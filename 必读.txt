@@ -1,0 +1,58 @@
+1、工程所有的本地化相关的文件如.setting、.project、.classpath 日志以及测试用例产生的文件等不可提交。
+   将exclude文件拷贝覆盖当前目录下.git\info的文件，该文件描述git提交时的文件过滤信息，会过滤到上述提到的文件等。
+   
+2、开发需要用到git相关的软件，下载地址。
+   http://pan.baidu.com/s/1kTzSUpT
+
+   安装完毕后，右键会加入相关菜单TortoiseGit。
+
+   Git Clone,URL中输入以下链接，即可下载源码。
+   https://git.oschina.net/tinyframework/sdpm.git
+
+   常用功能: commit\pull\push
+
+   pull:从git服务器远程仓库上拉下最新代码
+   commit:将本地源码提交到本地仓库
+   push:将本地仓库的更改提交到服务器远程仓库
+
+   当本地代码修改后，首先执行commit提交到本地仓库，然后push提交到远程仓库。
+   如果push失败，一般情况下，pull后再push(右键Git Sync - push)即可。
+   提交加上功能性的调整的说明，便于后期梳理、查错等。
+
+   http://git.oschina.net/oschina/git-osc/wikis/Home
+  
+3、开发需要用到的maven工具，下载地址。maven的安装相关资料可以网上查找。
+   http://pan.baidu.com/s/1c0ub7aw
+
+   常用功能: 
+
+   mvn clean 清理,会删除项目下生成的target目录(里面可能有jar包、war包等)
+   mvn install 安装工程，可能会去远程仓库上对比及下载包。
+   mvn clean install -DskipTests  清理\安装(过程中跳过测试用例)
+   mvn install -DskipTests 安装(过程中跳过测试用例)
+   mvn jetty:run 启动maven jetty插件提供的jetty容器，默认8080端口。
+
+   Maven的依赖关系，就类似于build path中的依赖。以下提到的依赖都是指maven依赖。
+   maven依赖具有传递性，例如存在工程1、工程2、工程3。依赖关系为 3依赖2 2依赖1。
+   在工程3中可使用工程2、1的类。
+   当工程1发生变动后，建议install后方能保证工程2所以来的1是最新的1。
+   例如web工程依赖1、2、3。当1、2、3发生代码变更后，需要install后，再启动web工程，方可保证web工程中使用的是代码调整后的web工程。
+   
+4、eclipse maven插件配置
+   Window - Perferences - Maven
+   Installations - add 选择的maven目录，加入后勾选。
+   User Settings - User Settings 选择maven目录下conf/settings.xml
+
+5、maven工程目录
+   src/main/java java类所在目录
+   src/main/resources 配置文件所在目录.本项目中主要用到的配置文件为*.beans.xml\*.service.xml,以及其他工具生成的配置文件。
+   src/test/java 单元测试类所在目录
+   src/test/resources 测试用到的资源目录
+ 
+6、包名称
+   org.tinygroup.sdpm.xxx
+   该工程目录下所有的类以工程全名为基础包。
+   如该工程下有类User,则全路径为org.tinygroup.sdpm.xxx.User
+   测试类的基础包围工程全名.test,即org.tinygroup.sdpm.xxx.test
+   如有测试类TestUser,全路径则为org.tinygroup.sdpm.xxx.test.TestUser
+
