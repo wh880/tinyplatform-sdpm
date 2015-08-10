@@ -49,10 +49,4 @@
    src/test/java 单元测试类所在目录
    src/test/resources 测试用到的资源目录
  
-6、包名称
-   org.tinygroup.sdpm.xxx
-   该工程目录下所有的类以工程全名为基础包。
-   如该工程下有类User,则全路径为org.tinygroup.sdpm.xxx.User
-   测试类的基础包围工程全名.test,即org.tinygroup.sdpm.xxx.test
-   如有测试类TestUser,全路径则为org.tinygroup.sdpm.xxx.test.TestUser
 
