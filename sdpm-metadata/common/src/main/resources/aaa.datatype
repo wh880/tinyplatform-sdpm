@@ -1,0 +1,82 @@
+<standard-types>
+  <standard-type id="50f490d7c8484caf9276bd2a2d1996ac" name="TINYINT" title="TINYINT" data-type="-6">
+    <description></description>
+    <placeholder-list/>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="Integer"/>
+      <dialect-type language="mysql" base-type="TINYINT"/>
+    </dialect-type-list>
+  </standard-type>
+  <standard-type id="197caff13e2b42c8b4d68dd5ec634784" name="INTEGER" title="INTEGER" data-type="4">
+    <placeholder-list/>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="Integer"/>
+      <dialect-type language="mysql" base-type="INT"/>
+    </dialect-type-list>
+  </standard-type>
+  <standard-type id="e82ce7e9a08c4dc7adbe91263ba01829" name="VARCHAR" title="VARCHAR" data-type="12">
+    <placeholder-list>
+      <placeholder name="length" title="长度"/>
+    </placeholder-list>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="String"/>
+      <dialect-type language="mysql" base-type="VARCHAR" ext-type="(${length})">
+        <placeholder-value name="length"/>
+      </dialect-type>
+    </dialect-type-list>
+  </standard-type>
+  <standard-type id="0ee437f614294d3eabadd6987c90610b" name="MEDIUMINT" title="MEDIUMINT" data-type="4">
+    <placeholder-list/>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="Integer"/>
+      <dialect-type language="mysql" base-type="MEDIUMINT"/>
+    </dialect-type-list>
+  </standard-type>
+  <standard-type id="e7cec5e8c47e4b109121c4420c1b4f3e" name="FLOAT" title="FLOAT" data-type="6">
+    <placeholder-list>
+      <placeholder name="length" title="长度"/>
+    </placeholder-list>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="Float"/>
+      <dialect-type language="mysql" base-type="FLOAT" ext-type="(${length})">
+        <placeholder-value name="length"/>
+      </dialect-type>
+    </dialect-type-list>
+  </standard-type>
+  <standard-type id="24336b5f40fd41e1b190dda6ced9ff55" name="TEXT" title="TEXT" data-type="12">
+    <placeholder-list/>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="String"/>
+      <dialect-type language="mysql" base-type="TEXT"/>
+    </dialect-type-list>
+  </standard-type>
+  <standard-type id="c7ca60d7a7a14d7b89ab915fceb960f1" name="DATE" title="DATE" data-type="91">
+    <placeholder-list/>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="Date"/>
+      <dialect-type language="mysql" base-type="DATETIME"/>
+    </dialect-type-list>
+  </standard-type>
+  <standard-type id="f0e2fbb8436647cf86a5819da2a58231" name="BIGINT" title="BIGINT" data-type="-5">
+    <placeholder-list/>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="BigInteger" ext-type=""/>
+      <dialect-type language="mysql" base-type="BIGINT"/>
+    </dialect-type-list>
+  </standard-type>
+  <standard-type id="2ca03c3206f84bcdac6599d54dcb29d2" name="DATETIME" title="DATETIME" data-type="91">
+    <description></description>
+    <placeholder-list/>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="Date"/>
+      <dialect-type language="mysql" base-type="DATETIME"/>
+    </dialect-type-list>
+  </standard-type>
+  <standard-type id="c6b9f34c0ed64d379414883bbc14e5b7" name="SMALLINT" title="SMALLINT" data-type="5">
+    <placeholder-list/>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="Integer"/>
+      <dialect-type language="mysql" base-type="SMALLINT"/>
+    </dialect-type-list>
+  </standard-type>
+</standard-types>

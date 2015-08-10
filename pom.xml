@@ -335,9 +335,14 @@
     </mailingLists>
     
     <modules>
-	<!--
-        <module>framework</module>
-	-->
+				<module>sdpm-service</module>
+    		<module>sdpm-common</module>
+    		<module>sdpm-document</module>
+    		<module>sdpm-metadata</module>
+    		<module>sdpm-product</module>
+    		<module>sdpm-project</module>
+    		<module>sdpm-quality</module>
+    		<module>sdpm-report</module>
     </modules>
 	
 	<dependencyManagement>
