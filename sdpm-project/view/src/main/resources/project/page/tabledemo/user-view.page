@@ -1,0 +1,28 @@
+#@divHorizontal()
+		#@viewRowCol("用户名：")
+			用户名1
+		#end
+		#@viewRowCol("性别：")
+			男
+		#end
+		#@viewRowCol("手机：")
+			11111111111
+		#end
+		#@viewRowCol("邮箱：")
+			2342423432@qq.com	
+		#end
+		#@viewRowCol("附件：")
+			xxx.xx
+		#end
+		#@viewRowCol("所在城市：")
+			北京
+		#end
+		#@viewRowCol("日期：")
+			2015-01-01
+		#end
+		#@viewRowCol("备注：")
+			xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+			xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+			xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+		 #end
+#end
