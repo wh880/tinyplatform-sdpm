@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="sdpm-report-web:war">
-    <output-path>$PROJECT_DIR$/sdpm-report/web/target</output-path>
-    <root id="archive" name="sdpm-report-web.war">
-      <element id="artifact" artifact-name="sdpm-report-web:war exploded" />
-    </root>
-  </artifact>
-</component>
