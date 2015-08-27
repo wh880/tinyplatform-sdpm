@@ -70,6 +70,14 @@
     </annotation-configuration>
 
     <!--tiny-processor实现 -->
+        <tiny-processors>
+                <tiny-processor id="uiEngineTinyProcessor" class="uiEngineTinyProcessor">
+                        <servlet-mapping url-pattern=".*/uiengine\.uijs"></servlet-mapping>
+                        <servlet-mapping url-pattern=".*/uiengine\.uicss"></servlet-mapping>
+                </tiny-processor>
+
+        </tiny-processors>
+
     <!--这里是Tiny处理器的配置扩展,请对照org.tinygroup.weblayer组件tinyprocessor.config.xml-->
 
     <!--tiny-filters配置 -->

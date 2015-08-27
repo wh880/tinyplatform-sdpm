@@ -68,6 +68,12 @@
         <annotation-mapping id="service" value="(.)*ServiceAdapter"></annotation-mapping>
         <annotation-mapping id="validate" value="org\.tiny\..*"></annotation-mapping>
     </annotation-configuration>
+        <tiny-processors>
+                <tiny-processor id="uiEngineTinyProcessor" class="uiEngineTinyProcessor">
+                        <servlet-mapping url-pattern=".*/uiengine\.uijs"></servlet-mapping>
+                        <servlet-mapping url-pattern=".*/uiengine\.uicss"></servlet-mapping>
+                </tiny-processor>
+        </tiny-processors>
 
     <!--tiny-processor实现 -->
     <!--这里是Tiny处理器的配置扩展,请对照org.tinygroup.weblayer组件tinyprocessor.config.xml-->

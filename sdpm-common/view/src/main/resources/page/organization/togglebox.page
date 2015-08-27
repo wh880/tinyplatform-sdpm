@@ -1,0 +1,60 @@
+##import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
+#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+
+#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+	#@toggleLeft({"class":"aclass"})
+		#@settoggleLeftTitle()网站建设一期#end
+		#@settoggleLeftBody()
+			#@OlTopList()
+			    #topItem(1 "#" "最新动态列表")
+			    #normalLiItems(2 "#" "最新动态列表" "" "green")
+			    #normalLiItems(3 "#" "最新动态列表" "" "darkGreen")
+			    #normalLiItems(4 "#" "最新动态列表" "" "grey")
+			    #normalLiItems(5 "#" "最新动态列表")
+			#end
+		#end
+	#end
+	#@toggleRight()
+		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+			#@div(divBaseClass="tinyheaderTools form-inline")
+				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+				#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
+				<a href="#" class="btn btn-default btn-sm">产品</a>
+				<a href="#" class="btn btn-success btn-sm">Bug</a>
+				<a href="#" class="btn btn-primary btn-sm">工程</a>
+				<a href="#" class="btn btn-info btn-sm">历史</a>
+				<a href="#" class="btn btn-warning btn-sm">相关</a>
+			#end
+			#@tinyTableContent("../../data/tabledata.pagelet") ##取数据地址 总数据
+				#@thead()
+					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})姓名#end
+						#@tinyTh({"class":"","rel":"sortname"})城市#end
+						#@tinyTh({"class":"","rel":"sortname"})办公室#end
+						#@tinyTh({"class":"sorting","rel":"sortname","style":"color:#f00"})年龄#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})就职日期#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})薪资#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})操作#end
+					#end
+				#end
+			#end
+			##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
+			<script type="text/javascript">
+				$(function(){
+					$('#${tableId}').on('click','.delBtn',function(e){
+						user_del(this,'1');
+					});
+				})
+			</script>
+			#@dialog("myModal")
+				#@dialogHeader()对话框标题#end
+				#@dialogBody()<p>对话框内容…</p>#end
+				#@dialogFooter()
+					#@buttonEnsure()确定#end
+					#@buttonCancel()关闭#end
+				#end
+			#end
+		#end
+	#end
+#end
