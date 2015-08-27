@@ -10,6 +10,32 @@
           <element id="archive" name="sdpm-common-view-0.0.1-SNAPSHOT.jar">
             <element id="module-output" name="sdpm-common-view" />
           </element>
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.jquery:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.bootstrap:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.publicComponent:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.frameCommon:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.gridSystems:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.compose:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.table:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.form:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.button:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.icon:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.navigation:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.tab:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.alert:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.modal:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.toTop:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.media:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.dataTables:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.bootstrapDate:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.jqueryUi:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.widget:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.layer:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.zTree:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.UEditor:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.interfaceElements:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.uiupload:2.0.19" />
+          <element id="library" level="project" name="Maven: org.tinygroup:org.tinygroup.fullCalendar:2.0.19" />
           <element id="archive" name="sdpm-common-view-uicomponent-0.0.1-SNAPSHOT.jar">
             <element id="module-output" name="sdpm-common-view-uicomponent" />
           </element>
