@@ -31,7 +31,7 @@
 		document.createElement("footer");
 		document.createElement("header");
 		document.createElement("nav");
-		document.createElement("button");
+		document.createElement	("button");
 	</script>
 	<![endif]-->
 	<link rel="shortcut icon" href="/tinyuiweb/img/tiny32.png">
@@ -208,7 +208,7 @@
 					#@navItemDemo("6.3" "javascript:void(0);" "icon-list")测试#end
 					#@navItemDemo("6.4" "javascript:void(0);" "icon-list")组织#end
 				#end*#
-				#TnavItem("7" "组织管理" "/page/organization/organizationUser.page" "icon-sitemap")
+				#TnavItem("7" "组织管理" "/page/project/organizationcompany.page" "icon-sitemap")
 #*				#@navDropDownMenu("7" "组织管理" "icon-sitemap" )
 					#@navItemDemo("7.1" "javascript:void(0);" "icon-list")用户#end
 					#@navItemDemo("7.2" "javascript:void(0);" "icon-list")日志#end
@@ -217,7 +217,7 @@
 					#@navItemDemo("7.5" "javascript:void(0);" "icon-list")权限#end
 					#@navItemDemo("7.6" "javascript:void(0);" "icon-list")公司#end
 				#end*#
-				#TnavItem("8" "后台管理" "/page/project/product1.page" "icon-trophy")
+				#TnavItem("8" "后台管理" "/page/project/backstage.page" "icon-trophy")
 #*				#@navDropDownMenu("8" "后台管理" "icon-trophy" )
 					#@navItemDemo("8.1" "javascript:void(0);" "icon-list")首页#end
 					#@navItemDemo("8.2" "javascript:void(0);" "icon-list")插件#end

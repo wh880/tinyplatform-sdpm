@@ -1,0 +1,64 @@
+#!set(activeTitle="文档管理",activeMenuId=currentPageId)
+#include("/page/event/common.page")
+#@div()
+	#@tabWithInit("tab_demo" "tabLayout")
+		#@tabHead()
+			#@tabHeadCol()文档#end
+			#@tabHeadCol()编辑#end
+			#@tabHeadCol()分类#end
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start
+			#@div(divClass="operationbar")
+				<span class="f">
+					<a href="#" class="active_btn">按模块浏览</a>
+					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
+				</span>
+				<span class="r">
+					<a href="#">#buttonIcon(iconClass="icon-plus")创建文档 </a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/togglebox.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start1
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">编辑页面</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/togglebox.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start2
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">模块文档</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/togglebox.page")
+		#end
+	#end
+#end
+<script type="text/javascript">
+$(function(){
+        var timeid;
+      $(".tabOption").find("li").each(function(index){
+          var sTab=$(this);
+          sTab.mouseenter(function(){
+              timeid= setTimeout(function(){
+                  sTab.addClass("tabCurrent").siblings().removeClass("tabCurrent");
+                  sTab.parent().siblings().find("ul:eq(" + index +")").show().siblings().hide() ;
+             },300);
+          }).mouseleave(function(){
+                 clearTimeout(timeid);
+            })
+      })
+    })
+</script>
