@@ -110,12 +110,12 @@
 		#@rightNavBar()
 			<li class="nav-icon-btn nav-icon-btn-danger dropdown">
 				#@notifyDropdown(5 "fa-bullhorn" "动态" "更多的动态")
-					#include("/project/page/index/notify.page")
+					#include("/page/index/notify.page")
 				#end
 			</li>
 			<li class="nav-icon-btn nav-icon-btn-success dropdown">
 				#@messagesDropdown(12 "fa-envelope" "所得的任务" "更多的任务")
-						#include("/project/page/index/messages.page")
+						#include("/page/index/messages.page")
 				#end
 			</li>
 				<li>
