@@ -5,17 +5,17 @@
     .tabLayout .tabBar .Current a{color:#fff}
     .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
 </style>
-#include("/page/event/common.page")
+#include("/organization/common.page")
 #@div()
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/organizationcompany.page">用户</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/organizationGtasks.page">待办</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/organizationlog.page">日志</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/organizationcompany.page">动态</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/organizationcompany.page">部门</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/organizationcompany.page">权限</a></span>
-        <span class="Current"><a href="${TINY_CONTEXT_PATH}/page/project/organizationcompany.page">公司</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationUser.page">用户</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationGtasks.page">待办</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationLog.page">日志</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationActive.page">动态</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationDepartment.page">部门</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationCompany.page">权限</a></span>
+        <span class="Current"><a href="${TINY_CONTEXT_PATH}/organization/organizationcompany.page">公司</a></span>
         #end
 
     #end
@@ -29,7 +29,7 @@
             #@centerAlignTr()
                 #@th()#h3Title("公司信息")#end
                 #@th()
-                    #@aModal("#myModal" "编辑公司" "600" "400" "btn radius btn-primary size-L" "/page/project/organizationUpdateCompany.pagelet")编辑公司#end
+                    #@aModal("#myModal" "编辑公司" "600" "400" "btn radius btn-primary size-L" "/organization/organizationUpdateCompany.pagelet")编辑公司#end
                     #@dialog("myModal")
                         #@dialogHeader()公司#end
                         #@dialogBody()<p>agshdshsh</p>#end

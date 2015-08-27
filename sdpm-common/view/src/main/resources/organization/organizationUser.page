@@ -1,17 +1,17 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
 #import("/org/tinygroup/zTree/components/zTree.component")
 #import("/components/org/tinygroup/fulimanageui/form.component")
-#include("/page/event/common.page")
+#include("/organization/common.page")
 #@div()
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
-        <span class="Current"><a href="${TINY_CONTEXT_PATH}/page/organization/organizationUser.page">用户</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/testManagementCases.page">待办</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page">日历</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/organization/organizationActive.page">动态</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page">部门</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page">权限</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page">公司</a></span>
+        <span class="Current"><a href="${TINY_CONTEXT_PATH}/organization/organizationUser.page">用户</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationGtasks.page">待办</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationLog.page">日志</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationActive.page">动态</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationDepartment.page">部门</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationPrivilege.page">权限</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationCompany.page">公司</a></span>
         #end
 
         #@div(divClass="operationbar")
@@ -35,7 +35,7 @@
                 #end
             #end
             #@toggleRight()
-                #include("/page/organization/userRightTable.page")
+                #include("/organization/userRightTable.page")
             #end
         #end
     #end

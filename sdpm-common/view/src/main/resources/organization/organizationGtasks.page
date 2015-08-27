@@ -5,17 +5,17 @@
     .tabLayout .tabBar .Current a{color:#fff}
     .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
 </style>
-#include("/page/event/common.page")
+#include("/organization/common.page")
 #@div()
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/organizationcompany.page">用户</a></span>
-        <span class="Current"><a href="${TINY_CONTEXT_PATH}/page/project/organizationGtasks.page">待办</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/organizationlog.page">日志</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/organizationcompany.page">动态</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/organizationcompany.page">部门</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/organizationcompany.page">权限</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/organizationcompany.page">公司</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationUser.page">用户</a></span>
+        <span class="Current"><a href="${TINY_CONTEXT_PATH}/organization/organizationGtasks.page">待办</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationLog.page">日志</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationActive.page">动态</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationDepartment.page">部门</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationPrivilege.page">权限</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationCompany.page">公司</a></span>
         #end
     #end
 
@@ -39,7 +39,7 @@
         #@toggleRight()
             #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 
-                #@tinyTableContent("../../data/tabledata.pagelet") ##取数据地址 总数据
+                #@tinyTableContent("../../organizationUserTableData.pagelet") ##取数据地址 总数据
                     #@thead()
                         #@div(divBaseClass="tinyheaderTools form-inline")
                             #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置

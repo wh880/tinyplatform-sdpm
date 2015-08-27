@@ -22,7 +22,7 @@
     #@td()2015-08-21#end
     #@td()2015-08-21#end
     #@td()
-        #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/page/organization/organizationUserAdd.pagelet" "ml-5")
+        #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/organization/organizationUserAdd.pagelet" "ml-5")
         #iconOperation(" icon-remove" "删除" "ml-5")
     #end
 #end

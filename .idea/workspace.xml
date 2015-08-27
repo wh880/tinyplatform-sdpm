@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c5a9266e-fd39-48f8-816a-411b9d5098b3" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationDepartment.page" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationPrivilege.page" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/app/sdpm-common-app.iml" afterPath="$PROJECT_DIR$/sdpm-common/app/sdpm-common-app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/base-dao/sdpm-common-base-dao.iml" afterPath="$PROJECT_DIR$/sdpm-common/base-dao/sdpm-common-base-dao.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/business-impl/sdpm-common-business-impl.iml" afterPath="$PROJECT_DIR$/sdpm-common/business-impl/sdpm-common-business-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/business-interface/sdpm-common-business-interface.iml" afterPath="$PROJECT_DIR$/sdpm-common/business-interface/sdpm-common-business-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/common/sdpm-common-common.iml" afterPath="$PROJECT_DIR$/sdpm-common/common/sdpm-common-common.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/dao-impl/sdpm-common-dao-impl.iml" afterPath="$PROJECT_DIR$/sdpm-common/dao-impl/sdpm-common-dao-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/dao-interface/sdpm-common-dao-interface.iml" afterPath="$PROJECT_DIR$/sdpm-common/dao-interface/sdpm-common-dao-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/sdpm-common.iml" afterPath="$PROJECT_DIR$/sdpm-common/sdpm-common.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/service-impl/sdpm-common-service-impl.iml" afterPath="$PROJECT_DIR$/sdpm-common/service-impl/sdpm-common-service-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/service-interface/sdpm-common-service-interface.iml" afterPath="$PROJECT_DIR$/sdpm-common/service-interface/sdpm-common-service-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/service-wrapper/sdpm-common-service-wrapper.iml" afterPath="$PROJECT_DIR$/sdpm-common/service-wrapper/sdpm-common-service-wrapper.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/view-uicomponent/sdpm-common-view-uicomponent.iml" afterPath="$PROJECT_DIR$/sdpm-common/view-uicomponent/sdpm-common-view-uicomponent.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/view/sdpm-common-view.iml" afterPath="$PROJECT_DIR$/sdpm-common/view/sdpm-common-view.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationActive.page" afterPath="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationActive.page" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationGtasks.page" afterPath="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationGtasks.page" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUser.page" afterPath="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUser.page" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUserTableData.page" afterPath="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUserTableData.page" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/userRightTable.page" afterPath="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/userRightTable.page" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-common/web/sdpm-common-web.iml" afterPath="$PROJECT_DIR$/sdpm-common/web/sdpm-common-web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/app/sdpm-document-app.iml" afterPath="$PROJECT_DIR$/sdpm-document/app/sdpm-document-app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/base-dao/sdpm-document-base-dao.iml" afterPath="$PROJECT_DIR$/sdpm-document/base-dao/sdpm-document-base-dao.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/business-impl/sdpm-document-business-impl.iml" afterPath="$PROJECT_DIR$/sdpm-document/business-impl/sdpm-document-business-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/business-interface/sdpm-document-business-interface.iml" afterPath="$PROJECT_DIR$/sdpm-document/business-interface/sdpm-document-business-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/common/sdpm-document-common.iml" afterPath="$PROJECT_DIR$/sdpm-document/common/sdpm-document-common.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/dao-impl/sdpm-document-dao-impl.iml" afterPath="$PROJECT_DIR$/sdpm-document/dao-impl/sdpm-document-dao-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/dao-interface/sdpm-document-dao-interface.iml" afterPath="$PROJECT_DIR$/sdpm-document/dao-interface/sdpm-document-dao-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/sdpm-document.iml" afterPath="$PROJECT_DIR$/sdpm-document/sdpm-document.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/service-impl/sdpm-document-service-impl.iml" afterPath="$PROJECT_DIR$/sdpm-document/service-impl/sdpm-document-service-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/service-interface/sdpm-document-service-interface.iml" afterPath="$PROJECT_DIR$/sdpm-document/service-interface/sdpm-document-service-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/service-wrapper/sdpm-document-service-wrapper.iml" afterPath="$PROJECT_DIR$/sdpm-document/service-wrapper/sdpm-document-service-wrapper.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/view-uicomponent/sdpm-document-view-uicomponent.iml" afterPath="$PROJECT_DIR$/sdpm-document/view-uicomponent/sdpm-document-view-uicomponent.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/view/sdpm-document-view.iml" afterPath="$PROJECT_DIR$/sdpm-document/view/sdpm-document-view.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-document/web/sdpm-document-web.iml" afterPath="$PROJECT_DIR$/sdpm-document/web/sdpm-document-web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-metadata/common/sdpm-metadata-common.iml" afterPath="$PROJECT_DIR$/sdpm-metadata/common/sdpm-metadata-common.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-metadata/sdpm-metadata.iml" afterPath="$PROJECT_DIR$/sdpm-metadata/sdpm-metadata.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/app/sdpm-product-app.iml" afterPath="$PROJECT_DIR$/sdpm-product/app/sdpm-product-app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/base-dao/sdpm-product-base-dao.iml" afterPath="$PROJECT_DIR$/sdpm-product/base-dao/sdpm-product-base-dao.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/business-impl/sdpm-product-business-impl.iml" afterPath="$PROJECT_DIR$/sdpm-product/business-impl/sdpm-product-business-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/business-interface/sdpm-product-business-interface.iml" afterPath="$PROJECT_DIR$/sdpm-product/business-interface/sdpm-product-business-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/common/sdpm-product-common.iml" afterPath="$PROJECT_DIR$/sdpm-product/common/sdpm-product-common.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/dao-impl/sdpm-product-dao-impl.iml" afterPath="$PROJECT_DIR$/sdpm-product/dao-impl/sdpm-product-dao-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/dao-interface/sdpm-product-dao-interface.iml" afterPath="$PROJECT_DIR$/sdpm-product/dao-interface/sdpm-product-dao-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/sdpm-product.iml" afterPath="$PROJECT_DIR$/sdpm-product/sdpm-product.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/service-impl/sdpm-product-service-impl.iml" afterPath="$PROJECT_DIR$/sdpm-product/service-impl/sdpm-product-service-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/service-interface/sdpm-product-service-interface.iml" afterPath="$PROJECT_DIR$/sdpm-product/service-interface/sdpm-product-service-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/service-wrapper/sdpm-product-service-wrapper.iml" afterPath="$PROJECT_DIR$/sdpm-product/service-wrapper/sdpm-product-service-wrapper.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/view-uicomponent/sdpm-product-view-uicomponent.iml" afterPath="$PROJECT_DIR$/sdpm-product/view-uicomponent/sdpm-product-view-uicomponent.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/view/sdpm-product-view.iml" afterPath="$PROJECT_DIR$/sdpm-product/view/sdpm-product-view.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-product/web/sdpm-product-web.iml" afterPath="$PROJECT_DIR$/sdpm-product/web/sdpm-product-web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/app/sdpm-project-app.iml" afterPath="$PROJECT_DIR$/sdpm-project/app/sdpm-project-app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/base-dao/sdpm-project-base-dao.iml" afterPath="$PROJECT_DIR$/sdpm-project/base-dao/sdpm-project-base-dao.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/business-impl/sdpm-project-business-impl.iml" afterPath="$PROJECT_DIR$/sdpm-project/business-impl/sdpm-project-business-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/business-interface/sdpm-project-business-interface.iml" afterPath="$PROJECT_DIR$/sdpm-project/business-interface/sdpm-project-business-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/common/sdpm-project-common.iml" afterPath="$PROJECT_DIR$/sdpm-project/common/sdpm-project-common.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/dao-impl/sdpm-project-dao-impl.iml" afterPath="$PROJECT_DIR$/sdpm-project/dao-impl/sdpm-project-dao-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/dao-interface/sdpm-project-dao-interface.iml" afterPath="$PROJECT_DIR$/sdpm-project/dao-interface/sdpm-project-dao-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/sdpm-project.iml" afterPath="$PROJECT_DIR$/sdpm-project/sdpm-project.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/service-impl/sdpm-project-service-impl.iml" afterPath="$PROJECT_DIR$/sdpm-project/service-impl/sdpm-project-service-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/service-interface/sdpm-project-service-interface.iml" afterPath="$PROJECT_DIR$/sdpm-project/service-interface/sdpm-project-service-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/service-wrapper/sdpm-project-service-wrapper.iml" afterPath="$PROJECT_DIR$/sdpm-project/service-wrapper/sdpm-project-service-wrapper.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/view-uicomponent/sdpm-project-view-uicomponent.iml" afterPath="$PROJECT_DIR$/sdpm-project/view-uicomponent/sdpm-project-view-uicomponent.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/view/sdpm-project-view.iml" afterPath="$PROJECT_DIR$/sdpm-project/view/sdpm-project-view.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-project/web/sdpm-project-web.iml" afterPath="$PROJECT_DIR$/sdpm-project/web/sdpm-project-web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/app/sdpm-quality-app.iml" afterPath="$PROJECT_DIR$/sdpm-quality/app/sdpm-quality-app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/base-dao/sdpm-quality-base-dao.iml" afterPath="$PROJECT_DIR$/sdpm-quality/base-dao/sdpm-quality-base-dao.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/business-impl/sdpm-quality-business-impl.iml" afterPath="$PROJECT_DIR$/sdpm-quality/business-impl/sdpm-quality-business-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/business-interface/sdpm-quality-business-interface.iml" afterPath="$PROJECT_DIR$/sdpm-quality/business-interface/sdpm-quality-business-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/common/sdpm-quality-common.iml" afterPath="$PROJECT_DIR$/sdpm-quality/common/sdpm-quality-common.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/dao-impl/sdpm-quality-dao-impl.iml" afterPath="$PROJECT_DIR$/sdpm-quality/dao-impl/sdpm-quality-dao-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/dao-interface/sdpm-quality-dao-interface.iml" afterPath="$PROJECT_DIR$/sdpm-quality/dao-interface/sdpm-quality-dao-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/sdpm-quality.iml" afterPath="$PROJECT_DIR$/sdpm-quality/sdpm-quality.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/service-impl/sdpm-quality-service-impl.iml" afterPath="$PROJECT_DIR$/sdpm-quality/service-impl/sdpm-quality-service-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/service-interface/sdpm-quality-service-interface.iml" afterPath="$PROJECT_DIR$/sdpm-quality/service-interface/sdpm-quality-service-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/service-wrapper/sdpm-quality-service-wrapper.iml" afterPath="$PROJECT_DIR$/sdpm-quality/service-wrapper/sdpm-quality-service-wrapper.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/view-uicomponent/sdpm-quality-view-uicomponent.iml" afterPath="$PROJECT_DIR$/sdpm-quality/view-uicomponent/sdpm-quality-view-uicomponent.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/view/sdpm-quality-view.iml" afterPath="$PROJECT_DIR$/sdpm-quality/view/sdpm-quality-view.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-quality/web/sdpm-quality-web.iml" afterPath="$PROJECT_DIR$/sdpm-quality/web/sdpm-quality-web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/app/sdpm-report-app.iml" afterPath="$PROJECT_DIR$/sdpm-report/app/sdpm-report-app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/base-dao/sdpm-report-base-dao.iml" afterPath="$PROJECT_DIR$/sdpm-report/base-dao/sdpm-report-base-dao.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/business-impl/sdpm-report-business-impl.iml" afterPath="$PROJECT_DIR$/sdpm-report/business-impl/sdpm-report-business-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/business-interface/sdpm-report-business-interface.iml" afterPath="$PROJECT_DIR$/sdpm-report/business-interface/sdpm-report-business-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/common/sdpm-report-common.iml" afterPath="$PROJECT_DIR$/sdpm-report/common/sdpm-report-common.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/dao-impl/sdpm-report-dao-impl.iml" afterPath="$PROJECT_DIR$/sdpm-report/dao-impl/sdpm-report-dao-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/dao-interface/sdpm-report-dao-interface.iml" afterPath="$PROJECT_DIR$/sdpm-report/dao-interface/sdpm-report-dao-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/sdpm-report.iml" afterPath="$PROJECT_DIR$/sdpm-report/sdpm-report.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/service-impl/sdpm-report-service-impl.iml" afterPath="$PROJECT_DIR$/sdpm-report/service-impl/sdpm-report-service-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/service-interface/sdpm-report-service-interface.iml" afterPath="$PROJECT_DIR$/sdpm-report/service-interface/sdpm-report-service-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/service-wrapper/sdpm-report-service-wrapper.iml" afterPath="$PROJECT_DIR$/sdpm-report/service-wrapper/sdpm-report-service-wrapper.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/view-uicomponent/sdpm-report-view-uicomponent.iml" afterPath="$PROJECT_DIR$/sdpm-report/view-uicomponent/sdpm-report-view-uicomponent.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/view/sdpm-report-view.iml" afterPath="$PROJECT_DIR$/sdpm-report/view/sdpm-report-view.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-report/web/sdpm-report-web.iml" afterPath="$PROJECT_DIR$/sdpm-report/web/sdpm-report-web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/app/sdpm-service-app.iml" afterPath="$PROJECT_DIR$/sdpm-service/app/sdpm-service-app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/base-dao/sdpm-service-base-dao.iml" afterPath="$PROJECT_DIR$/sdpm-service/base-dao/sdpm-service-base-dao.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/business-impl/sdpm-service-business-impl.iml" afterPath="$PROJECT_DIR$/sdpm-service/business-impl/sdpm-service-business-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/business-interface/sdpm-service-business-interface.iml" afterPath="$PROJECT_DIR$/sdpm-service/business-interface/sdpm-service-business-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/common/sdpm-service-common.iml" afterPath="$PROJECT_DIR$/sdpm-service/common/sdpm-service-common.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/dao-impl/sdpm-service-dao-impl.iml" afterPath="$PROJECT_DIR$/sdpm-service/dao-impl/sdpm-service-dao-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/dao-interface/sdpm-service-dao-interface.iml" afterPath="$PROJECT_DIR$/sdpm-service/dao-interface/sdpm-service-dao-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/sdpm-service.iml" afterPath="$PROJECT_DIR$/sdpm-service/sdpm-service.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/service-impl/sdpm-service-service-impl.iml" afterPath="$PROJECT_DIR$/sdpm-service/service-impl/sdpm-service-service-impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/service-interface/sdpm-service-service-interface.iml" afterPath="$PROJECT_DIR$/sdpm-service/service-interface/sdpm-service-service-interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/service-wrapper/sdpm-service-service-wrapper.iml" afterPath="$PROJECT_DIR$/sdpm-service/service-wrapper/sdpm-service-service-wrapper.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/view-uicomponent/sdpm-service-view-uicomponent.iml" afterPath="$PROJECT_DIR$/sdpm-service/view-uicomponent/sdpm-service-view-uicomponent.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/view/sdpm-service-view.iml" afterPath="$PROJECT_DIR$/sdpm-service/view/sdpm-service-view.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm-service/web/sdpm-service-web.iml" afterPath="$PROJECT_DIR$/sdpm-service/web/sdpm-service-web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdpm.iml" afterPath="$PROJECT_DIR$/sdpm.iml" />
+    </list>
+    <ignored path="sdpm.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/service-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/service-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/base-dao/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/service-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/common/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/common/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/app/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/base-dao/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/dao-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/business-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/view/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/view-uicomponent/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/view/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/service-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/app/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/view-uicomponent/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/base-dao/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/view-uicomponent/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/business-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/web/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/dao-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/dao-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/dao-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/service-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/dao-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-metadata/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/view/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/service-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/dao-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/dao-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/service-wrapper/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/service-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/common/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/app/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/web/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/common/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/view-uicomponent/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/web/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/business-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/view/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/app/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/dao-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/business-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/dao-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/business-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/service-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/dao-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/dao-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/common/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/dao-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/base-dao/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/web/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/business-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/view/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/business-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/dao-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/service-wrapper/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/service-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/common/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/business-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/business-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/web/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/dao-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/business-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/business-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/service-wrapper/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/business-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/base-dao/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/base-dao/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/service-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/view/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/service-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/view/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/service-wrapper/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/service-wrapper/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/base-dao/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/web/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/view-uicomponent/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/app/target/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/web/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-document/service-wrapper/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/app/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/service-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/common/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/service-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-quality/business-impl/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-metadata/common/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/service-interface/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-service/view-uicomponent/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-report/service-wrapper/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-product/app/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-common/view-uicomponent/target/" />
+    <ignored path="$PROJECT_DIR$/sdpm-project/business-interface/target/" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="sdpm" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="organizationUserTableData.page" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUserTableData.page">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.519774">
+              <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="userRightTable.page" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/userRightTable.page">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.6153846">
+              <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="organizationDepartment.page" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationDepartment.page">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="organizationLog.page" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationLog.page">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.384615">
+              <caret line="58" column="75" selection-start-line="58" selection-start-column="75" selection-end-line="58" selection-end-column="75" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="organizationPrivilege.page" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationPrivilege.page">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="organizationUpdateCompany.page" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUpdateCompany.page">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="33.346153">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="organizationUser.page" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUser.page">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="11.269231">
+              <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
+              <folding>
+                <marker date="1440658530640" expanded="true" signature="4244:4253" placeholder="..." />
+                <marker date="1440658530640" expanded="true" signature="4720:4729" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="organizationUserAdd.page" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUserAdd.page">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="13.730769">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="organizationUserEdit.page" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUserEdit.page">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="organizationGtasks.page" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationGtasks.page">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.8461537">
+              <caret line="39" column="52" selection-start-line="39" selection-start-column="52" selection-end-line="39" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationcompany.page" />
+        <option value="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationActive.page" />
+        <option value="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationCompany.page" />
+        <option value="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUser.page" />
+        <option value="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUserTableData.page" />
+        <option value="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/userRightTable.page" />
+        <option value="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationGtasks.page" />
+        <option value="$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationLog.page" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\.m2\repository" />
+        <option name="mavenHome" value="D:/Program Files/apache-maven-3.2.3" />
+        <option name="userSettingsFile" value="D:\.m2\archetype-catalog.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sdpm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sdpm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sdpm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sdpm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sdpm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sdpm-common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sdpm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sdpm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sdpm-common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sdpm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sdpm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sdpm-common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <module name="" />
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="depsClasspath" value="false" />
+      <setting name="passParentEnv" value="true" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <setting name="launchBrowser" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c5a9266e-fd39-48f8-816a-411b9d5098b3" name="Default" comment="" />
+      <created>1440657246531</created>
+      <option name="number" value="Default" />
+      <updated>1440657246531</updated>
+      <workItem from="1440657249630" duration="1537000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1537000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33963692" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/common.page">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationActive.page">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.576923">
+          <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationCompany.page">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.346154">
+          <caret line="31" column="105" selection-start-line="31" selection-start-column="105" selection-end-line="31" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/userRightTable.page">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6153846">
+          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationDepartment.page">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationGtasks.page">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8461537">
+          <caret line="39" column="52" selection-start-line="39" selection-start-column="52" selection-end-line="39" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationLog.page">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.384615">
+          <caret line="58" column="75" selection-start-line="58" selection-start-column="75" selection-end-line="58" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationPrivilege.page">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUpdateCompany.page">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="33.346153">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUser.page">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="11.269231">
+          <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
+          <folding>
+            <marker date="1440658530640" expanded="true" signature="4244:4253" placeholder="..." />
+            <marker date="1440658530640" expanded="true" signature="4720:4729" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUserAdd.page">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="13.730769">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUserEdit.page">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdpm-common/view/src/main/resources/organization/organizationUserTableData.page">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.519774">
+          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
