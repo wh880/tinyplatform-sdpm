@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sdpm-service-web:war">
+    <output-path>$PROJECT_DIR$/sdpm-service/web/target</output-path>
+    <root id="archive" name="sdpm-service-web.war">
+      <element id="artifact" artifact-name="sdpm-service-web:war exploded" />
+    </root>
+  </artifact>
+</component>
