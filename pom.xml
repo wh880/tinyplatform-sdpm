@@ -15,7 +15,7 @@
     <url>http://www.tinygroup.org</url>
     <properties>
         <tiny_version>2.0.19</tiny_version>
-        <tiny_ui_version>2.0.19</tiny_ui_version>
+        <tiny_ui_version>2.0.20-SNAPSHOT</tiny_ui_version>
         <tiny_ext_version>2.0.9</tiny_ext_version>
         <tiny_sdpm_version>0.0.1-SNAPSHOT</tiny_sdpm_version>
     </properties>
