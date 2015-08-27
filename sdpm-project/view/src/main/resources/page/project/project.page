@@ -1,0 +1,261 @@
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#import("/org/tinygroup/button/components/button_smart.component")
+#include("/page/event/common.page")
+<style>
+.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+.open #downMenuSty{min-width:75px}
+</style>
+#@div()
+	#@tabWithInit("tab_demo" "tabLayout")
+		#@tabHead()
+			#@tabHeadCol()任务#end
+			#@tabHeadCol()需求#end
+			#@tabHeadCol()Bug#end
+			#@tabHeadCol()版本#end
+			#@tabHeadCol()测试#end
+			#@tabHeadCol()团队#end
+			#@tabHeadCol()日志#end
+			#@tabHeadCol()动态#end
+			#@tabHeadCol()文档#end
+			#@tabHeadCol()产品#end
+			#@tabHeadCol()概况#end
+		#end
+		<span class="r" style="position:relative;top:-28px;height:0">
+			<a href="#">#buttonIcon(iconClass="icon-globe")&nbsp;所有项目</a>&nbsp;
+			<a href="#">#buttonIcon(iconClass="icon-plus-sign")添加项目</a>
+		</span>
+		#@tabBodyCol("ptop-5")
+			##operationbar start
+			#@div(divClass="operationbar")
+				<span class="f">
+					<a href="#" class="active_btn">未关闭</a>
+					<a href="#">所有</a>
+					<a href="#">看板</a>
+					<a href="${TINY_CONTEXT_PATH}/page/project/gantt.page">甘特图</a>
+					<a href="${TINY_CONTEXT_PATH}/page/project/calendar.page">日历</a>
+					<a href="#">燃尽图</a>
+					<a href="#">指派给我</a>
+					<a href="#">**</a>
+					<a href="#">**</a>
+					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
+				</span>
+				<span class="r">
+				    #buttonIcon(iconClass="icon-download-alt")	
+				    #@buttonGroup()
+                    #@buttonDropdown("Dropdown")导入  #@spanCaret()#end#end
+                    #@ulDropdownMenu("downMenuSty")
+                    <p>
+                    #@iconOperations("#myModal" "" "导入" "865" "200"
+					 "/page/tabledemo/add_doc.pagelet" "ml-5")导入bug#end
+					 </p>
+					 <p>
+                     #@iconOperations("#myModal" "" "导入" "865" "200"
+					 "/page/tabledemo/add_doc.pagelet" "ml-5")导入任务#end
+					 </p>
+					
+                     #@iconOperations("#myModal" "" "导入" "865" "200"
+					 "/page/tabledemo/add_doc.pagelet" "ml-5")导入Excel#end
+					
+                     #@liDivider()#end
+                    #end
+                    #end&nbsp;
+                    
+                    #buttonIcon(iconClass="icon-upload-alt")	
+				    #@buttonGroup()
+                    #@buttonDropdown("Dropdown")导出  #@spanCaret()#end#end
+                    #@ulDropdownMenu("downMenuSty")
+                    <p>
+                     #@iconOperations("#myModal" "" "导出" "865" "200"
+					 "/page/tabledemo/output_data.pagelet" "ml-5") &nbsp;导出数据#end  
+					 </p>
+					
+                     #@iconOperations("#myModal" "" "导出" "865" "200"
+					 "/page/tabledemo/output_data.pagelet" "ml-5") &nbsp;导出模板#end            
+                     
+                    #end
+                    #end&nbsp;
+                    
+					<a href="#">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
+					
+					
+					#@iconOperations("#myModal" "icon-plus-sign" "批量增加" "985" "448" 
+					"/page/tabledemo/bech_add_task.pagelet" "ml-5")&nbsp;批量增加#end
+					
+					#@iconOperations("#myModal" "icon-plus" "建任务" "865" "448" 
+					"/page/tabledemo/add_task.pagelet" "ml-5")&nbsp;建任务#end
+					
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/togglebox.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start1
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">Bug列表</span>
+				</span>
+				<span class="r">
+					<a href="#">#buttonIcon(iconClass="icon-plus")提Bug</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start2
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">浏览计划</span>
+				</span>
+				<span class="r">
+					<a href="#">#buttonIcon(iconClass="icon-plus")创建计划</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start3
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">版本列表</span>
+				</span>
+				<span class="r">
+					<a href="#">#buttonIcon(iconClass="icon-plus")创建版本</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start4
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">测试列表</span>
+				</span>
+				<span class="r">
+					<a href="#">#buttonIcon(iconClass="icon-plus")提交测试</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start5
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">团队成员</span>
+				</span>
+				<span class="r">
+					<a href="#">#buttonIcon(iconClass="icon-user")团队管理</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start6
+			#@div(divClass="operationbar")
+				<span class="f">
+					<a class="active_btn">日历</a>
+					<a href="#">今日</a>
+					<a href="#">昨日</a>
+					<a href="#">本周</a>
+					<a href="#">上周</a>
+					<a href="#">本月</a>
+					<a href="#">上月</a>
+					<a href="#">所有日志</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/calendar.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start7
+			#@div(divClass="operationbar")
+				<span class="f">
+					a class="active_btn">日历</a>
+					<a href="#">今日</a>
+					<a href="#">昨日</a>
+					<a href="#">本周</a>
+					<a href="#">上周</a>
+					<a href="#">本月</a>
+					<a href="#">上月</a>
+					<a href="#">所有</a>
+					<a href="#">**</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start8
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">文档列表</span>
+				</span>
+				<span class="r">
+					<a href="#">#buttonIcon(iconClass="icon-off")创建文档</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start8
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">关联产品</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start8
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">概况</span>
+				</span>
+				<span class="r">
+					<a href="#">#buttonIcon(iconClass="icon-play-circle")开始</a>
+					<a href="#">#buttonIcon(iconClass="icon-calendar")延期</a>
+					<a href="#">#buttonIcon(iconClass="icon-pause")挂起</a>
+					<a href="#">#buttonIcon(iconClass="icon-off")结束</a>&nbsp;
+					<a href="#">#buttonIcon(iconClass="icon-plus")编辑</a>
+					<a href="#" title="返回">#buttonIcon(iconClass="icon-reply")&nbsp;</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+	#end
+#end
+<script type="text/javascript">
+$(function(){
+        var timeid;
+      $(".tabOption").find("li").each(function(index){
+          var sTab=$(this);
+          sTab.mouseenter(function(){
+              timeid= setTimeout(function(){
+                  sTab.addClass("tabCurrent").siblings().removeClass("tabCurrent");
+                  sTab.parent().siblings().find("ul:eq(" + index +")").show().siblings().hide() ;
+             },300);
+          }).mouseleave(function(){
+                 clearTimeout(timeid);
+            })
+      })
+    })
+</script>

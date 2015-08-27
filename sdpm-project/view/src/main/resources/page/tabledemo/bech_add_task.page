@@ -1,0 +1,115 @@
+
+#!set(activeTitle="批量增加",activeMenuId=currentPageId)
+#@tinyForm("thisform" "" "post" {"class":"test"})
+	 #@tableBorder()
+	 	#@thead()
+	 		#@tr()
+	 			#@thW("20")	ID	#end
+	 			#@thW("30")	所属板块	#end
+	 			#@thW("30")	相关需求#end
+	 			#@thW("50")	任务名称	#end
+	 			#@thW("50")	类型	#end
+	 			#@thW("40")	指派给#end
+	 			#@thW("20")	预算 #end
+	 			#@thW("40")	任务描述	#end
+	 			#@thW("40")	优先级#end
+	 		#end
+	 	
+	 	#end
+	 	
+	 	#@tbody()
+	 		
+	 		#for(i:[1..8])
+				#@tr()
+		 			
+		 			#@th()	${i}	#end
+		 			#@th()	
+						#@formControlDiv("col-8")
+								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+									#@tinyOptionItem("zh")/1#end
+									#@tinyOptionItem("en")/2#end
+									#@tinyOptionItem("ta")/3#end
+								#end
+						#end
+						#@validateDiv("col-2")#end
+			 		#end
+		 			#@th()	
+		 				
+		 				#@formControlDiv("col-8")
+								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+									#@tinyOptionItem("zh")/1#end
+									#@tinyOptionItem("en")/2#end
+									#@tinyOptionItem("ta")/3#end
+								#end
+						#end
+						#@validateDiv("col-2")#end
+			 		#end
+
+
+		 			#@th()
+		 			
+		 				 #tinyInput("text" "username")
+		 			
+		 			#end
+		 			
+		 			
+		 			#@th()	
+		 				
+		 				#@formControlDiv("col-8")
+								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+									#@tinyOptionItem("zh")/1#end
+									#@tinyOptionItem("en")/2#end
+									#@tinyOptionItem("ta")/3#end
+								#end
+						#end
+						#@validateDiv("col-2")#end
+
+		 			#end
+		 			
+		 			#@th()	
+		 				
+		 				#@formControlDiv("col-8")
+								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+									#@tinyOptionItem("zh")/1#end
+									#@tinyOptionItem("en")/2#end
+									#@tinyOptionItem("ta")/3#end
+								#end
+						#end
+						#@validateDiv("col-2")#end
+
+		 			#end
+		 			
+		 			#@th()
+		 			
+		 				 #tinyInput("text" "username")
+		 			#end
+		 			
+		 			#@th()
+		 			
+		 				 #tinyInput("text" "username")
+		 			
+		 			#end
+		 			
+		 			
+		 			#@th()	
+		 				
+		 				#@formControlDiv("col-8")
+								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+									#@tinyOptionItem("zh")/1#end
+									#@tinyOptionItem("en")/23333#end
+									#@tinyOptionItem("ta")/3#end
+								#end
+						#end
+						#@validateDiv("col-2")#end
+
+		 			#end
+		 					
+
+		 		#end
+		 			
+		 	#end
+		#end
+	 	
+	 #end
+	 	
+#end

@@ -1,0 +1,11 @@
+#@tinyForm("thisform" "" "" {"class":"test"})
+        #@elementItem()
+	    #@p()附件#end   #fileWithInput("file-1")
+        #end
+        #@validateDiv("col-2")#end
+    #@elementItem()
+    #@div(divClass="col-10 col-offset-5 form-inline")
+      #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+    #end
+	#end
+#end      
