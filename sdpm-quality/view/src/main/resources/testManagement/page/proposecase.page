@@ -20,15 +20,10 @@
 
         #@tabBodyCol("ptop-5")
 ##operationbar start1
-    #@div(divClass="operationbar")
-    <span class="f">
-					<a href="#" class="active_btn">提Bug</a>
-				</span>
 
-        #div(divClass="clearfix")
-    #end
 #end
-
+        #@div(divClass="bugBox")
+            #@p(pClass="title_sty")提交用例#end
     #@tinyForm("thisform" "url" "post" {"class":""})
         #@elementItem()
             #@colLabel()产品模块：#end
@@ -135,7 +130,7 @@
         #@divCenterAlign()#buttonRadiusDefault(caption="保存")
             #buttonRadiusDefault(caption="取消")#end
     #end
-
+#end
 <script type="text/javascript">
     $(function(){
         $(".selectList").each(function(){
