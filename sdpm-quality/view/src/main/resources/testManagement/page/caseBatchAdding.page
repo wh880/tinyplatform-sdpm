@@ -6,20 +6,21 @@
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 <style>
-    .tabLayout .tabBar span a{color:#333}
-    .tabLayout .tabBar .Current a{color:#fff}
-    .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
     .select_boxes{margin-top:0}
 </style>
+
 #include("/testManagement/page/event/common.page")
+#set(name="bug")
 #@div()
-	#@div(divClass="tabLayout")
-		#@div(divClass="tabBar cl")
-        	<span class="Current"><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementBug.page?currentPageId=4">Bug</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementCases.page?currentPageId=4">用例</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementVersion.page?currentPageId=4">版本</a></span>
+	#@tabWithInit("tab_demo" "optionsBox")
+		#@div(divClass="dropdownBox")
+			#include("/testManagement/page/dropdownMenu.page")
 		#end
-	#end
+		#@tabHead()
+			#include("/testManagement/page/testManagementTab.page")
+		#end
+
+		#@tabBodyCol("ptop-5")
 ##operationbar start1
 	#@div(divClass="operationbar")
     <span class="f">
@@ -43,6 +44,7 @@
 				</span>
 		#div(divClass="clearfix")
 	#end
+			#end
 	#@table(tableClass="table table-border table-bordered table-striped")
 		#@thead()
 			#@tr()
@@ -98,7 +100,7 @@
 #@divCenterAlign()#buttonRadiusDefault(caption="保存")
 	#buttonRadiusDefault(caption="取消")#end
 #end
-
+#end
 
 
 
