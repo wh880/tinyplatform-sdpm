@@ -1,4 +1,4 @@
-#include("/page/event/common.page")
+#include("/product/page/event/common.page")
 #set(editpagePath="/page/tabledemo/user-add.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 #set(viewpagePath="/page/tabledemo/user-view.pagelet",viewpageModalId="userViewModal",viewpageModal="#"+viewpageModalId)
 #set(editpasswordPath="/page/tabledemo/user-password-edit.pagelet",editpasswordModalId="userEditModal",editpasswordModal="#"+editpasswordModalId)
