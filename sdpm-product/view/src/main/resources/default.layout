@@ -143,14 +143,14 @@
 	#@mainMenu()
 			#@navigationMenu()
 				#@navDropDownMenu("0" "演示" "icon-user-md" )
-					#TnavItem("0.1" "内容管理" "/page/tabledemo/table_list.page" "icon-list")
-					#TnavItem("0.2" "tab选项卡" "/page/tabledemo/tab.page" "icon-list")
-					#TnavItem("0.3" "新增表单" "/page/tabledemo/addes.page" "icon-list")
-					#TnavItem("0.4" "左侧树" "/page/tabledemo/lefttree.page" "icon-list")
-					#TnavItem("0.5" "添加项目" "/page/tabledemo/addeProgect.page" "icon-list")
-					#TnavItem("0.6" "详情页" "/page/tabledemo/tetails.page" "icon-list")
+					#TnavItem("0.1" "内容管理" "/product/page/tabledemo/table_list.page" "icon-list")
+					#TnavItem("0.2" "tab选项卡" "/product/page/tabledemo/tab.page" "icon-list")
+					#TnavItem("0.3" "新增表单" "/product/page/tabledemo/addes.page" "icon-list")
+					#TnavItem("0.4" "左侧树" "/product/page/tabledemo/lefttree.page" "icon-list")
+					#TnavItem("0.5" "添加项目" "/product/page/tabledemo/addeProgect.page" "icon-list")
+					#TnavItem("0.6" "详情页" "/product/page/tabledemo/tetails.page" "icon-list")
 				#end
-				#TnavItem("1" "我的地盘" "/page/project/mySite.page" "fa-dashboard")
+				#TnavItem("1" "我的地盘" "/product/page/project/mySite.page" "fa-dashboard")
 #*				#@navDropDownMenu("1" "我的地盘" "icon-dashboard" )
 					#@navItemDemo("1.1" "javascript:void(0);" "icon-list")主页#end
 					#@navItemDemo("1.2" "javascript:void(0);" "icon-list")待办#end
@@ -175,7 +175,7 @@
 					#@navItemDemo("2.8" "javascript:void(0);" "icon-list")模块#end
 					#@navItemDemo("2.9" "javascript:void(0);" "icon-list")概况#end
 				#end*#
-				#TnavItem("3" "项目管理" "/page/project/project.page" "icon-book")
+				#TnavItem("3" "项目管理" "/product/page/project/project.page" "icon-book")
 #*				#@navDropDownMenu("3" "项目管理" "icon-book" )
 					#@navItemDemo("3.1" "javascript:void(0);" "icon-list")任务#end
 					#@navItemDemo("3.2" "javascript:void(0);" "icon-list")需求#end
@@ -189,26 +189,26 @@
 					#@navItemDemo("3.10" "javascript:void(0);" "icon-list")产品#end
 					#@navItemDemo("3.11" "javascript:void(0);" "icon-list")概况#end
 				#end*#
-				#TnavItem("4" "测试管理" "/page/project/testManagement.page" "icon-retweet")
+				#TnavItem("4" "测试管理" "/product/page/project/testManagement.page" "icon-retweet")
 #*				#@navDropDownMenu("4" "测试管理" "icon-retweet" )
 					#@navItemDemo("4.1" "javascript:void(0);" "icon-list")Bug#end
 					#@navItemDemo("4.2" "javascript:void(0);" "icon-list")用例#end
 					#@navItemDemo("4.3" "javascript:void(0);" "icon-list")版本#end
 				#end*#
-				#TnavItem("5" "文档管理" "/page/project/document.page" "icon-paste")
+				#TnavItem("5" "文档管理" "/product/page/project/document.page" "icon-paste")
 #*				#@navDropDownMenu("5" "文档管理" "icon-paste" )
 					#@navItemDemo("5.1" "javascript:void(0);" "icon-list")文档#end
 					#@navItemDemo("5.2" "javascript:void(0);" "icon-list")编辑#end
 					#@navItemDemo("5.3" "javascript:void(0);" "icon-list")分类 #end
 				#end*#
-				#TnavItem("6" "统计管理" "/page/project/statistical.page" "icon-bar-chart")
+				#TnavItem("6" "统计管理" "/product/page/project/statistical.page" "icon-bar-chart")
 #*				#@navDropDownMenu("6" "统计管理" "icon-bar-chart" )
 					#@navItemDemo("6.1" "javascript:void(0);" "icon-list")产品#end
 					#@navItemDemo("6.2" "javascript:void(0);" "icon-list")项目#end
 					#@navItemDemo("6.3" "javascript:void(0);" "icon-list")测试#end
 					#@navItemDemo("6.4" "javascript:void(0);" "icon-list")组织#end
 				#end*#
-				#TnavItem("7" "组织管理" "/page/project/organization.page" "icon-sitemap")
+				#TnavItem("7" "组织管理" "/product/page/project/organization.page" "icon-sitemap")
 #*				#@navDropDownMenu("7" "组织管理" "icon-sitemap" )
 					#@navItemDemo("7.1" "javascript:void(0);" "icon-list")用户#end
 					#@navItemDemo("7.2" "javascript:void(0);" "icon-list")日志#end
@@ -217,7 +217,7 @@
 					#@navItemDemo("7.5" "javascript:void(0);" "icon-list")权限#end
 					#@navItemDemo("7.6" "javascript:void(0);" "icon-list")公司#end
 				#end*#
-				#TnavItem("8" "后台管理" "/page/project/backstage.page" "icon-trophy")
+				#TnavItem("8" "后台管理" "/product/page/project/backstage.page" "icon-trophy")
 #*				#@navDropDownMenu("8" "后台管理" "icon-trophy" )
 					#@navItemDemo("8.1" "javascript:void(0);" "icon-list")首页#end
 					#@navItemDemo("8.2" "javascript:void(0);" "icon-list")插件#end
