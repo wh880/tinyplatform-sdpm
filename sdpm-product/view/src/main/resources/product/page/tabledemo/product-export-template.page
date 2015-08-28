@@ -1,0 +1,25 @@
+<form action="" method="post"> 
+	<table>
+		<tr>
+		 	<td width="10%">
+		 		 需求记录数
+	        </td>
+	        <td >
+		 		 <input type="text" name="fileName" id="fileName" value="" class="form-control" >
+	        </td>
+	        <td width="10%">
+		 		<select name="fileType" id="fileType"  >
+					<option value="xlsx">xlsx</option>
+					<option value="xls">xls</option>
+				</select>
+	        </td>
+	        <td width="10%">
+		 		 <button type="submit" id="submit" class="btn btn-submit btn-primary">保存</button>
+	        </td>
+		</tr> 
+	</table>
+	
+	
+</form>
+
+

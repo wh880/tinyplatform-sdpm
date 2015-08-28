@@ -1,5 +1,10 @@
+#import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
+<style>
+	.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+	.open #downMenuSty{min-width:75px}
+</style>
 #@div()
 	#@tabWithInit("tab_demo" "tabLayout")
 		#@tabHead()
@@ -36,8 +41,24 @@
 				</span>
 				<span class="r">
 				
-					<a href="#">#buttonIcon(iconClass="icon-upload-alt")导入</a>&nbsp;
-					<a href="#">#buttonIcon(iconClass="icon-download-alt")导出</a>&nbsp;
+				
+				
+				#@iconOperations("#myModal" "icon-download-alt" "导入" "300" "40" "/product/page/tabledemo/product-import.pagelet" "ml-5")&nbsp;导入#end
+				
+				
+				
+                    #buttonIcon(iconClass="icon-upload-alt")	
+					    #@buttonGroup()
+		                    #@buttonDropdown("Dropdown")导出  #@spanCaret()#end#end
+		                    #@ulDropdownMenu("downMenuSty")
+		                    <p>
+		                     #@iconOperations("#myModal" "" "导出" "500" "200"  "/product/page/tabledemo/product-export-data.pagelet" "ml-5") &nbsp;导出数据#end  
+							</p>
+							
+		                     #@iconOperations("#myModal" "" "导出" "700" "80" "/product/page/tabledemo/product-export-template.pagelet" "ml-5") &nbsp;导出模板#end            
+		                     
+	                    #end
+                    #end &nbsp;
 					<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-report.page">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
 					
 					#@iconOperations("#myModal" "icon-plus-sign" "批量添加" "1300" "500" "/product/page/tabledemo/product-add.pagelet" "ml-5")&nbsp;批量添加#end
