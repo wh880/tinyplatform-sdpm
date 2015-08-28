@@ -26,7 +26,7 @@
 			#@divRightAlign()		
 				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn ">#buttonIcon(iconClass="icon-list")所有项目</a>
 				&nbsp
-				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn ">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="#" class="active_btn ">#buttonIcon(iconClass="icon-plus")添加项目</a>
 			#end			
 		#end
 	#end
