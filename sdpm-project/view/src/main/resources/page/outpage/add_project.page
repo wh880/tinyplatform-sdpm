@@ -1,0 +1,151 @@
+
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#include("/page/event/common.page")
+<style>
+.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.wz{font-size:16px;top: 5px;}
+.c{padding:8px 73px}
+</style>
+#@div()
+	#@div(divClass="tabLayout")
+		#@div(divClass="tabBar cl")
+			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/project/project.page">任务</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/proxq.page">需求</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probug.page">Bug</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probb.page">版本</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procs.page">测试</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/protd.page">团队</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prorz.page">日志</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prodt.page">动态</a></span>
+			<span ><a href="${TINY_CONTEXT_PATH}/page/outpage/prowd.page">文档</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procp.page">产品</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">概况</a></span>
+			#@divRightAlign()		
+				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn ">#buttonIcon(iconClass="icon-list")所有项目</a>
+				&nbsp
+				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn ">#buttonIcon(iconClass="icon-plus")添加项目</a>
+			#end			
+		#end
+	#end
+#end
+#@div(divClass="operationbar")
+	添加项目
+#end
+#@div()
+	#@table()
+		#@tbody()
+		#@tr()
+				#@td()	
+					#@colLabel("wz")项目名称：#end
+					#@formControlDiv("col-8")
+					#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+					#end
+				#end
+				#@validateDiv("col-2")#end							
+			#end
+			
+			#@tr()
+				#@td()	
+					#@colLabel("wz")项目代号：#end
+					#@formControlDiv("col-8")
+					#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+					#end
+				#end
+				#@validateDiv("col-2")#end							
+			#end
+			
+		  #@tr()
+				#@td()	
+				#@colLabel("wz")起始日期：#end
+					#@formControlDiv("col-8")
+               #@formHorizontal()
+	              #daterangepicker("2015/03/18" "2015/03/23" "reservation" "reservation" "width:200px")
+               #end
+                  #daterangepickerInit("#reservation")
+                  
+            	#end
+            	#end
+				#@validateDiv("col-2")#end							
+			#end
+			
+			#@tr()
+				#@td()	
+					#@colLabel("wz")可工作日：#end
+					#@formControlDiv("col-8")
+					#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"天","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+					#end
+				#end
+				#@validateDiv("col-2")#end							
+			#end
+			
+			#@tr()
+				#@td()	
+					#@colLabel("wz")团队名称：#end
+					#@formControlDiv("col-8")
+					#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+					#end
+				#end
+				#@validateDiv("col-2")#end							
+			#end
+			
+			#@tr()
+				#@td()
+					#@colLabel("wz")项目类型：#end
+					#@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})
+						#@tinyOptionItem("zh")分类1#end
+						#@tinyOptionItem("en")分类2#end
+						#@tinyOptionItem("ta")分类3#end
+					#end
+				#end				
+			#end
+			
+			#@tr()
+			#@td()
+		    #@colLabel("wz")关联产品：#end
+		    #@formControlDiv("col-8")
+			#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+				#@tinyOptionItem("zh")中国#end
+				#@tinyOptionItem("en")英国#end
+				#@tinyOptionItem("ta")泰国#end
+			#end
+		
+		    #end
+		#@validateDiv("col-2")#end
+           #end
+		    #end
+		    
+		    #@tr()
+			#@td()
+		    #@colLabel("wz")项目描述：#end
+		    #@formControlDiv("col-10")
+			     #@tinyueditor("content" "content" "height:100px;overflow:auto")说点什么...最少输入10个字符#end
+		     #end
+		    #@validateDiv("col-2")#end
+		    #end
+		    #end
+		       
+		    #@tr()
+			#@td()
+			    #@colLabel("wz")添加之后：#end
+		        #@formControlDiv("skin-minimal col-9")
+		    	#@tinyRadio("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})默认设置(有项目视图权限，即可访问)#end<br>
+			   #@tinyRadio("sex" "women" "women")私有项目(只有项目团队成员才能访问)#end<br>
+			   #@tinyRadio("sex" "secret" "women")自定义白名单(团队成员和白名单的成员可以访问)#end
+		       #end
+	         	#@validateDiv("col-2")#end
+			#end
+		    #end
+		    
+		     #@tr()
+				#@td()
+					#@colLabel()#end
+					<a href="#">#buttonRadiusPrimary(caption="保存")</a>
+      				<a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">#buttonDefault(caption="返回")</a>
+				#end
+			#end
+		#end
+	#end
+#end		
