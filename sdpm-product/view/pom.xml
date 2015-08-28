@@ -193,6 +193,13 @@
 			<artifactId>org.tinygroup.fullCalendar</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
+		
+		<!-- 这是一个折叠的依赖 -->
+		<dependency>
+	<groupId>org.tinygroup</groupId>
+	<artifactId>org.tinygroup.fold</artifactId>
+	<version>${tiny_ui_version}</version>
+	</dependency>
     
   </dependencies>
 </project>

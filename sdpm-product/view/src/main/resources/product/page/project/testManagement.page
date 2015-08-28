@@ -1,5 +1,5 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
-#include("/page/event/common.page")
+#include("product/page/event/common.page")
 #@div()
 	#@tabWithInit("tab_demo" "tabLayout")
 		#@tabHead()
