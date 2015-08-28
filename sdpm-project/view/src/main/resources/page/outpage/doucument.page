@@ -8,7 +8,6 @@
 .tabLayout .tabBar .Current a{color:#fff}
 .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
 .wz{font-size:16px;top: 5px;}
-.c{padding:8px 73px}
 </style>
 #include("/page/event/common.page")
 #@div()
@@ -26,8 +25,8 @@
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procp.page">产品</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">概况</a></span>
 			#@divRightAlign()		
-				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn c">#buttonIcon(iconClass="icon-list")所有项目</a>
-				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn c">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn">#buttonIcon(iconClass="icon-list")所有项目</a>
+				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn">#buttonIcon(iconClass="icon-plus")添加项目</a>
 			#end			
 		#end
 	#end
