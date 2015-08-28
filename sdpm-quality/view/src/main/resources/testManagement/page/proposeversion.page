@@ -7,7 +7,7 @@
 </style>
 
 #include("/testManagement/page/event/common.page")
-#set(name="bug")
+#set(name="version")
 #@div()
 #@tabWithInit("tab_demo" "optionsBox")
     #@div(divClass="dropdownBox")
