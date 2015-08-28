@@ -1,5 +1,5 @@
 <style>
-.bg {background-color: #C0C0C0;font-size:26px;margin-left:-5px}
+.input-group-addon{width:10px;font-size:20px}
 </style>
 #@tinyForm("thisform" "" "" {"class":"test"})
 	#@elementItem()
@@ -19,12 +19,13 @@
       #@elementItem()
         #@colLabel()可用工作日#end
         #@formControlDiv("col-8")
-			 <input type="text">
-			 <span class="bg">天</span>						 
+			 <input type="text" style="float:left">
+			 <span class="input-group-addon">天</span>
+
       	#end
-      	#@validateDiv("col-2")#end
+      	#@validateDiv("col--10")#end
       #end
-       #@elementItem()
+     #@elementItem()
         #@colLabel()备注：#end
 	#@formControlDiv("col-8")
 		#@tinyueditor("content" "content")Say something#end
