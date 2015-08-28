@@ -1,26 +1,29 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
-<style>
-.tabLayout .tabBar span a{color:#333}
-.tabLayout .tabBar .Current a{color:#fff}
+#*<style>
+##.tabLayout .tabBar span a{color:#333}
+##.tabLayout .tabBar .Current a{color:#fff}
 .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
 .operationbar a{padding:2px 3px;display:inline-block;margin-right:0;border-radius:3px;}
 .operationbar a:hover{background:#ddd;color:#333;}
 .operationbar .active_btn:hover{background:none;}
 .btn-group #Dropdown{background:none;border:none;padding:0 3px}
 .open>#downMenuSty{min-width:70px}
-</style>
-
+</style>*#
+##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
 #include("/testManagement/page/event/common.page")
+#set(name="bug")
 #@div()
-	#@div(divClass="tabLayout")
-		#@div(divClass="tabBar cl")
-			<span class="Current"><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementBug.page?currentPageId=4">Bug</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementCases.page?currentPageId=4">用例</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementVersion.page?currentPageId=4">版本</a></span>
-		#end
-	#end
-			##operationbar start1
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/testManagement/page/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/testManagement/page/testManagementTab.page")
+			#end
+			
+			#@tabBodyCol("ptop-5")
+			##operationbar star
 			#@div(divClass="operationbar")
 				<span class="f">
 					<a href="#" class="active_btn">未关闭</a>
@@ -63,11 +66,12 @@
                     
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
                     <a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-plus")建用例</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-plus")建Bug</a>
 				</span>
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
+			#end
 			
 			#@toggleBox({"class":"open"})
 				#@toggleLeft({"class":"aclass"})
@@ -127,8 +131,9 @@
 			#end
 			##tinytable end
 			#end
-			##togglerigth end
+			##toggle rigth end
 		#end
 		##toggle end
-			
+	#end
+	##tab end
 #end

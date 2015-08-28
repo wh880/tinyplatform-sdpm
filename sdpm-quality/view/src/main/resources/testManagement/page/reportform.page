@@ -2,29 +2,26 @@
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
+#import("/testManagement/components/org/tinygroup/fulimanageui/form.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 <style>
-    .tabLayout .tabBar span a{color:#333}
-    .tabLayout .tabBar .Current a{color:#fff}
-    .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
     .togglebox.open .tableBoxessty{margin-left:262px}
     .togglebox.open .togglenavico{left:218px}
     .togglebox .togglenavpart{left:-260px;}
 </style>
-#macro toggleRight(toggleRightClass)
-<div id="${toggleid}-body" class="trans togglebodypart ${toggleRightClass}">
-    #bodyContent
-</div>
-#end
+
 #include("/testManagement/page/event/common.page")
+#set(name="bug")
 #@div()
-    #@div(divClass="tabLayout")
-        #@div(divClass="tabBar cl")
-			<span class="Current"><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementBug.page?currentPageId=4">Bug</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementCases.page?currentPageId=4">用例</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementVersion.page?currentPageId=4">版本</a></span>
-        #end
+#@tabWithInit("tab_demo" "optionsBox")
+    #@div(divClass="dropdownBox")
+        #include("/testManagement/page/dropdownMenu.page")
     #end
+    #@tabHead()
+        #include("/testManagement/page/testManagementTab.page")
+    #end
+
+    #@tabBodyCol("ptop-5")
 ##operationbar start1
     #@div(divClass="operationbar")
     <span class="f">
@@ -36,6 +33,7 @@
         #div(divClass="clearfix")
     #end
 ##operationbar end
+        #end
     #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
         #@toggleLeft({"class":"aclass","style":"width:250px;height:400px;overflow:auto"})
             #@settoggleLeftTitle()请选择报表类型#end
@@ -69,5 +67,5 @@
         #end
     #end
 
-
+#end
 #end

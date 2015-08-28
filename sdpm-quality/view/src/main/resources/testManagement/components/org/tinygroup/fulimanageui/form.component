@@ -56,3 +56,9 @@
 #macro statusLabel(statusLabelCls)
 	<span class="label $!{statusLabelCls} radius">#bodyContent</span>
 #end
+
+#macro toggleRight(toggleClass)
+	<div id="${toggleid}-body" class="trans togglebodypart ${toggleClass}">
+	#bodyContent
+	</div>
+#end
