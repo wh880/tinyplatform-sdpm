@@ -20,9 +20,9 @@
 #@div()
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
-        <span class="Current"><a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page">Bug</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/testManagementCases.page">用例</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page">版本</a></span>
+			<span class="Current"><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementBug.page?currentPageId=4">Bug</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementCases.page?currentPageId=4">用例</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementVersion.page?currentPageId=4">版本</a></span>
         #end
     #end
 ##operationbar start1
