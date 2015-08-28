@@ -30,8 +30,8 @@
 				<span class="f">
 					文档列表
 				</span>
-				<span class="r c">
-					<a href="#">#buttonIcon(iconClass="icon-plus")创建文档</a>
+				<span class="r">
+					<a href="${TINY_CONTEXT_PATH}/page/outpage/doucument.page">#buttonIcon(iconClass="icon-plus")创建文档</a>
 				</span>
 				#div(divClass="clearfix")
 			#end
