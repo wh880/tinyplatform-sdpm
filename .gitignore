@@ -14,7 +14,8 @@ target/*
 .settings/*
 *.iml
 
-
+.idea/
+.idea/*
 bin/
 bin/*
 
