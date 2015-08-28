@@ -65,7 +65,7 @@
 	   				   	 	#@buttonCancel()关闭#end
   						#end
 					#end				
-				<a href="#" title="编辑项目" class="b ">#buttonIcon(iconClass="icon-pencil")</a>
+				<a href="${TINY_CONTEXT_PATH}/page/outpage/edit.page" title="编辑项目" class="b ">#buttonIcon(iconClass="icon-pencil")</a>
 				<a href="#" title="删除项目">#buttonIcon(iconClass="icon-remove")</a>
 				<a href="#" title="返回">#buttonIcon(iconClass="icon-level-up")</a>
 				</span>
