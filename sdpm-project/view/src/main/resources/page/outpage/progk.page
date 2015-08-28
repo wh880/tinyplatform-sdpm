@@ -1,0 +1,92 @@
+	#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+<style>
+.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.b {margin-left: 8px;}
+</style>
+#include("/page/event/common.page")
+#@div()
+	#@div(divClass="tabLayout")
+		#@div(divClass="tabBar cl")
+			<span><a href="${TINY_CONTEXT_PATH}/page/project/project.page">任务</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/proxq.page">需求</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probug.page">Bug</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probb.page">版本</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procs.page">测试</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/protd.page">团队</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prorz.page">日志</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prodt.page">动态</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prowd.page">文档</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procp.page">产品</a></span>
+			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/cp/prosay.page">概况</a></span>
+			#@divRightAlign()		
+				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn c">#buttonIcon(iconClass="icon-list")所有项目</a>
+				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn c">#buttonIcon(iconClass="icon-plus")添加项目</a>
+			#end			
+		#end
+	#end
+			##operationbar start1
+			#@div(divClass="operationbar")
+				<span class="f">
+					哈哈哈哈
+				</span>
+				<span class="r">
+				#@aModal("#myModal" "项目名称>延期" "750" "400" "" "/page/outpage/yanqi.pagelet")#buttonIcon(iconClass="icon-calendar")延期#end
+					#@dialog("myModal")
+						#@dialogHeader()#end
+						#@dialogBody()<p></p>#end
+						#@dialogFooter()
+							#@buttonEnsure()确定#end
+	   				   	 	#@buttonCancel()关闭#end
+  						#end
+					#end
+				#@aModal("#myModal" "项目名称>挂起" "800" "500" "" "/page/outpage/guaqi.pagelet")#buttonIcon(iconClass="icon-pause")挂起#end
+					#@dialog("myModal")
+						#@dialogHeader()#end
+						#@dialogBody()
+						<p>					
+    					</p>
+    					#end
+						#@dialogFooter()
+							#@buttonEnsure()确定#end
+	   				   	 	#@buttonCancel()关闭#end
+  						#end
+					#end
+					#@aModal("#myModal" "项目名称>结束" "800" "500" "" "/page/outpage/guaqi.pagelet")#buttonIcon(iconClass="icon-off")结束#end
+					#@dialog("myModal")
+						#@dialogHeader()#end
+						#@dialogBody()
+						<p>					
+    					</p>
+    					#end
+						#@dialogFooter()
+							#@buttonEnsure()确定#end
+	   				   	 	#@buttonCancel()关闭#end
+  						#end
+					#end				
+				<a href="#" title="编辑项目" class="b ">#buttonIcon(iconClass="icon-pencil")</a>
+				<a href="#" title="删除项目">#buttonIcon(iconClass="icon-remove")</a>
+				<a href="#" title="返回">#buttonIcon(iconClass="icon-level-up")</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")				
+	#end				
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+							
+				
+	
