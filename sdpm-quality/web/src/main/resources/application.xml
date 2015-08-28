@@ -42,6 +42,7 @@
 		<class-paths>
 			<!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
 			<class-path path="E:\TinyWorkSpace\sdpm\sdpm-quality\view\src\main\resources" />
+			<class-path path="F:\daochu\sdpm\sdpm-quality\view\src\main\resources" />
  		</class-paths>
 		<include-patterns>
 			<include-pattern pattern="org\.tinygroup\.(.)*\.jar" />
