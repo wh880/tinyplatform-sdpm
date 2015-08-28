@@ -1,11 +1,5 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
-<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
-<style>
-.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
-.operationbar a{padding:2px 3px;display:inline-block;margin-right:0;border-radius:3px;}
-.operationbar a:hover{background:#ddd;color:#333;}
-.operationbar .active_btn:hover{background:none;}
-</style>
+
 #include("/testManagement/page/event/common.page")
 #set(name="case")
 #@div()
