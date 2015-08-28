@@ -94,7 +94,7 @@
 <script>var init = [];var tinywebroot='${TINY_CONTEXT_PATH}'</script>
 <!-- Demo script --> <script src="${TINY_CONTEXT_PATH}/demo/demo.js"></script> <!-- / Demo script -->
 #@mainWrapper()
-	#@mainNavbar("img/main-navbar-logo.png" "Tinyframework2")
+	#@mainNavbar("/img/main-navbar-logo.png" "Tinyframework2")
 		#@navbarNav()
 			#navbarNavItem("待办事项" "#")
 			#navbarNavItem("需求" "#")

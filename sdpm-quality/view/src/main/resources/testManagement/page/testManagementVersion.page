@@ -1,18 +1,22 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 <style>
-.tabLayout .tabBar span a{color:#333}
-.tabLayout .tabBar .Current a{color:#fff}
 .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.operationbar a{padding:2px 3px;display:inline-block;margin-right:0;border-radius:3px;}
+.operationbar a:hover{background:#ddd;color:#333;}
+.operationbar .active_btn:hover{background:none;}
 </style>
 #include("/testManagement/page/event/common.page")
+#set(name="version")
 #@div()
-	#@div(divClass="tabLayout")
-		#@div(divClass="tabBar cl")
-			<span><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementBug.page?currentPageId=4">Bug</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementCases.page?currentPageId=4">用例</a></span>
-			<span class="Current"><a href="${TINY_CONTEXT_PATH}/testManagement/page/testManagementVersion.page?currentPageId=4">版本</a></span>
-		#end
-	#end
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/testManagement/page/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/testManagement/page/testManagementTab.page")
+			#end
+			
+			#@tabBodyCol("ptop-5")
 			##operationbar start1
 			#@div(divClass="operationbar")
 				<span class="f">
@@ -25,7 +29,8 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			
+			#end
+			##tabbody end
 			#@tinyTable()
 				#@div(divBaseClass="tinyheaderTools form-inline")
 					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
@@ -67,4 +72,5 @@
 				#end
 			#end
 			#end
+	#end
 #end
