@@ -97,7 +97,7 @@
 					<span class="active_btn">浏览计划</span>
 				</span>
 				<span class="r">
-					<a href="#">#buttonIcon(iconClass="icon-plus")创建计划</a>
+					#@iconOperations("#myModal" "icon-plus" "创建计划" "1000" "400" "/product/page/tabledemo/product-addplan.pagelet" "ml-5")&nbsp;创建计划#end
 				</span>
 				#div(divClass="clearfix")
 			#end
