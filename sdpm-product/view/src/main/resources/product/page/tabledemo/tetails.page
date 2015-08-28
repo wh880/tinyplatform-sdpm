@@ -1,0 +1,169 @@
+#!set(activeTitle="详情页",activeMenuId=currentPageId)
+#include("/page/event/common.page")
+#@div()
+	#@tabWithInit("tab_demo" "tabLayout")
+		#@tabHead()
+			#@tabHeadCol()需求#end
+			#@tabHeadCol()动态#end
+			#@tabHeadCol()计划#end
+			#@tabHeadCol()发布#end
+			#@tabHeadCol()路线图#end
+			#@tabHeadCol()文档#end
+			#@tabHeadCol()项目#end
+			#@tabHeadCol()模块#end
+			#@tabHeadCol()概况#end
+		#end
+		<span class="r" style="position:relative;top:-28px;height:0">
+			<a href="#">#buttonIcon(iconClass="icon-globe")所有产品</a>&nbsp;
+			<a href="#">#buttonIcon(iconClass="icon-plus-sign")添加产品</a>
+		</span>
+		#@tabBodyCol("ptop-5")
+			##operationbar start
+			#@div(divClass="operationbar")
+				<span class="f">
+					<a href="#" class="active_btn">未关闭</a>
+					<a href="#">全部需求</a>
+					<a href="#">指派给我</a>
+					<a href="#">由我创建</a>
+					<a href="#">由我评审</a>
+					<a href="#">由我关闭</a>
+					<a href="#">草稿</a>
+					<a href="#">激活</a>
+					<a href="#">已变更</a>
+					<a href="#">待关闭</a>
+					<a href="#">已关闭</a>
+					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
+				</span>
+				<span class="r">
+					<a href="#">#buttonIcon(iconClass="icon-upload-alt")导入</a>&nbsp;
+					<a href="#">#buttonIcon(iconClass="icon-download-alt")导出</a>&nbsp;
+					<a href="#">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
+					<a href="#">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
+					<a href="#">#buttonIcon(iconClass="icon-plus")提需求</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/toggleboxes.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start1
+			#@div(divClass="operationbar")
+				<span class="f">
+					<a href="#" class="active_btn">今天</a>
+					<a href="#">昨天</a>
+					<a href="#">前天</a>
+					<a href="#">本周</a>
+					<a href="#">上周</a>
+					<a href="#">本月</a>
+					<a href="#">上月</a>
+					<a href="#">所有</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start2
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">浏览计划</span>
+				</span>
+				<span class="r">
+					<a href="#">#buttonIcon(iconClass="icon-plus")创建计划</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start3
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">浏览发布</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start4
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">线路图</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start5
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">文档列表</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start6
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">项目列表</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start7
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">模块维护</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start8
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">概况</span>
+				</span>
+				<span class="r">
+					<a href="#">#buttonIcon(iconClass="icon-off")关闭</a>&nbsp;
+					<a href="#">#buttonIcon(iconClass="icon-plus")编辑</a>&nbsp;
+					<a href="#" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/datatableDemo.page")
+		#end
+	#end
+#end
+<script type="text/javascript">
+$(function(){
+        var timeid;
+      $(".tabOption").find("li").each(function(index){
+          var sTab=$(this);
+          sTab.mouseenter(function(){
+              timeid= setTimeout(function(){
+                  sTab.addClass("tabCurrent").siblings().removeClass("tabCurrent");
+                  sTab.parent().siblings().find("ul:eq(" + index +")").show().siblings().hide() ;
+             },300);
+          }).mouseleave(function(){
+                 clearTimeout(timeid);
+            })
+      })
+    })
+</script>

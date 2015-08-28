@@ -17,6 +17,7 @@ public class MainTest {
         Menu menu = new Menu();
         List<Menu> menus = new ArrayList<Menu>();
         menu.setId(0);
+
         menu.setName("name");
         menu.setHref("href");
         menu.setIcon("icon");
