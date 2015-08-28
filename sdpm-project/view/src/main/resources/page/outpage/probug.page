@@ -30,8 +30,8 @@
 				<span class="f">
 					Bug列表
 				</span>
-				<span class="r c">
-					<a href="#">#buttonIcon(iconClass="icon-plus")提BUG</a>
+				<span class="r ">
+					<a href="${TINY_CONTEXT_PATH}/page/outpage/proposeBug.page">#buttonIcon(iconClass="icon-plus")提BUG</a>
 				</span>
 				#div(divClass="clearfix")
 			#end

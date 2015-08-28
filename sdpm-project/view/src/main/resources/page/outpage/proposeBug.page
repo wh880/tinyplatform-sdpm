@@ -140,6 +140,11 @@
 			#end
 			#@validateDiv("col-2")#end
 		#end
+		#@divCenterAlign()#buttonRadiusDefault(caption="保存")
+		  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+			#buttonRadiusDefault(caption="取消")#end
+
+	
 
 	#end
 
