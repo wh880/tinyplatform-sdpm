@@ -62,4 +62,5 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
+			#include("/page/outpage/dt_updown.page")
 #end
