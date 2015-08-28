@@ -6,6 +6,8 @@
     .tabLayout .tabBar .Current a{color:#fff}
     .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
     .select_boxes{margin-top:0}
+    .tableBoxes tbody tr{height:30px;}
+    .tableBoxes tbody tr td{padding:10px 7px;vertical-align:middle}
 </style>
 #include("/testManagement/page/event/common.page")
 #@div()
@@ -88,7 +90,7 @@
         #end
         #@elementItem()
             #@colLabel()用例步骤：#end
-            #@table()
+            #@table("tableBoxes col-8")
                 #@thead()
                     #@tr()
                         #@th()编号#end
@@ -103,12 +105,13 @@
                         #@td()${i}#end
                         #@td()#inputRadiusDefaultText()#end
                         #@td()#inputRadiusDefaultText()#end
-                        #@td()#@table()
+                        #@td()#@div()
                             #buttonRadiusPrimary(btClass="btn-small" caption="之前添加")
                             #buttonRadiusPrimary(btClass="btn-small" caption="之后添加")
                             #buttonRadiusPrimary(btClass="btn-small" caption="删除")
                             #end
                         #end
+                    #end
                     #end
                 #end
             #end
@@ -128,7 +131,8 @@
             #end
             #@validateDiv("col-2")#end
         #end
-
+        #@divCenterAlign()#buttonRadiusDefault(caption="保存")
+            #buttonRadiusDefault(caption="取消")#end
     #end
 
 <script type="text/javascript">
@@ -240,5 +244,4 @@
     });
 </script>
 
-#end
 #end

@@ -20,7 +20,7 @@
 					<a href="#">已测试版本</a>
 					</span>
 				<span class="r">
-					<a href="#">#buttonIcon(iconClass="icon-plus")提交测试</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-plus")提交测试</a>&nbsp;
 					</span>
 				#div(divClass="clearfix")
 			#end
