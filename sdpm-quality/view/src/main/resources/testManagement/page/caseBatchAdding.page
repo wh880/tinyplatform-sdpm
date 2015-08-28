@@ -1,0 +1,106 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/icon/components/icon.component")
+
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+<style>
+    .select_boxes{margin-top:0}
+</style>
+
+#include("/testManagement/page/event/common.page")
+#set(name="case")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+		#@div(divClass="dropdownBox")
+			#include("/testManagement/page/dropdownMenu.page")
+		#end
+		#@tabHead()
+			#include("/testManagement/page/testManagementTab.page")
+		#end
+
+		#@tabBodyCol("ptop-5")
+##operationbar start1
+	#@div(divClass="operationbar")
+    <span class="f">
+					<a href="#" class="active_btn"> Bug::批量添加</a>
+				</span>
+    <span class="r">
+	##普通弹出层
+		#@aModal("#myModal" "粘贴文本" ) #buttonRadiusDefault(caption="粘贴文本")#end
+		#@dialog("myModal")
+			#@dialogHeader()#iconItem("粘贴" "zhantie" "#xf016a")粘贴文本#end
+			#@dialogBody()<p>
+				#@textareaRadius(textareaRadiusPlaceholder="粘贴文本到文本区域中，每行文字作为一条数据的标题" textareaRadiusStyle="width:100%")#end
+            </p>
+			#end
+			#@dialogFooter()
+				#@buttonEnsure()保存#end
+
+			#end
+		#end
+
+				</span>
+		#div(divClass="clearfix")
+	#end
+			#end
+	#@table(tableClass="table table-border table-bordered table-striped")
+		#@thead()
+			#@tr()
+				#@th()ID#end
+				#@th()所属模块#end
+				#@th()用例类型#end
+				#@th()相关需求#end
+				#@th()用例标题#end
+			#end
+		#end
+		#@tbody()
+			#for(i:[1..10])
+			#@tr()
+				#@td()${i}#end
+				#@td()
+					#@selectRadiusBox("select_boxes")
+						#@select(selectName="demo2" selectClass="select")
+							#@optionSelected("")/#end
+							#@optionItem("1")同上#end
+						#end
+					#end
+				#end
+				#@td()
+					#@selectRadiusBox("select_boxes")
+						#@select(selectName="demo2" selectClass="select")
+							#@optionSelected("")/#end
+							#@optionItem("1")同上#end
+						#end
+					#end
+				#end
+				#@td()#@selectRadiusBox("select_boxes")
+					#@select(selectName="demo2" selectClass="select")
+						#@optionSelected("") #end
+						#@optionItem("1")代码错误#end
+						#@optionItem("1")界面优化#end
+						#@optionItem("1")设计缺陷#end
+						#@optionItem("1")配置相关#end
+						#@optionItem("1")安装部署#end
+						#@optionItem("1")安全相关#end
+						#@optionItem("1")性能问题#end
+						#@optionItem("1")标准规范#end
+						#@optionItem("1")测试脚本#end
+						#@optionItem("1")代码改进#end
+						#@optionItem("1")其他#end
+						#@optionItem("1")同上#end
+					#end
+				#end#end
+				#@td()#inputRadiusDefaultText()#end
+				#end
+			#end
+		#end
+	#end
+#@divCenterAlign()#buttonRadiusDefault(caption="保存")
+	#buttonRadiusDefault(caption="取消")#end
+#end
+#end
+
+
+

@@ -1,0 +1,34 @@
+<style>
+.bg {background-color: #C0C0C0;font-size:26px;margin-left:-5px}
+</style>
+#@tinyForm("thisform" "" "" {"class":"test"})
+	#@elementItem()
+        #@colLabel()起始日期#end
+        #@formControlDiv("col-8")
+			 #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","nullmsg":"日期不能为空","placeholder":"选择日期"})#end						 
+      	#end
+        #@validateDiv("col-2")#end
+      #end
+      #@elementItem()
+        #@colLabel()结束日期#end
+        #@formControlDiv("col-8")
+			 #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","nullmsg":"日期不能为空","placeholder":"选择日期"})#end						 
+      	#end
+      	#@validateDiv("col-2")#end
+      #end
+      #@elementItem()
+        #@colLabel()可用工作日#end
+        #@formControlDiv("col-8")
+			 <input type="text">
+			 <span class="bg">天</span>						 
+      	#end
+      	#@validateDiv("col-2")#end
+      #end
+       #@elementItem()
+        #@colLabel()备注：#end
+	#@formControlDiv("col-8")
+		#@tinyueditor("content" "content")Say something#end
+	#end
+        #@validateDiv("col-2")#end
+    #end
+#end

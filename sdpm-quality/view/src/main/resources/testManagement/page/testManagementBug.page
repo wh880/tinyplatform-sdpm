@@ -1,0 +1,139 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+#*<style>
+##.tabLayout .tabBar span a{color:#333}
+##.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.operationbar a{padding:2px 3px;display:inline-block;margin-right:0;border-radius:3px;}
+.operationbar a:hover{background:#ddd;color:#333;}
+.operationbar .active_btn:hover{background:none;}
+.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+.open>#downMenuSty{min-width:70px}
+</style>*#
+##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
+#include("/testManagement/page/event/common.page")
+#set(name="bug")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/testManagement/page/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/testManagement/page/testManagementTab.page")
+			#end
+			
+			#@tabBodyCol("ptop-5")
+			##operationbar star
+			#@div(divClass="operationbar")
+				<span class="f">
+					<a href="#" class="active_btn">未关闭</a>
+					<a href="#">所有</a>
+					<a href="#">指派给我</a>
+					<a href="#">由我创建</a>
+					<a href="#">由我解决</a>
+					<a href="#">未确认</a>
+					<a href="#">未指派</a>
+					<a href="#">未解决</a>
+					<a href="#">久未处理</a>
+					<a href="#">被延期</a>
+					<a href="#">需求变动</a>
+					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
+				</span>
+				<span class="r">
+					#@iconOperations("#myModal" "icon-upload-alt" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp导入#end
+					
+					###@iconOperations("#myModal" "icon-download-alt" "导出" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")&nbsp导出#end
+					#buttonIcon(iconClass="icon-download-alt")	
+				    #@buttonGroup()
+	                    #@buttonDropdown("Dropdown")导出   #@spanCaret()#end#end
+	                    #@ulDropdownMenu("downMenuSty")
+#*	                    	#@iconOperations("#myModal" "icon-download-alt" "导出数据" "865" "200"
+						 "/page/tabledemo/user-add.pagelet" "ml-5")导出数据#end*#
+						 #@aModal("#myModal" "导出数据" "500" "100" "" "/testManagement/page/tabledemo/testManagement1.pagelet")导出数据#end
+						</br>
+						 #@aModal("#myModal" "导出模板" "500" "100" "" "/testManagement/page/tabledemo/testManagement2.pagelet")导出模版#end
+							#@dialog("myModal")
+								#@dialogHeader()对话框标题#end
+								#@dialogBody()<p>对话框内容…</p>#end
+								#@dialogFooter()
+									#@buttonEnsure()确定#end
+								    #@buttonCancel()关闭#end
+							  	#end
+							#end
+						#end
+						
+                    #end&nbsp;
+                    
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
+                    <a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-plus")建Bug</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#end
+			
+			#@toggleBox({"class":"open"})
+				#@toggleLeft({"class":"aclass"})
+					#@settoggleLeftTitle()#end
+					#@settoggleLeftBody()
+						#@OlTopList()
+						    #topItem(1 "#" "测试的产品")
+						    #normalLiItems(2 "#" "" "" "green")
+						    #normalLiItems(3 "#" "最新动态列表" "" "darkGreen")
+						    #normalLiItems(4 "#" "最新动态列表" "" "grey")
+						    #normalLiItems(5 "#" "最新动态列表")
+						#end
+					#end
+				#end
+			
+			#@toggleRight()
+			#@tinyTable()
+				#@div(divBaseClass="tinyheaderTools form-inline")
+					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+					#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;暂时留着，后期更新新的按钮#end
+					<a href="#" class="btn btn-default btn-sm">产品</a>
+					<a href="#" class="btn btn-success btn-sm">Bug</a>
+					<a href="#" class="btn btn-primary btn-sm">工程</a>
+					<a href="#" class="btn btn-info btn-sm">历史</a>
+					<a href="#" class="btn btn-warning btn-sm">相关</a>
+				#end
+			#@tinyTableContent("../data/testManagementBugData.pagelet")
+				#@thead()
+					#@tr()
+						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})级别#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})P#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})Bug标题#end
+						#@tinyTh({"class":"sorting","rel":"sortname","style":"color:#333"})创建#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})指派#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})解决#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})方案#end
+						#@tinyTh({"csortinglass":"sorting","rel":"sortname"})操作#end
+					#end
+				#end
+				<script type="text/javascript">
+				$(function(){
+					$('#${tableId}').on('click','.delBtn',function(e){
+						user_del(this,'1');
+					});
+				})
+			</script>
+#*				#@dialog("myModal")
+					#@dialogHeader()对话框标题#end
+					#@dialogBody()<p>对话框内容…</p>#end
+					#@dialogFooter()
+						#@buttonEnsure()确定#end
+						#@buttonCancel()关闭#end
+					#end
+				#end*#
+			#end
+			#end
+			##tinytable end
+			#end
+			##toggle rigth end
+		#end
+		##toggle end
+	#end
+	##tab end
+#end

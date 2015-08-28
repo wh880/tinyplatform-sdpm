@@ -30,35 +30,34 @@
 					<a href="#">上周</a>
 					<a href="#">本月</a>
 					<a href="#">上月</a>
-					<a href="#">所有</a>
-
-##
-				</span>
+					<a href="#">>所有</a>
+        ##
+        </span>
             #@tinyForm("thisform" "" "" {"class":"test"})
-            #@formControlDiv("col-2")
-                #@tinySelect("lang" "请选择用户" {"class":"input-text select2","rel":"22"})
-                    #@tinyOptionItem("请选择用户")请选择用户#end
-                    #@tinyOptionItem("zh")中国#end
-                    #@tinyOptionItem("en")英国#end
-                    #@tinyOptionItem("ta")泰国#end
+                #@formControlDiv("col-2")
+                    #@tinySelect("lang" "请选择用户" {"class":"input-text select2","rel":"22"})
+                        #@tinyOptionItem("请选择用户")请选择用户#end
+                        #@tinyOptionItem("zh")中国#end
+                        #@tinyOptionItem("en")英国#end
+                        #@tinyOptionItem("ta")泰国#end
+                    #end
                 #end
-            #end
-            #@formControlDiv("col-2")
-                #@tinySelect("lang" "请选择产品" {"class":"input-text select2","rel":"22"})
-                    #@tinyOptionItem("请选择产品")请选择产品#end
-                    #@tinyOptionItem("zh")中国#end
-                    #@tinyOptionItem("en")英国#end
-                    #@tinyOptionItem("ta")泰国#end
+                #@formControlDiv("col-2")
+                    #@tinySelect("lang" "请选择产品" {"class":"input-text select2","rel":"22"})
+                        #@tinyOptionItem("请选择产品")请选择产品#end
+                        #@tinyOptionItem("zh")中国#end
+                        #@tinyOptionItem("en")英国#end
+                        #@tinyOptionItem("ta")泰国#end
+                    #end
                 #end
-            #end
-            #@formControlDiv("col-2")
-                #@tinySelect("lang" "请选择项目" {"class":"input-text select2","rel":"22"})
-                    #@tinyOptionItem("请选择项目")请选择项目#end
-                    #@tinyOptionItem("zh")中国#end
-                    #@tinyOptionItem("en")英国#end
-                    #@tinyOptionItem("ta")泰国#end
+                #@formControlDiv("col-2")
+                    #@tinySelect("lang" "请选择项目" {"class":"input-text select2","rel":"22"})
+                        #@tinyOptionItem("请选择项目")请选择项目#end
+                        #@tinyOptionItem("zh")中国#end
+                        #@tinyOptionItem("en")英国#end
+                        #@tinyOptionItem("ta")泰国#end
+                    #end
                 #end
-            #end
             #end
             #div(divClass="clearfix")
         #end
