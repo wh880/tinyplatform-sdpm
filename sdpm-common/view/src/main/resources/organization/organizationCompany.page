@@ -32,15 +32,24 @@
     #import("/org/tinygroup/table/components/table.component")
     #import("/org/tinygroup/button/components/button_common.component")
     #import("/org/tinygroup/button/components/button.component")
+    #import("/org/tinygroup/form/components/form.component")
+    #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+
+
+
     #@table()
         #@thead()
             #@centerAlignTr()
                 #@th()#h3Title("公司信息")#end
                 #@th()
-                    #@aModal("#myModal" "编辑公司" "600" "400" "btn radius btn-primary size-L" "/organization/organizationUpdateCompany.pagelet")编辑公司#end
+                    #@aModal("#myModal" "编辑公司" "600" "400" "btn radius btn-primary size-L" "/organization/organizationUpdateCompany.pagelet")
+
+                        #@simpleI("icon-edit")编辑#end
+
+                    #end
                     #@dialog("myModal")
                         #@dialogHeader()公司#end
-                        #@dialogBody()<p>agshdshsh</p>#end
+                        #@dialogBody()<p></p>#end
                     #end
                 #end
 

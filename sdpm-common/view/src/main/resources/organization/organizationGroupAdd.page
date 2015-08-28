@@ -1,0 +1,19 @@
+
+#@tinyForm("thisform" "" "" {"class":"test"})
+    #@elementItem()
+        #@colLabel()组名：#end
+        #@formControlDiv("col-8")
+            #tinyInput("text" "username" ""{"placeholder":"字母/中文/数字/下划线","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel()分组描述：#end
+        #@formControlDiv("col-8")
+##            #tinyInput("textarea" "groupdescription" ""{"datatype":"*4-16","id":"groupdescription","class":"input-text"})
+            #@textarea(textareaStyle="width:100%" textareaPlaceholder="说点什么...")#end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+#end
