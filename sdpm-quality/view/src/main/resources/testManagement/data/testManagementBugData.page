@@ -20,7 +20,7 @@
 						#@td()67#end
 						#@td()2013/03/25#end
 						#@td()￥320,800#end
-						 #@td()
+						#@td()
 							#iconOperations("#myModal" "icon-search" "确认" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
 							#iconOperations("#myModal" "icon-hand-right" "指派" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
 							#iconOperations("#myModal" "icon-ok-sign" "解决" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
