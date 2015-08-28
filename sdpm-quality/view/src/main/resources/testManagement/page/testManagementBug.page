@@ -37,18 +37,18 @@
 					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
-					#@iconOperations("#myModal" "icon-upload-alt" "导入" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")&nbsp导入#end
+					#@iconOperations("#myModal" "icon-upload-alt" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp导入#end
 					
 					###@iconOperations("#myModal" "icon-download-alt" "导出" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")&nbsp导出#end
 					#buttonIcon(iconClass="icon-download-alt")	
 				    #@buttonGroup()
-	                    #@buttonDropdown("Dropdown")导入  #@spanCaret()#end#end
+	                    #@buttonDropdown("Dropdown")导出   #@spanCaret()#end#end
 	                    #@ulDropdownMenu("downMenuSty")
 #*	                    	#@iconOperations("#myModal" "icon-download-alt" "导出数据" "865" "200"
 						 "/page/tabledemo/user-add.pagelet" "ml-5")导出数据#end*#
-						 #@aModal("#myModal" "测试标题" "300" "382" "" "/page/tabledemo/user-add.pagelet")导出数据#end
+						 #@aModal("#myModal" "导出数据" "500" "100" "" "/testManagement/page/tabledemo/testManagement1.pagelet")导出数据#end
 						</br>
-						 #@aModal("#myModal" "测试标题" "300" "382" "" "/page/tabledemo/user-add.pagelet")导出模版#end
+						 #@aModal("#myModal" "导出模板" "500" "100" "" "/testManagement/page/tabledemo/testManagement2.pagelet")导出模版#end
 							#@dialog("myModal")
 								#@dialogHeader()对话框标题#end
 								#@dialogBody()<p>对话框内容…</p>#end
@@ -61,9 +61,9 @@
 						
                     #end&nbsp;
                     
-					#@iconOperations("#myModal" "icon-bar-chart" "报表" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")&nbsp报表#end
-					#@iconOperations("#myModal" "icon-plus-sign" "批量添加" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")&nbsp批量添加#end
-					#@iconOperations("#myModal" "icon-plus" "提Bug" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")&nbsp提Bug#end
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
+                    <a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-plus")建用例</a>
 				</span>
 				#div(divClass="clearfix")
 			#end
