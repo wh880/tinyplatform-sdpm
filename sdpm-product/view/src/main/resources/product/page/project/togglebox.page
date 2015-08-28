@@ -1,4 +1,5 @@
-##import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
+#import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
+#import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
@@ -18,12 +19,48 @@
 		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-				#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
-				<a href="#" class="btn btn-default btn-sm">产品</a>
-				<a href="#" class="btn btn-success btn-sm">Bug</a>
-				<a href="#" class="btn btn-primary btn-sm">工程</a>
-				<a href="#" class="btn btn-info btn-sm">历史</a>
-				<a href="#" class="btn btn-warning btn-sm">相关</a>
+				
+				#@aModal("#myModal" "关闭" "1000" "500" "btn-danger btn-sm" "/page/tabledemo/product-del.pagelet")批量关闭#end
+				#@aModal("#myModal" "编辑" "1300" "500" "btn-success btn-sm" "/page/tabledemo/product-edit.pagelet")编辑#end
+				
+				
+				
+				#@buttonGroup()
+
+				    #@defaultDropDownButton()指派给 #end
+				
+				    #@dropDownMenuUl()
+				
+				      #@normalItem("")1#end
+				
+				      #@normalItem("")2#end
+				
+				      #@normalItem("")3#end
+				
+				    #end
+
+				#end
+				
+				#@buttonGroup()
+
+				    #@defaultDropDownButton()计划 #end
+				
+				    #@dropDownMenuUl()
+				
+				      #@normalItem("")已发布#end
+				
+				      #@normalItem("")已验收#end
+				
+				      #@normalItem("")空#end
+				
+				    #end
+
+				#end
+				
+				
+				
+				
+				
 			#end
 			#@tinyTableContent("../../data/tabledata.pagelet") ##取数据地址 总数据
 				#@thead()
