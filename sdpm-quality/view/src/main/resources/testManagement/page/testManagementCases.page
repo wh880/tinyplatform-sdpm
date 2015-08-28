@@ -23,10 +23,12 @@
 					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
-					<a href="#">#buttonIcon(iconClass="icon-upload-alt")导入</a>&nbsp;
-					<a href="#">#buttonIcon(iconClass="icon-download-alt")导出</a>&nbsp;
-					<a href="#">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-					<a href="#">#buttonIcon(iconClass="icon-plus")建用例</a>
+					#@iconOperations("#myModal" "icon-upload-alt" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp导入#end
+					#@iconOperations("#myModal" "icon-download-alt" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement1.pagelet" "ml-5")&nbsp导出#end
+				###@iconOperations("#myModal" "icon-download-alt" "导出" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")&nbsp导出#end
+
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseBatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">#buttonIcon(iconClass="icon-plus")建用例</a>
 				</span>
 				#div(divClass="clearfix")
 			#end
