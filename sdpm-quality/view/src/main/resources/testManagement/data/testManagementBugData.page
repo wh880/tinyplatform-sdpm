@@ -1,0 +1,33 @@
+#macro setTinyItemCount(num)
+	<input type="hidden" name="records" value="${num}"/>
+#end
+
+
+
+#set(records=28,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#if (pagesize>records-pagesize*(page-1))
+	#set(pagesize=records-(page-1)*pagesize)
+#end
+#setTinyItemCount(28)
+
+#for(var:[1..pagesize])
+					#@tr()
+						#@td()<input type="checkbox" value="1" name="idCheck">#end
+						#@td()1#end
+						#@td()张成浩#end
+						#@td()北京#end
+						#@td()中南海#end
+						#@td()67#end
+						#@td()2013/03/25#end
+						#@td()￥320,800#end
+						 #@td()
+							#iconOperations("#myModal" "icon-search" "确认" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+							#iconOperations("#myModal" "icon-hand-right" "指派" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+							#iconOperations("#myModal" "icon-ok-sign" "解决" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+							#iconOperations("#myModal" "icon-ok-off" "关闭" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+							#iconOperations("#myModal" "icon-pencil" "编辑" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+							#iconOperations("#myModal" " icon-copy" "复制" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+							
+						#end
+					#end
+				#end

@@ -25,9 +25,7 @@
 ">公司</a></span>
          #end
     #end
-
-
-
+##import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
     #import("/org/tinygroup/form/components/form.component")
     #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
     #import("/org/tinygroup/button/components/button_common.component")
@@ -55,20 +53,12 @@
                         #end
                         #@elementItem()
                             <span style="float:left">日期：</span>
-                            #@formHorizontal("col-9")
+                            #@formHorizontal()
 
-                                #daterangepicker("2015/03/18" "2015/03/23" "reservation" "reservation" "width:100px")
+                                #daterangepicker("2015/03/18" "2015/03/23" "reservation" "reservation" "width:150px")
                             #end
 
                             #daterangepickerInit("#reservation")
-                        #end
-
-                        #@elementItem()
-                            <span style="padding-top:10px;float:right">
-                            #@formHorizontal("col-9")
-                                #buttonRadiusInfo(caption="查看")
-                            #end
-
                         #end
                     #end
 
@@ -80,12 +70,8 @@
 
                 #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/tasktabledata.pagelet") ##取数据地址 总数据
                     #@thead()
-
                         #@div(divBaseClass="tinyheaderTools form-inline")
                             #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-                            #@aModal("#myModal" "导出" "865" "100" "btn radius btn-primary btn-sm" "/organization/organizationLogExport.pagelet")
-                                #@simpleI("icon-arrow-down")导出#end
-                            #end
                         #end
                         #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
                             #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})部门#end

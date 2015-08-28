@@ -1,0 +1,135 @@
+<tables package-name="org.tinygroup.sdpm.quality">
+  <table id="9727bf0478d5438a91b2d6f1cacc2b1e" name="bug" title="缺陷表" schema="" package-name="org.tinygroup.sdpm.quality">
+    <description></description>
+    <table-field standard-field-id="c462e22e844041799530a5a5457044fa" primary="true" unique="true" not-null="false" id="bug_id" auto-increase="false"/>
+    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="90c20173bb314bcdac02cdf14317d07c" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
+    <table-field standard-field-id="ccbd3960f853402e80f3adde94733c00" primary="false" unique="false" not-null="false" id="story_id" auto-increase="false"/>
+    <table-field standard-field-id="4b923b4e7de043ba9b3eb4e62cb745ab" primary="false" unique="false" not-null="false" id="story_version" auto-increase="false"/>
+    <table-field standard-field-id="4aa15300602340af8576fbc0451402af" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="72f0236d4a5842cebdad8d9d59c0b635" primary="false" unique="false" not-null="false" id="to_story_id" auto-increase="false"/>
+    <table-field standard-field-id="1ef1535b189b493da7558eb136af1473" primary="false" unique="false" not-null="false" id="task_id" auto-increase="false"/>
+    <table-field standard-field-id="5648f6044f5c48bbb11aa31e13c3ca7f" primary="false" unique="false" not-null="false" id="to_task_id" auto-increase="false"/>
+    <table-field standard-field-id="425a4ff873aa4b1fbbbae9cefc6e8b3c" primary="false" unique="false" not-null="false" id="bug_title" auto-increase="false"/>
+    <table-field standard-field-id="a53c13787bb94184a0499f9c1e3af6c7" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
+    <table-field standard-field-id="2b9d1f9be0cf4d25afe69ec85891e830" primary="false" unique="false" not-null="false" id="bug_keywords" auto-increase="false"/>
+    <table-field standard-field-id="867d51a0683a410881f38b399078dcd3" primary="false" unique="false" not-null="false" id="bug_severity" auto-increase="false"/>
+    <table-field standard-field-id="d92b7fca7c254e9984c7fd5263aef2f9" primary="false" unique="false" not-null="false" id="bug_pri" auto-increase="false"/>
+    <table-field standard-field-id="35bc2f5b2f724a0c893cc5921c7b579d" primary="false" unique="false" not-null="false" id="bug_type" auto-increase="false"/>
+    <table-field standard-field-id="b440df931871435fb769f236fa684a91" primary="false" unique="false" not-null="false" id="bug_os" auto-increase="false"/>
+    <table-field standard-field-id="4c437b82e49a4436969be1c1c4fb9271" primary="false" unique="false" not-null="false" id="bug_browser" auto-increase="false"/>
+    <table-field standard-field-id="004a7a0a0b7f4034b39adb30cd803208" primary="false" unique="false" not-null="false" id="bug_hardware" auto-increase="false"/>
+    <table-field standard-field-id="c867940490a041ee983881e1ca03252d" primary="false" unique="false" not-null="false" id="bug_steps" auto-increase="false"/>
+    <table-field standard-field-id="00903d6c88e546839e5dbbf6d2d45769" primary="false" unique="false" not-null="false" id="bug_status" auto-increase="false"/>
+    <table-field standard-field-id="39e6b75efee64a0788f8bd3827dafa1a" primary="false" unique="false" not-null="false" id="bug_confirmed" auto-increase="false"/>
+    <table-field standard-field-id="4c6bdb9b943d48c68ba482005c483527" primary="false" unique="false" not-null="false" id="bug_open_count" auto-increase="false"/>
+    <table-field standard-field-id="c01c53a0c0f640139ea8c140c9124e30" primary="false" unique="false" not-null="false" id="bug_mailto" auto-increase="false"/>
+    <table-field standard-field-id="00e791654c324c31bb82c2b7e7fa3fa5" primary="false" unique="false" not-null="false" id="bug_opened_by" auto-increase="false"/>
+    <table-field standard-field-id="5254ef2fb2d745a7a55c8fb5799d17ef" primary="false" unique="false" not-null="false" id="bug_opened_date" auto-increase="false"/>
+    <table-field standard-field-id="ebfee8eb2d7045dfb582abbecb932a59" primary="false" unique="false" not-null="false" id="bug_opened_build" auto-increase="false"/>
+    <table-field standard-field-id="a6b7d3a7b13142929a05ed92714b7575" primary="false" unique="false" not-null="false" id="bug_assigned_to" auto-increase="false"/>
+    <table-field standard-field-id="091d072e14354a47a566ec38d1a33931" primary="false" unique="false" not-null="false" id="bug_assigned_date" auto-increase="false"/>
+    <table-field standard-field-id="621a9316e838476cb42f890416925fb1" primary="false" unique="false" not-null="false" id="bug_resolved_by" auto-increase="false"/>
+    <table-field standard-field-id="a3cf2de717504efc869a9bc97726f245" primary="false" unique="false" not-null="false" id="bug_resolution" auto-increase="false"/>
+    <table-field standard-field-id="f412f7bf023d4b62b876b36e529da9ee" primary="false" unique="false" not-null="false" id="bug_resolved_build" auto-increase="false"/>
+    <table-field standard-field-id="b1024ef692a54132a4b09bafa18bb05d" primary="false" unique="false" not-null="false" id="bug_resolved_date" auto-increase="false"/>
+    <table-field standard-field-id="81c1a50eccc74211a720ce4b7c70ace3" primary="false" unique="false" not-null="false" id="bug_closed_by" auto-increase="false"/>
+    <table-field standard-field-id="a846c26620aa4b1ab84fbfa9a9d43e5a" primary="false" unique="false" not-null="false" id="bug_closed_date" auto-increase="false"/>
+    <table-field standard-field-id="20a77099721b470abe6ab2625a4653d4" primary="false" unique="false" not-null="false" id="bug_duplicate_bug" auto-increase="false"/>
+    <table-field standard-field-id="a7bf4c3e92c147b89a52bf297ae01c18" primary="false" unique="false" not-null="false" id="bug_link_bug" auto-increase="false"/>
+    <table-field standard-field-id="2bf4bb9734734aaaa1efe03623a45654" primary="false" unique="false" not-null="false" id="bug_last_edited_by" auto-increase="false"/>
+    <table-field standard-field-id="1352bc0b587840f99e89a192eaabbd05" primary="false" unique="false" not-null="false" id="bug_last_edited_date" auto-increase="false"/>
+    <table-field standard-field-id="d81ce580c74749bbb391f2565d7e103d" primary="false" unique="false" not-null="false" id="case_id" auto-increase="false"/>
+    <table-field standard-field-id="9788d3540bf64899871295e7aaea8bb3" primary="false" unique="false" not-null="false" id="case_version" auto-increase="false"/>
+    <table-field standard-field-id="c85bcf6f55414bd0b2ec8934337f7aca" primary="false" unique="false" not-null="false" id="bug_source" auto-increase="false"/>
+    <table-field standard-field-id="1166708d4b89402989bb87771c009ac2" primary="false" unique="false" not-null="false" id="bug_origin" auto-increase="false"/>
+    <table-field standard-field-id="b91f053ceeb141c58d25cf5cd03cea00" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  </table>
+  <table id="e1c39169c5954455bac280c7923719a5" name="caseStep" title="测试用例步骤表" package-name="org.tinygroup.sdpm.quality">
+    <table-field standard-field-id="6d758ced26cf449dbda281cc398ee168" primary="true" unique="true" not-null="false" id="case_step_id" auto-increase="false"/>
+    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="d81ce580c74749bbb391f2565d7e103d" primary="false" unique="false" not-null="false" id="case_id" auto-increase="false"/>
+    <table-field standard-field-id="9788d3540bf64899871295e7aaea8bb3" primary="false" unique="false" not-null="false" id="case_version" auto-increase="false"/>
+    <table-field standard-field-id="b1fcd149055448a8b93298edf0cc488b" primary="false" unique="false" not-null="false" id="case_step_desc" auto-increase="false"/>
+    <table-field standard-field-id="ed6968a4f4d54bf9af398b147cb1f0b8" primary="false" unique="false" not-null="false" id="case_step_expect" auto-increase="false"/>
+    <table-field standard-field-id="b91f053ceeb141c58d25cf5cd03cea00" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  </table>
+  <table id="d1bd78a250a04dd1a8a4f681d5e7e8c4" name="qualityAssessment" title="测试结果表" package-name="org.tinygroup.sdpm.quality">
+    <table-field standard-field-id="0bce46b270144278ac00a7eb2746cf3f" primary="true" unique="true" not-null="false" id="qa_id" auto-increase="false"/>
+    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="90c20173bb314bcdac02cdf14317d07c" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
+    <table-field standard-field-id="a53c13787bb94184a0499f9c1e3af6c7" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
+    <table-field standard-field-id="54c5b4d1d8e045a788e79a6517aa3b9d" primary="false" unique="false" not-null="false" id="module_feature" auto-increase="false"/>
+    <table-field standard-field-id="23cb0e97e1d94a9f876bb0b881d17786" primary="false" unique="false" not-null="false" id="qa_property" auto-increase="false"/>
+    <table-field standard-field-id="4fa0a294799f4b429e859c3b039b9832" primary="false" unique="false" not-null="false" id="qa_feature_value" auto-increase="false"/>
+    <table-field standard-field-id="a91a1edc22e44cf8bb8ad3e291614426" primary="false" unique="false" not-null="false" id="qa_test_coverage" auto-increase="false"/>
+    <table-field standard-field-id="5ccb4a7f23b540cb9627b37f378df9bd" primary="false" unique="false" not-null="false" id="qa_openbug_impact" auto-increase="false"/>
+    <table-field standard-field-id="cc7a472a71094afa892aedced56fccc7" primary="false" unique="false" not-null="false" id="qa_comment" auto-increase="false"/>
+    <table-field standard-field-id="b91f053ceeb141c58d25cf5cd03cea00" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  </table>
+  <table id="33ccd856d2f04778b3daa7d01e39e6f8" name="testCase" title="测试用例表" package-name="org.tinygroup.sdpm.quality">
+    <table-field standard-field-id="d81ce580c74749bbb391f2565d7e103d" primary="true" unique="false" not-null="false" id="case_id" auto-increase="false"/>
+    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="90c20173bb314bcdac02cdf14317d07c" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
+    <table-field standard-field-id="ccbd3960f853402e80f3adde94733c00" primary="false" unique="false" not-null="false" id="story_id" auto-increase="false"/>
+    <table-field standard-field-id="4b923b4e7de043ba9b3eb4e62cb745ab" primary="false" unique="false" not-null="false" id="story_version" auto-increase="false"/>
+    <table-field standard-field-id="a53c13787bb94184a0499f9c1e3af6c7" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
+    <table-field standard-field-id="9c8396a592114b74a2bc966de65d9b32" primary="false" unique="false" not-null="false" id="case_title" auto-increase="false"/>
+    <table-field standard-field-id="e8bc74f148f04db99b54970c6a82613e" primary="false" unique="false" not-null="false" id="case_precondition" auto-increase="false"/>
+    <table-field standard-field-id="27330419fcf84245b98ff8ec1d807d77" primary="false" unique="false" not-null="false" id="case_keywords" auto-increase="false"/>
+    <table-field standard-field-id="fe32c9d9960042fa8a09bb8642662dde" primary="false" unique="false" not-null="false" id="case_pri" auto-increase="false"/>
+    <table-field standard-field-id="765c0e6302bf4d6993a89860e543e0f2" primary="false" unique="false" not-null="false" id="case_type" auto-increase="false"/>
+    <table-field standard-field-id="ab9210fa57a940a089f4eab66dad320f" primary="false" unique="false" not-null="false" id="case_stage" auto-increase="false"/>
+    <table-field standard-field-id="00a150b049f34aa79dc8953f83dbddab" primary="false" unique="false" not-null="false" id="case_status" auto-increase="false"/>
+    <table-field standard-field-id="99fe53ad635e4df49b6df0f691252a16" primary="false" unique="false" not-null="false" id="case_run" auto-increase="false"/>
+    <table-field standard-field-id="71922a809b8a450496f4988ee5ffc57b" primary="false" unique="false" not-null="false" id="case_order" auto-increase="false"/>
+    <table-field standard-field-id="9788d3540bf64899871295e7aaea8bb3" primary="false" unique="false" not-null="false" id="case_version" auto-increase="false"/>
+    <table-field standard-field-id="4a2f10fc6f5c4685a1c6b895374e21c2" primary="false" unique="false" not-null="false" id="linkcase_id" auto-increase="false"/>
+    <table-field standard-field-id="d25b5133d5134bfe8f99d2ec8c783607" primary="false" unique="false" not-null="false" id="from_bug_id" auto-increase="false"/>
+    <table-field standard-field-id="89b110f7281246ff93cebfa655ee53df" primary="false" unique="false" not-null="false" id="case_opened_by" auto-increase="false"/>
+    <table-field standard-field-id="3885bbc8b04c49d0a6d6c45c4123a1e0" primary="false" unique="false" not-null="false" id="case_opened_date" auto-increase="false"/>
+    <table-field standard-field-id="1769763192494e35a4148b4cc31779b3" primary="false" unique="false" not-null="false" id="case_last_edited_by" auto-increase="false"/>
+    <table-field standard-field-id="539f4e66d057442f82adaa95192eb394" primary="false" unique="false" not-null="false" id="case_last_edited_date" auto-increase="false"/>
+    <table-field standard-field-id="f2a37fce797446559063a311729c1df4" primary="false" unique="false" not-null="false" id="case_last_runner" auto-increase="false"/>
+    <table-field standard-field-id="21de7ce81c8249e2bec08e05e0166750" primary="false" unique="false" not-null="false" id="case_last_run_date" auto-increase="false"/>
+    <table-field standard-field-id="4578f50e16c3443eb0afec2aed009cd4" primary="false" unique="false" not-null="false" id="case_last_run_result" auto-increase="false"/>
+    <table-field standard-field-id="b91f053ceeb141c58d25cf5cd03cea00" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  </table>
+  <table id="fd85ff5e55ac4018864da1f8e05f48da" name="testPlan" title="测试计划表" package-name="org.tinygroup.sdpm.quality">
+    <table-field standard-field-id="652786ffe08e446791f6af42963f7ee7" primary="true" unique="false" not-null="false" id="testplan_id" auto-increase="false"/>
+    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="12bc852a5d444a6cbaf6f5b8de55a0dc" primary="false" unique="false" not-null="false" id="testplan_name" auto-increase="false"/>
+    <table-field standard-field-id="90c20173bb314bcdac02cdf14317d07c" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
+    <table-field standard-field-id="4aa15300602340af8576fbc0451402af" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="4d119bc835854a978348b15fd21a6a5b" primary="false" unique="false" not-null="false" id="build_id" auto-increase="false"/>
+    <table-field standard-field-id="5aa61a6362a543a1984c8f59d846af86" primary="false" unique="false" not-null="false" id="testplan_owner" auto-increase="false"/>
+    <table-field standard-field-id="a323f001a5f44888abf1fc8392787d44" primary="false" unique="false" not-null="false" id="testplan_begin" auto-increase="false"/>
+    <table-field standard-field-id="121f4a14a835422ebca3c758824a5e5f" primary="false" unique="false" not-null="false" id="testplan_end" auto-increase="false"/>
+    <table-field standard-field-id="5b396d31bdc74bfcbb2fe69c52270377" primary="false" unique="false" not-null="false" id="testplan_desc" auto-increase="false"/>
+    <table-field standard-field-id="918785263f2441fd95a5d7b94ad32de9" primary="false" unique="false" not-null="false" id="testplan_status" auto-increase="false"/>
+    <table-field standard-field-id="b91f053ceeb141c58d25cf5cd03cea00" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  </table>
+  <table id="95a34e3e546b47ce9b1c8f7fdf476923" name="testResult" title="测试结果表" package-name="org.tinygroup.sdpm.quality">
+    <table-field standard-field-id="b206faacc3ec48f7a072e46ad01a86dd" primary="true" unique="true" not-null="false" id="test_result_id" auto-increase="false"/>
+    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="2e6d37dddde34309b2a3e472efdb0771" primary="false" unique="false" not-null="false" id="run_id" auto-increase="false"/>
+    <table-field standard-field-id="d81ce580c74749bbb391f2565d7e103d" primary="false" unique="false" not-null="false" id="case_id" auto-increase="false"/>
+    <table-field standard-field-id="9788d3540bf64899871295e7aaea8bb3" primary="false" unique="false" not-null="false" id="case_version" auto-increase="false"/>
+    <table-field standard-field-id="e40314fcd51743499430a0f8ccd2ad0f" primary="false" unique="false" not-null="false" id="case_result" auto-increase="false"/>
+    <table-field standard-field-id="9db20316653c40a08c98ba11c299bd84" primary="false" unique="false" not-null="false" id="case_step_results" auto-increase="false"/>
+    <table-field standard-field-id="2dee9b0ecab34431bc15d037135e916e" primary="false" unique="false" not-null="false" id="test_result_last_runner" auto-increase="false"/>
+    <table-field standard-field-id="eaaede07cc2346278c91f43c6e0a162b" primary="false" unique="false" not-null="false" id="test_result_date" auto-increase="false"/>
+  </table>
+  <table id="58f8502296744d7198409009d56e7539" name="testRun" title="测试计划执行表" package-name="org.tinygroup.sdpm.quality">
+    <table-field standard-field-id="fa64f062a3924e95ab02ec629fc296e7" primary="true" unique="false" not-null="false" id="testrun_id" auto-increase="false"/>
+    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="652786ffe08e446791f6af42963f7ee7" primary="false" unique="false" not-null="false" id="testplan_id" auto-increase="false"/>
+    <table-field standard-field-id="d81ce580c74749bbb391f2565d7e103d" primary="false" unique="false" not-null="false" id="case_id" auto-increase="false"/>
+    <table-field standard-field-id="9788d3540bf64899871295e7aaea8bb3" primary="false" unique="false" not-null="false" id="case_version" auto-increase="false"/>
+    <table-field standard-field-id="c579e859f1114739a5838298f5fb7d85" primary="false" unique="false" not-null="false" id="testrun_assigned_to" auto-increase="false"/>
+    <table-field standard-field-id="e6a048df47524031938f9ea282f582d4" primary="false" unique="false" not-null="false" id="testrun_last_runner" auto-increase="false"/>
+    <table-field standard-field-id="cd9c11e4d83a48cbb550e600b1d1876a" primary="false" unique="false" not-null="false" id="testrun_last_run_date" auto-increase="false"/>
+    <table-field standard-field-id="1586d0ba07d4428f8c37bf98d2a4a03d" primary="false" unique="false" not-null="false" id="testrun_last_run_result" auto-increase="false"/>
+    <table-field standard-field-id="fb663a1ff5ff4bfba6b1e159498bee92" primary="false" unique="false" not-null="false" id="testrun_status" auto-increase="false"/>
+  </table>
+</tables>

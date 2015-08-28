@@ -1,0 +1,96 @@
+#!set(activeTitle="组织管理",activeMenuId=currentPageId)
+#include("/page/event/common.page")
+#@div()
+	#@tabWithInit("tab_demo" "tabLayout")
+		#@tabHead()
+			#@tabHeadCol()用户#end
+			#@tabHeadCol()日志#end
+			#@tabHeadCol()动态#end
+			#@tabHeadCol()部门#end
+			#@tabHeadCol()权限#end
+			#@tabHeadCol()公司#end
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">用户浏览</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/togglebox.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start1
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">日志浏览</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/togglebox.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start2
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">动态浏览</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/togglebox.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start2
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">部门浏览</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/togglebox.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start2
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">权限浏览</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/togglebox.page")
+		#end
+		#@tabBodyCol("ptop-5")
+			##operationbar start2
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">公司浏览</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/togglebox.page")
+		#end
+	#end
+#end
+<script type="text/javascript">
+$(function(){
+        var timeid;
+      $(".tabOption").find("li").each(function(index){
+          var sTab=$(this);
+          sTab.mouseenter(function(){
+              timeid= setTimeout(function(){
+                  sTab.addClass("tabCurrent").siblings().removeClass("tabCurrent");
+                  sTab.parent().siblings().find("ul:eq(" + index +")").show().siblings().hide() ;
+             },300);
+          }).mouseleave(function(){
+                 clearTimeout(timeid);
+            })
+      })
+    })
+</script>
