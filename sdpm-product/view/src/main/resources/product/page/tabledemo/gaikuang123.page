@@ -1,0 +1,172 @@
+##import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
+#import("/org/tinygroup/form/components/form.component")
+#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+<style>
+.infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
+.infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:13px;}
+.infoContent ul li label{font-weight:normal; width:33%;font-size:12px;}
+.infoContent ul li .text-overflow{display:inline-block; width:64%;vertical-align:top;font-size:12px;}
+.infoContent ul li .text-overflow a{ color:#333;}
+.infoContent ul li .text-overflow a:hover{color:#f90}
+.infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}
+.shrinkage .edui-Box{margin-left:6px;}
+.shrinkage .edui-Box .titleNames{display:block;margin-bottom:6px;margin-left:8px;}
+.togglebox .togglenavpart{overflow:visible}
+</style>
+#@toggleBox({"class":"open shrinkage"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+	#@toggleLeft({"class":"aclass"})
+		#@settoggleLeftTitle("fa-bullhorn")&nbsp;相关信息#end
+		#@div(divClass="infoContent")
+	        <p class="titleName">基本信息</p>
+	       	<ul>
+	      <li>
+	       	<label>当前状态：</label>
+	       	#@span(spanClass="text-overflow")
+			 <p>用来测试的用例</p>
+			#end
+	   </li>
+	     <li>
+	       	<label>产品代号：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>测试123</p>
+			#end
+	   </li>
+	       		
+	       	 <li>
+	       	<label>产品负责人：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>admin</p>
+			#end
+	   </li>	 
+	   <li>
+	       	<label>测试负责人：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>A001</p>
+			#end
+	   </li>
+	   <li>
+	       	<label>发布负责人：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>A002</p>
+			#end
+	   </li>
+	  <li>
+	       	<label>发布状态：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>正常</p>
+			#end
+	   </li>
+ 		<li>
+	       	<label>访问控制：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>默认设置(有产品视图权限，即可访问)</p>
+			#end
+	   </li>
+	   <li>
+	       	<label>分组白名单：</label>
+	       	#@span(spanClass="text-overflow")
+			<p></p>
+			#end
+	   </li>
+	 <li>
+	       	<label>由谁创建：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>admin</p>
+			#end
+	   </li>
+	   <li>
+	       	<label>创建日期：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>2015-08-28 16:31:57</p>
+			#end
+	   </li>
+			</ul>
+      #end
+      #@div(divClass="infoContent")
+	        <p class="titleName">需求的一生</p>
+	       	<ul>
+	     <li>
+	       	<label>激活需求：</label>
+	       	#@span(spanClass="text-overflow")
+			<b>0</b>
+			#end
+	   </li>
+    <li>
+	       	<label>已变更需求：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>0</p>
+			#end
+	   </li>
+	    <li>
+	       	<label>草稿需求：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>0</p>
+			#end
+	   </li>
+	    <li>
+	       	<label>已关闭需求：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>0</p>
+			#end
+	   </li>
+	    <li>
+	       	<label>计划数：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>0</p>
+			#end
+	   </li>
+	    <li>
+	       	<label>关联项目数：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>0</p>
+			#end
+	   </li>
+	    <li>
+	       	<label>相关BUG：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>0</p>
+			#end
+	   </li>
+	    <li>
+	       	<label>文档数：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>0</p>
+			#end
+	   </li>
+	    <li>
+	       	<label>用例数：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>0</p>
+			#end
+	   </li>
+	    <li>
+	       	<label>BULID数：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>0</p>
+			#end
+	   </li>
+	    <li>
+	       	<label>发布数：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>0</p>
+			#end
+	   </li>
+	</ul>				
+      #end
+      #@div(divClass="infoContent")
+	        <p class="titleName">其他相关</p>
+	 #end
+	#end
+	#@toggleRight()
+		#@div(divClass="infoContent pd-10")
+	        <p class="titleName">产品描述</p>
+	       	<div>
+	       		123456
+	       	</div>
+		#end
+		#@div(divClass="infoContent")
+	        <p class="titleName">历史记录</p>
+	       	#include("/product/page/tabledemo/recordList222.page")
+		#end
+	#end
+#end
