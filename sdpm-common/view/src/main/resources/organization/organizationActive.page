@@ -30,7 +30,7 @@
 					<a href="#">上周</a>
 					<a href="#">本月</a>
 					<a href="#">上月</a>
-					<a href="#">>所有</a>
+					<a href="#">所有</a>
         ##
         </span>
             #@tinyForm("thisform" "" "" {"class":"test"})

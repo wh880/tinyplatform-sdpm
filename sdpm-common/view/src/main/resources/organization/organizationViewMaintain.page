@@ -1,0 +1,19 @@
+
+
+#@tinyForm("cheackform" "" "" {"class":"cheackform"})
+    #@elementItem()
+        #@colLabel()视图维护#tinyCheckbox("checkbox2" "01" "02")#end
+        #@formControlDiv("checkboxSty col-9")
+
+            #@tinyCheckbox("checkbox2" "01" "02")产品#end
+            #@tinyCheckbox("checkbox2" "01" "02")项目#end
+            #@tinyCheckbox("checkbox2" "01" "02")测试#end
+            #@tinyCheckbox("checkbox2" "01" "02")代码#end
+            #@tinyCheckbox("checkbox2" "01" "02")文档#end
+            #@tinyCheckbox("checkbox2" "01" "02")统计#end
+            #@tinyCheckbox("checkbox2" "01" "02")组织#end
+            #@tinyCheckbox("checkbox2" "01" "02")后台#end
+        #end
+    #end
+#end
+
