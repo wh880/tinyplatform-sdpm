@@ -11,8 +11,8 @@
 #@div()
 	#@div(divClass="tabLayout")
 		#@div(divClass="tabBar cl")
-			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/project/project.page">任务</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/proxq.page">需求</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/project/project.page">任务</a></span>
+			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/outpage/proxq.page">需求</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probug.page">Bug</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probb.page">版本</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procs.page">测试</a></span>
