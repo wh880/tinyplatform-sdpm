@@ -20,8 +20,8 @@
 			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/outpage/procp.page">产品</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">概况</a></span>
 			#@divRightAlign()		
-				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn c">#buttonIcon(iconClass="icon-list")所有项目</a>
-				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn c">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn ">#buttonIcon(iconClass="icon-list")所有项目</a>
+				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page" class="active_btn ">#buttonIcon(iconClass="icon-plus")添加项目</a>
 			#end			
 		#end
 	#end

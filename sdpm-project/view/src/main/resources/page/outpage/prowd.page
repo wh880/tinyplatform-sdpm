@@ -20,8 +20,8 @@
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procp.page">产品</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">概况</a></span>
 			#@divRightAlign()		
-				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn c">#buttonIcon(iconClass="icon-list")所有项目</a>
-				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn c">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn ">#buttonIcon(iconClass="icon-list")所有项目</a>
+				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page" class="active_btn ">#buttonIcon(iconClass="icon-plus")添加项目</a>
 			#end			
 		#end
 	#end
@@ -30,8 +30,8 @@
 				<span class="f">
 					文档列表
 				</span>
-				<span class="r c">
-					<a href="#">#buttonIcon(iconClass="icon-plus")创建文档</a>
+				<span class="r">
+					<a href="${TINY_CONTEXT_PATH}/page/outpage/doucument.page">#buttonIcon(iconClass="icon-plus")创建文档</a>
 				</span>
 				#div(divClass="clearfix")
 			#end

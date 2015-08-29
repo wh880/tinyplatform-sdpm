@@ -37,7 +37,7 @@ h3 {line-height: 1.2;}
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">概况</a></span>
 			#@divRightAlign()		
 				<a href="#">#buttonIcon(iconClass="icon-list")所有项目</a>
-				<a href="#">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page">#buttonIcon(iconClass="icon-plus")添加项目</a>
 			#end		
 		#end
 	#end	
@@ -187,17 +187,14 @@ h3 {line-height: 1.2;}
                     #@buttonDropdown("Dropdown")导入  #@spanCaret()#end#end
                     #@ulDropdownMenu("downMenuSty")
                     <p>
-                    #@iconOperations("#myModal" "" "导入" "865" "200"
-					 "/page/tabledemo/add_doc.pagelet" "ml-5")导入bug#end
+                    <span><a href="${TINY_CONTEXT_PATH}/page/outpage/Bug_updown.page">&nbsp导入bug</a></span>
 					 </p>
 					 <p>
-                     #@iconOperations("#myModal" "" "导入" "865" "200"
-					 "/page/tabledemo/add_doc.pagelet" "ml-5")导入任务#end
+                    <span><a href="${TINY_CONTEXT_PATH}/page/outpage/task_download.page">&nbsp导入任务</a></span>
 					 </p>
-					
                      #@iconOperations("#myModal" "" "导入" "865" "200"
-					 "/page/tabledemo/add_doc.pagelet" "ml-5")导入Excel#end
-					
+					 "/page/tabledemo/add_doc.pagelet" "ml-5")导入Excel #end
+					 
                      #@liDivider()#end
                     #end
                     #end&nbsp;
@@ -208,11 +205,11 @@ h3 {line-height: 1.2;}
                     #@ulDropdownMenu("downMenuSty")
                     <p>
                      #@iconOperations("#myModal" "" "导出" "865" "200"
-					 "/page/tabledemo/output_data.pagelet" "ml-5") &nbsp;导出数据#end  
+					 "/page/outpage/testManagement1.pagelet" "ml-5") &nbsp;导出数据#end  
 					 </p>
 					
                      #@iconOperations("#myModal" "" "导出" "865" "200"
-					 "/page/tabledemo/output_data.pagelet" "ml-5") &nbsp;导出模板#end            
+					 "/page/outpage/modal_updown.pagelet" "ml-5") &nbsp;导出模板#end            
                      
                     #end
                     #end&nbsp;

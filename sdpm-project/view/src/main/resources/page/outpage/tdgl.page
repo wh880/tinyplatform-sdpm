@@ -1,4 +1,4 @@
-#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+#!set(activeTitle="团队管理",activeMenuId=currentPageId)
 <style>
 .tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
@@ -11,30 +11,25 @@
 			<span><a href="${TINY_CONTEXT_PATH}/page/project/project.page">任务</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/proxq.page">需求</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probug.page">Bug</a></span>
-			<span  class="Current"><a href="${TINY_CONTEXT_PATH}/page/outpage/probb.page">版本</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probb.page">版本</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procs.page">测试</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/protd.page">团队</a></span>
+			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/outpage/protd.page">团队</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prorz.page">日志</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prodt.page">动态</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prowd.page">文档</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procp.page">产品</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">概况</a></span>
 			#@divRightAlign()		
-				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn ">#buttonIcon(iconClass="icon-list")所有项目</a>
-				&nbsp
-				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page" class="active_btn ">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn c">#buttonIcon(iconClass="icon-list")所有项目</a>
+				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn c">#buttonIcon(iconClass="icon-plus")添加项目</a>
 			#end			
 		#end
 	#end
-			##operationbar start1
-			#@div(divClass="operationbar")
-				<span class="f">
-					版本列表
-				</span>
-				<span class="r c">
-					<a href="${TINY_CONTEXT_PATH}/page/outpage/add_vesion.page">#buttonIcon(iconClass="icon-plus")新建版本</a>
-				</span>
-				#div(divClass="clearfix")
-			#end
-			##operationbar end
+#end
+#@div(divClass="operationbar")
+	团队管理>
+#end
+#include("/page/outpage/tdgl_updown.page")
+#@div(divClass="col-10 col-offset-2 form-inline")
+	#tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
 #end

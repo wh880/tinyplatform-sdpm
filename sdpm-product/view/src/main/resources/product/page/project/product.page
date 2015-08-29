@@ -90,6 +90,7 @@
 			##operationbar end
 			#include("/product/page/project/datatableDemo.page")
 		#end
+		
 		#@tabBodyCol("ptop-5")
 			##operationbar start2
 			#@div(divClass="operationbar")
@@ -104,6 +105,7 @@
 			##operationbar end
 			#include("/product/page/project/product-plan.page")
 		#end
+		
 		#@tabBodyCol("ptop-5")
 			##operationbar start3
 			#@div(divClass="operationbar")
@@ -135,7 +137,7 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			#include("/product/page/project/datatableDemo.page")
+			#include("/product/page/project/archive-list.page")
 		#end
 		#@tabBodyCol("ptop-5")
 			##operationbar start6
@@ -159,6 +161,7 @@
 			##operationbar end
 			#include("/product/page/project/datatableDemo.page")
 		#end
+		
 		#@tabBodyCol("ptop-5")
 			##operationbar start8
 			#@div(divClass="operationbar")
@@ -173,8 +176,9 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			#include("/product/page/project/datatableDemo.page")
+			#include("/product/page/tabledemo/gaikuang123.page")
 		#end
+		
 	#end
 #end
 <script type="text/javascript">

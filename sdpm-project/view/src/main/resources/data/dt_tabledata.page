@@ -1,0 +1,22 @@
+#macro setTinyItemCount(num)
+	<input type="hidden" name="records" value="${num}"/>
+#end
+
+
+
+#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#if (pagesize>records-pagesize*(page-1))
+#set(pagesize=records-(page-1)*pagesize)
+#end
+#setTinyItemCount(52)
+#for(var:[1..pagesize])
+	#@tr()
+		#@td()<input type="checkbox" value="1" name="idCheck">#end
+		#@td()2015年8月28日#end
+		#@td()admin#end
+		#@td()变更#end
+		#@td()大傻逼#end
+		#@td()${var}#end
+		#@td()超级大煞笔#end	
+	#end
+#end

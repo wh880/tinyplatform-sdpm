@@ -1,0 +1,72 @@
+#@tinyForm("thisform" "url" "post" {"class":""})
+	
+	#@elementItem()
+		#@colLabel()所属产品：#end
+		#@formControlDiv("col-8")
+			#@tinySelect("sort" "" {"class":"input-text","rel":"22"})
+				#@tinyOptionItem("cp1")产品1#end
+				#@tinyOptionItem("cp2")产品2#end
+				#@tinyOptionItem("testg")测试产品#end
+			#end
+		#end
+		#@validateDiv("col-2")#end
+	#end
+	#@elementItem()
+		#@colLabel()所属分类：#end
+		#@formControlDiv("col-8")
+			#@tinySelect("sort" "" {"class":"input-text","rel":"22"})
+				#@tinyOptionItem("cp1")产品1#end
+				#@tinyOptionItem("cp2")产品2#end
+				#@tinyOptionItem("testg")测试产品#end
+			#end
+		#end
+		#@validateDiv("col-2")#end
+	#end
+	#@elementItem()
+        #@colLabel()文档类型：#end
+        #@formControlDiv("skin-minimal col-5")
+            #@tinyRadio("archkind" "archive" "onlyview" {"nullmsg":"请选择！","datatype":"*"})文件#end
+            #@tinyRadio("archkind" "link" "private")链接#end
+            #@tinyRadio("archkind" "web" "whitelist")网页#end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+	#@elementItem()
+		#@colLabel()文档标题：#end
+		#@formControlDiv("col-8")
+			#tinyInput("text" "archive-title" ""{"placeholder":"","nullmsg":"请输入文档标题！","id":"archive-title","class":"input-text"})
+		#end
+		#@validateDiv("col-2")#end
+	#end
+	#@elementItem()
+		#@colLabel()关键字：#end
+		#@formControlDiv("col-8")
+			#tinyInput("text" "keywords" ""{"placeholder":"","id":"keywords","class":"input-text"})
+		#end
+		#@validateDiv("col-2")#end
+	#end
+
+	#@elementItem()
+		#@colLabel()文档摘要：#end
+		#@formControlDiv("col-8")
+			#tinyInput("text" "sel" ""{"placeholder":"","id":"sel","class":"input-text"})
+		#end
+		#@validateDiv("col-2")#end
+	#end
+	
+##
+	#@elementItem()
+		#@colLabel()附件(50M)：#end
+		#@formControlDiv("col-8")
+			#tinyInput("text" "sel" ""{"placeholder":"","id":"sel","class":"input-text"})
+		#end
+		#@validateDiv("col-2")#end
+	#end
+	
+	
+	#@elementItem()
+		#@div(divClass="col-10 col-offset-2 form-inline")
+			#tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+		#end
+	#end
+#end
