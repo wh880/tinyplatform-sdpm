@@ -112,6 +112,9 @@
 				<span class="f">
 					<span class="active_btn">浏览发布</span>
 				</span>
+				<span class="r">
+					#@iconOperations("#myModal" "icon-plus" "创建发布" "1000" "400" "/product/page/tabledemo/product-addrelease.pagelet" "ml-5")&nbsp;创建发布#end
+				</span>
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
@@ -133,6 +136,9 @@
 			#@div(divClass="operationbar")
 				<span class="f">
 					<span class="active_btn">文档列表</span>
+				</span>
+				<span class="r">
+					#@iconOperations("#myModal" "icon-plus" "创建文档" "1000" "400" "/product/page/tabledemo/product-adddocument.pagelet" "ml-5")&nbsp;创建文档#end
 				</span>
 				#div(divClass="clearfix")
 			#end
