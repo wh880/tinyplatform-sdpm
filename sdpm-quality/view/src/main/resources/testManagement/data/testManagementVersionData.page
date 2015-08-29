@@ -22,7 +22,8 @@
 						#@td()进行中#end
 						
 						 #@td()
-							#iconOperations("#myModal" "icon-file" "概况" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+						 	<a href="#" title="概况">#buttonIcon(iconClass="icon-file")</a>
+							###iconOperations("#myModal" "icon-file" "概况" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
 							#iconOperations("#myModal" "icon-link" "关联用例" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
 							#iconOperations("#myModal" "icon-pencil" "编辑版本" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
 							#iconOperations("#myModal" "icon-remove" "删除版本" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
