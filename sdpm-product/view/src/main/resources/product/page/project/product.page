@@ -51,7 +51,7 @@
 				#@aModal("#myModal" "导入" "700" "130" "btn-class" "/product/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-upload-alt")导入#end
 				
 					#@buttonGroup()
-			                    #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出  #@spanCaret()#end#end
+			                    #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-download-alt")导出  #@spanCaret()#end#end
 			                    #@ulDropdownMenu("downMenuSty")
 				                    <p>
 				                     #@iconOperations("#myModal" "" "导出" "500" "200"  "/product/page/tabledemo/product-export-data.pagelet" "ml-5") &nbsp;导出数据#end  

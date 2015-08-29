@@ -1,0 +1,41 @@
+#@tinyForm("thisform" "" "post" {"class":"test"})
+	
+	 #@tableStriped()
+	 	
+	 	#@thead()
+	 		#@tr()
+	 			<th width="5%">ID</th>
+	 			#@th()	日期	#end
+	 			#@th()	耗时	#end
+	 			#@th()	工作内容	#end
+	 			#@th()	操作	#end
+	 		#end
+	 	
+	 	#end
+	 	
+	 	#@tbody()
+	 		
+	 		#for(i:[1..8])
+				#@tr()
+		 			#@td()	${i}	#end
+		 			#@td()	
+		 				 #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:133px","datatype":"*","nullmsg":"日期不能为空"})#end
+		 			#end
+		 			#@td()	
+		 				#tinyInput("text" "username" ""{"style":"width:100px","datatype":"*4-16","id":"username","class":"input-text"})
+		 			#end
+		 			#@td()	
+		 				#tinyInput("text" "username" ""{"style":"width:500px","datatype":"*4-16","id":"username","class":"input-text"})
+		 			#end
+		 			#@td()	
+		 				#tinyInput("text" "username" ""{"style":"width:100px","datatype":"*4-16","id":"username","class":"input-text"})
+		 			#end
+		 			
+		 		#end
+			#end
+	 	
+	 	#end
+	 	
+	 #end
+#end
+	

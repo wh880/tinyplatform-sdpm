@@ -3,52 +3,44 @@
 </style>
 #@tinyForm("thisform" "" "" {"class":"test"})
      #@elementItem()
-        #@colLabel()产品#end
+        #@colLabel()发布名称#end
         #@formControlDiv("col-8")
-        	产品XXXX
-        #end
+        	#tinyInput("text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+       #end
         #@validateDiv("col-2")#end
       #end
     #@elementItem()
-        #@colLabel()名称#end
-        #@formControlDiv("col-8")
-          #tinyInput("text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
-        #end
+        #@colLabel()版本#end
+       #@formControlDiv("col-8")
+			#@tinySelect("PO" "" {"class":"input-text","rel":"22"})
+				#@tinyOptionItem("admin")版本1#end
+				#@tinyOptionItem("buzhang")版本3#end
+				#@tinyOptionItem("check")版本2#end
+			#end
+		#end
         #@validateDiv("col-2")#end
     #end
 
     #@elementItem()
-        #@colLabel()开始日期#end
+        #@colLabel()发布日期#end
         #@formControlDiv("col-8")
            #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
         #end
         #@validateDiv("col-2")#end
     #end
-    #@elementItem()
-        #@colLabel()结束日期#end
-        #@formControlDiv("col-8")
-           #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
-           <span class="radioBoxsty" style="left:220px;">
-				 #@radioBox()
-		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一周#end
-		          #end
-		           #@radioBox()
-		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一个月#end
-		          #end
-		           #@radioBox()
-		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一年#end
-		          #end
-		           #@radioBox()
-		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一辈子#end
-		          #end
-			</span>
-        #end
-        #@validateDiv("col-2")#end
-    #end
+   
     #@elementItem()
         #@colLabel()描述#end
         #@formControlDiv("col-8")
             #@tinyueditor("content" "content")说点什么...最少输入10个字符#end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    
+     #@elementItem()
+        #@colLabel()附件#end
+        #@formControlDiv("col-8")
+          <input type="file"/>
         #end
         #@validateDiv("col-2")#end
     #end
