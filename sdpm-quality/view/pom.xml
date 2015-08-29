@@ -33,6 +33,11 @@
 			<artifactId>org.tinygroup.dropDown</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>org.tinygroup.fold</artifactId>
+			<version>${tiny_ui_version}</version>
+		</dependency>
       <dependency>
           <groupId>org.tinygroup</groupId>
           <artifactId>org.tinygroup.compose</artifactId>
