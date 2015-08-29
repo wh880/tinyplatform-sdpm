@@ -9,6 +9,10 @@
 
 #@div()
 	#@tabWithInit("tab_demo" "tabLayout")
+		#@div(divClass="dropdownBox")
+			#include("/product/page/project/dropdownMenu.page")
+		#end
+		
 		#@tabHead()
 			#@tabHeadCol()需求#end
 			#@tabHeadCol()动态#end
@@ -94,12 +98,12 @@
 					<span class="active_btn">浏览计划</span>
 				</span>
 				<span class="r">
-					<a href="#">#buttonIcon(iconClass="icon-plus")创建计划</a>
+					#@iconOperations("#myModal" "icon-plus" "创建计划" "1000" "400" "/product/page/tabledemo/product-addplan.pagelet" "ml-5")&nbsp;创建计划#end
 				</span>
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			#include("/product/page/project/datatableDemo.page")
+			#include("/product/page/project/product-plan.page")
 		#end
 		
 		#@tabBodyCol("ptop-5")
