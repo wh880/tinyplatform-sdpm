@@ -115,7 +115,7 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			#include("/product/page/project/datatableDemo.page")
+			#include("/product/page/project/product-release.page")
 		#end
 		#@tabBodyCol("ptop-5")
 			##operationbar start4
