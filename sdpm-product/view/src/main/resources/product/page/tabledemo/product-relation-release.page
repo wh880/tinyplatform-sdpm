@@ -15,7 +15,7 @@
 	<div class="operationbar" style="background-color:aliceblue;height:30px"> 
    
 				<span class="r" >
-				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class" "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="btn effort")日志#end
+				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class" "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
 				<a href="#">#buttonIcon(iconClass="icon-link")关联需求</a>&nbsp;
 				<a href="#">#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
 				#iconOperations("#myModal" "icon-common-edit icon-pencil" "编辑发布" "865" "448" "/product/page/tabledemo/product-addrelease.pagelet" "ml-5")
@@ -89,7 +89,7 @@
 				#end
 			#end
 			#@tabHeadCol()
-				#@buttons("","icon-bug")
+				#@buttons("","icon-bug green")
 					已解决Bug
 				#end
 			#end

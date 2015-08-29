@@ -29,6 +29,8 @@
 			<!--新增产品-->
 			#@aModal("#myModal" "新增产品" "900" "500" "btn-class" "/product/page/tabledemo/addProduct.pagelet")#buttonIcon(iconClass="icon-plus-sign")添加产品 #end
 		</span>
+		
+		
 		#@tabBodyCol("ptop-5")
 			##operationbar start
 			#@div(divClass="operationbar")
@@ -154,7 +156,7 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			#include("/product/page/project/datatableDemo.page")
+			#include("/product/page/project/product-project-list.page")
 		#end
 		#@tabBodyCol("ptop-5")
 			##operationbar start7
