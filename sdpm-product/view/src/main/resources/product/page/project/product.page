@@ -74,6 +74,8 @@
 			##operationbar end
 			#include("/product/page/project/togglebox.page")
 		#end
+		
+	##		这里是动态的模块布局	
 		#@tabBodyCol("ptop-5")
 			##operationbar start1
 			#@div(divClass="operationbar")
@@ -90,7 +92,7 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			#include("/product/page/project/datatableDemo.page")
+			#include("/product/page/project/dymanicdata.page")
 		#end
 		
 		#@tabBodyCol("ptop-5")
