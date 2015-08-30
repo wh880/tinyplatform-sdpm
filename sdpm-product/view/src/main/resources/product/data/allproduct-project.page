@@ -22,8 +22,11 @@
 	#@td()121#end
 	#@td()
 	#set(rm=(rand("int")%100)+"%")
-		#@simpleProgressBar(rm)#end  
-		<span  style="left:401px;float:left;height: 0;position: relative;top: -14px;">${rm}</span>
+		<div class="progress-bars" style="width:110px">
+			<span class="sr-modern" style="width:${rm}"></span>
+		
+		</div>
+			<span  style="left:147px;float:left;height: 0;position: relative;top: -14px">${rm}</span>
 		
 	#end
 	#@td()暂无#end

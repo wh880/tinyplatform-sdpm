@@ -1,4 +1,4 @@
-#import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
+#import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 

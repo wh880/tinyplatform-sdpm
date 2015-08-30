@@ -1,0 +1,32 @@
+#import("/org/tinygroup/timeline/components/timeline.component")
+
+
+#@timeMainBox()
+
+    #@historyMenu()
+
+      #@year("first" "#")2015年#end
+
+      #@dateItem("green")
+
+          #dateHead("2015" "06" "08")
+
+          #@dateBody("发布全新Tiny框架的2.0版本")升级全新默认界面和工具；新增组件等功能#end
+
+      #end
+
+
+
+     #@dateItem()
+
+       #dateHead("2015" "04" "19")
+
+       #@dateBody("Tiny框架升级到1.2")新增支持度全球最好，修复BUG：#end
+
+      #end
+
+  #end
+
+ 
+
+#end

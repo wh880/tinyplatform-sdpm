@@ -22,7 +22,7 @@
 						#@tinyTh({"class":"","rel":"sortname"})总预计#end
 						#@tinyTh({"class":"","rel":"sortname"})总消耗#end
 						#@tinyTh({"class":"","rel":"sortname"})总剩余#end
-						#@tinyTh({"width":"8"})进度#end
+						#@tinyTh({"class":"","rel":"sortname"})进度#end
 						#@tinyTh({"class":"","rel":"sortname"})燃尽图#end
 					#end
 				#end
