@@ -11,7 +11,7 @@
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 	#@tr()
-		#@td()<input type="checkbox" value="1" name="idCheck">#end
+		
 		#@td()2015年8月28日#end
 		#@td()admin#end
 		#@td()变更#end

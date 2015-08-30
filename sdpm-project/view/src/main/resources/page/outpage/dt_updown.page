@@ -12,7 +12,7 @@
 			#@tinyTableContent("../../data/dt_tabledata.pagelet") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+						
 						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})日期#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})操作者#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})动作#end
