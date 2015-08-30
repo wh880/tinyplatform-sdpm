@@ -37,7 +37,7 @@
 					<a href="#">久未处理</a>
 					<a href="#">被延期</a>
 					<a href="#">需求变动</a>
-					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
+					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
 					#@iconOperations("#myModal" "icon-upload-alt" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp导入#end
@@ -69,6 +69,7 @@
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-plus")建Bug</a>
 				</span>
 				#div(divClass="clearfix")
+				#include("/testManagement/page/mulsearch.page")
 			#end
 			##operationbar end
 			#end
