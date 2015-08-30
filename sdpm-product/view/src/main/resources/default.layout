@@ -163,7 +163,7 @@
 					#@navItemDemo("1.8" "javascript:void(0);" "icon-list")动态#end
 					#@navItemDemo("1.9" "javascript:void(0);" "icon-list")档案#end
 				#end*#
-				#TnavItem("2" "产品管理" "/product/page/project/product.page" "icon-desktop")
+				#TnavItem("2" "产品管理" "/product/page/project/togglebox.page" "icon-desktop")
 #*				#@navDropDownMenu("2" "产品管理" "icon-desktop" )
 					#@navItemDemo("2.1" "javascript:void(0);" "icon-list")需求#end
 					#@navItemDemo("2.2" "javascript:void(0);" "icon-list")动态#end

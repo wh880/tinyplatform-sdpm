@@ -2,6 +2,18 @@
 #set(editpagePath="/page/tabledemo/user-add.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 #set(viewpagePath="/page/tabledemo/user-view.pagelet",viewpageModalId="userViewModal",viewpageModal="#"+viewpageModalId)
 #set(editpasswordPath="/page/tabledemo/user-password-edit.pagelet",editpasswordModalId="userEditModal",editpasswordModal="#"+editpasswordModalId)
+
+#@tabBodyCol("ptop-5")
+			##operationbar start7
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">模块维护</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+
+			
+			
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 	#@div(divClass="tinyheaderTools form-inline")
 		#setTinyTablePageSize([8,10,20,50,100,200])
@@ -30,3 +42,5 @@
 #simpleModal(editpageModalId)
 #simpleModal(editpasswordModalId)
 #simpleViewModal(viewpageModalId)
+#end
+

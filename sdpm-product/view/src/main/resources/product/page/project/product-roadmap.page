@@ -1,6 +1,15 @@
 #import("/org/tinygroup/timeline/components/timeline.component")
 
-
+#@tabBodyCol("ptop-5")
+			##operationbar start4
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">线路图</span>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+		
 #@timeMainBox()
 
     #@historyMenu()
@@ -30,3 +39,6 @@
  
 
 #end
+		
+#end
+

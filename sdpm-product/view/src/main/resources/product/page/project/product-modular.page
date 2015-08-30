@@ -1,0 +1,136 @@
+#import("/org/tinygroup/form/components/form.component")
+
+#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+<style>
+	.infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
+	.infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:13px;}
+	.infoContent ul li label{font-weight:normal; width:33%;font-size:12px;}
+	.infoContent ul li .text-overflow{display:inline-block; width:64%;vertical-align:top;font-size:12px;}
+	.infoContent ul li .text-overflow a{ color:#333;}
+	.infoContent ul li .text-overflow a:hover{color:#f90}
+	.infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}
+	.shrinkage .edui-Box{margin-left:6px;}
+	.shrinkage .edui-Box .titleNames{display:block;margin-bottom:6px;margin-left:8px;}
+</style>
+
+	
+
+#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+	#@toggleLeft({"class":"aclass"})
+		#@settoggleLeftTitle()	#buttonIcon(iconClass="icon-cog")产品测试1::视图维护#end
+		#@settoggleLeftBody()
+			
+		
+							
+							
+							
+			
+		#end
+		
+		
+		
+		
+	#end
+	#@toggleRight()
+		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+			#@td()
+				产品XXX
+			#end
+			#@td()
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#@tinySelect("PO" "" {"class":"input-text","rel":"22"})
+							#@tinyOptionItem("admin")A:admin#end
+							#@tinyOptionItem("buzhang")B:部长#end
+							#@tinyOptionItem("check")B:检察长#end
+						#end
+						
+					#end
+					#@validateDiv("col-2")#end
+				#end
+					
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#end
+					#@validateDiv("col-2")#end
+				#end
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#end
+					#@validateDiv("col-2")#end
+				#end
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#end
+					#@validateDiv("col-2")#end
+				#end
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#end
+					#@validateDiv("col-2")#end
+				#end
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#end
+					#@validateDiv("col-2")#end
+				#end
+                
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#end
+					#@validateDiv("col-2")#end
+				#end
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#end
+					#@validateDiv("col-2")#end
+				#end
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#end
+					#@validateDiv("col-2")#end
+				#end
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#end
+					#@validateDiv("col-2")#end
+				#end
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#end
+					#@validateDiv("col-2")#end
+				#end
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#end
+					#@validateDiv("col-2")#end
+				#end
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#end
+					#@validateDiv("col-2")#end
+				#end
+				#@elementItem()
+					#@formControlDiv("col-4")
+						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#end
+					#@validateDiv("col-2")#end
+				#end
+	
+			#end
+			
+		#end
+	#end
+#end

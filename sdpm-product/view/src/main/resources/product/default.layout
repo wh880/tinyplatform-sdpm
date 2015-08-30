@@ -1,0 +1,60 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#import("/org/tinygroup/button/components/button_common.component")
+
+#import("/org/tinygroup/button/components/button.component")
+
+#!set(activeTitle="产品管理",activeMenuId=currentPageId)
+#include("/product/page/event/common.page")
+
+<style>
+	.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+	.open #downMenuSty{min-width:75px}
+</style>
+
+
+#@div()
+	#@tabWithInit("tab_demo" "tabLayout")
+		#@div(divClass="dropdownBox")
+			#include("/product/page/project/dropdownMenu.page")
+		#end
+		
+		#@tabHead()
+			<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">
+				#@tabHeadCol()需求#end
+			</a>
+			<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">
+				#@tabHeadCol()动态#end
+			</a>
+			<a href="${TINY_CONTEXT_PATH}/product/page/project/product-plan.page">
+				#@tabHeadCol()计划#end
+			</a>
+			<a href="${TINY_CONTEXT_PATH}/product/page/project/product-release.page">
+				#@tabHeadCol()发布#end
+			</a>
+			<a href="${TINY_CONTEXT_PATH}/product/page/project/product-roadmap.page">
+				#@tabHeadCol()路线图#end
+			</a>
+			<a href="${TINY_CONTEXT_PATH}/product/page/project/archive-list.page">
+				#@tabHeadCol()文档#end
+			</a>
+			<a href="${TINY_CONTEXT_PATH}/product/page/project/product-project-list.page">
+				#@tabHeadCol()项目#end
+			</a>
+			<a href="${TINY_CONTEXT_PATH}/product/page/project/product-modular.page">
+				#@tabHeadCol()模块#end
+			</a>
+			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/gaikuang123.page">
+				#@tabHeadCol()概况#end
+			</a>
+			
+		#end
+		
+		<span class="r" style="position:relative;top:-28px;height:0">
+			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">#buttonIcon(iconClass="icon-globe")所有产品</a>&nbsp;
+			<!--新增产品-->
+			#@aModal("#myModal" "新增产品" "900" "500" "btn-class" "/product/page/tabledemo/addProduct.pagelet")#buttonIcon(iconClass="icon-plus-sign")添加产品 #end
+		</span>
+		
+			#pageContent
+	#end
+#end
