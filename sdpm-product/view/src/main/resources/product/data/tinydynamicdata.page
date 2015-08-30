@@ -8,16 +8,18 @@
 #if (pagesize>records-pagesize*(page-1))
 #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(0)
-#for(var:0..0])
+#setTinyItemCount(52)
+#for(var:[1..pagesize])
 #@tr()
 
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()#end
-	#@td()#end
-	#@td()#end
-	#@td()#end
-	#@td()#end
-	#@td()#end
+	#@td()8月30日 13:48#end
+	#@td()Demo#end
+	#@td()关闭了#end
+	#@td()Bug#end
+	#@td()154#end
+	#@td()
+		请稍等CAD
+	#end
 #end
 #end
