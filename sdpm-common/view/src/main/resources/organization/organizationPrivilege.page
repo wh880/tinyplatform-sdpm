@@ -1,6 +1,11 @@
 #!set(activeTitle="权限管理",activeMenuId=currentPageId)
 #set(editpagePath="/organization/organizationGroupAdd.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 ###set(tabpagePath="/organizationOther/tab.pagelet",tabpageModalId="userViewModal",tabpageModal="#"+tabpageModalId)
+<style>
+    .tabLayout .tabBar span a{color:#333}
+    .tabLayout .tabBar .Current a{color:#fff}
+    .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+</style>
 #include("/organizationOther/common.page")
 #@div()
     #@div(divClass="tabLayout")

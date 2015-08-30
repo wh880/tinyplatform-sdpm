@@ -3,6 +3,12 @@
 #import("/components/org/tinygroup/fulimanageui/form.component")
 ###set(tabpagePath="/page/tabledemo/tab.pagelet",tabpageModalId="userViewModal",tabpageModal="#"+tabpageModalId)
 #include("/organizationOther/common.page")
+<style>
+    .tabLayout .tabBar span a{color:#333}
+    .tabLayout .tabBar .Current a{color:#fff}
+    .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+</style>
+
 #@div()
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
@@ -48,38 +54,50 @@
 
 #@tinyForm("cheackform" "" "" {"class":"cheackform"})
     #@elementItem()
-        #@colLabel()内联复选框#tinyCheckbox("checkbox2" "01" "02")#end
+        #@colLabel()首页#tinyCheckbox("checkbox2" "01" "02")#end
         #@formControlDiv("checkboxSty col-9")
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
+            #@tinyCheckbox("checkbox2" "01" "02")首页#end
         #end
     #end
     #@elementItem()
-        #@colLabel()内联复选框#tinyCheckbox("checkbox2" "01" "02")#end
+        #@colLabel()我的地盘#tinyCheckbox("checkbox2" "01" "02")#end
         #@formControlDiv("checkboxSty col-9")
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
-            #@tinyCheckbox("checkbox2" "01" "02")上网#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首d页#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首aaa页#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页aa#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首aw页#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页a#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首dr页#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首aa页#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首eedd页#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首dd页#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+
         #end
+    #end
+    #@elementItem()
+        #@colLabel()我的地盘#tinyCheckbox("checkbox2" "01" "02")#end
+        #@formControlDiv("checkboxSty col-9")
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")新增#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")批量添加#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")更新待办#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")待办详情#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")删除待办#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")导出#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")完成#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")导入到今天#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")批量编辑#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")批量完成#end#end
+            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")日历#end#end
+
+        #end
+
     #end
 
     #@elementItem()
