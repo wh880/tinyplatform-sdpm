@@ -1,10 +1,31 @@
-	#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+#import("/org/tinygroup/form/components/form.component")
 <style>
 .tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
 .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
 .b {margin-left: 8px;}
+.infoContent{
+    margin: 18px 200px 10px 5px;
+    padding: 6px;
+    border: #eee 1px solid;
+    margin-right: 200px;}
+.infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:13px;}
+.infoContent ul li label{font-weight:normal; width:33%;font-size:12px;}
+.infoContent ul li .text-overflow{display:inline-block; width:64%;vertical-align:top;font-size:12px;}
+.infoContent ul li .text-overflow a{ color:#333;}
+.infoContent ul li .text-overflow a:hover{color:#f90}
+.infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}
+.shrinkage .edui-Box{margin-left:6px;}
+.shrinkage .edui-Box .titleNames{display:block;margin-bottom:6px;margin-left:8px;}
+.togglebox .togglenavpart{overflow:visible}
+.togglebox.open.shrinkage .togglenavpart {
+    left: 85%;
+    margin-left: -210px;
+    width: initial;
+}
 </style>
+
 #include("/page/event/common.page")
 #@div()
 	#@div(divClass="tabLayout")
@@ -29,7 +50,7 @@
 			##operationbar start1
 			#@div(divClass="operationbar")
 				<span class="f">
-					哈哈哈哈
+					项目名称
 				</span>
 				<span class="r">
 				#@aModal("#myModal" "项目名称>延期" "750" "400" "" "/page/outpage/yanqi.pagelet")#buttonIcon(iconClass="icon-calendar")延期#end
@@ -82,9 +103,95 @@
 				</span>
 				#div(divClass="clearfix")
 			#end
-			##operationbar end
-			#include("/page/project/datatableDemo.page")				
-	#end				
+#end
+
+#@toggleBox({"class":"open shrinkage"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+	#@toggleLeft({"class":"aclass"})		
+		#@div(divClass="infoContent")
+	        <p class="titleName">基本信息</p>
+	       	<ul style="width:350px">
+	      <li>
+	       	<label>当前状态：</label>
+	       	#@span(spanClass="text-overflow")
+			 <p>用来测试的用例</p>
+			#end
+	    </li>
+	     <li>
+	       	<label>产品代号：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>测试123</p>
+			#end
+	   </li>
+	       		
+	       	 <li>
+	       	<label>产品负责人：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>admin</p>
+			#end
+	   </li>	 
+	   <li>
+	       	<label>测试负责人：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>A001</p>
+			#end
+	   </li>
+	   <li>
+	       	<label>发布负责人：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>A002</p>
+			#end
+	   </li>
+	  <li>
+	       	<label>发布状态：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>正常</p>
+			#end
+	   </li>
+ 		<li>
+	       	<label>访问控制：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>默认设置(有产品视图权限，即可访问)</p>
+			#end
+	   </li>
+	   <li>
+	       	<label>分组白名单：</label>
+	       	#@span(spanClass="text-overflow")
+			<p></p>
+			#end
+	   </li>
+	 <li>
+	       	<label>由谁创建：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>admin</p>
+			#end
+	   </li>
+	   <li>
+	       	<label>创建日期：</label>
+	       	#@span(spanClass="text-overflow")
+			<p>2015-08-28 16:31:57</p>
+			#end
+	   </li>
+			</ul>
+      #end
+      #@div(divClass="infoContent")
+	        <p class="titleName">其他信息</p>
+	 #end
+	#end
+	#@toggleRight()
+		#@div(divClass="infoContent pd-10")
+	        <p class="titleName">项目描述</p>
+	       	<div>
+	       		11111
+	       	</div>
+		#end
+		#@div(divClass="infoContent")
+	        <p class="titleName">历史记录</p>
+	       	#include("/page/outpage/recordlist.page")
+		#end
+	#end
+#end
+
+					
 					
 					
 					
