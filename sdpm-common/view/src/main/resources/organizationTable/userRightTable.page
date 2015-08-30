@@ -2,6 +2,7 @@
 ##import("/org/tinygroup/table/components/tinytable.component")
 ###include("/page/event/common.page")
 #set(editpagePath="/organization/organizationUserAdd.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+#set(userBatchAddpagePath="/organization/organizationUserBatchAdd.pagelet",userBatchAddpageModalId="userBatchAddpageModal",userBatchAddpageModal="#"+userBatchAddpageModalId)
 #set(tabpagePath="/organizationOther/tab.pagelet",tabpageModalId="userViewModal",tabpageModal="#"+tabpageModalId)
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divBaseClass="tinyheaderTools form-inline")
@@ -10,6 +11,10 @@
         #@aModal(editpageModal "添加" "865" "420" "btn radius btn-primary btn-sm" editpagePath)
             #@simpleI("icon-plus")添加#end
         #end
+        #@aModal(userBatchAddpageModal "批量添加" "1200" "800" "btn radius btn-primary btn-sm" userBatchAddpagePath)
+            #@simpleI("icon-plus")批量添加#end
+        #end
+##    <a title="权限维护" href=userBatchAddpagePath>#buttonIcon(iconClass="添加" "865" "420","btn radius btn-info")</a>
     #end
     #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/organizationUserTableData.pagelet" 81) ##取数据地址 总数据
         #@thead()
@@ -33,3 +38,4 @@
 #@simpleModal("myModal" "用户添加")#end
 #simpleModal(editpageModalId)
 #simpleModal(tabpageModalId)
+#simpleModal(userBatchAddpageModalId)
