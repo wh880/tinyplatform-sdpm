@@ -35,7 +35,7 @@
 	#end
 	
     #@elementItem()
-        #@colLabel()指派给：#end
+        #@colLabel()由谁评审：#end
         #@formControlDiv("col-8")
              #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22","multiple":"multiple"})
 			#@tinyOptionItem("zh")A#end

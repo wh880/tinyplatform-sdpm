@@ -74,6 +74,8 @@
 			##operationbar end
 			#include("/product/page/project/togglebox.page")
 		#end
+		
+	##		这里是动态的模块布局	
 		#@tabBodyCol("ptop-5")
 			##operationbar start1
 			#@div(divClass="operationbar")
@@ -90,7 +92,7 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			#include("/product/page/project/datatableDemo.page")
+			#include("/product/page/project/dymanicdata.page")
 		#end
 		
 		#@tabBodyCol("ptop-5")
@@ -177,9 +179,11 @@
 					<span class="active_btn">概况</span>
 				</span>
 				<span class="r">
-					<a href="#">#buttonIcon(iconClass="icon-off")关闭</a>&nbsp;
-					<a href="#">#buttonIcon(iconClass="icon-plus")编辑</a>&nbsp;
-					<a href="#" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+				
+<!--修改了关闭、编辑和返回的跳转-->
+		#@aModal("#myModal" "关闭" "700" "130" "btn-class" "/product/page/tabledemo/user-guanbi.pagelet")#buttonIcon(iconClass="icon-off")关闭#end
+		<a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/tetails222.page">#buttonIcon(iconClass="icon-plus")编辑</a>
+		<a href="${TINY_CONTEXT_PATH}/product/page/project/product.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
 				</span>
 				#div(divClass="clearfix")
 			#end
