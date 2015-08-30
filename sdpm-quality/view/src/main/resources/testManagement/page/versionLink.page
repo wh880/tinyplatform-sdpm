@@ -1,0 +1,69 @@
+#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+#include("/testManagement/page/event/common.page")
+#set(name="version")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/testManagement/page/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/testManagement/page/testManagementTab.page")
+			#end
+			
+			#@tabBodyCol("ptop-5")
+			##operationbar start1
+			#@div(divClass="operationbar")
+				<span class="f">
+					<a href="#" class="active_btn">项目名称</a> >关联用例
+					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+				</span>
+				<span class="r">
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-link")按需求关联</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-link")按Bug关联</a>&nbsp;
+					<a href="#" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+					</span>
+				#div(divClass="clearfix")
+				#include("/testManagement/page/mulsearch.page")
+			#end
+			##operationbar end
+			#end
+			##tabbody end
+			#@tinyTable()
+				#@div(divBaseClass="tinyheaderTools form-inline")
+					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+					#*#@iconTags("icon-link")
+						未关联用例
+					#end*#
+					&nbsp;<i class="icon-unlink">&nbsp;未关联用例(2)</i>
+				#end
+			#@tinyTableContent("../data/testManagementLink.pagelet")
+				#@thead()
+					#@tr()
+						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})版本#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})P#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})用例标题#end
+						#@tinyTh({"class":"sorting","rel":"sortname","style":"color:#333"})用例类型#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})创建#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})状态#end
+					#end
+				#end
+				<script type="text/javascript">
+				$(function(){
+					$('#${tableId}').on('click','.delBtn',function(e){
+						user_del(this,'1');
+					});
+				})
+			</script>
+				#@dialog("myModal")
+					#@dialogHeader()对话框标题#end
+					#@dialogBody()<p>对话框内容…</p>#end
+					#@dialogFooter()
+						#@buttonEnsure()确定#end
+						#@buttonCancel()关闭#end
+					#end
+				#end
+			#end
+			#end
+	#end
+#end

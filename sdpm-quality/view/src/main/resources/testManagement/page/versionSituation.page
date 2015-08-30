@@ -24,7 +24,7 @@
 				#@iconOperations("#myModal" "icon-time" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp日志#end
 				#@iconOperations("#myModal" "icon-off" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp关闭#end
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-dashboard")用例</a>
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-link	")关联用例</a>
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link	")关联用例</a>
 				<a href="#" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
 				<a href="#" title="删除版本">#buttonIcon(iconClass="icon-remove")</a>
 				<a href="#" title="返回">#buttonIcon(iconClass="icon-reply")</a>
