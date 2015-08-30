@@ -36,4 +36,5 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
+				#include("/page/outpage/document_togglebox.page")
 #end

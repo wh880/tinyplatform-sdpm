@@ -33,4 +33,7 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
+			#for(i:[1..3])
+		  	#@tinyRadio("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})关联产品${i}#end<br>
+			#end
 #end
