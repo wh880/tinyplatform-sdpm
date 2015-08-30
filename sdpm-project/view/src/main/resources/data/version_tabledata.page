@@ -11,17 +11,15 @@
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()习近平${page}#end
+	
+	#@td()${page}#end
 	#@td()北京#end
 	#@td()中南海#end
 	#@td()67#end
 	#@td()2013/03/25#end
-	#@td()￥320,800#end
-	#@td()2013/03/25#end
-	#@td()￥320,800#end
-	#@td()2013/03/25#end
-	#@td()￥320,800#end
+	#@td()67#end
+	#@td()67#end
+	
 	#@td()￥320,800#end
 	 #@td()
 		#iconOperations("#myModal" "icon-hand-right" "指派" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")

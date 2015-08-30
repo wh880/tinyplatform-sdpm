@@ -49,4 +49,6 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
+			
+			#include("/page/outpage/need_togglebox.page")
 #end

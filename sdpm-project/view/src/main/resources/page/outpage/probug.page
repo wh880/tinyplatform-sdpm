@@ -36,4 +36,5 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
+			#include("/page/outpage/bug_togglebox.page")
 #end

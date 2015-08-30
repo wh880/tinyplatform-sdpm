@@ -37,4 +37,5 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
+			#include("/page/outpage/version_togglebox.page")
 #end
