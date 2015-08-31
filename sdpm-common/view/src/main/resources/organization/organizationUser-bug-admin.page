@@ -2,6 +2,8 @@
 ###import("/org/tinygroup/zTree/components/zTree.component")
 #import("/components/org/tinygroup/fulimanageui/form.component")
 ###set(tabpagePath="/page/tabledemo/tab.pagelet",tabpageModalId="userViewModal",tabpageModal="#"+tabpageModalId)
+#set(editpagePath="/organization/organizationFileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+
 #include("/organizationOther/common.page")
 <style>
     .tabLayout .tabBar span a {color: #333}
@@ -9,6 +11,9 @@
     .operationbar {border-top: none;
         background: #f9fafe;
         padding: 6px 5px 6px 10px;
+    .barBox{padding-top:5px;float:left}
+    .barBox a,.barBox a:link{color:#333;margin-right:3px;display:inline-block}
+    .barBox a:hover{color:#f90}
     }
 </style>
 #@div()
@@ -34,10 +39,15 @@
 					<a href="#">档案</a>
         ##
         </span>
+        <span style="padding-top:5px;float:right">
+            #@aModal(editpageModal "导出" "600" "120" ""  editpagePath)
+                #@simpleI(" icon-chevron-down")导出#end
+            #end
+        </span>
             #div(divClass="clearfix")
         #end
 
-    <span style="padding-top:5px;float:left;color: black;">
+    <span class="barBox">
                    	<a href="#" class="active_btn">指派给他</a>
 					<a href="#">由他创建</a>
 					<a href="#">由他解决</a>
@@ -68,3 +78,4 @@
     #end
 #end
 
+#simpleModal(editpageModalId)

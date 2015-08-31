@@ -1,7 +1,8 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
 ###import("/org/tinygroup/zTree/components/zTree.component")
 #import("/components/org/tinygroup/fulimanageui/form.component")
-###set(tabpagePath="/page/tabledemo/tab.pagelet",tabpageModalId="userViewModal",tabpageModal="#"+tabpageModalId)
+#set(editpagePath="/organization/organizationFileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+
 #include("/organizationOther/common.page")
 <style>
     .tabLayout .tabBar span a {color: #333}
@@ -10,13 +11,51 @@
         background: #f9fafe;
         padding: 6px 5px 6px 10px;
     }
+    .barBox{padding-top:5px;float:left}
+    .barBox a,.barBox a:link{color:#333;margin-right:3px;display:inline-block}
+    .barBox a:hover{color:#f90}
+
 </style>
+#@div()
+    #@div(divClass="tabLayout")
+        #@div(divClass="tabBar cl")
+        <span class="Current"><a
+                href="${TINY_CONTEXT_PATH}/organization/organizationUser.page?currentPageId=7">用户</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationGtasks.page?currentPageId=7">待办</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationLog.page?currentPageId=7">日志</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationActive.page?currentPageId=7">动态</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationDepartment.page?currentPageId=7">部门</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationPrivilege.page?currentPageId=7">权限</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationCompany.page?currentPageId=7">公司</a></span>
+        #end
+        #@div(divClass="operationbar")
+        <span style="padding-top:5px;float:left">
+					<a href="#">待办</a>
+					<a href="#">需求</a>
+					<a href="#">任务</a>
+					<a href="#">缺陷</a>
+					<a href="#">测试</a>
+					<a href="#">日志</a>
+					<a href="#" class="active_btn">项目</a>
+					<a href="#">档案</a>
+        </span>
+        <span style="padding-top:5px;float:right">
+            #@aModal(editpageModal "导出" "600" "120" ""  editpagePath)
+                #@simpleI(" icon-chevron-down")导出#end
+            #end
+        </span>
+            #div(divClass="clearfix")
+        #end
+
+
+    #end
+#end
 
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([8,10,20,50,100,200])
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/organizationUser-projectTable.pagelet") ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/organizationUser-storyTable.pagelet") ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
@@ -29,8 +68,11 @@
                 #@tinyTh({"class":"","rel":"sortname"})角色#end
                 #@tinyTh({"class":"","rel":"sortname"})加盟日#end
                 #@tinyTh({"class":"","rel":"sortname"})可用时间/天#end
+
             #end
         #end
     #end
 #end
+
+#simpleModal(editpageModalId)
 

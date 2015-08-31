@@ -1,7 +1,8 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
 ###import("/org/tinygroup/zTree/components/zTree.component")
 #import("/components/org/tinygroup/fulimanageui/form.component")
-###set(tabpagePath="/page/tabledemo/tab.pagelet",tabpageModalId="userViewModal",tabpageModal="#"+tabpageModalId)
+#set(editpagePath="/organization/organizationFileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+
 #include("/organizationOther/common.page")
 <style>
     .tabLayout .tabBar span a {color: #333}
@@ -10,11 +11,16 @@
         background: #f9fafe;
         padding: 6px 5px 6px 10px;
     }
+    .barBox{padding-top:5px;float:left}
+    .barBox a,.barBox a:link{color:#333;margin-right:3px;display:inline-block}
+    .barBox a:hover{color:#f90}
+
 </style>
 #@div()
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
-        <span class="Current"><a href="${TINY_CONTEXT_PATH}/organization/organizationUser.page?currentPageId=7">用户</a></span>
+        <span class="Current"><a
+                href="${TINY_CONTEXT_PATH}/organization/organizationUser.page?currentPageId=7">用户</a></span>
         <span><a href="${TINY_CONTEXT_PATH}/organization/organizationGtasks.page?currentPageId=7">待办</a></span>
         <span><a href="${TINY_CONTEXT_PATH}/organization/organizationLog.page?currentPageId=7">日志</a></span>
         <span><a href="${TINY_CONTEXT_PATH}/organization/organizationActive.page?currentPageId=7">动态</a></span>
@@ -32,19 +38,22 @@
 					<a href="#">日志</a>
 					<a href="#">项目</a>
 					<a href="#">档案</a>
-        ##
+        </span>
+        <span style="padding-top:5px;float:right">
+            #@aModal(editpageModal "导出" "600" "120" ""  editpagePath)
+                #@simpleI(" icon-chevron-down")导出#end
+            #end
         </span>
             #div(divClass="clearfix")
         #end
 
-    <span style="padding-top:5px;float:left;color: black;">
-                   	<a href="#" class="active_btn">指派给他</a>
+    <span class="barBox">
+          <a href="#" class="active_btn">指派给他</a>
 					<a href="#">由他创建</a>
 					<a href="#">由他完成</a>
-                    <a href="#">由他关闭</a>
+					<a href="#">由他关闭</a>
 					<a href="#">由他取消</a>
         </span>
-
     #end
 #end
 
@@ -55,18 +64,22 @@
     #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/organizationUser-taskTable.pagelet") ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"","rel":"sortname"})ID#end
-                #@tinyTh({"class":"","rel":"sortname"})P#end
-                #@tinyTh({"class":"","rel":"sortname"})所属项目#end
-                #@tinyTh({"class":"","rel":"sortname"})任务名称#end
-                #@tinyTh({"class":"","rel":"sortname"})预计时间#end
-                #@tinyTh({"class":"","rel":"sortname"})耗时#end
-                #@tinyTh({"class":"","rel":"sortname"})剩余时间#end
-                #@tinyTh({"class":"","rel":"sortname"})截止日期#end
-                #@tinyTh({"class":"","rel":"sortname"})状态#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})P#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})所属项目#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})任务名称#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})预计时间#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})消耗时间#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})剩余时间#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})截止#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})状态#end
+
             #end
         #end
     #end
 #end
+
+#simpleModal(editpageModalId)
 

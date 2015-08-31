@@ -1,4 +1,5 @@
-#@td()￥800#end#macro setTinyItemCount(num)
+
+#macro setTinyItemCount(num)
 <input type="hidden" name="records" value="${num}"/>
 #end
 
