@@ -34,7 +34,6 @@
 	 	   #@th() 	   #tinyInput("text" "username") 	  #end	 	
 	 	     #@th()	  #tinyInput("text" "username")	  #end
 	 	   #@th() 	  #tinyInput("text" "username") 	  #end
-	 	   
 	 	 #end
 	 	  #end
 	 	 #end

@@ -12,22 +12,22 @@
 #for(var:[1..pagesize])
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()习近平${page}#end
-	#@td()北京#end
-	#@td()中南海#end
-	#@td()67#end
-	#@td()2013/03/25#end
-	#@td()67#end
-	#@td()67#end
-	#@td()￥320,800#end
+	#@td()${page}#end
+	#@td()①#end
+	#@td()任务名称#end
+	#@td()（状态）完成#end
+	#@td()03-25#end
+	#@td()03-25 08:30#end
+	#@td()开发者#end
+	#@td()开发者#end
 	 #@td()
-		#iconOperations("#myModal" "icon-search" "确认" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
 		#iconOperations("#myModal" "icon-hand-right" "指派" "865" "448" "/page/outpage/call.pagelet" "ml-5")
-		#iconOperations("#myModal" "icon-ok-sign" "解决" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+		#iconOperations("#myModal" "icon-play" "开始" "865" "448" "/page/outpage/start.pagelet" "ml-5")
+		#iconOperations("#myModal" "icon-time" "日志" "900" "448" "/page/outpage/note.pagelet" "ml-5")
+		#iconOperations("#myModal" "icon-ok-sign" "完成" "865" "448" "/page/outpage/task-finish.pagelet" "ml-5")
 		#iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
-		#iconOperations("#myModal" "icon-pencil" "编辑" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
-		#iconOperations("#myModal" " icon-copy" "复制" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
-		
+		#iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+		##iconOperation(" icon-remove" "删除" "ml-5")
 	#end
 #end
 #end
