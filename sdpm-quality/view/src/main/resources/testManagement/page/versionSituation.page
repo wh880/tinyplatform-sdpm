@@ -22,7 +22,8 @@
 			</span>
 			<span class="r">
 				#@iconOperations("#LogModal" "icon-time" "新增日志" "800" "600" "/testManagement/page/addLog.pagelet" "ml-5")&nbsp日志#end
-				#@iconOperations("#myModal" "icon-off" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp关闭#end
+				#@iconOperations("#beginModal" "icon-play" "这里需要后台调用该项目名称>开始" "900" "400" "/testManagement/page/versionBegin.pagelet" "ml-5")&nbsp开始#end
+				#@iconOperations("#endModal" "icon-off" "这里需要后台调用该项目名称>关闭" "900" "400" "/testManagement/page/versionEnd.pagelet" "ml-5")&nbsp关闭#end
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-dashboard")用例</a>
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link	")关联用例</a>
 				<a href="#" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
@@ -51,7 +52,7 @@
 	       	#include("/testManagement/page/historyRecord.page")
 		#end
 		<div style="text-align:center;margin:auto">
-				#@iconOperations("#LogModal" "icon-time" "新增日志" "500" "100" "/testManagement/page/addLog.pagelet" "ml-5")&nbsp日志#end
+				#@iconOperations("#LogModal" "icon-time" "新增日志" "800" "600" "/testManagement/page/addLog.pagelet" "ml-5")&nbsp日志#end
 					#@dialog("LogModal")
 						#@dialogHeader()对话框标题#end
 						#@dialogBody()<p>对话框内容…</p>#end
@@ -60,7 +61,24 @@
 					  	#@buttonCancel()关闭#end
 						#end
 					#end
-				#@iconOperations("#myModal" "icon-off" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp关闭#end
+				#@iconOperations("#beginModal" "icon-play" "这里需要后台调用该项目名称>开始" "900" "400" "/testManagement/page/versionBegin.pagelet" "ml-5")&nbsp开始#end
+					#@dialog("beginModal")
+						#@dialogHeader()对话框标题#end
+						#@dialogBody()<p>对话框内容…</p>#end
+						#@dialogFooter()
+						#@buttonEnsure()确定#end
+					  	#@buttonCancel()关闭#end
+						#end
+					#end
+				#@iconOperations("#endModal" "icon-off" "这里需要后台调用该项目名称>关闭" "900" "400" "/testManagement/page/versionEnd.pagelet" "ml-5")&nbsp关闭#end
+					#@dialog("endModal")
+						#@dialogHeader()对话框标题#end
+						#@dialogBody()<p>对话框内容…</p>#end
+						#@dialogFooter()
+						#@buttonEnsure()确定#end
+					  	#@buttonCancel()关闭#end
+						#end
+					#end
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-dashboard")用例</a>
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-link	")关联用例</a>
 				<a href="#" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>

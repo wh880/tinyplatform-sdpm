@@ -1,0 +1,24 @@
+#@tinyForm("thisform" "" "" {"class":"test"})
+	#@table()
+    	#@tbody()
+    		#@tr()
+    			#@td()测试总结：#end
+    			#@td()
+    				#@Teditor("content" "content" {"initialFrameHeight":"100"})#end
+    			#end
+    		#end
+    		#@tr()
+    			#@td()备注：#end
+    			#@td()
+    				#@Teditor("content2" "content2" {"initialFrameHeight":"100"})#end
+    			#end
+    		#end
+    	#end
+    #end
+    #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+    #@div(divClass="infoContent")
+    <p class="titleName">历史记录</p>
+    ##加入后，js代码会导致页面排版混乱
+        #include("/testManagement/page/historyRecord.page")
+    #end
+#end
