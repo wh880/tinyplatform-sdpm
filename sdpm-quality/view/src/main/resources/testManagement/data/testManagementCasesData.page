@@ -26,7 +26,7 @@
 							#iconOperations("#myModal" "icon-flag" "结果" "600" "200" "/testManagement/page/tabledemo/result.pagelet" "ml-5")
                          	<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editioncase.page">#buttonIcon(iconClass="icon-pencil")</a>
                          	<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">#buttonIcon(iconClass="icon-copy")</a>
-							#iconOperations("#myModal" "icon-remove" "删除" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+							#iconOperations("#myModal" "icon-remove" "删除" "200" "50" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
                          <a href="${TINY_CONTEXT_PATH}">#buttonIcon(iconClass="icon-bug")</a>
 						#end
 					#end
