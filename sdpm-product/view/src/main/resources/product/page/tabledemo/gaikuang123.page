@@ -24,9 +24,9 @@
 				<span class="r">
 				
 <!--修改了关闭、编辑和返回的跳转-->
-		#@aModal("#myModal" "关闭" "700" "130" "btn-class" "/product/page/tabledemo/user-guanbi.pagelet")#buttonIcon(iconClass="icon-off")关闭#end
+		#@aModal("#myModal" "关闭" "700" "400" "btn-class" "/product/page/tabledemo/user-guanbi.pagelet")#buttonIcon(iconClass="icon-off")关闭#end
 		<a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/mukuai-bianji.page">#buttonIcon(iconClass="icon-plus")编辑</a>
-		<a href="${TINY_CONTEXT_PATH}/product/page/project/product.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+		<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/gaikuang123.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
 				</span>
 				#div(divClass="clearfix")
 			#end
@@ -193,3 +193,12 @@
 			
 #end
 
+
+#@dialog("myModal")
+				#@dialogHeader()对话框标题#end
+				#@dialogBody()<p>对话框内容…</p>#end
+				#@dialogFooter()
+					#@buttonEnsure()确定#end
+					#@buttonCancel()关闭#end
+				#end
+#end

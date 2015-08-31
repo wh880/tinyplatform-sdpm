@@ -1,5 +1,6 @@
 #include("/product/page/event/common.page")
 #set(addArchivePagePath="/product/page/tabledemo/addArchive.pagelet",editpageModalId="myModal",editpageModal="#"+editpageModalId)
+#!set(linkName="dynamic")
 
 #@tabBodyCol("ptop-5")
 			##operationbar start1
