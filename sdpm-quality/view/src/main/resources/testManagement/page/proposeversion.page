@@ -34,8 +34,8 @@
         #@elementItem()
             #@colLabel()版本：#end
             #@formControlDiv("col-8")
-                #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                    #@optionItem("")请选择#end
+                #@tinySelect("lang" "zh" {"class":"select2"})
+                    #@tinyOptionItem("zh")#end
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -43,8 +43,8 @@
         #@elementItem()
             #@colLabel()负责人：#end
             #@formControlDiv("col-8")
-                #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                    #@optionItem("")请选择#end
+                #@tinySelect("lang" "zh" {"class":"select2"})
+                    #@tinyOptionItem("zh")#end
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -85,8 +85,7 @@
                 #@tinySelect("" "" {"class":"当前状态","nullmsg":"请选择","datatype":"*"})
                     #@optionItem("")未开始#end
                     #@optionItem("")进行中#end
-                    #@optionItem("")已完成#end
-                    #@optionItem("")被阻塞#end
+                     #@optionItem("")被阻塞#end
 
                 #end
 
@@ -220,6 +219,9 @@
             }
         });
     });
+</script>
+<script type="text/javascript">
+    $(".select2").select2();
 </script>
         #end
 

@@ -2,6 +2,12 @@
 #import("/org/tinygroup/zTree/components/zTree.component")
 #import("/components/org/tinygroup/fulimanageui/form.component")
 <style>.input_box .col-6{margin-left:17%;margin-bottom:12px;clear:both}</style>
+<style>
+    .tabLayout .tabBar span a{color:#333}
+    .tabLayout .tabBar .Current a{color:#fff}
+    .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+</style>
+
 #include("/organizationOther/common.page")
 #@div()
     #@div(divClass="tabLayout")

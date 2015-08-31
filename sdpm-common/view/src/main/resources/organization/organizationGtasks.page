@@ -57,7 +57,7 @@
                             <span style="float:left">日期：</span>
                             #@formHorizontal("col-9")
 
-                                #daterangepicker("2015/03/18" "2015/03/23" "reservation" "reservation" "width:100px")
+                                #daterangepicker("2015/03/18" "2015/03/23" "reservation" "reservation" "width:107px")
                             #end
 
                             #daterangepickerInit("#reservation")
@@ -66,7 +66,8 @@
                         #@elementItem()
                             <span style="padding-top:10px;float:right">
                             #@formHorizontal("col-9")
-                                #buttonRadiusInfo(caption="查看")
+                                #buttonRadiusPrimary(caption="查看")
+
                             #end
 
                         #end
@@ -76,46 +77,25 @@
             #end
         #end
         #@toggleRight()
-            #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+            #include("/organization/organizationGtaskRightTable.page")
 
-                #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/tasktabledata.pagelet") ##取数据地址 总数据
-                    #@thead()
-
-                        #@div(divBaseClass="tinyheaderTools form-inline")
-                            #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-                            #@aModal("#myModal" "导出" "865" "100" "btn radius btn-primary btn-sm" "/organization/organizationLogExport.pagelet")
-                                #@simpleI("icon-arrow-down")导出#end
-                            #end
-                        #end
-                        #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-                            #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})部门#end
-                            #@tinyTh({"class":"","rel":"sortname"})用户#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})时间#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})待办事件#end
-
-                        #end
-                    #end
-
-                #end
-
-            ##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
-            <script type="text/javascript">
-                $(function(){
-                    $('#${tableId}').on('click','.delBtn',function(e){
-                        user_del(this,'1');
-                    });
-                })
-            </script>
-                #@dialog("myModal")
-                    #@dialogHeader()对话框标题#end
-                    #@dialogBody()<p>对话框内容…</p>#end
-                    #@dialogFooter()
-                        #@buttonEnsure()确定#end
-                        #@buttonCancel()关闭#end
-                    #end
-                #end
-            #end
         #end
     #end
 
+#end
+
+    <script type="text/javascript">
+        $(function(){
+            $('#${tableId}').on('click','.delBtn',function(e){
+                user_del(this,'1');
+            });
+        })
+    </script>
+#@dialog("myModal")
+    #@dialogHeader()对话框标题#end
+    #@dialogBody()<p>对话框内容…</p>#end
+    #@dialogFooter()
+        #@buttonEnsure()确定#end
+        #@buttonCancel()关闭#end
+    #end
 #end

@@ -20,9 +20,10 @@
 		#@td()2015-8-28#end
 		#@td()做完了#end	
 		#@td()
-			<a href="#" title="用例">#buttonIcon(iconClass="icon-asterisk")</a>
-			<a href="#" title="关联用例">#buttonIcon(iconClass="icon-retweet")</a>
-			<a href="#" title="关联用例">#buttonIcon(iconClass="icon-edit")</a>
+			<a href="#" title="用例">#buttonIcon(iconClass="icon-smile")</a>
+			<a href="#" title="关联用例">#buttonIcon(iconClass="icon-link")</a>
+			<a href="#" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
+			<a href="#" title="移除">#buttonIcon(iconClass="icon-remove")</a>
 		#end	
 	#end
 #end

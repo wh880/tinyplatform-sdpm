@@ -31,9 +31,9 @@
                 #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
                     #@optionItem("")请选择#end
                 #end
-                #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                    #@optionItem("")请选择#end
-                #end
+                    #@tinySelect("lang" "zh" {"class":"select2"})
+                        #@tinyOptionItem("zh")请选择#end
+                    #end
                 #buttonRadiusDefault(caption="维护模板")
                 #buttonRadiusDefault(caption="刷新")
             #end
@@ -41,8 +41,18 @@
         #@elementItem()
             #@colLabel()用例类型：#end
             #@formControlDiv("col-8")
-                #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                    #@optionItem("")请选择#end
+                #@formControlDiv("col-8")
+                    #@tinySelect("lang" "zh" {"class":"select2"})
+                        #@tinyOptionItem("zh")#end
+                        #@tinyOptionItem("en")功能测试#end
+                        #@tinyOptionItem("ta")性能测试#end
+                        #@tinyOptionItem("z2h")配置相关#end
+                        #@tinyOptionItem("e2n")安装部署#end
+                        #@tinyOptionItem("t2a")安全相关#end
+                        #@tinyOptionItem("e3n")接口测试#end
+                        #@tinyOptionItem("t3a")其他#end
+                    #end
+                    #@validateDiv("col-2")#end
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -239,6 +249,10 @@
         });
     });
 </script>
+<script type="text/javascript">
+    $(".select2").select2();
+</script>
+
 
 #end
 #end

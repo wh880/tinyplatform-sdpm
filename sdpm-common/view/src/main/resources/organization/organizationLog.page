@@ -4,6 +4,9 @@
     .tabLayout .tabBar span a{color:#333}
     .tabLayout .tabBar .Current a{color:#fff}
     .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+    #checkBoxsty .radio-box{margin-top:8px;}
+    #checkBoxsty .radio-box  input{margin-top:0;margin-left:15px;}
+    #checkBoxsty .radio-box  label{font-weight:100;}
 </style>
 #include("/organizationOther/common.page")
 #@div()
@@ -92,7 +95,7 @@
                         #@elementItem()
                         <span style="float:left">部门：</span>
                             #@formControlDiv("col-9")
-                                #@tinySelect("lang" "departA" {"class":"input-text select2","rel":"22"})
+                                #@tinySelect("lang" "departA" {"class":"select2","rel":"22"})
                                     #@tinyOptionItem("departA")部门A#end
                                     #@tinyOptionItem("departB")部门B#end
                                     #@tinyOptionItem("departC")部门C#end
@@ -104,16 +107,25 @@
                         <span style="float:left">日期：</span>
                             #@formHorizontal("col-9")
 
-                                #daterangepicker("2015/03/18" "2015/03/23" "reservation" "reservation" "width:100px")
+                                #daterangepicker("2015/03/18" "2015/03/23" "reservation" "reservation" "width:107px")
                             #end
 
                             #daterangepickerInit("#reservation")
                         #end
 
                         #@elementItem()
+                        <span style="padding-bottom:10px;float:left"></span>
+                            #@formHorizontal("col-9" formHorizontalId="checkBoxsty")
+
+                                #@tinyCheckbox("checkbox2" "sw2" "sw2")&nbsp;&nbsp;显示部门所有成员#end
+                            #end
+
+                            #daterangepickerInit("#reservation")
+                        #end
+                        #@elementItem()
                         <span style="padding-top:10px;float:right">
                             #@formHorizontal("col-9")
-                                #buttonRadiusInfo(caption="查看")
+                                #buttonRadiusPrimary(caption="查看")
                             #end
 
                         #end
@@ -125,20 +137,25 @@
         #@toggleRight()
             #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 
-                #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/tasktabledata.pagelet") ##取数据地址 总数据
+                #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/organizationLog-TableData.pagelet") ##取数据地址 总数据
                     #@thead()
 
                         #@div(divBaseClass="tinyheaderTools form-inline")
                             #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-                            #@aModal("#myModal" "导出" "865" "100" "btn radius btn-primary btn-sm" "/organization/organizationLogExport.pagelet")
-                                #@simpleI("icon-arrow-down")导出#end
+                            #@aModal("#myModal2" "导出" "865" "100" "" "/organization/organizationLogExport.pagelet")
+                                #@simpleI(" icon-chevron-down")导出#end
                             #end
                         #end
                         #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-                            #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})部门#end
-                            #@tinyTh({"class":"","rel":"sortname"})用户#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})时间#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})待办事件#end
+                            #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                            #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
+                            #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})日期#end
+                            #@tinyTh({"class":"","rel":"sortname"})登记人#end
+                            #@tinyTh({"class":"sorting","rel":"sortname"})工作内容#end
+                            #@tinyTh({"class":"sorting","rel":"sortname"})耗时#end
+                            #@tinyTh({"class":"sorting","rel":"sortname"})剩余#end
+                            #@tinyTh({"class":"sorting","rel":"sortname"})对象#end
+
 
                         #end
                     #end
@@ -146,23 +163,24 @@
                 #end
 
             ##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
-                <script type="text/javascript">
-                    $(function(){
-                        $('#${tableId}').on('click','.delBtn',function(e){
-                            user_del(this,'1');
-                        });
-                    })
-                </script>
-                #@dialog("myModal")
-                    #@dialogHeader()对话框标题#end
-                    #@dialogBody()<p>对话框内容…</p>#end
-                    #@dialogFooter()
-                        #@buttonEnsure()确定#end
-                        #@buttonCancel()关闭#end
-                    #end
-                #end
+
             #end
         #end
     #end
 
+#end
+    <script type="text/javascript">
+        $(function(){
+            $('#${tableId}').on('click','.delBtn',function(e){
+                user_del(this,'1');
+            });
+        })
+    </script>
+#@dialog("myModal2")
+    #@dialogHeader()对话框标题#end
+    #@dialogBody()<p>对话框内容…</p>#end
+    #@dialogFooter()
+        #@buttonEnsure()确定#end
+        #@buttonCancel()关闭#end
+    #end
 #end

@@ -1,29 +1,70 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
+
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-#!set(linkName="demand")
+#!set(linkName="demand",sonitem="<li>"+"需求"+"</li>")
 
 #import("/org/tinygroup/button/components/button_smart.component")
 
-
 #@tabBodyCol("ptop-5")
-			
-	#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+			##operationbar start
+			#@div(divClass="operationbar")
+				<span class="f">
+					<a href="#" class="active_btn">未关闭</a>
+					<a href="#">全部需求</a>
+					<a href="#">指派给我</a>
+					<a href="#">由我创建</a>
+					<a href="#">由我评审</a>
+					<a href="#">由我关闭</a>
+					<a href="#">草稿</a>
+					<a href="#">激活</a>
+					<a href="#">已变更</a>
+					<a href="#">待关闭</a>
+					<a href="#">已关闭</a>
+					<a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
+				</span>
+				<span class="r">
+				<!--导入导出修改-->
+				#@aModal("#myModal" "导入" "700" "130" "btn-class" "/product/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-upload-alt")导入#end
+				
+					#@buttonGroup()
+			                    #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-download-alt")导出  #@spanCaret()#end#end
+			                    #@ulDropdownMenu("downMenuSty")
+				                    <p>
+				                     #@iconOperations("#myModal" "" "导出" "500" "200"  "/product/page/tabledemo/product-export-data.pagelet" "ml-5") &nbsp;导出数据#end  
+									</p>
+									
+				                     #@iconOperations("#myModal" "" "导出" "700" "80" "/product/page/tabledemo/product-export-template.pagelet" "ml-5") &nbsp;导出模板#end            
+			                     
+		                   		 #end
+	               #end &nbsp;
+	             
+				
+					<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-report.page">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
+					#@iconOperations("#myModal" "icon-plus-sign" "批量添加" "1300" "500" "/product/page/tabledemo/product-demand-addlist.pagelet" "ml-5")&nbsp;批量添加#end
+					#@iconOperations("#myModal" "icon-plus" "提需求" "1000" "400" "/product/page/tabledemo/product-demand-add.pagelet" "ml-5")&nbsp;提需求#end
+				</span>
+				#div(divClass="clearfix")
+				#include("/product/page/event/mulsearch-demand.page")
+			#end
+			##operationbar end
+
+				#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 		#@toggleLeft({"class":"aclass"})
-			#@settoggleLeftTitle()
-				网站建设一期
+		#@settoggleLeftTitle()
+				禅道测试
 			#end
 			#@settoggleLeftBody()
-				#@OlTopList()
-				    #topItem(1 "#" "最新动态列表")
-				    #normalLiItems(2 "#" "最新动态列表" "" "green")
-				    #normalLiItems(3 "#" "最新动态列表" "" "darkGreen")
-				    #normalLiItems(4 "#" "最新动态列表" "" "grey")
-				    #normalLiItems(5 "#" "最新动态列表")
-				#end
-			#end
+				  <ul class="treeList">
+                    <li id="listContent" style="display:none; position:absolute;left:74px;">
+                        <ul id="alternative" class="ztree"
+                            style="width:126px;min-height:160px;max-height:300px;"></ul>
+                    </li>
+                </ul>
+            <ul id="treeDrag" class="ztree"></ul>
+	<div style="float:right"><a href="#"> 维护模块</a>	<a href="#"> 修正数据</a></div>
 			
-			
+			#end	
 		#end
 		
 		
@@ -74,13 +115,17 @@
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})姓名#end
-						#@tinyTh({"class":"","rel":"sortname"})城市#end
-						#@tinyTh({"class":"","rel":"sortname"})办公室#end
-						#@tinyTh({"class":"sorting","rel":"sortname","style":"color:#f00"})年龄#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})就职日期#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})薪资#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})操作#end
+						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})ID#end
+						#@tinyTh({"class":"","rel":"sortname"})P#end
+						#@tinyTh({"class":"","rel":"sortname"})需求名称#end
+						#@tinyTh({"class":"","rel":"sortname"})计划#end
+						#@tinyTh({"class":"","rel":"sortname"})来源#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})创建#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})指派#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})预计#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})状态#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})阶段#end
+						#@tinyTh({"class":"","rel":"sortname"})操作#end
 					#end
 				#end
 			#end
@@ -103,6 +148,254 @@
 		#end
 	#end
 #end
+				
 		#end
 
+<<<<<<< HEAD
 		
+		
+		<script type="text/javascript">
+    <!--
+    var setting = {
+        view: {
+            addHoverDom: addHoverDom,
+            removeHoverDom: removeHoverDom,
+            selectedMulti: false
+        },
+        edit: {
+            enable: true,
+            editNameSelectAll: true,
+
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            beforeDrag: beforeDrag,
+            beforeEditName: beforeEditName,
+            beforeRemove: beforeRemove,
+            beforeRename: beforeRename,
+            onRemove: onRemove,
+            onRename: onRename
+        }
+    };
+    var treeNodes = [
+        {id: 1, pId: 0, name: "前端", open: true},
+        {id: 11, pId: 1, name: "前端子模块"},
+        {id: 2, pId: 0, name: "后台", open: true},
+        {id: 21, pId: 2, name: "后天子模块1"},
+        {id: 22, pId: 2, name: "后台子模块2"},
+        {id: 3, pId: 0, name: "维护", open: true, drag: false},
+        {id: 31, pId: 3, name: "维护子模块1", drag: false},
+        {id: 32, pId: 3, name: "维护子模块2", drag: false},
+        {id: 33, pId: 3, name: "维护子模块3", drag: false}
+    ];
+
+    var log, className = "dark";
+    function beforeDrag(treeId, treeNodes) {
+        return false;
+    }
+    function beforeEditName(treeId, treeNode) {
+        className = (className === "dark" ? "" : "dark");
+        showLog("[ " + getTime() + " beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+        var zTree = $.fn.zTree.getZTreeObj("treeDrag");
+        zTree.selectNode(treeNode);
+        return confirm("进入节点 -- " + treeNode.name + " 的编辑状态吗？");
+    }
+    function beforeRemove(treeId, treeNode) {
+        className = (className === "dark" ? "" : "dark");
+        showLog("[ " + getTime() + " beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+        var zTree = $.fn.zTree.getZTreeObj("treeDrag");
+        zTree.selectNode(treeNode);
+        return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+    }
+    function onRemove(e, treeId, treeNode) {
+        showLog("[ " + getTime() + " onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+    }
+    function beforeRename(treeId, treeNode, newName, isCancel) {
+        className = (className === "dark" ? "" : "dark");
+        showLog((isCancel ? "<span style='color:red'>" : "") + "[ " + getTime() + " beforeRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>" : ""));
+        if (newName.length == 0) {
+            alert("节点名称不能为空.");
+            var zTree = $.fn.zTree.getZTreeObj("treeDrag");
+            setTimeout(function () {
+                zTree.editName(treeNode)
+            }, 10);
+            return false;
+        }
+        return true;
+    }
+    function onRename(e, treeId, treeNode, isCancel) {
+        showLog((isCancel ? "<span style='color:red'>" : "") + "[ " + getTime() + " onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>" : ""));
+    }
+    function showRemoveBtn(treeId, treeNode) {
+        return !treeNode.isFirstNode;
+    }
+    function showRenameBtn(treeId, treeNode) {
+        return !treeNode.isLastNode;
+    }
+    function showLog(str) {
+        if (!log) log = $("#log");
+        log.append("<li class='" + className + "'>" + str + "</li>");
+        if (log.children("li").length > 8) {
+            log.get(0).removeChild(log.children("li")[0]);
+        }
+    }
+    function getTime() {
+        var now = new Date(),
+                h = now.getHours(),
+                m = now.getMinutes(),
+                s = now.getSeconds(),
+                ms = now.getMilliseconds();
+        return (h + ":" + m + ":" + s + " " + ms);
+    }
+
+    var newCount = 1;
+    function addHoverDom(treeId, treeNode) {
+        var sObj = $("#" + treeNode.tId + "_span");
+        if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
+        var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+                + "' title='add node' onfocus='this.blur();'></span>";
+        sObj.after(addStr);
+        var btn = $("#addBtn_" + treeNode.tId);
+        if (btn) btn.bind("click", function () {
+            var zTree = $.fn.zTree.getZTreeObj("treeDrag");
+            zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: "new node" + (newCount++)});
+            return false;
+        });
+    }
+    ;
+    function removeHoverDom(treeId, treeNode) {
+        $("#addBtn_" + treeNode.tId).unbind().remove();
+    }
+    ;
+    function selectAll() {
+        var zTree = $.fn.zTree.getZTreeObj("treeDrag");
+        zTree.setting.edit.editNameSelectAll = $("#selectAll").attr("checked");
+    }
+
+    $(document).ready(function () {
+        $.fn.zTree.init($("#treeDrag"), setting);
+        $("#selectAll").bind("click", selectAll);
+    });
+    //-->
+
+    function dropPrev(treeId, nodes, targetNode) {
+        var pNode = targetNode.getParentNode();
+        if (pNode && pNode.dropInner === false) {
+            return false;
+        } else {
+            for (var i = 0, l = curDragNodes.length; i < l; i++) {
+                var curPNode = curDragNodes[i].getParentNode();
+                if (curPNode && curPNode !== targetNode.getParentNode() && curPNode.childOuter === false) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    function dropInner(treeId, nodes, targetNode) {
+        if (targetNode && targetNode.dropInner === false) {
+            return false;
+        } else {
+            for (var i = 0, l = curDragNodes.length; i < l; i++) {
+                if (!targetNode && curDragNodes[i].dropRoot === false) {
+                    return false;
+                } else if (curDragNodes[i].parentTId && curDragNodes[i].getParentNode() !== targetNode && curDragNodes[i].getParentNode().childOuter === false) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    function dropNext(treeId, nodes, targetNode) {
+        var pNode = targetNode.getParentNode();
+        if (pNode && pNode.dropInner === false) {
+            return false;
+        } else {
+            for (var i = 0, l = curDragNodes.length; i < l; i++) {
+                var curPNode = curDragNodes[i].getParentNode();
+                if (curPNode && curPNode !== targetNode.getParentNode() && curPNode.childOuter === false) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    var log, className = "dark", curDragNodes, autoExpandNode;
+    function beforeDrag(treeId, treeNodes) {
+        className = (className === "dark" ? "" : "dark");
+        showLog("[ " + getTime() + " beforeDrag ]&nbsp;&nbsp;&nbsp;&nbsp; drag: " + treeNodes.length + " nodes.");
+        for (var i = 0, l = treeNodes.length; i < l; i++) {
+            if (treeNodes[i].drag === false) {
+                curDragNodes = null;
+                return false;
+            } else if (treeNodes[i].parentTId && treeNodes[i].getParentNode().childDrag === false) {
+                curDragNodes = null;
+                return false;
+            }
+        }
+        curDragNodes = treeNodes;
+        return true;
+    }
+    function beforeDragOpen(treeId, treeNode) {
+        autoExpandNode = treeNode;
+        return true;
+    }
+    function beforeDrop(treeId, treeNodes, targetNode, moveType, isCopy) {
+        className = (className === "dark" ? "" : "dark");
+        showLog("[ " + getTime() + " beforeDrop ]&nbsp;&nbsp;&nbsp;&nbsp; moveType:" + moveType);
+        showLog("target: " + (targetNode ? targetNode.name : "root") + "  -- is " + (isCopy == null ? "cancel" : isCopy ? "copy" : "move"));
+        return true;
+    }
+    function onDrag(event, treeId, treeNodes) {
+        className = (className === "dark" ? "" : "dark");
+        showLog("[ " + getTime() + " onDrag ]&nbsp;&nbsp;&nbsp;&nbsp; drag: " + treeNodes.length + " nodes.");
+    }
+    function onDrop(event, treeId, treeNodes, targetNode, moveType, isCopy) {
+        className = (className === "dark" ? "" : "dark");
+        showLog("[ " + getTime() + " onDrop ]&nbsp;&nbsp;&nbsp;&nbsp; moveType:" + moveType);
+        showLog("target: " + (targetNode ? targetNode.name : "root") + "  -- is " + (isCopy == null ? "cancel" : isCopy ? "copy" : "move"))
+    }
+    function onExpand(event, treeId, treeNode) {
+        if (treeNode === autoExpandNode) {
+            className = (className === "dark" ? "" : "dark");
+            showLog("[ " + getTime() + " onExpand ]&nbsp;&nbsp;&nbsp;&nbsp;" + treeNode.name);
+        }
+    }
+
+    function showLog(str) {
+        if (!log) log = $("#log");
+        log.append("<li class='" + className + "'>" + str + "</li>");
+        if (log.children("li").length > 8) {
+            log.get(0).removeChild(log.children("li")[0]);
+        }
+    }
+    function getTime() {
+        var now = new Date(),
+                h = now.getHours(),
+                m = now.getMinutes(),
+                s = now.getSeconds(),
+                ms = now.getMilliseconds();
+        return (h + ":" + m + ":" + s + " " + ms);
+    }
+
+    function setTrigger() {
+        var zTree = $.fn.zTree.getZTreeObj("treeDrag");
+        zTree.setting.edit.drag.autoExpandTrigger = $("#callbackTrigger").attr("checked");
+    }
+
+    $(document).ready(function () {
+        $.fn.zTree.init($("#treeDrag"), setting, treeNodes);
+        $("#callbackTrigger").bind("change", {}, setTrigger);
+    });
+    //-->
+</script>
+=======
+
+
+		
+>>>>>>> 4727f511697ca51f31cbca06232b6d0f46060bd0

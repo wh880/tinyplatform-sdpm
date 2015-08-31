@@ -1,0 +1,59 @@
+#!set(activeTitle="自定义文档库1",activeMenuId=currentPageId)
+<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
+ ##   #include("/page/event/common.page")
+      #include("${TINY_CONTEXT_PATH}/docu/common.page")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+		#@div(divClass="dropdownBox")
+	##		#include("/page/project/dropdownMenu.page")
+	        #include("${TINY_CONTEXT_PATH}/docu/dropdownMenu.page")
+		#end
+		#@tabHead()
+
+        ##    #@tabHeadCol()文档#end
+##    #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/page/tabledemo/document03-edit.pagelet" "ml-5")编辑 #end
+      #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "${TINY_CONTEXT_PATH}/docu/document03-edit.pagelet" "ml-5")编辑 #end
+		##	#@tabHeadCol()编辑#end
+		##	#@tabHeadCol()分类#end
+		##	#@tabHeadCol()删除#end
+##      #@iconOperations("#myModal" "" "指派" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")删除 #end
+        #@iconOperations("#myModal" "" "指派" "865" "448" "${TINY_CONTEXT_PATH}/docu/user-add.pagelet" "ml-5")删除 #end
+		#end
+		<span class="r" style="position:relative;top:-28px;height:0">
+##			<a href="${TINY_CONTEXT_PATH}/page/project/adddocumentlib.page">#buttonIcon(iconClass="icon-globe")添加文档库</a>&nbsp;
+            <a href="${TINY_CONTEXT_PATH}/docu/adddocumentlib.page">#buttonIcon(iconClass="icon-globe")添加文档库</a>&nbsp;
+			##<a href="#">#buttonIcon(iconClass="icon-plus-sign")添加产品</a>
+		</span>
+		#@tabBodyCol("ptop-5")
+			##operationbar start
+			#@div(divClass="operationbar")
+				<span class="f">
+					##<a href="#" class="active_btn">未关闭</a>
+					##<a href="#">全部需求</a>
+					##<a href="#">指派给我</a>
+					##<a href="#">由我创建</a>
+					##<a href="#">由我评审</a>
+					##<a href="#">由我关闭</a>
+					##<a href="#">草稿</a>
+					##<a href="#">激活</a>
+					##<a href="#">已变更</a>
+					##<a href="#">待关闭</a>
+					<a href="#">按模块浏览</a>
+					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
+				</span>
+				<span class="r">
+					##<a href="#">#buttonIcon(iconClass="icon-upload-alt")导入</a>&nbsp;
+					##<a href="#">#buttonIcon(iconClass="icon-download-alt")导出</a>&nbsp;
+					##<a href="#">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
+					##<a href="#">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
+##					<a href="${TINY_CONTEXT_PATH}/page/project/adddocument03.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
+                    <a href="${TINY_CONTEXT_PATH}/docu/adddocument03.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+##			#include("/page/project/treeNew.page")
+            #include("${TINY_CONTEXT_PATH}/docu/treeNew.page")
+		#end
+	#end
+#end

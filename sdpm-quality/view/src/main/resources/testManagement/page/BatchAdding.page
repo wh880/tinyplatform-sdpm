@@ -81,21 +81,25 @@
               #@tr()
                 #@td()${i}#end
                 #@td()
-                    #@selectRadiusBox("select_boxes")
-                        #@select(selectName="demo2" selectClass="select")
-                        #@optionSelected("")/#end
-                        #@optionItem("1")同上#end
+                    #@formControlDiv()
+                        #@tinySelect("lang" "zh" {"class":"select2"})
+                            #@tinyOptionItem("zh")/#end
+                            #@tinyOptionItem("zh")加行数据#end
+                            #@tinyOptionItem("en")/同上#end
                         #end
+                        #@validateDiv("col-2")#end
                     #end
                 #end
-                #@td()
-                    #@selectRadiusBox("select_boxes")
-                        #@select(selectName="demo2" selectClass="select")
-                            #@optionSelected("")/#end
-                            #@optionItem("1")同上#end
-                        #end
-                    #end
-                #end
+                  #@td()
+                      #@formControlDiv()
+                          #@tinySelect("lang" "zh" {"class":"select2"})
+                              #@tinyOptionItem("zh")/#end
+                              #@tinyOptionItem("zh")加行数据#end
+                              #@tinyOptionItem("en")/同上#end
+                          #end
+                          #@validateDiv("col-2")#end
+                      #end
+                  #end
 
                 #@td()#inputRadiusDefaultText("inputwidth")#end
                 #@td()#inputRadiusDefaultText("inputwidth")#end
@@ -189,3 +193,6 @@
 
 #end
 #end
+<script type="text/javascript">
+    $(".select2").select2();
+</script>

@@ -1,23 +1,23 @@
 #!set(activeTitle="自定义文档库2",activeMenuId=currentPageId)
 <style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
 ##    #include("/page/event/common.page")
-      #include("${TINY_CONTEXT_PATH}/docu/common.page")
+      #include("/docu/common.page")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
 		#@div(divClass="dropdownBox")
 ##			#include("/page/project/dropdownMenu.page")
-            #include("${TINY_CONTEXT_PATH}/docu/dropdownMenu.page")
+            #include("/docu/dropdownMenu.page")
 		#end
 		#@tabHead()
 
         ##    #@tabHeadCol()文档#end
 ##    #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/page/tabledemo/document04-edit.pagelet" "ml-5")编辑 #end
-      #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "${TINY_CONTEXT_PATH}/docu/document04-edit.pagelet" "ml-5")编辑 #end
+      #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/docu/document04-edit.pagelet" "ml-5")编辑 #end
 		##	#@tabHeadCol()编辑#end
 		##	#@tabHeadCol()分类#end
 		##	#@tabHeadCol()删除#end
 ##      #@iconOperations("#myModal" "" "指派" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")删除 #end
-          #@iconOperations("#myModal" "" "指派" "865" "448" "${TINY_CONTEXT_PATH}/docu/user-add.pagelet" "ml-5")删除 #end
+          #@iconOperations("#myModal" "" "指派" "865" "448" "/docu/user-add.pagelet" "ml-5")删除 #end
 #end
 		<span class="r" style="position:relative;top:-28px;height:0">
 ##			<a href="${TINY_CONTEXT_PATH}/page/project/adddocumentlib.page">#buttonIcon(iconClass="icon-globe")添加文档库</a>&nbsp;
@@ -53,7 +53,7 @@
 			#end
 			##operationbar end
 ##			#include("/page/project/treeNew.page")
-            #include("${TINY_CONTEXT_PATH}/docu/treeNew.page")
+            #include("/docu/treeNew.page")
 		#end
 	#end
 #end

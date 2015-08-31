@@ -235,7 +235,7 @@
 	#@div("content-wrapper")
 
 		#@contentWrapper()
-				${pagePostionTitle}
+				${pagePostionTitle}${sonitem}
 		#end
 		<!-- 主体 start -->
 		#@rowFrame()
