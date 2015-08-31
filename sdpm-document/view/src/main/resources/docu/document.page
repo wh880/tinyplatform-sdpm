@@ -1,6 +1,7 @@
 #!set(activeTitle="产品文档库",activeMenuId=currentPageId)
 <style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
-#include("${TINY_CONTEXT_PATH}/docu/common.page")
+##    #include("${TINY_CONTEXT_PATH}/docu/common.page")
+      #include("/docu/common.page")
 #*     #@div()
 	              #@div(divClass="tabLayout")
 		          #@div(divClass="tabBar cl")
