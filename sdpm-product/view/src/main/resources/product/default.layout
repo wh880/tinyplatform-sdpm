@@ -45,9 +45,18 @@
 			<!--新增产品-->
 			#@aModal("#myModal" "新增产品" "900" "500" "btn-class" "/product/page/tabledemo/addProduct.pagelet")#buttonIcon(iconClass="icon-plus-sign")添加产品 #end
 		</span>
-		
+		<hr/>
 			#pageContent
 	#end
+#end
+
+#@dialog("myModal")
+				#@dialogHeader()对话框标题#end
+				#@dialogBody()<p>对话框内容…</p>#end
+				#@dialogFooter()
+					#@buttonEnsure()确定#end
+					#@buttonCancel()关闭#end
+				#end
 #end
 
 <script type="text/javascript">
@@ -66,3 +75,4 @@ $(function(){
       })
     })
 </script>
+
