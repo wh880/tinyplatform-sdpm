@@ -1,7 +1,5 @@
-#!set(activeTitle="项目管理",activeMenuId=currentPageId)
 #import("/org/tinygroup/button/components/button_smart.component")
-#import("/org/tinygroup/UEditor/component/ueditor.component")
-#include("/page/event/common.page")
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
 <style>
 .tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
@@ -21,27 +19,30 @@
 }
 h3 {line-height: 1.2;}
 </style>
+#*<style>
+##.tabLayout .tabBar span a{color:#333}
+##.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.operationbar a{padding:2px 3px;display:inline-block;margin-right:0;border-radius:3px;}
+.operationbar a:hover{background:#ddd;color:#333;}
+.operationbar .active_btn:hover{background:none;}
+.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+.open>#downMenuSty{min-width:70px}
+</style>*#
+##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
+#include("/page/event/common.page")
+#set(name="rw")
 #@div()
-	#@div(divClass="tabLayout")
-		#@div(divClass="tabBar cl")
-			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/project/project.page">任务</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/proxq.page">需求</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probug.page">Bug</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probb.page">版本</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procs.page">测试</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/protd.page">团队</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prorz.page">日志</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prodt.page">动态</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prowd.page">文档</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procp.page">产品</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">概况</a></span>
-			#@divRightAlign()		
-				<a href="#">#buttonIcon(iconClass="icon-list")所有项目</a>
-				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page">#buttonIcon(iconClass="icon-plus")添加项目</a>
-			#end		
-		#end
-	#end	
-
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/page/outpage/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/page/outpage/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="#" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+			#end				
+			#@tabBodyCol("ptop-5")
 			##operationbar start
 			#@div(divClass="operationbar")
 				<span class="f">
@@ -232,4 +233,6 @@ h3 {line-height: 1.2;}
 			#end
 			##operationbar end
 			#include("/page/project/project-tast-togglebox.page")
+#end
+#end
 #end

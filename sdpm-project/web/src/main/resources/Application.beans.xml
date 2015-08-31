@@ -4,9 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-   <bean id="infoFunction" scope="singleton" class="function.InfoFunction" />
    
-   <bean id="infoUtil" scope="singleton" class="function.TypeInfoUtil" />
 
   <bean id="fileResolver" scope="singleton"
 		class="org.tinygroup.fileresolver.impl.FileResolverImpl">
