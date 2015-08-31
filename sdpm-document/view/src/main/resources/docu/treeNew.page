@@ -24,8 +24,8 @@
 				##<a href="#" class="btn btn-info btn-sm">历史</a>
 				##<a href="#" class="btn btn-warning btn-sm">相关</a>
 			#end
-			 ##  #@tinyTableContent("../../data/tabledata.pagelet") ##取数据地址 总数据
-			#@tinyTableContent("../../data/tabledata.pagelet") ##取数据地址 总数据
+			##   #@tinyTableContent("../../data/tabledata.pagelet") ##取数据地址 总数据
+			     #@tinyTableContent("tabledata.pagelet") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

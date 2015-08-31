@@ -25,7 +25,7 @@
 	##	#iconOperations("#myModal" "icon-ok-sign" "完成" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
 	##	#iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
 	##	#iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/page/tabledemo/table-edit.pagelet" "ml-5")
-	    #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/page/project/table-edit.pagelet" "ml-5")
+	    #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/docu/table-edit.pagelet" "ml-5")
 		#iconOperation(" icon-remove" "删除" "ml-5")
 	#end
 #end

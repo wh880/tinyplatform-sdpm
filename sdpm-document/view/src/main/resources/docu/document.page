@@ -27,17 +27,17 @@
  #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
 		#@div(divClass="dropdownBox")
-			#include("${TINY_CONTEXT_PATH}/docu/dropdownMenu.page")
+			#include("/docu/dropdownMenu.page")
 		#end
 		#@tabHead()
 
           ##    #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/page/project/document.page" "ml-5")文档 #end
           ##    #@tabHeadCol()文档#end
-#@iconOperations("#myModal" "" "编辑文档库" "865" "448" "${TINY_CONTEXT_PATH}/docu/document01-edit.pagelet" "ml-5")编辑 #end
+#@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/docu/document01-edit.pagelet" "ml-5")编辑 #end
         ##	#@tabHeadCol()编辑#end
 		##	#@tabHeadCol()分类#end
 		##	#@tabHeadCol()删除#end
-#@iconOperations("#myModal" "" "指派" "865" "448" "${TINY_CONTEXT_PATH}/docu/user-add.pagelet" "ml-5")删除 #end
+#@iconOperations("#myModal" "" "指派" "865" "448" "/docu/user-add.pagelet" "ml-5")删除 #end
 #end
 
 
@@ -72,7 +72,7 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			#include("${TINY_CONTEXT_PATH}/docu/treeNew.page")
+			#include("/docu/treeNew.page")
 		#end
 	#end
 #end

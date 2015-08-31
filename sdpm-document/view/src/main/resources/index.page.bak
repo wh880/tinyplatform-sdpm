@@ -7,10 +7,10 @@
 	        <small>您有32条消息和6个待处理事项</small>
 			 #@OlTopList()
 			    #topItem(1 "#" "最新动态列表" "18:12")
-			    #normalLiItems(2 "#" "最新动态列表" "14:12" "green")
-			    #normalLiItems(3 "#" "最新动态列表" "13:12" "darkGreen")
-			    #normalLiItems(4 "#" "最新动态列表" "11:12" "grey")
-			    #normalLiItems(5 "#" "最新动态列表" "09:12")
+			    #normalLiItem(2 "#" "最新动态列表" "14:12" "green")
+			    #normalLiItem(3 "#" "最新动态列表" "13:12" "darkGreen")
+			    #normalLiItem(4 "#" "最新动态列表" "11:12" "grey")
+			    #normalLiItem(5 "#" "最新动态列表" "09:12")
 			#end
 		#end
     #end

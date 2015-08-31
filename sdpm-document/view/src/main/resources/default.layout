@@ -195,7 +195,7 @@
 					#@navItemDemo("4.2" "javascript:void(0);" "icon-list")用例#end
 					#@navItemDemo("4.3" "javascript:void(0);" "icon-list")版本#end
 				#end*#
-				#TnavItem("5" "文档管理" "/page/project/document.page" "icon-paste")
+				#TnavItem("5" "文档管理" "/docu/document.page" "icon-paste")
 #*				#@navDropDownMenu("5" "文档管理" "icon-paste" )
 					#@navItemDemo("5.1" "javascript:void(0);" "icon-list")文档#end
 					#@navItemDemo("5.2" "javascript:void(0);" "icon-list")编辑#end
