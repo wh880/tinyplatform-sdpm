@@ -56,11 +56,11 @@
 		<table>
 			<tr>
 			 	<td style="float:left;margin-bottom:5px"> #fileWithInput("file-0")</td>
-			 	<td style="float:left;width:422px">#inputRadiusText(inputPlaceHolder="标题：")</td>
+			 	<td style="float:left;width:385px">#inputRadiusText(inputPlaceHolder="标题：")</td>
 			</tr>
 			<tr>
 			 	<td style="float:left"> #fileWithInput("file-1")</td>
-			 	<td style="float:left;width:422px">#inputRadiusText(inputPlaceHolder="标题：")</td>
+			 	<td style="float:left;width:385px">#inputRadiusText(inputPlaceHolder="标题：")</td>
 			</tr>
 		</table>
 		<center style="margin-top:5px">
@@ -219,9 +219,8 @@
 			<tr>
 				<td style="float:right;padding:3px 10px;font-size:15px">总耗时</td>
 				<td>0
-				#@simpleModal("myModal" "新增日志")#end
-				
-				 #@iconOperations("#myModal" "icon-time" "新增日志" "865" "200"
+				#@simpleModal("myModal" "新增日志")#end				
+				 #@iconOperations("#myModal" "icon-time" "新增日志" "900" "400"
 					 "/page/outpage/haoshi.pagelet" "ml-5")#end
 				</td>
 			</tr>
