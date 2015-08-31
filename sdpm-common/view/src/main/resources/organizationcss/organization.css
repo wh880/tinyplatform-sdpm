@@ -9,3 +9,4 @@
 .barBoxs a, .barBoxs a:link {color: #333;margin-right: 3px;display: inline-block}
 .barBoxs a:hover {  color: #f90  }
 form .tinyFormsty {  padding-top: 1px;  line-height: 29px}
+.activeSearch{float: left;margin-top: 5px;margin-left: 5px;}

@@ -31,7 +31,7 @@
             #@tinyForm("thisform" "" "" {"class":"test"})
             <span class="tinyFormsty">
                 #@formControlDiv("col-1")
-                    #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
+                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
                         #@tinyOptionItem("zh")中国#end
                         #@tinyOptionItem("en")英国#end
                         #@tinyOptionItem("ta")泰国#end
