@@ -31,6 +31,13 @@
 			#tinyInput("submit" "submitbtn" " 保存" {"class":"btn btn-primary"})
 		#end
 	#end
+	
+		#@div(divClass="infoContent")
+	        <p class="titleName">历史记录</p>
+	       	#include("/product/page/tabledemo/recordList222.page")
+		#end
+	
+	
 
 #end
 <script type="text/javascript">

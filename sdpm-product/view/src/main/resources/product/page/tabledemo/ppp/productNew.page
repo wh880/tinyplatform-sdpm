@@ -1,0 +1,54 @@
+#!set(activeTitle="产品管理",activeMenuId=currentPageId)
+#include("/product/page/event/common.page")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+		#@div(divClass="dropdownBox")
+			#include("/product/page/tabledemo/ppp/dropdownMenu.page")
+		#end
+		#@tabHead()
+			#@aHeadCol("#" "Current")需求#end
+			#@aHeadCol()动态#end
+			#@aHeadCol()计划#end
+			#@aHeadCol()发布#end
+			#@aHeadCol()路线图#end
+			#@aHeadCol()文档#end
+			#@aHeadCol()项目#end
+			#@aHeadCol()模块#end
+			#@aHeadCol()概况#end
+		#end
+		<span class="r" style="position:relative;top:-28px;height:0">
+			<a href="#">#buttonIcon(iconClass="icon-globe")所有产品</a>&nbsp;
+			<a href="#">#buttonIcon(iconClass="icon-plus-sign")添加产品</a>
+		</span>
+		#@tabBodyCol("ptop-5")
+			##operationbar start
+			#@div(divClass="operationbar")
+				<span class="f">
+					<a href="#" class="active_btn">未关闭</a>
+					<a href="#">全部需求</a>
+					<a href="#">指派给我</a>
+					<a href="#">由我创建</a>
+					<a href="#">由我评审</a>
+					<a href="#">由我关闭</a>
+					<a href="#">草稿</a>
+					<a href="#">激活</a>
+					<a href="#">已变更</a>
+					<a href="#">待关闭</a>
+					<a href="#">已关闭</a>
+					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+				</span>
+				<span class="r">
+					<a href="#">#buttonIcon(iconClass="icon-upload-alt")导入</a>&nbsp;
+					<a href="#">#buttonIcon(iconClass="icon-download-alt")导出</a>&nbsp;
+					<a href="#">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
+					<a href="#">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
+					<a href="#">#buttonIcon(iconClass="icon-plus")提需求</a>
+				</span>
+				#div(divClass="clearfix")
+				#include("/product/page/tabledemo/ppp/mulsearch.page")
+			#end
+			##operationbar end
+			#include("/product/page/tabledemo/ppp/treeNew.page")
+		#end
+	#end
+#end

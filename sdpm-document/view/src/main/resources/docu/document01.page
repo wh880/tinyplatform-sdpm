@@ -19,13 +19,26 @@
 		##	#@tabHeadCol()分类#end
 		##	#@tabHeadCol()删除#end
 ##    #@iconOperations("#myModal" "" "指派" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")删除 #end
-      #@iconOperations("#myModal" "" "指派" "865" "448" "/docu/user-add.pagelet" "ml-5")删除 #end
+##      #@iconOperations("#myModal" "" "指派" "865" "448" "/docu/user-add.pagelet" "ml-5")删除 #end
+         #@iconOperations("#myModal" "" "删除" "865" "448" "" "ml-5")删除 #end
 #end
 
 <span class="r" style="position:relative;top:-28px;height:0">
 		##	<a href="${TINY_CONTEXT_PATH}/page/project/adddocumentlib.page">#buttonIcon(iconClass="icon-globe")添加文档库</a>&nbsp;
-		    <a href="${TINY_CONTEXT_PATH}/docu/adddocumentlib.page">#buttonIcon(iconClass="icon-globe")添加文档库</a>&nbsp;
-			##<a href="#">#buttonIcon(iconClass="icon-plus-sign")添加产品</a>
+		##    <a href="${TINY_CONTEXT_PATH}/docu/adddocumentlib.page">#buttonIcon(iconClass="icon-globe")添加文档库</a>&nbsp;
+		       ##添加文档库
+                        			#@aModal("#myModal" "创建文档库" "600" "382" "" "/docu/adddocumentlib.pagelet")
+                        			#simpleI("icon-plus-sign")添加文档库#end
+                                        #@dialog("myModal")
+                                    	#@dialogHeader()对话框标题#end
+                                    	#@dialogBody()<p>对话框内容…</p>#end
+                                    	#@dialogFooter()
+                                    		#@buttonEnsure()确定#end
+                                    	    #@buttonCancel()关闭#end
+                                      	#end
+                                    #end
+               ##添加文档库
+        ##<a href="#">#buttonIcon(iconClass="icon-plus-sign")添加产品</a>
 		</span>
 		#@tabBodyCol("ptop-5")
 			##operationbar start
@@ -59,7 +72,7 @@
 
 			##operationbar end
 		##	#include("/page/project/treeNew.page")
-		#include("/docu/treeNew.page")
+		#include("/docu/treeNew01.page")
 		#end
 	#end
 #end

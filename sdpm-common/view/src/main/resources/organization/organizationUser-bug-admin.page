@@ -12,16 +12,12 @@
         background: #f9fafe;
         padding: 6px 5px 6px 10px;
     }
-    .barBox{padding-top:5px;float:left}
-    .barBox a,.barBox a:link{color:#333;margin-right:3px;display:inline-block}
-    .barBox a:hover{color:#f90}
 
 </style>
 #@div()
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
-        <span class="Current"><a
-                href="${TINY_CONTEXT_PATH}/organization/organizationUser.page?currentPageId=7">用户</a></span>
+        <span class="Current"><a href="${TINY_CONTEXT_PATH}/organization/organizationUser.page?currentPageId=7">用户</a></span>
         <span><a href="${TINY_CONTEXT_PATH}/organization/organizationGtasks.page?currentPageId=7">待办</a></span>
         <span><a href="${TINY_CONTEXT_PATH}/organization/organizationLog.page?currentPageId=7">日志</a></span>
         <span><a href="${TINY_CONTEXT_PATH}/organization/organizationActive.page?currentPageId=7">动态</a></span>
@@ -30,34 +26,49 @@
         <span><a href="${TINY_CONTEXT_PATH}/organization/organizationCompany.page?currentPageId=7">公司</a></span>
         #end
         #@div(divClass="operationbar")
-        <span style="padding-top:5px;float:left">
+            #@tinyForm("thisform" "" "" {"class":"test"})
+            <span class="tinyFormsty">
+                #@formControlDiv("col-1")
+                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                        #@tinyOptionItem("zh")中国#end
+                        #@tinyOptionItem("en")英国#end
+                        #@tinyOptionItem("ta")泰国#end
+                    #end
+                #end
+                <span>
+                    &nbsp;&gt;
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-todo.page">待办</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-story-admin.page">需求</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-task-admin.page">任务</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-bug-admin.page" class="active_btn">缺陷</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-testtask-admin.page">测试</a>
+                   <a href="${TINY_CONTEXT_PATH}/organization/organizationUser-active-admin.page">动态</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-log-admin.page">日志</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-project-admin.page">项目</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-profile-admin.page">档案</a>
+                </span>
         </span>
-        <span style="padding-top:5px;float:right">
-            #@aModal(editpageModal "导出" "600" "120" ""  editpagePath)
-                #@simpleI(" icon-chevron-down")导出#end
+            <span style="padding-top:5px;float:right">
+                #@aModal(editpageModal "导出" "600" "120" ""  editpagePath)
+                    #@simpleI(" icon-chevron-down")导出#end
+                #end
+            </span>
+                #div(divClass="clearfix")
             #end
-        </span>
-            #div(divClass="clearfix")
-        #end
 
-    <span class="barBox">
-          <a href="#">日历日志</a>
-					<a href="#" class="active_btn">指派给他</a>
-					<a href="#">由他创建</a>
-					<a href="#">由他解决</a>
-					<a href="#">由他取消</a>
+        <span class="barBoxs">
+          <a href="organizationUser-logcalendar-admin.page">日历日志</a>
+					<a href="#" class="active_btn">今天</a>
+					<a href="#">昨天</a>
+					<a href="#">本周</a>
+					<a href="#">上周</a>
+					<a href="#">本月</a>
+					<a href="#">上月</a>
+					<a href="#">所有</a>
         </span>
+        #end
     #end
 #end
-
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([8,10,20,50,100,200])

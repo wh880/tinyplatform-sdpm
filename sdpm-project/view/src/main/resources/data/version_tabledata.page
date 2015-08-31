@@ -24,9 +24,9 @@
 	 #@td()
 		
 		
-		#iconOperations("#myModal" "icon-ok-sign" "完成" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
-		#iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
-		#iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+		#iconOperations("#myModal" "icon-ok-sign" "完成" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")&nbsp
+		<a href="${TINY_CONTEXT_PATH}/page/outpage/probug.page" title="查看bug">#buttonIcon(iconClass="icon-eye-open")</a>&nbsp
+		<a href="${TINY_CONTEXT_PATH}/page/outpage/add_version.page" title="查看bug">#buttonIcon(iconClass="icon-pencil")</a>
 		#iconOperation(" icon-remove" "删除" "ml-5")
 	#end
 #end

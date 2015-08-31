@@ -18,6 +18,6 @@
 	#@td()23#end
 	#@td()8.0#end
 	#@td()161#end	
-	#@td()#buttonIcon(iconClass="icon-remove")#end
+	#@td()<a href="#" title="移除">#buttonIcon(iconClass="icon-remove")</a>#end
 #end
 #end

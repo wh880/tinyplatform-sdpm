@@ -51,17 +51,20 @@
 
 				#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 		#@toggleLeft({"class":"aclass"})
-			#@settoggleLeftTitle()
-				网站建设一期
+		#@settoggleLeftTitle()
+				禅道测试
 			#end
-			#@settoggleLeftBody()
-				#@OlTopList()
-				    #topItem(1 "#" "最新动态列表")
-				    #normalLiItems(2 "#" "最新动态列表" "" "green")
-				    #normalLiItems(3 "#" "最新动态列表" "" "darkGreen")
-				    #normalLiItems(4 "#" "最新动态列表" "" "grey")
-				    #normalLiItems(5 "#" "最新动态列表")
-				#end
+			
+			#@settoggleLeftBody("treeLeftbox")
+				<ul class="treeList">
+					<li id="listContent" style="display:none; position:absolute;left:74px;">
+						<ul id="alternative" class="ztree" style="width:126px;min-height:160px;max-height:300px;"></ul>
+					</li>
+				</ul>
+				<ul id="treeDrag" class="ztree"></ul>
+				<div style="float:right">
+					<a href="#"> 维护模块</a>	<a href="#"> 修正数据</a>
+				</div>
 			#end
 			
 			
@@ -115,13 +118,17 @@
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})姓名#end
-						#@tinyTh({"class":"","rel":"sortname"})城市#end
-						#@tinyTh({"class":"","rel":"sortname"})办公室#end
-						#@tinyTh({"class":"sorting","rel":"sortname","style":"color:#f00"})年龄#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})就职日期#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})薪资#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})操作#end
+						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})ID#end
+						#@tinyTh({"class":"","rel":"sortname"})P#end
+						#@tinyTh({"class":"","rel":"sortname"})需求名称#end
+						#@tinyTh({"class":"","rel":"sortname"})计划#end
+						#@tinyTh({"class":"","rel":"sortname"})来源#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})创建#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})指派#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})预计#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})状态#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})阶段#end
+						#@tinyTh({"class":"","rel":"sortname"})操作#end
 					#end
 				#end
 			#end
@@ -148,5 +155,4 @@
 		#end
 
 
-
-		
+#include("/product/page/event/mytree.page")

@@ -81,18 +81,20 @@
               #@tr()
                 #@td()${i}#end
                 #@td()
-                    #@formControlDiv("col-8")
+                    #@formControlDiv()
                         #@tinySelect("lang" "zh" {"class":"select2"})
                             #@tinyOptionItem("zh")/#end
+                            #@tinyOptionItem("zh")加行数据#end
                             #@tinyOptionItem("en")/同上#end
                         #end
                         #@validateDiv("col-2")#end
                     #end
                 #end
                   #@td()
-                      #@formControlDiv("col-8")
+                      #@formControlDiv()
                           #@tinySelect("lang" "zh" {"class":"select2"})
                               #@tinyOptionItem("zh")/#end
+                              #@tinyOptionItem("zh")加行数据#end
                               #@tinyOptionItem("en")/同上#end
                           #end
                           #@validateDiv("col-2")#end

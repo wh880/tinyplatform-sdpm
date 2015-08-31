@@ -26,7 +26,7 @@
 		#iconOperations("#myModal" "icon-time" "日志" "900" "448" "/page/outpage/note.pagelet" "ml-5")
 		#iconOperations("#myModal" "icon-ok-sign" "完成" "865" "448" "/page/outpage/task-finish.pagelet" "ml-5")
 		#iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
-		#iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+		<a href="${TINY_CONTEXT_PATH}/page/outpage/task_edit.page">#buttonIcon(iconClass="icon-pencil")</a>
 		##iconOperation(" icon-remove" "删除" "ml-5")
 	#end
 #end
