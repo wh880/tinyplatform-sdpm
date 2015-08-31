@@ -38,50 +38,50 @@
 
 
     #@table()
-        #@thead()
-            #@centerAlignTr()
-                #@th()#h3Title("公司信息")#end
-                #@th()
-                    #@aModal("#myModal" "编辑公司" "600" "400" "btn radius btn-primary size-L" "/organization/organizationUpdateCompany.pagelet")
+    #@thead()
+        #@centerAlignTr()
+            #@th()#h3Title("公司信息")#end
+            #@th()
+                #@aModal("#myModal" "编辑公司" "600" "400" "btn radius btn-primary size-L" "/organization/organizationUpdateCompany.pagelet")
 
-                        #@simpleI("icon-edit")编辑#end
+                    #@simpleI("icon-edit")编辑#end
 
-                    #end
-                    #@dialog("myModal")
-                        #@dialogHeader()公司#end
-                        #@dialogBody()<p></p>#end
-                    #end
                 #end
+                #@dialog("myModal")
+                    #@dialogHeader()公司#end
+                    #@dialogBody()<p></p>#end
+                #end
+            #end
 
-            #end
-        #end
-        #@tbody()
-            #@centerAlignTr()
-                #@th()公司名称#end
-            #end
-            #@centerAlignTr()
-                #@th()联系电话#end
-            #end
-            #@centerAlignTr()
-                #@th()传真#end
-            #end
-            #@centerAlignTr()
-                #@th()通讯地址#end
-            #end
-            #@centerAlignTr()
-                #@th()邮政编码#end
-            #end
-            #@centerAlignTr()
-                #@th()官网#end
-            #end
-            #@centerAlignTr()
-                #@th()内网#end
-            #end
-            #@centerAlignTr()
-                #@th()匿名登录#end
-            #end
         #end
     #end
+    #@tbody()
+        #@centerAlignTr()
+            #@th()公司名称#end
+        #end
+        #@centerAlignTr()
+            #@th()联系电话#end
+        #end
+        #@centerAlignTr()
+            #@th()传真#end
+        #end
+        #@centerAlignTr()
+            #@th()通讯地址#end
+        #end
+        #@centerAlignTr()
+            #@th()邮政编码#end
+        #end
+        #@centerAlignTr()
+            #@th()官网#end
+        #end
+        #@centerAlignTr()
+            #@th()内网#end
+        #end
+        #@centerAlignTr()
+            #@th()匿名登录#end
+        #end
+    #end
+#end
 
 
 #end
