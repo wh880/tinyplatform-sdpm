@@ -1,5 +1,5 @@
 #!set(activeTitle="产品文档库",activeMenuId=currentPageId)
-<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
+<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}.optionsBoxsty{margin-bottom:5px;display:inline-block;float:left}.barBtnsty a{border:#ddd 1px solid;border-radius:2px;background-image:linear-gradient(to bottom,#fff,#e6e6e6);color:#333; padding:5px 18px;display:inline-block}.barBtnsty a:hover{color:#f90}</style>
 ##    #include("${TINY_CONTEXT_PATH}/docu/common.page")
       #include("/docu/common.page")
 #*     #@div()
@@ -25,27 +25,26 @@
 
 
  #@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-		#@div(divClass="dropdownBox")
+	#@tabWithInit("tab_demo")
 			#include("/docu/dropdownMenu.page")
-		#end
-		#@tabHead()
-
+		##@tabHead()
+        #@span(spanClass="barBtnsty")
           ##    #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/page/project/document.page" "ml-5")文档 #end
           ##    #@tabHeadCol()文档#end
-#@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/docu/document01-edit.pagelet" "ml-5")编辑 #end
+#@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/docu/document01-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
         ##	#@tabHeadCol()编辑#end
 		##	#@tabHeadCol()分类#end
 		##	#@tabHeadCol()删除#end
  ##      #@iconOperations("#myModal" "" "删除" "865" "448" "/docu/user-add.pagelet" "ml-5")删除 #end
-        #@iconOperations("#myModal" "" "删除" "865" "448" "" "ml-5")删除 #end
-
-#end
-<span class="r" style="position:relative;top:-28px;height:0">
-       ##         			<a href="${TINY_CONTEXT_PATH}/docu/adddocumentlib.page">#buttonIcon(iconClass="icon-plus")添加文档库</a>&nbsp;
-       ##添加文档库
+        #@iconOperations("#myModal" "" "删除" "865" "448" "" "ml-5")<i class="icon-trash"></i>&nbsp;删除 #end
+    #end
+##end
+<span class="r" style="position:relative;height:0">
+##                			<a href="${TINY_CONTEXT_PATH}/docu/adddocumentlib.page">#buttonIcon(iconClass="icon-plus-sign")添加文档库</a>&nbsp;
+      ##添加文档库
                 			#@aModal("#myModal" "创建文档库" "600" "382" "" "/docu/adddocumentlib.pagelet")
-                			#simpleI("icon-plus-sign")添加文档库#end
+##               			    #simpleI("icon-plus-sign")添加文档库#end
+               			     #simpleI("icon-plus-sign")添加文档库#end
                                 #@dialog("myModal")
                             	#@dialogHeader()对话框标题#end
                             	#@dialogBody()<p>对话框内容…</p>#end

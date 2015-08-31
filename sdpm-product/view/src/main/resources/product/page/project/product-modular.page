@@ -1,25 +1,13 @@
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/table/components/table.component") 
 #import("/org/tinygroup/Smart-treeview/components/treeview_smart.component")
-#!set(linkName="modular")
+#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 #!set(linkName="modular",sonitem="<li>"+"模板"+"</li>")
 
-#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-<style>
-	.infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
-	.infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:13px;}
-	.infoContent ul li label{font-weight:normal; width:33%;font-size:12px;}
-	.infoContent ul li .text-overflow{display:inline-block; width:64%;vertical-align:top;font-size:12px;}
-	.infoContent ul li .text-overflow a{ color:#333;}
-	.infoContent ul li .text-overflow a:hover{color:#f90}
-	.infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}
-	.shrinkage .edui-Box{margin-left:6px;}
-	.shrinkage .edui-Box .titleNames{display:block;margin-bottom:6px;margin-left:8px;}
-</style>
 
-	
 
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP 带入
+
 	#@toggleLeft({"class":"aclass"})
 		#@settoggleLeftTitle()	#buttonIcon(iconClass="icon-cog")产品测试1::视图维护#end
 		#@settoggleLeftBody()
@@ -39,60 +27,51 @@
 	
 	
 	#@toggleRight()
-		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
-			<span style="left:45px;float:left;height: 0;position: relative;top: 236px">
-				产品XXX
-            </span>
-				
 			
-			<span  style="left:147px;float:left;height: 0;position: relative;top: 12px;width: 402px">
-				#@elementItem()
-					#@formControlDiv("col-6")
-								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-									#@tinyOptionItem("zh")/三大#end
-									#@tinyOptionItem("en")辅导费#end
-									#@tinyOptionItem("ta")/发的#end
-								#end
-								
-						#end
-						#@validateDiv("col-2")#end
-				#end
-			
-				#for(i:[1..11])
-					
-					#@elementItem()
-						#@formControlDiv("col-6")
-							#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+#import("/org/tinygroup/table/components/table.component")
+
+		#@borderedTable()
+		
+		
+		    #@tbody()
+		
+		
+		      #@rightAlignTr()       
+		            
+		      	 <th class="text-r" style="vertical-align:middle;height: 30px;line-height: 3px"> 居右
+                 </th>
+		      	 #@th("text-l" )
+		      	 	 #@elementItem()
+						#@formControlDiv("col-4")
+							#@tinySelect()
+								#@tinyOptionItem("zh")admin#end
+								#@tinyOptionItem("en")部长#end
+								#@tinyOptionItem("ta")检察长#end
+							#end
+							#@tinySelect()
+								#@tinyOptionItem("zh")admin#end
+								#@tinyOptionItem("en")部长#end
+								#@tinyOptionItem("ta")检察长#end
+							#end
 						#end
 						#@validateDiv("col-2")#end
 					#end
-				
-				#end
-				
-				
-				<button type="submit" id="submit" class="btn btn-submit btn-primary">保存</button>
-                 <a href="#" class="btn btn-back">返回</a>
-			</span>
-			
-				
-	
-			#end
-			
-			
-			<span  style="left:348px;float:left;height: 0;position: relative;top: -9px;width: 402px">
-            
-				#@elementItem()
-					#@formControlDiv("col-6")
-								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-									#@tinyOptionItem("zh")/三fff大#end
-									#@tinyOptionItem("en")辅导费#end
-									#@tinyOptionItem("ta")/发的#end
-								#end
-								
+					#for(i:[1..10])
+						#@elementItem()
+							#@formControlDiv("col-4")
+								#tinyInput("text" "product-id" ""{"placeholder":"","nullmsg":"代号不能为空！","id":"product-id","class":"input-text"})
+							#end
+							#@validateDiv("col-2")#end
 						#end
-						#@validateDiv("col-2")#end
-				#end
-			</span>
+					#end
+					
+		      	 #end   
+		      #end
+		
+		    #end
+		
+		#end
+			
 			
 		#end
 #end

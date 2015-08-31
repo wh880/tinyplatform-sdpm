@@ -1,5 +1,5 @@
 #@navSelect2()
-#@div()
+#@div(divClass="optionsBoxsty")
 	#@tabWithInit("tab_demo" "optionsBox")
 		#@tabHead()
 
