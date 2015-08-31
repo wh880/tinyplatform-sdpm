@@ -4,6 +4,7 @@
     .tabLayout .tabBar span a{color:#333}
     .tabLayout .tabBar .Current a{color:#fff}
     .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+    .formText{margin-top:-6px;border:#eee 1px solid;padding:2px 0 16px}
 </style>
 #include("/organizationOther/common.page")
 #@div()
@@ -43,23 +44,26 @@
         <a href="#">公司信息</a>
 
     </span>
-        #@aModal("#myModal" "编辑公司" "600" "400" "" "/organization/organizationUpdateCompany.pagelet")
+        <span style="padding-top: 5px;float: right">
+            #@aModal("#myModal" "编辑公司" "600" "400" "" "/organization/organizationUpdateCompany.pagelet")
 
-            #@simpleI("icon-edit")编辑#end
+                #@simpleI("icon-edit")编辑#end
 
-        #end
-        #@dialog("myModal")
-            #@dialogHeader()公司#end
-            #@dialogBody()<p></p>#end
-        #end
+            #end
+            #@dialog("myModal")
+                #@dialogHeader()公司#end
+                #@dialogBody()<p></p>#end
+            #end
+        </span>
+
         #div(divClass="clearfix")
     #end
 
-    #@tinyForm("thisform" "" "" {"class":"test"})
+    #@tinyForm("thisform" "" "" {"class":"formText"})
         #@elementItem()
             #@colLabel()公司名称：#end
             #@formControlDiv("col-8")
-            <h5>123</h5>
+            <p>123</p>
             #end
             #@validateDiv("col-2")#end
         #end
@@ -68,14 +72,14 @@
         #@elementItem()
             #@colLabel()联系电话：#end
             #@formControlDiv("col-8")
-            <h5>123</h5>
+            <p>123</p>
             #end
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
             #@colLabel()传真：#end
             #@formControlDiv("col-8")
-            <h5>123</h5>
+            <p>123</p>
             #end
             #@validateDiv("col-2")#end
         #end
@@ -84,14 +88,14 @@
         #@elementItem()
             #@colLabel()通讯地址：#end
             #@formControlDiv("col-8")
-            <h5>123</h5>
+            <p>123</p>
             #end
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
             #@colLabel()邮政编码：#end
             #@formControlDiv("col-8")
-            <h5>123</h5>
+            <p>123</p>
             #end
             #@validateDiv("col-2")#end
         #end
@@ -100,14 +104,14 @@
         #@elementItem()
             #@colLabel()官网：#end
             #@formControlDiv("col-8")
-            <h5>123</h5>
+            <p>123</p>
             #end
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
             #@colLabel()对象：#end
             #@formControlDiv("col-8")
-            <h5>123</h5>
+            <p>123</p>
             #end
             #@validateDiv("col-2")#end
         #end
@@ -116,7 +120,7 @@
         #@elementItem()
             #@colLabel()内网：#end
             #@formControlDiv("col-8")
-            <h5>123</h5>
+            <p>123</p>
             #end
             #@validateDiv("col-2")#end
         #end
@@ -125,7 +129,7 @@
         #@elementItem()
             #@colLabel()匿名登录：#end
             #@formControlDiv("col-8")
-            <h5>123</h5>
+            <p>123</p>
             #end
             #@validateDiv("col-2")#end
         #end
