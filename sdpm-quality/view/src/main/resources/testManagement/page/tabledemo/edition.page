@@ -125,6 +125,17 @@
 						#end#end
 					#end
 					#@tr()
+						#@th()指派给#end
+						#@td()
+							#@tinySelect("lang" "zh" {"class":"select2"})
+								#@tinyOptionItem("zh")/1#end
+								#@tinyOptionItem("en")/2#end
+								#@tinyOptionItem("ta")/3#end
+							#end
+							#@validateDiv("col-2")#end
+                            #end
+					#end
+					#@tr()
 						#@th()操作系统#end
 						#@td()#@selectRadiusBox("select_boxes")
 							#@select(selectName="demo2" selectClass="select")
@@ -240,9 +251,13 @@
 					#end
 					#@tr()
 						#@th()解决者#end
-						#@td()#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-							#@optionItem("")请选择#end
-						#end#end
+						#@td()
+							#@tinySelect("lang" "zh" {"class":"select2"})
+								#@tinyOptionItem("zh")/#end
+								#@tinyOptionItem("en")admin#end
+							#end
+							#@validateDiv("col-2")#end
+                            #end
 					#end
 					#@tr()
 						#@th()解决日期#end
@@ -251,9 +266,12 @@
 					#end
 					#@tr()
 						#@th()解决版本#end
-						#@td()#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-							#@optionItem("")请选择#end
-						#end#end
+						#@td()
+							#@tinySelect("lang" "zh" {"class":"select2"})
+								#@tinyOptionItem("zh")/#end
+							#end
+							#@validateDiv("col-2")#end
+						#end
 					#end
 					#@tr()
 						#@th()解决方案#end
@@ -263,9 +281,13 @@
 					#end
 					#@tr()
 						#@th()由谁关闭#end
-						#@td()#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-							#@optionItem("")请选择#end
-						#end#end
+						#@td()
+							#@tinySelect("lang" "zh" {"class":"select2"})
+								#@tinyOptionItem("zh")close#end
+								#@tinyOptionItem("en")admin#end
+							#end
+							#@validateDiv("col-2")#end
+						#end
 					#end
 				#@tr()
 					#@th()关闭日期#end
@@ -321,6 +343,10 @@
 
     </div>
 	#@p(pClass="clearfix") #end
+<script type="text/javascript">
+    $(".select2").select2();
+</script>
+
 <script type="text/javascript">
     $(function(){
         $(".selectList").each(function(){
