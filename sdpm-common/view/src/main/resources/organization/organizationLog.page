@@ -111,6 +111,15 @@
                         #end
 
                         #@elementItem()
+                        <span style="padding-bottom:10px;float:left"></span>
+                            #@formHorizontal("col-9")
+
+                                #@tinyCheckbox("checkbox2" "sw2" "sw2")&nbsp;&nbsp;显示部门所有成员#end
+                            #end
+
+                            #daterangepickerInit("#reservation")
+                        #end
+                        #@elementItem()
                         <span style="padding-top:10px;float:right">
                             #@formHorizontal("col-9")
                                 #buttonRadiusInfo(caption="查看")
@@ -125,7 +134,7 @@
         #@toggleRight()
             #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 
-                #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/tasktabledata.pagelet") ##取数据地址 总数据
+                #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/organizationLog-TableData.pagelet") ##取数据地址 总数据
                     #@thead()
 
                         #@div(divBaseClass="tinyheaderTools form-inline")
@@ -135,10 +144,15 @@
                             #end
                         #end
                         #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-                            #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})部门#end
-                            #@tinyTh({"class":"","rel":"sortname"})用户#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})时间#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})待办事件#end
+                            #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                            #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
+                            #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})日期#end
+                            #@tinyTh({"class":"","rel":"sortname"})登记人#end
+                            #@tinyTh({"class":"sorting","rel":"sortname"})工作内容#end
+                            #@tinyTh({"class":"sorting","rel":"sortname"})耗时#end
+                            #@tinyTh({"class":"sorting","rel":"sortname"})剩余#end
+                            #@tinyTh({"class":"sorting","rel":"sortname"})对象#end
+
 
                         #end
                     #end

@@ -37,51 +37,100 @@
 
 
 
-    #@table()
-        #@thead()
-            #@centerAlignTr()
-                #@th()#h3Title("公司信息")#end
-                #@th()
-                    #@aModal("#myModal" "编辑公司" "600" "400" "btn radius btn-primary size-L" "/organization/organizationUpdateCompany.pagelet")
+    #@div(divClass="operationbar")
+    <span style="padding-top:5px;float:left">
 
-                        #@simpleI("icon-edit")编辑#end
+        <a href="#">公司信息</a>
 
-                    #end
-                    #@dialog("myModal")
-                        #@dialogHeader()公司#end
-                        #@dialogBody()<p></p>#end
-                    #end
-                #end
+    </span>
+        #@aModal("#myModal" "编辑公司" "600" "400" "" "/organization/organizationUpdateCompany.pagelet")
 
-            #end
+            #@simpleI("icon-edit")编辑#end
+
         #end
-        #@tbody()
-            #@centerAlignTr()
-                #@th()公司名称#end
-            #end
-            #@centerAlignTr()
-                #@th()联系电话#end
-            #end
-            #@centerAlignTr()
-                #@th()传真#end
-            #end
-            #@centerAlignTr()
-                #@th()通讯地址#end
-            #end
-            #@centerAlignTr()
-                #@th()邮政编码#end
-            #end
-            #@centerAlignTr()
-                #@th()官网#end
-            #end
-            #@centerAlignTr()
-                #@th()内网#end
-            #end
-            #@centerAlignTr()
-                #@th()匿名登录#end
-            #end
+        #@dialog("myModal")
+            #@dialogHeader()公司#end
+            #@dialogBody()<p></p>#end
         #end
+        #div(divClass="clearfix")
     #end
 
+    #@tinyForm("thisform" "" "" {"class":"test"})
+        #@elementItem()
+            #@colLabel()公司名称：#end
+            #@formControlDiv("col-8")
+            <h5>123</h5>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+
+        #@elementItem()
+            #@colLabel()联系电话：#end
+            #@formControlDiv("col-8")
+            <h5>123</h5>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()传真：#end
+            #@formControlDiv("col-8")
+            <h5>123</h5>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+
+        #@elementItem()
+            #@colLabel()通讯地址：#end
+            #@formControlDiv("col-8")
+            <h5>123</h5>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()邮政编码：#end
+            #@formControlDiv("col-8")
+            <h5>123</h5>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+
+        #@elementItem()
+            #@colLabel()官网：#end
+            #@formControlDiv("col-8")
+            <h5>123</h5>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()对象：#end
+            #@formControlDiv("col-8")
+            <h5>123</h5>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+
+        #@elementItem()
+            #@colLabel()内网：#end
+            #@formControlDiv("col-8")
+            <h5>123</h5>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+
+        #@elementItem()
+            #@colLabel()匿名登录：#end
+            #@formControlDiv("col-8")
+            <h5>123</h5>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+
+    #end
 
 #end
