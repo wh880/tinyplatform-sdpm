@@ -19,3 +19,5 @@
 .infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}
 .shrinkage .edui-Box{margin-left:6px;}
 .shrinkage .edui-Box .titleNames{display:block;margin-bottom:6px;margin-left:8px;}
+
+.adjustTable tbody tr th{width:40%;text-align:right;}
