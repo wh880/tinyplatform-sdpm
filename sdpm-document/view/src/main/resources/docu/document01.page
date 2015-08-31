@@ -1,29 +1,33 @@
 #!set(activeTitle="产品文档库",activeMenuId=currentPageId)
-<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
+##  <style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
+   <style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}.optionsBoxsty{margin-bottom:5px;display:inline-block;float:left}.barBtnsty a{border:#ddd 1px solid;border-radius:2px;background-image:linear-gradient(to bottom,#fff,#e6e6e6);color:#333; padding:5px 18px;display:inline-block}.barBtnsty a:hover{color:#f90}</style>
    ##  #include("/page/event/common.page")
    #include("/docu/common.page")
 #@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-		#@div(divClass="dropdownBox")
+
+
+	#@tabWithInit("tab_demo")
+		##@div(divClass="dropdownBox")
 
       ##  #include("/page/project/dropdownMenu.page")
           #include("/docu/dropdownMenu.page")
 
-#end
-		#@tabHead()
-
-    ##  #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/page/tabledemo/document01-edit.pagelet" "ml-5")编辑 #end
-         #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/docu/document01-edit.pagelet" "ml-5")编辑 #end
+##end
+##		#@tabHead()
+#@span(spanClass="barBtnsty")
+    ##  #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/page/tabledemo/document01-edit.pagelet" "ml-5")</i>&nbsp;编辑 #end
+         #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/docu/document01-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
 		##    #@tabHeadCol()文档#end
 		##	#@tabHeadCol()编辑#end
 		##	#@tabHeadCol()分类#end
 		##	#@tabHeadCol()删除#end
 ##    #@iconOperations("#myModal" "" "指派" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")删除 #end
 ##      #@iconOperations("#myModal" "" "指派" "865" "448" "/docu/user-add.pagelet" "ml-5")删除 #end
-         #@iconOperations("#myModal" "" "删除" "865" "448" "" "ml-5")删除 #end
+        #@iconOperations("#myModal" "" "删除" "865" "448" "" "ml-5")<i class="icon-trash"></i>&nbsp;删除 #end
 #end
-
-<span class="r" style="position:relative;top:-28px;height:0">
+##end
+##  <span class="r" style="position:relative;top:-28px;height:0">
+    <span class="r" style="position:relative;height:0">
 		##	<a href="${TINY_CONTEXT_PATH}/page/project/adddocumentlib.page">#buttonIcon(iconClass="icon-globe")添加文档库</a>&nbsp;
 		##    <a href="${TINY_CONTEXT_PATH}/docu/adddocumentlib.page">#buttonIcon(iconClass="icon-globe")添加文档库</a>&nbsp;
 		       ##添加文档库
@@ -55,7 +59,7 @@
 					##<a href="#">已变更</a>
 					##<a href="#">待关闭</a>
 					<a href="#">按模块浏览</a>
-					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
+					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
 					##<a href="#">#buttonIcon(iconClass="icon-upload-alt")导入</a>&nbsp;
@@ -65,10 +69,9 @@
 				##	<a href="${TINY_CONTEXT_PATH}/page/project/adddocument01.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
 				    <a href="${TINY_CONTEXT_PATH}/docu/adddocument01.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
 				</span>
-           #div(divClass="clearfix")
+                 #div(divClass="clearfix")
              #end
-
-
+             #include("/docu/mulsearch.page")
 
 			##operationbar end
 		##	#include("/page/project/treeNew.page")
