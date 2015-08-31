@@ -1,29 +1,16 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 #import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
 <style>
 .tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
 .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
 .b {margin-left: 8px;}
-.infoContent{
-    margin: 18px 200px 10px 5px;
-    padding: 6px;
-    border: #eee 1px solid;
-    margin-right: 200px;}
-.infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:13px;}
-.infoContent ul li label{font-weight:normal; width:33%;font-size:12px;}
-.infoContent ul li .text-overflow{display:inline-block; width:64%;vertical-align:top;font-size:12px;}
-.infoContent ul li .text-overflow a{ color:#333;}
-.infoContent ul li .text-overflow a:hover{color:#f90}
-.infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}
-.shrinkage .edui-Box{margin-left:6px;}
-.shrinkage .edui-Box .titleNames{display:block;margin-bottom:6px;margin-left:8px;}
-.togglebox .togglenavpart{overflow:visible}
-.togglebox.open.shrinkage .togglenavpart {
-    left: 85%;
-    margin-left: -210px;
-    width: initial;
-}
+.infoContent{ margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
+.infoContent .titleName{margin-top:-16px;margin-bottom:8px;font-weight:bold;font-size:13px;}
+.row{rowspan:3;}
 </style>
 
 #include("/page/event/common.page")
@@ -40,7 +27,7 @@
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prodt.page">动态</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prowd.page">文档</a></span>
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procp.page">产品</a></span>
-			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/cp/prosay.page">概况</a></span>
+			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">概况</a></span>
 			#@divRightAlign()		
 				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn ">#buttonIcon(iconClass="icon-list")所有项目</a>
 				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page" class="active_btn ">#buttonIcon(iconClass="icon-plus")添加项目</a>
@@ -102,96 +89,109 @@
 				<a href="${TINY_CONTEXT_PATH}/page/project/project.page" title="返回">#buttonIcon(iconClass="icon-level-up")</a>
 				</span>
 				#div(divClass="clearfix")
-			#end
+			 #end
 #end
 
-#@toggleBox({"class":"open shrinkage"})##展开为class:OPEN 要附加其它的属性请用MAP带入
-	#@toggleLeft({"class":"aclass"})		
+<div style="width:65%;float:left">
 		#@div(divClass="infoContent")
-	        <p class="titleName">基本信息</p>
-	       	<ul style="width:350px">
-	      <li>
-	       	<label>当前状态：</label>
-	       	#@span(spanClass="text-overflow")
-			 <p>用来测试的用例</p>
-			#end
-	    </li>
-	     <li>
-	       	<label>产品代号：</label>
-	       	#@span(spanClass="text-overflow")
-			<p>测试123</p>
-			#end
-	   </li>
-	       		
-	       	 <li>
-	       	<label>产品负责人：</label>
-	       	#@span(spanClass="text-overflow")
-			<p>admin</p>
-			#end
-	   </li>	 
-	   <li>
-	       	<label>测试负责人：</label>
-	       	#@span(spanClass="text-overflow")
-			<p>A001</p>
-			#end
-	   </li>
-	   <li>
-	       	<label>发布负责人：</label>
-	       	#@span(spanClass="text-overflow")
-			<p>A002</p>
-			#end
-	   </li>
-	  <li>
-	       	<label>发布状态：</label>
-	       	#@span(spanClass="text-overflow")
-			<p>正常</p>
-			#end
-	   </li>
- 		<li>
-	       	<label>访问控制：</label>
-	       	#@span(spanClass="text-overflow")
-			<p>默认设置(有产品视图权限，即可访问)</p>
-			#end
-	   </li>
-	   <li>
-	       	<label>分组白名单：</label>
-	       	#@span(spanClass="text-overflow")
-			<p></p>
-			#end
-	   </li>
-	 <li>
-	       	<label>由谁创建：</label>
-	       	#@span(spanClass="text-overflow")
-			<p>admin</p>
-			#end
-	   </li>
-	   <li>
-	       	<label>创建日期：</label>
-	       	#@span(spanClass="text-overflow")
-			<p>2015-08-28 16:31:57</p>
-			#end
-	   </li>
-			</ul>
-      #end
-      #@div(divClass="infoContent")
-	        <p class="titleName">其他信息</p>
-	 #end
-	#end
-	#@toggleRight()
-		#@div(divClass="infoContent pd-10")
 	        <p class="titleName">项目描述</p>
 	       	<div>
-	       		11111
+	       		456789
 	       	</div>
 		#end
 		#@div(divClass="infoContent")
 	        <p class="titleName">历史记录</p>
+	        ##加入后，js代码会导致页面排版混乱
 	       	#include("/page/outpage/recordlist.page")
 		#end
-	#end
-#end
-
-					
+	</div>
+	<div style="width:35%;float:right" >
+		#@div(divClass="infoContent")
+		        <p class="titleName">基本信息</p>
+		       	#@table()
+		       		#@thead()
+		       		#end
+		       		#@tbody()
+		       			#@tr()
+							#@td()所属项目#end
+		       				#@td()<a href="#">测试项目</a>#end
+		       			#end
+		       			#@tr()
+							#@td()版本#end
+		       				#@td()trunk#end
+		       			#end
+		       			#@tr()
+							#@td()负责人#end
+		       				#@td()admin#end
+		       			#end
+		       			#@tr()
+							#@td()优先级#end
+		       				#@td()1#end
+		       			#end
+		       			#@tr()
+							#@td()开始日期#end
+		       				#@td()2015-08-12#end
+		       			#end
+		       			#@tr()
+							#@td()结束日期#end
+		       				#@td()2015-08-12#end
+		       			#end
+		       			#@tr()
+							#@td()当前状态#end
+		       				#@td()<font color="red">正在进行中#end
+		       			#end	
+		       		#end
+		       	#end
+		#end
+		#@div(divClass="infoContent")
+			<p class="titleName">其他信息</p>
+			<table>
+				<tr>
+					<td rowspan="4">工时统计</td>
+					<td>总共预计20工时</td>
+				</tr>
+				<tr>
+					<td>可用工时483.0工时</td>
+				</tr>
+				<tr>
+					<td>已经消耗1工时</td>
+				</tr>
+				<tr>
+					<td>预计剩余19工时</td>
+				</tr>
+			</table>
+		#end
+#*			#@table()
+				#@thead()
+					#@tr()
+						#@td(tdClass="row")
+							工时统计
+						#end
+						#@td()总共预计20工时#end
+					#end
+					#@tr()
+						#@td()可用工时483.0工时#end
+						
+					#end
+					#@tr()
+						#@td()已经消耗1工时#end
+					#end
+					#@tr()
+						#@td()预计剩余19工时#end
+					#end
+				#end
+			#end
+		#end*#
+	</div>
+#*	<div style="float:button;text-align:center;margin:auto">
+				#@iconOperations("#myModal" "icon-time" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp日志#end
+				#@iconOperations("#myModal" "icon-off" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp关闭#end
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-dashboard")用例</a>
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-link	")关联用例</a>
+				<a href="#" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
+				<a href="#" title="删除版本">#buttonIcon(iconClass="icon-remove")</a>
+				<a href="#" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+	</div>				*#
 					
 					
 					

@@ -1,6 +1,7 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+#!set(linkName="demand")
 
 #import("/org/tinygroup/button/components/button_smart.component")
 
@@ -86,20 +87,22 @@
 			##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
 			<script type="text/javascript">
 				$(function(){
-					$('#${tableId}').on('click','.delBtn',function(e){
-						user_del(this,'1');
-					});
-				})
-			</script>
-			#@dialog("myModal")
+				#@dialog("myModal")
 				#@dialogHeader()对话框标题#end
 				#@dialogBody()<p>对话框内容…</p>#end
 				#@dialogFooter()
 					#@buttonEnsure()确定#end
 					#@buttonCancel()关闭#end
 				#end
-			#end
+			#end	$('#${tableId}').on('click','.delBtn',function(e){
+						user_del(this,'1');
+					});
+				})
+			</script>
+			
 		#end
 	#end
 #end
 		#end
+
+		

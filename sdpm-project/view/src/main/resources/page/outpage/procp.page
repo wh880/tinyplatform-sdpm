@@ -26,6 +26,7 @@
 		#end
 	#end
 			##operationbar start1
+			
 			#@div(divClass="operationbar")
 				<span class="f">
 					关联产品
@@ -33,7 +34,23 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			#for(i:[1..3])
+			#@table()
+			
+			#for(i:[1..4])
+			
+			#@tr()
+			
+		     #for(i:[1..4])
+			#@td()
+		
 		  	#@tinyRadio("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})关联产品${i}#end<br>
+		  	
+		  	#end
+		  
+		    #end
+		  	#end
+		  	
+			#end
+			
 			#end
 #end

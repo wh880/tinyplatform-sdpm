@@ -8,6 +8,7 @@
 .wz{font-size:16px;top: 5px;}
 .c{padding:8px 73px}
 </style>
+
 #@div()
 	#@div(divClass="tabLayout")
 		#@div(divClass="tabBar cl")
@@ -30,8 +31,13 @@
 		#end
 	#end
 #end
+
 #@div(divClass="operationbar")
     关联需求
+#end
+<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+#@div(divClass="operationbar")
+#include("/page/outpage/mulsearch.page")
 #end
 #!set(activeTitle="关联需求",activeMenuId=currentPageId)
 	 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID

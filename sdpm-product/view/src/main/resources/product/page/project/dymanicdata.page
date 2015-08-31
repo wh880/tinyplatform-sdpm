@@ -1,10 +1,12 @@
 #include("/product/page/event/common.page")
 #set(addArchivePagePath="/product/page/tabledemo/addArchive.pagelet",editpageModalId="myModal",editpageModal="#"+editpageModalId)
+#!set(linkName="dynamic")
 
 #@tabBodyCol("ptop-5")
 			##operationbar start1
-			#@div(divClass="operationbar")
-				<span class="f" >
+			<div class="operationbar" style="height:36px"> 
+            
+				<span class="f">
 					<a href="#" class="active_btn">今天</a>
 					<a href="#">昨天</a>
 					<a href="#">前天</a>
@@ -13,7 +15,7 @@
 					<a href="#">本月</a>
 					<a href="#">上月</a>
 					<a href="#">所有</a>
-					<span style="left:297px;top:-35px; position:relative">
+					<span style="left:297px;top:-35px; position:relative; height:10%">
 						#@tinyForm("thisform" "" "" {"class":"test"})
 					  #@elementItem()
 						#@formControlDiv("col-2")
@@ -29,7 +31,7 @@
 					</span>					
 				</span>
 				#div(divClass="clearfix")
-			#end
+			</div>
 			##operationbar end
 			#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 	#@div(divClass="tinyheaderTools form-inline")

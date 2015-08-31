@@ -1,4 +1,4 @@
-#@td()￥800#end#macro setTinyItemCount(num)
+#macro setTinyItemCount(num)
 <input type="hidden" name="records" value="${num}"/>
 #end
 
@@ -18,7 +18,6 @@
     #@td()67#end
     #@td()2013/03/25#end
     #@td()￥320,800#end
-    #@td()￥800#end
     #@td()￥800#end
     #@td()￥800#end
 #end

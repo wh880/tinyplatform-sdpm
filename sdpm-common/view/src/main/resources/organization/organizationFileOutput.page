@@ -1,0 +1,44 @@
+<style>
+    .tabLayout .tabBar span a {color: #333}
+    .tabLayout .tabBar .Current a {color: #fff}
+    .operationbar {border-top: none;
+        background: #f9fafe;
+        padding: 6px 5px 6px 10px;
+    }
+    .barBox{padding-top:5px;float:left}
+    .barBox a,.barBox a:link{color:#333;margin-right:3px;display:inline-block}
+    .barBox a:hover{color:#f90}
+
+</style>
+#@table()
+    #@tbody()
+        #@tr()
+            #@td()
+                #inputText(inputPlaceHolder="文件名")
+            #end
+            #@td()
+                #@selectBox()
+                    #@select(selectName="demo1" selectClass="select")
+                        #@optionSelected("")csv#end
+                        #@optionItem("1")xml#end
+                        #@optionItem("1")html#end
+                    #end
+                #end
+            #end
+            #@td()
+                #@selectBox()
+                    #@select(selectName="demo2" selectClass="select")
+                        #@optionSelected("")UTF-8#end
+                        #@optionItem("1")GBK#end
+                    #end
+                #end
+            #end
+            #@td()#@selectBox()
+                #@select(selectName="demo3" selectClass="select")
+                    #@optionSelected("")全部记录#end
+                    #@optionItem("1")选中记录#end
+                #end
+            #end#end
+        #end
+    #end
+#end

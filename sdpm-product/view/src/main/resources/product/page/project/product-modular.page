@@ -1,4 +1,7 @@
 #import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/table/components/table.component") 
+#!set(linkName="modular")
+
 
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 <style>
@@ -33,104 +36,59 @@
 	#end
 	#@toggleRight()
 		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
-			#@td()
+			<span style="left:45px;float:left;height: 0;position: relative;top: 236px">
 				产品XXX
-			#end
-			#@td()
+            </span>
+				
+			
+			<span  style="left:147px;float:left;height: 0;position: relative;top: 12px;width: 402px">
 				#@elementItem()
-					#@formControlDiv("col-4")
-						#@tinySelect("PO" "" {"class":"input-text","rel":"22"})
-							#@tinyOptionItem("admin")A:admin#end
-							#@tinyOptionItem("buzhang")B:部长#end
-							#@tinyOptionItem("check")B:检察长#end
+					#@formControlDiv("col-6")
+								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+									#@tinyOptionItem("zh")/三大#end
+									#@tinyOptionItem("en")辅导费#end
+									#@tinyOptionItem("ta")/发的#end
+								#end
+								
 						#end
-						
-					#end
-					#@validateDiv("col-2")#end
+						#@validateDiv("col-2")#end
 				#end
+			
+				#for(i:[1..11])
 					
-				#@elementItem()
-					#@formControlDiv("col-4")
-						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+					#@elementItem()
+						#@formControlDiv("col-6")
+							#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
+						#end
+						#@validateDiv("col-2")#end
 					#end
-					#@validateDiv("col-2")#end
+				
 				#end
-				#@elementItem()
-					#@formControlDiv("col-4")
-						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
-					#end
-					#@validateDiv("col-2")#end
-				#end
-				#@elementItem()
-					#@formControlDiv("col-4")
-						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
-					#end
-					#@validateDiv("col-2")#end
-				#end
-				#@elementItem()
-					#@formControlDiv("col-4")
-						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
-					#end
-					#@validateDiv("col-2")#end
-				#end
-				#@elementItem()
-					#@formControlDiv("col-4")
-						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
-					#end
-					#@validateDiv("col-2")#end
-				#end
-                
-				#@elementItem()
-					#@formControlDiv("col-4")
-						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
-					#end
-					#@validateDiv("col-2")#end
-				#end
-				#@elementItem()
-					#@formControlDiv("col-4")
-						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
-					#end
-					#@validateDiv("col-2")#end
-				#end
-				#@elementItem()
-					#@formControlDiv("col-4")
-						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
-					#end
-					#@validateDiv("col-2")#end
-				#end
-				#@elementItem()
-					#@formControlDiv("col-4")
-						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
-					#end
-					#@validateDiv("col-2")#end
-				#end
-				#@elementItem()
-					#@formControlDiv("col-4")
-						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
-					#end
-					#@validateDiv("col-2")#end
-				#end
-				#@elementItem()
-					#@formControlDiv("col-4")
-						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
-					#end
-					#@validateDiv("col-2")#end
-				#end
-				#@elementItem()
-					#@formControlDiv("col-4")
-						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
-					#end
-					#@validateDiv("col-2")#end
-				#end
-				#@elementItem()
-					#@formControlDiv("col-4")
-						#tinyInput("text" "product-name" ""{"id":"product-name","class":"input-text"})
-					#end
-					#@validateDiv("col-2")#end
-				#end
+				
+				
+				<button type="submit" id="submit" class="btn btn-submit btn-primary">保存</button>
+                 <a href="#" class="btn btn-back">返回</a>
+			</span>
+			
+				
 	
 			#end
 			
+			
+			<span  style="left:348px;float:left;height: 0;position: relative;top: -9px;width: 402px">
+            
+				#@elementItem()
+					#@formControlDiv("col-6")
+								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+									#@tinyOptionItem("zh")/三fff大#end
+									#@tinyOptionItem("en")辅导费#end
+									#@tinyOptionItem("ta")/发的#end
+								#end
+								
+						#end
+						#@validateDiv("col-2")#end
+				#end
+			</span>
+			
 		#end
-	#end
 #end

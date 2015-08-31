@@ -2,6 +2,7 @@
 ###import("/org/tinygroup/zTree/components/zTree.component")
 #import("/components/org/tinygroup/fulimanageui/form.component")
 #set(editpagePath="/organization/organizationUpdateCompany.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+#set(editpagePath1="/organization/organizationFileOutput.pagelet",editpageModalId1="userEditModal",editpageModal1="#"+editpageModalId1)
 #include("/organizationOther/common.page")
 <style>
     .tabLayout .tabBar span a {color: #333}
@@ -33,6 +34,11 @@
 					<a href="#">项目</a>
 					<a href="#">档案</a>
         ##
+        </span>
+        <span style="padding-top:5px;float:right">
+            #@aModal(editpageModal "导出" "600" "120" ""  editpagePath1)
+                #@simpleI(" icon-chevron-down")导出#end
+            #end
         </span>
             #div(divClass="clearfix")
         #end
@@ -97,5 +103,5 @@
 
     #end
 #end
-#simpleModal(editpageModalId)
+#simpleModal(editpageModalId1)
 
