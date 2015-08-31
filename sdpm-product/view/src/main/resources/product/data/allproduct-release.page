@@ -20,8 +20,8 @@
 	 	
 	 	
 	 	
-	 	<a title="关联需求" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-relation-release.page"><i class="icon-link"></i></a>
-	 	<a title="关联BUG" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-relation-release.page"><i class="icon-bug"></i></a>
+	 	<a title="关联需求" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation/product-al-req.page?cname=demand&type=release"><i class="icon-link"></i></a>
+	 	<a title="关联BUG" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation/product-al-bug.page?cname=bug&type=release"><i class="icon-bug"></i></a>
 	 	#iconOperations("#myModal" "icon-common-edit icon-pencil" "编辑发布" "865" "448" "/product/page/tabledemo/product-addrelease.pagelet" "ml-5")
 		#iconOperation(" icon-remove" "删除发布" "ml-5")
 	#end

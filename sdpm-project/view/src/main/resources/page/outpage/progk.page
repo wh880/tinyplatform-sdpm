@@ -10,7 +10,6 @@
 .b {margin-left: 8px;}
 .infoContent{ margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
 .infoContent .titleName{margin-top:-16px;margin-bottom:8px;font-weight:bold;font-size:13px;}
-.row{rowspan:3;}
 </style>
 
 #include("/page/event/common.page")
@@ -29,7 +28,7 @@
 			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procp.page">产品</a></span>
 			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">概况</a></span>
 			#@divRightAlign()		
-				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn ">#buttonIcon(iconClass="icon-list")所有项目</a>
+				<a href="${TINY_CONTEXT_PATH}/page/outpage/task_edit.page" class="active_btn ">#buttonIcon(iconClass="icon-list")所有项目</a>
 				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page" class="active_btn ">#buttonIcon(iconClass="icon-plus")添加项目</a>
 			#end			
 		#end

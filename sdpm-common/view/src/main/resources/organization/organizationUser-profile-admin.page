@@ -24,83 +24,37 @@
         <span><a href="${TINY_CONTEXT_PATH}/organization/organizationCompany.page?currentPageId=7">公司</a></span>
         #end
         #@div(divClass="operationbar")
-        <span style="padding-top:5px;float:left">
+            #@tinyForm("thisform" "" "" {"class":"test"})
+            <span class="tinyFormsty">
+                #@formControlDiv("col-1")
+                    #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
+                        #@tinyOptionItem("zh")中国#end
+                        #@tinyOptionItem("en")英国#end
+                        #@tinyOptionItem("ta")泰国#end
+                    #end
+                #end
+                <span>
+                    &nbsp;&gt;
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-todo.page">待办</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-story-admin.page">需求</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-task-admin.page">任务</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-bug-admin.page">缺陷</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-testtask-admin.page">测试</a>
+                   <a href="${TINY_CONTEXT_PATH}/organization/organizationUser-active-admin.page">动态</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-log-admin.page">日志</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-project-admin.page">项目</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-profile-admin.page" class="active_btn">档案</a>
-        ##
+                </span>
         </span>
-        <span style="padding-top:5px;float:right">
-            #@aModal(editpageModal "导出" "600" "120" ""  editpagePath1)
-                #@simpleI(" icon-chevron-down")导出#end
+            <span style="padding-top:5px;float:right">
+                #@aModal(editpageModal "导出" "600" "120" ""  editpagePath)
+                    #@simpleI(" icon-chevron-down")导出#end
+                #end
+            </span>
+                #div(divClass="clearfix")
             #end
-        </span>
-            #div(divClass="clearfix")
+
         #end
-
-        #@table()
-            #@thead()
-                #@centerAlignTr()
-                    #@th()#h3Title("档案")#end
-                    #@th()
-                        #@aModal("#myModal" "修改档案" "600" "400" "btn radius btn-primary size-L" editpagePath)
-
-                            #@simpleI("icon-edit")修改档案#end
-
-                        #end
-                        #@dialog("myModal")
-                            #@dialogHeader()档案#end
-                            #@dialogBody()<p></p>#end
-                        #end
-                    #end
-
-                #end
-            #end
-            #@tbody()
-                #@centerAlignTr()
-                    #@th()所属部门#end
-                #end
-                #@centerAlignTr()
-                    #@th()用户名#end
-                #end
-                #@centerAlignTr()
-                    #@th()真实姓名#end
-                #end
-                #@centerAlignTr()
-                    #@th()权限#end
-                #end
-                #@centerAlignTr()
-                    #@th()职位#end
-                #end
-                #@centerAlignTr()
-                    #@th()源代码账号#end
-                #end
-                #@centerAlignTr()
-                    #@th()邮箱#end
-                #end
-                #@centerAlignTr()
-                    #@th()加入日期#end
-                #end
-                #@centerAlignTr()
-                    #@th()访问次数#end
-                #end
-                #@centerAlignTr()
-                    #@th()最后IP#end
-                #end
-                #@centerAlignTr()
-                    #@th()最后登录#end
-                #end
-                #@centerAlignTr()
-                    #@th()QQ#end
-                #end
-            #end
-        #end
-
     #end
 #end
 #simpleModal(editpageModalId1)

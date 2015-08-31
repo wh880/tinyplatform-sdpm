@@ -1,15 +1,15 @@
 #import("/org/tinygroup/fold/components/fold.component")
 #@foldMenu("" "Tinyfold3" "" "width:100%")
     #@foldItem("2015-08-26 09:19:52, 由 Demo 指派给 Demo")记录详情<br>
-		修改了<p>预计剩余</p>值为 "0"，新值为 "2"。
+		由admin创建
 	 #end
 	 #@foldItem("2015-08-25 09:15:58, 由 Demo 开始启动")记录详情<br>
-		修改了<p>预计剩余</p>值为 "0"，新值为 "2"。
+		由demo创建
 	 #end
 	 #@foldItem("2015-08-24 09:16:58, 由 Demo 指派给 Mack")记录详情<br>
-		修改了<p>预计剩余</p>值为 "0"，新值为 "2"。
+		由SB创建
 	 #end
-#end 
+#end
 <script type="text/javascript">
 $(function(){
 	$(".Hui_aside").scrollTop(380);

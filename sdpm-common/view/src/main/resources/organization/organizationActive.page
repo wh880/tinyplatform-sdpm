@@ -29,6 +29,7 @@
 					<a href="#">本月</a>
 					<a href="#">上月</a>
 					<a href="#">所有</a>
+
         ##
         </span>
             #@tinyForm("thisform" "" "" {"class":"test"})
@@ -56,10 +57,11 @@
                         #@tinyOptionItem("ta")泰国#end
                     #end
                 #end
-            #end
+            #end&nbsp;
+        <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
             #div(divClass="clearfix")
         #end
-
+        #include("/organization/organizationActiveMultiSearch.page")
     #end
 #end
 

@@ -87,6 +87,7 @@
   <!--<![endif]-->
   <script src="${TINY_CONTEXT_PATH}/uiengine.uijs"></script>
  #end
+    <link href="${TINY_CONTEXT_PATH}/organizationcss/organization.css" rel="stylesheet" />
 	 <style>.dataTables_wrapper .DT-lf-right .DT-per-page{display:none}.theme-clean #main-menu #main-menu-inner{padding-top:3px;}#content-wrapper{padding:106px 10px 18px}</style>
 </head>
 <body class="theme-default main-menu-animated">

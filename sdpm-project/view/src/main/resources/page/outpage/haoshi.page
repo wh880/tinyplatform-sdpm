@@ -1,0 +1,58 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")	
+#!set(activeTitle="总耗时",activeMenuId=currentPageId)
+#@tinyForm("thisform" "" "post" {"class":"test"})
+	 #@tableBorder()
+	 	#@thead()
+	 		#@tr()
+	 			#@thW("60")	ID	#end
+	 			#@thW("40")	日期	#end
+	 			#@thW("100")	耗时#end
+	 			#@thW("100")	剩余	#end
+	 			#@thW("300")	工作内容	#end
+	 		#end
+	 	
+	 	#end
+	 	
+	 	#@tbody()
+	 		
+	 		#for(i:[1..8])
+				#@tr()
+		 			
+		 			#@th()	${i}	#end
+		 			#@th()	
+						
+							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:150px","datatype":"*","placeholder":"选择日期"})#end
+						
+						#@validateDiv("col-2")#end
+			 		#end
+		 			#@th()
+		 			
+		 				 #tinyInput("text" "username")
+		 			
+		 			#end
+		 			
+		 			#@th()
+		 			
+		 				 #tinyInput("text" "username")
+		 			#end
+		 			
+		 			#@th()
+		 			
+		 				 #tinyInput("text" "username")
+		 			
+		 			#end
+		 		#end
+		 			
+		 	#end
+		#end
+	 	
+	 #end
+	  <p>
+       </p>
+           #@td()
+					#@colLabel()#end
+					<a href="#">#buttonRadiusPrimary(caption="保存")</a>
+
+		#end	 	
+#end
