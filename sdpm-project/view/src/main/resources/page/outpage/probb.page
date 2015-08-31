@@ -32,7 +32,7 @@
 					版本列表
 				</span>
 				<span class="r c">
-					<a href="${TINY_CONTEXT_PATH}/page/outpage/add_vesion.page">#buttonIcon(iconClass="icon-plus")新建版本</a>
+					<a href="${TINY_CONTEXT_PATH}/page/outpage/add_version.page">#buttonIcon(iconClass="icon-plus")新建版本</a>
 				</span>
 				#div(divClass="clearfix")
 			#end
