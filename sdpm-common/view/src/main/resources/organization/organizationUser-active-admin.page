@@ -1,25 +1,16 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
 ###import("/org/tinygroup/zTree/components/zTree.component")
 #import("/components/org/tinygroup/fulimanageui/form.component")
-#set(editpagePath="/organization/organizationFileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+#set(editpagePath=
+    "/organization/organizationFileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 
 #include("/organizationOther/common.page")
-<style>
-    .tabLayout .tabBar span a {color: #333}
-    .tabLayout .tabBar .Current a {color: #fff}
-    .operationbar {border-top: none;
-        background: #f9fafe;
-        padding: 6px 5px 6px 10px;
-    }
-    .barBox{padding-top:5px;float:left}
-    .barBox a,.barBox a:link{color:#333;margin-right:3px;display:inline-block}
-    .barBox a:hover{color:#f90}
 
-</style>
 #@div()
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
-        <span class="Current"><a href="${TINY_CONTEXT_PATH}/organization/organizationUser.page?currentPageId=7">用户</a></span>
+        <span class="Current"><a
+                href="${TINY_CONTEXT_PATH}/organization/organizationUser.page?currentPageId=7">用户</a></span>
         <span><a href="${TINY_CONTEXT_PATH}/organization/organizationGtasks.page?currentPageId=7">待办</a></span>
         <span><a href="${TINY_CONTEXT_PATH}/organization/organizationLog.page?currentPageId=7">日志</a></span>
         <span><a href="${TINY_CONTEXT_PATH}/organization/organizationActive.page?currentPageId=7">动态</a></span>
@@ -29,7 +20,7 @@
         #end
         #@div(divClass="operationbar")
             #@tinyForm("thisform" "" "" {"class":"test"})
-            <span class="tinyFormsty">
+        <span class="tinyFormsty">
                 #@formControlDiv("col-1")
                     #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
                         #@tinyOptionItem("zh")中国#end
@@ -44,9 +35,10 @@
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-task-admin.page">任务</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-bug-admin.page">缺陷</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-testtask-admin.page">测试</a>
-                   <a href="${TINY_CONTEXT_PATH}/organization/organizationUser-active-admin.page">动态</a>
+                   <a href="${TINY_CONTEXT_PATH}/organization/organizationUser-active-admin.page"
+                      class="active_btn">动态</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-log-admin.page">日志</a>
-					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-project-admin.page" class="active_btn">项目</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-project-admin.page">项目</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-profile-admin.page">档案</a>
                 </span>
         </span>
@@ -57,28 +49,33 @@
             </span>
                 #div(divClass="clearfix")
             #end
+
+        <span class="barBoxs">
+        			<a href="#" class="active_btn">今天</a>
+					<a href="#">昨天</a>
+					<a href="#">本周</a>
+					<a href="#">上周</a>
+					<a href="#">本月</a>
+					<a href="#">上月</a>
+					<a href="#">所有</a>
+        </span>
         #end
     #end
 #end
-
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([8,10,20,50,100,200])
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/organizationUser-storyTable.pagelet") ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/organizationUser-activeTable.pagelet") ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"","rel":"sortname"})ID#end
-                #@tinyTh({"class":"","rel":"sortname"})项目代号#end
-                #@tinyTh({"class":"","rel":"sortname"})项目名称#end
-                #@tinyTh({"class":"","rel":"sortname"})开始时间#end
-                #@tinyTh({"class":"","rel":"sortname"})结束日期#end
-                #@tinyTh({"class":"","rel":"sortname"})状态#end
-                #@tinyTh({"class":"","rel":"sortname"})角色#end
-                #@tinyTh({"class":"","rel":"sortname"})加盟日#end
-                #@tinyTh({"class":"","rel":"sortname"})可用时间/天#end
-
+                #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})日期#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})操作者#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})动作#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})对象类型#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})对象名称#end
             #end
         #end
     #end
