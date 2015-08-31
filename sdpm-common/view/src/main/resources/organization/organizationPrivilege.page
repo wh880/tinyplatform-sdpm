@@ -25,8 +25,11 @@
         </span>
         <span style="padding-top:5px;float:right">
             #@aModal(editpageModal "新增分组" "600" "300" "btn radius btn-primary btn-sm" editpagePath)
-                #@simpleI("icon")新增分组#end
+                #@simpleI("icon-plus")新增分组#end
             #end
+##    #@aModal(editpageModal "添加" "865" "420" "btn radius btn-primary btn-sm" editpagePath)
+##        #@simpleI("icon-plus")添加#end
+##    #end
             </span>
             #div(divClass="clearfix")
         #end
