@@ -53,6 +53,7 @@
 		#end
 		<div style="text-align:center;margin:auto">
 				#@iconOperations("#LogModal" "icon-time" "新增日志" "800" "600" "/testManagement/page/addLog.pagelet" "ml-5")&nbsp日志#end
+					
 					#@dialog("LogModal")
 						#@dialogHeader()对话框标题#end
 						#@dialogBody()<p>对话框内容…</p>#end
