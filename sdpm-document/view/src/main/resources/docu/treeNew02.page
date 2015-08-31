@@ -3,7 +3,7 @@
 
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 	#@toggleLeft({"class":"aclass"})
-		#@settoggleLeftTitle()产品文档库#end
+		#@settoggleLeftTitle()项目文档库#end
 		#@settoggleLeftBody("treeLeftbox")
 			<ul class="treeList">
 				<li id="listContent" style="display:none; position:absolute;left:74px;">

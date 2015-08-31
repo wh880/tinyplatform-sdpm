@@ -5,6 +5,8 @@
         #@colLabel()添加文档库：#end
         #@formControlDiv("col-8")
           #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":"文档库名称不能为空！","id":"username","class":"input-text"})
+  ##      #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+  ##      #tinyInput("submit" "submitbtn" "&nbsp;保存&nbsp;" {"class":"btn btn-primary"})
         #end
         #@validateDiv("col-2")#end
     #end
