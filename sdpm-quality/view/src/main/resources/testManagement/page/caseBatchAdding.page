@@ -60,21 +60,24 @@
 			#@tr()
 				#@td()${i}#end
 				#@td()
-					#@selectRadiusBox("select_boxes")
-						#@select(selectName="demo2" selectClass="select")
-							#@optionSelected("")/#end
-							#@optionItem("1")同上#end
+					#@formControlDiv("col-8")
+						#@tinySelect("lang" "zh" {"class":"select2"})
+							#@tinyOptionItem("zh")/#end
+							#@tinyOptionItem("en")同上#end
+
 						#end
-					#end
+						#@validateDiv("col-2")#end
+                    #end
 				#end
 				#@td()
-					#@selectRadiusBox("select_boxes")
-						#@select(selectName="demo2" selectClass="select")
-							#@optionSelected("")/#end
-							#@optionItem("1")同上#end
+					#@formControlDiv("col-8")
+						#@tinySelect("lang" "zh" {"class":"select2"})
+							#@tinyOptionItem("zh")/#end
+							#@tinyOptionItem("en")/同上#end
 						#end
+						#@validateDiv("col-2")#end
+                    #end
 					#end
-				#end
 				#@td()#@selectRadiusBox("select_boxes")
 					#@select(selectName="demo2" selectClass="select")
 						#@optionSelected("") #end
@@ -102,5 +105,8 @@
 #end
 #end
 
+<script type="text/javascript">
+    $(".select2").select2();
+</script>
 
 
