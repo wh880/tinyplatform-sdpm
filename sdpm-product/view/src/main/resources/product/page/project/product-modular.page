@@ -1,4 +1,6 @@
 #import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/table/components/table.component") 
+
 
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 <style>
@@ -39,14 +41,14 @@
 			#@td()
 				#@elementItem()
 					#@formControlDiv("col-4")
-						#@tinySelect("PO" "" {"class":"input-text","rel":"22"})
-							#@tinyOptionItem("admin")A:admin#end
-							#@tinyOptionItem("buzhang")B:部长#end
-							#@tinyOptionItem("check")B:检察长#end
+								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+									#@tinyOptionItem("zh")/三大#end
+									#@tinyOptionItem("en")辅导费#end
+									#@tinyOptionItem("ta")/发的#end
+								#end
+								
 						#end
-						
-					#end
-					#@validateDiv("col-2")#end
+						#@validateDiv("col-2")#end
 				#end
 					
 				#@elementItem()
@@ -129,6 +131,23 @@
 					#@validateDiv("col-2")#end
 				#end
 	
+			#end
+			
+			#@td()
+			<span style="width:19"> 
+            
+				#@elementItem()
+					#@formControlDiv("col-4")
+								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+									#@tinyOptionItem("zh")/三大#end
+									#@tinyOptionItem("en")辅导费#end
+									#@tinyOptionItem("ta")/发的#end
+								#end
+								
+						#end
+						#@validateDiv("col-2")#end
+				#end
+			</span>
 			#end
 			
 		#end

@@ -2,6 +2,7 @@
 #import("/org/tinygroup/button/components/button_common.component")
 
 #import("/org/tinygroup/button/components/button.component")
+#include("/product/page/event/common.page")
 
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
@@ -13,7 +14,7 @@
 
 
 #@div()
-	#@tabWithInit("tab_demo" "tabLayout")
+	#@tabWithInit("top_demo" "tabLayout")
 		#@div(divClass="dropdownBox")
 			#include("/product/page/project/dropdownMenu.page")
 		#end
@@ -58,3 +59,20 @@
 			#pageContent
 	#end
 #end
+
+<script type="text/javascript">
+$(function(){
+        var timeid;
+      $(".tabOption").find("li").each(function(index){
+          var sTab=$(this);
+          sTab.mouseenter(function(){
+              timeid= setTimeout(function(){
+                  sTab.addClass("tabCurrent").siblings().removeClass("tabCurrent");
+                  sTab.parent().siblings().find("ul:eq(" + index +")").show().siblings().hide() ;
+             },300);
+          }).mouseleave(function(){
+                 clearTimeout(timeid);
+            })
+      })
+    })
+</script>
