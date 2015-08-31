@@ -6,6 +6,10 @@
     <groupId>org.tinygroup</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
+  <properties>
+        <tiny_version>2.0.23</tiny_version>
+    </properties>
+  
     <groupId>org.tinygroup</groupId>
     <artifactId>sdpm-product</artifactId>
     <version>0.0.1-SNAPSHOT</version>
