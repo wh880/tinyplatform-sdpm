@@ -14,6 +14,11 @@
   </properties>
   <dependencies>
   	<dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-product-view</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+  	<dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-service-view-uicomponent</artifactId>
        <version>0.0.1-SNAPSHOT</version>
