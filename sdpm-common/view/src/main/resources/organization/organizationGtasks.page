@@ -57,7 +57,7 @@
                             <span style="float:left">日期：</span>
                             #@formHorizontal("col-9")
 
-                                #daterangepicker("2015/03/18" "2015/03/23" "reservation" "reservation" "width:100px")
+                                #daterangepicker("2015/03/18" "2015/03/23" "reservation" "reservation" "width:107px")
                             #end
 
                             #daterangepickerInit("#reservation")
