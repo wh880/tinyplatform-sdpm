@@ -1,6 +1,6 @@
 #include("/product/page/event/common.page")
 #set(addArchivePagePath="/product/page/tabledemo/addArchive.pagelet",editpageModalId="myModal",editpageModal="#"+editpageModalId)
-#!set(linkName="archive")
+#!set(linkName="archive",sonitem="<li>"+"文档"+"</li>")
 
 #@tabBodyCol("ptop-5")
 		##operationbar start5

@@ -2,7 +2,6 @@
 #import("/org/tinygroup/button/components/button_common.component")
 
 #import("/org/tinygroup/button/components/button.component")
-#include("/product/page/event/common.page")
 
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
@@ -20,23 +19,23 @@
 		#end
 		
 		#@tabHead()
-				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/togglebox.page"  linkName=="demand"?"Current":"")需求#end
+				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/togglebox.page?currentPageId="+currentPageId linkName=="demand"?"Current":"")需求#end
 				
-				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/dymanicdata.page"  linkName=="dynamic"?"Current":"")动态#end
+				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/dymanicdata.page?currentPageId="+currentPageId  linkName=="dynamic"?"Current":"")动态#end
 				
-				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/product-plan.page"  linkName=="plan"?"Current":"")计划#end
+				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/product-plan.page?currentPageId="+currentPageId  linkName=="plan"?"Current":"")计划#end
 				
-				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/product-release.page"  linkName=="release"?"Current":"")发布#end
+				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/product-release.page?currentPageId="+currentPageId  linkName=="release"?"Current":"")发布#end
 				
-				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/product-roadmap.page"  linkName=="roadmap"?"Current":"")路线图#end
+				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/product-roadmap.page?currentPageId="+currentPageId  linkName=="roadmap"?"Current":"")路线图#end
 				
-				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/archive-list.page"  linkName=="archive"?"Current":"")文档#end
+				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/archive-list.page?currentPageId="+currentPageId  linkName=="archive"?"Current":"")文档#end
 				
-				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/product-project-list.page"  linkName=="project"?"Current":"")项目#end
+				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/product-project-list.page?currentPageId="+currentPageId  linkName=="project"?"Current":"")项目#end
 				
-				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/product-modular.page"  linkName=="modular"?"Current":"")模块#end
+				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/product-modular.page?currentPageId="+currentPageId  linkName=="modular"?"Current":"")模块#end
 				
-				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/overview.page"  linkName=="gaikuang"?"Current":"")概况#end
+				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/overview.page?currentPageId="+currentPageId  linkName=="gaikuang"?"Current":"")概况#end
 				
 		#end
 		

@@ -1,7 +1,7 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-#!set(linkName="plan")
+#!set(linkName="plan",sonitem="<li>"+"计划"+"</li>")
 
 
 #@tabBodyCol("ptop-5")

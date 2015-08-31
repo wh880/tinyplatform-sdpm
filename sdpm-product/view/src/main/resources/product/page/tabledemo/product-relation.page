@@ -12,6 +12,21 @@
 	.shrinkage .edui-Box .titleNames{display:block;margin-bottom:6px;margin-left:8px;}
 </style>
 
+
+#@div(divClass="operationbar")
+   
+				<span class="r" >
+				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class" "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
+				<a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-link")关联需求</a>&nbsp;
+				<a href="#" id="showsearchmore-bug">#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
+				#iconOperations("#myModal" "icon-common-edit icon-pencil" "编辑发布" "865" "448" "/product/page/tabledemo/product-addplan.pagelet" "ml-5")
+				#iconOperation(" icon-remove" "删除发布" "ml-5")
+				#iconOperation("icon-goback icon-level-up icon-large icon-rotate-270" "返回" "ml-5")
+			
+				</span>#div(divClass="clearfix")
+				
+		 #end
+
 #@toggleBox({"class":"open shrinkage"})
 	#@toggleLeft({"class":"aclass"})
 		#@settoggleLeftTitle("fa-bullhorn")&nbsp;相关信息#end

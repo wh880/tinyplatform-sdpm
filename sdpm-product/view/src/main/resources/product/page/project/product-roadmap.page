@@ -1,4 +1,4 @@
-#!set(linkName="roadmap")
+#!set(linkName="roadmap",sonitem="<li>"+"路线图"+"</li>")
 
 #import("/org/tinygroup/timeline/components/timeline.component")
 

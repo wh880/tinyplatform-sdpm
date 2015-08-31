@@ -39,6 +39,7 @@
 			<artifactId>org.tinygroup.progress</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.tinygroup</groupId>
 			<artifactId>org.tinygroup.timeline</artifactId>
