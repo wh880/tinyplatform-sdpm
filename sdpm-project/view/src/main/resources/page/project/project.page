@@ -179,7 +179,11 @@ h3 {line-height: 1.2;}
 	  				#end   *#
 	  				
 	  				
-					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
+					<a href="#"id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+					
+					#@div(divClass="operationbar")
+                    #include("/page/outpage/mulsearch.page")
+                     #end
 
 				<span class="r">
 				    #buttonIcon(iconClass="icon-download-alt")	
