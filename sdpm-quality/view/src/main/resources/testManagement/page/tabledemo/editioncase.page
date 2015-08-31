@@ -112,9 +112,14 @@
 					#end
 					#@tr()
 						#@th()所属模块#end
-						#@td()#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-							#@optionItem("")请选择#end
-						#end#end
+						#@td()
+							#@tinySelect("lang" "zh" {"class":"select2"})
+								#@tinyOptionItem("zh")/1#end
+								#@tinyOptionItem("en")/2#end
+								#@tinyOptionItem("ta")/3#end
+							#end
+							#@validateDiv("col-2")#end
+                            #end
 					#end
 					#tr()
 						#@th()相关需求#end
@@ -304,4 +309,8 @@
         });
     });
 </script>
+<script type="text/javascript">
+    $(".select2").select2();
+</script>
+
 
