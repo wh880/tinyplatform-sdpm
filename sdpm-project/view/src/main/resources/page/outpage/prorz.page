@@ -28,6 +28,9 @@
 			##operationbar start1
 			#@div(divClass="operationbar")
 				<span class="f">
+				<table>
+					<tr>
+					<td style="width:320px">
 					<a href="#" class="active_btn c">日历</a>
 					<a href="#" class="c">今日</a>
 					<a href="#" class="c">昨日</a>
@@ -36,6 +39,19 @@
 					<a href="#" class="c">本月</a>
 					<a href="#" class="c">上月</a>
 					<a href="#" class="c">所有日志</a>
+					</td>
+					<td style="float:left">
+					<div style="width:120px">
+					#@tinySelect("lang" "zh" {"class":"select2"})
+							#@tinyOptionItem("en")请选择用户#end
+							#@tinyOptionItem("zh")admin#end
+							#@tinyOptionItem("en")admin1#end
+							#@tinyOptionItem("ta")admin2#end
+							
+					#end
+					</div></td>
+						</tr>
+					</table>
 				</span>
 				#div(divClass="clearfix")
 			#end
@@ -57,3 +73,6 @@
     
     #fullCalendarInit("#external-events .fc-event" "#calendar")
 #end
+<script type="text/javascript">
+	$(".select2").select2();
+</script>
