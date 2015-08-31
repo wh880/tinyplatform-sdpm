@@ -24,7 +24,7 @@
 	#@td()￥320,800#end
 	#@td()￥320,800#end
 	 #@td()
-		#iconOperations("#myModal" "icon-hand-right" "指派" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+		#iconOperations("#myModal" "icon-hand-right" "指派" "865" "448" "/page/outpage/call.pagelet" "ml-5")
 		#iconOperations("#myModal" "icon-play" "开始" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
 		#iconOperations("#myModal" "icon-time" "日志" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
 		#iconOperations("#myModal" "icon-ok-sign" "完成" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")

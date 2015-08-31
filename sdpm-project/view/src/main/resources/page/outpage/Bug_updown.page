@@ -34,13 +34,17 @@
 #@div(divClass="operationbar")
 	导入bug
 #end
+<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+#@div(divClass="operationbar")
+#include("/page/outpage/mulsearch.page")
+#end
 #!set(activeTitle="导入bug",activeMenuId=currentPageId)
 	 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
-				#*<a href="#" class="btn btn-default btn-sm">产品</a>
-				<a href="#" class="btn btn-success btn-sm">Bug</a>
+				<a href="#" class="btn btn-default btn-sm">导入</a>
+				#*<a href="#" class="btn btn-success btn-sm">Bug</a>
 				<a href="#" class="btn btn-primary btn-sm">工程</a>
 				<a href="#" class="btn btn-info btn-sm">历史</a>
 				<a href="#" class="btn btn-warning btn-sm">相关</a>*#
@@ -61,6 +65,7 @@
 				#end
 			#end
 #end
+     
 <script type="text/javascript">
 				$(function(){
 					$('#${tableId}').on('click','.delBtn',function(e){

@@ -1,4 +1,5 @@
-
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")	
 #!set(activeTitle="批量增加",activeMenuId=currentPageId)
 #@tinyForm("thisform" "" "post" {"class":"test"})
 	 #@tableBorder()
@@ -111,5 +112,12 @@
 		#end
 	 	
 	 #end
+	  <p>
+       </p>
+             #@td()
+					#@colLabel()#end
+					<a href="#">#buttonRadiusPrimary(caption="保存")</a>
+      				<a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">#buttonDefault(caption="返回")</a>
+			#end
 	 	
 #end

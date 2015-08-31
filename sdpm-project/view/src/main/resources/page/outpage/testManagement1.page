@@ -1,3 +1,7 @@
+
+
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
 #@table()
     #@tbody()
         #@tr()
@@ -27,6 +31,10 @@
                     #@optionItem("1")选中记录#end
                 #end
             #end#end
+            #@td()
+            <a href="#">#buttonRadiusPrimary(caption="导出")</a>
+             #end
         #end
+        
     #end
 #end
