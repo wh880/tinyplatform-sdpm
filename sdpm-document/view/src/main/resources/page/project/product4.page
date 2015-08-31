@@ -1,0 +1,35 @@
+#!set(activeTitle="产品管理",activeMenuId=currentPageId)
+#include("/page/event/common.page")
+#@div()
+	#@tabWithInit("tab_demo" "tabLayout")
+		#@tabHead()
+
+		#end
+
+		#@tabBodyCol("ptop-5")
+			##operationbar start
+			#@div(divClass="operationbar")
+
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/page/project/treeNew4.page")
+		#end
+#end
+#end
+<script type="text/javascript">
+$(function(){
+        var timeid;
+      $(".tabOption").find("li").each(function(index){
+          var sTab=$(this);
+          sTab.mouseenter(function(){
+              timeid= setTimeout(function(){
+                  sTab.addClass("tabCurrent").siblings().removeClass("tabCurrent");
+                  sTab.parent().siblings().find("ul:eq(" + index +")").show().siblings().hide() ;
+             },300);
+          }).mouseleave(function(){
+                 clearTimeout(timeid);
+            })
+      })
+    })
+</script>
