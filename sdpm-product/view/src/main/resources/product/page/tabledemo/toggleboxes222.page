@@ -1,5 +1,8 @@
 ##import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
 #import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 <style>
 .infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
@@ -218,10 +221,11 @@
         #@validateDiv("col-4")#end
     #end
     
-  #@elementItem()
-   #@div(divClass="col-10 col-offset-2 form-inline")
-      #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
-    #end
+   #@elementItem()
+  <center>
+	#buttonRadiusDefault(caption="保存")
+	#buttonRadiusDefault(caption="返回")
+	</center>
 	#end
 		
 		#@div(divClass="infoContent")
