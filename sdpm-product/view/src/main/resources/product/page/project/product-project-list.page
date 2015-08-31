@@ -1,6 +1,7 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+#!set(linkName="project")
 
 #@tabBodyCol("ptop-5")
 			##operationbar start6
