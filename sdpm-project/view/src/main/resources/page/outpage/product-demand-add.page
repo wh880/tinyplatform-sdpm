@@ -8,28 +8,18 @@
 .wz{font-size:16px;top: 5px;}
 
 </style>
+#set(name="rw")
 #@div()
-	#@div(divClass="tabLayout")
-		#@div(divClass="tabBar cl")
-			<span ><a href="${TINY_CONTEXT_PATH}/page/project/project.page">任务</a></span>
-			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/outpage/proxq.page">需求</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probug.page">Bug</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probb.page">版本</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procs.page">测试</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/protd.page">团队</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prorz.page">日志</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prodt.page">动态</a></span>
-			<span ><a href="${TINY_CONTEXT_PATH}/page/outpage/prowd.page">文档</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procp.page">产品</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">概况</a></span>
-			#@divRightAlign()		
-				<a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page" class="active_btn ">#buttonIcon(iconClass="icon-list")所有项目</a>
-				&nbsp
-				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page" class="active_btn ">#buttonIcon(iconClass="icon-plus")添加项目</a>
-			#end			
-		#end
-	#end
-#end
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/page/outpage/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/page/outpage/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="#" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+			#end				
+			#@tabBodyCol("ptop-5")
 #@div(divClass="operationbar")
 	创建文档
 #end
@@ -176,5 +166,8 @@
 					<a href="#">#buttonRadiusPrimary(caption="保存")</a>
       				<a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">#buttonDefault(caption="返回")</a>
 				#end
+			
+#end
+#end
 			
 #end
