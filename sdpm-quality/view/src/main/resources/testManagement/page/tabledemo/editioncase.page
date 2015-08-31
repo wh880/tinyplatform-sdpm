@@ -1,117 +1,201 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 <style>
     .select_boxes{margin-top:0}
+    .tableBoxes tbody tr{height:30px;}
+    .tableBoxes tbody tr td{padding:10px 7px;vertical-align:middle}
 </style>
 
 #include("/testManagement/page/event/common.page")
-#set(name="version")
+#set(name="bug")
 #@div()
 #@tabWithInit("tab_demo" "optionsBox")
-    #@div(divClass="dropdownBox")
-        #include("/testManagement/page/dropdownMenu.page")
-    #end
-    #@tabHead()
-        #include("/testManagement/page/testManagementTab.page")
-    #end
+	#@div(divClass="dropdownBox")
+		#include("/testManagement/page/dropdownMenu.page")
+	#end
+	#@tabHead()
+		#include("/testManagement/page/testManagementTab.page")
+	#end
 
-    #@tabBodyCol("ptop-5")
+	#@tabBodyCol("ptop-5")
 ##operationbar start1
 
 #end
-    #@div(divClass="bugBox")
-        #@p(pClass="title_sty")提交测试#end
-    #@tinyForm("thisform" "url" "post" {"class":""})
-        #@elementItem()
-            #@colLabel()所属项目：#end
-            #@formControlDiv("col-5 form-inline selectList")
-                #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                    #@optionItem("")请选择#end
-                #end
-            #end
-        #end
-        #@elementItem()
-            #@colLabel()版本：#end
-            #@formControlDiv("col-8")
-                #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                    #@optionItem("")请选择#end
-                #end
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()负责人：#end
-            #@formControlDiv("col-8")
-                #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                    #@optionItem("")请选择#end
-                #end
-            #end
-            #@validateDiv("col-2")#end
-        #end
+	#@div(divClass="operationbar")
+		<span class="f">
+					<a href="#" class="active_btn">编辑</a>
+			</span>
+    <span class="r">
+		#buttonRadiusDefault(caption="保存")
+			</span>#end
+<div style="width:70%;float:left">
+	#@div()#tinyInput("text" "111" ""{"datatype":"","id":"111","class":"input-text","placeholder":"111"})
+	#end
+	#@div(divClass="infoContent")
+        <p class="titleName">前置条件</p>
+		#tinyInput("text" "111" ""{"datatype":"","id":"111","class":"input-text"})
+	#end
 
-        #@elementItem()
-            #@colLabel()优先级：#end
-            #@formControlDiv("col-8")
-                #@formControlDiv("col-8")
-                    #@tinySelect("" "" {"class":"优先级","nullmsg":"请选择","datatype":"*"})
-                        #@optionItem("")1#end
-                        #@optionItem("")2#end
-                        #@optionItem("")3#end
-                        #@optionItem("")4#end
-                    #end
-                #end
-            #end
-            #@validateDiv("col-2")#end
-        #end
+	#@div(divClass="infoContent")
+        <p class="titleName">用例步骤</p>
+        <div>
+		#@table("tableBoxes")
+			#@thead()
+				#@tr()
+					#@th()编号#end
+					#@th()步骤#end
+					#@th()预期#end
+					#@th()操作#end
+				#end
+			#end
+			#@tbody()
+				#for(i:[1..3])
+				#@tr()
+					#@td()${i}#end
+					#@td()#inputRadiusDefaultText()#end
+					#@td()#inputRadiusDefaultText()#end
+					#@td()#@div()
+						#buttonRadiusPrimary(btClass="btn-small" caption="之前添加")
+						#buttonRadiusPrimary(btClass="btn-small" caption="之后添加")
+						#buttonRadiusPrimary(btClass="btn-small" caption="删除")
+					#end
+					#end
+				#end#end
+			#end
+		#end
+        </div>
+	#@div(divClass="infoContent")
+        <p class="titleName">备注</p>
+        <div>
+			#@formControlDiv()
+				#@tinyueditor("contents" "contents""min-height:150px")#end
+			#end
+        </div>
+	#end
+	#@div(divClass="infoContent")
+        <p class="titleName">附件</p>
+        <div>
 
-        #@elementItem()
-            #@colLabel()开始日期：#end
-            #@formControlDiv("col-8")
-                #@tinyDateInput("birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()结束日期：#end
-            #@formControlDiv("col-8")
-                #@tinyDateInput("birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()当前状态：#end
-            #@formControlDiv("col-8")
-                #@tinySelect("" "" {"class":"当前状态","nullmsg":"请选择","datatype":"*"})
-                    #@optionItem("")未开始#end
-                    #@optionItem("")进行中#end
-                     #@optionItem("")被阻塞#end
-
-                #end
+			#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
 
 
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()任务名称：#end
-            #@formControlDiv("col-8")
-                #tinyInput("text" "任务名称" ""{"datatype":"","id":"关键词","class":"input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()描述：#end
-            #@formControlDiv("col-8")
-                #@tinyueditor("content" "content")请输入描述#end
-            #end
-            #@validateDiv("col-2")#end
-        #end
+			#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
 
-        #@divCenterAlign()#buttonRadiusDefault(caption="保存")
-            #buttonRadiusDefault(caption="取消")#end
-    #end
+        </div>
+	#end
+	#end
+
+	#buttonRadiusDefault(caption="保存")
+	#buttonRadiusDefault(caption="返回")
+	#@div(divClass="infoContent")
+        <p class="titleName">历史记录</p>
+	##加入后，js代码会导致页面排版混乱
+		#include("/testManagement/page/historyRecord.page")
+	#end
 #end
+
+    <div style="width:30%;float:right" >
+		#@div(divClass="infoContent")
+            <p class="titleName">基本信息</p>
+		##该样式在comm.css样式中自定义
+			#@table("adjustTable")
+				#@thead()
+				#end
+				#@tbody()
+					#@tr()
+						#@th()所属产品#end
+						#@td()#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
+							#@optionItem("")请选择#end
+						#end</a>#end
+					#end
+					#@tr()
+						#@th()所属模块#end
+						#@td()#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
+							#@optionItem("")请选择#end
+						#end#end
+					#end
+					#tr()
+						#@th()相关需求#end
+
+					#end
+					#@tr()
+						#@th()用例类型#end
+						#@td()#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
+							#@optionItem("")请选择#end
+						#end#end
+					#end
+					#@tr()
+						#@th()试用阶段#end
+						#@td()
+							#tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+						#end
+					#end
+					#@tr()
+						#@th()优先级#end
+						#@td()#@selectRadiusBox("select_boxes")
+							#@select(selectName="demo2" selectClass="select")
+								#@optionSelected("") #end
+								#@optionItem("1")1#end
+								#@optionItem("1")2#end
+								#@optionItem("1")3#end
+								#@optionItem("1")4#end
+							#end
+						#end#end
+					#end
+					#@tr()
+						#@th()用例状态#end
+						#@td()#@selectRadiusBox("select_boxes")
+							#@select(selectName="demo2" selectClass="select")
+								#@optionSelected("") #end
+								#@optionItem("正常")1#end
+								#@optionItem("被阻塞")2#end
+								#@optionItem("研究中")3#end
+							#end
+						#end#end
+					#end
+					#@tr()
+						#@th()关键词#end
+						#@td()
+							#tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+						#end
+					#end
+					#@tr()
+						#@th()相关用例#end
+						#@td()#tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
+						#end
+					#end
+
+				#end
+
+		#end
+		#@div(divClass="infoContent")
+            <p class="titleName">创建编辑</p>
+		##该样式在comm.css样式中自定义
+			#@table("adjustTable")
+				#@thead()
+				#end
+				#@tbody()
+					#@tr()
+						#@th()由谁创建#end
+						#@td()admin 于 2015-08-31 11:31:51#end
+					#end
+					#@tr()
+						#@th()最后编辑#end
+						#@td()******#end
+					#end
+				#end
+			#end
+		#end
+
+    </div>
+#end
+
+
+
+    </div>
+	#@p(pClass="clearfix") #end
 <script type="text/javascript">
     $(function(){
         $(".selectList").each(function(){
@@ -220,7 +304,4 @@
         });
     });
 </script>
-        #end
-
-#end
 

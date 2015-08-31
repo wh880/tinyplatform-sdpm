@@ -22,13 +22,12 @@
 						#@td()success#end
 						#@td()正常#end
 						 #@td()
-							#iconOperations("#myModal" "icon-play" "执行" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
-							#iconOperations("#myModal" "icon-flag" "结果" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
-							#iconOperations("#myModal" "icon-pencil" "编辑" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
-							#iconOperations("#myModal" "icon-copy" "复制" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
+							#iconOperations("#myModal" "icon-play" "执行" "865" "300" "/testManagement/page/tabledemo/execution.pagelet" "ml-5")
+							#iconOperations("#myModal" "icon-flag" "结果" "600" "200" "/testManagement/page/tabledemo/result.pagelet" "ml-5")
+                         	<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editioncase.page">#buttonIcon(iconClass="icon-pencil")</a>
+                         	<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">#buttonIcon(iconClass="icon-copy")</a>
 							#iconOperations("#myModal" "icon-remove" "删除" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
-							#iconOperations("#myModal" " icon-copy" "复制" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
-							
+                         <a href="${TINY_CONTEXT_PATH}">#buttonIcon(iconClass="icon-bug")</a>
 						#end
 					#end
 				#end
