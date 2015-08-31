@@ -1,0 +1,44 @@
+#@table()
+	#@thead()
+		#@tr()
+            #@th()ID#end
+            #@thW("200")日期#end
+            #@th()耗时#end
+            #@th()工作内容#end
+            #@th()操作#end
+        #end
+	#end
+	#@tbody()
+		#foreach(l:[1,2,3])
+            #@tr()
+                #@td()${lFor.index}#end
+                #@td()2015-08-31#end
+                #@td()111#end
+                #@td()111111#end
+                #@td()
+                    #@iconOperations("#editModal" "icon-pencil" "修改日志" "600" "400" "/testManagement/page/editLog.pagelet" "ml-5")#end
+                    <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-remove")</a>
+                    #@dialog("editModal")
+						#@dialogHeader()对话框标题#end
+						#@dialogBody()<p>对话框内容…</p>#end
+						#@dialogFooter()
+						#end
+					#end
+                #end
+            #end
+        #end
+        ##每次输出日志后 再新增3个新框框
+        #foreach(l:[1,2,3])
+            #@tr()
+                #@td()${lFor.index}#end
+                #@td()
+                	#@tinyDateInput("birthday" "2015-08-12" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end
+                #end
+                #@td()#tinyInput("text" "耗时" ""{"datatype":"","id":"关键词","class":"input-text"})#end
+                #@td()#tinyInput("text" "工作内容" ""{"datatype":"","id":"关键词","class":"input-text"})#end
+                #@td()
+                #end
+            #end
+        #end
+	#end
+#end
