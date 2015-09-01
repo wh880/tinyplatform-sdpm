@@ -20,7 +20,7 @@
 	#@td()121#end
 	#@td()121#end
 	#@td()121#end
-	#@td()
+	#@td("text-l")
 	#set(rm=(rand("int")%100)+"%")
 		<div class="progress-bars" style="width:110px">
 			<span class="sr-modern" style="width:${rm}"></span>
