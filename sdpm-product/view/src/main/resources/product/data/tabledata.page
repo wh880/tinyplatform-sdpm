@@ -23,10 +23,10 @@
 	#@td()激活#end
 	#@td()未开始#end
 	 #@td()
-	 	<a title="变更" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/user-add123.page"><i class="icon-random"></i></a>
-	 	<a title="评审" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/user-pingshen.page"><i class="icon-search"></i></a>
-	 	#iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/product/page/tabledemo/user-guanbi.pagelet" "ml-5")
-	 	<a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/toggleboxes222.page"><i class="icon-pencil"></i></a>
+	 	<a title="变更" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-change.page"><i class="icon-random"></i></a>
+	 	<a title="评审" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-review.page"><i class="icon-search"></i></a>
+	 	#iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/product/page/tabledemo/product-demand-close.pagelet" "ml-5")
+	 	<a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-editor.page"><i class="icon-pencil"></i></a>
 		#iconOperation(" icon-sitemap" "建用例" "ml-5")
 	#end
 #end

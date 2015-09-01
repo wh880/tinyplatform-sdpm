@@ -6,8 +6,8 @@
 
 
 
-#@toggleBox({"class":"open","style":"line-height: 2.6"})##展开为class:OPEN 要附加其它的属性请用MAP 带入
-
+#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP 带入
+<div line-height: 2.6;>
 	#@toggleLeft({"class":"aclass"})
 		#@settoggleLeftTitle()
 				#buttonIcon(iconClass="icon-cog")产品测试1:视图维护
