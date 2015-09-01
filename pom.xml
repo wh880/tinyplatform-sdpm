@@ -346,6 +346,7 @@
         <module>sdpm-report</module>
         <module>sdpm-web</module>
         <module>sdpm-statis</module>
+        <module>sdpm-statistic</module>
     </modules>
 
     <dependencyManagement>
