@@ -17,13 +17,18 @@
   <dependencies>
       <dependency>
           <groupId>org.tinygroup</groupId>
+          <artifactId>sdpm-common-view</artifactId>
+          <version>${tiny_sdpm_version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
           <artifactId>sdpm-quality-view-uicomponent</artifactId>
-          <version>0.0.1-SNAPSHOT</version>
+          <version>${tiny_sdpm_version}</version>
       </dependency>
       <dependency>
           <groupId>org.tinygroup</groupId>
           <artifactId>sdpm-quality-service-interface</artifactId>
-          <version>0.0.1-SNAPSHOT</version>
+          <version>${tiny_sdpm_version}</version>
       </dependency>
       <dependency>
           <groupId>org.tinygroup</groupId>
