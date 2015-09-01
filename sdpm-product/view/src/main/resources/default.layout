@@ -1,4 +1,4 @@
-#set(pagePostionTitle='<li><a href="'+TINY_CONTEXT_PATH+'">首页</a></li>',activeMenuId=currentPageId)<!DOCTYPE html>
+#set(pagePostionTitle='<li><a href="'+TINY_CONTEXT_PATH+'">首页</a></li>',activeMenuId=activeMenuId?:currentPageId)<!DOCTYPE html>
 <!--[if IE 7 ]>		 <html class="no-js ie ie7 lte7 lte8 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
 <!--[if IE 8 ]>		 <html class="no-js ie ie8 lte8 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
 <!--[if IE 9 ]>		 <html class="no-js ie ie9 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
@@ -258,6 +258,7 @@
 		//setPostiionNav();
 		var menucount=$(".navigation:first>li").size();
 		$("#topmenurap .navigation>li").css("width",100/menucount+"%");
+		$.cookie("currentPageId","${currentPageId}",{path: '/'});
 	})
 	//window.TinyAdmin.start(init);
 	function setPostiionNav(){

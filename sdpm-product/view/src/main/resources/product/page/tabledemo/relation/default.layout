@@ -10,9 +10,9 @@
 
 
 #if(type=="plan")
-	#!set(linkName="plan")
+	#!set(linkName="plan",sonitem="<li>"+"计划"+"</li>")
 	#elseif(type=="release")
-	#!set(linkName="release")
+	#!set(linkName="release",sonitem="<li>"+"发布"+"</li>")
 #end
 
 <style>
