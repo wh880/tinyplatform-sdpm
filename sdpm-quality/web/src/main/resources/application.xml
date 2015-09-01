@@ -41,7 +41,7 @@
 		resolve-classpath="true">
 		<class-paths>
 			<!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
-			<class-path path="E:\TinyWorkSpace\sdpm\sdpm-quality\view\src\main\resources" />
+			<class-path path="E:\TinyWorkSpace\sdpm\sdpm-statistic\view\src\main\resources"/>
 			<class-path path="F:\daochu\sdpm\sdpm-quality\view\src\main\resources" />
  		</class-paths>
 		<include-patterns>
@@ -581,15 +581,15 @@
 			<param-parser-filter bean-name="hTMLParameterValueFilter"></param-parser-filter>
 			<!-- <param-parser-filter bean-name="paramValueEncryptFilter"></param-parser-filter> -->
 		</param-parser-filters>
-		<upload-service bean-name="umUploadService">
-			<property name="sizeMax" value="-1"></property>
-			<property name="fileSizeMax" value="-1"></property>
-			<property name="repository" value="C:\temp"></property>
-			<property name="sizeThreshold" value="1024"></property>
-			<property name="keepFormFieldInMemory" value="true"></property>
-			<property name="saveInFile" value="false"></property>
-			<property name="temporary" value="false"></property>
-		</upload-service>
+		<!--		<upload-service bean-name="umUploadService">
+                    <property name="sizeMax" value="-1"></property>
+                    <property name="fileSizeMax" value="-1"></property>
+                    <property name="repository" value="C:\temp"></property>
+                    <property name="sizeThreshold" value="1024"></property>
+                    <property name="keepFormFieldInMemory" value="true"></property>
+                    <property name="saveInFile" value="false"></property>
+                    <property name="temporary" value="false"></property>
+                </upload-service>-->
 	</parser>
 	<rewrite>
 		<!-- <rule pattern="/hello/(\w+)\.page"> <condition test="%{QUERY:name}" 
