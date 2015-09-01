@@ -62,9 +62,6 @@
 					</li>
 				</ul>
 				<ul id="treeDrag" class="ztree"></ul>
-				<div style="float:right">
-					<a href="#"> 维护模块</a>	<a href="#"> 修正数据</a>
-				</div>
 			#end
 			
 			
