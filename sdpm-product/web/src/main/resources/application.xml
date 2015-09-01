@@ -34,7 +34,7 @@
 		<application-processor bean="fileMonitorProcessor"></application-processor>
 		<!-- <application-processor bean="logAdapterProcessor"></application-processor>
 		<application-processor bean="encryptionProcessor"></application-processor> -->
-		<application-processor bean="tinyTemplateConfigProcessor"></application-processor>
+		<application-processor bean="tinyTemplateConfigProcessor"></application-processor
 	</application-processors>
 
 	<!-- 这里是文件搜索器相关配置，如果配置请参考file-resolver-configuration配置手册 -->
@@ -43,7 +43,7 @@
 		<class-paths>
 			<!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
 			<class-path path="E:\TinyWork\sdpm\sdpm-product\view\src\main\resources" />
-	<!-- 		<class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources" /> -->
+	<class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources" /> 
 					
  		</class-paths>
 		<include-patterns>

@@ -44,6 +44,7 @@
 			<!--新增产品-->
 			#@aModal("#myModal" "新增产品" "900" "500" "btn-class" "/product/page/tabledemo/addProduct.pagelet")#buttonIcon(iconClass="icon-plus-sign")添加产品 #end
 		</span>
+		<hr/>
 			#pageContent
 	#end
 #end

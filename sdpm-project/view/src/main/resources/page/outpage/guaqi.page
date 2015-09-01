@@ -1,9 +1,0 @@
-#@tinyForm("thisform" "url" "post" {"class":""})
-						#@elementItem()
-							#@colLabel()内容：#end
-							#@formControlDiv("col-8")
-							#@tinyueditor("content" "content")说点什么...最少输入10个字符#end
-							#end
-						#@validateDiv("col-2")#end
-						#end
-#end

@@ -41,6 +41,11 @@
             <artifactId>sdpm-project-view</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-common-view</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
 
         <dependency>

@@ -27,7 +27,7 @@
          #end
          #@validateDiv("col-2")#end
      #end
-
+#####     以下文档类型为“文件”
     #@elementItem()
         #@colLabel()文档标题：#end
         #@formControlDiv("col-8")
@@ -59,7 +59,64 @@
         #end
         #@validateDiv("col-2")#end
     #end
-
+#####     以下文档类型为“链接”
+    #@elementItem()
+        #@colLabel()文档标题：#end
+        #@formControlDiv("col-8")
+            #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":"文档标题不能为空！","id":"username","class":"input-text"})
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel()文档URL：#end
+        #@formControlDiv("col-8")
+            #tinyInput("text" "username" ""{"placeholder":"http://","datatype":"url","nullmsg":"网址不能为空！","id":"username","class":"input-text"})
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel()关键字：#end
+        #@formControlDiv("col-8")
+            #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":"关键字不能为空！","id":"username","class":"input-text"})
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel()文档摘要：#end
+        #@formControlDiv("col-8")
+            #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":"摘要不能为空！","id":"username","class":"input-text"})
+        #end
+        #@validateDiv("col-2")#end
+    #end
+####    以下文档类型为“网页”
+    #@elementItem()
+        #@colLabel()文档标题：#end
+        #@formControlDiv("col-8")
+            #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":"文档标题不能为空！","id":"username","class":"input-text"})
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel()文档正文：#end
+        #@formControlDiv("col-8")
+            #@tinyueditor("content" "content")说点什么...最少输入10个字符#end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel()关键字：#end
+        #@formControlDiv("col-8")
+            #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":"关键字不能为空！","id":"username","class":"input-text"})
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel()文档摘要：#end
+        #@formControlDiv("col-8")
+            #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":"摘要不能为空！","id":"username","class":"input-text"})
+        #end
+        #@validateDiv("col-2")#end
+    #end
     #@elementItem()
     #@div(divClass="col-10 col-offset-2 form-inline")
       #tinyInput("submit" "submitbtn" "&nbsp;保存&nbsp;" {"class":"btn btn-primary"})
