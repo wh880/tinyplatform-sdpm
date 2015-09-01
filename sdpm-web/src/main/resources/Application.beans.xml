@@ -40,7 +40,6 @@
                 <ref bean="generatorFileProcessor"/>
                 <!-- serviceMapping -->
                 <ref bean="serviceMappingFileProcessor"/>
-                <ref bean="menuFileProcessor"/>
             </list>
         </property>
     </bean>
@@ -48,9 +47,4 @@
           class="org.tinygroup.fileresolver.applicationprocessor.FileResolverProcessor">
         <property name="fileResolver" ref="fileResolver"></property>
     </bean>
-    <bean id="menuFileProcessor" class="org.tinygroup.sdpm.menu.MenuFileProcessor">
-        <property name="fileResolver" ref="fileResolver"></property>
-        <property name="menuManager" ref="menuManager"></property>
-    </bean>
-    <bean id="menuManager" class="org.tinygroup.sdpm.menu.impl.MenuManagerImpl"/>
 </beans>

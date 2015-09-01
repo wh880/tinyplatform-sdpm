@@ -7,7 +7,14 @@ import java.util.List;
  */
 public interface MenuManager {
     String XSTREAN_PACKAGE_NAME = "menu";
-    void addMenu(Menu menu);
-    void removeMenu(String name);
+
+    void addMenu(Menu menu, String fileName);
+
+    void removeMenu(String menuId);
+
+    List<Menu> getChildMenus(String parentId);
+
+    Menu getMenu(String menuId);
+
     List<Menu> getMenus();
 }

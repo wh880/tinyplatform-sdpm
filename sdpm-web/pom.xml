@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.tinygroup</groupId>
-        <artifactId>sdpm-product</artifactId>
+        <artifactId>sdpm-service</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>sdpm-product-web</artifactId>
-    <name>sdpm-product-web</name>
+    <artifactId>sdpm-web</artifactId>
+    <name>sdpm-web</name>
     <packaging>war</packaging>
     <url>http://maven.apache.org</url>
     <properties>
@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-product-view</artifactId>
+            <artifactId>sdpm-service-view</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -116,5 +116,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
