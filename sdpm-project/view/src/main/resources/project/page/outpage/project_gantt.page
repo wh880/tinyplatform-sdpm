@@ -49,7 +49,7 @@ h3 {line-height: 1.2;}
 					<a href="#" class="active_btn">未关闭</a>
 					<a href="#">所有</a>
 					<a href="#">看板</a>
-					<a href="${TINY_CONTEXT_PATH}/project/page/outpage/project_gantt.page">甘特图</a>
+					<a href="${TINY_CONTEXT_PATH}/project/page/project/gantt.page">甘特图</a>
 					<a href="${TINY_CONTEXT_PATH}/project/page/outpage/project_calendar.page">日历</a>
 					<a href="#">燃尽图</a>
 					<a href="#">指派给我</a>
@@ -232,7 +232,8 @@ h3 {line-height: 1.2;}
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			#include("/project/page/project/project-tast-togglebox.page")
+			##include("/project/page/project/project-tast-togglebox.page")
+			#include("/project/page/project/gantt.page")
 #end
 #end
 #end
