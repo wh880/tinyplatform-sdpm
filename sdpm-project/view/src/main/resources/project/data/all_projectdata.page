@@ -1,0 +1,45 @@
+#macro setTinyItemCount(num)
+	<input type="hidden" name="records" value="${num}"/>
+#end
+
+
+
+#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#if (pagesize>records-pagesize*(page-1))
+#set(pagesize=records-(page-1)*pagesize)
+#end
+#setTinyItemCount(52)
+#for(var:[1..pagesize])
+#@tr()
+	#@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()${var}#end
+	#@td()项目${page}#end
+	#@td()12#end
+	#@td()121#end
+	#@td()121#end
+	#@td()121#end
+	#@td()121#end
+	#@td()121#end
+	#@td()
+	#set(rm=(rand("int")%100)+"%")
+		<div class="progress-bars" style="width:110px">
+			<span class="sr-modern" style="width:${rm}"></span>
+		
+		</div>
+			<span style="left:147px; float:left;height: 0; position: relative;top: -14px">${rm}</span>
+		
+	#end
+	#@td()暂无#end
+	 
+#end
+#end
+
+
+#@dialog("myModal")
+	#@dialogHeader()对话框标题#end
+	#@dialogBody()<p>对话框内容…</p>#end
+	#@dialogFooter()
+		#@buttonEnsure()确定#end
+		#@buttonCancel()关闭#end
+	#end
+#end

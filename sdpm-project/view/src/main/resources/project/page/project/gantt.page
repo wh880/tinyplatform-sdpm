@@ -1,6 +1,6 @@
 #!set(activeTitle="gantt图",activeMenuId=currentPageId)
 #import("/org/tinygroup/gantt/components/gantt.component")
-#@h2()${currentPageId} gantt图#end
+#@h2()${currentPageId} #end
 <div style="margin-right:20px">
 	#@gantt("save.jsp",500)
 	    {"tasks":[
