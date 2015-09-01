@@ -60,7 +60,7 @@
 			#@tr()
 				#@td()${i}#end
 				#@td()
-					#@formControlDiv("col-8")
+					#@formControlDiv()
 						#@tinySelect("lang" "zh" {"class":"select2"})
 							#@tinyOptionItem("zh")/#end
 							#@tinyOptionItem("en")同上#end
@@ -70,7 +70,7 @@
                     #end
 				#end
 				#@td()
-					#@formControlDiv("col-8")
+					#@formControlDiv()
 						#@tinySelect("lang" "zh" {"class":"select2"})
 							#@tinyOptionItem("zh")/#end
 							#@tinyOptionItem("en")/同上#end
