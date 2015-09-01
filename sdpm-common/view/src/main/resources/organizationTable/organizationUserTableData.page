@@ -23,7 +23,7 @@
     #@td()
         #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/organization/organizationUserAdd.pagelet" "ml-5")
         #iconOperations(
-            "#myModal2" "icon-remove" "删除" "500" "350" "/organization/organizationUserDelect.pagelet" "ml-5")
+            "#myModal2" "icon-remove" "删除" "550" "150" "/organization/organizationUserDelect.pagelet" "ml-5")
     #end
 #end
 #end
