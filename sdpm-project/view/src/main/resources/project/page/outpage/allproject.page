@@ -42,7 +42,7 @@
 					</table>
 					
 	#end
-#*	#include("#")*#
+	#include("/project/page/outpage/allproject_list.page")
 #end
 #end
 #end
