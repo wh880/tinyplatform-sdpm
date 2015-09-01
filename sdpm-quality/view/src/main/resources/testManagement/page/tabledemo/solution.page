@@ -63,10 +63,16 @@
             #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
         #end
     #end
-    #@div(divClass="infoContent")
-    <p class="titleName">历史记录</p>
-    ##加入后，js代码会导致页面排版混乱
-        #include("/testManagement/page/historyRecord.page")
+    #@elementItem()
+        #@colLabel()备注：#end
+        #@formControlDiv("col-8")
+            #@div(divClass="infoContent")
+            <p class="titleName">历史记录</p>
+            ##加入后，js代码会导致页面排版混乱
+                #include("/testManagement/page/historyRecord.page")
+            #end
+        #end
+        #@validateDiv("col-2")#end
     #end
 #end
 
