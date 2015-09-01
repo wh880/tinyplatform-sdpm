@@ -117,7 +117,7 @@
 						
 					<span class="r">
 					<!--导入导出修改-->
-						#@aModal("#myModal" "导出HTML" "800" "130" "btn-class" "/product/page/tabledemo/product-export-html.pagelet")#buttonIcon(iconClass="icon-download-alt")导处HTML#end
+						#@aModal("#myModal" "导出HTML" "800" "130" "btn-class" "/product/page/tabledemo/product-export-html.pagelet")#buttonIcon(iconClass="icon-download-alt")导出HTML#end
 					</span>	
 					
 				#end

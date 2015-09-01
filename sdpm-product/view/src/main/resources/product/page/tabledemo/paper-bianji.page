@@ -1,46 +1,37 @@
-
+#import("/org/tinygroup/form/components/form.component")
 #@tinyForm("thisform" "" "" {"class":"test"})
 
- #@elementItem()
-        #@colLabel()所属文档库：#end
-        #@formControlDiv("col-8")
-             #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-			#@tinyOptionItem("zh")1#end
-			#@tinyOptionItem("en")2#end
-			#@tinyOptionItem("ta")3#end
-			#@tinyOptionItem("zh")4#end
-			#@tinyOptionItem("en")5#end
-			#@tinyOptionItem("ta")6#end
+ 
+   
+    #@elementItem()
+		#@colLabel()所属文档库：#end
+		#@formControlDiv("col-8")
+			#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+				#@tinyOptionItem("zh")产品文档库#end
+				#@tinyOptionItem("en")B001#end
+				#@tinyOptionItem("ta")C001#end
+			#end
 		#end
-        #end
-        #@validateDiv("col-2")#end
-    #end
-	 
-	 #@elementItem()
-        #@colLabel()所属产品：#end
-        #@formControlDiv("col-8")
-             #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-			#@tinyOptionItem("zh")012#end
-			#@tinyOptionItem("en")42312#end
-			#@tinyOptionItem("ta")23123#end
-			#@tinyOptionItem("zh")2312#end
-			#@tinyOptionItem("en")2312#end
-			#@tinyOptionItem("ta")2312#end
+		#@validateDiv("col-2")#end
+	#end
+    #@elementItem()
+		#@colLabel()所属产品：#end
+		#@formControlDiv("col-8")
+			#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+				#@tinyOptionItem("zh")A001#end
+				#@tinyOptionItem("en")B001#end
+				#@tinyOptionItem("ta")C001#end
+			#end
 		#end
-        #end
-        #@validateDiv("col-2")#end
-    #end
-	 
+		#@validateDiv("col-2")#end
+	#end
 	  #@elementItem()
         #@colLabel()所属分类：#end
         #@formControlDiv("col-8")
              #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-			#@tinyOptionItem("zh")21#end
+			#@tinyOptionItem("zh")/#end
 			#@tinyOptionItem("en")4224#end
 			#@tinyOptionItem("ta")23电风扇#end
-			#@tinyOptionItem("zh")23防守打法2#end
-			#@tinyOptionItem("en")2防守打法 12#end
-			#@tinyOptionItem("ta")23防守打法2#end
 		#end
         #end
         #@validateDiv("col-2")#end
@@ -71,7 +62,7 @@
           #@elementItem()
         #@colLabel()文档摘要：#end
 	#@formControlDiv("col-8")
-		#@tinyueditor("content23" "content23" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"备注不能为空！"})备注...最少输入10个字符#end
+		#@Teditor("content23" "content23" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"备注不能为空！"})备注...最少输入10个字符#end
 	#end
         #@validateDiv("col-2")#end
     #end
@@ -79,7 +70,7 @@
             #@elementItem()
         #@colLabel()文档备注：#end
 	#@formControlDiv("col-8")
-		#@tinyueditor("content" "content" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"备注不能为空！"})备注...最少输入10个字符#end
+		#@Teditor("content" "content" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"备注不能为空！"})备注...最少输入10个字符#end
 	#end
         #@validateDiv("col-2")#end
     #end
@@ -95,13 +86,6 @@
  	
  	
         #@validateDiv("col-3")#end
-  
-    #@elementItem()
-		#@div(divClass="col-10 col-offset-2 form-inline")
-			#tinyInput("submit" "submitbtn" " 保存" {"class":"btn btn-primary"})
-		#end
-	#end
-
 #end
 <script type="text/javascript">
     $(function(){
