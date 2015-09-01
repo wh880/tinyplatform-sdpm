@@ -13,27 +13,18 @@
 </style>
 
 #include("/page/event/common.page")
+#set(name="gk")
 #@div()
-	#@div(divClass="tabLayout")
-		#@div(divClass="tabBar cl")
-			<span><a href="${TINY_CONTEXT_PATH}/page/project/project.page">任务</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/proxq.page">需求</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probug.page">Bug</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/probb.page">版本</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procs.page">测试</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/protd.page">团队</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prorz.page">日志</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prodt.page">动态</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/prowd.page">文档</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/outpage/procp.page">产品</a></span>
-			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">概况</a></span>
-			#@divRightAlign()		
-				<a href="${TINY_CONTEXT_PATH}/page/outpage/task_edit.page" class="active_btn ">#buttonIcon(iconClass="icon-list")所有项目</a>
-				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page" class="active_btn ">#buttonIcon(iconClass="icon-plus")添加项目</a>
-			#end			
-		#end
-	#end
-			##operationbar start1
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/page/outpage/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/page/outpage/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="#" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+			#end				
+			#@tabBodyCol("ptop-5")
 			#@div(divClass="operationbar")
 				<span class="f">
 					项目名称
@@ -103,8 +94,88 @@
 	        ##加入后，js代码会导致页面排版混乱
 	       	#include("/page/outpage/recordlist.page")
 		#end
+</div>
+<div style="width:35%;float:right" >
+		#@div(divClass="infoContent")
+		        <p class="titleName">基本信息</p>
+		       	#@table()
+		       		#@thead()
+		       		#end
+		       		#@tbody()
+		       			#@tr()
+							#@td()所属项目#end
+		       				#@td()<a href="#">测试项目</a>#end
+		       			#end
+		       			#@tr()
+							#@td()版本#end
+		       				#@td()trunk#end
+		       			#end
+		       			#@tr()
+							#@td()负责人#end
+		       				#@td()admin#end
+		       			#end
+		       			#@tr()
+							#@td()优先级#end
+		       				#@td()1#end
+		       			#end
+		       			#@tr()
+							#@td()开始日期#end
+		       				#@td()2015-08-12#end
+		       			#end
+		       			#@tr()
+							#@td()结束日期#end
+		       				#@td()2015-08-12#end
+		       			#end
+		       			#@tr()
+							#@td()当前状态#end
+		       				#@td()<font color="red">正在进行中#end
+		       			#end	
+		       		#end
+		       	#end
+		#end
+		#@div(divClass="infoContent")
+			<p class="titleName">其他信息</p>
+			<table>
+				<tr>
+					<td rowspan="4">工时统计</td>
+					<td>总共预计20工时</td>
+				</tr>
+				<tr>
+					<td>可用工时483.0工时</td>
+				</tr>
+				<tr>
+					<td>已经消耗1工时</td>
+				</tr>
+				<tr>
+					<td>预计剩余19工时</td>
+				</tr>
+			</table>
+		#end
+#*			#@table()
+				#@thead()
+					#@tr()
+						#@td(tdClass="row")
+							工时统计
+						#end
+						#@td()总共预计20工时#end
+					#end
+					#@tr()
+						#@td()可用工时483.0工时#end
+						
+					#end
+					#@tr()
+						#@td()已经消耗1工时#end
+					#end
+					#@tr()
+						#@td()预计剩余19工时#end
+					#end
+				#end
+			#end
+		#end*#
 	</div>
-	#TypeInfo("project" "")
+#*	#TypeInfo("project" "")*#
+	#end
+	#end
 #*	<div style="float:button;text-align:center;margin:auto">
 				#@iconOperations("#myModal" "icon-time" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp日志#end
 				#@iconOperations("#myModal" "icon-off" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp关闭#end
