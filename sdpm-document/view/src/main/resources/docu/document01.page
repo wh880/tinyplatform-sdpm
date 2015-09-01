@@ -58,7 +58,8 @@
 					##<a href="#">激活</a>
 					##<a href="#">已变更</a>
 					##<a href="#">待关闭</a>
-					<a href="#">按模块浏览</a>
+	##				<a href="#">按模块浏览</a>
+	               <a href="${TINY_CONTEXT_PATH}/docu/document01.page">按模块浏览</a>
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
