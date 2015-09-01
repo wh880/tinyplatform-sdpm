@@ -6,7 +6,10 @@ import org.tinygroup.logger.LoggerFactory;
 import org.tinygroup.sdpm.menu.Menu;
 import org.tinygroup.sdpm.menu.MenuManager;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MenuManagerImpl implements MenuManager {
 
@@ -25,9 +28,12 @@ public class MenuManagerImpl implements MenuManager {
         }
         menuMap.put(menu.getName(), menu);
         logger.logMessage(LogLevel.WARN, "菜单:[id:{},name:{}]", menuId, menu.getName());
-        for (Menu child : menu.getChildMenus()) {
-            child.setParentId(menu.getId());
-            addMenu(child, fileName);
+        List<Menu> childMenus = menu.getChildMenus();
+        if (childMenus != null) {
+            for (Menu child : childMenus) {
+                child.setParentId(menu.getId());
+                addMenu(child, fileName);
+            }
         }
     }
 

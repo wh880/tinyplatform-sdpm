@@ -38,10 +38,12 @@ public class MenuFileProcessor extends AbstractFileProcessor {
                 menuManager.removeMenu(oldMenu.getId());
             }
             Menu menu = (Menu) stream.fromXML(fileObject.getInputStream());
-            menuManager.addMenu(menu, fileObject.getAbsolutePath());
-            caches.put(fileObject.getAbsolutePath(), menu);
-            logger.logMessage(LogLevel.INFO, "读取菜单menu文件[{0}]结束",
-                    fileObject.getAbsolutePath());
+            if (menu != null) {
+                menuManager.addMenu(menu, fileObject.getAbsolutePath());
+                caches.put(fileObject.getAbsolutePath(), menu);
+                logger.logMessage(LogLevel.INFO, "读取菜单menu文件[{0}]结束",
+                        fileObject.getAbsolutePath());
+            }
         }
     }
 
@@ -50,4 +52,11 @@ public class MenuFileProcessor extends AbstractFileProcessor {
         return fileObject.getFileName().toLowerCase().endsWith(MENU_EXT_FILENAME);
     }
 
+    public MenuManager getMenuManager() {
+        return menuManager;
+    }
+
+    public void setMenuManager(MenuManager menuManager) {
+        this.menuManager = menuManager;
+    }
 }
