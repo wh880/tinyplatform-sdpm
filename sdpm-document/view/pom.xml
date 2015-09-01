@@ -1,4 +1,6 @@
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.tinygroup</groupId>
@@ -16,12 +18,12 @@
   	<dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-document-view-uicomponent</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
+        <version>${tiny_sdpm_version}</version>
     </dependency>
     <dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-document-service-interface</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
+        <version>${tiny_sdpm_version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
