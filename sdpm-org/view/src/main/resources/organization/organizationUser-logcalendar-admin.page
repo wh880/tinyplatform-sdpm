@@ -1,0 +1,91 @@
+#!set(activeTitle="组织管理",activeMenuId=currentPageId)
+###import("/org/tinygroup/zTree/components/zTree.component")
+#import("/components/org/tinygroup/fulimanageui/form.component")
+#set(editpagePath=
+    "/organization/organizationFileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+
+#include("/organizationOther/common.page")
+<style>
+    .tabLayout .tabBar span a {
+        color: #333
+    }
+
+    .tabLayout .tabBar .Current a {
+        color: #fff
+    }
+
+    .operationbar {
+        border-top: none;
+        background: #f9fafe;
+        padding: 6px 5px 6px 10px;
+    }
+
+    .barBox {
+        padding-top: 5px;
+        float: left
+    }
+
+    .barBox a, .barBox a:link {
+        color: #333;
+        margin-right: 3px;
+        display: inline-block
+    }
+
+    .barBox a:hover {
+        color: #f90
+    }
+
+</style>
+#@div()
+    #@div(divClass="tabLayout")
+        #@div(divClass="tabBar cl")
+        <span class="Current"><a
+                href="${TINY_CONTEXT_PATH}/organization/organizationUser.page?currentPageId=7">用户</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationGtasks.page?currentPageId=7">待办</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationLog.page?currentPageId=7">日志</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationActive.page?currentPageId=7">动态</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationDepartment.page?currentPageId=7">部门</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationPrivilege.page?currentPageId=7">权限</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationCompany.page?currentPageId=7">公司</a></span>
+        #end
+        #@div(divClass="operationbar")
+        <span style="padding-top:5px;float:left">
+					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-todo.page">待办</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-story-admin.page">需求</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-task-admin.page">任务</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-bug-admin.page">缺陷</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-testtask-admin.page">测试</a>
+                    <a href="${TINY_CONTEXT_PATH}/organization/organizationUser-active-admin.page">动态</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-log-admin.page"
+                       class="active_btn">日志</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-project-admin.page">项目</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/organizationUser-profile-admin.page">档案</a>
+        </span>
+        <span style="padding-top:5px;float:right">
+            #@aModal(editpageModal "导出" "600" "120" ""  editpagePath)
+                #@simpleI(" icon-chevron-down")导出#end
+            #end
+        </span>
+            #div(divClass="clearfix")
+        #end
+
+    #end
+#end
+
+#@fullCalendar("fullCalendar")
+    #@externalEvents("external-events")
+        #@h4()可拖动事件#end
+        #@fcEvent()我的事件1#end
+        #@fcEvent()我的事件2#end
+        #@fcEvent()我的事件3#end
+        #@fcEvent()我的事件4#end
+        #@fcEvent()我的事件5#end
+        #@eventButtons("drop-remove")
+        放下后即可删除
+        #end
+    #end
+    #@calendar("calendar")#end
+#end
+
+#simpleModal(editpageModalId)
+#fullCalendarInit("#external-events .fc-event" "#calendar")
