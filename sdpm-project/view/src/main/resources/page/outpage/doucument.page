@@ -1,0 +1,129 @@
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/icon/components/icon.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+<style>
+.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.wz{font-size:16px;top: 5px;}
+</style>
+#include("/page/event/common.page")
+#set(name="wd")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/page/outpage/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/page/outpage/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="#" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+			#end				
+			#@tabBodyCol("ptop-5")
+#@div(divClass="operationbar")
+	创建文档
+#end
+#@div()
+	#@table()
+		#@tbody()
+			#@tr()
+				#@td()
+					#@colLabel("wz")所属项目#end
+					#@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})
+						#@tinyOptionItem("zh")项目1#end
+						#@tinyOptionItem("en")项目2#end
+						#@tinyOptionItem("ta")项目3#end
+					#end
+				#end				
+			#end
+			#@tr()
+				#@td()
+					#@colLabel("wz")所属产品#end
+					#@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})
+						
+						#@tinyOptionItem("zh")产品1#end
+						#@tinyOptionItem("en")产品2#end
+						#@tinyOptionItem("ta")产品3#end
+					#end
+				#end				
+			#end
+			#@tr()
+				#@td()
+					#@colLabel("wz")所属分类#end
+					#@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})
+						#@tinyOptionItem("zh")分类1#end
+						#@tinyOptionItem("en")分类2#end
+						#@tinyOptionItem("ta")分类3#end
+					#end
+				#end				
+			#end
+			#@tr()
+				#@td()	
+					#@colLabel("wz")文档标题#end
+					#@formControlDiv("col-8")
+					#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+					#end
+				#end
+				#@validateDiv("col-2")#end							
+			#end
+			#@tr()
+				#@td()	
+					#@colLabel("wz")关键字#end
+					#@formControlDiv("col-8")
+					#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","id":"username","class":"input-text"})
+					#end
+				#end
+				#@validateDiv("col-2")#end							
+			#end
+			#@tr()
+				#@td()	
+					#@colLabel("wz")文档摘要#end
+					#@formControlDiv("col-8")
+					#@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})摘要#end
+					#end
+					#@validateDiv("col-2")#end
+				#end
+				#@validateDiv("col-2")#end							
+			#end
+			#@tr()
+				#@td()	
+					#@colLabel("wz")文档URL#end
+					#@formControlDiv("col-8")
+					#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","id":"username","class":"input-text"})
+					#end
+				#end
+				#@validateDiv("col-2")#end							
+			#end
+			#@tr()
+				#@td()
+					#@colLabel("wz")附件#end
+					#@formControlDiv("col-8")
+					#fileWithInput("file-1")
+					#end
+					#@validateDiv("col-2")#end
+				#end
+			#end
+			#@tr()
+				#@td()
+					#@colLabel("wz")文档正文#end
+					#@formControlDiv("col-8")
+					#@tinyueditor("content" "content")放个屁...最少输入10个字符#end
+					#end					
+					#@validateDiv("col-2")#end
+				#end
+			#end
+			#@tr()
+				#@td()
+					#@colLabel()#end
+					<a href="#">#buttonRadiusPrimary(caption="保存")</a>
+      				<a href="${TINY_CONTEXT_PATH}/page/outpage/prowd.page">#buttonDefault(caption="返回")</a>
+				#end
+			#end
+		#end
+	#end
+#end
+	#end
+		#end
+	#end

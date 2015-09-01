@@ -41,9 +41,15 @@
 			
 			#@toggleBox({"class":"open"})
 				#@toggleLeft({"class":"aclass"})
-					#@settoggleLeftTitle()这里据说是项目名称#end
+					#@settoggleLeftTitle()网站建设一期#end
 					#@settoggleLeftBody()
-						#include("/testManagement/page/moduleTree.page"
+						#@OlTopList()
+						    #topItem(1 "#" "最新动态列表")
+						    #normalLiItems(2 "#" "最新动态列表" "" "green")
+						    #normalLiItems(3 "#" "最新动态列表" "" "darkGreen")
+						    #normalLiItems(4 "#" "最新动态列表" "" "grey")
+						    #normalLiItems(5 "#" "最新动态列表")
+						#end
 					#end
 				#end
 				

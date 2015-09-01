@@ -73,8 +73,7 @@
 					##<a href="#">已变更</a>
 					##<a href="#">待关闭</a>
 					<a href="#">按模块浏览</a>
-	##				<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
-                        <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
 					##<a href="#">#buttonIcon(iconClass="icon-upload-alt")导入</a>&nbsp;
@@ -85,7 +84,6 @@
 				</span>
 				#div(divClass="clearfix")
 			#end
-	#include("/docu/mulsearch.page")
 			##operationbar end
 			#include("/docu/treeNew.page")
 		#end

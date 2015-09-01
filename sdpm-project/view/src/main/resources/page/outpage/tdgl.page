@@ -1,0 +1,29 @@
+#!set(activeTitle="团队管理",activeMenuId=currentPageId)
+<style>
+.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+</style>
+#include("/page/event/common.page")
+#set(name="td")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/page/outpage/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/page/outpage/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="#" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+			#end				
+			#@tabBodyCol("ptop-5")
+#@div(divClass="operationbar")
+	团队管理>
+#end
+#include("/page/outpage/tdgl_updown.page")
+#@div(divClass="col-10 col-offset-2 form-inline")
+	#tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+#end
+#end
+#end
+#end
