@@ -119,7 +119,7 @@
 
       
       #@elementItem()
-        #@colLabel()由谁评审#end
+        #@colLabel()关联产品#end
 	        #@formControlDiv("col-4")
 	            #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"8","multiple":"multiple"})
 				#@tinyOptionItem("zh")1#end

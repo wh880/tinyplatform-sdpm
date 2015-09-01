@@ -152,11 +152,15 @@
       #end
       #@elementItem()
         	#@colLabel()关联产品#end       		
-			#@formControlDiv("col-8")
-				<input type="text" style="width:300px">				
+			#@formControlDiv("col-3")
+			    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"8","multiple":"multiple"})
+				#@tinyOptionItem("zh")1#end
+				#@tinyOptionItem("en")22#end
+				#@tinyOptionItem("ta")3#end			
 			#end
 			#@validateDiv("col-2")#end
       #end
+      <br />
       #@elementItem()
         	#@colLabel()项目描述#end
 			#@formControlDiv("col-6")
@@ -191,7 +195,7 @@
     #@colLabel()#end
       <a href="#">#buttonRadiusPrimary(caption="保存")</a>
       <a href="${TINY_CONTEXT_PATH}/project/page/outpage/progk.page">#buttonDefault(caption="返回")</a>
-   #end
+   #end#end
 #*   <table>
    		<tr>
    			<td>
