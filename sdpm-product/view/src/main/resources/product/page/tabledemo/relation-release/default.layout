@@ -9,11 +9,7 @@
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 
 
-#if(type=="plan")
-	#!set(linkName="plan",sonitem="<li>"+"计划"+"</li>")
-	#elseif(type=="release")
-	#!set(linkName="release",sonitem="<li>"+"发布"+"</li>")
-#end
+#!set(linkName="release",sonitem="<li>"+"发布"+"</li>")
 
 <style>
 	.infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
@@ -99,23 +95,21 @@
 			#@tabWithInit("tab_demo" "optionsBox")
 				
 				#@tabHead()
-					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation/product-al-req.page" cname=="demand"?"Current":"")
+					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-release/product-al-req.page" cname=="demand"?"Current":"")
 						#@buttons("","icon-lightbulb")
 							已完成需求
 						#end
 					#end
 					
-					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation/product-al-bug.page" cname=="bug"?"Current":"")
+					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-release/product-al-bug.page" cname=="bug"?"Current":"")
 						#@buttons("","icon-bug green")
 							已解决Bug
 						#end
 					#end
 					
-					#if(type=='release')
-						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation/product-al-no-bug.page" cname=="no-bug"?"Current":"")
-							#@buttons("","icon-bug red")
-								遗留Bug
-							#end
+					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-release/product-al-no-bug.page" cname=="no-bug"?"Current":"")
+						#@buttons("","icon-bug red")
+							遗留Bug
 						#end
 					#end
 					
