@@ -1,0 +1,237 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+<style>
+.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+.open #downMenuSty{min-width:75px}
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: -5px;
+    margin-right: 5px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+h3 {line-height: 1.2;}
+</style>
+#*<style>
+##.tabLayout .tabBar span a{color:#333}
+##.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.operationbar a{padding:2px 3px;display:inline-block;margin-right:0;border-radius:3px;}
+.operationbar a:hover{background:#ddd;color:#333;}
+.operationbar .active_btn:hover{background:none;}
+.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+.open>#downMenuSty{min-width:70px}
+</style>*#
+##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
+#include("/project/page/event/common.page")
+#set(name="rw")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/project/page/outpage/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/project/page/outpage/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/allproject.page" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+			#end							#@tabBodyCol("ptop-5")
+			##operationbar start
+			#@div(divClass="operationbar")
+				<span class="f">
+					<a href="#" class="active_btn">未关闭</a>
+					<a href="#">所有</a>
+					<a href="#">看板</a>
+					<a href="${TINY_CONTEXT_PATH}/project/page/outpage/project_gantt.page">甘特图</a>
+					<a href="${TINY_CONTEXT_PATH}/project/page/outpage/project_calendar.page">日历</a>
+					<a href="#">燃尽图</a>
+					<a href="#">指派给我</a>
+					#*	#@dropDownClickMenu("更多" "#")						
+							#@dropDownItem("#")我完成#end
+							#@dropDownItem("#")未开始#end
+							#@dropDownItem("#")进行中#end
+							#@dropDownItem("#")未完成#end
+							#@dropDownItem("#")已完成#end
+							#@dropDownItem("#")已关闭#end
+							#@dropDownItem("#")已延期#end
+							#@dropDownItem("#")需求变动#end
+							#@dropDownItem("#")已取消#end
+	  				#end  *#
+	  				#@buttonGroup()
+                    #@buttonDropdown("Dropdown")更多  #@spanCaret()#end#end
+                    #@ulDropdownMenu("downMenuSty")
+                    <p>
+                    #@iconOperations("#myModal" "" "我完成" "865" "200"
+					 "#" "ml-5")我完成#end
+					 </p>
+					 <p>
+                     #@iconOperations("#myModal" "" "未开始" "865" "200"
+					 "#" "ml-5")未开始#end
+					 </p>
+					 <p>
+                     #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")进行中#end
+					 </p>
+					 <p>
+					 #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")未完成#end
+					 </p>
+					 <p>
+					  #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")已完成#end
+					 </p>
+					 <p>
+					  #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")已关闭#end
+					 </p>
+					 <p>
+					  #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")已延期#end
+					 </p>
+					 <p>
+					  #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")需求变动#end
+					 </p>
+					  #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")已取消#end
+                     #@liDivider()#end
+                    #end
+                    #end
+                    
+                    #@buttonGroup()
+                    #@buttonDropdown("Dropdown")分组查看 #@spanCaret()#end#end
+                    #@ulDropdownMenu("downMenuSty")
+                    <p>
+                    #@iconOperations("#myModal" "" "我完成" "865" "200"
+					 "#" "ml-5")需求分组#end
+					 </p>
+					 <p>
+                     #@iconOperations("#myModal" "" "未开始" "865" "200"
+					 "#" "ml-5")状态分组#end
+					 </p>
+					 <p>
+                     #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")优先级分组#end
+					 </p>
+					 <p>
+					 #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")创建者分组#end
+					 </p>
+					 <p>
+					  #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")指派给分组#end
+					 </p>
+					 <p>
+					  #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")完成者分组#end
+					 </p>
+					 <p>
+					  #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")关闭者分组#end
+					 </p>
+					 <p>
+					  #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")预计分组#end
+					 </p>
+					 <p>
+					  #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")已消耗分组#end
+					 <p>
+					 <p>
+					  #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")剩余分组#end
+					 <p>
+					 <p>
+					  #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")类型分组#end
+					 <p>
+					
+					  #@iconOperations("#myModal" "" "进行中" "865" "200"
+					 "#" "ml-5")截止分组#end
+					
+                     #@liDivider()#end
+                    #end
+                    #end
+                    
+                    
+	  				 
+				</span>
+					
+	  			#*	#@dropDownClickMenu("分组查看" "#")						
+							#@dropDownItem("#")需求分组#end
+							#@dropDownItem("#")状态分组#end
+							#@dropDownItem("#")优先级分组#end
+							#@dropDownItem("#")创建者分组#end
+							#@dropDownItem("#")指派给分组#end
+							#@dropDownItem("#")完成者分组#end
+							#@dropDownItem("#")关闭着分组#end
+							#@dropDownItem("#")预计分组#end
+							#@dropDownItem("#")已消耗分组#end							
+							#@dropDownItem("#")剩余分组#end
+							#@dropDownItem("#")类型分组#end
+							#@dropDownItem("#")截止分组#end
+	  				#end   *#
+	  				
+	  				
+					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+					
+					#@div(divClass="operationbar")
+                    #include("/project/page/outpage/mulsearch.page")
+                     #end
+
+				<span class="r">
+				    #buttonIcon(iconClass="icon-download-alt")	
+				    #@buttonGroup()
+                    #@buttonDropdown("Dropdown")导入  #@spanCaret()#end#end
+                    #@ulDropdownMenu("downMenuSty")
+                    <p>
+                    <span><a href="${TINY_CONTEXT_PATH}/project/page/outpage/Bug_updown.page">&nbsp导入bug</a></span>
+					 </p>
+					 <p>
+                    <span><a href="${TINY_CONTEXT_PATH}/project/page/outpage/task_download.page">&nbsp导入任务</a></span>
+					 </p>
+                     #@iconOperations("#myModal" "" "导入" "865" "200"
+					 "/project/page/tabledemo/add_doc.pagelet" "ml-5")导入Excel #end
+					 
+                     #@liDivider()#end
+                    #end
+                    #end&nbsp;
+                    
+                    #buttonIcon(iconClass="icon-upload-alt")	
+				    #@buttonGroup()
+                    #@buttonDropdown("Dropdown")导出  #@spanCaret()#end#end
+                    #@ulDropdownMenu("downMenuSty")
+                    <p>
+                     #@iconOperations("#myModal" "" "导出" "865" "200"
+					 "/project/page/outpage/testManagement1.pagelet" "ml-5") &nbsp;导出数据#end  
+					 </p>
+					
+                     #@iconOperations("#myModal" "" "导出" "865" "200"
+					 "/project/page/outpage/modal_updown.pagelet" "ml-5") &nbsp;导出模板#end            
+                     
+                    #end
+                    #end&nbsp;
+                    
+					<a href="${TINY_CONTEXT_PATH}/project/page/outpage/reportform.page">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
+					
+					
+					#@iconOperations("#myModal" "icon-plus-sign" "批量增加" "985" "448" 
+					"/project/page/tabledemo/bech_add_task.pagelet" "ml-5")&nbsp;批量增加#end
+					
+					#@iconOperations("#myModal" "icon-plus" "建任务" "865" "448" 
+					"/project/page/tabledemo/add_task.pagelet" "ml-5")&nbsp;建任务#end
+					
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/project/page/project/project-tast-togglebox.page")
+#end
+#end
+#end

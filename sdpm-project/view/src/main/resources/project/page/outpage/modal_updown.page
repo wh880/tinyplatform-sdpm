@@ -1,0 +1,19 @@
+
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#@tinyForm("thisform" "url" "post" {"class":""})
+		#@elementItem()
+			#@colLabel()任务记录数：#end
+			#@formControlDiv("col-5 form-inline selectList")
+			
+				#tinyInput("text" "任务记录" ""{"datatype":"","id":"版本","class":"input-text"})
+				#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
+					#@optionItem("")xlsx#end
+					#@optionItem("")xls#end
+				#end
+				
+				<a href="#">#buttonRadiusPrimary(caption="导出")</a>
+				
+			#end
+		#end
+#end 

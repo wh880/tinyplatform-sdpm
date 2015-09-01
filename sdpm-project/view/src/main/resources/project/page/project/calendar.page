@@ -1,0 +1,10 @@
+
+
+
+  #@fullCalendar("fullCalendar")
+
+        
+        #@calendar("calendar")#end
+    #end
+    
+    #fullCalendarInit("#external-events .fc-event" "#calendar")

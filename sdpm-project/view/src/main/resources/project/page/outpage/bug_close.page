@@ -1,0 +1,51 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/fold/components/fold.component")
+
+#@tinyForm("thisform" "" "" {"class":"test"})
+
+ #@elementItem()
+		#@colLabel()备注：#end
+		#@formControlDiv("col-10")
+			#@tinyueditor("content" "content" "height:100px;overflow:auto")说点什么...最少输入10个字符#end
+		#end
+		#@validateDiv("col-2")#end
+	#end
+	
+	#@elementItem()
+	    #@colLabel()#end
+	
+					#@formControlDiv("col-10")
+					<a href="#">#buttonRadiusPrimary(caption="保存")</a>
+      				#@validateDiv("col-2")#end
+		#end	
+	#end	
+ #@elementItem()
+	#@colLabel()历史记录：#end
+	#@formControlDiv("col-10")
+	#@foldMenu("" "Tinyfold3" "" "width:100%")
+    #@foldItem("2015-08-26 09:19:52, 由 Demo 指派给 Demo")记录详情<br>
+		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
+	 #end
+	 #@foldItem("2015-08-25 09:15:58, 由 Demo 开始启动")记录详情<br>
+		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
+	 #end
+	 #@foldItem("2015-08-24 09:16:58, 由 Demo 指派给 Mack")记录详情<br>
+		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
+	 #end
+    #end
+     #end
+    
+  #end
+<script type="text/javascript">
+$(function(){
+	$(".Hui_aside").scrollTop(380);
+	/*折叠*/
+	/*5个参数顺序不可打乱，分别是：相应区,隐藏显示的内容,速度,类型,事件*/
+	$.Tinyfold("#Tinyfold3 .item h4","#Tinyfold3 .item .info","",3,"click");
+});
+</script>
+	
+#end
