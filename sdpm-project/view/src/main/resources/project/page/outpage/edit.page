@@ -11,16 +11,16 @@
 .width{width:260px}
 .input-group-addon{width:10px;font-size:20px}
 </style>
-#include("/page/event/common.page")
+#include("/project/page/event/common.page")
 #set(name="gk")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
 			#@div(divClass="dropdownBox")
-				#include("/page/outpage/dropdownMenu.page")
+				#include("/project/page/outpage/dropdownMenu.page")
 			#end
 			#@tabHead()
-				#include("/page/outpage/protab.page")							
-				<a href="${TINY_CONTEXT_PATH}/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				#include("/project/page/outpage/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
 				<a href="#" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
 			#end				
 			#@tabBodyCol("ptop-5")
@@ -179,7 +179,7 @@
       #end
       #@colLabel()#end
       <a href="#">#buttonRadiusPrimary(caption="保存")</a>
-      <a href="${TINY_CONTEXT_PATH}/page/outpage/progk.page">#buttonDefault(caption="返回")</a>
+      <a href="${TINY_CONTEXT_PATH}/project/page/outpage/progk.page">#buttonDefault(caption="返回")</a>
    #end
 #end
  #end
