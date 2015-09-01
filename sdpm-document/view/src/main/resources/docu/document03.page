@@ -13,20 +13,20 @@
 #@span(spanClass="barBtnsty")
         ##    #@tabHeadCol()文档#end
 ##    #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/page/tabledemo/document03-edit.pagelet" "ml-5")编辑 #end
-     #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/docu/document01-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
+     #@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/docu/document01-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
 		##	#@tabHeadCol()编辑#end
 		##	#@tabHeadCol()分类#end
 		##	#@tabHeadCol()删除#end
 ##      #@iconOperations("#myModal" "" "指派" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")删除 #end
 ##      #@iconOperations("#myModal" "" "指派" "865" "448" "/docu/user-add.pagelet" "ml-5")删除 #end
-       #@iconOperations("#myModal" "" "删除" "865" "448" "" "ml-5")<i class="icon-trash"></i>&nbsp;删除 #end
+       #@iconOperations("#myModal" "" "删除" "865" "150" "" "ml-5")<i class="icon-trash"></i>&nbsp;删除 #end
 		#end
 	##	<span class="r" style="position:relative;top:-28px;height:0">
 		<span class="r" style="position:relative;height:0">
 ##			<a href="${TINY_CONTEXT_PATH}/page/project/adddocumentlib.page">#buttonIcon(iconClass="icon-globe")添加文档库</a>&nbsp;
 ##            <a href="${TINY_CONTEXT_PATH}/docu/adddocumentlib.page">#buttonIcon(iconClass="icon-globe")添加文档库</a>&nbsp;
  ##添加文档库
-                                			#@aModal("#myModal" "创建文档库" "600" "382" "" "/docu/adddocumentlib.pagelet")
+                                			#@aModal("#myModal" "创建文档库" "865" "150" "" "/docu/adddocumentlib.pagelet")
                                 			#simpleI("icon-plus-sign")添加文档库#end
                                                 #@dialog("myModal")
                                             	#@dialogHeader()对话框标题#end
