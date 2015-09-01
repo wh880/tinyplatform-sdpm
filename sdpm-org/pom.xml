@@ -12,8 +12,7 @@
     <name>sdpm-org develop</name>
     <url>http://maven.apache.org</url>
     <properties>
-        <tiny_version>2.0.20</tiny_version>
-        <tinyui_version>2.0.0</tinyui_version>
+
     </properties>
     <build>
         <plugins>
