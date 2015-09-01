@@ -1,5 +1,6 @@
 #!set(activeTitle="权限管理",activeMenuId=currentPageId)
 #set(editpagePath="/organization/organizationGroupAdd.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+
 ###set(tabpagePath="/organizationOther/tab.pagelet",tabpageModalId="userViewModal",tabpageModal="#"+tabpageModalId)
 <style>
     .tabLayout .tabBar span a{color:#333}
@@ -23,16 +24,24 @@
         <span class="f">
 					<dr>浏览分组</dr>
         </span>
+
+
+        <span style="padding-top:5px;float:right">
+            #@aModal(editpageModal "按模块分配权限" "600" "300" "btn radius btn-primary btn-sm"
+                "/organization/organizationPrivilegeByModule.pagelet")
+                #@simpleI("")按模块分配权限#end
+            #end
+        </span>
         <span style="padding-top:5px;float:right">
             #@aModal(editpageModal "新增分组" "600" "300" "btn radius btn-primary btn-sm" editpagePath)
                 #@simpleI("icon-plus")新增分组#end
             #end
-##    #@aModal(editpageModal "添加" "865" "420" "btn radius btn-primary btn-sm" editpagePath)
-##        #@simpleI("icon-plus")添加#end
-##    #end
-            </span>
+
+        </span>
             #div(divClass="clearfix")
         #end
+
+
 
         #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
             #@div(divBaseClass="tinyheaderTools form-inline")
@@ -56,6 +65,7 @@
 #end
 
 #simpleModal(editpageModalId)
+#simpleModal(editpageModalId1)
 
 #@simpleModal("myModal" "视图维护")#end
 #@simpleModal("myModa2" "用户添加")#end
