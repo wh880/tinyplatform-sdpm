@@ -40,7 +40,7 @@ h3 {line-height: 1.2;}
 			#@tabHead()
 				#include("/project/page/outpage/protab.page")							
 				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
-				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/allproject.page" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+				<a href="#" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
 			#end				
 			#@tabBodyCol("ptop-5")
 			##operationbar start
@@ -49,7 +49,7 @@ h3 {line-height: 1.2;}
 					<a href="#" class="active_btn">未关闭</a>
 					<a href="#">所有</a>
 					<a href="#">看板</a>
-					<a href="${TINY_CONTEXT_PATH}/project/page/outpage/project_gantt.page">甘特图</a>
+					<a href="${TINY_CONTEXT_PATH}/project/page/project/gantt.page">甘特图</a>
 					<a href="${TINY_CONTEXT_PATH}/project/page/outpage/project_calendar.page">日历</a>
 					<a href="#">燃尽图</a>
 					<a href="#">指派给我</a>
@@ -180,7 +180,7 @@ h3 {line-height: 1.2;}
 	  				#end   *#
 	  				
 	  				
-					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+					<a href="#"id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 					
 					#@div(divClass="operationbar")
                     #include("/project/page/outpage/mulsearch.page")
@@ -232,7 +232,8 @@ h3 {line-height: 1.2;}
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			#include("/project/page/project/project-tast-togglebox.page")
+			##include("/project/page/project/project-tast-togglebox.page")
+			#include("/project/page/project/calendar.page")
 #end
 #end
 #end
