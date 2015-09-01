@@ -57,11 +57,11 @@
 
 #simpleModal(editpageModalId)
 
-#@simpleModal("myModal" "用户添加")#end
+#@simpleModal("myModal" "视图维护")#end
 #@simpleModal("myModa2" "用户添加")#end
-#@simpleModal("myModa3" "用户添加")#end
-#@simpleModal("myModa4" "用户添加")#end
-#@simpleModal("myModa5" "用户添加")#end
+#@simpleModal("myModa3" "成员维护")#end
+#@simpleModal("myModa4" "复制分组")#end
+#@simpleModal("myModa5" "编辑分组")#end
 <script type="text/javascript">
     <!--
     var setting = {
