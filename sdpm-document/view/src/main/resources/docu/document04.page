@@ -3,6 +3,7 @@
  <style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}.optionsBoxsty{margin-bottom:5px;display:inline-block;float:left}.barBtnsty a{border:#ddd 1px solid;border-radius:2px;background-image:linear-gradient(to bottom,#fff,#e6e6e6);color:#333; padding:5px 18px;display:inline-block}.barBtnsty a:hover{color:#f90}</style>
 ##    #include("/page/event/common.page")
       #include("/docu/common.page")
+#include("/docu/deletedocumentlib.page")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
 	##	#@div(divClass="dropdownBox")
@@ -19,7 +20,9 @@
 		##	#@tabHeadCol()删除#end
 ##      #@iconOperations("#myModal" "" "指派" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")删除 #end
 ##      #@iconOperations("#myModal" "" "指派" "865" "448" "/docu/user-add.pagelet" "ml-5")删除 #end
-       #@iconOperations("#myModal" "" "删除" "865" "150" "" "ml-5")<i class="icon-trash"></i>&nbsp;删除 #end
+ ##      #@iconOperations("#myModal" "" "删除" "865" "150" "" "ml-5")<i class="icon-trash"></i>&nbsp;删除 #end
+        <a  id="deleteBatch2" href="javascript:;" onclick="batchDel();" class="deleteBatch radius">
+            <i class="icon-trash"></i>&nbsp;删除</a>
 #end
 ##		<span class="r" style="position:relative;top:-28px;height:0">
         <span class="r" style="position:relative;height:0">
