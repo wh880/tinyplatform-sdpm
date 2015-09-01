@@ -8,6 +8,7 @@
 
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 
+
 #if(type=="plan")
 	#!set(linkName="plan")
 	#elseif(type=="release")

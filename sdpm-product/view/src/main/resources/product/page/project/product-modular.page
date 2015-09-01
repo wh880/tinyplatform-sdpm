@@ -30,7 +30,7 @@
 			
 #import("/org/tinygroup/table/components/table.component")
 
-		#@borderedTable()
+		<table class="table table-border table-bordered" cellspacing="0">
 		
 		
 		    #@tbody()
@@ -38,17 +38,18 @@
 		
 		      #@rightAlignTr()       
 		            
-		      	 <th class="text-r" style="vertical-align:middle;height: 30px;line-height: 3px"> 居右
-                 </th>
+	            #@th("text-r" "vertical-align:middle;width:20%")
+	            	产品XXX
+	            #end
 		      	 #@th("text-l" )
 		      	 	 #@elementItem()
-						#@formControlDiv("col-4")
-							#@tinySelect()
+						#@formControlDiv()
+							#@tinySelect("" "" {"class":"col-4"})
 								#@tinyOptionItem("zh")admin#end
 								#@tinyOptionItem("en")部长#end
 								#@tinyOptionItem("ta")检察长#end
 							#end
-							#@tinySelect()
+							#@tinySelect("" "" {"class":"col-4"})
 								#@tinyOptionItem("zh")admin#end
 								#@tinyOptionItem("en")部长#end
 								#@tinyOptionItem("ta")检察长#end
@@ -70,7 +71,7 @@
 		
 		    #end
 		
-		#end
+		</table>
 			
 			
 		#end
