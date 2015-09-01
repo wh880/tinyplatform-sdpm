@@ -18,24 +18,29 @@
 			#@tabHead()
 				#include("/project/page/outpage/protab.page")							
 				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
-				<a href="#" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/allproject.page" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
 			#end				
 			#@tabBodyCol("ptop-5")
 #@div(divClass="operationbar")
 	新建版本
 #end
+#@tinyForm("thisform" "" "" {"class":"test"})
 #@div()
 	#@table()
 		#@tbody()
 			#@tr()
 				#@td()
 					#@colLabel("wz")产品：#end
-					#@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})
+					  #@formControlDiv("col-3")
+					#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
 						#@tinyOptionItem("zh")分类1#end
 						#@tinyOptionItem("en")分类2#end
 						#@tinyOptionItem("ta")分类3#end
+						#@tinyOptionItem("ta")<a href="#">#buttonIcon(iconClass="icon-plus")建任务</a>#end
 					#end
-				#end				
+				#end
+				#end	
+							
 			#end
 			
 			#@tr()
@@ -51,7 +56,7 @@
 			#@tr()
 			#@td()
 		    #@colLabel("wz")构建者：#end
-		    #@formControlDiv("col-8")
+		    #@formControlDiv("col-3")
 			#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
 				#@tinyOptionItem("zh")中国#end
 				#@tinyOptionItem("en")英国#end
@@ -128,3 +133,4 @@
 #end
 #end	
 #end		
+#end
