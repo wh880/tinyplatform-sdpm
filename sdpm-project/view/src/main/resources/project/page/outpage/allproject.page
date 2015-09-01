@@ -1,0 +1,48 @@
+#include("/project/page/event/common.page")
+#set(name="rw")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/project/page/outpage/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/project/page/outpage/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="#" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+			#end				
+			#@tabBodyCol("ptop-5")
+			#@div(divClass="operationbar")
+				<span class="f">
+				<table>
+					<tr>
+						<td style="width:300px">
+					<a href="#" class="active_btn">未完成</a>
+					<a href="#">所有</a>
+					<a href="#">未开始</a>
+					<a href="#">进行中</a>
+					<a href="#">已挂起</a>					
+					<a href="#">已完成</a>
+					</td>
+					<td style="float:left">
+					<div style="width:120px">
+					#@tinySelect("lang" "zh" {"class":"select2"})							
+							#@tinyOptionItem("zh")--请选择产品--#end
+							#@tinyOptionItem("en")aaaaa#end
+							#@tinyOptionItem("en")bbbbb#end
+							#@tinyOptionItem("ta")ccccc#end
+							
+					#end
+					</div>
+					
+					</td>
+					<td>
+					<a href="${TINY_CONTEXT_PATH}/project/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+					</td>
+						</tr>
+					</table>
+					
+	#end
+#*	#include("#")*#
+#end
+#end
+#end
