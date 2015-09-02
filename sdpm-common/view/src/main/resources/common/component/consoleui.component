@@ -1,0 +1,42 @@
+#macro statisticalBox(sClass sbgIcon sTitle sIcon sNum)
+<div class="panel panel-dark widget-profile ${sClass}">
+    <div class="panel-heading">
+        <div class="widget-profile-bg-icon"><i class="fa ${sbgIcon}"></i></div>
+        <h3>${sTitle}</h3>
+        <span class="label label-tag ${sIcon}">${sNum}</span>
+    </div>
+    #bodyContent
+</div>
+#end
+
+#macro groupList(listClass)
+<div class="list-group ${listClass}">
+    #bodyContent
+</div>
+#end
+
+#macro itemNumber(listIcon listName listNum)
+<a href="${itemHref}" class="list-group-item"><i class="fa ${listIcon}"></i>&nbsp;${listName}<span
+        class="badge badge-info">${listNum}</span></a>
+#end
+
+#macro numberBox(statBg statIcon statClass )
+<div class="stat-panel widget-profile ${statClass}">
+    <div class="stat-row">
+        <div class="stat-cell no-padding text-center text-slg ${statBg}">
+            <i class="fa ${statIcon}"></i>
+        </div>
+    </div>
+    <div class="stat-row">
+        <div class="stat-cell bordered no-border-t text-center text-lg">
+            <div class="widget-profile-counters">
+                #bodyContent
+            </div>
+        </div>
+    </div>
+</div>
+#end
+
+#macro numList(colWidth nNumbers nTitle numHref)
+<div class="${colWidth}"><span>${nNumbers}</span><br><a href="${numHref}">${nTitle}</a></div>
+#end

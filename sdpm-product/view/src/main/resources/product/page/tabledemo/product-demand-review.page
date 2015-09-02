@@ -12,19 +12,20 @@
 .infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}
 </style>
 #@tinyForm("thisform" "" "" {"class":"test"})
-
+<span style="width:236px">
    #@elementItem()
    #@daterangepickerPosition()
         #@colLabel()评审时间：#end
         #@formControlDiv("col-8")
-           #@tinyDateInput("pingshendate" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+           #@tinyDateInput("pingshendate" "" "YYYY-MM-DD" {"style":"width:236px","datatype":"*","nullmsg":"日期不能为空"})#end
         #end
         #@validateDiv("col-2")#end
     #end
     #end
+    </span>
      #@elementItem()
         #@colLabel()评审结果：#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-3")
              #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
 			#@tinyOptionItem("zh")确认通过#end
 			#@tinyOptionItem("en")有待明确#end
@@ -36,7 +37,7 @@
 
     #@elementItem()
 		#@colLabel()指派给：#end
-		#@formControlDiv("col-8")
+		#@formControlDiv("col-3")
 			#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
 				#@tinyOptionItem("zh")A001#end
 				#@tinyOptionItem("en")B001#end
@@ -48,7 +49,7 @@
 	
     #@elementItem()
         #@colLabel()由谁评审：#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-3")
              #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22","multiple":"multiple"})
 			#@tinyOptionItem("zh")A#end
 			#@tinyOptionItem("en")B#end

@@ -1,0 +1,4 @@
+#@aHeadCol(TINY_CONTEXT_PATH+"/statistic/page/product.page" name=="product"?"Current":"")产品#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/statistic/page/project.page" name=="project"?"Current":"")项目#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/statistic/page/test.page" name=="test"?"Current":"")测试#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/statistic/page/org.page" name=="org"?"Current":"")组织#end

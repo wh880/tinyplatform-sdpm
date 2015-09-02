@@ -20,7 +20,7 @@
 	#@toggleLeft({"class":"aclass"})
 		#@settoggleLeftTitle("fa-bullhorn")&nbsp;相关信息#end
 		#@div(divClass="infoContent")
-	        <p class="titleName">基本信息</p>123456
+	        <p class="titleName">基本信息</p>
 	       	<ul>
 	      <li>	
 #@tinyForm("thisform" "" "" {"class":"test"})
@@ -199,6 +199,7 @@
 			
       #end
 	#end
+	
 	#@toggleRight()
 		#@div(divClass="infoContent pd-10")
 	        <p class="titleName">需求描述</p>
