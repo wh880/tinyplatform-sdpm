@@ -10,17 +10,17 @@
     #@tbody()
         #@tr()
             #@td()
-            <a href="${TINY_CONTEXT_PATH}/statistic/page/product.page?order=1">产品汇总表</a>
+            <a href="${TINY_CONTEXT_PATH}/statistic/page/test.page?order=1">Bug指派</a>
             #end
         #end
         #@tr()
             #@td()
-            <a href="${TINY_CONTEXT_PATH}/statistic/page/product.page?order=2">产品投入表</a>
+            <a href="${TINY_CONTEXT_PATH}/statistic/page/test.page?order=2">用例统计</a>
             #end
         #end
         #@tr()
             #@td()
-            <a href="${TINY_CONTEXT_PATH}/statistic/page/product.page?order=3">产品完成度统计报表</a>
+            <a href="${TINY_CONTEXT_PATH}/statistic/page/test.page?order=3">版本统计</a>
             #end
         #end
 
