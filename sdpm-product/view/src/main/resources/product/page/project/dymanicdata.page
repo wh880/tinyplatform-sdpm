@@ -17,18 +17,18 @@
 					<a href="#">上月</a>
 					<a href="#">所有</a>
 					<span style="left:297px;top:-35px; position:relative; height:10%">
-						#@tinyForm("thisform" "" "" {"class":"test"})
+					#@tinyForm("thisform" "" "" {"class":"test"})
 					  #@elementItem()
-						#@formControlDiv("col-2")
-						#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-						#@tinyOptionItem("zh")上周#end
-						#@tinyOptionItem("en")上月#end
-						#@tinyOptionItem("ta")去年#end
+						 #@formControlDiv("col-2")
+						   #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+						   #@tinyOptionItem("zh")上周#end
+						   #@tinyOptionItem("en")上月#end
+						   #@tinyOptionItem("ta")去年#end
+					       #end
+						 #end
+							 #@validateDiv("col-2")#end
+						#end
 					#end
-									#end
-							#@validateDiv("col-2")#end
-						#end
-						#end
 					</span>					
 				</span>
 				#div(divClass="clearfix")

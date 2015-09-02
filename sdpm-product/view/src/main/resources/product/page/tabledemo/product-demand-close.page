@@ -11,7 +11,7 @@
 
  #@elementItem()
         #@colLabel()关闭原因：#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-3")
              #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
 			#@tinyOptionItem("zh")已完成#end
 			#@tinyOptionItem("en")已细分#end
@@ -21,7 +21,7 @@
 			#@tinyOptionItem("ta")设计如此#end
 		#end
         #end
-        #@validateDiv("col-2")#end
+        #@validateDiv("col-3")#end
     #end
 	 
           #@elementItem()
