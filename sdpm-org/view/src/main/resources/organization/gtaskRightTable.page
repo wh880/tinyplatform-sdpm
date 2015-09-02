@@ -1,12 +1,12 @@
 #!set(activeTitle="表格",activeMenuId=currentPageId)
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/tasktabledata.pagelet") ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/taskTableData.pagelet") ##取数据地址 总数据
         #@thead()
 
             #@div(divBaseClass="tinyheaderTools form-inline")
                 #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-                #@aModal("#myModal" "导出" "865" "100" "" "/organization/organizationLogExport.pagelet")
+                #@aModal("#myModal" "导出" "865" "100" "" "/organization/logExport.pagelet")
                     #@simpleI(" icon-chevron-down")导出#end
                 #end
             #end

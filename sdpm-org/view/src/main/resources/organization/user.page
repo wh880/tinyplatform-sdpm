@@ -1,7 +1,7 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
 #import("/org/tinygroup/zTree/components/zTree.component")
 #import("/components/org/tinygroup/fulimanageui/form.component")
-#include("/organizationOther/common.page")
+#include("/common/common.page")
 <style>
     .tabLayout .tabBar span a {
         color: #333
@@ -44,19 +44,19 @@
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
         <span class="Current"><a
-                href="${TINY_CONTEXT_PATH}/organization/organizationUser.page?currentPageId=7">用户</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationGtasks.page?currentPageId=7">待办</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationLog.page?currentPageId=7">日志</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationActive.page?currentPageId=7">动态</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationDepartment.page?currentPageId=7">部门</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationPrivilege.page?currentPageId=7">权限</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/organizationCompany.page?currentPageId=7">公司</a></span>
+                href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7">用户</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/gtasks.page?currentPageId=7">待办</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/log.page?currentPageId=7">日志</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/active.page?currentPageId=7">动态</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/department.page?currentPageId=7">部门</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/privilege.page?currentPageId=7">权限</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/company.page?currentPageId=7">公司</a></span>
         #end
         #@div(divClass="operationbar")
 
         ##   多重搜索
         ##
-            #include("/organization/organizationMultiSearch.page")
+            #include("/organization/multiSearch.page")
         #end
         #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
             #@toggleLeft({"class":"aclass"})

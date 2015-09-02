@@ -18,7 +18,7 @@
     #@td()2015-12-1#end
     #@td()习近平#end
     #@td()
-        #@aModal("#myModal" "日志详情" "600" "300" "" "/organization/organizationLog-Detail.pagelet")日志详情#end
+        #@aModal("#myModal" "日志详情" "600" "300" "" "/organization/logDetail.pagelet")日志详情#end
         #@dialog("myModal")
             #@dialogHeader()公司#end
             #@dialogBody()<p></p>#end
