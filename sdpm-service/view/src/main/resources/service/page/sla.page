@@ -11,15 +11,15 @@
 .open>#downMenuSty{min-width:70px}
 </style>*#
 ##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
-#include("/serviceManagement/page/event/common.page")
+#include("/service/page/event/common.page")
 #set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
-            #include("/serviceManagement/page/dropdownMenu.page")
+            #include("/service/page/dropdownMenu.page")
         #end
         #@tabHead()
-            #include("/serviceManagement/page/serviceManagement.page")
+            #include("/service/page/serviceManagement.page")
         #end
 
         #@tabBodyCol("ptop-5")
@@ -38,7 +38,7 @@
 
 					##<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
                     ##<a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/serviceManagement/page/proposeSla.page">#buttonIcon(iconClass="icon-plus")新建协议</a>
+					<a href="${TINY_CONTEXT_PATH}/service/page/proposeSla.page">#buttonIcon(iconClass="icon-plus")新建协议</a>
 				</span>
                 #div(divClass="clearfix")
                 #include("/testManagement/page/mulsearch.page")
