@@ -30,7 +30,7 @@
         #iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/testManagement/page/tabledemo/shutdown.pagelet" "ml-5")
     <a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/edition.page" title="编辑">#buttonIcon(iconClass=
         "icon-pencil")</a>
-    <a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/proposeBug.page" title="复制">#buttonIcon(iconClass=
+    <a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page" title="复制">#buttonIcon(iconClass=
         "icon-copy")</a>
 
 
