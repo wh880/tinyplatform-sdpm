@@ -228,7 +228,7 @@
                                 #@navItemDemo("8.6" "javascript:void(0);" "icon-list")回收站#end
                                 #@navItemDemo("8.7" "javascript:void(0);" "icon-list")重建索引#end
                             #end*#
-				#TnavItem("9" "服务管理" "/service/page/service-client.page" "icon-trophy")
+				#TnavItem("9" "服务管理" "/service/page/client.page" "icon-trophy")
 			#*				#@navDropDownMenu("9" "后台管理" "icon-trophy" )
                                 #@navItemDemo("9.1" "javascript:void(0);" "icon-list")首页#end
                                 #@navItemDemo("9.2" "javascript:void(0);" "icon-list")插件#end
