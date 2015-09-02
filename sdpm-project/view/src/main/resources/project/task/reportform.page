@@ -16,29 +16,7 @@
     #bodyContent
 </div>
 #end
-#include("/project/page/event/common.page")
-#set(name="rw")
-#@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-			#@div(divClass="dropdownBox")
-				#include("/project/page/outpage/dropdownMenu.page")
-			#end
-			#@tabHead()
-				#include("/project/page/outpage/protab.page")							
-				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
-				<a href="#" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
-			#end				
-			#@tabBodyCol("ptop-5")
-##operationbar start1
-    #@div(divClass="operationbar")
-    <span class="f">
-					<a href="#" class="active_btn">报表</a>
-				</span>
-    <span class="r">
-					<a href="${TINY_CONTEXT_PATH}/project/page/project/project.page">#buttonIcon(iconClass="icon-upload-alt")返回</a>&nbsp;
-				</span>
-        #div(divClass="clearfix")
-    #end
+#include("/project/task/taskMenu.page")
 ##operationbar end
     #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
         #@toggleLeft({"class":"aclass","style":"width:250px;height:400px;overflow:auto"})
@@ -72,9 +50,9 @@
 
         #end
     #end
-    #end
-    #end
-    #end
+    
+    
+    
 
 
 

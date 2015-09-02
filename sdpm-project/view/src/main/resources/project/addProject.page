@@ -3,7 +3,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/search/components/search.component")
 
-#include("/project/page/event/common.page")
+#include("/project/task/taskMenu.page")
 #macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
 	<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked") checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass) class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio" onclick="${radioOther}"/>
 #end
@@ -21,18 +21,8 @@
 .width{width:270px}
 .input-group-addon{width:10px;font-size:20px}
 </style>
-#set(name="rw")
-#@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-			#@div(divClass="dropdownBox")
-				#include("/project/page/outpage/dropdownMenu.page")
-			#end
-			#@tabHead()
-				#include("/project/page/outpage/protab.page")							
-				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
-				<a href="#" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
-			#end				
-			#@tabBodyCol("ptop-5")
+
+
 	#@div(divClass="operationbar")
 	添加项目
 	#end
@@ -141,9 +131,8 @@
      			 <a href="#">#buttonRadiusPrimary(caption="保存")</a>
       			<a href="${TINY_CONTEXT_PATH}/project/page/outpage/progk.page">#buttonDefault(caption="返回")</a>
   			 #end
-		#end
-#end
-#end
+		
+
 <script type="text/javascript">
 function setWhite(acl)
 {

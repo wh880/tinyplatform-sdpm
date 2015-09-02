@@ -1,9 +1,16 @@
-##import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
-#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-
-#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+<style>
+.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+</style>
+  #include("/project/task/taskMenu.page")
+			##operationbar end
+			#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 	#@toggleLeft({"class":"aclass"})
-	   #@settoggleLeftTitle()产品文档库#end
+	 #@settoggleLeftTitle()产品文档库#end
 		#@settoggleLeftBody("treeLeftbox")
 			<ul class="treeList">
 				<li id="listContent" style="display:none; position:absolute;left:74px;">
@@ -15,34 +22,11 @@
 	#end
 	
 	#@toggleRight()
-		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
-			#@div(divBaseClass="tinyheaderTools form-inline")
-				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-				#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
-			#*	<a href="#" class="btn btn-default btn-sm">产品</a>
-				<a href="#" class="btn btn-success btn-sm">Bug</a>
-				<a href="#" class="btn btn-primary btn-sm">工程</a>
-				<a href="#" class="btn btn-info btn-sm">历史</a>
-				<a href="#" class="btn btn-warning btn-sm">相关</a>*#
-			#end
-			#@tinyTableContent("../../data/tast-datalist.pagelet") ##取数据地址 总数据
-				#@thead()
-					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})ID#end
-						#@tinyTh({"class":"","rel":"sortname"})P#end
-						#@tinyTh({"class":"","rel":"sortname"})任务名称#end
-						#@tinyTh({"class":"sorting","rel":"sortname","style":"color:#f00"})状态#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})截止#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})创建#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})指派给#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})完成者#end
-						
-						#@tinyTh({"class":"","rel":"sortname"})操作#end
-					#end
-				#end
-			#end
-			##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
+		##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+			#include("/project/task/add_task_date.page")
+	
+		
+#*			#include("/project/page/outpage/add_task_date.page")*#
 			<script type="text/javascript">
 				$(function(){
 					$('#${tableId}').on('click','.delBtn',function(e){
@@ -58,9 +42,9 @@
 					#@buttonCancel()关闭#end
 				#end
 			#end
-		#end
-	#end
+    #end
 #end
+ 
 <script type="text/javascript">
 		<!--
 		var setting = {
@@ -299,4 +283,4 @@
 			$("#callbackTrigger").bind("change", {}, setTrigger);
 		});
 		//-->
-	</script>
+</script>

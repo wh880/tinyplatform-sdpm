@@ -9,6 +9,7 @@
 .infoContent ul li .text-overflow a:hover{color:#f90}
 .infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}
 </style>
+#include("/project/task/taskMenu.page")
 #@tinyForm("thisform" "url" "post" {"class":""})
 	
 	#@elementItem()
@@ -57,7 +58,7 @@
 	#@elementItem()
 		#@colLabel()备注#end
 		#@formControlDiv("col-8")
-			#@tinyueditor("content" "content")说点什么...最少输入10个字符#end
+			#@Teditor("content" "content" {"initialFrameHeight":"200"})Say something#end
 		#end
 		#@validateDiv("col-2")#end
 	#end

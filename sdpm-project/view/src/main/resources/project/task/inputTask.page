@@ -1,6 +1,6 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
-#include("/project/page/event/common.page")
+
 <style>
 .tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
@@ -8,18 +8,7 @@
 .wz{font-size:16px;top: 5px;}
 
 </style>
-#set(name="rw")
-#@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-			#@div(divClass="dropdownBox")
-				#include("/project/page/outpage/dropdownMenu.page")
-			#end
-			#@tabHead()
-				#include("/project/page/outpage/protab.page")							
-				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
-				<a href="#" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
-			#end				
-			#@tabBodyCol("ptop-5")
+#include("/project/task/taskMenu.page")
 #@div(divClass="operationbar")
     <p>
 	导入任务
@@ -41,13 +30,13 @@
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
-				<a href="#" class="btn btn-default btn-sm">导入</a>
-				#*<a href="#" class="btn btn-success btn-sm">Bug</a>
+			#*	<a href="#" class="btn btn-default btn-sm">导入</a>
+				<a href="#" class="btn btn-success btn-sm">Bug</a>
 				<a href="#" class="btn btn-primary btn-sm">工程</a>
 				<a href="#" class="btn btn-info btn-sm">历史</a>
 				<a href="#" class="btn btn-warning btn-sm">相关</a>*#
 			#end
-			#@tinyTableContent("../../data/task_tabledata.pagelet") ##取数据地址 总数据
+			#@tinyTableContent("task_tabledata.pagelet") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
@@ -64,8 +53,8 @@
 				#end
 			#end
 #end
-			#end
-#end#end
+		
+
 <script type="text/javascript">
 				$(function(){
 					$('#${tableId}').on('click','.delBtn',function(e){

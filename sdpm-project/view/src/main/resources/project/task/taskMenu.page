@@ -30,17 +30,17 @@ h3 {line-height: 1.2;}
 .open>#downMenuSty{min-width:70px}
 </style>*#
 ##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
-#include("/project/page/event/common.page")
+#include("/project/event/common.page")
 #set(name="rw")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
 			#@div(divClass="dropdownBox")
-				#include("/project/page/outpage/dropdownMenu.page")
+				#include("/project/dropdownMenu.page")
 			#end
 			#@tabHead()
-				#include("/project/page/outpage/protab.page")							
-				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/add_project.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
-				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/allproject.page" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+				#include("/project/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/project/addProject.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="${TINY_CONTEXT_PATH}/project/allProject.page" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
 			#end						
 			#@tabBodyCol("ptop-5")
 			##operationbar start
@@ -49,8 +49,8 @@ h3 {line-height: 1.2;}
 					<a href="#" class="active_btn">未关闭</a>
 					<a href="#">所有</a>
 					<a href="#">看板</a>
-					<a href="${TINY_CONTEXT_PATH}/project/page/outpage/project_gantt.page">甘特图</a>
-					<a href="${TINY_CONTEXT_PATH}/project/page/outpage/project_calendar.page">日历</a>
+					<a href="${TINY_CONTEXT_PATH}/project/task/gantt.page">甘特图</a>
+					<a href="${TINY_CONTEXT_PATH}/project/task/calendar.page">日历</a>
 					<a href="#">燃尽图</a>
 					<a href="#">指派给我</a>
 					#*	#@dropDownClickMenu("更多" "#")						
@@ -189,13 +189,13 @@ h3 {line-height: 1.2;}
                     #@buttonDropdown("Dropdown")导入  #@spanCaret()#end#end
                     #@ulDropdownMenu("downMenuSty")
                     <p>
-                    <span><a href="${TINY_CONTEXT_PATH}/project/page/outpage/Bug_updown.page">&nbsp导入bug</a></span>
+                    <span><a href="${TINY_CONTEXT_PATH}/project/task/inputBug.page">&nbsp导入bug</a></span>
 					 </p>
 					 <p>
-                    <span><a href="${TINY_CONTEXT_PATH}/project/page/outpage/task_download.page">&nbsp导入任务</a></span>
+                    <span><a href="${TINY_CONTEXT_PATH}/project/task/inputTask.page">&nbsp导入任务</a></span>
 					 </p>
                    
-					  #@aModal("#myModal2" "导入Excel" "600" "120" "" "/project/page/tabledemo/add_doc.pagelet")&nbsp导入Excel#end
+					  #@aModal("#myModal2" "导入Excel" "600" "120" "" "/project/task/inputExcel.pagelet")&nbsp导入Excel#end
 					 #@dialog("myModal2")
 						#@dialogHeader()#end
 						#@dialogBody()<p></p>#end
@@ -211,7 +211,7 @@ h3 {line-height: 1.2;}
                     #@ulDropdownMenu("downMenuSty")
                     
 					 <p>
-					 #@aModal("#myModal" "导出数据" "600" "120" "" "/project/page/outpage/testManagement1.pagelet")&nbsp导出数据#end
+					 #@aModal("#myModal" "导出数据" "600" "120" "" "/project/task/outputData.pagelet")&nbsp导出数据#end
 					 #@dialog("myModal")
 						#@dialogHeader()#end
 						#@dialogBody()<p></p>#end
@@ -220,7 +220,7 @@ h3 {line-height: 1.2;}
 					 
 					</p>
                     
-					  #@aModal("#myModal1" "导出数据" "600" "150" "" "/project/page/outpage/modal_updown.pagelet")&nbsp导出模板#end
+					  #@aModal("#myModal1" "导出数据" "600" "150" "" "/project/task/outputModal.pagelet")&nbsp导出模板#end
 					  #@dialog("myModal1")
 						#@dialogHeader()#end
 						#@dialogBody()<p></p>#end
@@ -230,19 +230,18 @@ h3 {line-height: 1.2;}
                     #end
                     #end&nbsp;
                     
-					<a href="${TINY_CONTEXT_PATH}/project/page/outpage/reportform.page">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/project/task/reportform.page">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
 					
-					<a href="${TINY_CONTEXT_PATH}/project/page/tabledemo/bech_add_task.page">#buttonIcon(iconClass="icon-plus-sign")批量增加</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/project/task/bechAdd.page">#buttonIcon(iconClass="icon-plus-sign")批量增加</a>&nbsp;
 					
-					<a href="${TINY_CONTEXT_PATH}/project/page/tabledemo/add_task.page">#buttonIcon(iconClass="icon-plus")建任务</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-plus")建任务</a>&nbsp;
 					
 					
 				</span>
 				#div(divClass="clearfix")
 			#end
-			 #include("/project/page/outpage/mulsearch.page")
-			##operationbar end
-			#include("/project/page/outpage/call.page")
-#end
+			
+			#end
+			 #include("/project/mulsearch.page")
 #end
 #end

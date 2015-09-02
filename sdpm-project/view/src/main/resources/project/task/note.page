@@ -1,6 +1,7 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")	
 #!set(activeTitle="日志",activeMenuId=currentPageId)
+#include("/project/task/taskMenu.page")
 #@tinyForm("thisform" "" "post" {"class":"test"})
 	 #@tableBorder()
 	 	#@thead()
@@ -10,7 +11,7 @@
 	 			#@thW()	耗时#end
 	 			#@thW()	剩余	#end
 	 			#@thW()	工作内容	#end
-	 			#@thW("20")	操作#end
+	 			#@thW()	操作#end
 	 			
 	 		#end
 	 	
@@ -23,7 +24,7 @@
 	 	   #@th() 	  22	 	  #end	 	
 	 	     #@th()	  22	  #end
 	 	   #@th() 	  22	 	  #end
-	 	   #@th() 	  #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/project/page/tabledemo/user-add.pagelet" "ml-5")
+	 	   #@th() 	  #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "#" "ml-5")
 		              #iconOperation(" icon-remove" "删除" "ml-5")	 	  #end
 	 	  #end
 	 	 #end

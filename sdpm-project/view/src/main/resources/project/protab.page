@@ -1,5 +1,5 @@
 
-#@aHeadCol(TINY_CONTEXT_PATH+"/project/page/project/project.page?currentPageId=3" name=="rw"?"Current":"")任务#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/project/task/task.page?currentPageId=3" name=="rw"?"Current":"")任务#end
 #@aHeadCol(TINY_CONTEXT_PATH+"/project/page/outpage/proxq.page?currentPageId=3" name=="xq"?"Current":"")需求#end
 #@aHeadCol(TINY_CONTEXT_PATH+"/project/page/outpage/probug.page?currentPageId=3" name=="bug"?"Current":"")Bug#end
 #@aHeadCol(TINY_CONTEXT_PATH+"/project/page/outpage/probb.page?currentPageId=3" name=="bb"?"Current":"")版本#end
