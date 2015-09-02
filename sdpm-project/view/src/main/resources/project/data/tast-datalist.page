@@ -21,12 +21,13 @@
 	#@td()开发者#end
 	#@td()开发者#end
 	 #@td()
-		#iconOperations("#myModal" "icon-hand-right" "指派" "865" "448" "/project/page/outpage/call.pagelet" "ml-5")
+		
+		<a title="指派" href="${TINY_CONTEXT_PATH}/project/page/outpage/project_call.page">#buttonIcon(iconClass="icon-hand-right")</a>
 		#iconOperations("#myModal" "icon-play" "开始" "865" "448" "/project/page/outpage/start.pagelet" "ml-5")
 		#iconOperations("#myModal" "icon-time" "日志" "900" "448" "/project/page/outpage/note.pagelet" "ml-5")
 		#iconOperations("#myModal" "icon-ok-sign" "完成" "865" "448" "/project/page/outpage/task-finish.pagelet" "ml-5")
-		#iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/project/page/tabledemo/user-add.pagelet" "ml-5")
-		<a href="${TINY_CONTEXT_PATH}/project/page/outpage/task_edit.page">#buttonIcon(iconClass="icon-pencil")</a>
+		#iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/project/page/outpage/task_close.pagelet" "ml-5")
+		<a title="编辑" href="${TINY_CONTEXT_PATH}/project/page/outpage/task_edit.page">#buttonIcon(iconClass="icon-pencil")</a>
 		##iconOperation(" icon-remove" "删除" "ml-5")
 	#end
 #end
