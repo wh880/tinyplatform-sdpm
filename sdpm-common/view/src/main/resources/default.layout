@@ -89,7 +89,7 @@
 </head>
 <body class="theme-default main-menu-animated">
 	#@mainWrapper()
-		#@mainNavbar("/img/main-navbar-logo.png" "Tinyframework")
+		#@mainNavbar("/common/img/main-navbar-logo.png" "Tinyframework")
 			#@navbarNav()
 				#navbarNavItem("切换到AJAX" "/ajax.page")
 				#@navbarDropdownMenu("下拉菜单")
