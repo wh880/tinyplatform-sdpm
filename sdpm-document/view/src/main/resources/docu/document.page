@@ -32,7 +32,7 @@
         #@span(spanClass="barBtnsty")
           ##    #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/page/project/document.page" "ml-5")文档 #end
           ##    #@tabHeadCol()文档#end
-#@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/docu/document01-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
+#@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/docu/documentproduct-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
         ##	#@tabHeadCol()编辑#end
 		##	#@tabHeadCol()分类#end
 		##	#@tabHeadCol()删除#end
@@ -85,7 +85,7 @@
 					##<a href="#">#buttonIcon(iconClass="icon-download-alt")导出</a>&nbsp;
 					##<a href="#">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
 					##<a href="#">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/docu/adddocument01.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
+					<a href="${TINY_CONTEXT_PATH}/docu/adddocumentproduct.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
 				</span>
 				#div(divClass="clearfix")
 			#end

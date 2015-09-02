@@ -10,7 +10,7 @@
     #inputwidth{width:110px;}
 </style>
 
-#include("/testManagement/page/event/common.page")
+
 #set(name="bug")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -18,7 +18,7 @@
             #include("/testManagement/page/dropdownMenu.page")
         #end
         #@tabHead()
-            #include("/testManagement/page/testManagementTab.page")
+            #include("/testManagement/page/Tab.page")
         #end
 
         #@tabBodyCol("ptop-5")

@@ -1,0 +1,32 @@
+#@tableHover("table-border")
+    #@thead()
+        #@tr()
+            #@td()
+            统计报表
+            #end
+        #end
+    #end
+
+    #@tbody()
+        #@tr()
+            #@td()
+            <a href="${TINY_CONTEXT_PATH}/statistic/page/product.page?order=1">产品汇总表</a>
+            #end
+        #end
+        #@tr()
+            #@td()
+            <a href="${TINY_CONTEXT_PATH}/statistic/page/product.page?order=2">产品投入表</a>
+            #end
+        #end
+        #@tr()
+            #@td()
+            <a href="${TINY_CONTEXT_PATH}/statistic/page/product.page?order=3">产品完成度统计报表</a>
+            #end
+        #end
+        #@tr()
+            #@td()
+            <a href="${TINY_CONTEXT_PATH}/statistic/page/product.page?order=1">产品路线图标</a>
+            #end
+        #end
+    #end
+#end

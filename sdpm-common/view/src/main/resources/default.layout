@@ -196,7 +196,7 @@
                                 #@navItemDemo("4.2" "javascript:void(0);" "icon-list")用例#end
                                 #@navItemDemo("4.3" "javascript:void(0);" "icon-list")版本#end
                             #end*#
-				#TnavItem("5" "文档管理" "/page/project/document.page" "icon-paste")
+				#TnavItem("5" "文档管理" "/docu/document.page" "icon-paste")
 			#*				#@navDropDownMenu("5" "文档管理" "icon-paste" )
                                 #@navItemDemo("5.1" "javascript:void(0);" "icon-list")文档#end
                                 #@navItemDemo("5.2" "javascript:void(0);" "icon-list")编辑#end
@@ -209,7 +209,7 @@
                                 #@navItemDemo("6.3" "javascript:void(0);" "icon-list")测试#end
                                 #@navItemDemo("6.4" "javascript:void(0);" "icon-list")组织#end
                             #end*#
-				#TnavItem("7" "组织管理" "/organization/organizationUser.page" "icon-sitemap")
+				#TnavItem("7" "组织管理" "/organization/user.page" "icon-sitemap")
 			#*				#@navDropDownMenu("7" "组织管理" "icon-sitemap" )
                                 #@navItemDemo("7.1" "javascript:void(0);" "icon-list")用户#end
                                 #@navItemDemo("7.2" "javascript:void(0);" "icon-list")日志#end
@@ -228,7 +228,7 @@
                                 #@navItemDemo("8.6" "javascript:void(0);" "icon-list")回收站#end
                                 #@navItemDemo("8.7" "javascript:void(0);" "icon-list")重建索引#end
                             #end*#
-				#TnavItem("9" "服务管理" "/serviceManagement/page/service-client.page" "icon-trophy")
+				#TnavItem("9" "服务管理" "/service/page/client.page" "icon-trophy")
 			#*				#@navDropDownMenu("9" "后台管理" "icon-trophy" )
                                 #@navItemDemo("9.1" "javascript:void(0);" "icon-list")首页#end
                                 #@navItemDemo("9.2" "javascript:void(0);" "icon-list")插件#end

@@ -46,7 +46,8 @@
             <class-path path="E:\TinyWorkSpace\sdpm\sdpm-quality\view\src\main\resources"/>
             <class-path path="F:\daochu\sdpm\sdpm-quality\view\src\main\resources"/>
 
-                <class-path path="E:\git\sdpm\sdpm-service\view\src\main\resources"/>
+                <class-path path="E:\git\sdpm\sdpm-org\view\src\main\resources"/>
+                <class-path path="D:\sdpm\sdpm-org\view\src\main\resources"/>
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>

@@ -1,0 +1,4 @@
+#@aHeadCol(TINY_CONTEXT_PATH+"/testManagement/page/Bug.page?currentPageId=4" name=="bug"?"Current":"")Bug#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/testManagement/page/cases.page?currentPageId=4" name=="case"?"Current":"")用例#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/testManagement/page/version.page?currentPageId=4" name=="version"?"Current":"")版本#end
+			

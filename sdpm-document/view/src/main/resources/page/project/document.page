@@ -66,7 +66,7 @@
 					##<a href="#">#buttonIcon(iconClass="icon-download-alt")导出</a>&nbsp;
 					##<a href="#">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
 					##<a href="#">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/docu/adddocument01.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
+					<a href="${TINY_CONTEXT_PATH}/docu/adddocumentproduct.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
 				</span>
 				#div(divClass="clearfix")
 			#end
