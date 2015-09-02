@@ -1,0 +1,38 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#!set(activeTitle="统计",activeMenuId=currentPageId)
+#*<style>
+##.tabLayout .tabBar span a{color:#333}
+##.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.operationbar a{padding:2px 3px;display:inline-block;margin-right:0;border-radius:3px;}
+.operationbar a:hover{background:#ddd;color:#333;}
+.operationbar .active_btn:hover{background:none;}
+.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+.open>#downMenuSty{min-width:70px}
+</style>*#
+##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
+#set(name="project")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/statistic/page/tab.page")
+        #end
+
+        #@tabBodyCol("ptop-5")
+        ##operationbar star
+            #@div(divClass="operationbar")
+            <span class="f">
+				</span>
+            <span class="r">
+                    <a href="#">#buttonIcon(iconClass="icon-plus-sign")批量添加，暂时放着</a>&nbsp;
+				</span>
+                #div(divClass="clearfix")
+            #end
+        ##operationbar end
+        #end
+
+
+    ##toggle end
+    #end
+##tab end
+#end
