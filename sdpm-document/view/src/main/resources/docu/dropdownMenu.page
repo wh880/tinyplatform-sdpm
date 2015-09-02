@@ -10,15 +10,21 @@ ${activeTitle}
         </button>
         <ul class="dropdown-menu" role="menu">
         <li>
-        <a href="${TINY_CONTEXT_PATH}/docu/document01.page">产品文档库</a></li>
+
+
+      <a href="${TINY_CONTEXT_PATH}/docu/documentproduct.page">产品文档库</a></li>
+		##注释掉，下面用于测试FAQ   <a href="${TINY_CONTEXT_PATH}/docu/faq.page">产品文档库</a></li>
+
+
+
         <li>
-        <a href="${TINY_CONTEXT_PATH}/docu/document02.page">项目文档库</a></li>
+        <a href="${TINY_CONTEXT_PATH}/docu/documentproject.page">项目文档库</a></li>
         <li>
-        <a href="${TINY_CONTEXT_PATH}/docu/document03.page">自定义文档库1</a></li>
+        <a href="${TINY_CONTEXT_PATH}/docu/documentfirst.page">自定义文档库1</a></li>
         <li class="divider ">
         </li>
         <li>
-        <a href="${TINY_CONTEXT_PATH}/docu/document04.page">自定义文档库2</a></li>
+        <a href="${TINY_CONTEXT_PATH}/docu/documentsecond.page">自定义文档库2</a></li>
         </ul>
           ##  #@tabHeadCol()文档#end
 		##	#@tabHeadCol()编辑#end

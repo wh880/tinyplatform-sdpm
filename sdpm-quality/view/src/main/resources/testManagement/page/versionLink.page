@@ -1,5 +1,5 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
-#include("/testManagement/page/event/common.page")
+
 #set(name="version")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
@@ -7,7 +7,7 @@
 				#include("/testManagement/page/dropdownMenu.page")
 			#end
 			#@tabHead()
-				#include("/testManagement/page/testManagementTab.page")
+				#include("/testManagement/page/Tab.page")
 			#end
 			
 			#@tabBodyCol("ptop-5")
@@ -18,8 +18,8 @@
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-link")按需求关联</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-link")按Bug关联</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeVersion.page">#buttonIcon(iconClass="icon-link")按需求关联</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeVersion.page">#buttonIcon(iconClass="icon-link")按Bug关联</a>&nbsp;
 					<a href="#" title="返回">#buttonIcon(iconClass="icon-reply")</a>
 					</span>
 				#div(divClass="clearfix")
@@ -36,7 +36,7 @@
 					#end*#
 					&nbsp;<i class="icon-unlink">&nbsp;未关联用例(2)</i>
 				#end
-			#@tinyTableContent("../data/testManagementLink.pagelet")
+			#@tinyTableContent("../data/link.pagelet")
 				#@thead()
 					#@tr()
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

@@ -159,16 +159,16 @@ $(function () {
     var panel_width = 260;
 
     var demo_themes = [
-        {name: 'default', title: '默认', img: contextPath + '/img/themes/default.png'},
-        {name: 'clean', title: '深色', img: contextPath + '/img/themes/dark.png'},
-        {name: 'asphalt', title: '沥青', img: contextPath + '/img/themes/asphalt.png'},
-        {name: 'purple-hills', title: '紫色', img: contextPath + '/img/themes/purple-hills.png'},
-        {name: 'adminflare', title: '深蓝', img: contextPath + '/img/themes/deep-blue.png'},
-        {name: 'dust', title: '橙色', img: contextPath + '/img/themes/orange.png'},
-        {name: 'frost', title: '浅蓝', img: contextPath + '/img/themes/light-blue.png'},
-        {name: 'fresh', title: '绿色', img: contextPath + '/img/themes/green.png'},
-        {name: 'silver', title: '黑色', img: contextPath + '/img/themes/black.png'},
-        {name: 'white', title: '时尚', img: contextPath + '/img/themes/fashion.png'}
+        {name: 'default', title: '默认', img: contextPath + '/common/img/themes/default.png'},
+        {name: 'clean', title: '深色', img: contextPath + '/common/img/themes/dark.png'},
+        {name: 'asphalt', title: '沥青', img: contextPath + '/common/img/themes/asphalt.png'},
+        {name: 'purple-hills', title: '紫色', img: contextPath + '/common/img/themes/purple-hills.png'},
+        {name: 'adminflare', title: '深蓝', img: contextPath + '/common/img/themes/deep-blue.png'},
+        {name: 'dust', title: '橙色', img: contextPath + '/common/img/themes/orange.png'},
+        {name: 'frost', title: '浅蓝', img: contextPath + '/common/img/themes/light-blue.png'},
+        {name: 'fresh', title: '绿色', img: contextPath + '/common/img/themes/green.png'},
+        {name: 'silver', title: '黑色', img: contextPath + '/common/img/themes/black.png'},
+        {name: 'white', title: '时尚', img: contextPath + '/common/img/themes/fashion.png'}
     ];
 
     var demo_settings = loadDemoSettings();

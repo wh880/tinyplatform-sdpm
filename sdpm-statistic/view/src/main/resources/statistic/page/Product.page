@@ -30,9 +30,17 @@
             #end
         ##operationbar end
         #end
+    <div style="float: left;width: 15%;">
+        #include("/statistic/data/productList.page")
+    </div>
+    <div style="float: right;width: 83%;">
+        #if(!order)
+            #set(order="1")
+        #end
+            #include("/statistic/data/productData"+order+".page")
+    </div>
 
 
-    ##toggle end
     #end
 ##tab end
 #end

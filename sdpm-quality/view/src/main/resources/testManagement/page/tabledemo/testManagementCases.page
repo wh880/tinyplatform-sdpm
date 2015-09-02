@@ -4,13 +4,13 @@
 .tabLayout .tabBar .Current a{color:#fff}
 .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
 </style>
-#include("/page/event/common.page")
+
 #@div()
 	#@div(divClass="tabLayout")
 		#@div(divClass="tabBar cl")
-			<span><a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page">Bug</a></span>
-			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/project/testManagementCases.page">用例</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/project/testManagement.page">版本</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/project/Bug.page">Bug</a></span>
+			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/project/cases.page">用例</a></span>
+			<span><a href="${TINY_CONTEXT_PATH}/page/project/version.page">版本</a></span>
 		#end
 	#end
 			##operationbar start1
