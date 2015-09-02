@@ -1,0 +1,110 @@
+#!set(activeTitle="组织管理",activeMenuId=currentPageId)
+<style>
+    .tabLayout .tabBar span a {
+        color: #333
+    }
+
+    .tabLayout .tabBar .Current a {
+        color: #fff
+    }
+
+    .operationbar {
+        border-top: none;
+        background: #f9fafe;
+        padding: 6px 5px 6px 10px;
+    }
+</style>
+#include("/common/common.page")
+#@div()
+    #@div(divClass="tabLayout")
+        #@div(divClass="tabBar cl")
+        <span><a href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7
+">用户</a></span>
+        <span class="Current"><a href="${TINY_CONTEXT_PATH}/organization/gtasks.page?currentPageId=7
+">待办</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/log.page?currentPageId=7
+">日志</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/active.page?currentPageId=7
+">动态</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/department.page?currentPageId=7
+">部门</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/privilege.page?currentPageId=7
+">权限</a></span>
+        <span><a href="${TINY_CONTEXT_PATH}/organization/company.page?currentPageId=7
+">公司</a></span>
+        #end
+    #end
+
+
+
+    #import("/org/tinygroup/form/components/form.component")
+    #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+    #import("/org/tinygroup/button/components/button_common.component")
+    #import("/org/tinygroup/button/components/button.component")
+    #import("/org/tinygroup/form/components/form.component")
+    #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+
+    #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+        #@toggleLeft({"class":"aclass"})
+            #@settoggleLeftTitle()待办日历#end
+            #@settoggleLeftBody()
+                #@OlTopList()
+                    #@tinyForm("thisform" "url" "post" {"class":"xxxxxxxxx"})
+                        #@elementItem()
+                        <span style="float:left">部门：</span>
+                            #@formControlDiv("col-9")
+                                #@tinySelect("lang" "departA" {"class":"input-text select2","rel":"22"})
+                                    #@tinyOptionItem("departA")部门A#end
+                                    #@tinyOptionItem("departB")部门B#end
+                                    #@tinyOptionItem("departC")部门C#end
+                                #end
+                            #end
+                            #@validateDiv("col-2")#end
+                        #end
+                        #@elementItem()
+                        <span style="float:left">日期：</span>
+                            #@formHorizontal("col-9")
+
+                                #daterangepicker("2015/03/18" "2015/03/23" "reservation" "reservation" "width:107px")
+                            #end
+
+                            #daterangepickerInit("#reservation")
+                        #end
+
+                        #@elementItem()
+                        <span style="padding-top:10px;float:right">
+                            #@formHorizontal("col-9")
+                                #buttonRadiusPrimary(caption="查看")
+
+                            #end
+
+                        #end
+                    #end
+
+                #end
+            #end
+        #end
+        #@toggleRight()
+            #include("/organization/gtaskRightTable.page")
+
+        #end
+    #end
+
+#end
+
+    <script type="text/javascript">
+        $(function () {
+            $('#${tableId}').on('click', '.delBtn', function (e) {
+                user_del(this, '1');
+            });
+        })
+    </script>
+#@dialog("myModal")
+    #@dialogHeader()对话框标题#end
+    #@dialogBody()<p>对话框内容…</p>#end
+    #@dialogFooter()
+        #@buttonEnsure()确定#end
+        #@buttonCancel()关闭#end
+    #end
+#end
