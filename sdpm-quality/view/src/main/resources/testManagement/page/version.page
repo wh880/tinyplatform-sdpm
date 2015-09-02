@@ -18,7 +18,7 @@
 					<a href="#">已测试版本</a>
 					</span>
 				<span class="r">
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-plus")提交测试</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeVersion.page">#buttonIcon(iconClass="icon-plus")提交测试</a>&nbsp;
 					</span>
 				#div(divClass="clearfix")
 			#end
@@ -28,14 +28,14 @@
 			#@tinyTable()
 				#@div(divBaseClass="tinyheaderTools form-inline")
 					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-					#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;暂时留着，后期更新新的按钮#end
+
 					<a href="#" class="btn btn-default btn-sm">产品</a>
 					<a href="#" class="btn btn-success btn-sm">Bug</a>
 					<a href="#" class="btn btn-primary btn-sm">工程</a>
 					<a href="#" class="btn btn-info btn-sm">历史</a>
 					<a href="#" class="btn btn-warning btn-sm">相关</a>
 				#end
-			#@tinyTableContent("../data/testManagementVersionData.pagelet")
+			#@tinyTableContent("../data/versionData.pagelet")
 				#@thead()
 					#@tr()
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

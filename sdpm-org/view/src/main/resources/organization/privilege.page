@@ -80,6 +80,23 @@
 #@simpleModal("myModa3" "成员维护")#end
 #@simpleModal("myModa4" "复制分组")#end
 #@simpleModal("myModa5" "编辑分组")#end
+<script>
+    $(function () {
+        $(".tinytable").on("click", ".icon-remove", function () {
+            //console.log($(this).attr("itemId"))
+            // user_del(this, '1');
+            var that = this;
+            layer.confirm('qurang', function (index) {
+                //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                //$.ajax()
+                //console.log(index);
+                layer.msg($("确定要删除该用户？").attr("itemId"), 1);
+            }, function (index) {
+                //layer.msg('fdsfdfdsf',1)
+            })
+        });
+    });
+</script>
 <script type="text/javascript">
     <!--
     var setting = {
