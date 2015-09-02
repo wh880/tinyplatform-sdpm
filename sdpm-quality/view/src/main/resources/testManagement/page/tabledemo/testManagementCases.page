@@ -4,7 +4,7 @@
 .tabLayout .tabBar .Current a{color:#fff}
 .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
 </style>
-#include("/page/event/common.page")
+
 #@div()
 	#@div(divClass="tabLayout")
 		#@div(divClass="tabBar cl")

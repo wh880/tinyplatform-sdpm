@@ -209,7 +209,7 @@
                                 #@navItemDemo("6.3" "javascript:void(0);" "icon-list")测试#end
                                 #@navItemDemo("6.4" "javascript:void(0);" "icon-list")组织#end
                             #end*#
-				#TnavItem("7" "组织管理" "/organization/organizationUser.page" "icon-sitemap")
+				#TnavItem("7" "组织管理" "/organization/user.page" "icon-sitemap")
 			#*				#@navDropDownMenu("7" "组织管理" "icon-sitemap" )
                                 #@navItemDemo("7.1" "javascript:void(0);" "icon-list")用户#end
                                 #@navItemDemo("7.2" "javascript:void(0);" "icon-list")日志#end
