@@ -14,7 +14,7 @@
         #@span(spanClass="barBtnsty")
         ##    #@tabHeadCol()文档#end
 ##    #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/page/tabledemo/document04-edit.pagelet" "ml-5")编辑 #end
-     #@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/docu/document01-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
+     #@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/docu/documentsecond-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
 		##	#@tabHeadCol()编辑#end
 		##	#@tabHeadCol()分类#end
 		##	#@tabHeadCol()删除#end
@@ -56,7 +56,7 @@
 					##<a href="#">激活</a>
 					##<a href="#">已变更</a>
 					##<a href="#">待关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/docu/document04.page">按模块浏览</a>
+					<a href="${TINY_CONTEXT_PATH}/docu/documentsecond.page">按模块浏览</a>
 			##		<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
 			        <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
@@ -65,15 +65,15 @@
 					##<a href="#">#buttonIcon(iconClass="icon-download-alt")导出</a>&nbsp;
 					##<a href="#">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
 					##<a href="#">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-##					<a href="${TINY_CONTEXT_PATH}/page/project/adddocument04.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
-                    <a href="${TINY_CONTEXT_PATH}/docu/adddocument04.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
+##					<a href="${TINY_CONTEXT_PATH}/page/project/adddocumentsecond.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
+                    <a href="${TINY_CONTEXT_PATH}/docu/adddocumentsecond.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
 				</span>
 				#div(divClass="clearfix")
 			#end
 			 #include("/docu/mulsearch.page")
 			##operationbar end
 ##			#include("/page/project/treeNew.page")
-            #include("/docu/treeNew04.page")
+            #include("/docu/treeNewsecond.page")
 		#end
 	#end
 #end

@@ -17,7 +17,7 @@
 ##		#@tabHead()
 #@span(spanClass="barBtnsty")
     ##  #@iconOperations("#myModal" "" "编辑文档库" "865" "448" "/page/tabledemo/document01-edit.pagelet" "ml-5")</i>&nbsp;编辑 #end
-         #@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/docu/document01-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
+         #@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/docu/documentproduct-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
 		##    #@tabHeadCol()文档#end
 		##	#@tabHeadCol()编辑#end
 		##	#@tabHeadCol()分类#end
@@ -35,7 +35,8 @@
 		##    <a href="${TINY_CONTEXT_PATH}/docu/adddocumentlib.page">#buttonIcon(iconClass="icon-globe")添加文档库</a>&nbsp;
 		       ##添加文档库
                         			#@aModal("#myModal" "创建文档库" "865" "150" "" "/docu/adddocumentlib.pagelet")
-                        			#simpleI("icon-plus-sign")添加文档库#end
+                        			#simpleI("icon-plus-sign")添加文档库
+									#end
                                         #@dialog("myModal")
                                     	#@dialogHeader()对话框标题#end
                                     	#@dialogBody()<p>对话框内容…</p>#end
@@ -62,7 +63,7 @@
 					##<a href="#">已变更</a>
 					##<a href="#">待关闭</a>
 	##				<a href="#">按模块浏览</a>
-	               <a href="${TINY_CONTEXT_PATH}/docu/document01.page">按模块浏览</a>
+	               <a href="${TINY_CONTEXT_PATH}/docu/documentproduct.page">按模块浏览</a>
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
@@ -70,8 +71,8 @@
 					##<a href="#">#buttonIcon(iconClass="icon-download-alt")导出</a>&nbsp;
 					##<a href="#">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
 					##<a href="#">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-				##	<a href="${TINY_CONTEXT_PATH}/page/project/adddocument01.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
-				    <a href="${TINY_CONTEXT_PATH}/docu/adddocument01.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
+				##	<a href="${TINY_CONTEXT_PATH}/page/project/adddocumentproduct.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
+				    <a href="${TINY_CONTEXT_PATH}/docu/adddocumentproduct.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
 				</span>
                  #div(divClass="clearfix")
              #end
@@ -79,7 +80,7 @@
 
 			##operationbar end
 		##	#include("/page/project/treeNew.page")
-		#include("/docu/treeNew01.page")
+		#include("/docu/treeNewproduct.page")
 		#end
 	#end
 #end
