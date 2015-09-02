@@ -21,7 +21,7 @@
 				<a href="#" id="showsearchmore-bug">#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
 				#iconOperations("#myModal" "icon-common-edit icon-pencil" "编辑发布" "865" "448" "/product/page/tabledemo/product-addplan.pagelet" "ml-5")
 				#iconOperation(" icon-remove" "删除发布" "ml-5")
-				#iconOperation("icon-goback icon-level-up icon-large icon-rotate-270" "返回" "ml-5")
+			<a href="${TINY_CONTEXT_PATH}/product/page/project/product-release.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
 			
 				</span>#div(divClass="clearfix")
 				

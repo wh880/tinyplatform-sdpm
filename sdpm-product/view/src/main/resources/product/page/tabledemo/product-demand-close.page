@@ -32,10 +32,6 @@
         #@validateDiv("col-2")#end
     #end
  	
-        #@validateDiv("col-3")#end
-  
-   
-	
 		#@div(divClass="infoContent")
 	        <p class="titleName">历史记录</p>
 	       	#include("/product/page/tabledemo/historyrecord.page")
