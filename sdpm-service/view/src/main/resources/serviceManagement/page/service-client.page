@@ -1,0 +1,42 @@
+#!set(activeTitle="服务",activeMenuId=currentPageId)
+#import("/org/tinygroup/zTree/components/zTree.component")
+#import("/components/org/tinygroup/fulimanageui/form.component")
+
+<style type="text/css">
+    #showsearchmore {
+        cursor: pointer
+    }
+
+    #searchform table {
+        display: inline
+    }
+
+    #searchform td {
+        vertical-align: middle;
+        padding: 1px !important;
+    }
+
+    #searchform .form-control {
+        padding: 0;
+        line-height: 25px;
+        height: 25px
+    }
+
+</style>
+
+#@div()
+    #@div(divClass="tabLayout")
+        #@div(divClass="tabBar cl")
+        <span class="Current"><a href="#">客户</a></span>
+        <span><a href="#">需求</a></span>
+        <span><a href="#">协议</a></span>
+        <span><a href="#">FAQ</a></span>
+        <span style="padding-top:5px;float:right">
+            #@aModal("" "新增分组" "600" "300" "btn radius btn-primary btn-sm" "")
+                #@simpleI("icon-plus")新增客户#end
+            #end
+        </span>
+        #end
+
+    #end
+#end
