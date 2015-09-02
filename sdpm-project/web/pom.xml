@@ -21,6 +21,11 @@
             <artifactId>sdpm-project-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+		<dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-common-view</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.validate</artifactId>
