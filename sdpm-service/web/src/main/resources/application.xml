@@ -44,6 +44,7 @@
 			<!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
 			<class-path path="E:\TinyWork\sdpm\sdpm-product\view\src\main\resources" />
 			<class-path path="E:\git\sdpm\sdpm-common\view\src\main\resources"/>
+			<class-path path="D:\sdpm\sdpm-common\view\src\main\resources"/>
 	<!-- 		<class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources" /> -->
 					
  		</class-paths>
