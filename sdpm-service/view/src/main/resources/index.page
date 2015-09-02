@@ -23,49 +23,49 @@
 }</style>
 #@div(divClass="row dashboard-header")
     #@div(divClass="col-sm-3")
-        #@div(divClass="dynamicBox")
+		#@div(divClass="dynamicBox")
         <h2>Hello,Beaut-liyl</h2>
         <small>您有32条消息和6个待处理事项</small>
-            #@OlTopList()
-                #topItem(1 "#" "最新动态列表" "18:12")
-                #normalLiItems(2 "#" "最新动态列表" "14:12" "green")
-                #normalLiItems(3 "#" "最新动态列表" "13:12" "darkGreen")
-                #normalLiItems(4 "#" "最新动态列表" "11:12" "grey")
-                #normalLiItems(5 "#" "最新动态列表" "09:12")
-            #end
-        #end
+			#@OlTopList()
+				#topItem(1 "#" "最新动态列表" "18:12")
+				#normalLiItems(2 "#" "最新动态列表" "14:12" "green")
+				#normalLiItems(3 "#" "最新动态列表" "13:12" "darkGreen")
+				#normalLiItems(4 "#" "最新动态列表" "11:12" "grey")
+				#normalLiItems(5 "#" "最新动态列表" "09:12")
+			#end
+		#end
     #end
     #@div(divClass="col-sm-6")
-        #@div(divClass="col-sm-4")
-            #@numberBox("bg-pa-purple" "fa-clock-o")
-                #numList("col-xs-12" "436" "项目名称")
-                #numList("col-xs-12" "436" "产品名称")
-            #end
-        #end
-        #@div(divClass="col-sm-4")
+		#@div(divClass="col-sm-4")
+			#@numberBox("bg-pa-purple" "fa-clock-o")
+				#numList("col-xs-12" "436" "项目名称")
+				#numList("col-xs-12" "436" "产品名称")
+			#end
+		#end
+		#@div(divClass="col-sm-4")
 
-            #@numberBox("bg-warning" "icon-flag")
-                #numList("col-xs-12" "161" "我的待办")
-                #numList("col-xs-12" "161" "我的任务")
-            #end
-        #end
-        #@div(divClass="col-sm-4")
-            #@numberBox("bg-primary" "icon-plane")
-                #numList("col-xs-12" "168" "我的BUG")
-                #numList("col-xs-12" "168" "我的测试")
-            #end
-        #end
+			#@numberBox("bg-warning" "icon-flag")
+				#numList("col-xs-12" "161" "我的待办")
+				#numList("col-xs-12" "161" "我的任务")
+			#end
+		#end
+		#@div(divClass="col-sm-4")
+			#@numberBox("bg-primary" "icon-plane")
+				#numList("col-xs-12" "168" "我的BUG")
+				#numList("col-xs-12" "168" "我的测试")
+			#end
+		#end
     #end
     #@div(divClass="col-sm-3")
     <!-- statisticalBox start-->
-        #@statisticalBox("panel-success" "fa-flask" "项目的进度" "label-warning" "66%")
-            #@groupList()
-                #itemNumber("icon-desktop" "OA" "50%")
-                #itemNumber("icon-tasks" "官网" "54%")
-                #itemNumber("icon-tasks" "P2P" "64%")
-                #itemNumber("icon-tasks" "B2B" "84%")
-            #end
-        #end
+		#@statisticalBox("panel-success" "fa-flask" "项目的进度" "label-warning" "66%")
+			#@groupList()
+				#itemNumber("icon-desktop" "OA" "50%")
+				#itemNumber("icon-tasks" "官网" "54%")
+				#itemNumber("icon-tasks" "P2P" "64%")
+				#itemNumber("icon-tasks" "B2B" "84%")
+			#end
+		#end
     <!-- statisticalBox end-->
-    #end
+	#end
 #end
