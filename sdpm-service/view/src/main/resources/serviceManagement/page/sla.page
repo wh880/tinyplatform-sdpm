@@ -11,36 +11,28 @@
 .open>#downMenuSty{min-width:70px}
 </style>*#
 ##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
-#include("/testManagement/page/event/common.page")
-#set(name="bug")
+#include("/serviceManagement/page/event/common.page")
+#set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
-            #include("/testManagement/page/dropdownMenu.page")
+            #include("/serviceManagement/page/dropdownMenu.page")
         #end
         #@tabHead()
-            #include("/testManagement/page/testManagementTab.page")
+            #include("/serviceManagement/page/serviceManagement.page")
         #end
 
         #@tabBodyCol("ptop-5")
         ##operationbar star
             #@div(divClass="operationbar")
             <span class="f">
-					<a href="#" class="active_btn">未关闭</a>
+					<a href="#" class="active_btn">详情</a>
 					<a href="#">所有</a>
 					<a href="#">指派给我</a>
-					<a href="#">由我创建</a>
-					<a href="#">由我解决</a>
-					<a href="#">未确认</a>
-					<a href="#">未指派</a>
-					<a href="#">未解决</a>
-					<a href="#">久未处理</a>
-					<a href="#">被延期</a>
-					<a href="#">需求变动</a>
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
             <span class="r">
-					#@iconOperations("#myModal" "icon-upload-alt" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp导入#end
+					#@iconOperations("#myModal" "icon-upload-alt" "导入" "500" "100" "/serviceManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp导入#end
 
             ###@iconOperations("#myModal" "icon-download-alt" "导出" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")&nbsp导出#end
                 #buttonIcon(iconClass="icon-download-alt")
