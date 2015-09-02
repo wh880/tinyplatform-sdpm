@@ -18,7 +18,7 @@
 					<a href="#">已测试版本</a>
 					</span>
 				<span class="r">
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-plus")提交测试</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeVersion.page">#buttonIcon(iconClass="icon-plus")提交测试</a>&nbsp;
 					</span>
 				#div(divClass="clearfix")
 			#end
@@ -35,7 +35,7 @@
 					<a href="#" class="btn btn-info btn-sm">历史</a>
 					<a href="#" class="btn btn-warning btn-sm">相关</a>
 				#end
-			#@tinyTableContent("../data/testManagementVersionData.pagelet")
+			#@tinyTableContent("../data/versionData.pagelet")
 				#@thead()
 					#@tr()
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
