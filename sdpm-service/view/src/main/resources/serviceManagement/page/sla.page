@@ -36,9 +36,9 @@
 
                     #@iconOperations("#myModal" "icon-download-alt" "导出" "865" "448" "/serviceManagement/page/tabledemo/slaExport.pagelet" "ml-5")&nbsp导出#end
 
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
-                    <a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-plus")建Bug</a>
+					##<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
+                    ##<a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/serviceManagement/page/proposeSla.page">#buttonIcon(iconClass="icon-plus")新建服务级别协议表</a>
 				</span>
                 #div(divClass="clearfix")
                 #include("/testManagement/page/mulsearch.page")
