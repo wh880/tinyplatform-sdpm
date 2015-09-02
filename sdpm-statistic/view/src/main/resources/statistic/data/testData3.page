@@ -1,0 +1,36 @@
+#@div()
+<span class="l">产品完成度统计报表</span>
+<span class="r"><a class="btn txt-color-dark btn-default">导出</a></span>
+#end
+#@tableStriped("table-border")
+    #@thead()
+        #@tr("text-c")
+            #@th()
+            产品名称
+            #end
+            #@th()
+            项目数
+            #end
+            #@th()
+            已消耗工时
+            #end
+        #end
+        #@tbody()
+            #@tr("text-c")
+            <td>计划1</td>
+            <td>1</td>
+            <td>2.00</td>
+            #end
+            #@tr("text-c")
+            <td>计划2</td>
+            <td>4</td>
+            <td></td>
+            #end
+            #@tr("text-c")
+            <td>计划3</td>
+            <td>2</td>
+            <td>4.00</td>
+            #end
+        #end
+    #end
+#end

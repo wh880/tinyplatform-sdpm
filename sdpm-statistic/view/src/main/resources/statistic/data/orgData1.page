@@ -1,0 +1,85 @@
+部门：
+#@tinySelect("lang" "zh" {"class":"select2","style":"width:190px"})
+    #@tinyOptionItem("en")请选择用户#end
+    #@tinyOptionItem("zh")admin#end
+    #@tinyOptionItem("en")admin1#end
+    #@tinyOptionItem("ta")admin2#end
+#end
+<script type="text/javascript">
+    $(".select2").select2();
+</script>
+<br>
+指派时间：
+#@tinyDateInput("begin" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+至
+#@tinyDateInput("end" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+每天工时：
+#tinyInput("input-text radius" "worktime")
+
+<div style="height: 10px;"></div>
+#@tableStriped("table-border")
+    #@thead()
+        #@tr("text-c")
+            #@th()
+            产品名称
+            #end
+            #@th()
+            产品负责人
+            #end
+            #@th()
+            产品计划
+            #end
+            #@th()
+            开始日期
+            #end
+            #@th()
+            结束日期
+            #end
+            #@th()
+            草稿
+            #end
+            #@th()
+            激活
+            #end
+            #@th()
+            已变更
+            #end
+            #@th()
+            已关闭
+            #end
+        #end
+        #@tbody()
+            #@tr("text-c")
+            <td rowspan="2">测试产品</td>
+            <td rowspan="2">admin</td>
+            <td>计划</td>
+            <td>2015-08-25</td>
+            <td>2015-08-25</td>
+            <td>2</td>
+            <td>4</td>
+            <td>1</td>
+            <td>1</td>
+            #end
+            #@tr("text-c")
+            <td>计划2</td>
+            <td>2015-09-25</td>
+            <td>2015-09-25</td>
+            <td>2</td>
+            <td>4</td>
+            <td>1</td>
+            <td>1</td>
+            #end
+            #@tr("text-c")
+            <td rowspan="1">测试产品3</td>
+            <td rowspan="1">admin</td>
+            <td>计划</td>
+            <td>2015-08-25</td>
+            <td>2015-08-25</td>
+            <td>2</td>
+            <td>4</td>
+            <td>1</td>
+            <td>1</td>
+            #end
+        #end
+    #end
+#end
