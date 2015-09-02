@@ -54,19 +54,12 @@
 		#@validateDiv("col-2")#end
 	#end
 	
-##
-	#@elementItem()
-		#@colLabel()附件(50M)：#end
-		#@formControlDiv("col-8")
-			#tinyInput("text" "sel" ""{"placeholder":"","id":"sel","class":"input-text"})
-		#end
-		#@validateDiv("col-2")#end
-	#end
-	
-	
-	#@elementItem()
-		#@div(divClass="col-10 col-offset-2 form-inline")
-			#tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
-		#end
-	#end
+
+	   #@elementItem()
+        #@colLabel()附件：#end
+        #@formControlDiv("col-3")
+	    #tinyUploadInput("inputName" "" {"placeholder":"添加附件"})
+        #end
+        #@validateDiv("col-2")#end
+    #end
 #end

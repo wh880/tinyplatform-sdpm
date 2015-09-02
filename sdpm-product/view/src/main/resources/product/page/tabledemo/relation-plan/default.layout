@@ -29,11 +29,11 @@
 				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class" "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
 				<a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-link")关联需求</a>&nbsp;
 				<a href="#" id="showsearchmore-bug">#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
+						
 			
 				#iconOperations("#myModal" "icon-common-edit icon-pencil" "编辑发布" "865" "448" "/product/page/tabledemo/product-addrelease.pagelet" "ml-5")
 				#iconOperation(" icon-remove" "删除发布" "ml-5")
-				#iconOperation("icon-goback icon-level-up icon-large icon-rotate-270" "返回" "ml-5")
-			
+				<a href="${TINY_CONTEXT_PATH}/product/page/project/product-plan.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
 				</span>#div(divClass="clearfix")
 				
 	#end

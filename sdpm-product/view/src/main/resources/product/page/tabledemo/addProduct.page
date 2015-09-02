@@ -70,14 +70,6 @@
         #end
         #@validateDiv("col-2")#end
     #end
-	
-	
-	  
- #@elementItem()
-  <center>
-	#buttonRadiusDefault(caption="保存")
-	</center>
-	#end
 #end
 
 <script type="text/javascript">

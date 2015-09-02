@@ -20,22 +20,22 @@
           <artifactId>sdpm-common-view</artifactId>
           <version>${tiny_sdpm_version}</version>
       </dependency>
-  	<dependency>
+  	 <!--<dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-product-view-uicomponent</artifactId>
         <version>${tiny_sdpm_version}</version>
-    </dependency>
+    </dependency>-->
     <dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-product-service-interface</artifactId>
         <version>${tiny_sdpm_version}</version>
     </dependency>
-    <dependency>
+   <!-- <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
-    </dependency>
+    </dependency>-->
     <dependency>
 			<groupId>org.tinygroup</groupId>
 			<artifactId>org.tinygroup.buttonGroup</artifactId>
@@ -79,17 +79,17 @@
 			<version>${tiny_ui_version}</version>
 		</dependency> 
 		
-		<dependency>
+	<!--	<dependency>
 			<groupId>org.tinygroup</groupId>
 			<artifactId>org.tinygroup.jquery</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
-		<dependency>
+			<dependency>
 			<groupId>org.tinygroup</groupId>
 			<artifactId>org.tinygroup.bootstrap</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
-		<dependency>
+	<dependency>
 			<groupId>org.tinygroup</groupId>
 			<artifactId>org.tinygroup.publicComponent</artifactId>
 			<version>${tiny_ui_version}</version>
@@ -100,7 +100,7 @@
 			<artifactId>org.tinygroup.frameCommon</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
-		<dependency>
+			<dependency>
 			<groupId>org.tinygroup</groupId>
 			<artifactId>org.tinygroup.gridSystems</artifactId>
 			<version>${tiny_ui_version}</version>
@@ -110,7 +110,7 @@
 			<artifactId>org.tinygroup.compose</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
-		<dependency>
+	<dependency>
 			<groupId>org.tinygroup</groupId>
 			<artifactId>org.tinygroup.table</artifactId>
 			<version>${tiny_ui_version}</version>
@@ -215,7 +215,7 @@
 			<groupId>org.tinygroup</groupId>
 			<artifactId>org.tinygroup.fullCalendar</artifactId>
 			<version>${tiny_ui_version}</version>
-		</dependency>
+		</dependency>-->
 		
 		<!-- 这是一个折叠的依赖 -->
 		<dependency>

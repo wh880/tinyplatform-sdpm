@@ -11,7 +11,7 @@
 .open>#downMenuSty{min-width:70px}
 </style>*#
 ##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
-#include("/service/page/event/common.page")
+
 #set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
