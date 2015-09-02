@@ -4,14 +4,14 @@
 	
 	#@elementItem()
 		#@colLabel()产品名称：#end
-		#@formControlDiv("col-8")
+		#@formControlDiv("col-3")
 			#tinyInput("text" "product-name" ""{"placeholder":"","nullmsg":"请输入产品名称！","id":"product-name","class":"input-text"})
 		#end
 		#@validateDiv("col-2")#end
 	#end
 	#@elementItem()
 		#@colLabel()产品代号：#end
-		#@formControlDiv("col-8")
+		#@formControlDiv("col-3")
 			#tinyInput("text" "product-id" ""{"placeholder":"","nullmsg":"代号不能为空！","id":"product-id","class":"input-text"})
 		#end
 		#@validateDiv("col-2")#end
@@ -20,7 +20,7 @@
 	
 	 #@elementItem()
 		#@colLabel()产品负责人：#end
-		#@formControlDiv("col-8")
+		#@formControlDiv("col-3")
 			#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
 				#@tinyOptionItem("zh")A:admin#end
 				#@tinyOptionItem("en")B:部长#end
@@ -33,7 +33,7 @@
 	
 	#@elementItem()
 		#@colLabel()测试负责人：#end
-		#@formControlDiv("col-8")
+		#@formControlDiv("col-3")
 			#@tinySelect("testPO" "testPO" {"class":"input-text select2","rel":"22"})
 				#@tinyOptionItem("admin")检察长#end
 				#@tinyOptionItem("buzhang")B:部长#end
@@ -44,7 +44,7 @@
 	#end
 	#@elementItem()
 		#@colLabel()发布负责人：#end
-		#@formControlDiv("col-8")
+		#@formControlDiv("col-3")
 			#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
 				#@tinyOptionItem("admin")部长#end
 				#@tinyOptionItem("buzhang")B:部长#end
