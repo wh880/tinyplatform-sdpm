@@ -65,7 +65,7 @@
 					#end				
 				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/edit.page" title="编辑项目" class="b ">#buttonIcon(iconClass="icon-pencil")</a>
 #*				<a href="#" title="删除项目">#buttonIcon(iconClass="icon-remove")</a>*#
-				#@aModal("#myModa4" "来自星星的提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
+				#@aModal("#myModa4" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
 					#@dialog("myModa4")
 						#@dialogHeader()#end
 						#@dialogBody()				
