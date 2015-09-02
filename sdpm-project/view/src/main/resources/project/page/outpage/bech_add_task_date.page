@@ -1,7 +1,5 @@
-
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")		
-	 	
 #@div(divClass="operationbar")
 	批量增加
 #end	
@@ -122,7 +120,7 @@
              #@td()
 					#@colLabel()#end
 					<a href="#">#buttonRadiusPrimary(caption="保存")</a>
-      				<a href="${TINY_CONTEXT_PATH}/project/page/outpage/progk.page">#buttonDefault(caption="返回")</a>
+    				<a href="${TINY_CONTEXT_PATH}/project/page/project/project.page">#buttonDefault(caption="返回")</a>
 			#end
 	 	
 #end

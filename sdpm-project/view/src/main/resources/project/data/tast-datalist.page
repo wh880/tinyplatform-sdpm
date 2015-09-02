@@ -23,7 +23,7 @@
 	 #@td()
 		
 		<a title="指派" href="${TINY_CONTEXT_PATH}/project/page/outpage/project_call.page">#buttonIcon(iconClass="icon-hand-right")</a>
-		#iconOperations("#myModal" "icon-play" "开始" "865" "448" "/project/page/outpage/start.pagelet" "ml-5")
+		<a title="开始" href="${TINY_CONTEXT_PATH}/project/page/outpage/start.page">#buttonIcon(iconClass="icon-play")</a>
 		#iconOperations("#myModal" "icon-time" "日志" "900" "448" "/project/page/outpage/note.pagelet" "ml-5")
 		#iconOperations("#myModal" "icon-ok-sign" "完成" "865" "448" "/project/page/outpage/task-finish.pagelet" "ml-5")
 		#iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/project/page/outpage/task_close.pagelet" "ml-5")
