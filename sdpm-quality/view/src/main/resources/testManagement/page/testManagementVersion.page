@@ -1,5 +1,5 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
-#include("/testManagement/page/event/common.page")
+
 #set(name="version")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")

@@ -10,7 +10,7 @@
     .togglebox .togglenavpart{left:-260px;}
 </style>
 
-#include("/testManagement/page/event/common.page")
+
 #set(name="bug")
 #@div()
 #@tabWithInit("tab_demo" "optionsBox")

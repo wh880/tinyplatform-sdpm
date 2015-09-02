@@ -7,7 +7,7 @@
     .select_boxes{margin-top:0}
 </style>
 
-#include("/testManagement/page/event/common.page")
+
 #set(name="version")
 #@div()
 #@tabWithInit("tab_demo" "optionsBox")
