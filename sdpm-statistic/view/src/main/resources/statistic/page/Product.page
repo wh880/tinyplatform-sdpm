@@ -15,7 +15,7 @@
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()
-            #include("/statistic/page/statisticTab.page")
+            #include("/statistic/page/tab.page")
         #end
 
         #@tabBodyCol("ptop-5")
