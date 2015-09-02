@@ -1,0 +1,15 @@
+#@notificationItem("系统" "text-danger" "12小时前" "fa-hdd-o bg-danger")
+<strong>500错误</strong>: 语法错误在索引××行 <strong>461</strong>.
+#end
+#@notificationItem("仓库" "text-info" "12小时前" "fa-truck bg-info")
+你有 <strong>9</strong> 新订单。
+#end
+#@notificationItem("进程" "text-default" "12小时前" "fa-clock-o bg-default")
+工作 <strong>"清理"</strong> 完成。
+#end
+#@notificationItem("体系" "text-success" "11小时前" "fa-hdd-o bg-success")
+服务器 <strong>内存已满。</strong>.
+#end
+#@notificationItem("系统" "text-warning" "10小时前" "fa-hdd-o bg-warning")
+服务器 <strong>内存已满。</strong>.
+#end

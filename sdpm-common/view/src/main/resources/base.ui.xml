@@ -1,0 +1,9 @@
+<ui-components>
+    <ui-component name="base" dependencies="frameCommon,publicComponent">
+        <js-codelet>
+            var init = [];
+        </js-codelet>
+        <js-resource>/common/js/tinyui.js</js-resource>        
+        <css-resource></css-resource>   
+    </ui-component>
+</ui-components>
