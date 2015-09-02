@@ -1,4 +1,0 @@
-#@leftTreeCol()
-    #@searchZtreeWithInit("treeDemo" "height:454px;" "/data/tree/region3.js")
-    #end
-#end
