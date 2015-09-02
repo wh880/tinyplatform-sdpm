@@ -19,7 +19,7 @@
 				#include("/testManagement/page/dropdownMenu.page")
 			#end
 			#@tabHead()
-				#include("/testManagement/page/testManagementTab.page")
+				#include("/testManagement/page/Tab.page")
 			#end
 			
 			#@tabBodyCol("ptop-5")
@@ -40,7 +40,7 @@
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
-					#@iconOperations("#myModal" "icon-upload-alt" "导入" "500" "100" "/testManagement/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp导入#end
+					#@iconOperations("#myModal" "icon-upload-alt" "导入" "500" "100" "/testManagement/page/tabledemo/importBug.pagelet" "ml-5")&nbsp导入#end
 					
 					###@iconOperations("#myModal" "icon-download-alt" "导出" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")&nbsp导出#end
 					#buttonIcon(iconClass="icon-download-alt")	
@@ -49,9 +49,9 @@
 	                    #@ulDropdownMenu("downMenuSty")
 #*	                    	#@iconOperations("#myModal" "icon-download-alt" "导出数据" "865" "200"
 						 "/page/tabledemo/user-add.pagelet" "ml-5")导出数据#end*#
-						 #@aModal("#myModal" "导出数据" "500" "100" "" "/testManagement/page/tabledemo/testManagement1.pagelet")导出数据#end
+						 #@aModal("#myModal" "导出数据" "500" "100" "" "/testManagement/page/tabledemo/exportBugData.pagelet")导出数据#end
 						</br>
-						 #@aModal("#myModal" "导出模板" "500" "100" "" "/testManagement/page/tabledemo/testManagement2.pagelet")导出模版#end
+						 #@aModal("#myModal" "导出模板" "500" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出模版#end
 							#@dialog("myModal")
 								#@dialogHeader()对话框标题#end
 								#@dialogBody()<p>对话框内容…</p>#end
@@ -65,7 +65,7 @@
                     #end&nbsp;
                     
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
-                    <a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
+                    <a href="${TINY_CONTEXT_PATH}/testManagement/page/batchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-plus")建Bug</a>
 				</span>
 				#div(divClass="clearfix")
@@ -93,7 +93,7 @@
 					<a href="#" class="btn btn-info btn-sm">历史</a>
 					<a href="#" class="btn btn-warning btn-sm">相关</a>
 				#end
-			#@tinyTableContent("../data/testManagementBugData.pagelet")
+			#@tinyTableContent("../data/BugData.pagelet")
 				#@thead()
 					#@tr()
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
