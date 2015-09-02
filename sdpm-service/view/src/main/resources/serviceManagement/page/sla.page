@@ -38,7 +38,7 @@
 
 					##<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
                     ##<a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/serviceManagement/page/proposeSla.page">#buttonIcon(iconClass="icon-plus")新建服务级别协议表</a>
+					<a href="${TINY_CONTEXT_PATH}/serviceManagement/page/proposeSla.page">#buttonIcon(iconClass="icon-plus")新建协议</a>
 				</span>
                 #div(divClass="clearfix")
                 #include("/testManagement/page/mulsearch.page")
@@ -48,57 +48,126 @@
 
         #@toggleBox({"class":"open"})
             #@toggleLeft({"class":"aclass"})
-                #@settoggleLeftTitle()这里据说是项目名称#end
+                #@settoggleLeftTitle()这里是项目名称和客户名称#end
                 #@settoggleLeftBody()
                     #include("/testManagement/page/moduleTree.page")
                 #end
             #end
 
-            #@toggleRight()
-                #@tinyTable()
-                    #@div(divBaseClass="tinyheaderTools form-inline")
-                        #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-                        #@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;暂时留着，后期更新新的按钮#end
-                    <a href="#" class="btn btn-default btn-sm">产品</a>
-                    <a href="#" class="btn btn-success btn-sm">Bug</a>
-                    <a href="#" class="btn btn-primary btn-sm">工程</a>
-                    <a href="#" class="btn btn-info btn-sm">历史</a>
-                    <a href="#" class="btn btn-warning btn-sm">相关</a>
-                    #end
-                    #@tinyTableContent("../data/testManagementBugData.pagelet")
-                        #@thead()
-                            #@tr()
-                                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                                #@tinyTh({"class":"sorting","rel":"sortname"})级别#end
-                                #@tinyTh({"class":"sorting","rel":"sortname"})P#end
-                                #@tinyTh({"class":"sorting","rel":"sortname"})Bug标题#end
-                                #@tinyTh({"class":"sorting","rel":"sortname","style":"color:#333"})创建#end
-                                #@tinyTh({"class":"sorting","rel":"sortname"})指派#end
-                                #@tinyTh({"class":"sorting","rel":"sortname"})解决#end
-                                #@tinyTh({"class":"sorting","rel":"sortname"})方案#end
-                                #@tinyTh({"csortinglass":"sorting","rel":"sortname"})操作#end
-                            #end
-                        #end
-                    <script type="text/javascript">
-                        $(function(){
-                            $('#${tableId}').on('click','.delBtn',function(e){
-                                user_del(this,'1');
-                            });
-                        })
-                    </script>
-                    #*				#@dialog("myModal")
-                                        #@dialogHeader()对话框标题#end
-                                        #@dialogBody()<p>对话框内容…</p>#end
-                                        #@dialogFooter()
-                                            #@buttonEnsure()确定#end
-                                            #@buttonCancel()关闭#end
-                                        #end
-                                    #end*#
+            #@tabBodyCol("ptop-5")
+            ##operationbar
+                #@div(divClass="operationbar")
+                <span class="f">
+					<a href="#" class="active_btn">我是项目名称哦！</a>
+			</span>
+                <span class="r">
+				#@iconOperations("#LogModal" "icon-time" "新增日志" "800" "600" "/testManagement/page/addLog.pagelet" "ml-5")&nbsp日志#end
+                    #@iconOperations("#beginModal" "icon-play" "这里需要后台调用该项目名称>开始" "900" "400" "/testManagement/page/versionBegin.pagelet" "ml-5")&nbsp开始#end
+                    #@iconOperations("#endModal" "icon-off" "这里需要后台调用该项目名称>关闭" "900" "400" "/testManagement/page/versionEnd.pagelet" "ml-5")&nbsp关闭#end
+                    <a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-dashboard")用例</a>
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link	")关联用例</a>
+				<a href="#" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
+				<a href="#" title="删除版本">#buttonIcon(iconClass="icon-remove")</a>
+				<a href="#" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+			</span>
+                #end
+            ##operationbar end
+            #end
+        ##tabbody end
+        <div style="width:80%;float:left">
+            #@div(divClass="infoContent")
+                <p class="titleName">版本描述</p>
+                <div>
+                    456789
+                </div>
+            #end
+            #@div(divClass="infoContent")
+                <p class="titleName">测试总结</p>
+                <div>
+                    456789
+                </div>
+            #end
+            #@div(divClass="infoContent")
+                <p class="titleName">历史记录</p>
+                #include("/testManagement/page/historyRecord.page")
+            #end
+            <div style="text-align:center;margin:auto">
+                #@iconOperations("#LogModal" "icon-time" "新增日志" "800" "600" "/testManagement/page/addLog.pagelet" "ml-5")&nbsp日志#end
+
+                #@dialog("LogModal")
+                    #@dialogHeader()对话框标题#end
+                    #@dialogBody()<p>对话框内容…</p>#end
+                    #@dialogFooter()
+                        #@buttonEnsure()确定#end
+                        #@buttonCancel()关闭#end
                     #end
                 #end
-            ##tinytable end
+                #@iconOperations("#beginModal" "icon-play" "这里需要后台调用该项目名称>开始" "900" "400" "/testManagement/page/versionBegin.pagelet" "ml-5")&nbsp开始#end
+                #@dialog("beginModal")
+                    #@dialogHeader()对话框标题#end
+                    #@dialogBody()<p>对话框内容…</p>#end
+                    #@dialogFooter()
+                        #@buttonEnsure()确定#end
+                        #@buttonCancel()关闭#end
+                    #end
+                #end
+                #@iconOperations("#endModal" "icon-off" "这里需要后台调用该项目名称>关闭" "900" "400" "/testManagement/page/versionEnd.pagelet" "ml-5")&nbsp关闭#end
+                #@dialog("endModal")
+                    #@dialogHeader()对话框标题#end
+                    #@dialogBody()<p>对话框内容…</p>#end
+                    #@dialogFooter()
+                        #@buttonEnsure()确定#end
+                        #@buttonCancel()关闭#end
+                    #end
+                #end
+                <a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-dashboard")用例</a>
+                <a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-link	")关联用例</a>
+                <a href="#" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
+                <a href="#" title="删除版本">#buttonIcon(iconClass="icon-remove")</a>
+                <a href="#" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+            </div>
+        </div>
+
+        <div style="width:20%;float:right" >
+            #@div(divClass="infoContent")
+                <p class="titleName">基本信息</p>
+            ##该样式在comm.css样式中自定义
+                #@table("adjustTable")
+                    #@thead()
+                    #end
+                    #@tbody()
+                        #@tr()
+                            #@th()所属项目#end
+                            #@td()<a href="#">测试项目</a>#end
+                        #end
+                        #@tr()
+                            #@th()版本#end
+                            #@td()trunk#end
+                        #end
+                        #@tr()
+                            #@th()负责人#end
+                            #@td()admin#end
+                        #end
+                        #@tr()
+                            #@th()优先级#end
+                            #@td()1#end
+                        #end
+                        #@tr()
+                            #@th()开始日期#end
+                            #@td()2015-08-12#end
+                        #end
+                        #@tr()
+                            #@th()结束日期#end
+                            #@td()2015-08-12#end
+                        #end
+                        #@tr()
+                            #@th()当前状态#end
+                            #@td()<font color="red">正在进行中#end
+                        #end
+                    #end
+                #end
             #end
-        ##toggle rigth end
+        </div>
         #end
     ##toggle end
     #end

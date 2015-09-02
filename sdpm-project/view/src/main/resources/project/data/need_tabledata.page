@@ -22,10 +22,20 @@
 	#@td()2013/03/25#end
 	#@td()￥320,800#end
 	 #@td()
-		#iconOperations("#myModal" "icon-smile" "分解任务" "865" "448" "/project/page/tabledemo/add_task.pagelet" "ml-5")
-		#iconOperations("#myModal" "icon-paste" "批量分解" "865" "448" "/project/page/tabledemo/bech_add_task.pagelet" "ml-5")
-		#iconOperations("#myModal" "icon-sitemap" "建用例" "865" "448" "/project/page/tabledemo/user-add.pagelet" "ml-5")
-		#iconOperation(" icon-remove" "移除" "ml-5")
+	 	<a href="${TINY_CONTEXT_PATH}/project/page/tabledemo/add_task.page" title="分解任务">#buttonIcon(iconClass="icon-smile")</a>
+		<a href="${TINY_CONTEXT_PATH}/project/page/tabledemo/bech_add_task.page" title="批量分解">#buttonIcon(iconClass="icon-paste")</a>		
+		<a href="#" title="建用例">#buttonIcon(iconClass="icon-sitemap")</a>			
+		#@aModal("#myModa4" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
+					#@dialog("myModa4")
+						#@dialogHeader()#end
+						#@dialogBody()				
+								<h4>确定删除吗?</h4>						
+    					#end
+						#@dialogFooter()
+							#@buttonEnsure()确定#end
+	   				   	 	#@buttonCancel()关闭#end
+  						#end
+					#end
 		
 	#end
 #end

@@ -89,7 +89,7 @@
 </head>
 <body class="theme-default main-menu-animated">
 	#@mainWrapper()
-		#@mainNavbar("/img/main-navbar-logo.png" "Tinyframework")
+		#@mainNavbar("/common/img/main-navbar-logo.png" "Tinyframework")
 			#@navbarNav()
 				#navbarNavItem("切换到AJAX" "/ajax.page")
 				#@navbarDropdownMenu("下拉菜单")
@@ -176,7 +176,7 @@
                                 #@navItemDemo("2.8" "javascript:void(0);" "icon-list")模块#end
                                 #@navItemDemo("2.9" "javascript:void(0);" "icon-list")概况#end
                             #end*#
-				#TnavItem("3" "项目管理" "/page/project/project.page" "icon-book")
+				#TnavItem("3" "项目管理" "/project/page/project/project.page" "icon-book")
 			#*				#@navDropDownMenu("3" "项目管理" "icon-book" )
                                 #@navItemDemo("3.1" "javascript:void(0);" "icon-list")任务#end
                                 #@navItemDemo("3.2" "javascript:void(0);" "icon-list")需求#end
@@ -202,7 +202,7 @@
                                 #@navItemDemo("5.2" "javascript:void(0);" "icon-list")编辑#end
                                 #@navItemDemo("5.3" "javascript:void(0);" "icon-list")分类 #end
                             #end*#
-				#TnavItem("6" "统计管理" "/page/project/statistical.page" "icon-bar-chart")
+				#TnavItem("6" "统计管理" "/statistic/page/product.page" "icon-bar-chart")
 			#*				#@navDropDownMenu("6" "统计管理" "icon-bar-chart" )
                                 #@navItemDemo("6.1" "javascript:void(0);" "icon-list")产品#end
                                 #@navItemDemo("6.2" "javascript:void(0);" "icon-list")项目#end
@@ -227,6 +227,16 @@
                                 #@navItemDemo("8.5" "javascript:void(0);" "icon-list")LDAP配置#end
                                 #@navItemDemo("8.6" "javascript:void(0);" "icon-list")回收站#end
                                 #@navItemDemo("8.7" "javascript:void(0);" "icon-list")重建索引#end
+                            #end*#
+				#TnavItem("9" "服务管理" "/serviceManagement/page/service-client.page" "icon-trophy")
+			#*				#@navDropDownMenu("9" "后台管理" "icon-trophy" )
+                                #@navItemDemo("9.1" "javascript:void(0);" "icon-list")首页#end
+                                #@navItemDemo("9.2" "javascript:void(0);" "icon-list")插件#end
+                                #@navItemDemo("9.3" "javascript:void(0);" "icon-list")自定义#end
+                                #@navItemDemo("9.4" "javascript:void(0);" "icon-list")短信配置#end
+                                #@navItemDemo("9.5" "javascript:void(0);" "icon-list")LDAP配置#end
+                                #@navItemDemo("9.6" "javascript:void(0);" "icon-list")回收站#end
+                                #@navItemDemo("9.7" "javascript:void(0);" "icon-list")重建索引#end
                             #end*#
 			#end <!-- navigation end -->
 		#end

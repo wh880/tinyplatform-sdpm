@@ -225,7 +225,7 @@
 		</table>
 	#end
 	#@div(divClass="infoContent")
-		<p class="titleName">任务的一生</p>s
+		<p class="titleName">任务的一生</p>
 		<table>
 			<tr>
 				<td style="float:right;padding:3px 10px;font-size:15px">由谁创建</td>
