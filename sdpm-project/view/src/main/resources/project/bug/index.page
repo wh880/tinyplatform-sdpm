@@ -1,0 +1,33 @@
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+<style>
+.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+</style>
+#include("/project/event/common.page")
+#set(name="bug")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/project/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/project/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/project/addProject.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="${TINY_CONTEXT_PATH}/project/allProject.page" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+			#end				
+			#@tabBodyCol("ptop-5")
+			#@div(divClass="operationbar")
+				<span class="f">
+					Bug列表
+				</span>
+				<span class="r ">
+					<a href="#">#buttonIcon(iconClass="icon-plus")提BUG</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/project/bug/bugTogglebox.page")
+#end
+#end
+#end

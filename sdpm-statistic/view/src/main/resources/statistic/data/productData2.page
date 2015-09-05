@@ -1,0 +1,34 @@
+#@bkGrayDiv("pd-20")
+筛选条件：
+##加个tinyform 和 一段js 选择后提交
+    #labelCheckbox(ckId="shutdown" labelText="关闭产品")
+#end
+<div style="height: 10px;"></div>
+#@tableStriped("table-border")
+    #@thead()
+        #@tr("text-c")
+            #@th()
+            产品
+            #end
+            #@th()
+            计划
+            #end
+        #end
+        #@tbody()
+            #@tr("text-c")
+            <td>计划1</td>
+            <td>
+                #@div(divStyle="background-color:#fff; border:solid 1px #ddd;width: 180px;")10像素填充，来点背景效果更明显#end
+            </td>
+            #end
+            #@tr("text-c")
+            <td>计划2</td>
+            <td></td>
+            #end
+            #@tr("text-c")
+            <td>计划3</td>
+            <td></td>
+            #end
+        #end
+    #end
+#end

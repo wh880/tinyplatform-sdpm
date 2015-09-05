@@ -1,0 +1,28 @@
+#@tableHover("table-border")
+    #@thead()
+        #@tr()
+            #@td()
+            统计报表
+            #end
+        #end
+    #end
+
+    #@tbody()
+        #@tr()
+            #@td()
+            <a href="${TINY_CONTEXT_PATH}/statistic/page/test.page?order=1">Bug指派</a>
+            #end
+        #end
+        #@tr()
+            #@td()
+            <a href="${TINY_CONTEXT_PATH}/statistic/page/test.page?order=2">用例统计</a>
+            #end
+        #end
+        #@tr()
+            #@td()
+            <a href="${TINY_CONTEXT_PATH}/statistic/page/test.page?order=3">版本统计</a>
+            #end
+        #end
+
+    #end
+#end

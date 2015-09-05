@@ -1,0 +1,10 @@
+
+#include("/project/task/taskMenu.page")
+
+  #@fullCalendar("fullCalendar")
+
+        
+        #@calendar("calendar")#end
+    #end
+    
+    #fullCalendarInit("#external-events .fc-event" "#calendar")

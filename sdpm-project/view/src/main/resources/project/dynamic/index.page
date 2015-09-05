@@ -1,0 +1,57 @@
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#import("/org/tinygroup/dropDown/components/dropDown.component")
+<style>
+.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: -5px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+</style>
+
+
+#include("/project/event/common.page")
+#set(name="dynamic")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/project/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/project/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/project/addProject.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="${TINY_CONTEXT_PATH}/project/allProject.page" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+			#end				
+			#@tabBodyCol("ptop-5")
+			#@div(divClass="operationbar")
+				<span class="f">
+					<a href="#" class="active_btn">今天</a>
+					<a href="#">昨天</a>
+					<a href="#">前天</a>
+					<a href="#">本周</a>
+					<a href="#">上周</a>
+					<a href="#">本月</a>
+					<a href="#">上月</a>
+					<a href="#">所有</a>
+						#@dropDownClickMenu("按用户" "#")						
+							#@dropDownItem("#")用户一#end
+							#@dropDownItem("#")用户二#end
+	  					#end
+	  					<span class="caret"></span>	  				
+				</span>
+				
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#include("/project/dynamic/table.page")
+#end
+#end
+#end

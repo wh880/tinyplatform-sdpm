@@ -72,7 +72,7 @@
                 #end
             #end
             #@toggleRight()
-                #include("/organizationTable/userRightTable.page")
+                #include("/organization/table/userRightTable.page")
             #end
         #end
     #end
