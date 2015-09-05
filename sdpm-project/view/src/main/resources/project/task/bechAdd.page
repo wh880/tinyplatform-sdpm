@@ -38,7 +38,7 @@ h3 {line-height: 1.2;}
 	
 	#@toggleRight()
 		##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-			#include("/project/task/bech_add_task_date.page")
+			#include("/project/task/bechAddData.page")
 	
 		
 #*			#include("/project/page/outpage/add_task_date.page")*#

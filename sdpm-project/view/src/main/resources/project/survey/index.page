@@ -1,0 +1,203 @@
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+<style>
+.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.b {margin-left: 8px;}
+.infoContent{ margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
+.infoContent .titleName{margin-top:-16px;margin-bottom:8px;font-weight:bold;font-size:13px;}
+</style>
+
+#include("/project/event/common.page")
+#set(name="survey")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/project/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/project/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/project/addProject.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="${TINY_CONTEXT_PATH}/project/allProject.page" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+			#end				
+			#@tabBodyCol("ptop-5")
+			#@div(divClass="operationbar")
+				<span class="f">
+					项目名称
+				</span>
+				<span class="r">
+				#@aModal("#myModal" "项目名称>延期" "750" "400" "" "/project/survey/delay.pagelet")#buttonIcon(iconClass="icon-calendar")延期#end
+					#@dialog("myModal")
+						#@dialogHeader()#end
+						#@dialogBody()
+						<p></p>
+						#end
+						#@dialogFooter()
+							#@buttonEnsure()确定#end
+	   				   	 	#@buttonCancel()关闭#end
+  						#end
+					#end
+				#@aModal("#myModa2" "项目名称>挂起" "800" "500" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass="icon-pause")挂起#end
+					#@dialog("myModa2")
+						#@dialogHeader()#end
+						#@dialogBody()
+						<p></p>						
+    					#end
+						#@dialogFooter()
+							#@buttonEnsure()确定#end
+	   				   	 	#@buttonCancel()关闭#end
+  						#end
+					#end
+					#@aModal("#myModa3" "项目名称>结束" "800" "500" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass="icon-off")结束#end
+					#@dialog("myModa3")
+						#@dialogHeader()#end
+						#@dialogBody()
+							<p></p>
+    					#end
+						#@dialogFooter()
+							#@buttonEnsure()确定#end
+	   				   	 	#@buttonCancel()关闭#end
+  						#end
+					#end				
+				<a href="${TINY_CONTEXT_PATH}/project/survey/edit.page" title="编辑项目" class="b ">#buttonIcon(iconClass="icon-pencil")</a>
+#*				<a href="#" title="删除项目">#buttonIcon(iconClass="icon-remove")</a>*#
+				#@aModal("#myModa4" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
+					#@dialog("myModa4")
+						#@dialogHeader()#end
+						#@dialogBody()				
+								<h4>确定删除吗?</h4>						
+    					#end
+						#@dialogFooter()
+							#@buttonEnsure()确定#end
+	   				   	 	#@buttonCancel()关闭#end
+  						#end
+					#end
+				<a href="${TINY_CONTEXT_PATH}/project/dynamic/index.page" title="返回">#buttonIcon(iconClass="icon-level-up")</a>
+				</span>
+				#div(divClass="clearfix")
+			 #end
+#end
+
+<div style="width:65%;float:left">
+		#@div(divClass="infoContent")
+	        <p class="titleName">项目描述</p>
+	       	<div>
+	       		456789
+	       	</div>
+		#end
+		#@div(divClass="infoContent")
+	        <p class="titleName">历史记录</p>
+	        ##加入后，js代码会导致页面排版混乱
+	       	#include("/project/recordlist.page")
+		#end
+</div>
+<div style="width:35%;float:right" >
+		#@div(divClass="infoContent")
+		        <p class="titleName">基本信息</p>
+		       	#@table()
+		       		#@thead()
+		       		#end
+		       		#@tbody()
+		       			#@tr()
+							#@td()所属项目#end
+		       				#@td()<a href="#">测试项目</a>#end
+		       			#end
+		       			#@tr()
+							#@td()版本#end
+		       				#@td()trunk#end
+		       			#end
+		       			#@tr()
+							#@td()负责人#end
+		       				#@td()admin#end
+		       			#end
+		       			#@tr()
+							#@td()优先级#end
+		       				#@td()1#end
+		       			#end
+		       			#@tr()
+							#@td()开始日期#end
+		       				#@td()2015-08-12#end
+		       			#end
+		       			#@tr()
+							#@td()结束日期#end
+		       				#@td()2015-08-12#end
+		       			#end
+		       			#@tr()
+							#@td()当前状态#end
+		       				#@td()<font color="red">正在进行中#end
+		       			#end	
+		       		#end
+		       	#end
+		#end
+		#@div(divClass="infoContent")
+			<p class="titleName">其他信息</p>
+			<table>
+				<tr>
+					<td rowspan="4">工时统计</td>
+					<td>总共预计20工时</td>
+				</tr>
+				<tr>
+					<td>可用工时483.0工时</td>
+				</tr>
+				<tr>
+					<td>已经消耗1工时</td>
+				</tr>
+				<tr>
+					<td>预计剩余19工时</td>
+				</tr>
+			</table>
+		#end
+#*			#@table()
+				#@thead()
+					#@tr()
+						#@td(tdClass="row")
+							工时统计
+						#end
+						#@td()总共预计20工时#end
+					#end
+					#@tr()
+						#@td()可用工时483.0工时#end
+						
+					#end
+					#@tr()
+						#@td()已经消耗1工时#end
+					#end
+					#@tr()
+						#@td()预计剩余19工时#end
+					#end
+				#end
+			#end
+		#end*#
+	</div>
+#*	#TypeInfo("project" "")*#
+	#end
+	#end
+#*	<div style="float:button;text-align:center;margin:auto">
+				#@iconOperations("#myModal" "icon-time" "导入" "500" "100" "/testManagement/project/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp日志#end
+				#@iconOperations("#myModal" "icon-off" "导入" "500" "100" "/testManagement/project/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp关闭#end
+				<a href="${TINY_CONTEXT_PATH}/testManagement/project/page/proposeBug.page">#buttonIcon(iconClass="icon-dashboard")用例</a>
+				<a href="${TINY_CONTEXT_PATH}/testManagement/project/page/proposeBug.page">#buttonIcon(iconClass="icon-link	")关联用例</a>
+				<a href="#" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
+				<a href="#" title="删除版本">#buttonIcon(iconClass="icon-remove")</a>
+				<a href="#" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+	</div>				*#
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+							
+				
+	

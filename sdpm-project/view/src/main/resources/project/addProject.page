@@ -129,7 +129,7 @@
 		    #end		    
 		     #@colLabel()#end
      			 <a href="#">#buttonRadiusPrimary(caption="保存")</a>
-      			<a href="${TINY_CONTEXT_PATH}/project/page/outpage/progk.page">#buttonDefault(caption="返回")</a>
+      			<a href="${TINY_CONTEXT_PATH}/project/survey/index.page">#buttonDefault(caption="返回")</a>
   			 #end
 		
 

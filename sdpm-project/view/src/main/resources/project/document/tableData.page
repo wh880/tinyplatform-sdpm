@@ -1,0 +1,30 @@
+#macro setTinyItemCount(num)
+	<input type="hidden" name="records" value="${num}"/>
+#end
+
+
+
+#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#if (pagesize>records-pagesize*(page-1))
+#set(pagesize=records-(page-1)*pagesize)
+#end
+#setTinyItemCount(52)
+#for(var:[1..pagesize])
+#@tr()
+	
+	#@td()${page}#end
+	#@td()北京#end
+	#@td()中南海#end
+	#@td()67#end
+	#@td()2013/03/25#end
+	#@td()67#end
+	
+	
+	
+	 #@td()
+		
+		#iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "#" "ml-5")
+		#iconOperation(" icon-remove" "删除" "ml-5")
+	#end
+#end
+#end

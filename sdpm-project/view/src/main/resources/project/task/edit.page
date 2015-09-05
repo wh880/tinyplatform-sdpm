@@ -43,12 +43,12 @@
 		</table>
 		<center style="margin-top:5px">
 		<a href="#">#buttonRadiusPrimary(caption="保存")</a>
-        <a href="${TINY_CONTEXT_PATH}/project/page/outpage/progk.page">#buttonDefault(caption="返回")</a>
+        <a href="#">#buttonDefault(caption="返回")</a>
         </center>        
 	#end
 	#@div(divClass="infoContent")
 		<p class="titleName">历史记录</p>
-		#include("/project/task/recordlist1.page")
+		#include("/project/task/recordlist.page")
 	#end
 </div>
 <div style="width:35%;float:right">
@@ -199,7 +199,7 @@
 				<td>0
 				#@simpleModal("myModal" "新增日志")#end				
 				 #@iconOperations("#myModal" "icon-time" "新增日志" "900" "400"
-					 "/project/task/haoshi.pagelet" "ml-5")#end
+					 "/project/task/consumeTime.pagelet" "ml-5")#end
 				</td>
 			</tr>
 			<tr>

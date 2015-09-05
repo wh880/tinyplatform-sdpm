@@ -1,14 +1,14 @@
 
-#@aHeadCol(TINY_CONTEXT_PATH+"/project/task/task.page?currentPageId=3" name=="rw"?"Current":"")任务#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/project/page/outpage/proxq.page?currentPageId=3" name=="xq"?"Current":"")需求#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/project/page/outpage/probug.page?currentPageId=3" name=="bug"?"Current":"")Bug#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/project/page/outpage/probb.page?currentPageId=3" name=="bb"?"Current":"")版本#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/project/page/outpage/procs.page?currentPageId=3" name=="cs"?"Current":"")测试#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/project/page/outpage/protd.page?currentPageId=3" name=="td"?"Current":"")团队#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/project/page/outpage/prorz.page?currentPageId=3" name=="rz"?"Current":"")日志#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/project/page/outpage/prodt.page?currentPageId=3" name=="dt"?"Current":"")动态#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/project/page/outpage/prowd.page?currentPageId=3" name=="wd"?"Current":"")文档#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/project/page/outpage/procp.page?currentPageId=3" name=="cp"?"Current":"")产品#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/project/page/outpage/progk.page?currentPageId=3" name=="gk"?"Current":"")概况#end	
+#@aHeadCol(TINY_CONTEXT_PATH+"/project/task/index.page?currentPageId=3" name=="task"?"Current":"")任务#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/project/demand/index.page?currentPageId=3" name=="demand"?"Current":"")需求#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/project/bug/index.page?currentPageId=3" name=="bug"?"Current":"")Bug#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/project/version/index.page?currentPageId=3" name=="version"?"Current":"")版本#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/project/test/index.page?currentPageId=3" name=="test"?"Current":"")测试#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/project/team/index.page?currentPageId=3" name=="team"?"Current":"")团队#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/project/note/index.page?currentPageId=3" name=="note"?"Current":"")日志#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/project/dynamic/index.page?currentPageId=3" name=="dynamic"?"Current":"")动态#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/project/document/index.page?currentPageId=3" name=="document"?"Current":"")文档#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/project/product/index.page?currentPageId=3" name=="product"?"Current":"")产品#end
+#@aHeadCol(TINY_CONTEXT_PATH+"/project/survey/index.page?currentPageId=3" name=="survey"?"Current":"")概况#end	
 
 	

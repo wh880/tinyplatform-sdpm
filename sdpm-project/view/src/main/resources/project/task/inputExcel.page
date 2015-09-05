@@ -7,7 +7,7 @@
 	    #@formControlDiv("col-12")
 	      #@p()#end	#fileWithInput("file-1")
 	    #@validateDiv("col-2")#end
-	    <a href="${TINY_CONTEXT_PATH}/project/task/task.page">#buttonRadiusPrimary(caption="保存")</a>
+	    <a href="${TINY_CONTEXT_PATH}/project/task/index.page">#buttonRadiusPrimary(caption="保存")</a>
 	   #end
       #end
 #end      

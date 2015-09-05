@@ -120,7 +120,7 @@
              #@td()
 					#@colLabel()#end
 					<a href="#">#buttonRadiusPrimary(caption="保存")</a>
-    				<a href="${TINY_CONTEXT_PATH}/project/page/project/project.page">#buttonDefault(caption="返回")</a>
+    				<a href="${TINY_CONTEXT_PATH}/project/task/index.page">#buttonDefault(caption="返回")</a>
 			#end
 	 	
 #end
