@@ -32,5 +32,10 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.templateengine</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
     </dependencies>
 </project>
