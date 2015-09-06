@@ -340,6 +340,7 @@
         <module>sdpm-common</module>
         <module>sdpm-document</module>
         <module>sdpm-metadata</module>
+        <module>sdpm-productLine</module>
         <module>sdpm-product</module>
         <module>sdpm-project</module>
         <module>sdpm-quality</module>
