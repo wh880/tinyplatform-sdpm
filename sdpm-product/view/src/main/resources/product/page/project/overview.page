@@ -25,7 +25,7 @@
 			</span>
 			<span class="r">
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-module-editor.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/overview-close.page" title="关闭">#buttonIcon(iconClass="icon-off")</a>
+				#iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet" "ml-5")
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
 			</span>
 		#end
@@ -45,7 +45,7 @@
 		#end
 	</div>
 
-#include("/product/page/tabledemo/basicinformation.page")
+#include("/product/page/tabledemo/baseinfo.page")
 		
 	
 #end
