@@ -150,6 +150,8 @@
 				#foreach(m in menuManager.getChildMenus("0"))
 					#TnavItem(mFor.index m.name m.href m.icon)
 				#end
+
+			#end <!-- navigation end -->
 		#end
     <div class="content-wrapper-bg"></div>
 		#@div("content-wrapper")
