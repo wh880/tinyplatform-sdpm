@@ -2,7 +2,6 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
     <bean id="fileResolverProcessor" scope="singleton"
           class="org.tinygroup.fileresolver.applicationprocessor.FileResolverProcessor">
         <property name="fileResolver" ref="fileResolver"></property>
@@ -11,10 +10,9 @@
         <property name="fileResolver" ref="fileResolver"></property>
         <property name="menuManager" ref="menuManager"></property>
     </bean>
-
-    <bean id="childMenuTemplateFunction" class="org.tinygroup.sdpm.menu.impl.ChildMenuTemplateFunction">
-        <property name="menuManager" ref="menuManager"/>
-    </bean>
-
+    <!--<bean id="childMenuTemplateFunction" class="org.tinygroup.sdpm.menu.impl.ChildMenuTemplateFunction">-->
+    <!--<property name="menuManager" ref="menuManager"/>-->
+    <!--</bean>-->
     <bean id="menuManager" class="org.tinygroup.sdpm.menu.impl.MenuManagerImpl"/>
+    <bean id="commonFilter" class="org.tinygroup.sdpm.fitter.CommonFilter"/>
 </beans>
