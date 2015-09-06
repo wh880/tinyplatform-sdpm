@@ -61,10 +61,10 @@
 	#end
 	       	</li>
 	   <li>
-	       	<label>当前状态：</label>
-	       	#@span(spanClass="text-overflow")
-			<a href="#" title="未开始">草稿</a>
-			#end
+	         #@elementItem()
+		#@colLabel()当前状态：#end
+		<p>草稿</p>
+	#end
 	   </li>
 	  <li>
 	    #@elementItem()
@@ -114,17 +114,19 @@
         #end
 			</ul>
       #end
+      
       #@div(divClass="infoContent")
 	        <p class="titleName">需求的一生</p>
 	       	<ul>
-	       		<li>
-	       			<label>由谁创建：</label>
-	       			#@span(spanClass="text-overflow")
-						<a href="#" >Admin</a>
-					#end
-	       		</li>
-<li>	
-#@tinyForm("thisform" "" "" {"class":"test"})
+	   <li>
+	   <label>由谁创建：</label>
+	   #@span(spanClass="text-overflow")
+		<a href="#" >Admin</a>
+		#end
+	    </li>
+	       		
+	<li>	
+    #@tinyForm("thisform" "" "" {"class":"test"})
     #@elementItem()
 	#@colLabel()指派给：#end
 	#@formControlDiv("col-8")
@@ -137,16 +139,17 @@
 	#@validateDiv("col-2")#end
 	#end
 		#end
-</li>
-	</ul>
+	</li>
+			</ul>
 	
 				</ul>
 				
       #end
+      
       #@div(divClass="infoContent")
 	        <p class="titleName">其他相关</p>
-	       	<ul>
-	       	    <li> 
+<ul>
+	    <li> 
   #@elementItem()
         #@colLabel()重复需求：#end
         #@formControlDiv("col-8")
@@ -155,7 +158,8 @@
         #@validateDiv("col-2")#end
       #end
 	    </li>
-	        <li> 
+	    
+	     <li> 
   #@elementItem()
         #@colLabel()相关需求：#end
         #@formControlDiv("col-8")
@@ -164,7 +168,8 @@
         #@validateDiv("col-2")#end
       #end
 	    </li>
-	        <li> 
+	    
+	    <li> 
   #@elementItem()
         #@colLabel()细分需求：#end
         #@formControlDiv("col-8")
@@ -173,6 +178,7 @@
         #@validateDiv("col-2")#end
       #end
 	    </li>
-	       	   </ul>				
+	    
+</ul>				
       #end
       </div>
