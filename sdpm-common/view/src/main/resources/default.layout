@@ -147,7 +147,7 @@
 					#TnavItem("0.5" "添加项目" "/page/tabledemo/addeProgect.page" "icon-list")
 					#TnavItem("0.6" "详情页" "/page/tabledemo/tetails.page" "icon-list")
 				#end
-				#foreach(m in childMenus("0"))
+				#foreach(m in menuManager.getChildMenus("0"))
 					#TnavItem("1" m.name m.href m.icon)
 				#end
 				#TnavItem("1" "我的地盘" "/page/project/mySite.page" "fa-dashboard")

@@ -1,30 +1,42 @@
-#!set(activeTitle="服务管理",activeMenuId=currentPageId)
-#import("/org/tinygroup/zTree/components/zTree.component")
-#import("/components/org/tinygroup/fulimanageui/form.component")
-###include("/organizationOther/common.page")
-<style>
-    .tabLayout .tabBar span a {color: #333}
-
-    .tabLayout .tabBar .Current a {color: #fff}
-
-    .operationbar {border-top: none;background: #f9fafe;padding: 6px 5px 6px 10px;
-    }
-</style>
-
+#import("/org/tinygroup/button/components/button_smart.component")
+#!set(activeTitle="客户管理",activeMenuId=currentPageId)
+#set(name="client")
 #@div()
-    #@div(divClass="tabLayout")
-        #@div(divClass="tabBar cl")
-        <span class="Current"><a href="#">客户</a></span>
-        <span><a href="#">需求</a></span>
-        <span><a href="#">协议</a></span>
-        <span><a href="#">FAQ</a></span>
-        <span style="float:right;background: #fff"><a href="#">#buttonIcon(iconClass="icon-plus")添加客户</a></span>
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox dropdownBoxes")
+            #include("/service/page/dropdownMenu.page")
         #end
-    #end
+        #@tabHead()
+            #include("/service/page/tab.page")
+        #end
+    <span class="r" style="position:relative;top:-28px;height:0">
+##			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">#buttonIcon(iconClass="icon-globe")所有产品</a>&nbsp;
+    <!--新增产品-->
+    #@aModal("#myModal" "新增产品" "900" "500" "btn-class" "#")#buttonIcon(iconClass="icon-plus-sign")添加产品 #end
+    </span>
 
+    ##这里是动态的模块布局
+    #end
 #end
 
-
+#include("/service/page/multiSearch.page")
+#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+    #@toggleLeft({"class":"aclass"})
+        #@settoggleLeftTitle()所属产品#end
+        #@settoggleLeftBody("treeLeftbox")
+        <ul class="treeList">
+            <li id="listContent" style="display:none; position:absolute;left:74px;">
+                <ul id="alternative" class="ztree"
+                    style="width:126px;min-height:160px;max-height:300px;"></ul>
+            </li>
+        </ul>
+        <ul id="treeDrag" class="ztree"></ul>
+        #end
+    #end
+    #@toggleRight()
+        #include("/service/page/tabledemo/clientTable.page")
+    #end
+#end
 <script type="text/javascript">
     <!--
     var setting = {
@@ -265,157 +277,6 @@
     $(document).ready(function () {
         $.fn.zTree.init($("#treeDrag"), setting, treeNodes);
         $("#callbackTrigger").bind("change", {}, setTrigger);
-    });
-    //-->
-</script>
-<script type="text/javascript">
-    <!--
-    $(function () {
-        $("#showsearchmore").click(function () {
-            $("#searchform").toggleClass("showmore");
-        });
-        $("#searchmore").click(function () {
-            $("#searchlite").css("display", "block");
-            $(this).hide();
-            $("#searchbox5,#searchbox6,#searchbox2,#searchbox3").show();
-        });
-        $("#searchlite").click(function () {
-            $("#searchmore").css("display", "block");
-            $(this).hide();
-            $("#searchbox5,#searchbox6,#searchbox2,#searchbox3").hide();
-        });
-        var itemlist = []
-        itemlist.push({
-            "name": "name",
-            "title": "真实姓名",
-            "operator": "include",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "email",
-            "title": "邮箱",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "apartment",
-            "title": "所属部门",
-            "operator": "=",
-            "value": "status"
-        });
-        itemlist.push({
-            "name": "uerNumber",
-            "title": "用户名",
-            "operator": "include",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "positio",
-            "title": "职位",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "phoneNumber",
-            "title": "电话",
-            "operator": "=",
-            "value": "pri"
-        });
-        itemlist.push({
-            "name": "joinDate",
-            "title": "加入日期",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "number",
-            "title": "编号",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "codeAccount",
-            "title": "源代码账号",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "birthday",
-            "title": "出生年",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "sex",
-            "title": "性别",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "QQ",
-            "title": "QQ",
-            "operator": "belong",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "address",
-            "title": "通讯地址",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "addressNum",
-            "title": "邮编",
-            "operator": "=",
-            "value": "user"
-        });
-
-        function setValueBox(index, itemIndex) {
-            $("#operator" + itemIndex).val(itemlist[index]["operator"]);
-            switch (itemlist[index]["value"]) {
-                case "text":
-                    $("#valueBox" + itemIndex).html('<input type="text" name="value' + itemIndex + '" id="value' + itemIndex + '" value="" class="form-control">');
-                    break;
-                case "user":
-                    $("#valueBox" + itemIndex).html($('<select name="value' + itemIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#usertemp").html()));
-                    break;
-                case "pri":
-                    $("#valueBox" + itemIndex).html($('<select name="value' + itemIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#pritemp").html()));
-                    break;
-                case "status":
-                    $("#valueBox" + itemIndex).html($('<select name="value' + itemIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#statustemp").html()));
-                    break;
-                case "date":
-                    $("#valueBox" + itemIndex).html('<input type="text" name="value' + itemIndex + '" id="value' + itemIndex + '" value="" class="form-control dateinput">');
-                    break;
-            }
-        }
-
-        $("#field1,#field2,#field3,#field4,#field5,#field6").each(function (index) {
-            $(this).empty();
-            var option;
-            for (var i = 0; i < itemlist.length; i++) {
-                option = $("<option>").val(itemlist[i]["name"]).text(itemlist[i]["title"]);
-                $(this).append(option);
-            }
-            $(this).val(itemlist[index]["name"]);
-            $("#operator" + (index + 1)).html($("#operatortemp").html());
-            setValueBox(index, index + 1);
-            $(this).on("change", function () {
-                for (var i = 0; i < itemlist.length; i++) {
-                    if (itemlist[i]["name"] == $(this).val()) {
-                        setValueBox(i, $(this).attr("id").substr(-1));
-                        break;
-                    }
-                }
-            });
-
-        });
-        $("#searchform").on("click", "input[class*=dateinput]", function () {
-            WdatePicker({
-                startDate: '%y-%M-01 00:00:00', dateFmt: "yyyy-MM-dd"
-            })
-        });
     });
     //-->
 </script>

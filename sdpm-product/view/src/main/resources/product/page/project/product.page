@@ -3,7 +3,7 @@
 #include("/product/page/event/common.page")
 
 <style>
-	.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+	.btn-group #Dropdown{background:none;border:none;padding:0 3px;}
 	.open #downMenuSty{min-width:75px}
 </style>
 
@@ -12,7 +12,6 @@
 		#@div(divClass="dropdownBox")
 			#include("/product/page/project/dropdownMenu.page")
 		#end
-		
 		#@tabHead()
 			#@tabHeadCol()需求#end
 			#@tabHeadCol()动态#end
@@ -27,7 +26,7 @@
 		<span class="r" style="position:relative;top:-28px;height:0">
 			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">#buttonIcon(iconClass="icon-globe")所有产品</a>&nbsp;
 			<!--新增产品-->
-			#@aModal("#myModal" "新增产品" "900" "500" "btn-class" "/product/page/tabledemo/addProduct.pagelet")#buttonIcon(iconClass="icon-plus-sign")添加产品 #end
+			#@aModal("#myModal" "新增产品" "900" "500" "btn-class" "/product/page/tabledemo/addProduct.page")#buttonIcon(iconClass="icon-plus-sign")添加产品 #end
 		</span>
 		
 		
@@ -149,6 +148,7 @@
 			##operationbar end
 			#include("/product/page/project/product-roadmap.page")
 		#end
+		
 		#@tabBodyCol("ptop-5")
 			##operationbar start5
 			#@div(divClass="operationbar")
@@ -163,6 +163,7 @@
 			##operationbar end
 			#include("/product/page/project/archive-list.page")
 		#end
+		
 		#@tabBodyCol("ptop-5")
 			##operationbar start6
 			#@div(divClass="operationbar")
@@ -189,16 +190,18 @@
 		#@tabBodyCol("ptop-5")
 			##operationbar start8
 			#@div(divClass="operationbar")
+			
 				<span class="f">
 					<span class="active_btn">概况</span>
 				</span>
-				<span class="r">
 				
-<!--修改了关闭、编辑和返回的跳转-->
-		#@aModal("#myModal" "关闭" "700" "130" "btn-class" "/product/page/tabledemo/user-guanbi.pagelet")#buttonIcon(iconClass="icon-off")关闭#end
-		<a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/tetails.page">#buttonIcon(iconClass="icon-plus")编辑</a>
-		<a href="${TINY_CONTEXT_PATH}/product/page/project/product.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+				<span class="r">
+			<!--修改了关闭、编辑和返回的跳转-->
+			#@aModal("#myModal" "关闭" "700" "130" "btn-class" "/product/page/tabledemo/user-guanbi.pagelet")#buttonIcon(iconClass="icon-off")关闭#end
+			<a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/tetails.page">#buttonIcon(iconClass="icon-plus")编辑</a>
+			<a href="${TINY_CONTEXT_PATH}/product/page/project/product.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
 				</span>
+				
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
