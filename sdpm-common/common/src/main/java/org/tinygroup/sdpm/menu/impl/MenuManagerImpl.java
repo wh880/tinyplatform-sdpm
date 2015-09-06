@@ -26,8 +26,8 @@ public class MenuManagerImpl implements MenuManager {
             logger.logMessage(LogLevel.ERROR, "菜单:[id:{},name:{}]已存在,重复定义在文件{}", menuId, menu.getName(), fileName);
             return;
         }
-        menuMap.put(menu.getName(), menu);
-        logger.logMessage(LogLevel.WARN, "菜单:[id:{},name:{}]", menuId, menu.getName());
+        menuMap.put(menuId, menu);
+        logger.logMessage(LogLevel.DEBUG, "添加菜单完成:[id:{},name:{}]", menuId, menu.getName());
         List<Menu> childMenus = menu.getChildMenus();
         if (childMenus != null) {
             for (Menu child : childMenus) {
