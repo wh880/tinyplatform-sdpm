@@ -95,7 +95,8 @@
 	       	#include("/project/recordlist.page")
 		#end
 </div>
-<div style="width:35%;float:right" >
+#include("/project/survey/basicInformation.page")
+#*<div style="width:35%;float:right" >
 		#@div(divClass="infoContent")
 		        <p class="titleName">基本信息</p>
 		       	#@table()
@@ -103,8 +104,8 @@
 		       		#end
 		       		#@tbody()
 		       			#@tr()
-							#@td()所属项目#end
-		       				#@td()<a href="#">测试项目</a>#end
+							#@th()项目名称#end
+		       				#@td()文化大革命#end
 		       			#end
 		       			#@tr()
 							#@td()版本#end
@@ -151,41 +152,9 @@
 				</tr>
 			</table>
 		#end
-#*			#@table()
-				#@thead()
-					#@tr()
-						#@td(tdClass="row")
-							工时统计
-						#end
-						#@td()总共预计20工时#end
-					#end
-					#@tr()
-						#@td()可用工时483.0工时#end
-						
-					#end
-					#@tr()
-						#@td()已经消耗1工时#end
-					#end
-					#@tr()
-						#@td()预计剩余19工时#end
-					#end
-				#end
-			#end
-		#end*#
-	</div>
-#*	#TypeInfo("project" "")*#
+	</div>*#
 	#end
-	#end
-#*	<div style="float:button;text-align:center;margin:auto">
-				#@iconOperations("#myModal" "icon-time" "导入" "500" "100" "/testManagement/project/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp日志#end
-				#@iconOperations("#myModal" "icon-off" "导入" "500" "100" "/testManagement/project/page/tabledemo/testManagement.pagelet" "ml-5")&nbsp关闭#end
-				<a href="${TINY_CONTEXT_PATH}/testManagement/project/page/proposeBug.page">#buttonIcon(iconClass="icon-dashboard")用例</a>
-				<a href="${TINY_CONTEXT_PATH}/testManagement/project/page/proposeBug.page">#buttonIcon(iconClass="icon-link	")关联用例</a>
-				<a href="#" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
-				<a href="#" title="删除版本">#buttonIcon(iconClass="icon-remove")</a>
-				<a href="#" title="返回">#buttonIcon(iconClass="icon-reply")</a>
-	</div>				*#
-					
+	#end			
 					
 					
 					

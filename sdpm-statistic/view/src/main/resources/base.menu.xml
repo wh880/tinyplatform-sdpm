@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="0" name="name" href="href" icon="icon" sort="100" isShow="isShow" permission="Permission">
-    <menu id="1" name="name1" href="href1" icon="icon1" sort="101" isShow="isShow1" permission="Permission1">
-        <menu id="220" name="name" href="href" icon="icon" sort="100" isShow="isShow" permission="Permission"/>
+<menu id="statistic" parent-id="0" name="统计管理" href="/statistic/page/product.page" icon="icon-pencil" sort="1"
+      isShow="1"
+      permission="Permission">
+    <!--<menu id="statisticProduct" parent-id="statistic" name="产品" href="statistic/page/product.page" icon="" sort="1"
+          isShow="1"
+          permission="Permission">
     </menu>
-    <menu id="2" name="name2" href="href2" icon="icon2" sort="102" isShow="isShow2" permission="Permission2">
-        <menu id="220" name="name" href="href" icon="icon" sort="100" isShow="isShow" permission="Permission"/>
+    <menu id="statisticProject" parent-id="statistic" name="项目" href="statistic/page/project.page" icon="" sort="1"
+          isShow="1"
+          permission="Permission">
     </menu>
-    <menu id="3" name="name3" href="href3" icon="icon3" sort="103" isShow="isShow3" permission="Permission3">
-        <menu id="220" name="name" href="href" icon="icon" sort="100" isShow="isShow" permission="Permission"/>
+    <menu id="statisticTest" parent-id="statistic" name="测试" href="statistic/page/test.page" icon="" sort="1" isShow="1"
+          permission="Permission">
     </menu>
-    <menu id="4" name="name4" href="href4" icon="icon4" sort="104" isShow="isShow4" permission="Permission4">
-        <menu id="220" name="name" href="href" icon="icon" sort="100" isShow="isShow" permission="Permission"/>
-    </menu>
+    <menu id="statisticOrg" parent-id="statistic" name="组织" href="statistic/page/org.page" icon="" sort="1" isShow="1"
+          permission="Permission">
+    </menu>-->
 </menu>
