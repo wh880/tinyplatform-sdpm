@@ -2,3 +2,7 @@
 #@aHeadCol(TINY_CONTEXT_PATH+"/statistic/page/project.page" name=="project"?"Current":"")项目#end
 #@aHeadCol(TINY_CONTEXT_PATH+"/statistic/page/test.page" name=="test"?"Current":"")测试#end
 #@aHeadCol(TINY_CONTEXT_PATH+"/statistic/page/org.page" name=="org"?"Current":"")组织#end
+#*
+#foreach(m in menuManager.getChildMenus("statistic"))
+    #TnavItem("6" m.name m.href m.icon)
+#end*#

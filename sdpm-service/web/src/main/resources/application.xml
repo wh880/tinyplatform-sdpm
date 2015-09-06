@@ -47,6 +47,7 @@
 			<class-path path="D:\sdpm\sdpm-service\view\src\main\resources"/>
 			<class-path path="E:\git\sdpm\sdpm-service\view\src\main\resources"/>
 			<class-path path="D:\webspaces\sdpm\sdpm-service\view\src\main\resources"/>
+			<class-path path="F:\sdpm\sdpm-service\view\src\main\resources"/>
 
 			<!-- 		<class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources" /> -->
 					
@@ -530,6 +531,9 @@
 		<tiny-filter id="basicTinyFilter" class="basicTinyFilter">
 			<filter-mapping url-pattern=".*"></filter-mapping>
 			<init-param name="maxCookieSize" value="5K"></init-param>
+		</tiny-filter>
+		<tiny-filter id="commonFilter" bean="commonFilter">
+			<filter-mapping url-pattern=".*"></filter-mapping>
 		</tiny-filter>
 		<tiny-filter id="setLocaleTinyFilter" class="setLocaleTinyFilter">
 			<filter-mapping url-pattern=".*"></filter-mapping>
