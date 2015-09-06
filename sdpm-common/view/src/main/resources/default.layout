@@ -148,8 +148,10 @@
 					#TnavItem("0.6" "详情页" "/page/tabledemo/tetails.page" "icon-list")
 				#end
 				#foreach(m in menuManager.getChildMenus("0"))
-					#TnavItem("1" m.name m.href m.icon)
+					#TnavItem(mFor.index m.name m.href m.icon)
 				#end
+
+			#end <!-- navigation end -->
 		#end
     <div class="content-wrapper-bg"></div>
 		#@div("content-wrapper")

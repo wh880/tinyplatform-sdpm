@@ -69,7 +69,7 @@
       #@elementItem()
         	#@colLabel()可用工作日#end
         	#@formControlDiv("col-8")
-				 <input type="text" style="float:left" class="width">
+				 <input type="text" style="float:left;width:35%">
 				 <span class="input-group-addon">天</span>					 
       		#end
 
@@ -152,7 +152,7 @@
       #@elementItem()
         	#@colLabel()关联产品#end       		
 			#@formControlDiv("col-3")
-			    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"8","multiple":"multiple"})
+			    #@tinySelect("lang" "zh" {"style":"width:110%","class":"input-text select2","rel":"8","multiple":"multiple"})
 				#@tinyOptionItem("zh")1#end
 				#@tinyOptionItem("en")22#end
 				#@tinyOptionItem("ta")3#end			
@@ -238,6 +238,7 @@
 #end
  #end
 #end
+
 <script type="text/javascript">
 function setWhite(acl)
 {

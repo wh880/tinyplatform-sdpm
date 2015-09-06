@@ -64,7 +64,7 @@
 	#@elementItem()
 		#@colLabel()任务描述：#end
 		#@formControlDiv("col-8")
-			#@tinyueditor("content" "content" "height:60px;overflow:auto")说点什么...最少输入10个字符#end
+			#@tinyueditor("content" "content" "height:200px;overflow:auto")说点什么...最少输入10个字符#end
 		#end
 		#@validateDiv("col-2")#end
 	#end
