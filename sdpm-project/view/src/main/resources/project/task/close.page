@@ -1,8 +1,16 @@
-
+<style>
+.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.b {margin-left: 8px;}
+.infoContent{ margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
+.infoContent .titleName{margin-top:-19px;margin-bottom:8px;font-weight:bold;font-size:13px;}
+</style>
 
   #import("/org/tinygroup/fold/components/fold.component")
   #include("/project/task/taskMenu.page")
   #@tinyForm("thisform" "url" "post" {"class":""})
+  <div style="width:50%;float:left">
    #@elementItem()
 		#@colLabel()备注&nbsp#end
 		#@formControlDiv("col-8")
@@ -15,25 +23,17 @@
 			#tinyInput("submit" "submitbtn" " 完成 " {"class":"btn btn-primary"})
  		#end
 	#end
-	
-	
-  #@elementItem()
-	#@colLabel()历史记录：#end
+	</div>
+	<div style="width:50%;float:right">
+  #@elementItem(eleItemClass="infoContent")
+	#@colLabel(labelClass="titleName")历史记录：#end
 	#@formControlDiv("col-10")
 	#@foldMenu("" "Tinyfold3" "" "width:100%")
-    #@foldItem("2015-08-26 09:19:52, 由 Demo 指派给 Demo")记录详情<br>
-		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
-	 #end
-	 #@foldItem("2015-08-25 09:15:58, 由 Demo 开始启动")记录详情<br>
-		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
-	 #end
-	 #@foldItem("2015-08-24 09:16:58, 由 Demo 指派给 Mack")记录详情<br>
-		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
-	 #end
+    	#include("/project/recordlist.page")
     #end
-     #end
-    
+     #end    
   #end
+  </div>
 <script type="text/javascript">
 $(function(){
 	$(".Hui_aside").scrollTop(380);

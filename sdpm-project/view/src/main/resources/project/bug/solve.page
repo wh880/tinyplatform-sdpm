@@ -1,5 +1,6 @@
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+#import("/org/tinygroup/fold/components/fold.component")
 <style>
 .infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
 .infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:13px;}
@@ -9,7 +10,39 @@
 .infoContent ul li .text-overflow a:hover{color:#f90}
 .infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}
 </style>
-#@tinyForm("thisform" "url" "post" {"class":""})
+#include("/project/event/common.page")
+#set(name="bug")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/project/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/project/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/project/addProject.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="${TINY_CONTEXT_PATH}/project/allProject.page" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+			#end				
+			#@tabBodyCol("ptop-5")
+			#@div(divClass="operationbar")
+				<span class="f">
+					Bug列表
+				</span>
+				<span class="r ">
+					<a href="#">#buttonIcon(iconClass="icon-plus")提BUG</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			
+#end
+#end
+#end
+#@div(divClass="operationbar")
+	bug名称>解决</span>		
+#end
+<div style="width:50%;float:left"> 
+#@tinyForm("thisform" "" "" {"class":"test"})  
+ 
 	
 	#@elementItem()
 		#@colLabel()解决方案：#end
@@ -38,7 +71,7 @@
 	#@elementItem()
         #@colLabel()解决日期#end
         #@formControlDiv("skin-minimal col-5")
-            #dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:200px'")
+            #dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:320px'")
         #end
         #@validateDiv("col-2")#end
     #end
@@ -87,13 +120,15 @@
 		#end
 	#end
 #end
-#@div(divClass="infoContent")
-<p class="titleName">历史记录</p>
-#import("/org/tinygroup/fold/components/fold.component")
-#@foldMenu("" "Tinyfold3" "" "width:100%")
-    #@foldItem("2015-08-11 09:19:52, 由 Demo创建")
-	 #end
-#end 
+</div>  
+	<div style="width:50%;float:right">  
+	 #@div(divClass="infoContent")
+		<p class="titleName">历史记录</p>
+	
+	#@foldMenu("" "Tinyfold3" "" "width:100%")
+    	#include("/project/recordlist.page")	 
+	#end 
+</div>
 <script type="text/javascript">
 $(function(){
 	$(".Hui_aside").scrollTop(380);
