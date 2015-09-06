@@ -523,6 +523,9 @@
 			<init-param name="paramKey" value="_lang"></init-param>
 			<init-param name="sessionKey" value="_lang"></init-param>
 		</tiny-filter>
+		<tiny-filter id="commonFilter" bean="commonFilter">
+                    <filter-mapping url-pattern=".*"></filter-mapping>
+            </tiny-filter>
 		<tiny-filter id="parserTinyFilter" class="parserTinyFilter">
 			<filter-mapping url-pattern=".*"></filter-mapping>
 			<init-param name="converterQuietParam" value="true"></init-param>
