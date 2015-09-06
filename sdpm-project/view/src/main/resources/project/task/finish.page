@@ -8,6 +8,7 @@
 .infoContent ul li .text-overflow a{ color:#333;}
 .infoContent ul li .text-overflow a:hover{color:#f90}
 .infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}
+
 </style>
 #include("/project/task/taskMenu.page")
 #@tinyForm("thisform" "url" "post" {"class":""})
@@ -42,9 +43,8 @@
 		#@formControlDiv("col-8")
 		<table class="fileBox" id="fileBox1">
 		    <tbody>
-		    <tr>
-		      	#fileWithInput("file-1")
-		      <td class="">#tinyInput("text" "sel" ""{"placeholder":"","id":"sel","class":"input-text"})</td>
+		    <tr> 	
+		      <td class="">#fileWithInput("file-1")</td>
 		      <td class="w-30px"><a href="javascript:void();" onclick="addFile(this)" class="btn btn-block"><i class="icon-plus"></i></a></td>
 		      <td class="w-30px"><a href="javascript:void();" onclick="delFile(this)" class="btn btn-block"><i class="icon-remove"></i></a></td>
 		    </tr>
