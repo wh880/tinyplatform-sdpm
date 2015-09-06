@@ -1,25 +1,5 @@
-##import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
-#import("/org/tinygroup/form/components/form.component")
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
-#!set(linkName="demand")
-
-#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-<style>
-.infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
-.infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:13px;}
-.infoContent ul li label{font-weight:normal; width:33%;font-size:12px;}
-.infoContent ul li .text-overflow{display:inline-block; width:64%;vertical-align:top;font-size:12px;}
-.infoContent ul li .text-overflow a{ color:#333;}
-.infoContent ul li .text-overflow a:hover{color:#f90}
-.infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}
-.shrinkage .edui-Box{margin-left:6px;}
-.shrinkage .edui-Box .titleNames{display:block;margin-bottom:6px;margin-left:8px;}
-</style>
-#@toggleBox({"class":"open shrinkage"})##展开为class:OPEN 要附加其它的属性请用MAP带入
-	#@toggleLeft({"class":"aclass"})
-		#@settoggleLeftTitle("fa-bullhorn")&nbsp;相关信息#end
-		#@div(divClass="infoContent")
+<div style="width:35%;float:right" >
+	#@div(divClass="infoContent")
 	        <p class="titleName">基本信息</p>
 	       	<ul>
 	      <li>	
@@ -193,46 +173,6 @@
         #@validateDiv("col-2")#end
       #end
 	    </li>
-	       	   </ul>		
-
-	     
-			
+	       	   </ul>				
       #end
-	#end
-	
-	#@toggleRight()
-		#@div(divClass="infoContent pd-10")
-	        <p class="titleName">需求描述</p>
-	       	<div>
-	       		123456
-	       	</div>
-		#end
-		#@div(divClass="infoContent")
-	        <p class="titleName">验收标准</p>
-	       	<div>
-	       		456789
-	       	</div>
-		#end
-		
-		
-		#@elementItem("" "edui-Box")
-         <b class="titleNames">备注</b>    
-	#@formControlDiv("col-12")
-		#@Teditor("content1" "content1" {"initialFrameHeight":"300" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-300","nullmsg":"备注不能为空！"})需求描述...最少输入10个字符#end
-	#end
-        #@validateDiv("col-4")#end
-    #end
-    
-   #@elementItem()
-  <center>
-	#buttonRadiusDefault(caption="保存")
-	<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" >#buttonRadiusDefault(caption="返回")</a>
-	</center>
-	#end
-		
-		#@div(divClass="infoContent")
-	        <p class="titleName">历史记录</p>
-	       	#include("/product/page/tabledemo/historyrecord.page")
-		#end
-	#end
-#end
+      </div>

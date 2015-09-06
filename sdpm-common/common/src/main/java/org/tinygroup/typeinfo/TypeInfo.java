@@ -10,7 +10,7 @@ import java.util.List;
 public class TypeInfo {
 	@XStreamAsAttribute
 	@XStreamAlias("name")
-	private String typesName;// °üÃû
+	private String typesName;
 	@XStreamAsAttribute
 	@XStreamAlias("url")
 	private String typeUrl;
