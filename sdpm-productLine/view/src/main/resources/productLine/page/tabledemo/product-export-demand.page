@@ -1,0 +1,15 @@
+
+
+<form action="" method="post" style="padding: 40px 5%">
+	<table>
+	 <tr>
+      <td>
+        <div class="input-group">
+          <span class="input-group-addon">文件名：</span>
+          <input type="text" name="fileName" id="fileName" value="" class="form-control">
+        </div>
+      </td>
+      <td> <button type="submit" id="submit" class="btn btn-submit btn-primary">导出</button></td>
+    </tr>
+  </table>
+</form>

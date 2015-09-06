@@ -163,6 +163,10 @@
                                 #@navItemDemo("1.8" "javascript:void(0);" "icon-list")动态#end
                                 #@navItemDemo("1.9" "javascript:void(0);" "icon-list")档案#end
                             #end*#
+                            
+                
+                 #TnavItem("11" "产品线管理" "/productLine/page/project/productLine.page" "icon-th-large")
+                
 				#TnavItem("2" "产品管理" "/product/page/project/togglebox.page" "icon-desktop")
 			#*				#@navDropDownMenu("2" "产品管理" "icon-desktop" )
                                 #@navItemDemo("2.1" "javascript:void(0);" "icon-list")需求#end

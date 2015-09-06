@@ -1,0 +1,3 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/icon/components/icon.component")
+<center>#fileWithInput("file-1")</center>
