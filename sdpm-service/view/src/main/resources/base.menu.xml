@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="0" parent-id="0" name="服务管理" href="/service/page/clientUser.page" icon="icon-phone" sort="100" isShow="isShow" permission="Permission">
-    
+<menu id="service" parent-id="0" name="服务管理" href="/service/page/clientUser.page" icon="icon-phone" sort="100" isShow="isShow" permission="Permission">
+
 </menu>
