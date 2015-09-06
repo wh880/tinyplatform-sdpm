@@ -9,14 +9,30 @@
 <style>
 .tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
-.operationbar{border-top:none;background:#f9fafe;padding:10px 5px 22px 10px;font-weight:bold;font-size:16px;}
 .infoContent{ margin:18px 4px 10px 5px; padding:6px;font-weight:bold;border:#eee 1px solid;}
 .infoContent .titleName{margin-top:-16px;margin-bottom:8px;font-weight:bold;font-size:13px;}
+.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}
+
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+.open #downMenuSty{min-width:75px}
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: -5px;
+    margin-right: 5px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+h3 {line-height: 1.2;}
 </style>
 #include("/project/task/taskMenu.page")
 	#@div(divClass="operationbar")
-		<span class="f">项目名称>编辑</span>
-		
+		<span class="f">项目名称>编辑</span>		
 	#end
 
 <div style="width:62%;float:left">
@@ -34,16 +50,16 @@
 		<table>
 			<tr>
 			 	<td style="float:left;margin-bottom:5px"> #fileWithInput("file-0")</td>
-			 	<td style="float:left;width:385px">#inputRadiusText(inputPlaceHolder="标题：")</td>
+			 	<td style="float:left;width:240px">#inputRadiusText(inputPlaceHolder="标题：")</td>
 			</tr>
 			<tr>
 			 	<td style="float:left"> #fileWithInput("file-1")</td>
-			 	<td style="float:left;width:385px">#inputRadiusText(inputPlaceHolder="标题：")</td>
+			 	<td style="float:left;width:240px">#inputRadiusText(inputPlaceHolder="标题：")</td>
 			</tr>
 		</table>
 		<center style="margin-top:5px">
 		<a href="#">#buttonRadiusPrimary(caption="保存")</a>
-        <a href="#">#buttonDefault(caption="返回")</a>
+        <a href="${TINY_CONTEXT_PATH}/project/task/editBack.page">#buttonDefault(caption="返回")</a>
         </center>        
 	#end
 	#@div(divClass="infoContent")
@@ -51,247 +67,4 @@
 		#include("/project/task/recordlist.page")
 	#end
 </div>
-<div style="width:35%;float:right">
-	#@div(divClass="infoContent")		
-			<p class="titleName">基本信息</p>
-			<table>
-				<tr>
-					<td style="float:right;padding:0px 10px;font-size:15px">所属项目</td>
-					<td style="width:75%">
-						#@formControlDiv("col-8")
-								#@tinySelect("lang" "zh" {"class":"select2"})
-									#@tinyOptionItem("zh")/1#end
-									#@tinyOptionItem("en")/2#end
-									#@tinyOptionItem("ta")/3#end
-								#end
-								#@validateDiv("col-2")#end
-						#end
-					</td>
-				</tr>
-				<tr>
-					<td style="float:right;padding:0px 10px;font-size:15px">所属模块</td>
-					<td style="width:75%">
-						#@formControlDiv("col-8")
-								#@tinySelect("lang" "zh" {"class":"select2"})
-									#@tinyOptionItem("zh")/1#end
-									#@tinyOptionItem("en")/2#end
-									#@tinyOptionItem("ta")/3#end
-								#end
-								#@validateDiv("col-2")#end
-						#end
-					</td>
-				</tr>
-				<tr>
-					<td style="float:right;padding:0px 10px;font-size:15px">相关需求</td>
-					<td style="width:75%">
-						#@formControlDiv("col-8")
-								#@tinySelect("lang" "zh" {"class":"select2"})
-									#@tinyOptionItem("zh")/1#end
-									#@tinyOptionItem("en")/2#end
-									#@tinyOptionItem("ta")/3#end
-								#end
-								#@validateDiv("col-2")#end
-						#end
-					</td>
-				</tr>
-				<tr>
-					<td style="float:right;padding:0px 10px;font-size:15px">指派给</td>
-					<td style="width:75%">
-						#@formControlDiv("col-8")
-								#@tinySelect("lang" "zh" {"class":"select2"})
-									#@tinyOptionItem("zh")/1#end
-									#@tinyOptionItem("en")/2#end
-									#@tinyOptionItem("ta")/3#end
-								#end
-								#@validateDiv("col-2")#end
-						#end
-					</td>
-				</tr>
-				<tr>
-					<td style="float:right;padding:0px 10px;font-size:15px">任务类型</td>
-					<td style="width:75%">
-						#@formControlDiv("col-8")
-								#@tinySelect("lang" "zh" {"class":""})
-									#@tinyOptionItem("zh")/1#end
-									#@tinyOptionItem("en")/2#end
-									#@tinyOptionItem("ta")/3#end
-								#end
-								#@validateDiv("col-2")#end
-						#end
-					</td>
-				</tr>
-				<tr>
-					<td style="float:right;padding:0px 10px;font-size:15px">任务状态</td>
-					<td style="width:75%">
-						#@formControlDiv("col-8")
-								#@tinySelect("lang" "zh" {"class":""})
-									#@tinyOptionItem("zh")/1#end
-									#@tinyOptionItem("en")/2#end
-									#@tinyOptionItem("ta")/3#end
-								#end
-								#@validateDiv("col-2")#end
-						#end
-					</td>
-				</tr>
-				<tr>
-					<td style="float:right;padding:0px 10px;font-size:15px">优先级</td>
-					<td style="width:75%">
-						#@formControlDiv("col-8")
-								#@tinySelect("lang" "zh" {"class":""})
-									#@tinyOptionItem("zh")/1#end
-									#@tinyOptionItem("en")/2#end
-									#@tinyOptionItem("ta")/3#end
-								#end
-								#@validateDiv("col-2")#end
-						#end
-					</td>
-				</tr>
-				<tr>
-					<td style="float:right;padding:0px 10px;font-size:15px">抄送给</td>
-					<td style="width:75%">
-						#@formControlDiv("col-8")
-								#@tinySelect("lang" "zh" {"class":""})
-									#@tinyOptionItem("zh")/1#end
-									#@tinyOptionItem("en")/2#end
-									#@tinyOptionItem("ta")/3#end
-								#end
-								#@validateDiv("col-2")#end
-						#end
-					</td>
-				</tr>
-			</table>					
-	#end
-	#@div(divClass="infoContent")
-		<p class="titleName">工时信息</p>
-		<table>
-			<tr>
-				<td style="float:right;padding:3px 10px;font-size:15px">预计开始</td>
-				<td style="width:75%">
-				#@formControlDiv("col-8")
-			     	#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end						 
-      			#end
-				</td>
-			</tr>
-			<tr>
-				<td style="float:right;padding:3px 10px;font-size:15px">实际开始</td>
-				<td style="width:75%">
-				#@formControlDiv("col-8")
-			     	#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end						 
-      			#end
-				</td>
-			</tr>
-			<tr>
-				<td style="float:right;padding:3px 10px;font-size:15px">截止日期</td>
-				<td style="width:75%">
-				#@formControlDiv("col-8")
-			     	#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end						 
-      			#end
-				</td>
-			</tr>
-			<tr>
-				<td style="float:right;padding:3px 10px;font-size:15px">最初预计</td>
-				<td style="width:75%">
-					<input type="text" value="天" />
-				</td>
-			</tr>
-			<tr>
-				<td style="float:right;padding:3px 10px;font-size:15px">总耗时</td>
-				<td>0
-				#@simpleModal("myModal" "新增日志")#end				
-				 #@iconOperations("#myModal" "icon-time" "新增日志" "900" "400"
-					 "/project/task/consumeTime.pagelet" "ml-5")#end
-				</td>
-			</tr>
-			<tr>
-				<td style="float:right;padding:3px 10px;font-size:15px">预计剩余</td>
-				<td style="width:75%">
-					<input type="text" value="天" />
-				</td>
-			</tr>
-		</table>
-	#end
-	#@div(divClass="infoContent")
-		<p class="titleName">任务的一生</p>
-		<table>
-			<tr>
-				<td style="float:right;padding:3px 10px;font-size:15px">由谁创建</td>
-				<td>admin</td>
-			</tr>
-			<tr>
-				<td style="float:right;padding:0px 10px;font-size:15px">由谁完成</td>
-				<td style="width:75%">
-					#@formControlDiv("col-8")
-						#@tinySelect("lang" "zh" {"class":"select2"})
-							#@tinyOptionItem("zh")/1#end
-							#@tinyOptionItem("en")/2#end
-							#@tinyOptionItem("ta")/3#end
-						#end
-						#@validateDiv("col-2")#end
-					#end
-				</td>
-			</tr>
-			<tr>
-				<td style="float:right;padding:3px 10px;font-size:15px">完成时间</td>
-				<td style="width:75%">
-					<input type="text" style="width:225px" />
-				</td>
-			</tr>
-			<tr>
-				<td style="float:right;padding:0px 10px;font-size:15px">由谁取消</td>
-				<td style="width:80%">
-					#@formControlDiv("col-8")
-						#@tinySelect("lang" "zh" {"class":"select2"})
-							#@tinyOptionItem("zh")/1#end
-							#@tinyOptionItem("en")/2#end
-							#@tinyOptionItem("ta")/3#end
-						#end
-						#@validateDiv("col-2")#end
-					#end
-				</td>
-			</tr>
-			<tr>
-				<td style="float:right;padding:3px 10px;font-size:15px">取消时间</td>				
-				<td>
-					<input type="text" style="width:225px" />
-				</td>				
-			</tr>
-			<tr>
-				<td style="float:right;padding:0px 10px;font-size:15px">由谁关闭</td>
-				<td style="width:80%">
-					#@formControlDiv("col-8")
-						#@tinySelect("lang" "zh" {"class":"select2"})
-							#@tinyOptionItem("zh")/1#end
-							#@tinyOptionItem("en")/2#end
-							#@tinyOptionItem("ta")/3#end
-						#end
-						#@validateDiv("col-2")#end
-					#end
-				</td>
-			</tr>
-			<tr>
-				<td style="float:right;padding:0px 10px;font-size:15px">关闭原因</td>
-				<td style="width:80%">
-					#@formControlDiv("col-8")
-						#@tinySelect("lang" "zh" {"class":""})
-							#@tinyOptionItem("zh")#end
-							#@tinyOptionItem("en")已完成#end
-							#@tinyOptionItem("ta")已取消#end
-						#end
-						#@validateDiv("col-2")#end
-					#end
-				</td>
-			</tr>
-			<tr>
-				<td style="float:right;padding:3px 10px;font-size:15px">关闭时间</td>				
-				<td>
-					<input type="text" style="width:225px" />
-				</td>				
-			</tr>
-		</table>
-	#end
-</div>
-	
-
-<script type="text/javascript">
-	$(".select2").select2();
-</script>
+#include("/project/task/basicInfoEdit.page")
