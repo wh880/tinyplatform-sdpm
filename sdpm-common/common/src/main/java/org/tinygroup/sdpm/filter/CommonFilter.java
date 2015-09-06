@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.fitter;
+package org.tinygroup.sdpm.filter;
 
 import org.tinygroup.beancontainer.BeanContainer;
 import org.tinygroup.beancontainer.BeanContainerFactory;

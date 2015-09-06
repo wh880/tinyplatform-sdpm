@@ -16,7 +16,7 @@
     <!--<meta name="apple-mobile-web-app-capable" content="yes" />--><!-- home screen app 全屏 -->
     <!--<meta name="apple-mobile-web-app-status-bar-style" content="black" />--><!-- 状态栏 -->
     <title>
-		#if(activeTitle)${activeTitle} #{end}SDPM项目管理
+		#if(activeTitle)${activeTitle} #{end}软件开发项目管理
     </title>
     <meta name="keywords" content="TinyUi 是基于bootscrap的前端UI组件框架。">
     <meta name="description"
