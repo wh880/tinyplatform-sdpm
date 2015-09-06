@@ -42,7 +42,7 @@
 			resolve-classpath="true">
 		<class-paths>
 			<!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
-			<class-path path="E:\TinyWorkSpace\sdpm\sdpm-statistic\view\src\main\resources"/>
+			<class-path path="E:\TinyWorkSpace\sdpm\sdpm-quality\view\src\main\resources"/>
 			<class-path path="F:\daochu\sdpm\sdpm-quality\view\src\main\resources"/>
 		</class-paths>
 		<include-patterns>
@@ -295,16 +295,9 @@
 
 	<!--tiny-processor实现 -->
 	<tiny-processors>
-		<
-		<
-		<
-		<
-		<
-		<
-		< Updated upstream
-
-				=======
-		>>>>>>> Stashed changes
+		<tiny-processor id="umUploadTinyProcessor" class="umUploadTinyProcessor">
+			<servlet-mapping url-pattern=".*\.umupload"></servlet-mapping>
+		</tiny-processor>
 		<tiny-processor id="uiEngineTinyProcessor" class="uiEngineTinyProcessor">
 			<servlet-mapping url-pattern=".*/uiengine\.uijs"></servlet-mapping>
 			<servlet-mapping url-pattern=".*/uiengine\.uicss"></servlet-mapping>

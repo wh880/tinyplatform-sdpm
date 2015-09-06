@@ -25,7 +25,7 @@
 ##operationbar start1
     #@div(divClass="operationbar")
     <span class="f">
-					<a href="#" class="active_btn">报表</a>
+					<a href="#" class="active_btn">报表gggggggggggggggggggggg</a>
 				</span>
     <span class="r">
 					<a href="#">#buttonIcon(iconClass="icon-upload-alt")返回</a>&nbsp;
