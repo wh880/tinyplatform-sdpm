@@ -60,15 +60,15 @@ h3 {line-height: 1.2;}
 	<a href="#" style="margin-left:5px">#buttonIcon(iconClass="icon-pause")暂停</a>
 	<a href="#" style="margin-left:5px">#buttonIcon(iconClass="icon-ok")完成</a>
 	<a href="#" style="margin-left:5px">#buttonIcon(iconClass="icon-ban-circle")取消</a>
-	<a href="#" title="编辑" style="margin-left:5px">#buttonIcon(iconClass="icon-pencil")</a>	
-	<a  title="备注" style="margin-left:5px" id="acl" value="custom">#buttonIcon(iconClass="icon-comment-alt")</a>
+	<a href="${TINY_CONTEXT_PATH}/project/task/edit.page" title="编辑" style="margin-left:5px">#buttonIcon(iconClass="icon-pencil")</a>	
+	<a  title="备注" style="margin-left:5px" onclick="toggle()">#buttonIcon(iconClass="icon-comment-alt")</a>
 	<a href="${TINY_CONTEXT_PATH}/project/task/add.page" title="复制" style="margin-left:5px">#buttonIcon(iconClass="icon-copy")</a>
 	<a href="#" title="删除" style="margin-left:5px">#buttonIcon(iconClass="icon-delete")</a>
 	<a href="${TINY_CONTEXT_PATH}/project/task/index.page" title="返回" style="margin-left:5px">#buttonIcon(iconClass="icon-arrow-left")</a>
 	<a href="#" title="#4 陆军训练" style="margin-left:5px">#buttonIcon(iconClass="icon-arrow-right")</a>
 	</center>
 	
-	#@div(divId="whitelistBox" divClass="infoContent hidden")
+	#@div(divId="comment" divStyle="display:none;" divClass="infoContent")
 		<p class="titleName">备注</p>
 		#@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end
 		<a href="#">#buttonRadiusPrimary(caption="保存")</a>
@@ -79,11 +79,13 @@ h3 {line-height: 1.2;}
 
 
 
-<script src="http://www.w3school.com.cn/jquery/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-  $("#acl").click(function(){
-  $("#whitelistBox").toggle();
-  });
-});
+function toggle()
+{
+   var comment = document.getElementById("comment");
+   if(comment.style.display=='none')
+     comment.style.display='block';
+   else
+    comment.style.display='none';
+}
 </script>
