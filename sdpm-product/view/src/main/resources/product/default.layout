@@ -12,6 +12,11 @@
 
 #@div()
 	#@tabWithInit("top_demo" "optionsBox")
+		
+		#@div(divClass="dropdownBox")
+			#include("/product/page/project/dropdownMenu.page")
+		#end
+	
 		#@div(divClass="dropdownBox")
 			#include("/product/page/project/dropdownMenu.page")
 		#end
@@ -33,7 +38,7 @@
 				
 				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/product-modular.page?currentPageId="+currentPageId  linkName=="modular"?"Current":"")模块#end
 				
-				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/overview.page?currentPageId="+currentPageId  linkName=="gaikuang"?"Current":"")概况#end
+				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/overview.page?currentPageId="+currentPageId  linkName=="overview"?"Current":"")概况#end
 				
 		#end
 		
