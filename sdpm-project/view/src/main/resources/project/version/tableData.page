@@ -23,8 +23,7 @@
 	#@td()￥320,800#end
 	 #@td()
 		
-		
-		#iconOperations("#myModal" "icon-ok-sign" "完成" "865" "448" "/project/page/tabledemo/user-add.pagelet" "ml-5")&nbsp
+		<a href="#" title="完成">#buttonIcon(iconClass="icon-ok-sign")</a>&nbsp
 		<a href="${TINY_CONTEXT_PATH}/project/bug/index.page" title="查看bug">#buttonIcon(iconClass="icon-eye-open")</a>&nbsp
 		<a href="${TINY_CONTEXT_PATH}/project/version/add.page" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
 		#iconOperation(" icon-remove" "删除" "ml-5")
