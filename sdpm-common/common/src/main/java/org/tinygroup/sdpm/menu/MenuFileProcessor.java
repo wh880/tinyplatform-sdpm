@@ -17,6 +17,7 @@ public class MenuFileProcessor extends AbstractFileProcessor {
             .getLogger(MenuFileProcessor.class);
     private MenuManager menuManager;
 
+
     public void process() {
         XStream stream = XStreamFactory.getXStream(MenuManager.XSTREAN_PACKAGE_NAME);
         for (FileObject fileObject : deleteList) {

@@ -19,4 +19,5 @@ public interface MenuManager {
     Menu getMenu(String menuId);
 
     List<Menu> getMenus();
+
 }

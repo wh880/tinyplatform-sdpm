@@ -19,6 +19,14 @@ public class MenuManagerImpl implements MenuManager {
     private static Map<String, Menu> menuMap = new HashMap<String, Menu>();
     private static Logger logger = LoggerFactory.getLogger(MenuManagerImpl.class);
 
+    {
+        Menu root = new Menu();
+        root.setId("0");
+        root.setName("首页");
+        root.setChildMenus(new ArrayList<Menu>());
+        addMenu(root, "init");
+    }
+
     public void addMenu(Menu menu, String fileName) {
         String menuId = menu.getId();
         logger.logMessage(LogLevel.DEBUG, "添加菜单:[id:{},name:{}]", menuId, menu.getName());

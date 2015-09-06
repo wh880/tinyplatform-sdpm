@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="0" name="首页" href="/" icon="fa-dashboard" sort="1" isShow="1" permission="Permission">
-    <menu id="home" parent-id="0" name="我的地盘" href="/" icon="fa-dashboard" sort="1" isShow="1" permission="Permission">
+<menu id="home" parent-id="0" name="我的地盘" href="/" icon="fa-dashboard" sort="1" isShow="1" permission="Permission">
 
-    </menu>
 </menu>
