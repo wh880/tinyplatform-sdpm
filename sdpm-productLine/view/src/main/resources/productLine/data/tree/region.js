@@ -1,0 +1,23 @@
+[
+		{ id: 4, pId: 0, name: "浙江省01", open: true, nocheck: true },
+		{ id: 41, pId: 4, name: "杭州0101" },
+		{ id: 42, pId: 4, name: "宁波0102" },
+		{ id: 43, pId: 4, name: "温州0103" },
+		{ id: 44, pId: 4, name: "嘉兴0104" },
+		{ id: 45, pId: 4, name: "金华0105" },
+		{ id: 46, pId: 4, name: "台州0106" },
+		{ id: 47, pId: 4, name: "湖州0107" },
+		{ id: 44, pId: 4, name: "绍兴0108" },
+		{ id: 5, pId: 0, name: "广东省02", open: true, nocheck: true },
+		{ id: 51, pId: 5, name: "广州0201" },
+		{ id: 52, pId: 5, name: "深圳0202" },
+		{ id: 53, pId: 5, name: "东莞0203" },
+		{ id: 54, pId: 5, name: "佛山0204" },
+		{ id: 8, pId: 0, name: "河南省03", open: true, nocheck: true },
+		{ id: 81, pId: 8, name: "郑州0301" },
+		{ id: 82, pId: 8, name: "周口0302", open: true, nocheck: true },
+		{ id: 91, pId: 82, name: "川汇区030201" },
+		{ id: 92, pId: 82, name: "淮阳030202", open: true, nocheck: true },
+		{ id: 102, pId: 92, name: "指挥营0302" },
+
+	]

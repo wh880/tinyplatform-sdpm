@@ -1,6 +1,0 @@
-#@aHeadCol(TINY_CONTEXT_PATH+"/serviceManagement/page/testManagementBug.page?currentPageId=4" name=="bug"?"Current":"")Bug#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/serviceManagement/page/testManagementCases.page?currentPageId=4" name=="case"?"Current":"")用例#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/serviceManagement/page/testManagementVersion.page?currentPageId=4" name=="version"?"Current":"")版本#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/serviceManagement/page/testManagementVersion.page?currentPageId=4" name=="version"?"Current":"")版本#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/serviceManagement/page/testManagementVersion.page?currentPageId=4" name=="version"?"Current":"")版本#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/serviceManagement/page/sla.page?currentPageId=4" name=="sla"?"Current":"")服务级别协议表#end

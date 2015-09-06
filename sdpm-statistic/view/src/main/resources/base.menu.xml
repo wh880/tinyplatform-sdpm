@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu id="11" parent-id="0" name="统计1" href="/" icon="fa-dashboard" sort="1" isShow="1" permission="Permission">
+
+</menu>
+<menu id="22" parent-id="0" name="统计2" href="/" icon="fa-dashboard" sort="1" isShow="1" permission="Permission">
+
+</menu>
+<menu id="33" parent-id="0" name="统计3" href="/" icon="fa-dashboard" sort="1" isShow="1" permission="Permission">
+
+</menu>
+<menu id="44" parent-id="0" name="统计4" href="/" icon="fa-dashboard" sort="1" isShow="1" permission="Permission">
+
+</menu>
+<menu id="55" parent-id="0" name="统计5" href="/" icon="fa-dashboard" sort="1" isShow="1" permission="Permission">
+
+</menu>
+<menu id="statistic" parent-id="0" name="统计" href="/" icon="fa-dashboard" sort="1" isShow="1" permission="Permission">
+<menu id="statisticProduct" parent-id="0" name="产品" href="statistic/page/product.page" icon="" sort="1" isShow="1"
+      permission="Permission">
+    </menu>
+<menu id="statisticProject" parent-id="0" name="项目" href="statistic/page/project.page" icon="" sort="1" isShow="1"
+      permission="Permission">
+    </menu>
+<menu id="statisticTest" parent-id="0" name="测试" href="statistic/page/test.page" icon="" sort="1" isShow="1"
+      permission="Permission">
+    </menu>
+<menu id="statisticOrg" parent-id="0" name="组织" href="statistic/page/org.page" icon="" sort="1" isShow="1"
+      permission="Permission">
+    </menu>
+</menu>

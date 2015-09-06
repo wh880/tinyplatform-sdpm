@@ -1,1 +1,55 @@
-#include("/service/page/client.page")
+#import("/org/tinygroup/button/components/button_smart.component")
+#!set(activeTitle="服务管理",activeMenuId=currentPageId)
+#*<style>
+##.tabLayout .tabBar span a{color:#333}
+##.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.operationbar a{padding:2px 3px;display:inline-block;margin-right:0;border-radius:3px;}
+.operationbar a:hover{background:#ddd;color:#333;}
+.operationbar .active_btn:hover{background:none;}
+.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+.open>#downMenuSty{min-width:70px}
+</style>*#
+##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
+
+#set(name="request")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/service/page/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/service/page/tab.page")
+        #end
+
+        #@tabBodyCol("ptop-5")
+        ##operationbar star
+            #@div(divClass="operationbar")
+            <span class="f">
+					<a href="#" class="active_btn">未关闭</a>
+					<a href="#">全部请求</a>
+					<a href="#">指派给我</a>
+					<a href="#">由我创建</a>
+					<a href="#">由我评审</a>
+					<a href="#">由我关闭</a>
+					<a href="#">草稿</a>
+					<a href="#">激活</a>
+					<a href="#">已变更</a>
+					<a href="#">待关闭</a>
+					<a href="#">已关闭</a>
+					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
+				</span>
+            <span class="r">
+
+                <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
+				</span>
+                #div(divClass="clearfix")
+                #include("/service/page/multiSearch.page")
+            #end
+        ##operationbar end
+        #end
+
+
+    #end
+##tab end
+#end

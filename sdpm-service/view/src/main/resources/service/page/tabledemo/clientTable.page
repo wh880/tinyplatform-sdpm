@@ -1,0 +1,29 @@
+#!set(activeTitle="表格",activeMenuId=currentPageId)
+
+#set(editpagePath= "/organization/userAdd.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+
+#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/service/page/tabledemo/clientTableData.page" 81) ##取数据地址 总数据
+        #@thead()
+            #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})yyD#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})姓名#end
+                #@tinyTh({"class":"","rel":"sortname"})用户名#end
+                #@tinyTh({"class":"","rel":"sortname"})职位#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})邮箱#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})性别#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})电话#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})加入日期#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})最后登录#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})操作#end
+            #end
+        #end
+    #end
+#end
+
+#@simpleModal("myModal" "编辑")#end
+#@simpleModal("myModal2" "删除")#end
+###simpleModal(editpageModalId)
+###simpleModal(tabpageModalId)
+###simpleModal(userBatchAddpageModalId)
