@@ -10,6 +10,8 @@ public interface MenuManager {
 
     void addMenu(Menu menu, String fileName);
 
+    void addMenuToParent(Menu menu, String fileName);
+
     void removeMenu(String menuId);
 
     List<Menu> getChildMenus(String parentId);

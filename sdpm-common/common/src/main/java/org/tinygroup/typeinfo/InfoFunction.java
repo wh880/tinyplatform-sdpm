@@ -12,13 +12,14 @@ public class InfoFunction extends AbstractTemplateFunction {
 
 	public InfoFunction() {
 		super("getInfo");
-		// TODO Auto-generated constructor stub
 	}
 
 	public Object execute(Template template, TemplateContext context,
 						  Object... parameters) throws TemplateException {
-		// TODO Auto-generated method stub
 		int id = 0;
+		if(parameters[0]==null){
+			throw new TemplateException("信息类别不能为空");
+		}
 		if(parameters.length>1&&parameters[1]!=null&&!"".equals(parameters[1].toString())){
 			id = Integer.valueOf(parameters[1].toString());
 		}

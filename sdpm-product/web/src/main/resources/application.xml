@@ -518,7 +518,14 @@
 	</tiny-processors>
 
 	<!--tiny-filters配置 -->
-	<tiny-filters>
+	<tiny-filters> </tiny-filter>
+
+            <tiny-filter id="commonFilter" bean="commonFilter">
+                    <filter-mapping url-pattern=".*"></filter-mapping>
+            </tiny-filter>
+	
+	
+	
 		<tiny-wrapper-filter id="tinyFilterWrapper" class="tinyFilterWrapper">
 			<init-param name="filter_beans" value="gZIPFilter"></init-param>
 			<filter-mapping url-pattern=".*"></filter-mapping>
