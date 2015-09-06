@@ -1,6 +1,11 @@
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
 #import("/org/tinygroup/zTree/components/zTree.component")
 #import("/components/org/tinygroup/fulimanageui/form.component")
+#import("/org/tinygroup/table/components/table.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
 #include("/common/common.page")
 <style>
     .tabLayout .tabBar span a {
@@ -22,7 +27,7 @@
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
         <span><a href="#">客户</a></span>
-        <span class="Current"><a href="${TINY_CONTEXT_PATH}/service/page/request.page">需求</a></span>
+        <span class="Current"><a href="${TINY_CONTEXT_PATH}/service/page/request.page">请求</a></span>
         <span><a href="#">协议</a></span>
         <span><a href="#">FAQ</a></span>
         <span style="float:right;background: #fff"><a href="#">#buttonIcon(iconClass="icon-plus")添加客户</a></span>
@@ -31,8 +36,8 @@
 
     #@div(divClass="operationbar")
     <span class="f">
-					<a href="#" class="active_btn">未关闭</a>
-					<a href="#">全部需求</a>
+					<a href="#" class="active_btn">未处理</a>
+					<a href="#">全部请求</a>
 					<a href="#">指派给我</a>
 					<a href="#">由我创建</a>
 					<a href="#">由我评审</a>
@@ -42,18 +47,50 @@
 					<a href="#">已变更</a>
 					<a href="#">待关闭</a>
 					<a href="#">已关闭</a>
-					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
-				</span>
+
+    </span>
     <span class="r">
 				<!--导入导出修改-->
        &nbsp;
-        #@iconOperations(
-            "#myModal" "icon-plus-sign" "批量添加" "1300" "500" "/product/page/tabledemo/product-demand-addlist.pagelet"
-            "ml-5")&nbsp;批量添加#end
-        #@iconOperations(
-            "#myModal" "icon-plus" "提需求" "1000" "400" "/product/page/tabledemo/product-demand-add.pagelet" "ml-5")&nbsp;提需求#end
-				</span>
+
+        #@aModal("#myModal" "批量添加" "1300" "500" "" "/service/page/tabledemo/requestAddList.pagelet")
+
+            #@simpleI("icon-plus-sign")批量添加#end
+
+        #end
+        #@dialog("myModal")
+            #@dialogHeader()批量添加#end
+            #@dialogBody()<p></p>#end
+        #end
+        #@aModal("#myModal" "提请求" "1300" "500" "" "/service/page/tabledemo/requestAddList.pagelet")
+
+            #@simpleI("icon-plus")提请求#end
+
+        #end
+        #@dialog("myModal")
+            #@dialogHeader()批量添加#end
+            #@dialogBody()<p></p>#end
+        #end
+
+    </span>
         #div(divClass="clearfix")
     #end
 
 #end
+
+<script type="text/javascript">
+    $(function () {
+        var timeid;
+        $(".tabOption").find("li").each(function (index) {
+            var sTab = $(this);
+            sTab.mouseenter(function () {
+                timeid = setTimeout(function () {
+                    sTab.addClass("tabCurrent").siblings().removeClass("tabCurrent");
+                    sTab.parent().siblings().find("ul:eq(" + index + ")").show().siblings().hide();
+                }, 300);
+            }).mouseleave(function () {
+                clearTimeout(timeid);
+            })
+        })
+    })
+</script>
