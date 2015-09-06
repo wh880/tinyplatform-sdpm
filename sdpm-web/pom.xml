@@ -17,13 +17,16 @@
             <artifactId>sdpm-common-common</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-org-view</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-common-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-service-view</artifactId>
@@ -51,7 +54,7 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-common-view</artifactId>
+            <artifactId>sdpm-statistic-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
 
