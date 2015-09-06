@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="statistic" parent-id="0" name="统计" href="statistic/page/product.page" icon="" sort="1" isShow="1"
+<menu id="statistic" parent-id="0" name="统计管理" href="/statistic/page/product.page" icon="icon-pencil" sort="1"
+      isShow="1"
       permission="Permission">
-    <menu id="statisticProduct" parent-id="statistic" name="产品" href="statistic/page/product.page" icon="" sort="1"
+    <!--<menu id="statisticProduct" parent-id="statistic" name="产品" href="statistic/page/product.page" icon="" sort="1"
           isShow="1"
           permission="Permission">
     </menu>
@@ -14,5 +15,5 @@
     </menu>
     <menu id="statisticOrg" parent-id="statistic" name="组织" href="statistic/page/org.page" icon="" sort="1" isShow="1"
           permission="Permission">
-    </menu>
+    </menu>-->
 </menu>

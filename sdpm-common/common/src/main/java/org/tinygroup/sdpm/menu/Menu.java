@@ -49,7 +49,7 @@ public class Menu implements Serializable {
     @XStreamAsAttribute
     private Integer sort;    // 排序
     /**
-     * 菜单显示名称
+     * 是否在菜单中显示（1：显示；0：不显示）
      */
     @XStreamAsAttribute
     private String isShow;    // 是否在菜单中显示（1：显示；0：不显示）
