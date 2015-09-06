@@ -35,6 +35,7 @@
 		<!-- <application-processor bean="logAdapterProcessor"></application-processor>
 		<application-processor bean="encryptionProcessor"></application-processor> -->
 		<application-processor bean="tinyTemplateConfigProcessor"></application-processor>
+		<application-processor bean="tinyTemplateConfigProcessor"></application-processor>
 	</application-processors>
 
 	<!-- 这里是文件搜索器相关配置，如果配置请参考file-resolver-configuration配置手册 -->
@@ -43,12 +44,7 @@
 		<class-paths>
 			<!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
 			<class-path path="E:\TinyWork\sdpm\sdpm-product\view\src\main\resources" />
-			<class-path path="E:\git\sdpm\sdpm-common\view\src\main\resources"/>
-			<class-path path="D:\sdpm\sdpm-service\view\src\main\resources"/>
-			<class-path path="E:\git\sdpm\sdpm-service\view\src\main\resources"/>
-			<class-path path="D:\webspaces\sdpm\sdpm-service\view\src\main\resources"/>
-
-			<!-- 		<class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources" /> -->
+	<class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources" /> 
 					
  		</class-paths>
 		<include-patterns>
@@ -564,13 +560,14 @@
 		<tiny-filter id="sessionTinyFilter" class="sessionTinyFilter">
 			<filter-mapping url-pattern=".*"></filter-mapping>
 		</tiny-filter>
-		<tiny-filter id="commonFilter" bean="commonFilter">
-			<filter-mapping url-pattern=".*"></filter-mapping>
-		</tiny-filter>
 		<!--<tiny-wrapper-filter id="tinyFilterWrapper" class="tinyFilterWrapper"> 
 			value值可以是多个实现http filter接口的bean名称，多个以","分隔开 <init-param name="filter_beans" 
 			value="encondingHttpFilter"></init-param> <filter-mapping url-pattern=".*"></filter-mapping> 
 			</tiny-wrapper-filter> -->
+			
+		<tiny-filter id="commonFilter" bean="commonFilter">
+            <filter-mapping url-pattern=".*"></filter-mapping>
+        </tiny-filter>
 	</tiny-filters>
 	<!--tiny listener 配置 -->
 	<tiny-listener>
@@ -635,7 +632,7 @@
 	</jcs-config>
 
 	<!--文件监控器配置参数，具体参见FileMonitorProcessor配置管理手册，interrupt扫描间隔时间，单位秒 -->
-	<file-monitor interval="10" enable="false" />
+	<file-monitor interval="10" enable="true" />
 
 	<gzip-filter max-content-length="0">
 		<!-- 多个content-type已分号隔开 -->
