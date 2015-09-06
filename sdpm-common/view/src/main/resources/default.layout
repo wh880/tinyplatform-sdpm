@@ -176,7 +176,7 @@
                                 #@navItemDemo("2.8" "javascript:void(0);" "icon-list")模块#end
                                 #@navItemDemo("2.9" "javascript:void(0);" "icon-list")概况#end
                             #end*#
-				#TnavItem("3" "项目管理" "project/task/task.page" "icon-book")
+				#TnavItem("3" "项目管理" "project/task/index.page" "icon-book")
 			#*				#@navDropDownMenu("3" "项目管理" "icon-book" )
                                 #@navItemDemo("3.1" "javascript:void(0);" "icon-list")任务#end
                                 #@navItemDemo("3.2" "javascript:void(0);" "icon-list")需求#end
