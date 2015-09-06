@@ -104,7 +104,7 @@
                 <configuration>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <port>8080</port>
+                            <port>8081</port>
                         </connector>
                     </connectors>
                     <webAppConfig>
