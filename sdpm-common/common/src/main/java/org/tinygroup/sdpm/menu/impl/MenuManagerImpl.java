@@ -27,7 +27,6 @@ public class MenuManagerImpl implements MenuManager {
             return;
         }
         menuMap.put(menuId, menu);
-        logger.logMessage(LogLevel.DEBUG, "添加菜单完成:[id:{},name:{}]", menuId, menu.getName());
         List<Menu> childMenus = menu.getChildMenus();
         if (childMenus != null) {
             for (Menu child : childMenus) {
@@ -35,6 +34,20 @@ public class MenuManagerImpl implements MenuManager {
                 addMenu(child, fileName);
             }
         }
+        logger.logMessage(LogLevel.DEBUG, "添加菜单完成:[id:{},name:{}]", menuId, menu.getName());
+    }
+
+    public void addMenuToParent(Menu menu, String fileName) {
+        logger.logMessage(LogLevel.DEBUG, "开始添加菜单到父节点:[id:{},name:{}]", menu.getId(), menu.getName());
+
+        if (menu.getParentId() != null) {
+            Menu parentMenu = menuMap.get(menu.getParentId());
+            if (parentMenu != null && parentMenu.getChildMenus() != null) {
+                parentMenu.getChildMenus().add(menu);
+            }
+        }
+        logger.logMessage(LogLevel.DEBUG, "结束添加菜单到父节点:[id:{},name:{}]", menu.getId(), menu.getName());
+
     }
 
     public void removeMenu(String menuId) {
