@@ -1,0 +1,13 @@
+<type-infos>
+	<type-info name="product"  >
+	    <info name="productInfo" title="产品信息" infoParameter="" url="1"/>
+	    <info name="productOwnerInfo" title="产品经理信息" infoParameter="" url="2"/>
+	    <info name="productOwnerBuilderInfo" title="产品创建者信息" infoParameter="" url="3"/>
+	</type-info>
+	<type-info name="project" >
+	    <info name="projectInfo" title="项目信息" infoParameter="" url="/project/page/outpage/projectInfo.pagelet"/>
+	    <info name="testInfo" title="其他信息" infoParameter="" url="1"/>
+	</type-info>
+	<type-info name="task" parameterName="taskId" url="task" />
+	<type-info name="case" parameterName="caseId" url="case" />
+</type-infos>

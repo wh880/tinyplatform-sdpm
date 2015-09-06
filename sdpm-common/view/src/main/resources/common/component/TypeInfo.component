@@ -1,0 +1,88 @@
+#macro TypeInfo(type id)
+<script type="text/javascript">
+<!--
+function tLoadContent(link, contain) {
+	var $b=$(contain);
+	 $.ajax({
+		  type: "get",
+		  url: link,
+		  dataType: "html",
+		  cache: !0,
+		  beforeSend: function() {
+				$b.html('<h1 class="ajax-loading-animation"><i class="fa fa-cog fa-spin"></i> 加载...</h1>'),
+				$b.animate({
+					 scrollTop: 0
+				},
+				"fast")
+		  },
+		  success: function(a) {
+				$b.css({
+					 opacity: "0.0"
+				}).html(a).delay(50).animate({
+					 opacity: "1.0"
+				},
+				300)
+		  },
+		  error: function(a) {
+				$b.html('<h4 class="ajax-loading-error"><i class="fa fa-warning txt-color-orangeDark"></i> Error 404! Page not found.</h4>')
+		  },
+		  async: !0
+		//async: true
+	 })
+}
+</script>
+
+<style>
+.jarviswidget>div{border:none; padding:2px 0 1px 10px;}
+.tabs-right.nav-tabsty .nav-tabs li a{border:none;padding:2px 8px;background:#f2f2f2;min-width:10px;width:28px;display:inline-block}
+.tabs-right.nav-tabsty .nav-tabs>li.active>a,.tabs-right.nav-tabsty .nav-tabs>li.active>a:hover{background:#fff}
+.tabs-right.nav-tabsty .nav-tabs li a:hover{background:#eee;}
+.tabs-right.nav-tabsty{ margin-bottom:-2px; margin-top:-2px;}
+.tabs-right.nav-tabsty>.nav-tabs{border:none}
+.jarviswidget{width:35%;float:right}
+.tab-content02{ padding: 0;float:left;width: 88%;position: absolute;}
+.ajax-loading-error{margin-top:18px}
+</style>
+#set(urlMap = getInfo(type,id))
+	<div class="jarviswidget" id="wid-id-6" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
+
+	<!-- widget div-->
+	<div>
+		<!-- widget edit box -->
+		<div class="jarviswidget-editbox">
+			<!-- This area used as dropdown edit box -->
+		</div>
+		<!-- end widget edit box -->
+		<!-- widget content -->
+		<div class="widget-body">
+			<div class="tabs-right nav-tabsty">
+				<ul class="nav nav-tabs">
+				#for(name : urlMap.keySet())
+				    #set(liActive = nameFor.index==1?"active":"")
+				    <li class="${liActive}">
+                        <a href="#tab${nameFor.index}" data-toggle="tab">${name}</a>
+                    </li>
+				#end
+				</ul>
+				<div class="tab-content tab-content02">
+				#for(name : urlMap.keySet())
+				    #contentDiv("tab"+nameFor.index urlMap.get(name) nameFor.index==1?"active":"")
+				#end
+				</div>
+			</div>
+		</div>
+		<!-- end widget content -->
+	</div>
+	<!-- end widget div -->
+</div>
+<!-- end widget -->
+#end
+
+#macro contentDiv(contentDivId contentUrl active)
+<div class="tab-pane ${active}" id="${contentDivId}">
+
+</div>
+<script type="text/javascript">
+    tLoadContent("${TINY_CONTEXT_PATH+contentUrl}","#${contentDivId}")
+</script>
+#end
