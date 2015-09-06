@@ -42,6 +42,8 @@
                 <ref bean="generatorFileProcessor"/>
                 <!-- serviceMapping -->
                 <ref bean="serviceMappingFileProcessor"/>
+                <!--菜单加载处理器-->
+                <ref bean="menuFileProcessor"/>
             </list>
         </property>
     </bean>
