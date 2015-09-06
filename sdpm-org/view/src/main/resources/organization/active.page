@@ -1,7 +1,7 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
 
 ###import("/org/tinygroup/zTree/components/zTree.component")
-#import("/components/org/tinygroup/fulimanageui/form.component")
+#import("/components/org/tinygroup/projectmanageui/form.component")
 #set(editpagePath=
     "/organization/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 
