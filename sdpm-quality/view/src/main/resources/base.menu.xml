@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu id="quality" parent-id="0" name="测试管理" href="/testManagement/page/Bug.page" icon="icon-pencil" sort="1"
+      isShow="1"
+      permission="Permission">
+    <!--    <menu id="statisticProduct" parent-id="statistic" name="产品" href="/statistic/page/product.page" icon="" sort="1"
+              isShow="1"
+              permission="Permission">
+        </menu>
+        <menu id="statisticProject" parent-id="statistic" name="项目" href="/statistic/page/project.page" icon="" sort="1"
+              isShow="1"
+              permission="Permission">
+        </menu>
+        <menu id="statisticTest" parent-id="statistic" name="测试" href="/statistic/page/test.page" icon="" sort="1"
+              isShow="1"
+              permission="Permission">
+        </menu>
+        <menu id="statisticOrg" parent-id="statistic" name="组织" href="/statistic/page/org.page" icon="" sort="1" isShow="1"
+              permission="Permission">
+        </menu>-->
+</menu>
