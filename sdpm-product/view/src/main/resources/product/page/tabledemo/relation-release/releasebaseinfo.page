@@ -1,0 +1,59 @@
+
+<div style="width:35%;float:right" >
+	#@div(divClass="infoContent")
+	        <p class="titleName">描述</p>
+	       	<div>
+	       		123456 撒啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+	       	</div>
+		#end
+      
+      #@div(divClass="infoContent")
+	        <p class="titleName">基本信息</p>
+<ul>
+	   <li>
+	    #@elementItem()
+	 
+		<p>123456</p>
+	
+		#end
+	   </li>
+	   
+	    <li>
+	    #@elementItem()
+	 
+		<p><b>名称:</b> 计划XXX</p>
+	
+		#end
+	   </li>
+	   
+	   <li>
+	    #@elementItem()
+	  
+		<p><b>开始日期:</b>1970-01-01</p>
+	
+		#end
+	   </li>
+	   
+	   <li>
+	    #@elementItem()
+	     
+		<p><b>结束日期:</b>1970-01-01</p>
+
+		#end
+	   </li>
+	       	
+</ul>			
+      #end
+      
+      #@div(divClass="infoContent")
+	        <p class="titleName">其他相关</p>
+<ul>
+	<li>
+				#@div(divClass="infoContent")
+	        	<p class="titleName">历史记录</p>
+	       		#include("/product/page/tabledemo/historyrecord.page")
+				#end
+	</li>    
+</ul>				
+      #end
+ </div>

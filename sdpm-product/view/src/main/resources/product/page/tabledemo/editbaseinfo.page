@@ -119,11 +119,11 @@
 	        <p class="titleName">需求的一生</p>
 	       	<ul>
 	   <li>
-	   <label>由谁创建：</label>
-	   #@span(spanClass="text-overflow")
-		<a href="#" >Admin</a>
+	    #@elementItem()
+		#@colLabel()由谁创建：#end
+		<p>Admin</p>
 		#end
-	    </li>
+	   </li>
 	       		
 	<li>	
     #@tinyForm("thisform" "" "" {"class":"test"})

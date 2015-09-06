@@ -1,15 +1,10 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/button/components/button_common.component")
-
 #import("/org/tinygroup/button/components/button.component")
-
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
-
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-
-
-#!set(linkName="release",sonitem="<li>"+"发布"+"</li>")
+#!set(linkName="plan",sonitem="<li>"+"计划"+"</li>")
 
 <style>
 	.infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
@@ -29,17 +24,86 @@
 				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class" "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
 				<a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-link")关联需求</a>&nbsp;
 				<a href="#" id="showsearchmore-bug">#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
+						
 			
 				#iconOperations("#myModal" "icon-common-edit icon-pencil" "编辑发布" "865" "448" "/product/page/tabledemo/product-addrelease.pagelet" "ml-5")
 				#iconOperation(" icon-remove" "删除发布" "ml-5")
-				<a href="${TINY_CONTEXT_PATH}/product/page/project/product-release.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+				<a href="${TINY_CONTEXT_PATH}/product/page/project/product-plan.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
 				</span>#div(divClass="clearfix")
 				
 	#end
-
-
-#@tabWithInit("tab_demo" "optionsBox")
 <div style="width:65%;float:left">
+		#@div()
+			#@tabWithInit("tab_demo" "optionsBox")
+				
+				#@tabHead()
+					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="demand"?"Current":"")
+						#@buttons("","icon-lightbulb")
+						d
+					#end
+					
+					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="bug"?"Current":"")
+						#@buttons("","icon-bug green")
+							已关联Bug列表
+						#end
+					#end
+				#end
+				
+				#@tabBodyCol("ptop-5")
+					#pageContent
+				#end
+			
+			#end
+		#end
+	#end
+		</div>
+		
+		<div style="width:35%;float:right" >
+		#@settoggleLeftTitle("fa-bullhorn")&nbsp;相关信息#end
+		
+		#@div(divClass="infoContent")
+	        <p class="titleName">描述</p>123456
+	       	<span>
+	       		撒啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊 
+            </span>
+        #end
+        
+        #@div(divClass="infoContent")
+	        <p class="titleName">基本</p>123456
+		      <ul>
+		      	<li> 
+		      		<label>名称：</label>
+			       	#@span(spanClass="text-overflow")
+						<span> 计划XXX
+                        </span>
+					#end
+                </li>
+                <li> 
+		      		<label>开始日期：</label>
+			       	#@span(spanClass="text-overflow")
+						<span>
+							XXX.XXX.XXX
+						</span>
+					#end
+                </li>
+                <li> 
+		      		<label>结束日期：</label>
+			       	#@span(spanClass="text-overflow")
+						<span>
+							XXX.XXX.XXX
+						</span>
+					#end
+                </li>
+		      </ul>
+        #end
+      	
+      	#@div(divClass="infoContent")
+	        <p class="titleName">历史记录</p>
+	       	#include("/product/page/tabledemo/historyrecord.page")
+		#end
+
+	
+
 		#@div()
 			#@tabWithInit("tab_demo" "optionsBox")
 				
@@ -58,17 +122,9 @@
 				#end
 				
 				#@tabBodyCol("ptop-5")
-					
-					
 					#pageContent
-				
-			
 				#end
 			
 			#end
 		#end
-</div>
-
-	#include("/product/page/tabledemo/relation-release/releasebaseinfo.page")
-
-#end
+		</div>
