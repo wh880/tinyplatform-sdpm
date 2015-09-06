@@ -6,11 +6,6 @@
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
-				<a href="#" class="btn btn-default btn-sm">产品</a>
-				<a href="#" class="btn btn-success btn-sm">Bug</a>
-				<a href="#" class="btn btn-primary btn-sm">工程</a>
-				<a href="#" class="btn btn-info btn-sm">历史</a>
-				<a href="#" class="btn btn-warning btn-sm">相关</a>
 			#end
 			#@tinyTableContent("tableData.pagelet") ##取数据地址 总数据
 				#@thead()
