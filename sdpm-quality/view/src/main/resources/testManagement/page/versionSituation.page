@@ -88,46 +88,7 @@
 	</div>
 	</div>
 
-	<div style="width:20%;float:right" >
-		#@div(divClass="infoContent")
-		        <p class="titleName">基本信息</p>
-		        ##该样式在comm.css样式中自定义
-		       	#@table("adjustTable")
-		       		#@thead()
-		       		#end
-		       		#@tbody()
-		       			#@tr()
-							#@th()所属项目#end
-		       				#@td()<a href="#">测试项目</a>#end
-		       			#end
-		       			#@tr()
-							#@th()版本#end
-		       				#@td()trunk#end
-		       			#end
-		       			#@tr()
-							#@th()负责人#end
-		       				#@td()admin#end
-		       			#end
-		       			#@tr()
-							#@th()优先级#end
-		       				#@td()1#end
-		       			#end
-		       			#@tr()
-							#@th()开始日期#end
-		       				#@td()2015-08-12#end
-		       			#end
-		       			#@tr()
-							#@th()结束日期#end
-		       				#@td()2015-08-12#end
-		       			#end
-		       			#@tr()
-							#@th()当前状态#end
-		       				#@td()<font color="red">正在进行中#end
-		       			#end	
-		       		#end
-		       	#end
-		#end
-	</div>
-	
+
+	#include("/testManagement/page/versionSituationpaging.page")
 #end
 #end

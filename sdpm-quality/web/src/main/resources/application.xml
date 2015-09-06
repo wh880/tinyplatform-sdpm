@@ -295,7 +295,16 @@
 
 	<!--tiny-processor实现 -->
 	<tiny-processors>
+		<
+		<
+		<
+		<
+		<
+		<
+		< Updated upstream
 
+				=======
+		>>>>>>> Stashed changes
 		<tiny-processor id="uiEngineTinyProcessor" class="uiEngineTinyProcessor">
 			<servlet-mapping url-pattern=".*/uiengine\.uijs"></servlet-mapping>
 			<servlet-mapping url-pattern=".*/uiengine\.uicss"></servlet-mapping>

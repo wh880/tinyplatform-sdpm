@@ -19,7 +19,7 @@
 				#include("/testManagement/page/dropdownMenu.page")
 			#end
 			#@tabHead()
-				#include("/testManagement/page/Tab.page")
+				#include("/testManagement/page/")
 			#end
 			
 			#@tabBodyCol("ptop-5")
