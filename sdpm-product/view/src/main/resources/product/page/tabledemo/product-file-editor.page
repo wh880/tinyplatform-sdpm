@@ -1,4 +1,7 @@
 #import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#!set(linkName="archive",sonitem="<li>"+"文档"+"</li>")
 #@tinyForm("thisform" "" "" {"class":"test"})
 
  
@@ -86,6 +89,13 @@
  	
  	
         #@validateDiv("col-3")#end
+         #@elementItem()
+  <center>
+	#buttonRadiusDefault(caption="保存")
+	<a href="${TINY_CONTEXT_PATH}/product/page/project/archive-list.page" >#buttonRadiusDefault(caption="返回")</a>
+	</center>
+	#end
+        
 #end
 <script type="text/javascript">
     $(function(){

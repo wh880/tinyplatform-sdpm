@@ -1,3 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu id="product" parent-id="0" name="产品管理" href="/product/page/project/togglebox.page" icon="icon-desktop" sort="1" isShow="true" permission="Permission">
+	<menu id="demand"  name="需求" href="/product/page/project/togglebox.page" icon="icon-desktop" sort="1" isShow="true" permission="Permission">
+	</menu>
+	<menu id="dymanic"  name="动态" href="/product/page/project/togglebox.page" icon="icon-desktop" sort="1" isShow="true" permission="Permission">
+	</menu> 		
+    <menu id="plan"  name="计划" href="/product/page/project/togglebox.page" icon="icon-desktop" sort="1" isShow="true" permission="Permission">
+	</menu>
+	<menu id="release"  name="发布" href="/product/page/project/togglebox.page" icon="icon-desktop" sort="1" isShow="true" permission="Permission">
+	</menu>
+	<menu id="roadmap"  name="路线图" href="/product/page/project/togglebox.page" icon="icon-desktop" sort="1" isShow="true" permission="Permission">
+	</menu>
+
+
 </menu> 		
