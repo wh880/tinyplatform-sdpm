@@ -94,7 +94,7 @@
 		.menu-on-top #main-menu .navigation>li>ul{top:44px}
 	 	.menu-on-top #main-menu .navigation>li>a>span.mm-text {display:inline-block;}
 	 	.menu-on-top #main-menu .navigation>li>a i{padding-right:5px;width:auto;display:inline-block;}
-	 	.menu-on-top #main-menu .navigation>li{width:102px}
+	 	.menu-on-top #main-menu .navigation>li{width:108px;white-space: nowrap;}
 	 	.menu-on-top #main-menu .navigation>li.mm-dropdown>a:after{top:30px!important}
 		.menu-on-top #main-menu .navigation > li *:not(span){background:#fbfbfb!important}
 		.menu-on-top #main-menu .navigation > li *:not(span):hover{background:#fff!important}
