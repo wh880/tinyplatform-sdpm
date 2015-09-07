@@ -32,7 +32,6 @@ function tLoadContent(link, contain, className) {
 	 })
 }
 </script>
-
 <style>
 .jarviswidget>div{border:none; padding:2px 0 1px 10px;}
 .tabs-right.nav-tabsty .nav-tabs li a{border:none;padding:2px 8px;background:#f2f2f2;min-width:10px;width:28px;display:inline-block}
