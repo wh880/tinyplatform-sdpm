@@ -43,7 +43,7 @@
     <span class="r">
     	#@aModal("#myModal" "导出HTML" "500" "130" "btn-class" "/product/page/tabledemo/product-export-demand.pagelet")#buttonIcon(iconClass="icon-download-alt")导出#end
 					
-		<a href="#">#buttonIcon(iconClass="icon-goback icon-level-up icon-large icon-rotate-270")返回</a>&nbsp;
+		<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">#buttonIcon(iconClass="icon-goback icon-level-up icon-large icon-rotate-270")返回</a>&nbsp;
 	</span>
         #div(divClass="clearfix")
     #end
