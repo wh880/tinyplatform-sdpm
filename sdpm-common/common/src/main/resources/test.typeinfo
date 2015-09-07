@@ -1,9 +1,0 @@
-<type-infos>
-
-	<type-info name="project" >
-	    <info name="projectInfo" title="项目信息" infoParameter="" url="/project/page/outpage/projectInfo.pagelet"/>
-	    <info name="testInfo" title="其他信息" infoParameter="" url="1" resource="product"/>
-	</type-info>
-	<type-info name="task" parameterName="taskId" url="task" />
-	<type-info name="case" parameterName="caseId" url="case" />
-</type-infos>
