@@ -97,7 +97,9 @@
 	       	#include("/project/recordlist.page")
 		#end
 </div>
-	#include("/project/survey/basicInformation.page")
+	<div style="width:35%;float:right">
+		#TypeInfo("project")
+	</div>
 	#end
 #end			
 					

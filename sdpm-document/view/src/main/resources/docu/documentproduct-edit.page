@@ -1,5 +1,6 @@
 
 #@tinyForm("thisform" "" "" {"class":"test"})
+    #set(name="")
 
 #@elementItem()
         #@colLabel()#end

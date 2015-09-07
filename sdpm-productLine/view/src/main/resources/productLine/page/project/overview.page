@@ -49,8 +49,10 @@
 	       	#include("/productLine/page/tabledemo/historical-records.page")
 		#end
 	</div>
+	<div style="width:35%;float:right"> 
+		#TypeInfo("productLine")
+    </div>
 	
-	#TypeInfo("productLine")
 		
 	
 #end

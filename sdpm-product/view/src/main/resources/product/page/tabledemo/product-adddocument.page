@@ -4,15 +4,15 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
      #@elementItem()
         #@colLabel()产品#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-4")
         	产品XXXX
         #end
         #@validateDiv("col-2")#end
       #end
     #@elementItem()
         #@colLabel()名称#end
-        #@formControlDiv("col-8")
-          #tinyInput("text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+        #@formControlDiv("col-4")
+          #tinyInput("text" "username" ""{"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end

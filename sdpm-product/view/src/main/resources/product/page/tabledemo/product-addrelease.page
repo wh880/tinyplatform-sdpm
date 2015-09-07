@@ -17,14 +17,14 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
      #@elementItem()
         #@colLabel()发布名称#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-4")
         	#tinyInput("text" "username" ""{"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
        #end
         #@validateDiv("col-2")#end
       #end
     #@elementItem()
         #@colLabel()版本#end
-       #@formControlDiv("col-8")
+       #@formControlDiv("col-4")
 			#@tinySelect("PO" "" {"class":"input-text","rel":"22"})
 				#@tinyOptionItem("admin")版本1#end
 				#@tinyOptionItem("buzhang")版本3#end

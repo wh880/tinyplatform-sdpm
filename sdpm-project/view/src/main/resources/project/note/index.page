@@ -23,7 +23,7 @@
 				<span class="f">
 				<table>
 					<tr>
-					<td style="width:320px">
+					<td style="width:360px">
 					<a href="#" class="active_btn">日历</a>
 					<a href="#">今日</a>
 					<a href="#">昨日</a>
@@ -34,7 +34,7 @@
 					<a href="#">所有日志</a>
 					</td>
 					<td style="float:left">
-					<div style="width:120px">
+					<div style="width:150px">
 					#@tinySelect("lang" "zh" {"class":"select2"})
 							#@tinyOptionItem("en")请选择用户#end
 							#@tinyOptionItem("zh")admin#end

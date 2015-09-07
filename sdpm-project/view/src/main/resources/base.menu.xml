@@ -1,4 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu id="project" parent-id="0" name="项目管理" href="/project/task/index.page" icon="icon-book" sort="1" isShow="1" permission="Permission">
-    
+    <menu id="task" parent-id="project" name="任务" href="/project/task/index.page" icon="" sort="1" isShow="1" permission="Permission">
+	</menu>
+		
+	<menu id="demand" parent-id="project" name="需求" href="/project/demand/index.page" icon="" sort="1" isShow="1" permission="Permission">
+	</menu>
+	
+	<menu id="bug" parent-id="project" name="Bug" href="/project/bug/index.page" icon="" sort="1" isShow="1" permission="Permission">
+	</menu>
+	
+	<menu id="version" parent-id="project" name="版本" href="/project/version/index.page" icon="" sort="1" isShow="1" permission="Permission">
+	</menu>
+	
+	<menu id="test" parent-id="project" name="测试" href="/project/test/index.page" icon="" sort="1" isShow="1" permission="Permission">
+	</menu>
+	
+	<menu id="team" parent-id="project" name="团队" href="/project/team/index.page" icon="" sort="1" isShow="1" permission="Permission">
+	</menu>
+	
+	<menu id="note" parent-id="project" name="日志" href="/project/note/index.page" icon="" sort="1" isShow="1" permission="Permission">
+	</menu>
+	
+	<menu id="dynamic" parent-id="project" name="动态" href="/project/dynamic/index.page" icon="" sort="1" isShow="1" permission="Permission">
+	</menu>
+	
+	<menu id="document" parent-id="project" name="文档" href="/project/document/index.page" icon="" sort="1" isShow="1" permission="Permission">
+	</menu>
+	
+	<menu id="product" parent-id="project" name="产品" href="/project/product/index.page" icon="" sort="1" isShow="1" permission="Permission">
+	</menu>
+	
+	<menu id="survey" parent-id="project" name="概况" href="/project/survey/index.page" icon="" sort="1" isShow="1" permission="Permission">
+	</menu>
 </menu>

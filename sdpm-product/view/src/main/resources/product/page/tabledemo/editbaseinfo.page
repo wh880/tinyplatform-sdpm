@@ -1,5 +1,6 @@
 	#@div(divClass="infoContent")
 	        <p class="titleName">基本信息</p>
+	        
 	       	<ul>
 	      <li>	
 #@tinyForm("thisform" "" "" {"class":"test"})

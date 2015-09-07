@@ -8,7 +8,7 @@
    
     #@elementItem()
 		#@colLabel()所属文档库：#end
-		#@formControlDiv("col-8")
+		#@formControlDiv("col-4")
 			#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
 				#@tinyOptionItem("zh")产品文档库#end
 				#@tinyOptionItem("en")B001#end
@@ -19,7 +19,7 @@
 	#end
     #@elementItem()
 		#@colLabel()所属产品：#end
-		#@formControlDiv("col-8")
+		#@formControlDiv("col-4")
 			#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
 				#@tinyOptionItem("zh")A001#end
 				#@tinyOptionItem("en")B001#end
@@ -30,7 +30,7 @@
 	#end
 	  #@elementItem()
         #@colLabel()所属分类：#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-4")
              #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
 			#@tinyOptionItem("zh")/#end
 			#@tinyOptionItem("en")4224#end
@@ -48,7 +48,7 @@
     
     #@elementItem()
         #@colLabel()文档标题：#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-4")
           #tinyInput("text" "12" ""{"nullmsg":"请输入文档标题！","id":"23","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
@@ -56,7 +56,7 @@
 	 
 	 #@elementItem()
         #@colLabel()关键字：#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-4")
           #tinyInput("text" "13" ""{"nullmsg":"请输入关键字！","id":"33","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
@@ -81,7 +81,7 @@
       
       #@elementItem()
         #@colLabel()附件：#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-4")
 	    #tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
         #end
         #@validateDiv("col-2")#end
