@@ -1,7 +1,19 @@
 <type-infos>
-	<type-info name="product1"  >
-	    <info name="productInfo" title="产品信息" infoParameter="" url="/product/page/tabledemo/baseinfo.pagelet"/>
-	    <info name="productOwnerInfo" title="产品线信息" infoParameter="" url="/productLine/page/tabledemo/other-information.pagelet"/>
+	<type-info name="product"  >
+	    <info name="productInfo" title="产品信息" infoParameter="" url="/product/page/tabledemo/baseinfo.pagelet" resource="product"/>
+	    <info name="productOwnerInfo" title="产品线信息" infoParameter="" url="/productLine/page/tabledemo/other-information.pagelet" resource="product"/>
+	</type-info>
+	
+	<type-info name="demand"  >
+	    <info name="demandInfo" title="需求信息" infoParameter="" url="/product/page/tabledemo/editbaseinfo.pagelet" resource="demand"/>
+	</type-info>
+	
+	<type-info name="productPlan"  >
+	    <info name="demandInfo" title="计划信息" infoParameter="" url="/product/page/tabledemo/relation-plan/planbaseinfo.pagelet" resource="productPlan"/>
+	</type-info>
+	
+	<type-info name="productRelease"  >
+	    <info name="demandInfo" title="发布信息" infoParameter="" url="/product/page/tabledemo/relation-release/releasebaseinfo.pagelet" resource="productRelease"/>
 	</type-info>
 	
 </type-infos>

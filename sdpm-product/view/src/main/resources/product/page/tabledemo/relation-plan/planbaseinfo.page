@@ -1,5 +1,3 @@
-
-<div style="width:35%;float:right" >
 	#@div(divClass="infoContent")
 	        <p class="titleName">描述</p>
 	       	<div>
@@ -43,4 +41,3 @@
 	       		#include("/product/page/tabledemo/historyrecord.page")
 				#end
 
- </div>

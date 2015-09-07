@@ -53,8 +53,8 @@
 	       			#include("/product/page/tabledemo/historyrecord.page")
 				#end
 	</div>
-
-	#include("/product/page/tabledemo/editbaseinfo.page")
-		
 	
+	<div style="width:35%;float:right" >
+		#TypeInfo("demand")
+	</div>
 	#end
