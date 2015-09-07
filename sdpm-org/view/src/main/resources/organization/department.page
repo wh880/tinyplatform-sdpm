@@ -44,8 +44,12 @@
 ##
 ##        #end
 
+#@tabHead()
+    #include("/organization/tab.page")
+#end
 
-        #@div(divClass="operationbar")
+
+#@div(divClass="operationbar")
         <span class="f">
 					<dr>部门结构</dr>
 				</span>

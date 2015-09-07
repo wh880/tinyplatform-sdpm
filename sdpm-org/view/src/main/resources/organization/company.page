@@ -42,9 +42,12 @@
 ##
 ##        #end
 ##    #end
+#@tabHead()
+    #include("/organization/tab.page")
+#end
 
 
-    #import("/org/tinygroup/table/components/table.component")
+#import("/org/tinygroup/table/components/table.component")
     #import("/org/tinygroup/button/components/button_common.component")
     #import("/org/tinygroup/button/components/button.component")
 #import("/common/component/form.component")

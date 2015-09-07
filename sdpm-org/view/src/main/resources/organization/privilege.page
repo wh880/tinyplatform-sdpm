@@ -32,6 +32,10 @@
 ##        <span><a href="${TINY_CONTEXT_PATH}/organization/company.page?currentPageId=7">公司</a></span>
 ##        #end
 
+#@tabHead()
+    #include("/organization/tab.page")
+#end
+
         #@div(divClass="operationbar")
         <span class="f">
 					<dr>浏览分组</dr>
