@@ -5,7 +5,7 @@
 <style>
     .select_boxes{margin-top:0}
 </style>
-#set(name="sla")
+#set(name="test")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
