@@ -43,8 +43,13 @@
         ##                #include("/organization/tab.page")
         ##            #end
 
-            #foreach(m in menuManager.getChildMenus("organization"))
-            <span><a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a></span>
+        ##            #foreach(m in menuManager.getChildMenus("organization"))
+        ##            <span><a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a></span>
+        ##            #end
+            #@tabWithInit("tab_demo" "optionsBox")
+                #@tabHead()
+                    #include("/organization/tab.page")
+                #end
             #end
         #end
 

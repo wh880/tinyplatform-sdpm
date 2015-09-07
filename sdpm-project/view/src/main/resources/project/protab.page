@@ -1,4 +1,4 @@
-
+#*
 #@aHeadCol(TINY_CONTEXT_PATH+"/project/task/index.page?currentPageId=3" name=="task"?"Current":"")任务#end
 #@aHeadCol(TINY_CONTEXT_PATH+"/project/demand/index.page?currentPageId=3" name=="demand"?"Current":"")需求#end
 #@aHeadCol(TINY_CONTEXT_PATH+"/project/bug/index.page?currentPageId=3" name=="bug"?"Current":"")Bug#end
@@ -9,6 +9,10 @@
 #@aHeadCol(TINY_CONTEXT_PATH+"/project/dynamic/index.page?currentPageId=3" name=="dynamic"?"Current":"")动态#end
 #@aHeadCol(TINY_CONTEXT_PATH+"/project/document/index.page?currentPageId=3" name=="document"?"Current":"")文档#end
 #@aHeadCol(TINY_CONTEXT_PATH+"/project/product/index.page?currentPageId=3" name=="product"?"Current":"")产品#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/project/survey/index.page?currentPageId=3" name=="survey"?"Current":"")概况#end	
+#@aHeadCol(TINY_CONTEXT_PATH+"/project/survey/index.page?currentPageId=3" name=="survey"?"Current":"")概况#end	*#
 
-	
+#foreach(m in menuManager.getChildMenus("project"))
+###TnavItem("6" m.name m.href m.icon)
+###@aHeadCol(TINY_CONTEXT_PATH+m.href name=="org"?"Current":"")${m.name}#end
+    #@aHeadCol(TINY_CONTEXT_PATH+m.href m.id==name?"Current":"")${m.name}#end
+#end	

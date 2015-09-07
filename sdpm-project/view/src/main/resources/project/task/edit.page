@@ -80,7 +80,9 @@
 		#include("/project/recordlist.page")
 	#end
 </div>
-#include("/project/task/basicInfoEdit.page")
+<div style="width:35%;float:right">
+	#TypeInfo("projectEdit")
+</div>
 #end
 #*#end*#
 #* <script type="text/javascript">

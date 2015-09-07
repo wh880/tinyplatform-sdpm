@@ -43,3 +43,16 @@
         #end
     #end
 #end
+
+
+
+##有序列表改造
+
+#macro normalLiItemsconment(itemIndex itemHref itemContent liClass)
+	<li#if(liClass) class="$!{liClass}"#end>
+		<em>${itemIndex}</em><a href="$!{itemHref}">${itemContent}</a>
+		<span class="date btnItems">
+		 #bodyContent
+		</span>
+	</li>
+#end

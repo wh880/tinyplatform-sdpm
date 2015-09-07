@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu id="document" parent-id="0" name="文档管理" href="/docu/document.page" icon="icon-desktop" sort="1" isShow="true" permission="Permission">
+    <menu id="edit" parent-id="product-edit" name="编辑" href="/docu/documentproduct-edit.pagelet" icon="icon-desktop" sort="1" isShow="true" permission="Permission">
+    </menu>
 </menu>
