@@ -12,7 +12,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 #end
 
 
-#set(name="request")
+#set(name="faqmenu2")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -57,7 +57,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 
 ###@h2()${activeTitle}#end
 #@divDataTablebox()
-    #@tableHeaderBar()${activeTitle}#end
+
     #@leftTreeCol()
  ##         #@searchZtreeWithInit("treeDemo" "height:454px;" "/admin/product/tree")
         #@searchZtreeWithInit("treeDemo" "height:454px;" "/service/js/service1.js")
@@ -104,4 +104,4 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
     });
 
 </script>
-#end
+    #end

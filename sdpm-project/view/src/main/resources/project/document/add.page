@@ -67,9 +67,9 @@
 			#@elementItem()
         			#@colLabel()文档类型#end
 					#@skinMinimal("mt-20")
-    					#labelRadio1(rId="aclopen" rName="acl" rValue="custom2" labelText="文件" "setWhite(this.value);")
-    					#labelRadio1(rId="aclcustom" rName="acl" rValue="custom1" labelText="链接" "setWhite(this.value);")   								
-    					#labelRadio1(rId="aclcustom" rName="acl" rValue="custom" labelText="网页" "setWhite(this.value);")
+    					#labelRadio1(rId="typefile" rName="type" rValue="file" labelText="文件" "setType(this.value);")
+    					#labelRadio1(rId="typeurl" rName="type" rValue="url" labelText="链接" "setType(this.value);")   								
+    					#labelRadio1(rId="typetext" rName="type" rValue="text" labelText="网页" "setType(this.value);")
 					
 					#end
         			#@validateDiv("col-2")#end
@@ -78,14 +78,21 @@
 			#@elementItem()
 					#@colLabel()文档标题#end
 					#@formControlDiv("col-8")
-					#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+					#tinyInput("text" "doctitle" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"doctitle","class":"input-text"})
+					#end
+				#end
+				#@validateDiv("col-2")#end
+			#@elementItem(elementId="urlBox" eleItemClass="hidden")
+					#@colLabel()文档URL#end
+					#@formControlDiv("col-8")
+					#tinyInput("text" "docurl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16","id":"docurl","class":"input-text"})
 					#end
 				#end
 				#@validateDiv("col-2")#end							
 			#@elementItem()	
 					#@colLabel()关键字#end
 					#@formControlDiv("col-8")
-					#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","id":"username","class":"input-text"})
+					#tinyInput("text" "keywords" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","id":"keywords","class":"input-text"})
 					#end
 				#end
 				#@validateDiv("col-2")#end
@@ -96,24 +103,16 @@
 						#@Teditor("content1" "content1" {"initialFrameHeight":"200"})Say something#end
 					#end
 					#@validateDiv("col-2")#end
-				#end
+				#end	
 										
-			#@elementItem(elementId="whitelistBox1" eleItemClass="hidden")				
-					#@colLabel()文档URL#end
-					#@formControlDiv("col-8")
-					#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","id":"username","class":"input-text"})
-					#end
-				#end
-				#@validateDiv("col-2")#end	
-										
-			#@elementItem(elementId="whitelistBox2" eleItemClass="hidden")				
+			#@elementItem(elementId="fileBox" eleItemClass="")				
 					#@colLabel()附件#end
 					#@formControlDiv("col-8")
 					#fileWithInput("file-1")
 					#end
 					#@validateDiv("col-2")#end
 				#end
-			#@elementItem(elementId="whitelistBox" eleItemClass="hidden")
+			#@elementItem(elementId="contentBox" eleItemClass="hidden")
 					#@colLabel()文档正文#end
 					#@formControlDiv("col-6")
 						#@tinyueditor("content" "content")说点什么...最少输入10个字符#end
@@ -131,10 +130,26 @@
 #end
 #end
 <script type="text/javascript">
-function setWhite(acl)
+ /* Set doc type. */
+function setType(type)
 {
-    acl == 'custom2' ? $('#whitelistBox2').removeClass('hidden') : $('#whitelistBox2').addClass('hidden');
-    acl == 'custom1' ? $('#whitelistBox1').removeClass('hidden') : $('#whitelistBox1').addClass('hidden');
-    acl == 'custom' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
+	if(type == 'url')
+	{
+		$('#urlBox').removeClass('hidden');
+		$('#fileBox').addClass('hidden');
+		$('#contentBox').addClass('hidden');
+	}
+	else if(type == 'text')
+	{
+		$('#urlBox').addClass('hidden');
+		$('#fileBox').addClass('hidden');
+		$('#contentBox').removeClass('hidden');
+	}
+	else
+	{
+		$('#urlBox').addClass('hidden');
+		$('#fileBox').removeClass('hidden');
+		$('#contentBox').addClass('hidden');
+	}
 }
 </script>
