@@ -33,9 +33,7 @@
 </style>
 
 #include("/project/task/taskMenu.page")
-	#@div(divClass="operationbar")
-		<span class="f">项目名称</span>		
-	#end
+	<span class="f" style="font-size:15px">项目名称</span>
 
 <div style="width:62%;float:left">
 	#@div(divClass="infoContent")
@@ -75,7 +73,9 @@
       	<a href="${TINY_CONTEXT_PATH}/project/task/edit.page">#buttonDefault(caption="返回")</a>
 	#end
 </div>
-#include("/project/task/basicInfoView.page")
+	<div style="width:35%;float:right">
+		#TypeInfo("projectView")
+	</div>
 
 
 

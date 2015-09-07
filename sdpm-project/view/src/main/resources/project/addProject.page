@@ -16,7 +16,7 @@
 <style>
 .tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
-.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+#*.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}*#
 .b {margin-left: 8px;}
 .width{width:270px}
 .input-group-addon{width:10px;font-size:20px}
