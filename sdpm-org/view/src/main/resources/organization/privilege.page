@@ -86,13 +86,13 @@
             //console.log($(this).attr("itemId"))
             // user_del(this, '1');
             var that = this;
-            layer.confirm('qurang', function (index) {
+            layer.confirm('确定要删除该用户？', function (index) {
                 //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
                 //$.ajax()
                 //console.log(index);
-                layer.msg($("确定要删除该用户？").attr("itemId"), 1);
+                layer.msg($("已删除").attr("deleteList"), 1);
             }, function (index) {
-                //layer.msg('fdsfdfdsf',1)
+                layer.msg('已删除', 1)
             })
         });
     });
