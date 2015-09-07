@@ -31,7 +31,7 @@
         <!-- <application-processor bean="serviceApplicationProcessor"></application-processor> -->
         <application-processor bean="tinyListenerProcessor"></application-processor>
         <application-processor bean="fileMonitorProcessor"></application-processor>
-            <application-processor bean="tinyTemplateConfigProcessor"></application-processor>
+        <application-processor bean="tinyTemplateConfigProcessor"></application-processor>
 
             <!--<application-processor bean="logAdapterProcessor"></application-processor>-->
         <!--<application-processor bean="encryptionProcessor"></application-processor>-->
@@ -42,9 +42,8 @@
             resolve-classpath="true">
         <class-paths>
             <!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
-                <class-path path="E:\TinyWorkSpace\sdpm\sdpm-quality\view\src\main\resources"/>
-                <class-path path="D:\workspace\sdpm\sdpm-common\view\src\main\resources"/>
-
+                <!--<class-path path="E:\TinyWorkSpace\sdpm\sdpm-quality\view\src\main\resources"/>
+                <class-path path="E:\workspace\sdpm\sdpm-common\view\src\main\resources"/>-->
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>
@@ -637,7 +636,7 @@
 
     <template-config templateExtFileName="page"
                      layoutExtFileName="layout" componentExtFileName="component">
-        <init-param name="engineId" value="fuliEngine"></init-param>
+        <init-param name="engineId" value="projectEngine"></init-param>
     </template-config>
 
 </application>

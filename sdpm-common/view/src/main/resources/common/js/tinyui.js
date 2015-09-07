@@ -210,8 +210,8 @@ $(function () {
     activateTheme();
     init.push(function () {
         $("#main-menu").prepend('<div id="topmenurap" style="display:none">' + $("#main-menu #main-menu-inner").html() + '</div>');
-        var menucount = $(".navigation:first>li").size();
-        $("#topmenurap .navigation>li").css("width", 100 / menucount + "%");
+        //var menucount = $(".navigation:first>li").size();
+        //$("#topmenurap .navigation>li").css("width", 100 / menucount + "%");
         if (demo_settings.menupos == "top") {
             $("#main-menu #topmenurap").css("display", "block")
             $("#main-menu>.slimScrollDiv").css("display", "none")
@@ -298,9 +298,9 @@ $(function () {
         '}',
         '#demo-settings {',
         ' position: absolute;',
-        ' right: -' + (panel_width + 10) + 'px;',
+        ' right: -' + (panel_width + 30) + 'px;',
         ' width: ' + (panel_width + 10) + 'px;',
-        ' top:5px;',
+        ' top:-50px;',
         ' padding-right: 10px;  ',
         ' background: #333;',
         ' border-radius: 5px;',
@@ -319,7 +319,7 @@ $(function () {
         '}',
         '.main-position-fixed #demo-settings{position:fixed}',
         '#demo-settings.open {',
-        ' right: -10px;',
+        ' right: -20px;',
         '}',
         '#demo-settings > .header {',
         ' position: relative;',
@@ -479,7 +479,8 @@ $(function () {
     $(function () {
         activateTheme($('#main-menu .btn-outline'));
         $('head').append($('<style>\n' + demo_styles.join('\n') + '\n</style>'));
-        $('.postion-nav').append($(demo_template.join('\n')));
+        //$('.postion-nav').append($(demo_template.join('\n')));
+		$('#tinypagecontent').prepend($(demo_template.join('\n')));
 
         // Activate theme
         $('#demo-themes .demo-theme[data-theme="' + demo_settings.theme + '"]').addClass('active');

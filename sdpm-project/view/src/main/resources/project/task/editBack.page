@@ -56,7 +56,7 @@ h3 {line-height: 1.2;}
 	#end
 	<center>
 	<a href="${TINY_CONTEXT_PATH}/project/task/call.page" style="margin-left:5px">#buttonIcon(iconClass="icon-hand-right")指派</a>
-	<a href="${TINY_CONTEXT_PATH}/project/task/addNote.page" style="margin-left:5px">#buttonIcon(iconClass="icon-time")日志</a>
+	<a href="${TINY_CONTEXT_PATH}/project/task/note.page" style="margin-left:5px">#buttonIcon(iconClass="icon-time")日志</a>
 	<a href="#" style="margin-left:5px">#buttonIcon(iconClass="icon-pause")暂停</a>
 	<a href="#" style="margin-left:5px">#buttonIcon(iconClass="icon-ok")完成</a>
 	<a href="#" style="margin-left:5px">#buttonIcon(iconClass="icon-ban-circle")取消</a>

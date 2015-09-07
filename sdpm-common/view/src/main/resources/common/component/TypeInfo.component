@@ -1,7 +1,7 @@
 #macro TypeInfo(type id)
 <script type="text/javascript">
 <!--
-function tLoadContent(link, contain) {
+function tLoadContent(link, contain, className) {
 	var $b=$(contain);
 	 $.ajax({
 		  type: "get",
@@ -24,7 +24,8 @@ function tLoadContent(link, contain) {
 				300)
 		  },
 		  error: function(a) {
-				$b.html('<h4 class="ajax-loading-error"><i class="fa fa-warning txt-color-orangeDark"></i> Error 404! Page not found.</h4>')
+		        $(className).hide();
+		        $b.html("");
 		  },
 		  async: !0
 		//async: true
@@ -59,7 +60,7 @@ function tLoadContent(link, contain) {
 				<ul class="nav nav-tabs">
 				#for(name : urlMap.keySet())
 				    #set(liActive = nameFor.index==1?"active":"")
-				    <li class="${liActive}">
+				    <li class="tab${nameFor.index} ${liActive}">
                         <a href="#tab${nameFor.index}" data-toggle="tab">${name}</a>
                     </li>
 				#end
@@ -83,6 +84,6 @@ function tLoadContent(link, contain) {
 
 </div>
 <script type="text/javascript">
-    tLoadContent("${TINY_CONTEXT_PATH+contentUrl}","#${contentDivId}")
+    tLoadContent("${TINY_CONTEXT_PATH+contentUrl}","#${contentDivId}",".${contentDivId}")
 </script>
 #end

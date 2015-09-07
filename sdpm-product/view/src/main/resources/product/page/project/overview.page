@@ -2,7 +2,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="产品概况",activeMenuId=currentPageId)
-#!set(linkName="gaikuang",sonitem="<li>"+"概况"+"</li>")
+#!set(linkName="overview",sonitem="<li>"+"概况"+"</li>")
 <style>
 .infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
 .infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:13px;}

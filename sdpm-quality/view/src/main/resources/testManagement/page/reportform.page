@@ -2,7 +2,7 @@
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
-#import("/testManagement/components/org/tinygroup/fulimanageui/form.component")
+#import("/common/component/form.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 <style>
     .togglebox.open .tableBoxessty{margin-left:262px}
@@ -25,7 +25,7 @@
 ##operationbar start1
     #@div(divClass="operationbar")
     <span class="f">
-					<a href="#" class="active_btn">报表</a>
+					<a href="#" class="active_btn">报表gggggggggggggggggggggg</a>
 				</span>
     <span class="r">
 					<a href="#">#buttonIcon(iconClass="icon-upload-alt")返回</a>&nbsp;
