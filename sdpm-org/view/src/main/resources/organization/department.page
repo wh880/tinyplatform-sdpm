@@ -26,9 +26,14 @@
 #@div()
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
-            #foreach(m in menuManager.getChildMenus("organization"))
-            <span><a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a></span>
+            #@tabWithInit("tab_demo" "optionsBox")
+                #@tabHead()
+                    #include("/organization/tab.page")
+                #end
             #end
+        ##            #foreach(m in menuManager.getChildMenus("organization"))
+        ##            <span><a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a></span>
+        ##            #end
 ##        <span><a href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7
 ##">用户</a></span>
 ##        <span><a href="${TINY_CONTEXT_PATH}/organization/gtasks.page?currentPageId=7
