@@ -26,6 +26,7 @@
         var CKEDITOR_BASEPATH = contextPath + '/';
         var pathname = location.pathname;
         var relativeurl = pathname.substring(CKEDITOR_BASEPATH.length);
+        var pomlist=new Array()
     </script>
     <!--[if lt ie 9]>
 	<script>
