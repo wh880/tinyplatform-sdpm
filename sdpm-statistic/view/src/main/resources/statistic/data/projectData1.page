@@ -1,6 +1,6 @@
-#@tinyDateInput("begin" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
-至
-#@tinyDateInput("end" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+日期：#daterangepicker("2015/08/01" "2015/08/01" "reservation" "reservationtime" "width:400px")
+#daterangepickerInit("#reservationtime" "timePicker: true,timePickerIncrement: 30,format: 'YYYY/MM/DD'")
+<br/>
 <div style="height: 10px;"></div>
 #@tableStriped("table-border")
     #@thead()

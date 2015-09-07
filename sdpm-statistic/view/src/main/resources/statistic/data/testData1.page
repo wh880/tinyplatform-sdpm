@@ -1,7 +1,10 @@
 Bug创建：
-#@tinyDateInput("begin" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
-至
-#@tinyDateInput("end" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+###@tinyDateInput("begin" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+##至
+###@tinyDateInput("end" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+#daterangepicker("2015/08/01" "2015/08/01" "reservation" "reservationtime" "width:400px")
+#daterangepickerInit("#reservationtime" "timePicker: true,timePickerIncrement: 30,format: 'YYYY/MM/DD'")
+<br/>
 产品：
 #@tinySelect("lang" "zh" {"class":"select2","style":"width:190px"})
     #@tinyOptionItem("en")请选择用户#end

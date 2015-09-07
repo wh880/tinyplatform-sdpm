@@ -19,7 +19,7 @@
 	#@td()阿炉添加#end
 	#@td()20150828#end
 	#@td()
-		#iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/product/page/tabledemo/product-file-editor.pagelet" "ml-5")
+		<a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-file-editor.page"><i class="icon-pencil"></i></a>
 		#iconOperation(" icon-remove" "删除" "ml-5")
 	#end
 #end

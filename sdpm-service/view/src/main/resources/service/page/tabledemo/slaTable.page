@@ -1,0 +1,28 @@
+#!set(activeTitle="表格",activeMenuId=currentPageId)
+##import("/org/tinygroup/table/components/tinytable.component")
+###include("/page/event/common.page")
+#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+    #@div(divBaseClass="tinyheaderTools form-inline")
+        #setTinyTablePageSize([8,10,20,50,100,200])
+        #@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel") 批量删除#end
+    ##    <a title="权限维护" href=userBatchAddpagePath>#buttonIcon(iconClass="添加" "865" "420","btn radius btn-info")</a>
+    #end
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/service/page/tabledemo/clientTableData.pagelet" 81) ##取数据地址 总数据
+        #@thead()
+            #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})产品ID#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})客户ID#end
+                #@tinyTh({"class":"","rel":"sortname"})客户单位#end
+                #@tinyTh({"class":"","rel":"sortname"})客户名称#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})客户登记人#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})客户联系人#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})客户登记时间#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})客户状态#end
+                #@tinyTh({"class":"","rel":"sortname"})操作#end
+            #end
+        #end
+    #end
+#end
+#@simpleModal("myModal" "用户编辑")#end
+#@simpleModal("myModal2" "用户删除")#end

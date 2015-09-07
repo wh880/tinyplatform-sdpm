@@ -2,7 +2,7 @@
 	#showsearchmore-bug{cursor:pointer}
 	#searchform table{display:inline}
 	#searchform td{vertical-align: middle;padding:1px!important;}
-	#searchform .form-control{padding:0;line-height:25px;height:25px}
+	#searchform .form-control{padding:0;line-height:27px;height:27px;margin-bottom:3px}
 	.w-150px{width:150px;}.w-180px{width:180px;}
 	.w-90px{width:90px;}
 	.w-400px{width:360px;}

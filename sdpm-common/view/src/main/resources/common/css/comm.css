@@ -1,0 +1,101 @@
+
+.operationbar {
+
+    background: #f9fafe;
+    padding: 6px 5px 6px 10px;
+}
+
+.operationbar a {
+    padding: 2px 3px;
+    display: inline-block;
+    margin-right: 0;
+    border-radius: 3px;
+}
+
+.operationbar a:hover {
+    background: #ddd;
+    color: #333;
+}
+
+.operationbar .active_btn:hover {
+    background: none;
+}
+
+.btn-group #Dropdown {
+    background: none;
+    border: none;
+    padding: 0 3px
+}
+
+.open > #downMenuSty {
+    min-width: 70px
+}
+
+.title_sty {
+    background: #f8fafe;
+    padding: 6px 16px;
+    font-weight: bold;
+}
+
+.bugBox {
+    border: #eee 1px solid
+}
+
+.select_boxes {
+    margin-top: 0
+}
+
+.infoContent {
+    margin: 18px 4px 10px 5px;
+    padding: 6px;
+    border: #eee 1px solid;
+}
+
+.infoContent .titleName {
+    margin-top: -16px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.infoContent ul li label {
+    font-weight: normal;
+    width: 33%;
+    font-size: 12px;
+}
+
+.infoContent ul li .text-overflow {
+    display: inline-block;
+    width: 64%;
+    vertical-align: top;
+    font-size: 12px;
+}
+
+.infoContent ul li .text-overflow a {
+    color: #333;
+}
+
+.infoContent ul li .text-overflow a:hover {
+    color: #f90
+}
+
+.infoContent .Tinyfold .item h4 {
+    background: #f8f8f8;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.shrinkage .edui-Box {
+    margin-left: 6px;
+}
+
+.shrinkage .edui-Box .titleNames {
+    display: block;
+    margin-bottom: 6px;
+    margin-left: 8px;
+}
+
+.adjustTable tbody tr th {
+    width: 40%;
+    text-align: right;
+}

@@ -1,0 +1,186 @@
+#!set(activeTitle="FAQ",activeMenuId=currentPageId)
+<style>
+    .tabLayout .tabBar span a {
+        color: #333
+    }
+
+    .tabLayout .tabBar .Current a {
+        color: #fff
+    }
+
+    .operationbar {
+        border-top: none;
+        background: #f9fafe;
+        padding: 6px 5px 6px 10px;
+    }
+
+    .formText {
+        margin-top: -6px;
+        border: #eee 1px solid;
+        padding: 2px 0 16px
+    }
+</style>
+
+##   #include("/common/common.page")
+#@div()
+    #@div(divClass="tabLayout")
+        #@div(divClass="tabBar cl")
+ ##       <span><a href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7
+  ##    ">用户</a></span>
+  ##      <span><a href="${TINY_CONTEXT_PATH}/organization/gtasks.page?currentPageId=7
+  ##    ">待办</a></span>
+  ##      <span><a href="${TINY_CONTEXT_PATH}/organization/log.page?currentPageId=7
+  ##     ">日志</a></span>
+ ##       <span><a href="${TINY_CONTEXT_PATH}/organization/active.page?currentPageId=7
+ ##      ">动态</a></span>
+##        <span><a href="${TINY_CONTEXT_PATH}/organization/department.page?currentPageId=7
+##       ">部门</a></span>
+ ##       <span><a href="${TINY_CONTEXT_PATH}/organization/privilege.page?currentPageId=7
+ ##       ">权限</a></span>
+ ##       <span class="Current"><a href="${TINY_CONTEXT_PATH}/organization/company.page?
+ ##          currentPageId=7
+  ##     ">公司</a></span>
+
+
+        #end
+    #end
+
+
+    #import("/org/tinygroup/table/components/table.component")
+    #import("/org/tinygroup/button/components/button_common.component")
+    #import("/org/tinygroup/button/components/button.component")
+    #import("/org/tinygroup/form/components/form.component")
+    #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+
+
+
+    #@div(divClass="operationbar")
+    #*    <span style="padding-top:5px;float:left">
+
+         <a href="#">公司信息</a>
+
+     </span>      *#
+    <span style="padding-top: 5px;float: right">
+            #@aModal("#myModal" "编辑公司" "600" "400" "" "/organization/updateCompany.pagelet")
+
+                #@simpleI("icon-edit")编辑#end
+
+            #end
+        #@dialog("myModal")
+            #@dialogHeader()公司#end
+            #@dialogBody()<p></p>#end
+        #end
+        </span>
+
+        #div(divClass="clearfix")
+    #end
+
+   #@tinyForm("thisform" "" "" {"class":"formText"})
+ #*       #@elementItem()
+            #@colLabel()公司称谓：#end
+            #@formControlDiv("col-8")
+            <p>123</p>
+            #end
+            #@validateDiv("col-2")#end
+        #end                                  *#
+
+
+        #@elementItem()
+        <div><b>1.如何初始化项目管理数据库？</b></div>
+        <p>把zentao/config/my.php 里面install的值改成false。</p>
+        <p>访问禅道，会自动进入安装页面，所有数据都会清空。</p>
+        #end
+
+       #@elementItem()
+       <div><b>2.项目里面的版本和测试的版本有什么区别？</b></div>
+       <p>项目→版本：是开发人员针对代码创建的标记，用于提交给测试部门测试。</p>
+       <p>测试→版本：是给测试人员的测试任务，需要测试人员在里面执行测试用例。</p>
+       #end
+
+       #@elementItem()
+       <div><b>3.怎么维护项目的模块？</b></div>
+       <p>项目中关联的需求在产品中的模块。</p>
+       <p>项目也可以维护自己的模块：先取消关联产品，然后维护模块，维护完成后再关联上产品。</p>
+       #end
+
+       #@elementItem()
+       <div><b>4.能将项目转交给别人吗？</b></div>
+       <p>项目→概况里编辑负责人即可。</p>
+       #end
+
+       #@elementItem()
+       <div><b>5.访问项目管理，可以绑定域名吗？</b></div>
+       <p>可以使用域名，配置apache的虚拟主机即可。</p>
+       <p>可以参考 http://www.zentao.net/book/zentaopmshelp/131.html</p>
+       #end
+
+
+ #*       #@elementItem()
+            #@colLabel()联系电话：#end
+            #@formControlDiv("col-8")
+            <p>123</p>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()传真：#end
+            #@formControlDiv("col-8")
+            <p>123</p>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+
+        #@elementItem()
+            #@colLabel()通讯地址：#end
+            #@formControlDiv("col-8")
+            <p>123</p>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()邮政编码：#end
+            #@formControlDiv("col-8")
+            <p>123</p>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+
+        #@elementItem()
+            #@colLabel()官网：#end
+            #@formControlDiv("col-8")
+            <p>123</p>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()对象：#end
+            #@formControlDiv("col-8")
+            <p>123</p>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+
+        #@elementItem()
+            #@colLabel()内网：#end
+            #@formControlDiv("col-8")
+            <p>123</p>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+
+        #@elementItem()
+            #@colLabel()匿名登录：#end
+            #@formControlDiv("col-8")
+            <p>123</p>
+            #end
+            #@validateDiv("col-2")#end
+        #end                      *#
+
+
+    #end
+
+#end

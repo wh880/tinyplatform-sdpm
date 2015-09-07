@@ -3,8 +3,18 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
+
+<style>
+#*.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}*#
+.b {margin-left: 8px;}
+#*.infoContent{ margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
+.infoContent .titleName{margin-top:-19px;margin-bottom:8px;font-weight:bold;font-size:13px;}*#
+</style>
+
 #include("/project/task/taskMenu.page")
-#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+#*#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 	#@toggleLeft({"class":"aclass"})
 	   #@settoggleLeftTitle()产品文档库#end
 		#@settoggleLeftBody("treeLeftbox")
@@ -16,11 +26,11 @@
 			<ul id="treeDrag" class="ztree"></ul>
 		#end
 	#end
-#@toggleRight()
+#@toggleRight()*#
   
    #@tinyForm("thisform" "" "" {"class":"test"})
  
-    
+    <div style="width:50%;float:left">
     #@elementItem()
     
 		
@@ -63,40 +73,28 @@
              #@td()
 				#@colLabel() #end
 					<a style:float:left href="${TINY_CONTEXT_PATH}/project/task/index.page">#buttonRadiusPrimary(caption="保存")</a>
-      				
+      			
 			#end
-	#@elementItem()
-	
-	
-	#@colLabel()历史记录&nbsp #end
-	#@formControlDiv("col-8")
-	#@foldMenu("" "Tinyfold3" "" "width:100%")
-    #@foldItem("2015-08-26 09:19:52, 由 Demo 指派给 Demo")记录详情<br>
-		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
-	 #end
-	 #@foldItem("2015-08-25 09:15:58, 由 Demo 开始启动")记录详情<br>
-		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
-	 #end
-	 #@foldItem("2015-08-24 09:16:58, 由 Demo 指派给 Mack")记录详情<br>
-		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
-	 #end
-    #end
-     #end
-    
-  #end
-  #end
+	</div>
  #end
- 
- <script type="text/javascript">
+	<div style="width:50%;float:right">
+		#@div(divClass="infoContent")
+	        <p class="titleName">历史记录</p>
+	        ##加入后，js代码会导致页面排版混乱
+	       	#include("/project/recordlist.page")
+		#end
+  	</div>
+
+#* <script type="text/javascript">
  $(function(){
 	$(".Hui_aside").scrollTop(380);
 	/*折叠*/
 	/*5个参数顺序不可打乱，分别是：相应区,隐藏显示的内容,速度,类型,事件*/
 	$.Tinyfold("#Tinyfold3 .item h4","#Tinyfold3 .item .info","",3,"click");
   });
-  </script>
+  </script>*#
   
-  <script type="text/javascript">
+#*  <script type="text/javascript">
 		<!--
 		var setting = {
 			view: {
@@ -334,5 +332,4 @@
 			$("#callbackTrigger").bind("change", {}, setTrigger);
 		});
 		//-->
-	</script>
-#end	
+	</script>*#

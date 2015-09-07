@@ -17,19 +17,24 @@
         padding: 6px 5px 6px 10px;
     }
 </style>
+#set(name="organizationPrivilege")
 #include("/common/common.page")
-#@div()
-    #@div(divClass="tabLayout")
-        #@div(divClass="tabBar cl")
-        <span><a href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7">用户</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/gtasks.page?currentPageId=7">待办</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/log.page?currentPageId=7">日志</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/active.page?currentPageId=7">动态</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/department.page?currentPageId=7">部门</a></span>
-        <span class="Current"><a
-                href="${TINY_CONTEXT_PATH}/organization/privilege.page?currentPageId=7">权限</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/company.page?currentPageId=7">公司</a></span>
-        #end
+
+## #@div(divClass="tabLayout")
+##        #@div(divClass="tabBar cl")
+##        <span><a href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7">用户</a></span>
+##        <span><a href="${TINY_CONTEXT_PATH}/organization/gtasks.page?currentPageId=7">待办</a></span>
+##        <span><a href="${TINY_CONTEXT_PATH}/organization/log.page?currentPageId=7">日志</a></span>
+##        <span><a href="${TINY_CONTEXT_PATH}/organization/active.page?currentPageId=7">动态</a></span>
+##        <span><a href="${TINY_CONTEXT_PATH}/organization/department.page?currentPageId=7">部门</a></span>
+##        <span class="Current"><a
+##                href="${TINY_CONTEXT_PATH}/organization/privilege.page?currentPageId=7">权限</a></span>
+##        <span><a href="${TINY_CONTEXT_PATH}/organization/company.page?currentPageId=7">公司</a></span>
+##        #end
+
+#@tabHead()
+    #include("/organization/tab.page")
+#end
 
         #@div(divClass="operationbar")
         <span class="f">
@@ -56,7 +61,7 @@
             #@div(divBaseClass="tinyheaderTools form-inline")
                 #setTinyTablePageSize([8,10,20,50,100,200])
             #end
-            #@tinyTableContent(TINY_CONTEXT_PATH+"/organizationTable/privilegeTable.pagelet" 81) ##取数据地址 总数据
+            #@tinyTableContent(TINY_CONTEXT_PATH+"/organization/table/privilegeTable.pagelet" 81) ##取数据地址 总数据
                 #@thead()
                     #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                         #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
@@ -70,8 +75,8 @@
             #end
         #end
     ##        #end
-    #end
-#end
+## #end
+
 
 #simpleModal(editpageModalId)
 
@@ -86,13 +91,13 @@
             //console.log($(this).attr("itemId"))
             // user_del(this, '1');
             var that = this;
-            layer.confirm('qurang', function (index) {
+            layer.confirm('确定要删除该用户？', function (index) {
                 //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
                 //$.ajax()
                 //console.log(index);
-                layer.msg($("确定要删除该用户？").attr("itemId"), 1);
+                layer.msg($("已删除").attr("deleteList"), 1);
             }, function (index) {
-                //layer.msg('fdsfdfdsf',1)
+                layer.msg('已删除', 1)
             })
         });
     });

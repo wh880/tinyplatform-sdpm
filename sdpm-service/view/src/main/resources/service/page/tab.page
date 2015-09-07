@@ -1,4 +1,3 @@
-#@aHeadCol(TINY_CONTEXT_PATH+"/service/page/clientUser.page" name=="client"?"Current":"")客户#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/service/page/request.page" name=="request"?"Current":"")需求#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/service/page/sla.page" name=="sla"?"Current":"")协议#end
-#@aHeadCol(TINY_CONTEXT_PATH+"/service/page/faqmenu.page" name=="faq"?"Current":"")FAQ#end
+#foreach(m in menuManager.getChildMenus("service"))
+    #@aHeadCol(TINY_CONTEXT_PATH+m.href m.id==name?"Current":"")${m.name}#end
+#end

@@ -1,154 +1,107 @@
-#!set(activeTitle="FAQ",activeMenuId=currentPageId)
+###!set(activeTitle="左侧树",activeMenuId="1.4")
+#import("/org/tinygroup/zTree/components/zTree.component")
+#!set(activeTitle="服务管理",activeMenuId=currentPageId)
+##     #import("/fulimanageui/form.component")
 <style>
-    .tabLayout .tabBar span a {
-        color: #333
-    }
-
-    .tabLayout .tabBar .Current a {
-        color: #fff
-    }
-
-    .operationbar {
-        border-top: none;
-        background: #f9fafe;
-        padding: 6px 5px 6px 10px;
-    }
-
-    .formText {
-        margin-top: -6px;
-        border: #eee 1px solid;
-        padding: 2px 0 16px
-    }
+   .faqSty{margin:5px;padding:10px 12px;border: none;}
 </style>
-#include("/common/common.page")
+#macro ztreeClick()
+if(!treeNode.isParent){
+loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
+}
+#end
+
+
+#set(name="request")
 #@div()
-    #@div(divClass="tabLayout")
-        #@div(divClass="tabBar cl")
-        <span><a href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7
-">用户</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/gtasks.page?currentPageId=7
-">待办</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/log.page?currentPageId=7
-">日志</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/active.page?currentPageId=7
-">动态</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/department.page?currentPageId=7
-">部门</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/privilege.page?currentPageId=7
-">权限</a></span>
-        <span class="Current"><a href="${TINY_CONTEXT_PATH}/organization/company.page?currentPageId=7
-">公司</a></span>
-
-
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/service/page/dropdownMenu.page")
         #end
-    #end
-
-
-    #import("/org/tinygroup/table/components/table.component")
-    #import("/org/tinygroup/button/components/button_common.component")
-    #import("/org/tinygroup/button/components/button.component")
-    #import("/org/tinygroup/form/components/form.component")
-    #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
-
-
-
-    #@div(divClass="operationbar")
-    <span style="padding-top:5px;float:left">
-
-        <a href="#">公司信息</a>
-
-    </span>
-    <span style="padding-top: 5px;float: right">
-            #@aModal("#myModal" "编辑公司" "600" "400" "" "/organization/updateCompany.pagelet")
-
-                #@simpleI("icon-edit")编辑#end
-
-            #end
-        #@dialog("myModal")
-            #@dialogHeader()公司#end
-            #@dialogBody()<p></p>#end
-        #end
-        </span>
-
-        #div(divClass="clearfix")
-    #end
-
-    #@tinyForm("thisform" "" "" {"class":"formText"})
-        #@elementItem()
-            #@colLabel()公司名称：#end
-            #@formControlDiv("col-8")
-            <p>123</p>
-            #end
-            #@validateDiv("col-2")#end
+        #@tabHead()
+            #include("/service/page/tab.page")
         #end
 
+        #@tabBodyCol("ptop-5")
+        ##operationbar star
+            #@div(divClass="operationbar")
+            <span class="f">
+					<a href="#" class="active_btn">未关闭</a>
+					<a href="#">全部请求</a>
+					<a href="#">指派给我</a>
+					<a href="#">由我创建</a>
+					<a href="#">由我评审</a>
+					<a href="#">由我关闭</a>
+					<a href="#">草稿</a>
+					<a href="#">激活</a>
+					<a href="#">已变更</a>
+					<a href="#">待关闭</a>
+					<a href="#">已关闭</a>
+					<a href="#">#buttonIcon(iconClass="icon-search")搜111索</a>
+				</span>
+            <span class="r">
 
-        #@elementItem()
-            #@colLabel()联系电话：#end
-            #@formControlDiv("col-8")
-            <p>123</p>
+                <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
+				</span>
+                #div(divClass="clearfix")
+                #include("/service/page/multiSearch.page")
             #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()传真：#end
-            #@formControlDiv("col-8")
-            <p>123</p>
-            #end
-            #@validateDiv("col-2")#end
-        #end
-
-
-        #@elementItem()
-            #@colLabel()通讯地址：#end
-            #@formControlDiv("col-8")
-            <p>123</p>
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()邮政编码：#end
-            #@formControlDiv("col-8")
-            <p>123</p>
-            #end
-            #@validateDiv("col-2")#end
-        #end
-
-
-        #@elementItem()
-            #@colLabel()官网：#end
-            #@formControlDiv("col-8")
-            <p>123</p>
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()对象：#end
-            #@formControlDiv("col-8")
-            <p>123</p>
-            #end
-            #@validateDiv("col-2")#end
-        #end
-
-
-        #@elementItem()
-            #@colLabel()内网：#end
-            #@formControlDiv("col-8")
-            <p>123</p>
-            #end
-            #@validateDiv("col-2")#end
-        #end
-
-
-        #@elementItem()
-            #@colLabel()匿名登录：#end
-            #@formControlDiv("col-8")
-            <p>123</p>
-            #end
-            #@validateDiv("col-2")#end
+        ##operationbar end
         #end
 
 
     #end
 
+
+
+
+###@h2()${activeTitle}#end
+#@divDataTablebox()
+    #@tableHeaderBar()${activeTitle}#end
+    #@leftTreeCol()
+ ##         #@searchZtreeWithInit("treeDemo" "height:454px;" "/admin/product/tree")
+        #@searchZtreeWithInit("treeDemo" "height:454px;" "/service/js/service1.js")
+
+        #end
+    #end
+
+    ##页面右边
+    #@tableBox("tBox")
+
+#*       #@elementItem()
+        <div><b>公司称谓wen</b></div>
+        <p>123</p>
+        <p>123</p>
+        #end       *#
+
+        #@div(divClass="faqSty")
+            #@OlTopList()
+                #topItem(1 "../page/questiondb.page" "如何初始化项目管理数据库？" "18:12")
+                #normalLiItems(2 "../page/questiondb.page" "项目里面的版本和测试的版本有什么区别？" "14:12" "green")
+                #normalLiItems(3 "../page/questiondb.page" "怎么维护项目的模块？" "13:12" "darkGreen")
+                #normalLiItems(4 "../page/questiondb.page" "能将项目转交给别人吗？" "11:12" "grey")
+                #normalLiItems(5 "../page/questiondb.page" "访问项目管理，可以绑定域名吗？" "09:12")
+            #end
+        #end
+
+
+
+
+
+    #end
+#end
+<script type="text/javascript">
+    $("#tBox").on("click", ".treeview", function () {
+        loadURL($(this).attr("href"), $("#tBox"));
+        return false;
+    });
+    $("#example").on("click", ".deleteitem", function () {
+        var that = this;
+        layer.confirm('确认要删除吗？', function (index) {
+            window.location.href = $(that).attr("href");
+        });
+        return false;
+    });
+
+</script>
 #end
