@@ -18,11 +18,10 @@
         #@td()123@688.com#end
         #@td()男#end
         #@td()1234556667#end
-        #@td()2015-08-21#end
-        #@td()2015-08-21#end
+        #@td()1234556667#end
         #@td()
-            #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/organization/userAdd.pagelet" "ml-5")
-            #iconOperations("#myModal2" "icon-remove" "删除" "550" "150" "/organization/userDelect.pagelet" "ml-5")
+            #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/service/page/clientEdit.pagelet" "ml-5")
+            #iconOperations("#myModal2" "icon-remove" "删除" "550" "100" "/service/page/clientDelect.pagelet" "ml-5")
         #end
     #end
 #end
