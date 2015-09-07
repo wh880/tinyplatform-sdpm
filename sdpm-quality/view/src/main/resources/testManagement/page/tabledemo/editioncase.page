@@ -9,7 +9,7 @@
 </style>
 
 
-#set(name="case")
+#set(name="qualityCases")
 #@div()
 #@tabWithInit("tab_demo" "optionsBox")
 	#@div(divClass="dropdownBox")
