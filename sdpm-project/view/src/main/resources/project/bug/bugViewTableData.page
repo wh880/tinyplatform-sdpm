@@ -21,12 +21,12 @@
 	#@td()67#end
 	#@td()￥320,800#end
 	 #@td()
-		#iconOperations("#myModal" "icon-search" "确认" "865" "448" "/project/bug/commit.pagelet" "ml-5")
-		#iconOperations("#myModal" "icon-hand-right" "指派" "865" "448" "/project/bug/call.pagelet" "ml-5")
-		#iconOperations("#myModal" "icon-ok-sign" "解决" "865" "448" "/project/bug/solve.pagelet" "ml-5")
-		#iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/project/bug/close.pagelet" "ml-5")
-		#iconOperations("#myModal" "icon-pencil" "编辑" "865" "448" "#" "ml-5")
-		#iconOperations("#myModal" " icon-copy" "复制" "865" "448" "#" "ml-5")		
+	 	<a href="${TINY_CONTEXT_PATH}/project/bug/commit.page" title="确认">#buttonIcon(iconClass="icon-search")</a>
+		<a href="${TINY_CONTEXT_PATH}/project/bug/call.page" title="指派">#buttonIcon(iconClass="icon-hand-right")</a>
+		<a href="${TINY_CONTEXT_PATH}/project/bug/solve.page" title="解决">#buttonIcon(iconClass="icon-ok-sign")</a>
+		<a href="${TINY_CONTEXT_PATH}/project/bug/close.page" title="关闭">#buttonIcon(iconClass="icon-off")</a>
+		<a href="#" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
+		<a href="#" title="复制">#buttonIcon(iconClass="icon-copy")</a>		
 	#end
 #end
 #end

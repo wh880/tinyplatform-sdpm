@@ -1,14 +1,9 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/button/components/button_common.component")
-
 #import("/org/tinygroup/button/components/button.component")
-
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
-
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-
-
 #!set(linkName="plan",sonitem="<li>"+"计划"+"</li>")
 
 <style>
@@ -37,60 +32,9 @@
 				</span>#div(divClass="clearfix")
 				
 	#end
-
-
-#@toggleBox({"class":"open shrinkage"})
-
-
 	
-
-	#@toggleLeft({"class":"aclass"})
-		#@settoggleLeftTitle("fa-bullhorn")&nbsp;相关信息#end
-		
-		#@div(divClass="infoContent")
-	        <p class="titleName">描述</p>123456
-	       	<span>
-	       		撒啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊 
-            </span>
-        #end
-        
-        #@div(divClass="infoContent")
-	        <p class="titleName">基本</p>123456
-		      <ul>
-		      	<li> 
-		      		<label>名称：</label>
-			       	#@span(spanClass="text-overflow")
-						<span> 计划XXX
-                        </span>
-					#end
-                </li>
-                <li> 
-		      		<label>开始日期：</label>
-			       	#@span(spanClass="text-overflow")
-						<span>
-							XXX.XXX.XXX
-						</span>
-					#end
-                </li>
-                <li> 
-		      		<label>结束日期：</label>
-			       	#@span(spanClass="text-overflow")
-						<span>
-							XXX.XXX.XXX
-						</span>
-					#end
-                </li>
-		      </ul>
-        #end
-      	
-      	#@div(divClass="infoContent")
-	        <p class="titleName">历史记录</p>
-	       	#include("/product/page/tabledemo/historyrecord.page")
-		#end
-	#end
-	
-	#@toggleRight()
-		
+#@tabWithInit("tab_demo" "optionsBox")
+<div style="width:65%;float:left">
 		#@div()
 			#@tabWithInit("tab_demo" "optionsBox")
 				
@@ -118,5 +62,102 @@
 			
 			#end
 		#end
-	#end
+</div>
+
+	#include("/product/page/tabledemo/relation-plan/planbaseinfo.page")
+
 #end
+
+
+
+
+
+
+
+
+
+
+
+
+##
+###@toggleBox({"class":"open shrinkage"})
+##
+##
+##	
+##
+##	#@toggleLeft({"class":"aclass"})
+##		#@settoggleLeftTitle("fa-bullhorn")&nbsp;相关信息#end
+##		
+##		#@div(divClass="infoContent")
+##	        <p class="titleName">描述</p>123456
+##	       	<span>
+##	       		撒啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊 
+##            </span>
+##        #end
+##        
+##        #@div(divClass="infoContent")
+##	        <p class="titleName">基本</p>123456
+##		      <ul>
+##		      	<li> 
+##		      		<label>名称：</label>
+##			       	#@span(spanClass="text-overflow")
+##						<span> 计划XXX
+##                        </span>
+##					#end
+##                </li>
+##                <li> 
+##		      		<label>开始日期：</label>
+##			       	#@span(spanClass="text-overflow")
+##						<span>
+##							XXX.XXX.XXX
+##						</span>
+##					#end
+##                </li>
+##                <li> 
+##		      		<label>结束日期：</label>
+##			       	#@span(spanClass="text-overflow")
+##						<span>
+##							XXX.XXX.XXX
+##						</span>
+##					#end
+##                </li>
+##		      </ul>
+##        #end
+##      	
+##      	#@div(divClass="infoContent")
+##	        <p class="titleName">历史记录</p>
+##	       	#include("/product/page/tabledemo/historyrecord.page")
+##		#end
+##	#end
+##	
+##	#@toggleRight()
+##		
+##		#@div()
+##			#@tabWithInit("tab_demo" "optionsBox")
+##				
+##				#@tabHead()
+##					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="demand"?"Current":"")
+##						#@buttons("","icon-lightbulb")
+##							已关联需求列表
+##						#end
+##					#end
+##					
+##					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="bug"?"Current":"")
+##						#@buttons("","icon-bug green")
+##							已关联Bug列表
+##						#end
+##					#end
+##				#end
+##				
+##				#@tabBodyCol("ptop-5")
+##					
+##					
+##					#pageContent
+##				
+##			
+##				#end
+##			
+##			#end
+##		#end
+##	#end
+###end

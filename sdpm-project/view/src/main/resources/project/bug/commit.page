@@ -3,8 +3,43 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
-#@tinyForm("thisform" "" "" {"class":"test"})
-    
+<style>
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.infoContent{ margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
+.infoContent .titleName{margin-top:-19px;margin-bottom:8px;font-weight:bold;font-size:13px;}
+</style>
+#include("/project/event/common.page")
+#set(name="bug")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/project/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/project/protab.page")							
+				<a href="${TINY_CONTEXT_PATH}/project/addProject.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				<a href="${TINY_CONTEXT_PATH}/project/allProject.page" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+			#end				
+			#@tabBodyCol("ptop-5")
+			#@div(divClass="operationbar")
+				<span class="f">
+					Bug列表
+				</span>
+				<span class="r ">
+					<a href="#">#buttonIcon(iconClass="icon-plus")提BUG</a>
+				</span>
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+		
+#end
+#end
+#end
+#@div(divClass="operationbar")
+	bug名称>确认</span>		
+#end
+#@tinyForm("thisform" "" "" {"class":"test"}) 
+	<div style="width:50%;float:left"> 
     #@elementItem()
 		#@colLabel()指派给：#end
 		#@formControlDiv("col-8")
@@ -49,23 +84,16 @@
 	<a href="#">#buttonRadiusPrimary(caption="保存")</a>
 	#@validateDiv("col-2")#end
 	#end
-	
-	#@elementItem()
-	#@colLabel()历史记录：#end
+	</div>
+	<div style="width:50%;float:right">
+	#@elementItem(eleItemClass="infoContent")
+	#@colLabel(labelClass="titleName")历史记录：#end
 	#@formControlDiv("col-10")
 	#@foldMenu("" "Tinyfold3" "" "width:100%")
-    #@foldItem("2015-08-26 09:19:52, 由 Demo 指派给 Demo")记录详情<br>
-		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
-	 #end
-	 #@foldItem("2015-08-25 09:15:58, 由 Demo 开始启动")记录详情<br>
-		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
-	 #end
-	 #@foldItem("2015-08-24 09:16:58, 由 Demo 指派给 Mack")记录详情<br>
-		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
-	 #end
+    	#include("/project/recordlist.page")
     #end
      #end
-    
+    </div>
   #end
 <script type="text/javascript">
 $(function(){

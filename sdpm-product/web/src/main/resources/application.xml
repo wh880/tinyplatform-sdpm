@@ -35,7 +35,6 @@
 		<!-- <application-processor bean="logAdapterProcessor"></application-processor>
 		<application-processor bean="encryptionProcessor"></application-processor> -->
 		<application-processor bean="tinyTemplateConfigProcessor"></application-processor>
-		<application-processor bean="tinyTemplateConfigProcessor"></application-processor>
 	</application-processors>
 
 	<!-- 这里是文件搜索器相关配置，如果配置请参考file-resolver-configuration配置手册 -->
@@ -44,7 +43,12 @@
 		<class-paths>
 			<!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
 			<class-path path="E:\TinyWork\sdpm\sdpm-product\view\src\main\resources" />
-	<class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources" /> 
+			<class-path path="E:\git\sdpm\sdpm-common\view\src\main\resources"/>
+			<class-path path="D:\sdpm\sdpm-service\view\src\main\resources"/>
+			<class-path path="E:\git\sdpm\sdpm-service\view\src\main\resources"/>
+			<class-path path="D:\webspaces\sdpm\sdpm-service\view\src\main\resources"/>
+			<class-path path="F:\sdpm\sdpm-service\view\src\main\resources"/>
+			<class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources" /> 
 					
  		</class-paths>
 		<include-patterns>
@@ -518,14 +522,7 @@
 	</tiny-processors>
 
 	<!--tiny-filters配置 -->
-	<tiny-filters> </tiny-filter>
-
-            <tiny-filter id="commonFilter" bean="commonFilter">
-                    <filter-mapping url-pattern=".*"></filter-mapping>
-            </tiny-filter>
-	
-	
-	
+	<tiny-filters>
 		<tiny-wrapper-filter id="tinyFilterWrapper" class="tinyFilterWrapper">
 			<init-param name="filter_beans" value="gZIPFilter"></init-param>
 			<filter-mapping url-pattern=".*"></filter-mapping>
@@ -533,6 +530,9 @@
 		<tiny-filter id="basicTinyFilter" class="basicTinyFilter">
 			<filter-mapping url-pattern=".*"></filter-mapping>
 			<init-param name="maxCookieSize" value="5K"></init-param>
+		</tiny-filter>
+		<tiny-filter id="commonFilter" bean="commonFilter">
+			<filter-mapping url-pattern=".*"></filter-mapping>
 		</tiny-filter>
 		<tiny-filter id="setLocaleTinyFilter" class="setLocaleTinyFilter">
 			<filter-mapping url-pattern=".*"></filter-mapping>
@@ -568,8 +568,8 @@
 			<filter-mapping url-pattern=".*"></filter-mapping>
 		</tiny-filter>
 		<tiny-filter id="commonFilter" bean="commonFilter">
-            <filter-mapping url-pattern=".*"></filter-mapping>
-    </tiny-filter>
+			<filter-mapping url-pattern=".*"></filter-mapping>
+		</tiny-filter>
 		<!--<tiny-wrapper-filter id="tinyFilterWrapper" class="tinyFilterWrapper"> 
 			value值可以是多个实现http filter接口的bean名称，多个以","分隔开 <init-param name="filter_beans" 
 			value="encondingHttpFilter"></init-param> <filter-mapping url-pattern=".*"></filter-mapping> 
@@ -580,8 +580,6 @@
 		<!--<listener-bean name=""></listener-bean> -->
 		<!--<context-param name="" value=""></context-param> -->
 	</tiny-listener>
-	
-	
 
 
 	<parser>
@@ -640,7 +638,7 @@
 	</jcs-config>
 
 	<!--文件监控器配置参数，具体参见FileMonitorProcessor配置管理手册，interrupt扫描间隔时间，单位秒 -->
-	<file-monitor interval="10" enable="true" />
+	<file-monitor interval="10" enable="false" />
 
 	<gzip-filter max-content-length="0">
 		<!-- 多个content-type已分号隔开 -->
@@ -655,7 +653,7 @@
 
 	<template-config templateExtFileName="page"
 		layoutExtFileName="layout" componentExtFileName="component">
-		<init-param name="engineId" value="fuliEngine" ></init-param>
+		<init-param name="engineId" value="projectEngine" ></init-param>
 	</template-config>
 
 </application>

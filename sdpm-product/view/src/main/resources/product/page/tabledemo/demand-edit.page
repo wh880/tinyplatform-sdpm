@@ -2,6 +2,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="产品概况",activeMenuId=currentPageId)
+#!set(linkName="demand",sonitem="<li>"+"需求"+"</li>")
 #!set(linkName="demand",sonitem="<li>"+"概况"+"</li>")
 <style>
 .infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}

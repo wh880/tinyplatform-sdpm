@@ -7,12 +7,10 @@
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				
+				#@aModal("#myModal" "批量编辑" "1200" "500" "btn radius btn-danger" "/product/page/tabledemo/product-editall.pagelet")批量编辑#end
 				#@div(divClass="dropdownBox")
 					#include("/product/page/project/dropdownMenu.page")
 				#end
-				
-				#@aModal("#myModal" "批量编辑" "1200" "500" "btn-success btn-sm" "/product/page/tabledemo/product-editall.pagelet")批量编辑#end
-				
 			#end
 			#@tinyTableContent("../../data/allproductdata.pagelet") ##取数据地址 总数据
 				#@thead()
