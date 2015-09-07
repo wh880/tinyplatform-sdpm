@@ -23,7 +23,7 @@
 .infoContent .tableInfoes tr{height:30px; line-height:40px;}
 #*h3 {line-height: 1.2;}*#
 </style>
-<div style="width:35%;float:right">
+<div>
 	#@div(divClass="infoContent")		
 			<p class="titleName">基本信息</p>
 			<table class="tableInfoes">
@@ -266,5 +266,8 @@
 	
 
 <script type="text/javascript">
+$(function(){
 	$(".select2").select2();
+});
+	
 </script>
