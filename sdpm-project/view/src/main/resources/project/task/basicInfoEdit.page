@@ -1,5 +1,5 @@
 <style>
-.tabLayout .tabBar span a{color:#333}
+#*.tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
 .infoContent{ margin:18px 4px 10px 5px; padding:6px;font-weight:bold;border:#eee 1px solid;}
 .infoContent .titleName{margin-top:-16px;margin-bottom:8px;font-weight:bold;font-size:13px;}
@@ -7,7 +7,7 @@
 .tabLayout .tabBar .Current a{color:#fff}
 
 .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
-.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+.btn-group #Dropdown{background:none;border:none;padding:0 3px}*#
 .open #downMenuSty{min-width:75px}
 .caret {
     display: inline-block;
@@ -20,12 +20,13 @@
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
 }
-h3 {line-height: 1.2;}
+.infoContent .tableInfoes tr{height:30px; line-height:40px;}
+#*h3 {line-height: 1.2;}*#
 </style>
 <div style="width:35%;float:right">
 	#@div(divClass="infoContent")		
 			<p class="titleName">基本信息</p>
-			<table>
+			<table class="tableInfoes">
 				<tr>
 					<td style="float:right;padding:0px 10px;font-size:15px">所属项目</td>
 					<td style="width:75%">
@@ -135,7 +136,7 @@ h3 {line-height: 1.2;}
 	#end
 	#@div(divClass="infoContent")
 		<p class="titleName">工时信息</p>
-		<table>
+		<table class="tableInfoes">
 			<tr>
 				<td style="float:right;padding:3px 10px;font-size:15px">预计开始</td>
 				<td style="width:75%">
@@ -162,8 +163,8 @@ h3 {line-height: 1.2;}
 			</tr>
 			<tr>
 				<td style="float:right;padding:3px 10px;font-size:15px">最初预计</td>
-				<td style="width:75%">
-					<input type="text" value="天" />
+				<td style="width:54%">
+					<input type="text" value="天" style="height:33px" />
 				</td>
 			</tr>
 			<tr>
@@ -177,14 +178,14 @@ h3 {line-height: 1.2;}
 			<tr>
 				<td style="float:right;padding:3px 10px;font-size:15px">预计剩余</td>
 				<td style="width:75%">
-					<input type="text" value="天" />
+					<input type="text" value="天" style="height:33px" />
 				</td>
 			</tr>
 		</table>
 	#end
 	#@div(divClass="infoContent")
 		<p class="titleName">任务的一生</p>
-		<table>
+		<table class="tableInfoes">
 			<tr>
 				<td style="float:right;padding:3px 5px;font-size:15px">由谁创建</td>
 				<td>admin</td>
@@ -205,7 +206,7 @@ h3 {line-height: 1.2;}
 			<tr>
 				<td style="float:right;padding:3px 5px;font-size:15px">完成时间</td>
 				<td style="width:75%">
-					<input type="text" style="width:210px" />
+					<input type="text" style="width:210px;height:33px" />
 				</td>
 			</tr>
 			<tr>
@@ -224,7 +225,7 @@ h3 {line-height: 1.2;}
 			<tr>
 				<td style="float:right;padding:3px 5px;font-size:15px">取消时间</td>				
 				<td>
-					<input type="text" style="width:210px" />
+					<input type="text" style="width:210px;height:33px" />
 				</td>				
 			</tr>
 			<tr>
@@ -256,7 +257,7 @@ h3 {line-height: 1.2;}
 			<tr>
 				<td style="float:right;padding:3px 5px;font-size:15px">关闭时间</td>				
 				<td>
-					<input type="text" style="width:210px" />
+					<input type="text" style="width:210px;height:33px" />
 				</td>				
 			</tr>
 		</table>

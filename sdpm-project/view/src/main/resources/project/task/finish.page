@@ -1,13 +1,13 @@
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
 <style>
-.infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
+#*.infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
 .infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:13px;}
 .infoContent ul li label{font-weight:normal; width:33%;font-size:12px;}
 .infoContent ul li .text-overflow{display:inline-block; width:64%;vertical-align:top;font-size:12px;}
 .infoContent ul li .text-overflow a{ color:#333;}
 .infoContent ul li .text-overflow a:hover{color:#f90}
-.infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}
+.infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}*#
 
 </style>
 #include("/project/task/taskMenu.page")

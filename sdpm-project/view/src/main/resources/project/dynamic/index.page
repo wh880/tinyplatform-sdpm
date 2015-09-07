@@ -1,8 +1,8 @@
 #!set(activeTitle="项目管理",activeMenuId=currentPageId)
 #import("/org/tinygroup/dropDown/components/dropDown.component")
 <style>
-.tabLayout .tabBar span a{color:#333}
-.tabLayout .tabBar .Current a{color:#fff}
+#*.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}*#
 .caret {
     display: inline-block;
     width: 0;
@@ -13,8 +13,8 @@
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
 }
-.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
-.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+#*.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.btn-group #Dropdown{background:none;border:none;padding:0 3px}*#
 </style>
 
 
@@ -27,7 +27,7 @@
 			#end
 			#@tabHead()
 				#include("/project/protab.page")							
-				<span class="r" style="position:relative;top:-6px;height:0">
+				<span class="r" style="position:relative;top:2px;height:0">
 					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
 					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
 				</span>

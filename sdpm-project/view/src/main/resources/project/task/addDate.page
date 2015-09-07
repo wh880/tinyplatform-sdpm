@@ -1,9 +1,9 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 
-#@div(divClass="operationbar")
-	建任务
-#end	
+<span class="f" style="font-size:15px">建任务</span>
+	
+	
 #@tinyForm("thisform" "" "" {"class":"test"})
      #@elementItem()
         #@colLabel()所属项目：#end

@@ -1,10 +1,10 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="项目管理",activeMenuId=currentPageId)
 <style>
-.tabLayout .tabBar span a{color:#333}
+#*.tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
-.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
-.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+.operationbar{background:#f9fafe;padding:6px 5px 6px 10px;}
+.btn-group #Dropdown{background:none;border:none;padding:0 3px}*#
 .open #downMenuSty{min-width:75px}
 .caret {
     display: inline-block;
@@ -17,19 +17,9 @@
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
 }
-h3 {line-height: 1.2;}
+#*h3 {line-height: 1.2;}*#
 </style>
-#*<style>
-##.tabLayout .tabBar span a{color:#333}
-##.tabLayout .tabBar .Current a{color:#fff}
-.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
-.operationbar a{padding:2px 3px;display:inline-block;margin-right:0;border-radius:3px;}
-.operationbar a:hover{background:#ddd;color:#333;}
-.operationbar .active_btn:hover{background:none;}
-.btn-group #Dropdown{background:none;border:none;padding:0 3px}
-.open>#downMenuSty{min-width:70px}
-</style>*#
-##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
+
 #include("/project/event/common.page")
 #set(name="task")
 #@div()
