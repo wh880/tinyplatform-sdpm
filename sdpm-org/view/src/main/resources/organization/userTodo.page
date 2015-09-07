@@ -4,17 +4,23 @@
 #set(editpagePath="/organization/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 
 #include("/common/common.page")
+#set(name="organizationUser")
 #@div()
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
-        <span class="Current"><a
-                href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7">用户</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/gtasks.page?currentPageId=7">待办</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/log.page?currentPageId=7">日志</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/active.page?currentPageId=7">动态</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/department.page?currentPageId=7">部门</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/privilege.page?currentPageId=7">权限</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/company.page?currentPageId=7">公司</a></span>
+            #@tabWithInit("tab_demo" "optionsBox")
+                #@tabHead()
+                    #include("/organization/tab.page")
+                #end
+            #end
+        ##        <span class="Current"><a
+        ##                href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7">用户</a></span>
+        ##        <span><a href="${TINY_CONTEXT_PATH}/organization/gtasks.page?currentPageId=7">待办</a></span>
+        ##        <span><a href="${TINY_CONTEXT_PATH}/organization/log.page?currentPageId=7">日志</a></span>
+        ##        <span><a href="${TINY_CONTEXT_PATH}/organization/active.page?currentPageId=7">动态</a></span>
+        ##        <span><a href="${TINY_CONTEXT_PATH}/organization/department.page?currentPageId=7">部门</a></span>
+        ##        <span><a href="${TINY_CONTEXT_PATH}/organization/privilege.page?currentPageId=7">权限</a></span>
+        ##        <span><a href="${TINY_CONTEXT_PATH}/organization/company.page?currentPageId=7">公司</a></span>
         #end
         #@div(divClass="operationbar")
             #@tinyForm("thisform" "" "" {"class":"test"})

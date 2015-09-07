@@ -40,7 +40,7 @@
     }
 
 </style>
-#set(name="organizationUser1")
+#set(name="organizationUser")
 #@div()
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")

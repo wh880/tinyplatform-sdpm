@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu id="organization" parent-id="0" name="组织管理" href="/organization/user.page" icon="icon-sitemap" sort="1"
       isShow="true" permission="Permission">
-    <menu id="organizationUser1" name="用户" href="/organization/user.page" icon="" sort="1"
+    <menu id="organizationUser" name="用户" href="/organization/user.page" icon="" sort="1"
           isShow="1"
           permission="Permission">
     </menu>
