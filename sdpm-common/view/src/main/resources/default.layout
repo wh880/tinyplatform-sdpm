@@ -99,10 +99,13 @@
 		.menu-on-top #main-menu .navigation > li *:not(span){background:#fbfbfb!important}
 		.menu-on-top #main-menu .navigation > li *:not(span):hover{background:#fff!important}
 		.menu-on-top #main-menu .navigation>li.active>a{background:#fefefe!important}
+		#bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus{background:#369;border:#369 1px solid!important}
+		#bodyrap.theme-clean .btn-primary:hover {background:#2a4f85!important;}
+		
 		}
 	 </style>
 </head>
-<body class="theme-default main-menu-animated">
+<body class="theme-clean main-menu-animated menu-on-top" id="bodyrap">
 	#@mainWrapper()
 		#@mainNavbar("/common/img/main-navbar-logo.png" "Tinyframework")
 			#@navbarNav()

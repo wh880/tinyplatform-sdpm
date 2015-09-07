@@ -24,6 +24,9 @@
 #import("/common/component/form.component")
 #set(editpagePath= "/organization/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 
+
+#set(name="active")
+
 #include("/common/common.page")
 #@div()
     #@div(divClass="tabLayout")
