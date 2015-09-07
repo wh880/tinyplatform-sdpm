@@ -1,4 +1,4 @@
-<div style="width:35%;float:right">
+
     #@div(divClass="infoContent")
         <p class="titleName">用户基本信息</p>
         #@table()
@@ -52,4 +52,3 @@
             #end
         #end
     #end
-</div>
