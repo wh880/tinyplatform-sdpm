@@ -1,6 +1,6 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="客户管理",activeMenuId=currentPageId)
-#set(name="client")
+#set(name="clientUser")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox dropdownBoxes")
