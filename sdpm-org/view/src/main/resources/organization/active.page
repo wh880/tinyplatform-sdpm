@@ -28,7 +28,6 @@
 #set(name="organizationActive")
 
 #include("/common/common.page")
-#@div()
 ##        #@div(divClass="tabBar cl")
 ##        <span><a href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7">用户</a></span>
 ##        <span><a href="${TINY_CONTEXT_PATH}/organization/gtasks.page?currentPageId=7">待办</a></span>
@@ -85,7 +84,6 @@
             #include("/organization/activeMultiSearch.page")
 
         #end
-#end
 
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divClass="tinyheaderTools form-inline")

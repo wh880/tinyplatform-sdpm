@@ -19,7 +19,7 @@
 </style>
 #set(name="organizationPrivilege")
 #include("/common/common.page")
-#@div()
+
 ## #@div(divClass="tabLayout")
 ##        #@div(divClass="tabBar cl")
 ##        <span><a href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7">用户</a></span>
@@ -72,7 +72,7 @@
         #end
     ##        #end
 ## #end
-#end
+
 
 #simpleModal(editpageModalId)
 

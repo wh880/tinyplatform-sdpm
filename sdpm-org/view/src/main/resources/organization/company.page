@@ -22,7 +22,6 @@
 </style>
 #set(name="organizationCompany")
 #include("/common/common.page")
-#@div()
 ##    #@div(divClass="tabLayout")
 ##        #@div(divClass="tabBar cl")
 ##        <span><a href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7
@@ -48,7 +47,7 @@
     #import("/org/tinygroup/table/components/table.component")
     #import("/org/tinygroup/button/components/button_common.component")
     #import("/org/tinygroup/button/components/button.component")
-    #import("/org/tinygroup/form/components/form.component")
+#import("/common/component/form.component")
     #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
 
 
@@ -152,4 +151,4 @@
 
     #end
 
-#end
+

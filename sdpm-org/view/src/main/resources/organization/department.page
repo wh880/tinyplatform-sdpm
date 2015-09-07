@@ -23,7 +23,7 @@
 </style>
 #set(name="organizationDepartment")
 #include("/common/common.page")
-#@div()
+
 ##    #@div(divClass="tabLayout")
 ##        #@div(divClass="tabBar cl")
 ##        <span><a href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7
@@ -103,7 +103,7 @@
             #end
         #end
 
-#end
+
 
 <script type="text/javascript">
     <!--
