@@ -447,10 +447,7 @@ $(function () {
         '       <span>固定页脚</span>',
         '       <div class="demo-checkbox"><input type="checkbox" id="demo-footer-fixed" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.footer_fixed) ? ' checked="checked"' : '' ) + '></div>',
         '     </li>',
-        '     <li class="clearfix">',
-        '       <span>菜单位置</span>',
-        '       <div class="demo-checkbox"> <input type="radio" name="navposition" id="navpositiontop" value="top"' + ((demo_settings.menupos == "top") ? ' checked="checked"' : '' ) + '><label for="navpositiontop">顶部</label> </div>', /*<input type="radio" name="navposition" value="right" id="navpositionright"' + ((demo_settings.menupos=="right") ? ' checked="checked"' : '' ) + '><label for="navpositionright">右边</label> */
-        '     </li>',
+        '     
         /*'     <li class="clearfix">',
          '       <span>菜单在顶部</span>',
          '       <div class="demo-checkbox"><input type="checkbox" id="demo-menu-ontop" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.menu_ontop) ? ' checked="checked"' : '' ) + '></div>',

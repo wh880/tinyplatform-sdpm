@@ -101,7 +101,6 @@
 		.menu-on-top #main-menu .navigation>li.active>a{background:#fefefe!important}
 		#bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus,.theme-clean .pagination>li.active>a, .theme-clean .pagination>li.active>a:focus, .theme-clean .pagination>li.active>a:hover, .theme-clean .pagination>li.active>span{background:#369;border:#369 1px solid!important}
 		#bodyrap.theme-clean .btn-primary:hover {background:#2a4f85!important;}
-		#bodyrap #content-wrapper{padding-top:57px;}
 		#main-navbar .navbar-nav.pull-right{margin-right:21px;}
 		}
 	 </style>
