@@ -1,8 +1,8 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
 ###import("/org/tinygroup/zTree/components/zTree.component")
-#import("/components/org/tinygroup/projectmanageui/form.component")
+#import("/common/component/form.component")
 ###set(tabpagePath="/page/tabledemo/tab.pagelet",tabpageModalId="userViewModal",tabpageModal="#"+tabpageModalId)
-#include("/common/common.page")
+###include("/common/common.page")
 <style>
     .tabLayout .tabBar span a {
         color: #333

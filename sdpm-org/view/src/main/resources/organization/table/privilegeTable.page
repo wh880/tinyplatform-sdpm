@@ -10,7 +10,7 @@
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(52)
-#for(var:[1..pagesize])
+#foreach(var:[1..pagesize])
 #@tr()
     #@td()<input type="checkbox" value="1" name="idCheck">#end
     #@td()001${page}#end
@@ -19,11 +19,11 @@
     #@td()研发工程师#end
     #@td()
     <a title="权限维护" href="../organization/privilegeMaintain.page">#buttonIcon(iconClass="icon-lock")</a>
-        #iconOperations("#myModal" "icon-eye-open" "视图维护" "700" "300" "/organization/viewMaintain.pagelet" "ml-5")
+        #iconOperations("#myModal" "icon-eye-open" "视图维护" "700" "300 " "/organization/viewMaintain.pagelet" "ml-5")
         #iconOperations("#myModa3" "icon-sitemap" "成员维护" "700" "300" "/organization/groupMaintain.pagelet" "ml-5")
         #iconOperations("#myModa4" "icon-copy" "复制分组" "700" "300" "/organization/groupCopy.pagelet" "ml-5")
         #iconOperations("#myModa5" " icon-pencil" "编辑分组" "600" "300" "/organization/groupEdit.pagelet" "ml-5")
-    <span><i class="icon-remove" itemId="dsfdsf"></i></span>
+    <span><i class="icon-remove" itemId="deleteList"></i></span>
     #end
 #end
 #end
