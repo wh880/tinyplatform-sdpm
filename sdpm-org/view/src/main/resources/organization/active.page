@@ -57,15 +57,15 @@
         #@div(divClass="operationbar")
             #@tinyForm("thisform" "" "" {"class":"test"})
             <span class="activeSearch">
-                <a href="${TINY_CONTEXT_PATH}/organization/userTodo.page" class="active_btn">待办</a>
-					<a href="${TINY_CONTEXT_PATH}/organization/userStoryAdmin.page">需求</a>
-					<a href="${TINY_CONTEXT_PATH}/organization/userTaskAdmin.page">任务</a>
-					<a href="${TINY_CONTEXT_PATH}/organization/userBugAdmin.page">缺陷</a>
-					<a href="${TINY_CONTEXT_PATH}/organization/userTesttaskAdmin.page">测试</a>
-                   <a href="${TINY_CONTEXT_PATH}/organization/userActiveAdmin.page">动态</a>
-					<a href="${TINY_CONTEXT_PATH}/organization/userLogAdmin.page">日志</a>
-					<a href="${TINY_CONTEXT_PATH}/organization/userProjectAdmin.page">项目</a>
-					<a href="${TINY_CONTEXT_PATH}/organization/userProfileAdmin.page">档案</a>
+                <a href="#" class="active_btn">今天</a>
+					<a href="#">昨天</a>
+					<a href="#">前天</a>
+					<a href="#">本周</a>
+					<a href="#">上周</a>
+                   <a href="#">本月</a>
+					<a href="#">上月</a>
+					<a href="#">所有</a>
+
                  </span>
             <span class="tinyFormsty">
                     #@formControlDiv("col-1")
