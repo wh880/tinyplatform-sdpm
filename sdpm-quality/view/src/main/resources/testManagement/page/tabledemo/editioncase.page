@@ -30,7 +30,7 @@
     <span class="r">
 		#buttonRadiusDefault(caption="保存")
 			</span>#end
-<div style="width:70%;float:left">
+<div style="width:65%;float:left">
 	#@div()#tinyInput("text" "111" ""{"datatype":"","id":"111","class":"input-text","placeholder":"111"})
 	#end
 	#@div(divClass="infoContent")

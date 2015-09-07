@@ -1,4 +1,4 @@
-<div style="width:30%;float:right" >
+<div style="width:35%;float:right" >
 	#@div(divClass="infoContent")
         <p class="titleName">基本信息</p>
 	##该样式在comm.css样式中自定义
