@@ -1,6 +1,6 @@
 #!set(activeTitle="左侧树",activeMenuId=currentPageId)
 #import("/org/tinygroup/zTree/components/zTree.component")
-#import("/components/org/tinygroup/fulimanageui/form.component")
+##     #import("/components/org/tinygroup/fulimanageui/form.component")
 #macro ztreeClick()
 ##        loadURL('#link("/page/tabledemo/righttable.pagelet")', $("#tableInfo"));
           loadURL('#link("/service/page/righttable.pagelet")', $("#tableInfo"));
@@ -23,7 +23,7 @@
     #@tableHeaderBar()${activeTitle}#end
     #@leftTreeCol()
    #@searchZtreeWithInit("treeDemo" "height:454px;" "/service/data/tree/service.js")
-    ##     #@searchZtreeWithInit("treeDemo" "height:454px;" "/service/js/service.js")
+    ##     #@searchZtreeWithInit("treeDemo" "height:454px;" "/service/js/service1.js")
         #end
     #end
     #@tableBox("tableInfo")
