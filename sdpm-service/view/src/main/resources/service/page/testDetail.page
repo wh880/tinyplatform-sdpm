@@ -75,6 +75,62 @@
                             #@th()服务协议表述#end
                             #@td()表述#end
                         #end
+                        #@tr()
+                            #@th()服务响应时限#end
+                            #@td()<a href="#">011</a>#end
+                        #end
+                        #@tr()
+                            #@th()需求回访时限#end
+                            #@td()1#end
+                        #end
+                        #@tr()
+                            #@th()服务工时上限#end
+                            #@td()2015.09.07#end
+                        #end
+                        #@tr()
+                            #@th()服务请求数上限#end
+                            #@td()1#end
+                        #end
+                        #@tr()
+                            #@th()现场服务次数上限#end
+                            #@td()1#end
+                        #end
+                        #@tr()
+                            #@th()服务专员#end
+                            #@td()标题#end
+                        #end
+                        #@tr()
+                            #@th()服务级别协议#end
+                            #@td()表述#end
+                        #end
+                        #@tr()
+                            #@th()创建人#end
+                            #@td()1#end
+                        #end
+                        #@tr()
+                            #@th()创建时间#end
+                            #@td()2015.09.07#end
+                        #end
+                        #@tr()
+                            #@th()批准人#end
+                            #@td()1#end
+                        #end
+                        #@tr()
+                            #@th()批准时间#end
+                            #@td()1#end
+                        #end
+                        #@tr()
+                            #@th()关闭人#end
+                            #@td()标题#end
+                        #end
+                        #@tr()
+                            #@th()关闭时间#end
+                            #@td()表述#end
+                        #end
+                        #@tr()
+                            #@th()打开次数#end
+                            #@td()表述#end
+                        #end
                     #end
                 #end
             </div>
