@@ -21,33 +21,6 @@
         #@tabHead()
             #include("/service/page/tab.page")
         #end
-
-    ##        #@tabBodyCol("ptop-5")
-    ##        ##operationbar star
-    ##            #@div(divClass="operationbar")
-    ##            <span class="f">
-    ##					<a href="#" class="active_btn">未关闭</a>
-    ##					<a href="#">全部请求</a>
-    ##					<a href="#">指派给我</a>
-    ##					<a href="#">由我创建</a>
-    ##					<a href="#">由我评审</a>
-    ##					<a href="#">由我关闭</a>
-    ##					<a href="#">草稿</a>
-    ##					<a href="#">已变更</a>
-    ##					<a href="#">待关闭</a>
-    ##					<a href="#">已关闭</a>
-    ##					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-    ##				</span>
-    ##            <span class="r">
-    ##
-    ##                <a href="${TINY_CONTEXT_PATH}/service/page/newRequest.page">#buttonIcon(iconClass="icon-plus")新建请求</a>
-    ##				</span>
-    ##                #div(divClass="clearfix")
-    ##                #include("/service/page/multiSearch.page")
-    ##            #end
-    ##        ##operationbar end
-    ##        #end
-
         #@tabBodyCol("ptop-5")
         ##operationbar star
             #@div(divClass="operationbar")
