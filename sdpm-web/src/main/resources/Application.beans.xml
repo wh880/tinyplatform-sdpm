@@ -44,6 +44,9 @@
                 <!--菜单加载处理器-->
                 <ref bean="menuFileProcessor"/>
 
+                <!--TypeInfo处理器 -->
+                <ref bean="typeInfoProcessor" />
+
             </list>
         </property>
     </bean>

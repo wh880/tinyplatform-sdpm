@@ -31,7 +31,7 @@
         <!-- <application-processor bean="serviceApplicationProcessor"></application-processor> -->
         <application-processor bean="tinyListenerProcessor"></application-processor>
         <application-processor bean="fileMonitorProcessor"></application-processor>
-            <application-processor bean="tinyTemplateConfigProcessor"></application-processor>
+        <application-processor bean="tinyTemplateConfigProcessor"></application-processor>
 
             <!--<application-processor bean="logAdapterProcessor"></application-processor>-->
         <!--<application-processor bean="encryptionProcessor"></application-processor>-->
