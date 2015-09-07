@@ -109,7 +109,7 @@
 	#@mainWrapper()
 		#@mainNavbar("/common/img/main-navbar-logo.png" "Tinyframework")
 			#@navbarNav()
-				#navbarNavItem("切换到AJAX" "/ajax.page")
+				#navbarNavItem("新增内容" "#")
 				#@navbarDropdownMenu("下拉菜单")
 					#navbarNavItem("第一项" "#")
 					#navbarNavItem("第二项" "#")
