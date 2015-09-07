@@ -7,15 +7,15 @@
 #import("/org/tinygroup/table/components/table.component")
 #import("/org/tinygroup/icon/components/icon.component")
 <style>
-.tabLayout .tabBar span a{color:#333}
+#*.tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
 .infoContent{ margin:18px 4px 10px 5px; padding:6px;font-weight:bold;border:#eee 1px solid;}
 .infoContent .titleName{margin-top:-16px;margin-bottom:8px;font-weight:bold;font-size:13px;}
 .tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
 
-.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
-.btn-group #Dropdown{background:none;border:none;padding:0 3px}
+.operationbar{background:#f9fafe;padding:6px 5px 6px 10px;}
+.btn-group #Dropdown{background:none;border:none;padding:0 3px}*#
 .open #downMenuSty{min-width:75px}
 .caret {
     display: inline-block;
@@ -28,13 +28,13 @@
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
 }
-h3 {line-height: 1.2;}
+.infoContent .tableInfoes tr{height:30px; line-height:40px;}
 </style>
 #include("/project/task/taskMenu.page")
-	#@div(divClass="operationbar")
-		<span class="f">项目名称>编辑</span>		
-	#end
-	#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+	
+		<span class="f" style="font-size:15px">项目名称>编辑</span>		
+	
+#*	#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 	#@toggleLeft({"class":"aclass"})
 	   #@settoggleLeftTitle()产品文档库#end
 		#@settoggleLeftBody("treeLeftbox")
@@ -45,7 +45,7 @@ h3 {line-height: 1.2;}
 			</ul>
 			<ul id="treeDrag" class="ztree"></ul>
 		#end
-	#end
+	#end*#
 	
 #@toggleRight()
 <div style="width:62%;float:left">
@@ -60,7 +60,7 @@ h3 {line-height: 1.2;}
 			#@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end	
 		#end
 		<p style="margin-top:10px;margin-bottom:1px">附件</p>
-		<table>
+		<table class="tableInfoes">
 			<tr>
 			 	<td style="float:left;margin-bottom:5px"> #fileWithInput("file-0")</td>
 			 	<td style="float:left;width:240px">#inputRadiusText(inputPlaceHolder="标题：")</td>
@@ -82,8 +82,8 @@ h3 {line-height: 1.2;}
 </div>
 #include("/project/task/basicInfoEdit.page")
 #end
-#end
- <script type="text/javascript">
+#*#end*#
+#* <script type="text/javascript">
  $(function(){
 	$(".Hui_aside").scrollTop(380);
 	/*折叠*/
@@ -330,4 +330,4 @@ h3 {line-height: 1.2;}
 			$("#callbackTrigger").bind("change", {}, setTrigger);
 		});
 		//-->
-	</script>
+	</script>*#

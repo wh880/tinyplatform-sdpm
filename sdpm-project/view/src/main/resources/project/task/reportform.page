@@ -4,9 +4,9 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(activeTitle="项目管理",activeMenuId=currentPageId)
 <style>
-    .tabLayout .tabBar span a{color:#333}
+#*    .tabLayout .tabBar span a{color:#333}
     .tabLayout .tabBar .Current a{color:#fff}
-    .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+    .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}*#
     .togglebox.open .tableBoxessty{margin-left:262px}
     .togglebox.open .togglenavico{left:218px}
     .togglebox .togglenavpart{left:-260px;}
