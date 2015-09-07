@@ -2,116 +2,118 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
-<style>
-    .select_boxes{margin-top:0}
-    .tableBoxes tbody tr{height:30px;}
-    .tableBoxes tbody tr td{padding:10px 7px;vertical-align:middle}
-</style>
 
+<style>
+    .select_boxes {
+        margin-top: 0
+    }
+
+    .tableBoxes tbody tr {
+        height: 30px;
+    }
+
+    .tableBoxes tbody tr td {
+        padding: 10px 7px;
+        vertical-align: middle
+    }
+</style>
 
 #set(name="qualityCases")
 #@div()
-#@tabWithInit("tab_demo" "optionsBox")
-	#@div(divClass="dropdownBox")
-		#include("/testManagement/page/dropdownMenu.page")
-	#end
-	#@tabHead()
-		#include("/testManagement/page/Tab.page")
-	#end
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/testManagement/page/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/testManagement/page/Tab.page")
+        #end
 
-	#@tabBodyCol("ptop-5")
-##operationbar start1
-	#end
-
-	#@div(divClass="operationbar")
-		<span class="f">
+        #@tabBodyCol("ptop-5")
+        ##operationbar
+            #@div(divClass="operationbar")
+            <span class="f">
 					<a href="#" class="active_btn">编辑</a>
 			</span>
-    <span class="r">
-		#buttonRadiusDefault(caption="保存")
-			</span>#end
-<div style="width:65%;float:left">
-	#@div()#tinyInput("text" "111" ""{"datatype":"","id":"111","class":"input-text","placeholder":"111"})
-	#end
-	#@div(divClass="infoContent")
-        <p class="titleName">前置条件</p>
-		#tinyInput("text" "111" ""{"datatype":"","id":"111","class":"input-text"})
-	#end
+            <span class="r">
+					<a href="#" class="active_btn">保存</a>
+			</span>
+            #end
+        ##operationbar end
+        #end
+    ##tabbody end
+    <div style="width:70%;float:left">
+        #@div()#tinyInput("text" "111" ""{"datatype":"","id":"111","class":"input-text","placeholder":"111"})
+        #end
+        #@div(divClass="infoContent")
+            <p class="titleName">前置条件</p>
+            #tinyInput("text" "111" ""{"datatype":"","id":"111","class":"input-text"})
+        #end
+        #@div(divClass="infoContent")
+            <p class="titleName">用例步骤</p>
+            <div>
+                #@table("tableBoxes")
+                    #@thead()
+                        #@tr()
+                            #@th()编号#end
+                            #@th()步骤#end
+                            #@th()预期#end
+                            #@th()操作#end
+                        #end
+                    #end
 
-	#@div(divClass="infoContent")
-        <p class="titleName">用例步骤</p>
-        <div>
-		#@table("tableBoxes")
-			#@thead()
-				#@tr()
-					#@th()编号#end
-					#@th()步骤#end
-					#@th()预期#end
-					#@th()操作#end
-				#end
-			#end
-			#@tbody()
-				#for(i:[1..3])
-				#@tr()
-					#@td()${i}#end
-					#@td()#inputRadiusDefaultText()#end
-					#@td()#inputRadiusDefaultText()#end
-					#@td()#@div()
-						#buttonRadiusPrimary(btClass="btn-small" caption="之前添加")
-						#buttonRadiusPrimary(btClass="btn-small" caption="之后添加")
-						#buttonRadiusPrimary(btClass="btn-small" caption="删除")
-					#end
-					#end
-				#end
-			#end
-		#end</div>
-	#end
+                    #@tbody()
+                        #for(i:[1..3])
+                        #@tr()
+                            #@td()${i}#end
+                            #@td()#inputRadiusDefaultText()#end
+                            #@td()#inputRadiusDefaultText()#end
+                            #@td()#@div()
+                                #buttonRadiusPrimary(btClass="btn-small" caption="之前添加")
+                                #buttonRadiusPrimary(btClass="btn-small" caption="之后添加")
+                                #buttonRadiusPrimary(btClass="btn-small" caption="删除")
+                            #end
+                            #end
+                        #end
 
+                        #end
+                    #end
+                #end
+            </div>
+        #end
+        #@div(divClass="infoContent")
+            <p class="titleName">备注</p>
 
-
-
-#end
-
-#end
-#@div(divClass="infoContent")
-    <p class="titleName">备注</p>
-    <div>
-        #@formControlDiv()
+            <div>
+                #@formControlDiv()
 				#@tinyueditor("contents" "contents""min-height:150px")#end
 			#end
-    </div>
-#end
-#@div(divClass="infoContent")
-    <p class="titleName">附件</p>
-    <div>
+            </div>
+        #end
+        #@div(divClass="infoContent")
+            <p class="titleName">附件</p>
 
-        #tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
+            <div>
+
+                #tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
 			#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
 
+            </div>
+
+            #buttonRadiusDefault(caption="保存")
+            #buttonRadiusDefault(caption="返回")
+            <p style="clear:both"></p>
+            #@div(divClass="infoContent")
+                <p class="titleName">历史记录</p>
+            ##加入后，js代码会导致页面排版混乱
+                #include("/testManagement/page/historyRecord.page")
+            #end
+        #end
     </div>
 
-    #buttonRadiusDefault(caption="保存")
-    #buttonRadiusDefault(caption="返回")
-    <p style="clear:both"></p>
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-    ##加入后，js代码会导致页面排版混乱
-        #include("/testManagement/page/historyRecord.page")
-    #end
-#end
-#end
-    <p style="clear:both"></p>
-
-
+    <div style="width:30%;float:right">
+        #TypeInfo("qualityCaseEdition2")
+        ###include("/testManagement/page/tabledemo/editioncasepaging.page")
 
     </div>
-<div style="width: 35%;float: right">
-    #TypeInfo("qualityCaseEditon")
-</div>
-
-
-<script type="text/javascript">
-    $(".select2").select2();
-</script>
-
-
+#end
+#end
