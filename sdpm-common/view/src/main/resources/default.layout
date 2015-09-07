@@ -84,6 +84,22 @@
         <!--<![endif]-->
         <script src="${TINY_CONTEXT_PATH}/uiengine.uijs"></script>
 	#end
+	<style>
+	 .dataTables_wrapper .DT-lf-right .DT-per-page{display:none}.theme-clean #main-menu #content-wrapper{padding:53px 10px 18px}
+	 .ajax-loading-animation{font-size:20px;margin-left:10px;}
+	 @media (min-width:768px) {
+	 	.menu-on-top #content-wrapper{padding-top:98px}
+		.menu-on-top #main-menu{height:46px}
+		.menu-on-top #main-menu .navigation>li>ul{top:44px}
+	 	.menu-on-top #main-menu .navigation>li>a>span.mm-text {display:inline-block;}
+	 	.menu-on-top #main-menu .navigation>li>a i{padding-right:5px;width:auto;display:inline-block;}
+	 	.menu-on-top #main-menu .navigation>li{width:102px}
+	 	.menu-on-top #main-menu .navigation>li.mm-dropdown>a:after{top:30px!important}
+		.menu-on-top #main-menu .navigation > li *:not(span){background:#fbfbfb!important}
+		.menu-on-top #main-menu .navigation > li *:not(span):hover{background:#fff!important}
+		.menu-on-top #main-menu .navigation>li.active>a{background:#fefefe!important}
+		}
+	 </style>
 </head>
 <body class="theme-default main-menu-animated">
 	#@mainWrapper()
@@ -156,9 +172,9 @@
     <div class="content-wrapper-bg"></div>
 		#@div("content-wrapper")
 
-			#@contentWrapper()
+#*		#@contentWrapper()
 				${pagePostionTitle}
-			#end
+		#end*#
         <!-- 主体 start -->
 			#@rowFrame()
             <div id="tinypagecontent" style="min-height:490px">${pageContent}</div>
@@ -174,11 +190,6 @@
 		#end
 	#end
 <script type="text/javascript">
-    init.push(function () {
-        var menucount = $(".navigation:first>li").size();
-        $("#topmenurap .navigation>li").css("width", 100 / menucount + "%");
-        $.cookie("currentPageId", "${activeMenuId}", {path: '/'});
-    })
     //window.TinyAdmin.start(init);
     function setPostiionNav() {
         var currenttxt = $(".navigation ul>li.active>a:first>span:first").html();

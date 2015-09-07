@@ -22,8 +22,7 @@
 	
 	
 	 #@td()
-		
-		#iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "#" "ml-5")
+		<a href="#" title="编辑">#buttonIcon(iconClass="icon-pencil")
 		#iconOperation(" icon-remove" "删除" "ml-5")
 	#end
 #end
