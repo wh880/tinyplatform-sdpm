@@ -18,14 +18,22 @@
         ##operationbar
             #@div(divClass="operationbar")
             <span class="f">
-					<a href="#" class="active_btn">我是服务协议标题</a>
+					<a href="#" class="active_btn">我
+                        是服务协议标题</a>
 			</span>
             <span class="r">
-                #@iconOperations("#beginModal" "icon-play" "这里需要后台调用该项目名称>开始" "900" "400" "/testManagement/page/versionBegin.pagelet" "ml-5")&nbsp开始#end
-                #@iconOperations("#endModal" "icon-off" "这里需要后台调用该项目名称>关闭" "900" "400" "/testManagement/page/versionEnd.pagelet" "ml-5")&nbsp关闭#end
-				<a href="#" title="编辑协议">#buttonIcon(iconClass="icon-pencil")</a>
-				<a href="#" title="删除协议">#buttonIcon(iconClass="icon-remove")</a>
-				<a href="#" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+                #@iconOperations("#beginModal" "icon-play" "这里需要后台
+调用该项目名称>开始" "900" "400"
+                    "/testManagement/page/versionBegin.pagelet" "ml-5")&nbsp开始#end
+                #@iconOperations("#endModal" "icon-off" "这里需要后台调用
+该项目名称>关闭" "900" "400" "/testManagement/page/versionEnd.pagelet"
+                    "ml-5")&nbsp关闭#end
+                #iconOperations("#myModal" " icon-pencil" "编辑" "865"
+                    "448" "/service/page/testEdit.pagelet" "ml-5")
+                #iconOperations("#myModal2" "icon-remove" "删除" "550"
+                    "100" "/service/page/testDelect.pagelet" "ml-5")
+                <a href="${TINY_CONTEXT_PATH}/service/page/test.page"
+                   title="返回">#buttonIcon(iconClass="icon-reply")</a>
 			</span>
             #end
         ##operationbar end
@@ -33,17 +41,45 @@
     ##tabbody end
     <div style="width:100%;float:left">
         #@div(divClass="infoContent")
-            <p class="titleName">版本描述</p>
+            <p class="titleName">服务协议详情</p>
             <div>
-                456789
+                #@table("")
+                    #@thead()
+                    #end
+                    #@tbody()
+                        #@tr()
+                            #@th()服务协议ID#end
+                            #@td()<a href="#">011</a>#end
+                        #end
+                        #@tr()
+                            #@th()服务级别#end
+                            #@td()1#end
+                        #end
+                        #@tr()
+                            #@th()服务期限#end
+                            #@td()2015.09.07#end
+                        #end
+                        #@tr()
+                            #@th()客户ID#end
+                            #@td()1#end
+                        #end
+                        #@tr()
+                            #@th()产品ID#end
+                            #@td()1#end
+                        #end
+                        #@tr()
+                            #@th()服务协议标题#end
+                            #@td()标题#end
+                        #end
+                        #@tr()
+                            #@th()服务协议表述#end
+                            #@td()表述#end
+                        #end
+                    #end
+                #end
             </div>
         #end
-        #@div(divClass="infoContent")
-            <p class="titleName">测试总结</p>
-            <div>
-                456789
-            </div>
-        #end
+
         #@div(divClass="infoContent")
             <p class="titleName">历史记录111</p>
             #include("/service/page/historyRecord.page")
@@ -58,7 +94,9 @@
                     #@buttonCancel()关闭#end
                 #end
             #end
-            #@iconOperations("#beginModal" "icon-play" "这里需要后台调用该项目名称>开始" "500" "100" "/testManagement/page/versionBegin.pagelet" "ml-5")&nbsp开始#end
+            #@iconOperations("#beginModal" "icon-play" "这里需要后台调用
+该项目名称>开始" "500" "100" "/testManagement/page/versionBegin.pagelet"
+                "ml-5")&nbsp开始#end
             #@dialog("beginModal")
                 #@dialogHeader()开始#end
                 #@dialogBody()<p>确认开始</p>#end
@@ -67,7 +105,9 @@
                     #@buttonCancel()关闭#end
                 #end
             #end
-            #@iconOperations("#endModal" "icon-off" "这里需要后台调用该项目名称>关闭" "500" "100" "/testManagement/page/versionEnd.pagelet" "ml-5")&nbsp关闭#end
+            #@iconOperations("#endModal" "icon-off" "这里需要后台调用该项
+目名称>关闭" "500" "100" "/testManagement/page/versionEnd.pagelet" "ml-
+5")&nbsp关闭#end
             #@dialog("endModal")
                 #@dialogHeader()关闭#end
                 #@dialogBody()<p>确认关闭</p>#end
@@ -78,9 +118,12 @@
             #end
 
 
-            #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/service/page/testEdit.pagelet" "ml-5")
-            #iconOperations("#myModal2" "icon-remove" "删除" "550" "100" "/service/page/testDelect.pagelet" "ml-5")
-            <a href="${TINY_CONTEXT_PATH}/service/page/test.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+            #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448"
+                "/service/page/testEdit.pagelet" "ml-5")
+            #iconOperations("#myModal2" "icon-remove" "删除" "550" "100"
+                "/service/page/testDelect.pagelet" "ml-5")
+            <a href="${TINY_CONTEXT_PATH}/service/page/test.page" title="
+返回">#buttonIcon(iconClass="icon-reply")</a>
         </div>
     </div>
 
