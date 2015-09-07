@@ -16,7 +16,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
     #@tableHeaderBar()${activeTitle}#end
     #@leftTreeCol()
  ##         #@searchZtreeWithInit("treeDemo" "height:454px;" "/admin/product/tree")
-        #@searchZtreeWithInit("treeDemo" "height:454px;" "/service/data/tree/service1.js")
+        #@searchZtreeWithInit("treeDemo" "height:454px;" "/service/js/service1.js")
 
         #end
     #end
@@ -24,11 +24,25 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
     ##页面右边
     #@tableBox("tBox")
 
-        #@elementItem()
+#*       #@elementItem()
         <div><b>公司称谓wen</b></div>
         <p>123</p>
         <p>123</p>
+        #end       *#
+
+        #@div(divClass="faq")
+            #@OlTopList()
+                #topItem(1 "/service/page/questiondb.page" "如何初始化项目管理数据库？" "18:12")
+                #normalLiItems(2 "#" "项目里面的版本和测试的版本有什么区别？" "14:12" "green")
+                #normalLiItems(3 "#" "怎么维护项目的模块？" "13:12" "darkGreen")
+                #normalLiItems(4 "#" "任务可以指派多人吗？" "11:12" "grey")
+                #normalLiItems(5 "#" "访问项目管理，可以绑定域名吗？" "09:12")
+            #end
         #end
+
+
+
+
 
     #end
 #end
