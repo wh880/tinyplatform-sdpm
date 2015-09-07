@@ -9,7 +9,13 @@
 		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-				#@aModal("#myModal" "批量移除" "1200" "500" "btn radius btn-primary" "/product/page/tabledemo/product-editall.pagelet")批量移除#end
+				<div style="float:right" > 
+					<a id="showsearchmore-bug" href="#">
+						<button class="btn btn-submit btn-primary" id="submit" type="button">关联Bug</button>
+					</a>
+					#@aModal("#myModal" "批量移除" "1200" "500" "btn radius btn-primary" "/product/page/tabledemo/product-editall.pagelet")批量移除#end
+				
+                </div>
 				
 			#end
 			#@tinyTableContent("../../../data/product-al-bug-data.pagelet") ##取数据地址 总数据

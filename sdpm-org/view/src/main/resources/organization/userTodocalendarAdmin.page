@@ -36,17 +36,23 @@
     }
 
 </style>
+#set(name="organizationUser")
 #@div()
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
-        <span class="Current"><ahref="${TINY_CONTEXT_PATH}
-            /organization/organizationUser.page?currentPageId=7">用户</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/gtasks.page?currentPageId=7">待办</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/log.page?currentPageId=7">日志</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/active.page?currentPageId=7">动态</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/department.page?currentPageId=7">部门</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/privilege.page?currentPageId=7">权限</a></span>
-        <span><a href="${TINY_CONTEXT_PATH}/organization/company.page?currentPageId=7">公司</a></span>
+            #@tabWithInit("tab_demo" "optionsBox")
+                #@tabHead()
+                    #include("/organization/tab.page")
+                #end
+            #end
+        ##        <span class="Current"><ahref="${TINY_CONTEXT_PATH}
+        ##            /organization/organizationUser.page?currentPageId=7">用户</a></span>
+        ##        <span><a href="${TINY_CONTEXT_PATH}/organization/gtasks.page?currentPageId=7">待办</a></span>
+        ##        <span><a href="${TINY_CONTEXT_PATH}/organization/log.page?currentPageId=7">日志</a></span>
+        ##        <span><a href="${TINY_CONTEXT_PATH}/organization/active.page?currentPageId=7">动态</a></span>
+        ##        <span><a href="${TINY_CONTEXT_PATH}/organization/department.page?currentPageId=7">部门</a></span>
+        ##        <span><a href="${TINY_CONTEXT_PATH}/organization/privilege.page?currentPageId=7">权限</a></span>
+        ##        <span><a href="${TINY_CONTEXT_PATH}/organization/company.page?currentPageId=7">公司</a></span>
         #end
         #@div(divClass="operationbar")
         <span style="padding-top:5px;float:left">
@@ -61,7 +67,7 @@
         </span>
         <span style="padding-top:5px;float:right">
             #@aModal(editpageModal "导出" "600" "120" ""  editpagePath)
-                #@simpleI(" icon-chevron-down")导出#end
+                #@simpleI(" icon-download-alt")导出#end
             #end
         </span>
             #div(divClass="clearfix")
