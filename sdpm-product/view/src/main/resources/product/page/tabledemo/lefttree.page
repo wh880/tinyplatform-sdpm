@@ -1,6 +1,6 @@
 #!set(activeTitle="左侧树",activeMenuId=currentPageId)
 #import("/org/tinygroup/zTree/components/zTree.component")
-#import("/components/org/tinygroup/projectmanageui/form.component")
+#import("/common/component/form.component")
 #macro ztreeClick()
 	loadURL('#link("/page/tabledemo/righttable.pagelet")', $("#tableInfo"));
 #end
