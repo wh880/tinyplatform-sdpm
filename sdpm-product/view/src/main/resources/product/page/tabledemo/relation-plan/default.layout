@@ -63,101 +63,12 @@
 			#end
 		#end
 </div>
-
-	#include("/product/page/tabledemo/relation-plan/planbaseinfo.page")
+	
+	
+<div style="width:35%;float:right" >
+	#TypeInfo("productPlan")
+</div>
 
 #end
 
 
-
-
-
-
-
-
-
-
-
-
-##
-###@toggleBox({"class":"open shrinkage"})
-##
-##
-##	
-##
-##	#@toggleLeft({"class":"aclass"})
-##		#@settoggleLeftTitle("fa-bullhorn")&nbsp;相关信息#end
-##		
-##		#@div(divClass="infoContent")
-##	        <p class="titleName">描述</p>123456
-##	       	<span>
-##	       		撒啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊 
-##            </span>
-##        #end
-##        
-##        #@div(divClass="infoContent")
-##	        <p class="titleName">基本</p>123456
-##		      <ul>
-##		      	<li> 
-##		      		<label>名称：</label>
-##			       	#@span(spanClass="text-overflow")
-##						<span> 计划XXX
-##                        </span>
-##					#end
-##                </li>
-##                <li> 
-##		      		<label>开始日期：</label>
-##			       	#@span(spanClass="text-overflow")
-##						<span>
-##							XXX.XXX.XXX
-##						</span>
-##					#end
-##                </li>
-##                <li> 
-##		      		<label>结束日期：</label>
-##			       	#@span(spanClass="text-overflow")
-##						<span>
-##							XXX.XXX.XXX
-##						</span>
-##					#end
-##                </li>
-##		      </ul>
-##        #end
-##      	
-##      	#@div(divClass="infoContent")
-##	        <p class="titleName">历史记录</p>
-##	       	#include("/product/page/tabledemo/historyrecord.page")
-##		#end
-##	#end
-##	
-##	#@toggleRight()
-##		
-##		#@div()
-##			#@tabWithInit("tab_demo" "optionsBox")
-##				
-##				#@tabHead()
-##					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="demand"?"Current":"")
-##						#@buttons("","icon-lightbulb")
-##							已关联需求列表
-##						#end
-##					#end
-##					
-##					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="bug"?"Current":"")
-##						#@buttons("","icon-bug green")
-##							已关联Bug列表
-##						#end
-##					#end
-##				#end
-##				
-##				#@tabBodyCol("ptop-5")
-##					
-##					
-##					#pageContent
-##				
-##			
-##				#end
-##			
-##			#end
-##		#end
-##	#end
-###end

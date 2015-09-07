@@ -1,9 +1,8 @@
 
-<div style="width:35%;float:right" >
 	#@div(divClass="infoContent")
 	        <p class="titleName">描述</p>
 	       	<div>
-	       		123456 撒啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+	       		八戒哪里跑！！
 	       	</div>
 		#end
       
@@ -51,5 +50,3 @@
 	        	<p class="titleName">历史记录</p>
 	       		#include("/product/page/tabledemo/historyrecord.page")
 				#end
-
- </div>

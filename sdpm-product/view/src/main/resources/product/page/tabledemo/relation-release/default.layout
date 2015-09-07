@@ -68,7 +68,7 @@
 			#end
 		#end
 </div>
-
-	#include("/product/page/tabledemo/relation-release/releasebaseinfo.page")
-
+<div style="width:35%;float:right" >
+		#TypeInfo("productRelease")
+</div>
 #end

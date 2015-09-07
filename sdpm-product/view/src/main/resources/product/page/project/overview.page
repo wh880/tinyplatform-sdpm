@@ -46,7 +46,9 @@
 	</div>
 
 #*	#include("/product/page/tabledemo/baseinfo.page")*#
-	#TypeInfo("product1")
+<div style="width:35%;float:right">
+		#TypeInfo("product")
+</div>
 		
 	
 #end
