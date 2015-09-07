@@ -63,7 +63,7 @@ h3 {line-height: 1.2;}
 	#end
 	#@div(divClass="infoContent")
 		<p class="titleName">历史记录</p>
-		#include("/project/task/recordlist.page")
+		#include("/project/recordlist.page")
 	#end
 </div>
 #include("/project/task/basicInfoEdit.page")
