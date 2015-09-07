@@ -4,7 +4,7 @@
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-#!set(linkName="plan",sonitem="<li>"+"计划"+"</li>")
+#!set(linkName="plan")
 
 <style>
 	.infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
@@ -22,8 +22,8 @@
    
 				<span class="r" >
 				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class" "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
-				<a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-link")关联需求</a>&nbsp;
-				<a href="#" id="showsearchmore-bug">#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
+				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-plan/product-al-req.page?cname=demand" >#buttonIcon(iconClass="icon-link")关联需求</a>&nbsp;
+				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-plan/product-al-bug.page?cname=bug" >#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
 						
 			
 				#iconOperations("#myModal" "icon-common-edit icon-pencil" "编辑发布" "865" "448" "/product/page/tabledemo/product-addrelease.pagelet" "ml-5")
