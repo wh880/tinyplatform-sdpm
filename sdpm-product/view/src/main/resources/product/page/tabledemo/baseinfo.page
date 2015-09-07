@@ -1,5 +1,4 @@
 
-<div>
 		#@div(divClass="infoContent")
 		        <p class="titleName">基本信息</p>
 		       	#@table()
@@ -106,4 +105,3 @@
 		       		#end
 		       	#end
 		#end
-	</div>

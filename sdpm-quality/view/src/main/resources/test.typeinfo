@@ -2,4 +2,11 @@
 	<type-info name="qualityVersionSituation" >
 	    <info name="versionSituationInfo" title="基本信息" resource="qualityVersionSituation" infoParameter="" url="/testManagement/page/versionSituationpaging.pagelet"/>
 	</type-info>
+	<type-info name="qualityBugEdition" >
+    	    <info name="BugEditionInfo" title="基本信息" resource="qualityBugEdition" infoParameter="" url="/testManagement/page/tabledemo/editionpaging.pagelet"/>
+    	    <info name="userInfo" title="负责人信息" resource="userInfo" infoParameter="" url="/organization/userinfor.pagelet"/>
+    	</type-info>
+    	<type-info name="qualityCaseEditon" >
+            	    <info name="CaseEditionInfo" title="基本信息" resource="qualityCaseEdition" infoParameter="" url="/testManagement/page/tabledemo/editioncasepaging.pagelet"/>
+            	</type-info>
 </type-infos>
