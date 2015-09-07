@@ -90,6 +90,6 @@
 
 
 ##	#include("/testManagement/page/versionSituationpaging.page")
-	#TypeInfo("quality")
+	#TypeInfo("qualityVersionSituation")
 #end
 #end
