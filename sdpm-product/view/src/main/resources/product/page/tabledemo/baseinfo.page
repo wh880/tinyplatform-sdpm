@@ -1,5 +1,5 @@
 
-<div style="width:35%;float:right" >
+<div>
 		#@div(divClass="infoContent")
 		        <p class="titleName">基本信息</p>
 		       	#@table()
