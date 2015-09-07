@@ -49,10 +49,11 @@
 	       	#include("/productLine/page/tabledemo/historical-records.page")
 		#end
 	</div>
-	<div style="width:35%;float:right" >
+#*	<div style="width:35%;float:right" >
 			#include("/productLine/page/tabledemo/other-information.page")
-	</div>
-
+	</div>*#
+	
+	#TypeInfo("productLine")
 		
 	
 #end
