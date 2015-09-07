@@ -2,7 +2,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #include("/productLine/page/event/mytree.page")
-
+#set(linkName="overview")
 <style>
 .infoContent{ margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
 .infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:13px;}
@@ -49,9 +49,6 @@
 	       	#include("/productLine/page/tabledemo/historical-records.page")
 		#end
 	</div>
-#*	<div style="width:35%;float:right" >
-			#include("/productLine/page/tabledemo/other-information.page")
-	</div>*#
 	
 	#TypeInfo("productLine")
 		
