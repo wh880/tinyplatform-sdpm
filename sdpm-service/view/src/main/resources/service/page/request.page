@@ -33,15 +33,14 @@
 					<a href="#">由我评审</a>
 					<a href="#">由我关闭</a>
 					<a href="#">草稿</a>
-					<a href="#">激活</a>
 					<a href="#">已变更</a>
 					<a href="#">待关闭</a>
 					<a href="#">已关闭</a>
-					<a href="#">#buttonIcon(iconClass="icon-search")搜111索</a>
+					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
             <span class="r">
 
-                <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
+                <a href="${TINY_CONTEXT_PATH}/service/page/newRequest.page">#buttonIcon(iconClass="icon-plus")新建请求</a>
 				</span>
                 #div(divClass="clearfix")
                 #include("/service/page/multiSearch.page")

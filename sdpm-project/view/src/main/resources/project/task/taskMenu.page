@@ -38,9 +38,11 @@ h3 {line-height: 1.2;}
 				#include("/project/dropdownMenu.page")
 			#end
 			#@tabHead()
-				#include("/project/protab.page")							
-				<a href="${TINY_CONTEXT_PATH}/project/addProject.page" style="float:right">#buttonIcon(iconClass="icon-plus")添加项目</a>
-				<a href="${TINY_CONTEXT_PATH}/project/allProject.page" style="float:right">#buttonIcon(iconClass="icon-list")所有项目</a>
+				#include("/project/protab.page")
+				<span class="r" style="position:relative;top:2px;height:0">
+					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
+				</span>				
 			#end						
 			#@tabBodyCol("ptop-5")
 			##operationbar start

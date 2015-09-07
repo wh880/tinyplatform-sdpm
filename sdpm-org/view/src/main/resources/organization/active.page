@@ -1,9 +1,31 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
+<style>
+    .tabLayout .tabBar span a {
+        color: #333
+    }
 
+    .tabLayout .tabBar .Current a {
+        color: #fff
+    }
+
+    .operationbar {
+        border-top: none;
+        background: #f9fafe;
+        padding: 6px 5px 6px 10px;
+    }
+
+    .activeSearch {
+        float: left;
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+</style>
 ###import("/org/tinygroup/zTree/components/zTree.component")
 #import("/common/component/form.component")
-#set(editpagePath=
-    "/organization/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+#set(editpagePath= "/organization/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+
+
+#set(name="active")
 
 #include("/common/common.page")
 #@div()

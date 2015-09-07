@@ -6,5 +6,6 @@
 
 #foreach(m in menuManager.getChildMenus("statistic"))
 ###TnavItem("6" m.name m.href m.icon)
-    #@aHeadCol(TINY_CONTEXT_PATH+m.href name=="org"?"Current":"")${m.name}#end
+###@aHeadCol(TINY_CONTEXT_PATH+m.href name=="org"?"Current":"")${m.name}#end
+    #@aHeadCol(TINY_CONTEXT_PATH+m.href m.id==name?"Current":"")${m.name}#end
 #end

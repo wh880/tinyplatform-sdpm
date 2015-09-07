@@ -1,6 +1,6 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="统计",activeMenuId=currentPageId)
-#set(name="test")
+#set(name="statisticTest")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()
