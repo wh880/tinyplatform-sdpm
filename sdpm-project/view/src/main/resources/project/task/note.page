@@ -4,7 +4,7 @@
 #include("/project/task/taskMenu.page")
 
 
-#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+#*#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 	#@toggleLeft({"class":"aclass"})
 	   #@settoggleLeftTitle()产品文档库#end
 		#@settoggleLeftBody("treeLeftbox")
@@ -15,7 +15,7 @@
 			</ul>
 			<ul id="treeDrag" class="ztree"></ul>
 		#end
-	#end
+	#end*#
 	
 #@toggleRight()
 #@tinyForm("thisform" "" "post" {"class":"test"})
@@ -58,7 +58,7 @@
 	 <a href="#">#buttonRadiusPrimary(caption="保存")</a>
 #end	
 #end
-#end 	
+	
 <script type="text/javascript">
  $(function(){
 	$(".Hui_aside").scrollTop(380);

@@ -24,6 +24,7 @@ public class TypeInfoUtil {
 		result.clear();
 		if(typeDict.get(type)!=null) {
 			for (Info info : typeDict.get(type).getInfos()) {
+				if(typeDict.get(info.getUrlResource())!=null)
 				result.put(info.getInfoTile(), formatUrl(info.getInfoUrl(), info.getInfoParameter(), id));
 			}
 		}

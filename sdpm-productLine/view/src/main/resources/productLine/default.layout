@@ -19,13 +19,12 @@
 		#end
 		
 		#@tabHead()
-				#@aHeadCol(TINY_CONTEXT_PATH+"/productLine/page/project/productLine.page")产品#end
+				#foreach(m in menuManager.getChildMenus("productLine"))
+					
+					#@aHeadCol(TINY_CONTEXT_PATH+m.href m.id==linkName?"Current":"")${m.name}#end
+				#end
 				
-				#@aHeadCol(TINY_CONTEXT_PATH+"/productLine/page/project/overview.page")概况#end
-				
-#*				#@aHeadCol(TINY_CONTEXT_PATH+"/productLine/page/project/dymanicdata.page?currentPageId="+currentPageId  linkName=="dynamic"?"Current":"")动态#end
-				
-				*#
+
 		#end
 		
 		<span class="r" style="position:relative;top:-28px;height:0">

@@ -12,7 +12,7 @@
 </style>*#
 ##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
 
-#set(name="request")
+#set(name="request1")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -33,7 +33,6 @@
 					<a href="#">由我评审</a>
 					<a href="#">由我关闭</a>
 					<a href="#">草稿</a>
-					<a href="#">激活</a>
 					<a href="#">已变更</a>
 					<a href="#">待关闭</a>
 					<a href="#">已关闭</a>
@@ -41,7 +40,7 @@
 				</span>
             <span class="r">
 
-                <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
+                <a href="${TINY_CONTEXT_PATH}/service/page/newRequest.page">#buttonIcon(iconClass="icon-plus")新建请求</a>
 				</span>
                 #div(divClass="clearfix")
                 #include("/service/page/multiSearch.page")

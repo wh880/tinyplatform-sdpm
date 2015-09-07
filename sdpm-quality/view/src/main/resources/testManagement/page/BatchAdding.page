@@ -11,7 +11,7 @@
 </style>
 
 
-#set(name="bug")
+#set(name="qualityBug")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")

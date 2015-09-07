@@ -12,7 +12,7 @@
 </style>*#
 ##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
 
-#set(name="bug")
+#set(name="qualityBug")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
 			#@div(divClass="dropdownBox")

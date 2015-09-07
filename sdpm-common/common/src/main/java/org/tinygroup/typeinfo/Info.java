@@ -20,6 +20,17 @@ public class Info {
     @XStreamAsAttribute
     @XStreamAlias("infoParameter")
     private String infoParameter;
+    @XStreamAsAttribute
+    @XStreamAlias("resource")
+    private String urlResource;
+
+    public String getUrlResource() {
+        return urlResource;
+    }
+
+    public void setUrlResource(String urlResource) {
+        this.urlResource = urlResource;
+    }
 
     public String getInfoParameter() {
         return infoParameter;

@@ -32,16 +32,15 @@ function tLoadContent(link, contain, className) {
 	 })
 }
 </script>
-
 <style>
 .jarviswidget>div{border:none; padding:2px 0 1px 10px;}
 .tabs-right.nav-tabsty .nav-tabs li a{border:none;padding:2px 8px;background:#f2f2f2;min-width:10px;width:28px;display:inline-block}
 .tabs-right.nav-tabsty .nav-tabs>li.active>a,.tabs-right.nav-tabsty .nav-tabs>li.active>a:hover{background:#fff}
 .tabs-right.nav-tabsty .nav-tabs li a:hover{background:#eee;}
 .tabs-right.nav-tabsty{ margin-bottom:-2px; margin-top:-2px;}
-.tabs-right.nav-tabsty>.nav-tabs{border:none}
+.tabs-right.nav-tabsty>.nav-tabs{border:none;position: absolute;right:0;top:0;z-index:2}
 .jarviswidget{width:35%;float:right}
-.tab-content02{ padding: 0;float:left;width: 88%;position: absolute;}
+.tab-content02{ padding: 0;width: 88%;}
 .ajax-loading-error{margin-top:18px}
 </style>
 #set(urlMap = getInfo(type,id))

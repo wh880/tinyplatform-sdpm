@@ -12,30 +12,58 @@
     <span class="r" style="position:relative;top:-28px;height:0">
 ##			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">#buttonIcon(iconClass="icon-globe")所有产品</a>&nbsp;
     <!--新增产品-->
-    #@aModal("#myModal" "新增产品" "900" "500" "btn-class" "#")#buttonIcon(iconClass="icon-plus-sign")添加客户 #end
+##    #@aModal("#myModal" "新增产品" "900" "500" "btn-class" "#")#buttonIcon(iconClass="icon-plus-sign")添加客户 #end
     </span>
 
     ##这里是动态的模块布局
-    #end
-#end
-#@div(divClass="operationbar")
-    #include("/service/page/multiSearch.page")
-#end
-#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
-    #@toggleLeft({"class":"aclass"})
-        #@settoggleLeftTitle()所属产品#end
-        #@settoggleLeftBody("treeLeftbox")
-        <ul class="treeList">
-            <li id="listContent" style="display:none; position:absolute;left:74px;">
-                <ul id="alternative" class="ztree"
-                    style="width:126px;min-height:160px;max-height:300px;"></ul>
-            </li>
-        </ul>
-        <ul id="treeDrag" class="ztree"></ul>
+
+
+    ###@div(divClass="operationbar")
+    ##    #include("/service/page/multiSearch.page")
+    ###end
+        #@tabBodyCol("ptop-5")
+        ##operationbar star
+            #@div(divClass="operationbar")
+            <span class="f">
+					<a href="#" class="active_btn">详情</a>
+
+					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+				</span>
+            <span class="r">
+					#@iconOperations(
+                        "#myModal" "icon-upload-alt" "导入" "500" "100" "/service/page/tabledemo/slaImport.pagelet""ml-5")
+                        &nbsp导入#end
+
+                #@iconOperations(
+                    "#myModal" "icon-download-alt" "导出" "500" "100" "/service/page/tabledemo/slaExport.pagelet" "ml-5")
+                    &nbsp导出#end
+
+            ##<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
+            ##<a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
+                <a href="${TINY_CONTEXT_PATH}/service/page/clientAdd.page">#buttonIcon(iconClass="icon-plus")新建客户</a>
+				</span>
+                #div(divClass="clearfix")
+                #include("/service/page/mulsearch.page")
+            #end
+        ##operationbar end
         #end
-    #end
-    #@toggleRight()
-        #include("/service/page/tabledemo/clientTable.page")
+        #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+            #@toggleLeft({"class":"aclass"})
+                #@settoggleLeftTitle()所属产品#end
+                #@settoggleLeftBody("treeLeftbox")
+                <ul class="treeList">
+                    <li id="listContent" style="display:none; position:absolute;left:74px;">
+                        <ul id="alternative" class="ztree"
+                            style="width:126px;min-height:160px;max-height:300px;"></ul>
+                    </li>
+                </ul>
+                <ul id="treeDrag" class="ztree"></ul>
+                #end
+            #end
+            #@toggleRight()
+                #include("/service/page/tabledemo/clientTable.page")
+            #end
+        #end
     #end
 #end
 <script type="text/javascript">
@@ -63,7 +91,7 @@
             beforeRename: beforeRename,
             onRemove: onRemove,
             onRename: onRename
-        }
+            }
     };
     var treeNodes = [
         {id: 1, pId: 0, name: "随意拖拽", open: true},
@@ -82,15 +110,15 @@
 
     var log, className = "dark";
     function beforeDrag(treeId, treeNodes) {
-        return false;
-    }
+            return false;
+        }
     function beforeEditName(treeId, treeNode) {
         className = (className === "dark" ? "" : "dark");
         showLog("[ " + getTime() + " beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
         var zTree = $.fn.zTree.getZTreeObj("treeDrag");
         zTree.selectNode(treeNode);
         return confirm("进入节点 -- " + treeNode.name + " 的编辑状态吗？");
-    }
+        }
     function beforeRemove(treeId, treeNode) {
         className = (className === "dark" ? "" : "dark");
         showLog("[ " + getTime() + " beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
@@ -159,14 +187,14 @@
     }
     ;
     function selectAll() {
-        var zTree = $.fn.zTree.getZTreeObj("treeDrag");
+            var zTree = $.fn.zTree.getZTreeObj("treeDrag");
         zTree.setting.edit.editNameSelectAll = $("#selectAll").attr("checked");
     }
 
     $(document).ready(function () {
         $.fn.zTree.init($("#treeDrag"), setting);
         $("#selectAll").bind("click", selectAll);
-    });
+        });
     //-->
 
     function dropPrev(treeId, nodes, targetNode) {
@@ -179,10 +207,10 @@
                 if (curPNode && curPNode !== targetNode.getParentNode() && curPNode.childOuter === false) {
                     return false;
                 }
+                }
             }
-        }
         return true;
-    }
+        }
     function dropInner(treeId, nodes, targetNode) {
         if (targetNode && targetNode.dropInner === false) {
             return false;
@@ -193,10 +221,10 @@
                 } else if (curDragNodes[i].parentTId && curDragNodes[i].getParentNode() !== targetNode && curDragNodes[i].getParentNode().childOuter === false) {
                     return false;
                 }
+                }
             }
-        }
         return true;
-    }
+        }
     function dropNext(treeId, nodes, targetNode) {
         var pNode = targetNode.getParentNode();
         if (pNode && pNode.dropInner === false) {
@@ -207,10 +235,10 @@
                 if (curPNode && curPNode !== targetNode.getParentNode() && curPNode.childOuter === false) {
                     return false;
                 }
+                }
             }
-        }
         return true;
-    }
+        }
 
     var log, className = "dark", curDragNodes, autoExpandNode;
     function beforeDrag(treeId, treeNodes) {
@@ -224,20 +252,20 @@
                 curDragNodes = null;
                 return false;
             }
-        }
+            }
         curDragNodes = treeNodes;
         return true;
-    }
+        }
     function beforeDragOpen(treeId, treeNode) {
         autoExpandNode = treeNode;
         return true;
     }
     function beforeDrop(treeId, treeNodes, targetNode, moveType, isCopy) {
-        className = (className === "dark" ? "" : "dark");
+            className = (className === "dark" ? "" : "dark");
         showLog("[ " + getTime() + " beforeDrop ]&nbsp;&nbsp;&nbsp;&nbsp; moveType:" + moveType);
         showLog("target: " + (targetNode ? targetNode.name : "root") + "  -- is " + (isCopy == null ? "cancel" : isCopy ? "copy" : "move"));
         return true;
-    }
+        }
     function onDrag(event, treeId, treeNodes) {
         className = (className === "dark" ? "" : "dark");
         showLog("[ " + getTime() + " onDrag ]&nbsp;&nbsp;&nbsp;&nbsp; drag: " + treeNodes.length + " nodes.");
@@ -260,7 +288,7 @@
         if (log.children("li").length > 8) {
             log.get(0).removeChild(log.children("li")[0]);
         }
-    }
+        }
     function getTime() {
         var now = new Date(),
                 h = now.getHours(),

@@ -47,7 +47,7 @@ $(function () {
                 result.no_menu = (window.localStorage.demo_no_menu && window.localStorage.demo_no_menu === '1');
                 result.tinycontainer = (window.localStorage.demo_tinycontainer && window.localStorage.demo_tinycontainer === '1');
                 result.theme = testTheme((window.localStorage.demo_theme) ? window.localStorage.demo_theme : '');
-                result.menupos = window.localStorage.demo_menupos ? window.localStorage.demo_menupos : "left";
+                result.menupos = window.localStorage.demo_menupos ? window.localStorage.demo_menupos : "top";
                 result.mmstate = window.localStorage.pa_mmstate ? window.localStorage.pa_mmstate : "expanded";
 
                 return result;

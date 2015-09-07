@@ -6,7 +6,7 @@
 </style>
 
 
-#set(name="version")
+#set(name="qualityVersion")
 #@div()
 #@tabWithInit("tab_demo" "optionsBox")
     #@div(divClass="dropdownBox")
