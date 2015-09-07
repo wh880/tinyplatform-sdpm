@@ -19,7 +19,7 @@
     <menu id="organizationDepartment" name="部门" href="/organization/department.page" icon="" sort="1" isShow="1"
           permission="Permission">
     </menu>
-    <menu id="organizationPrivilege" name="权限" href="/organization/privilege.page" icon="" sort="1" isShow="1"
+    <menu id="organizationPrivilege" name="角色" href="/organization/privilege.page" icon="" sort="1" isShow="1"
           permission="Permission">
     </menu>
     <menu id="organizationCompany" name="公司" href="/organization/company.page" icon="" sort="1" isShow="1"
