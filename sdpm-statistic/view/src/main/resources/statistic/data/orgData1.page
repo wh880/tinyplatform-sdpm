@@ -8,14 +8,17 @@
 <script type="text/javascript">
     $(".select2").select2();
 </script>
-<br>
+<br/>
 指派时间：
-#@tinyDateInput("begin" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
-至
-#@tinyDateInput("end" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
-每天工时：
-#tinyInput("input-text radius" "worktime")
+#daterangepicker("2015/08/01" "2015/08/01" "reservation" "reservationtime" "width:230px")
+#daterangepickerInit("#reservationtime" "timePicker: true,timePickerIncrement: 30,format: 'YYYY/MM/DD'")
+<br/>
 
+<div class="col-3">
+    每天工时：
+    #tinyInput("input-text radius" "worktime")
+    <br/>
+</div>
 <div style="height: 10px;"></div>
 #@tableStriped("table-border")
     #@thead()
