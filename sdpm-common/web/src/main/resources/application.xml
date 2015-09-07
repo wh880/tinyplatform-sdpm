@@ -43,9 +43,10 @@
     <file-resolver-configuration
             resolve-classpath="true">
         <class-paths>
-            <!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
+            <!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" />
                 <class-path path="E:\workspace\sdpm\sdpm-common\view\src\main\resources"/>
-                <class-path path="E:\workspace\sdpm\sdpm-statistic\view\src\main\resources"/>
+				
+                <class-path path="E:\test\后台管理\完整\sdpm\sdpm-common\view\src\main\resources"/> -->
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>
@@ -633,7 +634,7 @@
     </jcs-config>
 
     <!--文件监控器配置参数，具体参见FileMonitorProcessor配置管理手册，interrupt扫描间隔时间，单位秒 -->
-    <file-monitor interval="10" enable="false"/>
+    <file-monitor interval="10" enable="ture"/>
 
     <gzip-filter max-content-length="0">
         <!-- 多个content-type已分号隔开 -->
