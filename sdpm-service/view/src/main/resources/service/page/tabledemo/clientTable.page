@@ -11,17 +11,18 @@
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})姓名#end
-                #@tinyTh({"class":"","rel":"sortname"})用户名#end
-                #@tinyTh({"class":"","rel":"sortname"})职位#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})邮123箱#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})性别#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})电话#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})加入日期#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})最后登录#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})操作#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})产品ID#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})客户ID#end
+                #@tinyTh({"class":"","rel":"sortname"})客户单位#end
+                #@tinyTh({"class":"","rel":"sortname"})客户名称#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})客户登记人#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})客户联系人#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})客户登记时间#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})客户状态#end
+                #@tinyTh({"class":"","rel":"sortname"})操作#end
             #end
         #end
     #end
 #end
+#@simpleModal("myModal" "用户编辑")#end
+#@simpleModal("myModal2" "用户删除")#end

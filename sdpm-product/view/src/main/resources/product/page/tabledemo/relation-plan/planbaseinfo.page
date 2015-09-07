@@ -37,15 +37,10 @@
 </ul>			
       #end
       
-      #@div(divClass="infoContent")
-	        <p class="titleName">其他相关</p>
-<ul>
-	<li>
+
 				#@div(divClass="infoContent")
 	        	<p class="titleName">历史记录</p>
 	       		#include("/product/page/tabledemo/historyrecord.page")
 				#end
-	</li>    
-</ul>				
-      #end
+
  </div>
