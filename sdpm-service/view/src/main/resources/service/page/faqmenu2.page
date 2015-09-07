@@ -1,19 +1,63 @@
 ###!set(activeTitle="左侧树",activeMenuId="1.4")
 #import("/org/tinygroup/zTree/components/zTree.component")
+#!set(activeTitle="服务管理",activeMenuId=currentPageId)
 ##     #import("/fulimanageui/form.component")
 <style>
-    .tablebox {
-        overflow: hidden;
-    }
+   .faqSty{margin:5px;padding:10px 12px;border: none;}
 </style>
 #macro ztreeClick()
 if(!treeNode.isParent){
 loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 }
 #end
+
+
+#set(name="faqmenu2")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/service/page/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/service/page/tab.page")
+        #end
+
+        #@tabBodyCol("ptop-5")
+        ##operationbar star
+            #@div(divClass="operationbar")
+            <span class="f">
+					<a href="#" class="active_btn">未关闭</a>
+					<a href="#">全部请求</a>
+					<a href="#">指派给我</a>
+					<a href="#">由我创建</a>
+					<a href="#">由我评审</a>
+					<a href="#">由我关闭</a>
+					<a href="#">草稿</a>
+					<a href="#">激活</a>
+					<a href="#">已变更</a>
+					<a href="#">待关闭</a>
+					<a href="#">已关闭</a>
+					<a href="#">#buttonIcon(iconClass="icon-search")搜111索</a>
+				</span>
+            <span class="r">
+
+                <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
+				</span>
+                #div(divClass="clearfix")
+                #include("/service/page/multiSearch.page")
+            #end
+        ##operationbar end
+        #end
+
+
+    #end
+
+
+
+
 ###@h2()${activeTitle}#end
 #@divDataTablebox()
-    #@tableHeaderBar()${activeTitle}#end
+
     #@leftTreeCol()
  ##         #@searchZtreeWithInit("treeDemo" "height:454px;" "/admin/product/tree")
         #@searchZtreeWithInit("treeDemo" "height:454px;" "/service/js/service1.js")
@@ -30,13 +74,13 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         <p>123</p>
         #end       *#
 
-        #@div(divClass="faq")
+        #@div(divClass="faqSty")
             #@OlTopList()
-                #topItem(1 "/service/page/questiondb.page" "如何初始化项目管理数据库？" "18:12")
-                #normalLiItems(2 "#" "项目里面的版本和测试的版本有什么区别？" "14:12" "green")
-                #normalLiItems(3 "#" "怎么维护项目的模块？" "13:12" "darkGreen")
-                #normalLiItems(4 "#" "任务可以指派多人吗？" "11:12" "grey")
-                #normalLiItems(5 "#" "访问项目管理，可以绑定域名吗？" "09:12")
+                #topItem(1 "../page/questiondb.page" "如何初始化项目管理数据库？" "18:12")
+                #normalLiItems(2 "../page/questiondb.page" "项目里面的版本和测试的版本有什么区别？" "14:12" "green")
+                #normalLiItems(3 "../page/questiondb.page" "怎么维护项目的模块？" "13:12" "darkGreen")
+                #normalLiItems(4 "../page/questiondb.page" "能将项目转交给别人吗？" "11:12" "grey")
+                #normalLiItems(5 "../page/questiondb.page" "访问项目管理，可以绑定域名吗？" "09:12")
             #end
         #end
 
@@ -58,4 +102,6 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         });
         return false;
     });
+
 </script>
+    #end

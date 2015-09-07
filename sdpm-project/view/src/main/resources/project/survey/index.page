@@ -4,12 +4,12 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 <style>
-.tabLayout .tabBar span a{color:#333}
+#*.tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
-.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}*#
 .b {margin-left: 8px;}
-.infoContent{ margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
-.infoContent .titleName{margin-top:-16px;margin-bottom:8px;font-weight:bold;font-size:13px;}
+#*.infoContent{ margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
+.infoContent .titleName{margin-top:-16px;margin-bottom:8px;font-weight:bold;font-size:13px;}*#
 </style>
 
 #include("/project/event/common.page")
@@ -21,7 +21,7 @@
 			#end
 			#@tabHead()
 				#include("/project/protab.page")							
-				<span class="r" style="position:relative;top:-6px;height:0">
+				<span class="r" style="position:relative;top:2px;height:0">
 					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
 					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
 				</span>

@@ -1,0 +1,5 @@
+<type-infos>
+	<type-info name="qualityVersionSituation" >
+	    <info name="versionSituationInfo" title="基本信息" resource="quality" infoParameter="" url="/testManagement/page/versionSituationpaging.pagelet"/>
+	</type-info>
+</type-infos>

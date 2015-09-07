@@ -28,7 +28,7 @@
     <span class="r">
 		#buttonRadiusDefault(caption="取消")
 			</span>#end
-<div style="width:70%;float:left">
+<div style="width:65%;float:left">
 	#@div(divClass="infoContent")
         <p class="titleName">重现步骤</p>
 				#@tinyueditor("content" "content" "min-height:150px")步骤<br>结果<br>期望#end

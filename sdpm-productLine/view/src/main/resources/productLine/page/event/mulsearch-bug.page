@@ -12,7 +12,7 @@
 	#moreOrLite{display:block;width:30px;position:absolute;right:0;top:0;text-align:center}
 	#moreOrLite a{display:inline-block}
 	#moreOrLite a:hover{background:#eee}
-	#searchform{position:relative;text-align:center;display:none;padding-bottom:20px}
+	#searchform{position:relative;text-align:center;display:none;}
 	#searchform.showmore{display:block}
 	#searchbox5,#searchbox6,#searchbox2,#searchbox3{display:none}
 </style>
