@@ -27,8 +27,7 @@
             #@div(divClass="operationbar")
             <span class="f">
 					<a href="#" class="active_btn">详情</a>
-					<a href="#">所有</a>
-					<a href="#">指派给我</a>
+
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
             <span class="r">
@@ -46,7 +45,7 @@
         ##operationbar end
         #end
 
-        #@toggleBox({"class":"open"})
+        #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
             #@toggleLeft({"class":"aclass"})
                 #@settoggleLeftTitle()所属产品#end
                 #@settoggleLeftBody("treeLeftbox")
@@ -58,6 +57,9 @@
                 </ul>
                 <ul id="treeDrag" class="ztree"></ul>
                 #end
+            #end
+            #@toggleRight()
+                #include("/service/page/tabledemo/slaTable.page")
             #end
         #end
     ##toggle end
