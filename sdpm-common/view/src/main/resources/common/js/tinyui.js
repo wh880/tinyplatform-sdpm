@@ -300,7 +300,7 @@ $(function () {
         ' position: absolute;',
         ' right: -' + (panel_width + 30) + 'px;',
         ' width: ' + (panel_width + 10) + 'px;',
-        ' top:-50px;',
+        ' top:-9px;',
         ' padding-right: 10px;  ',
         ' background: #333;',
         ' border-radius: 5px;',
@@ -449,7 +449,7 @@ $(function () {
         '     </li>',
         '     <li class="clearfix">',
         '       <span>菜单位置</span>',
-        '       <div class="demo-checkbox"><input type="radio" name="navposition" value="left" id="navpositionleft" ' + ((demo_settings.menupos == "left") ? ' checked="checked"' : '' ) + '><label for="navpositionleft">左边</label> <input type="radio" name="navposition" id="navpositiontop" value="top"' + ((demo_settings.menupos == "top") ? ' checked="checked"' : '' ) + '><label for="navpositiontop">顶部</label> </div>', /*<input type="radio" name="navposition" value="right" id="navpositionright"' + ((demo_settings.menupos=="right") ? ' checked="checked"' : '' ) + '><label for="navpositionright">右边</label> */
+        '       <div class="demo-checkbox"> <input type="radio" name="navposition" id="navpositiontop" value="top"' + ((demo_settings.menupos == "top") ? ' checked="checked"' : '' ) + '><label for="navpositiontop">顶部</label> </div>', /*<input type="radio" name="navposition" value="right" id="navpositionright"' + ((demo_settings.menupos=="right") ? ' checked="checked"' : '' ) + '><label for="navpositionright">右边</label> */
         '     </li>',
         /*'     <li class="clearfix">',
          '       <span>菜单在顶部</span>',
