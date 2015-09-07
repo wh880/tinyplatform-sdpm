@@ -1,6 +1,6 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 
-#set(name="version")
+#set(name="qualityVersion")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
 			#@div(divClass="dropdownBox")

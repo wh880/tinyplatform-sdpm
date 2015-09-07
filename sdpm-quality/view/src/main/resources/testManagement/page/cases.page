@@ -1,7 +1,7 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 
 
-#set(name="case")
+#set(name="qualityCases")
 #@div()
 #@tabWithInit("tab_demo" "optionsBox")
     #@div(divClass="dropdownBox")
