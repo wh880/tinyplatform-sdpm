@@ -3,67 +3,70 @@
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 <style>
-    .select_boxes{margin-top:0}
+    .select_boxes {
+        margin-top: 0
+    }
 </style>
 
 
 #set(name="bug")
 #@div()
-#@tabWithInit("tab_demo" "optionsBox")
-	#@div(divClass="dropdownBox")
-		#include("/testManagement/page/dropdownMenu.page")
-	#end
-	#@tabHead()
-		#include("/testManagement/page/Tab.page")
-	#end
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/testManagement/page/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/testManagement/page/Tab.page")
+        #end
 
-	#@tabBodyCol("ptop-5")
-##operationbar start1
+        #@tabBodyCol("ptop-5")
+        ##operationbar start1
 
-#end
-	#@div(divClass="operationbar")
-		<span class="f">
-					<a href="#" class="active_btn">编辑</a>
-			</span>
-    <span class="r">
-		#buttonRadiusDefault(caption="取消")
-			</span>#end
-<div style="width:65%;float:left">
-	#@div(divClass="infoContent")
-        <p class="titleName">重现步骤</p>
-				#@tinyueditor("content" "content" "min-height:150px")步骤<br>结果<br>期望#end
+        #end
+        #@div(divClass="operationbar")
+        <span class="f">
+            <a href="#" class="active_btn">编辑</a>
+        </span>
+        <span class="r">
+            <a href="#" class="active_btn">保存</a>
+        </span>
+        #end
+    <div style="width:65%;float:left">
+        #@div(divClass="infoContent")
+            <p class="titleName">重现步骤</p>
+            #@tinyueditor("content" "content" "min-height:150px")步骤<br>结果<br>期望#end
 
-	#end
-	#@div(divClass="infoContent")
-        <p class="titleName">备注</p>
-        <div>
-			#@formControlDiv()
+        #end
+        #@div(divClass="infoContent")
+            <p class="titleName">备注</p>
+            <div>
+                #@formControlDiv()
 				#@tinyueditor("contents" "contents""min-height:150px")#end
 			#end
-        </div>
-	#end
-	#@div(divClass="infoContent")
-        <p class="titleName">附件</p>
-        <div>
+            </div>
+        #end
+        #@div(divClass="infoContent")
+            <p class="titleName">附件</p>
+            <div>
 
-					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
+                #tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
 
 
 			#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
 
-        </div>
-	#end
-	#buttonRadiusDefault(caption="保存")
-	#buttonRadiusDefault(caption="返回")
-	#@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-	##加入后，js代码会导致页面排版混乱
-		#include("/testManagement/page/historyRecord.page")
-	#end
+            </div>
+        #end
+        #buttonRadiusDefault(caption="保存")
+        #buttonRadiusDefault(caption="返回")
+        #@div(divClass="infoContent")
+            <p class="titleName">历史记录</p>
+        ##加入后，js代码会导致页面排版混乱
+            #include("/testManagement/page/historyRecord.page")
+        #end
+    #end
 #end
-	#end
     <div style="width: 35%;float: right">
-		#TypeInfo("qualityBugEdition")
+        #TypeInfo("qualityBugEdition")
     </div>
 
 
@@ -71,7 +74,7 @@
 
 
 </div>
-	#@p(pClass="clearfix") #end
+#@p(pClass="clearfix") #end
 <script type="text/javascript">
     $(".select2").select2();
 </script>
