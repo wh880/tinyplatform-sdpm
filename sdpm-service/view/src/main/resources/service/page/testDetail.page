@@ -45,7 +45,7 @@
             </div>
         #end
         #@div(divClass="infoContent")
-            <p class="titleName">历史记录</p>
+            <p class="titleName">历史记录111</p>
             #include("/service/page/historyRecord.page")
         #end
         <div style="text-align:center;margin:auto">
@@ -77,9 +77,10 @@
                 #end
             #end
 
-            <a href="#" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
-            <a href="#" title="删除版本">#buttonIcon(iconClass="icon-remove")</a>
-            <a href="#" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+
+            #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/service/page/testEdit.pagelet" "ml-5")
+            #iconOperations("#myModal2" "icon-remove" "删除" "550" "100" "/service/page/testDelect.pagelet" "ml-5")
+            <a href="${TINY_CONTEXT_PATH}/service/page/test.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
         </div>
     </div>
 
