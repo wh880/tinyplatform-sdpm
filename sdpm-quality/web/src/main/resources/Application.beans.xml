@@ -41,6 +41,7 @@
         <!-- serviceMapping -->
 				<ref bean="serviceMappingFileProcessor"/>
                 <ref bean="menuFileProcessor"/>
+                <ref bean="typeInfoProcessor"/>
 			</list>
 		</property>
 	</bean>
