@@ -130,7 +130,7 @@
 #end
 #end
 <script type="text/javascript">
-/* Set doc type. */
+ /* Set doc type. */
 function setType(type)
 {
 	if(type == 'url')
