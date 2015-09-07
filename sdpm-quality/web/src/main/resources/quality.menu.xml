@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<menu id="quality" name="测试管理" href="/quality/Bug.page" icon="fa-dashboard" sort="1" isShow="1" permission="Permission">
-
-</menu>
