@@ -10,7 +10,7 @@
 #foreach(var:[1..pagesize])
     #@tr()
         #@td()<input type="checkbox" value="1" name="idCheck">#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/page/testDetail.page"> 001</a>${page}#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/page/slaDetail.page"> 001</a>${page}#end
         #@td()001#end
         #@td()001#end
         #@td()协议标题#end
