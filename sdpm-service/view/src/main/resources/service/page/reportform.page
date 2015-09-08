@@ -37,9 +37,8 @@
 
     });
 </script>
-
-#include("/product/page/event/common.page")
-#set(name="bug")
+#set(name="request1")
+#include("/common/common.page")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
 

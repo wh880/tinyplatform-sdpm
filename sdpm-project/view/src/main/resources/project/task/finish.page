@@ -26,7 +26,7 @@
 	
 #@toggleRight()
 #@tinyForm("thisform" "url" "post" {"class":""})
-	<div style="width:50%;float:left">
+	<div>
 	#@elementItem()
 		#@colLabel()总消耗#end
 		#@formControlDiv("col-8")
@@ -86,16 +86,17 @@
 	#end
 #end
 </div>
-<div style="width:50%;float:right">
-#@div(divClass="infoContent")
-<p class="titleName">历史记录</p>
-#import("/org/tinygroup/fold/components/fold.component")
-#@foldMenu("" "Tinyfold3" "" "width:100%")
-    #include("/project/recordlist.page")
-#end 
-#end 
+
+#end
+<div>
+	#@div(divClass="infoContent")
+        <p class="titleName">历史记录</p>
+		#import("/org/tinygroup/fold/components/fold.component")
+		#@foldMenu("" "Tinyfold3" "" "width:100%")
+			#include("/project/recordlist.page")
+		#end
+	#end
 </div>
-#end 
 <script type="text/javascript">
 $(function(){
 	$(".Hui_aside").scrollTop(380);

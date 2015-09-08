@@ -43,12 +43,12 @@
 					#if("demand"==type)
 						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="demand"?"Current":"")
 							#@buttons("","icon-lightbulb")
-								已关联需求列表
+								已关联需求
 							#end
 						#end
 						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-no-req.page" cname=="no-demand"?"Current":"")
-							#@buttons("","icon-lightbulb")
-								未关联需求列表
+							#@buttons("","icon-unlink")
+								未关联需求
 							#end
 						#end
 						#if("no-demand"==cname)
@@ -62,12 +62,12 @@
 					#if("bug"==type)
 						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="bug"?"Current":"")
 							#@buttons("","icon-bug green")
-								已关联Bug列表
+								已关联Bug
 							#end
 						#end
 						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-no-bug.page" cname=="no-bug"?"Current":"")
-							#@buttons("","icon-bug green")
-								未关联Bug列表
+							#@buttons("","icon-unlink")
+								未关联Bug
 							#end
 						#end
 						#if("no-bug"==cname)

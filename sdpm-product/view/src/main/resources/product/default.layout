@@ -22,6 +22,11 @@
 		#end
 		
 		#@tabHead()
+				
+				#foreach(m in menuManager.getChildMenus("myproduct"))
+					#@aHeadCol(TINY_CONTEXT_PATH+m.href linkName==m.id?"Current":"")${m.name}#end
+				#end
+#*				
 				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/togglebox.page?currentPageId="+currentPageId linkName=="demand"?"Current":"")需求#end
 				
 				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/dymanicdata.page?currentPageId="+currentPageId  linkName=="dynamic"?"Current":"")动态#end
@@ -39,7 +44,7 @@
 				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/product-modular.page?currentPageId="+currentPageId  linkName=="modular"?"Current":"")模块#end
 				
 				#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/project/overview.page?currentPageId="+currentPageId  linkName=="overview"?"Current":"")概况#end
-				
+				*#
 		#end
 		
 		<span class="r" style="position:relative;top:-28px;height:0">

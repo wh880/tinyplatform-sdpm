@@ -19,38 +19,41 @@
 	
 #@toggleRight()
 #@tinyForm("thisform" "" "post" {"class":"test"})
-	 #@tableBorder()
+	 #@tableBorder("text-c")
 	 	#@thead()
-	 		#@tr()
-	 			#@thW()	ID	#end
-	 			#@thW("20")	日期	#end
-	 			#@thW()	耗时#end
-	 			#@thW()	剩余	#end
-	 			#@thW()	工作内容	#end
-	 			#@thW()	操作#end
+	 		#@tr("text-c")
+	 			#@th()	ID	#end
+	 			#@thW("20")日期	#end
+	 			#@th()耗时#end
+	 			#@th()剩余#end
+	 			#@th()工作内容#end
+	 			#@th()操作#end
 	 			
 	 		#end
 	 	
 	 	#end
 	 	#@tbody()
 	 	#for(i:[1..3])
-	 	 #@tr()
-	 	  #@th()${i} #end
-	 	  #@th()  22	  #end
-	 	   #@th() 	  22	 	  #end	 	
-	 	     #@th()	  22	  #end
-	 	   #@th() 	  22	 	  #end
-	 	   #@th() 	  #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "#" "ml-5")
-		              #iconOperation(" icon-remove" "删除" "ml-5")	 	  #end
+	 	 #@tr("text-c")
+	 	  #@th("text-c")${i} #end
+	 	  #@th()22#end
+	 	   #@th()22	#end
+	 	     #@th()22#end
+	 	   #@th()22	#end
+	 	   #@th()#iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "#" "ml-5")
+			   #iconOperation(" icon-remove" "删除" "ml-5")	 	  #end
 	 	  #end
 	 	 #end
 	 	 #for(i:[1..3])
-	 	 #@tr()
+	 	 #@tr("text-c")
 	 	  #@th()${i} #end
 	 	  #@th()  #dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:200px'")#end
 	 	   #@th() 	   #tinyInput("text" "username") 	  #end	 	
 	 	     #@th()	  #tinyInput("text" "username")	  #end
 	 	   #@th() 	  #tinyInput("text" "username") 	  #end
+			 #@th()#iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "#" "ml-5")
+				 #iconOperation(" icon-remove" "删除" "ml-5")	 	  #end
+
 	 	 #end
 	 	  #end
 	 	 #end
