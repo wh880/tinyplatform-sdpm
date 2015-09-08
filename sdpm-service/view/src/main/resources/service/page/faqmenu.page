@@ -13,7 +13,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 #end
 
 
-#set(name="faqmenu")
+#set(name="faq")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
