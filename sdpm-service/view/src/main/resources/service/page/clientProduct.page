@@ -22,6 +22,8 @@
                 #@iconOperations(
                     "#myModal2" "icon-plus" "购买产品" "600" "400" "/service/page/clientProductAdd.pagelet" "ml-5")购买产品#end
             ##                <a href="/service/page/clientProductAdd.page">#buttonIcon(iconClass="icon-plus")新建产品</a>
+                <a href="${TINY_CONTEXT_PATH}/service/page/clientUser.page"
+                   title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
             </span>
                 #div(divClass="clearfix")
                 #include("/service/page/mulsearch.page")
@@ -33,6 +35,23 @@
 #end
 #@simpleModal("myModal1" "导出")#end
 #@simpleModal("myModal2" "新建产品")#end
+
+<script>
+    $(function () {
+        $(".tinytable").on("click", ".icon-remove", function () {
+            //console.log($(this).attr("itemId"))
+            // user_del(this, '1');
+            var that = this;
+            layer.confirm('确定要删除该记录？', function (index) {
+                //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                //$.ajax()
+                //console.log(index);
+                layer.msg($("已删除").attr("deleteList"), 1);
+//                layer.msg('已删除', 1);
+            })
+        });
+    });
+</script>
 <script type="text/javascript">
     <!--
     var setting = {
