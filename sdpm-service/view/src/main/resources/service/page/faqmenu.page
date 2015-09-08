@@ -5,6 +5,7 @@
 ##     #import("/fulimanageui/form.component")
 <style>
     .faqSty{margin:5px;padding:10px 12px;border: none;}
+    .faqSty .pd-15{padding:0 0 16px; text-align: left;line-height:30px;}
 </style>
 #macro ztreeClick()
 if(!treeNode.isParent){
@@ -13,7 +14,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 #end
 
 
-#set(name="faqmenu")
+#set(name="faq")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -22,35 +23,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         #@tabHead()
             #include("/service/page/tab.page")
         #end
-        #@tabBodyCol("ptop-5")
-        ##operationbar star
-            #@div(divClass="operationbar")
-            <span class="f">
-##					<a href="#" class="active_btn">未关闭</a>
-##					<a href="#">全部请求</a>
-##					<a href="#">指派给我</a>
-##					<a href="#">由我创建</a>
-##					<a href="#">由我评审</a>
-##					<a href="#">由我关闭</a>
-##					<a href="#">草稿</a>
-##					<a href="#">激活</a>
-##					<a href="#">已变更</a>
-##					<a href="#">待关闭</a>
-##					<a href="#">已关闭</a>
-##					<a href="#">#buttonIcon(iconClass="icon-search")搜111索</a>
-				</span>
-            <span class="r">
 
-      ##          <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
-          <a href="${TINY_CONTEXT_PATH}/service/page/addquestion.page">#buttonIcon(iconClass="icon-plus")新增问题</a>
-				</span>
-                #div(divClass="clearfix")
-                #include("/service/page/multiSearchfaq.page")
-#####                ##新建搜索page
-
-            #end
-        ##operationbar end
-        #end
 
 
     #end
@@ -78,6 +51,24 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
                 #end       *#
 
             #@div(divClass="faqSty")
+                #@topSearch()
+                ##    #wDatePicker("日期范围")
+                    #simpleText("请输入要搜索的问题" "" "width:30%")
+                #*     #@selectWBox()
+                       #@select("demo1" "demo1")
+                            #@optionSelected("")请选择目录#end
+                            #@optionItem("1")菜单一#end
+                            #@optionItem("1")菜单二#end
+                            #@optionItem("1")菜单三#end
+                        #end
+                    #end                                                      *#
+                    #@btnSubmit("icon-search")&nbsp;搜问题#end
+                <span class="r">
+
+      ##          <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
+          <a href="${TINY_CONTEXT_PATH}/service/page/addquestion.page">#buttonIcon(iconClass="icon-plus")新增问题</a>
+				</span>
+                #end
                 #@OlTopList()
                 #* #topItem(1 "../page/questiondb.page" "如何初始化项目管理数据库？" "18:12")*#
                     #@normalLiItemsconment(1 "../page/questiondb.page" "访问项目管理，可以绑定域名吗？" "")
