@@ -15,12 +15,12 @@
 					<a href="#" class="active_btn">恒生公司</a>
 			</span>
             <span class="r">
-                #iconOperations("#myModal" " icon-pencil" "编辑" "865"
-                    "448" "/service/page/testEdit.pagelet" "ml-5")
-                #iconOperations("#myModal2" "icon-remove" "删除" "550"
-                    "100" "/service/page/testDelect.pagelet" "ml-5")
+                #@iconOperations("#myModal1" " icon-pencil" "客户编辑" "865"
+                    "448" "/service/page/companyInfoEdit.pagelet" "ml-5")编辑#end
+                #@iconOperations("#myModal2" "icon-remove" "客户删除" "550"
+                    "100" "/service/page/slaDelect.pagelet" "ml-5")删除#end
                 <a href="${TINY_CONTEXT_PATH}/service/page/clientUser.page"
-                   title="返回">#buttonIcon(iconClass="icon-reply")</a>
+                   title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
 			</span>
             #end
         ##operationbar end
@@ -43,7 +43,15 @@
                         #end
                         #@tr()
                             #@th()联系人电话#end
-                            #@td()0571-825172627#end
+                            #@td()1361729202#end
+                        #end
+                        #@tr()
+                            #@th()公司传真#end
+                            #@td()0571-825616772#end
+                        #end
+                        #@tr()
+                            #@th()公司邮编#end
+                            #@td()311000#end
                         #end
                         #@tr()
                             #@th()公司地址#end
@@ -56,3 +64,5 @@
     </div>
     #end
 #end
+#@simpleModal("myModal1" "客户编辑")#end
+#@simpleModal("myModal2" "客户删除")#end

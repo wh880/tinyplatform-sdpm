@@ -1,68 +1,34 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
     #@elementItem()
+        #@colLabel()产品名称：#end
+        #@formControlDiv("col-8")
+            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
+                #@tinyOptionItem("zh")支付宝#end
+                #@tinyOptionItem("en")财付通#end
+                #@tinyOptionItem("ta")余额宝#end
+            #end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
         #@colLabel()产品ID：#end
         #@formControlDiv("col-8")
             #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-                #@tinyOptionItem("zh")中国#end
-                #@tinyOptionItem("en")英国#end
-                #@tinyOptionItem("ta")泰国#end
+                #@tinyOptionItem("zh")2.0#end
+                #@tinyOptionItem("en")3.0#end
+                #@tinyOptionItem("ta")4.0#end
             #end
         #end
         #@validateDiv("col-2")#end
     #end
-    #@elementItem()
-        #@colLabel()客户ID：#end
+    #@daterangepickerPosition()
+        #@colLabel()发布时间：#end
         #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
-                "username","class":"input-text"})
+            #@tinyDateInput(
+                "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
         #end
         #@validateDiv("col-2")#end
     #end
-    #@elementItem()
-        #@colLabel()客户单位：#end
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
-                "username","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()客户名称：#end
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
-                "username","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()客户登记人：#end
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
-                "username","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()客户联系人：#end
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
-                "username","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-        #@daterangepickerPosition()
-            #@colLabel()客户登记时间：#end
-            #@formControlDiv("col-8")
-                #@tinyDateInput(
-                    "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
-            #end
-            #@validateDiv("col-2")#end
-        #end
 
 #end
 

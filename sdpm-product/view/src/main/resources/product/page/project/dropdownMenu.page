@@ -52,16 +52,17 @@
 		
 		#end
 	#end
-#*	<script type="text/javascript">
+
+		<script type="text/javascript">
 	<!--
 	$(function(){
 		$("#${sid}-select").on("change",function(){
 			//console.log("do something")
-			window.location.href='productNew.page?currentPageId=${currentPageId}&id='+$(this).val();
+			window.location.href='togglebox.page?currentPageId=${currentPageId}&id='+$(this).val();
 			console.log('productNew.page?currentPageId=${currentPageId}&id='+$(this).val())
 		});
 	});
 	//-->
-	</script>*#
+	</script>
 #end
 

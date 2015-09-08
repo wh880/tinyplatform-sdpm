@@ -24,18 +24,15 @@
         #@tabBodyCol("ptop-5")
         ##operationbar star
             #@div(divClass="operationbar")
-            <span class="f">
-					<a href="#" class="active_btn">详情</a>
-
-					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-				</span>
+            ##            <span class="f">
+            ##					<a href="#" class="active_btn">详情</a>
+            ##
+            ##					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+            ##				</span>
             <span class="r">
-					#@iconOperations(
-                        "#myModal" "icon-upload-alt" "导入" "500" "100" "/service/page/tabledemo/slaImport.pagelet""ml-5")
-                        &nbsp导入#end
 
                 #@iconOperations(
-                    "#myModal" "icon-download-alt" "导出" "500" "100" "/service/page/tabledemo/slaExport.pagelet" "ml-5")
+                    "#myModal" "icon-download-alt" "导出" "600" "100" "/service/page/tabledemo/slaExport.pagelet" "ml-5")
                     &nbsp导出#end
 
             ##<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
@@ -49,7 +46,7 @@
         #end
         #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
             #@toggleLeft({"class":"aclass"})
-                #@settoggleLeftTitle()所属产品#end
+                #@settoggleLeftTitle()所有产品#end
                 #@settoggleLeftBody("treeLeftbox")
                 <ul class="treeList">
                     <li id="listContent" style="display:none; position:absolute;left:74px;">
@@ -94,18 +91,18 @@
             }
     };
     var treeNodes = [
-        {id: 1, pId: 0, name: "随意拖拽", open: true},
-        {id: 11, pId: 1, name: "年龄 1-1"},
-        {id: 12, pId: 1, name: "年龄 1-2"},
-        {id: 13, pId: 1, name: "年龄 1-3"},
-        {id: 2, pId: 0, name: "随意拖拽2", open: true},
-        {id: 21, pId: 2, name: "学历 2-1"},
-        {id: 22, pId: 2, name: "学历  2-2"},
-        {id: 23, pId: 2, name: "学历  2-3"},
-        {id: 3, pId: 0, name: "禁止拖拽3", open: true, drag: false},
-        {id: 31, pId: 3, name: "城市 3-1", drag: false},
-        {id: 32, pId: 3, name: "城市 3-2", drag: false},
-        {id: 33, pId: 3, name: "地区 3-3", drag: false}
+        {id: 1, pId: 0, name: "支付宝", open: true},
+        {id: 11, pId: 1, name: "支付宝 1-1"},
+        {id: 12, pId: 1, name: "支付宝 1-2"},
+        {id: 13, pId: 1, name: "支付宝 1-3"},
+        {id: 2, pId: 0, name: "财付通", open: true},
+        {id: 21, pId: 2, name: "财付通 2-1"},
+        {id: 22, pId: 2, name: "财付通  2-2"},
+        {id: 23, pId: 2, name: "财付通  2-3"},
+        {id: 3, pId: 0, name: "余额宝", open: true, drag: false},
+        {id: 31, pId: 3, name: "财付通 3-1", drag: false},
+        {id: 32, pId: 3, name: "财付通 3-2", drag: false},
+        {id: 33, pId: 3, name: "财付通 3-3", drag: false}
     ];
 
     var log, className = "dark";

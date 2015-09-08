@@ -1,70 +1,57 @@
-#@tinyForm("thisform" "" "" {"class":"test"})
-    #@elementItem()
-        #@colLabel()产品ID：#end
-        #@formControlDiv("col-8")
-            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-                #@tinyOptionItem("zh")中国#end
-                #@tinyOptionItem("en")英国#end
-                #@tinyOptionItem("ta")泰国#end
-            #end
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()客户ID：#end
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
-                "username","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()客户单位：#end
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
-                "username","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()客户名称：#end
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
-                "username","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()客户登记人：#end
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
-                "username","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()客户联系人：#end
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
-                "username","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-        #@daterangepickerPosition()
-            #@colLabel()客户登记时间：#end
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+
+#@div(divClass="bugBox")
+##    #@p(pClass="title_sty")编辑公司信息#end
+    #@tinyForm("thisform" "url" "post" {"class":""})
+        #@elementItem()
+            #@colLabel()公司编号：#end
             #@formControlDiv("col-8")
-                #@tinyDateInput(
-                    "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+                #tinyInput("text" "公司编号" ""{"datatype":"","id":"公司编号","class":"input-text"})
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()公司联系人：#end
+            #@formControlDiv("col-8")
+                #tinyInput("text" "影响版本" "可以多人，间隔符英文,"{"datatype":"","id":"版本","class":"input-text"})
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()联系人电话：#end
+            #@formControlDiv("col-8")
+                #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()公司传真：#end
+            #@formControlDiv("col-8")
+                #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()公司邮编：#end
+            #@formControlDiv("col-8")
+                #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()公司地址：#end
+            #@formControlDiv("col-8")
+                #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
             #end
             #@validateDiv("col-2")#end
         #end
 
+    #end
 #end
+
+
 
 <script type="text/javascript">
     $(function () {
@@ -175,3 +162,8 @@
         });
     });
 </script>
+<script type="text/javascript">
+    $(".select2").select2();
+</script>
+
+
