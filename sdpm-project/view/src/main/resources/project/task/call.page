@@ -4,52 +4,70 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
 
-
-
 #include("/project/task/taskMenu.page")
-  
-   #@tinyForm("thisform" "" "" {"class":"test"})
-    <div>
-    #@elementItem()
-		#@colLabel("col-1")指派给&nbsp#end
-		#@formControlDiv("col-6")
-			#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-				#@tinyOptionItem("zh")中国#end
-				#@tinyOptionItem("en")英国#end
-				#@tinyOptionItem("ta")泰国#end
-			#end
+#@tinyForm("thisform" "" "" {"class":"test"})
+
+<style>
+
+</style>
+<div style="width:70%;float:left">
+    <div class="infoContent">
+        <p class="titleName">编辑</p>
+
+        <div class="RTtitle">
+            <button type="submit" id="submit" class="commitBtn">保存</button>
+        </div>
+
+		#@elementItem()
+            <div class="col-5">
+                <label>指派给</label>
+				#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+					#@tinyOptionItem("zh")admin#end
+					#@tinyOptionItem("en")TOM#end
+					#@tinyOptionItem("ta")JACK#end
+				#end
+            </div>
 		#end
-		#@validateDiv("col-2")#end</td>
-	#end
+		#@elementItem()
+            <div class="col-5">
+                <label>剩余时间</label>
+
+                <div>
+                    <input type="text" style="float:left">
+                    <span class="input-group-addon">小时</span>
+                </div>
+            </div>
+		#end
+
+		#@elementItem()
+            <div class="col-12">
+                <div class="col-1"><label>备注</label></div>
+                <div class="col-10"></div>
+                <div class="col-1">
+                </div>
+                <div class="col-12">
+					#@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+            </div>
+		#end
+    </div>
 	#@elementItem()
-		#@colLabel("col-1")剩余天数&nbsp#end
-		#@formControlDiv("col-6")
-			#tinyInput("text" "username" ""{"placeholder":"剩余天数","datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
-		#end
-		#@validateDiv("col-1")#end
+        <div class="col-12">
+            <div class="col-5">
+                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-1">
+                <button style="float: right" type="submit" id="submit" class="backBtn">返回</button>
+            </div>
+            <div class="col-5"></div>
+        </div>
 	#end
-
-	#@elementItem()
-		#@colLabel("col-1")备注&nbsp #end
-		#@formControlDiv("col-8")
-			#@Teditor("content" "content" {"initialFrameHeight":"400"})Say something#end
-		#end
-		#@validateDiv("col-1")#end
+    <br>
+</div>
+#end
+<div style="width:30%;float:right">
+	#@div(divClass="infoContent")
+        <p class="titleName">历史记录</p>
+		#include("/project/recordlist.page")
 	#end
-	 <p>
-       </p>
-             #@td()
-				<center>	<a style:float:left href="${TINY_CONTEXT_PATH}/project/task/index.page">#buttonRadiusPrimary(caption="保存")</a></center>
-			#end
-
-	</div>
-   <div>
-
-		   #@div(divClass="infoContent")
-               <p class="titleName">历史记录</p>
-		   ##加入后，js代码会导致页面排版混乱
-			   #include("/project/recordlist.page")
-		   #end
-
-   </div>
- #end
+</div>
