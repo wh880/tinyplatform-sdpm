@@ -24,3 +24,19 @@
 #end
 #@simpleModal("myModal" "用户编辑")#end
 #@simpleModal("myModal2" "用户删除")#end
+<script>
+    $(function () {
+        $(".tinytable").on("click", ".icon-remove", function () {
+            //console.log($(this).attr("itemId"))
+            // user_del(this, '1');
+            var that = this;
+            layer.confirm('确定要删除该记录？', function (index) {
+                //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                //$.ajax()
+                //console.log(index);
+//                layer.msg($("已删除").attr("deleteList"), 1);
+                layer.msg('已删除', 1);
+            })
+        });
+    });
+</script>
