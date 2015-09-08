@@ -6,6 +6,7 @@
     .select_boxes {
         margin-top: 0
     }
+    .margin {margin-top:4px;margin-bottom:5px;}
 </style>
 
 
@@ -25,10 +26,10 @@
         #end
         #@div(divClass="operationbar")
         <span class="f">
-            <a href="#" class="active_btn">编辑</a>
+            <a href="#" class="active_btn margin">项目名称</a>>编辑
         </span>
         <span class="r">
-            <a href="#" class="active_btn">保存</a>
+            <a href="#" class="active_btn">#buttonRadiusPrimary(caption="保存")</a>
         </span>
         #end
     <div style="width:65%;float:left">
@@ -41,8 +42,8 @@
             <p class="titleName">备注</p>
             <div>
                 #@formControlDiv()
-				#@tinyueditor("contents" "contents""min-height:150px")#end
-			#end
+					#@tinyueditor("contents" "contents""min-height:150px")#end
+				#end
             </div>
         #end
         #@div(divClass="infoContent")
@@ -56,8 +57,10 @@
 
             </div>
         #end
-        #buttonRadiusDefault(caption="保存")
-        #buttonRadiusDefault(caption="返回")
+        <center style="margin-top:5px">
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">#buttonRadiusPrimary(caption="保存")</a>
+        	<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">#buttonDefault(caption="返回")</a>
+        </center> 
         #@div(divClass="infoContent")
             <p class="titleName">历史记录</p>
         ##加入后，js代码会导致页面排版混乱
@@ -66,7 +69,8 @@
     #end
 #end
     <div style="width: 35%;float: right">
-        #TypeInfo("qualityBugEdition")
+       #TypeInfo("qualityBugEdition")
+##       #include("/testManagement/page/tabledemo/editionpaging.page")
     </div>
 
 
@@ -76,7 +80,7 @@
 </div>
 #@p(pClass="clearfix") #end
 <script type="text/javascript">
-    $(".select2").select2();
+    $("select.select2").select2();
 </script>
 
 

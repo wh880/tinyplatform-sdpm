@@ -21,7 +21,7 @@
 
         #end
         #@div(divClass="bugBox")
-            #@p(pClass="title_sty")新建请求#end
+            #@p(pClass="title_sty")请求回访#end
             #@tinyForm("thisform" "url" "post" {"class":""})
                 #@elementItem()
                     #@colLabel()产品ID：#end
@@ -69,6 +69,7 @@
                     #end
                     #@validateDiv("col-2")#end
                 #end
+
                 #@elementItem()
                     #@colLabel()请求标题：#end
                     #@formControlDiv("col-8")
@@ -76,58 +77,50 @@
                     #end
                     #@validateDiv("col-2")#end
                 #end
-
-                #@elementItem()
-                    #@colLabel()请求表述：#end
-                    #@formControlDiv()
-                        #@tinyueditor("contents" "contents""min-height:150px")#end
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@elementItem()
-                    #@colLabel()服务响应时限：#end
-                    #@formControlDiv("col-8")
-                        #tinyInput("text" "影响版本" "单位为小时（不含节假日）"{"datatype":"","id":"版本","class":"input-text"})
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
                 #@elementItem()
                     #@colLabel()需求回访时限：#end
                     #@formControlDiv("col-8")
-                        #tinyInput("text" "影响版本" "单位工作日"{"datatype":"","id":"版本","class":"input-text"})
+                        #@tinyDateInput(
+                            "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
+                            "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
                     #end
                     #@validateDiv("col-2")#end
                 #end
                 #@elementItem()
-                    #@colLabel()服务工时上限：#end
+                    #@colLabel()实际回访时间：#end
+                    #@formControlDiv("col-8")
+                        #@tinyDateInput(
+                            "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
+                            "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+                #@elementItem()
+                    #@colLabel()回访工时：#end
                     #@formControlDiv("col-8")
                         #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
                     #end
                     #@validateDiv("col-2")#end
                 #end
+
                 #@elementItem()
-                    #@colLabel()服务请求数上限：#end
-                    #@formControlDiv("col-8")
-                        #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                    #@colLabel()回访记录：#end
+                    #@formControlDiv()
+                        #@tinyueditor("contents" "contents""min-height:20px")#end
                     #end
                     #@validateDiv("col-2")#end
                 #end
+
                 #@elementItem()
-                    #@colLabel()服务专员：#end
+                    #@colLabel()回访人员：#end
                     #@formControlDiv("col-8")
                         #tinyInput("text" "影响版本" "可以多人，间隔符英文,"{"datatype":"","id":"版本","class":"input-text"})
                     #end
                     #@validateDiv("col-2")#end
                 #end
+
                 #@elementItem()
-                    #@colLabel()服务工时上限：#end
-                    #@formControlDiv("col-8")
-                        #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
-                    #end
-                    #@validateDiv("col-2")#end
-                #end#
-                #@elementItem()
-                    #@colLabel()创建时间：#end
+                    #@colLabel()录入时间：#end
                     #@formControlDiv("col-8")
                         #@tinyDateInput(
                             "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
