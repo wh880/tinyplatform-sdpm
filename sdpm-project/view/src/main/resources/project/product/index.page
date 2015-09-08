@@ -33,25 +33,44 @@
 			##operationbar end
 			#@table()
 			
-			#for(i:[1..3])
+
 			
 			#@tr()
 			
-		     #for(i:[1..3])
+
 			#@td()
-		
-		  	#@tinyRadio("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})关联产品${i}#end<br>
+				#@elementItem()
+
+					#@formControlDiv("checkboxSty col-9")
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首d页#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首aaa页#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页aa#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首aw页#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页a#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首dr页#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首aa页#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首eedd页#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首dd页#end#end
+						#@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+
+					#end
+				#end
 		  	
 		  	#end
 		  
-		    #end
-		  	#end
-		  	
+
+
 			#end
 			
 			#end
-			
-			<a href="#">#buttonRadiusPrimary(caption="保存")</a>
+			<center>
+			<a href="#">#buttonRadiusPrimary(caption="保存")</a></center>
 #end
 #end
 #end
