@@ -27,8 +27,9 @@
    
 				<span class="r" >
 				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class" "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
-				<a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-link")关联需求</a>&nbsp;
-				<a href="#" id="showsearchmore-bug">#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
+				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-release/product-al-req.page?cname=demand" >#buttonIcon(iconClass="icon-link")关联需求</a>&nbsp;
+				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-release/product-al-bug.page?cname=bug" >#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
+				
 				#iconOperations("#myModal" "icon-common-edit icon-pencil" "编辑发布" "865" "448" "/product/page/tabledemo/product-addrelease.pagelet" "ml-5")
 				#iconOperation(" icon-remove" "删除发布" "ml-5")
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/product-release.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
@@ -43,17 +44,56 @@
 			#@tabWithInit("tab_demo" "optionsBox")
 				
 				#@tabHead()
-					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="demand"?"Current":"")
-						#@buttons("","icon-lightbulb")
-							已关联需求列表
+				
+					#if("demand"==type)
+						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-release/product-al-req.page" cname=="demand"?"Current":"")
+							#@buttons("","icon-lightbulb")
+								已完成需求
+							#end
+						#end
+						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-release/product-al-no-req.page" cname=="no-demand"?"Current":"")
+							#@buttons("","icon-unlink")
+								未关联需求
+							#end
+						#end
+						#if("no-demand"==cname)
+							<div style="float:right" > 
+								<a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
+			                </div>
+						#end
+					
+					#end
+					
+					#if("bug"==type)
+						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-release/product-al-bug.page" cname=="bug"?"Current":"")
+							#@buttons("","icon-bug green")
+								已解决Bug
+							#end
+						#end
+						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-release/product-al-no-bug.page" cname=="no-bug"?"Current":"")
+							#@buttons("","icon-bug green")
+								未关联Bug
+							#end
+						#end
+						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-release/product-al-le-bug.page" cname=="le-bug"?"Current":"")
+							#@buttons("","icon-bug green")
+								遗留Bug
+							#end
+						#end
+						#if("no-bug"==cname)
+							
+							<div class="r"> 
+								
+								<a href="#" id="showsearchmore-bug">&nbsp;&nbsp; #buttonIcon(iconClass="icon-search")搜索</a>
+			                </div>
 						#end
 					#end
 					
-					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="bug"?"Current":"")
-						#@buttons("","icon-bug green")
-							已关联Bug列表
-						#end
-					#end
+					<div class="r"> 
+					#@aModal("#myModal" "导出HTML" "700" "130" "icon-upload-alt" "/product/page/tabledemo/product-export-html.pagelet")导出HTML#end
+				
+                    </div>
+					
 				#end
 				
 				#@tabBodyCol("ptop-5")

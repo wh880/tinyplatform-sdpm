@@ -1,7 +1,7 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-#!set(cname="bug")
+#!set(cname="bug",type="bug")
 
 
 #include("/product/page/event/mulsearch-bug.page")	

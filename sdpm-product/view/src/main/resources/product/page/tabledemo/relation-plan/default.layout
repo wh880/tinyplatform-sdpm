@@ -34,22 +34,50 @@
 	#end
 	
 #@tabWithInit("tab_demo" "optionsBox")
-<div style="width:65%;float:left">
+<div style="width:70%;float:left">
 		#@div()
 			#@tabWithInit("tab_demo" "optionsBox")
 				
 				#@tabHead()
-					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="demand"?"Current":"")
-						#@buttons("","icon-lightbulb")
-							已关联需求列表
+				
+					#if("demand"==type)
+						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="demand"?"Current":"")
+							#@buttons("","icon-lightbulb")
+								已关联需求列表
+							#end
+						#end
+						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-no-req.page" cname=="no-demand"?"Current":"")
+							#@buttons("","icon-lightbulb")
+								未关联需求列表
+							#end
+						#end
+						#if("no-demand"==cname)
+							<div style="float:right" > 
+								<a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
+			                </div>
+						#end
+						
+					#end
+					
+					#if("bug"==type)
+						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="bug"?"Current":"")
+							#@buttons("","icon-bug green")
+								已关联Bug列表
+							#end
+						#end
+						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-no-bug.page" cname=="no-bug"?"Current":"")
+							#@buttons("","icon-bug green")
+								未关联Bug列表
+							#end
+						#end
+						#if("no-bug"==cname)
+							<div style="float:right" > 
+								<a href="#" id="showsearchmore-bug">#buttonIcon(iconClass="icon-search")搜索</a>
+			                </div>
 						#end
 					#end
 					
-					#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="bug"?"Current":"")
-						#@buttons("","icon-bug green")
-							已关联Bug列表
-						#end
-					#end
+					
 				#end
 				
 				#@tabBodyCol("ptop-5")
@@ -65,7 +93,7 @@
 </div>
 	
 	
-<div style="width:35%;float:right" >
+<div style="width:30%;float:right" >
 	#TypeInfo("productPlan")
 </div>
 
