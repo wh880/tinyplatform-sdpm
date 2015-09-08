@@ -1,36 +1,38 @@
-#@tinyForm("thisform" "" "" {"class":"test"})
-
-    #@elementItem()
-        #@formControlDiv("col-8")
-	    	#@tabWithInit("tab_demo")
+#@div(divClass="infoContent tabInfocontents")
+	
+#@tabWithInit("tab_demo1")
 	#@tabHead()
-		#@tabHeadCol()影响的项目#end
-		#@tabHeadCol()影响的BUG#end
-		#@tabHeadCol()影响的用例#end
-		
+		#@tabHeadCol()影响的v项目#end
+		#@tabHeadCol()影响v的BUG#end
 	#end
-	#@tabBodyCol("ptop-5")
+	
+	#@tabBodyCol("tabBorder")
+		#@tableHover()
+		       		#@thead()
+		       		#end
+		       		#@tbody()
+		       			#@tr()
+							#@td()<b>产品名称v</b>#end
+		       				#@td()<b>禅道v测试</b>#end
+		       			#end
+		       		#end
+		 #end
 	#end
-	#@tabBodyCol("ptop-5")
-		#import("/org/tinygroup/table/components/table.component")
-		  #@tableHover()
-		    #@thead()
-		      #@tr()
-		        #@th()BUG编号#end
-		        #@th()标题#end
-		        #@th()BUG状态#end
-		        #@th()由谁创建#end
-		        #@th()解决者#end
-		        #@th()解决方案#end
-		        #@th()最后修改者#end
-		      #end
-		    #end
-		  #end
-		#end
- 	 #end
- 	    #end
-        #@validateDiv("col-2")#end
-    #end
-   
-#end  
-  
+	
+	#@tabBodyCol("tabBorder")
+		#@tableHover()
+		       		#@thead()
+		       		#end
+		       		#@tbody()
+		       			#@tr()
+							#@td()<b>产品名称</b>#end
+		       				#@td()<b>禅道测试</b>#end
+		       			#end
+		       		#end
+		 #end
+	#end
+		       			
+	
+				
+#end
+#end

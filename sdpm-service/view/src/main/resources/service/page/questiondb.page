@@ -56,9 +56,9 @@
        #end
 
        #@elementItem()
-       <div><b>5.访问项目管理，可以绑定域名吗？</b></div>
-       <p>可以使用域名，配置apache的虚拟主机即可。</p>
-       <p>可以参考 http://www.zentao.net/book/zentaopmshelp/131.html</p>
+       <div><b>5.如何初始化数据库？</b></div>
+       <p>把zentao/config/my.php 里面install的值改成false。</p>
+       <p>访问禅道，会自动进入安装页面，所有数据都会清空。</p>
        #end
 
 

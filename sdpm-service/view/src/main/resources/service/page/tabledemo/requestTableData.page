@@ -17,7 +17,8 @@
         #@td()2015-09-09#end
         #@td()正常#end
         #@td()
-        <a href="${TINY_CONTEXT_PATH}/service/page/requestBack.page">#buttonIcon(iconClass="icon-envelope")</a>
+        <a href="${TINY_CONTEXT_PATH}/service/page/requestBack.page">#buttonIcon(iconClass="icon-search")</a>
+        <a href="${TINY_CONTEXT_PATH}/service/page/requestEdit.page">#buttonIcon(iconClass="icon-pencil")</a>
         ##    #iconOperations("#myModal" " icon-search" "查看" "865" "448" "/service/page/requestView.pagelet" "ml-5")
         ##    #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/service/page/clientEdit.pagelet" "ml-5")
         ##    #iconOperations("#myModal" " icon-pencil" "回访" "865" "448" "/service/page/requestBack.page" "ml-5")

@@ -3,39 +3,47 @@
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="产品概况",activeMenuId=currentPageId)
 #!set(linkName="demand",sonitem="<li>"+"需求"+"</li>")
-<style>
-.infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
-.infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:13px;}
-.infoContent ul li label{font-weight:normal; width:33%;font-size:12px;}
-.infoContent ul li .text-overflow{display:inline-block; width:64%;vertical-align:top;font-size:12px;}
-.infoContent ul li .text-overflow a{ color:#333;}
-.infoContent ul li .text-overflow a:hover{color:#f90}
-.infoContent .Tinyfold .item h4{background:#f8f8f8;font-size:13px;font-weight:normal;}
-.shrinkage .edui-Box{margin-left:6px;}
-.shrinkage .edui-Box .titleNames{display:block;margin-bottom:6px;margin-left:8px;}
-</style>
+<script>
+	$(document).ready(function(){
+		
+		$(".beizhu").each(function(){
+			$(this).unbind("click").bind("click",function(){
+				if($("#beizhutext").attr("style")==""){
+					$("#beizhutext").hide();
+				}else{
+					$("#beizhutext").show();
+				}
+			
+			
+			});
+		});
+		
+	});	 
+</script>
 #include("/product/page/event/common.page")
 #set(name="version")
 #@tabWithInit("tab_demo" "optionsBox")
 
-	#@tabBodyCol("ptop-5")
 		#@div(divClass="operationbar")
 			<span class="f">
 					<a href="#" class="active_btn">这是一条演示用的需求</a>
 			</span>
 			<span class="r">
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-change.page">#buttonIcon(iconClass="icon-random")变更</a>&nbsp;		
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-review.page">#buttonIcon(iconClass="icon-search")评审</a>&nbsp;		
+				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class" "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
+				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-change.page">#buttonIcon(iconClass="icon-random")变更</a>&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-close.page">#buttonIcon(iconClass="icon-off ")关闭</a>&nbsp;		
+#*				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-review.page">#buttonIcon(iconClass="icon-search")评审</a>&nbsp;		*#
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeCase.page">#buttonIcon(iconClass="icon-sitemap")建用例</a>&nbsp;		
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-editor.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
-				<a href="#" title="备注">#buttonIcon(iconClass="icon-comment-alt")</a>
-				<a href="#" title="复制">#buttonIcon(iconClass="icon-copy")</a>
+				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
+				<a href="#" title="备注" id="beizhu" class="beizhu">#buttonIcon(iconClass="icon-comment-alt")</a>
+				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" title="复制">#buttonIcon(iconClass="icon-copy")</a>
 				<a href="#" title="删除">#buttonIcon(iconClass="icon-remove")</a>
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+				<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page" title="上一个">#buttonIcon(iconClass="icon-pre icon-chevron-left")</a>
+				<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page" title="下一个">#buttonIcon(iconClass="icon-pre icon-chevron-right")</a>
 			</span>
 		#end
-	#end
+	
 
 	<div style="width:65%;float:left">
 		#@div(divClass="infoContent")
@@ -68,18 +76,38 @@
 		
 	<div style="text-align:center;margin:auto">
 	       <span >
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-change.page">#buttonIcon(iconClass="icon-random")变更</a>&nbsp;		
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-review.page">#buttonIcon(iconClass="icon-search")评审</a>&nbsp;		
+				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class" "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
+				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-change.page">#buttonIcon(iconClass="icon-random")变更</a>&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-close.page">#buttonIcon(iconClass="icon-off ")关闭</a>&nbsp;		
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeCase.page">#buttonIcon(iconClass="icon-sitemap")建用例</a>&nbsp;&nbsp;	
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-editor.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;
-				<a href="#" title="备注">#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;
-				<a href="#" title="复制">#buttonIcon(iconClass="icon-copy")</a>&nbsp;
-				<a href="#" title="删除">#buttonIcon(iconClass="icon-remove")</a>&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+#*				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-review.page">#buttonIcon(iconClass="icon-search")评审</a>&nbsp;		*#
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeCase.page">#buttonIcon(iconClass="icon-sitemap")建用例</a>&nbsp;	&nbsp;		
+				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;	
+				<a href="#" title="备注" id="beizhu" class="beizhu">#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;	
+				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" title="复制">#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;	
+				<a href="#" title="删除">#buttonIcon(iconClass="icon-remove")</a>&nbsp;&nbsp;	
+				<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>&nbsp;&nbsp;	
+				<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page" title="上一个">#buttonIcon(iconClass="icon-pre icon-chevron-left")</a>&nbsp;&nbsp;	
+				<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page" title="下一个">#buttonIcon(iconClass="icon-pre icon-chevron-right")</a>
 			</span>
 	</div>
-		
+	
+	<div class="infoContent" id="beizhutext" style="display:none"> 
+   
+        <p class="titleName">备注</p>
+       	 #@elementItem()
+	
+				#@formControlDiv("col-16")
+					#@Teditor("content1" "content1" {"initialFrameHeight":"250" ,"datatype":"*10-500"})备注描述...最少输入10个字符#end
+				#end
+	        	#@validateDiv("col-2")#end 
+	    #end
+	    #@elementItem()
+		  <center>
+			#buttonRadiusDefault(caption="保存")
+			<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" >#buttonRadiusDefault(caption="返回")</a>
+			</center>
+		#end
+		 </div>
 		
 	</div>
 

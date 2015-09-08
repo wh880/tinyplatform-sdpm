@@ -29,7 +29,7 @@
 
 .infoContent {
     margin: 18px 0px 10px 0px;
-    /*padding: 20px;*/
+    padding: 16px 6px;
     border: #eee 1px solid;
     position: relative;
     border-radius: 4px;
@@ -101,7 +101,7 @@
     text-align: right;
 }
 
-/*���水ť�����ذ�ť��ʽ*/
+/*保存与返回按钮*/
 .commitBtn {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
     background-color: #1a4f85;
@@ -124,12 +124,19 @@
     /*color: #fff;*/
 }
 
+/*新选项卡*/
+.tab-pane .tabInfocontents{border:none}
+.tabInfocontents .HuiTab .tabBar,.tabInfocontents .HuiTab .tabBar span{background:none; font-weight:normal;}
+.tabInfocontents .HuiTab .tabBar span:hover{background:#f9fafe;border-bottom:#ddd 1px solid;color:#369}
+.tabInfocontents .HuiTab .tabBar span.Current{font-weight:bold;color:#333;border:#ddd 1px solid;background: #fff;border-bottom: none;}
+.tabInfocontents .HuiTab .tabBorder{border:#ddd 1px solid; padding:12px 10px;margin-top:-3px;}
+
+/*访问控制*/
 .hidden_namesty{
     margin-left:17%
-    /*单选换行后对齐*/
 }
 
+/*访问控制白名单*/
 .label_title{
     width:100px
-    /*单选弹出框对齐*/
 }

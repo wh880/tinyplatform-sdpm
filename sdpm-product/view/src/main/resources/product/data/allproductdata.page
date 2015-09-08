@@ -13,16 +13,16 @@
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${var}#end
-	#@td()产品${page}#end
-	#@td()12#end
-	#@td()121#end
-	#@td()12#end
-	#@td()12#end
-	#@td()12#end
-	#@td()12#end
-	#@td()21#end
-	#@td()313#end
-	#@td()31#end
+	#@td()现金管理#end
+	#@td()1#end
+	#@td()0#end
+	#@td()0#end
+	#@td()1#end
+	#@td()3#end
+	#@td()5#end
+	#@td()8#end
+	#@td()0#end
+	#@td()1#end
 	  #@td()
 	 	#iconOperations("#myModal" "icon-off " "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet" "ml-5")&nbsp;
 		<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-module-editor.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>

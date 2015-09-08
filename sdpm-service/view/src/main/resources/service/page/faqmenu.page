@@ -24,15 +24,8 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         #@tabHead()
             #include("/service/page/tab.page")
         #end
-
-
-
     #end
 
-
-
-
-###@h2()${activeTitle}#end
     #@divDataTablebox()
 ## 左边
         #@leftTreeCol()
@@ -44,94 +37,44 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 
     ##页面右边
         #@tableBox("tBox")
-
-        #*       #@elementItem()
-                <div><b>公司称谓wen</b></div>
-                <p>123</p>
-                <p>123</p>
-                #end       *#
-
-            #@div(divClass="faqSty")
+ #@div(divClass="faqSty")
                 #@topSearch()
                 ##    #wDatePicker("日期范围")
                     #simpleText("请输入要搜索的问题" "" "width:30%")
-                #*     #@selectWBox()
-                       #@select("demo1" "demo1")
-                            #@optionSelected("")请选择目录#end
-                            #@optionItem("1")菜单一#end
-                            #@optionItem("1")菜单二#end
-                            #@optionItem("1")菜单三#end
-                        #end
-                    #end                                                      *#
-                    #@btnSubmit("icon-search")&nbsp;搜问题#end
+ #@btnSubmit("icon-search")&nbsp;搜问题#end
                 <span class="r">
 
       ##          <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
           <a href="${TINY_CONTEXT_PATH}/service/page/addquestion.page">#buttonIcon(iconClass="icon-plus")新增问题</a>
 				</span>
                 #end
-                #@OlTopList()
-                #* #topItem(1 "../page/questiondb.page" "如何初始化项目管理数据库？" "18:12")*#
-                    #@normalLiItemsconment(1 "../page/questiondb.page" "访问项目管理，可以绑定域名吗？" "")
-##                        #@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/docu/documentproduct-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
-                        #@iconOperations("#myModal" "" "编辑问题" "865" "150" "../page/editdb.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
-                        #@dialog("myModal")
-                            #@dialogHeader()对话框标题#end
-                            #@dialogBody()<p>对话框内容…</p>#end
-                            #@dialogFooter()
-                                #@buttonEnsure()确定#end
-                                #@buttonCancel()关闭#end
-                            #end
-                        #end
-
-                    ##                <a title="编辑" class="ml-5" style="text-decoration: none;" href="/docu/documentproduct-edit.pagelet" data-toggle="modal" data-target="#myModal" data-width="504" data-height="290" modal-title="编辑"><i class="icon-edit"></i></a>
-                    ##                <a title="删除" class="ml-5 delBtn" style="text-decoration: none;" href="/service/page/editdb.page"><i class="icon-trash"></i></a>
-                    ##                    #@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/page/questiondb.page" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
-
-                    #end
-                    #@normalLiItemsconment(2 "../page/questiondb.page" "项目里面的版本和测试的版本有什么区别？" "green")
-                    #end
-                    #@normalLiItemsconment(3 "../page/questiondb.page" "怎么维护项目的模块？" "darkGreen")
-                    #end
-                    #@normalLiItemsconment(4 "../page/questiondb.page" "能将项目转交给别人吗？" "grey")
-                    #end
-                    #@normalLiItemsconment(5 "../page/questiondb.page" "访问项目管理，可以绑定域名吗？" "")
-                    #end
-                #end
+##以下包含在faqquestion.page里面，现在用include包含faqquestion.page里面
+     #@div()
+       #@tabHead()
+     #include("/service/page/faqquestion.page")
+ #end
+     #end
+ ##以上包含在faqquestion.page里面，现在用include包含faqquestion.page里面
             #end
         <div id="bodyconentrap" class="">
 
         </div>
-            <div class="btnsty-page">#tinyPageNavAjax("bodyconentrap" 1 10 "../page/addquestion.pagelet")</div>
-##以下实现分页
-  #*         #macro setTinyItemCount(num)
-<input type="hidden" name="records" value="${num}"/>
-#end
+##    以下实现faqmenu.page页面下面的分页
+          <div class="btnsty-page">#tinyPageNavAjax("bodyconentrap" 1 10 "../page/addquestion.pagelet")</div>
+##        <div class="btnsty-page">#tinyPageNavAjax("bodyconentrap" 1 10 "../page/faqmenu.page")</div>
+#*            #set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+            #if (pagesize>records-pagesize*(page-1))
+                #set(pagesize=records-(page-1)*pagesize)
+            #end
+            #setTinyItemCount(52)
+            #for(var:[1..pagesize])
+            #@tr()
+                #@td()
 
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-    #set(pagesize=records-(page-1)*pagesize)
-#end
-#setTinyItemCount(52)
-#foreach(var:[1..pagesize])
-    #@tr()
-        #@td()<input type="checkbox" value="1" name="idCheck">#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/page/slaDetail.page"> 001</a>${page}#end
-        #@td()001#end
-        #@td()001#end
-        #@td()协议标题#end
-        #@td()级别#end
-        #@td()徐丹洋#end
-        #@td()1234556667#end
-
-        #@td()
-            #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/service/page/testEdit.pagelet" "ml-5")
-            #iconOperations("#myModal2" "icon-remove" "删除" "550" "100" "/service/page/testDelect.pagelet" "ml-5")
-        #end
-    #end
-#end                                        *#
-##以上实现分页
-
+                #end
+            #end
+        #end                                     *#
+##    以上实现faqmenu.page页面下面的分页
 
 
         #end

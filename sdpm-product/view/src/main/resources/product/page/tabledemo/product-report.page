@@ -14,11 +14,12 @@
 <script>
 	$(document).ready(function(){
 		
-		$("#but1").unbind("click").bind("click",function(){
-			 $("input[type='checkbox']").attr("checked", true);			
+		$(".but1").unbind("click").bind("click",function(){
+		
+			 $("input[type='checkbox']").attr("checked", "checked");		
 		}); 
 		
-		$("#but2").unbind("click").bind("click",function(){
+		$(".but2").unbind("click").bind("click",function(){
 			  $("input[type='checkbox']").each(function () {
                     $(this).attr("checked", !$(this).attr("checked"));
                 });
@@ -68,8 +69,8 @@
                         #labelCheckbox(ckId="checkbox-13" labelText="关闭原因来进行统计")
                         #labelCheckbox(ckId="checkbox-14" labelText="变更次数来进行统计")
                     #end
-                    #buttonRadiusDefault(btId="but1" caption="全选")
-                    #buttonRadiusDefault(btId="but2"caption="反选")
+                    #buttonRadiusDefault(btId="but1" btClass="but1" caption="全选")
+                    #buttonRadiusDefault(btId="but2" btClass="but2" caption="反选")
                     #buttonRadiusDanger(caption="生成报表")
 
             #end
