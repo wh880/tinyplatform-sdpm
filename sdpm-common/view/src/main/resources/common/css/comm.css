@@ -49,6 +49,17 @@
     margin: 18px 4px 10px 5px;
     padding: 6px;
     border: #eee 1px solid;
+    position: relative;
+}
+
+.infoContent .RTtitle {
+    position: absolute;
+    z-index: 2;
+    top: -12px;
+    right: 10px;
+    width: auto;
+    background: #fff;
+
 }
 
 .infoContent .titleName {
@@ -98,4 +109,33 @@
 .adjustTable tbody tr th {
     width: 40%;
     text-align: right;
+}
+
+/*保存按钮及返回按钮样式*/
+.commitBtn {
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+    background-color: #1a4f85;
+    border: none;
+    padding: 5px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.backBtn {
+    text-shadow: 0 1px 0 #fff;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    padding: 5px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    border-radius: 3px;
+    /*color: #fff;*/
+}
+
+/*input右边加上量词的样式，如sdpm-project-web/project/task/call.page中剩余时间中展示效果*/
+.input-group-addon {
+    width: 10px;
+    font-size: 20px
 }
