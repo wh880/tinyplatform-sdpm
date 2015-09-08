@@ -39,17 +39,17 @@
 	 <p>
        </p>
              #@td()
-				#@colLabel() #end
-					<a style:float:left href="${TINY_CONTEXT_PATH}/project/task/index.page">#buttonRadiusPrimary(caption="保存")</a>
+				<center>	<a style:float:left href="${TINY_CONTEXT_PATH}/project/task/index.page">#buttonRadiusPrimary(caption="保存")</a></center>
 			#end
+
 	</div>
    <div>
-	   #@formControlDiv("col-8")
+
 		   #@div(divClass="infoContent")
                <p class="titleName">历史记录</p>
 		   ##加入后，js代码会导致页面排版混乱
 			   #include("/project/recordlist.page")
 		   #end
-	   #end
+
    </div>
  #end
