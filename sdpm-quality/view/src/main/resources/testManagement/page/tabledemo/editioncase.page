@@ -32,7 +32,7 @@
         ##operationbar
             #@div(divClass="operationbar")
             <span class="f">
-					<a href="#" class="active_btn">用力标题></a>编辑
+					<a href="#" class="active_btn">用例标题></a>编辑
 			</span>
             <span class="r">
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page" class="active_btn">保存</a>
