@@ -15,10 +15,10 @@
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${var}#end
-	#@td()计划${page}#end
-	#@td()12#end
-	#@td()121#end
-	#@td()12#end
+	#@td()基金计划#end
+	#@td()体验金#end
+	#@td()2015-09-02#end
+	#@td()2015-10-02#end
 	 #@td()
 	 
 	 	<a title="关联需求" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-plan/product-al-req.page?cname=demand"><i class="icon-link"></i></a>

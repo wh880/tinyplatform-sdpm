@@ -13,13 +13,13 @@
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${var}#end
-	#@td()项目${page}#end
-	#@td()12#end
-	#@td()121#end
-	#@td()121#end
-	#@td()121#end
-	#@td()121#end
-	#@td()121#end
+	#@td()产品项目${page}#end
+	#@td()SD09#end
+	#@td()2015-09-02#end
+	#@td()进行中#end
+	#@td()14天#end
+	#@td()12天#end
+	#@td()4天#end
 	#@td("text-l")
 	#set(rm=(rand("int")%100)+"%")
 		<div class="progress-bars" style="width:110px">
