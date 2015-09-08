@@ -137,7 +137,7 @@
         #end
 
         #@div(divClass="infoContent")
-            <p class="titleName">历史记录111</p>
+            <p class="titleName">历史记录</p>
             #include("/service/page/historyRecord.page")
         #end
         <div style="text-align:center;margin:auto">

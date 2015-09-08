@@ -3,7 +3,7 @@
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
 
-
+#set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
     ##tabbody end
@@ -35,6 +35,22 @@
                                     #@th()发布时间#end
                                     #@td()2015.09.07#end
                                 #end
+                                #@tr()
+                                    #@th()服务级别#end
+                                    #@td()高级#end
+                                #end
+                                #@tr()
+                                    #@th()协议内容#end
+                                    #@td()<a href="${TINY_CONTEXT_PATH}/service/page/slaContent.page">详情#end
+                                #end
+                                #@tr()
+                                    #@th()创建人#end
+                                    #@td()习近平#end
+                                #end
+                                #@tr()
+                                    #@th()创建时间#end
+                                    #@td()20150908#end
+                                #end
                             #end
                         #end
                     </div>
@@ -45,6 +61,10 @@
                     </div>
                 #end
             #end
+        ##            #@div(divClass="infoContent,col-6")
+        ##                <p class="titleName">历史记录</p>
+        ##                #include("/service/page/historyRecord.page")
+        ##            #end
         #end
 
     </div>
