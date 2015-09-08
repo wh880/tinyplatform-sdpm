@@ -1,0 +1,13 @@
+#@topSearch()
+##    #wDatePicker("日期范围")
+    #simpleText("请输入要搜索的问题" "" "width:25%")
+#*     #@selectWBox()
+       #@select("demo1" "demo1")
+            #@optionSelected("")请选择目录#end
+            #@optionItem("1")菜单一#end
+            #@optionItem("1")菜单二#end
+            #@optionItem("1")菜单三#end
+        #end
+    #end                                                      *#
+    #@btnSubmit("icon-search")&nbsp;搜问题#end
+#end
