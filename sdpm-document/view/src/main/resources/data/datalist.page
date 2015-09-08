@@ -1,0 +1,34 @@
+#macro setTinyItemCount(num)
+	<input type="hidden" name="records" value="${num}"/>
+#end
+
+
+
+#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#if (pagesize>records-pagesize*(page-1))
+#set(pagesize=records-(page-1)*pagesize)
+#end
+#setTinyItemCount(52)
+#for(var:[1..pagesize])
+#@tr()
+	#@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()${page}#end
+	#@td()文档标题${page}#end
+	#@td()网页（类型）#end
+	#@td()阿炉添加#end
+	#@td()2015/03/25 21:49#end
+	 #@td()
+	    #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/document/table-edit.pagelet" "ml-5")
+		#iconOperation(" icon-remove" "删除" "ml-5")
+	#end
+#end
+#end
+
+#@dialog("myModal")
+	#@dialogHeader()对话框标题#end
+	#@dialogBody()<p>对话框内容…</p>#end
+	#@dialogFooter()
+		#@buttonEnsure()确定#end
+		#@buttonCancel()关闭#end
+	#end
+#end
