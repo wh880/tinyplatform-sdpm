@@ -6,7 +6,6 @@
 					
 				#end
 				#@tabBodyCol("ptop-5")
-					#import("/org/tinygroup/table/components/table.component")
 					  #@tableHover()
 					    #@thead()
 					      #@tr()
@@ -29,7 +28,6 @@
 					  #end
 					#end
 				#@tabBodyCol("ptop-5")
-					#import("/org/tinygroup/table/components/table.component")
 					  #@tableHover()
 					    #@thead()
 					      #@tr()
@@ -57,7 +55,6 @@
 					#end
 					
 				#@tabBodyCol("ptop-5")
-					#import("/org/tinygroup/table/components/table.component")
 					  #@tableHover()
 					    #@thead()
 					      #@tr()

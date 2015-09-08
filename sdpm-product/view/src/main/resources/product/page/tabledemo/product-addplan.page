@@ -39,9 +39,8 @@
     #end
     #@elementItem()
         #@colLabel()结束日期:#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-8 form-inline")
            #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
-           <span class="radioBoxsty" style="left:220px;">
 				 #@radioBox()
 		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一周#end
 		          #end
@@ -54,7 +53,6 @@
 		           #@radioBox()
 		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一辈子#end
 		          #end
-			</span>
         #end
         #@validateDiv("col-2")#end
     #end

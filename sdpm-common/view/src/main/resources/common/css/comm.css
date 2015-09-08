@@ -93,7 +93,7 @@
     text-align: right;
 }
 
-/*±£´æ°´Å¥¼°·µ»Ø°´Å¥ÑùÊ½*/
+/*ï¿½ï¿½ï¿½æ°´Å¥ï¿½ï¿½ï¿½ï¿½ï¿½Ø°ï¿½Å¥ï¿½ï¿½Ê½*/
 .commitBtn {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
     background-color: #1a4f85;
@@ -116,8 +116,15 @@
     /*color: #fff;*/
 }
 
-/*inputÓÒ±ß¼ÓÉÏÁ¿´ÊµÄÑùÊ½£¬Èçsdpm-project-web/project/task/call.pageÖĞÊ£ÓàÊ±¼äÖĞÕ¹Ê¾Ğ§¹û*/
+/*inputï¿½Ò±ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½sdpm-project-web/project/task/call.pageï¿½ï¿½Ê£ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Õ¹Ê¾Ğ§ï¿½ï¿½*/
 .input-group-addon {
     width: 10px;
     font-size: 20px
 }
+
+/*é€‰é¡¹å¡ æ–°*/
+.tab-pane .tabInfocontents{border:none}
+.tabInfocontents .HuiTab .tabBar,.tabInfocontents .HuiTab .tabBar span{background:none; font-weight:normal;}
+.tabInfocontents .HuiTab .tabBar span:hover{background:#f9fafe;border-bottom:#ddd 1px solid;color:#369}
+.tabInfocontents .HuiTab .tabBar span.Current{font-weight:bold;color:#333;border:#ddd 1px solid;background: #fff;border-bottom: none;}
+.tabInfocontents .HuiTab .tabBorder{border:#ddd 1px solid; padding:12px 10px;margin-top:-3px;}
