@@ -74,21 +74,16 @@
 	
 	#@elementItem()
         #@colLabel()访问控制：#end
-        #@skinMinimal("mt-20")
-    				#labelRadio1(rId="aclopen" rName="acl" rValue="open" labelText="默认设置(有项目视图权限，即可访问)" "setWhite(this.value);")
-    				#labelRadio1(rId="aclcustom" rName="acl" rValue="custom1" labelText="私有项目(只有项目团队成员才能访问)" "setWhite(this.value);")   								
-    				#labelRadio1(rId="aclcustom" rName="acl" rValue="custom" labelText="自定义白名单(团队成员和白名单的成员可以访问)" "setWhite(this.value);")
+        #@skinMinimal("col-8")
+    				#labelRadio1(rId="aclopen" rName="acl" rValue="open" labelText="默认设置(有项目视图权限，即可访问)" "setWhite(this.value);")</br>
+    				#labelRadio1(rId="aclcustom" rName="acl" rValue="custom1" labelText="私有项目(只有项目团队成员才能访问)" "setWhite(this.value);")</br>   								
+    				#labelRadio1(rId="aclcustom" rName="acl" rValue="custom" labelText="自定义白名单(团队成员和白名单的成员可以访问)" "setWhite(this.value);")</br>
 					
 			#end
-#*        #@formControlDiv("skin-minimal col-5")
-            #@tinyRadio("authority" "default" "onlyview" {"nullmsg":"请选择访问权限！","datatype":"*"})默认设置(有产品视图权限，即可访问)#end
-            #@tinyRadio("authority" "private" "private")私有产品(只有项目团队成员才能访问)#end
-            #@tinyRadio("authority" "whitelist" "whitelist")自定义白名单(团队成员和白名单的成员可以访问)#end
-        #end*#
         #@validateDiv("col-2")#end
     #end
-    #@elementItem(elementId="whitelistBox" eleItemClass="hidden")
-        	#@colLabel()分组白名单#end
+    #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
+        	#@colLabel("label_title")分组白名单#end
 			#@skinMinimal()
 				#labelCheckbox(ckId="whitelistBox" labelText="管理员")
 				#labelCheckbox(ckId="whitelistBox" labelText="研发")

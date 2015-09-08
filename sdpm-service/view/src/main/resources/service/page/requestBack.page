@@ -7,7 +7,7 @@
         margin-top: 0
     }
 </style>
-#set(name="client")
+#set(name="request1")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -21,76 +21,131 @@
 
         #end
         #@div(divClass="bugBox")
-            #@p(pClass="title_sty")新建客户#end
+            #@p(pClass="title_sty")请求
+            <a style="float: right" href="${TINY_CONTEXT_PATH}/service/page/requestEdit.page">&nbsp;&nbsp;编辑</a>
+
+            #end
+
+
             #@tinyForm("thisform" "url" "post" {"class":""})
                 #@elementItem()
-                    #@colLabel()产品名称：#end
-                    #@formControlDiv("col-3 form-inline selectList")
-                        #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                            #@optionItem("")请选择#end
-                            #@optionItem("")产品1#end
-                            #@optionItem("")产品2 #end
-                        #end
+                    #@colLabel()产品ID：#end
+                    #@formControlDiv("col-8 form-inline selectList")
+                    <p>&nbsp;&nbsp;&nbsp;产品1</p>
                     #end
                 #end
                 #@elementItem()
-                    #@colLabel()客户名称：#end
-                    #@formControlDiv("col-3")
-                        #tinyInput("text" "客户单位" ""{"datatype":"","id":"客户单位ID","class":"input-text"})
+                    #@colLabel()客户ID：#end
+                    #@formControlDiv("col-8")
+                    <p>&nbsp;&nbsp;&nbsp;恒生电子</p>
                     #end
                     #@validateDiv("col-2")#end
                 #end
                 #@elementItem()
-                    #@colLabel()客户部门：#end
-                    #@formControlDiv("col-3")
-                        #tinyInput("text" "客户ID" ""{"datatype":"","id":"客户ID","class":"input-text"})
+                    #@colLabel()请求级别：#end
+                    #@formControlDiv("col-8 form-inline selectList")
+                    <p>&nbsp;&nbsp;&nbsp;普通 </p>
+                    #end
+                #end
+                #@elementItem()
+                    #@colLabel()请求分类：#end
+                    #@formControlDiv("col-8 form-inline selectList")
+                    <p>&nbsp;&nbsp;&nbsp;分类1</p>
+                    #end
+                #end
+                #@elementItem()
+                    #@colLabel()请求期限：#end
+                    #@formControlDiv("col-8")
+                    <p>&nbsp;&nbsp;&nbsp;2014-10-1</p>
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+
+                #@elementItem()
+                    #@colLabel()请求标题：#end
+                    #@formControlDiv("col-8")
+                    <p>&nbsp;&nbsp;&nbsp;这是一个请求标题</p>
                     #end
                     #@validateDiv("col-2")#end
                 #end
                 #@elementItem()
-                    #@colLabel()客户登记人：#end
-                    #@formControlDiv("col-3")
-                        #tinyInput("text" "客户ID" ""{"datatype":"","id":"客户ID","class":"input-text"})
+                    #@colLabel()请求表述：#end
+                    #@formControlDiv("col-8")
+                    <p>
+                        &nbsp;&nbsp;&nbsp;请求详细描述
+                    </p>
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+
+
+
+            #end
+            #@p(pClass="title_sty")解决#end
+            #@tinyForm("thisform" "url" "post" {"class":""})
+                #@elementItem()
+                    #@colLabel()解决时间时间：#end
+                    #@formControlDiv("col-8")
+                    <p>2012-10-1</p>
                     #end
                     #@validateDiv("col-2")#end
                 #end
                 #@elementItem()
-                    #@colLabel()客户联系人：#end
-                    #@formControlDiv("col-3")
-                        #tinyInput("text" "客户ID" ""{"datatype":"","id":"客户ID","class":"input-text"})
+                    #@colLabel()解决人员：#end
+                    #@formControlDiv("col-8")
+                    <p>张三、李四、王二麻子</p>
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+
+                #@elementItem()
+                    #@colLabel()解决方案：#end
+                    #@formControlDiv()
+                    客户满意，给出很高评价
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+
+
+            #end
+
+            #@p(pClass="title_sty")回访#end
+            #@tinyForm("thisform" "url" "post" {"class":""})
+                #@elementItem()
+                    #@colLabel()回访时间：#end
+                    #@formControlDiv("col-8")
+                    <p>2014-10-1</p>
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+
+                #@elementItem()
+                    #@colLabel()回访人员：#end
+                    #@formControlDiv("col-8")
+                    <p>汪杰</p>
                     #end
                     #@validateDiv("col-2")#end
                 #end
                 #@elementItem()
-                    #@colLabel()联系人电话：#end
-                    #@formControlDiv("col-3")
-                        #tinyInput("text" "客户ID" ""{"datatype":"","id":"客户ID","class":"input-text"})
+                    #@colLabel()客户满意度：#end
+                    #@formControlDiv("col-8")
+                    <p>非常非常满意</p>
                     #end
                     #@validateDiv("col-2")#end
                 #end
                 #@elementItem()
-                    #@colLabel()客户登记时间：#end
-                    #@formControlDiv("col-3")
-                        #@tinyDateInput(
-                            "regionday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                            "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+                    #@colLabel()回访记录：#end
+                    #@formControlDiv("col-8")
+                    <p>
+                        1.回访记录1
+                        2.回访记录2
+                    </p>
                     #end
                     #@validateDiv("col-2")#end
                 #end
-                #@elementItem()
-                    #@colLabel()客户状态：#end
-                    #@formControlDiv("skin-minimal col-5")
-                        #@radioBox()
-                            #@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择状态！","datatype":"*"})正常#end
-                        #end
-                        #@radioBox()
-                            #@tinyRadioes("sex" "women" "women")失效#end
-                        #end
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@divCenterAlign()#buttonRadiusDefault(caption="保存")
-                    #buttonRadiusDefault(caption="取消")#end
+
+
+
             #end
         #end
 
@@ -102,63 +157,6 @@
 
 
 <script type="text/javascript">
-    $(function () {
-        $(".selectList").each(function () {
-            var url = "#link('/getDist.html')";
-            var areaJson;
-            var temp_html;
-            var oProvince = $(this).find(".province");
-            var oCity = $(this).find(".city");
-            var oDistrict = $(this).find(".district");
-            //初始化省
-            var province = function () {
-                $.each(areaJson, function (i, province) {
-                    temp_html += "<option value='" + province.p + "'>" + province.p + "</option>";
-                });
-                oProvince.html(temp_html);
-                city();
-            };
-            //赋值市
-            var city = function () {
-                temp_html = "";
-                var n = oProvince.get(0).selectedIndex;
-                $.each(areaJson[n].c, function (i, city) {
-                    temp_html += "<option value='" + city.ct + "'>" + city.ct + "</option>";
-                });
-                oCity.html(temp_html);
-                district();
-            };
-            //赋值县
-            var district = function () {
-                temp_html = "";
-                var m = oProvince.get(0).selectedIndex;
-                var n = oCity.get(0).selectedIndex;
-                if (typeof(areaJson[m].c[n].d) == "undefined") {
-                    oDistrict.css("display", "none");
-                } else {
-                    oDistrict.css("display", "inline");
-                    $.each(areaJson[m].c[n].d, function (i, district) {
-                        temp_html += "<option value='" + district.dt + "'>" + district.dt + "</option>";
-                    });
-                    oDistrict.html(temp_html);
-                }
-                ;
-            };
-            //选择省改变市
-            oProvince.change(function () {
-                city();
-            });
-            //选择市改变县
-            oCity.change(function () {
-                district();
-            });
-            //获取json数据
-            $.getJSON(url, function (data) {
-                areaJson = data;
-                province();
-            });
-        });
-    });
     $(function () {
 
         $("form[name=thisform").attr("action", '#link("/Validform_post.html")');

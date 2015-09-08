@@ -32,10 +32,10 @@
         ##operationbar
             #@div(divClass="operationbar")
             <span class="f">
-					<a href="#" class="active_btn">编辑</a>
+					<a href="#" class="active_btn">用例标题></a>编辑
 			</span>
             <span class="r">
-					<a href="#" class="active_btn">保存</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page" class="active_btn">保存</a>
 			</span>
             #end
         ##operationbar end
@@ -99,8 +99,10 @@
 
             </div>
 
-            #buttonRadiusDefault(caption="保存")
-            #buttonRadiusDefault(caption="返回")
+            <a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
+		 		#buttonRadiusDefault(caption="保存")</a>
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
+   		 		#buttonRadiusDefault(caption="取消")</a>
             <p style="clear:both"></p>
             #@div(divClass="infoContent")
                 <p class="titleName">历史记录</p>
@@ -111,7 +113,7 @@
     </div>
 
     <div style="width:30%;float:right">
-        #TypeInfo("qualityCaseEdition2")
+        #TypeInfo("qualityCaseEdition")
         ###include("/testManagement/page/tabledemo/editioncasepaging.page")
 
     </div>

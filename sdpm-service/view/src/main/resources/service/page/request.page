@@ -31,16 +31,16 @@
             					<a href="#">由我创建</a>
             					<a href="#">由我评审</a>
             					<a href="#">由我关闭</a>
-            					<a href="#">草稿</a>
+
             					<a href="#">已变更</a>
             					<a href="#">待关闭</a>
             					<a href="#">已关闭</a>
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
             <span class="r">
-					#@iconOperations(
-                        "#myModal" "icon-upload-alt" "导入" "500" "100" "/service/page/tabledemo/slaImport.pagelet""ml-5")
-                        &nbsp导入#end
+##					#@iconOperations(
+##                        "#myModal" "icon-upload-alt" "导入" "500" "100" "/service/page/tabledemo/slaImport.pagelet""ml-5")
+##                        &nbsp导入#end
 
                 #@iconOperations(
                     "#myModal" "icon-download-alt" "导出" "600" "100" "/service/page/tabledemo/slaExport.pagelet" "ml-5")
@@ -49,7 +49,7 @@
                 <a href="${TINY_CONTEXT_PATH}/service/page/reportform.page">#buttonIcon(iconClass="icon-bar-chart")
                     报表</a>&nbsp;
             ##<a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-                <a href="${TINY_CONTEXT_PATH}/service/page/requestAdd.page">#buttonIcon(iconClass="icon-plus")新建请求</a>
+##    <a href="${TINY_CONTEXT_PATH}/service/page/requestAdd.page">#buttonIcon(iconClass="icon-plus")新建请求</a>
 				</span>
                 #div(divClass="clearfix")
                 #include("/service/page/mulsearch.page")

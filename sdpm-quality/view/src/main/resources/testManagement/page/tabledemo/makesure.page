@@ -36,7 +36,7 @@
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()备注：#end
+        #@colLabel()#end
         #@formControlDiv("col-8")
             #@div(divClass="infoContent")
             <p class="titleName">历史记录</p>

@@ -28,10 +28,15 @@
 }
 
 .infoContent {
-    margin: 18px 4px 10px 5px;
-    padding: 6px;
+    margin: 18px 0px 10px 0px;
+    /*padding: 20px;*/
     border: #eee 1px solid;
     position: relative;
+    border-radius: 4px;
+}
+
+.pageleftpart .infoContent {
+    margin-right: 15px;
 }
 
 .infoContent .RTtitle {
@@ -45,10 +50,13 @@
 }
 
 .infoContent .titleName {
-    margin-top: -16px;
-    margin-bottom: 8px;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 14px;
+    position: absolute;
+    top: -11px;
+    left: 15px;
+    padding: 0 6px;
+    background-color: #fff;
 }
 
 .infoContent ul li label {
@@ -128,3 +136,13 @@
 .tabInfocontents .HuiTab .tabBar span:hover{background:#f9fafe;border-bottom:#ddd 1px solid;color:#369}
 .tabInfocontents .HuiTab .tabBar span.Current{font-weight:bold;color:#333;border:#ddd 1px solid;background: #fff;border-bottom: none;}
 .tabInfocontents .HuiTab .tabBorder{border:#ddd 1px solid; padding:12px 10px;margin-top:-3px;}
+
+.hidden_namesty{
+    margin-left:17%
+    /*单选换行后对齐*/
+}
+
+.label_title{
+    width:100px
+    /*单选弹出框对齐*/
+}

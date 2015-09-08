@@ -14,6 +14,7 @@
             #@gridSysCol(4)
                 #@div(divClass="infoContent")
                     <p class="titleName">支付宝</p>
+
                     <div>
                         #@table("")
                             #@thead()
@@ -37,8 +38,7 @@
                     <div style="text-align:right;margin:right">
                         #@iconOperations(
                             "#myModal3" "" "编辑" "700" "300 " "/service/page/clientProductEdit.pagelet" "ml-5")编辑#end
-                    ##                        #@iconOperations("#myModal4" "" "删除" "700" "300 " "#" "ml-5")删除#end
-                        <a><i class="icon-remove" itemId="deleteList"></i></a>
+                        <a class="clientDelete">删除</a>
                     </div>
                 #end
             #end
@@ -53,16 +53,15 @@
 #@simpleModal("myModal4" "删除")#end
 <script>
     $(function () {
-        $(".tinytable").on("click", ".icon-remove", function () {
+        $(".infoContent").on("click", ".clientDelete", function () {
             //console.log($(this).attr("itemId"))
-            // user_del(this, '1');
-            var that = this;
+//            var that = this;
             layer.confirm('确定要删除该记录？', function (index) {
                 //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
                 //$.ajax()
                 //console.log(index);
-                layer.msg($("已删除").attr("deleteList"), 1);
-//                layer.msg('已删除', 1);
+//                layer.msg($("已删除").attr("deleteList"), 1);
+                layer.msg('已删除', 1);
             })
         });
     });

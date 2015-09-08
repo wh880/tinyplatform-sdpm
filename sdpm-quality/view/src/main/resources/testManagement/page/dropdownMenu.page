@@ -45,6 +45,7 @@
 		#end
 		#@navSelect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
 	#end
+#end
 	<script type="text/javascript">
 	<!--
 	$(function(){
@@ -56,4 +57,3 @@
 	});
 	//-->
 	</script>
-#end

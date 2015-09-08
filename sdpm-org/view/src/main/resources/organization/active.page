@@ -20,7 +20,7 @@
         margin-left: 5px;
     }
 </style>
-###import("/org/tinygroup/zTree/components/zTree.component")
+
 #import("/common/component/form.component")
 #set(editpagePath= "/organization/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 
@@ -31,21 +31,6 @@
 #@div()
     #@div(divClass="tabLayout")
         #@div(divClass="tabBar cl")
-        ##        #@tabWithInit("tab_demo" "optionsBox")
-##        <span><a href="${TINY_CONTEXT_PATH}/organization/user.page?currentPageId=7">用户</a></span>
-##        <span><a href="${TINY_CONTEXT_PATH}/organization/gtasks.page?currentPageId=7">待办</a></span>
-##        <span><a href="${TINY_CONTEXT_PATH}/organization/log.page?currentPageId=7">日志</a></span>
-##        <span class="Current"><a href="${TINY_CONTEXT_PATH}/organization/active.page?currentPageId=7">动态</a></span>
-##        <span><a href="${TINY_CONTEXT_PATH}/organization/department.page?currentPageId=7">部门</a></span>
-##        <span><a href="${TINY_CONTEXT_PATH}/organization/privilege.page?currentPageId=7">权限</a></span>
-##        <span><a href="${TINY_CONTEXT_PATH}/organization/company.page?currentPageId=7">公司</a></span>
-        ##            #@tabHead()
-        ##                #include("/organization/tab.page")
-        ##            #end
-
-        ##            #foreach(m in menuManager.getChildMenus("organization"))
-        ##            <span><a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a></span>
-        ##            #end
             #@tabWithInit("tab_demo" "optionsBox")
                 #@tabHead()
                     #include("/organization/tab.page")
