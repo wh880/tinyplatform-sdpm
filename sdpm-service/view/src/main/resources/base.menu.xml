@@ -5,7 +5,7 @@
           permission="Permission"></menu>
     <menu id="request1" name="需求" href="/service/page/request.page" sort="100" isShow="isShow"
           permission="Permission"></menu>
-    <menu id="test" name="协议" href="/service/page/test.page" sort="100" isShow="isShow" permission="Permission"></menu>
+    <menu id="sla" name="协议" href="/service/page/sla.page" sort="100" isShow="isShow" permission="Permission"></menu>
     <menu id="faq" name="FAQ" href="/service/page/faqmenu.page" sort="100" isShow="isShow"
           permission="Permission"></menu>
 
