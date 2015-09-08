@@ -23,8 +23,8 @@
 		#@tabBodyCol("ptop-5")
 ##operationbar start1
 	#@div(divClass="operationbar")
-    <span class="f">
-					<a href="#" class="active_btn"> Bug::批量添加</a>
+    <span class="f active_btn">
+			Bug::批量添加
 				</span>
     <span class="r">
 	##普通弹出层
@@ -100,8 +100,12 @@
 			#end
 		#end
 	#end
-#@divCenterAlign()#buttonRadiusDefault(caption="保存")
-	#buttonRadiusDefault(caption="取消")#end
+#@divCenterAlign()
+	<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
+		 #buttonRadiusDefault(caption="保存")</a>
+	<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
+   		 #buttonRadiusDefault(caption="取消")</a>
+#end
 #end
 #end
 
