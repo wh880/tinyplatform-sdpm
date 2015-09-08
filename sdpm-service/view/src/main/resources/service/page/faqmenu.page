@@ -13,7 +13,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 #end
 
 
-#set(name="faqmenu2")
+#set(name="faqmenu")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -22,23 +22,22 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         #@tabHead()
             #include("/service/page/tab.page")
         #end
-
         #@tabBodyCol("ptop-5")
         ##operationbar star
             #@div(divClass="operationbar")
             <span class="f">
-					<a href="#" class="active_btn">未关闭</a>
-					<a href="#">全部请求</a>
-					<a href="#">指派给我</a>
-					<a href="#">由我创建</a>
-					<a href="#">由我评审</a>
-					<a href="#">由我关闭</a>
-					<a href="#">草稿</a>
-					<a href="#">激活</a>
-					<a href="#">已变更</a>
-					<a href="#">待关闭</a>
-					<a href="#">已关闭</a>
-					<a href="#">#buttonIcon(iconClass="icon-search")搜111索</a>
+##					<a href="#" class="active_btn">未关闭</a>
+##					<a href="#">全部请求</a>
+##					<a href="#">指派给我</a>
+##					<a href="#">由我创建</a>
+##					<a href="#">由我评审</a>
+##					<a href="#">由我关闭</a>
+##					<a href="#">草稿</a>
+##					<a href="#">激活</a>
+##					<a href="#">已变更</a>
+##					<a href="#">待关闭</a>
+##					<a href="#">已关闭</a>
+##					<a href="#">#buttonIcon(iconClass="icon-search")搜111索</a>
 				</span>
             <span class="r">
 
@@ -46,7 +45,9 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
           <a href="${TINY_CONTEXT_PATH}/service/page/addquestion.page">#buttonIcon(iconClass="icon-plus")新增问题</a>
 				</span>
                 #div(divClass="clearfix")
-                #include("/service/page/multiSearch.page")
+                #include("/service/page/multiSearchfaq.page")
+#####                ##新建搜索page
+
             #end
         ##operationbar end
         #end
@@ -59,7 +60,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 
 ###@h2()${activeTitle}#end
     #@divDataTablebox()
-
+## 左边
         #@leftTreeCol()
         ##         #@searchZtreeWithInit("treeDemo" "height:454px;" "/admin/product/tree")
             #@searchZtreeWithInit("treeDemo" "height:454px;" "/service/js/serviceleft.js")
