@@ -23,7 +23,7 @@
 	#end
 #@toggleRight()
   #@tinyForm("thisform" "url" "post" {"class":""})
-  <div style="width:50%;float:left">
+  <div>
    #@elementItem()
 		#@colLabel()备注&nbsp#end
 		#@formControlDiv("col-8")
@@ -37,16 +37,19 @@
  		#end
 	#end
 	</div>
-	<div style="width:50%;float:right">
-  #@elementItem(eleItemClass="infoContent")
-	#@colLabel(labelClass="titleName")历史记录：#end
-	#@formControlDiv("col-10")
-	#@foldMenu("" "Tinyfold3" "" "width:100%")
-    	#include("/project/recordlist.page")
-    #end
-     #end    
+
   #end
+#end
+  <div>
+
+	  #@div(divClass="infoContent")
+          <p class="titleName">历史记录</p>
+	  ##加入后，js代码会导致页面排版混乱
+		  #include("/project/recordlist.page")
+	  #end
+
   </div>
+  #end
 <script type="text/javascript">
 $(function(){
 	$(".Hui_aside").scrollTop(380);
@@ -55,9 +58,7 @@ $(function(){
 	$.Tinyfold("#Tinyfold3 .item h4","#Tinyfold3 .item .info","",3,"click");
 });
 </script>
-#end
-#end
-#end
+
  <script type="text/javascript">
  $(function(){
 	$(".Hui_aside").scrollTop(380);
