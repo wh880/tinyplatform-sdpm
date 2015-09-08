@@ -36,8 +36,9 @@
                         #end
                     </div>
                     <div style="text-align:right;margin:right">
-                        <a href="${TINY_CONTEXT_PATH}/service/page/clientAdd.page">编辑</a>
-                        <a href="${TINY_CONTEXT_PATH}/service/page/clientAdd.page">删除</a>
+                        #@iconOperations(
+                            "#myModal3" "" "编辑" "700" "300 " "/service/page/clientProductEdit.pagelet" "ml-5")编辑#end
+                        #@iconOperations("#myModal4" "" "删除" "700" "300 " "#" "ml-5")删除#end
                     </div>
                 #end
             #end
@@ -48,3 +49,5 @@
 
     #end
 #end
+#@simpleModal("myModal3" "编辑")#end
+#@simpleModal("myModal4" "删除")#end
