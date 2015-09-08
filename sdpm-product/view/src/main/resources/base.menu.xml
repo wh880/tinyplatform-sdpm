@@ -9,4 +9,4 @@
 	<menu id="modular" parent-id="myproduct" name="模块" href="/product/page/project/product-modular.page"  sort="9" isShow="1" permission="Permission"></menu>
     <menu id="overview" parent-id="myproduct" name="概况" href="/product/page/project/overview.page"  sort="1" isShow="10" permission="Permission"></menu>
     <menu id="dynamic" parent-id="myproduct" name="动态" href="/product/page/project/dymanicdata.page"  sort="1" isShow="11" permission="Permission">	</menu> 
-</menu> 		
+ </menu> 		
