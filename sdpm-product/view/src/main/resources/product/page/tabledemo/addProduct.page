@@ -87,8 +87,8 @@
         #end*#
         #@validateDiv("col-2")#end
     #end
-    #@elementItem(elementId="whitelistBox" eleItemClass="hidden")
-        	#@colLabel()分组白名单#end
+    #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
+        	#@colLabel(label_title)分组白名单#end
 			#@skinMinimal()
 				#labelCheckbox(ckId="whitelistBox" labelText="管理员")
 				#labelCheckbox(ckId="whitelistBox" labelText="研发")

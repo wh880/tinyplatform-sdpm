@@ -13,7 +13,7 @@
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${var}#end
-	#@td()工程发布#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-release/product-al-req.page">工程发布</a>#end
 	#@td()2.20.1#end
 	#@td()2015-09-02#end
 	 #@td()
