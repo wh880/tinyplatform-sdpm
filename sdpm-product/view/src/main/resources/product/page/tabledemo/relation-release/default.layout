@@ -39,7 +39,7 @@
 
 
 #@tabWithInit("tab_demo" "optionsBox")
-<div style="width:65%;float:left">
+<div style="width:70%;float:left">
 		#@div()
 			#@tabWithInit("tab_demo" "optionsBox")
 				
@@ -71,7 +71,7 @@
 							#end
 						#end
 						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-release/product-al-no-bug.page" cname=="no-bug"?"Current":"")
-							#@buttons("","icon-bug green")
+							#@buttons("","icon-unlink")
 								未关联Bug
 							#end
 						#end
@@ -107,7 +107,7 @@
 			#end
 		#end
 </div>
-<div style="width:35%;float:right" >
+<div style="width:30%;float:right" >
 		#TypeInfo("productRelease")
 </div>
 #end
