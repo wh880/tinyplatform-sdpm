@@ -13,7 +13,7 @@
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${var}#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/project/task/index.page">产品项目${page}</a>#end
+	#@td()<a href="#">产品项目${page}</a>#end
 	#@td()SD09#end
 	#@td()2015-09-02#end
 	#@td()进行中#end

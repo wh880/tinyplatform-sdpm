@@ -16,7 +16,7 @@
 					<a href="#">本月</a>
 					<a href="#">上月</a>
 					<a href="#">所有</a>
-					<span style="left:310px;top:-41px; position:relative; height:10%">
+					<span style="left:330px;top:-35px; position:relative; height:10%">
 					#@tinyForm("thisform" "" "" {"class":"test"})
 					  #@elementItem()
 						 #@formControlDiv("col-2")
