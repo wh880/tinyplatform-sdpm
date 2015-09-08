@@ -3,10 +3,6 @@
 #import("/org/tinygroup/table/components/table.component")
 #include("/productLine/page/event/mytree.page")
 #set(linkName="overview")
-<style>
-.infoContent{ margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
-.infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:13px;}
-</style>
 #include("/product/page/event/common.page")
 #set(name="version")
 #@tabWithInit("tab_demo" "optionsBox")
