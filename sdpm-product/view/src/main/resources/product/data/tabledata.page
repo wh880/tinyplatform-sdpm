@@ -12,10 +12,10 @@
 #for(var:[1..pagesize])
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">007</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">03</a>#end
 	#@td()@#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">这是一条演示用的需求</a>#end
-	#@td()A计划#end
+	#@td()工程计划#end
 	#@td()开发人员#end
 	#@td()Demo#end
 	#@td()admin#end

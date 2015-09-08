@@ -70,41 +70,15 @@
       
       #@elementItem()
         #@colLabel()附件：#end
-        #@formControlDiv("col-3")
-	    #tinyUploadInput("inputName" "" {"placeholder":"添加附件"})
-        #end
-        #@validateDiv("col-2")#end
+        #@formControlDiv("col-8")
+		   	#include("/product/page/event/fileupload.page")
+       #end
     #end
     
     #@elementItem()
         #@colLabel()检查影响：#end
         #@formControlDiv("col-8")
-	    	#@tabWithInit("tab_demo")
-	#@tabHead()
-		#@tabHeadCol()影响的项目#end
-		#@tabHeadCol()影响的BUG#end
-		#@tabHeadCol()影响的用例#end
-		
-	#end
-	#@tabBodyCol("ptop-5")
-	#end
-	#@tabBodyCol("ptop-5")
-		#import("/org/tinygroup/table/components/table.component")
-		  #@tableHover()
-		    #@thead()
-		      #@tr()
-		        #@th()BUG编号#end
-		        #@th()标题#end
-		        #@th()BUG状态#end
-		        #@th()由谁创建#end
-		        #@th()解决者#end
-		        #@th()解决方案#end
-		        #@th()最后修改者#end
-		      #end
-		    #end
-		  #end
-		#end
- 	 #end
+	    	#include("/product/page/tabledemo/check-effect.page")
  	    #end
         #@validateDiv("col-2")#end
     #end
