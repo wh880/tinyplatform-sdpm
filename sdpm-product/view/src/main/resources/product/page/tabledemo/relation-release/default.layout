@@ -90,7 +90,7 @@
 					#end
 					
 					<div class="r"> 
-					#@aModal("#myModal" "导出HTML" "700" "130" "icon-upload-alt" "/product/page/tabledemo/product-export-html.pagelet")导出HTML#end
+					#@aModal("#myModal" "导出HTML" "700" "130" "icon-upload-alt" "/product/page/tabledemo/product-export-html.pagelet")导出HTML#end&nbsp;
 				
                     </div>
 					

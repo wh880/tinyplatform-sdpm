@@ -16,9 +16,11 @@
 <style>
 #*.tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
-.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}*#
-.b {margin-left: 8px;}
-.input-group-addon{width:10px;font-size:20px}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+.b {margin-left: 8px;}*#
+.input-group-addon{width:10px;font-size:20px;}
+.hidden_namesty{margin-left:17%}
+.label_title{width:100px}
 </style>
 #include("/project/event/common.page")
 #set(name="survey")
@@ -171,16 +173,16 @@
       #end
       #@elementItem()
         	#@colLabel()访问控制#end
-			#@skinMinimal("mt-20")
-    				#labelRadio1(rId="aclopen" rName="acl" rValue="open" labelText="默认设置(有项目视图权限，即可访问)" "setWhite(this.value);")
-    				#labelRadio1(rId="aclcustom" rName="acl" rValue="custom1" labelText="私有项目(只有项目团队成员才能访问)" "setWhite(this.value);")   								
-    				#labelRadio1(rId="aclcustom" rName="acl" rValue="custom" labelText="自定义白名单(团队成员和白名单的成员可以访问)" "setWhite(this.value);")
-					
+			#@skinMinimal("col-10")
+
+    				#labelRadio1(rId="aclopen" rName="acl" rValue="open" labelText="默认设置(有项目视图权限，即可访问)" "setWhite(this.value);")</br>
+    				#labelRadio1(rId="aclcustom" rName="acl" rValue="custom1" labelText="私有项目(只有项目团队成员才能访问)" "setWhite(this.value);")   	</br>
+    				#labelRadio1(rId="aclcustom" rName="acl" rValue="custom" labelText="自定义白名单(团队成员和白名单的成员可以访问)" "setWhite(this.value);")</sbr>
 			#end
         #@validateDiv("col-2")#end
       #end
-       #@elementItem(elementId="whitelistBox" eleItemClass="hidden")
-        	#@colLabel()分组白名单#end
+       #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
+        	#@colLabel("label_title")分组白名单#end
 			#@skinMinimal()
 				#labelCheckbox(ckId="whitelistBox" labelText="管理员")
 				#labelCheckbox(ckId="whitelistBox" labelText="研发")
@@ -197,46 +199,7 @@
       <a href="#">#buttonRadiusPrimary(caption="保存")</a>
       <a href="${TINY_CONTEXT_PATH}/project/survey/index.page">#buttonDefault(caption="返回")</a>
    #end#end
-#*   <table>
-   		<tr>
-   			<td>
-   				<input type="radio" name="acl" value="custom" onclick="setWhite(this.value);" id="aclcustom"> 私有项目(只有项目团队成员才能访问)
-   			</td>
-   		</tr>
-   		<tr id="whitelistBox" class="hidden">
-        	<th>分组白名单</th>
-        	<td colspan="2" id="whitelistBox">
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="1" id="whitelist1"> 管理员</label>
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="2" id="whitelist2"> 研发</label>
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="3" id="whitelist3"> 测试</label>
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="4" id="whitelist4"> 项目经理</label>
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="5" id="whitelist5"> 产品经理</label>
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="6" id="whitelist6"> 研发主管</label>
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="7" id="whitelist7"> 产品主管</label>
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="8" id="whitelist8"> 测试主管</label>
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="9" id="whitelist9"> 高层管理</label>
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="10" id="whitelist10"> 其他</label>
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="11" id="whitelist11"> guest</label>
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="12" id="whitelist12"> 第一个分组</label>
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="13" id="whitelist13"> 管理员1</label>
-        	<label class="checkbox-inline">
-        		<input type="checkbox" name="whitelist[]" value="14" id="whitelist14"> 2112</label>
-        	</td>
-      </tr>
-   </table>*#
+
 #end
  #end
 #end
