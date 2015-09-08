@@ -32,7 +32,7 @@
                     "448" "/service/page/testEdit.pagelet" "ml-5")
                 #iconOperations("#myModal2" "icon-remove" "删除" "550"
                     "100" "/service/page/testDelect.pagelet" "ml-5")
-                <a href="${TINY_CONTEXT_PATH}/service/page/test.page"
+                <a href="${TINY_CONTEXT_PATH}/service/page/sla.page"
                    title="返回">#buttonIcon(iconClass="icon-reply")</a>
 			</span>
             #end
@@ -178,7 +178,7 @@
                 "/service/page/testEdit.pagelet" "ml-5")
             #iconOperations("#myModal2" "icon-remove" "删除" "550" "100"
                 "/service/page/testDelect.pagelet" "ml-5")
-            <a href="${TINY_CONTEXT_PATH}/service/page/test.page" title="
+            <a href="${TINY_CONTEXT_PATH}/service/page/sla.page" title="
 返回">#buttonIcon(iconClass="icon-reply")</a>
         </div>
     </div>

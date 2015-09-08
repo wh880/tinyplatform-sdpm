@@ -7,16 +7,19 @@
         #@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel") 批量删除#end
     ##    <a title="权限维护" href=userBatchAddpagePath>#buttonIcon(iconClass="添加" "865" "420","btn radius btn-info")</a>
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/service/page/tabledemo/clientTableData.pagelet" 81) ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/service/page/tabledemo/clientProductTableData.pagelet" 81) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})客户ID#end
-                #@tinyTh({"class":"","rel":"sortname"})客户名称#end
-                #@tinyTh({"class":"","rel":"sortname"})客户部门#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})客户登记人#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})客户登记时间#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})客户状态#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})产品ID#end
+                #@tinyTh({"class":"","rel":"sortname"})产品名称#end
+                #@tinyTh({"class":"","rel":"sortname"})产品版本#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})客户联系人1#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})联系电话1#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})客户联系人2#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})联系电话2#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})客户联系人3#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})联系电话3#end
                 #@tinyTh({"class":"","rel":"sortname"})操作#end
             #end
         #end

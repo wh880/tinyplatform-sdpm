@@ -1,21 +1,24 @@
 
 #@tinyForm("thisform" "" "" {"class":"test"})
-    #set(name="")
-
+#####     以下文档类型为“文件”
     #@elementItem()
-        #@colLabel()#end
+        #@colLabel()问题：#end
         #@formControlDiv("col-8")
-            #tinyInput("text" "username" ""{"placeholder":"产品文档库","datatype":"*4-16","nullmsg":"文档库名称不能为空！","id":"username","class":"input-text"})
+            #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":"文档标题不能为空！","id":"username","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end
 
-#*     #@elementItem()
-    #@div(divClass="col-10 col-offset-2 form-inline")
-      #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+    #@elementItem()
+        #@colLabel()回答：#end
+        #@formControlDiv("col-8")
+            #@tinyueditor("content" "content")说点什么...最少输入10个字符#end
+        #end
+        #@validateDiv("col-2")#end
     #end
-	#end     *#
+
 #end
+
 
 <script type="text/javascript">
     $(function(){
