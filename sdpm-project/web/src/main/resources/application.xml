@@ -42,8 +42,10 @@
 		resolve-classpath="true">
 		<class-paths>
 			<!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
-			<class-path path="D:\GitFile\sdpm\sdpm-project\view\src\main\resources" /> 		
-			<!-- <class-path path="E:\sdpm\sdpm-project\view\src\main\resources" />  -->		
+			<class-path path="D:\GitFile\sdpm\sdpm-project\view\src\main\resources" />
+			<!-- <class-path path="E:\sdpm\sdpm-project\view\src\main\resources" />  -->
+			<class-path path="E:\TinyWorkSpace\sdpm\sdpm-project\view\src\main\resources"/>
+			<class-path path="F:\daochu\sdpm\sdpm-project\view\src\main\resources"/>
  		</class-paths>
 		<include-patterns>
 			<include-pattern pattern="org\.tinygroup\.(.)*\.jar" />

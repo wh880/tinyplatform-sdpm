@@ -190,12 +190,12 @@
     <modules>
         <module>app</module>
         <module>base-dao</module>
-
+        <module>business-interface</module>
         <module>business-impl</module>
         <module>common</module>
-
+        <module>dao-interface</module>
         <module>dao-impl</module>
-
+        <module>service-interface</module>
         <module>service-impl</module>
         <module>service-wrapper</module>
         <module>view</module>
