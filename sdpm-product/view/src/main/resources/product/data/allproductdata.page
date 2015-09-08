@@ -24,7 +24,7 @@
 	#@td()313#end
 	#@td()31#end
 	  #@td()
-	 	#iconOperations("#myModal" "icon-off " "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet" "ml-5")
+	 	#iconOperations("#myModal" "icon-off " "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet" "ml-5")&nbsp;
 		<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-module-editor.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
 		#iconOperation(" icon-remove" "删除产品" "ml-5")		
 	#end

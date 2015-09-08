@@ -14,10 +14,10 @@
 
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${page}#end
-	#@td()产品文档分类#end
-	#@td()添加文档标题#end
-	#@td()阿炉添加#end
-	#@td()20150828#end
+	#@td()工程管理类#end
+	#@td()项目管理经验#end
+	#@td()产品经理#end
+	#@td()2015-09-02#end
 	#@td()
 		<a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-file-editor.page"><i class="icon-pencil"></i></a>
 		#iconOperation(" icon-remove" "删除" "ml-5")

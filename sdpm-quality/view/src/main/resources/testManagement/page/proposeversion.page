@@ -26,8 +26,10 @@
         #@elementItem()
             #@colLabel()所属项目：#end
             #@formControlDiv("col-5 form-inline selectList")
-                #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                    #@optionItem("")请选择#end
+                #@tinySelect("" "1" {"class":"#####","nullmsg":"请选择","datatype":"*"})
+                    #@optionItem("1")--请选择--#end
+                    #@optionItem("2")项目1#end
+                    #@optionItem("2")项目2#end
                 #end
             #end
         #end
@@ -108,8 +110,9 @@
             #@validateDiv("col-2")#end
         #end
 
-        #@divCenterAlign()#buttonRadiusDefault(caption="保存")
-            #buttonRadiusDefault(caption="取消")#end
+        #@divCenterAlign()
+	       	<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page">#buttonRadiusDefault(caption="保存")</a>
+            <a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page">#buttonRadiusDefault(caption="取消")#end</a>
     #end
 #end
 <script type="text/javascript">

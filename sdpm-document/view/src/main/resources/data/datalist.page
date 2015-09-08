@@ -12,17 +12,23 @@
 #for(var:[1..pagesize])
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()${var}#end
-	#@td()@#end
-	#@td()个性化需求#end
-	#@td()产品经理#end
-	#@td()项目经理#end
-	#@td()开发人员#end
-	#@td()半年#end
-	#@td()进行中#end
-	#@td()
+	#@td()${page}#end
+	#@td()文档标题${page}#end
+	#@td()网页（类型）#end
+	#@td()阿炉添加#end
+	#@td()2015/03/25 21:49#end
+	 #@td()
+	    #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/document/table-edit.pagelet" "ml-5")
 		#iconOperation(" icon-remove" "删除" "ml-5")
 	#end
-	
 #end
+#end
+
+#@dialog("myModal")
+	#@dialogHeader()对话框标题#end
+	#@dialogBody()<p>对话框内容…</p>#end
+	#@dialogFooter()
+		#@buttonEnsure()确定#end
+		#@buttonCancel()关闭#end
+	#end
 #end
