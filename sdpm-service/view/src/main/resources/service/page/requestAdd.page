@@ -51,6 +51,16 @@
                     #end
                 #end
                 #@elementItem()
+                    #@colLabel()请求分类：#end
+                    #@formControlDiv("col-8 form-inline selectList")
+                        #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
+                            #@optionItem("")请选择#end
+                            #@optionItem("")请求分类1#end
+                            #@optionItem("")请求分类2#end
+                        #end
+                    #end
+                #end
+                #@elementItem()
                     #@colLabel()请求期限：#end
                     #@formControlDiv("col-8")
                         #@tinyDateInput(

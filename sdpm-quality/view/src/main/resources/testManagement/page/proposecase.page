@@ -137,8 +137,12 @@
             #end
             #@validateDiv("col-2")#end
         #end
-        #@divCenterAlign()#buttonRadiusDefault(caption="保存")
-            #buttonRadiusDefault(caption="取消")#end
+        #@divCenterAlign()
+        	<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
+		 		#buttonRadiusDefault(caption="保存")</a>
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
+   		 		#buttonRadiusDefault(caption="取消")</a>
+   		 #end
     #end
 #end
 <script type="text/javascript">

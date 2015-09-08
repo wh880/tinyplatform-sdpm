@@ -1,22 +1,4 @@
 
-.operationbar {
-
-    background: #f9fafe;
-    padding: 6px 5px 6px 10px;
-}
-
-.operationbar a {
-    padding: 2px 3px;
-    display: inline-block;
-    margin-right: 0;
-    border-radius: 3px;
-}
-
-.operationbar a:hover {
-    background: #ddd;
-    color: #333;
-}
-
 .operationbar .active_btn:hover {
     background: none;
 }
@@ -46,16 +28,35 @@
 }
 
 .infoContent {
-    margin: 18px 4px 10px 5px;
-    padding: 6px;
+    margin: 18px 0px 10px 0px;
+    padding: 20px;
     border: #eee 1px solid;
+    position: relative;
+    border-radius: 4px;
+}
+
+.pageleftpart .infoContent {
+    margin-right: 15px;
+}
+
+.infoContent .RTtitle {
+    position: absolute;
+    z-index: 2;
+    top: -12px;
+    right: 10px;
+    width: auto;
+    background: #fff;
+
 }
 
 .infoContent .titleName {
-    margin-top: -16px;
-    margin-bottom: 8px;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 14px;
+    position: absolute;
+    top: -11px;
+    left: 15px;
+    padding: 0 6px;
+    background-color: #fff;
 }
 
 .infoContent ul li label {
@@ -99,3 +100,27 @@
     width: 40%;
     text-align: right;
 }
+
+/*保存按钮及返回按钮样式*/
+.commitBtn {
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+    background-color: #1a4f85;
+    border: none;
+    padding: 5px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.backBtn {
+    text-shadow: 0 1px 0 #fff;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    padding: 5px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    border-radius: 3px;
+    /*color: #fff;*/
+}
+
