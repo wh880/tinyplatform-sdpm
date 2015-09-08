@@ -17,4 +17,8 @@
 	    <info name="demandInfo" title="发布信息" infoParameter="" url="/product/page/tabledemo/relation-release/releasebaseinfo.pagelet" resource="productRelease"/>
 	</type-info>
 	
+	<type-info name="demandhref"  >
+	    <info name="demandInfo" title="需求信息" infoParameter="" url="/product/page/tabledemo/hrefbaseinfo.pagelet" resource="demandhref"/>
+	</type-info>
+	
 </type-infos>
