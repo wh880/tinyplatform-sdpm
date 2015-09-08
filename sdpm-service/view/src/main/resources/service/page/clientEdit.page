@@ -64,18 +64,6 @@
             #@validateDiv("col-2")#end
         #end
 
-##    #@elementItem()
-##        #@colLabel()客户状态：#end
-##        #@formControlDiv("skin-minimal col-5")
-##            #@radioBox()
-##                #@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择状态！","datatype":"*"})正常#end
-##            #end
-##            #@radioBox()
-##                #@tinyRadioes("sex" "women" "women")失效#end
-##            #end
-##        #end
-##        #@validateDiv("col-2")#end
-##    #end
 #end
 
 <script type="text/javascript">

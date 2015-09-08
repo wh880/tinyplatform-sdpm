@@ -1,19 +1,16 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-#!set(cname="demand")
+#!set(cname="demand",type="demand")
 
-#include("/product/page/event/mulsearch-demand.page")		
-
+#@tinyForm("thisform" "" "post" {"class":"test"})
 		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 			
+			#submitButton("submit","批量删除","btn btn-submit btn-primary","批量删除")
+			
 			#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置		
-				<div style="float:right" > 
-					<a id="showsearchmore-demand" href="#">
-						<button class="btn btn-submit btn-primary" id="submit" type="button">关联需求</button>
-					</a>
-                </div>
+				
 				
 						
 			#end
@@ -23,13 +20,13 @@
 						#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
 						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})P#end
-						#@tinyTh({"class":"","rel":"sortname"})所属计划#end
 						#@tinyTh({"class":"","rel":"sortname"})需求名称#end
 						#@tinyTh({"class":"","rel":"sortname"})创建#end
 						#@tinyTh({"class":"","rel":"sortname"})指派#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})预计#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})状态#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})阶段#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})操作#end
 						
 					#end
 				#end
@@ -46,4 +43,4 @@
 			
 		#end
 		
-	
+#end	

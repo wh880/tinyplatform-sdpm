@@ -1,7 +1,7 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-#!set(cname="bug")
+#!set(cname="bug",type="bug")
 
 
 #include("/product/page/event/mulsearch-bug.page")	
@@ -13,18 +13,18 @@
 				
 			#end
 			#@tinyTableContent("../../../data/product-al-bug-data.pagelet") ##取数据地址 总数据
-				#@thead()
-					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-						#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})P#end
-						#@tinyTh({"class":"","rel":"sortname"})Bug标题#end
-						#@tinyTh({"class":"","rel":"sortname"})创建者#end
-						#@tinyTh({"class":"","rel":"sortname"})指派#end
-						#@tinyTh({"class":"","rel":"sortname"})状态#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})操作#end
+					#@thead()
+						#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+							#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
+							#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
+							#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})P#end
+							#@tinyTh({"class":"","rel":"sortname"})Bug标题#end
+							#@tinyTh({"class":"","rel":"sortname"})创建者#end
+							#@tinyTh({"class":"","rel":"sortname"})指派#end
+							#@tinyTh({"class":"","rel":"sortname"})状态#end
+							#@tinyTh({"class":"sorting","rel":"sortname"})操作#end
+						#end
 					#end
-				#end
 			#end
 #*			
 			##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用

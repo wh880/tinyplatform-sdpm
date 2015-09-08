@@ -13,9 +13,9 @@
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${var}#end
-	#@td()发布${page}#end
-	#@td()12#end
-	#@td()121#end
+	#@td()工程发布#end
+	#@td()2.20.1#end
+	#@td()2015-09-02#end
 	 #@td()
 	 	
 	 	

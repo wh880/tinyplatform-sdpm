@@ -9,63 +9,49 @@
         #@tabHead()
             #include("/service/page/tab.page")
         #end
-    <span class="r" style="position:relative;top:-28px;height:0">
-##			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">#buttonIcon(iconClass="icon-globe")所有产品</a>&nbsp;
-    <!--新增产品-->
-##    #@aModal("#myModal" "新增产品" "900" "500" "btn-class" "#")#buttonIcon(iconClass="icon-plus-sign")添加客户 #end
-    </span>
-
-    ##这里是动态的模块布局
-
-
-    ###@div(divClass="operationbar")
-    ##    #include("/service/page/multiSearch.page")
-    ###end
         #@tabBodyCol("ptop-5")
         ##operationbar star
             #@div(divClass="operationbar")
             <span class="f">
 					<a href="#" class="active_btn">恒生公司</a>
-
-            ##					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-				</span>
+            </span>
             <span class="r">
-					#@iconOperations(
-                        "#myModal" "icon-upload-alt" "导入" "500" "100" "/service/page/tabledemo/slaImport.pagelet""ml-5")
-                        &nbsp导入#end
-
                 #@iconOperations(
-                    "#myModal" "icon-download-alt" "导出" "500" "100" "/service/page/tabledemo/slaExport.pagelet" "ml-5")
-                    &nbsp导出#end
-            ##<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
-            ##<a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-                <a href="#">#buttonIcon(iconClass="icon-plus")新建产品</a>
-				</span>
+                    "#myModal1" "icon-download-alt" "导出" "600" "100" "/service/page/tabledemo/slaExport.pagelet" "ml-5")
+                    导出#end
+                #@iconOperations(
+                    "#myModal2" "icon-plus" "购买产品" "600" "400" "/service/page/clientProductAdd.pagelet" "ml-5")购买产品#end
+            ##                <a href="/service/page/clientProductAdd.page">#buttonIcon(iconClass="icon-plus")新建产品</a>
+                <a href="${TINY_CONTEXT_PATH}/service/page/clientUser.page"
+                   title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
+            </span>
                 #div(divClass="clearfix")
                 #include("/service/page/mulsearch.page")
             #end
         ##operationbar end
         #end
-    ##        #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
-    ##        #@toggleLeft({"class":"aclass"})
-    ##            #@settoggleLeftTitle()所属客户#end
-    ##            #@settoggleLeftBody("treeLeftbox")
-    ##            <ul class="treeList">
-    ##                <li id="listContent" style="display:none; position:absolute;left:74px;">
-    ##                    <ul id="alternative" class="ztree"
-    ##                        style="width:126px;min-height:160px;max-height:300px;"></ul>
-    ##                </li>
-    ##            </ul>
-    ##            <ul id="treeDrag" class="ztree"></ul>
-    ##            #end
-    ##        #end
-    ##        #@toggleRight()
-    ##            #include("/service/page/tabledemo/clientProductTable.page")
-    ##        #end
-    ##    #end
         #include("/service/page/clientDetail.page")
     #end
 #end
+#@simpleModal("myModal1" "导出")#end
+#@simpleModal("myModal2" "新建产品")#end
+
+<script>
+    $(function () {
+        $(".tinytable").on("click", ".icon-remove", function () {
+            //console.log($(this).attr("itemId"))
+            // user_del(this, '1');
+            var that = this;
+            layer.confirm('确定要删除该记录？', function (index) {
+                //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                //$.ajax()
+                //console.log(index);
+                layer.msg($("已删除").attr("deleteList"), 1);
+//                layer.msg('已删除', 1);
+            })
+        });
+    });
+</script>
 <script type="text/javascript">
     <!--
     var setting = {

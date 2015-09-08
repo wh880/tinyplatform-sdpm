@@ -7,7 +7,7 @@
 #@tinyForm("thisform" "" "post" {"class":"test"})
 	 #@tableBorder()
 	 	#@thead()
-	 		#@tr()
+	 		#@tr("text-c")
 	 			#@thW("20")	ID	#end
 	 			#@thW("30")	所属板块	#end
 	 			#@thW("30")	相关需求#end
@@ -24,11 +24,11 @@
 	 	#@tbody()
 	 		
 	 		#for(i:[1..8])
-				#@tr()
+				#@tr("text-c")
 		 			
 		 			#@th()	${i}	#end
 		 			#@th()	
-						#@formControlDiv("col-8")
+						#@formControlDiv()
 								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
 									#@tinyOptionItem("zh")/1#end
 									#@tinyOptionItem("en")/2#end
@@ -39,7 +39,7 @@
 			 		#end
 		 			#@th()	
 		 				
-		 				#@formControlDiv("col-8")
+		 				#@formControlDiv()
 								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
 									#@tinyOptionItem("zh")/1#end
 									#@tinyOptionItem("en")/2#end
@@ -59,7 +59,7 @@
 		 			
 		 			#@th()	
 		 				
-		 				#@formControlDiv("col-8")
+		 				#@formControlDiv( )
 								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
 									#@tinyOptionItem("zh")/1#end
 									#@tinyOptionItem("en")/2#end
@@ -72,7 +72,7 @@
 		 			
 		 			#@th()	
 		 				
-		 				#@formControlDiv("col-8")
+		 				#@formControlDiv()
 								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
 									#@tinyOptionItem("zh")/1#end
 									#@tinyOptionItem("en")/2#end
@@ -97,7 +97,7 @@
 		 			
 		 			#@th()	
 		 				
-		 				#@formControlDiv("col-8")
+		 				#@formControlDiv()
 								#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
 									#@tinyOptionItem("zh")/1#end
 									#@tinyOptionItem("en")/23333#end
@@ -117,7 +117,7 @@
 	 #end
 	  <p>
        </p>
-             #@td()
+             #@td("text-c")
 					#@colLabel()#end
 					<a href="#">#buttonRadiusPrimary(caption="保存")</a>
     				<a href="${TINY_CONTEXT_PATH}/project/task/index.page">#buttonDefault(caption="返回")</a>
