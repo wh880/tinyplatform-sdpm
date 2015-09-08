@@ -6,7 +6,7 @@
 #*.tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}
 .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}*#
-.wz{font-size:16px;top: 5px;}
+##.wz{font-size:16px;top: 5px;}
 </style>
 #set(name="version")
 #@div()
@@ -25,111 +25,86 @@
 #@div(divClass="operationbar")
 	新建版本
 #end
-#@tinyForm("thisform" "" "" {"class":"test"})
-#@div()
-	#@table()
-		#@tbody()
-			#@tr()
-				#@td()
-					#@colLabel("wz")产品：#end
-					  #@formControlDiv("col-3")
-						#@tinySelect("lang" "zh" {"style":"width:115%","class":"input-text select2","rel":"22"})
-						#@tinyOptionItem("zh")分类1#end
-						#@tinyOptionItem("en")分类2#end
-						#@tinyOptionItem("ta")分类3#end
-						#@tinyOptionItem("ta")<a href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-plus")建任务</a>#end
+				#@tinyForm("thisform" "" "" {"class":"test"})
+					#@elementItem()
+						#@colLabel()产品：#end
+						#@formControlDiv("col-5")
+							#@tinySelect("lang" "zh" {"style":"width:115%","class":"input-text select2","rel":"22"})
+								#@tinyOptionItem("zh")分类1#end
+								#@tinyOptionItem("en")分类2#end
+								#@tinyOptionItem("ta")分类3#end
+								#@tinyOptionItem("ta")<a href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-plus")建任务</a>#end
+						#end
+						#@validateDiv("col-2")#end
+					#end
+						#end
+					#@elementItem()
+						#@colLabel()名称编号#end
+						#@formControlDiv("col-8")
+							#tinyInput("text" "username" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+						#end
+						#@validateDiv("col-2")#end
+					#end
+					#@elementItem()
+						#@colLabel()构建者：#end
+						#@formControlDiv("skin-minimal col-5")
+							#@tinySelect("lang" "zh" {"style":"width:115%","class":"input-text select2","rel":"22"})
+								#@tinyOptionItem("zh")中国#end
+								#@tinyOptionItem("en")英国#end
+								#@tinyOptionItem("ta")泰国#end
+							#end
+						#end
+						#@validateDiv("col-2")#end
+					#end
+					#@elementItem()
+						#@colLabel()打包日期：#end
+						#@formControlDiv("col-8")
+							#@formHorizontal()
+								#dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:40%'")
+							#end
+						#end
+						#@validateDiv("col-2")#end
+					#end
+
+					#@elementItem()
+						#@colLabel()源代码地址：#end
+						#@formControlDiv("col-5")
+							#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+						#end
+						#@validateDiv("col-2")#end
+					#end
+
+				##
+					#@elementItem()
+						#@colLabel()下载地址：#end
+						#@formControlDiv("col-5")
+							#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+						#end
+						#@validateDiv("col-2")#end
+					#end
+						#@elementItem()
+						#@colLabel()附件：#end
+						#@formControlDiv("col-8")
+							#tinyUploadInput("inputName" "" {"style":"width:43%","placeholder":"可直接输入地址，也可点击下图标进行上传"})
+						#end
+						#@validateDiv("col-2")#end
+					#end
+						#@elementItem()
+							#@colLabel()描述：#end
+							#@formControlDiv("col-8")
+								#@tinyueditor("content" "content" "height:100px;overflow:auto")说点什么...最少输入10个字符#end
+							#end
+							#@validateDiv("col-2")#end
+						#end
+
+
+					#@elementItem()
+						<center>
+                        <a href="#">#buttonRadiusPrimary(caption="保存")</a>
+                        <a href="${TINY_CONTEXT_PATH}/project/version/index.page">#buttonDefault(caption="返回")</a>
+                        </center>
 					#end
 				#end
-				#end								
-			#end			
-			#@tr()
-				#@td()	
-					#@colLabel("wz")名称编号：#end
-					#@formControlDiv("col-8")
-					#tinyInput("text" "username" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
-					#end
-				#end
-				#@validateDiv("col-2")#end							
-			#end
-			
-			#@tr()
-			#@td()
-		    #@colLabel("wz")构建者：#end
-		    #@formControlDiv("col-3")
-			#@tinySelect("lang" "zh" {"style":"width:115%","class":"input-text select2","rel":"22"})
-				#@tinyOptionItem("zh")中国#end
-				#@tinyOptionItem("en")英国#end
-				#@tinyOptionItem("ta")泰国#end
-			#end
-		
-		    #end
-		     #@validateDiv("col-2")#end
-              #end
-		    #end
-		      #@tr()
-			  #@td()
-		      #@colLabel("wz")打包日期：#end
-		      #@formControlDiv("col-8")
-		       #@formHorizontal()
-	              #dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:40%'")
-                #end
-			      #end
-	             #end
-                #end	
-                
-                #@tr()
-				#@td()	
-					#@colLabel("wz")源代码地址：#end
-					#@formControlDiv("col-8")
-					#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
-					#end
-				#end
-				#@validateDiv("col-2")#end							
-			#end	
-			
-			 #@tr()
-				#@td()	
-					#@colLabel("wz")下载地址：#end
-					#@formControlDiv("col-8")
-					#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
-					#end
-				#end
-				#@validateDiv("col-2")#end							
-			#end	
-			 #@tr()
-			#@td()	
-			 #@colLabel()附件：#end
-              #@formControlDiv("col-8")
-	    	#tinyUploadInput("inputName" "" {"style":"width:43%","placeholder":"可直接输入地址，也可点击下图标进行上传"})
-             #end  
-              
-             
-             #@validateDiv("col-2")#end
-              #end
-	         #end
-	         
-	         #@tr()
-			#@td()
-		    #@colLabel("wz")描述：#end
-		    #@formControlDiv("col-10")
-			     #@tinyueditor("content" "content" "height:100px;overflow:auto")说点什么...最少输入10个字符#end
-		     #end
-		    #@validateDiv("col-2")#end
-		    #end
-		    #end
-		    
-		    #@tr()
-				#@td()
-					#@colLabel()#end
-					<a href="#">#buttonRadiusPrimary(caption="保存")</a>
-      				<a href="${TINY_CONTEXT_PATH}/project/version/index.page">#buttonDefault(caption="返回")</a>
-				#end
-			#end
-			
-	   #end
-	#end
-#end	
-#end
 #end	
 #end		
 #end
