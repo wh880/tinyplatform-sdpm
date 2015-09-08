@@ -101,7 +101,7 @@
     text-align: right;
 }
 
-/*保存按钮及返回按钮样式*/
+/*锟斤拷锟芥按钮锟斤拷锟斤拷锟截帮拷钮锟斤拷式*/
 .commitBtn {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
     background-color: #1a4f85;
@@ -124,3 +124,12 @@
     /*color: #fff;*/
 }
 
+.hidden_namesty{
+    margin-left:17%
+    /*鍗曢�夋崲琛屽悗瀵归綈*/
+}
+
+.label_title{
+    width:100px
+    /*鍗曢�夊脊鍑烘瀵归綈*/
+}
