@@ -68,8 +68,8 @@
 
 					#@elementItem()
 						#@colLabel()源代码地址：#end
-						#@formControlDiv("col-5")
-							#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+						#@formControlDiv("col-8")
+							#tinyInput("text" "username" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
 						#end
 						#@validateDiv("col-2")#end
 					#end
