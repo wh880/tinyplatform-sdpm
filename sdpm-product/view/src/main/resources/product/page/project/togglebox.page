@@ -118,10 +118,10 @@
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
 						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})ID#end
-						#@tinyTh({"class":"","rel":"sortname"})P#end
-						#@tinyTh({"class":"","rel":"sortname"})需求名称#end
-						#@tinyTh({"class":"","rel":"sortname"})计划#end
-						#@tinyTh({"class":"","rel":"sortname"})来源#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})P#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})需求名称#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})计划#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})来源#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})创建#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})指派#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})预计#end

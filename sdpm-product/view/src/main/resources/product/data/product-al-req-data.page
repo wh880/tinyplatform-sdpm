@@ -14,7 +14,7 @@
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${var}#end
 	#@td()@#end
-	#@td()个性化需求#end
+	#@td()个性化需#end
 	#@td()产品经理#end
 	#@td()项目经理#end
 	#@td()开发人员#end

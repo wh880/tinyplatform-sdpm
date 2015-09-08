@@ -13,17 +13,17 @@
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})产品名称#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})产品名称#end
 						#@tinyTh({"class":"","rel":"sortname"})激活需求#end
 						#@tinyTh({"class":"","rel":"sortname"})已变更需求#end
 						#@tinyTh({"class":"","rel":"sortname"})草稿需求#end
 						#@tinyTh({"class":"","rel":"sortname"})已关闭需求#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})计划数#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})发布数#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})相关BUG#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})未解决#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})未指派#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})操作#end
+						#@tinyTh({"class":"","rel":"sortname"})计划数#end
+						#@tinyTh({"class":"","rel":"sortname"})发布数#end
+						#@tinyTh({"class":"","rel":"sortname"})相关BUG#end
+						#@tinyTh({"class":"","rel":"sortname"})未解决#end
+						#@tinyTh({"class":"","rel":"sortname"})未指派#end
+						#@tinyTh({"class":"","rel":"sortname"})操作#end
 					#end
 				#end
 			#end
