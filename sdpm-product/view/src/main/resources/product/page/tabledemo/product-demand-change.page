@@ -70,10 +70,9 @@
       
       #@elementItem()
         #@colLabel()附件：#end
-        #@formControlDiv("col-3")
-	    #tinyUploadInput("inputName" "" {"placeholder":"添加附件"})
-        #end
-        #@validateDiv("col-2")#end
+        #@formControlDiv("col-8")
+		   	#include("/product/page/event/fileupload.page")
+       #end
     #end
     
     #@elementItem()
