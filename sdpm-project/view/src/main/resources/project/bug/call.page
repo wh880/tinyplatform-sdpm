@@ -23,15 +23,7 @@
 				</span>
 			#end				
 			#@tabBodyCol("ptop-5")
-			#@div(divClass="operationbar")
-				<span class="f">
-					Bug列表
-				</span>
-				<span class="r ">
-					<a href="#">#buttonIcon(iconClass="icon-plus")提BUG</a>
-				</span>
-				#div(divClass="clearfix")
-			#end
+
 			##operationbar end
 			
 #end
