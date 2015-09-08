@@ -6,84 +6,76 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #import("/org/tinygroup/icon/components/icon.component")
-<style>
-#*.tabLayout .tabBar span a{color:#333}
-.tabLayout .tabBar .Current a{color:#fff}
-.infoContent{ margin:18px 4px 10px 5px; padding:6px;font-weight:bold;border:#eee 1px solid;}
-.infoContent .titleName{margin-top:-16px;margin-bottom:8px;font-weight:bold;font-size:13px;}
-.tabLayout .tabBar span a{color:#333}
-.tabLayout .tabBar .Current a{color:#fff}
 
-.operationbar{background:#f9fafe;padding:6px 5px 6px 10px;}
-.btn-group #Dropdown{background:none;border:none;padding:0 3px}*#
-.open #downMenuSty{min-width:75px}
-.caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: -5px;
-    margin-right: 5px;
-    vertical-align: middle;
-    border-top: 4px dashed;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
-}
-.infoContent .tableInfoes tr{height:30px; line-height:40px;}
-</style>
 #include("/project/task/taskMenu.page")
-	
-		<span class="f" style="font-size:15px">项目名称>编辑</span>		
-	
-#*	#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
-	#@toggleLeft({"class":"aclass"})
-	   #@settoggleLeftTitle()产品文档库#end
-		#@settoggleLeftBody("treeLeftbox")
-			<ul class="treeList">
-				<li id="listContent" style="display:none; position:absolute;left:74px;">
-					<ul id="alternative" class="ztree" style="width:126px;min-height:160px;max-height:300px;"></ul>
-				</li>
-			</ul>
-			<ul id="treeDrag" class="ztree"></ul>
-		#end
-	#end*#
-	
-#@toggleRight()
-<div style="width:62%;float:left">
-	#@div()
-		<p style="margin-top:10px">#inputRadiusDefaultText(inputPlaceHolder="项目名称")</p>
-		<p style="margin-bottom:1px">任务描述</p>
-			
-			#@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end	
-		
-		<p style="margin-top:10px;margin-bottom:1px">备注</p>
-		#@formControlDiv()
-			#@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end	
-		#end
-		<p style="margin-top:10px;margin-bottom:1px">附件</p>
-		<table class="tableInfoes">
-			<tr>
-			 	<td style="float:left;margin-bottom:5px"> #fileWithInput("file-0")</td>
-			 	<td style="float:left;width:240px">#inputRadiusText(inputPlaceHolder="标题：")</td>
-			</tr>
-			<tr>
-			 	<td style="float:left"> #fileWithInput("file-1")</td>
-			 	<td style="float:left;width:240px">#inputRadiusText(inputPlaceHolder="标题：")</td>
-			</tr>
-		</table>
-		<center style="margin-top:5px">
-		<a href="#">#buttonRadiusPrimary(caption="保存")</a>
-        <a href="${TINY_CONTEXT_PATH}/project/task/editBack.page">#buttonDefault(caption="返回")</a>
-        </center>        
-	#end
-	#@div(divClass="infoContent")
-		<p class="titleName">历史记录</p>
-		#include("/project/recordlist.page")
-	#end
-</div>
-<div style="width:35%;float:right">
-	#TypeInfo("projectEdit")
+
+
+#@tinyForm("thisform" "" "" {"class":"test"})
+<div style="width:62%;float:left" class="">
+
+    <div class="infoContent">
+        <p class="titleName">项目名称>编辑</p>
+
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>任务描述：</label></div>
+
+                <div class="col-9">
+                    #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+            </div>
+        #end
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：</label></div>
+
+                <div class="col-9">
+                    #@Teditor("contents" "contents" {"initialFrameHeight":"150"})Say something#end</div>
+            </div>
+        #end
+        #@elementItem()
+        <div class="col-12">
+            <div class="col-2 text-r"><label>附件：</label></div>
+            <div class="col-9">
+                <table class="tableInfoes">
+                    <tr>
+                        <td style="float:left;margin-bottom:5px"> #fileWithInput("file-0")</td>
+                        <td style="float:left;width:200px">#inputRadiusText(inputPlaceHolder="标题：")</td>
+                    </tr>
+                    <tr>
+                        <td style="float:left"> #fileWithInput("file-1")</td>
+                        <td style="float:left;width:200px">#inputRadiusText(inputPlaceHolder="标题：")</td>
+                    </tr>
+                </table></div>
+        #end
+
+
+    </div>
+    </div>
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
+    <br>
+    #@div(divClass="infoContent")
+        <p class="titleName">历史记录</p>
+        #include("/project/recordlist.page")
+
+    #end
 </div>
 #end
+<div style="width:35%;float:right">
+    #TypeInfo("projectEdit")
+</div>
+
 <script>
     $('select.select2').select2()
 </script>
