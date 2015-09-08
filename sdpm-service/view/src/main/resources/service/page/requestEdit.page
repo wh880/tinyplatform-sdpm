@@ -2,11 +2,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
-<style>
-    .select_boxes {
-        margin-top: 0
-    }
-</style>
+
 #set(name="request1")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -17,10 +13,11 @@
             #include("/service/page/tab.page")
         #end
 
-        #@tabBodyCol("ptop-5")
+    ##        #@tabBodyCol("ptop-5")
+    ##        #end
 
 
-            #@div(divClass="bugBox")
+        #@div()
                 #@p(pClass="title_sty")请求#end
                 #@tinyForm("thisform" "url" "post" {"class":""})
                     #@elementItem()
@@ -84,7 +81,8 @@
                     #@elementItem()
                         #@colLabel()请求表述：#end
                         #@formControlDiv("col-8")
-                            #@Teditor("content" "content" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符",
+                            #@Teditor(
+                                "content2" "content2" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符",
                                 "datatype":"*10-500","nullmsg":"备注不能为空！"})备注...最少输入10个字符#end
                         #end
                         #@validateDiv("col-2")#end
@@ -113,7 +111,8 @@
                     #@elementItem()
                         #@colLabel()解决方案：#end
                         #@formControlDiv("col-8")
-                            #@Teditor("content" "content" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符",
+                            #@Teditor(
+                                "content1" "content1" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符",
                                 "datatype":"*10-500","nullmsg":"备注不能为空！"})备注...最少输入10个字符#end
                         #end
                         #@validateDiv("col-2")#end
@@ -172,7 +171,7 @@
 
             #end
 
-        #end
+
     ##toggle end
     #end
 ##tab end
