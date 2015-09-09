@@ -1,0 +1,53 @@
+#@div(divClass="infoContent")
+	<p class="titleName">基本信息</p>
+		<ul>
+			#@tinyForm("thisform" "" "" {"class":"test"})
+			<li>	
+				 #@elementItem()
+			        #@colLabel()名称：#end
+				        #@formControlDiv("col-8")
+				          #tinyInput("text" "yujigongshi" ""{"id":"yujigongshi","class":"input-text"})
+				        #end
+			        #@validateDiv("col-2")#end
+			      #end
+			 </li>
+			 <li>
+			      #@elementItem()
+			        #@colLabel()日期：#end
+				        #@formControlDiv("col-8")
+				         #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end
+	      				#end
+			        #@validateDiv("col-2")#end
+			      #end
+			
+			</li>
+			<li>	
+				 #@elementItem()
+			        #@colLabel()创建者：#end
+				        #@formControlDiv("col-8")
+				        	
+				        	
+				        	 
+				        	 
+				        	 #@Tselect2F()
+			                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+			                        <option value="CT">Connecticut</option>
+			                        <option value="DE">Delaware</option>
+			                        <option value="FL">Florida</option>
+			                        <option value="GA">Georgia</option>
+			                        <option value="IN">Indiana</option>
+			                        <option value="ME">Maine</option>
+			                        <option value="MD">Maryland</option>
+			                    #end
+			                
+			                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+			                #end
+				        	 
+				        	 
+				        #end
+			        #@validateDiv("col-2")#end
+			      #end
+			 </li>
+			#end
+	       			
+#end

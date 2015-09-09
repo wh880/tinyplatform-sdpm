@@ -14,7 +14,7 @@
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${var}#end
 	#@td()
-		<a title="国庆节"  href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">国庆节${page}</a>
+		<a title="额外工作日" href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">额外工作日${page}</a>
 	#end
 	#@td()2015.10.1#end
 	#@td()admin#end
