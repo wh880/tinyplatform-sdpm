@@ -1,10 +1,14 @@
+<style>
+.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}
+.optionsBoxsty{margin-bottom:5px;display:inline-block;float:left}
+</style>
 #@navSelect2()
 #@div(divClass="optionsBoxsty")
 	#@tabWithInit("tab_demo" "optionsBox")
 		#@tabHead()
 
 		<div class="btn-group ">
-        <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown" >
+        <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" >
 ${activeTitle}
         <b class="caret"></b>
         </button>
