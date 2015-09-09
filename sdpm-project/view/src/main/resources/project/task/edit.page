@@ -55,11 +55,11 @@
                 <table class="tableInfoes">
                     <tr>
                         <td style="float:left;margin-bottom:5px"> #fileWithInput("file-0")</td>
-                        <td style="float:left;width:200px">#inputRadiusText(inputPlaceHolder="标题：")</td>
+                        <td style="float:left;width:150px">#inputRadiusText(inputPlaceHolder="标题：")</td>
                     </tr>
                     <tr>
                         <td style="float:left"> #fileWithInput("file-1")</td>
-                        <td style="float:left;width:200px">#inputRadiusText(inputPlaceHolder="标题：")</td>
+                        <td style="float:left;width:150px">#inputRadiusText(inputPlaceHolder="标题：")</td>
                     </tr>
                 </table></div>
         #end
