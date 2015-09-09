@@ -137,8 +137,14 @@ $(document).ready(function(){
 		<div class="itemTemplate" style="display:none">
 			<div class="searchItem">
 			
-			<div class="col-w2">
-				#inputRadiusSmallText(inputPlaceHolder="得分")
+			<div class="col-9">
+                 <div class="col-6" style="float:left;">
+                 	<input type="file" style="width:100%"/>
+                 </div>
+				 <div class="col-6" style="float:right;">   
+				   <input type="text" class="form-control" placeholder="标题：" tabindex="-1" style="width:100%"/>
+			     </div> 
+				
 			</div>
 #*			<div class="col-w2">
 				<input type="checkbox" value="1" name="isMust">是否必备
