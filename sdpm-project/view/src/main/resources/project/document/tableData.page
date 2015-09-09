@@ -12,10 +12,10 @@
 #for(var:[1..pagesize])
 #@tr()
 	
-	#@td()${page}#end
+	#@td()<a href="#"> ${page}</a>#end
 	#@td()北京#end
 	#@td()中南海#end
-	#@td()67#end
+	#@td()<a href="#">67</a> #end
 	#@td()2013/03/25#end
 	#@td()67#end
 	
