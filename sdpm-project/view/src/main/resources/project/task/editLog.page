@@ -1,0 +1,54 @@
+<style>
+    .adjustTable2 tbody tr th {
+        width: 20%;
+        text-align: right;
+    }
+</style>
+#@tinyForm()
+    #@table("adjustTable2")
+        #@tbody()
+            #@tr()
+                #@th()日期#end
+                #@td()
+                    #@tinyDateInput("birthday" "2015-08-12" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
+                        "日期不能为空"})#end
+                #end
+            #end
+            #@tr()
+                #@th()耗时#end
+                #@td()
+                    #tinyInput("text" "耗时" ""{"datatype":"","id":"关键词","class":"input-text"})
+                #end
+            #end
+            #@tr()
+                #@th()对象#end
+                #@td()
+                    #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
+                        #@optionItem("")需求#end
+                        #@optionItem("")计划#end
+                        #@optionItem("")发布#end
+                        #@optionItem("")任务#end
+                        #@optionItem("")Build#end
+                        #@optionItem("")用例#end
+                    #end
+                #end
+            #end
+            #@tr()
+                #@th()对象ID#end
+                #@td()
+                    #tinyInput("text" "耗时" ""{"datatype":"","id":"关键词","class":"input-text"})
+                #end
+            #end
+            #@tr()
+                #@th()工作内容#end
+                #@td()
+                    #tinyInput("text" "耗时" ""{"datatype":"","id":"关键词","class":"input-text"})
+                #end
+            #end
+        #end
+    #end
+<center>
+    <button type="submit" id="submit" class="commitBtn">保存</button>
+</center>
+
+#end
