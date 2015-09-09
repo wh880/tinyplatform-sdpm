@@ -1,61 +1,67 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
-#import("/org/tinygroup/table/components/table.component")
-#!set(activeTitle="产品概况",activeMenuId=currentPageId)
-#!set(linkName="demand",sonitem="<li>"+"需求"+"</li>")
-#!set(linkName="demand",sonitem="<li>"+"概况"+"</li>")
+#import("/org/tinygroup/fold/components/fold.component")
+#!set(linkName="demand")
+#@tinyForm("thisform" "" "" {"class":"test"})
+<div style="width:70%;float:left" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">编辑</p>
+ 
+    <div class="RTtitle">
+        <button type="submit" id="submit" class="commitBtn">保存</button>
+    </div>
 
-#include("/product/page/event/common.page")
-#set(name="version")
-#@tabWithInit("tab_demo" "optionsBox")
-	
-#*	#@div(divClass="operationbar")
-		<span class="f">
-			<a href="#">需求1</a> > 编辑
-		</span>
-		<span class="r">
-			#@iconOperations("#myModal" "icon-plus" "创建发布" "1000" "400" "/product/page/tabledemo/product-addrelease.pagelet" "ml-5")&nbsp;创建发布#end
-		</span>
-		#div(divClass="clearfix")
-	#end*#
-	
-	<div style="width:65%;float:left">
-		#@div(divClass="infoContent")
+     #@div(divClass="infoContent")
 	        <p class="titleName">描述需求</p>
 	       	<div>
 	       		这里要描述需求的内容
 	       	</div>
 		#end
-		
-		#@div(divClass="infoContent")
+
+	#@div(divClass="infoContent")
 	        <p class="titleName">验收标准</p>
 	       	<div>
 	       		妖精哪里跑！！！
 	       	</div>
 		#end
 		
+		
 			#@elementItem("" "edui-Box")
-         			<b class="titleNames">备注</b>    
+         				<b class="titleNames">备注</b>
 					#@formControlDiv("col-12")
-					#@Teditor("content1" "content1" {"initialFrameHeight":"300" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-300","nullmsg":"备注不能为空！"})需求描述...最少输入10个字符#end
+					#@Teditor("content2" "content2" {"initialFrameHeight":"300" ,"datatype":"*10-300"})#end
 					#end
        				#@validateDiv("col-4")#end
     		#end
-    		
-    		   #@elementItem()
-  			<center>
-			#buttonRadiusDefault(caption="保存")
-			<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" >#buttonRadiusDefault(caption="返回")</a>
-			</center>
-				#end
-		
-				#@div(divClass="infoContent")
-	        		<p class="titleName">历史记录</p>
-	       			#include("/product/page/tabledemo/historyrecord.page")
-				#end
-	</div>
-	
-	<div style="width:35%;float:right" >
+ </div>
+
+ 
+    
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="backBtn"><a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" >返回</a></button>
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
+    <br>
+</div>
+#end
+
+
+<div style="width:30%;float:right">
 		#TypeInfo("demand")
-	</div>
-	#end
+#*    #@div(divClass="infoContent")
+        <p class="titleName">历史记录</p>
+        #include("/product/page/tabledemo/historyrecord.page")
+    #end*#
+</div>

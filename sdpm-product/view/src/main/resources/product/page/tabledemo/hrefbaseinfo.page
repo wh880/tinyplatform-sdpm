@@ -1,6 +1,6 @@
 #@div(divClass="infoContent tabInfocontents")
 	
-#@tabWithInit("tab_info01")
+#@tabWithInit("tab_demo")
 	#@tabHead()
 		#@tabHeadCol()基本信息#end
 		#@tabHeadCol()需求的一生#end
@@ -102,7 +102,7 @@
 
 #@div(divClass="infoContent tabInfocontents")
 	
-#@tabWithInit("tab_info02")
+#@tabWithInit("tab_demo")
 	#@tabHead()
 		#@tabHeadCol()迭代任务#end
 		#@tabHeadCol()相关信息#end
@@ -140,7 +140,7 @@
 		       			#@tr()
 							#@td()相关需求#end
 		       			#end		       					       		
-		         	#end
+		        	#end
 		#end
 	#end		       			
 #end
