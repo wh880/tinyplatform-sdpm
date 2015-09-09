@@ -1,6 +1,6 @@
 #@div(divClass="infoContent tabInfocontents")
 	
-#@tabWithInit("tab_demo")
+#@tabWithInit("tab_info01")
 	#@tabHead()
 		#@tabHeadCol()基本信息#end
 		#@tabHeadCol()需求的一生#end
@@ -10,52 +10,43 @@
 		#@table()
 		       		#@thead()
 		       		#end
-		       		#@tbody()
 		       			#@tr()
 							#@td()所属产品#end
-		       				#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">测试用例</a>#end
+		       				#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">项目管理</a>#end
 		       			#end
 		       			#@tr()
 							#@td()所属模块#end
-		       				#@td()/#end
+		       				#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">产品需求</a>#end
 		       			#end
 		       			#@tr()
 							#@td()所属计划#end
-		       				#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/product-plan.page">发布计划3.30.1</a>#end
-		       			#end
-		       			#@tr()
-							#@td()来源#end
-		       				#@td()#end
+		       				#@td()A计划#end
 		       			#end
 		       			#@tr()
 							#@td()当前状态#end
-		       				#@td()激活#end
-		       			#end
-		       			#@tr()
-							#@td()状态#end
-		       				#@td()<font color="green">正常#end
+		       				#@td()<p style="color:green">草稿</p>#end
 		       			#end
 		       			#@tr()
 							#@td()所处阶段#end
-		       				#@td()研发中#end
+		       				#@td()未开始#end
 		       			#end
 		       			#@tr()
 							#@td()优先级#end
-		       				#@td()#end
+		       				#@td()一般#end
 		       			#end
 		       			#@tr()
 							#@td()预计工时#end
-		       				#@td()半年#end
+		       				#@td()14天#end
 		       			#end
 		       			#@tr()
 							#@td()关键词#end
-		       				#@td()#end
-		       			#end	
+		       				#@td()默认设置(有产品视图权限，即可访问)#end
+		       			#end
 		       			#@tr()
 							#@td()抄送给#end
 		       				#@td()#end
-		       			#end	
-		       		#end
+		       			#end
+		       			
 		 #end
 	#end
 	
@@ -102,7 +93,7 @@
 
 #@div(divClass="infoContent tabInfocontents")
 	
-#@tabWithInit("tab_demo")
+#@tabWithInit("tab_info02")
 	#@tabHead()
 		#@tabHeadCol()迭代任务#end
 		#@tabHeadCol()相关信息#end
