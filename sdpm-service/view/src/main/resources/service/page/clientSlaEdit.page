@@ -18,6 +18,9 @@
                     #@tinyOptionItem("en")002#end
                     #@tinyOptionItem("ta")003#end
                 #end
+
+                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+            #end
             #end
         #end
         #@gridSysRow()

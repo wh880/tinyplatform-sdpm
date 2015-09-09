@@ -23,10 +23,14 @@
             <p class="titleName">新建协议</p>
             #@elementItem()
                 #@sdpmItem("客户名称")
-                    #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                        #@tinyOptionItem("zh")恒生#end
-                        #@tinyOptionItem("en")阿里#end
-                        #@tinyOptionItem("ta")网易#end
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="CT">恒生</option>
+                            <option value="DE">阿里</option>
+                            <option value="FL">网易</option>
+                        #end
+
+                        #@Tselect2Fix()<a href="/service/page/clientAdd.page" class="r ">增加</a><a href="#">全部</a>#end
                     #end
                 #end
             #end
