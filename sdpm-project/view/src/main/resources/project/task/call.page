@@ -6,6 +6,7 @@
 ##<style>
 ##    .pageleftpart label{display:inline-block;width:90px;text-align:right}
 ##</style>
+#set(name="task")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
