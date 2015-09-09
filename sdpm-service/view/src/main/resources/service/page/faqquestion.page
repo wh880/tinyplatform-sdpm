@@ -67,4 +67,16 @@
             #end
         #end
     #end
+    #@normalLiItemsconment(5 "../page/questiondb.page" "如何初始化数据库？" "")
+        #@iconOperations("#myModal" "" "编辑问题" "865" "150" "../page/editfive.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
+        #@iconOperations("#myModal" "" "删除问题" "865" "150" "../page/deletefive.pagelet" "ml-5")<i class=" icon-trash"></i>&nbsp;删除 #end
+        #@dialog("myModal")
+            #@dialogHeader()对话框标题#end
+            #@dialogBody()<p>对话框内容…</p>#end
+            #@dialogFooter()
+                #@buttonEnsure()确定#end
+                #@buttonCancel()关闭#end
+            #end
+        #end
+    #end
 #end

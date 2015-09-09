@@ -1,0 +1,141 @@
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+<style>
+
+</style>
+
+#include("/project/event/common.page")
+#set(name="task")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        <span class="r" style="position:relative;top:2px;height:0">
+					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
+				</span>
+        #end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span class="f">
+					ID
+				</span>
+            <span class="r">
+				<a title="指派" href="${TINY_CONTEXT_PATH}/project/task/call.page">#buttonIcon(iconClass=
+                    "icon-hand-right")指派</a>
+		        <a title="开始" href="${TINY_CONTEXT_PATH}/project/task/start.page">#buttonIcon(iconClass="icon-play")
+                    开始</a>
+		        <a title="日志" href="${TINY_CONTEXT_PATH}/project/task/note.page">#buttonIcon(iconClass="icon-time")
+                    工时</a>
+		        <a title="完成" href="${TINY_CONTEXT_PATH}/project/task/finish.page">#buttonIcon(iconClass="icon-ok-sign")
+                    完成</a>
+		        <a title="关闭" href="${TINY_CONTEXT_PATH}/project/task/close.page">#buttonIcon(iconClass="icon-off")
+                    取消</a>
+		        <a title="编辑" href="${TINY_CONTEXT_PATH}/project/task/edit.page">#buttonIcon(iconClass=
+                    "icon-pencil")</a>
+                <a title="备注" href="${TINY_CONTEXT_PATH}/project/task/IDLinkremark.page">#buttonIcon(iconClass="icon-book")</a>
+		        <a title="复制" href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-copy")</a>
+                #@iconOperations(
+                    "#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet"
+                    "ml-5")&nbsp#end
+                #@dialog("deleteModal")
+                    #@dialogHeader()对话框标题#end
+                    #@dialogBody()<p>对话框内容…</p>#end
+                    #@dialogFooter()
+                        #@buttonEnsure()确定#end
+                        #@buttonCancel()关闭#end
+                    #end
+                #end
+                <a href="${TINY_CONTEXT_PATH}/project/task/index.page" class="margin-left"
+                   title="返回">#buttonIcon(iconClass="icon-reply")</a>
+				</span>
+                #div(divClass="clearfix")
+            #end
+        #end
+
+    <div style="width:65%;float:left">
+        #@div(divClass="infoContent")
+            <p class="titleName">任务描述</p>
+
+            <div>
+                456789
+            </div>
+        #end
+        #@div(divClass="infoContent")
+            <p class="titleName">需求描述</p>
+
+            <div>
+                456789
+            </div>
+        #end
+        #@div(divClass="infoContent")
+            <p class="titleName">附件</p>
+
+            <div>
+                456789
+            </div>
+        #end
+        #@div(divClass="infoContent")
+            <p class="titleName">历史记录</p>
+        ##加入后，js代码会导致页面排版混乱
+            #include("/project/recordlist.page")
+        #end
+        <center>
+            <a title="指派" href="${TINY_CONTEXT_PATH}/project/task/call.page">#buttonIcon(iconClass="icon-hand-right")
+                指派</a>
+            <a title="开始" href="${TINY_CONTEXT_PATH}/project/task/start.page">#buttonIcon(iconClass="icon-play")开始</a>
+            <a title="日志" href="${TINY_CONTEXT_PATH}/project/task/note.page">#buttonIcon(iconClass="icon-time")工时</a>
+            <a title="完成" href="${TINY_CONTEXT_PATH}/project/task/finish.page">#buttonIcon(iconClass="icon-ok-sign")
+                完成</a>
+            <a title="关闭" href="${TINY_CONTEXT_PATH}/project/task/close.page">#buttonIcon(iconClass="icon-off")取消</a>
+            <a title="编辑" href="${TINY_CONTEXT_PATH}/project/task/edit.page">#buttonIcon(iconClass="icon-pencil")</a>
+            <a title="备注" href="${TINY_CONTEXT_PATH}/project/task/IDLinkremark.page">#buttonIcon(iconClass="icon-book")</a>
+            <a title="复制" href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-copy")</a>
+            #@iconOperations(
+                "#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
+                &nbsp#end
+            #@dialog("deleteModal")
+                #@dialogHeader()对话框标题#end
+                #@dialogBody()<p>对话框内容…</p>#end
+                #@dialogFooter()
+                    #@buttonEnsure()确定#end
+                    #@buttonCancel()关闭#end
+                #end
+            #end
+            <a href="${TINY_CONTEXT_PATH}/project/task/index.page" class="margin-left" title="返回">#buttonIcon(iconClass=
+                "icon-reply")</a>
+        </center>
+        #@div(divClass="infoContent")
+            <p class="titleName">备注</p>
+            <div>
+                #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+            </div>
+        #end
+
+    </div>
+    <div style="width:35%;float:right">
+        #TypeInfo("information")
+    </div>
+    #end
+#end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

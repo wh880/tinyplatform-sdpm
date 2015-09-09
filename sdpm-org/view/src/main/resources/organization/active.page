@@ -1,19 +1,9 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
 <style>
-    .tabLayout .tabBar span a {
-        color: #333
+    .secrchLac {
+        display: inline-block;
+        padding-top: 5px
     }
-
-    .tabLayout .tabBar .Current a {
-        color: #fff
-    }
-
-    .operationbar {
-        border-top: none;
-        background: #f9fafe;
-        padding: 6px 5px 6px 10px;
-    }
-
     .activeSearch {
         float: left;
         margin-top: 5px;
@@ -52,7 +42,7 @@
 					<a href="#">所有</a>
 
                  </span>
-            <span class="tinyFormsty">
+            ##            <span class="tinyFormsty">
                     #@formControlDiv("col-1")
                         #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
                             #@tinyOptionItem("zh")中国#end
@@ -74,11 +64,10 @@
                         #@tinyOptionItem("ta")泰国#end
                     #end
                 #end&nbsp;
-                    <span style="padding-top:5px">
+            <span class="secrchLac">
                    <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-
                     </span>
-                </span>
+            ##                </span>
 
 
                 #div(divClass="clearfix")

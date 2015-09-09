@@ -27,7 +27,7 @@
 	 	<a title="评审" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-review.page"><i class="icon-search"></i></a>
 	 	<a title="关闭" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-close.page"><i class="icon-off"></i></a>
 	 	<a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page"><i class="icon-pencil"></i></a>
-	 	<a title="建用例" class="ml-5" href="${TINY_CONTEXT_PATH}/testManagement/page/proposeCase.page"><i class="icon-sitemap"></i></a>
+	 	<a title="建用例" class="ml-5" href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page"><i class="icon-sitemap"></i></a>
 	#end
 #end
 #end

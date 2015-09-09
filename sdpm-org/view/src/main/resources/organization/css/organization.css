@@ -1,3 +1,37 @@
+.activeSearch {
+    float: left;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.tabLayout .tabBar span a {
+    color: #333
+}
+
+.tabLayout .tabBar .Current a {
+    color: #fff
+}
+
+.operationbar {
+    border-top: none;
+    background: #f9fafe;
+    padding: 6px 5px 6px 10px;
+}
+
+.barBox {
+    padding-top: 5px;
+    float: left
+}
+
+.barBox a, .barBox a:link {
+    color: #333;
+    margin-right: 3px;
+    display: inline-block
+}
+
+.barBox a:hover {
+    color: #f90
+}
 
 .barBoxs {
     padding-top: 18px;
@@ -12,15 +46,4 @@
 
 .barBoxs a:hover {
     color: #f90
-}
-
-form .tinyFormsty {
-    padding-top: 1px;
-    line-height: 29px
-}
-
-.activeSearch {
-    float: left;
-    margin-top: 5px;
-    margin-left: 5px;
 }
