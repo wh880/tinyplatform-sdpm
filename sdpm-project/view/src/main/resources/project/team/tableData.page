@@ -12,7 +12,7 @@
 #for(var:[1..pagesize])
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="#">admin</a> #end
+	#@td()<a href="${TINY_CONTEXT_PATH}/organization/userTodo.page">admin</a> #end
 	#@td()1#end
 	#@td()2015-8-28#end
 	#@td()23#end
