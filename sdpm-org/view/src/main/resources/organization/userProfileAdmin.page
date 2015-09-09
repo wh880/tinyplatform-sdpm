@@ -41,13 +41,13 @@
         #@div(divClass="operationbar")
             #@tinyForm("thisform" "" "" {"class":"test"})
                 #@formControlDiv("col-1")
-                    #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
+                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
                         #@tinyOptionItem("zh")中国#end
                         #@tinyOptionItem("en")英国#end
                         #@tinyOptionItem("ta")泰国#end
                     #end
                 #end
-                <span>
+            <span>
                     &nbsp;&gt;
 					<a href="${TINY_CONTEXT_PATH}/organization/userTodo.page">待办</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/userStoryAdmin.page">需求</a>
@@ -60,7 +60,7 @@
 					<a href="${TINY_CONTEXT_PATH}/organization/userProfileAdmin.page" class="active_btn">档案</a>
                 </span>
             <span style="padding-top:5px;float:right">
-                #@aModal(editpageModal "导出" "600" "120" ""  editpagePath)
+                #@aModal(editpageModal "导出" "600" "120" ""  editpagePath1)
                     #@simpleI(" icon-download-alt")导出#end
                 #end
             </span>
@@ -88,143 +88,148 @@
 
             #div(divClass="clearfix")
         #end
+    #end
 
-        #@tinyForm("thisform" "" "" {"class":"formText"})
-            #@elementItem()
-                #@colLabel()所属部门：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@colLabel()用户名：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@validateDiv("col-2")#end
-            #end
+    #@noRespsGridSystem()
 
-
-            #@elementItem()
-                #@colLabel()真实姓名：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-
-                #@colLabel()权限：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@validateDiv("col-2")#end
-            #end
-
-
-
-            #@elementItem()
-                #@colLabel()职位：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@colLabel()源代码账号：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@validateDiv("col-2")#end
-            #end
-
-
-            #@elementItem()
-                #@colLabel()邮箱：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@colLabel()加入日期：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@validateDiv("col-2")#end
-            #end
-
-
-
-            #@elementItem()
-                #@colLabel()访问次数：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@colLabel()最后IP：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@validateDiv("col-2")#end
-            #end
-
-
-
-            #@elementItem()
-                #@colLabel()最后登录：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@colLabel()Skype：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@validateDiv("col-2")#end
-            #end
-
-
-
-            #@elementItem()
-                #@colLabel()QQ：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@colLabel()雅虎通：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@validateDiv("col-2")#end
-            #end
-
-
-
-            #@elementItem()
-                #@colLabel()GTalk：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@colLabel()旺旺：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@validateDiv("col-2")#end
-            #end
-            #@elementItem()
-                #@colLabel()手机：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@colLabel()电话：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@validateDiv("col-2")#end
-            #end
-            #@elementItem()
-                #@colLabel()通讯地址：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@colLabel()邮编：#end
-                #@formControlDiv("col-2")
-                <p>123</p>
-                #end
-                #@validateDiv("col-2")#end
-            #end
-
-
+        #@gridSysCol(3)
         #end
 
+        #@gridSysCol(6)
+            #@tinyForm("thisform" "" "" {"class":"formText"})
+            <div class="infoContent">
+                <p class="titleName">账号信息</p>
+                #@gridSysRow()
+                    #@colLabel("col-4")用户名：#end
+                    #@gridSysCol(8)
+                        <p>张三</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")邮箱：#end
+                    #@gridSysCol(8)
+                        <p>mahuateng@qq.com</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")源代码账号：#end
+                    #@gridSysCol(8)
+                        <p>研发部门</p>
+                    #end
+                #end
+            </div>
+
+
+            <div class="infoContent">
+                <p class="titleName">基本信息</p>
+                #@gridSysRow()
+                    #@colLabel("col-4")真实姓名：#end
+                    #@gridSysCol(8)
+                        <p>张三</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")性别：#end
+                    #@gridSysCol(8)
+                        <p>女</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")所属部门：#end
+                    #@gridSysCol(8)
+                        <p>研发部门</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")职位：#end
+                    #@gridSysCol(8)
+                        <p>攻城狮</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")权限：#end
+                    #@gridSysCol(8)
+                        <p>管理员</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")加入日期：#end
+                    #@gridSysCol(8)
+                        <p>2016-1-1</p>
+                    #end
+                #end
+            </div>
+
+            <div class="infoContent">
+                <p class="titleName">联系信息</p>
+                #@gridSysRow()
+                    #@colLabel("col-4")Skype：#end
+                    #@gridSysCol(8)
+                        <p>Skype</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")QQ：#end
+                    #@gridSysCol(8)
+                        <p>123456</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")雅虎通：#end
+                    #@gridSysCol(8)
+                        <p>雅虎通</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")职位：#end
+                    #@gridSysCol(8)
+                        <p>攻城狮</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")Gtalk：#end
+                    #@gridSysCol(8)
+                        <p>Gtalk</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")旺旺：#end
+                    #@gridSysCol(8)
+                        <p>旺旺</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")手机：#end
+                    #@gridSysCol(8)
+                        <p>手机</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")电话：#end
+                    #@gridSysCol(8)
+                        <p>电话</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")通讯地址：#end
+                    #@gridSysCol(8)
+                        <p>杭州恒生电子</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")邮编：#end
+                    #@gridSysCol(8)
+                        <p>1241241</p>
+                    #end
+                #end
+            </div>
+            #end
+        #end
+        #@gridSysCol(6)
+        #end
     #end
+
+
 #end
 #simpleModal(editpageModalId1)
 

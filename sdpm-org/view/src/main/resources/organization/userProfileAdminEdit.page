@@ -10,236 +10,219 @@
         margin-top: -10px;
     }
 </style>
-#@div(divClass="titleBarsty")
-<p class="titleNamesty">基本信息</p>
-    #@tinyForm("thisform" "" "" {"class":""})
-        #@elementItem()
-            #@colLabel()真实姓名：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
 
-        #@elementItem()
-            #@colLabel()所属部门：#end
-            #@formControlDiv("col-8")
-                #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-                    #@tinyOptionItem("zh")部门A#end
-                    #@tinyOptionItem("en")部门B#end
-                    #@tinyOptionItem("ta")部门C#end
+
+
+
+#@tinyForm("thisform" "" "" {"class":""})
+    #@noRespsGridSystem()
+        #@gridSysRow()
+
+        <div class="infoContent">
+            <p class="titleName">账号信息</p>
+            #@gridSysRow()
+                #@colLabel("col-2")用户名：#end
+                #@gridSysCol(6)
+                    #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
                 #end
             #end
-            #@validateDiv("col-2")#end
-        #end
-
-        #@elementItem()
-            #@colLabel()职位：#end
-            #@formControlDiv("col-8")
-                #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-                    #@tinyOptionItem("zh")研发#end
-                    #@tinyOptionItem("en")测试#end
-                    #@tinyOptionItem("ta")管理#end
+            #@gridSysRow()
+                #@colLabel("col-2")邮箱：#end
+                #@gridSysCol(6)
+                    #tinyInput(
+                        "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
+                        "input-text"})
                 #end
             #end
-            #@validateDiv("col-2")#end
-        #end
-
-        #@elementItem()
-            #@colLabel()权限：#end
-            #@formControlDiv("col-8")
-                #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-                    #@tinyOptionItem("zh")研发#end
-                    #@tinyOptionItem("en")测试#end
-                    #@tinyOptionItem("ta")管理#end
+            #@gridSysRow()
+                #@colLabel("col-2")密码：#end
+                #@gridSysCol(6)
+                    #tinyInput(
+                        "password" "password" ""{"placeholder":"密码","datatype":"*6-18","nullmsg":"请输入密码！",
+                        "autocomplete":
+                        "off","id":"password","class":"input-text"})
                 #end
             #end
-            #@validateDiv("col-2")#end
-        #end
-
-        #@elementItem()
-            #@colLabel()加入日期：#end
-            #@formControlDiv("col-8")
-                #@tinyDateInput(
-                    "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空",
-                    "placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+            #@gridSysRow()
+                #@colLabel("col-2")密码验证：#end
+                #@gridSysCol(6)
+                    #tinyInput("password" "password2" ""{"placeholder":"密码","datatype":"*6-18","nullmsg":"请再输入一次密码！",
+                        "autocomplete":"off","recheck":"password","errormsg":"您两次输入的密码不一致！","id":"password2","class":
+                        "input-text"})
+                #end
             #end
-            #@validateDiv("col-2")#end
-        #end
-
-        #@elementItem()
-            #@colLabel()性别：#end
-            #@formControlDiv("skin-minimal col-5")
-                #@tinyRadio("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})男#end
-                #@tinyRadio("sex" "women" "women")女#end
-
+            #@gridSysRow()
+                #@colLabel("col-2")源代码账号：#end
+                #@gridSysCol(6)
+                    #tinyInput(
+                        "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
+                        "input-text"})
+                #end
             #end
-            #@validateDiv("col-2")#end
-        #end
-    #end
+        </div>
 
 
+        <div class="infoContent">
+            <p class="titleName">基本信息</p>
+            #@gridSysRow()
+                #@colLabel("col-2")真实姓名：#end
+                #@gridSysCol(6)
+                    #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-2")性别：#end
+                #@gridSysCol(6)
+                    #@tinyRadio("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})男#end
+                    #@tinyRadio("sex" "women" "women")女#end
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-2")所属部门：#end
+                #@gridSysCol(6)
+                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                        #@tinyOptionItem("zh")部门a#end
+                        #@tinyOptionItem("en")部门b#end
+                        #@tinyOptionItem("ta")部门c#end
+                    #end
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-2")职位：#end
+                #@gridSysCol(6)
+                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                        #@tinyOptionItem("zh")研发#end
+                        #@tinyOptionItem("en")测试#end
+                        #@tinyOptionItem("ta")管理#end
+                    #end
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-2")权限：#end
+                #@gridSysCol(6)
+                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                        #@tinyOptionItem("zh")研发#end
+                        #@tinyOptionItem("en")测试#end
+                        #@tinyOptionItem("ta")管理#end
+                    #end
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-2")加入日期：#end
+                #@gridSysCol(6)
+                    #@tinyDateInput(
+                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空",
+                        "placeholder":""})#end
+                #end
+            #end
+        </div>
 
-<p class="titleNamesty">账号信息</p>
-    #@tinyForm("thisform" "" "" {"class":""})
-        #@elementItem()
-            #@colLabel()用户名：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
+        <div class="infoContent">
+            <p class="titleName">联系信息</p>
+            #@gridSysRow()
+                #@colLabel("col-2")Skype：#end
+                #@gridSysCol(6)
+                    #tinyInput(
+                        "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":"input-text"})
+                #end
             #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()邮箱：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
+            #@gridSysRow()
+                #@colLabel("col-2")QQ：#end
+                #@gridSysCol(6)
+                    #tinyInput(
+                        "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":"input-text"})
+                #end
             #end
-            #@validateDiv("col-2")#end
-        #end
+            #@gridSysRow()
+                #@colLabel("col-2")雅虎通：#end
+                #@gridSysCol(6)
+                    #tinyInput(
+                        "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":"input-text"})
 
-        #@elementItem()
-            #@colLabel()密码：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "password" "password" ""{"placeholder":"密码","datatype":"*6-18","nullmsg":"请输入密码！","autocomplete":
-                    "off","id":"password","class":"input-text"})
+                #end
             #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()密码验证：#end
-            #@formControlDiv("col-8")
-                #tinyInput("password" "password2" ""{"placeholder":"密码","datatype":"*6-18","nullmsg":"请再输入一次密码！",
-                    "autocomplete":"off","recheck":"password","errormsg":"您两次输入的密码不一致！","id":"password2","class":
-                    "input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
+            #@gridSysRow()
+                #@colLabel("col-2")Gtalk：#end
+                #@gridSysCol(6)
+                    #tinyInput(
+                        "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":"input-text"})
 
-        #@elementItem()
-            #@colLabel()源代码账号：#end
-            #@formControlDiv("col-8")
-                #tinyInput("text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
+                #end
             #end
-            #@validateDiv("col-2")#end
-        #end
-    #end
+            #@gridSysRow()
+                #@colLabel("col-2")旺旺：#end
+                #@gridSysCol(6)
+                    #tinyInput(
+                        "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":"input-text"})
+
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-2")手机：#end
+                #@gridSysCol(6)
+                    #tinyInput(
+                        "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":"input-text"})
+
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-2")电话：#end
+                #@gridSysCol(6)
+                    #tinyInput(
+                        "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":"input-text"})
+
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-2")通讯地址：#end
+                #@gridSysCol(6)
+                    #tinyInput(
+                        "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":"input-text"})
+
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-2")邮编：#end
+                #@gridSysCol(6)
+                    #tinyInput(
+                        "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":"input-text"})
+
+                #end
+            #end
+        </div>
 
 
+        <div class="infoContent">
+            <p class="titleName">安全验证</p>
+            #@gridSysRow()
+                #@colLabel("col-2")请输入你的密码：#end
+                #@gridSysCol(6)
+                    #tinyInput(
+                        "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
+                        "input-text"})                #end
+            #end
+            #@gridSysRow()
 
+                #@div(divClass="col-8 col-offset-4 form-inline")
+                    #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+                #end
 
-<p class="titleNamesty">联系信息</p>
-    #@tinyForm("thisform" "" "" {"class":""})
-        #@elementItem()
-            #@colLabel()Skype：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
             #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()QQ：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()雅虎通：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()Gtalk：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()旺旺：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()手机：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()电话：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()通讯地址：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()邮编：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
 
-    #end
+        </div>
 
-<p class="titleNamesty">安全验证</p>
-    #@tinyForm("thisform" "" "" {"class":""})
-        #@elementItem()
-            #@colLabel()请输入你的密码：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "name" ""{"placeholder":"输入验证密码","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
-                    "input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
-
-        #@elementItem()
-            #@div(divClass="col-10 col-offset-2 form-inline")
-                #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
-            #end
         #end
 
     #end
+#end
+
+
+
+
+
+
+
+
 <script type="text/javascript">
 
     $(function () {
@@ -294,7 +277,7 @@
     });
 </script>
 
-#end
+
 
 
 
