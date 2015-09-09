@@ -44,9 +44,9 @@
             resolve-classpath="true">
         <class-paths>
             <!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" />
-                <class-path path="E:\workspace\sdpm\sdpm-common\view\src\main\resources"/>
-				
-                <class-path path="E:\test\后台管理\完整\sdpm\sdpm-common\view\src\main\resources"/> -->
+                <class-path path="E:\workspace\sdpm\sdpm-common\view\src\main\resources"/>-->
+
+                <class-path path="F:\sdpm\sdpm-common\view\src\main\resources"/>
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>
