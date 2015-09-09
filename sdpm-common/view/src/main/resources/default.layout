@@ -142,14 +142,6 @@
 
 		#@mainMenu()
 			#@navigationMenu()
-				#@navDropDownMenu("0" "演示" "icon-user-md" )
-					#TnavItem("0.1" "内容管理" "/page/tabledemo/table_list.page" "icon-list")
-					#TnavItem("0.2" "tab选项卡" "/page/tabledemo/tab.page" "icon-list")
-					#TnavItem("0.3" "新增表单" "/page/tabledemo/addes.page" "icon-list")
-					#TnavItem("0.4" "左侧树" "/page/tabledemo/lefttree.page" "icon-list")
-					#TnavItem("0.5" "添加项目" "/page/tabledemo/addeProgect.page" "icon-list")
-					#TnavItem("0.6" "详情页" "/page/tabledemo/tetails.page" "icon-list")
-				#end
 				#foreach(m in menuManager.getChildMenus("0"))
 					#TnavItem(mFor.index m.name m.href m.icon)
 				#end

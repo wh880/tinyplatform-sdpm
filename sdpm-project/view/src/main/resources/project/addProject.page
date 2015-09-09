@@ -1,141 +1,133 @@
 #import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
-#import("/org/tinygroup/search/components/search.component")
-
-#include("/project/task/taskMenu.page")
-#macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
-	<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked") checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass) class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio" onclick="${radioOther}"/>
-#end
+#import("/org/tinygroup/fold/components/fold.component")
 #macro labelRadio1(rId rName rValue rClass radioOther labelText)
 	#@radioBox()
 		#radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)
 		#@label(ckId)${labelText}#end
 	#end
 #end
-<style>
-.tabLayout .tabBar span a{color:#333}
-.tabLayout .tabBar .Current a{color:#fff}
-#*.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}*#
-.b {margin-left: 8px;}
-.width{width:270px}
-.input-group-addon{width:10px;font-size:20px}
-</style>
 
-
-	#@div(divClass="operationbar")
-	添加项目
+#set(name="task")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+		#@div(divClass="dropdownBox")
+			#include("/project/dropdownMenu.page")
+		#end
+		#@tabHead()
+			#include("/project/protab.page")
+        <span class="r" style="position:relative;top:2px;height:0">
+					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
+				</span>
+		#end
+	##head end
+    <br/>
+	##body end
 	#end
-		#@tinyForm("thisform" "" "" {"class":"test"})
-		#@elementItem()
-			#@colLabel()项目名称#end
-			#@formControlDiv("col-3")
-			#tinyInput("text" "" ""{"placeholder":"请输入项目名称","datatype":"*4-16","nullmsg":"项目名称不能为空！","id":"","class":"input-text"})
-			#end
-			#@validateDiv("col-2")#end
-		#end
-		#@elementItem()
-			#@colLabel()项目代号#end
-			#@formControlDiv("col-3")
-			#tinyInput("text" "" ""{"placeholder":"请输入项目代号","datatype":"*4-16","nullmsg":"项目代号不能为空！","id":"","class":"input-text"})
-			#end
-			#@validateDiv("col-2")#end
-		#end
-		#@elementItem()
-        	 #@colLabel()起始日期#end
-       		 #@formControlDiv("col-8")
-			 #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"日期不能为空","placeholder":"选择日期"})#end						 
-      		 #end
-        	 #@validateDiv("col-2")#end
-      #end
-      #@elementItem()
-       		 #@colLabel()结束日期#end
-        	 #@formControlDiv("col-8")
-			 #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"日期不能为空","placeholder":"选择日期"})#end						 
-      		 #end
-      		 #@validateDiv("col-2")#end
-      #end
-      #@elementItem()
-        	#@colLabel()可用工作日#end
-        	#@formControlDiv("col-8")
-				 <input type="text" style="float:left" class="width">
-				 <span class="input-group-addon">天</span>					 
-      		#end
+#end
 
-      		#@validateDiv("col-2")#end
-      #end
-      #@elementItem()
-        	#@colLabel()项目类型#end
-			#@formControlDiv("col-3")
+
+#@tinyForm("thisform" "" "" {"class":"test"})
+
+<div style="width:100%;float:left" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">指派</p>
+		#@elementItem()
+			#@sdpmItem("项目名称")
+				#tinyInput("text" "" ""{"placeholder":"请输入项目名称","datatype":"*4-16","nullmsg":"项目名称不能为空！","id":"","class":"input-text"})
+			#end
+		#end
+		#@elementItem()
+			#@sdpmItem("项目代号")
+				#tinyInput("text" "" ""{"placeholder":"请输入项目代号","datatype":"*4-16","nullmsg":"项目代号不能为空！","id":"","class":"input-text"})
+			#end
+		#end
+		#@elementItem()
+			#@sdpmItem("起始日期")
+				#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"日期不能为空","placeholder":"选择日期"})#end
+			#end
+		#end
+		#@elementItem()
+			#@sdpmItem("结束日期")
+				#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"日期不能为空","placeholder":"选择日期"})#end
+
+			#end
+		#end
+		#@elementItem()
+			#@sdpmItem("可用工作日")
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon2">小时</span>
+                </div>
+			#end
+		#end
+
+		#@elementItem()
+			#@sdpmItem("项目类型")
 				#@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
 					#@tinyOptionItem("zh")短期项目#end
 					#@tinyOptionItem("en")长期项目#end
 					#@tinyOptionItem("ta")运维项目#end
 				#end
 			#end
-			#@validateDiv("col-2")#end
-      #end
-      #@elementItem()
-        	#@colLabel()团队名称#end
-        	#@formControlDiv("col-3")
-			 <input type="text" style="width:320px">						 
-      		#end
-      		#@validateDiv("col-2")#end
-      #end
-     
-      #@elementItem()
-        	#@colLabel()关联产品#end       		
-			#@formControlDiv("col-3")
-				#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"8","multiple":"multiple"})
-				#@tinyOptionItem("zh")1#end
-				#@tinyOptionItem("en")22#end
-				#@tinyOptionItem("ta")3#end				
+		#end
+
+	##
+		#@elementItem()
+			#@sdpmItem("团队名称")
+				#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
 			#end
-			#@validateDiv("col-2")#end
-      #end
-      <br />
-      #@elementItem()
-        	#@colLabel()项目描述#end
-			#@formControlDiv("col-6")
+		#end
+		#@elementItem()
+			#@sdpmItem("关联产品")
+				#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+			#end
+		#end
+		#@elementItem()
+			#@sdpmItem("项目描述")
 				#@Teditor("content" "content" {"initialFrameHeight":"200"})Say something#end
 			#end
-        #@validateDiv("col-2")#end
-      #end
-		    
-			#@elementItem()
-        	#@colLabel()访问控制#end
-			#@skinMinimal("mt-20")
-    				#labelRadio1(rId="aclopen" rName="acl" rValue="open" labelText="默认设置(有项目视图权限，即可访问)" "setWhite(this.value);")
-    				#labelRadio1(rId="aclcustom" rName="acl" rValue="custom1" labelText="私有项目(只有项目团队成员才能访问)" "setWhite(this.value);")   								
-    				#labelRadio1(rId="aclcustom" rName="acl" rValue="custom" labelText="自定义白名单(团队成员和白名单的成员可以访问)" "setWhite(this.value);")
-					
+		#end
+		#@elementItem()
+			#@colLabel()访问控制：#end
+			#@formControlDiv("skin-minimal col-5")
+				#@tinyRadio("options" "default" "custom")默认设置(有项目视图权限，即可访问)#end
+				#@tinyRadio("options" "private" "custom")私有项目(只有项目团队成员才能访问)#end
+				#@tinyRadio("options" "custom" "custom")自定义白名单(团队成员和白名单的成员可以访问)#end
 			#end
-       			 #@validateDiv("col-2")#end
-      		#end
-			#@elementItem(elementId="whitelistBox" eleItemClass="hidden")
-        	#@colLabel()分组白名单#end
-			#@skinMinimal()
-				#labelCheckbox(ckId="whitelistBox" labelText="管理员")
-				#labelCheckbox(ckId="whitelistBox" labelText="研发")
-				#labelCheckbox(ckId="whitelistBox" labelText="测试")
-				#labelCheckbox(ckId="whitelistBox" labelText="项目经理")
-				#labelCheckbox(ckId="whitelistBox" labelText="产品经理")
-				#labelCheckbox(ckId="whitelistBox" labelText="研发主管")
-				#labelCheckbox(ckId="whitelistBox" labelText="产品主管")
-				#labelCheckbox(ckId="whitelistBox" labelText="测试主管")				
-			#end
-        #@validateDiv("col-2")#end
-      #end
-		    #end		    
-		     #@colLabel()#end
-     			 <a href="#">#buttonRadiusPrimary(caption="保存")</a>
-      			<a href="${TINY_CONTEXT_PATH}/project/survey/index.page">#buttonDefault(caption="返回")</a>
-  			 #end
-		
+			#@validateDiv("col-2")#end
+		#end
 
-<script type="text/javascript">
-function setWhite(acl)
-{
-    acl == 'custom' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
-}
-</script>
+		#@elementItem()
+			#@colLabel()分组名单：#end
+			#@formControlDiv("col-5")
+				#@tinyCheckbox("checkbox2" "grouping" "grouping")管理员#end
+				#@tinyCheckbox("checkbox2" "grouping2" "grouping")研发#end
+				#@tinyCheckbox("checkbox2" "grouping3" "grouping")测试#end
+				#@tinyCheckbox("checkbox2" "grouping4" "grouping")项目经理#end
+			#end
+			#@validateDiv("col-2")#end
+		#end
+
+        <br/>
+    </div>
+	#@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
+            </div>
+            <div class="col-5"></div>
+        </div>
+	#end
+    <br>
+</div>
+#end

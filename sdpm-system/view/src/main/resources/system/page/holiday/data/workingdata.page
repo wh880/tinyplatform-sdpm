@@ -11,26 +11,17 @@
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
-
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="#">${page}</a>#end
-	#@td()<a href="#">工程管理类</a>#end
-	#@td()项目管理经验#end
-	#@td()产品经理#end
-	#@td()2015-09-02#end
+	#@td()${var}#end
 	#@td()
-		<a title="编辑" class="ml-5" href="#"><i class="icon-pencil"></i></a>
+		<a title="额外工作日" href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">额外工作日${page}</a>
+	#end
+	#@td()2015.10.1#end
+	#@td()admin#end
+	#@td()
+	 	<a title="编辑发布" class="ml-5" href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page"><i class="icon-pencil"></i></a>
 		#iconOperation(" icon-remove" "删除" "ml-5")
 	#end
+	
 #end
-#end
-
-
-#@dialog("myModal")
-	#@dialogHeader()对话框标题#end
-	#@dialogBody()<p>对话框内容…</p>#end
-	#@dialogFooter()
-		#@buttonEnsure()确定#end
-		#@buttonCancel()关闭#end
-	#end
 #end

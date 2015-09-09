@@ -21,8 +21,8 @@
 	            <tr>
 					<td  width="100%">
 						9月08日 17:22, admin 
-						<em>删除了</em> 假期
-						<a href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">国庆节1</a>。
+						<em>删除了</em> 工作日1 
+						<a href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">劳动日1</a>。
 					</td>
 				</tr>
 	         #end

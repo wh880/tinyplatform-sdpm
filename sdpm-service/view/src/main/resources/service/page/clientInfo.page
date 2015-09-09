@@ -7,25 +7,20 @@
 #set(name="client")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-
+        #@tabHead()
+            #include("/service/page/tab.page")
+        #end
         #@tabBodyCol("ptop-5")
-        ##operationbar
-            #@div(divClass="operationbar")
-            <span class="f">
-					<a href="#" class="active_btn">恒生公司</a>
-			</span>
             <span class="r">
-                #@iconOperations("#myModal1" " icon-pencil" "客户编辑" "865"
-                    "448" "/service/page/companyInfoEdit.pagelet" "ml-5")编辑#end
+                #@iconOperations("#myModal1" " icon-pencil" "客户编辑" "600"
+                    "348" "/service/page/companyInfoEdit.pagelet" "ml-5")编辑#end
                 #@iconOperations("#myModal2" "icon-remove" "客户删除" "550"
                     "100" "/service/page/slaDelect.pagelet" "ml-5")删除#end
             ##                <a href="${TINY_CONTEXT_PATH}/service/page/clientUser.page"
             ##                   title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
 			</span>
-            #end
-        ##operationbar end
+        ##            #end
         #end
-    ##tabbody end
     <div style="width:100%;float:left">
         #@div(divClass="infoContent")
             <div>
@@ -33,6 +28,10 @@
                     #@thead()
                     #end
                     #@tbody()
+                        #@tr()
+                            #@th()公司名称#end
+                            #@td()恒生电子#end
+                        #end
                         #@tr()
                             #@th()公司编号#end
                             #@td()000018#end
