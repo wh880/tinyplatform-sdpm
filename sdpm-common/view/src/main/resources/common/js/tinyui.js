@@ -343,7 +343,7 @@
         ' font-size: 21px;',
         ' width: 50px;',
         ' height: 40px;',
-        ' padding-right: 10px;',
+        ' padding-right: 11px;',
         ' position: absolute;',
         ' left: -40px;',
         ' top: 0;',
