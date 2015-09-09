@@ -1,3 +1,36 @@
+/**整体框架个性化设置start**/
+.dataTables_wrapper .DT-lf-right .DT-per-page{display:none}.theme-clean #main-menu #content-wrapper{padding:53px 10px 18px}
+.ajax-loading-animation{font-size:20px;margin-left:10px;}
+@media (min-width:768px) {
+.menu-on-top #content-wrapper{padding-top:98px}
+.menu-on-top #main-menu{height:46px}
+.menu-on-top #main-menu .navigation>li>ul{top:44px}
+.menu-on-top #main-menu .navigation>li>a>span.mm-text {display:inline-block;}
+.menu-on-top #main-menu .navigation>li>a i{padding-right:3px;width:auto;display:inline-block;}
+.menu-on-top #main-menu .navigation>li{width:111px;white-space:nowrap;}
+.menu-on-top #main-menu .navigation>li.mm-dropdown>a:after{top:28px!important}
+.menu-on-top #main-menu .navigation > li *:not(span){background:#fbfbfb!important}
+.menu-on-top #main-menu .navigation > li *:not(span):hover{background:#fff!important}
+.menu-on-top #main-menu .navigation>li.active>a{background:#fefefe!important}
+#bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus,.theme-clean .pagination>li.active>a, .theme-clean .pagination>li.active>a:focus, .theme-clean .pagination>li.active>a:hover, .theme-clean .pagination>li.active>span{background:#369;border:#369 1px solid!important}
+#bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus{border:#369 1px solid!important}
+#bodyrap.theme-clean .btn-primary:hover {background:#2a4f85!important;}
+#main-navbar .navbar-nav.pull-right{margin-right:21px;}
+#bodyrap.theme-clean #main-menu .mmc-dropdown-open-ul a:after, .theme-default #main-menu .navigation a:after{background:none}
+#bodyrap.theme-asphalt .optionsBox .tabBar .switchClass.Current{background:#3BC2A9}
+#bodyrap.theme-asphalt .optionsBox .tabBar .switchClass:hover{background:#52bdb4}
+#bodyrap.theme-purple-hills .optionsBox .tabBar .switchClass.Current{background:#857198}
+#bodyrap.theme-purple-hills .optionsBox .tabBar .switchClass:hover{background:#a48ad4}
+#bodyrap.theme-dust .optionsBox .tabBar .switchClass.Current{background:#7a6f6f}
+#bodyrap.theme-dust .optionsBox .tabBar .switchClass:hover{background:#8a6f6f}
+#bodyrap.theme-fresh .optionsBox .tabBar .switchClass.Current{background:#50b5d3}
+#bodyrap.theme-fresh .optionsBox .tabBar .switchClass:hover{background:#64bed8}
+#bodyrap.theme-white .optionsBox .tabBar .switchClass.Current{background:#b9662b}
+#bodyrap.theme-white .optionsBox .tabBar .switchClass:hover{background:#985813}
+}
+/**select2特有**/
+#bodyrap .select2-results{margin:5px;}
+/**整体框架个性化设置end**/
 
 .operationbar .active_btn:hover {
     background: none;

@@ -341,6 +341,7 @@
         <module>sdpm-document</module>
         <module>sdpm-metadata</module>
         <module>sdpm-productLine</module>
+        <module>sdpm-system</module>
         <module>sdpm-product</module>
         <module>sdpm-project</module>
         <module>sdpm-quality</module>
@@ -348,6 +349,7 @@
         <module>sdpm-web</module>
         <module>sdpm-statistic</module>
         <module>sdpm-org</module>
+        <module>sdpm-system</module>
     </modules>
 
     <dependencyManagement>

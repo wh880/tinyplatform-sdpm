@@ -9,4 +9,8 @@
 	<type-info name="projectView"  >
 	    <info name="projectInfo" title="项目信息" infoParameter="" url="/project/task/basicInfoView.pagelet" resource="projectView"/>
 	</type-info>
+	<type-info name="information"  >
+    	    <info name="projectInfo" title="基本信息" infoParameter="" url="/project/task/basicInformation.pagelet" resource="project"/>
+
+    </type-info>
 </type-infos>
