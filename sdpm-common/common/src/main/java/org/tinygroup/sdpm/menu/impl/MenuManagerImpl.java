@@ -31,10 +31,10 @@ public class MenuManagerImpl implements MenuManager {
             logger.logMessage(LogLevel.ERROR, "菜单无id,重复定义在文件{}", fileName);
             throw new RuntimeException("菜单文件加载错误，菜单无id。");
         }
-//        if (menuMap.containsKey(menuId)) {
-//            logger.logMessage(LogLevel.ERROR, "菜单:[id:{}]已存在,重复定义在文件{}", menuId, fileName);
-//            throw new RuntimeException("菜单文件加载错误，id重复定义。");
-//        }
+        if (menuMap.containsKey(menuId)) {
+            logger.logMessage(LogLevel.ERROR, "菜单:[id:{}]已存在,重复定义在文件{}", menuId, fileName);
+            throw new RuntimeException("菜单文件加载错误，id重复定义。");
+        }
         logger.logMessage(LogLevel.DEBUG, "开始添加菜单:[id:{}]", menuId);
         menuMap.put(menuId, menu);
         addScopeMenu(menu, fileName);
