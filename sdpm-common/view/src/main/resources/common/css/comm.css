@@ -31,6 +31,10 @@
 /**select2特有**/
 #bodyrap .select2-results{margin:5px;}
 
+/**标题**/
+.panelNobr{background:#edf0f1;padding:5px 10px;border-bottom:#ddd 1px solid;}
+.panel-content{padding:10px;}
+
 /**整体框架个性化设置end**/
 
 .operationbar .active_btn:hover {
