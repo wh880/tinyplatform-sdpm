@@ -20,19 +20,10 @@
     #import("/org/tinygroup/form/components/form.component")
     #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
 
+    #@tinyForm("thisform" "" "" {"class":"question_info"})
 
-
-   #@tinyForm("thisform" "" "" {"class":"question_info"})
- #*       #@elementItem()
-            #@colLabel()公司称谓：#end
-            #@formControlDiv("col-8")
-            <p>123</p>
-            #end
-            #@validateDiv("col-2")#end
-        #end                                  *#
-
-
-        #@elementItem()
+   ##以下为明明问题文本页面
+       #* #@elementItem()
         <div><b>1.如何初始化项目管理数据库？</b></div>
         <p>把zentao/config/my.php 里面install的值改成false。</p>
         <p>访问禅道，会自动进入安装页面，所有数据都会清空。</p>
@@ -59,10 +50,138 @@
        <div><b>5.如何初始化数据库？</b></div>
        <p>把zentao/config/my.php 里面install的值改成false。</p>
        <p>访问禅道，会自动进入安装页面，所有数据都会清空。</p>
-       #end
+       #end*#
+    ##以下为明明问题文本页面
+        #@div(divClass="infoContent")
+        <div>
+            #@table("协议详情")
+                #@thead()
+                #end
+                #@tbody()
+                    #@tr()
+                        #@th()1.如何初始化项目管理数据库？#end
+                        #@td()#end
+                    #end
+                    #@tr()
+                        #@th()把zentao/config/my.php 里面install的值改成false。#end
+                        #@td()#end
+                    #end
+                    #@tr()
+                        #@th()访问禅道，会自动进入安装页面，所有数据都会清空。#end
+                        #@td()#end
+                    #end
+                #end
+            #end
+        </div>
+        <div style="text-align:right;margin:right">
+            <a href="slaContentEdit.page">编辑</a>
+            <a class="clientDelete">删除</a>
+        </div>
+        #end
 
+
+        <div>
+            #@table("协议详情")
+                #@thead()
+                #end
+                #@tbody()
+                    #@tr()
+                        #@th()2.项目里面的版本和测试的版本有什么区别？#end
+                        #@td()#end
+                    #end
+                    #@tr()
+                        #@th()项目→版本：是开发人员针对代码创建的标记，用于提交给测试部门测试。#end
+
+                    #end
+                    #@tr()
+                        #@th()测试→版本：是给测试人员的测试任务，需要测试人员在里面执行测试用例。#end
+
+                    #end
+                #end
+            #end
+        </div>
+        <div style="text-align:right;margin:right">
+            <a href="slaContentEdit.page">编辑</a>
+            <a class="clientDelete">删除</a>
+        </div>
+
+
+    <div>
+        #@table("协议详情")
+            #@thead()
+            #end
+            #@tbody()
+                #@tr()
+                    #@th()3.能将项目转交给别人吗？#end
+                    #@td()#end
+                #end
+                #@tr()
+                    #@th()项目中关联的需求在产品中的模块。#end
+
+                #end
+                #@tr()
+                    #@th()项目也可以维护自己的模块：先取消关联产品，然后维护模块，维护完成后再关联上产品。#end
+
+                #end
+            #end
+        #end
+    </div>
+    <div style="text-align:right;margin:right">
+        <a href="slaContentEdit.page">编辑</a>
+        <a class="clientDelete">删除</a>
+    </div>
+
+
+    <div>
+        #@table("协议详情")
+            #@thead()
+            #end
+            #@tbody()
+                #@tr()
+                    #@th()4.如何初始化数据库？#end
+                    #@td()#end
+                #end
+                #@tr()
+                    #@th()项目→概况里编辑负责人即可。#end
+
+                #end
+                #@tr()
+                    #@th()#end
+
+                #end
+            #end
+        #end
+    </div>
+    <div style="text-align:right;margin:right">
+        <a href="slaContentEdit.page">编辑</a>
+        <a class="clientDelete">删除</a>
+    </div>
+
+    <div>
+        #@table("协议详情")
+            #@thead()
+            #end
+            #@tbody()
+                #@tr()
+                    #@th()5.怎么维护项目的模块？#end
+                    #@td()#end
+                #end
+                #@tr()
+                    #@th()把zentao/config/my.php 里面install的值改成false。#end
+
+                #end
+                #@tr()
+                    #@th()访问禅道，会自动进入安装页面，所有数据都会清空。#end
+
+                #end
+            #end
+        #end
+    </div>
+    <div style="text-align:right;margin:right">
+        <a href="slaContentEdit.page">编辑</a>
+        <a class="clientDelete">删除</a>
+    </div>
+    ##以上为明明问题文本页面
 
     #end
-
-
 #end
