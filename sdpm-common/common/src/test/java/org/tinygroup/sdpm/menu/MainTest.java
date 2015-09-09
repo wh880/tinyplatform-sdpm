@@ -22,7 +22,6 @@ public class MainTest {
         menu.setHref("href");
         menu.setIcon("icon");
         menu.setIsShow("isShow");
-        menu.setPermission("Permission");
         menu.setSort(100);
 //        menu.setTarget("target");
 
@@ -33,7 +32,6 @@ public class MainTest {
             sub.setHref("href" + i);
             sub.setIcon("icon" + i);
             sub.setIsShow("isShow" + i);
-            sub.setPermission("Permission" + i);
             sub.setSort(100 + i);
 //            sub.setTarget("target" + i);
             List<Menu> menus2 = new ArrayList<Menu>();
@@ -44,7 +42,6 @@ public class MainTest {
             menu22.setHref("href");
             menu22.setIcon("icon");
             menu22.setIsShow("isShow");
-            menu22.setPermission("Permission");
             menu22.setSort(100);
             menus2.add(menu22);
             sub.setChildMenus(menus2);

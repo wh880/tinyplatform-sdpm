@@ -12,12 +12,16 @@
 #for(var:[1..pagesize])
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/organization/userTodo.page">admin</a> #end
-	#@td()1#end
-	#@td()2015-8-28#end
-	#@td()23#end
-	#@td()8.0#end
-	#@td()161#end	
-	#@td()<a href="#" title="移除">#buttonIcon(iconClass="icon-remove")</a>#end
+	#@td()${var}#end
+	#@td()
+		<a title="额外工作日" href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">额外工作日${page}</a>
+	#end
+	#@td()2015.10.1#end
+	#@td()admin#end
+	#@td()
+	 	<a title="编辑发布" class="ml-5" href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page"><i class="icon-pencil"></i></a>
+		#iconOperation(" icon-remove" "删除" "ml-5")
+	#end
+	
 #end
 #end

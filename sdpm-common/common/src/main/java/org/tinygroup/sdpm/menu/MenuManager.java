@@ -10,11 +10,15 @@ public interface MenuManager {
 
     void addMenu(Menu menu, String fileName);
 
+    void addScopeMenu(Menu menu, String fileName);
+
     void addMenuToParent(Menu menu, String fileName);
 
     void removeMenu(String menuId);
 
     List<Menu> getChildMenus(String parentId);
+
+    List<Menu> getScopeMenus(String scope);
 
     Menu getMenu(String menuId);
 

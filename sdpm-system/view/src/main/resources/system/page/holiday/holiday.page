@@ -1,17 +1,18 @@
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
-#import("/org/tinygroup/table/components/table.component")
+#import("/org/tinygroup/table/components/togglebox.component")
+#import("/org/tinygroup/compose/components/compose_typography.component")
+#import("/org/tinygroup/button/components/button_smart.component")
+
 #include("/system/page/event/common.page")
 #@tabWithInit("tab_demo" "optionsBox")
 	#@tabBodyCol("ptop-5")
 		#@div(divClass="operationbar")
 			<span class="f">
-					<a href="#" class="active_btn">特殊节假日</a>
+					<a href="${TINY_CONTEXT_PATH}/system/page/holiday/holiday.page" class="active_btn">特殊节假日</a>
 			</span>
 			<span class="r">
-				#@iconOperations("#myModal" "icon-off" "关闭" "800" "500" "" "ml-5")关闭#end
+#*				#@iconOperations("#myModal" "icon-off" "关闭" "800" "500" "" "ml-5")关闭#end*#
 					
-				<a href="${TINY_CONTEXT_PATH}/" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
+				<a href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
 				<a href="#" title="删除">#buttonIcon(iconClass="icon-common-delete icon-remove")</a>
 				<a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>
 			</span>
@@ -22,9 +23,11 @@
 		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-				#@aModal("#myModal" "批量e删除" "1200" "500" "btn radius btn-primary" "")批量删除#end
+				#@aModal("#myModal" "批量删除" "1200" "500" "btn radius btn-primary" "/system/page/holiday/batch-del.pagelet")批量删除#end
+				#@aModal("#myModal" "添加" "500" "233" "btn radius btn-primary" "/system/page/holiday/holiday-add.pagelet")添加#end
+			
 			#end
-			#@tinyTableContent("../../data/holidaydata.pagelet") ##取数据地址 总数据
+			#@tinyTableContent("data/holidaydata.pagelet") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end

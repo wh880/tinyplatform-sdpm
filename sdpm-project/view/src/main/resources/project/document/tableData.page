@@ -12,17 +12,17 @@
 #for(var:[1..pagesize])
 #@tr()
 	
-	#@td()<a href="#"> ${page}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/document/tab.page"> ${page}</a>#end
 	#@td()北京#end
 	#@td()中南海#end
-	#@td()<a href="#">67</a> #end
+	#@td()<a href="${TINY_CONTEXT_PATH}/document/tab.page">67</a> #end
 	#@td()2013/03/25#end
 	#@td()67#end
 	
 	
 	
 	 #@td()
-		<a href="#" title="编辑">#buttonIcon(iconClass="icon-pencil")
+		<a href="${TINY_CONTEXT_PATH}/document/edit-doclib.page" title="编辑">#buttonIcon(iconClass="icon-pencil")
 		#iconOperation(" icon-remove" "删除" "ml-5")
 	#end
 #end
