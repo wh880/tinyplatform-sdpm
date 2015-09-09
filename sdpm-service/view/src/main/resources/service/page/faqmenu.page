@@ -14,7 +14,6 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 }
 #end
 
-
 #set(name="faq")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -31,7 +30,6 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         #@leftTreeCol()
         ##         #@searchZtreeWithInit("treeDemo" "height:454px;" "/admin/product/tree")
             #@searchZtreeWithInit("treeDemo" "height:454px;" "/service/js/serviceleft.js")
-
             #end
         #end
 
@@ -39,23 +37,23 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         #@tableBox("tBox")
  #@div(divClass="faqSty")
                 #@topSearch()
-                ##    #wDatePicker("日期范围")
-                    #simpleText("请输入要搜索的问题" "" "width:30%")
+##以下为搜索框及其搜索按钮
+                    #simpleText("请输入要搜索的问题" "" "width:25%")
  #@btnSubmit("icon-search")&nbsp;搜问题#end
-                <span class="r">
 
-      ##          <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
+                <span class="r">
+                ##          <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
           <a href="${TINY_CONTEXT_PATH}/service/page/addquestion.page">#buttonIcon(iconClass="icon-plus")新增问题</a>
 				</span>
                 #end
-##以下包含在faqquestion.page里面，加载faq页面问题
+##以下包含在faqquestion.page里面，加载faq页面-“具体的5个问题以及问题后面的编辑和删除按钮”
      #include("/service/page/faqquestion.page")
- ##以上包含在faqquestion.page里面，加载faq页面问题
+ ##以上包含在faqquestion.page里面，加载faq页面-“具体的5个问题以及问题后面的编辑和删除按钮”
             #end
 
 ##    以下实现faqmenu.page页面下面的分页
          <div class="btnsty-page">#tinyPageNav("bodyconentrap" 1 10 "../page/faqmenu.page")</div>
-##与上面一行的区别，是将“1”改为“page”        <div class="btnsty-page">#tinyPageNav("bodyconentrap" page 10 "../page/faqmenu.page")</div>
+##与上面一行的区别，是将“1”改为“page”,page为当前页码，“10”为总页码<div class="btnsty-page">#tinyPageNav("bodyconentrap" page 10 "../page/faqmenu.page")</div>
 ##    以上实现faqmenu.page页面下面的分页
         #end
     #end
@@ -71,6 +69,5 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         });
         return false;
     });
-
 </script>
 #end
