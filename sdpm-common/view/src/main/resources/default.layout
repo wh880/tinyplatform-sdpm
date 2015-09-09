@@ -103,6 +103,16 @@
 		#bodyrap.theme-clean .btn-primary:hover {background:#2a4f85!important;}
 		#main-navbar .navbar-nav.pull-right{margin-right:21px;}
 		#bodyrap.theme-clean #main-menu .mmc-dropdown-open-ul a:after, .theme-default #main-menu .navigation a:after{background:none}
+		#bodyrap.theme-asphalt .optionsBox .tabBar .switchClass.Current{background:#3BC2A9}
+		#bodyrap.theme-asphalt .optionsBox .tabBar .switchClass:hover{background:#52bdb4}
+		#bodyrap.theme-purple-hills .optionsBox .tabBar .switchClass.Current{background:#857198}
+		#bodyrap.theme-purple-hills .optionsBox .tabBar .switchClass:hover{background:#a48ad4}
+		#bodyrap.theme-dust .optionsBox .tabBar .switchClass.Current{background:#7a6f6f}
+		#bodyrap.theme-dust .optionsBox .tabBar .switchClass:hover{background:#8a6f6f}
+		#bodyrap.theme-fresh .optionsBox .tabBar .switchClass.Current{background:#50b5d3}
+		#bodyrap.theme-fresh .optionsBox .tabBar .switchClass:hover{background:#64bed8}
+		#bodyrap.theme-white .optionsBox .tabBar .switchClass.Current{background:#b9662b}
+		#bodyrap.theme-white .optionsBox .tabBar .switchClass:hover{background:#985813}
 		}
 	 </style>
 </head>
