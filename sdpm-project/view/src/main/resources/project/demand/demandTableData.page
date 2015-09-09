@@ -24,7 +24,7 @@
 	 #@td()
 	 	<a href="${TINY_CONTEXT_PATH}/project/task/add.page" title="分解任务">#buttonIcon(iconClass="icon-smile")</a>
 		<a href="${TINY_CONTEXT_PATH}/project/task/bechAdd.page" title="批量分解">#buttonIcon(iconClass="icon-paste")</a>		
-		<a href="#" title="建用例">#buttonIcon(iconClass="icon-sitemap")</a>			
+		<a href="${TINY_CONTEXT_PATH}/quality/testmanagement/page/proposeBug.page" title="建用例">#buttonIcon(iconClass="icon-sitemap")</a>
 		#@aModal("#myModa4" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
 					#@dialog("myModa4")
 						#@dialogHeader()#end

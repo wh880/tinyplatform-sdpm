@@ -33,7 +33,7 @@
 						
 					#end
 					
-					<a href="#" >#buttonIcon(iconClass="icon-plus")新增需求</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" >#buttonIcon(iconClass="icon-plus")新增需求</a>
 					<a href="${TINY_CONTEXT_PATH}/project/demand/relateDemand.page" >#buttonIcon(iconClass="icon-exchange")关联需求</a>
 				</span>
 				#div(divClass="clearfix")
