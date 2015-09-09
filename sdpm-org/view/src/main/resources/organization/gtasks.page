@@ -1,32 +1,15 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
-<style>
-    .tabLayout .tabBar span a {
-        color: #333
-    }
-
-    .tabLayout .tabBar .Current a {
-        color: #fff
-    }
-
-    .operationbar {
-        border-top: none;
-        background: #f9fafe;
-        padding: 6px 5px 6px 10px;
-    }
-</style>
 #set(name="organizationGtask")
 #include("/common/common.page")
 #@div()
     #@div(divClass="tabLayout")
-        #@div(divClass="tabBar cl")
+    ##        #@div(divClass="tabBar cl")
             #@tabWithInit("tab_demo" "optionsBox")
                 #@tabHead()
                     #include("/organization/tab.page")
                 #end
             #end
-        #end
-
-
+    ##        #end
 #end
 
 #import("/org/tinygroup/form/components/form.component")
