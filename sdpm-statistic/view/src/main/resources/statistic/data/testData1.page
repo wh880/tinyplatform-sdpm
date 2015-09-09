@@ -1,24 +1,64 @@
-Bug创建：
-###@tinyDateInput("begin" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
-##至
-###@tinyDateInput("end" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
-#daterangepicker("2015/08/01" "2015/08/01" "reservation" "reservationtime" "width:400px")
-#daterangepickerInit("#reservationtime" "timePicker: true,timePickerIncrement: 30,format: 'YYYY/MM/DD'")
-<br/>
-产品：
-#@tinySelect("lang" "zh" {"class":"select2","style":"width:190px"})
-    #@tinyOptionItem("en")请选择用户#end
-    #@tinyOptionItem("zh")admin#end
-    #@tinyOptionItem("en")admin1#end
-    #@tinyOptionItem("ta")admin2#end
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+
+#@tinyForm("thisform" "url" "post" {"class":""})
+				#@elementItem()
+					#@colLabel("col-1")Bug创建：#end
+					#@formControlDiv("col-6")
+					<div class="input-group">
+						#@div(divClass="col-12")
+							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
+						#end
+						<span class="input-group-addon" id="basic-addon2">至</span>
+						#@div(divClass="col-12")
+							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
+						#end
+					</div>
+					#end					
+				#end
+			#@elementItem()
+				#@colLabel("col-1")产品：#end
+				#@formControlDiv("col-6")	
+				#@div(divClass="col-5")
+				#@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">请选择产品</option>
+                        <option value="DE">产品1</option>
+                        <option value="FL">产品2</option>
+                        <option value="GA">产品3</option>   
+                    #end               
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
+                #end
+                #@colLabel("col-2")项目：#end
+                #@div(divClass="col-5")
+                #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">请选择项目</option>
+                        <option value="DE">项目1</option>
+                        <option value="FL">项目2</option>
+                        <option value="GA">项目3</option>   
+                    #end               
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
+                #end	
+                #end
+             #end
+#*             #@elementItem()
+				#@colLabel("col-1")项目：#end
+				#@formControlDiv("col-4")		
+				#@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">请选择项目</option>
+                        <option value="DE">项目1</option>
+                        <option value="FL">项目2</option>
+                        <option value="GA">项目3</option>   
+                    #end               
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
+                #end	
+             #end																*#
 #end
-项目：
-#@tinySelect("lang" "zh" {"class":"select2","style":"width:190px"})
-    #@tinyOptionItem("en")请选择用户#end
-    #@tinyOptionItem("zh")admin#end
-    #@tinyOptionItem("en")admin1#end
-    #@tinyOptionItem("ta")admin2#end
-#end
+
 <script type="text/javascript">
     $(".select2").select2();
 </script>

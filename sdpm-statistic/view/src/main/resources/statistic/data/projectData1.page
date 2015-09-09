@@ -1,5 +1,21 @@
-日期：#daterangepicker("2015/08/01" "2015/08/01" "reservation" "reservationtime" "width:400px")
-#daterangepickerInit("#reservationtime" "timePicker: true,timePickerIncrement: 30,format: 'YYYY/MM/DD'")
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+
+#@tinyForm("thisform" "url" "post" {"class":""})
+				#@elementItem()
+					#@colLabel("col-1")日期：#end
+					#@formControlDiv("col-4")
+					<div class="input-group">
+						#@div(divClass="col-12")
+							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
+						#end
+						<span class="input-group-addon" id="basic-addon2">至</span>
+						#@div(divClass="col-12")
+							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"float:left"})#end
+						#end
+					</div>
+					#end					
+				#end																		
+#end
 <br/>
 <div style="height: 10px;"></div>
 #@tableStriped("table-border")
