@@ -110,9 +110,21 @@
             #@validateDiv("col-2")#end
         #end
 
-        #@divCenterAlign()
-	       	<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page">#buttonRadiusDefault(caption="保存")</a>
-            <a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page">#buttonRadiusDefault(caption="取消")#end</a>
+        #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+            <a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page">
+                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+            </div>
+            <div class="col-5"></div>
+        </div>
+    	#end
     #end
 #end
 <script type="text/javascript">

@@ -35,14 +35,16 @@
     <div style="width:65%;float:left">
         #@div(divClass="infoContent")
             <p class="titleName">重现步骤</p>
-            #@tinyueditor("content" "content" "min-height:150px")步骤<br>结果<br>期望#end
+            <br>
+            #@tinyueditor("content" "content" "min-height:100px")步骤<br>结果<br>期望#end
 
         #end
         #@div(divClass="infoContent")
             <p class="titleName">备注</p>
+            <br>
             <div>
                 #@formControlDiv()
-					#@tinyueditor("contents" "contents""min-height:150px")#end
+					#@tinyueditor("contents" "contents""min-height:100px")#end
 				#end
             </div>
         #end
