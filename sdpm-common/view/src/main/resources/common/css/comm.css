@@ -142,6 +142,11 @@
 }
 
 /*org三级菜单格式*/
+.barBoxs {
+    padding-top: 18px;
+    float: left
+}
+
 .barBoxs a, .barBoxs a:link {
     color: #333;
     margin-right: 3px;
