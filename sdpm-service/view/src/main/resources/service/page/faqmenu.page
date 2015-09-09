@@ -27,7 +27,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
     #end
 
     #@divDataTablebox()
-## 左边
+## faq左边
         #@leftTreeCol()
         ##         #@searchZtreeWithInit("treeDemo" "height:454px;" "/admin/product/tree")
             #@searchZtreeWithInit("treeDemo" "height:454px;" "/service/js/serviceleft.js")
@@ -35,7 +35,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
             #end
         #end
 
-    ##页面右边
+    ##faq页面右边
         #@tableBox("tBox")
  #@div(divClass="faqSty")
                 #@topSearch()
@@ -48,24 +48,19 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
           <a href="${TINY_CONTEXT_PATH}/service/page/addquestion.page">#buttonIcon(iconClass="icon-plus")新增问题</a>
 				</span>
                 #end
-##以下包含在faqquestion.page里面，里面是问题对应的链接
+##以下包含在faqquestion.page里面，加载faq页面问题
      #@div()
        #@tabHead()
      #include("/service/page/faqquestion.page")
  #end
      #end
- ##以上包含在faqquestion.page里面，里面是问题对应的链接
+ ##以上包含在faqquestion.page里面，加载faq页面问题
             #end
-        <div id="bodyconentrap" class="">
 
-        </div>
 ##    以下实现faqmenu.page页面下面的分页
          <div class="btnsty-page">#tinyPageNav("bodyconentrap" 1 10 "../page/faqmenu.page")</div>
 ##与上面一行的区别，是将“1”改为“page”        <div class="btnsty-page">#tinyPageNav("bodyconentrap" page 10 "../page/faqmenu.page")</div>
-
 ##    以上实现faqmenu.page页面下面的分页
-
-
         #end
     #end
 <script type="text/javascript">
