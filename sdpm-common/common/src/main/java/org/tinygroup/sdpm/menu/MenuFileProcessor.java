@@ -57,7 +57,7 @@ public class MenuFileProcessor extends AbstractFileProcessor {
 
     @Override
     protected boolean checkMatch(FileObject fileObject) {
-        return fileObject.getFileName().contains("jar") && fileObject.getFileName().toLowerCase().endsWith(MENU_EXT_FILENAME);
+        return fileObject.getAbsolutePath().contains("jar") && fileObject.getFileName().toLowerCase().endsWith(MENU_EXT_FILENAME);
     }
 
     public MenuManager getMenuManager() {
