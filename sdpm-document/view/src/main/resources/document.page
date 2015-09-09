@@ -1,11 +1,7 @@
 #!set(activeTitle="产品文档库",activeMenuId=currentPageId)
 <style>
-.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}
-.optionsBoxsty{margin-bottom:5px;display:inline-block;float:left}
-.barBtnsty a{border:#ddd 1px solid;border-radius:2px;background-image:linear-gradient(to bottom,#fff,#e6e6e6);color:#333; padding:5px 18px;display:inline-block}
-.barBtnsty a:hover{color:#f90}
-.barBtnsty a,.barBtnsty a:link,.barBtnsty a:visited{height:34px;line-height:20px;} 
-.barBtnsty a:hover{background:#eef}
+.barBtnsty a{height:34px;line-height:20px;border:#ddd 1px solid;color:#333;background:#eee; padding:5px 18px;display:inline-block}
+.barBtnsty a:hover{color:#f90;background:#eef}
 </style>
 ##<!-- Fuck! Who write this like shit,why not write the little .js together one document?  -->
 ##<!-- 忍不了改了！改！  -->
@@ -17,9 +13,9 @@
 	#include("/document/dropdownMenu.page")
 		#@span(spanClass="barBtnsty")
 			#@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/document/edit-doclib.pagelet" "ml-5")<i class=" icon-pencil"></i>编辑 #end
-			<a  id="deleteBatch2" href="#" onclick="batchDel();" class="deleteBatch radius"><i class="icon-trash"></i>删除</a>
+			<a  id="deleteBatch2" href="#" onclick="batchDel();" class="backBtn"><i class="icon-trash"></i>删除</a>
 		#end
-##end
+
 <span class="r" style="position:relative;height:0">
     #@aModal("#myModal" "创建文档库" "865" "150" "" "/document/add-doclib.pagelet")#simpleI("icon-plus-sign")添加文档库#end
     #@dialog("myModal")
@@ -31,7 +27,7 @@
 				#end
 			#end
 </span>
-
+		
 	#@tabBodyCol("ptop-5")
 	##operationbar start
 		#@div(divClass="operationbar")
