@@ -1,0 +1,91 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="服务管理",activeMenuId=currentPageId)
+
+#set(name="sla")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+    ##tabbody end
+    <div style="width:100%;float:left">
+        #set(listNum=3)
+        #foreach(var:[1..listNum])
+            #@gridSysCol(4)
+                #@div(divClass="infoContent")
+                    <p class="titleName">支付宝协议</p>
+
+                    <div>
+                        #@table("")
+                            #@thead()
+                            #end
+                            #@tbody()
+                                #@tr()
+                                    #@th(thStyle="width:150px")协议ID#end
+                                    #@td()<a href="${TINY_CONTEXT_PATH}/service/page/clientUser.page">001#end
+                                #end
+                                #@tr()
+                                    #@th()产品名称#end
+                                    #@td()支付宝#end
+                                #end
+                                #@tr()
+                                    #@th()产品版本#end
+                                    #@td()2.0.1#end
+                                #end
+                                #@tr()
+                                    #@th()发布时间#end
+                                    #@td()2015.09.07#end
+                                #end
+                                #@tr()
+                                    #@th()服务级别#end
+                                    #@td()高级#end
+                                #end
+                                #@tr()
+                                    #@th()协议内容#end
+                                    #@td()<a href="${TINY_CONTEXT_PATH}/service/page/slaContent.page">详情#end
+                                #end
+                                #@tr()
+                                    #@th()创建人#end
+                                    #@td()习近平#end
+                                #end
+                                #@tr()
+                                    #@th()创建时间#end
+                                    #@td()20150908#end
+                                #end
+                            #end
+                        #end
+                    </div>
+                    <div style="text-align:right;margin:right">
+                        #@iconOperations(
+                            "#myModal3" "" "编辑" "700" "300 " "/service/page/clientProductEdit.pagelet" "ml-5")编辑#end
+                        <a class="clientDelete">删除</a>
+                    </div>
+                #end
+            #end
+        ##            #@div(divClass="infoContent,col-6")
+        ##                <p class="titleName">历史记录</p>
+        ##                #include("/service/page/historyRecord.page")
+        ##            #end
+        #end
+
+    </div>
+
+
+    #end
+#end
+#@simpleModal("myModal3" "编辑")#end
+#@simpleModal("myModal4" "删除")#end
+<script>
+    $(function () {
+        $(".infoContent").on("click", ".clientDelete", function () {
+            //console.log($(this).attr("itemId"))
+//            var that = this;
+            layer.confirm('确定要删除该记录？', function (index) {
+                //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                //$.ajax()
+                //console.log(index);
+//                layer.msg($("已删除").attr("deleteList"), 1);
+                layer.msg('已删除', 1);
+            })
+        });
+    });
+</script>

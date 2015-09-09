@@ -69,18 +69,15 @@
                         #end
                     #end
                 #end
-            ##                邮箱
+
                 #@td()#inputRadiusDefaultText("inputwidth")#end
-            ##                性别
+
                 #@td()
-                ##                    #@formControlDiv("skin-minimal col-5")
-                ##                        #@radioBox()
+
                     #@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})男#end
-                ##                        #end
-                ##                        #@radioBox()
+
                     #@tinyRadioes("sex" "women" "women")女#end
-                ##                        #end
-                ##                    #end
+
                     #@validateDiv("col-2")#end
                 #end
                 #@td()#inputRadiusDefaultText("inputwidth")#end

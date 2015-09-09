@@ -24,13 +24,6 @@
             #@tinyCheckbox("checkbox2" "01" "02")复制用户#end
         #end
     #end
-##    #@elementItem()
-##        #@div(divClass="col-10 col-offset-2 form-inline")
-##            #tinyInput("submit" "submitbtn" "&nbsp;保存&nbsp;" {"class":"btn btn-primary"})
-##            #@aTxtDarkDefaultButton(aHref="javascript:void(0);")&nbsp;取消&nbsp;#end
-##        #end
-##    #end
-###end
 #end
 <script type="text/javascript">
     $(document).ready(function () {

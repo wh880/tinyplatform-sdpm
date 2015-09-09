@@ -19,8 +19,8 @@
                     "448" "/service/page/companyInfoEdit.pagelet" "ml-5")编辑#end
                 #@iconOperations("#myModal2" "icon-remove" "客户删除" "550"
                     "100" "/service/page/slaDelect.pagelet" "ml-5")删除#end
-                <a href="${TINY_CONTEXT_PATH}/service/page/clientUser.page"
-                   title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
+            ##                <a href="${TINY_CONTEXT_PATH}/service/page/clientUser.page"
+            ##                   title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
 			</span>
             #end
         ##operationbar end

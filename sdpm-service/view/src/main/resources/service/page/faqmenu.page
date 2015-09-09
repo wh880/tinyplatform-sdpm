@@ -6,6 +6,7 @@
 <style>
     .faqSty{margin:5px;padding:10px 12px;border: none;}
     .faqSty .pd-15{padding:0 0 16px; text-align: left;line-height:30px;}
+    .btnsty-page{float:right;margin-right:30px;}
 </style>
 #macro ztreeClick()
 if(!treeNode.isParent){
@@ -23,15 +24,8 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         #@tabHead()
             #include("/service/page/tab.page")
         #end
-
-
-
     #end
 
-
-
-
-###@h2()${activeTitle}#end
     #@divDataTablebox()
 ## 左边
         #@leftTreeCol()
@@ -43,63 +37,33 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 
     ##页面右边
         #@tableBox("tBox")
-
-        #*       #@elementItem()
-                <div><b>公司称谓wen</b></div>
-                <p>123</p>
-                <p>123</p>
-                #end       *#
-
-            #@div(divClass="faqSty")
+ #@div(divClass="faqSty")
                 #@topSearch()
                 ##    #wDatePicker("日期范围")
                     #simpleText("请输入要搜索的问题" "" "width:30%")
-                #*     #@selectWBox()
-                       #@select("demo1" "demo1")
-                            #@optionSelected("")请选择目录#end
-                            #@optionItem("1")菜单一#end
-                            #@optionItem("1")菜单二#end
-                            #@optionItem("1")菜单三#end
-                        #end
-                    #end                                                      *#
-                    #@btnSubmit("icon-search")&nbsp;搜问题#end
+ #@btnSubmit("icon-search")&nbsp;搜问题#end
                 <span class="r">
 
       ##          <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
           <a href="${TINY_CONTEXT_PATH}/service/page/addquestion.page">#buttonIcon(iconClass="icon-plus")新增问题</a>
 				</span>
                 #end
-                #@OlTopList()
-                #* #topItem(1 "../page/questiondb.page" "如何初始化项目管理数据库？" "18:12")*#
-                    #@normalLiItemsconment(1 "../page/questiondb.page" "访问项目管理，可以绑定域名吗？" "")
-                        #@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/docu/documentproduct-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
-                        #@dialog("myModal")
-                            #@dialogHeader()对话框标题#end
-                            #@dialogBody()<p>对话框内容…</p>#end
-                            #@dialogFooter()
-                                #@buttonEnsure()确定#end
-                                #@buttonCancel()关闭#end
-                            #end
-                        #end
-
-                    ##                <a title="编辑" class="ml-5" style="text-decoration: none;" href="/docu/documentproduct-edit.pagelet" data-toggle="modal" data-target="#myModal" data-width="504" data-height="290" modal-title="编辑"><i class="icon-edit"></i></a>
-                    ##                <a title="删除" class="ml-5 delBtn" style="text-decoration: none;" href="/service/page/editdb.page"><i class="icon-trash"></i></a>
-                    ##                    #@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/page/questiondb.page" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
-
-                    #end
-                    #@normalLiItemsconment(2 "../page/questiondb.page" "项目里面的版本和测试的版本有什么区别？" "green")
-                    #end
-                    #@normalLiItemsconment(3 "../page/questiondb.page" "怎么维护项目的模块？" "darkGreen")
-                    #end
-                    #@normalLiItemsconment(4 "../page/questiondb.page" "能将项目转交给别人吗？" "grey")
-                    #end
-                    #@normalLiItemsconment(5 "../page/questiondb.page" "访问项目管理，可以绑定域名吗？" "")
-                    #end
-                #end
+##以下包含在faqquestion.page里面，里面是问题对应的链接
+     #@div()
+       #@tabHead()
+     #include("/service/page/faqquestion.page")
+ #end
+     #end
+ ##以上包含在faqquestion.page里面，里面是问题对应的链接
             #end
+        <div id="bodyconentrap" class="">
 
+        </div>
+##    以下实现faqmenu.page页面下面的分页
+         <div class="btnsty-page">#tinyPageNav("bodyconentrap" 1 10 "../page/faqmenu.page")</div>
+##与上面一行的区别，是将“1”改为“page”        <div class="btnsty-page">#tinyPageNav("bodyconentrap" page 10 "../page/faqmenu.page")</div>
 
-
+##    以上实现faqmenu.page页面下面的分页
 
 
         #end

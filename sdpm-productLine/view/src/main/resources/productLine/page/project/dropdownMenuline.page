@@ -45,10 +45,10 @@
 		#end
 		#@navSelect2Fix()
 			
-			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page" class="r">所有产品</a>&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/list.page" class="r">所有产品线</a>&nbsp;
 			<!--新增产品-->
-			#@aModal("#myModal" "新增产品" "900" "500" "btn-class" "/product/page/tabledemo/addProduct.pagelet")添加产品 #end
-		
+			<a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/add.page">添加产品线</a>&nbsp;
+			
 		
 		#end
 	#end

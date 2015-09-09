@@ -29,9 +29,9 @@
 该项目名称>关闭" "900" "400" "/testManagement/page/versionEnd.pagelet"
                     "ml-5")&nbsp关闭#end
                 #iconOperations("#myModal" " icon-pencil" "编辑" "865"
-                    "448" "/service/page/testEdit.pagelet" "ml-5")
+                    "448" "/service/page/slaEdit.pagelet" "ml-5")
                 #iconOperations("#myModal2" "icon-remove" "删除" "550"
-                    "100" "/service/page/testDelect.pagelet" "ml-5")
+                    "100" "/service/page/slaDelect.pagelet" "ml-5")
                 <a href="${TINY_CONTEXT_PATH}/service/page/sla.page"
                    title="返回">#buttonIcon(iconClass="icon-reply")</a>
 			</span>
@@ -137,7 +137,7 @@
         #end
 
         #@div(divClass="infoContent")
-            <p class="titleName">历史记录111</p>
+            <p class="titleName">历史记录</p>
             #include("/service/page/historyRecord.page")
         #end
         <div style="text-align:center;margin:auto">

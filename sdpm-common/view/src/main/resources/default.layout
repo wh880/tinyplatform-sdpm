@@ -103,6 +103,16 @@
 		#bodyrap.theme-clean .btn-primary:hover {background:#2a4f85!important;}
 		#main-navbar .navbar-nav.pull-right{margin-right:21px;}
 		#bodyrap.theme-clean #main-menu .mmc-dropdown-open-ul a:after, .theme-default #main-menu .navigation a:after{background:none}
+		#bodyrap.theme-asphalt .optionsBox .tabBar .switchClass.Current{background:#3BC2A9}
+		#bodyrap.theme-asphalt .optionsBox .tabBar .switchClass:hover{background:#52bdb4}
+		#bodyrap.theme-purple-hills .optionsBox .tabBar .switchClass.Current{background:#857198}
+		#bodyrap.theme-purple-hills .optionsBox .tabBar .switchClass:hover{background:#a48ad4}
+		#bodyrap.theme-dust .optionsBox .tabBar .switchClass.Current{background:#7a6f6f}
+		#bodyrap.theme-dust .optionsBox .tabBar .switchClass:hover{background:#8a6f6f}
+		#bodyrap.theme-fresh .optionsBox .tabBar .switchClass.Current{background:#50b5d3}
+		#bodyrap.theme-fresh .optionsBox .tabBar .switchClass:hover{background:#64bed8}
+		#bodyrap.theme-white .optionsBox .tabBar .switchClass.Current{background:#b9662b}
+		#bodyrap.theme-white .optionsBox .tabBar .switchClass:hover{background:#985813}
 		}
 	 </style>
 </head>
@@ -112,37 +122,7 @@
 		#@mainNavbar("/common/img/main-navbar-logo.png" "Tinyframework")
 			#@navbarNav()
 				#navbarNavItem("新增内容" "#")
-				#@tinySelectAndAdd("additems")
-							{ label: "字典类型", value: "#link("/page/system/dict/dict_edit.pagelet")",modal:true},
-							{ label: "字典项", value: "#link("/page/system/dict/dictitem_edit.pagelet")",modal:true},
-							{ label: "系统参数", value: "#link("/page/system/sysParam/sysParam_edit.pagelet")",modal:true},
-							{ label: "功能", value: "#link("/page/system/function/function_edit.pagelet")",modal:true},
-							{ label: "角色", value: "#link("/page/system/role/role_edit.pagelet")",modal:true},
-							{ label: "逻辑行政区划", value: "#link("/page/region/logic_region_edit.pagelet")",modal:true},
-							{ label: "元数据-字典类型", value: "#link("/page/system/dict/dict_edit.pagelet")",modal:true},
-							{ label: "元数据-字典项", value: "#link("/page/system/dict/dictitem_edit.pagelet")",modal:true},
-							{ label: "岗位", value: "#link("/page/job/job_edit.pagelet")",modal:true},
-							{ label: "岗位任职规则", value: "#link("/page/job/job_rule_edit.pagelet")",modal:true,width:"800"},
-							{ label: "岗位职责规则", value: "#link("/page/job/job_resp_edit.pagelet")",modal:true,width:"800"},
-							{ label: "标准属性分组", value: "#link("/page/tag/tag_category_edit.pagelet")",modal:true},
-							{ label: "标准属性", value: "#link("/page/tag/tag_edit.pagelet")",modal:true},
-							{ label: "标准属性规则", value: "#link("/page/tag/tag_rule_edit.pagelet")",modal:true},
-							{ label: "事务模板类型", value: "#link("/page/affairs/affair_template_edit.pagelet")",modal:true},
-							{ label: "事务类型", value: "#link("/page/affairs/affair_type_edit.pagelet")",modal:true},
-							{ label: "人员属性分组", value: "#link("/page/member/member_cate_edit.pagelet")",modal:true},
-							{ label: "人员属性", value: "#link("/page/member/member_ext_edit.pagelet")",modal:true},
-							{ label: "人员属性规则", value: "#link("/page/member/ext_rule_edit.pagelet")",modal:true},
-							{ label: "家庭属性分组", value: "#link("/page/member/member_cate_edit.pagelet")",modal:true},
-							{ label: "家庭属性", value: "#link("/page/home/home_ext_edit.pagelet")",modal:true},
-							{ label: "家庭属性规则", value: "#link("/page/home/ext_rule_edit.pagelet")",modal:true},
-							{ label: "单位属性分组", value: "#link("/page/workunit/cate_edit.pagelet")",modal:true},
-							{ label: "单位属性", value: "#link("/page/workunit/workunit_ext_edit.pagelet")",modal:true},
-							{ label: "单位属性规则", value: "#link("/page/workunit/ext_rule_edit.pagelet")",modal:true},
-							{ label: "福利对象-人员", value: "#link("/page/member/member_tag_tab.pagelet")",modal:true},
-							{ label: "福利对象-家庭", value: "#link("/page/home/home_tag_tab.pagelet")",modal:true},
-							{ label: "福利对象-单位", value: "#link("/page/workunit/workunit_tag_tab.pagelet")",modal:true},
-							{ label: "事务", value: "#link("/page/affairs/affair_tab.pagelet")",modal:true}
-						#end
+				
 				#@navbarDropdownMenu("下拉菜单")
 					#navbarNavItem("第一项" "#")
 					#navbarNavItem("第二项" "#")

@@ -1,5 +1,4 @@
 #!set(activeTitle="表格",activeMenuId=currentPageId)
-##import("/org/tinygroup/table/components/tinytable.component")
 #include("/common/common.page")
 #set(editpagePath=
     "/organization/userAdd.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
@@ -16,7 +15,6 @@
         #@aModal(userBatchAddpageModal "批量添加" "1200" "800" "btn radius btn-primary btn-sm" userBatchAddpagePath)
             #@simpleI("icon-plus")批量添加#end
         #end
-    ##    <a title="权限维护" href=userBatchAddpagePath>#buttonIcon(iconClass="添加" "865" "420","btn radius btn-info")</a>
     #end
     #@tinyTableContent(TINY_CONTEXT_PATH+"/organization/table/userTableData.pagelet" 81) ##取数据地址 总数据
         #@thead()

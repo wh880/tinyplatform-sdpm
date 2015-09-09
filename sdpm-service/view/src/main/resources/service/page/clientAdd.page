@@ -34,13 +34,6 @@
                     #end
                 #end
                 #@elementItem()
-                    #@colLabel()客户ID：#end
-                    #@formControlDiv("col-3")
-                        #tinyInput("text" "客户ID" ""{"datatype":"","id":"客户ID","class":"input-text"})
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@elementItem()
                     #@colLabel()客户名称：#end
                     #@formControlDiv("col-3")
                         #tinyInput("text" "客户单位" ""{"datatype":"","id":"客户单位ID","class":"input-text"})
@@ -79,7 +72,7 @@
                     #@colLabel()客户登记时间：#end
                     #@formControlDiv("col-3")
                         #@tinyDateInput(
-                            "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
+                            "regionday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
                             "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
                     #end
                     #@validateDiv("col-2")#end
