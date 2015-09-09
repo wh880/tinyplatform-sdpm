@@ -40,7 +40,7 @@
 		        <a title="编辑" href="${TINY_CONTEXT_PATH}/project/task/edit.page">#buttonIcon(iconClass=
                     "icon-pencil")</a>
                 <a title="备注" href="${TINY_CONTEXT_PATH}/project/task/IDLinkremark.page">#buttonIcon(iconClass="icon-book")</a>
-		        <a title="复制" href="${TINY_CONTEXT_PATH}/project/task/task/add.page">#buttonIcon(iconClass="icon-copy")</a>
+		        <a title="复制" href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-copy")</a>
                 #@iconOperations(
                     "#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet"
                     "ml-5")&nbsp#end
@@ -96,7 +96,7 @@
             <a title="关闭" href="${TINY_CONTEXT_PATH}/project/task/close.page">#buttonIcon(iconClass="icon-off")取消</a>
             <a title="编辑" href="${TINY_CONTEXT_PATH}/project/task/edit.page">#buttonIcon(iconClass="icon-pencil")</a>
             <a title="备注" href="${TINY_CONTEXT_PATH}/project/task/IDLinkremark.page">#buttonIcon(iconClass="icon-book")</a>
-            <a title="复制" href="${TINY_CONTEXT_PATH}/project/task/task/add.page">#buttonIcon(iconClass="icon-copy")</a>
+            <a title="复制" href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-copy")</a>
             #@iconOperations(
                 "#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
                 &nbsp#end
@@ -111,6 +111,13 @@
             <a href="${TINY_CONTEXT_PATH}/project/task/index.page" class="margin-left" title="返回">#buttonIcon(iconClass=
                 "icon-reply")</a>
         </center>
+        #@div(divClass="infoContent")
+            <p class="titleName">备注</p>
+            <div>
+                #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+            </div>
+        #end
+
     </div>
     <div style="width:35%;float:right">
         #TypeInfo("information")
