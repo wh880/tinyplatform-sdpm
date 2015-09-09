@@ -99,10 +99,19 @@
 
             </div>
 
-            <a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
-		 		#buttonRadiusDefault(caption="保存")</a>
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
-   		 		#buttonRadiusDefault(caption="取消")</a>
+            #@elementItem()
+        		<div class="col-12">
+            	<div class="col-5">
+                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+           		 </div>
+            <div class="col-1"></div>
+            <div class="col-1">
+                <a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
+                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+            </div>
+            <div class="col-5"></div>
+        	</div>
+			#end
             <p style="clear:both"></p>
             #@div(divClass="infoContent")
                 <p class="titleName">历史记录</p>

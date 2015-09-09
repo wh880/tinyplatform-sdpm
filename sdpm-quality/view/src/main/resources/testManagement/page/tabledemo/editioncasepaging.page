@@ -95,3 +95,6 @@
 			#end
 		#end
 	#end
+<script>
+	$('select.select2').select2()
+</script>
