@@ -1,0 +1,23 @@
+#macro setTinyItemCount(num)
+	<input type="hidden" name="records" value="${num}"/>
+#end
+
+#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#if (pagesize>records-pagesize*(page-1))
+#set(pagesize=records-(page-1)*pagesize)
+#end
+#setTinyItemCount(52)
+#for(var:[1..pagesize])
+#@tr()
+	#@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()${var}#end
+	#@td()国庆节#end
+	#@td()2015.10.1#end
+	#@td()admin#end
+	#@td()
+	 	<a title="编辑发布" class="ml-5" href=""><i class="icon-pencil"></i></a>
+		#iconOperation(" icon-remove" "删除" "ml-5")
+	#end
+	
+#end
+#end

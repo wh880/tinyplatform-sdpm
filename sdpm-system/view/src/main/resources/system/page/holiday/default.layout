@@ -1,4 +1,4 @@
-#include("/productLine/page/event/common.page")
+#include("/system/page/event/common.page")
 
 		#@div(divClass="operationbar")
 			<span class="f">
