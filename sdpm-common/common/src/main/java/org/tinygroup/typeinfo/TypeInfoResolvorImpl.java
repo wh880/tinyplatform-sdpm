@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by wangll13383 on 2015/9/6.
  */
 public class TypeInfoResolvorImpl implements TypeInfoResolvor {
-    private List<FileObject> fileLists = new ArrayList<FileObject>();
 
-    private static Map<String, TypeInfo> typeDict = new HashMap<String, TypeInfo>();
+    private static Map<String, TypeInfo> typeDict = new ConcurrentHashMap<String, TypeInfo>();
 
     public void addTypeInfo(TypeInfos typeInfos) {
         if(typeInfos!=null) {
