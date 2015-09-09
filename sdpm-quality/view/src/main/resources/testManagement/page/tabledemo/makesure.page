@@ -29,21 +29,34 @@
         	</div>
     #@elementItem()
             #@sdpmItem("指派给")
-	            #@tinySelect("" "1" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-	               		#@optionItem("1")--请选择--#end
-	               		#@optionItem("2")admin#end
-	               		#@optionItem("3")demo#end
-	            #end	             
+	            #@Tselect2F()
+	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Connecticut</option>
+	                        <option value="DE">Delaware</option>
+	                        <option value="FL">Florida</option>
+	                        <option value="GA">Georgia</option>
+	                        <option value="IN">Indiana</option>
+	                        <option value="ME">Maine</option>
+	                        <option value="MD">Maryland</option>
+	                    	#end                
+	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                	  #end	             
         	#end
     #end
     #@elementItem()
     	#@sdpmItem("优先级")
-                #@tinySelect("" "1" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                    #@optionItem("1")/#end
-                    #@optionItem("2")1#end
-	               	#@optionItem("3")2#end
-	               	#@optionItem("3")3#end	
-                #end
+               #@Tselect2F()
+	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Connecticut</option>
+	                        <option value="DE">Delaware</option>
+	                        <option value="FL">Florida</option>
+	                        <option value="GA">Georgia</option>
+	                        <option value="IN">Indiana</option>
+	                        <option value="ME">Maine</option>
+	                        <option value="MD">Maryland</option>
+	                    	#end                
+	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                	  #end
    		#end 
     #end
     #@elementItem()
