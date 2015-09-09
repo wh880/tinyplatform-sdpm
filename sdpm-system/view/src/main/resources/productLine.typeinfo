@@ -1,0 +1,5 @@
+<type-infos>
+	<type-info name="holiday" >
+	    <info name="holiday-dynamic" title="动态" infoParameter="" url="/system/page/holiday/holiday-dynamic.pagelet" resource="holiday"/>
+	</type-info>
+</type-infos>

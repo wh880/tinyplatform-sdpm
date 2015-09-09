@@ -12,8 +12,8 @@
 #for(var:[1..pagesize])
 	#@tr()
 		#@td()<input type="checkbox" value="1" name="idCheck">#end
-		#@td()008#end
-		#@td()1#end
+		#@td()<a href="${TINY_CONTEXT_PATH}/quality/page/project/demdtablehref.page">008</a>#end
+		#@td()<a href="${TINY_CONTEXT_PATH}/quality/page/project/demdtablehref.page">1</a> #end
 		#@td()1#end
 		#@td()1#end
 		#@td()2015-8-28#end

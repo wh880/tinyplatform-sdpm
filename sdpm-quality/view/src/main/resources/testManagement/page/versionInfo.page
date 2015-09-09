@@ -1,0 +1,87 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+<style>
+    .select_boxes{margin-top:0}
+#*    .margin-top {margin-top:8px;float:left;margin-left:18px}*#
+</style>
+
+
+#set(name="qualityVersion")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+		#@div(divClass="dropdownBox")
+			#include("/testManagement/page/dropdownMenu.page")
+		#end
+		#@tabHead()
+			#include("/testManagement/page/Tab.page")
+		#end
+	
+		#@tabBodyCol("ptop-5")
+		#end
+	#end
+#end
+##operationbar start1
+#@div()
+	#@p(pClass="title_sty")
+		<span class="f">
+			版本名称</span>
+		<span class="r">
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/addLog.page">
+				#buttonIcon(iconClass="icon-time")日志</a>&nbsp&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/versionStart.page">
+				#buttonIcon(iconClass="icon-play")开始</a>&nbsp;&nbsp;
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionEnd.page">
+				#buttonIcon(iconClass="icon-off")关闭</a>&nbsp;&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
+				#buttonIcon(iconClass="icon-smile")用例</a>&nbsp;&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page">
+				#buttonIcon(iconClass="icon-link")关联用例</a>&nbsp;&nbsp;		
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page" title="编辑">
+				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
+			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" 
+				"/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page" title="返回">
+				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;</span>
+	#end
+	#@tinyForm("thisform" "url" "post" {"class":""})
+#*	<div class="infoContent">
+    		<p class="titleName">Bug名称</p>*#
+	<div style="width:70%;float:left" class="pageleftpart">
+		<div class="infoContent">
+    		<p class="titleName">版本描述</p>
+    	</div>
+    	<div class="infoContent">
+    		<p class="titleName">测试总结</p>
+    	</div>    		
+    	#@div(divClass="infoContent")
+            <p class="titleName">历史记录</p>
+        ##加入后，js代码会导致页面排版混乱
+            #include("/testManagement/page/historyRecord.page")
+        #end
+        <center>
+       		 <a href="${TINY_CONTEXT_PATH}/testManagement/page/addLog.page">
+				#buttonIcon(iconClass="icon-time")日志</a>&nbsp&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/versionStart.page">
+				#buttonIcon(iconClass="icon-play")开始</a>&nbsp;&nbsp;
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionEnd.page">
+				#buttonIcon(iconClass="icon-off")关闭</a>&nbsp;&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
+				#buttonIcon(iconClass="icon-smile")用例</a>&nbsp;&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page">
+				#buttonIcon(iconClass="icon-link")关联用例</a>&nbsp;&nbsp;		
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page" title="编辑">
+				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
+			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" 
+				"/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page" title="返回">
+				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
+			</center>
+		</div>
+		<div style="width: 30%;float: right">
+		 #TypeInfo("qualityVersionInfo")
+##   			#include("/testManagement/page/tabledemo/versionRightInfo.page")
+    	</div>
+    #end
+#end

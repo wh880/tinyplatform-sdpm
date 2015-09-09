@@ -4,12 +4,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 <style>
-#*.tabLayout .tabBar span a{color:#333}
-.tabLayout .tabBar .Current a{color:#fff}
-.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}*#
-.b {margin-left: 8px;}
-#*.infoContent{ margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
-.infoContent .titleName{margin-top:-16px;margin-bottom:8px;font-weight:bold;font-size:13px;}*#
+
 </style>
 
 #include("/project/event/common.page")
@@ -20,12 +15,12 @@
 				#include("/project/dropdownMenu.page")
 			#end
 			#@tabHead()
-				#include("/project/protab.page")							
+				#include("/project/protab.page")
 				<span class="r" style="position:relative;top:2px;height:0">
 					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
 					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
 				</span>
-			#end				
+			#end
 			#@tabBodyCol("ptop-5")
 			#@div(divClass="operationbar")
 				<span class="f">
@@ -47,7 +42,7 @@
 					#@dialog("myModa2")
 						#@dialogHeader()#end
 						#@dialogBody()
-						<p></p>						
+						<p></p>
     					#end
 						#@dialogFooter()
 							#@buttonEnsure()确定#end
@@ -64,14 +59,14 @@
 							#@buttonEnsure()确定#end
 	   				   	 	#@buttonCancel()关闭#end
   						#end
-					#end				
+					#end
 				<a href="${TINY_CONTEXT_PATH}/project/survey/edit.page" title="编辑项目" class="b ">#buttonIcon(iconClass="icon-pencil")</a>
 #*				<a href="#" title="删除项目">#buttonIcon(iconClass="icon-remove")</a>*#
 				#@aModal("#myModa4" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
 					#@dialog("myModa4")
 						#@dialogHeader()#end
-						#@dialogBody()				
-								<h4>确定删除吗?</h4>						
+						#@dialogBody()
+								<h4>确定删除吗?</h4>
     					#end
 						#@dialogFooter()
 							#@buttonEnsure()确定#end
@@ -101,19 +96,19 @@
 		#TypeInfo("project")
 	</div>
 	#end
-#end			
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-							
-				
-	
+#end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

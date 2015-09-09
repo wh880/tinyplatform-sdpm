@@ -12,8 +12,8 @@
 #for(var:[1..pagesize])
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()${page}#end
-	#@td()①#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">${page}</a> #end
+	#@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">①</a>#end
 	#@td()任务名称#end
 	#@td()（状态）完成#end
 	#@td()03-25#end

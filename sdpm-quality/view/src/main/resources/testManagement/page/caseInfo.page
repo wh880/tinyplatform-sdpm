@@ -1,0 +1,161 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+<style>
+    .select_boxes{margin-top:0}
+#*    .margin-top {margin-top:8px;float:left;margin-left:18px}*#
+</style>
+
+
+#set(name="qualityCases")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+		#@div(divClass="dropdownBox")
+			#include("/testManagement/page/dropdownMenu.page")
+		#end
+		#@tabHead()
+			#include("/testManagement/page/Tab.page")
+		#end
+	
+		#@tabBodyCol("ptop-5")
+		#end
+	#end
+#end
+##operationbar start1
+#@div()
+	#@p(pClass="title_sty")
+		<span class="f">
+			用例名称</span>
+		<span class="r">
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/addLog.page">
+				#buttonIcon(iconClass="icon-time")日志</a>&nbsp&nbsp;
+			#@iconOperations("#goModal" "icon-play" "执行" "600" "300" 
+				"/testManagement/page/tabledemo/caseExecute.pagelet" "ml-5")执行#end&nbsp;&nbsp;
+			#@iconOperations("#reModal" "icon-flag-checkered" "结果" "600" "300" 
+				"/testManagement/page/tabledemo/caseResult.pagelet" "ml-5")结果#end&nbsp;&nbsp;		
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editioncase.page" title="编辑">
+				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
+			<a  title="备注" onclick="toggle()">
+				#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page" title="复制">
+				#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
+			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" 
+				"/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
+
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page" title="返回">
+				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;</span>
+	#end
+	#@tinyForm("thisform" "url" "post" {"class":""})
+#*	<div class="infoContent">
+    		<p class="titleName">Bug名称</p>*#
+	<div style="width:70%;float:left" class="pageleftpart">
+		<div class="infoContent">
+    		<p class="titleName">前置条件</p>
+    	</div>
+    	<div class="infoContent">
+    		<p class="titleName">步骤</p>
+    	#@tableStriped()
+            #@thead()
+                #@tr()
+                    #@th()编号#end
+                    #@th()步骤#end
+                    #@th()预期 #end
+                #end
+            #end
+            #@tbody()
+                #@tr()
+                    #@th()1#end
+                    #@td()表格内容#end
+                    #@td()表格内容#end                    
+                #end
+            #end
+        #end
+    	</div>    		
+    	<div class="infoContent">
+    		<p class="titleName">附件</p>
+    	</div>
+    	#@div(divClass="infoContent")
+            <p class="titleName">历史记录</p>
+        ##加入后，js代码会导致页面排版混乱
+            #include("/testManagement/page/historyRecord.page")
+        #end
+        <center>
+       		 <a href="${TINY_CONTEXT_PATH}/testManagement/page/addLog.page">
+				#buttonIcon(iconClass="icon-time")日志</a>&nbsp&nbsp;
+			#@iconOperations("#goModal" "icon-play" "执行" "600" "300" 
+				"/testManagement/page/tabledemo/caseExecute.pagelet" "ml-5")执行#end&nbsp;&nbsp;
+			#@iconOperations("#reModal" "icon-flag-checkered" "结果" "600" "300" 
+				"/testManagement/page/tabledemo/caseResult.pagelet" "ml-5")结果#end&nbsp;&nbsp;		
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editioncase.page" title="编辑">
+				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
+			<a  title="备注" onclick="toggle()">
+				#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page" title="复制">
+				#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
+			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" 
+				"/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
+
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page" title="返回">
+				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
+			</center>
+		#@div(divId="comment" divStyle="display:none;" divClass="infoContent")
+			<p class="titleName">备注</p>
+			#@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end
+			#@elementItem()
+        	<div class="col-12">
+            <div class="col-5">
+                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-1">
+                <a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
+                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+            </div>
+            <div class="col-5"></div>
+        	</div>
+		#end
+		#end
+		</div>
+		#end
+	<div style="width: 30%;float: right">
+		 #TypeInfo("qualityCaseInfo")
+ ##  #include("/testManagement/page/tabledemo/caseEditInfo.page")
+    </div>
+	#end
+	
+				#@dialog("myModal")
+					#@dialogHeader()对话框标题#end
+					#@dialogBody()<p>对话框内容…</p>#end
+					#@dialogFooter()
+						#@buttonEnsure()确定#end
+						#@buttonCancel()关闭#end
+					#end
+				#end
+				#@dialog("goModal")
+					#@dialogHeader()对话框标题#end
+					#@dialogBody()<p>对话框内容…</p>#end
+					#@dialogFooter()
+						#@buttonEnsure()确定#end
+						#@buttonCancel()关闭#end
+					#end
+				#end
+				#@dialog("reModal")
+					#@dialogHeader()对话框标题#end
+					#@dialogBody()<p>对话框内容…</p>#end
+					#@dialogFooter()
+						#@buttonEnsure()确定#end
+						#@buttonCancel()关闭#end
+					#end
+				#end
+<script type="text/javascript">
+function toggle()
+{
+   var comment = document.getElementById("comment");
+   if(comment.style.display=='none')
+     comment.style.display='block';
+   else
+    comment.style.display='none';
+}
+</script>
+

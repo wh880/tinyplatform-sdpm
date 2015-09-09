@@ -5,37 +5,7 @@
     "/organization/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 
 #include("/common/common.page")
-<style>
-    .tabLayout .tabBar span a {
-        color: #333
-    }
 
-    .tabLayout .tabBar .Current a {
-        color: #fff
-    }
-
-    .operationbar {
-        border-top: none;
-        background: #f9fafe;
-        padding: 6px 5px 6px 10px;
-    }
-
-    .barBox {
-        padding-top: 5px;
-        float: left
-    }
-
-    .barBox a, .barBox a:link {
-        color: #333;
-        margin-right: 3px;
-        display: inline-block
-    }
-
-    .barBox a:hover {
-        color: #f90
-    }
-
-</style>
 #set(name="organizationUser")
 #@div()
     #@div(divClass="tabLayout")

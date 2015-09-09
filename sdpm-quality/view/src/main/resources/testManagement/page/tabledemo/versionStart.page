@@ -1,0 +1,62 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/button/components/button_smart.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/fold/components/fold.component")
+#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+
+#set(name="qualityVersion")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/testManagement/page/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/testManagement/page/Tab.page")
+			#end
+			
+			#@tabBodyCol("ptop-5")
+			#end
+	#end
+#end
+			
+#@tinyForm("thisform" "" "" {"class":"test"})
+	<div style="width:67%;float:left">
+    	<div class="infoContent">
+    		<p class="titleName">开始</p>
+    		<div class="RTtitle">
+            	<button type="submit" id="submit" class="commitBtn">保存</button>
+        	</div>
+     #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：</label></div>
+
+                <div class="col-9">
+                    #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+            </div>
+        #end
+        <br/>
+       </div>
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-1">
+                <a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page">
+                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+            </div>
+            <div class="col-5"></div>
+        </div>
+	#end
+    <br >
+   </div>
+   <div style="width:32%;float:right">
+		#@div(divClass="infoContent")
+      	  <p class="titleName">历史记录</p>
+			#include("/testManagement/page/historyRecord.page")
+		#end
+	</div>
+#end
+

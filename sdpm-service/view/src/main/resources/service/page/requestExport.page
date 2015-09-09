@@ -1,0 +1,63 @@
+#@tinyForm("thisform" "" "" {"class":"test"})
+    #@noRespsGridSystem()
+        #@gridSysRow()
+            #@gridSysCol(4)
+                #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
+            #end
+            #@gridSysCol(4)
+                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                    #@tinyOptionItem("zh")csv#end
+                    #@tinyOptionItem("en")xml#end
+                    #@tinyOptionItem("ta")html#end
+                #end
+            #end
+            #@gridSysCol(4)
+                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                    #@tinyOptionItem("zh")UTF#end
+                    #@tinyOptionItem("en")GBK#end
+
+                #end
+            #end
+
+
+        #end
+
+
+    #end
+#end
+
+
+
+
+###@table()
+##    #@tbody()
+##        #@tr()
+##            #@td()
+##                #inputText(inputPlaceHolder="文件名")
+##            #end
+##            #@td()
+##                #@selectBox()
+##                    #@select(selectName="demo1" selectClass="select")
+##                        #@optionSelected("")csv#end
+##                        #@optionItem("1")xml#end
+##                        #@optionItem("1")html#end
+##                    #end
+##                #end
+##            #end
+##            #@td()
+##                #@selectBox()
+##                    #@select(selectName="demo2" selectClass="select")
+##                        #@optionSelected("")UTF-8#end
+##                        #@optionItem("1")GBK#end
+##                    #end
+##                #end
+##            #end
+##            #@td()#@selectBox()
+##                #@select(selectName="demo3" selectClass="select")
+##                    #@optionSelected("")全部记录#end
+##                    #@optionItem("1")选中记录#end
+##                #end
+##            #end#end
+##        #end
+##    #end
+###end

@@ -19,8 +19,8 @@
 	#@tabBodyCol("ptop-5")
 		##operationbar
 		#@div(divClass="operationbar")
-			<span class="f">
-					<a href="#" class="active_btn">我是项目名称哦！</a>
+			<span class="f active_btn">
+					我是项目名称哦
 			</span>
 			<span class="r">
 				<div style="text-align:center;margin:auto">
@@ -30,7 +30,7 @@
 				###@iconOperations("#beginModal" "icon-play" "项目名称>开始" "900" "400" "/testManagement/page/versionBegin.pagelet" "ml-5")&nbsp开始#end
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionEnd.page">
 					#buttonIcon(iconClass="icon-off")关闭</a>
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-dashboard")用例</a>
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">#buttonIcon(iconClass="icon-dashboard")用例</a>
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link	")关联用例</a>
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
 				#@iconOperations("#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp#end
@@ -70,7 +70,7 @@
 					#buttonIcon(iconClass="icon-time")日志</a>
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionEnd.page" class="margin-left">
 					#buttonIcon(iconClass="icon-off")关闭</a>
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page" class="margin-left">#buttonIcon(iconClass="icon-dashboard")用例</a>
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page" class="margin-left">#buttonIcon(iconClass="icon-dashboard")用例</a>
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page" class="margin-left">#buttonIcon(iconClass="icon-link	")关联用例</a>
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page" class="margin-left" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
 				#@iconOperations("#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp#end

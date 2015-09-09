@@ -16,55 +16,7 @@
 			#end
 			
 			#@tabBodyCol("ptop-5")
-			##operationbar star
-			#@div(divClass="operationbar")
-				<span class="f">
-#*					<a href="#" class="active_btn">未关闭</a>*#
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page" class="active_btn">未关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">所有</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">指派给我</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">由我创建</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">由我解决</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">未确认</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">未指派</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">未解决</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">久未处理</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">被延期</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">需求变动</a>
-					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-				</span>
-				<span class="r">
-					#@iconOperations("#myModal" "icon-download-alt" "导入" "500" "100" "/testManagement/page/tabledemo/importBug.pagelet" "ml-5")&nbsp导入#end
-					
-					###@iconOperations("#myModal" "icon-download-alt" "导出" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")&nbsp导出#end	
-				    #@buttonGroup()			   		
-	                    #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出   #@spanCaret()#end#end
-	                    #@ulDropdownMenu("downMenuSty")
-#*	                    	#@iconOperations("#myModal" "icon-download-alt" "导出数据" "865" "200"
-						 "/page/tabledemo/user-add.pagelet" "ml-5")导出数据#end*#
-						 #@aModal("#myModal" "导出数据" "500" "100" "" "/testManagement/page/tabledemo/exportBugData.pagelet")导出数据#end
-						</br>
-						 #@aModal("#myModal" "导出模板" "500" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出模版#end
-							#@dialog("myModal")
-								#@dialogHeader()对话框标题#end
-								#@dialogBody()<p>对话框内容…</p>#end
-								#@dialogFooter()
-									#@buttonEnsure()确定#end
-								    #@buttonCancel()关闭#end
-							  	#end
-							#end
-						#end
-						
-                    #end&nbsp;
-                    
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
-                    <a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-plus")建Bug</a>
-				</span>
-				#div(divClass="clearfix")
-				#include("/testManagement/page/mulsearch.page")
 			#end
-		#end
 	#end
 #end
 			

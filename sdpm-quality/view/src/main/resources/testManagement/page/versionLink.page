@@ -14,7 +14,7 @@
 			##operationbar start1
 			#@div(divClass="operationbar")
 				<span class="f">
-					<a href="#" class="active_btn">项目名称</a> >关联用例
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionInfo.page" class="active_btn">版本名称</a> >关联用例
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">

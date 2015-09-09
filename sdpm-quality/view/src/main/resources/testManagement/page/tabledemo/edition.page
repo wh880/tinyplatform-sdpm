@@ -1,86 +1,92 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
+#import("/org/tinygroup/button/components/button_smart.component")
+
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 <style>
     .select_boxes {
         margin-top: 0
     }
-    .margin {margin-top:4px;margin-bottom:5px;}
 </style>
 
 
-#set(name="bug")
+#set(name="qualityBug")
 #@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@div(divClass="dropdownBox")
-            #include("/testManagement/page/dropdownMenu.page")
-        #end
-        #@tabHead()
-            #include("/testManagement/page/Tab.page")
-        #end
+	#@tabWithInit("tab_demo" "optionsBox")
+		#@div(divClass="dropdownBox")
+			#include("/testManagement/page/dropdownMenu.page")
+		#end
+		#@tabHead()
+			#include("/testManagement/page/Tab.page")
+		#end
+	
+		#@tabBodyCol("ptop-5")
+		#end
+	#end
+#end
+			
+#@tinyForm("thisform" "" "" {"class":"test"})
+	<div style="width:65%;float:left" class="pageleftpart">
+    	<div class="infoContent">
+    		<p class="titleName"><a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page" class="active_btn margin">项目名称</a>>编辑</p>
+    		<div class="RTtitle">
+            	<button type="submit" id="submit" class="commitBtn">保存</button>
+        	</div>
+        	        
+   		#@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>重现步骤</label></div>
 
-        #@tabBodyCol("ptop-5")
-        ##operationbar start1
-
-        #end
-        #@div(divClass="operationbar")
-        <span class="f">
-            <a href="#" class="active_btn margin">项目名称</a>>编辑
-        </span>
-        <span class="r">
-            <a href="#" class="active_btn">#buttonRadiusPrimary(caption="保存")</a>
-        </span>
-        #end
-    <div style="width:65%;float:left">
-        #@div(divClass="infoContent")
-            <p class="titleName">重现步骤</p>
-            <br>
-            #@tinyueditor("content" "content" "min-height:100px")步骤<br>结果<br>期望#end
-
-        #end
-        #@div(divClass="infoContent")
-            <p class="titleName">备注</p>
-            <br>
-            <div>
-                #@formControlDiv()
-					#@tinyueditor("contents" "contents""min-height:100px")#end
-				#end
+                <div class="col-9">
+                    #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
             </div>
         #end
-        #@div(divClass="infoContent")
-            <p class="titleName">附件</p>
-            <div>
+        <br/>
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注</label></div>
 
+                <div class="col-9">
+                    #@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end</div>
+            </div>
+        #end
+        <br/>
+        #@elementItem()
+    		#@sdpmItem("附件")
                 #tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
-
-
-			#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
-
-            </div>
+				#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})            
+        	#end
         #end
-        <center style="margin-top:5px">
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">#buttonRadiusPrimary(caption="保存")</a>
-        	<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">#buttonDefault(caption="返回")</a>
-        </center> 
+        </div>
+        #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-1">
+                <a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">
+                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+            </div>
+            <div class="col-5"></div>
+        </div>
+		#end
+    	<br >
+   
         #@div(divClass="infoContent")
             <p class="titleName">历史记录</p>
         ##加入后，js代码会导致页面排版混乱
             #include("/testManagement/page/historyRecord.page")
         #end
-    #end
+        </div>
 #end
+
     <div style="width: 35%;float: right">
        #TypeInfo("qualityBugEdition")
 ##       #include("/testManagement/page/tabledemo/editionpaging.page")
     </div>
-
-
-
-
-
-</div>
-#@p(pClass="clearfix") #end
+    
 <script type="text/javascript">
     $("select.select2").select2();
 </script>

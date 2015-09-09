@@ -1,38 +1,147 @@
 #@div(divClass="infoContent tabInfocontents")
 	
-#@tabWithInit("tab_demo1")
+#@tabWithInit("tab_demo")
 	#@tabHead()
-		#@tabHeadCol()影响的v项目#end
-		#@tabHeadCol()影响v的BUG#end
+		#@tabHeadCol()基本信息#end
+		#@tabHeadCol()需求的一生#end
 	#end
 	
 	#@tabBodyCol("tabBorder")
-		#@tableHover()
+		#@table()
 		       		#@thead()
 		       		#end
 		       		#@tbody()
 		       			#@tr()
-							#@td()<b>产品名称v</b>#end
-		       				#@td()<b>禅道v测试</b>#end
+							#@td()所属产品#end
+		       				#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">测试用例</a>#end
+		       			#end
+		       			#@tr()
+							#@td()所属模块#end
+		       				#@td()/#end
+		       			#end
+		       			#@tr()
+							#@td()所属计划#end
+		       				#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/product-plan.page">发布计划3.30.1</a>#end
+		       			#end
+		       			#@tr()
+							#@td()来源#end
+		       				#@td()#end
+		       			#end
+		       			#@tr()
+							#@td()当前状态#end
+		       				#@td()激活#end
+		       			#end
+		       			#@tr()
+							#@td()状态#end
+		       				#@td()<font color="green">正常#end
+		       			#end
+		       			#@tr()
+							#@td()所处阶段#end
+		       				#@td()研发中#end
+		       			#end
+		       			#@tr()
+							#@td()优先级#end
+		       				#@td()#end
+		       			#end
+		       			#@tr()
+							#@td()预计工时#end
+		       				#@td()半年#end
+		       			#end
+		       			#@tr()
+							#@td()关键词#end
+		       				#@td()#end
+		       			#end	
+		       			#@tr()
+							#@td()抄送给#end
+		       				#@td()#end
+		       			#end	
+		       		#end
+		 #end
+	#end
+	
+	#@tabBodyCol("tabBorder")
+		   
+	
+		#@table()
+		       		#@thead()
+		       		#end
+		       		#@tbody()
+		       			#@tr()
+							#@td()由谁创建#end
+		       				#@td()Demo 于 2015-09-07 11:41:20#end
+		       			#end
+		       			#@tr()
+							#@td()指派给#end
+		       				#@td()Demo 于 2015-09-07 11:45:56#end
+		       			#end
+		       			#@tr()
+							#@td()由谁评审#end
+		       				#@td()Demo#end
+		       			#end
+		       			#@tr()
+							#@td()评审时间#end
+		       				#@td()2015-09-07#end
+		       			#end
+		       			#@tr()
+							#@td()由谁关闭#end
+		       				#@td()#end
+		       			#end
+		       			#@tr()
+							#@td()关闭原因#end
+		       				#@td()#end
+		       			#end
+		       			#@tr()
+							#@td()最后修改#end
+		       				#@td()Demo 于 2015-09-07 11:46:25#end
+		       			#end	
+		         		#end
+				#end
+		#end		       			
+	#end
+#end
+
+#@div(divClass="infoContent tabInfocontents")
+	
+#@tabWithInit("tab_demo")
+	#@tabHead()
+		#@tabHeadCol()迭代任务#end
+		#@tabHeadCol()相关信息#end
+	#end
+	
+	#@tabBodyCol("tabBorder")
+		#@table()
+		       		#@thead()
+		       		#end
+		       		#@tbody()
+		       			#@tr()
+							#@td()<a href="#">#68</a>测试用例1#end
+		       			#end
+		       			#@tr()
+							#@td()<a href="#">#69</a>测试用例2#end
+		       			#end
+		       			#@tr()
+							#@td()<a href="#">#70</a>测试用例3#end
 		       			#end
 		       		#end
 		 #end
 	#end
 	
 	#@tabBodyCol("tabBorder")
-		#@tableHover()
+		#@table()
 		       		#@thead()
 		       		#end
 		       		#@tbody()
 		       			#@tr()
-							#@td()<b>产品名称</b>#end
-		       				#@td()<b>禅道测试</b>#end
+							#@td()相关BUG#end	
 		       			#end
-		       		#end
-		 #end
-	#end
-		       			
-	
-				
+		       			#@tr()
+							#@td()相关用例#end
+		       			#end
+		       			#@tr()
+							#@td()相关需求#end
+		       			#end		       					       		
+		        	#end
+		#end
+	#end		       			
 #end
 #end

@@ -8,4 +8,7 @@
         #bodyContent
     </div>
 </div>
+    #@validateDiv("col-5 validmsg")#end
 #end
+
+

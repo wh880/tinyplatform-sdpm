@@ -1,28 +1,30 @@
-#@tinyForm("thisform" "url" "post" {"class":""})
-    #@elementItem()
-        #@colLabel()解决时间：#end
-        #@formControlDiv("col-8")
-            #@tinyDateInput(
-                "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()解决人员：#end
-        #@formControlDiv("col-8")
-            #tinyInput("text" "解决人员" ""{"datatype":"","id":"解决人员","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()解决方案：#end
-        #@formControlDiv("col-8")
-            #@Teditor(
-                "content1" "content1" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符",
-                "datatype":"*10-500","nullmsg":"备注不能为空！"})备注...最少输入10个字符#end
-        #end
-        #@validateDiv("col-2")#end
-    #end
+#@tinyForm("thisform" "" "" {"class":"test"})
+    #@noRespsGridSystem()
 
+        #@gridSysRow()
+            #@colLabel("col-2")解决时间：#end
+            #@gridSysCol(5)
+                #@tinyDateInput(
+                    "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
+                    "日期不能为空","placeholder":""})
+                #end
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-2")解决人员：#end
+            #@gridSysCol(5)
+                #tinyInput("text" "解决人员" ""{"datatype":"","id":"解决人员","class":"input-text"})
+            #end
+
+        #end
+        #@gridSysRow()
+            #@colLabel("col-2")解决方案：#end
+            #@gridSysCol(9)
+                #@Teditor(
+                    "content1" "content1" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符",
+                    "datatype":"*10-500","nullmsg":"备注不能为空！"})备注...最少输入10个字符#end
+
+            #end
+        #end
+    #end
 #end

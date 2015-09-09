@@ -1,74 +1,62 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
-    #@elementItem()
-        #@colLabel()产品ID：#end
-        #@formControlDiv("col-8")
-            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-                #@tinyOptionItem("zh")产品1#end
-                #@tinyOptionItem("en")产品2#end
-                #@tinyOptionItem("ta")产品3#end
+
+    #@noRespsGridSystem()
+        #@gridSysRow()
+            #@colLabel("col-2")产品ID：#end
+
+            #@gridSysCol(5)
+                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                    #@tinyOptionItem("zh")admin#end
+                    #@tinyOptionItem("en")TOM#end
+                    #@tinyOptionItem("ta")JACK#end
+                #end
             #end
         #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()客户ID：#end
-        #@formControlDiv("col-8")
-            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-                #@tinyOptionItem("zh")恒生#end
-                #@tinyOptionItem("en")恒生#end
-                #@tinyOptionItem("ta")恒生#end
+
+        #@gridSysRow()
+            #@colLabel("col-2")客户ID：#end
+
+            #@gridSysCol(5)
+                #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
             #end
         #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@sdpmItem("请求级别")
+        #@gridSysRow()
+            #@colLabel("col-2")请求分类：#end
+            #@gridSysCol(5)
+                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                    #@tinyOptionItem("zh")请求分类1#end
+                    #@tinyOptionItem("en")请求分类2#end
+                    #@tinyOptionItem("ta")请求分类3#end
+                #end
+            #end
 
-            #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                #@optionItem("")请选择#end
-                #@optionItem("")紧急#end
-                #@optionItem("")普通  #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-2")请求期限：#end
+
+            #@gridSysCol(5)
+                #@tinyDateInput(
+                    "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
+                    "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
             #end
         #end
-    #end
-    #@elementItem()
-        #@sdpmItem("请求分类")
+        #@gridSysRow()
+            #@colLabel("col-2")请求标题：#end
 
-            #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                #@optionItem("")请选择#end
-                #@optionItem("")请求分类1#end
-                #@optionItem("")请求分类2#end
+            #@gridSysCol(5)
+                #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
             #end
         #end
-    #end
+        #@gridSysRow()
+            #@colLabel("col-2")请求表述：#end
 
-    #@elementItem()
-        #@sdpmItem("请求期限")
-            #@tinyDateInput(
-                "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+            #@gridSysCol(9)
+                #@Teditor(
+                    "content2" "content2" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符",
+                    "datatype":"*10-500","nullmsg":"备注不能为空！"})备注...最少输入10个字符#end
+            #end
         #end
-        #@validateDiv("col-2")#end
-    #end
 
-    #@elementItem()
-        #@sdpmItem("请求标题 ")
-
-            #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-
-
-
-    #@elementItem()
-        #@colLabel()请求表述：#end
-        #@formControlDiv("col-8")
-            #@Teditor(
-                "content2" "content2" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符",
-                "datatype":"*10-500","nullmsg":"备注不能为空！"})备注...最少输入10个字符#end
-        #end
-        #@validateDiv("col-2")#end
     #end
 
 #end

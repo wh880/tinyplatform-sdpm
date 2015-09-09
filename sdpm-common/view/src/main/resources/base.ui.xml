@@ -3,7 +3,7 @@
         <js-codelet>
             var init = [];
         </js-codelet>
-        <js-resource></js-resource>        
+        <js-resource>/common/js/sdpm.js</js-resource>        
         <css-resource>/common/css/comm.css</css-resource>   
     </ui-component>
 </ui-components>

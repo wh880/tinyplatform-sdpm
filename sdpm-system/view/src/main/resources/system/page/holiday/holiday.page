@@ -1,0 +1,48 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#include("/system/page/event/common.page")
+#@tabWithInit("tab_demo" "optionsBox")
+	#@tabBodyCol("ptop-5")
+		#@div(divClass="operationbar")
+			<span class="f">
+					<a href="#" class="active_btn">特殊节假日</a>
+			</span>
+			<span class="r">
+				#@iconOperations("#myModal" "icon-off" "关闭" "800" "500" "" "ml-5")关闭#end
+					
+				<a href="${TINY_CONTEXT_PATH}/" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
+				<a href="#" title="删除">#buttonIcon(iconClass="icon-common-delete icon-remove")</a>
+				<a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+			</span>
+		#end
+	#end
+
+	<div style="width:65%;float:left">
+		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+			#@div(divBaseClass="tinyheaderTools form-inline")
+				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+				#@aModal("#myModal" "批量e删除" "1200" "500" "btn radius btn-primary" "")批量删除#end
+			#end
+			#@tinyTableContent("../../data/holidaydata.pagelet") ##取数据地址 总数据
+				#@thead()
+					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+						#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
+						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})名称#end
+						#@tinyTh({"class":"","rel":"sortname"})日期#end
+						#@tinyTh({"class":"","rel":"sortname"})创建者#end
+						#@tinyTh({"class":"","rel":"sortname"})操作#end
+					#end
+				#end
+			#end
+			
+		#end
+	</div>
+	<div style="width:35%;float:right"> 
+		#TypeInfo("holiday")
+    </div>
+	
+		
+	
+#end
