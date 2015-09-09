@@ -3,10 +3,23 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
-##<style>
-##    .pageleftpart label{display:inline-block;width:90px;text-align:right}
-##</style>
-#include("/project/task/taskMenu.page")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        <span class="r" style="position:relative;top:2px;height:0">
+					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
+				</span>
+        #end
+    ##head end
+    <br/>
+    ##body end
+    #end
+#end
 #@tinyForm("thisform" "" "" {"class":"test"})
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
