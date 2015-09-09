@@ -35,13 +35,19 @@
 					</td>
 					<td style="float:left">
 					<div style="width:150px">
-					#@tinySelect("lang" "zh" {"class":"select2"})
-							#@tinyOptionItem("en")请选择用户#end
-							#@tinyOptionItem("zh")admin#end
-							#@tinyOptionItem("en")admin1#end
-							#@tinyOptionItem("ta")admin2#end
-							
-					#end
+						#@Tselect2F()
+							#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="FL">Florida</option>
+                                <option value="GA">Georgia</option>
+                                <option value="IN">Indiana</option>
+                                <option value="ME">Maine</option>
+                                <option value="MD">Maryland</option>
+							#end
+						##填写任意内容，侦听需重新填加 A侦听已内置
+							#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+						#end
 					</div></td>
 						</tr>
 					</table>

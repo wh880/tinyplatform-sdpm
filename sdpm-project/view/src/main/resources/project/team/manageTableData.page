@@ -14,17 +14,33 @@
 		<input type="checkbox" value="1" name="idCheck">
 	#end
 	#@td()
-		#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-				#@optionItem("")请选择#end
-				#@optionItem("")请选择#end
-				#@optionItem("")请选择#end
+		#@Tselect2F()
+			#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+            <option value="CT">Connecticut</option>
+            <option value="DE">Delaware</option>
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="IN">Indiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+			#end
+		##填写任意内容，侦听需重新填加 A侦听已内置
+			#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
 		#end
 	#end
 	#@td()
-		#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-				#@optionItem("")请选择#end
-				#@optionItem("")请选择#end
-				#@optionItem("")请选择#end
+		#@Tselect2F()
+			#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+            <option value="CT">Connecticut</option>
+            <option value="DE">Delaware</option>
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="IN">Indiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+			#end
+		##填写任意内容，侦听需重新填加 A侦听已内置
+			#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
 		#end
 	#end
 	#@td()

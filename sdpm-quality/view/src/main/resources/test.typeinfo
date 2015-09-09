@@ -13,7 +13,7 @@
             	    <info name="bugEditionInfo" title="基本信息" resource="qualityBugInfo" infoParameter="" url="/testManagement/page/bugRightInfo.pagelet"/>
             	</type-info>
       <type-info name="qualityCaseInfo" >
-            	    <info name="caseEditionInfo" title="基本信息" resource="qualityCaseInfo" infoParameter="" url="/testManagement/page/tabledemo/bugEditInfo.pagelet"/>
+            	    <info name="caseEditionInfo" title="基本信息" resource="qualityCaseInfo" infoParameter="" url="/testManagement/page/tabledemo/caseEditInfo.pagelet"/>
             	</type-info>
      <type-info name="qualityVersionInfo" >
             	    <info name="versionEditionInfo" title="基本信息" resource="qualityVersionInfo" infoParameter="" url="/testManagement/page/tabledemo/versionRightInfo.pagelet"/>
