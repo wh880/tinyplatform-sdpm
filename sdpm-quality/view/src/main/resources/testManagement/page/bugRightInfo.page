@@ -2,16 +2,14 @@
 
 
 #@div(divClass="tabInfocontents")	
-	#@tabWithInit("tab_demo1")
+	#@tabWithInit("tab_info")
 		#@tabHead()
 			#@tabHeadCol()基本信息#end
 			#@tabHeadCol()项目/需求/任务#end
 		#end
 
 		#@tabBodyCol("tabBorder")
-			#@tableHover()
-			       		#@thead()
-			       		#end
+			#@table()
 			       		#@tbody()
 			       			#@tr()
 								#@td()所属产品#end
@@ -73,7 +71,7 @@
 				 #end
 			#end
 		#@tabBodyCol("tabBorder")
-			#@tableHover()
+			#@table()
 			       		#@thead()
 			       		#end
 			       		#@tbody()
@@ -95,15 +93,16 @@
 						
 	#end
 #end
+<br>
 #@div(divClass="tabInfocontents")
-	#@tabWithInit("tab_demo1")
+	#@tabWithInit("tab_info1")
 		#@tabHead()
 			#@tabHeadCol()BUG的一生#end
 			#@tabHeadCol()其他相关#end
 		#end
 		
 		#@tabBodyCol("tabBorder")
-			#@tableHover()
+			#@table()
 			       		#@thead()
 			       		#end
 			       		#@tbody()
@@ -140,7 +139,7 @@
 		#end
 		
 		#@tabBodyCol("tabBorder")
-			#@tableHover()
+			#@table()
 			       		#@thead()
 			       		#end
 			       		#@tbody()
