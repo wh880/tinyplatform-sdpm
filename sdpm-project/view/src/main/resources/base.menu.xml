@@ -5,8 +5,8 @@
 		
 	<menu id="demand" parent-id="project" name="需求" href="/project/demand/index.page" icon="" sort="1" isShow="1" permission="Permission">
 	</menu>
-	
-	<menu id="bug" parent-id="project" name="Bug" href="/project/bug/index.page" icon="" sort="1" isShow="1" permission="Permission">
+
+    <menu id="bug" parent-id="project" name="Bug" href="/project/bug/index.page" icon="" sort="1" isShow="1" permission="Permission">
 	</menu>
 	
 	<menu id="version" parent-id="project" name="版本" href="/project/version/index.page" icon="" sort="1" isShow="1" permission="Permission">
