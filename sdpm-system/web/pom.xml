@@ -1,78 +1,42 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
          xmlns="http://maven.apache.org/POM/4.0.0">
-    <modelVersion>4.0.0</modelVersion>
+         
+  <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.tinygroup</groupId>
-        <artifactId>sdpm</artifactId>
+        <artifactId>sdpm-system</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>sdpm-web</artifactId>
-    <name>sdpm-web</name>
+    <artifactId>sdpm-system-web</artifactId>
+    <name>sdpm-system-web</name>
     <packaging>war</packaging>
     <url>http://maven.apache.org</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--可以自定义标签对,可以在其它地方用{标签名引用}-->
+    </properties>
     <dependencies>
         <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-common-common</artifactId>
-            <version>${tiny_sdpm_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-org-view</artifactId>
-            <version>${tiny_sdpm_version}</version>
-        </dependency>
-         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-system-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-common-view</artifactId>
-            <version>${tiny_sdpm_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-service-view</artifactId>
-            <version>${tiny_sdpm_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-quality-view</artifactId>
-            <version>${tiny_sdpm_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-document-view</artifactId>
-            <version>${tiny_sdpm_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-product-view</artifactId>
-            <version>${tiny_sdpm_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-productLine-view</artifactId>
-            <version>${tiny_sdpm_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-project-view</artifactId>
-            <version>${tiny_sdpm_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-statistic-view</artifactId>
-            <version>${tiny_sdpm_version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.validate</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+         <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>sdpm-common-common</artifactId>
+          <version>${tiny_sdpm_version}</version>
+     	 </dependency>
+        <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>sdpm-common-view</artifactId>
+          <version>${tiny_sdpm_version}</version>
+     	 </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.templateweblayer</artifactId>
@@ -163,4 +127,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
