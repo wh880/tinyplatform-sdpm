@@ -9,4 +9,13 @@
     	<type-info name="qualityCaseEdition" >
             	    <info name="CaseEditionInfo" title="基本信息" resource="qualityCaseEdition" infoParameter="" url="/testManagement/page/tabledemo/editioncasepaging.pagelet"/>
             	</type-info>
+			<type-info name="qualityBugInfo" >
+            	    <info name="bugEditionInfo" title="基本信息" resource="qualityBugInfo" infoParameter="" url="/testManagement/page/bugRightInfo.pagelet"/>
+            	</type-info>
+      <type-info name="qualityCaseInfo" >
+            	    <info name="caseEditionInfo" title="基本信息" resource="qualityCaseInfo" infoParameter="" url="/testManagement/page/tabledemo/bugEditInfo.pagelet"/>
+            	</type-info>
+     <type-info name="qualityVersionInfo" >
+            	    <info name="versionEditionInfo" title="基本信息" resource="qualityVersionInfo" infoParameter="" url="/testManagement/page/tabledemo/versionRightInfo.pagelet"/>
+            	</type-info>
 </type-infos>

@@ -10,7 +10,8 @@
 					#@th()所属产品#end
 					#@td()#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
 						#@optionItem("")请选择#end
-					#end</a>#end
+					#end
+					#end
 				#end
 				#@tr()
 					#@th()所属模块#end
@@ -22,11 +23,11 @@
 						#end
 						#@validateDiv("col-2")#end
 					#end
+
 				#end
-				#tr()
+				
 				#@th()相关需求#end
 
-			#end
 			#@tr()
 				#@th()用例类型#end
 				#@td()#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
@@ -75,7 +76,7 @@
 			#end
 
 		#end
-
+		#end
 	#end
 	#@div(divClass="infoContent")
         <p class="titleName">创建编辑</p>

@@ -1,0 +1,38 @@
+
+#@tinyForm("thisform" "url" "post" {"class":""})
+	<div class="infoContent">
+    	<p class="titleName">基本信息</p>
+    	#@table("adjustTable")
+    		#@tbody()
+    			#@tr()
+    				#@th()所属项目#end
+    				#@td()
+    				<a href="${TINY_CONTEXT_PATH}/project/demand/index.page">第20周工作项目#end
+    			#end
+    			#@tr()
+    				#@th()版本#end
+    				#@td()Trunk#end
+    			#end
+    			#@tr()
+    				#@th()负责人#end
+    				#@td()admin#end
+    			#end
+    			#@tr()
+    				#@th()优先级#end
+    				#@td()0#end
+    			#end
+    			#@tr()
+    				#@th()开始日期#end
+    				#@td()2015-1-1#end
+    			#end
+    			#@tr()
+    				#@th()结束日期#end
+    				#@td()2015-9-9#end
+    			#end
+    			#@tr()
+    				#@th()当前状态#end
+    				#@td()未开始#end
+    			#end
+    		#end
+    	#end
+#end
