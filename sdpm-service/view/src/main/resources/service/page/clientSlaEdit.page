@@ -5,7 +5,13 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
     #@noRespsGridSystem()
         #@gridSysRow()
-            #@colLabel("col-3")客户ID：#end
+            #@colLabel("col-3")协议标题：#end
+            #@gridSysCol(5)
+                #tinyInput("text" "标题" ""{"datatype":"","id":"","class":"input-text"})
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-3")协议ID：#end
             #@gridSysCol(5)
                 #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
                     #@tinyOptionItem("zh")001#end
@@ -15,19 +21,13 @@
             #end
         #end
         #@gridSysRow()
-            #@colLabel("col-3")客户名称：#end
+            #@colLabel("col-3")产品名称：#end
             #@gridSysCol(5)
                 #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                    #@tinyOptionItem("zh")阿里巴巴#end
-                    #@tinyOptionItem("en")恒生#end
-                    #@tinyOptionItem("ta")网易#end
+                    #@tinyOptionItem("zh")支付宝#end
+                    #@tinyOptionItem("en")余额宝#end
+                    #@tinyOptionItem("ta")财付通#end
                 #end
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-3")协议标题：#end
-            #@gridSysCol(5)
-                #tinyInput("text" "标题" ""{"datatype":"","id":"","class":"input-text"})
             #end
         #end
         #@gridSysRow()
@@ -38,6 +38,22 @@
                     #@tinyOptionItem("en")2.1#end
                     #@tinyOptionItem("ta")3.0#end
                 #end
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-3")服务级别：#end
+            #@gridSysCol(5)
+                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                    #@tinyOptionItem("zh")高级#end
+                    #@tinyOptionItem("en")中级#end
+                    #@tinyOptionItem("ta")低级#end
+                #end
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-3")服务级别：#end
+            #@gridSysCol(8)
+                #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end
             #end
         #end
         #@gridSysRow()

@@ -20,7 +20,7 @@
     #end
 #end
 #@tinyForm("thisform" "" "" {"class":"test"})
-<div style="width:70%;float:left" class="pageleftpart">
+<div style="width:80%;margin-left: 200px;" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">新建客户</p>
 
@@ -44,33 +44,24 @@
             #@sdpmItem("客户部门")
                 #tinyInput("text" "客户部门" "请输入部门全称"{"datatype":"","id":"","class":"input-text"})
             #end
-            #@validateDiv("col-2 validmsg")#end
         #end
 
         #@elementItem()
             #@sdpmItem("客户登记人")
                 #tinyInput("text" "客户登记人" ""{"datatype":"","id":"","class":"input-text"})
             #end
-            #@validateDiv("col-2 validmsg")#end
         #end
 
         #@elementItem()
             #@sdpmItem("客户联系人")
                 #tinyInput("text" "客户联系人" ""{"datatype":"","id":"","class":"input-text"})
             #end
-            #@validateDiv("col-5 validmsg")#end
         #end
 
-        #@elementItem()
-            #@colLabel()客户电话：#end
-            #tinyInput("text" "客户电话" ""{"datatype":"/^[0-9\.]{11,12}$/","nullmsg": "请输入合法的数字","id":"","class":""})
-            #@validateDiv("col-2 validmsg")#end
-        #end
         #@elementItem()
             #@sdpmItem("客户电话")
                 #tinyInput("text" "客户电话" ""{"datatype":"/^[0-9\.]{11,12}$/","nullmsg": "请输入合法的数字","id":"","class":""})
             #end
-            #@validateDiv("col-2 validmsg")#end
         #end
 
         #@elementItem()
@@ -79,7 +70,6 @@
                     "regionday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
                     "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
             #end
-            #@validateDiv("col-2")#end
         #end
 
         #@elementItem()
@@ -91,7 +81,6 @@
                     #@tinyRadioes("sex" "women" "women")失效#end
                 #end
             #end
-            #@validateDiv("col-2")#end
         #end
         <br/>
     </div>
@@ -115,29 +104,29 @@
 
 #end
 
-<script type="text/javascript">
-    $(function () {
-        $("form[name=thisform").Validform({
-            tiptype: function (msg, o, cssctl) {
-                var objtip = o.obj.parent().parent().siblings(".validmsg");
-                cssctl(objtip, o.type);
-                objtip.text(msg);
-            },
-            ajaxPost: true,
-            beforeSubmit: function (curform) {
-                //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
-                //这里明确return false的话表单将不会提交;
-            },
-            callback: function (data) {
-                if (data.status == "y") {
-                    setTimeout(function () {
-                        $.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
-                    }, 2000);
-                }
-            }
-        });
-    });
-</script>
+##<script type="text/javascript">
+##    $(function () {
+##        $("form[name=thisform").Validform({
+##            tiptype: function (msg, o, cssctl) {
+##                var objtip = o.obj.parent().parent().siblings(".validmsg");
+##                cssctl(objtip, o.type);
+##                objtip.text(msg);
+##            },
+##            ajaxPost: true,
+##            beforeSubmit: function (curform) {
+##                //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
+##                //这里明确return false的话表单将不会提交;
+##            },
+##            callback: function (data) {
+##                if (data.status == "y") {
+##                    setTimeout(function () {
+##                        $.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
+##                    }, 2000);
+##                }
+##            }
+##        });
+##    });
+##</script>
 <script type="text/javascript">
     $("select.select2").select2();
 </script>
