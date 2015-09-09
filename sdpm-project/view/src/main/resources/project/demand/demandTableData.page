@@ -12,8 +12,8 @@
 #for(var:[1..pagesize])
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="#"> 习近平${page}</a>#end
-	#@td()<a href="#"> 北京</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"> 习近平${page}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"> 北京</a>#end
 	#@td()中南海#end
 	#@td()67#end
 	#@td()2013/03/25#end
