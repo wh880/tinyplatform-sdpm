@@ -23,13 +23,18 @@
             #@tr()
                 #@th()对象#end
                 #@td()
-                    #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                        #@optionItem("")需求#end
-                        #@optionItem("")计划#end
-                        #@optionItem("")发布#end
-                        #@optionItem("")任务#end
-                        #@optionItem("")Build#end
-                        #@optionItem("")用例#end
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="IN">Indiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        #end
+                    ##填写任意内容，侦听需重新填加 A侦听已内置
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                     #end
                 #end
             #end
