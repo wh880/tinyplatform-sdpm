@@ -1,6 +1,9 @@
 
-#@tinyForm("thisform" "" "" {"class":"test"})
 
+#@tinyForm("thisform" "" "" {"class":"test"})
+<div style="width:80%;margin-left: 150px;" class="pageleftpart">
+   <div class="infoContent">
+        <p class="titleName">复制</p>
 	 #@elementItem()
         #@colLabel()所属产品：#end
 		<span class="tinyFormsty">
@@ -59,14 +62,16 @@
                 #end
                 </span>
     #end
+    
 
      #@elementItem()
         #@colLabel()需求名称#end
-	        #@formControlDiv("col-8")
+	        #@formControlDiv("col-4")
 	          #tinyInput("text" "email" ""{"datatype":"e","nullmsg":"请输入名称！","id":"email","class":"input-text"})
 	        #end
         #@validateDiv("col-2")#end
       #end
+     
       
      #@elementItem()
 	    #@colLabel()需求描述#end
@@ -103,13 +108,7 @@
 	        #end
         #@validateDiv("col-2")#end
       #end
-      
-      
-      
-      
-      
-
-      
+          
       #@elementItem()
         #@colLabel()由谁评审#end
 	        #@formControlDiv("col-4")
@@ -118,10 +117,7 @@
 				#@tinyOptionItem("en")22#end
 				#@tinyOptionItem("ta")3#end
 			
-			
-#*				 #@checkboxBox()
-		          		#@tinyCheckbox("checkbox2" "sw" {"nullmsg":"爱好不能为空！","datatype":"*"})上网#end
-		         #end*#
+
 		     #end
 	         
         #end
@@ -130,7 +126,7 @@
       
     #@elementItem()
         #@colLabel()抄送给#end
-	        #@formControlDiv("col-8")
+	        #@formControlDiv("col-4")
 	          #tinyInput("text" "email" ""{"datatype":"e","nullmsg":"请输入名称！","id":"email","class":"input-text"})
 	        #end
         #@validateDiv("col-2")#end
@@ -138,7 +134,7 @@
     
      #@elementItem()
         #@colLabel()关键词#end
-	        #@formControlDiv("col-8")
+	        #@formControlDiv("col-4")
 	          #tinyInput("text" "email" ""{"datatype":"e","nullmsg":"请输入名称！","id":"email","class":"input-text"})
 	        #end
         #@validateDiv("col-2")#end
@@ -152,4 +148,21 @@
        #end
         #@validateDiv("col-2")#end
     #end
+    </div>
+     #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="backBtn"><a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page" >返回</a></button>
+            </div>
+            <div class="col-5"></div>
+       
+   		 #end 
+    </div> 
 #end
+
