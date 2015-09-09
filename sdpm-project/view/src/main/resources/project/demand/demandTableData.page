@@ -22,7 +22,7 @@
 	#@td()2013/03/25#end
 	#@td()￥320,800#end
 	 #@td()
-		 #foreach(m:menuManger.getScopeMenus("demand-op"))
+		 #foreach(m:menuManager.getScopeMenus("demand-op"))
          <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 		 #end
 ##	 	<a href="${TINY_CONTEXT_PATH}/project/task/add.page" title="分解任务">#buttonIcon(iconClass="icon-smile")</a>
