@@ -1,4 +1,6 @@
-##import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
+#import("/org/tinygroup/table/components/togglebox.component")
+#import("/org/tinygroup/compose/components/compose_typography.component")
+#import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
@@ -21,7 +23,7 @@
 				
 			#end
 			
-			#@tinyTableContent("../data/datalist.pagelet") ##取数据地址 总数据
+			#@tinyTableContent("data/datalist.pagelet") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
