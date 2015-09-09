@@ -27,6 +27,13 @@
         #@validateDiv("col-2")#end
     #end
 
+      #@elementItem()
+            #@div(divClass="col-10 col-offset-2 form-inline")
+                #tinyInput("submit" "submitbtn" "&nbsp;保存&nbsp;" {"class":"btn btn-primary"})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                #tinyInput("submit" "submitbtn" "&nbsp;返回&nbsp;" {"class":"btn btn-default"})
+            #end
+        #end
+
 #end
 
 
