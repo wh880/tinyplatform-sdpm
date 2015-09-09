@@ -1,0 +1,14 @@
+#include("/productLine/page/event/common.page")
+
+		#@div(divClass="operationbar")
+			<span class="f">
+				#foreach(m in menuManager.getChildMenus("holiday"))
+						<a href="${TINY_CONTEXT_PATH}${m.href}" class="active_btn">${m.name}</a>
+				#end
+			</span>	
+				
+				
+				#div(divClass="clearfix")
+		#end
+		
+		#pageContent

@@ -22,6 +22,11 @@
             <artifactId>sdpm-org-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+         <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-system-view</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-common-view</artifactId>
