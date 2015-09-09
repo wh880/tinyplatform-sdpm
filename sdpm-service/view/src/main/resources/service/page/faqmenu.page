@@ -49,11 +49,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 				</span>
                 #end
 ##以下包含在faqquestion.page里面，加载faq页面问题
-     #@div()
-       #@tabHead()
      #include("/service/page/faqquestion.page")
- #end
-     #end
  ##以上包含在faqquestion.page里面，加载faq页面问题
             #end
 
