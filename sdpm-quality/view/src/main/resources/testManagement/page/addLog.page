@@ -1,6 +1,6 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 
-#set(name="qualityVersion")
+
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
 			#@div(divClass="dropdownBox")
@@ -85,10 +85,10 @@
 #end
             <div class="col-5">
                 <button style="float: right" type="submit" id="submit" class="commitBtn">
-                	<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionSituation.page">保存</a></button>
+                	保存</button>
             </div>
             <div class="col-1">
-                <button style="float: right" type="submit" id="submit" class="backBtn">
-                	<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionSituation.page">返回</a></button>
+            	<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionSituation.page">
+                <button style="float: right" type="button" id="back" class="backBtn">返回</button></a>
             </div>
 

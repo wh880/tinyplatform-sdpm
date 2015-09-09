@@ -4,7 +4,7 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 <style>
     .select_boxes{margin-top:0}
-    .margin-top {margin-top:8px}
+#*    .margin-top {margin-top:8px;float:left;margin-left:18px}*#
 </style>
 
 
@@ -26,26 +26,22 @@
 		#@p(pClass="title_sty")提Bug#end
 		#@tinyForm("thisform" "url" "post" {"class":""})
 			#@elementItem()
-				#@colLabel(labelClass="margin-top")产品模块：#end
-				#@formControlDiv("col-6")
-				#@table()
-					#@tr()
-						#@td()
+				#@colLabel()产品模块：#end
+				#@formControlDiv("col-8")
+					#@div(divClass="col-6")
 					#@tinySelect("lang" "1" {"class":"select2"})
 							#@tinyOptionItem("1")日本三菱#end
 							#@tinyOptionItem("2")销售系统#end
 							#@tinyOptionItem("3")国产需求#end
-						#end
-						#end
-						#@td()
+					#end
+					#end
+					#@div(divClass="col-6")
 					#@tinySelect("lang" "zh" {"class":"select2"})
 							#@tinyOptionItem("zh")/首页#end
 							#@tinyOptionItem("en")/轮播图#end
 							#@tinyOptionItem("ta")/导航#end
-						#end
-						#end
-						#end
-						#end
+					#end
+					#end
 #*					#buttonRadiusDefault(caption="维护模板")
 					#buttonRadiusDefault(caption="刷新")*#
 				#end

@@ -23,7 +23,8 @@
 
 #end
 	#@div(divClass="bugBox")
-		#@p(pClass="title_sty")编辑版本#end
+		#@p(pClass="title_sty")
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionInfo.page">版本名称</a>>编辑版本#end
 		#@tinyForm("thisform" "url" "post" {"class":""})
 			#@elementItem()
 				#@colLabel()所属项目：#end

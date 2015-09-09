@@ -5,7 +5,7 @@
 #import("/org/tinygroup/fold/components/fold.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 
-#set(name="qualityBug")
+#set(name="qualityVersion")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
 			#@div(divClass="dropdownBox")
@@ -23,7 +23,7 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
 	<div style="width:67%;float:left">
     	<div class="infoContent">
-    		<p class="titleName">关闭</p>
+    		<p class="titleName">开始</p>
     		<div class="RTtitle">
             	<button type="submit" id="submit" class="commitBtn">保存</button>
         	</div>
@@ -44,7 +44,7 @@
             </div>
             <div class="col-1"></div>
             <div class="col-1">
-                <a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">
+                <a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page">
                 <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
             </div>
             <div class="col-5"></div>
