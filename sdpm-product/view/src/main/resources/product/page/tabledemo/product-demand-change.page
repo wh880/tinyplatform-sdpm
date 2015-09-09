@@ -7,8 +7,6 @@
 #!set(linkName="demand")
 
 #@tinyForm("thisform" "" "" {"class":"test"})
-
-
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">变更</p>
@@ -19,11 +17,16 @@
 
       #@elementItem()
             #@sdpmItem("由谁评审")
-                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                    #@tinyOptionItem("zh")admin#end
-                    #@tinyOptionItem("en")TOM#end
-                    #@tinyOptionItem("ta")JACK#end
+                #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">Admin</option>
+                        <option value="DE">Demo</option>
+                        <option value="FL">Me</option>
+                    #end
+                
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 #end
+
             #end
         #end
     

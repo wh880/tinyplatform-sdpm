@@ -19,6 +19,7 @@ public class MenuFileProcessor extends AbstractFileProcessor {
 
 
     public void process() {
+
         XStream stream = XStreamFactory.getXStream(MenuManager.XSTREAN_PACKAGE_NAME);
         for (FileObject fileObject : deleteList) {
             logger.logMessage(LogLevel.INFO, "正在删除菜单menu文件[{0}]",

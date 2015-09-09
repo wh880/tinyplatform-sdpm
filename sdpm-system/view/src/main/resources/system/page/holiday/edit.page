@@ -1,0 +1,54 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/fold/components/fold.component")
+#!set(linkName="demand")
+#@tinyForm("thisform" "" "" {"class":"test"})
+<div style="width:70%;float:left" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">编辑</p>
+ 
+
+     #@div(divClass="infoContent")
+	        <p class="titleName">描述</p>
+	       	<div>
+	       		这里要描述需求的内容
+	       	</div>
+		#end
+
+		
+		
+			#@elementItem("" "edui-Box")
+         				<b class="titleNames">备注</b>
+					#@formControlDiv("col-12")
+					#@Teditor("content2" "content2" {"initialFrameHeight":"300" ,"datatype":"*10-300"})#end
+					#end
+       				#@validateDiv("col-4")#end
+    		#end
+ </div>
+
+ 
+    
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="backBtn"><a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" >返回</a></button>
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
+    <br>
+</div>
+#end
+
+
+<div style="width:30%;float:right">
+		#TypeInfo("holiday-edit")
+</div>

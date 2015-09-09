@@ -1,36 +1,32 @@
+
+	
+	 #@tinyForm("thisform" "" "" {"class":"test"})	 
 	#@div(divClass="infoContent")
 	        <p class="titleName">基本信息</p>
 	        
 	       	<ul>
-	      <li>	
-#@tinyForm("thisform" "" "" {"class":"test"})
-    #@elementItem()
+	      <li>	  
+	      #@elementItem()
 	#@colLabel()产品：#end
 	#@formControlDiv("col-8")
-	#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-	#@tinyOptionItem("zh")产品1#end
-	#@tinyOptionItem("en")产品2#end
-	#@tinyOptionItem("ta")产品3#end
-	#end
+	#@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">产品A</option>
+                        <option value="DE">产品B</option>
+                        <option value="FL">产品C</option>
+                        <option value="GA">产品D</option>
+                    #end
+                
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
+
 	#end
 	#@validateDiv("col-2")#end
 	#end
-		#end
+		
+	
 </li>
-	       		<li>
-	     #@elementItem()
-		#@colLabel()所属计划：#end
-		#@formControlDiv("col-8")
-			#@tinySelect("lang" "zh" {"class":"input-text ","rel":"22"})
-				#@tinyOptionItem("zh")A001#end
-				#@tinyOptionItem("en")B001#end
-				#@tinyOptionItem("ta")C001#end
-			#end
-		#end
-		#@validateDiv("col-2")#end
-		#end
-	       		</li>
-	       		
+       		
 	       		<li>
 	       			    #@elementItem()
 		#@colLabel()所属模块：#end
@@ -44,6 +40,7 @@
 		#@validateDiv("col-2")#end
 	#end
 	       	</li>
+	       		
 	       		       		<li>
 	       			    #@elementItem()
 		#@colLabel()来源：#end
@@ -54,18 +51,20 @@
 				#@tinyOptionItem("ta")3#end
 				#@tinyOptionItem("ta")4#end
 				#@tinyOptionItem("ta")5#end
-				#@tinyOptionItem("ta")6#end
+			#@tinyOptionItem("ta")6#end
 			#end
 		#end
 		#@validateDiv("col-2")#end
 	#end
-	       	</li>
-	   <li>
-	         #@elementItem()
+       	</li>
+       		
+   <li>
+         #@elementItem()
 		#@colLabel()当前状态：#end
 		<p>草稿</p>
 	#end
 	   </li>
+  
 	  <li>
 	    #@elementItem()
 		#@colLabel()优先级：#end
@@ -80,41 +79,45 @@
 		#@validateDiv("col-2")#end
 	#end
 	    </li>
+  
 	    <li> 
   #@elementItem()
-        #@colLabel()预计工时：#end
-        #@formControlDiv("col-8")
-          #tinyInput("text" "yujigongshi" ""{"id":"yujigongshi","class":"input-text"})
+       #@colLabel()预计工时：#end
+       #@formControlDiv("col-8")
+        #tinyInput("text" "yujigongshi" ""{"id":"yujigongshi","class":"input-text"})
         #end
-        #@validateDiv("col-2")#end
-      #end
+       #@validateDiv("col-2")#end
+     #end
 	    </li>
-	    <li> 
+	    	
+    <li> 
   #@elementItem()
         #@colLabel()关键词：#end
-        #@formControlDiv("col-8")
+       #@formControlDiv("col-8")
           #tinyInput("text" "guanjianci" ""{"id":"guanjianci","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
       #end
+        #@validateDiv("col-2")#end
+     #end
 	    </li>
+ 
 	  <li>
-	  #@tinyForm("thisform" "" "" {"class":"test"})	  	
+ 	
 	  #@elementItem()
         #@colLabel()抄送给：#end
-        #@formControlDiv("col-8")
-             #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22","multiple":"multiple"})
+       #@formControlDiv("col-8")
+            #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22","multiple":"multiple"})
 			#@tinyOptionItem("zh")A#end
 			#@tinyOptionItem("en")B#end
 			#@tinyOptionItem("ta")C#end
 		#end
-        #end
-        #@validateDiv("col-2")#end
+       #end
+      #@validateDiv("col-2")#end
     #end
-        #end
+       
 			</ul>
+						#end
       #end
-      
+     
       #@div(divClass="infoContent")
 	        <p class="titleName">需求的一生</p>
 	       	<ul>
@@ -124,17 +127,22 @@
 		<p>Admin</p>
 		#end
 	   </li>
-	       		
+       		
 	<li>	
     #@tinyForm("thisform" "" "" {"class":"test"})
     #@elementItem()
 	#@colLabel()指派给：#end
 	#@formControlDiv("col-8")
-	#@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-	#@tinyOptionItem("zh")你#end
-	#@tinyOptionItem("en")我#end
-	#@tinyOptionItem("ta")他#end
-	#end
+	#@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">开发人员</option>
+                        <option value="DE">测试人员</option>
+                        <option value="FL">实施人员</option>
+                    #end
+                
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
+
 	#end
 	#@validateDiv("col-2")#end
 	#end
@@ -142,42 +150,49 @@
 	</li>
 			</ul>
 	
-				</ul>
-				
-      #end
+			</ul>
+			
+     #end
       
+      #@tinyForm("thisform" "" "" {"class":"test"})	 
       #@div(divClass="infoContent")
-	        <p class="titleName">其他相关</p>
+        <p class="titleName">其他相关</p>
 <ul>
 	    <li> 
   #@elementItem()
         #@colLabel()重复需求：#end
         #@formControlDiv("col-8")
-          #tinyInput("text" "yujigongshi" ""{"id":"yujigongshi","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
+         #tinyInput("text" "yujigongshi" ""{"id":"yujigongshi","class":"input-text"})
+      #end
+       #@validateDiv("col-2")#end
       #end
 	    </li>
 	    
 	     <li> 
   #@elementItem()
-        #@colLabel()相关需求：#end
+       #@colLabel()相关需求：#end
         #@formControlDiv("col-8")
-          #tinyInput("text" "yujigongshi" ""{"id":"yujigongshi","class":"input-text"})
+         #tinyInput("text" "yujigongshi" ""{"id":"yujigongshi","class":"input-text"})
         #end
-        #@validateDiv("col-2")#end
-      #end
+       #@validateDiv("col-2")#end
+    #end
 	    </li>
-	    
+    
 	    <li> 
   #@elementItem()
-        #@colLabel()细分需求：#end
-        #@formControlDiv("col-8")
+       #@colLabel()细分需求：#end
+       #@formControlDiv("col-8")
           #tinyInput("text" "yujigongshi" ""{"id":"yujigongshi","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
-      #end
+     #end
 	    </li>
 	    
 </ul>				
       #end
+            #end
+     
+     #@div(divClass="infoContent")
+        <p class="titleName">历史记录</p>
+       #include("/product/page/tabledemo/historyrecord.page")
+    #end

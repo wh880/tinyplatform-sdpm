@@ -35,6 +35,34 @@
         <button type="submit" id="submit" class="commitBtn">保存</button>
     </div>*#
 
+
+        #@elementItem()
+            #@sdpmItem("客户联系人")
+                #tinyInput("text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":
+                    "用户名不能为空！","id":"username","class":"input-text"})
+            #end
+        #end
+
+
+        #@elementItem()
+            #@sdpmItem("测试")
+                #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="IN">Indiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                    #end
+                ##填写任意内容，侦听需重新填加 A侦听已内置
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
+
+            #end
+        #end
+
         #@elementItem()
             #@sdpmItem("指派给")
                 #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
@@ -81,9 +109,29 @@
     <br>
 </div>
 #end
-<div style="width:30%;float:right">
+<div style="width:30%;position: fixed;top: 153px;right: 10px;" class="rightpart">
     #@div(divClass="infoContent")
         <p class="titleName">历史记录</p>
         #include("/project/recordlist.page")
     #end
 </div>
+<script type="text/javascript">
+
+    $(function(){
+        var minTop=96;
+        var maxTop=153;
+        var currenttop=maxTop;
+        function doscroll(){
+            currenttop=maxTop-parseInt($(window).scrollTop());
+            if(currenttop<minTop) currenttop=minTop;
+            $(".rightpart").css("top",currenttop+"px");
+        }
+        var timer_scroll;
+        $(window).scroll(function(){
+            clearTimeout(timer_scroll);
+            setTimeout(function() {
+                doscroll();
+            },10);
+        })
+    })
+</script>
