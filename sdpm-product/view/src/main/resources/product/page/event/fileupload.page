@@ -8,7 +8,7 @@
 .treeList .btn-add{margin-top:10px;margin-left:6px;}
 .searchItemBox{min-height:100px;padding:5px; max-height:164px; overflow:auto; border:#ddd 1px solid; clear:both;}
 .searchItemBox .col-w1{width:20%; float:left; margin-right:8px;}
-.searchItemBox .col-w2{width:80%;margin-right:8px;}
+.searchItemBox .col-w2{width:77%;margin-right:8px;}
 .searchItemBox .col-w3{width:5%;}
 .searchItemBox .col-m{ margin:2px 6px 2px 2px; width:56px;text-align:right;}
 .searchItemBox .col-btn .btn,.col-btn{padding-right:5px;}
@@ -99,7 +99,6 @@ $(document).ready(function(){
 <div class="attributeList">
 	<ul class="treeList">
 		<li class="alternativeBox">
-		<div class="col-12">备选属性：</div>
 #*		<div class="col-4">
 			#@selectRadiusBox()
 			    #@select(selectName="itemBarName",selectId="selectItems")
@@ -137,25 +136,7 @@ $(document).ready(function(){
 	#div(divClass="clearfix")
 		<div class="itemTemplate" style="display:none">
 			<div class="searchItem">
-			###@div(divClass="fl col-m")<input type="checkbox" name="idCheck" value="">#end
-#*			<div class="col-w3">
-				#@select(selectName="itemRela")
-					#@optionItem("1")或者#end
-					#@optionItem("2")并且#end
-				#end
-				并且
-			</div>*#
-#*			<div class="fl col-m itemName">性别</div>
-			<div class="col-w1">
-				#@select(selectName="demo2")
-					#@optionSelected("")请选择#end
-					#@optionItem("1")等于#end
-					#@optionItem("1")不等于#end
-				#end
-			</div>
-			<div class="col-w1">
-				#inputRadiusSmallText(inputPlaceHolder="")
-			</div>*#
+			
 			<div class="col-w2">
 				#inputRadiusSmallText(inputPlaceHolder="得分")
 			</div>
@@ -171,42 +152,17 @@ $(document).ready(function(){
 		</div>
 	<div class="searchItemBox">
 		<div class="searchItem"  id="list1">
-#*			<div class="col-w3">
-			    #@select(selectName="demo2")
-			   		#@optionItem("1")或者#end
-			    	#@optionItem("1")并且#end
-			    #end
-			    	并且
-		    </div>*#
-#*		   <div class="fl col-m">学历</div>
-		    <div class="col-w1">
-	 			#@select(selectName="demo2")
-					#@optionSelected("")请选择#end
-			        #@optionItem("1")等于#end
-		        	#@optionItem("1")不等于#end
-			    #end
+
+			<div class="col-9">
+                 <div class="col-6" style="float:left;">
+                 	<input type="file" style="width:100%"/>
+                 </div>
+				 <div class="col-6" style="float:right;">   
+				   <input type="text" class="form-control" placeholder="标题：" tabindex="-1" style="width:100%"/>
+			     </div> 
+				
 			</div>
-			<div class="col-w1">
-				#@select(selectName="demo2")
-					#@optionSelected("")请选择#end
-			        #@optionItem("1")博士后#end
-		        	#@optionItem("1")博士#end
-		        	#@optionItem("1")硕士#end
-		        	#@optionItem("1")本科#end
-		        	#@optionItem("1")专科#end
-		        	#@optionItem("1")中专#end
-		        	#@optionItem("1")高中#end
-		        	#@optionItem("1")初中#end
-		        	#@optionItem("1")小学#end
-		        	#@optionItem("1")未读书#end
-			    #end
-			</div>*#
-			<div class="col-w2">
-				#inputRadiusSmallText(inputPlaceHolder="得分")
-			</div>
-#*			<div class="col-w2">
-				<input type="checkbox" value="1" name="isMust">是否必备
-			</div>*#
+			
 			<div class="col-btn del-btn">
 				<span class="btn btn-small btn-default">
 					<i class="icon-remove"> 删除</i>
@@ -214,27 +170,16 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<div class="searchItem"  id="list2">
-#*			<div class="col-w3">
-			    #@select(selectName="demo2")
-			   		#@optionItem("1")或者#end
-			    	#@optionItem("1")并且#end
-			    #end
-			    并且
-		    </div>*#
-#*		    <div class="fl col-m">年龄</div>
-		    <div class="col-w1">
-	 			#@select(selectName="demo2")
-			        #@optionSelected("")请选择#end
-			        #@optionItem("1")等于#end
-		        	#@optionItem("1")不等于#end
-			    #end
-			</div>
-			<div class="col-w1">
-				#inputRadiusSmallText(inputPlaceHolder="")
-			</div>*#
+
 			
-			<div class="col-w2">
-				#inputRadiusSmallText(inputPlaceHolder="得分")
+			<div class="col-9">
+                 <div class="col-6" style="float:left;">
+                 	<input type="file" style="width:100%"/>
+                 </div>
+				 <div class="col-6" style="float:right;">   
+				   <input type="text" class="form-control" placeholder="标题：" tabindex="-1" style="width:100%"/>
+			     </div> 
+				
 			</div>
 #*			<div class="col-w2">
 				<input type="checkbox" value="1" name="isMust">是否必备
@@ -270,8 +215,14 @@ $(document).ready(function(){
 		        	#@optionItem("1")10000以上#end
 			    #end
 			</div>*#
-			<div class="col-w2">
-				#inputRadiusSmallText(inputPlaceHolder="得分")
+			<div class="col-9">
+                 <div class="col-6" style="float:left;">
+                 	<input type="file" style="width:100%"/>
+                 </div>
+				 <div class="col-6" style="float:right;">   
+				   <input type="text" class="form-control" placeholder="标题：" tabindex="-1" style="width:100%"/>
+			     </div> 
+				
 			</div>
 #*			<div class="col-w2">
 				<input type="checkbox" value="1" name="isMust">是否必备
