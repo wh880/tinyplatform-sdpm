@@ -1,0 +1,36 @@
+
+#@tinyForm("thisform" "" "" {"class":"test"})
+     
+    #@elementItem()
+        #@colLabel()名称：#end
+        #@formControlDiv("col-6")
+          #tinyInput("text" "username" ""{"id":"username","class":"input-text"})
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+   
+
+    #@elementItem()
+    #@daterangepickerPosition()
+        #@colLabel()日期：#end
+        #@formControlDiv("col-6")
+           #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #end
+   
+     #@elementItem()
+        #@colLabel()描述：#end
+	#@formControlDiv("col-8")
+		#@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"备注不能为空！"})内容走起#end
+	#end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+    #@div(divClass="col-8 col-offset-2 form-inline")
+      #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+    #end
+	#end
+#end
