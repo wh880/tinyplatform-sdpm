@@ -17,7 +17,6 @@
         ##operationbar star
             #@div(divClass="operationbar")
             <span class="r">
-
                 #@iconOperations(
                     "#myModal" "icon-download-alt" "导出" "600" "100" "/service/page/tabledemo/slaExport.pagelet" "ml-5")
                     &nbsp导出#end

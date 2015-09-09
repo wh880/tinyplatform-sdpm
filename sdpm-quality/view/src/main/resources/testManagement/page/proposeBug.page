@@ -4,6 +4,7 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 <style>
     .select_boxes{margin-top:0}
+    .margin-top {margin-top:8px}
 </style>
 
 
@@ -25,16 +26,28 @@
 		#@p(pClass="title_sty")提Bug#end
 		#@tinyForm("thisform" "url" "post" {"class":""})
 			#@elementItem()
-				#@colLabel()产品模块：#end
-				#@formControlDiv("col-8 form-inline selectList")
-					#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-						#@optionItem("")请选择#end
-					#end
-					#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-						#@optionItem("")请选择#end
-					#end
-					#buttonRadiusDefault(caption="维护模板")
-					#buttonRadiusDefault(caption="刷新")
+				#@colLabel(labelClass="margin-top")产品模块：#end
+				#@formControlDiv("col-6")
+				#@table()
+					#@tr()
+						#@td()
+					#@tinySelect("lang" "1" {"class":"select2"})
+							#@tinyOptionItem("1")日本三菱#end
+							#@tinyOptionItem("2")销售系统#end
+							#@tinyOptionItem("3")国产需求#end
+						#end
+						#end
+						#@td()
+					#@tinySelect("lang" "zh" {"class":"select2"})
+							#@tinyOptionItem("zh")/首页#end
+							#@tinyOptionItem("en")/轮播图#end
+							#@tinyOptionItem("ta")/导航#end
+						#end
+						#end
+						#end
+						#end
+#*					#buttonRadiusDefault(caption="维护模板")
+					#buttonRadiusDefault(caption="刷新")*#
 				#end
 			#end
 			#@elementItem()
@@ -202,16 +215,27 @@
 				#end
 				#@validateDiv("col-2")#end
 			#end
-			#@divCenterAlign()
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">
-		 			#buttonRadiusDefault(caption="保存")</a>
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">
-   		 			#buttonRadiusDefault(caption="取消")</a>
-   		 	#end
+			#@elementItem()
+       		 	<div class="col-12">
+            	<div class="col-5">
+                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+            	</div>
+            	<div class="col-1"></div>
+            	<div class="col-1">
+                <a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">
+                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+           		 </div>
+            	<div class="col-5"></div>
+        		</div>
+			#end
+			<br>
 		#end
 	#end
 	#end
 
+<script>
+	$('select.select2').select2()
+</script>
 <script type="text/javascript">
     $(function(){
         $(".selectList").each(function(){

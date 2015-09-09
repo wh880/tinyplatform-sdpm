@@ -1,21 +1,110 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/button/components/button_smart.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/fold/components/fold.component")
+#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+
+#set(name="qualityBug")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+			#@div(divClass="dropdownBox")
+				#include("/testManagement/page/dropdownMenu.page")
+			#end
+			#@tabHead()
+				#include("/testManagement/page/Tab.page")
+			#end
+			
+			#@tabBodyCol("ptop-5")
+			##operationbar star
+			#@div(divClass="operationbar")
+				<span class="f">
+#*					<a href="#" class="active_btn">未关闭</a>*#
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page" class="active_btn">未关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">所有</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">指派给我</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">由我创建</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">由我解决</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">未确认</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">未指派</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">未解决</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">久未处理</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">被延期</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">需求变动</a>
+					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+				</span>
+				<span class="r">
+					#@iconOperations("#myModal" "icon-download-alt" "导入" "500" "100" "/testManagement/page/tabledemo/importBug.pagelet" "ml-5")&nbsp导入#end
+					
+					###@iconOperations("#myModal" "icon-download-alt" "导出" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")&nbsp导出#end	
+				    #@buttonGroup()			   		
+	                    #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出   #@spanCaret()#end#end
+	                    #@ulDropdownMenu("downMenuSty")
+#*	                    	#@iconOperations("#myModal" "icon-download-alt" "导出数据" "865" "200"
+						 "/page/tabledemo/user-add.pagelet" "ml-5")导出数据#end*#
+						 #@aModal("#myModal" "导出数据" "500" "100" "" "/testManagement/page/tabledemo/exportBugData.pagelet")导出数据#end
+						</br>
+						 #@aModal("#myModal" "导出模板" "500" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出模版#end
+							#@dialog("myModal")
+								#@dialogHeader()对话框标题#end
+								#@dialogBody()<p>对话框内容…</p>#end
+								#@dialogFooter()
+									#@buttonEnsure()确定#end
+								    #@buttonCancel()关闭#end
+							  	#end
+							#end
+						#end
+						
+                    #end&nbsp;
+                    
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
+                    <a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-plus")建Bug</a>
+				</span>
+				#div(divClass="clearfix")
+				#include("/testManagement/page/mulsearch.page")
+			#end
+		#end
+	#end
+#end
+			
 #@tinyForm("thisform" "" "" {"class":"test"})
-    #@elementItem()
-        #@colLabel()备注：#end
-        #@formControlDiv("col-8")
-            #@tinyueditor("content" "content")#end
+	<div style="width:67%;float:left">
+    	<div class="infoContent">
+    		<p class="titleName">关闭</p>
+    		<div class="RTtitle">
+            	<button type="submit" id="submit" class="commitBtn">保存</button>
+        	</div>
+     #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：</label></div>
+
+                <div class="col-9">
+                    #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+            </div>
         #end
-        #@validateDiv("col-2")#end
-    #end
+        <br/>
+       </div>
     #@elementItem()
-        #@colLabel()#end
-        #@formControlDiv("col-8")
-            #@div(divClass="infoContent")
-            <p class="titleName">历史记录</p>
-            ##加入后，js代码会导致页面排版混乱
-                #include("/testManagement/page/historyRecord.page")
-            #end
-        #end
-        #@validateDiv("col-2")#end
-    #end
+        <div class="col-12">
+            <div class="col-5">
+                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-1">
+                <a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">
+                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+            </div>
+            <div class="col-5"></div>
+        </div>
+	#end
+    <br >
+   </div>
+   <div style="width:32%;float:right">
+		#@div(divClass="infoContent")
+      	  <p class="titleName">历史记录</p>
+			#include("/testManagement/page/historyRecord.page")
+		#end
+	</div>
 #end
 

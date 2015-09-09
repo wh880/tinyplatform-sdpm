@@ -8,7 +8,7 @@
 </style>
 
 
-#set(name="version")
+#set(name="qualityVersion")
 #@div()
 #@tabWithInit("tab_demo" "optionsBox")
 	#@div(divClass="dropdownBox")
@@ -131,13 +131,26 @@
 				#end
 				#@validateDiv("col-2")#end
 			#end
+			<br>
+			#@elementItem()
+        <div class="col-12">
+            <div class="col-5">
 
-			#@divCenterAlign()#buttonRadiusDefault(caption="保存")
-				#buttonRadiusDefault(caption="取消")#end
-		#end
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <a href="${TINY_CONTEXT_PATH}/testManagement/page/versionSituation.page">
+                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
 	#end
 	#end
 	#end
+#end
 
 <script type="text/javascript">
     $(function(){

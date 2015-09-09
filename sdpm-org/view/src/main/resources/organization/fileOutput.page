@@ -1,18 +1,4 @@
 <style>
-    .tabLayout .tabBar span a {
-        color: #333
-    }
-
-    .tabLayout .tabBar .Current a {
-        color: #fff
-    }
-
-    .operationbar {
-        border-top: none;
-        background: #f9fafe;
-        padding: 6px 5px 6px 10px;
-    }
-
     .barBox {
         padding-top: 5px;
         float: left

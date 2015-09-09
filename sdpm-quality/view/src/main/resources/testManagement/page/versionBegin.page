@@ -1,3 +1,4 @@
+
 #@tinyForm("thisform" "" "" {"class":"test"})
 #*    #@elementItem()
         #@colLabel()备注：#end
@@ -6,17 +7,16 @@
         #end
         #@validateDiv("col-2")#end
     #end*#
-    #@table()
-    	#@tbody()
-    		#@tr()
-    			#@td()备注：#end
-    			#@td()
-    				#@Teditor("content" "content" {"initialFrameHeight":"150"})#end
-    			#end
-    		#end
-    	#end
+
+    #@elementItem()
+			#@colLabel()备注：#end
+           <div class="col-9">
+                    #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end
+           </div>
     #end
-    #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+    	<center>
+   		 #tinyInput("submit" "submitbtn" " 提交 " {"style":"width:60px","class":"btn btn-primary"})	
+   		 </center>
     #@div(divClass="infoContent")
     
     <p class="titleName">历史记录</p>

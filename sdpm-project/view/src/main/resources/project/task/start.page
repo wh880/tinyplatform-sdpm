@@ -3,110 +3,67 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
-##<style>
-##    .pageleftpart label{display:inline-block;width:90px;text-align:right}
-##</style>
-<style>
-    #*.tabLayout .tabBar span a{color:#333}
-    .tabLayout .tabBar .Current a{color:#fff}
-    .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
-    .btn-group #Dropdown{background:none;border:none;padding:0 3px}*#
-    .open #downMenuSty {
-        min-width: 75px
-    }
 
-    .input-group-addon {
-        width: 10px;
-        font-size: 20px
-    }
-
-    .caret {
-        display: inline-block;
-        width: 0;
-        height: 0;
-        margin-left: -5px;
-        margin-right: 5px;
-        vertical-align: middle;
-        border-top: 4px dashed;
-        border-right: 4px solid transparent;
-        border-left: 4px solid transparent;
-    }
-    #*h3 {line-height: 1.2;}*#
-</style>
 #include("/project/task/taskMenu.page")
 
 
-    #@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" "" "" {"class":"test"})
 
-        <div style="width:70%;float:left" class="pageleftpart">
-            <div class="infoContent">
-                <p class="titleName">指派</p>
-            ##在边框的右上角加需要的按钮或者别的，根据需求选择是否添加
-            #*<div class="RTtitle">
-                <button type="submit" id="submit" class="commitBtn">保存</button>
-            </div>*#
-
-                #@elementItem()
-                    #@colLabel()实际开始#end
-                    #@formControlDiv("skin-minimal col-5")
-                        #dateInputSimple("birthday" "" "YYYY-MM-DD")
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@elementItem()
-                    #@colLabel()总消耗#end
-                    #@formControlDiv("col-8")
-                        <input type="text" style="float:left">
-                        <span class="input-group-addon">小时</span>
-
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@elementItem()
-                    #@colLabel()预计剩余#end
-                    #@formControlDiv("col-8")
-                        <input type="text" style="float:left">
-                        <span class="input-group-addon">小时</span>
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-
-                #@elementItem()
-                    #@colLabel()备注#end
-                    #@formControlDiv("col-8")
-                        #@Teditor("content" "content" {"initialFrameHeight":"300"})Say something#end
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-
-
-                #@elementItem()
-                    #@div(divClass="col-10 col-offset-2 form-inline")
-                        #tinyInput("submit" "submitbtn" " 完成 " {"class":"btn btn-primary"})
-                    #end
-                #end
-                <br/>
-            </div>
-            #@elementItem()
-                <div class="col-12">
-                    <div class="col-5">
-
-                    </div>
-                    <div class="col-1">
-                        <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-                    </div>
-                    <div class="col-1">
-                        <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
-                    </div>
-                    <div class="col-5"></div>
+<div style="width:70%;float:left" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">指派</p>
+        #@elementItem()
+            #@sdpmItem("实际开始")
+                #dateInputSimple("birthday" "" "YYYY-MM-DD")
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("总消耗")
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="all-time">小时</span>
                 </div>
             #end
-            <br>
-        </div>
         #end
-    <div style="width:30%;float:right">
-        #@div(divClass="infoContent")
-            <p class="titleName">历史记录</p>
-            #include("/project/recordlist.page")
+        #@elementItem()
+            #@sdpmItem()
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="last-time">小时</span>
+                </div>
+            #end
         #end
+
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：</label></div>
+
+                <div class="col-9">
+                    #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+            </div>
+        #end
+        <br/>
     </div>
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
+    <br>
+</div>
+#end
+<div style="width:30%;float:right">
+    #@div(divClass="infoContent")
+        <p class="titleName">历史记录</p>
+        #include("/project/recordlist.page")
+    #end
+</div>

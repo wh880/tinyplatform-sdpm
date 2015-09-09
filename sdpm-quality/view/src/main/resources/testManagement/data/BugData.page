@@ -14,7 +14,7 @@
 #@tr()
     #@td()<input type="checkbox" value="1" name="idCheck">#end
     #@td()1#end
-    #@td()张成浩1#end
+    #@td()张三#end
     #@td()北京#end
     #@td()中南海#end
     #@td()67#end
