@@ -2,28 +2,6 @@
 #import("/org/tinygroup/zTree/components/zTree.component")
 #import("/common/component/form.component")
 #include("/common/common.page")
-<style type="text/css">
-    #showsearchmore {
-        cursor: pointer
-    }
-
-    #searchform table {
-        display: inline
-    }
-
-    #searchform td {
-        vertical-align: middle;
-        padding: 1px !important;
-    }
-
-    #searchform .form-control {
-        padding: 0;
-        line-height: 27px;
-        height: 27px;
-        margin-bottom: 3px
-    }
-
-</style>
 #set(name="organizationUser")
 #@div()
     #@div(divClass="tabLayout")

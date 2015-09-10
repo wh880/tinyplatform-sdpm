@@ -4,7 +4,7 @@
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
     #@toggleLeft({"class":"aclass"})
         #@settoggleLeftTitle()这里据说是项目名称#end
-        #@settoggleLeftBody()
+        #@settoggleLeftBody("treeLeftbox")
             #include("/project/task/moduleTree.page")
         #end
     #end

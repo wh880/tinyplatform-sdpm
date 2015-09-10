@@ -15,9 +15,6 @@
 	#@td()<a href="${TINY_CONTEXT_PATH}/organization/userTodo.page">admin</a> #end
 	#@td()1#end
 	#@td()2015-8-28#end
-	#@td()23#end
-	#@td()8.0#end
-	#@td()161#end	
-	#@td()<a href="#" title="移除">#buttonIcon(iconClass="icon-remove")</a>#end
+
 #end
 #end
