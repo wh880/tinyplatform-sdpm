@@ -76,7 +76,8 @@
         </div>
         <div style="text-align:right;margin:right">
             <a href="questiondbEdit.page">编辑</a>
-            <a class="clientDelete">删除</a>
+##            <a class="clientDelete">删除</a>
+            <a class="answerquestionDelete">删除</a>
         </div>
         #end
 
@@ -103,7 +104,7 @@
         </div>
         <div style="text-align:right;margin:right">
             <a href="questiondbEdit.page">编辑</a>
-            <a class="clientDelete">删除</a>
+            <a class="answerquestionDelete">删除</a>
         </div>
 
 
@@ -129,7 +130,7 @@
     </div>
     <div style="text-align:right;margin:right">
         <a href="questiondbEdit.page">编辑</a>
-        <a class="clientDelete">删除</a>
+        <a class="answerquestionDelete">删除</a>
     </div>
 
 
@@ -155,7 +156,7 @@
     </div>
     <div style="text-align:right;margin:right">
         <a href="questiondbEdit.page">编辑</a>
-        <a class="clientDelete">删除</a>
+        <a class="answerquestionDelete">删除</a>
     </div>
 
     <div>
@@ -180,14 +181,15 @@
     </div>
     <div style="text-align:right;margin:right">
         <a href="questiondbEdit.page">编辑</a>
-        <a class="clientDelete">删除</a>
+        <a class="answerquestionDelete">删除</a>
     </div>
 
 
         #@simpleModal("myModal4" "删除")#end
     <script>
         $(function () {
-            $(".infoContent").on("click", ".clientDelete", function () {
+##            $(".infoContent").on("click", ".clientDelete", function () {
+            $(".infoContent").on("click", ".answerquestionDelete", function () {
                 //console.log($(this).attr("itemId"))
 //            var that = this;
                 layer.confirm('确定要删除该记录？', function (index) {
