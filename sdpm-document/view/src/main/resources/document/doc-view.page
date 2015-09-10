@@ -4,15 +4,26 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
 <style> </style>
-#set(name="doc-view")
-#!set(abstract="很好看的文章！",keywords="关键字",tach="这是附件",history="1. 2015-08-25 18:00:18, 由 admin 创建。")
-
+#set(name="documentDocu")
 #@div()
-	#@tabWithInit("tab_demo")	
-	#include("dropdownMenu.page")
-	#end
-
-##operationbar start1
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/document/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("tab.page")
+        	<span class="r" style="position:relative;top:2px;height:0">
+        	        #@aModal("#myModal" "编辑" "400" "150" "" "edit-doclib.pagelet")
+        	        	#buttonIcon(iconClass="icon-edit-sign")编辑&nbsp;#end
+            		#@aModal("#myModal" "删除" "400" "150" "" "docu-delete.pagelet")
+            			#buttonIcon(iconClass="icon-remove")删除&nbsp;#end				
+					#@aModal("#myModal" "添加文档库" "865" "150" "" "add-doclib.pagelet")
+						#buttonIcon(iconClass="icon-plus-sign")添加文档库#end
+			</span>
+        #end
+        #@tabBodyCol("ptop-5")#end
+     #end
+#end
 #@div()
 	#@p(pClass="title_sty")
 		<span class="f"> 版本名称</span>
@@ -23,7 +34,8 @@
 			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" 
 				"/delete.pagelet" "ml-5")&nbsp;&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/document/document.page" title="返回">
-				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;</span>
+				#buttonIcon(iconClass="icon-level-up")</a>
+		</span>
 	#end
 #@tinyForm("thisform" "" "" {"class":"test"})
 <div style="width:70%;float:left" class="pageleftpart">
@@ -55,14 +67,11 @@
 #end
 #end		
 
-<div style="width:30%;position: fixed;top: 153px;right: 10px;" class="rightpart">
-    #@div(divClass="infoContent")
-        <p class="titleName">基本信息</p>
-        #include("../data/basic-info.page")
-    #end
+<div style="width:30%;position: fixed;top: 180px;right: 10px;" class="rightpart">
+  ## 		#TypeInfo("docInfo")
+     #include("basic-info.page")
 </div>
 
-#end
 <script type="text/javascript">
 
     $(function(){
