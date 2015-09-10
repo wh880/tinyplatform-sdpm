@@ -18,7 +18,7 @@ public class InfoFunction extends AbstractTemplateFunction {
 						  Object... parameters) throws TemplateException {
 		int id = 0;
 		if(parameters[0]==null){
-			throw new TemplateException("信息类别不能为空");
+			throw new TemplateException("淇℃伅绫诲埆涓嶈兘涓虹┖");
 		}
 		if(parameters.length>1&&parameters[1]!=null&&!"".equals(parameters[1].toString())){
 			id = Integer.valueOf(parameters[1].toString());

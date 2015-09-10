@@ -128,51 +128,69 @@
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()日志日历#end
             #@settoggleLeftBody()
-                #@OlTopList()
-                    #@tinyForm("thisform" "url" "post" {"class":"xxxxxxxxx"})
-                        #@elementItem()
-                        <span style="float:left">部门：</span>
-                            #@formControlDiv("col-9")
-                                #@Tselect2F()
-                                    #@Tselect2Body(
-                                        "lang" "departA" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                    <option value="departA">部门A</option>
-                                    <option value="departB">部门B</option>
-                                    <option value="departC">部门C</option>
-                                    #end
+                #@noRespsGridSystem()
+                    #@gridSysRow()
+                        #@colLabel("col-3")部门：#end
+                        #@gridSysCol(9)
+                        <div style="margin-bottom: 10px">
+                            #@Tselect2F()
+                                #@Tselect2Body(
+                                    "lang" "部门" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                    <option value="部门">部门</option>
+                                    <option value="departa">部门A</option>
+                                    <option value="departa">部门A</option>
+                                    <option value="departa">部门A</option>
+                                    <option value="departa">部门A</option>
+                                    <option value="departa">部门A</option>
 
-                                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a
-                                            href="#">全部</a>#end
                                 #end
-                            #end
-                            #@validateDiv("col-2")#end
-                        #end
-                        #@elementItem()
-                        <span style="float:left">日期：</span>
-                            #@formHorizontal("col-9")
 
-                                #daterangepicker("2015/03/18" "2015/03/23" "reservation" "reservation" "width:107px")
+                                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                             #end
+                        </div>
 
-                            #daterangepickerInit("#reservation")
                         #end
 
-                        #@elementItem()
-                        <span style="padding-bottom:10px;float:left"></span>
-                            #@formHorizontal("col-9" formHorizontalId="checkBoxsty")
-
-                                #@tinyCheckbox("checkbox2" "sw2" "sw2")&nbsp;&nbsp;显示部门所有成员#end
-                            #end
-
-                            #daterangepickerInit("#reservation")
-                        #end
-                        #@elementItem()
-                        <span style="padding-top:10px;float:right">
-                            #@formHorizontal("col-9")
-                                #buttonRadiusPrimary(caption="查看")
-                            #end
+                    #end
+                    #@gridSysRow()
+                        #@colLabel("col-3")开始：#end
+                        #@gridSysCol(9)
+                        <div style="margin-bottom: 10px">
+                            #dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:107px'")
+                        </div>
 
                         #end
+
+                    #end
+                    #@gridSysRow()
+                        #@colLabel("col-3")结束：#end
+                        #@gridSysCol(9)
+                        <div style="margin-bottom: 10px">
+                            #dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:107px'")
+                        </div>
+
+                        #end
+
+                    #end
+                    #@gridSysRow()
+                        #@colLabel("col-1")#end
+                        #@gridSysCol(11)
+                        <div style="margin-bottom: 10px">
+                            #@tinyCheckbox("checkbox2" "sw2" "sw2")显示部门所有成员#end                        </div>
+
+                        #end
+
+                    #end
+                    #@gridSysRow()
+                        #@colLabel("col-3")#end
+                        #@gridSysCol(9)
+                        <div style="float: right;">
+                            #buttonRadiusPrimary(caption="查看")
+
+                        </div>
+
+                        #end
+
                     #end
 
                 #end

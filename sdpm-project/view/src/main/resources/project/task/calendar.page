@@ -1,10 +1,11 @@
-
 #include("/project/task/taskMenu.page")
-
-  #@fullCalendar("fullCalendar")
-
-        
-        #@calendar("calendar")#end
-    #end
-    
-    #fullCalendarInit("#external-events .fc-event" "#calendar")
+<style>
+    ##    暂时用于100%显示日历
+    #calendar {
+        width: 100%;
+    }
+</style>
+#@fullCalendar("fullCalendar")
+    #@calendar("calendar")#end
+#end
+#fullCalendarInit("#external-events .fc-event" "#calendar")

@@ -28,40 +28,66 @@
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()待办日历#end
             #@settoggleLeftBody()
-                #@OlTopList()
-                    #@tinyForm("thisform" "url" "post" {"class":"xxxxxxxxx"})
-                        #@elementItem()
-                        <span style="float:left">部门：</span>
-                            #@formControlDiv("col-9")
-                                #@tinySelect("lang" "departA" {"class":"input-text select2","rel":"22"})
-                                    #@tinyOptionItem("departA")部门A#end
-                                    #@tinyOptionItem("departB")部门B#end
-                                    #@tinyOptionItem("departC")部门C#end
+
+                #@noRespsGridSystem()
+                    #@gridSysRow()
+                        #@colLabel("col-3")部门：#end
+                        #@gridSysCol(9)
+                            <div style="margin-bottom: 10px">
+                                #@Tselect2F()
+                                    #@Tselect2Body(
+                                        "lang" "部门" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                        <option value="部门">部门</option>
+                                        <option value="departa">部门A</option>
+                                        <option value="departa">部门A</option>
+                                        <option value="departa">部门A</option>
+                                        <option value="departa">部门A</option>
+                                        <option value="departa">部门A</option>
+
+                                    #end
+
+                                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a
+                                            href="#">全部</a>#end
                                 #end
-                            #end
-                            #@validateDiv("col-2")#end
-                        #end
-                        #@elementItem()
-                        <span style="float:left">日期：</span>
-                            #@formHorizontal("col-9")
+                            </div>
 
-                                #daterangepicker("2015/03/18" "2015/03/23" "reservation" "reservation" "width:107px")
-                            #end
-
-                            #daterangepickerInit("#reservation")
                         #end
 
-                        #@elementItem()
-                        <span style="padding-top:10px;float:right">
-                            #@formHorizontal("col-9")
+                    #end
+                    #@gridSysRow()
+                        #@colLabel("col-3")开始：#end
+                        #@gridSysCol(9)
+                            <div style="margin-bottom: 10px">
+                                #dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:107px'")
+                            </div>
+
+                        #end
+
+                    #end
+                    #@gridSysRow()
+                        #@colLabel("col-3")结束：#end
+                        #@gridSysCol(9)
+                            <div style="margin-bottom: 10px">
+                                #dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:107px'")
+                            </div>
+
+                        #end
+
+                    #end
+                    #@gridSysRow()
+                        #@colLabel("col-3")#end
+                        #@gridSysCol(9)
+                            <div style="float: right;">
                                 #buttonRadiusPrimary(caption="查看")
 
-                            #end
+                            </div>
 
                         #end
+
                     #end
 
                 #end
+
             #end
         #end
         #@toggleRight()
@@ -72,13 +98,13 @@
 </div>
 #end
 
-    <script type="text/javascript">
-        $(function () {
-            $('#${tableId}').on('click', '.delBtn', function (e) {
-                user_del(this, '1');
-            });
-        })
-    </script>
+<script type="text/javascript">
+    $(function () {
+        $('#${tableId}').on('click', '.delBtn', function (e) {
+            user_del(this, '1');
+        });
+    })
+</script>
 #@dialog("myModal")
     #@dialogHeader()对话框标题#end
     #@dialogBody()<p>对话框内容…</p>#end

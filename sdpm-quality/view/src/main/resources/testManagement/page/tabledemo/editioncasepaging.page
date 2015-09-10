@@ -47,7 +47,8 @@
 
 			#@tr()
 				#@th()用例类型#end
-				#@td() #@Tselect2F()
+				#@td()
+				 #@Tselect2F()
 	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="CT">Connecticut</option>
 	                        <option value="DE">Delaware</option>
@@ -70,7 +71,7 @@
 				#@th()优先级#end
 				#@td() 
 				#@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="CT">Connecticut</option>
 	                        <option value="DE">Delaware</option>
 	                        <option value="FL">Florida</option>
@@ -80,8 +81,8 @@
 	                        <option value="MD">Maryland</option>
 	                    	#end                
 	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                	  #end#
-               end
+                	  #end
+                 #end
 			#end
 			#@tr()
 				#@th()用例状态#end
@@ -111,7 +112,6 @@
 				#@td()#tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
 				#end
 			#end
-
 		#end
 		#end
 	#end

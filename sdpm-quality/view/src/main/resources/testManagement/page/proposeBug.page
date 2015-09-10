@@ -130,6 +130,9 @@
 			#end
 			#@elementItem()
 				#@colLabel()相关需求：#end
+				#@formControlDiv("col-8")
+					#tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
+				#end
 			#end
 			#@elementItem()
 				#@colLabel()相关任务：#end

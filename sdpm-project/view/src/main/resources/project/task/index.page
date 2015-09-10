@@ -125,45 +125,44 @@
                 <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
                 </span>
             <span class="r">
-                    #buttonIcon(iconClass="icon-download-alt")
+
                 #@buttonGroup()
-                    #@buttonDropdown("Dropdown")导入  #@spanCaret()#end#end
+                    #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-download-alt")导入  #@spanCaret()#end#end
                     #@ulDropdownMenu("downMenuSty")
                         <p>
-                            <span><a href="${TINY_CONTEXT_PATH}/project/task/inputBug.page">&nbsp导入bug</a></span>
+                            #@iconOperations("#myModal" "" "导入Bug" "500" "200"  "/project/task/inputBug.pagelet" "ml-5")
+                                &nbsp导入bug#end
                         </p>
-                            <p>
-                                <span><a href="${TINY_CONTEXT_PATH}/project/task/inputTask.page">&nbsp导入任务</a></span>
-                            </p>
-                        #@aModal("#myModal2" "导入Excel" "600" "120" "" "/project/task/inputExcel.pagelet")
-                            &nbsp导入Excel#end
-                        #@dialog("myModal2")
-                            #@dialogHeader()#end
-                            #@dialogBody()<p></p>#end
-                        #end
-                        #@liDivider()#end
-                    #end
-                #end&nbsp;
 
-                #buttonIcon(iconClass="icon-upload-alt")
+                        #@iconOperations("#myModal" "" "导入任务" "700" "80" "/project/task/inputTask.pagelet" "ml-5")
+                            &nbsp导入任务#end
+
+                    #end
+                #end &nbsp;
+
+
+
+
+
                 #@buttonGroup()
-                    #@buttonDropdown("Dropdown")导出  #@spanCaret()#end#end
+                    #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-download-alt")导出  #@spanCaret()#end#end
                     #@ulDropdownMenu("downMenuSty")
+                        <p>
+                            #@iconOperations(
+                                "#myModal" "" "导出数据" "700" "100"  "/project/task/outputData.pagelet" "ml-5")
+                                &nbsp;导出数据#end
+                        </p>
 
-                        #@aModal("#myModal" "导出数据" "600" "120" "" "/project/task/outputData.pagelet")&nbsp导出数据#end
-                        #@dialog("myModal")
-                            #@dialogHeader()#end
-                            #@dialogBody()<p></p>#end
-                        #end
-
-                        #@aModal("#myModal1" "导出数据" "600" "150" "" "/project/task/outputModal.pagelet")&nbsp导出模板#end
-                        #@dialog("myModal1")
-                            #@dialogHeader()#end
-                            #@dialogBody()<p></p>#end
-                        #end
+                        #@iconOperations("#myModal" "" "导出数据" "550" "100" "/project/task/outputModal.pagelet" "ml-5")
+                            &nbsp;导出模板#end
 
                     #end
-                #end&nbsp;
+                #end &nbsp;
+
+
+
+
+
 
                     <a href="${TINY_CONTEXT_PATH}/project/task/reportform.page">#buttonIcon(iconClass="icon-bar-chart")
                         报表</a>&nbsp;

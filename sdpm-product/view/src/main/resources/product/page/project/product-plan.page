@@ -1,7 +1,7 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-#!set(linkName="plan",sonitem="<li>"+"计划"+"</li>")
+#!set(linkName="product-plan",sonitem="<li>"+"计划"+"</li>")
 
 
 #@tabBodyCol("ptop-5")
@@ -11,7 +11,8 @@
 					<span class="active_btn">浏览计划</span>
 				</span>
 				<span class="r">
-					#@iconOperations("#myModal" "icon-plus" "创建计划" "1000" "400" "/product/page/tabledemo/product-addplan.pagelet" "ml-5")&nbsp;创建计划#end
+					<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-addplan.page">#buttonIcon(iconClass="icon-plus")创建计划</a>&nbsp;
+			
 				</span>
 				#div(divClass="clearfix")
 			#end

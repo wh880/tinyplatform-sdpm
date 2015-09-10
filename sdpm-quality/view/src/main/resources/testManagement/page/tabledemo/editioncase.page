@@ -38,7 +38,7 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
-    		<p class="titleName"><a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page" class="active_btn">用例标题</a>>编辑</p>
+    		<p class="titleName">编辑</p>
     		<div class="RTtitle">
             	<button type="submit" id="submit" class="commitBtn">保存</button>
         	</div>

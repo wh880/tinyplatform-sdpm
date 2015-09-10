@@ -1,6 +1,6 @@
 #include("/product/page/event/common.page")
 #set(addArchivePagePath="/product/page/tabledemo/addArchive.pagelet",editpageModalId="myModal",editpageModal="#"+editpageModalId)
-#!set(linkName="archive",sonitem="<li>"+"文档"+"</li>")
+#!set(linkName="product-archive",sonitem="<li>"+"文档"+"</li>")
 
 #@tabBodyCol("ptop-5")
 		##operationbar start5
@@ -9,8 +9,7 @@
 				<span class="active_btn">文档列表</span>
 			</span>
 			<span class="r">
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-adddocument.page">#buttonIcon(iconClass="icon-plus")创建文档</a>&nbsp;
-				
+                <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addArchive.page" title="创建文档">#buttonIcon(iconClass="icon-plus")创建文档</a>
 			</span>
 			#div(divClass="clearfix")
 		#end
@@ -38,9 +37,9 @@
 	#@div(divClass="tinyheaderTools form-inline")
 		#setTinyTablePageSize([8,10,20,50,100,200])
 		#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
-		#@aModal(editpageModal "添加文档" "865" "420" "btn radius btn-primary btn-sm" addArchivePagePath)
+		#*#@aModal(editpageModal "添加文档" "865" "420" "btn radius btn-primary btn-sm" addArchivePagePath)
 			#@simpleI("icon-plus")添加#end
-		#end
+		#end*#
 	#end
 	#@tinyTableContent("../../data/archivedata.pagelet") ##取数据地址 总数据
 		#@thead()

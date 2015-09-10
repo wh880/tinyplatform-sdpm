@@ -3,6 +3,7 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 
 #include("/system/page/event/common.page")
+
 #@tabWithInit("tab_demo" "optionsBox")
 	#@tabBodyCol("ptop-5")
 		#@div(divClass="operationbar")

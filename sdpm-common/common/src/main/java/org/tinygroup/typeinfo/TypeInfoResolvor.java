@@ -11,7 +11,7 @@ import java.util.Map;
 public interface TypeInfoResolvor {
     public static String TYPEINFO_XSTREAM_= "typeinfo";
 
-    public void addTypeInfo(TypeInfos typeInfos);
+    public void addTypeInfo(TypeInfos typeInfos,String filePath);
 
     public Map<String,TypeInfo> getDict();
 
