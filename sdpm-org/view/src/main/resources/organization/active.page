@@ -19,14 +19,17 @@
 
 #include("/common/common.page")
 #@div()
-    #@div(divClass="tabLayout")
+## #@div(divClass="tabLayout")
+
+    #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="tabBar cl")
-            #@tabWithInit("tab_demo" "optionsBox")
-                #@tabHead()
-                    #include("/organization/tab.page")
-                #end
+            #@tabHead()
+                #include("/organization/tab.page")
             #end
+        ##
         #end
+    #end
+
 
 
         #@div(divClass="operationbar")
@@ -101,8 +104,8 @@
             #include("/organization/activeMultiSearch.page")
 
         #end
-    #end
 #end
+
 
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divClass="tinyheaderTools form-inline")
