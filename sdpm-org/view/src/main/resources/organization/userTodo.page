@@ -18,10 +18,15 @@
         #@div(divClass="operationbar")
             #@tinyForm("thisform" "" "" {"class":"test"})
                 #@formControlDiv("col-1")
-                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                        #@tinyOptionItem("zh")中国#end
-                        #@tinyOptionItem("en")英国#end
-                        #@tinyOptionItem("ta")泰国#end
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "用户" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="用户">用户</option>
+                        <option value="usera">用户</option>
+                        <option value="usera">用户</option>
+                        <option value="usera">用户</option>
+                        #end
+
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                     #end
                 #end
                 <span>
