@@ -1,7 +1,7 @@
 
 
 
-#@div(divClass="tabInfocontents")	
+#@div(divClass="infoContent tabInfocontents")	
 	#@tabWithInit("tab_info")
 		#@tabHead()
 			#@tabHeadCol()基本信息#end

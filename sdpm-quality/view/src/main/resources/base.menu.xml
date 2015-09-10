@@ -11,10 +11,10 @@
           permission="Permission">
         <menu id="add-case" name="建用例" href="/" icon="" sort="1"
               isShow="1" scope="demand-op"></menu>
-
-        <menu id="qualityVersion" parent-id="quality" name="版本" href="/testManagement/page/version.page" icon=""
+		 </menu>
+      <menu id="qualityVersion" parent-id="quality" name="版本" href="/testManagement/page/version.page" icon=""
               sort="1"       isShow="1"
               permission="Permission">
-        </menu>
-    </menu>
+      </menu>
+   
 </menu>
