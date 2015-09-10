@@ -1,6 +1,7 @@
 #@OlTopList()
 #* #topItem(1 "../page/questiondb.page" "如何初始化项目管理数据库？" "18:12")*#
-    #@normalLiItemsconment(1 "../page/questiondb.page" "访问项目管理，可以绑定域名吗？" "")
+##    #@normalLiItemsconment(1 "../page/questiondb.page" "访问项目管理，可以绑定域名吗？" "")
+        #@normalLiItemsconment(1 "../page/questionAnswerFirst.page" "访问项目管理，可以绑定域名吗？" "")
     ##                        #@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/docu/documentproduct-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
         #@iconOperations("#myModal" "" "编辑问题" "550" "80" "../page/editfirst.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
         #@iconOperations("#myModal" "" "删除问题" "550" "80" "../page/deletefirst.pagelet" "ml-5")<i class=" icon-trash"></i>&nbsp;删除 #end
