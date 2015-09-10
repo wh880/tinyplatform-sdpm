@@ -1,53 +1,21 @@
 #macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
+<input type="hidden" name="records" value="${num}"/>
 #end
-#import("/org/tinygroup/form/components/form.component")
+
+
 
 #set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
+	#set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
-	#@td()
-		<input type="checkbox" value="1" name="idCheck">
-	#end
-	#@td()
-		#@Tselect2F()
-			#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-            <option value="CT">Connecticut</option>
-            <option value="DE">Delaware</option>
-            <option value="FL">Florida</option>
-            <option value="GA">Georgia</option>
-            <option value="IN">Indiana</option>
-            <option value="ME">Maine</option>
-            <option value="MD">Maryland</option>
-			#end
-		##填写任意内容，侦听需重新填加 A侦听已内置
-			#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-		#end
-	#end
-	#@td()
-		#@Tselect2F()
-			#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-            <option value="CT">Connecticut</option>
-            <option value="DE">Delaware</option>
-            <option value="FL">Florida</option>
-            <option value="GA">Georgia</option>
-            <option value="IN">Indiana</option>
-            <option value="ME">Maine</option>
-            <option value="MD">Maryland</option>
-			#end
-		##填写任意内容，侦听需重新填加 A侦听已内置
-			#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-		#end
-	#end
-	#@td()
-		#inputRadiusText()			
-	#end
-	#@td()
-		#inputRadiusText()		
-	#end
+	#@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/organization/userTodo.page">admin</a> #end
+	#@td()1#end
+	#@td()2015-8-28#end
+
+
 #end
 #end
