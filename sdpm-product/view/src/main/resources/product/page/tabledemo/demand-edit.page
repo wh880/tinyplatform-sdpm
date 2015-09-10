@@ -60,8 +60,4 @@
 
 <div style="width:30%;float:right">
 		#TypeInfo("demand")
-#*    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-        #include("/product/page/tabledemo/historyrecord.page")
-    #end*#
 </div>
