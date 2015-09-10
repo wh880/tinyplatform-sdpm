@@ -6,45 +6,52 @@
 #set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-    ##tabbody end
-    <div style="width:80%;float:left">
-    ##        #@gridSysCol(8)
-        #@div(divClass="infoContent")
-            <div>
-                #@table("协议详情")
-                    #@thead()
-                    #end
-                    #@tbody()
-                        #@tr()
-                            #@th()客户名称#end
-                            #@td()阿里巴巴#end
-                        #end
-                        #@tr()
-                            #@th()协议名称#end
-                            #@td()XXXX协议#end
-                        #end
-                        #@tr()
-                            #@th()协议内容#end
-                            #@td()***********************#end
-                        #end
-                    #end
-                #end
-            </div>
-            <div style="text-align:right;margin:right">
-                #@iconOperations(
-                    "#myModal3" "" "编辑" "700" "300 " "/service/page/clientProductEdit.pagelet" "ml-5")编辑#end
-                <a class="clientDelete">删除</a>
-            </div>
+
+        #@tabHead()
+            #include("/service/page/tab.page")
         #end
-        #@div(divClass="infoContent,col-6")
-            <p class="titleName">历史记录</p>
-            #include("/service/page/historyRecord.page")
-        #end
-    ##        #end
-    </div>
+    <br/>
     #end
 #end
-#@simpleModal("myModal3" "编辑")#end
+#@tabWithInit("tab_demo" "optionsBox")
+##tabbody end
+<div style="width:80%;float:left">
+##        #@gridSysCol(8)
+    #@div(divClass="infoContent")
+        <div>
+            #@table("协议详情")
+                #@thead()
+                #end
+                #@tbody()
+                    #@tr()
+                        #@th()客户名称#end
+                        #@td()阿里巴巴#end
+                    #end
+                    #@tr()
+                        #@th()协议名称#end
+                        #@td()XXXX协议#end
+                    #end
+                    #@tr()
+                        #@th()协议内容#end
+                        #@td()***********************#end
+                    #end
+                #end
+            #end
+        </div>
+        <div style="text-align:right;margin:right">
+            <a href="slaContentEdit.page">编辑</a>
+            <a class="clientDelete">删除</a>
+        </div>
+    #end
+    #@div(divClass="infoContent,col-6")
+        <p class="titleName">历史记录</p>
+        #include("/service/page/historyRecord.page")
+    #end
+##        #end
+</div>
+#end
+
+###@simpleModal("myModal3" "编辑")#end
 #@simpleModal("myModal4" "删除")#end
 <script>
     $(function () {

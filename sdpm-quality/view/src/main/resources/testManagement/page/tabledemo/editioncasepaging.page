@@ -8,19 +8,36 @@
 			#@tbody()
 				#@tr()
 					#@th()所属产品#end
-					#@td()#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-						#@optionItem("")请选择#end
-					#end
+					#@td()
+					 #@Tselect2F()
+	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Connecticut</option>
+	                        <option value="DE">Delaware</option>
+	                        <option value="FL">Florida</option>
+	                        <option value="GA">Georgia</option>
+	                        <option value="IN">Indiana</option>
+	                        <option value="ME">Maine</option>
+	                        <option value="MD">Maryland</option>
+	                    	#end                
+	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                	  #end
 					#end
 				#end
 				#@tr()
 					#@th()所属模块#end
 					#@td()
-						#@tinySelect("lang" "zh" {"class":"select2"})
-							#@tinyOptionItem("zh")/1#end
-							#@tinyOptionItem("en")/2#end
-							#@tinyOptionItem("ta")/3#end
-						#end
+						 #@Tselect2F()
+	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Connecticut</option>
+	                        <option value="DE">Delaware</option>
+	                        <option value="FL">Florida</option>
+	                        <option value="GA">Georgia</option>
+	                        <option value="IN">Indiana</option>
+	                        <option value="ME">Maine</option>
+	                        <option value="MD">Maryland</option>
+	                    	#end                
+	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                	  #end
 						#@validateDiv("col-2")#end
 					#end
 
@@ -30,9 +47,18 @@
 
 			#@tr()
 				#@th()用例类型#end
-				#@td()#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-					#@optionItem("")请选择#end
-				#end#end
+				#@td() #@Tselect2F()
+	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Connecticut</option>
+	                        <option value="DE">Delaware</option>
+	                        <option value="FL">Florida</option>
+	                        <option value="GA">Georgia</option>
+	                        <option value="IN">Indiana</option>
+	                        <option value="ME">Maine</option>
+	                        <option value="MD">Maryland</option>
+	                    	#end                
+	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                	  #end#end
 			#end
 			#@tr()
 				#@th()试用阶段#end
@@ -42,26 +68,37 @@
 			#end
 			#@tr()
 				#@th()优先级#end
-				#@td()#@selectRadiusBox("select_boxes")
-					#@select(selectName="demo2" selectClass="select")
-						#@optionSelected("") #end
-						#@optionItem("1")1#end
-						#@optionItem("1")2#end
-						#@optionItem("1")3#end
-						#@optionItem("1")4#end
-					#end
-				#end#end
+				#@td() 
+				#@Tselect2F()
+	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Connecticut</option>
+	                        <option value="DE">Delaware</option>
+	                        <option value="FL">Florida</option>
+	                        <option value="GA">Georgia</option>
+	                        <option value="IN">Indiana</option>
+	                        <option value="ME">Maine</option>
+	                        <option value="MD">Maryland</option>
+	                    	#end                
+	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                	  #end#
+               end
 			#end
 			#@tr()
 				#@th()用例状态#end
-				#@td()#@selectRadiusBox("select_boxes")
-					#@select(selectName="demo2" selectClass="select")
-						#@optionSelected("") #end
-						#@optionItem("正常")1#end
-						#@optionItem("被阻塞")2#end
-						#@optionItem("研究中")3#end
-					#end
-				#end#end
+				#@td()
+				 #@Tselect2F()
+	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Connecticut</option>
+	                        <option value="DE">Delaware</option>
+	                        <option value="FL">Florida</option>
+	                        <option value="GA">Georgia</option>
+	                        <option value="IN">Indiana</option>
+	                        <option value="ME">Maine</option>
+	                        <option value="MD">Maryland</option>
+	                    	#end                
+	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                	  #end
+                #end
 			#end
 			#@tr()
 				#@th()关键词#end

@@ -1,25 +1,40 @@
-部门：
-#@tinySelect("lang" "zh" {"class":"select2","style":"width:190px"})
-    #@tinyOptionItem("en")请选择用户#end
-    #@tinyOptionItem("zh")admin#end
-    #@tinyOptionItem("en")admin1#end
-    #@tinyOptionItem("ta")admin2#end
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+#@tinyForm("thisform" "url" "post" {"class":""})
+		#@elementItem()
+			#@formControlDiv("col-12")
+				<div class="col-3">
+				#@colLabel("col-3")部门：#end						
+				#@tinySelect("lang" "zh" {"class":"select2","style":"width:190px"})
+    				#@tinyOptionItem("en")请选择部门#end
+   					#@tinyOptionItem("zh")银行#end
+    				#@tinyOptionItem("en")云融#end
+				#end
+				</div>
+				<div class="col-3">
+				#@colLabel("col-4")每天工时：#end
+                <div class="input-group">
+                    <input type="text" class="form-control col-3" placeholder="" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon2">小时</span>
+                </div>
+                </div>
+                <div class="col-5">
+           	 	#@colLabel("col-3")指派时间：#end
+				<div class="input-group col-9">					
+						#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
+					<span class="input-group-addon" id="basic-addon2">至</span>
+						#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
+				</div>				
+				</div>
+				##此处type应为submit，后台注意
+				<div class="col-1"><input style="float:right" type="button" class="commitBtn" value="保存" /></div>
+			#end					
+		#end
 #end
+
 <script type="text/javascript">
     $(".select2").select2();
 </script>
 <br/>
-指派时间：
-#daterangepicker("2015/08/01" "2015/08/01" "reservation" "reservationtime" "width:230px")
-#daterangepickerInit("#reservationtime" "timePicker: true,timePickerIncrement: 30,format: 'YYYY/MM/DD'")
-<br/>
-
-<div class="col-3">
-    每天工时：
-    #tinyInput("input-text radius" "worktime")
-    <br/>
-</div>
-<div style="height: 10px;"></div>
 #@tableStriped("table-border")
     #@thead()
         #@tr("text-c")

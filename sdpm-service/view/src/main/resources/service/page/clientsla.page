@@ -19,9 +19,8 @@
                 #@iconOperations(
                     "#myModal1" "icon-download-alt" "导出" "600" "100" "/service/page/tabledemo/slaExport.pagelet" "ml-5")
                     导出#end
-                #@iconOperations(
-                    "#myModal2" "icon-plus" "新建协议" "600" "400" "/service/page/clientProductAdd.pagelet" "ml-5")新建协议#end
-            ##                <a href="/service/page/clientProductAdd.page">#buttonIcon(iconClass="icon-plus")新建产品</a>
+                <a href="${TINY_CONTEXT_PATH}/service/page/proposeTest.page"
+                   title="新建协议">#buttonIcon(iconClass="icon-plus")新建协议</a>
                 <a href="${TINY_CONTEXT_PATH}/service/page/sla.page"
                    title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
             </span>
