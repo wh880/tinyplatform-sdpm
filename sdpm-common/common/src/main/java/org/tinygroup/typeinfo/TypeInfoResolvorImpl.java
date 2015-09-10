@@ -17,6 +17,9 @@ public class TypeInfoResolvorImpl implements TypeInfoResolvor {
 
     public void addTypeInfo(TypeInfos typeInfos) {
         if(typeInfos!=null) {
+            if (typeDict.get(typeInfos.getTypesName())!=null){
+                throw new RuntimeException("typeinfos:["+typeInfos.getTypesName()+"]已存在" );
+            }
             for (TypeInfo typeinfo : typeInfos.getTypeInfoList()) {
                 typeDict.put(typeinfo.getTypesName(), typeinfo);
             }
