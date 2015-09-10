@@ -4,7 +4,7 @@
 
     #@elementItem()
         #@colLabel()#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-6")
             #tinyInput("text" "username" ""{"placeholder":"能将项目转交给别人吗？","datatype":"*4-16","nullmsg":"问题不能为空！","id":"username","class":"input-text"})
         #end
         #@validateDiv("col-2")#end

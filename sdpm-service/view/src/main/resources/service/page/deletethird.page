@@ -4,7 +4,7 @@
 
     #@elementItem()
         #@colLabel()#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-6")
             #tinyInput("text" "username" ""{"placeholder":"怎么维护项目的模块？","datatype":"*4-16","nullmsg":"问题不能为空！","id":"username","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
