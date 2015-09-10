@@ -1,0 +1,31 @@
+<div class="panel">
+	<div class="panel-heading panelNobr">
+		<span class="panel-title"><i class="panel-title-icon fa fa-tasks"></i>最新动态</span>
+		<div class="panel-heading-controls">
+			<a href="${TINY_CONTEXT_PATH}/organization/active.page">更多&gt&gt</a>
+		</div>
+	</div>
+	<!-- Without vertical padding -->
+	<div class="panel-content">
+		<table class="table  table-striped "> 
+			#for(i:[1..5])
+	
+#*				<tr>
+					<td>9月09日 14:39</td> 
+					<td>admin </td>
+					<td>添加假期</td>
+					<td>
+						<a href="#"> 国庆节</a>
+					</td>
+	            </tr>*#
+	            <tr>
+					<td  width="100%">
+						9月08日 17:22, admin 
+						<em>删除了</em> 假期
+						<a href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">国庆节1</a>。
+					</td>
+				</tr>
+	         #end
+        </table>
+	</div>
+</div>

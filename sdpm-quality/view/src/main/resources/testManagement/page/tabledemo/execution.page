@@ -16,9 +16,20 @@
                     #@th()1#end
                     #@td()表格内容#end
                     #@td()表格内容#end
-                    #@td()#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                        #@optionItem("")请选择#end
-                    #end#end
+                    #@td()
+                    #@Tselect2F()
+	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Connecticut</option>
+	                        <option value="DE">Delaware</option>
+	                        <option value="FL">Florida</option>
+	                        <option value="GA">Georgia</option>
+	                        <option value="IN">Indiana</option>
+	                        <option value="ME">Maine</option>
+	                        <option value="MD">Maryland</option>
+	                    	#end                
+	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                	  #end
+                    #end
                     #@td()#tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
                     #end
                 #end

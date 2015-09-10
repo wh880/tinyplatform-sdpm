@@ -137,11 +137,11 @@ $(document).ready(function(){
 		<div class="itemTemplate" style="display:none">
 			<div class="searchItem">
 			
-			<div class="col-9">
-                 <div class="col-6" style="float:left;">
+			<div class="col-8">
+                 <div class="col-7" style="float:left;">
                  	<input type="file" style="width:100%"/>
                  </div>
-				 <div class="col-6" style="float:right;">   
+				 <div class="col-5" style="float:right;">   
 				   <input type="text" class="form-control" placeholder="标题：" tabindex="-1" style="width:100%"/>
 			     </div> 
 				
@@ -159,11 +159,11 @@ $(document).ready(function(){
 	<div class="searchItemBox">
 		<div class="searchItem"  id="list1">
 
-			<div class="col-9">
-                 <div class="col-6" style="float:left;">
+			<div class="col-8">
+                 <div class="col-7" style="float:left;">
                  	<input type="file" style="width:100%"/>
                  </div>
-				 <div class="col-6" style="float:right;">   
+				 <div class="col-5" style="float:right;">   
 				   <input type="text" class="form-control" placeholder="标题：" tabindex="-1" style="width:100%"/>
 			     </div> 
 				
@@ -176,63 +176,15 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<div class="searchItem"  id="list2">
-
-			
-			<div class="col-9">
-                 <div class="col-6" style="float:left;">
+			<div class="col-8">
+                 <div class="col-7" style="float:left;">
                  	<input type="file" style="width:100%"/>
                  </div>
-				 <div class="col-6" style="float:right;">   
+				 <div class="col-5" style="float:right;">   
 				   <input type="text" class="form-control" placeholder="标题：" tabindex="-1" style="width:100%"/>
 			     </div> 
 				
 			</div>
-#*			<div class="col-w2">
-				<input type="checkbox" value="1" name="isMust">是否必备
-			</div>*#
-			<div class="col-btn del-btn">
-				<span class="btn btn-small btn-default">
-					<i class="icon-remove"> 删除</i>
-				</span>
-			</div>
-		</div>
-		<div class="searchItem" id="list3">
-#*			<div class="col-w3">
-			    #@select(selectName="demo2")
-			        #@optionItem("1")并且#end
-			        #@optionItem("1")或者#end
-			    #end
-			    并且
-		    </div>
-		    <div class="fl col-m">收入</div>
-		    <div class="col-w1">
-					#@select(selectName="demo2")
-			        #@optionSelected("")请选择#end
-			        #@optionItem("1")等于#end
-		        	#@optionItem("1")不等于#end
-			    #end
-			</div>
-			<div class="col-w1">
-				#@select(selectName="demo2")
-			        #@optionSelected("")请选择#end
-			        #@optionItem("1")1000-2000#end
-		        	#@optionItem("1")2000-5000#end
-		        	#@optionItem("1")5000-10000#end
-		        	#@optionItem("1")10000以上#end
-			    #end
-			</div>*#
-			<div class="col-9">
-                 <div class="col-6" style="float:left;">
-                 	<input type="file" style="width:100%"/>
-                 </div>
-				 <div class="col-6" style="float:right;">   
-				   <input type="text" class="form-control" placeholder="标题：" tabindex="-1" style="width:100%"/>
-			     </div> 
-				
-			</div>
-#*			<div class="col-w2">
-				<input type="checkbox" value="1" name="isMust">是否必备
-			</div>*#
 			<div class="col-btn del-btn">
 				<span class="btn btn-small btn-default">
 					<i class="icon-remove"> 删除</i>

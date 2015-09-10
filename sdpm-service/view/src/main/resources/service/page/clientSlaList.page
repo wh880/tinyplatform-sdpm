@@ -21,7 +21,7 @@
                             #@tbody()
                                 #@tr()
                                     #@th(thStyle="width:150px")协议ID#end
-                                    #@td()<a href="${TINY_CONTEXT_PATH}/service/page/clientUser.page">001#end
+                                    #@td()001#end
                                 #end
                                 #@tr()
                                     #@th()产品名称#end
@@ -30,10 +30,6 @@
                                 #@tr()
                                     #@th()产品版本#end
                                     #@td()2.0.1#end
-                                #end
-                                #@tr()
-                                    #@th()发布时间#end
-                                    #@td()2015.09.07#end
                                 #end
                                 #@tr()
                                     #@th()服务级别#end
@@ -56,7 +52,7 @@
                     </div>
                     <div style="text-align:right;margin:right">
                         #@iconOperations(
-                            "#myModal3" "" "编辑" "700" "300 " "/service/page/clientProductEdit.pagelet" "ml-5")编辑#end
+                            "#myModal3" "" "编辑" "800" "500 " "/service/page/clientSlaEdit.pagelet" "ml-5")编辑#end
                         <a class="clientDelete">删除</a>
                     </div>
                 #end

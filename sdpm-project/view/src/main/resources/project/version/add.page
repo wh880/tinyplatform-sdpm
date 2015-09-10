@@ -33,20 +33,35 @@
     <p class="titleName">新建版本</p>
 	#@elementItem()
 		#@sdpmItem("解决版本")
-			#@tinySelect("laaaang" "zsh" {"class":"input-text select2","rel":"22"})
-				#@tinyOptionItem("q")A#end
-				#@tinyOptionItem("w")B#end
-				#@tinyOptionItem("e")C#end
+			#@Tselect2F()
+				#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="IN">Indiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+				#end
+			##填写任意内容，侦听需重新填加 A侦听已内置
+				#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
 			#end
 		#end
 	#end
 	#@elementItem()
 		#@sdpmItem("产品")
-			#@tinySelect("lang" "zh" {"style":"width:115%","class":"input-text select2","rel":"22"})
-				#@tinyOptionItem("zh")分类1#end
-				#@tinyOptionItem("en")分类2#end
-				#@tinyOptionItem("ta")分类3#end
-				#@tinyOptionItem("ta")<a href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-plus")建任务</a>#end
+			#@Tselect2F()
+				#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="IN">Indiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+				#end
+			##填写任意内容，侦听需重新填加 A侦听已内置
+				#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
 			#end
 		#end
 	#end
@@ -57,10 +72,18 @@
 	#end
 	#@elementItem()
 		#@sdpmItem("构建者")
-			#@tinySelect("lang" "zh" {"style":"width:115%","class":"input-text select2","rel":"22"})
-				#@tinyOptionItem("zh")中国#end
-				#@tinyOptionItem("en")英国#end
-				#@tinyOptionItem("ta")泰国#end
+			#@Tselect2F()
+				#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="IN">Indiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+				#end
+			##填写任意内容，侦听需重新填加 A侦听已内置
+				#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
 			#end
 		#end
 	#end

@@ -21,6 +21,8 @@
 		
 		$(".but2").unbind("click").bind("click",function(){
 			  $("input[type='checkbox']").each(function () {
+			  		var ischecked = $(this).hasClass("checked");
+			  		
                     $(this).attr("checked", !$(this).attr("checked"));
                 });
 			

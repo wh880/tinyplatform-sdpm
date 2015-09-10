@@ -12,13 +12,14 @@
         #@td()<input type="checkbox" value="1" name="idCheck">#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/page/clientsla.page">001#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/page/clientInfo.page">阿里巴巴</a>#end
-        #@td()支付宝协议#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/page/slaContent.page">支付宝协议#end
+        #@td()2.0.1#end
         #@td()高级#end
         #@td()习近平#end
         #@td()20150708#end
         #@td()
-            #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/service/page/testEdit.pagelet" "ml-5")
-            #iconOperations("#myModal2" "icon-remove" "删除" "550" "100" "/service/page/testDelect.pagelet" "ml-5")
+            #iconOperations("#myModal1" " icon-pencil" "编辑" "600" "300" "/service/page/slaEdit.pagelet" "ml-5")
+            <a><i class="icon-remove" itemId="deleteList"></i></a>
         #end
     #end
 #end

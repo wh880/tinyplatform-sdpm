@@ -57,7 +57,7 @@
             #end
             #@toggleRight()
                 #@settoggleLeftTitle()部门结构：#end
-            <form>
+
                 #@navBreadcrumb()
 
                     #@navItemHome("/")部门#end
@@ -67,28 +67,53 @@
                     #@navItemCurrent()当前页面#end
                 #end
                 #@div(divClass="col-12 input_box")
+
                     #@tinyForm("thisform" "" "" {"class":"test"})
-                        #@elementItem()
-                            #@formControlDiv("col-6")
-                                #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
+
+                        #@noRespsGridSystem()
+                            #@gridSysCol(3)
                             #end
-                        #end
-                        #@elementItem()
-                            #@formControlDiv("col-6")
-                                #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
+                            #@gridSysCol(5)
+                                #@gridSysRow()
+                                    #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
+
+                                #end
+                                #@gridSysRow()
+                                    #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
+
+                                #end
+                                #@gridSysRow()
+                                    #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
+
+                                #end
+                                #@gridSysRow()
+                                    #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
+
+                                #end
+                                #@gridSysRow()
+                                    #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
+
+                                #end
+                                #@gridSysRow()
+                                    #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
+
+                                #end
+                                #@gridSysRow()
+                                    #@div(divClass="col-10 col-offset-2 form-inline")
+                                        #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+                                    <a href="#" class="btn radius btn-default">返回</a>
+                                    #end
+                                #end
+
+
+
                             #end
+
+
                         #end
 
-                        #@elementItem()
-                            #@div(divClass="col-10 col-offset-2 form-inline")
-                                #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
-                                <a href="#" class="btn radius btn-default">返回</a>
-                            #end
-                        #end
                     #end
                 #end
-
-            </form>
 
             #end
         #end

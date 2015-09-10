@@ -9,14 +9,14 @@
 
         #@tabBodyCol("ptop-5")
         ##operationbar star
-            #@div(divClass="operationbar")
+#*            #@div(divClass="operationbar")
             <span class="f">
 				</span>
             <span class="r">
                     <a href="#">#buttonIcon(iconClass="icon-plus-sign")批量添加，暂时放着</a>&nbsp;
 				</span>
                 #div(divClass="clearfix")
-            #end
+            #end*#
         ##operationbar end
         #end
     <div style="float: left;width: 15%;">

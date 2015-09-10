@@ -1,58 +1,47 @@
-#@div(divClass="operationbar")
+#@tinyForm("thisform" "" "" {"class":"test"})
+    #@noRespsGridSystem()
 
-    #@tinyForm("thisform" "" "" {"class":"test"})
-
-        #@elementItem()
-            #@colLabel()登记人：#end
-            #@formControlDiv("col-8")
-            <h5>123</h5>
+        #@gridSysRow()
+            #@colLabel("col-3")登记人：#end
+            #@gridSysCol(5)
+            <p>登记人</p>
             #end
-            #@validateDiv("col-2")#end
         #end
-        #@elementItem()
-            #@colLabel()日期：#end
-            #@formControlDiv("col-8")
-            <h5>123</h5>
+        #@gridSysRow()
+            #@colLabel("col-3")日期：#end
+            #@gridSysCol(5)
+            <p>日期</p>
             #end
-            #@validateDiv("col-2")#end
         #end
 
-        #@elementItem()
-            #@colLabel()耗时：#end
-            #@formControlDiv("col-8")
-            <h5>123</h5>
+        #@gridSysRow()
+            #@colLabel("col-3")耗时：#end
+            #@gridSysCol(5)
+            <p>耗时</p>
             #end
-            #@validateDiv("col-2")#end
         #end
-
-        #@elementItem()
-            #@colLabel()剩余：#end
-            #@formControlDiv("col-8")
-            <h5>123</h5>
+        #@gridSysRow()
+            #@colLabel("col-3")剩余：#end
+            #@gridSysCol(5)
+            <p>剩余</p>
             #end
-            #@validateDiv("col-2")#end
         #end
-
-        #@elementItem()
-            #@colLabel()对象：#end
-            #@formControlDiv("col-8")
-            <h5>123</h5>
+        #@gridSysRow()
+            #@colLabel("col-3")对象：#end
+            #@gridSysCol(5)
+            <p>对象</p>
             #end
-            #@validateDiv("col-2")#end
+        #end#@gridSysRow()
+        #@colLabel("col-3")工作内容：#end
+        #@gridSysCol(5)
+        <p>工作内容</p>
         #end
+    #end
 
-
-        #@elementItem()
-            #@colLabel()工作内容：#end
-            #@formControlDiv("col-8")
-            <h5>123</h5>
-            #end
-            #@validateDiv("col-2")#end
-        #end
 
     #end
-    #div(divClass="clearfix")
 #end
+
 <script type="text/javascript">
 
     $(function () {

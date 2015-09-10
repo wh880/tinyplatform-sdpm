@@ -11,22 +11,60 @@
 
     #@tinyForm("thisform" "" "" {"class":"test"})
 #####     以下文档类型为“文件”
-    #@elementItem()
+## 下面注释的是明明的问题栏
+ #*   #@elementItem()
         #@colLabel()问题：#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-4")
             #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":"文档标题不能为空！","id":"username","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
-    #end
-
-    #@elementItem()
+    #end*#
+## 下面的是参照模版:sdpm\sdpm-project\view\src\main\resources\project\task\call.page，设计的问题栏
+        #@elementItem()
+            #@sdpmItem("问题")
+                #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":
+                    "问题不能为空！","id":"username","class":"input-text"})
+            #end
+        #end
+##下面注释的是明明的问题编辑框
+ #*  #@elementItem()
         #@colLabel()回答：#end
-        #@formControlDiv("col-8")
-            #@tinyueditor("content" "content")说点什么...最少输入10个字符#end
+        #@formControlDiv("col-4")
+            #@tinyueditor("content" "content" "width:80%")说点什么...最少输入10个字符#end
         #end
         #@validateDiv("col-2")#end
-    #end
+    #end*#
+##下面的是参照模版:sdpm\sdpm-project\view\src\main\resources\project\task\call.page，设计的问题编辑框
+        #@elementItem()
+        <div class="col-12">
+            <div class="col-2 text-r"><label>回答：</label></div>
 
+            <div class="col-9">
+                #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+        </div>
+        #end
+##下面注释的为明明的“保存”“返回”按钮
+#*        #@elementItem()
+            #@div(divClass="col-10 col-offset-2 form-inline")
+                #tinyInput("submit" "submitbtn" "&nbsp;保存&nbsp;" {"class":"btn btn-primary"})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                #tinyInput("submit" "submitbtn" "&nbsp;返回&nbsp;" {"class":"btn btn-default"})
+            #end
+        #end   *#
+    ##下面的是参照模版:sdpm\sdpm-project\view\src\main\resources\project\task\call.page，设计的是“保存”“返回”
+        #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
+            </div>
+            <div class="col-5"></div>
+        </div>
+        #end
 #end
 
 

@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Hulk on 2015/8/27.
  */
 @XStreamAlias("menu")
-public class Menu implements Serializable {
+public class Menu implements Serializable, Comparable {
     /**
      * 菜单编号
      */
@@ -54,10 +54,10 @@ public class Menu implements Serializable {
     @XStreamAsAttribute
     private String isShow;    // 是否在菜单中显示（1：显示；0：不显示）
     /**
-     * 子菜单
+     * 所属聚合分类 多个分类以 , (英文)分开
      */
     @XStreamAsAttribute
-    private String permission; // 权限标识
+    private String scope;
     /**
      * 子菜单
      */
@@ -120,12 +120,12 @@ public class Menu implements Serializable {
         this.isShow = isShow;
     }
 
-    public String getPermission() {
-        return permission;
+    public String getScope() {
+        return scope;
     }
 
-    public void setPermission(String permission) {
-        this.permission = permission;
+    public void setScope(String scope) {
+        this.scope = scope;
     }
 
     public List<Menu> getChildMenus() {
@@ -134,5 +134,15 @@ public class Menu implements Serializable {
 
     public void setChildMenus(List<Menu> childMenus) {
         this.childMenus = childMenus;
+    }
+
+    public int compareTo(Object o) {
+        if (o != null) {
+            Menu menu = (Menu) o;
+            if (menu.getSort() != null) {
+                return sort - menu.getSort();
+            }
+        }
+        return 1;
     }
 }
