@@ -43,26 +43,52 @@
 
                  </span>
             ##            <span class="tinyFormsty">
-                    #@formControlDiv("col-1")
-                        #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                            #@tinyOptionItem("zh")中国#end
-                            #@tinyOptionItem("en")英国#end
-                            #@tinyOptionItem("ta")泰国#end
+                #@formControlDiv("col-2")
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "请选择用户" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="请选择用户">请选择用户</option>
+                        <option value="usera">用户A</option>
+                        <option value="userb">用户B</option>
+                        <option value="userc">用户c</option>
+                        <option value="userd">用户d</option>
+                        <option value="usere">用户e</option>
+
+                        #end
+
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                         #end
                     #end
-                #@formControlDiv("col-1")
-                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                        #@tinyOptionItem("zh")中国#end
-                        #@tinyOptionItem("en")英国#end
-                        #@tinyOptionItem("ta")泰国#end
+                #@formControlDiv("col-2")
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "请选择产品" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="请选择产品">请选择产品</option>
+                        <option value="producta">产品A</option>
+                        <option value="producta">产品A</option>
+                        <option value="producta">产品A</option>
+                        <option value="producta">产品A</option>
+                        <option value="producta">产品A</option>
+
+                        #end
+
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                     #end
+
                 #end
-                #@formControlDiv("col-1")
-                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                        #@tinyOptionItem("zh")中国#end
-                        #@tinyOptionItem("en")英国#end
-                        #@tinyOptionItem("ta")泰国#end
+                #@formControlDiv("col-2")
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "请选择项目" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="请选择项目">请选择项目</option>
+                        <option value="projecta">项目A</option>
+                        <option value="projecta">项目A</option>
+                        <option value="projecta">项目A</option>
+                        <option value="projecta">项目A</option>
+                        <option value="projecta">项目A</option>
+
+                        #end
+
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                     #end
+
                 #end&nbsp;
             <span class="secrchLac">
                    <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>

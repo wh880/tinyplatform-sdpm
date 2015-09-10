@@ -46,7 +46,7 @@
             #@tinyForm("thisform" "" "" {"class":"test"})
                 #@formControlDiv("col-2")
                     #@tinySelect("lang" "修改历史" {"class":"input-text select2","rel":"22"})
-                        #@tinyOptionItem("修改历史")请选择项目#end
+                        #@tinyOptionItem("修改历史")修改历史#end
                         #@tinyOptionItem("zh")版本1.0#end
                         #@tinyOptionItem("en")版本2.0#end
                         #@tinyOptionItem("ta")版本3.0#end
