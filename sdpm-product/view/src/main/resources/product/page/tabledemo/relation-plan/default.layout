@@ -4,7 +4,7 @@
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-#!set(linkName="plan")
+#!set(linkName="product-plan",sonitem="<li>"+"计划"+"</li>")
 
 
 	#@div(divClass="operationbar")
@@ -23,7 +23,7 @@
 	#end
 	
 #@tabWithInit("tab_demo" "optionsBox")
-<div style="width:70%;float:left">
+<div style="width:70%;float:left;padding-top:18px;">
 		#@div()
 			#@tabWithInit("tab_demo" "optionsBox")
 				
