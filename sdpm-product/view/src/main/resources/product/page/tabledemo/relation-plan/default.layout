@@ -43,14 +43,14 @@
 						
 							<div class="r"> 
 							
-							#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="link-demand"?"Current":"")
-							#@buttons("","icon-link")
-								关联需求
+							#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="link-bug"?"Current":"")
+							#@buttons("","icon-bug")
+								关联BUG
 							#end
 						#end
 				
                     </div>
-					
+						
 						
 						
 						
@@ -74,16 +74,18 @@
 							#end
 						#end
 						
-						
 							<div class="r"> 
 							
-							#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="link-bug"?"Current":"")
-							#@buttons("","icon-bug")
-								关联BUG
+							#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="link-demand"?"Current":"")
+							#@buttons("","icon-link")
+								关联需求
 							#end
 						#end
 				
                     </div>
+					
+						
+						
 					
 						
 						#if("no-bug"==cname)

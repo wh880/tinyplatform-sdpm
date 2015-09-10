@@ -13,11 +13,11 @@
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${var}#end
-	#@td()PP#end
-	#@td()计划${page}#end
-	#@td()121#end
-	#@td()12#end
-	#@td()12#end
+	#@td()@#end
+	#@td()测试BUG#end
+	#@td()Admin#end
+	#@td()产品经理#end
+	#@td()进行中#end
 	#@td()
 		#iconOperation(" icon-remove" "删除" "ml-5")
 	#end
