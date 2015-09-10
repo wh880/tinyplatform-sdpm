@@ -19,7 +19,8 @@
 			 <option value="TX">Texas</option>
 			 <option value="TN">Tennessee</option>
 			 <option value="WI">Wisconsin</option>
-		  </optgroup>
+
+          </optgroup>
 		  <optgroup label="Eastern Time Zone">
 			 <option value="CT">Connecticut</option>
 			 <option value="DE">Delaware</option>
