@@ -46,7 +46,7 @@ public class TypeInfoFileProcessor extends AbstractFileProcessor {
                     .fromXML(fileObject.getInputStream());
             typeInfoResolvor.addTypeInfo(typeinfos);
             caches.put(fileObject.getAbsolutePath(), typeinfos);
-            LOGGER.logMessage(LogLevel.INFO, "加载table文件[{0}]结束",
+            LOGGER.logMessage(LogLevel.INFO, "加载typeInfo文件[{0}]结束",
                     fileObject.getAbsolutePath());
         }
     }
