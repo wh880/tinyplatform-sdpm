@@ -1,5 +1,5 @@
 
-
+#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 #@tinyForm("thisform" "" "" {"class":"test"})
 <div style="width:80%;margin-left: 150px;" class="pageleftpart">
    <div class="infoContent">

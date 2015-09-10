@@ -1,3 +1,4 @@
+#!set(linkName="product-archive",sonitem="<li>"+"文档"+"</li>")
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")

@@ -1,6 +1,7 @@
+
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
-#!set(linkName="overview",sonitem="<li>"+"概况"+"</li>")
+#!set(linkName="product-overview",sonitem="<li>"+"概况"+"</li>")
 #macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
 	<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked") checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass) class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio" onclick="${radioOther}"/>
 #end
@@ -106,7 +107,7 @@
         #@validateDiv("col-2")#end
     #end
     #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
-        	#@colLabel("label_title")分组白名单#end
+        	#@colLabel()分组白名单#end
 			#@skinMinimal()
 				#labelCheckbox(ckId="whitelistBox" labelText="管理员")
 				#labelCheckbox(ckId="whitelistBox" labelText="研发")
@@ -115,7 +116,7 @@
 				#labelCheckbox(ckId="whitelistBox" labelText="产品经理")
 				#labelCheckbox(ckId="whitelistBox" labelText="研发主管")
 				#labelCheckbox(ckId="whitelistBox" labelText="产品主管")
-				#labelCheckbox(ckId="whitelistBox" labelText="测试主管")				
+				#labelCheckbox(ckId="whitelistBox" labelText="测试主管")
 			#end
         #@validateDiv("col-2")#end
       #end
