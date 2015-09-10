@@ -1,0 +1,91 @@
+#import("/org/tinygroup/table/components/table.component")
+
+#@tinyForm("thisform" "" "post" {"class":"test"})
+
+    #@tableBorder()
+        #@thead()
+            #@tr()
+                #@thW("20")    ID    #end
+                #@thW("30")    产品名称    #end
+                #@thW("30")    产品代号    #end
+                #@thW("50")    产品负责人    #end
+                #@thW("50")    测试负责任    #end
+                #@thW("40")    发布负责人#end
+                #@thW("40")    状态    #end
+            #end
+
+        #end
+
+        #@tbody()
+
+            #for(i:[1..8])
+            #@tr()
+
+                #@th()    ${i}    #end
+                #@th()
+
+                    #tinyInput("text" "username")
+
+                #end
+                #@th()
+
+                    #tinyInput("text" "username")
+
+                #end
+                #@th()
+                    #@formControlDiv("col-8")
+                        #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                            #@tinyOptionItem("zh")张三#end
+                            #@tinyOptionItem("en")李素#end
+                            #@tinyOptionItem("ta")/3#end
+                        #end
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+                #@th()
+
+                    #@formControlDiv("col-8")
+                        #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                            #@tinyOptionItem("zh")/三大#end
+                            #@tinyOptionItem("en")辅导费#end
+                            #@tinyOptionItem("ta")/发的#end
+                        #end
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+
+                #@th()
+
+                    #@formControlDiv("col-8")
+                        #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                            #@tinyOptionItem("zh")/三大#end
+                            #@tinyOptionItem("en")辅导费#end
+                            #@tinyOptionItem("ta")/发的#end
+                        #end
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+
+                #@th()
+
+                    #@formControlDiv("col-8")
+                        #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                            #@tinyOptionItem("zh")正常#end
+                            #@tinyOptionItem("en")结束#end
+                        #end
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+
+
+
+            #end
+
+        #end
+    #end
+
+#end
+
+#end
+
+	

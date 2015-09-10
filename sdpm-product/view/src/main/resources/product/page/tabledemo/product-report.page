@@ -15,15 +15,26 @@
 	$(document).ready(function(){
 		
 		$(".but1").unbind("click").bind("click",function(){
-		
-			 $("input[type='checkbox']").attr("checked", "checked");		
+			 $(".navbody input[type='checkbox']").each(function(){
+			 	this.checked=true
+			 		
+			 });//attr("checked", "checked");
+			
+			 		
 		}); 
 		
 		$(".but2").unbind("click").bind("click",function(){
-			  $("input[type='checkbox']").each(function () {
-			  		var ischecked = $(this).hasClass("checked");
+				
+			  $(".navbody input[type='checkbox']").each(function () {
+			  		this.checked=!this.checked;
 			  		
-                    $(this).attr("checked", !$(this).attr("checked"));
+			  		/*console.log(this.checked)
+			  		var ischecked = $(this).is(":checked");//("checked");
+			  		if(ischecked){
+			  			$(this).removeAttr("checked");
+			  		}else{
+                   	 	$(this).attr("checked","checked");
+                    }*/
                 });
 			
 			
@@ -57,27 +68,30 @@
             #@settoggleLeftTitle()请选择报表类型#end
             #@settoggleLeftBody()
                     #@skinMinimal()
-                        #labelCheckbox(ckId="checkbox-1" labelText="产品需求数量")
-                        #labelCheckbox(ckId="checkbox-3" labelText="模块需求数量")
-                        #labelCheckbox(ckId="checkbox-4" labelText="需求来源统计")
-                        #labelCheckbox(ckId="checkbox-5" labelText="计划进行统计")
-                        #labelCheckbox(ckId="checkbox-6" labelText="状态进行统计")
-                        #labelCheckbox(ckId="checkbox-7" labelText="所处阶段进行统计")
-                        #labelCheckbox(ckId="checkbox-8" labelText="优先级进行统计")
-                        #labelCheckbox(ckId="checkbox-9" labelText="预计工时进行统计")
-                        #labelCheckbox(ckId="checkbox-10" labelText="由谁创建来进行统计")
-                        #labelCheckbox(ckId="checkbox-11" labelText="由谁指派来进行统计")
-                        #labelCheckbox(ckId="checkbox-12" labelText="当前指派来进行统计")
-                        #labelCheckbox(ckId="checkbox-13" labelText="关闭原因来进行统计")
-                        #labelCheckbox(ckId="checkbox-14" labelText="变更次数来进行统计")
+                        #labelCheckbox(ckId="checkbox-1" ckName="chexkitem" labelText="产品需求数量")
+                        #labelCheckbox(ckId="checkbox-3" ckName="chexkitem" labelText="模块需求数量")
+                        #labelCheckbox(ckId="checkbox-4" ckName="chexkitem" labelText="需求来源统计")
+                        #labelCheckbox(ckId="checkbox-5" ckName="chexkitem" labelText="计划进行统计")
+                        #labelCheckbox(ckId="checkbox-6" ckName="chexkitem" labelText="状态进行统计")
+                        #labelCheckbox(ckId="checkbox-7" ckName="chexkitem" labelText="所处阶段进行统计")
+                        #labelCheckbox(ckId="checkbox-8" ckName="chexkitem" labelText="优先级进行统计")
+                        #labelCheckbox(ckId="checkbox-9" ckName="chexkitem" labelText="预计工时进行统计")
+                        #labelCheckbox(ckId="checkbox-10" ckName="chexkitem" labelText="由谁创建来进行统计")
+                        #labelCheckbox(ckId="checkbox-11" ckName="chexkitem" labelText="由谁指派来进行统计")
+                        #labelCheckbox(ckId="checkbox-12" ckName="chexkitem" labelText="当前指派来进行统计")
+                        #labelCheckbox(ckId="checkbox-13" ckName="chexkitem" labelText="关闭原因来进行统计")
+                        #labelCheckbox(ckId="checkbox-14" ckName="chexkitem" labelText="变更次数来进行统计")
                     #end
-                    #buttonRadiusDefault(btId="but1" btClass="but1" caption="全选")
-                    #buttonRadiusDefault(btId="but2" btClass="but2" caption="反选")
-                    #buttonRadiusDanger(caption="生成报表")
+               		 #buttonRadiusDefault(btId="but1" btClass="but1" caption="全选")
+			        #buttonRadiusDefault(btId="but2" btClass="but2" caption="反选")
+			        #buttonRadiusDanger(caption="生成报表")    
 
             #end
-        #end
+           
+        #end 
+        
         #@toggleRight("tableBoxessty")
+        
             #@settoggleLeftTitle()报表#end
             
             <table class="table table-border table-bordered" cellspacing="0">

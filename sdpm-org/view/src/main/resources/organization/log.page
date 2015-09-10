@@ -42,10 +42,9 @@
 
         #end
 
-#end
+    #end
 
-
-#@div(divClass="operationbar")
+    #@div(divClass="operationbar")
     <span style="padding-top:5px;float:left">
 					<a href="#" class="active_btn">日历</a>
 					<a href="#">今日</a>
@@ -55,7 +54,7 @@
 					<a href="#">本月</a>
 					<a href="#">上月</a>
 					<a href="#">所有日志</a>
-    </span>
+        </span>
 
         #@tinyForm("thisform" "" "" {"class":"test"})
             #@noRespsGridSystem()
@@ -111,11 +110,27 @@
                         #@elementItem()
                         <span style="float:left">部门：</span>
                             #@formControlDiv("col-9")
-                                #@tinySelect("lang" "departA" {"class":"select2","rel":"22"})
-                                    #@tinyOptionItem("departA")部门A#end
-                                    #@tinyOptionItem("departB")部门B#end
-                                    #@tinyOptionItem("departC")部门C#end
+                                #@Tselect2F()
+                                    #@Tselect2Body(
+                                        "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    #end
+
+                                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a
+                                            href="#">全部</a>#end
                                 #end
+
+                            ##                                #@tinySelect("lang" "departA" {"class":"select2","rel":"22"})
+                            ##                                    #@tinyOptionItem("departA")部门A#end
+                            ##                                    #@tinyOptionItem("departB")部门B#end
+                            ##                                    #@tinyOptionItem("departC")部门C#end
+                            ##                                #end
                             #end
                             #@validateDiv("col-2")#end
                         #end

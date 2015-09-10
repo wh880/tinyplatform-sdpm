@@ -23,13 +23,18 @@
 	#@td()￥320,800#end
 	 #@td()
 		 #foreach(m:menuManager.getScopeMenus("demand-op"))
-         <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+			 #if(m.id != "rm-demand")
+             <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+			 #else
+				 #@aModal("#myModa4" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
+			 #end
 		 #end
+
 ##	 	<a href="${TINY_CONTEXT_PATH}/project/task/add.page" title="分解任务">#buttonIcon(iconClass="icon-smile")</a>
 ##		<a href="${TINY_CONTEXT_PATH}/project/task/bechAdd.page" title="批量分解">#buttonIcon(iconClass="icon-paste")</a>
 ##		<a href="${TINY_CONTEXT_PATH}/quality/testmanagement/page/proposeBug.page" title="建用例">#buttonIcon(iconClass="icon-sitemap")</a>
-		#@aModal("#myModa4" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
-					#@dialog("myModa4")
+
+		 #@dialog("myModa4")
 						#@dialogHeader()#end
 						#@dialogBody()				
 								<h4>确定删除吗?</h4>						

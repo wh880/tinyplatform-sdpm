@@ -41,7 +41,7 @@
             <div class="col-2 text-r"><label>回答：</label></div>
 
             <div class="col-9">
-                #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+                #@Teditor("content" "content" {"initialFrameHeight":"280"})Say something#end</div>
         </div>
         #end
 ##下面注释的为明明的“保存”“返回”按钮

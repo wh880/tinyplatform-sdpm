@@ -2,23 +2,6 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(activeTitle="日志",activeMenuId=currentPageId)
 #set(name="task")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@div(divClass="dropdownBox")
-            #include("/project/dropdownMenu.page")
-        #end
-        #@tabHead()
-            #include("/project/protab.page")
-        <span class="r" style="position:relative;top:2px;height:0">
-					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
-				</span>
-        #end
-    ##head end
-    <br/>
-    ##body end
-    #end
-#end
 
 
 #@tinyForm("thisform" "" "post" {"class":"test"})
@@ -83,14 +66,14 @@
         #end
     #end
 #end
-<div class="col-5">
-    <button style="float: right" type="submit" id="submit" class="commitBtn">
-        <a href="${TINY_CONTEXT_PATH}/project/task/index.page">保存</a></button>
-</div>
-<div class="col-1">
-    <button style="float: right" type="submit" id="submit" class="backBtn">
-        <a href="${TINY_CONTEXT_PATH}/project/task/index.page">返回</a></button>
-</div>
+##<div class="col-5">
+##    <button style="float: right" type="submit" id="submit" class="commitBtn">
+##        <a href="${TINY_CONTEXT_PATH}/project/task/index.page">保存</a></button>
+##</div>
+##<div class="col-1">
+##    <button style="float: right" type="submit" id="submit" class="backBtn">
+##        <a href="${TINY_CONTEXT_PATH}/project/task/index.page">返回</a></button>
+##</div>
 
 
 

@@ -2,8 +2,8 @@
 #* #topItem(1 "../page/questiondb.page" "如何初始化项目管理数据库？" "18:12")*#
     #@normalLiItemsconment(1 "../page/questiondb.page" "访问项目管理，可以绑定域名吗？" "")
     ##                        #@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/docu/documentproduct-edit.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
-        #@iconOperations("#myModal" "" "编辑问题" "865" "150" "../page/editfirst.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
-        #@iconOperations("#myModal" "" "删除问题" "865" "150" "../page/deletefirst.pagelet" "ml-5")<i class=" icon-trash"></i>&nbsp;删除 #end
+        #@iconOperations("#myModal" "" "编辑问题" "700" "100" "../page/editfirst.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
+        #@iconOperations("#myModal" "" "删除问题" "700" "100" "../page/deletefirst.pagelet" "ml-5")<i class=" icon-trash"></i>&nbsp;删除 #end
         #@dialog("myModal")
             #@dialogHeader()对话框标题#end
             #@dialogBody()<p>对话框内容…</p>#end
@@ -20,8 +20,8 @@
     #end
 #####最后一行为问题前面的颜色   #@normalLiItemsconment(2 "../page/questiondb.page" "项目里面的版本和测试的版本有什么区别？" "green")
     #@normalLiItemsconment(2 "../page/questiondb.page" "项目里面的版本和测试的版本有什么区别？" "")
-        #@iconOperations("#myModal" "" "编辑问题" "865" "150" "../page/editsecond.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
-        #@iconOperations("#myModal" "" "删除问题" "865" "150" "../page/deletesecond.pagelet" "ml-5")<i class=" icon-trash"></i>&nbsp;删除 #end
+        #@iconOperations("#myModal" "" "编辑问题" "700" "100" "../page/editsecond.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
+        #@iconOperations("#myModal" "" "删除问题" "700" "100" "../page/deletesecond.pagelet" "ml-5")<i class=" icon-trash"></i>&nbsp;删除 #end
         #@dialog("myModal")
             #@dialogHeader()对话框标题#end
             #@dialogBody()<p>对话框内容…</p>#end
@@ -32,8 +32,8 @@
         #end
     #end
     #@normalLiItemsconment(3 "../page/questiondb.page" "怎么维护项目的模块？" "")
-        #@iconOperations("#myModal" "" "编辑问题" "865" "150" "../page/editthird.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
-        #@iconOperations("#myModal" "" "删除问题" "865" "150" "../page/deletethird.pagelet" "ml-5")<i class=" icon-trash"></i>&nbsp;删除 #end
+        #@iconOperations("#myModal" "" "编辑问题" "700" "100" "../page/editthird.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
+        #@iconOperations("#myModal" "" "删除问题" "700" "100" "../page/deletethird.pagelet" "ml-5")<i class=" icon-trash"></i>&nbsp;删除 #end
         #@dialog("myModal")
             #@dialogHeader()对话框标题#end
             #@dialogBody()<p>对话框内容…</p>#end
@@ -44,8 +44,8 @@
         #end
     #end
     #@normalLiItemsconment(4 "../page/questiondb.page" "能将项目转交给别人吗？" "")
-        #@iconOperations("#myModal" "" "编辑问题" "865" "150" "../page/editfour.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
-        #@iconOperations("#myModal" "" "删除问题" "865" "150" "../page/deletefour.pagelet" "ml-5")<i class=" icon-trash"></i>&nbsp;删除 #end
+        #@iconOperations("#myModal" "" "编辑问题" "700" "100" "../page/editfour.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
+        #@iconOperations("#myModal" "" "删除问题" "700" "100" "../page/deletefour.pagelet" "ml-5")<i class=" icon-trash"></i>&nbsp;删除 #end
         #@dialog("myModal")
             #@dialogHeader()对话框标题#end
             #@dialogBody()<p>对话框内容…</p>#end
@@ -56,6 +56,18 @@
         #end
     #end
     #@normalLiItemsconment(5 "../page/questiondb.page" "如何初始化数据库？" "")
+        #@iconOperations("#myModal" "" "编辑问题" "700" "100" "../page/editfive.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
+        #@iconOperations("#myModal" "" "删除问题" "700" "100" "../page/deletefive.pagelet" "ml-5")<i class=" icon-trash"></i>&nbsp;删除 #end
+        #@dialog("myModal")
+            #@dialogHeader()对话框标题#end
+            #@dialogBody()<p>对话框内容…</p>#end
+            #@dialogFooter()
+                #@buttonEnsure()确定#end
+                #@buttonCancel()关闭#end
+            #end
+        #end
+    #end
+   #* #@normalLiItemsconment(5 "../page/questiondb.page" "如何初始化数据库？" "")
         #@iconOperations("#myModal" "" "编辑问题" "865" "150" "../page/editfive.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
         #@iconOperations("#myModal" "" "删除问题" "865" "150" "../page/deletefive.pagelet" "ml-5")<i class=" icon-trash"></i>&nbsp;删除 #end
         #@dialog("myModal")
@@ -66,17 +78,5 @@
                 #@buttonCancel()关闭#end
             #end
         #end
-    #end
-    #@normalLiItemsconment(5 "../page/questiondb.page" "如何初始化数据库？" "")
-        #@iconOperations("#myModal" "" "编辑问题" "865" "150" "../page/editfive.pagelet" "ml-5")<i class=" icon-pencil"></i>&nbsp;编辑 #end
-        #@iconOperations("#myModal" "" "删除问题" "865" "150" "../page/deletefive.pagelet" "ml-5")<i class=" icon-trash"></i>&nbsp;删除 #end
-        #@dialog("myModal")
-            #@dialogHeader()对话框标题#end
-            #@dialogBody()<p>对话框内容…</p>#end
-            #@dialogFooter()
-                #@buttonEnsure()确定#end
-                #@buttonCancel()关闭#end
-            #end
-        #end
-    #end
+    #end*#
 #end
