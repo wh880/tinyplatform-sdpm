@@ -1,0 +1,60 @@
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/button/components/button_smart.component")
+#set(name="demand")
+<style>
+    .open #downMenuSty {
+        min-width: 75px
+    }
+</style>
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        <span class="r" style="position:relative;top:2px;height:0">
+					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
+				</span>
+        #end
+    ##head end
+    <br/>
+    ##body end
+    #end
+#end
+##operationbar end
+#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+    #@toggleLeft({"class":"aclass"})
+        #@settoggleLeftTitle()产品文档库#end
+        #@settoggleLeftBody("treeLeftbox")
+            #include("/project/task/moduleTree.page")
+        #end
+    #end
+
+    #@toggleRight()
+    ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+        #include("/project/task/batchAddData.page")
+
+
+    #*			#include("/project/page/outpage/add_task_date.page")*#
+    <script type="text/javascript">
+        $(function () {
+            $('#${tableId}').on('click', '.delBtn', function (e) {
+                user_del(this, '1');
+            });
+        })
+    </script>
+        #@dialog("myModal")
+            #@dialogHeader()对话框标题#end
+            #@dialogBody()<p>对话框内容…</p>#end
+            #@dialogFooter()
+                #@buttonEnsure()确定#end
+                #@buttonCancel()关闭#end
+            #end
+        #end
+    #end
+
+#end

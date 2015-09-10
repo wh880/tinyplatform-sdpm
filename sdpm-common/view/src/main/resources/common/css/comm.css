@@ -207,3 +207,13 @@
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
 }
+
+/*表格有外边框，无内边框*/
+.test .out-border {
+    border-left: #ddd 1px solid;
+    border-right: #ddd 1px solid;
+}
+
+.test .out-border th, .test .out-border td {
+    border-left: none
+}

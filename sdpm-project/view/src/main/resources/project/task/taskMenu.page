@@ -174,7 +174,7 @@
 
                     <a href="${TINY_CONTEXT_PATH}/project/task/reportform.page">#buttonIcon(iconClass="icon-bar-chart")
                         报表</a>&nbsp;
-                    <a href="${TINY_CONTEXT_PATH}/project/task/bechAdd.page">#buttonIcon(iconClass="icon-plus-sign")
+                    <a href="${TINY_CONTEXT_PATH}/project/task/batchAdd.page">#buttonIcon(iconClass="icon-plus-sign")
                         批量增加</a>&nbsp;
                     <a href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-plus")建任务</a>&nbsp;
                 </span>

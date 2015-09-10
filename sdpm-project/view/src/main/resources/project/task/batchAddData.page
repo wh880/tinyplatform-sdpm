@@ -1,0 +1,137 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#@div(divClass="operationbar")
+批量增加
+#end
+#!set(activeTitle="批量增加",activeMenuId=currentPageId)
+
+
+#@tinyForm("thisform" "" "post" {"class":"test"})
+    #@tableBorder("out-border")
+        #@thead()
+            #@tr("text-c")
+                #@thW("20")ID#end
+                #@thW("30")所属板块#end
+                #@thW("30")相关需求#end
+                #@thW("50")任务名称#end
+                #@thW("50")类型#end
+                #@thW("40")指派给#end
+                #@thW("20")预算 #end
+                #@thW("40")任务描述#end
+                #@thW("40")优先级#end
+            #end
+        #end
+        #@tbody()
+            #for(i:[1..8])
+            #@tr("text-c")
+                #@th()${i}#end
+                #@th()
+                    #@formControlDiv()
+                        #@Tselect2F()
+                            #@Tselect2Body(
+                                "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="IN">Indiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            #end
+                        ##填写任意内容，侦听需重新填加 A侦听已内置
+                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                        #end
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+                #@th()
+
+                    #@formControlDiv()
+                        #@Tselect2F()
+                            #@Tselect2Body(
+                                "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="IN">Indiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            #end
+                        ##填写任意内容，侦听需重新填加 A侦听已内置
+                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                        #end
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+                #@th()
+                    #tinyInput("text" "username")
+                #end
+                #@th()
+                    #@formControlDiv( )
+                        #@Tselect2F()
+                            #@Tselect2Body(
+                                "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="IN">Indiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            #end
+                        ##填写任意内容，侦听需重新填加 A侦听已内置
+                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                        #end
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+                #@th()
+                    #@formControlDiv()
+                        #@Tselect2F()
+                            #@Tselect2Body(
+                                "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="IN">Indiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            #end
+                        ##填写任意内容，侦听需重新填加 A侦听已内置
+                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                        #end
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+                #@th()
+                    #tinyInput("text" "username")
+                #end
+                #@th()
+                    #tinyInput("text" "username")
+                #end
+                #@th()
+                    #@formControlDiv()
+                        #@tinySelect()
+                            #@option()1#end
+                            #@option()2#end
+                            #@option()3#end
+                            #@option()4#end
+                        #end
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+            #end
+        #end
+    #end
+#end
+<p>
+</p>
+#@td("text-c")
+    #@colLabel()#end
+<a href="#">#buttonRadiusPrimary(caption="保存")</a>
+<a href="${TINY_CONTEXT_PATH}/project/task/index.page">#buttonDefault(caption="返回")</a>
+#end
+
+#end
