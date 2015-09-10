@@ -88,11 +88,12 @@
 	                        <option value="MD">Maryland</option>
 	                    	#end                
 	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                	  #end
+                	  	#end
 						#@validateDiv("col-2")#end
                     #end
 					#end
-				#@td()#@selectRadiusBox("select_boxes")
+				#@td()
+				#@selectRadiusBox("select_boxes")
 					#@select(selectName="demo2" selectClass="select")
 						#@optionSelected("") #end
 						#@optionItem("1")代码错误#end

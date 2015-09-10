@@ -2,5 +2,6 @@
 	<type-info name="productLine" >
 	    <info name="productInfo" title="产品信息" infoParameter="" url="/productLine/page/tabledemo/other-information.pagelet" resource="productLine"/>
 	    <info name="productOwnerInfo" title="父产品线信息" infoParameter="" url="/productLine/page/tabledemo/other-information.pagelet" resource="productLin"/>
+	    <info name="userbasrinfo" title="负责人" infoParameter="" url="/organization/userbaseinfo.pagelet" resource="userInfo"/>
 	</type-info>
 </type-infos>

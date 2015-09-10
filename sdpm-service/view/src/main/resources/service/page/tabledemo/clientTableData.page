@@ -17,7 +17,7 @@
         #@td()2015-09-09#end
         #@td()正常#end
         #@td()
-            #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/service/page/clientEdit.pagelet" "ml-5")
+            #iconOperations("#myModal" " icon-pencil" "编辑" "865" "350" "/service/page/clientEdit.pagelet" "ml-5")
         <a><i class="icon-remove" itemId="deleteList"></i></a>
         #end
     #end

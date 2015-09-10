@@ -80,31 +80,55 @@
             #@gridSysRow()
                 #@colLabel("col-2")所属部门：#end
                 #@gridSysCol(6)
-                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                        #@tinyOptionItem("zh")部门a#end
-                        #@tinyOptionItem("en")部门b#end
-                        #@tinyOptionItem("ta")部门c#end
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "部门" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="部门">部门</option>
+                            <option value="departa">部门</option>
+                            <option value="departa">部门</option>
+                            <option value="departa">部门</option>
+                            <option value="departa">部门</option>
+                            <option value="departa">部门</option>
+
+                        #end
+
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                     #end
                 #end
             #end
             #@gridSysRow()
                 #@colLabel("col-2")职位：#end
                 #@gridSysCol(6)
-                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                        #@tinyOptionItem("zh")研发#end
-                        #@tinyOptionItem("en")测试#end
-                        #@tinyOptionItem("ta")管理#end
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "职位" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="职位">职位</option>
+                            <option value="zh">研发</option>
+                            <option value="en">测试</option>
+                            <option value="ta">管理</option>
+
+
+                        #end
+
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                     #end
+
                 #end
             #end
             #@gridSysRow()
                 #@colLabel("col-2")权限：#end
                 #@gridSysCol(6)
-                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                        #@tinyOptionItem("zh")研发#end
-                        #@tinyOptionItem("en")测试#end
-                        #@tinyOptionItem("ta")管理#end
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "权限" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="权限">权限</option>
+                            <option value="zh">研发</option>
+                            <option value="en">测试</option>
+                            <option value="ta">管理</option>
+
+
+                        #end
+
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                     #end
+
                 #end
             #end
             #@gridSysRow()

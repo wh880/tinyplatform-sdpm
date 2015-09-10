@@ -86,7 +86,7 @@
 			
 			#@toggleRight()
 			#@tinyTable()
-				#@div(divBaseClass="tinyheaderTools form-inline")
+				#@div(divBaseClass="tinyheaderTools form-inline")				
 #*					<div class="btn btn-default btn-sm">全选</div>
 					<div class="btn btn-default btn-sm">反选</div>*#
 					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
@@ -101,7 +101,7 @@
 				#@thead()
 					#@tr()
 #*						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end*#
-						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})级别#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})P#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})Bug标题#end

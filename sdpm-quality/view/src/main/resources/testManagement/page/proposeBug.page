@@ -287,7 +287,8 @@
 			#@elementItem()
 				#@colLabel()附件：#end
 				#@formControlDiv("col-8")
-					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
+					#include("/testManagement/page/fileupload.page")
+#*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#
 				#end
 				#@validateDiv("col-2")#end
 			#end

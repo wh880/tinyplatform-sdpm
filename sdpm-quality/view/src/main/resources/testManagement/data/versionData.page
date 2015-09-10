@@ -13,8 +13,9 @@
 #for(var:[1..pagesize])
 					#@tr()
 						#@td()<input type="checkbox" value="1" name="idCheck">#end
-						#@td()我是任务名称#end
-						#@td()我是所属项目#end
+						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionInfo.page">${var}</a>#end
+						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionInfo.page">任务名称</a>#end
+						#@td()<a href="${TINY_CONTEXT_PATH}/project/demand/index.page">第20周工作项目</a>#end
 						#@td()Trunk#end
 						#@td()admin#end
 						#@td()2015-07-30#end

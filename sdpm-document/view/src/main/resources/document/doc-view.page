@@ -1,0 +1,85 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/fold/components/fold.component")
+<style> </style>
+#set(name="doc-view")
+#!set(abstract="很好看的文章！",keywords="关键字",tach="这是附件",history="1. 2015-08-25 18:00:18, 由 admin 创建。")
+
+#@div()
+	#@tabWithInit("tab_demo")	
+	#include("dropdownMenu.page")
+	#end
+
+##operationbar start1
+#@div()
+	#@p(pClass="title_sty")
+		<span class="f"> 版本名称</span>
+		<span class="r">
+					
+			<a href="${TINY_CONTEXT_PATH}/document/table-edit.page" title="编辑">
+				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
+			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" 
+				"/delete.pagelet" "ml-5")&nbsp;&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/document/document.page" title="返回">
+				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;</span>
+	#end
+#@tinyForm("thisform" "" "" {"class":"test"})
+<div style="width:70%;float:left" class="pageleftpart">
+	#@div(divClass="infoContent")
+        <p class="titleName">文档摘要</p>
+        ${abstract}
+    #end
+    #@div(divClass="infoContent")
+        <p class="titleName">关键字</p>
+        ${keywords}
+    #end
+    #@div(divClass="infoContent")
+        <p class="titleName">附件</p>
+        ${tach}
+    #end
+    #@div(divClass="infoContent")
+        <p class="titleName">历史记录</p>
+        #include("../data/historyRecord.page")
+    #end
+    <center>		
+			<a href="${TINY_CONTEXT_PATH}/document/table-edit.page" title="编辑">
+				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
+			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" 
+				"/delete.pagelet" "ml-5")&nbsp;&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/document/document.page" title="返回">
+				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
+	</center>
+</div>
+#end
+#end		
+
+<div style="width:30%;position: fixed;top: 153px;right: 10px;" class="rightpart">
+    #@div(divClass="infoContent")
+        <p class="titleName">基本信息</p>
+        #include("../data/basic-info.page")
+    #end
+</div>
+
+#end
+<script type="text/javascript">
+
+    $(function(){
+        var minTop=96;
+        var maxTop=153;
+        var currenttop=maxTop;
+        function doscroll(){
+            currenttop=maxTop-parseInt($(window).scrollTop());
+            if(currenttop<minTop) currenttop=minTop;
+            $(".rightpart").css("top",currenttop+"px");
+        }
+        var timer_scroll;
+        $(window).scroll(function(){
+            clearTimeout(timer_scroll);
+            setTimeout(function() {
+                doscroll();
+            },10);
+        })
+    })
+</script>

@@ -1,68 +1,70 @@
-
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 
 <style>
-#*.tabLayout .tabBar span a{color:#333}
-.tabLayout .tabBar .Current a{color:#fff}
-.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}*#
-.wz{font-size:16px;top: 5px;}
+    #*.tabLayout .tabBar span a{color:#333}
+    .tabLayout .tabBar .Current a{color:#fff}
+    .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}*#
+    .wz {
+        font-size: 16px;
+        top: 5px;
+    }
 
 </style>
-
+#set(name="bug")
 #@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-		#@div(divClass="dropdownBox")
-			#include("/project/dropdownMenu.page")
-		#end
-		#@tabHead()
-			#include("/project/protab.page")
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
         <span class="r" style="position:relative;top:2px;height:0">
 					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
 					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
 				</span>
-		#end
-	##head end
+        #end
+    ##head end
     <br/>
-	##body end
-	#end
+    ##body end
+    #end
 #end
 #@div(divClass="operationbar")
-	导入bug
+导入bug
 #end
 
 #!set(activeTitle="导入bug",activeMenuId=currentPageId)
-	 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
-			#@div(divBaseClass="tinyheaderTools form-inline")
-				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-				#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
-				<a href="#" class="btn btn-default btn-sm">导入</a>
-				#*<a href="#" class="btn btn-success btn-sm">Bug</a>
-				<a href="#" class="btn btn-primary btn-sm">工程</a>
-				<a href="#" class="btn btn-info btn-sm">历史</a>
-				<a href="#" class="btn btn-warning btn-sm">相关</a>*#
-			#end
-			#@tinyTableContent("../bug/bugTableData.pagelet") ##取数据地址 总数据
-				#@thead()
-					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})ID#end
-						#@tinyTh({"class":"","rel":"sortname"})级别#end
-						#@tinyTh({"class":"","rel":"sortname"})P#end
-						#@tinyTh({"class":"sorting","rel":"sortname","style":"color:#0000"})bug标题#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})状态#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})优先级#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})指派给#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})最初预计#end
-					#end
-				#end
-			#end
+#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+    #@div(divBaseClass="tinyheaderTools form-inline")
+        #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+        #@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
+    <a href="#" class="btn btn-default btn-sm">导入</a>
+    #*<a href="#" class="btn btn-success btn-sm">Bug</a>
+    <a href="#" class="btn btn-primary btn-sm">工程</a>
+    <a href="#" class="btn btn-info btn-sm">历史</a>
+    <a href="#" class="btn btn-warning btn-sm">相关</a>*#
+    #end
+    #@tinyTableContent("../bug/bugTableData.pagelet") ##取数据地址 总数据
+        #@thead()
+            #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})ID#end
+                #@tinyTh({"class":"","rel":"sortname"})级别#end
+                #@tinyTh({"class":"","rel":"sortname"})P#end
+                #@tinyTh({"class":"sorting","rel":"sortname","style":"color:#0000"})bug标题#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})状态#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})优先级#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})指派给#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})最初预计#end
+            #end
+        #end
+    #end
 #end
-     
+
 <script type="text/javascript">
-				$(function(){
-					$('#${tableId}').on('click','.delBtn',function(e){
-						user_del(this,'1');
-					});
-				})
+    $(function () {
+        $('#${tableId}').on('click', '.delBtn', function (e) {
+            user_del(this, '1');
+        });
+    })
 </script>
