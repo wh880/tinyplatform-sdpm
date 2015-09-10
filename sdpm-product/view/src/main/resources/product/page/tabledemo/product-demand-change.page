@@ -81,7 +81,7 @@
         <div class="col-12">
                 <div class="col-2 text-r"><label>检查影响：</label></div>
 
-                <div class="col-9">
+                <div class="col-9  tabInfocontents">
                   #@formControlDiv("col-12")
 	    				#include("/product/page/tabledemo/check-effect.page")
  	    			#end

@@ -3,18 +3,37 @@
 
 	 #@elementItem()
         #@colLabel()所属产品：#end
-		#@formControlDiv("col-5 form-inline")
-			#@tinySelect("province" "" {"class":"province","nullmsg":"请选择产品！","datatype":"*"})
-				#@optionItem("")请选择产品#end
-				#@optionItem("")请2131#end
-				#@optionItem("")请313123择产品#end
-				#@optionItem("")请选1231择产品#end
-		     #end
-			#@tinySelect("city" "" {"class":"city","nullmsg":"请选择模块！","datatype":"*"})
-				#@optionItem("")请选择模块#end
-				#@optionItem("")请qeqwr块#end
-				#@optionItem("")请选rwer择模块#end
-		     #end
+		#@formControlDiv("col-4")
+			<div class="col-6">
+			#@Tselect2F()
+	                #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                    <option value="CT">Connecticut</option>
+	                    <option value="DE">Delaware</option>
+	                    <option value="FL">Florida</option>
+	                    <option value="GA">Georgia</option>
+	                    <option value="IN">Indiana</option>
+	                    <option value="ME">Maine</option>
+	                    <option value="MD">Maryland</option>
+	                #end
+	            
+	                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+	            #end
+		     </div>
+		     <div class="col-6">
+			#@Tselect2F()
+	                #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                    <option value="CT">Connecticut</option>
+	                    <option value="DE">Delaware</option>
+	                    <option value="FL">Florida</option>
+	                    <option value="GA">Georgia</option>
+	                    <option value="IN">Indiana</option>
+	                    <option value="ME">Maine</option>
+	                    <option value="MD">Maryland</option>
+	                #end
+	            
+	                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+	            #end
+		     </div>
 		#end
 		#@validateDiv("col-2")#end
     #end

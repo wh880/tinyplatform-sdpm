@@ -43,7 +43,7 @@
 			 <option value="WV">West Virginia</option>
 			</optgroup>
 		#end
-		#@navSelect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+	##		#@navSelect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
 	#end
 	<script type="text/javascript">
 	<!--
