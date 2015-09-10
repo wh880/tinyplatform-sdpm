@@ -84,10 +84,10 @@
         #@gridSysRow()
             #@colLabel("col-2")产品版本：#end
             #@gridSysCol(5)
-                #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                    #@optionItem("")请选择#end
-                    #@optionItem("")2.0.0#end
-                    #@optionItem("")3.0.1#end
+                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                    #@tinyOptionItem("zh")2.0.1#end
+                    #@tinyOptionItem("en")3.0.1#end
+                    #@tinyOptionItem("ta")4.0.1#end
                 #end
             #end
         #end
