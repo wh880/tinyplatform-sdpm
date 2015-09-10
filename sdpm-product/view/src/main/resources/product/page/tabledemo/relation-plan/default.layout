@@ -40,6 +40,20 @@
 								未关联需求
 							#end
 						#end
+						
+							<div class="r"> 
+							
+							#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="link-bug"?"Current":"")
+							#@buttons("","icon-bug")
+								关联BUG
+							#end
+						#end
+				
+                    </div>
+						
+						
+						
+						
 						#if("no-demand"==cname)
 							<div style="float:right" > 
 								<a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
@@ -59,6 +73,21 @@
 								未关联Bug
 							#end
 						#end
+						
+							<div class="r"> 
+							
+							#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="link-demand"?"Current":"")
+							#@buttons("","icon-link")
+								关联需求
+							#end
+						#end
+				
+                    </div>
+					
+						
+						
+					
+						
 						#if("no-bug"==cname)
 							<div style="float:right" > 
 								<a href="#" id="showsearchmore-bug">#buttonIcon(iconClass="icon-search")搜索</a>

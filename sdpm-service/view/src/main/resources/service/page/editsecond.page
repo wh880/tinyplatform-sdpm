@@ -3,7 +3,7 @@
     #set(name="")
 
     #@elementItem()
-        #@colLabel()#end
+        #@colLabel("col-2")#end
         #@formControlDiv("col-8")
             #tinyInput("text" "username" ""{"placeholder":"项目里面的版本和测试的版本有什么区别？","datatype":"*4-16","nullmsg":"问题不能为空！","id":"username","class":"input-text"})
         #end

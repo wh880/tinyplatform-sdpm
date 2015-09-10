@@ -43,6 +43,18 @@
 								未关联需求
 							#end
 						#end
+						
+							<div class="r"> 
+							
+							#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-release/product-al-bug.page" cname=="link-demand"?"Current":"")
+							#@buttons("","icon-bug")
+								关联BUG
+							#end
+						#end
+				
+                    </div>
+					
+						
 						#if("no-demand"==cname)
 							<div style="float:right" > 
 								<a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
@@ -67,10 +79,19 @@
 								遗留Bug
 							#end
 						#end
+							<div class="r">
+							#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-release/product-al-req.page" cname=="link-demand"?"Current":"")
+							#@buttons("","icon-link")
+								关联需求
+							#end
+						#end
+							</div>
+						
 						#if("no-bug"==cname)
 							
-							<div class="r"> 
-								
+						
+							
+							<div class="r">
 								<a href="#" id="showsearchmore-bug">&nbsp;&nbsp; #buttonIcon(iconClass="icon-search")搜索</a>
 			                </div>
 						#end
@@ -80,7 +101,7 @@
 					#@aModal("#myModal" "导出HTML" "700" "130" "icon-upload-alt" "/product/page/tabledemo/product-export-html.pagelet")导出HTML#end&nbsp;
 				
                     </div>
-					
+                    					
 				#end
 				
 				#@tabBodyCol("ptop-5")

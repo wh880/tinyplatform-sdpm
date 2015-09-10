@@ -19,7 +19,7 @@
 	#@td()Bug#end
 	#@td()154#end
 	#@td()
-		<a href="#">请稍等CAD</a>
+		<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">请稍等CAD</a>
 	#end
 #end
 #end

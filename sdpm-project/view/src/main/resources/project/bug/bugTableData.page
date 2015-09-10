@@ -12,9 +12,9 @@
 #for(var:[1..pagesize])
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/quality/page/project/demdtablehref.page"> ${var}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page"> ${var}</a>#end
 	#@td()北京#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/quality/page/project/demdtablehref.page">中南海</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">中南海</a>#end
 	#@td()67#end
 	#@td()2013/03/25#end
 	#@td()#@Tselect2F()

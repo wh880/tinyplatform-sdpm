@@ -25,7 +25,7 @@
     #@tinyForm("thisform" "url" "post" {"class":""})
         #@elementItem()
             #@colLabel()所属项目：#end
-            #@formControlDiv("col-5 form-inline selectList")
+            #@formControlDiv("col-8")
                  #@Tselect2F()
 	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="CT">Connecticut</option>

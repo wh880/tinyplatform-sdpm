@@ -1,5 +1,6 @@
 #!set(activeTitle="FAQ",activeMenuId=currentPageId)
 ## 以下增加问题所在的以及菜单“产品”，“客户”，“需求”，“协议”，“FAQ”，有一个#end在最下面
+#set(name="faq")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -54,7 +55,7 @@
     ##以下为明明问题文本页面
         #@div(divClass="infoContent")
         <div>
-            #@table("协议详情")
+            #@table("问答页面")
                 #@thead()
                 #end
                 #@tbody()
@@ -74,14 +75,15 @@
             #end
         </div>
         <div style="text-align:right;margin:right">
-            <a href="slaContentEdit.page">编辑</a>
-            <a class="clientDelete">删除</a>
+            <a href="questiondbEdit.page">编辑</a>
+##            <a class="clientDelete">删除</a>
+            <a class="answerquestionDelete">删除</a>
         </div>
         #end
 
-
+        #@div(divClass="infoContent")
         <div>
-            #@table("协议详情")
+            #@table("问答页面")
                 #@thead()
                 #end
                 #@tbody()
@@ -101,18 +103,19 @@
             #end
         </div>
         <div style="text-align:right;margin:right">
-            <a href="slaContentEdit.page">编辑</a>
-            <a class="clientDelete">删除</a>
+            <a href="questiondbEdit.page">编辑</a>
+            <a class="answerquestionSecDelete">删除</a>
         </div>
+        #end
 
-
+        #@div(divClass="infoContent")
     <div>
-        #@table("协议详情")
+        #@table("问答页面")
             #@thead()
             #end
             #@tbody()
                 #@tr()
-                    #@th()3.能将项目转交给别人吗？#end
+                    #@th()3.怎么维护项目的模块？#end
                     #@td()#end
                 #end
                 #@tr()
@@ -127,18 +130,19 @@
         #end
     </div>
     <div style="text-align:right;margin:right">
-        <a href="slaContentEdit.page">编辑</a>
-        <a class="clientDelete">删除</a>
+        <a href="questiondbEdit.page">编辑</a>
+        <a class="answerquestionDelete">删除</a>
     </div>
+        #end
 
-
+        #@div(divClass="infoContent")
     <div>
-        #@table("协议详情")
+        #@table("问答页面")
             #@thead()
             #end
             #@tbody()
                 #@tr()
-                    #@th()4.如何初始化数据库？#end
+                    #@th()4.能将项目转交给别人吗？#end
                     #@td()#end
                 #end
                 #@tr()
@@ -153,17 +157,19 @@
         #end
     </div>
     <div style="text-align:right;margin:right">
-        <a href="slaContentEdit.page">编辑</a>
-        <a class="clientDelete">删除</a>
+        <a href="questiondbEdit.page">编辑</a>
+        <a class="answerquestionDelete">删除</a>
     </div>
+        #end
 
+        #@div(divClass="infoContent")
     <div>
-        #@table("协议详情")
+        #@table("问答页面")
             #@thead()
             #end
             #@tbody()
                 #@tr()
-                    #@th()5.怎么维护项目的模块？#end
+                    #@th()5.如何初始化数据库？#end
                     #@td()#end
                 #end
                 #@tr()
@@ -178,10 +184,68 @@
         #end
     </div>
     <div style="text-align:right;margin:right">
-        <a href="slaContentEdit.page">编辑</a>
-        <a class="clientDelete">删除</a>
+        <a href="questiondbEdit.page">编辑</a>
+        <a class="answerquestionDelete">删除</a>
     </div>
+    #end
+
+##问答页面第一个“删除”
+     #*   #@simpleModal("myModal4" "删除")#end
+    <script>
+        $(function () {
+##            $(".infoContent").on("click", ".clientDelete", function () {
+            $(".infoContent").on("click", ".answerquestionDelete", function () {
+                //console.log($(this).attr("itemId"))
+//            var that = this;
+                layer.confirm('确定要删除该记录？', function (index) {
+                    //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                    //$.ajax()
+                    //console.log(index);
+//                layer.msg($("已删除").attr("deleteList"), 1);
+                    layer.msg('已删除', 1);
+                })
+            });
+        });
+    </script>
+
+        #@simpleModal("myModal4" "删除")#end
+    <script>
+        $(function () {
+        ##            $(".infoContent").on("click", ".clientDelete", function () {
+            $(".infoContent").on("click", ".answerquestionSecDelete", function () {
+                //console.log($(this).attr("itemId"))
+//            var that = this;
+                layer.confirm('确定要删除该记录？', function (index) {
+                    //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                    //$.ajax()
+                    //console.log(index);
+//                layer.msg($("已删除").attr("deleteList"), 1);
+                    layer.msg('已删除', 1);
+                })
+            });
+        });
+    </script>*#
     ##以上为明明问题文本页面
 
     #end
 #end
+
+##问答页面第一个“删除”
+#@simpleModal("myModal3" "编辑")#end
+#@simpleModal("myModal4" "删除")#end
+<script>
+    $(function () {
+    ##            $(".infoContent").on("click", ".clientDelete", function () {
+        $(".infoContent").on("click", ".answerquestionDelete", function () {
+            //console.log($(this).attr("itemId"))
+//            var that = this;
+            layer.confirm('确定要删除该记录？', function (index) {
+                //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                //$.ajax()
+                //console.log(index);
+//                layer.msg($("已删除").attr("deleteList"), 1);
+                layer.msg('已删除', 1);
+            })
+        });
+    });
+</script>

@@ -24,7 +24,7 @@
         &nbsp导出#end
 ##<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
 ##<a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-    <a href="${TINY_CONTEXT_PATH}/service/page/proposeTest.page">#buttonIcon(iconClass="icon-plus")新建协议</a>
+    <a href="${TINY_CONTEXT_PATH}/service/page/slaAdd.page">#buttonIcon(iconClass="icon-plus")新建协议</a>
 				</span>
                 #div(divClass="clearfix")
                 #include("/service/page/mulsearch.page")
