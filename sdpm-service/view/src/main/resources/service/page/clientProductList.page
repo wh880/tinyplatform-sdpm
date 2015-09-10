@@ -5,48 +5,43 @@
 
 
 #set(name="client")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-    ##tabbody end
-    <div style="width:100%;float:left">
-        #set(listNum=3)
-        #foreach(var:[1..listNum])
-            #@gridSysCol(4)
+#@tabWithInit("tab_demo" "optionsBox")
+##    <div style="width:100%;float:left">
+    #@gridSystem24Col()
+        #foreach(var:[1..5])
+            #@gridSystemCol(7)
                 #@div(divClass="infoContent")
-                    <p class="titleName"><a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">支付宝</p>
-
-                    <div>
-                        #@table("")
-                            #@thead()
-                            #end
-                            #@tbody()
-                                #@tr()
-                                    #@th(thStyle="width:150px")产品ID#end
-                                    #@td()<a href="${TINY_CONTEXT_PATH}/service/page/clientUser.page">001#end
-                                #end
-                                #@tr()
-                                    #@th()产品版本#end
-                                    #@td()2.0.1#end
-                                #end
-                                #@tr()
-                                    #@th()发布时间#end
-                                    #@td()2015.09.07#end
-                                #end
-                            #end
+                <p class="titleName"><a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">支付宝</p>
+                    #@gridSysRow()
+                        #@gridSysCol(4)产品ID#end
+                        #@gridSysCol(8)
+                        <a href="${TINY_CONTEXT_PATH}/service/page/clientUser.page">001</a>
                         #end
-                    </div>
-                    <div style="text-align:right;margin:right">
-                        #@iconOperations(
-                            "#myModal3" "" "编辑" "700" "300 " "/service/page/clientProductEdit.pagelet" "ml-5")编辑#end
-                        <a class="clientDelete">删除</a>
-                    </div>
+                        #@gridSysCol(4)产品版本#end
+                        #@gridSysCol(8)
+                        2.0.1
+                        #end
+                        #@gridSysCol(4)发布时间#end
+                        #@gridSysCol(8)
+                        2015.09.07
+                        #end
+                    #end
+                <div style="text-align:right;margin:right">
+                    #@iconOperations(
+                        "#myModal3"+varFor.index "" "编辑" "700" "300 " "/service/page/clientProductEdit.pagelet" "ml-5")
+                        编辑
+                    #end
+                    <a class="clientDelete">删除</a>
+                </div>
+
                 #end
+                #@simpleModal("myModal3"+varFor.index "编辑")#end
             #end
         #end
-
-    </div>
     #end
 #end
+
+##    </div>
 #@simpleModal("myModal3" "编辑")#end
 #@simpleModal("myModal4" "删除")#end
 <script>

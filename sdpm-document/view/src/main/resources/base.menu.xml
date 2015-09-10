@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="documentM" parent-id="0" name="文档管理" href="/document/document.page" icon="icon-desktop" sort="1" isShow="true" permission="Permission">
-    <!-- <menu id="edit" parent-id="product-edit" name="编辑" href="/document/edit-doclib.page" icon="icon-desktop" sort="1" isShow="true" permission="Permission"></menu> -->
+<menu id="documentM" parent-id="0" name="文档管理" href="/document/document.page" icon="icon-desktop" sort="1" isShow="1">
+    <!-- <menu id="edit" parent-id="product-edit" name="编辑" href="/document/edit-doclib.page" icon="icon-desktop" sort="1" isShow="1" ></menu> -->
 
 </menu>

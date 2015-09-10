@@ -28,14 +28,14 @@ public class MenuManagerImpl implements MenuManager {
     public void addMenu(Menu menu, String fileName) {
         String menuId = menu.getId();
         if (menuId == null || menuId.isEmpty()) {
-            logger.logMessage(LogLevel.ERROR, "菜单无id,重复定义在文件{}", fileName);
+            logger.logMessage(LogLevel.ERROR, "菜单文件{}加载错误，菜单无id", fileName);
             throw new RuntimeException("菜单文件加载错误，菜单无id。");
         }
         if (menuMap.containsKey(menuId)) {
-            logger.logMessage(LogLevel.ERROR, "菜单:[id:{}]已存在,重复定义在文件{}", menuId, fileName);
+            logger.logMessage(LogLevel.ERROR, "菜单:[id=\"{}\"]已存在,重复定义在文件{}", menuId, fileName);
             throw new RuntimeException("菜单文件加载错误，id重复定义。");
         }
-        logger.logMessage(LogLevel.DEBUG, "开始添加菜单:[id:{}]", menuId);
+        logger.logMessage(LogLevel.INFO, "开始添加菜单:[id=\"{}\"]", menuId);
         menuMap.put(menuId, menu);
         addScopeMenu(menu, fileName);
         List<Menu> childMenus = menu.getChildMenus();
@@ -45,14 +45,14 @@ public class MenuManagerImpl implements MenuManager {
                 addMenu(child, fileName);
             }
         }
-        logger.logMessage(LogLevel.DEBUG, "完成添加菜单:[id:{}]", menuId, menu.getName());
+        logger.logMessage(LogLevel.INFO, "完成添加菜单:[id=\"{}\"]", menuId, menu.getName());
     }
 
     public void addScopeMenu(Menu menu, String fileName) {
         if (menu.getScope() == null) {
             return;
         }
-        logger.logMessage(LogLevel.DEBUG, "开始添加菜单:[id:{}的所属聚合]", menu.getId());
+        logger.logMessage(LogLevel.INFO, "开始添加菜单:[id=\"{}\"的所属聚合]", menu.getId());
         for (String m : menu.getScope().split(",")) {
             List<String> scopeList = scopeMap.get(m);
             if (scopeList == null) {
@@ -61,13 +61,13 @@ public class MenuManagerImpl implements MenuManager {
                 logger.logMessage(LogLevel.DEBUG, "新增聚合分类{}", m);
             }
             scopeList.add(menu.getId());
-            logger.logMessage(LogLevel.DEBUG, "菜单:[id:{}]添加了所属聚合{}", menu.getId(), m);
+            logger.logMessage(LogLevel.DEBUG, "菜单:[id=\"{}\"]添加了所属聚合{}", menu.getId(), m);
         }
-        logger.logMessage(LogLevel.DEBUG, "结束添加菜单:[id:{}的所属聚合]", menu.getId());
+        logger.logMessage(LogLevel.INFO, "结束添加菜单:[id=\"{}\"的所属聚合]", menu.getId());
     }
 
     public void addMenuToParent(Menu menu, String fileName) {
-        logger.logMessage(LogLevel.DEBUG, "开始添加菜单到父节点:[id:{}]", menu.getId());
+        logger.logMessage(LogLevel.DEBUG, "开始添加菜单到父节点:[id=\"{}\"]", menu.getId());
 
         if (menu.getParentId() != null) {
             Menu parentMenu = menuMap.get(menu.getParentId());
@@ -75,18 +75,18 @@ public class MenuManagerImpl implements MenuManager {
                 parentMenu.getChildMenus().add(menu);
             }
         }
-        logger.logMessage(LogLevel.DEBUG, "结束添加菜单到父节点:[id:{}]", menu.getId());
+        logger.logMessage(LogLevel.DEBUG, "结束添加菜单到父节点:[id=\"{}\"]", menu.getId());
 
     }
 
     public void removeMenu(String menuId) {
-        logger.logMessage(LogLevel.DEBUG, "删除菜单id:{}", menuId);
+        logger.logMessage(LogLevel.DEBUG, "删除菜单id=\"{}\"", menuId);
         if (!menuMap.containsKey(menuId)) {
-            logger.logMessage(LogLevel.WARN, "菜单menuId:{}不存在,无须删除", menuId);
+            logger.logMessage(LogLevel.WARN, "菜单menuid=\"{}\"不存在,无须删除", menuId);
         } else {
             menuMap.remove(menuId);
         }
-        logger.logMessage(LogLevel.DEBUG, "删除菜单menuId:{}完毕", menuId);
+        logger.logMessage(LogLevel.DEBUG, "删除菜单menuid=\"{}\"完毕", menuId);
     }
 
     public List<Menu> getChildMenus(String parentId) {
@@ -109,6 +109,7 @@ public class MenuManagerImpl implements MenuManager {
         for (String s : scopeIdList) {
             menuList.add(menuMap.get(s));
         }
+        Collections.sort(menuList);
         return menuList;
     }
 
