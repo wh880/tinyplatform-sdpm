@@ -1,11 +1,12 @@
+#!set(linkName="product-archive",sonitem="<li>"+"文档"+"</li>")
 #@tinyForm("thisform" "url" "post" {"class":""})
 
-<div style="width:80%;margin-left: 150px;" class="pageleftpart">
+<div style="width:100%;float:center" class="pageleftpart">
 <div class="infoContent">
     <p class="titleName">创建文档</p>
 	#@elementItem()
 		#@colLabel()所属产品：#end
-		#@formControlDiv("col-6")
+		#@formControlDiv("col-5")
 			#@Tselect2F()
 				#@Tselect2Body("lang" "IN" {"class":"input-text select2"})
                     <option value="CT">产品1</option>
@@ -20,7 +21,7 @@
 	#end
 	#@elementItem()
 		#@colLabel()所属分类：#end
-		#@formControlDiv("col-6")
+		#@formControlDiv("col-5")
 			#@Tselect2F()
 				#@Tselect2Body("lang" "IN" {"class":"input-text select2"})
                     <option value="CT">A1</option>
@@ -44,14 +45,14 @@
     #end
 	#@elementItem()
 		#@colLabel()文档标题：#end
-		#@formControlDiv("col-6")
+		#@formControlDiv("col-5")
 			#tinyInput("text" "archive-title" ""{"placeholder":"","nullmsg":"请输入文档标题！","id":"archive-title","class":"input-text"})
 		#end
 		#@validateDiv("col-2")#end
 	#end
 	#@elementItem()
 		#@colLabel()关键字：#end
-		#@formControlDiv("col-6")
+		#@formControlDiv("col-5")
 			#tinyInput("text" "keywords" ""{"placeholder":"","id":"keywords","class":"input-text"})
 		#end
 		#@validateDiv("col-2")#end
@@ -59,7 +60,7 @@
 
 	#@elementItem()
 		#@colLabel()文档摘要：#end
-		#@formControlDiv("col-6")
+		#@formControlDiv("col-5")
 			#tinyInput("text" "sel" ""{"placeholder":"","id":"sel","class":"input-text"})
 		#end
 		#@validateDiv("col-2")#end
@@ -81,7 +82,7 @@
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="backBtn"><a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" >返回</a></button>
+                <button style="float: left" type="submit" id="submit" class="backBtn"><a href="${TINY_CONTEXT_PATH}/product/page/project/archive-list.page" >返回</a></button>
             </div>
             <div class="col-5"></div>
         </div>

@@ -1,0 +1,96 @@
+#!set(linkName="product-archive",sonitem="<li>"+"文档"+"</li>")
+#@tinyForm("thisform" "url" "post" {"class":""})
+
+<div style="width:100%;float:center" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">创建文档</p>
+        #@elementItem()
+            #@colLabel()所属产品：#end
+            #@formControlDiv("col-5")
+                #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"})
+                        <option value="CT">产品1</option>
+                        <option value="DE">产品2</option>
+                        <option value="FL">产品3</option>
+                    #end
+
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a> <a href="#"></a>#end
+                #end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()所属分类：#end
+            #@formControlDiv("col-5")
+                #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"})
+                        <option value="CT">A1</option>
+                        <option value="DE">D2</option>
+                        <option value="FL">M3</option>
+                    #end
+
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#"></a>#end
+                #end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()文档类型：#end
+            #@formControlDiv("skin-minimal col-5")
+                #@tinyRadio("archkind" "archive" "onlyview" {"nullmsg":"请选择！","datatype":"*"})文件#end
+                #@tinyRadio("archkind" "link" "private")链接#end
+                #@tinyRadio("archkind" "web" "whitelist")网页#end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()文档标题：#end
+            #@formControlDiv("col-5")
+                #tinyInput("text" "archive-title" ""{"placeholder":"","nullmsg":"请输入文档标题！","id":"archive-title","class":"input-text"})
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>文档正文：</label></div>
+                <div class="col-9">
+                    #@Teditor("content2" "content2" {"initialFrameHeight":"150"})#end</div>
+            </div>
+        #end
+
+
+        #@elementItem()
+            #@colLabel()关键字：#end
+            #@formControlDiv("col-5")
+                #tinyInput("text" "keywords" ""{"placeholder":"","id":"keywords","class":"input-text"})
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+        #@elementItem()
+            #@colLabel()文档摘要：#end
+            #@formControlDiv("col-5")
+                #tinyInput("text" "sel" ""{"placeholder":"","id":"sel","class":"input-text"})
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+    </div>
+
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="backBtn"><a href="${TINY_CONTEXT_PATH}/product/page/project/archive-list.page" >返回</a></button>
+            </div>
+            <div class="col-5"></div>
+        </div>
+
+    #end
+
+#end
