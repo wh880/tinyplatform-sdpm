@@ -6,61 +6,89 @@
         <p class="titleName">复制</p>
 	 #@elementItem()
         #@colLabel()所属产品：#end
-		<span class="tinyFormsty">
-                    #@formControlDiv("col-1")
-                        #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                            #@tinyOptionItem("zh")中国#end
-                            #@tinyOptionItem("en")英国#end
-                            #@tinyOptionItem("ta")泰国#end
-                        #end
-                    #end
-                #@formControlDiv("col-1")
-                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                        #@tinyOptionItem("zh")中国#end
-                        #@tinyOptionItem("en")英国#end
-                        #@tinyOptionItem("ta")泰国#end
-                    #end
-                #end
-         </span>
+		
+            #@formControlDiv("col-4")
+            	<div class="col-6">
+		             #@Tselect2F()
+	                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Admin</option>
+	                        <option value="DE">Demo</option>
+	                        <option value="FL">Me</option>
+	                    #end
+	                
+	                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+	                #end
+                </div>
+                <div class="col-6">
+		             #@Tselect2F()
+	                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Admin</option>
+	                        <option value="DE">Demo</option>
+	                        <option value="FL">Me</option>
+	                    #end
+	                
+	                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+	                #end
+                </div>
+       		 #end       
+         
+	         
+        
     #end
     
      #@elementItem()
         #@colLabel()所属计划：#end
 	        #@formControlDiv("col-4")
-	            #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-				#@tinyOptionItem("zh")中国#end
-				#@tinyOptionItem("en")英国#end
-				#@tinyOptionItem("ta")fffffffffffff泰国#end
-			#end
+	             #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">Admin</option>
+                        <option value="DE">Demo</option>
+                        <option value="FL">Me</option>
+                    #end
+                
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
         #end
         #@validateDiv("col-2")#end
     #end
     
      #@elementItem()
         #@colLabel()来源：#end
-	       <span class="tinyFormsty">
-                    #@formControlDiv("col-2")
-                        #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                            #@tinyOptionItem("zh")中国#end
-                            #@tinyOptionItem("en")英国#end
-                            #@tinyOptionItem("ta")泰国#end
-                        #end
-                    #end
-                #@formControlDiv("col-1")
-                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                        #@tinyOptionItem("zh")中国#end
-                        #@tinyOptionItem("en")英国#end
-                        #@tinyOptionItem("ta")泰国#end
-                    #end
-                #end
-                #@formControlDiv("col-1")
-                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                        #@tinyOptionItem("zh")中国#end
-                        #@tinyOptionItem("en")英国#end
-                        #@tinyOptionItem("ta")泰国#end
-                    #end
-                #end
-                </span>
+	        #@formControlDiv("col-4")
+            	<div class="col-4">
+		             #@Tselect2F()
+	                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Admin</option>
+	                        <option value="DE">Demo</option>
+	                        <option value="FL">Me</option>
+	                    #end
+	                
+	                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+	                #end
+                </div>
+                <div class="col-4">
+		             #@Tselect2F()
+	                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Admin</option>
+	                        <option value="DE">Demo</option>
+	                        <option value="FL">Me</option>
+	                    #end
+	                
+	                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+	                #end
+                </div>
+                 <div class="col-4">
+		             #@Tselect2F()
+	                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Admin</option>
+	                        <option value="DE">Demo</option>
+	                        <option value="FL">Me</option>
+	                    #end
+	                
+	                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+	                #end
+                </div>
+       		 #end 
     #end
     
 
@@ -92,11 +120,15 @@
      #@elementItem()
         #@colLabel()优先级#end
 	        #@formControlDiv("col-4")
-	            #@tinySelect("lang" "zh" {"class":"input-text select2 ","rel":"22"})
-				#@tinyOptionItem("zh")1#end
-				#@tinyOptionItem("en")22#end
-				#@tinyOptionItem("ta")3#end
-			#end
+	             #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">Admin</option>
+                        <option value="DE">Demo</option>
+                        <option value="FL">Me</option>
+                    #end
+                
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
         #end
         #@validateDiv("col-2")#end
     #end
@@ -112,13 +144,15 @@
       #@elementItem()
         #@colLabel()由谁评审#end
 	        #@formControlDiv("col-4")
-	            #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"8","multiple":"multiple"})
-				#@tinyOptionItem("zh")1#end
-				#@tinyOptionItem("en")22#end
-				#@tinyOptionItem("ta")3#end
-			
-
-		     #end
+	            #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">Admin</option>
+                        <option value="DE">Demo</option>
+                        <option value="FL">Me</option>
+                    #end
+                
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
 	         
         #end
         #@validateDiv("col-2")#end
@@ -127,8 +161,16 @@
     #@elementItem()
         #@colLabel()抄送给#end
 	        #@formControlDiv("col-4")
-	          #tinyInput("text" "email" ""{"datatype":"e","nullmsg":"请输入名称！","id":"email","class":"input-text"})
-	        #end
+	             #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2","multiple":"multiple "}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">Admin</option>
+                        <option value="DE">Demo</option>
+                        <option value="FL">Me</option>
+                    #end
+                
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
+        #end
         #@validateDiv("col-2")#end
     #end
     

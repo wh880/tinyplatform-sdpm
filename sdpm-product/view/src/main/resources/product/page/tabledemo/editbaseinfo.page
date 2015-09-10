@@ -31,11 +31,16 @@
 	       			    #@elementItem()
 		#@colLabel()所属模块：#end
 		#@formControlDiv("col-8")
-			#@tinySelect("lang" "zh" {"class":"input-text ","rel":"22"})
-				#@tinyOptionItem("zh")A001#end
-				#@tinyOptionItem("en")B001#end
-				#@tinyOptionItem("ta")C001#end
-			#end
+				#@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">模块A</option>
+                        <option value="DE">模块B</option>
+                        <option value="FL">模块C</option>
+                        <option value="GA">产品D</option>
+                    #end
+                
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
 		#end
 		#@validateDiv("col-2")#end
 	#end
@@ -105,11 +110,15 @@
 	  #@elementItem()
         #@colLabel()抄送给：#end
        #@formControlDiv("col-8")
-            #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22","multiple":"multiple"})
-			#@tinyOptionItem("zh")A#end
-			#@tinyOptionItem("en")B#end
-			#@tinyOptionItem("ta")C#end
-		#end
+          #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2","multiple":"multiple "}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">Admin</option>
+                        <option value="DE">Demo</option>
+                        <option value="FL">Me</option>
+                    #end
+                
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
        #end
       #@validateDiv("col-2")#end
     #end

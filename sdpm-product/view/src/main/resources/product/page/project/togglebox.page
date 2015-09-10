@@ -41,8 +41,8 @@
 	             
 				
 					<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-report.page">#buttonIcon(iconClass="icon-bar-chart")报表</a>&nbsp;
-#*					
-					#@iconOperations("#myModal" "icon-plus-sign" "批量添加" "1300" "500" "/product/page/tabledemo/product-demand-addlist.pagelet" "ml-5")&nbsp;批量添加#end
+					
+#*					#@iconOperations("#myModal" "icon-plus-sign" "批量添加" "1300" "500" "/product/page/tabledemo/product-demand-addlist.pagelet" "ml-5")&nbsp;批量添加#end
 					*#
 					<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page">#buttonIcon(iconClass="icon-plus")提需求</a>&nbsp;
 				</span>

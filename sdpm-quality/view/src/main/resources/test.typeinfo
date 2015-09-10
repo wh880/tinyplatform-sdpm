@@ -17,5 +17,7 @@
             	</type-info>
      <type-info name="qualityVersionInfo" >
             	    <info name="versionEditionInfo" title="基本信息" resource="qualityVersionInfo" infoParameter="" url="/testManagement/page/tabledemo/versionRightInfo.pagelet"/>
+            			<info name="userInfo" title="负责人信息" resource="userInfo" infoParameter="" url="/organization/userinfor.pagelet"/>
+            			<info name="projectInfo" title="项目信息" infoParameter="" url="/project/task/basicInfoEdit.pagelet" resource="projectEdit"/>
             	</type-info>
 </type-infos>

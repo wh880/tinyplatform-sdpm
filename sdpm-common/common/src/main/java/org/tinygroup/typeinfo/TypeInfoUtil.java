@@ -34,10 +34,10 @@ public class TypeInfoUtil {
 	public static String formatUrl(String url,String parameter, int id){
 		if(parameter != null&&!"".equals(parameter)){
 					url = url+"?"+parameter+"="+id;
-				}else{
-					url = url;
-				}
-		return url;
+		}else{
+			url = url;
+		}
+		return url.startsWith("/")?url:"/"+url;
 	}
 
 	private static void init(){

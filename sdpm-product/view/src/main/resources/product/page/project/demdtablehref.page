@@ -3,23 +3,7 @@
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="产品概况",activeMenuId=currentPageId)
 #!set(linkName="demand",sonitem="<li>"+"需求"+"</li>")
-#*<script>
-	$(document).ready(function(){
-		
-		$(".beizhu").each(function(){
-			$(this).unbind("click").bind("click",function(){
-				if($("#beizhutext").attr("style")==""){
-					$("#beizhutext").hide();
-				}else{
-					$("#beizhutext").show();
-				}
-			
-			
-			});
-		});
-		
-	});	 
-</script>*#
+
 #include("/product/page/event/common.page")
 #set(name="version")
 #@tabWithInit("tab_demo" "optionsBox")
@@ -108,6 +92,7 @@
 		 </div>
 		
 	</div>
+	
 <div style="width:35%;float:right">
 #*#include("/product/page/tabledemo/hrefbaseinfo.page")*#
 	#TypeInfo("demandhref")

@@ -18,7 +18,7 @@
 	#@td()阿炉添加#end
 	#@td()2015/03/25 21:49#end
 	 #@td()
-	    #iconOperations("#myModal" " icon-pencil" "编辑" "865" "448" "/document/table-edit.pagelet" "ml-5")
+	 	<a href="${TINY_CONTEXT_PATH}/document/table-edit.page">#buttonIcon(iconClass="icon-pencil")</a>	    
 		#iconOperation(" icon-remove" "删除" "ml-5")
 	#end
 #end
