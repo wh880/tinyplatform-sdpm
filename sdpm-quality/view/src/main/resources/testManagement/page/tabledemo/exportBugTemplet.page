@@ -1,8 +1,12 @@
+<style>
+	.size {height: 35px}
+</style>
 #@table()
     #@tbody()
         #@tr()
             #@td()
-                #inputText(inputPlaceHolder="文件名")
+#*                #inputText(inputPlaceHolder="文件名")*#
+					<input type="text" class="size" value="请输入文件名" />
             #end
             #@td()
                 #@selectBox()

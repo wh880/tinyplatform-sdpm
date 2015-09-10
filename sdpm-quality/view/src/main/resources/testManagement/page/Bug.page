@@ -2,17 +2,6 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
-#*<style>
-.tabLayout .tabBar span a{color:#333}
-.tabLayout .tabBar .Current a{color:#fff}
-.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
-.operationbar a{padding:2px 3px;display:inline-block;margin-right:0;border-radius:3px;}
-.operationbar a:hover{background:#ddd;color:#333;}
-.operationbar .active_btn:hover{background:none;}
-.btn-group #Dropdown{background:none;border:none;padding:0 3px}
-.open>#downMenuSty{min-width:80px}
-</style>*#
-##<style>.dropdownBox{float:left;background:#eee; padding:5px 18px;margin-top:-5px;margin-bottom:-8px;}</style>
 
 #set(name="qualityBug")
 #@div()
@@ -51,9 +40,9 @@
 	                    #@ulDropdownMenu("downMenuSty")
 #*	                    	#@iconOperations("#myModal" "icon-download-alt" "导出数据" "865" "200"
 						 "/page/tabledemo/user-add.pagelet" "ml-5")导出数据#end*#
-						 #@aModal("#myModal" "导出数据" "500" "100" "" "/testManagement/page/tabledemo/exportBugData.pagelet")导出数据#end
+						 #@aModal("#myModal" "导出数据" "550" "100" "" "/testManagement/page/tabledemo/exportBugData.pagelet")导出数据#end
 						</br>
-						 #@aModal("#myModal" "导出模板" "500" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出模版#end
+						 #@aModal("#myModal" "导出模板" "550" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出模版#end
 							#@dialog("myModal")
 								#@dialogHeader()对话框标题#end
 								#@dialogBody()<p>对话框内容…</p>#end
@@ -67,7 +56,7 @@
                     #end&nbsp;
                     
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
-                    <a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
+   ##                 <a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-plus")建Bug</a>
 				</span>
 				#div(divClass="clearfix")
@@ -79,9 +68,9 @@
 			#@toggleBox({"class":"open"})
 				#@toggleLeft({"class":"aclass"})
 					#@settoggleLeftTitle()这里据说是项目名称#end
-					#@settoggleLeftBody()
+					#@settoggleLeftBody("treeLeftbox")
 						#include("/testManagement/page/moduleTree.page")
-				#end
+					#end
 				#end
 			
 			#@toggleRight()
@@ -100,7 +89,7 @@
 			#@tinyTableContent("../data/BugData.pagelet")
 				#@thead()
 					#@tr()
-#*						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end*#
+						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})级别#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})P#end

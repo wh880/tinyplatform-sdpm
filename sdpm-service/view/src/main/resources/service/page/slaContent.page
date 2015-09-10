@@ -6,7 +6,9 @@
 #set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-
+        #@div(divClass="dropdownBox")
+            #include("/service/page/dropdownMenu.page")
+        #end
         #@tabHead()
             #include("/service/page/tab.page")
         #end
@@ -15,29 +17,30 @@
 #end
 #@tabWithInit("tab_demo" "optionsBox")
 ##tabbody end
-<div style="width:80%;float:left">
+<p style="width:100%;float:left">
 ##        #@gridSysCol(8)
     #@div(divClass="infoContent")
-        <div>
-            #@table("协议详情")
-                #@thead()
-                #end
-                #@tbody()
-                    #@tr()
-                        #@th()客户名称#end
-                        #@td()阿里巴巴#end
+    <p class="titleName">阿里巴巴</p>
+    ##        <div>
+    ##            #@table("协议详情")
+        #@tbody()
+            #@tr()
+            <div class="text-c"><h4>支付宝出售协议</h4></div>
+            #end
+            #@noRespsGridSystem()
+                #@gridSysRow()
+                    #@gridSysCol(2)#end
+                    #@gridSysCol(8)
+                        #@tr()
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议</p>
+                        #end
                     #end
-                    #@tr()
-                        #@th()协议名称#end
-                        #@td()XXXX协议#end
-                    #end
-                    #@tr()
-                        #@th()协议内容#end
-                        #@td()***********************#end
-                    #end
+                    #@gridSysCol(2)#end
                 #end
             #end
-        </div>
+        #end
+    ##            #end
+    ##        </div>
         <div style="text-align:right;margin:right">
             <a href="slaContentEdit.page">编辑</a>
             <a class="clientDelete">删除</a>

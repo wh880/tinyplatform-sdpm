@@ -3,8 +3,7 @@
         #@colLabel()客户ID：#end
         #@formControlDiv("col-8")
             #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
-                "username","class":"input-text"})
+                "text" "username" ""{"id":"username","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end
@@ -12,8 +11,8 @@
         #@colLabel()客户名称：#end
         #@formControlDiv("col-8")
             #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
-                "username","class":"input-text"})
+                "text" "clientName" ""{"placeholder":"客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":
+                "clientName","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end
@@ -21,8 +20,7 @@
         #@colLabel()客户部门：#end
         #@formControlDiv("col-8")
             #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
-                "username","class":"input-text"})
+                "text" "clientDepartment" ""{"placeholder":"","id":"clientDepartment","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end
@@ -30,7 +28,7 @@
         #@colLabel()客户登记人：#end
         #@formControlDiv("col-8")
             #tinyInput(
-                "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
+                "text" "username" ""{"placeholder":"","datatype":"*","nullmsg":"客户登记人不能为空！","id":
                 "username","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
@@ -46,14 +44,10 @@
         #end
     #end
     #@elementItem()
-        #@colLabel()客户状态：#end
-        #@formControlDiv("col-3")
-            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-                #@tinyOptionItem("zh")正常#end
-                #@tinyOptionItem("en")失效#end
+            #@colLabel()状态是否正常：#end
+            #@formControlDiv("col-8")
+                #tinySwitcher("isvip" "正常" "失效") ##第二个为选中状态 第三参数为数据库返回时的数据
             #end
-        #end
-        #@validateDiv("col-2")#end
     #end
 
 #end

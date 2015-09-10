@@ -1,26 +1,6 @@
 <style>
-#*.tabLayout .tabBar span a{color:#333}
-.tabLayout .tabBar .Current a{color:#fff}
-.infoContent{ margin:18px 4px 10px 5px; padding:6px;font-weight:bold;border:#eee 1px solid;}
-.infoContent .titleName{margin-top:-16px;margin-bottom:8px;font-weight:bold;font-size:13px;}
-.tabLayout .tabBar span a{color:#333}
-.tabLayout .tabBar .Current a{color:#fff}*#
 .infoContent,.aa{font-weight:normal;}
-#*.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
-.btn-group #Dropdown{background:none;border:none;padding:0 3px}*#
 .open #downMenuSty{min-width:75px}
-.caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: -5px;
-    margin-right: 5px;
-    vertical-align: middle;
-    border-top: 4px dashed;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
-}
-#*h3 {line-height: 1.2;}*#
 </style>
 <div>
 	#@div(divClass="infoContent")		

@@ -1,5 +1,5 @@
 #@navSelect2()
-    #@navSelect2Nav()网金社${id}<span class="caret"></span>#end
+    #@navSelect2Nav()我是网金社${id}<span class="caret"></span>#end
     #@navSelect2Body()
         #@navSelect2Data()
         <option value=""></option>

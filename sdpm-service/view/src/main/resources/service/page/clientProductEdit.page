@@ -2,7 +2,7 @@
     #@noRespsGridSystem()
         #@gridSysRow()
             #@colLabel("col-2")产品名称：#end
-            #@gridSysCol(5)
+            #@gridSysCol(8)
                 #@tinySelect("lang" "ch" {"class":"input-text select2","rel":"22"})
                     #@tinyOptionItem("ch")请选择#end
                     #@tinyOptionItem("zh")支付宝#end
@@ -14,7 +14,7 @@
 
         #@gridSysRow()
             #@colLabel("col-2")产品版本：#end
-            #@gridSysCol(5)
+            #@gridSysCol(8)
                 #@tinySelect("lang" "ch" {"class":"input-text select2","rel":"22"})
                     #@tinyOptionItem("ch")请选择#end
                     #@tinyOptionItem("zh")2.0#end
@@ -26,7 +26,7 @@
         #end
         #@gridSysRow()
             #@colLabel("col-2")发布时间：#end
-            #@gridSysCol(5)
+            #@gridSysCol(8)
                 #@tinyDateInput(
                     "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
             #end

@@ -20,7 +20,7 @@
                     "#myModal1" "icon-download-alt" "导出" "600" "100" "/service/page/tabledemo/slaExport.pagelet" "ml-5")
                     导出#end
                 #@iconOperations(
-                    "#myModal2" "icon-plus" "购买产品" "500" "300" "/service/page/clientProductAdd.pagelet" "ml-5")购买产品#end
+                    "#myModal2" "icon-plus" "购买产品" "500" "250" "/service/page/clientProductAdd.pagelet" "ml-5")购买产品#end
             ##                <a href="/service/page/clientProductAdd.page">#buttonIcon(iconClass="icon-plus")新建产品</a>
                 <a href="${TINY_CONTEXT_PATH}/service/page/clientUser.page"
                    title="返回">#buttonIcon(iconClass="icon-reply")返回</a>

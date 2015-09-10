@@ -25,10 +25,12 @@
 				</span>
 				<span class="r">
 				<!--导入导出修改-->
-				#@aModal("#myModal" "导入" "600" "65" "btn-class" "/product/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")导入#end
+					#@aModal("#myModal" "导入" "600" "65" "btn-class"
+						"/product/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")
+                        导入#end
 				
 					#@buttonGroup()
-			                    #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出  #@spanCaret()#end#end
+						#@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出  #@spanCaret()#end#end
 			                    #@ulDropdownMenu("downMenuSty")
 				                    <p>
 				                     #@iconOperations("#myModal" "" "导出" "400" "200"  "/product/page/tabledemo/product-export-data.pagelet" "ml-5") &nbsp;导出数据#end  
