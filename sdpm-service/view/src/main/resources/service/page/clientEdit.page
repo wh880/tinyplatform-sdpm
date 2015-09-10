@@ -44,12 +44,10 @@
         #end
     #end
     #@elementItem()
-        #@elementItem()
             #@colLabel()状态是否正常：#end
             #@formControlDiv("col-8")
                 #tinySwitcher("isvip" "正常" "失效") ##第二个为选中状态 第三参数为数据库返回时的数据
             #end
-        #end
     #end
 
 #end

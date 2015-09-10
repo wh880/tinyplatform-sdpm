@@ -65,7 +65,7 @@
     #@noRespsGridSystem()
         #@gridSysRow()
             #@colLabel("col-2")产品名称：#end
-            #@gridSysCol(5)
+            #@gridSysCol(8)
                 #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
                     #@tinyOptionItem("zh")支付宝#end
                     #@tinyOptionItem("en")财付通#end
@@ -75,7 +75,7 @@
         #end
         #@gridSysRow()
             #@colLabel("col-2")客户名称：#end
-            #@gridSysCol(5)
+            #@gridSysCol(8)
                 #tinyInput("text" "username" ""{"placeholder":"字母/中文/数字","datatype":"*3-20","nullmsg":"客户不能为空！","id":
                     "username","class":""})
             #end
@@ -83,7 +83,7 @@
         #end
         #@gridSysRow()
             #@colLabel("col-2")产品版本：#end
-            #@gridSysCol(5)
+            #@gridSysCol(8)
                 #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
                     #@tinyOptionItem("zh")2.0.1#end
                     #@tinyOptionItem("en")3.0.1#end
@@ -93,7 +93,7 @@
         #end
         #@gridSysRow()
             #@colLabel("col-2")购买时间：#end
-            #@gridSysCol(5)
+            #@gridSysCol(8)
                 #@tinyDateInput(
                     "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
                     "日期不能为空","placeholder":"yMdH分别代表年月日,你可以任意组合这些元素来自定义你个性化的日期格式."})#end

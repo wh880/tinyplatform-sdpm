@@ -20,7 +20,7 @@
     #end
 #end
 #@tinyForm("thisform" "" "" {"class":"test"})
-<div style="width:80%;margin-left: 200px;" class="pageleftpart">
+<div style="width:80%;margin-left: 20px;" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">新建客户</p>
 
@@ -52,15 +52,16 @@
         #@elementItem()
             #@sdpmItem("客户登记人")
                 #tinyInput(
-                    "text" "username" ""{"placeholder":"","datatype":"","nullmsg":"登记人不能为空！","id":"username","class":
+                    "text" "username" ""{"placeholder":"","datatype":"*","nullmsg":"登记人不能为空！","id":"username","class":
                     ""})
             #end
         #end
 
         #@elementItem()
             #@sdpmItem("客户联系人")
-                #tinyInput("text" "客户联系人" ""{"datatype":"","id":"","class":"input-text"})
-            #end
+                #tinyInput(
+                    "text" "username" ""{"placeholder":"","datatype":"*","nullmsg":"登记人不能为空！","id":"username","class":
+                    ""})#end
         #end
 
         #@elementItem()
@@ -72,19 +73,15 @@
         #@elementItem()
             #@sdpmItem("客户登记时间")
                 #@tinyDateInput(
-                    "regionday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
+                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
                     "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
             #end
         #end
 
         #@elementItem()
-            #@sdpmItem("客户状态")
-                #@radioBox()
-                    #@tinyRadioes("start" "normal" "innormal" {"nullmsg":"请选择状态！","datatype":"*"})正常#end
-                #end
-                #@radioBox()
-                    #@tinyRadioes("sex" "women" "women")失效#end
-                #end
+            #@colLabel()状态是否正常：#end
+            #@formControlDiv("col-8")
+                #tinySwitcher("isvip" "是" "否") ##第二个为选中状态 第三参数为数据库返回时的数据
             #end
         #end
         <br/>
