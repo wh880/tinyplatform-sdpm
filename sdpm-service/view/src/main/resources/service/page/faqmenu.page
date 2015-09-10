@@ -46,9 +46,9 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
           <a href="${TINY_CONTEXT_PATH}/service/page/addquestion.page">#buttonIcon(iconClass="icon-plus")新增问题</a>
 				</span>
                 #end
-##以下包含在faqquestion.page里面，加载faq页面-“具体的5个问题以及问题后面的编辑和删除按钮”
+##以下内容，加载faq右边页面-“具体的5个问题以及问题后面的编辑和删除按钮”，包含在faqquestion.page里面
      #include("/service/page/faqquestion.page")
- ##以上包含在faqquestion.page里面，加载faq页面-“具体的5个问题以及问题后面的编辑和删除按钮”
+ ##以上内容，加载faq右边页面-“具体的5个问题以及问题后面的编辑和删除按钮”，包含在faqquestion.page里面
             #end
 
 ##    以下实现faqmenu.page页面下面的分页
