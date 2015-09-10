@@ -8,7 +8,7 @@
     </menu>
 		
 	<menu id="demand" parent-id="project" name="需求" href="/project/demand/index.page" icon="" sort="1" isShow="1" permission="Permission">
-        <menu id="rm-demand" name="需求移出" href="/" icon="icon-unlink" sort="1"
+        <menu id="rm-demand" name="需求移出" href="/" icon="icon-remove" sort="1"
               isShow="1" scope="demand-op"/>
     </menu>
 
