@@ -74,7 +74,7 @@
             #end
         </div>
         <div style="text-align:right;margin:right">
-            <a href="slaContentEdit.page">编辑</a>
+            <a href="questiondbEdit.page">编辑</a>
             <a class="clientDelete">删除</a>
         </div>
         #end
@@ -101,7 +101,7 @@
             #end
         </div>
         <div style="text-align:right;margin:right">
-            <a href="slaContentEdit.page">编辑</a>
+            <a href="questiondbEdit.page">编辑</a>
             <a class="clientDelete">删除</a>
         </div>
 
@@ -127,7 +127,7 @@
         #end
     </div>
     <div style="text-align:right;margin:right">
-        <a href="slaContentEdit.page">编辑</a>
+        <a href="questiondbEdit.page">编辑</a>
         <a class="clientDelete">删除</a>
     </div>
 
@@ -153,7 +153,7 @@
         #end
     </div>
     <div style="text-align:right;margin:right">
-        <a href="slaContentEdit.page">编辑</a>
+        <a href="questiondbEdit.page">编辑</a>
         <a class="clientDelete">删除</a>
     </div>
 
@@ -178,7 +178,7 @@
         #end
     </div>
     <div style="text-align:right;margin:right">
-        <a href="slaContentEdit.page">编辑</a>
+        <a href="questiondbEdit.page">编辑</a>
         <a class="clientDelete">删除</a>
     </div>
     ##以上为明明问题文本页面
