@@ -14,7 +14,7 @@
         ##operationbar star
             #@div(divClass="operationbar")
             <span class="f">
-					<a href="#" class="active_btn">详情</a>
+##					<a href="#" class="active_btn">详情</a>
 
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>

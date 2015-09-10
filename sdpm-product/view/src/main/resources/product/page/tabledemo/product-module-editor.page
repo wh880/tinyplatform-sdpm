@@ -11,7 +11,7 @@
 	#end
 #end
 #@tinyForm("thisform" "" "" {"class":"test"})
-<div style="width:80%;margin-left: 150px;" class="pageleftpart">
+<div style="width:100%;float:center" class="pageleftpart">
    <div class="infoContent">
         <p class="titleName">编辑</p>
  #@elementItem()

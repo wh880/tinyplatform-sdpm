@@ -38,7 +38,7 @@
 	
 	  #@elementItem()
         #@colLabel()文件名#end
-        #@formControlDiv("col-8")
+          #@formControlDiv("col-8")
           #tinyInput("text" "filename" ""{"nullmsg":"文件名不能为空！","id":"filename","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
@@ -46,7 +46,7 @@
     
      #@elementItem()
         #@colLabel()导出格式#end
-        #@formControlDiv("col-8")
+         #@formControlDiv("col-8")
              #@tinySelect("lang" "size" {"class":"input-text","rel":"22"})
 			#@tinyOptionItem("word")word#end
 			#@tinyOptionItem("xlsx")xlsx#end
@@ -61,19 +61,19 @@
     
      #@elementItem()
         #@colLabel()编码#end
-        #@formControlDiv("col-8")
+         #@formControlDiv("col-8")
              #@tinySelect("lang" "size" {"class":"input-text","rel":"22"})
 			#@tinyOptionItem("word")UTF-8#end
 			#@tinyOptionItem("xlsx")GBK#end
 			
 		#end
         #end
-        #@validateDiv("col-8")#end
+         #@validateDiv("col-8")#end
     #end
     
      #@elementItem()
         #@colLabel()记录#end
-        #@formControlDiv("col-8")
+         #@formControlDiv("col-8")
              #@tinySelect("lang" "size" {"class":"input-text","rel":"22"})
 			#@tinyOptionItem("word")全部记录#end
 			#@tinyOptionItem("xlsx")选中记录#end

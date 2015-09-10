@@ -21,8 +21,8 @@
 
                 #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
             #end
-            #end
         #end
+
         #@gridSysRow()
             #@colLabel("col-3")产品名称：#end
             #@gridSysCol(5)
@@ -74,6 +74,7 @@
         #end
     #end
 #end
+
 
 <script type="text/javascript">
     $(".select2").select2();
