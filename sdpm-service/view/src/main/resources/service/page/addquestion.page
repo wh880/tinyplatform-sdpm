@@ -1,4 +1,5 @@
 ##有一个#end在最下面
+#set(name="faq")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")

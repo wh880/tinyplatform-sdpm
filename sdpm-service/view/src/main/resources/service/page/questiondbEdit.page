@@ -1,3 +1,4 @@
+#set(name="faq")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
 
