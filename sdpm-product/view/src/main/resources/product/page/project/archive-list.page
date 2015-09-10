@@ -9,7 +9,7 @@
 				<span class="active_btn">文档列表</span>
 			</span>
 			<span class="r">
-                <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addArchive.page" title="创建文档">#buttonIcon(iconClass="icon-plus")创建文档</a>
+                <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/add-doc.page" title="创建文档">#buttonIcon(iconClass="icon-plus")创建文档</a>
 			</span>
 			#div(divClass="clearfix")
 		#end
