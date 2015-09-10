@@ -3,11 +3,11 @@
     #set(name="")
 
     #@elementItem()
-        #@colLabel()#end
+        #@colLabel("col-3")#end
         #@formControlDiv("col-6")
             #tinyInput("text" "username" ""{"placeholder":"如何初始化数据库？","datatype":"*4-16","nullmsg":"问题不能为空！","id":"username","class":"input-text"})
         #end
-        #@validateDiv("col-2")#end
+        #@validateDiv("col-3")#end
     #end
 
 #*     #@elementItem()
