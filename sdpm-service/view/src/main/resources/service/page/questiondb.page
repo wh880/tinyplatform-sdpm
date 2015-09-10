@@ -181,6 +181,24 @@
         <a href="questiondbEdit.page">编辑</a>
         <a class="clientDelete">删除</a>
     </div>
+
+
+        #@simpleModal("myModal4" "删除")#end
+    <script>
+        $(function () {
+            $(".infoContent").on("click", ".clientDelete", function () {
+                //console.log($(this).attr("itemId"))
+//            var that = this;
+                layer.confirm('确定要删除该记录？', function (index) {
+                    //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                    //$.ajax()
+                    //console.log(index);
+//                layer.msg($("已删除").attr("deleteList"), 1);
+                    layer.msg('已删除', 1);
+                })
+            });
+        });
+    </script>
     ##以上为明明问题文本页面
 
     #end
