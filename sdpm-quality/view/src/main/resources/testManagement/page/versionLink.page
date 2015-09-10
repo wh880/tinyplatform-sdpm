@@ -39,7 +39,8 @@
 			#@tinyTableContent("../data/link.pagelet")
 				#@thead()
 					#@tr()
-						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+#*						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end*#
+						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})版本#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})P#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})用例标题#end

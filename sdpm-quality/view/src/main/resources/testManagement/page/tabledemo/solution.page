@@ -29,55 +29,9 @@
             	<button type="submit" id="submit" class="commitBtn">保存</button>
         	</div>
     #@elementItem()
-    	#@sdpmItem("解决方案")
-    		 #@Tselect2F()
-	             #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                  <option value="CT">Connecticut</option>
-	                  <option value="DE">Delaware</option>
-	                  <option value="FL">Florida</option>
-	                  <option value="GA">Georgia</option>
-	                  <option value="IN">Indiana</option>
-	                  <option value="ME">Maine</option>
-	                  <option value="MD">Maryland</option>
-	               #end                
-	                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-              #end
-#*            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-                #@tinyOptionItem("0")#end
-                #@tinyOptionItem("1")设计如此#end
-                #@tinyOptionItem("2")重复Bug#end
-                #@tinyOptionItem("3")外部原因#end
-                #@tinyOptionItem("4")已解决#end
-                #@tinyOptionItem("5")无法重现#end
-                #@tinyOptionItem("6")延期解决#end
-                #@tinyOptionItem("7")不予解决#end
-            #end*#
-        #end
-    #end
-    #@elementItem()
-       #@sdpmItem("解决版本")
-             #@Tselect2F()
-	             #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                  <option value="CT">Connecticut</option>
-	                  <option value="DE">Delaware</option>
-	                  <option value="FL">Florida</option>
-	                  <option value="GA">Georgia</option>
-	                  <option value="IN">Indiana</option>
-	                  <option value="ME">Maine</option>
-	                  <option value="MD">Maryland</option>
-	               #end                
-	                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-              #end
-        #end
-    #end
-
-    #@elementItem()
-        #@sdpmItem("解决日期")
-            #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
-        #end
-    #end
-    #@elementItem()
-         #@sdpmItem("指派给")
+        <div class="col-12">
+         	<div class="col-2 text-r"><label>解决方案：</label></div>
+         		<div class="col-4">
             #@Tselect2F()
 	             #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                  <option value="CT">Connecticut</option>
@@ -90,14 +44,74 @@
 	               #end                
 	               #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
               #end
-        #end
+              </div>
+       </div>
+     #end
+#*            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
+                #@tinyOptionItem("0")#end
+                #@tinyOptionItem("1")设计如此#end
+                #@tinyOptionItem("2")重复Bug#end
+                #@tinyOptionItem("3")外部原因#end
+                #@tinyOptionItem("4")已解决#end
+                #@tinyOptionItem("5")无法重现#end
+                #@tinyOptionItem("6")延期解决#end
+                #@tinyOptionItem("7")不予解决#end
+            #end*#
+    #@elementItem()
+        <div class="col-12">
+         	<div class="col-2 text-r"><label>解决版本：</label></div>
+         		<div class="col-4">
+            #@Tselect2F()
+	             #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                  <option value="CT">Connecticut</option>
+	                  <option value="DE">Delaware</option>
+	                  <option value="FL">Florida</option>
+	                  <option value="GA">Georgia</option>
+	                  <option value="IN">Indiana</option>
+	                  <option value="ME">Maine</option>
+	                  <option value="MD">Maryland</option>
+	               #end                
+	               #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+              #end
+              </div>
+       </div>
+     #end
+
+    #@elementItem()
+        <div class="col-12">
+         	<div class="col-2 text-r"><label>解决日期：</label></div>
+         		<div class="col-4">
+            #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+        		</div>
+        </div>
     #end
     #@elementItem()
-         #@sdpmItem("附件")
-            #tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
-            #tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
-        #end
-    #end
+        <div class="col-12">
+         	<div class="col-2 text-r"><label>指派给：</label></div>
+         		<div class="col-4">
+            #@Tselect2F()
+	             #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                  <option value="CT">Connecticut</option>
+	                  <option value="DE">Delaware</option>
+	                  <option value="FL">Florida</option>
+	                  <option value="GA">Georgia</option>
+	                  <option value="IN">Indiana</option>
+	                  <option value="ME">Maine</option>
+	                  <option value="MD">Maryland</option>
+	               #end                
+	               #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+              #end
+              </div>
+       </div>
+     #end
+    #@elementItem()
+    	<div class="col-12">
+         <div class="col-2 text-r"><label>附件：</label></div>
+         	<div class="col-9">
+             #include("/testManagement/page/fileupload.page")
+             </div>
+         </div>
+     #end
     #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>备注：</label></div>
