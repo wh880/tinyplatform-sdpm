@@ -28,7 +28,7 @@
                          	<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editioncase.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
                          	<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page" title="复制">#buttonIcon(iconClass="icon-copy")</a>
 							#iconOperations("#myModal" "icon-remove" "删除" "200" "50" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
-                         	<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page"title="Bug">#buttonIcon(iconClass="icon-bug")</a>
+                         	<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page"title="Bug">#buttonIcon(iconClass="icon-bug")</a>
 						#end
 					#end
 				#end
