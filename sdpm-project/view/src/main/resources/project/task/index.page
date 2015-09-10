@@ -148,11 +148,11 @@
                     #@ulDropdownMenu("downMenuSty")
                         <p>
                             #@iconOperations(
-                                "#myModal" "" "导出数据" "700" "200"  "/project/task/outputData.pagelet" "ml-5")
+                                "#myModal" "" "导出数据" "700" "100"  "/project/task/outputData.pagelet" "ml-5")
                                 &nbsp;导出数据#end
                         </p>
 
-                        #@iconOperations("#myModal" "" "导出数据" "700" "80" "/project/task/outputModal.pagelet" "ml-5")
+                        #@iconOperations("#myModal" "" "导出数据" "550" "100" "/project/task/outputModal.pagelet" "ml-5")
                             &nbsp;导出模板#end
 
                     #end
