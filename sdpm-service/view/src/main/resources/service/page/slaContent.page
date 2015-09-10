@@ -41,15 +41,17 @@
         #end
     ##            #end
     ##        </div>
-        <div style="text-align:right;margin:right">
-            <a href="slaContentEdit.page">编辑</a>
-            <a class="clientDelete">删除</a>
-        </div>
+    <div style="text-align:right;margin:right">
+        <a href="slaContentEdit.page">编辑</a>
+        <a class="clientDelete">删除</a>
+    </div>
     #end
+<div class="infoContent">
     #@div(divClass="infoContent,col-6")
         <p class="titleName">历史记录</p>
         #include("/service/page/historyRecord.page")
     #end
+</div>
 ##        #end
 </div>
 #end
