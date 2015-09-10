@@ -12,9 +12,9 @@
 
 #for(var:[1..pagesize])
 #@tr()
-    #@td()<input type="checkbox" value="1" name="idCheck">#end
+    #@td()<input type="checkbox" name="bugIDList[]" value="" checked="checked"><a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${var}</a>#end
     #@td()1#end
-    #@td()张三#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">张三</a>#end
     #@td()北京#end
     #@td()中南海#end
     #@td()67#end

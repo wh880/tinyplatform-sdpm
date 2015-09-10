@@ -12,10 +12,21 @@
 
 #for(var:[1..pagesize])
 					#@tr()
-						#@td()<input type="checkbox" value="1" name="idCheck">#end
-						#@td()我是版本#end
+						#@td()<input type="checkbox" value="1" name="idCheck"><a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${var}</a>#end
+						#@td()
+						#@selectRadiusBox("select-box")
+							#@select(selectName="demo2" selectClass="select")
+							#@optionSelected("") #end
+							#@optionItem("1")1#end
+							#@optionItem("1")2#end
+							#@optionItem("1")3#end
+							#@optionItem("1")4#end						
+							#end
+						#end
+                	  	#end
+                	 
 						#@td()1#end
-						#@td()我是标题党#end
+						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">我是标题党</a>#end
 						#@td()我是类型#end
 						#@td()创建#end
 						#@td()状态#end

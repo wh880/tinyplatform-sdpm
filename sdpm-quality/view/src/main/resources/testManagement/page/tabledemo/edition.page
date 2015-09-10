@@ -27,7 +27,7 @@
 #end
 			
 #@tinyForm("thisform" "" "" {"class":"test"})
-	<div style="width:65%;float:left" class="pageleftpart">
+	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
     		<p class="titleName"><a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page" class="active_btn margin">项目名称</a>>编辑</p>
     		<div class="RTtitle">
@@ -36,7 +36,7 @@
         	        
    		#@elementItem()
             <div class="col-12">
-                <div class="col-2 text-r"><label>重现步骤</label></div>
+                <div class="col-2 text-r"><label>重现步骤&nbsp</label></div>
 
                 <div class="col-9">
                     #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
@@ -45,7 +45,7 @@
         <br/>
         #@elementItem()
             <div class="col-12">
-                <div class="col-2 text-r"><label>备注</label></div>
+                <div class="col-2 text-r"><label>备注&nbsp</label></div>
 
                 <div class="col-9">
                     #@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end</div>
@@ -53,10 +53,12 @@
         #end
         <br/>
         #@elementItem()
-    		#@sdpmItem("附件")
-                #tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
-				#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})            
-        	#end
+       		 <div class="col-12">
+                <div class="col-2 text-r"><label>附件</label></div>
+                <div class="col-9">
+                    #include("/testManagement/page/fileupload.page")  
+                </div>
+            </div>
         #end
         </div>
         #@elementItem()
@@ -82,7 +84,7 @@
         </div>
 #end
 
-    <div style="width: 35%;float: right">
+    <div style="width: 30%;float: right">
        #TypeInfo("qualityBugEdition")
 ##       #include("/testManagement/page/tabledemo/editionpaging.page")
     </div>
