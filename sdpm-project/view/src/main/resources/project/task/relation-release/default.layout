@@ -1,0 +1,110 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#import("/org/tinygroup/button/components/button_common.component")
+
+#import("/org/tinygroup/button/components/button.component")
+
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+
+
+#!set(linkName="release",sonitem="
+<li>"+"发布"+"</li>")
+#@div(divClass="operationbar")
+
+<span class="r">
+				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class"
+                    "/project/task/relation-release/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
+    <a href="${TINY_CONTEXT_PATH}/project/task//relation-release/product-al-req.page?cname=demand">#buttonIcon(iconClass=
+        "icon-link")关联需求</a>&nbsp;
+				<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page?cname=bug">#buttonIcon(iconClass=
+                    "icon-bug")关联Bug</a>&nbsp;
+
+    #iconOperations(
+        "#myModal" "icon-common-edit icon-pencil" "编辑发布" "865" "448" "/project/task/product-addrelease.pagelet" "ml-5")
+    #iconOperation(" icon-remove" "删除发布" "ml-5")
+    <a href="${TINY_CONTEXT_PATH}/product/page/project/product-release.page" title="返回">#buttonIcon(iconClass=
+        "icon-reply")</a>
+				</span>#div(divClass="clearfix")
+
+#end
+
+
+#@tabWithInit("tab_demo" "optionsBox")
+<div style="width:70%;float:left">
+    #@div()
+        #@tabWithInit("tab_demo" "optionsBox")
+
+            #@tabHead()
+
+                #if("demand"==type)
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/task/relation-release/product-al-req.page" cname=="demand"?
+                        "Current":"")
+                        #@buttons("","icon-lightbulb")
+                            已完成需求
+                        #end
+                    #end
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/task/relation-release/product-al-no-req.page" cname==
+                        "no-demand"?"Current":"")
+                        #@buttons("","icon-unlink")
+                            未关联需求
+                        #end
+                    #end
+                    #if("no-demand"==cname)
+                        <div style="float:right">
+                            <a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
+                        </div>
+                    #end
+
+                #end
+
+                #if("bug"==type)
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/task/relation-release/product-al-bug.page" cname=="bug"?
+                        "Current":"")
+                        #@buttons("","icon-bug green")
+                            已解决Bug
+                        #end
+                    #end
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/task/relation-release/product-al-no-bug.page" cname==
+                        "no-bug"?"Current":"")
+                        #@buttons("","icon-unlink")
+                            未关联Bug
+                        #end
+                    #end
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/task/relation-release/product-al-le-bug.page" cname==
+                        "le-bug"?"Current":"")
+                        #@buttons("","icon-bug green")
+                            遗留Bug
+                        #end
+                    #end
+                    #if("no-bug"==cname)
+
+                        <div class="r">
+
+                            <a href="#" id="showsearchmore-bug">&nbsp;&nbsp; #buttonIcon(iconClass="icon-search")搜索</a>
+                        </div>
+                    #end
+                #end
+
+                <div class="r">
+                    #@aModal(
+                        "#myModal" "导出HTML" "700" "130" "icon-upload-alt" "/project/task/product-export-html.pagelet")
+                        导出HTML#end&nbsp;
+
+                </div>
+
+            #end
+
+            #@tabBodyCol("ptop-5")
+
+
+                #pageContent
+
+
+            #end
+
+        #end
+    #end
+</div>
+<div style="width:30%;float:right">
+    #TypeInfo("productRelease")
+</div>
+#end

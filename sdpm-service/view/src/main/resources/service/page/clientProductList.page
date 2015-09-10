@@ -13,7 +13,7 @@
         #foreach(var:[1..listNum])
             #@gridSysCol(4)
                 #@div(divClass="infoContent")
-                    <p class="titleName">支付宝</p>
+                    <p class="titleName"><a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">支付宝</p>
 
                     <div>
                         #@table("")

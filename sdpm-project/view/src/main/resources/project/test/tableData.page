@@ -12,17 +12,17 @@
 #for(var:[1..pagesize])
 	#@tr()
 		#@td()<input type="checkbox" value="1" name="idCheck">#end
-		#@td()<a href="${TINY_CONTEXT_PATH}/quality/page/project/demdtablehref.page">008</a>#end
-		#@td()<a href="${TINY_CONTEXT_PATH}/quality/page/project/demdtablehref.page">1</a> #end
+		#@td()<a href="${TINY_CONTEXT_PATH}/project/demdtablehref.page">008</a>#end
+		#@td()<a href="${TINY_CONTEXT_PATH}//project/demdtablehref.page">1</a> #end
 		#@td()1#end
 		#@td()1#end
 		#@td()2015-8-28#end
 		#@td()2015-8-28#end
 		#@td()完成#end	
 		#@td()
-			<a href="${TINY_CONTEXT_PATH}/quality/page/version.page" title="用例">#buttonIcon(iconClass="icon-smile")</a>
-			<a href="${TINY_CONTEXT_PATH}/quality/page/versionLink.page" title="关联用例">#buttonIcon(iconClass="icon-link")</a>
-			<a href="${TINY_CONTEXT_PATH}/quality/page/tabledemo/editionversion.page" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
+			<a href="${TINY_CONTEXT_PATH}/quality/testmanagement/page/version.page" title="用例">#buttonIcon(iconClass="icon-smile")</a>
+			<a href="${TINY_CONTEXT_PATH}/quality/testmanagement/page/versionLink.page" title="关联用例">#buttonIcon(iconClass="icon-link")</a>
+			<a href="${TINY_CONTEXT_PATH}/quality/testmanagement/page/tabledemo/editionversion.page" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
 #*			<a href="#" title="移除">#buttonIcon(iconClass="icon-remove")</a>*#
 		#end	
 	#end

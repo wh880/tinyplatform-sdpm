@@ -27,10 +27,22 @@
     #@tinyForm("thisform" "url" "post" {"class":""})
         #@elementItem()
             #@colLabel()产品模块：#end
-            #@formControlDiv("col-5 form-inline selectList")
-                #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
-                    #@optionItem("")请选择#end
-                #end
+            #@formControlDiv("col-8")
+            <div class="col-4">
+                #@Tselect2F()
+	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">Connecticut</option>
+	                        <option value="DE">Delaware</option>
+	                        <option value="FL">Florida</option>
+	                        <option value="GA">Georgia</option>
+	                        <option value="IN">Indiana</option>
+	                        <option value="ME">Maine</option>
+	                        <option value="MD">Maryland</option>
+	                    	#end                
+	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                	  #end
+                	 </div>
+                	 <div class="col-4">
                     #@Tselect2F()
 	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="CT">Connecticut</option>
@@ -43,8 +55,9 @@
 	                    	#end                
 	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 	  #end
-                #buttonRadiusDefault(caption="维护模板")
-                #buttonRadiusDefault(caption="刷新")
+                	  </div>
+#*                #buttonRadiusDefault(caption="维护模板")
+                #buttonRadiusDefault(caption="刷新")*#
             #end
         #end
         #@elementItem()

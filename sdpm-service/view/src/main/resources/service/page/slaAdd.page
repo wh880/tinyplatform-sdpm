@@ -7,7 +7,7 @@
         margin-top: 0
     }
 </style>
-#set(name="test")
+#set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -29,14 +29,14 @@
                             <option value="DE">阿里</option>
                             <option value="FL">网易</option>
                         #end
-
                         #@Tselect2Fix()<a href="/service/page/clientAdd.page" class="r ">增加</a><a href="#">全部</a>#end
                     #end
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("产品名称")
-                    #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
+                    #@tinySelect("" "" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        #@tinyOptionItem("ch")请选择#end
                         #@tinyOptionItem("zh")支付宝#end
                         #@tinyOptionItem("en")余额宝#end
                         #@tinyOptionItem("ta")财付通#end
@@ -45,7 +45,7 @@
             #end
             #@elementItem()
                 #@sdpmItem("服务级别")
-                    #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
+                    #@tinySelect("" "" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
                         #@tinyOptionItem("zh")请选择#end
                         #@tinyOptionItem("en")0基础#end
                         #@tinyOptionItem("ta")1潜力#end
@@ -61,7 +61,7 @@
             #end
             #@elementItem()
                 #@sdpmItem("服务工时上限")
-                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text select2"})
                 #end
             #end
             #@elementItem()
@@ -80,13 +80,8 @@
                 #end
             #end
             #@elementItem()
-                #@sdpmItem("服务工时上限")
-                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
-                #end
-            #end
-            #@elementItem()
-                #@sdpmItem("服务工时上限")
-                    #@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
+                #@sdpmItem("服务级别协议")
+                    #@tinySelect("" "" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
                         #@tinyOptionItem("")请选择#end
                         #@tinyOptionItem("")0新建#end
                         #@tinyOptionItem("")1生效#end
