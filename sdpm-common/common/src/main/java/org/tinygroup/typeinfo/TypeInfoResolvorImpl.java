@@ -17,10 +17,10 @@ public class TypeInfoResolvorImpl implements TypeInfoResolvor {
 
     public void addTypeInfo(TypeInfos typeInfos) {
         if(typeInfos!=null) {
-            if (typeDict.get(typeInfos.getTypesName())!=null){
-                throw new RuntimeException("typeinfos:["+typeInfos.getTypesName()+"]已存在" );
-            }
             for (TypeInfo typeinfo : typeInfos.getTypeInfoList()) {
+                if (typeDict.containsKey(typeinfo.getTypesName())){
+                    throw new RuntimeException("typeinfos:["+typeinfo.getTypesName()+"]已存在" );
+                }
                 typeDict.put(typeinfo.getTypesName(), typeinfo);
             }
         }
