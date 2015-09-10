@@ -1,6 +1,6 @@
 #include("/product/page/event/common.page")
 #set(addArchivePagePath="/product/page/tabledemo/addArchive.pagelet",editpageModalId="myModal",editpageModal="#"+editpageModalId)
-#!set(linkName="archive",sonitem="<li>"+"文档"+"</li>")
+#!set(linkName="product-archive",sonitem="<li>"+"文档"+"</li>")
 
 #@tabBodyCol("ptop-5")
 		##operationbar start5
@@ -9,8 +9,7 @@
 				<span class="active_btn">文档列表</span>
 			</span>
 			<span class="r">
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-adddocument.page">#buttonIcon(iconClass="icon-plus")创建文档</a>&nbsp;
-				
+				#@iconOperations("#myModal" "icon-plus" "创建文档" "1000" "400" "/product/page/tabledemo/product-adddocument.pagelet" "ml-5")&nbsp;创建文档#end
 			</span>
 			#div(divClass="clearfix")
 		#end

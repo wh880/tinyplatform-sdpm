@@ -31,15 +31,11 @@
       #@elementItem()
         #@colLabel()评审结果：#end
         #@formControlDiv("col-4")
-          #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="CT">确认通过</option>
-                        <option value="DE">有待明确</option>
-                        <option value="FL">拒绝</option>
-                    #end
-                
-                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                #end
+             #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
+			#@tinyOptionItem("zh")确认通过#end
+			#@tinyOptionItem("en")有待明确#end
+			#@tinyOptionItem("ta")拒绝#end
+		#end
         #end
         #@validateDiv("col-2")#end
     #end
@@ -63,10 +59,16 @@
  
         #@elementItem()
             #@sdpmItem("由谁评审")
-                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22","multiple":"multiple","style":"width:600px"})
-                    #@tinyOptionItem("zh")admin#end
-                    #@tinyOptionItem("en")TOM#end
-                    #@tinyOptionItem("ta")JACK#end
+            	
+             #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2","style":"width:296px","multiple":"multiple"})
+                        <option value="ZX">开发人员</option>
+                        <option value="CV">测试人员</option>
+                        <option value="BN">实施人员</option>
+                        <option value="MK">结构人员</option>
+                        <option value="AS">组织人员</option>
+                    #end
+                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
                 #end
             #end
         #end
