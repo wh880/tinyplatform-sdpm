@@ -5,5 +5,5 @@
     <menu id="line-product" parent-id="productLine" name="产品" href="/productLine/page/project/productLine.page" icon=""
           sort="1" isShow="1"></menu>
     <menu id="overview" parent-id="productLine" name="概况" href="/productLine/page/project/overview.page" icon=""
-          sort="1" isShow="1"></menu>
+          sort="2" isShow="1"></menu>
 </menu>

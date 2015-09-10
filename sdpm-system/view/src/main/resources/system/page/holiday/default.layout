@@ -1,4 +1,5 @@
 #include("/system/page/event/common.page")
+#set(linkName="holiday")
 
 		#@div(divClass="operationbar")
 			<span class="f">
