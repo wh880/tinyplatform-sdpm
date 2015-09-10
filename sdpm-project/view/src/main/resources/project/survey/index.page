@@ -46,8 +46,8 @@
     					#end
 						#@dialogFooter()
 							#@buttonEnsure()确定#end
-	   				   	 	#@buttonCancel()关闭#end
-  						#end
+							#@buttonCancel()关闭#end
+						#end
 					#end
 					#@aModal("#myModa3" "项目名称>结束" "800" "250" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass="icon-off")结束#end
 					#@dialog("myModa3")
