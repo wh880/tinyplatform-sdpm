@@ -1,17 +1,2 @@
 
-#@tinyForm("thisform" "" "" {"class":"test"})
-    #set(name="")
-
-#@elementItem()
-        #@colLabel()Warning！#end
- 		#@formControlDiv("col-8")
-        #tinyInput("text" "username" ""{"placeholder":"产品文档库","datatype":"*4-16","nullmsg":"文档库名称不能为空！","id":"username","class":"input-text"})
- 		#end
-        #@validateDiv("col-2")#end
-#end
-
-#end
-
-<script type="text/javascript">
-    
-</script>
+#tinyInput("text" "username" ""{"placeholder":"产品文档库","datatype":"*4-16","nullmsg":"文档库名称不能为空！","id":"username","class":"input-text"})

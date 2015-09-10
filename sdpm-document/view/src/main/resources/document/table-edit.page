@@ -2,173 +2,245 @@
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
-#macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
- <input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked") checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass) class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio" onclick="${radioOther}"/>
-#end
-#macro labelRadio1(rId rName rValue rClass radioOther labelText)
-	#@radioBox()
-		#radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)
-		#@label(ckId)${labelText}#end
-	#end
-#end
-#@div(divClass="operationbar")
-	创建文档
+
+#import("/org/tinygroup/button/components/button_smart.component")
+#!set(activeTitle="产品文档库",activeMenuId=currentPageId)
+##脚本
+#include("common.page")
+
+#set(name="documentDocu")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/document/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("tab.page")
+        	<span class="r" style="position:relative;top:2px;height:0">
+        	        #@aModal("#myModal" "编辑" "400" "150" "" "edit-doclib.pagelet")
+        	        	#buttonIcon(iconClass="icon-edit-sign")编辑&nbsp;#end
+            		#@aModal("#myModal" "删除" "400" "150" "" "docu-delete.pagelet")
+            			#buttonIcon(iconClass="icon-remove")删除&nbsp;#end				
+					#@aModal("#myModal" "添加文档库" "865" "150" "" "add-doclib.pagelet")
+						#buttonIcon(iconClass="icon-plus-sign")添加文档库#end
+			</span>
+        #end
+        #@tabBodyCol("ptop-5")#end
+     #end
 #end
 #@tinyForm("thisform" "" "" {"class":"test"})
-#@elementItem()
-					#@colLabel()所属产品#end
-					#@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})						
-						#@tinyOptionItem("zh")产品1#end
-						#@tinyOptionItem("en")产品2#end
-						#@tinyOptionItem("ta")产品3#end
-					#end
-				#end				
-	
-			#@elementItem()
-					#@colLabel()所属分类#end
-					#@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})
-						#@tinyOptionItem("zh")分类1#end
-						#@tinyOptionItem("en")分类2#end
-						#@tinyOptionItem("ta")分类3#end
-					#end
-				#end	
-				
-			#@elementItem()
-        			#@colLabel()文档类型#end
-					#@skinMinimal("mt-20")
-    					#labelRadio1(rId="typefile" rName="type" rValue="file" labelText="文件" "setType(this.value);")
-    					#labelRadio1(rId="typeurl" rName="type" rValue="url" labelText="链接" "setType(this.value);")   								
-    					#labelRadio1(rId="typetext" rName="type" rValue="text" labelText="网页" "setType(this.value);")
-					
-					#end
-        			#@validateDiv("col-2")#end
-      		#end	
-							
-			#@elementItem()
-					#@colLabel()文档标题#end
-					#@formControlDiv("col-8")
-					#tinyInput("text" "doctitle" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"doctitle","class":"input-text"})
-					#end
-				#end
-				#@validateDiv("col-2")#end
-			#@elementItem(elementId="urlBox" eleItemClass="hidden")
-					#@colLabel()文档URL#end
-					#@formControlDiv("col-8")
-					#tinyInput("text" "docurl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16","id":"docurl","class":"input-text"})
-					#end
-				#end
-				#@validateDiv("col-2")#end							
-			#@elementItem()	
-					#@colLabel()关键字#end
-					#@formControlDiv("col-8")
-					#tinyInput("text" "keywords" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","id":"keywords","class":"input-text"})
-					#end
-				#end
-				#@validateDiv("col-2")#end
-											
-			#@elementItem()
-					#@colLabel()文档摘要#end
-					#@formControlDiv("col-6")
-						#@Teditor("content1" "content1" {"initialFrameHeight":"200"})Say something#end
-					#end
-					#@validateDiv("col-2")#end
-				#end	
-										
-			#@elementItem(elementId="fileBox" eleItemClass="")				
-					#@colLabel()附件#end
-					#@formControlDiv("col-8")
-					#fileWithInput("file-1")
-					#end
-					#@validateDiv("col-2")#end
-				#end
-			#@elementItem(elementId="contentBox" eleItemClass="hidden")
-					#@colLabel()文档正文#end
-					#@formControlDiv("col-6")
-						#@tinyueditor("content" "content")说点什么...最少输入10个字符#end
-					#end					
-					#@validateDiv("col-2")#end
-			#end
-    #@elementItem()
-    #@div(divClass="col-10 col-offset-2 form-inline")
-       #tinyInput("submit" "submitbtn" "&nbsp;保存&nbsp;" {"class":"btn btn-primary"})
-       #tinyInput("submit" "submitbtn" "&nbsp;返回&nbsp;" {"class":"btn btn-default"})
+	#@div(divClass="operationbar active_btn")
+    	<a href="${TINY_CONTEXT_PATH}/document/doc-view.page">文档名称></a>编辑</p>
     #end
+    #@elementItem()
+        <div class="col-12">
+         <div class="col-2 text-r"><label>所属文档库：</label></div>
+         <div class="col-4">
+          #@Tselect2F()
+	          #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	              <option value="CT">Connecticut</option>
+	               <option value="DE">Delaware</option>
+	               <option value="FL">Florida</option>
+	              <option value="GA">Georgia</option>
+	                <option value="IN">Indiana</option>
+	               <option value="ME">Maine</option>
+	                <option value="MD">Maryland</option>
+	               #end                
+	           #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+              #end
+              	</div>
+       		</div>
+     #end
+     #@elementItem()
+        <div class="col-12">
+         <div class="col-2 text-r"><label>所属分类：</label></div>
+         <div class="col-4">
+          #@Tselect2F()
+	          #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	              <option value="CT">Connecticut</option>
+	               <option value="DE">Delaware</option>
+	               <option value="FL">Florida</option>
+	              <option value="GA">Georgia</option>
+	                <option value="IN">Indiana</option>
+	               <option value="ME">Maine</option>
+	                <option value="MD">Maryland</option>
+	               #end                
+	           #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+              #end
+              	</div>
+       		</div>
+     #end
+     #@elementItem()
+        <div class="col-12">
+         <div class="col-2 text-r"><label>文档类型：</label></div>
+         	<div class="col-4">
+          		文件
+              	</div>
+       		</div>
+     #end
+     #@elementItem()
+        <div class="col-12">
+         <div class="col-2 text-r"><label>文档标题：</label></div>
+         		<div class="col-4">
+           	 	#tinyInput("text" "文档标题" ""{"datatype":"","id":"文档标题","class":"input-text"})
+              	</div>
+       	</div>
+     #end
+     #@elementItem()
+        <div class="col-12">
+         <div class="col-2 text-r"><label>关键字：</label></div>
+         		<div class="col-4">
+           	 	#tinyInput("text" "关键字" ""{"datatype":"","id":"关键字","class":"input-text"})
+              	</div>
+       	</div>
+     #end
+     #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>文档摘要：</label></div>
+                <div class="col-6">
+                    #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+       			</div>
+        #end
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>文档备注：</label></div>
+
+                <div class="col-6">
+                    #@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end</div>
+            </div>
+        #end
+        #@elementItem()
+    	<div class="col-11">
+         <div class="col-2 text-r"><label>附件：</label></div>
+         	<div class="col-9">
+             #include("fileupload.page")
+             </div>
+         </div>
+     #end
+     #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-1">
+                <a href="${TINY_CONTEXT_PATH}/document/document.page">
+                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+            </div>
+            <div class="col-5"></div>
+        </div>
 	#end
 #end
-
+     
 
 <script type="text/javascript">
-/* Set doc type. */
-function setType(type)
-{
-	if(type == 'url')
-	{
-		$('#urlBox').removeClass('hidden');
-		$('#fileBox').addClass('hidden');
-		$('#contentBox').addClass('hidden');
-	}
-	else if(type == 'text')
-	{
-		$('#urlBox').addClass('hidden');
-		$('#fileBox').addClass('hidden');
-		$('#contentBox').removeClass('hidden');
-	}
-	else
-	{
-		$('#urlBox').addClass('hidden');
-		$('#fileBox').removeClass('hidden');
-		$('#contentBox').addClass('hidden');
-	}
-}
-//The other func
-$(function(){
+    $(function(){
+        $(".selectList").each(function(){
+            var url = "#link('/getDist.html')";
+            var areaJson;
+            var temp_html;
+            var oProvince = $(this).find(".province");
+            var oCity = $(this).find(".city");
+            var oDistrict = $(this).find(".district");
+            //初始化省
+            var province = function(){
+                $.each(areaJson,function(i,province){
+                    temp_html+="<option value='"+province.p+"'>"+province.p+"</option>";
+                });
+                oProvince.html(temp_html);
+                city();
+            };
+            //赋值市
+            var city = function(){
+                temp_html = "";
+                var n = oProvince.get(0).selectedIndex;
+                $.each(areaJson[n].c,function(i,city){
+                    temp_html+="<option value='"+city.ct+"'>"+city.ct+"</option>";
+                });
+                oCity.html(temp_html);
+                district();
+            };
+            //赋值县
+            var district = function(){
+                temp_html = "";
+                var m = oProvince.get(0).selectedIndex;
+                var n = oCity.get(0).selectedIndex;
+                if(typeof(areaJson[m].c[n].d) == "undefined"){
+                    oDistrict.css("display","none");
+                }else{
+                    oDistrict.css("display","inline");
+                    $.each(areaJson[m].c[n].d,function(i,district){
+                        temp_html+="<option value='"+district.dt+"'>"+district.dt+"</option>";
+                    });
+                    oDistrict.html(temp_html);
+                };
+            };
+            //选择省改变市
+            oProvince.change(function(){
+                city();
+            });
+            //选择市改变县
+            oCity.change(function(){
+                district();
+            });
+            //获取json数据
+            $.getJSON(url,function(data){
+                areaJson = data;
+                province();
+            });
+        });
+    });
+    $(function(){
 
-  $("form[name=thisform").attr("action",'#link("/Validform_post.html")');
-  $("form[name=thisform").Validform({
-        tiptype:2,
-        usePlugin:{
-            //datepicker:{},//日期控件校验;
-            passwordstrength:{
-                minLen:6,//设置密码长度最小值，默认为0;
-                maxLen:18,//设置密码长度最大值，默认为30;
-                trigger:function(obj,error){
-                    //该表单元素的keyup和blur事件会触发该函数的执行;
-                    //obj:当前表单元素jquery对象;
-                    //error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
-                    //console.log(error);
-                    if(error){
-                        obj.parent().find(".Validform_checktip").show();
-                        obj.parent().find(".passwordStrength").hide();
-                    }else{
-                        obj.parent().find(".passwordStrength").show();
+        $("form[name=thisform").attr("action",'#link("/Validform_post.html")');
+        $("form[name=thisform").Validform({
+            tiptype:2,
+            usePlugin:{
+                //datepicker:{},//日期控件校验;
+                passwordstrength:{
+                    minLen:6,//设置密码长度最小值，默认为0;
+                    maxLen:18,//设置密码长度最大值，默认为30;
+                    trigger:function(obj,error){
+                        //该表单元素的keyup和blur事件会触发该函数的执行;
+                        //obj:当前表单元素jquery对象;
+                        //error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
+                        //console.log(error);
+                        if(error){
+                            obj.parent().find(".Validform_checktip").show();
+                            obj.parent().find(".passwordStrength").hide();
+                        }else{
+                            obj.parent().find(".passwordStrength").show();
+                        }
                     }
                 }
-            }
-        },
-	ajaxPost:true,
-	beforeCheck:function(curform){
-		//在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
-		//这里明确return false的话将不会继续执行验证操作;
-	},
-	beforeSubmit:function(curform){
-		//在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
-		//这里明确return false的话表单将不会提交;
-	},
-	callback:function(data){
-		if(data.status=="y"){
-			setTimeout(function(){
-				$.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
-			},2000);
-		}
-		//返回数据data是json对象，{"info":"demo info","status":"y"}
-		//info: 输出提示信息;
-		//status: 返回提交数据的状态,是否提交成功。如可以用"y"表示提交成功，"n"表示提交失败，在Validform_post.html文件返回数据里自定字符，主要用在callback函数里根据该值执行相应的回调操作;
-		//你也可以在Validform_post.html文件返回更多信息在这里获取，进行相应操作；
-		//ajax遇到服务端错误时也会执行回调，这时的data是{ status:**, statusText:**, readyState:**, responseText:** }；
+            },
+            ajaxPost:true,
+            beforeCheck:function(curform){
+                //在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
+                //这里明确return false的话将不会继续执行验证操作;
+            },
+            beforeSubmit:function(curform){
+                //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
+                //这里明确return false的话表单将不会提交;
+            },
+            callback:function(data){
+                if(data.status=="y"){
+                    setTimeout(function(){
+                        $.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
+                    },2000);
+                }
+                //返回数据data是json对象，{"info":"demo info","status":"y"}
+                //info: 输出提示信息;
+                //status: 返回提交数据的状态,是否提交成功。如可以用"y"表示提交成功，"n"表示提交失败，在Validform_post.html文件返回数据里自定字符，主要用在callback函数里根据该值执行相应的回调操作;
+                //你也可以在Validform_post.html文件返回更多信息在这里获取，进行相应操作；
+                //ajax遇到服务端错误时也会执行回调，这时的data是{ status:**, statusText:**, readyState:**, responseText:** }；
 
-		//这里执行回调操作;
-		//注意：如果不是ajax方式提交表单，传入callback，这时data参数是当前表单对象，回调函数会在表单验证全部通过后执行，然后判断是否提交表单，如果callback里明确return false，则表单不会提交，如果return true或没有return，则会提交表单。
-	}
+                //这里执行回调操作;
+                //注意：如果不是ajax方式提交表单，传入callback，这时data参数是当前表单对象，回调函数会在表单验证全部通过后执行，然后判断是否提交表单，如果callback里明确return false，则表单不会提交，如果return true或没有return，则会提交表单。
+            }
+        });
     });
-});
+</script>
+<script type="text/javascript">
+    $(".select2").select2();
 </script>

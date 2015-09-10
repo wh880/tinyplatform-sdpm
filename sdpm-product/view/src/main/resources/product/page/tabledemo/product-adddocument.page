@@ -1,57 +1,78 @@
-<style>
-	.radioBoxsty{float:left;height: 0;position: relative;top: -33px;}
-</style>
+#!set(linkName="archive")
+
 #@tinyForm("thisform" "" "" {"class":"test"})
+<div style="width:80%;margin-left: 150px;" class="pageleftpart">
+   <div class="infoContent">
+        <p class="titleName">创建文档</p>
      #@elementItem()
-        #@colLabel()产品#end
+        #@colLabel()产品：#end
         #@formControlDiv("col-4")
         	产品XXXX
         #end
         #@validateDiv("col-2")#end
       #end
     #@elementItem()
-        #@colLabel()名称#end
-        #@formControlDiv("col-4")
-          #tinyInput("text" "username" ""{"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+        #@colLabel()名称：#end
+        <div class="col-4">
+        #@formControlDiv()
+          #tinyInput("text" "username" ""{"style":"width:282px","datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
         #end
+        </div>
         #@validateDiv("col-2")#end
     #end
 
     #@elementItem()
-        #@colLabel()开始日期#end
-        #@formControlDiv("col-8")
-           #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+        #@colLabel()开始日期：#end
+        <div class="col-4">
+        #@formControlDiv()
+           #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:245px","datatype":"*","nullmsg":"日期不能为空"})#end
+           
         #end
+        </div>
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()结束日期#end
-        #@formControlDiv("col-8")
-           #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
-           <span class="radioBoxsty" style="left:220px;">
-				 #@radioBox()
-		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一周#end
-		          #end
-		           #@radioBox()
-		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一个月#end
-		          #end
-		           #@radioBox()
-		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一年#end
-		          #end
-		           #@radioBox()
-		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一辈子#end
-		          #end
-			</span>
-        #end
+        #@colLabel()结束日期：#end
+        <div class="col-10">
+        <div class="col-4">
+           #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+				 </div>
+				 <div class="col-7">
+		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一周#end&nbsp;
+		          
+		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一个月#end&nbsp;
+		          
+		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一年#end&nbsp;
+		          
+		          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一辈子#end&nbsp;
+		          </div>
+		               
+        </div>
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()描述#end
+        #@colLabel()描述：#end
         #@formControlDiv("col-8")
-            #@tinyueditor("content" "content")说点什么...最少输入10个字符#end
+               #@Teditor("content3" "content3" {"initialFrameHeight":"250"})#end</div>
         #end
         #@validateDiv("col-2")#end
     #end
+      </div>
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="backBtn"><a href="${TINY_CONTEXT_PATH}/product/page/project/archive-list.page" >返回</a></button>
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
+
    
    
    

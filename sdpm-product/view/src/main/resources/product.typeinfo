@@ -3,7 +3,7 @@
 	<type-info name="product"  >
 	    <info name="productInfo" title="产品信息" infoParameter="" url="/product/page/tabledemo/baseinfo.pagelet" resource="product"/>
 	    <info name="productOwnerInfo" title="产品线信息" infoParameter="" url="/productLine/page/tabledemo/other-information.pagelet" resource="productLine"/>
-	    <info name="productOwnerInfo" title="负责人信息" infoParameter="" url="/productLine/page/tabledemo/other-information.pagelet" resource="productLine"/>
+	    <info name="userbasrinfo" title="负责人信息" infoParameter="" url="/organization/userbaseinfo.pagelet" resource="userInfo"/>
 	</type-info>
 	
 	<type-info name="demand"  >

@@ -11,6 +11,26 @@
 		#@label(ckId)${labelText}#end
 	#end
 #end
+#set(name="documentDocu")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/document/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("tab.page")
+        	<span class="r" style="position:relative;top:2px;height:0">
+        	        #@aModal("#myModal" "编辑" "400" "150" "" "edit-doclib.pagelet")
+        	        	#buttonIcon(iconClass="icon-edit-sign")编辑&nbsp;#end
+            		#@aModal("#myModal" "删除" "400" "150" "" "docu-delete.pagelet")
+            			#buttonIcon(iconClass="icon-remove")删除&nbsp;#end				
+					#@aModal("#myModal" "添加文档库" "865" "150" "" "add-doclib.pagelet")
+						#buttonIcon(iconClass="icon-plus-sign")添加文档库#end
+			</span>
+        #end
+        #@tabBodyCol("ptop-5")#end
+     #end
+#end
 #@div(divClass="operationbar")
 	创建文档
 #end
@@ -89,11 +109,20 @@
 					#@validateDiv("col-2")#end
 			#end
     #@elementItem()
-    #@div(divClass="col-10 col-offset-2 form-inline")
-       #tinyInput("submit" "submitbtn" "&nbsp;保存&nbsp;" {"class":"btn btn-primary"})
-       #tinyInput("submit" "submitbtn" "&nbsp;返回&nbsp;" {"class":"btn btn-default"})
+        <div class="col-12">
+            <div class="col-2">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+            	<a href="${TINY_CONTEXT_PATH}/document/document.page">
+                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+            </div>
+            <div class="col-5"></div>
+        </div>
     #end
-	#end
 #end
 
 

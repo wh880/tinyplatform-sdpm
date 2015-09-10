@@ -31,11 +31,15 @@
       #@elementItem()
         #@colLabel()评审结果：#end
         #@formControlDiv("col-4")
-             #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-			#@tinyOptionItem("zh")确认通过#end
-			#@tinyOptionItem("en")有待明确#end
-			#@tinyOptionItem("ta")拒绝#end
-		#end
+          #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="CT">确认通过</option>
+                        <option value="DE">有待明确</option>
+                        <option value="FL">拒绝</option>
+                    #end
+                
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
         #end
         #@validateDiv("col-2")#end
     #end
