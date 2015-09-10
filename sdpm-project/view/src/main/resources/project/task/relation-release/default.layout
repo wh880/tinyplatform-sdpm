@@ -11,8 +11,8 @@
 #@div(divClass="operationbar")
 
 <span class="r">
-				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class"
-                    "/project/task/relation-release/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
+				#@aModal("#myModal" "新增日志" "1000" "350" "btn-class"
+                    "/project/task/note.pagelet")#buttonIcon(iconClass="icon-time")日志#end
     <a href="${TINY_CONTEXT_PATH}/project/task//relation-release/product-al-req.page?cname=demand">#buttonIcon(iconClass=
         "icon-link")关联需求</a>&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page?cname=bug">#buttonIcon(iconClass=
@@ -105,6 +105,6 @@
     #end
 </div>
 <div style="width:30%;float:right">
-    #TypeInfo("productRelease")
+    #TypeInfo("projectRelease")
 </div>
 #end

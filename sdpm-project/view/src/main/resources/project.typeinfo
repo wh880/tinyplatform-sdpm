@@ -13,4 +13,7 @@
     	    <info name="projectInfo" title="基本信息" infoParameter="" url="/project/task/basicInformation.pagelet" resource="project"/>
 
     </type-info>
+    <type-info name="projectRelease"  >
+    	    <info name="projectdemandInfo" title="发布信息" infoParameter="" url="/project/task/relation-release/releasebaseinfo.pagelet" resource="projectRelease"/>
+    	</type-info>
 </type-infos>
