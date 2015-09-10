@@ -27,7 +27,7 @@
 		       			#end
 		       			#@tr()
 							#@td()状态#end
-		       				#@td()<font color="green">正常#end
+		       				#@td()<font color="green">正常</font>#end
 		       			#end
 		       			#@tr()
 							#@td()访问控制#end
