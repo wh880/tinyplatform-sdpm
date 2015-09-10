@@ -6,21 +6,6 @@
     margin-bottom: 12px;
     clear: both
 }</style>
-<style>
-    .tabLayout .tabBar span a {
-        color: #333
-    }
-
-    .tabLayout .tabBar .Current a {
-        color: #fff
-    }
-
-    .operationbar {
-        border-top: none;
-        background: #f9fafe;
-        padding: 6px 5px 6px 10px;
-    }
-</style>
 #set(name="organizationDepartment")
 #include("/common/common.page")
 #@div()

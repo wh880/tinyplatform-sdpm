@@ -9,8 +9,6 @@
         #@tabHead()
             #include("/service/page/tab.page")
         #end
-    <span class="r" style="position:relative;top:-28px;height:0">
-    </span>
 
     ##这里是动态的模块布局
         #@tabBodyCol("ptop-5")
