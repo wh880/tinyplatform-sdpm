@@ -61,7 +61,8 @@
                         <td style="float:left"> #fileWithInput("file-1")</td>
                         <td style="float:left;width:150px">#inputRadiusText(inputPlaceHolder="标题：")</td>
                     </tr>
-                </table></div>
+                </table>
+            </div>
         #end
 
 
