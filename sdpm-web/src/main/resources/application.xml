@@ -48,7 +48,12 @@
                 <class-path path="E:\workspace\sdpm\sdpm-common\view\src\main\resources"/>
                 <class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources" /> -->
                 <class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources"/>
-                
+                <class-path path="F:\daochu\sdpm\sdpm-project\view\src\main\resources"/>
+                <class-path path="F:\daochu\sdpm\sdpm-quality\view\src\main\resources"/>
+                <class-path path="F:\daochu\sdpm\sdpm-document\view\src\main\resources"/>
+
+
+
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>
