@@ -1,6 +1,4 @@
-<style>
-.input-group-addon{width:10px;font-size:20px}
-</style>
+
 #@tinyForm("thisform" "" "" {"class":"test"})
 	#@elementItem()
         #@colLabel()起始日期#end
@@ -19,8 +17,10 @@
       #@elementItem()
         #@colLabel()可用工作日#end
         #@formControlDiv("col-8")
-			 <input type="text" style="float:left">
-			 <span class="input-group-addon">天</span>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+            <span class="input-group-addon" id="basic-addon2">天</span>
+        </div>
 
       	#end
       	#@validateDiv("col--10")#end
