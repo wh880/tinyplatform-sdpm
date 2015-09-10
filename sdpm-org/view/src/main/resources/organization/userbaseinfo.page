@@ -2,9 +2,9 @@
 
     #@tabWithInit("tab_info01")
         #@tabHead()
-            #@tabHeadCol()产品负责�?#end
-            #@tabHeadCol()测试负责�?#end
-            #@tabHeadCol()发布负责�?#end
+            #@tabHeadCol()产品负责人#end
+            #@tabHeadCol()测试负责人#end
+            #@tabHeadCol()发布负责人#end
         #end
 
         #@tabBodyCol("tabBorder")
@@ -18,10 +18,10 @@
                     #end
                     #@tr()
                         #@td()真实姓名#end
-                        #@td()习近�?#end
+                        #@td()习近平#end
                     #end
                     #@tr()
-                        #@td()用户�?#end
+                        #@td()用户名#end
                         #@td()admin#end
                     #end
                     #@tr()
@@ -34,7 +34,7 @@
                     #end
                     #@tr()
                         #@td()性别#end
-                        #@td()�?#end
+                        #@td()男#end
                     #end
                     #@tr()
                         #@td()电话#end
@@ -49,7 +49,7 @@
                         #@td()20150909#end
                     #end
                     #@tr()
-                        #@td()�?后登�?#end
+                        #@td()最后登录#end
                         #@td()20150909#end
                     #end
                     #@tr()
@@ -71,10 +71,10 @@
                     #end
                     #@tr()
                         #@td()真实姓名#end
-                        #@td()习近�?#end
+                        #@td()习近平#end
                     #end
                     #@tr()
-                        #@td()用户�?#end
+                        #@td()用户名#end
                         #@td()admin#end
                     #end
                     #@tr()
@@ -87,7 +87,7 @@
                     #end
                     #@tr()
                         #@td()性别#end
-                        #@td()�?#end
+                        #@td()男#end
                     #end
                     #@tr()
                         #@td()电话#end
@@ -102,7 +102,7 @@
                         #@td()20150909#end
                     #end
                     #@tr()
-                        #@td()�?后登�?#end
+                        #@td()最后登录#end
                         #@td()20150909#end
                     #end
                     #@tr()
@@ -123,10 +123,10 @@
                     #end
                     #@tr()
                         #@td()真实姓名#end
-                        #@td()习近�?#end
+                        #@td()习近平#end
                     #end
                     #@tr()
-                        #@td()用户�?#end
+                        #@td()用户名#end
                         #@td()admin#end
                     #end
                     #@tr()
@@ -139,7 +139,7 @@
                     #end
                     #@tr()
                         #@td()性别#end
-                        #@td()�?#end
+                        #@td()男#end
                     #end
                     #@tr()
                         #@td()电话#end
@@ -154,7 +154,7 @@
                         #@td()20150909#end
                     #end
                     #@tr()
-                        #@td()�?后登�?#end
+                        #@td()最后登录#end
                         #@td()20150909#end
                     #end
                     #@tr()
