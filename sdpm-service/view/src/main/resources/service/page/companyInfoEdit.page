@@ -5,10 +5,13 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
     #@noRespsGridSystem()
         #@gridSysRow()
-            #@colLabel("col-3")公司编号：#end
+            #@colLabel("col-3")公司名称：#end
             #@gridSysCol(5)
-                #tinyInput("text" "公司编号" ""{"datatype":"","id":"公司编号","class":"input-text"})
+                #tinyInput(
+                    "text" "clientname" ""{"placeholder":"","datatype":"*4","nullmsg":"公司名称不能为空！","id":"username",
+                    "class":""})
             #end
+            #@validateDiv("col-2")#end
         #end
         #@gridSysRow()
             #@colLabel("col-3")公司联系人：#end
