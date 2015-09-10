@@ -36,7 +36,7 @@
 	            <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 			</span>
 			<span class="r">
-				<a href="${TINY_CONTEXT_PATH}/add-doc.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
+				<a href="${TINY_CONTEXT_PATH}/document/add-doc.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
 			</span>
 			#div(divClass="clearfix")
 		#end
