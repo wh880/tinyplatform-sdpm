@@ -7,9 +7,8 @@
 #include("/product/page/event/common.page")
 
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+#!set(linkName="product-release",sonitem="<li>"+"发布"+"</li>")
 
-
-#!set(linkName="release",sonitem="<li>"+"发布"+"</li>")
 	#@div(divClass="operationbar")
    
 				<span class="r" >
@@ -26,7 +25,7 @@
 
 
 #@tabWithInit("tab_demo" "optionsBox")
-<div style="width:70%;float:left">
+<div style="width:70%;float:left;padding-top:18px;">
 		#@div()
 			#@tabWithInit("tab_demo" "optionsBox")
 				
