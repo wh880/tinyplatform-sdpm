@@ -1,6 +1,5 @@
 <type-infos>
 	<type-info name="userInfo" >
-
+            <info name="userbasrinfo" title="负责人" infoParameter="" url="/organization/userbaseinfo.pagelet" resource="userInfo"/>
 	</type-info>
-
 </type-infos>
