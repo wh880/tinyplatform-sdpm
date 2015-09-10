@@ -11,55 +11,58 @@
             #include("/service/page/tab.page")
         #end
         #@tabBodyCol("ptop-5")
-            <span class="r">
+        <span class="r">
                 #@iconOperations("#myModal1" " icon-pencil" "客户编辑" "600"
                     "348" "/service/page/companyInfoEdit.pagelet" "ml-5")编辑#end
-                #@iconOperations("#myModal2" "icon-remove" "客户删除" "550"
-                    "100" "/service/page/slaDelect.pagelet" "ml-5")删除#end
-            ##                <a href="${TINY_CONTEXT_PATH}/service/page/clientUser.page"
-            ##                   title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
+            #@iconOperations("#myModal2" "icon-remove" "客户删除" "550"
+                "100" "/service/page/slaDelect.pagelet" "ml-5")删除#end
+        ##                <a href="${TINY_CONTEXT_PATH}/service/page/clientUser.page"
+        ##                   title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
 			</span>
         ##            #end
         #end
-    <div style="width:100%;float:left">
+    <div style="width:80%;float:left">
         #@div(divClass="infoContent")
-            <div>
-                #@table("")
-                    #@thead()
-                    #end
-                    #@tbody()
-                        #@tr()
-                            #@th()公司名称#end
-                            #@td()恒生电子#end
-                        #end
-                        #@tr()
-                            #@th()公司编号#end
-                            #@td()000018#end
-                        #end
-                        #@tr()
-                            #@th()公司联系人#end
-                            #@td()习近平#end
-                        #end
-                        #@tr()
-                            #@th()联系人电话#end
-                            #@td()1361729202#end
-                        #end
-                        #@tr()
-                            #@th()公司传真#end
-                            #@td()0571-825616772#end
-                        #end
-                        #@tr()
-                            #@th()公司邮编#end
-                            #@td()311000#end
-                        #end
-                        #@tr()
-                            #@th()公司地址#end
-                            #@td()浙江杭州江南大道3588号#end
-                        #end
-                    #end
+            <p class="titleName">客户信息</p>
+            #@gridSysRow()
+                #@colLabel("col-4")公司名称：#end
+                #@gridSysCol(1)#end
+                #@gridSysCol(7)
+                    <p>恒生电子</p>
                 #end
-            </div>
+                #@colLabel("col-4")公司编号：#end
+                #@gridSysCol(1)#end
+                #@gridSysCol(7)
+                    <p>10088</p>
+                #end
+                #@colLabel("col-4")公司联系人：#end
+                #@gridSysCol(1)#end
+                #@gridSysCol(7)
+                    <p>习近平</p>
+                #end
+                #@colLabel("col-4")联系人电话：#end
+                #@gridSysCol(1)#end
+                #@gridSysCol(7)
+                    <p>13615263726</p>
+                #end
+                #@colLabel("col-4")公司传真：#end
+                #@gridSysCol(1)#end
+                #@gridSysCol(7)
+                    <p>0571-82573833</p>
+                #end
+                #@colLabel("col-4")公司邮编：#end
+                #@gridSysCol(1)#end
+                #@gridSysCol(7)
+                    <p>311000</p>
+                #end
+                #@colLabel("col-4")公司地址：#end
+                #@gridSysCol(1)#end
+                #@gridSysCol(7)
+                    <p>浙江杭州江南大道3588号</p>
+                #end
+            #end
         #end
+
     </div>
     #end
 #end
