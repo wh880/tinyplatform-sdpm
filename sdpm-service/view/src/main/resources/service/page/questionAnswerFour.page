@@ -15,7 +15,7 @@
         margin: 22px 0px 16px 0px;
         border: #eee 1px solid;
         background: #fdfdfd;
-     ## padding: 6px 12px
+    ## padding: 6px 12px
         padding: 18px 12px
     }
 </style>
@@ -27,47 +27,47 @@
     #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
 
 ##    #@tinyForm("thisform" "" "" {"class":"question_info"})
-    ##第一个问题的问题，答案以及后面的编辑和删除
-        #set(ans=
-            "把zentao/config/my.php 里面install的值改成false。访问禅道，会自动进入安装页面，所有数据都会清空。")
+##第一个问题的问题，答案以及后面的编辑和删除
+    #set(ans=
+        "项目→概况里编辑负责人即可。")
 
-        <div style="width: 75%;float: left">
+<div style="width: 75%;float: left">
 ##       #@div(divClass="infoContent")
-         #@div(divClass="question_info")
-        ##        #@table("问答页面")
-            <p class="titleName">问答页面</p>
-            #@gridSysRow()
-                #@gridSysCol(12)1.如何初始化项目管理数据库？#end
-                #@gridSysCol(12)${ans}#end
-            #end
-         ##        #@thead()
-        ##        #end
-        ##        #@tbody()
-        ##            #@tr()
-        ##                #@th()1.如何初始化项目管理数据库？#end
-        ##                #@td()#end
-        ##            #end
-        ##            #@tr()
-        ##                #@th()把zentao/config/my.php 里面install的值改成false。#end
-        ##                #@td()#end
-        ##            #end
-        ##            #@tr()
-        ##                #@th()${ans}#end
-        ##                #@td()#end
-        ##            #end
-        ##        #end
-        ##        #end
-        </div>
- ##       <div style="text-align:right;margin:right">
-             <div style="text-align:right;margin:right">
-##            <a href="questiondbEdit.page">&nbsp;编辑&nbsp;&nbsp;&nbsp;&nbsp;</a>
-##         下面的“编辑”是以按钮的形式显示。
- ##                #@aTxtWhiteButton(aTxtWhiteBtHref="questiondbEdit.page")&nbsp;编辑 &nbsp;#end
-    #@aExtendButton("btn-primary" "questiondbEdit.page")&nbsp;编辑&nbsp;#end
-    <a class="answerquestionDelete">&nbsp;删除</a>
-        </div>
+    #@div(divClass="question_info")
+    ##        #@table("问答页面")
+        <p class="titleName">问答页面</p>
+        #@gridSysRow()
+            #@gridSysCol(12)4.能将项目转交给别人吗？#end
+            #@gridSysCol(12)${ans}#end
         #end
-    ##第一个问题的问题，答案以及后面的编辑和删除，到此处结束。
+    ##        #@thead()
+    ##        #end
+    ##        #@tbody()
+    ##            #@tr()
+    ##                #@th()1.如何初始化项目管理数据库？#end
+    ##                #@td()#end
+    ##            #end
+    ##            #@tr()
+    ##                #@th()把zentao/config/my.php 里面install的值改成false。#end
+    ##                #@td()#end
+    ##            #end
+    ##            #@tr()
+    ##                #@th()${ans}#end
+    ##                #@td()#end
+    ##            #end
+    ##        #end
+    ##        #end
+    </div>
+    ##       <div style="text-align:right;margin:right">
+    <div style="text-align:right;margin:right">
+    ##            <a href="questiondbEdit.page">&nbsp;编辑&nbsp;&nbsp;&nbsp;&nbsp;</a>
+    ##         下面的“编辑”是以按钮的形式显示。
+    ##    #@aTxtWhiteButton(aTxtWhiteBtHref="questiondbEdit.page")&nbsp;编辑 &nbsp;#end
+        #@aExtendButton("btn-primary" "questiondbEdit.page")&nbsp;编辑&nbsp;#end
+        <a class="answerquestionDelete">&nbsp;删除</a>
+    </div>
+    #end
+##第一个问题的问题，答案以及后面的编辑和删除，到此处结束。
 ##    #end
 #end
 
