@@ -12,9 +12,9 @@
 #for(var:[1..pagesize])
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/quality/testManagement/page/bugInfo.page"> ${var}</a>${page}#end
-	#@td()北111京#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/quality/testManagement/page/bugInfo.page">中南海</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page"> ${var}</a>${page}#end
+	#@td()北京#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">中南海</a>#end
 	#@td()67#end
 	#@td()2013/03/25#end
 	#@td()67#end
@@ -25,8 +25,8 @@
 		<a href="${TINY_CONTEXT_PATH}/project/bug/call.page" title="指派">#buttonIcon(iconClass="icon-hand-right")</a>
 		<a href="${TINY_CONTEXT_PATH}/project/bug/solve.page" title="解决">#buttonIcon(iconClass="icon-ok-sign")</a>
 		<a href="${TINY_CONTEXT_PATH}/project/bug/close.page" title="关闭">#buttonIcon(iconClass="icon-off")</a>
-		<a href="${TINY_CONTEXT_PATH}/quality/testManagement/page/tabledemo/edition.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
-		<a href="${TINY_CONTEXT_PATH}/quality/testManagement/page/proposeBug.page" title="复制">#buttonIcon(iconClass="icon-copy")</a>
+		<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/edition.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
+		<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page" title="复制">#buttonIcon(iconClass="icon-copy")</a>
 	#end
 #end
 #end
