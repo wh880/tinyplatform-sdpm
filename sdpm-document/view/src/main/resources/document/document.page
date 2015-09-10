@@ -6,18 +6,18 @@
 ##<!-- Fuck! Who write this like shit,why not write the little .js together one document?  -->
 ##<!-- 忍不了改了！改！  -->
 ##<!-- common.page写了一点js脚本！  -->
-#include("/document/common.page")
+#include("common.page")
 
 #@div()
 	#@tabWithInit("tab_demo")
-	#include("/document/dropdownMenu.page")
+	#include("dropdownMenu.page")
 		#@span(spanClass="barBtnsty")
 			#@iconOperations("#myModal" "" "编辑文档库" "865" "150" "/document/edit-doclib.pagelet" "ml-5")<i class=" icon-pencil"></i>编辑 #end
 			<a  id="deleteBatch2" href="#" onclick="batchDel();" class="backBtn"><i class="icon-trash"></i>删除</a>
 		#end
 
 <span class="r" style="position:relative;height:0">
-    #@aModal("#myModal" "创建文档库" "865" "150" "" "/document/add-doclib.pagelet")#simpleI("icon-plus-sign")添加文档库#end
+    #@aModal("#myModal" "创建文档库" "865" "150" "" "add-doclib.pagelet")#simpleI("icon-plus-sign")添加文档库#end
     #@dialog("myModal")
 				#@dialogHeader()对话框标题#end
 				#@dialogBody()<p>对话框内容…</p>#end
@@ -36,12 +36,12 @@
 	            <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 			</span>
 			<span class="r">
-				<a href="${TINY_CONTEXT_PATH}/document/add-doc.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
+				<a href="${TINY_CONTEXT_PATH}/add-doc.page">#buttonIcon(iconClass="icon-plus")添加文档</a>
 			</span>
 			#div(divClass="clearfix")
 		#end
 		<!-- 二级搜索！  -->
-		#include("/document/mulsearch.page")
-		<!-- 左边那个小框框，可伸缩！和数据区！  -->		#include("/document/treeNew.page")	#end
+		#include("mulsearch.page")
+		<!-- 左边那个小框框，可伸缩！和数据区！  -->		#include("treeNew.page")	#end
   #end
 #end
