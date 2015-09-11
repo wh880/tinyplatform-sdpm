@@ -47,6 +47,7 @@
             });
         })
     </script>
+
         #@dialog("myModal")
             #@dialogHeader()对话框标题#end
             #@dialogBody()<p>对话框内容…</p>#end
