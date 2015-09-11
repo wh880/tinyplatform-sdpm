@@ -26,14 +26,14 @@
 			#@tabBodyCol("ptop-5")
 			#@div(divClass="operationbar")
 				<span class="f">
-					<a href="#" class="active_btn">今天</a>
-					<a href="#">昨天</a>
-					<a href="#">前天</a>
-					<a href="#">本周</a>
-					<a href="#">上周</a>
-					<a href="#">本月</a>
-					<a href="#">上月</a>
-					<a href="#">所有</a>
+					<a href="${TINY_CONTEXT_PATH}/project/dynamic/index.page" class="active_btn">今天</a>
+					<a href="${TINY_CONTEXT_PATH}/project/dynamic/index.page">昨天</a>
+					<a href="${TINY_CONTEXT_PATH}/project/dynamic/index.page">前天</a>
+					<a href="${TINY_CONTEXT_PATH}/project/dynamic/index.page">本周</a>
+					<a href="${TINY_CONTEXT_PATH}/project/dynamic/index.page">上周</a>
+					<a href="${TINY_CONTEXT_PATH}/project/dynamic/index.page">本月</a>
+					<a href="${TINY_CONTEXT_PATH}/project/dynamic/index.page">上月</a>
+					<a href="${TINY_CONTEXT_PATH}/project/dynamic/index.page">所有</a>
 						#@dropDownClickMenu("按用户" "#")						
 							#@dropDownItem("#")用户一#end
 							#@dropDownItem("#")用户二#end

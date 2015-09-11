@@ -13,7 +13,8 @@
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
-            #include("/document/dropdownMenu.page")
+        ##/document/dropdownMenu.page
+            #include("dropdownMenu.page")
         #end
         #@tabHead()
             #include("tab.page")
