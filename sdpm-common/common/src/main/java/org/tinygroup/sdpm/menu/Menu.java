@@ -12,6 +12,9 @@ import java.util.List;
  */
 @XStreamAlias("menu")
 public class Menu implements Serializable, Comparable {
+    public static String IS_SHOW_YES = "1";
+    public static String IS_SHOW_NO = "0";
+
     /**
      * 菜单编号
      */

@@ -7,25 +7,21 @@
 #include("/common/common.page")
 #set(name="organizationUser")
 #@div()
-    #@div(divClass="tabLayout")
-        #@div(divClass="tabBar cl")
-            #@tabWithInit("tab_demo" "optionsBox")
-                #@tabHead()
-                    #include("/organization/tab.page")
-                #end
-            #end
-
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/organization/tab.page")
         #end
-        #@div(divClass="operationbar")
-            #@tinyForm("thisform" "" "" {"class":"test"})
-                #@formControlDiv("col-1")
-                    #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                        #@tinyOptionItem("zh")中国#end
-                        #@tinyOptionItem("en")英国#end
-                        #@tinyOptionItem("ta")泰国#end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+                #@tinyForm("thisform" "" "" {"class":"test"})
+                    #@formControlDiv("col-1")
+                        #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                            #@tinyOptionItem("zh")中国#end
+                            #@tinyOptionItem("en")英国#end
+                            #@tinyOptionItem("ta")泰国#end
+                        #end
                     #end
-                #end
-                <span>
+                <span style="padding-top: 5px;float: left">
                     &nbsp;&gt;
 					<a href="${TINY_CONTEXT_PATH}/organization/userTodo.page">待办</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/userStoryAdmin.page">需求</a>
@@ -38,21 +34,22 @@
 					<a href="${TINY_CONTEXT_PATH}/organization/userProjectAdmin.page">项目</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/userProfileAdmin.page">档案</a>
                 </span>
-            <span style="padding-top:5px;float:right">
-                #@aModal(editpageModal "导出" "600" "120" ""  editpagePath)
-                    #@simpleI(" icon-download-alt")导出#end
+                <span style="padding-top:5px;float:right">
+                    #@aModal(editpageModal "导出" "600" "120" ""  editpagePath)
+                        #@simpleI(" icon-download-alt")导出#end
+                    #end
+                </span>
+                    #div(divClass="clearfix")
                 #end
-            </span>
-                #div(divClass="clearfix")
-            #end
 
-        <span class="barBoxs">
+            <span class="barBoxs">
             <a href="#" class="active_btn">指派给他</a>
             <a href="#">由他创建</a>
             <a href="#">由他完成</a>
             <a href="#">由他关闭</a>
             <a href="#">由他取消</a>
         </span>
+            #end
         #end
     #end
 #end

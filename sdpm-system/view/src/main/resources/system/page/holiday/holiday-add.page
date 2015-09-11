@@ -9,7 +9,16 @@
         #@validateDiv("col-2")#end
     #end
 
-   
+   #@elementItem()
+        #@colLabel()类型：#end
+         #@formControlDiv("col-6")
+	       #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
+				#@tinyOptionItem("zh")放假#end
+				#@tinyOptionItem("en")工作#end
+			#end
+		#end
+        #@validateDiv("col-2")#end
+    #end
 
     #@elementItem()
     #@daterangepickerPosition()

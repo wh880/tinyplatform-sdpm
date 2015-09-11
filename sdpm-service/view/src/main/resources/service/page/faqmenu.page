@@ -4,9 +4,22 @@
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
 ##     #import("/fulimanageui/form.component")
 <style>
-    .faqSty{margin:5px;padding:10px 12px;border: none;}
-    .faqSty .pd-15{padding:0 0 16px; text-align: left;line-height:30px;}
-    .btnsty-page{float:right;margin-right:30px;}
+    .faqSty {
+        margin: 5px;
+        padding: 10px 12px;
+        border: none;
+    }
+
+    .faqSty .pd-15 {
+        padding: 0 0 16px;
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .btnsty-page {
+        float: right;
+        margin-right: 30px;
+    }
 </style>
 #macro ztreeClick()
 if(!treeNode.isParent){
@@ -25,38 +38,39 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         #end
     #end
 
-    #@divDataTablebox()
-## faq左边
-        #@leftTreeCol()
-        ##         #@searchZtreeWithInit("treeDemo" "height:454px;" "/admin/product/tree")
-            #@searchZtreeWithInit("treeDemo" "height:454px;" "/service/js/serviceleft.js")
+    #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+        #@toggleLeft({"class":"aclass"})
+            #@settoggleLeftTitle()FAQ分类#end
+            #@settoggleLeftBody("treeLeftbox")
+                #include("/service/page/moduleTree.page")
+
             #end
         #end
-
-    ##faq页面右边
-        #@tableBox("tBox")
- #@div(divClass="faqSty")
+        #@toggleRight()
+            #@div(divClass="faqSty")
                 #@topSearch()
-##以下为搜索框及其搜索按钮
+                ##以下为搜索框及其搜索按钮
                     #simpleText("请输入要搜索的问题" "" "width:25%")
- #@btnSubmit("icon-search")&nbsp;搜问题#end
+                    #@btnSubmit("icon-search")&nbsp;搜问题#end
 
                 <span class="r">
                 ##          <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
-          <a href="${TINY_CONTEXT_PATH}/service/page/addquestion.page">#buttonIcon(iconClass="icon-plus")新增问题</a>
+                    <a href="${TINY_CONTEXT_PATH}/service/page/addquestion.page">#buttonIcon(iconClass="icon-plus-sign")
+                        新增问题</a>
 				</span>
                 #end
-##以下内容，加载faq右边页面-“具体的5个问题以及问题后面的编辑和删除按钮”，包含在faqquestion.page里面
-     #include("/service/page/faqquestion.page")
- ##以上内容，加载faq右边页面-“具体的5个问题以及问题后面的编辑和删除按钮”，包含在faqquestion.page里面
+            ##以下内容，加载faq右边页面-“具体的5个问题以及问题后面的编辑和删除按钮”，包含在faqquestion.page里面
+                #include("/service/page/faqquestion.page")
+            ##以上内容，加载faq右边页面-“具体的5个问题以及问题后面的编辑和删除按钮”，包含在faqquestion.page里面
             #end
 
-##    以下实现faqmenu.page页面下面的分页
-         <div class="btnsty-page">#tinyPageNav("bodyconentrap" 1 10 "../page/faqmenu.page")</div>
-##与上面一行的区别，是将“1”改为“page”,page为当前页码，“10”为总页码<div class="btnsty-page">#tinyPageNav("bodyconentrap" page 10 "../page/faqmenu.page")</div>
-##    以上实现faqmenu.page页面下面的分页
+        ##    以下实现faqmenu.page页面下面的分页
+        <div class="btnsty-page">#tinyPageNav("bodyconentrap" 1 10 "../page/faqmenu.page")</div>
+        ##与上面一行的区别，是将“1”改为“page”,page为当前页码，“10”为总页码<div class="btnsty-page">#tinyPageNav("bodyconentrap" page 10 "../page/faqmenu.page")</div>
+        ##    以上实现faqmenu.page页面下面的分页
         #end
     #end
+#end
 <script type="text/javascript">
     $("#tBox").on("click", ".treeview", function () {
         loadURL($(this).attr("href"), $("#tBox"));
@@ -70,4 +84,247 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         return false;
     });
 </script>
-#end
+
+<script type="text/javascript">
+    <!--
+    var setting = {
+        view: {
+            addHoverDom: addHoverDom,
+            removeHoverDom: removeHoverDom,
+            selectedMulti: false
+        },
+        edit: {
+            enable: true,
+            editNameSelectAll: true,
+
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            beforeDrag: beforeDrag,
+            beforeEditName: beforeEditName,
+            beforeRemove: beforeRemove,
+            beforeRename: beforeRename,
+            onRemove: onRemove,
+            onRename: onRename
+        }
+    };
+    var treeNodes = [
+        {id: 1, pId: 0, name: "第一类问题", open: true},
+        {id: 11, pId: 1, name: "问题1"},
+        {id: 12, pId: 1, name: "问题2"},
+        {id: 13, pId: 1, name: "问题3"},
+        {id: 2, pId: 0, name: "第二类问题", open: true},
+        {id: 21, pId: 2, name: "问题1"},
+        {id: 22, pId: 2, name: "问题2"},
+        {id: 23, pId: 2, name: "问题3"},
+        {id: 3, pId: 0, name: "第三类问题", open: true},
+        {id: 31, pId: 3, name: "问题1"},
+        {id: 32, pId: 3, name: "问题2"},
+        {id: 33, pId: 3, name: "问题3"},
+    ];
+
+    var log, className = "dark";
+    function beforeDrag(treeId, treeNodes) {
+        return false;
+    }
+    function beforeEditName(treeId, treeNode) {
+        className = (className === "dark" ? "" : "dark");
+        showLog("[ " + getTime() + " beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+        var zTree = $.fn.zTree.getZTreeObj("treeDrag");
+        zTree.selectNode(treeNode);
+        return confirm("进入节点 -- " + treeNode.name + " 的编辑状态吗？");
+    }
+    function beforeRemove(treeId, treeNode) {
+        className = (className === "dark" ? "" : "dark");
+        showLog("[ " + getTime() + " beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+        var zTree = $.fn.zTree.getZTreeObj("treeDrag");
+        zTree.selectNode(treeNode);
+        return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+    }
+    function onRemove(e, treeId, treeNode) {
+        showLog("[ " + getTime() + " onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+    }
+    function beforeRename(treeId, treeNode, newName, isCancel) {
+        className = (className === "dark" ? "" : "dark");
+        showLog((isCancel ? "<span style='color:red'>" : "") + "[ " + getTime() + " beforeRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>" : ""));
+        if (newName.length == 0) {
+            alert("节点名称不能为空.");
+            var zTree = $.fn.zTree.getZTreeObj("treeDrag");
+            setTimeout(function () {
+                zTree.editName(treeNode)
+            }, 10);
+            return false;
+        }
+        return true;
+    }
+    function onRename(e, treeId, treeNode, isCancel) {
+        showLog((isCancel ? "<span style='color:red'>" : "") + "[ " + getTime() + " onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>" : ""));
+    }
+    function showRemoveBtn(treeId, treeNode) {
+        return !treeNode.isFirstNode;
+    }
+    function showRenameBtn(treeId, treeNode) {
+        return !treeNode.isLastNode;
+    }
+    function showLog(str) {
+        if (!log) log = $("#log");
+        log.append("<li class='" + className + "'>" + str + "</li>");
+        if (log.children("li").length > 8) {
+            log.get(0).removeChild(log.children("li")[0]);
+        }
+    }
+    function getTime() {
+        var now = new Date(),
+                h = now.getHours(),
+                m = now.getMinutes(),
+                s = now.getSeconds(),
+                ms = now.getMilliseconds();
+        return (h + ":" + m + ":" + s + " " + ms);
+    }
+
+    var newCount = 1;
+    function addHoverDom(treeId, treeNode) {
+        var sObj = $("#" + treeNode.tId + "_span");
+        if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
+        var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+                + "' title='add node' onfocus='this.blur();'></span>";
+        sObj.after(addStr);
+        var btn = $("#addBtn_" + treeNode.tId);
+        if (btn) btn.bind("click", function () {
+            var zTree = $.fn.zTree.getZTreeObj("treeDrag");
+            zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: "new node" + (newCount++)});
+            return false;
+        });
+    }
+    ;
+    function removeHoverDom(treeId, treeNode) {
+        $("#addBtn_" + treeNode.tId).unbind().remove();
+    }
+    ;
+    function selectAll() {
+        var zTree = $.fn.zTree.getZTreeObj("treeDrag");
+        zTree.setting.edit.editNameSelectAll = $("#selectAll").attr("checked");
+    }
+
+    $(document).ready(function () {
+        $.fn.zTree.init($("#treeDrag"), setting);
+        $("#selectAll").bind("click", selectAll);
+    });
+    //-->
+
+    function dropPrev(treeId, nodes, targetNode) {
+        var pNode = targetNode.getParentNode();
+        if (pNode && pNode.dropInner === false) {
+            return false;
+        } else {
+            for (var i = 0, l = curDragNodes.length; i < l; i++) {
+                var curPNode = curDragNodes[i].getParentNode();
+                if (curPNode && curPNode !== targetNode.getParentNode() && curPNode.childOuter === false) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    function dropInner(treeId, nodes, targetNode) {
+        if (targetNode && targetNode.dropInner === false) {
+            return false;
+        } else {
+            for (var i = 0, l = curDragNodes.length; i < l; i++) {
+                if (!targetNode && curDragNodes[i].dropRoot === false) {
+                    return false;
+                } else if (curDragNodes[i].parentTId && curDragNodes[i].getParentNode() !== targetNode && curDragNodes[i].getParentNode().childOuter === false) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    function dropNext(treeId, nodes, targetNode) {
+        var pNode = targetNode.getParentNode();
+        if (pNode && pNode.dropInner === false) {
+            return false;
+        } else {
+            for (var i = 0, l = curDragNodes.length; i < l; i++) {
+                var curPNode = curDragNodes[i].getParentNode();
+                if (curPNode && curPNode !== targetNode.getParentNode() && curPNode.childOuter === false) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    var log, className = "dark", curDragNodes, autoExpandNode;
+    function beforeDrag(treeId, treeNodes) {
+        className = (className === "dark" ? "" : "dark");
+        showLog("[ " + getTime() + " beforeDrag ]&nbsp;&nbsp;&nbsp;&nbsp; drag: " + treeNodes.length + " nodes.");
+        for (var i = 0, l = treeNodes.length; i < l; i++) {
+            if (treeNodes[i].drag === false) {
+                curDragNodes = null;
+                return false;
+            } else if (treeNodes[i].parentTId && treeNodes[i].getParentNode().childDrag === false) {
+                curDragNodes = null;
+                return false;
+            }
+        }
+        curDragNodes = treeNodes;
+        return true;
+    }
+    function beforeDragOpen(treeId, treeNode) {
+        autoExpandNode = treeNode;
+        return true;
+    }
+    function beforeDrop(treeId, treeNodes, targetNode, moveType, isCopy) {
+        className = (className === "dark" ? "" : "dark");
+        showLog("[ " + getTime() + " beforeDrop ]&nbsp;&nbsp;&nbsp;&nbsp; moveType:" + moveType);
+        showLog("target: " + (targetNode ? targetNode.name : "root") + "  -- is " + (isCopy == null ? "cancel" : isCopy ? "copy" : "move"));
+        return true;
+    }
+    function onDrag(event, treeId, treeNodes) {
+        className = (className === "dark" ? "" : "dark");
+        showLog("[ " + getTime() + " onDrag ]&nbsp;&nbsp;&nbsp;&nbsp; drag: " + treeNodes.length + " nodes.");
+    }
+    function onDrop(event, treeId, treeNodes, targetNode, moveType, isCopy) {
+        className = (className === "dark" ? "" : "dark");
+        showLog("[ " + getTime() + " onDrop ]&nbsp;&nbsp;&nbsp;&nbsp; moveType:" + moveType);
+        showLog("target: " + (targetNode ? targetNode.name : "root") + "  -- is " + (isCopy == null ? "cancel" : isCopy ? "copy" : "move"))
+    }
+    function onExpand(event, treeId, treeNode) {
+        if (treeNode === autoExpandNode) {
+            className = (className === "dark" ? "" : "dark");
+            showLog("[ " + getTime() + " onExpand ]&nbsp;&nbsp;&nbsp;&nbsp;" + treeNode.name);
+        }
+    }
+
+    function showLog(str) {
+        if (!log) log = $("#log");
+        log.append("<li class='" + className + "'>" + str + "</li>");
+        if (log.children("li").length > 8) {
+            log.get(0).removeChild(log.children("li")[0]);
+        }
+    }
+    function getTime() {
+        var now = new Date(),
+                h = now.getHours(),
+                m = now.getMinutes(),
+                s = now.getSeconds(),
+                ms = now.getMilliseconds();
+        return (h + ":" + m + ":" + s + " " + ms);
+    }
+
+    function setTrigger() {
+        var zTree = $.fn.zTree.getZTreeObj("treeDrag");
+        zTree.setting.edit.drag.autoExpandTrigger = $("#callbackTrigger").attr("checked");
+    }
+
+    $(document).ready(function () {
+        $.fn.zTree.init($("#treeDrag"), setting, treeNodes);
+        $("#callbackTrigger").bind("change", {}, setTrigger);
+    });
+    //-->
+</script>

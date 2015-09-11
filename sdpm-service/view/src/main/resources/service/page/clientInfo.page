@@ -13,13 +13,10 @@
         #@tabHead()
             #include("/service/page/tab.page")
         #end
-        #@tabBodyCol("ptop-5")
-        ##            #end
-        #end
     <div style="width:80%;float:left">
         #@div(divClass="infoContent")
             <p class="titleName">客户信息</p>
-            #@tbody()
+            #@noRespsGridSystem()
                 #@gridSysRow()
                     #@colLabel("col-4")公司名称：#end
                     #@gridSysCol(1)#end
@@ -59,10 +56,12 @@
                 #end
             #end
             <div style="text-align:right;margin:right">
-                #@iconOperations(
-                    "#myModal1" " icon-pencil" "客户编辑" "600""348" "/service/page/companyInfoEdit.pagelet" "ml-5")编辑#end
-                #@iconOperations("#myModal2" "icon-remove" "客户删除" "550""100" "/service/page/slaDelect.pagelet" "ml-5")
-                    删除#end
+                #@aModal("#myModal1" "编辑" "600" "348" "btn radius btn-primary btn-sm"
+                    "/service/page/companyInfoEdit.pagelet")编辑
+                #end
+                #@aModal("#myModal2" "删除" "550" "100" "btn radius btn-danger btn-sm" "/service/page/slaDelect.pagelet")
+                    删除
+                #end
             </div>
         #end
 

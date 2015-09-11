@@ -47,24 +47,19 @@
                         #end
                     </div>
                     <div style="text-align:right;margin:right">
-                        #@iconOperations("#myModal3" "" "编辑" "800" "500 " "/service/page/clientSlaEdit.pagelet" "ml-5")
-                            编辑#end
+                        #@aModal("#myModal3"+varFor.index "编辑" "800" "500" "btn radius btn-primary btn-sm"
+                            "/service/page/clientSlaEdit.pagelet")编辑#end
                         <a class="clientDelete">删除</a>
                     </div>
                 #end
             #end
-        ##            #@div(divClass="infoContent,col-6")
-        ##                <p class="titleName">历史记录</p>
-        ##                #include("/service/page/historyRecord.page")
-        ##            #end
+            #@simpleModal("myModal3"+varFor.index "编辑")#end
         #end
 
     </div>
-
-
     #end
 #end
-#@simpleModal("myModal3" "编辑")#end
+###@simpleModal("myModal3" "编辑")#end
 #@simpleModal("myModal4" "删除")#end
 <script>
     $(function () {

@@ -51,7 +51,8 @@
                 #@tinyForm("thisform" "" "" {"class":"test"})
                     #@noRespsGridSystem()
                         #@gridSysCol(2)
-                            #dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:100%'")
+                            #@tinyDateInput(
+                                "birthday" "" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end
                         #end
                         #@gridSysCol(2)
                             #@Tselect2F()
@@ -152,7 +153,9 @@
                         #@colLabel("col-3")开始：#end
                         #@gridSysCol(9)
                         <div style="margin-bottom: 10px">
-                            #dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:107px'")
+                            #@tinyDateInput(
+                                "birthday" "" "YYYY-MM-DD" {"style":"width:107px","datatype":"*","nullmsg":
+                                "日期不能为空"})#end
                         </div>
 
                         #end
@@ -162,7 +165,8 @@
                         #@colLabel("col-3")结束：#end
                         #@gridSysCol(9)
                         <div style="margin-bottom: 10px">
-                            #dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:107px'")
+                            #@tinyDateInput(
+                             "birthday" "" "YYYY-MM-DD" {"style":"width:107px","datatype":"*","nullmsg":"日期不能为空"})#end
                         </div>
 
                         #end

@@ -1,5 +1,19 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="项目管理",activeMenuId=currentPageId)
+<style>
+    .operationbar a:hover {
+        color: #c00
+    }
+
+    .operationbar .btn-group .dropdown-toggle {
+        -webkit-box-shadow: none;
+        box-shadow: none
+    }
+</style>
+
+#@delItemsdpm("/sdpm-web/project/task/index.pagelet" 5 "/sdpm-web/project/task/index.pagelet")delete#end
+
+
 #set(name="task")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -8,10 +22,6 @@
         #end
         #@tabHead()
             #include("/project/protab.page")
-        <span class="r" style="position:relative;top:2px;height:0">
-					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
-				</span>
         #end
     ##head end
         #@tabBodyCol("ptop-5")

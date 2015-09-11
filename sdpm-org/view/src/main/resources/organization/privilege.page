@@ -29,12 +29,7 @@
             <span class="f">
 					<dr>浏览分组</dr>
         </span>
-            <span style="float:right">
-                #@aModal(editpageModal "按模块分配权限" "600" "300" "btn radius btn-primary btn-sm"
-                    "/organization/privilegeByModule.pagelet")
-                    #@simpleI("")按模块分配权限#end
-                #end
-            </span>
+
             <span style="float:right">
                 #@aModal(editpageModal "新增分组" "600" "300" "btn radius btn-primary btn-sm" editpagePath)
                     #@simpleI("icon-plus")新增分组#end
@@ -64,13 +59,12 @@
             #end
         #end
     #end
-##        #end
-## #end
+
 #end
 
 #simpleModal(editpageModalId)
 
-#@simpleModal("myModal" "视图维护")#end
+
 #@simpleModal("myModa2" "用户添加")#end
 #@simpleModal("myModa3" "成员维护")#end
 #@simpleModal("myModa4" "复制分组")#end

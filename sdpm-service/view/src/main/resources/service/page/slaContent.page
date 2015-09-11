@@ -42,7 +42,7 @@
     ##            #end
     ##        </div>
     <div style="text-align:right;margin:right">
-        <a href="slaContentEdit.page">编辑</a>
+        #@aExtendButton("btn-primary" "slaContentEdit.page")&nbsp;编辑&nbsp;#end
         <a class="clientDelete">删除</a>
     </div>
     #end
