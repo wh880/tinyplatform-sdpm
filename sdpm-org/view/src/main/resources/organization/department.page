@@ -9,95 +9,89 @@
 #set(name="organizationDepartment")
 #include("/common/common.page")
 #@div()
-    #@div(divClass="tabLayout")
-        #@div(divClass="tabBar cl")
-            #@tabWithInit("tab_demo" "optionsBox")
-                #@tabHead()
-                    #include("/organization/tab.page")
-                #end
-            #end
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/organization/tab.page")
         #end
-
-
-
-        #@div(divClass="operationbar")
-        <span class="f">
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span class="f">
 					<dr>部门结构</dr>
 				</span>
-            #div(divClass="clearfix")
-        #end
-
-
-        #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
-            #@toggleLeft({"class":"aclass"})
-                #@settoggleLeftTitle()部门结构：#end
-                #@settoggleLeftBody("treeLeftbox")
-                    #include("/organization/moduleTree.page")
-                #end
+                #div(divClass="clearfix")
             #end
-            #@toggleRight()
-                #@settoggleLeftTitle()部门结构：#end
+        #end
+    #end
+    #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+        #@toggleLeft({"class":"aclass"})
+            #@settoggleLeftTitle()维护部门结构：#end
+            #@settoggleLeftBody("treeLeftbox")
+                #include("/organization/moduleTree.page")
+            #end
+        #end
+        #@toggleRight()
+        ## #@settoggleLeftTitle()部门结构：#end
 
-                #@navBreadcrumb()
+            #@navBreadcrumb()
 
-                    #@navItemHome("/")部门#end
-                    #navDelimiter()
-                    #@navItemNormal("#")组件#end
-                    #navDelimiter()
-                    #@navItemCurrent()当前页面#end
-                #end
-                #@div(divClass="col-12 input_box")
+                #@navItemHome("/")部门#end
+                #navDelimiter()
+                #@navItemNormal("#")组件#end
+                #navDelimiter()
+                #@navItemCurrent()当前页面#end
+            #end
+            #@div(divClass="col-12 input_box")
 
-                    #@tinyForm("thisform" "" "" {"class":"test"})
+                #@tinyForm("thisform" "" "" {"class":"test"})
 
-                        #@noRespsGridSystem()
-                            #@gridSysCol(3)
-                            #end
-                            #@gridSysCol(5)
-                                #@gridSysRow()
-                                    #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
-
-                                #end
-                                #@gridSysRow()
-                                    #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
-
-                                #end
-                                #@gridSysRow()
-                                    #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
-
-                                #end
-                                #@gridSysRow()
-                                    #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
-
-                                #end
-                                #@gridSysRow()
-                                    #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
-
-                                #end
-                                #@gridSysRow()
-                                    #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
-
-                                #end
-                                #@gridSysRow()
-                                    #@div(divClass="col-10 col-offset-2 form-inline")
-                                        #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
-                                    <a href="#" class="btn radius btn-default">返回</a>
-                                    #end
-                                #end
-
-
+                    #@noRespsGridSystem()
+                        #@gridSysCol(3)
+                        #end
+                        #@gridSysCol(5)
+                            #@gridSysRow()
+                                #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
 
                             #end
+                            #@gridSysRow()
+                                #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
+
+                            #end
+                            #@gridSysRow()
+                                #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
+
+                            #end
+                            #@gridSysRow()
+                                #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
+
+                            #end
+                            #@gridSysRow()
+                                #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
+
+                            #end
+                            #@gridSysRow()
+                                #tinyInput("text" "text" ""{"id":"username","class":"input-text"})
+
+                            #end
+                            #@gridSysRow()
+                                #@div(divClass="col-10 col-offset-2 form-inline")
+                                    #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+                                <a href="#" class="btn radius btn-default">返回</a>
+                                #end
+                            #end
+
 
 
                         #end
 
-                    #end
-                #end
 
+                    #end
+
+                #end
             #end
+
         #end
     #end
+##  #end
 #end
 
 <script type="text/javascript">
