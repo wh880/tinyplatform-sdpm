@@ -1,5 +1,5 @@
-<div>
-    #@div(divClass="infoContent")
+
+  #@div(divClass="infoContent")
         <p class="titleName">基本信息</p>
     ##该样式在comm.css样式中自定义
         #@table("adjustTable")
@@ -37,4 +37,3 @@
             #end
         #end
     #end
-</div>

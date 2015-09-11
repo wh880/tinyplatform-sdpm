@@ -27,7 +27,10 @@
 							###iconOperations("#myModal" "icon-file" "概况" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")
                          <a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page" title="关联用例">#buttonIcon(iconClass="icon-link")</a>
                          <a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page" title="修改">#buttonIcon(iconClass="icon-pencil")</a>
-							#iconOperations("#myModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
+							#@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)
+								<i class="icon-remove"></i>
+							#end
+							###iconOperations("#myModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
 							
 							
 						#end

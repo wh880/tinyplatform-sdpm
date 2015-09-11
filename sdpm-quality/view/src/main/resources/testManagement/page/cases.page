@@ -1,3 +1,4 @@
+#import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 
 
@@ -16,8 +17,18 @@
         #@div(divClass="operationbar")
         <span class="f">
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page" class="active_btn">所有</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">需求变动</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">分组查看</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">需求变动</a>					
+						#@buttonGroup()
+		                    #@buttonDropdown("more" buttonClass="btnDropDown")分组查看 
+		                     	#@spanCaret()#end
+		                    #end
+		                    #@ulDropdownMenu("downMenuSty")                       
+		                         <p>
+		                             <a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">需求分组</a>
+		                         </p>	
+		                        #@liDivider()#end
+		                    #end
+		                #end
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">零用例需求</a>
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
@@ -54,6 +65,23 @@
     #@toggleRight()
 #@tinyTable()
 #@div(divBaseClass="tinyheaderTools form-inline")
+			<div class="f col-2">
+						<div class="btn btn-default btn-primary col-4">全选</div>
+						<div class="col-0">&nbsp&nbsp</div>
+						<div class="btn btn-default btn-primary col-4">反选</div>
+						<div class="col-0">&nbsp&nbsp</div>
+						<div class="dropdown col-1">
+							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
+							<ul class="dropdown-menu multi-level" role="menu">
+								<li>
+									<a href="javascript:void(0);">删除</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">执行</a>
+								</li>																
+							</ul>
+						</div>
+					</div>
 #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 #*#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end*#
 #*<a href="#" class="btn btn-default btn-sm">产品</a>
