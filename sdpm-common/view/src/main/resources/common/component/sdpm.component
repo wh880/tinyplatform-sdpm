@@ -11,4 +11,8 @@
     #@validateDiv("col-5 validmsg")#end
 #end
 
+##
+#macro delItemsdpm(doAction delId backUrl)
+<a href="${backUrl}" data-removeid="${delId}" data-action="${doAction}">#bodyContent</a>
+#end
 

@@ -52,7 +52,9 @@
                         #@colLabel("col-3")开始：#end
                         #@gridSysCol(9)
                             <div style="margin-bottom: 10px">
-                                #dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:107px'")
+                                #@tinyDateInput(
+                                    "birthday" "" "YYYY-MM-DD" {"style":"width:107px","datatype":"*","nullmsg":
+                                    "日期不能为空"})#end
                             </div>
 
                         #end
@@ -62,7 +64,9 @@
                         #@colLabel("col-3")结束：#end
                         #@gridSysCol(9)
                             <div style="margin-bottom: 10px">
-                                #dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:107px'")
+                                #@tinyDateInput(
+                                  "birthday" "" "YYYY-MM-DD" {"style":"width:107px","datatype":"*","nullmsg":
+                                    "日期不能为空"})#end
                             </div>
 
                         #end

@@ -24,7 +24,7 @@
         <p class="titleName">创建文档</p>
 
         #@elementItem()
-            #@colLabel()所属产品#end
+            #@colLabel()所属产品：#end
             #@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})
                 #@tinyOptionItem("zh")产品1#end
                 #@tinyOptionItem("en")产品2#end
@@ -33,7 +33,7 @@
         #end
 
         #@elementItem()
-            #@colLabel()所属分类#end
+            #@colLabel()所属分类：#end
             #@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})
                 #@tinyOptionItem("zh")分类1#end
                 #@tinyOptionItem("en")分类2#end
@@ -42,7 +42,7 @@
         #end
 
         #@elementItem()
-            #@colLabel()文档类型#end
+            #@colLabel()文档类型：#end
             #@skinMinimal("mt-20")
                 #labelRadio1(rId="typefile" rName="type" rValue="file" labelText="文件" "setType(this.value);")
                 #labelRadio1(rId="typeurl" rName="type" rValue="url" labelText="链接" "setType(this.value);")
@@ -53,7 +53,7 @@
         #end
 
         #@elementItem()
-            #@colLabel()文档标题#end
+            #@colLabel()文档标题：#end
             #@formControlDiv("col-8")
                 #tinyInput(
                     "text" "doctitle" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！",
@@ -62,14 +62,14 @@
         #end
         #@validateDiv("col-2")#end
         #@elementItem(elementId="contentBox" eleItemClass="hidden")
-            #@colLabel()文档正文#end
+            #@colLabel()文档正文：#end
             #@formControlDiv("col-6")
                 #@Teditor("content2" "content2" {"initialFrameHeight":"150" ,"datatype":"*10-300"})#end
             #end
             #@validateDiv("col-2")#end
         #end
         #@elementItem(elementId="urlBox" eleItemClass="hidden")
-            #@colLabel()文档URL#end
+            #@colLabel()文档URL：#end
             #@formControlDiv("col-8")
                 #tinyInput(
                     "text" "docurl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16","id":"docurl",
@@ -78,7 +78,7 @@
         #end
         #@validateDiv("col-2")#end
         #@elementItem()
-            #@colLabel()关键字#end
+            #@colLabel()关键字：#end
             #@formControlDiv("col-6")
                 #tinyInput(
                     "text" "keywords" ""{"placeholder":"","datatype":"*4-16","id":"keywords","class":"input-text"})
@@ -87,7 +87,7 @@
         #@validateDiv("col-2")#end
 
         #@elementItem()
-            #@colLabel()文档摘要#end
+            #@colLabel()文档摘要：#end
             #@formControlDiv("col-6")
                 #@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"描述不能为空！"})内容走起#end
 
@@ -96,7 +96,7 @@
         #end
 
         #@elementItem(elementId="fileBox" eleItemClass="")
-            #@colLabel()附件#end
+            #@colLabel()附件：#end
             #@formControlDiv("col-8")
                 #fileWithInput("file-1")
             #end
@@ -112,7 +112,7 @@
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="backBtn"><a href="${TINY_CONTEXT_PATH}/product/page/project/archive-list.page" >返回</a></button>
+                <a href="${TINY_CONTEXT_PATH}/product/page/project/archive-list.page" > <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
             </div>
             <div class="col-5"></div>
         </div>
