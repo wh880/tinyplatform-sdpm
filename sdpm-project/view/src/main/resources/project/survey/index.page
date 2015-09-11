@@ -38,7 +38,7 @@
 	   				   	 	#@buttonCancel()关闭#end
   						#end
 					#end
-				#@aModal("#myModa2" "项目名称>挂起" "800" "250" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass="icon-pause")挂起#end
+				#@aModal("#myModa2" "项目名称>挂起" "750" "250" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass="icon-pause")挂起#end
 					#@dialog("myModa2")
 						#@dialogHeader()#end
 						#@dialogBody()
@@ -49,7 +49,7 @@
 							#@buttonCancel()关闭#end
 						#end
 					#end
-					#@aModal("#myModa3" "项目名称>结束" "800" "250" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass="icon-off")结束#end
+					#@aModal("#myModa3" "项目名称>结束" "750" "250" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass="icon-off")结束#end
 					#@dialog("myModa3")
 						#@dialogHeader()#end
 						#@dialogBody()
