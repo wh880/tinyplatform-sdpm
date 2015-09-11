@@ -72,7 +72,10 @@
 #end
 #end		
 
-
+	#@dialog("myModal")
+        #@dialogHeader()#end
+        #@dialogBody()<p></p>#end
+    #end
 
 <script type="text/javascript">
 
