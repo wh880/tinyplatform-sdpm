@@ -18,7 +18,7 @@
     #@td()121#end
     #@td()admin#end
     #@td()
-        #iconOperation(" icon-ok" "删除" "ml-5")
+        #@tinyTableItemRemove("" "1")<i class="icon-remove"></i>#end
     #end
 
 #end
