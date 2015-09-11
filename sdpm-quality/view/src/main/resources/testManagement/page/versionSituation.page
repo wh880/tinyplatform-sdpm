@@ -48,7 +48,7 @@
 		##operationbar end
 	#end
 	##tabbody end
-<div style="width:80%;float:left">
+<div style="width:70%;float:left">
 		#@div(divClass="infoContent")
 	        <p class="titleName">版本描述</p>
 	       	<div>
@@ -86,7 +86,7 @@
 	</div>
 	</div>
 
-<div style="width:20%;float:right">
+<div style="width:30%;float:right">
 ##	#include("/testManagement/page/versionSituationpaging.page")
 	#TypeInfo("qualityVersionSituation")
 </div>

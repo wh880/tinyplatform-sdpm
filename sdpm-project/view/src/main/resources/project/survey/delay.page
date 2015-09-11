@@ -16,7 +16,7 @@
       #end
       #@elementItem()
         #@colLabel()可用工作日#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-2")
         <div class="input-group">
             <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
             <span class="input-group-addon" id="basic-addon2">天</span>
