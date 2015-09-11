@@ -2,19 +2,13 @@
 #set(name="organizationGtask")
 #include("/common/common.page")
 #@div()
-    #@div(divClass="tabLayout")
 
-    ##       #@div(divClass="tabBar cl")
-
-        #@tabWithInit("tab_demo" "optionsBox")
-            #@tabHead()
-                #include("/organization/tab.page")
-            #end
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/organization/tab.page")
         #end
-        #div(divClass="clearfix")
-
-    ##        #end
     #end
+    #div(divClass="clearfix")
 
     #import("/org/tinygroup/form/components/form.component")
     #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
