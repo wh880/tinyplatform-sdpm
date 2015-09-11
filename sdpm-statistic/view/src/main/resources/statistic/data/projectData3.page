@@ -1,6 +1,19 @@
 #@div()
 <span class="l">产品完成度统计报表</span>
-<span class="r"><a class="btn txt-color-dark btn-default">导出</a></span>
+<span class="r">
+	#@iconOperations("#myModal" "" "导出" "550" "100" 
+		"/statistic/data/output.pagelet" "ml-5")<input type="button" class="btn btn-sm btn-primary" value="保存"></input>#end
+
+</span>
+<br>
+		#@dialog("myModal")
+			#@dialogHeader()对话框标题#end
+			#@dialogBody()<p>对话框内容…</p>#end
+			#@dialogFooter()
+				#@buttonEnsure()确定#end
+				#@buttonCancel()关闭#end
+			#end
+		#end
 #end
 #@tableStriped("table-border")
     #@thead()

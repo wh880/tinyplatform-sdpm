@@ -1,124 +1,151 @@
-
+#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 
 #macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
-	<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked") checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass) class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio" onclick="${radioOther}"/>
+<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked")
+               checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass)
+               class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio"
+               onclick="${radioOther}"/>
 #end
 #macro labelRadio1(rId rName rValue rClass radioOther labelText)
-	#@radioBox()
-		#radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)
-		#@label(ckId)${labelText}#end
-	#end
+    #@radioBox()
+        #radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)
+        #@label(ckId)${labelText}#end
+    #end
 #end
 
 #@tinyForm("thisform" "url" "post" {"class":""})
-	
-	#@elementItem()
-		#@colLabel()产品名称：#end
-		#@formControlDiv("col-3")
-			#tinyInput("text" "product-name" ""{"placeholder":"","nullmsg":"请输入产品名称！","id":"product-name","class":"input-text"})
-		#end
-		#@validateDiv("col-2")#end
-	#end
-	#@elementItem()
-		#@colLabel()产品代号：#end
-		#@formControlDiv("col-3")
-			#tinyInput("text" "product-id" ""{"placeholder":"","nullmsg":"代号不能为空！","id":"product-id","class":"input-text"})
-		#end
-		#@validateDiv("col-2")#end
-	#end
+<div style="width:100%;float:center" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">添加产品</p>
+        #@elementItem()
+            #@colLabel()产品名称：#end
+            #@formControlDiv("col-3")
+                #tinyInput("text" "product-name" ""{"placeholder":"","nullmsg":"请输入产品名称！","id":"product-name","class":
+                    "input-text"})
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()产品代号：#end
+            #@formControlDiv("col-3")
+                #tinyInput(
+                    "text" "product-id" ""{"placeholder":"","nullmsg":"代号不能为空！","id":"product-id","class":"input-text"})
+            #end
+            #@validateDiv("col-2")#end
+        #end
 
-	
-	 #@elementItem()
-		#@colLabel()产品负责人：#end
-		#@formControlDiv("col-3")
-			#@Tselect2F()
+
+        #@elementItem()
+            #@colLabel()产品负责人：#end
+            #@formControlDiv("col-3")
+                #@Tselect2F()
                     #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">A</option>
                         <option value="DE">B</option>
                         <option value="FL">C</option>
                     #end
-                
+
                     #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 #end
 
-		#end
-		#@validateDiv("col-2")#end
-	#end
-	
-	
-	#@elementItem()
-		#@colLabel()测试负责人：#end
-		#@formControlDiv("col-3")
-			#@Tselect2F()
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+
+        #@elementItem()
+            #@colLabel()测试负责人：#end
+            #@formControlDiv("col-3")
+                #@Tselect2F()
                     #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">甲</option>
                         <option value="DE">乙</option>
                         <option value="FL">丙</option>
                     #end
-                
+
                     #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 #end
 
-		#end
-		#@validateDiv("col-2")#end
-	#end
-	#@elementItem()
-		#@colLabel()发布负责人：#end
-		#@formControlDiv("col-3")
-			#@Tselect2F()
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()发布负责人：#end
+            #@formControlDiv("col-3")
+                #@Tselect2F()
                     #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">项目经理</option>
                         <option value="DE">产品经理</option>
                         <option value="FL">开发主管</option>
                     #end
-                
+
                     #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 #end
 
-		#end
-		#@validateDiv("col-2")#end
-	#end
-	#@elementItem()
-		#@colLabel()产品描述：#end
-		#@formControlDiv("col-8")
-			#@Teditor("content1" "content1" {"initialFrameHeight":"200" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})描述一下产品的相关信息...#end
-		#end
-		#@validateDiv("col-2")#end
-	#end
-	
-	#@elementItem()
-        #@colLabel()访问控制：#end
-        #@skinMinimal("col-8")
-    				#labelRadio1(rId="aclopen" rName="acl" rValue="open" labelText="默认设置(有项目视图权限，即可访问)" "setWhite(this.value);")</br>
-    				#labelRadio1(rId="aclcustom" rName="acl" rValue="custom1" labelText="私有项目(只有项目团队成员才能访问)" "setWhite(this.value);")</br>   								
-    				#labelRadio1(rId="aclcustom" rName="acl" rValue="custom" labelText="自定义白名单(团队成员和白名单的成员可以访问)" "setWhite(this.value);")</br>
-					
-			#end
-        #@validateDiv("col-2")#end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()产品描述：#end
+            #@formControlDiv("col-8")
+                #@Teditor(
+                    "content1" "content1" {"initialFrameHeight":"200" ,"placeholder":"说点什么...最少输入10个字符","datatype":
+                    "*10-500"})描述一下产品的相关信息...#end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+        #@elementItem()
+            #@colLabel()访问控制：#end
+            #@skinMinimal("col-8")
+                    #labelRadio1(rId="aclopen" rName="acl" rValue="open" labelText="默认设置(有项目视图权限，即可访问)"
+                        "setWhite(this.value);")</br>
+                    #labelRadio1(rId="aclcustom" rName="acl" rValue="custom1" labelText="私有项目(只有项目团队成员才能访问)"
+                        "setWhite(this.value);")</br>
+                    #labelRadio1(rId="aclcustom" rName="acl" rValue="custom" labelText="自定义白名单(团队成员和白名单的成员可以访问)"
+                        "setWhite(this.value);")</br>
+
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
+            #@colLabel()分组白名单#end
+            #@skinMinimal("col-8")
+                #labelCheckbox(ckId="whitelistBox" labelText="管理员")
+                #labelCheckbox(ckId="whitelistBox" labelText="研发")
+                #labelCheckbox(ckId="whitelistBox" labelText="测试")
+                #labelCheckbox(ckId="whitelistBox" labelText="项目经理")
+                #labelCheckbox(ckId="whitelistBox" labelText="产品经理")
+                #labelCheckbox(ckId="whitelistBox" labelText="研发主管")
+                #labelCheckbox(ckId="whitelistBox" labelText="产品主管")
+                #labelCheckbox(ckId="whitelistBox" labelText="测试主管")
+            #end
+            #@validateDiv("col-2")#end
+        #end
+    </div>
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="backBtn"><a
+                        href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">返回</a></button>
+            </div>
+            <div class="col-5"></div>
+        </div>
     #end
-    #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
-        	#@colLabel()分组白名单#end
-			#@skinMinimal("col-8")
-				#labelCheckbox(ckId="whitelistBox" labelText="管理员")
-				#labelCheckbox(ckId="whitelistBox" labelText="研发")
-				#labelCheckbox(ckId="whitelistBox" labelText="测试")
-				#labelCheckbox(ckId="whitelistBox" labelText="项目经理")
-				#labelCheckbox(ckId="whitelistBox" labelText="产品经理")
-				#labelCheckbox(ckId="whitelistBox" labelText="研发主管")
-				#labelCheckbox(ckId="whitelistBox" labelText="产品主管")
-				#labelCheckbox(ckId="whitelistBox" labelText="测试主管")				
-			#end
-        #@validateDiv("col-2")#end
-      #end
 #end
 
 
 
-<script type="text/javascript">
-function setWhite(acl)
-{
-    acl == 'custom' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
-}
-</script>
+    <script type="text/javascript">
+        function setWhite(acl) {
+            acl == 'custom' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
+        }
+    </script>
