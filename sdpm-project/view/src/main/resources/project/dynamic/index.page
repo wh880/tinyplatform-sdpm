@@ -9,7 +9,7 @@
 </style>
 
 
-#include("/project/event/common.page")
+
 #set(name="dynamic")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
