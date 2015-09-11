@@ -71,7 +71,7 @@
 </div>
 #end
 #end		
-
+##遗漏的弹出框
 	#@dialog("myModal")
         #@dialogHeader()#end
         #@dialogBody()<p></p>#end
