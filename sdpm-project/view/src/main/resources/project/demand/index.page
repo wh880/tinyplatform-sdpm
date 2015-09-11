@@ -1,10 +1,5 @@
 #!set(activeTitle="项目管理",activeMenuId=currentPageId)
-#*<style>
-.tabLayout .tabBar span a{color:#333}
-.tabLayout .tabBar .Current a{color:#fff}
-.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
-</style>*#
-#include("/project/event/common.page")
+
 #set(name="demand")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
@@ -12,11 +7,7 @@
 				#include("/project/dropdownMenu.page")
 			#end
 			#@tabHead()
-				#include("/project/protab.page")							
-				<span class="r" style="position:relative;top:2px;height:0">
-					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
-				</span>
+				#include("/project/protab.page")
 			#end				
 			#@tabBodyCol("ptop-5")
 			#@div(divClass="operationbar")

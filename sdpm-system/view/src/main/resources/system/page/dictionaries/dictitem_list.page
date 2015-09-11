@@ -1,0 +1,44 @@
+#include("/system/page/event/common.page")
+#set(editpagePath="/system/page/dictionaries/dictitem_edit.pagelet",editpageModalId="dictitemEditModal",editpageModal="#"+editpageModalId)
+#set(viewpagePath="/system/page/dictionaries/dictitem_view.pagelet",viewpageModalId="dictitemViewModal",viewpageModal="#"+viewpageModalId)
+#datatablesInitSimple("#dictitemTb" )
+#import("/org/tinygroup/table/components/table.component")
+#@tableBox()
+	#@datatable("dictitemTb")
+		#@tableToolbar()
+				#@radiusBtn("btn-danger" "icon-trash" "javascript:;" "deleteBatch") 批量删除#end
+				 #@aModal(editpageModal "添加" "" "" "btn radius btn-primary" editpagePath)
+				 #@simpleI("icon-plus")添加#end
+				#end
+			#end
+			#@thead()
+				#@tr("text-c")
+					#@thW("6")<input type="checkbox" name="idCheck" value="">#end
+					#@thW("96")编码#end
+					#@thW("50")名称#end
+					#@thW("50")值#end
+					#@thW("50")排序号#end
+					#@thW("120")操作#end
+				#end
+			#end
+			#@tbody()
+			#set(objs=[1..5])
+			#for(obj:objs)
+				#@tr("text-c")
+					#@td()<input type="checkbox" value="1" name="idCheck">#end
+					#@td()编码${objFor.index}#end
+					#@td()名称${objFor.index}#end
+					#@td()值${objFor.index}#end
+					#@td()${objFor.index}#end
+					#@td("f-14 user-manage")
+						#iconOperations(viewpageModal "icon-eye-open" "查看" "" "" viewpagePath "ml-5")
+						#iconOperations(editpageModal "icon-edit" "编辑" "" "" editpagePath "ml-5")
+						#iconOperation("icon-trash" "删除" "ml-5 delBtn")
+					#end
+				#end
+			#end
+			#end
+		#end
+#end
+#simpleModal(editpageModalId)
+#simpleViewModal(viewpageModalId)

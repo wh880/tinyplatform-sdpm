@@ -19,16 +19,13 @@
 </style>
 #set(name="organizationPrivilege")
 #@div()
-    #@div(divClass="tabLayout")
-        #@div(divClass="tabBar cl")
-            #@tabWithInit("tab_demo" "optionsBox")
-                #@tabHead()
-                    #include("/organization/tab.page")
-                #end
-            #end
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/organization/tab.page")
         #end
-        #@div(divClass="operationbar")
-        <span style="padding-top:5px;float:left">
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span style="padding-top:5px;float:left">
 					<a href="#" class="active_btn">所有权限</a>
 					<a href="#">我的地盘</a>
 					<a href="#">产品</a>
@@ -40,22 +37,20 @@
                     <a href="#">组织</a>
 					<a href="#">后台</a>
 					<a href="#">其他模块</a>
-
-        ##
-        </span>
-            #@tinyForm("thisform" "" "" {"class":"test"})
-                #@formControlDiv("col-2")
-                    #@tinySelect("lang" "修改历史" {"class":"input-text select2","rel":"22"})
-                        #@tinyOptionItem("修改历史")修改历史#end
-                        #@tinyOptionItem("zh")版本1.0#end
-                        #@tinyOptionItem("en")版本2.0#end
-                        #@tinyOptionItem("ta")版本3.0#end
+         </span>
+                #@tinyForm("thisform" "" "" {"class":"test"})
+                    #@formControlDiv("col-2")
+                        #@tinySelect("lang" "修改历史" {"class":"input-text select2","rel":"22"})
+                            #@tinyOptionItem("修改历史")修改历史#end
+                            #@tinyOptionItem("zh")版本1.0#end
+                            #@tinyOptionItem("en")版本2.0#end
+                            #@tinyOptionItem("ta")版本3.0#end
+                        #end
                     #end
                 #end
+                #div(divClass="clearfix")
             #end
-            #div(divClass="clearfix")
         #end
-
     #end
 #end
 
