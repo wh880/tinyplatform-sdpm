@@ -1,0 +1,93 @@
+#!set(activeTitle="FAQ",activeMenuId=currentPageId)
+#set(name="faq")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/service/serviceCom/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/service/serviceCom/tab.page")
+        #end
+    #end
+## 以上增加问题所在的以及菜单“产品”，“客户”，“需求”，“协议”，“FAQ”，有一个#end在最下面
+<style>
+    .question_info {
+        margin: 22px 0px 16px 0px;
+        border: #eee 1px solid;
+        background: #fdfdfd;
+    ## padding: 6px 12px
+        padding: 18px 12px
+    }
+</style>
+
+    #import("/org/tinygroup/table/components/table.component")
+    #import("/org/tinygroup/button/components/button_common.component")
+    #import("/org/tinygroup/button/components/button.component")
+    #import("/org/tinygroup/form/components/form.component")
+    #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+
+##    #@tinyForm("thisform" "" "" {"class":"question_info"})
+##第一个问题的问题，答案以及后面的编辑和删除
+    #set(ans=
+        "项目→概况里编辑负责人即可。")
+
+<div style="width: 75%;float: left">
+##       #@div(divClass="infoContent")
+    #@div(divClass="question_info")
+    ##        #@table("问答页面")
+        <p class="titleName">问答页面</p>
+        #@gridSysRow()
+            #@gridSysCol(12)4.能将项目转交给别人吗？#end
+            #@gridSysCol(12)${ans}#end
+        #end
+    ##        #@thead()
+    ##        #end
+    ##        #@tbody()
+    ##            #@tr()
+    ##                #@th()1.如何初始化项目管理数据库？#end
+    ##                #@td()#end
+    ##            #end
+    ##            #@tr()
+    ##                #@th()把zentao/config/my.php 里面install的值改成false。#end
+    ##                #@td()#end
+    ##            #end
+    ##            #@tr()
+    ##                #@th()${ans}#end
+    ##                #@td()#end
+    ##            #end
+    ##        #end
+    ##        #end
+    </div>
+    ##       <div style="text-align:right;margin:right">
+    <div style="text-align:right;margin:right">
+    ##            <a href="questiondbEdit.page">&nbsp;编辑&nbsp;&nbsp;&nbsp;&nbsp;</a>
+    ##         下面的“编辑”是以按钮的形式显示。
+    ##    #@aTxtWhiteButton(aTxtWhiteBtHref="questiondbEdit.page")&nbsp;编辑 &nbsp;#end
+        #@aExtendButton("btn-primary" "questiondbEdit.page")&nbsp;编辑&nbsp;#end
+        <a class="answerquestionDelete">&nbsp;删除</a>
+    </div>
+    #end
+##第一个问题的问题，答案以及后面的编辑和删除，到此处结束。
+##    #end
+#end
+
+
+##第一个问答页面后面的“删除”
+#@simpleModal("myModal3" "编辑")#end
+#@simpleModal("myModal4" "删除")#end
+<script>
+    $(function () {
+    ##            $(".infoContent").on("click", ".clientDelete", function () {
+        $(".infoContent").on("click", ".answerquestionDelete", function () {
+            //console.log($(this).attr("itemId"))
+//            var that = this;
+            layer.confirm('确定要删除该记录？', function (index) {
+                //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                //$.ajax()
+                //console.log(index);
+//                layer.msg($("已删除").attr("deleteList"), 1);
+                layer.msg('已删除', 1);
+            })
+        });
+    });
+</script>

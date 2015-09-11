@@ -1,0 +1,158 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="服务管理",activeMenuId=currentPageId)
+<style>
+    .select_boxes {
+        margin-top: 0
+    }
+</style>
+#set(name="sla")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/service/serviceCom/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/service/serviceCom/tab.page")
+        #end
+    #end
+    #@tinyForm("thisform" "" "" {"class":"test"})
+    <div style="width:100%;float:left" class="pageleftpart">
+        <div class="infoContent">
+            <p class="titleName">新建协议</p>
+            #@elementItem()
+                #@sdpmItem("客户名称")
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="CT">恒生</option>
+                            <option value="DE">阿里</option>
+                            <option value="FL">网易</option>
+                        #end
+                        #@Tselect2Fix()<a href="/service/client/clientAdd.page" class="r ">增加</a><a href="#">全部</a>#end
+                    #end
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("产品名称")
+                    #@tinySelect("" "" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        #@tinyOptionItem("ch")请选择#end
+                        #@tinyOptionItem("zh")支付宝#end
+                        #@tinyOptionItem("en")余额宝#end
+                        #@tinyOptionItem("ta")财付通#end
+                    #end
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务级别")
+                    #@tinySelect("" "" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        #@tinyOptionItem("zh")请选择#end
+                        #@tinyOptionItem("en")0基础#end
+                        #@tinyOptionItem("ta")1潜力#end
+                        #@tinyOptionItem("en")2核心#end
+                        #@tinyOptionItem("ta")3vip#end
+                    #end
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务协议标题")
+                    #tinyInput("text" "服务协议ID" ""{"datatype":"","id":"协议ID","class":"input-text"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务工时上限")
+                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text select2"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务请求数上限")
+                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("现场服务次数上限")
+                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务专员")
+                    #tinyInput("text" "影响版本" "可以多人，间隔符英文,"{"datatype":"","id":"版本","class":"input-text"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务级别协议")
+                    #@tinySelect("" "" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        #@tinyOptionItem("")请选择#end
+                        #@tinyOptionItem("")0新建#end
+                        #@tinyOptionItem("")1生效#end
+                        #@tinyOptionItem("")2到期#end
+                        #@tinyOptionItem("")3作废#end
+                        #@tinyOptionItem("")4关闭#end
+                    #end
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务期限")
+                    #@tinyDateInput(
+                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
+                        "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("创建人")
+                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("创建时间")
+                    #@tinyDateInput(
+                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
+                        "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("批准人")
+                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("批准时间")
+                    #@tinyDateInput(
+                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
+                        "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+                #end
+            #end
+            #@elementItem()
+                <div class="col-12">
+                    <div class="col-2 text-r"><label>协议内容：</label></div>
+
+                    <div class="col-9">
+                        #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+                </div>
+            #end
+        </div>
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-5">
+
+                </div>
+                <div class="col-1">
+                    <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                </div>
+                <div class="col-1">
+                    <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
+                </div>
+                <div class="col-5"></div>
+            </div>
+        #end
+    </div>
+    #end
+
+#end
+
+
+<script type="text/javascript">
+    $(".select2").select2();
+</script>
+
+

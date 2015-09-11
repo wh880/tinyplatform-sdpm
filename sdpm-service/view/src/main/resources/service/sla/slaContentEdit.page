@@ -1,0 +1,72 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/fold/components/fold.component")
+##<style>
+##    .pageleftpart label{display:inline-block;width:90px;text-align:right}
+##</style>
+#set(name="sla")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+
+        #@tabHead()
+            #include("/service/serviceCom/tab.page")
+        #end
+    <br/>
+    #end
+#end
+#@tinyForm("thisform" "" "" {"class":"test"})
+
+
+<div style="width:100%;float:left" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">协议详情</p>
+    ##在边框的右上角加需要的按钮或者别的，根据需求选择是否添加
+    #*<div class="RTtitle">
+        <button type="submit" id="submit" class="commitBtn">保存</button>
+    </div>*#
+
+        #@elementItem()
+            #@sdpmItem("客户名称")
+                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                    #@tinyOptionItem("zh")阿里巴巴#end
+                    #@tinyOptionItem("en")恒生#end
+                    #@tinyOptionItem("ta")网易#end
+                #end
+            #end
+        #end
+
+        #@elementItem()
+            #@sdpmItem("协议名称")
+                #tinyInput("text" "标题" ""{"datatype":"","id":"","class":"input-text"})
+            #end
+        #end
+
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>详情：</label></div>
+
+                <div class="col-9">
+                    #@Teditor("content" "content" {"initialFrameHeight":"350"})Say something#end</div>
+            </div>
+        #end
+        <br/>
+    </div>
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
+    <br>
+</div>
+#end

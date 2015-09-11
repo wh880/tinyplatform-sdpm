@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<menu id="service" parent-id="0" name="服务管理" href="/service/page/clientUser.page" icon="icon-phone" sort="100" isShow="isShow" >
-    <menu id="client" name="客户" href="/service/page/clientUser.page" sort="100" isShow="isShow"
+<menu id="service" parent-id="0" name="服务管理" href="/service/client/clientUser.page" icon="icon-phone" sort="100"
+      isShow="1">
+    <menu id="client" name="客户" href="/service/client/clientUser.page" sort="100" isShow="1"
           ></menu>
-    <menu id="request1" name="需求" href="/service/page/request.page" sort="100" isShow="isShow"
+    <menu id="request1" name="需求" href="/service/serviceReq/request.page" sort="100" isShow="1"
           ></menu>
-    <menu id="sla" name="协议" href="/service/page/sla.page" sort="100" isShow="isShow" ></menu>
-    <menu id="faq" name="FAQ" href="/service/page/faqmenu.page" sort="100" isShow="isShow"
+    <menu id="sla" name="协议" href="/service/sla/sla.page" sort="100" isShow="1"></menu>
+    <menu id="faq" name="FAQ" href="/service/faq/faqmenu.page" sort="100" isShow="1"
           ></menu>
 
 </menu>
