@@ -60,8 +60,6 @@
         #end
 
     </div>
-
-
     #end
 #end
 #@simpleModal("myModal3" "编辑")#end
