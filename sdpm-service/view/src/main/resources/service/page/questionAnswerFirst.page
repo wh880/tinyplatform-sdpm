@@ -35,8 +35,8 @@
         #end
     </div>
     <div style="text-align:right;margin:right">
-        #@aExtendButton("btn-primary" "questiondbEdit.page")&nbsp;编辑&nbsp;#end
-        #@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" "var")#buttonRadiusDanger(caption="删除1")#end
+        #@aExtendButton("btn-primary" "questiondbEdit.page")编辑#end
+        #@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" "var")#buttonRadiusDanger(caption="删除")#end
     </div>
     #end
 #end

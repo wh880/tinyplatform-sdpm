@@ -12,7 +12,7 @@
 #end
 
 ##
-#macro delItemsdpm(doAction delId backUrl)
-<a href="${backUrl}" data-removeid="${delId}" data-action="${doAction}">#bodyContent</a>
+#macro delItemsdpm(doAction delId backUrl mapInfo)
+<a href="${backUrl}" data-removeid="${delId}" data-action="${doAction}" #getmapInfo(mapInfo)>#bodyContent</a>
 #end
 

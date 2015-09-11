@@ -217,3 +217,13 @@
 .test .out-border th, .test .out-border td {
     border-left: none
 }
+
+.btn-danger {
+    background: #bd362f !important;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #a90329 !important;
+    color: #fff
+}
