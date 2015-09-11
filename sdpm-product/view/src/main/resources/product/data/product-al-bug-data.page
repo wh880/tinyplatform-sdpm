@@ -14,7 +14,10 @@
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${var}#end
 	#@td()@#end
-	#@td()测试BUG#end
+	#@td()
+	
+		<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page"> 测试BUG  </a> 
+	#end
 	#@td()Admin#end
 	#@td()产品经理#end
 	#@td()进行中#end

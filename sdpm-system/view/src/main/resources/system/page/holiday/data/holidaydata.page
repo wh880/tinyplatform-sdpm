@@ -18,6 +18,7 @@
 	#end
 	#@td()2015.10.1#end
 	#@td()admin#end
+	#@td()放假#end
 	#@td()
 	 	<a title="编辑发布" class="ml-5" href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page"><i class="icon-pencil"></i></a>
 		#iconOperation(" icon-remove" "删除" "ml-5")

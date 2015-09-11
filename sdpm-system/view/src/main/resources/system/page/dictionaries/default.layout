@@ -1,0 +1,21 @@
+#include("/system/page/event/common.page")
+#set(linkName="dictionaries")
+
+		#@div(divClass="operationbar")
+			<span class="f">
+				#foreach(m in menuManager.getChildMenus("dictionaries"))
+						<a href="${TINY_CONTEXT_PATH}${m.href}" style="  color: #369">${m.name}</a>
+				#end
+			</span>	
+				
+				
+				#div(divClass="clearfix")
+		#end
+		
+		#@topSearch() 
+		    #simpleText("代码" "" "width:25%")
+		    #simpleText("中文名" "" "width:25%")
+		 	#@btnSubmit("icon-search") 搜索#end
+		#end
+		
+		#pageContent
