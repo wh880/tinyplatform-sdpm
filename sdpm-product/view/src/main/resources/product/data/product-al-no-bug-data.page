@@ -11,7 +11,7 @@
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${var}#end
 	#@td()@#end
-	#@td()bug1#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page"> 未关联BUG  </a> #end
 	#@td()admin#end
 	#@td()admin#end
 	#@td()正常#end

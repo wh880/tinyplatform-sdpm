@@ -9,6 +9,13 @@
 		#@label(ckId)${labelText}#end
 	#end
 #end
+#macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
+<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked")
+               checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass)
+               class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio"
+               onclick="${radioOther}"/>
+#end
+
 
 #set(name="task")
 #@div()
@@ -18,10 +25,6 @@
 		#end
 		#@tabHead()
 			#include("/project/protab.page")
-        <span class="r" style="position:relative;top:2px;height:0">
-					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
-				</span>
 		#end
 	##head end
     <br/>
@@ -34,7 +37,7 @@
 
 <div style="width:100%;float:left" class="pageleftpart">
     <div class="infoContent">
-        <p class="titleName">指派</p>
+        <p class="titleName">添加</p>
 		#@elementItem()
 			#@sdpmItem("项目名称")
 				#tinyInput("text" "" ""{"placeholder":"请输入项目名称","datatype":"*4-16","nullmsg":"项目名称不能为空！","id":"","class":"input-text"})
@@ -101,21 +104,28 @@
 		#end
 		#@elementItem()
 			#@colLabel()访问控制：#end
-			#@formControlDiv("skin-minimal col-5")
-				#@tinyRadio("options" "default" "custom")默认设置(有项目视图权限，即可访问)#end
-				#@tinyRadio("options" "private" "custom")私有项目(只有项目团队成员才能访问)#end
-				#@tinyRadio("options" "custom" "custom")自定义白名单(团队成员和白名单的成员可以访问)#end
+			#@skinMinimal("col-8")
+					#labelRadio1(rId="aclopen" rName="acl" rValue="open" labelText="默认设置(有项目视图权限，即可访问)"
+						"setWhite(this.value);")</br>
+					#labelRadio1(rId="aclcustom" rName="acl" rValue="custom1" labelText="私有项目(只有项目团队成员才能访问)"
+						"setWhite(this.value);")</br>
+					#labelRadio1(rId="aclcustom" rName="acl" rValue="custom" labelText="自定义白名单(团队成员和白名单的成员可以访问)"
+						"setWhite(this.value);")</br>
+
 			#end
 			#@validateDiv("col-2")#end
 		#end
-
-		#@elementItem()
-			#@colLabel()分组名单：#end
-			#@formControlDiv("col-5")
-				#@tinyCheckbox("checkbox2" "grouping" "grouping")管理员#end
-				#@tinyCheckbox("checkbox2" "grouping2" "grouping")研发#end
-				#@tinyCheckbox("checkbox2" "grouping3" "grouping")测试#end
-				#@tinyCheckbox("checkbox2" "grouping4" "grouping")项目经理#end
+		#@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
+			#@colLabel()分组白名单#end
+			#@skinMinimal("col-8")
+				#labelCheckbox(ckId="whitelistBox" labelText="管理员")
+				#labelCheckbox(ckId="whitelistBox" labelText="研发")
+				#labelCheckbox(ckId="whitelistBox" labelText="测试")
+				#labelCheckbox(ckId="whitelistBox" labelText="项目经理")
+				#labelCheckbox(ckId="whitelistBox" labelText="产品经理")
+				#labelCheckbox(ckId="whitelistBox" labelText="研发主管")
+				#labelCheckbox(ckId="whitelistBox" labelText="产品主管")
+				#labelCheckbox(ckId="whitelistBox" labelText="测试主管")
 			#end
 			#@validateDiv("col-2")#end
 		#end
@@ -139,3 +149,9 @@
     <br>
 </div>
 #end
+
+<script type="text/javascript">
+    function setWhite(acl) {
+        acl == 'custom' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
+    }
+</script>

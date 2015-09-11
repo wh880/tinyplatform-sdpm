@@ -19,21 +19,12 @@
 
 #include("/common/common.page")
 #@div()
-## #@div(divClass="tabLayout")
-
     #@tabWithInit("tab_demo" "optionsBox")
-        #@div(divClass="tabBar cl")
-            #@tabHead()
-                #include("/organization/tab.page")
-            #end
-        ##
+        #@tabHead()
+            #include("/organization/tab.page")
         #end
-    #end
-
-
-
-        #@div(divClass="operationbar")
-            #@tinyForm("thisform" "" "" {"class":"test"})
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
             <span class="activeSearch">
                 <a href="#" class="active_btn">今天</a>
 					<a href="#">昨天</a>
@@ -45,7 +36,6 @@
 					<a href="#">所有</a>
 
                  </span>
-            ##            <span class="tinyFormsty">
                 #@formControlDiv("col-2")
                     #@Tselect2F()
                         #@Tselect2Body("lang" "请选择用户" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -59,8 +49,8 @@
                         #end
 
                         #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                        #end
                     #end
+                #end
                 #@formControlDiv("col-2")
                     #@Tselect2F()
                         #@Tselect2Body("lang" "请选择产品" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -95,15 +85,14 @@
                 #end&nbsp;
             <span class="secrchLac">
                    <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-                    </span>
-            ##                </span>
-
-
+           </span>
+            <div style="margin-top: 10px;">
+                #include("/organization/activeMultiSearch.page")
+            </div>
                 #div(divClass="clearfix")
             #end
-            #include("/organization/activeMultiSearch.page")
-
         #end
+    #end
 #end
 
 

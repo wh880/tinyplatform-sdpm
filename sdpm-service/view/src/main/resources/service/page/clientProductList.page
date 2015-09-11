@@ -27,8 +27,8 @@
                         #end
                     #end
                 <div style="text-align:right;margin:right">
-                    #@iconOperations(
-                        "#myModal3"+varFor.index "" "编辑" "700" "300 " "/service/page/clientProductEdit.pagelet" "ml-5")
+                    #@aModal("#myModal3"+varFor.index "编辑" "799" "300" "btn radius btn-primary btn-sm"
+                        "/service/page/clientProductEdit.pagelet")
                         编辑
                     #end
                     <a class="clientDelete">删除</a>
@@ -42,7 +42,7 @@
 #end
 
 ##    </div>
-#@simpleModal("myModal3" "编辑")#end
+###@simpleModal("myModal3" "编辑")#end
 #@simpleModal("myModal4" "删除")#end
 <script>
     $(function () {

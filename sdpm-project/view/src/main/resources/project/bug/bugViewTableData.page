@@ -12,14 +12,14 @@
 #for(var:[1..pagesize])
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page"> ${var}</a>${page}#end
-	#@td()北京#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">中南海</a>#end
-	#@td()67#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page"> ${var}</a>#end
+	#@td()一级#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">北京</a>#end
+	#@td()空指针异常#end
 	#@td()2013/03/25#end
-	#@td()67#end
-	#@td()67#end
-	#@td()￥320,800#end
+	#@td()admin#end
+	#@td()admin#end
+	#@td()方案一#end
 	 #@td()
 	 	<a href="${TINY_CONTEXT_PATH}/project/bug/commit.page" title="确认">#buttonIcon(iconClass="icon-search")</a>
 		<a href="${TINY_CONTEXT_PATH}/project/bug/call.page" title="指派">#buttonIcon(iconClass="icon-hand-right")</a>

@@ -15,7 +15,7 @@
 	#@td()${var}#end
 	#@td()@#end
 	#@td()P2P计划#end
-	#@td()设计需求#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">设计需求</a>#end
 	#@td()产品经理#end
 	#@td()项目经理#end
 	#@td()开发人员#end

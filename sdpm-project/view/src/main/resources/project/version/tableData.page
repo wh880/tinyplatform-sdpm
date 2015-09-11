@@ -11,7 +11,7 @@
 #setTinyItemCount(52)
 #foreach(var:[1..pagesize])
     #@tr()
-        #@td()<a href="#">${page}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page">${page}</a>#end
         #@td()我是产品#end
         #@td()1#end
         #@td()<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page">32</a>#end

@@ -3,11 +3,7 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
-<style>
 
-</style>
-
-#include("/project/event/common.page")
 #set(name="survey")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
@@ -16,10 +12,6 @@
 			#end
 			#@tabHead()
 				#include("/project/protab.page")
-				<span class="r" style="position:relative;top:2px;height:0">
-					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
-				</span>
 			#end
 			#@tabBodyCol("ptop-5")
 			#@div(divClass="operationbar")
@@ -38,7 +30,7 @@
 	   				   	 	#@buttonCancel()关闭#end
   						#end
 					#end
-				#@aModal("#myModa2" "项目名称>挂起" "800" "250" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass="icon-pause")挂起#end
+				#@aModal("#myModa2" "项目名称>挂起" "750" "250" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass="icon-pause")挂起#end
 					#@dialog("myModa2")
 						#@dialogHeader()#end
 						#@dialogBody()
@@ -49,7 +41,7 @@
 							#@buttonCancel()关闭#end
 						#end
 					#end
-					#@aModal("#myModa3" "项目名称>结束" "800" "250" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass="icon-off")结束#end
+					#@aModal("#myModa3" "项目名称>结束" "750" "250" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass="icon-off")结束#end
 					#@dialog("myModa3")
 						#@dialogHeader()#end
 						#@dialogBody()

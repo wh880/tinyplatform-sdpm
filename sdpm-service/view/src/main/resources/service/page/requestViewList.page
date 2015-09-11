@@ -50,9 +50,8 @@
                     #end
                 </div>
                 <div style="text-align:right;margin:right">
-                    #@iconOperations(
-                        "#myModal1" "" "编辑" "700" "300 " "/service/page/requestViewEdit.pagelet" "ml-5")编辑#end
-
+                    #@aModal("#myModal1" "编辑" "700" "500" "btn radius btn-primary btn-sm"
+                        "/service/page/requestViewEdit.pagelet")编辑#end
                 </div>
             #end
         #end
@@ -84,9 +83,8 @@
                     #end
                 </div>
                 <div style="text-align:right;margin:right">
-                    #@iconOperations(
-                        "#myModal2" "" "编辑" "700" "300 " "/service/page/requestViewSolve.pagelet" "ml-5")编辑#end
-
+                    #@aModal("#myModal1" "编辑" "700" "500" "btn radius btn-primary btn-sm"
+                        "/service/page/requestViewSolve.pagelet")编辑#end
                 </div>
             #end
         #end
@@ -124,9 +122,8 @@
                     #end
                 </div>
                 <div style="text-align:right;margin:right">
-                    #@iconOperations(
-                        "#myModal3" "" "编辑" "700" "300 " "/service/page/requestViewBack.pagelet" "ml-5")编辑#end
-
+                    #@aModal("#myModal1" "编辑" "700" "500" "btn radius btn-primary btn-sm"
+                        "/service/page/requestViewBack.pagelet")编辑#end
                 </div>
             #end
         #end
@@ -137,7 +134,9 @@
 
     #end
 #end
-#@simpleModal("myModal3" "编辑")#end
+#@simpleModal("myModal1" "编辑请求")#end
+#@simpleModal("myModal2" "编辑解决")#end
+#@simpleModal("myModal3" "编辑回访")#end
 #@simpleModal("myModal4" "删除")#end
 <script>
     $(function () {

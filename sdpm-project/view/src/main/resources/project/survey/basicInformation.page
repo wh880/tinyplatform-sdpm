@@ -47,7 +47,7 @@
                 #end
                 #@tr()
                     #@td()相关产品#end
-                    #@td()<a href="#">中华明国#end
+                    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">中华明国#end
                 #end
                 #@tr()
                     #@td()访问控制#end
