@@ -1,0 +1,9 @@
+#import("/system/page/dictionaries/components/form.component")
+#@formHorizoontalValidate("" "dict_edit")
+	#@rowCol("col-3" "代码：" "col-5" "*")
+		#@inputTextx("dictValue" "代码" "*" "代码不能为空")#end
+	#end
+	#@rowCol("col-3" "中文名：" "col-5" "*")
+		#@inputTextx("dictName" "中文名" "*" "代码不能为空")#end
+	#end		
+#end

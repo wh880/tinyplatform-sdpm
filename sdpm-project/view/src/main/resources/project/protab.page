@@ -15,4 +15,8 @@
 ###TnavItem("6" m.name m.href m.icon)
 ###@aHeadCol(TINY_CONTEXT_PATH+m.href name=="org"?"Current":"")${m.name}#end
     #@aHeadCol(TINY_CONTEXT_PATH+m.href m.id==name?"Current":"")${m.name}#end
-#end	
+#end
+<span class="r" style="position:relative;top:2px;height:0">
+					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有项目</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加项目</a>
+				</span>
