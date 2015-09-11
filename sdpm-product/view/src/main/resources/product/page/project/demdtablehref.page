@@ -2,10 +2,31 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="产品概况",activeMenuId=currentPageId)
-#!set(linkName="demand",sonitem="<li>"+"需求"+"</li>")
+#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 
 #include("/product/page/event/common.page")
 #set(name="version")
+
+<script>
+	$(document).ready(function(){
+		
+		$(".beizhu").each(function(){
+			$(this).unbind("click").bind("click",function(){
+				/*if($("#beizhutext").attr("style")==""){
+					$("#beizhutext").hide();
+				}else{
+					$("#beizhutext").show();
+				}*/
+
+                $("#beizhutext").toggle(1000);
+			
+			
+			});
+		});
+		
+	});	 
+</script>
+
 #@tabWithInit("tab_demo" "optionsBox")
 
 		#@div(divClass="operationbar")
@@ -18,7 +39,7 @@
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-close.page">#buttonIcon(iconClass="icon-off ")关闭</a>&nbsp;		
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeCase.page">#buttonIcon(iconClass="icon-sitemap")建用例</a>&nbsp;		
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
-				<a href="#" title="备注" id="beizhu" class="beizhu">#buttonIcon(iconClass="icon-comment-alt")</a>
+				#buttonIcon(iconClass="beizhu icon-comment-alt")&nbsp;&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" title="复制">#buttonIcon(iconClass="icon-copy")</a>
 				<a href="#" title="删除">#buttonIcon(iconClass="icon-remove")</a>
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
@@ -63,8 +84,8 @@
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-change.page">#buttonIcon(iconClass="icon-random")变更</a>&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-close.page">#buttonIcon(iconClass="icon-off ")关闭</a>&nbsp;		
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeCase.page">#buttonIcon(iconClass="icon-sitemap")建用例</a>&nbsp;	&nbsp;		
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;	
-				<a href="#" title="备注" id="beizhu" class="beizhu">#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;	
+				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
+				#buttonIcon(iconClass="beizhu icon-comment-alt")&nbsp;&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" title="复制">#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;	
 				<a href="#" title="删除">#buttonIcon(iconClass="icon-remove")</a>&nbsp;&nbsp;	
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>&nbsp;&nbsp;	

@@ -21,7 +21,7 @@
 	#@td()半年#end
 	#@td()进行中#end
 	#@td()
-		#iconOperation(" icon-remove" "删除" "ml-5")
+		#@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)<i class="icon-remove"></i>#end
 	#end
 	
 #end
