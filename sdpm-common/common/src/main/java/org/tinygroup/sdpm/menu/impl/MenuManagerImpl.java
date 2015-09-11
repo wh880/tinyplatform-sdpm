@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.menu.impl;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
@@ -68,7 +70,6 @@ public class MenuManagerImpl implements MenuManager {
 
     public void addMenuToParent(Menu menu, String fileName) {
         logger.logMessage(LogLevel.DEBUG, "开始添加菜单到父节点:[id=\"{}\"]", menu.getId());
-
         if (menu.getParentId() != null) {
             Menu parentMenu = menuMap.get(menu.getParentId());
             if (parentMenu != null && parentMenu.getChildMenus() != null) {
@@ -76,7 +77,6 @@ public class MenuManagerImpl implements MenuManager {
             }
         }
         logger.logMessage(LogLevel.DEBUG, "结束添加菜单到父节点:[id=\"{}\"]", menu.getId());
-
     }
 
     public void removeMenu(String menuId) {
@@ -91,12 +91,14 @@ public class MenuManagerImpl implements MenuManager {
 
     public List<Menu> getChildMenus(String parentId) {
         Menu menu = menuMap.get(parentId);
+        List<Menu> childMenus = null;
         if (menu != null) {
-            List<Menu> childMenus = menu.getChildMenus();
-            Collections.sort(childMenus);
-            return childMenus;
+            childMenus = menu.getChildMenus();
+            if (childMenus != null) {
+                Collections.sort(childMenus);
+            }
         }
-        return null;
+        return findShow(childMenus);
     }
 
     public List<Menu> getScopeMenus(String scope) {
@@ -121,7 +123,12 @@ public class MenuManagerImpl implements MenuManager {
         return new ArrayList<Menu>(menuMap.values());
     }
 
-    private List<Menu> sortMenuList(List<Menu> menuList) {
-        return null;
+    private List<Menu> findShow(List<Menu> list) {
+        Predicate<Menu> predicate = new Predicate<Menu>() {
+            public boolean apply(Menu menu) {
+                return Menu.IS_SHOW_YES.equals(menu.getIsShow());
+            }
+        };
+        return new ArrayList<Menu>(Collections2.filter(list, predicate));
     }
 }
