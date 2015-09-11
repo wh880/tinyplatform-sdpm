@@ -1,1 +1,3 @@
-#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
+<center>
+#fileWithInput("file-1")
+</center>
