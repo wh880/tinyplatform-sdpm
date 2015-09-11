@@ -50,7 +50,11 @@
 		<span class="r" style="position:relative;top:-28px;height:0">
 			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">#buttonIcon(iconClass="icon-globe")所有产品</a>&nbsp;
 			<!--新增产品-->
-			#@aModal("#myModal" "添加产品" "900" "500" "btn-class" "/product/page/tabledemo/addProduct.pagelet")#buttonIcon(iconClass="icon-plus-sign")添加产品 #end
+#*
+			#@aModal("#myModal" "添加产品" "900" "500" "btn-class" "/product/page/tabledemo/addProduct.page")#buttonIcon(iconClass="icon-plus-sign")添加产品 #end
+*#
+            <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page">#buttonIcon(iconClass="icon-plus-sign")添加产品</a>&nbsp;
+
 		</span>
 			#pageContent
 	#end

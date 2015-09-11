@@ -1,6 +1,7 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 
 
 		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
