@@ -1,11 +1,13 @@
 #include("/product/page/event/common.page")
-#set(addArchivePagePath="/product/page/tabledemo/addArchive.pagelet",editpageModalId="myModal",editpageModal="#"+editpageModalId)
-#!set(linkName="product-dynamic",sonitem="<li>"+"动态"+"</li>")
+#set(addArchivePagePath=
+    "/product/page/tabledemo/addArchive.pagelet",editpageModalId="myModal",editpageModal="#"+editpageModalId)
+#!set(linkName="product-dynamic",sonitem="
+<li>"+"动态"+"</li>")
 
 
 #@tabBodyCol("ptop-5")
-			##operationbar start1
-			<div class="operationbar" style="height:36px"> 
+##operationbar start1
+<div class="operationbar" style="height:36px">
             
 				<span class="f">
 					<a href="#" class="active_btn">今天</a>
@@ -17,42 +19,46 @@
 					<a href="#">上月</a>
 					<a href="#">所有</a>
 					<span style="left:330px;top:-35px; position:relative; height:10%">
-					#@tinyForm("thisform" "" "" {"class":"test"})
-					  #@elementItem()
-						 #@formControlDiv("col-2")
-						   #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-						   #@tinyOptionItem("zh")上周#end
-						   #@tinyOptionItem("en")上月#end
-						   #@tinyOptionItem("ta")去年#end
-					       #end
-						 #end
-							 #@validateDiv("col-2")#end
-						#end
-						 #div(divClass="clearfix")
-					#end
-					</span>					
+                        #@tinyForm("thisform" "" "" {"class":"test"})
+                            #@elementItem()
+                                #@formControlDiv("col-2")
+                                    #@Tselect2F()
+                                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"})
+                                            <option value="CV">上周</option>
+                                            <option value="BN">上月</option>
+                                            <option value="MK">前半年</option>
+                                            <option value="AS">去年</option>
+                                        #end
+                                        #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+                                    #end
+                                #end
+                                #@validateDiv("col-2")#end
+                            #end
+                            #div(divClass="clearfix")
+                        #end
+                    </span>
 				</span>
-				#div(divClass="clearfix")
-			</div>
-			##operationbar end
-			#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
-	#@div(divClass="tinyheaderTools form-inline")
-		#setTinyTablePageSize([8,10,20,50,100,200])
-		#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
-	#end
-	#@tinyTableContent("../../data/tinydynamicdata.pagelet") ##取数据地址 总数据
-		#@thead()
-			#@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-				#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-				#@tinyTh({"class":"sorting","rel":"sortname"})日期#end
-				#@tinyTh({"class":"sorting","rel":"sortname"})操作者#end
-				#@tinyTh({"class":"sorting","rel":"sortname"})动作#end
-				#@tinyTh({"class":"sorting","rel":"sortname","style":"color:#333"})对象类型#end
-				#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-				#@tinyTh({"class":"","rel":"sortname"})对象名称#end
-			#end
-		#end
-	#end
+    #div(divClass="clearfix")
+</div>
+##operationbar end
+    #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+        #@div(divClass="tinyheaderTools form-inline")
+            #setTinyTablePageSize([8,10,20,50,100,200])
+            #@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
+        #end
+        #@tinyTableContent("../../data/tinydynamicdata.pagelet") ##取数据地址 总数据
+            #@thead()
+                #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+                    #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                    #@tinyTh({"class":"sorting","rel":"sortname"})日期#end
+                    #@tinyTh({"class":"sorting","rel":"sortname"})操作者#end
+                    #@tinyTh({"class":"sorting","rel":"sortname"})动作#end
+                    #@tinyTh({"class":"sorting","rel":"sortname","style":"color:#333"})对象类型#end
+                    #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
+                    #@tinyTh({"class":"","rel":"sortname"})对象名称#end
+                #end
+            #end
+        #end
+    #end
 #end
-		#end
 
