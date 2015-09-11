@@ -1,22 +1,20 @@
-#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+## #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
 
 #@tinyForm("thisform" "url" "post" {"class":""})
 				#@elementItem()
 					#@colLabel("col-1")日期：#end
-					#@formControlDiv("col-4")
-					<div class="input-group">
-						#@div(divClass="col-12")
+					#@formControlDiv("col-8")
+						#@div(divClass="col-3")
+							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
+						#end						
+						#@div(divClass="col-0")&nbsp&nbsp至&nbsp&nbsp#end
+						#@div(divClass="col-3")
 							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
 						#end
-						<span class="input-group-addon" id="basic-addon2">至</span>
-						#@div(divClass="col-12")
-							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"float:left"})#end
-						#end
-					</div>
 					#end					
 				#end																		
 #end
-<br/>
+
 <div style="height: 10px;"></div>
 #@tableStriped("table-border")
     #@thead()

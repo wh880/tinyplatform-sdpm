@@ -1,4 +1,4 @@
-#@tableHover("table-border")
+#@tableHover("table-border top")
     #@thead()
         #@tr()
             #@td()

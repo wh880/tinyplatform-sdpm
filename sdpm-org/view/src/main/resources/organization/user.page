@@ -4,32 +4,27 @@
 #include("/common/common.page")
 #set(name="organizationUser")
 #@div()
-    #@div(divClass="tabLayout")
-        #@div(divClass="tabBar cl")
-            #@tabWithInit("tab_demo" "optionsBox")
-                #@tabHead()
-                    #include("/organization/tab.page")
-                #end
-            #end
-
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/organization/tab.page")
         #end
-        #@div(divClass="operationbar")
-
-        ##   多重搜索
-        ##
-            #include("/organization/multiSearch.page")
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+                #include("/organization/multiSearch.page")
+            #end
         #end
-        #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
-            #@toggleLeft({"class":"aclass"})
-                #@settoggleLeftTitle()部门结构#end
-                #@settoggleLeftBody("treeLeftbox")
-                    #include("/organization/moduleTree.page")
+    #end
 
-                #end
+    #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+        #@toggleLeft({"class":"aclass"})
+            #@settoggleLeftTitle()部门结构#end
+            #@settoggleLeftBody("treeLeftbox")
+                #include("/organization/moduleTree.page")
+
             #end
-            #@toggleRight()
-                #include("/organization/table/userRightTable.page")
-            #end
+        #end
+        #@toggleRight()
+            #include("/organization/table/userRightTable.page")
         #end
     #end
 #end
