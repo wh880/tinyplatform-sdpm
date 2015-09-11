@@ -15,7 +15,7 @@
     ##head end
         #@tabBodyCol("ptop-5")
         ##operationbar start
-            #@div(divClass="operationbar menuInfobar")
+            #@div(divClass="operationbar")
             <span class="f">
                     <a href="${TINY_CONTEXT_PATH}/project/task/index.page" "ml-5")" class="active_btn">未关闭</a>
                     <a href="${TINY_CONTEXT_PATH}/project/task/index.page" "ml-5")">所有</a>
