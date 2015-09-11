@@ -84,18 +84,34 @@
 				
 				#@buttonGroup()
 
-				    #@defaultDropDownButton()指派给 #end
-				
-				    #@dropDownMenuUl()
-				
-				      #@normalItem("")1#end
-				
-				      #@normalItem("")2#end
-				
-				      #@normalItem("")3#end
-				
-				    #end
-
+				    <div class="dropdown">
+	<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">多级下拉<span class="caret"></span></a>
+	<ul class="dropdown-menu multi-level" role="menu">
+		<li>
+			<a href="javascript:void(0);">下拉一</a>
+		</li>
+		<li class="dropdown-submenu">
+			<a tabindex="-1" href="javascript:void(0);">显示子菜单</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a tabindex="-1" href="javascript:void(0);">子菜单一</a>
+				</li>
+				<li class="dropdown-submenu">
+					<a href="javascript:void(0);">子菜单二</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:void(0);">子菜单三</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:void(0);">子菜单一</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+					
 				#end
 				
 				#@buttonGroup()

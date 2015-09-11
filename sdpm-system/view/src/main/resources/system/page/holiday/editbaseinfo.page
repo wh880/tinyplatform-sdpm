@@ -11,6 +11,18 @@
 			        #@validateDiv("col-2")#end
 			      #end
 			 </li>
+			 <li>	
+				 #@elementItem()
+			        #@colLabel()类型：#end
+				        #@formControlDiv("col-8")
+					       #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
+								#@tinyOptionItem("zh")放假#end
+								#@tinyOptionItem("en")工作#end
+							#end
+						#end
+			        #@validateDiv("col-2")#end
+			      #end
+			 </li>
 			 <li>
 			      #@elementItem()
 			        #@colLabel()日期：#end
