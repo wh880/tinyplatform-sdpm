@@ -3,7 +3,6 @@
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
 
-
 #set(name="client")
 #@tabWithInit("tab_demo" "optionsBox")
 ##    <div style="width:100%;float:left">
@@ -31,7 +30,9 @@
                         "/service/page/clientProductEdit.pagelet")
                         编辑
                     #end
-                    <a class="clientDelete">删除</a>
+                    #@delItemsdpm(
+                        "#action" "id" "/service/page/clientProduct.page" {"class":"btn radius btn-danger btn-sm"})
+                        删除#end
                 </div>
 
                 #end
