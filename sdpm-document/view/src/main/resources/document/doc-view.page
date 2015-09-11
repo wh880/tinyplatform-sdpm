@@ -65,9 +65,9 @@
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
 	</center>
 </div>
-<div style="width:30%;position: fixed;top: 181px;right: 10px;" class="rightpart">
-  ## 		#TypeInfo("docInfo")
-     #include("basic-info.page")
+<div style="width:30%;float:right;">
+ 		#TypeInfo("docInfo")
+##     #include("basic-info.page")
 </div>
 #end
 #end		

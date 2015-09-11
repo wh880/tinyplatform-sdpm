@@ -24,14 +24,14 @@
 				<table>
 					<tr>
 					<td style="width:360px">
-					<a href="#" class="active_btn">日历</a>
-					<a href="#">今日</a>
-					<a href="#">昨日</a>
-					<a href="#">本周</a>
-					<a href="#">上周</a>
-					<a href="#">本月</a>
-					<a href="#">上月</a>
-					<a href="#">所有日志</a>
+					<a href="${TINY_CONTEXT_PATH}/project/note/index.page" class="active_btn">日历</a>
+					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">今日</a>
+					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">昨日</a>
+					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">本周</a>
+					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">上周</a>
+					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">本月</a>
+					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">上月</a>
+					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">所有日志</a>
 					</td>
 					<td style="float:left">
 					<div style="width:150px">
