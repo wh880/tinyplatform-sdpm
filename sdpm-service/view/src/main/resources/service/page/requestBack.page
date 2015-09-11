@@ -16,7 +16,6 @@
 					<a href="#" class="active_btn">查看</a>
             </span>
             <span class="r">
-
                 <a href="${TINY_CONTEXT_PATH}/service/page/requestEdit.page"
                    title="编辑">#buttonIcon(iconClass="icon-pencil")编辑</a>
             </span>

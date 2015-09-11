@@ -40,29 +40,8 @@
                 #@gridSysCol(12)1.如何初始化项目管理数据库？#end
                 #@gridSysCol(12)${ans}#end
             #end
-         ##        #@thead()
-        ##        #end
-        ##        #@tbody()
-        ##            #@tr()
-        ##                #@th()1.如何初始化项目管理数据库？#end
-        ##                #@td()#end
-        ##            #end
-        ##            #@tr()
-        ##                #@th()把zentao/config/my.php 里面install的值改成false。#end
-        ##                #@td()#end
-        ##            #end
-        ##            #@tr()
-        ##                #@th()${ans}#end
-        ##                #@td()#end
-        ##            #end
-        ##        #end
-        ##        #end
         </div>
- ##       <div style="text-align:right;margin:right">
              <div style="text-align:right;margin:right">
-##            <a href="questiondbEdit.page">&nbsp;编辑&nbsp;&nbsp;&nbsp;&nbsp;</a>
-##         下面的“编辑”是以按钮的形式显示。
- ##                #@aTxtWhiteButton(aTxtWhiteBtHref="questiondbEdit.page")&nbsp;编辑 &nbsp;#end
     #@aExtendButton("btn-primary" "questiondbEdit.page")&nbsp;编辑&nbsp;#end
     <a class="answerquestionDelete">&nbsp;删除</a>
         </div>
