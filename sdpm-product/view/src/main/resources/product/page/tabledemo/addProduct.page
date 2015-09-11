@@ -2,17 +2,11 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 
-#macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
-<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked")
-               checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass)
+#macro labelRadio1Sty(rId rName rValue rClass radioOther labelText rChecked )
+        <input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end #if(rValue) value="$!{rValue}"#end#if(rClass)
                class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio"
-               onclick="${radioOther}"/>
-#end
-#macro labelRadio1(rId rName rValue rClass radioOther labelText)
-    #@radioBox()
-        #radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)
+               onclick="${radioOther}" #if(rChecked) checked="${rChecked}"#end/>
         #@label(ckId)${labelText}#end
-    #end
 #end
 
 #@tinyForm("thisform" "url" "post" {"class":""})
@@ -100,11 +94,11 @@
         #@elementItem()
             #@colLabel()访问控制：#end
             #@skinMinimal("col-8")
-                    #labelRadio1(rId="aclopen" rName="acl" rValue="open" labelText="默认设置(有项目视图权限，即可访问)"
+                    #labelRadio1Sty(rId="aclopen" rName="acl" rValue="open" labelText="默认设置(有项目视图权限，即可访问)"
+                        "setWhite(this.value);" rChecked="checked")</br>
+                    #labelRadio1Sty(rId="aclcustom" rName="acl" rValue="custom1" labelText="私有项目(只有项目团队成员才能访问)"
                         "setWhite(this.value);")</br>
-                    #labelRadio1(rId="aclcustom" rName="acl" rValue="custom1" labelText="私有项目(只有项目团队成员才能访问)"
-                        "setWhite(this.value);")</br>
-                    #labelRadio1(rId="aclcustom" rName="acl" rValue="custom" labelText="自定义白名单(团队成员和白名单的成员可以访问)"
+                    #labelRadio1Sty(rId="aclcustom" rName="acl" rValue="custom" labelText="自定义白名单(团队成员和白名单的成员可以访问)"
                         "setWhite(this.value);")</br>
 
             #end

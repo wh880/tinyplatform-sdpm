@@ -20,7 +20,6 @@
             #@settoggleLeftTitle()部门结构#end
             #@settoggleLeftBody("treeLeftbox")
                 #include("/organization/moduleTree.page")
-
             #end
         #end
         #@toggleRight()

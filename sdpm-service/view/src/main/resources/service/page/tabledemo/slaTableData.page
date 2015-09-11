@@ -18,8 +18,10 @@
         #@td()习近平#end
         #@td()20150708#end
         #@td()
-            #iconOperations("#myModal1" " icon-pencil" "编辑" "600" "300" "/service/page/slaEdit.pagelet" "ml-5")
+            #iconOperations(
+                "#myModal1"+varFor.index " icon-pencil" "编辑" "600" "300" "/service/page/slaEdit.pagelet" "ml-5")
             <a><i class="icon-remove" itemId="deleteList"></i></a>
         #end
     #end
+    #@simpleModal("myModal1"+varFor.index "编辑")#end
 #end

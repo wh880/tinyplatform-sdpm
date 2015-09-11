@@ -18,7 +18,7 @@
         #@td()正常#end
         #@td()
             #iconOperations("#myModal" " icon-pencil" "编辑" "650" "350" "/service/page/clientEdit.pagelet" "ml-5")
-        <a><i class="icon-remove" itemId="deleteList"></i></a>
+            #@tinyTableItemRemove("#" "id")<i class="icon-remove"></i>#end
         #end
     #end
 #end
