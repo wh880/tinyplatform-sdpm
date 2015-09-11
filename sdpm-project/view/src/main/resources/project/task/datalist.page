@@ -28,7 +28,7 @@
 		<a title="完成" href="${TINY_CONTEXT_PATH}/project/task/finish.page">#buttonIcon(iconClass="icon-ok-sign")</a>
 		<a title="关闭" href="${TINY_CONTEXT_PATH}/project/task/close.page">#buttonIcon(iconClass="icon-off")</a>		
 		<a title="编辑" href="${TINY_CONTEXT_PATH}/project/task/edit.page">#buttonIcon(iconClass="icon-pencil")</a>
-		##iconOperation(" icon-remove" "删除" "ml-5")
-	#end
+
+	 #end
 #end
 #end

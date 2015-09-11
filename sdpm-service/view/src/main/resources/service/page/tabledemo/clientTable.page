@@ -24,13 +24,3 @@
 #end
 #@simpleModal("myModal" "用户编辑")#end
 #@simpleModal("myModal2" "用户删除")#end
-<script>
-    $(function () {
-        $(".tinytable").on("click", ".icon-remove", function () {
-            var that = this;
-            layer.confirm('确定要删除该记录？', function (index) {
-                layer.msg('已删除', 1);
-            })
-        });
-    });
-</script>
