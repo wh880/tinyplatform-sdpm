@@ -52,64 +52,129 @@
             #end
         #end
     #end
+
+
 #end
 
-#@tinyForm("cheackform" "" "" {"class":"cheackform"})
-    #@elementItem()
-        #@div(divClass="form-label col-2")首页#tinyCheckbox("checkbox-c1" "01" "02")#end
-        #@formControlDiv("checkboxSty col-9")
-            #@tinyCheckbox("checkbox1" "firstPage" "02")首页#end
+
+
+
+
+
+
+
+
+
+##<style>
+##    #reverse{margin-left:2px;}
+##    #playList input{margin-left:12px;}
+##</style>
+##<script language="javascript" type="text/javascript">
+##    $(function () {
+##        $("#reverse").click(function () {//反选
+##            $("#playList :checkbox").each(function () {
+##                $(this).attr("checked", !$(this).attr("checked"));
+##            });
+##        });
+##    });
+##</script>
+###@tinyForm("cheackform" "" "" {"class":"cheackform"})
+##    #@elementItem()
+##        #@colLabel()内联复选框#@tinyCheckbox("checkbox2" "01" "02")#end#end
+##        #@formControlDiv("checkboxSty col-9")
+##                #foreach(m in menuManager.getChildMenus("0"))
+##                    #@tinyCheckbox("checkbox2" "01" "02")
+##                        ${m.name}
+##                    #end
+##               ## {id: '${m.id}', pId: '${m.parentId}', name: "${m.name}", open: true},
+##                #end
+##        #end
+##    #end
+##
+##    #@elementItem()
+##        #@div(divClass="col-10 col-offset-2 form-inline")
+##            #tinyInput("submit" "submitbtn" "&nbsp;保存&nbsp;" {"class":"btn btn-primary"})
+##            #@aTxtDarkDefaultButton(aHref="javascript:void(0);")&nbsp;取消&nbsp;#end
+##        #end
+##    #end
+###end
+
+
+
+
+
+#@noRespsGridSystem()
+    #@gridSysRow()
+        #@gridSysCol(3)
         #end
-    #end
-    #@elementItem()
-        #@div(divClass="form-label col-2")我的地盘#tinyCheckbox("checkbox-c2" "01" "02")#end
-        #@formControlDiv("checkboxSty col-9")
-            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "add" "")新增#end#end
-            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "muladd" "muladd")批量添加#end#end
-            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "update" "02")更新待办#end#end
-            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "todo" "02")待办详情#end#end
-            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "del" "02")删除待办#end#end
-            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "export" "02")导出#end#end
-            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "complete" "02")完成#end#end
-            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "exportTeday" "02")导入到今天#end#end
-            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "batchedit" "02")批量编辑#end#end
-            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "batchComplete" "02")批量完成#end#end
-            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "calendar" "02")日历#end#end
+        #@gridSysCol(6)
+            #@gridSysRow()
+            <ul id="treeDemo" class="ztree" style="width:100%;min-height:160px;max-height:300px;"></ul>
+
+            <div style="padding-top: 20px;float: right">
+                #@div(divClass="col-7 col-offset-5 form-inline")
+                        #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+                    #end
+            </div>
+
+
+            #end
 
         #end
-
-    #end
-
-    #@elementItem()
-        #@div(divClass="col-10 col-offset-2 form-inline")
-            #tinyInput("submit" "submitbtn" "&nbsp;保存&nbsp;" {"class":"btn btn-primary"})
-            #@aTxtDarkDefaultButton(aHref="javascript:void(0);")&nbsp;取消&nbsp;#end
+        #@gridSysCol(3)
         #end
+
     #end
 #end
-<script type="text/javascript">
-    $(function () {
-        $("input[name=checkbox-c1]").parent().on("click", function () {
-            var ischecked = $(this).hasClass("checked");
-            $("input[name=checkbox1]").parent().each(function () {
-                if (ischecked) {
-                    $(this).addClass("checked")
-                } else {
-                    $(this).removeClass("checked")
-                }
-            })
-        });
+
+
+<SCRIPT type="text/javascript">
+    <!--
+    var setting = {
+        check: {
+            enable: true
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        }
+    };
+
+    var zNodes = [
+
+        #foreach(m:menuManager.getMenus())
+            {id: '${m.id}', pId: '${m.parentId}', name: "${m.name}", open: true},
+        #end
+    ];
+
+    var code;
+
+    function setCheck() {
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+                py = $("#py").attr("checked") ? "p" : "",
+                sy = $("#sy").attr("checked") ? "s" : "",
+                pn = $("#pn").attr("checked") ? "p" : "",
+                sn = $("#sn").attr("checked") ? "s" : "",
+                type = {"Y": py + sy, "N": pn + sn};
+        zTree.setting.check.chkboxType = type;
+        showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+    }
+    function showCode(str) {
+        if (!code) code = $("#code");
+        code.empty();
+        code.append("<li>" + str + "</li>");
+    }
+
+    $(document).ready(function () {
+        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        setCheck();
+        $("#py").bind("change", setCheck);
+        $("#sy").bind("change", setCheck);
+        $("#pn").bind("change", setCheck);
+        $("#sn").bind("change", setCheck);
     });
-    $(function () {
-        $("input[name=checkbox-c2]").parent().on("click", function () {
-            var ischecked = $(this).hasClass("checked");
-            $("input[name=checkbox2]").parent().each(function () {
-                if (ischecked) {
-                    $(this).addClass("checked")
-                } else {
-                    $(this).removeClass("checked")
-                }
-            })
-        });
-    });
-</script>
+    //-->
+</SCRIPT>
+
+

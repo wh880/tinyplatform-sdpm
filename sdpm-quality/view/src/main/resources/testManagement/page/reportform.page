@@ -8,7 +8,7 @@
     .togglebox.open .tableBoxessty{margin-left:262px}
     .togglebox.open .togglenavico{left:218px}
     .togglebox .togglenavpart{left:-260px;}
-    .dow {display:block}
+#*    .dow {display:block}*#
 </style>
 
 
@@ -28,8 +28,9 @@
     <span class="f active_btn" >
 		报表
 				</span>
-    <span class="r active_btn">
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page" class="dow">返回</a>&nbsp;
+    <span class="r">
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">
+					<button style="float: left" type="button" id="back" class="backBtn">返回</button></a>&nbsp;
 				</span>
         #div(divClass="clearfix")
     #end

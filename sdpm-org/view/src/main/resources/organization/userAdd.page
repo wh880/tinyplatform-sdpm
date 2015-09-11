@@ -20,7 +20,7 @@
 
     #end
         #@gridSysRow()
-            #@colLabel("col-3")用户名：#end
+            #@colLabel("col-3")<span class="c-red">*</span>用户名：#end
             #@gridSysCol(7)
             #tinyInput(
                 "text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
