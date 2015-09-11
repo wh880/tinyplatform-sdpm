@@ -8,17 +8,28 @@
 
 #set(name="organizationUser")
 #@div()
-    #@div(divClass="tabLayout")
-        #@div(divClass="tabBar cl")
-            #@tabWithInit("tab_demo" "optionsBox")
-                #@tabHead()
-                    #include("/organization/tab.page")
-                #end
-            #end
 
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/organization/tab.page")
         #end
-        #@div(divClass="operationbar")
-        <span style="padding-top:5px;float:left">
+
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+                #@formControlDiv("col-1")
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "用户" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="用户">用户</option>
+                        <option value="usera">用户</option>
+                        <option value="usera">用户</option>
+                        <option value="usera">用户</option>
+                        #end
+
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                    #end
+                #end
+            <span style="padding-top:5px;float:left">
+                &nbsp;&gt;
 					<a href="${TINY_CONTEXT_PATH}/organization/userTodo.page" class="active_btn">待办</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/userStoryAdmin.page">需求</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/userTaskAdmin.page">任务</a>
@@ -28,14 +39,20 @@
 					<a href="${TINY_CONTEXT_PATH}/organization/userProjectAdmin.page">项目</a>
 					<a href="${TINY_CONTEXT_PATH}/organization/userProfileAdmin.page">档案</a>
         </span>
-        <span style="padding-top:5px;float:right">
-            #@aModal(editpageModal "导出" "600" "120" ""  editpagePath)
-                #@simpleI(" icon-download-alt")导出#end
+            <span style="padding-top:5px;float:right">
+                #@aModal(editpageModal "导出" "600" "120" ""  editpagePath)
+                    #@simpleI(" icon-download-alt")导出#end
+                #end
+            </span>
+                #div(divClass="clearfix")
             #end
-        </span>
-            #div(divClass="clearfix")
         #end
+
     #end
+
+
+
+
 #end
 
 #@fullCalendar("fullCalendar")

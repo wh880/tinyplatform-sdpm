@@ -25,7 +25,6 @@
         #end
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
-            ##  #@tinyForm("thisform" "" "" {"class":"test"})
             <span class="activeSearch">
                 <a href="#" class="active_btn">今天</a>
 					<a href="#">昨天</a>
@@ -86,12 +85,12 @@
                 #end&nbsp;
             <span class="secrchLac">
                    <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-            </span>
+           </span>
+            <div style="margin-top: 10px;">
+                #include("/organization/activeMultiSearch.page")
+            </div>
                 #div(divClass="clearfix")
             #end
-            #include("/organization/activeMultiSearch.page")
-
-        ## #end
         #end
     #end
 #end
