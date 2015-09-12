@@ -24,7 +24,9 @@
     #@daterangepickerPosition()
         #@colLabel()日期：#end
         #@formControlDiv("col-6")
-           #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end
+        	 #@dateMultipleSelect()
+        	 #end
+#*           #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end*#
         #end
         #@validateDiv("col-2")#end
     #end

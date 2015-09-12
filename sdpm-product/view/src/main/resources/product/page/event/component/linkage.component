@@ -1,0 +1,23 @@
+#macro dropdownMenu()
+	<ul class="dropdown-menu">
+		#bodyContent
+    </ul>
+#end
+#macro dropdownSubmenu(rName)
+	<li class="dropdown-submenu">
+		<a tabindex="-1" href="javascript:void(0);">${rName}</a>
+		#bodyContent
+	</li>
+#end
+
+#macro dmenu(rName url)
+	<li>
+		<a tabindex="-1" href="${TINY_CONTEXT_PATH}${url}">${rName}</a>
+	</li>
+#end
+
+
+#macro dropdown(rName)
+	<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">${rName}<span class="caret"></span></a>
+    #bodyContent
+#end

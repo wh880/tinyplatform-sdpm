@@ -19,15 +19,10 @@
                     #@td()
                     #@Tselect2F()
 	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">Connecticut</option>
-	                        <option value="DE">Delaware</option>
-	                        <option value="FL">Florida</option>
-	                        <option value="GA">Georgia</option>
-	                        <option value="IN">Indiana</option>
-	                        <option value="ME">Maine</option>
-	                        <option value="MD">Maryland</option>
+	                        <option value="IN">一级棒</option>
+	                        <option value="ME">挺好</option>
+	                        <option value="MD">加油</option>
 	                    	#end                
-	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 	  #end
                     #end
                     #@td()#tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
@@ -40,7 +35,7 @@
     #end
     #@div(divClass="infoContent")
     <p class="titleName">测试结果   共执行0次</p>
-
+		<p>1111</p>
     #end
 
 #end

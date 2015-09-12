@@ -1,0 +1,44 @@
+#set(name="faq")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+
+        #@tabHead()
+            #include("/service/serviceCom/tab.page")
+        #end
+    <br/>
+    #end
+#end
+#@tinyForm("thisform" "" "" {"class":"test"})
+
+
+<div style="width:100%;float:left" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">编辑问题和答案</p>
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-1 text-r">
+                    <label></label>
+                </div>
+                <div class="col-10">
+                    #@Teditor("content" "content" {"initialFrameHeight":"350"})Say something#end</div>
+            </div>
+        #end
+        <br/>
+    </div>
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
+    <br>
+</div>
+#end

@@ -1,0 +1,30 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#!set(activeTitle="客户管理",activeMenuId=currentPageId)
+#set(name="request1")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox dropdownBoxes")
+            #include("/service/serviceCom/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/service/serviceCom/tab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+        ##operationbar star
+            #@div(divClass="operationbar")
+            <span class="f">
+					<a href="#" class="active_btn">查看</a>
+            </span>
+            <span class="r">
+                <a href="${TINY_CONTEXT_PATH}/service/serviceReq/requestEdit.paget.page"
+                   title="编辑">#buttonIcon(iconClass="icon-pencil")编辑</a>
+            </span>
+            #end
+        ##operationbar end
+        #end
+        #include("/service/serviceReq/requestViewList.page")
+    #end
+#end
+#@simpleModal("myModal1" "导出")#end
+#@simpleModal("myModal2" "新建产品")#end
+

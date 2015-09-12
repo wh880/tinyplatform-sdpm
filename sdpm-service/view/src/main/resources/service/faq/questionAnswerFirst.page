@@ -1,0 +1,47 @@
+#!set(activeTitle="FAQ",activeMenuId=currentPageId)
+#import("/org/tinygroup/table/components/table.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+<style>
+    .question_info {
+        margin: 22px 0px 16px 0px;
+        border: #eee 1px solid;
+        background: #fdfdfd;
+    ## padding: 6px 12px
+        padding: 18px 12px
+    }
+</style>
+#set(name="faq")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/service/serviceCom/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/service/serviceCom/tab.page")
+        #end
+    #end
+    #set(ans= "把zentao/config/my.php 里面install的值改成false。访问禅道，会自动进入安装页面，所有数据都会清空。")
+<div style="width: 75%;float: left">
+##       #@div(divClass="infoContent")
+    #@div(divClass="question_info")
+    ##        #@table("问答页面")
+        <p class="titleName">问答页面</p>
+        #@gridSysRow()
+            #@gridSysCol(12)1.如何初始化项目管理数据库？#end
+            #@gridSysCol(12)${ans}#end
+        #end
+    </div>
+    <div style="text-align:right;margin:right">
+        #@aExtendButton("btn-primary" "questiondbEdit.page")编辑#end
+        #@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" "var")#buttonRadiusDanger(caption="删除")#end
+    </div>
+    #end
+#end
+
+
+##第一个问答页面后面的“删除”
+#@simpleModal("myModal3" "编辑")#end
+#@simpleModal("myModal4" "删除")#end

@@ -109,7 +109,7 @@
         #end
         #@gridSysCol(6)
             #@gridSysRow()
-            <ul id="treeDemo" class="ztree" style="width:100%;min-height:160px;max-height:300px;"></ul>
+            <ul id="treeDemo" class="ztree" style="width:100%;min-height:360px;max-height:300px;"></ul>
 
             <div style="padding-top: 20px;float: right">
                 #@div(divClass="col-7 col-offset-5 form-inline")
@@ -126,6 +126,7 @@
 
     #end
 #end
+
 
 
 <SCRIPT type="text/javascript">
@@ -148,31 +149,11 @@
         #end
     ];
 
-    var code;
-
-    function setCheck() {
-        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
-                py = $("#py").attr("checked") ? "p" : "",
-                sy = $("#sy").attr("checked") ? "s" : "",
-                pn = $("#pn").attr("checked") ? "p" : "",
-                sn = $("#sn").attr("checked") ? "s" : "",
-                type = {"Y": py + sy, "N": pn + sn};
-        zTree.setting.check.chkboxType = type;
-        showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
-    }
-    function showCode(str) {
-        if (!code) code = $("#code");
-        code.empty();
-        code.append("<li>" + str + "</li>");
-    }
 
     $(document).ready(function () {
+
         $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-        setCheck();
-        $("#py").bind("change", setCheck);
-        $("#sy").bind("change", setCheck);
-        $("#pn").bind("change", setCheck);
-        $("#sn").bind("change", setCheck);
+
     });
     //-->
 </SCRIPT>
