@@ -1,6 +1,6 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
     #@elementItem()
-        #@colLabel()客户ID：#end
+        #@colLabel()<span class="c-red">*</span>客户ID：#end
         #@formControlDiv("col-8")
             #tinyInput(
                 "text" "username" ""{"id":"username","class":"input-text"})
@@ -25,7 +25,7 @@
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()客户登记人：#end
+        #@colLabel()<span class="c-red">*</span>客户登记人：#end
         #@formControlDiv("col-8")
             #tinyInput(
                 "text" "username" ""{"placeholder":"","datatype":"*","nullmsg":"客户登记人不能为空！","id":

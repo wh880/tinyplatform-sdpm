@@ -5,7 +5,7 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
     #@noRespsGridSystem()
         #@gridSysRow()
-            #@colLabel("col-3")客户ID：#end
+            #@colLabel("col-3")<span class="c-red">*</span>客户ID：#end
             #@gridSysCol(5)
                 #@tinySelect("lang" "ch" {"class":"input-text select2","rel":"22"})
                     #@tinyOptionItem("ch")请选择#end
@@ -16,7 +16,7 @@
             #end
         #end
         #@gridSysRow()
-            #@colLabel("col-3")客户名称：#end
+            #@colLabel("col-3")<span class="c-red">*</span>客户名称：#end
             #@gridSysCol(5)
                 #@tinySelect("lang" "ch" {"class":"input-text select2","rel":"22"})
                     #@tinyOptionItem("ch")请选择#end
@@ -43,7 +43,7 @@
             #end
         #end
         #@gridSysRow()
-            #@colLabel("col-3")创建人：#end
+            #@colLabel("col-3")<span class="c-red">*</span>创建人：#end
             #@gridSysCol(5)
                 #tinyInput("text" "创建人" ""{"datatype":"","id":"","class":"input-text"})
             #end
