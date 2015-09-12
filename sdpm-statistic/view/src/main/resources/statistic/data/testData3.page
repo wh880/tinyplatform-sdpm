@@ -12,6 +12,7 @@
 		#@buttonCancel()关闭#end
 		#end
 #end
+<br/><br/>
 #@tableStriped("table-border")
     #@thead()
         #@tr("text-c")
