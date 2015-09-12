@@ -40,26 +40,30 @@
     <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 </span>
 <span class="r">
-                #@buttonGroup()
-                    #@buttonDropdown("Dropdown" buttonClass="btnDropDown")
-                        #buttonIcon(iconClass="icon-download-alt")导入  #@spanCaret()#end#end
-                    #@ulDropdownMenu()
-                        <a href="${TINY_CONTEXT_PATH}/project/task/inputBug.page">导入bug</a>
-                        <a href="${TINY_CONTEXT_PATH}/project/task/inputTask.page">导入bug</a>
-                    #end
-                #end &nbsp;
     #@buttonGroup()
         #@buttonDropdown("Dropdown" buttonClass="btnDropDown")
-            #buttonIcon(iconClass="icon-download-alt")导出#@spanCaret()#end#end
+            #buttonIcon(iconClass="icon-download-alt")导入  #@spanCaret()#end
+        #end
+        #@ulDropdownMenu()
+            <p><a href="${TINY_CONTEXT_PATH}/project/task/inputBug.page">导入bug</a></p>
+            <p><a href="${TINY_CONTEXT_PATH}/project/task/inputTask.page">导入任务</a></p>
+        #end
+    #end &nbsp;
+    #@buttonGroup()
+        #@buttonDropdown("Dropdown" buttonClass="btnDropDown")
+            #buttonIcon(iconClass="icon-download-alt")导出#@spanCaret()#end
+        #end
         #@ulDropdownMenu()
             <p>
                 #@iconOperations(
                     "#myModal" "" "导出数据" "700" "100"  "/project/task/outputData.pagelet" "ml-5")
-                    &nbsp;导出数据#end
+                    &nbsp;导出数据
+                #end
             </p>
 
             #@iconOperations("#myModal" "" "导出数据" "550" "100" "/project/task/outputModal.pagelet" "ml-5")
-                &nbsp;导出模板#end
+                &nbsp;导出模板
+            #end
 
         #end
     #end &nbsp;
