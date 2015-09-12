@@ -10,7 +10,7 @@
 #foreach(var:[1..pagesize])
     #@tr()
         #@td()<input type="checkbox" value="1" name="idCheck">#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientsla.page">001#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/clientsla.page">001#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">恒生电子</a>#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent.page">支付宝协议#end
         #@td()2.0.1#end
@@ -19,9 +19,11 @@
         #@td()20150708#end
         #@td()
             #iconOperations(
-                "#myModal1"+varFor.index " icon-pencil" "编辑" "600" "300" "/service/sla/slaEdit.pagelet" "ml-5")
+                "#myModal1" " icon-pencil" "编辑" "600" "300" "/service/sla/slaEdit.pagelet" "ml-5")
             <a><i class="icon-remove" itemId="deleteList"></i></a>
         #end
     #end
-    #@simpleModal("myModal1"+varFor.index "编辑")#end
+##    #@simpleModal("myModal1"+varFor.index "编辑")#end
 #end
+#@simpleModal("myModal1" "编辑")#end
+
