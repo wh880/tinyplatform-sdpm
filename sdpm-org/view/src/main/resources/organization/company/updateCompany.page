@@ -66,8 +66,8 @@
         #@gridSysRow()
             #@colLabel("col-3")匿名登录：#end
             #@gridSysCol(7)
-                #@tinyRadio("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})男#end
-                #@tinyRadio("sex" "women" "women")女#end
+                #@tinyRadio("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})允许#end
+                #@tinyRadio("sex" "women" "women")不允许#end
             #end
         #end
         #@gridSysRow()

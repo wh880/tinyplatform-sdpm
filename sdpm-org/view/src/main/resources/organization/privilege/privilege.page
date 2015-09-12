@@ -1,32 +1,91 @@
-#!set(activeTitle="组织管理",activeMenuId=currentPageId)
-#import("/org/tinygroup/zTree/components/zTree.component")
-#import("/common/component/form.component")
+#!set(activeTitle="权限管理",activeMenuId=currentPageId)
+#set(editpagePath=
+    "/organization/privilege/groupAdd.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+
+<style>
+    .tabLayout .tabBar span a {
+        color: #333
+    }
+
+    .tabLayout .tabBar .Current a {
+        color: #fff
+    }
+
+    .operationbar {
+        border-top: none;
+        background: #f9fafe;
+        padding: 6px 5px 6px 10px;
+    }
+</style>
+#set(name="organizationPrivilege")
 #include("/common/common.page")
-#set(name="organizationUser")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()
-            #include("/organization/tab.page")
+            #include("/organization/common/tab.page")
         #end
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
-                #include("/organization/multiSearch.page")
+            <span class="f">
+					<dr>浏览分组</dr>
+        </span>
+
+            <span style="float:right">
+                #@aModal(editpageModal "新增分组" "600" "300" "btn radius btn-primary btn-sm" editpagePath)
+                    #@simpleI("icon-plus")新增分组#end
+                #end
+
+            </span>
+                #div(divClass="clearfix")
+            #end
+        #end
+
+
+    #end
+    #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+        #@div(divBaseClass="tinyheaderTools form-inline")
+            #setTinyTablePageSize([8,10,20,50,100,200])
+        #end
+        #@tinyTableContent(TINY_CONTEXT_PATH+"/organization/privilege/privilegeTable.pagelet" 81) ##取数据地址 总数据
+            #@thead()
+                #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+                    #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                    #@tinyTh({"class":"","rel":"sortname"})编号#end
+                    #@tinyTh({"class":"","rel":"sortname"})分组名称#end
+                    #@tinyTh({"class":"","rel":"sortname"})分组描述#end
+                    #@tinyTh({"class":"","rel":"sortname"})用户列表#end
+                    #@tinyTh({"class":"","rel":"sortname"})操作#end
+                #end
             #end
         #end
     #end
 
-    #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
-        #@toggleLeft({"class":"aclass"})
-            #@settoggleLeftTitle()部门结构#end
-            #@settoggleLeftBody("treeLeftbox")
-                #include("/organization/moduleTree.page")
-            #end
-        #end
-        #@toggleRight()
-            #include("/organization/table/userRightTable.page")
-        #end
-    #end
 #end
+
+#simpleModal(editpageModalId)
+
+
+#@simpleModal("myModa2" "用户添加")#end
+#@simpleModal("myModa3" "成员维护")#end
+#@simpleModal("myModa4" "复制分组")#end
+#@simpleModal("myModa5" "编辑分组")#end
+<script>
+    $(function () {
+        $(".tinytable").on("click", ".icon-remove", function () {
+            //console.log($(this).attr("itemId"))
+            // user_del(this, '1');
+            var that = this;
+            layer.confirm('确定要删除该用户？', function (index) {
+                //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                //$.ajax()
+                //console.log(index);
+                layer.msg($("已删除").attr("deleteList"), 1);
+            }, function (index) {
+                layer.msg('已删除', 1)
+            })
+        });
+    });
+</script>
 <script type="text/javascript">
     <!--
     var setting = {
@@ -55,15 +114,18 @@
         }
     };
     var treeNodes = [
-        {id: 1, pId: 0, name: "研发部", open: true},
-        {id: 11, pId: 1, name: "测试"},
-        {id: 12, pId: 1, name: "开发"},
-        {id: 13, pId: 1, name: "设计"},
-        {id: 2, pId: 0, name: "销售", open: true},
-        {id: 21, pId: 2, name: "市场"},
-        {id: 22, pId: 2, name: "运营"},
-        {id: 23, pId: 2, name: "广告"},
-
+        {id: 1, pId: 0, name: "随意拖拽", open: true},
+        {id: 11, pId: 1, name: "年龄 1-1"},
+        {id: 12, pId: 1, name: "年龄 1-2"},
+        {id: 13, pId: 1, name: "年龄 1-3"},
+        {id: 2, pId: 0, name: "随意拖拽2", open: true},
+        {id: 21, pId: 2, name: "学历 2-1"},
+        {id: 22, pId: 2, name: "学历  2-2"},
+        {id: 23, pId: 2, name: "学历  2-3"},
+        {id: 3, pId: 0, name: "禁止拖拽3", open: true, drag: false},
+        {id: 31, pId: 3, name: "城市 3-1", drag: false},
+        {id: 32, pId: 3, name: "城市 3-2", drag: false},
+        {id: 33, pId: 3, name: "地区 3-3", drag: false}
     ];
 
     var log, className = "dark";
@@ -264,157 +326,6 @@
     $(document).ready(function () {
         $.fn.zTree.init($("#treeDrag"), setting, treeNodes);
         $("#callbackTrigger").bind("change", {}, setTrigger);
-    });
-    //-->
-</script>
-<script type="text/javascript">
-    <!--
-    $(function () {
-        $("#showsearchmore").click(function () {
-            $("#searchform").toggleClass("showmore");
-        });
-        $("#searchmore").click(function () {
-            $("#searchlite").css("display", "block");
-            $(this).hide();
-            $("#searchbox5,#searchbox6,#searchbox2,#searchbox3").show();
-        });
-        $("#searchlite").click(function () {
-            $("#searchmore").css("display", "block");
-            $(this).hide();
-            $("#searchbox5,#searchbox6,#searchbox2,#searchbox3").hide();
-        });
-        var itemlist = []
-        itemlist.push({
-            "name": "name",
-            "title": "真实姓名",
-            "operator": "include",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "email",
-            "title": "邮箱",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "apartment",
-            "title": "所属部门",
-            "operator": "=",
-            "value": "status"
-        });
-        itemlist.push({
-            "name": "uerNumber",
-            "title": "用户名",
-            "operator": "include",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "positio",
-            "title": "职位",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "phoneNumber",
-            "title": "电话",
-            "operator": "=",
-            "value": "pri"
-        });
-        itemlist.push({
-            "name": "joinDate",
-            "title": "加入日期",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "number",
-            "title": "编号",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "codeAccount",
-            "title": "源代码账号",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "birthday",
-            "title": "出生年",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "sex",
-            "title": "性别",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "QQ",
-            "title": "QQ",
-            "operator": "belong",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "address",
-            "title": "通讯地址",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "addressNum",
-            "title": "邮编",
-            "operator": "=",
-            "value": "user"
-        });
-
-        function setValueBox(index, itemIndex) {
-            $("#operator" + itemIndex).val(itemlist[index]["operator"]);
-            switch (itemlist[index]["value"]) {
-                case "text":
-                    $("#valueBox" + itemIndex).html('<input type="text" name="value' + itemIndex + '" id="value' + itemIndex + '" value="" class="form-control">');
-                    break;
-                case "user":
-                    $("#valueBox" + itemIndex).html($('<select name="value' + itemIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#usertemp").html()));
-                    break;
-                case "pri":
-                    $("#valueBox" + itemIndex).html($('<select name="value' + itemIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#pritemp").html()));
-                    break;
-                case "status":
-                    $("#valueBox" + itemIndex).html($('<select name="value' + itemIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#statustemp").html()));
-                    break;
-                case "date":
-                    $("#valueBox" + itemIndex).html('<input type="text" name="value' + itemIndex + '" id="value' + itemIndex + '" value="" class="form-control dateinput">');
-                    break;
-            }
-        }
-
-        $("#field1,#field2,#field3,#field4,#field5,#field6").each(function (index) {
-            $(this).empty();
-            var option;
-            for (var i = 0; i < itemlist.length; i++) {
-                option = $("<option>").val(itemlist[i]["name"]).text(itemlist[i]["title"]);
-                $(this).append(option);
-            }
-            $(this).val(itemlist[index]["name"]);
-            $("#operator" + (index + 1)).html($("#operatortemp").html());
-            setValueBox(index, index + 1);
-            $(this).on("change", function () {
-                for (var i = 0; i < itemlist.length; i++) {
-                    if (itemlist[i]["name"] == $(this).val()) {
-                        setValueBox(i, $(this).attr("id").substr(-1));
-                        break;
-                    }
-                }
-            });
-
-        });
-        $("#searchform").on("click", "input[class*=dateinput]", function () {
-            WdatePicker({
-                startDate: '%y-%M-01 00:00:00', dateFmt: "yyyy-MM-dd"
-            })
-        });
     });
     //-->
 </script>

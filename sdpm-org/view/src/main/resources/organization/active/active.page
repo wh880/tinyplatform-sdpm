@@ -12,7 +12,8 @@
 </style>
 
 #import("/common/component/form.component")
-#set(editpagePath= "/organization/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+#set(editpagePath=
+    "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 
 
 #set(name="organizationActive")
@@ -21,7 +22,7 @@
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()
-            #include("/organization/tab.page")
+            #include("/organization/common/tab.page")
         #end
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
@@ -87,7 +88,7 @@
                    <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
            </span>
             <div style="margin-top: 10px;">
-                #include("/organization/activeMultiSearch.page")
+                #include("/organization/active/multiSearch.page")
             </div>
                 #div(divClass="clearfix")
             #end
@@ -100,7 +101,7 @@
     #@div(divClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([8,10,20,50,100,200])
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/organization/table/activeTable.pagelet") ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/organization/active/activeTable.pagelet") ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

@@ -25,7 +25,7 @@
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()
-            #include("/organization/tab.page")
+            #include("/organization/common/tab.page")
         #end
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
@@ -33,7 +33,7 @@
             ##					<dr>公司信息</dr>
             ##            </span>
             <span style="float: right">
-            #@aModal("#myModal" "编辑公司" "600" "400" "" "/organization/updateCompany.pagelet")
+            #@aModal("#myModal" "编辑公司" "600" "400" "" "/organization/company/updateCompany.pagelet")
                 #@simpleI("icon-edit")编辑#end
             #end
                 #@dialog("myModal")

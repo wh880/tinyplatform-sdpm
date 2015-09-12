@@ -5,7 +5,7 @@
 
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()
-            #include("/organization/tab.page")
+            #include("/organization/common/tab.page")
         #end
     #end
     #div(divClass="clearfix")
@@ -89,7 +89,7 @@
             #end
         #end
         #@toggleRight()
-            #include("/organization/gtaskRightTable.page")
+            #include("/organization/gtask/rightTable.page")
 
         #end
     #end

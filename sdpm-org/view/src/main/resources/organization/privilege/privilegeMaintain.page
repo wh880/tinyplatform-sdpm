@@ -21,7 +21,7 @@
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()
-            #include("/organization/tab.page")
+            #include("/organization/common/tab.page")
         #end
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")

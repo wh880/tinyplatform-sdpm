@@ -11,7 +11,7 @@
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()
-            #include("/organization/tab.page")
+            #include("/organization/common/tab.page")
         #end
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
@@ -26,7 +26,7 @@
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()维护部门结构：#end
             #@settoggleLeftBody("treeLeftbox")
-                #include("/organization/moduleTree.page")
+                #include("/organization/common/moduleTree.page")
             #end
         #end
         #@toggleRight()
