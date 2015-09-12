@@ -74,7 +74,7 @@
             #@sdpmItem("客户登记时间")
                 #@tinyDateInput(
                     "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
-                    "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+                    "日期不能为空"})#end
             #end
         #end
 
