@@ -66,9 +66,11 @@
 #@tinyTable()
 #@div(divBaseClass="tinyheaderTools form-inline")
 			<div class="f col-2">
-						<div class="btn btn-default btn-primary col-4">全选</div>
+						<input type="button" value="全选" class="btn btn-default btn-primary col-4" 
+						onclick="selectAllNullorReserve('userid','全选');" />											
 						<div class="col-0">&nbsp&nbsp</div>
-						<div class="btn btn-default btn-primary col-4">反选</div>
+						<input type="button" value="反选" class="btn btn-default btn-primary col-4"
+						 onclick="selectAllNullorReserve('userid','反选');" />	
 						<div class="col-0">&nbsp&nbsp</div>
 						<div class="dropdown col-1">
 							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
@@ -97,7 +99,7 @@
 #@tinyTableContent("../data/casesData.pagelet")
 #@thead()
 #@tr()
-#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+#@tinyTh({"width":"6"})<input type="checkbox" name="userid" value="">#end
 #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
 #@tinyTh({"class":"sorting","rel":"sortname"})P#end
 #@tinyTh({"class":"sorting","rel":"sortname"})用例标题#end
@@ -135,3 +137,33 @@ user_del(this,'1');
 #end
 ##tab end
 #end
+<script type="text/javascript">
+function selectAllNullorReserve(obj,type){
+   if(obj!=null&&obj!=""){
+    if(document.getElementsByName(obj)!=undefined&&document.getElementsByName(obj).length>0){	//getElementsByName函数的作用按名字查找对象，返回一个数组。
+     var userids = document.getElementsByName(obj);
+     if(type=="全选"){
+      for(var i=0;i<userids.length;i++){
+       if(userids[i].checked == false){
+        userids[i].checked = true;
+       }
+      }
+     }else if(type=="全不选"){
+      for(var i=0;i<userids.length;i++){
+       if(userids[i].checked == true){
+        userids[i].checked = false;
+       }
+      }
+     }else if(type=="反选"){
+      for(var i=0;i<userids.length;i++){
+       if(userids[i].checked == true){
+        userids[i].checked = false;
+       }else{
+        userids[i].checked = true;
+       }
+      }
+     }
+    }
+   }  
+}
+</script>
