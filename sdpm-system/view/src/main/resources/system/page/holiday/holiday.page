@@ -3,11 +3,13 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 
 #include("/system/page/event/common.page")
+#set(threeMenu="myholiday")
+
 #@tabWithInit("tab_demo" "optionsBox")
 	#@tabBodyCol("ptop-5")
 		#@div(divClass="operationbar")
 			<span class="f">
-					<a href="${TINY_CONTEXT_PATH}/system/page/holiday/holiday.page" class="active_btn">特殊节假日</a>
+					<a href="${TINY_CONTEXT_PATH}/system/page/holiday/holiday.page" >节假日&工作日</a>
 			</span>
 			<span class="r">
 #*				#@iconOperations("#myModal" "icon-off" "关闭" "800" "500" "" "ml-5")关闭#end*#

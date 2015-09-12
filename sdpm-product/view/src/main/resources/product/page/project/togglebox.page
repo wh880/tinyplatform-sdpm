@@ -1,6 +1,6 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
-#import("/product/page/event/component/linkage.component")
+#import("/common/component/linkage.component")
 
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 #!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
@@ -47,7 +47,7 @@
 					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">已变更</a>
 					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">待关闭</a>
 					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">已关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
 				<!--导入导出修改-->
