@@ -38,12 +38,11 @@
 	</application-processors>
 
 	<!-- 这里是文件搜索器相关配置，如果配置请参考file-resolver-configuration配置手册 -->
-	<file-resolver-configuration
-		resolve-classpath="true">
+	<file-resolver-configuration resolve-classpath="true">
 		<class-paths>
 			<!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
 			<class-path path="D:\GitFile\sdpm\sdpm-project\view\src\main\resources" />
-			<!-- <class-path path="E:\sdpm\sdpm-project\view\src\main\resources" />  -->
+			<class-path path="E:\workspace\sdpm\sdpm-project\view\src\main\resources"/>
 			<class-path path="E:\TinyWorkSpace\sdpm\sdpm-project\view\src\main\resources"/>
 			<class-path path="F:\daochu\sdpm\sdpm-project\view\src\main\resources"/>
  		</class-paths>
@@ -631,7 +630,7 @@
 	</jcs-config>
 
 	<!--文件监控器配置参数，具体参见FileMonitorProcessor配置管理手册，interrupt扫描间隔时间，单位秒 -->
-	<file-monitor interval="10" enable="true" />
+	<file-monitor interval="10" enable="false"/>
 
 	<gzip-filter max-content-length="0">
 		<!-- 多个content-type已分号隔开 -->
