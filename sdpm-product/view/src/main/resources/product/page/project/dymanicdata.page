@@ -10,24 +10,24 @@
 <div class="operationbar" style="height:36px">
             
 				<span class="f">
-					<a href="#" class="active_btn">今天</a>
-					<a href="#">昨天</a>
-					<a href="#">前天</a>
-					<a href="#">本周</a>
-					<a href="#">上周</a>
-					<a href="#">本月</a>
-					<a href="#">上月</a>
-					<a href="#">所有</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page" class="active_btn">今天</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">昨天</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">前天</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">本周</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">上周</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">本月</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">上月</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">所有</a>
 					<span style="left:330px;top:-35px; position:relative; height:10%">
                         #@tinyForm("thisform" "" "" {"class":"test"})
                             #@elementItem()
                                 #@formControlDiv("col-2")
                                     #@Tselect2F()
                                         #@Tselect2Body("lang" "IN" {"class":"input-text select2"})
-                                            <option value="CV">上周</option>
-                                            <option value="BN">上月</option>
-                                            <option value="MK">前半年</option>
-                                            <option value="AS">去年</option>
+                                            <option value="CV"><a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">上周</a></option>
+                                            <option value="BN"><a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">上月</a></option>
+                                            <option value="MK"><a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">前半年</a></option>
+                                            <option value="AS"><a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">去年</a></option>
                                         #end
                                         #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
                                     #end

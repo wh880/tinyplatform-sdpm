@@ -47,20 +47,21 @@
                         #end
                     </div>
                     <div style="text-align:right;margin:right">
-                        #@aModal("#myModal3"+varFor.index "编辑" "800" "500" "btn radius btn-primary btn-sm"
-                            "/service/client/clientSlaEdit.pagelet")编辑#end
-                        <a class="clientDelete">删除</a>
+                        #@aModal("#myModal3" "编辑" "800" "500" "btn radius btn-primary btn-sm"
+                            "/service/sla/clientSlaEdit.pagelet")编辑#end
+                        #@delItemsdpm(
+                            "#action" "id" "/service/sla/clientsla.page" {"class":"btn radius btn-danger btn-sm"})删除#end
                     </div>
                 #end
             #end
-            #@simpleModal("myModal3"+varFor.index "编辑")#end
+        ##            #@simpleModal("myModal3"+varFor.index "编辑")#end
         #end
 
     </div>
     #end
 #end
-###@simpleModal("myModal3" "编辑")#end
-#@simpleModal("myModal4" "删除")#end
+#@simpleModal("myModal3" "编辑")#end
+
 <script>
     $(function () {
         $(".infoContent").on("click", ".clientDelete", function () {

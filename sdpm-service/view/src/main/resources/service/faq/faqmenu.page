@@ -65,7 +65,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
             #end
 
         ##    以下实现faqmenu.page页面下面的分页
-        <div class="btnsty-page">#tinyPageNav("bodyconentrap" 1 10 "../page/faqmenu.page")</div>
+        <div class="btnsty-page">#tinyPageNav("bodyconentrap" 1 10 "../faq/faqmenu.page")</div>
         ##与上面一行的区别，是将“1”改为“page”,page为当前页码，“10”为总页码<div class="btnsty-page">#tinyPageNav("bodyconentrap" page 10 "../page/faqmenu.page")</div>
         ##    以上实现faqmenu.page页面下面的分页
         #end

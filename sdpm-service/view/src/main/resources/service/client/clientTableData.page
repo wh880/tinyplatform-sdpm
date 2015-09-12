@@ -17,8 +17,10 @@
         #@td()2015-09-09#end
         #@td()正常#end
         #@td()
-            #iconOperations("#myModal" " icon-pencil" "编辑" "650" "350" "/service/client/clientEdit.pagelet" "ml-5")
+            #iconOperations(
+                "#myModal" " icon-pencil" "编辑" "650" "350" "/service/client/clientEdit.pagelet" "ml-5")
             #@tinyTableItemRemove("#" "id")<i class="icon-remove"></i>#end
         #end
+    ##        #@simpleModal("myModal"+varFor.index "用户编辑")#end
     #end
 #end

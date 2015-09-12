@@ -42,8 +42,9 @@
     ##            #end
     ##        </div>
     <div style="text-align:right;margin:right">
-        #@aExtendButton("btn-primary" "slaContentEdit.page")&nbsp;编辑&nbsp;#end
-        <a class="clientDelete">删除</a>
+        #@aExtendButton("btn-primary btn-sm" "slaContentEdit.page")编辑#end
+        #@delItemsdpm("#action" "id" "/service/client/clientProduct.page" {"class":"btn radius btn-danger btn-sm"})
+            删除#end
     </div>
     #end
 <div class="infoContent">
@@ -57,19 +58,3 @@
 #end
 
 ###@simpleModal("myModal3" "编辑")#end
-#@simpleModal("myModal4" "删除")#end
-<script>
-    $(function () {
-        $(".infoContent").on("click", ".clientDelete", function () {
-            //console.log($(this).attr("itemId"))
-//            var that = this;
-            layer.confirm('确定要删除该记录？', function (index) {
-                //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
-                //$.ajax()
-                //console.log(index);
-//                layer.msg($("已删除").attr("deleteList"), 1);
-                layer.msg('已删除', 1);
-            })
-        });
-    });
-</script>
