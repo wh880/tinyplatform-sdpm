@@ -23,20 +23,33 @@
         #end
     #end
 ##分组查看
-    #@buttonGroup()
-        #@buttonDropdown("group" buttonClass="btnDropDown")分组查看 #@spanCaret()#end#end
-        #@ulDropdownMenu()
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">需求分组</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">状态分组</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">优先分组</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">创建者分组</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">指派给分组</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">完成者分组</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">关闭者组</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">预计分组</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">已消耗分组</a></p>
-        #end
-    #end
+    <div class="btn-group">
+        <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            分组查看
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dLabel">
+            <li><a href="${TINY_CONTEXT_PATH}/project/task/index.page">需求分组</a></li>
+            <li><a href="${TINY_CONTEXT_PATH}/project/task/index.page">状态分组</a></li>
+            <li><a href="${TINY_CONTEXT_PATH}/project/task/index.page">优先分组</a></li>
+            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">创建者分组</a></li>
+            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">指派给分组</a></li>
+            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">完成者分组</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">关闭者组</a></li>
+            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">预计分组</a></li>
+            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">已消耗分组</a></li>
+        </ul>
+    </div>
+
+##    #@buttonGroup()
+##        #@buttonDropdown("group" buttonClass="btnDropDown")分组查看 #@spanCaret()#end#end
+##        #@ulDropdownMenu()
+##            <p></p>
+##            <p></p>
+##            <p></p>
+##        #end
+##    #end
 ##搜索
     <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 </span>
