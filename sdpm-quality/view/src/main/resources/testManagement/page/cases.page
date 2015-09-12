@@ -74,10 +74,12 @@
 							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
 							<ul class="dropdown-menu multi-level" role="menu">
 								<li>
-									<a href="javascript:void(0);">删除</a>
+									<a href="javascript:void(0);">
+										删除</a>
 								</li>
 								<li>
-									<a href="javascript:void(0);">执行</a>
+									#@iconOperations("#myModal" "" "执行" "865" "300"
+										 "/testManagement/page/tabledemo/execution.pagelet" "ml-5")执行#end
 								</li>																
 							</ul>
 						</div>

@@ -1,8 +1,8 @@
 #@div()
-<span class="l">产品完成度统计报表</span>
+<span class="l active_btn">产品完成度统计报表</span>
 <span class="r">
 	#@iconOperations("#myModal" "" "导出" "550" "100" 
-		"/statistic/data/output.pagelet" "ml-5")<input type="button" class="btn btn-sm btn-primary" value="保存"></input>#end
+		"/statistic/data/output.pagelet" "ml-5")<input type="button" class="btn btn-sm btn-primary" value="导出"></input>#end
 
 </span>
 <br>

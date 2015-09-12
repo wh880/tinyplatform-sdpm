@@ -19,6 +19,5 @@
       </div>
 	#end
 	#@toggleRight()
-		
 	#end
 #end

@@ -1,4 +1,4 @@
-
+#@tinyForm("thisform" "url" "post" {"class":""})
   #@div(divClass="infoContent")
         <p class="titleName">基本信息</p>
     ##该样式在comm.css样式中自定义
@@ -9,6 +9,10 @@
                 #@tr()
                     #@th()所属项目#end
                     #@td()<a href="${TINY_CONTEXT_PATH}/project/demand/index.page">文化大革命</a>#end
+                #end
+                #@tr()
+                    #@th()版本#end
+                    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page>trunk</a>#end
                 #end
                 #@tr()
                     #@th()版本#end
@@ -37,3 +41,4 @@
             #end
         #end
     #end
+ #end

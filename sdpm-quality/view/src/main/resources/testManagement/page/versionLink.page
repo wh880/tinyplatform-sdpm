@@ -18,9 +18,9 @@
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-link")按需求关联</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-link")按Bug关联</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionSituation.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link")按需求关联</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link")按Bug关联</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
 					</span>
 				#div(divClass="clearfix")
 				#include("/testManagement/page/mulsearch.page")
