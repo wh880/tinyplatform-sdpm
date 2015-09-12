@@ -1,10 +1,16 @@
 #include("/system/page/event/common.page")
+
+<style>
+
+ 
+</style>
+
 #set(linkName="dictionaries")
 
 		#@div(divClass="operationbar")
 			<span class="f">
 				#foreach(m in menuManager.getChildMenus("dictionaries"))
-						<a href="${TINY_CONTEXT_PATH}${m.href}" style="  color: #369">${m.name}</a>
+						<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==threeMenu?'active_btn':''}">${m.name}</a>
 				#end
 			</span>	
 				
