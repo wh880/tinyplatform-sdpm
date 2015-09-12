@@ -22,7 +22,7 @@
                 #@iconOperations(
                     "#myModal2" "icon-plus" "购买产品" "500" "250" "/service/client/clientProductAdd.pagelet" "ml-5")
                     购买产品#end
-                <a href="${TINY_CONTEXT_PATH}/service/client/clientUser.pagege"
+                <a href="${TINY_CONTEXT_PATH}/service/client/clientUser.page"
                    title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
             </span>
             #end

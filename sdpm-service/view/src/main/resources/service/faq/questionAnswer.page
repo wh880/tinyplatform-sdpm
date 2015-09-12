@@ -35,7 +35,7 @@
         #end
     </div>
     <div style="text-align:right;margin:right">
-        #@aExtendButton("btn-primary btn-sm" "questiondbEdit.page")编辑#end
+        #@aExtendButton("btn-primary btn-sm" "addquestion.page")编辑#end
         #@delItemsdpm("#action" "id" "/service/faq/faqmenu.page" {"class":"btn radius btn-danger btn-sm"})
             删除#end
     </div>
