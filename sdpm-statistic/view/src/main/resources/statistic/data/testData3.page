@@ -3,8 +3,7 @@
 <span class="r">
 	#@iconOperations("#myModal" "" "导出" "550" "100" 
 		"/statistic/data/output.pagelet" "ml-5")<input type="button" class="btn btn-sm btn-primary" value="导出"></input>#end
-
-#end
+	#end
 #@dialog("myModal")
 		#@dialogHeader()对话框标题#end
 		#@dialogBody()<p>对话框内容…</p>#end
