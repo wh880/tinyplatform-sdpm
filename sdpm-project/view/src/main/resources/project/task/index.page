@@ -22,7 +22,7 @@
                     <a href="${TINY_CONTEXT_PATH}/project/task/index.page" "ml-5")">看板</a>
                     <a href="${TINY_CONTEXT_PATH}/project/task/gantt.page">甘特图</a>
                     <a href="${TINY_CONTEXT_PATH}/project/task/calendar.page">日历</a>
-                    <a href="${TINY_CONTEXT_PATH}/project/task/index.page" "ml-5")">燃尽图</a>
+                    <a href="${TINY_CONTEXT_PATH}/project/task/projectBurn.page" "ml-5")">燃尽图</a>
                     <a href="${TINY_CONTEXT_PATH}/project/task/index.page" "ml-5")">指派给我</a>
             ##更多
                 #@buttonGroup()
