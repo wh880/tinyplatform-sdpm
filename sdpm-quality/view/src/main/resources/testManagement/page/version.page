@@ -39,7 +39,7 @@
 									<a href="javascript:void(0);">删除</a>
 								</li>
 								<li>
-									<a href="javascript:void(0);">执行</a>
+									<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page">修改</a>
 								</li>																
 							</ul>
 						</div>

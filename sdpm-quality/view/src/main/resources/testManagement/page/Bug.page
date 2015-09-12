@@ -78,53 +78,59 @@
 			#@tinyTable()
 				#@div(divBaseClass="tinyheaderTools form-inline")
 					<div class="f col-2">						
-						<div class="btn btn-default btn-primary col-4" id="All">全选</div>
+						<div class="btn btn-default btn-primary col-4" id="selectAll">全选</div>
 						<div class="col-0">&nbsp&nbsp</div>
-						<div class="btn btn-default btn-primary col-4" id="othercheck">反选</div>
+						<div class="btn btn-default btn-primary col-4" id="fx">反选</div>
 												
 						<div class="col-0">&nbsp&nbsp</div>
 						<div class="dropdown col-1">
 							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
 							<ul class="dropdown-menu multi-level" role="menu">
 								<li>
-									<a href="javascript:void(0);">确认</a>
+									<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/makesure.page">
+										确认</a>
 								</li>
 								<li>
-									<a href="javascript:void(0);">关闭</a>
+									<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/shutdown.page">
+										关闭</a>
 								</li>
 								<li class="dropdown-submenu">
-									<a tabindex="-1" href="javascript:void(0);">解决</a>
+									<a tabindex="-1" href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">解决</a>
 									<ul class="dropdown-menu">
 										<li>
-											<a tabindex="-1" href="javascript:void(0);">设计如此</a>
+											<a tabindex="-1" href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">设计如此</a>
 										</li>
 										<li>
-											<a tabindex="-1" href="javascript:void(0);">外部原因</a>
+											<a tabindex="-1" href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">外部原因</a>
 										</li>
 										<li class="dropdown-submenu">
-											<a href="javascript:void(0);">已解决</a>
+											<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">
+												已解决</a>
 											<ul class="dropdown-menu">
 												<li>
-													<a href="javascript:void(0);">Admin</a>
+													<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">Admin</a>
 												</li>
 												<li>
-													<a href="javascript:void(0);">Trunk</a>
+													<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">Trunk</a>
 												</li>
 											</ul>
 										</li>
 										<li>
-											<a href="javascript:void(0);">延期解决</a>
+											<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">延期解决</a>
 										</li>
 									</ul>
 								</li>
 								<li class="dropdown-submenu">
-									<a tabindex="-1" href="javascript:void(0);">指派给</a>
+									<a tabindex="-1" href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/assign.page">
+											指派给</a>
 									<ul class="dropdown-menu">
 										<li>
-											<a tabindex="-1" href="javascript:void(0);">admin</a>
+											<a tabindex="-1" href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/assign.page">
+											admin</a>
 										</li>
 										<li>
-											<a tabindex="-1" href="javascript:void(0);">admin1</a>
+											<a tabindex="-1" href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/assign.page">
+											admin1</a>
 										</li>										
 									</ul>
 								</li>
@@ -142,7 +148,7 @@
 			#@tinyTableContent("../data/BugData.pagelet")
 				#@thead()
 					#@tr()
-						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="" />#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})级别#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})P#end
@@ -180,3 +186,25 @@
 	##tab end
 #end
 ##全选和反选的JS
+<script type="text/javascript">
+window.onload = function(){
+var oSelsctAll = document.getElementById("selectAll");
+var oFx = document.getElementById("fx");
+var aInput = document.getElementsByTagName("input");
+oSelsctAll.onclick = function(){
+for(var i = 0;i<aInput.length;i++){
+if(aInput[i].checked == true){
+aInput[i].checked = false;
+}else{
+aInput[i].checked = true;
+}
+ 
+}
+}
+oFx.onclick = function(){
+for(var i = 0;i<aInput.length;i++){
+aInput[i].checked = !aInput[i].checked;//“！”为非
+}
+}
+}
+</script>
