@@ -27,7 +27,7 @@
             #end
         ##operationbar end
         #end
-        #include("/service/client/clientSlaList.page")
+        #include("/service/sla/clientSlaList.page")
     #end
 #end
 #@simpleModal("myModal1" "导出")#end
