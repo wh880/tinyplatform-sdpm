@@ -1,3 +1,26 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+
+###@delItemsdpm("/sdpm-web/project/task/index.pagelet" 5 "/sdpm-web/project/task/index.pagelet")delete#end
+
+#set(name="task")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+    ##head end
+        #@tabBodyCol("ptop-5")
+        ##operationbar start
+            #include("/project/task/taskMenu.page")
+        ##operationbay end
+        #end
+    ##body end
+    #end
+#end
 <div class='container text-center bd-0'>
     <div class='clearfix'>
         <div class='actions r'>
