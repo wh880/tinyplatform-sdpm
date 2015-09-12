@@ -55,24 +55,6 @@
 								    #@buttonCancel()关闭#end
 							  	#end
 						#end
-#*				    #@buttonGroup()			   		
-	                    #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出   #@spanCaret()#end#end
-	                    #@ulDropdownMenu("downMenuSty")
-
-						 #@aModal("#myModal" "导出数据" "550" "100" "" "/testManagement/page/tabledemo/exportBugData.pagelet")导出数据#end
-						</br>
-						 #@aModal("#myModal" "导出模板" "550" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出模版#end
-							#@dialog("myModal")
-								#@dialogHeader()对话框标题#end
-								#@dialogBody()<p>对话框内容…</p>#end
-								#@dialogFooter()
-									#@buttonEnsure()确定#end
-								    #@buttonCancel()关闭#end
-							  	#end
-							#end
-						#end
-						
-                    #end&nbsp;*#
                     
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
    ##                 <a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
@@ -86,7 +68,7 @@
 			
 			#@toggleBox({"class":"open"})
 				#@toggleLeft({"class":"aclass"})
-					#@settoggleLeftTitle()这里据说是项目名称#end
+					#@settoggleLeftTitle()管理系统#end
 					#@settoggleLeftBody("treeLeftbox")
 						#include("/testManagement/page/moduleTree.page")
 					#end
@@ -95,10 +77,11 @@
 			#@toggleRight()
 			#@tinyTable()
 				#@div(divBaseClass="tinyheaderTools form-inline")
-					<div class="f col-2">
-						<div class="btn btn-default btn-primary col-4">全选</div>
+					<div class="f col-2">						
+						<div class="btn btn-default btn-primary col-4" id="All">全选</div>
 						<div class="col-0">&nbsp&nbsp</div>
-						<div class="btn btn-default btn-primary col-4">反选</div>
+						<div class="btn btn-default btn-primary col-4" id="othercheck">反选</div>
+												
 						<div class="col-0">&nbsp&nbsp</div>
 						<div class="dropdown col-1">
 							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
@@ -147,7 +130,7 @@
 								</li>
 							</ul>
 						</div>
-					</div>
+					</div>					
 					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 					###@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;暂时留着，后期更新新的按钮#end
 #*					<a href="#" class="btn btn-default btn-sm">产品</a>
@@ -196,3 +179,4 @@
 	#end
 	##tab end
 #end
+##全选和反选的JS
