@@ -14,7 +14,7 @@
 			##operationbar start1
 			#@div(divClass="operationbar")
 				<span class="f">
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionInfo.page" class="active_btn">版本名称</a> >关联用例
+					<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionSituation.page" class="active_btn">版本名称</a> >关联用例
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
@@ -34,12 +34,25 @@
 					#*#@iconTags("icon-link")
 						未关联用例
 					#end*#
-					&nbsp;<i class="icon-unlink">&nbsp;未关联用例(2)</i>
+					&nbsp;<i class="icon-unlink" style="float: left">&nbsp;未关联用例(2)&nbsp;&nbsp;</i>
+					<div class="f col-2">
+						<input type="button" value="全选" class="btn btn-default btn-primary col-3" 
+						onclick="selectAllNullorReserve('userid','全选');" />											
+						<div class="col-0">&nbsp&nbsp</div>
+						<input type="button" value="反选" class="btn btn-default btn-primary col-3"
+						 onclick="selectAllNullorReserve('userid','反选');" />						
+						<div class="col-0">&nbsp&nbsp</div>
+						<div class="dropdown col-3">
+							<input type="submit" value="保存" class="btn btn-default btn-primary" 
+									 />
+						</div>
+					</div>
 				#end
 			#@tinyTableContent("../data/link.pagelet")
 				#@thead()
 					#@tr()
 #*						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end*#
+						#@tinyTh({"width":"6"})<input type="checkbox" name="userid" value="">#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})版本#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})P#end
@@ -68,3 +81,33 @@
 			#end
 	#end
 #end
+<script type="text/javascript">
+function selectAllNullorReserve(obj,type){
+   if(obj!=null&&obj!=""){
+    if(document.getElementsByName(obj)!=undefined&&document.getElementsByName(obj).length>0){	//getElementsByName函数的作用按名字查找对象，返回一个数组。
+     var userids = document.getElementsByName(obj);
+     if(type=="全选"){
+      for(var i=0;i<userids.length;i++){
+       if(userids[i].checked == false){
+        userids[i].checked = true;
+       }
+      }
+     }else if(type=="全不选"){
+      for(var i=0;i<userids.length;i++){
+       if(userids[i].checked == true){
+        userids[i].checked = false;
+       }
+      }
+     }else if(type=="反选"){
+      for(var i=0;i<userids.length;i++){
+       if(userids[i].checked == true){
+        userids[i].checked = false;
+       }else{
+        userids[i].checked = true;
+       }
+      }
+     }
+    }
+   }  
+}
+</script>
