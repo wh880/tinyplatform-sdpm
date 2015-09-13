@@ -10,10 +10,6 @@
         margin-top: -10px;
     }
 </style>
-
-
-
-
 #@tinyForm("thisform" "" "" {"class":""})
     #@noRespsGridSystem()
         #@gridSysRow()
