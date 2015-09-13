@@ -17,9 +17,9 @@
         #@tabHead()
             #include("tab.page")
         	<span class="r" style="position:relative;top:2px;height:0">
-        	        #@aModal("#myModal" "编辑" "400" "150" "" "edit-doclib.pagelet")
+        	        #@aModal("#myModal" "编辑" "865" "150" "" "edit-doclib.pagelet")
         	        	#buttonIcon(iconClass="icon-edit-sign")编辑&nbsp;#end
-            		#@aModal("#myModal" "删除" "400" "150" "" "docu-delete.pagelet")
+            		#@aModal("#myModal" "删除" "865" "150" "" "docu-delete.pagelet")
             			#buttonIcon(iconClass="icon-remove")删除&nbsp;#end				
 					#@aModal("#myModal" "添加文档库" "865" "150" "" "add-doclib.pagelet")
 						#buttonIcon(iconClass="icon-plus-sign")添加文档库#end
