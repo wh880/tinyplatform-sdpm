@@ -1,7 +1,7 @@
 #@noRespsGridSystem()
     #@tinyForm("thisform" "" "" {"class":""})
         #@gridSysRow()
-            #@colLabel("col-3")公司名称：#end
+            #@colLabel("col-3")<span class="c-red">*</span>公司名称：#end
             #@gridSysCol(7)
                 #tinyInput(
                     "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
