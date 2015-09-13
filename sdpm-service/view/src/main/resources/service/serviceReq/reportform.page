@@ -55,10 +55,10 @@
 		<a href="#" class="active_btn">报表</a>
 	</span>
             <span class="r">
-    	#@aModal("#myModal" "导出HTML" "500" "130" "btn-class"
-            "/product/page/tabledemo/product-export-demand.pagelet")#buttonIcon(iconClass="icon-download-alt")导出#end
+    	#@aModal("#myModal" "导出HTML" "600" "100" "btn-class"
+            "/service/serviceCom/serviceExport.pagelet")#buttonIcon(iconClass="icon-download-alt")导出#end
 
-                <a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">#buttonIcon(iconClass=
+                <a href="${TINY_CONTEXT_PATH}/service/serviceReq/request.page">#buttonIcon(iconClass=
                     "icon-goback icon-level-up icon-large icon-rotate-270")返回</a>&nbsp;
 	</span>
                 #div(divClass="clearfix")
@@ -126,34 +126,11 @@
                                 </tbody>
                             </table>
 
-
-                        #*				<!---myTable5 end---->
-                                        <!---myTable1 start---->
-                                       <table id='myTable1'>
-                                            <caption>会员性别分布</caption>
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>男</th>
-                                                    <th>女</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th>1000</th>
-                                                    <td>450</td>
-                                                    <td>550</td>
-                                                    </tr>
-                                            </tbody>
-                                        </table>
-                                        <!---myTable1 end---->*#
                         #end
 
                         #pieChartInit("#myTable5" "PieChart" "No of players" "Month",600,350)
 
                     #end
-
-
                     #@td()
                         <table class="table table-border table-bordered" cellspacing="0">
                             #!set(num=2000)
@@ -198,23 +175,12 @@
                                 #@td()
                                 #end
                             #end
-
-
                         </table>
-
                     #end
-
                 #end
-
-
-
             </table>
-
-
-
-
             #end
         #end
-
     #end
 #end
+#@simpleModal("myModal" "导出")#end

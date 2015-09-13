@@ -7,7 +7,7 @@
         #@radiusBtn("btn radius btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel") 批量删除#end
         #@aExtendButton("btn radius btn-primary btn-sm" "clientAdd.page")#buttonIcon(iconClass="icon-plus")新建客户#end
         #@aModal("#myModal3" "导出" "600" "100" "btn radius btn-primary btn-sm"
-            "/service/sla/slaExport.pagelet")#buttonIcon(iconClass="icon-download-alt")
+            "/service/serviceCom/serviceExport.pagelet")#buttonIcon(iconClass="icon-download-alt")
         导出#end
     ##    <a title="权限维护" href=userBatchAddpagePath>#buttonIcon(iconClass="添加" "865" "420","btn radius btn-info")</a>
     #end
