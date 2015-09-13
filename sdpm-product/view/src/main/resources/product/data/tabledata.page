@@ -11,7 +11,7 @@
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
-	#@td()<input type="checkbox" value="1" name="userid">#end
+	#@td()<input type="checkbox" value="1" name="product-demand">#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">03</a>#end
 	#@td()@#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">这是一条演示用的需求</a>#end

@@ -11,7 +11,7 @@
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()<input type="checkbox" value="1" name="product">#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">${var}</a>#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">现金管理</a>#end
 	#@td()1#end

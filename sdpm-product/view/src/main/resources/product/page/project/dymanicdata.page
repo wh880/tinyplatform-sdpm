@@ -44,6 +44,9 @@
     #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
         #@div(divClass="tinyheaderTools form-inline")
             #setTinyTablePageSize([8,10,20,50,100,200])
+            <input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('product-dymanic','全选');" />
+            <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('product-dymanic','反选');" />
+           
             #@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
         #end
         #@tinyTableContent("../../data/tinydynamicdata.pagelet") ##取数据地址 总数据

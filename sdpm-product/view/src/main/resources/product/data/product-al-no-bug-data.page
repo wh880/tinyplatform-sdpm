@@ -8,7 +8,7 @@
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()<input type="checkbox" value="1" name="product-al-no-bug">#end
 	#@td()${var}#end
 	#@td()@#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page"> 未关联BUG  </a> #end
