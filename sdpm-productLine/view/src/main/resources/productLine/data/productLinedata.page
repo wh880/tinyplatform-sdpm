@@ -9,7 +9,7 @@
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()<input type="checkbox" value="1" name="productLine">#end
 	#@td()${var}#end
 	#@td()
 		<a href="${TINY_CONTEXT_PATH}/productLine/page/project/overview.page"> 产品线${page} </a>	
@@ -23,6 +23,10 @@
 	#@td()21#end
 	#@td()313#end
 	#@td()31#end
+	#@td()
+		<a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/add.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;
+		  #@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)<i class="icon-remove"></i>#end
+	#end
 	
 #end
 #end

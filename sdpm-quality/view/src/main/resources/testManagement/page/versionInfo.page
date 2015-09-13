@@ -40,8 +40,7 @@
 				#buttonIcon(iconClass="icon-link")关联用例</a>&nbsp;&nbsp;		
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" 
-				"/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
+			#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")#buttonIcon(iconClass="icon-remove")#end&nbsp				
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;</span>
 	#end
@@ -73,8 +72,7 @@
 				#buttonIcon(iconClass="icon-link")关联用例</a>&nbsp;&nbsp;		
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" 
-				"/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
+			#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")#buttonIcon(iconClass="icon-remove")#end&nbsp
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
 			</center>

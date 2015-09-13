@@ -11,46 +11,46 @@
 		#@label(ckId)${labelText}#end
 	#end
 #end
-#set(name="documentDocu")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@div(divClass="dropdownBox")
-            #include("/document/dropdownMenu.page")
-        #end
-        #@tabHead()
-            #include("tab.page")
-        	<span class="r" style="position:relative;top:2px;height:0">
-        	        #@aModal("#myModal" "编辑" "400" "150" "" "edit-doclib.pagelet")
-        	        	#buttonIcon(iconClass="icon-edit-sign")编辑&nbsp;#end
-            		#@aModal("#myModal" "删除" "400" "150" "" "docu-delete.pagelet")
-            			#buttonIcon(iconClass="icon-remove")删除&nbsp;#end				
-					#@aModal("#myModal" "添加文档库" "865" "150" "" "add-doclib.pagelet")
-						#buttonIcon(iconClass="icon-plus-sign")添加文档库#end
-			</span>
-        #end
-        #@tabBodyCol("ptop-5")#end
-     #end
-#end
-#@div(divClass="operationbar")
-	创建文档
-#end
-#@tinyForm("thisform" "" "" {"class":"test"})
-#@elementItem()
+#include("doc-tab.page")
+#@tinyForm("thisform" "url" "post" {"class":""})
+	<div style="width:100%">
+    	<div class="infoContent">
+    		<p class="titleName">创建文档</p>
+			#@elementItem()
 					#@colLabel()所属产品#end
-					#@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})						
-						#@tinyOptionItem("zh")产品1#end
-						#@tinyOptionItem("en")产品2#end
-						#@tinyOptionItem("ta")产品3#end
-					#end
+					#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+					#@Tselect2F()
+	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">产品2</option>
+	                        <option value="DE">产品3</option>
+	                        <option value="FL">产品4</option>
+	                        <option value="GA">产品5</option>
+	                        <option value="IN">产品1</option>
+	                    	#end                  
+	                    	#@Tselect2Fix()
+	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
+                	  #end
+                	  #end
+                	  #end
 				#end				
 	
 			#@elementItem()
 					#@colLabel()所属分类#end
-					#@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})
-						#@tinyOptionItem("zh")分类1#end
-						#@tinyOptionItem("en")分类2#end
-						#@tinyOptionItem("ta")分类3#end
-					#end
+					#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+					#@Tselect2F()
+	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="CT">产品2</option>
+	                        <option value="DE">产品3</option>
+	                        <option value="FL">产品4</option>
+	                        <option value="GA">产品5</option>
+	                        <option value="IN">产品1</option>
+	                    	#end                  	                    	
+                	  #end
+                	  #end
+                	   #end
 				#end	
 				
 			#@elementItem()
@@ -67,40 +67,47 @@
 			#@elementItem()
 					#@colLabel()文档标题#end
 					#@formControlDiv("col-8")
-					#tinyInput("text" "doctitle" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"doctitle","class":"input-text"})
+					#@div(divClass="col-5")
+					#tinyInput("text" "doctitle" ""{"placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"doctitle","class":"input-text"})
+					#end
 					#end
 				#end
 				#@validateDiv("col-2")#end
 			#@elementItem(elementId="urlBox" eleItemClass="hidden")
 					#@colLabel()文档URL#end
 					#@formControlDiv("col-8")
-					#tinyInput("text" "docurl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16","id":"docurl","class":"input-text"})
+					#@div(divClass="col-5")
+					#tinyInput("text" "docurl" ""{"placeholder":"相应的链接地址","datatype":"*4-16","id":"docurl","class":"input-text"})
+					#end
 					#end
 				#end
 				#@validateDiv("col-2")#end							
 			#@elementItem()	
 					#@colLabel()关键字#end
 					#@formControlDiv("col-8")
-					#tinyInput("text" "keywords" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","id":"keywords","class":"input-text"})
+					#@div(divClass="col-5")
+					#tinyInput("text" "keywords" ""{"placeholder":"","datatype":"*4-16","id":"keywords","class":"input-text"})
+					#end
 					#end
 				#end
 				#@validateDiv("col-2")#end
 											
 			#@elementItem()
 					#@colLabel()文档摘要#end
-					#@formControlDiv("col-6")
+					#@formControlDiv("col-8")
 						#@Teditor("content1" "content1" {"initialFrameHeight":"200"})Say something#end
 					#end
 					#@validateDiv("col-2")#end
 				#end	
 										
-			#@elementItem(elementId="fileBox" eleItemClass="")				
-					#@colLabel()附件#end
-					#@formControlDiv("col-8")
-					#fileWithInput("file-1")
-					#end
-					#@validateDiv("col-2")#end
+			#@elementItem()
+				#@colLabel()附件：#end
+				#@formControlDiv("col-8")					
+					#include("fileupload.page")
+#*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#				
 				#end
+				#@validateDiv("col-2")#end
+			#end
 			#@elementItem(elementId="contentBox" eleItemClass="hidden")
 					#@colLabel()文档正文#end
 					#@formControlDiv("col-6")

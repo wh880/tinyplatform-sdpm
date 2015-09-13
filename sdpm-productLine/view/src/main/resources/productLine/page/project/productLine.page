@@ -16,17 +16,17 @@
 					<a href="#">取消</a>
 					<a href="#">已关闭</a>
 					
-					<a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
+					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
 				<!--导入导出修改-->
-				#@aModal("#myModal" "导入" "700" "65" "btn-class" "/productLine/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")导入#end
+				#@aModal("#myModal" "导入" "600" "65" "btn-class" "/productLine/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")导入#end
 				
 					#@buttonGroup()
 			                    #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出#end
 			                    #@ulDropdownMenu("downMenuSty")
 				                    
-				                     #@iconOperations("#myModal" "" "导出" "500" "200"  "/productLine/page/tabledemo/product-export-data.pagelet" "ml-5") &nbsp;导出数据#end  
+				                     #@iconOperations("#myModal" "" "导出" "500" "254"  "/productLine/page/tabledemo/product-export-data.pagelet" "ml-5") &nbsp;导出数据#end  
 									
 									
 				                     #@iconOperations("#myModal" "" "导出" "700" "80" "/productLine/page/tabledemo/product-export-template.pagelet" "ml-5") &nbsp;导出模板#end            
@@ -36,17 +36,17 @@
 	             
 				
 #*					#@iconOperations("#myModal" "icon-plus-sign" "批量添加" "1300" "500" "/productLine/page/tabledemo/product-batchadd.pagelet" "ml-5")&nbsp;批量添加#end*#
-					#@iconOperations("#myModal" "icon-plus" "提需求" "1000" "400" "/productLine/page/tabledemo/product-add.pagelet" "ml-5")&nbsp;创建产品#end
+					#@iconOperations("#myModal" "icon-plus" "创建产品" "1000" "400" "/productLine/page/tabledemo/product-add.pagelet" "ml-5")&nbsp;创建产品#end
 				</span>
 				#div(divClass="clearfix")
-				#include("/productLine/page/event/mulsearch-demand.page")
+				#include("/productLine/page/event/mulsearch.page")
 			#end
 			##operationbar end
 
     #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 		#@toggleLeft({"class":"aclass"})
 		#@settoggleLeftTitle()
-				禅道测试
+				产品线
 			#end
 			
 			#@settoggleLeftBody("treeLeftbox")
@@ -64,49 +64,13 @@
 		
 		
 	#@toggleRight()
-		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+#*		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				
 				#@aModal("#myModal" "批量编辑" "1200" "500" "btn radius btn-primary" "/productLine/page/tabledemo/product-batchedit.pagelet")批量编辑#end
 				
-				
-##				#@aModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger" "/productLine/page/tabledemo/product-batchdel.pagelet")批量关闭#end
-##				
-##				
-				
-#*				#@buttonGroup()
-
-				    #@defaultDropDownButton()指派给 #end
-				
-				    #@dropDownMenuUl()
-				
-				      #@normalItem("")1#end
-				
-				      #@normalItem("")2#end
-				
-				      #@normalItem("")3#end
-				
-				    #end
-
-				#end
-				
-				#@buttonGroup()
-
-				    #@defaultDropDownButton()计划 #end
-				
-				    #@dropDownMenuUl()
-				
-				      #@normalItem("")已发布#end
-				
-				      #@normalItem("")已验收#end
-				
-				      #@normalItem("")空#end
-				
-				    #end
-
-				#end*#
-				
+	
 			#end
 			#@tinyTableContent("../../data/productdata.pagelet") ##取数据地址 总数据
 				#@thead()
@@ -143,7 +107,9 @@
 				})
 			</script>
 			
-		#end
+		#end*#
+		#include("/productLine/page/tabledemo/list.page")
+		
 	#end
 #end
 				

@@ -16,7 +16,6 @@
         padding: 10px 7px;
         vertical-align: middle
     }
-    .top {top:-15px}
 </style>
 
 #set(name="qualityCases")
@@ -105,7 +104,7 @@
         #@elementItem()
        		 <div class="col-10">
                 <div class="col-2 text-r"><label>附件：</label></div>
-                <div class="col-10 top">
+                <div class="col-10">
                     #include("/testManagement/page/fileupload.page")  
                 </div>
             </div>

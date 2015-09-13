@@ -6,7 +6,6 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 <style>
     .select_boxes{margin-top:0}
-    .top {top: -15px}
 </style>
 
 #set(name="qualityBug")
@@ -34,7 +33,7 @@
         	        
    		#@elementItem()
             <div class="col-12">
-                <div class="col-2 text-r"><label>重现步骤&nbsp</label></div>
+                <div class="col-2 text-r"><label>重现步骤：&nbsp</label></div>
 
                 <div class="col-9">
                     #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
@@ -43,7 +42,7 @@
         <br/>
         #@elementItem()
             <div class="col-12">
-                <div class="col-2 text-r"><label>备注&nbsp</label></div>
+                <div class="col-2 text-r"><label>备注：&nbsp</label></div>
 
                 <div class="col-9">
                     #@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end</div>
@@ -52,8 +51,8 @@
         <br/>
         #@elementItem()
        		 <div class="col-12">
-                <div class="col-2 text-r"><label>附件</label></div>
-                <div class="col-9 top">
+                <div class="col-2 text-r"><label>附件：</label></div>
+                <div class="col-9">
                     #include("/testManagement/page/fileupload.page")  
                 </div>
             </div>
