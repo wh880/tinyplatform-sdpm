@@ -33,8 +33,7 @@
 					#@buttonGroup()
 						#@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出  #@spanCaret()#end#end
 			                    #@ulDropdownMenu("downMenuSty")
-				                    <p>
-				                     #@iconOperations("#myModal" "" "导出" "400" "200"  "/product/page/tabledemo/product-export-data.pagelet" "ml-5") &nbsp;导出数据#end  
+				                    <p>#@iconOperations("#myModal" "" "导出" "400" "200"  "/product/page/tabledemo/product-export-data.pagelet" "ml-5") &nbsp;导出数据#end
 									</p>
 									
 				                     #@iconOperations("#myModal" "" "导出" "700" "64" "/product/page/tabledemo/product-export-template.pagelet" "ml-5") &nbsp;导出模板#end            
@@ -79,68 +78,16 @@
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				
 				#@aModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger" "/product/page/tabledemo/product-demand-del.pagelet")批量关闭#end
-				#@aModal("#myModal" "编辑" "1300" "500" "btn radius btn-primary" "/product/page/tabledemo/product-demand-edit.pagelet")编辑#end
-				
-				
-				
-				
-				#@dropdown("操作")
-					#@dropdownMenu()
-						#@dropdownSubmenu("指派给")
-							#@dropdownMenu()
-								#dmenu("admin")
-								#dmenu("张三")
-								#dmenu("lisi")
-							#end
-						#end
-					
-						#@dropdownSubmenu("阶段")
-							#@dropdownMenu()
-								#dmenu("空")
-								#dmenu("未开始")
-								#dmenu("已计划")
-								#dmenu("已立项")
-								#dmenu("研发中")
-								#dmenu("完毕")
-								#dmenu("测试中")
-								#dmenu("测试完毕")
-								#dmenu("已验收")
-								#dmenu("已发布")
-							#end
-						#end
-						
-						#@dropdownSubmenu("计划")
-							#@dropdownMenu()
-								#dmenu("空")
-								#dmenu("计划1")
-								#dmenu("计划2")
-								
-							#end
-						#end
-						
-						#@dropdownSubmenu("评审")
-							#@dropdownMenu()
-								#dmenu("确认通过")
-								#dmenu("有待明确")
-								#@dropdownSubmenu("拒绝")
-									#@dropdownMenu()
-										#dmenu("已完成")
-										#dmenu("延期")
-										#dmenu("不做")
-										#dmenu("已取消")
-										#dmenu("设计如此")
-									#end
-								#end
-								
-							#end
-						#end
-					#end
-				#end
-								
-				
-				
-#*
-				<div class="dropdown">
+
+			<div class="f col-2">
+
+            <input type="button" value="全选"  class="btn btn-default btn-primary col-4"
+                   onclick="selectAllNullorReserve('userid','全选');" />
+            <div class="col-0">&nbsp&nbsp</div>
+            <input type="button" value="反选"   class="btn btn-default btn-primary col-4"
+                   onclick="selectAllNullorReserve('userid','反选');" />
+            <div class="col-0">&nbsp&nbsp</div>
+				<div class="dropdown col-1">
 					<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">操作<span class="caret"></span></a>
 					<ul class="dropdown-menu multi-level" role="menu">
 						
@@ -245,9 +192,8 @@
 							</ul>
 						</li>
 					</ul>
-				</div>*#
-					
-				
+				</div>
+            </div>
 #set(map={"a":"url1","b":[1,2]})
 #set(con=[{"关闭":"url1"},{"c":[{"通过":"url.."},{"a":{"aa":"urssl..","不做":"url.."}}]}])
 ${(con[1].get("c")[1]).get("aa")}
@@ -259,7 +205,7 @@ ${(con[1].get("c")[1]).get("aa")}
 			#@tinyTableContent("../../data/tabledata.pagelet") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+						#@tinyTh({"width":"6"})<input type="checkbox" name="userid" value="">#end
 						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})ID#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})P#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})需求名称#end
@@ -298,6 +244,38 @@ ${(con[1].get("c")[1]).get("aa")}
 
 
 #include("/product/page/event/mytree.page")
+
+##JS代码全选和反选
+<script type="text/javascript">
+    function selectAllNullorReserve(obj,type){
+        if(obj!=null&&obj!=""){
+            if(document.getElementsByName(obj)!=undefined&&document.getElementsByName(obj).length>0){	//getElementsByName函数的作用按名字查找对象，返回一个数组。
+                var userids = document.getElementsByName(obj);
+                if(type=="全选"){
+                    for(var i=0;i<userids.length;i++){
+                        if(userids[i].checked == false){
+                            userids[i].checked = true;
+                        }
+                    }
+                }else if(type=="全不选"){
+                    for(var i=0;i<userids.length;i++){
+                        if(userids[i].checked == true){
+                            userids[i].checked = false;
+                        }
+                    }
+                }else if(type=="反选"){
+                    for(var i=0;i<userids.length;i++){
+                        if(userids[i].checked == true){
+                            userids[i].checked = false;
+                        }else{
+                            userids[i].checked = true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+</script>
 
 
 

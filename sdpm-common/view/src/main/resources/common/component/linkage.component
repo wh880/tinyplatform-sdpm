@@ -1,4 +1,73 @@
-#macro dropdownMenu()
+#macro liDropdownMenu(rName)
+	<li class="dropdown-submenu">
+		<a tabindex="-1" data-toggle="tab">${rName}</a>
+		#bodyContent
+	</li>
+#end
+
+#*示例用法*#
+
+#*
+#@buttonGroup()
+	 #@buttonPrimary()按钮#end
+	    
+	#aDropdown("btn btn-primary")
+	
+	#@ulDropdownMenu()
+		#@liDropdownMenu("指派给")
+			#@ulDropdownMenu()
+	    		#@dropdownItem("javascript:void(0);")admin#end
+	    		#@dropdownItem("javascript:void(0);")张三#end
+	    		#@dropdownItem("javascript:void(0);")lisi#end
+	    	#end
+		#end
+		
+		#@liDropdownMenu("阶段")
+			#@ulDropdownMenu()
+	    		#@dropdownItem("javascript:void(0);")空#end
+	    		#@dropdownItem("javascript:void(0);")未开始#end
+	    		#@dropdownItem("javascript:void(0);")已计划#end
+	    		#@dropdownItem("javascript:void(0);")已立项#end
+	    		#@dropdownItem("javascript:void(0);")研发中#end
+	    		#@dropdownItem("javascript:void(0);")完毕#end
+	    		#@dropdownItem("javascript:void(0);")测试中#end
+	    		#@dropdownItem("javascript:void(0);")测试完毕#end
+	    		#@dropdownItem("javascript:void(0);")已验收#end
+	    		#@dropdownItem("javascript:void(0);")已发布#end
+	    	#end
+		#end
+		
+		#@liDropdownMenu("计划")
+			#@ulDropdownMenu()
+	    		#@dropdownItem("javascript:void(0);")空#end
+	    		#@dropdownItem("javascript:void(0);")计划1#end
+	    		#@dropdownItem("javascript:void(0);")计划2#end
+	    	#end
+		#end
+		
+		#@liDropdownMenu("评审")
+			#@ulDropdownMenu()
+	    		#@dropdownItem("javascript:void(0);")确认通过#end
+	    		#@dropdownItem("javascript:void(0);")有待明确#end
+	    		#@liDropdownMenu("拒绝")
+	        		#@ulDropdownMenu()
+	            		#@dropdownItem("javascript:void(0);")已完成#end
+	            		#@dropdownItem("javascript:void(0);")延期#end
+	            		#@dropdownItem("javascript:void(0);")不做#end
+	            		#@dropdownItem("javascript:void(0);")已取消#end
+	            		#@dropdownItem("javascript:void(0);")计划如此#end
+	                	#end
+	            	#end
+	        	#end
+	    	#end
+	    #end
+	#end	
+*#
+
+
+
+
+#*#macro dropdownMenu()
 	<ul class="dropdown-menu">
 		#bodyContent
     </ul>
@@ -21,7 +90,7 @@
 	<a id="" role="button" data-toggle="dropdown" #if(rClass) class="${rClass}" #else class="btn btn-primary" #end data-target="#" href="javascript:void(0);">${rName}<span class="caret"></span></a>
     #bodyContent
 #end
-
+*#
 
 #*示例*#
 #*

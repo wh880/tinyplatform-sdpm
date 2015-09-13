@@ -1,11 +1,12 @@
-#@div()
+
+<div style="padding-bottom:35px">
 <span class="l active_btn">产品完成度统计报表</span>
 <span class="r">
 	#@iconOperations("#myModal" "" "导出" "550" "100" 
 		"/statistic/data/output.pagelet" "ml-5")<input type="button" class="btn btn-sm btn-primary" value="导出"></input>#end
 
 </span>
-<br>
+
 		#@dialog("myModal")
 			#@dialogHeader()对话框标题#end
 			#@dialogBody()<p>对话框内容…</p>#end
@@ -14,8 +15,8 @@
 				#@buttonCancel()关闭#end
 			#end
 		#end
-#end
-<br/><br/>
+</div>
+
 #@tableStriped("table-border")
     #@thead()
         #@tr("text-c")

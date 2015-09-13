@@ -1,7 +1,7 @@
 <type-infos>
 	<type-info name="qualityVersionSituation" >
 	    <info name="versionSituationInfo" title="基本信息" resource="qualityVersionSituation" infoParameter="" url="/testManagement/page/versionSituationpaging.pagelet"/>
-		    <info name="versionInfo" title="版本信息" resource="projectRelease" infoParameter="" url="/project/task/relation-release/product-al-bug.pagelet"/>
+		    <info name="versionInfo" title="版本信息" resource="projectRelease" infoParameter="" url="/project/task/relation-release/releasebaseinfo.pagelet"/>
 	</type-info>
 	<type-info name="qualityBugEdition" >
     	    <info name="BugEditionInfo" title="基本信息" resource="qualityBugEdition" infoParameter="" url="/testManagement/page/tabledemo/editionpaging.pagelet"/>

@@ -12,7 +12,8 @@
 
 #for(var:[1..pagesize])
 					#@tr()
-						#@td()<input type="checkbox" value="1" name="idCheck"><a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${var}</a>#end
+						#@td()<input type="checkbox" value="1" name="userid">#end
+						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${var}</a>#end
 						#@td()
 						#@Tselect2F()
 	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -22,7 +23,6 @@
 	                    	#end                
                 	  #end
                 	  	#end
-                	 
 						#@td()1#end
 						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">我是标题党</a>#end
 						#@td()我是类型#end

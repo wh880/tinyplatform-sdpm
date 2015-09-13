@@ -4,6 +4,7 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 <style>
     .select_boxes{margin-top:0}
+    .top {top: -15px}
 </style>
 
 
@@ -291,9 +292,9 @@
 			#end
 			#@elementItem()
 				#@colLabel()附件：#end
-				#@formControlDiv("col-8")
+				#@formControlDiv("col-8 top")					
 					#include("/testManagement/page/fileupload.page")
-#*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#
+#*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#				
 				#end
 				#@validateDiv("col-2")#end
 			#end

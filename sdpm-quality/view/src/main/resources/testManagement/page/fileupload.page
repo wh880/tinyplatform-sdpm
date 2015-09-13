@@ -1,7 +1,7 @@
 #!set(activeTitle="属性管理",activeMenuId="9.5")
 #import("/org/tinygroup/form/components/form.component")
 <style>
-.attributeList{padding:0 10px;}
+#*.attributeList{padding:0 10px;}*#
 .treeList .select-box{margin-top:12px;}
 .treeList .col-4{ margin-right:8px;}
 .treeList li{ margin-bottom:7px;}
@@ -14,8 +14,9 @@
 .searchItemBox .col-btn .btn,.col-btn{padding-right:5px;}
 .searchItem{clear:both; padding:2px 1px; height:38px;padding:5px; min-width:538px;}
 .searchItemActive{background:#eec;}
-.alternativeBox{padding:3px 1px 5px;background-color:#fdfdfd;}
+.alternativeBox{padding:3px 1px 5px;}
 </style>
+
 <script>
 $(document).ready(function(){
   $('.searchItemBox').on('click', '.del-btn',function(e){
@@ -96,9 +97,9 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="attributeList">
+<div>
 	<ul class="treeList">
-		<li class="alternativeBox">
+		<li class="alternativeBox top">
 #*		<div class="col-4">
 			#@selectRadiusBox()
 			    #@select(selectName="itemBarName",selectId="selectItems")

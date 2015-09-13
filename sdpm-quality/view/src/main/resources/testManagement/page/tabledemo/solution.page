@@ -4,7 +4,10 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
-
+<style>
+    .select_boxes{margin-top:0}
+    .top {top: -15px}
+</style>
 #set(name="qualityBug")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
@@ -88,7 +91,7 @@
     #@elementItem()
     	<div class="col-12">
          <div class="col-2 text-r"><label>附件：</label></div>
-         	<div class="col-9">
+         	<div class="col-9 top">
              #include("/testManagement/page/fileupload.page")
              </div>
          </div>
