@@ -156,8 +156,20 @@
                 <div class="btn-group">
                     <button type="submit" id="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
                     <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
+                    #@aModal("#myModal" "请输入查询标题（保存之前请先查询）：" "500" "120" "btn radius btn-primary btn-sm"
+                        "/organization/common/searchSave.pagelet")
+                        <div style="margin: 4px">
+                            保存
+                        </div>
+                    #end
 
-                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>
+
+
+                ##                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">
+                ##                        #@aModal("#myModal" "编辑公司" "600" "400" "" "/organization/common/searchSave.pagelet")保存
+                ##                        #end
+                ##                    </button>
+                ##   <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>
                     </div>
             </td>
 ##新增搜索框里面的“保存”和“我的查询”

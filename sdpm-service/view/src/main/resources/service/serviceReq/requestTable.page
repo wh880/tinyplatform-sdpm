@@ -17,7 +17,6 @@
                 #@tinyTh({"class":"","rel":"sortname"})请求优先级#end
                 #@tinyTh({"class":"","rel":"sortname"})回访预期时间#end
                 #@tinyTh({"class":"sorting","rel":"sortname"})联系人#end
-
                 #@tinyTh({"class":"","rel":"sortname"})操作#end
             #end
         #end

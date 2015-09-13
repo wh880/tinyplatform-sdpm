@@ -4,6 +4,7 @@
 #include("/system/page/event/common.page")
 #datatablesInitSimple("#dictListTb" )
 #import("/org/tinygroup/table/components/table.component")
+#set(threeMenu="dictionary-type")
 	
 #@divDataTablebox()
 	    #@tableHeaderBar()${activeTitle}#end

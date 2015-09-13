@@ -43,16 +43,16 @@
         <class-paths>
 
             <!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
-                <!--<class-path path="E:\TinyWorkSpace\sdpm\sdpm-quality\view\src\main\resources"/>-->
-
-                <class-path path="E:\TinyWork\sdpm\sdpm-productLine\view\src\main\resources"/> 
+                <class-path path="E:\workspace\sdpm\sdpm-project\view\src\main\resources"/>
+                <class-path path="E:\TinyWork\sdpm\sdpm-productLine\view\src\main\resources"/>
                 <class-path path="E:\TinyWork\sdpm\sdpm-product\view\src\main\resources" />
                 <class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources"/>
                 <class-path path="F:\daochu\sdpm\sdpm-project\view\src\main\resources"/>
                 <class-path path="F:\daochu\sdpm\sdpm-quality\view\src\main\resources"/>
                 <class-path path="F:\daochu\sdpm\sdpm-document\view\src\main\resources"/>
                 <class-path path="E:\workspace\sdpm\sdpm-document\view\src\main\resources"/>
-                <class-path path="E:\TinyWorkSpace\sdpm\sdpm-project\view\src\main\resources"/>     
+                <class-path path="E:\TinyWorkSpace\sdpm\sdpm-project\view\src\main\resources"/>
+                <class-path path="E:\TinyWork\sdpm\sdpm-system\view\src\main\resources"/>       
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>

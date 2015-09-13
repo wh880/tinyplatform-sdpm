@@ -26,13 +26,13 @@
             #end
         #end
         #@gridSysRow()
-            #@colLabel("col-3")协议标题：#end
+            #@colLabel("col-3")<span class="c-red">*</span>协议标题：#end
             #@gridSysCol(5)
                 #tinyInput("text" "标题" ""{"datatype":"","id":"","class":"input-text"})
             #end
         #end
         #@gridSysRow()
-            #@colLabel("col-3")产品版本：#end
+            #@colLabel("col-3")<span class="c-red">*</span>产品版本：#end
             #@gridSysCol(5)
                 #@tinySelect("lang" "ch" {"class":"input-text select2","rel":"22"})
                     #@tinyOptionItem("ch")请选择#end
@@ -49,7 +49,7 @@
             #end
         #end
         #@gridSysRow()
-            #@colLabel("col-3")创建时间：#end
+            #@colLabel("col-3")<span class="c-red">*</span>创建时间：#end
             #@gridSysCol(5)
                 #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
                     "日期不能为空"})#end            #end

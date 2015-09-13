@@ -8,7 +8,7 @@
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()客户名称：#end
+        #@colLabel()<span class="c-red">*</span>客户名称：#end
         #@formControlDiv("col-8")
             #tinyInput(
                 "text" "clientName" ""{"placeholder":"客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":
@@ -35,7 +35,7 @@
     #end
     #@elementItem()
         #@daterangepickerPosition()
-            #@colLabel()客户登记时间：#end
+            #@colLabel()<span class="c-red">*</span>客户登记时间：#end
             #@formControlDiv("col-8")
                 #@tinyDateInput(
                     "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
@@ -44,10 +44,10 @@
         #end
     #end
     #@elementItem()
-            #@colLabel()状态是否正常：#end
-            #@formControlDiv("col-8")
-                #tinySwitcher("isvip" "正常" "失效") ##第二个为选中状态 第三参数为数据库返回时的数据
-            #end
+        #@colLabel()<span class="c-red">*</span>状态是否正常：#end
+        #@formControlDiv("col-8")
+            #tinySwitcher("isvip" "正常" "失效") ##第二个为选中状态 第三参数为数据库返回时的数据
+        #end
     #end
 
 #end

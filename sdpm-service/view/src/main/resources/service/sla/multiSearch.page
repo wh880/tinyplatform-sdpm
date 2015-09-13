@@ -160,7 +160,7 @@
                         </div>
                     #end
                 ## <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>
-                    </div>
+                </div>
             </td>
         ##新增搜索框里面的“保存”和“我的查询”
             <td>

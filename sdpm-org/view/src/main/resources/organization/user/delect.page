@@ -1,6 +1,6 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
     #@elementItem()
-        #@colLabel()请输入密码：#end
+        #@colLabel("col-3")<span class="c-red">*</span>请输入密码：#end
         #@formControlDiv("col-8")
             #tinyInput(
                 "password" "password" ""{"placeholder":"密码","datatype":"*6-18","nullmsg":"请输入密码！","autocomplete":"off",
