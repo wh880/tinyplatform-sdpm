@@ -1,29 +1,41 @@
 #import("/org/tinygroup/button/components/button_smart.component")
+
+
 #@div(divClass="operationbar")
 <span class="f">
-    <a href="${TINY_CONTEXT_PATH}/project/task/index.page" "ml-5")" class="active_btn">未关闭</a>
-    <a href="${TINY_CONTEXT_PATH}/project/task/index.page" "ml-5")">所有</a>
-    <a href="${TINY_CONTEXT_PATH}/project/task/index.page" "ml-5")">看板</a>
-    <a href="${TINY_CONTEXT_PATH}/project/task/gantt.page">甘特图</a>
-    <a href="${TINY_CONTEXT_PATH}/project/task/calendar.page">日历</a>
-    <a href="${TINY_CONTEXT_PATH}/project/task/projectBurn.page" "ml-5")">燃尽图</a>
-    <a href="${TINY_CONTEXT_PATH}/project/task/index.page" "ml-5")">指派给我</a>
+    <a href="${TINY_CONTEXT_PATH}/project/task/index.page?type=noclose" "ml-5" class=${type
+    =="noclose"?"active_btn":""}>未关闭</a>
+    <a href="${TINY_CONTEXT_PATH}/project/task/index.page?type=all" "ml-5" class=${type=="all"?"active_btn":""}>所有</a>
+    <a href="${TINY_CONTEXT_PATH}/project/task/index.page?type=board" "ml-5" class=${type
+    =="board"?"active_btn":""}>看板</a>
+    <a href="${TINY_CONTEXT_PATH}/project/task/gantt.page?type=gantt" "ml-5" class=${type
+    =="gantt"?"active_btn":""}>甘特图</a>
+    <a href="${TINY_CONTEXT_PATH}/project/task/calendar.page?type=calendar" "ml-5" class=${type
+    =="calendar"?"active_btn":""}>日历</a>
+    <a href="${TINY_CONTEXT_PATH}/project/task/projectBurn.page?type=figureout" "ml-5" class=${type
+    =="figureout"?"active_btn":""}>燃尽图</a>
+    <a href="${TINY_CONTEXT_PATH}/project/task/index.page?type=assigned" "ml-5" class=${type
+    =="assigned"?"active_btn":""}>指派给我</a>
 ##更多
-    #@buttonGroup()
-        #@buttonDropdown("more" buttonClass="btnDropDown")更多  #@spanCaret()#end#end
-        #@ulDropdownMenu()
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">我完成的</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">未开始</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">进行中</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">未完成</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">已完成</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">已关闭</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">已延期</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/index.page">需求变动</a></p>
-        #end
-    #end
+    <div class="btn-group btnDropDown">
+        <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            更多
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dLabel">
+            <li><a href="${TINY_CONTEXT_PATH}/project/task/index.page">我完成的</a></li>
+            <li><a href="${TINY_CONTEXT_PATH}/project/task/index.page">未开始</a></li>
+            <li><a href="${TINY_CONTEXT_PATH}/project/task/index.page">进行中</a></li>
+            <li><a href="${TINY_CONTEXT_PATH}/project/task/index.page">未完成</a></li>
+            <li><a href="${TINY_CONTEXT_PATH}/project/task/index.page">已完成</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="${TINY_CONTEXT_PATH}/project/task/index.page">已关闭</a></li>
+            <li><a href="${TINY_CONTEXT_PATH}/project/task/index.page">已延期</a></li>
+            <li><a href="${TINY_CONTEXT_PATH}/project/task/index.page">需求变动</a></li>
+        </ul>
+    </div>
 ##分组查看
-    <div class="btn-group">
+    <div class="btn-group btnDropDown">
         <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             分组查看
             <span class="caret"></span>
@@ -41,52 +53,40 @@
             <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">已消耗分组</a></li>
         </ul>
     </div>
-
-##    #@buttonGroup()
-##        #@buttonDropdown("group" buttonClass="btnDropDown")分组查看 #@spanCaret()#end#end
-##        #@ulDropdownMenu()
-##            <p></p>
-##            <p></p>
-##            <p></p>
-##        #end
-##    #end
-##搜索
     <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 </span>
+
 <span class="r">
-    #@buttonGroup()
-        #@buttonDropdown("Dropdown" buttonClass="btnDropDown")
-            #buttonIcon(iconClass="icon-download-alt")导入  #@spanCaret()#end
-        #end
-        #@ulDropdownMenu()
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/inputBug.page">导入bug</a></p>
-            <p><a href="${TINY_CONTEXT_PATH}/project/task/inputTask.page">导入任务</a></p>
-        #end
-    #end &nbsp;
-    #@buttonGroup()
-        #@buttonDropdown("Dropdown" buttonClass="btnDropDown")
-            #buttonIcon(iconClass="icon-download-alt")导出#@spanCaret()#end
-        #end
-        #@ulDropdownMenu()
-            <p>
-                #@iconOperations(
-                    "#myModal" "" "导出数据" "700" "100"  "/project/task/outputData.pagelet" "ml-5")
-                    &nbsp;导出数据
-                #end
-            </p>
+    <div class="btn-group btnDropDown">
+        <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            导入
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dLabel">
+            <li><a href="${TINY_CONTEXT_PATH}/project/task/inputBug.page">导入bug</a></li>
+            <li><a href="${TINY_CONTEXT_PATH}/project/task/inputTask.page">导入任务</a></li>
+        </ul>
+    </div>
 
-            #@iconOperations("#myModal" "" "导出数据" "550" "100" "/project/task/outputModal.pagelet" "ml-5")
-                &nbsp;导出模板
-            #end
+    <div class="btn-group btnDropDown">
+        <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            导出
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dLabel">
+            <li>#@iconOperations("#myModal" "" "导出数据" "700" "100"  "/project/task/outputData.pagelet" "ml-5")
+                导出数据#end</li>
+            <li>#@iconOperations("#myModal" "" "导出数据" "550" "100" "/project/task/outputModal.pagelet" "ml-5")
+                导出模板#end</li>
+        </ul>
+    </div>
 
-        #end
-    #end &nbsp;
-                    <a href="${TINY_CONTEXT_PATH}/project/task/reportform.page">#buttonIcon(iconClass="icon-bar-chart")
-                        报表</a>&nbsp;
-                    <a href="${TINY_CONTEXT_PATH}/project/task/batchAdd.page">#buttonIcon(iconClass="icon-plus-sign")
-                        批量增加</a>&nbsp;
-                    <a href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-plus")建任务</a>&nbsp;
-                </span>
+    <a href="${TINY_CONTEXT_PATH}/project/task/reportform.page">#buttonIcon(iconClass="icon-bar-chart")
+        报表</a>&nbsp;
+    <a href="${TINY_CONTEXT_PATH}/project/task/batchAdd.page">#buttonIcon(iconClass="icon-plus-sign")
+        批量增加</a>&nbsp;
+    <a href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-plus")建任务</a>&nbsp;
+</span>
     #div(divClass="clearfix")
     #include("/project/mulsearch.page")
 #end
