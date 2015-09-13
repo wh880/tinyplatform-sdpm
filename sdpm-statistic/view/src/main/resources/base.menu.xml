@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="statistic" parent-id="0" name="统计管理" href="/statistic/page/product.page" icon="icon-tasks" sort="1"
+<menu id="statistic" parent-id="0" name="统计管理" href="/statistic/page/product.page" icon="icon-tasks" sort="400"
       isShow="1"
 >
     <menu id="statisticProduct" parent-id="statistic" name="产品" href="/statistic/page/product.page" icon="" sort="1"

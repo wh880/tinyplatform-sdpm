@@ -30,6 +30,7 @@
         $("#${sid}-select").on("change", function (e) {
             window.location.href = "${TINY_CONTEXT_PATH}/project/task/index.page?selItem="
                     + $(this).find("option:selected").text();
+            //val() 选择选择项的value
         });
     });
 </script>
