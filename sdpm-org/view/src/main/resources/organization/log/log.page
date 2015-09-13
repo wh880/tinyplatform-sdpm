@@ -38,14 +38,14 @@
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
             <span style="padding-top:5px;float:left">
-					<a href="#" class="active_btn">日历</a>
-					<a href="#">今日</a>
-					<a href="#">昨日</a>
-					<a href="#">本周</a>
-					<a href="#">上周</a>
-					<a href="#">本月</a>
-					<a href="#">上月</a>
-					<a href="#">所有日志</a>
+					<a href="../log/log.page" class="active_btn">日历</a>
+					<a href="../log/log.page">今日</a>
+					<a href="../log/log.page">昨日</a>
+					<a href="../log/log.page">本周</a>
+					<a href="../log/log.page">上周</a>
+					<a href="../log/log.page">本月</a>
+					<a href="../log/log.page">上月</a>
+					<a href="../log/log.page">所有日志</a>
         </span>
 
                 #@tinyForm("thisform" "" "" {"class":"test"})
