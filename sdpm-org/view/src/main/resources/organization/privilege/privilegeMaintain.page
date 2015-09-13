@@ -1,0 +1,161 @@
+#!set(activeTitle="组织管理",activeMenuId=currentPageId)
+
+#import("/common/component/form.component")
+
+<style>
+    .tabLayout .tabBar span a {
+        color: #333
+    }
+
+    .tabLayout .tabBar .Current a {
+        color: #fff
+    }
+
+    .operationbar {
+        border-top: none;
+        background: #f9fafe;
+        padding: 6px 5px 6px 10px;
+    }
+</style>
+#set(name="organizationPrivilege")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/organization/common/tab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span style="padding-top:5px;float:left">
+					<a href="#" class="active_btn">所有权限</a>
+					<a href="#">我的地盘</a>
+					<a href="#">产品</a>
+					<a href="#">项目</a>
+					<a href="#">测试</a>
+					<a href="#">代码</a>
+					<a href="#">文档</a>
+					<a href="#">统计</a>
+                    <a href="#">组织</a>
+					<a href="#">后台</a>
+					<a href="#">其他模块</a>
+         </span>
+                #@tinyForm("thisform" "" "" {"class":"test"})
+                    #@formControlDiv("col-2")
+                        #@tinySelect("lang" "修改历史" {"class":"input-text select2","rel":"22"})
+                            #@tinyOptionItem("修改历史")修改历史#end
+                            #@tinyOptionItem("zh")版本1.0#end
+                            #@tinyOptionItem("en")版本2.0#end
+                            #@tinyOptionItem("ta")版本3.0#end
+                        #end
+                    #end
+                #end
+                #div(divClass="clearfix")
+            #end
+        #end
+    #end
+
+
+#end
+
+
+
+
+
+
+
+
+
+
+##<style>
+##    #reverse{margin-left:2px;}
+##    #playList input{margin-left:12px;}
+##</style>
+##<script language="javascript" type="text/javascript">
+##    $(function () {
+##        $("#reverse").click(function () {//反选
+##            $("#playList :checkbox").each(function () {
+##                $(this).attr("checked", !$(this).attr("checked"));
+##            });
+##        });
+##    });
+##</script>
+###@tinyForm("cheackform" "" "" {"class":"cheackform"})
+##    #@elementItem()
+##        #@colLabel()内联复选框#@tinyCheckbox("checkbox2" "01" "02")#end#end
+##        #@formControlDiv("checkboxSty col-9")
+##                #foreach(m in menuManager.getChildMenus("0"))
+##                    #@tinyCheckbox("checkbox2" "01" "02")
+##                        ${m.name}
+##                    #end
+##               ## {id: '${m.id}', pId: '${m.parentId}', name: "${m.name}", open: true},
+##                #end
+##        #end
+##    #end
+##
+##    #@elementItem()
+##        #@div(divClass="col-10 col-offset-2 form-inline")
+##            #tinyInput("submit" "submitbtn" "&nbsp;保存&nbsp;" {"class":"btn btn-primary"})
+##            #@aTxtDarkDefaultButton(aHref="javascript:void(0);")&nbsp;取消&nbsp;#end
+##        #end
+##    #end
+###end
+
+
+
+
+
+#@noRespsGridSystem()
+    #@gridSysRow()
+        #@gridSysCol(3)
+        #end
+        #@gridSysCol(6)
+            #@gridSysRow()
+            <ul id="treeDemo" class="ztree" style="width:100%;min-height:360px;max-height:300px;"></ul>
+
+            <div style="padding-top: 20px;float: right">
+                #@div(divClass="col-7 col-offset-5 form-inline")
+                        #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+                    #end
+            </div>
+
+
+            #end
+
+        #end
+        #@gridSysCol(3)
+        #end
+
+    #end
+#end
+
+
+
+<SCRIPT type="text/javascript">
+    <!--
+    var setting = {
+        check: {
+            enable: true
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        }
+    };
+
+    var zNodes = [
+
+        #foreach(m:menuManager.getMenus())
+            {id: '${m.id}', pId: '${m.parentId}', name: "${m.name}", open: true},
+        #end
+    ];
+
+
+    $(document).ready(function () {
+
+        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+
+    });
+    //-->
+</SCRIPT>
+
+

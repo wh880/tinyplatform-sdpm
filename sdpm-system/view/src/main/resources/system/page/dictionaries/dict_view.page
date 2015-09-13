@@ -1,0 +1,8 @@
+#@divHorizontal()
+	#@viewRowCol("代码：")
+		sex
+	#end
+	#@viewRowCol("中文名：")
+		性别
+	#end					
+#end

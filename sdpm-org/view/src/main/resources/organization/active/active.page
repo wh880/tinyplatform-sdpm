@@ -1,0 +1,123 @@
+#!set(activeTitle="组织管理",activeMenuId=currentPageId)
+<style>
+    .secrchLac {
+        display: inline-block;
+        padding-top: 5px
+    }
+    .activeSearch {
+        float: left;
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+</style>
+
+#import("/common/component/form.component")
+#set(editpagePath=
+    "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+
+
+#set(name="organizationActive")
+
+#include("/common/common.page")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/organization/common/tab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span class="activeSearch">
+                <a href="#" class="active_btn">今天</a>
+					<a href="#">昨天</a>
+					<a href="#">前天</a>
+					<a href="#">本周</a>
+					<a href="#">上周</a>
+                   <a href="#">本月</a>
+					<a href="#">上月</a>
+					<a href="#">所有</a>
+
+                 </span>
+                #@formControlDiv("col-2")
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "请选择用户" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="请选择用户">请选择用户</option>
+                        <option value="usera">用户A</option>
+                        <option value="userb">用户B</option>
+                        <option value="userc">用户c</option>
+                        <option value="userd">用户d</option>
+                        <option value="usere">用户e</option>
+
+                        #end
+
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                    #end
+                #end
+                #@formControlDiv("col-2")
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "请选择产品" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="请选择产品">请选择产品</option>
+                        <option value="producta">产品A</option>
+                        <option value="producta">产品A</option>
+                        <option value="producta">产品A</option>
+                        <option value="producta">产品A</option>
+                        <option value="producta">产品A</option>
+
+                        #end
+
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                    #end
+
+                #end
+                #@formControlDiv("col-2")
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "请选择项目" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="请选择项目">请选择项目</option>
+                        <option value="projecta">项目A</option>
+                        <option value="projecta">项目A</option>
+                        <option value="projecta">项目A</option>
+                        <option value="projecta">项目A</option>
+                        <option value="projecta">项目A</option>
+
+                        #end
+
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                    #end
+
+                #end&nbsp;
+            <span class="secrchLac">
+                   <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+           </span>
+            <div style="margin-top: 10px;">
+                #include("/organization/active/multiSearch.page")
+            </div>
+                #div(divClass="clearfix")
+            #end
+        #end
+    #end
+#end
+
+
+#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+    #@div(divClass="tinyheaderTools form-inline")
+        #setTinyTablePageSize([8,10,20,50,100,200])
+    #end
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/organization/active/activeTable.pagelet") ##取数据地址 总数据
+        #@thead()
+            #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})日期#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})操作者#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})动作#end
+                #@tinyTh({"class":"sorting","rel":"sortname","style":"color:#333"})对象类型#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
+                #@tinyTh({"class":"","rel":"sortname"})对象名称#end
+            #end
+        #end
+    #end
+#end
+
+
+
+
+
+

@@ -1,187 +1,194 @@
-#!set(linkName="product-archive",sonitem="<li>"+"文档"+"</li>")
+#!set(linkName="product-archive",sonitem="
+<li>"+"文档"+"</li>")
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
- <input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked") checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass) class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio" onclick="${radioOther}"/>
+<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked")
+               checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass)
+               class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio"
+               onclick="${radioOther}"/>
 #end
 #macro labelRadio1(rId rName rValue rClass radioOther labelText)
-	#@radioBox()
-		#radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)
-		#@label(ckId)${labelText}#end
-	#end
+    #@radioBox()
+        #radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)
+        #@label(ckId)${labelText}#end
+    #end
 #end
 
-#@div(divClass="operationbar")
-	创建文档
-#end
+
 #@tinyForm("thisform" "" "" {"class":"test"})
-#@elementItem()
-					#@colLabel()所属产品#end
-					#@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})						
-						#@tinyOptionItem("zh")产品1#end
-						#@tinyOptionItem("en")产品2#end
-						#@tinyOptionItem("ta")产品3#end
-					#end
-				#end				
-	
-			#@elementItem()
-					#@colLabel()所属分类#end
-					#@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})
-						#@tinyOptionItem("zh")分类1#end
-						#@tinyOptionItem("en")分类2#end
-						#@tinyOptionItem("ta")分类3#end
-					#end
-				#end	
-				
-			#@elementItem()
-        			#@colLabel()文档类型#end
-					#@skinMinimal("mt-20")
-    					#labelRadio1(rId="typefile" rName="type" rValue="file" labelText="文件" "setType(this.value);")
-    					#labelRadio1(rId="typeurl" rName="type" rValue="url" labelText="链接" "setType(this.value);")   								
-    					#labelRadio1(rId="typetext" rName="type" rValue="text" labelText="网页" "setType(this.value);")
-					
-					#end
-        			#@validateDiv("col-2")#end
-      		#end	
-							
-			#@elementItem()
-					#@colLabel()文档标题#end
-					#@formControlDiv("col-8")
-					#tinyInput("text" "doctitle" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"doctitle","class":"input-text"})
-					#end
-				#end
-				#@validateDiv("col-2")#end
-			#@elementItem(elementId="contentBox" eleItemClass="hidden")
-					#@colLabel()文档正文#end
-					#@formControlDiv("col-6")
-						 #@Teditor("content2" "content2" {"initialFrameHeight":"150" ,"datatype":"*10-300"})#end
-					#end					
-					#@validateDiv("col-2")#end
-			#end
-			#@elementItem(elementId="urlBox" eleItemClass="hidden")
-					#@colLabel()文档URL#end
-					#@formControlDiv("col-8")
-					#tinyInput("text" "docurl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16","id":"docurl","class":"input-text"})
-					#end
-				#end
-				#@validateDiv("col-2")#end							
-			#@elementItem()	
-					#@colLabel()关键字#end
-					#@formControlDiv("col-6")
-					#tinyInput("text" "keywords" ""{"placeholder":"","datatype":"*4-16","id":"keywords","class":"input-text"})
-					#end
-				#end
-				#@validateDiv("col-2")#end
-											
-			#@elementItem()
-					#@colLabel()文档摘要#end
-					#@formControlDiv("col-6")
-						#@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"描述不能为空！"})内容走起#end
-	
-					#end
-					#@validateDiv("col-2")#end
-				#end	
-										
-			#@elementItem(elementId="fileBox" eleItemClass="")				
-					#@colLabel()附件#end
-					#@formControlDiv("col-8")
-					#fileWithInput("file-1")
-					#end
-					#@validateDiv("col-2")#end
-				#end
-			
+<div style="width:100%;float:center" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">创建文档</p>
+
+        #@elementItem()
+            #@colLabel()所属产品：#end
+            #@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})
+                #@tinyOptionItem("zh")产品1#end
+                #@tinyOptionItem("en")产品2#end
+                #@tinyOptionItem("ta")产品3#end
+            #end
+        #end
+
+        #@elementItem()
+            #@colLabel()所属分类：#end
+            #@tinySelect("lang" "zh" {"style":"width:300px","class":"input-text","rel":"22"})
+                #@tinyOptionItem("zh")分类1#end
+                #@tinyOptionItem("en")分类2#end
+                #@tinyOptionItem("ta")分类3#end
+            #end
+        #end
+
+        #@elementItem()
+            #@colLabel()文档类型：#end
+            #@skinMinimal("mt-20")
+                #labelRadio1(rId="typefile" rName="type" rValue="file" labelText="文件" "setType(this.value);")
+                #labelRadio1(rId="typeurl" rName="type" rValue="url" labelText="链接" "setType(this.value);")
+                #labelRadio1(rId="typetext" rName="type" rValue="text" labelText="网页" "setType(this.value);")
+
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+        #@elementItem()
+            #@colLabel()文档标题：#end
+            #@formControlDiv("col-8")
+                #tinyInput(
+                    "text" "doctitle" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！",
+                    "id":"doctitle","class":"input-text"})
+            #end
+        #end
+        #@validateDiv("col-2")#end
+        #@elementItem(elementId="contentBox" eleItemClass="hidden")
+            #@colLabel()文档正文：#end
+            #@formControlDiv("col-6")
+                #@Teditor("content2" "content2" {"initialFrameHeight":"150" ,"datatype":"*10-300"})#end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem(elementId="urlBox" eleItemClass="hidden")
+            #@colLabel()文档URL：#end
+            #@formControlDiv("col-8")
+                #tinyInput(
+                    "text" "docurl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16","id":"docurl",
+                    "class":"input-text"})
+            #end
+        #end
+        #@validateDiv("col-2")#end
+        #@elementItem()
+            #@colLabel()关键字：#end
+            #@formControlDiv("col-6")
+                #tinyInput(
+                    "text" "keywords" ""{"placeholder":"","datatype":"*4-16","id":"keywords","class":"input-text"})
+            #end
+        #end
+        #@validateDiv("col-2")#end
+
+        #@elementItem()
+            #@colLabel()文档摘要：#end
+            #@formControlDiv("col-6")
+                #@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"描述不能为空！"})内容走起#end
+
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+        #@elementItem(elementId="fileBox" eleItemClass="")
+            #@colLabel()附件：#end
+            #@formControlDiv("col-8")
+                #fileWithInput("file-1")
+            #end
+            #@validateDiv("col-2")#end
+        #end
+    </div>
     #@elementItem()
         <div class="col-12">
-            <div class="col-2">
+            <div class="col-5">
 
             </div>
             <div class="col-1">
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-            	<a href="${TINY_CONTEXT_PATH}/document/document.page">
-                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+                <a href="${TINY_CONTEXT_PATH}/product/page/project/archive-list.page" > <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
             </div>
             <div class="col-5"></div>
         </div>
     #end
+
 #end
 
 
-<script type="text/javascript">
-/* Set doc type. */
-function setType(type)
-{
-	if(type == 'url')
-	{
-		$('#urlBox').removeClass('hidden');
-		$('#fileBox').addClass('hidden');
-		$('#contentBox').addClass('hidden');
-	}
-	else if(type == 'text')
-	{
-		$('#urlBox').addClass('hidden');
-		$('#fileBox').addClass('hidden');
-		$('#contentBox').removeClass('hidden');
-	}
-	else
-	{
-		$('#urlBox').addClass('hidden');
-		$('#fileBox').removeClass('hidden');
-		$('#contentBox').addClass('hidden');
-	}
-}
-//The other func
-$(function(){
-
-  $("form[name=thisform").attr("action",'#link("/Validform_post.html")');
-  $("form[name=thisform").Validform({
-        tiptype:2,
-        usePlugin:{
-            //datepicker:{},//日期控件校验;
-            passwordstrength:{
-                minLen:6,//设置密码长度最小值，默认为0;
-                maxLen:18,//设置密码长度最大值，默认为30;
-                trigger:function(obj,error){
-                    //该表单元素的keyup和blur事件会触发该函数的执行;
-                    //obj:当前表单元素jquery对象;
-                    //error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
-                    //console.log(error);
-                    if(error){
-                        obj.parent().find(".Validform_checktip").show();
-                        obj.parent().find(".passwordStrength").hide();
-                    }else{
-                        obj.parent().find(".passwordStrength").show();
-                    }
-                }
+    <script type="text/javascript">
+        /* Set doc type. */
+        function setType(type) {
+            if (type == 'url') {
+                $('#urlBox').removeClass('hidden');
+                $('#fileBox').addClass('hidden');
+                $('#contentBox').addClass('hidden');
             }
-        },
-	ajaxPost:true,
-	beforeCheck:function(curform){
-		//在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
-		//这里明确return false的话将不会继续执行验证操作;
-	},
-	beforeSubmit:function(curform){
-		//在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
-		//这里明确return false的话表单将不会提交;
-	},
-	callback:function(data){
-		if(data.status=="y"){
-			setTimeout(function(){
-				$.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
-			},2000);
-		}
-		//返回数据data是json对象，{"info":"demo info","status":"y"}
-		//info: 输出提示信息;
-		//status: 返回提交数据的状态,是否提交成功。如可以用"y"表示提交成功，"n"表示提交失败，在Validform_post.html文件返回数据里自定字符，主要用在callback函数里根据该值执行相应的回调操作;
-		//你也可以在Validform_post.html文件返回更多信息在这里获取，进行相应操作；
-		//ajax遇到服务端错误时也会执行回调，这时的data是{ status:**, statusText:**, readyState:**, responseText:** }；
+            else if (type == 'text') {
+                $('#urlBox').addClass('hidden');
+                $('#fileBox').addClass('hidden');
+                $('#contentBox').removeClass('hidden');
+            }
+            else {
+                $('#urlBox').addClass('hidden');
+                $('#fileBox').removeClass('hidden');
+                $('#contentBox').addClass('hidden');
+            }
+        }
+        //The other func
+        $(function () {
 
-		//这里执行回调操作;
-		//注意：如果不是ajax方式提交表单，传入callback，这时data参数是当前表单对象，回调函数会在表单验证全部通过后执行，然后判断是否提交表单，如果callback里明确return false，则表单不会提交，如果return true或没有return，则会提交表单。
-	}
-    });
-});
-</script>
+            $("form[name=thisform").attr("action", '#link("/Validform_post.html")');
+            $("form[name=thisform").Validform({
+                tiptype: 2,
+                usePlugin: {
+                    //datepicker:{},//日期控件校验;
+                    passwordstrength: {
+                        minLen: 6,//设置密码长度最小值，默认为0;
+                        maxLen: 18,//设置密码长度最大值，默认为30;
+                        trigger: function (obj, error) {
+                            //该表单元素的keyup和blur事件会触发该函数的执行;
+                            //obj:当前表单元素jquery对象;
+                            //error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
+                            //console.log(error);
+                            if (error) {
+                                obj.parent().find(".Validform_checktip").show();
+                                obj.parent().find(".passwordStrength").hide();
+                            } else {
+                                obj.parent().find(".passwordStrength").show();
+                            }
+                        }
+                    }
+                },
+                ajaxPost: true,
+                beforeCheck: function (curform) {
+                    //在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
+                    //这里明确return false的话将不会继续执行验证操作;
+                },
+                beforeSubmit: function (curform) {
+                    //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
+                    //这里明确return false的话表单将不会提交;
+                },
+                callback: function (data) {
+                    if (data.status == "y") {
+                        setTimeout(function () {
+                            $.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
+                        }, 2000);
+                    }
+                    //返回数据data是json对象，{"info":"demo info","status":"y"}
+                    //info: 输出提示信息;
+                    //status: 返回提交数据的状态,是否提交成功。如可以用"y"表示提交成功，"n"表示提交失败，在Validform_post.html文件返回数据里自定字符，主要用在callback函数里根据该值执行相应的回调操作;
+                    //你也可以在Validform_post.html文件返回更多信息在这里获取，进行相应操作；
+                    //ajax遇到服务端错误时也会执行回调，这时的data是{ status:**, statusText:**, readyState:**, responseText:** }；
+
+                    //这里执行回调操作;
+                    //注意：如果不是ajax方式提交表单，传入callback，这时data参数是当前表单对象，回调函数会在表单验证全部通过后执行，然后判断是否提交表单，如果callback里明确return false，则表单不会提交，如果return true或没有return，则会提交表单。
+                }
+            });
+        });
+    </script>

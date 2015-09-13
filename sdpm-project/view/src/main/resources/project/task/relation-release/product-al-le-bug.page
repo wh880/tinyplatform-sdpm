@@ -38,7 +38,30 @@
 
     #@dialog("myModal")
         #@dialogHeader()对话框标题#end
-        #@dialogBody()<p>对话框内容…</p>#end
+        #@dialogBody()<p>#@table()
+            #@tbody()
+                #@tr()
+                    #@td()
+                    #*                #inputText(inputPlaceHolder="文件名")*#
+                        <input type="text" class="size" value="请输入文件名" />
+                    #end
+                    #@td()
+                        #@selectBox()
+                            #@select(selectName="demo2" selectClass="select")
+                                #@optionSelected("")UTF-8#end
+                                #@optionItem("1")GBK#end
+                            #end
+                        #end
+                    #end
+                    #@td()#@selectBox()
+                        #@select(selectName="demo3" selectClass="select")
+                            #@optionSelected("")全部记录#end
+                            #@optionItem("1")选中记录#end
+                        #end
+                    #end#end
+                #end
+            #end
+        #end</p>#end
         #@dialogFooter()
             #@buttonEnsure()确定#end
             #@buttonCancel()关闭#end

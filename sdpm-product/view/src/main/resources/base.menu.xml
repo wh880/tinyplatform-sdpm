@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="myproduct" parent-id="0" name="产品管理" href="/product/page/project/togglebox.page" icon="icon-desktop" sort="1" isShow="true" permission="Permission">
-    <menu id="product-demand" parent-id="myproduct" name="需求" href="/product/page/project/togglebox.page"  scope="liop,l2op"  sort="1" isShow="1" permission="Permission"></menu>
-    <menu id="product-plan"  parent-id="myproduct" name="计划" href="/product/page/project/product-plan.page"  sort="2" isShow="3" permission="Permission"></menu>
-	<menu id="product-release" parent-id="myproduct"  name="发布" href="/product/page/project/product-release.page"  sort="3" isShow="1" permission="Permission"></menu>
-	<menu id="product-roadmap" parent-id="myproduct"  name="路线图" href="/product/page/project/product-roadmap.page"  sort="4" isShow="1" permission="Permission"></menu>
-    <menu id="product-archive" parent-id="myproduct" name="文档" href="/product/page/project/archive-list.page" scope="liop"
-          sort="5" isShow="1" permission="Permission"></menu>
+<menu id="myproduct" parent-id="0" name="产品管理" href="/product/page/project/togglebox.page" icon="icon-desktop" sort="1"
+      isShow="1" permission="Permission">
+    <menu id="product-demand" parent-id="myproduct" name="需求" href="/product/page/project/togglebox.page"
+          scope="liop,l2op" sort="1" isShow="1" permission="Permission"></menu>
+    <menu id="product-plan" parent-id="myproduct" name="计划" href="/product/page/project/product-plan.page" sort="2"
+          isShow="1" permission="Permission"></menu>
+    <menu id="product-release" parent-id="myproduct" name="发布" href="/product/page/project/product-release.page"
+          sort="3" isShow="1" permission="Permission"></menu>
+    <menu id="product-roadmap" parent-id="myproduct" name="路线图" href="/product/page/project/product-roadmap.page"
+          sort="4" isShow="1" permission="Permission"></menu>
+    <menu id="product-archive" parent-id="myproduct" name="文档" href="/product/page/project/archive-list.page"
+          scope="liop" sort="5" isShow="1" permission="Permission"></menu>
     <menu id="product-project" parent-id="myproduct" name="项目" href="/product/page/project/product-project-list.page"
           sort="6" isShow="1" permission="Permission"></menu>
-	<menu id="product-modular" parent-id="myproduct" name="模块" href="/product/page/project/product-modular.page"  sort="7" isShow="1" permission="Permission"></menu>
+    <menu id="product-modular" parent-id="myproduct" name="模块" href="/product/page/project/product-modular.page"
+          sort="7" isShow="1" permission="Permission"></menu>
     <menu id="product-overview" parent-id="myproduct" name="概况" href="/product/page/project/overview.page" sort="8"
           isShow="1" permission="Permission"></menu>
     <menu id="product-dynamic" parent-id="myproduct" name="动态" href="/product/page/project/dymanicdata.page" sort="9"
           isShow="1" permission="Permission"></menu>
- </menu> 		
+</menu>

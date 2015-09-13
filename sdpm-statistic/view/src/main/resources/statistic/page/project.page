@@ -6,7 +6,6 @@
         #@tabHead()
             #include("/statistic/page/tab.page")
         #end
-	<br>
         #@tabBodyCol("ptop-5")
         ##operationbar star
 #*            #@div(divClass="operationbar")

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="Idocument" parent-id="0" name="文档管理" href="/document/document.page" icon="icon-desktop" sort="1" isShow="true" permission="Permission">
-     <menu id="documentDocu" parent-id="Idocument" name="文档" 
-     		href="/document/document.page" icon="icon-desktop" sort="1" isShow="true" permission="Permission"></menu>
+
+<menu id="idocument" parent-id="0" name="文档管理" href="/document/document.page"
+	icon="icon-inbox" sort="1" isShow="1" permission="Permission">
+	<menu id="sdocument" name="文档" href="/document/document.page"
+		sort="100" isShow="true" />
 </menu>

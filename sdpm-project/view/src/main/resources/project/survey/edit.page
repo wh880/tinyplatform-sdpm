@@ -18,7 +18,7 @@
 .tabLayout .tabBar .Current a{color:#fff}
 .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
 .b {margin-left: 8px;}*#
-.input-group-addon{width:10px;font-size:20px;}
+
 .hidden_namesty{margin-left:17%}
 .label_title{width:100px}
 </style>
@@ -72,9 +72,11 @@
       #end
       #@elementItem()
         	#@colLabel()可用工作日#end
-        	#@formControlDiv("col-8")
-				 <input type="text" style="float:left;width:35%">
-				 <span class="input-group-addon">天</span>					 
+        	#@formControlDiv("col-2")
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+                <span class="input-group-addon" id="basic-addon2">天</span>
+            </div>
       		#end
 
       		#@validateDiv("col-2")#end

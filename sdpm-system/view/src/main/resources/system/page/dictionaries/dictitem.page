@@ -1,0 +1,20 @@
+#!set(activeTitle="字典项管理",activeMenuId=currentPageId)
+#import("/org/tinygroup/zTree/components/zTree.component")
+#set(threeMenu="dictionary-entries")
+
+###searchZtreeInit("treeDemo" "/data/tree/dict.js" "#test")
+#macro ztreeClick()
+	loadURL('#link("/system/page/dictionaries/dictitem_list.pagelet")', $("#tBox"));
+#end
+
+###@h2()${activeTitle}#end
+	
+	#@divDataTablebox()
+	    #@tableHeaderBar()${activeTitle}#end
+		#@leftTreeCol()
+			#@searchZtreeWithInit("treeDemo" "height:454px;" "/system/page/dictionaries/data/tree/dict.js")
+			#end
+		#end
+    	#@tableBox("tBox")
+    	#end
+	#end

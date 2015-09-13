@@ -1,0 +1,109 @@
+#!set(activeTitle="组织管理",activeMenuId=currentPageId)
+<style>
+    .tabLayout .tabBar span a {
+        color: #333
+    }
+
+    .tabLayout .tabBar .Current a {
+        color: #fff
+    }
+
+    .operationbar {
+        border-top: none;
+        background: #f9fafe;
+        padding: 6px 5px 6px 10px;
+    }
+
+    .formText {
+        margin-top: -6px;
+        border: #eee 1px solid;
+        padding: 2px 0 16px
+    }
+</style>
+#set(name="organizationCompany")
+#include("/common/common.page")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/organization/common/tab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            ##            <span class="f">
+            ##					<dr>公司信息</dr>
+            ##            </span>
+            <span style="float: right">
+            #@aModal("#myModal" "编辑公司" "600" "400" "" "/organization/company/updateCompany.pagelet")
+                #@simpleI("icon-edit")编辑#end
+            #end
+                #@dialog("myModal")
+                    #@dialogHeader()公司#end
+                    #@dialogBody()<p></p>#end
+                #end
+            </span>
+                #div(divClass="clearfix")
+            #end
+        #end
+    #end
+
+
+    #@noRespsGridSystem()
+        #@tinyForm("thisform" "" "" {"class":"formText"})
+
+        <div class="infoContent">
+            <p class="titleName">公司信息</p>
+            #@gridSysRow()
+                #@colLabel("col-4")公司名称：#end
+                #@gridSysCol(8)
+                    <p>恒生</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")联系电话：#end
+                #@gridSysCol(8)
+                    <p>123456</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")传真：#end
+                #@gridSysCol(8)
+                    <p>12321455</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")通讯地址：#end
+                #@gridSysCol(8)
+                    <p>杭州</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")邮政编码：#end
+                #@gridSysCol(8)
+                    <p>123456</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")官网：#end
+                #@gridSysCol(8)
+                    <p>www.baidu.com</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")内网：#end
+                #@gridSysCol(8)
+                    <p>www.baidu.com</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")匿名登录：#end
+                #@gridSysCol(8)
+                    <p>不允许</p>
+                #end
+            #end
+        </div>
+        #end
+
+    #end
+#end
+
+

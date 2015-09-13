@@ -12,7 +12,7 @@
 
 #for(var:[1..pagesize])
 					#@tr()
-						#@td()<input type="checkbox" value="1" name="idCheck">#end
+						#@td()<input type="checkbox" value="1" name="userid">#end
 						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${var}</a>#end
 						#@td()1#end
 						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">标题</a>#end
@@ -27,8 +27,11 @@
 							#iconOperations("#myModal" "icon-flag" "结果" "600" "200" "/testManagement/page/tabledemo/result.pagelet" "ml-5")
                          	<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editioncase.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
                          	<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page" title="复制">#buttonIcon(iconClass="icon-copy")</a>
-							#iconOperations("#myModal" "icon-remove" "删除" "200" "50" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
-                         	<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page"title="Bug">#buttonIcon(iconClass="icon-bug")</a>
+                         	#@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)
+								<i class="icon-remove"></i>
+							#end
+#*							#iconOperations("#myModal" "icon-remove" "删除" "200" "50" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
+                         	<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page"title="Bug">#buttonIcon(iconClass="icon-bug")</a>*#
 						#end
 					#end
 				#end

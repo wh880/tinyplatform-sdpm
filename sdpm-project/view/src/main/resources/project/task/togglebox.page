@@ -10,6 +10,7 @@
     #end
 
     #@toggleRight()
+    ##此处id及link属性 不懂
         #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
             #@div(divBaseClass="tinyheaderTools form-inline")
                 #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
@@ -30,6 +31,7 @@
                         #@tinyTh({"class":"","rel":"sortname"})操作#end
                     #end
                 #end
+
             #end
         ##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
         ##个人认为下面的js及dialog无用，先完成页面效果。2015年9月8日 10:09:33

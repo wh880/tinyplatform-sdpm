@@ -5,6 +5,7 @@
 #import("/org/tinygroup/fold/components/fold.component")
 <style> </style>
 #set(name="documentDocu")
+#set(abstract="这个摘要很好看啊，内容很精彩啊！",keywords="关键字 精彩 好看",tach="good.jpg")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -64,13 +65,17 @@
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
 	</center>
 </div>
+<div style="width:30%;float:right;">
+ 		#TypeInfo("docInfo")
+##     #include("basic-info.page")
+</div>
 #end
 #end		
-
-<div style="width:30%;position: fixed;top: 180px;right: 10px;" class="rightpart">
-  ## 		#TypeInfo("docInfo")
-     #include("basic-info.page")
-</div>
+##遗漏的弹出框
+	#@dialog("myModal")
+        #@dialogHeader()#end
+        #@dialogBody()<p></p>#end
+    #end
 
 <script type="text/javascript">
 

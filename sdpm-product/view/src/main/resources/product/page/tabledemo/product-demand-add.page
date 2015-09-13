@@ -1,11 +1,11 @@
 
 #!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 #@tinyForm("thisform" "" "" {"class":"test"})
-<div style="width:80%;margin-left: 150px;" class="pageleftpart">
+<div style="width:100%;" class="pageleftpart">
    <div class="infoContent">
-        <p class="titleName">复制</p>
+        <p class="titleName">提需求</p>
 	 #@elementItem()
-        #@colLabel()所属产品：#end
+        #@colLabel()所属产品:#end
 		
             #@formControlDiv("col-4")
             	<div class="col-6">
@@ -37,7 +37,7 @@
     #end
     
      #@elementItem()
-        #@colLabel()所属计划：#end
+        #@colLabel()所属计划:#end
 	        #@formControlDiv("col-4")
 	             #@Tselect2F()
                     #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -53,7 +53,7 @@
     #end
     
      #@elementItem()
-        #@colLabel()来源：#end
+        #@colLabel()来源:#end
 	        #@formControlDiv("col-4")
             	<div class="col-4">
 		             #@Tselect2F()
@@ -93,16 +93,16 @@
     
 
      #@elementItem()
-        #@colLabel()需求名称#end
+        #@colLabel()需求名称:#end
 	        #@formControlDiv("col-4")
-	          #tinyInput("text" "email" ""{"datatype":"e","nullmsg":"请输入名称！","id":"email","class":"input-text"})
+	          #tinyInput("text" "email" ""{"datatype":"e","nullmsg":"请输入描述！","id":"email","class":"input-text"})
 	        #end
         #@validateDiv("col-2")#end
       #end
      
       
      #@elementItem()
-	    #@colLabel()需求描述#end
+	    #@colLabel()需求描述:#end
 		#@formControlDiv("col-8")
 			#@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"描述不能为空！"})内容走起#end
 		#end
@@ -110,7 +110,7 @@
     #end
     
      #@elementItem()
-	    #@colLabel()验收标准#end
+	    #@colLabel()验收标准:#end
 		#@formControlDiv("col-8")
 			#@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-200"})内容走起#end
 		#end
@@ -118,7 +118,7 @@
     #end
     
      #@elementItem()
-        #@colLabel()优先级#end
+        #@colLabel()优先级:#end
 	        #@formControlDiv("col-4")
 	             #@Tselect2F()
                     #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -134,15 +134,18 @@
     #end
     
     #@elementItem()
-        #@colLabel()预计工时#end
+        #@colLabel()预计工时:#end
 	        #@formControlDiv("col-4")
-	          #tinyInput("text" "email" ""{"datatype":"e","nullmsg":"请输入工时！","id":"email","class":"input-text"})
-	        #end
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon2">小时</span>
+                </div>
+            #end
         #@validateDiv("col-2")#end
       #end
           
       #@elementItem()
-        #@colLabel()由谁评审#end
+        #@colLabel()由谁评审:#end
 	        #@formControlDiv("col-4")
 	            #@Tselect2F()
                     #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -159,7 +162,7 @@
     #end
       
     #@elementItem()
-        #@colLabel()抄送给#end
+        #@colLabel()抄送给:#end
 	        #@formControlDiv("col-4")
 	             #@Tselect2F()
                     #@Tselect2Body("lang" "IN" {"class":"input-text select2","multiple":"multiple "}) ##,"multiple":"multiple"加上为多选项
@@ -175,7 +178,7 @@
     #end
     
      #@elementItem()
-        #@colLabel()关键词#end
+        #@colLabel()关键词:#end
 	        #@formControlDiv("col-4")
 	          #tinyInput("text" "email" ""{"datatype":"e","nullmsg":"请输入名称！","id":"email","class":"input-text"})
 	        #end
@@ -200,7 +203,7 @@
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="backBtn"><a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page" >返回</a></button>
+                <a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page" ><button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
             </div>
             <div class="col-5"></div>
        

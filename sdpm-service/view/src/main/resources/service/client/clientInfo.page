@@ -1,0 +1,70 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="服务管理",activeMenuId=currentPageId)
+
+
+#set(name="client")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox dropdownBoxes")
+            #include("/service/serviceCom/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/service/serviceCom/tab.page")
+        #end
+    <div style="width:80%;float:left">
+        #@div(divClass="infoContent")
+            <p class="titleName">客户信息</p>
+            #@noRespsGridSystem()
+                #@gridSysRow()
+                    #@colLabel("col-4")公司名称：#end
+                    #@gridSysCol(1)#end
+                    #@gridSysCol(7)
+                        <p>恒生电子</p>
+                    #end
+                    #@colLabel("col-4")公司编号：#end
+                    #@gridSysCol(1)#end
+                    #@gridSysCol(7)
+                        <p>10088</p>
+                    #end
+                    #@colLabel("col-4")公司联系人：#end
+                    #@gridSysCol(1)#end
+                    #@gridSysCol(7)
+                        <p>习近平</p>
+                    #end
+                    #@colLabel("col-4")联系人电话：#end
+                    #@gridSysCol(1)#end
+                    #@gridSysCol(7)
+                        <p>13615263726</p>
+                    #end
+                    #@colLabel("col-4")公司传真：#end
+                    #@gridSysCol(1)#end
+                    #@gridSysCol(7)
+                        <p>0571-82573833</p>
+                    #end
+                    #@colLabel("col-4")公司邮编：#end
+                    #@gridSysCol(1)#end
+                    #@gridSysCol(7)
+                        <p>311000</p>
+                    #end
+                    #@colLabel("col-4")公司地址：#end
+                    #@gridSysCol(1)#end
+                    #@gridSysCol(7)
+                        <p>浙江杭州江南大道3588号</p>
+                    #end
+                #end
+            #end
+            <div style="text-align:right;margin:right">
+                #@aModal("#myModal1" "编辑" "600" "348" "btn radius btn-primary btn-sm"
+                    "/service/client/companyInfoEdit.pagelet")编辑
+                #end
+                #@delItemsdpm("#action" "id" "/service/client/clientUser.page" {"class":"btn radius btn-danger btn-sm"})
+                    删除#end
+            </div>
+        #end
+
+    </div>
+    #end
+#end
+#@simpleModal("myModal1" "客户编辑")#end

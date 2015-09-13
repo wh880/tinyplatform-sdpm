@@ -1,0 +1,60 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="服务管理",activeMenuId=currentPageId)
+
+#set(name="sla")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/service/serviceCom/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/service/serviceCom/tab.page")
+        #end
+    <br/>
+    #end
+#end
+#@tabWithInit("tab_demo" "optionsBox")
+##tabbody end
+<p style="width:100%;float:left">
+##        #@gridSysCol(8)
+    #@div(divClass="infoContent")
+    <p class="titleName">阿里巴巴</p>
+    ##        <div>
+    ##            #@table("协议详情")
+        #@tbody()
+            #@tr()
+            <div class="text-c"><h4>支付宝出售协议</h4></div>
+            #end
+            #@noRespsGridSystem()
+                #@gridSysRow()
+                    #@gridSysCol(2)#end
+                    #@gridSysCol(8)
+                        #@tr()
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议</p>
+                        #end
+                    #end
+                    #@gridSysCol(2)#end
+                #end
+            #end
+        #end
+    ##            #end
+    ##        </div>
+    <div style="text-align:right;margin:right">
+        #@aExtendButton("btn-primary btn-sm" "slaContentEdit.page")编辑#end
+        #@delItemsdpm("#action" "id" "/service/client/clientProduct.page" {"class":"btn radius btn-danger btn-sm"})
+            删除#end
+    </div>
+    #end
+<div class="infoContent">
+    #@div(divClass="infoContent,col-6")
+        <p class="titleName">历史记录</p>
+        #include("/service/sla/historyRecord.page")
+    #end
+</div>
+##        #end
+</div>
+#end
+
+###@simpleModal("myModal3" "编辑")#end

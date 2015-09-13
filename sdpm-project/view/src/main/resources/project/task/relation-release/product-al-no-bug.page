@@ -3,6 +3,9 @@
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 #!set(cname="no-bug",type="bug")
 
+<style>
+    .size {height: 35px}
+</style>
 
 #include("/project/mulsearch.page")
 
@@ -13,7 +16,7 @@
         #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 
     #end
-    #@tinyTableContent("product-al-bug-data.pagelet") ##取数据地址 总数据
+    #@tinyTableContent("product-al-no-bug-data.pagelet") ##取数据地址 总数据
         #@thead()
             #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
                 #@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
@@ -38,12 +41,39 @@
 			*#
 
     #@dialog("myModal")
-        #@dialogHeader()对话框标题#end
-        #@dialogBody()<p>对话框内容…</p>#end
+        #@dialogHeader()导出HTML#end
+        #@dialogBody()<p>#@table()
+            #@tbody()
+                #@tr()
+                    #@td()
+                    #*                #inputText(inputPlaceHolder="文件名")*#
+                        <input type="text" class="size" value="请输入文件名" />
+                    #end
+                    #@td()
+                        #@selectBox()
+                            #@select(selectName="demo2" selectClass="select")
+                                #@optionSelected("")UTF-8#end
+                                #@optionItem("1")GBK#end
+                            #end
+                        #end
+                    #end
+                    #@td()#@selectBox()
+                        #@select(selectName="demo3" selectClass="select")
+                            #@optionSelected("")全部记录#end
+                            #@optionItem("1")选中记录#end
+                        #end
+                    #end#end
+                #end
+            #end
+        #end</p>#end
         #@dialogFooter()
             #@buttonEnsure()确定#end
             #@buttonCancel()关闭#end
         #end
     #end
 #end
-	
+
+
+
+
+

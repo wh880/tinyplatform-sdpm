@@ -13,7 +13,7 @@
 <span class="r">
 				#@aModal("#myModal" "新增日志" "1000" "350" "btn-class"
                     "/project/task/note.pagelet")#buttonIcon(iconClass="icon-time")日志#end
-    <a href="${TINY_CONTEXT_PATH}/project/task//relation-release/product-al-req.page?cname=demand">#buttonIcon(iconClass=
+    <a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-req.page?cname=demand">#buttonIcon(iconClass=
         "icon-link")关联需求</a>&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page?cname=bug">#buttonIcon(iconClass=
                     "icon-bug")关联Bug</a>&nbsp;
@@ -32,9 +32,7 @@
 <div style="width:70%;float:left">
     #@div()
         #@tabWithInit("tab_demo" "optionsBox")
-
             #@tabHead()
-
                 #if("demand"==type)
                     #@aHeadCol(TINY_CONTEXT_PATH+"/project/task/relation-release/product-al-req.page" cname=="demand"?
                         "Current":"")
@@ -50,10 +48,9 @@
                     #end
                     #if("no-demand"==cname)
                         <div style="float:right">
-                            <a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
+                            <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
                         </div>
                     #end
-
                 #end
 
                 #if("bug"==type)
@@ -76,31 +73,21 @@
                         #end
                     #end
                     #if("no-bug"==cname)
-
                         <div class="r">
-
-                            <a href="#" id="showsearchmore-bug">&nbsp;&nbsp; #buttonIcon(iconClass="icon-search")搜索</a>
+                            <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
                         </div>
                     #end
                 #end
 
                 <div class="r">
                     #@aModal(
-                        "#myModal" "导出HTML" "700" "130" "icon-upload-alt" "/project/task/product-export-html.pagelet")
+                        "#myModal" "导出HTML" "700" "130" "icon-upload-alt" "/project/task/relation-release/product-export-html.pagelet")
                         导出HTML#end&nbsp;
-
                 </div>
-
             #end
-
             #@tabBodyCol("ptop-5")
-
-
                 #pageContent
-
-
             #end
-
         #end
     #end
 </div>

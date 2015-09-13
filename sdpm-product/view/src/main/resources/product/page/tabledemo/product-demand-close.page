@@ -3,7 +3,7 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
-#!set(linkName="demand")
+#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 #@tinyForm("thisform" "" "" {"class":"test"})
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
@@ -40,7 +40,7 @@
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="backBtn"><a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" >返回</a></button>
+                <a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" ><button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
             </div>
             <div class="col-5"></div>
         </div>

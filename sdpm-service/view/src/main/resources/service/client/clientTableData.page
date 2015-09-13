@@ -1,0 +1,26 @@
+#macro setTinyItemCount(num)
+<input type="hidden" name="records" value="${num}"/>
+#end
+
+#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#if (pagesize>records-pagesize*(page-1))
+    #set(pagesize=records-(page-1)*pagesize)
+#end
+#setTinyItemCount(52)
+#foreach(var:[1..pagesize])
+    #@tr()
+        #@td()<input type="checkbox" value="1" name="idCheck">#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientProduct.page">001</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">恒生</a>#end
+        #@td()银行部#end
+        #@td()习近平#end
+        #@td()2015-09-09#end
+        #@td()正常#end
+        #@td()
+            #iconOperations(
+                "#myModal" " icon-pencil" "编辑" "650" "350" "/service/client/clientEdit.pagelet" "ml-5")
+            #@tinyTableItemRemove("#" "id")<i class="icon-remove"></i>#end
+        #end
+    ##        #@simpleModal("myModal"+varFor.index "用户编辑")#end
+    #end
+#end

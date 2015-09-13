@@ -13,10 +13,6 @@
 
                 <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/add-doc.page" title="创建文档">#buttonIcon(iconClass="icon-plus")创建文档</a>
 
-#*
-                <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addArchiveweb.page" title="创建文档">#buttonIcon(iconClass="icon-plus")创建文档</a>
-*#
-
 			</span>
 			#div(divClass="clearfix")
 		#end

@@ -1,0 +1,222 @@
+#!set(activeTitle="组织管理",activeMenuId=currentPageId)
+
+#import("/common/component/form.component")
+
+#set(editpagePath=
+    "/organization/updateCompany.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+#set(editpagePath1=
+    "/organization/common/fileOutput.pagelet",editpageModalId1="userEditModal",editpageModal1="#"+editpageModalId1)
+#include("/common/common.page")
+<style>
+    .tabLayout .tabBar span a {
+        color: #333
+    }
+
+    .tabLayout .tabBar .Current a {
+        color: #fff
+    }
+
+    .operationbar {
+        border-top: none;
+        background: #f9fafe;
+        padding: 6px 5px 6px 10px;
+    }
+
+    .operationbarsty {
+        margin-top: -5px;
+        padding: 0 12px 5px;
+    }
+</style>
+#set(name="organizationUser")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/organization/common/tab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+                #@tinyForm("thisform" "" "" {"class":"test"})
+                    #@formControlDiv("col-1")
+                        #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                            #@tinyOptionItem("zh")中国#end
+                            #@tinyOptionItem("en")英国#end
+                            #@tinyOptionItem("ta")泰国#end
+                        #end
+                    #end
+                <span style="padding-top: 5px;float: left">
+                    &nbsp;&gt;
+					<a href="${TINY_CONTEXT_PATH}/organization/user/todo.page">待办</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/user/storyAdmin.page">需求</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/user/taskAdmin.page">任务</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/user/bugAdmin.page">缺陷</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/user/testtaskAdmin.page">测试</a>
+                   <a href="${TINY_CONTEXT_PATH}/organization/user/activeAdmin.page">动态</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/user/logAdmin.page">日志</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/user/projectAdmin.page">项目</a>
+					<a href="${TINY_CONTEXT_PATH}/organization/user/profileAdmin.page" class="active_btn">档案</a>
+                </span>
+
+                <span style="padding-top: 5px;float: right">
+            #@aModal("#myModal" "修改档案" "800" "400" "" "/organization/user/profileAdminEdit.pagelet")
+
+                #@simpleI("icon-edit")修改档案#end
+
+            #end
+                    #@dialog("myModal")
+                        #@dialogHeader()公司#end
+                        #@dialogBody()<p></p>#end
+                    #end
+            </span>
+                <span style="padding-top:5px;float:right">
+                    #@aModal(editpageModal "导出" "600" "120" ""  editpagePath1)
+                        #@simpleI(" icon-download-alt")导出#end
+                    #end
+                </span>
+                    #div(divClass="clearfix")
+                #end
+            #end
+            #div(divClass="clearfix")
+        #end
+    #end
+
+    #@noRespsGridSystem()
+
+        #@gridSysCol(3)
+        #end
+
+        #@gridSysCol(6)
+            #@tinyForm("thisform" "" "" {"class":"formText"})
+            <div class="infoContent">
+                <p class="titleName">账号信息</p>
+                #@gridSysRow()
+                    #@colLabel("col-4")用户名：#end
+                    #@gridSysCol(8)
+                        <p>张三</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")邮箱：#end
+                    #@gridSysCol(8)
+                        <p>mahuateng@qq.com</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")源代码账号：#end
+                    #@gridSysCol(8)
+                        <p>研发部门</p>
+                    #end
+                #end
+            </div>
+
+
+            <div class="infoContent">
+                <p class="titleName">基本信息</p>
+                #@gridSysRow()
+                    #@colLabel("col-4")真实姓名：#end
+                    #@gridSysCol(8)
+                        <p>张三</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")性别：#end
+                    #@gridSysCol(8)
+                        <p>女</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")所属部门：#end
+                    #@gridSysCol(8)
+                        <p>研发部门</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")职位：#end
+                    #@gridSysCol(8)
+                        <p>攻城狮</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")权限：#end
+                    #@gridSysCol(8)
+                        <p>管理员</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")加入日期：#end
+                    #@gridSysCol(8)
+                        <p>2016-1-1</p>
+                    #end
+                #end
+            </div>
+
+            <div class="infoContent">
+                <p class="titleName">联系信息</p>
+                #@gridSysRow()
+                    #@colLabel("col-4")Skype：#end
+                    #@gridSysCol(8)
+                        <p>Skype</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")QQ：#end
+                    #@gridSysCol(8)
+                        <p>123456</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")雅虎通：#end
+                    #@gridSysCol(8)
+                        <p>雅虎通</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")职位：#end
+                    #@gridSysCol(8)
+                        <p>攻城狮</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")Gtalk：#end
+                    #@gridSysCol(8)
+                        <p>Gtalk</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")旺旺：#end
+                    #@gridSysCol(8)
+                        <p>旺旺</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")手机：#end
+                    #@gridSysCol(8)
+                        <p>手机</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")电话：#end
+                    #@gridSysCol(8)
+                        <p>电话</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")通讯地址：#end
+                    #@gridSysCol(8)
+                        <p>杭州恒生电子</p>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")邮编：#end
+                    #@gridSysCol(8)
+                        <p>1241241</p>
+                    #end
+                #end
+            </div>
+            #end
+        #end
+        #@gridSysCol(6)
+        #end
+    #end
+#end
+#simpleModal(editpageModalId1)
+

@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="organization" parent-id="0" name="组织管理" href="/organization/user.page" icon="icon-sitemap" sort="1"
+<menu id="organization" parent-id="0" name="组织管理" href="/organization/user/user.page" icon="icon-sitemap" sort="1"
       isShow="1">
-    <menu id="organizationUser" name="用户" href="/organization/user.page" icon="" sort="1"
+    <menu id="organizationUser" name="用户" href="/organization/user/user.page" icon="" sort="1"
           isShow="1"
     >
     </menu>
-    <menu id="organizationGtask" name="待办" href="/organization/gtasks.page" icon="" sort="1"
+    <menu id="organizationGtask" name="待办" href="/organization/gtask/gtasks.page" icon="" sort="1"
           isShow="1"
     >
     </menu>
-    <menu id="organizationLog" name="日志" href="/organization/log.page" icon="" sort="1"
+    <menu id="organizationLog" name="日志" href="/organization/log/log.page" icon="" sort="1"
           isShow="1"
     >
     </menu>
-    <menu id="organizationActive" name="动态" href="/organization/active.page" icon="" sort="1" isShow="1"
+    <menu id="organizationActive" name="动态" href="/organization/active/active.page" icon="" sort="1" isShow="1"
     >
     </menu>
-    <menu id="organizationDepartment" name="部门" href="/organization/department.page" icon="" sort="1" isShow="1"
+    <menu id="organizationDepartment" name="部门" href="/organization/department/department.page" icon="" sort="1"
+          isShow="1"
     >
     </menu>
-    <menu id="organizationPrivilege" name="角色" href="/organization/privilege.page" icon="" sort="1" isShow="1"
+    <menu id="organizationPrivilege" name="角色" href="/organization/privilege/privilege.page" icon="" sort="1" isShow="1"
     >
     </menu>
-    <menu id="organizationCompany" name="公司" href="/organization/company.page" icon="" sort="1" isShow="1"
+    <menu id="organizationCompany" name="公司" href="/organization/company/company.page" icon="" sort="1" isShow="1"
     >
     </menu>
 </menu>

@@ -1,11 +1,11 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
     #@div(divClass="infoContent")
     <p class="titleName">前置条件</p>
-
+		<p>木鸡啊</p>
     #end
     #@div(divClass="infoContent")
     <p class="titleName">测试结果</p>
-
+		<p>一级棒</p>
     #end
 
 #end

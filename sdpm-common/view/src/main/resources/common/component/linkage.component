@@ -1,0 +1,80 @@
+#macro dropdownMenu()
+	<ul class="dropdown-menu">
+		#bodyContent
+    </ul>
+#end
+#macro dropdownSubmenu(rName)
+	<li class="dropdown-submenu">
+		<a tabindex="-1" href="javascript:void(0);">${rName}</a>
+		#bodyContent
+	</li>
+#end
+
+#macro dmenu(rName url)
+	<li>
+		<a tabindex="-1" href="${TINY_CONTEXT_PATH}${url}">${rName}</a>
+	</li>
+#end
+
+
+#macro dropdown(rName rClass)
+	<a id="" role="button" data-toggle="dropdown" #if(rClass) class="${rClass}" #else class="btn btn-primary" #end data-target="#" href="javascript:void(0);">${rName}<span class="caret"></span></a>
+    #bodyContent
+#end
+
+
+#*示例*#
+#*
+
+#@dropdown("操作")
+	#@dropdownMenu()
+		#@dropdownSubmenu("指派给")
+			#@dropdownMenu()
+				#dmenu("admin")
+				#dmenu("张三")
+				#dmenu("lisi")
+			#end
+		#end
+	
+		#@dropdownSubmenu("阶段")
+			#@dropdownMenu()
+				#dmenu("空")
+				#dmenu("未开始")
+				#dmenu("已计划")
+				#dmenu("已立项")
+				#dmenu("研发中")
+				#dmenu("完毕")
+				#dmenu("测试中")
+				#dmenu("测试完毕")
+				#dmenu("已验收")
+				#dmenu("已发布")
+			#end
+		#end
+		
+		#@dropdownSubmenu("计划")
+			#@dropdownMenu()
+				#dmenu("空")
+				#dmenu("计划1")
+				#dmenu("计划2")
+				
+			#end
+		#end
+		
+		#@dropdownSubmenu("评审")
+			#@dropdownMenu()
+				#dmenu("确认通过")
+				#dmenu("有待明确")
+				#@dropdownSubmenu("拒绝")
+					#@dropdownMenu()
+						#dmenu("已完成")
+						#dmenu("延期")
+						#dmenu("不做")
+						#dmenu("已取消")
+						#dmenu("设计如此")
+					#end
+				#end
+				
+			#end
+		#end
+	#end
+#end*#

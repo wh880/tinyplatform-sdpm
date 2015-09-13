@@ -1,8 +1,10 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
+#import("/common/component/linkage.component")
 
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 #!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
+
 
 #import("/org/tinygroup/button/components/button_smart.component")
 
@@ -10,24 +12,23 @@
 			##operationbar start
 			#@div(divClass="operationbar")
 				<span class="f">
-					<a href="#" class="active_btn">未关闭</a>
-					<a href="#">全部需求</a>
-					<a href="#">指派给我</a>
-					<a href="#">由我创建</a>
-					<a href="#">由我评审</a>
-					<a href="#">由我关闭</a>
-					<a href="#">草稿</a>
-					<a href="#">激活</a>
-					<a href="#">已变更</a>
-					<a href="#">待关闭</a>
-					<a href="#">已关闭</a>
-					<a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" class="active_btn">未关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">全部需求</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">指派给我</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">由我创建</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">由我评审</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">由我关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">草稿</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">激活</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">已变更</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">待关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">已关闭</a>
+					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
 				<!--导入导出修改-->
-					#@aModal("#myModal" "导入" "600" "65" "btn-class"
-						"/product/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")
-                        导入#end
+					#@aModal("#myModal" "导入" "600" "65" "btn-class" "/product/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")
+                     	   导入#end
 				
 					#@buttonGroup()
 						#@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出  #@spanCaret()#end#end
@@ -49,7 +50,7 @@
 					<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page">#buttonIcon(iconClass="icon-plus")提需求</a>&nbsp;
 				</span>
 				#div(divClass="clearfix")
-				#include("/product/page/event/mulsearch-demand.page")
+				#include("/product/page/event/mulsearch.page")
 			#end
 			##operationbar end
 
@@ -82,37 +83,177 @@
 				
 				
 				
-				#@buttonGroup()
-
-				    #@defaultDropDownButton()指派给 #end
 				
-				    #@dropDownMenuUl()
-				
-				      #@normalItem("")1#end
-				
-				      #@normalItem("")2#end
-				
-				      #@normalItem("")3#end
-				
-				    #end
-
+				#@dropdown("操作")
+					#@dropdownMenu()
+						#@dropdownSubmenu("指派给")
+							#@dropdownMenu()
+								#dmenu("admin")
+								#dmenu("张三")
+								#dmenu("lisi")
+							#end
+						#end
+					
+						#@dropdownSubmenu("阶段")
+							#@dropdownMenu()
+								#dmenu("空")
+								#dmenu("未开始")
+								#dmenu("已计划")
+								#dmenu("已立项")
+								#dmenu("研发中")
+								#dmenu("完毕")
+								#dmenu("测试中")
+								#dmenu("测试完毕")
+								#dmenu("已验收")
+								#dmenu("已发布")
+							#end
+						#end
+						
+						#@dropdownSubmenu("计划")
+							#@dropdownMenu()
+								#dmenu("空")
+								#dmenu("计划1")
+								#dmenu("计划2")
+								
+							#end
+						#end
+						
+						#@dropdownSubmenu("评审")
+							#@dropdownMenu()
+								#dmenu("确认通过")
+								#dmenu("有待明确")
+								#@dropdownSubmenu("拒绝")
+									#@dropdownMenu()
+										#dmenu("已完成")
+										#dmenu("延期")
+										#dmenu("不做")
+										#dmenu("已取消")
+										#dmenu("设计如此")
+									#end
+								#end
+								
+							#end
+						#end
+					#end
 				#end
+								
 				
-				#@buttonGroup()
+				
+#*
+				<div class="dropdown">
+					<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">操作<span class="caret"></span></a>
+					<ul class="dropdown-menu multi-level" role="menu">
+						
+						<li class="dropdown-submenu">
+							<a tabindex="-1" href="javascript:void(0);">指派给</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="javascript:void(0);">admin</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">zhangsan</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">lisi</a>
+								</li>
+								
+							</ul>
+						</li>
+						<li class="dropdown-submenu">
+							<a tabindex="-1" href="javascript:void(0);">阶段</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="javascript:void(0);">空</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">未开始</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">已计划</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">已立项</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">研发中</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">完毕</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">测试中</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">测试完毕</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">已验收</a>
+								</li>
+							
+								<li>
+									<a  href="javascript:void(0);">已发布</a>
+								</li>
+								
+							</ul>
+						</li>
+						<li class="dropdown-submenu">
+							<a tabindex="-1" href="javascript:void(0);">计划</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="javascript:void(0);">空</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">计划1</a>
+								</li>
+								<li>
+									<a  href="javascript:void(0);">计划2</a>
+								</li>
+								
+							</ul>
+						</li>
+						<li class="dropdown-submenu">
+							<a tabindex="-1" href="javascript:void(0);">评审</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="javascript:void(0);">确认通过</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">有待明确</a>
+								</li>
+								<li class="dropdown-submenu">
+									<a tabindex="-1" href="javascript:void(0);">拒绝</a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="javascript:void(0);">已完成</a>
+										</li>
+										<li>
+											<a href="javascript:void(0);">延期</a>
+										</li>
+										<li>
+											<a href="javascript:void(0);">不做</a>
+										</li>
+										<li>
+											<a href="javascript:void(0);">已取消</a>
+										</li>
+										<li>
+											<a href="javascript:void(0);">设计如此</a>
+										</li>
+										
+									</ul>
+								</li>
+								
+							</ul>
+						</li>
+					</ul>
+				</div>*#
+					
+				
+#set(map={"a":"url1","b":[1,2]})
+#set(con=[{"关闭":"url1"},{"c":[{"通过":"url.."},{"a":{"aa":"urssl..","不做":"url.."}}]}])
+${(con[1].get("c")[1]).get("aa")}
 
-				    #@defaultDropDownButton()计划 #end
-				
-				    #@dropDownMenuUl()
-				
-				      #@normalItem("")已发布#end
-				
-				      #@normalItem("")已验收#end
-				
-				      #@normalItem("")空#end
-				
-				    #end
 
-				#end
+				
 				
 			#end
 			#@tinyTableContent("../../data/tabledata.pagelet") ##取数据地址 总数据
@@ -157,3 +298,7 @@
 
 
 #include("/product/page/event/mytree.page")
+
+
+
+

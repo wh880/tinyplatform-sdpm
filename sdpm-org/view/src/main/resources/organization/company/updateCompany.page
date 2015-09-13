@@ -1,0 +1,85 @@
+#@noRespsGridSystem()
+    #@tinyForm("thisform" "" "" {"class":""})
+        #@gridSysRow()
+            #@colLabel("col-3")公司名称：#end
+            #@gridSysCol(7)
+                #tinyInput(
+                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
+                    "input-text"})
+            #end
+
+        #end
+        #@gridSysRow()
+            #@colLabel("col-3")联系电话：#end
+            #@gridSysCol(7)
+                #tinyInput(
+                    "text" "phone" ""{"placeholder":"请输入联系电话","datatype":"*4-16","nullmsg":"联系电话不能为空！","id":"phone",
+                    "class":
+                    "input-text"})
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-3")传真：#end
+            #@gridSysCol(7)
+                #tinyInput(
+                    "text" "phone" ""{"placeholder":"请输入传真","datatype":"*4-16","nullmsg":"联系电话不能为空！","id":"phone",
+                    "class":
+                    "input-text"})
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-3")通讯地址：#end
+            #@gridSysCol(7)
+                #tinyInput(
+                    "text" "phone" ""{"placeholder":"请输入联系电话","datatype":"*4-16","nullmsg":"联系电话不能为空！","id":"phone",
+                    "class":
+                    "input-text"})
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-3")邮政编码：#end
+            #@gridSysCol(7)
+                #tinyInput(
+                    "text" "phone" ""{"placeholder":"请输入联系电话","datatype":"*4-16","nullmsg":"联系电话不能为空！","id":"phone",
+                    "class":
+                    "input-text"})
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-3")官网：#end
+            #@gridSysCol(7)
+                #tinyInput(
+                    "text" "phone" ""{"placeholder":"请输入联系电话","datatype":"*4-16","nullmsg":"联系电话不能为空！","id":"phone",
+                    "class":
+                    "input-text"})
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-3")内网：#end
+            #@gridSysCol(7)
+                #tinyInput(
+                    "text" "phone" ""{"placeholder":"请输入联系电话","datatype":"*4-16","nullmsg":"联系电话不能为空！","id":"phone",
+                    "class":
+                    "input-text"})
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-3")匿名登录：#end
+            #@gridSysCol(7)
+                #@tinyRadio("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})允许#end
+                #@tinyRadio("sex" "women" "women")不允许#end
+            #end
+        #end
+        #@gridSysRow()
+
+            #@gridSysCol(7)
+                #@div(divClass="col-7 col-offset-5 form-inline")
+                    #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+                #end
+            #end
+        #end
+    #end
+
+#end
+
+

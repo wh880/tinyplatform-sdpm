@@ -1,0 +1,46 @@
+#!set(activeTitle="字典类型管理",activeMenuId=currentPageId)
+#set(editpagePath="/system/page/dictionaries/dict_edit.pagelet",editpageModalId="dictEditModal",editpageModal="#"+editpageModalId)
+#set(viewpagePath="/system/page/dictionaries/dict_view.pagelet",viewpageModalId="dictViewModal",viewpageModal="#"+viewpageModalId)
+#include("/system/page/event/common.page")
+#datatablesInitSimple("#dictListTb" )
+#import("/org/tinygroup/table/components/table.component")
+#set(threeMenu="dictionary-type")
+	
+#@divDataTablebox()
+	    #@tableHeaderBar()${activeTitle}#end
+#@tableBox()
+	#@datatable("dictListTb")
+		#@tableToolbar()
+				#@radiusBtn("btn-danger" "icon-trash" "javascript:;" "deleteBatch") 批量删除#end
+				 #@aModal(editpageModal "添加" "460" "158" "btn radius btn-primary" editpagePath)
+						#@simpleI("icon-plus")添加#end
+				#end
+			#end
+			#@thead()
+				#@tr("text-c")
+					#@thW("6")<input type="checkbox" name="idCheck" value="">#end
+					#@thW("96")代码#end
+					#@thW("50")中文名#end
+					#@thW("120")操作#end
+				#end
+			#end
+			#@tbody()
+			#set(objs=[["性别","SEX"],["年龄","AGE"],["教育程度","EDUCATION"],["残疾等级","DISABILITYGRADE"],["残疾类别","DISABILITYTYPE"],["角色类型","ROLETYPE"],["用户状态","USERSTATUS"],["岗位任职规则属性","JOBRULE"],["岗位职责规则属性","JOBRESP"]])
+			#for(obj:objs)
+				#@tr("text-c")
+					#@td()<input type="checkbox" value="1" name="idCheck">#end
+					#@td()${obj[1]}#end
+					#@td()${obj[0]}#end
+					#@td("f-14 user-manage")
+						#iconOperations(viewpageModal "icon-eye-open" "查看" "460" "158" viewpagePath "ml-5")
+						#iconOperations(editpageModal "icon-edit" "编辑" "460" "158" editpagePath "ml-5")
+						#iconOperation("icon-trash" "删除" "ml-5 delBtn")
+					#end
+				#end
+			#end
+			#end
+		#end
+#end
+#end
+#simpleModal(editpageModalId)
+#simpleViewModal(viewpageModalId)

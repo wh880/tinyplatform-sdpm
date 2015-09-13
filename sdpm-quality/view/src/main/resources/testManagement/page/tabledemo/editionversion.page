@@ -22,25 +22,26 @@
 ##operationbar start1
 
 #end
-	#@div(divClass="bugBox")
-		#@p(pClass="title_sty")
-			编辑版本#end
 		#@tinyForm("thisform" "url" "post" {"class":""})
+			<div style="width:100%">
+    			<div class="infoContent">
+    				<p class="titleName">编辑版本</p>
 			#@elementItem()
 				#@colLabel()所属项目：#end
 				#@formControlDiv("col-8")
-					#@Tselect2F()
+					#@div(divClass="col-5")
+					 #@Tselect2F()
 	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">Connecticut</option>
-	                        <option value="DE">Delaware</option>
-	                        <option value="FL">Florida</option>
-	                        <option value="GA">Georgia</option>
-	                        <option value="IN">Indiana</option>
-	                        <option value="ME">Maine</option>
-	                        <option value="MD">Maryland</option>
+	                        <option value="IN">项目1</option>
+	                        <option value="ME">项目2</option>
+	                        <option value="MD">项目3</option>
 	                    	#end                
-	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+	                    	#@Tselect2Fix()
+	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
+	                    	#end
                 	  #end
+                	 #end
 					#@validateDiv("col-2")#end
 
 				#end
@@ -49,18 +50,19 @@
 			#@elementItem()
 				#@colLabel()版本：#end
 				#@formControlDiv("col-8")
-					#@Tselect2F()
+					#@div(divClass="col-5")
+					 #@Tselect2F()
 	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">Connecticut</option>
-	                        <option value="DE">Delaware</option>
-	                        <option value="FL">Florida</option>
-	                        <option value="GA">Georgia</option>
-	                        <option value="IN">Indiana</option>
-	                        <option value="ME">Maine</option>
-	                        <option value="MD">Maryland</option>
+	                        <option value="IN">版本1</option>
+	                        <option value="ME">版本2</option>
+	                        <option value="MD">版本3</option>
 	                    	#end                
-	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+#*	                    	#@Tselect2Fix()
+	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
+	                    	#end*#
                 	  #end
+                	 #end
 					#@validateDiv("col-2")#end
 
 				#end
@@ -70,18 +72,19 @@
 			#@elementItem()
 				#@colLabel()负责人：#end
 				#@formControlDiv("col-8")
-					#@Tselect2F()
+					#@div(divClass="col-5")
+					 #@Tselect2F()
 	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">Connecticut</option>
-	                        <option value="DE">Delaware</option>
-	                        <option value="FL">Florida</option>
-	                        <option value="GA">Georgia</option>
-	                        <option value="IN">Indiana</option>
-	                        <option value="ME">Maine</option>
-	                        <option value="MD">Maryland</option>
+	                        <option value="IN">A</option>
+	                        <option value="ME">B</option>
+	                        <option value="MD">C</option>
 	                    	#end                
-	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+#*	                    	#@Tselect2Fix()
+	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
+	                    	#end*#
                 	  #end
+                	 #end
 					#@validateDiv("col-2")#end
 
 				#end
@@ -91,36 +94,35 @@
 			#@elementItem()
 				#@colLabel()优先级：#end
 				#@formControlDiv("col-8")
-					#@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">Connecticut</option>
-	                        <option value="DE">Delaware</option>
-	                        <option value="FL">Florida</option>
-	                        <option value="GA">Georgia</option>
-	                        <option value="IN">Indiana</option>
-	                        <option value="ME">Maine</option>
-	                        <option value="MD">Maryland</option>
-	                    	#end                
-	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                	  #end
-				#end
+					#@div(divClass="col-5")
+	                        #@select(selectName="demo2" selectClass="select")
+	                            #@optionSelected("") #end
+	                            #@optionItem("")1#end
+	                            #@optionItem("")2#end
+	                            #@optionItem("")3#end
+	                        #end
+	                #end
+	              #end
 				#@validateDiv("col-2")#end
 			#end
 				#@elementItem()
 					#@colLabel()开始日期：#end
 					#@formControlDiv("col-8")
-						#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+						#@div(divClass="col-3")
+						#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+						#end
 					#end
 					#@validateDiv("col-2")#end
 				#end
 				#@elementItem()
 					#@colLabel()结束日期：#end
 					#@formControlDiv("col-8")
-						#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
-					#end
+						#@div(divClass="col-3")
+						#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+						#end					#end
 					#@validateDiv("col-2")#end
 				#end
-			#@elementItem()
+#*			#@elementItem()
 				#@colLabel()相关人物：#end
 				#@formControlDiv("col-8")
 					#@Tselect2F()
@@ -137,25 +139,28 @@
                 	  #end
 				#end
 				#@validateDiv("col-2")#end
-			#end
+			#end*#
 			#@elementItem()
 				#@colLabel()当前状态：#end
-				#@formControlDiv("col-5 form-inline selectList")
-					#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":"*"})
+				#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+					#@tinySelect("" "" {"class":"#####","nullmsg":"请选择","datatype":""})
 						#@optionItem("")请选择#end
 						#@optionItem("")未开始#end
 						#@optionItem("")进行中#end
 						#@optionItem("")已完成#end
 						#@optionItem("")被阻塞#end
 					#end
-
+					#end
 				#end
 				#@validateDiv("col-2")#end
 			#end
 			#@elementItem()
 				#@colLabel()任务名称：#end
 				#@formControlDiv("col-8")
-					#tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
+					#@div(divClass="col-5")
+						#tinyInput("text" "抄送给" ""{"datatype":"*","id":"抄送给","class":"input-text"})
+					#end					
 				#end
 				#@validateDiv("col-2")#end
 			#end
@@ -168,26 +173,36 @@
 				#end
 				#@validateDiv("col-2")#end
 			#end
+			#@elementItem()
+				#@colLabel()测试总结：#end
+				#@formControlDiv("col-8")
+					#@Teditor("content1" "content1" {"initialFrameHeight":"150"})#end
+
+				#end
+				#@validateDiv("col-2")#end
+			#end
 			<br>
 			#@elementItem()
-        <div class="col-12">
-            <div class="col-5">
+		        <div class="col-12">
+		            <div class="col-5">
+		
+		            </div>
+		            <div class="col-1">
+		                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+		            </div>
+		            <div class="col-1">
+		                <a href="${TINY_CONTEXT_PATH}/testManagement/page/versionSituation.page">
+		                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+		            </div>
+		            <div class="col-5"></div>
+		        </div>
+    		#end
+    	</div>
+    </div>
+	#end
+	#end
+	#end
 
-            </div>
-            <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-            </div>
-            <div class="col-1">
-                <a href="${TINY_CONTEXT_PATH}/testManagement/page/versionSituation.page">
-                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
-            </div>
-            <div class="col-5"></div>
-        </div>
-    #end
-	#end
-	#end
-	#end
-#end
 
 <script type="text/javascript">
     $(function(){

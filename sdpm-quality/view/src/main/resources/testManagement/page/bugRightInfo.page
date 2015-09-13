@@ -1,7 +1,7 @@
 
 
 
-#@div(divClass="infoContent tabInfocontents")	
+#@div(divClass="tabInfocontents")	
 	#@tabWithInit("tab_info")
 		#@tabHead()
 			#@tabHeadCol()基本信息#end
@@ -13,7 +13,7 @@
 			       		#@tbody()
 			       			#@tr()
 								#@td()所属产品#end
-			       				#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">产品1</a>#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">产品1</a>#end
 			       			#end
 			       			#@tr()
 								#@td()所属模块#end

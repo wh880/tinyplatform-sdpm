@@ -1,0 +1,14 @@
+#@divHorizontal()
+		#@viewRowCol("编码：")
+			xxxx
+		#end
+		#@viewRowCol("名称：")
+			名称1
+		#end
+		#@viewRowCol("值：")
+			2
+		#end
+		#@viewRowCol("排序号：")
+			1
+		#end
+#end

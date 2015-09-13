@@ -45,16 +45,15 @@
         #@elementItem()
         	#@colLabel("col-1")#end
         	<div class="col-9">
-           #tinyInput("text" "111" ""{"datatype":"","id":"111","class":"input-text","placeholder":"111"})
+           		#tinyInput("text" "111" ""{"datatype":"","id":"111","class":"input-text","placeholder":"用例名称"})
            </div>
         #end
-		#@elementItem()
-			#@colLabel("col-1")#end
-            <div class="col-11">
-                <div class="col-1 text-r"><label>前置条件&nbsp</label></div>
-                <div class="col-9">
-                   #tinyInput("text" "111" ""{"datatype":"","id":"111","class":"input-text"})</div>
-            </div>
+		
+        #@elementItem()
+			#@colLabel("col-2")前置条件#end
+        	#@formControlDiv("col-8")
+                	#@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符"})请输入内容#end          
+            #end
         #end
         #@elementItem()
         	#@colLabel("col-1")#end

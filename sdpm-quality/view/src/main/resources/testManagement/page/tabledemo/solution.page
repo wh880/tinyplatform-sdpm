@@ -32,22 +32,7 @@
         <div class="col-12">
          	<div class="col-2 text-r"><label>解决方案：</label></div>
          		<div class="col-4">
-            #@Tselect2F()
-	             #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                  <option value="CT">Connecticut</option>
-	                  <option value="DE">Delaware</option>
-	                  <option value="FL">Florida</option>
-	                  <option value="GA">Georgia</option>
-	                  <option value="IN">Indiana</option>
-	                  <option value="ME">Maine</option>
-	                  <option value="MD">Maryland</option>
-	               #end                
-	               #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-              #end
-              </div>
-       </div>
-     #end
-#*            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
+            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
                 #@tinyOptionItem("0")#end
                 #@tinyOptionItem("1")设计如此#end
                 #@tinyOptionItem("2")重复Bug#end
@@ -56,22 +41,22 @@
                 #@tinyOptionItem("5")无法重现#end
                 #@tinyOptionItem("6")延期解决#end
                 #@tinyOptionItem("7")不予解决#end
-            #end*#
+            #end
+              </div>
+       </div>
+     #end
+           
     #@elementItem()
         <div class="col-12">
          	<div class="col-2 text-r"><label>解决版本：</label></div>
          		<div class="col-4">
             #@Tselect2F()
 	             #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                  <option value="CT">Connecticut</option>
-	                  <option value="DE">Delaware</option>
-	                  <option value="FL">Florida</option>
-	                  <option value="GA">Georgia</option>
-	                  <option value="IN">Indiana</option>
-	                  <option value="ME">Maine</option>
-	                  <option value="MD">Maryland</option>
+	                  <option value="IN">版本1</option>
+	                  <option value="ME">版本2</option>
+	                  <option value="MD">版本3</option>
 	               #end                
-	               #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+	          ##     #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
               #end
               </div>
        </div>
@@ -91,15 +76,11 @@
          		<div class="col-4">
             #@Tselect2F()
 	             #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                  <option value="CT">Connecticut</option>
-	                  <option value="DE">Delaware</option>
-	                  <option value="FL">Florida</option>
-	                  <option value="GA">Georgia</option>
-	                  <option value="IN">Indiana</option>
-	                  <option value="ME">Maine</option>
-	                  <option value="MD">Maryland</option>
+	                  <option value="IN">A</option>
+	                  <option value="ME">B</option>
+	                  <option value="MD">C</option>
 	               #end                
-	               #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+	        ##       #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
               #end
               </div>
        </div>
