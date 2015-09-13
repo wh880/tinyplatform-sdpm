@@ -29,7 +29,8 @@
 #end
 #@tinyForm("thisform" "" "" {"class":"test"})
 	#@div(divClass="operationbar active_btn")
-    	<span style="border:solid 1px grey;">0001</span><a href="${TINY_CONTEXT_PATH}/document/doc-view.page">文档名称></a>编辑</p>
+	#set(ID="0001")
+    	<span style="border:solid 1px grey;">${ID}</span><a href="${TINY_CONTEXT_PATH}/document/doc-view.page">文档名称></a>编辑</p>
     #end
     #@elementItem()
         <div class="col-12">
@@ -130,7 +131,10 @@
         </div>
 	#end
 #end
-     
+#@dialog("myModal")
+        #@dialogHeader()#end
+        #@dialogBody()<p></p>#end
+#end     
 
 <script type="text/javascript">
     $(function(){

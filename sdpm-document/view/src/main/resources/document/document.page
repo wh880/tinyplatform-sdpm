@@ -46,7 +46,7 @@
 	#end
 #end
 #include("treeNew.page")
-	#@dialog("myModal1")
+	#@dialog("myModal")
         #@dialogHeader()#end
         #@dialogBody()<p></p>#end
     #end
