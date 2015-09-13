@@ -8,6 +8,13 @@
 
 #import("/org/tinygroup/button/components/button_smart.component")
 
+#macro liDropdownMenu(rName)
+	<li class="dropdown-submenu">
+		<a tabindex="-1" data-toggle="tab">${rName}</a>
+		#bodyContent
+	</li>
+#end
+
 #@tabBodyCol("ptop-5")
 			##operationbar start
 			#@div(divClass="operationbar")
@@ -79,76 +86,77 @@
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				
 				#@aModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger" "/product/page/tabledemo/product-demand-del.pagelet")批量关闭#end
-				#@aModal("#myModal" "编辑" "1300" "500" "btn radius btn-primary" "/product/page/tabledemo/product-demand-edit.pagelet")编辑#end
+#*				#@aModal("#myModal" "编辑" "1300" "500" "btn radius btn-primary" "/product/page/tabledemo/product-demand-edit.pagelet")编辑#end*#
 				
 				
+				#@buttonGroup()
+#*	            	#@buttonPrimary()ssds按钮#end   *#
+					#@aModal("#myModal" "编辑" "1300" "500" "btn radius btn-primary" "/product/page/tabledemo/product-demand-edit.pagelet")编辑#end
 				
+		                
+	                #aDropdown("btn btn-primary")
+	                
+	                #@ulDropdownMenu()
+	                	#@liDropdownMenu("指派给")
+	                		#@ulDropdownMenu()
+		                		#@dropdownItem("javascript:void(0);")admin#end
+		                		#@dropdownItem("javascript:void(0);")张三#end
+		                		#@dropdownItem("javascript:void(0);")lisi#end
+		                	#end
+	                	#end
+	                	
+	                	#@liDropdownMenu("阶段")
+	                		#@ulDropdownMenu()
+		                		#@dropdownItem("javascript:void(0);")空#end
+		                		#@dropdownItem("javascript:void(0);")未开始#end
+		                		#@dropdownItem("javascript:void(0);")已计划#end
+		                		#@dropdownItem("javascript:void(0);")已立项#end
+		                		#@dropdownItem("javascript:void(0);")研发中#end
+		                		#@dropdownItem("javascript:void(0);")完毕#end
+		                		#@dropdownItem("javascript:void(0);")测试中#end
+		                		#@dropdownItem("javascript:void(0);")测试完毕#end
+		                		#@dropdownItem("javascript:void(0);")已验收#end
+		                		#@dropdownItem("javascript:void(0);")已发布#end
+		                	#end
+	                	#end
+	                	
+	                	#@liDropdownMenu("计划")
+	                		#@ulDropdownMenu()
+		                		#@dropdownItem("javascript:void(0);")空#end
+		                		#@dropdownItem("javascript:void(0);")计划1#end
+		                		#@dropdownItem("javascript:void(0);")计划2#end
+		                	#end
+	                	#end
+	                	
+	                	#@liDropdownMenu("评审")
+	                		#@ulDropdownMenu()
+		                		#@dropdownItem("javascript:void(0);")确认通过#end
+		                		#@dropdownItem("javascript:void(0);")有待明确#end
+#*		                		#@liDivider()<hr/>#end*#
+		                		#@liDropdownMenu("拒绝")
+			                		#@ulDropdownMenu()
+				                		#@dropdownItem("javascript:void(0);")已完成#end
+				                		#@dropdownItem("javascript:void(0);")延期#end
+				                		#@dropdownItem("javascript:void(0);")不做#end
+				                		#@dropdownItem("javascript:void(0);")已取消#end
+				                		#@dropdownItem("javascript:void(0);")计划如此#end
+				                	#end
+			                	#end
+		                	#end
+	                	#end
+	                #end
+	            #end	
 				
-				#@dropdown("操作")
-					#@dropdownMenu()
-						#@dropdownSubmenu("指派给")
-							#@dropdownMenu()
-								#dmenu("admin")
-								#dmenu("张三")
-								#dmenu("lisi")
-							#end
-						#end
-					
-						#@dropdownSubmenu("阶段")
-							#@dropdownMenu()
-								#dmenu("空")
-								#dmenu("未开始")
-								#dmenu("已计划")
-								#dmenu("已立项")
-								#dmenu("研发中")
-								#dmenu("完毕")
-								#dmenu("测试中")
-								#dmenu("测试完毕")
-								#dmenu("已验收")
-								#dmenu("已发布")
-							#end
-						#end
-						
-						#@dropdownSubmenu("计划")
-							#@dropdownMenu()
-								#dmenu("空")
-								#dmenu("计划1")
-								#dmenu("计划2")
-								
-							#end
-						#end
-						
-						#@dropdownSubmenu("评审")
-							#@dropdownMenu()
-								#dmenu("确认通过")
-								#dmenu("有待明确")
-								#@dropdownSubmenu("拒绝")
-									#@dropdownMenu()
-										#dmenu("已完成")
-										#dmenu("延期")
-										#dmenu("不做")
-										#dmenu("已取消")
-										#dmenu("设计如此")
-									#end
-								#end
-								
-							#end
-						#end
-					#end
-				#end
-								
-				
-				
-#*
-				<div class="dropdown">
+
+#*				<div class="dropdown">
 					<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">操作<span class="caret"></span></a>
 					<ul class="dropdown-menu multi-level" role="menu">
 						
 						<li class="dropdown-submenu">
-							<a tabindex="-1" href="javascript:void(0);">指派给</a>
+							<a tabindex="-1" href="javascript:void(0);" >指派给</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="javascript:void(0);">admin</a>
+									<a href="javascript:void(0);" tabindex="-1" data-toggle="tab">admin</a>
 								</li>
 								<li>
 									<a href="javascript:void(0);">zhangsan</a>
