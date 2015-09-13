@@ -1,7 +1,7 @@
 #!set(activeTitle="属性管理",activeMenuId="9.5")
 #import("/org/tinygroup/form/components/form.component")
 <style>
-.attributeList{padding:0 10px;}
+.attributeList{padding:0 0px;margin-top: -11px}
 .treeList .select-box{margin-top:12px;}
 .treeList .col-4{ margin-right:8px;}
 .treeList li{ margin-bottom:7px;}
