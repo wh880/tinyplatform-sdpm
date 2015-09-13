@@ -82,5 +82,13 @@
         #end
         #@validateDiv("col-2")#end
     #end
+    
+    #@elementItem()
+	    #@div(divClass="col-3" divStyle="margin: 0 36%;")
+	      #tinyInput("submit" "submitbtn" " 导出 " {"class":"btn btn-primary"})
+	    #end
+	#end
+    
+    
 
 #end

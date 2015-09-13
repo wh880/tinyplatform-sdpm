@@ -1,5 +1,6 @@
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/table/components/table.component")
+#import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/Smart-treeview/components/treeview_smart.component")
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 #!set(linkName="product-modular",sonitem="
@@ -31,7 +32,7 @@
 
         #import("/org/tinygroup/table/components/table.component")
 
-    <table class="table table-border table-bordered" cellspacing="0">
+    <table class="table " cellspacing="0">
 
 
         #@tbody()
@@ -55,6 +56,7 @@
                                 #@tinyOptionItem("en")部长#end
                                 #@tinyOptionItem("ta")检察长#end
                             #end
+                            #buttonRadiusDefault(btClass="btn btn-default btn-primary" caption="复制")
                         #end
                         #@validateDiv("col-2")#end
                     #end
