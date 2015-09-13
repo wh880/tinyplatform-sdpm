@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<menu id="service" parent-id="0" name="服务管理" href="/service/client/clientUser.page" icon="icon-phone" sort="300"
+<menu id="service" parent-id="0" name="客服" href="/service/client/clientUser.page" icon="icon-phone" sort="300"
       isShow="1">
     <menu id="client" name="客户" href="/service/client/clientUser.page" sort="100" isShow="1"
           ></menu>

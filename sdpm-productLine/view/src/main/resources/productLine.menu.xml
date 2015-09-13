@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="productLine" parent-id="0" name="产品线管理" href="/productLine/page/project/productLine.page" icon="icon-th-large"
+<menu id="productLine" parent-id="0" name="产品线" href="/productLine/page/project/productLine.page" icon="icon-th-large"
       sort="900" isShow="1">
 
     <menu id="line-product" parent-id="productLine" name="产品" href="/productLine/page/project/productLine.page" icon=""
