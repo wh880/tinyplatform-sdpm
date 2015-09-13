@@ -2,7 +2,7 @@
 #@tinyForm("thisform" "url" "post" {"class":""})
 				#@elementItem()
 					#@colLabel("col-1")Bug创建：#end
-					#@formControlDiv("col-10")
+					#@formControlDiv("col-11")
 						#@div(divClass="col-2")
 							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
 						#end
@@ -10,9 +10,9 @@
 						#@div(divClass="col-2")
 							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
 						#end
-						#@div(divClass="col-4")
+						#@div(divClass="col-3")
 							#@colLabel("col-3")产品：#end
-							#@div(divClass="col-8")
+							#@div(divClass="col-9")
 							#@Tselect2F()
                     			#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         			<option value="CT">请选择产品</option>
@@ -21,10 +21,8 @@
                         			<option value="GA">产品3</option>   
                     			#end               
                     			#@Tselect2Fix()
-                    				<a href="http://www.baidu.com" class="r ">增加</a>
-                    				<a href="#">全部</a>
-                    			#end
-                			#end
+                    				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
+	                    			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end                			#end
                 			#end
 						#end
 						#@div(divClass="col-3")
@@ -38,12 +36,16 @@
                         			<option value="GA">项目3</option>   
                     			#end               
                     			#@Tselect2Fix()
-                    				<a href="http://www.baidu.com" class="r ">增加</a>
-                    				<a href="#">全部</a>
+                    				<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
+	                    			<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
                     			#end
                 			#end
                 			#end
-						#end						
+						#end
+						<div class="col-1">
+							<a href="${TINY_CONTEXT_PATH}/statistic/page/org.page">
+						<input style="float:right" type="button" class="commitBtn" value="保存" /></a>
+				</div>						
 					#end					
 				#end																				
 #end

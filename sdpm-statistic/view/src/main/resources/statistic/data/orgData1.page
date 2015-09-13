@@ -1,5 +1,5 @@
 #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
-
+<div style="padding-bottom:10px">
 #@tinyForm("thisform" "url" "post" {"class":""})
 		#@elementItem()
 			#@formControlDiv("col-12")
@@ -14,8 +14,8 @@
 					</div>
 				</div>
 				<div class="col-3">
-					#@colLabel("col-5")每天工时：#end
-	                <div class="input-group col-7">
+					#@colLabel("col-4")每天工时：#end
+	                <div class="input-group col-8">
 	                    <input type="text" class="form-control col-3" placeholder="" aria-describedby="basic-addon2">
 	                    <span class="input-group-addon" id="basic-addon2">小时</span>
 	                </div>
@@ -38,11 +38,11 @@
 			#end					
 		#end
 #end
-
+</div>
 <script type="text/javascript">
     $(".select2").select2();
 </script>
-<br/>
+
 #@tableStriped("table-border")
     #@thead()
         #@tr("text-c")
