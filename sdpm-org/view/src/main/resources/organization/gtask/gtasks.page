@@ -76,7 +76,10 @@
                         #@colLabel("col-3")#end
                         #@gridSysCol(9)
                             <div style="float: right;">
-                                #buttonRadiusPrimary(caption="查看")
+                                <button type="submit" id="submit" class="commitBtn"
+                                        onclick="window.location.href='../gtask/gtasks.page'">
+                                    查看
+                                </button>
 
                             </div>
 
