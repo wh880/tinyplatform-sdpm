@@ -2,7 +2,8 @@
 #import("/org/tinygroup/form/components/form.component")
 <style>
 #*.attributeList{padding:0 10px;}*#
-.treeList .select-box{margin-top:12px;}
+.treeList .select-box{margin-top:10px;}
+.treeList .select-box .size-M{height:34px;}
 .treeList .col-4{ margin-right:8px;}
 .treeList li{ margin-bottom:7px;}
 .treeList .btn-add{margin-top:10px;margin-left:6px;}
@@ -97,9 +98,9 @@ $(document).ready(function(){
 });
 </script>
 
-<div>
+<div class="col-12" style="top:-14px">
 	<ul class="treeList">
-		<li class="alternativeBox top">
+		<li class="alternativeBox">
 #*		<div class="col-4">
 			#@selectRadiusBox()
 			    #@select(selectName="itemBarName",selectId="selectItems")

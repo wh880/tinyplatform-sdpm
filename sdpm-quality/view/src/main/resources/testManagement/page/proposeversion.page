@@ -100,14 +100,18 @@
         #@elementItem()
             #@colLabel()开始日期：#end
             #@formControlDiv("col-8")
-                #@tinyDateInput("birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+            	#@div(divClass="col-5")
+                #@tinyDateInput("birthday" "" "YYYY-MM-DD HH:mm:ss" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
+           		#end
             #end
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
             #@colLabel()结束日期：#end
             #@formControlDiv("col-8")
-                #@tinyDateInput("birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+                #@div(divClass="col-5")
+                #@tinyDateInput("birthday" "" "YYYY-MM-DD HH:mm:ss" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
+           		#end
             #end
             #@validateDiv("col-2")#end
         #end

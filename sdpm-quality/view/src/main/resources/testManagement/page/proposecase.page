@@ -5,8 +5,6 @@
     .select_boxes{margin-top:0}
     .tableBoxes tbody tr{height:30px;}
     .tableBoxes tbody tr td{padding:10px 7px;vertical-align:middle}
-
-    .top {top: -15px}
 </style>
 
 
@@ -196,7 +194,7 @@
         #end
         #@elementItem()
             #@colLabel()附件：#end
-            #@formControlDiv("col-8 top")
+            #@formControlDiv("col-8")
                 #include("/testManagement/page/fileupload.page")
             #end
             #@validateDiv("col-2")#end
