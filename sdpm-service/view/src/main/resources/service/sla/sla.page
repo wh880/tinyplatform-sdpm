@@ -14,8 +14,6 @@
         ##operationbar star
             #@div(divClass="operationbar")
             <span class="f">
-##					<a href="#" class="active_btn">详情</a>
-
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
             <span class="r">
@@ -26,7 +24,7 @@
                 <a href="${TINY_CONTEXT_PATH}/service/sla/slaAdd.page">#buttonIcon(iconClass="icon-plus")新建协议</a>
 				</span>
                 #div(divClass="clearfix")
-                #include("/service/serviceCom/mulsearch.page")
+                #include("/service/sla/multiSearch.page")
             #end
         ##operationbar end
         #end
