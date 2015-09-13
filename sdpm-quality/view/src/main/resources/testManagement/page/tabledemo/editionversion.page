@@ -95,12 +95,13 @@
 				#@colLabel()优先级：#end
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-	                        #@select(selectName="demo2" selectClass="select")
-	                            #@optionSelected("") #end
-	                            #@optionItem("")1#end
-	                            #@optionItem("")2#end
-	                            #@optionItem("")3#end
-	                        #end
+	                        #@Tselect2F()
+	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="IN">1</option>
+	                        <option value="ME">2</option>
+	                        <option value="MD">3</option>
+	                    	#end                	                    
+                	  #end
 	                #end
 	              #end
 				#@validateDiv("col-2")#end
@@ -108,7 +109,7 @@
 				#@elementItem()
 					#@colLabel()开始日期：#end
 					#@formControlDiv("col-8")
-						#@div(divClass="col-3")
+						#@div(divClass="col-5")
 						#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
 						#end
 					#end
@@ -117,7 +118,7 @@
 				#@elementItem()
 					#@colLabel()结束日期：#end
 					#@formControlDiv("col-8")
-						#@div(divClass="col-3")
+						#@div(divClass="col-5")
 						#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
 						#end					#end
 					#@validateDiv("col-2")#end

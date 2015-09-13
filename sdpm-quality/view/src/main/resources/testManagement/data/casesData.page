@@ -23,7 +23,7 @@
 						#@td()success#end
 						#@td()正常#end
 						 #@td()
-							#iconOperations("#myModal" "icon-play" "执行" "865" "300" "/testManagement/page/tabledemo/execution.pagelet" "ml-5")
+							#iconOperations("#myModal" "icon-play" "执行" "865" "400" "/testManagement/page/tabledemo/execution.pagelet" "ml-5")
 							#iconOperations("#myModal" "icon-flag" "结果" "600" "200" "/testManagement/page/tabledemo/result.pagelet" "ml-5")
                          	<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editioncase.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
                          	<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page" title="复制">#buttonIcon(iconClass="icon-copy")</a>

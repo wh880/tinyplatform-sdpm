@@ -31,11 +31,16 @@
 
             #end
         #end
-
+        <center>
+	        <button type="button" id="back" class="btn">上一个</button>
+			<button type="submit" id="" class="btn btn-success">通过</button>
+			<button type="submit" id="" class="btn btn-danger">失败</button>
+			<button type="button" id="back" class="btn">下一个</button>
+		</center>
     #end
     #@div(divClass="infoContent")
     <p class="titleName">测试结果   共执行0次</p>
-		<p>1111</p>
+		#include("../historyRecord.page")
     #end
 
 #end
