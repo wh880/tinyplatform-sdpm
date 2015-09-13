@@ -27,14 +27,14 @@
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
             <span class="activeSearch">
-                <a href="#" class="active_btn">今天</a>
-					<a href="#">昨天</a>
-					<a href="#">前天</a>
-					<a href="#">本周</a>
-					<a href="#">上周</a>
-                   <a href="#">本月</a>
-					<a href="#">上月</a>
-					<a href="#">所有</a>
+                <a href="../active/active.page" class="active_btn">今天</a>
+					<a href="../active/active.page">昨天</a>
+					<a href="../active/active.page">前天</a>
+					<a href="../active/active.page">本周</a>
+					<a href="../active/active.page">上周</a>
+                   <a href="../active/active.page">本月</a>
+					<a href="../active/active.page">上月</a>
+					<a href="../active/active.page">所有</a>
 
                  </span>
                 #@formControlDiv("col-2")
