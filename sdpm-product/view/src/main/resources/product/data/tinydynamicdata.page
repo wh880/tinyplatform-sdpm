@@ -12,7 +12,7 @@
 #for(var:[1..pagesize])
 #@tr()
 
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()<input type="checkbox" value="1" name="product-dymanic">#end
 	#@td()8月30日 13:48#end
 	#@td()Demo#end
 	#@td()关闭了#end

@@ -11,7 +11,7 @@
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
-    #@td()<input type="checkbox" value="1" name="idCheck">#end
+    #@td()<input type="checkbox" value="1" name="product-release">#end
     #@td()${var}#end
     #@td()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-release/product-al-req.page">工程发布</a>#end
     #@td()2.20.1#end
