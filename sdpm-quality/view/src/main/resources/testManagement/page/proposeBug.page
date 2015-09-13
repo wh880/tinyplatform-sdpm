@@ -54,7 +54,6 @@
 	                        <option value="DE">/2/3</option>
 	                        <option value="IN">/3/4</option>
 	                    	#end                
-	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 	  #end
 #*					#@tinySelect("lang" "zh" {"class":"select2"})
 							#@tinyOptionItem("zh")/首页#end

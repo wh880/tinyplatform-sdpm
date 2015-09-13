@@ -35,7 +35,6 @@
 	                        <option value="ME">B</option>
 	                        <option value="MD">C</option>
 	                    	#end                
-	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 	  #end	             
         	#end
     #end
