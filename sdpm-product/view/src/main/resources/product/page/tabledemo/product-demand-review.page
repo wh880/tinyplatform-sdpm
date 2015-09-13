@@ -12,7 +12,7 @@
 
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
-        <p class="titleName">变更</p>
+        <p class="titleName">评审</p>
  
     <div class="RTtitle">
         <button type="submit" id="submit" class="commitBtn">保存</button>

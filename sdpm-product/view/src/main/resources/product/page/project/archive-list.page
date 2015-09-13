@@ -20,7 +20,7 @@
 		#@toggleBox({"class":"open"})
 		#@toggleLeft({"class":"aclass"})
 		#@settoggleLeftTitle()
-				禅道测试
+				文档列表
 			#end
 			
 			#@settoggleLeftBody("treeLeftbox")

@@ -117,7 +117,7 @@ $(document).ready(function(){
 			    #end
 			#end
 		</div>
-			<input class="btn radius btn-info btn-add item-btn-add" type="button"  value="添加">
+			<input class="btn radius btn-info btn-add item-btn-add" type="button"  value="添加" style="margin-top: 12px">
 	</li>
 ##	<li class="mobileBtn">
 ##		

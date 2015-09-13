@@ -17,7 +17,7 @@
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-release/product-al-bug.page?cname=bug" >#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
 				
 				#iconOperations("#myModal" "icon-common-edit icon-pencil" "编辑发布" "865" "448" "/product/page/tabledemo/product-addrelease.pagelet" "ml-5")
-				#iconOperation(" icon-remove" "删除发布" "ml-5")
+				#@iconOperations("#myModal" "icon-remove" "删除" "200" "50""/testManagement/page/tabledemo/delete.pagelet" "ml-5")#end&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/product-release.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
 				</span>#div(divClass="clearfix")
 				
