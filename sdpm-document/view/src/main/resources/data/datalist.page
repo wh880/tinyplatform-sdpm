@@ -18,8 +18,11 @@
 	#@td()阿炉添加#end
 	#@td()2015/03/25 21:49#end
 	 #@td()
-	 	<a href="${TINY_CONTEXT_PATH}/document/table-edit.page">#buttonIcon(iconClass="icon-pencil")</a>	    
-		#iconOperation(" icon-remove" "删除" "ml-5")
+	 	<a href="${TINY_CONTEXT_PATH}/document/table-edit.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>	    
+	##	#iconOperation(" icon-remove" "删除" "ml-5")
+		#@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)
+								<i class="icon-remove"></i>
+							#end
 	#end
 #end
 #end
