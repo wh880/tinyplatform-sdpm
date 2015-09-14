@@ -45,16 +45,14 @@
                     "icon-sitemap")建用例</a>&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page" title="编辑">#buttonIcon(iconClass=
                     "icon-pencil")</a>
-    #*
-                    <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page" title="beizhu">#buttonIcon(iconClass="icon-comment-alt")</a>
-    *#
-        <a href="#" title="beizhu">#buttonIcon(iconClass="beizhu icon-comment-alt")</a>
+
+        <a href="#" title="备注">#buttonIcon(iconClass="备注 icon-comment-alt")</a>
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
                    title="复制">#buttonIcon(iconClass="icon-copy")</a>
-        #iconOperations("#myModal" "icon-remove" "删除" "200" "50"
-            "/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass=
-                    "icon-reply")</a>
+        #@delItemsdpm()#buttonIcon(iconClass="icon-remove")#end
+
+        <a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass=
+            "icon-reply")</a>
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"
                    title="上一个">#buttonIcon(iconClass="icon-pre icon-chevron-left")</a>
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"
@@ -107,11 +105,10 @@
                     "icon-sitemap")建用例</a>&nbsp;&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page" title="编辑">#buttonIcon(iconClass=
                     "icon-pencil")</a>&nbsp;&nbsp;
-	            <a href="#" title="beizhu">#buttonIcon(iconClass="beizhu icon-comment-alt")</a>&nbsp;&nbsp;		<a
+	            <a href="#" title="备注">#buttonIcon(iconClass="备注 icon-comment-alt")</a>&nbsp;&nbsp;		<a
                    href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
                    title="复制">#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
-               #iconOperations("#myModal" "icon-remove" "删除" "200" "50"
-                   "/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
+               #@delItemsdpm()#buttonIcon(iconClass="icon-remove")#end&nbsp
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass=
                     "icon-reply")</a>&nbsp;&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"

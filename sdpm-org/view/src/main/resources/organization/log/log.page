@@ -226,7 +226,8 @@
                             #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
                             #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
                             #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})日期#end
-                            #@tinyTh({"class":"","rel":"sortname"})登记人#end
+                            #@tinyTh({"class":"","rel":"sortname"})用户#end
+                            #@tinyTh({"class":"","rel":"sortname"})部门#end
                             #@tinyTh({"class":"sorting","rel":"sortname"})工作内容#end
                             #@tinyTh({"class":"sorting","rel":"sortname"})耗时#end
                             #@tinyTh({"class":"sorting","rel":"sortname"})剩余#end

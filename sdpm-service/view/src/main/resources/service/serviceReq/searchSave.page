@@ -1,0 +1,12 @@
+#@noRespsGridSystem()
+    #@tinyForm("thisform" "" "" {"class":"test"})
+        #@gridSysRow()
+            #@gridSysCol(12)
+                #tinyInput(
+                    "text" "username" ""{"placeholder":"","nullmsg":"不能为空！","id":"username","class":
+                    "input-text"})
+            #end
+        #end
+    #end
+#end
+

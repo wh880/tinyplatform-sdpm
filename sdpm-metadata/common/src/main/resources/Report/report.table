@@ -1,34 +1,33 @@
-<tables id="9c8b0816a6074048b6228d5feed9a66a" package-name="org.tinygroup.alm.report">
-  <table name="serviceReport" title="&amp;#26381;&amp;#21153;&amp;#25253;&amp;#21578;&amp;#34920;" schema="" package-name="org.tinygroup.alm.report">
-    <description></description>
-    <table-field standard-field-id="549475de79d2467e9b43e5bc6b20a4e0" primary="true" unique="true" not-null="false" id="sr_id" auto-increase="false"/>
-    <table-field standard-field-id="232a67211f8b4fe7adf8b78bc24d220d" primary="false" unique="false" not-null="false" id="sr_title" auto-increase="false"/>
-    <table-field standard-field-id="1bef42baf7a442b4ba21bdfffc035fa9" primary="false" unique="false" not-null="false" id="sr_type" auto-increase="false"/>
-    <table-field standard-field-id="78fbf0d359164ed9a1a3cd32831a32f0" primary="false" unique="false" not-null="false" id="sr_end_date" auto-increase="false"/>
-    <table-field standard-field-id="3782d3737ace47e6996bf932187fe4e6" primary="false" unique="false" not-null="false" id="sr_begin_date" auto-increase="false"/>
-    <table-field standard-field-id="73e23ba81e2041198cacb01d10ac1388" primary="false" unique="false" not-null="false" id="sr_create_by" auto-increase="false"/>
-    <table-field standard-field-id="9bd9b8486eab409da7849710fa2673cc" primary="false" unique="false" not-null="false" id="sr_create_date" auto-increase="false"/>
-    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
-    <table-field standard-field-id="8edbec90df274a01ae929d3233948028" primary="false" unique="false" not-null="false" id="dept_id" auto-increase="false"/>
-    <table-field standard-field-id="110c35fe3a064f5c98a1c93239005a06" primary="false" unique="false" not-null="false" id="productline_name" auto-increase="false"/>
-    <table-field standard-field-id="ff11109eff4a458b9d19baf0071382e6" primary="false" unique="false" not-null="false" id="product_name" auto-increase="false"/>
-    <table-field standard-field-id="8fbca2c0791f4953a0f18be7ba2093e0" primary="false" unique="false" not-null="false" id="request_count" auto-increase="false"/>
-    <table-field standard-field-id="0e6485015bd048b8b569d433a12ad798" primary="false" unique="false" not-null="false" id="request_count_client" auto-increase="false"/>
-    <table-field standard-field-id="f36289709fd24f70bd49cff4267f1e34" primary="false" unique="false" not-null="false" id="request_count_reply_intime" auto-increase="false"/>
-    <table-field standard-field-id="0f5d2afaa6604434a1c0da868775d524" primary="false" unique="false" not-null="false" id="request_count_commit" auto-increase="false"/>
-    <table-field standard-field-id="83878e0f13c04b0eb6afb18307827641" primary="false" unique="false" not-null="false" id="request_count_expired" auto-increase="false"/>
-    <table-field standard-field-id="69b4b5ba8cf344d0853293af94b929ed" primary="false" unique="false" not-null="false" id="request_count_released" auto-increase="false"/>
-    <table-field standard-field-id="043ae12f54cd43bd9a01b8bfd1497f89" primary="false" unique="false" not-null="false" id="request_commit_span" auto-increase="false"/>
-    <table-field standard-field-id="98f09380c32a4dbf9826e6da1123eb69" primary="false" unique="false" not-null="false" id="request_release_span" auto-increase="false"/>
-    <table-field standard-field-id="9e288be1ea3d4fd6876db42647d18c40" primary="false" unique="false" not-null="false" id="request_count_bug" auto-increase="false"/>
-    <table-field standard-field-id="fbc6bab57b6e44e09380df357e1ad76c" primary="false" unique="false" not-null="false" id="request_count_n_req" auto-increase="false"/>
-    <table-field standard-field-id="527c4ae544204d15bfb18cbae225f030" primary="false" unique="false" not-null="false" id="request_count_c_req" auto-increase="false"/>
-    <table-field standard-field-id="8f8a5db4149d482792ede561fa91bbec" primary="false" unique="false" not-null="false" id="request_count_need_review" auto-increase="false"/>
-    <table-field standard-field-id="6a0f5e8093e2440b87d5c74e1b941f17" primary="false" unique="false" not-null="false" id="request_count_reviewed" auto-increase="false"/>
-    <table-field standard-field-id="96dda7001b804737bd97ff62d2f7171b" primary="false" unique="false" not-null="false" id="request_count_reviewed_pass" auto-increase="false"/>
-    <table-field standard-field-id="2ea244df45434ac6a72ca27bfdc2cbea" primary="false" unique="false" not-null="false" id="request_count_client_feed_back" auto-increase="false"/>
-    <table-field standard-field-id="6623d6a8710c46119d3fdb2e54a8b984" primary="false" unique="false" not-null="false" id="request_count_add_up" auto-increase="false"/>
-    <table-field standard-field-id="218f524b37c0472ba90df4ad374be25c" primary="false" unique="false" not-null="false" id="request_score_total" auto-increase="false"/>
-    <table-field standard-field-id="b91f053ceeb141c58d25cf5cd03cea00" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+<tables id="b1ea8a6e4ad34d9594ef84f0a4a84689" package-name="org.tinygroup.alm.report">
+  <table id="c87685fe9de04a11aa2cce32ec1c9065" name="serviceReport" title="服务报告表" packageName="org.tinygroup.alm.report">
+    <table-field standard-field-id="4933ab0a32374a0cb182f43543545408" primary="true" unique="true" not-null="false" id="sr_id" auto-increase="false"/>
+    <table-field standard-field-id="bb7952efe9f24f49bfe7d7a3f78dd958" primary="false" unique="false" not-null="false" id="sr_title" auto-increase="false"/>
+    <table-field standard-field-id="dd01cf01d509460a9c4bb28f68e1ba55" primary="false" unique="false" not-null="false" id="sr_type" auto-increase="false"/>
+    <table-field standard-field-id="7f3fde03be5349ff8a3ffba8f113b60a" primary="false" unique="false" not-null="false" id="sr_end_date" auto-increase="false"/>
+    <table-field standard-field-id="b8b095ed11a445ef8329b70eea7c435a" primary="false" unique="false" not-null="false" id="sr_begin_date" auto-increase="false"/>
+    <table-field standard-field-id="ed4ef2b727e44825976595936c1c952d" primary="false" unique="false" not-null="false" id="sr_create_by" auto-increase="false"/>
+    <table-field standard-field-id="bd316808b905442e94adf4682a983567" primary="false" unique="false" not-null="false" id="sr_create_date" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="1593c6855e5f4534be78b058803e3706" primary="false" unique="false" not-null="false" id="dept_id" auto-increase="false"/>
+    <table-field standard-field-id="b296ca3761b546669e9f9c1fc706c142" primary="false" unique="false" not-null="false" id="productline_name" auto-increase="false"/>
+    <table-field standard-field-id="0f92249448b4481ea126b834de0f40a2" primary="false" unique="false" not-null="false" id="product_name" auto-increase="false"/>
+    <table-field standard-field-id="77a2470900194e7f87e5d35e5f9c650b" primary="false" unique="false" not-null="false" id="request_count" auto-increase="false"/>
+    <table-field standard-field-id="b34a71c9971d4a9c9e59eb57455ad14d" primary="false" unique="false" not-null="false" id="request_count_client" auto-increase="false"/>
+    <table-field standard-field-id="c462ce26eef144cbb495ceb40e9f22bb" primary="false" unique="false" not-null="false" id="request_count_reply_intime" auto-increase="false"/>
+    <table-field standard-field-id="4bf41539826e407fb9b2e4278454db5a" primary="false" unique="false" not-null="false" id="request_count_commit" auto-increase="false"/>
+    <table-field standard-field-id="40618defbdbc421b9f40f82c1d33e2b4" primary="false" unique="false" not-null="false" id="request_count_expired" auto-increase="false"/>
+    <table-field standard-field-id="2b4d28f8e80945cba469f9ad0f69cdec" primary="false" unique="false" not-null="false" id="request_count_released" auto-increase="false"/>
+    <table-field standard-field-id="9e1b5f3daf944a5ebb66b65a7ee202db" primary="false" unique="false" not-null="false" id="request_commit_span" auto-increase="false"/>
+    <table-field standard-field-id="100f40920c7c4d23aedb81b852ca76b5" primary="false" unique="false" not-null="false" id="request_release_span" auto-increase="false"/>
+    <table-field standard-field-id="1c3bfe2c0aa54f87912df2ee36de7f94" primary="false" unique="false" not-null="false" id="request_count_bug" auto-increase="false"/>
+    <table-field standard-field-id="447dd7e1b2964fe7878687397fda317f" primary="false" unique="false" not-null="false" id="request_count_n_req" auto-increase="false"/>
+    <table-field standard-field-id="019d2accfb5745c2a77fcdd8d12d2f28" primary="false" unique="false" not-null="false" id="request_count_c_req" auto-increase="false"/>
+    <table-field standard-field-id="71d54e48d6674b8eb620ddd16d6b7f6f" primary="false" unique="false" not-null="false" id="request_count_need_review" auto-increase="false"/>
+    <table-field standard-field-id="13b4fdfd5da34b90a080a919e036e826" primary="false" unique="false" not-null="false" id="request_count_reviewed" auto-increase="false"/>
+    <table-field standard-field-id="56994471f77143e3bde0a49efd4a6cdc" primary="false" unique="false" not-null="false" id="request_count_reviewed_pass" auto-increase="false"/>
+    <table-field standard-field-id="7d34c8cc1c70443aa38fec5e5edc377d" primary="false" unique="false" not-null="false" id="request_count_client_feed_back" auto-increase="false"/>
+    <table-field standard-field-id="e94858b35a5c4bb4bac6edff9815233e" primary="false" unique="false" not-null="false" id="request_count_add_up" auto-increase="false"/>
+    <table-field standard-field-id="d42e72f1b904499387c5ef37b9f99789" primary="false" unique="false" not-null="false" id="request_score_total" auto-increase="false"/>
+    <table-field standard-field-id="49ae069b1b04465ab4b6966e3615cee8" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
   </table>
 </tables>

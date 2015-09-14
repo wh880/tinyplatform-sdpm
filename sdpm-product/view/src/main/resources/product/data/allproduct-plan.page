@@ -20,10 +20,16 @@
 	#@td()2015-09-02#end
 	#@td()2015-10-02#end
 	 #@td()
+
 		 #foreach(m:menuManager.getScopeMenus("product-pl"))
+			 #if(m.id!="product-plan-remove")
              <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${m.href}"><i class="${m.icon}"></i></a>
+				 #else
+				&nbsp; #@tinyTableItemRemove("#" "id")<i class="icon-remove"></i>#end
+			 #end
+
 		 #end
-		&nbsp; #@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)<i class="icon-remove"></i>#end
+
 	 	#*<a title="关联需求" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-plan/product-al-req.page?cname=demand"><i class="icon-link"></i></a>
 	 	<a title="关联BUG" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-plan/product-al-bug.page?cname=bug"><i class="icon-bug"></i></a>
 	 	<a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-addplan.page"><i class="icon-pencil"></i></a>&nbsp;

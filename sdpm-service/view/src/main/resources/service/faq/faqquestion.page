@@ -3,9 +3,9 @@
 ##    #@normalLiItemsconment(1 "../page/questiondb.page" "访问项目管理，可以绑定域名吗？" "")
     #foreach(var:[1..5])
         #@normalLiItemsconment(1 "../faq/questionAnswer.page" "访问项目管理，可以绑定域名吗？" "")
-        <a href="${TINY_CONTEXT_PATH}/service/faq/addquestion.page" +"?id="+var><i class=" icon-pencil"></i>&nbsp;编辑</a>
-        ##            #@iconOperations("#myModal" "" "编辑问题" "550" "80" "/service/faq/addquestion.pagelet" "ml-5")<i
-        ##                    class=" icon-pencil"></i>&nbsp;编辑 #end
+        ##        <a href="${TINY_CONTEXT_PATH}/service/faq/addquestion.page" >#buttonIcon(iconClass="icon-pencil")编辑</a>
+        <a href="${TINY_CONTEXT_PATH}/service/faq/addquestion.page?id=${var}">#buttonIcon(iconClass="icon-pencil")
+            编辑 </a>
             #@delItemsdpm("#action" "id" "/service/faq/faqmenu.page" {"class":"icon-trash"})
             删除#end
             #@dialog("myModal")

@@ -6,6 +6,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Hulk on 2015/8/27.
@@ -66,6 +67,9 @@ public class Menu implements Serializable, Comparable {
      */
     @XStreamImplicit
     private List<Menu> childMenus;    // 子菜单
+
+    @XStreamAsAttribute
+    private Map<Object, Object> map;
 
     public String getId() {
         return id;
@@ -137,6 +141,14 @@ public class Menu implements Serializable, Comparable {
 
     public void setChildMenus(List<Menu> childMenus) {
         this.childMenus = childMenus;
+    }
+
+    public Map<Object, Object> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<Object, Object> map) {
+        this.map = map;
     }
 
     public int compareTo(Object o) {
