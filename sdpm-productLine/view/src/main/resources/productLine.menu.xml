@@ -3,7 +3,12 @@
       sort="900" isShow="1">
 
     <menu id="line-product" parent-id="productLine" name="产品" href="/productLine/page/project/productLine.page" icon=""
-          sort="1" isShow="1"></menu>
+          sort="200" isShow="1" scope="productLine-left"></menu>
     <menu id="overview" parent-id="productLine" name="概况" href="/productLine/page/project/overview.page" icon=""
-          sort="2" isShow="1"></menu>
+          sort="100" isShow="1" scope="productLine-left"></menu>
+          
+    <menu id="productLine-list" parent-id="productLine" name="所有产品线" href="/productLine/page/tabledemo/list.page" icon="icon-globe"
+          sort="400" isShow="1" scope="productLine-right"></menu> 
+    <menu id="productLine-add" parent-id="productLine" name="添加产品线" href="/productLine/page/tabledemo/add.page" icon="icon-plus-sign"
+          sort="200" isShow="1" scope="productLine-right"></menu>      
 </menu>
