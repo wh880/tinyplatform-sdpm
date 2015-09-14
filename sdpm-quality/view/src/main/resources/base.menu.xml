@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu id="quality" parent-id="0" name="测试" href="/testManagement/page/Bug.page" icon="icon-pencil" sort="600"
-      isShow="1"
->
+      isShow="1">
     <menu id="qualityBug" parent-id="quality" name="Bug" href="/testManagement/page/Bug.page" icon="" sort="1"
-          isShow="1"
-    >
+          isShow="1">
     	 <menu id="tmakesure" name="确认" href="/testManagement/page/tabledemo/makesure.page" icon="icon-search" sort="1"
               isShow="1" scope="testbug-op"></menu>
          <menu id="tassign" name="指派" href="/testManagement/page/tabledemo/assign.page" icon=" icon-hand-right" sort="1"
@@ -19,9 +17,7 @@
               isShow="1" scope="testbug-op,pro-bug-op"></menu>     
     </menu>
     <menu id="qualityCases" parent-id="quality" name="用例" href="/testManagement/page/cases.page" icon="" sort="1"
-          isShow="1"
-<<<<<<< HEAD
-    >    	 
+          isShow="1">    	 
          <menu id="texecution" name="执行" href="/testManagement/page/tabledemo/execution.pagelet" icon="icon-play" sort="5"
               isShow="1" scope="testcase-op"></menu>
          <menu id="tresult" name="结果" href="/testManagement/page/tabledemo/result.pagelet" icon="icon-flag" sort="4"
@@ -33,18 +29,10 @@
          <menu id="tcasedelete" name="删除" href="/tinyuiweb/action/del.pagelet" icon="icon-remove" sort="1"
               isShow="1" scope="testcase-op"></menu>      
         <menu id="add-case" name="建用例" href="/testManagement/page/proposecase.page" icon="icon-sitemap" sort="1"
-              isShow="1" scope="demand-op,product-de"></menu>
-        
-	</menu>
-=======
-    >
-        <menu id="add-case" name="建用例" href="/testManagement/page/proposeversion.page" icon="icon-sitemap" sort="1"
-              isShow="1" scope="demand-op"></menu>
+              isShow="1" scope="demand-op,product-de"></menu>       
 		 </menu>
->>>>>>> ec243a37c18ff5ac18fafa4e70750e91c7d656ae
       <menu id="qualityVersion" parent-id="quality" name="版本" href="/testManagement/page/version.page" icon=""
-              sort="1"       isShow="1"
-      >
+              sort="1"       isShow="1">
       	<menu id="tversionSituation" name="概况" href="/testManagement/page/versionSituation.page" icon="icon-file" sort="4"
               isShow="1" scope="testversion-op"></menu> 
         <menu id="tversionLink" name="关联用例" href="/testManagement/page/versionLink.page" icon="icon-link" sort="3"
