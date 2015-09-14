@@ -12,21 +12,21 @@
         <input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('product-al-bug','全选');" />
         <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('product-al-bug','反选');" />
             
-        #@aModal("#myModal" "批量移除" "1200" "500" "btn radius btn-danger"
-            "/product/page/tabledemo/product-editall.pagelet")批量删除#end
+        #@aModal("#myModal" "批量移除" "1200" "500" "btn radius btn-danger" "/product/page/tabledemo/product-editall.pagelet")批量删除#end
 
     #end
-    #@tinyTableContent("../../../data/product-al-bug-data.pagelet") ##取数据地址 总数据
+    #@tinyTableContent("../../../data/product-relation-al-bug-data.pagelet") ##取数据地址 总数据
         #@thead()
             #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
                 #@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
                 #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})P#end
                 #@tinyTh({"class":"","rel":"sortname"})Bug标题#end
-                #@tinyTh({"class":"","rel":"sortname"})创建者#end
-                #@tinyTh({"class":"","rel":"sortname"})指派#end
-                #@tinyTh({"class":"","rel":"sortname"})状态#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})操作#end
+                #@tinyTh({"class":"","rel":"sortname"})Bug状态#end
+                #@tinyTh({"class":"","rel":"sortname"})创建#end
+                #@tinyTh({"class":"","rel":"sortname"})创建日期#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})解决#end
+                #@tinyTh({"class":"","rel":"sortname"})解决日期#end
+                #@tinyTh({"class":"","rel":"sortname"})操作#end
             #end
         #end
     #end
