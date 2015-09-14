@@ -3,6 +3,68 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-plan",sonitem="<li>"+"计划"+"</li>")
 
+
+
+<script>
+
+	$(document).ready(function(){
+		
+		$("input[name='endTime']").each(function(){
+			
+			$(this).unbind("click").bind("click",function(){
+			
+				var start =	$("input[name='start-time']").val();
+				
+				
+				if(start!=""){
+					start = new Date(Date.parse(start.replace(/-/g, "/")));
+					
+					var time = $(this).val();
+					var end = new Date();
+				    if(time=="one-week"){
+						end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+7);
+					}
+					if(time=="two-week"){
+						end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+14);
+					}
+					if(time=="one-month"){
+						end = new Date(start.getFullYear(),start.getMonth()+1,start.getDate());
+					}
+					if(time=="two-month"){
+						end = new Date(start.getFullYear(),start.getMonth()+2,start.getDate());
+					}
+					if(time=="half-year"){
+						end = new Date(start.getFullYear(),start.getMonth()+6,start.getDate());
+					}
+					if(time=="year"){
+						end = new Date(start.getFullYear()+1,start.getMonth(),start.getDate());
+					}
+					$("input[name='end-time']").removeAttr("value");
+					$("input[name='end-time']").attr("value",end.format("yyyy-MM-dd"));
+					
+				}else{
+					alert("请选择开始日期");
+				}
+				
+				
+			});
+		
+		});
+		
+			
+	});
+ 
+</script>
+
+
+
+
+
+
+
+
+
+
 #@tinyForm("thisform" "" "" {"class":"test"})
     <div class="infoContent">
         <p class="titleName">编辑</p>
@@ -28,26 +90,36 @@
     #@elementItem()
         #@colLabel()开始日期:#end
         #@formControlDiv("col-4")
-           #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+           #@tinyDateInput("start-time" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
         #@colLabel()结束日期:#end
         #@formControlDiv("col-4")
-        	 #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+        	 #@tinyDateInput("end-time" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end
-         <div  class="col-4"> 
+         <div  class="col-6"> 
          	
 			 #@radioBox()
-	          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一周#end
+	          	#@tinyRadioes("endTime" "one-week" "time")一周#end
 	          #end
 	           #@radioBox()
-	          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一个月#end
+	          	#@tinyRadioes("endTime" "two-week" "time")两周#end
 	          #end
 	           #@radioBox()
-	          	#@tinyRadioes("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})一年#end
+	          	#@tinyRadioes("endTime" "one-month" "time")一个月#end
 	          #end
+	           #@radioBox()
+	          	#@tinyRadioes("endTime" "two-month" "time")两个月#end
+	          #end
+	           #@radioBox()
+	          	#@tinyRadioes("endTime" "half-year" "time")半年#end
+	          #end
+	          #@radioBox()
+	          	#@tinyRadioes("endTime" "year" "time")一年#end
+	          #end
+	          
 	          
         </div>
           
@@ -57,7 +129,7 @@
     #end
     #@elementItem()
         #@colLabel()描述:#end
-        #@formControlDiv("col-8")
+        #@formControlDiv("col-10")
            #@Teditor("content3" "content3" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})备注...最少输入10个字符#end
         #end
         #@validateDiv("col-2")#end
