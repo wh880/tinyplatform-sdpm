@@ -40,10 +40,11 @@
                         "/testManagement/page/tabledemo/importBug.pagelet" "ml-5")&nbsp导入#end
                     #@iconOperations("#myModal" "icon-upload-alt" "导出" "550" "100"
                         "/testManagement/page/tabledemo/exportBugData.pagelet" "ml-5")&nbsp导出#end
-                ###@iconOperations("#myModal" "icon-download-alt" "导出" "865" "448" "/page/tabledemo/user-add.pagelet" "ml-5")&nbsp导出#end
-
-#*                    <a href="${TINY_CONTEXT_PATH}/testManagement/page/caseBatchAdding.page">#buttonIcon(iconClass=
-                        "icon-plus-sign")批量添加</a>&nbsp;   *#
+#*                         #foreach(m:menuManager.getScopeMenus("demand-op"))
+							 #if(m.id == "add-case")
+             					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)建用例</a>
+			 				#end
+		 				#end*#
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">#buttonIcon(iconClass=
                         "icon-plus")建用例</a>
 				</span>
@@ -55,10 +56,10 @@
 ##tabbody end
 
 #@toggleBox({"class":"open"})
-#@toggleLeft({"class":"aclass"})
-    #@settoggleLeftTitle()用例名称#end
-#@settoggleLeftBody("treeLeftbox")
-    #include("/testManagement/page/moduleTree.page")
+	#@toggleLeft({"class":"aclass"})
+    	#@settoggleLeftTitle()用例名称#end
+	#@settoggleLeftBody("treeLeftbox")
+    	#include("/testManagement/page/moduleTree.page")
     #end
     #end
 
@@ -118,7 +119,7 @@ user_del(this,'1');
 })
 </script>
 #@dialog("myModal")
-#@dialogHeader()对话框标题#end
+#@dialogHeader()#end
 #@dialogBody()<p>对话框内容…</p>#end
 #@dialogFooter()
 #@buttonEnsure()确定#end
