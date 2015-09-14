@@ -95,7 +95,7 @@
                     <option value="MD">Maryland</option>
 					#end
 				##填写任意内容，侦听需重新填加 A侦听已内置
-					#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+					#@Tselect2Fix()<a href="<a href="${TINY_CONTEXT_PATH}/project/addProject.page">" class="r ">增加</a><a href="<a href="${TINY_CONTEXT_PATH}/project/allProject.page">">全部</a>#end
 				#end
 			#end
 			#@validateDiv("col-2")#end
@@ -121,7 +121,7 @@
                     <option value="MD">Maryland</option>
 					#end
 				##填写任意内容，侦听需重新填加 A侦听已内置
-					#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+
 				#end
 			#end
 			#@validateDiv("col-2")#end
@@ -140,7 +140,7 @@
                     <option value="MD">Maryland</option>
 					#end
 				##填写任意内容，侦听需重新填加 A侦听已内置
-					#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+					#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/organization/user/add.page">全部</a>#end
 				#end
 			#end
 			#@validateDiv("col-2")#end
@@ -159,7 +159,7 @@
                     <option value="MD">Maryland</option>
 					#end
 				##填写任意内容，侦听需重新填加 A侦听已内置
-					#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+					#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/organization/user/add.page">全部</a>#end
 				#end
 			#end
 			#@validateDiv("col-2")#end
@@ -178,7 +178,7 @@
                     <option value="MD">Maryland</option>
 					#end
 				##填写任意内容，侦听需重新填加 A侦听已内置
-					#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+					#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/organization/user/add.page">全部</a>#end
 				#end
 			#end
 			#@validateDiv("col-2")#end
@@ -197,7 +197,7 @@
                     <option value="MD">Maryland</option>
 					#end
 				##填写任意内容，侦听需重新填加 A侦听已内置
-					#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+					#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/organization/user/add.page">全部</a>#end
 				#end
 			#end
 			#@validateDiv("col-2")#end
@@ -216,8 +216,7 @@
                     <option value="MD">Maryland</option>
 					#end
 				##填写任意内容，侦听需重新填加 A侦听已内置
-					#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-				#end
+					#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end				#end
 			#@validateDiv("col-2")#end
       #end
       <br />

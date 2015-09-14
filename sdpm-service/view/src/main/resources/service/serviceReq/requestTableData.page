@@ -17,12 +17,9 @@
         #@td()2015-09-09#end
         #@td()正常#end
         #@td()
-        <a title="查看" class="ml-5"
-           href="${TINY_CONTEXT_PATH}/service/serviceReq/requestBack.page">#buttonIcon(iconClass="icon-search")</a>
-        <a title="编辑" class="ml-5"
-           href="${TINY_CONTEXT_PATH}/service/serviceReq/requestEdit.page">#buttonIcon(iconClass="icon-pencil")</a>
-        <a title="关闭" class="ml-5"
-           href="${TINY_CONTEXT_PATH}/service/serviceReq/requestClose.page">#buttonIcon(iconClass="icon-off")</a>
+            #foreach(m:menuManager.getScopeMenus("service-request"))
+            <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            #end
         #end
     #end
 #end

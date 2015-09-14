@@ -2,11 +2,30 @@
 
 <menu id="service" parent-id="0" name="客服" href="/service/client/clientUser.page" icon="icon-phone" sort="300"
       isShow="1">
-    <menu id="client" name="客户" href="/service/client/clientUser.page" sort="100" isShow="1"
-          ></menu>
-    <menu id="request1" name="需求" href="/service/serviceReq/request.page" sort="100" isShow="1"
-          ></menu>
-    <menu id="sla" name="协议" href="/service/sla/sla.page" sort="100" isShow="1"></menu>
+    <menu id="client" name="客户" href="/service/client/clientUser.page" sort="100" isShow="1">
+        <menu id="client-edit" name="编辑" href="${TINY_CONTEXT_PATH}/service/client/clientEdit.pagelet"
+              icon="icon-pencil" sort="1" isShow="1"
+              scope="service-cil"/>
+        <menu id="client-del" name="删除" href="#" icon="icon-remove" sort="1" isShow="1"
+              scope="service-cil"/>
+    </menu>
+    <menu id="request" name="需求" href="/service/serviceReq/request.page" sort="100" isShow="1">
+        <menu id="request-search" name="查看" href="/service/serviceReq/requestBack.page" icon="icon-search" sort="1"
+              isShow="1"
+              scope="service-request"/>
+        <menu id="request-edit" name="编辑" href="/service/serviceReq/requestEdit.page" icon="icon-pencil" sort="1"
+              isShow="1"
+              scope="service-request"/>
+        <menu id="request-off" name="关闭" href="/service/serviceReq/requestClose.page" icon="icon-off" sort="1"
+              isShow="1"
+              scope="service-request"/>
+    </menu>
+    <menu id="sla" name="协议" href="/service/sla/sla.page" sort="100" isShow="1">
+        <menu id="sla-edit" name="编辑" href="/service/sla/slaEdit.pagelet" icon="icon-pencil" sort="1" isShow="1"
+              scope="service-sla"/>
+        <menu id="sla-del" name="删除" href="/service/serviceReq/requestEdit.page" icon="icon-pencil" sort="1" isShow="1"
+              scope="service-sla"/>
+    </menu>
     <menu id="faq" name="FAQ" href="/service/faq/faqmenu.page" sort="100" isShow="1"
           ></menu>
 
