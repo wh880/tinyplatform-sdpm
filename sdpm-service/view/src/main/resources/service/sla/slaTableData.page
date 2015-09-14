@@ -20,7 +20,7 @@
         #@td()
             #iconOperations(
                 "#myModal1" " icon-pencil" "编辑" "600" "300" "/service/sla/slaEdit.pagelet" "ml-5")
-            <a><i class="icon-remove" itemId="deleteList"></i></a>
+            #@tinyTableItemRemove("#" "id")<i class="icon-remove"></i>#end
         #end
     #end
 ##    #@simpleModal("myModal1"+varFor.index "编辑")#end
