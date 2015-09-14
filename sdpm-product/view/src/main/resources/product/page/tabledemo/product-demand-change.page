@@ -12,20 +12,20 @@
     <div class="infoContent">
         <p class="titleName">变更</p>
  
-    <div class="RTtitle">
+   #* <div class="RTtitle">
         <button type="submit" id="submit" class="commitBtn">保存</button>
-    </div>
+    </div>*#
 
       #@elementItem()
             #@sdpmItem("由谁评审")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"})
                         <option value="CT">Admin</option>
                         <option value="DE">Demo</option>
                         <option value="FL">Me</option>
                     #end
                 
-                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                  #*  #@Tselect2Fix()<a href="http://www.baidu.com" class="r "></a><a href="#"></a>#end*#
                 #end
 
             #end

@@ -22,7 +22,10 @@
     #@td()2013/03/25#end
     #@td()￥320,800#end
     #@td()
-    	<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/makesure.page" title="确认">#buttonIcon(iconClass=
+    	#foreach(m:menuManager.getScopeMenus("testbug-op"))
+             	<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>			
+		 #end
+#*    	<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/makesure.page" title="确认">#buttonIcon(iconClass=
         "icon-search")</a>
         <a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/assign.page" title="指派">#buttonIcon(iconClass=
         "icon-hand-right")</a>
@@ -30,17 +33,10 @@
         "icon-ok-sign")</a>
         <a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/shutdown.page" title="关闭">#buttonIcon(iconClass=
         "icon-off")</a>
-#*        #iconOperations(
-            "#myModal" "icon-search" "确认" "865" "448" "/testManagement/page/tabledemo/makesure.pagelet" "ml-5")
-        #iconOperations(
-            "#myModal" "icon-hand-right" "指派" "865" "448" "/testManagement/page/tabledemo/assign.pagelet" "ml-5")
-        #iconOperations(
-            "#myModal" "icon-ok-sign" "解决" "865" "448" "/testManagement/page/tabledemo/solution.pagelet" "ml-5")
-        #iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/testManagement/page/tabledemo/shutdown.pagelet" "ml-5")*#
     <a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/edition.page" title="编辑">#buttonIcon(iconClass=
         "icon-pencil")</a>
     <a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page" title="复制">#buttonIcon(iconClass=
-        "icon-copy")</a>
+        "icon-copy")</a>*#
 
 
     ##"icon-pencil"

@@ -22,16 +22,27 @@
 						#@td()test#end
 						#@td()success#end
 						#@td()正常#end
-						 #@td()
-							#iconOperations("#myModal" "icon-play" "执行" "865" "400" "/testManagement/page/tabledemo/execution.pagelet" "ml-5")
+						 #@td()					 					 			                       			
+                         	#foreach(m:menuManager.getScopeMenus("testcase-op"))
+                         		#if(m.id=="teditioncase"||m.id=="tproposecase")
+            						<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            					#else
+            						#if(m.id=="texecution"||m.id=="tresult")
+            							#iconOperations("#myModal" m.icon m.name "865" "400" m.href "ml-1")            											
+            						#else            																	
+										#@tinyTableItemRemove(m.href var)
+											<i class="${m.icon}" title="删除"></i>
+										#end
+									#end									
+								#end
+                         	#end		 					
+#*							#iconOperations("#myModal" "icon-play" "执行" "865" "400" "/testManagement/page/tabledemo/execution.pagelet" "ml-5")
 							#iconOperations("#myModal" "icon-flag" "结果" "600" "200" "/testManagement/page/tabledemo/result.pagelet" "ml-5")
                          	<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editioncase.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
                          	<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page" title="复制">#buttonIcon(iconClass="icon-copy")</a>
                          	#@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)
 								<i class="icon-remove"></i>
-							#end
-#*							#iconOperations("#myModal" "icon-remove" "删除" "200" "50" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
-                         	<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page"title="Bug">#buttonIcon(iconClass="icon-bug")</a>*#
+							#end*#						
 						#end
 					#end
 				#end

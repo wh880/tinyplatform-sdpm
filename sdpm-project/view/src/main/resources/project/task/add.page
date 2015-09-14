@@ -11,10 +11,6 @@
 		#end
 		#@tabHead()
 			#include("/project/protab.page")
-        <span class="r" style="position:relative;top:2px;height:0">
-					<a href="${TINY_CONTEXT_PATH}/project/allProject.page">#buttonIcon(iconClass="icon-list")所有产品</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/project/addProject.page">#buttonIcon(iconClass="icon-plus")添加产品</a>
-				</span>
 		#end
 	##head end
     <br/>
@@ -76,7 +72,7 @@
                     <option value="MD">Maryland</option>
 				#end
 			##填写任意内容，侦听需重新填加 A侦听已内置
-				#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+				#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/project/demand/index.page">全部</a>#end
 			#end
 		#end
 	#end
@@ -113,7 +109,7 @@
                     <option value="MD">Maryland</option>
 				#end
 			##填写任意内容，侦听需重新填加 A侦听已内置
-				#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+
 			#end
 		#end
 	#end
@@ -138,7 +134,7 @@
                     <option value="MD">Maryland</option>
 				#end
 			##填写任意内容，侦听需重新填加 A侦听已内置
-				#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+				#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
 			#end
 		#end
 	#end
