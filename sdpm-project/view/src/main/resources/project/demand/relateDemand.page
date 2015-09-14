@@ -1,6 +1,6 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
-#include("/project/event/common.page")
+
 <style>
 #*.tabLayout .tabBar span a{color:#333}
 .tabLayout .tabBar .Current a{color:#fff}

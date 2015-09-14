@@ -7,7 +7,7 @@
 
 </style>
 
-#include("/project/event/common.page")
+
 #set(name="task")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
