@@ -22,7 +22,7 @@
 	
 	
 	 #@td()
-		<a href="${TINY_CONTEXT_PATH}/document/edit-doclib.page" title="编辑">#buttonIcon(iconClass="icon-pencil")
+		<a href="${TINY_CONTEXT_PATH}/document/table-edit.page" title="编辑">#buttonIcon(iconClass="icon-pencil")
 		#iconOperation(" icon-remove" "删除" "ml-5")
 	#end
 #end

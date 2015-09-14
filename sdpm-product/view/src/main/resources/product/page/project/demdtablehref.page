@@ -41,7 +41,7 @@
             "icon-random")变更</a>&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-close.page">#buttonIcon(iconClass=
                     "icon-off ")关闭</a>&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeCase.page">#buttonIcon(iconClass=
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">#buttonIcon(iconClass=
                     "icon-sitemap")建用例</a>&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page" title="编辑">#buttonIcon(iconClass=
                     "icon-pencil")</a>
@@ -103,7 +103,7 @@
                    "icon-random")变更</a>&nbsp;&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-close.page">#buttonIcon(iconClass=
                     "icon-off ")关闭</a>&nbsp;&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeCase.page">#buttonIcon(iconClass=
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">#buttonIcon(iconClass=
                     "icon-sitemap")建用例</a>&nbsp;&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page" title="编辑">#buttonIcon(iconClass=
                     "icon-pencil")</a>&nbsp;&nbsp;
