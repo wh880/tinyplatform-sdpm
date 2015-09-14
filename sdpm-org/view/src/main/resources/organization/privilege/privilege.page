@@ -31,9 +31,12 @@
         </span>
 
             <span style="float:right">
-                #@aModal(editpageModal "新增分组" "600" "300" "btn radius btn-primary btn-sm" editpagePath)
-                    #@simpleI("icon-plus")新增分组#end
+                #foreach(m:menuManager.getScopeMenus("org-privilege-addGroup"))
+                    #@aModal(editpageModal "新增分组" "600" "300" "btn radius btn-primary btn-sm" m.href)
+                        #@simpleI(m.icon)新增分组#end
+                    #end
                 #end
+
 
             </span>
                 #div(divClass="clearfix")
@@ -64,11 +67,8 @@
 
 #simpleModal(editpageModalId)
 
+#@simpleModal("myModal" )#end
 
-#@simpleModal("myModa2" "用户添加")#end
-#@simpleModal("myModa3" "成员维护")#end
-#@simpleModal("myModa4" "复制分组")#end
-#@simpleModal("myModa5" "编辑分组")#end
 <script>
     $(function () {
         $(".tinytable").on("click", ".icon-remove", function () {

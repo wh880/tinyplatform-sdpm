@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu id="organization" parent-id="0" name="组织" href="/organization/user/user.page" icon="icon-sitemap" sort="200"
       isShow="1">
-    <menu id="organizationUser" name="用户" href="/organization/user/user.page" icon="" sort="1"
-          isShow="1"
-    >
+    <menu id="organizationUser" name="用户" href="/organization/user/user.page" icon="" sort="1" isShow="1">
+        <menu id="org-user-edit" name="用户编辑" href="/organization/user/add.pagelet" icon="icon-pencil" sort="1"
+              isShow="1"
+              scope="org-user"/>
+        <menu id="org-user-delete" name="删除" href="/organization/user/delect.pagelet" icon="icon-remove" sort="1"
+              isShow="1"
+              scope="org-user"/>
     </menu>
     <menu id="organizationGtask" name="待办" href="/organization/gtask/gtasks.page" icon="" sort="1"
           isShow="1"
@@ -22,8 +26,32 @@
     </menu>
     <menu id="organizationPrivilege" name="角色" href="/organization/privilege/privilege.page" icon="" sort="1" isShow="1"
     >
+        <menu id="org-privilege-maintain" name="权限维护" href="/organization/privilege/privilegeMaintain.page"
+              icon="icon-lock" sort="1" isShow="1"
+              scope="org-privilege"/>
+        <menu id="org-privilege-user" name="成员维护" href="/organization/privilege/groupMaintain.pagelet"
+              icon="icon-sitemap" sort="1" isShow="1"
+              scope="org-privilege"/>
+        <menu id="org-privilege-copy" name="复制分组" href="/organization/privilege/groupCopy.pagelet" icon="icon-copy"
+              sort="1" isShow="1"
+              scope="org-privilege"/>
+        <menu id="org-privilege-edit" name="编辑分组" href="/organization/privilege/groupEdit.pagelet" icon="icon-pencil"
+              sort="1" isShow="1"
+              scope="org-privilege"/>
+        <menu id="org-privilege-add" name="添加分组" href="/organization/privilege/groupAdd.pagelet" icon="icon-plus"
+              sort="1" isShow="1"
+              scope="org-privilege-addGroup"/>
+
     </menu>
     <menu id="organizationCompany" name="公司" href="/organization/company/company.page" icon="" sort="1" isShow="1"
     >
+    </menu>
+    <menu id="organizationAddUser" name="添加用户" href="/organization/common/addUser.page" icon="icon-plus" sort="1"
+          isShow="1"
+          scope="org-menu">
+    </menu>
+    <menu id="organizationAddGroup" name="添加分组" href="/organization/common/addGroup.page" icon="icon-group" sort="1"
+          isShow="1"
+          scope="org-menu">
     </menu>
 </menu>
