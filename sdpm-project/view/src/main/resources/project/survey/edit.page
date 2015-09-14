@@ -22,7 +22,7 @@
 .hidden_namesty{margin-left:17%}
 .label_title{width:100px}
 </style>
-#include("/project/event/common.page")
+
 #set(name="survey")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
