@@ -23,7 +23,7 @@
 						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})P#end
 						#@tinyTh({"class":"","rel":"sortname"})Bug标题#end
 						#@tinyTh({"class":"","rel":"sortname"})创建者#end
-						#@tinyTh({"class":"","rel":"sortname"})指派#end
+						#@tinyTh({"class":"","rel":"sortname"})解决者#end
 						#@tinyTh({"class":"","rel":"sortname"})状态#end
 					#end
 				#end
