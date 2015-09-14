@@ -29,8 +29,8 @@
 	                        <option value="IN">产品1</option>
 	                    	#end                  
 	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
+	                    	<a href="${TINY_CONTEXT_PATH}/document/add-doclib.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH}/document/all-doclib.page">全部</a>#end
                 	  #end
                 	  #end
                 	  #end

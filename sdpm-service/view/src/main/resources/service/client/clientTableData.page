@@ -17,10 +17,13 @@
         #@td()2015-09-09#end
         #@td()正常#end
         #@td()
-            #iconOperations(
-                "#myModal" " icon-pencil" "编辑" "650" "350" "/service/client/clientEdit.pagelet" "ml-5")
-            #@tinyTableItemRemove("#" "id")<i class="icon-remove"></i>#end
+            #foreach(m:menuManager.getScopeMenus("service-cil"))
+                #if(m.id != "client-del")
+                    #iconOperations("#myModal" m.icon m.name "650" "350" m.href+"?id="+var "ml-5")
+                #else
+                    #@tinyTableItemRemove("#" "${m.id}")<i class="${m.icon}"></i>#end
+                #end
+            #end
         #end
-    ##        #@simpleModal("myModal"+varFor.index "用户编辑")#end
     #end
 #end
