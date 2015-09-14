@@ -19,7 +19,7 @@
 		#end
 		
 		#@tabHead()
-				#foreach(m in menuManager.getChildMenus("productLine"))
+				#foreach(m in menuManager.getScopeMenus("productLine-left"))
 					
 					#@aHeadCol(TINY_CONTEXT_PATH+m.href m.id==linkName?"Current":"")${m.name}#end
 				#end
@@ -28,9 +28,9 @@
 		#end
 		
 		<span class="r" style="position:relative;top:-28px;height:0">
-			<a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/list.page">#buttonIcon(iconClass="icon-globe")所有产品线</a>&nbsp;
-			<!--新增产品-->
-			<a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/add.page">#buttonIcon(iconClass="icon-plus-sign")添加产品线</a>&nbsp;
+			#foreach(m in menuManager.getScopeMenus("productLine-right"))
+				<a href="${TINY_CONTEXT_PATH}${m.href} " >#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;
+			#end
 		</span>
 			#pageContent
 	#end

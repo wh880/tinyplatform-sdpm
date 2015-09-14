@@ -18,7 +18,7 @@
         #@td()正常#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("service-request"))
-            <a href="${TINY_CONTEXT_PATH}${m.href}" +"?id="+var title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
         #end
     #end
