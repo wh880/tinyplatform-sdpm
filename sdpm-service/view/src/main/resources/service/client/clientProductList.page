@@ -10,20 +10,14 @@
         #foreach(var:[1..5])
             #@gridSystemCol(7)
                 #@div(divClass="infoContent")
-                <p class="titleName"><a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">支付宝</p>
+                <p class="titleName"><a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">支付宝</a></p>
                     #@gridSysRow()
                         #@gridSysCol(4)产品ID#end
-                        #@gridSysCol(8)
-                        <a href="${TINY_CONTEXT_PATH}/service/client/clientUser.pagege">001</a>
-                        #end
+                        #@gridSysCol(8)001#end
                         #@gridSysCol(4)产品版本#end
-                        #@gridSysCol(8)
-                        2.0.1
-                        #end
+                        #@gridSysCol(8)2.0.1#end
                         #@gridSysCol(4)发布时间#end
-                        #@gridSysCol(8)
-                        2015.09.07
-                        #end
+                        #@gridSysCol(8)2015.09.07#end
                     #end
                 <div style="text-align:right;margin:right">
                     #@aModal("#myModal3"+varFor.index "编辑" "799" "300" "btn radius btn-primary btn-sm"

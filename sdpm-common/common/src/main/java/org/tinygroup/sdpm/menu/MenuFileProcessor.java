@@ -1,12 +1,16 @@
 package org.tinygroup.sdpm.menu;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.mapper.DefaultMapper;
 import org.tinygroup.fileresolver.impl.AbstractFileProcessor;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
+import org.tinygroup.sdpm.menu.xstream.MapCustomConverter;
 import org.tinygroup.vfs.FileObject;
 import org.tinygroup.xstream.XStreamFactory;
+
+import java.util.Map;
 
 /**
  * Created by Hulk on 2015/8/27.
@@ -15,12 +19,17 @@ public class MenuFileProcessor extends AbstractFileProcessor {
     private static final String MENU_EXT_FILENAME = ".menu.xml";
     private static Logger logger = LoggerFactory
             .getLogger(MenuFileProcessor.class);
+    private static XStream stream;
+
+    static {
+        stream = XStreamFactory.getXStream(MenuManager.XSTREAN_PACKAGE_NAME);
+        stream.registerConverter(new MapCustomConverter(new DefaultMapper(MenuFileProcessor.class.getClassLoader())));
+        stream.alias("property", Map.Entry.class);
+    }
+
     private MenuManager menuManager;
 
-
     public void process() {
-
-        XStream stream = XStreamFactory.getXStream(MenuManager.XSTREAN_PACKAGE_NAME);
         for (FileObject fileObject : deleteList) {
             logger.logMessage(LogLevel.INFO, "正在删除菜单menu文件[{0}]",
                     fileObject.getAbsolutePath());

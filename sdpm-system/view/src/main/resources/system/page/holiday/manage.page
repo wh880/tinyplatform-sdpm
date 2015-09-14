@@ -1,3 +1,8 @@
 #set(threeMenu="manage")
 
-ffffffffff
+#@workCalendar("") ##传参数二个数date isadd（为1时新境否则为删除）
+	setFixEvent("2015-09-04");
+	setFixEvent("2015-09-05");
+	setFixEvent("2015-09-06");
+	setFixEvent("2015-09-13");
+#end

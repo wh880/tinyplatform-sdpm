@@ -153,8 +153,8 @@
                 <div class="btn-group">
                     <button type="submit" id="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
                     <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
-                    #@aModal("#myModa2" "请输入查询标题（保存之前请先查询）：" "500" "120" "btn radius btn-primary btn-sm"
-                        "/organization/common/searchSave.pagelet")
+                    #@aModal("#myModal" "请输入查询标题（保存之前请先查询）：" "500" "120" "btn radius btn-primary btn-sm"
+                        "/service/serviceReq/searchSave.pagelet")
                         <div style="margin: 4px">
                             保存
                         </div>
@@ -172,7 +172,6 @@
                             <option value="o2o">o2o系统</option>
                         #end
                     ##填写任意内容，侦听需重新填加 A侦听已内置
-                        #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
                     #end
                 </div>
             </td>

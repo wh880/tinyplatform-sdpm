@@ -6,8 +6,8 @@
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 #*				#@aModal("#myModal" "批量编辑" "1300" "500" "btn radius btn-primary" "/productLine/page/tabledemo/batchedit.pagelet")批量编辑#end*#
-				<input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('idCheck','全选');" />
-            <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('idCheck','反选');" />
+				<input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('productLine','全选');" />
+            <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('productLine','反选');" />
            
 			#end
 			#@tinyTableContent("../../data/productLinedata.pagelet") ##取数据地址 总数据
