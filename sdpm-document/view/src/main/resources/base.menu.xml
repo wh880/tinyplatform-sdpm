@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <menu id="idocument" parent-id="0" name="文档" href="/document/document.page"
-      icon="icon-inbox" sort="500" isShow="1" permission="Permission">
+	icon="icon-inbox" sort="500" isShow="1" permission="Permission">
 	<menu id="sdocument" name="文档" href="/document/document.page"
 		sort="100" isShow="true" />
+	<menu id="product-archive-edit" name="文档编辑" href="/document/table-edit.page"
+		icon="icon-pencil" sort="2" isShow="1" scope="product-ar" />
 </menu>
