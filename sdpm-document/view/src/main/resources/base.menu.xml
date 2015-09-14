@@ -5,7 +5,7 @@
 	<menu id="doc-my" parent-id="idocument" name="文档" href="/document/document.page" icon="" sort="1"
           isShow="1">
 		<menu id="docedit" name="编辑" href="/document/table-edit.page"
-			icon="icon-pencil" sort="2" isShow="1" scope="doc-op,product-ar"></menu>
+			icon="icon-pencil" sort="2" isShow="1" scope="doc-op,product-ar,pro-document-op"></menu>
 		<menu id="docdelete" name="删除" href="/tinyuiweb/action/del.pagelet"
 			icon="icon-remove" sort="1" isShow="1" scope="doc-op"></menu>
 	</menu>

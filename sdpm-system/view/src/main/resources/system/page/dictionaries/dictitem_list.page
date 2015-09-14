@@ -31,9 +31,15 @@
 					#@td()值${objFor.index}#end
 					#@td()${objFor.index}#end
 					#@td("f-14 user-manage")
-						#iconOperations(viewpageModal "icon-eye-open" "查看" "" "" viewpagePath "ml-5")
-						#iconOperations(editpageModal "icon-edit" "编辑" "" "" editpagePath "ml-5")
-						#iconOperation("icon-trash" "删除" "ml-5 delBtn")
+						#foreach(m in menuManager.getScopeMenus("dictitem-op"))
+							#if(m.id!="dictitem-del")
+								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "" "" m.href "ml-5")
+							#else
+								#iconOperation(m.icon m.name "ml-5 delBtn")
+							#end
+							
+						#end
+						
 					#end
 				#end
 			#end
