@@ -22,7 +22,7 @@
         #@td()
             #foreach(m:menuManager.getScopeMenus("pro-version-op"))
                 #if(m.id != "pro-version-delete")
-                    <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
                     #@delItemsdpm(m.href 5)#buttonIcon(iconClass=m.icon)#end
                 #end

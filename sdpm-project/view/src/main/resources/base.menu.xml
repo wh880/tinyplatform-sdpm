@@ -36,7 +36,8 @@
     </menu>
 
     <menu id="version" parent-id="project" name="版本" href="/project/version/index.page" icon="" sort="1" isShow="1">
-        <menu id="pro-version-look" name="查看bug" href="/project/bug/index.page" icon="icon-eye-open" sort="20" isShow="1"
+        <menu id="pro-version-look" name="查看bug" href="/project/bug/index.page" icon="icon-eye-open" sort="20"
+              isShow="1"
               scope="pro-version-op"/>
         <menu id="pro-version-edit" name="编辑版本" href="/project/version/add.page" icon="icon-pencil" sort="15" isShow="1"
               scope="pro-version-op"/>
