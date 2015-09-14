@@ -22,8 +22,8 @@
         #end
     #end
 #end
-#@simpleModal("myModal1" "编辑")#end
-#@simpleModal("myModal2" "删除")#end
+#@simpleModal("myModal" "编辑")#end
+###@simpleModal("myModal2" "删除")#end
 <script>
     $(function () {
         $(".tinytable").on("click", ".icon-remove", function () {

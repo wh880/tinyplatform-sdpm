@@ -1,5 +1,10 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
-
+<style>
+    ##    暂时用于100%显示日历
+    #calendar {
+        width: 100%;
+    }
+</style>
 #import("/common/component/form.component")
 #set(editpagePath=
     "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
@@ -56,17 +61,7 @@
 #end
 
 #@fullCalendar("fullCalendar")
-    #@externalEvents("external-events")
-        #@h4()可拖动事件#end
-        #@fcEvent()我的事件1#end
-        #@fcEvent()我的事件2#end
-        #@fcEvent()我的事件3#end
-        #@fcEvent()我的事件4#end
-        #@fcEvent()我的事件5#end
-        #@eventButtons("drop-remove")
-        放下后即可删除
-        #end
-    #end
+
     #@calendar("calendar")#end
 #end
 

@@ -1,12 +1,11 @@
 #foreach(m in menuManager.getChildMenus("organization"))
-    #@aHeadCol(TINY_CONTEXT_PATH+m.href m.id==name?"Current":"")${m.name}#end
+    #if(m.scope != "org-menu")
+        #@aHeadCol(TINY_CONTEXT_PATH+m.href m.id==name?"Current":"")${m.name}#end
+    #end
 #end
 
 <div style="float: right">
-    <a href="${TINY_CONTEXT_PATH}/organization/common/addUser.page">#buttonIcon(iconClass="icon-plus")
-        添加用户</a>&nbsp;
-##    <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page">#buttonIcon(iconClass="icon-plus-sign")
-##        批量添加</a>&nbsp;
-    <a href="${TINY_CONTEXT_PATH}/organization/common/addGroup.page">#buttonIcon(iconClass=" icon-group ")
-        添加分组</a>&nbsp;
+    #foreach(m:menuManager.getScopeMenus("org-menu"))
+        <a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+    #end
 </div>

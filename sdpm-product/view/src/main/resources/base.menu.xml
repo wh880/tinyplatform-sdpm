@@ -1,22 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="myproduct" parent-id="0" name="产品管理" href="/product/page/project/togglebox.page" icon="icon-desktop" sort="1"
+<menu id="myproduct" parent-id="0" name="产品" href="/product/page/project/togglebox.page" icon="icon-desktop" sort="800"
       isShow="1" permission="Permission">
     <menu id="product-demand" parent-id="myproduct" name="需求" href="/product/page/project/togglebox.page"
-          scope="liop,l2op" sort="1" isShow="1" permission="Permission"></menu>
-    <menu id="product-plan" parent-id="myproduct" name="计划" href="/product/page/project/product-plan.page" sort="2"
-          isShow="1" permission="Permission"></menu>
+          scope="liop,l2op" sort="9" isShow="1" permission="Permission">
+        <menu id="product-demand-change" name="需求变更" href="/product/page/tabledemo/product-demand-change.page"
+              icon="icon-random" sort="5" isShow="1"
+              scope="product-de"/>
+        <menu id="product-demand-review" name="需求评审" href="/product/page/tabledemo/product-demand-review.page"
+              icon="icon-search" sort="4" isShow="1"
+              scope="product-de"/>
+        <menu id="product-demand-close" name="需求关闭" href="/product/page/tabledemo/product-demand-close.page"
+              icon="icon-off" sort="3" isShow="1"
+              scope="product-de"/>
+        <menu id="product-demand-edit" name="需求编辑" href="/product/page/tabledemo/demand-edit.page" icon="icon-pencil"
+              sort="2" isShow="1"
+              scope="product-de"/>
+    </menu>
+
+    <menu id="product-plan" parent-id="myproduct" name="计划" href="/product/page/project/product-plan.page" sort="8"
+          isShow="1" permission="Permission">
+        <menu id="product-plan-demand" name="关联需求"
+              href="/product/page/tabledemo/relation-plan/product-al-req.page?cname=demand" icon="icon-link" sort="4"
+              isShow="1"
+              scope="product-pl"/>
+        <menu id="product-plan-bug" name="关联BUG"
+              href="/product/page/tabledemo/relation-plan/product-al-bug.page?cname=bug" icon="icon-bug" sort="3"
+              isShow="1"
+              scope="product-pl"/>
+        <menu id="product-plan-edit" name="计划编辑" href="/product/page/tabledemo/product-addplan.page" icon="icon-pencil"
+              sort="2" isShow="1"
+              scope="product-pl"/>
+        <menu id="product-plan-remove" name="删除" href="#" icon="icon-remove" sort="1" isShow="1"
+              scope="product-pl"/>
+    </menu>
+
     <menu id="product-release" parent-id="myproduct" name="发布" href="/product/page/project/product-release.page"
-          sort="3" isShow="1" permission="Permission"></menu>
+          sort="7" isShow="1" permission="Permission">
+        <menu id="product-release-demand" name="关联需求"
+              href="/product/page/tabledemo/relation-release/product-al-req.page?cname=demand" icon="icon-link" sort="4"
+              isShow="1"
+              scope="product-re"/>
+        <menu id="product-release-bug" name="关联BUG"
+              href="/product/page/tabledemo/relation-release/product-al-bug.page?cname=bug" icon="icon-bug" sort="3"
+              isShow="1"
+              scope="product-re"/>
+        <menu id="product-release-edit" name="发布编辑" href="/product/page/tabledemo/product-addrelease.page"
+              icon="icon-pencil" sort="2" isShow="1"
+              scope="product-re"/>
+        <menu id="product-release-remove" name="删除" href="#" icon="icon-remove" sort="1" isShow="1"
+              scope="product-re"/>
+    </menu>
+
     <menu id="product-roadmap" parent-id="myproduct" name="路线图" href="/product/page/project/product-roadmap.page"
-          sort="4" isShow="1" permission="Permission"></menu>
-    <menu id="product-archive" parent-id="myproduct" name="文档" href="/product/page/project/archive-list.page"
-          scope="liop" sort="5" isShow="1" permission="Permission"></menu>
-    <menu id="product-project" parent-id="myproduct" name="项目" href="/product/page/project/product-project-list.page"
           sort="6" isShow="1" permission="Permission"></menu>
+
+    <menu id="product-archive" parent-id="myproduct" name="文档" href="/product/page/project/archive-list.page"
+          scope="liop" sort="5" isShow="1" permission="Permission">
+
+        <menu id="product-archive-remove" name="删除"
+              href="#" icon="icon-remove" sort="1"
+              isShow="1"
+              scope="product-ar"/>
+
+
+    </menu>
+
+    <menu id="product-project" parent-id="myproduct" name="项目" href="/product/page/project/product-project-list.page"
+          sort="4" isShow="1" permission="Permission"></menu>
+
     <menu id="product-modular" parent-id="myproduct" name="模块" href="/product/page/project/product-modular.page"
-          sort="7" isShow="1" permission="Permission"></menu>
-    <menu id="product-overview" parent-id="myproduct" name="概况" href="/product/page/project/overview.page" sort="8"
+          sort="3" isShow="1" permission="Permission"></menu>
+
+    <menu id="product-overview" parent-id="myproduct" name="概况" href="/product/page/project/overview.page" sort="2"
           isShow="1" permission="Permission"></menu>
-    <menu id="product-dynamic" parent-id="myproduct" name="动态" href="/product/page/project/dymanicdata.page" sort="9"
+
+    <menu id="product-dynamic" parent-id="myproduct" name="动态" href="/product/page/project/dymanicdata.page" sort="1"
           isShow="1" permission="Permission"></menu>
+
 </menu>
