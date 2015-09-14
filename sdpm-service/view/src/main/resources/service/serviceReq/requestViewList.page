@@ -4,7 +4,7 @@
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
 
 
-#set(name="request1")
+#set(name="request")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
     ##tabbody end
