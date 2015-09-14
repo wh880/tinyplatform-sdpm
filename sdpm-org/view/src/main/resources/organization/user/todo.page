@@ -45,17 +45,17 @@
                 #div(divClass="clearfix")
             <span class="barBoxs">
 					<a href="todocalendarAdmin.page">待办日历</a>
-                    <a href="#" class="active_btn">今天</a>
-                    <a href="#">昨天</a>
-                    <a href="#">本周</a>
-                    <a href="#">上周</a>
-                    <a href="#">本月</a>
-                    <a href="#">上月</a>
-                    <a href="#">本季</a>
-                    <a href="#">本年</a>
-                    <a href="#">待定</a>
-                    <a href="#">未完</a>
-                    <a href="#">所有</a>
+                    <a href="../user/todo.page" class="active_btn">今天</a>
+                    <a href="../user/todo.page">昨天</a>
+                    <a href="../user/todo.page">本周</a>
+                    <a href="../user/todo.page">上周</a>
+                    <a href="../user/todo.page">本月</a>
+                    <a href="../user/todo.page">上月</a>
+                    <a href="../user/todo.page">本季</a>
+                    <a href="../user/todo.page">本年</a>
+                    <a href="../user/todo.page">待定</a>
+                    <a href="../user/todo.page">未完</a>
+                    <a href="../user/todo.page">所有</a>
                     </span>
             #end
         #end

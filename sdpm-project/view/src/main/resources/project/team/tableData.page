@@ -18,7 +18,15 @@
 	#@td()23#end
 	#@td()8.0#end
 	#@td()161#end
-	#@td()<a href="#" title="移除">#buttonIcon(iconClass="icon-remove")</a>#end
+	#@td()
+		#foreach(m:menuManager.getScopeMenus("pro-team-op"))
+			#if(m.id != "pro-team-delete")
+            <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+			#else
+				#@delItemsdpm(m.href 5)#buttonIcon(iconClass=m.icon)#end
+			#end
+		#end
+	#end
 
 #end
 #end

@@ -52,7 +52,7 @@
                         <option value="MK">结构人员</option>
                         <option value="AS">组织人员</option>
                     #end
-                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+                #*    #@Tselect2Fix()<a href="#" class="r "></a><a href="#"></a>#end*#
                 #end
                 </div>
             #end
@@ -69,7 +69,9 @@
                         <option value="MK">结构人员</option>
                         <option value="AS">组织人员</option>
                     #end
+#*
                     #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+*#
                 #end
             #end
         #end

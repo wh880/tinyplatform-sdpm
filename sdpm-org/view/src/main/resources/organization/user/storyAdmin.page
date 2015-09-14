@@ -42,10 +42,10 @@
                 #end
 
             <span class="barBoxs">
-            <a href="#" class="active_btn">指派给他</a>
-            <a href="#">由他创建</a>
-            <a href="#">由他评审</a>
-            <a href="#">由他关闭</a>
+            <a href="../user/storyAdmin.page" class="active_btn">指派给他</a>
+            <a href="../user/storyAdmin.page">由他创建</a>
+            <a href="../user/storyAdmin.page">由他评审</a>
+            <a href="../user/storyAdmin.page">由他关闭</a>
         </span>
             #end
         #end

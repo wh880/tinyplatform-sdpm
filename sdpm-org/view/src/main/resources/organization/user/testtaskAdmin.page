@@ -58,9 +58,9 @@
                 #end
 
             <span class="barBoxs">
-            <a href="#" class="active_btn">他的任务</a>
-            <a href="#">给他的用例</a>
-            <a href="#">他建的用例</a>
+            <a href="../user/testtaskAdmin.page" class="active_btn">他的任务</a>
+            <a href="../user/testtaskAdmin.page">给他的用例</a>
+            <a href="../user/testtaskAdmin.page">他建的用例</a>
         </span>
             #end
         #end
