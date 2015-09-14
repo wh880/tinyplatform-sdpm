@@ -1,23 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu id="myproduct" parent-id="0" name="产品" href="/product/page/project/togglebox.page" icon="icon-desktop" sort="800"
       isShow="1" permission="Permission">
+
     <menu id="product-demand" parent-id="myproduct" name="需求" href="/product/page/project/togglebox.page"
-          scope="liop,l2op" sort="9" isShow="1" permission="Permission">
+          scope="liop,l2op" sort="15" isShow="1" permission="Permission">
         <menu id="product-demand-change" name="需求变更" href="/product/page/tabledemo/product-demand-change.page"
-              icon="icon-random" sort="5" isShow="1"
+              icon="icon-random" sort="15" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-review" name="需求评审" href="/product/page/tabledemo/product-demand-review.page"
-              icon="icon-search" sort="4" isShow="1"
+              icon="icon-search" sort="14" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-close" name="需求关闭" href="/product/page/tabledemo/product-demand-close.page"
-              icon="icon-off" sort="3" isShow="1"
+              icon="icon-off" sort="13" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-edit" name="需求编辑" href="/product/page/tabledemo/demand-edit.page" icon="icon-pencil"
-              sort="2" isShow="1"
+              sort="12" isShow="1"
               scope="product-de"/>
+        <menu id="product-demand-input" name="导入" href="" icon=""
+              sort="11" isShow="1"
+              scope="product-io"/>
+        <menu id="product-demand-output" name="导出" href="" icon=""
+              sort="10" isShow="1"
+              scope="product-io"/>
+        <menu id="product-demand-report" name="报表" href="/product/page/tabledemo/product-report.page" icon="icon-bar-chart"
+              sort="9" isShow="1"
+              scope="product-io"/>
+        <menu id="product-demand-add" name="提需求" href="/product/page/tabledemo/product-demand-add.page" icon="icon-plus"
+              sort="8" isShow="1"
+              scope="product-io"/>
+        <menu id="product-demand-operation" name="操作" href="" icon=""
+              sort="7" isShow="1"
+              scope="product-oper"/>
     </menu>
 
-    <menu id="product-plan" parent-id="myproduct" name="计划" href="/product/page/project/product-plan.page" sort="8"
+    <menu id="product-plan" parent-id="myproduct" name="计划" href="/product/page/project/product-plan.page" sort="14"
           isShow="1" permission="Permission">
         <menu id="product-plan-demand" name="关联需求"
               href="/product/page/tabledemo/relation-plan/product-al-req.page?cname=demand" icon="icon-link" sort="4"
@@ -35,7 +51,7 @@
     </menu>
 
     <menu id="product-release" parent-id="myproduct" name="发布" href="/product/page/project/product-release.page"
-          sort="7" isShow="1" permission="Permission">
+          sort="13" isShow="1" permission="Permission">
         <menu id="product-release-demand" name="关联需求"
               href="/product/page/tabledemo/relation-release/product-al-req.page?cname=demand" icon="icon-link" sort="4"
               isShow="1"
@@ -52,10 +68,10 @@
     </menu>
 
     <menu id="product-roadmap" parent-id="myproduct" name="路线图" href="/product/page/project/product-roadmap.page"
-          sort="6" isShow="1" permission="Permission"></menu>
+          sort="12" isShow="1" permission="Permission"></menu>
 
     <menu id="product-archive" parent-id="myproduct" name="文档" href="/product/page/project/archive-list.page"
-          scope="liop" sort="5" isShow="1" permission="Permission">
+          scope="liop" sort="11" isShow="1" permission="Permission">
 
         <menu id="product-archive-remove" name="删除"
               href="#" icon="icon-remove" sort="1"
@@ -66,15 +82,23 @@
     </menu>
 
     <menu id="product-project" parent-id="myproduct" name="项目" href="/product/page/project/product-project-list.page"
-          sort="4" isShow="1" permission="Permission"></menu>
+          sort="10" isShow="1" permission="Permission"></menu>
 
     <menu id="product-modular" parent-id="myproduct" name="模块" href="/product/page/project/product-modular.page"
-          sort="3" isShow="1" permission="Permission"></menu>
+          sort="9" isShow="1" permission="Permission"></menu>
 
-    <menu id="product-overview" parent-id="myproduct" name="概况" href="/product/page/project/overview.page" sort="2"
+    <menu id="product-overview" parent-id="myproduct" name="概况" href="/product/page/project/overview.page" sort="8"
           isShow="1" permission="Permission"></menu>
 
-    <menu id="product-dynamic" parent-id="myproduct" name="动态" href="/product/page/project/dymanicdata.page" sort="1"
+    <menu id="product-dynamic" parent-id="myproduct" name="动态" href="/product/page/project/dymanicdata.page" sort="7"
           isShow="1" permission="Permission"></menu>
+
+    <menu id="allproduct" parent-id="myproduct" name="所有产品" href="/product/page/tabledemo/product-listall.page" sort="6"
+          isShow="1" permission="Permission" scope="product-menu" icon="icon-globe"></menu>
+
+    <menu id="newproduct" parent-id="myproduct" name="添加产品" href="/product/page/tabledemo/addProduct.page" sort="5"
+          isShow="1" permission="Permission" scope="product-menu" icon="icon-plus-sign"></menu>
+
+
 
 </menu>
