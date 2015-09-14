@@ -14,7 +14,7 @@
 			$(this).unbind("click").bind("click",function(){
 			
 				var start =	$("input[name='start-time']").val();
-				
+				console.log(start);
 				
 				if(start!=""){
 					start = new Date(Date.parse(start.replace(/-/g, "/")));
@@ -39,9 +39,8 @@
 					if(time=="year"){
 						end = new Date(start.getFullYear()+1,start.getMonth(),start.getDate());
 					}
-					$("input[name='end-time']").removeAttr("value");
-					$("input[name='end-time']").attr("value",end.format("yyyy-MM-dd"));
 					
+					$("input[name='end-time']").val(end.format("yyyy-MM-dd"))
 				}else{
 					alert("请选择开始日期");
 				}
