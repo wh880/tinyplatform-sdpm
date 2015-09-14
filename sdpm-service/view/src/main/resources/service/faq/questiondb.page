@@ -23,36 +23,6 @@
 
     #@tinyForm("thisform" "" "" {"class":"question_info"})
 
-   ##以下为明明问题文本页面
-       #* #@elementItem()
-        <div><b>1.如何初始化项目管理数据库？</b></div>
-        <p>把zentao/config/my.php 里面install的值改成false。</p>
-        <p>访问禅道，会自动进入安装页面，所有数据都会清空。</p>
-        #end
-
-       #@elementItem()
-       <div><b>2.项目里面的版本和测试的版本有什么区别？</b></div>
-       <p>项目→版本：是开发人员针对代码创建的标记，用于提交给测试部门测试。</p>
-       <p>测试→版本：是给测试人员的测试任务，需要测试人员在里面执行测试用例。</p>
-       #end
-
-       #@elementItem()
-       <div><b>3.怎么维护项目的模块？</b></div>
-       <p>项目中关联的需求在产品中的模块。</p>
-       <p>项目也可以维护自己的模块：先取消关联产品，然后维护模块，维护完成后再关联上产品。</p>
-       #end
-
-       #@elementItem()
-       <div><b>4.能将项目转交给别人吗？</b></div>
-       <p>项目→概况里编辑负责人即可。</p>
-       #end
-
-       #@elementItem()
-       <div><b>5.如何初始化数据库？</b></div>
-       <p>把zentao/config/my.php 里面install的值改成false。</p>
-       <p>访问禅道，会自动进入安装页面，所有数据都会清空。</p>
-       #end*#
-    ##以下为明明问题文本页面
         #@div(divClass="infoContent")
         <div>
             #@table("问答页面")
