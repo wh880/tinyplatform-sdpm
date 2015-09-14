@@ -16,8 +16,8 @@
 			<span class="r">
 				#@iconOperations("#myModal" "icon-off " "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet" "ml-5")关闭#end
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-module-editor.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
-				#@iconOperations("#myModal" "icon-remove" "删除" "200" "50""/testManagement/page/tabledemo/delete.pagelet" "ml-5")#end&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+				#@delItemsdpm("#")#buttonIcon(iconClass="icon-remove")#end&nbsp
+                <a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
 			</span>
 		#end
 	#end
@@ -41,7 +41,7 @@
 	        <span class="c">
 				#@iconOperations("#myModal" "icon-off " "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet" "ml-5")关闭#end&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-module-editor.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;
-				#iconOperations("#myModal" "icon-remove" "删除" "200" "50""/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;
+				#@delItemsdpm("#")#buttonIcon(iconClass="icon-remove")#end&nbsp
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>&nbsp;
 			</span>
 	</div>

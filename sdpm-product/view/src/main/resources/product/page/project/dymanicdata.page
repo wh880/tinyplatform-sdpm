@@ -58,8 +58,7 @@
                onclick="selectAllNullorReserve('product-dymanic','全选');"/>
         <input type="button" value="反选" class="btn btn-default btn-primary"
                onclick="selectAllNullorReserve('product-dymanic','反选');"/>
-
-            #@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel" )&nbsp;批量删除#end
+                #@radiusBtn("btn radius btn-danger " "icon-trash" "javascript:;" "deleteBatch" "batchDel" )&nbsp;批量删除#end
         #end
         #@tinyTableContent("../../data/tinydynamicdata.pagelet") ##取数据地址 总数据
             #@thead()
