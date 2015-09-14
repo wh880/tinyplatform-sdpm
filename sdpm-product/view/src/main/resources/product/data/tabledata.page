@@ -1,33 +1,44 @@
 #macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
+<input type="hidden" name="records" value="${num}"/>
 #end
 
 
 
 #set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
+    #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
-	#@td()<input type="checkbox" value="1" name="product-demand">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">03</a>#end
-	#@td()@#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">这是一条演示用的需求</a>#end
-	#@td()工程计划#end
-	#@td()开发人员#end
-	#@td()Demo#end
-	#@td()admin#end
-	#@td()10#end
-	#@td()激活#end
-	#@td()未开始#end
-	 #@td()
-	 	<a title="变更" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-change.page"><i class="icon-random"></i></a>
-	 	<a title="评审" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-review.page"><i class="icon-search"></i></a>
-	 	<a title="关闭" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-close.page"><i class="icon-off"></i></a>
-	 	<a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page"><i class="icon-pencil"></i></a>
-	 	<a title="建用例" class="ml-5" href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page"><i class="icon-sitemap"></i></a>
-	#end
+    #@td()<input type="checkbox" value="1" name="product-demand">#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">03</a>#end
+    #@td()@#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">这是一条演示用的需求</a>#end
+    #@td()工程计划#end
+    #@td()开发人员#end
+    #@td()Demo#end
+    #@td()admin#end
+    #@td()10#end
+    #@td()激活#end
+    #@td()未开始#end
+    #@td()
+     #foreach(m:menuManager.getScopeMenus("product-de"))
+        <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${m.href}"><i class="${m.icon}"></i></a>
+        #end
+
+   #* <a title="m.name" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-change.page"><i
+            class="icon-random"></i></a>
+    <a title="评审" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-review.page"><i
+            class="icon-search"></i></a>
+    <a title="关闭" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-close.page"><i
+            class="icon-off"></i></a>
+    <a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page"><i
+            class="icon-pencil"></i></a>
+    <a title="建用例" class="ml-5" href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page"><i
+            class="icon-sitemap"></i></a>*#
+
+    #end
 #end
 #end
+

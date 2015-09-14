@@ -37,7 +37,7 @@
 
     });
 </script>
-#set(name="request1")
+#set(name="request")
 #include("/common/common.page")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")

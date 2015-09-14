@@ -28,7 +28,7 @@ $(function () {
 
                 },
                 error: function () {
-                    layer.msg("error")
+                    layer.msg("删除失败！")
                 }
             });
         });

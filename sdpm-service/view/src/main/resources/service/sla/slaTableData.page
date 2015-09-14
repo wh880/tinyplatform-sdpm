@@ -18,12 +18,17 @@
         #@td()习近平#end
         #@td()20150708#end
         #@td()
-            #iconOperations(
-                "#myModal1" " icon-pencil" "编辑" "600" "300" "/service/sla/slaEdit.pagelet" "ml-5")
-            #@tinyTableItemRemove("#" "id")<i class="icon-remove"></i>#end
+            #foreach(m:menuManager.getScopeMenus("service-sla"))
+                #if(m.id != "sla-del")
+                    #iconOperations(
+                        "#myModal" m.icon m.name "600" "300" m.href+"?id="+var "ml-5")
+                #else
+                    #@tinyTableItemRemove("#" "id")<i class="icon-remove"></i>#end
+                #end
+            #end
         #end
     #end
-##    #@simpleModal("myModal1"+varFor.index "编辑")#end
 #end
-#@simpleModal("myModal1" "编辑")#end
+
+###@simpleModal("myModal1" "编辑")#end
 
