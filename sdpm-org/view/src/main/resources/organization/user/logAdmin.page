@@ -47,13 +47,13 @@
 
             <span class="barBoxs">
           <a href="logcalendarAdmin.page">日历日志</a>
-					<a href="#" class="active_btn">今天</a>
-					<a href="#">昨天</a>
-					<a href="#">本周</a>
-					<a href="#">上周</a>
-					<a href="#">本月</a>
-					<a href="#">上月</a>
-					<a href="#">所有</a>
+					<a href="../user/logAdmin.page" class="active_btn">今天</a>
+					<a href="../user/logAdmin.page">昨天</a>
+					<a href="../user/logAdmin.page">本周</a>
+					<a href="../user/logAdmin.page">上周</a>
+					<a href="../user/logAdmin.page">本月</a>
+					<a href="../user/logAdmin.page">上月</a>
+					<a href="../user/logAdmin.page">所有</a>
         </span>
             #end
 
