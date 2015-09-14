@@ -2,22 +2,31 @@
 <menu id="mysystem" parent-id="0" name="系统" href="/system/page/holiday/manage.page" icon="icon-cogs" sort="-1"
       isShow="1">
 
-    <menu id="holiday" parent-id="mysystem" name="节假日管理" href="/system/page/holiday/manage.page" icon="" sort="1"
-          isShow="1">
-        <menu id="manage" parent-id="holiday" name="管理" href="/system/page/holiday/manage.page" icon="" sort="1"
-              isShow="1"></menu>
-        <menu id="myholiday" parent-id="holiday" name="节假日" href="/system/page/holiday/holiday.page" icon="" sort="2"
-              isShow="1"></menu>
+    <menu id="holiday" parent-id="mysystem" name="节假日管理" href="/system/page/holiday/manage.page" icon="" sort="300" isShow="1">
+        <menu id="manage" parent-id="holiday" name="管理" href="/system/page/holiday/manage.page" icon="" sort="200" isShow="1"></menu>
+        <menu id="myholiday" parent-id="holiday" name="节假日" href="/system/page/holiday/holiday.page" icon="" sort="100" isShow="1">
+        	<menu id="myholiday-edit" parent-id="myholiday" name="编辑" href="/system/page/holiday/edit.page" icon="icon-pencil" sort="300" isShow="1" scope="myholiday-op"></menu>
+        	 <menu id="myholiday-del" parent-id="myholiday" name="删除" href="javascript:;" icon="icon-remove" sort="200" isShow="1" scope="myholiday-op"></menu>
+        	
+        </menu>
        <!--  <menu id="working" parent-id="holiday" name="工作日" href="/system/page/holiday/working.page" icon="" sort="3"
               isShow="1"></menu> -->
     </menu>
     
-    <menu id="dictionaries" parent-id="mysystem" name="数据字典" href="/system/page/dictionaries/dict_list.page" icon="" sort="2"
+    <menu id="dictionaries" parent-id="mysystem" name="数据字典" href="/system/page/dictionaries/dict_list.page" icon="" sort="200"
           isShow="1">
-        <menu id="dictionary-type" parent-id="dictionaries" name="字典类型管理" href="/system/page/dictionaries/dict_list.page" icon="" sort="1"
-              isShow="1"></menu>
-        <menu id="dictionary-entries" parent-id="dictionaries" name="字典项" href="/system/page/dictionaries/dictitem.page" icon="" sort="2"
-              isShow="1"></menu>
+        <menu id="dictionary-type" parent-id="dictionaries" name="字典类型管理" href="/system/page/dictionaries/dict_list.page" icon="" sort="200" isShow="1">
+             <menu id="dict-view" parent-id="dictionary-type" name="查看" href="/system/page/dictionaries/dict_view.pagelet" icon="icon-eye-open" sort="300" isShow="1" scope="dict-op"></menu>
+        	 <menu id="dict-edit" parent-id="dictionary-type" name="编辑" href="/system/page/dictionaries/dict_edit.pagelet" icon="icon-edit" sort="200" isShow="1" scope="dict-op"></menu>
+        	 <menu id="dict-del" parent-id="dictionary-type" name="删除" href="javascript:;" icon="icon-trash" sort="100" isShow="1" scope="dict-op"></menu>
+        	  
+        </menu>
+        <menu id="dictionary-entries" parent-id="dictionaries" name="字典项" href="/system/page/dictionaries/dictitem.page" icon="" sort="100" isShow="1">
+        	<menu id="dictitem-view" parent-id="dictionary-entries" name="查看" href="/system/page/dictionaries/dictitem_view.pagelet" icon="icon-eye-open" sort="300" isShow="1" scope="dictitem-op"></menu>
+        	<menu id="dictitem-edit" parent-id="dictionary-entries" name="编辑" href="/system/page/dictionaries/dictitem_edit.pagelet" icon="icon-edit" sort="200" isShow="1" scope="dictitem-op"></menu>
+        	<menu id="dictitem-del" parent-id="dictionary-entries" name="删除" href="javascript:;" icon="icon-trash" sort="100" isShow="1" scope="dictitem-op"></menu>
+        
+        </menu>
       
     </menu>
 </menu>

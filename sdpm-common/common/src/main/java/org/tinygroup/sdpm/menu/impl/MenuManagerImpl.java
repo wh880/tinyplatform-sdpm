@@ -107,6 +107,9 @@ public class MenuManagerImpl implements MenuManager {
             return null;
         }
         List<String> scopeIdList = scopeMap.get(scope);
+        if (scopeIdList == null) {
+            return null;
+        }
         List<Menu> menuList = new ArrayList<Menu>();
         for (String s : scopeIdList) {
             menuList.add(menuMap.get(s));

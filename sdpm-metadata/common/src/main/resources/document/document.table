@@ -1,0 +1,55 @@
+<tables id="a91b5666002c43eabeebeeae6a8e8b99" package-name="org.tinygroup.alm.document">
+  <table id="73f7262da7df41468e00bb8c16e84c95" name="attachment" title="附件表" packageName="org.tinygroup.alm.document">
+    <table-field standard-field-id="94fc4d04a9444e0a987e8ca859882f0d" primary="true" unique="false" not-null="false" id="file_id" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="031040851d0f49f9894fb2d6521de99b" primary="false" unique="false" not-null="false" id="file_pathname" auto-increase="false"/>
+    <table-field standard-field-id="5859a52de43840ef8d02f08f2e2e9e79" primary="false" unique="false" not-null="false" id="file_title" auto-increase="false"/>
+    <table-field standard-field-id="ed2abec82c884d48bb509a0ccbfd082a" primary="false" unique="false" not-null="false" id="file_extension" auto-increase="false"/>
+    <table-field standard-field-id="5593effeb0e5438fb558e3bc3c8a7c57" primary="false" unique="false" not-null="false" id="file_size" auto-increase="false"/>
+    <table-field standard-field-id="2c9b30216c1240c79b55f154009e7eef" primary="false" unique="false" not-null="false" id="file_object_type" auto-increase="false"/>
+    <table-field standard-field-id="2f651f7df0ae4e5fa764d52be1ef950c" primary="false" unique="false" not-null="false" id="file_object_id" auto-increase="false"/>
+    <table-field standard-field-id="f072acf430c0483aaa969295fae15d45" primary="false" unique="false" not-null="false" id="file_added_by" auto-increase="false"/>
+    <table-field standard-field-id="b65342e978b44d1981e19edc489843d6" primary="false" unique="false" not-null="false" id="file_added_date" auto-increase="false"/>
+    <table-field standard-field-id="5429f6b81f834bc2abde808cddfb2974" primary="false" unique="false" not-null="false" id="file_downloads" auto-increase="false"/>
+    <table-field standard-field-id="87dcd436705b4389bb1cd6f15b3692ba" primary="false" unique="false" not-null="false" id="file_extra" auto-increase="false"/>
+    <table-field standard-field-id="49ae069b1b04465ab4b6966e3615cee8" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  </table>
+  <table id="229f61c1d3be42489c41e679e294d54f" name="comments" title="文档评论表" packageName="org.tinygroup.alm.document">
+    <table-field standard-field-id="3f6ff9636a124b86a771b39dadec817e" primary="true" unique="true" not-null="false" id="comment_id" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="6dfa47fc0cdc4c12bfe4e2f006466cdb" primary="false" unique="false" not-null="false" id="doc_id" auto-increase="false"/>
+    <table-field standard-field-id="cd41f2858ecf403caf2ba483f480f149" primary="false" unique="false" not-null="false" id="parent_id" auto-increase="false"/>
+    <table-field standard-field-id="c265613501f54e6d8303b62d25625f25" primary="false" unique="false" not-null="false" id="comment_text" auto-increase="false"/>
+    <table-field standard-field-id="8628fe8c917e4985b0e0ae20c219ae45" primary="false" unique="false" not-null="false" id="comment_added_by" auto-increase="false"/>
+    <table-field standard-field-id="bc53e658ce114c3ca204baa58817ecca" primary="false" unique="false" not-null="false" id="comment_added_date" auto-increase="false"/>
+    <table-field standard-field-id="49ae069b1b04465ab4b6966e3615cee8" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  </table>
+  <table id="59549c7852a84135a7f594a6d2081544" name="doc" title="文档表" packageName="org.tinygroup.alm.document">
+    <table-field standard-field-id="6dfa47fc0cdc4c12bfe4e2f006466cdb" primary="true" unique="false" not-null="false" id="doc_id" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="999665d97994405bab25998560219fdc" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
+    <table-field standard-field-id="cc29ddaff4794b498d6fa26d5eb63ce6" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="f23ee602490848ccaa288ef992c76b58" primary="false" unique="false" not-null="false" id="doclib_name" auto-increase="false"/>
+    <table-field standard-field-id="8f45dc0709dd4f8ab87a81c44a0b56ce" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
+    <table-field standard-field-id="e5f365ca7c5c4bf7bbd29807417ccc78" primary="false" unique="false" not-null="false" id="doc_title" auto-increase="false"/>
+    <table-field standard-field-id="e24e4096abc945b2a22f8a5372e9ee17" primary="false" unique="false" not-null="false" id="doc_abstract" auto-increase="false"/>
+    <table-field standard-field-id="ee6ef2c36c744c56870ccdfa36c4606e" primary="false" unique="false" not-null="false" id="doc_keywords" auto-increase="false"/>
+    <table-field standard-field-id="45027461241a4b519a509bf12a94c607" primary="false" unique="false" not-null="false" id="doc_type" auto-increase="false"/>
+    <table-field standard-field-id="2b2f8324ea2842f3bacbf0e8b54bf621" primary="false" unique="false" not-null="false" id="doc_content" auto-increase="false"/>
+    <table-field standard-field-id="922a44d1439c4563a999f8ccdbf5cbd2" primary="false" unique="false" not-null="false" id="doc_url" auto-increase="false"/>
+    <table-field standard-field-id="f8f4804fd0714806bb2186c92bc53b78" primary="false" unique="false" not-null="false" id="doc_views" auto-increase="false"/>
+    <table-field standard-field-id="f2fd42ed628e47dc964d9a31f44cfef9" primary="false" unique="false" not-null="false" id="doc_added_by" auto-increase="false"/>
+    <table-field standard-field-id="4fba28e2ea804c4aa0a2a3fefc43bcd2" primary="false" unique="false" not-null="false" id="doc_added_date" auto-increase="false"/>
+    <table-field standard-field-id="6fb9ef295dd0429f9e88cc7be46e3edf" primary="false" unique="false" not-null="false" id="doc_edited_by" auto-increase="false"/>
+    <table-field standard-field-id="6cc5ade65f9f46019a05ed29a698d747" primary="false" unique="false" not-null="false" id="doc_edited_date" auto-increase="false"/>
+    <table-field standard-field-id="e97c783395354f39b5c9d823d623e6ed" primary="false" unique="false" not-null="false" id="doc_score" auto-increase="false"/>
+    <table-field standard-field-id="65cc7176ea7e4f54886f85d25ca2a3e3" primary="false" unique="false" not-null="false" id="doc_share" auto-increase="false"/>
+    <table-field standard-field-id="49ae069b1b04465ab4b6966e3615cee8" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  </table>
+  <table id="56f136998f6c43208337c635b20390b2" name="docLib" title="文档库表" packageName="org.tinygroup.alm.document">
+    <table-field standard-field-id="be223410bac44b6da883a76252d276b7" primary="true" unique="false" not-null="false" id="doclib_id" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="f23ee602490848ccaa288ef992c76b58" primary="false" unique="false" not-null="false" id="doclib_name" auto-increase="false"/>
+    <table-field standard-field-id="49ae069b1b04465ab4b6966e3615cee8" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  </table>
+</tables>

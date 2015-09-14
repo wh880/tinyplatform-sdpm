@@ -76,7 +76,7 @@
 	
 		$(function(){
 			$("#productLine-select").on("change",function(){
-				window.location.href='${TINY_CONTEXT_PATH}/productLine/page/project/productLine.page?item='+$(this).find("option:selected").text();
+				window.location.href='${TINY_CONTEXT_PATH}/product/page/project/togglebox.page?item='+$(this).find("option:selected").text();
 			});
 		});
 	

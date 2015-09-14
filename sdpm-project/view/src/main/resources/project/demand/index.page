@@ -12,7 +12,7 @@
 			#@tabBodyCol("ptop-5")
 			#@div(divClass="operationbar")
 				<span class="f">
-					<a href="#" class="active_btn c">需求列表</a>
+					需求列表
 				</span>
 				<span class="r">
 				

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu id="home" parent-id="0" name="我的地盘" href="/" icon="fa-dashboard" sort="1000" isShow="1">
-
+    <map>
+        <property key="stringkey22" value="21313"/>
+        <property key="stringkey" value="1"/>
+    </map>
 </menu>
