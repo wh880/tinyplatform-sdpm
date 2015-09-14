@@ -14,7 +14,7 @@
     #@td()主席#end
     #@td()研发工程师#end
     #@td()
-        #set(map={"org-privilege-user":[700,300],"org-privilege-copy":[700,300],"org-privilege-edit":[600,300]})
+        #set(map={"org-privilege-user":[700,300],"org-privilege-copy":[700,300],"org-privilege-edit":[600,200]})
         #foreach(m:menuManager.getScopeMenus("org-privilege"))
             #if(m.id == "org-privilege-maintain")
             <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>

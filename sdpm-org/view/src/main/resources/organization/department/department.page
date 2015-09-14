@@ -38,7 +38,7 @@
                 #navDelimiter()
                 #@navItemNormal("#")组件#end
                 #navDelimiter()
-                #@navItemCurrent()当前页面#end
+                #@navItemCurrent()下级部门#end
             #end
             #@div(divClass="col-12 input_box")
 

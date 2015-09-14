@@ -17,6 +17,7 @@
     #@td()001${page}#end
     #@td()2015-12-1#end
     #@td()习近平#end
+    #@td()部门#end
     #@td()
         #@aModal("#myModal" "日志详情" "600" "300" "" "/organization/log/detail.pagelet")日志详情#end
         #@dialog("myModal")
