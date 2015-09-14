@@ -54,11 +54,11 @@
         </select>
 
     </div>
-    <table class="table table-condensed table-form" id="task-search">
+    <table class="table-condensed table-form" id="task-search">
         <tbody>
         <tr>
             <td class="w-400px">
-                <table class="table active-disabled">
+                <table class="active-disabled">
                     <tbody>
                     <tr id="searchbox1" class="">
                         <td class="text-right w-60px"><span id="searchgroup1"><strong>第一组</strong></span><input
@@ -109,7 +109,7 @@
             </select>
             </td>
             <td class="w-400px">
-                <table class="table active-disabled">
+                <table class="active-disabled">
                     <tbody>
                     <tr id="searchbox4" class="">
                         <td class="text-right w-60px"><span id="searchgroup2"><strong>第二组</strong></span><input

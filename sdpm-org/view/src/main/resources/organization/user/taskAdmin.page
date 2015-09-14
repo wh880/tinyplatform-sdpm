@@ -43,11 +43,11 @@
                 #end
 
             <span class="barBoxs">
-            <a href="#" class="active_btn">指派给他</a>
-            <a href="#">由他创建</a>
-            <a href="#">由他完成</a>
-            <a href="#">由他关闭</a>
-            <a href="#">由他取消</a>
+            <a href="../user/taskAdmin.page" class="active_btn">指派给他</a>
+            <a href="../user/taskAdmin.page">由他创建</a>
+            <a href="../user/taskAdmin.page">由他完成</a>
+            <a href="../user/taskAdmin.page">由他关闭</a>
+            <a href="../user/taskAdmin.page">由他取消</a>
         </span>
             #end
         #end
