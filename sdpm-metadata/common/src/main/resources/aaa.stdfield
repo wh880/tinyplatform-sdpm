@@ -1,549 +1,543 @@
 <standard-fields>
-  <standard-field id="9c4f50164ed14d15b7f9e201962d31e2" name="task_consumed" title="任务消耗" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false">
-    <description></description>
-  </standard-field>
-  <standard-field id="d8cb454541474d149b4a964bb0ed13ba" name="product_line_spec" title="产品线描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="ded650d8b4f5427aa560c8973dff2016" name="message_senddate" title="消息发送时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="ec5d712ca2864d4cbd4bfe8b843d0226" name="dept_parent" title="上级部门" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="705512995e25428592adcb4e24572bd6" name="task_assigned_to" title="任务指派人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="c460e8b18bdb4c23bceb9e9a31e64a8f" name="history_new" title="新值" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="72f0236d4a5842cebdad8d9d59c0b635" name="to_story_id" title="转为需求ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="5b1537bc5d8e456fb09adb0ddec33f0e" name="story_reviewed_by" title="需求审核人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="b53a259fe7c740ff90eef0cbab37d55e" name="extension_name" title="扩展名称" business-type-id="78dadeda7dc747b3b4a2ae45bffb6e1d" not-null="false"/>
-  <standard-field id="53e015a73db647618569a99da31f535b" name="product_created_date" title="创建日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="b206faacc3ec48f7a072e46ad01a86dd" name="test_result_id" title="测试结果ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="1af1912b2b8e49f9b67cb211cfc7e0a2" name="review_result" title="回访结果" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="9bd9b8486eab409da7849710fa2673cc" name="sr_create_date" title="报告制作日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="babdda4a0b70474eb8f380fee45348ba" name="story_verification" title="验证标准" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="c85bcf6f55414bd0b2ec8934337f7aca" name="bug_source" title="缺陷来源" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="fe32c9d9960042fa8a09bb8642662dde" name="case_pri" title="优先级" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="cc7a472a71094afa892aedced56fccc7" name="qa_comment" title="评估说明" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="0186155ec11045d487b8b1b7e5c347cf" name="reply_spec" title="回复描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="c81c6b37c4b24d93b6e88c6e9147d972" name="extension_site" title="扩展网站" business-type-id="78dadeda7dc747b3b4a2ae45bffb6e1d" not-null="false"/>
-  <standard-field id="2f8b8e2e4523450db7a7ad21fe395e74" name="program_id" title="项目集ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="a3732f8edd004beabea3ada569e9a643" name="history_id" title="历史信息ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="4782a5a6f28f4a52886bbf68d3fb9560" name="product_line_status" title="产品线状态" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="656711ef47dc4657b9a98a54a864707b" name="sysdict_id" title="字典ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="2ea244df45434ac6a72ca27bfdc2cbea" name="request_count_client_feed_back" title="客户反馈请求数" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="00827fe5dd384e7686d0c380cb51121b" name="requester" title="联系人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="faf7c97179054205a916eb524d8a472b" name="service_effort_limit" title="服务工时上限" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="e06c087efa494ce3bbf094e9dfc8c5f2" name="role_priv_id" title="角色权限ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="4f2f7c3a8e004567a2acc1ec2c293733" name="story_estimate" title="需求估算" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="652786ffe08e446791f6af42963f7ee7" name="testplan_id" title="测试计划ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="503bb7da622642fe8eefce35411baf5f" name="project_parent" title="父项目ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="2629bb9c156644a590d3c9f6e51f779c" name="risk_closed_by" title="风险关闭者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="ac8fc8ea5ad745238040a1d4953cbd0a" name="todo_name" title="事项名称" business-type-id="78dadeda7dc747b3b4a2ae45bffb6e1d" not-null="false"/>
-  <standard-field id="55e6fc00fd014106994afdeadfb792fa" name="history_diff" title="差别" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="1bef42baf7a442b4ba21bdfffc035fa9" name="sr_type" title="服务报告类型" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="00a150b049f34aa79dc8953f83dbddab" name="case_status" title="用例状态" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="e1892ce2bf4642a6b005ecdd2240b22a" name="user_birthday" title="用户生日" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="4b6c813474ba4ff18e83b6777187db6c" name="dept_manager" title="部门负责人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="4a2f10fc6f5c4685a1c6b895374e21c2" name="linkcase_id" title="关联用例ID" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="eaaede07cc2346278c91f43c6e0a162b" name="test_result_date" title="测试结果日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="8948560671b14585b9c7daa42e6737c0" name="user_avatar" title="用户化身" business-type-id="d202722a21aa47149768950f9f837700" not-null="false"/>
-  <standard-field id="4b8428e34e40423386f1e57248c2b8c6" name="sla_closed_by" title="关闭人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="a7bf4c3e92c147b89a52bf297ae01c18" name="bug_link_bug" title="关联缺陷" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="6d758ced26cf449dbda281cc398ee168" name="case_step_id" title="用例步骤ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="4fa0a294799f4b429e859c3b039b9832" name="qa_feature_value" title="质量评估值" business-type-id="65dbd4c66a3444e6851e94d3f10165b4" not-null="false"/>
-  <standard-field id="7f2ca56b301f46e5b30ba8e2371eb589" name="user_visitsm" title="本月访问次数" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="b703cbc4cbda4fdb89bfd731da846434" name="user_zipcode" title="用户邮编" business-type-id="bef0919ec31f424abd96f8ae11f32bde" not-null="false"/>
-  <standard-field id="1bc07ddb7e4a4da98308abea17b3d460" name="action_id" title="动作ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="a05bd2a278c8453780d9b105a9eb60ed" name="product_line_name" title="产品线名称" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="61856a6bee9c493faa5ef337e7dc116a" name="request_trans_to" title="转换为" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="d992f621f668462a88bfb80d20067b91" name="user_regdate" title="加入时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="91f041662743448d8e54db30c2dba46a" name="dept_path" title="部门层次路径" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="3902d98041894b4abaedb03cd55dc38c" name="program_status" title="项目集状态" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="c462e22e844041799530a5a5457044fa" name="bug_id" title="缺陷ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="b80c7906f12e42e0a061e324c072bc4d" name="product_status" title="产品状态" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="747c50e2ba90465a8529f49686049665" name="risk_plan_date" title="风险计划日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="520888cb52ea486ebcbcb043b9cc50c5" name="story_closed_by" title="需求关闭者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="9788d3540bf64899871295e7aaea8bb3" name="case_version" title="关联用例版本" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="ee860259856048d28dccbe10d18709ee" name="team_days" title="可用工日" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="c8eee6cf4b404db6b6c7e049e6e16539" name="faq_question" title="问题描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="eb101448307e4fd5946385fd89a86001" name="company_address" title="公司地址" business-type-id="915f9f3c58d34f38b628ed68fce8d03e" not-null="false"/>
-  <standard-field id="8deca88075ab43238133933239623f1d" name="program_name" title="项目集名称" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="100f967a5fa34650847fcb48af267887" name="pmc_left" title="剩余工作量" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="6c4959fc40a747afa750deaa912d962e" name="object_id" title="关联对象ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="7e606b857bfb48bdb30b915c57647a30" name="extension_license" title="扩展授权" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="61258ce11e0247bbb94581f280b7bffc" name="file_extra" title="扩展字段" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="6b9e1b0ed7d946729868bf2db25d0cab" name="risk_exposure" title="风险值" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="fa0ad808cd2f44129656c89bf1150733" name="story_assigned_date" title="需求指派日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="e21b55002f9e44a794fce2b43e84c26d" name="program_stage" title="项目集阶段" business-type-id="bef0919ec31f424abd96f8ae11f32bde" not-null="false"/>
-  <standard-field id="d17b4fb9494242d291f1a46c4e55eba8" name="build_spec" title="集成描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="4d91b2fde6354706984da2ab07f33220" name="doc_added_by" title="加入者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="0bce46b270144278ac00a7eb2746cf3f" name="qa_id" title="质量评估ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="47d7cfed845e482fbb6bd900ed0bdc36" name="faq_type" title="问答类型" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="6fed8795fe41413082628d6f45b5731a" name="request_is_abnormal" title="异常标记" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="a8573a02afbf4d11998bf79ba54a4043" name="request_keywords" title="关键字" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="9e288be1ea3d4fd6876db42647d18c40" name="request_count_bug" title="属于缺陷数量" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="567a7407de374ec8a1698e60169cea0f" name="sysdict_key" title="字典键" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="ea62b98027e3426884e8923c8084a934" name="message_type" title="消息类型" business-type-id="bef0919ec31f424abd96f8ae11f32bde" not-null="false"/>
-  <standard-field id="a91a1edc22e44cf8bb8ad3e291614426" name="qa_test_coverage" title="测试充分性" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="7f2f9977d71946a39bb0f99bb6324894" name="sla_reviewed_by" title="批准人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="527c4ae544204d15bfb18cbae225f030" name="request_count_c_req" title="变更需求数" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="1f8e21ff8bec4bfd8c2ce1553b469516" name="sla_id" title="服务协议ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="73c6edf65de4492aafdbf87e27df9a4f" name="risk_mitigation_a_p" title="风险缓解计划" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="b1e3eb70307a40a2b28e94512202df09" name="task_finished_date" title="任务完成日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="621a9316e838476cb42f890416925fb1" name="bug_resolved_by" title="缺陷解决者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="6fcd0c26c0fb4cb3894ef2287512df37" name="release_publisher" title="RELEASE_PUBLISHER" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="b451d15e81194988b621a81db72c021d" name="task_left" title="任务剩余" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="8afbf26b55a848a6a6f7ab32cd4d6e90" name="team_role" title="角色" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="ec2e566e6ddf449e9d5eaf525843452a" name="project_manager" title="项目经理" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="111da9011ecd4ae98a2cdd57b847d1fc" name="module_type" title="模块类型" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="ed6968a4f4d54bf9af398b147cb1f0b8" name="case_step_expect" title="用例步骤预期" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="21e440208a064a9c926cf05ee02b71d1" name="risk_exp_phase" title="风险预期阶段" business-type-id="d202722a21aa47149768950f9f837700" not-null="false"/>
-  <standard-field id="6b2ef8a2703747379349ce7b666a0b4e" name="program_days" title="项目集持续工作日" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="9db20316653c40a08c98ba11c299bd84" name="case_step_results" title="用例步骤结果" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="7feea8cba07640b1a72ed69464d3959b" name="portfolio_id" title="项目组合ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="a2cf9a5548b3463ea019da200bee81e4" name="user_last" title="USER_LAST" business-type-id="b2d1c47124ef42a2bd06e3170e3e0090" not-null="false"/>
-  <standard-field id="951b8d5075794bd78e26b8c14ac9de74" name="program_canceled_by" title="项目集取消人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="eda6aa0d5b7e455ebd32eab6f1daad46" name="product_order" title="产品序号" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="c050c96d5acb485e8b25f137c285cb07" name="reviewer" title="回访者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="c2fea753902b48429fe3bb750c513cc5" name="pmc_tasknum" title="剩余任务数" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="035ac72f94aa43a1b3c7a97094a495e6" name="client_id" title="客户ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="dc494b9c68cb42a0bba1b2563f3f3b8b" name="hdate" title="日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="78eb418efae24f6a9badefbb1f2b6623" name="project_pri" title="项目优先级" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="9c8396a592114b74a2bc966de65d9b32" name="case_title" title="用例标题" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="46faf052c99e479dba0ff8cc6847c9bb" name="task_type" title="任务类型" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="9d86dd998fdd41ceb2d4b1a6bd238f13" name="sla_spec" title="服务协议表述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="5629e3249d844744bcd190370714e3a9" name="release_type" title="发布版本类型" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="ae606e73d6af429d84b59f0cac3dbac6" name="plan_release_date" title="发放日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="07aaabeab2c04276925eb654d2ffb8f4" name="sysdict_module" title="所属模块" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="002e40e62c7140fb998093d35523fe3f" name="release_mail_b_c" title="发布秘送" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="c0b4a7e70ebd47e9a72ae7f6bfe84e17" name="user_onlinetime" title="用户在线时间" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="9b06df421dae496980aef443d831a01c" name="release_create_by" title="创建人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="dfaa0dda30c541c79ac4c9e344679a16" name="todo_pri" title="事项优先级" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="730b810fe7e94696be8bcee6ddb69c35" name="release_path" title="发布包存放路径" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="02b4b0a2a4624cbeab689017d3f818e1" name="product_line_code" title="产品线代号" business-type-id="c699fc5aa56849d097aed70a669226d7" not-null="false"/>
-  <standard-field id="2676799906fd4bd39fbfa20b0edd9e27" name="doc_id" title="文档ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="2dee9b0ecab34431bc15d037135e916e" name="test_result_last_runner" title="测试最后执行者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="2a8aba8972cb494b937894db058b3eee" name="pmc_ac" title="消耗工作量" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="b0af8fa554bd421bbd2ba3d4108d6b19" name="module_name" title="模块名称" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="1417592d62d64dcf8d41cd6f7119880e" name="project_begin" title="项目开始日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="78fbf0d359164ed9a1a3cd32831a32f0" name="sr_end_date" title="统计截止日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="ec203685ca1642a99d9dc219c4557713" name="user_gender" title="用户性别" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="9205a91ec5cb4f9aa3b89f6fac272e7b" name="sla_close_date" title="关闭时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="d632204b06a74d0fa000fec066d76786" name="company_id" title="公司ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="2dd82f5f162e404d9576951fcb2af7da" name="product_white_list" title="白名单" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="1d9b29a1b9b54e91b1def289de03fcaa" name="request_type" title="请求类型" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="4578f50e16c3443eb0afec2aed009cd4" name="case_last_run_result" title="用例最后执行结果" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="01adde70d5c04f598e569155290ac2a6" name="doc_edited_by" title="修改者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="4a9623a39e8046e78001db9d1dcb97f3" name="risk_avoidance_a_p" title="风险规避计划" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="429940d726ba47cdad16d37837185e92" name="user_email" title="电子邮件" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="1f9bd1e24d7245b487e8f1d85603a9ad" name="history_old" title="旧值" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="31c7fc1cdeb94e61b23a89dc4dc5d837" name="user_ip" title="用户IP" business-type-id="d40653f917f4487397d7dbf962930e41" not-null="false"/>
-  <standard-field id="210fc4803c8b4da99476cccef2ac84d2" name="plan_id" title="计划ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="478182cae56c4dd3b08fc55076fe17a8" name="task_real_started" title="任务实际开始日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="d176ad48b21f4a8893a7e972405f4144" name="task_canceled_date" title="任务取消日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="cc6a5adc66b540e4bb8d82ee4f2affdd" name="release_mail_to" title="发布对象ACCOUNT" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="d92b7fca7c254e9984c7fd5263aef2f9" name="bug_pri" title="优先级" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="1d312d296b0640b7aaefc4bcbee458b0" name="pmc_date" title="统计日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="29aac55ba86444529ca1d05264400827" name="user_id" title="用户ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="d1fac3ee63a044dfb1b6d90896e1e7ed" name="todo_begin" title="开始时间" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="814ff7ad75da43e380a6a7531b92d38f" name="faq_keywords" title="关键字" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="71922a809b8a450496f4988ee5ffc57b" name="case_order" title="用例序号" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="0d19313f11a7471688e7dc38d97ca8b3" name="dept_function" title="部门职能" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="b9c520866ef24768b9a6f015fa5bf535" name="build_file_path" title="文件路径" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="98f09380c32a4dbf9826e6da1123eb69" name="request_release_span" title="实际交付跨度" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="091d072e14354a47a566ec38d1a33931" name="bug_assigned_date" title="指派日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="6df58e2c100b453092a6da72638003f0" name="client_created_by" title="客户登记人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="29a2e7dc1aa540fdb8feb50fb8611601" name="release_content" title="发布内容" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="e17a74228a424d6eae609d0f98a27702" name="project_order" title="项目序号" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="2c8d0385997c49be9a73877bc1761d7b" name="doc_type" title="文档类型" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="b686eb52551f443889afefc0298f48c7" name="message_level" title="消息级别" business-type-id="bef0919ec31f424abd96f8ae11f32bde" not-null="false"/>
-  <standard-field id="eb23c5fe483949bcaa24af0bb10ffb9f" name="doc_share" title="文档转发数" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="3cf4ab982aff4e0688bbaba3156a662d" name="story_spec_id" title="需求描述ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="337c1b1be6264023a57ebcddb41233b6" name="client_create_date" title="客户登记时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="95ebf0c6914b440daefbf799c830844c" name="project_story_id" title="项目需求ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="438f0766289b44be8865fc81fd5f14ec" name="project_days" title="可用工作日" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="95880ce2fb77450582819257d8d95734" name="hdate_id" title="记录ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="e0b720fa074e47b6b531c283976327a3" name="risk_last_edited_by" title="风险最后编辑者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="e40314fcd51743499430a0f8ccd2ad0f" name="case_result" title="用例结果" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="cd9c11e4d83a48cbb550e600b1d1876a" name="testrun_last_run_date" title="测试执行日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="e8d5911c5781485bbb21d711a177c401" name="doc_abstract" title="文档摘要" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="7c1736f476324959bf4fb30e46c7abaf" name="project_whitelist" title="PROJECT_WHITELIST" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="dff2ca9c593a4347ac70c443d8aa9134" name="history_field" title="操作字段" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="905738a5f22d41f4952ce62e7996536e" name="user_gtalk" title="GTALK" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="57ac8874a1ec43d19828bc72d0550966" name="actor" title="操作者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="89b110f7281246ff93cebfa655ee53df" name="case_opened_by" title="用例创建人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="33c3076e83f04473bb2b816e19dd9e68" name="story_assigned_to" title="需求指派" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="461c17ad60c846edb0b5c1021028bbbe" name="extension_id" title="扩展ID" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="0566a8d506e948e5a46896aeae285e83" name="object_type" title="关联对象类型" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="811d3e9822c74e19a1be9bfcb3e4efa1" name="faq_source" title="FAQ来源" business-type-id="bef0919ec31f424abd96f8ae11f32bde" not-null="false"/>
-  <standard-field id="ae4ff215168e4c228343b1501a60316c" name="risk_owner" title="风险责任人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="00e791654c324c31bb82c2b7e7fa3fa5" name="bug_opened_by" title="缺陷创建人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="b440df931871435fb769f236fa684a91" name="bug_os" title="操作系统" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="679aefdc325645209b2cdfdbc3b78c5f" name="reply_date" title="回复时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="fa64f062a3924e95ab02ec629fc296e7" name="testrun_id" title="测试执行ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="f1badfe80ab745068ea783231c20cf46" name="doclib_name" title="文档库" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="3a8b14b9a3704c738e1ac792033f4257" name="action_date" title="操作时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="5067778cb1a14be9a377dc9da9708e6e" name="sysdict_section" title="分区" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="a1a5366d277341d899a5fcd28deab18f" name="reply_opinion" title="回复意见" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="9122226c9f9b4c8883a8a11304e41852" name="task_assigned_date" title="任务指派日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="0e6485015bd048b8b569d433a12ad798" name="request_count_client" title="客户请求数" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="2dd2917561b345b1aaf1c66e56305840" name="todo_end" title="结束时间" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="da87ef2bb9c2428385bcd72d98c00529" name="userquery_form" title="用户查询表单" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="afe36a7d997f4cbd89899508e6e58e06" name="pmc_cpi" title="成本偏差" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="ab9210fa57a940a089f4eab66dad320f" name="case_stage" title="使用阶段" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="d4c648d77c4840238be2c7165479ddd9" name="user_phone" title="用户电话" business-type-id="67077bff05514ff0a8f39c129f309845" not-null="false"/>
-  <standard-field id="5aa61a6362a543a1984c8f59d846af86" name="testplan_owner" title="负责人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="23710d24aabe413e97208be22ba7ac5a" name="user_password" title="用户口令" business-type-id="651611f09d4c4450a321dcaf0ca5c967" not-null="false"/>
-  <standard-field id="13f41ce1f3ca4f59ba88c6d8e0380ab0" name="request_spec" title="请求描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="9d318773e04048f2881bb49efdce8708" name="plan_effort" title="计划投入" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="79792fec0b0045ebb1c6f0607232dda7" name="story_link_stories" title="关联需求" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="e049e06c7ed04b639c68d81d35213281" name="team_hours" title="可用工时/天" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="87293036762b4c81ab808eccd9f4c8f8" name="project_closed_date" title="项目关闭日期" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="c01c53a0c0f640139ea8c140c9124e30" name="bug_mailto" title="邮件列表" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="7dbf7d7b7d2e4ea3a8db97d19a47ad1a" name="task_closed_date" title="任务关闭日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="12e1d757b6d24459b027c968cf39d650" name="request_pre" title="请求优先级" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="1586d0ba07d4428f8c37bf98d2a4a03d" name="testrun_last_run_result" title="测试执行结果" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="9733707a6c5a4939aa4b82e968886f42" name="faq_id" title="问答ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="1352bc0b587840f99e89a192eaabbd05" name="bug_last_edited_date" title="缺陷最后编辑日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="09a52679547049d3b595ca188d3ba6a7" name="module_order" title="模块序号" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="e116301c81ab423fac9282c29cb65010" name="request_reply_date" title="请求回复时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="6001d5efe188440f8506a01129ef84cf" name="build_name" title="集成版本名称" business-type-id="78dadeda7dc747b3b4a2ae45bffb6e1d" not-null="false"/>
-  <standard-field id="02fd6e9625284449a9a99167322b24f0" name="team_leave" title="离开日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="fc158f51fc854d0ebf31f45c3bf00b6c" name="project_closed_by" title="项目关闭人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="8babce83132b4a628652b7a2ea66231c" name="program_begin" title="项目集开始日期" business-type-id="a819d2e170d6479a9bd08e70cbe107e8" not-null="false"/>
-  <standard-field id="425a4ff873aa4b1fbbbae9cefc6e8b3c" name="bug_title" title="缺陷标题" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="3bd177428ba043f7a653ebcffc7e04f7" name="project_team" title="项目组名" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="f0fb992f8556400e8b88a9c51793841d" name="review_type" title="回访类型" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="9556d53b360f42218d18a18a7d8e3e10" name="file_pathname" title="附件路径" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="3255f06be57b45009edfa318bd9525b6" name="company_website" title="公司网站" business-type-id="915f9f3c58d34f38b628ed68fce8d03e" not-null="false"/>
-  <standard-field id="6e6e380fd77a40a78763c875c290d143" name="project_opened_by" title="项目创建人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="96a0dbb8ce5c46cd928fc0a2843abf57" name="user_msn" title="MSN" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="8654639f5b3e40b58dbfd7d4bc82356a" name="request_id" title="客户请求ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="423fd42f30794ca48ac1cb471277f781" name="task_pri" title="任务优先级" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="99fe53ad635e4df49b6df0f691252a16" name="case_run" title="执行次数" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="eea5edad70a94faea812983550f8b1c1" name="account" title="用户账号" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="56c7d8f3b0824f498181926e4c921e29" name="module_parent" title="父模块" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="f412f7bf023d4b62b876b36e529da9ee" name="bug_resolved_build" title="解决版本" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="765c0e6302bf4d6993a89860e543e0f2" name="case_type" title="用例类型" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="a14e2dfc778a4ac58460c8f5fd0f28e4" name="reply_do_date" title="回复处理日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="9545fe8c7d4b4411b9c0dc7804bcf524" name="sysdict_value" title="字典值" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="21de7ce81c8249e2bec08e05e0166750" name="case_last_run_date" title="用例最后执行日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="b07217ae2f2d4a6dba94bf348b57a92e" name="story_opened_date" title="需求打开日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="7512da49c79f4df09ed1f2745bdd246c" name="function_id" title="功能ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="6fc1382a923c4613b0c6dbb3912d1382" name="task_opened_by" title="任务创建者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="ebfee8eb2d7045dfb582abbecb932a59" name="bug_opened_build" title="影响版本" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="99c12fbc53d74c358b92bda497dc7054" name="file_added_date" title="附件加入时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="7c3f26230d674e01967bb7e55bda4d28" name="todo_status" title="事项状态" business-type-id="67077bff05514ff0a8f39c129f309845" not-null="false"/>
-  <standard-field id="3c86c05e86a24c40a564fe07c48e2bf9" name="service_request_limit" title="服务请求数上限" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="5142b1670d22498caf8fd49c0c168319" name="story_closed_date" title="需求关闭日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="60e51ecfa34b4ef9a4c1d46366153ff7" name="product_list" title="产品ID列表" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="396d10dc9ba5455db0c6a93e9794ffaa" name="program_pri" title="项目集优先级" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="eb75415e113143b4b302c6e6a8b7dff2" name="request_submit_date" title="请求提交时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="ec87aa9c15e648eeb751f7b6c9e33f5e" name="release_name" title="发布名称" business-type-id="d202722a21aa47149768950f9f837700" not-null="false"/>
-  <standard-field id="5811d0d578474b3e9ab88ca695ff8841" name="action" title="操作" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="8c23585c484f4aa79153f982cb3246cb" name="dept_grade" title="部门级别" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="b1c7b9ffedb948a8afc08bc2528ec14a" name="doc_score" title="文档得分" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="a88f4fbfa6c94a3a88d2e229da97f236" name="story_pri" title="需求优先级" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="1bbb8bb363594a04b084d32dbe64cfc9" name="project_end" title="项目结束日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="d25b5133d5134bfe8f99d2ec8c783607" name="from_bug_id" title="建自缺陷ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="4019bcf0e5074e4bbceacfdffe5b0b9a" name="message_sender" title="消息发送者" business-type-id="bef0919ec31f424abd96f8ae11f32bde" not-null="false"/>
-  <standard-field id="5d33b387e29746b8a382dac119fdd557" name="project_opened_date" title="项目创建日期" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="69beaefa1ee849809f76eca4760aebd0" name="todo_id" title="待办事项ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="79e90f2786f84e48bba1bf167b49dfed" name="task_story_id" title="任务需求ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="f2a37fce797446559063a311729c1df4" name="case_last_runner" title="用例最后执行者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="04e6095c1e404b4e8b8691641db2691a" name="client_spec" title="客户描述" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="4472a2279b5c41fc8195ad8415c82f81" name="pmc_id" title="项目监控ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="03c472f2d81b47269d5aaff383156884" name="task_canceled_by" title="任务取消者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="6623d6a8710c46119d3fdb2e54a8b984" name="request_count_add_up" title="累计请求数" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="67fe26d215054b06a4d0f2cf8eb5c241" name="request_title" title="请求标题" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="7606654ab39e4faa83a2d241500ee94d" name="program_order" title="项目集序号" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="f3e5ae0b71374815a7ccf532ba02b78c" name="company_fax" title="公司传真" business-type-id="67077bff05514ff0a8f39c129f309845" not-null="false"/>
-  <standard-field id="e6ea616535b6421cb999c78b6636ce79" name="review_date" title="回访时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="b76d38bfbedf4d57b204da0c23e9f6ed" name="product_line_created_by" title="产品线创建者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="d1937bb92fc64e42b24a99fe2f4ef0d9" name="story_opened_by" title="需求打开者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="1fd5adaa5d1f4326b21b91bb8ebe23be" name="task_open_count" title="TASK_OPEN_COUNT" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="af96b5b5b66143bc9878ced990cd8925" name="risk_category" title="风险分类" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="799d358452984273a3c99836281e1430" name="extension_version" title="扩展版本" business-type-id="d202722a21aa47149768950f9f837700" not-null="false"/>
-  <standard-field id="4aa15300602340af8576fbc0451402af" name="project_id" title="项目ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="b4a2a8138b61424893b8e9444f2d72ff" name="task_mailto" title="邮件列表" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="e663c12cf19d4b13b42be7cbe12c3dd6" name="project_stage" title="项目阶段" business-type-id="bef0919ec31f424abd96f8ae11f32bde" not-null="false"/>
-  <standard-field id="7a1315581bb24cbdab40b3c5461324e1" name="product_line_white_list" title="产品线白名单" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="20a77099721b470abe6ab2625a4653d4" name="bug_duplicate_bug" title="重复缺陷ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="536c61eee73c45bab2e0b46a843f7a56" name="company_zipcode" title="公司邮编" business-type-id="bef0919ec31f424abd96f8ae11f32bde" not-null="false"/>
-  <standard-field id="a4a9b1b9d6e745e585cfbaa33f795c21" name="product_line_order" title="产品线序号" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="54c5b4d1d8e045a788e79a6517aa3b9d" name="module_feature" title="评估特性" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="83a2559b79324362a728fecd9968aa7b" name="faq_create_date" title="创建时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="be9bf2c7867b4c2696f3d17fcb13fb6b" name="team_join" title="加入日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="bd62f832d5234e348257fadece6a2cbb" name="plan_name" title="计划名称" business-type-id="d202722a21aa47149768950f9f837700" not-null="false"/>
-  <standard-field id="34d1b9070bc24708b976f1100310b8ea" name="product_line_created_date" title="产品线创建日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="c33fd3351fbe4cc8b042a8a23d211f0a" name="story_type" title="需求类型" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="a7db670354d541139757cce0867ca0b4" name="risk_open_date" title="风险识别日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="fa8efb89fcee4be499c3e3ecdbd62eb6" name="risk_opened_by" title="风险识别人" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="918785263f2441fd95a5d7b94ad32de9" name="testplan_status" title="测试计划状态" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="f4663f7a5dd54f96863687d055227318" name="product_desc" title="产品描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="b304c74562014af1a21ade746e07a4b8" name="release_id" title="发布ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="6e50c327c7194887afcba8fc53bcb3f3" name="story_to_bug" title="STORY_TO_BUG" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="a0abc9d2fea4429fa9c9ce583ced06cc" name="user_title" title="用户头衔" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="8f8a5db4149d482792ede561fa91bbec" name="request_count_need_review" title="需要回访请求数" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="ae5425fca3f44949afef930a83c6f124" name="user_qq" title="QQ" business-type-id="67077bff05514ff0a8f39c129f309845" not-null="false"/>
-  <standard-field id="a6f84d5eadfa48e8976bd17412f5b32b" name="hdate_name" title="节假日及工作日名称" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="c0b87a95f9344a0ab97cd1469c743159" name="review_id" title="回访ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="96dda7001b804737bd97ff62d2f7171b" name="request_count_reviewed_pass" title="回访通过请求数" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="2cd45a98ccc34954b65fa7e025738063" name="company_phone" title="公司电话" business-type-id="67077bff05514ff0a8f39c129f309845" not-null="false"/>
-  <standard-field id="726b3a5063154abe83a09b1d2b1cb9bc" name="task_s_s" title="同启任务ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="7fafd1e8dc8046c7b1f0e300ebca1a6f" name="service_review_time_limit" title="需求回访时限" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="e0c724fae8a2426faf4f8759ea06d78d" name="task_s_f" title="紧后任务ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="d1a9fa8df89d4b8684a0c4c2a1752ccc" name="reply_commitment_date" title="承诺日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="45cedbd9f56a4500966ec7e981ee3107" name="pmc_ev" title="挣值" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="48149da617804927acda852c6ee57139" name="user_lastvisit" title="上次访问时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="c612133873c944dd8109dd25e8fb4722" name="product_line_id" title="产品线ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="7425834d71d54a80a943fe8f2a412335" name="story_status" title="需求状态" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="fb7cbfa4a6914405990ee8cd03ff4076" name="risk_check_trigger" title="风险跟踪触发" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="6b0cda53590043afb834d5a91c7a7011" name="acl" title="权限模式" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="867d51a0683a410881f38b399078dcd3" name="bug_severity" title="严重级别" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="747ee23256a041079e1994407e1e5d4d" name="program_goal" title="项目集目标" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="a53c13787bb94184a0499f9c1e3af6c7" name="module_id" title="模块ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="acf5495cf57b4a2d80e9fa3db60e612b" name="file_object_id" title="附件对象ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="d81ce580c74749bbb391f2565d7e103d" name="case_id" title="关联用例ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="65ad763333a64c9a976de3b76bc692d2" name="service_reply_time_limit" title="服务响应时限" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="bf7ad703917141c6b0ccd3721a70e800" name="message_receiver" title="消息接收者" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="1982d0b7c4a443c48bddb865bb2286a0" name="file_added_by" title="附件加入者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="e66e1d1852d24692a4e699ab60080c4e" name="story_parent_id" title="父需求ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="13ebd97b0c67485d9426bf085decaef0" name="task_estimate" title="任务估算" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="0369da75a2c64317bc45939e829429e1" name="extension_type" title="扩展类型" business-type-id="67077bff05514ff0a8f39c129f309845" not-null="false"/>
-  <standard-field id="f36289709fd24f70bd49cff4267f1e34" name="request_count_reply_intime" title="及时回复请求数" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="65d061fd681746d2b669cbe1ce32b8db" name="message_content" title="消息内容" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="5b396d31bdc74bfcbb2fe69c52270377" name="testplan_desc" title="测试计划描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="ccbd3960f853402e80f3adde94733c00" name="story_id" title="需求ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="f785320f06364eb5861ede9265d91c41" name="message_flag" title="消息标志" business-type-id="bef0919ec31f424abd96f8ae11f32bde" not-null="false"/>
-  <standard-field id="e6e30d0cb91346a28f74b8ee0ae458e0" name="doc_views" title="文档查看数" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="25f756b5d1374f8584128b80edcb89e1" name="reply_do_by" title="回复处理人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="7edc82a42d954896b5ec878181ae7e2a" name="module_path" title="模块层次路径" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="8fbca2c0791f4953a0f18be7ba2093e0" name="request_count" title="请求总数" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="be2eef2550404ee8b5fd8238c48c3af0" name="user_position" title="用户位置" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="c2cc33b8a36f4834b8efd506c35a67d6" name="file_size" title="附件大小" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="83c2bea276aa42dcbcd6a51b34b130d0" name="sla_created_by" title="创建人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="c57c38dc71a848ed990996105e0993a2" name="story_mailto" title="邮件列表" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="0d0d40465d704b08bf0be55e1f7cbc93" name="builder" title="集成者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="bf1e48664dee461ba363b9dd2ecdac95" name="service_specialist" title="服务专员" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="1ff4edae6f454568930fbdfe259c4f39" name="project_canceled_by" title="项目取消人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="9eb80974f84543baafeed7ac78ff4c0e" name="program_closed_by" title="项目集关闭者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="c03b7c5f0fc54a25b5d0dc7a8338c078" name="request_last_edit_date" title="请求最后编辑时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="121f4a14a835422ebca3c758824a5e5f" name="testplan_end" title="测试计划结束日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="d5fc2a6cfefd4d72b687d18e528066e8" name="client_dept_id" title="客户单位/部门ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="ca72fa67ba0d4669ad5dc2eb021b992f" name="program_end" title="项目集结束日期" business-type-id="a819d2e170d6479a9bd08e70cbe107e8" not-null="false"/>
-  <standard-field id="27330419fcf84245b98ff8ec1d807d77" name="case_keywords" title="关键字" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="fbc6bab57b6e44e09380df357e1ad76c" name="request_count_n_req" title="新需求数" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="dc3dc744f31d421c9b39d70c7a90ae9e" name="user_onlinetimem" title="用户本月在线时间" business-type-id="b2d1c47124ef42a2bd06e3170e3e0090" not-null="false"/>
-  <standard-field id="6735ee4c63a9483dac9d8b4282fb643e" name="task_finished_by" title="任务完成者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="44d60774d9c043819b619f0bd47a1d1f" name="program_desc" title="项目集描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="c1a0b7cab4814b759aabdf711b0eae49" name="role_desc" title="角色描述" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="13306b0e90334ccca700c8c43b58da54" name="user_nickname" title="用户昵称" business-type-id="972511bb53d84b73966db5814f42a345" not-null="false"/>
-  <standard-field id="a78386f6060943f09fd5e55c63c7780e" name="story_last_edited_by" title="需求上次编辑者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="28c683ab873b42ce8578d6e8f3f3921f" name="admins" title="管理员列表" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="85b6c5405c8d4404874faeb0e1b5c01c" name="project_type" title="项目类型" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="73e23ba81e2041198cacb01d10ac1388" name="sr_create_by" title="报告制作人" business-type-id="d202722a21aa47149768950f9f837700" not-null="false"/>
-  <standard-field id="977cc7a9a16d4ef5a2a4fe2f741305cb" name="story_title" title="需求标题" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="f7010efdb52a4ed9b756eaf3cf45c364" name="module_root" title="根模块ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="8edbec90df274a01ae929d3233948028" name="dept_id" title="部门ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="f0f53998ae9d4beb84e8fb22a0a2be0d" name="doc_url" title="文档超链接" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="b2715bb11ed84900aedc9dc63e7b8bef" name="user_mobile" title="用户手机" business-type-id="c42658bb1f35436ead5889baa16fa2c6" not-null="false"/>
-  <standard-field id="7fb8bdb237aa4d03bf859e089b06d896" name="file_id" title="附件ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="23530a474108448a8a2afd1ea5661b9f" name="review_score" title="回访评分" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="8ac94946ece34135b978f3e21e65443d" name="extension_installeddate" title="安装日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="144979cf3021436db584e03a34ed8fd9" name="request_commitment_date" title="请求承诺完成日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="1be2973789144cd0b558cc3ba1fcb573" name="request_status" title="请求状态" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="e8bc74f148f04db99b54970c6a82613e" name="case_precondition" title="前置条件" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="b74574374fbc41e88cfde2795e4c9b7f" name="extension_systemversion" title="支持系统版本列表" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="a24854bdd4f0459280fc9b433dbb0347" name="dept_name" title="部门名称" business-type-id="972511bb53d84b73966db5814f42a345" not-null="false"/>
-  <standard-field id="55644828e74d41b589a9d85e595b7f41" name="story_reviewed_date" title="需求审核日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="8cedb9b002da4bbca6a48b3334749086" name="extension_desc" title="扩展描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="592bdc8841fe4d658f7dce9bbe065399" name="faq_created_by" title="创建人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="69b4b5ba8cf344d0853293af94b929ed" name="request_count_released" title="实际发放请求数" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="c579e859f1114739a5838298f5fb7d85" name="testrun_assigned_to" title="测试执行指派给" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="a8823b9e0f0649b6bcdf871c0d25e7a4" name="sla_title" title="服务协议标题" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="c14609b8dbfd4b8198adc8f24e3a270b" name="product_line_root" title="产品线根节点" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="a20080da0f8b4e649277ffee277795a7" name="module_owner" title="模块负责人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="627d2c0677ad4a90a55988dc00df4019" name="request_trans_id" title="转出对象ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="ce294ef978da418e8b60c9946f3db789" name="task_est_started" title="任务预计开始日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="1769763192494e35a4148b4cc31779b3" name="case_last_edited_by" title="用例最后编辑者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="c5d2adfffd2e4e8095ecdac2438caee9" name="release_spot_test" title="是否需要现场测试" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="33f495bae23343c798fe91b7137ef2ef" name="build_scm_path" title="配置库路径" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="5648f6044f5c48bbb11aa31e13c3ca7f" name="to_task_id" title="转为任务ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="6ae71e07281740679a13ddb1dce44af8" name="request_reviewer" title="回访人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="035768495c544deb8dc0a54e56194196" name="task_last_edited_date" title="最后编辑日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="b032e3be5e3d4cd7bd1cfcaecfd334b1" name="user_visits" title="访问次数" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="f6f2808b093d4074acb4fbcddd3f5145" name="todo_type" title="事项类型" business-type-id="bef0919ec31f424abd96f8ae11f32bde" not-null="false"/>
-  <standard-field id="2221b3fb7d664b34a878e01ddb9224b0" name="file_downloads" title="附件下载数" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="24467806aefc452baed4bfeced84391f" name="userquery_title" title="用户查询标题" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="a146f8bf823a41509bd2dce3f6d03b93" name="company_home" title="公司网络社区" business-type-id="915f9f3c58d34f38b628ed68fce8d03e" not-null="false"/>
-  <standard-field id="81868d7139734943931bcd2abce3e567" name="doclib_id" title="文档库ID" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="639f4ebf14af45eebb1da1830b8963f9" name="project_status" title="项目状态" business-type-id="bef0919ec31f424abd96f8ae11f32bde" not-null="false"/>
-  <standard-field id="eaa64885cae440e6af2de9391a765c51" name="comment_added_date" title="评论时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="24f3fcad56834c278ea2b70b68656bd6" name="task_status" title="任务状态" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="6a0f5e8093e2440b87d5c74e1b941f17" name="request_count_reviewed" title="按时回访需求数" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="c1ee5c7072a14449952588ee7ab1bdc6" name="request_release_date" title="请求完成日期" business-type-id="b2d1c47124ef42a2bd06e3170e3e0090" not-null="false"/>
-  <standard-field id="d81349ef281e4d1d94f5958ba9847368" name="product_line_parent" title="产品线父节点" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="9d4f2443ce964561a2f5f4e716d283e2" name="service_level" title="服务级别" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="51080dfe3ae34946b19e820232cd479e" name="task_desc" title="任务描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="7863a318a00d477da648f4e4b580b85f" name="program_opened_by" title="项目集创建者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="e7095bba073746fd9286e693cbc444a3" name="file_extension" title="附件扩展名" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="110c35fe3a064f5c98a1c93239005a06" name="productline_name" title="产品线" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="91cceb216ed04980bbfcac7a2529889a" name="pmc_pv" title="计划值" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="1166708d4b89402989bb87771c009ac2" name="bug_origin" title="缺陷起源" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="74caddf2534544a88790d162177f8086" name="request_close_date" title="关闭时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="b71e1017465e4c19a76bf99926208ebd" name="task_f_f" title="同完任务ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="a86777b066e249dba4719fc108448e8e" name="build_range_id" title="集成范围ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="35bc2f5b2f724a0c893cc5921c7b579d" name="bug_type" title="缺陷类型" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="7935316161734b62b6589348bd20012e" name="comment_text" title="评论内容" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="ff11109eff4a458b9d19baf0071382e6" name="product_name" title="产品名称" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="0bbc93fb98684f76a7f7e5b6a119d31b" name="task_deadline" title="任务期限" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="07cdc410496948a3ab84b1b3512c13ba" name="extension_author" title="扩展作者" business-type-id="53850ef9228c409c9d32ca55cf1511c8" not-null="false"/>
-  <standard-field id="dc9625870d234807a3c0f3ac06e3134b" name="module_grade" title="模块级别" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="dd8397f90d6245efa756986fd6656690" name="doc_content" title="文档内容" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="7350f541d46e4dda86029674e061dd5e" name="release_create_date" title="创建时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="9c6bcf190584443a97df80dd0eea86ed" name="plan_bugs" title="版本缺陷列表" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="8fdd8be25dbc4a0fb395e8597e83bc66" name="user_account" title="用户账户" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="252fb8ac8c614652ae7bc0878893bbf8" name="story_closed_reason" title="需求关闭原因" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="fb663a1ff5ff4bfba6b1e159498bee92" name="testrun_status" title="测试执行状态" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="8270a0161a9f432182d0f0efdd17f3ba" name="pmc_spi" title="进度偏差" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="0e624ec41a4c4ab693c8f35a751ef0e3" name="plan_stories" title="版本需求列表" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="5260242bbea34320bd89a0adafe11a1d" name="extension_code" title="扩展编号" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="549475de79d2467e9b43e5bc6b20a4e0" name="sr_id" title="服务报告ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="5c2ca6578c6b4e548e93aaf7e41fe66d" name="client_user_id" title="客户名称" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="218f524b37c0472ba90df4ad374be25c" name="request_score_total" title="请求客户评价总分" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="e6a048df47524031938f9ea282f582d4" name="testrun_last_runner" title="测试执行者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="f58495ef07514e4f9120e75c0e186098" name="story_keywords" title="需求关键字" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="0d68698422c341c2b3e095a949ab6529" name="message_receivedate" title="消息接收时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="96b6ab2963c7447987dfe175f82056ad" name="review_spec" title="回访描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="612ec9976ab64aafbb8ab869610e8668" name="file_object_type" title="附件对象类型" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="928fe6ac335f49a0884cc6b56f574d3f" name="story_spec" title="需求描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="060f60e575dc4ea7a322b34d88cc5a29" name="risk_impact" title="风险影响" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="d97fa0ac1718422a9e63f7011a5e00f0" name="task_f_s" title="紧前任务ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="b1fcd149055448a8b93298edf0cc488b" name="case_step_desc" title="用例步骤描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="dbdadff2f89b4e0cbac9ec9f1cc44bef" name="sla_status" title="服务级别协议" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="e56f129fd4f947228684c2a6a8eaff12" name="project_canceled_date" title="项目取消日期" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="71ce1319f0b24a668c568c2bc2b7dc22" name="request_submit_by" title="服务事件提交人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="2e6d37dddde34309b2a3e472efdb0771" name="run_id" title="测试执行ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="219c68d4ca114dec99b9eb58c1e6d0c1" name="risk_close_date" title="风险关闭日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="f1c1e12d7c144116b365be1fbdb1e43a" name="project_code" title="项目代号" business-type-id="c699fc5aa56849d097aed70a669226d7" not-null="false"/>
-  <standard-field id="4b923b4e7de043ba9b3eb4e62cb745ab" name="story_version" title="需求版本" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="b1024ef692a54132a4b09bafa18bb05d" name="bug_resolved_date" title="解决日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="cc623a59ac1846669d528c401b3f9180" name="role_name" title="角色名称" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="6c8b5f5a5b2a4dd6b394dc037b715fdb" name="request_open_count" title="请求打开次数" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="567eadbcbccc4618b7afed67861850da" name="comment_id" title="评论ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="2b9d1f9be0cf4d25afe69ec85891e830" name="bug_keywords" title="关键字" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="90c20173bb314bcdac02cdf14317d07c" name="product_id" title="产品ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="2bf4bb9734734aaaa1efe03623a45654" name="bug_last_edited_by" title="缺陷最后编辑者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="a5a896cda14f4d6f8b77e017e3103620" name="user_realname" title="真实姓名" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="d5ffe2bc34c245f7a2c389530ba3fac0" name="program_manager" title="项目部经理" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="40fdb879d97f49899e87ebf4ed10ac94" name="risk_title" title="风险标题" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="ee95d89405a64875ba6ee4f81a64227f" name="service_ts_onsite_limit" title="现场服务次数上限" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="043ae12f54cd43bd9a01b8bfd1497f89" name="request_commit_span" title="承诺交付跨度" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="12bc852a5d444a6cbaf6f5b8de55a0dc" name="testplan_name" title="测试计划名称" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="0fb1c2001f604554bee0b9b7de26e54e" name="faq_answer" title="解答" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="16be428f9aac450ba3ccf3da9fadf8f2" name="faq_source_id" title="来源ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="43ad53f92b1343f7901dc4cb2c41fec9" name="action_comment" title="备注" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="9ab8a9cfb1c047a794a48d81a5afec72" name="parent_id" title="PARENT_ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="d4338dc240ca4084bd79e4cde5483ce5" name="risk_id" title="风险ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="7bc51a86c9a14bd7a7c286fdcb1caf58" name="client_n_o" title="客户编号" business-type-id="d202722a21aa47149768950f9f837700" not-null="false"/>
-  <standard-field id="11070d7a93154b02beb6ba2de5f834a3" name="risk_probability" title="风险可能性" business-type-id="87b5868412d34eadbf7682b4b8acaac9" not-null="false"/>
-  <standard-field id="a323f001a5f44888abf1fc8392787d44" name="testplan_begin" title="测试计划开始日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="232a67211f8b4fe7adf8b78bc24d220d" name="sr_title" title="报告标题" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="b0108cf6be7d42389b7db1409c44509d" name="userquery_id" title="用户查询ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="ac9b4de09b0b4564af17c25cadeda33e" name="reply_done" title="是否回复" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="a6b7d3a7b13142929a05ed92714b7575" name="bug_assigned_to" title="指派给" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="95bd1a8d7acf4fbea30b92c32b55fdca" name="dept_position" title="部门位置" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="132ba75ab608448eb372ad74cb531107" name="program_opened_date" title="项目集创建日期" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="c2850e2b80a34a94a5f289fe4984a1ca" name="request_review_date" title="回访日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="1a5270bccd5046929b1e87e9542e0acc" name="action_extra" title="扩展字段" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="43d26d8ef5aa4e009fa783906565cfc5" name="project_goal" title="项目目标" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="756d9aced6e3473fb6ece2d80bd855db" name="userquery_sqlcondition" title="用户查询SQL" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="82368f764d2e49e48140b0a3fe5db29e" name="todo_date" title="待办日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="ca34d6f7e7904d47a523c81979e3f2ad" name="doc_title" title="文档标题" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="c867940490a041ee983881e1ca03252d" name="bug_steps" title="重现步骤" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="c4714b0ddef94fcfb85385e8cc518f47" name="replier" title="回复者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="004a7a0a0b7f4034b39adb30cd803208" name="bug_hardware" title="硬件" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="39e6b75efee64a0788f8bd3827dafa1a" name="bug_confirmed" title="是否确认" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="10370ce8ccf443f0b4a5a55bbe1d3bb5" name="project_product_id" title="项目产品ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="64ee7f0ecec14e20b4e98cd48433af6e" name="user_role_id" title="用户角色ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="dede71315f6c4577afd4d6220b2b1ff8" name="request_last_edited_by" title="请求最后编辑者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="42e4b07d4de840b9b6aba7899345ca3c" name="project_name" title="项目名称" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="4c437b82e49a4436969be1c1c4fb9271" name="bug_browser" title="浏览器" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="e25ff8d52af84371891fba663509596a" name="plan_spec" title="计划描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="83878e0f13c04b0eb6afb18307827641" name="request_count_expired" title="到期请求数" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="2ebbcb143e4a45cca14e9ae6295207a9" name="release_mail_c_c" title="发布抄送" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="3782d3737ace47e6996bf932187fe4e6" name="sr_begin_date" title="统计起始日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="4a49806f7b5e47bc823cae1d3d530453" name="request_n_o" title="请求逻辑编号" business-type-id="d202722a21aa47149768950f9f837700" not-null="false"/>
-  <standard-field id="ae47d854766046f29798d48929344efe" name="release_request" title="关联用户需求单" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="b94a4491b2414fccacc9d4f567acbc27" name="todo_desc" title="事项描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="69cfb5104bda47d8b343f3d98d337812" name="risk_action_result" title="风险计划结果" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="5254ef2fb2d745a7a55c8fb5799d17ef" name="bug_opened_date" title="创建日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="32716a5cc38d412e8d01a32528757319" name="risk_spec" title="风险描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="6c18e853bf2b4b448739d67f0989d24d" name="client_name" title="客户名称" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="28f65085c48f4bbcbdf4e6469ee654d3" name="module_spec" title="模块描述" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="e5aed0bec93640f0a8bcd9db0af303bb" name="program_canceled_date" title="项目集取消日期" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="588e254a328f4174a6a5b3e0e18edf24" name="client_status" title="客户状态" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="00903d6c88e546839e5dbbf6d2d45769" name="bug_status" title="缺陷状态" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="49a745ce63e947029700ec442974c37f" name="build_date" title="集成日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="4f12852f883943cbb68af79a07ed5d7a" name="faq_reply_date" title="FAQ_REPLY_DATE" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="09526f0a5a834bfdb7b88f906a1cb74c" name="doc_keywords" title="文档关键字" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="28b18856687548f68f00f33e150de800" name="story_last_edited_date" title="需求上次编辑日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="488dc6b0f5b94cadb174ada02335a8fb" name="doc_edited_date" title="修改时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="71cfeaa42ec543e986eeb73b558ca1ed" name="task_closed_by" title="任务关闭者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="e3ecdd222d7c45fe8069cbdb760453bf" name="dept_order" title="部门排序" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="2384bfee069b430b9753ab00d74a2ce0" name="risk_last_edit_date" title="风险最后编辑日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="9ebc4067843b4f03831dbc9fa17d3f74" name="product_owner" title="产品经理" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="76c3ba6ba974457a8b809b9c7bd12154" name="program_code" title="项目集代号" business-type-id="c699fc5aa56849d097aed70a669226d7" not-null="false"/>
-  <standard-field id="eb386b34bad4444b94fcfe73d4cfc463" name="service_deadline" title="服务期限" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="0ff9964da383429d8ac6a63fac61b58c" name="user_address" title="用户地址" business-type-id="915f9f3c58d34f38b628ed68fce8d03e" not-null="false"/>
-  <standard-field id="2ff97fe700204b1fa963b554c548f3e5" name="company_weibo" title="公司微博" business-type-id="915f9f3c58d34f38b628ed68fce8d03e" not-null="false"/>
-  <standard-field id="d5d83f23492d4992af37fa63b09e142d" name="request_closed_by" title="关闭人" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="e11c10c264474db298fbf1dec68c2c37" name="task_closed_reason" title="任务关闭原因" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="b8373ff00cc44d0e9a3dca66080331af" name="function" title="功能名称" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="07907fb43de24c229a09b5927582fcff" name="risk_contingency_a_p" title="风险承受计划" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="ee86579611984b3faf70dcf2d8f5186d" name="program_whitelist" title="项目集白名单" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="84f7539705564ba18900b2861324cea9" name="doc_added_date" title="加入时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="d297ae05ea7f4619afebc03fce3c9820" name="company_name" title="公司名称" business-type-id="915f9f3c58d34f38b628ed68fce8d03e" not-null="false"/>
-  <standard-field id="455ec7738016458a9a9c9210ba97f522" name="story_source" title="需求来源" business-type-id="67077bff05514ff0a8f39c129f309845" not-null="false"/>
-  <standard-field id="d88a1fc52f0b46b58779d6b717ade2d5" name="program_closed_date" title="项目集关闭日期" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="3653bd5167d9460eb34491634ca8f189" name="risk_status" title="风险状态" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="164ecd69aaf543cfacb3ba35f29878ec" name="team_member_id" title="团队成员ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="5ccb4a7f23b540cb9627b37f378df9bd" name="qa_openbug_impact" title="遗留缺陷影响" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="be8225c89e5244eca60ef2e78a6a3263" name="task_name" title="任务标题" business-type-id="b73cf5a01d6746e99c5fea0e023165e7" not-null="false"/>
-  <standard-field id="3426cd1b79a14cf89ff5d301ecf8071a" name="task_last_edited_by" title="最后编辑者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="a33d8f972a194f16995ac5fa96bcf63f" name="user_status" title="用户状态" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="c6b8a583b308412d8643d02bf0c41658" name="sla_create_date" title="创建时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="3885bbc8b04c49d0a6d6c45c4123a1e0" name="case_opened_date" title="用例创建日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="81c1a50eccc74211a720ce4b7c70ace3" name="bug_closed_by" title="缺陷关闭者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="0f5d2afaa6604434a1c0da868775d524" name="request_count_commit" title="承诺修改请求数" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="b91f053ceeb141c58d25cf5cd03cea00" name="deleted" title="删除标记" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="539f4e66d057442f82adaa95192eb394" name="case_last_edited_date" title="用例最后编辑日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="964f6e32d5ea4151885196a194e056b9" name="quality_manager" title="质量经理" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="a3cf2de717504efc869a9bc97726f245" name="bug_resolution" title="解决方案" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="a86fde5916e34da4a304e811db5f288c" name="sla_open_count" title="打开次数" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="23cb0e97e1d94a9f876bb0b881d17786" name="qa_property" title="质量评估属性" business-type-id="951b7cada4e746909ed5cf705764df12" not-null="false"/>
-  <standard-field id="cb4a19a841eb4e4488209902e6e3612f" name="task_opened_date" title="任务创建日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="8f23ae414b814009ac71abcacd643bd8" name="sysdict_owner" title="信息所有者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="ed67ea05cae04077bf839d0ea49e3acf" name="plan_end_date" title="计划结束时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="6651eb463e904b82b7af8b6a037e5846" name="role_id" title="角色ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="70b850538cd7477b8c7fc6679a13dad0" name="extension_files" title="扩展文件" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="1ef1535b189b493da7558eb136af1473" name="task_id" title="任务ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="29d7fdabca71452a943098658a71ba69" name="comment_added_by" title="评论者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="07ee74e85e4f499783d8f65e6da791f5" name="plan_begin_date" title="计划开始时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="6c453f94ff574d05ae9f9808b38da0aa" name="program_parent" title="父项目集ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="9a1a445c354f4826a1ebdc3213f1f5df" name="faq_replied_by" title="回复者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="297b276e6fee4af289b9d4c55ec3aee3" name="extension_status" title="状态" business-type-id="67077bff05514ff0a8f39c129f309845" not-null="false"/>
-  <standard-field id="a846c26620aa4b1ab84fbfa9a9d43e5a" name="bug_closed_date" title="缺陷关闭日期" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="7fdaedaf3d87415a8333b0e747230fb4" name="message_id" title="消息ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="7f05d23c98064b06b337e6427e0b7355" name="sla_review_date" title="批准时间" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="1b88d0ac623b49e6a403b9d5c82dc013" name="file_title" title="附件标题" business-type-id="1adbd72aadb54310983ae9e2fb548315" not-null="false"/>
-  <standard-field id="d340bf50fede4774a815f67591f54633" name="product_created_by" title="创建者" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="8a15781a3b844023bb5dc68fabdc0245" name="story_duplicate_story" title="重复需求ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="72ef0e072e754a7a87bf851a61d1d925" name="project_desc" title="项目描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="c41c5812a4364e28bef5a99923238d6d" name="delivery_manager" title="交付经理" business-type-id="0d720668dba245868f57f9c1469a316d" not-null="false"/>
-  <standard-field id="ee135c728c43480c99abd94d592d7e5e" name="release_publish_date" title="RELEASE_PUBLISH_DATE" business-type-id="db6080d57c54414ca800ca654b60780c" not-null="false"/>
-  <standard-field id="0bc3a63e5de64116a52d83a6fe6be06d" name="product_code" title="产品代号" business-type-id="c699fc5aa56849d097aed70a669226d7" not-null="false"/>
-  <standard-field id="e7296945dbcf4820ac40d96d676642ba" name="reply_id" title="回复ID" business-type-id="08a1ebf76ed148eeb27cc94a28c053e8" not-null="false"/>
-  <standard-field id="4d119bc835854a978348b15fd21a6a5b" name="build_id" title="集成版本ID" business-type-id="486afe7ec32a45a7b02c97ed7e91e7d6" not-null="false"/>
-  <standard-field id="509b44a4140d4785b82ab2e4b8d041d4" name="hdate_spec" title="节假日及工作日描述" business-type-id="d202722a21aa47149768950f9f837700" not-null="false"/>
-  <standard-field id="4c6bdb9b943d48c68ba482005c483527" name="bug_open_count" title="打开次数" business-type-id="4c6c8001ace74650a32ff50584309a70" not-null="false"/>
-  <standard-field id="af81199992fe4d2fba38c3ce9025f1ee" name="release_stories" title="发布关联需求" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="bf198441e4a44f89a6c68f85077f7b5a" name="release_bugs" title="发布关联bug" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="a3da298563444c0eaa029a9a05f186ae" name="release_desc" title="发布描述" business-type-id="e374e74e40574d63833e88416ed21ef4" not-null="false"/>
-  <standard-field id="a4f185f4189d41478468e2e77379dbc2" name="product_createVersion" title="产品初始版本" business-type-id="67077bff05514ff0a8f39c129f309845" not-null="false"/>
+  <standard-field id="01bd47ce6f7f4fadac48a7376c4d777e" name="task_consumed" title="任务消耗" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="264a77ce641c41b5923a9dabd474ac13" name="product_line_spec" title="产品线描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="4dad513470664e4a9513985d94136de6" name="message_senddate" title="消息发送时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="4f5e388ceb594135806cfdbcbedd87cb" name="dept_parent" title="上级部门" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="70f86acde4444359b1ba809fc8b41039" name="task_assigned_to" title="任务指派人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="3dfee988369742c5841a9dae41ea463f" name="history_new" title="新值" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="49646362ee264440b3499d82e2118043" name="to_story_id" title="转为需求ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="8c64af6ea7984defb762d22cdfc45ee7" name="story_reviewed_by" title="需求审核人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="ad1fa9b669944b94a03bcb54c3b9d17a" name="extension_name" title="扩展名称" business-type-id="e860c7034d9441cfa80b95ade564adf7"/>
+  <standard-field id="a26f50e2764942c2aee9a31239c0f839" name="product_created_date" title="创建日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="376f631a8b9e4ffea474a196b77b235b" name="test_result_id" title="测试结果ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="f258246af7b5498aa3b0ffb59c6d9c1d" name="review_result" title="回访结果" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="bd316808b905442e94adf4682a983567" name="sr_create_date" title="报告制作日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="eaf4160e27ff4048a833b9d74a8ad9c8" name="story_verification" title="验证标准" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="c42a026f56bb446888a0ff9926708364" name="bug_source" title="缺陷来源" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="10559ea74d004acaad50adf934b3a290" name="case_pri" title="优先级" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="71edcf4159e04786a7499ef601dfd898" name="qa_comment" title="评估说明" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="f45a0496117c40dba0769116ba0a71a5" name="reply_spec" title="回复描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="091cf42dc63b4e5497ffcae726a4fba6" name="extension_site" title="扩展网站" business-type-id="e860c7034d9441cfa80b95ade564adf7"/>
+  <standard-field id="013e544e4aea4a59b584b8d901565df7" name="program_id" title="项目集ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="2802bf3cfa3d4cd48a6697e56d78dbb3" name="history_id" title="历史信息ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="bcc2d69a544543498f8ad9965e0e6000" name="product_line_status" title="产品线状态" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="16192cee4ea14f9f85b5b485d7056b2e" name="sysdict_id" title="字典ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="7d34c8cc1c70443aa38fec5e5edc377d" name="request_count_client_feed_back" title="客户反馈请求数" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="71bae36bc7ec47f685c38e3197ed7ca7" name="requester" title="联系人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="1735bfdb9c5e40ceb323a5929758f905" name="service_effort_limit" title="服务工时上限" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="d58407f60b52457db24abf979326445a" name="role_priv_id" title="角色权限ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="ed485d07cf8f429d864faef30e17ec88" name="story_estimate" title="需求估算" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="3367e5b929ec409c82e6ddbd46373650" name="testplan_id" title="测试计划ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="26d0e7d176bb4a8699bdeb13b2e1ebf3" name="project_parent" title="父项目ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="8adbd06f199d40ceb267a26df96475a2" name="risk_closed_by" title="风险关闭者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="98cc167293184c5a9462fb977421918b" name="todo_name" title="事项名称" business-type-id="e860c7034d9441cfa80b95ade564adf7"/>
+  <standard-field id="1ea89aee19824ec882c6ab895f5f0e9f" name="history_diff" title="差别" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="dd01cf01d509460a9c4bb28f68e1ba55" name="sr_type" title="服务报告类型" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="3a3fcbfac9854f97a6af83e4fcd5832e" name="case_status" title="用例状态" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="bc4da93b9430432a9e0cc34eda1dcc5d" name="user_birthday" title="用户生日" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="12ee9814f6c340e08cecce1be2eaa1ff" name="dept_manager" title="部门负责人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="268150f616334cb08661faf7ad8102cf" name="linkcase_id" title="关联用例ID" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="9eab9627e84044f08d62e4e93e38ca32" name="test_result_date" title="测试结果日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="4747062ce03145c7b84bad2204850697" name="user_avatar" title="用户化身" business-type-id="c736a288204545ed94bdc09f5b09feb0"/>
+  <standard-field id="fb501657685c4b5da5bbd71018ad9ea5" name="sla_closed_by" title="关闭人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="8c76fc348cdd446594b1c47c2385778c" name="bug_link_bug" title="关联缺陷" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="57cb841262bc42f98e97b6b6df2c736e" name="case_step_id" title="用例步骤ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="eeef29a0a6454d1182c7f0098383a245" name="qa_feature_value" title="质量评估值" business-type-id="bb63f9f5eb0b4f398092b52f28d8a1a9"/>
+  <standard-field id="ad530588afc948dc8f75ce5b7aabd3e8" name="user_visitsm" title="本月访问次数" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="ae4619ea15ab4bcebb8897715a66e89c" name="user_zipcode" title="用户邮编" business-type-id="1a98f7a11a8e4e7db15aec24d8b8efdf"/>
+  <standard-field id="536de35be0844e67a494aa0014e27857" name="action_id" title="动作ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="f0a12df7e98746bfb869f9afd0d116f7" name="product_line_name" title="产品线名称" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="26c2b2491da5460d9f0ff1dcedda1baa" name="request_trans_to" title="转换为" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="4038c84e92d54139a941ad22bbd83a03" name="user_regdate" title="加入时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="7688fdc34a2b4c9f890aa2e44420ec1e" name="dept_path" title="部门层次路径" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="25f6b0ecdb5343649551c682484d1654" name="program_status" title="项目集状态" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="e82080799d8d47fc8e1a9431cc9fc564" name="bug_id" title="缺陷ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="e2cc9b53b3c1483dbbf8892ab2b0844d" name="product_status" title="产品状态" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="0d46307ef1b54e55aab4b9a9dc0349e9" name="risk_plan_date" title="风险计划日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="edd87fd6c1c04431a9dc98c9d74a784d" name="story_closed_by" title="需求关闭者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="a05dac8411b34c6092b0f03057834962" name="case_version" title="关联用例版本" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="ef30b94e0e804e289b9dccbcecf37ba4" name="team_days" title="可用工日" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="de155c220575438e8c26b2ca3c566c67" name="faq_question" title="问题描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="c9ef8e61b0ef4ed2a2c28519fbf29de4" name="company_address" title="公司地址" business-type-id="b70db83f52c7460ba9ddb7ba6a1df2e9"/>
+  <standard-field id="0cbb29e19e1d4a1fadebb26317558ef0" name="program_name" title="项目集名称" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="4352627f7ac54fe8a071fc0b511cd0db" name="pmc_left" title="剩余工作量" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="9da7a8ca6faa41ed94999096b18c21f8" name="object_id" title="关联对象ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="9aa5b65deada40a0a638f95210696d50" name="extension_license" title="扩展授权" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="87dcd436705b4389bb1cd6f15b3692ba" name="file_extra" title="扩展字段" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="1be33ae1891d461f89aaef399e78c477" name="risk_exposure" title="风险值" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="b55dc4da1ca3475c9ed0df5318671942" name="story_assigned_date" title="需求指派日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="851a49128f504fadbe68edeb425d563f" name="program_stage" title="项目集阶段" business-type-id="1a98f7a11a8e4e7db15aec24d8b8efdf"/>
+  <standard-field id="c989f8e83e124ddc80de939698e4a32b" name="build_spec" title="集成描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="f2fd42ed628e47dc964d9a31f44cfef9" name="doc_added_by" title="加入者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="2a04c1fe1c774476a6d0c4d0129c89d6" name="qa_id" title="质量评估ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="8b7cc96daac54bfd81c6a813b8142d9e" name="faq_type" title="问答类型" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="2937092683364756a39fbf3b238a9dc9" name="request_is_abnormal" title="异常标记" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="b52850103b9448d2ba2e9a3b5918edb9" name="request_keywords" title="关键字" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="1c3bfe2c0aa54f87912df2ee36de7f94" name="request_count_bug" title="属于缺陷数量" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="27e6d102e8f347878ebbd5e0838014a7" name="sysdict_key" title="字典键" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="d2fafd92cd2d4cd08d6c990375e3c91b" name="message_type" title="消息类型" business-type-id="1a98f7a11a8e4e7db15aec24d8b8efdf"/>
+  <standard-field id="96bd0ef7ac19483f9ae9f0e90b8e94b2" name="qa_test_coverage" title="测试充分性" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="55e9955b2a344b6daf66d162654b05d8" name="sla_reviewed_by" title="批准人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="019d2accfb5745c2a77fcdd8d12d2f28" name="request_count_c_req" title="变更需求数" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="e4a46fdd96e94ef89ba8b54cd94fc335" name="sla_id" title="服务协议ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="862e3016e68b490ba5fffa032d91dc99" name="risk_mitigation_a_p" title="风险缓解计划" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="47ad02027b7345388ed7819030059f43" name="task_finished_date" title="任务完成日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="6243f4f93b5440538562ec3f22167872" name="bug_resolved_by" title="缺陷解决者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="e0344d1f2b7741818098a57e0810cc1f" name="release_publisher" title="RELEASE_PUBLISHER" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="e1821e4f6f564ff4a88a803b264b9b1d" name="task_left" title="任务剩余" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="9233ccaa4ffe4662a6ccfd749cd4cb70" name="team_role" title="角色" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="876038cd5c294622aa7bee9804261d82" name="project_manager" title="项目经理" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="4b817f8a4e4d474881f4a4cedb070430" name="module_type" title="模块类型" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="f72ab163ea38411e82c3d129c42c02b1" name="case_step_expect" title="用例步骤预期" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="4e376b2e3e02442eacd6f8607925a5da" name="risk_exp_phase" title="风险预期阶段" business-type-id="c736a288204545ed94bdc09f5b09feb0"/>
+  <standard-field id="9501eb048d5d4992adfccf3152aae746" name="program_days" title="项目集持续工作日" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="b5185254e1e24fee8c6d902fe8db6eab" name="case_step_results" title="用例步骤结果" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="12a264b2930e4c789246eb2c2f53b734" name="portfolio_id" title="项目组合ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="08fb2270389c43b09bedd73a28b130bc" name="user_last" title="USER_LAST" business-type-id="70ce056112814752af05805ddfec9c79"/>
+  <standard-field id="a389ad78a3a74800824fb8e637f4db9e" name="program_canceled_by" title="项目集取消人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="382404ec894c4323a6b298cca1463508" name="product_order" title="产品序号" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="e6c59fe667b246ecbf55c6e737cbed86" name="reviewer" title="回访者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="172d3d9dc1dc46788878ff19fd574fcd" name="pmc_tasknum" title="剩余任务数" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="8366aac1d7244af9a210ebc2004e3b58" name="client_id" title="客户ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="9a23f936d13f43aabfb3c6e7ab47c72c" name="hdate" title="日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="3e706974314f4511928bf84295ec9fe9" name="project_pri" title="项目优先级" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="2766197a25df4acaabb3870acf828a65" name="case_title" title="用例标题" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="f7b2dfa638ef4d8a8ecaf65e6cf3d1a1" name="task_type" title="任务类型" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="12a82adcabd847c79d1eb18f6f9aae70" name="sla_spec" title="服务协议表述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="45d70b5a6f4d42f7b6e3d33e0c59d442" name="release_type" title="发布版本类型" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="b335923159d24b07a311ecdc13b45d2e" name="plan_release_date" title="发放日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="3e4e451c225b45c2a020fb14b98b03fb" name="sysdict_module" title="所属模块" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="f9dcbb1cc5644e658504b98075e82ad6" name="release_mail_b_c" title="发布秘送" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="6b02f6d1336b4504845dd14406726595" name="user_onlinetime" title="用户在线时间" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="fdb48ef508f244e2b04289b789421668" name="release_create_by" title="创建人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="6292514f1cf04233a10cbf9418f7d915" name="todo_pri" title="事项优先级" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="46e52baea4f24f548333c9d8529a21e9" name="release_path" title="发布包存放路径" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="bd1f9d939999403a8dbbf7fe14ccbbdc" name="product_line_code" title="产品线编号" business-type-id="ee9eeaa6d14d48c8a9b0ae94e46e0c21"/>
+  <standard-field id="6dfa47fc0cdc4c12bfe4e2f006466cdb" name="doc_id" title="文档ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="ef4ff9f4c649447bb4399156c7cf1a0c" name="test_result_last_runner" title="测试最后执行者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="a8defc1392704a809f91e31bdbb9ebfb" name="pmc_ac" title="消耗工作量" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="31178daf5aa3422aa111c40e1e485bc5" name="module_name" title="模块名称" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="0575522d0496424883ecb4e54d6a2246" name="project_begin" title="项目开始日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="7f3fde03be5349ff8a3ffba8f113b60a" name="sr_end_date" title="统计截止日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="385ecba688f64536856ba42f0b19a613" name="user_gender" title="用户性别" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="d6eb35e131be4784b26c81fdb1a2fa36" name="sla_close_date" title="关闭时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="d5cbdffdb76a4adba53fc6079bacd976" name="company_id" title="公司ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="b279970002b44fd2a8208ef80ca9e118" name="product_white_list" title="白名单" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="7013765473f14167bc93aeceed955fc7" name="request_type" title="请求类型" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="2548fb92d3954edc8c628325ca4cc225" name="case_last_run_result" title="用例最后执行结果" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="6fb9ef295dd0429f9e88cc7be46e3edf" name="doc_edited_by" title="修改者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="dcea56141a7546a58eaca8e95a580adb" name="risk_avoidance_a_p" title="风险规避计划" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="087001d4af7b465b82aa8e1bdca829ce" name="user_email" title="电子邮件" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="ac055ca48a264b5c9bfbea803a9108ed" name="history_old" title="旧值" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="13f7b5e27b85433694d2daea20fe476b" name="user_ip" title="用户IP" business-type-id="5942fb056e3040c284ebb56705964d69"/>
+  <standard-field id="ba209dcb8cee44e785b8f94a0e87f4e4" name="plan_id" title="发布计划ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="9a041eae945a4a798c4985f43d849312" name="task_real_started" title="任务实际开始日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="d56c806175eb4e3aaf45e4ae1b51162a" name="task_canceled_date" title="任务取消日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="2cd4000595754ac9a5b1d86997556593" name="release_mail_to" title="发布对象ACCOUNT" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="c5ff76e7278746bc98d7fca1c52472e4" name="bug_pri" title="优先级" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="6e5ea72111b3425a85999251f36589ba" name="pmc_date" title="统计日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="611cd22276194da9b876cc35cbc82a9a" name="user_id" title="用户ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="c59faa4b634147429eeab989d412f08e" name="todo_begin" title="开始时间" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="2658372734d340f183e2b611afbb1803" name="faq_keywords" title="关键字" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="b726de4354e94840876f9281c8abc22f" name="case_order" title="用例序号" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="2c259fb1e4044dc8ae8be30115a22b2a" name="dept_function" title="部门职能" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="2edff2d8d582426fb76494f9508def4d" name="build_file_path" title="文件路径" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="100f40920c7c4d23aedb81b852ca76b5" name="request_release_span" title="实际交付跨度" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="e26913b07d024067bd1ba75d0ffac7b8" name="bug_assigned_date" title="指派日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="6e30cc1ef48841649fe9f94f33cb8834" name="client_created_by" title="客户登记人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="0079c70647654488af30a3814a42ad75" name="release_content" title="发布内容" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="02da32fe0b254ae89bedad7c4324019d" name="project_order" title="项目序号" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="45027461241a4b519a509bf12a94c607" name="doc_type" title="文档类型" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="048c622681ac44009b81c3951540f4a8" name="message_level" title="消息级别" business-type-id="1a98f7a11a8e4e7db15aec24d8b8efdf"/>
+  <standard-field id="65cc7176ea7e4f54886f85d25ca2a3e3" name="doc_share" title="文档转发数" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="c8a22985c92d4ac08d3eee164350a3fc" name="story_spec_id" title="需求描述ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="337f79011f004d0e8ccbb0df8511bedc" name="client_create_date" title="客户登记时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="ef51da26b5f346579597de2c17a4c36e" name="project_story_id" title="项目需求ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="2582e32dd93840f6975cd2aa3c5d1e07" name="project_days" title="可用工作日" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="3f47a43e28df46958521c45769445bc9" name="hdate_id" title="记录ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="5f452f6e97e440e7858ff44b0cdb72ed" name="risk_last_edited_by" title="风险最后编辑者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="bcbd3606b9454d1c9b13b33a167c2d6e" name="case_result" title="用例结果" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="13f8f13c21d14774b06183009821df14" name="testrun_last_run_date" title="测试执行日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="e24e4096abc945b2a22f8a5372e9ee17" name="doc_abstract" title="文档摘要" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="e954d3ec735447cab8cfe619ab98f880" name="project_whitelist" title="PROJECT_WHITELIST" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="69a6527183a84997a8d9ba0b6c01a36d" name="history_field" title="操作字段" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="6b4b80cede3941b2adba994632d97f53" name="user_gtalk" title="GTALK" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="5e2dababf0204ec19c9dbc651d04b6df" name="actor" title="操作者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="d9738a6577764aaea370ea41f3afde24" name="case_opened_by" title="用例创建人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="7aaf9445eec944fc91b09049656477d8" name="story_assigned_to" title="需求指派" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="0c1c84754401456b8f12c843b614967e" name="extension_id" title="扩展ID" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="7e3b13d862684648b3dd86ca21e15d4a" name="object_type" title="关联对象类型" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="7dd391433dce4cec85499f1622366ad3" name="faq_source" title="FAQ来源" business-type-id="1a98f7a11a8e4e7db15aec24d8b8efdf"/>
+  <standard-field id="7ac7c277ab654de6a5b8ca4541446193" name="risk_owner" title="风险责任人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="b2553a6254c74c24a99cfe048784e201" name="bug_opened_by" title="缺陷创建人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="228bd19c6288468782beb6be88ef5355" name="bug_os" title="操作系统" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="958646570c104f51a31af282512cc7d4" name="reply_date" title="回复时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="5f6dd6d2e2b64d088459c8982baaeeca" name="testrun_id" title="测试执行ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="f23ee602490848ccaa288ef992c76b58" name="doclib_name" title="文档库" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="3b7f0c641dbe4e99b78c9e054fb34bfe" name="action_date" title="操作时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="61a395981d764f72a507867dba584d6e" name="sysdict_section" title="分区" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="b5917917fe0c493bb3b4c2126fd7b7fc" name="reply_opinion" title="回复意见" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="fc07accd630f494fb1dbd1f4e210919e" name="task_assigned_date" title="任务指派日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="b34a71c9971d4a9c9e59eb57455ad14d" name="request_count_client" title="客户请求数" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="4c411c70881a4c59a4b0a5596aa72b16" name="todo_end" title="结束时间" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="78332d57a4ca4d77967cbb84cfc83ccd" name="userquery_form" title="用户查询表单" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="7ad7bc7a8c88452eb54483e968ab36e2" name="pmc_cpi" title="成本偏差" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="c95ad604fc434e208e0c90c460460d31" name="case_stage" title="使用阶段" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="5699f0b62cdc4ceca199a3ab7e2dc4d6" name="user_phone" title="用户电话" business-type-id="75d3db2aa9cd44c9b6eff586ae0ff8b3"/>
+  <standard-field id="50d5284fb0cc4282b87f84bf8bc6bc1b" name="testplan_owner" title="负责人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="fc7687cfc1d6483d950c8819e06c722e" name="user_password" title="用户口令" business-type-id="06f8c5526e304671a3108390ef6cacb2"/>
+  <standard-field id="22df226a66ba40de8996d0a764f557dd" name="request_spec" title="请求描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="444a0648645647dba70088f46bf22cee" name="plan_effort" title="规划投入" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="d2df5f7ea9a54f6b8e15e9b02ee05a89" name="story_link_stories" title="关联需求" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="2f227a2d55934d18aef2c9640d4f36b9" name="team_hours" title="可用工时/天" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="2a57f81e0fcf4aebb8ecd9d98d8318bd" name="project_closed_date" title="项目关闭日期" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="adfd7a293858474a98fed118a6d7f411" name="bug_mailto" title="邮件列表" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="cbbeac9281b84ba5b7c5f8509fc2656a" name="task_closed_date" title="任务关闭日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="92fc903fdb4c411d805ba64a4493185f" name="request_pre" title="请求优先级" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="780be6cef23b43689b11e177d2c8dba9" name="testrun_last_run_result" title="测试执行结果" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="2dfc53c6c3894d9f8ee9e7ed90bd11ba" name="faq_id" title="问答ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="17fb1eb056e9424996c2a58ac3a13d18" name="bug_last_edited_date" title="缺陷最后编辑日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="ef6cb561baa8416aaa7bed92b46c4eb3" name="module_order" title="模块序号" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="68bb8537003640b1b62af6c6859b018a" name="request_reply_date" title="请求回复时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="da17a31ea8f1472a9af990b8161dbee0" name="build_name" title="集成版本名称" business-type-id="e860c7034d9441cfa80b95ade564adf7"/>
+  <standard-field id="e952e79343054d5eb3f5c29edb691978" name="team_leave" title="离开日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="68c1e772232b47ca836b858a1a7c494f" name="project_closed_by" title="项目关闭人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="4d7b506f47654fefa6f198a58886a4b6" name="program_begin" title="项目集开始日期" business-type-id="b477e1d68a7c4765929ab795e4e6fb00"/>
+  <standard-field id="9ef8171b5bd14f9da6699e3b68cec47b" name="bug_title" title="缺陷标题" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="e281a9de9c5d468abb7fecff8425b0d5" name="project_team" title="项目组名" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="0687becda67b48179038919a8a80b7d2" name="review_type" title="回访类型" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="031040851d0f49f9894fb2d6521de99b" name="file_pathname" title="附件路径" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="af348c5d58ef459ebbc4d24e3d567722" name="company_website" title="公司网站" business-type-id="b70db83f52c7460ba9ddb7ba6a1df2e9"/>
+  <standard-field id="b4e2d5d3c3db4cca877bcc5ef09d2aaf" name="project_opened_by" title="项目创建人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="16e9ab0de8b14c22b616dcfeeffee6f2" name="user_msn" title="MSN" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="ebdaeae60a244ce98ed3985dce06a43f" name="request_id" title="客户请求ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="d8772336d75644f4972cf01ac1ee8dfc" name="task_pri" title="任务优先级" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="c7c3b4261b5f4f208cd2f282e1fef550" name="case_run" title="执行次数" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="65e3d362a5ba4cb99006a0412334641a" name="account" title="用户账号" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="74045f17dde34c0f96f6ab70d16a5c12" name="module_parent" title="父模块" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="11925e41b10a43f4a887a554a8bd954b" name="bug_resolved_build" title="解决版本" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="c116f1f6c3df42d591caa5dbfbb2a859" name="case_type" title="用例类型" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="392872eb8f6648bfa9c2b5e433d88ae5" name="reply_do_date" title="回复处理日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="11894d3b853e4cec9e7d88584a1d5cb1" name="sysdict_value" title="字典值" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="caf34bdea4964ef0a983a41c321b2d85" name="case_last_run_date" title="用例最后执行日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="df9637008fc64c14a282c3bd9cdbe55c" name="story_opened_date" title="需求打开日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="779b938158d64dfea8a0cefc38de8771" name="function_id" title="功能ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="3ac1fc5624244784b95a951ab8cf6acd" name="task_opened_by" title="任务创建者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="ca2cb13fe3b442cfab76a98168a6c517" name="bug_opened_build" title="影响版本" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="b65342e978b44d1981e19edc489843d6" name="file_added_date" title="附件加入时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="4ec7505aebd74a6782abf3c3aec54874" name="todo_status" title="事项状态" business-type-id="75d3db2aa9cd44c9b6eff586ae0ff8b3"/>
+  <standard-field id="9e006d46bac546d59126c121f522db2a" name="service_request_limit" title="服务请求数上限" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="2a79aeff21d94f31998de951446b8977" name="story_closed_date" title="需求关闭日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="a70a744899914a9294069f79f0c3c881" name="product_list" title="产品ID列表" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="f2273a6d561645d19db2c0f8bebe0d74" name="request_submit_date" title="请求提交时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="dd7dceb7d3bf44039ba2a80fdaca90ec" name="program_pri" title="项目集优先级" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="9ddc39f566404cea8eb5de0ffb80a5b8" name="release_name" title="发放版本编号" business-type-id="c736a288204545ed94bdc09f5b09feb0"/>
+  <standard-field id="dffe3192e6d74df78781f5b79a9acee2" name="action" title="操作" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="05f0a73a509d46c5ac34b9202e9f6b2c" name="dept_grade" title="部门级别" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="e97c783395354f39b5c9d823d623e6ed" name="doc_score" title="文档得分" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="a4f7d3b54de344ebad14b0b72c54029f" name="story_pri" title="需求优先级" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="7bda3c6e2a8840cea42bfa3256ed1771" name="project_end" title="项目结束日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="c86acdcdf60a47b9b2b19ab810dba377" name="from_bug_id" title="建自缺陷ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="2b699ba45ea646128f16ebb236a1f000" name="message_sender" title="消息发送者" business-type-id="1a98f7a11a8e4e7db15aec24d8b8efdf"/>
+  <standard-field id="4e67ffa881dd4bca9ee69e3b4040a4a7" name="project_opened_date" title="项目创建日期" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="6711a054dc844f3a8e3bea94d3a6bc4e" name="todo_id" title="待办事项ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="8bae66321f494bd7849cc50134a321fc" name="task_story_id" title="任务需求ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="5aaee11b89e04fa1bb4de27ee95bfee7" name="case_last_runner" title="用例最后执行者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="b2a961084bc64908964d9474757eaf83" name="client_spec" title="客户描述" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="0436ad1dc36f4a559190850b3cf57533" name="pmc_id" title="项目监控ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="31c1cc531bb14fe2b1c09a38c964d73f" name="task_canceled_by" title="任务取消者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="e94858b35a5c4bb4bac6edff9815233e" name="request_count_add_up" title="累计请求数" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="aa607679d6fa4aa19206ad41727bd416" name="request_title" title="请求标题" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="285352730b2f4f8f8050fed09f737b70" name="program_order" title="项目集序号" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="45755439c7ef4081be71a98e01add8c0" name="company_fax" title="公司传真" business-type-id="75d3db2aa9cd44c9b6eff586ae0ff8b3"/>
+  <standard-field id="62ef45ee894f4f3195dbb656fd034070" name="review_date" title="回访时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="1fb63c1c48e343fcab29b71fa155c394" name="product_line_created_by" title="产品线创建者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="19c5a1868e7b411cb811e2d6d76515a5" name="story_opened_by" title="需求打开者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="71d99dbf884c469aa12389a2818d28d6" name="task_open_count" title="TASK_OPEN_COUNT" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="176b562bdd0b462e9aef9b93ef206946" name="risk_category" title="风险分类" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="8181d7cbde414866b51bdfd77fd85a9d" name="extension_version" title="扩展版本" business-type-id="c736a288204545ed94bdc09f5b09feb0"/>
+  <standard-field id="cc29ddaff4794b498d6fa26d5eb63ce6" name="project_id" title="项目ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="f9221376088949518207ec0815570b2c" name="task_mailto" title="邮件列表" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="86354cb3c830470db4b2c5212d990819" name="project_stage" title="项目阶段" business-type-id="1a98f7a11a8e4e7db15aec24d8b8efdf"/>
+  <standard-field id="b572f97b65f54fd9aa7ddb3f562a78d6" name="product_line_white_list" title="产品线白名单" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="ed2a852d3fd94174999b933d99e23704" name="bug_duplicate_bug" title="重复缺陷ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="2ad7063da44d497dae8bfd7615af7f78" name="company_zipcode" title="公司邮编" business-type-id="1a98f7a11a8e4e7db15aec24d8b8efdf"/>
+  <standard-field id="152923cc85834a0da33ed8a5da06e461" name="product_line_order" title="产品线序号" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="cac750ed0c5f4194a81df131008958ff" name="module_feature" title="评估特性" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="5cbd7b4d433c449db026d5970be23e52" name="faq_create_date" title="创建时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="7d395344629a4151b1c78ebbc69a9553" name="team_join" title="加入日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="53728b2d4f39484fb746f07502f4ed89" name="plan_name" title="规划版本名称" business-type-id="c736a288204545ed94bdc09f5b09feb0"/>
+  <standard-field id="4eedfe38b36b45d094b4d2d147df43ff" name="product_line_created_date" title="产品线创建日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="1c6c99085c114feaaa5f9a9a36946ce4" name="story_type" title="需求类型" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="8d2ef581f77f4bd7b2b7bd1eb10f86ec" name="risk_open_date" title="风险识别日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="df12c71017614661905b940ce6dd7335" name="risk_opened_by" title="风险识别人" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="596dee904e394d44896f89fa0e86d6d3" name="testplan_status" title="测试计划状态" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="8a7001cd9b35485caf91bd13c7927a6a" name="product_desc" title="产品描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="ee1c7fe716bf46df8fcc99924ea79b74" name="release_id" title="需求发布ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="e2f330e71dd9409da1bdd1e10618b319" name="story_to_bug" title="STORY_TO_BUG" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="309d8fa16d2242fb8c35d60b4c6553f8" name="user_title" title="用户头衔" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="71d54e48d6674b8eb620ddd16d6b7f6f" name="request_count_need_review" title="需要回访请求数" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="47345705c36a450fb833e40ef1e96117" name="user_qq" title="QQ" business-type-id="75d3db2aa9cd44c9b6eff586ae0ff8b3"/>
+  <standard-field id="89e4eaafcb154481a1148bc43a1a47de" name="hdate_name" title="节假日名称" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="a2feb7294cfd4ff29444ef50ed15b6fa" name="review_id" title="回访ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="56994471f77143e3bde0a49efd4a6cdc" name="request_count_reviewed_pass" title="回访通过请求数" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="1b1a18826dd64e33a593dc52eb6d2802" name="company_phone" title="公司电话" business-type-id="75d3db2aa9cd44c9b6eff586ae0ff8b3"/>
+  <standard-field id="645f7701e15643eaacd987197f5306ad" name="task_s_s" title="同启任务ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="2e9718aadd3d4cee93d9ab6388c482f9" name="service_review_time_limit" title="需求回访时限" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="2e57cf8029ca4f41b69fd44101acbae3" name="task_s_f" title="紧后任务ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="d49e5a5a843747dcade7d3d043ef6220" name="reply_commitment_date" title="承诺日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="7363a7dbeb844dffbb05bbcd1a379659" name="pmc_ev" title="挣值" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="25a7c214c61a41208af3a219a9be0c63" name="user_lastvisit" title="上次访问时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="18f49e69574642b188ffc316671b0d1f" name="product_line_id" title="产品线ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="ef1e1a72e2984b058a3299254c93e16d" name="story_status" title="需求状态" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="cb47bf813e4c4915866a9228e712068a" name="risk_check_trigger" title="风险跟踪触发" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="f6bc720b2d9948fc82e8cea8015a3adf" name="acl" title="权限模式" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="0469fde60e5a4db8b4bff4e5f69ea0b7" name="bug_severity" title="严重级别" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="6d8dd78cbc1240df98d6d6ccb47f8816" name="program_goal" title="项目集目标" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="8f45dc0709dd4f8ab87a81c44a0b56ce" name="module_id" title="模块ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="2f651f7df0ae4e5fa764d52be1ef950c" name="file_object_id" title="附件对象ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="6cac5943b55c4a8db72cb66f94b7c2fb" name="case_id" title="关联用例ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="42e70902a1ae40548181cea0296f2836" name="service_reply_time_limit" title="服务响应时限" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="608f9769ccfe4407a1b4df9601fad455" name="message_receiver" title="消息接收者" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="f072acf430c0483aaa969295fae15d45" name="file_added_by" title="附件加入者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="179ebb1a5dc04610b56cf48db2eee379" name="story_parent_id" title="父需求ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="faf8a1ed910b4670a9e5bbe815eead0a" name="task_estimate" title="任务估算" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="b427925d604a4c23a0bd9ccbca8b6d45" name="extension_type" title="扩展类型" business-type-id="75d3db2aa9cd44c9b6eff586ae0ff8b3"/>
+  <standard-field id="c462ce26eef144cbb495ceb40e9f22bb" name="request_count_reply_intime" title="及时回复请求数" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="18d8fbab6c5c4e1e8f87c490f7321f92" name="message_content" title="消息内容" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="27243f68348049ceb63ea6d161deaef4" name="testplan_desc" title="测试计划描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="25d60bf0feb14d14a7c695a73d987fff" name="story_id" title="需求ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="71fca414dabc48288572d255246d6642" name="message_flag" title="消息标志" business-type-id="1a98f7a11a8e4e7db15aec24d8b8efdf"/>
+  <standard-field id="f8f4804fd0714806bb2186c92bc53b78" name="doc_views" title="文档查看数" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="d98f23cdb3c94359a961da379565a18e" name="reply_do_by" title="回复处理人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="66b9477a69a74be78867fdb4493fa565" name="module_path" title="模块层次路径" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="77a2470900194e7f87e5d35e5f9c650b" name="request_count" title="请求总数" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="0a6f370f994f48bd9f508d26a43348dd" name="user_position" title="用户位置" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="5593effeb0e5438fb558e3bc3c8a7c57" name="file_size" title="附件大小" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="30283e968ba444d9a416ed0df669c617" name="sla_created_by" title="创建人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="4e1acb3bc4f742e98cf3e795ef1ab151" name="story_mailto" title="邮件列表" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="e8b5ebed77674150adb2f68acb6c18b6" name="builder" title="集成者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="6be917c9edea4667a29fb5b4f19bc483" name="service_specialist" title="服务专员" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="43726be7d2f84390b35da9ec27659af6" name="project_canceled_by" title="项目取消人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="8ff50bbfbe68446797dfda4e428bdaf0" name="program_closed_by" title="项目集关闭者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="e71c56c3959648afbeb18e32972d0709" name="request_last_edit_date" title="请求最后编辑时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="d008a711534d43ad9a96a43242ec1b7c" name="testplan_end" title="测试计划结束日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="0d5eafba283542bab8f1e3d715df1823" name="client_dept_id" title="客户单位/部门ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="527fd417aac7417ea35dbb4cd604b2b9" name="program_end" title="项目集结束日期" business-type-id="b477e1d68a7c4765929ab795e4e6fb00"/>
+  <standard-field id="30abdd1a665b483cb9a8ec7265172194" name="case_keywords" title="关键字" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="447dd7e1b2964fe7878687397fda317f" name="request_count_n_req" title="新需求数" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="1c8985aba590469fb2a781e2d82d8c61" name="user_onlinetimem" title="用户本月在线时间" business-type-id="70ce056112814752af05805ddfec9c79"/>
+  <standard-field id="fa5d2c71e88b4f36bd11dff5dc2b77d9" name="task_finished_by" title="任务完成者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="93649eedf69b4c239a01dc38b1527b40" name="program_desc" title="项目集描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="8e76f758a9c84fe0bf0fc9dbcf501cc3" name="role_desc" title="角色描述" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="1f3d85ade02440389cc9828289d34295" name="user_nickname" title="用户昵称" business-type-id="6aa268f93a8f4ab8abb4d698ead6e2a6"/>
+  <standard-field id="32fcb0782bf343fc968ee44e58fb81ba" name="story_last_edited_by" title="需求上次编辑者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="4da5d6852f7d4ea2b4e4d69f4a177dbd" name="admins" title="管理员列表" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="ec4343e966c846398a009a23c4b08ebd" name="project_type" title="项目类型" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="ed4ef2b727e44825976595936c1c952d" name="sr_create_by" title="报告制作人" business-type-id="c736a288204545ed94bdc09f5b09feb0"/>
+  <standard-field id="a40188b9d72d4c53afa8b991ead99129" name="story_title" title="需求标题" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="305385f2d1fe49d6b18de5abd76060dd" name="module_root" title="根模块ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="1593c6855e5f4534be78b058803e3706" name="dept_id" title="部门ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="922a44d1439c4563a999f8ccdbf5cbd2" name="doc_url" title="文档超链接" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="bbab12e5860049e39efd9901e4b28d71" name="user_mobile" title="用户手机" business-type-id="8cc2c166158f4a7aa9f48d4f4f13d0a2"/>
+  <standard-field id="94fc4d04a9444e0a987e8ca859882f0d" name="file_id" title="附件ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="6edea899b4ea4091b69a97f98aed487d" name="review_score" title="回访评分" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="002a541333d04d7180bee42a04a596fa" name="extension_installeddate" title="安装日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="6518515e9b6d4c688e12c44d49747498" name="request_commitment_date" title="请求承诺完成日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="05cbcf9f48504dd98ac788d7a2519c87" name="request_status" title="请求状态" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="2b1d36e9cda24660a885fc7ea6dc8a89" name="case_precondition" title="前置条件" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="9d1de509608b4a6db6bf91656782aa2f" name="extension_systemversion" title="支持系统版本列表" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="e6771019a71e4fc893c7bac998645b22" name="dept_name" title="部门名称" business-type-id="6aa268f93a8f4ab8abb4d698ead6e2a6"/>
+  <standard-field id="bc0fa648fc3248b887bdc3c6031a3851" name="story_reviewed_date" title="需求审核日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="4b3ace44f6b14423b072ae82159722c8" name="extension_desc" title="扩展描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="228cd4cb83b84a81bdbada0fbef889af" name="faq_created_by" title="创建人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="2b4d28f8e80945cba469f9ad0f69cdec" name="request_count_released" title="实际发放请求数" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="37ef7b2fb36c46cba3cdf376a16f2c40" name="testrun_assigned_to" title="测试执行指派给" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="90a99b855a724acf9a64aaa598a782e3" name="sla_title" title="服务协议标题" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="8b3a5dfdb7e74f528d5ddfe43a9bd96d" name="product_line_root" title="产品线根节点" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="9af43dbb360e4e1aadc289c5e7224c29" name="module_owner" title="模块负责人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="a7dd48e4a18a4ebbaccae45deb712d22" name="request_trans_id" title="转出对象ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="02f8304446e84d909116ade9d84dca41" name="task_est_started" title="任务预计开始日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="03527ea26b9343c4bbbbd6ce1f0d03ac" name="case_last_edited_by" title="用例最后编辑者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="1602a93f7b9a491f919ae426dc3a8ec0" name="release_spot_test" title="是否需要现场测试" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="aa11ae9944984ef49778bf109616dd77" name="build_scm_path" title="配置库路径" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="b7b1191eadbf47339be69ac3f5911583" name="to_task_id" title="转为任务ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="e0b58e965d0e4a0dbbf3f913ef38cbff" name="request_reviewer" title="回访人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="9bcca053d3834c62ab68bee6987f3377" name="task_last_edited_date" title="最后编辑日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="0f76b7bddcb54fd2a3cc9028e7273d9b" name="user_visits" title="访问次数" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="3aecc3bbf3f644b3b01ff738f6b4793d" name="todo_type" title="事项类型" business-type-id="1a98f7a11a8e4e7db15aec24d8b8efdf"/>
+  <standard-field id="5429f6b81f834bc2abde808cddfb2974" name="file_downloads" title="附件下载数" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="eabf1075cbe7469484e1a7366aee4aa1" name="userquery_title" title="用户查询标题" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="1b647c9e30504e4dba65afb491bf9a80" name="company_home" title="公司网络社区" business-type-id="b70db83f52c7460ba9ddb7ba6a1df2e9"/>
+  <standard-field id="be223410bac44b6da883a76252d276b7" name="doclib_id" title="文档库ID" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="c1532b1cf7964ae6b8038be94f07c72d" name="project_status" title="项目状态" business-type-id="1a98f7a11a8e4e7db15aec24d8b8efdf"/>
+  <standard-field id="bc53e658ce114c3ca204baa58817ecca" name="comment_added_date" title="评论时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="2644fc725fef4031a648f6e4cdc88ca7" name="task_status" title="任务状态" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="13b4fdfd5da34b90a080a919e036e826" name="request_count_reviewed" title="按时回访需求数" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="fb45874863d94d4fb2a3c20cb6c87fad" name="request_release_date" title="请求完成日期" business-type-id="70ce056112814752af05805ddfec9c79"/>
+  <standard-field id="4da723a48b6543168974e3bbae9b9eff" name="product_line_parent" title="产品线父节点" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="4ceb9bff00f54af4a696e710938eb001" name="service_level" title="服务级别" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="40426b8003274f1a9afa81601ee7e7fd" name="task_desc" title="任务描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="b670dab7d7cf495c9adafd3842961aaf" name="program_opened_by" title="项目集创建者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="ed2abec82c884d48bb509a0ccbfd082a" name="file_extension" title="附件扩展名" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="b296ca3761b546669e9f9c1fc706c142" name="productline_name" title="产品线" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="0cb3da22dc2d49ecad0db5945d30a8d5" name="pmc_pv" title="计划值" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="dcf53905f414453fa73689dc5dc36d7d" name="bug_origin" title="缺陷起源" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="3c6dda9b8eda4468a55b9ff91193fb2f" name="request_close_date" title="关闭时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="112de383fb8f4d69b6b1f737a941396b" name="task_f_f" title="同完任务ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="9a56598537eb45a5aaf1fc564d582681" name="build_range_id" title="集成范围ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="4c64914f6f3946138a13e993e262f7ed" name="bug_type" title="缺陷类型" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="c265613501f54e6d8303b62d25625f25" name="comment_text" title="评论内容" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="0f92249448b4481ea126b834de0f40a2" name="product_name" title="产品名称" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="aa15e0a991284069ab2995436e5a92b2" name="task_deadline" title="任务期限" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="72368066762e4af5817a894698160ac9" name="extension_author" title="扩展作者" business-type-id="9444ea8f00b942b1a331b2e400a16eb7"/>
+  <standard-field id="39cef3fefa8d468494debc912a680bcd" name="module_grade" title="模块级别" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="2b2f8324ea2842f3bacbf0e8b54bf621" name="doc_content" title="文档内容" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="36d199f82ef24b4ca69eeaadb919ff3b" name="release_create_date" title="创建时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="167154612b324d31893e8c031f3e45eb" name="plan_bugs" title="版本缺陷列表" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="e7fb3f131c0b4ba4aba4eef364dc8afd" name="user_account" title="用户账户" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="8a38d9fef57940408ec4be771fecc45a" name="story_closed_reason" title="需求关闭原因" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="416c183494a5450dacafb1949f779ce2" name="testrun_status" title="测试执行状态" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="9059a0fe18724b04ace3b18dc5ad9cd4" name="pmc_spi" title="进度偏差" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="8d71130ff5a842a78f6d9ca2ef419aa6" name="plan_stories" title="版本需求列表" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="e940123316e44523baf792df522b2dae" name="extension_code" title="扩展编号" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="4933ab0a32374a0cb182f43543545408" name="sr_id" title="服务报告ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="9b45a5a107844251aa6fa4d31d681705" name="client_user_id" title="客户名称" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="d42e72f1b904499387c5ef37b9f99789" name="request_score_total" title="请求客户评价总分" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="9180444414314e4d892bd287d057c83c" name="testrun_last_runner" title="测试执行者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="8ccd9df51f404446a860e0c1f7b63460" name="story_keywords" title="需求关键字" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="299fa8b2e7ee4155b22cb3f8acdffa73" name="message_receivedate" title="消息接收时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="eef25ad9a2614d9cb651c5694fe75e1a" name="review_spec" title="回访描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="2c9b30216c1240c79b55f154009e7eef" name="file_object_type" title="附件对象类型" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="e3743e8b67e447f3ba708a12a39252cd" name="story_spec" title="需求描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="134bc6a444224e16b4def2e57dc6df9b" name="risk_impact" title="风险影响" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="eadd20ef26534c30a852c6db5be561b7" name="task_f_s" title="紧前任务ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="c7c41bd7eecb41f5b870ae22dbcfff92" name="case_step_desc" title="用例步骤描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="9a2df9b657264687a5cd8fdbf12f5c3e" name="sla_status" title="服务级别协议" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="5a6d8f59382a478786e084dd8d463ba1" name="project_canceled_date" title="项目取消日期" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="10632308e8fd475a9db2a934770dd5ff" name="request_submit_by" title="服务事件提交人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="6077ad73113f42dfb7599a6b74250115" name="run_id" title="测试执行ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="b98e45dcd3e549fca7cefbb1cbb8a0e5" name="risk_close_date" title="风险关闭日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="2cbfb4c8cb1e493dbfefcfe0ef07630c" name="project_code" title="项目代号" business-type-id="ee9eeaa6d14d48c8a9b0ae94e46e0c21"/>
+  <standard-field id="64f3d693504044eaa158b86a8ebbdb98" name="story_version" title="需求版本" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="1288fb018e504753bc85f2b5a7c5772f" name="bug_resolved_date" title="解决日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="fbde7eb1cea74924ab7de87c19f96ccd" name="role_name" title="角色名称" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="9ef42036ddb94641928fc11ad3ba5ace" name="request_open_count" title="请求打开次数" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="3f6ff9636a124b86a771b39dadec817e" name="comment_id" title="评论ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="017e47e8aa144a78a2bea8b3b75bd799" name="bug_keywords" title="关键字" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="999665d97994405bab25998560219fdc" name="product_id" title="产品ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="bf2ba4a7286944ad81718eb017e6d21c" name="bug_last_edited_by" title="缺陷最后编辑者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="95859e5d8ea844988baac5ac732e4cd0" name="user_realname" title="真实姓名" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="36f39e9a71b24974ae9ec8d4e7be8fb6" name="program_manager" title="项目部经理" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="092d1c5cc75f4a74a668cfdd9fe1502d" name="risk_title" title="风险标题" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="d909231eb87a49339c1ce021b3470df9" name="service_ts_onsite_limit" title="现场服务次数上限" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="9e1b5f3daf944a5ebb66b65a7ee202db" name="request_commit_span" title="承诺交付跨度" business-type-id="1c163568d8b043989a09f23378c0a745"/>
+  <standard-field id="18576184c11a44f38d5efc61bcba3509" name="testplan_name" title="测试计划名称" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="285b41f75dc54f47a58992eaab8e5a3b" name="faq_answer" title="解答" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="20b9036321a14f98bc79f834e669b407" name="faq_source_id" title="来源ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="64d4b52ecfe6471a94eca271770599a0" name="action_comment" title="备注" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="cd41f2858ecf403caf2ba483f480f149" name="parent_id" title="PARENT_ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="46d30876d9d6485bb62580d1230dc090" name="risk_id" title="风险ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="21bb56c370d849248bc7f6fdca3ad70e" name="client_n_o" title="客户编号" business-type-id="c736a288204545ed94bdc09f5b09feb0"/>
+  <standard-field id="870c74a142524599ac4af1c9420fc98f" name="risk_probability" title="风险可能性" business-type-id="637792998f4a4c649a9ee14459f6421b"/>
+  <standard-field id="5ccb27b9dad7419fbd6fb3a1185e8f3b" name="testplan_begin" title="测试计划开始日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="bb7952efe9f24f49bfe7d7a3f78dd958" name="sr_title" title="报告标题" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="c68ae169eba148c498f6fa8ac154f333" name="userquery_id" title="用户查询ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="fb1010b00ba84123bc11bd38cf866030" name="reply_done" title="是否回复" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="f24ae0b49e8b432eb5a8e3984a3e187e" name="bug_assigned_to" title="指派给" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="284ed2cfe71c459bba00d5a25d61f18a" name="dept_position" title="部门位置" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="bce01851ec004ac68e819968b5c27b86" name="program_opened_date" title="项目集创建日期" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="2b0e2092a7c4426d8e41ec6c67ca5316" name="request_review_date" title="回访日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="684248a6c41344f9b8e7c30d9404bb88" name="action_extra" title="扩展字段" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="dae887ac016e422eba1ab6042d6c4e77" name="project_goal" title="项目目标" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="92ddd7e74c9349c2857784e71d42cf59" name="userquery_sqlcondition" title="用户查询SQL" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="1322b889738e4292ad59acb145aa5ada" name="todo_date" title="待办日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="e5f365ca7c5c4bf7bbd29807417ccc78" name="doc_title" title="文档标题" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="905a0c7c099a4875ac9d893d13341341" name="bug_steps" title="重现步骤" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="8739d096cc3340eaaebabbf5d8a4e661" name="replier" title="回复者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="a9b420ba7f364337965890e14a49acc4" name="bug_hardware" title="硬件" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="a4a3a10986244802bed2c602afe02eba" name="bug_confirmed" title="是否确认" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="1b7aa9b3299843f4b79db7191195a7b2" name="project_product_id" title="项目产品ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="de5b4de3ce4548249c39a6706d4ab475" name="user_role_id" title="用户角色ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="7e11c03102014964acc8bc3acf6f6d4a" name="request_last_edited_by" title="请求最后编辑者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="ecec79b9d2a3455d9953c56e9b05e173" name="project_name" title="项目名称" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="670b4527baf441e0b2d7f81cc0942164" name="bug_browser" title="浏览器" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="e84d2178beee4885b06ba11c43a3e362" name="plan_spec" title="规划描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="40618defbdbc421b9f40f82c1d33e2b4" name="request_count_expired" title="到期请求数" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="a9760ad34c914f5c8dccd09a766bd5e7" name="release_mail_c_c" title="发布抄送" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="b8b095ed11a445ef8329b70eea7c435a" name="sr_begin_date" title="统计起始日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="8ca00c9cd1cf4a9590eeb387d4e5e2dc" name="request_n_o" title="请求逻辑编号" business-type-id="c736a288204545ed94bdc09f5b09feb0"/>
+  <standard-field id="5737f58e53ff4ab0aa54c63ce27d482a" name="release_request" title="关联用户需求单" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="781352d85c274a1a8f07954ed68c835c" name="todo_desc" title="事项描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="f68dce48cd0e49a1a006abe018623239" name="risk_action_result" title="风险计划结果" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="c81a7b57561a4015b06cc74102ebb2d3" name="bug_opened_date" title="创建日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="693d6912c0154a858878969c4a93476f" name="risk_spec" title="风险描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="ca0909edf0434fa6a1eda4e48d110875" name="client_name" title="客户名称" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="7b9582e4d7be4982ac5fe49d3929f9c3" name="module_spec" title="模块描述" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="ab3bf208fe0b4cb89e4cb1336a66158e" name="program_canceled_date" title="项目集取消日期" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="46e73b79a6f34110a85bc50240c0e761" name="client_status" title="客户状态" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="60fe4282cdef4ce98854cd07518a2210" name="bug_status" title="缺陷状态" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="f947f13afc214080b20dd6561f37bf2a" name="build_date" title="集成日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="665391e1579e49d9bc8afecd0568ee84" name="faq_reply_date" title="FAQ_REPLY_DATE" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="ee6ef2c36c744c56870ccdfa36c4606e" name="doc_keywords" title="文档关键字" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="5487d1b46eeb41fea3ac9aff5806c57d" name="story_last_edited_date" title="需求上次编辑日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="6cc5ade65f9f46019a05ed29a698d747" name="doc_edited_date" title="修改时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="0f30fda760af42d4b2b7b156956c9310" name="task_closed_by" title="任务关闭者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="92cbb35e0a8f407ebb4afeeaded9de7a" name="dept_order" title="部门排序" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="6105e6e401134f109c19b2cf605ea9ab" name="risk_last_edit_date" title="风险最后编辑日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="4864462f9ad74e478a8cd42473acd5d6" name="product_owner" title="产品经理" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="45fe36cad41f464fb354a837dc5b8453" name="program_code" title="项目集代号" business-type-id="ee9eeaa6d14d48c8a9b0ae94e46e0c21"/>
+  <standard-field id="463102f8bf1f40d089f29cde9fb7723f" name="service_deadline" title="服务期限" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="c1b1e683cad945619960e4dcf2e18a84" name="user_address" title="用户地址" business-type-id="b70db83f52c7460ba9ddb7ba6a1df2e9"/>
+  <standard-field id="a28ca2424e5244479be8f5f9a99b96a2" name="company_weibo" title="公司微博" business-type-id="b70db83f52c7460ba9ddb7ba6a1df2e9"/>
+  <standard-field id="7a65254500ce49928435b079c856737c" name="request_closed_by" title="关闭人" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="344fc1182faa4aee839ad8b923533af2" name="task_closed_reason" title="任务关闭原因" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="4e5b6cf5d3e14cb2901ac4d26770a82f" name="function" title="功能名称" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="951a33d9ea454a7e8a63d164455bbb59" name="risk_contingency_a_p" title="风险承受计划" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="80d621d365ad4912bbb5a70edde7b236" name="program_whitelist" title="项目集白名单" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="4fba28e2ea804c4aa0a2a3fefc43bcd2" name="doc_added_date" title="加入时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="272690eac0ef4fca9dbdef53310fc62e" name="company_name" title="公司名称" business-type-id="b70db83f52c7460ba9ddb7ba6a1df2e9"/>
+  <standard-field id="25d1ddad925b47a2bb31cd7019ea5fee" name="story_source" title="需求来源" business-type-id="75d3db2aa9cd44c9b6eff586ae0ff8b3"/>
+  <standard-field id="d09c1f2ba65e404c8574fda9a909e1de" name="program_closed_date" title="项目集关闭日期" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="e7cfa59a1fda4669899995dfb67597cc" name="risk_status" title="风险状态" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="8d997ffd882445258ba58c7816019182" name="team_member_id" title="团队成员ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="a90ac42c2db046dbadb38af86e36a280" name="qa_openbug_impact" title="遗留缺陷影响" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="5dc28a8a2f834594bb2fc6df6e218729" name="task_name" title="任务标题" business-type-id="05b3f21a08dc4914a1d0a13a0f9e2a3d"/>
+  <standard-field id="0453cd90eea5464d93beee12e4f66450" name="task_last_edited_by" title="最后编辑者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="d41d436c46e34144aed9dd8bf3e74286" name="user_status" title="用户状态" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="9f76510ce7b24afe852ed925e018d29d" name="sla_create_date" title="创建时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="b122f356f9fa42a699acf90b440c57a2" name="case_opened_date" title="用例创建日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="70450e5dbf264eb98688e35c5ee353e5" name="bug_closed_by" title="缺陷关闭者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="4bf41539826e407fb9b2e4278454db5a" name="request_count_commit" title="承诺修改请求数" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="49ae069b1b04465ab4b6966e3615cee8" name="deleted" title="删除标记" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="28a6056604bf46818911f9a7680ea2f1" name="case_last_edited_date" title="用例最后编辑日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="db2e78cd4fa244dc8530cb6cb5a7642c" name="quality_manager" title="质量经理" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="0e5106d0503c4c9aaa41e43d4708cdc4" name="bug_resolution" title="解决方案" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="d072678485fe4326b2d6910295e19e7c" name="sla_open_count" title="打开次数" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="19bc3b72206c434ba1538b6042abd858" name="qa_property" title="质量评估属性" business-type-id="026a690814e34259898ba74b2b677bac"/>
+  <standard-field id="6665455ea365421d9c24e6c896aa428a" name="task_opened_date" title="任务创建日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="feb34a26deae463dba00a6f1bfc3838e" name="sysdict_owner" title="信息所有者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="9d0463bf887845ebadf8a2c8193825eb" name="plan_end_date" title="规划结束时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="21b08ef3611a49dc8888a059ff53c86f" name="role_id" title="角色ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="58d002e471704dc1b0d0d6ec2b0cc077" name="extension_files" title="扩展文件" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="d0be3790ef74455897b7e529d0d5542e" name="task_id" title="任务ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="8628fe8c917e4985b0e0ae20c219ae45" name="comment_added_by" title="评论者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="0d938481e95a4513b045a57599bd109f" name="plan_begin_date" title="规划开始时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="be400239363a41e99617b0e38c26dac1" name="program_parent" title="父项目集ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="e42979aee83b48238d40aca578d11763" name="faq_replied_by" title="回复者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="d55a641e93d243e5adabece9e09376d7" name="extension_status" title="状态" business-type-id="75d3db2aa9cd44c9b6eff586ae0ff8b3"/>
+  <standard-field id="4c68847102f2460d9a36f7183a05c46d" name="bug_closed_date" title="缺陷关闭日期" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="942063acec214a06913e9922d9137dd6" name="message_id" title="消息ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="508c7e97e5c947fab877ddb5f72351c7" name="sla_review_date" title="批准时间" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="5859a52de43840ef8d02f08f2e2e9e79" name="file_title" title="附件标题" business-type-id="b2547dade84349779debf0afc0dd98fe"/>
+  <standard-field id="e62983984a354b2284cdbb8f5e8254d0" name="product_created_by" title="创建者" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="9a7112a74e5f40de9322a41aad3a1cd7" name="story_duplicate_story" title="重复需求ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="b674de1f93094f11bd0bb5a0715bb4cd" name="project_desc" title="项目描述" business-type-id="11a92da25bd344ac8118f18ea6069dda"/>
+  <standard-field id="a62f5c96385c422693e7e5f4eabd872c" name="delivery_manager" title="交付经理" business-type-id="b9eb448b45cd4c47a6fef44c9cfc1d51"/>
+  <standard-field id="ba826c8a56e343c997db8fe180753431" name="release_publish_date" title="RELEASE_PUBLISH_DATE" business-type-id="b073c4a346f44812889eb863a6b47f77"/>
+  <standard-field id="e8c865e549fb482a878fa1a3921ef772" name="product_code" title="产品代号" business-type-id="ee9eeaa6d14d48c8a9b0ae94e46e0c21"/>
+  <standard-field id="53f467b5452f41c6a8f9cac3ca454acb" name="reply_id" title="回复ID" business-type-id="24b445e238d44dd9bb55e5b8648b419c"/>
+  <standard-field id="0c03b685331f4f37b633f2bccdee6749" name="build_id" title="集成版本ID" business-type-id="f1b1363dbd5d413b8079887296cacdb5"/>
+  <standard-field id="de5739253b094f8b8b02c507fbe642bf" name="hdate_spec" title="节假日描述" business-type-id="c736a288204545ed94bdc09f5b09feb0"/>
+  <standard-field id="535eb4c16342443285d8e3187009ef5e" name="bug_open_count" title="打开次数" business-type-id="1c163568d8b043989a09f23378c0a745"/>
 </standard-fields>

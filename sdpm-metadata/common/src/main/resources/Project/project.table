@@ -1,194 +1,193 @@
-<tables id="17f3634f8ed645beb1f4bfd09b1d4104" package-name="org.tinygroup.alm.project">
-  <table name="build" title="&amp;#38598;&amp;#25104;&amp;#29256;&amp;#26412;&amp;#34920;" schema="" package-name="org.tinygroup.alm.project">
-    <description></description>
-    <table-field standard-field-id="4d119bc835854a978348b15fd21a6a5b" primary="true" unique="false" not-null="false" id="build_id" auto-increase="false"/>
-    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
-    <table-field standard-field-id="90c20173bb314bcdac02cdf14317d07c" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
-    <table-field standard-field-id="4aa15300602340af8576fbc0451402af" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
-    <table-field standard-field-id="6001d5efe188440f8506a01129ef84cf" primary="false" unique="true" not-null="false" id="build_name" auto-increase="false"/>
-    <table-field standard-field-id="d17b4fb9494242d291f1a46c4e55eba8" primary="false" unique="false" not-null="false" id="build_spec" auto-increase="false"/>
-    <table-field standard-field-id="33f495bae23343c798fe91b7137ef2ef" primary="false" unique="false" not-null="false" id="build_scm_path" auto-increase="false"/>
-    <table-field standard-field-id="b9c520866ef24768b9a6f015fa5bf535" primary="false" unique="false" not-null="false" id="build_file_path" auto-increase="false"/>
-    <table-field standard-field-id="49a745ce63e947029700ec442974c37f" primary="false" unique="false" not-null="false" id="build_date" auto-increase="false"/>
-    <table-field standard-field-id="0d0d40465d704b08bf0be55e1f7cbc93" primary="false" unique="false" not-null="false" id="builder" auto-increase="false"/>
-    <table-field standard-field-id="b91f053ceeb141c58d25cf5cd03cea00" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+<tables id="dd14ed2a3efc4eaa8831ba02c3f3aa2e" package-name="org.tinygroup.alm.project">
+  <table id="cead0bae996d4a97a7ead9210b03a77a" name="build" title="集成版本表" packageName="org.tinygroup.alm.project">
+    <table-field standard-field-id="0c03b685331f4f37b633f2bccdee6749" primary="true" unique="false" not-null="false" id="build_id" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="999665d97994405bab25998560219fdc" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
+    <table-field standard-field-id="cc29ddaff4794b498d6fa26d5eb63ce6" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="da17a31ea8f1472a9af990b8161dbee0" primary="false" unique="true" not-null="false" id="build_name" auto-increase="false"/>
+    <table-field standard-field-id="c989f8e83e124ddc80de939698e4a32b" primary="false" unique="false" not-null="false" id="build_spec" auto-increase="false"/>
+    <table-field standard-field-id="aa11ae9944984ef49778bf109616dd77" primary="false" unique="false" not-null="false" id="build_scm_path" auto-increase="false"/>
+    <table-field standard-field-id="2edff2d8d582426fb76494f9508def4d" primary="false" unique="false" not-null="false" id="build_file_path" auto-increase="false"/>
+    <table-field standard-field-id="f947f13afc214080b20dd6561f37bf2a" primary="false" unique="false" not-null="false" id="build_date" auto-increase="false"/>
+    <table-field standard-field-id="e8b5ebed77674150adb2f68acb6c18b6" primary="false" unique="false" not-null="false" id="builder" auto-increase="false"/>
+    <table-field standard-field-id="49ae069b1b04465ab4b6966e3615cee8" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
   </table>
-  <table name="buildRange" title="&amp;#38598;&amp;#25104;&amp;#29256;&amp;#26412;&amp;#33539;&amp;#22260;&amp;#34920;" package-name="org.tinygroup.alm.project">
-    <table-field standard-field-id="a86777b066e249dba4719fc108448e8e" primary="true" unique="false" not-null="false" id="build_range_id" auto-increase="false"/>
-    <table-field standard-field-id="4d119bc835854a978348b15fd21a6a5b" primary="false" unique="false" not-null="false" id="build_id" auto-increase="false"/>
-    <table-field standard-field-id="6c4959fc40a747afa750deaa912d962e" primary="false" unique="false" not-null="false" id="object_id" auto-increase="false"/>
-    <table-field standard-field-id="0566a8d506e948e5a46896aeae285e83" primary="false" unique="false" not-null="false" id="object_type" auto-increase="false"/>
+  <table id="3ef1fe2f9b664306800fc3e738e4880b" name="buildRange" title="集成版本范围表" packageName="org.tinygroup.alm.project">
+    <table-field standard-field-id="9a56598537eb45a5aaf1fc564d582681" primary="true" unique="false" not-null="false" id="build_range_id" auto-increase="false"/>
+    <table-field standard-field-id="0c03b685331f4f37b633f2bccdee6749" primary="false" unique="false" not-null="false" id="build_id" auto-increase="false"/>
+    <table-field standard-field-id="9da7a8ca6faa41ed94999096b18c21f8" primary="false" unique="false" not-null="false" id="object_id" auto-increase="false"/>
+    <table-field standard-field-id="7e3b13d862684648b3dd86ca21e15d4a" primary="false" unique="false" not-null="false" id="object_type" auto-increase="false"/>
   </table>
-  <table name="pmc" title="&amp;#39033;&amp;#30446;&amp;#30417;&amp;#25511;&amp;#34920;" package-name="org.tinygroup.alm.project">
-    <table-field standard-field-id="4472a2279b5c41fc8195ad8415c82f81" primary="true" unique="false" not-null="false" id="pmc_id" auto-increase="false"/>
-    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
-    <table-field standard-field-id="4aa15300602340af8576fbc0451402af" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
-    <table-field standard-field-id="1d312d296b0640b7aaefc4bcbee458b0" primary="false" unique="true" not-null="false" id="pmc_date" auto-increase="false"/>
-    <table-field standard-field-id="100f967a5fa34650847fcb48af267887" primary="false" unique="false" not-null="false" id="pmc_left" auto-increase="false"/>
-    <table-field standard-field-id="c2fea753902b48429fe3bb750c513cc5" primary="false" unique="false" not-null="false" id="pmc_tasknum" auto-increase="false"/>
-    <table-field standard-field-id="2a8aba8972cb494b937894db058b3eee" primary="false" unique="false" not-null="false" id="pmc_ac" auto-increase="false"/>
-    <table-field standard-field-id="91cceb216ed04980bbfcac7a2529889a" primary="false" unique="false" not-null="false" id="pmc_pv" auto-increase="false"/>
-    <table-field standard-field-id="45cedbd9f56a4500966ec7e981ee3107" primary="false" unique="false" not-null="false" id="pmc_ev" auto-increase="false"/>
-    <table-field standard-field-id="afe36a7d997f4cbd89899508e6e58e06" primary="false" unique="false" not-null="false" id="pmc_cpi" auto-increase="false"/>
-    <table-field standard-field-id="8270a0161a9f432182d0f0efdd17f3ba" primary="false" unique="false" not-null="false" id="pmc_spi" auto-increase="false"/>
-    <table-field standard-field-id="b91f053ceeb141c58d25cf5cd03cea00" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  <table id="2b90ed9dc60b4a548511965ce8f727bc" name="pmc" title="项目监控表" packageName="org.tinygroup.alm.project">
+    <table-field standard-field-id="0436ad1dc36f4a559190850b3cf57533" primary="true" unique="false" not-null="false" id="pmc_id" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="cc29ddaff4794b498d6fa26d5eb63ce6" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="6e5ea72111b3425a85999251f36589ba" primary="false" unique="true" not-null="false" id="pmc_date" auto-increase="false"/>
+    <table-field standard-field-id="4352627f7ac54fe8a071fc0b511cd0db" primary="false" unique="false" not-null="false" id="pmc_left" auto-increase="false"/>
+    <table-field standard-field-id="172d3d9dc1dc46788878ff19fd574fcd" primary="false" unique="false" not-null="false" id="pmc_tasknum" auto-increase="false"/>
+    <table-field standard-field-id="a8defc1392704a809f91e31bdbb9ebfb" primary="false" unique="false" not-null="false" id="pmc_ac" auto-increase="false"/>
+    <table-field standard-field-id="0cb3da22dc2d49ecad0db5945d30a8d5" primary="false" unique="false" not-null="false" id="pmc_pv" auto-increase="false"/>
+    <table-field standard-field-id="7363a7dbeb844dffbb05bbcd1a379659" primary="false" unique="false" not-null="false" id="pmc_ev" auto-increase="false"/>
+    <table-field standard-field-id="7ad7bc7a8c88452eb54483e968ab36e2" primary="false" unique="false" not-null="false" id="pmc_cpi" auto-increase="false"/>
+    <table-field standard-field-id="9059a0fe18724b04ace3b18dc5ad9cd4" primary="false" unique="false" not-null="false" id="pmc_spi" auto-increase="false"/>
+    <table-field standard-field-id="49ae069b1b04465ab4b6966e3615cee8" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
   </table>
-  <table name="program" title="&amp;#39033;&amp;#30446;&amp;#38598;&amp;#34920;" package-name="org.tinygroup.alm.project">
-    <table-field standard-field-id="2f8b8e2e4523450db7a7ad21fe395e74" primary="true" unique="false" not-null="false" id="program_id" auto-increase="false"/>
-    <table-field standard-field-id="7feea8cba07640b1a72ed69464d3959b" primary="false" unique="false" not-null="false" id="portfolio_id" auto-increase="false"/>
-    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
-    <table-field standard-field-id="8edbec90df274a01ae929d3233948028" primary="false" unique="false" not-null="false" id="dept_id" auto-increase="false"/>
-    <table-field standard-field-id="6c453f94ff574d05ae9f9808b38da0aa" primary="false" unique="false" not-null="false" id="program_parent" auto-increase="false"/>
-    <table-field standard-field-id="8deca88075ab43238133933239623f1d" primary="false" unique="false" not-null="false" id="program_name" auto-increase="false"/>
-    <table-field standard-field-id="76c3ba6ba974457a8b809b9c7bd12154" primary="false" unique="false" not-null="false" id="program_code" auto-increase="false"/>
-    <table-field standard-field-id="7606654ab39e4faa83a2d241500ee94d" primary="false" unique="false" not-null="false" id="program_order" auto-increase="false"/>
-    <table-field standard-field-id="8babce83132b4a628652b7a2ea66231c" primary="false" unique="false" not-null="false" id="program_begin" auto-increase="false"/>
-    <table-field standard-field-id="ca72fa67ba0d4669ad5dc2eb021b992f" primary="false" unique="false" not-null="false" id="program_end" auto-increase="false"/>
-    <table-field standard-field-id="6b2ef8a2703747379349ce7b666a0b4e" primary="false" unique="false" not-null="false" id="program_days" auto-increase="false"/>
-    <table-field standard-field-id="3902d98041894b4abaedb03cd55dc38c" primary="false" unique="false" not-null="false" id="program_status" auto-increase="false"/>
-    <table-field standard-field-id="e21b55002f9e44a794fce2b43e84c26d" primary="false" unique="false" not-null="false" id="program_stage" auto-increase="false"/>
-    <table-field standard-field-id="396d10dc9ba5455db0c6a93e9794ffaa" primary="false" unique="false" not-null="false" id="program_pri" auto-increase="false"/>
-    <table-field standard-field-id="44d60774d9c043819b619f0bd47a1d1f" primary="false" unique="false" not-null="false" id="program_desc" auto-increase="false"/>
-    <table-field standard-field-id="747ee23256a041079e1994407e1e5d4d" primary="false" unique="false" not-null="false" id="program_goal" auto-increase="false"/>
-    <table-field standard-field-id="7863a318a00d477da648f4e4b580b85f" primary="false" unique="false" not-null="false" id="program_opened_by" auto-increase="false"/>
-    <table-field standard-field-id="132ba75ab608448eb372ad74cb531107" primary="false" unique="false" not-null="false" id="program_opened_date" auto-increase="false"/>
-    <table-field standard-field-id="9eb80974f84543baafeed7ac78ff4c0e" primary="false" unique="false" not-null="false" id="program_closed_by" auto-increase="false"/>
-    <table-field standard-field-id="d88a1fc52f0b46b58779d6b717ade2d5" primary="false" unique="false" not-null="false" id="program_closed_date" auto-increase="false"/>
-    <table-field standard-field-id="951b8d5075794bd78e26b8c14ac9de74" primary="false" unique="false" not-null="false" id="program_canceled_by" auto-increase="false"/>
-    <table-field standard-field-id="e5aed0bec93640f0a8bcd9db0af303bb" primary="false" unique="false" not-null="false" id="program_canceled_date" auto-increase="false"/>
-    <table-field standard-field-id="d5ffe2bc34c245f7a2c389530ba3fac0" primary="false" unique="false" not-null="false" id="program_manager" auto-increase="false"/>
-    <table-field standard-field-id="6b0cda53590043afb834d5a91c7a7011" primary="false" unique="false" not-null="false" id="acl" auto-increase="false"/>
-    <table-field standard-field-id="ee86579611984b3faf70dcf2d8f5186d" primary="false" unique="false" not-null="false" id="program_whitelist" auto-increase="false"/>
-    <table-field standard-field-id="b91f053ceeb141c58d25cf5cd03cea00" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  <table id="5a00d9e39902420b805b8aea4f3e5067" name="program" title="项目集表" packageName="org.tinygroup.alm.project">
+    <table-field standard-field-id="013e544e4aea4a59b584b8d901565df7" primary="true" unique="false" not-null="false" id="program_id" auto-increase="false"/>
+    <table-field standard-field-id="12a264b2930e4c789246eb2c2f53b734" primary="false" unique="false" not-null="false" id="portfolio_id" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="1593c6855e5f4534be78b058803e3706" primary="false" unique="false" not-null="false" id="dept_id" auto-increase="false"/>
+    <table-field standard-field-id="be400239363a41e99617b0e38c26dac1" primary="false" unique="false" not-null="false" id="program_parent" auto-increase="false"/>
+    <table-field standard-field-id="0cbb29e19e1d4a1fadebb26317558ef0" primary="false" unique="false" not-null="false" id="program_name" auto-increase="false"/>
+    <table-field standard-field-id="45fe36cad41f464fb354a837dc5b8453" primary="false" unique="false" not-null="false" id="program_code" auto-increase="false"/>
+    <table-field standard-field-id="285352730b2f4f8f8050fed09f737b70" primary="false" unique="false" not-null="false" id="program_order" auto-increase="false"/>
+    <table-field standard-field-id="4d7b506f47654fefa6f198a58886a4b6" primary="false" unique="false" not-null="false" id="program_begin" auto-increase="false"/>
+    <table-field standard-field-id="527fd417aac7417ea35dbb4cd604b2b9" primary="false" unique="false" not-null="false" id="program_end" auto-increase="false"/>
+    <table-field standard-field-id="9501eb048d5d4992adfccf3152aae746" primary="false" unique="false" not-null="false" id="program_days" auto-increase="false"/>
+    <table-field standard-field-id="25f6b0ecdb5343649551c682484d1654" primary="false" unique="false" not-null="false" id="program_status" auto-increase="false"/>
+    <table-field standard-field-id="851a49128f504fadbe68edeb425d563f" primary="false" unique="false" not-null="false" id="program_stage" auto-increase="false"/>
+    <table-field standard-field-id="dd7dceb7d3bf44039ba2a80fdaca90ec" primary="false" unique="false" not-null="false" id="program_pri" auto-increase="false"/>
+    <table-field standard-field-id="93649eedf69b4c239a01dc38b1527b40" primary="false" unique="false" not-null="false" id="program_desc" auto-increase="false"/>
+    <table-field standard-field-id="6d8dd78cbc1240df98d6d6ccb47f8816" primary="false" unique="false" not-null="false" id="program_goal" auto-increase="false"/>
+    <table-field standard-field-id="b670dab7d7cf495c9adafd3842961aaf" primary="false" unique="false" not-null="false" id="program_opened_by" auto-increase="false"/>
+    <table-field standard-field-id="bce01851ec004ac68e819968b5c27b86" primary="false" unique="false" not-null="false" id="program_opened_date" auto-increase="false"/>
+    <table-field standard-field-id="8ff50bbfbe68446797dfda4e428bdaf0" primary="false" unique="false" not-null="false" id="program_closed_by" auto-increase="false"/>
+    <table-field standard-field-id="d09c1f2ba65e404c8574fda9a909e1de" primary="false" unique="false" not-null="false" id="program_closed_date" auto-increase="false"/>
+    <table-field standard-field-id="a389ad78a3a74800824fb8e637f4db9e" primary="false" unique="false" not-null="false" id="program_canceled_by" auto-increase="false"/>
+    <table-field standard-field-id="ab3bf208fe0b4cb89e4cb1336a66158e" primary="false" unique="false" not-null="false" id="program_canceled_date" auto-increase="false"/>
+    <table-field standard-field-id="36f39e9a71b24974ae9ec8d4e7be8fb6" primary="false" unique="false" not-null="false" id="program_manager" auto-increase="false"/>
+    <table-field standard-field-id="f6bc720b2d9948fc82e8cea8015a3adf" primary="false" unique="false" not-null="false" id="acl" auto-increase="false"/>
+    <table-field standard-field-id="80d621d365ad4912bbb5a70edde7b236" primary="false" unique="false" not-null="false" id="program_whitelist" auto-increase="false"/>
+    <table-field standard-field-id="49ae069b1b04465ab4b6966e3615cee8" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
   </table>
-  <table name="project" title="&amp;#39033;&amp;#30446;&amp;#34920;" package-name="org.tinygroup.alm.project">
-    <table-field standard-field-id="4aa15300602340af8576fbc0451402af" primary="true" unique="true" not-null="false" id="project_id" auto-increase="false"/>
-    <table-field standard-field-id="2f8b8e2e4523450db7a7ad21fe395e74" primary="false" unique="false" not-null="false" id="program_id" auto-increase="false"/>
-    <table-field standard-field-id="7feea8cba07640b1a72ed69464d3959b" primary="false" unique="false" not-null="false" id="portfolio_id" auto-increase="false"/>
-    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
-    <table-field standard-field-id="8edbec90df274a01ae929d3233948028" primary="false" unique="false" not-null="false" id="dept_id" auto-increase="false"/>
-    <table-field standard-field-id="85b6c5405c8d4404874faeb0e1b5c01c" primary="false" unique="false" not-null="false" id="project_type" auto-increase="false"/>
-    <table-field standard-field-id="503bb7da622642fe8eefce35411baf5f" primary="false" unique="false" not-null="false" id="project_parent" auto-increase="false"/>
-    <table-field standard-field-id="42e4b07d4de840b9b6aba7899345ca3c" primary="false" unique="false" not-null="false" id="project_name" auto-increase="false"/>
-    <table-field standard-field-id="f1c1e12d7c144116b365be1fbdb1e43a" primary="false" unique="false" not-null="false" id="project_code" auto-increase="false"/>
-    <table-field standard-field-id="e17a74228a424d6eae609d0f98a27702" primary="false" unique="false" not-null="false" id="project_order" auto-increase="false"/>
-    <table-field standard-field-id="1417592d62d64dcf8d41cd6f7119880e" primary="false" unique="false" not-null="false" id="project_begin" auto-increase="false"/>
-    <table-field standard-field-id="1bbb8bb363594a04b084d32dbe64cfc9" primary="false" unique="false" not-null="false" id="project_end" auto-increase="false"/>
-    <table-field standard-field-id="438f0766289b44be8865fc81fd5f14ec" primary="false" unique="false" not-null="false" id="project_days" auto-increase="false"/>
-    <table-field standard-field-id="639f4ebf14af45eebb1da1830b8963f9" primary="false" unique="false" not-null="false" id="project_status" auto-increase="false"/>
-    <table-field standard-field-id="e663c12cf19d4b13b42be7cbe12c3dd6" primary="false" unique="false" not-null="false" id="project_stage" auto-increase="false"/>
-    <table-field standard-field-id="78eb418efae24f6a9badefbb1f2b6623" primary="false" unique="false" not-null="false" id="project_pri" auto-increase="false"/>
-    <table-field standard-field-id="72ef0e072e754a7a87bf851a61d1d925" primary="false" unique="false" not-null="false" id="project_desc" auto-increase="false"/>
-    <table-field standard-field-id="43d26d8ef5aa4e009fa783906565cfc5" primary="false" unique="false" not-null="false" id="project_goal" auto-increase="false"/>
-    <table-field standard-field-id="6e6e380fd77a40a78763c875c290d143" primary="false" unique="false" not-null="false" id="project_opened_by" auto-increase="false"/>
-    <table-field standard-field-id="5d33b387e29746b8a382dac119fdd557" primary="false" unique="false" not-null="false" id="project_opened_date" auto-increase="false"/>
-    <table-field standard-field-id="fc158f51fc854d0ebf31f45c3bf00b6c" primary="false" unique="false" not-null="false" id="project_closed_by" auto-increase="false"/>
-    <table-field standard-field-id="87293036762b4c81ab808eccd9f4c8f8" primary="false" unique="false" not-null="false" id="project_closed_date" auto-increase="false"/>
-    <table-field standard-field-id="1ff4edae6f454568930fbdfe259c4f39" primary="false" unique="false" not-null="false" id="project_canceled_by" auto-increase="false"/>
-    <table-field standard-field-id="e56f129fd4f947228684c2a6a8eaff12" primary="false" unique="false" not-null="false" id="project_canceled_date" auto-increase="false"/>
-    <table-field standard-field-id="ec2e566e6ddf449e9d5eaf525843452a" primary="false" unique="false" not-null="false" id="project_manager" auto-increase="false"/>
-    <table-field standard-field-id="964f6e32d5ea4151885196a194e056b9" primary="false" unique="false" not-null="false" id="quality_manager" auto-increase="false"/>
-    <table-field standard-field-id="c41c5812a4364e28bef5a99923238d6d" primary="false" unique="false" not-null="false" id="delivery_manager" auto-increase="false"/>
-    <table-field standard-field-id="3bd177428ba043f7a653ebcffc7e04f7" primary="false" unique="false" not-null="false" id="project_team" auto-increase="false"/>
-    <table-field standard-field-id="6b0cda53590043afb834d5a91c7a7011" primary="false" unique="false" not-null="false" id="acl" auto-increase="false"/>
-    <table-field standard-field-id="7c1736f476324959bf4fb30e46c7abaf" primary="false" unique="false" not-null="false" id="project_whitelist" auto-increase="false"/>
-    <table-field standard-field-id="b91f053ceeb141c58d25cf5cd03cea00" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  <table id="4aaa2661f29f4401a4568a60c0bb78be" name="project" title="项目表" packageName="org.tinygroup.alm.project">
+    <table-field standard-field-id="cc29ddaff4794b498d6fa26d5eb63ce6" primary="true" unique="true" not-null="false" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="013e544e4aea4a59b584b8d901565df7" primary="false" unique="false" not-null="false" id="program_id" auto-increase="false"/>
+    <table-field standard-field-id="12a264b2930e4c789246eb2c2f53b734" primary="false" unique="false" not-null="false" id="portfolio_id" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="1593c6855e5f4534be78b058803e3706" primary="false" unique="false" not-null="false" id="dept_id" auto-increase="false"/>
+    <table-field standard-field-id="ec4343e966c846398a009a23c4b08ebd" primary="false" unique="false" not-null="false" id="project_type" auto-increase="false"/>
+    <table-field standard-field-id="26d0e7d176bb4a8699bdeb13b2e1ebf3" primary="false" unique="false" not-null="false" id="project_parent" auto-increase="false"/>
+    <table-field standard-field-id="ecec79b9d2a3455d9953c56e9b05e173" primary="false" unique="false" not-null="false" id="project_name" auto-increase="false"/>
+    <table-field standard-field-id="2cbfb4c8cb1e493dbfefcfe0ef07630c" primary="false" unique="false" not-null="false" id="project_code" auto-increase="false"/>
+    <table-field standard-field-id="02da32fe0b254ae89bedad7c4324019d" primary="false" unique="false" not-null="false" id="project_order" auto-increase="false"/>
+    <table-field standard-field-id="0575522d0496424883ecb4e54d6a2246" primary="false" unique="false" not-null="false" id="project_begin" auto-increase="false"/>
+    <table-field standard-field-id="7bda3c6e2a8840cea42bfa3256ed1771" primary="false" unique="false" not-null="false" id="project_end" auto-increase="false"/>
+    <table-field standard-field-id="2582e32dd93840f6975cd2aa3c5d1e07" primary="false" unique="false" not-null="false" id="project_days" auto-increase="false"/>
+    <table-field standard-field-id="c1532b1cf7964ae6b8038be94f07c72d" primary="false" unique="false" not-null="false" id="project_status" auto-increase="false"/>
+    <table-field standard-field-id="86354cb3c830470db4b2c5212d990819" primary="false" unique="false" not-null="false" id="project_stage" auto-increase="false"/>
+    <table-field standard-field-id="3e706974314f4511928bf84295ec9fe9" primary="false" unique="false" not-null="false" id="project_pri" auto-increase="false"/>
+    <table-field standard-field-id="b674de1f93094f11bd0bb5a0715bb4cd" primary="false" unique="false" not-null="false" id="project_desc" auto-increase="false"/>
+    <table-field standard-field-id="dae887ac016e422eba1ab6042d6c4e77" primary="false" unique="false" not-null="false" id="project_goal" auto-increase="false"/>
+    <table-field standard-field-id="b4e2d5d3c3db4cca877bcc5ef09d2aaf" primary="false" unique="false" not-null="false" id="project_opened_by" auto-increase="false"/>
+    <table-field standard-field-id="4e67ffa881dd4bca9ee69e3b4040a4a7" primary="false" unique="false" not-null="false" id="project_opened_date" auto-increase="false"/>
+    <table-field standard-field-id="68c1e772232b47ca836b858a1a7c494f" primary="false" unique="false" not-null="false" id="project_closed_by" auto-increase="false"/>
+    <table-field standard-field-id="2a57f81e0fcf4aebb8ecd9d98d8318bd" primary="false" unique="false" not-null="false" id="project_closed_date" auto-increase="false"/>
+    <table-field standard-field-id="43726be7d2f84390b35da9ec27659af6" primary="false" unique="false" not-null="false" id="project_canceled_by" auto-increase="false"/>
+    <table-field standard-field-id="5a6d8f59382a478786e084dd8d463ba1" primary="false" unique="false" not-null="false" id="project_canceled_date" auto-increase="false"/>
+    <table-field standard-field-id="876038cd5c294622aa7bee9804261d82" primary="false" unique="false" not-null="false" id="project_manager" auto-increase="false"/>
+    <table-field standard-field-id="db2e78cd4fa244dc8530cb6cb5a7642c" primary="false" unique="false" not-null="false" id="quality_manager" auto-increase="false"/>
+    <table-field standard-field-id="a62f5c96385c422693e7e5f4eabd872c" primary="false" unique="false" not-null="false" id="delivery_manager" auto-increase="false"/>
+    <table-field standard-field-id="e281a9de9c5d468abb7fecff8425b0d5" primary="false" unique="false" not-null="false" id="project_team" auto-increase="false"/>
+    <table-field standard-field-id="f6bc720b2d9948fc82e8cea8015a3adf" primary="false" unique="false" not-null="false" id="acl" auto-increase="false"/>
+    <table-field standard-field-id="e954d3ec735447cab8cfe619ab98f880" primary="false" unique="false" not-null="false" id="project_whitelist" auto-increase="false"/>
+    <table-field standard-field-id="49ae069b1b04465ab4b6966e3615cee8" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
   </table>
-  <table name="projectProduct" title="&amp;#39033;&amp;#30446;&amp;#20135;&amp;#21697;&amp;#34920;" package-name="org.tinygroup.alm.project">
-    <table-field standard-field-id="10370ce8ccf443f0b4a5a55bbe1d3bb5" primary="true" unique="true" not-null="false" id="project_product_id" auto-increase="false"/>
-    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
-    <table-field standard-field-id="4aa15300602340af8576fbc0451402af" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
-    <table-field standard-field-id="90c20173bb314bcdac02cdf14317d07c" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
+  <table id="4bffc0ec4ae84fde9a41c200ba2d99c4" name="projectProduct" title="项目产品表" packageName="org.tinygroup.alm.project">
+    <table-field standard-field-id="1b7aa9b3299843f4b79db7191195a7b2" primary="true" unique="true" not-null="false" id="project_product_id" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="cc29ddaff4794b498d6fa26d5eb63ce6" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="999665d97994405bab25998560219fdc" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
   </table>
-  <table name="projectStory" title="&amp;#39033;&amp;#30446;&amp;#38656;&amp;#27714;&amp;#34920;" package-name="org.tinygroup.alm.project">
-    <table-field standard-field-id="95ebf0c6914b440daefbf799c830844c" primary="true" unique="true" not-null="false" id="project_story_id" auto-increase="false"/>
-    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
-    <table-field standard-field-id="4aa15300602340af8576fbc0451402af" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
-    <table-field standard-field-id="90c20173bb314bcdac02cdf14317d07c" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
-    <table-field standard-field-id="ccbd3960f853402e80f3adde94733c00" primary="false" unique="false" not-null="false" id="story_id" auto-increase="false"/>
-    <table-field standard-field-id="4b923b4e7de043ba9b3eb4e62cb745ab" primary="false" unique="false" not-null="false" id="story_version" auto-increase="false"/>
+  <table id="390cc5513a3943229cafd3f7b0b5b397" name="projectStory" title="项目需求表" packageName="org.tinygroup.alm.project">
+    <table-field standard-field-id="ef51da26b5f346579597de2c17a4c36e" primary="true" unique="true" not-null="false" id="project_story_id" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="cc29ddaff4794b498d6fa26d5eb63ce6" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="999665d97994405bab25998560219fdc" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
+    <table-field standard-field-id="25d60bf0feb14d14a7c695a73d987fff" primary="false" unique="false" not-null="false" id="story_id" auto-increase="false"/>
+    <table-field standard-field-id="64f3d693504044eaa158b86a8ebbdb98" primary="false" unique="false" not-null="false" id="story_version" auto-increase="false"/>
   </table>
-  <table name="risk" title="&amp;#39033;&amp;#30446;&amp;#39118;&amp;#38505;" package-name="org.tinygroup.alm.project">
-    <table-field standard-field-id="d4338dc240ca4084bd79e4cde5483ce5" primary="true" unique="true" not-null="false" id="risk_id" auto-increase="false"/>
-    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
-    <table-field standard-field-id="4aa15300602340af8576fbc0451402af" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
-    <table-field standard-field-id="fa8efb89fcee4be499c3e3ecdbd62eb6" primary="false" unique="false" not-null="false" id="risk_opened_by" auto-increase="false"/>
-    <table-field standard-field-id="a7db670354d541139757cce0867ca0b4" primary="false" unique="false" not-null="false" id="risk_open_date" auto-increase="false"/>
-    <table-field standard-field-id="40fdb879d97f49899e87ebf4ed10ac94" primary="false" unique="false" not-null="false" id="risk_title" auto-increase="false"/>
-    <table-field standard-field-id="32716a5cc38d412e8d01a32528757319" primary="false" unique="false" not-null="false" id="risk_spec" auto-increase="false"/>
-    <table-field standard-field-id="af96b5b5b66143bc9878ced990cd8925" primary="false" unique="false" not-null="false" id="risk_category" auto-increase="false"/>
-    <table-field standard-field-id="11070d7a93154b02beb6ba2de5f834a3" primary="false" unique="false" not-null="false" id="risk_probability" auto-increase="false"/>
-    <table-field standard-field-id="060f60e575dc4ea7a322b34d88cc5a29" primary="false" unique="false" not-null="false" id="risk_impact" auto-increase="false"/>
-    <table-field standard-field-id="6b9e1b0ed7d946729868bf2db25d0cab" primary="false" unique="false" not-null="false" id="risk_exposure" auto-increase="false"/>
-    <table-field standard-field-id="21e440208a064a9c926cf05ee02b71d1" primary="false" unique="false" not-null="false" id="risk_exp_phase" auto-increase="false"/>
-    <table-field standard-field-id="4a9623a39e8046e78001db9d1dcb97f3" primary="false" unique="false" not-null="false" id="risk_avoidance_a_p" auto-increase="false"/>
-    <table-field standard-field-id="73c6edf65de4492aafdbf87e27df9a4f" primary="false" unique="false" not-null="false" id="risk_mitigation_a_p" auto-increase="false"/>
-    <table-field standard-field-id="07907fb43de24c229a09b5927582fcff" primary="false" unique="false" not-null="false" id="risk_contingency_a_p" auto-increase="false"/>
-    <table-field standard-field-id="69cfb5104bda47d8b343f3d98d337812" primary="false" unique="false" not-null="false" id="risk_action_result" auto-increase="false"/>
-    <table-field standard-field-id="ae4ff215168e4c228343b1501a60316c" primary="false" unique="false" not-null="false" id="risk_owner" auto-increase="false"/>
-    <table-field standard-field-id="3653bd5167d9460eb34491634ca8f189" primary="false" unique="false" not-null="false" id="risk_status" auto-increase="false"/>
-    <table-field standard-field-id="fb7cbfa4a6914405990ee8cd03ff4076" primary="false" unique="false" not-null="false" id="risk_check_trigger" auto-increase="false"/>
-    <table-field standard-field-id="e0b720fa074e47b6b531c283976327a3" primary="false" unique="false" not-null="false" id="risk_last_edited_by" auto-increase="false"/>
-    <table-field standard-field-id="747c50e2ba90465a8529f49686049665" primary="false" unique="false" not-null="false" id="risk_plan_date" auto-increase="false"/>
-    <table-field standard-field-id="2384bfee069b430b9753ab00d74a2ce0" primary="false" unique="false" not-null="false" id="risk_last_edit_date" auto-increase="false"/>
-    <table-field standard-field-id="2629bb9c156644a590d3c9f6e51f779c" primary="false" unique="false" not-null="false" id="risk_closed_by" auto-increase="false"/>
-    <table-field standard-field-id="219c68d4ca114dec99b9eb58c1e6d0c1" primary="false" unique="false" not-null="false" id="risk_close_date" auto-increase="false"/>
-    <table-field standard-field-id="b91f053ceeb141c58d25cf5cd03cea00" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  <table id="68c783a8a3414796bb75a2e1311f62d2" name="risk" title="项目风险" packageName="org.tinygroup.alm.project">
+    <table-field standard-field-id="46d30876d9d6485bb62580d1230dc090" primary="true" unique="true" not-null="false" id="risk_id" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="cc29ddaff4794b498d6fa26d5eb63ce6" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="df12c71017614661905b940ce6dd7335" primary="false" unique="false" not-null="false" id="risk_opened_by" auto-increase="false"/>
+    <table-field standard-field-id="8d2ef581f77f4bd7b2b7bd1eb10f86ec" primary="false" unique="false" not-null="false" id="risk_open_date" auto-increase="false"/>
+    <table-field standard-field-id="092d1c5cc75f4a74a668cfdd9fe1502d" primary="false" unique="false" not-null="false" id="risk_title" auto-increase="false"/>
+    <table-field standard-field-id="693d6912c0154a858878969c4a93476f" primary="false" unique="false" not-null="false" id="risk_spec" auto-increase="false"/>
+    <table-field standard-field-id="176b562bdd0b462e9aef9b93ef206946" primary="false" unique="false" not-null="false" id="risk_category" auto-increase="false"/>
+    <table-field standard-field-id="870c74a142524599ac4af1c9420fc98f" primary="false" unique="false" not-null="false" id="risk_probability" auto-increase="false"/>
+    <table-field standard-field-id="134bc6a444224e16b4def2e57dc6df9b" primary="false" unique="false" not-null="false" id="risk_impact" auto-increase="false"/>
+    <table-field standard-field-id="1be33ae1891d461f89aaef399e78c477" primary="false" unique="false" not-null="false" id="risk_exposure" auto-increase="false"/>
+    <table-field standard-field-id="4e376b2e3e02442eacd6f8607925a5da" primary="false" unique="false" not-null="false" id="risk_exp_phase" auto-increase="false"/>
+    <table-field standard-field-id="dcea56141a7546a58eaca8e95a580adb" primary="false" unique="false" not-null="false" id="risk_avoidance_a_p" auto-increase="false"/>
+    <table-field standard-field-id="862e3016e68b490ba5fffa032d91dc99" primary="false" unique="false" not-null="false" id="risk_mitigation_a_p" auto-increase="false"/>
+    <table-field standard-field-id="951a33d9ea454a7e8a63d164455bbb59" primary="false" unique="false" not-null="false" id="risk_contingency_a_p" auto-increase="false"/>
+    <table-field standard-field-id="f68dce48cd0e49a1a006abe018623239" primary="false" unique="false" not-null="false" id="risk_action_result" auto-increase="false"/>
+    <table-field standard-field-id="7ac7c277ab654de6a5b8ca4541446193" primary="false" unique="false" not-null="false" id="risk_owner" auto-increase="false"/>
+    <table-field standard-field-id="e7cfa59a1fda4669899995dfb67597cc" primary="false" unique="false" not-null="false" id="risk_status" auto-increase="false"/>
+    <table-field standard-field-id="cb47bf813e4c4915866a9228e712068a" primary="false" unique="false" not-null="false" id="risk_check_trigger" auto-increase="false"/>
+    <table-field standard-field-id="5f452f6e97e440e7858ff44b0cdb72ed" primary="false" unique="false" not-null="false" id="risk_last_edited_by" auto-increase="false"/>
+    <table-field standard-field-id="0d46307ef1b54e55aab4b9a9dc0349e9" primary="false" unique="false" not-null="false" id="risk_plan_date" auto-increase="false"/>
+    <table-field standard-field-id="6105e6e401134f109c19b2cf605ea9ab" primary="false" unique="false" not-null="false" id="risk_last_edit_date" auto-increase="false"/>
+    <table-field standard-field-id="8adbd06f199d40ceb267a26df96475a2" primary="false" unique="false" not-null="false" id="risk_closed_by" auto-increase="false"/>
+    <table-field standard-field-id="b98e45dcd3e549fca7cefbb1cbb8a0e5" primary="false" unique="false" not-null="false" id="risk_close_date" auto-increase="false"/>
+    <table-field standard-field-id="49ae069b1b04465ab4b6966e3615cee8" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
   </table>
-  <table name="task" title="&amp;#20219;&amp;#21153;&amp;#34920;" package-name="org.tinygroup.alm.project">
-    <table-field standard-field-id="1ef1535b189b493da7558eb136af1473" primary="true" unique="true" not-null="false" id="task_id" auto-increase="false"/>
-    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
-    <table-field standard-field-id="4aa15300602340af8576fbc0451402af" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
-    <table-field standard-field-id="a53c13787bb94184a0499f9c1e3af6c7" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
-    <table-field standard-field-id="be8225c89e5244eca60ef2e78a6a3263" primary="false" unique="false" not-null="false" id="task_name" auto-increase="false"/>
-    <table-field standard-field-id="46faf052c99e479dba0ff8cc6847c9bb" primary="false" unique="false" not-null="false" id="task_type" auto-increase="false"/>
-    <table-field standard-field-id="423fd42f30794ca48ac1cb471277f781" primary="false" unique="false" not-null="false" id="task_pri" auto-increase="false"/>
-    <table-field standard-field-id="13ebd97b0c67485d9426bf085decaef0" primary="false" unique="false" not-null="false" id="task_estimate" auto-increase="false"/>
-    <table-field standard-field-id="9c4f50164ed14d15b7f9e201962d31e2" primary="false" unique="false" not-null="false" id="task_consumed" auto-increase="false"/>
-    <table-field standard-field-id="b451d15e81194988b621a81db72c021d" primary="false" unique="false" not-null="false" id="task_left" auto-increase="false"/>
-    <table-field standard-field-id="0bbc93fb98684f76a7f7e5b6a119d31b" primary="false" unique="false" not-null="false" id="task_deadline" auto-increase="false"/>
-    <table-field standard-field-id="24f3fcad56834c278ea2b70b68656bd6" primary="false" unique="false" not-null="false" id="task_status" auto-increase="false"/>
-    <table-field standard-field-id="b4a2a8138b61424893b8e9444f2d72ff" primary="false" unique="false" not-null="false" id="task_mailto" auto-increase="false"/>
-    <table-field standard-field-id="51080dfe3ae34946b19e820232cd479e" primary="false" unique="false" not-null="false" id="task_desc" auto-increase="false"/>
-    <table-field standard-field-id="1fd5adaa5d1f4326b21b91bb8ebe23be" primary="false" unique="false" not-null="false" id="task_open_count" auto-increase="false"/>
-    <table-field standard-field-id="6fc1382a923c4613b0c6dbb3912d1382" primary="false" unique="false" not-null="false" id="task_opened_by" auto-increase="false"/>
-    <table-field standard-field-id="cb4a19a841eb4e4488209902e6e3612f" primary="false" unique="false" not-null="false" id="task_opened_date" auto-increase="false"/>
-    <table-field standard-field-id="705512995e25428592adcb4e24572bd6" primary="false" unique="false" not-null="false" id="task_assigned_to" auto-increase="false"/>
-    <table-field standard-field-id="9122226c9f9b4c8883a8a11304e41852" primary="false" unique="false" not-null="false" id="task_assigned_date" auto-increase="false"/>
-    <table-field standard-field-id="ce294ef978da418e8b60c9946f3db789" primary="false" unique="false" not-null="false" id="task_est_started" auto-increase="false"/>
-    <table-field standard-field-id="478182cae56c4dd3b08fc55076fe17a8" primary="false" unique="false" not-null="false" id="task_real_started" auto-increase="false"/>
-    <table-field standard-field-id="6735ee4c63a9483dac9d8b4282fb643e" primary="false" unique="false" not-null="false" id="task_finished_by" auto-increase="false"/>
-    <table-field standard-field-id="b1e3eb70307a40a2b28e94512202df09" primary="false" unique="false" not-null="false" id="task_finished_date" auto-increase="false"/>
-    <table-field standard-field-id="03c472f2d81b47269d5aaff383156884" primary="false" unique="false" not-null="false" id="task_canceled_by" auto-increase="false"/>
-    <table-field standard-field-id="d176ad48b21f4a8893a7e972405f4144" primary="false" unique="false" not-null="false" id="task_canceled_date" auto-increase="false"/>
-    <table-field standard-field-id="71cfeaa42ec543e986eeb73b558ca1ed" primary="false" unique="false" not-null="false" id="task_closed_by" auto-increase="false"/>
-    <table-field standard-field-id="7dbf7d7b7d2e4ea3a8db97d19a47ad1a" primary="false" unique="false" not-null="false" id="task_closed_date" auto-increase="false"/>
-    <table-field standard-field-id="e11c10c264474db298fbf1dec68c2c37" primary="false" unique="false" not-null="false" id="task_closed_reason" auto-increase="false"/>
-    <table-field standard-field-id="3426cd1b79a14cf89ff5d301ecf8071a" primary="false" unique="false" not-null="false" id="task_last_edited_by" auto-increase="false"/>
-    <table-field standard-field-id="035768495c544deb8dc0a54e56194196" primary="false" unique="false" not-null="false" id="task_last_edited_date" auto-increase="false"/>
-    <table-field standard-field-id="d97fa0ac1718422a9e63f7011a5e00f0" primary="false" unique="false" not-null="false" id="task_f_s" auto-increase="false"/>
-    <table-field standard-field-id="726b3a5063154abe83a09b1d2b1cb9bc" primary="false" unique="false" not-null="false" id="task_s_s" auto-increase="false"/>
-    <table-field standard-field-id="b71e1017465e4c19a76bf99926208ebd" primary="false" unique="false" not-null="false" id="task_f_f" auto-increase="false"/>
-    <table-field standard-field-id="e0c724fae8a2426faf4f8759ea06d78d" primary="false" unique="false" not-null="false" id="task_s_f" auto-increase="false"/>
-    <table-field standard-field-id="8654639f5b3e40b58dbfd7d4bc82356a" primary="false" unique="false" not-null="false" id="request_id" auto-increase="false"/>
-    <table-field standard-field-id="b91f053ceeb141c58d25cf5cd03cea00" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  <table id="ea5ab09ab7db4f42bf4bba973ffecf39" name="task" title="任务表" packageName="org.tinygroup.alm.project">
+    <table-field standard-field-id="d0be3790ef74455897b7e529d0d5542e" primary="true" unique="true" not-null="false" id="task_id" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="cc29ddaff4794b498d6fa26d5eb63ce6" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="8f45dc0709dd4f8ab87a81c44a0b56ce" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
+    <table-field standard-field-id="5dc28a8a2f834594bb2fc6df6e218729" primary="false" unique="false" not-null="false" id="task_name" auto-increase="false"/>
+    <table-field standard-field-id="f7b2dfa638ef4d8a8ecaf65e6cf3d1a1" primary="false" unique="false" not-null="false" id="task_type" auto-increase="false"/>
+    <table-field standard-field-id="d8772336d75644f4972cf01ac1ee8dfc" primary="false" unique="false" not-null="false" id="task_pri" auto-increase="false"/>
+    <table-field standard-field-id="faf8a1ed910b4670a9e5bbe815eead0a" primary="false" unique="false" not-null="false" id="task_estimate" auto-increase="false"/>
+    <table-field standard-field-id="01bd47ce6f7f4fadac48a7376c4d777e" primary="false" unique="false" not-null="false" id="task_consumed" auto-increase="false"/>
+    <table-field standard-field-id="e1821e4f6f564ff4a88a803b264b9b1d" primary="false" unique="false" not-null="false" id="task_left" auto-increase="false"/>
+    <table-field standard-field-id="aa15e0a991284069ab2995436e5a92b2" primary="false" unique="false" not-null="false" id="task_deadline" auto-increase="false"/>
+    <table-field standard-field-id="2644fc725fef4031a648f6e4cdc88ca7" primary="false" unique="false" not-null="false" id="task_status" auto-increase="false"/>
+    <table-field standard-field-id="f9221376088949518207ec0815570b2c" primary="false" unique="false" not-null="false" id="task_mailto" auto-increase="false"/>
+    <table-field standard-field-id="40426b8003274f1a9afa81601ee7e7fd" primary="false" unique="false" not-null="false" id="task_desc" auto-increase="false"/>
+    <table-field standard-field-id="71d99dbf884c469aa12389a2818d28d6" primary="false" unique="false" not-null="false" id="task_open_count" auto-increase="false"/>
+    <table-field standard-field-id="3ac1fc5624244784b95a951ab8cf6acd" primary="false" unique="false" not-null="false" id="task_opened_by" auto-increase="false"/>
+    <table-field standard-field-id="6665455ea365421d9c24e6c896aa428a" primary="false" unique="false" not-null="false" id="task_opened_date" auto-increase="false"/>
+    <table-field standard-field-id="70f86acde4444359b1ba809fc8b41039" primary="false" unique="false" not-null="false" id="task_assigned_to" auto-increase="false"/>
+    <table-field standard-field-id="fc07accd630f494fb1dbd1f4e210919e" primary="false" unique="false" not-null="false" id="task_assigned_date" auto-increase="false"/>
+    <table-field standard-field-id="02f8304446e84d909116ade9d84dca41" primary="false" unique="false" not-null="false" id="task_est_started" auto-increase="false"/>
+    <table-field standard-field-id="9a041eae945a4a798c4985f43d849312" primary="false" unique="false" not-null="false" id="task_real_started" auto-increase="false"/>
+    <table-field standard-field-id="fa5d2c71e88b4f36bd11dff5dc2b77d9" primary="false" unique="false" not-null="false" id="task_finished_by" auto-increase="false"/>
+    <table-field standard-field-id="47ad02027b7345388ed7819030059f43" primary="false" unique="false" not-null="false" id="task_finished_date" auto-increase="false"/>
+    <table-field standard-field-id="31c1cc531bb14fe2b1c09a38c964d73f" primary="false" unique="false" not-null="false" id="task_canceled_by" auto-increase="false"/>
+    <table-field standard-field-id="d56c806175eb4e3aaf45e4ae1b51162a" primary="false" unique="false" not-null="false" id="task_canceled_date" auto-increase="false"/>
+    <table-field standard-field-id="0f30fda760af42d4b2b7b156956c9310" primary="false" unique="false" not-null="false" id="task_closed_by" auto-increase="false"/>
+    <table-field standard-field-id="cbbeac9281b84ba5b7c5f8509fc2656a" primary="false" unique="false" not-null="false" id="task_closed_date" auto-increase="false"/>
+    <table-field standard-field-id="344fc1182faa4aee839ad8b923533af2" primary="false" unique="false" not-null="false" id="task_closed_reason" auto-increase="false"/>
+    <table-field standard-field-id="0453cd90eea5464d93beee12e4f66450" primary="false" unique="false" not-null="false" id="task_last_edited_by" auto-increase="false"/>
+    <table-field standard-field-id="9bcca053d3834c62ab68bee6987f3377" primary="false" unique="false" not-null="false" id="task_last_edited_date" auto-increase="false"/>
+    <table-field standard-field-id="eadd20ef26534c30a852c6db5be561b7" primary="false" unique="false" not-null="false" id="task_f_s" auto-increase="false"/>
+    <table-field standard-field-id="645f7701e15643eaacd987197f5306ad" primary="false" unique="false" not-null="false" id="task_s_s" auto-increase="false"/>
+    <table-field standard-field-id="112de383fb8f4d69b6b1f737a941396b" primary="false" unique="false" not-null="false" id="task_f_f" auto-increase="false"/>
+    <table-field standard-field-id="2e57cf8029ca4f41b69fd44101acbae3" primary="false" unique="false" not-null="false" id="task_s_f" auto-increase="false"/>
+    <table-field standard-field-id="ebdaeae60a244ce98ed3985dce06a43f" primary="false" unique="false" not-null="false" id="request_id" auto-increase="false"/>
+    <table-field standard-field-id="49ae069b1b04465ab4b6966e3615cee8" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
   </table>
-  <table name="taskStory" title="&amp;#20219;&amp;#21153;&amp;#38656;&amp;#27714;&amp;#34920;" package-name="org.tinygroup.alm.project">
-    <table-field standard-field-id="79e90f2786f84e48bba1bf167b49dfed" primary="true" unique="true" not-null="false" id="task_story_id" auto-increase="false"/>
-    <table-field standard-field-id="1ef1535b189b493da7558eb136af1473" primary="false" unique="false" not-null="false" id="task_id" auto-increase="false"/>
-    <table-field standard-field-id="ccbd3960f853402e80f3adde94733c00" primary="false" unique="false" not-null="false" id="story_id" auto-increase="false"/>
-    <table-field standard-field-id="4b923b4e7de043ba9b3eb4e62cb745ab" primary="false" unique="false" not-null="false" id="story_version" auto-increase="false"/>
-    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+  <table id="a3908eaeb5f54e21a023b295b5c61655" name="taskStory" title="任务需求表" packageName="org.tinygroup.alm.project">
+    <table-field standard-field-id="8bae66321f494bd7849cc50134a321fc" primary="true" unique="true" not-null="false" id="task_story_id" auto-increase="false"/>
+    <table-field standard-field-id="d0be3790ef74455897b7e529d0d5542e" primary="false" unique="false" not-null="false" id="task_id" auto-increase="false"/>
+    <table-field standard-field-id="25d60bf0feb14d14a7c695a73d987fff" primary="false" unique="false" not-null="false" id="story_id" auto-increase="false"/>
+    <table-field standard-field-id="64f3d693504044eaa158b86a8ebbdb98" primary="false" unique="false" not-null="false" id="story_version" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
   </table>
-  <table name="teamMember" title="&amp;#39033;&amp;#30446;&amp;#22242;&amp;#38431;&amp;#34920;" package-name="org.tinygroup.alm.project">
-    <table-field standard-field-id="164ecd69aaf543cfacb3ba35f29878ec" primary="true" unique="true" not-null="false" id="team_member_id" auto-increase="false"/>
-    <table-field standard-field-id="4aa15300602340af8576fbc0451402af" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
-    <table-field standard-field-id="d632204b06a74d0fa000fec066d76786" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
-    <table-field standard-field-id="8fdd8be25dbc4a0fb395e8597e83bc66" primary="false" unique="false" not-null="false" id="user_account" auto-increase="false"/>
-    <table-field standard-field-id="8afbf26b55a848a6a6f7ab32cd4d6e90" primary="false" unique="false" not-null="false" id="team_role" auto-increase="false"/>
-    <table-field standard-field-id="be9bf2c7867b4c2696f3d17fcb13fb6b" primary="false" unique="false" not-null="false" id="team_join" auto-increase="false"/>
-    <table-field standard-field-id="02fd6e9625284449a9a99167322b24f0" primary="false" unique="false" not-null="false" id="team_leave" auto-increase="false"/>
-    <table-field standard-field-id="ee860259856048d28dccbe10d18709ee" primary="false" unique="false" not-null="false" id="team_days" auto-increase="false"/>
-    <table-field standard-field-id="e049e06c7ed04b639c68d81d35213281" primary="false" unique="false" not-null="false" id="team_hours" auto-increase="false"/>
+  <table id="8dbb7f2830414f7f8cc686f2ad62a972" name="teamMember" title="项目团队表" packageName="org.tinygroup.alm.project">
+    <table-field standard-field-id="8d997ffd882445258ba58c7816019182" primary="true" unique="true" not-null="false" id="team_member_id" auto-increase="false"/>
+    <table-field standard-field-id="cc29ddaff4794b498d6fa26d5eb63ce6" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="d5cbdffdb76a4adba53fc6079bacd976" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="e7fb3f131c0b4ba4aba4eef364dc8afd" primary="false" unique="false" not-null="false" id="user_account" auto-increase="false"/>
+    <table-field standard-field-id="9233ccaa4ffe4662a6ccfd749cd4cb70" primary="false" unique="false" not-null="false" id="team_role" auto-increase="false"/>
+    <table-field standard-field-id="7d395344629a4151b1c78ebbc69a9553" primary="false" unique="false" not-null="false" id="team_join" auto-increase="false"/>
+    <table-field standard-field-id="e952e79343054d5eb3f5c29edb691978" primary="false" unique="false" not-null="false" id="team_leave" auto-increase="false"/>
+    <table-field standard-field-id="ef30b94e0e804e289b9dccbcecf37ba4" primary="false" unique="false" not-null="false" id="team_days" auto-increase="false"/>
+    <table-field standard-field-id="2f227a2d55934d18aef2c9640d4f36b9" primary="false" unique="false" not-null="false" id="team_hours" auto-increase="false"/>
   </table>
 </tables>
