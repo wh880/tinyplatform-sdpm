@@ -19,7 +19,7 @@
             #if(m.id == "org-privilege-maintain")
             <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #else
-                #iconOperations("#myModal" m.icon m.name map[m.id][0] map[m.id][1] m.href+"?id="+var "ml-5")
+                #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?id="+var "ml-5")
             #end
         #end
     <a><i class="icon-remove" itemId="deleteList"></i></a>

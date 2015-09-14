@@ -106,9 +106,15 @@
                         #end
 
                     <div style="padding-top: 5px;float:right;">
-                        #@aModal("#myModal2" "导出" "865" "100" "" "/organization/log/export.pagelet")
-                            #@simpleI(" icon-download-alt")导出#end
+
+                        #set(m=menuManager.getMenu("org-log-export"))
+                        #if(m)
+                            #@aModal("#myModal" m.name "600" "100" ""
+                            m.href)#buttonIcon(iconClass="icon-download-alt")导出#end
                         #end
+                    ##                        #@aModal("#myModal2" "导出" "865" "100" "" "/organization/log/export.pagelet")
+                    ##                            #@simpleI(" icon-download-alt")导出#end
+                    ##                        #end
 
                     </div>
 

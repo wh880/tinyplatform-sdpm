@@ -4,10 +4,24 @@
     <menu id="organizationUser" name="用户" href="/organization/user/user.page" icon="" sort="1" isShow="1">
         <menu id="org-user-edit" name="用户编辑" href="/organization/user/add.pagelet" icon="icon-pencil" sort="1"
               isShow="1"
-              scope="org-user"/>
+              scope="org-user">
+            <map>
+                <property key="width" value="665"/>
+                <property key="heigth" value="448"/>
+            </map>
+
+        </menu>
+
         <menu id="org-user-delete" name="删除" href="/organization/user/delect.pagelet" icon="icon-remove" sort="1"
               isShow="1"
-              scope="org-user"/>
+              scope="org-user">
+            <map>
+                <property key="width" value="550"/>
+                <property key="heigth" value="150"/>
+
+            </map>
+        </menu>
+
     </menu>
     <menu id="organizationGtask" name="待办" href="/organization/gtask/gtasks.page" icon="" sort="1"
           isShow="1"
@@ -16,6 +30,9 @@
     <menu id="organizationLog" name="日志" href="/organization/log/log.page" icon="" sort="1"
           isShow="1"
     >
+        <menu id="org-log-export" name="导出" href="/organization/log/export.pagelet" icon="icon-download-alt"
+              sort="1" isShow="1"
+              scope="org-log-export"/>
     </menu>
     <menu id="organizationActive" name="动态" href="/organization/active/active.page" icon="" sort="1" isShow="1"
     >
@@ -31,13 +48,31 @@
               scope="org-privilege"/>
         <menu id="org-privilege-user" name="成员维护" href="/organization/privilege/groupMaintain.pagelet"
               icon="icon-sitemap" sort="1" isShow="1"
-              scope="org-privilege"/>
+              scope="org-privilege">
+            <map>
+                <property key="width" value="700"/>
+                <property key="heigth" value="300"/>
+            </map>
+        </menu>
+
         <menu id="org-privilege-copy" name="复制分组" href="/organization/privilege/groupCopy.pagelet" icon="icon-copy"
               sort="1" isShow="1"
-              scope="org-privilege"/>
+              scope="org-privilege">
+            <map>
+                <property key="width" value="700"/>
+                <property key="heigth" value="300"/>
+            </map>
+        </menu>
+
         <menu id="org-privilege-edit" name="编辑分组" href="/organization/privilege/groupEdit.pagelet" icon="icon-pencil"
               sort="1" isShow="1"
-              scope="org-privilege"/>
+              scope="org-privilege">
+            <map>
+                <property key="width" value="600"/>
+                <property key="heigth" value="200"/>
+            </map>
+        </menu>
+
         <menu id="org-privilege-add" name="添加分组" href="/organization/privilege/groupAdd.pagelet" icon="icon-plus"
               sort="1" isShow="1"
               scope="org-privilege-addGroup"/>
