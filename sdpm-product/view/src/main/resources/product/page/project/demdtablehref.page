@@ -51,7 +51,8 @@
         <a href="#" title="beizhu">#buttonIcon(iconClass="beizhu icon-comment-alt")</a>
 				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
                    title="复制">#buttonIcon(iconClass="icon-copy")</a>
-				<a href="#" title="删除">#buttonIcon(iconClass="icon-remove")</a>
+        #iconOperations("#myModal" "icon-remove" "删除" "200" "50"
+            "/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass=
                     "icon-reply")</a>
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"
@@ -109,7 +110,8 @@
 	            <a href="#" title="beizhu">#buttonIcon(iconClass="beizhu icon-comment-alt")</a>&nbsp;&nbsp;		<a
                    href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
                    title="复制">#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
-				<a href="#" title="删除">#buttonIcon(iconClass="icon-remove")</a>&nbsp;&nbsp;	
+               #iconOperations("#myModal" "icon-remove" "删除" "200" "50"
+                   "/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass=
                     "icon-reply")</a>&nbsp;&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"

@@ -12,11 +12,7 @@
                 #end
                 #@tr()
                     #@th()版本#end
-                    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page>trunk</a>#end
-                #end
-                #@tr()
-                    #@th()版本#end
-                    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page>trunk</a>#end
+                    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page">trunk</a>#end
                 #end
                 #@tr()
                     #@th()负责人#end

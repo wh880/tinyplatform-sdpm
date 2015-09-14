@@ -12,7 +12,7 @@
 #for(var:[1..pagesize])
 #@tr()
 
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()<input type="checkbox" value="1" name="product-archive">#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/document/table-edit.page">${page}</a>#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/document/table-edit.page">工程管理类</a>#end
 	#@td()项目管理经验#end

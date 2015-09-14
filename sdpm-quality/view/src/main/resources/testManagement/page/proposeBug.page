@@ -4,7 +4,6 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 <style>
     .select_boxes{margin-top:0}
-    .top {top: -15px}
 </style>
 
 
@@ -55,7 +54,6 @@
 	                        <option value="DE">/2/3</option>
 	                        <option value="IN">/3/4</option>
 	                    	#end                
-	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 	  #end
 #*					#@tinySelect("lang" "zh" {"class":"select2"})
 							#@tinyOptionItem("zh")/首页#end
@@ -292,7 +290,7 @@
 			#end
 			#@elementItem()
 				#@colLabel()附件：#end
-				#@formControlDiv("col-8 top")					
+				#@formControlDiv("col-8")					
 					#include("/testManagement/page/fileupload.page")
 #*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#				
 				#end

@@ -4,11 +4,11 @@
 		    <th class="w-120px text-r">需求记录数：</th>
 		    <td class="w-80px"><input type="text" name="num" id="num" value="10" class="form-control"></td>
 		    <td class="w-100px">
-		    	<select name="fileType" id="fileType" class="form-control">
+		    	<select name="fileType" id="fileType" class="form-control" style="height: 34px;" >
 					<option value="xlsx" selected="selected">xlsx</option>
 					<option value="xls">xls</option>
 				</select>
-		    </td><td> <button type="submit" id="submit" class="btn btn-submit btn-primary">保存</button></td>
+		    </td><td> <button type="submit" id="submit" class="btn btn-submit btn-primary">导出</button></td>
 	  </tr>
 	
 	</table>

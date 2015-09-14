@@ -6,34 +6,16 @@
 <style> </style>
 #set(name="documentDocu")
 #set(abstract="这个摘要很好看啊，内容很精彩啊！",keywords="关键字 精彩 好看",tach="good.jpg")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@div(divClass="dropdownBox")
-            #include("/document/dropdownMenu.page")
-        #end
-        #@tabHead()
-            #include("tab.page")
-        	<span class="r" style="position:relative;top:2px;height:0">
-        	        #@aModal("#myModal" "编辑" "400" "150" "" "edit-doclib.pagelet")
-        	        	#buttonIcon(iconClass="icon-edit-sign")编辑&nbsp;#end
-            		#@aModal("#myModal" "删除" "400" "150" "" "docu-delete.pagelet")
-            			#buttonIcon(iconClass="icon-remove")删除&nbsp;#end				
-					#@aModal("#myModal" "添加文档库" "865" "150" "" "add-doclib.pagelet")
-						#buttonIcon(iconClass="icon-plus-sign")添加文档库#end
-			</span>
-        #end
-        #@tabBodyCol("ptop-5")#end
-     #end
-#end
+#include("doc-tab.page")
 #@div()
 	#@p(pClass="title_sty")
 		<span class="f"> 版本名称</span>
 		<span class="r">
 					
 			<a href="${TINY_CONTEXT_PATH}/document/table-edit.page" title="编辑">
-				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" 
-				"/delete.pagelet" "ml-5")&nbsp;&nbsp;
+				#buttonIcon(iconClass="icon-pencil")</a>&nbsp
+				#@delItemsdpm("" 3 "")
+        	        	#buttonIcon(iconClass="icon-remove")#end&nbsp
 			<a href="${TINY_CONTEXT_PATH}/document/document.page" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>
 		</span>
@@ -59,24 +41,19 @@
     <center>		
 			<a href="${TINY_CONTEXT_PATH}/document/table-edit.page" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" 
-				"/delete.pagelet" "ml-5")&nbsp;&nbsp;
+			#@delItemsdpm("" 3 "")
+        	        	#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/document/document.page" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
 	</center>
 </div>
 <div style="width:30%;float:right;">
- 		#TypeInfo("docInfo")
-##     #include("basic-info.page")
+		#TypeInfo("docInfo")
+ ##    #include("basic-info.page")
 </div>
 #end
 #end		
 ##遗漏的弹出框
-	#@dialog("myModal")
-        #@dialogHeader()#end
-        #@dialogBody()<p></p>#end
-    #end
-
 <script type="text/javascript">
 
     $(function(){

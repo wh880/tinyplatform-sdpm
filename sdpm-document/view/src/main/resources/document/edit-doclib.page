@@ -1,3 +1,12 @@
-#@elementItem()
-#tinyInput("text" "username" ""{"placeholder":"产品文档库","datatype":"*4-16","nullmsg":"文档库名称不能为空！","id":"username","class":"input-text"})
+
+#@colLabel()#end
+<div class="col-8">
+#@div(divClass="col-8")
+	
+	#tinyInput("text" "username" ""{"style":"height:29px","placeholder":"产品文档库","id":"username","class":"input-text"})
+	
 #end
+<div class="col-3">
+<button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+</div>
+</div>

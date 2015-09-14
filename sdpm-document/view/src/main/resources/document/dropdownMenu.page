@@ -20,7 +20,8 @@
 			 <option value="WI">Wisconsin</option>
 		  ##</optgroup>
 		#end
-		#@navSelect2Fix()<a href="add-doclib.page" class="r">增加</a><a href="#">全部</a>#end
+		#@navSelect2Fix()
+		<a href="${TINY_CONTEXT_PATH}/document/document.page">全部</a>#end
 	#end
 	<script type="text/javascript">
 	<!--

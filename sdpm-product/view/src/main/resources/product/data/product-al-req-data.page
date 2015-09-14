@@ -11,7 +11,7 @@
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()<input type="checkbox" value="1" name="product-al-req">#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">${var}</a>#end
 	#@td()@#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">个性化需求</a>#end

@@ -11,7 +11,7 @@
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()<input type="checkbox" value="1" name="product-al-bug">#end
 	#@td()${var}#end
 	#@td()@#end
 	#@td()

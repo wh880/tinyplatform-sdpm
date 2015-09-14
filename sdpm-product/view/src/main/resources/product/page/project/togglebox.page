@@ -33,8 +33,7 @@
 					#@buttonGroup()
 						#@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出  #@spanCaret()#end#end
 			                    #@ulDropdownMenu("downMenuSty")
-				                    <p>
-				                     #@iconOperations("#myModal" "" "导出" "400" "200"  "/product/page/tabledemo/product-export-data.pagelet" "ml-5") &nbsp;导出数据#end  
+				                    <p>#@iconOperations("#myModal" "" "导出" "400" "254"  "/product/page/tabledemo/product-export-data.pagelet" "ml-5") &nbsp;导出数据#end
 									</p>
 									
 				                     #@iconOperations("#myModal" "" "导出" "700" "64" "/product/page/tabledemo/product-export-template.pagelet" "ml-5") &nbsp;导出模板#end            
@@ -77,189 +76,75 @@
 		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-				
-				#@aModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger" "/product/page/tabledemo/product-demand-del.pagelet")批量关闭#end
-				#@aModal("#myModal" "编辑" "1300" "500" "btn radius btn-primary" "/product/page/tabledemo/product-demand-edit.pagelet")编辑#end
-				
-				
-				
-				
-				#@dropdown("操作")
-					#@dropdownMenu()
-						#@dropdownSubmenu("指派给")
-							#@dropdownMenu()
-								#dmenu("admin")
-								#dmenu("张三")
-								#dmenu("lisi")
-							#end
-						#end
-					
-						#@dropdownSubmenu("阶段")
-							#@dropdownMenu()
-								#dmenu("空")
-								#dmenu("未开始")
-								#dmenu("已计划")
-								#dmenu("已立项")
-								#dmenu("研发中")
-								#dmenu("完毕")
-								#dmenu("测试中")
-								#dmenu("测试完毕")
-								#dmenu("已验收")
-								#dmenu("已发布")
-							#end
-						#end
-						
-						#@dropdownSubmenu("计划")
-							#@dropdownMenu()
-								#dmenu("空")
-								#dmenu("计划1")
-								#dmenu("计划2")
-								
-							#end
-						#end
-						
-						#@dropdownSubmenu("评审")
-							#@dropdownMenu()
-								#dmenu("确认通过")
-								#dmenu("有待明确")
-								#@dropdownSubmenu("拒绝")
-									#@dropdownMenu()
-										#dmenu("已完成")
-										#dmenu("延期")
-										#dmenu("不做")
-										#dmenu("已取消")
-										#dmenu("设计如此")
-									#end
-								#end
-								
-							#end
-						#end
-					#end
-				#end
-								
-				
-				
-#*
-				<div class="dropdown">
+            <input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('product-demand','全选');" />
+            <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('product-demand','反选');" />
+            #@buttonGroup()
+	            	 <div class="dropdown">
 					<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">操作<span class="caret"></span></a>
-					<ul class="dropdown-menu multi-level" role="menu">
-						
-						<li class="dropdown-submenu">
-							<a tabindex="-1" href="javascript:void(0);">指派给</a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="javascript:void(0);">admin</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);">zhangsan</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);">lisi</a>
-								</li>
-								
-							</ul>
-						</li>
-						<li class="dropdown-submenu">
-							<a tabindex="-1" href="javascript:void(0);">阶段</a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="javascript:void(0);">空</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);">未开始</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);">已计划</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);">已立项</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);">研发中</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);">完毕</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);">测试中</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);">测试完毕</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);">已验收</a>
-								</li>
-							
-								<li>
-									<a  href="javascript:void(0);">已发布</a>
-								</li>
-								
-							</ul>
-						</li>
-						<li class="dropdown-submenu">
-							<a tabindex="-1" href="javascript:void(0);">计划</a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="javascript:void(0);">空</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);">计划1</a>
-								</li>
-								<li>
-									<a  href="javascript:void(0);">计划2</a>
-								</li>
-								
-							</ul>
-						</li>
-						<li class="dropdown-submenu">
-							<a tabindex="-1" href="javascript:void(0);">评审</a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="javascript:void(0);">确认通过</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);">有待明确</a>
-								</li>
-								<li class="dropdown-submenu">
-									<a tabindex="-1" href="javascript:void(0);">拒绝</a>
-									<ul class="dropdown-menu">
-										<li>
-											<a href="javascript:void(0);">已完成</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);">延期</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);">不做</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);">已取消</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);">设计如此</a>
-										</li>
-										
-									</ul>
-								</li>
-								
-							</ul>
-						</li>
-					</ul>
-				</div>*#
-					
+#*					#@aModal("#myModal" "编辑" "1300" "500" "btn radius btn-primary" "/product/page/tabledemo/product-demand-edit.pagelet")编辑#end*#
 				
-#set(map={"a":"url1","b":[1,2]})
-#set(con=[{"关闭":"url1"},{"c":[{"通过":"url.."},{"a":{"aa":"urssl..","不做":"url.."}}]}])
-${(con[1].get("c")[1]).get("aa")}
+	                #@ulDropdownMenu()
+	                	#@liDropdownMenu("指派给")
+	                		#@ulDropdownMenu()
+		                		#@dropdownItem("javascript:void(0);")admin#end
+		                		#@dropdownItem("javascript:void(0);")张三#end
+		                		#@dropdownItem("javascript:void(0);")lisi#end
+		                	#end
+	                	#end
+	                	
+	                	#@liDropdownMenu("阶段")
+	                		#@ulDropdownMenu()
+		                		#@dropdownItem("javascript:void(0);")空#end
+		                		#@dropdownItem("javascript:void(0);")未开始#end
+		                		#@dropdownItem("javascript:void(0);")已计划#end
+		                		#@dropdownItem("javascript:void(0);")已立项#end
+		                		#@dropdownItem("javascript:void(0);")研发中#end
+		                		#@dropdownItem("javascript:void(0);")完毕#end
+		                		#@dropdownItem("javascript:void(0);")测试中#end
+		                		#@dropdownItem("javascript:void(0);")测试完毕#end
+		                		#@dropdownItem("javascript:void(0);")已验收#end
+		                		#@dropdownItem("javascript:void(0);")已发布#end
+		                	#end
+	                	#end
+	                	
+	                	#@liDropdownMenu("计划")
+	                		#@ulDropdownMenu()
+		                		#@dropdownItem("javascript:void(0);")空#end
+		                		#@dropdownItem("javascript:void(0);")计划1#end
+		                		#@dropdownItem("javascript:void(0);")计划2#end
+		                	#end
+	                	#end
+	                	
+	                	#@liDropdownMenu("评审")
+	                		#@ulDropdownMenu()
+		                		#@dropdownItem("javascript:void(0);")确认通过#end
+		                		#@dropdownItem("javascript:void(0);")有待明确#end
+#*		                		#@liDivider()<hr/>#end*#
+		                		#@liDropdownMenu("拒绝")
+			                		#@ulDropdownMenu()
+				                		#@dropdownItem("javascript:void(0);")已完成#end
+				                		#@dropdownItem("javascript:void(0);")延期#end
+				                		#@dropdownItem("javascript:void(0);")不做#end
+				                		#@dropdownItem("javascript:void(0);")已取消#end
+				                		#@dropdownItem("javascript:void(0);")计划如此#end
+				                	#end
+			                	#end
+		                	#end
+	                	#end
+	                #end
+	               </div>
+	            #end
 
 
+  #@aModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger" "/product/page/tabledemo/product-demand-del.pagelet")批量关闭#end
+          
 				
 				
 			#end
 			#@tinyTableContent("../../data/tabledata.pagelet") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+						#@tinyTh({"width":"6"})<input type="checkbox"  value="">#end
 						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})ID#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})P#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})需求名称#end

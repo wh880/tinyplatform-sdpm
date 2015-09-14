@@ -48,61 +48,57 @@
 
 
     #@noRespsGridSystem()
-        #@tinyForm("thisform" "" "" {"class":"formText"})
-
-        <div class="infoContent">
-            <p class="titleName">公司信息</p>
-            #@gridSysRow()
-                #@colLabel("col-4")公司名称：#end
-                #@gridSysCol(8)
-                    <p>恒生</p>
-                #end
+    <div class="infoContent">
+        <p class="titleName">公司信息</p>
+        #@gridSysRow()
+            #@colLabel("col-4")公司名称：#end
+            #@gridSysCol(8)
+                <p>恒生</p>
             #end
-            #@gridSysRow()
-                #@colLabel("col-4")联系电话：#end
-                #@gridSysCol(8)
-                    <p>123456</p>
-                #end
-            #end
-            #@gridSysRow()
-                #@colLabel("col-4")传真：#end
-                #@gridSysCol(8)
-                    <p>12321455</p>
-                #end
-            #end
-            #@gridSysRow()
-                #@colLabel("col-4")通讯地址：#end
-                #@gridSysCol(8)
-                    <p>杭州</p>
-                #end
-            #end
-            #@gridSysRow()
-                #@colLabel("col-4")邮政编码：#end
-                #@gridSysCol(8)
-                    <p>123456</p>
-                #end
-            #end
-            #@gridSysRow()
-                #@colLabel("col-4")官网：#end
-                #@gridSysCol(8)
-                    <p>www.baidu.com</p>
-                #end
-            #end
-            #@gridSysRow()
-                #@colLabel("col-4")内网：#end
-                #@gridSysCol(8)
-                    <p>www.baidu.com</p>
-                #end
-            #end
-            #@gridSysRow()
-                #@colLabel("col-4")匿名登录：#end
-                #@gridSysCol(8)
-                    <p>不允许</p>
-                #end
-            #end
-        </div>
         #end
-
+        #@gridSysRow()
+            #@colLabel("col-4")联系电话：#end
+            #@gridSysCol(8)
+                <p>123456</p>
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-4")传真：#end
+            #@gridSysCol(8)
+                <p>12321455</p>
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-4")通讯地址：#end
+            #@gridSysCol(8)
+                <p>杭州</p>
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-4")邮政编码：#end
+            #@gridSysCol(8)
+                <p>123456</p>
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-4")官网：#end
+            #@gridSysCol(8)
+                <p>www.baidu.com</p>
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-4")内网：#end
+            #@gridSysCol(8)
+                <p>www.baidu.com</p>
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-4")匿名登录：#end
+            #@gridSysCol(8)
+                <p>不允许</p>
+            #end
+        #end
+    </div>
     #end
 #end
 

@@ -7,7 +7,7 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
-        <p class="titleName">变更</p>
+        <p class="titleName">关闭</p>
      #@elementItem()
         #@colLabel()关闭原因：#end
         #@formControlDiv("col-3")

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="quality" parent-id="0" name="测试管理" href="/testManagement/page/Bug.page" icon="icon-pencil" sort="1"
+<menu id="quality" parent-id="0" name="测试" href="/testManagement/page/Bug.page" icon="icon-pencil" sort="600"
       isShow="1"
 >
     <menu id="qualityBug" parent-id="quality" name="Bug" href="/testManagement/page/Bug.page" icon="" sort="1"

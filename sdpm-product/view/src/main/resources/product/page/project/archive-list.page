@@ -20,7 +20,7 @@
 		#@toggleBox({"class":"open"})
 		#@toggleLeft({"class":"aclass"})
 		#@settoggleLeftTitle()
-				禅道测试
+				文档列表
 			#end
 			
 			#@settoggleLeftBody("treeLeftbox")
@@ -39,6 +39,9 @@
 		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 	#@div(divClass="tinyheaderTools form-inline")
 		#setTinyTablePageSize([8,10,20,50,100,200])
+			<input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('product-archive','全选');" />
+            <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('product-archive','反选');" />
+           
 		#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
 		#*#@aModal(editpageModal "添加文档" "865" "420" "btn radius btn-primary btn-sm" addArchivePagePath)
 			#@simpleI("icon-plus")添加#end

@@ -143,9 +143,9 @@ public class Menu implements Serializable, Comparable {
         if (o != null) {
             Menu menu = (Menu) o;
             if (menu.getSort() != null) {
-                return sort - menu.getSort();
+                return menu.getSort() - sort;
             }
         }
-        return 1;
+        return 0;
     }
 }

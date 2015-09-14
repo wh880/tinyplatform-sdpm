@@ -13,7 +13,7 @@
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()<input type="checkbox" value="1" name="product-plan">#end
 	#@td()${var}#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-plan/product-al-req.page">基金计划</a>#end
 	#@td()体验金#end

@@ -17,6 +17,8 @@
     #@td()中南海#end
     #@td()67#end
     #@td()2013/03/25#end
-    #@td()￥320,800#end
+    #@td()
+    <a href="${TINY_CONTEXT_PATH}/organization/user/todocalendarAdmin.page">动态对象</a>
+    #end
 #end
 #end

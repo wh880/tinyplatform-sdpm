@@ -53,7 +53,7 @@
 			#@tinyTableContent("../data/versionData.pagelet")
 				#@thead()
 					#@tr()
-						#@tinyTh({"width":"6"})<input type="checkbox" name="userid" value="">#end
+						#@tinyTh({"width":"6"})<input type="checkbox" name="" value="">#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})任务名称#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})所属项目#end

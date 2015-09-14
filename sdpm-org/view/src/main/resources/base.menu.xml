@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="organization" parent-id="0" name="组织管理" href="/organization/user/user.page" icon="icon-sitemap" sort="1"
+<menu id="organization" parent-id="0" name="组织" href="/organization/user/user.page" icon="icon-sitemap" sort="200"
       isShow="1">
     <menu id="organizationUser" name="用户" href="/organization/user/user.page" icon="" sort="1"
           isShow="1"

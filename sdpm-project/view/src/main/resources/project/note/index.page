@@ -2,69 +2,69 @@
 
 #set(name="note")
 #@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-			#@div(divClass="dropdownBox")
-				#include("/project/dropdownMenu.page")
-			#end
-			#@tabHead()
-				#include("/project/protab.page")
-			#end				
-			#@tabBodyCol("ptop-5")
-			#@div(divClass="operationbar")
-				<span class="f">
-				<table>
-					<tr>
-					<td style="width:360px">
-					<a href="${TINY_CONTEXT_PATH}/project/note/index.page" class="active_btn">日历</a>
-					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">今日</a>
-					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">昨日</a>
-					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">本周</a>
-					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">上周</a>
-					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">本月</a>
-					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">上月</a>
-					<a href="${TINY_CONTEXT_PATH}/project/note/index.page">所有日志</a>
-					</td>
-					<td style="float:left">
-					<div style="width:150px">
-						#@Tselect2F()
-							#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="IN">Indiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
-							#end
-						##填写任意内容，侦听需重新填加 A侦听已内置
-							#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-						#end
-					</div></td>
-						</tr>
-					</table>
-				</span>
-				#div(divClass="clearfix")
-			#end
-			##operationbar end
-			#@fullCalendar("fullCalendar")
-        #@externalEvents("external-events")
-            #@h4()可拖动事件#end
-            #@fcEvent()我的事件1#end
-            #@fcEvent()我的事件2#end
-            #@fcEvent()我的事件3#end
-            #@fcEvent()我的事件4#end
-            #@fcEvent()我的事件5#end
-            #@eventButtons("drop-remove")
-                放下后即可删除
-            #end
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
         #end
-        #@calendar("calendar")#end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span class="f">
+				<table>
+                    <tr>
+                        <td style="width:360px">
+                            <a href="${TINY_CONTEXT_PATH}/project/note/index.page" class="active_btn">日历</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/index.page">今日</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/index.page">昨日</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/index.page">本周</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/index.page">上周</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/index.page">本月</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/index.page">上月</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/index.page">所有日志</a>
+                        </td>
+                        <td style="float:left">
+                            <div style="width:150px">
+                                #@Tselect2F()
+                                    #@Tselect2Body(
+                                        "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                        <option value="CT">Connecticut</option>
+                                        <option value="DE">Delaware</option>
+                                        <option value="FL">Florida</option>
+                                        <option value="GA">Georgia</option>
+                                        <option value="IN">Indiana</option>
+                                        <option value="ME">Maine</option>
+                                        <option value="MD">Maryland</option>
+                                    #end
+                                #end
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+				</span>
+                #div(divClass="clearfix")
+            #end
+        ##operationbar end
+            #@fullCalendar("fullCalendar")
+                #@externalEvents("external-events")
+                    #@h4()可拖动事件#end
+                    #@fcEvent()我的事件1#end
+                    #@fcEvent()我的事件2#end
+                    #@fcEvent()我的事件3#end
+                    #@fcEvent()我的事件4#end
+                    #@fcEvent()我的事件5#end
+                    #@eventButtons("drop-remove")
+                    放下后即可删除
+                    #end
+                #end
+                #@calendar("calendar")#end
+            #end
+
+            #fullCalendarInit("#external-events .fc-event" "#calendar")
+        #end
     #end
-    
-    #fullCalendarInit("#external-events .fc-event" "#calendar")
-#end
-#end
 #end
 <script type="text/javascript">
-	$(".select2").select2();
+    $(".select2").select2();
 </script>
