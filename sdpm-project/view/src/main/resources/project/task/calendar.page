@@ -1,10 +1,31 @@
-#include("/project/task/taskMenu.page")
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+
 <style>
     ##    暂时用于100%显示日历
     #calendar {
         width: 100%;
     }
 </style>
+
+#set(name="task")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+    ##head end
+        #@tabBodyCol("ptop-5")
+        ##operationbar start
+            #include("/project/task/taskMenu.page")
+        ##operationbay end
+        #end
+    ##body end
+    #end
+#end
+
 #@fullCalendar("fullCalendar")
     #@calendar("calendar")#end
 #end
