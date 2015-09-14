@@ -57,17 +57,24 @@
 </span>
 
 <span class="r">
+    #set(m1=menuManager.getMenu("pro-task-input"))
+    #if(m1)
     <div class="btn-group btnDropDown">
         <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             导入
             <span class="caret"></span>
         </a>
-        <ul class="dropdown-menu" aria-labelledby="dLabel">
+
+            <ul class="dropdown-menu" aria-labelledby="dLabel">
             <li><a href="${TINY_CONTEXT_PATH}/project/task/inputBug.page">导入bug</a></li>
             <li><a href="${TINY_CONTEXT_PATH}/project/task/inputTask.page">导入任务</a></li>
         </ul>
-    </div>
 
+
+    </div>
+    #end
+    #set(m2=menuManager.getMenu("pro-task-input"))
+    #if(m2)
     <div class="btn-group btnDropDown">
         <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             导出
@@ -80,13 +87,19 @@
                 导出模板#end</li>
         </ul>
     </div>
+    #end
 
-    <a href="${TINY_CONTEXT_PATH}/project/task/reportform.page">#buttonIcon(iconClass="icon-bar-chart")
-        报表</a>&nbsp;
-    <a href="${TINY_CONTEXT_PATH}/project/task/batchAdd.page">#buttonIcon(iconClass="icon-plus-sign")
-        批量增加</a>&nbsp;
-    <a href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-plus")建任务</a>&nbsp;
+##    <a href="${TINY_CONTEXT_PATH}/project/task/reportform.page">#buttonIcon(iconClass="icon-bar-chart")
+##        报表</a>&nbsp;
+##    <a href="${TINY_CONTEXT_PATH}/project/task/batchAdd.page">#buttonIcon(iconClass="icon-plus-sign")
+##        批量增加</a>&nbsp;
+##    <a href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-plus")建任务</a>&nbsp;
+
+    #foreach(m:menuManager.getScopeMenus("pro-taskmenu2-op"))
+        <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+    #end
 </span>
+
     #div(divClass="clearfix")
     #include("/project/mulsearch.page")
 #end

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <menu id="project" parent-id="0" name="迭代" href="/project/task/index.page" icon="icon-book" sort="700" isShow="1">
     <menu id="task" parent-id="project" name="任务" href="/project/task/index.page" icon="" sort="1" isShow="1">
         <menu id="pro-task-call" name="指派" href="/project/task/call.page" icon="icon-hand-right" sort="20" isShow="1"
@@ -14,7 +15,34 @@
         <menu id="pro-task-edit" name="编辑" href="/project/task/edit.page" icon="icon-pencil" sort="4" isShow="1"
               scope="pro-task-op"/>
 
+        <menu id="task-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
+            <menu id="pro-task-input" name="" href="" icon="" sort="15" isShow="1"
+                  scope="pro-taskmenu-op"/>
+            <menu id="pro-task-output" name="" href="" icon="" sort="10" isShow="1"
+                  scope="pro-taskmenu-op"/>
+        </menu>
+
+        <menu id="task-menu2" name="任务菜单2" href="/project/task/index.page" icon="" sort="1" isShow="1">
+            <menu id="pro-task-report" name="报表" href="/project/task/reportform.page" icon="icon-bar-chart" sort="8" isShow="1"
+                  scope="pro-taskmenu2-op"/>
+            <menu id="pro-task-batchadd" name="批量增加" href="/project/task/batchAdd.page" icon="icon-plus-sign" sort="6" isShow="1"
+                  scope="pro-taskmenu2-op"/>
+            <menu id="pro-task-proposeversion" name="建任务" href="/project/task/add.page" icon="icon-plus" sort="4" isShow="1"
+                  scope="pro-taskmenu2-op"/>
+        </menu>
+
+        <menu id="protab"  name="项目" href="/project/task/index.page" icon="" sort="1" isShow="1">
+
+            <menu id="project-op-all" name="所有项目" href="/project/allProject.page" icon="icon-list" sort="1" isShow="1"
+                  scope="project-op"/>
+            <menu id="project-op-add" name="添加项目" href="/project/addProject.page" icon="icon-plus" sort="1" isShow="1"
+                  scope="project-op"/>
+        </menu>
+
+
     </menu>
+
+
 
     <menu id="demand" parent-id="project" name="需求" href="/project/demand/index.page" icon="" sort="1" isShow="1">
         <menu id="rm-demand" name="需求移出" href="/" icon="icon-remove" sort="1" isShow="1" scope="demand-op"/>
@@ -69,4 +97,10 @@
 
     <menu id="survey" parent-id="project" name="概况" href="/project/survey/index.page" icon="" sort="1" isShow="1">
     </menu>
+
+
+
+
+
+
 </menu>
