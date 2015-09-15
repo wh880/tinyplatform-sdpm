@@ -21,8 +21,8 @@
 			</span>
 			<span class="r">
 				<div style="text-align:center;margin:auto">
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/addLog.page"">
-					#buttonIcon(iconClass="icon-time")日志</a>
+				#@aModal("#noteModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
+				#buttonIcon(iconClass="icon-time")日志#end
 #*				#@iconOperations("#LogModal" "icon-time" "新增日志" "800" "400" "/testManagement/page/addLog.pagelet" "ml-5")&nbsp日志#end*#
 				###@iconOperations("#beginModal" "icon-play" "项目名称>开始" "900" "400" "/testManagement/page/versionBegin.pagelet" "ml-5")&nbsp开始#end
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionEnd.page">
@@ -64,14 +64,14 @@
 	       	#include("/testManagement/page/historyRecord.page")
 		#end
 		<div style="text-align:center;margin:auto">
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/addLog.page">
-					#buttonIcon(iconClass="icon-time")日志</a>&nbsp
+				#@aModal("#noteModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
+				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionEnd.page">
-					#buttonIcon(iconClass="icon-off")关闭</a>&nbsp
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">#buttonIcon(iconClass="icon-dashboard")用例</a>&nbsp
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link	")关联用例</a>&nbsp				
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page" class="margin-left" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>&nbsp
-				#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")#buttonIcon(iconClass="icon-remove")#end&nbsp  
+					#buttonIcon(iconClass="icon-off")关闭</a>&nbsp&nbsp;
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">#buttonIcon(iconClass="icon-dashboard")用例</a>&nbsp&nbsp;
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link	")关联用例</a>&nbsp&nbsp;			
+				<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page" class="margin-left" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp
+				#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")#buttonIcon(iconClass="icon-remove")#end&nbsp &nbsp; 
 #*				#@iconOperations("#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp#end
 					#@dialog("deleteModal")
 						#@dialogHeader()对话框标题#end
@@ -89,5 +89,11 @@
 ##	#include("/testManagement/page/versionSituationpaging.page")
 	#TypeInfo("qualityVersionSituation")
 </div>
+				#@dialog("noteModal")
+					#@dialogHeader()对话框标题#end
+					#@dialogBody()<p>对话框内容…</p>#end
+					#@dialogFooter()						
+					#end
+				#end
 #end
 #end

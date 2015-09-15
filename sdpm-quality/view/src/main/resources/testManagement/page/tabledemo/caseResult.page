@@ -3,7 +3,7 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
 	#@div(divClass="infoContent")
         <p class="titleName">前置条件</p>
-#*        #@tableStriped()
+        #@tableStriped()
             #@thead()
                 #@tr()
                     #@th()编号#end
@@ -13,7 +13,7 @@
                     #@th()实际情况 #end
                 #end
             #end
-            #@tbody()
+#*            #@tbody()
                 #@tr()
                     #@th()#end
                     #@td()#end
@@ -21,8 +21,8 @@
                     #@th()#end
                     #@th()#end                   
                 #end                
-            #end
-        #end*#
+            #end*#
+        #end
             
     #end
     #@div(divClass="infoContent")

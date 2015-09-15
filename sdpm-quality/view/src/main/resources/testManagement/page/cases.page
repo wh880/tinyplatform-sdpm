@@ -33,20 +33,16 @@
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
         <span class="r">
-				
-				##这里需要根据不同页面需求显示不同的图标，从版本中查看用例，显示关联用例、导出数据和返回，查看所有以当前的为准
-                ##可能span f 及data中的标签也需要一起进行判断后显示
-                    #@iconOperations("#myModal" "icon-download-alt" "导入" "550" "100"
-                        "/testManagement/page/tabledemo/importBug.pagelet" "ml-5")&nbsp导入#end
-                    #@iconOperations("#myModal" "icon-upload-alt" "导出" "550" "100"
-                        "/testManagement/page/tabledemo/exportBugData.pagelet" "ml-5")&nbsp导出#end
-#*                         #foreach(m:menuManager.getScopeMenus("demand-op"))
-							 #if(m.id == "add-case")
-             					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)建用例</a>
-			 				#end
-		 				#end*#
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">#buttonIcon(iconClass=
-                        "icon-plus")建用例</a>
+				#foreach(m:menuManager.getScopeMenus("testcase-tab"))
+    				#if(m.id!="add-case")
+    					#@aModal("#myModal" m.name "550" "100" "" m.href "ml-5")
+								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;
+					#else                  
+             			<a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+			 		#end
+		 		#end
+#*					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">#buttonIcon(iconClass=
+                        "icon-plus")建用例</a>*#
 				</span>
             #div(divClass="clearfix")
             #include("/testManagement/page/mulsearch.page")
@@ -77,12 +73,20 @@
 							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
 							<ul class="dropdown-menu multi-level" role="menu">
 								<li>
-									<a href="javascript:void(0);">
-										删除</a>
+								#foreach(m:menuManager.getScopeMenus("testcase-op"))
+    								#if(m.id=="tcasedelete")
+										<a href="javascript:void(0);">
+											删除</a>
+									#end
+								#end
 								</li>
 								<li>
+								#foreach(m:menuManager.getScopeMenus("testcase-op"))
+    								#if(m.id=="texecution")
 									#@iconOperations("#myModal" "" "执行" "865" "400"
 										 "/testManagement/page/tabledemo/execution.pagelet" "ml-5")执行#end
+									#end
+								#end
 								</li>																
 							</ul>
 						</div>
@@ -122,8 +126,8 @@ user_del(this,'1');
 #@dialogHeader()#end
 #@dialogBody()<p>对话框内容…</p>#end
 #@dialogFooter()
-#@buttonEnsure()确定#end
-#@buttonCancel()关闭#end
+	#@buttonEnsure()确定#end
+	#@buttonCancel()关闭#end
 #end
 #end
 #end

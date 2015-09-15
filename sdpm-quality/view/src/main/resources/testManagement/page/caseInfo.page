@@ -28,20 +28,20 @@
 		<span class="f">
 			用例名称</span>
 		<span class="r">
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/addLog.page">
-				#buttonIcon(iconClass="icon-time")日志</a>&nbsp&nbsp;
-			#@iconOperations("#goModal" "icon-play" "执行" "600" "300" 
-				"/testManagement/page/tabledemo/caseExecute.pagelet" "ml-5")执行#end&nbsp;&nbsp;
-			#@iconOperations("#reModal" "icon-flag-checkered" "结果" "600" "300" 
-				"/testManagement/page/tabledemo/caseResult.pagelet" "ml-5")结果#end&nbsp;&nbsp;		
+			#@aModal("#noteModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
+				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
+			#@aModal("#myModal" "执行" "600" "300" "" "/testManagement/page/tabledemo/caseExecute.pagelet" "ml-5")
+				#buttonIcon(iconClass="icon-flag-checkered")执行#end&nbsp;&nbsp;
+			#@aModal("#myModal" "结果" "600" "300" "" "/testManagement/page/tabledemo/caseResult.pagelet" "ml-5")
+					#buttonIcon(iconClass="icon-play")结果#end&nbsp;&nbsp;		
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editioncase.page" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
 			<a  title="备注" onclick="toggle()">
 				#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page" title="复制">
 				#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
-			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" 
-				"/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
+			#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")
+					#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp				
 
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;</span>
@@ -81,20 +81,20 @@
             #include("/testManagement/page/historyRecord.page")
         #end
         <center>
-       		 <a href="${TINY_CONTEXT_PATH}/testManagement/page/addLog.page">
-				#buttonIcon(iconClass="icon-time")日志</a>&nbsp&nbsp;
-			#@iconOperations("#goModal" "icon-play" "执行" "600" "300" 
-				"/testManagement/page/tabledemo/caseExecute.pagelet" "ml-5")执行#end&nbsp;&nbsp;
-			#@iconOperations("#reModal" "icon-flag-checkered" "结果" "600" "300" 
-				"/testManagement/page/tabledemo/caseResult.pagelet" "ml-5")结果#end&nbsp;&nbsp;		
+        	#@aModal("#noteModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
+				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
+			#@aModal("#myModal" "执行" "600" "300" "" "/testManagement/page/tabledemo/caseExecute.pagelet" "ml-5")
+				#buttonIcon(iconClass="icon-flag-checkered")执行#end&nbsp;&nbsp;
+			#@aModal("#myModal" "结果" "600" "300" "" "/testManagement/page/tabledemo/caseResult.pagelet" "ml-5")
+					#buttonIcon(iconClass="icon-play")结果#end&nbsp;&nbsp;		
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editioncase.page" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
 			<a  title="备注" onclick="toggle()">
 				#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page" title="复制">
 				#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
-			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" 
-				"/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
+			#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")
+					#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp
 
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
@@ -132,22 +132,13 @@
 						#@buttonCancel()关闭#end
 					#end
 				#end
-				#@dialog("goModal")
+				#@dialog("noteModal")
 					#@dialogHeader()对话框标题#end
 					#@dialogBody()<p>对话框内容…</p>#end
-					#@dialogFooter()
-						#@buttonEnsure()确定#end
-						#@buttonCancel()关闭#end
+					#@dialogFooter()						
 					#end
 				#end
-				#@dialog("reModal")
-					#@dialogHeader()对话框标题#end
-					#@dialogBody()<p>对话框内容…</p>#end
-					#@dialogFooter()
-						#@buttonEnsure()确定#end
-						#@buttonCancel()关闭#end
-					#end
-				#end
+				
 <script type="text/javascript">
 function toggle()
 {

@@ -1,34 +1,5 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 
-
-#@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-			#@div(divClass="dropdownBox")
-				#include("/testManagement/page/dropdownMenu.page")
-			#end
-			#@tabHead()
-				#include("/testManagement/page/Tab.page")
-			#end
-			
-			#@tabBodyCol("ptop-5")
-			##operationbar start1
-			#@div(divClass="operationbar")
-				<span class="f">
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page" class="active_btn">待测版本</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page">已测试版本</a>
-					</span>
-				<span class="r">
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-plus")提交测试</a>&nbsp;
-					</span>
-				#div(divClass="clearfix")
-			#end
-			##operationbar end
-			#end
-	#end
-#end
-			##tabbody end
-
-
 #@table()
 	#@thead()
 		#@tr()
@@ -47,15 +18,11 @@
                 #@td()23#end
                 #@td()做项目#end
                 #@td()
-                    #@iconOperations("#editModal" "icon-pencil" "修改日志" "600" "340" "/testManagement/page/editLog.pagelet" "ml-5")#end
-                    #iconOperations("#myModal" "icon-remove" "删除" "200" "50" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
-                    #@dialog("editModal")
-						#@dialogHeader()对话框标题#end
-						#@dialogBody()<p>对话框内容…</p>#end
-						#@dialogFooter()
-						#end
-					#end
-					#@dialog("myModal")
+                    #iconOperations("#editModal" "icon-pencil" "修改日志" "600" "340" "/testManagement/page/editLog.pagelet" "ml-5")
+                   	#@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)
+						<i class="icon-remove" title="删除"></i>
+					#end                    
+#*					#@dialog("myModal")
 						#@dialogHeader()对话框标题#end
 						#@dialogBody()<p>对话框内容…</p>#end
 						#@dialogFooter()
@@ -64,7 +31,7 @@
 							<a href="${TINY_CONTEXT_PATH}/testManagement/page/addLog.page">确定</a>#end
 					  	#@buttonCancel()关闭#end					  		
 						#end
-					#end
+					#end*#
                 #end
             #end
         #end
@@ -83,7 +50,7 @@
         #end
 	#end
 #end
-            <div class="col-5">
+            <div class="col-6">
                 <button style="float: right" type="submit" id="submit" class="commitBtn">
                 	保存</button>
             </div>
@@ -91,4 +58,9 @@
             	<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionSituation.page">
                 <button style="float: right" type="button" id="back" class="backBtn">返回</button></a>
             </div>
-
+					#@dialog("editModal")
+						#@dialogHeader()#end
+						#@dialogBody()<p></p>#end
+						#@dialogFooter()
+						#end
+					#end

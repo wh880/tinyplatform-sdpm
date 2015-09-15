@@ -32,33 +32,44 @@
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
-					#@iconOperations("#myModal" "icon-download-alt" "导入" "400" "80" "/testManagement/page/tabledemo/importBug.pagelet" "ml-5")&nbsp导入#end
-					
-					#@buttonGroup()
-		                    #@buttonDropdown("more" buttonClass="btnDropDown")#buttonIcon(iconClass="icon-upload-alt")导出 
-		                     	#@spanCaret()#end
-		                    #end
-		                    #@ulDropdownMenu("downMenuSty")                       
-		                         <p>
-		                             #@aModal("#myModal" "导出数据" "550" "100" "" "/testManagement/page/tabledemo/exportBugData.pagelet")导出数据#end
-		                         </p>
-		                         <p>
- 									#@aModal("#myModal" "导出模板" "550" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出模版#end		                         </p>	
-		                        #@liDivider()#end
-		                    #end
+			##		#set(m1=menuManager.getMenu("tbugoutput"))
+					#foreach(m:menuManager.getScopeMenus("testbug-tab"))
+    				#if(m.id=="tbugoutput")
+    					#@buttonGroup()
+		                    		#@buttonDropdown("more" buttonClass="btnDropDown")#buttonIcon(iconClass="icon-upload-alt")导出 
+		                     			#@spanCaret()#end
+		                    		#end
+		                    		#@ulDropdownMenu("downMenuSty")                       
+		                         		<p>
+		                             		#@aModal("#myModal" "导出数据" "550" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出数据#end
+		                         		</p>
+		                         		<p>
+ 											#@aModal("#myModal" "导出模板" "550" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出模版#end		                         </p>	
+		                       			</p>
+		                       			 #@liDivider()#end
+		                   			#end
 		                #end&nbsp;
+    				#else
+    					#if(m.id=="tbuginput")
+    						#@aModal("#myModal" m.name "400" "80" "" m.href "ml-5")
+								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;
+						#else
+							<a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;
+    					#end
+    				#end
+    				#end
+    									
 		                #@dialog("myModal")
-								#@dialogHeader()对话框标题#end
-								#@dialogBody()<p>对话框内容…</p>#end
+								#@dialogHeader()#end
+								#@dialogBody()<p></p>#end
 								#@dialogFooter()
 									#@buttonEnsure()确定#end
 								    #@buttonCancel()关闭#end
 							  	#end
 						#end
                     
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
-   ##                 <a href="${TINY_CONTEXT_PATH}/testManagement/page/BatchAdding.page">#buttonIcon(iconClass="icon-plus-sign")批量添加</a>&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-plus")建Bug</a>
+			##		<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
+			##		<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-plus")建Bug</a>
 				</span>
 				#div(divClass="clearfix")
 				#include("/testManagement/page/mulsearch.page")
@@ -88,14 +99,24 @@
 							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
 							<ul class="dropdown-menu multi-level" role="menu">
 								<li>
-									<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/makesure.page">
-										确认</a>
+									#foreach(m:menuManager.getScopeMenus("testbug-op"))
+										#if(m.id=="tmakesure")
+											<a href="${TINY_CONTEXT_PATH}${m.href}">
+												${m.name}</a>
+										#end
+									#end
 								</li>
 								<li>
-									<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/shutdown.page">
-										关闭</a>
+									#foreach(m:menuManager.getScopeMenus("testbug-op"))
+										#if(m.id=="tversiondelete")
+											<a href="${TINY_CONTEXT_PATH}${m.href}">
+												${m.name}</a>
+										#end
+									#end
 								</li>
 								<li class="dropdown-submenu">
+									#foreach(m:menuManager.getScopeMenus("testbug-op"))
+									#if(m.id=="tsolution")
 									<a tabindex="-1" href="javascript:void(0);">解决</a>
 									<ul class="dropdown-menu">
 										<li>
@@ -120,8 +141,12 @@
 											<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">延期解决</a>
 										</li>
 									</ul>
+									#end
+									#end
 								</li>
 								<li class="dropdown-submenu">
+								#foreach(m:menuManager.getScopeMenus("testbug-op"))
+									#if(m.id=="tassign")
 									<a tabindex="-1" href="javascript:void(0);">
 											指派给</a>
 									<ul class="dropdown-menu">
@@ -134,6 +159,8 @@
 											admin1</a>
 										</li>										
 									</ul>
+									#end
+									#end
 								</li>
 							</ul>
 						</div>
