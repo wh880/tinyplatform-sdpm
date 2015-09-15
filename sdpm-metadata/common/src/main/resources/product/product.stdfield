@@ -24,7 +24,6 @@
   <standard-field id="e0722a6a05ab4b3a8875fa8aaf6c0386" name="plan_beginDate" title="计划开始时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
   <standard-field id="32ed57583f5643cf86baaca014e19502" name="plan_endDate" title="计划结束时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
   <standard-field id="fcd9ccc8418d40bf94a7caa53175ef4c" name="release_id" title="发布ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
-  <standard-field id="e38b830ee796420b9fb6b0cca4052c0e" name="build_id" title="版本ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
   <standard-field id="bd0d01c2dcb44f6182c4dc7cd8b7d15c" name="release_name" title="发布名称" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
   <standard-field id="4ebcf9c3891b4e4cb1b9a33e82fb3357" name="release_date" title="发布日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
   <standard-field id="bf293158656146ceb9d5ad2ff8a35d84" name="release_stories" title="已完成需求" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false"/>
