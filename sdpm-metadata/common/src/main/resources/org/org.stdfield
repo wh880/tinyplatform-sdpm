@@ -1,0 +1,8 @@
+<standard-fields>
+  <standard-field id="c7d7754bfa85454993ffd049f902f1be" name="user_id" title="用户编号" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" not-null="false">
+    <description></description>
+  </standard-field>
+  <standard-field id="5cc0a1c502804310a2f2bd21b9fe4111" name="username" title="用户名" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="6e55b0ac4e64416da2cac4a793e8762b" name="rold_id" title="角色ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
+  <standard-field id="b6114a5f17184031a39bb34033ff1231" name="rold_name" title="角色名称" business-type-id="286a6bca92b34779bcb6fc8809f0a666" not-null="false"/>
+</standard-fields>
