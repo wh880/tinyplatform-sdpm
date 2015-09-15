@@ -27,6 +27,10 @@
                      <a href="${TINY_CONTEXT_PATH}${m.href}"
                         title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                  #end
+                #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
+                    <a href="${TINY_CONTEXT_PATH}${m.href}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
             ##				<a title="指派" href="${TINY_CONTEXT_PATH}/project/task/call.page">#buttonIcon(iconClass=
             ##                    "icon-hand-right")指派</a>
             ##		        <a title="开始" href="${TINY_CONTEXT_PATH}/project/task/start.page">#buttonIcon(iconClass="icon-play")
@@ -93,6 +97,10 @@
             #foreach(m:menuManager.getScopeMenus("pro-taskInfo-op"))
                 <a href="${TINY_CONTEXT_PATH}${m.href}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+            #end
+            #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
+                <a href="${TINY_CONTEXT_PATH}${m.href}"
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
         ##				<a title="指派" href="${TINY_CONTEXT_PATH}/project/task/call.page">#buttonIcon(iconClass=
         ##                    "icon-hand-right")指派</a>

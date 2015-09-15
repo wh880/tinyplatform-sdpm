@@ -16,9 +16,9 @@
               scope="pro-task-op"/>
 
         <menu id="task-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
-            <menu id="pro-task-input" name="" href="" icon="" sort="15" isShow="1"
+            <menu id="pro-task-input" sort="15" isShow="1"
                   scope="pro-taskmenu-op"/>
-            <menu id="pro-task-output" name="" href="" icon="" sort="10" isShow="1"
+            <menu id="pro-task-output"  sort="10" isShow="1"
                   scope="pro-taskmenu-op"/>
         </menu>
 
@@ -50,16 +50,20 @@
                   scope="pro-taskInfo-op"/>
             <menu id="pro-Info-close" name="取消" href="/project/task/close.page" icon="icon-off" sort="6" isShow="1"
                   scope="pro-taskInfo-op"/>
-            <menu id="pro-Info-edit" name="编辑" href="/project/task/edit.page" icon="icon-pencil" sort="4" isShow="1"
-                  scope="pro-taskInfo-op"/>
-            <menu id="pro-Info-remark" name="备注" href="/project/task/IDLinkremark.page" icon="icon-book" sort="10" isShow="1"
-                  scope="pro-taskInfo-op"/>
-            <menu id="pro-Info-copy" name="复制" href="/project/task/add.page" icon="icon-copy" sort="8" isShow="1"
-                  scope="pro-taskInfo-op"/>
-            <menu id="pro-Info-remove" name="删除" href="" icon="" sort="6" isShow="1"
-                  scope="pro-taskInfo-op"/>
-            <menu id="pro-Info-return" name="返回" href="/project/task/index.page" icon="margin-left" sort="4" isShow="1"
-                  scope="pro-taskInfo-op"/>
+
+        </menu>
+
+        <menu id="task-Info2" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
+            <menu id="pro-Info2-edit" name="编辑" href="/project/task/edit.page" icon="icon-pencil" sort="4" isShow="1"
+                  scope="pro-taskInfo2-op"/>
+            <menu id="pro-Info2-remark" name="备注" href="/project/task/IDLinkremark.page" icon="icon-book" sort="10" isShow="1"
+                  scope="pro-taskInfo2-op"/>
+            <menu id="pro-Info2-copy" name="复制" href="/project/task/add.page" icon="icon-copy" sort="8" isShow="1"
+                  scope="pro-taskInfo2-op"/>
+            <menu id="pro-Info2-remove"  sort="6" isShow="1"
+                  scope="pro-taskInfo2-op"/>
+            <menu id="pro-Info2-return" name="返回" href="/project/task/index.page" icon="icon-reply" sort="4" isShow="1"
+                  scope="pro-taskInfo2-op"/>
         </menu>
 
 
@@ -75,7 +79,7 @@
               scope="demand-op"/>
 
         <menu id="demand-menu" name="任务菜单" href="/project/demand/index.page" icon="" sort="1" isShow="1">
-            <menu id="pro-demand-report" name="" href="" icon="" sort="8" isShow="1"
+            <menu id="pro-demand-report"  sort="8" isShow="1"
                   scope="pro-demandmenu-op"/>
             <menu id="pro-demand-add" name="新增需求" href="/product/page/tabledemo/product-demand-add.page" icon="icon-plus-sign" sort="6" isShow="1"
                   scope="pro-demandmenu-op"/>
@@ -103,14 +107,28 @@
               scope="pro-version-op"/>
         <menu id="pro-version-delete" name="删除" href="" icon="icon-remove" sort="10" isShow="1"
               scope="pro-version-op"/>
+
+        <menu id="version-menu" name="任务菜单" href="/project/version/index.page" icon="" sort="1" isShow="1">
+            <menu id="pro-version-report" name="新建版本" href="/project/version/add.page" icon="icon-plus" sort="8" isShow="1"
+                  scope="pro-versionmenu-op"/>
+        </menu>
+
     </menu>
 
     <menu id="test" parent-id="project" name="测试" href="/project/test/index.page" icon="" sort="1" isShow="1">
+        <menu id="test-menu" name="任务菜单" href="/project/version/index.page" icon="" sort="1" isShow="1">
+            <menu id="pro-test-report" name="提交测试" href="/testManagement/page/proposeversion.page" icon="icon-plus" sort="8" isShow="1"
+                  scope="pro-testmenu-op"/>
+        </menu>
     </menu>
 
     <menu id="team" parent-id="project" name="团队" href="/project/team/index.page" icon="" sort="1" isShow="1">
         <menu id="pro-team-delete" name="删除" href="" icon="icon-remove" sort="10" isShow="1"
               scope="pro-team-op"/>
+        <menu id="team-menu" name="任务菜单" href="/project/team/index.page" icon="" sort="1" isShow="1">
+            <menu id="pro-team-report" name="团队管理" href="/project/team/teamManage.page" icon="icon-user" sort="8" isShow="1"
+                  scope="pro-teammenu-op"/>
+        </menu>
     </menu>
 
     <menu id="note" parent-id="project" name="日志" href="/project/note/index.page" icon="" sort="1" isShow="1">
@@ -122,12 +140,35 @@
     <menu id="document" parent-id="project" name="文档" href="/project/document/index.page" icon="" sort="1" isShow="1">
         <menu id="pro-document-delete" name="删除" href="" icon="icon-remove" sort="10" isShow="1"
               scope="pro-document-op"/>
+        <menu id="documentmenu" name="任务菜单" href="/project/document/index.page" icon="" sort="1" isShow="1">
+            <menu id="pro-document-report" name="创建文档" href="/project/document/add.page" icon="icon-plus" sort="8" isShow="1"
+                  scope="pro-documentmenu-op"/>
+        </menu>
     </menu>
 
     <menu id="product" parent-id="project" name="产品" href="/project/product/index.page" icon="" sort="1" isShow="1">
     </menu>
 
     <menu id="survey" parent-id="project" name="概况" href="/project/survey/index.page" icon="" sort="1" isShow="1">
+        <menu id="survey-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
+            <menu id="pro-survey-delay"  sort="15" isShow="1"
+                  scope="pro-surveymenu-op"/>
+            <menu id="pro-survey-hangon" sort="10" isShow="1"
+                  scope="pro-surveymenu-op"/>
+            <menu id="pro-survey-finish"  sort="10" isShow="1"
+                  scope="pro-surveymenu-op"/>
+        </menu>
+
+        <menu id="survey-menu2" name="任务菜单2" href="/project/survey/index.page" icon="" sort="1" isShow="1">
+            <menu id="pro-survey-edit" name="编辑" href="/project/survey/edit.page" icon="icon-pencil" sort="8" isShow="1"
+                  scope="pro-surveymenu2-op"/>
+            <menu id="pro-survey-remove" name="" href="" icon="" sort="6" isShow="1"
+                  scope="pro-surveymenu2-op"/>
+            <menu id="pro-survey-return" name="返回" href="/project/dynamic/index.page" icon="icon-level-up" sort="4" isShow="1"
+                  scope="pro-surveymenu2-op"/>
+        </menu>
+
+
     </menu>
 
 

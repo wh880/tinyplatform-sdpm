@@ -48,6 +48,7 @@
 
                 <class-path path="E:\git\sdpm\sdpm-org\view\src\main\resources"/>
                 <class-path path="F:\sdpm\sdpm-org\view\src\main\resources"/>
+                 <class-path path="D:\webspaces\sdpm\sdpm-org\view\src\main\resources"/>
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>
