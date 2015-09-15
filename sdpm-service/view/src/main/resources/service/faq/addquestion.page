@@ -16,9 +16,9 @@
             #@sdpmItem("产品名称")
                 #@tinySelect("lang" "ch" {"class":"input-text select2","rel":"22"})
                     #@tinyOptionItem("ch")请选择#end
-                    #@tinyOptionItem("zh")分类1#end
-                    #@tinyOptionItem("en")分类2#end
-                    #@tinyOptionItem("ta")分类3#end
+                    #@tinyOptionItem("zh")支付宝#end
+                    #@tinyOptionItem("en")余额宝#end
+                    #@tinyOptionItem("ta")财付通#end
                 #end
             #end
         #end
@@ -27,6 +27,21 @@
             #@sdpmItem("问题")
                 #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":
                     "问题不能为空！","id":"username","class":"input-text"})
+            #end
+        #end
+
+        #@elementItem()
+            #@sdpmItem("问题类型")
+                #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="CT">第一类问题</option>
+                    <option value="DE">第二类问题</option>
+                    <option value="FL">第三类问题</option>
+                    #end
+                    #@Tselect2Fix()<a href="#" class="r ">增加</a>
+                    <a href="#">全部</a>#end
+
+                #end
             #end
         #end
 
