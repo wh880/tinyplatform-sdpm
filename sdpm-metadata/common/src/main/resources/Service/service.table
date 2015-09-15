@@ -20,18 +20,9 @@
   </table>
   <table id="575a6e070e1a4e3691eef395f8c5a133" name="faq" title="问答表" package-name="org.tinygroup.alm.service">
     <table-field standard-field-id="b237b780903149a5b941906cee7ad32c" primary="true" unique="true" not-null="false" id="faq_id" auto-increase="false"/>
-    <table-field standard-field-id="1a6c34e1cad04f38a0cde598b6ebe22f" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
     <table-field standard-field-id="123cfdd2e43b4822b26ccb665e6b0a31" primary="false" unique="false" not-null="false" id="faq_type" auto-increase="false"/>
     <table-field standard-field-id="8b15df3898f846139cb18ac32494ff2c" primary="false" unique="false" not-null="false" id="faq_question" auto-increase="false"/>
     <table-field standard-field-id="f55849f27a0d4f8ea3e5e25e65dc7c38" primary="false" unique="false" not-null="false" id="faq_answer" auto-increase="false"/>
-    <table-field standard-field-id="46a5d6ebb2384d06a56ad808d95a9941" primary="false" unique="false" not-null="false" id="" auto-increase="false"/>
-    <table-field standard-field-id="6ac8953db3b9485fa999a337eb38884c" primary="false" unique="false" not-null="false" id="faq_keywords" auto-increase="false"/>
-    <table-field standard-field-id="618fb648de2e4967af1cfe0e38ee1080" primary="false" unique="false" not-null="false" id="faq_source" auto-increase="false"/>
-    <table-field standard-field-id="865b01cda4a3418291fae73da1033c83" primary="false" unique="false" not-null="false" id="faq_source_id" auto-increase="false"/>
-    <table-field standard-field-id="6171afc19fb141789e00ea6496d9a315" primary="false" unique="false" not-null="false" id="faq_created_by" auto-increase="false"/>
-    <table-field standard-field-id="b35d189236be4548b694dc5f422e87b0" primary="false" unique="false" not-null="false" id="faq_create_date" auto-increase="false"/>
-    <table-field standard-field-id="6e57184592d541dd89018be9b92201a6" primary="false" unique="false" not-null="false" id="faq_replied_by" auto-increase="false"/>
-    <table-field standard-field-id="b30a14aecb4e4235a27eb5f9f676df7f" primary="false" unique="false" not-null="false" id="faq_reply_date" auto-increase="false"/>
     <table-field standard-field-id="49ec26b28400415f8832cedf503aeaa9" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
   </table>
   <table id="77c664a151334381a0accaf66e13f8dc" name="clientUser" title="客户联系人表" package-name="org.tinygroup.alm.service">
@@ -116,7 +107,6 @@
   </table>
   <table id="9398bc0d1e584881a5b8fbd9f8b6e60e" name="sla" title="服务级别协议表" package-name="org.tinygroup.alm.service">
     <table-field standard-field-id="f201054bde4c4d7e83bda49cc76f24a0" primary="true" unique="true" not-null="true" id="sla_id" auto-increase="false"/>
-    <table-field standard-field-id="1a6c34e1cad04f38a0cde598b6ebe22f" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
     <table-field standard-field-id="4e3b803e6e8a4b918207fc9916c70a38" primary="false" unique="false" not-null="true" id="service_level" auto-increase="false"/>
     <table-field standard-field-id="403263c8770744b4ab1a8c9b8ca735fc" primary="false" unique="false" not-null="true" id="service_deadline" auto-increase="false"/>
     <table-field standard-field-id="1786285066dd4f408bbae01233a96b53" primary="false" unique="false" not-null="true" id="client_id" auto-increase="false"/>
@@ -139,5 +129,9 @@
     <table-field standard-field-id="91cf15193a6f4a49af40cf4768d25d53" primary="false" unique="false" not-null="false" id="sla_open_count" auto-increase="false"/>
     <table-field standard-field-id="49ec26b28400415f8832cedf503aeaa9" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
     <table-field standard-field-id="4a0f195409da4cb681d4e4891c4b02f6" primary="false" unique="false" not-null="true" id="cilent_product_vision" auto-increase="false"/>
+  </table>
+  <table id="2bc7ecbfb7dd4a729b65c4c9dd54c1e9" name="faqtype" title="faq分类" package-name="org.tinygroup.alm.service">
+    <table-field standard-field-id="c83a241663e541c6b5cbea631a848388" primary="true" unique="true" not-null="true" id="faq_type_id" auto-increase="false"/>
+    <table-field standard-field-id="123cfdd2e43b4822b26ccb665e6b0a31" primary="false" unique="true" not-null="true" id="faq_type" auto-increase="false"/>
   </table>
 </tables>
