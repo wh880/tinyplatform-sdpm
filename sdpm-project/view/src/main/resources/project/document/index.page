@@ -15,7 +15,10 @@
 					文档列表
 				</span>
 				<span class="r">
-					<a href="${TINY_CONTEXT_PATH}/project/document/add.page">#buttonIcon(iconClass="icon-plus")创建文档</a>
+##					<a href="${TINY_CONTEXT_PATH}/project/document/add.page">#buttonIcon(iconClass="icon-plus")创建文档</a>
+	#foreach(m:menuManager.getScopeMenus("pro-documentmenu-op"))
+        <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+	#end
 				</span>
 				#div(divClass="clearfix")
 			#end
