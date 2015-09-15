@@ -9,9 +9,18 @@
   <standard-field id="eab32eaec00b49468015f581162f3ee0" name="product_order" title="产品序号" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false"/>
   <standard-field id="308dd01786ae49f69785cf695552ced3" name="product_status" title="产品状态" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
   <standard-field id="c70521518ed842f9bc08fe57d5297bd1" name="product_desc" title="产品描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false"/>
-  <standard-field id="546a69e01f264c9b972ea6981fd3b322" name="product_owner" title="产品经理" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
-  <standard-field id="430b83ede00647648c48abf90330e5cc" name="quality_manager" title="质量经理" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
-  <standard-field id="69e4b036fd0948f3ac379f2525020cb0" name="delivery_manager" title="交付经理" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="546a69e01f264c9b972ea6981fd3b322" name="owner" title="经理" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false">
+    <nick-name name="product_owner" title="产品经理" id="27f6252e423d4560b2ed9337cfa1ff2a"/>
+    <nick-name name="productLine_owner" title="产品线经理" id="490f688faf6447aca072dee1fbe36a55"/>
+  </standard-field>
+  <standard-field id="430b83ede00647648c48abf90330e5cc" name="quality_manager" title="质量经理" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false">
+    <nick-name name="product_quality_manager" title="产品质量经理" id="38839f2f94c64b4db5dced682507d3b4"/>
+    <nick-name name="productLine_quality_manager" title="产品线质量经理" id="97ced3c198934553b015803eeca42397"/>
+  </standard-field>
+  <standard-field id="69e4b036fd0948f3ac379f2525020cb0" name="delivery_manager" title="交付经理" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false">
+    <nick-name name="product_delivery_manager" title="产品交付经理" id="71d56e20803743729e25c98c8cd7d8d1"/>
+    <nick-name name="productLine_delivery_manager" title="产品线交付经理" id="4797e2f35e4d4eebb0a0a88991cbbe91"/>
+  </standard-field>
   <standard-field id="7639fb33a77048fe973bfd0203430c15" name="acl" title="权限模式" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false">
     <description>本部门范围：0-open公开；1-custom自定义（产品/项目团队和白名单可访问）；2-private私有（产品/项目团队成员才可访问）</description>
   </standard-field>
@@ -33,4 +42,59 @@
   <standard-field id="bf293158656146ceb9d5ad2ff8a35d84" name="release_stories" title="已完成需求" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false"/>
   <standard-field id="5bc3d632bf8444de9d1ac8a851ddbdd0" name="release_bugs" title="已解决Bug" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false"/>
   <standard-field id="fa9c452cfb5944288f43e0ca22d78a34" name="release_desc" title="描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false"/>
+	 <standard-field id="ad2df857db7641fd8247d8a24baa69f8" name="productLine_id" title="产品线ID" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false">
+    <description></description>
+  </standard-field>
+  <standard-field id="fcff1578dca64cfc9320e08689eb970d" name="productLine_root" title="产品线根节点" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
+  <standard-field id="c2d02b77d3804d64b41de5c45045e1db" name="productLine_parent" title="产品线父节点" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
+  <standard-field id="c3750e6c13b74e75a173d9c728439dc8" name="productLine_name" title="产品线名称" business-type-id="a30696c1e44441ecad77a832afd3731d" not-null="false"/>
+  <standard-field id="c1035c0e396040b19780a0baf1091d14" name="productLine_code" title="产品线编号" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false"/>
+  <standard-field id="bd69a13b7e85463c9ea1e7a480860c45" name="productLine_spec" title="产品线描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false"/>
+  <standard-field id="743ea2aceba546a4a517f8fc7961c652" name="productLine_status" title="产品线状态" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="b23469decc5745288b84d5c4a82ece21" name="productLine_whiteList" title="产品线白名单" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false"/>
+  <standard-field id="5a4261249df645a5aa5afa7cf79cc9df" name="productLine_createdBy" title="产品线创建者" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="ce868ce3764c40e68e9bd148b492db19" name="productLine_createdDate" title="产品线创建日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="1c7c14de7eb5457a8a6fe6181fc489b4" name="productLine_order" title="产品线序号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
+	<standard-field id="2db31fc4492c400bba36a758c0df2611" name="story_id" title="需求ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false">
+    <description></description>
+  </standard-field>
+  <standard-field id="c9c2efebf9ba4bb597b8e9497d7b3563" name="module_id" title="模块ID" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
+  <standard-field id="8296a6e150d147c1a13a8dae13529ca9" name="story_parentId" title="父需求ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
+  <standard-field id="2b324902ce2f41c9b3c1d9ec7003c6eb" name="story_source" title="需求来源" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="932480be92ac4aef93efa9aeb3c20cf5" name="story_fromBug" title="来源Bug" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
+  <standard-field id="b82777e73fcd488cb571f5d5671558d4" name="story_title" title="需求标题" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false"/>
+  <standard-field id="ff1ca1f501f14817abe7e46cdcd7c4de" name="story_keywords" title="需求关键字" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false"/>
+  <standard-field id="d9063e636acf4e779e74cbf796209228" name="story_type" title="需求类型" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="9400ac991c6c4632a1588734e3f5f9fd" name="story_pri" title="需求优先级" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false"/>
+  <standard-field id="9417806ddee04396b35ac7ad663f70d7" name="story_estimate" title="预计工时" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35" not-null="false"/>
+  <standard-field id="eb01c1b4f1694e288223c34e1689a645" name="story_status" title="需求状态" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false">
+    <description>0-created新建；1-accepted评审通过（接受，并纳入计划）；2-rejected评审不通过（拒绝，属终点状态）；3-canceled取消（无效或重复，属终点状态）；4-postponed待明确（需要重新评审），5-changed已变更（需要重新评审）；6-developing开发中（关联到项目）7-finished完成（通过测试验收，可发布），8-released已发布（创建了产品发布），9-closed关闭（终点状态）</description>
+  </standard-field>
+  <standard-field id="6d17adeabaca49e3bf5aaab54033f40a" name="story_stage" title="所处阶段" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false">
+    <description></description>
+  </standard-field>
+  <standard-field id="f58f7c94e1474f63a68abb1e0d3e1166" name="story_mailto" title="邮件列表" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false"/>
+  <standard-field id="19e2461d8b6f4896aa8b9e683a54b1bb" name="story_openedBy" title="由谁创建" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="a7c842e163fe4775819ff39f3158ff61" name="story_openedDate" title="创建日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="1350722f8d6e4fa49deeafcdf2cb4f03" name="story_assignedTo" title="需求指派" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="6c5b45393ed74bbcac6e93fe2222cd07" name="story_assignedDate" title="需求指派日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="cdd6e68898114847a1e8ed07c5ffa15b" name="story_lastEditedBy" title="需求上次编辑者" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="30b66130305b43e686b4c8ea61d9830f" name="story_lastEditedDate" title="需求上次编辑日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="0b92178654624538a181d40993ed25f2" name="story_reviewedBy" title="需求审核人" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="0d9c365e20af42e990bf826b8936d0fc" name="story_reviewedDate" title="需求审核日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="483157638d7b4debba3bb0bec922a422" name="story_closedBy" title="需求关闭者" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="52df67f6d8a7421ca72f92fcb10f54c2" name="story_closedDate" title="需求关闭日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="7e0fe0a11ddd4c83a552888e8c237df5" name="story_closedReason" title="需求关闭原因" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="91b0fcc3f4ec4832973ecf8c81d343df" name="story_toBug" title="关联bug" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
+  <standard-field id="416eed1e560e4931b980bc0569f35669" name="story_childStories" title="细分需求" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" not-null="false"/>
+  <standard-field id="a78a83818ec4495e9196cca5c87fe180" name="story_linkStories" title="关联需求" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false"/>
+  <standard-field id="6c0b15cffa8c40f587969376f8b2194b" name="story_duplicateStory" title="重复需求ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
+  <standard-field id="d530b2f878d94725b0de97aa83fe6012" name="story_version" title="需求版本" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
+  <standard-field id="70e17a8d372a492b9452bbc0ea5e145d" name="bug_id" title="缺陷ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
+  <standard-field id="ac9a59e6d71c4226aecea31d14eb4b30" name="request_id" title="客户请求ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
+  <standard-field id="53806a8e2b9943d8bfbbb0853c893b6b" name="storySpec_id" title="需求描述ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
+  <standard-field id="196dbdfea33c43649227901605968e7c" name="story_verification" title="验证标准" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false"/>
+  <standard-field id="ba346a40ad5f492ca7cff6c724600df9" name="story_spec" title="需求描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false"/>
+	
+	
 </standard-fields>
