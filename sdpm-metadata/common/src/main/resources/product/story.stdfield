@@ -4,7 +4,7 @@
   </standard-field>
   <standard-field id="c9c2efebf9ba4bb597b8e9497d7b3563" name="module_id" title="模块ID" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
   <standard-field id="8296a6e150d147c1a13a8dae13529ca9" name="story_parentId" title="父需求ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
-  <standard-field id="2b324902ce2f41c9b3c1d9ec7003c6eb" name="story_source" title="story_source" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="2b324902ce2f41c9b3c1d9ec7003c6eb" name="story_source" title="需求来源" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
   <standard-field id="932480be92ac4aef93efa9aeb3c20cf5" name="story_fromBug" title="来源Bug" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
   <standard-field id="b82777e73fcd488cb571f5d5671558d4" name="story_title" title="需求标题" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false"/>
   <standard-field id="ff1ca1f501f14817abe7e46cdcd7c4de" name="story_keywords" title="需求关键字" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false"/>
