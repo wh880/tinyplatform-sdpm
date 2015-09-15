@@ -2,7 +2,6 @@
   <standard-field id="182debb0d4a84d3ab984cfeb8f1fc960" name="request_open_count" title="请求打开次数" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false">
     <description></description>
   </standard-field>
-  <standard-field id="46a5d6ebb2384d06a56ad808d95a9941" name="product_id" title="产品ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
   <standard-field id="28e931db680247e9b52382df7908cf8c" name="service_ts_onsite_limit" title="现场服务次数上限" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false"/>
   <standard-field id="74c6cb9c070841968e68c5281621cec6" name="review_result" title="回访结果" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false"/>
   <standard-field id="618fb648de2e4967af1cfe0e38ee1080" name="faq_source" title="FAQ来源" business-type-id="286a6bca92b34779bcb6fc8809f0a666" not-null="false"/>
@@ -100,6 +99,6 @@
   <standard-field id="6118120deb974eb2b62b9b3c6da7d3fb" name="module_id" title="模块ID" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
   <standard-field id="a2bef96d21dd47da9bea8bb643538918" name="reply_id" title="回复ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
   <standard-field id="15fc541bcc7b4eb9a9d0d72e20fdb412" name="service_reply_time_limit" title="服务响应时限" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false"/>
-  <standard-field id="2cca0dec07cc49859fceac7289b6d0df" name="client_phone" title="客户联系电话" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
-  <standard-field id="894fa21c9ca24afd875dbdfa514da29d" name="client_user" title="客户联系人" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="2cca0dec07cc49859fceac7289b6d0df" name="user_phone" title="客户联系电话" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="398e31c8923d47868aa9e180fa975d11" name="user_post" title="联系人职务" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
 </standard-fields>
