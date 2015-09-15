@@ -23,33 +23,40 @@
 					ID
 				</span>
             <span class="r">
-				<a title="指派" href="${TINY_CONTEXT_PATH}/project/task/call.page">#buttonIcon(iconClass=
-                    "icon-hand-right")指派</a>
-		        <a title="开始" href="${TINY_CONTEXT_PATH}/project/task/start.page">#buttonIcon(iconClass="icon-play")
-                    开始</a>
-		        <a title="日志" href="${TINY_CONTEXT_PATH}/project/task/note.page">#buttonIcon(iconClass="icon-time")
-                    工时</a>
-		        <a title="完成" href="${TINY_CONTEXT_PATH}/project/task/finish.page">#buttonIcon(iconClass="icon-ok-sign")
-                    完成</a>
-		        <a title="关闭" href="${TINY_CONTEXT_PATH}/project/task/close.page">#buttonIcon(iconClass="icon-off")
-                    取消</a>
-		        <a title="编辑" href="${TINY_CONTEXT_PATH}/project/task/edit.page">#buttonIcon(iconClass=
-                    "icon-pencil")</a>
-                <a title="备注" href="${TINY_CONTEXT_PATH}/project/task/IDLinkremark.page">#buttonIcon(iconClass="icon-book")</a>
-		        <a title="复制" href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-copy")</a>
-                #@iconOperations(
-                    "#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet"
-                    "ml-5")&nbsp#end
-                #@dialog("deleteModal")
-                    #@dialogHeader()对话框标题#end
-                    #@dialogBody()<p>对话框内容…</p>#end
-                    #@dialogFooter()
-                        #@buttonEnsure()确定#end
-                        #@buttonCancel()关闭#end
+                 #foreach(m:menuManager.getScopeMenus("pro-taskInfo-op"))
+                     <a href="${TINY_CONTEXT_PATH}${m.href}"
+                        title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                 #end
+            ##				<a title="指派" href="${TINY_CONTEXT_PATH}/project/task/call.page">#buttonIcon(iconClass=
+            ##                    "icon-hand-right")指派</a>
+            ##		        <a title="开始" href="${TINY_CONTEXT_PATH}/project/task/start.page">#buttonIcon(iconClass="icon-play")
+            ##                    开始</a>
+            ##		        <a title="日志" href="${TINY_CONTEXT_PATH}/project/task/note.page">#buttonIcon(iconClass="icon-time")
+            ##                    工时</a>
+            ##		        <a title="完成" href="${TINY_CONTEXT_PATH}/project/task/finish.page">#buttonIcon(iconClass="icon-ok-sign")
+            ##                    完成</a>
+            ##		        <a title="关闭" href="${TINY_CONTEXT_PATH}/project/task/close.page">#buttonIcon(iconClass="icon-off")
+            ##                    取消</a>
+            ##		        <a title="编辑" href="${TINY_CONTEXT_PATH}/project/task/edit.page">#buttonIcon(iconClass=
+            ##                    "icon-pencil")</a>
+            ##                <a title="备注" href="${TINY_CONTEXT_PATH}/project/task/IDLinkremark.page">#buttonIcon(iconClass="icon-book")</a>
+            ##		        <a title="复制" href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-copy")</a>
+                #set(m1=menuManager.getMenu("pro-Info-close"))
+                #if(m1)
+                    #@iconOperations(
+                        "#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet"
+                        "ml-5")&nbsp#end
+                    #@dialog("deleteModal")
+                        #@dialogHeader()对话框标题#end
+                        #@dialogBody()<p>对话框内容…</p>#end
+                        #@dialogFooter()
+                            #@buttonEnsure()确定#end
+                            #@buttonCancel()关闭#end
+                        #end
                     #end
                 #end
-                <a href="${TINY_CONTEXT_PATH}/project/task/index.page" class="margin-left"
-                   title="返回">#buttonIcon(iconClass="icon-reply")</a>
+            ##                <a href="${TINY_CONTEXT_PATH}/project/task/index.page" class="margin-left"
+            ##                   title="返回">#buttonIcon(iconClass="icon-reply")</a>
 				</span>
                 #div(divClass="clearfix")
             #end
@@ -83,35 +90,45 @@
             #include("/project/recordlist.page")
         #end
         <center>
-            <a title="指派" href="${TINY_CONTEXT_PATH}/project/task/call.page">#buttonIcon(iconClass="icon-hand-right")
-                指派</a>
-            <a title="开始" href="${TINY_CONTEXT_PATH}/project/task/start.page">#buttonIcon(iconClass="icon-play")开始</a>
-            <a title="日志" href="${TINY_CONTEXT_PATH}/project/task/note.page">#buttonIcon(iconClass="icon-time")工时</a>
-            <a title="完成" href="${TINY_CONTEXT_PATH}/project/task/finish.page">#buttonIcon(iconClass="icon-ok-sign")
-                完成</a>
-            <a title="关闭" href="${TINY_CONTEXT_PATH}/project/task/close.page">#buttonIcon(iconClass="icon-off")取消</a>
-            <a title="编辑" href="${TINY_CONTEXT_PATH}/project/task/edit.page">#buttonIcon(iconClass="icon-pencil")</a>
-            <a title="备注" href="${TINY_CONTEXT_PATH}/project/task/IDLinkremark.page">#buttonIcon(iconClass="icon-book")</a>
-            <a title="复制" href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-copy")</a>
-            #@iconOperations(
-                "#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
-                &nbsp#end
-            #@dialog("deleteModal")
-                #@dialogHeader()对话框标题#end
-                #@dialogBody()<p>对话框内容…</p>#end
-                #@dialogFooter()
-                    #@buttonEnsure()确定#end
-                    #@buttonCancel()关闭#end
+            #foreach(m:menuManager.getScopeMenus("pro-taskInfo-op"))
+                <a href="${TINY_CONTEXT_PATH}${m.href}"
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+            #end
+        ##				<a title="指派" href="${TINY_CONTEXT_PATH}/project/task/call.page">#buttonIcon(iconClass=
+        ##                    "icon-hand-right")指派</a>
+        ##		        <a title="开始" href="${TINY_CONTEXT_PATH}/project/task/start.page">#buttonIcon(iconClass="icon-play")
+        ##                    开始</a>
+        ##		        <a title="日志" href="${TINY_CONTEXT_PATH}/project/task/note.page">#buttonIcon(iconClass="icon-time")
+        ##                    工时</a>
+        ##		        <a title="完成" href="${TINY_CONTEXT_PATH}/project/task/finish.page">#buttonIcon(iconClass="icon-ok-sign")
+        ##                    完成</a>
+        ##		        <a title="关闭" href="${TINY_CONTEXT_PATH}/project/task/close.page">#buttonIcon(iconClass="icon-off")
+        ##                    取消</a>
+        ##		        <a title="编辑" href="${TINY_CONTEXT_PATH}/project/task/edit.page">#buttonIcon(iconClass=
+        ##                    "icon-pencil")</a>
+        ##                <a title="备注" href="${TINY_CONTEXT_PATH}/project/task/IDLinkremark.page">#buttonIcon(iconClass="icon-book")</a>
+        ##		        <a title="复制" href="${TINY_CONTEXT_PATH}/project/task/add.page">#buttonIcon(iconClass="icon-copy")</a>
+            #set(m1=menuManager.getMenu("pro-Info-close"))
+            #if(m1)
+                #@iconOperations(
+                    "#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet"
+                    "ml-5")&nbsp#end
+                #@dialog("deleteModal")
+                    #@dialogHeader()对话框标题#end
+                    #@dialogBody()<p>对话框内容…</p>#end
+                    #@dialogFooter()
+                        #@buttonEnsure()确定#end
+                        #@buttonCancel()关闭#end
+                    #end
                 #end
             #end
-            <a href="${TINY_CONTEXT_PATH}/project/task/index.page" class="margin-left" title="返回">#buttonIcon(iconClass=
-                "icon-reply")</a>
         </center>
         #@div(divClass="infoContent")
             <p class="titleName">备注</p>
+
             <div>
                 #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
-            </div>
+        </div>
         #end
 
     </div>
