@@ -6,6 +6,16 @@
 
 #!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 
+<script>
+	$(document).ready(function(){
+		
+		$("#story_reviewed").on("click",function(){
+			this.checked
+		});
+	
+	});	
+</script>
+
 
 #@tinyForm("thisform" "" "" {"class":"test"})
 <div style="width:70%;float:left" class="pageleftpart">
@@ -27,8 +37,14 @@
                 
                   #*  #@Tselect2Fix()<a href="http://www.baidu.com" class="r "></a><a href="#"></a>#end*#
                 #end
+                
 
             #end
+            #@checkboxBox()
+	            #input(inputId="story_reviewed" inputName="story_reviewed" inputType="checkbox")
+	            #@label(labelFor="checkbox-6")摄影#end
+	          #end
+             
         #end
     
         #@elementItem()
