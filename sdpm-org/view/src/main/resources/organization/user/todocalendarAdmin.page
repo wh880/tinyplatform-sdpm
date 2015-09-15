@@ -38,8 +38,10 @@
                 #foreach(m:menuManager.getScopeMenus("org-user-detail"))
                     #if(m.id=="org-user-gtask")
                         <a href="${TINY_CONTEXT_PATH}${m.href}" class="active_btn">${m.name}</a>
+
+                    #else
+                        <a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a>
                     #end
-                    <a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a>
                 #end
             ##					<a href="${TINY_CONTEXT_PATH}/organization/user/todo.page" class="active_btn">待办</a>
             ##					<a href="${TINY_CONTEXT_PATH}/organization/user/storyAdmin.page">需求</a>
