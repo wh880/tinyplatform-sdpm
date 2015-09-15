@@ -29,7 +29,7 @@
   <standard-field id="09a6fd6e09ef40e0b3b387aebe3ab8e7" name="doc_content" title="文档正文" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false">
     <description>文档正文</description>
   </standard-field>
-  <standard-field id="cc191e36888f4414938be77d84babd0e" name="doc_url" title="DOC_URL" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false">
+  <standard-field id="cc191e36888f4414938be77d84babd0e" name="doc_url" title="文档url" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false">
     <description>文档url</description>
   </standard-field>
   <standard-field id="b2dad0bf75e34c4abed7b3d9b1af4896" name="doc_views" title="DOC查阅次数" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false">

@@ -33,6 +33,7 @@
     <table-field standard-field-id="4240a1ee3cc04b6f9621e95ed93b8b22" primary="false" unique="false" not-null="false" id="doc_deleted" auto-increase="false"/>
   </table>
   <table id="56f136998f6c43208337c635b20390b2" name="docLib" title="文档库表" package-name="org.tinygroup.alm.document">
+    <description>文档相关的</description>
     <table-field standard-field-id="509aa7b0d6ee413ab1f3b4ad99e28843" primary="true" unique="false" not-null="false" id="doc_libid" auto-increase="false"/>
     <table-field standard-field-id="95b70aee2d1e4c9dbf04e6688ffb9bee" primary="false" unique="false" not-null="false" id="doc_libname" auto-increase="false"/>
     <table-field standard-field-id="2655a73603e54dd98679d4163bd0851f" primary="false" unique="false" not-null="false" id="doc_lib_deleted" auto-increase="false"/>
