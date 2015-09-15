@@ -12,11 +12,13 @@
                 #@div(divClass="infoContent")
                 <p class="titleName"><a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">支付宝</a></p>
                     #@gridSysRow()
-                        #@gridSysCol(4)产品ID#end
+                        #@gridSysCol(4)协议名称#end
+                        #@gridSysCol(8)<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent.page">支付宝协议</a>#end
+                        #@gridSysCol(4)协议ID#end
                         #@gridSysCol(8)001#end
-                        #@gridSysCol(4)产品版本#end
-                        #@gridSysCol(8)2.0.1#end
-                        #@gridSysCol(4)发布时间#end
+                        #@gridSysCol(4)客户登记人#end
+                        #@gridSysCol(8)明明#end
+                        #@gridSysCol(4)购买时间#end
                         #@gridSysCol(8)2015.09.07#end
                     #end
                 <div style="text-align:right;margin:right">
