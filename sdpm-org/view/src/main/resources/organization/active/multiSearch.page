@@ -172,7 +172,7 @@
                             <option value="o2o">o2o系统</option>
                         #end
                     ##填写任意内容，侦听需重新填加 A侦听已内置
-                        #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+                    ###@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
                     #end
                 </div>
             </td>
