@@ -17,7 +17,9 @@
             	         	
             </span>
             <span class="r">
-            	<a href="${TINY_CONTEXT_PATH}/document/add-doc.page">#buttonIcon(iconClass="icon-plus")创建文档</a>
+            #foreach(addm:menuManager.getScopeMenus("add-doc"))
+            	<a href="${TINY_CONTEXT_PATH}${addm.href}">#buttonIcon(iconClass=addm.icon)$!{addm.name}</a>
+            #end
             </span>
             #include("mulsearch.page") 
             #end          
