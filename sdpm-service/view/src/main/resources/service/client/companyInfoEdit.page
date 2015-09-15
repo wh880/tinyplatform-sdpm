@@ -13,18 +13,18 @@
             #end
             #@validateDiv("col-2")#end
         #end
-        #@gridSysRow()
-            #@colLabel("col-3")公司联系人：#end
-            #@gridSysCol(5)
-                #tinyInput("text" "公司联系人" ""{"datatype":"","id":"版本","class":"input-text"})
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-3")联系人电话：#end
-            #@gridSysCol(5)
-                #tinyInput("text" "联系人电话" ""{"datatype":"","id":"公司编号","class":"input-text"})
-            #end
-        #end
+    ##        #@gridSysRow()
+    ##            #@colLabel("col-3")公司联系人：#end
+    ##            #@gridSysCol(5)
+    ##                #tinyInput("text" "公司联系人" ""{"datatype":"","id":"版本","class":"input-text"})
+    ##            #end
+    ##        #end
+    ##        #@gridSysRow()
+    ##            #@colLabel("col-3")联系人电话：#end
+    ##            #@gridSysCol(5)
+    ##                #tinyInput("text" "联系人电话" ""{"datatype":"","id":"公司编号","class":"input-text"})
+    ##            #end
+    ##        #end
         #@gridSysRow()
             #@colLabel("col-3")公司传真：#end
             #@gridSysCol(5)
