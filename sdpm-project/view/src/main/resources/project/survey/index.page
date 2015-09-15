@@ -6,88 +6,111 @@
 
 #set(name="survey")
 #@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-			#@div(divClass="dropdownBox")
-				#include("/project/dropdownMenu.page")
-			#end
-			#@tabHead()
-				#include("/project/protab.page")
-			#end
-			#@tabBodyCol("ptop-5")
-			#@div(divClass="operationbar")
-				<span class="f">
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span class="f">
 					项目名称
 				</span>
-				<span class="r">
-				#@aModal("#myModal" "项目名称>延期" "750" "400" "" "/project/survey/delay.pagelet")#buttonIcon(iconClass="icon-calendar")延期#end
-					#@dialog("myModal")
-						#@dialogHeader()#end
-						#@dialogBody()
-						<p></p>
-						#end
-						#@dialogFooter()
-							#@buttonEnsure()确定#end
-	   				   	 	#@buttonCancel()关闭#end
-  						#end
-					#end
-				#@aModal("#myModa2" "项目名称>挂起" "750" "250" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass="icon-pause")挂起#end
-					#@dialog("myModa2")
-						#@dialogHeader()#end
-						#@dialogBody()
-						<p></p>
-    					#end
-						#@dialogFooter()
-							#@buttonEnsure()确定#end
-							#@buttonCancel()关闭#end
-						#end
-					#end
-					#@aModal("#myModa3" "项目名称>结束" "750" "250" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass="icon-off")结束#end
-					#@dialog("myModa3")
-						#@dialogHeader()#end
-						#@dialogBody()
-							<p></p>
-    					#end
-						#@dialogFooter()
-							#@buttonEnsure()确定#end
-	   				   	 	#@buttonCancel()关闭#end
-  						#end
-					#end
-				<a href="${TINY_CONTEXT_PATH}/project/survey/edit.page" title="编辑项目" class="b ">#buttonIcon(iconClass="icon-pencil")</a>
-#*				<a href="#" title="删除项目">#buttonIcon(iconClass="icon-remove")</a>*#
-				#@aModal("#myModa4" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
-					#@dialog("myModa4")
-						#@dialogHeader()#end
-						#@dialogBody()
-								<h4>确定删除吗?</h4>
-    					#end
-						#@dialogFooter()
-							#@buttonEnsure()确定#end
-	   				   	 	#@buttonCancel()关闭#end
-  						#end
-					#end
-				<a href="${TINY_CONTEXT_PATH}/project/dynamic/index.page" title="返回">#buttonIcon(iconClass="icon-level-up")</a>
+            <span class="r">
+				#set(m1=menuManager.getMenu("pro-survey-delay"))
+                #if(m1)
+                    #@aModal("#myModal" "项目名称>延期" "750" "400" "" "/project/survey/delay.pagelet")#buttonIcon(iconClass=
+                        "icon-calendar")延期#end
+                    #@dialog("myModal")
+                        #@dialogHeader()#end
+                        #@dialogBody()
+                            <p></p>
+                        #end
+                        #@dialogFooter()
+                            #@buttonEnsure()确定#end
+                            #@buttonCancel()关闭#end
+                        #end
+                    #end
+                #end
+                #set(m2=menuManager.getMenu("pro-survey-hangon"))
+                #if(m2)
+                    #@aModal(
+                        "#myModa2" "项目名称>挂起" "750" "250" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass=
+                        "icon-pause")挂起#end
+                    #@dialog("myModa2")
+                        #@dialogHeader()#end
+                        #@dialogBody()
+                            <p></p>
+                        #end
+                        #@dialogFooter()
+                            #@buttonEnsure()确定#end
+                            #@buttonCancel()关闭#end
+                        #end
+                    #end
+                #end
+                #set(m3=menuManager.getMenu("pro-survey-finish"))
+                #if(m3)
+                    #@aModal(
+                        "#myModa3" "项目名称>结束" "750" "250" "" "/project/survey/hang-up.pagelet")#buttonIcon(iconClass=
+                        "icon-off")结束#end
+                    #@dialog("myModa3")
+                        #@dialogHeader()#end
+                        #@dialogBody()
+                            <p></p>
+                        #end
+                        #@dialogFooter()
+                            #@buttonEnsure()确定#end
+                            #@buttonCancel()关闭#end
+                        #end
+                    #end
+                #end
+##                <a href="${TINY_CONTEXT_PATH}/project/survey/edit.page" title="编辑项目" class="b ">#buttonIcon(iconClass=
+##                    "icon-pencil")</a>
+                #foreach(m:menuManager.getScopeMenus("pro-surveymenu2-op"))
+                    <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #*				<a href="#" title="删除项目">#buttonIcon(iconClass="icon-remove")</a>*#
+                #set(m4=menuManager.getMenu("pro-survey-remove"))
+                #if(m4)
+                #@aModal("#myModa4" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
+                #@dialog("myModa4")
+                    #@dialogHeader()#end
+                    #@dialogBody()
+                        <h4>确定删除吗?</h4>
+                    #end
+                    #@dialogFooter()
+                        #@buttonEnsure()确定#end
+                        #@buttonCancel()关闭#end
+                    #end
+                #end
+                    #end
+##                <a href="${TINY_CONTEXT_PATH}/project/dynamic/index.page" title="返回">#buttonIcon(iconClass=
+##                    "icon-level-up")</a>
 				</span>
-				#div(divClass="clearfix")
-			 #end
-#end
+                #div(divClass="clearfix")
+            #end
+        #end
 
-<div style="width:65%;float:left">
-		#@div(divClass="infoContent")
-	        <p class="titleName">项目描述</p>
-	       	<div>
-	       		456789
-	       	</div>
-		#end
-		#@div(divClass="infoContent")
-	        <p class="titleName">历史记录</p>
-	        ##加入后，js代码会导致页面排版混乱
-	       	#include("/project/recordlist.page")
-		#end
-</div>
-	<div style="width:35%;float:right">
-		#TypeInfo("project")
-	</div>
-	#end
+    <div style="width:65%;float:left">
+        #@div(divClass="infoContent")
+            <p class="titleName">项目描述</p>
+
+            <div>
+                456789
+            </div>
+        #end
+        #@div(divClass="infoContent")
+            <p class="titleName">历史记录</p>
+        ##加入后，js代码会导致页面排版混乱
+            #include("/project/recordlist.page")
+        #end
+    </div>
+    <div style="width:35%;float:right">
+        #TypeInfo("project")
+    </div>
+    #end
 #end
 
 

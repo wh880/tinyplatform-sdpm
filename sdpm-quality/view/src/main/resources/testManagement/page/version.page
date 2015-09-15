@@ -18,8 +18,13 @@
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page">已测试版本</a>
 					</span>
 				<span class="r">
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-plus")提交测试</a>&nbsp;
-					</span>
+					#foreach(m:menuManager.getScopeMenus("testversion-tab"))
+						#if(m.id=="tversionpro")
+							<a href="${TINY_CONTEXT_PATH}${m.href}">
+												#buttonIcon(iconClass=m.icon)${m.name}</a>
+						#end
+					#end
+				</span>
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
@@ -38,10 +43,18 @@
 							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
 							<ul class="dropdown-menu multi-level" role="menu">
 								<li>
-									<a href="javascript:void(0);">删除</a>
+								#foreach(m:menuManager.getScopeMenus("testversion-op"))
+									#if(m.id=="tversiondelete")
+										<a href="javascript:void(0);">删除</a>
+									#end
+								#end
 								</li>
 								<li>
+								#foreach(m:menuManager.getScopeMenus("testversion-op"))
+									#if(m.id=="teditionversion")
 									<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page">修改</a>
+									#end
+								#end
 								</li>																
 							</ul>
 						</div>

@@ -1,6 +1,7 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
+#import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 <style>
     .select_boxes{margin-top:0}
@@ -28,8 +29,8 @@
 		<span class="f">
 			Bug名称</span>
 		<span class="r">
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/addLog.page">
-				#buttonIcon(iconClass="icon-time")日志</a>&nbsp&nbsp;
+			#@aModal("#myModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
+				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/makesure.page">
 				#buttonIcon(iconClass="icon-search")确认</a>&nbsp&nbsp;	
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/assign.page">
@@ -41,13 +42,13 @@
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">
 				#buttonIcon(iconClass="icon-sitemap")建用例</a>&nbsp;&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/edition.page" title="编辑">
-				#buttonIcon(iconClass="icon-edit")</a>&nbsp;&nbsp;
+				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
 			<a  title="备注" onclick="toggle()">
 				#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page" title="复制">
 				#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
-			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
-
+			#@delItemsdpm("/sdpm-web/testManagement/page/Bug.page" 3 "/sdpm-web/testManagement/page/Bug.page")
+					#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp					
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page" title="回上一个Bug">
@@ -72,8 +73,8 @@
             #include("/testManagement/page/historyRecord.page")
         #end
         <center>
-        <a href="${TINY_CONTEXT_PATH}/testManagement/page/addLog.page">
-				#buttonIcon(iconClass="icon-time")日志</a>&nbsp&nbsp;
+       		#@aModal("#myModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
+				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/makesure.page">
 				#buttonIcon(iconClass="icon-search")确认</a>&nbsp&nbsp;	
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/assign.page">
@@ -85,13 +86,13 @@
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">
 				#buttonIcon(iconClass="icon-sitemap")建用例</a>&nbsp;&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/edition.page" title="编辑">
-				#buttonIcon(iconClass="icon-edit")</a>&nbsp;&nbsp;
+				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
 			<a  title="备注" onclick="toggle()">
 				#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page" title="复制">
 				#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
-			#iconOperations("#myModal" "icon-remove" "删除" "200" "50" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp;&nbsp;
-
+			#@delItemsdpm("/sdpm-web/testManagement/page/Bug.page" 3 "/sdpm-web/testManagement/page/Bug.page")
+					#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page" title="回上一个Bug">
@@ -125,9 +126,7 @@
 				#@dialog("myModal")
 					#@dialogHeader()对话框标题#end
 					#@dialogBody()<p>对话框内容…</p>#end
-					#@dialogFooter()
-						#@buttonEnsure()确定#end
-						#@buttonCancel()关闭#end
+					#@dialogFooter()						
 					#end
 				#end
 <script type="text/javascript">
