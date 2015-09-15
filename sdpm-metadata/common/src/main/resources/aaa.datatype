@@ -74,4 +74,8 @@
       <dialect-type language="mysql" base-type="SMALLINT"/>
     </dialect-type-list>
   </standard-type>
+  <standard-type id="0c8ff0176500456d990dcbc8323d6a85" name="BOOL" title="BOOL" data-type="16">
+    <placeholder-list/>
+    <dialect-type-list/>
+  </standard-type>
 </standard-types>
