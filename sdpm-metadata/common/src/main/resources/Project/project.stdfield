@@ -2,4 +2,50 @@
   <standard-field id="dca4d75a1c1347d8baeff4f420dc894a" name="project_id" title="项目id" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false">
     <description></description>
   </standard-field>
+  <standard-field id="f7474ba7379f4d9fbd44e6feffa2c70e" name="project_is_cat" title="PROJECT_ISCAT" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" not-null="false"/>
+  <standard-field id="bd3dcef09ad646e19196aea417b47baa" name="project_cat_id" title="PROJECT_" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
+  <standard-field id="e5d28aec72b24c58ac03fc7dfbaff40f" name="project_type" title="项目类型" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" not-null="false">
+    <description>如长期项目，短期项目，运维项目</description>
+  </standard-field>
+  <standard-field id="c4604e5a5f7a49e8906ec39c7c1489e2" name="project_name" title="项目名称PROJECT_NAME" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false">
+    <description></description>
+  </standard-field>
+  <standard-field id="5cafe4cc5fab4097a8c488b96b69b5f6" name="project_code" title="项目代号" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="eb64fc3731a74e6b83fbd21e04d9c2c8" name="project_begin" title="项目开始日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="b60537fc2b034196958ac32b0d598bd5" name="project_end" title="项目结束日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="d3bdb7016bcf4199aa9ba4a6f8c58b8f" name="project_days" title="可用工作日" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
+  <standard-field id="c3f62efdcb7a47abb9d9b9f2571f5e64" name="project_status" title="项目状态" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" not-null="false"/>
+  <standard-field id="0a23fb9850164fa9b731b667c85ec3ec" name="project_statge" title="项目所处阶段" business-type-id="58742167af454018b4bbce2a0aad595e" not-null="false">
+    <description>enum 12345</description>
+  </standard-field>
+  <standard-field id="843cdf91c0f04a4e9ae683a4bd24c8b8" name="project_pri" title="优先级" not-null="false">
+    <description>enmu1234</description>
+  </standard-field>
+  <standard-field id="461b1811ad134b999c75ec8798cc6fae" name="project_desc" title="项目描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false">
+    <description></description>
+  </standard-field>
+  <standard-field id="36792f6411a24677b9a4c71ae93a56c1" name="project_opened_by" title="由谁创建" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="4ab479c04eab40558aefdeeffa72cae7" name="project_opened_date" title="创建日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="bc23d6469923416aa689fa5f28da6a3f" name="project_opened_version" title="项目创建版本" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="47699dc5285e4a5fb0768bbd5457b5d1" name="project_close_by" title="项目由谁关闭" business-type-id="286a6bca92b34779bcb6fc8809f0a666" not-null="false"/>
+  <standard-field id="2c89172a50054d1495789ff49ed9b0e1" name="project_close_date" title="项目删除日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="c1b67b7db4674da8a314bf02239ed35f" name="project_canceled_by" title="项目由谁取消" business-type-id="286a6bca92b34779bcb6fc8809f0a666" not-null="false"/>
+  <standard-field id="24dca11728884b14bd9be06764b46426" name="project_canceled_date" title="项目取消日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="b8f47ec967ba40b8b33e8deb5ec37fc8" name="project_PO" title="产品负责人" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="9cf8e03af53c48378961f3f5a84348ae" name="project_PM" title="项目负责人" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="05e4444c3a0b40e398fff266f48eba84" name="project_QD" title="测试负责人" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="7eff7598a0f14505a4e7a54a8a146a36" name="project_RD" title="项目发布负责人" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="24ab9c69d3f64babbfc9a345d0cac3eb" name="project_team" title="团队成员" business-type-id="a30696c1e44441ecad77a832afd3731d" not-null="false">
+    <description></description>
+  </standard-field>
+  <standard-field id="779f3ff51d8444c88cfb9542ad85060a" name="project_acl" title="访问控制" not-null="false">
+    <description>enum:open,private</description>
+  </standard-field>
+  <standard-field id="f3b59b52574b4f1e8a8e80f9d9f00c05" name="project_white_list" title="分组白名单" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false">
+    <description></description>
+  </standard-field>
+  <standard-field id="9628e745b2594a1b9c93c019b726d138" name="project_order" title="项目排序" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
+  <standard-field id="4d4103ac19d24bb2a710b2a7bb479ab8" name="project_deleted" title="已删除" not-null="false">
+    <description>enum 0,1</description>
+  </standard-field>
 </standard-fields>

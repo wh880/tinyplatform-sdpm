@@ -39,6 +39,5 @@
 	  <language-field id="Byte" name="Byte"></language-field>
 	  <language-field id="BigDecimal" name="BigDecimal"></language-field>
 	  <language-field id="BigInteger" name="BigInteger"></language-field>
-	  <language-field id="Enum" name="Enum"></language-field>
 	</language-type>
 </language-types>

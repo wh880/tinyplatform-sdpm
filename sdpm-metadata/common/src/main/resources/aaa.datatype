@@ -78,4 +78,11 @@
     <placeholder-list/>
     <dialect-type-list/>
   </standard-type>
+  <standard-type id="eb4075d42e4e4cf0baafc1787d89de1d" name="enum" title="ENUM" data-type="12">
+    <placeholder-list/>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="String"/>
+      <dialect-type language="mysql" base-type="ENUM"/>
+    </dialect-type-list>
+  </standard-type>
 </standard-types>
