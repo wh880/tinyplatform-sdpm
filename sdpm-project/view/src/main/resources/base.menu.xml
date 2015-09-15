@@ -16,9 +16,9 @@
               scope="pro-task-op"/>
 
         <menu id="task-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
-            <menu id="pro-task-input" name="" href="" icon="" sort="15" isShow="1"
+            <menu id="pro-task-input" sort="15" isShow="1"
                   scope="pro-taskmenu-op"/>
-            <menu id="pro-task-output" name="" href="" icon="" sort="10" isShow="1"
+            <menu id="pro-task-output"  sort="10" isShow="1"
                   scope="pro-taskmenu-op"/>
         </menu>
 
@@ -60,9 +60,9 @@
                   scope="pro-taskInfo2-op"/>
             <menu id="pro-Info2-copy" name="复制" href="/project/task/add.page" icon="icon-copy" sort="8" isShow="1"
                   scope="pro-taskInfo2-op"/>
-            <menu id="pro-Info2-remove" name="删除" href="" icon="" sort="6" isShow="1"
+            <menu id="pro-Info2-remove"  sort="6" isShow="1"
                   scope="pro-taskInfo2-op"/>
-            <menu id="pro-Info2-return" name="返回" href="/project/task/index.page" icon="margin-left" sort="4" isShow="1"
+            <menu id="pro-Info2-return" name="返回" href="/project/task/index.page" icon="icon-reply" sort="4" isShow="1"
                   scope="pro-taskInfo2-op"/>
         </menu>
 
@@ -79,7 +79,7 @@
               scope="demand-op"/>
 
         <menu id="demand-menu" name="任务菜单" href="/project/demand/index.page" icon="" sort="1" isShow="1">
-            <menu id="pro-demand-report" name="" href="" icon="" sort="8" isShow="1"
+            <menu id="pro-demand-report"  sort="8" isShow="1"
                   scope="pro-demandmenu-op"/>
             <menu id="pro-demand-add" name="新增需求" href="/product/page/tabledemo/product-demand-add.page" icon="icon-plus-sign" sort="6" isShow="1"
                   scope="pro-demandmenu-op"/>
@@ -151,11 +151,11 @@
 
     <menu id="survey" parent-id="project" name="概况" href="/project/survey/index.page" icon="" sort="1" isShow="1">
         <menu id="survey-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
-            <menu id="pro-survey-delay" name="" href="" icon="" sort="15" isShow="1"
+            <menu id="pro-survey-delay"  sort="15" isShow="1"
                   scope="pro-surveymenu-op"/>
-            <menu id="pro-survey-hangon" name="" href="" icon="" sort="10" isShow="1"
+            <menu id="pro-survey-hangon" sort="10" isShow="1"
                   scope="pro-surveymenu-op"/>
-            <menu id="pro-survey-finish" name="" href="" icon="" sort="10" isShow="1"
+            <menu id="pro-survey-finish"  sort="10" isShow="1"
                   scope="pro-surveymenu-op"/>
         </menu>
 
