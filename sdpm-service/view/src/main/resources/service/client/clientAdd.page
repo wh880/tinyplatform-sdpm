@@ -25,20 +25,43 @@
         <p class="titleName">新建客户</p>
 
         #@elementItem()
-            #@sdpmItem("产品名称")
-                #@tinySelect("lang" "ch" {"class":"input-text select2","rel":"22"})
-                    #@tinyOptionItem("ch")请选择#end
-                    #@tinyOptionItem("zh")支付宝#end
-                    #@tinyOptionItem("en")财付通#end
-                    #@tinyOptionItem("ta")余额宝#end
+            #@sdpmItem("协议名称")
+                #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("ch")请选择#end
+                        #@tinyOptionItem("zh")协议一#end
+                        #@tinyOptionItem("en")协议二#end
+                        #@tinyOptionItem("ta")协议三#end
+                    #end
+                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/sla/slaAdd.page" class="r ">增加</a><a
+                            href="${TINY_CONTEXT_PATH}/service/sla/sla.page">全部</a>#end
                 #end
             #end
         #end
+
+
+
+
+
 
         #@elementItem()
             #@sdpmItem("客户名称")
                 #tinyInput(
                     "text" "username" ""{"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":"username",
+                    "class":"input-text"})
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("客户编号")
+                #tinyInput(
+                    "text" "username" ""{"placeholder":"请输入客户编号","datatype":"*","nullmsg":"客户名不能为空！","id":"username",
+                    "class":"input-text"})
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("客户描述")
+                #tinyInput(
+                    "text" "username" ""{"placeholder":"请输入客户描述","datatype":"*","nullmsg":"客户名不能为空！","id":"username",
                     "class":"input-text"})
             #end
         #end

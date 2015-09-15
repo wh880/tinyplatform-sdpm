@@ -197,7 +197,7 @@
 
         #@elementItem()
             #@colLabel()附件：#end
-            #@formControlDiv("col-8")
+            #@formControlDiv("col-10")
                 #include("/product/page/event/fileupload.page")
             #end
             #@validateDiv("col-2")#end

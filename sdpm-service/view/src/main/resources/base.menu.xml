@@ -15,7 +15,25 @@
         <menu id="client-export" name="导出" href="/service/serviceCom/serviceExport.pagelet" icon="icon-download-alt"
               sort="1" isShow="1"
               scope="service-cil-export"/>
+        <menu id="linkman" name="联系人" href="/service/client/clientInfo.page" sort="100" isShow="1">
+            <menu id="linkman-edit"  sort="1" isShow="1"
+                  scope="linkman-cil"/>
+            <menu id="linkman-del" name="删除" href="/service/client/clientUser.page" icon="icon-remove" sort="1" isShow="1"
+                  scope="linkman-cil"/>
+            <menu id="linkman-new"   sort="1" isShow="1"
+                  scope="linkman-cil-batchdel"/>
+        </menu>
     </menu>
+
+
+    <!--<menu id="linkman" name="联系人" href="/service/client/clientInfo.page" sort="100" isShow="1">-->
+        <!--<menu id="linkman-edit"  sort="1" isShow="1"-->
+              <!--scope="linkman-cil"/>-->
+        <!--<menu id="linkman-del" name="删除" href="/service/client/clientUser.page" icon="icon-remove" sort="1" isShow="1"-->
+              <!--scope="linkman-cil"/>-->
+        <!--<menu id="linkman-new"   sort="1" isShow="1"-->
+              <!--scope="linkman-cil-batchdel"/>-->
+    <!--</menu>-->
     <menu id="request" name="需求" href="/service/serviceReq/request.page" sort="100" isShow="1">
         <menu id="request-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="service-req-batchdel"/>
