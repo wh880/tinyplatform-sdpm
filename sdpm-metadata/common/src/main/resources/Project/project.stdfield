@@ -85,4 +85,20 @@
   <standard-field id="c85de241491c4e27ba02dd4fed1059ac" name="task_deleted" title="已删除" not-null="false">
     <description>enum 0,1</description>
   </standard-field>
+  <standard-field id="d375c0a459c0490d840add34075e27f5" name="version_id" title="版本id" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false">
+    <description></description>
+  </standard-field>
+  <standard-field id="c2eff8527271417b8a64e48d1e448562" name="version_product" title="产品" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
+  <standard-field id="bfbdd7d31ee44d52a0e598ec2a5435a2" name="version_project" title="项目" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
+  <standard-field id="27b1f072f029411e930cd4b6fdb804ad" name="version_name" title="名称编号" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false"/>
+  <standard-field id="d95ddb81995949f39760a718372669c2" name="version_scm_path" title="源码地址" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false"/>
+  <standard-field id="8dde271313cf4c318deed6fe090c246a" name="version_file_path" title="下载地址" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false"/>
+  <standard-field id="5ac4c0d6169044008a05dcc8d1610c6b" name="version_date" title="打包日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="b33c838369a34f0ba6b0a2063fc62b59" name="version_stories" title="已解决需求" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false"/>
+  <standard-field id="9c60fef54ff64aba8d2fb9ebb554c11e" name="version_bugs" title="已解决bug" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false"/>
+  <standard-field id="674d345ce14c42b6a25eb283f666d882" name="version_builder" title="构建者" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="8d1c5a7ab2ce4b5384f9f0315f52db58" name="version_desc" title="描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false"/>
+  <standard-field id="17eedc084da5420bb4e6de6c5b152ecb" name="version_deleted" title="已删除" not-null="false">
+    <description>enum 0，1</description>
+  </standard-field>
 </standard-fields>
