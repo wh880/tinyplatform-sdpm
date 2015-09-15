@@ -11,19 +11,25 @@
     <span class="f">
 					<span class="active_btn">浏览计划</span>
 				</span>
-    <span class="r">
+        #foreach(m:menuManager.getScopeMenus("product-addpl"))
+            #if(m.id=="product-plan-add")
+            <span class="r">
 					<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-addplan.page">#buttonIcon(iconClass=
                         "icon-plus")创建计划</a>&nbsp;
 				</span>
+                #end
+            #end
         #div(divClass="clearfix")
     #end
 ##operationbar end
     #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
         #@div(divBaseClass="tinyheaderTools form-inline")
             #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-            <input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('product-plan','全选');" />
-            <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('product-plan','反选');" />
-           
+        <input type="button" value="全选" class="btn btn-default btn-primary "
+               onclick="selectAllNullorReserve('product-plan','全选');"/>
+        <input type="button" value="反选" class="btn btn-default btn-primary"
+               onclick="selectAllNullorReserve('product-plan','反选');"/>
+
         #end
         #@tinyTableContent("../../data/allproduct-plan.pagelet") ##取数据地址 总数据
             #@thead()

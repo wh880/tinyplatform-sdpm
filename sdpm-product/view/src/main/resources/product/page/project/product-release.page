@@ -10,10 +10,14 @@
 				<span class="f">
 					<span class="active_btn">浏览发布</span>
 				</span>
+
+				#foreach(m:menuManager.getScopeMenus("product-addre"))
+					#if(m.id=="product-release-add")
 				<span class="r">
 					<a title="编辑发布" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-addrelease.page"><i class="icon-plus"></i>创建发布</a>
-		
 				</span>
+						#end
+					#end
 				#div(divClass="clearfix")
 			#end
 			##operationbar end

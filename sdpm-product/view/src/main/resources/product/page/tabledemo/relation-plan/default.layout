@@ -8,27 +8,38 @@
 
 
 	#@div(divClass="operationbar")
-   
+
 				<span class="r" >
-				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class" "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-plan/product-al-req.page?cname=demand" >#buttonIcon(iconClass="icon-link")关联需求</a>&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-plan/product-al-bug.page?cname=bug" >#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
-						
-			
-				<a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-addplan.page"><i class="icon-pencil"></i></a>&nbsp;
-				#@iconOperations("#myModal" "icon-remove" "删除" "200" "50""/testManagement/page/tabledemo/delete.pagelet" "ml-5")#end&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/product/page/project/product-plan.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+                    #foreach(m:menuManager.getScopeMenus("product-log"))
+                        #if(m.id=="product-plan-log")
+                            #@aModal("#myModal" "新增日志" "1000" "500" "btn-class" "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
+                            #else
+                                #if(m.id=="product-plan-del")
+                                    #@delItemsdpm("#")#buttonIcon(iconClass="icon-remove")#end
+                                    #else
+                                       #if(m.id=="product-plan-editor")
+                                           <a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-addplan.page"><i class="icon-pencil"></i></a>&nbsp;
+                                           #else
+                                              #if(m.id=="product-plan-back")
+                                                  <a href="${TINY_CONTEXT_PATH}/product/page/project/product-plan.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+                                                  #else
+                                                  <a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass="${m.icon}")${m.name}</a>&nbsp;
+                                              #end
+                                       #end
+                                #end
+                        #end
+                    #end
+
 				</span>#div(divClass="clearfix")
-				
 	#end
-	
+
 #@tabWithInit("tab_demo" "optionsBox")
 <div style="width:70%;float:left;padding-top:18px;">
 		#@div()
 			#@tabWithInit("tab_demo" "optionsBox")
-				
+
 				#@tabHead()
-				
+
 					#if("demand"==type)
 						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="demand"?"Current":"")
 							#@buttons("","icon-lightbulb")
@@ -40,28 +51,31 @@
 								未关联需求
 							#end
 						#end
-						
-							<div class="r"> 
-							
+
+							<div class="r">
+                        #foreach(m:menuManager.getScopeMenus("table-bug"))
+                            #if(m.id=="plan-table-bug")
 							#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="link-bug"?"Current":"")
 							#@buttons("","icon-bug")
 								关联BUG
 							#end
-						#end
-				
-                    </div>
-						
-						
-						
-						
+						    #end
+                                #end
+                            #end
+
+                             </div>
+
+
+
+
 						#if("no-demand"==cname)
-							<div style="float:right" > 
+							<div style="float:right" >
 								<a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
 			                </div>
 						#end
-						
+
 					#end
-					
+
 					#if("bug"==type)
 						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="bug"?"Current":"")
 							#@buttons("","icon-bug green")
@@ -73,44 +87,44 @@
 								未关联Bug
 							#end
 						#end
-						
-							<div class="r"> 
-							
+
+							<div class="r">
+
 							#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="link-demand"?"Current":"")
 							#@buttons("","icon-link")
 								关联需求
 							#end
 						#end
-				
+
                     </div>
-					
-						
-						
-					
-						
+
+
+
+
+
 						#if("no-bug"==cname)
-							<div style="float:right" > 
+							<div style="float:right" >
 								<a href="#" id="showsearchmore-bug">#buttonIcon(iconClass="icon-search")搜索</a>
 			                </div>
 						#end
 					#end
-					
-					
+
+
 				#end
-				
+
 				#@tabBodyCol("ptop-5")
-					
-					
+
+
 					#pageContent
-				
-			
+
+
 				#end
-			
+
 			#end
 		#end
 </div>
-	
-	
+
+
 <div style="width:30%;float:right" >
 	#TypeInfo("productPlan")
 </div>
