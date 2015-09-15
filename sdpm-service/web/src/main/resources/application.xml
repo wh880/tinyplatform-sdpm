@@ -46,6 +46,7 @@
 			<class-path path="F:\sdpm\sdpm-service\view\src\main\resources"/>
 			<class-path path="E:\git\sdpm\sdpm-service\view\src\main\resources"/>
 			<class-path path="D:\webspaces\sdpm\sdpm-service\view\src\main\resources"/>
+			<class-path path="F:\daochu\sdpm\sdpm-service\view\src\main\resources"/>
 			<!-- 		<class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources" /> -->
 					
  		</class-paths>

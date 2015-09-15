@@ -22,7 +22,8 @@
         <menu id="product-demand-output" name="导出" href="" icon=""
               sort="10" isShow="1"
               scope="product-io"/>
-        <menu id="product-demand-report" name="报表" href="/product/page/tabledemo/product-report.page" icon="icon-bar-chart"
+        <menu id="product-demand-report" name="报表" href="/product/page/tabledemo/product-report.page"
+              icon="icon-bar-chart"
               sort="9" isShow="1"
               scope="product-io"/>
         <menu id="product-demand-add" name="提需求" href="/product/page/tabledemo/product-demand-add.page" icon="icon-plus"
@@ -31,40 +32,97 @@
         <menu id="product-demand-operation" name="操作" href="" icon=""
               sort="7" isShow="1"
               scope="product-oper"/>
+        <menu id="product-demand-del" name="批量关闭" href="" icon=""
+              sort="6" isShow="1"
+              scope="product-del"/>
     </menu>
 
     <menu id="product-plan" parent-id="myproduct" name="计划" href="/product/page/project/product-plan.page" sort="14"
           isShow="1" permission="Permission">
         <menu id="product-plan-demand" name="关联需求"
-              href="/product/page/tabledemo/relation-plan/product-al-req.page?cname=demand" icon="icon-link" sort="4"
+              href="/product/page/tabledemo/relation-plan/product-al-req.page?cname=demand" icon="icon-link" sort="14"
               isShow="1"
               scope="product-pl"/>
         <menu id="product-plan-bug" name="关联BUG"
-              href="/product/page/tabledemo/relation-plan/product-al-bug.page?cname=bug" icon="icon-bug" sort="3"
+              href="/product/page/tabledemo/relation-plan/product-al-bug.page?cname=bug" icon="icon-bug" sort="13"
               isShow="1"
               scope="product-pl"/>
         <menu id="product-plan-edit" name="计划编辑" href="/product/page/tabledemo/product-addplan.page" icon="icon-pencil"
-              sort="2" isShow="1"
+              sort="12" isShow="1"
               scope="product-pl"/>
-        <menu id="product-plan-remove" name="删除" href="#" icon="icon-remove" sort="1" isShow="1"
+        <menu id="product-plan-remove" name="删除" href="#" icon="icon-remove" sort="11" isShow="1"
               scope="product-pl"/>
+        <menu id="product-plan-add" name="创建计划" href="" icon="" sort="10" isShow="1"
+              scope="product-addpl"/>
+        <menu id="product-plan-log" name="日志" href="" icon="" sort="9" isShow="1"
+              scope="product-log"/>
+        <menu id="product-plan-req" name="关联需求"
+              href="/product/page/tabledemo/relation-plan/product-al-req.page?cname=demand" icon="icon-link" sort="8"
+              isShow="1"
+              scope="product-log"/>
+        <menu id="product-plan-bg" name="关联BUG"
+              href="/product/page/tabledemo/relation-plan/product-al-bug.page?cname=bug" icon="icon-bug" sort="7"
+              isShow="1"
+              scope="product-log"/>
+        <menu id="product-plan-editor" name="编辑" href="" icon="" sort="6" isShow="1"
+              scope="product-log"/>
+        <menu id="product-plan-del" name="删除" href="" icon="" sort="5" isShow="1"
+              scope="product-log"/>
+        <menu id="product-plan-back" name="返回" href="/product/page/project/product-plan.page" icon="icon-reply" sort="4"
+              isShow="1"
+              scope="product-log"/>
+        <menu id="plan-table-bug" name="关联BUG" href="" icon="" sort="3" isShow="1"
+              scope="table-bug"/>
+        <menu id="plan-table-del" name="删除" href="" icon="" sort="2" isShow="1"
+              scope="table-del"/>
+        <menu id="product-plan-badel" name="批量删除" href="" icon="" sort="1" isShow="1"
+              scope="plan-badel"/>
     </menu>
 
     <menu id="product-release" parent-id="myproduct" name="发布" href="/product/page/project/product-release.page"
           sort="13" isShow="1" permission="Permission">
         <menu id="product-release-demand" name="关联需求"
-              href="/product/page/tabledemo/relation-release/product-al-req.page?cname=demand" icon="icon-link" sort="4"
+              href="/product/page/tabledemo/relation-release/product-al-req.page?cname=demand" icon="icon-link"
+              sort="14"
               isShow="1"
               scope="product-re"/>
         <menu id="product-release-bug" name="关联BUG"
-              href="/product/page/tabledemo/relation-release/product-al-bug.page?cname=bug" icon="icon-bug" sort="3"
+              href="/product/page/tabledemo/relation-release/product-al-bug.page?cname=bug" icon="icon-bug" sort="13"
               isShow="1"
               scope="product-re"/>
         <menu id="product-release-edit" name="发布编辑" href="/product/page/tabledemo/product-addrelease.page"
-              icon="icon-pencil" sort="2" isShow="1"
+              icon="icon-pencil" sort="12" isShow="1"
               scope="product-re"/>
-        <menu id="product-release-remove" name="删除" href="#" icon="icon-remove" sort="1" isShow="1"
+        <menu id="product-release-remove" name="删除" href="#" icon="icon-remove" sort="11" isShow="1"
               scope="product-re"/>
+        <menu id="product-release-add" name="创建发布" href="" icon="" sort="10" isShow="1"
+              scope="product-addre"/>
+        <menu id="product-release-log" name="日志" href="" icon="" sort="9" isShow="1"
+              scope="product-relog"/>
+        <menu id="product-release-req" name="关联需求"
+              href="/product/page/tabledemo/relation-release/product-al-req.page?cname=demand" icon="icon-link" sort="8"
+              isShow="1"
+              scope="product-relog"/>
+        <menu id="product-release-bg" name="关联BUG"
+              href="/product/page/tabledemo/relation-release/product-al-bug.page?cname=bug" icon="icon-bug" sort="7"
+              isShow="1"
+              scope="product-relog"/>
+        <menu id="product-release-editor" name="编辑" href="" icon="" sort="6" isShow="1"
+              scope="product-relog"/>
+        <menu id="product-release-del" name="删除" href="" icon="" sort="5" isShow="1"
+              scope="product-relog"/>
+        <menu id="product-release-back" name="返回" href="/product/page/project/product-plan.page" icon="icon-reply"
+              sort="4" isShow="1"
+              scope="product-relog"/>
+        <menu id="release-table-rebug" name="关联BUG" href="" icon="" sort="3" isShow="1"
+              scope="table-rebug"/>
+        <menu id="release-table-del" name="删除" href="" icon="" sort="2" isShow="1"
+              scope="table-del"/>
+        <menu id="release-table-export" name="导出HTML" href="" icon="" sort="1" isShow="1"
+              scope="table-export"/>
+        <menu id="product-release-badel" name="批量删除" href="" icon="" sort="1" isShow="1"
+              scope="release-badel"/>
+
     </menu>
 
     <menu id="product-roadmap" parent-id="myproduct" name="路线图" href="/product/page/project/product-roadmap.page"
@@ -73,11 +131,9 @@
     <menu id="product-archive" parent-id="myproduct" name="文档" href="/product/page/project/archive-list.page"
           scope="liop" sort="11" isShow="1" permission="Permission">
 
-        <menu id="product-archive-remove" name="删除"
-              href="#" icon="icon-remove" sort="1"
-              isShow="1"
-              scope="product-ar"/>
-
+        <menu id="product-archive-remove" name="删除" href="#" icon="icon-remove" sort="10" isShow="1" scope="product-ar"/>
+        <menu id="product-archive-badel" name="批量删除" href="" icon="" sort="9" isShow="1" scope="archive-badel"/>
+        <menu id="product-archive-add" name="创建文档" href="" icon="" sort="8" isShow="1" scope="archive-add"/>
 
     </menu>
 
@@ -88,17 +144,27 @@
           sort="9" isShow="1" permission="Permission"></menu>
 
     <menu id="product-overview" parent-id="myproduct" name="概况" href="/product/page/project/overview.page" sort="8"
-          isShow="1" permission="Permission"></menu>
+          isShow="1" permission="Permission">
+
+        <menu id="product-overview-close" name="关闭" href="" icon="" sort="10" isShow="1" scope="overview-cl"/>
+        <menu id="product-overview-editor" name="编辑" href="/product/page/tabledemo/product-module-editor.page" icon="icon-pencil" sort="9" isShow="1" scope="overview-cl"/>
+        <menu id="product-overview-delete" name="删除" href="" icon="" sort="8" isShow="1" scope="overview-cl"/>
+        <menu id="product-overview-back" name="返回" href="/product/page/project/togglebox.page" icon="icon-reply" sort="7" isShow="1" scope="overview-cl"/>
+
+
+    </menu>
 
     <menu id="product-dynamic" parent-id="myproduct" name="动态" href="/product/page/project/dymanicdata.page" sort="7"
-          isShow="1" permission="Permission"></menu>
+          isShow="1" permission="Permission">
+        <menu id="product-dymanic-badel" name="批量删除" href="" icon="" sort="9" isShow="1" scope="dymanci-dl"/>
+
+    </menu>
 
     <menu id="allproduct" parent-id="myproduct" name="所有产品" href="/product/page/tabledemo/product-listall.page" sort="6"
           isShow="1" permission="Permission" scope="product-menu" icon="icon-globe"></menu>
 
     <menu id="newproduct" parent-id="myproduct" name="添加产品" href="/product/page/tabledemo/addProduct.page" sort="5"
           isShow="1" permission="Permission" scope="product-menu" icon="icon-plus-sign"></menu>
-
 
 
 </menu>

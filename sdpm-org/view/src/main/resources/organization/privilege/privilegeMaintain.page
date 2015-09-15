@@ -26,17 +26,19 @@
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
             <span style="padding-top:5px;float:left">
-					<a href="#" class="active_btn">所有权限</a>
-					<a href="#">我的地盘</a>
-					<a href="#">产品</a>
-					<a href="#">项目</a>
-					<a href="#">测试</a>
-					<a href="#">代码</a>
-					<a href="#">文档</a>
-					<a href="#">统计</a>
-                    <a href="#">组织</a>
-					<a href="#">后台</a>
-					<a href="#">其他模块</a>
+                <a href="${TINY_REQUEST_URI}?treeid=0" ${treeid=='0'?" class='active_btn'":""}>所有权限</a>
+                <a href="${TINY_REQUEST_URI}?treeid=home" ${treeid=='home'?" class='active_btn'":""}>我的地盘</a>
+                <a href="${TINY_REQUEST_URI}?treeid=productLine" ${treeid
+                =='productLine'?" class='active_btn'":""}>产品线</a>
+                <a href="${TINY_REQUEST_URI}?treeid=myproduct" ${treeid=='myproduct'?" class='active_btn'":""}>产品</a>
+                <a href="${TINY_REQUEST_URI}?treeid=project" ${treeid=='project'?" class='active_btn'":""}>迭代</a>
+                <a href="${TINY_REQUEST_URI}?treeid=quality" ${treeid=='quality'?" class='active_btn'":""}>测试</a>
+                <a href="${TINY_REQUEST_URI}?treeid=idocument" ${treeid=='idocument'?" class='active_btn'":""}>文档</a>
+                <a href="${TINY_REQUEST_URI}?treeid=statistic" ${treeid=='statistic'?" class='active_btn'":""}>统计</a>
+                <a href="${TINY_REQUEST_URI}?treeid=service" ${treeid=='service'?" class='active_btn'":""}>客服</a>
+                <a href="${TINY_REQUEST_URI}?treeid=organization" ${treeid
+                =='organization'?" class='active_btn'":""}>组织</a>
+                <a href="${TINY_REQUEST_URI}?treeid=mysystem" ${treeid=='mysystem'?" class='active_btn'":""}>系统</a>
          </span>
                 #@tinyForm("thisform" "" "" {"class":"test"})
                     #@formControlDiv("col-2")
@@ -52,55 +54,7 @@
             #end
         #end
     #end
-
-
 #end
-
-
-
-
-
-
-
-
-
-
-##<style>
-##    #reverse{margin-left:2px;}
-##    #playList input{margin-left:12px;}
-##</style>
-##<script language="javascript" type="text/javascript">
-##    $(function () {
-##        $("#reverse").click(function () {//反选
-##            $("#playList :checkbox").each(function () {
-##                $(this).attr("checked", !$(this).attr("checked"));
-##            });
-##        });
-##    });
-##</script>
-###@tinyForm("cheackform" "" "" {"class":"cheackform"})
-##    #@elementItem()
-##        #@colLabel()内联复选框#@tinyCheckbox("checkbox2" "01" "02")#end#end
-##        #@formControlDiv("checkboxSty col-9")
-##                #foreach(m in menuManager.getChildMenus("0"))
-##                    #@tinyCheckbox("checkbox2" "01" "02")
-##                        ${m.name}
-##                    #end
-##               ## {id: '${m.id}', pId: '${m.parentId}', name: "${m.name}", open: true},
-##                #end
-##        #end
-##    #end
-##
-##    #@elementItem()
-##        #@div(divClass="col-10 col-offset-2 form-inline")
-##            #tinyInput("submit" "submitbtn" "&nbsp;保存&nbsp;" {"class":"btn btn-primary"})
-##            #@aTxtDarkDefaultButton(aHref="javascript:void(0);")&nbsp;取消&nbsp;#end
-##        #end
-##    #end
-###end
-
-
-
 
 
 #@noRespsGridSystem()

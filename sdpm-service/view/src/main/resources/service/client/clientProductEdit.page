@@ -1,18 +1,37 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
     #@noRespsGridSystem()
         #@gridSysRow()
-            #@colLabel("col-2")产品名称：#end
-            #@gridSysCol(8)
+            #@colLabel("col-2")协议名称：#end
+
+           #* #@gridSysCol(8)
                 #@tinySelect("lang" "ch" {"class":"input-text select2","rel":"22"})
                     #@tinyOptionItem("ch")请选择#end
-                    #@tinyOptionItem("zh")支付宝#end
-                    #@tinyOptionItem("en")财付通#end
-                    #@tinyOptionItem("ta")余额宝#end
+                    #@tinyOptionItem("zh")支付宝协议#end
+                    #@tinyOptionItem("en")财付通协议#end
+                    #@tinyOptionItem("ta")余额宝协议#end
                 #end
+            #end*#
+
+            #@gridSysCol(8)
+            <div style="margin-bottom: 10px">
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "lang" "部门" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="部门">请选择</option>
+                        <option value="departa">支付宝协议</option>
+                        <option value="departa">财付通协议</option>
+                        <option value="departa">余额宝协议</option>
+                    #end
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
+            </div>
             #end
+
+
+
         #end
 
-        #@gridSysRow()
+   #*     #@gridSysRow()
             #@colLabel("col-2")产品版本：#end
             #@gridSysCol(8)
                 #@tinySelect("lang" "ch" {"class":"input-text select2","rel":"22"})
@@ -23,9 +42,9 @@
                 #end
             #end
             #@validateDiv("col-2")#end
-        #end
+        #end*#
         #@gridSysRow()
-            #@colLabel("col-2")发布时间：#end
+            #@colLabel("col-2")购买时间：#end
             #@gridSysCol(8)
                 #@tinyDateInput(
                     "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
