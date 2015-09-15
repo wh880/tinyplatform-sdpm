@@ -2,7 +2,6 @@
   <standard-field id="182debb0d4a84d3ab984cfeb8f1fc960" name="request_open_count" title="请求打开次数" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false">
     <description></description>
   </standard-field>
-  <standard-field id="46a5d6ebb2384d06a56ad808d95a9941" name="product_id" title="产品ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false"/>
   <standard-field id="28e931db680247e9b52382df7908cf8c" name="service_ts_onsite_limit" title="现场服务次数上限" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false"/>
   <standard-field id="74c6cb9c070841968e68c5281621cec6" name="review_result" title="回访结果" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false"/>
   <standard-field id="618fb648de2e4967af1cfe0e38ee1080" name="faq_source" title="FAQ来源" business-type-id="286a6bca92b34779bcb6fc8809f0a666" not-null="false"/>
