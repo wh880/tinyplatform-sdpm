@@ -45,6 +45,11 @@
                 #end
             #end
             #@elementItem()
+                #@sdpmItem("产品协议")
+                    #tinyInput("text" "产品协议" ""{"datatype":"","id":"产品协议","class":"input-text"})
+                #end
+            #end
+            #@elementItem()
                 #@sdpmItem("服务级别")
                     #@tinySelect("" "" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
                         #@tinyOptionItem("zh")请选择#end
@@ -77,26 +82,26 @@
             #end
             #@elementItem()
                 #@sdpmItem("服务专员")
-                    #tinyInput("text" "影响版本" "可以多人，间隔符英文,"{"datatype":"","id":"版本","class":"input-text"})
+                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务级别协议")
-                    #@tinySelect("" "" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
-                        #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("")0新建#end
-                        #@tinyOptionItem("")1生效#end
-                        #@tinyOptionItem("")2到期#end
-                        #@tinyOptionItem("")3作废#end
-                        #@tinyOptionItem("")4关闭#end
+                    #@tinySelect("" "aa" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        #@tinyOptionItem("aa")请选择#end
+                        #@tinyOptionItem("bb")0新建#end
+                        #@tinyOptionItem("cc")1生效#end
+                        #@tinyOptionItem("dd")2到期#end
+                        #@tinyOptionItem("ee")3作废#end
+                        #@tinyOptionItem("ff")4关闭#end
                     #end
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务期限")
                     #@tinyDateInput(
-                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                        "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+                        "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
+                        "日期不能为空","placeholder":""})#end
                 #end
             #end
             #@elementItem()
