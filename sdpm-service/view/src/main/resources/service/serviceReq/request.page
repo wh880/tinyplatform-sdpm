@@ -30,6 +30,10 @@
                 #if(m2)
                     <a href="${TINY_CONTEXT_PATH}${m2.href}">#buttonIcon(iconClass="icon-bar-chart")${m2.name}</a>
                 #end
+                #set(m3=menuManager.getMenu("request-add"))
+                #if(m3)
+                    <a href="${TINY_CONTEXT_PATH}${m3.href}">#buttonIcon(iconClass="icon-add")${m3.name}</a>
+                #end
 
 				</span>
                 #div(divClass="clearfix")

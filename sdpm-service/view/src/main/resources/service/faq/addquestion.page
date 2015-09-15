@@ -34,6 +34,7 @@
             #@sdpmItem("问题类型")
                 #@Tselect2F()
                     #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="IN">请选择</option>
                     <option value="CT">第一类问题</option>
                     <option value="DE">第二类问题</option>
                     <option value="FL">第三类问题</option>

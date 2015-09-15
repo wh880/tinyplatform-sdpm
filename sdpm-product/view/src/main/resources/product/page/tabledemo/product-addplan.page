@@ -14,7 +14,7 @@
 			$(this).unbind("click").bind("click",function(){
 			
 				var start =	$("input[name='start-time']").val();
-				console.log(start);
+				
 				
 				if(start!=""){
 					start = new Date(Date.parse(start.replace(/-/g, "/")));
