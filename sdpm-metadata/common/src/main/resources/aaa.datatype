@@ -3,8 +3,8 @@
     <description></description>
     <placeholder-list/>
     <dialect-type-list>
-      <dialect-type language="java" base-type="Byte"/>
-      <dialect-type language="mysql" base-type="TIME"/>
+      <dialect-type language="java" base-type="Integer"/>
+      <dialect-type language="mysql" base-type="TINYINT"/>
     </dialect-type-list>
   </standard-type>
   <standard-type id="88d5621709f0456ebd988e15e5c28cb4" name="INTEGER" title="INTEGER" data-type="4">
@@ -72,13 +72,6 @@
     <dialect-type-list>
       <dialect-type language="java" base-type="Integer"/>
       <dialect-type language="mysql" base-type="SMALLINT"/>
-    </dialect-type-list>
-  </standard-type>
-  <standard-type id="eb4075d42e4e4cf0baafc1787d89de1d" name="enum" title="ENUM" data-type="12">
-    <placeholder-list/>
-    <dialect-type-list>
-      <dialect-type language="java" base-type="String"/>
-      <dialect-type language="mysql" base-type="ENUM"/>
     </dialect-type-list>
   </standard-type>
 </standard-types>

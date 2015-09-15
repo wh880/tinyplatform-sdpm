@@ -53,7 +53,4 @@
       <placeholder-value name="length" value="1"/>
     </placeholder-value-list>
   </business-type>
-  <business-type id="58742167af454018b4bbce2a0aad595e" name="enum" title="ENUM" standard-type-id="eb4075d42e4e4cf0baafc1787d89de1d">
-    <placeholder-value-list/>
-  </business-type>
 </business-types>
