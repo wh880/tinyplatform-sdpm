@@ -22,6 +22,40 @@
             </map>
         </menu>
 
+        <menu id="org-user-gtask" name="待办" href="/organization/user/todo.page" icon="" sort="1"
+              isShow="1"
+              scope="org-user-detail"/>
+        <menu id="org-user-storyAdmin" name="需求" href="/organization/user/storyAdmin.page" icon="" sort="1"
+              isShow="1"
+              scope="org-user-detail"/>
+        <menu id="org-user-taskAdmin" name="任务" href="/organization/user/taskAdmin.page" icon="" sort="1"
+              isShow="1"
+              scope="org-user-detail"/>
+        <menu id="org-user-bugAdmin" name="缺陷" href="/organization/user/bugAdmin.page" icon="" sort="1"
+              isShow="1"
+              scope="org-user-detail"/>
+        <menu id="org-user-testtaskAdmin" name="测试" href="/organization/user/testtaskAdmin.page" icon="" sort="1"
+              isShow="1"
+              scope="org-user-detail"/>
+        <menu id="org-user-activeAdmin" name="动态" href="/organization/user/activeAdmin.page" icon="" sort="1"
+              isShow="1"
+              scope="org-user-detail"/>
+        <menu id="org-user-logAdmin" name="日志" href="/organization/user/logAdmin.page" icon="" sort="1"
+              isShow="1"
+              scope="org-user-detail"/>
+        <menu id="org-user-projectAdmin" name="项目" href="/organization/user/projectAdmin.page" icon="" sort="1"
+              isShow="1"
+              scope="org-user-detail"/>
+        <menu id="org-user-profileAdmin" name="档案" href="/organization/user/profileAdmin.page" icon="" sort="1"
+              isShow="1"
+              scope="org-user-detail"/>
+        <menu id="org-user-export" name="导出" href="/organization/common/fileOutput.pagelet" icon="icon-download-alt"
+              sort="1" isShow="1"
+              scope="org-user-export"/>
+        <menu id="org-user-editprofile" name="修改档案" href="/organization/user/profileAdminEdit.pagelet" icon="icon-edit"
+              sort="1" isShow="1"
+              scope="org-user-editprofile"/>
+
     </menu>
     <menu id="organizationGtask" name="待办" href="/organization/gtask/gtasks.page" icon="" sort="1"
           isShow="1"
@@ -80,6 +114,9 @@
     </menu>
     <menu id="organizationCompany" name="公司" href="/organization/company/company.page" icon="" sort="1" isShow="1"
     >
+        <menu id="org-company-edit" name="编辑" href="/organization/company/updateCompany.pagelet" icon="icon-edit"
+              sort="1" isShow="1"
+              scope="org-company-edit"/>
     </menu>
     <menu id="organizationAddUser" name="添加用户" href="/organization/common/addUser.page" icon="icon-plus" sort="1"
           isShow="1"

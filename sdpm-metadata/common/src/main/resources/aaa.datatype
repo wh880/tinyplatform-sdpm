@@ -26,7 +26,7 @@
   <standard-type id="4f7b7a0015f2478b948892a3772e35b6" name="MEDIUMINT" title="MEDIUMINT" data-type="4">
     <placeholder-list/>
     <dialect-type-list>
-      <dialect-type language="java" base-type="Byte"/>
+      <dialect-type language="java" base-type="Integer"/>
       <dialect-type language="mysql" base-type="MEDIUMINT"/>
     </dialect-type-list>
   </standard-type>

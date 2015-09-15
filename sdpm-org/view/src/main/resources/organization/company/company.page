@@ -33,9 +33,14 @@
             ##					<dr>公司信息</dr>
             ##            </span>
             <span style="float: right">
-            #@aModal("#myModal" "编辑公司" "600" "400" "" "/organization/company/updateCompany.pagelet")
-                #@simpleI("icon-edit")编辑#end
-            #end
+                #set(m=menuManager.getMenu("org-company-edit"))
+                #if(m)
+                    #@aModal("#myModal" m.name "600" "400" ""
+                    m.href)#buttonIcon(iconClass="icon-edit")${m.name}#end
+                #end
+            ##            #@aModal("#myModal" "编辑公司" "600" "400" "" "/organization/company/updateCompany.pagelet")
+            ##                #@simpleI("icon-edit")编辑#end
+            ##            #end
                 #@dialog("myModal")
                     #@dialogHeader()公司#end
                     #@dialogBody()<p></p>#end
