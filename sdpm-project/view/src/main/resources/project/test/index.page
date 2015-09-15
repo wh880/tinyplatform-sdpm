@@ -19,7 +19,10 @@
 					测试列表
 				</span>
 				<span class="r c">
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-plus")提交测试</a>
+##					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-plus")提交测试</a>
+	#foreach(m:menuManager.getScopeMenus("pro-testmenu-op"))
+        <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+	#end
 				</span>
 				#div(divClass="clearfix")
 			#end
