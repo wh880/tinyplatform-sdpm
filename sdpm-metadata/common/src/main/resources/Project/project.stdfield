@@ -48,4 +48,41 @@
   <standard-field id="4d4103ac19d24bb2a710b2a7bb479ab8" name="project_deleted" title="已删除" not-null="false">
     <description>enum 0,1</description>
   </standard-field>
+  <standard-field id="8cd36378dabf44a99afef4d1f7e433a0" name="task_id" title="任务id" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
+  <standard-field id="03ee1372ef3b480681b5aaa5032f35d7" name="task_project" title="任务所属项目" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
+  <standard-field id="dfa99c9c348b4bb6a4aef3b27bfa7bbf" name="task_story" title="任务相关需求" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
+  <standard-field id="831bc52d5d5b43f989178551619c0bf6" name="task_story_version" title="需求版本" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
+  <standard-field id="7421ce33884541ccb87cc2c2dd45d74c" name="task_from_bug" title="来源bug" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
+  <standard-field id="23aba5dca629484db6d0d7d95b905c79" name="task_name" title="任务名称" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false"/>
+  <standard-field id="5b511aed51c44ca79423ffc1768ea355" name="task_type" title="任务类型" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="5536a2ac6a4840f896ce8625ba1b1e6f" name="taks_pri" title="任务优先级" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false"/>
+  <standard-field id="0f21714367f147e2b3cbbe0287ee58da" name="task_estimate" title="最初预计" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35" not-null="false"/>
+  <standard-field id="b8174ca90ba54768909d91760aeffc9c" name="task_consumed" title="总消耗" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35" not-null="false"/>
+  <standard-field id="eaddc6ac33814e21bf01fab77e7072c1" name="task_left" title="预计剩余" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35" not-null="false"/>
+  <standard-field id="43c75930464542fc81fddfa340d85e99" name="task_dead_line" title="截止日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="8296af574d80406bb78cfb7060b7ab86" name="task_status" title="任务状态" not-null="false">
+    <description>enum wait doing</description>
+  </standard-field>
+  <standard-field id="88bc935554ec47818157cfa52d623e32" name="task_mailto" title="抄送给" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false">
+    <description></description>
+  </standard-field>
+  <standard-field id="01ad8dc3196a472fabb2bf4fc3c2037f" name="task_desc" title="任务描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false"/>
+  <standard-field id="327d59a858cd4f4ea0ff8636a497a88e" name="task_open_by" title="由谁创建" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="e5ce9edecc5646e6ae6c88f196764d6d" name="task_opened_date" title="创建日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="016289efc06c4fb59626e17d7d275234" name="task_assigned_to" title="指派给" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="668593cafe58439abd6be6483aca0c6e" name="task_assigned_date" title="指派日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="3cfeefa0e3a84b2fb6848ea05efe6ff0" name="task_est_stared" title="预计开始" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="1c9e7e4fb94241d6ad60dff7f1053451" name="task_real_started" title="实际开始" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="f7a0e6a4e9c44879b960c7b778fa972e" name="task_finished_by" title="由谁完成" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="e458bda7278c46028b1ce52f69cac2aa" name="task_finished_date" title="完成时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="8b9005a0f05d458f9ad9c79b850e24b8" name="task_canceled_by" title="由谁取消" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="da7e19c0dd0d4f3ea165fcdbb0528b0c" name="task_canceled_date" title="取消时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="ee9117a2bd6d4faaab23bdc15efee400" name="task_closed_by" title="由谁关闭" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="b58d2e5dc9fc48d8b690c9144fc193cb" name="task_close_date" title="关闭时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="80e60edc0ec14545a981c073db046a9f" name="task_closed_reason" title="关闭原因" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false"/>
+  <standard-field id="e70e2c2ab35d4703a9dbec16dc1fd243" name="task_last_edited_by" title="最后修改" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false"/>
+  <standard-field id="f976ad5772de4ff1b45bc35652ca2f06" name="task_last_edited_date" title="最后修改日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false"/>
+  <standard-field id="c85de241491c4e27ba02dd4fed1059ac" name="task_deleted" title="已删除" not-null="false">
+    <description>enum 0,1</description>
+  </standard-field>
 </standard-fields>
