@@ -48,4 +48,10 @@
   <business-type id="a9e498b3bfc54c338f3a97012efdf5ff" name="DATETIME" title="DATETIME" standard-type-id="9d4a22f78600442aad1ed31211bf9641">
     <placeholder-value-list/>
   </business-type>
-</business-types>
+  <business-type id="18da16c8ca98440d8f58e0a2ce83cb20" name="BOOL" title="BOOL" standard-type-id="0c8ff0176500456d990dcbc8323d6a85">
+    <placeholder-value-list/>
+  </business-type><business-type id="b6a9bc04774b40859a7dd8c6fd52a629" name="VARCHAR1" title="VARCHAR1" standard-type-id="9f58b8458d2c461e8b7f9f9ba2f122de">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="1"/>
+    </placeholder-value-list>
+  </business-type></business-types>

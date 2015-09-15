@@ -1,0 +1,5 @@
+<standard-fields>
+  <standard-field id="dca4d75a1c1347d8baeff4f420dc894a" name="project_id" title="项目id" business-type-id="a6beade23ed9454f8b29e4b0be73e18e" not-null="false">
+    <description></description>
+  </standard-field>
+</standard-fields>
