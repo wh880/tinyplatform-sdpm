@@ -2,36 +2,43 @@
 
 #set(name="demand")
 #@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-			#@div(divClass="dropdownBox")
-				#include("/project/dropdownMenu.page")
-			#end
-			#@tabHead()
-				#include("/project/protab.page")
-			#end				
-			#@tabBodyCol("ptop-5")
-			#@div(divClass="operationbar")
-				<span class="f">
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span class="f">
 					需求列表
 				</span>
-				<span class="r">
-				
-				   #@aModal("#myModal" "项目名称>导出数据" "750" "100" "" "/project/task/outputData.pagelet")
-				   #buttonIcon(iconClass="icon-upload-alt")导出数据#end
-					#@dialog("myModal")
-						#@dialogHeader()#end
-						#@dialogBody()<p></p>#end
-						
-					#end
-					
-					<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" >#buttonIcon(iconClass="icon-plus")新增需求</a>
-					<a href="${TINY_CONTEXT_PATH}/project/demand/relateDemand.page" >#buttonIcon(iconClass="icon-exchange")关联需求</a>
+            <span class="r">
+				#set(m1=menuManager.getMenu("pro-demand-report"))
+                #if(m1)
+                    #@aModal("#myModal" "项目名称>导出数据" "750" "100" "" "/project/task/outputData.pagelet")
+                        #buttonIcon(iconClass="icon-upload-alt")导出数据#end
+                    #@dialog("myModal")
+                        #@dialogHeader()#end
+                        #@dialogBody()<p></p>#end
+
+                    #end
+                #end
+
+##                <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page">#buttonIcon(iconClass=
+##                    "icon-plus")新增需求</a>
+##					<a href="${TINY_CONTEXT_PATH}/project/demand/relateDemand.page">#buttonIcon(iconClass=
+##                        "icon-exchange")关联需求</a>
+                #foreach(m:menuManager.getScopeMenus("pro-demandmenu-op"))
+                    <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                #end
 				</span>
-				#div(divClass="clearfix")
-			#end
-			##operationbar end
-			
-			#include("/project/demand/demandTogglebox.page")
-#end
-#end
+                #div(divClass="clearfix")
+            #end
+        ##operationbar end
+
+            #include("/project/demand/demandTogglebox.page")
+        #end
+    #end
 #end
