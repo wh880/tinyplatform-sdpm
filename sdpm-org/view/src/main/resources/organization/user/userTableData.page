@@ -25,7 +25,9 @@
     #@td()
         #set(map={"org-user-edit":[665,448],"org-user-delete":[550,150]})
         #foreach(m:menuManager.getScopeMenus("org-user"))
-            #iconOperations("#myModal" m.icon m.name map[m.id][0] map[m.id][1] m.href+"?id="+var "ml-5")
+            #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?id="+var "ml-5")
+
+        ##       #iconOperations("#myModal" m.icon m.name map[m.id][0] map[m.id][1] m.href+"?id="+var "ml-5")
         #end
 
     #end

@@ -55,8 +55,10 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 
                 <span class="r">
                 ##          <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
-                    <a href="${TINY_CONTEXT_PATH}/service/faq/addquestion.page">#buttonIcon(iconClass="icon-plus-sign")
-                        新增问题</a>
+                    #set(m1=menuManager.getMenu("faq-add"))
+                    #if(m1)
+                        <a href="${TINY_CONTEXT_PATH}${m1.href}">#buttonIcon(iconClass=m1.icon)${m1.name}</a>
+                    #end
 				</span>
                 #end
             ##以下内容，加载faq右边页面-“具体的5个问题以及问题后面的编辑和删除按钮”，包含在faqquestion.page里面
