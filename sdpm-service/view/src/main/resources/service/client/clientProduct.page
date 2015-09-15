@@ -13,7 +13,7 @@
         ##operationbar star
             #@div(divClass="operationbar")
             <span class="f">
-					<a href="#" class="active_btn">恒生公司</a>
+					<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page" class="active_btn">恒生公司</a>
             </span>
             <span class="r">
                 #@iconOperations(

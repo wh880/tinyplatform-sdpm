@@ -28,16 +28,16 @@
                     #@gridSysCol(7)
                         <p>10088</p>
                     #end
-##                    #@colLabel("col-4")公司联系人：#end
-##                    #@gridSysCol(1)#end
-##                    #@gridSysCol(7)
-##                        <p>习近平</p>
-##                    #end
-##                    #@colLabel("col-4")联系人电话：#end
-##                    #@gridSysCol(1)#end
-##                    #@gridSysCol(7)
-##                        <p>13615263726</p>
-##                    #end
+                ##                    #@colLabel("col-4")公司联系人：#end
+                ##                    #@gridSysCol(1)#end
+                ##                    #@gridSysCol(7)
+                ##                        <p>习近平</p>
+                ##                    #end
+                ##                    #@colLabel("col-4")联系人电话：#end
+                ##                    #@gridSysCol(1)#end
+                ##                    #@gridSysCol(7)
+                ##                        <p>13615263726</p>
+                ##                    #end
                     #@colLabel("col-4")公司传真：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
@@ -64,24 +64,32 @@
             </div>
         #end
 
-
         #@div(divClass="infoContent")
             <p class="titleName">客户信息</p>
-            #@tinyTableContent(TINY_CONTEXT_PATH+"/service/client/linkmanTableData.pagelet" 81) ##取数据地址 总数据
+            #@tableBordered()
                 #@thead()
                     #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-                        #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
                         #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})联系人姓名#end
                         #@tinyTh({"class":"","rel":"sortname"})职务#end
                         #@tinyTh({"class":"","rel":"sortname"})联系人电话#end
                         #@tinyTh({"class":"","rel":"sortname"})操作#end
                     #end
+                    #end
+                <tr>
+                    <td>徐丹洋</td>
+                    <td>12345678901</td>
+                    <td>员工</td>
+                    <td>#@aModal("#myModal1" "编辑" "500" "200" "btn radius btn-primary btn-sm"
+                        "/service/client/companyInfoEdit2.pagelet")编辑
+                    #end
+                        #@delItemsdpm("#action" "id" "/service/client/clientUser.page" {"class":"btn radius btn-danger btn-sm"})
+                            删除#end</td>
+                </tr>
                 #end
             #end
-
-        #end
-
     </div>
     #end
 #end
 #@simpleModal("myModal1" "客户编辑")#end
+
+

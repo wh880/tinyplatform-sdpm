@@ -24,7 +24,7 @@
 	  <language-field id="TIME" name="TIME"></language-field>
 	  <language-field id="DATETIME" name="DATETIME"></language-field>
 	  <language-field id="TIMESTAMP" name="TIMESTAMP"></language-field>
-	  <language-field id="ENUM" name="ENUM"></language-field>
+	  <language-field id="ENUM" name="ENUM"></language-field>	  
 	</language-type>
 	<language-type id="java" name="java">
 	  <language-field id="String" name="String"></language-field>
@@ -39,6 +39,6 @@
 	  <language-field id="Byte" name="Byte"></language-field>
 	  <language-field id="BigDecimal" name="BigDecimal"></language-field>
 	  <language-field id="BigInteger" name="BigInteger"></language-field>
-	  <language-field id="Enum" name="Enum"></language-field>
+	  <language-field id="ENUM" name="ENUM"></language-field>
 	</language-type>
 </language-types>
