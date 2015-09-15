@@ -10,8 +10,8 @@
 #foreach(var:[1..pagesize])
     #@tr()
         #@td()<input type="checkbox" value="1" name="idCheck">#end
-        #@td()徐丹洋</a>#end
-        #@td()职员</a>#end
+        #@td()徐丹洋#end
+        #@td()职员#end
         #@td()18645678901#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("service-cil"))

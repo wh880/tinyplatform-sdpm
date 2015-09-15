@@ -11,6 +11,7 @@
     <table-field standard-field-id="49ec26b28400415f8832cedf503aeaa9" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
     <table-field standard-field-id="2cca0dec07cc49859fceac7289b6d0df" primary="false" unique="false" not-null="true" id="client_phone" auto-increase="false"/>
     <table-field standard-field-id="894fa21c9ca24afd875dbdfa514da29d" primary="false" unique="false" not-null="true" id="client_user" auto-increase="false"/>
+    <table-field standard-field-id="398e31c8923d47868aa9e180fa975d11" primary="false" unique="false" not-null="false" id="client_post" auto-increase="false"/>
   </table>
   <table id="2f8a21de7c27415591ad8265cf63edeb" name="clientUser" title="客户信息表" package-name="org.tinygroup.alm.service">
     <table-field standard-field-id="014fe1bfba704f66806482db358d8a48" primary="true" unique="true" not-null="false" id="client_user_id" auto-increase="false"/>
