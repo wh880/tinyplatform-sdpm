@@ -138,5 +138,6 @@
     <table-field standard-field-id="f8f86043412a436b8ef8ca4bd4fb22f3" primary="false" unique="false" not-null="false" id="sla_close_date" auto-increase="false"/>
     <table-field standard-field-id="91cf15193a6f4a49af40cf4768d25d53" primary="false" unique="false" not-null="false" id="sla_open_count" auto-increase="false"/>
     <table-field standard-field-id="49ec26b28400415f8832cedf503aeaa9" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
+    <table-field standard-field-id="4a0f195409da4cb681d4e4891c4b02f6" primary="false" unique="false" not-null="true" id="cilent_product_vision" auto-increase="false"/>
   </table>
 </tables>
