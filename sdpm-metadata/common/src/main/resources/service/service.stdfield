@@ -102,4 +102,7 @@
   <standard-field id="398e31c8923d47868aa9e180fa975d11" name="user_post" title="联系人职务" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="4a0f195409da4cb681d4e4891c4b02f6" name="cilent_product_vision" title="产品版本" business-type-id="286a6bca92b34779bcb6fc8809f0a666"/>
   <standard-field id="c83a241663e541c6b5cbea631a848388" name="faq_type_id" title="问题类型id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="57510782cae14bc3a7b1f5925d324d85" name="faq_parent_type_id" title="父级问题类型id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="053cc92b39714257a6dedd40355e7e09" name="faq_type_creatDay" title="faq类型创建时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="62a784375ece49b189f39854ce757d76" name="faq_type_creatby" title="faq类型创建者" business-type-id="095e594e1550424b9643c7e2279e85be"/>
 </standard-fields>
