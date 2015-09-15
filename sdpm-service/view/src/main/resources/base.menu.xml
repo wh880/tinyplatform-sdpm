@@ -61,6 +61,8 @@
               isShow="1" scope="service-request-r"/>
         <menu id="request-form" name="报表" icon="icon-bar-chart" href="/service/serviceReq/reportform.page" sort="1"
               isShow="1" scope="service-request-r"/>
+        <menu id="request-add" name="新增请求" icon="icon-plus" href="/service/serviceReq/add.page" sort="1"
+              isShow="1" scope="service-request-r"/>
     </menu>
 
     <menu id="sla" name="协议" href="/service/sla/sla.page" sort="100" isShow="1">
