@@ -2,8 +2,7 @@
     #@noRespsGridSystem()
         #@gridSysRow()
             #@colLabel("col-2")协议名称：#end
-
-           #* #@gridSysCol(8)
+        #* #@gridSysCol(8)
                 #@tinySelect("lang" "ch" {"class":"input-text select2","rel":"22"})
                     #@tinyOptionItem("ch")请选择#end
                     #@tinyOptionItem("zh")支付宝协议#end
@@ -11,7 +10,6 @@
                     #@tinyOptionItem("ta")余额宝协议#end
                 #end
             #end*#
-
             #@gridSysCol(8)
             <div style="margin-bottom: 10px">
                 #@Tselect2F()
@@ -26,11 +24,25 @@
                 #end
             </div>
             #end
-
-
-
         #end
 
+        #@gridSysRow()
+            #@colLabel("col-2")客户登记人：#end
+            #@gridSysCol(8)
+            <div style="margin-bottom: 10px">
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "lang" "部门" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="部门">请选择</option>
+                        <option value="departa">明明</option>
+                        <option value="departa">徐丹阳</option>
+                        <option value="departa">高志超</option>
+                    #end
+                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                #end
+            </div>
+            #end
+        #end
    #*     #@gridSysRow()
             #@colLabel("col-2")产品版本：#end
             #@gridSysCol(8)
