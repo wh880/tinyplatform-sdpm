@@ -48,4 +48,9 @@
   <business-type id="a9e498b3bfc54c338f3a97012efdf5ff" name="DATETIME" title="DATETIME" standard-type-id="9d4a22f78600442aad1ed31211bf9641">
     <placeholder-value-list/>
   </business-type>
+  <business-type id="b6a9bc04774b40859a7dd8c6fd52a629" name="VARCHAR1" title="VARCHAR1" standard-type-id="9f58b8458d2c461e8b7f9f9ba2f122de">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="1"/>
+    </placeholder-value-list>
+  </business-type>
 </business-types>
