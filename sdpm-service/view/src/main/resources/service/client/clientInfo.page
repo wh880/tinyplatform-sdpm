@@ -76,10 +76,14 @@
                     #end
                     #end
                 <tr>
-                    <td>联系人姓名</td>
-                    <td>联系人姓名</td>
-                    <td>联系人姓名</td>
-                    <td>联系人姓名</td>
+                    <td>徐丹洋</td>
+                    <td>12345678901</td>
+                    <td>员工</td>
+                    <td>#@aModal("#myModal1" "编辑" "500" "200" "btn radius btn-primary btn-sm"
+                        "/service/client/companyInfoEdit2.pagelet")编辑
+                    #end
+                        #@delItemsdpm("#action" "id" "/service/client/clientUser.page" {"class":"btn radius btn-danger btn-sm"})
+                            删除#end</td>
                 </tr>
                 #end
             #end
