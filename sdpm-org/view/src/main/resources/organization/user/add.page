@@ -80,7 +80,7 @@
                 #@colLabel("col-2")加入日期：#end
                 #@gridSysCol(6)
                     #@tinyDateInput(
-                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空",
+                        "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空",
                         "placeholder":""})#end
                 #end
             #end
