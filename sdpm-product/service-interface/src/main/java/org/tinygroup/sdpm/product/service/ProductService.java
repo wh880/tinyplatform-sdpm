@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.product.service;
 import java.util.List;
 
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface ProductService {
 	/**
@@ -24,7 +25,7 @@ public interface ProductService {
 	 * @param id
 	 * @return
 	 */
-	int deleteById(Integer id);
+	int deleteById(Integer productId);
 	
 	/**
 	 * 根据产品对象删除
@@ -45,14 +46,14 @@ public interface ProductService {
 	 * @param integer
 	 * @return
 	 */
-	int deleteByProductLineId(Integer id);
+	int deleteByProductLineId(Integer productLineId);
 	
 	/**
 	 * 根据产品ID查找
 	 * @param id
 	 * @return
 	 */
-	Product findById(Integer id);
+	Product findById(Integer productId);
 	
 	/**
 	 * 根据产品对象查找
@@ -72,7 +73,25 @@ public interface ProductService {
 	 * @param id
 	 * @return
 	 */
-	List<Product> findByProductLineId(Integer id);
+	List<Product> findByProductLineId(Integer productLineId);
+	
+	/**
+	 * 根据产品对象分页查询
+	 * @param currentPage
+	 * @param limit
+	 * @param product
+	 * @return
+	 */
+	Pager<Product> findPager(int currentPage,int limit ,Product product);
+	
+	/**
+	 * 根据产品线Id分页查询
+	 * @param currentPage
+	 * @param limit
+	 * @param product
+	 * @return
+	 */
+	Pager<Product> findPagerByLine(int currentPage,int limit ,Integer productLineId);
 	
 	
 	
