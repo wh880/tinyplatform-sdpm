@@ -1,4 +1,4 @@
-package sdpm.common.service.inter;
+package org.tinygroup.sdpm.common.service.inter;
 
 import java.util.Date;
 import java.util.List;
