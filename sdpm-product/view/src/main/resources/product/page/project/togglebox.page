@@ -7,6 +7,15 @@
 <li>"+"需求"+"</li>")
 
 
+#macro liDropdownMenu(rName)
+<li class="dropdown-submenu">
+    <a tabindex="-1" data-toggle="tab">${rName}</a>
+    #bodyContent
+</li>
+#end
+
+
+
 #import("/org/tinygroup/button/components/button_smart.component")
 
 #@tabBodyCol("ptop-5")
@@ -99,11 +108,8 @@
                     #foreach(m:menuManager.getScopeMenus("product-oper"))
                         #if(m.id=="product-demand-operation")
                             #@buttonGroup()
-                            <div class="dropdown">
-                                <a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#"
-                                   href="javascript:void(0);">操作<span class="caret"></span></a>
-                            #*					#@aModal("#myModal" "编辑" "1300" "500" "btn radius btn-primary" "/product/page/tabledemo/product-demand-edit.pagelet")编辑#end*#
-
+                                #@dropdownItempatent(sizebgClass="btn-primary" dropdownContent="操作" downTarget="#")
+                         	
                                 #@ulDropdownMenu()
                                     #@liDropdownMenu("指派给")
                                         #@ulDropdownMenu()
@@ -153,7 +159,7 @@
                                         #end
                                     #end
                                 #end
-                            </div>
+                                #end
                             #end
                         #end
                         #end
