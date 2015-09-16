@@ -17,7 +17,7 @@
 package sdpm.product.dao.impl;
 
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static sdpm.product.dao.inter.dao.constant.ReleaseTable.*;
+import static sdpm.product.dao.constant.ReleaseTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
@@ -35,8 +35,8 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 
-import sdpm.product.dao.inter.dao.inter.ReleaseDao;
-import sdpm.product.dao.inter.dao.pojo.Release;
+import sdpm.product.dao.inter.ReleaseDao;
+import sdpm.product.dao.pojo.Release;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;

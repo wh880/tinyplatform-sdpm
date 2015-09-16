@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package sdpm.product.dao.inter.dao.pojo;
+package sdpm.product.dao.pojo;
 
 import java.util.Date;
 

@@ -14,12 +14,12 @@
  *  limitations under the License.
  */
 
-package sdpm.product.dao.inter.dao.inter;
+package sdpm.product.dao.inter;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
-import sdpm.product.dao.inter.dao.pojo.Config;
+import sdpm.product.dao.pojo.ProductLine;
 
-public interface ConfigDao extends BaseDao<Config,Integer> {
+public interface ProductLineDao extends BaseDao<ProductLine,Integer> {
 
 }

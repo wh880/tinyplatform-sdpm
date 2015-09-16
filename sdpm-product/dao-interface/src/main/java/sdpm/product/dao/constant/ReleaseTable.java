@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package sdpm.product.dao.inter.dao.constant;
+package sdpm.product.dao.constant;
 
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
