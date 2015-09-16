@@ -43,6 +43,7 @@ import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import static org.tinygroup.sdpm.product.dao.constant.StorySpecTable.STORYSPECTABLE;
 
 public class StorySpecDaoImpl extends TinyDslDaoSupport implements StorySpecDao {
 

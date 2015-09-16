@@ -43,7 +43,7 @@ import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-
+import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 
 	public Product add(Product product) {

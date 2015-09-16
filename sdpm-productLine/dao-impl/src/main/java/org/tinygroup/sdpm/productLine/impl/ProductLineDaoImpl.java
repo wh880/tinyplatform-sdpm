@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.product.dao.impl;
+package org.tinygroup.sdpm.productLine.impl;
 
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
@@ -34,8 +34,8 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.product.dao.inter.ProductLineDao;
-import org.tinygroup.sdpm.product.dao.pojo.ProductLine;
+import org.tinygroup.sdpm.productLine.dao.inter.ProductLineDao;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Pager;
@@ -43,6 +43,7 @@ import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCTLINETABLE;
 
 public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLineDao {
 

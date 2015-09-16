@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.product.dao.impl;
+package org.tinygroup.sdpm.system.dao.impl;
 
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
@@ -34,8 +34,8 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.product.dao.inter.SearchindexDao;
-import org.tinygroup.sdpm.product.dao.pojo.Searchindex;
+import org.tinygroup.sdpm.system.dao.inter.SearchindexDao;
+import org.tinygroup.sdpm.system.dao.pojo.Searchindex;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Pager;
@@ -43,6 +43,7 @@ import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import static org.tinygroup.sdpm.system.dao.constant.SearchindexTable.SEARCHINDEXTABLE;
 
 public class SearchindexDaoImpl extends TinyDslDaoSupport implements SearchindexDao {
 

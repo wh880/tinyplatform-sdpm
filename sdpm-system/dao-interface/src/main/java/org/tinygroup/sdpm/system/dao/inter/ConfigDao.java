@@ -14,11 +14,11 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.product.dao.inter;
+package org.tinygroup.sdpm.system.dao.inter;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-import org.tinygroup.sdpm.product.dao.pojo.Searchindex;
+import org.tinygroup.sdpm.system.dao.pojo.Config;
 
-public interface SearchindexDao extends BaseDao<Searchindex,Integer> {
+public interface ConfigDao extends BaseDao<Config,Integer> {
 
 }
