@@ -48,9 +48,8 @@
                 #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})客户名称#end
                 #@tinyTh({"class":"","rel":"sortname"})请求标题#end
                 #@tinyTh({"class":"","rel":"sortname"})请求优先级#end
-                #@tinyTh({"class":"","rel":"sortname"})状态#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})请求预期回复时间#end
-                #@tinyTh({"class":"","rel":"sortname"})指派#end
+                #@tinyTh({"class":"","rel":"sortname"})回访预期时间#end
+                #@tinyTh({"class":"sorting","rel":"sortname"})指派#end
                 #@tinyTh({"class":"","rel":"sortname"})操作#end
             #end
         #end
@@ -58,36 +57,3 @@
 #end
 #@simpleModal("myModal" "用户编辑")#end
 #@simpleModal("myModal2" "用户删除")#end
-
-
-<script type="text/javascript">
-
-    function selectAllNullorReserve(obj, type) {
-        if (obj != null && obj != "") {
-            if (document.getElementsByName(obj) != undefined && document.getElementsByName(obj).length > 0) {	//getElementsByName函数的作用按名字查找对象，返回一个数组。
-                var userids = document.getElementsByName(obj);
-                if (type == "全选") {
-                    for (var i = 0; i < userids.length; i++) {
-                        if (userids[i].checked == false) {
-                            userids[i].checked = true;
-                        }
-                    }
-                } else if (type == "全不选") {
-                    for (var i = 0; i < userids.length; i++) {
-                        if (userids[i].checked == true) {
-                            userids[i].checked = false;
-                        }
-                    }
-                } else if (type == "反选") {
-                    for (var i = 0; i < userids.length; i++) {
-                        if (userids[i].checked == true) {
-                            userids[i].checked = false;
-                        } else {
-                            userids[i].checked = true;
-                        }
-                    }
-                }
-            }
-        }
-    }
-</script>
