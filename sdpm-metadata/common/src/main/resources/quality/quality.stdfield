@@ -3,9 +3,9 @@
     <description></description>
   </standard-field>
   <standard-field id="a4e57a1ab53c499893f2e55d1e630439" name="product_ID" title="所属产品" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
-  <standard-field id="e4f234b5493f4c40853bbc61e1aa0718" name="module_ID" title="所属模块" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
+  <standard-field id="b2e06ff96c4a40198e55c878d1642fa0" name="module_ID" title="MODULE" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
   <standard-field id="2c7ac863e752467fa56f8650342cdf56" name="project_ID" title="所属项目" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
-  <standard-field id="266dbd8c28f84c0a850e8d73922e5ab4" name="plan_ID" title="所属计划" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="266dbd8c28f84c0a850e8d73922e5ab4" name="plan_ID" title="所属计划" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
   <standard-field id="390ffa7931214ce9bf99a6ab1a13cc5e" name="story_ID" title="相关需求" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
   <standard-field id="f557eadc92924a1199f6edce9fda0ea1" name="story_Version" title="需求版本" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="1"/>
   <standard-field id="e3c2915ebf324b6dbbbcd8c6213f409a" name="task_ID" title="相关任务" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
@@ -43,13 +43,13 @@
   <standard-field id="39620b293f4f4c7580ab9a2adcd09baa" name="result" title="RESULT" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="0b825f5b94964c9bb897b6d7e46bc521" name="repo" title="REPO" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="6b9f288452bf434b800682d537a0fe46" name="entry" title="ENTRY" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
-  <standard-field id="83e5fcc53b104488918293c7d077635c" name="lines" title="LINES" business-type-id="286a6bca92b34779bcb6fc8809f0a666"/>
+  <standard-field id="83e5fcc53b104488918293c7d077635c" name="lines" title="LINES" business-type-id="286a6bca92b34779bcb6fc8809f0a666" default=""/>
   <standard-field id="5eaade48b6504899be41bb710c6a96a9" name="v1" title="V1" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
   <standard-field id="94b9073805c646418fe2e5f7e1291b35" name="repoType" title="REPOTYPE" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="5fe0035446904292a5ae9844f5d75249" name="testtask" title="TESTTASK" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
   <standard-field id="f6a7e4ea3f6e48de8db3d22ffc1ef267" name="Bug_lastEditedBy" title="最后修改者" business-type-id="095e594e1550424b9643c7e2279e85be" default=""/>
   <standard-field id="48706c454e294123bb6eeba92516c9bb" name="Bug_lastEditedDate" title="最后修改日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default=""/>
-  <standard-field id="61c90281c2c54787a0588095fa5d5e96" name="deleted" title="已删除" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0"/>
+  <standard-field id="61c90281c2c54787a0588095fa5d5e96" name="deleted" title="已删除" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="0"/>
   <standard-field id="355ee3636b224f6d9979e38fb58c87a1" name="path" title="模块路径" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
   <standard-field id="1840bfb38b5e474f84b0e4bdc81207af" name="case_title" title="用例标题" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="e7971c08ed7f475d93efb3ba70b6cfad" name="case_precondition" title="前置条件" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" default=""/>
