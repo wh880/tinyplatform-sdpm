@@ -71,6 +71,16 @@
                 #end
             #end
             #@elementItem()
+                #@sdpmItem("服务响应时限")
+                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text select2"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("需求回访时限")
+                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text select2"})
+                #end
+            #end
+            #@elementItem()
                 #@sdpmItem("服务请求数上限")
                     #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
                 #end
