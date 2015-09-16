@@ -5,36 +5,61 @@
     <menu id="product-demand" parent-id="myproduct" name="需求" href="/product/page/project/togglebox.page"
           scope="liop,l2op" sort="15" isShow="1" permission="Permission">
         <menu id="product-demand-change" name="需求变更" href="/product/page/tabledemo/product-demand-change.page"
-              icon="icon-random" sort="15" isShow="1"
+              icon="icon-random" sort="35" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-review" name="需求评审" href="/product/page/tabledemo/product-demand-review.page"
-              icon="icon-search" sort="14" isShow="1"
+              icon="icon-search" sort="34" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-close" name="需求关闭" href="/product/page/tabledemo/product-demand-close.page"
-              icon="icon-off" sort="13" isShow="1"
+              icon="icon-off" sort="33" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-edit" name="需求编辑" href="/product/page/tabledemo/demand-edit.page" icon="icon-pencil"
-              sort="12" isShow="1"
+              sort="32" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-input" name="导入" href="" icon=""
-              sort="11" isShow="1"
+              sort="31" isShow="1"
               scope="product-io"/>
         <menu id="product-demand-output" name="导出" href="" icon=""
-              sort="10" isShow="1"
+              sort="30" isShow="1"
               scope="product-io"/>
         <menu id="product-demand-report" name="报表" href="/product/page/tabledemo/product-report.page"
               icon="icon-bar-chart"
-              sort="9" isShow="1"
+              sort="29" isShow="1"
               scope="product-io"/>
         <menu id="product-demand-add" name="提需求" href="/product/page/tabledemo/product-demand-add.page" icon="icon-plus"
-              sort="8" isShow="1"
+              sort="28" isShow="1"
               scope="product-io"/>
         <menu id="product-demand-operation" name="操作" href="" icon=""
-              sort="7" isShow="1"
+              sort="27" isShow="1"
               scope="product-oper"/>
         <menu id="product-demand-del" name="批量关闭" href="" icon=""
-              sort="6" isShow="1"
+              sort="26" isShow="1"
               scope="product-del"/>
+
+        <menu id="demand_log" name="日志" href="" icon=""
+              sort="25" isShow="1"
+              scope="pro_demand_log"/>
+        <menu id="demand-alteration" name="变更" href="" icon=""
+              sort="24" isShow="1"
+              scope="pro_demand_log"/>
+        <menu id="demand_close" name="关闭" href="" icon=""
+              sort="23" isShow="1"
+              scope="pro_demand_log"/>
+        <menu id="demand_set" name="建用例" href="" icon=""
+              sort="22" isShow="1"
+              scope="pro_demand_log"/>
+        <menu id="demand-edit" name="编辑" href="" icon=""
+              sort="21" isShow="1"
+              scope="pro_demand_log"/>
+        <menu id="demand_note" name="备注" href="" icon=""
+              sort="20" isShow="1"
+              scope="pro_demand_log"/>
+        <menu id="demand_copy" name="复制" href="" icon=""
+              sort="19" isShow="1"
+              scope="pro_demand_log"/>
+        <menu id="demand-delete" name="删除" href="" icon=""
+              sort="18" isShow="1"
+              scope="pro_demand-log"/>
     </menu>
 
     <menu id="product-plan" parent-id="myproduct" name="计划" href="/product/page/project/product-plan.page" sort="14"

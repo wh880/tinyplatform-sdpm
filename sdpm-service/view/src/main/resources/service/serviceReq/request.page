@@ -32,7 +32,7 @@
                 #end
                 #set(m3=menuManager.getMenu("request-add"))
                 #if(m3)
-                    <a href="${TINY_CONTEXT_PATH}${m3.href}">#buttonIcon(iconClass="icon-add")${m3.name}</a>
+                    <a href="${TINY_CONTEXT_PATH}${m3.href}">#buttonIcon(iconClass="icon-plus")${m3.name}</a>
                 #end
 
 				</span>

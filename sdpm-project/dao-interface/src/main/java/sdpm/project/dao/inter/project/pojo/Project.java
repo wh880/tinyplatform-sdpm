@@ -23,16 +23,16 @@ public class Project {
 	/** 项目id */
 	private Integer projectId;
 
-	/** PROJECT_ISCAT */
+	/** 是否作为目录 */
 	private String projectIsCat;
 
-	/** PROJECT_ */
+	/** 目录id */
 	private Integer projectCatId;
 
 	/** 项目类型 */
 	private String projectType;
 
-	/** 项目名称PROJECT_NAME */
+	/** 项目名称 */
 	private String projectName;
 
 	/** 项目代号 */
@@ -50,6 +50,9 @@ public class Project {
 	/** 项目状态 */
 	private String projectStatus;
 
+	/** 项目所处阶段 */
+	private String projectStatge;
+
 	/** 优先级 */
 	private String projectPri;
 
@@ -65,11 +68,11 @@ public class Project {
 	/** 项目创建版本 */
 	private String projectOpenedVersion;
 
-	/** 关闭人 */
-	private String slaClosedBy;
+	/** 项目由谁关闭 */
+	private String projectCloseBy;
 
-	/** 关闭时间 */
-	private Date slaCloseDate;
+	/** 项目关闭日期 */
+	private Date projectCloseDate;
 
 	/** 项目由谁取消 */
 	private String projectCanceledBy;
@@ -185,6 +188,14 @@ public class Project {
 		return projectStatus;
 	}
 
+	public void setProjectStatge(String projectStatge){
+		this. projectStatge = projectStatge;
+	}
+
+	public String getProjectStatge(){
+		return projectStatge;
+	}
+
 	public void setProjectPri(String projectPri){
 		this. projectPri = projectPri;
 	}
@@ -225,20 +236,20 @@ public class Project {
 		return projectOpenedVersion;
 	}
 
-	public void setSlaClosedBy(String slaClosedBy){
-		this. slaClosedBy = slaClosedBy;
+	public void setProjectCloseBy(String projectCloseBy){
+		this. projectCloseBy = projectCloseBy;
 	}
 
-	public String getSlaClosedBy(){
-		return slaClosedBy;
+	public String getProjectCloseBy(){
+		return projectCloseBy;
 	}
 
-	public void setSlaCloseDate(Date slaCloseDate){
-		this. slaCloseDate = slaCloseDate;
+	public void setProjectCloseDate(Date projectCloseDate){
+		this. projectCloseDate = projectCloseDate;
 	}
 
-	public Date getSlaCloseDate(){
-		return slaCloseDate;
+	public Date getProjectCloseDate(){
+		return projectCloseDate;
 	}
 
 	public void setProjectCanceledBy(String projectCanceledBy){

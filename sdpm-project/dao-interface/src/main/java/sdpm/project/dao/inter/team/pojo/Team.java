@@ -20,6 +20,9 @@ import java.util.Date;
 
 public class Team {
 
+	/** 逻辑ID */
+	private Integer id;
+
 	/** 项目id */
 	private Integer projectId;
 
@@ -38,6 +41,14 @@ public class Team {
 	/** 可用工时 */
 	private Float teamHours;
 
+
+	public void setId(Integer id){
+		this. id = id;
+	}
+
+	public Integer getId(){
+		return id;
+	}
 
 	public void setProjectId(Integer projectId){
 		this. projectId = projectId;

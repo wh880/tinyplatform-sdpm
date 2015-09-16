@@ -53,6 +53,7 @@ public class TeamDaoImpl extends TinyDslDaoSupport implements TeamDao {
 		return getDslTemplate().insertAndReturnKey(team, new InsertGenerateCallback<Team>() {
 			public Insert generate(Team t) {
 				Insert insert = insertInto(TEAMTABLE).values(
+					TEAMTABLE.ID.value(t.getId()),
 					TEAMTABLE.PROJECT_ID.value(t.getProjectId()),
 					TEAMTABLE.TEAM_ACCOUNT.value(t.getTeamAccount()),
 					TEAMTABLE.TEAM_ROLE.value(t.getTeamRole()),
@@ -65,7 +66,7 @@ public class TeamDaoImpl extends TinyDslDaoSupport implements TeamDao {
 	}
 
 	public int edit(Team team) {
-		if(team == null || team.getProjectId() == null){
+		if(team == null || team.getId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(team, new UpdateGenerateCallback<Team>() {
@@ -77,7 +78,7 @@ public class TeamDaoImpl extends TinyDslDaoSupport implements TeamDao {
 					TEAMTABLE.TEAM_JOIN.value(t.getTeamJoin()),
 					TEAMTABLE.TEAM_DAYS.value(t.getTeamDays()),
 					TEAMTABLE.TEAM_HOURS.value(t.getTeamHours())).where(
-					TEAMTABLE.PROJECT_ID.eq(t.getProjectId()));
+					TEAMTABLE.ID.eq(t.getId()));
 				return update;
 			}
 		});
@@ -89,7 +90,7 @@ public class TeamDaoImpl extends TinyDslDaoSupport implements TeamDao {
 		}
 		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
 			public Delete generate(Serializable pk) {
-				return delete(TEAMTABLE).where(TEAMTABLE.PROJECT_ID.eq(pk));
+				return delete(TEAMTABLE).where(TEAMTABLE.ID.eq(pk));
 			}
 		});
 	}
@@ -100,7 +101,7 @@ public class TeamDaoImpl extends TinyDslDaoSupport implements TeamDao {
 		}
 		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
 			public Delete generate(Serializable[] t) {
-				return delete(TEAMTABLE).where(TEAMTABLE.PROJECT_ID.in(t));
+				return delete(TEAMTABLE).where(TEAMTABLE.ID.in(t));
 		}
 		},pks);
 	}
@@ -109,7 +110,7 @@ public class TeamDaoImpl extends TinyDslDaoSupport implements TeamDao {
 		return getDslTemplate().getByKey(pk, Team.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(TEAMTABLE).where(TEAMTABLE.PROJECT_ID.eq(t));
+			return selectFrom(TEAMTABLE).where(TEAMTABLE.ID.eq(t));
 			}
 		});
 	}
@@ -189,7 +190,7 @@ public class TeamDaoImpl extends TinyDslDaoSupport implements TeamDao {
 					TEAMTABLE.TEAM_JOIN.value(new JdbcNamedParameter("teamJoin")),
 					TEAMTABLE.TEAM_DAYS.value(new JdbcNamedParameter("teamDays")),
 					TEAMTABLE.TEAM_HOURS.value(new JdbcNamedParameter("teamHours"))).where(
-				TEAMTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")));
+				TEAMTABLE.ID.eq(new JdbcNamedParameter("id")));
 			}
 		});
 	}
@@ -202,6 +203,7 @@ public class TeamDaoImpl extends TinyDslDaoSupport implements TeamDao {
 
 			public Delete generate() {
 				return delete(TEAMTABLE).where(and(
+				TEAMTABLE.ID.eq(new JdbcNamedParameter("id")),
 				TEAMTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")),
 				TEAMTABLE.TEAM_ACCOUNT.eq(new JdbcNamedParameter("teamAccount")),
 				TEAMTABLE.TEAM_ROLE.eq(new JdbcNamedParameter("teamRole")),

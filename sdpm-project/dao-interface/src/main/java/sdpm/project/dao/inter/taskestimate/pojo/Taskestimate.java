@@ -35,10 +35,10 @@ public class Taskestimate {
 	/** 任务预计消耗 */
 	private Float taskestimateConsumed;
 
-	/** TASKESTIMATE_ */
+	/** 操作人帐号 */
 	private String taskestimateAccount;
 
-	/** TASKESTIMATE_WORK */
+	/** 备用字段 */
 	private String taskestimateWork;
 
 

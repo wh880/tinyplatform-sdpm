@@ -53,6 +53,7 @@ public class ProjectproductDaoImpl extends TinyDslDaoSupport implements Projectp
 		return getDslTemplate().insertAndReturnKey(projectproduct, new InsertGenerateCallback<Projectproduct>() {
 			public Insert generate(Projectproduct t) {
 				Insert insert = insertInto(PROJECTPRODUCTTABLE).values(
+					PROJECTPRODUCTTABLE.ID.value(t.getId()),
 					PROJECTPRODUCTTABLE.PROJECT_ID.value(t.getProjectId()),
 					PROJECTPRODUCTTABLE.PRODUCT_ID.value(t.getProductId()));
 				return insert;
@@ -61,7 +62,7 @@ public class ProjectproductDaoImpl extends TinyDslDaoSupport implements Projectp
 	}
 
 	public int edit(Projectproduct projectproduct) {
-		if(projectproduct == null || projectproduct.getProjectId() == null){
+		if(projectproduct == null || projectproduct.getId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(projectproduct, new UpdateGenerateCallback<Projectproduct>() {
@@ -69,7 +70,7 @@ public class ProjectproductDaoImpl extends TinyDslDaoSupport implements Projectp
 				Update update = update(PROJECTPRODUCTTABLE).set(
 					PROJECTPRODUCTTABLE.PROJECT_ID.value(t.getProjectId()),
 					PROJECTPRODUCTTABLE.PRODUCT_ID.value(t.getProductId())).where(
-					PROJECTPRODUCTTABLE.PROJECT_ID.eq(t.getProjectId()));
+					PROJECTPRODUCTTABLE.ID.eq(t.getId()));
 				return update;
 			}
 		});
@@ -81,7 +82,7 @@ public class ProjectproductDaoImpl extends TinyDslDaoSupport implements Projectp
 		}
 		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
 			public Delete generate(Serializable pk) {
-				return delete(PROJECTPRODUCTTABLE).where(PROJECTPRODUCTTABLE.PROJECT_ID.eq(pk));
+				return delete(PROJECTPRODUCTTABLE).where(PROJECTPRODUCTTABLE.ID.eq(pk));
 			}
 		});
 	}
@@ -92,7 +93,7 @@ public class ProjectproductDaoImpl extends TinyDslDaoSupport implements Projectp
 		}
 		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
 			public Delete generate(Serializable[] t) {
-				return delete(PROJECTPRODUCTTABLE).where(PROJECTPRODUCTTABLE.PROJECT_ID.in(t));
+				return delete(PROJECTPRODUCTTABLE).where(PROJECTPRODUCTTABLE.ID.in(t));
 		}
 		},pks);
 	}
@@ -101,7 +102,7 @@ public class ProjectproductDaoImpl extends TinyDslDaoSupport implements Projectp
 		return getDslTemplate().getByKey(pk, Projectproduct.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(PROJECTPRODUCTTABLE).where(PROJECTPRODUCTTABLE.PROJECT_ID.eq(t));
+			return selectFrom(PROJECTPRODUCTTABLE).where(PROJECTPRODUCTTABLE.ID.eq(t));
 			}
 		});
 	}
@@ -165,7 +166,7 @@ public class ProjectproductDaoImpl extends TinyDslDaoSupport implements Projectp
 				return update(PROJECTPRODUCTTABLE).set(
 					PROJECTPRODUCTTABLE.PROJECT_ID.value(new JdbcNamedParameter("projectId")),
 					PROJECTPRODUCTTABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId"))).where(
-				PROJECTPRODUCTTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")));
+				PROJECTPRODUCTTABLE.ID.eq(new JdbcNamedParameter("id")));
 			}
 		});
 	}
@@ -178,6 +179,7 @@ public class ProjectproductDaoImpl extends TinyDslDaoSupport implements Projectp
 
 			public Delete generate() {
 				return delete(PROJECTPRODUCTTABLE).where(and(
+				PROJECTPRODUCTTABLE.ID.eq(new JdbcNamedParameter("id")),
 				PROJECTPRODUCTTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")),
 				PROJECTPRODUCTTABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId"))));
 			}

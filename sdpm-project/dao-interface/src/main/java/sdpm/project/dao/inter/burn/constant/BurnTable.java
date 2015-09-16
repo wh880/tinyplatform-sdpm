@@ -24,11 +24,11 @@ public class BurnTable extends Table {
 	public static final BurnTable BURNTABLE = new BurnTable();
 	/** 项目id */
 	public final Column PROJECT_ID = new Column(this, "project_id");
-	/** BURN_DATE */
+	/** 日期 */
 	public final Column BURN_DATE = new Column(this, "burn_date");
-	/** BURN_LEFT */
+	/** 剩余 */
 	public final Column BURN_LEFT = new Column(this, "burn_left");
-	/** BURN_CONSUMED */
+	/** 消耗 */
 	public final Column BURN_CONSUMED = new Column(this, "burn_consumed");
 
 		private BurnTable() {

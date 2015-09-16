@@ -1,5 +1,5 @@
 <standard-fields>
-  <standard-field id="157b6bcd380345ecb1bbb2b6005b92f7" name="doc_id" title="文档ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false">
+  <standard-field id="157b6bcd380345ecb1bbb2b6005b92f7" name="doc_id" title="文档ID" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0" not-null="false">
     <description>文档ID，主键，唯一标示</description>
   </standard-field>
   <standard-field id="51d8b407678c4adfbb36e530c87c7f22" name="doc_product" title="所属产品" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false">
@@ -47,7 +47,7 @@
   <standard-field id="59a569420f764db3b2a292c350d740ca" name="doc_editedDate" title="文档编辑时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false">
     <description>编辑时间</description>
   </standard-field>
-  <standard-field id="4240a1ee3cc04b6f9621e95ed93b8b22" name="doc_deleted" title="文档删除标志" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false">
+  <standard-field id="4240a1ee3cc04b6f9621e95ed93b8b22" name="doc_deleted" title="文档删除标志" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" not-null="false">
     <description>已删除,enum(&apos;0&apos;,&apos;1&apos;)</description>
   </standard-field>
   <standard-field id="509aa7b0d6ee413ab1f3b4ad99e28843" name="doc_libid" title="文档库ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false">
@@ -56,7 +56,7 @@
   <standard-field id="95b70aee2d1e4c9dbf04e6688ffb9bee" name="doc_libname" title="文档库名字" business-type-id="a30696c1e44441ecad77a832afd3731d" not-null="false">
     <description>文档库名字</description>
   </standard-field>
-  <standard-field id="2655a73603e54dd98679d4163bd0851f" name="doc_lib_deleted" title="删除文档库标志" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false">
+  <standard-field id="2655a73603e54dd98679d4163bd0851f" name="doc_lib_deleted" title="删除文档库标志" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" not-null="false">
     <description>enum(&apos;0&apos;,&apos;1&apos;),已删除，并不真正删除数据，只是相应比标志位变参而已。</description>
   </standard-field>
   <standard-field id="4eba0477bea94e218529867d56ede9ec" name="comment_id" title="评论编号" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0" not-null="false">

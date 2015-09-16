@@ -18,6 +18,9 @@ package sdpm.project.dao.inter.projectstory.pojo;
 
 public class Projectstory {
 
+	/** 逻辑ID */
+	private Integer id;
+
 	/** 项目id */
 	private Integer projectId;
 
@@ -27,6 +30,17 @@ public class Projectstory {
 	/** 需求ID */
 	private Integer storyId;
 
+	/** 需求版本 */
+	private Integer storyVersion;
+
+
+	public void setId(Integer id){
+		this. id = id;
+	}
+
+	public Integer getId(){
+		return id;
+	}
 
 	public void setProjectId(Integer projectId){
 		this. projectId = projectId;
@@ -50,6 +64,14 @@ public class Projectstory {
 
 	public Integer getStoryId(){
 		return storyId;
+	}
+
+	public void setStoryVersion(Integer storyVersion){
+		this. storyVersion = storyVersion;
+	}
+
+	public Integer getStoryVersion(){
+		return storyVersion;
 	}
 
 }
