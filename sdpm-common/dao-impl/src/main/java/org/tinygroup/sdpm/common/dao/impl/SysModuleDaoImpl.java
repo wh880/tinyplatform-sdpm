@@ -14,10 +14,10 @@
  *  limitations under the License.
  */
 
-package sdpm.common.dao.impl.a.b.c;
+package org.tinygroup.sdpm.common.dao.impl;
 
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static sdpm.common.dao.inter.constant.SysModuleTable.*;
+import static org.tinygroup.sdpm.common.dao.constant.SysModuleTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
@@ -35,8 +35,8 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import sdpm.common.dao.inter.pojo.SysModule;
-import sdpm.common.dao.inter.SysModuleDao;
+import org.tinygroup.sdpm.common.dao.pojo.SysModule;
+import org.tinygroup.sdpm.common.dao.SysModuleDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;

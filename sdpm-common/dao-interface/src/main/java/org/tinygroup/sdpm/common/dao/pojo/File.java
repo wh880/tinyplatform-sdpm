@@ -14,46 +14,86 @@
  *  limitations under the License.
  */
 
-package sdpm.common.dao.inter.pojo;
+package org.tinygroup.sdpm.common.dao.pojo;
 
 import java.util.Date;
 
+/** 
+ * 附件表
+ * 
+ */
 public class File {
 
-	/** 附件ID */
+	/** 
+	 * 附件ID
+	 * 
+	 */
 	private Integer fileId;
 
-	/** 附件地址 */
+	/** 
+	 * 附件地址
+	 * 
+	 */
 	private String filePathname;
 
-	/** 附件名 */
+	/** 
+	 * 附件名
+	 * 
+	 */
 	private String fileTitle;
 
-	/** 附件扩展 */
+	/** 
+	 * 附件扩展名
+	 * 
+	 */
 	private String fileExtension;
 
-	/** 附件大小 */
+	/** 
+	 * 附件大小
+	 * 
+	 */
 	private Integer fileSize;
 
-	/** 附件文件类型 */
+	/** 
+	 * 附件文件类型
+	 * 
+	 */
 	private String fileObjectType;
 
-	/** 附件对象ID */
+	/** 
+	 * 附件对象ID
+	 * 
+	 */
 	private Integer fileObjectID;
 
-	/** 由谁添加 */
+	/** 
+	 * 由谁添加
+	 * 
+	 */
 	private String fileAddedBy;
 
-	/** 附件添加日期 */
+	/** 
+	 * 附件添加日期
+	 * 
+	 */
 	private Date fileAddedDate;
 
-	/** 下载次数 */
+	/** 
+	 * 下载次数
+	 * 
+	 */
 	private Integer fileDownloads;
 
-	/** 附件名 */
+	/** 
+	 * file_extra
+	 * 
+	 */
 	private String fileExtra;
 
-	/** 是否删除 */
+	/** 
+	 * 是否删除
+	 * 
+	 */
 	private String fileDeleted;
 
 

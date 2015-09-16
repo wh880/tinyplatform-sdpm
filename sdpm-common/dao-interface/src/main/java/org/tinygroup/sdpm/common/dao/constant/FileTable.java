@@ -14,38 +14,91 @@
  *  limitations under the License.
  */
 
-package sdpm.common.dao.inter.constant;
+package org.tinygroup.sdpm.common.dao.constant;
 
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
 
+/** 
+ * 附件表
+ * 
+ */
 public class FileTable extends Table {
 
 	public static final FileTable FILETABLE = new FileTable();
-	/** 附件ID */
+
+	/** 
+	 * 附件ID
+	 * 
+	 */
 	public final Column FILE_ID = new Column(this, "file_id");
-	/** 附件地址 */
+
+	/** 
+	 * 附件地址
+	 * 
+	 */
 	public final Column FILE_PATHNAME = new Column(this, "file_pathname");
-	/** 附件名 */
+
+	/** 
+	 * 附件名
+	 * 
+	 */
 	public final Column FILE_TITLE = new Column(this, "file_title");
-	/** 附件扩展 */
+
+	/** 
+	 * 附件扩展名
+	 * 
+	 */
 	public final Column FILE_EXTENSION = new Column(this, "file_extension");
-	/** 附件大小 */
+
+	/** 
+	 * 附件大小
+	 * 
+	 */
 	public final Column FILE_SIZE = new Column(this, "file_size");
-	/** 附件文件类型 */
+
+	/** 
+	 * 附件文件类型
+	 * 
+	 */
 	public final Column FILE_OBJECTTYPE = new Column(this, "file_objectType");
-	/** 附件对象ID */
+
+	/** 
+	 * 附件对象ID
+	 * 
+	 */
 	public final Column FILE_OBJECTID = new Column(this, "file_objectID");
-	/** 由谁添加 */
+
+	/** 
+	 * 由谁添加
+	 * 
+	 */
 	public final Column FILE_ADDEDBY = new Column(this, "file_addedBy");
-	/** 附件添加日期 */
+
+	/** 
+	 * 附件添加日期
+	 * 
+	 */
 	public final Column FILE_ADDEDDATE = new Column(this, "file_addedDate");
-	/** 下载次数 */
+
+	/** 
+	 * 下载次数
+	 * 
+	 */
 	public final Column FILE_DOWNLOADS = new Column(this, "file_downloads");
-	/** 附件名 */
+
+	/** 
+	 * file_extra
+	 * 
+	 */
 	public final Column FILE_EXTRA = new Column(this, "file_extra");
-	/** 是否删除 */
+
+	/** 
+	 * 是否删除
+	 * 
+	 */
 	public final Column FILE_DELETED = new Column(this, "file_deleted");
+
 
 		private FileTable() {
 			super("file");

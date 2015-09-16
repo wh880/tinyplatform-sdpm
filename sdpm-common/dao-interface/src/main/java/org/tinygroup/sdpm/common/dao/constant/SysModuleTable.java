@@ -14,32 +14,73 @@
  *  limitations under the License.
  */
 
-package sdpm.common.dao.inter.constant;
+package org.tinygroup.sdpm.common.dao.constant;
 
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
 
+/** 
+ * 系统模块表
+ * 
+ */
 public class SysModuleTable extends Table {
 
 	public static final SysModuleTable SYS_MODULETABLE = new SysModuleTable();
-	/** 模块ID */
+
+	/** 
+	 * 模块ID
+	 * 
+	 */
 	public final Column SYS_MODULE_ID = new Column(this, "sys_module_id");
-	/** 模块根节点 */
+
+	/** 
+	 * 模块根节点
+	 * 
+	 */
 	public final Column SYS_MODULE_ROOT = new Column(this, "sys_module_root");
-	/** 模块名称 */
+
+	/** 
+	 * 模块名称
+	 * 
+	 */
 	public final Column SYS_MODULE_NAME = new Column(this, "sys_module_name");
-	/** 模块地址 */
+
+	/** 
+	 * 模块地址
+	 * 
+	 */
 	public final Column SYS_MODULE_PATH = new Column(this, "sys_module_path");
-	/** 模块父节点 */
+
+	/** 
+	 * 模块父节点
+	 * 
+	 */
 	public final Column SYS_MODULE_PARENT = new Column(this, "sys_module_parent");
-	/** 模块等级 */
+
+	/** 
+	 * 模块等级
+	 * 
+	 */
 	public final Column SYS_MODULE_GRADE = new Column(this, "sys_module_grade");
-	/** 模块次序 */
+
+	/** 
+	 * 模块次序
+	 * 
+	 */
 	public final Column SYS_MODULE_ORDER = new Column(this, "sys_module_order");
-	/** 模块类型 */
+
+	/** 
+	 * 模块类型
+	 * 
+	 */
 	public final Column SYS_MODULE_TYPE = new Column(this, "sys_module_type");
-	/** 模块归属 */
+
+	/** 
+	 * 模块归属
+	 * 
+	 */
 	public final Column SYS_MODULE_OWNER = new Column(this, "sys_module_owner");
+
 
 		private SysModuleTable() {
 			super("sys_module");

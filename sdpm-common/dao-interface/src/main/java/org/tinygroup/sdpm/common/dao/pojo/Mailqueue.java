@@ -14,40 +14,74 @@
  *  limitations under the License.
  */
 
-package sdpm.common.dao.inter.pojo;
+package org.tinygroup.sdpm.common.dao.pojo;
 
 import java.util.Date;
 
+/** 
+ * 邮件队列
+ * 
+ */
 public class Mailqueue {
 
-	/** 邮件队列ID */
+	/** 
+	 * 邮件队列ID
+	 * 
+	 */
 	private Integer mailqueueId;
 
-	/** 队列延迟 */
+	/** 
+	 * 发送给
+	 * 
+	 */
 	private String mailqueueToList;
 
-	/** 邮箱队列——ccList */
+	/** 
+	 * 抄送给
+	 * 
+	 */
 	private String mailqueueCcList;
 
-	/** 邮箱队列主题 */
+	/** 
+	 * 邮箱队列主题
+	 * 
+	 */
 	private String mailqueueSubject;
 
-	/** 队列主体 */
+	/** 
+	 * 队列主体
+	 * 
+	 */
 	private String mailqueueBody;
 
-	/** 添加日期 */
+	/** 
+	 * 添加日期
+	 * 
+	 */
 	private Date mailqueueAddedDate;
 
-	/** 邮箱队列由谁添加 */
+	/** 
+	 * 邮箱队列由谁添加
+	 * 
+	 */
 	private String mailqueueAddedBy;
 
-	/** 传送时间 */
+	/** 
+	 * 传送时间
+	 * 
+	 */
 	private Date mailqueueSendTime;
 
-	/** 队列状态 */
+	/** 
+	 * 队列状态
+	 * 
+	 */
 	private String mailqueueStatus;
 
-	/** 传送失败理由 */
+	/** 
+	 * 传送失败理由
+	 * 
+	 */
 	private String mailqueueFailReason;
 
 

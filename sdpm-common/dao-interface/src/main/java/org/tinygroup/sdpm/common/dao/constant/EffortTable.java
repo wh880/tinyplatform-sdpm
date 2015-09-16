@@ -14,38 +14,91 @@
  *  limitations under the License.
  */
 
-package sdpm.common.dao.inter.constant;
+package org.tinygroup.sdpm.common.dao.constant;
 
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
 
+/** 
+ * 日志表单
+ * 
+ */
 public class EffortTable extends Table {
 
 	public static final EffortTable EFFORTTABLE = new EffortTable();
-	/** 日志编号 */
+
+	/** 
+	 * 日志编号
+	 * 
+	 */
 	public final Column EFFORT_ID = new Column(this, "effort_id");
-	/** 日志对象 */
+
+	/** 
+	 * 日志对象
+	 * 
+	 */
 	public final Column EFFORT_OBJECTTYPE = new Column(this, "effort_objectType");
-	/** 对象ID */
+
+	/** 
+	 * 对象ID
+	 * 
+	 */
 	public final Column EFFORT_OBJECTID = new Column(this, "effort_objectID");
-	/** 日志下的对应的产品 */
+
+	/** 
+	 * 所属产品
+	 * 
+	 */
 	public final Column EFFORT_PRODUCT = new Column(this, "effort_product");
-	/** 日志下的项目对象 */
+
+	/** 
+	 * 所属项目
+	 * 
+	 */
 	public final Column EFFORT_PROJECT = new Column(this, "effort_project");
-	/** 登记人 */
+
+	/** 
+	 * 登记人
+	 * 
+	 */
 	public final Column EFFORT_ACCOUNT = new Column(this, "effort_account");
-	/** 工作内容 */
+
+	/** 
+	 * 工作内容
+	 * 
+	 */
 	public final Column EFFORT_WORK = new Column(this, "effort_work");
-	/** 日期 */
+
+	/** 
+	 * 日期
+	 * 
+	 */
 	public final Column EFFORT_DATE = new Column(this, "effort_date");
-	/** 剩余 */
+
+	/** 
+	 * 剩余
+	 * 
+	 */
 	public final Column EFFORT_LEFT = new Column(this, "effort_left");
-	/** 耗时 */
+
+	/** 
+	 * 耗时
+	 * 
+	 */
 	public final Column EFFORT_CONSUMED = new Column(this, "effort_consumed");
-	/** 开始 */
+
+	/** 
+	 * 开始
+	 * 
+	 */
 	public final Column EFFORT_BEGIN = new Column(this, "effort_begin");
-	/** 已关闭 */
+
+	/** 
+	 * 已关闭
+	 * 
+	 */
 	public final Column EFFORT_END = new Column(this, "effort_end");
+
 
 		private EffortTable() {
 			super("effort");

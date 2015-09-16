@@ -14,11 +14,11 @@
  *  limitations under the License.
  */
 
-package sdpm.common.dao.inter;
+package org.tinygroup.sdpm.common.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
-import sdpm.common.dao.inter.pojo.File;
+import org.tinygroup.sdpm.common.dao.pojo.File;
 
 public interface FileDao extends BaseDao<File,Integer> {
 

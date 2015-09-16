@@ -14,36 +14,66 @@
  *  limitations under the License.
  */
 
-package sdpm.common.dao.inter.pojo;
+package org.tinygroup.sdpm.common.dao.pojo;
 
-
+/** 
+ * 系统模块表
+ * 
+ */
 public class SysModule {
 
-	/** 模块ID */
+	/** 
+	 * 模块ID
+	 * 
+	 */
 	private Integer sysModuleId;
 
-	/** 模块根节点 */
+	/** 
+	 * 模块根节点
+	 * 
+	 */
 	private Integer sysModuleRoot;
 
-	/** 模块名称 */
+	/** 
+	 * 模块名称
+	 * 
+	 */
 	private String sysModuleName;
 
-	/** 模块地址 */
+	/** 
+	 * 模块地址
+	 * 
+	 */
 	private String sysModulePath;
 
-	/** 模块父节点 */
+	/** 
+	 * 模块父节点
+	 * 
+	 */
 	private Integer sysModuleParent;
 
-	/** 模块等级 */
+	/** 
+	 * 模块等级
+	 * 
+	 */
 	private Integer sysModuleGrade;
 
-	/** 模块次序 */
+	/** 
+	 * 模块次序
+	 * 
+	 */
 	private Integer sysModuleOrder;
 
-	/** 模块类型 */
+	/** 
+	 * 模块类型
+	 * 
+	 */
 	private String sysModuleType;
 
-	/** 模块归属 */
+	/** 
+	 * 模块归属
+	 * 
+	 */
 	private String sysModuleOwner;
 
 

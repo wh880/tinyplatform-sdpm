@@ -14,12 +14,12 @@
  *  limitations under the License.
  */
 
-package sdpm.common.dao.inter;
+package org.tinygroup.sdpm.common.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
-import sdpm.common.dao.inter.pojo.Mailqueue;
+import org.tinygroup.sdpm.common.dao.pojo.SysModule;
 
-public interface MailqueueDao extends BaseDao<Mailqueue,Integer> {
+public interface SysModuleDao extends BaseDao<SysModule,Integer> {
 
 }

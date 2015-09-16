@@ -14,46 +14,86 @@
  *  limitations under the License.
  */
 
-package sdpm.common.dao.inter.pojo;
+package org.tinygroup.sdpm.common.dao.pojo;
 
 import java.util.Date;
 
+/** 
+ * 日志表单
+ * 
+ */
 public class Effort {
 
-	/** 日志编号 */
+	/** 
+	 * 日志编号
+	 * 
+	 */
 	private Integer effortId;
 
-	/** 日志对象 */
+	/** 
+	 * 日志对象
+	 * 
+	 */
 	private String effortObjectType;
 
-	/** 对象ID */
+	/** 
+	 * 对象ID
+	 * 
+	 */
 	private Integer effortObjectID;
 
-	/** 日志下的对应的产品 */
+	/** 
+	 * 所属产品
+	 * 
+	 */
 	private String effortProduct;
 
-	/** 日志下的项目对象 */
+	/** 
+	 * 所属项目
+	 * 
+	 */
 	private Integer effortProject;
 
-	/** 登记人 */
+	/** 
+	 * 登记人
+	 * 
+	 */
 	private String effortAccount;
 
-	/** 工作内容 */
+	/** 
+	 * 工作内容
+	 * 
+	 */
 	private String effortWork;
 
-	/** 日期 */
+	/** 
+	 * 日期
+	 * 
+	 */
 	private Date effortDate;
 
-	/** 剩余 */
+	/** 
+	 * 剩余
+	 * 
+	 */
 	private Float effortLeft;
 
-	/** 耗时 */
+	/** 
+	 * 耗时
+	 * 
+	 */
 	private Float effortConsumed;
 
-	/** 开始 */
+	/** 
+	 * 开始
+	 * 
+	 */
 	private Integer effortBegin;
 
-	/** 已关闭 */
+	/** 
+	 * 已关闭
+	 * 
+	 */
 	private Integer effortEnd;
 
 

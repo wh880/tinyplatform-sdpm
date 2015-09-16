@@ -14,34 +14,79 @@
  *  limitations under the License.
  */
 
-package sdpm.common.dao.inter.constant;
+package org.tinygroup.sdpm.common.dao.constant;
 
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
 
+/** 
+ * 邮件队列
+ * 
+ */
 public class MailqueueTable extends Table {
 
 	public static final MailqueueTable MAILQUEUETABLE = new MailqueueTable();
-	/** 邮件队列ID */
+
+	/** 
+	 * 邮件队列ID
+	 * 
+	 */
 	public final Column MAILQUEUE_ID = new Column(this, "mailqueue_id");
-	/** 队列延迟 */
+
+	/** 
+	 * 发送给
+	 * 
+	 */
 	public final Column MAILQUEUE_TOLIST = new Column(this, "mailqueue_toList");
-	/** 邮箱队列——ccList */
+
+	/** 
+	 * 抄送给
+	 * 
+	 */
 	public final Column MAILQUEUE_CCLIST = new Column(this, "mailqueue_ccList");
-	/** 邮箱队列主题 */
+
+	/** 
+	 * 邮箱队列主题
+	 * 
+	 */
 	public final Column MAILQUEUE_SUBJECT = new Column(this, "mailqueue_subject");
-	/** 队列主体 */
+
+	/** 
+	 * 队列主体
+	 * 
+	 */
 	public final Column MAILQUEUE_BODY = new Column(this, "mailqueue_body");
-	/** 添加日期 */
+
+	/** 
+	 * 添加日期
+	 * 
+	 */
 	public final Column MAILQUEUE_ADDEDDATE = new Column(this, "mailqueue_addedDate");
-	/** 邮箱队列由谁添加 */
+
+	/** 
+	 * 邮箱队列由谁添加
+	 * 
+	 */
 	public final Column MAILQUEUE_ADDEDBY = new Column(this, "mailqueue_addedBy");
-	/** 传送时间 */
+
+	/** 
+	 * 传送时间
+	 * 
+	 */
 	public final Column MAILQUEUE_SENDTIME = new Column(this, "mailqueue_sendTime");
-	/** 队列状态 */
+
+	/** 
+	 * 队列状态
+	 * 
+	 */
 	public final Column MAILQUEUE_STATUS = new Column(this, "mailqueue_status");
-	/** 传送失败理由 */
+
+	/** 
+	 * 传送失败理由
+	 * 
+	 */
 	public final Column MAILQUEUE_FAILREASON = new Column(this, "mailqueue_failReason");
+
 
 		private MailqueueTable() {
 			super("mailqueue");
