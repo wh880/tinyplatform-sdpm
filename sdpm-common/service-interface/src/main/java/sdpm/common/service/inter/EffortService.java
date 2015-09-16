@@ -3,7 +3,7 @@ package sdpm.common.service.inter;
 import java.util.Date;
 import java.util.List;
 
-import sdpm.common.dao.inter.pojo.Effort;
+import org.tinygroup.sdpm.common.dao.pojo.Effort;
 
 public interface EffortService {
 	/**

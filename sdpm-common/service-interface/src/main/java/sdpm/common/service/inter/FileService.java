@@ -2,7 +2,7 @@ package sdpm.common.service.inter;
 
 import java.util.List;
 
-import sdpm.common.dao.inter.pojo.File;
+import org.tinygroup.sdpm.common.dao.pojo.File;
 
 
 public interface FileService {
