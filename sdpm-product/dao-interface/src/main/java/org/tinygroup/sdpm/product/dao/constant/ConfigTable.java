@@ -20,52 +20,52 @@ import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
 
 /** 
- * 需求表述表
+ * 模块配置表
  * 
  */
-public class StorySpecTable extends Table {
+public class ConfigTable extends Table {
 
-	public static final StorySpecTable STORYSPECTABLE = new StorySpecTable();
-
-	/** 
-	 * 公司ID
-	 * 
-	 */
-	public final Column COMPANY_ID = new Column(this, "company_id");
+	public static final ConfigTable CONFIGTABLE = new ConfigTable();
 
 	/** 
-	 * 需求ID
+	 * 配置ID
 	 * 
 	 */
-	public final Column STORY_ID = new Column(this, "story_id");
+	public final Column CONFIG_ID = new Column(this, "config_id");
 
 	/** 
-	 * 需求版本
+	 * 配置创建人
 	 * 
 	 */
-	public final Column STORY_VERSION = new Column(this, "story_version");
+	public final Column CONFIG_OWNER = new Column(this, "config_owner");
 
 	/** 
-	 * 需求标题
+	 * 配置模块
 	 * 
 	 */
-	public final Column STORY_TITLE = new Column(this, "story_title");
+	public final Column CONFIG_MODULE = new Column(this, "config_module");
 
 	/** 
-	 * 需求描述
+	 * 配置部分
 	 * 
 	 */
-	public final Column STORY_SPEC = new Column(this, "story_spec");
+	public final Column CONFIG_SECTION = new Column(this, "config_section");
 
 	/** 
-	 * 验证标准
+	 * 配置的关键词
 	 * 
 	 */
-	public final Column STORY_VERIFICATION = new Column(this, "story_verification");
+	public final Column CONFIG_KEY = new Column(this, "config_key");
+
+	/** 
+	 * 配置的值
+	 * 
+	 */
+	public final Column CONFIG_VALUE = new Column(this, "config_value");
 
 
-		private StorySpecTable() {
-			super("storySpec");
+		private ConfigTable() {
+			super("config");
 		}
 
 }

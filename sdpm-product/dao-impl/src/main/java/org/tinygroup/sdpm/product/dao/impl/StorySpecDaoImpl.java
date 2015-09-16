@@ -16,16 +16,29 @@
 
 package org.tinygroup.sdpm.product.dao.impl;
 
-import static org.tinygroup.tinysqldsl.Delete.delete;
-import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.selectFrom;
-import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.sdpm.product.dao.constant.StorySpecTable.*;
+import static org.tinygroup.tinysqldsl.Select.*;
+import static org.tinygroup.tinysqldsl.Insert.*;
+import static org.tinygroup.tinysqldsl.Delete.*;
+import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
 import java.util.List;
 
+import org.tinygroup.tinysqldsl.Delete;
+import org.tinygroup.tinysqldsl.Insert;
+import org.tinygroup.tinysqldsl.Select;
+import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.sdpm.product.dao.pojo.StorySpec;
+import org.tinygroup.sdpm.product.dao.StorySpecDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -33,17 +46,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.product.dao.inter.StorySpecDao;
-import org.tinygroup.sdpm.product.dao.pojo.StorySpec;
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import static org.tinygroup.sdpm.product.dao.constant.StorySpecTable.STORYSPECTABLE;
 
 public class StorySpecDaoImpl extends TinyDslDaoSupport implements StorySpecDao {
 
@@ -51,21 +53,19 @@ public class StorySpecDaoImpl extends TinyDslDaoSupport implements StorySpecDao 
 		return getDslTemplate().insertAndReturnKey(storySpec, new InsertGenerateCallback<StorySpec>() {
 			public Insert generate(StorySpec t) {
 				Insert insert = insertInto(STORYSPECTABLE).values(
-					STORYSPECTABLE.STORYSPEC_ID.value(t.getStorySpecId()),
 					STORYSPECTABLE.COMPANY_ID.value(t.getCompanyId()),
 					STORYSPECTABLE.STORY_ID.value(t.getStoryId()),
 					STORYSPECTABLE.STORY_VERSION.value(t.getStoryVersion()),
 					STORYSPECTABLE.STORY_TITLE.value(t.getStoryTitle()),
 					STORYSPECTABLE.STORY_SPEC.value(t.getStorySpec()),
-					STORYSPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification()),
-					STORYSPECTABLE.DELETED.value(t.getDeleted()));
+					STORYSPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification()));
 				return insert;
 			}
 		});
 	}
 
 	public int edit(StorySpec storySpec) {
-		if(storySpec == null || storySpec.getStorySpecId() == null){
+		if(storySpec == null || storySpec.getCompanyId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(storySpec, new UpdateGenerateCallback<StorySpec>() {
@@ -76,9 +76,8 @@ public class StorySpecDaoImpl extends TinyDslDaoSupport implements StorySpecDao 
 					STORYSPECTABLE.STORY_VERSION.value(t.getStoryVersion()),
 					STORYSPECTABLE.STORY_TITLE.value(t.getStoryTitle()),
 					STORYSPECTABLE.STORY_SPEC.value(t.getStorySpec()),
-					STORYSPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification()),
-					STORYSPECTABLE.DELETED.value(t.getDeleted())).where(
-					STORYSPECTABLE.STORYSPEC_ID.eq(t.getStorySpecId()));
+					STORYSPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification())).where(
+					STORYSPECTABLE.COMPANY_ID.eq(t.getCompanyId()));
 				return update;
 			}
 		});
@@ -90,7 +89,7 @@ public class StorySpecDaoImpl extends TinyDslDaoSupport implements StorySpecDao 
 		}
 		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
 			public Delete generate(Serializable pk) {
-				return delete(STORYSPECTABLE).where(STORYSPECTABLE.STORYSPEC_ID.eq(pk));
+				return delete(STORYSPECTABLE).where(STORYSPECTABLE.COMPANY_ID.eq(pk));
 			}
 		});
 	}
@@ -101,7 +100,7 @@ public class StorySpecDaoImpl extends TinyDslDaoSupport implements StorySpecDao 
 		}
 		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
 			public Delete generate(Serializable[] t) {
-				return delete(STORYSPECTABLE).where(STORYSPECTABLE.STORYSPEC_ID.in(t));
+				return delete(STORYSPECTABLE).where(STORYSPECTABLE.COMPANY_ID.in(t));
 		}
 		},pks);
 	}
@@ -110,7 +109,7 @@ public class StorySpecDaoImpl extends TinyDslDaoSupport implements StorySpecDao 
 		return getDslTemplate().getByKey(pk, StorySpec.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(STORYSPECTABLE).where(STORYSPECTABLE.STORYSPEC_ID.eq(t));
+			return selectFrom(STORYSPECTABLE).where(STORYSPECTABLE.COMPANY_ID.eq(t));
 			}
 		});
 	}
@@ -130,8 +129,7 @@ public class StorySpecDaoImpl extends TinyDslDaoSupport implements StorySpecDao 
 					STORYSPECTABLE.STORY_VERSION.eq(t.getStoryVersion()),
 					STORYSPECTABLE.STORY_TITLE.eq(t.getStoryTitle()),
 					STORYSPECTABLE.STORY_SPEC.eq(t.getStorySpec()),
-					STORYSPECTABLE.STORY_VERIFICATION.eq(t.getStoryVerification()),
-					STORYSPECTABLE.DELETED.eq(t.getDeleted())));
+					STORYSPECTABLE.STORY_VERIFICATION.eq(t.getStoryVerification())));
 			}
 		});
 	}
@@ -150,8 +148,7 @@ public class StorySpecDaoImpl extends TinyDslDaoSupport implements StorySpecDao 
 					STORYSPECTABLE.STORY_VERSION.eq(t.getStoryVersion()),
 					STORYSPECTABLE.STORY_TITLE.eq(t.getStoryTitle()),
 					STORYSPECTABLE.STORY_SPEC.eq(t.getStorySpec()),
-					STORYSPECTABLE.STORY_VERIFICATION.eq(t.getStoryVerification()),
-					STORYSPECTABLE.DELETED.eq(t.getDeleted())));
+					STORYSPECTABLE.STORY_VERIFICATION.eq(t.getStoryVerification())));
 			}
 		});
 	}
@@ -169,8 +166,7 @@ public class StorySpecDaoImpl extends TinyDslDaoSupport implements StorySpecDao 
 					STORYSPECTABLE.STORY_VERSION.value(new JdbcNamedParameter("storyVersion")),
 					STORYSPECTABLE.STORY_TITLE.value(new JdbcNamedParameter("storyTitle")),
 					STORYSPECTABLE.STORY_SPEC.value(new JdbcNamedParameter("storySpec")),
-					STORYSPECTABLE.STORY_VERIFICATION.value(new JdbcNamedParameter("storyVerification")),
-					STORYSPECTABLE.DELETED.value(new JdbcNamedParameter("deleted")));
+					STORYSPECTABLE.STORY_VERIFICATION.value(new JdbcNamedParameter("storyVerification")));
 			}
 		});
 	}
@@ -192,9 +188,8 @@ public class StorySpecDaoImpl extends TinyDslDaoSupport implements StorySpecDao 
 					STORYSPECTABLE.STORY_VERSION.value(new JdbcNamedParameter("storyVersion")),
 					STORYSPECTABLE.STORY_TITLE.value(new JdbcNamedParameter("storyTitle")),
 					STORYSPECTABLE.STORY_SPEC.value(new JdbcNamedParameter("storySpec")),
-					STORYSPECTABLE.STORY_VERIFICATION.value(new JdbcNamedParameter("storyVerification")),
-					STORYSPECTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
-				STORYSPECTABLE.STORYSPEC_ID.eq(new JdbcNamedParameter("storySpecId")));
+					STORYSPECTABLE.STORY_VERIFICATION.value(new JdbcNamedParameter("storyVerification"))).where(
+				STORYSPECTABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")));
 			}
 		});
 	}
@@ -207,14 +202,12 @@ public class StorySpecDaoImpl extends TinyDslDaoSupport implements StorySpecDao 
 
 			public Delete generate() {
 				return delete(STORYSPECTABLE).where(and(
-				STORYSPECTABLE.STORYSPEC_ID.eq(new JdbcNamedParameter("storySpecId")),
 				STORYSPECTABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")),
 				STORYSPECTABLE.STORY_ID.eq(new JdbcNamedParameter("storyId")),
 				STORYSPECTABLE.STORY_VERSION.eq(new JdbcNamedParameter("storyVersion")),
 				STORYSPECTABLE.STORY_TITLE.eq(new JdbcNamedParameter("storyTitle")),
 				STORYSPECTABLE.STORY_SPEC.eq(new JdbcNamedParameter("storySpec")),
-				STORYSPECTABLE.STORY_VERIFICATION.eq(new JdbcNamedParameter("storyVerification")),
-				STORYSPECTABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
+				STORYSPECTABLE.STORY_VERIFICATION.eq(new JdbcNamedParameter("storyVerification"))));
 			}
 		});
 	}

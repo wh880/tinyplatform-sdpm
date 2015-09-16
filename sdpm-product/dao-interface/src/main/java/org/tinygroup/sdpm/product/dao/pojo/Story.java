@@ -18,112 +18,223 @@ package org.tinygroup.sdpm.product.dao.pojo;
 
 import java.util.Date;
 
+/** 
+ * 需求表
+ * 
+ */
 public class Story {
 
-	/** 需求ID */
+	/** 
+	 * 需求ID
+	 * 
+	 */
 	private Integer storyId;
 
-	/** 公司ID */
+	/** 
+	 * 公司ID
+	 * 
+	 */
 	private Integer companyId;
 
-	/** 产品ID */
+	/** 
+	 * 产品ID
+	 * 
+	 */
 	private Integer productId;
 
-	/** 父需求ID */
+	/** 
+	 * 父需求ID
+	 * 
+	 */
 	private Integer storyParentId;
 
-	/** 模块ID */
+	/** 
+	 * 模块ID
+	 * 
+	 */
 	private Integer moduleId;
 
-	/** 计划ID */
+	/** 
+	 * 计划ID
+	 * 
+	 */
 	private Integer planId;
 
-	/** 需求状态 */
+	/** 
+	 * 需求状态
+	 * 
+	 * 0-created新建；1-accepted评审通过（接受，并纳入计划）；2-rejected评审不通过（拒绝，属终点状态）；3-canceled取消（无效或重复，属终点状态）；4-postponed待明确（需要重新评审），5-changed已变更（需要重新评审）；6-developing开发中（关联到项目）7-finished完成（通过测试验收，可发布），8-released已发布（创建了产品发布），9-closed关闭（终点状态）
+	 */
 	private String storyStatus;
 
-	/** 需求来源 */
+	/** 
+	 * 需求来源
+	 * 
+	 */
 	private String storySource;
 
-	/** 来源Bug */
+	/** 
+	 * 来源Bug
+	 * 
+	 */
 	private Integer storyFromBug;
 
-	/** 需求标题 */
+	/** 
+	 * 需求标题
+	 * 
+	 */
 	private String storyTitle;
 
-	/** 需求关键字 */
+	/** 
+	 * 需求关键字
+	 * 
+	 */
 	private String storyKeywords;
 
-	/** 需求类型 */
+	/** 
+	 * 需求类型
+	 * 
+	 */
 	private String storyType;
 
-	/** 需求优先级 */
+	/** 
+	 * 需求优先级
+	 * 
+	 */
 	private Integer storyPri;
 
-	/** 预计工时 */
+	/** 
+	 * 预计工时
+	 * 
+	 */
 	private Float storyEstimate;
 
-	/** 所处阶段 */
+	/** 
+	 * 所处阶段
+	 * 
+	 */
 	private String storyStage;
 
-	/** 邮件列表 */
+	/** 
+	 * 邮件列表
+	 * 
+	 */
 	private String storyMailto;
 
-	/** 由谁创建 */
+	/** 
+	 * 由谁创建
+	 * 
+	 */
 	private String storyOpenedBy;
 
-	/** 创建日期 */
+	/** 
+	 * 创建日期
+	 * 
+	 */
 	private Date storyOpenedDate;
 
-	/** 需求指派 */
+	/** 
+	 * 需求指派
+	 * 
+	 */
 	private String storyAssignedTo;
 
-	/** 需求指派日期 */
+	/** 
+	 * 需求指派日期
+	 * 
+	 */
 	private Date storyAssignedDate;
 
-	/** 需求上次编辑者 */
+	/** 
+	 * 需求上次编辑者
+	 * 
+	 */
 	private String storyLastEditedBy;
 
-	/** 需求上次编辑日期 */
+	/** 
+	 * 需求上次编辑日期
+	 * 
+	 */
 	private Date storyLastEditedDate;
 
-	/** 需求审核人 */
+	/** 
+	 * 需求审核人
+	 * 
+	 */
 	private String storyReviewedBy;
 
-	/** 需求审核日期 */
+	/** 
+	 * 需求审核日期
+	 * 
+	 */
 	private Date storyReviewedDate;
 
-	/** 需求关闭者 */
+	/** 
+	 * 需求关闭者
+	 * 
+	 */
 	private String storyClosedBy;
 
-	/** 需求关闭日期 */
+	/** 
+	 * 需求关闭日期
+	 * 
+	 */
 	private Date storyClosedDate;
 
-	/** 需求关闭原因 */
+	/** 
+	 * 需求关闭原因
+	 * 
+	 */
 	private String storyClosedReason;
 
-	/** 关联bug */
-	private Integer storyToBug;
+	/** 
+	 * 待定（关联bug）
+	 * 
+	 */
+	private Integer toBug;
 
-	/** 关联需求 */
+	/** 
+	 * 关联需求
+	 * 
+	 */
 	private String storyLinkStories;
 
-	/** 细分需求 */
+	/** 
+	 * 细分需求
+	 * 
+	 */
 	private String storyChildStories;
 
-	/** 重复需求ID */
+	/** 
+	 * 重复需求ID
+	 * 
+	 */
 	private Integer storyDuplicateStory;
 
-	/** 需求版本 */
+	/** 
+	 * 需求版本
+	 * 
+	 */
 	private Integer storyVersion;
 
-	/** 缺陷ID */
+	/** 
+	 * 缺陷ID
+	 * 
+	 */
 	private Integer bugId;
 
-	/** 请求ID */
+	/** 
+	 * 请求ID
+	 * 
+	 * 服务请求ID
+	 */
 	private Integer clientRequestId;
 
-	/** 已删除 */
-	private String deleted;
+	/** 
+	 * 已删除
+	 * 
+	 */
+	private Integer deleted;
 
 
 	public void setStoryId(Integer storyId){
@@ -342,12 +453,12 @@ public class Story {
 		return storyClosedReason;
 	}
 
-	public void setStoryToBug(Integer storyToBug){
-		this. storyToBug = storyToBug;
+	public void setToBug(Integer toBug){
+		this. toBug = toBug;
 	}
 
-	public Integer getStoryToBug(){
-		return storyToBug;
+	public Integer getToBug(){
+		return toBug;
 	}
 
 	public void setStoryLinkStories(String storyLinkStories){
@@ -398,11 +509,11 @@ public class Story {
 		return clientRequestId;
 	}
 
-	public void setDeleted(String deleted){
+	public void setDeleted(Integer deleted){
 		this. deleted = deleted;
 	}
 
-	public String getDeleted(){
+	public Integer getDeleted(){
 		return deleted;
 	}
 

@@ -19,25 +19,62 @@ package org.tinygroup.sdpm.product.dao.constant;
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
 
+/** 
+ * 计划表
+ * 
+ */
 public class PlanTable extends Table {
 
 	public static final PlanTable PLANTABLE = new PlanTable();
-	/** 计划ID */
+
+	/** 
+	 * 计划ID
+	 * 
+	 */
 	public final Column PLAN_ID = new Column(this, "plan_id");
-	/** 公司ID */
+
+	/** 
+	 * 公司ID
+	 * 
+	 */
 	public final Column COMPANY_ID = new Column(this, "company_id");
-	/** 产品ID */
+
+	/** 
+	 * 产品ID
+	 * 
+	 */
 	public final Column PRODUCT_ID = new Column(this, "product_id");
-	/** 计划名称 */
+
+	/** 
+	 * 计划名称
+	 * 
+	 */
 	public final Column PLAN_NAME = new Column(this, "plan_name");
-	/** 计划描述 */
+
+	/** 
+	 * 计划描述
+	 * 
+	 */
 	public final Column PLAN_SPEC = new Column(this, "plan_spec");
-	/** 计划开始时间 */
+
+	/** 
+	 * 计划开始时间
+	 * 
+	 */
 	public final Column PLAN_BEGINDATE = new Column(this, "plan_beginDate");
-	/** 计划结束时间 */
+
+	/** 
+	 * 计划结束时间
+	 * 
+	 */
 	public final Column PLAN_ENDDATE = new Column(this, "plan_endDate");
-	/** 已删除 */
+
+	/** 
+	 * 已删除
+	 * 
+	 */
 	public final Column DELETED = new Column(this, "deleted");
+
 
 		private PlanTable() {
 			super("plan");

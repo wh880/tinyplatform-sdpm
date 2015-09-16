@@ -16,16 +16,29 @@
 
 package org.tinygroup.sdpm.product.dao.impl;
 
-import static org.tinygroup.tinysqldsl.Delete.delete;
-import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.selectFrom;
-import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.sdpm.product.dao.constant.ReleaseTable.*;
+import static org.tinygroup.tinysqldsl.Select.*;
+import static org.tinygroup.tinysqldsl.Insert.*;
+import static org.tinygroup.tinysqldsl.Delete.*;
+import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
 import java.util.List;
 
+import org.tinygroup.tinysqldsl.Delete;
+import org.tinygroup.tinysqldsl.Insert;
+import org.tinygroup.tinysqldsl.Select;
+import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.sdpm.product.dao.pojo.Release;
+import org.tinygroup.sdpm.product.dao.ReleaseDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -33,17 +46,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.product.dao.inter.ReleaseDao;
-import org.tinygroup.sdpm.product.dao.pojo.Release;
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import static org.tinygroup.sdpm.product.dao.constant.ReleaseTable.RELEASETABLE;
+
 public class ReleaseDaoImpl extends TinyDslDaoSupport implements ReleaseDao {
 
 	public Release add(Release release) {
@@ -52,7 +55,7 @@ public class ReleaseDaoImpl extends TinyDslDaoSupport implements ReleaseDao {
 				Insert insert = insertInto(RELEASETABLE).values(
 					RELEASETABLE.RELEASE_ID.value(t.getReleaseId()),
 					RELEASETABLE.PRODUCT_ID.value(t.getProductId()),
-					RELEASETABLE.BUILD.value(t.getBuild()),
+					RELEASETABLE.BUILD_ID.value(t.getBuildId()),
 					RELEASETABLE.RELEASE_NAME.value(t.getReleaseName()),
 					RELEASETABLE.RELEASE_DATE.value(t.getReleaseDate()),
 					RELEASETABLE.RELEASE_STORIES.value(t.getReleaseStories()),
@@ -72,7 +75,7 @@ public class ReleaseDaoImpl extends TinyDslDaoSupport implements ReleaseDao {
 			public Update generate(Release t) {
 				Update update = update(RELEASETABLE).set(
 					RELEASETABLE.PRODUCT_ID.value(t.getProductId()),
-					RELEASETABLE.BUILD.value(t.getBuild()),
+					RELEASETABLE.BUILD_ID.value(t.getBuildId()),
 					RELEASETABLE.RELEASE_NAME.value(t.getReleaseName()),
 					RELEASETABLE.RELEASE_DATE.value(t.getReleaseDate()),
 					RELEASETABLE.RELEASE_STORIES.value(t.getReleaseStories()),
@@ -127,7 +130,7 @@ public class ReleaseDaoImpl extends TinyDslDaoSupport implements ReleaseDao {
 				return selectFrom(RELEASETABLE).where(
 				and(
 					RELEASETABLE.PRODUCT_ID.eq(t.getProductId()),
-					RELEASETABLE.BUILD.eq(t.getBuild()),
+					RELEASETABLE.BUILD_ID.eq(t.getBuildId()),
 					RELEASETABLE.RELEASE_NAME.eq(t.getReleaseName()),
 					RELEASETABLE.RELEASE_DATE.eq(t.getReleaseDate()),
 					RELEASETABLE.RELEASE_STORIES.eq(t.getReleaseStories()),
@@ -148,7 +151,7 @@ public class ReleaseDaoImpl extends TinyDslDaoSupport implements ReleaseDao {
 				return MysqlSelect.selectFrom(RELEASETABLE).where(
 				and(
 					RELEASETABLE.PRODUCT_ID.eq(t.getProductId()),
-					RELEASETABLE.BUILD.eq(t.getBuild()),
+					RELEASETABLE.BUILD_ID.eq(t.getBuildId()),
 					RELEASETABLE.RELEASE_NAME.eq(t.getReleaseName()),
 					RELEASETABLE.RELEASE_DATE.eq(t.getReleaseDate()),
 					RELEASETABLE.RELEASE_STORIES.eq(t.getReleaseStories()),
@@ -168,7 +171,7 @@ public class ReleaseDaoImpl extends TinyDslDaoSupport implements ReleaseDao {
 			public Insert generate() {
 				return insertInto(RELEASETABLE).values(
 					RELEASETABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
-					RELEASETABLE.BUILD.value(new JdbcNamedParameter("build")),
+					RELEASETABLE.BUILD_ID.value(new JdbcNamedParameter("buildId")),
 					RELEASETABLE.RELEASE_NAME.value(new JdbcNamedParameter("releaseName")),
 					RELEASETABLE.RELEASE_DATE.value(new JdbcNamedParameter("releaseDate")),
 					RELEASETABLE.RELEASE_STORIES.value(new JdbcNamedParameter("releaseStories")),
@@ -192,7 +195,7 @@ public class ReleaseDaoImpl extends TinyDslDaoSupport implements ReleaseDao {
 			public Update generate() {
 				return update(RELEASETABLE).set(
 					RELEASETABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
-					RELEASETABLE.BUILD.value(new JdbcNamedParameter("build")),
+					RELEASETABLE.BUILD_ID.value(new JdbcNamedParameter("buildId")),
 					RELEASETABLE.RELEASE_NAME.value(new JdbcNamedParameter("releaseName")),
 					RELEASETABLE.RELEASE_DATE.value(new JdbcNamedParameter("releaseDate")),
 					RELEASETABLE.RELEASE_STORIES.value(new JdbcNamedParameter("releaseStories")),
@@ -214,7 +217,7 @@ public class ReleaseDaoImpl extends TinyDslDaoSupport implements ReleaseDao {
 				return delete(RELEASETABLE).where(and(
 				RELEASETABLE.RELEASE_ID.eq(new JdbcNamedParameter("releaseId")),
 				RELEASETABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId")),
-				RELEASETABLE.BUILD.eq(new JdbcNamedParameter("build")),
+				RELEASETABLE.BUILD_ID.eq(new JdbcNamedParameter("buildId")),
 				RELEASETABLE.RELEASE_NAME.eq(new JdbcNamedParameter("releaseName")),
 				RELEASETABLE.RELEASE_DATE.eq(new JdbcNamedParameter("releaseDate")),
 				RELEASETABLE.RELEASE_STORIES.eq(new JdbcNamedParameter("releaseStories")),

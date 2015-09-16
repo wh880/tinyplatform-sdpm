@@ -18,61 +18,120 @@ package org.tinygroup.sdpm.product.dao.pojo;
 
 import java.util.Date;
 
+/** 
+ * 产品表
+ * 
+ */
 public class Product {
 
-	/** 产品ID */
+	/** 
+	 * 产品ID
+	 * 
+	 */
 	private Integer productId;
 
-	/** 公司ID */
+	/** 
+	 * 公司ID
+	 * 
+	 */
 	private Integer companyId;
 
-	/** 部门ID */
+	/** 
+	 * 部门ID
+	 * 
+	 */
 	private Integer deptId;
 
-	/** 产品线ID */
+	/** 
+	 * 产品线ID
+	 * 
+	 */
 	private Integer productLineId;
 
-	/** 产品名称 */
+	/** 
+	 * 产品名称
+	 * 
+	 */
 	private String productName;
 
-	/** 产品代号 */
+	/** 
+	 * 产品代号
+	 * 
+	 */
 	private String productCode;
 
-	/** 产品序号 */
+	/** 
+	 * 产品序号
+	 * 
+	 */
 	private Integer productOrder;
 
-	/** 产品状态 */
+	/** 
+	 * 产品状态
+	 * 
+	 */
 	private String productStatus;
 
-	/** 产品描述 */
+	/** 
+	 * 产品描述
+	 * 
+	 */
 	private String productDesc;
 
-	/** 产品经理 */
+	/** 
+	 * 产品经理
+	 * 
+	 */
 	private String productOwner;
 
-	/** 产品质量经理 */
+	/** 
+	 * 产品质量经理
+	 * 
+	 */
 	private String productQualityManager;
 
-	/** 产品交付经理 */
+	/** 
+	 * 产品交付经理
+	 * 
+	 */
 	private String productDeliveryManager;
 
-	/** 权限模式 */
+	/** 
+	 * 权限模式
+	 * 
+	 * 本部门范围：0-open公开；1-custom自定义（产品/项目团队和白名单可访问）；2-private私有（产品/项目团队成员才可访问）
+	 */
 	private Integer acl;
 
-	/** 白名单 */
+	/** 
+	 * 白名单
+	 * 
+	 */
 	private String productWhiteList;
 
-	/** 创建者 */
+	/** 
+	 * 创建者
+	 * 
+	 */
 	private String productCreatedBy;
 
-	/** 创建日期 */
+	/** 
+	 * 创建日期
+	 * 
+	 */
 	private Date productCreatedDate;
 
-	/** 创建版本 */
+	/** 
+	 * 创建版本
+	 * 
+	 */
 	private String productCreatedVersion;
 
-	/** 已删除 */
-	private String deleted;
+	/** 
+	 * 已删除
+	 * 
+	 */
+	private Integer deleted;
 
 
 	public void setProductId(Integer productId){
@@ -211,11 +270,11 @@ public class Product {
 		return productCreatedVersion;
 	}
 
-	public void setDeleted(String deleted){
+	public void setDeleted(Integer deleted){
 		this. deleted = deleted;
 	}
 
-	public String getDeleted(){
+	public Integer getDeleted(){
 		return deleted;
 	}
 

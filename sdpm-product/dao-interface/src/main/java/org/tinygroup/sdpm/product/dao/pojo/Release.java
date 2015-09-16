@@ -18,34 +18,65 @@ package org.tinygroup.sdpm.product.dao.pojo;
 
 import java.util.Date;
 
+/** 
+ * 发布表
+ * 
+ */
 public class Release {
 
-	/** 发布ID */
+	/** 
+	 * 发布ID
+	 * 
+	 */
 	private Integer releaseId;
 
-	/** 产品ID */
+	/** 
+	 * 产品ID
+	 * 
+	 */
 	private Integer productId;
 
-	/** 版本 */
-	private String build;
+	/** 
+	 * 版本id
+	 * 
+	 */
+	private Integer buildId;
 
-	/** 发布名称 */
+	/** 
+	 * 发布名称
+	 * 
+	 */
 	private String releaseName;
 
-	/** 发布日期 */
+	/** 
+	 * 发布日期
+	 * 
+	 */
 	private Date releaseDate;
 
-	/** 已完成需求 */
+	/** 
+	 * 已完成需求
+	 * 
+	 */
 	private String releaseStories;
 
-	/** 已解决Bug */
+	/** 
+	 * 已解决Bug
+	 * 
+	 */
 	private String releaseBugs;
 
-	/** 描述 */
+	/** 
+	 * 描述
+	 * 
+	 */
 	private String releaseDesc;
 
-	/** 已删除 */
-	private String deleted;
+	/** 
+	 * 已删除
+	 * 
+	 */
+	private Integer deleted;
 
 
 	public void setReleaseId(Integer releaseId){
@@ -64,12 +95,12 @@ public class Release {
 		return productId;
 	}
 
-	public void setBuild(String build){
-		this. build = build;
+	public void setBuildId(Integer buildId){
+		this. buildId = buildId;
 	}
 
-	public String getBuild(){
-		return build;
+	public Integer getBuildId(){
+		return buildId;
 	}
 
 	public void setReleaseName(String releaseName){
@@ -112,11 +143,11 @@ public class Release {
 		return releaseDesc;
 	}
 
-	public void setDeleted(String deleted){
+	public void setDeleted(Integer deleted){
 		this. deleted = deleted;
 	}
 
-	public String getDeleted(){
+	public Integer getDeleted(){
 		return deleted;
 	}
 

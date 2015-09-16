@@ -20,52 +20,58 @@ import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
 
 /** 
- * 需求表述表
+ * 模块搜索表
  * 
  */
-public class StorySpecTable extends Table {
+public class SearchTable extends Table {
 
-	public static final StorySpecTable STORYSPECTABLE = new StorySpecTable();
-
-	/** 
-	 * 公司ID
-	 * 
-	 */
-	public final Column COMPANY_ID = new Column(this, "company_id");
+	public static final SearchTable SEARCHTABLE = new SearchTable();
 
 	/** 
-	 * 需求ID
+	 * 搜索ID
 	 * 
 	 */
-	public final Column STORY_ID = new Column(this, "story_id");
+	public final Column SEARCH_ID = new Column(this, "search_id");
 
 	/** 
-	 * 需求版本
+	 * 搜索对象类型
 	 * 
 	 */
-	public final Column STORY_VERSION = new Column(this, "story_version");
+	public final Column SEARCH_OBJECTTYPE = new Column(this, "search_objectType");
 
 	/** 
-	 * 需求标题
+	 * 搜索对象ID
 	 * 
 	 */
-	public final Column STORY_TITLE = new Column(this, "story_title");
+	public final Column SEARCH_OBJECTID = new Column(this, "search_objectID");
 
 	/** 
-	 * 需求描述
+	 * 搜索名称	
 	 * 
 	 */
-	public final Column STORY_SPEC = new Column(this, "story_spec");
+	public final Column SEARCH_TITLE = new Column(this, "search_title");
 
 	/** 
-	 * 验证标准
+	 * 搜索内容
 	 * 
 	 */
-	public final Column STORY_VERIFICATION = new Column(this, "story_verification");
+	public final Column SEARCH_CONTENT = new Column(this, "search_content");
+
+	/** 
+	 * 搜索添加日期
+	 * 
+	 */
+	public final Column SEARCH_ADDEDDATE = new Column(this, "search_addedDate");
+
+	/** 
+	 * 搜索编辑日期
+	 * 
+	 */
+	public final Column SEARCH_EDITEDDATE = new Column(this, "search_editedDate");
 
 
-		private StorySpecTable() {
-			super("storySpec");
+		private SearchTable() {
+			super("search");
 		}
 
 }

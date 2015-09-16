@@ -16,41 +16,48 @@
 
 package org.tinygroup.sdpm.product.dao.pojo;
 
-
+/** 
+ * 需求表述表
+ * 
+ */
 public class StorySpec {
 
-	/** 需求描述ID */
-	private Integer storySpecId;
-
-	/** 公司ID */
+	/** 
+	 * 公司ID
+	 * 
+	 */
 	private Integer companyId;
 
-	/** 需求ID */
+	/** 
+	 * 需求ID
+	 * 
+	 */
 	private Integer storyId;
 
-	/** 需求版本 */
+	/** 
+	 * 需求版本
+	 * 
+	 */
 	private Integer storyVersion;
 
-	/** 需求标题 */
+	/** 
+	 * 需求标题
+	 * 
+	 */
 	private String storyTitle;
 
-	/** 需求描述 */
+	/** 
+	 * 需求描述
+	 * 
+	 */
 	private String storySpec;
 
-	/** 验证标准 */
+	/** 
+	 * 验证标准
+	 * 
+	 */
 	private String storyVerification;
 
-	/** 已删除 */
-	private String deleted;
-
-
-	public void setStorySpecId(Integer storySpecId){
-		this. storySpecId = storySpecId;
-	}
-
-	public Integer getStorySpecId(){
-		return storySpecId;
-	}
 
 	public void setCompanyId(Integer companyId){
 		this. companyId = companyId;
@@ -98,14 +105,6 @@ public class StorySpec {
 
 	public String getStoryVerification(){
 		return storyVerification;
-	}
-
-	public void setDeleted(String deleted){
-		this. deleted = deleted;
-	}
-
-	public String getDeleted(){
-		return deleted;
 	}
 
 }

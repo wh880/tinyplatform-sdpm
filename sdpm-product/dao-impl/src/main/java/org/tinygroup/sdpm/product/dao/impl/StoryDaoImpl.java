@@ -16,16 +16,29 @@
 
 package org.tinygroup.sdpm.product.dao.impl;
 
-import static org.tinygroup.tinysqldsl.Delete.delete;
-import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.selectFrom;
-import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.sdpm.product.dao.constant.StoryTable.*;
+import static org.tinygroup.tinysqldsl.Select.*;
+import static org.tinygroup.tinysqldsl.Insert.*;
+import static org.tinygroup.tinysqldsl.Delete.*;
+import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
 import java.util.List;
 
+import org.tinygroup.tinysqldsl.Delete;
+import org.tinygroup.tinysqldsl.Insert;
+import org.tinygroup.tinysqldsl.Select;
+import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.sdpm.product.dao.pojo.Story;
+import org.tinygroup.sdpm.product.dao.StoryDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -33,17 +46,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.product.dao.inter.StoryDao;
-import org.tinygroup.sdpm.product.dao.pojo.Story;
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import static org.tinygroup.sdpm.product.dao.constant.StoryTable.STORYTABLE;
 
 public class StoryDaoImpl extends TinyDslDaoSupport implements StoryDao {
 
@@ -78,7 +80,7 @@ public class StoryDaoImpl extends TinyDslDaoSupport implements StoryDao {
 					STORYTABLE.STORY_CLOSEDBY.value(t.getStoryClosedBy()),
 					STORYTABLE.STORY_CLOSEDDATE.value(t.getStoryClosedDate()),
 					STORYTABLE.STORY_CLOSEDREASON.value(t.getStoryClosedReason()),
-					STORYTABLE.STORY_TOBUG.value(t.getStoryToBug()),
+					STORYTABLE.TOBUG.value(t.getToBug()),
 					STORYTABLE.STORY_LINKSTORIES.value(t.getStoryLinkStories()),
 					STORYTABLE.STORY_CHILDSTORIES.value(t.getStoryChildStories()),
 					STORYTABLE.STORY_DUPLICATESTORY.value(t.getStoryDuplicateStory()),
@@ -124,7 +126,7 @@ public class StoryDaoImpl extends TinyDslDaoSupport implements StoryDao {
 					STORYTABLE.STORY_CLOSEDBY.value(t.getStoryClosedBy()),
 					STORYTABLE.STORY_CLOSEDDATE.value(t.getStoryClosedDate()),
 					STORYTABLE.STORY_CLOSEDREASON.value(t.getStoryClosedReason()),
-					STORYTABLE.STORY_TOBUG.value(t.getStoryToBug()),
+					STORYTABLE.TOBUG.value(t.getToBug()),
 					STORYTABLE.STORY_LINKSTORIES.value(t.getStoryLinkStories()),
 					STORYTABLE.STORY_CHILDSTORIES.value(t.getStoryChildStories()),
 					STORYTABLE.STORY_DUPLICATESTORY.value(t.getStoryDuplicateStory()),
@@ -205,7 +207,7 @@ public class StoryDaoImpl extends TinyDslDaoSupport implements StoryDao {
 					STORYTABLE.STORY_CLOSEDBY.eq(t.getStoryClosedBy()),
 					STORYTABLE.STORY_CLOSEDDATE.eq(t.getStoryClosedDate()),
 					STORYTABLE.STORY_CLOSEDREASON.eq(t.getStoryClosedReason()),
-					STORYTABLE.STORY_TOBUG.eq(t.getStoryToBug()),
+					STORYTABLE.TOBUG.eq(t.getToBug()),
 					STORYTABLE.STORY_LINKSTORIES.eq(t.getStoryLinkStories()),
 					STORYTABLE.STORY_CHILDSTORIES.eq(t.getStoryChildStories()),
 					STORYTABLE.STORY_DUPLICATESTORY.eq(t.getStoryDuplicateStory()),
@@ -252,7 +254,7 @@ public class StoryDaoImpl extends TinyDslDaoSupport implements StoryDao {
 					STORYTABLE.STORY_CLOSEDBY.eq(t.getStoryClosedBy()),
 					STORYTABLE.STORY_CLOSEDDATE.eq(t.getStoryClosedDate()),
 					STORYTABLE.STORY_CLOSEDREASON.eq(t.getStoryClosedReason()),
-					STORYTABLE.STORY_TOBUG.eq(t.getStoryToBug()),
+					STORYTABLE.TOBUG.eq(t.getToBug()),
 					STORYTABLE.STORY_LINKSTORIES.eq(t.getStoryLinkStories()),
 					STORYTABLE.STORY_CHILDSTORIES.eq(t.getStoryChildStories()),
 					STORYTABLE.STORY_DUPLICATESTORY.eq(t.getStoryDuplicateStory()),
@@ -298,7 +300,7 @@ public class StoryDaoImpl extends TinyDslDaoSupport implements StoryDao {
 					STORYTABLE.STORY_CLOSEDBY.value(new JdbcNamedParameter("storyClosedBy")),
 					STORYTABLE.STORY_CLOSEDDATE.value(new JdbcNamedParameter("storyClosedDate")),
 					STORYTABLE.STORY_CLOSEDREASON.value(new JdbcNamedParameter("storyClosedReason")),
-					STORYTABLE.STORY_TOBUG.value(new JdbcNamedParameter("storyToBug")),
+					STORYTABLE.TOBUG.value(new JdbcNamedParameter("toBug")),
 					STORYTABLE.STORY_LINKSTORIES.value(new JdbcNamedParameter("storyLinkStories")),
 					STORYTABLE.STORY_CHILDSTORIES.value(new JdbcNamedParameter("storyChildStories")),
 					STORYTABLE.STORY_DUPLICATESTORY.value(new JdbcNamedParameter("storyDuplicateStory")),
@@ -348,7 +350,7 @@ public class StoryDaoImpl extends TinyDslDaoSupport implements StoryDao {
 					STORYTABLE.STORY_CLOSEDBY.value(new JdbcNamedParameter("storyClosedBy")),
 					STORYTABLE.STORY_CLOSEDDATE.value(new JdbcNamedParameter("storyClosedDate")),
 					STORYTABLE.STORY_CLOSEDREASON.value(new JdbcNamedParameter("storyClosedReason")),
-					STORYTABLE.STORY_TOBUG.value(new JdbcNamedParameter("storyToBug")),
+					STORYTABLE.TOBUG.value(new JdbcNamedParameter("toBug")),
 					STORYTABLE.STORY_LINKSTORIES.value(new JdbcNamedParameter("storyLinkStories")),
 					STORYTABLE.STORY_CHILDSTORIES.value(new JdbcNamedParameter("storyChildStories")),
 					STORYTABLE.STORY_DUPLICATESTORY.value(new JdbcNamedParameter("storyDuplicateStory")),
@@ -396,7 +398,7 @@ public class StoryDaoImpl extends TinyDslDaoSupport implements StoryDao {
 				STORYTABLE.STORY_CLOSEDBY.eq(new JdbcNamedParameter("storyClosedBy")),
 				STORYTABLE.STORY_CLOSEDDATE.eq(new JdbcNamedParameter("storyClosedDate")),
 				STORYTABLE.STORY_CLOSEDREASON.eq(new JdbcNamedParameter("storyClosedReason")),
-				STORYTABLE.STORY_TOBUG.eq(new JdbcNamedParameter("storyToBug")),
+				STORYTABLE.TOBUG.eq(new JdbcNamedParameter("toBug")),
 				STORYTABLE.STORY_LINKSTORIES.eq(new JdbcNamedParameter("storyLinkStories")),
 				STORYTABLE.STORY_CHILDSTORIES.eq(new JdbcNamedParameter("storyChildStories")),
 				STORYTABLE.STORY_DUPLICATESTORY.eq(new JdbcNamedParameter("storyDuplicateStory")),

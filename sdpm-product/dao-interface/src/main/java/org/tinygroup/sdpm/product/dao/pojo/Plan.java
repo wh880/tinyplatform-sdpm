@@ -18,31 +18,59 @@ package org.tinygroup.sdpm.product.dao.pojo;
 
 import java.util.Date;
 
+/** 
+ * 计划表
+ * 
+ */
 public class Plan {
 
-	/** 计划ID */
+	/** 
+	 * 计划ID
+	 * 
+	 */
 	private Integer planId;
 
-	/** 公司ID */
+	/** 
+	 * 公司ID
+	 * 
+	 */
 	private Integer companyId;
 
-	/** 产品ID */
+	/** 
+	 * 产品ID
+	 * 
+	 */
 	private Integer productId;
 
-	/** 计划名称 */
+	/** 
+	 * 计划名称
+	 * 
+	 */
 	private String planName;
 
-	/** 计划描述 */
+	/** 
+	 * 计划描述
+	 * 
+	 */
 	private String planSpec;
 
-	/** 计划开始时间 */
+	/** 
+	 * 计划开始时间
+	 * 
+	 */
 	private Date planBeginDate;
 
-	/** 计划结束时间 */
+	/** 
+	 * 计划结束时间
+	 * 
+	 */
 	private Date planEndDate;
 
-	/** 已删除 */
-	private String deleted;
+	/** 
+	 * 已删除
+	 * 
+	 */
+	private Integer deleted;
 
 
 	public void setPlanId(Integer planId){
@@ -101,11 +129,11 @@ public class Plan {
 		return planEndDate;
 	}
 
-	public void setDeleted(String deleted){
+	public void setDeleted(Integer deleted){
 		this. deleted = deleted;
 	}
 
-	public String getDeleted(){
+	public Integer getDeleted(){
 		return deleted;
 	}
 
