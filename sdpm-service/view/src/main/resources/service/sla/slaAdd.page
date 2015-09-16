@@ -128,7 +128,7 @@
             #@elementItem()
                 #@sdpmItem("创建时间")
                     #@tinyDateInput(
-                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","id":"sla_create_date","datatype":
+                        "birthday" "" "YYYY-MM-DD" {"style":"width:200px","id":"sla_create_date","datatype":
                         "*","nullmsg":
                         "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
                 #end
@@ -141,7 +141,7 @@
             #@elementItem()
                 #@sdpmItem("批准时间")
                     #@tinyDateInput(
-                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","id":"sla_review_date","datatype":
+                        "birthday" "" "YYYY-MM-DD" {"style":"width:200px","id":"sla_review_date","datatype":
                         "*","nullmsg":
                         "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
                 #end
@@ -166,8 +166,9 @@
                 <div class="col-1">
                 ##                                    <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
                 ##                    #@aTxtDarkDefaultButton("../sla/sla.page")&nbsp;取消&nbsp;#end
-                    #@aExtendButton("btn-sm backBtn" "../sla/sla.page")取消#end
-
+                    #@aExtendButton("btn-sm backBtn" "javascript:history.back()")取消#end
+                ##                    <button onclick="javascript:history.back()" style="float: left" type="submit" id="submit" class="backBtn">返回
+                    </button>
                 </div>
                 <div class="col-5"></div>
             </div>
