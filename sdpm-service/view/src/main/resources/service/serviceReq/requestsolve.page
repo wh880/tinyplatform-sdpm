@@ -9,11 +9,29 @@
 </style>
 #set(name="request")
 #@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/service/serviceCom/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/service/serviceCom/tab.page")
+        #end
+    #end
+
+
     #@tinyForm("thisform" "url" "post" {"class":""})
 
     <div style="width:70%;margin-left: 200px" class="pageleftpart">
         <div class="infoContent">
-            <p class="titleName">回访</p>
+            <p class="titleName">回复</p>
+            #@elementItem()
+                #@sdpmItem("请求标题")
+
+                    #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
+
+                #end
+                #@validateDiv("col-2")#end
+            #end
             #@elementItem()
 
                 <div class="col-12">
@@ -25,41 +43,9 @@
                 #@validateDiv("col-2")#end
             #end
             #@elementItem()
-                #@sdpmItem("回访类型")
-                    #@Tselect2F()
-                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            #@tinyOptionItem("ch")请选择#end
-                            #@tinyOptionItem("zh")类型1#end
-                            #@tinyOptionItem("en")类型2#end
-                            #@tinyOptionItem("ta")类型3#end
-                        #end
-                    #end
-                #end
-            #end
-            #@elementItem()
-                #@sdpmItem("回访评分")
-                    #@Tselect2F()
-                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            #@tinyOptionItem("ch")请选择#end
-                            #@tinyOptionItem("zh")满意#end
-                            #@tinyOptionItem("en")一般#end
-                            #@tinyOptionItem("ta")不满意#end
-                        #end
-                    #end
-                #end
-            #end
-            #@elementItem()
-                #@sdpmItem("回访时间")
-                    #@tinyDateInput(
-                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                        "日期不能为空","placeholder":""})#end
-                #end
-                #@validateDiv("col-2")#end
-            #end
-            #@elementItem()
 
                 <div class="col-12">
-                    <div class="col-2 text-r"><label>回访描述：</label></div>
+                    <div class="col-2 text-r"><label>回复描述：</label></div>
 
                     <div class="col-9">
                         #@Teditor("content2" "content2" {"initialFrameHeight":"150"})Say something#end</div>
@@ -68,16 +54,13 @@
             #end
 
             #@elementItem()
-
-                <div class="col-12">
-                    <div class="col-2 text-r"><label>回访结果：</label></div>
-
-                    <div class="col-9">
-                        #@Teditor("content3" "content3" {"initialFrameHeight":"150"})Say something#end</div>
-                </div>
+                #@sdpmItem("回复处理时间")
+                    #@tinyDateInput(
+                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
+                        "日期不能为空","placeholder":""})#end
+                #end
                 #@validateDiv("col-2")#end
             #end
-
 
         </div>
         #@elementItem()

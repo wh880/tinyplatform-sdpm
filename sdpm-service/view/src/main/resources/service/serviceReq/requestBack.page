@@ -9,19 +9,6 @@
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
-        #@tabBodyCol("ptop-5")
-        ##operationbar star
-            #@div(divClass="operationbar")
-            <span class="f">
-					<a href="#" class="active_btn">查看</a>
-            </span>
-            <span class="r">
-                <a href="${TINY_CONTEXT_PATH}/service/serviceReq/requestEdit.page"
-                   title="编辑">#buttonIcon(iconClass="icon-pencil")编辑</a>
-            </span>
-            #end
-        ##operationbar end
-        #end
         #include("/service/serviceReq/requestViewList.page")
     #end
 #end
