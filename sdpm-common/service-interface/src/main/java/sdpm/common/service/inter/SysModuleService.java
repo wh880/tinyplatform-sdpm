@@ -22,4 +22,11 @@ public interface SysModuleService {
 	 */
 	public void deleteById(int id);
 	
+	/**
+	 * 根据根节点进行查询
+	 * @param root
+	 * @return
+	 */
+	
+	public List<SysModule> queryByRoot(int root);
 }

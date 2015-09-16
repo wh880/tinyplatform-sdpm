@@ -29,5 +29,10 @@ public interface EffortService {
 	 * @return
 	 */
 	public List<Effort> queryByAccount(String account);
+	/**
+	 * 查询所有字段
+	 * @return
+	 */
+	public List<Effort> query();
 	
 }
