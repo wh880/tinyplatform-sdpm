@@ -14,11 +14,11 @@
  *  limitations under the License.
  */
 
-package sdpm.product.dao.inter.dao.inter;
+package sdpm.product.dao.inter;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
-import sdpm.product.dao.inter.dao.pojo.Plan;
+import sdpm.product.dao.pojo.Plan;
 
 public interface PlanDao extends BaseDao<Plan,Integer> {
 
