@@ -1,55 +1,55 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="服务管理",activeMenuId=currentPageId)
+<style>
+    .select_boxes {
+        margin-top: 0
+    }
+</style>
+#set(name="client")
 #@tinyForm("thisform" "" "" {"class":"test"})
-    #@elementItem()
-        #@colLabel()<span class="c-red">*</span>客户ID：#end
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "username" ""{"datatype":"","""id":"username","class":"input-text"})
+    #@noRespsGridSystem()
+        #@gridSysRow()
+            #@colLabel("col-3")<span class="c-red">*</span>产品名称：#end
+            #@gridSysCol(7)
+                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+                    #@tinyOptionItem("zh")支付宝#end
+                    #@tinyOptionItem("en")财付通#end
+                    #@tinyOptionItem("ta")余额宝#end
+                #end
+            #end
         #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()<span class="c-red">*</span>客户名称：#end
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "clientName" ""{"placeholder":"客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":
-                "clientName","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()客户部门：#end
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "clientDepartment" ""{"placeholder":"","id":"clientDepartment","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()<span class="c-red">*</span>客户登记人：#end
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "username" ""{"placeholder":"","datatype":"*","nullmsg":"客户登记人不能为空！","id":
-                "username","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@daterangepickerPosition()
-            #@colLabel()<span class="c-red">*</span>客户登记时间：#end
-            #@formControlDiv("col-8")
-                #@tinyDateInput(
-                    "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+        #@elementItem()
+            #@colLabel("col-3")<span class="c-red">*</span>客户名称：#end
+            #@formControlDiv("col-7")
+                #tinyInput(
+                    "text" "clientName" ""{"placeholder":"客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":
+                    "clientName","class":"input-text"})
             #end
             #@validateDiv("col-2")#end
         #end
-    #end
-    #@elementItem()
-        #@colLabel()<span class="c-red">*</span>状态是否正常：#end
-        #@formControlDiv("col-8")
-            #tinySwitcher("isvip" "正常" "失效") ##第二个为选中状态 第三参数为数据库返回时的数据
+        #@gridSysRow()
+            #@colLabel("col-3")<span class="c-red">*</span>产品版本：#end
+            #@gridSysCol(7)
+                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22","id":"productCreatedVersion"})
+                    #@tinyOptionItem("zh")2.0.1#end
+                    #@tinyOptionItem("en")3.0.1#end
+                    #@tinyOptionItem("ta")4.0.1#end
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@daterangepickerPosition()
+                #@colLabel("col-3")<span class="c-red">*</span>购买时间：#end
+                #@formControlDiv("col-7")
+                    #@tinyDateInput(
+                        "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+                #end
+                #@validateDiv("col-2")#end
+            #end
         #end
     #end
-
 #end
 
 <script type="text/javascript">

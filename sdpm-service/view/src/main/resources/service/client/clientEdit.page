@@ -3,7 +3,7 @@
         #@colLabel()<span class="c-red">*</span>客户ID：#end
         #@formControlDiv("col-8")
             #tinyInput(
-                "text" "username" ""{"id":"username","class":"input-text"})
+                "text" "username" ""{"datatype":"*","nullmsg":"客户ID不能为空","id":"client_id","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end
@@ -11,8 +11,8 @@
         #@colLabel()<span class="c-red">*</span>客户名称：#end
         #@formControlDiv("col-8")
             #tinyInput(
-                "text" "clientName" ""{"placeholder":"客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":
-                "clientName","class":"input-text"})
+                "text" "clientName" ""{"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名称不能为空！","id":
+                "client_name","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end
@@ -20,7 +20,7 @@
         #@colLabel()客户部门：#end
         #@formControlDiv("col-8")
             #tinyInput(
-                "text" "clientDepartment" ""{"placeholder":"","id":"clientDepartment","class":"input-text"})
+                "text" "clientDepartment" ""{"placeholder":"","id":"client_dept_id","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end
