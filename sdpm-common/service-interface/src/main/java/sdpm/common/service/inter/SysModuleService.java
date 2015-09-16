@@ -10,17 +10,17 @@ public interface SysModuleService {
 	 * @param sysModule
 	 * @return
 	 */
-	public SysModule edit(SysModule sysModule);
+	 SysModule edit(SysModule sysModule);
 	/**
 	 * 保存
 	 * @return
 	 */
-	public List<SysModule> save();
+	 List<SysModule> save();
 	/**
 	 * 删除ById
 	 * @param id
 	 */
-	public void deleteById(int id);
+	 void deleteById(int id);
 	
 	/**
 	 * 根据根节点进行查询
@@ -28,5 +28,5 @@ public interface SysModuleService {
 	 * @return
 	 */
 	
-	public List<SysModule> queryByRoot(int root);
+	 List<SysModule> queryByRoot(int root);
 }
