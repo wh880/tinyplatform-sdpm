@@ -24,6 +24,26 @@
                 </div>
                 #@validateDiv("col-2")#end
             #end
+
+            #@elementItem()
+                #@sdpmItem("联系人")
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@tinyOptionItem("ch")请选择#end
+                            #@tinyOptionItem("zh")张三#end
+                            #@tinyOptionItem("en")李四#end
+                            #@tinyOptionItem("ta")习近平#end
+                        #end
+                    #end
+                #end
+            #end
+
+            #@elementItem()
+                #@sdpmItem("回访者")
+                    #tinyInput("text" "回访者" ""{"datatype":"","id":"解决人员","class":"input-text"})
+                #end
+            #end
+
             #@elementItem()
                 #@sdpmItem("回访类型")
                     #@Tselect2F()
@@ -67,17 +87,13 @@
                 #@validateDiv("col-2")#end
             #end
 
+
             #@elementItem()
-
-                <div class="col-12">
-                    <div class="col-2 text-r"><label>回访结果：</label></div>
-
-                    <div class="col-9">
-                        #@Teditor("content3" "content3" {"initialFrameHeight":"150"})Say something#end</div>
-                </div>
-                #@validateDiv("col-2")#end
+                #@colLabel()是否通过：#end
+                #@formControlDiv("col-8")
+                    #tinySwitcher("isvip" "是" "否") ##第二个为选中状态 第三参数为数据库返回时的数据
+                #end
             #end
-
 
         </div>
         #@elementItem()
