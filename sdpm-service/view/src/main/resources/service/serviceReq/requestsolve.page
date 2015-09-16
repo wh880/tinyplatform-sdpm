@@ -16,10 +16,10 @@
                 <div class="infoContent">
                     <p class="titleName">回复</p>
                     #@elementItem()
-                        #@sdpmItem("请求标题")
+                        #@sdpmItem("请求标题" "*")
                             #tinyInput(
                                 "text" "username" ""{"placeholder":"请求标题","datatype":"*","nullmsg":"请求标题不能为空！","id":
-                                "username",
+                                "request_title",
                                 "class":"input-text"})
                         #end
                     #end
@@ -45,10 +45,10 @@
                         #@validateDiv("col-2")#end
                     #end
                     #@elementItem()
-                        #@sdpmItem("回复处理事件")
+                        #@sdpmItem("回复处理时间")
                             #@tinyDateInput(
-                                "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                                "日期不能为空","placeholder":""})#end
+                                "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"" ,"placeholder":
+                                ""})#end
                         #end
                         #@validateDiv("col-2")#end
                     #end
