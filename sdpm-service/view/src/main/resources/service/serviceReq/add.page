@@ -87,11 +87,7 @@
                     "class":"input-text"})
             #end
         #end
-        #@elementItem()
-            #@sdpmItem("请求描述")
-                #@tinyueditor("contents" "contents""min-height:150px")#end
-            #end
-        #end
+
         #@elementItem()
             #@sdpmItem("客户名称")
                 #@Tselect2F()
@@ -119,6 +115,14 @@
             #end
         #end
 
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>请求描述：</label></div>
+
+                <div class="col-9">
+                    #@Teditor("content" "content" {"initialFrameHeight":"280"})Say something#end</div>
+            </div>
+        #end
 
         #@elementItem()
             #@sdpmItem("请求提交时间")

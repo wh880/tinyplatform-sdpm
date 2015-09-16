@@ -37,25 +37,25 @@
     <menu id="request" name="需求" href="/service/serviceReq/request.page" sort="100" isShow="1">
         <menu id="request-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="service-req-batchdel"/>
-        <menu id="request-search" name="查看" href="/service/serviceReq/requestBack.page" icon="icon-search" sort="1"
+        <menu id="request-solve" name="解决" href="/service/serviceReq/requestsolve.page" icon="icon-wrench " sort="1"
               isShow="1" scope="service-request"/>
-        <menu id="request-edit" name="编辑" href="/service/serviceReq/requestEdit.page" icon="icon-pencil" sort="1"
+        <menu id="request-back" name="回访" href="/service/serviceReq/requestBack.page" icon="icon-comment" sort="1"
               isShow="1" scope="service-request"/>
-        <menu id="request-open" name="未关闭" href="/service/serviceReq/request.page" sort="1"
+        <menu id="request-edit" name="变更" href="/service/serviceReq/requestEdit.page" icon="icon-random" sort="1"
+              isShow="1" scope="service-request"/>
+        <menu id="request-open" name="未解决" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
         <menu id="request-all" name="全部请求" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
-        <menu id="request-tome" name="指派给我" href="/service/serviceReq/request.page" sort="1"
+        <menu id="request-tome" name="由我解决" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
         <menu id="request-byme" name="由我创建" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
-        <menu id="request-review" name="由我评审" href="/service/serviceReq/request.page" sort="1"
+        <menu id="request-review" name="由我回访" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
-        <menu id="request-close" name="由我关闭" href="/service/serviceReq/request.page" sort="1"
+        <menu id="request-needclose" name="待回访" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
-        <menu id="request-needclose" name="待关闭" href="/service/serviceReq/request.page" sort="1"
-              isShow="1" scope="service-request-list"/>
-        <menu id="request-closed" name="已关闭" href="/service/serviceReq/request.page" sort="1"
+        <menu id="request-closed" name="已回访" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
         <menu id="request-export" name="导出" href="/service/serviceCom/serviceExport.pagelet" sort="1"
               isShow="1" scope="service-request-r"/>
@@ -63,6 +63,9 @@
               isShow="1" scope="service-request-r"/>
         <menu id="request-add" name="新增请求" icon="icon-plus" href="/service/serviceReq/add.page" sort="1"
               isShow="1" scope="service-request-r"/>
+        <menu id="service-request-operation" name="操作" href="" icon=""
+              sort="1" isShow="1"
+              scope="service-request-oper"/>
     </menu>
 
     <menu id="sla" name="协议" href="/service/sla/sla.page" sort="100" isShow="1">
