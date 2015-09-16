@@ -23,5 +23,11 @@ public interface EffortService {
 	 */
 	
 	public void save();
+	/**
+	 * 根据登记人查询
+	 * @param account
+	 * @return
+	 */
+	public List<Effort> queryByAccount(String account);
 	
 }
