@@ -32,90 +32,55 @@
 <div style="width:80%;margin-left: 20px;" class="pageleftpart">
 <div class="infoContent">
     <p class="titleName">新建客户</p>
-
-#* #@elementItem()
-     #@sdpmItem("协议名称")
-         #@Tselect2F()
-             #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                 #@tinyOptionItem("ch")请选择#end
-                 #@tinyOptionItem("zh")协议一#end
-                 #@tinyOptionItem("en")协议二#end
-                 #@tinyOptionItem("ta")协议三#end
-             #end
-             #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/sla/slaAdd.page" class="r ">增加</a><a
-                     href="${TINY_CONTEXT_PATH}/service/sla/sla.page">全部</a>#end
-         #end
-     #end
- #end*#
-##    #@noRespsGridSystem()
-##        #@gridSysRow()
-##            #@colLabel("col-2")<span class="c-red">*</span>客户名称：#end
-##            #@gridSysCol(4)
-##                #tinyInput(
-##                    "text" "username" ""{"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":"username",
-##                    "class":"input-text"})
-##            #end
-##            #@validateDiv("col-2")#end
-##        #end
-
-       #* #@elementItem()
-            #@colLabel()客户名称：#end
-            #@formControlDiv("col-4")
-                #tinyInput(
-                    "text" "username" ""{"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":"username",
-                    "class":"input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
-*#
         #@elementItem()
             #@sdpmItem("客户名称" "*")
                 #tinyInput(
-                    "text" "username" ""{"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":"username",
+                    "text" "username" ""{"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":"client_name",
                     "class":"input-text"})
             #end
         #end
         #@elementItem()
             #@sdpmItem("客户编号")
                 #tinyInput(
-                    "text" "username" ""{"id":"username","class":"input-text"})
+                    "text" "username" ""{"id":"client_n_o","class":"input-text"})
             #end
         #end
         #@elementItem()
             #@sdpmItem("客户描述")
-                #tinyInput("text" "username" ""{"id":"username","class":"input-text"})
+                #tinyInput("text" "username" ""{"id":"client_spec","class":"input-text"})
             #end
         #end
 
         #@elementItem()
             #@sdpmItem("客户部门")
-                #tinyInput("text" "username" ""{"id":"","class":"input-text"})
+                #tinyInput("text" "username" ""{"id":"client_dept_id","class":"input-text"})
             #end
         #end
 
         #@elementItem()
             #@sdpmItem("客户登记人" "*")
-                #tinyInput("text" "username" ""{"datatype":"*","nullmsg":"登记人不能为空！","id":"username","class":""})
+                #tinyInput(
+                    "text" "username" ""{"datatype":"*","nullmsg":"登记人不能为空！","id":"client_created_by","class":""})
             #end
         #end
 
     #@elementItem()
             #@sdpmItem("客户电话" "*")
-                #tinyInput("text" "客户电话" ""{"datatype":"/^[0-9\.]{11,12}$/","nullmsg":"客户电话不能为空","id":"","class":""})
+                #tinyInput(
+                    "text" "客户电话" ""{"datatype":"/^[0-9\.]{11,12}$/","nullmsg":"客户电话不能为空","id":"user_phone","class":""})
             #end
         #end
 
     #@elementItem()
         #@sdpmItem("客户联系人")
             #tinyInput(
-                "text" "username" ""{"id":"username","class":
-                ""})#end
+                "text" "username" ""{"id":"user_account","class":""})#end
     #end
 
     #@elementItem()
         #@sdpmItem("联系人职务")
             #tinyInput(
-                "text" "username" ""{"placeholder":"联系人职务"})#end
+                "text" "username" ""{"id":"user_post"})#end
     #end
 
         #@elementItem()
