@@ -1,87 +1,146 @@
 <standard-fields>
-  <standard-field id="182debb0d4a84d3ab984cfeb8f1fc960" name="request_open_count" title="请求打开次数" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="">
-    <description></description>
+  <standard-field id="182debb0d4a84d3ab984cfeb8f1fc960" name="request_open_count" title="请求打开次数" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="0">
+    <description>默认0，经历一次拒绝/关闭再打开加1</description>
   </standard-field>
   <standard-field id="28e931db680247e9b52382df7908cf8c" name="service_ts_onsite_limit" title="现场服务次数上限" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
-  <standard-field id="74c6cb9c070841968e68c5281621cec6" name="review_result" title="回访结果" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
+  <standard-field id="74c6cb9c070841968e68c5281621cec6" name="review_result" title="回访结果" business-type-id="ccd3e83b1cae428987599fb95985fa70">
+    <description>0-not pass, 1-pass</description>
+  </standard-field>
   <standard-field id="618fb648de2e4967af1cfe0e38ee1080" name="faq_source" title="FAQ来源" business-type-id="286a6bca92b34779bcb6fc8809f0a666"/>
   <standard-field id="af8d53fc0d2a4dd3b19afc69063bcbf0" name="reply_date" title="回复时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="f759e85b5e3145b18e3cd5c6aaad7ed4" name="reply_spec" title="回复描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="f55849f27a0d4f8ea3e5e25e65dc7c38" name="faq_answer" title="解答" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
-  <standard-field id="e885fed29331412b84d9bc5a2986fdf3" name="reply_do_by" title="回复处理人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="e885fed29331412b84d9bc5a2986fdf3" name="reply_do_by" title="回复处理人" business-type-id="095e594e1550424b9643c7e2279e85be" default="">
+    <description>可以是客服或转出后的产品组处理人</description>
+  </standard-field>
   <standard-field id="865b01cda4a3418291fae73da1033c83" name="faq_source_id" title="来源ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="2dec1562279d4b00a2c1b29c439e8079" name="client_n_o" title="客户编号" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
-  <standard-field id="5ace7904dd0d47a09aaeb45202ef4d40" name="requester" title="联系人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="c8d123b6a19e44dc86e8d98e0cca9b1d" name="reply_opinion" title="回复意见" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
-  <standard-field id="c457a69854e24534a2bff327ed642e6c" name="reply_done" title="是否回复" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
+  <standard-field id="5ace7904dd0d47a09aaeb45202ef4d40" name="requester" title="联系人" business-type-id="095e594e1550424b9643c7e2279e85be">
+    <description>默认为需求提交人或产品客户其他联系人</description>
+  </standard-field>
+  <standard-field id="c8d123b6a19e44dc86e8d98e0cca9b1d" name="reply_opinion" title="回复意见" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="0">
+    <description>0-接受；1-拒绝；2-待定</description>
+  </standard-field>
+  <standard-field id="c457a69854e24534a2bff327ed642e6c" name="reply_done" title="是否回复" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="0">
+    <description>0-未回复；1-已回复</description>
+  </standard-field>
   <standard-field id="f1a275c2e21c439289bd8b75e329aeac" name="service_effort_limit" title="服务工时上限" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35"/>
   <standard-field id="86ce3ab8232645cfaa66e00ba48e1375" name="sla_created_by" title="创建人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="851808c6cc364145aee0b4415d1250dd" name="service_specialist" title="服务专员" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
-  <standard-field id="11d288ce28dc4aa09b7b991a7866fa94" name="request_review_date" title="回访日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="851808c6cc364145aee0b4415d1250dd" name="service_specialist" title="服务专员" business-type-id="27ebfcdc558c477da425a46e566d4637">
+    <description>可以多人，间隔符英文,</description>
+  </standard-field>
+  <standard-field id="11d288ce28dc4aa09b7b991a7866fa94" name="request_review_date" title="回访日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff">
+    <description>请求回访日期&#xd;
+</description>
+  </standard-field>
   <standard-field id="875c0693930a4e35b697830e7a72fe1e" name="request_last_edit_date" title="请求最后编辑时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="41c60fff265346af8c40da9d584af5f3" name="replier" title="回复者" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="41c60fff265346af8c40da9d584af5f3" name="replier" title="回复者" business-type-id="095e594e1550424b9643c7e2279e85be">
+    <description>客服</description>
+  </standard-field>
   <standard-field id="2aff382b705a4ef0a0e0c67bbfdb2964" name="client_dept_id" title="客户单位/部门ID" business-type-id="a6beade23ed9454f8b29e4b0be73e18e"/>
   <standard-field id="6b0afce8eedf42e78723f1a37032c6d1" name="request_spec" title="请求描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="fac545f61b8847aeb201d8361edce14d" name="sla_closed_by" title="关闭人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="be2bc48231444d389046e845286119fb" name="request_last_edited_by" title="请求最后编辑者" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="1b2601178d2047408fa0af11ec470cff" name="request_trans_to" title="转换为" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
-  <standard-field id="7143bbd0f13844e7a7fa8d1342402ce6" name="request_pre" title="请求优先级" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
+  <standard-field id="1b2601178d2047408fa0af11ec470cff" name="request_trans_to" title="转换为" business-type-id="ccd3e83b1cae428987599fb95985fa70">
+    <description>1-&quot;toReq&quot;转为需求，2-&quot;toBug&quot;转为缺陷，3-&quot;toTask&quot;转为任务</description>
+  </standard-field>
+  <standard-field id="7143bbd0f13844e7a7fa8d1342402ce6" name="request_pre" title="请求优先级" business-type-id="ccd3e83b1cae428987599fb95985fa70">
+    <description>请求优先级&#xd;
+Priority:0-low,1-common,2-urgent</description>
+  </standard-field>
   <standard-field id="43397d88a76644e78fb888fec1e8a906" name="release_mail_c_c" title="发布抄送" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="b237b780903149a5b941906cee7ad32c" name="faq_id" title="问答ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
-  <standard-field id="ef26d4df32cd4df89a84850269acbe0a" name="request_n_o" title="请求逻辑编号" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
+  <standard-field id="ef26d4df32cd4df89a84850269acbe0a" name="request_no" title="请求逻辑编号" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37">
+    <description>服务请求逻辑编号</description>
+  </standard-field>
   <standard-field id="d2a7fc5ffb494f0a9b6198d6d4cabeb8" name="release_request" title="关联用户需求单" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
-  <standard-field id="ce78d2a1b7a840d298da9e7367125394" name="review_score" title="回访评分" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
+  <standard-field id="ce78d2a1b7a840d298da9e7367125394" name="review_score" title="回访评分" business-type-id="ccd3e83b1cae428987599fb95985fa70">
+    <description>0很不满意，2不满意，3一般，4满意，5非常满意&#xd;
+</description>
+  </standard-field>
   <standard-field id="61a2377884014234b2a9d53d080692f8" name="request_reply_date" title="请求回复时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="6af56338891744d591ddc1c85d36263a" name="request_commitment_date" title="请求承诺完成日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="e89bcf64ae874aa0890d8327301bc817" name="client_name" title="客户名称" business-type-id="a30696c1e44441ecad77a832afd3731d"/>
   <standard-field id="8b15df3898f846139cb18ac32494ff2c" name="faq_question" title="问题描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
-  <standard-field id="ed5401fbf64a427683d8c5dc62acfcf6" name="client_status" title="客户状态" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
-  <standard-field id="76a989f068ca4f70b6abb8271684e992" name="request_status" title="请求状态" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
-  <standard-field id="32da3f7c3ac84999af02c6a48f721c88" name="review_type" title="回访类型" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
+  <standard-field id="ed5401fbf64a427683d8c5dc62acfcf6" name="client_status" title="客户状态" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="1">
+    <description>0-停止；1-活跃</description>
+  </standard-field>
+  <standard-field id="76a989f068ca4f70b6abb8271684e992" name="request_status" title="请求状态" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="">
+    <description>请求状态0-created新建(用户可见),1-doing处理中(用户可见)，2-rejected拒绝（回复后用户可见）,3-toProduct转出（回复后用户可见）,4-planned已接受【由产品模块需求纳入计划触发/客服直接处理】（回复后用户可见），5-postponed挂起，6-finished已完成【由产品模块需求阶段】，7-released已发放(用户可见),8-retrunVisit已回访(用户可见), 9-reopen【回访不通过】(用户可见)，10-close关闭【状态8，并且review结果是pass】</description>
+  </standard-field>
+  <standard-field id="32da3f7c3ac84999af02c6a48f721c88" name="review_type" title="回访类型" business-type-id="ccd3e83b1cae428987599fb95985fa70">
+    <description>0-发放回访，1-拒绝需求回访，2-无修改需求回访</description>
+  </standard-field>
   <standard-field id="b30a14aecb4e4235a27eb5f9f676df7f" name="faq_reply_date" title="FAQ_REPLY_DATE" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="7d045d07a379467799bb865c513acad8" name="request_id" title="请求ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="7d045d07a379467799bb865c513acad8" name="client_request_id" title="请求ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
+    <description>服务请求ID</description>
+  </standard-field>
   <standard-field id="6171afc19fb141789e00ea6496d9a315" name="faq_created_by" title="创建人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="123cfdd2e43b4822b26ccb665e6b0a31" name="faq_type" title="问答类型" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
-  <standard-field id="bf16d70759b242b6ad09da8e41d87edf" name="request_is_abnormal" title="异常标记" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
-  <standard-field id="863d077afeac406289d4ce8811e84bfc" name="request_keywords" title="关键字" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="bf16d70759b242b6ad09da8e41d87edf" name="request_is_abnormal" title="异常标记" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="0">
+    <description>0-正常；1-异常；2-重大异常</description>
+  </standard-field>
+  <standard-field id="863d077afeac406289d4ce8811e84bfc" name="request_keywords" title="关键字" business-type-id="27ebfcdc558c477da425a46e566d4637">
+    <description>关键词（分隔符）</description>
+  </standard-field>
   <standard-field id="30c01f8fc37b4fdf8c79a7814ef82d19" name="reply_do_date" title="回复处理日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="d69529049a674fa1bc6fbee766b59a6a" name="sla_title" title="服务协议标题" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="3367ff5598404a429a559be207ba78b2" name="sla_reviewed_by" title="批准人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="f201054bde4c4d7e83bda49cc76f24a0" name="sla_id" title="服务协议ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="8970f47ef4b143a68fee95c698c47f94" name="release_publisher" title="RELEASE_PUBLISHER" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="403263c8770744b4ab1a8c9b8ca735fc" name="service_deadline" title="服务期限" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="403263c8770744b4ab1a8c9b8ca735fc" name="service_deadline" title="服务期限" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff">
+    <description>服务有效期Service Deadline</description>
+  </standard-field>
   <standard-field id="cd4f500c9e304bf2ab4fe23c87a03e44" name="request_trans_id" title="转出对象ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="17c6d7251e924bd289acdfccd1605608" name="release_spot_test" title="是否需要现场测试" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
   <standard-field id="35d8a5ff6ccd4f82a889dac25aa42975" name="request_closed_by" title="关闭人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="85fb1b3a99e24bf0be319db68ba095c1" name="service_request_limit" title="服务请求数上限" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="3fb69fefa6274e8ea5fab060f3898dd2" name="request_submit_date" title="请求提交时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="e66362eca33942529343b75633347a10" name="request_reviewer" title="回访人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="ccff4edf5898442a9c3bb4124ff47dce" name="reviewer" title="回访者" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="ccff4edf5898442a9c3bb4124ff47dce" name="reviewer" title="回访者" business-type-id="095e594e1550424b9643c7e2279e85be">
+    <description>回访人account，当前操作者</description>
+  </standard-field>
   <standard-field id="1786285066dd4f408bbae01233a96b53" name="client_id" title="客户ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="2257ec3a6d074affb282cc504df6cc1a" name="client_spec" title="客户描述" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="1497afcc2c76435887f7f51b5defc8fc" name="request_title" title="请求标题" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="7fa5c61131d7439c980f91dbf0345829" name="release_type" title="发布版本类型" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
-  <standard-field id="1c4f22bb730e49149298a0c6fe00c137" name="request_release_date" title="请求完成日期" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0"/>
+  <standard-field id="1c4f22bb730e49149298a0c6fe00c137" name="request_release_date" title="请求完成日期" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0">
+    <description>支持类需求-实际完成日期&#xd;
+修改类需求-实际发布日期</description>
+  </standard-field>
   <standard-field id="588ccfa1cbf24f198a51b10f89b65eba" name="sla_spec" title="服务协议表述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="8ce08038de2b47baad0a9e2e87126b4c" name="sla_create_date" title="创建时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="49ec26b28400415f8832cedf503aeaa9" name="deleted" title="删除标记" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
-  <standard-field id="4e3b803e6e8a4b918207fc9916c70a38" name="service_level" title="服务级别" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
+  <standard-field id="4e3b803e6e8a4b918207fc9916c70a38" name="service_level" title="服务级别" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="0">
+    <description>服务级别Service Level，保留字段，未今后分级服务提供信息；&#xd;
+0基础 1潜力 2核心 3vip</description>
+  </standard-field>
   <standard-field id="b5283c55769c4a749d9f85d03a7070d3" name="release_mail_b_c" title="发布秘送" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="9b4c2322ed274238a0ec8d1f6b059d66" name="release_create_by" title="创建人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="a02d69704a544bd7a200a0f8603270a9" name="release_path" title="发布包存放路径" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="9b1b5ef9cbf94c02bc98decf6e8b1d16" name="review_date" title="回访时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="91cf15193a6f4a49af40cf4768d25d53" name="sla_open_count" title="打开次数" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
+  <standard-field id="91cf15193a6f4a49af40cf4768d25d53" name="sla_open_count" title="打开次数" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="0">
+    <description>默认0，审核通过后编辑再审核+1</description>
+  </standard-field>
   <standard-field id="bccc064cc7f54464824d9db82d01f9c8" name="request_close_date" title="关闭时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="b35d189236be4548b694dc5f422e87b0" name="faq_create_date" title="创建时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="f8f86043412a436b8ef8ca4bd4fb22f3" name="sla_close_date" title="关闭时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="a6e55c64f8004ca195d1c6f74b154f86" name="request_type" title="请求类型" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
+  <standard-field id="a6e55c64f8004ca195d1c6f74b154f86" name="request_type" title="请求类型" business-type-id="ccd3e83b1cae428987599fb95985fa70">
+    <description>请求类型&#xd;
+Event type:0-bug(缺陷/纠错,1-req1（适应性）,2-req2（完善或增强）,3-req3（个性化定制）,4-reg4（全新）,&#xd;
+5-training,6-support,7-question</description>
+  </standard-field>
   <standard-field id="2bf7eed37e494820b58c89568de73f7e" name="release_create_date" title="创建时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="f4a2dd1dcbb649f3bcd3eef8f6602a3f" name="user_account" title="客户联系人" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="cb0d9b17d4f14242ad57f93b199ba752" name="release_mail_to" title="发布对象ACCOUNT" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="5c02810ba43f465fbeaad1e30c5e1c6b" name="review_id" title="回访ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="6e57184592d541dd89018be9b92201a6" name="faq_replied_by" title="回复者" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="84a6720351fe4e31bbedb1f2b766ddb6" name="service_review_time_limit" title="需求回访时限" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
-  <standard-field id="92d08c32d2dd48a6adc4d1d9410bd340" name="reply_commitment_date" title="承诺日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="84a6720351fe4e31bbedb1f2b766ddb6" name="service_review_time_limit" title="需求回访时限" business-type-id="ccd3e83b1cae428987599fb95985fa70">
+    <description>单位工作日&#xd;
+</description>
+  </standard-field>
+  <standard-field id="92d08c32d2dd48a6adc4d1d9410bd340" name="reply_commitment_date" title="承诺日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff">
+    <description>回复意见为“0-接受，”时，应有承诺日期</description>
+  </standard-field>
   <standard-field id="014fe1bfba704f66806482db358d8a48" name="client_user_id" title="客户名称" business-type-id="a30696c1e44441ecad77a832afd3731d"/>
   <standard-field id="6ac8953db3b9485fa999a337eb38884c" name="faq_keywords" title="关键字" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="e6497749e33b416687138be3d6c25bfc" name="release_content" title="发布内容" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
@@ -89,12 +148,19 @@
   <standard-field id="726ac7406cd640309d9bdffd9e9670a7" name="sla_review_date" title="批准时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="6cf77ba24b7d450dbac1b0569b309943" name="review_spec" title="回访描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="ee10108d43904aceba6bac56d3d5f2b0" name="client_create_date" title="客户登记时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="9bafba5d4e8b463b8eb9c5ce928f4a01" name="request_submit_by" title="服务事件提交人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="6961ac39470a473e9eebd487180c0991" name="sla_status" title="服务级别协议" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
+  <standard-field id="9bafba5d4e8b463b8eb9c5ce928f4a01" name="request_submit_by" title="服务事件提交人" business-type-id="095e594e1550424b9643c7e2279e85be">
+    <description>客户自助提交，此字段信息与requester相同，如客服代录入，可以不一致</description>
+  </standard-field>
+  <standard-field id="6961ac39470a473e9eebd487180c0991" name="sla_status" title="服务级别协议" business-type-id="ccd3e83b1cae428987599fb95985fa70">
+    <description>0新建，1生效，2到期，3作废，4关闭&#xd;
+</description>
+  </standard-field>
   <standard-field id="6596a56356c545b0ae898240aaeac632" name="release_publish_date" title="RELEASE_PUBLISH_DATE" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="6118120deb974eb2b62b9b3c6da7d3fb" name="module_id" title="模块ID" business-type-id="a6beade23ed9454f8b29e4b0be73e18e"/>
   <standard-field id="a2bef96d21dd47da9bea8bb643538918" name="reply_id" title="回复ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
-  <standard-field id="15fc541bcc7b4eb9a9d0d72e20fdb412" name="service_reply_time_limit" title="服务响应时限" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
+  <standard-field id="15fc541bcc7b4eb9a9d0d72e20fdb412" name="service_reply_time_limit" title="服务响应时限" business-type-id="ccd3e83b1cae428987599fb95985fa70">
+    <description>单位为小时（不含节假日）&#xd;
+</description>
+  </standard-field>
   <standard-field id="2cca0dec07cc49859fceac7289b6d0df" name="user_phone" title="客户联系电话" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="398e31c8923d47868aa9e180fa975d11" name="user_post" title="联系人职务" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="4a0f195409da4cb681d4e4891c4b02f6" name="cilent_product_vision" title="产品版本" business-type-id="286a6bca92b34779bcb6fc8809f0a666"/>

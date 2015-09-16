@@ -1,14 +1,15 @@
 ##用于类似编辑页面的条目排版
-#macro sdpmItem(title)
-<div class="col-6">
+#macro sdpmItem(title star)
+<div class="col-6 formControls">
     <div class="col-4 text-r">
+        <span class="c-red">${star}</span>
         <label>${title}：&nbsp;</label>
     </div>
     <div class="col-8">
         #bodyContent
     </div>
 </div>
-    #@validateDiv("col-5 validmsg")#end
+#@validateDiv("col-5 validmsg")#end
 #end
 
 ##
