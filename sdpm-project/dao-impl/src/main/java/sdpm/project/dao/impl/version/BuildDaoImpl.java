@@ -77,7 +77,6 @@ public class BuildDaoImpl extends TinyDslDaoSupport implements BuildDao {
 		return getDslTemplate().update(build, new UpdateGenerateCallback<Build>() {
 			public Update generate(Build t) {
 				Update update = update(BUILDTABLE).set(
-					BUILDTABLE.BUILD_ID.value(t.getBuildId()),
 					BUILDTABLE.BUILD_PRODUCT.value(t.getBuildProduct()),
 					BUILDTABLE.BUILD_PROJECT.value(t.getBuildProject()),
 					BUILDTABLE.BUILD_NAME.value(t.getBuildName()),
@@ -136,7 +135,6 @@ public class BuildDaoImpl extends TinyDslDaoSupport implements BuildDao {
 			public Select generate(Build t) {
 				return selectFrom(BUILDTABLE).where(
 				and(
-					BUILDTABLE.BUILD_ID.eq(t.getBuildId()),
 					BUILDTABLE.BUILD_PRODUCT.eq(t.getBuildProduct()),
 					BUILDTABLE.BUILD_PROJECT.eq(t.getBuildProject()),
 					BUILDTABLE.BUILD_NAME.eq(t.getBuildName()),
@@ -161,7 +159,6 @@ public class BuildDaoImpl extends TinyDslDaoSupport implements BuildDao {
 			public Select generate(Build t) {
 				return MysqlSelect.selectFrom(BUILDTABLE).where(
 				and(
-					BUILDTABLE.BUILD_ID.eq(t.getBuildId()),
 					BUILDTABLE.BUILD_PRODUCT.eq(t.getBuildProduct()),
 					BUILDTABLE.BUILD_PROJECT.eq(t.getBuildProject()),
 					BUILDTABLE.BUILD_NAME.eq(t.getBuildName()),
@@ -185,7 +182,6 @@ public class BuildDaoImpl extends TinyDslDaoSupport implements BuildDao {
 
 			public Insert generate() {
 				return insertInto(BUILDTABLE).values(
-					BUILDTABLE.BUILD_ID.value(new JdbcNamedParameter("buildId")),
 					BUILDTABLE.BUILD_PRODUCT.value(new JdbcNamedParameter("buildProduct")),
 					BUILDTABLE.BUILD_PROJECT.value(new JdbcNamedParameter("buildProject")),
 					BUILDTABLE.BUILD_NAME.value(new JdbcNamedParameter("buildName")),
@@ -213,7 +209,6 @@ public class BuildDaoImpl extends TinyDslDaoSupport implements BuildDao {
 
 			public Update generate() {
 				return update(BUILDTABLE).set(
-					BUILDTABLE.BUILD_ID.value(new JdbcNamedParameter("buildId")),
 					BUILDTABLE.BUILD_PRODUCT.value(new JdbcNamedParameter("buildProduct")),
 					BUILDTABLE.BUILD_PROJECT.value(new JdbcNamedParameter("buildProject")),
 					BUILDTABLE.BUILD_NAME.value(new JdbcNamedParameter("buildName")),
