@@ -22,12 +22,16 @@ import org.tinygroup.tinysqldsl.base.Table;
 public class ProjectstoryTable extends Table {
 
 	public static final ProjectstoryTable PROJECTSTORYTABLE = new ProjectstoryTable();
+	/** 逻辑ID */
+	public final Column ID = new Column(this, "id");
 	/** 项目id */
 	public final Column PROJECT_ID = new Column(this, "project_id");
 	/** 产品ID */
 	public final Column PRODUCT_ID = new Column(this, "product_id");
 	/** 需求ID */
 	public final Column STORY_ID = new Column(this, "story_id");
+	/** 需求版本 */
+	public final Column STORY_VERSION = new Column(this, "story_version");
 
 		private ProjectstoryTable() {
 			super("projectstory");

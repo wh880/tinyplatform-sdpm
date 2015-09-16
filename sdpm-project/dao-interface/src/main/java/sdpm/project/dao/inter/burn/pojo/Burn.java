@@ -23,13 +23,13 @@ public class Burn {
 	/** 项目id */
 	private Integer projectId;
 
-	/** BURN_DATE */
+	/** 日期 */
 	private Date burnDate;
 
-	/** BURN_LEFT */
+	/** 剩余 */
 	private Float burnLeft;
 
-	/** BURN_CONSUMED */
+	/** 消耗 */
 	private Float burnConsumed;
 
 
