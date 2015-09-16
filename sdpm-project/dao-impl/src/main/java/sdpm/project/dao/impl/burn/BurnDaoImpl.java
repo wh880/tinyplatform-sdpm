@@ -69,7 +69,6 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 		return getDslTemplate().update(burn, new UpdateGenerateCallback<Burn>() {
 			public Update generate(Burn t) {
 				Update update = update(BURNTABLE).set(
-					BURNTABLE.PROJECT_ID.value(t.getProjectId()),
 					BURNTABLE.BURN_DATE.value(t.getBurnDate()),
 					BURNTABLE.BURN_LEFT.value(t.getBurnLeft()),
 					BURNTABLE.BURN_CONSUMED.value(t.getBurnConsumed())).where(
@@ -120,7 +119,6 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 			public Select generate(Burn t) {
 				return selectFrom(BURNTABLE).where(
 				and(
-					BURNTABLE.PROJECT_ID.eq(t.getProjectId()),
 					BURNTABLE.BURN_DATE.eq(t.getBurnDate()),
 					BURNTABLE.BURN_LEFT.eq(t.getBurnLeft()),
 					BURNTABLE.BURN_CONSUMED.eq(t.getBurnConsumed())));
@@ -137,7 +135,6 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 			public Select generate(Burn t) {
 				return MysqlSelect.selectFrom(BURNTABLE).where(
 				and(
-					BURNTABLE.PROJECT_ID.eq(t.getProjectId()),
 					BURNTABLE.BURN_DATE.eq(t.getBurnDate()),
 					BURNTABLE.BURN_LEFT.eq(t.getBurnLeft()),
 					BURNTABLE.BURN_CONSUMED.eq(t.getBurnConsumed())));
@@ -153,7 +150,6 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 
 			public Insert generate() {
 				return insertInto(BURNTABLE).values(
-					BURNTABLE.PROJECT_ID.value(new JdbcNamedParameter("projectId")),
 					BURNTABLE.BURN_DATE.value(new JdbcNamedParameter("burnDate")),
 					BURNTABLE.BURN_LEFT.value(new JdbcNamedParameter("burnLeft")),
 					BURNTABLE.BURN_CONSUMED.value(new JdbcNamedParameter("burnConsumed")));
@@ -173,7 +169,6 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 
 			public Update generate() {
 				return update(BURNTABLE).set(
-					BURNTABLE.PROJECT_ID.value(new JdbcNamedParameter("projectId")),
 					BURNTABLE.BURN_DATE.value(new JdbcNamedParameter("burnDate")),
 					BURNTABLE.BURN_LEFT.value(new JdbcNamedParameter("burnLeft")),
 					BURNTABLE.BURN_CONSUMED.value(new JdbcNamedParameter("burnConsumed"))).where(

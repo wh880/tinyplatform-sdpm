@@ -1,5 +1,5 @@
 <tables>
-  <table id="7fb85a2df10f47beb23ab5cc6a277372" name="zt_config" title="配置表" schema="" package-name="org.tinygroup.alm.product">
+  <table id="7fb85a2df10f47beb23ab5cc6a277372" name="config" title="模块配置表" schema="" package-name="org.tinygroup.alm.product">
     <table-field standard-field-id="e61eb9908855427cb1d6b4a9a2ab3216" primary="true" unique="true" not-null="true" id="config_id" auto-increase="true"/>
     <table-field standard-field-id="d0ae32e1f34c4573b8298bdcad89c49f" primary="false" unique="false" not-null="false" id="config_owner" auto-increase="false"/>
     <table-field standard-field-id="08616f2108aa4d339c7cb43f44c961fd" primary="false" unique="false" not-null="false" id="config_module" auto-increase="false"/>
@@ -7,7 +7,7 @@
     <table-field standard-field-id="82d6405620c54f89975ea4b12a4688ba" primary="false" unique="false" not-null="false" id="config_key" auto-increase="false"/>
     <table-field standard-field-id="04f73ab7d089441daa66c55dbcf19b7a" primary="false" unique="false" not-null="false" id="config_value" auto-increase="false"/>
   </table>
-  <table id="52d013ba76aa4a968dcba9005ca3fccd" name="zt_searchindex" title="搜索索引" package-name="org.tinygroup.alm.product">
+  <table id="52d013ba76aa4a968dcba9005ca3fccd" name="searchindex" title="模块搜索表" package-name="org.tinygroup.alm.product">
     <table-field standard-field-id="20a7f050dd5f4726828fd67445d1378f" primary="true" unique="true" not-null="true" id="searchindex_id" auto-increase="true"/>
     <table-field standard-field-id="c512358f477c406ca15dc07ef5c1c4a8" primary="false" unique="false" not-null="false" id="searchindex_objectType" auto-increase="false"/>
     <table-field standard-field-id="5c5229c53bad4cf3afbbeccaf348bb0a" primary="false" unique="false" not-null="false" id="searchindex_objectID" auto-increase="false"/>
