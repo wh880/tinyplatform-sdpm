@@ -1,0 +1,17 @@
+<standard-fields>
+  <standard-field id="e61eb9908855427cb1d6b4a9a2ab3216" name="config_id" title="配置ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0">
+    <description></description>
+  </standard-field>
+  <standard-field id="d0ae32e1f34c4573b8298bdcad89c49f" name="config_owner" title="配置创建人" business-type-id="095e594e1550424b9643c7e2279e85be" default=""/>
+  <standard-field id="3bdd271084f240c7a4c8a7a323e24f44" name="config_section" title="配置部分" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="08616f2108aa4d339c7cb43f44c961fd" name="config_module" title="配置模块" business-type-id="095e594e1550424b9643c7e2279e85be" default=""/>
+  <standard-field id="82d6405620c54f89975ea4b12a4688ba" name="config_key" title="配置的关键词" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="04f73ab7d089441daa66c55dbcf19b7a" name="config_value" title="配置的值" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
+  <standard-field id="20a7f050dd5f4726828fd67445d1378f" name="search_id" title="搜索ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
+  <standard-field id="c512358f477c406ca15dc07ef5c1c4a8" name="search_objectType" title="搜索对象类型" business-type-id="095e594e1550424b9643c7e2279e85be" default=""/>
+  <standard-field id="5c5229c53bad4cf3afbbeccaf348bb0a" name="search_objectID" title="搜索对象ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="22819ace1ac644a19e15bf14034a3b06" name="search_title" title="搜索名称&#x9;" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
+  <standard-field id="9ea372d0291e48ad92b0ccc832485b65" name="search_content" title="搜索内容" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
+  <standard-field id="42c7e8f67f1c4dfd9471a62f6158cef0" name="search_addedDate" title="搜索添加日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="048d96b083e74cc1a334e0f33f2c0020" name="search_editedDate" title="搜索编辑日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+</standard-fields>
