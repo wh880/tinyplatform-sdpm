@@ -134,7 +134,7 @@
     <table-field standard-field-id="bab7c0daedc34545a255b9be36aed755" primary="false" unique="false" not-null="true" id="team_join" auto-increase="false"/>
     <table-field standard-field-id="e26d8ad4172d4f6297b5bca12dc6994b" primary="false" unique="false" not-null="true" id="team_days" auto-increase="false"/>
     <table-field standard-field-id="53e3179919434d0fbef0818a4039f5e1" primary="false" unique="false" not-null="true" id="team_hours" auto-increase="false"/>
-    <index name="team">
+    <index name="team" unique="false">
       <index-field field="project_id" direction="asc"/>
       <index-field field="team_account" direction="asc"/>
     </index>
