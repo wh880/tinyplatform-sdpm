@@ -48,6 +48,7 @@
                 #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})客户名称#end
                 #@tinyTh({"class":"","rel":"sortname"})请求标题#end
                 #@tinyTh({"class":"","rel":"sortname"})请求优先级#end
+                #@tinyTh({"class":"","rel":"sortname"})状态#end
                 #@tinyTh({"class":"","rel":"sortname"})回访预期时间#end
                 #@tinyTh({"class":"sorting","rel":"sortname"})指派#end
                 #@tinyTh({"class":"","rel":"sortname"})操作#end
