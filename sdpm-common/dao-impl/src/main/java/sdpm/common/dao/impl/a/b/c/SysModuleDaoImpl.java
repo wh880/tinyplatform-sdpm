@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package sdpm.common.dao.impl;
+package sdpm.common.dao.impl.a.b.c;
 
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static sdpm.common.dao.inter.constant.SysModuleTable.*;
