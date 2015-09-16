@@ -19,45 +19,123 @@ package org.tinygroup.sdpm.productLine.dao.constant;
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
 
+/** 
+ * 产品线表
+ * 
+ */
 public class ProductLineTable extends Table {
 
 	public static final ProductLineTable PRODUCTLINETABLE = new ProductLineTable();
-	/** 产品线ID */
+
+	/** 
+	 * 产品线ID
+	 * 
+	 */
 	public final Column PRODUCTLINE_ID = new Column(this, "productLine_id");
-	/** 公司ID */
+
+	/** 
+	 * 公司ID
+	 * 
+	 */
 	public final Column COMPANY_ID = new Column(this, "company_id");
-	/** 部门ID */
+
+	/** 
+	 * 部门ID
+	 * 
+	 */
 	public final Column DEPT_ID = new Column(this, "dept_id");
-	/** 产品线根节点 */
+
+	/** 
+	 * 产品线根节点
+	 * 
+	 */
 	public final Column PRODUCTLINE_ROOT = new Column(this, "productLine_root");
-	/** 产品线父节点 */
+
+	/** 
+	 * 产品线父节点
+	 * 
+	 */
 	public final Column PRODUCTLINE_PARENT = new Column(this, "productLine_parent");
-	/** 产品线名称 */
+
+	/** 
+	 * 产品线名称
+	 * 
+	 */
 	public final Column PRODUCTLINE_NAME = new Column(this, "productLine_name");
-	/** 产品线编号 */
+
+	/** 
+	 * 产品线编号
+	 * 
+	 */
 	public final Column PRODUCTLINE_CODE = new Column(this, "productLine_code");
-	/** 产品线序号 */
+
+	/** 
+	 * 产品线序号
+	 * 
+	 */
 	public final Column PRODUCTLINE_ORDER = new Column(this, "productLine_order");
-	/** 产品线描述 */
+
+	/** 
+	 * 产品线描述
+	 * 
+	 */
 	public final Column PRODUCTLINE_SPEC = new Column(this, "productLine_spec");
-	/** 产品线状态 */
+
+	/** 
+	 * 产品线状态
+	 * 
+	 */
 	public final Column PRODUCTLINE_STATUS = new Column(this, "productLine_status");
-	/** 产品线经理 */
+
+	/** 
+	 * 产品线经理
+	 * 
+	 */
 	public final Column PRODUCTLINE_OWNER = new Column(this, "productLine_owner");
-	/** 产品线质量经理 */
+
+	/** 
+	 * 产品线质量经理
+	 * 
+	 */
 	public final Column PRODUCTLINE_QUALITY_MANAGER = new Column(this, "productLine_quality_manager");
-	/** 产品线交付经理 */
+
+	/** 
+	 * 产品线交付经理
+	 * 
+	 */
 	public final Column PRODUCTLINE_DELIVERY_MANAGER = new Column(this, "productLine_delivery_manager");
-	/** 权限模式 */
+
+	/** 
+	 * 权限模式
+	 * 
+	 * 本部门范围：0-open公开；1-custom自定义（产品/项目团队和白名单可访问）；2-private私有（产品/项目团队成员才可访问）
+	 */
 	public final Column ACL = new Column(this, "acl");
-	/** 产品线白名单 */
+
+	/** 
+	 * 产品线白名单
+	 * 
+	 */
 	public final Column PRODUCTLINE_WHITELIST = new Column(this, "productLine_whiteList");
-	/** 产品线创建者 */
+
+	/** 
+	 * 产品线创建者
+	 * 
+	 */
 	public final Column PRODUCTLINE_CREATEDBY = new Column(this, "productLine_createdBy");
-	/** 产品线创建日期 */
+
+	/** 
+	 * 产品线创建日期
+	 * 
+	 */
 	public final Column PRODUCTLINE_CREATEDDATE = new Column(this, "productLine_createdDate");
-	/** 已删除 */
+
+	/** 
+	 * 已删除
+	 * 
+	 */
 	public final Column DELETED = new Column(this, "deleted");
+
 
 		private ProductLineTable() {
 			super("productLine");

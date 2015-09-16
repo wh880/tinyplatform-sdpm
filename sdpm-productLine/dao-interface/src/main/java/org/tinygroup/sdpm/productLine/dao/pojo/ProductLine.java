@@ -18,61 +18,120 @@ package org.tinygroup.sdpm.productLine.dao.pojo;
 
 import java.util.Date;
 
+/** 
+ * 产品线表
+ * 
+ */
 public class ProductLine {
 
-	/** 产品线ID */
+	/** 
+	 * 产品线ID
+	 * 
+	 */
 	private Integer productLineId;
 
-	/** 公司ID */
+	/** 
+	 * 公司ID
+	 * 
+	 */
 	private Integer companyId;
 
-	/** 部门ID */
+	/** 
+	 * 部门ID
+	 * 
+	 */
 	private Integer deptId;
 
-	/** 产品线根节点 */
+	/** 
+	 * 产品线根节点
+	 * 
+	 */
 	private Integer productLineRoot;
 
-	/** 产品线父节点 */
+	/** 
+	 * 产品线父节点
+	 * 
+	 */
 	private Integer productLineParent;
 
-	/** 产品线名称 */
+	/** 
+	 * 产品线名称
+	 * 
+	 */
 	private String productLineName;
 
-	/** 产品线编号 */
+	/** 
+	 * 产品线编号
+	 * 
+	 */
 	private Integer productLineCode;
 
-	/** 产品线序号 */
+	/** 
+	 * 产品线序号
+	 * 
+	 */
 	private Integer productLineOrder;
 
-	/** 产品线描述 */
+	/** 
+	 * 产品线描述
+	 * 
+	 */
 	private String productLineSpec;
 
-	/** 产品线状态 */
+	/** 
+	 * 产品线状态
+	 * 
+	 */
 	private String productLineStatus;
 
-	/** 产品线经理 */
+	/** 
+	 * 产品线经理
+	 * 
+	 */
 	private String productLineOwner;
 
-	/** 产品线质量经理 */
+	/** 
+	 * 产品线质量经理
+	 * 
+	 */
 	private String productLineQualityManager;
 
-	/** 产品线交付经理 */
+	/** 
+	 * 产品线交付经理
+	 * 
+	 */
 	private String productLineDeliveryManager;
 
-	/** 权限模式 */
+	/** 
+	 * 权限模式
+	 * 
+	 * 本部门范围：0-open公开；1-custom自定义（产品/项目团队和白名单可访问）；2-private私有（产品/项目团队成员才可访问）
+	 */
 	private Integer acl;
 
-	/** 产品线白名单 */
+	/** 
+	 * 产品线白名单
+	 * 
+	 */
 	private String productLineWhiteList;
 
-	/** 产品线创建者 */
+	/** 
+	 * 产品线创建者
+	 * 
+	 */
 	private String productLineCreatedBy;
 
-	/** 产品线创建日期 */
+	/** 
+	 * 产品线创建日期
+	 * 
+	 */
 	private Date productLineCreatedDate;
 
-	/** 已删除 */
-	private String deleted;
+	/** 
+	 * 已删除
+	 * 
+	 */
+	private Integer deleted;
 
 
 	public void setProductLineId(Integer productLineId){
@@ -211,11 +270,11 @@ public class ProductLine {
 		return productLineCreatedDate;
 	}
 
-	public void setDeleted(String deleted){
+	public void setDeleted(Integer deleted){
 		this. deleted = deleted;
 	}
 
-	public String getDeleted(){
+	public Integer getDeleted(){
 		return deleted;
 	}
 

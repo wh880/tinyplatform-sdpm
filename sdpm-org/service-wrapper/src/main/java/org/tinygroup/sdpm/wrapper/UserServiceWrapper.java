@@ -16,10 +16,11 @@
 package org.tinygroup.sdpm.wrapper;
 
 import org.springframework.stereotype.Service;
-import org.tinygroup.sdpm.service.inter.UserService;
+import org.tinygroup.sdpm.org.service.inter.UserService;
+
 
 @Service
-public class UserServiceWrapper implements UserService{
+public class UserServiceWrapper implements UserService {
     public String sayHello(String name) {
         return null;
     }
