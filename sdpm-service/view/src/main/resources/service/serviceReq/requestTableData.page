@@ -12,10 +12,11 @@
         #@td()<input type="checkbox" value="1" name="idCheck">#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/serviceReq/requestDetail.page">001</a>#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">恒生</a>#end
-        #@td()银行部#end
-        #@td()习近平#end
-        #@td()2015-09-09#end
-        #@td()正常#end
+        #@td()请求标题#end
+        #@td()请求优先级#end
+        #@td()状态#end
+        #@td()请求承诺回复时间#end
+        #@td()指派#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("service-request"))
             <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
