@@ -25,13 +25,20 @@
     #@tabBodyCol("ptop-5")
 ##operationbar start1
     #@div(divClass="operationbar")
-    <span class="f active_btn" >
+   <div class="col-10">
 		报表
-				</span>
-    <span class="r">
+	</div>
+				
+    	<div class="col-1">
+    			#@aModal("#myModal" "导出" "550" "100" "" 
+    				"/testManagement/page/tabledemo/exportBugTemplet.pagelet")    				  	    	
+    					<button type="button" id="back" class="btn btn-primary">导出</button>#end
+    					</div>
+    	<div class="col-1"></div>
+    	<div class="col-1">
 				<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">
-					<button style="float: left" type="button" id="back" class="backBtn">返回</button></a>&nbsp;
-				</span>
+					<button type="button" id="back" class="btn">返回</button></a>&nbsp;
+					</div>
         #div(divClass="clearfix")
     #end
 ##operationbar end
@@ -71,3 +78,11 @@
 
 #end
 #end
+#@dialog("myModal")
+								#@dialogHeader()#end
+								#@dialogBody()<p></p>#end
+								#@dialogFooter()
+									#@buttonEnsure()确定#end
+								    #@buttonCancel()关闭#end
+							  	#end
+						#end
