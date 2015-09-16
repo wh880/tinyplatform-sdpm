@@ -35,28 +35,62 @@
 					<a href="#" class="active_btn">这是一条演示用的需求</a>
 			</span>
     <span class="r">
-				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class"
-                    "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
-        <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-change.page">#buttonIcon(iconClass=
-            "icon-random")变更</a>&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-close.page">#buttonIcon(iconClass=
-                    "icon-off ")关闭</a>&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">#buttonIcon(iconClass=
-                    "icon-sitemap")建用例</a>&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page" title="编辑">#buttonIcon(iconClass=
-                    "icon-pencil")</a>
+ #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
+     #if(m.id=="demand_log")
+         #@aModal("#myModal" "新增日志" "1000" "500" "btn-class"
+             "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
+     #else
+         #if(m.id=="demand-alteration")
+             <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-change.page">#buttonIcon(iconClass=
+                 "icon-random")变更</a>
+         #else
+             #if(m.id=="demand_close")
+                 <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-close.page">#buttonIcon(iconClass=
+                     "icon-off ")关闭</a>
+             #else
+                 #if(m.id=="demand_set")
+                     <a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">#buttonIcon(iconClass=
+                         "icon-sitemap")建用例</a>
+                 #else
+                     #if(m.id=="demand-edit")
+                         <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page"
+                            title="编辑">#buttonIcon(iconClass=
+                             "icon-pencil")</a>
+                     #else
+                         #if(m.id=="demand-edit")
+                             <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page"
+                                title="编辑">#buttonIcon(iconClass=
+                                 "icon-pencil")</a>
+                         #else
+                             #if(m.id=="demand_note")
+                                 <a href="#" title="备注">#buttonIcon(iconClass="备注 icon-comment-alt")</a>
+                                 #if(m.id=="demand_copy")
+                                     <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
+                                        title="复制">#buttonIcon(iconClass="icon-copy")</a>
+                                 #else
+                                     <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
+                                        title="复制">#buttonIcon(iconClass="icon-copy")</a>
 
-        <a href="#" title="备注">#buttonIcon(iconClass="备注 icon-comment-alt")</a>
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
-                   title="复制">#buttonIcon(iconClass="icon-copy")</a>
-        #@delItemsdpm()#buttonIcon(iconClass="icon-remove")#end
+                                 #end
 
+                             #end
+
+                         #end
+
+                     #end
+
+                 #end
+
+             #end
+         #end
+     #end
+ #end
         <a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass=
             "icon-reply")</a>
-				<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"
-                   title="上一个">#buttonIcon(iconClass="icon-pre icon-chevron-left")</a>
-				<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"
-                   title="下一个">#buttonIcon(iconClass="icon-pre icon-chevron-right")</a>
+        <a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page" title="上一个">#buttonIcon(iconClass=
+            "icon-pre icon-chevron-left")</a>
+        <a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page" title="下一个">#buttonIcon(iconClass=
+            "icon-pre icon-chevron-right")</a>
 			</span>
     #end
 
@@ -94,28 +128,64 @@
 
 
     <div style="text-align:center;margin:auto">
-	       <span>
-				#@aModal("#myModal" "新增日志" "1000" "500" "btn-class"
-                    "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
-               <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-change.page">#buttonIcon(iconClass=
-                   "icon-random")变更</a>&nbsp;&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-close.page">#buttonIcon(iconClass=
-                    "icon-off ")关闭</a>&nbsp;&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">#buttonIcon(iconClass=
-                    "icon-sitemap")建用例</a>&nbsp;&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page" title="编辑">#buttonIcon(iconClass=
-                    "icon-pencil")</a>&nbsp;&nbsp;
-	            <a href="#" title="备注">#buttonIcon(iconClass="备注 icon-comment-alt")</a>&nbsp;&nbsp;		<a
-                   href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
-                   title="复制">#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
-               #@delItemsdpm()#buttonIcon(iconClass="icon-remove")#end&nbsp
-				<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass=
-                    "icon-reply")</a>&nbsp;&nbsp;
+<span>
+#foreach(m:menuManager.getScopeMenus("pro_demand_log"))
+    #if(m.id=="demand_log")
+        #@aModal("#myModal" "新增日志" "1000" "500" "btn-class"
+            "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end&nbsp;
+    #else
+        #if(m.id=="demand-alteration")
+            <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-change.page">#buttonIcon(iconClass=
+                "icon-random")变更</a>&nbsp;
+        #else
+            #if(m.id=="demand_close")
+                <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-close.page">#buttonIcon(iconClass=
+                    "icon-off ")关闭</a>&nbsp;
+            #else
+                #if(m.id=="demand_set")
+                    <a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">#buttonIcon(iconClass=
+                        "icon-sitemap")建用例</a>&nbsp;
+                #else
+                    #if(m.id=="demand-edit")
+                        <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page"
+                           title="编辑">#buttonIcon(iconClass=
+                            "icon-pencil")</a>&nbsp;
+                    #else
+                        #if(m.id=="demand-edit")
+                            <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/demand-edit.page"
+                               title="编辑">#buttonIcon(iconClass=
+                                "icon-pencil")</a>&nbsp;
+                        #else
+                            #if(m.id=="demand_note")
+                                <a href="#" title="备注">#buttonIcon(iconClass="备注 icon-comment-alt")</a>&nbsp;
+                                #if(m.id=="demand_copy")
+                                    <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
+                                       title="复制">#buttonIcon(iconClass="icon-copy")</a>&nbsp;
+                                #else
+                                    <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
+                                       title="复制">#buttonIcon(iconClass="icon-copy")</a>&nbsp;
+
+                                #end
+
+                            #end
+
+                        #end
+
+                    #end
+
+                #end
+
+            #end
+        #end
+    #end
+#end
+    <a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass=
+        "icon-reply")</a>&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"
-                   title="上一个">#buttonIcon(iconClass="icon-pre icon-chevron-left")</a>&nbsp;&nbsp;
+                   title="上一个">#buttonIcon(iconClass="icon-pre icon-chevron-left")</a>&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"
                    title="下一个">#buttonIcon(iconClass="icon-pre icon-chevron-right")</a>
-			</span>
+    </span>
     </div>
 
     <div class="infoContent" id="beizhutext" style="display:none">
@@ -124,7 +194,8 @@
         #@elementItem()
 
             #@formControlDiv("col-16")
-                #@Teditor("content1" "content1" {"initialFrameHeight":"200" ,"datatype":"*10-500"})备注描述...最少输入10个字符#end
+                #@Teditor("content1" "content1" {"initialFrameHeight":"200" ,"datatype":"*10-500"})
+                    备注描述...最少输入10个字符#end
             #end
             #@validateDiv("col-2")#end
         #end

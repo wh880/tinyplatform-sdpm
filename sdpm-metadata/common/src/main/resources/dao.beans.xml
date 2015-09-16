@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<bean id="projectDao" class="sdpm.metadata.common.project.ProjectDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="buildDao" class="sdpm.metadata.common.version.BuildDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="taskDao" class="sdpm.metadata.common.task.TaskDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="projectproductDao" class="sdpm.metadata.common.projectproduct.ProjectproductDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="burnDao" class="sdpm.metadata.common.burn.BurnDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="taskestimateDao" class="sdpm.metadata.common.taskestimate.TaskestimateDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="projectstoryDao" class="sdpm.metadata.common.projectstory.ProjectstoryDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="teamDao" class="sdpm.metadata.common.team.TeamDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="clientDao" class="sdpm.metadata.common.org.tinygroup.alm.service.ClientDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="clientUserDao" class="sdpm.metadata.common.org.tinygroup.alm.service.ClientUserDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="faqDao" class="sdpm.metadata.common.org.tinygroup.alm.service.FaqDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="clientUserDao" class="sdpm.metadata.common.org.tinygroup.alm.service.ClientUserDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="productReleaseDao" class="sdpm.metadata.common.org.tinygroup.alm.service.ProductReleaseDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="replyDao" class="sdpm.metadata.common.org.tinygroup.alm.service.ReplyDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="requestDao" class="sdpm.metadata.common.org.tinygroup.alm.service.RequestDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="reviewDao" class="sdpm.metadata.common.org.tinygroup.alm.service.ReviewDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="slaDao" class="sdpm.metadata.common.org.tinygroup.alm.service.SlaDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="faqTypeDao" class="sdpm.metadata.common.org.tinygroup.alm.service.FaqTypeDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="effortDao" class="sdpm.metadata.common.EffortDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="fileDao" class="sdpm.metadata.common.FileDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="mailqueueDao" class="sdpm.metadata.common.MailqueueDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="sysModuleDao" class="sdpm.metadata.common.SysModuleDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="attachmentDao" class="sdpm.metadata.common.org.tinygroup.alm.document.AttachmentDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="commentsDao" class="sdpm.metadata.common.org.tinygroup.alm.document.CommentsDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="docDao" class="sdpm.metadata.common.org.tinygroup.alm.document.DocDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="docLibDao" class="sdpm.metadata.common.org.tinygroup.alm.document.DocLibDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="orgUserDao" class="sdpm.metadata.common.org.tinygroup.alm.org.OrgUserDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="orgDeptDao" class="sdpm.metadata.common.org.tinygroup.alm.org.OrgDeptDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="orgCompanyyDao" class="sdpm.metadata.common.org.tinygroup.alm.org.OrgCompanyyDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="ztConfigDao" class="sdpm.metadata.common.org.tinygroup.alm.product.ZtConfigDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="ztSearchindexDao" class="sdpm.metadata.common.org.tinygroup.alm.product.ZtSearchindexDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="planDao" class="sdpm.metadata.common.org.tinygroup.alm.product.PlanDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="productDao" class="sdpm.metadata.common.org.tinygroup.alm.product.ProductDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="productLineDao" class="sdpm.metadata.common.org.tinygroup.alm.product.ProductLineDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="storyDao" class="sdpm.metadata.common.org.tinygroup.alm.product.StoryDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="storySpecDao" class="sdpm.metadata.common.org.tinygroup.alm.product.StorySpecDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="releaseDao" class="sdpm.metadata.common.org.tinygroup.alm.product.ReleaseDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="bugDao" class="sdpm.metadata.common.org.tinygroup.alm.quality.BugDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="caseStepDao" class="sdpm.metadata.common.org.tinygroup.alm.quality.CaseStepDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="testCaseDao" class="sdpm.metadata.common.org.tinygroup.alm.quality.TestCaseDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="testPlanDao" class="sdpm.metadata.common.org.tinygroup.alm.quality.TestPlanDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="testResultDao" class="sdpm.metadata.common.org.tinygroup.alm.quality.TestResultDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="testRunDao" class="sdpm.metadata.common.org.tinygroup.alm.quality.TestRunDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="projectDao" class="sdpm.metadata.common.project.ProjectDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="buildDao" class="sdpm.metadata.common.version.BuildDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="taskDao" class="sdpm.metadata.common.task.TaskDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="projectproductDao" class="sdpm.metadata.common.projectproduct.ProjectproductDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="burnDao" class="sdpm.metadata.common.burn.BurnDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="taskestimateDao" class="sdpm.metadata.common.taskestimate.TaskestimateDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="projectstoryDao" class="sdpm.metadata.common.projectstory.ProjectstoryDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="teamDao" class="sdpm.metadata.common.team.TeamDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="clientDao" class="sdpm.metadata.common.org.tinygroup.alm.service.ClientDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="clientUserDao" class="sdpm.metadata.common.org.tinygroup.alm.service.ClientUserDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="faqDao" class="sdpm.metadata.common.org.tinygroup.alm.service.FaqDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="clientUserDao" class="sdpm.metadata.common.org.tinygroup.alm.service.ClientUserDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="productReleaseDao" class="sdpm.metadata.common.org.tinygroup.alm.service.ProductReleaseDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="replyDao" class="sdpm.metadata.common.org.tinygroup.alm.service.ReplyDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="requestDao" class="sdpm.metadata.common.org.tinygroup.alm.service.RequestDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="reviewDao" class="sdpm.metadata.common.org.tinygroup.alm.service.ReviewDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="slaDao" class="sdpm.metadata.common.org.tinygroup.alm.service.SlaDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="faqTypeDao" class="sdpm.metadata.common.org.tinygroup.alm.service.FaqTypeDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="effortDao" class="sdpm.metadata.common.EffortDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="fileDao" class="sdpm.metadata.common.FileDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="mailqueueDao" class="sdpm.metadata.common.MailqueueDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="sysModuleDao" class="sdpm.metadata.common.SysModuleDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="attachmentDao" class="sdpm.metadata.common.org.tinygroup.alm.document.AttachmentDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="commentsDao" class="sdpm.metadata.common.org.tinygroup.alm.document.CommentsDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="docDao" class="sdpm.metadata.common.org.tinygroup.alm.document.DocDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="docLibDao" class="sdpm.metadata.common.org.tinygroup.alm.document.DocLibDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="orgUserDao" class="sdpm.metadata.common.org.tinygroup.alm.org.OrgUserDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="orgDeptDao" class="sdpm.metadata.common.org.tinygroup.alm.org.OrgDeptDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="orgCompanyyDao" class="sdpm.metadata.common.org.tinygroup.alm.org.OrgCompanyyDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="ztConfigDao" class="sdpm.metadata.common.org.tinygroup.alm.product.ZtConfigDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="ztSearchindexDao" class="sdpm.metadata.common.org.tinygroup.alm.product.ZtSearchindexDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="planDao" class="sdpm.metadata.common.org.tinygroup.alm.product.PlanDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="productDao" class="sdpm.metadata.common.org.tinygroup.alm.product.ProductDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="productLineDao" class="sdpm.metadata.common.org.tinygroup.alm.product.ProductLineDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="storyDao" class="sdpm.metadata.common.org.tinygroup.alm.product.StoryDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="storySpecDao" class="sdpm.metadata.common.org.tinygroup.alm.product.StorySpecDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="releaseDao" class="sdpm.metadata.common.org.tinygroup.alm.product.ReleaseDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="bugDao" class="sdpm.metadata.common.org.tinygroup.alm.quality.BugDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="caseStepDao" class="sdpm.metadata.common.org.tinygroup.alm.quality.CaseStepDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="testCaseDao" class="sdpm.metadata.common.org.tinygroup.alm.quality.TestCaseDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="testPlanDao" class="sdpm.metadata.common.org.tinygroup.alm.quality.TestPlanDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="testResultDao" class="sdpm.metadata.common.org.tinygroup.alm.quality.TestResultDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+	<bean id="testRunDao" class="sdpm.metadata.common.org.tinygroup.alm.quality.TestRunDaoImpl">
+		<property name="dslTemplate" ref="dslTemplate"></property>
+	</bean>
+
+</beans>
