@@ -1,0 +1,165 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="服务管理",activeMenuId=currentPageId)
+<style>
+    .select_boxes {
+        margin-top: 0
+    }
+</style>
+#set(name="request")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/service/serviceCom/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/service/serviceCom/tab.page")
+        #end
+    <br>
+    #end
+#end
+#@tinyForm("thisform" "" "" {"class":"test"})
+<div style="width:80%;margin-left: 20px;" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">新增请求</p>
+
+        #@elementItem()
+            #@sdpmItem("产品名称")
+                #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("ch")请选择#end
+                        #@tinyOptionItem("zh")产品一#end
+                        #@tinyOptionItem("en")产品二#end
+                        #@tinyOptionItem("ta")产品三#end
+                    #end
+                ##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/sla/slaAdd.page" class="r ">增加</a><a
+                ##                            href="${TINY_CONTEXT_PATH}/service/sla/sla.page">全部</a>#end
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("请求类型")
+                #@Tselect2F()
+                    #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("1")请选择#end
+                        #@tinyOptionItem("2")类型一#end
+                        #@tinyOptionItem("3")类型二#end
+                        #@tinyOptionItem("4")类型三#end
+                    #end
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("请求优先级")
+                #@Tselect2F()
+                    #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("1")请选择#end
+                        #@tinyOptionItem("2")1#end
+                        #@tinyOptionItem("3")2#end
+                        #@tinyOptionItem("4")3#end
+                    #end
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("请求模块")
+                #@Tselect2F()
+                    #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("1")请选择#end
+                        #@tinyOptionItem("2")模块一#end
+                        #@tinyOptionItem("3")模块二#end
+                        #@tinyOptionItem("4")模块三#end
+                    #end
+                #end
+            #end
+        #end
+
+
+
+
+
+
+        #@elementItem()
+            #@sdpmItem("请求标题")
+                #tinyInput(
+                    "text" "username" ""{"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":"username",
+                    "class":"input-text"})
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("请求描述")
+                #@tinyueditor("contents" "contents""min-height:150px")#end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("客户名称")
+                #@Tselect2F()
+                    #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("1")请选择#end
+                        #@tinyOptionItem("2")客户一#end
+                        #@tinyOptionItem("3")客户二#end
+                        #@tinyOptionItem("4")客户三#end
+                    #end
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("客户联系人")
+                #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("ch")请选择#end
+                        #@tinyOptionItem("zh")联系人一#end
+                        #@tinyOptionItem("en")联系人二#end
+                        #@tinyOptionItem("ta")联系人三#end
+                    #end
+                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/companyInfoEdit2.page" class="r ">增加</a>
+                            #end
+                #end
+            #end
+        #end
+
+
+        #@elementItem()
+            #@sdpmItem("请求提交时间")
+                #@tinyDateInput(
+                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
+                    "日期不能为空"})#end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("请求承诺回复时间")
+                #@tinyDateInput(
+                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
+                    "日期不能为空"})#end
+            #end
+        #end
+
+
+        <br/>
+    </div>
+##           /*************保存
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
+    <br>
+</div>
+
+#end
+
+<script type="text/javascript">
+    $("select.select2").select2();
+</script>
+
+
