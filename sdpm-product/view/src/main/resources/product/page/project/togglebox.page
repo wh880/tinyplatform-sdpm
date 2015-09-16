@@ -7,6 +7,15 @@
 <li>"+"需求"+"</li>")
 
 
+#macro liDropdownMenu(rName)
+<li class="dropdown-submenu">
+    <a tabindex="-1" data-toggle="tab">${rName}</a>
+    #bodyContent
+</li>
+#end
+
+
+
 #import("/org/tinygroup/button/components/button_smart.component")
 
 #@tabBodyCol("ptop-5")
@@ -99,50 +108,53 @@
                     #foreach(m:menuManager.getScopeMenus("product-oper"))
                         #if(m.id=="product-demand-operation")
                             #@buttonGroup()
-                            <div class="dropdown">
-                                <a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#"
-                                   href="javascript:void(0);">操作<span class="caret"></span></a>
-                            #*					#@aModal("#myModal" "编辑" "1300" "500" "btn radius btn-primary" "/product/page/tabledemo/product-demand-edit.pagelet")编辑#end*#
+                            
+                               #@dropdownItempatent("dropdownSm" "btn-primary" "操作" "#")
+                         	
+                                #@ulDropdownMenu(dropdownMenuClass="multi-level")
+                                    #@dropdownsLi("dropdown-submenu")
+									#@dropdownA(""　"javascript:void(0);")指派给#end
+	                                        #@dropdownsUl("dropdown-menu")
+	                                            #@dropdownItem("javascript:void(0);")admin#end
+	                                            #@dropdownItem("javascript:void(0);")张三#end
+	                                            #@dropdownItem("javascript:void(0);")lisi#end
+	                                        #end
+	                                #end
 
-                                #@ulDropdownMenu()
-                                    #@liDropdownMenu("指派给")
-                                        #@ulDropdownMenu()
-                                            #@dropdownItem("javascript:void(0);")admin#end
-                                            #@dropdownItem("javascript:void(0);")张三#end
-                                            #@dropdownItem("javascript:void(0);")lisi#end
-                                        #end
+                                    #@dropdownsLi("dropdown-submenu")
+									#@dropdownA(""　"javascript:void(0);")阶段#end
+	                                        #@dropdownsUl("dropdown-menu")
+	                                            #@dropdownItem("javascript:void(0);")空#end
+	                                            #@dropdownItem("javascript:void(0);")未开始#end
+	                                            #@dropdownItem("javascript:void(0);")已计划#end
+	                                            #@dropdownItem("javascript:void(0);")已立项#end
+	                                            #@dropdownItem("javascript:void(0);")研发中#end
+	                                            #@dropdownItem("javascript:void(0);")完毕#end
+	                                            #@dropdownItem("javascript:void(0);")测试中#end
+	                                            #@dropdownItem("javascript:void(0);")测试完毕#end
+	                                            #@dropdownItem("javascript:void(0);")已验收#end
+	                                            #@dropdownItem("javascript:void(0);")已发布#end
+	                                        #end
                                     #end
 
-                                    #@liDropdownMenu("阶段")
-                                        #@ulDropdownMenu()
-                                            #@dropdownItem("javascript:void(0);")空#end
-                                            #@dropdownItem("javascript:void(0);")未开始#end
-                                            #@dropdownItem("javascript:void(0);")已计划#end
-                                            #@dropdownItem("javascript:void(0);")已立项#end
-                                            #@dropdownItem("javascript:void(0);")研发中#end
-                                            #@dropdownItem("javascript:void(0);")完毕#end
-                                            #@dropdownItem("javascript:void(0);")测试中#end
-                                            #@dropdownItem("javascript:void(0);")测试完毕#end
-                                            #@dropdownItem("javascript:void(0);")已验收#end
-                                            #@dropdownItem("javascript:void(0);")已发布#end
-                                        #end
-                                    #end
-
-                                    #@liDropdownMenu("计划")
-                                        #@ulDropdownMenu()
+                                    #@dropdownsLi("dropdown-submenu")
+									#@dropdownA(""　"javascript:void(0);")计划#end
+                                        #@dropdownsUl("dropdown-menu")
                                             #@dropdownItem("javascript:void(0);")空#end
                                             #@dropdownItem("javascript:void(0);")计划1#end
                                             #@dropdownItem("javascript:void(0);")计划2#end
                                         #end
                                     #end
 
-                                    #@liDropdownMenu("评审")
-                                        #@ulDropdownMenu()
+                                   #@dropdownsLi("dropdown-submenu")
+									#@dropdownA(""　"javascript:void(0);")评审#end
+                                         #@dropdownsUl("dropdown-menu")
                                             #@dropdownItem("javascript:void(0);")确认通过#end
                                             #@dropdownItem("javascript:void(0);")有待明确#end
                                         #*		                		#@liDivider()<hr/>#end*#
-                                            #@liDropdownMenu("拒绝")
-                                                #@ulDropdownMenu()
+                                            #@dropdownsLi("dropdown-submenu")
+											#@dropdownA(""　"javascript:void(0);")拒绝#end
+                                                #@dropdownsUl("dropdown-menu")
                                                     #@dropdownItem("javascript:void(0);")已完成#end
                                                     #@dropdownItem("javascript:void(0);")延期#end
                                                     #@dropdownItem("javascript:void(0);")不做#end
@@ -153,7 +165,7 @@
                                         #end
                                     #end
                                 #end
-                            </div>
+                                #end
                             #end
                         #end
                         #end

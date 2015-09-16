@@ -3,7 +3,7 @@
 $(function () {
     $("form[name=thisform").Validform({
         tiptype: function (msg, o, cssctl) {
-            var objtip = o.obj.parent().parent().siblings(".validmsg");
+            var objtip = o.obj.parents(".formControls:first").siblings(".validmsg");
             cssctl(objtip, o.type);
             objtip.text(msg);
         },

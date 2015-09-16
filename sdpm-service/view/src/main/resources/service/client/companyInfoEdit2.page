@@ -14,7 +14,7 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
     #@noRespsGridSystem()
             #@gridSysRow()
-                #@colLabel("col-3")公司联系人：#end
+                #@colLabel("col-3")客户联系人：#end
                 #@gridSysCol(5)
                     #tinyInput("text" "公司联系人" ""{"datatype":"","id":"版本","class":"input-text"})
                 #end

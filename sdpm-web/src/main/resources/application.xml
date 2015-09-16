@@ -52,9 +52,14 @@
                 <class-path path="F:\daochu\sdpm\sdpm-document\view\src\main\resources"/>
                 <class-path path="E:\workspace\sdpm\sdpm-document\view\src\main\resources"/>
                 <class-path path="E:\TinyWorkSpace\sdpm\sdpm-project\view\src\main\resources"/>
+<<<<<<< HEAD
                 <class-path path="E:\TinyWork\sdpm\sdpm-system\view\src\main\resources"/>    
                 <class-path path="D:\GitFile\sdpm\sdpm-statistic\view\src\main\resources"/>    
                 <class-path path="D:\GitFile\sdpm\sdpm-quality\view\src\main\resources"/> 
+=======
+                <class-path path="E:\TinyWork\sdpm\sdpm-system\view\src\main\resources"/> 
+                <class-path path="E:\TinyWork\sdpm\sdpm-common\view\src\main\resources"/>
+>>>>>>> 915246a860c961ea3fdd5fa5a14170d4e32d27ca
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>
