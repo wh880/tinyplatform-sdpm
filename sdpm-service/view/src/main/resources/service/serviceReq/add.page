@@ -75,19 +75,6 @@
             #end
         #end
 
-
-
-
-
-
-        #@elementItem()
-            #@sdpmItem("请求标题")
-                #tinyInput(
-                    "text" "username" ""{"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":"username",
-                    "class":"input-text"})
-            #end
-        #end
-
         #@elementItem()
             #@sdpmItem("客户名称")
                 #@Tselect2F()
@@ -112,6 +99,14 @@
                     #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/companyInfoEdit2.page" class="r ">增加</a>
                             #end
                 #end
+            #end
+        #end
+
+        #@elementItem()
+            #@sdpmItem("请求标题")
+                #tinyInput(
+                    "text" "username" ""{"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":"username",
+                    "class":"input-text"})
             #end
         #end
 
