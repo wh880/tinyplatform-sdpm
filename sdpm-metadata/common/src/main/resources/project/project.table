@@ -1,5 +1,6 @@
 <tables id="dd14ed2a3efc4eaa8831ba02c3f3aa2e" package-name="org.tinygroup.alm.project">
-  <table id="cbcedea659a442ef88eca868880f9667" name="project" title="项目" schema="" package-name="project">
+  <table id="cbcedea659a442ef88eca868880f9667" name="project" title="项目" schema="" package-name="">
+    <description></description>
     <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="true" unique="true" not-null="true" id="project_id" auto-increase="true"/>
     <table-field standard-field-id="f7474ba7379f4d9fbd44e6feffa2c70e" primary="false" unique="false" not-null="true" id="project_is_cat" auto-increase="false"/>
     <table-field standard-field-id="bd3dcef09ad646e19196aea417b47baa" primary="false" unique="false" not-null="true" id="project_cat_id" auto-increase="false"/>
@@ -38,7 +39,7 @@
       <index-field field="project_statge" direction="asc"/>
     </index>
   </table>
-  <table id="d4d4c89595ba4df6ae02d2c70a8ced31" name="build" title="版本" package-name="version">
+  <table id="d4d4c89595ba4df6ae02d2c70a8ced31" name="build" title="版本" package-name="">
     <table-field standard-field-id="d375c0a459c0490d840add34075e27f5" primary="true" unique="true" not-null="true" id="version_id" auto-increase="true"/>
     <table-field standard-field-id="c2eff8527271417b8a64e48d1e448562" primary="false" unique="false" not-null="true" id="version_product" auto-increase="false"/>
     <table-field standard-field-id="bfbdd7d31ee44d52a0e598ec2a5435a2" primary="false" unique="false" not-null="true" id="version_project" auto-increase="false"/>
@@ -52,7 +53,7 @@
     <table-field standard-field-id="8d1c5a7ab2ce4b5384f9f0315f52db58" primary="false" unique="false" not-null="true" id="build_desc" auto-increase="false"/>
     <table-field standard-field-id="17eedc084da5420bb4e6de6c5b152ecb" primary="false" unique="false" not-null="true" id="build_deleted" auto-increase="false"/>
   </table>
-  <table id="dff2d0bd76b849d89140ba3c038ac673" name="task" title="任务" package-name="task">
+  <table id="dff2d0bd76b849d89140ba3c038ac673" name="task" title="任务" package-name="">
     <table-field standard-field-id="8cd36378dabf44a99afef4d1f7e433a0" primary="true" unique="true" not-null="true" id="task_id" auto-increase="true"/>
     <table-field standard-field-id="03ee1372ef3b480681b5aaa5032f35d7" primary="false" unique="false" not-null="true" id="task_project" auto-increase="false"/>
     <table-field standard-field-id="dfa99c9c348b4bb6a4aef3b27bfa7bbf" primary="false" unique="false" not-null="true" id="task_story" auto-increase="false"/>
@@ -88,7 +89,7 @@
       <index-field field="task_type" direction="asc"/>
     </index>
   </table>
-  <table id="04fb5501200749a48166f0be707cb195" name="projectproduct" title="项目产品" package-name="projectproduct">
+  <table id="04fb5501200749a48166f0be707cb195" name="projectproduct" title="项目产品" package-name="">
     <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
     <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="false" unique="false" not-null="true" id="project_id" auto-increase="false"/>
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="true" id="product_id" auto-increase="false"/>
@@ -97,13 +98,13 @@
       <index-field field="product_id" direction="asc"/>
     </index>
   </table>
-  <table id="3bed76082b2a4de180dcc2e86c3db4f5" name="burn" title="燃尽图" package-name="burn">
+  <table id="3bed76082b2a4de180dcc2e86c3db4f5" name="burn" title="燃尽图" package-name="">
     <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="true" unique="true" not-null="true" id="project_id" auto-increase="true"/>
     <table-field standard-field-id="148e8200ce404e8eb048888f07802a55" primary="false" unique="false" not-null="true" id="burn_date" auto-increase="false"/>
     <table-field standard-field-id="e2e5845ea87649128dcba54700676efe" primary="false" unique="false" not-null="true" id="burn_left" auto-increase="false"/>
     <table-field standard-field-id="761f75e7f4e94abbbe82b748560c09b4" primary="false" unique="false" not-null="true" id="burn_consumed" auto-increase="false"/>
   </table>
-  <table id="31116c442a404ee2b524ca9433c491f0" name="taskestimate" title="任务预计" package-name="taskestimate">
+  <table id="31116c442a404ee2b524ca9433c491f0" name="taskestimate" title="任务预计" package-name="">
     <table-field standard-field-id="f74f4dc7e32d46a09dabc5c350aa1976" primary="true" unique="true" not-null="true" id="taskestimate_id" auto-increase="true"/>
     <table-field standard-field-id="8cd36378dabf44a99afef4d1f7e433a0" primary="false" unique="false" not-null="true" id="task_id" auto-increase="false"/>
     <table-field standard-field-id="7b7ebc694a5743f1b3db97619a3c7816" primary="false" unique="false" not-null="true" id="taskestimate_date" auto-increase="false"/>
@@ -115,7 +116,7 @@
       <index-field field="task_id" direction="asc"/>
     </index>
   </table>
-  <table id="0c61b6a3d95144028c78b35383b2775e" name="projectstory" title="项目需求" package-name="projectstory">
+  <table id="0c61b6a3d95144028c78b35383b2775e" name="projectstory" title="项目需求" package-name="">
     <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
     <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="false" unique="false" not-null="true" id="project_id" auto-increase="false"/>
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="true" id="product_id" auto-increase="false"/>
@@ -126,7 +127,7 @@
       <index-field field="story_id" direction="asc"/>
     </index>
   </table>
-  <table id="101d5e140ea341688cc789d063e88659" name="team" title="团队" package-name="team">
+  <table id="101d5e140ea341688cc789d063e88659" name="team" title="团队" package-name="">
     <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
     <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="false" unique="false" not-null="true" id="project_id" auto-increase="false"/>
     <table-field standard-field-id="dcaad72616324712a1988f2743e4a0e8" primary="false" unique="false" not-null="true" id="team_account" auto-increase="false"/>

@@ -14,12 +14,12 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.org.dao;
+package org.tinygroup.sdpm.project.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.project.dao.pojo.Burn;
 
-public interface OrgUserDao extends BaseDao<OrgUser,Integer> {
+public interface BurnDao extends BaseDao<Burn,Integer> {
 
 }
