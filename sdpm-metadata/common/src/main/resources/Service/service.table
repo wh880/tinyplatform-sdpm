@@ -28,6 +28,12 @@
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
     <table-field standard-field-id="b35d189236be4548b694dc5f422e87b0" primary="false" unique="false" not-null="false" id="faq_create_date" auto-increase="false"/>
     <table-field standard-field-id="6171afc19fb141789e00ea6496d9a315" primary="false" unique="false" not-null="false" id="faq_created_by" auto-increase="false"/>
+    <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="true" id="product_id" auto-increase="false"/>
+    <table-field standard-field-id="6ac8953db3b9485fa999a337eb38884c" primary="false" unique="false" not-null="false" id="faq_keywords" auto-increase="false"/>
+    <table-field standard-field-id="865b01cda4a3418291fae73da1033c83" primary="false" unique="false" not-null="false" id="faq_source_id" auto-increase="false"/>
+    <table-field standard-field-id="618fb648de2e4967af1cfe0e38ee1080" primary="false" unique="false" not-null="false" id="faq_source" auto-increase="false"/>
+    <table-field standard-field-id="6e57184592d541dd89018be9b92201a6" primary="false" unique="false" not-null="false" id="faq_replied_by" auto-increase="false"/>
+    <table-field standard-field-id="b30a14aecb4e4235a27eb5f9f676df7f" primary="false" unique="false" not-null="false" id="faq_reply_date" auto-increase="false"/>
   </table>
   <table id="2bc7ecbfb7dd4a729b65c4c9dd54c1e9" name="faq_type" title="faq分类" package-name="faqType">
     <table-field standard-field-id="c83a241663e541c6b5cbea631a848388" primary="true" unique="true" not-null="true" id="faq_type_id" auto-increase="true"/>
@@ -52,8 +58,8 @@
   <table id="aa05b252d3c442bfb4bfca4da35a1629" name="request" title="客户请求表" package-name="request">
     <table-field standard-field-id="7d045d07a379467799bb865c513acad8" primary="true" unique="true" not-null="false" id="request_id" auto-increase="false"/>
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="true" id="product_id" auto-increase="false"/>
-    <table-field standard-field-id="e4f234b5493f4c40853bbc61e1aa0718" primary="false" unique="false" not-null="false" id="module_ID" auto-increase="false"/>
-    <table-field standard-field-id="ef26d4df32cd4df89a84850269acbe0a" primary="false" unique="false" not-null="false" id="request_n_o" auto-increase="false"/>
+    <table-field standard-field-id="32fc494251074a329bdfa8b6600ce738" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
+    <table-field standard-field-id="ef26d4df32cd4df89a84850269acbe0a" primary="false" unique="false" not-null="false" id="request_no" auto-increase="false"/>
     <table-field standard-field-id="a6e55c64f8004ca195d1c6f74b154f86" primary="false" unique="false" not-null="false" id="request_type" auto-increase="false"/>
     <table-field standard-field-id="7143bbd0f13844e7a7fa8d1342402ce6" primary="false" unique="false" not-null="true" id="request_pre" auto-increase="false"/>
     <table-field standard-field-id="1497afcc2c76435887f7f51b5defc8fc" primary="false" unique="false" not-null="true" id="request_title" auto-increase="false"/>
