@@ -17,7 +17,7 @@
     <nick-name name="product_quality_manager" title="产品质量经理" id="38839f2f94c64b4db5dced682507d3b4"/>
     <nick-name name="productLine_quality_manager" title="产品线质量经理" id="97ced3c198934553b015803eeca42397"/>
   </standard-field>
-  <standard-field id="69e4b036fd0948f3ac379f2525020cb0" name="delivery_manager" title="交付经理" business-type-id="095e594e1550424b9643c7e2279e85be">
+  <standard-field id="69e4b036fd0948f3ac379f2525020cb0" name="delivery_manager" title="交付经理" business-type-id="095e594e1550424b9643c7e2279e85be" default="">
     <description></description>
     <nick-name name="product_delivery_manager" title="产品交付经理" id="71d56e20803743729e25c98c8cd7d8d1"/>
     <nick-name name="productLine_delivery_manager" title="产品线交付经理" id="4797e2f35e4d4eebb0a0a88991cbbe91"/>
@@ -92,7 +92,7 @@
   <standard-field id="483157638d7b4debba3bb0bec922a422" name="story_closedBy" title="需求关闭者" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="52df67f6d8a7421ca72f92fcb10f54c2" name="story_closedDate" title="需求关闭日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="7e0fe0a11ddd4c83a552888e8c237df5" name="story_closedReason" title="需求关闭原因" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="91b0fcc3f4ec4832973ecf8c81d343df" name="story_toBug" title="关联bug" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="91b0fcc3f4ec4832973ecf8c81d343df" name="toBug" title="待定（关联bug）" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="416eed1e560e4931b980bc0569f35669" name="story_childStories" title="细分需求" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
   <standard-field id="a78a83818ec4495e9196cca5c87fe180" name="story_linkStories" title="关联需求" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="6c0b15cffa8c40f587969376f8b2194b" name="story_duplicateStory" title="重复需求ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
