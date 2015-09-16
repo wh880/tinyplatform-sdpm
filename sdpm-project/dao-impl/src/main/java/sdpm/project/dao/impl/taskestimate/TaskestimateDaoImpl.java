@@ -72,7 +72,6 @@ public class TaskestimateDaoImpl extends TinyDslDaoSupport implements Taskestima
 		return getDslTemplate().update(taskestimate, new UpdateGenerateCallback<Taskestimate>() {
 			public Update generate(Taskestimate t) {
 				Update update = update(TASKESTIMATETABLE).set(
-					TASKESTIMATETABLE.TASKESTIMATE_ID.value(t.getTaskestimateId()),
 					TASKESTIMATETABLE.TASK_ID.value(t.getTaskId()),
 					TASKESTIMATETABLE.TASKESTIMATE_DATE.value(t.getTaskestimateDate()),
 					TASKESTIMATETABLE.TASKESTIMATE_LEFT.value(t.getTaskestimateLeft()),
@@ -126,7 +125,6 @@ public class TaskestimateDaoImpl extends TinyDslDaoSupport implements Taskestima
 			public Select generate(Taskestimate t) {
 				return selectFrom(TASKESTIMATETABLE).where(
 				and(
-					TASKESTIMATETABLE.TASKESTIMATE_ID.eq(t.getTaskestimateId()),
 					TASKESTIMATETABLE.TASK_ID.eq(t.getTaskId()),
 					TASKESTIMATETABLE.TASKESTIMATE_DATE.eq(t.getTaskestimateDate()),
 					TASKESTIMATETABLE.TASKESTIMATE_LEFT.eq(t.getTaskestimateLeft()),
@@ -146,7 +144,6 @@ public class TaskestimateDaoImpl extends TinyDslDaoSupport implements Taskestima
 			public Select generate(Taskestimate t) {
 				return MysqlSelect.selectFrom(TASKESTIMATETABLE).where(
 				and(
-					TASKESTIMATETABLE.TASKESTIMATE_ID.eq(t.getTaskestimateId()),
 					TASKESTIMATETABLE.TASK_ID.eq(t.getTaskId()),
 					TASKESTIMATETABLE.TASKESTIMATE_DATE.eq(t.getTaskestimateDate()),
 					TASKESTIMATETABLE.TASKESTIMATE_LEFT.eq(t.getTaskestimateLeft()),
@@ -165,7 +162,6 @@ public class TaskestimateDaoImpl extends TinyDslDaoSupport implements Taskestima
 
 			public Insert generate() {
 				return insertInto(TASKESTIMATETABLE).values(
-					TASKESTIMATETABLE.TASKESTIMATE_ID.value(new JdbcNamedParameter("taskestimateId")),
 					TASKESTIMATETABLE.TASK_ID.value(new JdbcNamedParameter("taskId")),
 					TASKESTIMATETABLE.TASKESTIMATE_DATE.value(new JdbcNamedParameter("taskestimateDate")),
 					TASKESTIMATETABLE.TASKESTIMATE_LEFT.value(new JdbcNamedParameter("taskestimateLeft")),
@@ -188,7 +184,6 @@ public class TaskestimateDaoImpl extends TinyDslDaoSupport implements Taskestima
 
 			public Update generate() {
 				return update(TASKESTIMATETABLE).set(
-					TASKESTIMATETABLE.TASKESTIMATE_ID.value(new JdbcNamedParameter("taskestimateId")),
 					TASKESTIMATETABLE.TASK_ID.value(new JdbcNamedParameter("taskId")),
 					TASKESTIMATETABLE.TASKESTIMATE_DATE.value(new JdbcNamedParameter("taskestimateDate")),
 					TASKESTIMATETABLE.TASKESTIMATE_LEFT.value(new JdbcNamedParameter("taskestimateLeft")),

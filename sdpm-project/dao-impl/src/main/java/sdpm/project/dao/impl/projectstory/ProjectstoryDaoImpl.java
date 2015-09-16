@@ -53,16 +53,18 @@ public class ProjectstoryDaoImpl extends TinyDslDaoSupport implements Projectsto
 		return getDslTemplate().insertAndReturnKey(projectstory, new InsertGenerateCallback<Projectstory>() {
 			public Insert generate(Projectstory t) {
 				Insert insert = insertInto(PROJECTSTORYTABLE).values(
+					PROJECTSTORYTABLE.ID.value(t.getId()),
 					PROJECTSTORYTABLE.PROJECT_ID.value(t.getProjectId()),
 					PROJECTSTORYTABLE.PRODUCT_ID.value(t.getProductId()),
-					PROJECTSTORYTABLE.STORY_ID.value(t.getStoryId()));
+					PROJECTSTORYTABLE.STORY_ID.value(t.getStoryId()),
+					PROJECTSTORYTABLE.STORY_VERSION.value(t.getStoryVersion()));
 				return insert;
 			}
 		});
 	}
 
 	public int edit(Projectstory projectstory) {
-		if(projectstory == null || projectstory.getProjectId() == null){
+		if(projectstory == null || projectstory.getId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(projectstory, new UpdateGenerateCallback<Projectstory>() {
@@ -70,8 +72,9 @@ public class ProjectstoryDaoImpl extends TinyDslDaoSupport implements Projectsto
 				Update update = update(PROJECTSTORYTABLE).set(
 					PROJECTSTORYTABLE.PROJECT_ID.value(t.getProjectId()),
 					PROJECTSTORYTABLE.PRODUCT_ID.value(t.getProductId()),
-					PROJECTSTORYTABLE.STORY_ID.value(t.getStoryId())).where(
-					PROJECTSTORYTABLE.PROJECT_ID.eq(t.getProjectId()));
+					PROJECTSTORYTABLE.STORY_ID.value(t.getStoryId()),
+					PROJECTSTORYTABLE.STORY_VERSION.value(t.getStoryVersion())).where(
+					PROJECTSTORYTABLE.ID.eq(t.getId()));
 				return update;
 			}
 		});
@@ -83,7 +86,7 @@ public class ProjectstoryDaoImpl extends TinyDslDaoSupport implements Projectsto
 		}
 		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
 			public Delete generate(Serializable pk) {
-				return delete(PROJECTSTORYTABLE).where(PROJECTSTORYTABLE.PROJECT_ID.eq(pk));
+				return delete(PROJECTSTORYTABLE).where(PROJECTSTORYTABLE.ID.eq(pk));
 			}
 		});
 	}
@@ -94,7 +97,7 @@ public class ProjectstoryDaoImpl extends TinyDslDaoSupport implements Projectsto
 		}
 		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
 			public Delete generate(Serializable[] t) {
-				return delete(PROJECTSTORYTABLE).where(PROJECTSTORYTABLE.PROJECT_ID.in(t));
+				return delete(PROJECTSTORYTABLE).where(PROJECTSTORYTABLE.ID.in(t));
 		}
 		},pks);
 	}
@@ -103,7 +106,7 @@ public class ProjectstoryDaoImpl extends TinyDslDaoSupport implements Projectsto
 		return getDslTemplate().getByKey(pk, Projectstory.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(PROJECTSTORYTABLE).where(PROJECTSTORYTABLE.PROJECT_ID.eq(t));
+			return selectFrom(PROJECTSTORYTABLE).where(PROJECTSTORYTABLE.ID.eq(t));
 			}
 		});
 	}
@@ -120,7 +123,8 @@ public class ProjectstoryDaoImpl extends TinyDslDaoSupport implements Projectsto
 				and(
 					PROJECTSTORYTABLE.PROJECT_ID.eq(t.getProjectId()),
 					PROJECTSTORYTABLE.PRODUCT_ID.eq(t.getProductId()),
-					PROJECTSTORYTABLE.STORY_ID.eq(t.getStoryId())));
+					PROJECTSTORYTABLE.STORY_ID.eq(t.getStoryId()),
+					PROJECTSTORYTABLE.STORY_VERSION.eq(t.getStoryVersion())));
 			}
 		});
 	}
@@ -136,7 +140,8 @@ public class ProjectstoryDaoImpl extends TinyDslDaoSupport implements Projectsto
 				and(
 					PROJECTSTORYTABLE.PROJECT_ID.eq(t.getProjectId()),
 					PROJECTSTORYTABLE.PRODUCT_ID.eq(t.getProductId()),
-					PROJECTSTORYTABLE.STORY_ID.eq(t.getStoryId())));
+					PROJECTSTORYTABLE.STORY_ID.eq(t.getStoryId()),
+					PROJECTSTORYTABLE.STORY_VERSION.eq(t.getStoryVersion())));
 			}
 		});
 	}
@@ -151,7 +156,8 @@ public class ProjectstoryDaoImpl extends TinyDslDaoSupport implements Projectsto
 				return insertInto(PROJECTSTORYTABLE).values(
 					PROJECTSTORYTABLE.PROJECT_ID.value(new JdbcNamedParameter("projectId")),
 					PROJECTSTORYTABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
-					PROJECTSTORYTABLE.STORY_ID.value(new JdbcNamedParameter("storyId")));
+					PROJECTSTORYTABLE.STORY_ID.value(new JdbcNamedParameter("storyId")),
+					PROJECTSTORYTABLE.STORY_VERSION.value(new JdbcNamedParameter("storyVersion")));
 			}
 		});
 	}
@@ -170,8 +176,9 @@ public class ProjectstoryDaoImpl extends TinyDslDaoSupport implements Projectsto
 				return update(PROJECTSTORYTABLE).set(
 					PROJECTSTORYTABLE.PROJECT_ID.value(new JdbcNamedParameter("projectId")),
 					PROJECTSTORYTABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
-					PROJECTSTORYTABLE.STORY_ID.value(new JdbcNamedParameter("storyId"))).where(
-				PROJECTSTORYTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")));
+					PROJECTSTORYTABLE.STORY_ID.value(new JdbcNamedParameter("storyId")),
+					PROJECTSTORYTABLE.STORY_VERSION.value(new JdbcNamedParameter("storyVersion"))).where(
+				PROJECTSTORYTABLE.ID.eq(new JdbcNamedParameter("id")));
 			}
 		});
 	}
@@ -184,9 +191,11 @@ public class ProjectstoryDaoImpl extends TinyDslDaoSupport implements Projectsto
 
 			public Delete generate() {
 				return delete(PROJECTSTORYTABLE).where(and(
+				PROJECTSTORYTABLE.ID.eq(new JdbcNamedParameter("id")),
 				PROJECTSTORYTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")),
 				PROJECTSTORYTABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId")),
-				PROJECTSTORYTABLE.STORY_ID.eq(new JdbcNamedParameter("storyId"))));
+				PROJECTSTORYTABLE.STORY_ID.eq(new JdbcNamedParameter("storyId")),
+				PROJECTSTORYTABLE.STORY_VERSION.eq(new JdbcNamedParameter("storyVersion"))));
 			}
 		});
 	}

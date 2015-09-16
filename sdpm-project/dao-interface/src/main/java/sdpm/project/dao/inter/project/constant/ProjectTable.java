@@ -24,13 +24,13 @@ public class ProjectTable extends Table {
 	public static final ProjectTable PROJECTTABLE = new ProjectTable();
 	/** 项目id */
 	public final Column PROJECT_ID = new Column(this, "project_id");
-	/** PROJECT_ISCAT */
+	/** 是否作为目录 */
 	public final Column PROJECT_IS_CAT = new Column(this, "project_is_cat");
-	/** PROJECT_ */
+	/** 目录id */
 	public final Column PROJECT_CAT_ID = new Column(this, "project_cat_id");
 	/** 项目类型 */
 	public final Column PROJECT_TYPE = new Column(this, "project_type");
-	/** 项目名称PROJECT_NAME */
+	/** 项目名称 */
 	public final Column PROJECT_NAME = new Column(this, "project_name");
 	/** 项目代号 */
 	public final Column PROJECT_CODE = new Column(this, "project_code");
@@ -42,6 +42,8 @@ public class ProjectTable extends Table {
 	public final Column PROJECT_DAYS = new Column(this, "project_days");
 	/** 项目状态 */
 	public final Column PROJECT_STATUS = new Column(this, "project_status");
+	/** 项目所处阶段 */
+	public final Column PROJECT_STATGE = new Column(this, "project_statge");
 	/** 优先级 */
 	public final Column PROJECT_PRI = new Column(this, "project_pri");
 	/** 项目描述 */
@@ -52,10 +54,10 @@ public class ProjectTable extends Table {
 	public final Column PROJECT_OPENED_DATE = new Column(this, "project_opened_date");
 	/** 项目创建版本 */
 	public final Column PROJECT_OPENED_VERSION = new Column(this, "project_opened_version");
-	/** 关闭人 */
-	public final Column SLA_CLOSED_BY = new Column(this, "sla_closed_by");
-	/** 关闭时间 */
-	public final Column SLA_CLOSE_DATE = new Column(this, "sla_close_date");
+	/** 项目由谁关闭 */
+	public final Column PROJECT_CLOSE_BY = new Column(this, "project_close_by");
+	/** 项目关闭日期 */
+	public final Column PROJECT_CLOSE_DATE = new Column(this, "project_close_date");
 	/** 项目由谁取消 */
 	public final Column PROJECT_CANCELED_BY = new Column(this, "project_canceled_by");
 	/** 项目取消日期 */

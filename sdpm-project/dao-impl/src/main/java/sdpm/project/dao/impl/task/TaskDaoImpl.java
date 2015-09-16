@@ -96,7 +96,6 @@ public class TaskDaoImpl extends TinyDslDaoSupport implements TaskDao {
 		return getDslTemplate().update(task, new UpdateGenerateCallback<Task>() {
 			public Update generate(Task t) {
 				Update update = update(TASKTABLE).set(
-					TASKTABLE.TASK_ID.value(t.getTaskId()),
 					TASKTABLE.TASK_PROJECT.value(t.getTaskProject()),
 					TASKTABLE.TASK_STORY.value(t.getTaskStory()),
 					TASKTABLE.TASK_STORY_VERSION.value(t.getTaskStoryVersion()),
@@ -174,7 +173,6 @@ public class TaskDaoImpl extends TinyDslDaoSupport implements TaskDao {
 			public Select generate(Task t) {
 				return selectFrom(TASKTABLE).where(
 				and(
-					TASKTABLE.TASK_ID.eq(t.getTaskId()),
 					TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
 					TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
 					TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
@@ -218,7 +216,6 @@ public class TaskDaoImpl extends TinyDslDaoSupport implements TaskDao {
 			public Select generate(Task t) {
 				return MysqlSelect.selectFrom(TASKTABLE).where(
 				and(
-					TASKTABLE.TASK_ID.eq(t.getTaskId()),
 					TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
 					TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
 					TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
@@ -261,7 +258,6 @@ public class TaskDaoImpl extends TinyDslDaoSupport implements TaskDao {
 
 			public Insert generate() {
 				return insertInto(TASKTABLE).values(
-					TASKTABLE.TASK_ID.value(new JdbcNamedParameter("taskId")),
 					TASKTABLE.TASK_PROJECT.value(new JdbcNamedParameter("taskProject")),
 					TASKTABLE.TASK_STORY.value(new JdbcNamedParameter("taskStory")),
 					TASKTABLE.TASK_STORY_VERSION.value(new JdbcNamedParameter("taskStoryVersion")),
@@ -308,7 +304,6 @@ public class TaskDaoImpl extends TinyDslDaoSupport implements TaskDao {
 
 			public Update generate() {
 				return update(TASKTABLE).set(
-					TASKTABLE.TASK_ID.value(new JdbcNamedParameter("taskId")),
 					TASKTABLE.TASK_PROJECT.value(new JdbcNamedParameter("taskProject")),
 					TASKTABLE.TASK_STORY.value(new JdbcNamedParameter("taskStory")),
 					TASKTABLE.TASK_STORY_VERSION.value(new JdbcNamedParameter("taskStoryVersion")),

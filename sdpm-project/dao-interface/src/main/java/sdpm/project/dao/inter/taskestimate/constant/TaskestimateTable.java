@@ -32,9 +32,9 @@ public class TaskestimateTable extends Table {
 	public final Column TASKESTIMATE_LEFT = new Column(this, "taskestimate_left");
 	/** 任务预计消耗 */
 	public final Column TASKESTIMATE_CONSUMED = new Column(this, "taskestimate_consumed");
-	/** TASKESTIMATE_ */
+	/** 操作人帐号 */
 	public final Column TASKESTIMATE_ACCOUNT = new Column(this, "taskestimate_account");
-	/** TASKESTIMATE_WORK */
+	/** 备用字段 */
 	public final Column TASKESTIMATE_WORK = new Column(this, "taskestimate_work");
 
 		private TaskestimateTable() {

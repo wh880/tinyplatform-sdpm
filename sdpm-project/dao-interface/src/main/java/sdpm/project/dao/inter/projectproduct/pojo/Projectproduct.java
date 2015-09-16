@@ -18,12 +18,23 @@ package sdpm.project.dao.inter.projectproduct.pojo;
 
 public class Projectproduct {
 
+	/** 逻辑ID */
+	private Integer id;
+
 	/** 项目id */
 	private Integer projectId;
 
 	/** 产品ID */
 	private Integer productId;
 
+
+	public void setId(Integer id){
+		this. id = id;
+	}
+
+	public Integer getId(){
+		return id;
+	}
 
 	public void setProjectId(Integer projectId){
 		this. projectId = projectId;

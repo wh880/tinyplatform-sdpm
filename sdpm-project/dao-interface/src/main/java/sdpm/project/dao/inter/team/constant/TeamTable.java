@@ -22,6 +22,8 @@ import org.tinygroup.tinysqldsl.base.Table;
 public class TeamTable extends Table {
 
 	public static final TeamTable TEAMTABLE = new TeamTable();
+	/** 逻辑ID */
+	public final Column ID = new Column(this, "id");
 	/** 项目id */
 	public final Column PROJECT_ID = new Column(this, "project_id");
 	/** 用户 */
