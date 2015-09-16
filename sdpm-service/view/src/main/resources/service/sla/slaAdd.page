@@ -166,7 +166,7 @@
                 <div class="col-1">
                 ##                                    <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
                 ##                    #@aTxtDarkDefaultButton("../sla/sla.page")&nbsp;取消&nbsp;#end
-                    #@aExtendButton("backBtn btn-sm" "../sla/sla.page")&nbsp;取消&nbsp;#end
+                    #@aExtendButton("btn-sm backBtn" "../sla/sla.page")取消#end
 
                 </div>
                 <div class="col-5"></div>

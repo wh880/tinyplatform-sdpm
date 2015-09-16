@@ -26,7 +26,7 @@
             #end
 
             #@elementItem()
-                #@sdpmItem("联系人")
+                #@sdpmItem("联系人" "*")
                     #@Tselect2F()
                         #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             #@tinyOptionItem("ch")请选择#end
@@ -69,7 +69,7 @@
                 #end
             #end
             #@elementItem()
-                #@sdpmItem("回访时间")
+                #@sdpmItem("回访时间" "*")
                     #@tinyDateInput(
                         "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
                         "日期不能为空","placeholder":""})#end
@@ -79,7 +79,7 @@
             #@elementItem()
 
                 <div class="col-12">
-                    <div class="col-2 text-r"><label>回访描述：</label></div>
+                    <div class="col-2 text-r"><label><span class="c-red">*</span>回访描述：</label></div>
 
                     <div class="col-9">
                         #@Teditor("content2" "content2" {"initialFrameHeight":"150"})Say something#end</div>
