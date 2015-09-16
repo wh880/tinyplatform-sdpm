@@ -13,13 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tinygroup;
+package org.tinygroup.sdpm.org.service.inter;
 
-public class HelloWorldServiceImpl implements HelloWorldService {
-    public String sayHello(String name) {
-        if (name == null) {
-            name = "world.";
-        }
-        return "hello," + name;
-    }
+public interface UserService {
+    public String sayHello(String name);
 }

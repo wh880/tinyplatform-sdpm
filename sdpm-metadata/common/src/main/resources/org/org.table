@@ -41,7 +41,7 @@
     <table-field standard-field-id="9de62ab4d83a4dc2972a8ffb90b2c225" primary="false" unique="false" not-null="true" id="org_dept_position" auto-increase="false"/>
     <table-field standard-field-id="9c70d54486424630a724f8c01530d8c6" primary="false" unique="false" not-null="true" id="org_dept_manager" auto-increase="false"/>
   </table>
-  <table id="50a09faa7598459b8654ba86b6e7e5bc" name="org_companyy" title="公司表" package-name="">
+  <table id="50a09faa7598459b8654ba86b6e7e5bc" name="org_company" title="公司表" package-name="">
     <description>公司表</description>
     <table-field standard-field-id="8614e7d4a75940edacfdbe20d78f32db" primary="true" unique="true" not-null="true" id="org_company_id" auto-increase="true"/>
     <table-field standard-field-id="245ffdb6e1b74f9498bda3a43f3f4ef6" primary="false" unique="false" not-null="false" id="org_company_name" auto-increase="false"/>
