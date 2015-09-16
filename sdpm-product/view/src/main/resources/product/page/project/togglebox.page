@@ -3,14 +3,15 @@
 #import("/common/component/linkage.component")
 
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
+#!set(linkName="product-demand",sonitem="
+<li>"+"需求"+"</li>")
 
 
 #macro liDropdownMenu(rName)
-	<li class="dropdown-submenu">
-		<a tabindex="-1" data-toggle="tab">${rName}</a>
-		#bodyContent
-	</li>
+<li class="dropdown-submenu">
+    <a tabindex="-1" data-toggle="tab">${rName}</a>
+    #bodyContent
+</li>
 #end
 
 
@@ -107,7 +108,7 @@
                     #foreach(m:menuManager.getScopeMenus("product-oper"))
                         #if(m.id=="product-demand-operation")
                             #@buttonGroup()
-                         	#@dropdownItempatent(sizebgClass="btn-primary" dropdownContent="操作" downTarget="#")
+                                #@dropdownItempatent(sizebgClass="btn-primary" dropdownContent="操作" downTarget="#")
                          	
                                 #@ulDropdownMenu()
                                     #@liDropdownMenu("指派给")
@@ -158,7 +159,7 @@
                                         #end
                                     #end
                                 #end
-                            #end
+                                #end
                             #end
                         #end
                         #end
