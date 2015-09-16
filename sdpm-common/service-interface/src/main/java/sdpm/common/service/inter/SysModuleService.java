@@ -15,18 +15,17 @@ public interface SysModuleService {
 	 * 保存
 	 * @return
 	 */
-	 List<SysModule> save();
+	 SysModule save(SysModule sysModule);
 	/**
 	 * 删除ById
 	 * @param id
 	 */
-	 void deleteById(int id);
+	 int deleteById(int id);
 	
 	/**
 	 * 根据根节点进行查询
 	 * @param root
 	 * @return
 	 */
-	
-	 List<SysModule> queryByRoot(int root);
+	 List<SysModule> queryByRoot(SysModule sysModule);
 }

@@ -11,18 +11,19 @@ public interface EffortService {
 	 * @param 添加日志
 	 * @return
 	 */
-	 void add(Effort effort);
+	 Effort add(Effort effort);
 	/**
 	 * 根据日期查询，返回日志信息List
 	 * @param date
 	 * @return
 	 */
 	 List<Effort> queryByDate(Date date);
+	 
 	/**
 	 * 保存日志
 	 */
 	
-	 void save();
+	 Effort save(Effort effort);
 	/**
 	 * 根据登记人查询
 	 * @param account
@@ -40,6 +41,6 @@ public interface EffortService {
 	  * @param nowdate
 	  * @return
 	  */
-	 List<Effort> queryBetweenDate(Date lastdate,Date nowdate);
+	 List<Effort> queryBetweenDate(Date begindate,Date enddate);
 	
 }
