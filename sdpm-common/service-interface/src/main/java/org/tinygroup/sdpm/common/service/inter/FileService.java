@@ -16,7 +16,7 @@ public interface FileService {
     * 批量添加附件
     * @return
     */
-    List<File> bechAdd(List<File> files);
+    List<File> batchAdd(List<File> files);
    /**
     * 查询附件信息
     * @param
