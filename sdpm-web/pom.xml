@@ -12,16 +12,30 @@
     <packaging>war</packaging>
     <url>http://maven.apache.org</url>
     <dependencies>
+        <!--common-->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-common-common</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+
+        <!--org-->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-org-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-org-service-impl</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-org-service-wrapper</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-system-view</artifactId>
