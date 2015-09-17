@@ -7,20 +7,52 @@ import java.util.List;
 /**
  * Created by Administrator on 2015-09-17.
  */
-public interface slaService {
-    List<Sla> findSlaList(Sla sla);
-    /*查找客户的协议到表单*/
+public interface SlaService {
+    /**
+     * 根据主键id查找用户
+     *
+     * @param id 主键
+     * @return
+     */
+    Sla find(String id);
 
-    Sla findSla(Sla sla);
-    /*查找客户的协议*/
+    /**
+     * 根据条件查询List
+     *
+     * @param sla 用于查询条件
+     * @return
+     */
+    List<Sla> getList(Sla sla);
 
+    /**
+     * 新增有一个用户
+     *
+     * @param sla 新增实体类
+     * @return
+     */
     Sla add(Sla sla);
-    /* 新增协议*/
 
-    Sla delete(Sla sla);
-    /* 删除协议 */
+    /**
+     * 更新用户
+     *
+     * @param sla 需要更新的实体类
+     * @return
+     */
+    Sla update(Sla sla);
 
+    /**
+     * 根据id进行软删除用户
+     *
+     * @param id 主键
+     * @return
+     */
+    Integer delete(String id);
 
-    List<Sla> deleteBatch(Integer productId);
-    /*批量删除*/
+    /**
+     * 根据id进行批量软删除用户
+     *
+     * @param id 主键
+     * @return
+     */
+    Integer deleteBatch(Integer id);
 }
