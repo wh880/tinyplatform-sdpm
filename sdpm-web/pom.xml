@@ -78,15 +78,15 @@
                     <groupId>org.tinygroup</groupId>
                     <artifactId>org.tinygroup.spring256</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>org.tinygroup</groupId>
-                    <artifactId>org.tinygroup.spring305</artifactId>
-                </exclusion>
+                <!--<exclusion>-->
+                <!--<groupId>org.tinygroup</groupId>-->
+                <!--<artifactId>org.tinygroup.spring305</artifactId>-->
+                <!--</exclusion>-->
             </exclusions>
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.spring421</artifactId>
+            <artifactId>org.tinygroup.spring305</artifactId>
             <version>${tiny_version}</version>
         </dependency>
         <!--引入SpringMVC-->
