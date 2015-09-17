@@ -3,9 +3,9 @@
 #set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-        #@div(divClass="dropdownBox dropdownBoxes")
+     #*   #@div(divClass="dropdownBox dropdownBoxes")
             #include("/service/serviceCom/dropdownMenu.page")
-        #end
+        #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end

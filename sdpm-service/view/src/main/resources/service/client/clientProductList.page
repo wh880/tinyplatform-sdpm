@@ -5,8 +5,8 @@
 
 #set(name="client")
 #@tabWithInit("tab_demo" "optionsBox")
-##    <div style="width:100%;float:left">
-    #@gridSystem24Col()
+<div style="width:100%;float:left">
+    #@gridSystem24Col("girdrap")
         #foreach(var:[1..5])
             #@gridSystemCol(7)
                 #@div(divClass="infoContent")
@@ -34,11 +34,12 @@
                 #end
                 #@simpleModal("myModal3"+varFor.index "编辑")#end
             #end
+        ##            #@gridSystemCol(1)#end
         #end
     #end
 #end
 
-##    </div>
+</div>
 ###@simpleModal("myModal3" "编辑")#end
 #@simpleModal("myModal4" "删除")#end
 <script>

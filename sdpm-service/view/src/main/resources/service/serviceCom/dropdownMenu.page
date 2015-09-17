@@ -1,3 +1,4 @@
+#*
 #@navSelect2()
 	#@navSelect2Nav()产品 ${id}<span class="caret"></span>#end
 	#@navSelect2Body()
@@ -56,4 +57,4 @@
 	});
 	//-->
 	</script>
-#end
+#end*#

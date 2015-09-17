@@ -98,7 +98,7 @@
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="true" id="product_id" auto-increase="false"/>
     <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="false" unique="false" not-null="true" id="project_id" auto-increase="false"/>
     <table-field standard-field-id="03a152e4dc094780a0a2e57fb0e9ac67" primary="false" unique="false" not-null="false" id="build" auto-increase="false"/>
-    <table-field standard-field-id="0ad33bb0bf3642a39058cc94ff151acf" primary="false" unique="false" not-null="false" id="testplan_owner" auto-increase="false"/>
+    <table-field standard-field-id="0ad33bb0bf3642a39058cc94ff151acf" primary="false" unique="false" not-null="false" id="testtask_owner" auto-increase="false"/>
     <table-field standard-field-id="aa9be6c1c2094e47af40df0b6f017417" primary="false" unique="false" not-null="false" id="priority" auto-increase="false"/>
     <table-field standard-field-id="c7f037e584304db5a920ca364368f77d" primary="false" unique="false" not-null="false" id="testplan_begin" auto-increase="false"/>
     <table-field standard-field-id="54ce79105b4c4bb79d65f508ed5a29bc" primary="false" unique="false" not-null="false" id="testplan_end" auto-increase="false"/>

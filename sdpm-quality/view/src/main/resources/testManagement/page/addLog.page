@@ -18,20 +18,15 @@
                 #@td()23#end
                 #@td()做项目#end
                 #@td()
-                    #iconOperations("#editModal" "icon-pencil" "修改日志" "600" "340" "/testManagement/page/editLog.pagelet" "ml-5")
-                   	#@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)
-						<i class="icon-remove" title="删除"></i>
-					#end                    
-#*					#@dialog("myModal")
-						#@dialogHeader()对话框标题#end
-						#@dialogBody()<p>对话框内容…</p>#end
-						#@dialogFooter()
-						#@buttonEnsure()
-						##此链接有数据时删除
-							<a href="${TINY_CONTEXT_PATH}/testManagement/page/addLog.page">确定</a>#end
-					  	#@buttonCancel()关闭#end					  		
+               		 #foreach(m:menuManager.getScopeMenus("testcasenote-op"))
+						#if(m.id=="tnoteedit")
+                    		#iconOperations("#editModal" "icon-pencil" "修改日志" "600" "340" "/testManagement/page/editLog.pagelet" "ml-5")
+                   		#else
+                   			#@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)
+								<i class="icon-remove" title="删除"></i>
+							#end  
 						#end
-					#end*#
+					#end                  
                 #end
             #end
         #end
@@ -55,8 +50,10 @@
                 	保存</button>
             </div>
             <div class="col-1">
-            	<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionSituation.page">
-                <button style="float: right" type="button" id="back" class="backBtn">返回</button></a>
+#*            	<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionSituation.page">
+                <button style="float: right" type="button" id="back" class="btn-primary">返回</button></a>*#
+                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+                
             </div>
 					#@dialog("editModal")
 						#@dialogHeader()#end

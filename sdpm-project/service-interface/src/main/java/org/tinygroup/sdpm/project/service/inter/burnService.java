@@ -11,7 +11,7 @@ public interface burnService {
     /**
      * 新增，在项目变动后需要增加字段
      */
-    public int add(Burn burn);
+    public int save(Burn burn);
 
     /**
      * 根据项目id找到对应的所有数据，前台生成燃尽图

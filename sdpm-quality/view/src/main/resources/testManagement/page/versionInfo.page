@@ -28,7 +28,27 @@
 		<span class="f">
 			版本名称</span>
 		<span class="r">
-			#@aModal("#myModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
+			#foreach(m:menuManager.getScopeMenus("testverinfo-tab"))
+				#if(m.id=="tvernote")
+					#@aModal("#myModal" m.name "800" "400" "" m.href "ml-5")
+						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
+				#else 
+				#if(m.id=="tverbegin"||m.id=="tverclose"||m.id=="tvercase"||m.id=="tversionLink")
+					<a href="${TINY_CONTEXT_PATH}${m.href}">
+						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+				#else
+				#if(m.id=="tverback"||m.id=="tversionedit")
+					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+						#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+				#else
+					#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")
+						#buttonIcon(iconClass="icon-remove")#end&nbsp
+				#end		
+				#end
+				#end				
+			#end
+			
+#*			#@aModal("#myModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
 				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/versionStart.page">
 				#buttonIcon(iconClass="icon-play")开始</a>&nbsp;&nbsp;
@@ -42,7 +62,8 @@
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
 			#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")#buttonIcon(iconClass="icon-remove")#end&nbsp				
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page" title="返回">
-				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;</span>
+				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;*#
+				</span>
 	#end
 	#@tinyForm("thisform" "url" "post" {"class":""})
 #*	<div class="infoContent">
@@ -60,21 +81,25 @@
             #include("/testManagement/page/historyRecord.page")
         #end
         <center>
-       		 #@aModal("#myModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
-				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/versionStart.page">
-				#buttonIcon(iconClass="icon-play")开始</a>&nbsp;&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionEnd.page">
-				#buttonIcon(iconClass="icon-off")关闭</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
-				#buttonIcon(iconClass="icon-smile")用例</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page">
-				#buttonIcon(iconClass="icon-link")关联用例</a>&nbsp;&nbsp;		
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page" title="编辑">
-				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")#buttonIcon(iconClass="icon-remove")#end&nbsp
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page" title="返回">
-				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
+       		 #foreach(m:menuManager.getScopeMenus("testverinfo-tab"))
+				#if(m.id=="tvernote")
+					#@aModal("#myModal" m.name "800" "400" "" m.href "ml-5")
+						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
+				#else 
+				#if(m.id=="tverbegin"||m.id=="tverclose"||m.id=="tvercase"||m.id=="tversionLink")
+					<a href="${TINY_CONTEXT_PATH}${m.href}">
+						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+				#else
+				#if(m.id=="tverback"||m.id=="tversionedit")
+					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+						#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+				#else
+					#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")
+						#buttonIcon(iconClass="icon-remove")#end&nbsp
+				#end		
+				#end
+				#end				
+			#end
 			</center>
 		</div>
 		<div style="width: 30%;float: right">

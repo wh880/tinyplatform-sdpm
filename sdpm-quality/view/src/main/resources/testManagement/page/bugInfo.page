@@ -29,7 +29,34 @@
 		<span class="f">
 			Bug名称</span>
 		<span class="r">
-			#@aModal("#myModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
+			#foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
+				#if(m.id=="tbugnote")
+					#@aModal("#myModal" m.name "800" "400" "" m.href "ml-5")
+						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
+				#else 
+				#if(m.id=="tmakesure"||m.id=="tassign"||m.id=="tsolution"||m.id=="tbugadddemand"||m.id=="add-case")					
+					<a href="${TINY_CONTEXT_PATH}${m.href}">
+						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp&nbsp;
+				#else
+				#if(m.id=="tedition"||m.id=="tproposeBug"||m.id=="tbugback"||m.id=="tbugnext")
+					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+				#else
+				#if(m.id=="tbugremark")
+					<a  title="备注" onclick="toggle()">
+						#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
+				#else
+					#@delItemsdpm("/sdpm-web/testManagement/page/Bug.page" 3 "/sdpm-web/testManagement/page/Bug.page")
+						#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp
+				#end
+				#end
+				#end		
+				#end				
+			#end
+		
+		
+		
+#*			#@aModal("#myModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
 				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/makesure.page">
 				#buttonIcon(iconClass="icon-search")确认</a>&nbsp&nbsp;	
@@ -51,8 +78,8 @@
 					#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp					
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page" title="回上一个Bug">
-				#buttonIcon(iconClass="icon-chevron-right")</a>&nbsp;</span>
+			<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page" title="下一个Bug">
+				#buttonIcon(iconClass="icon-chevron-right")</a>&nbsp;</span>*#
 	#end
 	#@tinyForm("thisform" "url" "post" {"class":""})
 #*	<div class="infoContent">
@@ -73,30 +100,30 @@
             #include("/testManagement/page/historyRecord.page")
         #end
         <center>
-       		#@aModal("#myModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
-				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/makesure.page">
-				#buttonIcon(iconClass="icon-search")确认</a>&nbsp&nbsp;	
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/assign.page">
-				#buttonIcon(iconClass="icon-hand-right")指派</a>&nbsp&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">
-				#buttonIcon(iconClass="icon-ok-sign")解决</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page">
-				#buttonIcon(iconClass="icon-lightbulb")提需求</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">
-				#buttonIcon(iconClass="icon-sitemap")建用例</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/edition.page" title="编辑">
-				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			<a  title="备注" onclick="toggle()">
-				#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page" title="复制">
-				#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
-			#@delItemsdpm("/sdpm-web/testManagement/page/Bug.page" 3 "/sdpm-web/testManagement/page/Bug.page")
-					#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page" title="返回">
-				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page" title="回上一个Bug">
-				#buttonIcon(iconClass="icon-chevron-right")</a>&nbsp;
+       		#foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
+				#if(m.id=="tbugnote")
+					#@aModal("#myModal" m.name "800" "400" "" m.href "ml-5")
+						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
+				#else 
+				#if(m.id=="tmakesure"||m.id=="tassign"||m.id=="tsolution"||m.id=="tbugadddemand"||m.id=="add-case")					
+					<a href="${TINY_CONTEXT_PATH}${m.href}">
+						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp&nbsp;
+				#else
+				#if(m.id=="tedition"||m.id=="tproposeBug"||m.id=="tbugback"||m.id=="tbugnext")
+					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+				#else
+				#if(m.id=="tbugremark")
+					<a  title="备注" onclick="toggle()">
+						#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
+				#else
+					#@delItemsdpm("/sdpm-web/testManagement/page/Bug.page" 3 "/sdpm-web/testManagement/page/Bug.page")
+						#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp
+				#end
+				#end
+				#end		
+				#end				
+			#end
 			</center>
 		#@div(divId="comment" divStyle="display:none;" divClass="infoContent")
 			<p class="titleName">备注</p>
@@ -108,8 +135,8 @@
             </div>
             <div class="col-1"></div>
             <div class="col-1">
-                <a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">
-                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+
             </div>
             <div class="col-5"></div>
         	</div>
