@@ -53,6 +53,11 @@
                     #@gridSysCol(7)
                         <p>浙江杭州江南大道3588号</p>
                     #end
+                    #@colLabel("col-4")客户描述：#end
+                    #@gridSysCol(1)#end
+                    #@gridSysCol(7)
+                        <p>客户经营金融业务，前景广阔。</p>
+                    #end
                 #end
             #end
             <div style="text-align:right;margin:right">
