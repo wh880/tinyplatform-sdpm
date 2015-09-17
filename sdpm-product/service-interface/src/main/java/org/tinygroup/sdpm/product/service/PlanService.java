@@ -3,7 +3,6 @@ package org.tinygroup.sdpm.product.service;
 import java.util.List;
 
 import org.tinygroup.sdpm.product.dao.pojo.Plan;
-import org.tinygroup.sdpm.product.dao.pojo.Product;
 
 
 public interface PlanService {
@@ -56,21 +55,7 @@ public interface PlanService {
 	 */
 	Plan findById(Integer planId);
 	
-	
-	/**
-	 * 根据计划对象查找需求
-	 * @param plan
-	 * @return
-	 */
-	List<Story> findByPlan(Plan plan);	
-	/**
-	 * 根据计划对象查找BUG
-	 * @param plan
-	 * @return
-	 */
-	List<Plan> findByPlan(Plan plan);
-	
-	
+
 	
 	
 	
