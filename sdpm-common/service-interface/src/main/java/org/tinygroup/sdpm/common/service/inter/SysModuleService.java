@@ -12,14 +12,6 @@ public interface SysModuleService {
 	 */
 	 SysModule edit(SysModule sysModule);
 	 
-     /**
-      * 保存模块
-      * @param sysModule
-      * @return
-      */
-
-	 SysModule save(SysModule sysModule);
-	 
 	/**
 	 * 删除ById
 	 * @param id

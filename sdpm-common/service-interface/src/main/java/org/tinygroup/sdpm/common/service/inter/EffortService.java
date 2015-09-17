@@ -4,14 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.tinygroup.sdpm.common.dao.pojo.Effort;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface EffortService {
-	/**
-	 * 
-	 * @param 添加日志
-	 * @return
-	 */
-	 Effort add(Effort effort);
+	
 	/**
 	 * 根据日期查询，返回日志信息List
 	 * @param date
@@ -43,6 +39,7 @@ public interface EffortService {
 	  * @param nowdate
 	  * @return
 	  */
+
 	 List<Effort> findBetweenDate(Date begindate,Date enddate);
 	 /**
 	  * 通过projectID查询所有数据
@@ -50,5 +47,14 @@ public interface EffortService {
 	  * @return
 	  */
 	 List<Effort> findByProject(int projectId);
+	 /**
+	  * 分页查询
+	  * @param start
+	  * @param limit
+	  * @param effort
+	  * @return
+	  */
+	 Pager<Effort> findByPage(int start,int limit,Effort effort);
+	 
 	
 }
