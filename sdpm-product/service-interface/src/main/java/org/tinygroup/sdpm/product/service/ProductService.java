@@ -18,7 +18,7 @@ public interface ProductService {
 	 * @param product
 	 * @return
 	 */
-	int etid(Product product);
+	int edit(Product product);
 	
 	/**
 	 * 根据产品ID删除
