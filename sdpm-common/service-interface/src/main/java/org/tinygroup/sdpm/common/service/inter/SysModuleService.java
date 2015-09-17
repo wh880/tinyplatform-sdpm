@@ -11,11 +11,15 @@ public interface SysModuleService {
 	 * @return
 	 */
 	 SysModule edit(SysModule sysModule);
-	/**
-	 * 保存
-	 * @return
-	 */
+	 
+     /**
+      * 保存模块
+      * @param sysModule
+      * @return
+      */
+
 	 SysModule save(SysModule sysModule);
+	 
 	/**
 	 * 删除ById
 	 * @param id
@@ -27,5 +31,5 @@ public interface SysModuleService {
 	 * @param root
 	 * @return
 	 */
-	 List<SysModule> findByRoot(SysModule sysModule);
+	 List<SysModule> findByRoot(int root);
 }
