@@ -45,12 +45,14 @@
                         #@validateDiv("col-2")#end
                     #end
                     #@elementItem()
+
                         #@sdpmItem("回复处理时间")
                             #@tinyDateInput(
-                                "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"" ,"placeholder":
-                                ""})#end
+                                "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
+                                "日期不能为空"})#end
                         #end
                         #@validateDiv("col-2")#end
+
                     #end
 
 

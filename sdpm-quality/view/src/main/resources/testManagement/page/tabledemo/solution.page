@@ -34,7 +34,7 @@
         <div class="col-12">
          	<div class="col-2 text-r"><label>解决方案：</label></div>
          		<div class="col-4">
-            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
+            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22","onclick":"setType(this.value)"})
                 #@tinyOptionItem("0")#end
                 #@tinyOptionItem("1")设计如此#end
                 #@tinyOptionItem("2")重复Bug#end
@@ -47,8 +47,16 @@
               </div>
        </div>
      #end
-           
-    #@elementItem()
+           ##此处需要一段JS代码,点重复Bug出现。
+    #@elementItem(elementId="idBox" eleItemClass="hidden")
+        <div class="col-12">
+         	<div class="col-2 text-r"><label>重复ID：</label></div>
+         		<div class="col-4">
+           			#tinyInput("text" "111" ""{"datatype":"","id":"111","class":"input-text","placeholder":""})
+              </div>
+       </div>
+     #end
+     #@elementItem()
         <div class="col-12">
          	<div class="col-2 text-r"><label>解决版本：</label></div>
          		<div class="col-4">
@@ -129,6 +137,17 @@
 #end
 
 <script type="text/javascript">
+	
+	/* 重复ID隐藏*/
+	function setType(type){
+		if(type == '2'){
+			$('#idBox').removeClass('hidden');
+		}
+		else{
+			$('#idBox').addClass('hidden');			
+		}				
+	}
+	
     $(function(){
         $(".selectList").each(function(){
             var url = "#link('/getDist.html')";

@@ -71,8 +71,7 @@
             #@elementItem()
                 #@sdpmItem("回访时间" "*")
                     #@tinyDateInput(
-                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                        "日期不能为空","placeholder":""})#end
+                        "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
                 #end
                 #@validateDiv("col-2")#end
             #end
