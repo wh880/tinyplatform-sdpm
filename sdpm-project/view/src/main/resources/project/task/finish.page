@@ -83,11 +83,7 @@
 		#end
 
 
-		#@elementItem()
-			#@div(divClass="col-10 col-offset-2 form-inline")
-				#tinyInput("submit" "submitbtn" " 完成 " {"class":"btn btn-primary"})
-			#end
-		#end
+		
         <br/>
     </div>
 	#@elementItem()

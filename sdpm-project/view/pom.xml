@@ -20,6 +20,11 @@
           <artifactId>sdpm-common-view</artifactId>
           <version>${tiny_sdpm_version}</version>
       </dependency>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>org.tinygroup.pieCharts</artifactId>
+          <version>${tiny_ui_version}</version>
+      </dependency>
   <!-- 其他宏文件依赖 -->
 		<dependency>
 			<groupId>org.tinygroup</groupId>
