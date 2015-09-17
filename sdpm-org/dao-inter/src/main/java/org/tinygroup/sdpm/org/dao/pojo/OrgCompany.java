@@ -19,84 +19,72 @@ package org.tinygroup.sdpm.org.dao.pojo;
 /** 
  * 公司表
  * 
- * 公司表
  */
 public class OrgCompany {
 
 	/** 
 	 * 公司编号
 	 * 
-	 * 公司编号
 	 */
 	private Integer orgCompanyId;
 
 	/** 
 	 * 公司名称 
 	 * 
-	 * 公司名称
 	 */
 	private String orgCompanyName;
 
 	/** 
 	 * 联系电话 
 	 * 
-	 * 联系电话
 	 */
 	private String orgCompanyPhone;
 
 	/** 
 	 * 传真
 	 * 
-	 * 传真
 	 */
 	private String orgCompanyFax;
 
 	/** 
 	 * 通讯地址
 	 * 
-	 * 通讯地址
 	 */
 	private String orgCompanyAddress;
 
 	/** 
 	 * 邮政编码
 	 * 
-	 * 邮政编码
 	 */
-	private String orgCompanyZipcode;
+	private String orgCompanyZipCode;
 
 	/** 
 	 * 官网
 	 * 
-	 * 官网
 	 */
 	private String orgCompanyWebsite;
 
 	/** 
 	 * 内网
 	 * 
-	 * 内网
 	 */
 	private String orgCompanyBackyard;
 
 	/** 
 	 * 匿名登录
 	 * 
-	 * 匿名登录
 	 */
 	private String orgCompanyGuest;
 
 	/** 
 	 * 管理员列表
 	 * 
-	 * 管理员列表
 	 */
 	private String orgCompanyAdmins;
 
 	/** 
 	 * 删除标志 
 	 * 
-	 * 删除标志
 	 */
 	private String orgCompanyDeleted;
 
@@ -141,12 +129,12 @@ public class OrgCompany {
 		return orgCompanyAddress;
 	}
 
-	public void setOrgCompanyZipcode(String orgCompanyZipcode){
-		this. orgCompanyZipcode = orgCompanyZipcode;
+	public void setOrgCompanyZipCode(String orgCompanyZipCode){
+		this. orgCompanyZipCode = orgCompanyZipCode;
 	}
 
-	public String getOrgCompanyZipcode(){
-		return orgCompanyZipcode;
+	public String getOrgCompanyZipCode(){
+		return orgCompanyZipCode;
 	}
 
 	public void setOrgCompanyWebsite(String orgCompanyWebsite){

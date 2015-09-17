@@ -18,8 +18,8 @@ package org.tinygroup.sdpm.org.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRoldMenu;
 
-public interface OrgUserDao extends BaseDao<OrgUser,String> {
+public interface OrgRoldMenuDao extends BaseDao<OrgRoldMenu,Integer> {
 
 }

@@ -19,212 +19,183 @@ package org.tinygroup.sdpm.org.dao.pojo;
 /** 
  * 用户表
  * 
- * 用户表
  */
 public class OrgUser {
 
 	/** 
 	 * 用户编号
 	 * 
-	 * 用户编号
 	 */
-	private Integer orgUserId;
+	private String orgUserId;
 
 	/** 
 	 * 部门编号
 	 * 
-	 * 部门编号
 	 */
 	private Integer orgDeptId;
 
 	/** 
 	 * 用户名
 	 * 
-	 * 用户名
 	 */
 	private String orgUserAccount;
 
 	/** 
 	 * 密码
 	 * 
-	 * 密码
 	 */
 	private String orgUserPassword;
 
 	/** 
 	 * 职位
 	 * 
-	 * 职位
 	 */
 	private String orgUserRole;
 
 	/** 
 	 * 真实姓名
 	 * 
-	 * 真实姓名
 	 */
-	private String orgUserRealname;
+	private String orgUserRealName;
 
 	/** 
 	 * 昵称
 	 * 
-	 * 昵称
 	 */
 	private String orgUserNickname;
 
 	/** 
 	 * 源代码账号
 	 * 
-	 * 源代码账号
 	 */
-	private String orgUserCommiter;
+	private String orgUserSubmitter;
 
 	/** 
 	 * 头像
 	 * 
-	 * 头像
 	 */
 	private String orgUserAvatar;
 
 	/** 
 	 * 出生日期
 	 * 
-	 * 出生日期
 	 */
 	private String orgUserBirthday;
 
 	/** 
 	 * 性别 
 	 * 
-	 * 性别
 	 */
 	private String orgUserGender;
 
 	/** 
 	 * 邮箱
 	 * 
-	 * 邮箱
 	 */
 	private String orgUserEmail;
 
 	/** 
 	 * Skype
 	 * 
-	 * Skype
 	 */
-	private String orgUserSkype;
+	private String orgUserSKYPE;
 
 	/** 
 	 * QQ
 	 * 
-	 * QQ
 	 */
-	private String orgUserQq;
+	private String orgUserQQ;
 
 	/** 
 	 * 雅虎通
 	 * 
-	 * 雅虎通
 	 */
 	private String orgUserYahoo;
 
 	/** 
 	 * Gtalk
 	 * 
-	 * Gtalk
 	 */
-	private String orgUserGtalk;
+	private String orgUserGTalk;
 
 	/** 
 	 * 旺旺
 	 * 
-	 * 旺旺
 	 */
-	private String orgUserWangwang;
+	private String orgUserWANGWANG;
 
 	/** 
 	 * 手机
 	 * 
-	 * 手机
 	 */
 	private String orgUserMobile;
 
 	/** 
 	 * 电话 
 	 * 
-	 * 电话
 	 */
 	private String orgUserPhone;
 
 	/** 
 	 * 通讯地址
 	 * 
-	 * 通讯地址
 	 */
-	private String orgUserAdress;
+	private String orgUserAddress;
 
 	/** 
 	 * 邮编
 	 * 
-	 * 邮编
 	 */
-	private String orgUserZipcode;
+	private String orgUserZipCode;
 
 	/** 
 	 * 加入日期
 	 * 
-	 * 加入日期
 	 */
 	private String orgUserJoin;
 
 	/** 
 	 * 访问次数
 	 * 
-	 * 访问次数
 	 */
 	private Integer orgUserVisits;
 
 	/** 
 	 * 最后IP
 	 * 
-	 * 最后IP
 	 */
 	private String orgUserIp;
 
 	/** 
 	 * 最后登录
 	 * 
-	 * 最后登录
 	 */
 	private Integer orgUserLast;
 
 	/** 
 	 * 失败次数
 	 * 
-	 * 失败次数
 	 */
 	private Integer orgUserFails;
 
 	/** 
 	 * 上次锁定时间
 	 * 
-	 * 上次锁定时间
 	 */
 	private String orgUserLocked;
 
 	/** 
 	 * 是否删除
 	 * 
-	 * 是否删除
 	 */
 	private String orgUserDeleted;
 
 
-	public void setOrgUserId(Integer orgUserId){
+	public void setOrgUserId(String orgUserId){
 		this. orgUserId = orgUserId;
 	}
 
-	public Integer getOrgUserId(){
+	public String getOrgUserId(){
 		return orgUserId;
 	}
 
@@ -260,12 +231,12 @@ public class OrgUser {
 		return orgUserRole;
 	}
 
-	public void setOrgUserRealname(String orgUserRealname){
-		this. orgUserRealname = orgUserRealname;
+	public void setOrgUserRealName(String orgUserRealName){
+		this. orgUserRealName = orgUserRealName;
 	}
 
-	public String getOrgUserRealname(){
-		return orgUserRealname;
+	public String getOrgUserRealName(){
+		return orgUserRealName;
 	}
 
 	public void setOrgUserNickname(String orgUserNickname){
@@ -276,12 +247,12 @@ public class OrgUser {
 		return orgUserNickname;
 	}
 
-	public void setOrgUserCommiter(String orgUserCommiter){
-		this. orgUserCommiter = orgUserCommiter;
+	public void setOrgUserSubmitter(String orgUserSubmitter){
+		this. orgUserSubmitter = orgUserSubmitter;
 	}
 
-	public String getOrgUserCommiter(){
-		return orgUserCommiter;
+	public String getOrgUserSubmitter(){
+		return orgUserSubmitter;
 	}
 
 	public void setOrgUserAvatar(String orgUserAvatar){
@@ -316,20 +287,20 @@ public class OrgUser {
 		return orgUserEmail;
 	}
 
-	public void setOrgUserSkype(String orgUserSkype){
-		this. orgUserSkype = orgUserSkype;
+	public void setOrgUserSKYPE(String orgUserSKYPE){
+		this. orgUserSKYPE = orgUserSKYPE;
 	}
 
-	public String getOrgUserSkype(){
-		return orgUserSkype;
+	public String getOrgUserSKYPE(){
+		return orgUserSKYPE;
 	}
 
-	public void setOrgUserQq(String orgUserQq){
-		this. orgUserQq = orgUserQq;
+	public void setOrgUserQQ(String orgUserQQ){
+		this. orgUserQQ = orgUserQQ;
 	}
 
-	public String getOrgUserQq(){
-		return orgUserQq;
+	public String getOrgUserQQ(){
+		return orgUserQQ;
 	}
 
 	public void setOrgUserYahoo(String orgUserYahoo){
@@ -340,20 +311,20 @@ public class OrgUser {
 		return orgUserYahoo;
 	}
 
-	public void setOrgUserGtalk(String orgUserGtalk){
-		this. orgUserGtalk = orgUserGtalk;
+	public void setOrgUserGTalk(String orgUserGTalk){
+		this. orgUserGTalk = orgUserGTalk;
 	}
 
-	public String getOrgUserGtalk(){
-		return orgUserGtalk;
+	public String getOrgUserGTalk(){
+		return orgUserGTalk;
 	}
 
-	public void setOrgUserWangwang(String orgUserWangwang){
-		this. orgUserWangwang = orgUserWangwang;
+	public void setOrgUserWANGWANG(String orgUserWANGWANG){
+		this. orgUserWANGWANG = orgUserWANGWANG;
 	}
 
-	public String getOrgUserWangwang(){
-		return orgUserWangwang;
+	public String getOrgUserWANGWANG(){
+		return orgUserWANGWANG;
 	}
 
 	public void setOrgUserMobile(String orgUserMobile){
@@ -372,20 +343,20 @@ public class OrgUser {
 		return orgUserPhone;
 	}
 
-	public void setOrgUserAdress(String orgUserAdress){
-		this. orgUserAdress = orgUserAdress;
+	public void setOrgUserAddress(String orgUserAddress){
+		this. orgUserAddress = orgUserAddress;
 	}
 
-	public String getOrgUserAdress(){
-		return orgUserAdress;
+	public String getOrgUserAddress(){
+		return orgUserAddress;
 	}
 
-	public void setOrgUserZipcode(String orgUserZipcode){
-		this. orgUserZipcode = orgUserZipcode;
+	public void setOrgUserZipCode(String orgUserZipCode){
+		this. orgUserZipCode = orgUserZipCode;
 	}
 
-	public String getOrgUserZipcode(){
-		return orgUserZipcode;
+	public String getOrgUserZipCode(){
+		return orgUserZipCode;
 	}
 
 	public void setOrgUserJoin(String orgUserJoin){
