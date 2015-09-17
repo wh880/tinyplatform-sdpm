@@ -24,6 +24,12 @@ import java.util.Date;
  */
 public class Burn {
 
+	/**
+	 * 逻辑ID
+	 *
+	 */
+	private Integer id;
+
 	/** 
 	 * 项目id
 	 * 
@@ -48,37 +54,44 @@ public class Burn {
 	 */
 	private Float burnConsumed;
 
+	public Integer getId() {
+		return id;
+	}
 
-	public void setProjectId(Integer projectId){
-		this. projectId = projectId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getProjectId(){
 		return projectId;
 	}
 
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
+	}
+
+	public Date getBurnDate() {
+		return burnDate;
+	}
+
 	public void setBurnDate(Date burnDate){
 		this. burnDate = burnDate;
 	}
 
-	public Date getBurnDate(){
-		return burnDate;
+	public Float getBurnLeft() {
+		return burnLeft;
 	}
 
 	public void setBurnLeft(Float burnLeft){
 		this. burnLeft = burnLeft;
 	}
 
-	public Float getBurnLeft(){
-		return burnLeft;
+	public Float getBurnConsumed() {
+		return burnConsumed;
 	}
 
 	public void setBurnConsumed(Float burnConsumed){
 		this. burnConsumed = burnConsumed;
-	}
-
-	public Float getBurnConsumed(){
-		return burnConsumed;
 	}
 
 }
