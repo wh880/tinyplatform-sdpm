@@ -25,4 +25,13 @@ public interface StoryService {
 	 */
 	int deleteById(Integer storyId);
 	
+	/**
+	 * 根据需求对象删除
+	 * @param story
+	 * @return
+	 */
+	int deleteByStory(Story story);
+	
+	
+	
 }

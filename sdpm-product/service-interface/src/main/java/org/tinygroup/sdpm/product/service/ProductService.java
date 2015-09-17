@@ -18,7 +18,7 @@ public interface ProductService {
 	 * @param product
 	 * @return
 	 */
-	int edit(Product product);
+	int etid(Product product);
 	
 	/**
 	 * 根据产品ID删除
@@ -28,6 +28,13 @@ public interface ProductService {
 	int deleteById(Integer productId);
 	
 	/**
+	 * 根据产品Id批量删除
+	 * @param productIds
+	 * @return
+	 */
+	int deleteByProductIds(Integer... productIds);
+	
+	/**
 	 * 根据产品对象删除
 	 * @param product
 	 * @return
@@ -35,11 +42,13 @@ public interface ProductService {
 	int deleteByProduct(Product product);
 	
 	/**
-	 * 批量删除
+	 * 根据产品批量删除
 	 * @param products
 	 * @return
 	 */
-	int batchDelete(List<Product> products);
+	int[] batchDelete(List<Product> products);
+	
+	
 	
 	/**
 	 * 根据产品线Id删除
@@ -88,7 +97,7 @@ public interface ProductService {
 	 * 根据产品线Id分页查询
 	 * @param currentPage
 	 * @param limit
-	 * @param product
+	 * @param productLineId
 	 * @return
 	 */
 	Pager<Product> findPagerByLine(int currentPage,int limit ,Integer productLineId);
