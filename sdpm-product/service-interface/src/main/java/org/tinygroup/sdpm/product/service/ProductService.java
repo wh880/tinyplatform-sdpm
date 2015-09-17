@@ -91,16 +91,16 @@ public interface ProductService {
 	 * @param product
 	 * @return
 	 */
-	Pager<Product> findPager(int currentPage,int limit ,Product product);
+	Pager<Product> findProduct(int currentPage,int limit ,Product product);
 	
 	/**
-	 * 根据产品线Id分页查询
+	 * 根据产品线Id查询
 	 * @param currentPage
 	 * @param limit
 	 * @param productLineId
 	 * @return
 	 */
-	Pager<Product> findPagerByLine(int currentPage,int limit ,Integer productLineId);
+	List<Product> findPagerByLine(Integer productLineId);
 	
 	
 	

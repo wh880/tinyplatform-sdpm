@@ -69,7 +69,7 @@ public interface PlanService {
 	 * @param plan
 	 * @return
 	 */
-	Pager<Plan> findPager(int currentPage,int limit ,Plan plan);
+	Pager<Plan> findPlan(int currentPage,int limit ,Plan plan);
 	
 	/**
 	 * 根据计划Id批量删除

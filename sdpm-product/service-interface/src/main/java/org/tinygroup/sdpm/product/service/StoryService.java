@@ -23,6 +23,20 @@ public interface StoryService {
 	int edit(Story story);
 	
 	/**
+	 * 批量操作
+	 * @param stories
+	 * @return
+	 */
+	int[] batchUpdate(List<Story> stories);
+	
+	/**
+	 * 报表生成
+	 * @param stories
+	 * @return
+	 */
+	List<Story> GenerateRreports(List<Story> stories);
+	
+	/**
 	 * 根据需求ID批量关闭
 	 * @param storyIds
 	 * @return
@@ -52,52 +66,52 @@ public interface StoryService {
 	
 	/**
 	 * 根据需求批量删除
-	 * @param products
+	 * @param stories
 	 * @return
 	 */
-	int[] batchDelete(List<Story> storys);
+	int[] batchDelete(List<Story> stories);
 	
 	/**
 	 * 根据需求ID查找
 	 * @param storyId
 	 * @return
 	 */
-	Story getById(Integer storyId);
+	Story findById(Integer storyId);
 	
 	/**
 	 * 根据产品ID查找
 	 * @param productId
 	 * @return
 	 */
-	Pager<Story> getByProductId(Integer productId);
+	List<Story> findByProductId(Integer productId);
 	
 	/**
 	 * 根据模块ID查找
 	 * @param moduleId
 	 * @return
 	 */
-	Pager<Story> getByModuleId(Integer moduleId);
+	List<Story> findByModuleId(Integer moduleId);
 	
 	/**
 	 * 根据计划ID查找
 	 * @param planId
 	 * @return
 	 */
-	Pager<Story> getByPlanId(Integer planId);
+	List<Story> findByPlanId(Integer planId);
 	
 	/**
 	 * 根据状态查找
 	 * @param status
 	 * @return
 	 */
-	Pager<Story> getByStatus(String status);
+	List<Story> findByStatus(String status);
 	
 	/**
 	 * 分页查找
 	 * @param story
 	 * @return
 	 */
-	Pager<Story> getStory(Story story);
+	Pager<Story> findStory(int currentPage,int limit ,Story story);
 	
 	
 	
