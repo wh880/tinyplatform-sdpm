@@ -17,6 +17,7 @@ package org.tinygroup.sdpm.org.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
 import org.tinygroup.sdpm.org.dao.OrgUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -24,6 +25,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserManagerImpl implements UserManager {
     @Autowired
     private OrgUserDao orgUserDao;

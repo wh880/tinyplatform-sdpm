@@ -2,7 +2,9 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
-
+##<style>
+##.infoContent .table>tbody>tr>td, .infoContent .table>tbody>tr>th, .infoContent.table>thead>tr>td, .infoContent.table>thead>tr>th{border-top:none;}
+##</style>
 #set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")

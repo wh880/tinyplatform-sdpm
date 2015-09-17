@@ -21,9 +21,7 @@
                     #@delItemsdpm("#")#buttonIcon(iconClass="icon-remove")#end&nbsp
                 #else
                     #if(m.id=="product-overview-close")
-                        #@iconOperations(
-                            "#myModal" "icon-off " "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet"
-                            "ml-5")关闭#end
+                        #@iconOperations("#myModal" "icon-off " "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet""ml-5")关闭#end
                     #else
                         #if(m.id=="product-overview-editor")
                             <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-module-editor.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>

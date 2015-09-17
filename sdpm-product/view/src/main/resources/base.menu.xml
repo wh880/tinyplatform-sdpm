@@ -36,45 +36,60 @@
               sort="26" isShow="1"
               scope="product-del"/>
 
-        <menu id="demand_log" name="日志" href="" icon="" sort="25" isShow="1" scope="pro_demand_log">
+        <menu id="demand_log" name="日志" href="/product/page/tabledemo/product-log.pagelet" icon="icon-time" sort="25" isShow="1" scope="pro_demand_log">
         	<map>
                 <property key="type" value="aModal"/>
    			</map>
         </menu>
-        <menu id="demand-alteration" name="变更" href="" icon="" sort="24" isShow="1" scope="pro_demand_log">
+        <menu id="demand-alteration" name="变更" href="/product/page/tabledemo/product-demand-change.page" icon="icon-random" sort="24" isShow="1" scope="pro_demand_log">
         	<map>
                 <property key="type" value="icon-href"/>
    			</map>
         </menu>
-        <menu id="demand_close" name="关闭" href="" icon="" sort="23" isShow="1" scope="pro_demand_log">
+        <menu id="demand_close" name="关闭" href="/product/page/tabledemo/product-demand-close.page" icon="icon-off " sort="23" isShow="1" scope="pro_demand_log">
         	<map>
                 <property key="type" value="icon-href"/>
    			</map>
         </menu>
-        <menu id="demand_set" name="建用例" href="" icon="" sort="22" isShow="1" scope="pro_demand_log">
+        <menu id="demand_set" name="建用例" href="/testManagement/page/proposecase.page" icon="icon-sitemap" sort="22" isShow="1" scope="pro_demand_log">
         	<map>
                 <property key="type" value="icon-href"/>
    			</map>
         </menu>
-        <menu id="demand-edit" name="编辑" href="" icon="" sort="21" isShow="1"  scope="pro_demand_log">
+        <menu id="demand-edit" name="编辑" href="/product/page/tabledemo/demand-edit.page" icon="icon-pencil" sort="21" isShow="1"  scope="pro_demand_log">
         	<map>
                 <property key="type" value="icon"/>
    			</map>
         </menu>
-        <menu id="demand_note" name="备注" href="" icon="" sort="20" isShow="1"  scope="pro_demand_log">
+        <menu id="demand_note" name="备注" href="#" icon="beizhu icon-comment-alt" sort="20" isShow="1"  scope="pro_demand_log">
+        	<map>
+                <property key="type" value="beizhu"/>
+   			</map>
+        </menu>
+        <menu id="demand_copy" name="复制" href="/product/page/tabledemo/product-demand-add.page" icon="icon-copy" sort="19" isShow="1" scope="pro_demand_log">
         	<map>
                 <property key="type" value="icon"/>
    			</map>
         </menu>
-        <menu id="demand_copy" name="复制" href="" icon="" sort="19" isShow="1" scope="pro_demand_log">
+        <menu id="demand-delete" name="删除" href="#" icon="icon-remove"  sort="18" isShow="1"  scope="pro_demand_log">
         	<map>
-                <property key="type" value="icon"/>
+                <property key="type" value="del"/>
    			</map>
         </menu>
-        <menu id="demand-delete" name="删除" href="" icon=""  sort="18" isShow="1"  scope="pro_demand-log">
-        	<map>
+        <menu id="demand-back" name="返回" href="/product/page/project/togglebox.page" icon="icon-reply"  sort="17" isShow="1"  scope="pro_demand_log">
+            <map>
                 <property key="type" value="icon"/>
-   			</map>
+            </map>
+        </menu>
+        <menu id="demand-last" name="上一个" href="/product/page/project/demdtablehref.page" icon="icon-pre icon-chevron-left"  sort="16" isShow="1"  scope="pro_demand_log">
+            <map>
+                <property key="type" value="icon"/>
+            </map>
+        </menu>
+        <menu id="demand-next" name="下一个" href="/product/page/project/demdtablehref.page" icon="icon-pre icon-chevron-right"  sort="15" isShow="1"  scope="pro_demand_log">
+            <map>
+                <property key="type" value="icon"/>
+            </map>
         </menu>
     </menu>
 

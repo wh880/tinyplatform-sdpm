@@ -4,23 +4,45 @@
 
 <script>
 
-	$(document).ready(function(){
-	
-		$("select[name='demand-sources']").bind('change',function(){
-			
-			
-			if("request"==$(this).val()){
-				$(".customer-request").show();
-				$("#demand-sources").addClass("col-5");
-			}else{
-				$(".customer-request").hide();
-				$("#demand-sources").removeClass("col-5");
-			}
-		});
-	
-	});
+    $(document).ready(function () {
 
-</script>>
+        $("select[name='demand-sources']").bind('change', function () {
+
+
+            if ("request" == $(this).val()) {
+                $(".customer-request").show();
+                $("#demand-sources").addClass("col-5");
+            } else {
+                $(".customer-request").hide();
+                $("#demand-sources").removeClass("col-5");
+            }
+        });
+
+    });
+
+</script>
+##不需要评审的JS代码
+<script>
+    $(document).ready(function () {
+
+        $("#story_reviewed").on("click", function () {
+
+            var vm = this.checked;
+            if (vm == true) {
+                $("select[name='reviewed']").attr("disabled", "disabled");
+            }
+            if (vm == false) {
+                $("select[name='reviewed']").removeAttr("disabled");
+            }
+
+
+        });
+
+    });
+</script>
+
+
+
 
 
 <div style="width:100%;" class="pageleftpart">
@@ -83,7 +105,8 @@
             #@formControlDiv("col-4")
                 <div id="demand-sources">
                     #@Tselect2F()
-                        #@Tselect2Body("demand-sources" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body(
+                            "demand-sources" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="customer">客户</option>
                             <option value="request">请求</option>
                             <option value="user">用户</option>
@@ -102,23 +125,23 @@
                     #end
                 </div>
                 <span class="customer-request" style="display:none">
-	                <div  class="col-2 text-c">&nbsp;请求：
-	                </div>
-	                
+	                <div class="col-2 text-c">&nbsp;请求：
+                    </div>
+
 	                <div class="col-5">
-	                		
-	                    #@Tselect2F()
-	                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                            <option value="CT">Admin</option>
-	                            <option value="DE">Demo</option>
-	                            <option value="FL">Me</option>
-	                        #end
-	
-	                    #*   #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#
-	                    #end
-	                </div>
+
+                        #@Tselect2F()
+                            #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                <option value="CT">Admin</option>
+                                <option value="DE">Demo</option>
+                                <option value="FL">Me</option>
+                            #end
+
+                        #*   #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#
+                        #end
+                    </div>
                 </span>
-                
+
             #end
         #end
 
@@ -135,7 +158,8 @@
         #@elementItem()
             #@colLabel()需求描述：#end
             #@formControlDiv("col-8")
-                #@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"描述不能为空！"})内容走起#end
+                #@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"描述不能为空！"})
+                    内容走起#end
             #end
             #@validateDiv("col-2")#end
         #end
@@ -176,22 +200,27 @@
         #end
 
         #@elementItem()
-            #@colLabel()由谁评审：#end
-            #@formControlDiv("col-4")
+            #@sdpmItem("由谁评审")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("reviewed" "IN" {"class":"input-text select2"})
                         <option value="CT">Admin</option>
                         <option value="DE">Demo</option>
                         <option value="FL">Me</option>
                     #end
 
-                #*
-                                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                *#
+                #*  #@Tselect2Fix()<a href="http://www.baidu.com" class="r "></a><a href="#"></a>#end*#
                 #end
 
+
             #end
-            #@validateDiv("col-2")#end
+            #@checkboxBox()
+
+                #@label(labelFor="checkbox-6")
+                    #input(inputId="story_reviewed" inputName="story_reviewed" inputType="checkbox")
+                    不需要评审
+                #end
+            #end
+
         #end
 
         #@elementItem()
@@ -239,9 +268,7 @@
             <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
         </div>
         <div class="col-1">
-            <a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">
-                <button style="float: left" type="button" id="back" class="backBtn">返回</button>
-            </a>
+            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
         </div>
         <div class="col-5"></div>
 

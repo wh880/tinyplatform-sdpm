@@ -36,8 +36,7 @@
     					</div>
     	<div class="col-1"></div>
     	<div class="col-1">
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">
-					<button type="button" id="back" class="btn">返回</button></a>&nbsp;
+				#@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
 					</div>
         #div(divClass="clearfix")
     #end

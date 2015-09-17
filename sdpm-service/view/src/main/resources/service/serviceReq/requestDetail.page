@@ -10,9 +10,9 @@
 #set(name="request")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-        #@div(divClass="dropdownBox")
+       #* #@div(divClass="dropdownBox")
             #include("/service/serviceCom/dropdownMenu.page")
-        #end
+        #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end

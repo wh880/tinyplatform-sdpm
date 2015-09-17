@@ -249,3 +249,8 @@ a.btn.btn-sm.backBtn,backBtn {
     background: #a90329 !important;
     color: #fff
 }
+
+/*表格重置*/
+.infoContent .table > tbody > tr > td, .infoContent .table > tbody > tr > th, .infoContent.table > thead > tr > td, .infoContent.table > thead > tr > th {
+    border-top: none;
+}
