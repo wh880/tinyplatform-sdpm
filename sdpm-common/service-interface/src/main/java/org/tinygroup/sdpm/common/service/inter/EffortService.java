@@ -44,5 +44,11 @@ public interface EffortService {
 	  * @return
 	  */
 	 List<Effort> findBetweenDate(Date begindate,Date enddate);
+	 /**
+	  * 通过projectID查询所有数据
+	  * @param projectId
+	  * @return
+	  */
+	 List<Effort> findByProject(int projectId);
 	
 }
