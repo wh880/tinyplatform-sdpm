@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.product.service.pojo;
+package org.tinygroup.sdpm.product.dao.pojo;
 
 import java.util.Date;
 
@@ -22,7 +22,7 @@ import java.util.Date;
  * 计划表
  * 
  */
-public class PlanPojo {
+public class Plan {
 
 	/** 
 	 * 计划ID
