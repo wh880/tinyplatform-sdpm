@@ -18,8 +18,8 @@ package org.tinygroup.sdpm.org.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
-import org.tinygroup.sdpm.org.dao.pojo.OrgCompanyy;
+import org.tinygroup.sdpm.org.dao.pojo.OrgCompany;
 
-public interface OrgCompanyyDao extends BaseDao<OrgCompanyy,Integer> {
+public interface OrgCompanyDao extends BaseDao<OrgCompany,Integer> {
 
 }

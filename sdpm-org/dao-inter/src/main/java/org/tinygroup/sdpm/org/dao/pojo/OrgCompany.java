@@ -21,7 +21,7 @@ package org.tinygroup.sdpm.org.dao.pojo;
  * 
  * 公司表
  */
-public class OrgCompanyy {
+public class OrgCompany {
 
 	/** 
 	 * 公司编号
