@@ -38,25 +38,30 @@
                 ##                    #@gridSysCol(7)
                 ##                        <p>13615263726</p>
                 ##                    #end
-                    #@colLabel("col-4")客户传真：#end
+                    #@colLabel("col-4")客户部门：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
-                        <p>0571-82573833</p>
+                        <p>银行部</p>
                     #end
-                    #@colLabel("col-4")客户邮编：#end
+                    #@colLabel("col-4")客户登记人：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
-                        <p>311000</p>
+                        <p>明明</p>
                     #end
-                    #@colLabel("col-4")客户地址：#end
+                    #@colLabel("col-4")客户登记时间：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
-                        <p>浙江杭州江南大道3588号</p>
+                        <p>2015-8-1</p>
                     #end
                     #@colLabel("col-4")客户描述：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
                         <p>客户经营金融业务，前景广阔。</p>
+                    #end
+                    #@colLabel("col-4")客户状态：#end
+                    #@gridSysCol(1)#end
+                    #@gridSysCol(7)
+                        <p>正常</p>
                     #end
                 #end
             #end
