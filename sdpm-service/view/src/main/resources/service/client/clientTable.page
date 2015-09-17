@@ -20,8 +20,8 @@
 
         #set(m3=menuManager.getMenu("client-export"))
         #if(m3)
-            #@aModal("#myModal" "" "600" "100" "btn radius btn-primary btn-sm"
-            m3.href)#buttonIcon(iconClass="icon-download-alt")导出#end
+            #@aModal("#myModal" "" "600" "100" "btn radius btn-primary btn-sm" m3.href)#buttonIcon(iconClass=
+                "icon-download-alt")导出#end
         #end
 
     ##    <a title="权限维护" href=userBatchAddpagePath>#buttonIcon(iconClass="添加" "865" "420","btn radius btn-info")</a>
