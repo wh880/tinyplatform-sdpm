@@ -18,12 +18,12 @@
             <p class="titleName">客户信息</p>
             #@noRespsGridSystem()
                 #@gridSysRow()
-                    #@colLabel("col-4")公司名称：#end
+                    #@colLabel("col-4")客户名称：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
                         <p>恒生电子</p>
                     #end
-                    #@colLabel("col-4")公司编号：#end
+                    #@colLabel("col-4")客户编号：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
                         <p>10088</p>
@@ -38,17 +38,17 @@
                 ##                    #@gridSysCol(7)
                 ##                        <p>13615263726</p>
                 ##                    #end
-                    #@colLabel("col-4")公司传真：#end
+                    #@colLabel("col-4")客户传真：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
                         <p>0571-82573833</p>
                     #end
-                    #@colLabel("col-4")公司邮编：#end
+                    #@colLabel("col-4")客户邮编：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
                         <p>311000</p>
                     #end
-                    #@colLabel("col-4")公司地址：#end
+                    #@colLabel("col-4")客户地址：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
                         <p>浙江杭州江南大道3588号</p>
@@ -65,7 +65,7 @@
         #end
 
         #@div(divClass="infoContent")
-            <p class="titleName">客户信息</p>
+            <p class="titleName">客户联系人信息</p>
             #@tableBordered()
                 #@thead()
                     #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序

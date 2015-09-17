@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.quality.service.inter;
 
+import java.util.List;
 import org.tinygroup.sdpm.quality.dao.pojo.Bug;
 
 public interface BugService {
@@ -9,18 +10,50 @@ public interface BugService {
 	 * @param bug
 	 * @return
 	 */
-	Bug findByBug(Bug bug);
+	List<Bug> findByBug(Bug bug);
 	/**
-	 * 通过对象提Bug
+	 * 通过Bug状态查询
+	 * @param status
+	 * @return
+	 */
+	List<Bug> findByStatus(String status);
+	/**
+	 * 通过指派查询
+	 * @param assign
+	 * @return
+	 */
+	List<Bug> findByAssignto(String assign);
+	/**
+	 * 通过创建者查询
+	 * @param open
+	 * @return
+	 */
+	List<Bug> findByOpened(String open);
+	/**
+	 * 通过解决查询
+	 * @param resolve
+	 * @return
+	 */
+	List<Bug> findByResolved(String resolve);
+	/**
+	 * 通过是否确认查询
+	 * @param confirm
+	 * @return
+	 */
+	List<Bug> findByConfirmed(Integer confirm);
+	
+	/**
+	 * 提Bug
 	 * @param bug
 	 * @return
 	 */
 	Bug add(Bug bug);
 	/**
-	 * 编辑
+	 * 修改
 	 * @param bug
 	 * @return
 	 */
-	int edit(Bug bug);
+	int update(Bug bug);
+	
 	
 }
