@@ -1,15 +1,15 @@
 #@noRespsGridSystem()
     #@tinyForm("thisform" "" "" {"class":"test"})
         #@gridSysRow()
-            #@colLabel("col-2")<span class="c-red">*</span>组名：#end
+            #@colLabel("col-2")<span class="c-red">*</span>名角名：#end
             #@gridSysCol(7)
                 #tinyInput(
-                    "text" "username" ""{"placeholder":"字母/中文/数字/下划线","nullmsg":"用户名不能为空！","id":"username","class":
+                    "text" "username" ""{"placeholder":"","nullmsg":"角色名不能为空！","id":"username","class":
                     "input-text"})
             #end
         #end
         #@gridSysRow()
-            #@colLabel("col-2")分组描述：#end
+            #@colLabel("col-2")角色描述：#end
             #@gridSysCol(7)
                 #@textarea(textareaStyle="width:100%" textareaPlaceholder="说点什么...")#end
 
