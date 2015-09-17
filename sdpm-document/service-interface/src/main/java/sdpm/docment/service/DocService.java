@@ -1,12 +1,14 @@
 package sdpm.docment.service;
 
-import javax.print.Doc;
+import org.tinygroup.sdpm.document.pojo.Doc;
+import org.tinygroup.sdpm.document.pojo.DocLib;
+
 
 public interface DocService {
-	public void addDocLib(Object doclib);
-	public void addDoc(Object doc);
-	public int updtDoc(Object doc);
-	public int updtDocLib(Object doclib);
+	public void addDocLib(DocLib doclib);
+	public void addDoc(Doc doc);
+	public int updtDoc(Doc doc);
+	public int updtDocLib(DocLib doclib);
 	public int delDoc(Integer key);
 	public int delDocLib(Integer key);
 	public Doc getDocById(Integer key);
