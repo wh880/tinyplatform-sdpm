@@ -13,7 +13,7 @@
     #@tinyForm("thisform" "" "" {"class":"test"})
 
         #@elementItem()
-            #@sdpmItem("产品名称")
+            #@sdpmItem("产品名称" "*")
                 #@tinySelect("lang" "ch" {"class":"input-text select2","rel":"22"})
                     #@tinyOptionItem("ch")请选择#end
                     #@tinyOptionItem("zh")支付宝#end
@@ -25,21 +25,19 @@
 
         #@elementItem()
             #@sdpmItem("创建人")
-                #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":
-                    "问题不能为空！","id":"username","class":"input-text"})
+                #tinyInput("text" "username" ""{"placeholder":"","id":"faq_created_by","class":"input-text"})
             #end
         #end
         #@elementItem()
             #@sdpmItem("创建时间")
                 #@tinyDateInput(
-                    "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
-                    "日期不能为空","placeholder":""})#end
+                    "birthday" "" "YYYY-MM-DD" {"style":"width:200px","placeholder":"","id":"faq_create_date"})#end
             #end
         #end
         #@elementItem()
-            #@sdpmItem("问题")
+            #@sdpmItem("问题" "*")
                 #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":
-                    "问题不能为空！","id":"username","class":"input-text"})
+                    "问题不能为空！","id":"faq_id","class":"input-text"})
             #end
         #end
 

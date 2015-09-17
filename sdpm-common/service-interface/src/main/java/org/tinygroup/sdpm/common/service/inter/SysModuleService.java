@@ -27,5 +27,5 @@ public interface SysModuleService {
 	 * @param root
 	 * @return
 	 */
-	 List<SysModule> queryByRoot(SysModule sysModule);
+	 List<SysModule> findByRoot(SysModule sysModule);
 }

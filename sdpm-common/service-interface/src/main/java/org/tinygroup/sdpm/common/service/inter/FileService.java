@@ -21,6 +21,6 @@ public interface FileService {
     * 查询附件信息
     * @return 附件信息表
     */
-    List<File> query();
+    List<File> find(File file);
  
 }
