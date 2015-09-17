@@ -27,13 +27,13 @@
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
             <span class="f">
-					<dr>浏览分组</dr>
+					<dr>浏览角色</dr>
         </span>
 
             <span style="float:right">
                 #foreach(m:menuManager.getScopeMenus("org-privilege-addGroup"))
-                    #@aModal(editpageModal "新增分组" "600" "300" "btn radius btn-primary btn-sm" m.href)
-                        #@simpleI(m.icon)新增分组#end
+                    #@aModal(editpageModal "新增角色" "600" "300" "" m.href)
+                        #@simpleI(m.icon)新增角色#end
                     #end
                 #end
 
@@ -54,9 +54,8 @@
                 #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                     #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
                     #@tinyTh({"class":"","rel":"sortname"})编号#end
-                    #@tinyTh({"class":"","rel":"sortname"})分组名称#end
-                    #@tinyTh({"class":"","rel":"sortname"})分组描述#end
-                    #@tinyTh({"class":"","rel":"sortname"})用户列表#end
+                    #@tinyTh({"class":"","rel":"sortname"})角色名称#end
+                    #@tinyTh({"class":"","rel":"sortname"})角色描述#end
                     #@tinyTh({"class":"","rel":"sortname"})操作#end
                 #end
             #end

@@ -21,6 +21,8 @@ public interface EffortService {
 	 
 	/**
 	 * 保存日志
+	 * @param effort
+	 * @return
 	 */
 	
 	 Effort save(Effort effort);
@@ -34,7 +36,7 @@ public interface EffortService {
 	 * 查询所有字段
 	 * @return
 	 */
-	 List<Effort> find();
+	 List<Effort> find(Effort effort);
 	 /**
 	  * 根据时间段查询
 	  * @param lastdate

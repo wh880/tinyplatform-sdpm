@@ -16,36 +16,24 @@
 
 package org.tinygroup.sdpm.project.dao.impl;
 
-import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.sdpm.project.dao.constant.BurnTable.*;
-import static org.tinygroup.tinysqldsl.Select.*;
-import static org.tinygroup.tinysqldsl.Insert.*;
-import static org.tinygroup.tinysqldsl.Delete.*;
-import static org.tinygroup.tinysqldsl.Update.*;
-
-import java.io.Serializable;
-
-import java.util.List;
-
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.project.dao.BurnDao;
+import org.tinygroup.sdpm.project.dao.pojo.Burn;
+import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.sdpm.project.dao.pojo.Burn;
-import org.tinygroup.sdpm.project.dao.BurnDao;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
-import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+import java.io.Serializable;
+import java.util.List;
+
+import static org.tinygroup.sdpm.project.dao.constant.BurnTable.BURNTABLE;
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 
@@ -53,6 +41,7 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 		return getDslTemplate().insertAndReturnKey(burn, new InsertGenerateCallback<Burn>() {
 			public Insert generate(Burn t) {
 				Insert insert = insertInto(BURNTABLE).values(
+						BURNTABLE.ID.value(t.getId()),
 					BURNTABLE.PROJECT_ID.value(t.getProjectId()),
 					BURNTABLE.BURN_DATE.value(t.getBurnDate()),
 					BURNTABLE.BURN_LEFT.value(t.getBurnLeft()),
@@ -63,16 +52,17 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 	}
 
 	public int edit(Burn burn) {
-		if(burn == null || burn.getProjectId() == null){
+		if (burn == null || burn.getId() == null) {
 			return 0;
 		}
 		return getDslTemplate().update(burn, new UpdateGenerateCallback<Burn>() {
 			public Update generate(Burn t) {
 				Update update = update(BURNTABLE).set(
+						BURNTABLE.PROJECT_ID.value(t.getProjectId()),
 					BURNTABLE.BURN_DATE.value(t.getBurnDate()),
 					BURNTABLE.BURN_LEFT.value(t.getBurnLeft()),
 					BURNTABLE.BURN_CONSUMED.value(t.getBurnConsumed())).where(
-					BURNTABLE.PROJECT_ID.eq(t.getProjectId()));
+						BURNTABLE.ID.eq(t.getId()));
 				return update;
 			}
 		});
@@ -84,7 +74,7 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 		}
 		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
 			public Delete generate(Serializable pk) {
-				return delete(BURNTABLE).where(BURNTABLE.PROJECT_ID.eq(pk));
+				return delete(BURNTABLE).where(BURNTABLE.ID.eq(pk));
 			}
 		});
 	}
@@ -95,7 +85,7 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 		}
 		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
 			public Delete generate(Serializable[] t) {
-				return delete(BURNTABLE).where(BURNTABLE.PROJECT_ID.in(t));
+				return delete(BURNTABLE).where(BURNTABLE.ID.in(t));
 		}
 		},pks);
 	}
@@ -104,7 +94,7 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 		return getDslTemplate().getByKey(pk, Burn.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(BURNTABLE).where(BURNTABLE.PROJECT_ID.eq(t));
+			return selectFrom(BURNTABLE).where(BURNTABLE.ID.eq(t));
 			}
 		});
 	}
@@ -119,6 +109,7 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 			public Select generate(Burn t) {
 				return selectFrom(BURNTABLE).where(
 				and(
+						BURNTABLE.PROJECT_ID.eq(t.getProjectId()),
 					BURNTABLE.BURN_DATE.eq(t.getBurnDate()),
 					BURNTABLE.BURN_LEFT.eq(t.getBurnLeft()),
 					BURNTABLE.BURN_CONSUMED.eq(t.getBurnConsumed())));
@@ -135,6 +126,7 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 			public Select generate(Burn t) {
 				return MysqlSelect.selectFrom(BURNTABLE).where(
 				and(
+						BURNTABLE.PROJECT_ID.eq(t.getProjectId()),
 					BURNTABLE.BURN_DATE.eq(t.getBurnDate()),
 					BURNTABLE.BURN_LEFT.eq(t.getBurnLeft()),
 					BURNTABLE.BURN_CONSUMED.eq(t.getBurnConsumed())));
@@ -150,6 +142,7 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 
 			public Insert generate() {
 				return insertInto(BURNTABLE).values(
+						BURNTABLE.PROJECT_ID.value(new JdbcNamedParameter("projectId")),
 					BURNTABLE.BURN_DATE.value(new JdbcNamedParameter("burnDate")),
 					BURNTABLE.BURN_LEFT.value(new JdbcNamedParameter("burnLeft")),
 					BURNTABLE.BURN_CONSUMED.value(new JdbcNamedParameter("burnConsumed")));
@@ -169,10 +162,11 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 
 			public Update generate() {
 				return update(BURNTABLE).set(
+						BURNTABLE.PROJECT_ID.value(new JdbcNamedParameter("projectId")),
 					BURNTABLE.BURN_DATE.value(new JdbcNamedParameter("burnDate")),
 					BURNTABLE.BURN_LEFT.value(new JdbcNamedParameter("burnLeft")),
 					BURNTABLE.BURN_CONSUMED.value(new JdbcNamedParameter("burnConsumed"))).where(
-				BURNTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")));
+						BURNTABLE.ID.eq(new JdbcNamedParameter("id")));
 			}
 		});
 	}
@@ -185,6 +179,7 @@ public class BurnDaoImpl extends TinyDslDaoSupport implements BurnDao {
 
 			public Delete generate() {
 				return delete(BURNTABLE).where(and(
+						BURNTABLE.ID.eq(new JdbcNamedParameter("id")),
 				BURNTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")),
 				BURNTABLE.BURN_DATE.eq(new JdbcNamedParameter("burnDate")),
 				BURNTABLE.BURN_LEFT.eq(new JdbcNamedParameter("burnLeft")),

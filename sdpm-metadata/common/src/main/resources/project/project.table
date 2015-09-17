@@ -99,7 +99,8 @@
     </index>
   </table>
   <table id="3bed76082b2a4de180dcc2e86c3db4f5" name="burn" title="燃尽图" package-name="">
-    <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="true" unique="true" not-null="true" id="project_id" auto-increase="true"/>
+    <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
+    <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="false" unique="false" not-null="true" id="project_id" auto-increase="false"/>
     <table-field standard-field-id="148e8200ce404e8eb048888f07802a55" primary="false" unique="false" not-null="true" id="burn_date" auto-increase="false"/>
     <table-field standard-field-id="e2e5845ea87649128dcba54700676efe" primary="false" unique="false" not-null="true" id="burn_left" auto-increase="false"/>
     <table-field standard-field-id="761f75e7f4e94abbbe82b748560c09b4" primary="false" unique="false" not-null="true" id="burn_consumed" auto-increase="false"/>

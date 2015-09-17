@@ -1,12 +1,12 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
-    #@elementItem()
+  #*  #@elementItem()
         #@colLabel()<span class="c-red">*</span>客户ID：#end
         #@formControlDiv("col-8")
             #tinyInput(
                 "text" "username" ""{"datatype":"*","nullmsg":"客户ID不能为空","id":"client_id","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
-    #end
+    #end*#
     #@elementItem()
         #@colLabel()<span class="c-red">*</span>客户名称：#end
         #@formControlDiv("col-8")
@@ -42,6 +42,13 @@
             #end
             #@validateDiv("col-2")#end
         #end
+    #end
+    #@elementItem()
+    <div class="col-12">
+        <div class="col-2 text-r"><label>客户描述：</label></div>
+        <div class="col-9">
+            #@Teditor("content" "content" {"initialFrameHeight":"280"})Say something#end</div>
+    </div>
     #end
     #@elementItem()
         #@colLabel()<span class="c-red">*</span>状态是否正常：#end

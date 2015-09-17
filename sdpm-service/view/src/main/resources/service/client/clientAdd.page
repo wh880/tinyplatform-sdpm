@@ -45,11 +45,7 @@
                     "text" "username" ""{"id":"client_n_o","class":"input-text"})
             #end
         #end
-        #@elementItem()
-            #@sdpmItem("客户描述")
-                #tinyInput("text" "username" ""{"id":"client_spec","class":"input-text"})
-            #end
-        #end
+
 
         #@elementItem()
             #@sdpmItem("客户部门")
@@ -63,6 +59,11 @@
                     "text" "username" ""{"datatype":"*","nullmsg":"登记人不能为空！","id":"client_created_by","class":""})
             #end
         #end
+    #@elementItem()
+        #@sdpmItem("客户联系人" "*")
+            #tinyInput(
+                "text" "username" ""{"datatype":"*","nullmsg":"客户联系人不能为空","id":"user_account","class":""})#end
+    #end
 
     #@elementItem()
             #@sdpmItem("客户电话" "*")
@@ -70,13 +71,6 @@
                     "text" "客户电话" ""{"datatype":"/^[0-9\.]{11,12}$/","nullmsg":"客户电话不能为空","id":"user_phone","class":""})
             #end
         #end
-
-    #@elementItem()
-        #@sdpmItem("客户联系人")
-            #tinyInput(
-                "text" "username" ""{"id":"user_account","class":""})#end
-    #end
-
     #@elementItem()
         #@sdpmItem("联系人职务")
             #tinyInput(
@@ -90,14 +84,20 @@
                     "日期不能为空","placeholder":"请输入日期"})#end
             #end
         #end
-
-        #@elementItem()
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-2 text-r"><label>客户描述：</label></div>
+            <div class="col-9">
+                #@Teditor("content" "content" {"initialFrameHeight":"280"})Say something#end</div>
+        </div>
+    #end
+    #@elementItem()
             #@colLabel()状态是否正常：#end
             #@formControlDiv("col-8")
                 #tinySwitcher("isvip" "是" "否") ##第二个为选中状态 第三参数为数据库返回时的数据
             #end
         #end
-        <br/>
+    <br/>
     </div>
     ##           /*************保存
         #@elementItem()
@@ -109,7 +109,8 @@
                     <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
                 </div>
                 <div class="col-1">
-                    <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
+                   #* <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>*#
+                       #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
                 </div>
                 <div class="col-5"></div>
             </div>

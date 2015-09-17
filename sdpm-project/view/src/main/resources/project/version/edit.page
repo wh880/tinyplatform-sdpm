@@ -26,24 +26,8 @@
 
 ##<div style="width:100%;float:left" class="pageleftpart">
 <div class="infoContent">
-    <p class="titleName">新建版本</p>
-	#@elementItem()
-		#@sdpmItem("解决版本")
-			#@Tselect2F()
-				#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="IN">Indiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
-				#end
-			##填写任意内容，侦听需重新填加 A侦听已内置
-				#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/testmanagement/page/proposeversion.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/testmanagement/page/version.page">全部</a>#end
-			#end
-		#end
-	#end
+    <p class="titleName">编辑版本</p>
+
 	#@elementItem()
 		#@sdpmItem("产品")
 			#@Tselect2F()

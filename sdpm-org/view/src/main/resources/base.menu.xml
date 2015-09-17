@@ -80,7 +80,7 @@
         <menu id="org-privilege-maintain" name="权限维护" href="/organization/privilege/privilegeMaintain.page"
               icon="icon-lock" sort="1" isShow="1"
               scope="org-privilege"/>
-        <menu id="org-privilege-user" name="成员维护" href="/organization/privilege/groupMaintain.pagelet"
+        <menu id="org-privilege-user" name="成员维护" href="/organization/privilege/groupMaintain.page"
               icon="icon-sitemap" sort="1" isShow="1"
               scope="org-privilege">
             <map>
@@ -89,7 +89,7 @@
             </map>
         </menu>
 
-        <menu id="org-privilege-copy" name="复制分组" href="/organization/privilege/groupCopy.pagelet" icon="icon-copy"
+        <menu id="org-privilege-copy" name="复制角色" href="/organization/privilege/groupCopy.pagelet" icon="icon-copy"
               sort="1" isShow="1"
               scope="org-privilege">
             <map>
@@ -98,7 +98,7 @@
             </map>
         </menu>
 
-        <menu id="org-privilege-edit" name="编辑分组" href="/organization/privilege/groupEdit.pagelet" icon="icon-pencil"
+        <menu id="org-privilege-edit" name="编辑角色" href="/organization/privilege/groupEdit.pagelet" icon="icon-pencil"
               sort="1" isShow="1"
               scope="org-privilege">
             <map>
@@ -107,7 +107,7 @@
             </map>
         </menu>
 
-        <menu id="org-privilege-add" name="添加分组" href="/organization/privilege/groupAdd.pagelet" icon="icon-plus"
+        <menu id="org-privilege-add" name="添加角色" href="/organization/privilege/groupAdd.pagelet" icon="icon-plus"
               sort="1" isShow="1"
               scope="org-privilege-addGroup"/>
 
