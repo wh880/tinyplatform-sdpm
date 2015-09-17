@@ -22,20 +22,21 @@
         <div class="infoContent">
             <p class="titleName">新建协议</p>
             #@elementItem()
-                #@sdpmItem("客户名称")
+                #@sdpmItem("客户名称" "*")
                     #@Tselect2F()
                         #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="IN">请选择</option>
                             <option value="CT">恒生</option>
                             <option value="DE">阿里</option>
                             <option value="FL">网易</option>
                         #end
-                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/clientAdd.page" class="r ">增加</a><a
-                                href="#">全部</a>#end
+                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/clientAdd.page"
+                                          class="r ">增加</a>#end
                     #end
                 #end
             #end
             #@elementItem()
-                #@sdpmItem("产品名称")
+                #@sdpmItem("产品名称" "*")
                     #@tinySelect("" "" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
                         #@tinyOptionItem("ch")请选择#end
                         #@tinyOptionItem("zh")支付宝#end
@@ -45,12 +46,14 @@
                 #end
             #end
             #@elementItem()
-                #@sdpmItem("产品协议")
-                    #tinyInput("text" "产品协议" ""{"datatype":"","id":"产品协议","class":"input-text"})
+                #@sdpmItem("产品版本" "*")
+                    #tinyInput(
+                        "text" "产品版本" ""{"datatype":"*","id":"client_product_vision","nullmsg":"产品版本不能为空","class":
+                        "input-text"})
                 #end
             #end
             #@elementItem()
-                #@sdpmItem("服务级别")
+                #@sdpmItem("服务级别" "*")
                     #@tinySelect("" "" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
                         #@tinyOptionItem("zh")请选择#end
                         #@tinyOptionItem("en")0基础#end
@@ -61,32 +64,45 @@
                 #end
             #end
             #@elementItem()
-                #@sdpmItem("服务协议标题")
-                    #tinyInput("text" "服务协议ID" ""{"datatype":"","id":"协议ID","class":"input-text"})
+                #@sdpmItem("服务协议标题" "*")
+                    #tinyInput(
+                        "text" "服务协议ID" ""{"datatype":"*","id":"sla_title","nullmsg":"协议标题不能为空！","class":"input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务工时上限")
-                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text select2"})
+                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"service_effort_limit","class":"input-text select2"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务响应时限")
+                    #tinyInput(
+                        "text" "影响版本" ""{"datatype":"","id":"service_reply_time_limit","class":"input-text select2"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("需求回访时限")
+                    #tinyInput(
+                        "text" "影响版本" ""{"datatype":"","id":"service_review_time_limit","class":"input-text select2"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务请求数上限")
-                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"service_request_limit","class":"input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("现场服务次数上限")
-                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"service_ts_onsite_limit","class":"input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务专员")
-                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"service_specialist","class":"input-text"})
                 #end
             #end
             #@elementItem()
-                #@sdpmItem("服务级别协议")
+                #@sdpmItem("服务级别协议" "*")
                     #@tinySelect("" "aa" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
                         #@tinyOptionItem("aa")请选择#end
                         #@tinyOptionItem("bb")0新建#end
@@ -98,42 +114,43 @@
                 #end
             #end
             #@elementItem()
-                #@sdpmItem("服务期限")
+                #@sdpmItem("服务期限" "*")
                     #@tinyDateInput(
-                        "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
-                        "日期不能为空","placeholder":""})#end
+                        "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
+                        "日期不能为空","placeholder":"请输入日期"})#end
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("创建人")
-                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                    #tinyInput("text" "创建时间" ""{"datatype":"","id":"sla_created_by","class":"input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("创建时间")
                     #@tinyDateInput(
-                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                        "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+                        "birthday" "" "YYYY-MM-DD" {"style":"width:200px","id":"sla_create_date","datatype":
+                        "*","nullmsg":"日期不能为空","placeholder":""})#end
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("批准人")
-                    #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                    #tinyInput("text" "批准人" ""{"datatype":"","id":"sla_reviewed_by","class":"input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("批准时间")
                     #@tinyDateInput(
-                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                        "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+                        "birthday" "" "YYYY-MM-DD" {"style":"width:200px","id":"sla_review_date","datatype":
+                        "*","nullmsg":
+                        "日期不能为空","placeholder":""})#end
                 #end
             #end
             #@elementItem()
                 <div class="col-12">
-                    <div class="col-2 text-r"><label>协议内容：</label></div>
+                    <div class="col-2 text-r"><label>协议表述：</label></div>
 
                     <div class="col-9">
-                        #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+                        #@Teditor("sla_spec" "content" {"initialFrameHeight":"150"})Say something#end</div>
                 </div>
             #end
         </div>
@@ -146,7 +163,7 @@
                     <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
                 </div>
                 <div class="col-1">
-                    <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
+                    #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
                 </div>
                 <div class="col-5"></div>
             </div>

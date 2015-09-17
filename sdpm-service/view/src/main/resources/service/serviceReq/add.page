@@ -39,7 +39,7 @@
             #end
         #end
         #@elementItem()
-            #@sdpmItem("请求类型")
+            #@sdpmItem("请求类型" "*")
                 #@Tselect2F()
                     #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("1")请选择#end
@@ -51,7 +51,7 @@
             #end
         #end
         #@elementItem()
-            #@sdpmItem("请求优先级")
+            #@sdpmItem("请求优先级" "*")
                 #@Tselect2F()
                     #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("1")请选择#end
@@ -75,25 +75,8 @@
             #end
         #end
 
-
-
-
-
-
         #@elementItem()
-            #@sdpmItem("请求标题")
-                #tinyInput(
-                    "text" "username" ""{"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":"username",
-                    "class":"input-text"})
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("请求描述")
-                #@tinyueditor("contents" "contents""min-height:150px")#end
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("客户名称")
+            #@sdpmItem("客户名称" "*")
                 #@Tselect2F()
                     #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("1")请选择#end
@@ -105,7 +88,7 @@
             #end
         #end
         #@elementItem()
-            #@sdpmItem("客户联系人")
+            #@sdpmItem("客户联系人" "*")
                 #@Tselect2F()
                     #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("ch")请选择#end
@@ -114,14 +97,43 @@
                         #@tinyOptionItem("ta")联系人三#end
                     #end
                     #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/companyInfoEdit2.page" class="r ">增加</a>
-                            #end
+                    #end
                 #end
             #end
         #end
 
+        #@elementItem()
+            #@sdpmItem("请求标题" "*")
+                #tinyInput(
+                    "text" "request_title" ""{"placeholder":"请输入请求标题","datatype":"*","nullmsg":"请求标题不能为空！","id":
+                    "request_title",
+                    "class":"input-text"})
+            #end
+        #end
 
         #@elementItem()
-            #@sdpmItem("请求提交时间")
+            <div class="col-12">
+                <div class="col-2 text-r"><label>请求描述：</label></div>
+                <div class="col-9">
+                    #@Teditor("content" "content" {"initialFrameHeight":"280"})Say something#end</div>
+            </div>
+        #end
+        #@elementItem()
+            #@sdpmItem("请求状态" "*")
+                #@Tselect2F()
+                    #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("1")请选择#end
+                        #@tinyOptionItem("2")新建#end
+                        #@tinyOptionItem("3")待回访#end
+                        #@tinyOptionItem("4")已回访#end
+                        #@tinyOptionItem("5")被拒绝#end
+                        #@tinyOptionItem("6")处理中#end
+                    #end
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("请求提交时间" "*")
                 #@tinyDateInput(
                     "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
                     "日期不能为空"})#end
@@ -130,8 +142,7 @@
         #@elementItem()
             #@sdpmItem("请求承诺回复时间")
                 #@tinyDateInput(
-                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
-                    "日期不能为空"})#end
+                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":""})#end
             #end
         #end
 

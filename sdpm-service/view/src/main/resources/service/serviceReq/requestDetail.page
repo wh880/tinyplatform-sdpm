@@ -26,7 +26,7 @@
             <p class="titleName">编辑</p>
 
             #@elementItem()
-                #@sdpmItem("产品ID")
+                #@sdpmItem("产品ID" "*")
                     #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
                         #@tinyOptionItem("zh")产品1#end
                         #@tinyOptionItem("en")产品2#end
@@ -35,15 +35,16 @@
                 #end
             #end
             #@elementItem()
-                #@sdpmItem("客户ID")
+                #@sdpmItem("客户ID" "*")
 
-                    #tinyInput("text" "客户ID" ""{"datatype":"","id":"客户 ID","class":"input-text"})
+                    #tinyInput("text" "客户ID" ""{"datatype":"/^[0-9\.]/","id":"client_ID","class":"input-text","nullmsg":
+                        "客户ID不能为空"})
 
                 #end
                 #@validateDiv("col-2")#end
             #end
             #@elementItem()
-                #@sdpmItem("请求级别")
+                #@sdpmItem("请求优先级" "*")
                     #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
                         #@tinyOptionItem("zh")请求级别1#end
                         #@tinyOptionItem("en")请求级别2#end
@@ -53,7 +54,7 @@
             #end
 
             #@elementItem()
-                #@sdpmItem("请求分类")
+                #@sdpmItem("请求分类" "*")
                     #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
                         #@tinyOptionItem("zh")请求分类1#end
                         #@tinyOptionItem("en")请求分类2#end
@@ -71,9 +72,9 @@
                 #@validateDiv("col-2")#end
             #end
             #@elementItem()
-                #@sdpmItem("请求标题 ")
+                #@sdpmItem("请求标题 " "*")
 
-                    #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
+                    #tinyInput("text" "请求标题" ""{"datatype":"","id":"request_title","class":"input-text"})
                 #end
                 #@validateDiv("col-2")#end
             #end

@@ -16,70 +16,110 @@
 #end
 
 
-#@tinyForm("thisform" "url" "post" {"class":""})
-<div style="width:70%;margin-left: 200px" class="pageleftpart">
+#@tinyForm("thisform" "" "" {"class":"test"})
+<div style="width:70%;margin-left: 200px;" class="pageleftpart">
     <div class="infoContent">
-        <p class="titleName">编辑</p>
+        <p class="titleName">请求变更</p>
 
         #@elementItem()
-            #@sdpmItem("产品ID")
-                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                    #@tinyOptionItem("zh")产品1#end
-                    #@tinyOptionItem("en")产品2#end
-                    #@tinyOptionItem("ta")产品3#end
+            #@sdpmItem("产品名称" "*")
+                #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("ch")请选择#end
+                        #@tinyOptionItem("zh")产品一#end
+                        #@tinyOptionItem("en")产品二#end
+                        #@tinyOptionItem("ta")产品三#end
+                    #end
+                ##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/sla/slaAdd.page" class="r ">增加</a><a
+                ##                            href="${TINY_CONTEXT_PATH}/service/sla/sla.page">全部</a>#end
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("请求类型" "*")
+                #@Tselect2F()
+                    #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("1")请选择#end
+                        #@tinyOptionItem("2")类型一#end
+                        #@tinyOptionItem("3")类型二#end
+                        #@tinyOptionItem("4")类型三#end
+                    #end
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("请求优先级" "*")
+                #@Tselect2F()
+                    #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("1")请选择#end
+                        #@tinyOptionItem("2")1#end
+                        #@tinyOptionItem("3")2#end
+                        #@tinyOptionItem("4")3#end
+                    #end
                 #end
             #end
         #end
 
+
+
+
+
+
         #@elementItem()
-            #@sdpmItem("客户ID")
-
-                #tinyInput("text" "客户ID" ""{"datatype":"","id":"客户 ID","class":"input-text"})
-
+            #@sdpmItem("请求标题" "*")
+                #tinyInput(
+                    "text" "username" ""{"placeholder":"请输入请求标题","datatype":"*","nullmsg":"请求标题不能为空！","id":
+                    "request_title",
+                    "class":"input-text"})
             #end
-            #@validateDiv("col-2")#end
+        #end
+
+        #@elementItem()
+            #@sdpmItem("客户名称" "*")
+                #@Tselect2F()
+                    #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("1")请选择#end
+                        #@tinyOptionItem("2")客户一#end
+                        #@tinyOptionItem("3")客户二#end
+                        #@tinyOptionItem("4")客户三#end
+                    #end
+                #end
+            #end
         #end
         #@elementItem()
-            #@sdpmItem("请求级别")
-                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                    #@tinyOptionItem("zh")请求级别1#end
-                    #@tinyOptionItem("en")请求级别2#end
-                    #@tinyOptionItem("ta")请求级别3#end
+            #@sdpmItem("客户联系人" "*")
+                #@Tselect2F()
+                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("ch")请选择#end
+                        #@tinyOptionItem("zh")联系人一#end
+                        #@tinyOptionItem("en")联系人二#end
+                        #@tinyOptionItem("ta")联系人三#end
+                    #end
+                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/companyInfoEdit2.page" class="r ">增加</a>
+                    #end
                 #end
             #end
         #end
 
-        #@elementItem()
-            #@sdpmItem("请求分类")
-                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                    #@tinyOptionItem("zh")请求分类1#end
-                    #@tinyOptionItem("en")请求分类2#end
-                    #@tinyOptionItem("ta")请求分类3#end
-                #end
-            #end
-        #end
 
         #@elementItem()
-            #@sdpmItem("请求期限")
+            #@sdpmItem("请求提交时间" "*")
                 #@tinyDateInput(
-                    "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                    "日期不能为空","placeholder":""})#end
+                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
+                    "日期不能为空"})#end
             #end
-            #@validateDiv("col-2")#end
         #end
-
         #@elementItem()
-            #@sdpmItem("请求标题 ")
-
-                #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
+            #@sdpmItem("请求承诺回复时间")
+                #@tinyDateInput(
+                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":""})#end
             #end
-            #@validateDiv("col-2")#end
         #end
 
         #@elementItem()
 
             <div class="col-12">
-                <div class="col-2 text-r"><label>请求表述：</label></div>
+                <div class="col-2 text-r"><label>请求描述：</label></div>
 
                 <div class="col-9">
                     #@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end</div>
@@ -87,81 +127,11 @@
             #@validateDiv("col-2")#end
         #end
 
-
-        #@elementItem()
-            #@colLabel()解决时间：#end
-            #@formControlDiv("col-8")
-                #@tinyDateInput(
-                    "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                    "日期不能为空","placeholder":""})#end
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@sdpmItem("解决人员")
-                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                    #@tinyOptionItem("zh")张三#end
-                    #@tinyOptionItem("en")李四#end
-                    #@tinyOptionItem("ta")王五#end
-                #end
-            #end
-        #end
-
-        #@elementItem()
-            <div class="col-12">
-                <div class="col-2 text-r"><label>解决方案：</label></div>
-
-                <div class="col-9">
-                    #@Teditor("content2" "content2" {"initialFrameHeight":"150"})Say something#end</div>
-            </div>
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()回访时间：#end
-            #@formControlDiv("col-8")
-                #@tinyDateInput(
-                    "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                    "日期不能为空","placeholder":""})#end
-            #end
-            #@validateDiv("col-2")#end
-        #end
-
-        #@elementItem()
-            #@sdpmItem("回访人员")
-                #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="IN">请选择</option>
-                        <option value="CT">张三</option>
-                        <option value="DE">李四</option>
-                    #end
-                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a><a
-                            href="#">全部</a>#end
-                #end
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("客户满意")
-                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                    #@tinyOptionItem("zh")非常满意#end
-                    #@tinyOptionItem("zh")满意#end
-                    #@tinyOptionItem("zh")一般#end
-                    #@tinyOptionItem("en")不满意#end
-                    #@tinyOptionItem("ta")非常不满意#end
-                #end
-            #end
-        #end
-        #@elementItem()
-            <div class="col-12">
-                <div class="col-2 text-r"><label>回访记录：</label></div>
-
-                <div class="col-9">
-                    #@Teditor("content3" "content3" {"initialFrameHeight":"150"})Say something#end</div>
-            </div>
-            #@validateDiv("col-2")#end
-        #end
+        <br/>
     </div>
+##           /*************保存
     #@elementItem()
-        <div class="col-12" style="margin-left: 200px">
+        <div class="col-12">
             <div class="col-5">
 
             </div>
@@ -174,8 +144,171 @@
             <div class="col-5"></div>
         </div>
     #end
+    <br>
 </div>
+
 #end
+
+###@tinyForm("thisform" "url" "post" {"class":""})
+##<div style="width:70%;margin-left: 200px" class="pageleftpart">
+##    <div class="infoContent">
+##        <p class="titleName">编辑</p>
+##
+##        #@elementItem()
+##            #@sdpmItem("产品ID")
+##                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+##                    #@tinyOptionItem("zh")产品1#end
+##                    #@tinyOptionItem("en")产品2#end
+##                    #@tinyOptionItem("ta")产品3#end
+##                #end
+##            #end
+##        #end
+##
+##        #@elementItem()
+##            #@sdpmItem("客户ID")
+##
+##                #tinyInput("text" "客户ID" ""{"datatype":"","id":"客户 ID","class":"input-text"})
+##
+##            #end
+##            #@validateDiv("col-2")#end
+##        #end
+##        #@elementItem()
+##            #@sdpmItem("请求级别")
+##                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+##                    #@tinyOptionItem("zh")请求级别1#end
+##                    #@tinyOptionItem("en")请求级别2#end
+##                    #@tinyOptionItem("ta")请求级别3#end
+##                #end
+##            #end
+##        #end
+##
+##        #@elementItem()
+##            #@sdpmItem("请求分类")
+##                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+##                    #@tinyOptionItem("zh")请求分类1#end
+##                    #@tinyOptionItem("en")请求分类2#end
+##                    #@tinyOptionItem("ta")请求分类3#end
+##                #end
+##            #end
+##        #end
+##
+##        #@elementItem()
+##            #@sdpmItem("请求期限")
+##                #@tinyDateInput(
+##                    "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
+##                    "日期不能为空","placeholder":""})#end
+##            #end
+##            #@validateDiv("col-2")#end
+##        #end
+##
+##        #@elementItem()
+##            #@sdpmItem("请求标题 ")
+##
+##                #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
+##            #end
+##            #@validateDiv("col-2")#end
+##        #end
+##
+##        #@elementItem()
+##
+##            <div class="col-12">
+##                <div class="col-2 text-r"><label>请求表述：</label></div>
+##
+##                <div class="col-9">
+##                    #@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end</div>
+##            </div>
+##            #@validateDiv("col-2")#end
+##        #end
+##
+##
+##        #@elementItem()
+##            #@colLabel()解决时间：#end
+##            #@formControlDiv("col-8")
+##                #@tinyDateInput(
+##                    "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
+##                    "日期不能为空","placeholder":""})#end
+##            #end
+##            #@validateDiv("col-2")#end
+##        #end
+##        #@elementItem()
+##            #@sdpmItem("解决人员")
+##                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+##                    #@tinyOptionItem("zh")张三#end
+##                    #@tinyOptionItem("en")李四#end
+##                    #@tinyOptionItem("ta")王五#end
+##                #end
+##            #end
+##        #end
+##
+##        #@elementItem()
+##            <div class="col-12">
+##                <div class="col-2 text-r"><label>解决方案：</label></div>
+##
+##                <div class="col-9">
+##                    #@Teditor("content2" "content2" {"initialFrameHeight":"150"})Say something#end</div>
+##            </div>
+##            #@validateDiv("col-2")#end
+##        #end
+##        #@elementItem()
+##            #@colLabel()回访时间：#end
+##            #@formControlDiv("col-8")
+##                #@tinyDateInput(
+##                    "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
+##                    "日期不能为空","placeholder":""})#end
+##            #end
+##            #@validateDiv("col-2")#end
+##        #end
+##
+##        #@elementItem()
+##            #@sdpmItem("回访人员")
+##                #@Tselect2F()
+##                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+##                        <option value="IN">请选择</option>
+##                        <option value="CT">张三</option>
+##                        <option value="DE">李四</option>
+##                    #end
+##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a><a
+##                            href="#">全部</a>#end
+##                #end
+##            #end
+##        #end
+##        #@elementItem()
+##            #@sdpmItem("客户满意")
+##                #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
+##                    #@tinyOptionItem("zh")非常满意#end
+##                    #@tinyOptionItem("zh")满意#end
+##                    #@tinyOptionItem("zh")一般#end
+##                    #@tinyOptionItem("en")不满意#end
+##                    #@tinyOptionItem("ta")非常不满意#end
+##                #end
+##            #end
+##        #end
+##        #@elementItem()
+##            <div class="col-12">
+##                <div class="col-2 text-r"><label>回访记录：</label></div>
+##
+##                <div class="col-9">
+##                    #@Teditor("content3" "content3" {"initialFrameHeight":"150"})Say something#end</div>
+##            </div>
+##            #@validateDiv("col-2")#end
+##        #end
+##    </div>
+##    #@elementItem()
+##        <div class="col-12" style="margin-left: 200px">
+##            <div class="col-5">
+##
+##            </div>
+##            <div class="col-1">
+##                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+##            </div>
+##            <div class="col-1">
+##                <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
+##            </div>
+##            <div class="col-5"></div>
+##        </div>
+##    #end
+##</div>
+###end
 
 
 

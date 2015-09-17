@@ -1,0 +1,81 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#!set(activeTitle="客户管理",activeMenuId=currentPageId)
+#set(name="request")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox dropdownBoxes")
+            #include("/service/serviceCom/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/service/serviceCom/tab.page")
+        #end
+        #@div()
+            #@tinyForm("thisform" "url" "post" {"class":""})
+
+            <div style="width:70%;margin-left: 200px" class="pageleftpart">
+                <div class="infoContent">
+                    <p class="titleName">回复</p>
+                    #@elementItem()
+                        #@sdpmItem("请求标题" "*")
+                            #tinyInput(
+                                "text" "username" ""{"placeholder":"请求标题","datatype":"*","nullmsg":"请求标题不能为空！","id":
+                                "request_title",
+                                "class":"input-text"})
+                        #end
+                    #end
+                    #@elementItem()
+
+                        <div class="col-12">
+                            <div class="col-2 text-r"><label>请求描述：</label></div>
+
+                            <div class="col-9">
+                                #@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end</div>
+                        </div>
+                        #@validateDiv("col-2")#end
+                    #end
+
+                    #@elementItem()
+
+                        <div class="col-12">
+                            <div class="col-2 text-r"><label>回复描述：</label></div>
+
+                            <div class="col-9">
+                                #@Teditor("content2" "content2" {"initialFrameHeight":"150"})Say something#end</div>
+                        </div>
+                        #@validateDiv("col-2")#end
+                    #end
+                    #@elementItem()
+
+                        #@sdpmItem("回复处理时间")
+                            #@tinyDateInput(
+                                "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
+                                "日期不能为空"})#end
+                        #end
+                        #@validateDiv("col-2")#end
+
+                    #end
+
+
+                </div>
+                #@elementItem()
+                    <div class="col-12" style="margin-left: 200px">
+                        <div class="col-5">
+
+                        </div>
+                        <div class="col-1">
+                            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                        </div>
+                        <div class="col-1">
+                            <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
+                        </div>
+                        <div class="col-5"></div>
+                    </div>
+                #end
+            </div>
+            #end
+        #end
+    #end
+#end
+#@simpleModal("myModal1" "导出")#end
+#@simpleModal("myModal2" "新建产品")#end
+

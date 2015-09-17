@@ -22,7 +22,7 @@
             <artifactId>sdpm-org-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-system-view</artifactId>
             <version>${tiny_sdpm_version}</version>
@@ -66,6 +66,34 @@
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-statistic-view</artifactId>
             <version>${tiny_sdpm_version}</version>
+        </dependency>
+
+        <!--spring版本-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.springutil</artifactId>
+            <version>${tiny_version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.tinygroup</groupId>
+                    <artifactId>org.tinygroup.spring256</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.tinygroup</groupId>
+                    <artifactId>org.tinygroup.spring305</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.spring421</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+        <!--引入SpringMVC-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.springmvc</artifactId>
+            <version>${tiny_version}</version>
         </dependency>
 
         <dependency>

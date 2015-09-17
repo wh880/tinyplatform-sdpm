@@ -1,5 +1,5 @@
-<tables id="8b05439ef4c84a2b974399388b2db1b1" package-name="org.tinygroup.alm.product">
-  <table id="9dd8acaf96f84f378c25b2be31d7d4b6" name="plan" title="计划表" schema="" package-name="org.tinygroup.alm.product">
+<tables id="8b05439ef4c84a2b974399388b2db1b1" package-name="">
+  <table id="9dd8acaf96f84f378c25b2be31d7d4b6" name="plan" title="计划表" schema="" package-name="">
     <table-field standard-field-id="1ac76197c3214536851e8d3f6d04a619" primary="true" unique="true" not-null="true" id="plan_id" auto-increase="true"/>
     <table-field standard-field-id="2f31dbd7abc04051a071e456a4bcd85e" primary="false" unique="false" not-null="true" id="company_id" auto-increase="false"/>
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="true" id="product_id" auto-increase="false"/>
@@ -7,9 +7,9 @@
     <table-field standard-field-id="cee967be10a94edead46bb9a3052a062" primary="false" unique="false" not-null="false" id="plan_spec" auto-increase="false"/>
     <table-field standard-field-id="e0722a6a05ab4b3a8875fa8aaf6c0386" primary="false" unique="false" not-null="false" id="plan_beginDate" auto-increase="false"/>
     <table-field standard-field-id="32ed57583f5643cf86baaca014e19502" primary="false" unique="false" not-null="false" id="plan_endDate" auto-increase="false"/>
-    <table-field standard-field-id="49ec26b28400415f8832cedf503aeaa9" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
+    <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
   </table>
-  <table id="972c8ec0370845668750ba23036e16ef" name="product" title="产品表" package-name="org.tinygroup.alm.product">
+  <table id="972c8ec0370845668750ba23036e16ef" name="product" title="产品表" package-name="">
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="true" unique="true" not-null="true" id="product_id" auto-increase="true"/>
     <table-field standard-field-id="2f31dbd7abc04051a071e456a4bcd85e" primary="false" unique="false" not-null="true" id="company_id" auto-increase="false"/>
     <table-field standard-field-id="212dcf30304b410c9c21ad1b77d5ab01" primary="false" unique="false" not-null="false" id="dept_id" auto-increase="false"/>
@@ -27,34 +27,15 @@
     <table-field standard-field-id="c7e8356f9bea4a26801fcc5bc3eddbff" primary="false" unique="false" not-null="true" id="product_createdBy" auto-increase="false"/>
     <table-field standard-field-id="c97bbba549674da3bf7688b351ed34b9" primary="false" unique="false" not-null="true" id="product_createdDate" auto-increase="false"/>
     <table-field standard-field-id="b9c09ba271a74c9d991fbb38373025c2" primary="false" unique="false" not-null="true" id="product_createdVersion" auto-increase="false"/>
-    <table-field standard-field-id="49ec26b28400415f8832cedf503aeaa9" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
+    <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
   </table>
-  <table id="91d93e9afc534e8b8469eb2c408a7f2e" name="productLine" title="产品线表" package-name="org.tinygroup.alm.product">
-    <table-field standard-field-id="ad2df857db7641fd8247d8a24baa69f8" primary="true" unique="true" not-null="true" id="productLine_id" auto-increase="true"/>
-    <table-field standard-field-id="2f31dbd7abc04051a071e456a4bcd85e" primary="false" unique="false" not-null="true" id="company_id" auto-increase="false"/>
-    <table-field standard-field-id="212dcf30304b410c9c21ad1b77d5ab01" primary="false" unique="false" not-null="true" id="dept_id" auto-increase="false"/>
-    <table-field standard-field-id="fcff1578dca64cfc9320e08689eb970d" primary="false" unique="false" not-null="true" id="productLine_root" auto-increase="false"/>
-    <table-field standard-field-id="c2d02b77d3804d64b41de5c45045e1db" primary="false" unique="false" not-null="false" id="productLine_parent" auto-increase="false"/>
-    <table-field standard-field-id="c3750e6c13b74e75a173d9c728439dc8" primary="false" unique="false" not-null="true" id="productLine_name" auto-increase="false"/>
-    <table-field standard-field-id="c1035c0e396040b19780a0baf1091d14" primary="false" unique="false" not-null="true" id="productLine_code" auto-increase="false"/>
-    <table-field standard-field-id="1c7c14de7eb5457a8a6fe6181fc489b4" primary="false" unique="false" not-null="false" id="productLine_order" auto-increase="false"/>
-    <table-field standard-field-id="bd69a13b7e85463c9ea1e7a480860c45" primary="false" unique="false" not-null="false" id="productLine_spec" auto-increase="false"/>
-    <table-field standard-field-id="743ea2aceba546a4a517f8fc7961c652" primary="false" unique="false" not-null="true" id="productLine_status" auto-increase="false"/>
-    <table-field standard-field-id="490f688faf6447aca072dee1fbe36a55" primary="false" unique="false" not-null="false" id="productLine_owner" auto-increase="false"/>
-    <table-field standard-field-id="97ced3c198934553b015803eeca42397" primary="false" unique="false" not-null="false" id="productLine_quality_manager" auto-increase="false"/>
-    <table-field standard-field-id="4797e2f35e4d4eebb0a0a88991cbbe91" primary="false" unique="false" not-null="false" id="productLine_delivery_manager" auto-increase="false"/>
-    <table-field standard-field-id="7639fb33a77048fe973bfd0203430c15" primary="false" unique="false" not-null="true" id="acl" auto-increase="false"/>
-    <table-field standard-field-id="b23469decc5745288b84d5c4a82ece21" primary="false" unique="false" not-null="false" id="productLine_whiteList" auto-increase="false"/>
-    <table-field standard-field-id="5a4261249df645a5aa5afa7cf79cc9df" primary="false" unique="false" not-null="true" id="productLine_createdBy" auto-increase="false"/>
-    <table-field standard-field-id="ce868ce3764c40e68e9bd148b492db19" primary="false" unique="false" not-null="true" id="productLine_createdDate" auto-increase="false"/>
-    <table-field standard-field-id="49ec26b28400415f8832cedf503aeaa9" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
-  </table>
-  <table id="16f7307880c149aa89b5f3dc7cc18dcc" name="story" title="需求表" package-name="org.tinygroup.alm.product">
+  
+  <table id="16f7307880c149aa89b5f3dc7cc18dcc" name="story" title="需求表" package-name="">
     <table-field standard-field-id="2db31fc4492c400bba36a758c0df2611" primary="true" unique="true" not-null="true" id="story_id" auto-increase="true"/>
     <table-field standard-field-id="2f31dbd7abc04051a071e456a4bcd85e" primary="false" unique="false" not-null="true" id="company_id" auto-increase="false"/>
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="true" id="product_id" auto-increase="false"/>
     <table-field standard-field-id="8296a6e150d147c1a13a8dae13529ca9" primary="false" unique="false" not-null="false" id="story_parentId" auto-increase="false"/>
-    <table-field standard-field-id="6118120deb974eb2b62b9b3c6da7d3fb" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
+    <table-field standard-field-id="32fc494251074a329bdfa8b6600ce738" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
     <table-field standard-field-id="1ac76197c3214536851e8d3f6d04a619" primary="false" unique="false" not-null="false" id="plan_id" auto-increase="false"/>
     <table-field standard-field-id="eb01c1b4f1694e288223c34e1689a645" primary="false" unique="false" not-null="true" id="story_status" auto-increase="false"/>
     <table-field standard-field-id="2b324902ce2f41c9b3c1d9ec7003c6eb" primary="false" unique="false" not-null="false" id="story_source" auto-increase="false"/>
@@ -77,26 +58,24 @@
     <table-field standard-field-id="483157638d7b4debba3bb0bec922a422" primary="false" unique="false" not-null="false" id="story_closedBy" auto-increase="false"/>
     <table-field standard-field-id="52df67f6d8a7421ca72f92fcb10f54c2" primary="false" unique="false" not-null="false" id="story_closedDate" auto-increase="false"/>
     <table-field standard-field-id="7e0fe0a11ddd4c83a552888e8c237df5" primary="false" unique="false" not-null="false" id="story_closedReason" auto-increase="false"/>
-    <table-field standard-field-id="91b0fcc3f4ec4832973ecf8c81d343df" primary="false" unique="false" not-null="false" id="story_toBug" auto-increase="false"/>
+    <table-field standard-field-id="91b0fcc3f4ec4832973ecf8c81d343df" primary="false" unique="false" not-null="false" id="toBug" auto-increase="false"/>
     <table-field standard-field-id="a78a83818ec4495e9196cca5c87fe180" primary="false" unique="false" not-null="false" id="story_linkStories" auto-increase="false"/>
     <table-field standard-field-id="416eed1e560e4931b980bc0569f35669" primary="false" unique="false" not-null="false" id="story_childStories" auto-increase="false"/>
     <table-field standard-field-id="6c0b15cffa8c40f587969376f8b2194b" primary="false" unique="false" not-null="false" id="story_duplicateStory" auto-increase="false"/>
-    <table-field standard-field-id="d530b2f878d94725b0de97aa83fe6012" primary="false" unique="false" not-null="true" id="story_version" auto-increase="false"/>
+    <table-field standard-field-id="d530b2f878d94725b0de97aa83fe6012" primary="false" unique="false" not-null="false" id="story_version" auto-increase="false"/>
     <table-field standard-field-id="70e17a8d372a492b9452bbc0ea5e145d" primary="false" unique="false" not-null="false" id="bug_id" auto-increase="false"/>
     <table-field standard-field-id="7d045d07a379467799bb865c513acad8" primary="false" unique="false" not-null="false" id="request_id" auto-increase="false"/>
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
   </table>
-  <table id="58b2365c896646dc8d04b5539f40cd67" name="storySpec" title="需求表述表" package-name="org.tinygroup.alm.product">
-    <table-field standard-field-id="53806a8e2b9943d8bfbbb0853c893b6b" primary="true" unique="true" not-null="true" id="storySpec_id" auto-increase="true"/>
+  <table id="58b2365c896646dc8d04b5539f40cd67" name="storySpec" title="需求表述表" package-name="">
     <table-field standard-field-id="2f31dbd7abc04051a071e456a4bcd85e" primary="false" unique="false" not-null="true" id="company_id" auto-increase="false"/>
     <table-field standard-field-id="2db31fc4492c400bba36a758c0df2611" primary="false" unique="false" not-null="true" id="story_id" auto-increase="false"/>
     <table-field standard-field-id="d530b2f878d94725b0de97aa83fe6012" primary="false" unique="false" not-null="true" id="story_version" auto-increase="false"/>
     <table-field standard-field-id="b82777e73fcd488cb571f5d5671558d4" primary="false" unique="false" not-null="true" id="story_title" auto-increase="false"/>
     <table-field standard-field-id="ba346a40ad5f492ca7cff6c724600df9" primary="false" unique="false" not-null="true" id="story_spec" auto-increase="false"/>
     <table-field standard-field-id="196dbdfea33c43649227901605968e7c" primary="false" unique="false" not-null="false" id="story_verification" auto-increase="false"/>
-    <table-field standard-field-id="49ec26b28400415f8832cedf503aeaa9" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
   </table>
-  <table id="c837f18a2be346d18dc1e5213181b212" name="release" title="发布表" package-name="org.tinygroup.alm.product">
+  <table id="c837f18a2be346d18dc1e5213181b212" name="release" title="发布表" package-name="">
     <table-field standard-field-id="fcd9ccc8418d40bf94a7caa53175ef4c" primary="true" unique="true" not-null="true" id="release_id" auto-increase="false"/>
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
     <table-field standard-field-id="d375c0a459c0490d840add34075e27f5" primary="false" unique="false" not-null="false" id="build_id" auto-increase="false"/>
@@ -105,6 +84,7 @@
     <table-field standard-field-id="bf293158656146ceb9d5ad2ff8a35d84" primary="false" unique="false" not-null="false" id="release_stories" auto-increase="false"/>
     <table-field standard-field-id="5bc3d632bf8444de9d1ac8a851ddbdd0" primary="false" unique="false" not-null="false" id="release_bugs" auto-increase="false"/>
     <table-field standard-field-id="fa9c452cfb5944288f43e0ca22d78a34" primary="false" unique="false" not-null="false" id="release_desc" auto-increase="false"/>
-    <table-field standard-field-id="49ec26b28400415f8832cedf503aeaa9" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
+    <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
   </table>
+  
 </tables>

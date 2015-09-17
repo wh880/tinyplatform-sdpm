@@ -20,6 +20,7 @@
        <artifactId>sdpm-product-base-dao</artifactId>
         <version>${tiny_sdpm_version}</version>
     </dependency>
+   
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

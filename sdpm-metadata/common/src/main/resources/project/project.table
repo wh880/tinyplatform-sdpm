@@ -1,0 +1,143 @@
+<tables id="dd14ed2a3efc4eaa8831ba02c3f3aa2e" package-name="org.tinygroup.alm.project">
+  <table id="cbcedea659a442ef88eca868880f9667" name="project" title="项目" schema="" package-name="">
+    <description></description>
+    <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="true" unique="true" not-null="true" id="project_id" auto-increase="true"/>
+    <table-field standard-field-id="f7474ba7379f4d9fbd44e6feffa2c70e" primary="false" unique="false" not-null="true" id="project_is_cat" auto-increase="false"/>
+    <table-field standard-field-id="bd3dcef09ad646e19196aea417b47baa" primary="false" unique="false" not-null="true" id="project_cat_id" auto-increase="false"/>
+    <table-field standard-field-id="e5d28aec72b24c58ac03fc7dfbaff40f" primary="false" unique="false" not-null="true" id="project_type" auto-increase="false"/>
+    <table-field standard-field-id="c4604e5a5f7a49e8906ec39c7c1489e2" primary="false" unique="false" not-null="true" id="project_name" auto-increase="false"/>
+    <table-field standard-field-id="5cafe4cc5fab4097a8c488b96b69b5f6" primary="false" unique="false" not-null="true" id="project_code" auto-increase="false"/>
+    <table-field standard-field-id="eb64fc3731a74e6b83fbd21e04d9c2c8" primary="false" unique="false" not-null="true" id="project_begin" auto-increase="false"/>
+    <table-field standard-field-id="b60537fc2b034196958ac32b0d598bd5" primary="false" unique="false" not-null="true" id="project_end" auto-increase="false"/>
+    <table-field standard-field-id="d3bdb7016bcf4199aa9ba4a6f8c58b8f" primary="false" unique="false" not-null="true" id="project_days" auto-increase="false"/>
+    <table-field standard-field-id="c3f62efdcb7a47abb9d9b9f2571f5e64" primary="false" unique="false" not-null="true" id="project_status" auto-increase="false"/>
+    <table-field standard-field-id="0a23fb9850164fa9b731b667c85ec3ec" primary="false" unique="false" not-null="false" id="project_statge" auto-increase="false"/>
+    <table-field standard-field-id="843cdf91c0f04a4e9ae683a4bd24c8b8" primary="false" unique="false" not-null="true" id="project_pri" auto-increase="false"/>
+    <table-field standard-field-id="461b1811ad134b999c75ec8798cc6fae" primary="false" unique="false" not-null="true" id="project_desc" auto-increase="false"/>
+    <table-field standard-field-id="36792f6411a24677b9a4c71ae93a56c1" primary="false" unique="false" not-null="true" id="project_opened_by" auto-increase="false"/>
+    <table-field standard-field-id="4ab479c04eab40558aefdeeffa72cae7" primary="false" unique="false" not-null="true" id="project_opened_date" auto-increase="false"/>
+    <table-field standard-field-id="bc23d6469923416aa689fa5f28da6a3f" primary="false" unique="false" not-null="true" id="project_opened_version" auto-increase="false"/>
+    <table-field standard-field-id="47699dc5285e4a5fb0768bbd5457b5d1" primary="false" unique="false" not-null="true" id="project_close_by" auto-increase="false"/>
+    <table-field standard-field-id="2c89172a50054d1495789ff49ed9b0e1" primary="false" unique="false" not-null="false" id="project_close_date" auto-increase="false"/>
+    <table-field standard-field-id="c1b67b7db4674da8a314bf02239ed35f" primary="false" unique="false" not-null="true" id="project_canceled_by" auto-increase="false"/>
+    <table-field standard-field-id="24dca11728884b14bd9be06764b46426" primary="false" unique="false" not-null="true" id="project_canceled_date" auto-increase="false"/>
+    <table-field standard-field-id="b8f47ec967ba40b8b33e8deb5ec37fc8" primary="false" unique="false" not-null="true" id="project_PO" auto-increase="false"/>
+    <table-field standard-field-id="9cf8e03af53c48378961f3f5a84348ae" primary="false" unique="false" not-null="true" id="project_PM" auto-increase="false"/>
+    <table-field standard-field-id="05e4444c3a0b40e398fff266f48eba84" primary="false" unique="false" not-null="true" id="project_QD" auto-increase="false"/>
+    <table-field standard-field-id="7eff7598a0f14505a4e7a54a8a146a36" primary="false" unique="false" not-null="true" id="project_RD" auto-increase="false"/>
+    <table-field standard-field-id="24ab9c69d3f64babbfc9a345d0cac3eb" primary="false" unique="false" not-null="true" id="project_team" auto-increase="false"/>
+    <table-field standard-field-id="779f3ff51d8444c88cfb9542ad85060a" primary="false" unique="false" not-null="true" id="project_acl" auto-increase="false"/>
+    <table-field standard-field-id="f3b59b52574b4f1e8a8e80f9d9f00c05" primary="false" unique="false" not-null="true" id="project_white_list" auto-increase="false"/>
+    <table-field standard-field-id="9628e745b2594a1b9c93c019b726d138" primary="false" unique="false" not-null="true" id="project_order" auto-increase="false"/>
+    <table-field standard-field-id="4d4103ac19d24bb2a710b2a7bb479ab8" primary="false" unique="false" not-null="true" id="project_deleted" auto-increase="false"/>
+    <index name="project" unique="false">
+      <index-field field="project_type" direction="asc"/>
+      <index-field field="project_begin" direction="asc"/>
+      <index-field field="project_end" direction="asc"/>
+      <index-field field="project_status" direction="asc"/>
+      <index-field field="project_pri" direction="asc"/>
+      <index-field field="project_statge" direction="asc"/>
+    </index>
+  </table>
+  <table id="d4d4c89595ba4df6ae02d2c70a8ced31" name="build" title="版本" package-name="">
+    <table-field standard-field-id="d375c0a459c0490d840add34075e27f5" primary="true" unique="true" not-null="true" id="version_id" auto-increase="true"/>
+    <table-field standard-field-id="c2eff8527271417b8a64e48d1e448562" primary="false" unique="false" not-null="true" id="version_product" auto-increase="false"/>
+    <table-field standard-field-id="bfbdd7d31ee44d52a0e598ec2a5435a2" primary="false" unique="false" not-null="true" id="version_project" auto-increase="false"/>
+    <table-field standard-field-id="27b1f072f029411e930cd4b6fdb804ad" primary="false" unique="false" not-null="true" id="version_name" auto-increase="false"/>
+    <table-field standard-field-id="d95ddb81995949f39760a718372669c2" primary="false" unique="false" not-null="true" id="build_scm_path" auto-increase="false"/>
+    <table-field standard-field-id="8dde271313cf4c318deed6fe090c246a" primary="false" unique="false" not-null="true" id="build_file_path" auto-increase="false"/>
+    <table-field standard-field-id="5ac4c0d6169044008a05dcc8d1610c6b" primary="false" unique="false" not-null="true" id="build_date" auto-increase="false"/>
+    <table-field standard-field-id="b33c838369a34f0ba6b0a2063fc62b59" primary="false" unique="false" not-null="true" id="build_stories" auto-increase="false"/>
+    <table-field standard-field-id="9c60fef54ff64aba8d2fb9ebb554c11e" primary="false" unique="false" not-null="true" id="build_bugs" auto-increase="false"/>
+    <table-field standard-field-id="674d345ce14c42b6a25eb283f666d882" primary="false" unique="false" not-null="true" id="build_builder" auto-increase="false"/>
+    <table-field standard-field-id="8d1c5a7ab2ce4b5384f9f0315f52db58" primary="false" unique="false" not-null="true" id="build_desc" auto-increase="false"/>
+    <table-field standard-field-id="17eedc084da5420bb4e6de6c5b152ecb" primary="false" unique="false" not-null="true" id="build_deleted" auto-increase="false"/>
+  </table>
+  <table id="dff2d0bd76b849d89140ba3c038ac673" name="task" title="任务" package-name="">
+    <table-field standard-field-id="8cd36378dabf44a99afef4d1f7e433a0" primary="true" unique="true" not-null="true" id="task_id" auto-increase="true"/>
+    <table-field standard-field-id="03ee1372ef3b480681b5aaa5032f35d7" primary="false" unique="false" not-null="true" id="task_project" auto-increase="false"/>
+    <table-field standard-field-id="dfa99c9c348b4bb6a4aef3b27bfa7bbf" primary="false" unique="false" not-null="true" id="task_story" auto-increase="false"/>
+    <table-field standard-field-id="831bc52d5d5b43f989178551619c0bf6" primary="false" unique="false" not-null="true" id="task_story_version" auto-increase="false"/>
+    <table-field standard-field-id="7421ce33884541ccb87cc2c2dd45d74c" primary="false" unique="false" not-null="true" id="task_from_bug" auto-increase="false"/>
+    <table-field standard-field-id="23aba5dca629484db6d0d7d95b905c79" primary="false" unique="false" not-null="true" id="task_name" auto-increase="false"/>
+    <table-field standard-field-id="5b511aed51c44ca79423ffc1768ea355" primary="false" unique="false" not-null="true" id="task_type" auto-increase="false"/>
+    <table-field standard-field-id="5536a2ac6a4840f896ce8625ba1b1e6f" primary="false" unique="false" not-null="true" id="task_pri" auto-increase="false"/>
+    <table-field standard-field-id="0f21714367f147e2b3cbbe0287ee58da" primary="false" unique="false" not-null="true" id="task_estimate" auto-increase="false"/>
+    <table-field standard-field-id="b8174ca90ba54768909d91760aeffc9c" primary="false" unique="false" not-null="true" id="task_consumed" auto-increase="false"/>
+    <table-field standard-field-id="eaddc6ac33814e21bf01fab77e7072c1" primary="false" unique="false" not-null="true" id="task_left" auto-increase="false"/>
+    <table-field standard-field-id="43c75930464542fc81fddfa340d85e99" primary="false" unique="false" not-null="true" id="task_dead_line" auto-increase="false"/>
+    <table-field standard-field-id="8296af574d80406bb78cfb7060b7ab86" primary="false" unique="false" not-null="true" id="task_status" auto-increase="false"/>
+    <table-field standard-field-id="88bc935554ec47818157cfa52d623e32" primary="false" unique="false" not-null="true" id="task_mailto" auto-increase="false"/>
+    <table-field standard-field-id="01ad8dc3196a472fabb2bf4fc3c2037f" primary="false" unique="false" not-null="true" id="task_desc" auto-increase="false"/>
+    <table-field standard-field-id="327d59a858cd4f4ea0ff8636a497a88e" primary="false" unique="false" not-null="true" id="task_open_by" auto-increase="false"/>
+    <table-field standard-field-id="e5ce9edecc5646e6ae6c88f196764d6d" primary="false" unique="false" not-null="true" id="task_opened_date" auto-increase="false"/>
+    <table-field standard-field-id="016289efc06c4fb59626e17d7d275234" primary="false" unique="false" not-null="true" id="task_assigned_to" auto-increase="false"/>
+    <table-field standard-field-id="668593cafe58439abd6be6483aca0c6e" primary="false" unique="false" not-null="true" id="task_assigned_date" auto-increase="false"/>
+    <table-field standard-field-id="3cfeefa0e3a84b2fb6848ea05efe6ff0" primary="false" unique="false" not-null="true" id="task_est_stared" auto-increase="false"/>
+    <table-field standard-field-id="1c9e7e4fb94241d6ad60dff7f1053451" primary="false" unique="false" not-null="true" id="task_real_started" auto-increase="false"/>
+    <table-field standard-field-id="f7a0e6a4e9c44879b960c7b778fa972e" primary="false" unique="false" not-null="true" id="task_finished_by" auto-increase="false"/>
+    <table-field standard-field-id="e458bda7278c46028b1ce52f69cac2aa" primary="false" unique="false" not-null="true" id="task_finished_date" auto-increase="false"/>
+    <table-field standard-field-id="8b9005a0f05d458f9ad9c79b850e24b8" primary="false" unique="false" not-null="true" id="task_canceled_by" auto-increase="false"/>
+    <table-field standard-field-id="da7e19c0dd0d4f3ea165fcdbb0528b0c" primary="false" unique="false" not-null="true" id="task_canceled_date" auto-increase="false"/>
+    <table-field standard-field-id="ee9117a2bd6d4faaab23bdc15efee400" primary="false" unique="false" not-null="true" id="task_closed_by" auto-increase="false"/>
+    <table-field standard-field-id="b58d2e5dc9fc48d8b690c9144fc193cb" primary="false" unique="false" not-null="true" id="task_close_date" auto-increase="false"/>
+    <table-field standard-field-id="80e60edc0ec14545a981c073db046a9f" primary="false" unique="false" not-null="true" id="task_closed_reason" auto-increase="false"/>
+    <table-field standard-field-id="e70e2c2ab35d4703a9dbec16dc1fd243" primary="false" unique="false" not-null="true" id="task_last_edited_by" auto-increase="false"/>
+    <table-field standard-field-id="f976ad5772de4ff1b45bc35652ca2f06" primary="false" unique="false" not-null="true" id="task_last_edited_date" auto-increase="false"/>
+    <table-field standard-field-id="c85de241491c4e27ba02dd4fed1059ac" primary="false" unique="false" not-null="true" id="task_deleted" auto-increase="false"/>
+    <index name="type">
+      <index-field field="task_type" direction="asc"/>
+    </index>
+  </table>
+  <table id="04fb5501200749a48166f0be707cb195" name="projectproduct" title="项目产品" package-name="">
+    <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
+    <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="false" unique="false" not-null="true" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="true" id="product_id" auto-increase="false"/>
+    <index name="project" unique="true">
+      <index-field field="project_id" direction="asc"/>
+      <index-field field="product_id" direction="asc"/>
+    </index>
+  </table>
+  <table id="3bed76082b2a4de180dcc2e86c3db4f5" name="burn" title="燃尽图" package-name="">
+    <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="true" unique="true" not-null="true" id="project_id" auto-increase="true"/>
+    <table-field standard-field-id="148e8200ce404e8eb048888f07802a55" primary="false" unique="false" not-null="true" id="burn_date" auto-increase="false"/>
+    <table-field standard-field-id="e2e5845ea87649128dcba54700676efe" primary="false" unique="false" not-null="true" id="burn_left" auto-increase="false"/>
+    <table-field standard-field-id="761f75e7f4e94abbbe82b748560c09b4" primary="false" unique="false" not-null="true" id="burn_consumed" auto-increase="false"/>
+  </table>
+  <table id="31116c442a404ee2b524ca9433c491f0" name="taskestimate" title="任务预计" package-name="">
+    <table-field standard-field-id="f74f4dc7e32d46a09dabc5c350aa1976" primary="true" unique="true" not-null="true" id="taskestimate_id" auto-increase="true"/>
+    <table-field standard-field-id="8cd36378dabf44a99afef4d1f7e433a0" primary="false" unique="false" not-null="true" id="task_id" auto-increase="false"/>
+    <table-field standard-field-id="7b7ebc694a5743f1b3db97619a3c7816" primary="false" unique="false" not-null="true" id="taskestimate_date" auto-increase="false"/>
+    <table-field standard-field-id="5f2c61e114a142089f0c9f252e0d9f12" primary="false" unique="false" not-null="true" id="taskestimate_left" auto-increase="false"/>
+    <table-field standard-field-id="7ea184732399416daa3881de2244092c" primary="false" unique="false" not-null="true" id="taskestimate_consumed" auto-increase="false"/>
+    <table-field standard-field-id="83dabbaef75d4d1fbab0d563afd3c90f" primary="false" unique="false" not-null="true" id="taskestimate_account" auto-increase="false"/>
+    <table-field standard-field-id="e24f8e6ec85e4d1899fd87dacc4082a7" primary="false" unique="false" not-null="true" id="taskestimate_work" auto-increase="false"/>
+    <index name="task">
+      <index-field field="task_id" direction="asc"/>
+    </index>
+  </table>
+  <table id="0c61b6a3d95144028c78b35383b2775e" name="projectstory" title="项目需求" package-name="">
+    <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
+    <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="false" unique="false" not-null="true" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="true" id="product_id" auto-increase="false"/>
+    <table-field standard-field-id="2db31fc4492c400bba36a758c0df2611" primary="false" unique="false" not-null="true" id="story_id" auto-increase="false"/>
+    <table-field standard-field-id="d530b2f878d94725b0de97aa83fe6012" primary="false" unique="false" not-null="true" id="story_version" auto-increase="false"/>
+    <index name="project" unique="true">
+      <index-field field="project_id" direction="asc"/>
+      <index-field field="story_id" direction="asc"/>
+    </index>
+  </table>
+  <table id="101d5e140ea341688cc789d063e88659" name="team" title="团队" package-name="">
+    <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
+    <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="false" unique="false" not-null="true" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="dcaad72616324712a1988f2743e4a0e8" primary="false" unique="false" not-null="true" id="team_account" auto-increase="false"/>
+    <table-field standard-field-id="ccae118619c147f2902feffbb66f9c77" primary="false" unique="false" not-null="true" id="team_role" auto-increase="false"/>
+    <table-field standard-field-id="bab7c0daedc34545a255b9be36aed755" primary="false" unique="false" not-null="true" id="team_join" auto-increase="false"/>
+    <table-field standard-field-id="e26d8ad4172d4f6297b5bca12dc6994b" primary="false" unique="false" not-null="true" id="team_days" auto-increase="false"/>
+    <table-field standard-field-id="53e3179919434d0fbef0818a4039f5e1" primary="false" unique="false" not-null="true" id="team_hours" auto-increase="false"/>
+    <index name="team" unique="false">
+      <index-field field="project_id" direction="asc"/>
+      <index-field field="team_account" direction="asc"/>
+    </index>
+  </table>
+</tables>

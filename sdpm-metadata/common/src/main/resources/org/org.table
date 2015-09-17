@@ -1,5 +1,5 @@
 <tables>
-  <table id="69723ac7cf9a4963b3a2a32bd97bd754" name="org_user" title="用户表" schema="" package-name="org.tinygroup.alm.org">
+  <table id="69723ac7cf9a4963b3a2a32bd97bd754" name="org_user" title="用户表" schema="" package-name="">
     <description>用户表</description>
     <table-field standard-field-id="c7d7754bfa85454993ffd049f902f1be" primary="true" unique="true" not-null="true" id="org_user_id" auto-increase="true"/>
     <table-field standard-field-id="7f7e1f2fb38a47c5b2e3b08dba7e8ce8" primary="false" unique="false" not-null="true" id="org_dept_id" auto-increase="false"/>
@@ -30,7 +30,7 @@
     <table-field standard-field-id="21b39a8b9e53419084979797eb16631b" primary="false" unique="false" not-null="true" id="org_user_locked" auto-increase="false"/>
     <table-field standard-field-id="18a1a4b3d19b4459ae2da05cc23e60c5" primary="false" unique="false" not-null="true" id="org_user_deleted" auto-increase="false"/>
   </table>
-  <table id="556509d741454b8aaf60ad5636500dea" name="org_dept" title="部门表" package-name="org.tinygroup.alm.org">
+  <table id="556509d741454b8aaf60ad5636500dea" name="org_dept" title="部门表" package-name="">
     <description>部门表 </description>
     <table-field standard-field-id="7f7e1f2fb38a47c5b2e3b08dba7e8ce8" primary="true" unique="true" not-null="true" id="org_dept_id" auto-increase="true"/>
     <table-field standard-field-id="6733cc238cea46378fa1eb9c6d03be56" primary="false" unique="false" not-null="true" id="org_dept_name" auto-increase="false"/>
@@ -41,7 +41,7 @@
     <table-field standard-field-id="9de62ab4d83a4dc2972a8ffb90b2c225" primary="false" unique="false" not-null="true" id="org_dept_position" auto-increase="false"/>
     <table-field standard-field-id="9c70d54486424630a724f8c01530d8c6" primary="false" unique="false" not-null="true" id="org_dept_manager" auto-increase="false"/>
   </table>
-  <table id="50a09faa7598459b8654ba86b6e7e5bc" name="org_companyy" title="公司表" package-name="org.tinygroup.alm.org">
+  <table id="50a09faa7598459b8654ba86b6e7e5bc" name="org_company" title="公司表" package-name="">
     <description>公司表</description>
     <table-field standard-field-id="8614e7d4a75940edacfdbe20d78f32db" primary="true" unique="true" not-null="true" id="org_company_id" auto-increase="true"/>
     <table-field standard-field-id="245ffdb6e1b74f9498bda3a43f3f4ef6" primary="false" unique="false" not-null="false" id="org_company_name" auto-increase="false"/>
