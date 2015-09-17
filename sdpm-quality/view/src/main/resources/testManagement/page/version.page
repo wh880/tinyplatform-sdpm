@@ -32,14 +32,14 @@
 			##tabbody end
 			#@tinyTable()
 				#@div(divBaseClass="tinyheaderTools form-inline")
-				<div class="f col-2">
-						<input type="button" value="全选" class="btn btn-default btn-primary col-4" 
+				<div class="f col-3">
+						<input type="button" value="全选" class="btn btn-default btn-primary col-3" 
 						onclick="selectAllNullorReserve('userid','全选');" />											
 						<div class="col-0">&nbsp&nbsp</div>
-						<input type="button" value="反选" class="btn btn-default btn-primary col-4"
+						<input type="button" value="反选" class="btn btn-default btn-primary col-3"
 						 onclick="selectAllNullorReserve('userid','反选');" />
 						<div class="col-0">&nbsp&nbsp</div>
-						<div class="dropdown col-1">
+						<div class="dropdown col-3">
 							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
 							<ul class="dropdown-menu multi-level" role="menu">
 								<li>
@@ -58,10 +58,13 @@
 								</li>																
 							</ul>
 						</div>
+						<div class="col-2">
+							#@mulOperation("muldelete" "http://127.0.0.1:8080/sqdm-quality/testManagement/page/Bug.page")
+							<a href="javascript:;" class="btn radius btn-danger "><i class="icon-trash"></i>批量删除</a>#end
+						</div>
 					</div>
 					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-#*					<div class="btn btn-default btn-sm">全选</div>
-					<div class="btn btn-default btn-sm">反选</div>*#
+					
 				#end
 			#@tinyTableContent("../data/versionData.pagelet")
 				#@thead()
