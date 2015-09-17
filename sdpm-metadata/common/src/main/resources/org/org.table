@@ -1,7 +1,7 @@
 <tables>
   <table id="69723ac7cf9a4963b3a2a32bd97bd754" name="org_user" title="用户表" schema="" package-name="">
     <description>用户表</description>
-    <table-field standard-field-id="c7d7754bfa85454993ffd049f902f1be" primary="true" unique="true" not-null="true" id="org_user_id" auto-increase="true"/>
+    <table-field standard-field-id="c7d7754bfa85454993ffd049f902f1be" primary="true" unique="true" not-null="true" id="org_user_id" auto-increase="false"/>
     <table-field standard-field-id="7f7e1f2fb38a47c5b2e3b08dba7e8ce8" primary="false" unique="false" not-null="true" id="org_dept_id" auto-increase="false"/>
     <table-field standard-field-id="6e55b0ac4e64416da2cac4a793e8762b" primary="false" unique="false" not-null="true" id="org_user_account" auto-increase="false"/>
     <table-field standard-field-id="b6114a5f17184031a39bb34033ff1231" primary="false" unique="false" not-null="true" id="org_user_password" auto-increase="false"/>
