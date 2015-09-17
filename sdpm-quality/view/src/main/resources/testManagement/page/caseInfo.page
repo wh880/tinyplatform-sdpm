@@ -28,7 +28,27 @@
 		<span class="f">
 			用例名称</span>
 		<span class="r">
-			#@aModal("#noteModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
+			#foreach(m:menuManager.getScopeMenus("testcaseinfo-tab"))
+				#if(m.id=="tcasenote"||m.id=="texecution"||m.id=="tresult")
+					#@aModal("#myModal" m.name "800" "400" "" m.href "ml-5")
+						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
+				#else
+				#if(m.id=="teditioncase"||m.id=="tproposecase"||m.id=="tcaseback")
+					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+						#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+				#else
+				#if(m.id=="tcaseremark")
+					<a  title="备注" onclick="toggle()">
+						#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
+				#else
+					#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")
+						#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp
+				#end
+				#end
+				#end
+		  #end
+		
+#*			#@aModal("#noteModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
 				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
 			#@aModal("#myModal" "执行" "600" "300" "" "/testManagement/page/tabledemo/caseExecute.pagelet" "ml-5")
 				#buttonIcon(iconClass="icon-flag-checkered")执行#end&nbsp;&nbsp;
@@ -44,7 +64,8 @@
 					#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp				
 
 			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page" title="返回">
-				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;</span>
+				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;*#
+				</span>
 	#end
 	#@tinyForm("thisform" "url" "post" {"class":""})
 #*	<div class="infoContent">
@@ -81,23 +102,25 @@
             #include("/testManagement/page/historyRecord.page")
         #end
         <center>
-        	#@aModal("#noteModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
-				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
-			#@aModal("#myModal" "执行" "600" "300" "" "/testManagement/page/tabledemo/caseExecute.pagelet" "ml-5")
-				#buttonIcon(iconClass="icon-flag-checkered")执行#end&nbsp;&nbsp;
-			#@aModal("#myModal" "结果" "600" "300" "" "/testManagement/page/tabledemo/caseResult.pagelet" "ml-5")
-					#buttonIcon(iconClass="icon-play")结果#end&nbsp;&nbsp;		
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editioncase.page" title="编辑">
-				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			<a  title="备注" onclick="toggle()">
-				#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page" title="复制">
-				#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
-			#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")
-					#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp
-
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page" title="返回">
-				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
+        	#foreach(m:menuManager.getScopeMenus("testcaseinfo-tab"))
+				#if(m.id=="tcasenote"||m.id=="texecution"||m.id=="tresult")
+					#@aModal("#myModal" m.name "800" "400" "" m.href "ml-5")
+						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
+				#else
+				#if(m.id=="teditioncase"||m.id=="tproposecase"||m.id=="tcaseback")
+					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+						#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+				#else
+				#if(m.id=="tcaseremark")
+					<a  title="备注" onclick="toggle()">
+						#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
+				#else
+					#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")
+						#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp
+				#end
+				#end
+				#end
+		  #end
 			</center>
 		#@div(divId="comment" divStyle="display:none;" divClass="infoContent")
 			<p class="titleName">备注</p>
@@ -109,8 +132,9 @@
             </div>
             <div class="col-1"></div>
             <div class="col-1">
-                <a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
-                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+#*                <a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
+                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>*#
             </div>
             <div class="col-5"></div>
         	</div>
@@ -128,16 +152,9 @@
 					#@dialogHeader()对话框标题#end
 					#@dialogBody()<p>对话框内容…</p>#end
 					#@dialogFooter()
-						#@buttonEnsure()确定#end
-						#@buttonCancel()关闭#end
 					#end
 				#end
-				#@dialog("noteModal")
-					#@dialogHeader()对话框标题#end
-					#@dialogBody()<p>对话框内容…</p>#end
-					#@dialogFooter()						
-					#end
-				#end
+				
 				
 <script type="text/javascript">
 function toggle()
