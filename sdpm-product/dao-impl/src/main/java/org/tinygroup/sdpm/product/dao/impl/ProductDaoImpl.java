@@ -24,7 +24,7 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.tinygroup.tinysqldsl.Delete;
@@ -38,7 +38,6 @@ import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -127,7 +126,8 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		}
 		},pks);
 	}
-
+	
+	
 	public Product getByKey(Integer pk) {
 		return getDslTemplate().getByKey(pk, Product.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")

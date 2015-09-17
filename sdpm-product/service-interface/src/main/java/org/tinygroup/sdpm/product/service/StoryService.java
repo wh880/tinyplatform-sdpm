@@ -18,4 +18,11 @@ public interface StoryService {
 	 */
 	int edit(Story story);
 	
+	/**
+	 * 根据需求Id删除
+	 * @param storyId
+	 * @return
+	 */
+	int deleteById(Integer storyId);
+	
 }

@@ -2,66 +2,106 @@ package org.tinygroup.sdpm.product.service;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.product.dao.pojo.Plan;
-import org.tinygroup.sdpm.product.dao.pojo.Release;
-import org.tinygroup.sdpm.product.dao.pojo.Story;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.tinysqldsl.Pager;
 
-
-public interface PlanService {
+public interface ProductService {
 	/**
-	 * 创建计划
-	 * @param plan
+	 * 添加产品
+	 * @param product
 	 * @return
 	 */
-	Plan add(Plan plan);
+	Product add(Product product);
 	
 	/**
-	 * 保存计划
-	 * @param Plan
+	 * 修改
+	 * @param product
 	 * @return
 	 */
-	Plan save(Plan plan);
+	int etid(Product product);
 	
 	/**
-	 * 根据计划ID查找计划
-	 * @param Plan
+	 * 根据产品ID删除
+	 * @param id
 	 * @return
 	 */
-	Plan findByPlanId(Integer planId);
-	/**
-	 * 根据计划名称查找需求
-	 * @param Stories
-	 * @return
-	 */
-	List<Story> findByplanId(String PlanName);
+	int deleteById(Integer productId);
 	
 	/**
-	 * 根据计划ID编辑计划
-	 * @param Plan
+	 * 根据产品Id批量删除
+	 * @param productIds
 	 * @return
 	 */
-	int edit(Integer planId);
+	int deleteByProductIds(Integer... productIds);
 	
 	/**
-	 * 根据计划ID删除计划
-	 * @param Plan
+	 * 根据产品对象删除
+	 * @param product
 	 * @return
 	 */
-	int deleteByPlanId(Integer planId);
+	int deleteByProduct(Product product);
 	
 	/**
-	 * 根据计划ID查找关联需求
-	 * @param Stories
+	 * 根据产品批量删除
+	 * @param products
 	 * @return
 	 */
-	List<Story> find(Integer releaseId);
-/*	
-	*//**
-	 * 根据发布ID查找关联BUG
-	 * @param Stories
+	int[] batchDelete(List<Product> products);
+	
+	
+	
+	/**
+	 * 根据产品线Id删除
+	 * @param integer
 	 * @return
-	 *//*
-	List<Bug> findByReleaseid(Integer releaseId);*/
-
-
+	 */
+	int deleteByProductLineId(Integer productLineId);
+	
+	/**
+	 * 根据产品ID查找
+	 * @param id
+	 * @return
+	 */
+	Product findById(Integer productId);
+	
+	/**
+	 * 根据产品对象查找
+	 * @param product
+	 * @return
+	 */
+	List<Product> findByProduct(Product product);
+	
+	/**
+	 * 查找所有产品
+	 * @return
+	 */
+	List<Product> findAll();
+	
+	/**
+	 * 根据产品线Id查找产品
+	 * @param id
+	 * @return
+	 */
+	List<Product> findByProductLineId(Integer productLineId);
+	
+	/**
+	 * 根据产品对象分页查询
+	 * @param currentPage
+	 * @param limit
+	 * @param product
+	 * @return
+	 */
+	Pager<Product> findPager(int currentPage,int limit ,Product product);
+	
+	/**
+	 * 根据产品线Id分页查询
+	 * @param currentPage
+	 * @param limit
+	 * @param productLineId
+	 * @return
+	 */
+	Pager<Product> findPagerByLine(int currentPage,int limit ,Integer productLineId);
+	
+	
+	
 }
