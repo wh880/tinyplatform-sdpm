@@ -65,17 +65,17 @@ public interface ProductService {
 	Product findById(Integer productId);
 	
 	/**
-	 * 根据产品对象查找
+	 * 根据产品对象查找(分页、排序)
 	 * @param product
 	 * @return
 	 */
-	List<Product> findByProduct(Product product);
+	PagerSort<Product> findByProduct(PagerPojo pojo,Product product);
 	
 	/**
 	 * 查找所有产品
 	 * @return
 	 */
-	List<Product> findAll();
+	PagerSort<Product> findAll(PagerPojo pojo);
 	
 	/**
 	 * 根据产品线Id查找产品
