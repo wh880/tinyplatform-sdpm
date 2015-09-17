@@ -34,7 +34,7 @@ public interface UserService {
      * @param orgUser 用于查询条件
      * @return
      */
-    List<OrgUser> getList(OrgUser orgUser);
+    List<OrgUser> findList(OrgUser orgUser);
 
     /**
      * 新增有一个用户

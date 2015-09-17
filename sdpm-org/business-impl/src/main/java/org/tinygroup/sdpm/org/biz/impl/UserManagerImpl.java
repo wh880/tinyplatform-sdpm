@@ -32,7 +32,7 @@ public class UserManagerImpl implements UserManager {
         return orgUserDao.getByKey(id);
     }
 
-    public List<OrgUser> getList(OrgUser orgUser) {
+    public List<OrgUser> findList(OrgUser orgUser) {
         return orgUserDao.query(orgUser);
     }
 

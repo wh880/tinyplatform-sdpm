@@ -43,10 +43,9 @@
         <class-paths>
 
             <!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
-<<<<<<< Updated upstream
                 <class-path path="E:\workspace\sdpm\sdpm-project\view\src\main\resources"/>
                 <class-path path="E:\TinyWork\sdpm\sdpm-productLine\view\src\main\resources"/>
-                <class-path path="E:\TinyWork\sdpm\sdpm-product\view\src\main\resources" />
+                <class-path path="E:\TinyWork\sdpm\sdpm-product\view\src\main\resources"/>
                 <class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources"/>
                 <class-path path="F:\daochu\sdpm\sdpm-project\view\src\main\resources"/>
                 <class-path path="F:\daochu\sdpm\sdpm-quality\view\src\main\resources"/>
@@ -54,14 +53,12 @@
                 <class-path path="E:\workspace\sdpm\sdpm-document\view\src\main\resources"/>
                 <class-path path="E:\TinyWorkSpace\sdpm\sdpm-project\view\src\main\resources"/>
 
-                <class-path path="E:\TinyWork\sdpm\sdpm-system\view\src\main\resources"/>    
-                <class-path path="D:\GitFile\sdpm\sdpm-statistic\view\src\main\resources"/>    
-                <class-path path="D:\GitFile\sdpm\sdpm-quality\view\src\main\resources"/> 
+                <class-path path="E:\TinyWork\sdpm\sdpm-system\view\src\main\resources"/>
+                <class-path path="D:\GitFile\sdpm\sdpm-statistic\view\src\main\resources"/>
+                <class-path path="D:\GitFile\sdpm\sdpm-quality\view\src\main\resources"/>
 
-                <class-path path="E:\TinyWork\sdpm\sdpm-system\view\src\main\resources"/> 
+                <class-path path="E:\TinyWork\sdpm\sdpm-system\view\src\main\resources"/>
                 <class-path path="E:\TinyWork\sdpm\sdpm-common\view\src\main\resources"/>
-
-=======
             <class-path path="E:\workspace\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\TinyWork\sdpm\sdpm-productLine\view\src\main\resources"/>
             <class-path path="E:\TinyWork\sdpm\sdpm-product\view\src\main\resources"/>
@@ -72,7 +69,6 @@
             <class-path path="E:\workspace\sdpm\sdpm-document\view\src\main\resources"/>
             <class-path path="E:\TinyWorkSpace\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\TinyWork\sdpm\sdpm-system\view\src\main\resources"/>
->>>>>>> Stashed changes
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>

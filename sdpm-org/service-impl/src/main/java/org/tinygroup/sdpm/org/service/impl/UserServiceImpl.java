@@ -31,8 +31,8 @@ public class UserServiceImpl implements UserService {
         return userManager.find(id);
     }
 
-    public List<OrgUser> getList(OrgUser orgUser) {
-        return userManager.getList(orgUser);
+    public List<OrgUser> findList(OrgUser orgUser) {
+        return userManager.findList(orgUser);
     }
 
     public OrgUser add(OrgUser orgUser) {
