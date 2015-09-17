@@ -21,6 +21,12 @@
             <artifactId>sdpm-product-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-productLine-view</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
        
           <dependency>
             <groupId>org.tinygroup</groupId>

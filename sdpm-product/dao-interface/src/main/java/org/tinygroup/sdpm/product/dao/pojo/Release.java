@@ -18,11 +18,11 @@ package org.tinygroup.sdpm.product.dao.pojo;
 
 import java.util.Date;
 
-/** 
- * 发布表
- * 
- */
-public class Release {
+	/** 
+	 * 发布表
+	 * 
+	 */
+	public class Release {
 
 	/** 
 	 * 发布ID

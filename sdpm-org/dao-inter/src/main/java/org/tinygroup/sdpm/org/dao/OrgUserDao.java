@@ -20,6 +20,6 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 
-public interface OrgUserDao extends BaseDao<OrgUser,Integer> {
+public interface OrgUserDao extends BaseDao<OrgUser,String> {
 
 }

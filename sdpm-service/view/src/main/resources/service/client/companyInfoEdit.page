@@ -5,40 +5,40 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
     #@noRespsGridSystem()
         #@elementItem()
-            #@colLabel("col-3")<span class="c-red">*</span>公司名称：#end
+            #@colLabel("col-3")<span class="c-red">*</span>客户名称：#end
             #@formControlDiv("col-7")
                 #tinyInput(
-                    "text" "clientName" ""{"datatype":"*","nullmsg":"公司名称不能为空！","id":
+                    "text" "clientName" ""{"datatype":"*","nullmsg":"客户名称不能为空！","id":
                     "","class":"input-text"})
             #end
             #@validateDiv("col-2")#end
         #end
 
         #@elementItem()
-            #@colLabel("col-3")<span class="c-red">*</span>公司传真：#end
+            #@colLabel("col-3")<span class="c-red">*</span>客户传真：#end
             #@formControlDiv("col-7")
                 #tinyInput(
-                    "text" "clientName" ""{"datatype":"*","nullmsg":"公司传真不能为空！","id":
+                    "text" "clientName" ""{"datatype":"*","nullmsg":"客户传真不能为空！","id":
                     "","class":"input-text"})
             #end
             #@validateDiv("col-2")#end
         #end
 
         #@elementItem()
-            #@colLabel("col-3")<span class="c-red">*</span>公司地址：#end
+            #@colLabel("col-3")<span class="c-red">*</span>客户地址：#end
             #@formControlDiv("col-7")
                 #tinyInput(
-                    "text" "clientName" ""{"datatype":"*","nullmsg":"公司地址不能为空！","id":
+                    "text" "clientName" ""{"datatype":"*","nullmsg":"客户地址不能为空！","id":
                     "","class":"input-text"})
             #end
             #@validateDiv("col-2")#end
         #end
 
         #@elementItem()
-            #@colLabel("col-3")<span class="c-red">*</span>公司邮编：#end
+            #@colLabel("col-3")<span class="c-red">*</span>客户邮编：#end
             #@formControlDiv("col-7")
                 #tinyInput(
-                    "text" "clientName" ""{"datatype":"*","nullmsg":"公司邮编不能为空！","id":
+                    "text" "clientName" ""{"datatype":"*","nullmsg":"客户邮编不能为空！","id":
                     "","class":"input-text"})
             #end
             #@validateDiv("col-2")#end

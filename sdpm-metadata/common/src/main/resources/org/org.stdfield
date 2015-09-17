@@ -1,141 +1,145 @@
 <standard-fields>
-  <standard-field id="c7d7754bfa85454993ffd049f902f1be" name="org_user_id" title="用户编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
-    <description>用户编号</description>
+  <standard-field id="c7d7754bfa85454993ffd049f902f1be" name="org_user_id" title="用户编号" business-type-id="095e594e1550424b9643c7e2279e85be" default="">
+    <description></description>
   </standard-field>
   <standard-field id="6e55b0ac4e64416da2cac4a793e8762b" name="org_user_account" title="用户名" business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>用户名</description>
+    <description></description>
   </standard-field>
   <standard-field id="b6114a5f17184031a39bb34033ff1231" name="org_user_password" title="密码" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37">
-    <description>密码</description>
+    <description></description>
   </standard-field>
   <standard-field id="cc66fceecbe24d41a69f87c09935ea25" name="org_user_role" title="职位" business-type-id="286a6bca92b34779bcb6fc8809f0a666">
-    <description>职位</description>
+    <description></description>
   </standard-field>
-  <standard-field id="2d8d08288ada42f78cd291bd3cca33c6" name="org_user_realname" title="真实姓名" business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>真实姓名</description>
+  <standard-field id="2d8d08288ada42f78cd291bd3cca33c6" name="org_user_RealName" title="真实姓名" business-type-id="095e594e1550424b9643c7e2279e85be">
+    <description></description>
   </standard-field>
   <standard-field id="46747217701244d0b1c788267731a9b2" name="org_user_nickname" title="昵称" business-type-id="a30696c1e44441ecad77a832afd3731d">
-    <description>昵称</description>
+    <description></description>
   </standard-field>
-  <standard-field id="af76dbc221c840bba1e6eb1a1475c3c0" name="org_user_commiter" title="源代码账号" business-type-id="27ebfcdc558c477da425a46e566d4637">
-    <description>源代码账号 </description>
+  <standard-field id="af76dbc221c840bba1e6eb1a1475c3c0" name="org_user_submitter" title="源代码账号" business-type-id="27ebfcdc558c477da425a46e566d4637">
+    <description></description>
   </standard-field>
   <standard-field id="38ccfb1c82994fdda54cd048460e1183" name="org_user_avatar" title="头像" business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>头像</description>
+    <description></description>
   </standard-field>
   <standard-field id="5ce6656714744503a2fee4582a782422" name="org_user_birthday" title="出生日期" business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>出生日期</description>
+    <description></description>
   </standard-field>
   <standard-field id="1e9acfada6fa43a596c487b7a5862d50" name="org_user_gender" title="性别 " business-type-id="286a6bca92b34779bcb6fc8809f0a666">
-    <description>性别</description>
+    <description></description>
   </standard-field>
   <standard-field id="140fcb8250da4c8bb63bdd636819ac22" name="org_user_email" title="邮箱" business-type-id="a30696c1e44441ecad77a832afd3731d">
-    <description>邮箱</description>
+    <description></description>
   </standard-field>
-  <standard-field id="2acf3f674b0b44cc958e8ff41b379a99" name="org_user_skype" title="Skype" business-type-id="a30696c1e44441ecad77a832afd3731d">
-    <description>Skype</description>
+  <standard-field id="2acf3f674b0b44cc958e8ff41b379a99" name="org_user_SKYPE" title="Skype" business-type-id="a30696c1e44441ecad77a832afd3731d">
+    <description></description>
   </standard-field>
-  <standard-field id="cba3c4ed58d140bb89afbf98df52c24c" name="org_user_qq" title="QQ" business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>QQ</description>
+  <standard-field id="cba3c4ed58d140bb89afbf98df52c24c" name="org_user_QQ" title="QQ" business-type-id="095e594e1550424b9643c7e2279e85be">
+    <description></description>
   </standard-field>
   <standard-field id="9dfd8200d2074729b7829743e2dafb4f" name="org_user_yahoo" title="雅虎通" business-type-id="a30696c1e44441ecad77a832afd3731d">
-    <description>雅虎通</description>
+    <description></description>
   </standard-field>
-  <standard-field id="7336ab50a9e84a89a40ef5fa03a336f3" name="org_user_gtalk" title="Gtalk" business-type-id="a30696c1e44441ecad77a832afd3731d">
-    <description>Gtalk</description>
+  <standard-field id="7336ab50a9e84a89a40ef5fa03a336f3" name="org_user_GTalk" title="Gtalk" business-type-id="a30696c1e44441ecad77a832afd3731d">
+    <description></description>
   </standard-field>
-  <standard-field id="42fc877c345641f09302c8209097f15b" name="org_user_wangwang" title="旺旺" business-type-id="a30696c1e44441ecad77a832afd3731d">
-    <description>旺旺</description>
+  <standard-field id="42fc877c345641f09302c8209097f15b" name="org_user_WANGWANG" title="旺旺" business-type-id="a30696c1e44441ecad77a832afd3731d">
+    <description></description>
   </standard-field>
   <standard-field id="52a2d2bb3e104a6aaf2be1b965ce57bd" name="org_user_mobile" title="手机" business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>手机</description>
+    <description></description>
   </standard-field>
   <standard-field id="06d99989373049aa9094f0338cd0c294" name="org_user_phone" title="电话 " business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>电话 </description>
+    <description></description>
   </standard-field>
-  <standard-field id="034375b82af64be9ba69c8600094b20b" name="org_user_adress" title="通讯地址" business-type-id="27ebfcdc558c477da425a46e566d4637">
-    <description>通讯地址</description>
+  <standard-field id="034375b82af64be9ba69c8600094b20b" name="org_user_address" title="通讯地址" business-type-id="27ebfcdc558c477da425a46e566d4637">
+    <description></description>
   </standard-field>
-  <standard-field id="7b2c4dd9a1b041ca88f3adf8b26a1538" name="org_user_zipcode" title="邮编" business-type-id="286a6bca92b34779bcb6fc8809f0a666">
-    <description>邮编</description>
+  <standard-field id="7b2c4dd9a1b041ca88f3adf8b26a1538" name="org_user_ZipCode" title="邮编" business-type-id="286a6bca92b34779bcb6fc8809f0a666">
+    <description></description>
   </standard-field>
   <standard-field id="a602f8ddac18454693d4be20fadda6df" name="org_user_join" title="加入日期" business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>加入日期</description>
+    <description></description>
   </standard-field>
   <standard-field id="77b8b6d0282441b8be21816a162f71c0" name="org_user_visits" title="访问次数" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
-    <description>访问次数</description>
+    <description></description>
   </standard-field>
   <standard-field id="b7e01baa07d1416e8d62dfe05e7e9976" name="org_user_ip" title="最后IP" business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>最后IP</description>
+    <description></description>
   </standard-field>
   <standard-field id="8ef1bd3aecaa4e049827b68e39f26f30" name="org_user_last" title="最后登录" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
-    <description>最后登录</description>
+    <description></description>
   </standard-field>
   <standard-field id="7cf911e409d347e78682b8c733c14591" name="org_user_fails" title="失败次数" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
-    <description>失败次数</description>
+    <description></description>
   </standard-field>
   <standard-field id="21b39a8b9e53419084979797eb16631b" name="org_user_locked" title="上次锁定时间" business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>上次锁定时间</description>
+    <description></description>
   </standard-field>
   <standard-field id="18a1a4b3d19b4459ae2da05cc23e60c5" name="org_user_deleted" title="是否删除" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629">
-    <description>是否删除</description>
+    <description></description>
   </standard-field>
   <standard-field id="7f7e1f2fb38a47c5b2e3b08dba7e8ce8" name="org_dept_id" title="部门编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
-    <description>部门编号</description>
+    <description></description>
     <nick-name name="org_user_dept" title="部门编号" id="6e4a30ba0dc14d048eafc8279256dc7f"/>
   </standard-field>
   <standard-field id="6733cc238cea46378fa1eb9c6d03be56" name="org_dept_name" title="部门名称" business-type-id="a30696c1e44441ecad77a832afd3731d">
-    <description>部门名称</description>
+    <description></description>
   </standard-field>
   <standard-field id="9ba50db58dad450fad33c88ab44967f9" name="org_dept_parent" title="上级部门" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
-    <description>上级部门</description>
+    <description></description>
   </standard-field>
   <standard-field id="1b27dc18ebce48b68616feb689ae7744" name="org_dept_path" title="部门层次路径" business-type-id="27ebfcdc558c477da425a46e566d4637">
-    <description>部门层次路径</description>
+    <description></description>
   </standard-field>
   <standard-field id="cdeb079d5e57484d975ea7e9fe8740ae" name="org_dept_grade" title="部门级别" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
-    <description>部门级别</description>
+    <description></description>
   </standard-field>
   <standard-field id="14a373b325f8473db17dc99cec5de9b9" name="org_dept_order" title="部门排序" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
-    <description>部门排序</description>
+    <description></description>
   </standard-field>
   <standard-field id="9de62ab4d83a4dc2972a8ffb90b2c225" name="org_dept_position" title="部门位置" business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>部门位置</description>
+    <description></description>
   </standard-field>
   <standard-field id="9c70d54486424630a724f8c01530d8c6" name="org_dept_manager" title="负责人 " business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>负责人</description>
+    <description></description>
   </standard-field>
   <standard-field id="8614e7d4a75940edacfdbe20d78f32db" name="org_company_id" title="公司编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
-    <description>公司编号</description>
+    <description></description>
   </standard-field>
   <standard-field id="245ffdb6e1b74f9498bda3a43f3f4ef6" name="org_company_name" title="公司名称 " business-type-id="27ebfcdc558c477da425a46e566d4637">
-    <description>公司名称 </description>
+    <description></description>
   </standard-field>
   <standard-field id="3aa74a872e0d4b8ebbbfcc098675dc7e" name="org_company_phone" title="联系电话 " business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>联系电话</description>
+    <description></description>
   </standard-field>
   <standard-field id="a87b145e2c1e4329bcc8e81eca06ddfa" name="org_company_fax" title="传真" business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>传真</description>
+    <description></description>
   </standard-field>
   <standard-field id="a0ef366522e04294a98dabc4eb870826" name="org_company_address" title="通讯地址" business-type-id="27ebfcdc558c477da425a46e566d4637">
-    <description>通讯地址</description>
+    <description></description>
   </standard-field>
-  <standard-field id="a46cdb36c2864cb7a87d80b6a3be59c0" name="org_company_zipcode" title="邮政编码" business-type-id="286a6bca92b34779bcb6fc8809f0a666">
-    <description>邮政编码</description>
+  <standard-field id="a46cdb36c2864cb7a87d80b6a3be59c0" name="org_company_ZipCode" title="邮政编码" business-type-id="286a6bca92b34779bcb6fc8809f0a666">
+    <description></description>
   </standard-field>
   <standard-field id="7ecd44f91d124a2fb9f2cf3df01477a3" name="org_company_website" title="官网" business-type-id="27ebfcdc558c477da425a46e566d4637">
-    <description>官网 </description>
+    <description></description>
   </standard-field>
   <standard-field id="d434a6039fa049ceb149ad7902dfe401" name="org_company_backyard" title="内网" business-type-id="27ebfcdc558c477da425a46e566d4637">
-    <description>内网 </description>
+    <description></description>
   </standard-field>
   <standard-field id="6ba616d1ae6f4d70b312bfbf1ffbcc6e" name="org_company_guest" title="匿名登录" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629">
-    <description>匿名登录</description>
+    <description></description>
   </standard-field>
   <standard-field id="1162306b8f4b43e99c489c34888a3335" name="org_company_admins" title="管理员列表" business-type-id="27ebfcdc558c477da425a46e566d4637">
-    <description>管理员列表</description>
+    <description></description>
   </standard-field>
   <standard-field id="8e8078a1954e464cb4d5f280b5d463b3" name="org_company_deleted" title="删除标志 " business-type-id="b6a9bc04774b40859a7dd8c6fd52a629">
-    <description>删除标志</description>
+    <description></description>
   </standard-field>
+  <standard-field id="9d637734f8044ad789dbc9e2c5193c32" name="org_role_id" title="角色ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="f83ce375673546bdb35a8fcb6d751332" name="org_role_name" title="角色名称" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="2c70414be6154f128898e5ebb03e137d" name="org_role_remarks" title="角色备注" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="40cf45e575c0442e83c7fe2da3119b5e" name="org_role_menu_id" title="角色菜单id" business-type-id="095e594e1550424b9643c7e2279e85be"/>
 </standard-fields>

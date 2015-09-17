@@ -9,7 +9,7 @@
 #setTinyItemCount(52)
 #foreach(var:[1..pagesize])
     #@tr()
-        #@td()<input type="checkbox" value="1" name="idCheck">#end
+        #@td()<input type="checkbox" value="${var}" name="idCheck">#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientProduct.page">001</a>#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">恒生</a>#end
         #@td()银行部#end
