@@ -15,6 +15,49 @@
  */
 package org.tinygroup.sdpm.org.service.inter;
 
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+
+import java.util.List;
+
 public interface UserService {
-    public String sayHello(String name);
+    /**
+     * 根据主键id查找用户
+     *
+     * @param id 主键
+     * @return
+     */
+    OrgUser find(String id);
+
+    /**
+     * 根据条件查询List
+     *
+     * @param orgUser 用于查询条件
+     * @return
+     */
+    List<OrgUser> getList(OrgUser orgUser);
+
+    /**
+     * 新增有一个用户
+     *
+     * @param orgUser 新增实体类
+     * @return
+     */
+    OrgUser add(OrgUser orgUser);
+
+    /**
+     * 更新用户
+     *
+     * @param orgUser 需要更新的实体类
+     * @return
+     */
+    OrgUser update(OrgUser orgUser);
+
+    /**
+     * 根据id进行软删除用户
+     *
+     * @param id 主键
+     * @return
+     */
+    Integer delete(String id);
+
 }

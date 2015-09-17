@@ -1,0 +1,46 @@
+<service-components>
+    <service-component type="org.tinygroup.sdpm.org.service.impl.UserServiceImpl" bean="userService">
+        <service-method local-name="find" service-id="find" method-name="find" cacheable="false"
+                        category="org.tinygroup.sdpm.org.service.impl">
+            <service-parameters>
+                <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
+            </service-parameters>
+            <service-result name="findResult" required="false" is-array="false"
+                            type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+        </service-method>
+        <service-method local-name="getList" service-id="getList" method-name="getList" cacheable="false"
+                        category="org.tinygroup.sdpm.org.service.impl">
+            <service-parameters>
+                <service-parameter name="orgUser" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser" required="false"
+                                   is-array="false"/>
+            </service-parameters>
+            <service-result name="getListResult" required="false" is-array="false" collection-type="java.util.List"
+                            type="java.lang.Object"/>
+        </service-method>
+        <service-method local-name="add" service-id="add" method-name="add" cacheable="false"
+                        category="org.tinygroup.sdpm.org.service.impl">
+            <service-parameters>
+                <service-parameter name="orgUser" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser" required="false"
+                                   is-array="false"/>
+            </service-parameters>
+            <service-result name="addResult" required="false" is-array="false"
+                            type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+        </service-method>
+        <service-method local-name="update" service-id="update" method-name="update" cacheable="false"
+                        category="org.tinygroup.sdpm.org.service.impl">
+            <service-parameters>
+                <service-parameter name="orgUser" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser" required="false"
+                                   is-array="false"/>
+            </service-parameters>
+            <service-result name="updateResult" required="false" is-array="false"
+                            type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+        </service-method>
+        <service-method local-name="delete" service-id="delete" method-name="delete" cacheable="false"
+                        category="org.tinygroup.sdpm.org.service.impl">
+            <service-parameters>
+                <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
+            </service-parameters>
+            <service-result name="deleteResult" required="false" is-array="false" type="java.lang.Integer"/>
+        </service-method>
+    </service-component>
+</service-components>
