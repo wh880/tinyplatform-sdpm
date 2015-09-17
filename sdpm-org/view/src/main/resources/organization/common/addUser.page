@@ -181,7 +181,9 @@
     #@gridSysRow()
         #@div(divClass="col-7 col-offset-5 form-inline")
             #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
-        <a href="#" class="btn radius btn-default">返回</a>
+        ##            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+
+        <a href="javascript:history.go(-1)" class="btn radius btn-default">返回</a>
         #end
     #end
 
