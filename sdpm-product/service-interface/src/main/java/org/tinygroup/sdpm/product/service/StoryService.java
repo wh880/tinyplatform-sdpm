@@ -20,14 +20,14 @@ public interface StoryService {
 	 * @param story
 	 * @return
 	 */
-	int edit(Story story);
+	int update(Story story);
 	
 	/**
 	 * 批量操作
 	 * @param stories
 	 * @return
 	 */
-	int[] batchUpdate(List<Story> stories);
+	int[] updateBatch(List<Story> stories);
 	
 	/**
 	 * 报表生成
@@ -41,7 +41,7 @@ public interface StoryService {
 	 * @param storyIds
 	 * @return
 	 */
-	int batchClose(Integer...storyIds);
+	int updateBatchClose(Integer...storyIds);
 	
 	/**
 	 * 根据需求Id删除
@@ -69,7 +69,7 @@ public interface StoryService {
 	 * @param stories
 	 * @return
 	 */
-	int[] batchDelete(List<Story> stories);
+	int[] deleteBatch(List<Story> stories);
 	
 	/**
 	 * 根据需求ID查找
@@ -104,10 +104,48 @@ public interface StoryService {
 	 * @param status
 	 * @return
 	 */
-	List<Story> findByStatus(String status);
+	List<Story> findByStatus(PagerPojo pagerPojo,String status);
+	
+	/**
+	 * 根据对象查找
+	 * @param pagerPojo
+	 * @param story
+	 * @return
+	 */
+	List<Story> findStory(Story story);
+	
+
+	/**
+	 * 分页查找(可排序)
+	 * @param pagerPojo
+	 * @param story
+	 * @return
+	 */
+	List<Story> findStory(PagerPojo pagerPojo,Story story);
+	
+	/**
+	 * 排序查询
+	 * @param field
+	 * @param sorting
+	 * @param story
+	 * @return
+	 */
+	List<Story> findStorySort(String field,String sorting,Story story);
+	
+	/**
+	 * 分页查询
+	 * @param currentPage
+	 * @param limit
+	 * @param story
+	 * @return
+	 */
+	List<Story> findStoryPager(int currentPage,int limit,Story story);
+	
 	
 	/**
 	 * 分页查找
+	 * @param currentPage
+	 * @param limit
 	 * @param story
 	 * @return
 	 */

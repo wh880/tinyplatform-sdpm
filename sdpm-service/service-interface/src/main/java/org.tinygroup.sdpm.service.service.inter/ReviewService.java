@@ -33,7 +33,7 @@ public interface ReviewService {
     List<Review> getList(Review review);
 
     /**
-     * 将请求指派给成员进行回访
+     * 将请求指派成员进行回访
      *
      * @param review 新增实体类
      * @return

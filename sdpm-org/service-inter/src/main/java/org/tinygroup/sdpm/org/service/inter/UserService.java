@@ -26,7 +26,7 @@ public interface UserService {
      * @param id 主键
      * @return
      */
-    OrgUser find(String id);
+    OrgUser findUser(String id);
 
     /**
      * 根据条件查询List
@@ -34,7 +34,7 @@ public interface UserService {
      * @param orgUser 用于查询条件
      * @return
      */
-    List<OrgUser> findList(OrgUser orgUser);
+    List<OrgUser> findUserList(OrgUser orgUser);
 
     /**
      * 新增有一个用户
@@ -42,7 +42,7 @@ public interface UserService {
      * @param orgUser 新增实体类
      * @return
      */
-    OrgUser add(OrgUser orgUser);
+    OrgUser addUser(OrgUser orgUser);
 
     /**
      * 更新用户
@@ -50,7 +50,7 @@ public interface UserService {
      * @param orgUser 需要更新的实体类
      * @return
      */
-    OrgUser update(OrgUser orgUser);
+    OrgUser updateUser(OrgUser orgUser);
 
     /**
      * 根据id进行软删除用户
@@ -58,6 +58,6 @@ public interface UserService {
      * @param id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer deleteUser(String id);
 
 }

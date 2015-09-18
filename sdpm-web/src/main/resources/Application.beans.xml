@@ -3,6 +3,15 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="propertyPlaceholderConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:/sdpm.properties</value>
+            </list>
+        </property>
+    </bean>
+
     <bean id="fileResolver" scope="singleton"
           class="org.tinygroup.fileresolver.impl.FileResolverImpl">
         <property name="fileProcessorList">
@@ -54,5 +63,18 @@
         <property name="fileResolver" ref="fileResolver"></property>
     </bean>
 
+    <bean id="dynamicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName">
+            <value>com.mysql.jdbc.Driver</value>
+        </property>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dynamicDataSource"/>
+    </bean>
 
 </beans>

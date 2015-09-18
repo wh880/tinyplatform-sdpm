@@ -33,7 +33,7 @@ public interface RequestService {
     List<Request> getList(Request request);
 
     /**
-     * 新增一个请求
+     * 新增请求
      *
      * @param request 新增实体类
      * @return

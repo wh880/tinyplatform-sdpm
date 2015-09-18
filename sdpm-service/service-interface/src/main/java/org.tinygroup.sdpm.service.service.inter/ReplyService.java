@@ -33,7 +33,7 @@ public interface ReplyService {
     List<Reply> getList(Reply reply);
 
     /**
-     * 将请求指派给成员去解决
+     * 将请求指派成员去解决
      *
      * @param reply 新增实体类
      * @return

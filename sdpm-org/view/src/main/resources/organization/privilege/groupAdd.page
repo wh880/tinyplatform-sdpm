@@ -1,7 +1,7 @@
 #@noRespsGridSystem()
     #@tinyForm("thisform" "" "" {"class":"test"})
         #@gridSysRow()
-            #@colLabel("col-2")<span class="c-red">*</span>名角名：#end
+            #@colLabel("col-2")<span class="c-red">*</span>角色名称：#end
             #@gridSysCol(7)
                 #tinyInput(
                     "text" "username" ""{"placeholder":"","nullmsg":"角色名不能为空！","id":"username","class":

@@ -1,44 +1,42 @@
 package org.tinygroup.sdpm.service.service.inter;
 
-import org.tinygroup.sdpm.service.dao.pojo.Sla;
+import org.tinygroup.sdpm.service.dao.pojo.Client;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2015-09-17.
- */
-public interface SlaService {
+
+public interface ClientService {
     /**
      * 根据主键id查找用户
      *
      * @param id 主键
      * @return
      */
-    Sla find(String id);
+    Client find(Client id);
 
     /**
      * 根据条件查询List
      *
-     * @param sla 用于查询条件
+     * @param client 用于查询条件
      * @return
      */
-    List<Sla> getList(Sla sla);
+    List<Client> getList(Client client);
 
     /**
-     * 新增有一个用户
+     * 新增一个用户
      *
-     * @param sla 新增实体类
+     * @param client 新增实体类
      * @return
      */
-    Sla add(Sla sla);
+    Client add(Client client);
 
     /**
      * 更新用户
      *
-     * @param sla 需要更新的实体类
+     * @param client 需要更新的实体类
      * @return
      */
-    Sla update(Sla sla);
+    Client update(Client client);
 
     /**
      * 根据id进行软删除用户
@@ -55,4 +53,13 @@ public interface SlaService {
      * @return
      */
     Integer deleteBatch(Integer id);
+
+
+    /**
+     * 根据id进行批量软删除用户
+     *
+     * @param productId 主键
+     * @return
+     */
+    List<Client> findbyProduct(Integer productId);
 }

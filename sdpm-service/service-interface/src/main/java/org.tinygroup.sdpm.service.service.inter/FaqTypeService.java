@@ -25,7 +25,7 @@ public interface FaqTypeService {
     List<FaqType> getList(FaqType faqType);
 
     /**
-     * 新增有一个faqtype
+     * 新增有一faqtype
      *
      * @param faqType 新增实体类
      * @return
