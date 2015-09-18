@@ -1,5 +1,9 @@
 package org.tinygroup.sdpm.productLine.biz.inter;
 
+import java.util.List;
+
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
+
 public interface ProductLineManager {
     /**
      * 添加产品线

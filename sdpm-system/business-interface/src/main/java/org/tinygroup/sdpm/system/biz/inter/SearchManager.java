@@ -1,5 +1,9 @@
 package org.tinygroup.sdpm.system.biz.inter;
 
+import java.util.List;
+
+import org.tinygroup.sdpm.system.dao.pojo.Search;
+
 public interface SearchManager {
     /**
      * 添加搜索

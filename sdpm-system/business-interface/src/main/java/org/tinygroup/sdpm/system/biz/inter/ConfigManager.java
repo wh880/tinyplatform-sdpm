@@ -1,5 +1,9 @@
 package org.tinygroup.sdpm.system.biz.inter;
 
+import java.util.List;
+
+import org.tinygroup.sdpm.system.dao.pojo.Config;
+
 public interface ConfigManager {
     /**
      * 添加配置
