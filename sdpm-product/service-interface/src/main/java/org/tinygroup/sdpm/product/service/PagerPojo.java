@@ -17,51 +17,13 @@ public class PagerPojo implements Serializable{
 	
 	private String field;//排序依据的字段
 	
-	private String sorting;//sorting_desc为逆序，sorting_asc为倒序
+	private String sorting;//sorting_desc为逆序，sorting_asc为正序
 	
 	private Object object;//待定
 	
 	private Object[] objects;//待定
 	
-	private static final int DEFAULT_LIMIT=10;
-	
-	/*public PagerPojo(int currentPage,int limit){
-		this.currentPage = currentPage;
-		this.limit = limit;
-	}*/
-	
-	public PagerPojo(int totalCount,int start){
-		this(totalCount, start, DEFAULT_LIMIT);
-	}
-	
-	public PagerPojo(int totalCount,int start,String field,String sorting){
-		this(totalCount, start, DEFAULT_LIMIT);
-		this.field = field;
-		this.sorting = sorting;
-	}
-	
-    public PagerPojo(int totalCount,int start,int limit){
-		init(totalCount, start, limit);
-	}
-    
-    private void init(int totalCount, int start, int limit){
-        //设置基本参数
-        this.totalCount=totalCount;
-        if(limit==0){
-        	limit=DEFAULT_LIMIT;
-        }
-        if(start<0){//如果传人参数是小于0，那么设置为0
-        	start=0;
-        }
-        this.limit=limit;
-        this.start=start;
-        this.totalPages=totalCount%limit==0?totalCount/limit:totalCount/limit+1;
-        this.currentPage=start/limit==0?1:start/limit+1;
-        if(currentPage>totalPages){
-        	currentPage=totalPages;
-        }
-    }
-
+	protected static final int DEFAULT_LIMIT=10;
 	
 	public int getTotalCount() {
 		return totalCount;
