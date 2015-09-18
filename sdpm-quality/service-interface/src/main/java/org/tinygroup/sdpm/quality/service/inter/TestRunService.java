@@ -7,11 +7,11 @@ import org.tinygroup.sdpm.quality.dao.pojo.TestRun;
 public interface TestRunService {
 	
 	/**
-	 * 查询
+	 * 条件查询
 	 * @param testrun
 	 * @return
 	 */
-	List<TestRun> findByTestRun(TestRun testrun);
+	List<TestRun> findTestRunList(TestRun testrun);
 	/**
 	 * 保存
 	 * @param testrun

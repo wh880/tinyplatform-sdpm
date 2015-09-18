@@ -10,6 +10,11 @@ public interface TestResultService {
 	 * @param testresult
 	 * @return
 	 */
-	List<TestResult> findByTestResult(TestResult testresult);
-	
+	List<TestResult> findTestResultList(TestResult testresult);
+	/**
+	 * 通过主键id查询
+	 * @param id
+	 * @return
+	 */
+	TestResult findByid(int id);
 }

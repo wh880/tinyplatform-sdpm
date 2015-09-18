@@ -10,33 +10,30 @@ public interface TestCaseService {
 	 * @param festcase
 	 * @return
 	 */
-	List<TestCase> findByTestCase(TestCase festcase);
+	List<TestCase> findTestCaseList(TestCase festcase);
 	/**
-	 * 通过需求查询
+	 * 通过主键id查询
 	 * @param story
 	 * @return
 	 */
-	List<TestCase> findByStory(Integer story);
+	List<TestCase> findById(Integer id);
 	/**
 	 * 建用例
 	 * @param testcase
 	 * @return
 	 */
-	TestCase add(TestCase testcase);
+	TestCase addTestCase(TestCase testcase);
 	/**
 	 * 用例修改
 	 * @param testcase
 	 * @return
 	 */
-	int update(TestCase testcase);
+	int updateTestCase(TestCase testcase);
 	/**
 	 * 删除用例
 	 * @param id
 	 * @return
 	 */
 	int deleteById(Integer id);
-	/**
-	 * 转Bug
-	 */
 	
 }
