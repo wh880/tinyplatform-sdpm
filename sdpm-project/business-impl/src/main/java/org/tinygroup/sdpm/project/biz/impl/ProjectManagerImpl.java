@@ -14,4 +14,8 @@ import org.tinygroup.sdpm.project.dao.ProjectDao;
 public class ProjectManagerImpl implements ProjectManager {
     @Autowired
     private ProjectDao projectDao;
+
+    public int add(int a) {
+        return 0;
+    }
 }
