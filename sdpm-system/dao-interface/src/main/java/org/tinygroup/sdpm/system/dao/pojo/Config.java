@@ -16,6 +16,7 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
+
 /** 
  * 模块配置表
  * 

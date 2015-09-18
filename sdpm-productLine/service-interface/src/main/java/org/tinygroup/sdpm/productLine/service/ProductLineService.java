@@ -19,7 +19,7 @@ public interface ProductLineService {
 	 * @param productLine
 	 * @return
 	 */
-	int edit(ProductLine productLine);
+	int update(ProductLine productLine);
 	
 	/**
 	 * 根据主键查询
@@ -34,6 +34,32 @@ public interface ProductLineService {
 	 * @return
 	 */
 	List<ProductLine> findByStatus(String productLineStatus);
+	
+	/**
+	 * 根据对象查找(分页、排序)
+	 * @param productLine
+	 * @param pagerPojo
+	 * @return
+	 */
+	List<ProductLine> findProductLine(ProductLine productLine,PagerPojo pagerPojo);
+	
+	/**
+	 * 根据对象查找(分页)
+	 * @param currentPage
+	 * @param limit
+	 * @param pagerPojo
+	 * @return
+	 */
+	List<ProductLine> findProductLinePager(int currentPage,int limit,PagerPojo pagerPojo);
+	
+	/**
+	 * 根据对象查找(排序)
+	 * @param field
+	 * @param sorting
+	 * @param pagerPojo
+	 * @return
+	 */
+	List<ProductLine> findProductLineSort(String field,String sorting,PagerPojo pagerPojo);
 	
 	/**
 	 * 分页查找
