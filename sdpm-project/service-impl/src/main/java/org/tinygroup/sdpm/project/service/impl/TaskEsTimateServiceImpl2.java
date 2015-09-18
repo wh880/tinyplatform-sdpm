@@ -9,5 +9,5 @@ import org.tinygroup.sdpm.project.service.inter.TaskEsTimateService;
  */
 
 @Component
-public class TaskEsTimateServiceImpl implements TaskEsTimateService {
+public class TaskEsTimateServiceImpl2 implements TaskEsTimateService {
 }
