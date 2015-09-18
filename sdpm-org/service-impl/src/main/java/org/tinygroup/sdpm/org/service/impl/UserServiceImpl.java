@@ -17,35 +17,35 @@ package org.tinygroup.sdpm.org.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 
 import java.util.List;
+
 @Component
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserManager userManager;
 
-    public OrgUser find(String id) {
+    public OrgUser findUser(String id) {
         return userManager.find(id);
     }
 
-    public List<OrgUser> findList(OrgUser orgUser) {
+    public List<OrgUser> findUserList(OrgUser orgUser) {
         return userManager.findList(orgUser);
     }
 
-    public OrgUser add(OrgUser orgUser) {
+    public OrgUser addUser(OrgUser orgUser) {
         return userManager.add(orgUser);
     }
 
-    public OrgUser update(OrgUser orgUser) {
+    public OrgUser updateUser(OrgUser orgUser) {
         return userManager.update(orgUser);
     }
 
-    public Integer delete(String id) {
+    public Integer deleteUser(String id) {
         return userManager.delete(id);
     }
 }
