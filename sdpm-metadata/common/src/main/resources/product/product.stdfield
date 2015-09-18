@@ -102,8 +102,7 @@
   <standard-field id="196dbdfea33c43649227901605968e7c" name="story_verification" title="验证标准" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="ba346a40ad5f492ca7cff6c724600df9" name="story_spec" title="需求描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="32fc494251074a329bdfa8b6600ce738" name="module_id" title="模块ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
-	
-	<standard-field id="e61eb9908855427cb1d6b4a9a2ab3216" name="config_id" title="配置ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0">
+  <standard-field id="e61eb9908855427cb1d6b4a9a2ab3216" name="config_id" title="配置ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0">
     <description></description>
   </standard-field>
   <standard-field id="d0ae32e1f34c4573b8298bdcad89c49f" name="config_owner" title="配置创建人" business-type-id="095e594e1550424b9643c7e2279e85be" default=""/>
@@ -118,5 +117,8 @@
   <standard-field id="9ea372d0291e48ad92b0ccc832485b65" name="search_content" title="搜索内容" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="42c7e8f67f1c4dfd9471a62f6158cef0" name="search_addedDate" title="搜索添加日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="048d96b083e74cc1a334e0f33f2c0020" name="search_editedDate" title="搜索编辑日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-	
+  <standard-field id="db6bd96455a544c8b827b17b531f7cbc" name="dict_id" title="字典项ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
+  <standard-field id="45e660e7d07b46aca87f8e2c74d5decd" name="dict_key" title="字典key值" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="e8aa6f77988e4346bbafa0cfcb177836" name="dict_value" title="字典value值" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="f5c70ee6582347dea45bd6401b4f89b2" name="dict_sort" title="字典项序号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
 </standard-fields>

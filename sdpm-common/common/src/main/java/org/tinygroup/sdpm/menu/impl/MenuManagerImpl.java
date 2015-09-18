@@ -82,11 +82,11 @@ public class MenuManagerImpl implements MenuManager {
     public void removeMenu(String menuId) {
         logger.logMessage(LogLevel.DEBUG, "删除菜单id=\"{}\"", menuId);
         if (!menuMap.containsKey(menuId)) {
-            logger.logMessage(LogLevel.WARN, "菜单menuid=\"{}\"不存在,无须删除", menuId);
+            logger.logMessage(LogLevel.WARN, "菜单menuId=\"{}\"不存在,无须删除", menuId);
         } else {
             menuMap.remove(menuId);
         }
-        logger.logMessage(LogLevel.DEBUG, "删除菜单menuid=\"{}\"完毕", menuId);
+        logger.logMessage(LogLevel.DEBUG, "删除菜单menuId=\"{}\"完毕", menuId);
     }
 
     public List<Menu> getChildMenus(String parentId) {

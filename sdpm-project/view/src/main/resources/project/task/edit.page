@@ -22,7 +22,7 @@
 #end
 
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" "" "" {"class":"test","enctype":"multipart/form-data"})
 <div style="width:62%;float:left" class="">
 
     <div class="infoContent">
@@ -88,7 +88,7 @@
     #end
 </div>
 #end
-<div style="width:35%;float:right">
+<div style="width:30%;float:right">
     #TypeInfo("projectEdit")
 </div>
 

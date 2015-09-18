@@ -141,4 +141,14 @@
   <standard-field id="bab7c0daedc34545a255b9be36aed755" name="team_join" title="加盟日" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="e26d8ad4172d4f6297b5bca12dc6994b" name="team_days" title="可用工时" business-type-id="a6beade23ed9454f8b29e4b0be73e18e"/>
   <standard-field id="53e3179919434d0fbef0818a4039f5e1" name="team_hours" title="可用工时" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35"/>
+  <standard-field id="2c6c160a6c2b442ca13ebff69461443f" name="per_task" title="前置任务" business-type-id="a6beade23ed9454f8b29e4b0be73e18e"/>
+  <standard-field id="1c3b9f70044d44cfa691da4f6e98da4e" name="taskrelation_conditon" title="前置条件" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629">
+    <description>0-开始后，1-完成后</description>
+  </standard-field>
+  <standard-field id="bd827ff3a6d845298a83bf2508d99108" name="after_task" title="后置任务" business-type-id="a6beade23ed9454f8b29e4b0be73e18e">
+    <description></description>
+  </standard-field>
+  <standard-field id="327bb46ee3d24ced89d5bb2f8c852ff6" name="taskrelation_action" title="动作" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629">
+    <description>0-才能开始，1-才能完成</description>
+  </standard-field>
 </standard-fields>

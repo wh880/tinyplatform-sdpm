@@ -66,9 +66,10 @@
                 #end
             #end
             <div style="text-align:right;margin:right">
-                #@aModal("#myModal1" "编辑" "600" "348" "btn radius btn-primary btn-sm"
+                #*#@aModal("#myModal1" "编辑" "600" "348" "btn radius btn-primary btn-sm"
                     "/service/client/companyInfoEdit.pagelet")编辑
-                #end
+                #end*#
+                #@aExtendButton("btn-primary btn-sm" "../client/clientAdd.page")编辑#end
                 #@delItemsdpm("#action" "id" "/service/client/clientUser.page" {"class":"btn radius btn-danger btn-sm"})
                     删除#end
             </div>

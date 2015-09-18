@@ -28,10 +28,11 @@
         <application-processor bean="fileResolverProcessor"></application-processor>
         <!--<application-processor bean="bundleApplicationProcessor"></application-processor>-->
         <!--<application-processor bean="dictLoadProcessor"></application-processor>-->
-        <!-- <application-processor bean="serviceApplicationProcessor"></application-processor> -->
+            <application-processor bean="serviceApplicationProcessor"></application-processor>
         <application-processor bean="tinyListenerProcessor"></application-processor>
         <application-processor bean="fileMonitorProcessor"></application-processor>
         <application-processor bean="tinyTemplateConfigProcessor"></application-processor>
+            <application-processor bean="databaseInstallerProcessor"></application-processor>
 
         <!--<application-processor bean="logAdapterProcessor"></application-processor>-->
         <!--<application-processor bean="encryptionProcessor"></application-processor>-->
@@ -41,7 +42,6 @@
     <file-resolver-configuration
             resolve-classpath="true">
         <class-paths>
-
             <!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
                 <class-path path="E:\workspace\sdpm\sdpm-project\view\src\main\resources"/>
                 <class-path path="E:\TinyWork\sdpm\sdpm-productLine\view\src\main\resources"/>
@@ -670,5 +670,14 @@
         <init-param name="engineId" value="projectEngine"></init-param>
         <template-function name="typeInfoFunction"></template-function>
     </template-config>
+
+
+        <datasource id="aaaa" type="org.apache.commons.dbcp.BasicDataSource">
+                <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+                <property name="url"
+                          value="jdbc:mysql://192.168.51.28/sdpm?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+        </datasource>
 
 </application>

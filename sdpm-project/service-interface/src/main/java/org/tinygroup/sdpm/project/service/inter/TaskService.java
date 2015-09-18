@@ -13,29 +13,47 @@ public interface TaskService {
 
     /**
      * 新建任务
-     *
      * @param task
+     * @return
      */
     public Task save(Task task);
 
     /**
-     * 查询任务列表
+     * 查询所有任务
+     * @return
      */
-    public Pager<Task> findTasks();
+    public Pager<Task> findList();
 
     /**
-     * 通过分组查询，关键字column
-     * 用于分组查看
+     * 分组产看任务
+     * @param colum
+     * @return
      */
     public Map<String, List<Task>> findByGroup(String colum);
 
     /**
-     * 通过状态查询，关键字status
+     * 根据任务状态进行查询
+     * @param status
+     * @return
      */
     public Pager<Task> findByStatus(String status);
 
     /**
-     * 修改任务
+     * 跟新任务，包括指派，开始，完成，关闭，编辑
+     * 注意：1.状态不可逆转 2.有前置条件判断
+     * @param task
+     * @return
      */
     public Task update(Task task);
+
+    /**
+     * 复杂查询，延期
+     *
+     * @return
+     */
+    public Pager<Task> findComplex();
+
+    public void ouputFile();
+
+    public void input();
 }

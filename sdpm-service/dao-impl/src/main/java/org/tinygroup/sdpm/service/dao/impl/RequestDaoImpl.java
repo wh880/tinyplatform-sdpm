@@ -16,36 +16,24 @@
 
 package org.tinygroup.sdpm.service.dao.impl;
 
-import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.sdpm.service.dao.constant.RequestTable.*;
-import static org.tinygroup.tinysqldsl.Select.*;
-import static org.tinygroup.tinysqldsl.Insert.*;
-import static org.tinygroup.tinysqldsl.Delete.*;
-import static org.tinygroup.tinysqldsl.Update.*;
-
-import java.io.Serializable;
-
-import java.util.List;
-
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.service.dao.RequestDao;
+import org.tinygroup.sdpm.service.dao.pojo.Request;
+import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.sdpm.service.dao.pojo.Request;
-import org.tinygroup.sdpm.service.dao.RequestDao;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
-import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+import java.io.Serializable;
+import java.util.List;
+
+import static org.tinygroup.sdpm.service.dao.constant.RequestTable.REQUESTTABLE;
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 
@@ -80,7 +68,10 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 					REQUESTTABLE.REQUEST_STATUS.value(t.getRequestStatus()),
 					REQUESTTABLE.REQUEST_TRANS_TO.value(t.getRequestTransTo()),
 					REQUESTTABLE.REQUEST_TRANS_ID.value(t.getRequestTransId()),
-					REQUESTTABLE.DELETED.value(t.getDeleted()));
+						REQUESTTABLE.DELETED.value(t.getDeleted()),
+						REQUESTTABLE.REPLY_SPEC.value(t.getReplySpec()),
+						REQUESTTABLE.REPLIER.value(t.getReplier()),
+						REQUESTTABLE.REPLY_DATE.value(t.getReplyDate()));
 				return insert;
 			}
 		});
@@ -119,7 +110,10 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 					REQUESTTABLE.REQUEST_STATUS.value(t.getRequestStatus()),
 					REQUESTTABLE.REQUEST_TRANS_TO.value(t.getRequestTransTo()),
 					REQUESTTABLE.REQUEST_TRANS_ID.value(t.getRequestTransId()),
-					REQUESTTABLE.DELETED.value(t.getDeleted())).where(
+						REQUESTTABLE.DELETED.value(t.getDeleted()),
+						REQUESTTABLE.REPLY_SPEC.value(t.getReplySpec()),
+						REQUESTTABLE.REPLIER.value(t.getReplier()),
+						REQUESTTABLE.REPLY_DATE.value(t.getReplyDate())).where(
 					REQUESTTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()));
 				return update;
 			}
@@ -193,7 +187,10 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 					REQUESTTABLE.REQUEST_STATUS.eq(t.getRequestStatus()),
 					REQUESTTABLE.REQUEST_TRANS_TO.eq(t.getRequestTransTo()),
 					REQUESTTABLE.REQUEST_TRANS_ID.eq(t.getRequestTransId()),
-					REQUESTTABLE.DELETED.eq(t.getDeleted())));
+						REQUESTTABLE.DELETED.eq(t.getDeleted()),
+						REQUESTTABLE.REPLY_SPEC.eq(t.getReplySpec()),
+						REQUESTTABLE.REPLIER.eq(t.getReplier()),
+						REQUESTTABLE.REPLY_DATE.eq(t.getReplyDate())));
 			}
 		});
 	}
@@ -233,7 +230,10 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 					REQUESTTABLE.REQUEST_STATUS.eq(t.getRequestStatus()),
 					REQUESTTABLE.REQUEST_TRANS_TO.eq(t.getRequestTransTo()),
 					REQUESTTABLE.REQUEST_TRANS_ID.eq(t.getRequestTransId()),
-					REQUESTTABLE.DELETED.eq(t.getDeleted())));
+						REQUESTTABLE.DELETED.eq(t.getDeleted()),
+						REQUESTTABLE.REPLY_SPEC.eq(t.getReplySpec()),
+						REQUESTTABLE.REPLIER.eq(t.getReplier()),
+						REQUESTTABLE.REPLY_DATE.eq(t.getReplyDate())));
 			}
 		});
 	}
@@ -272,7 +272,10 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 					REQUESTTABLE.REQUEST_STATUS.value(new JdbcNamedParameter("requestStatus")),
 					REQUESTTABLE.REQUEST_TRANS_TO.value(new JdbcNamedParameter("requestTransTo")),
 					REQUESTTABLE.REQUEST_TRANS_ID.value(new JdbcNamedParameter("requestTransId")),
-					REQUESTTABLE.DELETED.value(new JdbcNamedParameter("deleted")));
+						REQUESTTABLE.DELETED.value(new JdbcNamedParameter("deleted")),
+						REQUESTTABLE.REPLY_SPEC.value(new JdbcNamedParameter("replySpec")),
+						REQUESTTABLE.REPLIER.value(new JdbcNamedParameter("replier")),
+						REQUESTTABLE.REPLY_DATE.value(new JdbcNamedParameter("replyDate")));
 			}
 		});
 	}
@@ -315,7 +318,10 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 					REQUESTTABLE.REQUEST_STATUS.value(new JdbcNamedParameter("requestStatus")),
 					REQUESTTABLE.REQUEST_TRANS_TO.value(new JdbcNamedParameter("requestTransTo")),
 					REQUESTTABLE.REQUEST_TRANS_ID.value(new JdbcNamedParameter("requestTransId")),
-					REQUESTTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
+						REQUESTTABLE.DELETED.value(new JdbcNamedParameter("deleted")),
+						REQUESTTABLE.REPLY_SPEC.value(new JdbcNamedParameter("replySpec")),
+						REQUESTTABLE.REPLIER.value(new JdbcNamedParameter("replier")),
+						REQUESTTABLE.REPLY_DATE.value(new JdbcNamedParameter("replyDate"))).where(
 				REQUESTTABLE.CLIENT_REQUEST_ID.eq(new JdbcNamedParameter("clientRequestId")));
 			}
 		});
@@ -356,7 +362,10 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 				REQUESTTABLE.REQUEST_STATUS.eq(new JdbcNamedParameter("requestStatus")),
 				REQUESTTABLE.REQUEST_TRANS_TO.eq(new JdbcNamedParameter("requestTransTo")),
 				REQUESTTABLE.REQUEST_TRANS_ID.eq(new JdbcNamedParameter("requestTransId")),
-				REQUESTTABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
+						REQUESTTABLE.DELETED.eq(new JdbcNamedParameter("deleted")),
+						REQUESTTABLE.REPLY_SPEC.eq(new JdbcNamedParameter("replySpec")),
+						REQUESTTABLE.REPLIER.eq(new JdbcNamedParameter("replier")),
+						REQUESTTABLE.REPLY_DATE.eq(new JdbcNamedParameter("replyDate"))));
 			}
 		});
 	}

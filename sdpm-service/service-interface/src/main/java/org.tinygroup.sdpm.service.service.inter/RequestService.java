@@ -14,7 +14,7 @@ public interface RequestService {
      * @param id 主键
      * @return
      */
-    Request find(String id);
+    Request findRequest(String id);
 
     /**
      * 根据产品模块id查找请求
@@ -22,7 +22,7 @@ public interface RequestService {
      * @param moldeId 主键
      * @return
      */
-    Request findByMolde(String moldeId);
+    Request findRequestByMolde(String moldeId);
 
     /**
      * 根据条件查询List
@@ -30,7 +30,7 @@ public interface RequestService {
      * @param request 用于查询条件
      * @return
      */
-    List<Request> getList(Request request);
+    List<Request> getRequestList(Request request);
 
     /**
      * 新增请求
@@ -38,7 +38,7 @@ public interface RequestService {
      * @param request 新增实体类
      * @return
      */
-    Request add(Request request);
+    Request addRequest(Request request);
 
     /**
      * 更新faq
@@ -46,7 +46,7 @@ public interface RequestService {
      * @param request 需要更新的实体类
      * @return
      */
-    Request update(Request request);
+    Request updateRequest(Request request);
 
     /**
      * 根据id进行软删除请求
@@ -54,7 +54,7 @@ public interface RequestService {
      * @param id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer deleteRequest(String id);
 
     /**
      * 根据id进行批量软删除请求
@@ -62,6 +62,6 @@ public interface RequestService {
      * @param id 主键
      * @return
      */
-    Integer deleteBatch(Integer id);
+    Integer deleteRequestBatch(Integer id);
 }
 

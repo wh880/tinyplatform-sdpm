@@ -214,6 +214,23 @@ public class RequestTable extends Table {
 	 */
 	public final Column DELETED = new Column(this, "deleted");
 
+	/**
+	 * 回复描述
+	 */
+	public final Column REPLY_SPEC = new Column(this, "reply_spec");
+
+	/**
+	 * 回复者
+	 * <p/>
+	 * 客服
+	 */
+	public final Column REPLIER = new Column(this, "replier");
+
+	/**
+	 * 回复时间
+	 */
+	public final Column REPLY_DATE = new Column(this, "reply_date");
+
 
 		private RequestTable() {
 			super("request");

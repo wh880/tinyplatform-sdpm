@@ -14,7 +14,7 @@ public interface ReviewService {
      * @param id 主键
      * @return
      */
-    Review find(String id);
+    Review findReview(String id);
 
     /**
      * 根据产品模块id回访中的请求
@@ -22,7 +22,7 @@ public interface ReviewService {
      * @param moldeId 主键
      * @return
      */
-    Review findByMolde(String moldeId);
+    Review findReviewByMolde(String moldeId);
 
     /**
      * 根据条件查询List
@@ -30,7 +30,7 @@ public interface ReviewService {
      * @param review 用于查询条件
      * @return
      */
-    List<Review> getList(Review review);
+    List<Review> getReviewList(Review review);
 
     /**
      * 将请求指派成员进行回访
@@ -38,7 +38,7 @@ public interface ReviewService {
      * @param review 新增实体类
      * @return
      */
-    Review add(Review review);
+    Review addReview(Review review);
 
     /**
      * 更新faq
@@ -46,23 +46,5 @@ public interface ReviewService {
      * @param review 需要更新的实体类
      * @return
      */
-    Review update(Review review);
-
-    /**
-     * 根据id对回访进行删除请求
-     * 对请求进行软删除
-     *
-     * @param id 主键
-     * @return
-     */
-    Integer delete(String id);
-
-    /**
-     * 根据id对回访进行批量删除请求
-     * 对请求进行软删除
-     *
-     * @param id 主键
-     * @return
-     */
-    Integer deleteBatch(Integer id);
+    Review updateReview(Review review);
 }

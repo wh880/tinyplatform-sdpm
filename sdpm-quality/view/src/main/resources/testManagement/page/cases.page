@@ -38,7 +38,7 @@
 				#foreach(m:menuManager.getScopeMenus("testcase-tab"))
     				#if(m.id!="add-case")
     					#@aModal("#myModal" m.name "550" "100" "" m.href "ml-5")
-								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;
+								#buttonIcon(iconClass=m.icon)${m.name}#end
 					#else                  
              			<a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>
 			 		#end

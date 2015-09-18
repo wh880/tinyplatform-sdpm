@@ -22,10 +22,11 @@
                         #@gridSysCol(8)2015.09.07#end
                     #end
                 <div style="text-align:right;margin:right">
-                    #@aModal("#myModal3"+varFor.index "编辑" "799" "300" "btn radius btn-primary btn-sm"
-                        "/service/client/clientProductEdit.pagelet")
+                    #*#@aModal("#myModal3"+varFor.index "编辑" "799" "300" "btn radius btn-primary btn-sm"
+                        "/service/client/clientAdd.page")
                         编辑
-                    #end
+                    #end*#
+                        #@aExtendButton("btn-primary btn-sm" "../sla/slaAdd.page")编辑#end
                     #@delItemsdpm(
                         "#action" "id" "/service/client/clientProduct.page" {"class":"btn radius btn-danger btn-sm"})
                         删除#end

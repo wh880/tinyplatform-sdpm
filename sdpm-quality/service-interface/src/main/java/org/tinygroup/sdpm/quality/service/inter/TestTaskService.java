@@ -6,23 +6,23 @@ import org.tinygroup.sdpm.quality.dao.pojo.TestTask;
 
 public interface TestTaskService {
 	/**
-	 * 通过状态查询
+	 * 通过条件查询
 	 * @param testtask
 	 * @return
 	 */
-	List<TestTask> findByStatus(String testtask);
+	List<TestTask> findTestTaskList(TestTask testtask);
 	/**
 	 * 提交测试
 	 * @param testtask
 	 * @return
 	 */
-	TestTask add(TestTask testtask);
+	TestTask addTestTask(TestTask testtask);
 	/**
 	 * 编辑测试
 	 * @param testtask
 	 * @return
 	 */
-	int update(TestTask testtask);
+	int updateTestTask(TestTask testtask);
 	/**
 	 * 删除测试
 	 * @param id

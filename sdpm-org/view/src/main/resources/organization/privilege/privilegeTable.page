@@ -15,7 +15,7 @@
     #@td()
         #set(map={"org-privilege-user":[700,300],"org-privilege-copy":[700,300],"org-privilege-edit":[600,200]})
         #foreach(m:menuManager.getScopeMenus("org-privilege"))
-            #if(m.id == "org-privilege-maintain"||m.id=="org-privilege-user")
+            #if(m.id == "org-privilege-maintain"||m.id=="org-privilege-user"||m.id=="org-privilege-edit")
             <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #else
                 #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?id="+var "ml-5")

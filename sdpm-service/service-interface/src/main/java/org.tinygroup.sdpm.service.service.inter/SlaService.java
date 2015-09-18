@@ -14,7 +14,7 @@ public interface SlaService {
      * @param id 主键
      * @return
      */
-    Sla find(String id);
+    Sla findSla(String id);
 
     /**
      * 根据条件查询List
@@ -22,7 +22,7 @@ public interface SlaService {
      * @param sla 用于查询条件
      * @return
      */
-    List<Sla> getList(Sla sla);
+    List<Sla> getSlaList(Sla sla);
 
     /**
      * 新增一个用户
@@ -30,7 +30,7 @@ public interface SlaService {
      * @param sla 新增实体类
      * @return
      */
-    Sla add(Sla sla);
+    Sla addSla(Sla sla);
 
     /**
      * 更新用户
@@ -38,7 +38,7 @@ public interface SlaService {
      * @param sla 需要更新的实体类
      * @return
      */
-    Sla update(Sla sla);
+    Sla updateSla(Sla sla);
 
     /**
      * 根据id进行软删除用户
@@ -46,7 +46,7 @@ public interface SlaService {
      * @param id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer deleteSla(String id);
 
     /**
      * 根据id进行批量软删除用户
@@ -54,5 +54,5 @@ public interface SlaService {
      * @param id 主键
      * @return
      */
-    Integer deleteBatch(Integer id);
+    Integer deleteSlaBatch(Integer id);
 }

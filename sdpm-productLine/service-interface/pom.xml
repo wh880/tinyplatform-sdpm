@@ -16,7 +16,7 @@
   	
   	<dependency>
        <groupId>org.tinygroup</groupId>
-       <artifactId>sdpm-productLine-dao-impl</artifactId>
+       <artifactId>sdpm-productLine-dao-interface</artifactId>
        <version>${tiny_sdpm_version}</version>
     </dependency>
   	

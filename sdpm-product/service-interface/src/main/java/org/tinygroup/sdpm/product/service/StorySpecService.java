@@ -2,8 +2,8 @@ package org.tinygroup.sdpm.product.service;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.product.dao.pojo.Story;
 import org.tinygroup.sdpm.product.dao.pojo.StorySpec;
+import org.tinygroup.sdpm.product.service.pojo.PagerPojo;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface StorySpecService {
@@ -43,10 +43,37 @@ public interface StorySpecService {
 	 */
 	int deleteByStorySpec(StorySpec storySpec);
 	
-	/**
+/*	*//**
+	 * 根据对形象查找(分页、排序)
+	 * @param pagerPojo
+	 * @param storySpec
+	 * @return
+	 *//*
+	
+	List<StorySpec> findStorySpec(PagerPojo pagerPojo, StorySpec storySpec);
+	
+	*//**
+	 * 根据对形象查找(分页)
+	 * @param field
+	 * @param sorting
+	 * @param storySpec
+	 * @return
+	 *//*
+	List<StorySpec> findStorySpecSort(String field,String sorting,StorySpec storySpec);
+	
+	*//**
+	 * 根据对形象查找(排序)
+	 * @param currentPage
+	 * @param limit
+	 * @param storySpec
+	 * @return
+	 *//*
+	List<StorySpec> findStorySpecPager(int currentPage,int limit,StorySpec storySpec);
+	
+	*//**
 	 * 分页查找
 	 * @param storySpec
 	 * @return
-	 */
-	Pager<StorySpec> findStorySpec(int currentPage,int limit ,StorySpec storySpec);
+	 *//*
+	Pager<StorySpec> findStorySpec(int currentPage,int limit ,StorySpec storySpec);*/
 }

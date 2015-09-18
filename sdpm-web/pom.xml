@@ -12,6 +12,12 @@
     <packaging>war</packaging>
     <url>http://maven.apache.org</url>
     <dependencies>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-metadata-common</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+
         <!--common-->
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -115,6 +121,15 @@
             <artifactId>org.tinygroup.validate</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
+        <!--数据库安装-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.databasebuinstaller</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.templateweblayer</artifactId>
@@ -130,36 +145,43 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.serviceprocessor</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.flowprocessor</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.cepcoreimpl</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.flowservicecomponent</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.flowbasiccomponent</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.jcscache</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
