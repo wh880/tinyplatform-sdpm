@@ -3,8 +3,6 @@ package org.tinygroup.sdpm.product.biz.inter;
 import java.util.List;
 
 import org.tinygroup.sdpm.product.dao.pojo.Plan;
-import org.tinygroup.sdpm.product.service.pojo.PagerPojo;
-import org.tinygroup.tinysqldsl.Pager;
 
 public interface PlanManager {
 	/**

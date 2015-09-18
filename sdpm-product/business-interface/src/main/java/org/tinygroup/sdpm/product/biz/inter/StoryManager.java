@@ -1,5 +1,9 @@
 package org.tinygroup.sdpm.product.biz.inter;
 
+import java.util.List;
+
+import org.tinygroup.sdpm.product.dao.pojo.Story;
+
 public interface StoryManager {
     /**
      * 添加需求

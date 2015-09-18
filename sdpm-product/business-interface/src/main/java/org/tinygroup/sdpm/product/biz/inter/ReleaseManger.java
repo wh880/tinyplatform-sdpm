@@ -1,10 +1,6 @@
 package org.tinygroup.sdpm.product.biz.inter;
 
-import org.tinygroup.database.config.Field;
 import org.tinygroup.sdpm.product.dao.pojo.Release;
-import org.tinygroup.sdpm.product.service.pojo.PagerPojo;
-import org.tinygroup.tinysqldsl.Pager;
-import java.util.List;
 
 public interface ReleaseManger{
     /**
