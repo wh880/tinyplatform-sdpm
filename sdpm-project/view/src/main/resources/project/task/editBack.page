@@ -63,7 +63,7 @@
       	<a href="${TINY_CONTEXT_PATH}/project/task/edit.page">#buttonDefault(caption="返回")</a>
 	#end
 </div>
-	<div style="width:35%;float:right">
+	<div style="width:30%;float:right">
 		#TypeInfo("projectView")
 	</div>
 

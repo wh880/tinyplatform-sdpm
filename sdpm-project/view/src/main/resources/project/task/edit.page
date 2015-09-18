@@ -88,7 +88,7 @@
     #end
 </div>
 #end
-<div style="width:35%;float:right">
+<div style="width:30%;float:right">
     #TypeInfo("projectEdit")
 </div>
 
