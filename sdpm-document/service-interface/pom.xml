@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.tinygroup</groupId>
-			<artifactId>sdpm-document-dao-interface</artifactId>
+			<artifactId>sdpm-document-business-interface</artifactId>
 			<version>${tiny_sdpm_version}</version>
 		</dependency>
 		<dependency>

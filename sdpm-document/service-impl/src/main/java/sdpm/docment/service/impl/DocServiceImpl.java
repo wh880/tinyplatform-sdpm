@@ -1,64 +1,80 @@
 package sdpm.docment.service.impl;
 
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.tinygroup.sdpm.document.dao.inter.DocDao;
-import org.tinygroup.sdpm.document.dao.inter.DocLibDao;
+import org.tinygroup.docment.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.pojo.Doc;
 import org.tinygroup.sdpm.document.pojo.DocLib;
+import org.tinygroup.tinysqldsl.Pager;
 
 import sdpm.docment.service.DocService;
 
-@Service
-public class DocServiceImpl implements DocService{
-	@Autowired
-	private DocDao docdao;
-	@Autowired
-	private DocLibDao doclibdao;
+/**
+ * @author alu
+ */
 
-	public void addDocLib(DocLib doclib) {
-		//
-		if(doclib.getDocLibid()!=null)
-			doclibdao.add(doclib);
-		//return "the doclib already exist.";
-		
+@Service
+public class DocServiceImpl implements DocService {
+	@Autowired
+	private DocBiz docbiz;
+
+	public Doc createNewDoc(Doc doc) {
+		// 
+		return docbiz.addDoc(doc);
 	}
 
-	public void addDoc(Doc doc) {
-		//
-		if(doc.getDocId()!=null)
-			docdao.add(doc);
-		//return "the doc already exist.";
+	public DocLib createNewDocLib(DocLib doclib) {
+		// 
+		return docbiz.addDocLib(doclib);
 	}
 
 	public int updtDoc(Doc doc) {
 		// 
-		return docdao.edit(doc);
+		return docbiz.updtDoc(doc);
 	}
 
 	public int updtDocLib(DocLib doclib) {
 		// 
-		return doclibdao.edit(doclib);
+		return docbiz.updtDocLib(doclib);
 	}
 
-	public int delDoc(Integer key) {
+	public Doc findById(BigInteger id) {
 		// 
-		return docdao.deleteByKey(key);
+		return docbiz.getDocById(id);
 	}
 
-	public int delDocLib(Integer key) {
+	public DocLib findDoclibById(Integer id) {
 		// 
-		return doclibdao.deleteByKey(key);
+		return docbiz.getDocLibById(id);
 	}
 
-	public Doc getDocById(Integer key) {
+	public List<Doc> findByIds(BigInteger... keys) {
 		// 
-		return docdao.getByKey(key);
+		return null;
 	}
 
-	public int batchDelDocByIds(Integer... keys) {
-		// 
-		return docdao.deleteByKeys(keys);
+	public List<Doc> findByIds(Doc doc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Pager<Doc> findWithPager(int start, int limit, Doc doc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int deleteDocById(BigInteger id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int deleteDocByIds(BigInteger... keys) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

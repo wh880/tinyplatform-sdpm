@@ -18,7 +18,7 @@
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-common-view-uicomponent</artifactId>
-            <version>${tiny_sdpm_version}</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>

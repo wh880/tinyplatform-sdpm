@@ -2,8 +2,8 @@ package org.tinygroup.sdpm.product.service;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.Story;
+import org.tinygroup.sdpm.product.service.pojo.PagerPojo;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface StoryService {
@@ -98,59 +98,54 @@ public interface StoryService {
 	 * @return
 	 */
 	List<Story> findByPlanId(Integer planId);
-	
-	/**
-	 * 根据状态查找
-	 * @param status
-	 * @return
-	 */
-	List<Story> findByStatus(PagerPojo pagerPojo,String status);
-	
 	/**
 	 * 根据对象查找
-	 * @param pagerPojo
 	 * @param story
 	 * @return
 	 */
 	List<Story> findStory(Story story);
 	
+/*	*//**
+	 * 根据状态查找
+	 * @param status
+	 * @return
+	 *//*
+	List<Story> findByStatus(PagerPojo pagerPojo, String status);
 
-	/**
+	*//**
 	 * 分页查找(可排序)
 	 * @param pagerPojo
 	 * @param story
 	 * @return
-	 */
+	 *//*
 	List<Story> findStory(PagerPojo pagerPojo,Story story);
 	
-	/**
+	*//**
 	 * 排序查询
 	 * @param field
 	 * @param sorting
 	 * @param story
 	 * @return
-	 */
+	 *//*
 	List<Story> findStorySort(String field,String sorting,Story story);
 	
-	/**
+	*//**
 	 * 分页查询
 	 * @param currentPage
 	 * @param limit
 	 * @param story
 	 * @return
-	 */
+	 *//*
 	List<Story> findStoryPager(int currentPage,int limit,Story story);
 	
 	
-	/**
+	*//**
 	 * 分页查找
 	 * @param currentPage
 	 * @param limit
 	 * @param story
 	 * @return
-	 */
+	 *//*
 	Pager<Story> findStory(int currentPage,int limit ,Story story);
-	
-	
-	
+	*/
 }

@@ -15,7 +15,7 @@
                     <a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#"
                        href="javascript:void(0);">操作<span class="caret"></span></a>
                     #@ulDropdownMenu()
-                        #@liDropdownMenu("指派解决")
+                        #@liDropdownMenu("指派回复")
                             #@ulDropdownMenu()
                                 #@dropdownItem("javascript:void(0);")admin#end
                                 #@dropdownItem("javascript:void(0);")张三#end

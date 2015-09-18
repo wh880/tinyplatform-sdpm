@@ -16,29 +16,18 @@
 
 package org.tinygroup.sdpm.document.dao.impl;
 
+import static org.tinygroup.sdpm.document.constant.DocTable.DOCTABLE;
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.sdpm.document.constant.DocTable.*;
-import static org.tinygroup.tinysqldsl.Select.*;
-import static org.tinygroup.tinysqldsl.Insert.*;
-import static org.tinygroup.tinysqldsl.Delete.*;
-import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
-
+import java.math.BigInteger;
 import java.util.List;
 
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.sdpm.document.pojo.Doc;
-import org.tinygroup.sdpm.document.dao.inter.DocDao;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -46,6 +35,16 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.document.dao.inter.DocDao;
+import org.tinygroup.sdpm.document.pojo.Doc;
+import org.tinygroup.tinysqldsl.Delete;
+import org.tinygroup.tinysqldsl.Insert;
+import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.Select;
+import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 
 public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 
@@ -104,7 +103,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 		});
 	}
 
-	public int deleteByKey(Integer pk){
+	public int deleteByKey(BigInteger pk){
 		if(pk == null){
 			return 0;
 		}
@@ -115,7 +114,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 		});
 	}
 
-	public int deleteByKeys(Integer... pks) {
+	public int deleteByKeys(BigInteger... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
 		}
@@ -126,7 +125,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 		},pks);
 	}
 
-	public Doc getByKey(Integer pk) {
+	public Doc getByKey(BigInteger pk) {
 		return getDslTemplate().getByKey(pk, Doc.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
