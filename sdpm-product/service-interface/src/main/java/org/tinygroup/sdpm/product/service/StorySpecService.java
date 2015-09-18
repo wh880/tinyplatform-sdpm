@@ -44,6 +44,33 @@ public interface StorySpecService {
 	int deleteByStorySpec(StorySpec storySpec);
 	
 	/**
+	 * 根据对形象查找(分页、排序)
+	 * @param pagerPojo
+	 * @param storySpec
+	 * @return
+	 */
+	
+	List<StorySpec> findStorySpec(PagerPojo pagerPojo,StorySpec storySpec);
+	
+	/**
+	 * 根据对形象查找(分页)
+	 * @param field
+	 * @param sorting
+	 * @param storySpec
+	 * @return
+	 */
+	List<StorySpec> findStorySpecSort(String field,String sorting,StorySpec storySpec);
+	
+	/**
+	 * 根据对形象查找(排序)
+	 * @param currentPage
+	 * @param limit
+	 * @param storySpec
+	 * @return
+	 */
+	List<StorySpec> findStorySpecPager(int currentPage,int limit,StorySpec storySpec);
+	
+	/**
 	 * 分页查找
 	 * @param storySpec
 	 * @return

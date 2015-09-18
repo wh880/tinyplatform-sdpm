@@ -49,8 +49,9 @@
                         #end
                     </div>
                     <div style="text-align:right;margin:right">
-                        #@aModal("#myModal3" "编辑" "800" "500" "btn radius btn-primary btn-sm"
-                            "/service/sla/clientSlaEdit.pagelet")编辑#end
+                       #* #@aModal("#myModal3" "编辑" "800" "500" "btn radius btn-primary btn-sm"
+                            "/service/sla/clientSlaEdit.pagelet")编辑#end*#
+                       #@aExtendButton("btn-primary  btn-sm" "../sla/slaAdd.page")编辑#end
                         #@delItemsdpm(
                             "#action" "id" "/service/sla/clientsla.page" {"class":"btn radius btn-danger btn-sm"})删除#end
                     </div>

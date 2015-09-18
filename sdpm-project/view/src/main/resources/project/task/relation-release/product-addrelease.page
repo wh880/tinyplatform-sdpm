@@ -3,7 +3,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="release")
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" "" "" {"class":"test","enctype":"multipart/form-data"})
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">编辑</p>

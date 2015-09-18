@@ -27,9 +27,9 @@ public class BurnTable extends Table {
 
 	public static final BurnTable BURNTABLE = new BurnTable();
 
-	/**
+	/** 
 	 * 逻辑ID
-	 *
+	 * 
 	 */
 	public final Column ID = new Column(this, "id");
 

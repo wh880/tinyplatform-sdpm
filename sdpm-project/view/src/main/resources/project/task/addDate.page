@@ -16,7 +16,7 @@
     ##body end
     #end
 #end
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" "" "" {"class":"test","enctype":"multipart/form-data"})
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">建任务</p>

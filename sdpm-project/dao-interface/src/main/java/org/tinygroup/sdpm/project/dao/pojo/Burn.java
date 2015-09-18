@@ -24,9 +24,9 @@ import java.util.Date;
  */
 public class Burn {
 
-	/**
+	/** 
 	 * 逻辑ID
-	 *
+	 * 
 	 */
 	private Integer id;
 

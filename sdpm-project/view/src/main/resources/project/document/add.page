@@ -32,7 +32,7 @@
 	创建文档
 #end
 #@div()
-	#@tinyForm("thisform" "" "" {"class":"test"})
+	#@tinyForm("thisform" "" "" {"class":"test","enctype":"multipart/form-data"})
 			#@elementItem()
 					#@colLabel()所属项目#end
 				#@Tselect2F()

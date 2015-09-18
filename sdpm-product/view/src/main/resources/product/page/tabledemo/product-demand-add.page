@@ -1,6 +1,6 @@
 #!set(linkName="product-demand",sonitem="
 <li>"+"需求"+"</li>")
-#@tinyForm("thisform" "" "" {"class":"test","enctype"="multipart/form-data"})
+#@tinyForm("thisform" "" "" {"class":"test","enctype":"multipart/form-data"})
 
 <script>
 

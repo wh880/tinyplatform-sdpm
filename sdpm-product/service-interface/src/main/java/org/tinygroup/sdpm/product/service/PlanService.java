@@ -15,12 +15,6 @@ public interface PlanService {
 	 */
 	Plan add(Plan plan);
 	
-	/**
-	 * 保存计划
-	 * @param Plan
-	 * @return
-	 */
-	Plan save(Plan plan);
 	
 	/**
 	 * 根据计划ID查找计划
@@ -40,7 +34,7 @@ public interface PlanService {
 	 * @param Plan
 	 * @return
 	 */
-	int edit(Integer PlanId);
+	int update(Integer PlanId);
 	
 	/**
 	 * 根据计划ID删除计划
