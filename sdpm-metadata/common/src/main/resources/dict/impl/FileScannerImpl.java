@@ -1,4 +1,4 @@
-package org.tinygroup.util.dict.impl;
+package dict.impl;
 
 import com.thoughtworks.xstream.XStream;
 import org.tinygroup.database.config.table.Table;
@@ -20,7 +20,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by wangll13383 on 2015/9/11.
- * 扫描 stdfield文件，table文件
  */
 public class FileScannerImpl extends AbstractFileScanner {
 
@@ -51,7 +50,8 @@ public class FileScannerImpl extends AbstractFileScanner {
 
     public void process() {
         fileProcess();
-
+        resolverStd();
+        resolverTable();
     }
 
     private void resolverStd(){
@@ -106,5 +106,10 @@ public class FileScannerImpl extends AbstractFileScanner {
 
     public boolean isMatchTable(FileObject fileObject){
         return fileObject.getFileName().endsWith(TABLE_FILE_EXT);
+    }
+
+    public static void main(String[] args){
+        FileScannerImpl f = new FileScannerImpl();
+        f.process();
     }
 }
