@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-org-service-impl</artifactId>
+            <artifactId>sdpm-org-service-inter</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
         <dependency>
