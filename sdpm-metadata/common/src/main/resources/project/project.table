@@ -141,4 +141,11 @@
       <index-field field="team_account" direction="asc"/>
     </index>
   </table>
+  <table id="5f014d2cbd8343eea09ab07733e86ad6" name="taskrelation" title="TASKRELATION">
+    <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="false" unique="false" not-null="false" id="id" auto-increase="false"/>
+    <table-field standard-field-id="2c6c160a6c2b442ca13ebff69461443f" primary="false" unique="false" not-null="false" id="per_task" auto-increase="false"/>
+    <table-field standard-field-id="1c3b9f70044d44cfa691da4f6e98da4e" primary="false" unique="false" not-null="false" id="taskrelation_conditon" auto-increase="false"/>
+    <table-field standard-field-id="bd827ff3a6d845298a83bf2508d99108" primary="false" unique="false" not-null="false" id="after_task" auto-increase="false"/>
+    <table-field standard-field-id="327bb46ee3d24ced89d5bb2f8c852ff6" primary="false" unique="false" not-null="false" id="taskrelation_action" auto-increase="false"/>
+  </table>
 </tables>
