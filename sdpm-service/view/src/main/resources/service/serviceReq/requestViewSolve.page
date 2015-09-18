@@ -2,7 +2,7 @@
     #@noRespsGridSystem()
 
         #@gridSysRow()
-            #@colLabel("col-2")解决时间：#end
+            #@colLabel("col-2")回复时间：#end
             #@gridSysCol(5)
                 #@tinyDateInput(
                     "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
@@ -11,14 +11,14 @@
             #end
         #end
         #@gridSysRow()
-            #@colLabel("col-2")解决人员：#end
+            #@colLabel("col-2")回复人员：#end
             #@gridSysCol(5)
-                #tinyInput("text" "解决人员" ""{"datatype":"","id":"解决人员","class":"input-text"})
+                #tinyInput("text" "回复人员" ""{"datatype":"","id":"回复人员","class":"input-text"})
             #end
 
         #end
         #@gridSysRow()
-            #@colLabel("col-2")解决方案：#end
+            #@colLabel("col-2")回复方案：#end
             #@gridSysCol(9)
                 #@Teditor(
                     "content1" "content1" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符",
