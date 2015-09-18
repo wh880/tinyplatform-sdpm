@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by shenly13343 on 2015-09-17.
  */
-public interface teamService {
+public interface TeamService2 {
     /**
      * 新增成员
      */

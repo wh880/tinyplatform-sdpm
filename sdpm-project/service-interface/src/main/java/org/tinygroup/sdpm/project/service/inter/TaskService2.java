@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by shenly13343 on 2015-09-17.
  */
-public interface taskService {
+public interface TaskService2 {
 
     /**
      * 新建任务
@@ -25,6 +25,7 @@ public interface taskService {
 
     /**
      * 通过分组查询，关键字column
+     * 用于分组查看
      */
     public Map<String, List<Task>> findByGroup(String colum);
 
