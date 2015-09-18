@@ -1,4 +1,4 @@
-package org.tinygroup.util;
+package org.tinygroup.util.sort;
 
 import com.google.common.collect.Table;
 import org.tinygroup.tinysqldsl.base.Column;

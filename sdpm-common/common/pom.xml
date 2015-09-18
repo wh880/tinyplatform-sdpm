@@ -62,5 +62,17 @@
             <version>${tiny_version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.metadata</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.database</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
     </dependencies>
 </project>

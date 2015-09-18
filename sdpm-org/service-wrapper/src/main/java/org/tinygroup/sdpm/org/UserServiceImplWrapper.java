@@ -16,6 +16,8 @@
 
 package org.tinygroup.sdpm.org;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -26,18 +28,10 @@ import org.tinygroup.event.ServiceRequest;
 
 import java.util.List;
 import java.util.UUID;
-
+@Component
 public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.inter.UserService {
-
-    CEPCore core;
-
-    public CEPCore getCore() {
-        return core;
-    }
-
-    public void setCore(CEPCore core) {
-        this.core = core;
-    }
+    @Autowired
+    CEPCore cepCore;
 
     private Event getEvent(String serviceId, Context context) throws Exception {
         Event event = new Event();
@@ -116,8 +110,8 @@ public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.in
 
     private <T> T callServiceAndCallBack(String serviceId, Context context) throws Exception {
         Event event = getEvent(serviceId, context);
-        core.process(event);
-        ServiceInfo info = core.getServiceInfo(serviceId);
+        cepCore.process(event);
+        ServiceInfo info = cepCore.getServiceInfo(serviceId);
         List<Parameter> resultsParam = info.getResults();
         if (resultsParam == null || resultsParam.size() == 0) {
             return null;
