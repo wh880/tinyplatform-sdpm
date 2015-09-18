@@ -13,47 +13,52 @@ import sdpm.docment.service.DocService;
 public class DocServiceImpl implements DocService{
 	@Autowired
 	private DocDao docdao;
+	@Autowired
 	private DocLibDao doclibdao;
 
 	public void addDocLib(DocLib doclib) {
 		//
-		doclibdao.add(doclib);
+		if(doclib.getDocLibid()!=null)
+			doclibdao.add(doclib);
+		//return "the doclib already exist.";
 		
 	}
 
 	public void addDoc(Doc doc) {
-		// TODO Auto-generated method stub
-		
+		//
+		if(doc.getDocId()!=null)
+			docdao.add(doc);
+		//return "the doc already exist.";
 	}
 
 	public int updtDoc(Doc doc) {
-		// TODO Auto-generated method stub
-		return 0;
+		// 
+		return docdao.edit(doc);
 	}
 
 	public int updtDocLib(DocLib doclib) {
-		// TODO Auto-generated method stub
-		return 0;
+		// 
+		return doclibdao.edit(doclib);
 	}
 
 	public int delDoc(Integer key) {
-		// TODO Auto-generated method stub
-		return 0;
+		// 
+		return docdao.deleteByKey(key);
 	}
 
 	public int delDocLib(Integer key) {
-		// TODO Auto-generated method stub
-		return 0;
+		// 
+		return doclibdao.deleteByKey(key);
 	}
 
 	public Doc getDocById(Integer key) {
-		// TODO Auto-generated method stub
-		return null;
+		// 
+		return docdao.getByKey(key);
 	}
 
 	public int batchDelDocByIds(Integer... keys) {
-		// TODO Auto-generated method stub
-		return 0;
+		// 
+		return docdao.deleteByKeys(keys);
 	}
 
 }
