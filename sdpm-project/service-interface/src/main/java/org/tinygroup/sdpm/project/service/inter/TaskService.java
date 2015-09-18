@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by shenly13343 on 2015-09-17.
  */
-public interface TaskService2 {
+public interface TaskService {
 
     /**
      * 新建任务
