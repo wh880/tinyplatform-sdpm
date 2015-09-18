@@ -16,9 +16,11 @@
 
 package org.tinygroup.sdpm.document.dao.inter;
 
+import java.math.BigInteger;
+
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.document.pojo.Doc;
 
-public interface DocDao extends BaseDao<Doc,Integer> {
+public interface DocDao extends BaseDao<Doc,BigInteger> {
 
 }
