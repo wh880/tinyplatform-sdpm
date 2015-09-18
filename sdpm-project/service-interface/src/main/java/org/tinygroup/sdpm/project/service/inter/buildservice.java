@@ -6,7 +6,7 @@ import org.tinygroup.tinysqldsl.Pager;
 /**
  * Created by shenly13343 on 2015-09-17.
  */
-public interface Buildservice3 {
+public interface Buildservice {
     /**
      * 创建版本
      *
