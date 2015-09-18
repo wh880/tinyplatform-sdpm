@@ -16,11 +16,13 @@
 
 package org.tinygroup.sdpm.org.dao.pojo;
 
+import java.io.Serializable;
+
 /**
  * 用户表
  *
  */
-public class OrgUser {
+public class OrgUser implements Serializable{
 
     public static String DELETE_YES = "1";
     public static String DELETE_NO = "0";

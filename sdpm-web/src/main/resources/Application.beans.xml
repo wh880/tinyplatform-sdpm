@@ -55,6 +55,19 @@
                 <!--TypeInfo处理器 -->
                 <ref bean="typeInfoProcessor" />
 
+                <!-- database -->
+                <ref bean="constantFileResolver"/>
+                <ref bean="standardTypeFileResolver"/>
+                <ref bean="errorMessageFileResolver"/>
+                <ref bean="businessTypeFileResolver"/>
+                <ref bean="standardFieldFileResolver"/>
+                <ref bean="tableFileResolver"/>
+                <ref bean="initDataFileResolver"/>
+                <ref bean="processorFileResolver"/>
+                <ref bean="customSqlFileResolver"/>
+                <ref bean="viewFileResolver"/>
+                <ref bean="procedureFileResolver"/>
+
             </list>
         </property>
     </bean>
