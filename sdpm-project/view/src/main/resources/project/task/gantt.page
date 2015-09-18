@@ -19,7 +19,16 @@
 		##operationbay end
 		#end
 	##body end
-	#end
+            #@div(divClass="operationbar")
+            <span class="f">
+    <a href="${TINY_CONTEXT_PATH}/project/task/viewingtask.page" "ml-5" class=${type
+                =="noclose"?"active_btn":""}>查看任务关系</a>
+                <a href="${TINY_CONTEXT_PATH}/project/task/maintenancetask.page" "ml-5" class=${type=="all"?"active_btn":""}>维护任务关系</a>
+</span>
+
+            #end
+
+    #end
 #end
 
 #@h2() #end
