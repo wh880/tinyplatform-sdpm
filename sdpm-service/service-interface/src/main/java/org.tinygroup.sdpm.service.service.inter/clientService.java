@@ -5,26 +5,61 @@ import org.tinygroup.sdpm.service.dao.pojo.Client;
 import java.util.List;
 
 
-public interface clientService {
-    List<Client> findCli(Client client);
-    /* 查找客户的记录到表单*/
+public interface ClientService {
+    /**
+     * 根据主键id查找用户
+     *
+     * @param id 主键
+     * @return
+     */
+    Client find(Client id);
 
+    /**
+     * 根据条件查询List
+     *
+     * @param client 用于查询条件
+     * @return
+     */
+    List<Client> getList(Client client);
+
+    /**
+     * 新增有一个用户
+     *
+     * @param client 新增实体类
+     * @return
+     */
     Client add(Client client);
-    /* 新增客户*/
 
-    Client edit(Client client);
-    /* 编辑客户 */
+    /**
+     * 更新用户
+     *
+     * @param client 需要更新的实体类
+     * @return
+     */
+    Client update(Client client);
 
-    Client delete(Client client);
-    /* 删除客户 */
+    /**
+     * 根据id进行软删除用户
+     *
+     * @param id 主键
+     * @return
+     */
+    Integer delete(String id);
 
-    Client find(Client client);
-    /*显示客户详细信息*/
+    /**
+     * 根据id进行批量软删除用户
+     *
+     * @param id 主键
+     * @return
+     */
+    Integer deleteBatch(Integer id);
 
+
+    /**
+     * 根据id进行批量软删除用户
+     *
+     * @param productId 主键
+     * @return
+     */
     List<Client> findbyProduct(Integer productId);
-    /*通过查找客户的记录到表单*/
-
-    List<Client> deleteBatch(Integer productId);
-    /*批量删除*/
-
 }
