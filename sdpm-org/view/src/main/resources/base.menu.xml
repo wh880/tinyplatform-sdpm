@@ -98,13 +98,9 @@
             </map>
         </menu>
 
-        <menu id="org-privilege-edit" name="编辑角色" href="/organization/privilege/groupEdit.pagelet" icon="icon-pencil"
+        <menu id="org-privilege-edit" name="编辑角色" href="/organization/common/addGroup.page" icon="icon-pencil"
               sort="1" isShow="1"
               scope="org-privilege">
-            <map>
-                <property key="width" value="600"/>
-                <property key="heigth" value="200"/>
-            </map>
         </menu>
 
         <menu id="org-privilege-add" name="添加角色" href="/organization/privilege/groupAdd.pagelet" icon="icon-plus"
@@ -122,7 +118,7 @@
           isShow="1"
           scope="org-menu">
     </menu>
-    <menu id="organizationAddGroup" name="添加分组" href="/organization/common/addGroup.page" icon="icon-group" sort="1"
+    <menu id="organizationAddGroup" name="添加角色 " href="/organization/common/addGroup.page" icon="icon-group" sort="1"
           isShow="1"
           scope="org-menu">
     </menu>

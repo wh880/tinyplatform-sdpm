@@ -30,15 +30,15 @@
 					<dr>浏览角色</dr>
         </span>
 
-            <span style="float:right">
-                #foreach(m:menuManager.getScopeMenus("org-privilege-addGroup"))
-                    #@aModal(editpageModal "新增角色" "600" "300" "" m.href)
-                        #@simpleI(m.icon)新增角色#end
-                    #end
-                #end
-
-
-            </span>
+            ##            <span style="float:right">
+            ##                #foreach(m:menuManager.getScopeMenus("org-privilege-addGroup"))
+            ##                    #@aModal(editpageModal "新增角色" "600" "300" "" m.href)
+            ##                        #@simpleI(m.icon)新增角色#end
+            ##                    #end
+            ##                #end
+            ##
+            ##
+            ##            </span>
                 #div(divClass="clearfix")
             #end
         #end
