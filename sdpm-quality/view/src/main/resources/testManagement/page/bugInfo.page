@@ -84,7 +84,7 @@
 	#@tinyForm("thisform" "url" "post" {"class":""})
 #*	<div class="infoContent">
     		<p class="titleName">Bug名称</p>*#
-	<div style="width:65%;float:left" class="pageleftpart">
+	<div style="width:70%;float:right" class="pageleftpart">
     	<div class="infoContent">
     		<p class="titleName">重现步骤</p>
     		<p>[步骤]</p>

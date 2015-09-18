@@ -20,7 +20,7 @@
 		#end
 	#end
 
-	<div style="width:65%;float:left">
+	<div style="width:70%;float:right">
 		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
@@ -43,7 +43,7 @@
 			
 		#end
 	</div>
-	<div style="width:35%;float:right"> 
+	<div style="width:30%;float:right"> 
 		#TypeInfo("working")
     </div>
 	

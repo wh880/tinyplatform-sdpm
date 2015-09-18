@@ -93,7 +93,7 @@
             #end
         #end
 
-    <div style="width:65%;float:left">
+    <div style="width:70%;float:right">
         #@div(divClass="infoContent")
             <p class="titleName">项目描述</p>
 
@@ -107,7 +107,7 @@
             #include("/project/recordlist.page")
         #end
     </div>
-    <div style="width:35%;float:right">
+    <div style="width:30%;float:right">
         #TypeInfo("project")
     </div>
     #end
