@@ -25,7 +25,11 @@
     #@td()
         #set(map={"org-user-edit":[665,448],"org-user-delete":[550,150]})
         #foreach(m:menuManager.getScopeMenus("org-user"))
-            #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?id="+var "ml-5")
+            #if(m.id=="org-user-edit")
+            <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            #else
+                #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?id="+var "ml-5")
+            #end
 
         ##       #iconOperations("#myModal" m.icon m.name map[m.id][0] map[m.id][1] m.href+"?id="+var "ml-5")
         #end
