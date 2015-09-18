@@ -1,76 +1,82 @@
 package org.tinygroup.sdpm.product.service;
 
 import java.util.List;
-
 import org.tinygroup.sdpm.product.dao.pojo.Plan;
-import org.tinygroup.sdpm.product.dao.pojo.Story;
+import org.tinygroup.sdpm.product.service.pojo.PagerPojo;
 import org.tinygroup.tinysqldsl.Pager;
 
 
-public interface PlanService {
+public interface PlanService{
 	/**
-	 * 创建计划 
-	 * @param Plan
+	 * 添加计划
+	 * @param plan
 	 * @return
 	 */
 	Plan add(Plan plan);
-	
-	
 	/**
-	 * 根据计划ID查找计划
-	 * @param Plan
-	 * @return
+	 * 编辑计划
+	 * @parm plan
+	 * @ruturn
 	 */
-	Plan findByPlanId(Integer PlanId);
+	int update(Plan plan);
 	/**
-	 * 根据计划名称查找需求
-	 * @param Plan
-	 * @return
+	 * 删除计划
+	 * @parm plan
+	 * @ruturn
 	 */
-	List<Story> findByPlanName(String planName);
-	
-	/**
-	 * 根据计划ID编辑计划
-	 * @param Plan
-	 * @return
-	 */
-	int update(Integer PlanId);
-	
+	int deleteByPlan(Plan plan);
 	/**
 	 * 根据计划ID删除计划
-	 * @param Plan
-	 * @return
+	 * @parm plan
+	 * @ruturn
 	 */
-	int deleteByPlanId(Integer planId);
+	int deleteByPlanId(Plan plan);
 	
 	/**
-	 * 根据计划ID查找关联需求
-	 * @param Stories
+	 * 根据Id查找
+	 * @param planId
 	 * @return
 	 */
-	List<Story> find(Integer planId);
-/*	
+	Plan findById(Integer planId);
+	
+	/**
+	 * 根据对象查找
+	 * @param plan
+	 * @return
+	 */
+	List<Plan> findPlan( Plan plan);
+	
+	/**
+	 * 分页查找(可排序)
+	 * @param pagerPojo
+	 * @param plan
+	 * @return
+	 */
+	/*List<Plan> findPlan(PagerPojo pagerPojo, Plan plan);
+
 	*//**
-	 * 根据计划ID查找关联BUG
-	 * @param BUGs
+	 * 排序查询
+	 * @param field
+	 * @param sorting
+	 * @param plan
 	 * @return
 	 *//*
-	List<Bug> findByPlanId(Integer planId);*/
-	/**
-	 * 根据计划对象分页查询
+	List<Plan> findPlansort(String field,String sorting,Plan plan);
+	*//**
+	 * 分页查询
 	 * @param currentPage
 	 * @param limit
 	 * @param plan
 	 * @return
-	 */
-	Pager<Plan> findPlan(int currentPage,int limit ,Plan plan);
-	
-	/**
-	 * 根据计划Id批量删除
-	 * @param PlanIds
+	 *//*
+	List<Plan> findStoryPager(int currentPage,int limit,Plan plan);
+
+	*//**
+	 * 分页查找
+	 * @param currentPage
+	 * @param limit
+	 * @param plan
 	 * @return
-	 */
-	int deleteByPlanIds(Integer... planIds);
-	
-	
+	 *//*
+	Pager<Plan> findPlan(int currentPage,int limit ,Plan plan);*/
 }
