@@ -24,4 +24,12 @@ public interface SysModuleService {
 	 * @return
 	 */
 	 List<SysModule> findByRoot(int root);
+	 /**
+	  * 通过对象进行删除
+	  * @param sysModule
+	  * @return
+	  */
+	 int delete(SysModule sysModule);
+	 
+	 
 }
