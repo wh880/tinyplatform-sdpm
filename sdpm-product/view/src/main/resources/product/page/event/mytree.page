@@ -22,7 +22,8 @@
             beforeRemove: beforeRemove,
             beforeRename: beforeRename,
             onRemove: onRemove,
-            onRename: onRename
+            onRename: onRename,
+            onClick:onClick
         }
     };
     var treeNodes = [
@@ -43,6 +44,10 @@
     var log, className = "dark";
     function beforeDrag(treeId, treeNodes) {
         return false;
+    }
+    function onClick(e,treeId,treeNode){
+    	console.log('tt');
+    	window.location.href='?treeid='+treeNode.id;
     }
     function beforeEditName(treeId, treeNode) {
         className = (className === "dark" ? "" : "dark");
