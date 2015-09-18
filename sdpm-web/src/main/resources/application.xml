@@ -671,4 +671,13 @@
         <template-function name="typeInfoFunction"></template-function>
     </template-config>
 
+
+        <datasource id="aaaa" type="org.apache.commons.dbcp.BasicDataSource">
+                <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+                <property name="url"
+                          value="jdbc:mysql://192.168.51.28/sdpm?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+        </datasource>
+
 </application>
