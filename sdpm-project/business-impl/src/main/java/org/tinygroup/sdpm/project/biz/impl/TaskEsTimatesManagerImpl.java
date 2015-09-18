@@ -11,7 +11,7 @@ import org.tinygroup.sdpm.project.dao.TaskestimateDao;
  */
 @Service
 @Transactional
-public class TaskEsTimatesManagerImpl2 implements TaskEsTimateManager {
+public class TaskEsTimatesManagerImpl implements TaskEsTimateManager {
     @Autowired
     private TaskestimateDao taskestimateDao;
 }

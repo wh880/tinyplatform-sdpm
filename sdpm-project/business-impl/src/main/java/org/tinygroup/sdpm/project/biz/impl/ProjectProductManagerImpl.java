@@ -11,7 +11,7 @@ import org.tinygroup.sdpm.project.dao.ProjectproductDao;
  */
 @Service
 @Transactional
-public class ProjectProductManagerImpl2 implements ProjectProductManager {
+public class ProjectProductManagerImpl implements ProjectProductManager {
     @Autowired
     private ProjectproductDao projectproductDao;
 }
