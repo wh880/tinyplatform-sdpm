@@ -41,7 +41,9 @@
               isShow="1" scope="service-request"/>
         <menu id="request-back" name="回访" href="/service/serviceReq/requestBack.page" icon="icon-comment" sort="1"
               isShow="1" scope="service-request"/>
-        <menu id="request-edit" name="变更" href="/service/serviceReq/requestEdit.page" icon="icon-random" sort="1"
+        <menu id="request-edit" name="变更" href="/service/serviceReq/request.page" icon="icon-random" sort="1"
+              isShow="1" scope="service-request"/>
+        <menu id="request-close" name="关闭" href="#" icon="icon-off" sort="1"
               isShow="1" scope="service-request"/>
         <menu id="request-open" name="未解决" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
@@ -51,11 +53,13 @@
               isShow="1" scope="service-request-list"/>
         <menu id="request-byme" name="由我创建" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
-        <menu id="request-review" name="由我回访" href="/service/serviceReq/request.page" sort="1"
+        <menu id="request-review-byme" name="由我回访" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
-        <menu id="request-needclose" name="待回访" href="/service/serviceReq/request.page" sort="1"
+        <menu id="request-need-review" name="待回访" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
-        <menu id="request-closed" name="已回访" href="/service/serviceReq/request.page" sort="1"
+        <menu id="request-review-comp" name="已回访" href="/service/serviceReq/request.page" sort="1"
+              isShow="1" scope="service-request-list"/>
+        <menu id="request-closed" name="已关闭" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
         <menu id="request-export" name="导出" href="/service/serviceCom/serviceExport.pagelet" sort="1"
               isShow="1" scope="service-request-r"/>

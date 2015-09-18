@@ -14,7 +14,7 @@ public interface FaqService {
      * @param id 主键
      * @return
      */
-    Faq find(String id);
+    Faq findFaq(String id);
 
     /**
      * 根据条件查询List
@@ -22,7 +22,7 @@ public interface FaqService {
      * @param faq 用于查询条件
      * @return
      */
-    List<Faq> getList(Faq faq);
+    List<Faq> getFaqList(Faq faq);
 
     /**
      * 新增一个faq
@@ -30,7 +30,7 @@ public interface FaqService {
      * @param faq 新增实体类
      * @return
      */
-    Faq add(Faq faq);
+    Faq addFaq(Faq faq);
 
     /**
      * 更新faq
@@ -38,7 +38,7 @@ public interface FaqService {
      * @param faq 需要更新的实体类
      * @return
      */
-    Faq update(Faq faq);
+    Faq updateFaq(Faq faq);
 
     /**
      * 根据id进行软删除faq
@@ -46,5 +46,5 @@ public interface FaqService {
      * @param id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer deleteFaq(String id);
 }
