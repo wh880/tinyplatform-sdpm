@@ -85,6 +85,9 @@
     <table-field standard-field-id="1b2601178d2047408fa0af11ec470cff" primary="false" unique="false" not-null="false" id="request_trans_to" auto-increase="false"/>
     <table-field standard-field-id="cd4f500c9e304bf2ab4fe23c87a03e44" primary="false" unique="false" not-null="false" id="request_trans_id" auto-increase="false"/>
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
+    <table-field standard-field-id="f759e85b5e3145b18e3cd5c6aaad7ed4" primary="false" unique="false" not-null="false" id="reply_spec" auto-increase="false"/>
+    <table-field standard-field-id="41c60fff265346af8c40da9d584af5f3" primary="false" unique="false" not-null="false" id="replier" auto-increase="false"/>
+    <table-field standard-field-id="af8d53fc0d2a4dd3b19afc69063bcbf0" primary="false" unique="false" not-null="false" id="reply_date" auto-increase="false"/>
   </table>
   <table id="13763221be294c16babcf4243d3daad3" name="review" title="客服回访表" package-name="">
     <table-field standard-field-id="5c02810ba43f465fbeaad1e30c5e1c6b" primary="true" unique="true" not-null="true" id="review_id" auto-increase="true"/>
