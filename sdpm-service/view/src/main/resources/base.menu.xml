@@ -37,7 +37,7 @@
     <menu id="request" name="需求" href="/service/serviceReq/request.page" sort="100" isShow="1">
         <menu id="request-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="service-req-batchdel"/>
-        <menu id="request-solve" name="解决" href="/service/serviceReq/requestsolve.page" icon="icon-wrench " sort="1"
+        <menu id="request-solve" name="回复" href="/service/serviceReq/requestsolve.page" icon="icon-wrench " sort="1"
               isShow="1" scope="service-request"/>
         <menu id="request-back" name="回访" href="/service/serviceReq/requestBack.page" icon="icon-comment" sort="1"
               isShow="1" scope="service-request"/>
@@ -45,11 +45,11 @@
               isShow="1" scope="service-request"/>
         <menu id="request-close" name="关闭" href="#" icon="icon-off" sort="1"
               isShow="1" scope="service-request"/>
-        <menu id="request-open" name="未解决" href="/service/serviceReq/request.page" sort="1"
+        <menu id="request-open" name="未回复" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
         <menu id="request-all" name="全部请求" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
-        <menu id="request-tome" name="由我解决" href="/service/serviceReq/request.page" sort="1"
+        <menu id="request-tome" name="由我回复" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
         <menu id="request-byme" name="由我创建" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
