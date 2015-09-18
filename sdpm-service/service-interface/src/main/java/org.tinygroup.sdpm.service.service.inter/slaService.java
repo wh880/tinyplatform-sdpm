@@ -25,7 +25,7 @@ public interface SlaService {
     List<Sla> getList(Sla sla);
 
     /**
-     * 新增有一个用户
+     * 新增一个用户
      *
      * @param sla 新增实体类
      * @return

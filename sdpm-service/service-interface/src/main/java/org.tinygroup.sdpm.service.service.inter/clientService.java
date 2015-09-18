@@ -23,7 +23,7 @@ public interface ClientService {
     List<Client> getList(Client client);
 
     /**
-     * 新增有一个用户
+     * 新增一个用户
      *
      * @param client 新增实体类
      * @return

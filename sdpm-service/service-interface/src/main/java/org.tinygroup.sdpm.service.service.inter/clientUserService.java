@@ -25,7 +25,7 @@ public interface ClientUserService {
     List<ClientUser> getList(ClientUser clientUser);
 
     /**
-     * 新增有一个用户联系人
+     * 新增一个用户联系人
      *
      * @param clientUser 新增实体类
      * @return

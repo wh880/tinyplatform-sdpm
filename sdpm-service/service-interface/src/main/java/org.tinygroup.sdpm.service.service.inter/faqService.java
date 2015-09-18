@@ -25,7 +25,7 @@ public interface FaqService {
     List<Faq> getList(Faq faq);
 
     /**
-     * 新增有一个faq
+     * 新增一个faq
      *
      * @param faq 新增实体类
      * @return
