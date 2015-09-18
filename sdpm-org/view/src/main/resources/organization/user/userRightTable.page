@@ -8,15 +8,17 @@
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divBaseClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([8,10,20,50,100,200])
-    ## #@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel") 批量删除#end
-        #@mulOperation("muldelete" "    ")
-        <a href="javascript:;" class="btn radius btn-danger btn-sm"><i class="icon-trash"></i>批量删除</a>
+        #set(m1=menuManager.getMenu("org-user-batchdel"))
+        #if(m1)
+            #@mulOperation("muldelete" "")
+            <a href="javascript:;" class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
+            #end
         #end
 
-    <button type="submit" id="submit" class="commitBtn"
-            onclick="window.location.href='../common/addUser.page'">添加
-    </button>
-
+        #set(m2=menuManager.getMenu("org-user-add"))
+        #if(m2)
+            #@aExtendButton("btn radius btn-primary btn-sm" m2.href)#buttonIcon(iconClass=m2.icon)添加#end
+        #end
     ##        #@aModal(editpageModal "添加" "865" "420" "btn radius btn-primary btn-sm" editpagePath)
     ##            #@simpleI("icon-plus")添加#end
     ##        #end
