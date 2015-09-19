@@ -1,0 +1,95 @@
+<standard-fields>
+  <standard-field id="157b6bcd380345ecb1bbb2b6005b92f7" name="doc_id" title="文档ID" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0" not-null="false">
+    <description>文档ID，主键，唯一标示</description>
+  </standard-field>
+  <standard-field id="51d8b407678c4adfbb36e530c87c7f22" name="doc_product" title="所属产品" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false">
+    <description>所属产品</description>
+  </standard-field>
+  <standard-field id="0dad99e5e3824c3f89a0d03f95baa577" name="doc_project" title="所属项目" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false">
+    <description>所属项目</description>
+  </standard-field>
+  <standard-field id="b4c51ca729444d619a90b285dbec71dc" name="doc_lib" title="所属文档库" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false">
+    <description>所属文档库</description>
+  </standard-field>
+  <standard-field id="99697402b1524b2980168f11bc9dfcef" name="doc_module" title="所属分类" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false">
+    <description>所属分类</description>
+  </standard-field>
+  <standard-field id="d6d1423caf944b84abf98afe24cee8e3" name="doc_title" title="文档标题" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false">
+    <description>文档标题</description>
+  </standard-field>
+  <standard-field id="2e92cb2e69804ff4aaefe411a2e4c4f1" name="doc_digest" title="摘要" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false">
+    <description>摘要</description>
+  </standard-field>
+  <standard-field id="11ffd8b85a114021af6188d754413565" name="doc_keywords" title="关键字" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false">
+    <description>关键字</description>
+  </standard-field>
+  <standard-field id="b4eafda448574c2f8a419c484c97def2" name="doc_type" title="文档类型" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false">
+    <description>文档类型</description>
+  </standard-field>
+  <standard-field id="09a6fd6e09ef40e0b3b387aebe3ab8e7" name="doc_content" title="文档正文" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false">
+    <description>文档正文</description>
+  </standard-field>
+  <standard-field id="cc191e36888f4414938be77d84babd0e" name="doc_url" title="文档url" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false">
+    <description>文档url</description>
+  </standard-field>
+  <standard-field id="b2dad0bf75e34c4abed7b3d9b1af4896" name="doc_views" title="DOC查阅次数" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false">
+    <description>查阅次数</description>
+  </standard-field>
+  <standard-field id="334e1412adb4444dad2e951a1f167453" name="doc_addedBy" title="DOC由谁添加" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false">
+    <description>由谁添加</description>
+  </standard-field>
+  <standard-field id="389533862bbd4507a77bda520ddde316" name="doc_addedDate" title="DOC添加时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false">
+    <description>添加时间</description>
+  </standard-field>
+  <standard-field id="4b7d87df878e4f92aa9e85b4d3079be1" name="doc_editedBy" title="由谁编辑" business-type-id="095e594e1550424b9643c7e2279e85be" not-null="false">
+    <description>由谁编辑</description>
+  </standard-field>
+  <standard-field id="59a569420f764db3b2a292c350d740ca" name="doc_editedDate" title="文档编辑时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false">
+    <description>编辑时间</description>
+  </standard-field>
+  <standard-field id="4240a1ee3cc04b6f9621e95ed93b8b22" name="doc_deleted" title="文档删除标志" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" not-null="false">
+    <description>已删除,enum(&apos;0&apos;,&apos;1&apos;)</description>
+  </standard-field>
+  <standard-field id="509aa7b0d6ee413ab1f3b4ad99e28843" name="doc_libid" title="文档库ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false">
+    <description>文档库ID</description>
+  </standard-field>
+  <standard-field id="95b70aee2d1e4c9dbf04e6688ffb9bee" name="doc_libname" title="文档库名字" business-type-id="a30696c1e44441ecad77a832afd3731d" not-null="false">
+    <description>文档库名字</description>
+  </standard-field>
+  <standard-field id="2655a73603e54dd98679d4163bd0851f" name="doc_lib_deleted" title="删除文档库标志" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" not-null="false">
+    <description>enum(&apos;0&apos;,&apos;1&apos;),已删除，并不真正删除数据，只是相应比标志位变参而已。</description>
+  </standard-field>
+  <standard-field id="4eba0477bea94e218529867d56ede9ec" name="comment_id" title="评论编号" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0" not-null="false">
+    <description>评论编号</description>
+  </standard-field>
+  <standard-field id="5c7149ae6fb04f43a777c5ad63a6d21b" name="comment_txt" title="评论正文" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" not-null="false">
+    <description>评论正文</description>
+  </standard-field>
+  <standard-field id="588b5c95a9bb4260a9e7a74781cb6125" name="comment_userid" title="评论者ID" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0" not-null="false">
+    <description>评论者ID</description>
+  </standard-field>
+  <standard-field id="a7e2f72ac40d41faa29dca6d2bc45c85" name="comment_time" title="评论时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false">
+    <description></description>
+  </standard-field>
+  <standard-field id="7132ef274c224d00b4449666535b8247" name="comment_docid" title="被评论文档ID" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0" not-null="false">
+    <description>被评论文档ID</description>
+  </standard-field>
+  <standard-field id="ade9ab3cb2964da0928ca49b972dd877" name="attach_id" title="附件编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" not-null="false">
+    <description>附件编号</description>
+  </standard-field>
+  <standard-field id="5926f5624a044dcc813ae3dc78afc623" name="attach_name" title="附件标题" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false">
+    <description>附件标题</description>
+  </standard-field>
+  <standard-field id="843859be9cf74daead06ac15a70538da" name="attach_type" title="附件类型" business-type-id="ccd3e83b1cae428987599fb95985fa70" not-null="false">
+    <description>附件类型</description>
+  </standard-field>
+  <standard-field id="9ff7f502031949b58c91d60bcf927863" name="attach_url" title="附件链接" business-type-id="27ebfcdc558c477da425a46e566d4637" not-null="false">
+    <description>附件url，路径</description>
+  </standard-field>
+  <standard-field id="9282649ea9b249eb9df0c2f9581c625c" name="doc_lib_addtime" title="文档库添加时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false">
+    <description>文档库添加时间</description>
+  </standard-field>
+  <standard-field id="8842a366405a4f35a57ba0e5f5ac66f3" name="doc_lib_updtime" title="文档库名称更新时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" not-null="false">
+    <description>文档库名称更新时间</description>
+  </standard-field>
+</standard-fields>

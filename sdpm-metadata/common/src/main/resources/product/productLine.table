@@ -1,0 +1,24 @@
+<tables id="8b05439ef4c84a2b974399388b2db1b1" package-name="">
+  
+  <table id="91d93e9afc534e8b8469eb2c408a7f2e" name="productLine" title="产品线表" package-name="">
+    <table-field standard-field-id="ad2df857db7641fd8247d8a24baa69f8" primary="true" unique="true" not-null="true" id="productLine_id" auto-increase="true"/>
+    <table-field standard-field-id="2f31dbd7abc04051a071e456a4bcd85e" primary="false" unique="false" not-null="true" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="212dcf30304b410c9c21ad1b77d5ab01" primary="false" unique="false" not-null="true" id="dept_id" auto-increase="false"/>
+    <table-field standard-field-id="fcff1578dca64cfc9320e08689eb970d" primary="false" unique="false" not-null="true" id="productLine_root" auto-increase="false"/>
+    <table-field standard-field-id="c2d02b77d3804d64b41de5c45045e1db" primary="false" unique="false" not-null="false" id="productLine_parent" auto-increase="false"/>
+    <table-field standard-field-id="c3750e6c13b74e75a173d9c728439dc8" primary="false" unique="false" not-null="true" id="productLine_name" auto-increase="false"/>
+    <table-field standard-field-id="c1035c0e396040b19780a0baf1091d14" primary="false" unique="false" not-null="true" id="productLine_code" auto-increase="false"/>
+    <table-field standard-field-id="1c7c14de7eb5457a8a6fe6181fc489b4" primary="false" unique="false" not-null="false" id="productLine_order" auto-increase="false"/>
+    <table-field standard-field-id="bd69a13b7e85463c9ea1e7a480860c45" primary="false" unique="false" not-null="false" id="productLine_spec" auto-increase="false"/>
+    <table-field standard-field-id="743ea2aceba546a4a517f8fc7961c652" primary="false" unique="false" not-null="true" id="productLine_status" auto-increase="false"/>
+    <table-field standard-field-id="490f688faf6447aca072dee1fbe36a55" primary="false" unique="false" not-null="false" id="productLine_owner" auto-increase="false"/>
+    <table-field standard-field-id="97ced3c198934553b015803eeca42397" primary="false" unique="false" not-null="false" id="productLine_quality_manager" auto-increase="false"/>
+    <table-field standard-field-id="4797e2f35e4d4eebb0a0a88991cbbe91" primary="false" unique="false" not-null="false" id="productLine_delivery_manager" auto-increase="false"/>
+    <table-field standard-field-id="7639fb33a77048fe973bfd0203430c15" primary="false" unique="false" not-null="true" id="acl" auto-increase="false"/>
+    <table-field standard-field-id="b23469decc5745288b84d5c4a82ece21" primary="false" unique="false" not-null="false" id="productLine_whiteList" auto-increase="false"/>
+    <table-field standard-field-id="5a4261249df645a5aa5afa7cf79cc9df" primary="false" unique="false" not-null="true" id="productLine_createdBy" auto-increase="false"/>
+    <table-field standard-field-id="ce868ce3764c40e68e9bd148b492db19" primary="false" unique="false" not-null="true" id="productLine_createdDate" auto-increase="false"/>
+    <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
+  </table>
+  
+</tables>
