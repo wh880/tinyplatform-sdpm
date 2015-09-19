@@ -9,7 +9,7 @@
   <standard-field id="eab32eaec00b49468015f581162f3ee0" name="product_order" title="产品序号" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="0"/>
   <standard-field id="308dd01786ae49f69785cf695552ced3" name="product_status" title="产品状态" business-type-id="095e594e1550424b9643c7e2279e85be" default=""/>
   <standard-field id="c70521518ed842f9bc08fe57d5297bd1" name="product_desc" title="产品描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
-  <standard-field id="546a69e01f264c9b972ea6981fd3b322" name="owner" title="经理" business-type-id="095e594e1550424b9643c7e2279e85be">
+  <standard-field id="546a69e01f264c9b972ea6981fd3b322" name="owner" title="经理" business-type-id="095e594e1550424b9643c7e2279e85be" default="">
     <nick-name name="product_owner" title="产品经理" id="27f6252e423d4560b2ed9337cfa1ff2a"/>
     <nick-name name="productLine_owner" title="产品线经理" id="490f688faf6447aca072dee1fbe36a55"/>
   </standard-field>

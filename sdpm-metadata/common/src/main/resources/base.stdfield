@@ -2,4 +2,6 @@
   <standard-field id="7edc4cffb5cf4a9f94ffca41db249285" name="id" title="逻辑ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
     <description></description>
   </standard-field>
+  <standard-field id="61c90281c2c54787a0588095fa5d5e96" name="deleted" title="已删除" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="0"/>
+
 </standard-fields>

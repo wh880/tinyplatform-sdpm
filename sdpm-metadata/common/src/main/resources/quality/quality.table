@@ -68,7 +68,7 @@
     <table-field standard-field-id="d530b2f878d94725b0de97aa83fe6012" primary="false" unique="false" not-null="true" id="story_version" auto-increase="false"/>
     <table-field standard-field-id="1840bfb38b5e474f84b0e4bdc81207af" primary="false" unique="false" not-null="true" id="case_title" auto-increase="false"/>
     <table-field standard-field-id="e7971c08ed7f475d93efb3ba70b6cfad" primary="false" unique="false" not-null="true" id="case_precondition" auto-increase="false"/>
-    <table-field standard-field-id="513f18f952134e90b0169f185d12cb8c" primary="false" unique="false" not-null="false" id="case_keywords" auto-increase="false"/>
+    <table-field standard-field-id="513f18f952134e90b0169f185d12cb8c" primary="false" unique="false" not-null="false" id="case_keywords" auto-increase="true"/>
     <table-field standard-field-id="aa9be6c1c2094e47af40df0b6f017417" primary="false" unique="false" not-null="false" id="priority" auto-increase="false"/>
     <table-field standard-field-id="e7699993410b4655b73ce0295c76e72b" primary="false" unique="false" not-null="false" id="case_type" auto-increase="false"/>
     <table-field standard-field-id="efcbc3136d414189b034e5c90edd8585" primary="false" unique="false" not-null="false" id="case_stage" auto-increase="false"/>
