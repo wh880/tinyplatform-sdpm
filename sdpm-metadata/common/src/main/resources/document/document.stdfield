@@ -57,7 +57,7 @@
     <description>文档库名字</description>
   </standard-field>
   <standard-field id="2655a73603e54dd98679d4163bd0851f" name="doc_lib_deleted" title="删除文档库标志" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629">
-    <description>enum(&apos;0&apos;,&apos;1&apos;),已删除，并不真正删除数据，只是相应比标志位变参而已。</description>
+    <description>已删除，并不真正删除数据，只是相应比标志位变参而已。</description>
   </standard-field>
   <standard-field id="4eba0477bea94e218529867d56ede9ec" name="comment_id" title="评论编号" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0">
     <description>评论编号</description>

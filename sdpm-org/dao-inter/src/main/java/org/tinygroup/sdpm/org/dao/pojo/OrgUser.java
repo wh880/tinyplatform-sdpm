@@ -111,7 +111,7 @@ public class OrgUser implements Serializable{
     private String orgUserQQ;
 
     /**
-     * 雅虎通
+     * 微信
      *
      */
     private String orgUserYahoo;
