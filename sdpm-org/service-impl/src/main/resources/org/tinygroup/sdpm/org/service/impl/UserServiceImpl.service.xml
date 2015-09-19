@@ -1,5 +1,5 @@
 <service-components>
-  <service-component type="org.tinygroup.sdpm.org.service.impl.UserServiceImpl" bean="userService">
+    <service-component type="org.tinygroup.sdpm.org.service.impl.UserServiceImpl">
     <service-method local-name="findUser" service-id="org_findUser" method-name="findUser" cacheable="false" category="org.tinygroup.sdpm.org.service.impl">
       <service-parameters>
         <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>

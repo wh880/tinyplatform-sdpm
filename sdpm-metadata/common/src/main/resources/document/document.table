@@ -1,19 +1,20 @@
 <tables id="a91b5666002c43eabeebeeae6a8e8b99" package-name="org.tinygroup.alm.document">
-  <table id="73f7262da7df41468e00bb8c16e84c95" name="attachment" title="附件表" schema="" package-name="org.tinygroup.alm.document">
+  <table id="73f7262da7df41468e00bb8c16e84c95" name="attachment" title="附件表" schema="" package-name="">
     <description></description>
     <table-field standard-field-id="ade9ab3cb2964da0928ca49b972dd877" primary="true" unique="false" not-null="false" id="attach_id" auto-increase="false"/>
     <table-field standard-field-id="5926f5624a044dcc813ae3dc78afc623" primary="false" unique="false" not-null="false" id="attach_name" auto-increase="false"/>
     <table-field standard-field-id="843859be9cf74daead06ac15a70538da" primary="false" unique="false" not-null="false" id="attach_type" auto-increase="false"/>
     <table-field standard-field-id="9ff7f502031949b58c91d60bcf927863" primary="false" unique="false" not-null="false" id="attach_url" auto-increase="false"/>
   </table>
-  <table id="229f61c1d3be42489c41e679e294d54f" name="comments" title="文档评论表" package-name="org.tinygroup.alm.document">
+  <table id="229f61c1d3be42489c41e679e294d54f" name="comments" title="文档评论表" package-name="">
     <table-field standard-field-id="4eba0477bea94e218529867d56ede9ec" primary="true" unique="true" not-null="false" id="comment_id" auto-increase="false"/>
     <table-field standard-field-id="7132ef274c224d00b4449666535b8247" primary="false" unique="false" not-null="false" id="comment_docid" auto-increase="false"/>
     <table-field standard-field-id="588b5c95a9bb4260a9e7a74781cb6125" primary="false" unique="false" not-null="false" id="comment_userid" auto-increase="false"/>
     <table-field standard-field-id="5c7149ae6fb04f43a777c5ad63a6d21b" primary="false" unique="false" not-null="false" id="comment_txt" auto-increase="false"/>
     <table-field standard-field-id="a7e2f72ac40d41faa29dca6d2bc45c85" primary="false" unique="false" not-null="false" id="comment_time" auto-increase="false"/>
   </table>
-  <table id="59549c7852a84135a7f594a6d2081544" name="doc" title="文档表" package-name="org.tinygroup.alm.document">
+  <table id="59549c7852a84135a7f594a6d2081544" name="doc" title="文档表" package-name="">
+    <description></description>
     <table-field standard-field-id="157b6bcd380345ecb1bbb2b6005b92f7" primary="true" unique="false" not-null="false" id="doc_id" auto-increase="false"/>
     <table-field standard-field-id="51d8b407678c4adfbb36e530c87c7f22" primary="false" unique="false" not-null="false" id="doc_product" auto-increase="false"/>
     <table-field standard-field-id="0dad99e5e3824c3f89a0d03f95baa577" primary="false" unique="false" not-null="false" id="doc_project" auto-increase="false"/>
@@ -32,7 +33,7 @@
     <table-field standard-field-id="59a569420f764db3b2a292c350d740ca" primary="false" unique="false" not-null="false" id="doc_editedDate" auto-increase="false"/>
     <table-field standard-field-id="4240a1ee3cc04b6f9621e95ed93b8b22" primary="false" unique="false" not-null="false" id="doc_deleted" auto-increase="false"/>
   </table>
-  <table id="56f136998f6c43208337c635b20390b2" name="docLib" title="文档库表" package-name="org.tinygroup.alm.document">
+  <table id="56f136998f6c43208337c635b20390b2" name="docLib" title="文档库表" package-name="">
     <description>文档相关的</description>
     <table-field standard-field-id="509aa7b0d6ee413ab1f3b4ad99e28843" primary="true" unique="false" not-null="false" id="doc_libid" auto-increase="false"/>
     <table-field standard-field-id="95b70aee2d1e4c9dbf04e6688ffb9bee" primary="false" unique="false" not-null="false" id="doc_libname" auto-increase="false"/>

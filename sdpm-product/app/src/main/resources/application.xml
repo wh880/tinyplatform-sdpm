@@ -115,9 +115,6 @@
         <tiny-filter id="sessionTinyFilter" class="sessionTinyFilter">
             <filter-mapping url-pattern=".*"></filter-mapping>
         </tiny-filter>
-        <tiny-filter id="tinydbFilter" class="tinydbFilter">
-            <filter-mapping url-pattern=".*"></filter-mapping>
-        </tiny-filter>
         <!--<tiny-wrapper-filter id="tinyFilterWrapper" class="tinyFilterWrapper">
             value值可以是多个实现http filter接口的bean名称，多个以","分隔开 <init-param name="filter_beans"
             value="encondingHttpFilter"></init-param> <filter-mapping url-pattern=".*"></filter-mapping>
