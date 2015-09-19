@@ -23,9 +23,9 @@ import org.tinygroup.tinysqldsl.base.Table;
  * 附件表
  * 
  */
-public class FileTable extends Table {
+public class ProfileTable extends Table {
 
-	public static final FileTable FILETABLE = new FileTable();
+	public static final ProfileTable PROFILETABLE = new ProfileTable();
 
 	/** 
 	 * 附件ID
@@ -100,8 +100,8 @@ public class FileTable extends Table {
 	public final Column FILE_DELETED = new Column(this, "file_deleted");
 
 
-		private FileTable() {
-			super("file");
+		private ProfileTable() {
+			super("profile");
 		}
 
 }

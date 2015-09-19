@@ -22,7 +22,7 @@ import java.util.Date;
  * 附件表
  * 
  */
-public class File {
+public class Profile {
 
 	/** 
 	 * 附件ID
