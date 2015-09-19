@@ -30,16 +30,20 @@
     #@gridSysRow()
         #@gridSysCol(3)#end
         #@gridSysCol(6)
-            #@tinyForm("thisform" "" "" {"class":""})
+            #@tinyForm("thisform" TINY_CONTEXT_PATH+"/org/user/save" "post" {"class":""})
+                #hiddenInput(hiddenInputName="orgUserId" hiddenInputValue=cmsArticle?.articleId)
+
+            <imput type="hidden" name="orgUserId" value="${user?.orgUserId}"/>
                 #@noRespsGridSystem()
                     #@gridSysRow()
-
                     <div class="infoContent">
-                        <p class="titleName">新建用户-基本信息</p>
+                        <p class="titleName">基本信息</p>
                         #@gridSysRow()
                             #@colLabel("col-2")<span class="c-red">*</span>真实姓名：#end
                             #@gridSysCol(6)
-                                #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
+                                #tinyInput(
+                                    "text" "orgUserRealName" user?.orgUserRealName {"datatype":"","id":"请求标题","class":
+                                    "input-text"})
                             #end
                         #end
 
@@ -48,26 +52,26 @@
                             #@gridSysCol(6)
                                 #@Tselect2F()
                                     #@Tselect2Body(
-                                        "lang" "部门" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                        <option value="部门">部门</option>
-                                        <option value="departa">部门</option>
-                                        <option value="departa">部门</option>
-                                        <option value="departa">部门</option>
-                                        <option value="departa">部门</option>
-                                        <option value="departa">部门</option>
-
+                                        "orgDeptId" user?.orgDeptId {"class":
+                                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                        <option value="1111">部门0</option>
+                                        <option value="2222">部门1</option>
+                                        <option value="33">部门2</option>
+                                        <option value="444">部门3</option>
+                                        <option value="555">部门4</option>
+                                        <option value="666">部门5</option>
                                     #end
-
-                                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a
-                                            href="#">全部</a>#end
+                                    #@Tselect2Fix()
+                                        <a href="${TINY_CONTEXT_PATH}/org/user/form" class="r">增加</a>
+                                        <a href="#">全部</a>
+                                    #end
                                 #end
                             #end
                         #end
                         #@gridSysRow()
-
                             #@colLabel("col-2")职位：#end
                             #@gridSysCol(6)
-                                #tinyInput("text" "职位" ""{"datatype":"","id":"职位","class":"input-text"})
+                                #tinyInput("text" user?.orgUserRole ""{"datatype":"","id":"职位","class":"input-text"})
                             #end
                         #end
                         #@gridSysRow()
@@ -78,11 +82,11 @@
                                     #@Tselect2Body(
                                         "lang" "权限" {"class":"input-text select2","style":"width:296px","multiple":
                                         "multiple"})
-                                        <option value="权限">权限</option>
-                                        <option value="CV">研发</option>
-                                        <option value="BN">测试</option>
-                                        <option value="MK">管理</option>
-                                        <option value="AS">需求设计</option>
+                                        <option value="1">权限</option>
+                                        <option value="2">研发</option>
+                                        <option value="3">测试</option>
+                                        <option value="4">管理</option>
+                                        <option value="5">需求设计</option>
                                     #end
                                     #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
                                 #end
@@ -92,15 +96,18 @@
                             #@colLabel("col-2")加入日期：#end
                             #@gridSysCol(6)
                                 #@tinyDateInput(
-                                    "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空",
+                                    "orgUserJoin" user?.orgUserJoin  "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                                    "nullmsg":"日期不能为空",
                                     "placeholder":""})#end
                             #end
                         #end
                         #@gridSysRow()
                             #@colLabel("col-2")性别：#end
                             #@gridSysCol(6)
-                                #@tinyRadio("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})男#end
-                                #@tinyRadio("sex" "women" "women")女#end
+                                #@tinyRadio(
+                                    "orgUserGender" "0" user?.orgUserGender?:"0" {"nullmsg":"请选择性别！","datatype":"*"})
+                                    男#end
+                                #@tinyRadio("orgUserGender" "1" user?.orgUserGender?:"0")女#end
                             #end
                         #end
                     </div>
@@ -109,14 +116,18 @@
                         #@gridSysRow()
                             #@colLabel("col-2")<span class="c-red">*</span>用户名：#end
                             #@gridSysCol(6)
-                                #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
+                                #tinyInput(
+                                    "text" "orgUserAccount" user?.orgUserAccount {"datatype":"","id":"请求标题","class":
+                                    "input-text"})
                             #end
                         #end
                         #@gridSysRow()
                             #@colLabel("col-2")邮箱：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"请输入公司名称！","id":"name",
+                                    "text" "orgUserEmail" user?.orgUserEmail {"placeholder":"","datatype":"*","nullmsg":
+                                    "请输入公司名称！","id":
+                                    "name",
                                     "class":
                                     "input-text"})
                             #end
@@ -125,7 +136,10 @@
                             #@colLabel("col-2")密码：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "password" "password" ""{"placeholder":"密码","datatype":"*6-18","nullmsg":"请输入密码！",
+                                    "password" "orgUserPassword" user?.orgUserPassword {"placeholder":"密码","datatype":
+                                    "*6-18",
+                                    "nullmsg":
+                                    "请输入密码！",
                                     "autocomplete":
                                     "off","id":"password","class":"input-text"})
                             #end
@@ -135,7 +149,7 @@
                             #@gridSysCol(6)
                                 #tinyInput("password" "password2" ""{"placeholder":"密码","datatype":"*6-18","nullmsg":
                                     "请再输入一次密码！",
-                                    "autocomplete":"off","recheck":"password","errormsg":"您两次输入的密码不一致！","id":
+                                    "autocomplete":"off","recheck":"orgUserPassword","errormsg":"您两次输入的密码不一致！","id":
                                     "password2","class":
                                     "input-text"})
                             #end
@@ -144,7 +158,8 @@
                             #@colLabel("col-2")源代码账号：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"请输入公司名称！","id":"name",
+                                    "text" "orgUserSubmitter" user?.orgUserSubmitter{"placeholder":"","datatype":"*",
+                                    "nullmsg":"请输入公司名称！","id":"name",
                                     "class":
                                     "input-text"})
                             #end
@@ -158,7 +173,9 @@
                             #@colLabel("col-2")Skype：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
+                                    "text" "orgUserSKYPE" user?.orgUserSKYPE{"placeholder":"","datatype":"*","nullmsg":
+                                    "",
+                                    "id":"name","class":
                                     "input-text"})
                             #end
                         #end
@@ -166,15 +183,19 @@
                             #@colLabel("col-2")QQ：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
+                                    "text" "orgUserQQ" user?.orgUserQQ {"placeholder":"","datatype":"*","nullmsg":"",
+                                    "id":
+                                    "name","class":
                                     "input-text"})
                             #end
                         #end
                         #@gridSysRow()
-                            #@colLabel("col-2")雅虎通：#end
+                            #@colLabel("col-2")微信：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
+                                    "text" "orgUserYahoo" user?.orgUserYahoo {"placeholder":"","datatype":"*","nullmsg":
+                                    "",
+                                    "id":"name","class":
                                     "input-text"})
 
                             #end
@@ -183,7 +204,9 @@
                             #@colLabel("col-2")Gtalk：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
+                                    "text" "orgUserGTalk" user?.orgUserGTalk {"placeholder":"","datatype":"*","nullmsg":
+                                    "",
+                                    "id":"name","class":
                                     "input-text"})
 
                             #end
@@ -192,7 +215,9 @@
                             #@colLabel("col-2")旺旺：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
+                                    "text" "orgUserWANGWANG" user?.orgUserWANGWANG {"placeholder":"","datatype":"*",
+                                    "nullmsg":
+                                    "","id":"name","class":
                                     "input-text"})
 
                             #end
@@ -201,7 +226,9 @@
                             #@colLabel("col-2")手机：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
+                                    "text" "orgUserMobile" user?.orgUserMobile {"placeholder":"","datatype":"*",
+                                    "nullmsg":"",
+                                    "id":"name","class":
                                     "input-text"})
 
                             #end
@@ -210,7 +237,9 @@
                             #@colLabel("col-2")电话：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
+                                    "text" "orgUserPhone" user?.orgUserPhone{"placeholder":"","datatype":"*","nullmsg":
+                                    "",
+                                    "id":"name","class":
                                     "input-text"})
 
                             #end
@@ -219,7 +248,9 @@
                             #@colLabel("col-2")通讯地址：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
+                                    "text" "orgUserAddress" user?.orgUserAddress{"placeholder":"","datatype":"*",
+                                    "nullmsg":"",
+                                    "id":"name","class":
                                     "input-text"})
 
                             #end
@@ -228,7 +259,9 @@
                             #@colLabel("col-2")邮编：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
+                                    "text" "orgUserZipCode" user?.orgUserZipCode{"placeholder":"","datatype":"*",
+                                    "nullmsg":"",
+                                    "id":"name","class":
                                     "input-text"})
 
                             #end
@@ -246,337 +279,76 @@
                                     "class":
                                     "input-text"})                #end
                         #end
-                    ##            #@gridSysRow()
-                    ##
-                    ##                #@div(divClass="col-8 col-offset-4 form-inline")
-                    ##                    #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
-                    ##                #end
-                    ##
-                    ##            #end
-
+                        #@gridSysRow()
+                            #@div(divClass="col-8 col-offset-4 form-inline")
+                                #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+                            #end
+                        #end
                     </div>
-
                     #end
-
                 #end
-            #end#@tinyForm("thisform" "" "" {"class":""})
-            #@noRespsGridSystem()
-                #@gridSysRow()
-
-                <div class="infoContent">
-                    <p class="titleName">新建用户-基本信息</p>
-                    #@gridSysRow()
-                        #@colLabel("col-2")<span class="c-red">*</span>真实姓名：#end
-                        #@gridSysCol(6)
-                            #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
-                        #end
-                    #end
-
-                    #@gridSysRow()
-                        #@colLabel("col-2")所属部门：#end
-                        #@gridSysCol(6)
-                            #@Tselect2F()
-                                #@Tselect2Body(
-                                    "lang" "部门" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                    <option value="部门">部门</option>
-                                    <option value="departa">部门</option>
-                                    <option value="departa">部门</option>
-                                    <option value="departa">部门</option>
-                                    <option value="departa">部门</option>
-                                    <option value="departa">部门</option>
-
-                                #end
-
-                                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                            #end
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")职位：#end
-                        #@gridSysCol(6)
-                            #@Tselect2F()
-                                #@Tselect2Body(
-                                    "lang" "职位" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                    <option value="职位">职位</option>
-                                    <option value="zh">研发</option>
-                                    <option value="en">测试</option>
-                                    <option value="ta">管理</option>
-
-
-                                #end
-
-                                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                            #end
-
-                        #end
-                    #end
-                    #@gridSysRow()
-
-                        #@colLabel("col-2")权限：#end
-                        #@gridSysCol(6)
-                            #@Tselect2F()
-                                #@Tselect2Body(
-                                    "lang" "权限" {"class":"input-text select2","style":"width:296px","multiple":
-                                    "multiple"})
-                                    <option value="权限">权限</option>
-                                    <option value="CV">研发</option>
-                                    <option value="BN">测试</option>
-                                    <option value="MK">管理</option>
-                                    <option value="AS">需求设计</option>
-                                #end
-                                #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
-                            #end
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")加入日期：#end
-                        #@gridSysCol(6)
-                            #@tinyDateInput(
-                                "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空",
-                                "placeholder":""})#end
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")性别：#end
-                        #@gridSysCol(6)
-                            #@tinyRadio("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})男#end
-                            #@tinyRadio("sex" "women" "women")女#end
-                        #end
-                    #end
-                </div>
-                <div class="infoContent">
-                    <p class="titleName">账号信息</p>
-                    #@gridSysRow()
-                        #@colLabel("col-2")<span class="c-red">*</span>用户名：#end
-                        #@gridSysCol(6)
-                            #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")邮箱：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"请输入公司名称！","id":"name",
-                                "class":
-                                "input-text"})
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")密码：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "password" "password" ""{"placeholder":"密码","datatype":"*6-18","nullmsg":"请输入密码！",
-                                "autocomplete":
-                                "off","id":"password","class":"input-text"})
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")密码验证：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "password" "password2" ""{"placeholder":"密码","datatype":"*6-18","nullmsg":"请再输入一次密码！",
-                                "autocomplete":"off","recheck":"password","errormsg":"您两次输入的密码不一致！","id":"password2",
-                                "class":
-                                "input-text"})
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")源代码账号：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"请输入公司名称！","id":"name",
-                                "class":
-                                "input-text"})
-                        #end
-                    #end
-                </div>
-
-
-                <div class="infoContent">
-                    <p class="titleName">联系信息</p>
-                    #@gridSysRow()
-                        #@colLabel("col-2")Skype：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
-                                "input-text"})
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")QQ：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
-                                "input-text"})
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")雅虎通：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
-                                "input-text"})
-
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")Gtalk：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
-                                "input-text"})
-
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")旺旺：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
-                                "input-text"})
-
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")手机：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
-                                "input-text"})
-
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")电话：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
-                                "input-text"})
-
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")通讯地址：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
-                                "input-text"})
-
-                        #end
-                    #end
-                    #@gridSysRow()
-                        #@colLabel("col-2")邮编：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"","id":"name","class":
-                                "input-text"})
-
-                        #end
-                    #end
-                </div>
-
-
-                <div class="infoContent">
-                    <p class="titleName">安全验证</p>
-                    #@gridSysRow()
-                        #@colLabel("col-2")<span class="c-red">*</span>请输入密码：#end
-                        #@gridSysCol(6)
-                            #tinyInput(
-                                "text" "name" ""{"placeholder":"","datatype":"*","nullmsg":"请输入公司名称！","id":"name",
-                                "class":
-                                "input-text"})                #end
-                    #end
-                ##            #@gridSysRow()
-                ##
-                ##                #@div(divClass="col-8 col-offset-4 form-inline")
-                ##                    #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
-                ##                #end
-                ##
-                ##            #end
-
-                </div>
-
-                #end
-
             #end
-        #end
-
-        #end
-        #@gridSysCol(3)#end
-    #end
-    #@gridSysRow()
-        #@div(divClass="col-7 col-offset-5 form-inline")
-            #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
-        ##            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
-
-        <a href="javascript:history.go(-1)" class="btn radius btn-default">返回</a>
+        ##    #@gridSysRow()
+        ##        #@div(divClass="col-7 col-offset-5 form-inline")
+        ##            #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+        ##        ##            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+        ##
+        ##        <a href="javascript:history.go(-1)" class="btn radius btn-default">返回</a>
+        ##        #end
+        ##    #end
         #end
     #end
-
 #end
 
 
-
-
-
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-
-    $(function () {
-
-        $("form[name=thisform").attr("action", '#link("/Validform_post.html")');
-        $("form[name=thisform").Validform({
-            tiptype: 2,
-            usePlugin: {
-                //datepicker:{},//日期控件校验;
-                passwordstrength: {
-                    minLen: 6,//设置密码长度最小值，默认为0;
-                    maxLen: 18,//设置密码长度最大值，默认为30;
-                    trigger: function (obj, error) {
-                        //该表单元素的keyup和blur事件会触发该函数的执行;
-                        //obj:当前表单元素jquery对象;
-                        //error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
-                        //console.log(error);
-                        if (error) {
-                            obj.parent().find(".Validform_checktip").show();
-                            obj.parent().find(".passwordStrength").hide();
-                        } else {
-                            obj.parent().find(".passwordStrength").show();
-                        }
-                    }
-                }
-            },
-            ajaxPost: true,
-            beforeCheck: function (curform) {
-                //在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
-                //这里明确return false的话将不会继续执行验证操作;
-            },
-            beforeSubmit: function (curform) {
-                //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
-                //这里明确return false的话表单将不会提交;
-            },
-            callback: function (data) {
-                if (data.status == "y") {
-                    setTimeout(function () {
-                        $.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
-                    }, 2000);
-                }
-                //返回数据data是json对象，{"info":"demo info","status":"y"}
-                //info: 输出提示信息;
-                //status: 返回提交数据的状态,是否提交成功。如可以用"y"表示提交成功，"n"表示提交失败，在Validform_post.html文件返回数据里自定字符，主要用在callback函数里根据该值执行相应的回调操作;
-                //你也可以在Validform_post.html文件返回更多信息在这里获取，进行相应操作；
-                //ajax遇到服务端错误时也会执行回调，这时的data是{ status:**, statusText:**, readyState:**, responseText:** }；
-
-                //这里执行回调操作;
-                //注意：如果不是ajax方式提交表单，传入callback，这时data参数是当前表单对象，回调函数会在表单验证全部通过后执行，然后判断是否提交表单，如果callback里明确return false，则表单不会提交，如果return true或没有return，则会提交表单。
-            }
-        });
-    });
-</script>
+##<script type="text/javascript">
+##    $(function () {
+####        $("form[name=thisform").attr("action", '#link("/Validform_post.html")');
+##        $("form[name=thisform").Validform({
+##            tiptype: 2,
+##            usePlugin: {
+##                //datepicker:{},//日期控件校验;
+##                passwordstrength: {
+##                    minLen: 6,//设置密码长度最小值，默认为0;
+##                    maxLen: 18,//设置密码长度最大值，默认为30;
+##                    trigger: function (obj, error) {
+##                        //该表单元素的keyup和blur事件会触发该函数的执行;
+##                        //obj:当前表单元素jquery对象;
+##                        //error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
+##                        //console.log(error);
+##                        if (error) {
+##                            obj.parent().find(".Validform_checktip").show();
+##                            obj.parent().find(".passwordStrength").hide();
+##                        } else {
+##                            obj.parent().find(".passwordStrength").show();
+##                        }
+##                    }
+##                }
+##            },
+##            ajaxPost: true,
+##            beforeCheck: function (curform) {
+##                //在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
+##                //这里明确return false的话将不会继续执行验证操作;
+##            },
+##            beforeSubmit: function (curform) {
+##                //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
+##                //这里明确return false的话表单将不会提交;
+##            },
+##            callback: function (data) {
+##                if (data.status == "y") {
+##                    setTimeout(function () {
+##                        $.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
+##                    }, 2000);
+##                }
+##                //返回数据data是json对象，{"info":"demo info","status":"y"}
+##                //info: 输出提示信息;
+##                //status: 返回提交数据的状态,是否提交成功。如可以用"y"表示提交成功，"n"表示提交失败，在Validform_post.html文件返回数据里自定字符，主要用在callback函数里根据该值执行相应的回调操作;
+##                //你也可以在Validform_post.html文件返回更多信息在这里获取，进行相应操作；
+##                //ajax遇到服务端错误时也会执行回调，这时的data是{ status:**, statusText:**, readyState:**, responseText:** }；
+##
+##                //这里执行回调操作;
+##                //注意：如果不是ajax方式提交表单，传入callback，这时data参数是当前表单对象，回调函数会在表单验证全部通过后执行，然后判断是否提交表单，如果callback里明确return false，则表单不会提交，如果return true或没有return，则会提交表单。
+##            }
+##        });
+##    });
+##</script>

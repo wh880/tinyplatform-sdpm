@@ -53,7 +53,7 @@
                 <ref bean="menuFileProcessor"/>
 
                 <!--TypeInfo处理器 -->
-                <ref bean="typeInfoProcessor" />
+                <ref bean="typeInfoProcessor"/>
 
                 <!-- database -->
                 <ref bean="constantFileResolver"/>
@@ -88,6 +88,13 @@
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dynamicDataSource"/>
+    </bean>
+
+    <bean id="dslSession" name="dslSession" scope="prototype"
+          class="org.tinygroup.jdbctemplatedslsession.SimpleDslSession">
+        <constructor-arg>
+            <ref bean="dynamicDataSource"/>
+        </constructor-arg>
     </bean>
 
 </beans>

@@ -40,11 +40,6 @@
 	    <artifactId>org.tinygroup.pageflowbasiccomponent</artifactId>
 	    <version>${tiny_version}</version>
 	  </dependency>
-	  <dependency>
-      <groupId>org.tinygroup</groupId>
-      <artifactId>org.tinygroup.tinydb</artifactId>
-      <version>${tiny_version}</version>
-    </dependency>
     <dependency>
       <groupId>org.tinygroup</groupId>
       <artifactId>org.tinygroup.tinydbflowcomponent</artifactId>
