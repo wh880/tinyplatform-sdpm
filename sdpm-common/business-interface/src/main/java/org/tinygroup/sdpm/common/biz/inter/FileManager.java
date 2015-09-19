@@ -17,5 +17,23 @@ public interface FileManager {
 	 * @return 附件List
 	 */
 	List<File> batchAdd(List<File> file);
+	/**
+	 * 查询
+	 * @param file
+	 * @return
+	 */
+	List<File> find(File file);
+	/**
+	 * 删除附件
+	 * @param file
+	 * @return
+	 */
+	int delete(File file);
+	/**
+	 * 更新附件信息
+	 * @param file
+	 * @return
+	 */
+	File updataFile(File file);
 	
 }
