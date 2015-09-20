@@ -22,6 +22,10 @@ public class BuildManagerImpl implements BuildManager {
         return null;
     }
 
+    public List<ProcessBuilder> findList(int projectId) {
+        return null;
+    }
+
     public List<ProcessBuilder> findList(ProcessBuilder build) {
         return null;
     }

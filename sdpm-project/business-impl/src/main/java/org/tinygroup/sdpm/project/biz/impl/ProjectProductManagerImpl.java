@@ -30,6 +30,18 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
         return null;
     }
 
+    public List<Integer> findProductList(int projectId) {
+        return null;
+    }
+
+    public List<Integer> findProjcetList(int productId) {
+        return null;
+    }
+
+    public ProjectProduct add(Integer projectId, int productId) {
+        return null;
+    }
+
     public ProjectProduct update(ProjectProduct projectproduct) {
         return null;
     }

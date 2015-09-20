@@ -22,6 +22,14 @@ public class TeamManagerImpl implements TeamManager {
         return null;
     }
 
+    public ProjectTeam find(String projectId, String account) {
+        return null;
+    }
+
+    public List<ProjectTeam> findList(int projectId) {
+        return null;
+    }
+
     public List<ProjectTeam> findList(ProjectTeam team) {
         return null;
     }

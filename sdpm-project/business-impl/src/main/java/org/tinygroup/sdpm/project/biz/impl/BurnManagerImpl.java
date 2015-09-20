@@ -22,6 +22,10 @@ public class BurnManagerImpl implements BurnManager {
         return null;
     }
 
+    public List<ProjectBurn> findList(int projectId) {
+        return null;
+    }
+
     public List<ProjectBurn> findList(ProjectBurn burn) {
         return null;
     }
