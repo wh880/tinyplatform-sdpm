@@ -26,12 +26,12 @@ public interface ProjectProductService {
      * @param productId
      * @return
      */
-    public int save(int projectId, int productId);
+    public int add(int projectId, int productId);
 
     /**
      *
      * @param id
      * @return
      */
-    public int deleteById(int id);
+    public int delete(int id);
 }

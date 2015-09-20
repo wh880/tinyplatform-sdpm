@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.project.biz.inter.BurnManager;
 import org.tinygroup.sdpm.project.dao.pojo.Burn;
 import org.tinygroup.sdpm.project.service.inter.BurnService;
 
@@ -13,15 +14,21 @@ import java.util.List;
 @Component
 public class BurnServiceImpl implements BurnService {
     @Autowired
-    public int save(Burn burn) {
-        return 0;
-    }
+    private BurnManager burnManager;
 
     public List<Burn> findById(int projectId) {
         return null;
     }
 
-    public int a(int a) {
+    public int addBurn(Burn burn) {
         return 0;
+    }
+
+    public List<Burn> findBurnByProjectId(int projectId) {
+        return null;
+    }
+
+    public Integer deleteBurnByProjectDate(int projectId, String date) {
+        return null;
     }
 }

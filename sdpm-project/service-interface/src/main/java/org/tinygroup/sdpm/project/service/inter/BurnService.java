@@ -13,7 +13,7 @@ public interface BurnService {
      * @param burn
      * @return
      */
-    public int save(Burn burn);
+    public int addBurn(Burn burn);
 
 
     /**
@@ -21,11 +21,14 @@ public interface BurnService {
      * @param projectId
      * @return
      */
-    public List<Burn> findById(int projectId);
+    public List<Burn> findBurnByProjectId(int projectId);
 
     /**
-     * @param a
+     * 预留接口，在删除项目中
+     * @param projectId
+     * @param date
      * @return
      */
-    public int a(int a);
+    public Integer deleteBurnByProjectDate(int projectId, String date);
+
 }
