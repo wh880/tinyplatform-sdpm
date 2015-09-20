@@ -12,62 +12,37 @@ public interface ProductService {
 	 * @param product
 	 * @return
 	 */
-	Product add(Product product);
+	Product addProduct(Product product);
 	
 	/**
 	 * 修改
 	 * @param product
 	 * @return
 	 */
-	int update(Product product);
+	int updateProduct(Product product);
 	
 	/**
 	 * 根据产品ID删除
 	 * @param productId
 	 * @return
 	 */
-	int deleteById(Integer productId);
+	int deleteProduct(Integer productId);
 	
-	/**
-	 * 根据产品Id批量删除
-	 * @param productIds
-	 * @return
-	 */
-	int deleteByProductIds(Integer... productIds);
 	
-	/**
-	 * 根据产品对象删除
-	 * @param product
-	 * @return
-	 */
-	int deleteByProduct(Product product);
-	
-	/**
-	 * 根据产品批量删除
-	 * @param products
-	 * @return
-	 */
-	int[] deleteBatch(List<Product> products);
-	/**
-	 * 根据产品线Id删除
-	 * @param productLineId
-	 * @return
-	 */
-	int deleteByProductLineId(Integer productLineId);
 	
 	/**
 	 * 根据产品ID查找
 	 * @param productId
 	 * @return
 	 */
-	Product findById(Integer productId);
+	Product findProduct(Integer productId);
 	
 	/**
 	 * 根据对象查找
 	 * @param product
 	 * @return
 	 */
-	List<Product> findProduct(Product product);
+	List<Product> findProductList(Product product);
 	
 	/**
 	 * 根据产品对象查找(分页、排序)
@@ -96,7 +71,9 @@ public interface ProductService {
 	 * @param product
 	 * @return
 	 *//*
-	Pager<Product> findProduct(int currentPage,int limit ,Product product);*/
+	Pager<Product> findProduct(int currentPage,int limit ,Product product);
+	
+	*/
 	
 	
 	

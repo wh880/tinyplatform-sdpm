@@ -2,42 +2,41 @@ package org.tinygroup.sdpm.system.service;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
+import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 
-public interface ConfigService {
-	
+public interface DictService {
 	/**
-	 * 添加配置
+	 * 添加字典
 	 * @param config
 	 * @return
 	 */
-	SystemConfig addConfig(SystemConfig config);
+	SystemDict addDict(SystemDict dict);
 	
 	/**
 	 * 删除
 	 * @param config
 	 * @return
 	 */
-	int deleteConfig(SystemConfig config);
+	int deleteDict(SystemDict dict);
 	
 	/**
 	 * 修改
 	 * @param config
 	 * @return
 	 */
-	int updateConfig(SystemConfig config);
+	int updateDict(SystemDict dict);
 	
 	/**
 	 * 根据ID查找
 	 * @param configId
 	 * @return
 	 */
-	SystemConfig findConfig(Integer configId);
+	SystemDict findDict(Integer dictId);
 	
 	/**
 	 * 根据对象查找
 	 * @param config
 	 * @return
 	 */
-	List<SystemConfig> findConfigList(SystemConfig config);
+	List<SystemDict> findDictList(SystemDict dict);
 }
