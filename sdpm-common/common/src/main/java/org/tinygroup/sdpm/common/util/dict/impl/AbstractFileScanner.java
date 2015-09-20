@@ -1,10 +1,9 @@
-package org.tinygroup.util.dict.impl;
+package org.tinygroup.sdpm.common.util.dict.impl;
 
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
-
-import org.tinygroup.util.dict.inter.CallBackFunction;
-import org.tinygroup.util.dict.inter.FileScanner;
+import org.tinygroup.sdpm.common.util.dict.inter.CallBackFunction;
+import org.tinygroup.sdpm.common.util.dict.inter.FileScanner;
 import org.tinygroup.vfs.FileObject;
 
 /**

@@ -1,14 +1,14 @@
 
-package org.tinygroup.util.dict.impl;
-import com.thoughtworks.xstream.XStream;
+package org.tinygroup.sdpm.common.util.dict.impl;
 
+import com.thoughtworks.xstream.XStream;
 import org.tinygroup.database.config.table.Table;
 import org.tinygroup.database.config.table.TableField;
 import org.tinygroup.database.config.table.Tables;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.metadata.config.stdfield.StandardField;
 import org.tinygroup.metadata.config.stdfield.StandardFields;
-import org.tinygroup.util.dict.inter.CallBackFunction;
+import org.tinygroup.sdpm.common.util.dict.inter.CallBackFunction;
 import org.tinygroup.vfs.FileObject;
 import org.tinygroup.vfs.VFS;
 import org.tinygroup.xstream.XStreamFactory;
@@ -35,6 +35,11 @@ public class FileScannerImpl extends AbstractFileScanner {
     private Map<String,Map<String,String>> tableMap = new ConcurrentHashMap<String, Map<String, String>>();
 
     private List<FileObject> tableFiles = new ArrayList<FileObject>();
+
+    public static void main(String[] args) {
+        FileScannerImpl f = new FileScannerImpl();
+        f.process();
+    }
 
     public void fileProcess() {
         resolverFile(VFS.resolveFile("./sdpm-metadata"), new CallBackFunction() {
@@ -107,10 +112,5 @@ public class FileScannerImpl extends AbstractFileScanner {
 
     public boolean isMatchTable(FileObject fileObject){
         return fileObject.getFileName().endsWith(TABLE_FILE_EXT);
-    }
-
-    public static void main(String[] args){
-        FileScannerImpl f = new FileScannerImpl();
-        f.process();
     }
 }
