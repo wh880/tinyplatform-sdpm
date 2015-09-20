@@ -1,7 +1,7 @@
 <tables id="3cebde70fa5346d0a5a9d7b575e05478" package-name="org.tinygroup.alm.quality">
   <table id="bcd99e5662f846938519f9f1ea6de27c" name="bug" title="缺陷表" schema="" package-name="">
     <description></description>
-    <table-field standard-field-id="6c98afc28df84e42bc25ff10b754c588" primary="true" unique="true" not-null="true" id="bug_ID" auto-increase="true"/>
+    <table-field standard-field-id="6c98afc28df84e42bc25ff10b754c588" primary="true" unique="true" not-null="true" id="bug_id" auto-increase="true"/>
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="true" id="product_id" auto-increase="false"/>
     <table-field standard-field-id="32fc494251074a329bdfa8b6600ce738" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
     <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="false" unique="false" not-null="true" id="project_id" auto-increase="false"/>
