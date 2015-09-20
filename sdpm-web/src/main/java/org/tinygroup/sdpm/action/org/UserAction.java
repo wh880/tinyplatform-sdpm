@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 
@@ -15,7 +16,7 @@ import org.tinygroup.sdpm.org.service.inter.UserService;
  */
 @Controller
 @RequestMapping("/org/user/")
-public class UserAction {
+public class UserAction extends BaseController {
     @Autowired
     private UserService userService;
 

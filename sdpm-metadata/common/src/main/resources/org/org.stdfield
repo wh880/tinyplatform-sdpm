@@ -77,7 +77,7 @@
   <standard-field id="21b39a8b9e53419084979797eb16631b" name="org_user_locked" title="上次锁定时间" business-type-id="095e594e1550424b9643c7e2279e85be">
     <description></description>
   </standard-field>
-  <standard-field id="18a1a4b3d19b4459ae2da05cc23e60c5" name="org_user_deleted" title="是否删除" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629">
+  <standard-field id="18a1a4b3d19b4459ae2da05cc23e60c5" name="org_user_deleted" title="是否删除" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">
     <description></description>
   </standard-field>
   <standard-field id="7f7e1f2fb38a47c5b2e3b08dba7e8ce8" name="org_dept_id" title="部门编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">

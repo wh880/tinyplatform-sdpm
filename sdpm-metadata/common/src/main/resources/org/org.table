@@ -2,32 +2,32 @@
   <table id="69723ac7cf9a4963b3a2a32bd97bd754" name="org_user" title="用户表" schema="" package-name="">
     <description></description>
     <table-field standard-field-id="c7d7754bfa85454993ffd049f902f1be" primary="true" unique="true" not-null="true" id="org_user_id" auto-increase="false"/>
-    <table-field standard-field-id="7f7e1f2fb38a47c5b2e3b08dba7e8ce8" primary="false" unique="false" not-null="true" id="org_dept_id" auto-increase="false"/>
+    <table-field standard-field-id="7f7e1f2fb38a47c5b2e3b08dba7e8ce8" primary="false" unique="false" not-null="false" id="org_dept_id" auto-increase="false"/>
     <table-field standard-field-id="6e55b0ac4e64416da2cac4a793e8762b" primary="false" unique="false" not-null="true" id="org_user_account" auto-increase="false"/>
     <table-field standard-field-id="b6114a5f17184031a39bb34033ff1231" primary="false" unique="false" not-null="true" id="org_user_password" auto-increase="false"/>
-    <table-field standard-field-id="cc66fceecbe24d41a69f87c09935ea25" primary="false" unique="false" not-null="true" id="org_user_role" auto-increase="false"/>
-    <table-field standard-field-id="2d8d08288ada42f78cd291bd3cca33c6" primary="false" unique="false" not-null="true" id="org_user_RealName" auto-increase="false"/>
-    <table-field standard-field-id="46747217701244d0b1c788267731a9b2" primary="false" unique="false" not-null="true" id="org_user_nickname" auto-increase="false"/>
-    <table-field standard-field-id="af76dbc221c840bba1e6eb1a1475c3c0" primary="false" unique="false" not-null="true" id="org_user_submitter" auto-increase="false"/>
-    <table-field standard-field-id="38ccfb1c82994fdda54cd048460e1183" primary="false" unique="false" not-null="true" id="org_user_avatar" auto-increase="false"/>
-    <table-field standard-field-id="5ce6656714744503a2fee4582a782422" primary="false" unique="false" not-null="true" id="org_user_birthday" auto-increase="false"/>
-    <table-field standard-field-id="1e9acfada6fa43a596c487b7a5862d50" primary="false" unique="false" not-null="true" id="org_user_gender" auto-increase="false"/>
-    <table-field standard-field-id="140fcb8250da4c8bb63bdd636819ac22" primary="false" unique="false" not-null="true" id="org_user_email" auto-increase="false"/>
-    <table-field standard-field-id="2acf3f674b0b44cc958e8ff41b379a99" primary="false" unique="false" not-null="true" id="org_user_SKYPE" auto-increase="false"/>
-    <table-field standard-field-id="cba3c4ed58d140bb89afbf98df52c24c" primary="false" unique="false" not-null="true" id="org_user_qq" auto-increase="false"/>
-    <table-field standard-field-id="9dfd8200d2074729b7829743e2dafb4f" primary="false" unique="false" not-null="true" id="org_user_yahoo" auto-increase="false"/>
-    <table-field standard-field-id="7336ab50a9e84a89a40ef5fa03a336f3" primary="false" unique="false" not-null="true" id="org_user_GTalk" auto-increase="false"/>
-    <table-field standard-field-id="42fc877c345641f09302c8209097f15b" primary="false" unique="false" not-null="true" id="org_user_WANGWANG" auto-increase="false"/>
-    <table-field standard-field-id="52a2d2bb3e104a6aaf2be1b965ce57bd" primary="false" unique="false" not-null="true" id="org_user_mobile" auto-increase="false"/>
-    <table-field standard-field-id="06d99989373049aa9094f0338cd0c294" primary="false" unique="false" not-null="true" id="org_user_phone" auto-increase="false"/>
-    <table-field standard-field-id="034375b82af64be9ba69c8600094b20b" primary="false" unique="false" not-null="true" id="org_user_address" auto-increase="false"/>
-    <table-field standard-field-id="7b2c4dd9a1b041ca88f3adf8b26a1538" primary="false" unique="false" not-null="true" id="org_user_ZipCode" auto-increase="false"/>
-    <table-field standard-field-id="a602f8ddac18454693d4be20fadda6df" primary="false" unique="false" not-null="true" id="org_user_join" auto-increase="false"/>
-    <table-field standard-field-id="77b8b6d0282441b8be21816a162f71c0" primary="false" unique="false" not-null="true" id="org_user_visits" auto-increase="false"/>
-    <table-field standard-field-id="b7e01baa07d1416e8d62dfe05e7e9976" primary="false" unique="false" not-null="true" id="org_user_ip" auto-increase="false"/>
-    <table-field standard-field-id="8ef1bd3aecaa4e049827b68e39f26f30" primary="false" unique="false" not-null="true" id="org_user_last" auto-increase="false"/>
-    <table-field standard-field-id="7cf911e409d347e78682b8c733c14591" primary="false" unique="false" not-null="true" id="org_user_fails" auto-increase="false"/>
-    <table-field standard-field-id="21b39a8b9e53419084979797eb16631b" primary="false" unique="false" not-null="true" id="org_user_locked" auto-increase="false"/>
+    <table-field standard-field-id="cc66fceecbe24d41a69f87c09935ea25" primary="false" unique="false" not-null="false" id="org_user_role" auto-increase="false"/>
+    <table-field standard-field-id="2d8d08288ada42f78cd291bd3cca33c6" primary="false" unique="false" not-null="false" id="org_user_RealName" auto-increase="false"/>
+    <table-field standard-field-id="46747217701244d0b1c788267731a9b2" primary="false" unique="false" not-null="false" id="org_user_nickname" auto-increase="false"/>
+    <table-field standard-field-id="af76dbc221c840bba1e6eb1a1475c3c0" primary="false" unique="false" not-null="false" id="org_user_submitter" auto-increase="false"/>
+    <table-field standard-field-id="38ccfb1c82994fdda54cd048460e1183" primary="false" unique="false" not-null="false" id="org_user_avatar" auto-increase="false"/>
+    <table-field standard-field-id="5ce6656714744503a2fee4582a782422" primary="false" unique="false" not-null="false" id="org_user_birthday" auto-increase="false"/>
+    <table-field standard-field-id="1e9acfada6fa43a596c487b7a5862d50" primary="false" unique="false" not-null="false" id="org_user_gender" auto-increase="false"/>
+    <table-field standard-field-id="140fcb8250da4c8bb63bdd636819ac22" primary="false" unique="false" not-null="false" id="org_user_email" auto-increase="false"/>
+    <table-field standard-field-id="2acf3f674b0b44cc958e8ff41b379a99" primary="false" unique="false" not-null="false" id="org_user_SKYPE" auto-increase="false"/>
+    <table-field standard-field-id="cba3c4ed58d140bb89afbf98df52c24c" primary="false" unique="false" not-null="false" id="org_user_qq" auto-increase="false"/>
+    <table-field standard-field-id="9dfd8200d2074729b7829743e2dafb4f" primary="false" unique="false" not-null="false" id="org_user_yahoo" auto-increase="false"/>
+    <table-field standard-field-id="7336ab50a9e84a89a40ef5fa03a336f3" primary="false" unique="false" not-null="false" id="org_user_GTalk" auto-increase="false"/>
+    <table-field standard-field-id="42fc877c345641f09302c8209097f15b" primary="false" unique="false" not-null="false" id="org_user_WANGWANG" auto-increase="false"/>
+    <table-field standard-field-id="52a2d2bb3e104a6aaf2be1b965ce57bd" primary="false" unique="false" not-null="false" id="org_user_mobile" auto-increase="false"/>
+    <table-field standard-field-id="06d99989373049aa9094f0338cd0c294" primary="false" unique="false" not-null="false" id="org_user_phone" auto-increase="false"/>
+    <table-field standard-field-id="034375b82af64be9ba69c8600094b20b" primary="false" unique="false" not-null="false" id="org_user_address" auto-increase="false"/>
+    <table-field standard-field-id="7b2c4dd9a1b041ca88f3adf8b26a1538" primary="false" unique="false" not-null="false" id="org_user_ZipCode" auto-increase="false"/>
+    <table-field standard-field-id="a602f8ddac18454693d4be20fadda6df" primary="false" unique="false" not-null="false" id="org_user_join" auto-increase="false"/>
+    <table-field standard-field-id="77b8b6d0282441b8be21816a162f71c0" primary="false" unique="false" not-null="false" id="org_user_visits" auto-increase="false"/>
+    <table-field standard-field-id="b7e01baa07d1416e8d62dfe05e7e9976" primary="false" unique="false" not-null="false" id="org_user_ip" auto-increase="false"/>
+    <table-field standard-field-id="8ef1bd3aecaa4e049827b68e39f26f30" primary="false" unique="false" not-null="false" id="org_user_last" auto-increase="false"/>
+    <table-field standard-field-id="7cf911e409d347e78682b8c733c14591" primary="false" unique="false" not-null="false" id="org_user_fails" auto-increase="false"/>
+    <table-field standard-field-id="21b39a8b9e53419084979797eb16631b" primary="false" unique="false" not-null="false" id="org_user_locked" auto-increase="false"/>
     <table-field standard-field-id="18a1a4b3d19b4459ae2da05cc23e60c5" primary="false" unique="false" not-null="true" id="org_user_deleted" auto-increase="false"/>
   </table>
   <table id="556509d741454b8aaf60ad5636500dea" name="org_dept" title="部门表" package-name="">
