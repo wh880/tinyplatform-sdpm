@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
-import org.tinygroup.sdpm.project.dao.pojo.Projectproduct;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 
 import java.util.List;
 
@@ -9,28 +9,28 @@ import java.util.List;
  */
 public interface ProjectProductManager {
     /**
-     * 根据主键id查找用户
+     * 根据projectId查找关联产品
      *
-     * @param id 主键
+     * @param projectId 主键
      * @return
      */
-    Projectproduct find(String id);
+    List<Integer> findProductList(int projectId);
 
     /**
      * 根据条件查询List
      *
-     * @param projectproduct 用于查询条件
+     * @param productId 用于查询条件
      * @return
      */
-    List<Projectproduct> findList(Projectproduct projectproduct);
+    List<Integer> findProjcetList(int productId);
 
     /**
-     * 新增有一个用户
-     *
-     * @param projectproduct 新增实体类
+     * 新增关联
+     * @param projectId
+     * @param productId
      * @return
      */
-    Projectproduct add(Projectproduct projectproduct);
+    ProjectProduct add(Integer projectId, int productId);
 
     /**
      * 更新用户
@@ -38,10 +38,10 @@ public interface ProjectProductManager {
      * @param projectproduct 需要更新的实体类
      * @return
      */
-    Projectproduct update(Projectproduct projectproduct);
+    ProjectProduct update(ProjectProduct projectproduct);
 
     /**
-     * 根据id进行软删除用户
+     * 根据id进行删除
      *
      * @param id 主键
      * @return

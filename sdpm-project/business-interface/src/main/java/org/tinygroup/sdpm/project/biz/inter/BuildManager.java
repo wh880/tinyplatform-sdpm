@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
-import org.tinygroup.sdpm.project.dao.pojo.Build;
+
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 
 import java.util.List;
 
@@ -14,23 +15,23 @@ public interface BuildManager {
      * @param id 主键
      * @return
      */
-    Build find(String id);
+    ProcessBuilder find(String id);
 
     /**
      * 根据条件查询List
      *
-     * @param build 用于查询条件
+     * @param projectId 用于查询条件
      * @return
      */
-    List<Build> findList(Build build);
+    List<ProcessBuilder> findList(int projectId);
 
     /**
-     * 新增有一个用户
+     * 新增有一个版本
      *
      * @param build 新增实体类
      * @return
      */
-    Build add(Build build);
+    ProjectBuild add(ProjectBuild build);
 
     /**
      * 更新用户
@@ -38,10 +39,10 @@ public interface BuildManager {
      * @param build 需要更新的实体类
      * @return
      */
-    Build update(Build build);
+    ProjectBuild update(ProjectBuild build);
 
     /**
-     * 根据id进行软删除用户
+     * 根据id进行软删除
      *
      * @param id 主键
      * @return

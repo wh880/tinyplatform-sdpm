@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
-import org.tinygroup.sdpm.project.dao.pojo.Task;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface TaskManager {
      * @param id 主键
      * @return
      */
-    Task find(String id);
+    ProjectTask find(String id);
 
     /**
      * 根据条件查询List
@@ -22,7 +22,7 @@ public interface TaskManager {
      * @param task 用于查询条件
      * @return
      */
-    List<Task> findList(Task task);
+    List<ProjectTask> findList(ProjectTask task);
 
     /**
      * 新增有一个用户
@@ -30,7 +30,7 @@ public interface TaskManager {
      * @param task 新增实体类
      * @return
      */
-    Task add(Task task);
+    ProjectTask add(ProjectTask task);
 
     /**
      * 更新用户
@@ -38,7 +38,7 @@ public interface TaskManager {
      * @param task 需要更新的实体类
      * @return
      */
-    Task update(Task task);
+    ProjectTask update(ProjectTask task);
 
     /**
      * 根据id进行软删除用户

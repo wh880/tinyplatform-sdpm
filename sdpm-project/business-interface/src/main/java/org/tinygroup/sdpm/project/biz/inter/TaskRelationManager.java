@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
-import org.tinygroup.sdpm.project.dao.pojo.Taskrelation;
+
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTaskrelation;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface TaskRelationManager {
      * @param id 主键
      * @return
      */
-    Taskrelation find(String id);
+    ProjectTaskrelation find(String id);
 
     /**
      * 根据条件查询List
@@ -22,7 +23,7 @@ public interface TaskRelationManager {
      * @param taskrelation 用于查询条件
      * @return
      */
-    List<Taskrelation> findList(Taskrelation taskrelation);
+    List<ProjectTaskrelation> findList(ProjectTaskrelation taskrelation);
 
     /**
      * 新增有一个用户
@@ -30,7 +31,7 @@ public interface TaskRelationManager {
      * @param taskrelation 新增实体类
      * @return
      */
-    Taskrelation add(Taskrelation taskrelation);
+    ProjectTaskrelation add(ProjectTaskrelation taskrelation);
 
     /**
      * 更新用户
@@ -38,7 +39,7 @@ public interface TaskRelationManager {
      * @param taskrelation 需要更新的实体类
      * @return
      */
-    Taskrelation update(Taskrelation taskrelation);
+    ProjectTaskrelation update(ProjectTaskrelation taskrelation);
 
     /**
      * 根据id进行软删除用户

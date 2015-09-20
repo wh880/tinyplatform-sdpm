@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
-import org.tinygroup.sdpm.project.dao.pojo.Team;
+
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 
 import java.util.List;
 
@@ -9,28 +10,36 @@ import java.util.List;
  */
 public interface TeamManager {
     /**
-     * 根据主键id查找用户
+     * 根据主键id查找
      *
      * @param id 主键
      * @return
      */
-    Team find(String id);
+    ProjectTeam find(String id);
+
+    /**
+     * 根据项目及帐号进行查询
+     * @param projectId
+     * @param account
+     * @return
+     */
+    ProjectTeam find(String projectId, String account);
 
     /**
      * 根据条件查询List
      *
-     * @param team 用于查询条件
+     * @param projectId 用于查询条件
      * @return
      */
-    List<Team> findList(Team team);
+    List<ProjectTeam> findList(int projectId);
 
     /**
-     * 新增有一个用户
+     * 新增有一个成员
      *
      * @param team 新增实体类
      * @return
      */
-    Team add(Team team);
+    ProjectTeam add(ProjectTeam team);
 
     /**
      * 更新用户
@@ -38,12 +47,12 @@ public interface TeamManager {
      * @param team 需要更新的实体类
      * @return
      */
-    Team update(Team team);
+    ProjectTeam update(ProjectTeam team);
 
     /**
-     * 根据id进行软删除用户
+     * 根据id进行删除
      *
-     * @param id 主键
+     * @param id 逻辑id 主键
      * @return
      */
     Integer delete(String id);

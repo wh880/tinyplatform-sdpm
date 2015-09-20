@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
-import org.tinygroup.sdpm.project.dao.pojo.Taskestimate;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTaskestimate;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface TaskEsTimateManager {
      * @param id 主键
      * @return
      */
-    Taskestimate find(String id);
+    ProjectTaskestimate find(String id);
 
     /**
      * 根据条件查询List
@@ -22,7 +22,7 @@ public interface TaskEsTimateManager {
      * @param taskestimate 用于查询条件
      * @return
      */
-    List<Taskestimate> findList(Taskestimate taskestimate);
+    List<ProjectTaskestimate> findList(ProjectTaskestimate taskestimate);
 
     /**
      * 新增有一个用户
@@ -30,7 +30,7 @@ public interface TaskEsTimateManager {
      * @param taskestimate 新增实体类
      * @return
      */
-    Taskestimate add(Taskestimate taskestimate);
+    ProjectTaskestimate add(ProjectTaskestimate taskestimate);
 
     /**
      * 更新用户
@@ -38,7 +38,7 @@ public interface TaskEsTimateManager {
      * @param taskestimate 需要更新的实体类
      * @return
      */
-    Taskestimate update(Taskestimate taskestimate);
+    ProjectTaskestimate update(ProjectTaskestimate taskestimate);
 
     /**
      * 根据id进行软删除用户
