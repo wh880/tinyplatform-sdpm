@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.product.biz.inter;
 
-import org.tinygroup.sdpm.product.dao.pojo.Release;
+import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 
 public interface ReleaseManger{
     /**
@@ -8,35 +8,30 @@ public interface ReleaseManger{
      *@param release
      *@return
      */
-    Release add(Release release);
+	ProductRelease add(ProductRelease release);
     /**
      * 编辑发布
      * @param release
      * @return
      */
-    int update(Release release);
+    int update(ProductRelease release);
     /**
      * 根据发布对象删除
      * @param release
      * @return
      */
-    int deleteRelease(Release release);
-    /**
-     * 根据发布ID删除
-     * @param releaseId
-     * @return
-     */
-    int deleteByReleaseId(Integer releaseId);
+    int delete(ProductRelease release);
+   
     /**
      * 查找发布
      * @param release
      * @return
      */
-    Release findRelease(Release release);
+    ProductRelease find(Integer releaseId);
     /**
      * 根据发布Id查找
      * @param releaseId
      * @return
      */
-    Release findById(Release releaseId);
+    ProductRelease findList(ProductRelease releaseId);
 }

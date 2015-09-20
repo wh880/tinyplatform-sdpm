@@ -25,4 +25,20 @@ public interface BuildService {
      * @return
      */
     public Pager<Build> findPager(int page, int pagesize, int projectId);
+
+    /**
+     * 编辑版本
+     *
+     * @param build
+     * @return
+     */
+    public Build updateBuild(Build build);
+
+    /**
+     * 根据id删除
+     *
+     * @param buildId
+     * @return
+     */
+    public Integer deleteBuild(Integer buildId);
 }

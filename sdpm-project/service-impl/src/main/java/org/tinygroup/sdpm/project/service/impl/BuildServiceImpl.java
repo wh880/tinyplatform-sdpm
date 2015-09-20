@@ -16,4 +16,12 @@ public class BuildServiceImpl implements BuildService {
     public Pager<Build> findPager(int page, int pagesize, int projectId) {
         return null;
     }
+
+    public Build updateBuild(Build build) {
+        return null;
+    }
+
+    public Integer deleteBuild(Integer buildId) {
+        return null;
+    }
 }

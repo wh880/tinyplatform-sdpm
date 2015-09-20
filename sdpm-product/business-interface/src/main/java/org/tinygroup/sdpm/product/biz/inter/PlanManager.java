@@ -2,7 +2,7 @@ package org.tinygroup.sdpm.product.biz.inter;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.product.dao.pojo.Plan;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 
 public interface PlanManager {
 	/**
@@ -10,38 +10,35 @@ public interface PlanManager {
 	 * @param plan
 	 * @return
 	 */
-	Plan add(Plan plan);
+	ProductPlan add(ProductPlan plan);
 	/**
 	 * 编辑计划
 	 * @parm plan
 	 * @ruturn
 	 */
-	int update(Plan plan);
-	/**
-	 * 删除计划
-	 * @parm plan
-	 * @ruturn
-	 */
-	int deleteByPlan(Plan plan);
+	int update(ProductPlan plan);
+	
 	/**
 	 * 根据计划ID删除计划
 	 * @parm plan
 	 * @ruturn
 	 */
-	int deleteByPlanId(Plan plan);
-
+	int delete(Integer planId);
+	
 	/**
 	 * 根据Id查找
 	 * @param planId
 	 * @return
 	 */
-	Plan findById(Integer planId);
-
+	ProductPlan find(Integer planId);
+	
 	/**
 	 * 根据对象查找
 	 * @param plan
 	 * @return
 	 */
-	List<Plan> findPlan( Plan plan);
+	List<ProductPlan> findList(ProductPlan plan);
+	
+	
 
 }

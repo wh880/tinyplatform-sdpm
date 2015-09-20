@@ -97,7 +97,6 @@
   <standard-field id="a78a83818ec4495e9196cca5c87fe180" name="story_linkStories" title="关联需求" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="6c0b15cffa8c40f587969376f8b2194b" name="story_duplicateStory" title="重复需求ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="d530b2f878d94725b0de97aa83fe6012" name="story_version" title="需求版本" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="1"/>
-  <standard-field id="70e17a8d372a492b9452bbc0ea5e145d" name="bug_id" title="缺陷ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
   <standard-field id="53806a8e2b9943d8bfbbb0853c893b6b" name="storySpec_id" title="需求描述ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
   <standard-field id="196dbdfea33c43649227901605968e7c" name="story_verification" title="验证标准" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="ba346a40ad5f492ca7cff6c724600df9" name="story_spec" title="需求描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>

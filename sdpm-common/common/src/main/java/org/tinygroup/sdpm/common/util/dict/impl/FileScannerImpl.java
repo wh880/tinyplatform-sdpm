@@ -1,13 +1,14 @@
-package org.tinygroup.sdpm.common.util.dict.impl;
 
+package org.tinygroup.util.dict.impl;
 import com.thoughtworks.xstream.XStream;
+
 import org.tinygroup.database.config.table.Table;
 import org.tinygroup.database.config.table.TableField;
 import org.tinygroup.database.config.table.Tables;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.metadata.config.stdfield.StandardField;
 import org.tinygroup.metadata.config.stdfield.StandardFields;
-import org.tinygroup.sdpm.common.util.dict.inter.CallBackFunction;
+import org.tinygroup.util.dict.inter.CallBackFunction;
 import org.tinygroup.vfs.FileObject;
 import org.tinygroup.vfs.VFS;
 import org.tinygroup.xstream.XStreamFactory;
@@ -20,7 +21,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by wangll13383 on 2015/9/11.
- * 扫描 stdfield文件，table文件
  */
 public class FileScannerImpl extends AbstractFileScanner {
 
@@ -37,21 +37,22 @@ public class FileScannerImpl extends AbstractFileScanner {
     private List<FileObject> tableFiles = new ArrayList<FileObject>();
 
     public void fileProcess() {
-       resolverFile(VFS.resolveFile("./"), new CallBackFunction() {
-           public void process(FileObject fileObject) {
+        resolverFile(VFS.resolveFile("./sdpm-metadata"), new CallBackFunction() {
+            public void process(FileObject fileObject) {
                 if (isMatchSTD(fileObject)){
                     stdFiles.add(fileObject);
                 }
                 if (isMatchTable(fileObject)){
                     tableFiles.add(fileObject);
                 }
-           }
-       });
+            }
+        });
     }
 
     public void process() {
         fileProcess();
-
+        resolverStd();
+        resolverTable();
     }
 
     private void resolverStd(){
@@ -60,7 +61,7 @@ public class FileScannerImpl extends AbstractFileScanner {
         for (FileObject fileObject : stdFiles) {
             LOGGER.logMessage(LogLevel.INFO, "正在加载stdField文件[{0}]",
                     fileObject.getAbsolutePath());
-            stream.addImmutableType(StandardFields.class);
+            stream.processAnnotations(StandardFields.class);
             StandardFields standardFields = (StandardFields) stream
                     .fromXML(fileObject.getInputStream());
             if(standardFields!=null){
@@ -76,10 +77,10 @@ public class FileScannerImpl extends AbstractFileScanner {
     private void resolverTable(){
         XStream stream = XStreamFactory
                 .getXStream();
-        for (FileObject fileObject : stdFiles) {
+        for (FileObject fileObject : tableFiles) {
             LOGGER.logMessage(LogLevel.INFO, "正在加载table文件[{0}]",
                     fileObject.getAbsolutePath());
-            stream.addImmutableType(Tables.class);
+            stream.processAnnotations(Tables.class);
             Tables tables = (Tables) stream
                     .fromXML(fileObject.getInputStream());
             if(tables != null){
@@ -106,5 +107,10 @@ public class FileScannerImpl extends AbstractFileScanner {
 
     public boolean isMatchTable(FileObject fileObject){
         return fileObject.getFileName().endsWith(TABLE_FILE_EXT);
+    }
+
+    public static void main(String[] args){
+        FileScannerImpl f = new FileScannerImpl();
+        f.process();
     }
 }

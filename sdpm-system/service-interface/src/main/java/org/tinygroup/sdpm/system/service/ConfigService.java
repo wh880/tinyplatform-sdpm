@@ -2,7 +2,7 @@ package org.tinygroup.sdpm.system.service;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.system.dao.pojo.Config;
+import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 
 public interface ConfigService {
 	
@@ -11,33 +11,33 @@ public interface ConfigService {
 	 * @param config
 	 * @return
 	 */
-	Config add(Config config);
+	SystemConfig addConfig(SystemConfig config);
 	
 	/**
 	 * 删除
 	 * @param config
 	 * @return
 	 */
-	int delete(Config config);
+	int deleteConfig(SystemConfig config);
 	
 	/**
 	 * 修改
 	 * @param config
 	 * @return
 	 */
-	int update(Config config);
+	int updateConfig(SystemConfig config);
 	
 	/**
 	 * 根据ID查找
 	 * @param configId
 	 * @return
 	 */
-	Config findById(Integer configId);
+	SystemConfig findConfig(Integer configId);
 	
 	/**
 	 * 根据对象查找
 	 * @param config
 	 * @return
 	 */
-	List<Config> findConfig(Config config);
+	List<SystemConfig> findConfigList(SystemConfig config);
 }
