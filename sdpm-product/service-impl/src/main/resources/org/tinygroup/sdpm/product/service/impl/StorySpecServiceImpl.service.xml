@@ -1,0 +1,16 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.product.service.impl.StorySpecServiceImpl" bean="storySpecService">
+    <service-method local-name="findStorySpec" service-id="product_findStorySpec" method-name="findStorySpec" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="storyId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStorySpecResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec"/>
+    </service-method>
+    <service-method local-name="findStorySpecList" service-id="product_findStorySpecList" method-name="findStorySpecList" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="storySpec" type="org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStorySpecListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec"/>
+    </service-method>
+  </service-component>
+</service-components>

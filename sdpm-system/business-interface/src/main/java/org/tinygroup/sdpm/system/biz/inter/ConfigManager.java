@@ -18,7 +18,7 @@ public interface ConfigManager {
 	 * @param config
 	 * @return
 	 */
-	int delete(SystemConfig config);
+	int delete(Integer configId);
 	
 	/**
 	 * 修改

@@ -5,7 +5,7 @@ import java.util.List;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 
 
-public interface ProductPlanService{
+public interface PlanService{
 	/**
 	 * 添加计划
 	 * @param plan

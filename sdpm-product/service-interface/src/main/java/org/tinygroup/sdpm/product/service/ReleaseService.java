@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.product.service;
 
+import java.util.List;
+
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 
 public interface ReleaseService {
@@ -20,7 +22,7 @@ public interface ReleaseService {
      * @param release
      * @return
      */
-    int deleteRelease(ProductRelease release);
+    int deleteRelease(Integer releaseId);
    
     /**
      * 查找发布
@@ -33,5 +35,5 @@ public interface ReleaseService {
      * @param releaseId
      * @return
      */
-    ProductRelease findReleaseList(ProductRelease releaseId);
+    List<ProductRelease> findReleaseList(ProductRelease releaseId);
 }

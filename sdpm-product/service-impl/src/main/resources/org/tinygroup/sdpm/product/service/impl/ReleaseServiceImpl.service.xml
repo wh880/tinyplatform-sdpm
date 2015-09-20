@@ -1,0 +1,34 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.product.service.impl.ReleaseServiceImpl" bean="releaseService">
+    <service-method local-name="addRelease" service-id="product_addRelease" method-name="addRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="release" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addReleaseResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease"/>
+    </service-method>
+    <service-method local-name="updateRelease" service-id="product_updateRelease" method-name="updateRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="release" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateReleaseResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="deleteRelease" service-id="product_deleteRelease" method-name="deleteRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="releaseId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteReleaseResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="findRelease" service-id="product_findRelease" method-name="findRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="releaseId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findReleaseResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease"/>
+    </service-method>
+    <service-method local-name="findReleaseList" service-id="product_findReleaseList" method-name="findReleaseList" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="releaseId" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findReleaseListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease"/>
+    </service-method>
+  </service-component>
+</service-components>

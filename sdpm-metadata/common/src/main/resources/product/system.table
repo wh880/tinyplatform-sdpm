@@ -23,5 +23,6 @@
     <table-field standard-field-id="e8aa6f77988e4346bbafa0cfcb177836" primary="false" unique="false" not-null="false" id="dict_value" auto-increase="false"/>
     <table-field standard-field-id="f5c70ee6582347dea45bd6401b4f89b2" primary="false" unique="false" not-null="false" id="dict_sort" auto-increase="false"/>
     <table-field standard-field-id="32fc494251074a329bdfa8b6600ce738" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
+    <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
   </table>
 </tables>

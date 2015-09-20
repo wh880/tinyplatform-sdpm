@@ -57,6 +57,12 @@ public class SystemDictTable extends Table {
 	 */
 	public final Column MODULE_ID = new Column(this, "module_id");
 
+	/** 
+	 * 已删除
+	 * 
+	 */
+	public final Column DELETED = new Column(this, "deleted");
+
 
 		private SystemDictTable() {
 			super("system_dict");

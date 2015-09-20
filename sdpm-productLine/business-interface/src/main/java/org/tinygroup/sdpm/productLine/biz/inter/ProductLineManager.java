@@ -21,6 +21,13 @@ public interface ProductLineManager {
 	int update(ProductLine productLine);
 	
 	/**
+	 * 根据Id删除
+	 * @param productLineId
+	 * @return
+	 */
+	int delete(Integer productLineId);
+	
+	/**
 	 * 根据主键查询
 	 * @param productLineId
 	 * @return

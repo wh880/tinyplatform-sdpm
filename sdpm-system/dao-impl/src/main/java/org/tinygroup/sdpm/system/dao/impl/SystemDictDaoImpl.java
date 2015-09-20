@@ -57,7 +57,8 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 					SYSTEM_DICTTABLE.DICT_KEY.value(t.getDictKey()),
 					SYSTEM_DICTTABLE.DICT_VALUE.value(t.getDictValue()),
 					SYSTEM_DICTTABLE.DICT_SORT.value(t.getDictSort()),
-					SYSTEM_DICTTABLE.MODULE_ID.value(t.getModuleId()));
+					SYSTEM_DICTTABLE.MODULE_ID.value(t.getModuleId()),
+					SYSTEM_DICTTABLE.DELETED.value(t.getDeleted()));
 				return insert;
 			}
 		});
@@ -74,7 +75,8 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 					SYSTEM_DICTTABLE.DICT_KEY.value(t.getDictKey()),
 					SYSTEM_DICTTABLE.DICT_VALUE.value(t.getDictValue()),
 					SYSTEM_DICTTABLE.DICT_SORT.value(t.getDictSort()),
-					SYSTEM_DICTTABLE.MODULE_ID.value(t.getModuleId())).where(
+					SYSTEM_DICTTABLE.MODULE_ID.value(t.getModuleId()),
+					SYSTEM_DICTTABLE.DELETED.value(t.getDeleted())).where(
 					SYSTEM_DICTTABLE.DICT_ID.eq(t.getDictId()));
 				return update;
 			}
@@ -126,7 +128,8 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 					SYSTEM_DICTTABLE.DICT_KEY.eq(t.getDictKey()),
 					SYSTEM_DICTTABLE.DICT_VALUE.eq(t.getDictValue()),
 					SYSTEM_DICTTABLE.DICT_SORT.eq(t.getDictSort()),
-					SYSTEM_DICTTABLE.MODULE_ID.eq(t.getModuleId())));
+					SYSTEM_DICTTABLE.MODULE_ID.eq(t.getModuleId()),
+					SYSTEM_DICTTABLE.DELETED.eq(t.getDeleted())));
 			}
 		});
 	}
@@ -144,7 +147,8 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 					SYSTEM_DICTTABLE.DICT_KEY.eq(t.getDictKey()),
 					SYSTEM_DICTTABLE.DICT_VALUE.eq(t.getDictValue()),
 					SYSTEM_DICTTABLE.DICT_SORT.eq(t.getDictSort()),
-					SYSTEM_DICTTABLE.MODULE_ID.eq(t.getModuleId())));
+					SYSTEM_DICTTABLE.MODULE_ID.eq(t.getModuleId()),
+					SYSTEM_DICTTABLE.DELETED.eq(t.getDeleted())));
 			}
 		});
 	}
@@ -161,7 +165,8 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 					SYSTEM_DICTTABLE.DICT_KEY.value(new JdbcNamedParameter("dictKey")),
 					SYSTEM_DICTTABLE.DICT_VALUE.value(new JdbcNamedParameter("dictValue")),
 					SYSTEM_DICTTABLE.DICT_SORT.value(new JdbcNamedParameter("dictSort")),
-					SYSTEM_DICTTABLE.MODULE_ID.value(new JdbcNamedParameter("moduleId")));
+					SYSTEM_DICTTABLE.MODULE_ID.value(new JdbcNamedParameter("moduleId")),
+					SYSTEM_DICTTABLE.DELETED.value(new JdbcNamedParameter("deleted")));
 			}
 		});
 	}
@@ -182,7 +187,8 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 					SYSTEM_DICTTABLE.DICT_KEY.value(new JdbcNamedParameter("dictKey")),
 					SYSTEM_DICTTABLE.DICT_VALUE.value(new JdbcNamedParameter("dictValue")),
 					SYSTEM_DICTTABLE.DICT_SORT.value(new JdbcNamedParameter("dictSort")),
-					SYSTEM_DICTTABLE.MODULE_ID.value(new JdbcNamedParameter("moduleId"))).where(
+					SYSTEM_DICTTABLE.MODULE_ID.value(new JdbcNamedParameter("moduleId")),
+					SYSTEM_DICTTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
 				SYSTEM_DICTTABLE.DICT_ID.eq(new JdbcNamedParameter("dictId")));
 			}
 		});
@@ -200,7 +206,8 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 				SYSTEM_DICTTABLE.DICT_KEY.eq(new JdbcNamedParameter("dictKey")),
 				SYSTEM_DICTTABLE.DICT_VALUE.eq(new JdbcNamedParameter("dictValue")),
 				SYSTEM_DICTTABLE.DICT_SORT.eq(new JdbcNamedParameter("dictSort")),
-				SYSTEM_DICTTABLE.MODULE_ID.eq(new JdbcNamedParameter("moduleId"))));
+				SYSTEM_DICTTABLE.MODULE_ID.eq(new JdbcNamedParameter("moduleId")),
+				SYSTEM_DICTTABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
 			}
 		});
 	}
