@@ -3,10 +3,10 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-        <bean id="typeInfoProcessor" class="org.tinygroup.typeinfo.TypeInfoFileProcessor">
+    <bean id="typeInfoProcessor" class="org.tinygroup.sdpm.common.typeinfo.TypeInfoFileProcessor">
             <property name="fileResolver" ref="fileResolver"></property>
             <property name="typeInfoResolvor" ref="typeInfoResolvor"></property>
         </bean>
-        <bean id="typeInfoResolvor" class="org.tinygroup.typeinfo.TypeInfoResolvorImpl"></bean>
-        <bean id="typeInfoFunction" class="org.tinygroup.typeinfo.InfoFunction" />
+    <bean id="typeInfoResolvor" class="org.tinygroup.sdpm.common.typeinfo.TypeInfoResolvorImpl"></bean>
+    <bean id="typeInfoFunction" class="org.tinygroup.sdpm.common.typeinfo.InfoFunction"/>
     </beans>

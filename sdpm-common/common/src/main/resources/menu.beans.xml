@@ -2,10 +2,10 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="menuFileProcessor" class="org.tinygroup.sdpm.menu.MenuFileProcessor">
+    <bean id="menuFileProcessor" class="org.tinygroup.sdpm.common.menu.MenuFileProcessor">
         <property name="fileResolver" ref="fileResolver"></property>
         <property name="menuManager" ref="menuManager"></property>
     </bean>
-    <bean id="menuManager" class="org.tinygroup.sdpm.menu.impl.MenuManagerImpl"/>
-    <bean id="commonFilter" class="org.tinygroup.sdpm.filter.CommonFilter"/>
+    <bean id="menuManager" class="org.tinygroup.sdpm.common.menu.impl.MenuManagerImpl"/>
+    <bean id="commonFilter" class="org.tinygroup.sdpm.common.filter.CommonFilter"/>
 </beans>

@@ -1,5 +1,5 @@
 <xstream-configuration package-name="menu">
     <xstream-annotation-classes>
-        <xstream-annotation-class class-name="org.tinygroup.sdpm.menu.Menu" />
+        <xstream-annotation-class class-name="org.tinygroup.sdpm.common.menu.Menu"/>
     </xstream-annotation-classes>
 </xstream-configuration>

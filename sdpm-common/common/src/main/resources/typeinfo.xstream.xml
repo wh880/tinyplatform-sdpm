@@ -1,5 +1,5 @@
 <xstream-configuration package-name="typeinfo">
     <xstream-annotation-classes>
-        <xstream-annotation-class class-name="org.tinygroup.typeinfo.TypeInfos" />
+        <xstream-annotation-class class-name="org.tinygroup.sdpm.common.typeinfo.TypeInfos"/>
     </xstream-annotation-classes>
 </xstream-configuration>

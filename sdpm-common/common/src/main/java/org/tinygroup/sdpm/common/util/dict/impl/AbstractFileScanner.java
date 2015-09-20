@@ -1,4 +1,4 @@
-package dict.impl;
+package org.tinygroup.sdpm.common.util.dict.impl;
 
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
