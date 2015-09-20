@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.project.service.inter;
 
-import org.tinygroup.sdpm.project.dao.pojo.Burn;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBurn;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ import java.util.List;
 public interface BurnService {
     /**
      * 新增，在项目变动后需要增加字段
-     * @param burn
+     * @param projectBurn
      * @return
      */
-    public int addBurn(Burn burn);
+    public int addBurn(ProjectBurn projectBurn);
 
 
     /**
@@ -21,7 +21,7 @@ public interface BurnService {
      * @param projectId
      * @return
      */
-    public List<Burn> findBurnByProjectId(int projectId);
+    public List<ProjectBurn> findBurnByProjectId(int projectId);
 
     /**
      * 预留接口，在删除项目中

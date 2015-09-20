@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.project.service.inter;
 
-import org.tinygroup.sdpm.project.dao.pojo.Taskrelation;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTaskrelation;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface TaskRelationService {
      * @param taskRelationService
      * @return
      */
-    public Taskrelation add(TaskRelationService taskRelationService);
+    public ProjectTaskrelation add(TaskRelationService taskRelationService);
 
     /**
      * 根据项目id查找相关任务关系

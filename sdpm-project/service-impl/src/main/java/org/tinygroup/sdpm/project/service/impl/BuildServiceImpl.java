@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.service.impl;
 
-import org.tinygroup.sdpm.project.dao.pojo.Build;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -9,15 +10,15 @@ import org.tinygroup.tinysqldsl.Pager;
  */
 public class BuildServiceImpl implements BuildService {
 
-    public Build add(Build build) {
+    public ProjectBuild add(ProjectBuild build) {
         return null;
     }
 
-    public Pager<Build> findPager(int page, int pagesize, int projectId) {
+    public Pager<ProjectBuild> findPager(int page, int pagesize, int projectId) {
         return null;
     }
 
-    public Build updateBuild(Build build) {
+    public ProjectBuild updateBuild(ProjectBuild build) {
         return null;
     }
 

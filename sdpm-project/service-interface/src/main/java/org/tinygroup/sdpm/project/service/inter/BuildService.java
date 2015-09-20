@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.service.inter;
 
-import org.tinygroup.sdpm.project.dao.pojo.Build;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.tinysqldsl.Pager;
 
 /**
@@ -11,10 +12,10 @@ public interface BuildService {
     /**
      * 创建版本
      *
-     * @param build
+     * @param projectBuild
      * @return
      */
-    public Build add(Build build);
+    public ProjectBuild add(ProjectBuild projectBuild);
 
     /**
      * 根据项目id查询所有版本
@@ -24,15 +25,15 @@ public interface BuildService {
      * @param projectId
      * @return
      */
-    public Pager<Build> findPager(int page, int pagesize, int projectId);
+    public Pager<ProjectBuild> findPager(int page, int pagesize, int projectId);
 
     /**
      * 编辑版本
      *
-     * @param build
+     * @param projectBuild
      * @return
      */
-    public Build updateBuild(Build build);
+    public ProjectBuild updateBuild(ProjectBuild projectBuild);
 
     /**
      * 根据id删除

@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.project.service.inter;
 
-import org.tinygroup.sdpm.project.dao.pojo.Team;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface TeamService {
     /**
      * 新增成员
      */
-    public int save(Team team);
+    public int save(ProjectTeam projectTeam);
 
     /**
      * 移除项目下的成员,根据逻辑id
@@ -21,6 +21,6 @@ public interface TeamService {
     /**
      * 查询项目下的所有成员
      */
-    public List<Team> findByProjectId(int projectId);
+    public List<ProjectTeam> findByProjectId(int projectId);
 
 }

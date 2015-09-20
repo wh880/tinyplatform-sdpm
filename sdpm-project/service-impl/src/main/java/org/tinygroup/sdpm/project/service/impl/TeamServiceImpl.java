@@ -2,7 +2,7 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tinygroup.sdpm.project.dao.pojo.Team;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class TeamServiceImpl implements TeamService {
     @Autowired
-    public int save(Team team) {
+    public int save(ProjectTeam team) {
         return 0;
     }
 
@@ -21,7 +21,7 @@ public class TeamServiceImpl implements TeamService {
         return 0;
     }
 
-    public List<Team> findByProjectId(int projectId) {
+    public List<ProjectTeam> findByProjectId(int projectId) {
         return null;
     }
 }

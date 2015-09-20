@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.project.service.inter;
 
-import org.tinygroup.sdpm.project.dao.pojo.Task;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -14,17 +14,17 @@ public interface TaskService {
     /**
      * 新建任务
      *
-     * @param task
+     * @param projectTask
      * @return
      */
-    public Task save(Task task);
+    public ProjectTask save(ProjectTask projectTask);
 
     /**
      * 查询所有任务
      *
      * @return
      */
-    public Pager<Task> findList();
+    public Pager<ProjectTask> findList();
 
     /**
      * 分组产看任务
@@ -32,7 +32,7 @@ public interface TaskService {
      * @param colum
      * @return
      */
-    public Map<String, List<Task>> findByGroup(String colum);
+    public Map<String, List<ProjectTask>> findByGroup(String colum);
 
     /**
      * 根据任务状态进行查询
@@ -40,23 +40,23 @@ public interface TaskService {
      * @param status
      * @return
      */
-    public Pager<Task> findByStatus(String status);
+    public Pager<ProjectTask> findByStatus(String status);
 
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
      * 注意：1.状态不可逆转 2.有前置条件判断
      *
-     * @param task
+     * @param projectTask
      * @return
      */
-    public Task update(Task task);
+    public ProjectTask update(ProjectTask projectTask);
 
     /**
      * 复杂查询，延期
      *
      * @return
      */
-    public Pager<Task> findComplex();
+    public Pager<ProjectTask> findComplex();
 
     public void ouputFile();
 
