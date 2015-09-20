@@ -17,7 +17,7 @@ public interface DictService {
 	 * @param config
 	 * @return
 	 */
-	int deleteDict(SystemDict dict);
+	int deleteDict(Integer dictId);
 	
 	/**
 	 * 修改

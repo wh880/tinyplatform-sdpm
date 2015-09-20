@@ -1,5 +1,49 @@
 package org.tinygroup.sdpm.product.biz.impl;
 
-public class StoryManagerImpl {
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.sdpm.product.biz.inter.StoryManager;
+import org.tinygroup.sdpm.product.dao.ProductStoryDao;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.tinysqldsl.Pager;
+
+@Service
+@Transactional
+public class StoryManagerImpl implements StoryManager{
+	
+	@Autowired
+	private ProductStoryDao storyDao;
+	
+	public ProductStory add(ProductStory story) {
+
+		return storyDao.add(story);
+	}
+
+	public int delete(Integer storyId) {
+		
+		ProductStory story = new ProductStory();
+		story.setStoryId(storyId);
+		story.setDeleted(ProductStory.DELETE_YES);
+		return storyDao.edit(story);
+	}
+
+	public int update(ProductStory story) {
+
+		return storyDao.edit(story);
+	}
+
+	public ProductStory find(Integer storyId) {
+
+		return storyDao.getByKey(storyId);
+	}
+
+	public List<ProductStory> findList(ProductStory story) {
+
+		return storyDao.query(story);
+	}
+	
+	
 }

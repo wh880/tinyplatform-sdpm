@@ -1,5 +1,8 @@
 package org.tinygroup.sdpm.system.biz.impl;
 
-public class ConfigManagerImpl {
 
+
+public class ConfigManagerImpl{
+	
+	
 }

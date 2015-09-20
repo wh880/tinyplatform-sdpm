@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.product.biz.inter;
 
+import java.util.List;
+
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 
 public interface ReleaseManger{
@@ -20,7 +22,7 @@ public interface ReleaseManger{
      * @param release
      * @return
      */
-    int delete(ProductRelease release);
+    int delete(Integer releaseId);
    
     /**
      * 查找发布
@@ -33,5 +35,5 @@ public interface ReleaseManger{
      * @param releaseId
      * @return
      */
-    ProductRelease findList(ProductRelease releaseId);
+    List<ProductRelease> findList(ProductRelease releaseId);
 }
