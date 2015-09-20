@@ -5,6 +5,7 @@ import java.util.List;
 import org.tinygroup.sdpm.common.dao.pojo.SysModule;
 
 public interface SysModuleService {
+	
 	/**
 	 * 编辑
 	 * @param sysModule
