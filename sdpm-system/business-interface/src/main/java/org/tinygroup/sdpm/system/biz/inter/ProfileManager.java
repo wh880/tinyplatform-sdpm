@@ -16,7 +16,7 @@ public interface ProfileManager {
 	 * @param Profile
 	 * @return 附件List
 	 */
-	List<Profile> batchAdd(List<Profile> Profiles);
+	int[] batchAdd(List<Profile> Profiles);
 	/**
 	 * 查询
 	 * @param Profile

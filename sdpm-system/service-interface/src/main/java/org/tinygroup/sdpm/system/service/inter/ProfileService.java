@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.system.service;
+package org.tinygroup.sdpm.system.service.inter;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public interface ProfileService {
     * 批量添加附件
     * @return
     */
-    List<Profile> batchAdd(List<Profile> Profiles);
+    int[] batchAdd(List<Profile> Profiles);
    /**
     * 查询附件信息
     * @param

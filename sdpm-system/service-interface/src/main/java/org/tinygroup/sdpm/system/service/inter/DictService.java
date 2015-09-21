@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.system.service;
+package org.tinygroup.sdpm.system.service.inter;
 
 import java.util.List;
 

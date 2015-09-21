@@ -3,12 +3,18 @@ package org.tinygroup.sdpm.system.biz.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.system.biz.inter.EffortManager;
 import org.tinygroup.sdpm.system.dao.EffortDao;
 import org.tinygroup.sdpm.system.dao.pojo.Effort;
 import org.tinygroup.tinysqldsl.Pager;
-
+import org.tinygroup.validate.annotation.AssertEnum;
+@Service
+@Transactional
 public class EffortManagerImpl implements EffortManager {
+	@Autowired
     private EffortDao effortDao;
 	public Effort add(Effort effort) {
 		// TODO Auto-generated method stub

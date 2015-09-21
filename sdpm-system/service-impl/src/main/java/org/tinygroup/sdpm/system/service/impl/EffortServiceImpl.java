@@ -1,13 +1,17 @@
-package org.tinygroup.sdpm.system.service;
+package org.tinygroup.sdpm.system.service.impl;
 
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.EffortManager;
 import org.tinygroup.sdpm.system.dao.pojo.Effort;
+import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.tinysqldsl.Pager;
-
+@Component("effortService")
 public class EffortServiceImpl implements EffortService {
+	@Autowired
     private EffortManager  effortManager;
 	public List<Effort> findByDate(Date date) {
 		// TODO Auto-generated method stub 

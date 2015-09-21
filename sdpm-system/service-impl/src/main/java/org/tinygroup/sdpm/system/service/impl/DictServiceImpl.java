@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.system.service;
+package org.tinygroup.sdpm.system.service.impl;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.DictManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
+import org.tinygroup.sdpm.system.service.inter.DictService;
 
 @Component("dictService")
 public class DictServiceImpl implements DictService {
