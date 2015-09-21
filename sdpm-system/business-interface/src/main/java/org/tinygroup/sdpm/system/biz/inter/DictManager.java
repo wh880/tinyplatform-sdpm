@@ -5,6 +5,9 @@ import java.util.List;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 
 public interface DictManager {
+	
+	public static int DELETE_YES = 1;
+	public static int DELETE_NO = 0;
 	/**
 	 * 添加字典
 	 * @param config

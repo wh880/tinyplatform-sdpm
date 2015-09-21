@@ -1,17 +1,18 @@
 
 package org.tinygroup.sdpm.system.biz.impl;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.SavepointManager;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.sdpm.system.biz.inter.SearchManager;
 import org.tinygroup.sdpm.system.dao.SystemSearchDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
 
 @Service
 @Transactional
-public class SearchManagerImpl {
+public class SearchManagerImpl implements SearchManager{
     @Autowired
     private SystemSearchDao searchDao;
 
@@ -19,7 +20,7 @@ public class SearchManagerImpl {
         return searchDao.add(search);
     }
 
-    public  int delete(SystemSearch searchId){
+    public  int delete(Integer searchId){
         SystemSearch search=new SystemSearch();
         search.setSearchId(searchId);
         search.setDeleted(SystemSearch.DELETE_YES);

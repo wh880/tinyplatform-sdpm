@@ -2,14 +2,18 @@
 package org.tinygroup.sdpm.system.biz.impl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.sdpm.system.biz.inter.ConfigManager;
 import org.tinygroup.sdpm.system.dao.SystemConfigDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 
 
 @Service
-@Transactionala
+@Transactional
 public class ConfigManagerImpl implements ConfigManager{
     @Autowired
     private SystemConfigDao configDao;
