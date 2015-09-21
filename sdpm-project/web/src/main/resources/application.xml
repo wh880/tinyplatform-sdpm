@@ -28,9 +28,7 @@
 	<application-processors>
 		<application-processor bean="fileResolverProcessor"></application-processor>
 		<application-processor bean="tinyTemplateConfigProcessor"></application-processor>
- <!-- 		<application-processor bean="bundleApplicationProcessor"></application-processor>
-		<application-processor bean="dictLoadProcessor"></application-processor>
- <!--&ndash;&gt;		<application-processor bean="serviceApplicationProcessor"></application-processor>-->
+		<!--<application-processor bean="dictLoadProcessor"></application-processor>-->
 		<application-processor bean="tinyListenerProcessor"></application-processor>
 		<application-processor bean="fileMonitorProcessor"></application-processor>
 		<!--  <application-processor bean="logAdapterProcessor"></application-processor>
