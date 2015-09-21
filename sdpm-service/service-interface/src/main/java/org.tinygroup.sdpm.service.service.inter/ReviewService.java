@@ -14,7 +14,7 @@ public interface ReviewService {
      * @param id 主键
      * @return
      */
-    Review findReview(String id);
+    Review findReview(Integer id);
 
     /**
      * 根据产品模块id回访中的请求

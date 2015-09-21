@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.docment.biz.inter.DocBiz;
 import org.tinygroup.sdpm.docment.pojo.Doc;
 import org.tinygroup.sdpm.docment.pojo.DocLib;
+import org.tinygroup.sdpm.docment.pojo.Historydoc;
 import org.tinygroup.sdpm.docment.service.inter.DocService;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -51,6 +52,16 @@ public class DocServiceImpl implements DocService{
 	public DocLib findDoclibById(Integer id) {
 		// 
 		return docbiz.getDocLibById(id);
+	}
+	
+	public List<Historydoc> getEditRecord(Integer docid)
+	{
+		//获取历史记录
+		//取数据
+		//List<Historydoc> list = docbiz.docHistory(docid);
+		//for(int i=list.size();i>=0;i--){
+		//list.get(i).getRecTime();list.get(i).getRecWho();}
+		return docbiz.docHistory(docid);
 	}
 
 	public List<Doc> findDocByDocClass(Doc doc) {
