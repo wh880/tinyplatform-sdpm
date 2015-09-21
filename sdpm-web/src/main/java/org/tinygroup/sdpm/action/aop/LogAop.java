@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.action.org.system.log.aop;
+package org.tinygroup.sdpm.action.aop;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -6,8 +6,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.tinygroup.beancontainer.BeanContainerFactory;
-import org.tinygroup.sdpm.common.log.LogClass;
-import org.tinygroup.sdpm.common.log.LogMethod;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.common.log.LogUtil;
 import org.tinygroup.sdpm.common.log.obtain.inter.Obtain;
 
@@ -22,7 +22,7 @@ public class LogAop {
     private final static Log log = LogFactory.getLog(LogAop.class);
 
     //配置切入点,该方法无方法体,主要为方便同类中其他方法使用此处配置的切入点
-    @Pointcut("@annotation(org.tinygroup.sdpm.common.log.LogMethod)")
+    @Pointcut("@annotation(org.tinygroup.sdpm.common.log.annotation.LogMethod)")
     public void aspect(){	}
 
     @Around("aspect()")

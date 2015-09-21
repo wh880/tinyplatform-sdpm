@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.common.log.obtain;
+package org.tinygroup.sdpm.common.log.obtain.processor;
 
 import com.thoughtworks.xstream.XStream;
 import org.springframework.beans.factory.annotation.Autowired;

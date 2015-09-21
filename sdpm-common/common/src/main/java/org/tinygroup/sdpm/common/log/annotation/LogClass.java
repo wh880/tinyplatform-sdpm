@@ -1,14 +1,13 @@
-package org.tinygroup.sdpm.common.log;
+package org.tinygroup.sdpm.common.log.annotation;
 
 import java.lang.annotation.*;
 
 /**
  * Created by wangll13383 on 2015/9/21.
  */
-
-@Target(ElementType.METHOD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface LogMethod {
+public @interface LogClass {
     String value() default "";
 }
