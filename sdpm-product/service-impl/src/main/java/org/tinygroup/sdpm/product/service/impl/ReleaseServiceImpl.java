@@ -8,7 +8,7 @@ import org.tinygroup.sdpm.product.biz.inter.ReleaseManger;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.service.ReleaseService;
 
-@Component("releaseService")
+@Component()
 public class ReleaseServiceImpl implements ReleaseService{
 	
 	@Autowired
