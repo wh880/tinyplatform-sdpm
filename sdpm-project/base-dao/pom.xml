@@ -26,10 +26,25 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-    	<groupId>org.tinygroup</groupId>
-    	<artifactId>sdpm-metadata-common</artifactId>
-        <version>${tiny_sdpm_version}</version>
-    </dependency>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>org.tinygroup.tinysqldsl</artifactId>
+          <version>${tiny_version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>org.tinygroup.jdbctemplatedslsession</artifactId>
+          <version>${tiny_version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>org.tinygroup.databasechange</artifactId>
+          <version>${tiny_version}</version>
+      </dependency>
+      <dependency>
+          <groupId>commons-dbcp</groupId>
+          <artifactId>commons-dbcp</artifactId>
+          <version>1.2.2</version>
+      </dependency>
   </dependencies>
 </project>
