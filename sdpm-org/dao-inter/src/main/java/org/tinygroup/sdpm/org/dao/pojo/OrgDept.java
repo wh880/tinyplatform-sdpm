@@ -16,12 +16,16 @@
 
 package org.tinygroup.sdpm.org.dao.pojo;
 
-/** 
+import java.io.Serializable;
+
+/**
  * 部门表
  * 
  */
-public class OrgDept {
+public class OrgDept implements Serializable {
 
+	public static String DELETE_YES = "1";
+	public static String DELETE_NO = "0";
 	/** 
 	 * 部门编号
 	 * 
@@ -70,69 +74,68 @@ public class OrgDept {
 	 */
 	private String orgDeptManager;
 
+	public Integer getOrgDeptId() {
+		return orgDeptId;
+	}
 
 	public void setOrgDeptId(Integer orgDeptId){
 		this. orgDeptId = orgDeptId;
 	}
 
-	public Integer getOrgDeptId(){
-		return orgDeptId;
+	public String getOrgDeptName() {
+		return orgDeptName;
 	}
 
 	public void setOrgDeptName(String orgDeptName){
 		this. orgDeptName = orgDeptName;
 	}
 
-	public String getOrgDeptName(){
-		return orgDeptName;
+	public Integer getOrgDeptParent() {
+		return orgDeptParent;
 	}
 
 	public void setOrgDeptParent(Integer orgDeptParent){
 		this. orgDeptParent = orgDeptParent;
 	}
 
-	public Integer getOrgDeptParent(){
-		return orgDeptParent;
+	public String getOrgDeptPath() {
+		return orgDeptPath;
 	}
 
 	public void setOrgDeptPath(String orgDeptPath){
 		this. orgDeptPath = orgDeptPath;
 	}
 
-	public String getOrgDeptPath(){
-		return orgDeptPath;
+	public Integer getOrgDeptGrade() {
+		return orgDeptGrade;
 	}
 
 	public void setOrgDeptGrade(Integer orgDeptGrade){
 		this. orgDeptGrade = orgDeptGrade;
 	}
 
-	public Integer getOrgDeptGrade(){
-		return orgDeptGrade;
+	public Integer getOrgDeptOrder() {
+		return orgDeptOrder;
 	}
 
 	public void setOrgDeptOrder(Integer orgDeptOrder){
 		this. orgDeptOrder = orgDeptOrder;
 	}
 
-	public Integer getOrgDeptOrder(){
-		return orgDeptOrder;
+	public String getOrgDeptPosition() {
+		return orgDeptPosition;
 	}
 
 	public void setOrgDeptPosition(String orgDeptPosition){
 		this. orgDeptPosition = orgDeptPosition;
 	}
 
-	public String getOrgDeptPosition(){
-		return orgDeptPosition;
+	public String getOrgDeptManager() {
+		return orgDeptManager;
 	}
 
 	public void setOrgDeptManager(String orgDeptManager){
 		this. orgDeptManager = orgDeptManager;
-	}
-
-	public String getOrgDeptManager(){
-		return orgDeptManager;
 	}
 
 }

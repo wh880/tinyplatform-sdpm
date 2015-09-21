@@ -16,12 +16,16 @@
 
 package org.tinygroup.sdpm.org.dao.pojo;
 
-/** 
+import java.io.Serializable;
+
+/**
  * 角色表
  * 
  */
-public class OrgRold {
+public class OrgRold implements Serializable {
 
+	public static String DELETE_YES = "1";
+	public static String DELETE_NO = "0";
 	/** 
 	 * 角色ID
 	 * 
@@ -46,37 +50,36 @@ public class OrgRold {
 	 */
 	private Integer deleted;
 
+	public Integer getOrgRoleId() {
+		return orgRoleId;
+	}
 
 	public void setOrgRoleId(Integer orgRoleId){
 		this. orgRoleId = orgRoleId;
 	}
 
-	public Integer getOrgRoleId(){
-		return orgRoleId;
+	public String getOrgRoleName() {
+		return orgRoleName;
 	}
 
 	public void setOrgRoleName(String orgRoleName){
 		this. orgRoleName = orgRoleName;
 	}
 
-	public String getOrgRoleName(){
-		return orgRoleName;
+	public String getOrgRoleRemarks() {
+		return orgRoleRemarks;
 	}
 
 	public void setOrgRoleRemarks(String orgRoleRemarks){
 		this. orgRoleRemarks = orgRoleRemarks;
 	}
 
-	public String getOrgRoleRemarks(){
-		return orgRoleRemarks;
+	public Integer getDeleted() {
+		return deleted;
 	}
 
 	public void setDeleted(Integer deleted){
 		this. deleted = deleted;
-	}
-
-	public Integer getDeleted(){
-		return deleted;
 	}
 
 }

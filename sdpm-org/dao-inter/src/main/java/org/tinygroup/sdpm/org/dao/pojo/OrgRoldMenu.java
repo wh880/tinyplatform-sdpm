@@ -16,12 +16,16 @@
 
 package org.tinygroup.sdpm.org.dao.pojo;
 
-/** 
+import java.io.Serializable;
+
+/**
  * 角色菜单表
  * 
  */
-public class OrgRoldMenu {
+public class OrgRoldMenu implements Serializable {
 
+	public static String DELETE_YES = "1";
+	public static String DELETE_NO = "0";
 	/** 
 	 * 逻辑ID
 	 * 
@@ -40,29 +44,28 @@ public class OrgRoldMenu {
 	 */
 	private String orgRoleMenuId;
 
+	public Integer getId() {
+		return id;
+	}
 
 	public void setId(Integer id){
 		this. id = id;
 	}
 
-	public Integer getId(){
-		return id;
+	public Integer getOrgRoleId() {
+		return orgRoleId;
 	}
 
 	public void setOrgRoleId(Integer orgRoleId){
 		this. orgRoleId = orgRoleId;
 	}
 
-	public Integer getOrgRoleId(){
-		return orgRoleId;
+	public String getOrgRoleMenuId() {
+		return orgRoleMenuId;
 	}
 
 	public void setOrgRoleMenuId(String orgRoleMenuId){
 		this. orgRoleMenuId = orgRoleMenuId;
-	}
-
-	public String getOrgRoleMenuId(){
-		return orgRoleMenuId;
 	}
 
 }

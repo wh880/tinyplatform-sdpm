@@ -16,12 +16,16 @@
 
 package org.tinygroup.sdpm.org.dao.pojo;
 
-/** 
+import java.io.Serializable;
+
+/**
  * 公司表
  * 
  */
-public class OrgCompany {
+public class OrgCompany implements Serializable {
 
+	public static String DELETE_YES = "1";
+	public static String DELETE_NO = "0";
 	/** 
 	 * 公司编号
 	 * 
@@ -88,93 +92,92 @@ public class OrgCompany {
 	 */
 	private String orgCompanyDeleted;
 
+	public Integer getOrgCompanyId() {
+		return orgCompanyId;
+	}
 
 	public void setOrgCompanyId(Integer orgCompanyId){
 		this. orgCompanyId = orgCompanyId;
 	}
 
-	public Integer getOrgCompanyId(){
-		return orgCompanyId;
+	public String getOrgCompanyName() {
+		return orgCompanyName;
 	}
 
 	public void setOrgCompanyName(String orgCompanyName){
 		this. orgCompanyName = orgCompanyName;
 	}
 
-	public String getOrgCompanyName(){
-		return orgCompanyName;
+	public String getOrgCompanyPhone() {
+		return orgCompanyPhone;
 	}
 
 	public void setOrgCompanyPhone(String orgCompanyPhone){
 		this. orgCompanyPhone = orgCompanyPhone;
 	}
 
-	public String getOrgCompanyPhone(){
-		return orgCompanyPhone;
+	public String getOrgCompanyFax() {
+		return orgCompanyFax;
 	}
 
 	public void setOrgCompanyFax(String orgCompanyFax){
 		this. orgCompanyFax = orgCompanyFax;
 	}
 
-	public String getOrgCompanyFax(){
-		return orgCompanyFax;
+	public String getOrgCompanyAddress() {
+		return orgCompanyAddress;
 	}
 
 	public void setOrgCompanyAddress(String orgCompanyAddress){
 		this. orgCompanyAddress = orgCompanyAddress;
 	}
 
-	public String getOrgCompanyAddress(){
-		return orgCompanyAddress;
+	public String getOrgCompanyZipCode() {
+		return orgCompanyZipCode;
 	}
 
 	public void setOrgCompanyZipCode(String orgCompanyZipCode){
 		this. orgCompanyZipCode = orgCompanyZipCode;
 	}
 
-	public String getOrgCompanyZipCode(){
-		return orgCompanyZipCode;
+	public String getOrgCompanyWebsite() {
+		return orgCompanyWebsite;
 	}
 
 	public void setOrgCompanyWebsite(String orgCompanyWebsite){
 		this. orgCompanyWebsite = orgCompanyWebsite;
 	}
 
-	public String getOrgCompanyWebsite(){
-		return orgCompanyWebsite;
+	public String getOrgCompanyBackyard() {
+		return orgCompanyBackyard;
 	}
 
 	public void setOrgCompanyBackyard(String orgCompanyBackyard){
 		this. orgCompanyBackyard = orgCompanyBackyard;
 	}
 
-	public String getOrgCompanyBackyard(){
-		return orgCompanyBackyard;
+	public String getOrgCompanyGuest() {
+		return orgCompanyGuest;
 	}
 
 	public void setOrgCompanyGuest(String orgCompanyGuest){
 		this. orgCompanyGuest = orgCompanyGuest;
 	}
 
-	public String getOrgCompanyGuest(){
-		return orgCompanyGuest;
+	public String getOrgCompanyAdmins() {
+		return orgCompanyAdmins;
 	}
 
 	public void setOrgCompanyAdmins(String orgCompanyAdmins){
 		this. orgCompanyAdmins = orgCompanyAdmins;
 	}
 
-	public String getOrgCompanyAdmins(){
-		return orgCompanyAdmins;
+	public String getOrgCompanyDeleted() {
+		return orgCompanyDeleted;
 	}
 
 	public void setOrgCompanyDeleted(String orgCompanyDeleted){
 		this. orgCompanyDeleted = orgCompanyDeleted;
-	}
-
-	public String getOrgCompanyDeleted(){
-		return orgCompanyDeleted;
 	}
 
 }
