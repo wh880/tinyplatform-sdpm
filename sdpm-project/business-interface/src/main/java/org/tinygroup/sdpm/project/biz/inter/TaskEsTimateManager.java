@@ -14,7 +14,7 @@ public interface TaskEsTimateManager {
      * @param id 主键
      * @return
      */
-    ProjectTaskestimate find(String id);
+    ProjectTaskestimate find(int id);
 
     /**
      * 根据条件查询List
@@ -38,7 +38,7 @@ public interface TaskEsTimateManager {
      * @param taskestimate 需要更新的实体类
      * @return
      */
-    ProjectTaskestimate update(ProjectTaskestimate taskestimate);
+    Integer update(ProjectTaskestimate taskestimate);
 
     /**
      * 根据id进行软删除用户
@@ -46,5 +46,5 @@ public interface TaskEsTimateManager {
      * @param id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer delete(int id);
 }

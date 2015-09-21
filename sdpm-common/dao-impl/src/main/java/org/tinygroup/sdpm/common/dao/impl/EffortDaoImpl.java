@@ -255,4 +255,6 @@ public class EffortDaoImpl extends TinyDslDaoSupport implements EffortDao {
 		return getDslTemplate().getDslSession().fetchList(select, Effort.class);
 	}
 
+
+
 }

@@ -13,12 +13,13 @@ public interface EffortManager {
 	 * @return
 	 */
 	List<Effort> add(Effort effort);
+	
 	/**
 	 * 更新日志
 	 * @param effort
 	 * @return
 	 */
-	Effort updata(Effort effort);
+	Integer updata(Effort effort);
 	/**
 	 * 删除日志
 	 * @param effort

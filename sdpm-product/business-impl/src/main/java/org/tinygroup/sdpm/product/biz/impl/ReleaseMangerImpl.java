@@ -14,16 +14,16 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 public class ReleaseMangerImpl implements ReleaseManger{
 	
 	@Autowired
-	private ProductReleaseDao releaseDao;
+	private ProductReleaseDao productReleaseDao;
 	
 	public ProductRelease add(ProductRelease release) {
 
-		return releaseDao.add(release);
+		return productReleaseDao.add(release);
 	}
 
 	public int update(ProductRelease release) {
 
-		return releaseDao.edit(release);
+		return productReleaseDao.edit(release);
 	}
 
 	public int delete(Integer releaseId) {
@@ -31,17 +31,17 @@ public class ReleaseMangerImpl implements ReleaseManger{
 		ProductRelease productRelease = new ProductRelease();
 		productRelease.setReleaseId(releaseId);
 		productRelease.setDeleted(ProductRelease.DELETE_YES);
-		return releaseDao.edit(productRelease);
+		return productReleaseDao.edit(productRelease);
 	}
 
 	public ProductRelease find(Integer releaseId) {
 
-		return releaseDao.getByKey(releaseId);
+		return productReleaseDao.getByKey(releaseId);
 	}
 
 	public List<ProductRelease> findList(ProductRelease releaseId) {
 
-		return releaseDao.query(releaseId);
+		return productReleaseDao.query(releaseId);
 	}
 
 	
