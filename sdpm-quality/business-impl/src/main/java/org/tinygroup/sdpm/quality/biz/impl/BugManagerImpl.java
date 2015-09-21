@@ -1,16 +1,18 @@
-package org.tinygroup.sdpm.quality.service.impl;
+package org.tinygroup.sdpm.quality.biz.impl;
 
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.sdpm.quality.biz.inter.BugManager;
 import org.tinygroup.sdpm.quality.dao.BugDao;
 import org.tinygroup.sdpm.quality.dao.pojo.Bug;
-import org.tinygroup.sdpm.quality.service.inter.BugService;
 
-@Component("bugService")
-public class BugServiceImpl implements BugService {
+@Service        //注解
+@Transactional  //开启事务
+public class BugManagerImpl implements BugManager {
 	@Autowired
 	private BugDao bugdao;
 	

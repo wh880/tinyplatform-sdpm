@@ -1,3 +1,4 @@
+package org.tinygroup.sdpm.quality.service.inter;
 /*package org.tinygroup.sdpm.quality.service.inter;
 
 import java.util.List;

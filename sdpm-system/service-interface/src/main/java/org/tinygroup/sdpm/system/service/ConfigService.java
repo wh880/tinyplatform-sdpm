@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.system.service;
 
 import java.util.List;
 
+import org.aspectj.apache.bcel.generic.InstructionTargeter;
 import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 
 public interface ConfigService {
@@ -18,7 +19,7 @@ public interface ConfigService {
 	 * @param config
 	 * @return
 	 */
-	int deleteConfig(SystemConfig config);
+	int deleteConfig(Integer configId);
 	
 	/**
 	 * 修改
