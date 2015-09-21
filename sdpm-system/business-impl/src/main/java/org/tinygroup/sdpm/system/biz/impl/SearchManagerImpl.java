@@ -1,3 +1,4 @@
+/*
 package org.tinygroup.sdpm.system.biz.impl;
 
 import com.sun.org.apache.bcel.internal.generic.RETURN;
@@ -37,3 +38,4 @@ public class SearchManagerImpl {
         return  searchDao.query(search);
     }
 }
+*/

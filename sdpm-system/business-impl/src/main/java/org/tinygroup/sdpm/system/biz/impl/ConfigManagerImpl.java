@@ -1,3 +1,4 @@
+/*
 package org.tinygroup.sdpm.system.biz.impl;
 
 
@@ -10,6 +11,7 @@ import org.tinygroup.config.ConfigurationManager;
 import org.tinygroup.config.util.ConfigurationUtil;
 import org.tinygroup.sdpm.system.dao.SystemConfigDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
+
 
 @Service
 @Transactional
@@ -41,4 +43,5 @@ public class ConfigManagerImpl implements ConfigManager{
     }
 
 
-}
+
+}*/
