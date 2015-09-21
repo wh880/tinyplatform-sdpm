@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.system.service;
+package org.tinygroup.sdpm.system.service.impl;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.SearchManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
+import org.tinygroup.sdpm.system.service.inter.SearchService;
 
 @Component("searchService")
 public class SearchServiceImpl implements SearchService {

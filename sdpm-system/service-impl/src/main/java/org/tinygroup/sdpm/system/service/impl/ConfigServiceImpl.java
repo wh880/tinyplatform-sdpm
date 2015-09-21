@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.system.service;
+package org.tinygroup.sdpm.system.service.impl;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.ConfigManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
+import org.tinygroup.sdpm.system.service.inter.ConfigService;
 
 
 @Component("configService")
