@@ -16,24 +16,40 @@
 
 package org.tinygroup.sdpm.service.dao.impl;
 
-import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.jdbctemplatedslsession.callback.*;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.service.dao.RequestDao;
-import org.tinygroup.sdpm.service.dao.pojo.Request;
-import org.tinygroup.tinysqldsl.*;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.sdpm.service.dao.constant.RequestTable.*;
+import static org.tinygroup.tinysqldsl.Select.*;
+import static org.tinygroup.tinysqldsl.Insert.*;
+import static org.tinygroup.tinysqldsl.Delete.*;
+import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
-import static org.tinygroup.sdpm.service.dao.constant.RequestTable.REQUESTTABLE;
-import static org.tinygroup.tinysqldsl.Delete.delete;
-import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.selectFrom;
-import static org.tinygroup.tinysqldsl.Update.update;
-import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import org.tinygroup.tinysqldsl.Delete;
+import org.tinygroup.tinysqldsl.Insert;
+import org.tinygroup.tinysqldsl.Select;
+import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.service.dao.pojo.Request;
+import org.tinygroup.sdpm.service.dao.RequestDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
+import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
 public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 
@@ -68,10 +84,10 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 					REQUESTTABLE.REQUEST_STATUS.value(t.getRequestStatus()),
 					REQUESTTABLE.REQUEST_TRANS_TO.value(t.getRequestTransTo()),
 					REQUESTTABLE.REQUEST_TRANS_ID.value(t.getRequestTransId()),
-						REQUESTTABLE.DELETED.value(t.getDeleted()),
-						REQUESTTABLE.REPLY_SPEC.value(t.getReplySpec()),
-						REQUESTTABLE.REPLIER.value(t.getReplier()),
-						REQUESTTABLE.REPLY_DATE.value(t.getReplyDate()));
+					REQUESTTABLE.DELETED.value(t.getDeleted()),
+					REQUESTTABLE.REPLY_SPEC.value(t.getReplySpec()),
+					REQUESTTABLE.REPLIER.value(t.getReplier()),
+					REQUESTTABLE.REPLY_DATE.value(t.getReplyDate()));
 				return insert;
 			}
 		});
@@ -110,10 +126,10 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 					REQUESTTABLE.REQUEST_STATUS.value(t.getRequestStatus()),
 					REQUESTTABLE.REQUEST_TRANS_TO.value(t.getRequestTransTo()),
 					REQUESTTABLE.REQUEST_TRANS_ID.value(t.getRequestTransId()),
-						REQUESTTABLE.DELETED.value(t.getDeleted()),
-						REQUESTTABLE.REPLY_SPEC.value(t.getReplySpec()),
-						REQUESTTABLE.REPLIER.value(t.getReplier()),
-						REQUESTTABLE.REPLY_DATE.value(t.getReplyDate())).where(
+					REQUESTTABLE.DELETED.value(t.getDeleted()),
+					REQUESTTABLE.REPLY_SPEC.value(t.getReplySpec()),
+					REQUESTTABLE.REPLIER.value(t.getReplier()),
+					REQUESTTABLE.REPLY_DATE.value(t.getReplyDate())).where(
 					REQUESTTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()));
 				return update;
 			}
@@ -151,7 +167,7 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 		});
 	}
 
-	public List<Request> query(Request request) {
+	public List<Request> query(Request request ,final OrderBy... orderBies) {
 		if(request==null){
 			request=new Request();
 		}
@@ -159,7 +175,7 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(Request t) {
-				return selectFrom(REQUESTTABLE).where(
+				Select select = selectFrom(REQUESTTABLE).where(
 				and(
 					REQUESTTABLE.PRODUCT_ID.eq(t.getProductId()),
 					REQUESTTABLE.MODULE_ID.eq(t.getModuleId()),
@@ -187,22 +203,23 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 					REQUESTTABLE.REQUEST_STATUS.eq(t.getRequestStatus()),
 					REQUESTTABLE.REQUEST_TRANS_TO.eq(t.getRequestTransTo()),
 					REQUESTTABLE.REQUEST_TRANS_ID.eq(t.getRequestTransId()),
-						REQUESTTABLE.DELETED.eq(t.getDeleted()),
-						REQUESTTABLE.REPLY_SPEC.eq(t.getReplySpec()),
-						REQUESTTABLE.REPLIER.eq(t.getReplier()),
-						REQUESTTABLE.REPLY_DATE.eq(t.getReplyDate())));
+					REQUESTTABLE.DELETED.eq(t.getDeleted()),
+					REQUESTTABLE.REPLY_SPEC.eq(t.getReplySpec()),
+					REQUESTTABLE.REPLIER.eq(t.getReplier()),
+					REQUESTTABLE.REPLY_DATE.eq(t.getReplyDate())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<Request> queryPager(int start,int limit ,Request request) {
+	public Pager<Request> queryPager(int start,int limit ,Request request ,final OrderBy... orderBies) {
 		if(request==null){
 			request=new Request();
 		}
 		return getDslTemplate().queryPager(start, limit, request, false, new SelectGenerateCallback<Request>() {
 
 			public Select generate(Request t) {
-				return MysqlSelect.selectFrom(REQUESTTABLE).where(
+				Select select = MysqlSelect.selectFrom(REQUESTTABLE).where(
 				and(
 					REQUESTTABLE.PRODUCT_ID.eq(t.getProductId()),
 					REQUESTTABLE.MODULE_ID.eq(t.getModuleId()),
@@ -230,10 +247,11 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 					REQUESTTABLE.REQUEST_STATUS.eq(t.getRequestStatus()),
 					REQUESTTABLE.REQUEST_TRANS_TO.eq(t.getRequestTransTo()),
 					REQUESTTABLE.REQUEST_TRANS_ID.eq(t.getRequestTransId()),
-						REQUESTTABLE.DELETED.eq(t.getDeleted()),
-						REQUESTTABLE.REPLY_SPEC.eq(t.getReplySpec()),
-						REQUESTTABLE.REPLIER.eq(t.getReplier()),
-						REQUESTTABLE.REPLY_DATE.eq(t.getReplyDate())));
+					REQUESTTABLE.DELETED.eq(t.getDeleted()),
+					REQUESTTABLE.REPLY_SPEC.eq(t.getReplySpec()),
+					REQUESTTABLE.REPLIER.eq(t.getReplier()),
+					REQUESTTABLE.REPLY_DATE.eq(t.getReplyDate())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -272,10 +290,10 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 					REQUESTTABLE.REQUEST_STATUS.value(new JdbcNamedParameter("requestStatus")),
 					REQUESTTABLE.REQUEST_TRANS_TO.value(new JdbcNamedParameter("requestTransTo")),
 					REQUESTTABLE.REQUEST_TRANS_ID.value(new JdbcNamedParameter("requestTransId")),
-						REQUESTTABLE.DELETED.value(new JdbcNamedParameter("deleted")),
-						REQUESTTABLE.REPLY_SPEC.value(new JdbcNamedParameter("replySpec")),
-						REQUESTTABLE.REPLIER.value(new JdbcNamedParameter("replier")),
-						REQUESTTABLE.REPLY_DATE.value(new JdbcNamedParameter("replyDate")));
+					REQUESTTABLE.DELETED.value(new JdbcNamedParameter("deleted")),
+					REQUESTTABLE.REPLY_SPEC.value(new JdbcNamedParameter("replySpec")),
+					REQUESTTABLE.REPLIER.value(new JdbcNamedParameter("replier")),
+					REQUESTTABLE.REPLY_DATE.value(new JdbcNamedParameter("replyDate")));
 			}
 		});
 	}
@@ -318,10 +336,10 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 					REQUESTTABLE.REQUEST_STATUS.value(new JdbcNamedParameter("requestStatus")),
 					REQUESTTABLE.REQUEST_TRANS_TO.value(new JdbcNamedParameter("requestTransTo")),
 					REQUESTTABLE.REQUEST_TRANS_ID.value(new JdbcNamedParameter("requestTransId")),
-						REQUESTTABLE.DELETED.value(new JdbcNamedParameter("deleted")),
-						REQUESTTABLE.REPLY_SPEC.value(new JdbcNamedParameter("replySpec")),
-						REQUESTTABLE.REPLIER.value(new JdbcNamedParameter("replier")),
-						REQUESTTABLE.REPLY_DATE.value(new JdbcNamedParameter("replyDate"))).where(
+					REQUESTTABLE.DELETED.value(new JdbcNamedParameter("deleted")),
+					REQUESTTABLE.REPLY_SPEC.value(new JdbcNamedParameter("replySpec")),
+					REQUESTTABLE.REPLIER.value(new JdbcNamedParameter("replier")),
+					REQUESTTABLE.REPLY_DATE.value(new JdbcNamedParameter("replyDate"))).where(
 				REQUESTTABLE.CLIENT_REQUEST_ID.eq(new JdbcNamedParameter("clientRequestId")));
 			}
 		});
@@ -362,12 +380,25 @@ public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 				REQUESTTABLE.REQUEST_STATUS.eq(new JdbcNamedParameter("requestStatus")),
 				REQUESTTABLE.REQUEST_TRANS_TO.eq(new JdbcNamedParameter("requestTransTo")),
 				REQUESTTABLE.REQUEST_TRANS_ID.eq(new JdbcNamedParameter("requestTransId")),
-						REQUESTTABLE.DELETED.eq(new JdbcNamedParameter("deleted")),
-						REQUESTTABLE.REPLY_SPEC.eq(new JdbcNamedParameter("replySpec")),
-						REQUESTTABLE.REPLIER.eq(new JdbcNamedParameter("replier")),
-						REQUESTTABLE.REPLY_DATE.eq(new JdbcNamedParameter("replyDate"))));
+				REQUESTTABLE.DELETED.eq(new JdbcNamedParameter("deleted")),
+				REQUESTTABLE.REPLY_SPEC.eq(new JdbcNamedParameter("replySpec")),
+				REQUESTTABLE.REPLIER.eq(new JdbcNamedParameter("replier")),
+				REQUESTTABLE.REPLY_DATE.eq(new JdbcNamedParameter("replyDate"))));
 			}
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

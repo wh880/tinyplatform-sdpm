@@ -25,6 +25,8 @@ import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.tinygroup.tinysqldsl.Delete;
@@ -35,8 +37,10 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.service.dao.pojo.Review;
 import org.tinygroup.sdpm.service.dao.ReviewDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -119,7 +123,7 @@ public class ReviewDaoImpl extends TinyDslDaoSupport implements ReviewDao {
 		});
 	}
 
-	public List<Review> query(Review review) {
+	public List<Review> query(Review review ,final OrderBy... orderBies) {
 		if(review==null){
 			review=new Review();
 		}
@@ -127,7 +131,7 @@ public class ReviewDaoImpl extends TinyDslDaoSupport implements ReviewDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(Review t) {
-				return selectFrom(REVIEWTABLE).where(
+				Select select = selectFrom(REVIEWTABLE).where(
 				and(
 					REVIEWTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()),
 					REVIEWTABLE.REVIEW_SPEC.eq(t.getReviewSpec()),
@@ -137,18 +141,19 @@ public class ReviewDaoImpl extends TinyDslDaoSupport implements ReviewDao {
 					REVIEWTABLE.REVIEW_RESULT.eq(t.getReviewResult()),
 					REVIEWTABLE.REVIEW_SCORE.eq(t.getReviewScore()),
 					REVIEWTABLE.REVIEW_TYPE.eq(t.getReviewType())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<Review> queryPager(int start,int limit ,Review review) {
+	public Pager<Review> queryPager(int start,int limit ,Review review ,final OrderBy... orderBies) {
 		if(review==null){
 			review=new Review();
 		}
 		return getDslTemplate().queryPager(start, limit, review, false, new SelectGenerateCallback<Review>() {
 
 			public Select generate(Review t) {
-				return MysqlSelect.selectFrom(REVIEWTABLE).where(
+				Select select = MysqlSelect.selectFrom(REVIEWTABLE).where(
 				and(
 					REVIEWTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()),
 					REVIEWTABLE.REVIEW_SPEC.eq(t.getReviewSpec()),
@@ -158,6 +163,7 @@ public class ReviewDaoImpl extends TinyDslDaoSupport implements ReviewDao {
 					REVIEWTABLE.REVIEW_RESULT.eq(t.getReviewResult()),
 					REVIEWTABLE.REVIEW_SCORE.eq(t.getReviewScore()),
 					REVIEWTABLE.REVIEW_TYPE.eq(t.getReviewType())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -228,4 +234,17 @@ public class ReviewDaoImpl extends TinyDslDaoSupport implements ReviewDao {
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

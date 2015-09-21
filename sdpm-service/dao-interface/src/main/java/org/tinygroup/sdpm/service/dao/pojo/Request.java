@@ -59,7 +59,7 @@ public class Request {
 	 * type:0-bug(缺陷/纠错,1-req1（适应性）,2-req2（完善或增强）,3-req3（个性化定制）,4-reg4（全新）,
 	 * 5-training,6-support,7-question
 	 */
-	private Integer requestType;
+	private String requestType;
 
 	/** 
 	 * 请求优先级
@@ -188,7 +188,13 @@ public class Request {
 	/** 
 	 * 请求状态
 	 * 
-	 * 请求状态0-created新建(用户可见),1-doing处理中(用户可见)，2-rejected拒绝（回复后用户可见）,3-toProduct转出（回复后用户可见）,4-planned已接受【由产品模块需求纳入计划触发/客服直接处理】（回复后用户可见），5-postponed挂起，6-finished已完成【由产品模块需求阶段】，7-released已发放(用户可见),8-retrunVisit已回访(用户可见),
+	 * 请求状态0-created新建(用户可见),1-doing处理中(用户可见)，
+	 * 2-rejected拒绝（回复后用户可见）,
+	 * 3-toProduct转出（回复后用户可见）,
+	 * 4-planned已接受【由产品模块需求纳入计划触发/客服直接处理】
+	 * （回复后用户可见），
+	 * 5-postponed挂起，6-finished已完成【由产品模块需求阶段】
+	 * ，7-released已发放(用户可见),8-retrunVisit已回访(用户可见),
 	 * 9-reopen【回访不通过】(用户可见)，10-close关闭【状态8，并且review结果是pass】
 	 */
 	private Integer requestStatus;
@@ -212,269 +218,272 @@ public class Request {
 	 */
 	private Integer deleted;
 
-	/**
+	/** 
 	 * 回复描述
+	 * 
 	 */
 	private String replySpec;
 
-	/**
+	/** 
 	 * 回复者
-	 * <p/>
+	 * 
 	 * 客服
 	 */
 	private String replier;
 
-	/**
+	/** 
 	 * 回复时间
+	 * 
 	 */
 	private Date replyDate;
 
-	public Integer getClientRequestId() {
-		return clientRequestId;
-	}
 
 	public void setClientRequestId(Integer clientRequestId){
 		this. clientRequestId = clientRequestId;
 	}
 
-	public Integer getProductId() {
-		return productId;
+	public Integer getClientRequestId(){
+		return clientRequestId;
 	}
 
 	public void setProductId(Integer productId){
 		this. productId = productId;
 	}
 
-	public Integer getModuleId() {
-		return moduleId;
+	public Integer getProductId(){
+		return productId;
 	}
 
 	public void setModuleId(Integer moduleId){
 		this. moduleId = moduleId;
 	}
 
-	public String getRequestNo() {
-		return requestNo;
+	public Integer getModuleId(){
+		return moduleId;
 	}
 
 	public void setRequestNo(String requestNo){
 		this. requestNo = requestNo;
 	}
 
-	public Integer getRequestType() {
-		return requestType;
+	public String getRequestNo(){
+		return requestNo;
 	}
 
-	public void setRequestType(Integer requestType){
+	public void setRequestType(String requestType){
 		this. requestType = requestType;
 	}
 
-	public Integer getRequestPre() {
-		return requestPre;
+	public String getRequestType(){
+		return requestType;
 	}
 
 	public void setRequestPre(Integer requestPre){
 		this. requestPre = requestPre;
 	}
 
-	public String getRequestTitle() {
-		return requestTitle;
+	public Integer getRequestPre(){
+		return requestPre;
 	}
 
 	public void setRequestTitle(String requestTitle){
 		this. requestTitle = requestTitle;
 	}
 
-	public String getRequestKeywords() {
-		return requestKeywords;
+	public String getRequestTitle(){
+		return requestTitle;
 	}
 
 	public void setRequestKeywords(String requestKeywords){
 		this. requestKeywords = requestKeywords;
 	}
 
-	public String getRequestSpec() {
-		return requestSpec;
+	public String getRequestKeywords(){
+		return requestKeywords;
 	}
 
 	public void setRequestSpec(String requestSpec){
 		this. requestSpec = requestSpec;
 	}
 
-	public Integer getRequestIsAbnormal() {
-		return requestIsAbnormal;
+	public String getRequestSpec(){
+		return requestSpec;
 	}
 
 	public void setRequestIsAbnormal(Integer requestIsAbnormal){
 		this. requestIsAbnormal = requestIsAbnormal;
 	}
 
-	public Integer getClientId() {
-		return clientId;
+	public Integer getRequestIsAbnormal(){
+		return requestIsAbnormal;
 	}
 
 	public void setClientId(Integer clientId){
 		this. clientId = clientId;
 	}
 
-	public String getRequester() {
-		return requester;
+	public Integer getClientId(){
+		return clientId;
 	}
 
 	public void setRequester(String requester){
 		this. requester = requester;
 	}
 
-	public String getRequestSubmitBy() {
-		return requestSubmitBy;
+	public String getRequester(){
+		return requester;
 	}
 
 	public void setRequestSubmitBy(String requestSubmitBy){
 		this. requestSubmitBy = requestSubmitBy;
 	}
 
-	public Date getRequestSubmitDate() {
-		return requestSubmitDate;
+	public String getRequestSubmitBy(){
+		return requestSubmitBy;
 	}
 
 	public void setRequestSubmitDate(Date requestSubmitDate){
 		this. requestSubmitDate = requestSubmitDate;
 	}
 
-	public Date getRequestReplyDate() {
-		return requestReplyDate;
+	public Date getRequestSubmitDate(){
+		return requestSubmitDate;
 	}
 
 	public void setRequestReplyDate(Date requestReplyDate){
 		this. requestReplyDate = requestReplyDate;
 	}
 
-	public Date getRequestCommitmentDate() {
-		return requestCommitmentDate;
+	public Date getRequestReplyDate(){
+		return requestReplyDate;
 	}
 
 	public void setRequestCommitmentDate(Date requestCommitmentDate){
 		this. requestCommitmentDate = requestCommitmentDate;
 	}
 
-	public String getRequestReviewer() {
-		return requestReviewer;
+	public Date getRequestCommitmentDate(){
+		return requestCommitmentDate;
 	}
 
 	public void setRequestReviewer(String requestReviewer){
 		this. requestReviewer = requestReviewer;
 	}
 
-	public Date getRequestReviewDate() {
-		return requestReviewDate;
+	public String getRequestReviewer(){
+		return requestReviewer;
 	}
 
 	public void setRequestReviewDate(Date requestReviewDate){
 		this. requestReviewDate = requestReviewDate;
 	}
 
-	public String getRequestLastEditedBy() {
-		return requestLastEditedBy;
+	public Date getRequestReviewDate(){
+		return requestReviewDate;
 	}
 
 	public void setRequestLastEditedBy(String requestLastEditedBy){
 		this. requestLastEditedBy = requestLastEditedBy;
 	}
 
-	public Date getRequestLastEditDate() {
-		return requestLastEditDate;
+	public String getRequestLastEditedBy(){
+		return requestLastEditedBy;
 	}
 
 	public void setRequestLastEditDate(Date requestLastEditDate){
 		this. requestLastEditDate = requestLastEditDate;
 	}
 
-	public BigInteger getRequestReleaseDate() {
-		return requestReleaseDate;
+	public Date getRequestLastEditDate(){
+		return requestLastEditDate;
 	}
 
 	public void setRequestReleaseDate(BigInteger requestReleaseDate){
 		this. requestReleaseDate = requestReleaseDate;
 	}
 
-	public String getRequestClosedBy() {
-		return requestClosedBy;
+	public BigInteger getRequestReleaseDate(){
+		return requestReleaseDate;
 	}
 
 	public void setRequestClosedBy(String requestClosedBy){
 		this. requestClosedBy = requestClosedBy;
 	}
 
-	public Date getRequestCloseDate() {
-		return requestCloseDate;
+	public String getRequestClosedBy(){
+		return requestClosedBy;
 	}
 
 	public void setRequestCloseDate(Date requestCloseDate){
 		this. requestCloseDate = requestCloseDate;
 	}
 
-	public Integer getRequestOpenCount() {
-		return requestOpenCount;
+	public Date getRequestCloseDate(){
+		return requestCloseDate;
 	}
 
 	public void setRequestOpenCount(Integer requestOpenCount){
 		this. requestOpenCount = requestOpenCount;
 	}
 
-	public Integer getRequestStatus() {
-		return requestStatus;
+	public Integer getRequestOpenCount(){
+		return requestOpenCount;
 	}
 
 	public void setRequestStatus(Integer requestStatus){
 		this. requestStatus = requestStatus;
 	}
 
-	public Integer getRequestTransTo() {
-		return requestTransTo;
+	public Integer getRequestStatus(){
+		return requestStatus;
 	}
 
 	public void setRequestTransTo(Integer requestTransTo){
 		this. requestTransTo = requestTransTo;
 	}
 
-	public Integer getRequestTransId() {
-		return requestTransId;
+	public Integer getRequestTransTo(){
+		return requestTransTo;
 	}
 
 	public void setRequestTransId(Integer requestTransId){
 		this. requestTransId = requestTransId;
 	}
 
-	public Integer getDeleted() {
-		return deleted;
+	public Integer getRequestTransId(){
+		return requestTransId;
 	}
 
 	public void setDeleted(Integer deleted){
 		this. deleted = deleted;
 	}
 
-	public String getReplySpec() {
+	public Integer getDeleted(){
+		return deleted;
+	}
+
+	public void setReplySpec(String replySpec){
+		this. replySpec = replySpec;
+	}
+
+	public String getReplySpec(){
 		return replySpec;
 	}
 
-	public void setReplySpec(String replySpec) {
-		this.replySpec = replySpec;
+	public void setReplier(String replier){
+		this. replier = replier;
 	}
 
-	public String getReplier() {
+	public String getReplier(){
 		return replier;
 	}
 
-	public void setReplier(String replier) {
-		this.replier = replier;
+	public void setReplyDate(Date replyDate){
+		this. replyDate = replyDate;
 	}
 
-	public Date getReplyDate() {
+	public Date getReplyDate(){
 		return replyDate;
-	}
-
-	public void setReplyDate(Date replyDate) {
-		this.replyDate = replyDate;
 	}
 
 }

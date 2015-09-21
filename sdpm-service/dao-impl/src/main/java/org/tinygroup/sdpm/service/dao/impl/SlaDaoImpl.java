@@ -25,6 +25,8 @@ import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.tinygroup.tinysqldsl.Delete;
@@ -35,8 +37,10 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.service.dao.pojo.Sla;
 import org.tinygroup.sdpm.service.dao.SlaDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -147,7 +151,7 @@ public class SlaDaoImpl extends TinyDslDaoSupport implements SlaDao {
 		});
 	}
 
-	public List<Sla> query(Sla sla) {
+	public List<Sla> query(Sla sla ,final OrderBy... orderBies) {
 		if(sla==null){
 			sla=new Sla();
 		}
@@ -155,7 +159,7 @@ public class SlaDaoImpl extends TinyDslDaoSupport implements SlaDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(Sla t) {
-				return selectFrom(SLATABLE).where(
+				Select select = selectFrom(SLATABLE).where(
 				and(
 					SLATABLE.SERVICE_LEVEL.eq(t.getServiceLevel()),
 					SLATABLE.SERVICE_DEADLINE.eq(t.getServiceDeadline()),
@@ -179,18 +183,19 @@ public class SlaDaoImpl extends TinyDslDaoSupport implements SlaDao {
 					SLATABLE.SLA_OPEN_COUNT.eq(t.getSlaOpenCount()),
 					SLATABLE.DELETED.eq(t.getDeleted()),
 					SLATABLE.CILENT_PRODUCT_VISION.eq(t.getCilentProductVision())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<Sla> queryPager(int start,int limit ,Sla sla) {
+	public Pager<Sla> queryPager(int start,int limit ,Sla sla ,final OrderBy... orderBies) {
 		if(sla==null){
 			sla=new Sla();
 		}
 		return getDslTemplate().queryPager(start, limit, sla, false, new SelectGenerateCallback<Sla>() {
 
 			public Select generate(Sla t) {
-				return MysqlSelect.selectFrom(SLATABLE).where(
+				Select select = MysqlSelect.selectFrom(SLATABLE).where(
 				and(
 					SLATABLE.SERVICE_LEVEL.eq(t.getServiceLevel()),
 					SLATABLE.SERVICE_DEADLINE.eq(t.getServiceDeadline()),
@@ -214,6 +219,7 @@ public class SlaDaoImpl extends TinyDslDaoSupport implements SlaDao {
 					SLATABLE.SLA_OPEN_COUNT.eq(t.getSlaOpenCount()),
 					SLATABLE.DELETED.eq(t.getDeleted()),
 					SLATABLE.CILENT_PRODUCT_VISION.eq(t.getCilentProductVision())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -326,4 +332,17 @@ public class SlaDaoImpl extends TinyDslDaoSupport implements SlaDao {
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

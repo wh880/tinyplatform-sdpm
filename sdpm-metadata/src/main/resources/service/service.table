@@ -57,7 +57,7 @@
     <table-field standard-field-id="c457a69854e24534a2bff327ed642e6c" primary="false" unique="false" not-null="true" id="reply_done" auto-increase="false"/>
   </table>
   <table id="aa05b252d3c442bfb4bfca4da35a1629" name="request" title="客户请求表" package-name="">
-    <table-field standard-field-id="7d045d07a379467799bb865c513acad8" primary="true" unique="true" not-null="true" id="request_id" auto-increase="false"/>
+    <table-field standard-field-id="7d045d07a379467799bb865c513acad8" primary="true" unique="true" not-null="true" id="request_id" auto-increase="true"/>
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="true" id="product_id" auto-increase="false"/>
     <table-field standard-field-id="32fc494251074a329bdfa8b6600ce738" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
     <table-field standard-field-id="ef26d4df32cd4df89a84850269acbe0a" primary="false" unique="false" not-null="false" id="request_no" auto-increase="false"/>

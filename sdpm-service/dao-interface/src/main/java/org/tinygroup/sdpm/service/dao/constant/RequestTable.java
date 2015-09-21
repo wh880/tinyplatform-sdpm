@@ -190,7 +190,13 @@ public class RequestTable extends Table {
 	/** 
 	 * 请求状态
 	 * 
-	 * 请求状态0-created新建(用户可见),1-doing处理中(用户可见)，2-rejected拒绝（回复后用户可见）,3-toProduct转出（回复后用户可见）,4-planned已接受【由产品模块需求纳入计划触发/客服直接处理】（回复后用户可见），5-postponed挂起，6-finished已完成【由产品模块需求阶段】，7-released已发放(用户可见),8-retrunVisit已回访(用户可见),
+	 * 请求状态0-created新建(用户可见),1-doing处理中(用户可见)，
+	 * 2-rejected拒绝（回复后用户可见）,
+	 * 3-toProduct转出（回复后用户可见）,
+	 * 4-planned已接受【由产品模块需求纳入计划触发/客服直接处理】
+	 * （回复后用户可见），
+	 * 5-postponed挂起，6-finished已完成【由产品模块需求阶段】
+	 * ，7-released已发放(用户可见),8-retrunVisit已回访(用户可见),
 	 * 9-reopen【回访不通过】(用户可见)，10-close关闭【状态8，并且review结果是pass】
 	 */
 	public final Column REQUEST_STATUS = new Column(this, "request_status");
@@ -214,26 +220,28 @@ public class RequestTable extends Table {
 	 */
 	public final Column DELETED = new Column(this, "deleted");
 
-	/**
+	/** 
 	 * 回复描述
+	 * 
 	 */
 	public final Column REPLY_SPEC = new Column(this, "reply_spec");
 
-	/**
+	/** 
 	 * 回复者
-	 * <p/>
+	 * 
 	 * 客服
 	 */
 	public final Column REPLIER = new Column(this, "replier");
 
-	/**
+	/** 
 	 * 回复时间
+	 * 
 	 */
 	public final Column REPLY_DATE = new Column(this, "reply_date");
 
 
-		private RequestTable() {
-			super("request");
-		}
+	private RequestTable() {
+		super("request");
+	}
 
 }

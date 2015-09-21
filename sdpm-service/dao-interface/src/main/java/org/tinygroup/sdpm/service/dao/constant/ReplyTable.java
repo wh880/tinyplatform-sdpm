@@ -94,8 +94,8 @@ public class ReplyTable extends Table {
 	public final Column REPLY_DONE = new Column(this, "reply_done");
 
 
-		private ReplyTable() {
-			super("reply");
-		}
+	private ReplyTable() {
+		super("reply");
+	}
 
 }

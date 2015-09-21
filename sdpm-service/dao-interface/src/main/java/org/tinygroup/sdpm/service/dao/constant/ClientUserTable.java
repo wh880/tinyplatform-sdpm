@@ -58,8 +58,8 @@ public class ClientUserTable extends Table {
 	public final Column USER_POST = new Column(this, "user_post");
 
 
-		private ClientUserTable() {
-			super("client_user");
-		}
+	private ClientUserTable() {
+		super("client_user");
+	}
 
 }

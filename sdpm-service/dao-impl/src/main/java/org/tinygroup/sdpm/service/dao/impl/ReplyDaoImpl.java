@@ -25,6 +25,8 @@ import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.tinygroup.tinysqldsl.Delete;
@@ -35,8 +37,10 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.service.dao.pojo.Reply;
 import org.tinygroup.sdpm.service.dao.ReplyDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -121,7 +125,7 @@ public class ReplyDaoImpl extends TinyDslDaoSupport implements ReplyDao {
 		});
 	}
 
-	public List<Reply> query(Reply reply) {
+	public List<Reply> query(Reply reply ,final OrderBy... orderBies) {
 		if(reply==null){
 			reply=new Reply();
 		}
@@ -129,7 +133,7 @@ public class ReplyDaoImpl extends TinyDslDaoSupport implements ReplyDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(Reply t) {
-				return selectFrom(REPLYTABLE).where(
+				Select select = selectFrom(REPLYTABLE).where(
 				and(
 					REPLYTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()),
 					REPLYTABLE.REPLY_OPINION.eq(t.getReplyOpinion()),
@@ -140,18 +144,19 @@ public class ReplyDaoImpl extends TinyDslDaoSupport implements ReplyDao {
 					REPLYTABLE.REPLIER.eq(t.getReplier()),
 					REPLYTABLE.REPLY_DATE.eq(t.getReplyDate()),
 					REPLYTABLE.REPLY_DONE.eq(t.getReplyDone())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<Reply> queryPager(int start,int limit ,Reply reply) {
+	public Pager<Reply> queryPager(int start,int limit ,Reply reply ,final OrderBy... orderBies) {
 		if(reply==null){
 			reply=new Reply();
 		}
 		return getDslTemplate().queryPager(start, limit, reply, false, new SelectGenerateCallback<Reply>() {
 
 			public Select generate(Reply t) {
-				return MysqlSelect.selectFrom(REPLYTABLE).where(
+				Select select = MysqlSelect.selectFrom(REPLYTABLE).where(
 				and(
 					REPLYTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()),
 					REPLYTABLE.REPLY_OPINION.eq(t.getReplyOpinion()),
@@ -162,6 +167,7 @@ public class ReplyDaoImpl extends TinyDslDaoSupport implements ReplyDao {
 					REPLYTABLE.REPLIER.eq(t.getReplier()),
 					REPLYTABLE.REPLY_DATE.eq(t.getReplyDate()),
 					REPLYTABLE.REPLY_DONE.eq(t.getReplyDone())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -235,4 +241,17 @@ public class ReplyDaoImpl extends TinyDslDaoSupport implements ReplyDao {
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

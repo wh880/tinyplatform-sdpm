@@ -25,6 +25,8 @@ import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.tinygroup.tinysqldsl.Delete;
@@ -35,8 +37,10 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.service.dao.pojo.FaqType;
 import org.tinygroup.sdpm.service.dao.FaqTypeDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -113,7 +117,7 @@ public class FaqTypeDaoImpl extends TinyDslDaoSupport implements FaqTypeDao {
 		});
 	}
 
-	public List<FaqType> query(FaqType faqType) {
+	public List<FaqType> query(FaqType faqType ,final OrderBy... orderBies) {
 		if(faqType==null){
 			faqType=new FaqType();
 		}
@@ -121,31 +125,33 @@ public class FaqTypeDaoImpl extends TinyDslDaoSupport implements FaqTypeDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(FaqType t) {
-				return selectFrom(FAQ_TYPETABLE).where(
+				Select select = selectFrom(FAQ_TYPETABLE).where(
 				and(
 					FAQ_TYPETABLE.FAQ_TYPE.eq(t.getFaqType()),
 					FAQ_TYPETABLE.FAQ_PARENT_TYPE_ID.eq(t.getFaqParentTypeId()),
 					FAQ_TYPETABLE.FAQ_TYPE_CREATDAY.eq(t.getFaqTypeCreatDay()),
 					FAQ_TYPETABLE.FAQ_CREATED_BY.eq(t.getFaqCreatedBy()),
 					FAQ_TYPETABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<FaqType> queryPager(int start,int limit ,FaqType faqType) {
+	public Pager<FaqType> queryPager(int start,int limit ,FaqType faqType ,final OrderBy... orderBies) {
 		if(faqType==null){
 			faqType=new FaqType();
 		}
 		return getDslTemplate().queryPager(start, limit, faqType, false, new SelectGenerateCallback<FaqType>() {
 
 			public Select generate(FaqType t) {
-				return MysqlSelect.selectFrom(FAQ_TYPETABLE).where(
+				Select select = MysqlSelect.selectFrom(FAQ_TYPETABLE).where(
 				and(
 					FAQ_TYPETABLE.FAQ_TYPE.eq(t.getFaqType()),
 					FAQ_TYPETABLE.FAQ_PARENT_TYPE_ID.eq(t.getFaqParentTypeId()),
 					FAQ_TYPETABLE.FAQ_TYPE_CREATDAY.eq(t.getFaqTypeCreatDay()),
 					FAQ_TYPETABLE.FAQ_CREATED_BY.eq(t.getFaqCreatedBy()),
 					FAQ_TYPETABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -207,4 +213,17 @@ public class FaqTypeDaoImpl extends TinyDslDaoSupport implements FaqTypeDao {
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

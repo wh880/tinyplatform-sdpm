@@ -34,7 +34,7 @@ public class Faq {
 	 * 问答类型
 	 * 
 	 */
-	private Integer faqType;
+	private String faqType;
 
 	/** 
 	 * 问题描述
@@ -111,11 +111,11 @@ public class Faq {
 		return faqId;
 	}
 
-	public void setFaqType(Integer faqType){
+	public void setFaqType(String faqType){
 		this. faqType = faqType;
 	}
 
-	public Integer getFaqType(){
+	public String getFaqType(){
 		return faqType;
 	}
 
