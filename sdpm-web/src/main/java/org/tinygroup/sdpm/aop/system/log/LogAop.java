@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.action.aop;
+package org.tinygroup.sdpm.aop.system.log;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
