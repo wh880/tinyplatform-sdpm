@@ -19,7 +19,7 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectManager projectManager;
 
     public Project add(Project project) {
-        return null;
+        return projectManager.add(project);
     }
 
     public List<Project> findList() {

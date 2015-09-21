@@ -16,14 +16,13 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 附件表
  * 
  */
-public class Profile implements Serializable{
+public class Profile {
 
 	/** 
 	 * 附件ID

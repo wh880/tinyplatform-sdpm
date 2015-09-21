@@ -8,7 +8,7 @@ import org.tinygroup.sdpm.product.biz.inter.PlanManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.PlanService;
 
-@Component("planService")
+@Component()
 public class PlanServiceImpl implements PlanService {
 	
 	@Autowired

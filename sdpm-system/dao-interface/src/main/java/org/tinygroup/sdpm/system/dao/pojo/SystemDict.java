@@ -18,13 +18,14 @@ package org.tinygroup.sdpm.system.dao.pojo;
 
 import java.io.Serializable;
 
-
 /** 
  * 数据字典
  * 
  */
 public class SystemDict implements Serializable{
-
+	
+	public static int DELETE_YES = 1;
+    public static int DELETE_NO = 0;
 	/** 
 	 * 字典项ID
 	 * 

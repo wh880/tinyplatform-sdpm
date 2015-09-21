@@ -83,11 +83,24 @@
             <artifactId>sdpm-productLine-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+
+        <!-- project -->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-project-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-project-service-impl</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-project-service-wrapper</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-statistic-view</artifactId>

@@ -33,11 +33,6 @@ public class EffortManagerImpl implements EffortManager {
 		return effortDao.deleteByKey(pk);
 	}
 
-	public List<Effort> findBetweenDate(Date begindate, Date enddate) {
-		// TODO Auto-generated method stub
-		return effortDao.findBetweenDate(begindate, enddate);
-	}
-
 	public List<Effort> findByAccount(String account) {
 		// TODO Auto-generated method stub
 		Effort effort= new Effort();
@@ -67,6 +62,11 @@ public class EffortManagerImpl implements EffortManager {
 	public List<Effort> find(Effort effort) {
 		// TODO Auto-generated method stub
 		return effortDao.query(effort);
+	}
+
+	public List<Effort> findBetweenDate(Date begindate, Date enddate) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

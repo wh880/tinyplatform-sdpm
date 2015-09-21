@@ -16,7 +16,6 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
-
 /** 
  * 操作历史表
  * 
