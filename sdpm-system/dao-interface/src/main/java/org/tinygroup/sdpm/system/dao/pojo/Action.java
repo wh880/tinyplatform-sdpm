@@ -16,14 +16,13 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 系统日志表
  * 
  */
-public class Action implements Serializable{
+public class Action {
 
 	/** 
 	 * 系统日志ID

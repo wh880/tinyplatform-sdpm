@@ -23,7 +23,7 @@ import java.util.Date;
  * 产品线表
  * 
  */
-public class ProductLine implements Serializable {
+public class ProductLine implements Serializable{
 	
 	public static int DELETE_YES = 1;
     public static int DELETE_NO = 0;

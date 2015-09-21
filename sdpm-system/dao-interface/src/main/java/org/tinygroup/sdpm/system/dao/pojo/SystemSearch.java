@@ -27,7 +27,6 @@ public class SystemSearch implements Serializable{
 	
 	public static int DELETE_YES = 1;
     public static int DELETE_NO = 0;
-
 	/** 
 	 * 搜索ID
 	 * 
