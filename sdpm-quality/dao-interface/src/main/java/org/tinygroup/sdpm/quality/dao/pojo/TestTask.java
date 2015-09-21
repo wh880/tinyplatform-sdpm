@@ -25,10 +25,10 @@ import java.util.Date;
 public class TestTask {
 
 	/** 
-	 * 测试计划ID
+	 * 测试版本编号
 	 * 
 	 */
-	private Integer testtaskID;
+	private Integer testversionId;
 
 	/** 
 	 * 任务名称
@@ -103,12 +103,12 @@ public class TestTask {
 	private Integer deleted;
 
 
-	public void setTesttaskID(Integer testtaskID){
-		this. testtaskID = testtaskID;
+	public void setTestversionId(Integer testversionId){
+		this. testversionId = testversionId;
 	}
 
-	public Integer getTesttaskID(){
-		return testtaskID;
+	public Integer getTestversionId(){
+		return testversionId;
 	}
 
 	public void setTesttaskTitle(String testtaskTitle){

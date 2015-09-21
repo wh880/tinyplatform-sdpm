@@ -43,7 +43,7 @@ public class TestRunTable extends Table {
 	 * 用例编号
 	 * 
 	 */
-	public final Column CASE_ID = new Column(this, "case_ID");
+	public final Column CASE_ID = new Column(this, "case_id");
 
 	/** 
 	 * 关联用例版本

@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.project.biz.impl;
 
+import com.sun.jmx.snmp.tasks.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,25 +17,29 @@ import java.util.List;
 @Transactional
 public class TaskManagerImpl implements TaskManager {
     @Autowired
-    private ProjectTaskDao projectTaskDao;
+    private ProjectTaskDao taskDao;
 
-    public ProjectTask find(String id) {
-        return null;
+    public ProjectTask find(int id) {
+        return taskDao.getByKey(id);
     }
 
     public List<ProjectTask> findList(ProjectTask task) {
-        return null;
+        return taskDao.query(task);
     }
 
     public ProjectTask add(ProjectTask task) {
-        return null;
+        return taskDao.add(task);
     }
 
-    public ProjectTask update(ProjectTask task) {
-        return null;
+    public Integer update(ProjectTask task) {
+        return taskDao.edit(task);
     }
 
-    public Integer delete(String id) {
-        return null;
+    public Integer delete(int id) {
+        ProjectTask task = new ProjectTask();
+        task.setTaskId(id);
+        task.setTaskDeleted(task.DELETE_YES);
+
+        return taskDao.edit(task);
     }
 }

@@ -16,33 +16,27 @@ import java.util.List;
 @Transactional
 public class TeamManagerImpl implements TeamManager {
     @Autowired
-    private ProjectTeamDao projectTeamDao;
+    private ProjectTeamDao teamDao;
 
-    public ProjectTeam find(String id) {
-        return null;
+    public ProjectTeam find(int id) {
+        return teamDao.getByKey(id);
     }
 
-    public ProjectTeam find(String projectId, String account) {
-        return null;
-    }
-
-    public List<ProjectTeam> findList(int projectId) {
-        return null;
-    }
-
-    public List<ProjectTeam> findList(ProjectTeam team) {
-        return null;
+    public List<ProjectTeam> findListAccount(int projectId) {
+        ProjectTeam team = new ProjectTeam();
+        team.setProjectId(projectId);
+        return teamDao.query(team);
     }
 
     public ProjectTeam add(ProjectTeam team) {
-        return null;
+        return teamDao.add(team);
     }
 
-    public ProjectTeam update(ProjectTeam team) {
-        return null;
+    public Integer update(ProjectTeam team) {
+        return teamDao.edit(team);
     }
 
-    public Integer delete(String id) {
-        return null;
+    public Integer delete(int id) {
+        return teamDao.deleteByKey(id);
     }
 }

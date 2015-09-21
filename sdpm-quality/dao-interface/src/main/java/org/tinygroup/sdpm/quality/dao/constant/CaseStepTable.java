@@ -31,13 +31,13 @@ public class CaseStepTable extends Table {
 	 * 用例步骤编号
 	 * 
 	 */
-	public final Column CASESTEP_ID = new Column(this, "caseStep_ID");
+	public final Column CASESTEP_ID = new Column(this, "caseStep_id");
 
 	/** 
 	 * 用例编号
 	 * 
 	 */
-	public final Column CASE_ID = new Column(this, "case_ID");
+	public final Column CASE_ID = new Column(this, "case_id");
 
 	/** 
 	 * 关联用例版本

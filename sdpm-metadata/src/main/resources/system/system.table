@@ -1,0 +1,30 @@
+<tables id="8b05439ef4c84a2b974399388b2db1b1" package-name="">
+  <table id="7fb85a2df10f47beb23ab5cc6a277372" name="system_config" title="模块配置表" schema="" package-name="">
+    <description></description>
+    <table-field standard-field-id="e61eb9908855427cb1d6b4a9a2ab3216" primary="true" unique="true" not-null="true" id="config_id" auto-increase="true"/>
+    <table-field standard-field-id="d0ae32e1f34c4573b8298bdcad89c49f" primary="false" unique="false" not-null="false" id="config_owner" auto-increase="false"/>
+    <table-field standard-field-id="08616f2108aa4d339c7cb43f44c961fd" primary="false" unique="false" not-null="false" id="config_module" auto-increase="false"/>
+    <table-field standard-field-id="3bdd271084f240c7a4c8a7a323e24f44" primary="false" unique="false" not-null="false" id="config_section" auto-increase="false"/>
+    <table-field standard-field-id="82d6405620c54f89975ea4b12a4688ba" primary="false" unique="false" not-null="false" id="config_key" auto-increase="false"/>
+    <table-field standard-field-id="04f73ab7d089441daa66c55dbcf19b7a" primary="false" unique="false" not-null="false" id="config_value" auto-increase="false"/>
+    <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  </table>
+  <table id="52d013ba76aa4a968dcba9005ca3fccd" name="system_search" title="模块搜索表" package-name="">
+    <table-field standard-field-id="20a7f050dd5f4726828fd67445d1378f" primary="true" unique="true" not-null="true" id="searchindex_id" auto-increase="true"/>
+    <table-field standard-field-id="c512358f477c406ca15dc07ef5c1c4a8" primary="false" unique="false" not-null="false" id="search_objectType" auto-increase="false"/>
+    <table-field standard-field-id="5c5229c53bad4cf3afbbeccaf348bb0a" primary="false" unique="false" not-null="false" id="search_objectID" auto-increase="false"/>
+    <table-field standard-field-id="22819ace1ac644a19e15bf14034a3b06" primary="false" unique="false" not-null="false" id="search_title" auto-increase="false"/>
+    <table-field standard-field-id="9ea372d0291e48ad92b0ccc832485b65" primary="false" unique="false" not-null="false" id="search_content" auto-increase="false"/>
+    <table-field standard-field-id="42c7e8f67f1c4dfd9471a62f6158cef0" primary="false" unique="false" not-null="false" id="search_addedDate" auto-increase="false"/>
+    <table-field standard-field-id="048d96b083e74cc1a334e0f33f2c0020" primary="false" unique="false" not-null="false" id="search_editedDate" auto-increase="false"/>
+    <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  </table>
+  <table id="d781c279a31d451b9206f6a7097b15f6" name="system_dict" title="数据字典">
+    <table-field standard-field-id="db6bd96455a544c8b827b17b531f7cbc" primary="false" unique="false" not-null="false" id="dict_id" auto-increase="false"/>
+    <table-field standard-field-id="45e660e7d07b46aca87f8e2c74d5decd" primary="false" unique="false" not-null="false" id="dict_key" auto-increase="false"/>
+    <table-field standard-field-id="e8aa6f77988e4346bbafa0cfcb177836" primary="false" unique="false" not-null="false" id="dict_value" auto-increase="false"/>
+    <table-field standard-field-id="f5c70ee6582347dea45bd6401b4f89b2" primary="false" unique="false" not-null="false" id="dict_sort" auto-increase="false"/>
+    <table-field standard-field-id="32fc494251074a329bdfa8b6600ce738" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
+    <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+  </table>
+</tables>

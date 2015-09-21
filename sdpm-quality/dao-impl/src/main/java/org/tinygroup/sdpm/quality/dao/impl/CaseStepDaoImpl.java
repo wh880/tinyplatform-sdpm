@@ -53,8 +53,8 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 		return getDslTemplate().insertAndReturnKey(caseStep, new InsertGenerateCallback<CaseStep>() {
 			public Insert generate(CaseStep t) {
 				Insert insert = insertInto(CASESTEPTABLE).values(
-					CASESTEPTABLE.CASESTEP_ID.value(t.getCaseStepID()),
-					CASESTEPTABLE.CASE_ID.value(t.getCaseID()),
+					CASESTEPTABLE.CASESTEP_ID.value(t.getCaseStepId()),
+					CASESTEPTABLE.CASE_ID.value(t.getCaseId()),
 					CASESTEPTABLE.CASE_VERSION.value(t.getCaseVersion()),
 					CASESTEPTABLE.CASESTEP_DESC.value(t.getCaseStepDesc()),
 					CASESTEPTABLE.CASESTEP_EXPECT.value(t.getCaseStepExpect()));
@@ -64,17 +64,17 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 	}
 
 	public int edit(CaseStep caseStep) {
-		if(caseStep == null || caseStep.getCaseStepID() == null){
+		if(caseStep == null || caseStep.getCaseStepId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(caseStep, new UpdateGenerateCallback<CaseStep>() {
 			public Update generate(CaseStep t) {
 				Update update = update(CASESTEPTABLE).set(
-					CASESTEPTABLE.CASE_ID.value(t.getCaseID()),
+					CASESTEPTABLE.CASE_ID.value(t.getCaseId()),
 					CASESTEPTABLE.CASE_VERSION.value(t.getCaseVersion()),
 					CASESTEPTABLE.CASESTEP_DESC.value(t.getCaseStepDesc()),
 					CASESTEPTABLE.CASESTEP_EXPECT.value(t.getCaseStepExpect())).where(
-					CASESTEPTABLE.CASESTEP_ID.eq(t.getCaseStepID()));
+					CASESTEPTABLE.CASESTEP_ID.eq(t.getCaseStepId()));
 				return update;
 			}
 		});
@@ -121,7 +121,7 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 			public Select generate(CaseStep t) {
 				return selectFrom(CASESTEPTABLE).where(
 				and(
-					CASESTEPTABLE.CASE_ID.eq(t.getCaseID()),
+					CASESTEPTABLE.CASE_ID.eq(t.getCaseId()),
 					CASESTEPTABLE.CASE_VERSION.eq(t.getCaseVersion()),
 					CASESTEPTABLE.CASESTEP_DESC.eq(t.getCaseStepDesc()),
 					CASESTEPTABLE.CASESTEP_EXPECT.eq(t.getCaseStepExpect())));
@@ -138,7 +138,7 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 			public Select generate(CaseStep t) {
 				return MysqlSelect.selectFrom(CASESTEPTABLE).where(
 				and(
-					CASESTEPTABLE.CASE_ID.eq(t.getCaseID()),
+					CASESTEPTABLE.CASE_ID.eq(t.getCaseId()),
 					CASESTEPTABLE.CASE_VERSION.eq(t.getCaseVersion()),
 					CASESTEPTABLE.CASESTEP_DESC.eq(t.getCaseStepDesc()),
 					CASESTEPTABLE.CASESTEP_EXPECT.eq(t.getCaseStepExpect())));
@@ -154,7 +154,7 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 
 			public Insert generate() {
 				return insertInto(CASESTEPTABLE).values(
-					CASESTEPTABLE.CASE_ID.value(new JdbcNamedParameter("caseID")),
+					CASESTEPTABLE.CASE_ID.value(new JdbcNamedParameter("caseId")),
 					CASESTEPTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
 					CASESTEPTABLE.CASESTEP_DESC.value(new JdbcNamedParameter("caseStepDesc")),
 					CASESTEPTABLE.CASESTEP_EXPECT.value(new JdbcNamedParameter("caseStepExpect")));
@@ -174,11 +174,11 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 
 			public Update generate() {
 				return update(CASESTEPTABLE).set(
-					CASESTEPTABLE.CASE_ID.value(new JdbcNamedParameter("caseID")),
+					CASESTEPTABLE.CASE_ID.value(new JdbcNamedParameter("caseId")),
 					CASESTEPTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
 					CASESTEPTABLE.CASESTEP_DESC.value(new JdbcNamedParameter("caseStepDesc")),
 					CASESTEPTABLE.CASESTEP_EXPECT.value(new JdbcNamedParameter("caseStepExpect"))).where(
-				CASESTEPTABLE.CASESTEP_ID.eq(new JdbcNamedParameter("caseStepID")));
+				CASESTEPTABLE.CASESTEP_ID.eq(new JdbcNamedParameter("caseStepId")));
 			}
 		});
 	}
@@ -191,8 +191,8 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 
 			public Delete generate() {
 				return delete(CASESTEPTABLE).where(and(
-				CASESTEPTABLE.CASESTEP_ID.eq(new JdbcNamedParameter("caseStepID")),
-				CASESTEPTABLE.CASE_ID.eq(new JdbcNamedParameter("caseID")),
+				CASESTEPTABLE.CASESTEP_ID.eq(new JdbcNamedParameter("caseStepId")),
+				CASESTEPTABLE.CASE_ID.eq(new JdbcNamedParameter("caseId")),
 				CASESTEPTABLE.CASE_VERSION.eq(new JdbcNamedParameter("caseVersion")),
 				CASESTEPTABLE.CASESTEP_DESC.eq(new JdbcNamedParameter("caseStepDesc")),
 				CASESTEPTABLE.CASESTEP_EXPECT.eq(new JdbcNamedParameter("caseStepExpect"))));

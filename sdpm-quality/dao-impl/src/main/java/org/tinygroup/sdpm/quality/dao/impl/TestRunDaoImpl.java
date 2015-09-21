@@ -55,7 +55,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 				Insert insert = insertInto(TESTRUNTABLE).values(
 					TESTRUNTABLE.TESTRUN_ID.value(t.getTestRunId()),
 					TESTRUNTABLE.TASK_ID.value(t.getTaskId()),
-					TESTRUNTABLE.CASE_ID.value(t.getCaseID()),
+					TESTRUNTABLE.CASE_ID.value(t.getCaseId()),
 					TESTRUNTABLE.CASE_VERSION.value(t.getCaseVersion()),
 					TESTRUNTABLE.TESTRUN_ASSIGNEDTO.value(t.getTestRunAssignedTo()),
 					TESTRUNTABLE.TESTRUN_LASTRUNNER.value(t.getTestRunLastRunner()),
@@ -75,7 +75,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 			public Update generate(TestRun t) {
 				Update update = update(TESTRUNTABLE).set(
 					TESTRUNTABLE.TASK_ID.value(t.getTaskId()),
-					TESTRUNTABLE.CASE_ID.value(t.getCaseID()),
+					TESTRUNTABLE.CASE_ID.value(t.getCaseId()),
 					TESTRUNTABLE.CASE_VERSION.value(t.getCaseVersion()),
 					TESTRUNTABLE.TESTRUN_ASSIGNEDTO.value(t.getTestRunAssignedTo()),
 					TESTRUNTABLE.TESTRUN_LASTRUNNER.value(t.getTestRunLastRunner()),
@@ -130,7 +130,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 				return selectFrom(TESTRUNTABLE).where(
 				and(
 					TESTRUNTABLE.TASK_ID.eq(t.getTaskId()),
-					TESTRUNTABLE.CASE_ID.eq(t.getCaseID()),
+					TESTRUNTABLE.CASE_ID.eq(t.getCaseId()),
 					TESTRUNTABLE.CASE_VERSION.eq(t.getCaseVersion()),
 					TESTRUNTABLE.TESTRUN_ASSIGNEDTO.eq(t.getTestRunAssignedTo()),
 					TESTRUNTABLE.TESTRUN_LASTRUNNER.eq(t.getTestRunLastRunner()),
@@ -151,7 +151,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 				return MysqlSelect.selectFrom(TESTRUNTABLE).where(
 				and(
 					TESTRUNTABLE.TASK_ID.eq(t.getTaskId()),
-					TESTRUNTABLE.CASE_ID.eq(t.getCaseID()),
+					TESTRUNTABLE.CASE_ID.eq(t.getCaseId()),
 					TESTRUNTABLE.CASE_VERSION.eq(t.getCaseVersion()),
 					TESTRUNTABLE.TESTRUN_ASSIGNEDTO.eq(t.getTestRunAssignedTo()),
 					TESTRUNTABLE.TESTRUN_LASTRUNNER.eq(t.getTestRunLastRunner()),
@@ -171,7 +171,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 			public Insert generate() {
 				return insertInto(TESTRUNTABLE).values(
 					TESTRUNTABLE.TASK_ID.value(new JdbcNamedParameter("taskId")),
-					TESTRUNTABLE.CASE_ID.value(new JdbcNamedParameter("caseID")),
+					TESTRUNTABLE.CASE_ID.value(new JdbcNamedParameter("caseId")),
 					TESTRUNTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
 					TESTRUNTABLE.TESTRUN_ASSIGNEDTO.value(new JdbcNamedParameter("testRunAssignedTo")),
 					TESTRUNTABLE.TESTRUN_LASTRUNNER.value(new JdbcNamedParameter("testRunLastRunner")),
@@ -195,7 +195,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 			public Update generate() {
 				return update(TESTRUNTABLE).set(
 					TESTRUNTABLE.TASK_ID.value(new JdbcNamedParameter("taskId")),
-					TESTRUNTABLE.CASE_ID.value(new JdbcNamedParameter("caseID")),
+					TESTRUNTABLE.CASE_ID.value(new JdbcNamedParameter("caseId")),
 					TESTRUNTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
 					TESTRUNTABLE.TESTRUN_ASSIGNEDTO.value(new JdbcNamedParameter("testRunAssignedTo")),
 					TESTRUNTABLE.TESTRUN_LASTRUNNER.value(new JdbcNamedParameter("testRunLastRunner")),
@@ -217,7 +217,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 				return delete(TESTRUNTABLE).where(and(
 				TESTRUNTABLE.TESTRUN_ID.eq(new JdbcNamedParameter("testRunId")),
 				TESTRUNTABLE.TASK_ID.eq(new JdbcNamedParameter("taskId")),
-				TESTRUNTABLE.CASE_ID.eq(new JdbcNamedParameter("caseID")),
+				TESTRUNTABLE.CASE_ID.eq(new JdbcNamedParameter("caseId")),
 				TESTRUNTABLE.CASE_VERSION.eq(new JdbcNamedParameter("caseVersion")),
 				TESTRUNTABLE.TESTRUN_ASSIGNEDTO.eq(new JdbcNamedParameter("testRunAssignedTo")),
 				TESTRUNTABLE.TESTRUN_LASTRUNNER.eq(new JdbcNamedParameter("testRunLastRunner")),

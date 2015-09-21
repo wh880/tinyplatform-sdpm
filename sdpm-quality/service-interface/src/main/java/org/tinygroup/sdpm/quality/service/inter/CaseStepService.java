@@ -1,7 +1,6 @@
 package org.tinygroup.sdpm.quality.service.inter;
 
 import java.util.List;
-
 import org.tinygroup.sdpm.quality.dao.pojo.CaseStep;
 
 public interface CaseStepService {

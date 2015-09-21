@@ -14,7 +14,7 @@ public interface ProjectProductManager {
      * @param projectId 主键
      * @return
      */
-    List<Integer> findProductList(int projectId);
+    List<ProjectProduct> findProductList(int projectId);
 
     /**
      * 根据条件查询List
@@ -22,15 +22,14 @@ public interface ProjectProductManager {
      * @param productId 用于查询条件
      * @return
      */
-    List<Integer> findProjcetList(int productId);
+    List<ProjectProduct> findProjcetList(int productId);
 
     /**
      * 新增关联
-     * @param projectId
-     * @param productId
+     * @param projectProduct
      * @return
      */
-    ProjectProduct add(Integer projectId, int productId);
+    ProjectProduct add(ProjectProduct projectProduct);
 
     /**
      * 更新用户
@@ -38,7 +37,7 @@ public interface ProjectProductManager {
      * @param projectproduct 需要更新的实体类
      * @return
      */
-    ProjectProduct update(ProjectProduct projectproduct);
+    Integer update(ProjectProduct projectproduct);
 
     /**
      * 根据id进行删除
@@ -46,5 +45,5 @@ public interface ProjectProductManager {
      * @param id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer delete(int id);
 }

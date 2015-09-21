@@ -26,13 +26,13 @@ public class CaseStep {
 	 * 用例步骤编号
 	 * 
 	 */
-	private Integer caseStepID;
+	private Integer caseStepId;
 
 	/** 
 	 * 用例编号
 	 * 
 	 */
-	private Integer caseID;
+	private Integer caseId;
 
 	/** 
 	 * 关联用例版本
@@ -53,20 +53,20 @@ public class CaseStep {
 	private String caseStepExpect;
 
 
-	public void setCaseStepID(Integer caseStepID){
-		this. caseStepID = caseStepID;
+	public void setCaseStepId(Integer caseStepId){
+		this. caseStepId = caseStepId;
 	}
 
-	public Integer getCaseStepID(){
-		return caseStepID;
+	public Integer getCaseStepId(){
+		return caseStepId;
 	}
 
-	public void setCaseID(Integer caseID){
-		this. caseID = caseID;
+	public void setCaseId(Integer caseId){
+		this. caseId = caseId;
 	}
 
-	public Integer getCaseID(){
-		return caseID;
+	public Integer getCaseId(){
+		return caseId;
 	}
 
 	public void setCaseVersion(Integer caseVersion){

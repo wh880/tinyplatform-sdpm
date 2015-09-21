@@ -14,7 +14,7 @@ public interface BugService {
 	Bug findById(int id);
 	
 	/**
-	 * 根据条件查询
+	 * 根据条件查询d
 	 * @param bug
 	 * @return
 	 */

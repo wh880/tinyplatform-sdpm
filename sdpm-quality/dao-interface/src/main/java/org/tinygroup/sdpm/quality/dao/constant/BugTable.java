@@ -31,7 +31,7 @@ public class BugTable extends Table {
 	 * Bug编号
 	 * 
 	 */
-	public final Column BUG_ID = new Column(this, "bug_ID");
+	public final Column BUG_ID = new Column(this, "bug_id");
 
 	/** 
 	 * 产品ID
@@ -79,13 +79,13 @@ public class BugTable extends Table {
 	 * 转任务
 	 * 
 	 */
-	public final Column TOTASK_ID = new Column(this, "toTask_ID");
+	public final Column TOTASK_ID = new Column(this, "toTask_id");
 
 	/** 
 	 * 转需求
 	 * 
 	 */
-	public final Column TOSTORY_ID = new Column(this, "toStory_ID");
+	public final Column TOSTORY_ID = new Column(this, "toStory_id");
 
 	/** 
 	 * Bug标题

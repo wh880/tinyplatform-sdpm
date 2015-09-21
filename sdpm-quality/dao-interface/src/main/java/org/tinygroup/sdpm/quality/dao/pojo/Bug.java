@@ -28,7 +28,7 @@ public class Bug {
 	 * Bug编号
 	 * 
 	 */
-	private Integer bugID;
+	private Integer bugId;
 
 	/** 
 	 * 产品ID
@@ -76,13 +76,13 @@ public class Bug {
 	 * 转任务
 	 * 
 	 */
-	private Integer toTaskID;
+	private Integer toTaskId;
 
 	/** 
 	 * 转需求
 	 * 
 	 */
-	private Integer toStoryID;
+	private Integer toStoryId;
 
 	/** 
 	 * Bug标题
@@ -325,12 +325,12 @@ public class Bug {
 	private Integer deleted;
 
 
-	public void setBugID(Integer bugID){
-		this. bugID = bugID;
+	public void setBugId(Integer bugId){
+		this. bugId = bugId;
 	}
 
-	public Integer getBugID(){
-		return bugID;
+	public Integer getBugId(){
+		return bugId;
 	}
 
 	public void setProductId(Integer productId){
@@ -389,20 +389,20 @@ public class Bug {
 		return taskId;
 	}
 
-	public void setToTaskID(Integer toTaskID){
-		this. toTaskID = toTaskID;
+	public void setToTaskId(Integer toTaskId){
+		this. toTaskId = toTaskId;
 	}
 
-	public Integer getToTaskID(){
-		return toTaskID;
+	public Integer getToTaskId(){
+		return toTaskId;
 	}
 
-	public void setToStoryID(Integer toStoryID){
-		this. toStoryID = toStoryID;
+	public void setToStoryId(Integer toStoryId){
+		this. toStoryId = toStoryId;
 	}
 
-	public Integer getToStoryID(){
-		return toStoryID;
+	public Integer getToStoryId(){
+		return toStoryId;
 	}
 
 	public void setBugTitle(String bugTitle){

@@ -40,7 +40,7 @@ public class TestRun {
 	 * 用例编号
 	 * 
 	 */
-	private Integer caseID;
+	private Integer caseId;
 
 	/** 
 	 * 关联用例版本
@@ -95,12 +95,12 @@ public class TestRun {
 		return taskId;
 	}
 
-	public void setCaseID(Integer caseID){
-		this. caseID = caseID;
+	public void setCaseId(Integer caseId){
+		this. caseId = caseId;
 	}
 
-	public Integer getCaseID(){
-		return caseID;
+	public Integer getCaseId(){
+		return caseId;
 	}
 
 	public void setCaseVersion(Integer caseVersion){

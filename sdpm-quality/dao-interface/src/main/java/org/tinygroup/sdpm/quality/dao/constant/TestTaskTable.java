@@ -28,10 +28,10 @@ public class TestTaskTable extends Table {
 	public static final TestTaskTable TESTTASKTABLE = new TestTaskTable();
 
 	/** 
-	 * 测试计划ID
+	 * 测试版本编号
 	 * 
 	 */
-	public final Column TESTTASK_ID = new Column(this, "testtask_ID");
+	public final Column TESTVERSION_ID = new Column(this, "testversion_id");
 
 	/** 
 	 * 任务名称

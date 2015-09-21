@@ -14,7 +14,7 @@ public interface TaskManager {
      * @param id 主键
      * @return
      */
-    ProjectTask find(String id);
+    ProjectTask find(int id);
 
     /**
      * 根据条件查询List
@@ -38,7 +38,7 @@ public interface TaskManager {
      * @param task 需要更新的实体类
      * @return
      */
-    ProjectTask update(ProjectTask task);
+    Integer update(ProjectTask task);
 
     /**
      * 根据id进行软删除用户
@@ -46,5 +46,5 @@ public interface TaskManager {
      * @param id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer delete(int id);
 }

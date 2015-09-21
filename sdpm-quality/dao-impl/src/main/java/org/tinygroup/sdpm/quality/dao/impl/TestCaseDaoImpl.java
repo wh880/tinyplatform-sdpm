@@ -53,7 +53,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 		return getDslTemplate().insertAndReturnKey(testCase, new InsertGenerateCallback<TestCase>() {
 			public Insert generate(TestCase t) {
 				Insert insert = insertInto(TESTCASETABLE).values(
-					TESTCASETABLE.CASE_ID.value(t.getCaseID()),
+					TESTCASETABLE.CASE_ID.value(t.getCaseId()),
 					TESTCASETABLE.PRODUCT_ID.value(t.getProductId()),
 					TESTCASETABLE.MODULE_ID.value(t.getModuleId()),
 					TESTCASETABLE.PATH.value(t.getPath()),
@@ -90,7 +90,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 	}
 
 	public int edit(TestCase testCase) {
-		if(testCase == null || testCase.getCaseID() == null){
+		if(testCase == null || testCase.getCaseId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(testCase, new UpdateGenerateCallback<TestCase>() {
@@ -126,7 +126,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 					TESTCASETABLE.CASE_LASTRUNNER.value(t.getCaseLastRunner()),
 					TESTCASETABLE.CASE_LASTRUNDATE.value(t.getCaseLastRunDate()),
 					TESTCASETABLE.CASE_LASTRUNRESULT.value(t.getCaseLastRunResult())).where(
-					TESTCASETABLE.CASE_ID.eq(t.getCaseID()));
+					TESTCASETABLE.CASE_ID.eq(t.getCaseId()));
 				return update;
 			}
 		});
@@ -334,7 +334,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 					TESTCASETABLE.CASE_LASTRUNNER.value(new JdbcNamedParameter("caseLastRunner")),
 					TESTCASETABLE.CASE_LASTRUNDATE.value(new JdbcNamedParameter("caseLastRunDate")),
 					TESTCASETABLE.CASE_LASTRUNRESULT.value(new JdbcNamedParameter("caseLastRunResult"))).where(
-				TESTCASETABLE.CASE_ID.eq(new JdbcNamedParameter("caseID")));
+				TESTCASETABLE.CASE_ID.eq(new JdbcNamedParameter("caseId")));
 			}
 		});
 	}
@@ -347,7 +347,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 
 			public Delete generate() {
 				return delete(TESTCASETABLE).where(and(
-				TESTCASETABLE.CASE_ID.eq(new JdbcNamedParameter("caseID")),
+				TESTCASETABLE.CASE_ID.eq(new JdbcNamedParameter("caseId")),
 				TESTCASETABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId")),
 				TESTCASETABLE.MODULE_ID.eq(new JdbcNamedParameter("moduleId")),
 				TESTCASETABLE.PATH.eq(new JdbcNamedParameter("path")),

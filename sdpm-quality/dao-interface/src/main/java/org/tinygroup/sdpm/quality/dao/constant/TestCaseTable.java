@@ -31,7 +31,7 @@ public class TestCaseTable extends Table {
 	 * 用例编号
 	 * 
 	 */
-	public final Column CASE_ID = new Column(this, "case_ID");
+	public final Column CASE_ID = new Column(this, "case_id");
 
 	/** 
 	 * 产品ID

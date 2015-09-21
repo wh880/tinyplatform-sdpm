@@ -53,7 +53,7 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 		return getDslTemplate().insertAndReturnKey(bug, new InsertGenerateCallback<Bug>() {
 			public Insert generate(Bug t) {
 				Insert insert = insertInto(BUGTABLE).values(
-					BUGTABLE.BUG_ID.value(t.getBugID()),
+					BUGTABLE.BUG_ID.value(t.getBugId()),
 					BUGTABLE.PRODUCT_ID.value(t.getProductId()),
 					BUGTABLE.MODULE_ID.value(t.getModuleId()),
 					BUGTABLE.PROJECT_ID.value(t.getProjectId()),
@@ -61,8 +61,8 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.STORY_ID.value(t.getStoryId()),
 					BUGTABLE.STORY_VERSION.value(t.getStoryVersion()),
 					BUGTABLE.TASK_ID.value(t.getTaskId()),
-					BUGTABLE.TOTASK_ID.value(t.getToTaskID()),
-					BUGTABLE.TOSTORY_ID.value(t.getToStoryID()),
+					BUGTABLE.TOTASK_ID.value(t.getToTaskId()),
+					BUGTABLE.TOSTORY_ID.value(t.getToStoryId()),
 					BUGTABLE.BUG_TITLE.value(t.getBugTitle()),
 					BUGTABLE.BUG_KEYWORDS.value(t.getBugKeywords()),
 					BUGTABLE.BUG_SEVERITY.value(t.getBugSeverity()),
@@ -109,7 +109,7 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 	}
 
 	public int edit(Bug bug) {
-		if(bug == null || bug.getBugID() == null){
+		if(bug == null || bug.getBugId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(bug, new UpdateGenerateCallback<Bug>() {
@@ -122,8 +122,8 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.STORY_ID.value(t.getStoryId()),
 					BUGTABLE.STORY_VERSION.value(t.getStoryVersion()),
 					BUGTABLE.TASK_ID.value(t.getTaskId()),
-					BUGTABLE.TOTASK_ID.value(t.getToTaskID()),
-					BUGTABLE.TOSTORY_ID.value(t.getToStoryID()),
+					BUGTABLE.TOTASK_ID.value(t.getToTaskId()),
+					BUGTABLE.TOSTORY_ID.value(t.getToStoryId()),
 					BUGTABLE.BUG_TITLE.value(t.getBugTitle()),
 					BUGTABLE.BUG_KEYWORDS.value(t.getBugKeywords()),
 					BUGTABLE.BUG_SEVERITY.value(t.getBugSeverity()),
@@ -164,7 +164,7 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.BUG_LASTEDITEDBY.value(t.getBugLastEditedBy()),
 					BUGTABLE.BUG_LASTEDITEDDATE.value(t.getBugLastEditedDate()),
 					BUGTABLE.DELETED.value(t.getDeleted())).where(
-					BUGTABLE.BUG_ID.eq(t.getBugID()));
+					BUGTABLE.BUG_ID.eq(t.getBugId()));
 				return update;
 			}
 		});
@@ -218,8 +218,8 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.STORY_ID.eq(t.getStoryId()),
 					BUGTABLE.STORY_VERSION.eq(t.getStoryVersion()),
 					BUGTABLE.TASK_ID.eq(t.getTaskId()),
-					BUGTABLE.TOTASK_ID.eq(t.getToTaskID()),
-					BUGTABLE.TOSTORY_ID.eq(t.getToStoryID()),
+					BUGTABLE.TOTASK_ID.eq(t.getToTaskId()),
+					BUGTABLE.TOSTORY_ID.eq(t.getToStoryId()),
 					BUGTABLE.BUG_TITLE.eq(t.getBugTitle()),
 					BUGTABLE.BUG_KEYWORDS.eq(t.getBugKeywords()),
 					BUGTABLE.BUG_SEVERITY.eq(t.getBugSeverity()),
@@ -280,8 +280,8 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.STORY_ID.eq(t.getStoryId()),
 					BUGTABLE.STORY_VERSION.eq(t.getStoryVersion()),
 					BUGTABLE.TASK_ID.eq(t.getTaskId()),
-					BUGTABLE.TOTASK_ID.eq(t.getToTaskID()),
-					BUGTABLE.TOSTORY_ID.eq(t.getToStoryID()),
+					BUGTABLE.TOTASK_ID.eq(t.getToTaskId()),
+					BUGTABLE.TOSTORY_ID.eq(t.getToStoryId()),
 					BUGTABLE.BUG_TITLE.eq(t.getBugTitle()),
 					BUGTABLE.BUG_KEYWORDS.eq(t.getBugKeywords()),
 					BUGTABLE.BUG_SEVERITY.eq(t.getBugSeverity()),
@@ -341,8 +341,8 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.STORY_ID.value(new JdbcNamedParameter("storyId")),
 					BUGTABLE.STORY_VERSION.value(new JdbcNamedParameter("storyVersion")),
 					BUGTABLE.TASK_ID.value(new JdbcNamedParameter("taskId")),
-					BUGTABLE.TOTASK_ID.value(new JdbcNamedParameter("toTaskID")),
-					BUGTABLE.TOSTORY_ID.value(new JdbcNamedParameter("toStoryID")),
+					BUGTABLE.TOTASK_ID.value(new JdbcNamedParameter("toTaskId")),
+					BUGTABLE.TOSTORY_ID.value(new JdbcNamedParameter("toStoryId")),
 					BUGTABLE.BUG_TITLE.value(new JdbcNamedParameter("bugTitle")),
 					BUGTABLE.BUG_KEYWORDS.value(new JdbcNamedParameter("bugKeywords")),
 					BUGTABLE.BUG_SEVERITY.value(new JdbcNamedParameter("bugSeverity")),
@@ -406,8 +406,8 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.STORY_ID.value(new JdbcNamedParameter("storyId")),
 					BUGTABLE.STORY_VERSION.value(new JdbcNamedParameter("storyVersion")),
 					BUGTABLE.TASK_ID.value(new JdbcNamedParameter("taskId")),
-					BUGTABLE.TOTASK_ID.value(new JdbcNamedParameter("toTaskID")),
-					BUGTABLE.TOSTORY_ID.value(new JdbcNamedParameter("toStoryID")),
+					BUGTABLE.TOTASK_ID.value(new JdbcNamedParameter("toTaskId")),
+					BUGTABLE.TOSTORY_ID.value(new JdbcNamedParameter("toStoryId")),
 					BUGTABLE.BUG_TITLE.value(new JdbcNamedParameter("bugTitle")),
 					BUGTABLE.BUG_KEYWORDS.value(new JdbcNamedParameter("bugKeywords")),
 					BUGTABLE.BUG_SEVERITY.value(new JdbcNamedParameter("bugSeverity")),
@@ -448,7 +448,7 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.BUG_LASTEDITEDBY.value(new JdbcNamedParameter("bugLastEditedBy")),
 					BUGTABLE.BUG_LASTEDITEDDATE.value(new JdbcNamedParameter("bugLastEditedDate")),
 					BUGTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
-				BUGTABLE.BUG_ID.eq(new JdbcNamedParameter("bugID")));
+				BUGTABLE.BUG_ID.eq(new JdbcNamedParameter("bugId")));
 			}
 		});
 	}
@@ -461,7 +461,7 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 
 			public Delete generate() {
 				return delete(BUGTABLE).where(and(
-				BUGTABLE.BUG_ID.eq(new JdbcNamedParameter("bugID")),
+				BUGTABLE.BUG_ID.eq(new JdbcNamedParameter("bugId")),
 				BUGTABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId")),
 				BUGTABLE.MODULE_ID.eq(new JdbcNamedParameter("moduleId")),
 				BUGTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")),
@@ -469,8 +469,8 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 				BUGTABLE.STORY_ID.eq(new JdbcNamedParameter("storyId")),
 				BUGTABLE.STORY_VERSION.eq(new JdbcNamedParameter("storyVersion")),
 				BUGTABLE.TASK_ID.eq(new JdbcNamedParameter("taskId")),
-				BUGTABLE.TOTASK_ID.eq(new JdbcNamedParameter("toTaskID")),
-				BUGTABLE.TOSTORY_ID.eq(new JdbcNamedParameter("toStoryID")),
+				BUGTABLE.TOTASK_ID.eq(new JdbcNamedParameter("toTaskId")),
+				BUGTABLE.TOSTORY_ID.eq(new JdbcNamedParameter("toStoryId")),
 				BUGTABLE.BUG_TITLE.eq(new JdbcNamedParameter("bugTitle")),
 				BUGTABLE.BUG_KEYWORDS.eq(new JdbcNamedParameter("bugKeywords")),
 				BUGTABLE.BUG_SEVERITY.eq(new JdbcNamedParameter("bugSeverity")),

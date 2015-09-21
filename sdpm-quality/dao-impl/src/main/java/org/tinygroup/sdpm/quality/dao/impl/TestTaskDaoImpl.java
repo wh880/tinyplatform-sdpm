@@ -53,7 +53,7 @@ public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 		return getDslTemplate().insertAndReturnKey(testTask, new InsertGenerateCallback<TestTask>() {
 			public Insert generate(TestTask t) {
 				Insert insert = insertInto(TESTTASKTABLE).values(
-					TESTTASKTABLE.TESTTASK_ID.value(t.getTesttaskID()),
+					TESTTASKTABLE.TESTVERSION_ID.value(t.getTestversionId()),
 					TESTTASKTABLE.TESTTASK_TITLE.value(t.getTesttaskTitle()),
 					TESTTASKTABLE.PRODUCT_ID.value(t.getProductId()),
 					TESTTASKTABLE.PROJECT_ID.value(t.getProjectId()),
@@ -72,7 +72,7 @@ public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 	}
 
 	public int edit(TestTask testTask) {
-		if(testTask == null || testTask.getTesttaskID() == null){
+		if(testTask == null || testTask.getTestversionId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(testTask, new UpdateGenerateCallback<TestTask>() {
@@ -90,7 +90,7 @@ public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 					TESTTASKTABLE.TESTTASK_REPORT.value(t.getTesttaskReport()),
 					TESTTASKTABLE.TESTTASK_STATUS.value(t.getTesttaskStatus()),
 					TESTTASKTABLE.DELETED.value(t.getDeleted())).where(
-					TESTTASKTABLE.TESTTASK_ID.eq(t.getTesttaskID()));
+					TESTTASKTABLE.TESTVERSION_ID.eq(t.getTestversionId()));
 				return update;
 			}
 		});
@@ -102,7 +102,7 @@ public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 		}
 		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
 			public Delete generate(Serializable pk) {
-				return delete(TESTTASKTABLE).where(TESTTASKTABLE.TESTTASK_ID.eq(pk));
+				return delete(TESTTASKTABLE).where(TESTTASKTABLE.TESTVERSION_ID.eq(pk));
 			}
 		});
 	}
@@ -113,7 +113,7 @@ public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 		}
 		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
 			public Delete generate(Serializable[] t) {
-				return delete(TESTTASKTABLE).where(TESTTASKTABLE.TESTTASK_ID.in(t));
+				return delete(TESTTASKTABLE).where(TESTTASKTABLE.TESTVERSION_ID.in(t));
 		}
 		},pks);
 	}
@@ -122,7 +122,7 @@ public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 		return getDslTemplate().getByKey(pk, TestTask.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(TESTTASKTABLE).where(TESTTASKTABLE.TESTTASK_ID.eq(t));
+			return selectFrom(TESTTASKTABLE).where(TESTTASKTABLE.TESTVERSION_ID.eq(t));
 			}
 		});
 	}
@@ -226,7 +226,7 @@ public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 					TESTTASKTABLE.TESTTASK_REPORT.value(new JdbcNamedParameter("testtaskReport")),
 					TESTTASKTABLE.TESTTASK_STATUS.value(new JdbcNamedParameter("testtaskStatus")),
 					TESTTASKTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
-				TESTTASKTABLE.TESTTASK_ID.eq(new JdbcNamedParameter("testtaskID")));
+				TESTTASKTABLE.TESTVERSION_ID.eq(new JdbcNamedParameter("testversionId")));
 			}
 		});
 	}
@@ -239,7 +239,7 @@ public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 
 			public Delete generate() {
 				return delete(TESTTASKTABLE).where(and(
-				TESTTASKTABLE.TESTTASK_ID.eq(new JdbcNamedParameter("testtaskID")),
+				TESTTASKTABLE.TESTVERSION_ID.eq(new JdbcNamedParameter("testversionId")),
 				TESTTASKTABLE.TESTTASK_TITLE.eq(new JdbcNamedParameter("testtaskTitle")),
 				TESTTASKTABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId")),
 				TESTTASKTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")),
