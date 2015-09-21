@@ -93,7 +93,7 @@
             #end
         #end
 
-    <div style="width:70%;float:right">
+    <div style="width:70%;float:left">
         #@div(divClass="infoContent")
             <p class="titleName">项目描述</p>
 

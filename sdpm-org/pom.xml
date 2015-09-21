@@ -189,7 +189,6 @@
     </build>
     <modules>
         <module>app</module>
-        <!--<module>base-dao</module>-->
         <module>business-inter</module>
         <module>business-impl</module>
         <module>common</module>

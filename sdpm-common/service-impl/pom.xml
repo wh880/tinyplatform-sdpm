@@ -24,11 +24,6 @@
 
 		<dependency>
 			<groupId>org.tinygroup</groupId>
-			<artifactId>sdpm-common-service-interface</artifactId>
-			<version>${tiny_sdpm_version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
 			<artifactId>sdpm-common-business-interface</artifactId>
 			<version>${tiny_sdpm_version}</version>
 		</dependency>

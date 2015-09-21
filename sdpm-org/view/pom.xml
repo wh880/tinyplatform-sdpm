@@ -165,11 +165,7 @@
             <artifactId>sdpm-common-view-uicomponent</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-common-service-interface</artifactId>
-            <version>${tiny_sdpm_version}</version>
-        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

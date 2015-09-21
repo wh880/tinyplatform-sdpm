@@ -34,7 +34,7 @@
 		#@elementItem()
 			#@colLabel()总消耗#end
 			#@formControlDiv("col-8")
-				#tinyInput("text" "comsume-time" ""{"placeholder":"单位是小时","nullmsg":"请输入时间（小时）","id":"comsume-time","class":"input-text"})
+				#tinyInput("text" "comsume-time" ""{"placeholder":"单位是小时","id":"comsume-time","class":"input-text","datatype":"*4-16","nullmsg":"请输入时间（小时）"})
 			#end
 			#@validateDiv("col-2")#end
 		#end

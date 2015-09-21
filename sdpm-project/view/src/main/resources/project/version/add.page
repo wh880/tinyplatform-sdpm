@@ -47,7 +47,8 @@
 	#@elementItem()
 		#@sdpmItem("产品")
 			#@Tselect2F()
-				#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+				#@Tselect2Body("lang" "T" {"class":"input-text select2","datatype":"*4-16","nullmsg":"产品不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="T"></option>
                     <option value="CT">Connecticut</option>
                     <option value="DE">Delaware</option>
                     <option value="FL">Florida</option>
@@ -63,13 +64,14 @@
 	#end
 	#@elementItem()
 		#@sdpmItem("名称编号")
-			#tinyInput("text" "username" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+			#tinyInput("text" "username" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"名称编号不能为空！","id":"username","class":"input-text"})
 		#end
 	#end
 	#@elementItem()
 		#@sdpmItem("构建者")
 			#@Tselect2F()
-				#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+				#@Tselect2Body("lang" "T" {"class":"input-text select2","placeholder":"","datatype":"*4-16","nullmsg":"名称编号不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="T"></option>
                     <option value="CT">Connecticut</option>
                     <option value="DE">Delaware</option>
                     <option value="FL">Florida</option>
@@ -93,14 +95,14 @@
 
 	#@elementItem()
 		#@sdpmItem("源代码地址")
-			#tinyInput("text" "username" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+			#tinyInput("text" "username" ""{"style":"width:43%","placeholder":"","id":"username","class":"input-text"})
 		#end
 	#end
 
 ##
 	#@elementItem()
 		#@sdpmItem("下载地址")
-			#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+			#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","id":"username","class":"input-text"})
 		#end
 	#end
 	#@elementItem()
