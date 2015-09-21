@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-metadata-common</artifactId>
+            <artifactId>sdpm-metadata</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
 
