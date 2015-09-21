@@ -12,7 +12,7 @@ public interface EffortManager {
 	 * @param effort
 	 * @return
 	 */
-	List<Effort> add(Effort effort);
+	Effort add(Effort effort);
 	
 	/**
 	 * 更新日志
@@ -21,10 +21,25 @@ public interface EffortManager {
 	 */
 	Integer updata(Effort effort);
 	/**
+	 * 查询所有的日志
+	 * @param effort
+	 * @return
+	 */
+	List<Effort> find(Effort effort);
+	/**
+	 * 通过当前时间查询
+	 * @param date
+	 * @return
+	 */
+	
+	List<Effort> findByDate(Date date);
+	/**
 	 * 删除日志
 	 * @param effort
 	 * @return
 	 */
+	
+	
 	Integer delete(Effort effort);
 	/**
 	 * 通过时间段查询

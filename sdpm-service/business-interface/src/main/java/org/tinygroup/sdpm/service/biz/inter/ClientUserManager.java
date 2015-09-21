@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.service.biz.inter;
 
+import org.omg.CORBA.INTERNAL;
 import org.tinygroup.sdpm.service.dao.pojo.ClientUser;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface ClientUserManager {
      * @param id 主键
      * @return
      */
-    ClientUser find(String id);
+    ClientUser find(Integer id);
 
     /**
      * 根据条件查询List

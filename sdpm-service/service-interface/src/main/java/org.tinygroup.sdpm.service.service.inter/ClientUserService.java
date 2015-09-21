@@ -14,7 +14,7 @@ public interface ClientUserService {
      * @param id 主键
      * @return
      */
-    ClientUser findClientUser(String id);
+    ClientUser findClientUser(Integer id);
 
     /**
      * 根据条件查询List

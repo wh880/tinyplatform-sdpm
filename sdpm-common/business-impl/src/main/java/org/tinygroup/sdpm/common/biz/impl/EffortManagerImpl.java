@@ -4,19 +4,20 @@ import java.util.Date;
 import java.util.List;
 
 import org.tinygroup.sdpm.common.biz.inter.EffortManager;
+import org.tinygroup.sdpm.common.dao.EffortDao;
 import org.tinygroup.sdpm.common.dao.pojo.Effort;
 import org.tinygroup.tinysqldsl.Pager;
 
 public class EffortManagerImpl implements EffortManager {
-
-	public List<Effort> add(Effort effort) {
+    private EffortDao effortDao;
+	public Effort add(Effort effort) {
 		// TODO Auto-generated method stub
-		return null;
+		return effortDao.add(effort);
 	}
 
 	public Integer updata(Effort effort) {
 		// TODO Auto-generated method stub
-		return null;
+		return effortDao.edit(effort);
 	}
 
 	public Integer delete(Effort effort) {
@@ -40,6 +41,16 @@ public class EffortManagerImpl implements EffortManager {
 	}
 
 	public Pager<Effort> findByPage(int start, int limit, Effort effort) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Effort> findByDate(Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Effort> find(Effort effort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
