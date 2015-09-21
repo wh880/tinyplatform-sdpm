@@ -15,28 +15,28 @@ public class StoryServiceImpl implements StoryService {
 	private StoryManager storyManager;
 	
 	public ProductStory addStory(ProductStory story) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return storyManager.add(story);
 	}
 
 	public int deleteStory(Integer storyId) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return storyManager.delete(storyId);
 	}
 
 	public int updateStory(ProductStory story) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return storyManager.update(story);
 	}
 
 	public ProductStory findStory(Integer storyId) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return storyManager.find(storyId);
 	}
 
 	public List<ProductStory> findStoryList(ProductStory story) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return storyManager.findList(story);
 	}
 
 }

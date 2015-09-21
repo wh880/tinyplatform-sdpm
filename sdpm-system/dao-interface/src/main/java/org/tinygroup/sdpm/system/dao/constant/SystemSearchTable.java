@@ -69,6 +69,12 @@ public class SystemSearchTable extends Table {
 	 */
 	public final Column SEARCH_EDITEDDATE = new Column(this, "search_editedDate");
 
+	/** 
+	 * 已删除
+	 * 
+	 */
+	public final Column DELETED = new Column(this, "deleted");
+
 
 		private SystemSearchTable() {
 			super("system_search");

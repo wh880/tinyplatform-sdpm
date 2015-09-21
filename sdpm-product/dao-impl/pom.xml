@@ -25,6 +25,33 @@
        <artifactId>sdpm-product-dao-interface</artifactId>
         <version>${tiny_sdpm_version}</version>
     </dependency>
+    
+    <dependency>
+      <groupId>org.tinygroup</groupId>
+      <artifactId>org.tinygroup.tinysqldsl</artifactId>
+      <version>${tiny_version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.tinygroup</groupId>
+      <artifactId>org.tinygroup.jdbctemplatedslsession</artifactId>
+      <version>${tiny_version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.tinygroup</groupId>
+      <artifactId>org.tinygroup.databasechange</artifactId>
+      <version>${tiny_version}</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.0.5</version>
+    </dependency>
+    <dependency>
+        <groupId>commons-dbcp</groupId>
+        <artifactId>commons-dbcp</artifactId>
+        <version>1.2.2</version>
+    </dependency>
+    
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

@@ -24,9 +24,9 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
-
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -38,7 +38,6 @@ import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.system.dao.SystemConfigDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -47,6 +46,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+@Repository
 public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConfigDao {
 
 	public SystemConfig add(SystemConfig systemConfig) {
@@ -58,7 +58,8 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 					SYSTEM_CONFIGTABLE.CONFIG_MODULE.value(t.getConfigModule()),
 					SYSTEM_CONFIGTABLE.CONFIG_SECTION.value(t.getConfigSection()),
 					SYSTEM_CONFIGTABLE.CONFIG_KEY.value(t.getConfigKey()),
-					SYSTEM_CONFIGTABLE.CONFIG_VALUE.value(t.getConfigValue()));
+					SYSTEM_CONFIGTABLE.CONFIG_VALUE.value(t.getConfigValue()),
+					SYSTEM_CONFIGTABLE.DELETED.value(t.getDeleted()));
 				return insert;
 			}
 		});
@@ -75,7 +76,8 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 					SYSTEM_CONFIGTABLE.CONFIG_MODULE.value(t.getConfigModule()),
 					SYSTEM_CONFIGTABLE.CONFIG_SECTION.value(t.getConfigSection()),
 					SYSTEM_CONFIGTABLE.CONFIG_KEY.value(t.getConfigKey()),
-					SYSTEM_CONFIGTABLE.CONFIG_VALUE.value(t.getConfigValue())).where(
+					SYSTEM_CONFIGTABLE.CONFIG_VALUE.value(t.getConfigValue()),
+					SYSTEM_CONFIGTABLE.DELETED.value(t.getDeleted())).where(
 					SYSTEM_CONFIGTABLE.CONFIG_ID.eq(t.getConfigId()));
 				return update;
 			}
@@ -127,7 +129,8 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 					SYSTEM_CONFIGTABLE.CONFIG_MODULE.eq(t.getConfigModule()),
 					SYSTEM_CONFIGTABLE.CONFIG_SECTION.eq(t.getConfigSection()),
 					SYSTEM_CONFIGTABLE.CONFIG_KEY.eq(t.getConfigKey()),
-					SYSTEM_CONFIGTABLE.CONFIG_VALUE.eq(t.getConfigValue())));
+					SYSTEM_CONFIGTABLE.CONFIG_VALUE.eq(t.getConfigValue()),
+					SYSTEM_CONFIGTABLE.DELETED.eq(t.getDeleted())));
 			}
 		});
 	}
@@ -145,7 +148,8 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 					SYSTEM_CONFIGTABLE.CONFIG_MODULE.eq(t.getConfigModule()),
 					SYSTEM_CONFIGTABLE.CONFIG_SECTION.eq(t.getConfigSection()),
 					SYSTEM_CONFIGTABLE.CONFIG_KEY.eq(t.getConfigKey()),
-					SYSTEM_CONFIGTABLE.CONFIG_VALUE.eq(t.getConfigValue())));
+					SYSTEM_CONFIGTABLE.CONFIG_VALUE.eq(t.getConfigValue()),
+					SYSTEM_CONFIGTABLE.DELETED.eq(t.getDeleted())));
 			}
 		});
 	}
@@ -162,7 +166,8 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 					SYSTEM_CONFIGTABLE.CONFIG_MODULE.value(new JdbcNamedParameter("configModule")),
 					SYSTEM_CONFIGTABLE.CONFIG_SECTION.value(new JdbcNamedParameter("configSection")),
 					SYSTEM_CONFIGTABLE.CONFIG_KEY.value(new JdbcNamedParameter("configKey")),
-					SYSTEM_CONFIGTABLE.CONFIG_VALUE.value(new JdbcNamedParameter("configValue")));
+					SYSTEM_CONFIGTABLE.CONFIG_VALUE.value(new JdbcNamedParameter("configValue")),
+					SYSTEM_CONFIGTABLE.DELETED.value(new JdbcNamedParameter("deleted")));
 			}
 		});
 	}
@@ -183,7 +188,8 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 					SYSTEM_CONFIGTABLE.CONFIG_MODULE.value(new JdbcNamedParameter("configModule")),
 					SYSTEM_CONFIGTABLE.CONFIG_SECTION.value(new JdbcNamedParameter("configSection")),
 					SYSTEM_CONFIGTABLE.CONFIG_KEY.value(new JdbcNamedParameter("configKey")),
-					SYSTEM_CONFIGTABLE.CONFIG_VALUE.value(new JdbcNamedParameter("configValue"))).where(
+					SYSTEM_CONFIGTABLE.CONFIG_VALUE.value(new JdbcNamedParameter("configValue")),
+					SYSTEM_CONFIGTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
 				SYSTEM_CONFIGTABLE.CONFIG_ID.eq(new JdbcNamedParameter("configId")));
 			}
 		});
@@ -202,7 +208,8 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 				SYSTEM_CONFIGTABLE.CONFIG_MODULE.eq(new JdbcNamedParameter("configModule")),
 				SYSTEM_CONFIGTABLE.CONFIG_SECTION.eq(new JdbcNamedParameter("configSection")),
 				SYSTEM_CONFIGTABLE.CONFIG_KEY.eq(new JdbcNamedParameter("configKey")),
-				SYSTEM_CONFIGTABLE.CONFIG_VALUE.eq(new JdbcNamedParameter("configValue"))));
+				SYSTEM_CONFIGTABLE.CONFIG_VALUE.eq(new JdbcNamedParameter("configValue")),
+				SYSTEM_CONFIGTABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
 			}
 		});
 	}
