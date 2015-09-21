@@ -16,12 +16,14 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
-
 /** 
  * 模块配置表
  * 
  */
 public class SystemConfig {
+	public static int DELETE_YES = 1;
+	public static int DELETE_NO = 0;
+
 
 	/** 
 	 * 配置ID
@@ -58,6 +60,12 @@ public class SystemConfig {
 	 * 
 	 */
 	private String configValue;
+
+	/** 
+	 * 已删除
+	 * 
+	 */
+	private Integer deleted;
 
 
 	public void setConfigId(Integer configId){
@@ -106,6 +114,14 @@ public class SystemConfig {
 
 	public String getConfigValue(){
 		return configValue;
+	}
+
+	public void setDeleted(Integer deleted){
+		this. deleted = deleted;
+	}
+
+	public Integer getDeleted(){
+		return deleted;
 	}
 
 }

@@ -2,12 +2,13 @@ package org.tinygroup.sdpm.service.biz.impl;
 
 import org.tinygroup.sdpm.service.biz.inter.FaqTypeManager;
 import org.tinygroup.sdpm.service.dao.pojo.FaqType;
-
+import org.tinygroup.sdpm.service.dao.FaqTypeDao;
 import java.util.List;
 
 /**
  * Created by Administrator on 2015-09-18.
  */
+
 public class FaqTypeManagerImpl implements FaqTypeManager{
     public FaqType find(String id) {
         return null;

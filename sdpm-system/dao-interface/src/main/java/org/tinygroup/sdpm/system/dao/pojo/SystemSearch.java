@@ -23,6 +23,9 @@ import java.util.Date;
  * 
  */
 public class SystemSearch {
+	public static int DELETE_YES = 1;
+	public static int DELETE_NO = 0;
+
 
 	/** 
 	 * 搜索ID
@@ -65,6 +68,12 @@ public class SystemSearch {
 	 * 
 	 */
 	private Date searchEditedDate;
+
+	/** 
+	 * 已删除
+	 * 
+	 */
+	private Integer deleted;
 
 
 	public void setSearchId(Integer searchId){
@@ -121,6 +130,14 @@ public class SystemSearch {
 
 	public Date getSearchEditedDate(){
 		return searchEditedDate;
+	}
+
+	public void setDeleted(Integer deleted){
+		this. deleted = deleted;
+	}
+
+	public Integer getDeleted(){
+		return deleted;
 	}
 
 }

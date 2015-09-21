@@ -24,9 +24,9 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
-
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -38,7 +38,6 @@ import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.system.dao.SystemDictDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -47,6 +46,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+@Repository
 public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDao {
 
 	public SystemDict add(SystemDict systemDict) {

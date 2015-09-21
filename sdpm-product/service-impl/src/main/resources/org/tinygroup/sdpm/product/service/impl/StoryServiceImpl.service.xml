@@ -1,0 +1,34 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.product.service.impl.StoryServiceImpl" bean="storyService">
+    <service-method local-name="addStory" service-id="product_addStory" method-name="addStory" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addStoryResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+    <service-method local-name="deleteStory" service-id="product_deleteStory" method-name="deleteStory" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="storyId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteStoryResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="updateStory" service-id="product_updateStory" method-name="updateStory" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateStoryResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="findStory" service-id="product_findStory" method-name="findStory" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="storyId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+    <service-method local-name="findStoryList" service-id="product_findStoryList" method-name="findStoryList" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+  </service-component>
+</service-components>

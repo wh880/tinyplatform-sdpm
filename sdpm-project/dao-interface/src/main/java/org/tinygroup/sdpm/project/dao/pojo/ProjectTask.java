@@ -24,6 +24,8 @@ import java.util.Date;
  */
 public class ProjectTask {
 
+	public static String DELETE_YES = "1";
+	public static String DELETE_NO = "0";
 	/** 
 	 * 任务id
 	 * 

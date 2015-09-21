@@ -14,7 +14,7 @@ public interface ProjectManager {
      * @param projectId 主键
      * @return
      */
-    Project find(String projectId);
+    Project find(int projectId);
 
     /**
      * 查询所有项目
@@ -37,7 +37,7 @@ public interface ProjectManager {
      * @param project 需要更新的实体类
      * @return
      */
-    Project update(Project project);
+    Integer update(Project project);
 
     /**
      * 根据id进行软删除
@@ -45,5 +45,5 @@ public interface ProjectManager {
      * @param projectId 主键
      * @return
      */
-    Integer delete(String projectId);
+    Integer delete(int projectId);
 }

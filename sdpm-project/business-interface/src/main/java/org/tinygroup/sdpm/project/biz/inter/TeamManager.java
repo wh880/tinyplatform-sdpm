@@ -15,15 +15,7 @@ public interface TeamManager {
      * @param id 主键
      * @return
      */
-    ProjectTeam find(String id);
-
-    /**
-     * 根据项目及帐号进行查询
-     * @param projectId
-     * @param account
-     * @return
-     */
-    ProjectTeam find(String projectId, String account);
+    ProjectTeam find(int id);
 
     /**
      * 根据条件查询List
@@ -31,7 +23,7 @@ public interface TeamManager {
      * @param projectId 用于查询条件
      * @return
      */
-    List<ProjectTeam> findList(int projectId);
+    List<ProjectTeam> findListAccount(int projectId);
 
     /**
      * 新增有一个成员
@@ -47,7 +39,7 @@ public interface TeamManager {
      * @param team 需要更新的实体类
      * @return
      */
-    ProjectTeam update(ProjectTeam team);
+    Integer update(ProjectTeam team);
 
     /**
      * 根据id进行删除
@@ -55,5 +47,5 @@ public interface TeamManager {
      * @param id 逻辑id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer delete(int id);
 }

@@ -16,25 +16,25 @@ import java.util.List;
 @Transactional
 public class TaskRelationManagerImpl implements TaskRelationManager {
     @Autowired
-    private ProjectTaskrelationDao projectTaskrelationDao;
+    private ProjectTaskrelationDao taskrelationDao;
 
-    public ProjectTaskrelation find(String id) {
-        return null;
+    public ProjectTaskrelation find(int id) {
+        return taskrelationDao.getByKey(id);
     }
 
     public List<ProjectTaskrelation> findList(ProjectTaskrelation taskrelation) {
-        return null;
+        return taskrelationDao.query(taskrelation);
     }
 
     public ProjectTaskrelation add(ProjectTaskrelation taskrelation) {
-        return null;
+        return taskrelationDao.add(taskrelation);
     }
 
-    public ProjectTaskrelation update(ProjectTaskrelation taskrelation) {
-        return null;
+    public Integer update(ProjectTaskrelation taskrelation) {
+        return taskrelationDao.edit(taskrelation);
     }
 
-    public Integer delete(String id) {
-        return null;
+    public Integer delete(int id) {
+        return taskrelationDao.deleteByKey(id);
     }
 }

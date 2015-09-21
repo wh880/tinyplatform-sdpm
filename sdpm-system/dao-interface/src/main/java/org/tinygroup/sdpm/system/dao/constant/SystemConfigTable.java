@@ -63,6 +63,12 @@ public class SystemConfigTable extends Table {
 	 */
 	public final Column CONFIG_VALUE = new Column(this, "config_value");
 
+	/** 
+	 * 已删除
+	 * 
+	 */
+	public final Column DELETED = new Column(this, "deleted");
+
 
 		private SystemConfigTable() {
 			super("system_config");

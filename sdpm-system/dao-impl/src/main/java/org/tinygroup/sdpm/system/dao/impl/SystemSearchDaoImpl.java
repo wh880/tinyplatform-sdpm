@@ -24,9 +24,9 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
-
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -38,7 +38,6 @@ import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
 import org.tinygroup.sdpm.system.dao.SystemSearchDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -47,6 +46,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+@Repository
 public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSearchDao {
 
 	public SystemSearch add(SystemSearch systemSearch) {
@@ -59,7 +59,8 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 					SYSTEM_SEARCHTABLE.SEARCH_TITLE.value(t.getSearchTitle()),
 					SYSTEM_SEARCHTABLE.SEARCH_CONTENT.value(t.getSearchContent()),
 					SYSTEM_SEARCHTABLE.SEARCH_ADDEDDATE.value(t.getSearchAddedDate()),
-					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.value(t.getSearchEditedDate()));
+					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.value(t.getSearchEditedDate()),
+					SYSTEM_SEARCHTABLE.DELETED.value(t.getDeleted()));
 				return insert;
 			}
 		});
@@ -77,7 +78,8 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 					SYSTEM_SEARCHTABLE.SEARCH_TITLE.value(t.getSearchTitle()),
 					SYSTEM_SEARCHTABLE.SEARCH_CONTENT.value(t.getSearchContent()),
 					SYSTEM_SEARCHTABLE.SEARCH_ADDEDDATE.value(t.getSearchAddedDate()),
-					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.value(t.getSearchEditedDate())).where(
+					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.value(t.getSearchEditedDate()),
+					SYSTEM_SEARCHTABLE.DELETED.value(t.getDeleted())).where(
 					SYSTEM_SEARCHTABLE.SEARCH_ID.eq(t.getSearchId()));
 				return update;
 			}
@@ -130,7 +132,8 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 					SYSTEM_SEARCHTABLE.SEARCH_TITLE.eq(t.getSearchTitle()),
 					SYSTEM_SEARCHTABLE.SEARCH_CONTENT.eq(t.getSearchContent()),
 					SYSTEM_SEARCHTABLE.SEARCH_ADDEDDATE.eq(t.getSearchAddedDate()),
-					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.eq(t.getSearchEditedDate())));
+					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.eq(t.getSearchEditedDate()),
+					SYSTEM_SEARCHTABLE.DELETED.eq(t.getDeleted())));
 			}
 		});
 	}
@@ -149,7 +152,8 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 					SYSTEM_SEARCHTABLE.SEARCH_TITLE.eq(t.getSearchTitle()),
 					SYSTEM_SEARCHTABLE.SEARCH_CONTENT.eq(t.getSearchContent()),
 					SYSTEM_SEARCHTABLE.SEARCH_ADDEDDATE.eq(t.getSearchAddedDate()),
-					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.eq(t.getSearchEditedDate())));
+					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.eq(t.getSearchEditedDate()),
+					SYSTEM_SEARCHTABLE.DELETED.eq(t.getDeleted())));
 			}
 		});
 	}
@@ -167,7 +171,8 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 					SYSTEM_SEARCHTABLE.SEARCH_TITLE.value(new JdbcNamedParameter("searchTitle")),
 					SYSTEM_SEARCHTABLE.SEARCH_CONTENT.value(new JdbcNamedParameter("searchContent")),
 					SYSTEM_SEARCHTABLE.SEARCH_ADDEDDATE.value(new JdbcNamedParameter("searchAddedDate")),
-					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.value(new JdbcNamedParameter("searchEditedDate")));
+					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.value(new JdbcNamedParameter("searchEditedDate")),
+					SYSTEM_SEARCHTABLE.DELETED.value(new JdbcNamedParameter("deleted")));
 			}
 		});
 	}
@@ -189,7 +194,8 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 					SYSTEM_SEARCHTABLE.SEARCH_TITLE.value(new JdbcNamedParameter("searchTitle")),
 					SYSTEM_SEARCHTABLE.SEARCH_CONTENT.value(new JdbcNamedParameter("searchContent")),
 					SYSTEM_SEARCHTABLE.SEARCH_ADDEDDATE.value(new JdbcNamedParameter("searchAddedDate")),
-					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.value(new JdbcNamedParameter("searchEditedDate"))).where(
+					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.value(new JdbcNamedParameter("searchEditedDate")),
+					SYSTEM_SEARCHTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
 				SYSTEM_SEARCHTABLE.SEARCH_ID.eq(new JdbcNamedParameter("searchId")));
 			}
 		});
@@ -209,7 +215,8 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 				SYSTEM_SEARCHTABLE.SEARCH_TITLE.eq(new JdbcNamedParameter("searchTitle")),
 				SYSTEM_SEARCHTABLE.SEARCH_CONTENT.eq(new JdbcNamedParameter("searchContent")),
 				SYSTEM_SEARCHTABLE.SEARCH_ADDEDDATE.eq(new JdbcNamedParameter("searchAddedDate")),
-				SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.eq(new JdbcNamedParameter("searchEditedDate"))));
+				SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.eq(new JdbcNamedParameter("searchEditedDate")),
+				SYSTEM_SEARCHTABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
 			}
 		});
 	}

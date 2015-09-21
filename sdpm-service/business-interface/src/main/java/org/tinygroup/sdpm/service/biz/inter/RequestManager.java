@@ -14,7 +14,7 @@ public interface RequestManager {
      * @param id 主键
      * @return
      */
-    Request find(String id);
+    Request find(Integer id);
 
     /**
      * 根据产品模块id查找请求
@@ -54,7 +54,7 @@ public interface RequestManager {
      * @param id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer delete(Integer id);
 
     /**
      * 根据id进行批量软删除请求
@@ -62,6 +62,6 @@ public interface RequestManager {
      * @param id 主键
      * @return
      */
-    Integer deleteBatch(Integer id);
+    Integer deleteBatch(Integer... id);
 }
 

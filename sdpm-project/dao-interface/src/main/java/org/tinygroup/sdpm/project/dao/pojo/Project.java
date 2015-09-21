@@ -24,6 +24,9 @@ import java.util.Date;
  */
 public class Project {
 
+	public static String DELETE_YES = "1";
+	public static String DELETE_NO = "0";
+
 	/** 
 	 * 项目id
 	 * 
@@ -205,237 +208,236 @@ public class Project {
 	 */
 	private String projectDeleted;
 
+	public Integer getProjectId() {
+		return projectId;
+	}
 
 	public void setProjectId(Integer projectId){
 		this. projectId = projectId;
 	}
 
-	public Integer getProjectId(){
-		return projectId;
+	public String getProjectIsCat() {
+		return projectIsCat;
 	}
 
 	public void setProjectIsCat(String projectIsCat){
 		this. projectIsCat = projectIsCat;
 	}
 
-	public String getProjectIsCat(){
-		return projectIsCat;
+	public Integer getProjectCatId() {
+		return projectCatId;
 	}
 
 	public void setProjectCatId(Integer projectCatId){
 		this. projectCatId = projectCatId;
 	}
 
-	public Integer getProjectCatId(){
-		return projectCatId;
+	public String getProjectType() {
+		return projectType;
 	}
 
 	public void setProjectType(String projectType){
 		this. projectType = projectType;
 	}
 
-	public String getProjectType(){
-		return projectType;
+	public String getProjectName() {
+		return projectName;
 	}
 
 	public void setProjectName(String projectName){
 		this. projectName = projectName;
 	}
 
-	public String getProjectName(){
-		return projectName;
+	public String getProjectCode() {
+		return projectCode;
 	}
 
 	public void setProjectCode(String projectCode){
 		this. projectCode = projectCode;
 	}
 
-	public String getProjectCode(){
-		return projectCode;
+	public Date getProjectBegin() {
+		return projectBegin;
 	}
 
 	public void setProjectBegin(Date projectBegin){
 		this. projectBegin = projectBegin;
 	}
 
-	public Date getProjectBegin(){
-		return projectBegin;
+	public Date getProjectEnd() {
+		return projectEnd;
 	}
 
 	public void setProjectEnd(Date projectEnd){
 		this. projectEnd = projectEnd;
 	}
 
-	public Date getProjectEnd(){
-		return projectEnd;
+	public Integer getProjectDays() {
+		return projectDays;
 	}
 
 	public void setProjectDays(Integer projectDays){
 		this. projectDays = projectDays;
 	}
 
-	public Integer getProjectDays(){
-		return projectDays;
+	public String getProjectStatus() {
+		return projectStatus;
 	}
 
 	public void setProjectStatus(String projectStatus){
 		this. projectStatus = projectStatus;
 	}
 
-	public String getProjectStatus(){
-		return projectStatus;
+	public String getProjectStatge() {
+		return projectStatge;
 	}
 
 	public void setProjectStatge(String projectStatge){
 		this. projectStatge = projectStatge;
 	}
 
-	public String getProjectStatge(){
-		return projectStatge;
+	public String getProjectPri() {
+		return projectPri;
 	}
 
 	public void setProjectPri(String projectPri){
 		this. projectPri = projectPri;
 	}
 
-	public String getProjectPri(){
-		return projectPri;
+	public String getProjectDesc() {
+		return projectDesc;
 	}
 
 	public void setProjectDesc(String projectDesc){
 		this. projectDesc = projectDesc;
 	}
 
-	public String getProjectDesc(){
-		return projectDesc;
+	public String getProjectOpenedBy() {
+		return projectOpenedBy;
 	}
 
 	public void setProjectOpenedBy(String projectOpenedBy){
 		this. projectOpenedBy = projectOpenedBy;
 	}
 
-	public String getProjectOpenedBy(){
-		return projectOpenedBy;
+	public Date getProjectOpenedDate() {
+		return projectOpenedDate;
 	}
 
 	public void setProjectOpenedDate(Date projectOpenedDate){
 		this. projectOpenedDate = projectOpenedDate;
 	}
 
-	public Date getProjectOpenedDate(){
-		return projectOpenedDate;
+	public String getProjectOpenedVersion() {
+		return projectOpenedVersion;
 	}
 
 	public void setProjectOpenedVersion(String projectOpenedVersion){
 		this. projectOpenedVersion = projectOpenedVersion;
 	}
 
-	public String getProjectOpenedVersion(){
-		return projectOpenedVersion;
+	public String getProjectCloseBy() {
+		return projectCloseBy;
 	}
 
 	public void setProjectCloseBy(String projectCloseBy){
 		this. projectCloseBy = projectCloseBy;
 	}
 
-	public String getProjectCloseBy(){
-		return projectCloseBy;
+	public Date getProjectCloseDate() {
+		return projectCloseDate;
 	}
 
 	public void setProjectCloseDate(Date projectCloseDate){
 		this. projectCloseDate = projectCloseDate;
 	}
 
-	public Date getProjectCloseDate(){
-		return projectCloseDate;
+	public String getProjectCanceledBy() {
+		return projectCanceledBy;
 	}
 
 	public void setProjectCanceledBy(String projectCanceledBy){
 		this. projectCanceledBy = projectCanceledBy;
 	}
 
-	public String getProjectCanceledBy(){
-		return projectCanceledBy;
+	public Date getProjectCanceledDate() {
+		return projectCanceledDate;
 	}
 
 	public void setProjectCanceledDate(Date projectCanceledDate){
 		this. projectCanceledDate = projectCanceledDate;
 	}
 
-	public Date getProjectCanceledDate(){
-		return projectCanceledDate;
+	public String getProjectPO() {
+		return projectPO;
 	}
 
 	public void setProjectPO(String projectPO){
 		this. projectPO = projectPO;
 	}
 
-	public String getProjectPO(){
-		return projectPO;
+	public String getProjectPM() {
+		return projectPM;
 	}
 
 	public void setProjectPM(String projectPM){
 		this. projectPM = projectPM;
 	}
 
-	public String getProjectPM(){
-		return projectPM;
+	public String getProjectQD() {
+		return projectQD;
 	}
 
 	public void setProjectQD(String projectQD){
 		this. projectQD = projectQD;
 	}
 
-	public String getProjectQD(){
-		return projectQD;
+	public String getProjectRD() {
+		return projectRD;
 	}
 
 	public void setProjectRD(String projectRD){
 		this. projectRD = projectRD;
 	}
 
-	public String getProjectRD(){
-		return projectRD;
+	public String getProjectTeam() {
+		return projectTeam;
 	}
 
 	public void setProjectTeam(String projectTeam){
 		this. projectTeam = projectTeam;
 	}
 
-	public String getProjectTeam(){
-		return projectTeam;
+	public String getProjectAcl() {
+		return projectAcl;
 	}
 
 	public void setProjectAcl(String projectAcl){
 		this. projectAcl = projectAcl;
 	}
 
-	public String getProjectAcl(){
-		return projectAcl;
+	public String getProjectWhiteList() {
+		return projectWhiteList;
 	}
 
 	public void setProjectWhiteList(String projectWhiteList){
 		this. projectWhiteList = projectWhiteList;
 	}
 
-	public String getProjectWhiteList(){
-		return projectWhiteList;
+	public Integer getProjectOrder() {
+		return projectOrder;
 	}
 
 	public void setProjectOrder(Integer projectOrder){
 		this. projectOrder = projectOrder;
 	}
 
-	public Integer getProjectOrder(){
-		return projectOrder;
+	public String getProjectDeleted() {
+		return projectDeleted;
 	}
 
 	public void setProjectDeleted(String projectDeleted){
 		this. projectDeleted = projectDeleted;
-	}
-
-	public String getProjectDeleted(){
-		return projectDeleted;
 	}
 
 }

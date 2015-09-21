@@ -18,27 +18,26 @@ public class BuildManagerImpl implements BuildManager {
     @Autowired
     private ProjectBuildDao projectBuildDao;
 
-    public ProcessBuilder find(String id) {
+    public ProjectBuild find(String id) {
         return null;
     }
 
-    public List<ProcessBuilder> findList(int projectId) {
-        return null;
-    }
-
-    public List<ProcessBuilder> findList(ProcessBuilder build) {
-        return null;
+    public List<ProjectBuild> findList(ProjectBuild build) {
+        return projectBuildDao.query(build);
     }
 
     public ProjectBuild add(ProjectBuild build) {
-        return null;
+        return projectBuildDao.add(build);
     }
 
-    public ProjectBuild update(ProjectBuild build) {
-        return null;
+    public int update(ProjectBuild build) {
+        return projectBuildDao.edit(build);
     }
 
-    public Integer delete(String id) {
-        return null;
+    public Integer delete(int id) {
+        ProjectBuild build = new ProjectBuild();
+        build.setBuildId(id);
+        build.setBuildDeleted(build.DELETE_YES);
+        return projectBuildDao.edit(build);
     }
 }

@@ -16,29 +16,25 @@ import java.util.List;
 @Transactional
 public class BurnManagerImpl implements BurnManager {
     @Autowired
-    private ProjectBurnDao projectBurnDao;
+    private ProjectBurnDao burnDao;
 
-    public ProjectBurn find(String id) {
-        return null;
-    }
-
-    public List<ProjectBurn> findList(int projectId) {
-        return null;
+    public ProjectBurn find(int id) {
+        return burnDao.getByKey(id);
     }
 
     public List<ProjectBurn> findList(ProjectBurn burn) {
-        return null;
+        return burnDao.query(burn);
     }
 
     public ProjectBurn add(ProjectBurn burn) {
-        return null;
+        return burnDao.add(burn);
     }
 
-    public ProjectBurn update(ProjectBurn burn) {
-        return null;
+    public int update(ProjectBurn burn) {
+        return burnDao.edit(burn);
     }
 
-    public Integer delete(String id) {
-        return null;
+    public Integer delete(int id) {
+        return burnDao.deleteByKey(id);
     }
 }

@@ -17,7 +17,7 @@ public interface SearchService {
 	 * @param config
 	 * @return
 	 */
-	int deleteSearch(SystemSearch search);
+	int deleteSearch(Integer searchId);
 	
 	/**
 	 * 修改

@@ -15,7 +15,7 @@ public interface TaskRelationManager {
      * @param id 主键
      * @return
      */
-    ProjectTaskrelation find(String id);
+    ProjectTaskrelation find(int id);
 
     /**
      * 根据条件查询List
@@ -39,7 +39,7 @@ public interface TaskRelationManager {
      * @param taskrelation 需要更新的实体类
      * @return
      */
-    ProjectTaskrelation update(ProjectTaskrelation taskrelation);
+    Integer update(ProjectTaskrelation taskrelation);
 
     /**
      * 根据id进行软删除用户
@@ -47,5 +47,5 @@ public interface TaskRelationManager {
      * @param id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer delete(int id);
 }

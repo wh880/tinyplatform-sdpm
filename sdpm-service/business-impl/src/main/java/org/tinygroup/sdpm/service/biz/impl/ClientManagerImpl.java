@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.ClientManager;
+import org.tinygroup.sdpm.service.dao.ClientDao;
 import org.tinygroup.sdpm.service.dao.pojo.Client;
 
 import java.util.List;
@@ -15,25 +16,27 @@ import java.util.List;
 @Transactional
 public class ClientManagerImpl implements ClientManager{
     @Autowired
-    private Client client;
-    public Client find(Client id) {
-        return null;
+    private ClientDao clientDao;
+    public Client find(Integer id) { return clientDao.getByKey(id);
     }
 
     public List<Client> getList(Client client) {
-        return null;
+        return clientDao.query(client);
     }
 
     public Client add(Client client) {
-        return null;
+        return clientDao.add(client);
     }
 
     public Client update(Client client) {
-        return null;
+        return clientDao.add(client);
     }
 
-    public Integer delete(String id) {
-        return null;
+    public Integer delete(Integer id) {
+        Client client = new Client();
+        client.setClientId(id);
+        client.setDeleted(id);
+        return clientDao.edit(client);
     }
 
     public Integer deleteBatch(Integer id) {

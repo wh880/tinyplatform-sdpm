@@ -18,35 +18,27 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
     @Autowired
     private ProjectProductDao projectProductDao;
 
-    public ProjectProduct find(String id) {
-        return null;
+    public List<ProjectProduct> findProductList(int projectId) {
+        ProjectProduct projectProduct = new ProjectProduct();
+        projectProduct.setProjectId(projectId);
+        return projectProductDao.query(projectProduct);
     }
 
-    public List<ProjectProduct> findList(ProjectProduct projectproduct) {
-        return null;
+    public List<ProjectProduct> findProjcetList(int productId) {
+        ProjectProduct projectProduct = new ProjectProduct();
+        projectProduct.setProductId(productId);
+        return projectProductDao.query(projectProduct);
     }
 
-    public ProjectProduct add(ProjectProduct projectproduct) {
-        return null;
+    public ProjectProduct add(ProjectProduct projectProduct) {
+        return projectProductDao.add(projectProduct);
     }
 
-    public List<Integer> findProductList(int projectId) {
-        return null;
+    public Integer update(ProjectProduct projectproduct) {
+        return projectProductDao.edit(projectproduct);
     }
 
-    public List<Integer> findProjcetList(int productId) {
-        return null;
-    }
-
-    public ProjectProduct add(Integer projectId, int productId) {
-        return null;
-    }
-
-    public ProjectProduct update(ProjectProduct projectproduct) {
-        return null;
-    }
-
-    public Integer delete(String id) {
-        return null;
+    public Integer delete(int id) {
+        return projectProductDao.deleteByKey(id);
     }
 }
