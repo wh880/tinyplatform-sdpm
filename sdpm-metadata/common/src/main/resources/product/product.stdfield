@@ -46,20 +46,7 @@
   <standard-field id="bf293158656146ceb9d5ad2ff8a35d84" name="release_stories" title="已完成需求" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="5bc3d632bf8444de9d1ac8a851ddbdd0" name="release_bugs" title="已解决Bug" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="fa9c452cfb5944288f43e0ca22d78a34" name="release_desc" title="描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
-  <standard-field id="ad2df857db7641fd8247d8a24baa69f8" name="productLine_id" title="产品线ID" business-type-id="a6beade23ed9454f8b29e4b0be73e18e">
-    <description></description>
-  </standard-field>
-  <standard-field id="fcff1578dca64cfc9320e08689eb970d" name="productLine_root" title="产品线根节点" business-type-id="a6beade23ed9454f8b29e4b0be73e18e"/>
-  <standard-field id="c2d02b77d3804d64b41de5c45045e1db" name="productLine_parent" title="产品线父节点" business-type-id="a6beade23ed9454f8b29e4b0be73e18e"/>
-  <standard-field id="c3750e6c13b74e75a173d9c728439dc8" name="productLine_name" title="产品线名称" business-type-id="a30696c1e44441ecad77a832afd3731d"/>
-  <standard-field id="c1035c0e396040b19780a0baf1091d14" name="productLine_code" title="产品线编号" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
-  <standard-field id="bd69a13b7e85463c9ea1e7a480860c45" name="productLine_spec" title="产品线描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
-  <standard-field id="743ea2aceba546a4a517f8fc7961c652" name="productLine_status" title="产品线状态" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="b23469decc5745288b84d5c4a82ece21" name="productLine_whiteList" title="产品线白名单" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
-  <standard-field id="5a4261249df645a5aa5afa7cf79cc9df" name="productLine_createdBy" title="产品线创建者" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="ce868ce3764c40e68e9bd148b492db19" name="productLine_createdDate" title="产品线创建日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="1c7c14de7eb5457a8a6fe6181fc489b4" name="productLine_order" title="产品线序号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
-  <standard-field id="2db31fc4492c400bba36a758c0df2611" name="story_id" title="需求ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
+   <standard-field id="2db31fc4492c400bba36a758c0df2611" name="story_id" title="需求ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
     <description></description>
   </standard-field>
   <standard-field id="8296a6e150d147c1a13a8dae13529ca9" name="story_parentId" title="父需求ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
@@ -104,20 +91,4 @@
   <standard-field id="e61eb9908855427cb1d6b4a9a2ab3216" name="config_id" title="配置ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
     <description></description>
   </standard-field>
-  <standard-field id="d0ae32e1f34c4573b8298bdcad89c49f" name="config_owner" title="配置创建人" business-type-id="095e594e1550424b9643c7e2279e85be" default=""/>
-  <standard-field id="3bdd271084f240c7a4c8a7a323e24f44" name="config_section" title="配置部分" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="08616f2108aa4d339c7cb43f44c961fd" name="config_module" title="配置模块" business-type-id="095e594e1550424b9643c7e2279e85be" default=""/>
-  <standard-field id="82d6405620c54f89975ea4b12a4688ba" name="config_key" title="配置的关键词" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="04f73ab7d089441daa66c55dbcf19b7a" name="config_value" title="配置的值" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
-  <standard-field id="20a7f050dd5f4726828fd67445d1378f" name="search_id" title="搜索ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
-  <standard-field id="c512358f477c406ca15dc07ef5c1c4a8" name="search_objectType" title="搜索对象类型" business-type-id="095e594e1550424b9643c7e2279e85be" default=""/>
-  <standard-field id="5c5229c53bad4cf3afbbeccaf348bb0a" name="search_objectID" title="搜索对象ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
-  <standard-field id="22819ace1ac644a19e15bf14034a3b06" name="search_title" title="搜索名称&#x9;" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
-  <standard-field id="9ea372d0291e48ad92b0ccc832485b65" name="search_content" title="搜索内容" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
-  <standard-field id="42c7e8f67f1c4dfd9471a62f6158cef0" name="search_addedDate" title="搜索添加日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="048d96b083e74cc1a334e0f33f2c0020" name="search_editedDate" title="搜索编辑日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="db6bd96455a544c8b827b17b531f7cbc" name="dict_id" title="字典项ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
-  <standard-field id="45e660e7d07b46aca87f8e2c74d5decd" name="dict_key" title="字典key值" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="e8aa6f77988e4346bbafa0cfcb177836" name="dict_value" title="字典value值" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="f5c70ee6582347dea45bd6401b4f89b2" name="dict_sort" title="字典项序号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
-</standard-fields>
+  </standard-fields>
