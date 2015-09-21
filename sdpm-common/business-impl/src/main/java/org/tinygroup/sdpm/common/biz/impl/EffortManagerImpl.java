@@ -14,7 +14,7 @@ public class EffortManagerImpl implements EffortManager {
 		return null;
 	}
 
-	public Effort updata(Effort effort) {
+	public Integer updata(Effort effort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
