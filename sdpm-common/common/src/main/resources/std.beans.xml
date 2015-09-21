@@ -4,4 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="stdProcessor" class="org.tinygroup.sdpm.common.util.std.processor.StdFieldProcessor"></bean>
+
+
+    <bean id="obtainProcessor" class="org.tinygroup.sdpm.common.log.obtain.ObtainFileProcessor"></bean>
+
+    <bean id="obtainHandleImpl" class="org.tinygroup.sdpm.common.log.obtain.impl.ObtainHandleImpl"></bean>
 </beans>

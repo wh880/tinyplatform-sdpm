@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.common.filter;
 
 import org.tinygroup.beancontainer.BeanContainer;
 import org.tinygroup.beancontainer.BeanContainerFactory;
+import org.tinygroup.sdpm.common.log.LogUtil;
 import org.tinygroup.weblayer.AbstractTinyFilter;
 import org.tinygroup.weblayer.WebContext;
 
@@ -21,6 +22,7 @@ public class CommonFilter extends AbstractTinyFilter {
     public void preProcess(WebContext webContext) throws ServletException, IOException {
         Object menuManager = springUtil.getBean("menuManager");
         webContext.put("menuManager", menuManager);
+        LogUtil.setSession(webContext.getRequest().getSession());
     }
 
     public void postProcess(WebContext webContext) throws ServletException, IOException {
