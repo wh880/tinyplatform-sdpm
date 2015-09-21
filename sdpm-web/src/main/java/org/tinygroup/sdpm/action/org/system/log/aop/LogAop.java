@@ -22,7 +22,7 @@ public class LogAop {
     private final static Log log = LogFactory.getLog(LogAop.class);
 
     //配置切入点,该方法无方法体,主要为方便同类中其他方法使用此处配置的切入点
-    @Pointcut("execution(* spring.test.*Method.*(..))")
+    @Pointcut("@annotation(org.tinygroup.sdpm.common.log.LogMethod)")
     public void aspect(){	}
 
     @Around("aspect()")

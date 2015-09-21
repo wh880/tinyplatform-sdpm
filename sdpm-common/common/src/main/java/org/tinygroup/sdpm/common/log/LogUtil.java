@@ -13,12 +13,11 @@ import java.util.Map;
  */
 public class LogUtil {
     private static ThreadLocal<HttpSession> session = new ThreadLocal<HttpSession>();
+    private static Map<String,Obtain> obtainDict;
 
     public static void setSession(HttpSession httpSession){
         session.set(httpSession);
     }
-
-    private static Map<String,Obtain> obtainDict;
 
     public static HttpSession getSession(){
         return session.get();
