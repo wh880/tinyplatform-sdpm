@@ -22,15 +22,15 @@
     #end
 #end
 ##operationbar end
-#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
-    #@toggleLeft({"class":"aclass"})
-        #@settoggleLeftTitle()产品文档库#end
-        #@settoggleLeftBody("treeLeftbox")
-            #include("/project/task/moduleTree.page")
-        #end
-    #end
+###@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+##    #@toggleLeft({"class":"aclass"})
+##        #@settoggleLeftTitle()产品文档库#end
+##        #@settoggleLeftBody("treeLeftbox")
+##            #include("/project/task/moduleTree.page")
+##        #end
+##    #end
 
-    #@toggleRight()
+##    #@toggleRight()
     ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
         #include("/project/task/batchAddData.page")
 
@@ -52,6 +52,6 @@
                 #@buttonCancel()关闭#end
             #end
         #end
-    #end
+##    #end
 
-#end
+###end
