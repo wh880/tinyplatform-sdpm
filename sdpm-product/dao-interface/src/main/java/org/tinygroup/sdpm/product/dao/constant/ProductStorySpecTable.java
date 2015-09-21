@@ -64,8 +64,8 @@ public class ProductStorySpecTable extends Table {
 	public final Column STORY_VERIFICATION = new Column(this, "story_verification");
 
 
-		private ProductStorySpecTable() {
-			super("product_storySpec");
-		}
+	private ProductStorySpecTable() {
+		super("product_storySpec");
+	}
 
 }

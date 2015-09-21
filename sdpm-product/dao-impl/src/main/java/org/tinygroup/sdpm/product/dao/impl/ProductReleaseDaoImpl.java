@@ -24,9 +24,11 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -35,9 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -46,7 +51,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
-@Repository
 public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductReleaseDao {
 
 	public ProductRelease add(ProductRelease productRelease) {
@@ -119,7 +123,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 		});
 	}
 
-	public List<ProductRelease> query(ProductRelease productRelease) {
+	public List<ProductRelease> query(ProductRelease productRelease ,final OrderBy... orderBies) {
 		if(productRelease==null){
 			productRelease=new ProductRelease();
 		}
@@ -127,7 +131,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(ProductRelease t) {
-				return selectFrom(PRODUCT_RELEASETABLE).where(
+				Select select = selectFrom(PRODUCT_RELEASETABLE).where(
 				and(
 					PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t.getProductId()),
 					PRODUCT_RELEASETABLE.BUILD_ID.eq(t.getBuildId()),
@@ -137,18 +141,19 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 					PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(t.getReleaseBugs()),
 					PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t.getReleaseDesc()),
 					PRODUCT_RELEASETABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<ProductRelease> queryPager(int start,int limit ,ProductRelease productRelease) {
+	public Pager<ProductRelease> queryPager(int start,int limit ,ProductRelease productRelease ,final OrderBy... orderBies) {
 		if(productRelease==null){
 			productRelease=new ProductRelease();
 		}
 		return getDslTemplate().queryPager(start, limit, productRelease, false, new SelectGenerateCallback<ProductRelease>() {
 
 			public Select generate(ProductRelease t) {
-				return MysqlSelect.selectFrom(PRODUCT_RELEASETABLE).where(
+				Select select = MysqlSelect.selectFrom(PRODUCT_RELEASETABLE).where(
 				and(
 					PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t.getProductId()),
 					PRODUCT_RELEASETABLE.BUILD_ID.eq(t.getBuildId()),
@@ -158,6 +163,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 					PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(t.getReleaseBugs()),
 					PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t.getReleaseDesc()),
 					PRODUCT_RELEASETABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -228,4 +234,17 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

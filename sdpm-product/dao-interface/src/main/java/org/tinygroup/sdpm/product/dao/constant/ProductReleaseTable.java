@@ -82,8 +82,8 @@ public class ProductReleaseTable extends Table {
 	public final Column DELETED = new Column(this, "deleted");
 
 
-		private ProductReleaseTable() {
-			super("product_release");
-		}
+	private ProductReleaseTable() {
+		super("product_release");
+	}
 
 }
