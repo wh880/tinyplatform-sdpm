@@ -1,23 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>sdpm</artifactId>
-    <groupId>org.tinygroup</groupId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
+        <artifactId>sdpm</artifactId>
+        <groupId>org.tinygroup</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
     <groupId>org.tinygroup</groupId>
     <artifactId>sdpm-metadata</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>sdpm-metadata develop</name>
     <url>http://maven.apache.org</url>
+    <dependencies>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.gensql</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.databasechange</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.tinysqldsl</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.gendslcode</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.tinysqldsl</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.jdbctemplatedslsession</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.databasechange</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.0.5</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
-                <!-- NOTE: We don't need a groupId specification because the group is
-                     org.apache.maven.plugins ...which is assumed by default.
-                 -->
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
@@ -190,7 +243,4 @@
             </plugins>
         </pluginManagement>
     </build>
-    <modules>
-        <module>common</module>
-    </modules>
 </project>
