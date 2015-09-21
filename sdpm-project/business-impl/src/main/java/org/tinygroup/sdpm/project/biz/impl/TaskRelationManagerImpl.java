@@ -18,8 +18,8 @@ public class TaskRelationManagerImpl implements TaskRelationManager {
     @Autowired
     private ProjectTaskrelationDao projectTaskrelationDao;
 
-    public ProjectTaskrelation find(String id) {
-        return null;
+    public ProjectTaskrelation find(int id) {
+        return projectTaskrelationDao.getByKey(id);
     }
 
     public List<ProjectTaskrelation> findList(ProjectTaskrelation taskrelation) {

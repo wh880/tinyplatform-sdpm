@@ -24,6 +24,9 @@ import java.util.Date;
  */
 public class ProjectBuild {
 
+	public static String DELETE_YES = "1";
+	public static String DELETE_NO = "0";
+
 	/** 
 	 * 版本id
 	 * 
