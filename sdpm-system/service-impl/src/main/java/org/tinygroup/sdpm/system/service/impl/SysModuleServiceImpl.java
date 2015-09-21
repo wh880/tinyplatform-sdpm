@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.SysModuleManager;
 import org.tinygroup.sdpm.system.dao.pojo.SysModule;
 import org.tinygroup.sdpm.system.service.inter.SysModuleService;
-@Component("sysModuleService")
+@Component()
 public class SysModuleServiceImpl implements SysModuleService {
 	@Autowired
     private SysModuleManager sysModuleManager;

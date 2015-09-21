@@ -8,7 +8,7 @@ import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 
-@Component("productService")
+@Component()
 public class ProductServiceImpl implements ProductService {
 	
 	@Autowired

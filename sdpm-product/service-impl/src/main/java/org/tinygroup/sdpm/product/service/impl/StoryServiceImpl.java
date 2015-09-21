@@ -8,7 +8,7 @@ import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
 
-@Component("storyService")
+@Component()
 public class StoryServiceImpl implements StoryService {
 	
 	@Autowired

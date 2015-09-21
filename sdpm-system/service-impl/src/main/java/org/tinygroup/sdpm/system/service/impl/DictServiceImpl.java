@@ -8,7 +8,7 @@ import org.tinygroup.sdpm.system.biz.inter.DictManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.system.service.inter.DictService;
 
-@Component("dictService")
+@Component()
 public class DictServiceImpl implements DictService {
 	
 	@Autowired

@@ -8,7 +8,7 @@ import org.tinygroup.sdpm.system.biz.inter.SearchManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
 import org.tinygroup.sdpm.system.service.inter.SearchService;
 
-@Component("searchService")
+@Component()
 public class SearchServiceImpl implements SearchService {
 	
 	@Autowired
