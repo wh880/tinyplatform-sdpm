@@ -14,20 +14,29 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.document.dao.impl;
+package org.tinygroup.sdpm.docment.dao.impl;
 
-import static org.tinygroup.sdpm.document.constant.DocTable.DOCTABLE;
-import static org.tinygroup.tinysqldsl.Delete.delete;
-import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.selectFrom;
-import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.sdpm.docment.constant.DocTable.*;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.Select.*;
+import static org.tinygroup.tinysqldsl.Insert.*;
+import static org.tinygroup.tinysqldsl.Delete.*;
+import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.List;
 
+import org.tinygroup.sdpm.docment.dao.inter.DocDao;
+import org.tinygroup.sdpm.docment.pojo.Doc;
+import org.tinygroup.tinysqldsl.Delete;
+import org.tinygroup.tinysqldsl.Insert;
+import org.tinygroup.tinysqldsl.Select;
+import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -35,16 +44,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.document.dao.inter.DocDao;
-import org.tinygroup.sdpm.document.pojo.Doc;
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 
 public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 
@@ -63,6 +62,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_TYPE.value(t.getDocType()),
 					DOCTABLE.DOC_CONTENT.value(t.getDocContent()),
 					DOCTABLE.DOC_URL.value(t.getDocUrl()),
+					DOCTABLE.ATTACH_URL.value(t.getAttachUrl()),
 					DOCTABLE.DOC_VIEWS.value(t.getDocViews()),
 					DOCTABLE.DOC_ADDEDBY.value(t.getDocAddedBy()),
 					DOCTABLE.DOC_ADDEDDATE.value(t.getDocAddedDate()),
@@ -91,6 +91,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_TYPE.value(t.getDocType()),
 					DOCTABLE.DOC_CONTENT.value(t.getDocContent()),
 					DOCTABLE.DOC_URL.value(t.getDocUrl()),
+					DOCTABLE.ATTACH_URL.value(t.getAttachUrl()),
 					DOCTABLE.DOC_VIEWS.value(t.getDocViews()),
 					DOCTABLE.DOC_ADDEDBY.value(t.getDocAddedBy()),
 					DOCTABLE.DOC_ADDEDDATE.value(t.getDocAddedDate()),
@@ -103,7 +104,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 		});
 	}
 
-	public int deleteByKey(BigInteger pk){
+	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
 		}
@@ -114,7 +115,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 		});
 	}
 
-	public int deleteByKeys(BigInteger... pks) {
+	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
 		}
@@ -125,7 +126,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 		},pks);
 	}
 
-	public Doc getByKey(BigInteger pk) {
+	public Doc getByKey(Integer pk) {
 		return getDslTemplate().getByKey(pk, Doc.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
@@ -154,6 +155,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_TYPE.eq(t.getDocType()),
 					DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
 					DOCTABLE.DOC_URL.eq(t.getDocUrl()),
+					DOCTABLE.ATTACH_URL.eq(t.getAttachUrl()),
 					DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
 					DOCTABLE.DOC_ADDEDBY.eq(t.getDocAddedBy()),
 					DOCTABLE.DOC_ADDEDDATE.eq(t.getDocAddedDate()),
@@ -183,6 +185,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_TYPE.eq(t.getDocType()),
 					DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
 					DOCTABLE.DOC_URL.eq(t.getDocUrl()),
+					DOCTABLE.ATTACH_URL.eq(t.getAttachUrl()),
 					DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
 					DOCTABLE.DOC_ADDEDBY.eq(t.getDocAddedBy()),
 					DOCTABLE.DOC_ADDEDDATE.eq(t.getDocAddedDate()),
@@ -211,6 +214,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_TYPE.value(new JdbcNamedParameter("docType")),
 					DOCTABLE.DOC_CONTENT.value(new JdbcNamedParameter("docContent")),
 					DOCTABLE.DOC_URL.value(new JdbcNamedParameter("docUrl")),
+					DOCTABLE.ATTACH_URL.value(new JdbcNamedParameter("attachUrl")),
 					DOCTABLE.DOC_VIEWS.value(new JdbcNamedParameter("docViews")),
 					DOCTABLE.DOC_ADDEDBY.value(new JdbcNamedParameter("docAddedBy")),
 					DOCTABLE.DOC_ADDEDDATE.value(new JdbcNamedParameter("docAddedDate")),
@@ -243,6 +247,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_TYPE.value(new JdbcNamedParameter("docType")),
 					DOCTABLE.DOC_CONTENT.value(new JdbcNamedParameter("docContent")),
 					DOCTABLE.DOC_URL.value(new JdbcNamedParameter("docUrl")),
+					DOCTABLE.ATTACH_URL.value(new JdbcNamedParameter("attachUrl")),
 					DOCTABLE.DOC_VIEWS.value(new JdbcNamedParameter("docViews")),
 					DOCTABLE.DOC_ADDEDBY.value(new JdbcNamedParameter("docAddedBy")),
 					DOCTABLE.DOC_ADDEDDATE.value(new JdbcNamedParameter("docAddedDate")),
@@ -273,6 +278,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 				DOCTABLE.DOC_TYPE.eq(new JdbcNamedParameter("docType")),
 				DOCTABLE.DOC_CONTENT.eq(new JdbcNamedParameter("docContent")),
 				DOCTABLE.DOC_URL.eq(new JdbcNamedParameter("docUrl")),
+				DOCTABLE.ATTACH_URL.eq(new JdbcNamedParameter("attachUrl")),
 				DOCTABLE.DOC_VIEWS.eq(new JdbcNamedParameter("docViews")),
 				DOCTABLE.DOC_ADDEDBY.eq(new JdbcNamedParameter("docAddedBy")),
 				DOCTABLE.DOC_ADDEDDATE.eq(new JdbcNamedParameter("docAddedDate")),

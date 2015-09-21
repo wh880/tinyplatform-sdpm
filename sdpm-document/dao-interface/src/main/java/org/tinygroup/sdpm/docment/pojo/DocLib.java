@@ -14,25 +14,50 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.document.pojo;
+package org.tinygroup.sdpm.docment.pojo;
 
 import java.util.Date;
 
+/** 
+ * 文档库表
+ * 
+ * 文档相关的
+ */
 public class DocLib {
 
-	/** 文档库ID */
+	/** 
+	 * 文档库ID
+	 * 
+	 * 文档库ID
+	 */
 	private Integer docLibid;
 
-	/** 文档库名字 */
+	/** 
+	 * 文档库名字
+	 * 
+	 * 文档库名字
+	 */
 	private String docLibname;
 
-	/** 删除文档库标志 */
+	/** 
+	 * 删除文档库标志
+	 * 
+	 * 已删除，并不真正删除数据，只是相应比标志位变参而已。
+	 */
 	private String docLibDeleted;
 
-	/** 文档库添加时间 */
+	/** 
+	 * 文档库添加时间
+	 * 
+	 * 文档库添加时间
+	 */
 	private Date docLibAddtime;
 
-	/** 文档库名称更新时间 */
+	/** 
+	 * 文档库名称更新时间
+	 * 
+	 * 文档库名称更新时间
+	 */
 	private Date docLibUpdtime;
 
 

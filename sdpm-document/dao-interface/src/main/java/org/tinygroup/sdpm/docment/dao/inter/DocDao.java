@@ -14,13 +14,11 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.document.dao.inter;
-
-import java.math.BigInteger;
+package org.tinygroup.sdpm.docment.dao.inter;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-import org.tinygroup.sdpm.document.pojo.Doc;
+import org.tinygroup.sdpm.docment.pojo.Doc;
 
-public interface DocDao extends BaseDao<Doc,BigInteger> {
+public interface DocDao extends BaseDao<Doc,Integer> {
 
 }

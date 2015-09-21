@@ -14,70 +14,148 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.document.pojo;
+package org.tinygroup.sdpm.docment.pojo;
 
-import java.math.BigInteger;
 import java.util.Date;
 
+/** 
+ * 文档表
+ * 
+ */
 public class Doc {
 
-	/** 文档ID */
-	private BigInteger docId;
+	/** 
+	 * 文档ID
+	 * 
+	 * 文档ID，主键，唯一标示
+	 */
+	private Integer docId;
 
-	/** 所属产品 */
+	/** 
+	 * 所属产品
+	 * 
+	 * 所属产品
+	 */
 	private Integer docProduct;
 
-	/** 所属项目 */
+	/** 
+	 * 所属项目
+	 * 
+	 * 所属项目
+	 */
 	private Integer docProject;
 
-	/** 所属文档库 */
+	/** 
+	 * 所属文档库
+	 * 
+	 * 所属文档库
+	 */
 	private String docLib;
 
-	/** 所属分类 */
+	/** 
+	 * 所属分类
+	 * 
+	 * 所属分类
+	 */
 	private String docModule;
 
-	/** 文档标题 */
+	/** 
+	 * 文档标题
+	 * 
+	 * 文档标题
+	 */
 	private String docTitle;
 
-	/** 摘要 */
+	/** 
+	 * 摘要
+	 * 
+	 * 摘要
+	 */
 	private String docDigest;
 
-	/** 关键字 */
+	/** 
+	 * 关键字
+	 * 
+	 * 关键字
+	 */
 	private String docKeywords;
 
-	/** 文档类型 */
+	/** 
+	 * 文档类型
+	 * 
+	 * 文档类型
+	 */
 	private String docType;
 
-	/** 文档正文 */
+	/** 
+	 * 文档正文
+	 * 
+	 * 文档正文
+	 */
 	private String docContent;
 
-	/** 文档url */
+	/** 
+	 * 文档url
+	 * 
+	 * 文档url
+	 */
 	private String docUrl;
 
-	/** DOC查阅次数 */
+	/** 
+	 * 附件链接
+	 * 
+	 * 附件url，路径
+	 */
+	private String attachUrl;
+
+	/** 
+	 * DOC查阅次数
+	 * 
+	 * 查阅次数
+	 */
 	private Integer docViews;
 
-	/** DOC由谁添加 */
+	/** 
+	 * DOC由谁添加
+	 * 
+	 * 由谁添加
+	 */
 	private String docAddedBy;
 
-	/** DOC添加时间 */
+	/** 
+	 * DOC添加时间
+	 * 
+	 * 添加时间
+	 */
 	private Date docAddedDate;
 
-	/** 由谁编辑 */
+	/** 
+	 * 由谁编辑
+	 * 
+	 * 由谁编辑
+	 */
 	private String docEditedBy;
 
-	/** 文档编辑时间 */
+	/** 
+	 * 文档编辑时间
+	 * 
+	 * 编辑时间
+	 */
 	private Date docEditedDate;
 
-	/** 文档删除标志 */
+	/** 
+	 * 文档删除标志
+	 * 
+	 * 已删除
+	 */
 	private String docDeleted;
 
 
-	public void setDocId(BigInteger docId){
+	public void setDocId(Integer docId){
 		this. docId = docId;
 	}
 
-	public BigInteger getDocId(){
+	public Integer getDocId(){
 		return docId;
 	}
 
@@ -159,6 +237,14 @@ public class Doc {
 
 	public String getDocUrl(){
 		return docUrl;
+	}
+
+	public void setAttachUrl(String attachUrl){
+		this. attachUrl = attachUrl;
+	}
+
+	public String getAttachUrl(){
+		return attachUrl;
 	}
 
 	public void setDocViews(Integer docViews){
