@@ -16,33 +16,35 @@
 
 package org.tinygroup.sdpm.org.dao.impl;
 
-import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.org.dao.OrgUserDao;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.impl.OrgUserDao;
+import org.tinygroup.sdpm.org.service.impl.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
+import static org.tinygroup.sdpm.org.service.impl.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
-@Repository
 public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
 
 	public OrgUser add(OrgUser orgUser) {
 		return getDslTemplate().insertAndReturnKey(orgUser, new InsertGenerateCallback<OrgUser>() {
 			public Insert generate(OrgUser t) {
 				Insert insert = insertInto(ORG_USERTABLE).values(
+						ORG_USERTABLE.ORG_USER_ID.value(t.getOrgUserId()),
 					ORG_USERTABLE.ORG_DEPT_ID.value(t.getOrgDeptId()),
 					ORG_USERTABLE.ORG_USER_ACCOUNT.value(t.getOrgUserAccount()),
 					ORG_USERTABLE.ORG_USER_PASSWORD.value(t.getOrgUserPassword()),
@@ -146,7 +148,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
 		});
 	}
 
-	public List<OrgUser> query(OrgUser orgUser) {
+	public List<OrgUser> query(OrgUser orgUser, final OrderBy... orderBies) {
 		if(orgUser==null){
 			orgUser=new OrgUser();
 		}
@@ -154,7 +156,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(OrgUser t) {
-				return selectFrom(ORG_USERTABLE).where(
+				Select select = selectFrom(ORG_USERTABLE).where(
 				and(
 					ORG_USERTABLE.ORG_DEPT_ID.eq(t.getOrgDeptId()),
 					ORG_USERTABLE.ORG_USER_ACCOUNT.eq(t.getOrgUserAccount()),
@@ -183,18 +185,19 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
 					ORG_USERTABLE.ORG_USER_FAILS.eq(t.getOrgUserFails()),
 					ORG_USERTABLE.ORG_USER_LOCKED.eq(t.getOrgUserLocked()),
 					ORG_USERTABLE.ORG_USER_DELETED.eq(t.getOrgUserDeleted())));
+				return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<OrgUser> queryPager(int start,int limit ,OrgUser orgUser) {
+	public Pager<OrgUser> queryPager(int start, int limit, OrgUser orgUser, final OrderBy... orderBies) {
 		if(orgUser==null){
 			orgUser=new OrgUser();
 		}
 		return getDslTemplate().queryPager(start, limit, orgUser, false, new SelectGenerateCallback<OrgUser>() {
 
 			public Select generate(OrgUser t) {
-				return MysqlSelect.selectFrom(ORG_USERTABLE).where(
+				Select select = MysqlSelect.selectFrom(ORG_USERTABLE).where(
 				and(
 					ORG_USERTABLE.ORG_DEPT_ID.eq(t.getOrgDeptId()),
 					ORG_USERTABLE.ORG_USER_ACCOUNT.eq(t.getOrgUserAccount()),
@@ -223,6 +226,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
 					ORG_USERTABLE.ORG_USER_FAILS.eq(t.getOrgUserFails()),
 					ORG_USERTABLE.ORG_USER_LOCKED.eq(t.getOrgUserLocked()),
 					ORG_USERTABLE.ORG_USER_DELETED.eq(t.getOrgUserDeleted())));
+				return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -350,4 +354,17 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
 		});
 	}
 
+	private Select addOrderByElements(Select select, OrderBy... orderBies) {
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

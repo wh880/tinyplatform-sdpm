@@ -16,27 +16,28 @@
 
 package org.tinygroup.sdpm.org.dao.impl;
 
-import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.org.dao.OrgRoldDao;
-import org.tinygroup.sdpm.org.dao.pojo.OrgRold;
+import org.tinygroup.sdpm.org.service.impl.OrgRoldDao;
+import org.tinygroup.sdpm.org.service.impl.pojo.OrgRold;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.tinygroup.sdpm.org.dao.constant.OrgRoldTable.ORG_ROLDTABLE;
+import static org.tinygroup.sdpm.org.service.impl.constant.OrgRoldTable.ORG_ROLDTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
-@Repository
 public class OrgRoldDaoImpl extends TinyDslDaoSupport implements OrgRoldDao {
 
 	public OrgRold add(OrgRold orgRold) {
@@ -99,7 +100,7 @@ public class OrgRoldDaoImpl extends TinyDslDaoSupport implements OrgRoldDao {
 		});
 	}
 
-	public List<OrgRold> query(OrgRold orgRold) {
+	public List<OrgRold> query(OrgRold orgRold, final OrderBy... orderBies) {
 		if(orgRold==null){
 			orgRold=new OrgRold();
 		}
@@ -107,27 +108,29 @@ public class OrgRoldDaoImpl extends TinyDslDaoSupport implements OrgRoldDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(OrgRold t) {
-				return selectFrom(ORG_ROLDTABLE).where(
+				Select select = selectFrom(ORG_ROLDTABLE).where(
 				and(
 					ORG_ROLDTABLE.ORG_ROLE_NAME.eq(t.getOrgRoleName()),
 					ORG_ROLDTABLE.ORG_ROLE_REMARKS.eq(t.getOrgRoleRemarks()),
 					ORG_ROLDTABLE.DELETED.eq(t.getDeleted())));
+				return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<OrgRold> queryPager(int start,int limit ,OrgRold orgRold) {
+	public Pager<OrgRold> queryPager(int start, int limit, OrgRold orgRold, final OrderBy... orderBies) {
 		if(orgRold==null){
 			orgRold=new OrgRold();
 		}
 		return getDslTemplate().queryPager(start, limit, orgRold, false, new SelectGenerateCallback<OrgRold>() {
 
 			public Select generate(OrgRold t) {
-				return MysqlSelect.selectFrom(ORG_ROLDTABLE).where(
+				Select select = MysqlSelect.selectFrom(ORG_ROLDTABLE).where(
 				and(
 					ORG_ROLDTABLE.ORG_ROLE_NAME.eq(t.getOrgRoleName()),
 					ORG_ROLDTABLE.ORG_ROLE_REMARKS.eq(t.getOrgRoleRemarks()),
 					ORG_ROLDTABLE.DELETED.eq(t.getDeleted())));
+				return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -183,4 +186,17 @@ public class OrgRoldDaoImpl extends TinyDslDaoSupport implements OrgRoldDao {
 		});
 	}
 
+	private Select addOrderByElements(Select select, OrderBy... orderBies) {
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

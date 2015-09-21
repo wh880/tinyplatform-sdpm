@@ -66,7 +66,7 @@ public class EffortManagerImpl implements EffortManager {
 
 	public List<Effort> findBetweenDate(Date begindate, Date enddate) {
 		// TODO Auto-generated method stub
-		return null;
+		return effortDao.findBetweenDate(begindate, enddate);
 	}
 
 }

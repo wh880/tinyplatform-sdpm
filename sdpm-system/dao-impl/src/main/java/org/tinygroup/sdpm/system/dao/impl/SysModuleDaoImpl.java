@@ -24,11 +24,10 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
-
 import java.util.List;
 
+import org.springframework.stereotype.Component;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -37,12 +36,13 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.system.dao.pojo.SysModule;
 import org.tinygroup.sdpm.system.dao.SysModuleDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -50,9 +50,10 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-
+@Component
+@LogClass("system")
 public class SysModuleDaoImpl extends TinyDslDaoSupport implements SysModuleDao {
-
+    @LogMethod("add")
 	public SysModule add(SysModule sysModule) {
 		return getDslTemplate().insertAndReturnKey(sysModule, new InsertGenerateCallback<SysModule>() {
 			public Insert generate(SysModule t) {
@@ -70,7 +71,7 @@ public class SysModuleDaoImpl extends TinyDslDaoSupport implements SysModuleDao 
 			}
 		});
 	}
-
+    @LogMethod("edit")
 	public int edit(SysModule sysModule) {
 		if(sysModule == null || sysModule.getSysModuleId() == null){
 			return 0;
@@ -91,7 +92,7 @@ public class SysModuleDaoImpl extends TinyDslDaoSupport implements SysModuleDao 
 			}
 		});
 	}
-
+    @LogMethod("delete")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -102,7 +103,7 @@ public class SysModuleDaoImpl extends TinyDslDaoSupport implements SysModuleDao 
 			}
 		});
 	}
-
+    @LogMethod("delete")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
