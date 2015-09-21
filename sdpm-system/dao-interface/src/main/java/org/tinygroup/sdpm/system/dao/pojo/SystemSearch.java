@@ -16,17 +16,16 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 模块搜索表
  * 
  */
-public class SystemSearch implements Serializable{
-	
+public class SystemSearch {
 	public static int DELETE_YES = 1;
 	public static int DELETE_NO = 0;
+
 
 	/** 
 	 * 搜索ID

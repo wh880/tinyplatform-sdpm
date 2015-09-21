@@ -15,11 +15,11 @@ import org.tinygroup.tinysqldsl.Pager;
 public class StoryManagerImpl implements StoryManager{
 	
 	@Autowired
-	private ProductStoryDao productStoryDao;
+	private ProductStoryDao storyDao;
 	
 	public ProductStory add(ProductStory story) {
 
-		return productStoryDao.add(story);
+		return storyDao.add(story);
 	}
 
 	public int delete(Integer storyId) {
@@ -27,22 +27,22 @@ public class StoryManagerImpl implements StoryManager{
 		ProductStory story = new ProductStory();
 		story.setStoryId(storyId);
 		story.setDeleted(ProductStory.DELETE_YES);
-		return productStoryDao.edit(story);
+		return storyDao.edit(story);
 	}
 
 	public int update(ProductStory story) {
 
-		return productStoryDao.edit(story);
+		return storyDao.edit(story);
 	}
 
 	public ProductStory find(Integer storyId) {
 
-		return productStoryDao.getByKey(storyId);
+		return storyDao.getByKey(storyId);
 	}
 
 	public List<ProductStory> findList(ProductStory story) {
 
-		return productStoryDao.query(story);
+		return storyDao.query(story);
 	}
 	
 	

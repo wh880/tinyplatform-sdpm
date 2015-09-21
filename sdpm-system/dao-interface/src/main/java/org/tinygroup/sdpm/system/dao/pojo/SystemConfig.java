@@ -16,17 +16,14 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
-import java.io.Serializable;
-
-
 /** 
  * 模块配置表
  * 
  */
-public class SystemConfig implements Serializable{
-	
+public class SystemConfig {
 	public static int DELETE_YES = 1;
 	public static int DELETE_NO = 0;
+
 
 	/** 
 	 * 配置ID

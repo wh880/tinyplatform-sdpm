@@ -16,16 +16,16 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 public class StorySpecManagerImpl implements StorySpecManager{
 	
 	@Autowired
-	private ProductStorySpecDao productStorySpecDao;
+	private ProductStorySpecDao storySpecDao;
 
 	public ProductStorySpec find(Integer storyId) {
 
-		return productStorySpecDao.getByKey(storyId);
+		return storySpecDao.getByKey(storyId);
 	}
 
 	public List<ProductStorySpec> findList(ProductStorySpec storySpec) {
 
-		return productStorySpecDao.query(storySpec);
+		return storySpecDao.query(storySpec);
 	}
 
 	
