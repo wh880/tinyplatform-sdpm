@@ -15,15 +15,15 @@ public interface BuildManager {
      * @param id 主键
      * @return
      */
-    ProcessBuilder find(String id);
+    ProjectBuild find(String id);
 
     /**
      * 根据条件查询List
      *
-     * @param projectId 用于查询条件
+     * @param build 用于查询条件
      * @return
      */
-    List<ProcessBuilder> findList(int projectId);
+    List<ProjectBuild> findList(ProjectBuild build);
 
     /**
      * 新增有一个版本
@@ -39,7 +39,7 @@ public interface BuildManager {
      * @param build 需要更新的实体类
      * @return
      */
-    ProjectBuild update(ProjectBuild build);
+    int update(ProjectBuild build);
 
     /**
      * 根据id进行软删除
@@ -47,5 +47,5 @@ public interface BuildManager {
      * @param id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer delete(int id);
 }

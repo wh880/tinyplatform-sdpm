@@ -15,7 +15,7 @@ public interface TaskRelationManager {
      * @param id 主键
      * @return
      */
-    ProjectTaskrelation find(String id);
+    ProjectTaskrelation find(int id);
 
     /**
      * 根据条件查询List
