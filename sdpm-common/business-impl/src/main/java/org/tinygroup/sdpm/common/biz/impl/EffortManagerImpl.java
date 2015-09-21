@@ -15,44 +15,52 @@ public class EffortManagerImpl implements EffortManager {
 		return effortDao.add(effort);
 	}
 
-	public Integer updata(Effort effort) {
+	public Effort updata(Effort effort) {
 		// TODO Auto-generated method stub
-		return effortDao.edit(effort);
+		effortDao.edit(effort);
+		return effort;
 	}
 
 	public Integer delete(Effort effort) {
 		// TODO Auto-generated method stub
-		return null;
+		int pk=effort.getEffortId();
+		return effortDao.deleteByKey(pk);
 	}
 
 	public List<Effort> findBetweenDate(Date begindate, Date enddate) {
 		// TODO Auto-generated method stub
-		return null;
+		return effortDao.findBetweenDate(begindate, enddate);
 	}
 
 	public List<Effort> findByAccount(String account) {
 		// TODO Auto-generated method stub
-		return null;
+		Effort effort= new Effort();
+		effort.setEffortAccount(account);
+		return effortDao.query(effort);
 	}
 
 	public List<Effort> findByProject(int projectId) {
 		// TODO Auto-generated method stub
-		return null;
+		Effort effort = new Effort();
+		effort.setEffortProject(projectId);
+		return effortDao.query(effort);
 	}
 
 	public Pager<Effort> findByPage(int start, int limit, Effort effort) {
 		// TODO Auto-generated method stub
-		return null;
+		return effortDao.queryPager(start, limit, effort);
 	}
 
 	public List<Effort> findByDate(Date date) {
 		// TODO Auto-generated method stub
-		return null;
+		Effort effort = new Effort();
+		effort.setEffortDate(date);
+		return effortDao.query(effort);
 	}
 
 	public List<Effort> find(Effort effort) {
 		// TODO Auto-generated method stub
-		return null;
+		return effortDao.query(effort);
 	}
 
 }
