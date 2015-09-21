@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.service.biz.impl;
 
+import org.springframework.stereotype.Service;
 import org.tinygroup.sdpm.service.biz.inter.ReviewManager;
 import org.tinygroup.sdpm.service.dao.pojo.Review;
 
@@ -8,7 +9,9 @@ import java.util.List;
 /**
  * Created by Administrator on 2015-09-18.
  */
+@Service
 public class ReviewManagerImpl implements ReviewManager{
+
     public Review find(String id) {
         return null;
     }
