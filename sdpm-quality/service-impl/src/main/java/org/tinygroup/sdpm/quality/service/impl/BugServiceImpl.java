@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.quality.service.impl;
+/*package org.tinygroup.sdpm.quality.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -34,3 +34,4 @@ public class BugServiceImpl implements BugService {
 		return bugdao.edit(bug);
 	}
 }
+*/
