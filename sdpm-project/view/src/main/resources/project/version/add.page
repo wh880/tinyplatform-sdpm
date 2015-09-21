@@ -70,7 +70,7 @@
 	#@elementItem()
 		#@sdpmItem("构建者")
 			#@Tselect2F()
-				#@Tselect2Body("lang" "T" {"class":"input-text select2","placeholder":"","datatype":"*4-16","nullmsg":"名称编号不能为空！"}) ##,"multiple":"multiple"加上为多选项
+				#@Tselect2Body("lang" "T" {"class":"input-text select2","placeholder":"","nullmsg":"名称编号不能为空！"}) ##,"multiple":"multiple"加上为多选项
                     <option value="T"></option>
                     <option value="CT">Connecticut</option>
                     <option value="DE">Delaware</option>
@@ -88,7 +88,7 @@
 	#@elementItem()
 		#@sdpmItem("打包日期")
 			#@formHorizontal()
-				#dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:40%'")
+				#@tinyDateInput("birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
 			#end
 		#end
 	#end
