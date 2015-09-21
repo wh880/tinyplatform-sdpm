@@ -24,7 +24,7 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
-
+import java.util.Date;
 import java.util.List;
 
 import org.tinygroup.tinysqldsl.Delete;
@@ -38,7 +38,6 @@ import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.sdpm.common.dao.pojo.Effort;
 import org.tinygroup.sdpm.common.dao.EffortDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -247,6 +246,13 @@ public class EffortDaoImpl extends TinyDslDaoSupport implements EffortDao {
 				EFFORTTABLE.EFFORT_END.eq(new JdbcNamedParameter("effortEnd"))));
 			}
 		});
+	}
+
+	public List<Effort> findBetweenDate(Date begindate, Date enddate) {
+		// TODO Auto-generated method stub
+		Select select;
+		select = selectFrom(EFFORTTABLE).where(EFFORTTABLE.EFFORT_DATE.between(begindate, enddate));
+		return getDslTemplate().getDslSession().fetchList(select, Effort.class);
 	}
 
 }
