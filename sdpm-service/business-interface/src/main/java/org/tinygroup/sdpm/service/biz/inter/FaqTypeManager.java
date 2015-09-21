@@ -14,7 +14,7 @@ public interface FaqTypeManager {
      * @param id 主键
      * @return
      */
-    FaqType find(String id);
+    FaqType find(Integer id);
 
     /**
      * 根据条件查询List
