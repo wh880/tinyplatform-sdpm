@@ -16,27 +16,28 @@
 
 package org.tinygroup.sdpm.org.dao.impl;
 
-import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.org.dao.OrgCompanyDao;
-import org.tinygroup.sdpm.org.dao.pojo.OrgCompany;
+import org.tinygroup.sdpm.org.service.impl.OrgCompanyDao;
+import org.tinygroup.sdpm.org.service.impl.pojo.OrgCompany;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.tinygroup.sdpm.org.dao.constant.OrgCompanyTable.ORG_COMPANYTABLE;
+import static org.tinygroup.sdpm.org.service.impl.constant.OrgCompanyTable.ORG_COMPANYTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
-@Repository
 public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDao {
 
 	public OrgCompany add(OrgCompany orgCompany) {
@@ -113,7 +114,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
 		});
 	}
 
-	public List<OrgCompany> query(OrgCompany orgCompany) {
+	public List<OrgCompany> query(OrgCompany orgCompany, final OrderBy... orderBies) {
 		if(orgCompany==null){
 			orgCompany=new OrgCompany();
 		}
@@ -121,7 +122,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(OrgCompany t) {
-				return selectFrom(ORG_COMPANYTABLE).where(
+				Select select = selectFrom(ORG_COMPANYTABLE).where(
 				and(
 					ORG_COMPANYTABLE.ORG_COMPANY_NAME.eq(t.getOrgCompanyName()),
 					ORG_COMPANYTABLE.ORG_COMPANY_PHONE.eq(t.getOrgCompanyPhone()),
@@ -133,18 +134,19 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
 					ORG_COMPANYTABLE.ORG_COMPANY_GUEST.eq(t.getOrgCompanyGuest()),
 					ORG_COMPANYTABLE.ORG_COMPANY_ADMINS.eq(t.getOrgCompanyAdmins()),
 					ORG_COMPANYTABLE.ORG_COMPANY_DELETED.eq(t.getOrgCompanyDeleted())));
+				return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<OrgCompany> queryPager(int start,int limit ,OrgCompany orgCompany) {
+	public Pager<OrgCompany> queryPager(int start, int limit, OrgCompany orgCompany, final OrderBy... orderBies) {
 		if(orgCompany==null){
 			orgCompany=new OrgCompany();
 		}
 		return getDslTemplate().queryPager(start, limit, orgCompany, false, new SelectGenerateCallback<OrgCompany>() {
 
 			public Select generate(OrgCompany t) {
-				return MysqlSelect.selectFrom(ORG_COMPANYTABLE).where(
+				Select select = MysqlSelect.selectFrom(ORG_COMPANYTABLE).where(
 				and(
 					ORG_COMPANYTABLE.ORG_COMPANY_NAME.eq(t.getOrgCompanyName()),
 					ORG_COMPANYTABLE.ORG_COMPANY_PHONE.eq(t.getOrgCompanyPhone()),
@@ -156,6 +158,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
 					ORG_COMPANYTABLE.ORG_COMPANY_GUEST.eq(t.getOrgCompanyGuest()),
 					ORG_COMPANYTABLE.ORG_COMPANY_ADMINS.eq(t.getOrgCompanyAdmins()),
 					ORG_COMPANYTABLE.ORG_COMPANY_DELETED.eq(t.getOrgCompanyDeleted())));
+				return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -232,4 +235,17 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
 		});
 	}
 
+	private Select addOrderByElements(Select select, OrderBy... orderBies) {
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

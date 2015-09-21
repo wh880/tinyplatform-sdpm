@@ -16,27 +16,28 @@
 
 package org.tinygroup.sdpm.org.dao.impl;
 
-import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.org.dao.OrgRoldMenuDao;
-import org.tinygroup.sdpm.org.dao.pojo.OrgRoldMenu;
+import org.tinygroup.sdpm.org.service.impl.OrgRoldMenuDao;
+import org.tinygroup.sdpm.org.service.impl.pojo.OrgRoldMenu;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.tinygroup.sdpm.org.dao.constant.OrgRoldMenuTable.ORG_ROLD_MENUTABLE;
+import static org.tinygroup.sdpm.org.service.impl.constant.OrgRoldMenuTable.ORG_ROLD_MENUTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
-@Repository
 public class OrgRoldMenuDaoImpl extends TinyDslDaoSupport implements OrgRoldMenuDao {
 
 	public OrgRoldMenu add(OrgRoldMenu orgRoldMenu) {
@@ -97,7 +98,7 @@ public class OrgRoldMenuDaoImpl extends TinyDslDaoSupport implements OrgRoldMenu
 		});
 	}
 
-	public List<OrgRoldMenu> query(OrgRoldMenu orgRoldMenu) {
+	public List<OrgRoldMenu> query(OrgRoldMenu orgRoldMenu, final OrderBy... orderBies) {
 		if(orgRoldMenu==null){
 			orgRoldMenu=new OrgRoldMenu();
 		}
@@ -105,25 +106,27 @@ public class OrgRoldMenuDaoImpl extends TinyDslDaoSupport implements OrgRoldMenu
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(OrgRoldMenu t) {
-				return selectFrom(ORG_ROLD_MENUTABLE).where(
+				Select select = selectFrom(ORG_ROLD_MENUTABLE).where(
 				and(
 					ORG_ROLD_MENUTABLE.ORG_ROLE_ID.eq(t.getOrgRoleId()),
 					ORG_ROLD_MENUTABLE.ORG_ROLE_MENU_ID.eq(t.getOrgRoleMenuId())));
+				return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<OrgRoldMenu> queryPager(int start,int limit ,OrgRoldMenu orgRoldMenu) {
+	public Pager<OrgRoldMenu> queryPager(int start, int limit, OrgRoldMenu orgRoldMenu, final OrderBy... orderBies) {
 		if(orgRoldMenu==null){
 			orgRoldMenu=new OrgRoldMenu();
 		}
 		return getDslTemplate().queryPager(start, limit, orgRoldMenu, false, new SelectGenerateCallback<OrgRoldMenu>() {
 
 			public Select generate(OrgRoldMenu t) {
-				return MysqlSelect.selectFrom(ORG_ROLD_MENUTABLE).where(
+				Select select = MysqlSelect.selectFrom(ORG_ROLD_MENUTABLE).where(
 				and(
 					ORG_ROLD_MENUTABLE.ORG_ROLE_ID.eq(t.getOrgRoleId()),
 					ORG_ROLD_MENUTABLE.ORG_ROLE_MENU_ID.eq(t.getOrgRoleMenuId())));
+				return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -176,4 +179,17 @@ public class OrgRoldMenuDaoImpl extends TinyDslDaoSupport implements OrgRoldMenu
 		});
 	}
 
+	private Select addOrderByElements(Select select, OrderBy... orderBies) {
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

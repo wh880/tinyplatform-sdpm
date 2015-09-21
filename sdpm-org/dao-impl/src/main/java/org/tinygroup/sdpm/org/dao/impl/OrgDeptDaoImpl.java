@@ -16,27 +16,28 @@
 
 package org.tinygroup.sdpm.org.dao.impl;
 
-import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.org.dao.OrgDeptDao;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
+import org.tinygroup.sdpm.org.service.impl.OrgDeptDao;
+import org.tinygroup.sdpm.org.service.impl.pojo.OrgDept;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.tinygroup.sdpm.org.dao.constant.OrgDeptTable.ORG_DEPTTABLE;
+import static org.tinygroup.sdpm.org.service.impl.constant.OrgDeptTable.ORG_DEPTTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
-@Repository
 public class OrgDeptDaoImpl extends TinyDslDaoSupport implements OrgDeptDao {
 
 	public OrgDept add(OrgDept orgDept) {
@@ -107,7 +108,7 @@ public class OrgDeptDaoImpl extends TinyDslDaoSupport implements OrgDeptDao {
 		});
 	}
 
-	public List<OrgDept> query(OrgDept orgDept) {
+	public List<OrgDept> query(OrgDept orgDept, final OrderBy... orderBies) {
 		if(orgDept==null){
 			orgDept=new OrgDept();
 		}
@@ -115,7 +116,7 @@ public class OrgDeptDaoImpl extends TinyDslDaoSupport implements OrgDeptDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(OrgDept t) {
-				return selectFrom(ORG_DEPTTABLE).where(
+				Select select = selectFrom(ORG_DEPTTABLE).where(
 				and(
 					ORG_DEPTTABLE.ORG_DEPT_NAME.eq(t.getOrgDeptName()),
 					ORG_DEPTTABLE.ORG_DEPT_PARENT.eq(t.getOrgDeptParent()),
@@ -124,18 +125,19 @@ public class OrgDeptDaoImpl extends TinyDslDaoSupport implements OrgDeptDao {
 					ORG_DEPTTABLE.ORG_DEPT_ORDER.eq(t.getOrgDeptOrder()),
 					ORG_DEPTTABLE.ORG_DEPT_POSITION.eq(t.getOrgDeptPosition()),
 					ORG_DEPTTABLE.ORG_DEPT_MANAGER.eq(t.getOrgDeptManager())));
+				return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<OrgDept> queryPager(int start,int limit ,OrgDept orgDept) {
+	public Pager<OrgDept> queryPager(int start, int limit, OrgDept orgDept, final OrderBy... orderBies) {
 		if(orgDept==null){
 			orgDept=new OrgDept();
 		}
 		return getDslTemplate().queryPager(start, limit, orgDept, false, new SelectGenerateCallback<OrgDept>() {
 
 			public Select generate(OrgDept t) {
-				return MysqlSelect.selectFrom(ORG_DEPTTABLE).where(
+				Select select = MysqlSelect.selectFrom(ORG_DEPTTABLE).where(
 				and(
 					ORG_DEPTTABLE.ORG_DEPT_NAME.eq(t.getOrgDeptName()),
 					ORG_DEPTTABLE.ORG_DEPT_PARENT.eq(t.getOrgDeptParent()),
@@ -144,6 +146,7 @@ public class OrgDeptDaoImpl extends TinyDslDaoSupport implements OrgDeptDao {
 					ORG_DEPTTABLE.ORG_DEPT_ORDER.eq(t.getOrgDeptOrder()),
 					ORG_DEPTTABLE.ORG_DEPT_POSITION.eq(t.getOrgDeptPosition()),
 					ORG_DEPTTABLE.ORG_DEPT_MANAGER.eq(t.getOrgDeptManager())));
+				return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -211,4 +214,17 @@ public class OrgDeptDaoImpl extends TinyDslDaoSupport implements OrgDeptDao {
 		});
 	}
 
+	private Select addOrderByElements(Select select, OrderBy... orderBies) {
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }
