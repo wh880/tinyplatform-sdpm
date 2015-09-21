@@ -1,5 +1,5 @@
 <standard-fields>
-  <standard-field id="157b6bcd380345ecb1bbb2b6005b92f7" name="doc_id" title="文档ID" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0" default="">
+  <standard-field id="157b6bcd380345ecb1bbb2b6005b92f7" name="doc_id" title="文档ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
     <description>文档ID，主键，唯一标示</description>
   </standard-field>
   <standard-field id="51d8b407678c4adfbb36e530c87c7f22" name="doc_product" title="所属产品" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
@@ -59,19 +59,19 @@
   <standard-field id="2655a73603e54dd98679d4163bd0851f" name="doc_lib_deleted" title="删除文档库标志" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629">
     <description>已删除，并不真正删除数据，只是相应比标志位变参而已。</description>
   </standard-field>
-  <standard-field id="4eba0477bea94e218529867d56ede9ec" name="comment_id" title="评论编号" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0">
+  <standard-field id="4eba0477bea94e218529867d56ede9ec" name="comment_id" title="评论编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
     <description>评论编号</description>
   </standard-field>
   <standard-field id="5c7149ae6fb04f43a777c5ad63a6d21b" name="comment_txt" title="评论正文" business-type-id="cc9ed20b13f943f3a967f9d1c5368132">
     <description>评论正文</description>
   </standard-field>
-  <standard-field id="588b5c95a9bb4260a9e7a74781cb6125" name="comment_userid" title="评论者ID" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0">
+  <standard-field id="588b5c95a9bb4260a9e7a74781cb6125" name="comment_userid" title="评论者ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
     <description>评论者ID</description>
   </standard-field>
   <standard-field id="a7e2f72ac40d41faa29dca6d2bc45c85" name="comment_time" title="评论时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff">
     <description></description>
   </standard-field>
-  <standard-field id="7132ef274c224d00b4449666535b8247" name="comment_docid" title="被评论文档ID" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0">
+  <standard-field id="7132ef274c224d00b4449666535b8247" name="comment_docid" title="被评论文档ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
     <description>被评论文档ID</description>
   </standard-field>
   <standard-field id="ade9ab3cb2964da0928ca49b972dd877" name="attach_id" title="附件编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
@@ -91,5 +91,14 @@
   </standard-field>
   <standard-field id="8842a366405a4f35a57ba0e5f5ac66f3" name="doc_lib_updtime" title="文档库名称更新时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff">
     <description>文档库名称更新时间</description>
+  </standard-field>
+  <standard-field id="ca754aa8cc3d4cfe8eb8c883b1793fe6" name="record_id" title="历史记录ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
+    <description>历史记录ID</description>
+  </standard-field>
+  <standard-field id="1e7bd4421b7a46d8b020fd681fa922df" name="rec_time" title="编辑时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff">
+    <description>编辑时间</description>
+  </standard-field>
+  <standard-field id="b86c9303eb134a2286f2acd69013cc38" name="rec_who" title="谁创建或是编辑" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37">
+    <description>谁创建或是编辑</description>
   </standard-field>
 </standard-fields>

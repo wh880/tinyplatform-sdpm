@@ -1,16 +1,7 @@
 package org.tinygroup.sdpm.product.dao.impl;
 
-import java.util.Date;
-
-import org.apache.commons.dbcp.BasicDataSource;
-import org.junit.Test;
-import org.tinygroup.jdbctemplatedslsession.SimpleDslSession;
-import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.tinysqldsl.DslSession;
-
 public class ProductTest {
-	public static DslSession getDslSession(){
+	/*public static DslSession getDslSession(){
 		BasicDataSource source =new BasicDataSource();
 		source.setDriverClassName("com.mysql.jdbc.Driver");
 		source.setUrl("jdbc:mysql://127.0.0.1/sdmp?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8");
@@ -49,5 +40,5 @@ public class ProductTest {
 		daoImpl.setDslSession(getDslSession());
 		daoImpl.add(plan);
 	}
-	
+	*/
 }

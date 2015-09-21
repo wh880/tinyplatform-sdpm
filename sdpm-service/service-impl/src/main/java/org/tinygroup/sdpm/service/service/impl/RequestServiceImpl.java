@@ -20,26 +20,26 @@ public class RequestServiceImpl implements RequestService {
     }
 
     public Request findRequestByMolde(String moldeId) {
-        return null;
+        return requestManager.findByMolde(moldeId);
     }
 
     public List<Request> getRequestList(Request request) {
-        return null;
+        return requestManager.getList(request);
     }
 
     public Request addRequest(Request request) {
-        return null;
+        return requestManager.add(request);
     }
 
     public Request updateRequest(Request request) {
-        return null;
+        return requestManager.update(request);
     }
 
-    public Integer deleteRequest(String id) {
-        return null;
+    public Integer deleteRequest(Integer id) {
+        return requestManager.delete(id);
     }
 
-    public Integer deleteRequestBatch(Integer id) {
-        return null;
+    public Integer deleteRequestBatch(Integer... id) {
+        return requestManager.deleteBatch(id);
     }
 }

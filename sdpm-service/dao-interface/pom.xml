@@ -17,7 +17,7 @@
   <dependencies>
   	<dependency>
        <groupId>org.tinygroup</groupId>
-       <artifactId>sdpm-service-base-dao</artifactId>
+       <artifactId>sdpm-common-base-dao</artifactId>
         <version>${tiny_sdpm_version}</version>
     </dependency>
     <dependency>

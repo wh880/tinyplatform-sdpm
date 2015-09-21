@@ -69,7 +69,7 @@
 
             <menu id="gantt-view-rm" name="删除" href="" icon="icon-remove" sort="1" isShow="1"
                   scope="gantt-op"/>
-            <menu id="gantt-op-rm"name="删除" href="" icon="icon-remove" sort="1" isShow="1"
+            <menu id="gantt-op-rm" name="删除" href="" icon="icon-remove" sort="2" isShow="1"
                   scope="gantt-op"/>
         </menu>
 

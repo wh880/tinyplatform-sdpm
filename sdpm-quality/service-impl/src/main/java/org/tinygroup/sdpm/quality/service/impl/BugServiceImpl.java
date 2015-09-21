@@ -1,4 +1,4 @@
-/*package org.tinygroup.sdpm.quality.service.impl;
+package org.tinygroup.sdpm.quality.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.tinygroup.sdpm.quality.dao.BugDao;
 import org.tinygroup.sdpm.quality.dao.pojo.Bug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 
-@Component("BugService")
+@Component("bugService")
 public class BugServiceImpl implements BugService {
 	@Autowired
 	private BugDao bugdao;
@@ -34,4 +34,3 @@ public class BugServiceImpl implements BugService {
 		return bugdao.edit(bug);
 	}
 }
-*/

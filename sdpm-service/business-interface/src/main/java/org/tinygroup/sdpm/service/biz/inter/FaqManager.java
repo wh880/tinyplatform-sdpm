@@ -13,7 +13,7 @@ public interface FaqManager { /**
  * @param id 主键
  * @return
  */
-Faq find(String id);
+Faq find(Integer id);
 
     /**
      * 根据条件查询List
@@ -45,5 +45,5 @@ Faq find(String id);
      * @param id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer delete(Integer id);
 }

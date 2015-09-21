@@ -54,7 +54,7 @@ public interface RequestService {
      * @param id 主键
      * @return
      */
-    Integer deleteRequest(String id);
+    Integer deleteRequest(Integer id);
 
     /**
      * 根据id进行批量软删除请求
@@ -62,6 +62,6 @@ public interface RequestService {
      * @param id 主键
      * @return
      */
-    Integer deleteRequestBatch(Integer id);
+    Integer deleteRequestBatch(Integer... id);
 }
 
