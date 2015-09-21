@@ -1,5 +1,5 @@
 /**整体框架个性化设置start**/
-#bodyrap.theme-clean #content-wrapper{padding:102px 8px 18px;}
+#bodyrap  #content-wrapper{padding:100px 8px 18px;}
 .dataTables_wrapper .DT-lf-right .DT-per-page{display:none}.theme-clean #main-menu #content-wrapper{padding:53px 10px 18px}
 .ajax-loading-animation{font-size:20px;margin-left:10px;}
 @media (min-width:768px) {

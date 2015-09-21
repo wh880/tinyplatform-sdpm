@@ -300,7 +300,7 @@
         ' position: absolute;',
         ' right: -' + (panel_width + 20) + 'px;',
         ' width: ' + (panel_width + 10) + 'px;',
-        ' top:-54px;',
+        ' top:-52px;',
         ' padding-right: 10px;  ',
         ' background: #333;',
         ' border-radius: 5px;',
