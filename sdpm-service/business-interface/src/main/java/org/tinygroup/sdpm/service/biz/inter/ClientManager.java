@@ -14,7 +14,7 @@ public interface ClientManager {
      * @param id 主键
      * @return
      */
-    Client find(Client id);
+    Client find(Integer id);
 
     /**
      * 根据条件查询List
