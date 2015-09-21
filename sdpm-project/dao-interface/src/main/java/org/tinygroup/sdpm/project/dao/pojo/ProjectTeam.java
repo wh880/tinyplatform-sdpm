@@ -16,13 +16,14 @@
 
 package org.tinygroup.sdpm.project.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 团队
  * 
  */
-public class ProjectTeam {
+public class ProjectTeam implements Serializable {
 
 	/** 
 	 * 逻辑ID

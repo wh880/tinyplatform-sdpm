@@ -16,13 +16,14 @@
 
 package org.tinygroup.sdpm.project.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 燃尽图
  * 
  */
-public class ProjectBurn {
+public class ProjectBurn implements Serializable {
 
 	/** 
 	 * 逻辑ID

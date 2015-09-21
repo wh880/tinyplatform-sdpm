@@ -16,11 +16,13 @@
 
 package org.tinygroup.sdpm.project.dao.pojo;
 
+import java.io.Serializable;
+
 /**
  * 项目产品
  *
  */
-public class ProjectProduct {
+public class ProjectProduct implements Serializable {
 
     /**
      * 逻辑ID

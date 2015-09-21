@@ -16,10 +16,12 @@
 
 package org.tinygroup.sdpm.project.dao.pojo;
 
+import java.io.Serializable;
+
 /**
  * TASKRELATION
  */
-public class ProjectTaskrelation {
+public class ProjectTaskrelation implements Serializable {
 
     /**
      * 逻辑ID
