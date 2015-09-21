@@ -1,0 +1,5 @@
+<obtains>
+    <obtain moduleName="test" classType="service_impl.ServiceImpl" method="getString" primaryName="projectId">
+        <obtain_parameter parameterName="i" parameterType="java.lang.Integer" />
+    </obtain>
+</obtains>

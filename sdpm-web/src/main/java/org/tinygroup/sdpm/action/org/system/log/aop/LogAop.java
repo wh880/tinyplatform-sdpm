@@ -31,7 +31,7 @@ public class LogAop {
         String methodName = joinPoint.getSignature().getName();
         Object[] args = joinPoint.getArgs();
         Class[] parameterTypes = ((MethodSignature)joinPoint.getSignature()).getMethod().getParameterTypes();
-        //TestClass为类级注解，之后需重建
+        //LogClass为类级注解，之后需重建
         LogClass logClass = target.getClass().getAnnotation(LogClass.class);
 
         Object result = joinPoint.proceed();
@@ -39,7 +39,7 @@ public class LogAop {
 
         String classType = logClass.value();
         Obtain obtain = LogUtil.getObtain(classType);
-        //TestMethod为方法级注解，之后需重建
+        //LogMethod为方法级注解，之后需重建
         LogMethod logMethod = null;
         try {
 
