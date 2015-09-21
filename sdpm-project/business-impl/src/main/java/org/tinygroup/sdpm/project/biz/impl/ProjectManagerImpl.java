@@ -18,23 +18,27 @@ public class ProjectManagerImpl implements ProjectManager {
     @Autowired
     private ProjectDao projectDao;
 
-    public Project find(String projectId) {
-        return null;
+    public Project find(int projectId) {
+        return projectDao.getByKey(projectId);
     }
 
     public List<Project> findList() {
-        return null;
+        Project project = new Project();
+        return projectDao.query(project);
     }
 
     public Project add(Project project) {
-        return null;
+        return projectDao.add(project);
     }
 
-    public Project update(Project project) {
-        return null;
+    public int update(Project project) {
+        return projectDao.edit(project);
     }
 
-    public Integer delete(String projectId) {
-        return null;
+    public Integer delete(int projectId) {
+        Project project = new Project();
+        project.setProjectId(projectId);
+        project.setProjectDeleted(project.DELETE_YES);
+        return projectDao.edit(project);
     }
 }

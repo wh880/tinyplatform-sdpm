@@ -15,15 +15,15 @@ public interface BurnManager {
      * @param id 主键
      * @return
      */
-    ProjectBurn find(String id);
+    ProjectBurn find(int id);
 
     /**
      * 根据条件查询List
      *
-     * @param projectId 用于查询条件
+     * @param burn 用于查询条件
      * @return
      */
-    List<ProjectBurn> findList(int projectId);
+    List<ProjectBurn> findList(ProjectBurn burn);
 
     /**
      * 新增有一个数据
@@ -39,7 +39,7 @@ public interface BurnManager {
      * @param burn 需要更新的实体类
      * @return
      */
-    ProjectBurn update(ProjectBurn burn);
+    int update(ProjectBurn burn);
 
     /**
      * 根据id进行删除
@@ -47,5 +47,5 @@ public interface BurnManager {
      * @param id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer delete(int id);
 }
