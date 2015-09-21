@@ -10,7 +10,6 @@
     <groupId>org.tinygroup</groupId>
     <artifactId>sdpm-metadata</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
     <name>sdpm-metadata develop</name>
     <url>http://maven.apache.org</url>
     <dependencies>
