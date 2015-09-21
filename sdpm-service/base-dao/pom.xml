@@ -26,11 +26,6 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-    	<groupId>org.tinygroup</groupId>
-    	<artifactId>sdpm-metadata-common</artifactId>
-        <version>${tiny_sdpm_version}</version>
-    </dependency>
       <dependency>
           <groupId>org.tinygroup</groupId>
           <artifactId>sdpm-common-common</artifactId>
