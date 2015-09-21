@@ -46,7 +46,7 @@ public interface ClientManager {
      * @param id 主键
      * @return
      */
-    Integer delete(String id);
+    Integer delete(Integer id);
 
     /**
      * 根据id进行批量软删除客户

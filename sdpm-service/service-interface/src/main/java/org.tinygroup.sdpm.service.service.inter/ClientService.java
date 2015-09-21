@@ -12,7 +12,7 @@ public interface ClientService {
      * @param id 主键
      * @return
      */
-    Client findClient(Client id);
+    Client findClient(Integer id);
 
     /**
      * 根据条件查询List
@@ -44,7 +44,7 @@ public interface ClientService {
      * @param id 主键
      * @return
      */
-    Integer deleteClient(String id);
+    Integer deleteClient(Integer id);
 
     /**
      * 根据id进行批量软删除客户

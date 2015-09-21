@@ -25,15 +25,18 @@ public class ClientManagerImpl implements ClientManager{
     }
 
     public Client add(Client client) {
-        return null;
+        return clientDao.add(client);
     }
 
     public Client update(Client client) {
-        return null;
+        return clientDao.add(client);
     }
 
-    public Integer delete(String id) {
-        return null;
+    public Integer delete(Integer id) {
+        Client client = new Client();
+        client.setClientId(id);
+        client.setDeleted(id);
+        return clientDao.edit(client);
     }
 
     public Integer deleteBatch(Integer id) {
