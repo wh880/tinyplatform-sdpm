@@ -82,7 +82,7 @@
   <standard-field id="0deaf731dafe4215b1e88551977502e6" name="testRun_lastRunDate" title="最后执行日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="39c7b8234eeb4dc5b892b3e257559e54" name="testRun_lastRunResult" title="最后执行结果" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="410897240d3e4595b3a7ada47cb9437f" name="testRun_status" title="测试执行状态" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="56604bfad9b54abeaa55e26ebf0a3377" name="testtask_id" title="测试计划ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
+  <standard-field id="56604bfad9b54abeaa55e26ebf0a3377" name="testversion_id" title="测试版本编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
   <standard-field id="465ab9fec2cc4da68d5df486a68a8163" name="testtask_title" title="任务名称" business-type-id="a30696c1e44441ecad77a832afd3731d" default=""/>
   <standard-field id="03a152e4dc094780a0a2e57fb0e9ac67" name="build" title="项目版本" business-type-id="095e594e1550424b9643c7e2279e85be" default=""/>
   <standard-field id="0ad33bb0bf3642a39058cc94ff151acf" name="testtask_owner" title="负责人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
