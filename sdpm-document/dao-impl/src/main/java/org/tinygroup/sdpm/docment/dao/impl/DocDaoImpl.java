@@ -45,6 +45,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+
 public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 
 	public Doc add(Doc doc) {
