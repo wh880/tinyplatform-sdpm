@@ -1,20 +1,15 @@
-/*
+
 package org.tinygroup.sdpm.system.biz.impl;
 
 
-import com.sun.org.apache.xml.internal.utils.SystemIDResolver;
-import jdk.nashorn.internal.runtime.regexp.joni.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.tinygroup.config.ConfigurationManager;
-import org.tinygroup.config.util.ConfigurationUtil;
 import org.tinygroup.sdpm.system.dao.SystemConfigDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 
 
 @Service
-@Transactional
+@Transactionala
 public class ConfigManagerImpl implements ConfigManager{
     @Autowired
     private SystemConfigDao configDao;
@@ -44,4 +39,4 @@ public class ConfigManagerImpl implements ConfigManager{
 
 
 
-}*/
+}
