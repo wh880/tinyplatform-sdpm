@@ -88,8 +88,8 @@ public class MailqueueTable extends Table {
 	public final Column MAILQUEUE_FAILREASON = new Column(this, "mailqueue_failReason");
 
 
-		private MailqueueTable() {
-			super("mailqueue");
-		}
+	private MailqueueTable() {
+		super("mailqueue");
+	}
 
 }

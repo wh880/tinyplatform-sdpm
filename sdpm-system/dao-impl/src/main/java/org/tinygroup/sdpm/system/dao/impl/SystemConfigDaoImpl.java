@@ -24,9 +24,11 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -35,9 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.system.dao.SystemConfigDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -46,7 +51,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
-@Repository
 public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConfigDao {
 
 	public SystemConfig add(SystemConfig systemConfig) {
@@ -115,7 +119,7 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 		});
 	}
 
-	public List<SystemConfig> query(SystemConfig systemConfig) {
+	public List<SystemConfig> query(SystemConfig systemConfig ,final OrderBy... orderBies) {
 		if(systemConfig==null){
 			systemConfig=new SystemConfig();
 		}
@@ -123,7 +127,7 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(SystemConfig t) {
-				return selectFrom(SYSTEM_CONFIGTABLE).where(
+				Select select = selectFrom(SYSTEM_CONFIGTABLE).where(
 				and(
 					SYSTEM_CONFIGTABLE.CONFIG_OWNER.eq(t.getConfigOwner()),
 					SYSTEM_CONFIGTABLE.CONFIG_MODULE.eq(t.getConfigModule()),
@@ -131,18 +135,19 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 					SYSTEM_CONFIGTABLE.CONFIG_KEY.eq(t.getConfigKey()),
 					SYSTEM_CONFIGTABLE.CONFIG_VALUE.eq(t.getConfigValue()),
 					SYSTEM_CONFIGTABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<SystemConfig> queryPager(int start,int limit ,SystemConfig systemConfig) {
+	public Pager<SystemConfig> queryPager(int start,int limit ,SystemConfig systemConfig ,final OrderBy... orderBies) {
 		if(systemConfig==null){
 			systemConfig=new SystemConfig();
 		}
 		return getDslTemplate().queryPager(start, limit, systemConfig, false, new SelectGenerateCallback<SystemConfig>() {
 
 			public Select generate(SystemConfig t) {
-				return MysqlSelect.selectFrom(SYSTEM_CONFIGTABLE).where(
+				Select select = MysqlSelect.selectFrom(SYSTEM_CONFIGTABLE).where(
 				and(
 					SYSTEM_CONFIGTABLE.CONFIG_OWNER.eq(t.getConfigOwner()),
 					SYSTEM_CONFIGTABLE.CONFIG_MODULE.eq(t.getConfigModule()),
@@ -150,6 +155,7 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 					SYSTEM_CONFIGTABLE.CONFIG_KEY.eq(t.getConfigKey()),
 					SYSTEM_CONFIGTABLE.CONFIG_VALUE.eq(t.getConfigValue()),
 					SYSTEM_CONFIGTABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -214,4 +220,17 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

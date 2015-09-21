@@ -17,18 +17,18 @@
 package org.tinygroup.sdpm.system.dao.impl;
 
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.sdpm.system.dao.constant.EffortTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
-import static org.tinygroup.sdpm.system.dao.constant.EffortTable.*;
 
 import java.io.Serializable;
-import java.util.Date;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
-import org.tinygroup.sdpm.system.dao.EffortDao;
-import org.tinygroup.sdpm.system.dao.pojo.Effort;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -37,7 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.system.dao.pojo.Effort;
+import org.tinygroup.sdpm.system.dao.EffortDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -124,7 +129,7 @@ public class EffortDaoImpl extends TinyDslDaoSupport implements EffortDao {
 		});
 	}
 
-	public List<Effort> query(Effort effort) {
+	public List<Effort> query(Effort effort ,final OrderBy... orderBies) {
 		if(effort==null){
 			effort=new Effort();
 		}
@@ -132,7 +137,7 @@ public class EffortDaoImpl extends TinyDslDaoSupport implements EffortDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(Effort t) {
-				return selectFrom(EFFORTTABLE).where(
+				Select select = selectFrom(EFFORTTABLE).where(
 				and(
 					EFFORTTABLE.EFFORT_OBJECTTYPE.eq(t.getEffortObjectType()),
 					EFFORTTABLE.EFFORT_OBJECTID.eq(t.getEffortObjectID()),
@@ -145,18 +150,19 @@ public class EffortDaoImpl extends TinyDslDaoSupport implements EffortDao {
 					EFFORTTABLE.EFFORT_CONSUMED.eq(t.getEffortConsumed()),
 					EFFORTTABLE.EFFORT_BEGIN.eq(t.getEffortBegin()),
 					EFFORTTABLE.EFFORT_END.eq(t.getEffortEnd())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<Effort> queryPager(int start,int limit ,Effort effort) {
+	public Pager<Effort> queryPager(int start,int limit ,Effort effort ,final OrderBy... orderBies) {
 		if(effort==null){
 			effort=new Effort();
 		}
 		return getDslTemplate().queryPager(start, limit, effort, false, new SelectGenerateCallback<Effort>() {
 
 			public Select generate(Effort t) {
-				return MysqlSelect.selectFrom(EFFORTTABLE).where(
+				Select select = MysqlSelect.selectFrom(EFFORTTABLE).where(
 				and(
 					EFFORTTABLE.EFFORT_OBJECTTYPE.eq(t.getEffortObjectType()),
 					EFFORTTABLE.EFFORT_OBJECTID.eq(t.getEffortObjectID()),
@@ -169,6 +175,7 @@ public class EffortDaoImpl extends TinyDslDaoSupport implements EffortDao {
 					EFFORTTABLE.EFFORT_CONSUMED.eq(t.getEffortConsumed()),
 					EFFORTTABLE.EFFORT_BEGIN.eq(t.getEffortBegin()),
 					EFFORTTABLE.EFFORT_END.eq(t.getEffortEnd())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -248,13 +255,17 @@ public class EffortDaoImpl extends TinyDslDaoSupport implements EffortDao {
 		});
 	}
 
-	public List<Effort> findBetweenDate(Date begindate, Date enddate) {
-		// TODO Auto-generated method stub
-		Select select;
-		select = selectFrom(EFFORTTABLE).where(EFFORTTABLE.EFFORT_DATE.between(begindate, enddate));
-		return getDslTemplate().getDslSession().fetchList(select, Effort.class);
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
 	}
-
-
-
 }

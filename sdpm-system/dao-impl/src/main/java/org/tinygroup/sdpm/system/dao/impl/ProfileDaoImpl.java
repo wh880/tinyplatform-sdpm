@@ -24,10 +24,11 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
-import org.tinygroup.sdpm.system.dao.ProfileDao;
-import org.tinygroup.sdpm.system.dao.pojo.Profile;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -36,7 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.system.dao.pojo.Profile;
+import org.tinygroup.sdpm.system.dao.ProfileDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -123,7 +129,7 @@ public class ProfileDaoImpl extends TinyDslDaoSupport implements ProfileDao {
 		});
 	}
 
-	public List<Profile> query(Profile profile) {
+	public List<Profile> query(Profile profile ,final OrderBy... orderBies) {
 		if(profile==null){
 			profile=new Profile();
 		}
@@ -131,7 +137,7 @@ public class ProfileDaoImpl extends TinyDslDaoSupport implements ProfileDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(Profile t) {
-				return selectFrom(PROFILETABLE).where(
+				Select select = selectFrom(PROFILETABLE).where(
 				and(
 					PROFILETABLE.FILE_PATHNAME.eq(t.getFilePathname()),
 					PROFILETABLE.FILE_TITLE.eq(t.getFileTitle()),
@@ -144,18 +150,19 @@ public class ProfileDaoImpl extends TinyDslDaoSupport implements ProfileDao {
 					PROFILETABLE.FILE_DOWNLOADS.eq(t.getFileDownloads()),
 					PROFILETABLE.FILE_EXTRA.eq(t.getFileExtra()),
 					PROFILETABLE.FILE_DELETED.eq(t.getFileDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<Profile> queryPager(int start,int limit ,Profile profile) {
+	public Pager<Profile> queryPager(int start,int limit ,Profile profile ,final OrderBy... orderBies) {
 		if(profile==null){
 			profile=new Profile();
 		}
 		return getDslTemplate().queryPager(start, limit, profile, false, new SelectGenerateCallback<Profile>() {
 
 			public Select generate(Profile t) {
-				return MysqlSelect.selectFrom(PROFILETABLE).where(
+				Select select = MysqlSelect.selectFrom(PROFILETABLE).where(
 				and(
 					PROFILETABLE.FILE_PATHNAME.eq(t.getFilePathname()),
 					PROFILETABLE.FILE_TITLE.eq(t.getFileTitle()),
@@ -168,6 +175,7 @@ public class ProfileDaoImpl extends TinyDslDaoSupport implements ProfileDao {
 					PROFILETABLE.FILE_DOWNLOADS.eq(t.getFileDownloads()),
 					PROFILETABLE.FILE_EXTRA.eq(t.getFileExtra()),
 					PROFILETABLE.FILE_DELETED.eq(t.getFileDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -247,4 +255,17 @@ public class ProfileDaoImpl extends TinyDslDaoSupport implements ProfileDao {
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

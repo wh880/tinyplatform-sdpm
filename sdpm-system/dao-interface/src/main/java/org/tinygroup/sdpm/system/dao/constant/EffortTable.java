@@ -100,8 +100,8 @@ public class EffortTable extends Table {
 	public final Column EFFORT_END = new Column(this, "effort_end");
 
 
-		private EffortTable() {
-			super("effort");
-		}
+	private EffortTable() {
+		super("effort");
+	}
 
 }

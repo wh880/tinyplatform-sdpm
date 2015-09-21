@@ -70,8 +70,8 @@ public class SystemConfigTable extends Table {
 	public final Column DELETED = new Column(this, "deleted");
 
 
-		private SystemConfigTable() {
-			super("system_config");
-		}
+	private SystemConfigTable() {
+		super("system_config");
+	}
 
 }

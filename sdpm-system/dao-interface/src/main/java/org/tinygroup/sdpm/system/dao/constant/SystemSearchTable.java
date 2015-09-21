@@ -76,8 +76,8 @@ public class SystemSearchTable extends Table {
 	public final Column DELETED = new Column(this, "deleted");
 
 
-		private SystemSearchTable() {
-			super("system_search");
-		}
+	private SystemSearchTable() {
+		super("system_search");
+	}
 
 }

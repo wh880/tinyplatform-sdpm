@@ -100,8 +100,8 @@ public class ProfileTable extends Table {
 	public final Column FILE_DELETED = new Column(this, "file_deleted");
 
 
-		private ProfileTable() {
-			super("profile");
-		}
+	private ProfileTable() {
+		super("profile");
+	}
 
 }

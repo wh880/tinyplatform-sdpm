@@ -20,52 +20,52 @@ import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
 
 /** 
- * 数据字典
+ * 操作历史表
  * 
  */
-public class SystemDictTable extends Table {
+public class HistoryTable extends Table {
 
-	public static final SystemDictTable SYSTEM_DICTTABLE = new SystemDictTable();
-
-	/** 
-	 * 字典项ID
-	 * 
-	 */
-	public final Column DICT_ID = new Column(this, "dict_id");
+	public static final HistoryTable HISTORYTABLE = new HistoryTable();
 
 	/** 
-	 * 字典key值
+	 * 操作历史ID
 	 * 
 	 */
-	public final Column DICT_KEY = new Column(this, "dict_key");
+	public final Column HISTORY_ID = new Column(this, "history_id");
 
 	/** 
-	 * 字典value值
+	 * 操作ID
 	 * 
 	 */
-	public final Column DICT_VALUE = new Column(this, "dict_value");
+	public final Column HISTORY_ACTION = new Column(this, "history_action");
 
 	/** 
-	 * 字典项序号
+	 * 所属领域
 	 * 
 	 */
-	public final Column DICT_SORT = new Column(this, "dict_sort");
+	public final Column HISTORY_FIELD = new Column(this, "history_field");
 
 	/** 
-	 * 模块ID
+	 * 当前历史
 	 * 
 	 */
-	public final Column MODULE_ID = new Column(this, "module_id");
+	public final Column HISTORY_NEW = new Column(this, "history_new");
 
 	/** 
-	 * 已删除
+	 * 上一条历史
 	 * 
 	 */
-	public final Column DELETED = new Column(this, "deleted");
+	public final Column HISTORY_OLD = new Column(this, "history_old");
+
+	/** 
+	 * 对比
+	 * 
+	 */
+	public final Column HISTORY_DIFF = new Column(this, "history_diff");
 
 
-	private SystemDictTable() {
-		super("system_dict");
+	private HistoryTable() {
+		super("history");
 	}
 
 }
