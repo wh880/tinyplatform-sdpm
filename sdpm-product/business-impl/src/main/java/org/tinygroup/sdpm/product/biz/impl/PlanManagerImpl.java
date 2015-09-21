@@ -12,35 +12,36 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 @Service
 @Transactional
 public class PlanManagerImpl implements PlanManager{
+	
+	@Autowired
+	private ProductPlanDao productPlanDao;
+	
+	public ProductPlan add(ProductPlan plan) {
 
-    @Autowired
-    private ProductPlanDao planDao;
+		return productPlanDao.add(plan);
+	}
 
-    public ProductPlan add(ProductPlan plan) {
+	public int update(ProductPlan plan) {
 
-        return planDao.add(plan);
-    }
+		return productPlanDao.edit(plan);
+	}
 
-    public int update(ProductPlan plan) {
+	public int delete(Integer planId) {
+		
+		ProductPlan plan = new ProductPlan();
+		plan.setPlanId(planId);
+		plan.setDeleted(ProductPlan.DELETE_YES);
+		return productPlanDao.edit(plan);
+	}
 
-        return planDao.edit(plan);
-    }
+	public ProductPlan find(Integer planId) {
 
-    public int delete(Integer planId) {
-        ProductPlan plan = new ProductPlan();
-        plan.setPlanId(planId);
-        plan.setDeleted(ProductPlan.DELETE_YES);
-        return planDao.edit(plan);
-    }
+		return productPlanDao.getByKey(planId);
+	}
 
-    public ProductPlan find(Integer planId) {
+	public List<ProductPlan> findList(ProductPlan plan) {
 
-        return planDao.getByKey(planId);
-    }
-
-    public List<ProductPlan> findList(ProductPlan plan) {
-
-        return planDao.query(plan);
-    }
+		return productPlanDao.query(plan);
+	}
 
 }
