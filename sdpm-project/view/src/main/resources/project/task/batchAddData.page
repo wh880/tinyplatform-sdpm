@@ -65,13 +65,14 @@
                     #@validateDiv("col-2")#end
                 #end
                 #@th()
-                    #tinyInput("text" "username")
+                    #tinyInput("text" "username"""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！"})
                 #end
                 #@th()
                     #@formControlDiv( )
                         #@Tselect2F()
                             #@Tselect2Body(
-                                "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                "lang" "T" {"class":"input-text select2","datatype":"*4-16","nullmsg":"不能为空"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="T"></option>
                             <option value="CT">Connecticut</option>
                             <option value="DE">Delaware</option>
                             <option value="FL">Florida</option>
