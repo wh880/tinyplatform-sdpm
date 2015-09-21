@@ -14,7 +14,7 @@ public interface RequestService {
      * @param id 主键
      * @return
      */
-    Request findRequest(String id);
+    Request findRequest(Integer id);
 
     /**
      * 根据产品模块id查找请求
