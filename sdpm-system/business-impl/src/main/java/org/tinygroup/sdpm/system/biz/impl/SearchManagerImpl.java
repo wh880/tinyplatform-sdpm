@@ -15,7 +15,7 @@ public class SearchManagerImpl {
     private SystemSearchDao searchDao;
 
     public  SystemSearch add(SystemSearch search){
-        return searchDao.add(search)
+        return searchDao.add(search);
     }
 
     public  int delete(SystemSearch searchId){
