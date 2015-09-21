@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.quality.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class BugServiceImpl implements BugService {
 	}
 	
 	public Bug addBug(Bug bug){
+		bug.setBugOpenedDate(new Date());
+		bug.setBugOpenedBy(bug.getBugOpenedBy());
 		return bugdao.add(bug);
 	}
 	
@@ -24,6 +27,8 @@ public class BugServiceImpl implements BugService {
 	}
 	
 	public int updateBug(Bug bug){
+		bug.setBugLastEditedDate(new Date());
+		bug.setBugLastEditedBy(bug.getBugLastEditedBy());
 		return bugdao.edit(bug);
 	}
 }
