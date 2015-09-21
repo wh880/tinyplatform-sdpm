@@ -4,10 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.quality.dao.BugDao;
 import org.tinygroup.sdpm.quality.dao.pojo.Bug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 
+@Component("BugService")
 public class BugServiceImpl implements BugService {
 	@Autowired
 	private BugDao bugdao;
