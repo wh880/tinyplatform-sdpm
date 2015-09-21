@@ -196,7 +196,6 @@
     </build>
     <modules>
         <module>app</module>
-        <module>base-dao</module>
         <module>business-interface</module>
         <module>business-impl</module>
         <module>common</module>

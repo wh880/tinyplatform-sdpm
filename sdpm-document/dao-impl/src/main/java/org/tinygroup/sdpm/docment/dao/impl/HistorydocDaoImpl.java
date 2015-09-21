@@ -184,7 +184,7 @@ public class HistorydocDaoImpl extends TinyDslDaoSupport implements HistorydocDa
 			public Delete generate() {
 				return delete(HISTORYDOCTABLE).where(and(
 				HISTORYDOCTABLE.RECORD_ID.eq(new JdbcNamedParameter("recordId")),
-				HISTORYDOCTABLE.DOC_ID.value(new JdbcNamedParameter("docId")),
+				HISTORYDOCTABLE.DOC_ID.eq(new JdbcNamedParameter("docId")),
 				HISTORYDOCTABLE.REC_TIME.eq(new JdbcNamedParameter("recTime")),
 				HISTORYDOCTABLE.REC_WHO.eq(new JdbcNamedParameter("recWho"))));
 			}
