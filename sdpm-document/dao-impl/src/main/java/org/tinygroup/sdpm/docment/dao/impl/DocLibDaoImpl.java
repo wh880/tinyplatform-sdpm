@@ -14,19 +14,20 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.document.dao.impl;
+package org.tinygroup.sdpm.docment.dao.impl;
 
+import static org.tinygroup.sdpm.docment.constant.DocLibTable.*;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.sdpm.document.constant.DocLibTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
-
 import java.util.List;
 
+import org.tinygroup.sdpm.docment.dao.inter.DocLibDao;
+import org.tinygroup.sdpm.docment.pojo.DocLib;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -35,10 +36,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.sdpm.document.pojo.DocLib;
-import org.tinygroup.sdpm.document.dao.inter.DocLibDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
