@@ -17,4 +17,10 @@ public interface TestResultService {
 	 * @return
 	 */
 	TestResult findByid(int id);
+	/**
+	 * 编辑
+	 * @param testresult
+	 * @return
+	 */
+	int updateTestResult(TestResult testresult);
 }
