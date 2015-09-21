@@ -14,33 +14,27 @@ public interface TaskService {
     /**
      * 新建任务
      *
-     * @param projectTask
+     * @param Task
      * @return
      */
-    public ProjectTask save(ProjectTask projectTask);
-
-    /**
-     * 查询所有任务
-     *
-     * @return
-     */
-    public Pager<ProjectTask> findList();
+    public ProjectTask addTask(ProjectTask Task);
 
     /**
      * 分组产看任务
      *
      * @param colum
+     * @param projectId
      * @return
      */
-    public Map<String, List<ProjectTask>> findByGroup(String colum);
+    public Map<String, List<ProjectTask>> findByGroup(int projectId, String colum);
 
     /**
      * 根据任务状态进行查询
      *
-     * @param status
+     * @param task
      * @return
      */
-    public Pager<ProjectTask> findByStatus(String status);
+    public List<ProjectTask> findListTask(ProjectTask task);
 
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
@@ -49,16 +43,12 @@ public interface TaskService {
      * @param projectTask
      * @return
      */
-    public ProjectTask update(ProjectTask projectTask);
+    public Integer updateTask(ProjectTask projectTask);
 
     /**
-     * 复杂查询，延期
+     * 复杂查询
      *
      * @return
      */
     public Pager<ProjectTask> findComplex();
-
-    public void ouputFile();
-
-    public void input();
 }

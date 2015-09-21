@@ -26,6 +26,16 @@
             <artifactId>sdpm-common-common</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>sdpm-project-service-interface</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>sdpm-project-service-wrapper</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+      </dependency>
 
       <dependency>
             <groupId>org.tinygroup</groupId>
