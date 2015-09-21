@@ -16,18 +16,10 @@
 
 package org.tinygroup.sdpm.system.dao;
 
-import java.util.Date;
-import java.util.List;
-
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-import org.tinygroup.sdpm.system.dao.pojo.Effort;
 
-public interface EffortDao extends BaseDao<Effort,Integer> {
-	/**
-	 * 通过时间段查询
-	 * @param begindate
-	 * @param enddate
-	 * @return
-	 */
-	List<Effort>  findBetweenDate(Date begindate,Date enddate);
+import org.tinygroup.sdpm.system.dao.pojo.History;
+
+public interface HistoryDao extends BaseDao<History,Integer> {
+
 }

@@ -24,9 +24,11 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -35,9 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.dao.ProductLineDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -46,7 +51,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
-@Repository
 public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLineDao {
 
 	public ProductLine add(ProductLine productLine) {
@@ -137,7 +141,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		});
 	}
 
-	public List<ProductLine> query(ProductLine productLine) {
+	public List<ProductLine> query(ProductLine productLine ,final OrderBy... orderBies) {
 		if(productLine==null){
 			productLine=new ProductLine();
 		}
@@ -145,7 +149,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(ProductLine t) {
-				return selectFrom(PRODUCTLINETABLE).where(
+				Select select = selectFrom(PRODUCTLINETABLE).where(
 				and(
 					PRODUCTLINETABLE.COMPANY_ID.eq(t.getCompanyId()),
 					PRODUCTLINETABLE.DEPT_ID.eq(t.getDeptId()),
@@ -164,18 +168,19 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 					PRODUCTLINETABLE.PRODUCTLINE_CREATEDBY.eq(t.getProductLineCreatedBy()),
 					PRODUCTLINETABLE.PRODUCTLINE_CREATEDDATE.eq(t.getProductLineCreatedDate()),
 					PRODUCTLINETABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<ProductLine> queryPager(int start,int limit ,ProductLine productLine) {
+	public Pager<ProductLine> queryPager(int start,int limit ,ProductLine productLine ,final OrderBy... orderBies) {
 		if(productLine==null){
 			productLine=new ProductLine();
 		}
 		return getDslTemplate().queryPager(start, limit, productLine, false, new SelectGenerateCallback<ProductLine>() {
 
 			public Select generate(ProductLine t) {
-				return MysqlSelect.selectFrom(PRODUCTLINETABLE).where(
+				Select select = MysqlSelect.selectFrom(PRODUCTLINETABLE).where(
 				and(
 					PRODUCTLINETABLE.COMPANY_ID.eq(t.getCompanyId()),
 					PRODUCTLINETABLE.DEPT_ID.eq(t.getDeptId()),
@@ -194,6 +199,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 					PRODUCTLINETABLE.PRODUCTLINE_CREATEDBY.eq(t.getProductLineCreatedBy()),
 					PRODUCTLINETABLE.PRODUCTLINE_CREATEDDATE.eq(t.getProductLineCreatedDate()),
 					PRODUCTLINETABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -291,4 +297,17 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

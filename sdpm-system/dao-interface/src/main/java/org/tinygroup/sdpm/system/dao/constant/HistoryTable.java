@@ -14,58 +14,58 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.product.dao.constant;
+package org.tinygroup.sdpm.system.dao.constant;
 
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
 
 /** 
- * 需求表述表
+ * 操作历史表
  * 
  */
-public class ProductStorySpecTable extends Table {
+public class HistoryTable extends Table {
 
-	public static final ProductStorySpecTable PRODUCT_STORYSPECTABLE = new ProductStorySpecTable();
-
-	/** 
-	 * 公司ID
-	 * 
-	 */
-	public final Column COMPANY_ID = new Column(this, "company_id");
+	public static final HistoryTable HISTORYTABLE = new HistoryTable();
 
 	/** 
-	 * 需求ID
+	 * 操作历史ID
 	 * 
 	 */
-	public final Column STORY_ID = new Column(this, "story_id");
+	public final Column HISTORY_ID = new Column(this, "history_id");
 
 	/** 
-	 * 需求版本
+	 * 操作ID
 	 * 
 	 */
-	public final Column STORY_VERSION = new Column(this, "story_version");
+	public final Column HISTORY_ACTION = new Column(this, "history_action");
 
 	/** 
-	 * 需求标题
+	 * 所属领域
 	 * 
 	 */
-	public final Column STORY_TITLE = new Column(this, "story_title");
+	public final Column HISTORY_FIELD = new Column(this, "history_field");
 
 	/** 
-	 * 需求描述
+	 * 当前历史
 	 * 
 	 */
-	public final Column STORY_SPEC = new Column(this, "story_spec");
+	public final Column HISTORY_NEW = new Column(this, "history_new");
 
 	/** 
-	 * 验证标准
+	 * 上一条历史
 	 * 
 	 */
-	public final Column STORY_VERIFICATION = new Column(this, "story_verification");
+	public final Column HISTORY_OLD = new Column(this, "history_old");
+
+	/** 
+	 * 对比
+	 * 
+	 */
+	public final Column HISTORY_DIFF = new Column(this, "history_diff");
 
 
-	private ProductStorySpecTable() {
-		super("product_storySpec");
+	private HistoryTable() {
+		super("history");
 	}
 
 }

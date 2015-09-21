@@ -24,12 +24,11 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
-
-
-import org.tinygroup.sdpm.system.dao.MailqueueDao;
-import org.tinygroup.sdpm.system.dao.pojo.Mailqueue;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -38,7 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.system.dao.pojo.Mailqueue;
+import org.tinygroup.sdpm.system.dao.MailqueueDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -121,7 +125,7 @@ public class MailqueueDaoImpl extends TinyDslDaoSupport implements MailqueueDao 
 		});
 	}
 
-	public List<Mailqueue> query(Mailqueue mailqueue) {
+	public List<Mailqueue> query(Mailqueue mailqueue ,final OrderBy... orderBies) {
 		if(mailqueue==null){
 			mailqueue=new Mailqueue();
 		}
@@ -129,7 +133,7 @@ public class MailqueueDaoImpl extends TinyDslDaoSupport implements MailqueueDao 
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(Mailqueue t) {
-				return selectFrom(MAILQUEUETABLE).where(
+				Select select = selectFrom(MAILQUEUETABLE).where(
 				and(
 					MAILQUEUETABLE.MAILQUEUE_TOLIST.eq(t.getMailqueueToList()),
 					MAILQUEUETABLE.MAILQUEUE_CCLIST.eq(t.getMailqueueCcList()),
@@ -140,18 +144,19 @@ public class MailqueueDaoImpl extends TinyDslDaoSupport implements MailqueueDao 
 					MAILQUEUETABLE.MAILQUEUE_SENDTIME.eq(t.getMailqueueSendTime()),
 					MAILQUEUETABLE.MAILQUEUE_STATUS.eq(t.getMailqueueStatus()),
 					MAILQUEUETABLE.MAILQUEUE_FAILREASON.eq(t.getMailqueueFailReason())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<Mailqueue> queryPager(int start,int limit ,Mailqueue mailqueue) {
+	public Pager<Mailqueue> queryPager(int start,int limit ,Mailqueue mailqueue ,final OrderBy... orderBies) {
 		if(mailqueue==null){
 			mailqueue=new Mailqueue();
 		}
 		return getDslTemplate().queryPager(start, limit, mailqueue, false, new SelectGenerateCallback<Mailqueue>() {
 
 			public Select generate(Mailqueue t) {
-				return MysqlSelect.selectFrom(MAILQUEUETABLE).where(
+				Select select = MysqlSelect.selectFrom(MAILQUEUETABLE).where(
 				and(
 					MAILQUEUETABLE.MAILQUEUE_TOLIST.eq(t.getMailqueueToList()),
 					MAILQUEUETABLE.MAILQUEUE_CCLIST.eq(t.getMailqueueCcList()),
@@ -162,6 +167,7 @@ public class MailqueueDaoImpl extends TinyDslDaoSupport implements MailqueueDao 
 					MAILQUEUETABLE.MAILQUEUE_SENDTIME.eq(t.getMailqueueSendTime()),
 					MAILQUEUETABLE.MAILQUEUE_STATUS.eq(t.getMailqueueStatus()),
 					MAILQUEUETABLE.MAILQUEUE_FAILREASON.eq(t.getMailqueueFailReason())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -235,4 +241,17 @@ public class MailqueueDaoImpl extends TinyDslDaoSupport implements MailqueueDao 
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

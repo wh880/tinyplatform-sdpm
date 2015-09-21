@@ -24,10 +24,11 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
-import org.tinygroup.sdpm.system.dao.SysModuleDao;
-import org.tinygroup.sdpm.system.dao.pojo.SysModule;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -36,7 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.system.dao.pojo.SysModule;
+import org.tinygroup.sdpm.system.dao.SysModuleDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -117,7 +123,7 @@ public class SysModuleDaoImpl extends TinyDslDaoSupport implements SysModuleDao 
 		});
 	}
 
-	public List<SysModule> query(SysModule sysModule) {
+	public List<SysModule> query(SysModule sysModule ,final OrderBy... orderBies) {
 		if(sysModule==null){
 			sysModule=new SysModule();
 		}
@@ -125,7 +131,7 @@ public class SysModuleDaoImpl extends TinyDslDaoSupport implements SysModuleDao 
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(SysModule t) {
-				return selectFrom(SYS_MODULETABLE).where(
+				Select select = selectFrom(SYS_MODULETABLE).where(
 				and(
 					SYS_MODULETABLE.SYS_MODULE_ROOT.eq(t.getSysModuleRoot()),
 					SYS_MODULETABLE.SYS_MODULE_NAME.eq(t.getSysModuleName()),
@@ -135,18 +141,19 @@ public class SysModuleDaoImpl extends TinyDslDaoSupport implements SysModuleDao 
 					SYS_MODULETABLE.SYS_MODULE_ORDER.eq(t.getSysModuleOrder()),
 					SYS_MODULETABLE.SYS_MODULE_TYPE.eq(t.getSysModuleType()),
 					SYS_MODULETABLE.SYS_MODULE_OWNER.eq(t.getSysModuleOwner())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<SysModule> queryPager(int start,int limit ,SysModule sysModule) {
+	public Pager<SysModule> queryPager(int start,int limit ,SysModule sysModule ,final OrderBy... orderBies) {
 		if(sysModule==null){
 			sysModule=new SysModule();
 		}
 		return getDslTemplate().queryPager(start, limit, sysModule, false, new SelectGenerateCallback<SysModule>() {
 
 			public Select generate(SysModule t) {
-				return MysqlSelect.selectFrom(SYS_MODULETABLE).where(
+				Select select = MysqlSelect.selectFrom(SYS_MODULETABLE).where(
 				and(
 					SYS_MODULETABLE.SYS_MODULE_ROOT.eq(t.getSysModuleRoot()),
 					SYS_MODULETABLE.SYS_MODULE_NAME.eq(t.getSysModuleName()),
@@ -156,6 +163,7 @@ public class SysModuleDaoImpl extends TinyDslDaoSupport implements SysModuleDao 
 					SYS_MODULETABLE.SYS_MODULE_ORDER.eq(t.getSysModuleOrder()),
 					SYS_MODULETABLE.SYS_MODULE_TYPE.eq(t.getSysModuleType()),
 					SYS_MODULETABLE.SYS_MODULE_OWNER.eq(t.getSysModuleOwner())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -226,4 +234,17 @@ public class SysModuleDaoImpl extends TinyDslDaoSupport implements SysModuleDao 
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

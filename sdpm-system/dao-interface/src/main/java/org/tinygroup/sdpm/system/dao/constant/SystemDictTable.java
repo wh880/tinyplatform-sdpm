@@ -64,8 +64,8 @@ public class SystemDictTable extends Table {
 	public final Column DELETED = new Column(this, "deleted");
 
 
-		private SystemDictTable() {
-			super("system_dict");
-		}
+	private SystemDictTable() {
+		super("system_dict");
+	}
 
 }

@@ -82,8 +82,8 @@ public class SysModuleTable extends Table {
 	public final Column SYS_MODULE_OWNER = new Column(this, "sys_module_owner");
 
 
-		private SysModuleTable() {
-			super("sys_module");
-		}
+	private SysModuleTable() {
+		super("sys_module");
+	}
 
 }

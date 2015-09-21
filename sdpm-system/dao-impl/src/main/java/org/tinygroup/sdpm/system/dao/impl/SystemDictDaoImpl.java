@@ -24,9 +24,11 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -35,9 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.system.dao.SystemDictDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -46,7 +51,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
-@Repository
 public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDao {
 
 	public SystemDict add(SystemDict systemDict) {
@@ -114,7 +118,7 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 		});
 	}
 
-	public List<SystemDict> query(SystemDict systemDict) {
+	public List<SystemDict> query(SystemDict systemDict ,final OrderBy... orderBies) {
 		if(systemDict==null){
 			systemDict=new SystemDict();
 		}
@@ -122,7 +126,7 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(SystemDict t) {
-				return selectFrom(SYSTEM_DICTTABLE).where(
+				Select select = selectFrom(SYSTEM_DICTTABLE).where(
 				and(
 					SYSTEM_DICTTABLE.DICT_ID.eq(t.getDictId()),
 					SYSTEM_DICTTABLE.DICT_KEY.eq(t.getDictKey()),
@@ -130,18 +134,19 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 					SYSTEM_DICTTABLE.DICT_SORT.eq(t.getDictSort()),
 					SYSTEM_DICTTABLE.MODULE_ID.eq(t.getModuleId()),
 					SYSTEM_DICTTABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<SystemDict> queryPager(int start,int limit ,SystemDict systemDict) {
+	public Pager<SystemDict> queryPager(int start,int limit ,SystemDict systemDict ,final OrderBy... orderBies) {
 		if(systemDict==null){
 			systemDict=new SystemDict();
 		}
 		return getDslTemplate().queryPager(start, limit, systemDict, false, new SelectGenerateCallback<SystemDict>() {
 
 			public Select generate(SystemDict t) {
-				return MysqlSelect.selectFrom(SYSTEM_DICTTABLE).where(
+				Select select = MysqlSelect.selectFrom(SYSTEM_DICTTABLE).where(
 				and(
 					SYSTEM_DICTTABLE.DICT_ID.eq(t.getDictId()),
 					SYSTEM_DICTTABLE.DICT_KEY.eq(t.getDictKey()),
@@ -149,6 +154,7 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 					SYSTEM_DICTTABLE.DICT_SORT.eq(t.getDictSort()),
 					SYSTEM_DICTTABLE.MODULE_ID.eq(t.getModuleId()),
 					SYSTEM_DICTTABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -212,4 +218,17 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

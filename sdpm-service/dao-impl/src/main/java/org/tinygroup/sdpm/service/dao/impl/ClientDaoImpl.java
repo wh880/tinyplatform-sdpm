@@ -27,6 +27,8 @@ import java.io.Serializable;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -46,7 +48,8 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-
+@Repository
+@LogClass("service")
 public class ClientDaoImpl extends TinyDslDaoSupport implements ClientDao {
 
 	public Client add(Client client) {

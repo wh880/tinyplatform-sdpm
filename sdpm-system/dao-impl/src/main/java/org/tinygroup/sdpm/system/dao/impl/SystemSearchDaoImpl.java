@@ -24,9 +24,11 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -35,9 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
 import org.tinygroup.sdpm.system.dao.SystemSearchDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -46,7 +51,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
-@Repository
 public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSearchDao {
 
 	public SystemSearch add(SystemSearch systemSearch) {
@@ -117,7 +121,7 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 		});
 	}
 
-	public List<SystemSearch> query(SystemSearch systemSearch) {
+	public List<SystemSearch> query(SystemSearch systemSearch ,final OrderBy... orderBies) {
 		if(systemSearch==null){
 			systemSearch=new SystemSearch();
 		}
@@ -125,7 +129,7 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(SystemSearch t) {
-				return selectFrom(SYSTEM_SEARCHTABLE).where(
+				Select select = selectFrom(SYSTEM_SEARCHTABLE).where(
 				and(
 					SYSTEM_SEARCHTABLE.SEARCH_OBJECTTYPE.eq(t.getSearchObjectType()),
 					SYSTEM_SEARCHTABLE.SEARCH_OBJECTID.eq(t.getSearchObjectID()),
@@ -134,18 +138,19 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 					SYSTEM_SEARCHTABLE.SEARCH_ADDEDDATE.eq(t.getSearchAddedDate()),
 					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.eq(t.getSearchEditedDate()),
 					SYSTEM_SEARCHTABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<SystemSearch> queryPager(int start,int limit ,SystemSearch systemSearch) {
+	public Pager<SystemSearch> queryPager(int start,int limit ,SystemSearch systemSearch ,final OrderBy... orderBies) {
 		if(systemSearch==null){
 			systemSearch=new SystemSearch();
 		}
 		return getDslTemplate().queryPager(start, limit, systemSearch, false, new SelectGenerateCallback<SystemSearch>() {
 
 			public Select generate(SystemSearch t) {
-				return MysqlSelect.selectFrom(SYSTEM_SEARCHTABLE).where(
+				Select select = MysqlSelect.selectFrom(SYSTEM_SEARCHTABLE).where(
 				and(
 					SYSTEM_SEARCHTABLE.SEARCH_OBJECTTYPE.eq(t.getSearchObjectType()),
 					SYSTEM_SEARCHTABLE.SEARCH_OBJECTID.eq(t.getSearchObjectID()),
@@ -154,6 +159,7 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 					SYSTEM_SEARCHTABLE.SEARCH_ADDEDDATE.eq(t.getSearchAddedDate()),
 					SYSTEM_SEARCHTABLE.SEARCH_EDITEDDATE.eq(t.getSearchEditedDate()),
 					SYSTEM_SEARCHTABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -221,4 +227,17 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

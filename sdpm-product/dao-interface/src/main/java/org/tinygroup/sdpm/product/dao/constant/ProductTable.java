@@ -137,8 +137,8 @@ public class ProductTable extends Table {
 	public final Column DELETED = new Column(this, "deleted");
 
 
-		private ProductTable() {
-			super("product");
-		}
+	private ProductTable() {
+		super("product");
+	}
 
 }
