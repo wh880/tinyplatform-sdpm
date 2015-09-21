@@ -16,25 +16,25 @@ import java.util.List;
 @Transactional
 public class TaskEsTimatesManagerImpl implements TaskEsTimateManager {
     @Autowired
-    private ProjectTaskestimateDao projectTaskestimateDao;
+    private ProjectTaskestimateDao taskestimateDao;
 
-    public ProjectTaskestimate find(String id) {
-        return null;
+    public ProjectTaskestimate find(int id) {
+        return taskestimateDao.getByKey(id);
     }
 
     public List<ProjectTaskestimate> findList(ProjectTaskestimate taskestimate) {
-        return null;
+        return taskestimateDao.query(taskestimate);
     }
 
     public ProjectTaskestimate add(ProjectTaskestimate taskestimate) {
-        return null;
+        return taskestimateDao.add(taskestimate);
     }
 
-    public ProjectTaskestimate update(ProjectTaskestimate taskestimate) {
-        return null;
+    public Integer update(ProjectTaskestimate taskestimate) {
+        return taskestimateDao.edit(taskestimate);
     }
 
-    public Integer delete(String id) {
-        return null;
+    public Integer delete(int id) {
+        return taskestimateDao.deleteByKey(id);
     }
 }

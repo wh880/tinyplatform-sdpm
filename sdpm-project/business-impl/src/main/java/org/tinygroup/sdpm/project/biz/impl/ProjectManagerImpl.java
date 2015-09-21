@@ -31,7 +31,7 @@ public class ProjectManagerImpl implements ProjectManager {
         return projectDao.add(project);
     }
 
-    public int update(Project project) {
+    public Integer update(Project project) {
         return projectDao.edit(project);
     }
 
