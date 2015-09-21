@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.tinygroup.sdpm.docment.pojo.Doc;
 import org.tinygroup.sdpm.docment.pojo.DocLib;
+import org.tinygroup.sdpm.docment.pojo.Historydoc;
 import org.tinygroup.tinysqldsl.Pager;
 /**
  * @date 2015/09/21
@@ -23,6 +24,8 @@ public interface DocService {
 	public int editDocLibName(DocLib doclib);
 	//find
 	public Doc findDocById(Integer id);
+	//文档操作记录
+	public List<Historydoc> getEditRecord(Integer docid);
 	public DocLib findDoclibById(Integer id);
 	//list
 	public List<Doc> findDocByDocClass(Doc doc);
