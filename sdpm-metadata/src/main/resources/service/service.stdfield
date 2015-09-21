@@ -18,7 +18,7 @@
   <standard-field id="5ace7904dd0d47a09aaeb45202ef4d40" name="requester" title="联系人" business-type-id="095e594e1550424b9643c7e2279e85be">
     <description>默认为需求提交人或产品客户其他联系人</description>
   </standard-field>
-  <standard-field id="c8d123b6a19e44dc86e8d98e0cca9b1d" name="reply_opinion" title="回复意见" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="0">
+  <standard-field id="c8d123b6a19e44dc86e8d98e0cca9b1d" name="reply_opinion" title="回复意见" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0">
     <description>0-接受；1-拒绝；2-待定</description>
   </standard-field>
   <standard-field id="c457a69854e24534a2bff327ed642e6c" name="reply_done" title="是否回复" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="0">
@@ -83,7 +83,7 @@ Priority:0-low,1-common,2-urgent</description>
     <description>服务请求ID</description>
   </standard-field>
   <standard-field id="6171afc19fb141789e00ea6496d9a315" name="faq_created_by" title="创建人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="123cfdd2e43b4822b26ccb665e6b0a31" name="faq_type" title="问答类型" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
+  <standard-field id="123cfdd2e43b4822b26ccb665e6b0a31" name="faq_type" title="问答类型" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="bf16d70759b242b6ad09da8e41d87edf" name="request_is_abnormal" title="异常标记" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="0">
     <description>0-正常；1-异常；2-重大异常</description>
   </standard-field>
@@ -108,7 +108,9 @@ Priority:0-low,1-common,2-urgent</description>
     <description>回访人account，当前操作者</description>
   </standard-field>
   <standard-field id="1786285066dd4f408bbae01233a96b53" name="client_id" title="客户ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
-  <standard-field id="2257ec3a6d074affb282cc504df6cc1a" name="client_spec" title="客户描述" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="2257ec3a6d074affb282cc504df6cc1a" name="client_spec" title="客户描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" default="">
+    <description></description>
+  </standard-field>
   <standard-field id="1497afcc2c76435887f7f51b5defc8fc" name="request_title" title="请求标题" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="7fa5c61131d7439c980f91dbf0345829" name="release_type" title="发布版本类型" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
   <standard-field id="1c4f22bb730e49149298a0c6fe00c137" name="request_release_date" title="请求完成日期" business-type-id="37028c8a9cd44ad69aa2e42084b5dcf0">
@@ -131,7 +133,7 @@ Priority:0-low,1-common,2-urgent</description>
   <standard-field id="bccc064cc7f54464824d9db82d01f9c8" name="request_close_date" title="关闭时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="b35d189236be4548b694dc5f422e87b0" name="faq_create_date" title="创建时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="f8f86043412a436b8ef8ca4bd4fb22f3" name="sla_close_date" title="关闭时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="a6e55c64f8004ca195d1c6f74b154f86" name="request_type" title="请求类型" business-type-id="ccd3e83b1cae428987599fb95985fa70">
+  <standard-field id="a6e55c64f8004ca195d1c6f74b154f86" name="request_type" title="请求类型" business-type-id="27ebfcdc558c477da425a46e566d4637" default="">
     <description>请求类型&#xd;
 Event type:0-bug(缺陷/纠错,1-req1（适应性）,2-req2（完善或增强）,3-req3（个性化定制）,4-reg4（全新）,&#xd;
 5-training,6-support,7-question</description>
@@ -171,7 +173,9 @@ Event type:0-bug(缺陷/纠错,1-req1（适应性）,2-req2（完善或增强）
   <standard-field id="2cca0dec07cc49859fceac7289b6d0df" name="user_phone" title="客户联系电话" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="398e31c8923d47868aa9e180fa975d11" name="user_post" title="联系人职务" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="4a0f195409da4cb681d4e4891c4b02f6" name="cilent_product_vision" title="产品版本" business-type-id="286a6bca92b34779bcb6fc8809f0a666"/>
-  <standard-field id="c83a241663e541c6b5cbea631a848388" name="faq_type_id" title="问题类型id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="c83a241663e541c6b5cbea631a848388" name="faq_type_id" title="问题类型id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
+    <description></description>
+  </standard-field>
   <standard-field id="57510782cae14bc3a7b1f5925d324d85" name="faq_parent_type_id" title="父级问题类型id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="053cc92b39714257a6dedd40355e7e09" name="faq_type_creatDay" title="faq类型创建时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="62a784375ece49b189f39854ce757d76" name="faq_type_creatby" title="faq类型创建者" business-type-id="095e594e1550424b9643c7e2279e85be"/>
