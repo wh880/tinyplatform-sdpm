@@ -14,7 +14,7 @@ public interface ReviewManager {
      * @param id 主键
      * @return
      */
-    Review find(String id);
+    Review find(Integer id);
 
     /**
      * 根据产品模块id回访中的请求
