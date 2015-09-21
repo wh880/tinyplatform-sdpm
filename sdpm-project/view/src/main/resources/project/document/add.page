@@ -98,66 +98,71 @@
                     #end
 
                     #@elementItem()
-                        #@colLabel()文档类型#end
-                        #@skinMinimal("mt-20")
-                            #labelRadio1(rId="typefile" rName="type" rValue="file" labelText="文件"
-                                "setType(this.value);")
-                            #labelRadio1(rId="typeurl" rName="type" rValue="url" labelText="链接" "setType(this.value);")
-                            #labelRadio1(rId="typetext" rName="type" rValue="text" labelText="网页"
-                                "setType(this.value);")
+                        #@sdpmItem("文档类型")
+                            #@skinMinimal("mt-20")
+                                #labelRadio1(rId="typefile" rName="type" rValue="file" labelText="文件"
+                                    "setType(this.value);")
+                                #labelRadio1(rId="typeurl" rName="type" rValue="url" labelText="链接"
+                                    "setType(this.value);")
+                                #labelRadio1(rId="typetext" rName="type" rValue="text" labelText="网页"
+                                    "setType(this.value);")
 
+                            #end
                         #end
-                        #@validateDiv("col-2")#end
                     #end
 
                     #@elementItem()
-                        #@colLabel()文档标题#end
-                        #@formControlDiv("col-8")
-                            #tinyInput("text" "doctitle" ""{"style":"width:300px","placeholder":"","datatype":"*4-16",
-                                "nullmsg":"标题不能为空！","id":"doctitle","class":"input-text"})
+                        #@sdpmItem("文档标题")
+                            #@formControlDiv("col-8")
+                                #tinyInput(
+                                    "text" "doctitle" ""{"style":"width:300px","placeholder":"","datatype":"*4-16",
+                                    "nullmsg":"标题不能为空！","id":"doctitle","class":"input-text"})
+                            #end
                         #end
                     #end
-                    #@validateDiv("col-2")#end
+
                     #@elementItem(elementId="urlBox" eleItemClass="hidden")
-                        #@colLabel()文档URL#end
-                        #@formControlDiv("col-8")
-                            #tinyInput(
-                                "text" "docurl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16",
-                                "id":"docurl","class":"input-text"})
+                        #@sdpmItem("文档URL")
+                            #@formControlDiv("col-8")
+                                #tinyInput(
+                                    "text" "docurl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16",
+                                    "id":"docurl","class":"input-text"})
+                            #end
                         #end
                     #end
                     #@validateDiv("col-2")#end
                     #@elementItem()
-                        #@colLabel()关键字#end
-                        #@formControlDiv("col-8")
-                            #tinyInput(
-                                "text" "keywords" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","id":
-                                "keywords","class":"input-text"})
+                        #@sdpmItem("关键字")
+                            #@formControlDiv("col-8")
+                                #tinyInput(
+                                    "text" "keywords" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","id":
+                                    "keywords","class":"input-text"})
+                            #end
                         #end
                     #end
                     #@validateDiv("col-2")#end
 
                     #@elementItem()
-                        #@colLabel()文档摘要#end
-                        #@formControlDiv("col-6")
-                            #@Teditor("content1" "content1" {"initialFrameHeight":"200"})Say something#end
+                        #@sdpmItem("文档摘要")
+                            #@formControlDiv("col-8")
+                                #@Teditor("content1" "content1" {"initialFrameHeight":"200"})Say something#end
+                            #end
                         #end
-                        #@validateDiv("col-2")#end
                     #end
 
                     #@elementItem(elementId="fileBox" eleItemClass="")
-                        #@colLabel()附件#end
-                        #@formControlDiv("col-8")
-                            #fileWithInput("file-1")
+                        #@sdpmItem("附件")
+                            #@formControlDiv("col-8")
+                                #fileWithInput("file-1")
+                            #end
                         #end
-                        #@validateDiv("col-2")#end
                     #end
                     #@elementItem(elementId="contentBox" eleItemClass="hidden")
-                        #@colLabel()文档正文#end
-                        #@formControlDiv("col-6")
-                            #@tinyueditor("content" "content")说点什么...最少输入10个字符#end
+                        #@sdpmItem("文档正文")
+                            #@formControlDiv("col-6")
+                                #@tinyueditor("content" "content")说点什么...最少输入10个字符#end
+                            #end
                         #end
-                        #@validateDiv("col-2")#end
                     #end
                     #@elementItem()
                         #@colLabel()#end
