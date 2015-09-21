@@ -19,7 +19,7 @@ public interface EffortManager {
 	 * @param effort
 	 * @return
 	 */
-	Integer updata(Effort effort);
+	Effort updata(Effort effort);
 	/**
 	 * 查询所有的日志
 	 * @param effort

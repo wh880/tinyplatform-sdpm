@@ -22,8 +22,8 @@ public class EffortServiceImpl implements EffortService {
 		return effortManager.add(effort);
 		}
 		else{
-			int i=effortManager.updata(effort);
-			return null;
+		
+			return effortManager.updata(effort);
 		}
 	}
 
