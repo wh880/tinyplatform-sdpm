@@ -67,4 +67,17 @@
   <standard-field id="d5e3e1f45ae34d569cf8ecd010ec4437" name="action_objectID" title="对象ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="f74f8eb053ef448a8903f8ab823d7950" name="action_product" title="所属产品" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="6185f7b6c38f499e8870b6247a464bb0" name="action_project" title="所属项目" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="f5aed712657140c283a09dc15231d9b5" name="action_actor" title="操作者" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="81872ca2ef8c4eb186888e9900f7e04c" name="action_action" title="动作" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="d9338ae7af0b4dac83c28cc3b825dab7" name="action_date" title="系统日志日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="1a56bb3151834ce688e6ec25a50c0369" name="action_comment" title="注释" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
+  <standard-field id="aa3abd25422e48fd92ace02365b2ec4b" name="action_extra" title="EXTRA" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="ed0fdaa8df4b424999ddc2a33aeb1154" name="action_read" title="是否已读" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629"/>
+  <standard-field id="db74df04c6164a6db9a0f5af85dd58f9" name="action_efforted" title="ACTION_efforted" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="a3c0dbee7bda4ec990d8bcfcbee2ee1f" name="history_id" title="操作历史ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="0d35680ef7484ef9a3ecbca782281d37" name="history_action" title="操作ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
+  <standard-field id="61032af00ff64c3e8d84a497ba8eff38" name="history_field" title="所属领域" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="13a94f229214469bb423e60c807c85ae" name="history_old" title="上一条历史" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
+  <standard-field id="8fbba64711854fa2b578e316737b475c" name="history_new" title="当前历史" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
+  <standard-field id="8e46079f520c494f94c3d3c70e42d9fb" name="history_diff" title="对比" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
 </standard-fields>
