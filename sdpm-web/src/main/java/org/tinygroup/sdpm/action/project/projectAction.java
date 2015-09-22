@@ -28,9 +28,10 @@ public class projectAction extends BaseController {
     }
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
-        if (id!=null) {
+        if (id != null) {
             Project project = projectService.findById(id);
             model.addAttribute("project", project);
         }
         return "project/allProject.page";
+    }
 }
