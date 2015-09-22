@@ -21,11 +21,12 @@
        <artifactId>sdpm-service-service-interface</artifactId>
         <version>${tiny_sdpm_version}</version>
     </dependency>
-    <dependency>
-       <groupId>org.tinygroup</groupId>
-        <artifactId>sdpm-service-business-impl</artifactId>
-        <version>${tiny_sdpm_version}</version>
-    </dependency>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>sdpm-service-business-impl</artifactId>
+          <version>${tiny_sdpm_version}</version>
+      </dependency>
+
     <dependency>
       <groupId>org.tinygroup</groupId>
       <artifactId>org.tinygroup.flow</artifactId>

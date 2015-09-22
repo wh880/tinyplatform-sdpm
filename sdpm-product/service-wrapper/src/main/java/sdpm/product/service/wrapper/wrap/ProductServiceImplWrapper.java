@@ -14,11 +14,12 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.quality.wrapper;
+package sdpm.product.service.wrapper.wrap;
 
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
@@ -28,9 +29,10 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-@Component("bugService")
-public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service.inter.BugService {
-
+@Component
+public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.service.ProductService {
+	
+	@Autowired
 	CEPCore cepcore;
 
 	public CEPCore getCore() {
@@ -51,12 +53,12 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		return event;
 	}
 
-	public java.util.List<org.tinygroup.sdpm.quality.dao.pojo.Bug> findBugList(org.tinygroup.sdpm.quality.dao.pojo.Bug bug) {
-		String serviceId = "quality_findBugList";
+	public org.tinygroup.sdpm.product.dao.pojo.Product addProduct(org.tinygroup.sdpm.product.dao.pojo.Product product) {
+		String serviceId = "product_addProduct";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("bug" ,bug);
+			context.put("product" ,product);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -64,12 +66,12 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public org.tinygroup.sdpm.quality.dao.pojo.Bug addBug(org.tinygroup.sdpm.quality.dao.pojo.Bug bug) {
-		String serviceId = "quality_addBug";
+	public int updateProduct(org.tinygroup.sdpm.product.dao.pojo.Product product) {
+		String serviceId = "product_updateProduct";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("bug" ,bug);
+			context.put("product" ,product);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -77,12 +79,12 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public org.tinygroup.sdpm.quality.dao.pojo.Bug findById(int id) {
-		String serviceId = "quality_findById";
+	public int deleteProduct(java.lang.Integer productId) {
+		String serviceId = "product_deleteProduct";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("id" ,id);
+			context.put("productId" ,productId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -90,12 +92,12 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public int updateBug(org.tinygroup.sdpm.quality.dao.pojo.Bug bug) {
-		String serviceId = "quality_updateBug";
+	public org.tinygroup.sdpm.product.dao.pojo.Product findProduct(java.lang.Integer productId) {
+		String serviceId = "product_findProduct";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("bug" ,bug);
+			context.put("productId" ,productId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -103,12 +105,44 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public int[] batchUpdateBug(java.util.List<org.tinygroup.sdpm.quality.dao.pojo.Bug> bugs) {
-		String serviceId = "quality_batchUpdateBug";
+	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.Product> findProductList(org.tinygroup.sdpm.product.dao.pojo.Product product ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "product_findProductList";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("bugs" ,bugs);
+			context.put("product" ,product);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.Product> findProductPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.Product product ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "product_findProductPager";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("start" ,start);
+			context.put("limit" ,limit);
+			context.put("product" ,product);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public int[] updateBatch(java.util.List<org.tinygroup.sdpm.product.dao.pojo.Product> products) {
+		String serviceId = "product_updateBatch";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("products" ,products);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

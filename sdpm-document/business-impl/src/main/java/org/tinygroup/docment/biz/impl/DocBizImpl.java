@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.tinygroup.docment.biz.inter.DocBiz;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.document.dao.DocDao;
 import org.tinygroup.sdpm.document.dao.DocLibDao;
 import org.tinygroup.sdpm.document.dao.HistorydocDao;
@@ -95,11 +96,9 @@ public class DocBizImpl implements DocBiz {
 		return docdao.getByKey(key);
 	}
 
-	public List<Doc> getDocByEntity(Doc doc) {
+	public List<Doc> getDocListOrderBy(Doc doc,OrderBy...orderbies) {
 		// 
-		if(doc == null)
-			doc = new Doc();
-		return docdao.query(doc);
+		return docdao.query(doc,orderbies);
 	}
 
 	public DocLib getDocLibById(Integer key) {
@@ -107,9 +106,9 @@ public class DocBizImpl implements DocBiz {
 		return doclibdao.getByKey(key);
 	}
 
-	public Pager<Doc> queryItemWithPage(Integer start, Integer limited, Doc doc) {
+	public Pager<Doc> queryItemWithPage(Integer start, Integer limited, Doc doc,OrderBy...orderbies) {
 		// 分页
-		return docdao.queryPager(start, limited, doc);
+		return docdao.queryPager(start, limited, doc ,orderbies);
 	}
 
 	public int batchDelDocByIds(Integer... keys) {
@@ -119,7 +118,7 @@ public class DocBizImpl implements DocBiz {
 
 	public List<Historydoc> docHistory(Integer docid) {
 		// 这个很重要了，显示历史操作数据的，涵盖操作时间和责任人。
-		return null;//hisdocdao.getWithSameDocId(docid);
+		return hisdocdao.getEditHistory(docid);
 	}
 
 

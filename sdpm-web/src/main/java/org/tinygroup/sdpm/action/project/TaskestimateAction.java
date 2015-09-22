@@ -9,5 +9,5 @@ import org.tinygroup.sdpm.common.web.BaseController;
  */
 @Controller
 @RequestMapping("/project/task")
-public class taskestimateAction extends BaseController {
+public class TaskestimateAction extends BaseController {
 }

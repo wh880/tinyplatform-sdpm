@@ -16,12 +16,12 @@ import org.tinygroup.sdpm.quality.service.inter.BugService;
 @Controller
 @RequestMapping("/quality/bug")
 public class BugAction extends BaseController {
-
+/*
 	@Autowired
 	private BugService bugService;
 
 	@RequestMapping(value = "/save",method = RequestMethod.POST)
 	public String save(Bug bug,Model model){
 		return "testManagement/page/Bug.page";
-	}
+	}*/
 }

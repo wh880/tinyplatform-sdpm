@@ -14,11 +14,12 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.quality.wrapper;
+package sdpm.product.service.wrapper.wrap;
 
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
@@ -28,9 +29,10 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-@Component("bugService")
-public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service.inter.BugService {
-
+@Component
+public class StorySpecServiceImplWrapper implements org.tinygroup.sdpm.product.service.StorySpecService {
+	
+	@Autowired
 	CEPCore cepcore;
 
 	public CEPCore getCore() {
@@ -51,12 +53,12 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		return event;
 	}
 
-	public java.util.List<org.tinygroup.sdpm.quality.dao.pojo.Bug> findBugList(org.tinygroup.sdpm.quality.dao.pojo.Bug bug) {
-		String serviceId = "quality_findBugList";
+	public org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec findStorySpec(java.lang.Integer storyId) {
+		String serviceId = "product_findStorySpec";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("bug" ,bug);
+			context.put("storyId" ,storyId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -64,12 +66,14 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public org.tinygroup.sdpm.quality.dao.pojo.Bug addBug(org.tinygroup.sdpm.quality.dao.pojo.Bug bug) {
-		String serviceId = "quality_addBug";
+	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec> findStorySpecList(org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec storySpec ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "product_findStorySpecList";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("bug" ,bug);
+			context.put("storySpec" ,storySpec);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -77,38 +81,16 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public org.tinygroup.sdpm.quality.dao.pojo.Bug findById(int id) {
-		String serviceId = "quality_findById";
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec> findStorySpecPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec storySpec ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "product_findStorySpecPager";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("id" ,id);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	public int updateBug(org.tinygroup.sdpm.quality.dao.pojo.Bug bug) {
-		String serviceId = "quality_updateBug";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("bug" ,bug);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	public int[] batchUpdateBug(java.util.List<org.tinygroup.sdpm.quality.dao.pojo.Bug> bugs) {
-		String serviceId = "quality_batchUpdateBug";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("bugs" ,bugs);
+			context.put("start" ,start);
+			context.put("limit" ,limit);
+			context.put("storySpec" ,storySpec);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

@@ -14,11 +14,12 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.quality.wrapper;
+package sdpm.product.service.wrapper.wrap;
 
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
@@ -28,9 +29,10 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-@Component("bugService")
-public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service.inter.BugService {
-
+@Component
+public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.service.ReleaseService {
+	
+	@Autowired
 	CEPCore cepcore;
 
 	public CEPCore getCore() {
@@ -51,12 +53,12 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		return event;
 	}
 
-	public java.util.List<org.tinygroup.sdpm.quality.dao.pojo.Bug> findBugList(org.tinygroup.sdpm.quality.dao.pojo.Bug bug) {
-		String serviceId = "quality_findBugList";
+	public org.tinygroup.sdpm.product.dao.pojo.ProductRelease addRelease(org.tinygroup.sdpm.product.dao.pojo.ProductRelease release) {
+		String serviceId = "product_addRelease";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("bug" ,bug);
+			context.put("release" ,release);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -64,12 +66,12 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public org.tinygroup.sdpm.quality.dao.pojo.Bug addBug(org.tinygroup.sdpm.quality.dao.pojo.Bug bug) {
-		String serviceId = "quality_addBug";
+	public int updateRelease(org.tinygroup.sdpm.product.dao.pojo.ProductRelease release) {
+		String serviceId = "product_updateRelease";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("bug" ,bug);
+			context.put("release" ,release);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -77,12 +79,12 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public org.tinygroup.sdpm.quality.dao.pojo.Bug findById(int id) {
-		String serviceId = "quality_findById";
+	public int[] updateBatch(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> releases) {
+		String serviceId = "product_updateBatch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("id" ,id);
+			context.put("releases" ,releases);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -90,12 +92,12 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public int updateBug(org.tinygroup.sdpm.quality.dao.pojo.Bug bug) {
-		String serviceId = "quality_updateBug";
+	public int deleteRelease(java.lang.Integer releaseId) {
+		String serviceId = "product_deleteRelease";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("bug" ,bug);
+			context.put("releaseId" ,releaseId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -103,12 +105,31 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public int[] batchUpdateBug(java.util.List<org.tinygroup.sdpm.quality.dao.pojo.Bug> bugs) {
-		String serviceId = "quality_batchUpdateBug";
+	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> findReleaseList(org.tinygroup.sdpm.product.dao.pojo.ProductRelease release ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "product_findReleaseList";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("bugs" ,bugs);
+			context.put("release" ,release);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> findReleasePager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductRelease release ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "product_findReleasePager";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("start" ,start);
+			context.put("limit" ,limit);
+			context.put("release" ,release);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
