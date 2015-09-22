@@ -18,23 +18,23 @@ import org.tinygroup.sdpm.project.service.inter.TaskService;
 public class taskAction extends BaseController {
     @Autowired
     private TaskService taskService;
-//    @RequestMapping("/form")
-//    public String form(String id, Model model) {
-//        if (!StringUtil.isBlank(id)) {
-//            OrgUser user = taskService.;
-//            model.addAttribute("user", user);
-//        }
-//        return "organization/common/addUser.page";
-//    }
-//
-//    @RequestMapping(value = "/save", method = RequestMethod.POST)
-//    public String save(OrgUser user, Model model) {
-//        if (StringUtil.isBlank(user.getOrgUserId())) {
-//            taskService.addTask();
-//        } else {
-//            taskService.updateTask();
-//        }
-//        model.addAttribute("user", user);
-//        return "organization/common/addUser.page";
-//    }
+    @RequestMapping("/form")
+    public String form(String id, Model model) {
+        if (!StringUtil.isBlank(id)) {
+            OrgUser user = taskService.;
+            model.addAttribute("user", user);
+        }
+        return "organization/common/addUser.page";
+    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(OrgUser user, Model model) {
+        if (StringUtil.isBlank(user.getOrgUserId())) {
+            taskService.addTask();
+        } else {
+            taskService.updateTask();
+        }
+        model.addAttribute("user", user);
+        return "organization/common/addUser.page";
+    }
 }
