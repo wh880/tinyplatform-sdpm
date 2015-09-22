@@ -7,7 +7,7 @@ import org.tinygroup.sdpm.org.biz.inter.RoleManager;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 
-@Component()
+@Component
 public class RoleServiceImpl implements RoleService {
 
     @Autowired

@@ -7,7 +7,7 @@ import org.tinygroup.sdpm.org.biz.inter.RoleMenuManager;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 import org.tinygroup.sdpm.org.service.inter.RoleMenuService;
 
-@Component("")
+@Component
 public class RoleMenuServiceImpl implements RoleMenuService {
 
     @Autowired

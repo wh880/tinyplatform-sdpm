@@ -7,7 +7,7 @@ import org.tinygroup.sdpm.org.biz.inter.CompanyManager;
 import org.tinygroup.sdpm.org.dao.pojo.OrgCompany;
 import org.tinygroup.sdpm.org.service.inter.CompanyService;
 
-@Component("companyService")
+@Component
 public class CompanyServiceImpl implements CompanyService {
 
     @Autowired

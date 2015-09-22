@@ -9,7 +9,7 @@ import org.tinygroup.sdpm.org.service.inter.DeptService;
 
 import java.util.List;
 
-@Component()
+@Component
 public class DeptServiceImpl implements DeptService {
 
     @Autowired
