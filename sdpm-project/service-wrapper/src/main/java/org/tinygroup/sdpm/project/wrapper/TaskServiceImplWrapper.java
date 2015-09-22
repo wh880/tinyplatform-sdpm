@@ -16,7 +16,6 @@
 
 package org.tinygroup.sdpm.project.wrapper;
 
-import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -27,9 +26,9 @@ import org.tinygroup.event.ServiceRequest;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
-@Component("taskService")
 public class TaskServiceImplWrapper implements org.tinygroup.sdpm.project.service.inter.TaskService {
 
 	CEPCore cepcore;
@@ -53,7 +52,7 @@ public class TaskServiceImplWrapper implements org.tinygroup.sdpm.project.servic
 	}
 
 	public org.tinygroup.sdpm.project.dao.pojo.ProjectTask addTask(org.tinygroup.sdpm.project.dao.pojo.ProjectTask task) {
-		String serviceId = "project_addTask";
+		String serviceId = "task_addTask";
 
 		try{
 			Context context = new ContextImpl();
@@ -65,22 +64,12 @@ public class TaskServiceImplWrapper implements org.tinygroup.sdpm.project.servic
 		}
 	}
 
-	public java.util.Map<String, List<ProjectTask>> findTaskByGroup(int projectId, java.lang.String colum) {
-		String serviceId = "project_findTaskByGroup";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("projectId", projectId);
-			context.put("colum", colum);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
+	public Map<String, List<ProjectTask>> findTaskByGroup(int projectId, String colum) {
+		return null;
 	}
 
 	public java.util.List<org.tinygroup.sdpm.project.dao.pojo.ProjectTask> findListTask(org.tinygroup.sdpm.project.dao.pojo.ProjectTask task) {
-		String serviceId = "project_findListTask";
+		String serviceId = "task_findListTask";
 
 		try{
 			Context context = new ContextImpl();
@@ -93,7 +82,7 @@ public class TaskServiceImplWrapper implements org.tinygroup.sdpm.project.servic
 	}
 
 	public java.lang.Integer updateTask(org.tinygroup.sdpm.project.dao.pojo.ProjectTask task) {
-		String serviceId = "project_updateTask";
+		String serviceId = "task_updateTask";
 
 		try{
 			Context context = new ContextImpl();
@@ -106,7 +95,7 @@ public class TaskServiceImplWrapper implements org.tinygroup.sdpm.project.servic
 	}
 
 	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.project.dao.pojo.ProjectTask> findComplexTask() {
-		String serviceId = "project_findComplexTask";
+		String serviceId = "task_findComplexTask";
 
 		try{
 			Context context = new ContextImpl();
