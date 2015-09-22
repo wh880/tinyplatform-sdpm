@@ -16,13 +16,14 @@
 
 package org.tinygroup.sdpm.service.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 客户信息表
  * 
  */
-public class Client {
+public class Client implements Serializable{
 
 	/** 
 	 * 客户ID

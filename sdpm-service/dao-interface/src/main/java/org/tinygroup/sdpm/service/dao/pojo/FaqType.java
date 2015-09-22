@@ -16,13 +16,14 @@
 
 package org.tinygroup.sdpm.service.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * faq分类
  * 
  */
-public class FaqType {
+public class FaqType implements Serializable {
 
 	/** 
 	 * 问题类型id
