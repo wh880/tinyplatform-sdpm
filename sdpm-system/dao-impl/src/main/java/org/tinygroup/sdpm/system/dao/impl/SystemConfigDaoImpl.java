@@ -50,7 +50,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-@LogClass("system_config")
+@LogClass("systemConfig")
 @Repository
 public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConfigDao {
 

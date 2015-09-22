@@ -19,8 +19,6 @@ package org.tinygroup.sdpm.system.wrapper;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -28,9 +26,9 @@ import org.tinygroup.event.Event;
 import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
-@Component
+
 public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.ActionService {
-	@Autowired
+
 	CEPCore cepcore;
 
 	public CEPCore getCore() {
@@ -52,7 +50,7 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 	}
 
 	public org.tinygroup.sdpm.system.dao.pojo.Action add(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_add";
+		String serviceId = "system_action_add_1";
 
 		try{
 			Context context = new ContextImpl();
@@ -65,7 +63,7 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 	}
 
 	public org.tinygroup.sdpm.system.dao.pojo.Action updata(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_updata";
+		String serviceId = "system_action_updata_1";
 
 		try{
 			Context context = new ContextImpl();
@@ -78,7 +76,7 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 	}
 
 	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_delete";
+		String serviceId = "system_action_delete_1";
 
 		try{
 			Context context = new ContextImpl();
@@ -91,7 +89,7 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 	}
 
 	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Action> find(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_find";
+		String serviceId = "system_action_find_1";
 
 		try{
 			Context context = new ContextImpl();
