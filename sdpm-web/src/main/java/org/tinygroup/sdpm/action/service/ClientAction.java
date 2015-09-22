@@ -36,4 +36,16 @@ public class ClientAction extends BaseController {
         return "service/client/clientAdd.page";
     }
 
+    @RequestMapping(value = "/delete")
+    public String delete(Integer id) {
+        clientService.deleteClient(id);
+        return "/service/client/clientUser.page";
+    }
+
+    @RequestMapping(value = "/list")
+    public String list(Client client, Model model) {
+        List<Client> list = clientService.getClientList(client);
+        model.addAttribute("list", list);
+        return "/service/client/clientUser.page";
+    }
 }
