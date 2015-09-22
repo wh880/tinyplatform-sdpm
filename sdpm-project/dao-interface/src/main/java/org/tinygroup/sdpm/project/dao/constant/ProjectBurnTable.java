@@ -60,6 +60,6 @@ public class ProjectBurnTable extends Table {
 
 	private ProjectBurnTable() {
 		super("project_burn");
-		}
+	}
 
 }

@@ -103,6 +103,6 @@ public class ProjectBuildTable extends Table {
 
 	private ProjectBuildTable() {
 		super("project_build");
-		}
+	}
 
 }

@@ -209,8 +209,8 @@ public class ProjectTable extends Table {
 	public final Column PROJECT_DELETED = new Column(this, "project_deleted");
 
 
-		private ProjectTable() {
-			super("project");
-		}
+	private ProjectTable() {
+		super("project");
+	}
 
 }

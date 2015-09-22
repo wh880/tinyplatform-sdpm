@@ -16,18 +16,16 @@
 
 package org.tinygroup.sdpm.project.dao.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 版本
  * 
  */
-public class ProjectBuild implements Serializable {
+public class ProjectBuild {
 
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
-
 	/** 
 	 * 版本id
 	 * 
