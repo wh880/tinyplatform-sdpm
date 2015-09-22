@@ -14,7 +14,7 @@ public interface SlaService {
      * @param id 主键
      * @return
      */
-    Sla findSla(String id);
+    Sla findSla(Integer id);
 
     /**
      * 根据条件查询List
@@ -46,7 +46,7 @@ public interface SlaService {
      * @param id 主键
      * @return
      */
-    Integer deleteSla(String id);
+    Integer deleteSla(Integer id);
 
     /**
      * 根据id进行批量软删除用户
