@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015-09-18.
  */
-@Component("clientService")
+@Component
 public class ClientServiceImpl implements ClientService {
     @Autowired
     private ClientManager clientManager;

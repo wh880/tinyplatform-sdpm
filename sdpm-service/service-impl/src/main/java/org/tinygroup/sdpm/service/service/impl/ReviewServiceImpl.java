@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015-09-19.
  */
-@Component("reviewService")
+@Component
 public class ReviewServiceImpl implements ReviewService {
     @Autowired
     private ReviewManager reviewManager;
