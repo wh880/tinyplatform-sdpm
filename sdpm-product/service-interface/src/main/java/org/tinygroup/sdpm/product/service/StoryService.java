@@ -2,7 +2,9 @@ package org.tinygroup.sdpm.product.service;
 
 import java.util.List;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface StoryService {
 	
@@ -25,10 +27,12 @@ public interface StoryService {
 	 * @return
 	 */
 	int updateStory(ProductStory story);
-	
-	
-
-	
+	/**
+	 * 批量编辑
+	 * @param stories
+	 * @return
+	 */
+	int[] updateBatch(List<ProductStory> stories);
 	/**
 	 * 根据需求ID查找
 	 * @param storyId
@@ -41,7 +45,16 @@ public interface StoryService {
 	 * @param productId
 	 * @return
 	 */
-	List<ProductStory> findStoryList(ProductStory story);
+	List<ProductStory> findStoryList(ProductStory story,String columnName,boolean asc);
+	/**
+	 * 分页查询
+	 * @param start
+	 * @param limit
+	 * @param story
+	 * @param orderBies
+	 * @return
+	 */
+	Pager<ProductStory> findStoryPager(int start,int limit,ProductStory story,String columnName,boolean asc);
 	
 	
 }

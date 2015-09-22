@@ -21,7 +21,7 @@ public class TestCaseManagerImpl implements TestCaseManager {
 		return testcasedao.query(testcase);
 	}
 	
-	public TestCase find(int id){
+	public TestCase find(Integer id){
 		return testcasedao.getByKey(id);
 	}
 	
@@ -30,7 +30,7 @@ public class TestCaseManagerImpl implements TestCaseManager {
 		return testcasedao.add(testcase);
 	}
 	
-	public int update(TestCase testcase){
+	public Integer update(TestCase testcase){
 		testcase.setCaseLastEditedDate(new Date());
 		return testcasedao.edit(testcase);
 	}
@@ -41,7 +41,7 @@ public class TestCaseManagerImpl implements TestCaseManager {
 		return testcasedao.batchUpdate(testcases);
 	}
 	
-	public int delete(int id){
+	public Integer delete(Integer id){
 		TestCase testcase = new TestCase();
 		testcase.setCaseId(id);
 		testcase.setDeleted(TestCase.DELETE_YES);
