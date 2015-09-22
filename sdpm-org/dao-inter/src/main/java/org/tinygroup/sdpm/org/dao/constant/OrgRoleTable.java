@@ -20,18 +20,12 @@ import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
 
 /** 
- * 角色菜单表
+ * 角色表
  * 
  */
-public class OrgRoldMenuTable extends Table {
+public class OrgRoleTable extends Table {
 
-	public static final OrgRoldMenuTable ORG_ROLD_MENUTABLE = new OrgRoldMenuTable();
-
-	/** 
-	 * 逻辑ID
-	 * 
-	 */
-	public final Column ID = new Column(this, "id");
+	public static final OrgRoleTable ORG_ROLETABLE = new OrgRoleTable();
 
 	/** 
 	 * 角色ID
@@ -40,14 +34,26 @@ public class OrgRoldMenuTable extends Table {
 	public final Column ORG_ROLE_ID = new Column(this, "org_role_id");
 
 	/** 
-	 * 角色菜单id
+	 * 角色名称
 	 * 
 	 */
-	public final Column ORG_ROLE_MENU_ID = new Column(this, "org_role_menu_id");
+	public final Column ORG_ROLE_NAME = new Column(this, "org_role_name");
+
+	/** 
+	 * 角色备注
+	 * 
+	 */
+	public final Column ORG_ROLE_REMARKS = new Column(this, "org_role_remarks");
+
+	/** 
+	 * 已删除
+	 * 
+	 */
+	public final Column DELETED = new Column(this, "deleted");
 
 
-	private OrgRoldMenuTable() {
-		super("org_rold_menu");
+	private OrgRoleTable() {
+		super("org_role");
 	}
 
 }

@@ -14,46 +14,54 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.org.dao.constant;
-
-import org.tinygroup.tinysqldsl.base.Column;
-import org.tinygroup.tinysqldsl.base.Table;
+package org.tinygroup.sdpm.org.dao.pojo;
 
 /** 
- * 角色表
+ * 角色菜单表
  * 
  */
-public class OrgRoldTable extends Table {
+public class OrgRoleMenu {
 
-	public static final OrgRoldTable ORG_ROLDTABLE = new OrgRoldTable();
+	/** 
+	 * 逻辑ID
+	 * 
+	 */
+	private Integer id;
 
 	/** 
 	 * 角色ID
 	 * 
 	 */
-	public final Column ORG_ROLE_ID = new Column(this, "org_role_id");
+	private Integer orgRoleId;
 
 	/** 
-	 * 角色名称
+	 * 角色菜单id
 	 * 
 	 */
-	public final Column ORG_ROLE_NAME = new Column(this, "org_role_name");
+	private String orgRoleMenuId;
 
-	/** 
-	 * 角色备注
-	 * 
-	 */
-	public final Column ORG_ROLE_REMARKS = new Column(this, "org_role_remarks");
+	public Integer getId() {
+		return id;
+	}
 
-	/** 
-	 * 已删除
-	 * 
-	 */
-	public final Column DELETED = new Column(this, "deleted");
+	public void setId(Integer id){
+		this. id = id;
+	}
 
+	public Integer getOrgRoleId() {
+		return orgRoleId;
+	}
 
-	private OrgRoldTable() {
-		super("org_rold");
+	public void setOrgRoleId(Integer orgRoleId){
+		this. orgRoleId = orgRoleId;
+	}
+
+	public String getOrgRoleMenuId() {
+		return orgRoleMenuId;
+	}
+
+	public void setOrgRoleMenuId(String orgRoleMenuId){
+		this. orgRoleMenuId = orgRoleMenuId;
 	}
 
 }

@@ -55,14 +55,14 @@
     <table-field standard-field-id="1162306b8f4b43e99c489c34888a3335" primary="false" unique="false" not-null="false" id="org_company_admins" auto-increase="false"/>
     <table-field standard-field-id="8e8078a1954e464cb4d5f280b5d463b3" primary="false" unique="false" not-null="true" id="org_company_deleted" auto-increase="false"/>
   </table>
-  <table id="dee51d41a02b4fb0bba2f46c7e1518ac" name="org_rold" title="角色表">
+  <table id="dee51d41a02b4fb0bba2f46c7e1518ac" name="org_role" title="角色表">
     <description></description>
     <table-field standard-field-id="9d637734f8044ad789dbc9e2c5193c32" primary="true" unique="true" not-null="true" id="org_role_id" auto-increase="true"/>
     <table-field standard-field-id="f83ce375673546bdb35a8fcb6d751332" primary="false" unique="false" not-null="false" id="org_role_name" auto-increase="false"/>
     <table-field standard-field-id="2c70414be6154f128898e5ebb03e137d" primary="false" unique="false" not-null="false" id="org_role_remarks" auto-increase="false"/>
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
   </table>
-  <table id="f20e3c631c62453a8db4f83f660e60bb" name="org_rold_menu" title="角色菜单表">
+  <table id="f20e3c631c62453a8db4f83f660e60bb" name="org_role_menu" title="角色菜单表">
     <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
     <table-field standard-field-id="9d637734f8044ad789dbc9e2c5193c32" primary="false" unique="false" not-null="true" id="org_role_id" auto-increase="false"/>
     <table-field standard-field-id="40cf45e575c0442e83c7fe2da3119b5e" primary="false" unique="false" not-null="true" id="org_role_menu_id" auto-increase="false"/>

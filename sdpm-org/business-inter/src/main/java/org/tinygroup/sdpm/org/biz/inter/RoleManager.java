@@ -13,51 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tinygroup.sdpm.org.service.inter;
+package org.tinygroup.sdpm.org.biz.inter;
 
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 
-import java.util.List;
-
-public interface RoldService {
+public interface RoleManager {
     /**
-     * 根据主键id查找用户
+     * 根据主键id查找Rold
      *
      * @param id 主键
      * @return
      */
-    OrgUser findUser(String id);
+    OrgRole find(Integer id);
 
     /**
-     * 根据条件查询List
+     * 新增有一Role
      *
-     * @param orgUser 用于查询条件
+     * @param orgRole 新增实体类
      * @return
      */
-    List<OrgUser> findUserList(OrgUser orgUser);
+    OrgRole add(OrgRole orgRole);
 
     /**
-     * 新增有一个用户
+     * 更新Role
      *
-     * @param orgUser 新增实体类
+     * @param orgRole 需要更新的实体类
      * @return
      */
-    OrgUser addUser(OrgUser orgUser);
+    OrgRole update(OrgRole orgRole);
 
     /**
-     * 更新用户
-     *
-     * @param orgUser 需要更新的实体类
-     * @return
-     */
-    OrgUser updateUser(OrgUser orgUser);
-
-    /**
-     * 根据id进行软删除用户
+     * 根据id进行软删除Role
      *
      * @param id 主键
      * @return
      */
-    Integer deleteUser(String id);
+    Integer delete(Integer id);
 
 }
