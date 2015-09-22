@@ -21,12 +21,11 @@ public class ProductAction extends BaseController{
 	@Autowired
 	private ProductService productService;
 	
-	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Product product,Model model){
 		
 		productService.addProduct(product);
-		return "product/page/tabledemo/product-add.page";
+		return "product/page/tabledemo/addProduct.page";
 		
 	}
 
