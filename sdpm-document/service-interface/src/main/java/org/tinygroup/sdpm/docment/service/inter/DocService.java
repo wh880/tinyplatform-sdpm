@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.docment.service.inter;
 
 import java.util.List;
 
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.document.dao.pojo.Doc;
 import org.tinygroup.sdpm.document.dao.pojo.DocLib;
 import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
@@ -29,12 +28,13 @@ public interface DocService {
 	public List<Historydoc> getEditRecord(Integer docid);
 	public DocLib findDoclibById(Integer id);
 	//list
-	//public List<Doc> findDocByDocClassOrderBy(Doc doc,OrderBy...orderbys);
+	public List<Doc> findDocByDocClass(Doc doc);
 	//page
-	//public Pager<Doc> findDocRetPager(int start,int limit ,Doc doc,OrderBy...orderbys);
+	public Pager<Doc> findDocRetPager(int start,int limit ,Doc doc);
 	//delete
 	public int deleteDocById(Integer id);
 	public int deleteDoclibById(Integer id);
 	public int deleteDocByIds(Integer... keys);
 	
+
 }

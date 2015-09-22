@@ -22,10 +22,6 @@ public class TaskServiceImpl implements TaskService {
         return taskManager.add(task);
     }
 
-    public Map<String, List<ProjectTask>> findTaskByGroup(int projectId, String colum) {
-        return null;
-    }
-
     public List<ProjectTask> findListTask(ProjectTask task) {
         return taskManager.findList(task);
     }
@@ -35,6 +31,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Pager<ProjectTask> findComplexTask() {
+        return null;
+    }
+
+    public Map<String, List<ProjectTask>> findTaskByGroup(int projectId, String colum) {
+        // TODO Auto-generated method stub
         return null;
     }
 

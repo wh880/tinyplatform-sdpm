@@ -42,5 +42,5 @@ public class BugAction extends BaseController {
 		}	
 		model.addAttribute("bug",bug);
 		return "testManagement/page/Bug.page";
-	}*/
+	}
 }

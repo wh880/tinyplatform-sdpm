@@ -26,37 +26,32 @@ public class Menu implements Serializable, Comparable {
      */
     @XStreamAlias("parent-id")
     @XStreamAsAttribute
-    private String parentId;    // id
+    private String parentId;
     /**
      * 菜单显示名称
      */
     @XStreamAsAttribute
-    private String name;    // 名称
+    private String name;
     /**
      * 菜单链接
      */
     @XStreamAsAttribute
-    private String href;    // 链接
-//    /**
-//     * 菜单目标
-//     */
-//    @XStreamAsAttribute
-//    private String target;  // 目标（ mainFrame、_blank、_self、_parent、_top）
+    private String href;
     /**
      * 菜单图标
      */
     @XStreamAsAttribute
-    private String icon;    // 图标
+    private String icon;
     /**
      * 菜单排序
      */
     @XStreamAsAttribute
-    private Integer sort;    // 排序
+    private Integer sort;
     /**
      * 是否在菜单中显示（1：显示；0：不显示）
      */
     @XStreamAsAttribute
-    private String isShow;    // 是否在菜单中显示（1：显示；0：不显示）
+    private String isShow;
     /**
      * 所属聚合分类 多个分类以 , (英文)分开
      */
@@ -66,7 +61,7 @@ public class Menu implements Serializable, Comparable {
      * 子菜单
      */
     @XStreamImplicit
-    private List<Menu> childMenus;    // 子菜单
+    private List<Menu> childMenus;
 
     @XStreamAsAttribute
     private Map<Object, Object> map;

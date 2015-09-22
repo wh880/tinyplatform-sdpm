@@ -1,8 +1,6 @@
 package org.tinygroup.sdpm.project.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.tinysqldsl.Pager;
@@ -12,8 +10,6 @@ import org.tinygroup.tinysqldsl.Pager;
  */
 @Component
 public class BuildServiceImpl implements BuildService {
-    @Autowired
-    private BuildManager buildManager;
 
     public ProjectBuild add(ProjectBuild build) {
         return null;
