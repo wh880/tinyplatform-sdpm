@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.DictManager;
+import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.system.service.inter.DictService;
+import org.tinygroup.tinysqldsl.Pager;
 
 @Component()
 public class DictServiceImpl implements DictService {
@@ -34,9 +36,18 @@ public class DictServiceImpl implements DictService {
 		return dictManager.find(dictId);
 	}
 
-	public List<SystemDict> findDictList(SystemDict dict) {
+	public List<SystemDict> findDictList(SystemDict dict, String columnName, boolean asc) {
 
-		return dictManager.findList(dict);
+		return dictManager.findList(dict, columnName, asc);
 	}
 
+	public Pager<SystemDict> findDictPager(int start, int limit, SystemDict dict, String columnName, boolean asc) {
+
+		return dictManager.findPager(start, limit, dict, columnName, asc);
+	}
+
+	
+	
+
+	
 }

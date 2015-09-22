@@ -2,7 +2,10 @@ package org.tinygroup.sdpm.system.service.inter;
 
 import java.util.List;
 
+import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
+import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface SearchService {
 	/**
@@ -38,5 +41,17 @@ public interface SearchService {
 	 * @param config
 	 * @return
 	 */
-	List<SystemSearch> findSearchList(SystemSearch search);
+	List<SystemSearch> findSearchList(SystemSearch search,String columnName,boolean asc);
+	
+	/**
+	 * 根据对象查找(分页、排序)
+	 * @param start
+	 * @param limit
+	 * @param search
+	 * @param columnName
+	 * @param asc
+	 * @return
+	 */
+	Pager<SystemSearch> findSearchPager(int start,int limit,SystemSearch search,String columnName,boolean asc);
+
 }

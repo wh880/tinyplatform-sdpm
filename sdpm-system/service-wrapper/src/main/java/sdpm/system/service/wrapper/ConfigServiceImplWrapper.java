@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.system.wrapper;
+package sdpm.system.service.wrapper;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,7 +27,7 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.ActionService {
+public class ConfigServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.ConfigService {
 
 	CEPCore cepcore;
 
@@ -49,12 +49,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Action add(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_add";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemConfig addConfig(org.tinygroup.sdpm.system.dao.pojo.SystemConfig config) {
+		String serviceId = "system_addConfig";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("config" ,config);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Action updata(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_updata";
+	public int deleteConfig(java.lang.Integer configId) {
+		String serviceId = "system_deleteConfig";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("configId" ,configId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_delete";
+	public int updateConfig(org.tinygroup.sdpm.system.dao.pojo.SystemConfig config) {
+		String serviceId = "system_updateConfig";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("config" ,config);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,12 +88,57 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Action> find(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_find";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemConfig findConfig(java.lang.Integer configId) {
+		String serviceId = "system_findConfig";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("configId" ,configId);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public int[] updateBatch(java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemConfig> configs) {
+		String serviceId = "system_updateBatch";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("configs" ,configs);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemConfig> findConfigList(org.tinygroup.sdpm.system.dao.pojo.SystemConfig config ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findConfigList";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("config" ,config);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.SystemConfig> findConfigPager(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemConfig config ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findConfigPager";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("start" ,start);
+			context.put("limit" ,limit);
+			context.put("config" ,config);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

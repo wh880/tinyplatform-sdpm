@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.system.wrapper;
+package sdpm.system.service.wrapper;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,7 +27,7 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.ActionService {
+public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.DictService {
 
 	CEPCore cepcore;
 
@@ -49,12 +49,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Action add(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_add";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemDict addDict(org.tinygroup.sdpm.system.dao.pojo.SystemDict dict) {
+		String serviceId = "system_addDict";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("dict" ,dict);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Action updata(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_updata";
+	public int deleteDict(java.lang.Integer dictId) {
+		String serviceId = "system_deleteDict";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("dictId" ,dictId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_delete";
+	public int updateDict(org.tinygroup.sdpm.system.dao.pojo.SystemDict dict) {
+		String serviceId = "system_updateDict";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("dict" ,dict);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,12 +88,44 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Action> find(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_find";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemDict findDict(java.lang.Integer dictId) {
+		String serviceId = "system_findDict";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("dictId" ,dictId);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemDict> findDictList(org.tinygroup.sdpm.system.dao.pojo.SystemDict dict ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findDictList";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("dict" ,dict);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.SystemDict> findDictPager(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemDict dict ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findDictPager";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("start" ,start);
+			context.put("limit" ,limit);
+			context.put("dict" ,dict);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

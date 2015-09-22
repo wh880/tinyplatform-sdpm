@@ -9,7 +9,7 @@ import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.tinysqldsl.Pager;
 
-@Component()
+@Component
 public class ProductLineServiceImpl implements ProductLineService {
 	
 	@Autowired
@@ -37,13 +37,13 @@ public class ProductLineServiceImpl implements ProductLineService {
 
 	public List<ProductLine> findProductLineList(ProductLine productLine, String columnName, boolean asc) {
 		
-		return productLineManager.findProductLineList(productLine, columnName, asc);
+		return productLineManager.findList(productLine, columnName, asc);
 	}
 
 	public Pager<ProductLine> findProductLinePager(int start, int limit, ProductLine productLine, String columnName,
 			boolean asc) {
 		
-		return productLineManager.findProductLinePager(start, limit, productLine, columnName, asc);
+		return productLineManager.findPager(start, limit, productLine, columnName, asc);
 	}
 
 

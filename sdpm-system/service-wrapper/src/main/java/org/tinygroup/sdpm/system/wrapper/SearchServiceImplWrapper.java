@@ -14,11 +14,13 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.productline.wrapper;
+package org.tinygroup.sdpm.system.wrapper;
 
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -27,8 +29,10 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.productLine.service.ProductLineService {
+@Component
+public class SearchServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.SearchService {
 
+	@Autowired
 	CEPCore cepcore;
 
 	public CEPCore getCore() {
@@ -49,12 +53,12 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 		return event;
 	}
 
-	public org.tinygroup.sdpm.productLine.dao.pojo.ProductLine addProductLine(org.tinygroup.sdpm.productLine.dao.pojo.ProductLine productLine) {
-		String serviceId = "productline_addProductLine";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemSearch addSearch(org.tinygroup.sdpm.system.dao.pojo.SystemSearch search) {
+		String serviceId = "system_addSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("productLine" ,productLine);
+			context.put("search" ,search);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +66,12 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 		}
 	}
 
-	public int updateProductLine(org.tinygroup.sdpm.productLine.dao.pojo.ProductLine productLine) {
-		String serviceId = "productline_updateProductLine";
+	public int deleteSearch(java.lang.Integer searchId) {
+		String serviceId = "system_deleteSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("productLine" ,productLine);
+			context.put("searchId" ,searchId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +79,12 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 		}
 	}
 
-	public org.tinygroup.sdpm.productLine.dao.pojo.ProductLine findProductLine(java.lang.Integer productLineId) {
-		String serviceId = "productline_findProductLine";
+	public int updateSearch(org.tinygroup.sdpm.system.dao.pojo.SystemSearch search) {
+		String serviceId = "system_updateSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("productLineId" ,productLineId);
+			context.put("search" ,search);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,12 +92,12 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 		}
 	}
 
-	public int[] updateBatch(java.util.List<org.tinygroup.sdpm.productLine.dao.pojo.ProductLine> productLines) {
-		String serviceId = "productline_updateBatch";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemSearch findSearch(java.lang.Integer searchId) {
+		String serviceId = "system_findSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("productLines" ,productLines);
+			context.put("searchId" ,searchId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -101,12 +105,12 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.productLine.dao.pojo.ProductLine> findProductLineList(org.tinygroup.sdpm.productLine.dao.pojo.ProductLine productLine ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "productline_findProductLineList";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemSearch> findSearchList(org.tinygroup.sdpm.system.dao.pojo.SystemSearch search ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findSearchList";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("productLine" ,productLine);
+			context.put("search" ,search);
 			context.put("columnName" ,columnName);
 			context.put("asc" ,asc);
 
@@ -116,14 +120,14 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.productLine.dao.pojo.ProductLine> findProductLinePager(int start ,int limit ,org.tinygroup.sdpm.productLine.dao.pojo.ProductLine productLine ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "productline_findProductLinePager";
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.SystemSearch> findSearchPager(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemSearch search ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findSearchPager";
 
 		try{
 			Context context = new ContextImpl();
 			context.put("start" ,start);
 			context.put("limit" ,limit);
-			context.put("productLine" ,productLine);
+			context.put("search" ,search);
 			context.put("columnName" ,columnName);
 			context.put("asc" ,asc);
 

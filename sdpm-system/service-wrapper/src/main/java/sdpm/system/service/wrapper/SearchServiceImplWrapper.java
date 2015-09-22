@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.system.wrapper;
+package sdpm.system.service.wrapper;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,7 +27,7 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.ActionService {
+public class SearchServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.SearchService {
 
 	CEPCore cepcore;
 
@@ -49,12 +49,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Action add(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_add";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemSearch addSearch(org.tinygroup.sdpm.system.dao.pojo.SystemSearch search) {
+		String serviceId = "system_addSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("search" ,search);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Action updata(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_updata";
+	public int deleteSearch(java.lang.Integer searchId) {
+		String serviceId = "system_deleteSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("searchId" ,searchId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_delete";
+	public int updateSearch(org.tinygroup.sdpm.system.dao.pojo.SystemSearch search) {
+		String serviceId = "system_updateSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("search" ,search);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,12 +88,44 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Action> find(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_find";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemSearch findSearch(java.lang.Integer searchId) {
+		String serviceId = "system_findSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("searchId" ,searchId);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemSearch> findSearchList(org.tinygroup.sdpm.system.dao.pojo.SystemSearch search ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findSearchList";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("search" ,search);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.SystemSearch> findSearchPager(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemSearch search ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findSearchPager";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("start" ,start);
+			context.put("limit" ,limit);
+			context.put("search" ,search);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

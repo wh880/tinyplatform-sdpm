@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.system.wrapper;
+package sdpm.system.service.wrapper;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,7 +27,7 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.ActionService {
+public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.HistoryService {
 
 	CEPCore cepcore;
 
@@ -49,12 +49,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Action add(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_add";
+	public org.tinygroup.sdpm.system.dao.pojo.History add(org.tinygroup.sdpm.system.dao.pojo.History history) {
+		String serviceId = "system_histroy_add";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("history" ,history);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Action updata(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_updata";
+	public org.tinygroup.sdpm.system.dao.pojo.History updata(org.tinygroup.sdpm.system.dao.pojo.History history) {
+		String serviceId = "system_histroy_updata";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("history" ,history);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_delete";
+	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.History history) {
+		String serviceId = "system_histroy_delete";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("history" ,history);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,12 +88,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Action> find(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_find";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.History> find(org.tinygroup.sdpm.system.dao.pojo.History history) {
+		String serviceId = "system_histroy_find";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("history" ,history);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

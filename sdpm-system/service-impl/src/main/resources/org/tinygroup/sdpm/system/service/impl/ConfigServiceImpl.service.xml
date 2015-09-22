@@ -1,0 +1,52 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.system.service.impl.ConfigServiceImpl" bean="configService">
+    <service-method local-name="addConfig" service-id="system_addConfig" method-name="addConfig" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="config" type="org.tinygroup.sdpm.system.dao.pojo.SystemConfig" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addConfigResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemConfig"/>
+    </service-method>
+    <service-method local-name="deleteConfig" service-id="system_deleteConfig" method-name="deleteConfig" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="configId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteConfigResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="updateConfig" service-id="system_updateConfig" method-name="updateConfig" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="config" type="org.tinygroup.sdpm.system.dao.pojo.SystemConfig" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateConfigResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="findConfig" service-id="system_findConfig" method-name="findConfig" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="configId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findConfigResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemConfig"/>
+    </service-method>
+    <service-method local-name="updateBatch" service-id="system_updateBatch" method-name="updateBatch" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="configs" type="org.tinygroup.sdpm.system.dao.pojo.SystemConfig" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateBatchResult" required="false" is-array="true" type="int"/>
+    </service-method>
+    <service-method local-name="findConfigList" service-id="system_findConfigList" method-name="findConfigList" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="config" type="org.tinygroup.sdpm.system.dao.pojo.SystemConfig" required="false" is-array="false"/>
+        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findConfigListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemConfig"/>
+    </service-method>
+    <service-method local-name="findConfigPager" service-id="system_findConfigPager" method-name="findConfigPager" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="config" type="org.tinygroup.sdpm.system.dao.pojo.SystemConfig" required="false" is-array="false"/>
+        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findConfigPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager&lt;org.tinygroup.sdpm.system.dao.pojo.SystemConfig&gt;"/>
+    </service-method>
+  </service-component>
+</service-components>

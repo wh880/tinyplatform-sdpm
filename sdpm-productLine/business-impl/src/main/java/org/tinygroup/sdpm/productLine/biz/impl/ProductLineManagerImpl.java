@@ -46,12 +46,12 @@ public class ProductLineManagerImpl implements ProductLineManager{
 		return productLineDao.batchUpdate(productLines);
 	}
 
-	public List<ProductLine> findProductLineList(ProductLine productLine, String columnName, boolean asc) {
+	public List<ProductLine> findList(ProductLine productLine, String columnName, boolean asc) {
 		
 		return productLineDao.query(productLine, new OrderBy(columnName, asc));
 	}
 
-	public Pager<ProductLine> findProductLinePager(int start, int limit, ProductLine productLine, String columnName,
+	public Pager<ProductLine> findPager(int start, int limit, ProductLine productLine, String columnName,
 			boolean asc) {
 		
 		return productLineDao.queryPager(start, limit, productLine, new OrderBy(columnName, asc));

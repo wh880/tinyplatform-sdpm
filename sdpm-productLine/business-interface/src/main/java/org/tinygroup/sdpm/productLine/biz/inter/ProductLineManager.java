@@ -48,7 +48,7 @@ public interface ProductLineManager {
 	 * @param asc
 	 * @return
 	 */
-	List<ProductLine> findProductLineList(ProductLine productLine,String columnName,boolean asc);
+	List<ProductLine> findList(ProductLine productLine,String columnName,boolean asc);
 	/**
 	 * 根据对象查找(分页、排序)
 	 * @param start
@@ -58,5 +58,5 @@ public interface ProductLineManager {
 	 * @param asc
 	 * @return
 	 */
-	Pager<ProductLine> findProductLinePager(int start,int limit,ProductLine productLine,String columnName,boolean asc);
+	Pager<ProductLine> findPager(int start,int limit,ProductLine productLine,String columnName,boolean asc);
 }

@@ -2,7 +2,9 @@ package org.tinygroup.sdpm.system.service.inter;
 
 import java.util.List;
 
+import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface DictService {
 	/**
@@ -38,5 +40,17 @@ public interface DictService {
 	 * @param config
 	 * @return
 	 */
-	List<SystemDict> findDictList(SystemDict dict);
+	List<SystemDict> findDictList(SystemDict dict,String columnName,boolean asc);
+	
+	/**
+	 * 根据对象查找(分页、排序)
+	 * @param start
+	 * @param limit
+	 * @param dict
+	 * @param columnName
+	 * @param asc
+	 * @return
+	 */
+	Pager<SystemDict> findDictPager(int start,int limit,SystemDict dict,String columnName,boolean asc);
+
 }

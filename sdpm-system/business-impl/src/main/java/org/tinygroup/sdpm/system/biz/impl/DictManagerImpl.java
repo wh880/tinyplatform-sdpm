@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.biz.inter.DictManager;
 import org.tinygroup.sdpm.system.dao.SystemDictDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
+import org.tinygroup.tinysqldsl.Pager;
 
 @Service
 @Transactional
@@ -39,9 +41,21 @@ public class DictManagerImpl implements DictManager {
 		return systemDictDao.getByKey(dictId);
 	}
 
-	public List<SystemDict> findList(SystemDict dict) {
-
-		return systemDictDao.query(dict);
+	public int[] updateBatch(List<SystemDict> dicts) {
+		
+		return systemDictDao.batchUpdate(dicts);
 	}
+
+	public List<SystemDict> findList(SystemDict dict, String columnName, boolean asc) {
+		
+		return systemDictDao.query(dict, new OrderBy(columnName, asc));
+	}
+
+	public Pager<SystemDict> findPager(int start, int limit, SystemDict dict, String columnName,
+			boolean asc) {
+		
+		return systemDictDao.queryPager(start, limit, dict,  new OrderBy(columnName, asc));
+	}
+
 
 }
