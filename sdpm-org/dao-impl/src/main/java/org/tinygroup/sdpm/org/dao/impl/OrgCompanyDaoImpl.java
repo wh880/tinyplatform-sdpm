@@ -16,6 +16,7 @@
 
 package org.tinygroup.sdpm.org.dao.impl;
 
+import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -38,6 +39,7 @@ import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
+@Repository
 public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDao {
 
 	public OrgCompany add(OrgCompany orgCompany) {
