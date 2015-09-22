@@ -10,7 +10,7 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.tinysqldsl.Pager;
 
-@Component()
+@Component
 public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
@@ -37,15 +37,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 
-	public List<Product> findProductList(Product product, OrderBy... orderBies) {
+	public List<Product> findProductList(Product product, String columnName,boolean asc) {
 
-		return productManager.findList(product, orderBies);
+		return productManager.findList(product, columnName, asc);
 	}
 
 	public Pager<Product> findProductPager(int start, int limit,
-			Product product, OrderBy... orderBies) {
+			Product product, String columnName,boolean asc) {
 
-		return productManager.findPager(start, limit, product, orderBies);
+		return productManager.findPager(start, limit, product, columnName, asc);
 	}
 
 	public int[] updateBatch(List<Product> products) {

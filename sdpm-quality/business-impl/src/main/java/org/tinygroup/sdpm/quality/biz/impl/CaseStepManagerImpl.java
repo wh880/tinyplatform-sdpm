@@ -15,7 +15,7 @@ public class CaseStepManagerImpl implements CaseStepManager {
 	@Autowired
 	private CaseStepDao casestepdao;
 	
-	public CaseStep find(int id){
+	public CaseStep find(Integer id){
 		return casestepdao.getByKey(id);
 	}
 	
@@ -24,7 +24,7 @@ public class CaseStepManagerImpl implements CaseStepManager {
 		return casestepdao.add(casestep);
 	}
 	
-	public int delete(int id){
+	public Integer delete(Integer id){
 		
 		return casestepdao.deleteByKeys(id);
 	}

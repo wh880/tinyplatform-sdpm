@@ -16,7 +16,7 @@ public interface TestCaseManager {
 	 * @param story
 	 * @return
 	 */
-	TestCase find(int id);
+	TestCase find(Integer id);
 	/**
 	 * 建用例
 	 * @param testcase
@@ -28,7 +28,7 @@ public interface TestCaseManager {
 	 * @param testcase
 	 * @return
 	 */
-	int update(TestCase testcase);
+	Integer update(TestCase testcase);
 	/**
 	 * 批量修改
 	 * @param testcases
@@ -40,7 +40,7 @@ public interface TestCaseManager {
 	 * @param id
 	 * @return
 	 */
-	int delete(int id);
+	Integer delete(Integer id);
 	/**
 	 * 批量删除
 	 * @param id

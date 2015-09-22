@@ -14,7 +14,7 @@ public interface FaqTypeService {
      * @param id 主键
      * @return
      */
-    FaqType findFaqType(String id);
+    FaqType findFaqType(Integer id);
 
     /**
      * 根据条件查询List

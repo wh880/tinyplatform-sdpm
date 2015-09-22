@@ -2,7 +2,9 @@ package org.tinygroup.sdpm.product.service;
 
 import java.util.List;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface ReleaseService {
     /**
@@ -18,6 +20,12 @@ public interface ReleaseService {
      */
     int updateRelease(ProductRelease release);
     /**
+     * 批量编辑
+     * @param releases
+     * @return
+     */
+    int[] updateBatch(List<ProductRelease> releases);
+    /**
      * 根据发布对象删除
      * @param release
      * @return
@@ -29,11 +37,15 @@ public interface ReleaseService {
      * @param release
      * @return
      */
-    ProductRelease findRelease(Integer releaseId);
+    List<ProductRelease> findReleaseList(ProductRelease release,String columnName,boolean asc);
+   
     /**
-     * 根据发布Id查找
-     * @param releaseId
+     * 分页查询 
+     * @param start
+     * @param limit
+     * @param release
+     * @param orderBies
      * @return
      */
-    List<ProductRelease> findReleaseList(ProductRelease releaseId);
+    Pager<ProductRelease>  findReleasePager(int start,int limit,ProductRelease release,String columnName,boolean asc);
 }

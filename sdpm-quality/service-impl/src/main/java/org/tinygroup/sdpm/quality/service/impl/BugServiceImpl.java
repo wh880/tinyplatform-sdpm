@@ -9,7 +9,7 @@ import org.tinygroup.sdpm.quality.biz.inter.BugManager;
 import org.tinygroup.sdpm.quality.dao.pojo.Bug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 
-@Component("bugService")
+@Component
 public class BugServiceImpl implements BugService {
 	@Autowired
 	private BugManager bugmanager;

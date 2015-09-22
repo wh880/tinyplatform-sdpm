@@ -2,7 +2,9 @@ package org.tinygroup.sdpm.product.biz.inter;
 
 import java.util.List;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface StoryManager {
 	
@@ -25,23 +27,32 @@ public interface StoryManager {
 	 * @return
 	 */
 	int update(ProductStory story);
-	
-	
-
-	
+	/**
+	 * 批量编辑
+	 * @param stories
+	 * @return
+	 */
+	int[] updateBatch(List<ProductStory> stories);
 	/**
 	 * 根据需求ID查找
 	 * @param storyId
 	 * @return
 	 */
 	ProductStory find(Integer storyId);
-	
 	/**
-	 * 根据产品对象查找
-	 * @param productId
+	 * 根据对象查找（排序）
+	 * @param story
+	 * @param orderBies
 	 * @return
 	 */
-	List<ProductStory> findList(ProductStory story);
-	
-	
+	List<ProductStory> findList(ProductStory story,String columnName,boolean asc);
+	/**
+	 * 分页查询（排序）
+	 * @param start
+	 * @param limit
+	 * @param story
+	 * @param orderBies
+	 * @return
+	 */
+	Pager<ProductStory> findPager(int start,int limit,ProductStory story,String columnName,boolean asc);
 }

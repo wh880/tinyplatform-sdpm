@@ -8,7 +8,7 @@ import org.tinygroup.sdpm.quality.biz.inter.CaseStepManager;
 import org.tinygroup.sdpm.quality.dao.pojo.CaseStep;
 import org.tinygroup.sdpm.quality.service.inter.CaseStepService;
 
-@Component("caseStepService")
+@Component
 public class CaseStepServiceImpl implements CaseStepService {
 
 	@Autowired

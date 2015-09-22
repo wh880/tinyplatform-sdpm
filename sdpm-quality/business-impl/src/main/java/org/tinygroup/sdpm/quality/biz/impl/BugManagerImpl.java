@@ -25,11 +25,11 @@ public class BugManagerImpl implements BugManager {
 		return bugdao.add(bug);
 	}
 	
-	public Bug find(int id){
+	public Bug find(Integer id){
 		return bugdao.getByKey(id);
 	}
 	
-	public int update(Bug bug){
+	public Integer update(Bug bug){
 		bug.setBugLastEditedDate(new Date());
 		return bugdao.edit(bug);
 	}
@@ -39,4 +39,5 @@ public class BugManagerImpl implements BugManager {
 		bug.setBugLastEditedDate(new Date());
 		return bugdao.batchUpdate(bugs);
 	}
+
 }

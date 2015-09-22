@@ -8,7 +8,7 @@ import org.tinygroup.sdpm.quality.biz.inter.TestCaseManager;
 import org.tinygroup.sdpm.quality.dao.pojo.TestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 
-@Component()
+@Component
 public class TestCaseServiceImpl implements TestCaseService {
 	@Autowired
 	private TestCaseManager testcasemanager;

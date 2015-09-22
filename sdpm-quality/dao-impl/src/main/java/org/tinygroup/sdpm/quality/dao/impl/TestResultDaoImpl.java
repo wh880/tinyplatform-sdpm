@@ -35,6 +35,7 @@ import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.Pager;
 import org.apache.commons.logging.Log;
+import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
@@ -54,7 +55,9 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+
 @LogClass("testResult")
+@Repository
 public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDao {
 	
 	@LogMethod("add")
