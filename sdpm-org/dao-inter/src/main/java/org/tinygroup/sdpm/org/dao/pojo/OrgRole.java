@@ -16,12 +16,16 @@
 
 package org.tinygroup.sdpm.org.dao.pojo;
 
-/** 
+import java.io.Serializable;
+
+/**
  * 角色表
  * 
  */
-public class OrgRole {
+public class OrgRole implements Serializable {
 
+	public static String DELETE_YES = "1";
+	public static String DELETE_NO = "0";
 	/** 
 	 * 角色ID
 	 * 
