@@ -28,7 +28,7 @@ public class BugAction extends BaseController {
 		if(id != null){
 			bug.setProductId(id);
 			List<Bug> buglist = bugService.findBugList(bug);
-			model.addAttribute("buglist",buglist);
+			model.addAttribute("bug",buglist);
 		}	
 		return "testManagement/data/BugData.pagelet";
 	}
