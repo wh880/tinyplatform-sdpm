@@ -39,6 +39,8 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.productLine.dao.ProductLineDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -51,8 +53,11 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+
+@LogClass("productLine")
 public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLineDao {
 
+	@LogMethod("add")
 	public ProductLine add(ProductLine productLine) {
 		return getDslTemplate().insertAndReturnKey(productLine, new InsertGenerateCallback<ProductLine>() {
 			public Insert generate(ProductLine t) {
@@ -79,7 +84,8 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 			}
 		});
 	}
-
+	
+	@LogMethod("edit")
 	public int edit(ProductLine productLine) {
 		if(productLine == null || productLine.getProductLineId() == null){
 			return 0;
@@ -109,7 +115,8 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 			}
 		});
 	}
-
+	
+	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -121,6 +128,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		});
 	}
 
+	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -237,6 +245,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 			return batchInsert(true ,productLines);
 	}
 
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<ProductLine> productLines) {
 		if (CollectionUtil.isEmpty(productLines)) {
 			return new int[0];
@@ -267,6 +276,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		});
 	}
 
+	@LogMethod("batchDelete")
 	public int[] batchDelete(List<ProductLine> productLines) {
 		if (CollectionUtil.isEmpty(productLines)) {
 			return new int[0];
@@ -297,6 +307,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		});
 	}
 
+	@LogMethod("addOrderByElements")
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {

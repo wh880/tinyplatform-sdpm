@@ -39,6 +39,8 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.system.dao.SystemSearchDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -51,8 +53,10 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+@LogClass("system_search")
 public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSearchDao {
 
+	@LogMethod("add")
 	public SystemSearch add(SystemSearch systemSearch) {
 		return getDslTemplate().insertAndReturnKey(systemSearch, new InsertGenerateCallback<SystemSearch>() {
 			public Insert generate(SystemSearch t) {
@@ -70,6 +74,7 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 		});
 	}
 
+	@LogMethod("edit")
 	public int edit(SystemSearch systemSearch) {
 		if(systemSearch == null || systemSearch.getSearchId() == null){
 			return 0;
@@ -90,6 +95,7 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 		});
 	}
 
+	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -101,6 +107,7 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 		});
 	}
 
+	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -187,6 +194,7 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 			return batchInsert(true ,systemSearchs);
 	}
 
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<SystemSearch> systemSearchs) {
 		if (CollectionUtil.isEmpty(systemSearchs)) {
 			return new int[0];
@@ -207,6 +215,7 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 		});
 	}
 
+	@LogMethod("batchDelete")
 	public int[] batchDelete(List<SystemSearch> systemSearchs) {
 		if (CollectionUtil.isEmpty(systemSearchs)) {
 			return new int[0];
@@ -227,6 +236,7 @@ public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSear
 		});
 	}
 
+	@LogMethod("addOrderByElements")
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {

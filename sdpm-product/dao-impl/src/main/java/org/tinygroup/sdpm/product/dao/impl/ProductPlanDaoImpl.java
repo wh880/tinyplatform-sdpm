@@ -39,6 +39,8 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -51,8 +53,10 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+@LogClass("product_plan")
 public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlanDao {
 
+	@LogMethod("add")
 	public ProductPlan add(ProductPlan productPlan) {
 		return getDslTemplate().insertAndReturnKey(productPlan, new InsertGenerateCallback<ProductPlan>() {
 			public Insert generate(ProductPlan t) {
@@ -70,6 +74,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 		});
 	}
 
+	@LogMethod("edit")
 	public int edit(ProductPlan productPlan) {
 		if(productPlan == null || productPlan.getPlanId() == null){
 			return 0;
@@ -90,6 +95,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 		});
 	}
 
+	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -101,6 +107,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 		});
 	}
 
+	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -187,6 +194,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 			return batchInsert(true ,productPlans);
 	}
 
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<ProductPlan> productPlans) {
 		if (CollectionUtil.isEmpty(productPlans)) {
 			return new int[0];
@@ -207,6 +215,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 		});
 	}
 
+	@LogMethod("batchDelete")
 	public int[] batchDelete(List<ProductPlan> productPlans) {
 		if (CollectionUtil.isEmpty(productPlans)) {
 			return new int[0];
@@ -227,6 +236,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 		});
 	}
 
+	@LogMethod("addOrderByElements")
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
