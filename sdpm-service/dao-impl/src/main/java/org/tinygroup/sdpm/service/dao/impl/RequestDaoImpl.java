@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.tinysqldsl.Delete;
@@ -53,6 +54,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 @LogClass("reqest")
+@Repository
 public class RequestDaoImpl extends TinyDslDaoSupport implements RequestDao {
 	@LogMethod("add")
 	public Request add(Request request) {
