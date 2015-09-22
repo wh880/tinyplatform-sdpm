@@ -52,7 +52,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 @Component
-@LogClass("system")
+@LogClass("effort")
 public class EffortDaoImpl extends TinyDslDaoSupport implements EffortDao {
 	@LogMethod("add")
 	public Effort add(Effort effort) {
