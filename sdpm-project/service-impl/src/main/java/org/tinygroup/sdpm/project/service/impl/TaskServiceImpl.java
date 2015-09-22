@@ -22,7 +22,7 @@ public class TaskServiceImpl implements TaskService {
         return taskManager.add(task);
     }
 
-    public Map<String, List<ProjectTask>> findByGroup(int projectId, String colum) {
+    public Map<String, List<ProjectTask>> findTaskByGroup(int projectId, String colum) {
         return null;
     }
 
@@ -34,7 +34,8 @@ public class TaskServiceImpl implements TaskService {
         return taskManager.update(task);
     }
 
-    public Pager<ProjectTask> findComplex() {
+    public Pager<ProjectTask> findComplexTask() {
         return null;
     }
+
 }

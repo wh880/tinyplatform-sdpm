@@ -26,7 +26,7 @@ public interface TaskService {
      * @param projectId
      * @return
      */
-    public Map<String, List<ProjectTask>> findByGroup(int projectId, String colum);
+    public Map<String, List<ProjectTask>> findTaskByGroup(int projectId, String colum);
 
     /**
      * 根据任务状态进行查询
@@ -50,5 +50,5 @@ public interface TaskService {
      *
      * @return
      */
-    public Pager<ProjectTask> findComplex();
+    public Pager<ProjectTask> findComplexTask();
 }

@@ -14,9 +14,8 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.org.wrapper;
+package org.tinygroup.sdpm.project.wrapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
@@ -25,22 +24,22 @@ import org.tinygroup.event.Event;
 import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 
 import java.util.List;
 import java.util.UUID;
 
-@Component("userService")
-public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.inter.UserService {
+@Component("taskService")
+public class TaskServiceImplWrapper implements org.tinygroup.sdpm.project.service.inter.TaskService {
 
-	@Autowired
-	CEPCore core;
+	CEPCore cepcore;
 
 	public CEPCore getCore() {
-		return core;
+		return cepcore;
 	}
 
-	public void setCore(CEPCore core) {
-		this.core = core;
+	public void setCore(CEPCore cepcore) {
+		this.cepcore = cepcore;
 	}
 
 	private Event getEvent(String serviceId,Context context) throws Exception{
@@ -53,12 +52,12 @@ public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.in
 		return event;
 	}
 
-	public org.tinygroup.sdpm.org.dao.pojo.OrgUser findUser(java.lang.String id) {
-		String serviceId = "org_findUser";
+	public org.tinygroup.sdpm.project.dao.pojo.ProjectTask addTask(org.tinygroup.sdpm.project.dao.pojo.ProjectTask task) {
+		String serviceId = "project_addTask";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("id" ,id);
+			context.put("task", task);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -66,12 +65,13 @@ public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.in
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.org.dao.pojo.OrgUser> findUserList(org.tinygroup.sdpm.org.dao.pojo.OrgUser orgUser) {
-		String serviceId = "org_findUserList";
+	public java.util.Map<String, List<ProjectTask>> findTaskByGroup(int projectId, java.lang.String colum) {
+		String serviceId = "project_findTaskByGroup";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("orgUser" ,orgUser);
+			context.put("projectId", projectId);
+			context.put("colum", colum);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -79,12 +79,12 @@ public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.in
 		}
 	}
 
-	public org.tinygroup.sdpm.org.dao.pojo.OrgUser addUser(org.tinygroup.sdpm.org.dao.pojo.OrgUser orgUser) {
-		String serviceId = "org_addUser";
+	public java.util.List<org.tinygroup.sdpm.project.dao.pojo.ProjectTask> findListTask(org.tinygroup.sdpm.project.dao.pojo.ProjectTask task) {
+		String serviceId = "project_findListTask";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("orgUser" ,orgUser);
+			context.put("task", task);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -92,12 +92,12 @@ public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.in
 		}
 	}
 
-	public org.tinygroup.sdpm.org.dao.pojo.OrgUser updateUser(org.tinygroup.sdpm.org.dao.pojo.OrgUser orgUser) {
-		String serviceId = "org_updateUser";
+	public java.lang.Integer updateTask(org.tinygroup.sdpm.project.dao.pojo.ProjectTask task) {
+		String serviceId = "project_updateTask";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("orgUser" ,orgUser);
+			context.put("task", task);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -105,12 +105,11 @@ public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.in
 		}
 	}
 
-	public java.lang.Integer deleteUser(java.lang.String id) {
-		String serviceId = "org_deleteUser";
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.project.dao.pojo.ProjectTask> findComplexTask() {
+		String serviceId = "project_findComplexTask";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("id" ,id);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -120,8 +119,8 @@ public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.in
 
 	private <T> T callServiceAndCallBack(String serviceId,Context context) throws Exception{
 		Event event = getEvent(serviceId,context);
-		core.process(event);
-		ServiceInfo info = core.getServiceInfo(serviceId);
+		cepcore.process(event);
+		ServiceInfo info = cepcore.getServiceInfo(serviceId);
 		List<Parameter> resultsParam = info.getResults();
 		if (resultsParam==null||resultsParam.size() == 0) {
 			return null;
