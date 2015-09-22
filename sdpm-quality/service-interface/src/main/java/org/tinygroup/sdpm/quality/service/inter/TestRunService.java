@@ -18,4 +18,10 @@ public interface TestRunService {
 	 * @return
 	 */
 	int updateTestRun(TestRun testrun);
+	/**
+	 * 批量编辑
+	 * @param testruns
+	 * @return
+	 */
+	int[] batchUpdateTestRun(List<TestRun> testruns);
 }

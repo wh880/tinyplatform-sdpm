@@ -23,7 +23,7 @@ import org.tinygroup.sdpm.org.service.inter.UserService;
 
 import java.util.List;
 
-@Component("userService")
+@Component
 public class UserServiceImpl implements UserService {
 
     @Autowired

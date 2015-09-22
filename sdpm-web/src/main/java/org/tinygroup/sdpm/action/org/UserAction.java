@@ -15,7 +15,7 @@ import org.tinygroup.sdpm.org.service.inter.UserService;
  * Created by Hulk on 2015/9/16.
  */
 @Controller
-@RequestMapping("/org/user/")
+@RequestMapping("/org/user")
 public class UserAction extends BaseController {
     @Autowired
     private UserService userService;

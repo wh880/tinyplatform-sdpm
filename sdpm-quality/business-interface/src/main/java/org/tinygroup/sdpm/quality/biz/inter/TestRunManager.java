@@ -19,4 +19,10 @@ public interface TestRunManager {
 	 * @return
 	 */
 	int update(TestRun testrun);
+	/**
+	 * 批量编辑
+	 * @param testruns
+	 * @return
+	 */
+	int[] batchUpdate(List<TestRun> testruns);
 }

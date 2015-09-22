@@ -16,9 +16,8 @@
 
 package org.tinygroup.sdpm.org.wrapper;
 
-import java.util.List;
-import java.util.UUID;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -27,8 +26,13 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
+import java.util.List;
+import java.util.UUID;
+
+@Component("userService")
 public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.inter.UserService {
 
+	@Autowired
 	CEPCore core;
 
 	public CEPCore getCore() {

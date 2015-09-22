@@ -30,10 +30,21 @@ public interface TestCaseService {
 	 */
 	int updateTestCase(TestCase testcase);
 	/**
+	 * 批量修改
+	 * @param testcases
+	 * @return
+	 */
+	int [] batchUpdateTestCase(List<TestCase> testcases);
+	/**
 	 * 删除用例
 	 * @param id
 	 * @return
 	 */
 	int deleteById(int id);
-	
+	/**
+	 * 批量删除
+	 * @param id
+	 * @return
+	 */
+	int[] batchDeleteTestCase(List<TestCase> testcases);
 }

@@ -30,10 +30,22 @@ public interface TestCaseManager {
 	 */
 	int update(TestCase testcase);
 	/**
+	 * 批量修改
+	 * @param testcases
+	 * @return
+	 */
+	int [] batchUpdate(List<TestCase> testcases);
+	/**
 	 * 删除用例
 	 * @param id
 	 * @return
 	 */
 	int delete(int id);
+	/**
+	 * 批量删除
+	 * @param id
+	 * @return
+	 */
+	int[] batchDelete(List<TestCase> testcases);
 
 }

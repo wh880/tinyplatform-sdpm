@@ -20,6 +20,8 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.tinysqldsl.*;
@@ -37,9 +39,9 @@ import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-
+@LogClass("project")
 public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBuildDao {
-
+	@LogMethod("add")
 	public ProjectBuild add(ProjectBuild projectBuild) {
 		return getDslTemplate().insertAndReturnKey(projectBuild, new InsertGenerateCallback<ProjectBuild>() {
 			public Insert generate(ProjectBuild t) {
@@ -60,7 +62,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 			}
 		});
 	}
-
+	@LogMethod("edit")
 	public int edit(ProjectBuild projectBuild) {
 		if (projectBuild == null || projectBuild.getBuildId() == null) {
 			return 0;
@@ -84,7 +86,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 			}
 		});
 	}
-
+	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk) {
 		if (pk == null) {
 			return 0;
@@ -95,7 +97,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 			}
 		});
 	}
-
+	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if (pks == null || pks.length == 0) {
 			return 0;
@@ -193,7 +195,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 	public int[] batchInsert(List<ProjectBuild> projectBuilds) {
 		return batchInsert(true, projectBuilds);
 	}
-
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<ProjectBuild> projectBuilds) {
 		if (CollectionUtil.isEmpty(projectBuilds)) {
 			return new int[0];
@@ -217,7 +219,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 			}
 		});
 	}
-
+	@LogMethod("batchDelete")
 	public int[] batchDelete(List<ProjectBuild> projectBuilds) {
 		if (CollectionUtil.isEmpty(projectBuilds)) {
 			return new int[0];
@@ -241,7 +243,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 			}
 		});
 	}
-
+	@LogMethod("addOrderByElements")
 	private Select addOrderByElements(Select select, OrderBy... orderBies) {
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {

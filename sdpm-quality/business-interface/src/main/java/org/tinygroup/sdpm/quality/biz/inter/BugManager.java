@@ -32,4 +32,11 @@ public interface BugManager {
 	 * @return
 	 */
 	int update(Bug bug);
+	/**
+	 * 批量编辑
+	 * @param bugs
+	 * @return
+	 */
+	int[] batchUpdate(List<Bug> bugs);
+	
 }

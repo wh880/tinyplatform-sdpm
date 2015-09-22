@@ -21,5 +21,9 @@ public class TestRunServiceImpl implements TestRunService {
 	public int updateTestRun(TestRun testrun){
 		return testrunmanager.update(testrun);
 	}
+	
+	public int[] batchUpdateTestRun(List<TestRun> testruns){
+		return testrunmanager.batchUpdate(testruns);
+	}
 
 }

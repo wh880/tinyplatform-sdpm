@@ -33,6 +33,12 @@ public interface BugService {
 	 * @return
 	 */
 	int updateBug(Bug bug);
+	/**
+	 * 批量修改
+	 * @param bugs
+	 * @return
+	 */
+	int[] batchUpdateBug(List<Bug> bugs);
 	
 	
 }

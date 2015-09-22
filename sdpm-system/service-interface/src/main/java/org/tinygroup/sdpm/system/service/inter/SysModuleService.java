@@ -31,6 +31,12 @@ public interface SysModuleService {
 	  * @return
 	  */
 	 int delete(SysModule sysModule);
+	 /**
+	  * 通过ID查询对象
+	  * @param id
+	  * @return
+	  */
+	 SysModule findById(int id);
 	 
 	 
 }
