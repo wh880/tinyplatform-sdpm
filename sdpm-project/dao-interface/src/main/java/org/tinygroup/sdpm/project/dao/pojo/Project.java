@@ -16,14 +16,13 @@
 
 package org.tinygroup.sdpm.project.dao.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 项目
  * 
  */
-public class Project implements Serializable{
+public class Project {
 
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";

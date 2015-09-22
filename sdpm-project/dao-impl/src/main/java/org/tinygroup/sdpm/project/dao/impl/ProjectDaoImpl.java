@@ -18,14 +18,17 @@ package org.tinygroup.sdpm.project.dao.impl;
 
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.project.dao.ProjectDao;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
@@ -147,7 +150,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 		});
 	}
 
-	public List<Project> query(Project project) {
+	public List<Project> query(Project project, final OrderBy... orderBies) {
 		if(project==null){
 			project=new Project();
 		}
@@ -155,7 +158,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(Project t) {
-				return selectFrom(PROJECTTABLE).where(
+				Select select = selectFrom(PROJECTTABLE).where(
 				and(
 					PROJECTTABLE.PROJECT_IS_CAT.eq(t.getProjectIsCat()),
 					PROJECTTABLE.PROJECT_CAT_ID.eq(t.getProjectCatId()),
@@ -185,18 +188,19 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 					PROJECTTABLE.PROJECT_WHITE_LIST.eq(t.getProjectWhiteList()),
 					PROJECTTABLE.PROJECT_ORDER.eq(t.getProjectOrder()),
 					PROJECTTABLE.PROJECT_DELETED.eq(t.getProjectDeleted())));
+				return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<Project> queryPager(int start,int limit ,Project project) {
+	public Pager<Project> queryPager(int start, int limit, Project project, final OrderBy... orderBies) {
 		if(project==null){
 			project=new Project();
 		}
 		return getDslTemplate().queryPager(start, limit, project, false, new SelectGenerateCallback<Project>() {
 
 			public Select generate(Project t) {
-				return MysqlSelect.selectFrom(PROJECTTABLE).where(
+				Select select = MysqlSelect.selectFrom(PROJECTTABLE).where(
 				and(
 					PROJECTTABLE.PROJECT_IS_CAT.eq(t.getProjectIsCat()),
 					PROJECTTABLE.PROJECT_CAT_ID.eq(t.getProjectCatId()),
@@ -226,6 +230,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 					PROJECTTABLE.PROJECT_WHITE_LIST.eq(t.getProjectWhiteList()),
 					PROJECTTABLE.PROJECT_ORDER.eq(t.getProjectOrder()),
 					PROJECTTABLE.PROJECT_DELETED.eq(t.getProjectDeleted())));
+				return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -356,4 +361,17 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 		});
 	}
 
+	private Select addOrderByElements(Select select, OrderBy... orderBies) {
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

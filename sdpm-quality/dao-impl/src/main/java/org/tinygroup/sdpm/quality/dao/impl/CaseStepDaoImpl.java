@@ -39,6 +39,8 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.CaseStep;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.quality.dao.CaseStepDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -51,8 +53,10 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+@LogClass("caseStep")
 public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
-
+	
+	@LogMethod("add")
 	public CaseStep add(CaseStep caseStep) {
 		return getDslTemplate().insertAndReturnKey(caseStep, new InsertGenerateCallback<CaseStep>() {
 			public Insert generate(CaseStep t) {
@@ -66,7 +70,7 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 			}
 		});
 	}
-
+	@LogMethod("edit")
 	public int edit(CaseStep caseStep) {
 		if(caseStep == null || caseStep.getCaseStepId() == null){
 			return 0;
@@ -83,7 +87,7 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 			}
 		});
 	}
-
+	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -94,7 +98,7 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 			}
 		});
 	}
-
+	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -105,7 +109,7 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 		}
 		},pks);
 	}
-
+	
 	public CaseStep getByKey(Integer pk) {
 		return getDslTemplate().getByKey(pk, CaseStep.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
@@ -171,7 +175,7 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 	public int[] batchInsert(List<CaseStep> caseSteps){
 			return batchInsert(true ,caseSteps);
 	}
-
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<CaseStep> caseSteps) {
 		if (CollectionUtil.isEmpty(caseSteps)) {
 			return new int[0];
@@ -188,7 +192,7 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 			}
 		});
 	}
-
+	@LogMethod("batchDelete")
 	public int[] batchDelete(List<CaseStep> caseSteps) {
 		if (CollectionUtil.isEmpty(caseSteps)) {
 			return new int[0];

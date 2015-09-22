@@ -16,13 +16,16 @@
 
 package org.tinygroup.sdpm.quality.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 测试用例表
  * 
  */
-public class TestCase {
+public class TestCase implements Serializable {
+	public static int DELETE_YES = 1;
+	public static int DELETE_NO = 0;
 
 	/** 
 	 * 用例编号

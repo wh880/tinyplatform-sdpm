@@ -221,6 +221,6 @@ public class ProjectTaskTable extends Table {
 
 	private ProjectTaskTable() {
 		super("project_task");
-		}
+	}
 
 }

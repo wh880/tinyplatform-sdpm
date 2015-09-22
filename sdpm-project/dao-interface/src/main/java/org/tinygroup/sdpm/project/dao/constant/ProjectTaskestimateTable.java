@@ -72,6 +72,6 @@ public class ProjectTaskestimateTable extends Table {
 
 	private ProjectTaskestimateTable() {
 		super("project_taskestimate");
-		}
+	}
 
 }

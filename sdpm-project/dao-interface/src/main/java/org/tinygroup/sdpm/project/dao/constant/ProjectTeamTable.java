@@ -72,6 +72,6 @@ public class ProjectTeamTable extends Table {
 
 	private ProjectTeamTable() {
 		super("project_team");
-		}
+	}
 
 }

@@ -39,6 +39,8 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.Bug;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.quality.dao.BugDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -51,8 +53,10 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+@LogClass("bug")
 public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
-
+	
+	@LogMethod("add")
 	public Bug add(Bug bug) {
 		return getDslTemplate().insertAndReturnKey(bug, new InsertGenerateCallback<Bug>() {
 			public Insert generate(Bug t) {
@@ -111,7 +115,7 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 			}
 		});
 	}
-
+	@LogMethod("edit")
 	public int edit(Bug bug) {
 		if(bug == null || bug.getBugId() == null){
 			return 0;
@@ -173,7 +177,7 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 			}
 		});
 	}
-
+	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -184,7 +188,7 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 			}
 		});
 	}
-
+	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -204,7 +208,7 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 			}
 		});
 	}
-
+	
 	public List<Bug> query(Bug bug ,final OrderBy... orderBies) {
 		if(bug==null){
 			bug=new Bug();
@@ -392,11 +396,11 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 			}
 		});
 	}
-
+	
 	public int[] batchInsert(List<Bug> bugs){
 			return batchInsert(true ,bugs);
 	}
-
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<Bug> bugs) {
 		if (CollectionUtil.isEmpty(bugs)) {
 			return new int[0];
@@ -458,7 +462,7 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 			}
 		});
 	}
-
+	@LogMethod("batchDelete")
 	public int[] batchDelete(List<Bug> bugs) {
 		if (CollectionUtil.isEmpty(bugs)) {
 			return new int[0];

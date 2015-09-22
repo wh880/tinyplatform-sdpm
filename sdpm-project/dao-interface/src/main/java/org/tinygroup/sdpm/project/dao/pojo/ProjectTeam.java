@@ -16,14 +16,13 @@
 
 package org.tinygroup.sdpm.project.dao.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 团队
  * 
  */
-public class ProjectTeam implements Serializable {
+public class ProjectTeam {
 
 	/** 
 	 * 逻辑ID
@@ -112,7 +111,7 @@ public class ProjectTeam implements Serializable {
 	}
 
 	public void setTeamDays(Float teamDays) {
-		this. teamDays = teamDays;
+		this.teamDays = teamDays;
 	}
 
 	public Float getTeamHours() {

@@ -16,13 +16,14 @@
 
 package org.tinygroup.sdpm.quality.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 测试结果表
  * 
  */
-public class TestResult {
+public class TestResult implements Serializable {
 
 	/** 
 	 * 测试结果

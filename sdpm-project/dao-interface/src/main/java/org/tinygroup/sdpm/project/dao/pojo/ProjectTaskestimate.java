@@ -16,14 +16,13 @@
 
 package org.tinygroup.sdpm.project.dao.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 任务预计
  * 
  */
-public class ProjectTaskestimate implements Serializable {
+public class ProjectTaskestimate {
 
 	/** 
 	 * 任务预计id

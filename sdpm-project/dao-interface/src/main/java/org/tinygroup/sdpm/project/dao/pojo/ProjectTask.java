@@ -16,14 +16,13 @@
 
 package org.tinygroup.sdpm.project.dao.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 任务
  * 
  */
-public class ProjectTask implements Serializable {
+public class ProjectTask {
 
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
@@ -279,7 +278,7 @@ public class ProjectTask implements Serializable {
 	}
 
 	public void setTaskPri(String taskPri) {
-		this. taskPri = taskPri;
+		this.taskPri = taskPri;
 	}
 
 	public Float getTaskEstimate() {
