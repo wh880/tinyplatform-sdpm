@@ -1,5 +1,6 @@
+
 <service-components>
-  <service-component type="org.tinygroup.sdpm.system.service.impl.EffortServiceImpl" bean="effortService">
+  <service-component type="org.tinygroup.sdpm.system.service.impl.EffortServiceImpl" bean="">
     <service-method local-name="findByDate" service-id="effort_findByDate" method-name="findByDate" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>
         <service-parameter name="date" type="java.util.Date" required="true" is-array="false"/>

@@ -24,7 +24,9 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.tinygroup.tinysqldsl.Delete;
@@ -35,11 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.select.OrderByElement;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
 import org.tinygroup.sdpm.document.dao.HistorydocDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -109,7 +112,7 @@ public class HistorydocDaoImpl extends TinyDslDaoSupport implements HistorydocDa
 			}
 		});
 	}
-	
+
 	public List<Historydoc> query(Historydoc historydoc ,final OrderBy... orderBies) {
 		if(historydoc==null){
 			historydoc=new Historydoc();
@@ -208,22 +211,5 @@ public class HistorydocDaoImpl extends TinyDslDaoSupport implements HistorydocDa
 			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
 		}
 		return select;
-	}
-
-	public List<Historydoc> getEditHistory(Integer docid) {
-		// 获得历史记录的操作。
-		if(docid==null){
-			docid=new Integer(docid);
-		}
-		Historydoc historydoc=new Historydoc();
-		return getDslTemplate().query(historydoc, new SelectGenerateCallback<Historydoc>() {
-
-			@SuppressWarnings("rawtypes")
-			public Select generate(Historydoc t) {
-				Select select = selectFrom(HISTORYDOCTABLE).where(
-				HISTORYDOCTABLE.DOC_ID.eq(t.getDocId()));
-			return select;
-			}
-		});
 	}
 }

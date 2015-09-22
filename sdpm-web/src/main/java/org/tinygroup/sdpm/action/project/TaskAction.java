@@ -27,9 +27,9 @@ public class TaskAction extends BaseController {
             List<ProjectTask> list = taskService.findListTask(task);
             model.addAttribute("tasksList", list);
         }
-        return "project/task/index.page";
+        return "project/task/datalist.pagelet";
     }
-
+//
 //    @RequestMapping(value = "/save", method = RequestMethod.POST)
 //    public String save(OrgUser user, Model model) {
 //        if (StringUtil.isBlank(user.getOrgUserId())) {

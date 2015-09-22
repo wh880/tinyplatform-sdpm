@@ -16,45 +16,45 @@
         <!--可以自定义标签对,可以在其它地方用{标签名引用}-->
     </properties>
     <dependencies>
-    	
-    	<dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-common-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-common-view</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-     	<dependency>
+    
+     	<!-- <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-metadata</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+            <version>${tiny_sdpm_version}</version>
+        </dependency> -->
         
-        
-    	<dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-product-view</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-product-dao-interface</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+    	 <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-product-service-impl</artifactId>
-            <version>${project.version}</version>
+            <version>${tiny_sdpm_version}</version>
         </dependency>
+    
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-product-service-wrapper</artifactId>
-            <version>${project.version}</version>
+            <artifactId>sdpm-product-view</artifactId>
+            <version>${tiny_sdpm_version}</version>
         </dependency>
-        
         
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-productLine-view</artifactId>
-            <version>${project.version}</version>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+       
+          <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-common-view</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+            <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-common-common</artifactId>
+            <version>${tiny_sdpm_version}</version>
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>

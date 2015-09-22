@@ -37,7 +37,7 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 
-	public int[] updateBatchPlan(List<ProductPlan> plan) {
+	public int[] updateBatch(List<ProductPlan> plan) {
 		
 		return planManager.updateBatch(plan);
 	}

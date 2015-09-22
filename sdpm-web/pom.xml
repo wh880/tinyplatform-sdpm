@@ -63,14 +63,11 @@
             <version>${tiny_sdpm_version}</version>
         </dependency>
         <!--service end-->
-        
-        <!-- system -->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-system-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
-        
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-common-view</artifactId>
@@ -96,25 +93,11 @@
             <artifactId>sdpm-document-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
-        
-        <!-- product -->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-product-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-product-service-impl</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-product-service-wrapper</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        
-        <!-- productLine -->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-productLine-view</artifactId>

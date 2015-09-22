@@ -1,0 +1,34 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.system.service.impl.ProfileServiceImpl" bean="">
+    <service-method local-name="add" service-id="add" method-name="add" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="Profile" type="org.tinygroup.sdpm.system.dao.pojo.Profile" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.Profile"/>
+    </service-method>
+    <service-method local-name="batchAdd" service-id="batchAdd" method-name="batchAdd" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="Profiles" type="org.tinygroup.sdpm.system.dao.pojo.Profile" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="batchAddResult" required="false" is-array="true" type="int"/>
+    </service-method>
+    <service-method local-name="find" service-id="find" method-name="find" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="Profile" type="org.tinygroup.sdpm.system.dao.pojo.Profile" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.Profile"/>
+    </service-method>
+    <service-method local-name="delete" service-id="delete" method-name="delete" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="Profile" type="org.tinygroup.sdpm.system.dao.pojo.Profile" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="edit" service-id="edit" method-name="edit" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="Profile" type="org.tinygroup.sdpm.system.dao.pojo.Profile" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="editResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.Profile"/>
+    </service-method>
+  </service-component>
+</service-components>

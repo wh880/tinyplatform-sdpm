@@ -1,5 +1,6 @@
+
 <service-components>
-  <service-component type="org.tinygroup.sdpm.system.service.impl.SearchServiceImpl" bean="searchService">
+  <service-component type="org.tinygroup.sdpm.system.service.impl.SearchServiceImpl" bean="">
     <service-method local-name="addSearch" service-id="system_addSearch" method-name="addSearch" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>
         <service-parameter name="search" type="org.tinygroup.sdpm.system.dao.pojo.SystemSearch" required="false" is-array="false"/>

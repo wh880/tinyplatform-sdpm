@@ -19,11 +19,15 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    
+    <dependency>
+	    <groupId>org.tinygroup</groupId>
+		<artifactId>org.tinygroup.genservicewrap</artifactId>
+		<version>${tiny_version}</version>
+	</dependency>
     <dependency>
 			<groupId>org.tinygroup</groupId>
 			<artifactId>sdpm-product-business-interface</artifactId>
-			<version>${project.version}</version>
+			<version>${tiny_sdpm_version}</version>
 	</dependency>
   </dependencies>
 </project>
