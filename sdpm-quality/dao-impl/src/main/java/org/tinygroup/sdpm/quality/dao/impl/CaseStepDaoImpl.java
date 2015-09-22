@@ -54,8 +54,9 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
-@Repository
+
 @LogClass("caseStep")
+@Repository
 public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 	
 	@LogMethod("add")

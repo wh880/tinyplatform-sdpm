@@ -54,8 +54,9 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
-@Repository
+
 @LogClass("bug")
+@Repository
 public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 	
 	@LogMethod("add")

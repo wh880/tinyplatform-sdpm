@@ -54,8 +54,9 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
-@Repository
+
 @LogClass("testTask")
+@Repository
 public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 	
 	@LogMethod("add")
