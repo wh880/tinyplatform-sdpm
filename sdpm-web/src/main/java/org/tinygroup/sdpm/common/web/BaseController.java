@@ -1,6 +1,5 @@
 package org.tinygroup.sdpm.common.web;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
@@ -137,10 +136,10 @@ public abstract class BaseController {
     protected void initBinder(WebDataBinder binder) {
         // String类型转换，将所有传递进来的String进行HTML编码，防止XSS攻击
         binder.registerCustomEditor(String.class, new PropertyEditorSupport() {
-            @Override
-            public void setAsText(String text) {
-                setValue(text == null ? null : StringEscapeUtils.escapeHtml(text.trim()));
-            }
+//            @Override
+//            public void setAsText(String text) {
+//                setValue(text == null ? null : StringEscapeUtils.escapeHtml(text.trim()));
+//            }
 
             @Override
             public String getAsText() {
