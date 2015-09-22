@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package sdpm.system.service.wrapper.wrap;
+package org.tinygroup.sdpm.system.wrapper;
 
 import java.util.List;
 import java.util.UUID;
