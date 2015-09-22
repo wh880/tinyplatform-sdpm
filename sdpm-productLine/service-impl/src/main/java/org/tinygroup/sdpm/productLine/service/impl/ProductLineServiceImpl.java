@@ -30,7 +30,7 @@ public class ProductLineServiceImpl implements ProductLineService {
 		return productLineManager.find(productLineId);
 	}
 
-	public int[] updateBatch(List<ProductLine> productLines) {
+	public int[] updateBatchProductLine(List<ProductLine> productLines) {
 		
 		return productLineManager.updateBatch(productLines);
 	}

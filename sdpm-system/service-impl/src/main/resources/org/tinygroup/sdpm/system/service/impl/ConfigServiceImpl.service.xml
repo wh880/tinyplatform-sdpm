@@ -24,12 +24,6 @@
       </service-parameters>
       <service-result name="findConfigResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemConfig"/>
     </service-method>
-    <service-method local-name="updateBatch" service-id="system_updateBatch" method-name="updateBatch" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
-      <service-parameters>
-        <service-parameter name="configs" type="org.tinygroup.sdpm.system.dao.pojo.SystemConfig" collection-type="java.util.List" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="updateBatchResult" required="false" is-array="true" type="int"/>
-    </service-method>
     <service-method local-name="findConfigList" service-id="system_findConfigList" method-name="findConfigList" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>
         <service-parameter name="config" type="org.tinygroup.sdpm.system.dao.pojo.SystemConfig" required="false" is-array="false"/>
@@ -47,6 +41,12 @@
         <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findConfigPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager&lt;org.tinygroup.sdpm.system.dao.pojo.SystemConfig&gt;"/>
+    </service-method>
+    <service-method local-name="updateBatchConfig" service-id="system_updateBatchConfig" method-name="updateBatchConfig" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="configs" type="org.tinygroup.sdpm.system.dao.pojo.SystemConfig" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateBatchConfigResult" required="false" is-array="true" type="int"/>
     </service-method>
   </service-component>
 </service-components>

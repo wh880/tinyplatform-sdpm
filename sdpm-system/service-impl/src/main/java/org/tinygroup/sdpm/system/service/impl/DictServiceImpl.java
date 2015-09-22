@@ -46,6 +46,11 @@ public class DictServiceImpl implements DictService {
 		return dictManager.findPager(start, limit, dict, columnName, asc);
 	}
 
+	public int[] updateBatchDict(List<SystemDict> dicts) {
+
+		return dictManager.updateBatch(dicts);
+	}
+
 	
 	
 

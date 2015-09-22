@@ -19,8 +19,6 @@ package org.tinygroup.sdpm.system.wrapper;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -29,10 +27,8 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-@Component
 public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.DictService {
 
-	@Autowired
 	CEPCore cepcore;
 
 	public CEPCore getCore() {
@@ -130,6 +126,19 @@ public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service
 			context.put("dict" ,dict);
 			context.put("columnName" ,columnName);
 			context.put("asc" ,asc);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public int[] updateBatchDict(java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemDict> dicts) {
+		String serviceId = "system_updateBatchDict";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("dicts" ,dicts);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

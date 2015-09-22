@@ -42,5 +42,11 @@
       </service-parameters>
       <service-result name="findDictPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager&lt;org.tinygroup.sdpm.system.dao.pojo.SystemDict&gt;"/>
     </service-method>
+    <service-method local-name="updateBatchDict" service-id="system_updateBatchDict" method-name="updateBatchDict" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="dicts" type="org.tinygroup.sdpm.system.dao.pojo.SystemDict" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateBatchDictResult" required="false" is-array="true" type="int"/>
+    </service-method>
   </service-component>
 </service-components>

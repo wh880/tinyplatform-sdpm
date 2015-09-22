@@ -29,6 +29,13 @@ public interface DictService {
 	int updateDict(SystemDict dict);
 	
 	/**
+	 * 批量编辑
+	 * @param dicts
+	 * @return
+	 */
+	int[] updateBatchDict(List<SystemDict> dicts);
+	
+	/**
 	 * 根据ID查找
 	 * @param configId
 	 * @return

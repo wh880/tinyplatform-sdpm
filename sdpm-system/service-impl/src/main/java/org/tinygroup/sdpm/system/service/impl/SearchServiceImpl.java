@@ -47,5 +47,10 @@ public class SearchServiceImpl implements SearchService {
 		return searchManager.findPager(start, limit, search, columnName, asc);
 	}
 
+	public int[] updateBatchSearch(List<SystemSearch> searches) {
+
+		return searchManager.updateBatch(searches);
+	}
+
 
 }

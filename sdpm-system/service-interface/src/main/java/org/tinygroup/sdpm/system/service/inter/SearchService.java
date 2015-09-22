@@ -30,6 +30,13 @@ public interface SearchService {
 	int updateSearch(SystemSearch search);
 	
 	/**
+	 * 批量编辑
+	 * @param dicts
+	 * @return
+	 */
+	int[] updateBatchSearch(List<SystemSearch> searchs);
+	
+	/**
 	 * 根据ID查找
 	 * @param configId
 	 * @return

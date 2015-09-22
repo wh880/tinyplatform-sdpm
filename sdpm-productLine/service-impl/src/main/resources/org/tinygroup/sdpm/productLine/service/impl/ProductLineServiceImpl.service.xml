@@ -18,11 +18,11 @@
       </service-parameters>
       <service-result name="findProductLineResult" required="false" is-array="false" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine"/>
     </service-method>
-    <service-method local-name="updateBatch" service-id="productline_updateBatch" method-name="updateBatch" cacheable="false" category="org.tinygroup.sdpm.productLine.service.impl">
+    <service-method local-name="updateBatchProductLine" service-id="productline_updateBatchProductLine" method-name="updateBatchProductLine" cacheable="false" category="org.tinygroup.sdpm.productLine.service.impl">
       <service-parameters>
         <service-parameter name="productLines" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine" collection-type="java.util.List" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="updateBatchResult" required="false" is-array="true" type="int"/>
+      <service-result name="updateBatchProductLineResult" required="false" is-array="true" type="int"/>
     </service-method>
     <service-method local-name="findProductLineList" service-id="productline_findProductLineList" method-name="findProductLineList" cacheable="false" category="org.tinygroup.sdpm.productLine.service.impl">
       <service-parameters>

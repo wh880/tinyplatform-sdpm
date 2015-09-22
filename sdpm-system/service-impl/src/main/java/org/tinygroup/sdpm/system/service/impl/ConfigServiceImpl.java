@@ -36,9 +36,6 @@ public class ConfigServiceImpl implements ConfigService {
 		return configManager.find(configId);
 	}
 
-	public int[] updateBatch(List<SystemConfig> configs) {
-		return configManager.updateBatch(configs);
-	}
 
 	public List<SystemConfig> findConfigList(SystemConfig config, String columnName, boolean asc) {
 		return configManager.findList(config, columnName, asc);
@@ -47,6 +44,11 @@ public class ConfigServiceImpl implements ConfigService {
 	public Pager<SystemConfig> findConfigPager(int start, int limit, SystemConfig config, String columnName,
 			boolean asc) {
 		return configManager.findPager(start, limit, config, columnName, asc);
+	}
+
+	public int[] updateBatchConfig(List<SystemConfig> configs) {
+
+		return configManager.updateBatch(configs);
 	}
 
 

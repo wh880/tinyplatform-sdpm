@@ -29,11 +29,11 @@ public interface ConfigService {
 	 */
 	int updateConfig(SystemConfig config);
 	/**
-	 * 批量删除
+	 * 批量编辑
 	 * @param config
 	 * @return
 	 */
-	int[] updateBatch(List<SystemConfig> configs);
+	int[] updateBatchConfig(List<SystemConfig> configs);
 	
 	/**
 	 * 根据ID查找

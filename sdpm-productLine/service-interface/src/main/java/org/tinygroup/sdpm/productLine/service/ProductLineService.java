@@ -25,7 +25,7 @@ public interface ProductLineService {
 	 * @param productLines
 	 * @return
 	 */
-	int[] updateBatch(List<ProductLine> productLines);
+	int[] updateBatchProductLine(List<ProductLine> productLines);
 	
 	/**
 	 * 根据主键查询
