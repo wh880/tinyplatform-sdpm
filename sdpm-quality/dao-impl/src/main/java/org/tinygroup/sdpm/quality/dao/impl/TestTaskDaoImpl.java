@@ -39,6 +39,8 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.TestTask;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.quality.dao.TestTaskDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -51,8 +53,10 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+@LogClass("testTask")
 public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
-
+	
+	@LogMethod("add")
 	public TestTask add(TestTask testTask) {
 		return getDslTemplate().insertAndReturnKey(testTask, new InsertGenerateCallback<TestTask>() {
 			public Insert generate(TestTask t) {
@@ -74,7 +78,7 @@ public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 			}
 		});
 	}
-
+	@LogMethod("edit")
 	public int edit(TestTask testTask) {
 		if(testTask == null || testTask.getTestversionId() == null){
 			return 0;
@@ -99,7 +103,7 @@ public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 			}
 		});
 	}
-
+	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -110,7 +114,7 @@ public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 			}
 		});
 	}
-
+	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -211,7 +215,7 @@ public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 	public int[] batchInsert(List<TestTask> testTasks){
 			return batchInsert(true ,testTasks);
 	}
-
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<TestTask> testTasks) {
 		if (CollectionUtil.isEmpty(testTasks)) {
 			return new int[0];
@@ -236,7 +240,7 @@ public class TestTaskDaoImpl extends TinyDslDaoSupport implements TestTaskDao {
 			}
 		});
 	}
-
+	@LogMethod("batchDelete")
 	public int[] batchDelete(List<TestTask> testTasks) {
 		if (CollectionUtil.isEmpty(testTasks)) {
 			return new int[0];

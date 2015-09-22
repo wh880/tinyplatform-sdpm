@@ -16,13 +16,14 @@
 
 package org.tinygroup.sdpm.quality.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 缺陷表
  * 
  */
-public class Bug {
+public class Bug implements Serializable {
 
 	/** 
 	 * Bug编号

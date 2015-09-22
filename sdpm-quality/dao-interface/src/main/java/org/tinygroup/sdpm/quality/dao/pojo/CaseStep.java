@@ -16,12 +16,13 @@
 
 package org.tinygroup.sdpm.quality.dao.pojo;
 
+import java.io.Serializable;
 
 /** 
  * 测试用例步骤表
  * 
  */
-public class CaseStep {
+public class CaseStep implements Serializable {
 
 	/** 
 	 * 用例步骤编号
