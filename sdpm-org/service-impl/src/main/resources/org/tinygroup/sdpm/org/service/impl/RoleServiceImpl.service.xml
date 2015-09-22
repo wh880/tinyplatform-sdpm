@@ -1,0 +1,37 @@
+<service-components>
+    <service-component type="org.tinygroup.sdpm.org.service.impl.RoleServiceImpl" bean="roleService">
+        <service-method local-name="findRole" service-id="org_findRole" method-name="findRole" cacheable="false"
+                        category="org.tinygroup.sdpm.org.service.impl">
+            <service-parameters>
+                <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+            </service-parameters>
+            <service-result name="findRoleResult" required="false" is-array="false"
+                            type="org.tinygroup.sdpm.org.dao.pojo.OrgRole"/>
+        </service-method>
+        <service-method local-name="addRole" service-id="org_addRole" method-name="addRole" cacheable="false"
+                        category="org.tinygroup.sdpm.org.service.impl">
+            <service-parameters>
+                <service-parameter name="orgRole" type="org.tinygroup.sdpm.org.dao.pojo.OrgRole" required="false"
+                                   is-array="false"/>
+            </service-parameters>
+            <service-result name="addRoleResult" required="false" is-array="false"
+                            type="org.tinygroup.sdpm.org.dao.pojo.OrgRole"/>
+        </service-method>
+        <service-method local-name="updateRole" service-id="org_updateRole" method-name="updateRole" cacheable="false"
+                        category="org.tinygroup.sdpm.org.service.impl">
+            <service-parameters>
+                <service-parameter name="orgRole" type="org.tinygroup.sdpm.org.dao.pojo.OrgRole" required="false"
+                                   is-array="false"/>
+            </service-parameters>
+            <service-result name="updateRoleResult" required="false" is-array="false"
+                            type="org.tinygroup.sdpm.org.dao.pojo.OrgRole"/>
+        </service-method>
+        <service-method local-name="deleteRole" service-id="org_deleteRole" method-name="deleteRole" cacheable="false"
+                        category="org.tinygroup.sdpm.org.service.impl">
+            <service-parameters>
+                <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+            </service-parameters>
+            <service-result name="deleteRoleResult" required="false" is-array="false" type="java.lang.Integer"/>
+        </service-method>
+    </service-component>
+</service-components>
