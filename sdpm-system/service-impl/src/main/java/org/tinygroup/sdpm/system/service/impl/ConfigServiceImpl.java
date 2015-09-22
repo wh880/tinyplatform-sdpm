@@ -10,7 +10,7 @@ import org.tinygroup.sdpm.system.service.inter.ConfigService;
 import org.tinygroup.tinysqldsl.Pager;
 
 
-@Component("configService")
+@Component
 public class ConfigServiceImpl implements ConfigService {
 	
 	@Autowired

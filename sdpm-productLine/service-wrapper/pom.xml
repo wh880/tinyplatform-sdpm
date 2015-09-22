@@ -18,12 +18,12 @@
   	<dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-productLine-service-interface</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
+       <version>${project.version}</version>
     </dependency>
     <dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-productLine-business-interface</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
+       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.tinygroup</groupId>

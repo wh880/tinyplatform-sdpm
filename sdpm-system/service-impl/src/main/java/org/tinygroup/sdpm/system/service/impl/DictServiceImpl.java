@@ -10,7 +10,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.system.service.inter.DictService;
 import org.tinygroup.tinysqldsl.Pager;
 
-@Component()
+@Component
 public class DictServiceImpl implements DictService {
 	
 	@Autowired

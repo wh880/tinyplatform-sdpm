@@ -9,7 +9,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
 import org.tinygroup.sdpm.system.service.inter.SearchService;
 import org.tinygroup.tinysqldsl.Pager;
 
-@Component()
+@Component
 public class SearchServiceImpl implements SearchService {
 	
 	@Autowired
