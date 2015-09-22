@@ -34,11 +34,14 @@ import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.Pager;
+import org.apache.commons.logging.Log;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.TestResult;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.quality.dao.TestResultDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -51,8 +54,10 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+@LogClass("testResult")
 public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDao {
-
+	
+	@LogMethod("add")
 	public TestResult add(TestResult testResult) {
 		return getDslTemplate().insertAndReturnKey(testResult, new InsertGenerateCallback<TestResult>() {
 			public Insert generate(TestResult t) {
@@ -69,7 +74,7 @@ public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDa
 			}
 		});
 	}
-
+	@LogMethod("edit")
 	public int edit(TestResult testResult) {
 		if(testResult == null || testResult.getTestResultId() == null){
 			return 0;
@@ -89,7 +94,7 @@ public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDa
 			}
 		});
 	}
-
+	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -100,7 +105,7 @@ public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDa
 			}
 		});
 	}
-
+	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -186,7 +191,7 @@ public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDa
 	public int[] batchInsert(List<TestResult> testResults){
 			return batchInsert(true ,testResults);
 	}
-
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<TestResult> testResults) {
 		if (CollectionUtil.isEmpty(testResults)) {
 			return new int[0];

@@ -39,6 +39,8 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.TestRun;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.quality.dao.TestRunDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -51,8 +53,10 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+@LogClass("testRun")
 public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
-
+	
+	@LogMethod("add")
 	public TestRun add(TestRun testRun) {
 		return getDslTemplate().insertAndReturnKey(testRun, new InsertGenerateCallback<TestRun>() {
 			public Insert generate(TestRun t) {
@@ -70,7 +74,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 			}
 		});
 	}
-
+	@LogMethod("edit")
 	public int edit(TestRun testRun) {
 		if(testRun == null || testRun.getTestRunId() == null){
 			return 0;
@@ -91,7 +95,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 			}
 		});
 	}
-
+	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -102,7 +106,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 			}
 		});
 	}
-
+	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -191,7 +195,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 	public int[] batchInsert(List<TestRun> testRuns){
 			return batchInsert(true ,testRuns);
 	}
-
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<TestRun> testRuns) {
 		if (CollectionUtil.isEmpty(testRuns)) {
 			return new int[0];
@@ -212,7 +216,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 			}
 		});
 	}
-
+	@LogMethod("batchDelete")
 	public int[] batchDelete(List<TestRun> testRuns) {
 		if (CollectionUtil.isEmpty(testRuns)) {
 			return new int[0];
@@ -233,7 +237,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 			}
 		});
 	}
-
+	
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {

@@ -39,6 +39,8 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.TestCase;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.quality.dao.TestCaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -51,8 +53,9 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+@LogClass("testCase")
 public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
-
+	@LogMethod("add")
 	public TestCase add(TestCase testCase) {
 		return getDslTemplate().insertAndReturnKey(testCase, new InsertGenerateCallback<TestCase>() {
 			public Insert generate(TestCase t) {
@@ -92,7 +95,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 			}
 		});
 	}
-
+	@LogMethod("edit")
 	public int edit(TestCase testCase) {
 		if(testCase == null || testCase.getCaseId() == null){
 			return 0;
@@ -135,7 +138,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 			}
 		});
 	}
-
+	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -146,7 +149,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 			}
 		});
 	}
-
+	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -157,7 +160,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 		}
 		},pks);
 	}
-
+	
 	public TestCase getByKey(Integer pk) {
 		return getDslTemplate().getByKey(pk, TestCase.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
@@ -301,7 +304,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 	public int[] batchInsert(List<TestCase> testCases){
 			return batchInsert(true ,testCases);
 	}
-
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<TestCase> testCases) {
 		if (CollectionUtil.isEmpty(testCases)) {
 			return new int[0];
@@ -344,7 +347,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 			}
 		});
 	}
-
+	@LogMethod("batchDelete")
 	public int[] batchDelete(List<TestCase> testCases) {
 		if (CollectionUtil.isEmpty(testCases)) {
 			return new int[0];
@@ -387,7 +390,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 			}
 		});
 	}
-
+	
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
