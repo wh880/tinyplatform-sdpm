@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.productLine.biz.inter.ProductLineManager;
 import org.tinygroup.sdpm.productLine.dao.ProductLineDao;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
+import org.tinygroup.tinysqldsl.Pager;
 
 
 @Service
@@ -39,10 +41,23 @@ public class ProductLineManagerImpl implements ProductLineManager{
 		return productLineDao.getByKey(productLineId);
 	}
 
-	public List<ProductLine> findList(ProductLine productLine) {
-
-		return productLineDao.query(productLine);
+	public int[] updateBatch(List<ProductLine> productLines) {
+		
+		return productLineDao.batchUpdate(productLines);
 	}
+
+	public List<ProductLine> findProductLineList(ProductLine productLine, String columnName, boolean asc) {
+		
+		return productLineDao.query(productLine, new OrderBy(columnName, asc));
+	}
+
+	public Pager<ProductLine> findProductLinePager(int start, int limit, ProductLine productLine, String columnName,
+			boolean asc) {
+		
+		return productLineDao.queryPager(start, limit, productLine, new OrderBy(columnName, asc));
+	}
+
+	
 
 	
 
