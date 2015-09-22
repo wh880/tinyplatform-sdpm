@@ -27,7 +27,7 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.HistoryService {
+public class SearchServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.SearchService {
 
 	CEPCore cepcore;
 
@@ -49,12 +49,12 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.History add(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_add_1";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemSearch addSearch(org.tinygroup.sdpm.system.dao.pojo.SystemSearch search) {
+		String serviceId = "system_addSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("search" ,search);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.History updata(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_updata_1";
+	public int deleteSearch(java.lang.Integer searchId) {
+		String serviceId = "system_deleteSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("searchId" ,searchId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_delete_1";
+	public int updateSearch(org.tinygroup.sdpm.system.dao.pojo.SystemSearch search) {
+		String serviceId = "system_updateSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("search" ,search);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,12 +88,57 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.History> find(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_find_1";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemSearch findSearch(java.lang.Integer searchId) {
+		String serviceId = "system_findSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("searchId" ,searchId);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemSearch> findSearchList(org.tinygroup.sdpm.system.dao.pojo.SystemSearch search ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findSearchList";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("search" ,search);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.SystemSearch> findSearchPager(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemSearch search ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findSearchPager";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("start" ,start);
+			context.put("limit" ,limit);
+			context.put("search" ,search);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public int[] updateBatchSearch(java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemSearch> searches) {
+		String serviceId = "system_updateBatchSearch";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("searches" ,searches);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

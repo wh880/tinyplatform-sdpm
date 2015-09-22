@@ -31,7 +31,7 @@
 	#@elementItem()
 		#@sdpmItem("产品")
 			#@Tselect2F()
-				#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+				#@Tselect2Body("buildProduct" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     <option value="CT">Connecticut</option>
                     <option value="DE">Delaware</option>
                     <option value="FL">Florida</option>
@@ -47,13 +47,13 @@
 	#end
 	#@elementItem()
 		#@sdpmItem("名称编号")
-			#tinyInput("text" "username" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+			#tinyInput("text" "buildName" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
 		#end
 	#end
 	#@elementItem()
 		#@sdpmItem("构建者")
 			#@Tselect2F()
-				#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+				#@Tselect2Body("buildBuilder" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     <option value="CT">Connecticut</option>
                     <option value="DE">Delaware</option>
                     <option value="FL">Florida</option>
@@ -70,21 +70,21 @@
 	#@elementItem()
 		#@sdpmItem("打包日期")
 			#@formHorizontal()
-				#dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:40%'")
+				#dateInputSimple("buildDate" "" "YYYY-MM-DD" " style='width:40%'")
 			#end
 		#end
 	#end
 
 	#@elementItem()
 		#@sdpmItem("源代码地址")
-			#tinyInput("text" "username" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+			#tinyInput("buildScmPath" "username" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
 		#end
 	#end
 
 ##
 	#@elementItem()
 		#@sdpmItem("下载地址")
-			#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+			#tinyInput("buildFilePath" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
 		#end
 	#end
 	#@elementItem()
@@ -96,7 +96,7 @@
 		#end
 	#@elementItem()
         #@sdpmItem("描述")
-		#@tinyueditor("content" "content" "height:100px;overflow:auto")说点什么...最少输入10个字符#end
+		#@tinyueditor("content" "buildDesc" "height:100px;overflow:auto")说点什么...最少输入10个字符#end
 	#end
 
 	#end

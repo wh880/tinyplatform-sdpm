@@ -53,7 +53,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
-@LogClass("product_storySpec")
+@LogClass("productStorySpec")
 public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements ProductStorySpecDao {
 
 	@LogMethod("add")

@@ -27,7 +27,7 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.HistoryService {
+public class ProfileServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.ProfileService {
 
 	CEPCore cepcore;
 
@@ -49,12 +49,12 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.History add(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_add_1";
+	public org.tinygroup.sdpm.system.dao.pojo.Profile add(org.tinygroup.sdpm.system.dao.pojo.Profile Profile) {
+		String serviceId = "add";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("Profile" ,Profile);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.History updata(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_updata_1";
+	public int[] batchAdd(java.util.List<org.tinygroup.sdpm.system.dao.pojo.Profile> Profiles) {
+		String serviceId = "batchAdd";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("Profiles" ,Profiles);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_delete_1";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Profile> find(org.tinygroup.sdpm.system.dao.pojo.Profile Profile) {
+		String serviceId = "find";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("Profile" ,Profile);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,12 +88,25 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.History> find(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_find_1";
+	public int delete(org.tinygroup.sdpm.system.dao.pojo.Profile Profile) {
+		String serviceId = "delete";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("Profile" ,Profile);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public org.tinygroup.sdpm.system.dao.pojo.Profile edit(org.tinygroup.sdpm.system.dao.pojo.Profile Profile) {
+		String serviceId = "edit";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("Profile" ,Profile);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
