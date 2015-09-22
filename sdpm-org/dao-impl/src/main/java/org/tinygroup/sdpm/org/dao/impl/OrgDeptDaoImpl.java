@@ -99,14 +99,6 @@ public class OrgDeptDaoImpl extends TinyDslDaoSupport implements OrgDeptDao {
 		},pks);
 	}
 
-	public List<OrgDept> query(OrgDept orgDept, OrderBy... orderBies) {
-		return null;
-	}
-
-	public Pager<OrgDept> queryPager(int i, int i1, OrgDept orgDept, OrderBy... orderBies) {
-		return null;
-	}
-
 	public OrgDept getByKey(Integer pk) {
 		return getDslTemplate().getByKey(pk, OrgDept.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")

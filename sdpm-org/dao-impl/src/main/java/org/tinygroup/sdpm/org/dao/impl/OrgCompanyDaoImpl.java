@@ -105,14 +105,6 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
 		},pks);
 	}
 
-	public List<OrgCompany> query(OrgCompany orgCompany, OrderBy... orderBies) {
-		return null;
-	}
-
-	public Pager<OrgCompany> queryPager(int i, int i1, OrgCompany orgCompany, OrderBy... orderBies) {
-		return null;
-	}
-
 	public OrgCompany getByKey(Integer pk) {
 		return getDslTemplate().getByKey(pk, OrgCompany.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
