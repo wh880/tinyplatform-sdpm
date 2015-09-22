@@ -139,6 +139,14 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
 		},pks);
 	}
 
+	public List<OrgUser> query(OrgUser orgUser, OrderBy... orderBies) {
+		return null;
+	}
+
+	public Pager<OrgUser> queryPager(int i, int i1, OrgUser orgUser, OrderBy... orderBies) {
+		return null;
+	}
+
 	public OrgUser getByKey(String pk) {
 		return getDslTemplate().getByKey(pk, OrgUser.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
