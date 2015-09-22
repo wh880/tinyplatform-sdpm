@@ -21,6 +21,11 @@
 			<artifactId>sdpm-system-business-interface</artifactId>
 			<version>${tiny_sdpm_version}</version>
 	</dependency>
+	<dependency>
+	    <groupId>org.tinygroup</groupId>
+	<artifactId>org.tinygroup.genservicewrap</artifactId>
+	<version>${tiny_version}</version>
+	</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

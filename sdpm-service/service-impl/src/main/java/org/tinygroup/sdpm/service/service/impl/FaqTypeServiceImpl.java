@@ -14,23 +14,24 @@ import java.util.List;
 @Component("")
 public class FaqTypeServiceImpl implements FaqTypeService {
     @Autowired
-    public FaqType findFaqType(String id) {
-        return null;
+    private FaqTypeManager faqTypeManager;
+    public FaqType findFaqType(Integer id) {
+        return faqTypeManager.find(id);
     }
 
     public List<FaqType> getFaqTypeList(FaqType faqType) {
-        return null;
+        return faqTypeManager.getList(faqType);
     }
 
     public FaqType addFaqType(FaqType faqType) {
-        return null;
+        return faqTypeManager.add(faqType);
     }
 
     public FaqType updateFaqType(FaqType faqType) {
-        return null;
+        return faqTypeManager.update(faqType);
     }
 
     public List<FaqType> deleteFaqType(Integer id) {
-        return null;
+        return faqTypeManager.delete(id);
     }
 }
