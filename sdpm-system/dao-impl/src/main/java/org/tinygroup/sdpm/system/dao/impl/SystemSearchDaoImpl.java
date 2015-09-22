@@ -51,7 +51,8 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 @Repository
-@LogClass("system_search")public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSearchDao {
+@LogClass("systemSearch")
+public class SystemSearchDaoImpl extends TinyDslDaoSupport implements SystemSearchDao {
 
 	@LogMethod("add")
 	public SystemSearch add(SystemSearch systemSearch) {

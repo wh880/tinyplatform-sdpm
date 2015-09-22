@@ -30,7 +30,7 @@
 	#@elementItem()
 		#@sdpmItem("解决版本")
 			#@Tselect2F()
-				#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+				#@Tselect2Body("buildId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     <option value="CT">Connecticut</option>
                     <option value="DE">Delaware</option>
                     <option value="FL">Florida</option>
@@ -47,7 +47,7 @@
 	#@elementItem()
 		#@sdpmItem("产品")
 			#@Tselect2F()
-				#@Tselect2Body("lang" "T" {"class":"input-text select2","datatype":"*4-16","nullmsg":"产品不能为空！"}) ##,"multiple":"multiple"加上为多选项
+				#@Tselect2Body("buildProduct" "T" {"class":"input-text select2","datatype":"*4-16","nullmsg":"产品不能为空！"}) ##,"multiple":"multiple"加上为多选项
                     <option value="T"></option>
                     <option value="CT">Connecticut</option>
                     <option value="DE">Delaware</option>
@@ -64,13 +64,13 @@
 	#end
 	#@elementItem()
 		#@sdpmItem("名称编号")
-			#tinyInput("text" "username" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"名称编号不能为空！","id":"username","class":"input-text"})
+			#tinyInput("text" "buildName" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"名称编号不能为空！","id":"username","class":"input-text"})
 		#end
 	#end
 	#@elementItem()
 		#@sdpmItem("构建者")
 			#@Tselect2F()
-				#@Tselect2Body("lang" "T" {"class":"input-text select2","placeholder":"","nullmsg":"名称编号不能为空！"}) ##,"multiple":"multiple"加上为多选项
+				#@Tselect2Body("buildBuilder" "T" {"class":"input-text select2","placeholder":"","nullmsg":"名称编号不能为空！"}) ##,"multiple":"multiple"加上为多选项
                     <option value="T"></option>
                     <option value="CT">Connecticut</option>
                     <option value="DE">Delaware</option>
@@ -88,21 +88,21 @@
 	#@elementItem()
 		#@sdpmItem("打包日期")
 			#@formHorizontal()
-				#@tinyDateInput("birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+				#@tinyDateInput("buildDate" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
 			#end
 		#end
 	#end
 
 	#@elementItem()
 		#@sdpmItem("源代码地址")
-			#tinyInput("text" "username" ""{"style":"width:43%","placeholder":"","id":"username","class":"input-text"})
+			#tinyInput("text" "buildScmPath" ""{"style":"width:43%","placeholder":"","id":"username","class":"input-text"})
 		#end
 	#end
 
 ##
 	#@elementItem()
 		#@sdpmItem("下载地址")
-			#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","id":"username","class":"input-text"})
+			#tinyInput("text" "buildFilePath" ""{"style":"width:300px","placeholder":"","id":"username","class":"input-text"})
 		#end
 	#end
 	#@elementItem()
@@ -114,7 +114,7 @@
 		#end
 	#@elementItem()
         #@sdpmItem("描述")
-		#@tinyueditor("content" "content" "height:100px;overflow:auto")说点什么...最少输入10个字符#end
+		#@tinyueditor("content" "buildDesc" "height:100px;overflow:auto")说点什么...最少输入10个字符#end
 	#end
 
 	#end

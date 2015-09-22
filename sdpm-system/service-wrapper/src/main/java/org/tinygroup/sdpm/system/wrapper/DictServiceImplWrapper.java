@@ -27,7 +27,7 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.HistoryService {
+public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.DictService {
 
 	CEPCore cepcore;
 
@@ -49,12 +49,12 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.History add(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_add_1";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemDict addDict(org.tinygroup.sdpm.system.dao.pojo.SystemDict dict) {
+		String serviceId = "system_addDict";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("dict" ,dict);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.History updata(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_updata_1";
+	public int deleteDict(java.lang.Integer dictId) {
+		String serviceId = "system_deleteDict";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("dictId" ,dictId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_delete_1";
+	public int updateDict(org.tinygroup.sdpm.system.dao.pojo.SystemDict dict) {
+		String serviceId = "system_updateDict";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("dict" ,dict);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,12 +88,57 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.History> find(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_find_1";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemDict findDict(java.lang.Integer dictId) {
+		String serviceId = "system_findDict";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("dictId" ,dictId);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemDict> findDictList(org.tinygroup.sdpm.system.dao.pojo.SystemDict dict ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findDictList";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("dict" ,dict);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.SystemDict> findDictPager(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemDict dict ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findDictPager";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("start" ,start);
+			context.put("limit" ,limit);
+			context.put("dict" ,dict);
+			context.put("columnName" ,columnName);
+			context.put("asc" ,asc);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public int[] updateBatchDict(java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemDict> dicts) {
+		String serviceId = "system_updateBatchDict";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("dicts" ,dicts);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

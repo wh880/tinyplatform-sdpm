@@ -44,7 +44,7 @@
         #@elementItem()
             #@sdpmItem("指派给")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("taskAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -61,7 +61,7 @@
         #@elementItem()
             #@sdpmItem("相关需求")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("taskStory" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -79,7 +79,7 @@
             #@sdpmItem("任务名称")
                 #@formControlDiv("col-8")
                     #tinyInput(
-                        "text" "username" ""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
+                        "text" "taskName" ""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
                         "username","class":
                         "input-text"})
                 #end
@@ -89,7 +89,7 @@
             #@sdpmItem("任务描述")
                 #@formControlDiv("col-8")
                     #tinyInput(
-                        "text" "username" ""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
+                        "text" "taskDesc" ""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
                         "username",
                         "class":"input-text"})
                 #end
@@ -98,7 +98,7 @@
         #@elementItem()
             #@sdpmItem("优先级")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("taskPri" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -115,7 +115,7 @@
         #@elementItem()
             #@sdpmItem("最初预计")
                 #@formControlDiv("col-8")
-                    #tinyInput("text" "username" ""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
+                    #tinyInput("text" "taskEstimate" ""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
                         "username","class":"input-text"})
                 #end
                 #end
@@ -123,7 +123,7 @@
         #@elementItem()
             #@sdpmItem("抄送给")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("taskMailto" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
