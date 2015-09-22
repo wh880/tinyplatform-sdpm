@@ -19,7 +19,12 @@
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-quality-business-interface</artifactId>
         <version>${tiny_sdpm_version}</version>
-    </dependency>   
+    </dependency>  
+    <dependency>
+       <groupId>org.tinygroup</groupId>
+       <artifactId>sdpm-quality-dao-impl</artifactId>
+        <version>${tiny_sdpm_version}</version>
+    </dependency> 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
