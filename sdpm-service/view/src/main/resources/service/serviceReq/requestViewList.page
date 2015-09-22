@@ -26,7 +26,7 @@
             #end
 
             #@elementItem()
-                #@sdpmItem("联系人" "*")
+                #@sdpmItem("联系人")
                     #@Tselect2F()
                         #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             #@tinyOptionItem("ch")请选择#end
@@ -39,8 +39,8 @@
             #end
 
             #@elementItem()
-                #@sdpmItem("回访者")
-                    #tinyInput("text" "回访者" ""{"datatype":"","id":"回复人员","class":"input-text"})
+                #@sdpmItem("回访者" "*")
+                    #tinyInput("text" "回访者" ""{"datatype":"*","nullmsg":"回访者不能为空","id":"回复人员","class":"input-text"})
                 #end
             #end
 
@@ -57,7 +57,7 @@
                 #end
             #end
             #@elementItem()
-                #@sdpmItem("回访评分")
+                #@sdpmItem("回访评分" "*")
                     #@Tselect2F()
                         #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             #@tinyOptionItem("ch")请选择#end

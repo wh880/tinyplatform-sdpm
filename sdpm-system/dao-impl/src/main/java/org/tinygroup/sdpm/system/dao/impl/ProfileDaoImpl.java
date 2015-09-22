@@ -51,7 +51,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 @Component
-@LogClass("system")
+@LogClass("profile")
 public class ProfileDaoImpl extends TinyDslDaoSupport implements ProfileDao {
 	 @LogMethod("add")
 	public Profile add(Profile profile) {

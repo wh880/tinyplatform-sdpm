@@ -9,8 +9,8 @@
     <table-field standard-field-id="58af7ad3c35a4776a787dab8abbca4aa" primary="false" unique="false" not-null="true" id="client_created_by" auto-increase="false"/>
     <table-field standard-field-id="ee10108d43904aceba6bac56d3d5f2b0" primary="false" unique="false" not-null="true" id="client_create_date" auto-increase="false"/>
     <table-field standard-field-id="ed5401fbf64a427683d8c5dc62acfcf6" primary="false" unique="false" not-null="true" id="client_status" auto-increase="false"/>
-    <table-field standard-field-id="2cca0dec07cc49859fceac7289b6d0df" primary="false" unique="false" not-null="false" id="user_phone" auto-increase="false"/>
-    <table-field standard-field-id="f4a2dd1dcbb649f3bcd3eef8f6602a3f" primary="false" unique="false" not-null="false" id="user_account" auto-increase="false"/>
+    <table-field standard-field-id="2cca0dec07cc49859fceac7289b6d0df" primary="false" unique="false" not-null="true" id="user_phone" auto-increase="false"/>
+    <table-field standard-field-id="f4a2dd1dcbb649f3bcd3eef8f6602a3f" primary="false" unique="false" not-null="true" id="user_account" auto-increase="false"/>
     <table-field standard-field-id="398e31c8923d47868aa9e180fa975d11" primary="false" unique="false" not-null="false" id="user_post" auto-increase="false"/>
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
   </table>
@@ -94,7 +94,7 @@
     <table-field standard-field-id="7d045d07a379467799bb865c513acad8" primary="false" unique="false" not-null="true" id="request_id" auto-increase="false"/>
     <table-field standard-field-id="6cf77ba24b7d450dbac1b0569b309943" primary="false" unique="false" not-null="true" id="review_spec" auto-increase="false"/>
     <table-field standard-field-id="5ace7904dd0d47a09aaeb45202ef4d40" primary="false" unique="false" not-null="false" id="requester" auto-increase="false"/>
-    <table-field standard-field-id="ccff4edf5898442a9c3bb4124ff47dce" primary="false" unique="false" not-null="true" id="reviewer" auto-increase="true"/>
+    <table-field standard-field-id="ccff4edf5898442a9c3bb4124ff47dce" primary="false" unique="false" not-null="true" id="reviewer" auto-increase="false"/>
     <table-field standard-field-id="9b1b5ef9cbf94c02bc98decf6e8b1d16" primary="false" unique="false" not-null="true" id="review_date" auto-increase="false"/>
     <table-field standard-field-id="74c6cb9c070841968e68c5281621cec6" primary="false" unique="false" not-null="true" id="review_result" auto-increase="false"/>
     <table-field standard-field-id="ce78d2a1b7a840d298da9e7367125394" primary="false" unique="false" not-null="true" id="review_score" auto-increase="false"/>

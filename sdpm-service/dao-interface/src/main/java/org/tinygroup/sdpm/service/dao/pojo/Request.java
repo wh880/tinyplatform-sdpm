@@ -16,6 +16,7 @@
 
 package org.tinygroup.sdpm.service.dao.pojo;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 
@@ -23,7 +24,7 @@ import java.util.Date;
  * 客户请求表
  * 
  */
-public class Request {
+public class Request implements Serializable {
 
 	/** 
 	 * 请求ID

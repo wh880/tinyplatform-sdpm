@@ -51,7 +51,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 @Component
-@LogClass("system")
+@LogClass("action")
 public class ActionDaoImpl extends TinyDslDaoSupport implements ActionDao {
     @LogMethod("add")
 	public Action add(Action action) {

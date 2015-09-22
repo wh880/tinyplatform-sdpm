@@ -16,13 +16,14 @@
 
 package org.tinygroup.sdpm.service.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 服务级别协议表
  * 
  */
-public class Sla {
+public class Sla implements Serializable {
 
 	/** 
 	 * 服务协议ID

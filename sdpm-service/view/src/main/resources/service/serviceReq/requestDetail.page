@@ -54,22 +54,13 @@
             #end
 
             #@elementItem()
-                #@sdpmItem("请求分类" "*")
+                #@sdpmItem("请求分类")
                     #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
                         #@tinyOptionItem("zh")请求分类1#end
                         #@tinyOptionItem("en")请求分类2#end
                         #@tinyOptionItem("ta")请求分类3#end
                     #end
                 #end
-            #end
-
-            #@elementItem()
-                #@sdpmItem("请求期限")
-                    #@tinyDateInput(
-                        "birthday" "" "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                        "日期不能为空","placeholder":""})#end
-                #end
-                #@validateDiv("col-2")#end
             #end
             #@elementItem()
                 #@sdpmItem("请求标题 " "*")

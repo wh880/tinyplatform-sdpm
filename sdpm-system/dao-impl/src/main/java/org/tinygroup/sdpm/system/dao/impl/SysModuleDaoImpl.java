@@ -51,7 +51,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 @Component
-@LogClass("system")
+@LogClass("sysModule")
 public class SysModuleDaoImpl extends TinyDslDaoSupport implements SysModuleDao {
     @LogMethod("add")
 	public SysModule add(SysModule sysModule) {
