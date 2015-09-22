@@ -15,41 +15,11 @@
     <!--可以自定义标签对,可以在其它地方用{标签名引用}-->
   </properties>
   <dependencies>
-  	<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.gendslcode</artifactId>
-			<version>${tiny_version}</version>
-	</dependency>
+  	
   	<dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-product-dao-interface</artifactId>
-        <version>${tiny_sdpm_version}</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.tinygroup</groupId>
-      <artifactId>org.tinygroup.tinysqldsl</artifactId>
-      <version>${tiny_version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.tinygroup</groupId>
-      <artifactId>org.tinygroup.jdbctemplatedslsession</artifactId>
-      <version>${tiny_version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.tinygroup</groupId>
-      <artifactId>org.tinygroup.databasechange</artifactId>
-      <version>${tiny_version}</version>
-    </dependency>
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>5.0.5</version>
-    </dependency>
-    <dependency>
-        <groupId>commons-dbcp</groupId>
-        <artifactId>commons-dbcp</artifactId>
-        <version>1.2.2</version>
+        <version>${project.version}</version>
     </dependency>
     
     <dependency>
