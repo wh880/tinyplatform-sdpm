@@ -11,14 +11,14 @@
         #@label(ckId)${labelText}#end
 #end
 
-#@tinyForm("thisform" "url" "post" {"class":""})
+#@tinyForm("thisform" "/product/save" "post" {"class":""})
 <div style="width:100%;float:center" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">添加产品</p>
         #@elementItem()
             #@colLabel()产品名称：#end
             #@formControlDiv("col-3")
-                #tinyInput("text" "product-name" ""{"placeholder":"","nullmsg":"请输入产品名称！","id":"product-name","class":
+                #tinyInput("text" "productName" ""{"placeholder":"","nullmsg":"请输入产品名称！","id":"productName","class":
                     "input-text"})
             #end
             #@validateDiv("col-2")#end
@@ -27,7 +27,7 @@
             #@colLabel()产品代号：#end
             #@formControlDiv("col-3")
                 #tinyInput(
-                    "text" "product-id" ""{"placeholder":"","nullmsg":"代号不能为空！","id":"product-id","class":"input-text"})
+                    "text" "productCode" ""{"placeholder":"","nullmsg":"代号不能为空！","id":"productCode","class":"input-text"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -37,7 +37,7 @@
             #@colLabel()产品负责人：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("productOwner" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">A</option>
                         <option value="DE">B</option>
                         <option value="FL">C</option>
@@ -55,7 +55,7 @@
             #@colLabel()测试负责人：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("productQualityManager" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">甲</option>
                         <option value="DE">乙</option>
                         <option value="FL">丙</option>
@@ -71,7 +71,7 @@
             #@colLabel()发布负责人：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("productDeliveryManager" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">项目经理</option>
                         <option value="DE">产品经理</option>
                         <option value="FL">开发主管</option>
@@ -86,8 +86,7 @@
         #@elementItem()
             #@colLabel()产品描述：#end
             #@formControlDiv("col-8")
-                #@Teditor(
-                    "content1" "content1" {"initialFrameHeight":"200" ,"placeholder":"说点什么...最少输入10个字符","datatype":
+                #@Teditor("productDesc" "productDesc" {"initialFrameHeight":"200" ,"placeholder":"说点什么...最少输入10个字符","datatype":
                     "*10-500"})描述一下产品的相关信息...#end
             #end
             #@validateDiv("col-2")#end
@@ -98,7 +97,7 @@
             #@skinMinimal("col-8")
                     #labelRadio1Sty(rId="aclopen" rName="acl" rValue="open" labelText="默认设置(有项目视图权限，即可访问)"
                         "setWhite(this.value);" rChecked="checked")</br>
-                    #labelRadio1Sty(rId="aclcustom" rName="acl" rValue="custom1" labelText="私有项目(只有项目团队成员才能访问)"
+                    #labelRadio1Sty(rId="aclprivate" rName="acl" rValue="custom1" labelText="私有项目(只有项目团队成员才能访问)"
                         "setWhite(this.value);")</br>
                     #labelRadio1Sty(rId="aclcustom" rName="acl" rValue="custom" labelText="自定义白名单(团队成员和白名单的成员可以访问)"
                         "setWhite(this.value);")</br>
@@ -109,14 +108,14 @@
         #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
             #@colLabel()分组白名单#end
             #@skinMinimal("col-8")
-                #labelCheckbox(ckId="whitelistBox" labelText="管理员")
-                #labelCheckbox(ckId="whitelistBox" labelText="研发")
-                #labelCheckbox(ckId="whitelistBox" labelText="测试")
-                #labelCheckbox(ckId="whitelistBox" labelText="项目经理")
-                #labelCheckbox(ckId="whitelistBox" labelText="产品经理")
-                #labelCheckbox(ckId="whitelistBox" labelText="研发主管")
-                #labelCheckbox(ckId="whitelistBox" labelText="产品主管")
-                #labelCheckbox(ckId="whitelistBox" labelText="测试主管")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="管理员")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="研发")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="测试")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="项目经理")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="产品经理")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="研发主管")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="产品主管")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="测试主管")
             #end
             #@validateDiv("col-2")#end
         #end
