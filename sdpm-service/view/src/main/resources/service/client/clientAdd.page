@@ -28,59 +28,59 @@
     <br>
     #end
 #end
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/client/save" "post" {"class":""})
 <div style="width:80%;margin-left: 20px;" class="pageleftpart">
 <div class="infoContent">
     <p class="titleName">新建客户</p>
         #@elementItem()
             #@sdpmItem("客户名称" "*")
                 #tinyInput(
-                    "text" "username" ""{"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":"client_name",
+                    "text" "clientName" ""{"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！","id":"client_name",
                     "class":"input-text"})
             #end
         #end
         #@elementItem()
             #@sdpmItem("客户编号")
                 #tinyInput(
-                    "text" "username" ""{"id":"client_n_o","class":"input-text"})
+                    "text" "clientNO" ""{"id":"client_n_o","class":"input-text"})
             #end
         #end
 
 
         #@elementItem()
             #@sdpmItem("客户部门")
-                #tinyInput("text" "username" ""{"id":"client_dept_id","class":"input-text"})
+                #tinyInput("text" "clientDeptId" ""{"id":"client_dept_id","class":"input-text"})
             #end
         #end
 
         #@elementItem()
             #@sdpmItem("客户登记人" "*")
                 #tinyInput(
-                    "text" "username" ""{"datatype":"*","nullmsg":"登记人不能为空！","id":"client_created_by","class":""})
+                    "text" "clientCreatedBy" ""{"datatype":"*","nullmsg":"登记人不能为空！","id":"client_created_by","class":""})
             #end
         #end
     #@elementItem()
         #@sdpmItem("客户联系人" "*")
             #tinyInput(
-                "text" "username" ""{"datatype":"*","nullmsg":"客户联系人不能为空","id":"user_account","class":""})#end
+                "text" "userAccount" ""{"datatype":"*","nullmsg":"客户联系人不能为空","id":"user_account","class":""})#end
     #end
 
     #@elementItem()
             #@sdpmItem("客户电话" "*")
                 #tinyInput(
-                    "text" "客户电话" ""{"datatype":"/^[0-9\.]{11,12}$/","nullmsg":"客户电话不能为空","id":"user_phone","class":""})
+                    "text" "userPhone" ""{"datatype":"/^[0-9\.]{11,12}$/","nullmsg":"客户电话不能为空","id":"user_phone","class":""})
             #end
         #end
     #@elementItem()
         #@sdpmItem("联系人职务")
             #tinyInput(
-                "text" "username" ""{"id":"user_post"})#end
+                "text" "userPost" ""{"id":"user_post"})#end
     #end
 
         #@elementItem()
             #@sdpmItem("客户登记时间" "*")
                 #@tinyDateInput(
-                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
+                    "clientCreateDate" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
                     "日期不能为空","placeholder":"请输入日期"})#end
             #end
         #end
@@ -88,13 +88,13 @@
         <div class="col-12">
             <div class="col-2 text-r"><label>客户描述：</label></div>
             <div class="col-9">
-                #@Teditor("content" "content" {"initialFrameHeight":"280"})Say something#end</div>
+                #@Teditor("content" "clientSpec" {"initialFrameHeight":"280"})Say something#end</div>
         </div>
     #end
     #@elementItem()
             #@colLabel()状态是否正常：#end
             #@formControlDiv("col-8")
-                #tinySwitcher("isvip" "是" "否") ##第二个为选中状态 第三参数为数据库返回时的数据
+                #tinySwitcher("clientStatus" "是" "否") ##第二个为选中状态 第三参数为数据库返回时的数据
             #end
         #end
     <br/>
