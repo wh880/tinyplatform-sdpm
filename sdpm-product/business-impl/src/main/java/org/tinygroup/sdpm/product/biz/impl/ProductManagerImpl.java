@@ -47,15 +47,14 @@ public class ProductManagerImpl implements ProductManager{
 		return productDao.batchUpdate(products);
 	}
 
-	public List<Product> findList(Product product, OrderBy... orderBies) {
-
-		return productDao.query(product, orderBies);
+	public List<Product> findList(Product product,String columnName,boolean asc) {
+		
+		return productDao.query(product, new OrderBy(columnName, asc));
 	}
 
-	public Pager<Product> findPager(int start, int limit, Product product,
-			OrderBy... orderBies) {
+	public Pager<Product> findPager(int start, int limit, Product product,String columnName,boolean asc) {
 
-		return productDao.queryPager(start, limit, product, orderBies);
+		return productDao.queryPager(start, limit, product, new OrderBy(columnName, asc));
 	}
 
 }

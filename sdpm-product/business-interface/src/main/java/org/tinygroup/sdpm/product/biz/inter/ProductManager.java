@@ -49,7 +49,7 @@ public interface ProductManager {
 	 * @param product
 	 * @return
 	 */
-	List<Product> findList(Product product,OrderBy... orderBies);
+	List<Product> findList(Product product,String columnName,boolean asc);
 	
 	/**
 	 * 根据对象查找(分页、排序)
@@ -59,7 +59,7 @@ public interface ProductManager {
 	 * @param orderBies
 	 * @return
 	 */
-	Pager<Product> findPager (int start ,int limit ,Product product,OrderBy... orderBies);
+	Pager<Product> findPager (int start ,int limit ,Product product,String columnName,boolean asc);
 	
 	
 }
