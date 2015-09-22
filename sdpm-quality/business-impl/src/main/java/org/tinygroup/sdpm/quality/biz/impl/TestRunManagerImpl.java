@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.quality.biz.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,13 @@ public class TestRunManagerImpl implements TestRunManager {
 		}
 		
 		public int update(TestRun testrun){
+			testrun.setTestRunLastRunDate(new Date());
 			return testrundao.edit(testrun);
+		}
+		
+		public int[] batchUpdate(List<TestRun> testruns){
+			TestRun testrun = new TestRun();
+			testrun.setTestRunLastRunDate(new Date());
+			return testrundao.batchUpdate(testruns);
 		}
 }

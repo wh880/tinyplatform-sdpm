@@ -27,8 +27,10 @@ public class BugServiceImpl implements BugService {
 	}
 	
 	public int updateBug(Bug bug){
-		bug.setBugLastEditedDate(new Date());
-		bug.setBugLastEditedBy(bug.getBugLastEditedBy());
 		return bugmanager.update(bug);
+	}
+	
+	public int[] batchUpdateBug(List<Bug> bugs){
+		return bugmanager.batchUpdate(bugs);
 	}
 }

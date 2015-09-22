@@ -31,7 +31,12 @@ public class BugManagerImpl implements BugManager {
 	
 	public int update(Bug bug){
 		bug.setBugLastEditedDate(new Date());
-		bug.setBugLastEditedBy(bug.getBugLastEditedBy());
 		return bugdao.edit(bug);
+	}
+	
+	public int[] batchUpdate(List<Bug> bugs){
+		Bug bug = new Bug();
+		bug.setBugLastEditedDate(new Date());
+		return bugdao.batchUpdate(bugs);
 	}
 }
