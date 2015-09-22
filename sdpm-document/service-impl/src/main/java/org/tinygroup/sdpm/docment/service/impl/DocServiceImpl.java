@@ -65,15 +65,15 @@ public class DocServiceImpl implements DocService{
 		return docbiz.docHistory(docid);
 	}
 
-	public List<Doc> findDocByDocClassOrderBy(Doc doc, OrderBy... orderbys) {
+	/*public List<Doc> findDocByDocClassOrderBy(Doc doc, OrderBy... orderbys) {
 		// 
-		return docbiz.getDocListOrderBy(doc);
-	}
+		return null;//docbiz.getDocListOrderBy(doc);
+	}*/
 
-	public Pager<Doc> findDocRetPager(int start, int limit, Doc doc,OrderBy...orderbys) {
+	/*public Pager<Doc> findDocRetPager(int start, int limit, Doc doc,OrderBy...orderbys) {
 		// 
 		return docbiz.queryItemWithPage(start, limit, doc,orderbys);
-	}
+	}*/
 
 	public int deleteDocById(Integer id) {
 		// 

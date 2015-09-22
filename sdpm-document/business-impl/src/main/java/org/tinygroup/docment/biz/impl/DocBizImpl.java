@@ -96,20 +96,20 @@ public class DocBizImpl implements DocBiz {
 		return docdao.getByKey(key);
 	}
 
-	public List<Doc> getDocListOrderBy(Doc doc,OrderBy...orderbies) {
+	/*public List<Doc> getDocListOrderBy(Doc doc,OrderBy...orderbies) {
 		// 
 		return docdao.query(doc,orderbies);
-	}
+	}*/
 
 	public DocLib getDocLibById(Integer key) {
 		// 
 		return doclibdao.getByKey(key);
 	}
 
-	public Pager<Doc> queryItemWithPage(Integer start, Integer limited, Doc doc,OrderBy...orderbies) {
+	/*public Pager<Doc> queryItemWithPage(Integer start, Integer limited, Doc doc,OrderBy...orderbies) {
 		// 分页
 		return docdao.queryPager(start, limited, doc ,orderbies);
-	}
+	}*/
 
 	public int batchDelDocByIds(Integer... keys) {
 		// 

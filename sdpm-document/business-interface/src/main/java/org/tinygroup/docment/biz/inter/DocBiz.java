@@ -23,9 +23,9 @@ public interface DocBiz {
 	public Doc getDocById(Integer key);
 	public DocLib getDocLibById(Integer key);
 	//这个基本不用，或是用来判断更新是否有改动，如果一字都没改动就不操作数据库。
-	public List<Doc> getDocListOrderBy(Doc doc,OrderBy...orderbies);
+	//public List<Doc> getDocListOrderBy(Doc doc,OrderBy...orderbies);
 	public List<Historydoc> docHistory(Integer docid);
 	//查询后分页吧~
-	public Pager<Doc> queryItemWithPage(Integer start,Integer limited,Doc doc,OrderBy...orderbies);
+	//public Pager<Doc> queryItemWithPage(Integer start,Integer limited,Doc doc,OrderBy...orderbies);
 
 }

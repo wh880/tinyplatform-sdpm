@@ -29,9 +29,9 @@ public interface DocService {
 	public List<Historydoc> getEditRecord(Integer docid);
 	public DocLib findDoclibById(Integer id);
 	//list
-	public List<Doc> findDocByDocClassOrderBy(Doc doc,OrderBy...orderbys);
+	//public List<Doc> findDocByDocClassOrderBy(Doc doc,OrderBy...orderbys);
 	//page
-	public Pager<Doc> findDocRetPager(int start,int limit ,Doc doc,OrderBy...orderbys);
+	//public Pager<Doc> findDocRetPager(int start,int limit ,Doc doc,OrderBy...orderbys);
 	//delete
 	public int deleteDocById(Integer id);
 	public int deleteDoclibById(Integer id);
