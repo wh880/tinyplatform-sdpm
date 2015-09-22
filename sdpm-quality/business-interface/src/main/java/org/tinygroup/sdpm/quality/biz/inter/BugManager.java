@@ -10,7 +10,7 @@ public interface BugManager {
 	 * @param id
 	 * @return
 	 */
-	Bug find(int id);
+	Bug find(Integer id);
 	
 	/**
 	 * 根据条件查询d
@@ -31,7 +31,7 @@ public interface BugManager {
 	 * @param bug
 	 * @return
 	 */
-	int update(Bug bug);
+	Integer update(Bug bug);
 	/**
 	 * 批量编辑
 	 * @param bugs
