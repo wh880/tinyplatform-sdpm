@@ -38,7 +38,7 @@ public class ClientAction extends BaseController {
             clientService.addClient(client);
         } else {
             clientService.updateClient(client);
-        }
+    }
         model.addAttribute("client", client);
         return "service/client/clientUser.page";
     }
