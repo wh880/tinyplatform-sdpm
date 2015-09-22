@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
     <context:component-scan base-package="org.tinygroup.sdpm.*" />
@@ -13,10 +12,10 @@
             <value>com.mysql.jdbc.Driver</value>
         </property>
         <property name="url">
-        <value>jdbc:mysql://localhost/sdpm?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8</value>
+            <value>jdbc:mysql://192.168.51.28/sdpm?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8</value>
         </property>
         <property name="username" value="root"/>
-        <property name="password" value="18211224"/>
+        <property name="password" value="123456"/>
     </bean>
 
     <bean id="dslSession" name="dslSession" scope="prototype"
