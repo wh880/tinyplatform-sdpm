@@ -31,4 +31,9 @@ public class SysModuleServiceImpl implements SysModuleService {
 		return  sysModuleManager.delete(sysModule);
 	}
 
+	public SysModule findById(int id) {
+		// TODO Auto-generated method stub
+		return sysModuleManager.findById(id);
+	}
+
 }
