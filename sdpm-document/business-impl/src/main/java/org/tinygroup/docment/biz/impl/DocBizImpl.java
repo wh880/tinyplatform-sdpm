@@ -4,12 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.tinygroup.docment.biz.inter.DocBiz;
-import org.tinygroup.sdpm.docment.dao.inter.DocDao;
-import org.tinygroup.sdpm.docment.dao.inter.DocLibDao;
-import org.tinygroup.sdpm.docment.dao.inter.HistorydocDao;
-import org.tinygroup.sdpm.docment.pojo.Doc;
-import org.tinygroup.sdpm.docment.pojo.DocLib;
-import org.tinygroup.sdpm.docment.pojo.Historydoc;
+import org.tinygroup.sdpm.document.dao.DocDao;
+import org.tinygroup.sdpm.document.dao.DocLibDao;
+import org.tinygroup.sdpm.document.dao.HistorydocDao;
+import org.tinygroup.sdpm.document.dao.pojo.Doc;
+import org.tinygroup.sdpm.document.dao.pojo.DocLib;
+import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
 import org.tinygroup.tinysqldsl.Pager;
 
 /**
@@ -119,7 +119,7 @@ public class DocBizImpl implements DocBiz {
 
 	public List<Historydoc> docHistory(Integer docid) {
 		// 这个很重要了，显示历史操作数据的，涵盖操作时间和责任人。
-		return hisdocdao.getWithSameDocId(docid);
+		return null;//hisdocdao.getWithSameDocId(docid);
 	}
 
 

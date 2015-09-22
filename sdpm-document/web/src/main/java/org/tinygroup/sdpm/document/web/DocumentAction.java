@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.tinygroup.sdpm.docment.pojo.Doc;
-import org.tinygroup.sdpm.docment.pojo.DocLib;
 import org.tinygroup.sdpm.docment.service.inter.DocService;
+import org.tinygroup.sdpm.document.dao.pojo.Doc;
+import org.tinygroup.sdpm.document.dao.pojo.DocLib;
 
 /**
  * @date 2015/09/21

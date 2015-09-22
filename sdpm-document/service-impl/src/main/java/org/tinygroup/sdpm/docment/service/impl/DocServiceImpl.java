@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.docment.biz.inter.DocBiz;
-import org.tinygroup.sdpm.docment.pojo.Doc;
-import org.tinygroup.sdpm.docment.pojo.DocLib;
-import org.tinygroup.sdpm.docment.pojo.Historydoc;
 import org.tinygroup.sdpm.docment.service.inter.DocService;
+import org.tinygroup.sdpm.document.dao.pojo.Doc;
+import org.tinygroup.sdpm.document.dao.pojo.DocLib;
+import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
 import org.tinygroup.tinysqldsl.Pager;
 
 /**

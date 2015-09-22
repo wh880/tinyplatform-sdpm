@@ -14,10 +14,11 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.docment.dao.inter;
+package org.tinygroup.sdpm.document.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-import org.tinygroup.sdpm.docment.pojo.DocLib;
+
+import org.tinygroup.sdpm.document.dao.pojo.DocLib;
 
 public interface DocLibDao extends BaseDao<DocLib,Integer> {
 

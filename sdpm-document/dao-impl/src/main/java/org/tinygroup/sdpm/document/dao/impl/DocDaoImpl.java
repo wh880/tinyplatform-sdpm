@@ -14,20 +14,21 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.docment.dao.impl;
+package org.tinygroup.sdpm.document.dao.impl;
 
-import static org.tinygroup.sdpm.docment.constant.DocTable.*;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.sdpm.document.dao.constant.DocTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
-import org.tinygroup.sdpm.docment.dao.inter.DocDao;
-import org.tinygroup.sdpm.docment.pojo.Doc;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -36,7 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.document.dao.pojo.Doc;
+import org.tinygroup.sdpm.document.dao.DocDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -44,7 +50,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-
 
 public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 
@@ -136,7 +141,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 		});
 	}
 
-	public List<Doc> query(Doc doc) {
+	public List<Doc> query(Doc doc ,final OrderBy... orderBies) {
 		if(doc==null){
 			doc=new Doc();
 		}
@@ -144,7 +149,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(Doc t) {
-				return selectFrom(DOCTABLE).where(
+				Select select = selectFrom(DOCTABLE).where(
 				and(
 					DOCTABLE.DOC_PRODUCT.eq(t.getDocProduct()),
 					DOCTABLE.DOC_PROJECT.eq(t.getDocProject()),
@@ -163,18 +168,19 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_EDITEDBY.eq(t.getDocEditedBy()),
 					DOCTABLE.DOC_EDITEDDATE.eq(t.getDocEditedDate()),
 					DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<Doc> queryPager(int start,int limit ,Doc doc) {
+	public Pager<Doc> queryPager(int start,int limit ,Doc doc ,final OrderBy... orderBies) {
 		if(doc==null){
 			doc=new Doc();
 		}
 		return getDslTemplate().queryPager(start, limit, doc, false, new SelectGenerateCallback<Doc>() {
 
 			public Select generate(Doc t) {
-				return MysqlSelect.selectFrom(DOCTABLE).where(
+				Select select = MysqlSelect.selectFrom(DOCTABLE).where(
 				and(
 					DOCTABLE.DOC_PRODUCT.eq(t.getDocProduct()),
 					DOCTABLE.DOC_PROJECT.eq(t.getDocProject()),
@@ -193,6 +199,7 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_EDITEDBY.eq(t.getDocEditedBy()),
 					DOCTABLE.DOC_EDITEDDATE.eq(t.getDocEditedDate()),
 					DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -290,4 +297,17 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.docment.constant;
+package org.tinygroup.sdpm.document.dao.constant;
 
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
@@ -64,8 +64,8 @@ public class DocLibTable extends Table {
 	public final Column DOC_LIB_UPDTIME = new Column(this, "doc_lib_updtime");
 
 
-		private DocLibTable() {
-			super("docLib");
-		}
+	private DocLibTable() {
+		super("docLib");
+	}
 
 }

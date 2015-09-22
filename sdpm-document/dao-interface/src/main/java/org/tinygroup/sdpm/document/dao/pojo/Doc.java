@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.docment.pojo;
+package org.tinygroup.sdpm.document.dao.pojo;
 
 import java.util.Date;
 

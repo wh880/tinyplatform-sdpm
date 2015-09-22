@@ -14,15 +14,12 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.docment.dao.inter;
-
-import java.util.List;
+package org.tinygroup.sdpm.document.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-import org.tinygroup.sdpm.docment.pojo.Historydoc;
+
+import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
 
 public interface HistorydocDao extends BaseDao<Historydoc,Integer> {
-	//添加一条，用于记录操作历史查询显示
-	public List<Historydoc> getWithSameDocId(Integer docid);
 
 }

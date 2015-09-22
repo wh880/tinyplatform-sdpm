@@ -14,20 +14,21 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.docment.dao.impl;
+package org.tinygroup.sdpm.document.dao.impl;
 
-import static org.tinygroup.sdpm.docment.constant.HistorydocTable.*;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.sdpm.document.dao.constant.HistorydocTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
-import org.tinygroup.sdpm.docment.dao.inter.HistorydocDao;
-import org.tinygroup.sdpm.docment.pojo.Historydoc;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -36,7 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
+import org.tinygroup.sdpm.document.dao.HistorydocDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -67,7 +73,7 @@ public class HistorydocDaoImpl extends TinyDslDaoSupport implements HistorydocDa
 		return getDslTemplate().update(historydoc, new UpdateGenerateCallback<Historydoc>() {
 			public Update generate(Historydoc t) {
 				Update update = update(HISTORYDOCTABLE).set(
-						HISTORYDOCTABLE.DOC_ID.value(t.getDocId()),
+					HISTORYDOCTABLE.DOC_ID.value(t.getDocId()),
 					HISTORYDOCTABLE.REC_TIME.value(t.getRecTime()),
 					HISTORYDOCTABLE.REC_WHO.value(t.getRecWho())).where(
 					HISTORYDOCTABLE.RECORD_ID.eq(t.getRecordId()));
@@ -107,7 +113,7 @@ public class HistorydocDaoImpl extends TinyDslDaoSupport implements HistorydocDa
 		});
 	}
 
-	public List<Historydoc> query(Historydoc historydoc) {
+	public List<Historydoc> query(Historydoc historydoc ,final OrderBy... orderBies) {
 		if(historydoc==null){
 			historydoc=new Historydoc();
 		}
@@ -115,27 +121,29 @@ public class HistorydocDaoImpl extends TinyDslDaoSupport implements HistorydocDa
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(Historydoc t) {
-				return selectFrom(HISTORYDOCTABLE).where(
+				Select select = selectFrom(HISTORYDOCTABLE).where(
 				and(
-						HISTORYDOCTABLE.DOC_ID.eq(t.getDocId()),
+					HISTORYDOCTABLE.DOC_ID.eq(t.getDocId()),
 					HISTORYDOCTABLE.REC_TIME.eq(t.getRecTime()),
 					HISTORYDOCTABLE.REC_WHO.eq(t.getRecWho())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<Historydoc> queryPager(int start,int limit ,Historydoc historydoc) {
+	public Pager<Historydoc> queryPager(int start,int limit ,Historydoc historydoc ,final OrderBy... orderBies) {
 		if(historydoc==null){
 			historydoc=new Historydoc();
 		}
 		return getDslTemplate().queryPager(start, limit, historydoc, false, new SelectGenerateCallback<Historydoc>() {
 
 			public Select generate(Historydoc t) {
-				return MysqlSelect.selectFrom(HISTORYDOCTABLE).where(
+				Select select = MysqlSelect.selectFrom(HISTORYDOCTABLE).where(
 				and(
-						HISTORYDOCTABLE.DOC_ID.eq(t.getDocId()),
+					HISTORYDOCTABLE.DOC_ID.eq(t.getDocId()),
 					HISTORYDOCTABLE.REC_TIME.eq(t.getRecTime()),
 					HISTORYDOCTABLE.REC_WHO.eq(t.getRecWho())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -148,7 +156,7 @@ public class HistorydocDaoImpl extends TinyDslDaoSupport implements HistorydocDa
 
 			public Insert generate() {
 				return insertInto(HISTORYDOCTABLE).values(
-						HISTORYDOCTABLE.DOC_ID.value(new JdbcNamedParameter("docId")),
+					HISTORYDOCTABLE.DOC_ID.value(new JdbcNamedParameter("docId")),
 					HISTORYDOCTABLE.REC_TIME.value(new JdbcNamedParameter("recTime")),
 					HISTORYDOCTABLE.REC_WHO.value(new JdbcNamedParameter("recWho")));
 			}
@@ -167,7 +175,7 @@ public class HistorydocDaoImpl extends TinyDslDaoSupport implements HistorydocDa
 
 			public Update generate() {
 				return update(HISTORYDOCTABLE).set(
-						HISTORYDOCTABLE.DOC_ID.value(new JdbcNamedParameter("docId")),
+					HISTORYDOCTABLE.DOC_ID.value(new JdbcNamedParameter("docId")),
 					HISTORYDOCTABLE.REC_TIME.value(new JdbcNamedParameter("recTime")),
 					HISTORYDOCTABLE.REC_WHO.value(new JdbcNamedParameter("recWho"))).where(
 				HISTORYDOCTABLE.RECORD_ID.eq(new JdbcNamedParameter("recordId")));
@@ -190,22 +198,18 @@ public class HistorydocDaoImpl extends TinyDslDaoSupport implements HistorydocDa
 			}
 		});
 	}
-/**
- * 也不知道靠不靠谱，通过相同的文档ID查出所以历史记录
- * select * form t_tablename where doc_id=docid;
- * 这个dsl不熟悉
- */
-	public List<Historydoc> getWithSameDocId(final Integer docid) {
-		//
-		Historydoc historydoc = null;
-		return getDslTemplate().query(historydoc, new SelectGenerateCallback<Historydoc>() {
 
-			@SuppressWarnings("rawtypes")
-			public Select generate(Historydoc t) {
-				return selectFrom(HISTORYDOCTABLE).where(
-						HISTORYDOCTABLE.DOC_ID.eq(docid));
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
 			}
-		});
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
 	}
-
 }

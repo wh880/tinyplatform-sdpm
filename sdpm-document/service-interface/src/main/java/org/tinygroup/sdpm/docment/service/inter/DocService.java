@@ -2,9 +2,9 @@ package org.tinygroup.sdpm.docment.service.inter;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.docment.pojo.Doc;
-import org.tinygroup.sdpm.docment.pojo.DocLib;
-import org.tinygroup.sdpm.docment.pojo.Historydoc;
+import org.tinygroup.sdpm.document.dao.pojo.Doc;
+import org.tinygroup.sdpm.document.dao.pojo.DocLib;
+import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
 import org.tinygroup.tinysqldsl.Pager;
 /**
  * @date 2015/09/21

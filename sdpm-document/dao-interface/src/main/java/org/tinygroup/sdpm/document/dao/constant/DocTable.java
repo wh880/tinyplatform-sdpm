@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.docment.constant;
+package org.tinygroup.sdpm.document.dao.constant;
 
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;
@@ -154,8 +154,8 @@ public class DocTable extends Table {
 	public final Column DOC_DELETED = new Column(this, "doc_deleted");
 
 
-		private DocTable() {
-			super("doc");
-		}
+	private DocTable() {
+		super("doc");
+	}
 
 }

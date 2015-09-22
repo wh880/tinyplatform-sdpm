@@ -14,74 +14,50 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.docment.pojo;
+package org.tinygroup.sdpm.document.dao.constant;
 
-import java.util.Date;
+import org.tinygroup.tinysqldsl.base.Column;
+import org.tinygroup.tinysqldsl.base.Table;
 
 /** 
  * 文档编辑历史记录
  * 
  */
-public class Historydoc {
+public class HistorydocTable extends Table {
+
+	public static final HistorydocTable HISTORYDOCTABLE = new HistorydocTable();
 
 	/** 
 	 * 历史记录ID
 	 * 
 	 * 历史记录ID
 	 */
-	private Integer recordId;
-	
+	public final Column RECORD_ID = new Column(this, "record_id");
+
 	/** 
 	 * 文档ID
 	 * 
+	 * 文档ID，主键，唯一标示
 	 */
-	private Integer docId;
+	public final Column DOC_ID = new Column(this, "doc_id");
 
 	/** 
 	 * 编辑时间
 	 * 
 	 * 编辑时间
 	 */
-	private Date recTime;
+	public final Column REC_TIME = new Column(this, "rec_time");
 
 	/** 
 	 * 谁创建或是编辑
 	 * 
 	 * 谁创建或是编辑
 	 */
-	private String recWho;
+	public final Column REC_WHO = new Column(this, "rec_who");
 
 
-	public void setRecordId(Integer recordId){
-		this. recordId = recordId;
-	}
-
-	public Integer getRecordId(){
-		return recordId;
-	}
-
-	public void setRecTime(Date recTime){
-		this. recTime = recTime;
-	}
-
-	public Date getRecTime(){
-		return recTime;
-	}
-
-	public void setRecWho(String recWho){
-		this. recWho = recWho;
-	}
-
-	public String getRecWho(){
-		return recWho;
-	}
-
-	public Integer getDocId() {
-		return docId;
-	}
-
-	public void setDocId(Integer docId) {
-		this.docId = docId;
+	private HistorydocTable() {
+		super("historydoc");
 	}
 
 }

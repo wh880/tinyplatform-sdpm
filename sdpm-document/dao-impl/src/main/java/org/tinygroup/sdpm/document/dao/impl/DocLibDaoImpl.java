@@ -14,20 +14,21 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.docment.dao.impl;
+package org.tinygroup.sdpm.document.dao.impl;
 
-import static org.tinygroup.sdpm.docment.constant.DocLibTable.*;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.sdpm.document.dao.constant.DocLibTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
-import org.tinygroup.sdpm.docment.dao.inter.DocLibDao;
-import org.tinygroup.sdpm.docment.pojo.DocLib;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -36,7 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.document.dao.pojo.DocLib;
+import org.tinygroup.sdpm.document.dao.DocLibDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -109,7 +115,7 @@ public class DocLibDaoImpl extends TinyDslDaoSupport implements DocLibDao {
 		});
 	}
 
-	public List<DocLib> query(DocLib docLib) {
+	public List<DocLib> query(DocLib docLib ,final OrderBy... orderBies) {
 		if(docLib==null){
 			docLib=new DocLib();
 		}
@@ -117,29 +123,31 @@ public class DocLibDaoImpl extends TinyDslDaoSupport implements DocLibDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(DocLib t) {
-				return selectFrom(DOCLIBTABLE).where(
+				Select select = selectFrom(DOCLIBTABLE).where(
 				and(
 					DOCLIBTABLE.DOC_LIBNAME.eq(t.getDocLibname()),
 					DOCLIBTABLE.DOC_LIB_DELETED.eq(t.getDocLibDeleted()),
 					DOCLIBTABLE.DOC_LIB_ADDTIME.eq(t.getDocLibAddtime()),
 					DOCLIBTABLE.DOC_LIB_UPDTIME.eq(t.getDocLibUpdtime())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<DocLib> queryPager(int start,int limit ,DocLib docLib) {
+	public Pager<DocLib> queryPager(int start,int limit ,DocLib docLib ,final OrderBy... orderBies) {
 		if(docLib==null){
 			docLib=new DocLib();
 		}
 		return getDslTemplate().queryPager(start, limit, docLib, false, new SelectGenerateCallback<DocLib>() {
 
 			public Select generate(DocLib t) {
-				return MysqlSelect.selectFrom(DOCLIBTABLE).where(
+				Select select = MysqlSelect.selectFrom(DOCLIBTABLE).where(
 				and(
 					DOCLIBTABLE.DOC_LIBNAME.eq(t.getDocLibname()),
 					DOCLIBTABLE.DOC_LIB_DELETED.eq(t.getDocLibDeleted()),
 					DOCLIBTABLE.DOC_LIB_ADDTIME.eq(t.getDocLibAddtime()),
 					DOCLIBTABLE.DOC_LIB_UPDTIME.eq(t.getDocLibUpdtime())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -198,4 +206,17 @@ public class DocLibDaoImpl extends TinyDslDaoSupport implements DocLibDao {
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }
