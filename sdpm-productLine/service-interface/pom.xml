@@ -20,11 +20,12 @@
        <version>${tiny_sdpm_version}</version>
     </dependency>
     
-     <dependency>
-	    <groupId>org.tinygroup</groupId>
-		<artifactId>org.tinygroup.genservicewrap</artifactId>
-		<version>${tiny_version}</version>
-	</dependency>
+    <!-- 用来实现生成服务的依赖 -->
+		<dependency>
+       <groupId>org.tinygroup</groupId>
+       <artifactId>org.tinygroup.genservicewrap</artifactId>
+       <version>${tiny_version}</version>
+    </dependency>
   	
     <dependency>
       <groupId>junit</groupId>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.docment.biz.inter.DocBiz;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.docment.service.inter.DocService;
 import org.tinygroup.sdpm.document.dao.pojo.Doc;
 import org.tinygroup.sdpm.document.dao.pojo.DocLib;
@@ -64,14 +65,14 @@ public class DocServiceImpl implements DocService{
 		return docbiz.docHistory(docid);
 	}
 
-	public List<Doc> findDocByDocClass(Doc doc) {
+	public List<Doc> findDocByDocClassOrderBy(Doc doc, OrderBy... orderbys) {
 		// 
-		return docbiz.getDocByEntity(doc);
+		return docbiz.getDocListOrderBy(doc);
 	}
 
-	public Pager<Doc> findDocRetPager(int start, int limit, Doc doc) {
+	public Pager<Doc> findDocRetPager(int start, int limit, Doc doc,OrderBy...orderbys) {
 		// 
-		return docbiz.queryItemWithPage(start, limit, doc);
+		return docbiz.queryItemWithPage(start, limit, doc,orderbys);
 	}
 
 	public int deleteDocById(Integer id) {
@@ -88,5 +89,6 @@ public class DocServiceImpl implements DocService{
 		// 
 		return docbiz.batchDelDocByIds(keys);
 	}
+
 
 }
