@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.SearchManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
 import org.tinygroup.sdpm.system.service.inter.SearchService;
+import org.tinygroup.tinysqldsl.Pager;
 
 @Component()
 public class SearchServiceImpl implements SearchService {
@@ -34,10 +35,21 @@ public class SearchServiceImpl implements SearchService {
 		return searchManager.find(searchId);
 	}
 
-	public List<SystemSearch> findSearchList(SystemSearch search) {
+	public List<SystemSearch> findSearchList(SystemSearch search,String columnName,boolean asc) {
 		
-		return searchManager.finList(search);
+		return searchManager.findList(search, columnName, asc);
 			
+	}
+
+	public Pager<SystemSearch> findSearchPager(int start, int limit, SystemSearch search, String columnName,
+			boolean asc) {
+
+		return searchManager.findPager(start, limit, search, columnName, asc);
+	}
+
+	public int[] updateBatchSearch(List<SystemSearch> searches) {
+
+		return searchManager.updateBatch(searches);
 	}
 
 

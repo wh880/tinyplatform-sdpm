@@ -7,9 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.biz.inter.ConfigManager;
 import org.tinygroup.sdpm.system.dao.SystemConfigDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
+import org.tinygroup.tinysqldsl.Pager;
 
 
 @Service
@@ -37,9 +39,21 @@ public class ConfigManagerImpl implements ConfigManager{
         return  configDao.getByKey(configId);
     }
 
-    public 	List<SystemConfig> findList(SystemConfig config){
-         return  configDao.query(config);
-    }
+	public int[] updateBatch(List<SystemConfig> configs) {
+		
+		return configDao.batchUpdate(configs);
+	}
+
+	public List<SystemConfig> findList(SystemConfig config, String columnName, boolean asc) {
+		
+		return configDao.query(config, new OrderBy(columnName, asc));
+	}
+
+	public Pager<SystemConfig> findPager(int start, int limit, SystemConfig config, String columnName,
+			boolean asc) {
+		
+		return configDao.queryPager(start, limit, config,  new OrderBy(columnName, asc));
+	}
 
 
 

@@ -15,6 +15,11 @@
     <!--可以自定义标签对,可以在其它地方用{标签名引用}-->
   </properties>
   <dependencies>
+  <dependency>
+	    <groupId>org.tinygroup</groupId>
+		<artifactId>org.tinygroup.genservicewrap</artifactId>
+		<version>${tiny_version}</version>
+	</dependency>
   	<dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-system-service-interface</artifactId>
@@ -41,7 +46,7 @@
 	    <version>${tiny_version}</version>
 	  </dependency>
     <dependency>
-      <groupId>org.tinygroup</groupId>
+  <groupId>org.tinygroup</groupId>
       <artifactId>org.tinygroup.tinydbflowcomponent</artifactId>
       <version>${tiny_version}</version>
     </dependency>
@@ -69,8 +74,7 @@
           <version>5.0.5</version>
           <scope>test</scope>
       </dependency>
-    <dependency>
-      <groupId>junit</groupId>
+    <dependency>      <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>

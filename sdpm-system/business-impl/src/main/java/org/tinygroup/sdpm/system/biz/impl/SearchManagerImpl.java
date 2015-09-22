@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.biz.inter.SearchManager;
 import org.tinygroup.sdpm.system.dao.SystemSearchDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
+import org.tinygroup.tinysqldsl.Pager;
 
 @Service
 @Transactional
@@ -35,8 +37,22 @@ public class SearchManagerImpl implements SearchManager{
         return searchDao.getByKey(searchId);
     }
 
-    public List<SystemSearch> finList(SystemSearch search){
-        return  searchDao.query(search);
-    }
+	public int[] updateBatch(List<SystemSearch> searches) {
+		
+		return searchDao.batchUpdate(searches);
+	}
+
+	public List<SystemSearch> findList(SystemSearch search, String columnName, boolean asc) {
+		
+		return searchDao.query(search, new OrderBy(columnName, asc));
+	}
+
+	public Pager<SystemSearch> findPager(int start, int limit, SystemSearch search, String columnName,
+			boolean asc) {
+		
+		return searchDao.queryPager(start, limit, search, new OrderBy(columnName, asc));
+	}
+
+   
 }
 
