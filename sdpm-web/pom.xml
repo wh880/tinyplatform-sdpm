@@ -47,7 +47,23 @@
             <artifactId>sdpm-org-service-wrapper</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
-
+        <!--service-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-service-view</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-service-service-impl</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-service-service-wrapper</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+        <!--service end-->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-system-view</artifactId>
