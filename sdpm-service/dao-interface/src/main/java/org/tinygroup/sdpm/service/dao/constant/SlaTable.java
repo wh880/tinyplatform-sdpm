@@ -179,8 +179,8 @@ public class SlaTable extends Table {
 	public final Column CILENT_PRODUCT_VISION = new Column(this, "cilent_product_vision");
 
 
-		private SlaTable() {
-			super("sla");
-		}
+	private SlaTable() {
+		super("sla");
+	}
 
 }

@@ -43,10 +43,10 @@ public class TestCase {
 	private Integer moduleId;
 
 	/** 
-	 * PATH
+	 * CASE_PATH
 	 * 
 	 */
-	private Integer path;
+	private Integer casePath;
 
 	/** 
 	 * 需求ID
@@ -235,12 +235,12 @@ public class TestCase {
 		return moduleId;
 	}
 
-	public void setPath(Integer path){
-		this. path = path;
+	public void setCasePath(Integer casePath){
+		this. casePath = casePath;
 	}
 
-	public Integer getPath(){
-		return path;
+	public Integer getCasePath(){
+		return casePath;
 	}
 
 	public void setStoryId(Integer storyId){

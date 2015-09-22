@@ -106,8 +106,8 @@ public class TestTaskTable extends Table {
 	public final Column DELETED = new Column(this, "deleted");
 
 
-		private TestTaskTable() {
-			super("testTask");
-		}
+	private TestTaskTable() {
+		super("testTask");
+	}
 
 }

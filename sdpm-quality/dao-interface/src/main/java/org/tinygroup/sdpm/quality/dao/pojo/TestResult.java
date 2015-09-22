@@ -31,10 +31,10 @@ public class TestResult {
 	private Integer testResultId;
 
 	/** 
-	 * RUN
+	 * TESTRESULT_RUN
 	 * 
 	 */
-	private Integer run;
+	private Integer testresultRun;
 
 	/** 
 	 * 相关用例
@@ -81,12 +81,12 @@ public class TestResult {
 		return testResultId;
 	}
 
-	public void setRun(Integer run){
-		this. run = run;
+	public void setTestresultRun(Integer testresultRun){
+		this. testresultRun = testresultRun;
 	}
 
-	public Integer getRun(){
-		return run;
+	public Integer getTestresultRun(){
+		return testresultRun;
 	}
 
 	public void setLinkCase(Integer linkCase){

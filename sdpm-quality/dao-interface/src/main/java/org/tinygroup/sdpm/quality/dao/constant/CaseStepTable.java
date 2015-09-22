@@ -58,8 +58,8 @@ public class CaseStepTable extends Table {
 	public final Column CASESTEP_EXPECT = new Column(this, "caseStep_expect");
 
 
-		private CaseStepTable() {
-			super("caseStep");
-		}
+	private CaseStepTable() {
+		super("caseStep");
+	}
 
 }

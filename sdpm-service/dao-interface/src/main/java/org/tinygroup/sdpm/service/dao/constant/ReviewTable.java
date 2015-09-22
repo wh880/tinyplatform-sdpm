@@ -90,8 +90,8 @@ public class ReviewTable extends Table {
 	public final Column REVIEW_TYPE = new Column(this, "review_type");
 
 
-		private ReviewTable() {
-			super("review");
-		}
+	private ReviewTable() {
+		super("review");
+	}
 
 }

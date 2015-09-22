@@ -106,8 +106,8 @@ public class FaqTable extends Table {
 	public final Column FAQ_REPLY_DATE = new Column(this, "faq_reply_date");
 
 
-		private FaqTable() {
-			super("faq");
-		}
+	private FaqTable() {
+		super("faq");
+	}
 
 }

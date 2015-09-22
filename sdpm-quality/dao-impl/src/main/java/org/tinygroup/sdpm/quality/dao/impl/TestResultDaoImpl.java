@@ -25,6 +25,8 @@ import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.tinygroup.tinysqldsl.Delete;
@@ -35,8 +37,10 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.TestResult;
 import org.tinygroup.sdpm.quality.dao.TestResultDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -54,7 +58,7 @@ public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDa
 			public Insert generate(TestResult t) {
 				Insert insert = insertInto(TESTRESULTTABLE).values(
 					TESTRESULTTABLE.TESTRESULT_ID.value(t.getTestResultId()),
-					TESTRESULTTABLE.RUN.value(t.getRun()),
+					TESTRESULTTABLE.TESTRESULT_RUN.value(t.getTestresultRun()),
 					TESTRESULTTABLE.LINK_CASE.value(t.getLinkCase()),
 					TESTRESULTTABLE.CASE_VERSION.value(t.getCaseVersion()),
 					TESTRESULTTABLE.CASE_RESULT.value(t.getCaseResult()),
@@ -73,7 +77,7 @@ public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDa
 		return getDslTemplate().update(testResult, new UpdateGenerateCallback<TestResult>() {
 			public Update generate(TestResult t) {
 				Update update = update(TESTRESULTTABLE).set(
-					TESTRESULTTABLE.RUN.value(t.getRun()),
+					TESTRESULTTABLE.TESTRESULT_RUN.value(t.getTestresultRun()),
 					TESTRESULTTABLE.LINK_CASE.value(t.getLinkCase()),
 					TESTRESULTTABLE.CASE_VERSION.value(t.getCaseVersion()),
 					TESTRESULTTABLE.CASE_RESULT.value(t.getCaseResult()),
@@ -117,7 +121,7 @@ public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDa
 		});
 	}
 
-	public List<TestResult> query(TestResult testResult) {
+	public List<TestResult> query(TestResult testResult ,final OrderBy... orderBies) {
 		if(testResult==null){
 			testResult=new TestResult();
 		}
@@ -125,35 +129,37 @@ public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDa
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(TestResult t) {
-				return selectFrom(TESTRESULTTABLE).where(
+				Select select = selectFrom(TESTRESULTTABLE).where(
 				and(
-					TESTRESULTTABLE.RUN.eq(t.getRun()),
+					TESTRESULTTABLE.TESTRESULT_RUN.eq(t.getTestresultRun()),
 					TESTRESULTTABLE.LINK_CASE.eq(t.getLinkCase()),
 					TESTRESULTTABLE.CASE_VERSION.eq(t.getCaseVersion()),
 					TESTRESULTTABLE.CASE_RESULT.eq(t.getCaseResult()),
 					TESTRESULTTABLE.CASE_STEPRESULTS.eq(t.getCaseStepresults()),
 					TESTRESULTTABLE.TESTRESULT_LASTRUNNER.eq(t.getTestResultLastRunner()),
 					TESTRESULTTABLE.TESTRESULT_DATE.eq(t.getTestResultDate())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<TestResult> queryPager(int start,int limit ,TestResult testResult) {
+	public Pager<TestResult> queryPager(int start,int limit ,TestResult testResult ,final OrderBy... orderBies) {
 		if(testResult==null){
 			testResult=new TestResult();
 		}
 		return getDslTemplate().queryPager(start, limit, testResult, false, new SelectGenerateCallback<TestResult>() {
 
 			public Select generate(TestResult t) {
-				return MysqlSelect.selectFrom(TESTRESULTTABLE).where(
+				Select select = MysqlSelect.selectFrom(TESTRESULTTABLE).where(
 				and(
-					TESTRESULTTABLE.RUN.eq(t.getRun()),
+					TESTRESULTTABLE.TESTRESULT_RUN.eq(t.getTestresultRun()),
 					TESTRESULTTABLE.LINK_CASE.eq(t.getLinkCase()),
 					TESTRESULTTABLE.CASE_VERSION.eq(t.getCaseVersion()),
 					TESTRESULTTABLE.CASE_RESULT.eq(t.getCaseResult()),
 					TESTRESULTTABLE.CASE_STEPRESULTS.eq(t.getCaseStepresults()),
 					TESTRESULTTABLE.TESTRESULT_LASTRUNNER.eq(t.getTestResultLastRunner()),
 					TESTRESULTTABLE.TESTRESULT_DATE.eq(t.getTestResultDate())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -166,7 +172,7 @@ public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDa
 
 			public Insert generate() {
 				return insertInto(TESTRESULTTABLE).values(
-					TESTRESULTTABLE.RUN.value(new JdbcNamedParameter("run")),
+					TESTRESULTTABLE.TESTRESULT_RUN.value(new JdbcNamedParameter("testresultRun")),
 					TESTRESULTTABLE.LINK_CASE.value(new JdbcNamedParameter("linkCase")),
 					TESTRESULTTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
 					TESTRESULTTABLE.CASE_RESULT.value(new JdbcNamedParameter("caseResult")),
@@ -189,7 +195,7 @@ public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDa
 
 			public Update generate() {
 				return update(TESTRESULTTABLE).set(
-					TESTRESULTTABLE.RUN.value(new JdbcNamedParameter("run")),
+					TESTRESULTTABLE.TESTRESULT_RUN.value(new JdbcNamedParameter("testresultRun")),
 					TESTRESULTTABLE.LINK_CASE.value(new JdbcNamedParameter("linkCase")),
 					TESTRESULTTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
 					TESTRESULTTABLE.CASE_RESULT.value(new JdbcNamedParameter("caseResult")),
@@ -210,7 +216,7 @@ public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDa
 			public Delete generate() {
 				return delete(TESTRESULTTABLE).where(and(
 				TESTRESULTTABLE.TESTRESULT_ID.eq(new JdbcNamedParameter("testResultId")),
-				TESTRESULTTABLE.RUN.eq(new JdbcNamedParameter("run")),
+				TESTRESULTTABLE.TESTRESULT_RUN.eq(new JdbcNamedParameter("testresultRun")),
 				TESTRESULTTABLE.LINK_CASE.eq(new JdbcNamedParameter("linkCase")),
 				TESTRESULTTABLE.CASE_VERSION.eq(new JdbcNamedParameter("caseVersion")),
 				TESTRESULTTABLE.CASE_RESULT.eq(new JdbcNamedParameter("caseResult")),
@@ -221,4 +227,17 @@ public class TestResultDaoImpl extends TinyDslDaoSupport implements TestResultDa
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

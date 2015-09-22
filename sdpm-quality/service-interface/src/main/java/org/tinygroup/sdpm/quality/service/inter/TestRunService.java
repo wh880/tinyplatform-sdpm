@@ -13,9 +13,9 @@ public interface TestRunService {
 	 */
 	List<TestRun> findTestRunList(TestRun testrun);
 	/**
-	 * 保存
+	 * 编辑
 	 * @param testrun
 	 * @return
 	 */
-	TestRun save(TestRun testrun);
+	int updateTestRun(TestRun testrun);
 }

@@ -34,10 +34,10 @@ public class TestResultTable extends Table {
 	public final Column TESTRESULT_ID = new Column(this, "testResult_id");
 
 	/** 
-	 * RUN
+	 * TESTRESULT_RUN
 	 * 
 	 */
-	public final Column RUN = new Column(this, "run");
+	public final Column TESTRESULT_RUN = new Column(this, "testresult_run");
 
 	/** 
 	 * 相关用例
@@ -76,8 +76,8 @@ public class TestResultTable extends Table {
 	public final Column TESTRESULT_DATE = new Column(this, "testResult_date");
 
 
-		private TestResultTable() {
-			super("testResult");
-		}
+	private TestResultTable() {
+		super("testResult");
+	}
 
 }

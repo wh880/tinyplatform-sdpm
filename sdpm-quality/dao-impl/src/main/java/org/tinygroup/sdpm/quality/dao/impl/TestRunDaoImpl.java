@@ -25,6 +25,8 @@ import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.tinygroup.tinysqldsl.Delete;
@@ -35,8 +37,10 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.TestRun;
 import org.tinygroup.sdpm.quality.dao.TestRunDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -119,7 +123,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 		});
 	}
 
-	public List<TestRun> query(TestRun testRun) {
+	public List<TestRun> query(TestRun testRun ,final OrderBy... orderBies) {
 		if(testRun==null){
 			testRun=new TestRun();
 		}
@@ -127,7 +131,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(TestRun t) {
-				return selectFrom(TESTRUNTABLE).where(
+				Select select = selectFrom(TESTRUNTABLE).where(
 				and(
 					TESTRUNTABLE.TASK_ID.eq(t.getTaskId()),
 					TESTRUNTABLE.CASE_ID.eq(t.getCaseId()),
@@ -137,18 +141,19 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 					TESTRUNTABLE.TESTRUN_LASTRUNDATE.eq(t.getTestRunLastRunDate()),
 					TESTRUNTABLE.TESTRUN_LASTRUNRESULT.eq(t.getTestRunLastRunResult()),
 					TESTRUNTABLE.TESTRUN_STATUS.eq(t.getTestRunStatus())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<TestRun> queryPager(int start,int limit ,TestRun testRun) {
+	public Pager<TestRun> queryPager(int start,int limit ,TestRun testRun ,final OrderBy... orderBies) {
 		if(testRun==null){
 			testRun=new TestRun();
 		}
 		return getDslTemplate().queryPager(start, limit, testRun, false, new SelectGenerateCallback<TestRun>() {
 
 			public Select generate(TestRun t) {
-				return MysqlSelect.selectFrom(TESTRUNTABLE).where(
+				Select select = MysqlSelect.selectFrom(TESTRUNTABLE).where(
 				and(
 					TESTRUNTABLE.TASK_ID.eq(t.getTaskId()),
 					TESTRUNTABLE.CASE_ID.eq(t.getCaseId()),
@@ -158,6 +163,7 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 					TESTRUNTABLE.TESTRUN_LASTRUNDATE.eq(t.getTestRunLastRunDate()),
 					TESTRUNTABLE.TESTRUN_LASTRUNRESULT.eq(t.getTestRunLastRunResult()),
 					TESTRUNTABLE.TESTRUN_STATUS.eq(t.getTestRunStatus())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -228,4 +234,17 @@ public class TestRunDaoImpl extends TinyDslDaoSupport implements TestRunDao {
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

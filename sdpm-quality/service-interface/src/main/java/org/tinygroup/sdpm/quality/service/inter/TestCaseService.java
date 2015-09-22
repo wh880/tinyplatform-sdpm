@@ -16,7 +16,7 @@ public interface TestCaseService {
 	 * @param story
 	 * @return
 	 */
-	List<TestCase> findById(Integer id);
+	TestCase findById(int id);
 	/**
 	 * 建用例
 	 * @param testcase
@@ -34,6 +34,6 @@ public interface TestCaseService {
 	 * @param id
 	 * @return
 	 */
-	int deleteById(Integer id);
+	int deleteById(int id);
 	
 }

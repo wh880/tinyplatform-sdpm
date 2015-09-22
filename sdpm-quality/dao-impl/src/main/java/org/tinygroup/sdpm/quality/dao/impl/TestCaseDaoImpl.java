@@ -25,6 +25,8 @@ import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.tinygroup.tinysqldsl.Delete;
@@ -35,8 +37,10 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.TestCase;
 import org.tinygroup.sdpm.quality.dao.TestCaseDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -56,7 +60,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 					TESTCASETABLE.CASE_ID.value(t.getCaseId()),
 					TESTCASETABLE.PRODUCT_ID.value(t.getProductId()),
 					TESTCASETABLE.MODULE_ID.value(t.getModuleId()),
-					TESTCASETABLE.PATH.value(t.getPath()),
+					TESTCASETABLE.CASE_PATH.value(t.getCasePath()),
 					TESTCASETABLE.STORY_ID.value(t.getStoryId()),
 					TESTCASETABLE.STORY_VERSION.value(t.getStoryVersion()),
 					TESTCASETABLE.CASE_TITLE.value(t.getCaseTitle()),
@@ -98,7 +102,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 				Update update = update(TESTCASETABLE).set(
 					TESTCASETABLE.PRODUCT_ID.value(t.getProductId()),
 					TESTCASETABLE.MODULE_ID.value(t.getModuleId()),
-					TESTCASETABLE.PATH.value(t.getPath()),
+					TESTCASETABLE.CASE_PATH.value(t.getCasePath()),
 					TESTCASETABLE.STORY_ID.value(t.getStoryId()),
 					TESTCASETABLE.STORY_VERSION.value(t.getStoryVersion()),
 					TESTCASETABLE.CASE_TITLE.value(t.getCaseTitle()),
@@ -163,7 +167,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 		});
 	}
 
-	public List<TestCase> query(TestCase testCase) {
+	public List<TestCase> query(TestCase testCase ,final OrderBy... orderBies) {
 		if(testCase==null){
 			testCase=new TestCase();
 		}
@@ -171,11 +175,11 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(TestCase t) {
-				return selectFrom(TESTCASETABLE).where(
+				Select select = selectFrom(TESTCASETABLE).where(
 				and(
 					TESTCASETABLE.PRODUCT_ID.eq(t.getProductId()),
 					TESTCASETABLE.MODULE_ID.eq(t.getModuleId()),
-					TESTCASETABLE.PATH.eq(t.getPath()),
+					TESTCASETABLE.CASE_PATH.eq(t.getCasePath()),
 					TESTCASETABLE.STORY_ID.eq(t.getStoryId()),
 					TESTCASETABLE.STORY_VERSION.eq(t.getStoryVersion()),
 					TESTCASETABLE.CASE_TITLE.eq(t.getCaseTitle()),
@@ -203,22 +207,23 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 					TESTCASETABLE.CASE_LASTRUNNER.eq(t.getCaseLastRunner()),
 					TESTCASETABLE.CASE_LASTRUNDATE.eq(t.getCaseLastRunDate()),
 					TESTCASETABLE.CASE_LASTRUNRESULT.eq(t.getCaseLastRunResult())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<TestCase> queryPager(int start,int limit ,TestCase testCase) {
+	public Pager<TestCase> queryPager(int start,int limit ,TestCase testCase ,final OrderBy... orderBies) {
 		if(testCase==null){
 			testCase=new TestCase();
 		}
 		return getDslTemplate().queryPager(start, limit, testCase, false, new SelectGenerateCallback<TestCase>() {
 
 			public Select generate(TestCase t) {
-				return MysqlSelect.selectFrom(TESTCASETABLE).where(
+				Select select = MysqlSelect.selectFrom(TESTCASETABLE).where(
 				and(
 					TESTCASETABLE.PRODUCT_ID.eq(t.getProductId()),
 					TESTCASETABLE.MODULE_ID.eq(t.getModuleId()),
-					TESTCASETABLE.PATH.eq(t.getPath()),
+					TESTCASETABLE.CASE_PATH.eq(t.getCasePath()),
 					TESTCASETABLE.STORY_ID.eq(t.getStoryId()),
 					TESTCASETABLE.STORY_VERSION.eq(t.getStoryVersion()),
 					TESTCASETABLE.CASE_TITLE.eq(t.getCaseTitle()),
@@ -246,6 +251,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 					TESTCASETABLE.CASE_LASTRUNNER.eq(t.getCaseLastRunner()),
 					TESTCASETABLE.CASE_LASTRUNDATE.eq(t.getCaseLastRunDate()),
 					TESTCASETABLE.CASE_LASTRUNRESULT.eq(t.getCaseLastRunResult())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -260,7 +266,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 				return insertInto(TESTCASETABLE).values(
 					TESTCASETABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
 					TESTCASETABLE.MODULE_ID.value(new JdbcNamedParameter("moduleId")),
-					TESTCASETABLE.PATH.value(new JdbcNamedParameter("path")),
+					TESTCASETABLE.CASE_PATH.value(new JdbcNamedParameter("casePath")),
 					TESTCASETABLE.STORY_ID.value(new JdbcNamedParameter("storyId")),
 					TESTCASETABLE.STORY_VERSION.value(new JdbcNamedParameter("storyVersion")),
 					TESTCASETABLE.CASE_TITLE.value(new JdbcNamedParameter("caseTitle")),
@@ -306,7 +312,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 				return update(TESTCASETABLE).set(
 					TESTCASETABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
 					TESTCASETABLE.MODULE_ID.value(new JdbcNamedParameter("moduleId")),
-					TESTCASETABLE.PATH.value(new JdbcNamedParameter("path")),
+					TESTCASETABLE.CASE_PATH.value(new JdbcNamedParameter("casePath")),
 					TESTCASETABLE.STORY_ID.value(new JdbcNamedParameter("storyId")),
 					TESTCASETABLE.STORY_VERSION.value(new JdbcNamedParameter("storyVersion")),
 					TESTCASETABLE.CASE_TITLE.value(new JdbcNamedParameter("caseTitle")),
@@ -350,7 +356,7 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 				TESTCASETABLE.CASE_ID.eq(new JdbcNamedParameter("caseId")),
 				TESTCASETABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId")),
 				TESTCASETABLE.MODULE_ID.eq(new JdbcNamedParameter("moduleId")),
-				TESTCASETABLE.PATH.eq(new JdbcNamedParameter("path")),
+				TESTCASETABLE.CASE_PATH.eq(new JdbcNamedParameter("casePath")),
 				TESTCASETABLE.STORY_ID.eq(new JdbcNamedParameter("storyId")),
 				TESTCASETABLE.STORY_VERSION.eq(new JdbcNamedParameter("storyVersion")),
 				TESTCASETABLE.CASE_TITLE.eq(new JdbcNamedParameter("caseTitle")),
@@ -382,4 +388,17 @@ public class TestCaseDaoImpl extends TinyDslDaoSupport implements TestCaseDao {
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

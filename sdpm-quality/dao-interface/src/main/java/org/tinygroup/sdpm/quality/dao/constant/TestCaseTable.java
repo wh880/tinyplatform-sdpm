@@ -46,10 +46,10 @@ public class TestCaseTable extends Table {
 	public final Column MODULE_ID = new Column(this, "module_id");
 
 	/** 
-	 * PATH
+	 * CASE_PATH
 	 * 
 	 */
-	public final Column PATH = new Column(this, "path");
+	public final Column CASE_PATH = new Column(this, "case_path");
 
 	/** 
 	 * 需求ID
@@ -214,8 +214,8 @@ public class TestCaseTable extends Table {
 	public final Column CASE_LASTRUNRESULT = new Column(this, "case_lastRunResult");
 
 
-		private TestCaseTable() {
-			super("testCase");
-		}
+	private TestCaseTable() {
+		super("testCase");
+	}
 
 }

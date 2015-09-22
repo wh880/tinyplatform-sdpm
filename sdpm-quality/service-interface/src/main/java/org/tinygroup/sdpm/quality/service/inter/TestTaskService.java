@@ -28,17 +28,5 @@ public interface TestTaskService {
 	 * @param id
 	 * @return
 	 */
-	int deleteById(Integer id);
-	/**
-	 * 需求关联查询
-	 * @param testtask
-	 * @return
-	 */
-	List<TestTask> findByLinkStory(TestTask testtask);
-	/**
-	 * Bug关联查询
-	 * @param testtask
-	 * @return
-	 */
-	List<TestTask> findByLinkBug(TestTask testtask);
+	int deleteById(int id);
 }

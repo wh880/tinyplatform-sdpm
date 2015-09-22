@@ -262,46 +262,46 @@ public class BugTable extends Table {
 	public final Column CASE_VERSION = new Column(this, "case_version");
 
 	/** 
-	 * RESULT
+	 * BUG_RESULT
 	 * 
 	 */
-	public final Column RESULT = new Column(this, "result");
+	public final Column BUG_RESULT = new Column(this, "bug_result");
 
 	/** 
-	 * REPO
+	 * BUG_REPO
 	 * 
 	 */
-	public final Column REPO = new Column(this, "repo");
+	public final Column BUG_REPO = new Column(this, "bug_repo");
 
 	/** 
-	 * ENTRY
+	 * BUG_ENTRY
 	 * 
 	 */
-	public final Column ENTRY = new Column(this, "entry");
+	public final Column BUG_ENTRY = new Column(this, "bug_entry");
 
 	/** 
-	 * LINES
+	 * BUG_LINES
 	 * 
 	 */
-	public final Column LINES = new Column(this, "lines");
+	public final Column BUG_LINES = new Column(this, "bug_lines");
 
 	/** 
-	 * V1
+	 * BUG_V1
 	 * 
 	 */
-	public final Column V1 = new Column(this, "v1");
+	public final Column BUG_V1 = new Column(this, "bug_v1");
 
 	/** 
-	 * V2
+	 * BUG_V2
 	 * 
 	 */
-	public final Column V2 = new Column(this, "v2");
+	public final Column BUG_V2 = new Column(this, "bug_v2");
 
 	/** 
-	 * REPOTYPE
+	 * BUG_REPOTYPE
 	 * 
 	 */
-	public final Column REPOTYPE = new Column(this, "repoType");
+	public final Column BUG_REPOTYPE = new Column(this, "bug_repoType");
 
 	/** 
 	 * 测试任务编号
@@ -328,8 +328,8 @@ public class BugTable extends Table {
 	public final Column DELETED = new Column(this, "deleted");
 
 
-		private BugTable() {
-			super("bug");
-		}
+	private BugTable() {
+		super("bug");
+	}
 
 }

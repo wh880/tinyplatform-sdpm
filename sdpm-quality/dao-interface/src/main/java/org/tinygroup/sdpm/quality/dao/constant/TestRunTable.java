@@ -82,8 +82,8 @@ public class TestRunTable extends Table {
 	public final Column TESTRUN_STATUS = new Column(this, "testRun_status");
 
 
-		private TestRunTable() {
-			super("testRun");
-		}
+	private TestRunTable() {
+		super("testRun");
+	}
 
 }

@@ -25,6 +25,8 @@ import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.tinygroup.tinysqldsl.Delete;
@@ -35,8 +37,10 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.CaseStep;
 import org.tinygroup.sdpm.quality.dao.CaseStepDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -111,7 +115,7 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 		});
 	}
 
-	public List<CaseStep> query(CaseStep caseStep) {
+	public List<CaseStep> query(CaseStep caseStep ,final OrderBy... orderBies) {
 		if(caseStep==null){
 			caseStep=new CaseStep();
 		}
@@ -119,29 +123,31 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(CaseStep t) {
-				return selectFrom(CASESTEPTABLE).where(
+				Select select = selectFrom(CASESTEPTABLE).where(
 				and(
 					CASESTEPTABLE.CASE_ID.eq(t.getCaseId()),
 					CASESTEPTABLE.CASE_VERSION.eq(t.getCaseVersion()),
 					CASESTEPTABLE.CASESTEP_DESC.eq(t.getCaseStepDesc()),
 					CASESTEPTABLE.CASESTEP_EXPECT.eq(t.getCaseStepExpect())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<CaseStep> queryPager(int start,int limit ,CaseStep caseStep) {
+	public Pager<CaseStep> queryPager(int start,int limit ,CaseStep caseStep ,final OrderBy... orderBies) {
 		if(caseStep==null){
 			caseStep=new CaseStep();
 		}
 		return getDslTemplate().queryPager(start, limit, caseStep, false, new SelectGenerateCallback<CaseStep>() {
 
 			public Select generate(CaseStep t) {
-				return MysqlSelect.selectFrom(CASESTEPTABLE).where(
+				Select select = MysqlSelect.selectFrom(CASESTEPTABLE).where(
 				and(
 					CASESTEPTABLE.CASE_ID.eq(t.getCaseId()),
 					CASESTEPTABLE.CASE_VERSION.eq(t.getCaseVersion()),
 					CASESTEPTABLE.CASESTEP_DESC.eq(t.getCaseStepDesc()),
 					CASESTEPTABLE.CASESTEP_EXPECT.eq(t.getCaseStepExpect())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -200,4 +206,17 @@ public class CaseStepDaoImpl extends TinyDslDaoSupport implements CaseStepDao {
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

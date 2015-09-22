@@ -25,6 +25,8 @@ import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.tinygroup.tinysqldsl.Delete;
@@ -35,8 +37,10 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.Bug;
 import org.tinygroup.sdpm.quality.dao.BugDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -92,13 +96,13 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.LINK_BUG.value(t.getLinkBug()),
 					BUGTABLE.LINK_CASE.value(t.getLinkCase()),
 					BUGTABLE.CASE_VERSION.value(t.getCaseVersion()),
-					BUGTABLE.RESULT.value(t.getResult()),
-					BUGTABLE.REPO.value(t.getRepo()),
-					BUGTABLE.ENTRY.value(t.getEntry()),
-					BUGTABLE.LINES.value(t.getLines()),
-					BUGTABLE.V1.value(t.getV1()),
-					BUGTABLE.V2.value(t.getV2()),
-					BUGTABLE.REPOTYPE.value(t.getRepoType()),
+					BUGTABLE.BUG_RESULT.value(t.getBugResult()),
+					BUGTABLE.BUG_REPO.value(t.getBugRepo()),
+					BUGTABLE.BUG_ENTRY.value(t.getBugEntry()),
+					BUGTABLE.BUG_LINES.value(t.getBugLines()),
+					BUGTABLE.BUG_V1.value(t.getBugV1()),
+					BUGTABLE.BUG_V2.value(t.getBugV2()),
+					BUGTABLE.BUG_REPOTYPE.value(t.getBugRepoType()),
 					BUGTABLE.TESTTASK.value(t.getTesttask()),
 					BUGTABLE.BUG_LASTEDITEDBY.value(t.getBugLastEditedBy()),
 					BUGTABLE.BUG_LASTEDITEDDATE.value(t.getBugLastEditedDate()),
@@ -153,13 +157,13 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.LINK_BUG.value(t.getLinkBug()),
 					BUGTABLE.LINK_CASE.value(t.getLinkCase()),
 					BUGTABLE.CASE_VERSION.value(t.getCaseVersion()),
-					BUGTABLE.RESULT.value(t.getResult()),
-					BUGTABLE.REPO.value(t.getRepo()),
-					BUGTABLE.ENTRY.value(t.getEntry()),
-					BUGTABLE.LINES.value(t.getLines()),
-					BUGTABLE.V1.value(t.getV1()),
-					BUGTABLE.V2.value(t.getV2()),
-					BUGTABLE.REPOTYPE.value(t.getRepoType()),
+					BUGTABLE.BUG_RESULT.value(t.getBugResult()),
+					BUGTABLE.BUG_REPO.value(t.getBugRepo()),
+					BUGTABLE.BUG_ENTRY.value(t.getBugEntry()),
+					BUGTABLE.BUG_LINES.value(t.getBugLines()),
+					BUGTABLE.BUG_V1.value(t.getBugV1()),
+					BUGTABLE.BUG_V2.value(t.getBugV2()),
+					BUGTABLE.BUG_REPOTYPE.value(t.getBugRepoType()),
 					BUGTABLE.TESTTASK.value(t.getTesttask()),
 					BUGTABLE.BUG_LASTEDITEDBY.value(t.getBugLastEditedBy()),
 					BUGTABLE.BUG_LASTEDITEDDATE.value(t.getBugLastEditedDate()),
@@ -201,7 +205,7 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 		});
 	}
 
-	public List<Bug> query(Bug bug) {
+	public List<Bug> query(Bug bug ,final OrderBy... orderBies) {
 		if(bug==null){
 			bug=new Bug();
 		}
@@ -209,7 +213,7 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(Bug t) {
-				return selectFrom(BUGTABLE).where(
+				Select select = selectFrom(BUGTABLE).where(
 				and(
 					BUGTABLE.PRODUCT_ID.eq(t.getProductId()),
 					BUGTABLE.MODULE_ID.eq(t.getModuleId()),
@@ -249,29 +253,30 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.LINK_BUG.eq(t.getLinkBug()),
 					BUGTABLE.LINK_CASE.eq(t.getLinkCase()),
 					BUGTABLE.CASE_VERSION.eq(t.getCaseVersion()),
-					BUGTABLE.RESULT.eq(t.getResult()),
-					BUGTABLE.REPO.eq(t.getRepo()),
-					BUGTABLE.ENTRY.eq(t.getEntry()),
-					BUGTABLE.LINES.eq(t.getLines()),
-					BUGTABLE.V1.eq(t.getV1()),
-					BUGTABLE.V2.eq(t.getV2()),
-					BUGTABLE.REPOTYPE.eq(t.getRepoType()),
+					BUGTABLE.BUG_RESULT.eq(t.getBugResult()),
+					BUGTABLE.BUG_REPO.eq(t.getBugRepo()),
+					BUGTABLE.BUG_ENTRY.eq(t.getBugEntry()),
+					BUGTABLE.BUG_LINES.eq(t.getBugLines()),
+					BUGTABLE.BUG_V1.eq(t.getBugV1()),
+					BUGTABLE.BUG_V2.eq(t.getBugV2()),
+					BUGTABLE.BUG_REPOTYPE.eq(t.getBugRepoType()),
 					BUGTABLE.TESTTASK.eq(t.getTesttask()),
 					BUGTABLE.BUG_LASTEDITEDBY.eq(t.getBugLastEditedBy()),
 					BUGTABLE.BUG_LASTEDITEDDATE.eq(t.getBugLastEditedDate()),
 					BUGTABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<Bug> queryPager(int start,int limit ,Bug bug) {
+	public Pager<Bug> queryPager(int start,int limit ,Bug bug ,final OrderBy... orderBies) {
 		if(bug==null){
 			bug=new Bug();
 		}
 		return getDslTemplate().queryPager(start, limit, bug, false, new SelectGenerateCallback<Bug>() {
 
 			public Select generate(Bug t) {
-				return MysqlSelect.selectFrom(BUGTABLE).where(
+				Select select = MysqlSelect.selectFrom(BUGTABLE).where(
 				and(
 					BUGTABLE.PRODUCT_ID.eq(t.getProductId()),
 					BUGTABLE.MODULE_ID.eq(t.getModuleId()),
@@ -311,17 +316,18 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.LINK_BUG.eq(t.getLinkBug()),
 					BUGTABLE.LINK_CASE.eq(t.getLinkCase()),
 					BUGTABLE.CASE_VERSION.eq(t.getCaseVersion()),
-					BUGTABLE.RESULT.eq(t.getResult()),
-					BUGTABLE.REPO.eq(t.getRepo()),
-					BUGTABLE.ENTRY.eq(t.getEntry()),
-					BUGTABLE.LINES.eq(t.getLines()),
-					BUGTABLE.V1.eq(t.getV1()),
-					BUGTABLE.V2.eq(t.getV2()),
-					BUGTABLE.REPOTYPE.eq(t.getRepoType()),
+					BUGTABLE.BUG_RESULT.eq(t.getBugResult()),
+					BUGTABLE.BUG_REPO.eq(t.getBugRepo()),
+					BUGTABLE.BUG_ENTRY.eq(t.getBugEntry()),
+					BUGTABLE.BUG_LINES.eq(t.getBugLines()),
+					BUGTABLE.BUG_V1.eq(t.getBugV1()),
+					BUGTABLE.BUG_V2.eq(t.getBugV2()),
+					BUGTABLE.BUG_REPOTYPE.eq(t.getBugRepoType()),
 					BUGTABLE.TESTTASK.eq(t.getTesttask()),
 					BUGTABLE.BUG_LASTEDITEDBY.eq(t.getBugLastEditedBy()),
 					BUGTABLE.BUG_LASTEDITEDDATE.eq(t.getBugLastEditedDate()),
 					BUGTABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -372,13 +378,13 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.LINK_BUG.value(new JdbcNamedParameter("linkBug")),
 					BUGTABLE.LINK_CASE.value(new JdbcNamedParameter("linkCase")),
 					BUGTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
-					BUGTABLE.RESULT.value(new JdbcNamedParameter("result")),
-					BUGTABLE.REPO.value(new JdbcNamedParameter("repo")),
-					BUGTABLE.ENTRY.value(new JdbcNamedParameter("entry")),
-					BUGTABLE.LINES.value(new JdbcNamedParameter("lines")),
-					BUGTABLE.V1.value(new JdbcNamedParameter("v1")),
-					BUGTABLE.V2.value(new JdbcNamedParameter("v2")),
-					BUGTABLE.REPOTYPE.value(new JdbcNamedParameter("repoType")),
+					BUGTABLE.BUG_RESULT.value(new JdbcNamedParameter("bugResult")),
+					BUGTABLE.BUG_REPO.value(new JdbcNamedParameter("bugRepo")),
+					BUGTABLE.BUG_ENTRY.value(new JdbcNamedParameter("bugEntry")),
+					BUGTABLE.BUG_LINES.value(new JdbcNamedParameter("bugLines")),
+					BUGTABLE.BUG_V1.value(new JdbcNamedParameter("bugV1")),
+					BUGTABLE.BUG_V2.value(new JdbcNamedParameter("bugV2")),
+					BUGTABLE.BUG_REPOTYPE.value(new JdbcNamedParameter("bugRepoType")),
 					BUGTABLE.TESTTASK.value(new JdbcNamedParameter("testtask")),
 					BUGTABLE.BUG_LASTEDITEDBY.value(new JdbcNamedParameter("bugLastEditedBy")),
 					BUGTABLE.BUG_LASTEDITEDDATE.value(new JdbcNamedParameter("bugLastEditedDate")),
@@ -437,13 +443,13 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 					BUGTABLE.LINK_BUG.value(new JdbcNamedParameter("linkBug")),
 					BUGTABLE.LINK_CASE.value(new JdbcNamedParameter("linkCase")),
 					BUGTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
-					BUGTABLE.RESULT.value(new JdbcNamedParameter("result")),
-					BUGTABLE.REPO.value(new JdbcNamedParameter("repo")),
-					BUGTABLE.ENTRY.value(new JdbcNamedParameter("entry")),
-					BUGTABLE.LINES.value(new JdbcNamedParameter("lines")),
-					BUGTABLE.V1.value(new JdbcNamedParameter("v1")),
-					BUGTABLE.V2.value(new JdbcNamedParameter("v2")),
-					BUGTABLE.REPOTYPE.value(new JdbcNamedParameter("repoType")),
+					BUGTABLE.BUG_RESULT.value(new JdbcNamedParameter("bugResult")),
+					BUGTABLE.BUG_REPO.value(new JdbcNamedParameter("bugRepo")),
+					BUGTABLE.BUG_ENTRY.value(new JdbcNamedParameter("bugEntry")),
+					BUGTABLE.BUG_LINES.value(new JdbcNamedParameter("bugLines")),
+					BUGTABLE.BUG_V1.value(new JdbcNamedParameter("bugV1")),
+					BUGTABLE.BUG_V2.value(new JdbcNamedParameter("bugV2")),
+					BUGTABLE.BUG_REPOTYPE.value(new JdbcNamedParameter("bugRepoType")),
 					BUGTABLE.TESTTASK.value(new JdbcNamedParameter("testtask")),
 					BUGTABLE.BUG_LASTEDITEDBY.value(new JdbcNamedParameter("bugLastEditedBy")),
 					BUGTABLE.BUG_LASTEDITEDDATE.value(new JdbcNamedParameter("bugLastEditedDate")),
@@ -500,13 +506,13 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 				BUGTABLE.LINK_BUG.eq(new JdbcNamedParameter("linkBug")),
 				BUGTABLE.LINK_CASE.eq(new JdbcNamedParameter("linkCase")),
 				BUGTABLE.CASE_VERSION.eq(new JdbcNamedParameter("caseVersion")),
-				BUGTABLE.RESULT.eq(new JdbcNamedParameter("result")),
-				BUGTABLE.REPO.eq(new JdbcNamedParameter("repo")),
-				BUGTABLE.ENTRY.eq(new JdbcNamedParameter("entry")),
-				BUGTABLE.LINES.eq(new JdbcNamedParameter("lines")),
-				BUGTABLE.V1.eq(new JdbcNamedParameter("v1")),
-				BUGTABLE.V2.eq(new JdbcNamedParameter("v2")),
-				BUGTABLE.REPOTYPE.eq(new JdbcNamedParameter("repoType")),
+				BUGTABLE.BUG_RESULT.eq(new JdbcNamedParameter("bugResult")),
+				BUGTABLE.BUG_REPO.eq(new JdbcNamedParameter("bugRepo")),
+				BUGTABLE.BUG_ENTRY.eq(new JdbcNamedParameter("bugEntry")),
+				BUGTABLE.BUG_LINES.eq(new JdbcNamedParameter("bugLines")),
+				BUGTABLE.BUG_V1.eq(new JdbcNamedParameter("bugV1")),
+				BUGTABLE.BUG_V2.eq(new JdbcNamedParameter("bugV2")),
+				BUGTABLE.BUG_REPOTYPE.eq(new JdbcNamedParameter("bugRepoType")),
 				BUGTABLE.TESTTASK.eq(new JdbcNamedParameter("testtask")),
 				BUGTABLE.BUG_LASTEDITEDBY.eq(new JdbcNamedParameter("bugLastEditedBy")),
 				BUGTABLE.BUG_LASTEDITEDDATE.eq(new JdbcNamedParameter("bugLastEditedDate")),
@@ -515,4 +521,17 @@ public class BugDaoImpl extends TinyDslDaoSupport implements BugDao {
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

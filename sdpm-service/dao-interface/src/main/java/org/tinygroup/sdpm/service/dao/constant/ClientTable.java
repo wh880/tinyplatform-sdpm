@@ -101,8 +101,8 @@ public class ClientTable extends Table {
 	public final Column DELETED = new Column(this, "deleted");
 
 
-		private ClientTable() {
-			super("client");
-		}
+	private ClientTable() {
+		super("client");
+	}
 
 }

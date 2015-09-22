@@ -64,8 +64,8 @@ public class FaqTypeTable extends Table {
 	public final Column DELETED = new Column(this, "deleted");
 
 
-		private FaqTypeTable() {
-			super("faq_type");
-		}
+	private FaqTypeTable() {
+		super("faq_type");
+	}
 
 }

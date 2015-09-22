@@ -35,16 +35,16 @@
     <nick-name name="link_case" title="相关用例" id="24ac4d6214c04529b4df86d1b7a2e53d"/>
   </standard-field>
   <standard-field id="e426ffcf06bd4cc2be2bf6c6b5aef436" name="case_version" title="关联用例版本" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
-  <standard-field id="39620b293f4f4c7580ab9a2adcd09baa" name="result" title="RESULT" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
-  <standard-field id="0b825f5b94964c9bb897b6d7e46bc521" name="repo" title="REPO" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
-  <standard-field id="6b9f288452bf434b800682d537a0fe46" name="entry" title="ENTRY" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
-  <standard-field id="83e5fcc53b104488918293c7d077635c" name="lines" title="LINES" business-type-id="286a6bca92b34779bcb6fc8809f0a666" default=""/>
-  <standard-field id="5eaade48b6504899be41bb710c6a96a9" name="v1" title="V1" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default=""/>
-  <standard-field id="94b9073805c646418fe2e5f7e1291b35" name="repoType" title="REPOTYPE" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="39620b293f4f4c7580ab9a2adcd09baa" name="bug_result" title="BUG_RESULT" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="0b825f5b94964c9bb897b6d7e46bc521" name="bug_repo" title="BUG_REPO" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="6b9f288452bf434b800682d537a0fe46" name="bug_entry" title="BUG_ENTRY" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="83e5fcc53b104488918293c7d077635c" name="bug_lines" title="BUG_LINES" business-type-id="286a6bca92b34779bcb6fc8809f0a666" default=""/>
+  <standard-field id="5eaade48b6504899be41bb710c6a96a9" name="bug_v1" title="BUG_V1" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default=""/>
+  <standard-field id="94b9073805c646418fe2e5f7e1291b35" name="bug_repoType" title="BUG_REPOTYPE" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="5fe0035446904292a5ae9844f5d75249" name="testtask" title="测试任务编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
   <standard-field id="f6a7e4ea3f6e48de8db3d22ffc1ef267" name="bug_lastEditedBy" title="最后修改者" business-type-id="095e594e1550424b9643c7e2279e85be" default=""/>
   <standard-field id="48706c454e294123bb6eeba92516c9bb" name="bug_lastEditedDate" title="最后修改日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default=""/>
-  <standard-field id="355ee3636b224f6d9979e38fb58c87a1" name="path" title="PATH" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
+  <standard-field id="355ee3636b224f6d9979e38fb58c87a1" name="case_path" title="CASE_PATH" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
   <standard-field id="1840bfb38b5e474f84b0e4bdc81207af" name="case_title" title="用例标题" business-type-id="27ebfcdc558c477da425a46e566d4637" default=""/>
   <standard-field id="e7971c08ed7f475d93efb3ba70b6cfad" name="case_precondition" title="前置条件" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" default=""/>
   <standard-field id="513f18f952134e90b0169f185d12cb8c" name="case_keywords" title="关键词" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
@@ -69,9 +69,9 @@
   <standard-field id="9fa084dd34924126a1d0bb8db870bc2a" name="caseStep_id" title="用例步骤编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="f188b6f154c548fd80abbeb903d4dcb7" name="caseStep_desc" title="描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" default=""/>
   <standard-field id="92cd0085df034b15928f9d31fef31c57" name="caseStep_expect" title="用例预期" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
-  <standard-field id="5c4ed17618134ece8c869756c3aa5292" name="v2" title="V2" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default=""/>
+  <standard-field id="5c4ed17618134ece8c869756c3aa5292" name="bug_v2" title="BUG_V2" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default=""/>
   <standard-field id="682cae09812d41c6b726a3d7c7a2e770" name="testResult_id" title="测试结果" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
-  <standard-field id="c076c31364c64d809887f04dcc9c0318" name="run" title="RUN" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="c076c31364c64d809887f04dcc9c0318" name="testresult_run" title="TESTRESULT_RUN" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="5a140e9f3c3e4fd88ba6d8895606344d" name="case_Result" title="测试结果" business-type-id="095e594e1550424b9643c7e2279e85be" default="-0"/>
   <standard-field id="142d02cd9d80455f8863beef028354e5" name="case_stepresults" title="用例步骤结果" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" default=""/>
   <standard-field id="8555ec8d0f9842848790d0b62faf31d8" name="testResult_lastRunner" title="最后执行人" business-type-id="095e594e1550424b9643c7e2279e85be"/>

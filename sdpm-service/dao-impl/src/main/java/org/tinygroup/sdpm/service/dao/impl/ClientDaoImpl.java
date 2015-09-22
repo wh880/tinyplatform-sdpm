@@ -25,10 +25,10 @@ import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -37,8 +37,10 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.service.dao.pojo.Client;
 import org.tinygroup.sdpm.service.dao.ClientDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -48,8 +50,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-@Repository
-@LogClass("service")
+
 public class ClientDaoImpl extends TinyDslDaoSupport implements ClientDao {
 
 	public Client add(Client client) {
@@ -128,7 +129,7 @@ public class ClientDaoImpl extends TinyDslDaoSupport implements ClientDao {
 		});
 	}
 
-	public List<Client> query(Client client) {
+	public List<Client> query(Client client ,final OrderBy... orderBies) {
 		if(client==null){
 			client=new Client();
 		}
@@ -136,7 +137,7 @@ public class ClientDaoImpl extends TinyDslDaoSupport implements ClientDao {
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(Client t) {
-				return selectFrom(CLIENTTABLE).where(
+				Select select = selectFrom(CLIENTTABLE).where(
 				and(
 					CLIENTTABLE.CLIENT_NAME.eq(t.getClientName()),
 					CLIENTTABLE.CLIENT_SPEC.eq(t.getClientSpec()),
@@ -149,18 +150,19 @@ public class ClientDaoImpl extends TinyDslDaoSupport implements ClientDao {
 					CLIENTTABLE.USER_ACCOUNT.eq(t.getUserAccount()),
 					CLIENTTABLE.USER_POST.eq(t.getUserPost()),
 					CLIENTTABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<Client> queryPager(int start,int limit ,Client client) {
+	public Pager<Client> queryPager(int start,int limit ,Client client ,final OrderBy... orderBies) {
 		if(client==null){
 			client=new Client();
 		}
 		return getDslTemplate().queryPager(start, limit, client, false, new SelectGenerateCallback<Client>() {
 
 			public Select generate(Client t) {
-				return MysqlSelect.selectFrom(CLIENTTABLE).where(
+				Select select = MysqlSelect.selectFrom(CLIENTTABLE).where(
 				and(
 					CLIENTTABLE.CLIENT_NAME.eq(t.getClientName()),
 					CLIENTTABLE.CLIENT_SPEC.eq(t.getClientSpec()),
@@ -173,6 +175,7 @@ public class ClientDaoImpl extends TinyDslDaoSupport implements ClientDao {
 					CLIENTTABLE.USER_ACCOUNT.eq(t.getUserAccount()),
 					CLIENTTABLE.USER_POST.eq(t.getUserPost()),
 					CLIENTTABLE.DELETED.eq(t.getDeleted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -252,4 +255,17 @@ public class ClientDaoImpl extends TinyDslDaoSupport implements ClientDao {
 		});
 	}
 
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

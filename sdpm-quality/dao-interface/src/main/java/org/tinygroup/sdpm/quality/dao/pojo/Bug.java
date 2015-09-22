@@ -259,46 +259,46 @@ public class Bug {
 	private Integer caseVersion;
 
 	/** 
-	 * RESULT
+	 * BUG_RESULT
 	 * 
 	 */
-	private Integer result;
+	private Integer bugResult;
 
 	/** 
-	 * REPO
+	 * BUG_REPO
 	 * 
 	 */
-	private Integer repo;
+	private Integer bugRepo;
 
 	/** 
-	 * ENTRY
+	 * BUG_ENTRY
 	 * 
 	 */
-	private String entry;
+	private String bugEntry;
 
 	/** 
-	 * LINES
+	 * BUG_LINES
 	 * 
 	 */
-	private String lines;
+	private String bugLines;
 
 	/** 
-	 * V1
+	 * BUG_V1
 	 * 
 	 */
-	private String v1;
+	private String bugV1;
 
 	/** 
-	 * V2
+	 * BUG_V2
 	 * 
 	 */
-	private String v2;
+	private String bugV2;
 
 	/** 
-	 * REPOTYPE
+	 * BUG_REPOTYPE
 	 * 
 	 */
-	private String repoType;
+	private String bugRepoType;
 
 	/** 
 	 * 测试任务编号
@@ -637,60 +637,60 @@ public class Bug {
 		return caseVersion;
 	}
 
-	public void setResult(Integer result){
-		this. result = result;
+	public void setBugResult(Integer bugResult){
+		this. bugResult = bugResult;
 	}
 
-	public Integer getResult(){
-		return result;
+	public Integer getBugResult(){
+		return bugResult;
 	}
 
-	public void setRepo(Integer repo){
-		this. repo = repo;
+	public void setBugRepo(Integer bugRepo){
+		this. bugRepo = bugRepo;
 	}
 
-	public Integer getRepo(){
-		return repo;
+	public Integer getBugRepo(){
+		return bugRepo;
 	}
 
-	public void setEntry(String entry){
-		this. entry = entry;
+	public void setBugEntry(String bugEntry){
+		this. bugEntry = bugEntry;
 	}
 
-	public String getEntry(){
-		return entry;
+	public String getBugEntry(){
+		return bugEntry;
 	}
 
-	public void setLines(String lines){
-		this. lines = lines;
+	public void setBugLines(String bugLines){
+		this. bugLines = bugLines;
 	}
 
-	public String getLines(){
-		return lines;
+	public String getBugLines(){
+		return bugLines;
 	}
 
-	public void setV1(String v1){
-		this. v1 = v1;
+	public void setBugV1(String bugV1){
+		this. bugV1 = bugV1;
 	}
 
-	public String getV1(){
-		return v1;
+	public String getBugV1(){
+		return bugV1;
 	}
 
-	public void setV2(String v2){
-		this. v2 = v2;
+	public void setBugV2(String bugV2){
+		this. bugV2 = bugV2;
 	}
 
-	public String getV2(){
-		return v2;
+	public String getBugV2(){
+		return bugV2;
 	}
 
-	public void setRepoType(String repoType){
-		this. repoType = repoType;
+	public void setBugRepoType(String bugRepoType){
+		this. bugRepoType = bugRepoType;
 	}
 
-	public String getRepoType(){
-		return repoType;
+	public String getBugRepoType(){
+		return bugRepoType;
 	}
 
 	public void setTesttask(Integer testtask){
