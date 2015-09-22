@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -40,9 +41,19 @@ public class StoryManagerImpl implements StoryManager{
 		return productStoryDao.getByKey(storyId);
 	}
 
-	public List<ProductStory> findList(ProductStory story) {
+	public int[] updateBatch(List<ProductStory> stories) {
+		
+		return productStoryDao.batchUpdate(stories);
+	}
 
-		return productStoryDao.query(story);
+	public List<ProductStory> findList(ProductStory story,String columnName,boolean asc) {
+		
+		return productStoryDao.query(story, new OrderBy(columnName, asc));
+	}
+
+	public Pager<ProductStory> findPager(int start, int limit, ProductStory story,String columnName,boolean asc) {
+		
+		return productStoryDao.queryPager(start, limit, story, new OrderBy(columnName, asc));
 	}
 	
 	

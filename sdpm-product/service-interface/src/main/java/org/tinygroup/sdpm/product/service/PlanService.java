@@ -2,7 +2,9 @@ package org.tinygroup.sdpm.product.service;
 
 import java.util.List;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.tinysqldsl.Pager;
 
 
 public interface PlanService{
@@ -18,6 +20,12 @@ public interface PlanService{
 	 * @ruturn
 	 */
 	int updatePlan(ProductPlan plan);
+	/**
+	 * 批量编辑
+	 * @param plan
+	 * @return
+	 */
+	int[] updateBatch(List<ProductPlan> plan);
 	
 	/**
 	 * 根据计划ID删除计划
@@ -36,36 +44,18 @@ public interface PlanService{
 	/**
 	 * 根据对象查找
 	 * @param plan
+	 * @param orderBies
 	 * @return
 	 */
-	List<ProductPlan> findPlanList(ProductPlan plan);
-	
-	
-	/*List<ProductPlan> findPlan(PagerPojo pagerPojo, ProductPlan plan);
-
-	*//**
-	 * 排序查询
-	 * @param field
-	 * @param sorting
-	 * @param plan
-	 * @return
-	 *//*
-	List<ProductPlan> findPlansort(String field,String sorting,ProductPlan plan);
-	*//**
-	 * 分页查询
-	 * @param currentPage
+	List<ProductPlan> findPlanList(ProductPlan plan,String columnName,boolean asc);
+	/**
+	 * 分页查询（排序）
+	 * @param start
 	 * @param limit
 	 * @param plan
+	 * @param orderBies
 	 * @return
-	 *//*
-	List<Plan> findStoryPager(int currentPage,int limit,Plan plan);
-
-	*//**
-	 * 分页查找
-	 * @param currentPage
-	 * @param limit
-	 * @param plan
-	 * @return
-	 *//*
-	Pager<Plan> findPlan(int currentPage,int limit ,Plan plan);*/
+	 */
+	Pager<ProductPlan> findProductPlanPager(int start,int limit,ProductPlan plan,String columnName,boolean asc);
+	
 }
