@@ -94,8 +94,8 @@ public class OrgCompanyTable extends Table {
 	public final Column ORG_COMPANY_DELETED = new Column(this, "org_company_deleted");
 
 
-		private OrgCompanyTable() {
-			super("org_company");
-		}
+	private OrgCompanyTable() {
+		super("org_company");
+	}
 
 }

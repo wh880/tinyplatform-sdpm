@@ -52,8 +52,8 @@ public class OrgRoldTable extends Table {
 	public final Column DELETED = new Column(this, "deleted");
 
 
-		private OrgRoldTable() {
-			super("org_rold");
-		}
+	private OrgRoldTable() {
+		super("org_rold");
+	}
 
 }

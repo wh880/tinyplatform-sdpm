@@ -1,397 +1,398 @@
 /**
- * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- * <p>
- * Licensed under the GPL, Version 3.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/gpl.html
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *  Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
+ *
+ *  Licensed under the GPL, Version 3.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *       http://www.gnu.org/licenses/gpl.html
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
  */
 
 package org.tinygroup.sdpm.org.dao.pojo;
 
-import java.io.Serializable;
-
-/**
+/** 
  * 用户表
- *
+ * 
  */
-public class OrgUser implements Serializable{
+public class OrgUser {
 
-    public static String DELETE_YES = "1";
-    public static String DELETE_NO = "0";
-    /**
-     * 用户编号
-     */
-    private String orgUserId;
-    /**
-     * 部门编号
-     *
-     */
-    private Integer orgDeptId;
-    /**
-     * 用户名
-     *
-     */
-    private String orgUserAccount;
-    /**
-     * 密码
-     *
-     */
-    private String orgUserPassword;
-    /**
-     * 职位
-     *
-     */
-    private String orgUserRole;
-    /**
-     * 真实姓名
-     *
-     */
-    private String orgUserRealName;
-    /**
-     * 昵称
-     *
-     */
-    private String orgUserNickname;
-    /**
-     * 源代码账号
-     *
-     */
-    private String orgUserSubmitter;
-    /**
-     * 头像
-     *
-     */
-    private String orgUserAvatar;
-    /**
-     * 出生日期
-     *
-     */
-    private String orgUserBirthday;
-    /**
-     * 性别
-     *
-     */
-    private String orgUserGender;
-    /**
-     * 邮箱
-     *
-     */
-    private String orgUserEmail;
-    /**
-     * Skype
-     *
-     */
-    private String orgUserSKYPE;
-    /**
-     * QQ
-     *
-     */
-    private String orgUserQQ;
-    /**
-     * 微信
-     *
-     */
-    private String orgUserYahoo;
-    /**
-     * Gtalk
-     *
-     */
-    private String orgUserGTalk;
-    /**
-     * 旺旺
-     *
-     */
-    private String orgUserWANGWANG;
-    /**
-     * 手机
-     *
-     */
-    private String orgUserMobile;
-    /**
-     * 电话
-     *
-     */
-    private String orgUserPhone;
-    /**
-     * 通讯地址
-     *
-     */
-    private String orgUserAddress;
-    /**
-     * 邮编
-     *
-     */
-    private String orgUserZipCode;
-    /**
-     * 加入日期
-     *
-     */
-    private String orgUserJoin;
-    /**
-     * 访问次数
-     *
-     */
-    private Integer orgUserVisits;
-    /**
-     * 最后IP
-     *
-     */
-    private String orgUserIp;
-    /**
-     * 最后登录
-     *
-     */
-    private Integer orgUserLast;
-    /**
-     * 失败次数
-     *
-     */
-    private Integer orgUserFails;
-    /**
-     * 上次锁定时间
-     *
-     */
-    private String orgUserLocked;
-    /**
-     * 是否删除
-     *
-     */
-    private String orgUserDeleted;
+	/**
+	 * 用户编号
+	 */
+	private String orgUserId;
 
-    public OrgUser() {
-        setOrgUserDeleted(DELETE_NO);
-    }
+	/**
+	 * 部门编号
+	 */
+	private Integer orgDeptId;
 
-    public String getOrgUserId() {
-        return orgUserId;
-    }
+	/**
+	 * 用户名
+	 */
+	private String orgUserAccount;
 
-    public void setOrgUserId(String orgUserId) {
-        this.orgUserId = orgUserId;
-    }
+	/**
+	 * 密码
+	 */
+	private String orgUserPassword;
 
-    public Integer getOrgDeptId() {
-        return orgDeptId;
-    }
+	/**
+	 * 职位
+	 */
+	private String orgUserRole;
 
-    public void setOrgDeptId(Integer orgDeptId) {
-        this.orgDeptId = orgDeptId;
-    }
+	/**
+	 * 真实姓名
+	 */
+	private String orgUserRealName;
 
-    public String getOrgUserAccount() {
-        return orgUserAccount;
-    }
+	/**
+	 * 昵称
+	 */
+	private String orgUserNickname;
 
-    public void setOrgUserAccount(String orgUserAccount) {
-        this.orgUserAccount = orgUserAccount;
-    }
+	/**
+	 * 源代码账号
+	 */
+	private String orgUserSubmitter;
 
-    public String getOrgUserPassword() {
-        return orgUserPassword;
-    }
+	/**
+	 * 头像
+	 */
+	private String orgUserAvatar;
 
-    public void setOrgUserPassword(String orgUserPassword) {
-        this.orgUserPassword = orgUserPassword;
-    }
+	/**
+	 * 出生日期
+	 */
+	private String orgUserBirthday;
 
-    public String getOrgUserRole() {
-        return orgUserRole;
-    }
+	/**
+	 * 性别
+	 */
+	private String orgUserGender;
 
-    public void setOrgUserRole(String orgUserRole) {
-        this.orgUserRole = orgUserRole;
-    }
+	/**
+	 * 邮箱
+	 */
+	private String orgUserEmail;
 
-    public String getOrgUserRealName() {
-        return orgUserRealName;
-    }
+	/**
+	 * Skype
+	 */
+	private String orgUserSKYPE;
 
-    public void setOrgUserRealName(String orgUserRealName) {
-        this.orgUserRealName = orgUserRealName;
-    }
+	/**
+	 * QQ
+	 */
+	private String orgUserQQ;
 
-    public String getOrgUserNickname() {
-        return orgUserNickname;
-    }
+	/**
+	 * 雅虎通
+	 */
+	private String orgUserYahoo;
 
-    public void setOrgUserNickname(String orgUserNickname) {
-        this.orgUserNickname = orgUserNickname;
-    }
+	/**
+	 * Gtalk
+	 */
+	private String orgUserGTalk;
 
-    public String getOrgUserSubmitter() {
-        return orgUserSubmitter;
-    }
+	/**
+	 * 旺旺
+	 */
+	private String orgUserWANGWANG;
 
-    public void setOrgUserSubmitter(String orgUserSubmitter) {
-        this.orgUserSubmitter = orgUserSubmitter;
-    }
+	/**
+	 * 手机
+	 */
+	private String orgUserMobile;
 
-    public String getOrgUserAvatar() {
-        return orgUserAvatar;
-    }
+	/**
+	 * 电话
+	 */
+	private String orgUserPhone;
 
-    public void setOrgUserAvatar(String orgUserAvatar) {
-        this.orgUserAvatar = orgUserAvatar;
-    }
+	/**
+	 * 通讯地址
+	 *
+	 */
+	private String orgUserAddress;
 
-    public String getOrgUserBirthday() {
-        return orgUserBirthday;
-    }
+	/**
+	 * 邮编
+	 *
+	 */
+	private String orgUserZipCode;
 
-    public void setOrgUserBirthday(String orgUserBirthday) {
-        this.orgUserBirthday = orgUserBirthday;
-    }
+	/**
+	 * 加入日期
+	 *
+	 */
+	private String orgUserJoin;
 
-    public String getOrgUserGender() {
-        return orgUserGender;
-    }
+	/**
+	 * 访问次数
+	 *
+	 */
+	private Integer orgUserVisits;
 
-    public void setOrgUserGender(String orgUserGender) {
-        this.orgUserGender = orgUserGender;
-    }
+	/**
+	 * 最后IP
+	 *
+	 */
+	private String orgUserIp;
 
-    public String getOrgUserEmail() {
-        return orgUserEmail;
-    }
+	/**
+	 * 最后登录
+	 *
+	 */
+	private Integer orgUserLast;
 
-    public void setOrgUserEmail(String orgUserEmail) {
-        this.orgUserEmail = orgUserEmail;
-    }
+	/**
+	 * 失败次数
+	 *
+	 */
+	private Integer orgUserFails;
 
-    public String getOrgUserSKYPE() {
-        return orgUserSKYPE;
-    }
+	/**
+	 * 上次锁定时间
+	 *
+	 */
+	private String orgUserLocked;
 
-    public void setOrgUserSKYPE(String orgUserSKYPE) {
-        this.orgUserSKYPE = orgUserSKYPE;
-    }
+	/**
+	 * 是否删除
+	 *
+	 */
+	private String orgUserDeleted;
 
-    public String getOrgUserQQ() {
-        return orgUserQQ;
-    }
+	public String getOrgUserId() {
+		return orgUserId;
+	}
 
-    public void setOrgUserQQ(String orgUserQQ) {
-        this.orgUserQQ = orgUserQQ;
-    }
+	public void setOrgUserId(String orgUserId) {
+		this.orgUserId = orgUserId;
+	}
 
-    public String getOrgUserYahoo() {
-        return orgUserYahoo;
-    }
+	public Integer getOrgDeptId() {
+		return orgDeptId;
+	}
 
-    public void setOrgUserYahoo(String orgUserYahoo) {
-        this.orgUserYahoo = orgUserYahoo;
-    }
+	public void setOrgDeptId(Integer orgDeptId) {
+		this.orgDeptId = orgDeptId;
+	}
 
-    public String getOrgUserGTalk() {
-        return orgUserGTalk;
-    }
+	public String getOrgUserAccount() {
+		return orgUserAccount;
+	}
 
-    public void setOrgUserGTalk(String orgUserGTalk) {
-        this.orgUserGTalk = orgUserGTalk;
-    }
+	public void setOrgUserAccount(String orgUserAccount) {
+		this.orgUserAccount = orgUserAccount;
+	}
 
-    public String getOrgUserWANGWANG() {
-        return orgUserWANGWANG;
-    }
+	public String getOrgUserPassword() {
+		return orgUserPassword;
+	}
 
-    public void setOrgUserWANGWANG(String orgUserWANGWANG) {
-        this.orgUserWANGWANG = orgUserWANGWANG;
-    }
+	public void setOrgUserPassword(String orgUserPassword) {
+		this.orgUserPassword = orgUserPassword;
+	}
 
-    public String getOrgUserMobile() {
-        return orgUserMobile;
-    }
+	public String getOrgUserRole() {
+		return orgUserRole;
+	}
 
-    public void setOrgUserMobile(String orgUserMobile) {
-        this.orgUserMobile = orgUserMobile;
-    }
+	public void setOrgUserRole(String orgUserRole) {
+		this.orgUserRole = orgUserRole;
+	}
 
-    public String getOrgUserPhone() {
-        return orgUserPhone;
-    }
+	public String getOrgUserRealName() {
+		return orgUserRealName;
+	}
 
-    public void setOrgUserPhone(String orgUserPhone) {
-        this.orgUserPhone = orgUserPhone;
-    }
+	public void setOrgUserRealName(String orgUserRealName) {
+		this.orgUserRealName = orgUserRealName;
+	}
 
-    public String getOrgUserAddress() {
-        return orgUserAddress;
-    }
+	public String getOrgUserNickname() {
+		return orgUserNickname;
+	}
 
-    public void setOrgUserAddress(String orgUserAddress) {
-        this.orgUserAddress = orgUserAddress;
-    }
+	public void setOrgUserNickname(String orgUserNickname) {
+		this.orgUserNickname = orgUserNickname;
+	}
 
-    public String getOrgUserZipCode() {
-        return orgUserZipCode;
-    }
+	public String getOrgUserSubmitter() {
+		return orgUserSubmitter;
+	}
 
-    public void setOrgUserZipCode(String orgUserZipCode) {
-        this.orgUserZipCode = orgUserZipCode;
-    }
+	public void setOrgUserSubmitter(String orgUserSubmitter) {
+		this.orgUserSubmitter = orgUserSubmitter;
+	}
 
-    public String getOrgUserJoin() {
-        return orgUserJoin;
-    }
+	public String getOrgUserAvatar() {
+		return orgUserAvatar;
+	}
 
-    public void setOrgUserJoin(String orgUserJoin) {
-        this.orgUserJoin = orgUserJoin;
-    }
+	public void setOrgUserAvatar(String orgUserAvatar) {
+		this.orgUserAvatar = orgUserAvatar;
+	}
 
-    public Integer getOrgUserVisits() {
-        return orgUserVisits;
-    }
+	public String getOrgUserBirthday() {
+		return orgUserBirthday;
+	}
 
-    public void setOrgUserVisits(Integer orgUserVisits) {
-        this.orgUserVisits = orgUserVisits;
-    }
+	public void setOrgUserBirthday(String orgUserBirthday) {
+		this.orgUserBirthday = orgUserBirthday;
+	}
 
-    public String getOrgUserIp() {
-        return orgUserIp;
-    }
+	public String getOrgUserGender() {
+		return orgUserGender;
+	}
 
-    public void setOrgUserIp(String orgUserIp) {
-        this.orgUserIp = orgUserIp;
-    }
+	public void setOrgUserGender(String orgUserGender) {
+		this.orgUserGender = orgUserGender;
+	}
 
-    public Integer getOrgUserLast() {
-        return orgUserLast;
-    }
+	public String getOrgUserEmail() {
+		return orgUserEmail;
+	}
 
-    public void setOrgUserLast(Integer orgUserLast) {
-        this.orgUserLast = orgUserLast;
-    }
+	public void setOrgUserEmail(String orgUserEmail) {
+		this.orgUserEmail = orgUserEmail;
+	}
 
-    public Integer getOrgUserFails() {
-        return orgUserFails;
-    }
+	public String getOrgUserSKYPE() {
+		return orgUserSKYPE;
+	}
 
-    public void setOrgUserFails(Integer orgUserFails) {
-        this.orgUserFails = orgUserFails;
-    }
+	public void setOrgUserSKYPE(String orgUserSKYPE) {
+		this.orgUserSKYPE = orgUserSKYPE;
+	}
 
-    public String getOrgUserLocked() {
-        return orgUserLocked;
-    }
+	public String getOrgUserQQ() {
+		return orgUserQQ;
+	}
 
-    public void setOrgUserLocked(String orgUserLocked) {
-        this.orgUserLocked = orgUserLocked;
-    }
+	public void setOrgUserQQ(String orgUserQQ) {
+		this.orgUserQQ = orgUserQQ;
+	}
 
-    public String getOrgUserDeleted() {
-        return orgUserDeleted;
-    }
+	public String getOrgUserYahoo() {
+		return orgUserYahoo;
+	}
 
-    public void setOrgUserDeleted(String orgUserDeleted) {
-        this.orgUserDeleted = orgUserDeleted;
-    }
+	public void setOrgUserYahoo(String orgUserYahoo) {
+		this.orgUserYahoo = orgUserYahoo;
+	}
+
+	public String getOrgUserGTalk() {
+		return orgUserGTalk;
+	}
+
+	public void setOrgUserGTalk(String orgUserGTalk) {
+		this.orgUserGTalk = orgUserGTalk;
+	}
+
+	public String getOrgUserWANGWANG() {
+		return orgUserWANGWANG;
+	}
+
+	public void setOrgUserWANGWANG(String orgUserWANGWANG) {
+		this.orgUserWANGWANG = orgUserWANGWANG;
+	}
+
+	public String getOrgUserMobile() {
+		return orgUserMobile;
+	}
+
+	public void setOrgUserMobile(String orgUserMobile) {
+		this.orgUserMobile = orgUserMobile;
+	}
+
+	public String getOrgUserPhone() {
+		return orgUserPhone;
+	}
+
+	public void setOrgUserPhone(String orgUserPhone) {
+		this.orgUserPhone = orgUserPhone;
+	}
+
+	public String getOrgUserAddress() {
+		return orgUserAddress;
+	}
+
+	public void setOrgUserAddress(String orgUserAddress) {
+		this.orgUserAddress = orgUserAddress;
+	}
+
+	public String getOrgUserZipCode() {
+		return orgUserZipCode;
+	}
+
+	public void setOrgUserZipCode(String orgUserZipCode) {
+		this.orgUserZipCode = orgUserZipCode;
+	}
+
+	public String getOrgUserJoin() {
+		return orgUserJoin;
+	}
+
+	public void setOrgUserJoin(String orgUserJoin) {
+		this.orgUserJoin = orgUserJoin;
+	}
+
+	public Integer getOrgUserVisits() {
+		return orgUserVisits;
+	}
+
+	public void setOrgUserVisits(Integer orgUserVisits) {
+		this.orgUserVisits = orgUserVisits;
+	}
+
+	public String getOrgUserIp() {
+		return orgUserIp;
+	}
+
+	public void setOrgUserIp(String orgUserIp) {
+		this.orgUserIp = orgUserIp;
+	}
+
+	public Integer getOrgUserLast() {
+		return orgUserLast;
+	}
+
+	public void setOrgUserLast(Integer orgUserLast) {
+		this.orgUserLast = orgUserLast;
+	}
+
+	public Integer getOrgUserFails() {
+		return orgUserFails;
+	}
+
+	public void setOrgUserFails(Integer orgUserFails) {
+		this.orgUserFails = orgUserFails;
+	}
+
+	public String getOrgUserLocked() {
+		return orgUserLocked;
+	}
+
+	public void setOrgUserLocked(String orgUserLocked) {
+		this.orgUserLocked = orgUserLocked;
+	}
+
+	public String getOrgUserDeleted() {
+		return orgUserDeleted;
+	}
+
+	public void setOrgUserDeleted(String orgUserDeleted) {
+		this.orgUserDeleted = orgUserDeleted;
+	}
 
 }

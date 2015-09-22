@@ -46,8 +46,8 @@ public class OrgRoldMenuTable extends Table {
 	public final Column ORG_ROLE_MENU_ID = new Column(this, "org_role_menu_id");
 
 
-		private OrgRoldMenuTable() {
-			super("org_rold_menu");
-		}
+	private OrgRoldMenuTable() {
+		super("org_rold_menu");
+	}
 
 }

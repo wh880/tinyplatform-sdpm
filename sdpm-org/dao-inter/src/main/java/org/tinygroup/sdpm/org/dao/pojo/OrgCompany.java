@@ -16,16 +16,12 @@
 
 package org.tinygroup.sdpm.org.dao.pojo;
 
-import java.io.Serializable;
-
-/**
+/** 
  * 公司表
  * 
  */
-public class OrgCompany implements Serializable {
+public class OrgCompany {
 
-	public static String DELETE_YES = "1";
-	public static String DELETE_NO = "0";
 	/** 
 	 * 公司编号
 	 * 
