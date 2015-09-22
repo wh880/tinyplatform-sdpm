@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>org.tinygroup</groupId>
 			<artifactId>sdpm-common-common</artifactId>
-			<version>${project.version}</version>
+			<version>${tiny_sdpm_version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.tinygroup</groupId>
