@@ -28,14 +28,21 @@ public class SysModuleManagerImpl implements SysModuleManager{
 
 	public List<SysModule> findByRoot(int root) {
 		// TODO Auto-generated method stub
+		SysModule sysModule = new SysModule();
+		sysModule.setSysModuleRoot(root);
 		
-		return null;
+		return sysModuleDao.query(sysModule);
 	}
 
 	public int delete(SysModule sysModule) {
 		// TODO Auto-generated method stub
 		int pk=sysModule.getSysModuleId();
 		return sysModuleDao.deleteByKey(pk);
+	}
+
+	public SysModule findById(int id) {
+		// TODO Auto-generated method stub
+		return sysModuleDao.getByKey(id);
 	}
 
 }
