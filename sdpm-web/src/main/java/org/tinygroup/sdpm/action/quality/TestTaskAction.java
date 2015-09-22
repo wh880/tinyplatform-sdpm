@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.action.quality;
 
-public class TestTaskAction {
+import org.tinygroup.sdpm.common.web.BaseController;
+
+public class TestTaskAction extends BaseController {
 
 }
