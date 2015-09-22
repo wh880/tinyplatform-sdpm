@@ -16,6 +16,7 @@
 
 package org.tinygroup.sdpm.project.dao.impl;
 
+import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -40,6 +41,7 @@ import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @LogClass("project")
+@Repository
 public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeamDao {
 	@LogMethod("add")
 	public ProjectTeam add(ProjectTeam projectTeam) {

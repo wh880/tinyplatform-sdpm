@@ -16,14 +16,13 @@
 package org.tinygroup.sdpm.org.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 
 import java.util.List;
 
-@Component
+
 public class UserServiceImpl implements UserService {
 
     @Autowired
