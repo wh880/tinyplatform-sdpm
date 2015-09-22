@@ -11,7 +11,7 @@ public interface CaseStepManager {
 		 * @param id
 		 * @return
 		 */
-		CaseStep find(int id);
+		CaseStep find(Integer id);
 		/**
 		 * 添加用例步骤
 		 * @param casestep
@@ -23,7 +23,7 @@ public interface CaseStepManager {
 		 * @param id
 		 * @return
 		 */
-		int delete(int id);
+		Integer delete(Integer id);
 		/**
 		 * 通过条件查询步骤
 		 * @param casestep

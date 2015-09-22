@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.biz.inter.ReleaseManger;
 import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
+import org.tinygroup.tinysqldsl.Pager;
 
 @Service
 @Transactional
@@ -39,11 +41,19 @@ public class ReleaseMangerImpl implements ReleaseManger{
 		return productReleaseDao.getByKey(releaseId);
 	}
 
-	public List<ProductRelease> findList(ProductRelease releaseId) {
-
-		return productReleaseDao.query(releaseId);
+	public int[] updateBatch(List<ProductRelease> releases) {
+		
+		return productReleaseDao.batchUpdate(releases);
 	}
 
-	
+	public List<ProductRelease> findList(ProductRelease release,String columnName,boolean asc) {
+		
+		return productReleaseDao.query(release, new OrderBy(columnName, asc));
+	}
 
-}
+	public Pager<ProductRelease> findPager(int start, int limit, ProductRelease release,String columnName,boolean asc) {
+		
+		return productReleaseDao.queryPager(start, limit, release, new OrderBy(columnName, asc));
+	}
+
+	}

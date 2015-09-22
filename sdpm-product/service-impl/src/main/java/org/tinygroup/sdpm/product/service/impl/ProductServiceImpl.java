@@ -10,7 +10,7 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.tinysqldsl.Pager;
 
-@Component()
+@Component
 public class ProductServiceImpl implements ProductService {
 	
 	@Autowired

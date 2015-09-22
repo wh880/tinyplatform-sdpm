@@ -28,7 +28,6 @@ public class ProductLineManagerImpl implements ProductLineManager{
 	}
 	
 	public int delete(Integer productLineId) {
-		
 		ProductLine productLine = new ProductLine();
 		productLine.setProductLineId(productLineId);
 		productLine.setDeleted(ProductLine.DELETE_YES);
