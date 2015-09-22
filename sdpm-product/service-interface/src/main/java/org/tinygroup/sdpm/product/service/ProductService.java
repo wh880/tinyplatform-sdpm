@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.product.service;
 
 import java.util.List;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.pojo.PagerPojo;
 import org.tinygroup.tinysqldsl.Pager;
@@ -22,6 +23,13 @@ public interface ProductService {
 	int updateProduct(Product product);
 	
 	/**
+	 * 批量修改
+	 * @param products
+	 * @return
+	 */
+	int[] updateBatch(List<Product> products);
+	
+	/**
 	 * 根据产品ID删除
 	 * @param productId
 	 * @return
@@ -38,43 +46,18 @@ public interface ProductService {
 	Product findProduct(Integer productId);
 	
 	/**
-	 * 根据对象查找
+	 * 根据对象查找(排序)
 	 * @param product
 	 * @return
 	 */
-	List<Product> findProductList(Product product);
+	List<Product> findProductList(Product product,OrderBy... orderBies);
 	
 	/**
-	 * 根据产品对象查找(分页、排序)
+	 * 根据对象查找(排序、分页)
 	 * @param product
 	 * @return
 	 */
-	/*List<Product> findProduct(PagerPojo pagerPojo, Product product);
-	
-	*//**
-	 * 查找所有产品
-	 * @return
-	 *//*
-	List<Product> findAll(PagerPojo pojo);
-	
-	*//**
-	 * 根据产品线Id查找产品
-	 * @param id
-	 * @return
-	 *//*
-	List<Product> findByProductLineId(PagerPojo pagerPojo,Integer productLineId);
-	
-	*//**
-	 * 根据产品对象分页查询
-	 * @param currentPage
-	 * @param limit
-	 * @param product
-	 * @return
-	 *//*
-	Pager<Product> findProduct(int currentPage,int limit ,Product product);
-	
-	*/
-	
+	Pager<Product> findProductPager (int start ,int limit ,Product product,OrderBy... orderBies);
 	
 	
 }
