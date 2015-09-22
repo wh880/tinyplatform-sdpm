@@ -11,7 +11,7 @@ import org.tinygroup.sdpm.project.service.inter.TaskService;
  */
 @Controller
 @RequestMapping("/project/task")
-public class TaskAction extends BaseController {
+public class taskAction extends BaseController {
     @Autowired
     private TaskService taskService;
 //    @RequestMapping("/form")
