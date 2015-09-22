@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package sdpm.product.service.wrapper.wrap;
+package org.tinygroup.sdpm.system.wrapper;
 
 import java.util.List;
 import java.util.UUID;
@@ -29,7 +29,7 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 @Component
-public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.service.StoryService {
+public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.ActionService {
 	@Autowired
 	CEPCore cepcore;
 
@@ -51,12 +51,12 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 		return event;
 	}
 
-	public org.tinygroup.sdpm.product.dao.pojo.ProductStory addStory(org.tinygroup.sdpm.product.dao.pojo.ProductStory story) {
-		String serviceId = "product_addStory";
+	public org.tinygroup.sdpm.system.dao.pojo.Action add(org.tinygroup.sdpm.system.dao.pojo.Action action) {
+		String serviceId = "system_action_add";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("story" ,story);
+			context.put("action" ,action);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -64,12 +64,12 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 		}
 	}
 
-	public int deleteStory(java.lang.Integer storyId) {
-		String serviceId = "product_deleteStory";
+	public org.tinygroup.sdpm.system.dao.pojo.Action updata(org.tinygroup.sdpm.system.dao.pojo.Action action) {
+		String serviceId = "system_action_updata";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("storyId" ,storyId);
+			context.put("action" ,action);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -77,12 +77,12 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 		}
 	}
 
-	public int updateStory(org.tinygroup.sdpm.product.dao.pojo.ProductStory story) {
-		String serviceId = "product_updateStory";
+	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.Action action) {
+		String serviceId = "system_action_delete";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("story" ,story);
+			context.put("action" ,action);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -90,57 +90,12 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 		}
 	}
 
-	public org.tinygroup.sdpm.product.dao.pojo.ProductStory findStory(java.lang.Integer storyId) {
-		String serviceId = "product_findStory";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Action> find(org.tinygroup.sdpm.system.dao.pojo.Action action) {
+		String serviceId = "system_action_find";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("storyId" ,storyId);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	public int[] updateBatch(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductStory> stories) {
-		String serviceId = "product_updateBatch";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("stories" ,stories);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductStory> findStoryList(org.tinygroup.sdpm.product.dao.pojo.ProductStory story ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "product_findStoryList";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("story" ,story);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductStory> findStoryPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductStory story ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "product_findStoryPager";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("start" ,start);
-			context.put("limit" ,limit);
-			context.put("story" ,story);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
+			context.put("action" ,action);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

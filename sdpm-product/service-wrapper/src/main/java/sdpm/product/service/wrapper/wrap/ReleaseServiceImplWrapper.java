@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.product.wrapper;
+package sdpm.product.service.wrapper.wrap;
 
 import java.util.List;
 import java.util.UUID;
@@ -30,7 +30,7 @@ import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 @Component
 public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.service.ReleaseService {
-@Autowired
+	@Autowired
 	CEPCore cepcore;
 
 	public CEPCore getCore() {
@@ -77,8 +77,8 @@ public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public int[] updateBatchRelease(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> releases) {
-		String serviceId = "product_updateBatchRelease";
+	public int[] updateBatch(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> releases) {
+		String serviceId = "product_updateBatch";
 
 		try{
 			Context context = new ContextImpl();

@@ -52,7 +52,7 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 	}
 
 	public org.tinygroup.sdpm.productLine.dao.pojo.ProductLine addProductLine(org.tinygroup.sdpm.productLine.dao.pojo.ProductLine productLine) {
-		String serviceId = "productline_addProductLine";
+		String serviceId = "productLine_addProductLine";
 
 		try{
 			Context context = new ContextImpl();
@@ -65,7 +65,7 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 	}
 
 	public int updateProductLine(org.tinygroup.sdpm.productLine.dao.pojo.ProductLine productLine) {
-		String serviceId = "productline_updateProductLine";
+		String serviceId = "productLine_updateProductLine";
 
 		try{
 			Context context = new ContextImpl();
@@ -78,7 +78,7 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 	}
 
 	public org.tinygroup.sdpm.productLine.dao.pojo.ProductLine findProductLine(java.lang.Integer productLineId) {
-		String serviceId = "productline_findProductLine";
+		String serviceId = "productLine_findProductLine";
 
 		try{
 			Context context = new ContextImpl();
@@ -90,44 +90,12 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 		}
 	}
 
-	public int[] updateBatchProductLine(java.util.List<org.tinygroup.sdpm.productLine.dao.pojo.ProductLine> productLines) {
-		String serviceId = "productline_updateBatchProductLine";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("productLines" ,productLines);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	public java.util.List<org.tinygroup.sdpm.productLine.dao.pojo.ProductLine> findProductLineList(org.tinygroup.sdpm.productLine.dao.pojo.ProductLine productLine ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "productline_findProductLineList";
+	public java.util.List<org.tinygroup.sdpm.productLine.dao.pojo.ProductLine> findProductLineList(org.tinygroup.sdpm.productLine.dao.pojo.ProductLine productLine) {
+		String serviceId = "productLine_findProductLineList";
 
 		try{
 			Context context = new ContextImpl();
 			context.put("productLine" ,productLine);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.productLine.dao.pojo.ProductLine> findProductLinePager(int start ,int limit ,org.tinygroup.sdpm.productLine.dao.pojo.ProductLine productLine ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "productline_findProductLinePager";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("start" ,start);
-			context.put("limit" ,limit);
-			context.put("productLine" ,productLine);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
