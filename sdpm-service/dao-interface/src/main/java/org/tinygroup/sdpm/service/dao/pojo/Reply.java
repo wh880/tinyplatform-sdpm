@@ -16,13 +16,14 @@
 
 package org.tinygroup.sdpm.service.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 客服回复表
  * 
  */
-public class Reply {
+public class Reply implements Serializable {
 
 	/** 
 	 * 回复ID
