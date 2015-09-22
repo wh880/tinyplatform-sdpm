@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.tinysqldsl.Pager;
 
 @Component()
 public class ProductServiceImpl implements ProductService {
@@ -34,9 +36,21 @@ public class ProductServiceImpl implements ProductService {
 		return productManager.find(productId);
 	}
 
-	public List<Product> findProductList(Product product) {
 
-		return productManager.findList(product);
+	public List<Product> findProductList(Product product, OrderBy... orderBies) {
+
+		return productManager.findList(product, orderBies);
+	}
+
+	public Pager<Product> findProductPager(int start, int limit,
+			Product product, OrderBy... orderBies) {
+
+		return productManager.findPager(start, limit, product, orderBies);
+	}
+
+	public int[] updateBatch(List<Product> products) {
+
+		return productManager.updateBatch(products);
 	}
 
 }

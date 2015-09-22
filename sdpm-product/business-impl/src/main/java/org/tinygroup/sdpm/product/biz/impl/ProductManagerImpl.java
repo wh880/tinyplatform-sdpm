@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.tinysqldsl.Pager;
 
 @Service
 @Transactional
@@ -39,9 +41,21 @@ public class ProductManagerImpl implements ProductManager{
 		return productDao.getByKey(productId);
 	}
 
-	public List<Product> findList(Product product) {
 
-		return productDao.query(product);
+	public int[] updateBatch(List<Product> products) {
+
+		return productDao.batchUpdate(products);
+	}
+
+	public List<Product> findList(Product product, OrderBy... orderBies) {
+
+		return productDao.query(product, orderBies);
+	}
+
+	public Pager<Product> findPager(int start, int limit, Product product,
+			OrderBy... orderBies) {
+
+		return productDao.queryPager(start, limit, product, orderBies);
 	}
 
 }

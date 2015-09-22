@@ -10,7 +10,6 @@ import org.tinygroup.sdpm.system.biz.inter.EffortManager;
 import org.tinygroup.sdpm.system.dao.EffortDao;
 import org.tinygroup.sdpm.system.dao.pojo.Effort;
 import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.validate.annotation.AssertEnum;
 @Service
 @Transactional
 public class EffortManagerImpl implements EffortManager {

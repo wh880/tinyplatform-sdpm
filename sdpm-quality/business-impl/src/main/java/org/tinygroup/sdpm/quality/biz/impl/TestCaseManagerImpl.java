@@ -32,8 +32,13 @@ public class TestCaseManagerImpl implements TestCaseManager {
 	
 	public int update(TestCase testcase){
 		testcase.setCaseLastEditedDate(new Date());
-		testcase.setCaseLastRunDate(new Date());
 		return testcasedao.edit(testcase);
+	}
+	
+	public int[] batchUpdate(List<TestCase> testcases){
+		TestCase testcase = new TestCase();
+		testcase.setCaseLastEditedDate(new Date());
+		return testcasedao.batchUpdate(testcases);
 	}
 	
 	public int delete(int id){
@@ -41,5 +46,12 @@ public class TestCaseManagerImpl implements TestCaseManager {
 		testcase.setCaseId(id);
 		testcase.setDeleted(TestCase.DELETE_YES);
 		return testcasedao.edit(testcase);
+	}
+	
+	public int[] batchDelete(List<TestCase> testcases){
+		for(TestCase testCase:testcases){
+			testCase.setDeleted(TestCase.DELETE_YES);
+		}
+		return testcasedao.batchUpdate(testcases);
 	}
 }

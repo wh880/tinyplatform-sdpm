@@ -14,7 +14,7 @@ public interface FaqService {
      * @param id 主键
      * @return
      */
-    Faq findFaq(String id);
+    Faq findFaq(Integer id);
 
     /**
      * 根据条件查询List
@@ -46,5 +46,5 @@ public interface FaqService {
      * @param id 主键
      * @return
      */
-    Integer deleteFaq(String id);
+    Integer deleteFaq(Integer id);
 }

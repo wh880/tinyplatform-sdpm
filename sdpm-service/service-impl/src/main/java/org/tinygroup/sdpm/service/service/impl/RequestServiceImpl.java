@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015-09-19.
  */
-@Component("requestService")
+@Component
 public class RequestServiceImpl implements RequestService {
     @Autowired
     private RequestManager requestManager;

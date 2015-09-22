@@ -22,7 +22,7 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
 <div style="width:80%;margin-left: 20px;" class="pageleftpart">
     <div class="infoContent">
-        <p class="titleName">新增请求</p>
+        <p class="titleName">请求</p>
 
         #@elementItem()
             #@sdpmItem("产品名称")

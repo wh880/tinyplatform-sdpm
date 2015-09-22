@@ -29,7 +29,15 @@ public class TestCaseServiceImpl implements TestCaseService {
 		return testcasemanager.update(testcase);
 	}
 	
+	public int[] batchUpdateTestCase(List<TestCase> testcases){
+		return testcasemanager.batchUpdate(testcases);
+	}
+	
 	public int deleteById(int id){
 		return testcasemanager.delete(id);
+	}
+	
+	public int[] batchDeleteTestCase(List<TestCase> testcases){
+		return testcasemanager.batchDelete(testcases);
 	}
 }

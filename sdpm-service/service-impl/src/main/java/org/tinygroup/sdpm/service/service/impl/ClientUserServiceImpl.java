@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015-09-18.
  */
-@Component("clientService")
+@Component
 public class ClientUserServiceImpl implements ClientUserService{
     @Autowired
     private ClientUserManager clientUserManager;
