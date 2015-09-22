@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.project.dao.ProjectTaskrelationDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTaskrelation;
 import org.tinygroup.sdpm.project.service.inter.TaskRelationService;
 
@@ -13,6 +14,8 @@ import java.util.List;
 @Component
 public class TaskRelationServiceImpl implements TaskRelationService {
     @Autowired
+    private ProjectTaskrelationDao taskrelationDao;
+
     public ProjectTaskrelation add(TaskRelationService taskRelationService) {
         return null;
     }

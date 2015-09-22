@@ -1,28 +1,46 @@
 <service-components>
   <service-component type="org.tinygroup.sdpm.productLine.service.impl.ProductLineServiceImpl" bean="productLineService">
-    <service-method local-name="addProductLine" service-id="productLine_addProductLine" method-name="addProductLine" cacheable="false" category="org.tinygroup.sdpm.productLine.service.impl">
+    <service-method local-name="addProductLine" service-id="productline_addProductLine" method-name="addProductLine" cacheable="false" category="org.tinygroup.sdpm.productLine.service.impl">
       <service-parameters>
         <service-parameter name="productLine" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="addProductLineResult" required="false" is-array="false" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine"/>
     </service-method>
-    <service-method local-name="updateProductLine" service-id="productLine_updateProductLine" method-name="updateProductLine" cacheable="false" category="org.tinygroup.sdpm.productLine.service.impl">
+    <service-method local-name="updateProductLine" service-id="productline_updateProductLine" method-name="updateProductLine" cacheable="false" category="org.tinygroup.sdpm.productLine.service.impl">
       <service-parameters>
         <service-parameter name="productLine" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="updateProductLineResult" required="false" is-array="false" type="int"/>
     </service-method>
-    <service-method local-name="findProductLine" service-id="productLine_findProductLine" method-name="findProductLine" cacheable="false" category="org.tinygroup.sdpm.productLine.service.impl">
+    <service-method local-name="findProductLine" service-id="productline_findProductLine" method-name="findProductLine" cacheable="false" category="org.tinygroup.sdpm.productLine.service.impl">
       <service-parameters>
         <service-parameter name="productLineId" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findProductLineResult" required="false" is-array="false" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine"/>
     </service-method>
-    <service-method local-name="findProductLineList" service-id="productLine_findProductLineList" method-name="findProductLineList" cacheable="false" category="org.tinygroup.sdpm.productLine.service.impl">
+    <service-method local-name="updateBatch" service-id="productline_updateBatch" method-name="updateBatch" cacheable="false" category="org.tinygroup.sdpm.productLine.service.impl">
+      <service-parameters>
+        <service-parameter name="productLines" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateBatchResult" required="false" is-array="true" type="int"/>
+    </service-method>
+    <service-method local-name="findProductLineList" service-id="productline_findProductLineList" method-name="findProductLineList" cacheable="false" category="org.tinygroup.sdpm.productLine.service.impl">
       <service-parameters>
         <service-parameter name="productLine" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine" required="false" is-array="false"/>
+        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findProductLineListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine"/>
+    </service-method>
+    <service-method local-name="findProductLinePager" service-id="productline_findProductLinePager" method-name="findProductLinePager" cacheable="false" category="org.tinygroup.sdpm.productLine.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="productLine" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine" required="false" is-array="false"/>
+        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProductLinePagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager&lt;org.tinygroup.sdpm.productLine.dao.pojo.ProductLine&gt;"/>
     </service-method>
   </service-component>
 </service-components>

@@ -4,18 +4,18 @@
 
 
 
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=3,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(3)
+#for(var:[1..3])
 #@tr()
     #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">${page}</a> #end
-    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">①</a>#end
-    #@td()任务名称#end
-    #@td()（状态）完成#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">${tasksList.taskId}</a> #end
+    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">${tasksList.taskpri}<</a>#end
+    #@td()${tasksList.taskStatus}#end
+    #@td()${tasksList.taskDeadLine}#end
     #@td()03-25#end
     #@td()03-25 08:30#end
     #@td()开发者#end
