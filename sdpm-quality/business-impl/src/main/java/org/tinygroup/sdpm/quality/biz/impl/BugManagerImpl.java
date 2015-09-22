@@ -10,8 +10,8 @@ import org.tinygroup.sdpm.quality.biz.inter.BugManager;
 import org.tinygroup.sdpm.quality.dao.BugDao;
 import org.tinygroup.sdpm.quality.dao.pojo.Bug;
 
-@Service        
-@Transactional  
+@Service        //注解，告诉spring创建一个实现类的实例
+@Transactional  //开启事务
 public class BugManagerImpl implements BugManager {
 	@Autowired
 	private BugDao bugdao;

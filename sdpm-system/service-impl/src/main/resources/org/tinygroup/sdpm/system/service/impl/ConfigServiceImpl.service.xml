@@ -1,5 +1,6 @@
+
 <service-components>
-  <service-component type="org.tinygroup.sdpm.system.service.impl.ConfigServiceImpl" bean="configService">
+  <service-component type="org.tinygroup.sdpm.system.service.impl.ConfigServiceImpl" bean="">
     <service-method local-name="addConfig" service-id="system_addConfig" method-name="addConfig" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>
         <service-parameter name="config" type="org.tinygroup.sdpm.system.dao.pojo.SystemConfig" required="false" is-array="false"/>

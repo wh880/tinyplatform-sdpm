@@ -1,9 +1,7 @@
 package org.tinygroup.sdpm.project.service.impl;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tinygroup.sdpm.project.biz.inter.TaskEsTimateManager;
 import org.tinygroup.sdpm.project.service.inter.TaskEsTimateService;
 
 /**
@@ -12,6 +10,4 @@ import org.tinygroup.sdpm.project.service.inter.TaskEsTimateService;
 
 @Component
 public class TaskEsTimateServiceImpl implements TaskEsTimateService {
-    @Autowired
-    private TaskEsTimateManager taskEsTimateManager;
 }

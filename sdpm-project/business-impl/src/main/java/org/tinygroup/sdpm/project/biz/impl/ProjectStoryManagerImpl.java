@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.project.biz.inter.ProjectStoryManager;
-import org.tinygroup.sdpm.project.dao.ProjectStoryDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 
@@ -18,8 +17,6 @@ import java.util.List;
 @Transactional
 public class ProjectStoryManagerImpl implements ProjectStoryManager {
     @Autowired
-    private ProjectStoryDao projectStoryDao;
-
     public ArrayList<Integer> findArrayStory(ProjectStory projectStory) {
         return null;
     }

@@ -27,7 +27,7 @@ public class ObtainHandleImpl implements ObtainHandle {
             for (Obtain obtain : obtains.getObtainList()) {
                 String key = obtain.getName();
                 if(isRepeat(key,filePath)){
-                    throw new RuntimeException("typeinfo:["+key+"]已存在.");
+                    throw new RuntimeException("obtain:["+key+"]已存在.");
                 }
                 obtainDict.put(obtain.getName(), obtain);
                 pathRecord.put(obtain.getName(),filePath);

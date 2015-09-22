@@ -50,9 +50,9 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+
 @Repository
-@LogClass("system_dict")
-public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDao {
+@LogClass("system_dict")public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDao {
 
 	@LogMethod("add")
 	public SystemDict add(SystemDict systemDict) {

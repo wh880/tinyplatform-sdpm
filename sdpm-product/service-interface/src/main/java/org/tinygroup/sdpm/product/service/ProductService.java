@@ -27,7 +27,7 @@ public interface ProductService {
 	 * @param products
 	 * @return
 	 */
-	int[] updateBatchProduct(List<Product> products);
+	int[] updateBatch(List<Product> products);
 	
 	/**
 	 * 根据产品ID删除
