@@ -2,7 +2,7 @@ package org.tinygroup.sdpm.quality.biz.inter;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.quality.dao.pojo.TestRun;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 
 public interface TestRunManager {
 
@@ -12,17 +12,17 @@ public interface TestRunManager {
 	 * @param testrun
 	 * @return
 	 */
-	List<TestRun> findList(TestRun testrun);
+	List<QualityTestRun> findList(QualityTestRun testrun);
 	/**
 	 * 编辑
 	 * @param testrun
 	 * @return
 	 */
-	int update(TestRun testrun);
+	int update(QualityTestRun testrun);
 	/**
 	 * 批量编辑
 	 * @param testruns
 	 * @return
 	 */
-	int[] batchUpdate(List<TestRun> testruns);
+	int[] batchUpdate(List<QualityTestRun> testruns);
 }

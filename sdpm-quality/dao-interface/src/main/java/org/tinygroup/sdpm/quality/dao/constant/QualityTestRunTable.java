@@ -23,9 +23,9 @@ import org.tinygroup.tinysqldsl.base.Table;
  * 测试计划执行表
  * 
  */
-public class TestRunTable extends Table {
+public class QualityTestRunTable extends Table {
 
-	public static final TestRunTable TESTRUNTABLE = new TestRunTable();
+	public static final QualityTestRunTable QUALITY_TESTRUNTABLE = new QualityTestRunTable();
 
 	/** 
 	 * 执行编号
@@ -82,8 +82,8 @@ public class TestRunTable extends Table {
 	public final Column TESTRUN_STATUS = new Column(this, "testRun_status");
 
 
-	private TestRunTable() {
-		super("testRun");
+	private QualityTestRunTable() {
+		super("quality_testRun");
 	}
 
 }

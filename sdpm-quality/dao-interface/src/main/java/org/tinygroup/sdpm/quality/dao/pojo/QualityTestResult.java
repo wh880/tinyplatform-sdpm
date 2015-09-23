@@ -23,7 +23,7 @@ import java.util.Date;
  * 测试结果表
  * 
  */
-public class TestResult implements Serializable {
+public class QualityTestResult implements Serializable {
 
 	/** 
 	 * 测试结果

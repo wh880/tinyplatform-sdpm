@@ -23,7 +23,7 @@ import java.util.Date;
  * 测试任务表
  * 
  */
-public class TestTask implements Serializable {
+public class QualityTestTask implements Serializable {
 	
 	public static int DELETE_YES = 1;
 	public static int DELETE_NO = 0;

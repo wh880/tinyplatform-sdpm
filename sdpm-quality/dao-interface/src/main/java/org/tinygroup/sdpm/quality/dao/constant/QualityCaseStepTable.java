@@ -23,9 +23,9 @@ import org.tinygroup.tinysqldsl.base.Table;
  * 测试用例步骤表
  * 
  */
-public class CaseStepTable extends Table {
+public class QualityCaseStepTable extends Table {
 
-	public static final CaseStepTable CASESTEPTABLE = new CaseStepTable();
+	public static final QualityCaseStepTable QUALITY_CASESTEPTABLE = new QualityCaseStepTable();
 
 	/** 
 	 * 用例步骤编号
@@ -58,8 +58,8 @@ public class CaseStepTable extends Table {
 	public final Column CASESTEP_EXPECT = new Column(this, "caseStep_expect");
 
 
-	private CaseStepTable() {
-		super("caseStep");
+	private QualityCaseStepTable() {
+		super("quality_caseStep");
 	}
 
 }

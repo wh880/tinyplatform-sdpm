@@ -23,9 +23,9 @@ import org.tinygroup.tinysqldsl.base.Table;
  * 测试用例表
  * 
  */
-public class TestCaseTable extends Table {
+public class QualityTestCaseTable extends Table {
 
-	public static final TestCaseTable TESTCASETABLE = new TestCaseTable();
+	public static final QualityTestCaseTable QUALITY_TESTCASETABLE = new QualityTestCaseTable();
 
 	/** 
 	 * 用例编号
@@ -214,8 +214,8 @@ public class TestCaseTable extends Table {
 	public final Column CASE_LASTRUNRESULT = new Column(this, "case_lastRunResult");
 
 
-	private TestCaseTable() {
-		super("testCase");
+	private QualityTestCaseTable() {
+		super("quality_testCase");
 	}
 
 }

@@ -18,8 +18,8 @@ package org.tinygroup.sdpm.quality.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
-import org.tinygroup.sdpm.quality.dao.pojo.TestTask;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult;
 
-public interface TestTaskDao extends BaseDao<TestTask,Integer> {
+public interface QualityTestResultDao extends BaseDao<QualityTestResult,Integer> {
 
 }

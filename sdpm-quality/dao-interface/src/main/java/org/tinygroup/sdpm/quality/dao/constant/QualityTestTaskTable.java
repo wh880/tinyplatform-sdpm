@@ -23,9 +23,9 @@ import org.tinygroup.tinysqldsl.base.Table;
  * 测试任务表
  * 
  */
-public class TestTaskTable extends Table {
+public class QualityTestTaskTable extends Table {
 
-	public static final TestTaskTable TESTTASKTABLE = new TestTaskTable();
+	public static final QualityTestTaskTable QUALITY_TESTTASKTABLE = new QualityTestTaskTable();
 
 	/** 
 	 * 测试版本编号
@@ -106,8 +106,8 @@ public class TestTaskTable extends Table {
 	public final Column DELETED = new Column(this, "deleted");
 
 
-	private TestTaskTable() {
-		super("testTask");
+	private QualityTestTaskTable() {
+		super("quality_testTask");
 	}
 
 }

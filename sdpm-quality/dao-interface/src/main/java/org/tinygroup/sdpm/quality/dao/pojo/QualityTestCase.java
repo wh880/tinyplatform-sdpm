@@ -23,7 +23,8 @@ import java.util.Date;
  * 测试用例表
  * 
  */
-public class TestCase implements Serializable {
+public class QualityTestCase implements Serializable {
+	
 	public static int DELETE_YES = 1;
 	public static int DELETE_NO = 0;
 

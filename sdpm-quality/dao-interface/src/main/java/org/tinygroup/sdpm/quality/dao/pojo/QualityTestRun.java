@@ -23,7 +23,7 @@ import java.util.Date;
  * 测试计划执行表
  * 
  */
-public class TestRun implements Serializable {
+public class QualityTestRun implements Serializable {
 
 	/** 
 	 * 执行编号

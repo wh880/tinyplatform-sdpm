@@ -7,35 +7,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.quality.biz.inter.BugManager;
-import org.tinygroup.sdpm.quality.dao.BugDao;
-import org.tinygroup.sdpm.quality.dao.pojo.Bug;
+import org.tinygroup.sdpm.quality.dao.QualityBugDao;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 
-@Service        //注解，告诉spring创建一个实现类的实例
-@Transactional  //开启事务
+@Service        
+@Transactional  
 public class BugManagerImpl implements BugManager {
 	@Autowired
-	private BugDao bugdao;
+	private QualityBugDao bugdao;
 	
-	public List<Bug> findList(Bug bug){			
+	public List<QualityBug> findList(QualityBug bug){			
 		return bugdao.query(bug);
 	}
 	
-	public Bug add(Bug bug){
+	public QualityBug add(QualityBug bug){
 		bug.setBugOpenedDate(new Date());		
 		return bugdao.add(bug);
 	}
 	
-	public Bug find(Integer id){
+	public QualityBug find(Integer id){
 		return bugdao.getByKey(id);
 	}
 	
-	public Integer update(Bug bug){
+	public Integer update(QualityBug bug){
 		bug.setBugLastEditedDate(new Date());
 		return bugdao.edit(bug);
 	}
 	
-	public int[] batchUpdate(List<Bug> bugs){
-		Bug bug = new Bug();
+	public int[] batchUpdate(List<QualityBug> bugs){
+		QualityBug bug = new QualityBug();
 		bug.setBugLastEditedDate(new Date());
 		return bugdao.batchUpdate(bugs);
 	}

@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.quality.dao.pojo.Bug;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 
 /**
@@ -23,11 +23,11 @@ public class BugAction extends BaseController {
 	private BugService bugService;
 	
 	@RequestMapping("/form")
-	public String form(Integer id,Bug bug,Model model){
-	//	Bug bug = new Bug();
+	public String form(Integer id,Model model){
+		QualityBug bug = new QualityBug();
 		if(id != null){
 			bug.setProductId(id);
-			List<Bug> buglist = bugService.findBugList(bug);
+			List<QualityBug> buglist = bugService.findBugList(bug);
 			model.addAttribute("bug",buglist);
 		}	
 		return "testManagement/data/BugData.pagelet";
@@ -41,7 +41,7 @@ public class BugAction extends BaseController {
 	}*/
 	
 	@RequestMapping(value = "/save",method = RequestMethod.POST)
-	public String save(Bug bug,Model model){
+	public String save(QualityBug bug,Model model){
 		if(bug.getBugId() == null){
 			bugService.addBug(bug);
 		}else{

@@ -1,7 +1,7 @@
 package org.tinygroup.sdpm.quality.service.inter;
 
 import java.util.List;
-import org.tinygroup.sdpm.quality.dao.pojo.CaseStep;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
 
 public interface CaseStepService {
 	
@@ -10,13 +10,13 @@ public interface CaseStepService {
 	 * @param id
 	 * @return
 	 */
-	CaseStep findById(int id);
+	QualityCaseStep findById(int id);
 	/**
 	 * 添加用例步骤
 	 * @param casestep
 	 * @return
 	 */
-	CaseStep addCaseStep(CaseStep casestep);
+	QualityCaseStep addCaseStep(QualityCaseStep casestep);
 	/**
 	 * 删除步骤
 	 * @param id
@@ -28,5 +28,5 @@ public interface CaseStepService {
 	 * @param casestep
 	 * @return
 	 */
-	List<CaseStep> findCaseStepList(CaseStep casestep);
+	List<QualityCaseStep> findCaseStepList(QualityCaseStep casestep);
 }

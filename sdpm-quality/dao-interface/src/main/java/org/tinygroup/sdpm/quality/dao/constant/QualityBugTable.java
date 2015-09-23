@@ -23,9 +23,9 @@ import org.tinygroup.tinysqldsl.base.Table;
  * 缺陷表
  * 
  */
-public class BugTable extends Table {
+public class QualityBugTable extends Table {
 
-	public static final BugTable BUGTABLE = new BugTable();
+	public static final QualityBugTable QUALITY_BUGTABLE = new QualityBugTable();
 
 	/** 
 	 * Bug编号
@@ -328,8 +328,8 @@ public class BugTable extends Table {
 	public final Column DELETED = new Column(this, "deleted");
 
 
-	private BugTable() {
-		super("bug");
+	private QualityBugTable() {
+		super("quality_bug");
 	}
 
 }
