@@ -11,7 +11,7 @@
         #@label(ckId)${labelText}#end
 #end
 
-#@tinyForm("thisform" "TINY_CONTEXT_PATH/product/save" "post" {"class":""})
+#@tinyForm("thisform" "/product/save" "post" {"class":""})
 <div style="width:100%;float:center" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">添加产品</p>

@@ -20,6 +20,17 @@
        <artifactId>sdpm-common-base-dao</artifactId>
         <version>${tiny_sdpm_version}</version>
     </dependency>
+    
+    <dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>org.tinygroup.tinysqldsl</artifactId>
+			<version>${tiny_version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>org.tinygroup.jdbctemplatedslsession</artifactId>
+			<version>${tiny_version}</version>
+		</dependency>
    
     <dependency>
       <groupId>junit</groupId>
