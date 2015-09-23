@@ -2,8 +2,7 @@
 #for(var:pager.records)
 #@tr()
     #@td()<input type="checkbox" value="${var.orgUserId}" name="idCheck">#end
-    #@td()
-    <a href="${TINY_CONTEXT_PATH}/organization/user/todocalendarAdmin.page">${var.orgUserRealName}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/organization/user/todocalendarAdmin.page">${var.orgUserRealName}</a>#end
     #@td()${var.orgUserAccount}#end
     #@td()${var.orgUserRole}#end
     #@td()
@@ -12,7 +11,6 @@
     #@td()${var.orgUserGender}#end
     #@td()${var.orgUserPhone}#end
     #@td()${var.orgUserJoin}#end
-    #@td()${var.orgUserLast}#end
     #@td()
         #set(map={"org-user-edit":[665,448],"org-user-delete":[550,150]})
         #foreach(m:menuManager.getScopeMenus("org-user"))

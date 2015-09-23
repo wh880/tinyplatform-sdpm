@@ -26,18 +26,17 @@
     ##            #@simpleI("icon-plus")批量添加#end
     ##        #end
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/organization/user/list/data") ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/org/user/list/data") ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"orgUserRealName"})姓名#end
+                #@tinyTh({"class":"","rel":"orgUserRealName"})姓名#end
                 #@tinyTh({"class":"","rel":"orgUserAccount"})用户名#end
                 #@tinyTh({"class":"","rel":"orgUserRole"})职位#end
                 #@tinyTh({"class":"","rel":"orgUserEmail"})邮箱#end
                 #@tinyTh({"class":"","rel":"orgUserGender"})性别#end
                 #@tinyTh({"class":"","rel":"orgUserPhone"})电话#end
                 #@tinyTh({"class":"sorting","rel":"orgUserJoin"})加入日期#end
-                #@tinyTh({"class":"sorting","rel":"orgUserLast"})最后登录#end
                 #@tinyTh({"class":"","rel":"sortname"})操作#end
             #end
         #end
