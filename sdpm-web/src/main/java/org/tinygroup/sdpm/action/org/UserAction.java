@@ -25,7 +25,7 @@ public class UserAction extends BaseController {
 
     @RequestMapping("/form")
     public String form(String id, Model model) {
-        if (!StringUtil.isBlank(id)) {
+        if (id != null) {
             OrgUser user = userService.findUser(id);
             model.addAttribute("user", user);
         }
