@@ -9,14 +9,14 @@
 #setTinyItemCount(52)
 #foreach(var:[1..pagesize])
     #@tr()
-        #@td()<input type="checkbox" value="1" name="idCheck">#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/clientsla.page">001#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">恒生电子</a>#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent.page">支付宝协议#end
-        #@td()2.0.1#end
-        #@td()高级#end
-        #@td()习近平#end
-        #@td()20150708#end
+        #@td()<input type="checkbox" value="${var.slaId}" name="idCheck">#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/clientsla.page">${var.clientId}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">${var.ServiceName}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent.page">${var.slaTitle}#end
+        #@td()${var.cilentProductVision}#end
+        #@td()${var.slaStatus}#end
+        #@td()${var.slaCreatedBy}#end
+        #@td()${var.slaCreateDate}#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("service-sla"))
                 #if(m.id != "sla-del")

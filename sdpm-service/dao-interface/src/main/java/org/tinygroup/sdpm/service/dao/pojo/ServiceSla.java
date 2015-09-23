@@ -24,6 +24,14 @@ import java.util.Date;
  */
 public class ServiceSla {
 
+	public static Integer DELETE_YES=1;
+	public static Integer DELETE_NO=1;
+
+	public ServiceSla()
+	{
+		setDeleted(DELETE_NO);
+	}
+
 	/** 
 	 * 服务协议ID
 	 * 
@@ -41,6 +49,11 @@ public class ServiceSla {
 	 * 3vip
 	 */
 	private Integer serviceLevel;
+
+
+	/*关联客户表的客户名称*/
+	private  String  ServiceName;
+
 
 	/** 
 	 * 服务期限

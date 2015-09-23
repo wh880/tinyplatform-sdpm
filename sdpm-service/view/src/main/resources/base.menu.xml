@@ -82,13 +82,15 @@
         <menu id="sla-export" name="导出" href="/service/serviceCom/serviceExport.pagelet" icon="icon-download-alt"
               sort="1" isShow="1"
               scope="service-sla-r"/>
-        <menu id="sla-add" name="新建协议" href="/service/sla/slaAdd.page" icon="icon-plus" sort="1" isShow="1"
+        <menu id="sla-add" name="新建协议" href="/service/sla/form" icon="icon-plus" sort="1" isShow="1"
               scope="service-sla-r"/>
     </menu>
     <menu id="faq" name="FAQ" href="/service/faq/faqmenu.page" sort="100" isShow="1">
-        <menu id="faq-edit" name="编辑" href="/service/faq/addquestion.page" icon="icon-pencil" sort="1" isShow="1"
+        <!--<menu id="faq-edit" name="编辑" href="/service/faq/addquestion.page" icon="icon-pencil" sort="1" isShow="1"-->
+        <menu id="faq-edit" name="编辑" href="/service/faq/form" icon="icon-pencil" sort="1" isShow="1"
               scope="service-faq"/>
-        <menu id="faq-del" name="删除" href="/service/faq/faqmenu.page" icon="icon-trash" sort="1" isShow="1"
+        <!--<menu id="faq-del" name="删除" href="/service/faq/faqmenu.page" icon="icon-trash" sort="1" isShow="1"-->
+        <menu id="faq-del" name="删除" href="/service/faq/delete" icon="icon-trash" sort="1" isShow="1"
               scope="service-faq"/>
         <!--<menu id="faq-add" name="新增问题" href="/service/faq/addquestion.page" icon="icon-plus-sign" sort="1" isShow="1"-->
         <menu id="faq-add" name="新增问题" href="/service/faq/form" icon="icon-plus-sign" sort="1" isShow="1"
