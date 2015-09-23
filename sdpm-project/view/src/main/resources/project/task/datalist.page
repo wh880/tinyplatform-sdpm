@@ -15,7 +15,7 @@ sssssssss
 #@tr()
     #@td()<input type="checkbox" value="1" name="idCheck">#end
     #@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">${t?.taskName}</a> #end
-    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">${t?.taskName}<</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">${t?.taskName}</a>#end
     #@td()${t?.taskName}#end
     #@td()${t?.taskName}#end
     #@td()03-25#end

@@ -3,7 +3,7 @@ package org.tinygroup.sdpm.service.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.service.biz.inter.SlaManager;
-import org.tinygroup.sdpm.service.dao.pojo.Sla;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.sdpm.service.service.inter.SlaService;
 
 import java.util.List;
@@ -14,19 +14,20 @@ import java.util.List;
 public class SlaServiceImpl implements SlaService {
     @Autowired
     private SlaManager slaManager;
-    public Sla findSla(Integer id) {
+
+    public ServiceSla findSla(Integer id) {
         return slaManager.find(id);
     }
 
-    public List<Sla> getSlaList(Sla sla) {
+    public List<ServiceSla> getSlaList(ServiceSla sla) {
         return slaManager.getList(sla);
     }
 
-    public Sla addSla(Sla sla) {
+    public ServiceSla addSla(ServiceSla sla) {
         return slaManager.add(sla);
     }
 
-    public Sla updateSla(Sla sla) {
+    public ServiceSla updateSla(ServiceSla sla) {
         return slaManager.update(sla);
     }
 

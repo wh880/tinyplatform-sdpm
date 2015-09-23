@@ -3,7 +3,7 @@ package org.tinygroup.sdpm.service.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.service.biz.inter.ClientManager;
-import org.tinygroup.sdpm.service.dao.pojo.Client;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 
 import java.util.List;
@@ -16,19 +16,19 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     private ClientManager clientManager;
 
-    public Client findClient(Integer id) {
+    public ServiceClient findClient(Integer id) {
         return clientManager.find(id);
     }
 
-    public List<Client> getClientList(Client client) {
+    public List<ServiceClient> getClientList(ServiceClient client) {
         return clientManager.getList(client);
     }
 
-    public Client addClient(Client client) {
+    public ServiceClient addClient(ServiceClient client) {
         return clientManager.add(client);
     }
 
-    public Client updateClient(Client client) {
+    public ServiceClient updateClient(ServiceClient client) {
         return clientManager.update(client);
     }
 
@@ -40,7 +40,7 @@ public class ClientServiceImpl implements ClientService {
         return clientManager.deleteBatch(id);
     }
 
-    public List<Client> findClientByProduct(Integer productId) {
+    public List<ServiceClient> findClientByProduct(Integer productId) {
         return clientManager.findByProduct(productId);
     }
 }

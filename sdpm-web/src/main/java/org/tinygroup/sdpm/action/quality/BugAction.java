@@ -23,8 +23,8 @@ public class BugAction extends BaseController {
 	private BugService bugService;
 	
 	@RequestMapping("/form")
-	public String list(Integer id,Model model){
-		Bug bug = new Bug();
+	public String form(Integer id,Bug bug,Model model){
+	//	Bug bug = new Bug();
 		if(id != null){
 			bug.setProductId(id);
 			List<Bug> buglist = bugService.findBugList(bug);
@@ -33,14 +33,21 @@ public class BugAction extends BaseController {
 		return "testManagement/data/BugData.pagelet";
 	}
 	
-	/*@RequestMapping(value = "/save",method = RequestMethod.POST)
+	/*@RequestMapping("add")
+	public String add(Bug bug,Model model){
+		Bug bugadd =	bugService.addBug(bug);
+		model.addAttribute("bugadd",bugadd);
+		return "testManagement/page/proposeBug.page";
+	}*/
+	
+	@RequestMapping(value = "/save",method = RequestMethod.POST)
 	public String save(Bug bug,Model model){
 		if(bug.getBugId() == null){
 			bugService.addBug(bug);
 		}else{
 			bugService.updateBug(bug);
 		}	
-		model.addAttribute("bug",bug);
+		model.addAttribute("bugsave",bug);
 		return "testManagement/page/Bug.page";
-	}*/
+	}
 }
