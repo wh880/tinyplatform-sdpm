@@ -32,6 +32,10 @@ public class TaskServiceImpl implements TaskService {
         return taskManager.findPager(start, limit, task, sortName, asc);
     }
 
+    public ProjectTask findTask(Integer taskId) {
+        return taskManager.find(taskId);
+    }
+
 
     public Integer updateTask(ProjectTask task) {
         return taskManager.update(task);

@@ -12,7 +12,7 @@
               scope="pro-task-op"/>
         <menu id="pro-task-close" name="关闭" href="/project/task/close.page" icon="icon-off" sort="6" isShow="1"
               scope="pro-task-op"/>
-        <menu id="pro-task-edit" name="编辑" href="/project/task/save" icon="icon-pencil" sort="4" isShow="1"
+        <menu id="pro-task-edit" name="编辑" href="/project/task/edit" icon="icon-pencil" sort="4" isShow="1"
               scope="pro-task-op"/>
 
         <menu id="task-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
