@@ -34,7 +34,7 @@
 		#@elementItem()
 			#@colLabel()总消耗#end
 			#@formControlDiv("col-8")
-				#tinyInput("text" "Float" ""{"placeholder":"单位是小时","id":"comsume-time","class":"input-text","datatype":"*4-16","nullmsg":"请输入时间（小时）"})
+				#tinyInput("text" "Float" "1.1"{"placeholder":"单位是小时","id":"comsume-time","class":"input-text","datatype":"*4-16","nullmsg":"请输入时间（小时）"})
 			#end
 			#@validateDiv("col-2")#end
 		#end
@@ -60,7 +60,7 @@
 		#@elementItem()
 			#@colLabel()完成时间#end
 			#@formControlDiv("skin-minimal col-5")
-				#dateInputSimple("taskFinishedDate" "" "YYYY-MM-DD")
+				#dateInputSimple("taskFinishedDate" "2015-01-23" "YYYY-MM-DD")
 			#end
 			#@validateDiv("col-2")#end
 		#end

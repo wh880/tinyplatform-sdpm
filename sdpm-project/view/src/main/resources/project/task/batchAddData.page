@@ -65,7 +65,7 @@
                     #@validateDiv("col-2")#end
                 #end
                 #@th()
-                    #tinyInput("text" "taskName"""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！"})
+                    #tinyInput("text" "taskName""ancdefg"{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！"})
                 #end
                 #@th()
                     #@formControlDiv( )
@@ -107,10 +107,10 @@
                     #@validateDiv("col-2")#end
                 #end
                 #@th()
-                    #tinyInput("text" "taskEstimate")
+                    #tinyInput("text" "taskEstimate""1.1")
                 #end
                 #@th()
-                    #tinyInput("text" "taskDesc")
+                    #tinyInput("text" "taskDesc""任务描述")
                 #end
                 #@th()
                     #@formControlDiv()

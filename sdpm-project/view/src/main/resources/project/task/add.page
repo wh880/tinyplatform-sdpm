@@ -23,7 +23,7 @@
     <p class="titleName">建任务</p>
 	#@elementItem()
 		#@sdpmItem("所属项目")
-            <input type="hidden" name="taskProject" value="1"/>
+            <input type="hidden" name="taskProject" value="111"/>
 		#end
 	#end
 	#@elementItem()
@@ -93,7 +93,7 @@
 		#@sdpmItem("任务名称")
 			#@formControlDiv("col-8")
 				#tinyInput(
-					"text" "taskName" ""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！","id":
+					"text" "taskName" "abcdefg"{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！","id":
 					"username","class":
 					"input-text"})
 			#end
@@ -103,7 +103,7 @@
 		#@sdpmItem("任务描述")
 			#@formControlDiv("col-8")
 				#tinyInput(
-					"text" "taskDesc" ""{"placeholder":"任务描述","datatype":"*4-16","id":
+					"text" "taskDesc" "任务描述"{"placeholder":"任务描述","datatype":"*4-16","id":
 					"username",
 					"class":"input-text"})
 			#end
@@ -127,7 +127,7 @@
 	#@elementItem()
 		#@sdpmItem("最初预计")
 			#@formControlDiv("col-8")
-				#tinyInput("text" "taskEstimate" ""{"placeholder":"最初预计","datatype":"*4-16","id":
+				#tinyInput("text" "taskEstimate" "1.1"{"placeholder":"最初预计","datatype":"*4-16","id":
 					"username","class":"input-text"})
 			#end
 		#end
