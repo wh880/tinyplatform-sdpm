@@ -20,12 +20,6 @@ public interface ProductLineService {
 	 * @return
 	 */
 	int updateProductLine(ProductLine productLine);
-	/**
-	 * 批量编辑
-	 * @param productLines
-	 * @return
-	 */
-	int[] updateBatch(List<ProductLine> productLines);
 	
 	/**
 	 * 根据主键查询
@@ -35,21 +29,9 @@ public interface ProductLineService {
 	ProductLine findProductLine(Integer productLineId);
 	
 	/**
-	 * 根据对象查询（排序）
+	 * 根据对象查找
 	 * @param productLine
-	 * @param columnName
-	 * @param asc
 	 * @return
 	 */
-	List<ProductLine> findProductLineList(ProductLine productLine,String columnName,boolean asc);
-	/**
-	 * 根据对象查找(分页、排序)
-	 * @param start
-	 * @param limit
-	 * @param productLine
-	 * @param columnName
-	 * @param asc
-	 * @return
-	 */
-	Pager<ProductLine> findProductLinePager(int start,int limit,ProductLine productLine,String columnName,boolean asc);
+	List<ProductLine> findProductLineList(ProductLine productLine);
 }

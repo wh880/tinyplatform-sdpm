@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.productline.wrapper;
+package org.tinygroup.sdpm.system.wrapper;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,7 +27,7 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.productLine.service.ProductLineService {
+public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.HistoryService {
 
 	CEPCore cepcore;
 
@@ -49,12 +49,12 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 		return event;
 	}
 
-	public org.tinygroup.sdpm.productLine.dao.pojo.ProductLine addProductLine(org.tinygroup.sdpm.productLine.dao.pojo.ProductLine productLine) {
-		String serviceId = "productline_addProductLine";
+	public org.tinygroup.sdpm.system.dao.pojo.History add(org.tinygroup.sdpm.system.dao.pojo.History history) {
+		String serviceId = "system_histroy_add_1";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("productLine" ,productLine);
+			context.put("history" ,history);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 		}
 	}
 
-	public int updateProductLine(org.tinygroup.sdpm.productLine.dao.pojo.ProductLine productLine) {
-		String serviceId = "productline_updateProductLine";
+	public org.tinygroup.sdpm.system.dao.pojo.History updata(org.tinygroup.sdpm.system.dao.pojo.History history) {
+		String serviceId = "system_histroy_updata_1";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("productLine" ,productLine);
+			context.put("history" ,history);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 		}
 	}
 
-	public org.tinygroup.sdpm.productLine.dao.pojo.ProductLine findProductLine(java.lang.Integer productLineId) {
-		String serviceId = "productline_findProductLine";
+	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.History history) {
+		String serviceId = "system_histroy_delete_1";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("productLineId" ,productLineId);
+			context.put("history" ,history);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,44 +88,12 @@ public class ProductLineServiceImplWrapper implements org.tinygroup.sdpm.product
 		}
 	}
 
-	public int[] updateBatch(java.util.List<org.tinygroup.sdpm.productLine.dao.pojo.ProductLine> productLines) {
-		String serviceId = "productline_updateBatch";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.History> find(org.tinygroup.sdpm.system.dao.pojo.History history) {
+		String serviceId = "system_histroy_find_1";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("productLines" ,productLines);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	public java.util.List<org.tinygroup.sdpm.productLine.dao.pojo.ProductLine> findProductLineList(org.tinygroup.sdpm.productLine.dao.pojo.ProductLine productLine ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "productline_findProductLineList";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("productLine" ,productLine);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.productLine.dao.pojo.ProductLine> findProductLinePager(int start ,int limit ,org.tinygroup.sdpm.productLine.dao.pojo.ProductLine productLine ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "productline_findProductLinePager";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("start" ,start);
-			context.put("limit" ,limit);
-			context.put("productLine" ,productLine);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
+			context.put("history" ,history);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

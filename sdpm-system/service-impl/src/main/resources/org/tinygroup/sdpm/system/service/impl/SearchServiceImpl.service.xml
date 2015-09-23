@@ -1,0 +1,53 @@
+
+<service-components>
+  <service-component type="org.tinygroup.sdpm.system.service.impl.SearchServiceImpl" bean="">
+    <service-method local-name="addSearch" service-id="system_addSearch" method-name="addSearch" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="search" type="org.tinygroup.sdpm.system.dao.pojo.SystemSearch" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addSearchResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemSearch"/>
+    </service-method>
+    <service-method local-name="deleteSearch" service-id="system_deleteSearch" method-name="deleteSearch" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="searchId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteSearchResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="updateSearch" service-id="system_updateSearch" method-name="updateSearch" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="search" type="org.tinygroup.sdpm.system.dao.pojo.SystemSearch" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateSearchResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="findSearch" service-id="system_findSearch" method-name="findSearch" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="searchId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSearchResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemSearch"/>
+    </service-method>
+    <service-method local-name="findSearchList" service-id="system_findSearchList" method-name="findSearchList" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="search" type="org.tinygroup.sdpm.system.dao.pojo.SystemSearch" required="false" is-array="false"/>
+        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSearchListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemSearch"/>
+    </service-method>
+    <service-method local-name="findSearchPager" service-id="system_findSearchPager" method-name="findSearchPager" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="search" type="org.tinygroup.sdpm.system.dao.pojo.SystemSearch" required="false" is-array="false"/>
+        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSearchPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager&lt;org.tinygroup.sdpm.system.dao.pojo.SystemSearch&gt;"/>
+    </service-method>
+    <service-method local-name="updateBatchSearch" service-id="system_updateBatchSearch" method-name="updateBatchSearch" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="searches" type="org.tinygroup.sdpm.system.dao.pojo.SystemSearch" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateBatchSearchResult" required="false" is-array="true" type="int"/>
+    </service-method>
+  </service-component>
+</service-components>

@@ -18,12 +18,12 @@
   	<dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-system-business-interface</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
+       <version>${project.version}</version>
     </dependency>
     <dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-system-dao-impl</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
+       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

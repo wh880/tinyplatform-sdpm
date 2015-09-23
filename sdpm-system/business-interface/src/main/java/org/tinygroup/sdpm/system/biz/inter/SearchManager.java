@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.system.biz.inter;
 import java.util.List;
 
 import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface SearchManager {
 	/**
@@ -25,6 +26,12 @@ public interface SearchManager {
 	 * @return
 	 */
 	int update(SystemSearch search);
+	/**
+	 * 批量删除
+	 * @param searches
+	 * @return
+	 */
+	int[] updateBatch(List<SystemSearch> searches);
 	
 	/**
 	 * 根据ID查找
@@ -34,9 +41,22 @@ public interface SearchManager {
 	SystemSearch find(Integer searchId);
 	
 	/**
-	 * 根据对象查找
-	 * @param config
+	 * 根据对象查询（排序）
+	 * @param search
+	 * @param columnName
+	 * @param asc
 	 * @return
 	 */
-	List<SystemSearch> finList(SystemSearch search);
+	List<SystemSearch> findList(SystemSearch search,String columnName,boolean asc);
+	/**
+	 * 分页查询
+	 * @param start
+	 * @param limit
+	 * @param search
+	 * @param columnName
+	 * @param asc
+	 * @return
+	 */
+	Pager<SystemSearch> findPager(int start,int limit,SystemSearch search,String columnName,boolean asc);
+	
 }

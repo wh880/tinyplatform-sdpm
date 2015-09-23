@@ -15,15 +15,20 @@
     <!--可以自定义标签对,可以在其它地方用{标签名引用}-->
   </properties>
   <dependencies>
+  <dependency>
+	    <groupId>org.tinygroup</groupId>
+		<artifactId>org.tinygroup.genservicewrap</artifactId>
+		<version>${tiny_version}</version>
+	</dependency>
   	<dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-system-service-interface</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
+       <version>${project.version}</version>
     </dependency>
     <dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-system-business-impl</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
+       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.tinygroup</groupId>
@@ -41,12 +46,35 @@
 	    <version>${tiny_version}</version>
 	  </dependency>
     <dependency>
-      <groupId>org.tinygroup</groupId>
+  <groupId>org.tinygroup</groupId>
       <artifactId>org.tinygroup.tinydbflowcomponent</artifactId>
       <version>${tiny_version}</version>
     </dependency>
-    <dependency>
-      <groupId>junit</groupId>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>org.tinygroup.testutil</artifactId>
+          <version>${tiny_version}</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>org.tinygroup.cepcoreimpl</artifactId>
+          <version>${tiny_version}</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>commons-dbcp</groupId>
+          <artifactId>commons-dbcp</artifactId>
+          <version>1.2.2</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>5.0.5</version>
+          <scope>test</scope>
+      </dependency>
+    <dependency>      <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>

@@ -28,10 +28,8 @@ import org.tinygroup.event.Event;
 import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
-
 @Component
 public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.service.ReleaseService {
-	
 	@Autowired
 	CEPCore cepcore;
 

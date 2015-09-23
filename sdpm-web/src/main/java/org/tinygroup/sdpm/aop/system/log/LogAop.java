@@ -31,7 +31,7 @@ public class LogAop {
         String methodName = joinPoint.getSignature().getName();
         Object[] args = joinPoint.getArgs();
         Class[] parameterTypes = ((MethodSignature)joinPoint.getSignature()).getMethod().getParameterTypes();
-        //LogClass为类级注解，之后需重建
+        //LogClass为类级注解
         LogClass logClass = target.getClass().getAnnotation(LogClass.class);
 
         Object result = joinPoint.proceed();
@@ -39,7 +39,7 @@ public class LogAop {
 
         String classType = logClass.value();
         Obtain obtain = LogUtil.getObtain(classType);
-        //LogMethod为方法级注解，之后需重建
+        //LogMethod为方法级注解
         LogMethod logMethod = null;
         try {
 
@@ -52,19 +52,29 @@ public class LogAop {
             e.printStackTrace();
         }
         if(logMethod!=null){
-            Class parameter = toClass(obtain.getParameters().get(0).getType());
             Object service = serviceInstance(obtain.getType());
-            //之后调用时的id
-//            Object id = reflectValue(args[0],toMethod(obtain.getPrimaryName()),null);
-            // 1 之后需改成 对象id值
-            Object old = reflectValue(service,obtain.getMethod(),1);
+            if("edit".equals(logMethod.value())){
+                //之后调用时的id
+                // Object id = reflectValue(args[0],toMethod(obtain.getPrimaryName()),null);
+                // 1 之后需改成 对象id值
+                Object old = reflectValue(service,obtain.getMethod(),1);
+                if((Boolean)result){
+                    //生成日志 (String)session.getAttribute("user") 之后需改成用户名
+                    recordEdit(classType,logMethod.value(),obtain,old,args[0],(String)session.getAttribute("user"));
+                }
+            }else if("add".equals(logMethod.value())){
 
+            }else if("delete".equals(logMethod.value())){
 
+            }else if("batchAdd".equals(logMethod.value())){
 
-            if((Boolean)result){
-                //生成日志 (String)session.getAttribute("user") 之后需改成用户名
-                record(classType,logMethod.value(),obtain,old,args[0],(String)session.getAttribute("user"));
+            }else if("batchDelete".equals(logMethod.value())){
+
             }
+
+
+
+
         }
 
 
@@ -76,7 +86,7 @@ public class LogAop {
     }
 
 
-    public void record(String type, String operatorType , Obtain obtain, Object oldObject, Object newObject, String user){
+    public void recordEdit(String type, String operatorType , Obtain obtain, Object oldObject, Object newObject, String user){
         if("edit".equals(operatorType)){
             Field[] fields =  oldObject.getClass().getDeclaredFields();
             for(Field field : fields){

@@ -19,7 +19,7 @@
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-productLine-view</artifactId>
-            <version>${tiny_sdpm_version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -29,13 +29,32 @@
          <dependency>
           <groupId>org.tinygroup</groupId>
           <artifactId>sdpm-common-common</artifactId>
-          <version>${tiny_sdpm_version}</version>
+          <version>${project.version}</version>
      	 </dependency>
         <dependency>
           <groupId>org.tinygroup</groupId>
           <artifactId>sdpm-common-view</artifactId>
-          <version>${tiny_sdpm_version}</version>
+          <version>${project.version}</version>
      	 </dependency>
+     	 	<dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-metadata</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+         <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-productLine-service-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-product-service-wrapper</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        
+        
+        
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.templateweblayer</artifactId>
@@ -81,6 +100,7 @@
             <artifactId>org.tinygroup.jcscache</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+        
 
         <dependency>
             <groupId>junit</groupId>

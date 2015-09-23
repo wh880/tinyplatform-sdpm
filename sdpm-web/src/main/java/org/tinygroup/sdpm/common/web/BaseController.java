@@ -1,11 +1,8 @@
 package org.tinygroup.sdpm.common.web;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindException;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
@@ -15,7 +12,6 @@ import org.tinygroup.sdpm.common.util.DateUtils;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
-import javax.xml.bind.ValidationException;
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.util.Date;
@@ -111,13 +107,13 @@ public abstract class BaseController {
         }
     }
 
-    /**
-     * 参数绑定异常
-     */
-    @ExceptionHandler({BindException.class, ConstraintViolationException.class, ValidationException.class})
-    public String bindException() {
-        return "error/400";
-    }
+//    /**
+//     * 参数绑定异常
+//     */
+//    @ExceptionHandler({BindException.class, ConstraintViolationException.class, ValidationException.class})
+//    public String bindException() {
+//        return "error/400";
+//    }
 
 //    /**
 //     * 授权登录异常
@@ -136,18 +132,18 @@ public abstract class BaseController {
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         // String类型转换，将所有传递进来的String进行HTML编码，防止XSS攻击
-        binder.registerCustomEditor(String.class, new PropertyEditorSupport() {
-            @Override
-            public void setAsText(String text) {
-                setValue(text == null ? null : StringEscapeUtils.escapeHtml(text.trim()));
-            }
-
-            @Override
-            public String getAsText() {
-                Object value = getValue();
-                return value != null ? value.toString() : "";
-            }
-        });
+//        binder.registerCustomEditor(String.class, new PropertyEditorSupport() {
+//            @Override
+//            public void setAsText(String text) {
+//                setValue(text == null ? null : StringEscapeUtils.escapeHtml(text.trim()));
+//            }
+//
+//            @Override
+//            public String getAsText() {
+//                Object value = getValue();
+//                return value != null ? value.toString() : "";
+//            }
+//        });
         // Date 类型转换
         binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
             @Override

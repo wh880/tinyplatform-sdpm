@@ -65,15 +65,15 @@ public class DocServiceImpl implements DocService{
 		return docbiz.docHistory(docid);
 	}
 
-	/*public List<Doc> findDocByDocClassOrderBy(Doc doc, OrderBy... orderbys) {
+	public List<Doc> findDocByDocClass(Doc doc) {
 		// 
-		return null;//docbiz.getDocListOrderBy(doc);
-	}*/
+		return docbiz.getDocByEntity(doc);
+	}
 
-	/*public Pager<Doc> findDocRetPager(int start, int limit, Doc doc,OrderBy...orderbys) {
+	public Pager<Doc> findDocRetPager(int start, int limit, Doc doc) {
 		// 
-		return docbiz.queryItemWithPage(start, limit, doc,orderbys);
-	}*/
+		return docbiz.queryItemWithPage(start, limit, doc);
+	}
 
 	public int deleteDocById(Integer id) {
 		// 
@@ -89,6 +89,5 @@ public class DocServiceImpl implements DocService{
 		// 
 		return docbiz.batchDelDocByIds(keys);
 	}
-
 
 }

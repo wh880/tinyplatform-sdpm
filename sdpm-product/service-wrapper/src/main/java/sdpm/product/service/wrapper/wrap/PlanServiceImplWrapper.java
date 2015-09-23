@@ -31,7 +31,6 @@ import org.tinygroup.event.ServiceRequest;
 
 @Component
 public class PlanServiceImplWrapper implements org.tinygroup.sdpm.product.service.PlanService {
-	
 	@Autowired
 	CEPCore cepcore;
 
@@ -43,7 +42,7 @@ public class PlanServiceImplWrapper implements org.tinygroup.sdpm.product.servic
 		this.cepcore = cepcore;
 	}
 
-	private Event getEvent(String serviceId,Context context) throws Exception{
+	private Event getEvent(String serviceId, Context context) throws Exception {
 		Event event = new Event();
 		event.setEventId(UUID.randomUUID().toString());
 		ServiceRequest serviceRequest = new ServiceRequest();
@@ -53,113 +52,116 @@ public class PlanServiceImplWrapper implements org.tinygroup.sdpm.product.servic
 		return event;
 	}
 
-	public org.tinygroup.sdpm.product.dao.pojo.ProductPlan addPlan(org.tinygroup.sdpm.product.dao.pojo.ProductPlan plan) {
+	public org.tinygroup.sdpm.product.dao.pojo.ProductPlan addPlan(
+			org.tinygroup.sdpm.product.dao.pojo.ProductPlan plan) {
 		String serviceId = "product_addPlan";
 
-		try{
+		try {
 			Context context = new ContextImpl();
-			context.put("plan" ,plan);
+			context.put("plan", plan);
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+			return callServiceAndCallBack(serviceId, context);
+		} catch (Exception e) {
+			throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
 		}
 	}
 
 	public int updatePlan(org.tinygroup.sdpm.product.dao.pojo.ProductPlan plan) {
 		String serviceId = "product_updatePlan";
 
-		try{
+		try {
 			Context context = new ContextImpl();
-			context.put("plan" ,plan);
+			context.put("plan", plan);
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+			return callServiceAndCallBack(serviceId, context);
+		} catch (Exception e) {
+			throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
 		}
 	}
 
 	public int deletePlan(java.lang.Integer planId) {
 		String serviceId = "product_deletePlan";
 
-		try{
+		try {
 			Context context = new ContextImpl();
-			context.put("planId" ,planId);
+			context.put("planId", planId);
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+			return callServiceAndCallBack(serviceId, context);
+		} catch (Exception e) {
+			throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
 		}
 	}
 
 	public org.tinygroup.sdpm.product.dao.pojo.ProductPlan findPlan(java.lang.Integer planId) {
 		String serviceId = "product_findPlan";
 
-		try{
+		try {
 			Context context = new ContextImpl();
-			context.put("planId" ,planId);
+			context.put("planId", planId);
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+			return callServiceAndCallBack(serviceId, context);
+		} catch (Exception e) {
+			throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
 		}
 	}
 
 	public int[] updateBatch(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductPlan> plan) {
 		String serviceId = "product_updateBatch";
 
-		try{
+		try {
 			Context context = new ContextImpl();
-			context.put("plan" ,plan);
+			context.put("plan", plan);
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+			return callServiceAndCallBack(serviceId, context);
+		} catch (Exception e) {
+			throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductPlan> findPlanList(org.tinygroup.sdpm.product.dao.pojo.ProductPlan plan ,java.lang.String columnName ,boolean asc) {
+	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductPlan> findPlanList(
+			org.tinygroup.sdpm.product.dao.pojo.ProductPlan plan, java.lang.String columnName, boolean asc) {
 		String serviceId = "product_findPlanList";
 
-		try{
+		try {
 			Context context = new ContextImpl();
-			context.put("plan" ,plan);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
+			context.put("plan", plan);
+			context.put("columnName", columnName);
+			context.put("asc", asc);
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+			return callServiceAndCallBack(serviceId, context);
+		} catch (Exception e) {
+			throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductPlan> findProductPlanPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductPlan plan ,java.lang.String columnName ,boolean asc) {
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductPlan> findProductPlanPager(
+			int start, int limit, org.tinygroup.sdpm.product.dao.pojo.ProductPlan plan, java.lang.String columnName,
+			boolean asc) {
 		String serviceId = "product_findProductPlanPager";
 
-		try{
+		try {
 			Context context = new ContextImpl();
-			context.put("start" ,start);
-			context.put("limit" ,limit);
-			context.put("plan" ,plan);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
+			context.put("start", start);
+			context.put("limit", limit);
+			context.put("plan", plan);
+			context.put("columnName", columnName);
+			context.put("asc", asc);
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+			return callServiceAndCallBack(serviceId, context);
+		} catch (Exception e) {
+			throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
 		}
 	}
 
-	private <T> T callServiceAndCallBack(String serviceId,Context context) throws Exception{
-		Event event = getEvent(serviceId,context);
+	private <T> T callServiceAndCallBack(String serviceId, Context context) throws Exception {
+		Event event = getEvent(serviceId, context);
 		cepcore.process(event);
 		ServiceInfo info = cepcore.getServiceInfo(serviceId);
 		List<Parameter> resultsParam = info.getResults();
-		if (resultsParam==null||resultsParam.size() == 0) {
+		if (resultsParam == null || resultsParam.size() == 0) {
 			return null;
-	}
-		return event.getServiceRequest().getContext()
-			.get(resultsParam.get(0).getName());
+		}
+		return event.getServiceRequest().getContext().get(resultsParam.get(0).getName());
 	}
 
 }

@@ -96,20 +96,22 @@ public class DocBizImpl implements DocBiz {
 		return docdao.getByKey(key);
 	}
 
-	/*public List<Doc> getDocListOrderBy(Doc doc,OrderBy...orderbies) {
+	public List<Doc> getDocByEntity(Doc doc) {
 		// 
-		return docdao.query(doc,orderbies);
-	}*/
+		if(doc == null)
+			doc = new Doc();
+		return docdao.query(doc);
+	}
 
 	public DocLib getDocLibById(Integer key) {
 		// 
 		return doclibdao.getByKey(key);
 	}
 
-	/*public Pager<Doc> queryItemWithPage(Integer start, Integer limited, Doc doc,OrderBy...orderbies) {
+	public Pager<Doc> queryItemWithPage(Integer start, Integer limited, Doc doc) {
 		// 分页
-		return docdao.queryPager(start, limited, doc ,orderbies);
-	}*/
+		return docdao.queryPager(start, limited, doc);
+	}
 
 	public int batchDelDocByIds(Integer... keys) {
 		// 
@@ -118,7 +120,7 @@ public class DocBizImpl implements DocBiz {
 
 	public List<Historydoc> docHistory(Integer docid) {
 		// 这个很重要了，显示历史操作数据的，涵盖操作时间和责任人。
-		return hisdocdao.getEditHistory(docid);
+		return null;//hisdocdao.getWithSameDocId(docid);
 	}
 
 

@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.project.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.tinygroup.sdpm.project.biz.inter.ProjectProductManager;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 
 import java.util.List;
@@ -8,6 +10,9 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-20.
  */
 public class ProjectProductServiceImpl implements ProjectProductService {
+    @Autowired
+    private ProjectProductManager projectProductManager;
+
     public List<Integer> findProducts(int porjectId) {
         return null;
     }

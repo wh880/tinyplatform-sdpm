@@ -19,7 +19,7 @@
             #@formControlDiv("col-8")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "taskProject" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -63,7 +63,7 @@
             #@formControlDiv("col-8")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "taskStory" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -85,7 +85,7 @@
             #@formControlDiv("col-8")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "taskAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -107,7 +107,7 @@
             #@formControlDiv("col-8")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "taskType" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -129,7 +129,7 @@
             #@formControlDiv("col-8")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "taskStatus" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -151,7 +151,7 @@
             #@formControlDiv("col-8")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "taskPri" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -173,7 +173,7 @@
             #@formControlDiv("col-8")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "taskMailto" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -200,7 +200,7 @@
         <td style="width:75%">
             #@formControlDiv("col-8")
 			     	#@tinyDateInput(
-                "birthday" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
+                "taskEstStared" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
       			#end
         </td>
     </tr>
@@ -209,7 +209,7 @@
         <td style="width:75%">
             #@formControlDiv("col-8")
 			     	#@tinyDateInput(
-                "birthday" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
+                "taskRealStarted" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
       			#end
         </td>
     </tr>
@@ -218,14 +218,14 @@
         <td style="width:75%">
             #@formControlDiv("col-8")
 			     	#@tinyDateInput(
-                "birthday" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
+                "taskDeadLine" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
       			#end
         </td>
     </tr>
     <tr>
         <td style="float:right;padding:3px 10px;font-size:15px">最初预计</td>
         <td style="width:54%">
-            <input type="text" value="天" style="height:33px"/>
+            <input name="taskEstimate" type="text" value="天" style="height:33px"/>
         </td>
     </tr>
     <tr>
@@ -239,7 +239,7 @@
     <tr>
         <td style="float:right;padding:3px 10px;font-size:15px">预计剩余</td>
         <td style="width:75%">
-            <input type="text" value="天" style="height:33px"/>
+            <input name="taskLeft"type="text" value="天" style="height:33px"/>
         </td>
     </tr>
 </table>
@@ -256,7 +256,7 @@
         <td style="width:75%">
             #@formControlDiv("col-8")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("taskFinishedBy" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -275,7 +275,7 @@
     <tr>
         <td style="float:right;padding:3px 5px;font-size:15px">完成时间</td>
         <td style="width:75%">
-            <input type="text" style="width:210px;height:33px"/>
+            <input name="askFinishedDate" type="text" style="width:210px;height:33px"/>
         </td>
     </tr>
     <tr>
@@ -283,7 +283,7 @@
         <td style="width:80%">
             #@formControlDiv("col-8")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("taskCanceledBy" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -302,7 +302,7 @@
     <tr>
         <td style="float:right;padding:3px 5px;font-size:15px">取消时间</td>
         <td>
-            <input type="text" style="width:210px;height:33px"/>
+            <input name="taskCanceledDate" type="text" style="width:210px;height:33px"/>
         </td>
     </tr>
     <tr>
@@ -310,7 +310,7 @@
         <td style="width:80%">
             #@formControlDiv("col-8")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("taskClosedBy" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -331,7 +331,7 @@
         <td style="width:80%">
             #@formControlDiv("col-8")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("taskClosedReason" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -350,7 +350,7 @@
     <tr>
         <td style="float:right;padding:3px 5px;font-size:15px">关闭时间</td>
         <td>
-            <input type="text" style="width:210px;height:33px"/>
+            <input name="taskCloseDate" type="text" style="width:210px;height:33px"/>
         </td>
     </tr>
 </table>

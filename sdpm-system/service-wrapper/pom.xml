@@ -18,12 +18,12 @@
   	<dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-system-service-interface</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
+       <version>${project.version}</version>
     </dependency>
     <dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-system-business-interface</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
+       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.tinygroup</groupId>
@@ -50,11 +50,6 @@
 	    <artifactId>org.tinygroup.pageflowbasiccomponent</artifactId>
 	    <version>${tiny_version}</version>
 	  </dependency>
-    <dependency>
-      <groupId>org.tinygroup</groupId>
-      <artifactId>org.tinygroup.tinydbflowcomponent</artifactId>
-      <version>${tiny_version}</version>
-    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

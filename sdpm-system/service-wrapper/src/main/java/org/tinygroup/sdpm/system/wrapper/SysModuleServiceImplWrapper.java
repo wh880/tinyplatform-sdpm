@@ -14,13 +14,11 @@
  *  limitations under the License.
  */
 
-package sdpm.system.service.wrapper.wrap;
+package org.tinygroup.sdpm.system.wrapper;
 
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -28,9 +26,9 @@ import org.tinygroup.event.Event;
 import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
-@Component
-public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.ActionService {
-	@Autowired
+
+public class SysModuleServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.SysModuleService {
+
 	CEPCore cepcore;
 
 	public CEPCore getCore() {
@@ -51,12 +49,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Action add(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_add";
+	public org.tinygroup.sdpm.system.dao.pojo.SysModule edit(org.tinygroup.sdpm.system.dao.pojo.SysModule sysModule) {
+		String serviceId = "edit";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("sysModule" ,sysModule);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -64,12 +62,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Action updata(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_updata";
+	public int deleteById(int id) {
+		String serviceId = "deleteById";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("id" ,id);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -77,12 +75,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_delete";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SysModule> findByRoot(int root) {
+		String serviceId = "findByRoot";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("root" ,root);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -90,12 +88,25 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Action> find(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_find";
+	public int delete(org.tinygroup.sdpm.system.dao.pojo.SysModule sysModule) {
+		String serviceId = "delete";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("sysModule" ,sysModule);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public org.tinygroup.sdpm.system.dao.pojo.SysModule findById(int id) {
+		String serviceId = "findById";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("id" ,id);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

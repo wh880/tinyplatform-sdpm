@@ -16,12 +16,10 @@
 
 package org.tinygroup.sdpm.document.dao;
 
-import java.util.List;
-
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+
 import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
 
 public interface HistorydocDao extends BaseDao<Historydoc,Integer> {
-	public List<Historydoc> getEditHistory(Integer docid);
 
 }

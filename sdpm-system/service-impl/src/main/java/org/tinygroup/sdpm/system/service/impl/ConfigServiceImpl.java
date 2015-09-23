@@ -7,9 +7,10 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.ConfigManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.system.service.inter.ConfigService;
+import org.tinygroup.tinysqldsl.Pager;
 
 
-@Component("configService")
+@Component
 public class ConfigServiceImpl implements ConfigService {
 	
 	@Autowired
@@ -35,10 +36,21 @@ public class ConfigServiceImpl implements ConfigService {
 		return configManager.find(configId);
 	}
 
-	public List<SystemConfig> findConfigList(SystemConfig config) {
-		
-		return configManager.findList(config);
+
+	public List<SystemConfig> findConfigList(SystemConfig config, String columnName, boolean asc) {
+		return configManager.findList(config, columnName, asc);
 	}
+
+	public Pager<SystemConfig> findConfigPager(int start, int limit, SystemConfig config, String columnName,
+			boolean asc) {
+		return configManager.findPager(start, limit, config, columnName, asc);
+	}
+
+	public int[] updateBatchConfig(List<SystemConfig> configs) {
+
+		return configManager.updateBatch(configs);
+	}
+
 
 
 }

@@ -177,7 +177,7 @@
 					<a href="#" class="btn btn-info btn-sm">历史</a>
 					<a href="#" class="btn btn-warning btn-sm">相关</a>*#
 				#end
-			#@tinyTableContent("../data/BugData.pagelet")
+			#@tinyTableContent(TINY_CONTEXT_PATH+"/quality/bug/form?id=1")
 				#@thead()
 					#@tr()
 						#@tinyTh({"width":"6"})<input type="checkbox" name="" value="" />#end
@@ -185,10 +185,13 @@
 						#@tinyTh({"class":"sorting","rel":"sortname"})级别#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})P#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})Bug标题#end
-						#@tinyTh({"class":"sorting","rel":"sortname","style":"color:#333"})创建#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})指派#end
+						#@tinyTh({"class":"sorting","rel":"sortname","style":"color:#333"})状态#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})创建#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})创建日期#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})指派给#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})解决#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})方案#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})解决日期#end
 						#@tinyTh({"csortinglass":"sorting","rel":"sortname"})操作#end
 					#end
 				#end
