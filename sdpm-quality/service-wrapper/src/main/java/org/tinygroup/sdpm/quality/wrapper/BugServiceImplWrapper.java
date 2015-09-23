@@ -19,6 +19,7 @@ package org.tinygroup.sdpm.quality.wrapper;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -27,6 +28,7 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
+@Component("bugService")
 public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service.inter.BugService {
 
 	CEPCore cepcore;
