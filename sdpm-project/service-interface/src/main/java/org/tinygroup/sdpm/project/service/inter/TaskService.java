@@ -37,6 +37,16 @@ public interface TaskService {
     public List<ProjectTask> findListTask(ProjectTask task);
 
     /**
+     * 分页查询
+     * @param start
+     * @param limit
+     * @param task
+     * @param sortName
+     * @return
+     */
+    public Pager<ProjectTask> findPagerTask(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc);
+
+    /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
      * 注意：1.状态不可逆转 2.有前置条件判断
      *

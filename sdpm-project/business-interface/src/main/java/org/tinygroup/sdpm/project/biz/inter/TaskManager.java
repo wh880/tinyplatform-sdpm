@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -23,6 +24,8 @@ public interface TaskManager {
      * @return
      */
     List<ProjectTask> findList(ProjectTask task);
+
+    Pager<ProjectTask> findPager(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc);
 
     /**
      * 新增有一个用户

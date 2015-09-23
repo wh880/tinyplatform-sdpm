@@ -16,7 +16,7 @@
 
     ###TnavItem("6" m.name m.href m.icon)
     ###@aHeadCol(TINY_CONTEXT_PATH+m.href name=="org"?"Current":"")${m.name}#end
-        #@aHeadCol(TINY_CONTEXT_PATH+m.href+"?id=1" m.id==name?"Current":"")${m.name}a#end
+        #@aHeadCol(TINY_CONTEXT_PATH+m.href+"?id=1" m.id==name?"Current":"")${m.name}#end
     #end
 #end
 <span class="r" style="position:relative;top:2px;height:0">
