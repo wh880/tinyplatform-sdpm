@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<menu id="service" parent-id="0" name="客服" href="/service/client/clientUser.page" icon="icon-phone" sort="300"
+<menu id="service" parent-id="0" name="客服" href="/service/client/list" icon="icon-phone" sort="300"
       isShow="1">
-    <menu id="client" name="客户" href="/service/client/clientUser.page" sort="100" isShow="1">
+    <menu id="client" name="客户" href="/service/client/list" sort="100" isShow="1">
         <menu id="client-edit" name="编辑" href="/service/client/clientAdd.page"
               icon="icon-pencil" sort="1" isShow="1"
               scope="service-cil"/>

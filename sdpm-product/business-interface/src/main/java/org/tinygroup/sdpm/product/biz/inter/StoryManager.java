@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.product.biz.inter;
 import java.util.List;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.sql.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -42,7 +43,6 @@ public interface StoryManager {
 	/**
 	 * 根据对象查找（排序）
 	 * @param story
-	 * @param orderBies
 	 * @return
 	 */
 	List<ProductStory> findList(ProductStory story,String columnName,boolean asc);
@@ -51,8 +51,9 @@ public interface StoryManager {
 	 * @param start
 	 * @param limit
 	 * @param story
-	 * @param orderBies
 	 * @return
 	 */
-	Pager<ProductStory> findPager(int start,int limit,ProductStory story,String columnName,boolean asc);
+	Pager<ProductStory> findPager(int start, int limit, ProductStory story, SearchInfos condition, String groupOperate, String columnName, boolean asc);
+
+
 }

@@ -40,7 +40,7 @@
                         #@sdpmItem("所属项目")
                             #@Tselect2F()
                                 #@Tselect2Body(
-                                    "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                    "docProject" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                     <option value="CT">Connecticut</option>
                                     <option value="DE">Delaware</option>
                                     <option value="FL">Florida</option>
@@ -61,7 +61,7 @@
                         #@sdpmItem("所属产品")
                             #@Tselect2F()
                                 #@Tselect2Body(
-                                    "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                    "docProduct" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                     <option value="CT">Connecticut</option>
                                     <option value="DE">Delaware</option>
                                     <option value="FL">Florida</option>
@@ -83,7 +83,7 @@
                         #@sdpmItem("所属分类")
                             #@Tselect2F()
                                 #@Tselect2Body(
-                                    "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                    "docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                     <option value="CT">Connecticut</option>
                                     <option value="DE">Delaware</option>
                                     <option value="FL">Florida</option>
@@ -115,7 +115,7 @@
                         #@sdpmItem("文档标题")
                             #@formControlDiv("col-8")
                                 #tinyInput(
-                                    "text" "doctitle" ""{"style":"width:300px","placeholder":"","datatype":"*4-16",
+                                    "text" "docTitle" ""{"style":"width:300px","placeholder":"","datatype":"*4-16",
                                     "nullmsg":"标题不能为空！","id":"doctitle","class":"input-text"})
                             #end
                         #end
@@ -125,7 +125,7 @@
                         #@sdpmItem("文档URL")
                             #@formControlDiv("col-8")
                                 #tinyInput(
-                                    "text" "docurl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16",
+                                    "text" "docUrl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16",
                                     "id":"docurl","class":"input-text"})
                             #end
                         #end
@@ -135,7 +135,7 @@
                         #@sdpmItem("关键字")
                             #@formControlDiv("col-8")
                                 #tinyInput(
-                                    "text" "keywords" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","id":
+                                    "text" "docKeywords" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","id":
                                     "keywords","class":"input-text"})
                             #end
                         #end
@@ -145,7 +145,7 @@
                     #@elementItem()
                         #@sdpmItem("文档摘要")
                             #@formControlDiv("col-8")
-                                #@Teditor("content1" "content1" {"initialFrameHeight":"200"})Say something#end
+                                #@Teditor("content1" "docDigest" {"initialFrameHeight":"200"})Say something#end
                             #end
                         #end
                     #end
@@ -160,7 +160,7 @@
                     #@elementItem(elementId="contentBox" eleItemClass="hidden")
                         #@sdpmItem("文档正文")
                             #@formControlDiv("col-6")
-                                #@tinyueditor("content" "content")说点什么...最少输入10个字符#end
+                                #@tinyueditor("content" "docContent")说点什么...最少输入10个字符#end
                             #end
                         #end
                     #end

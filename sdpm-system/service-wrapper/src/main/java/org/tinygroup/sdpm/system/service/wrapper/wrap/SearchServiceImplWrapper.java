@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.system.wrapper;
+package org.tinygroup.sdpm.system.service.wrapper.wrap;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,16 +27,16 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-public class ConfigServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.ConfigService {
+public class SearchServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.SearchService {
 
-	CEPCore cepcore;
+	CEPCore core;
 
 	public CEPCore getCore() {
-		return cepcore;
+		return core;
 	}
 
-	public void setCore(CEPCore cepcore) {
-		this.cepcore = cepcore;
+	public void setCore(CEPCore core) {
+		this.core = core;
 	}
 
 	private Event getEvent(String serviceId,Context context) throws Exception{
@@ -49,12 +49,12 @@ public class ConfigServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.SystemConfig addConfig(org.tinygroup.sdpm.system.dao.pojo.SystemConfig config) {
-		String serviceId = "system_addConfig";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemSearch addSearch(org.tinygroup.sdpm.system.dao.pojo.SystemSearch search) {
+		String serviceId = "system_addSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("config" ,config);
+			context.put("search" ,search);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class ConfigServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public int deleteConfig(java.lang.Integer configId) {
-		String serviceId = "system_deleteConfig";
+	public int deleteSearch(java.lang.Integer searchId) {
+		String serviceId = "system_deleteSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("configId" ,configId);
+			context.put("searchId" ,searchId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class ConfigServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public int updateConfig(org.tinygroup.sdpm.system.dao.pojo.SystemConfig config) {
-		String serviceId = "system_updateConfig";
+	public int updateSearch(org.tinygroup.sdpm.system.dao.pojo.SystemSearch search) {
+		String serviceId = "system_updateSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("config" ,config);
+			context.put("search" ,search);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,12 +88,12 @@ public class ConfigServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.SystemConfig findConfig(java.lang.Integer configId) {
-		String serviceId = "system_findConfig";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemSearch findSearch(java.lang.Integer searchId) {
+		String serviceId = "system_findSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("configId" ,configId);
+			context.put("searchId" ,searchId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -101,12 +101,12 @@ public class ConfigServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemConfig> findConfigList(org.tinygroup.sdpm.system.dao.pojo.SystemConfig config ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "system_findConfigList";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemSearch> findSearchList(org.tinygroup.sdpm.system.dao.pojo.SystemSearch search ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findSearchList";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("config" ,config);
+			context.put("search" ,search);
 			context.put("columnName" ,columnName);
 			context.put("asc" ,asc);
 
@@ -116,14 +116,14 @@ public class ConfigServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.SystemConfig> findConfigPager(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemConfig config ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "system_findConfigPager";
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.SystemSearch> findSearchPager(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemSearch search ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findSearchPager";
 
 		try{
 			Context context = new ContextImpl();
 			context.put("start" ,start);
 			context.put("limit" ,limit);
-			context.put("config" ,config);
+			context.put("search" ,search);
 			context.put("columnName" ,columnName);
 			context.put("asc" ,asc);
 
@@ -133,12 +133,12 @@ public class ConfigServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public int[] updateBatchConfig(java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemConfig> configs) {
-		String serviceId = "system_updateBatchConfig";
+	public int[] updateBatchSearch(java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemSearch> searches) {
+		String serviceId = "system_updateBatchSearch";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("configs" ,configs);
+			context.put("searches" ,searches);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -148,8 +148,8 @@ public class ConfigServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 
 	private <T> T callServiceAndCallBack(String serviceId,Context context) throws Exception{
 		Event event = getEvent(serviceId,context);
-		cepcore.process(event);
-		ServiceInfo info = cepcore.getServiceInfo(serviceId);
+		core.process(event);
+		ServiceInfo info = core.getServiceInfo(serviceId);
 		List<Parameter> resultsParam = info.getResults();
 		if (resultsParam==null||resultsParam.size() == 0) {
 			return null;

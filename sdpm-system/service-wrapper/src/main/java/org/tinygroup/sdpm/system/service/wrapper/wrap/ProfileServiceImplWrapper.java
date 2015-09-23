@@ -14,13 +14,11 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.system.wrapper;
+package org.tinygroup.sdpm.system.service.wrapper.wrap;
 
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -28,17 +26,17 @@ import org.tinygroup.event.Event;
 import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
-@Component("effortService")
-public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.EffortService {
-	@Autowired
-	CEPCore cepcore;
+
+public class ProfileServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.ProfileService {
+
+	CEPCore core;
 
 	public CEPCore getCore() {
-		return cepcore;
+		return core;
 	}
 
-	public void setCore(CEPCore cepcore) {
-		this.cepcore = cepcore;
+	public void setCore(CEPCore core) {
+		this.core = core;
 	}
 
 	private Event getEvent(String serviceId,Context context) throws Exception{
@@ -51,12 +49,12 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		return event;
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Effort> findByDate(java.util.Date date) {
-		String serviceId = "effort_findByDate";
+	public org.tinygroup.sdpm.system.dao.pojo.Profile add(org.tinygroup.sdpm.system.dao.pojo.Profile Profile) {
+		String serviceId = "add";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("date" ,date);
+			context.put("Profile" ,Profile);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -64,12 +62,12 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Effort save(org.tinygroup.sdpm.system.dao.pojo.Effort effort) {
-		String serviceId = "effort_save";
+	public int[] batchAdd(java.util.List<org.tinygroup.sdpm.system.dao.pojo.Profile> Profiles) {
+		String serviceId = "batchAdd";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("effort" ,effort);
+			context.put("Profiles" ,Profiles);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -77,12 +75,12 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Effort> findByAccount(java.lang.String account) {
-		String serviceId = "effort_findByAccount";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Profile> find(org.tinygroup.sdpm.system.dao.pojo.Profile Profile) {
+		String serviceId = "find";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("account" ,account);
+			context.put("Profile" ,Profile);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -90,12 +88,12 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Effort> find(org.tinygroup.sdpm.system.dao.pojo.Effort effort) {
-		String serviceId = "effort_find";
+	public int delete(org.tinygroup.sdpm.system.dao.pojo.Profile Profile) {
+		String serviceId = "delete";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("effort" ,effort);
+			context.put("Profile" ,Profile);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -103,41 +101,12 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Effort> findBetweenDate(java.util.Date begindate ,java.util.Date enddate) {
-		String serviceId = "effort_findBetweenDate";
+	public org.tinygroup.sdpm.system.dao.pojo.Profile edit(org.tinygroup.sdpm.system.dao.pojo.Profile Profile) {
+		String serviceId = "edit";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("begindate" ,begindate);
-			context.put("enddate" ,enddate);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Effort> findByProject(int projectId) {
-		String serviceId = "effort_findByProject";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("projectId" ,projectId);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.Effort> findByPage(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.Effort effort) {
-		String serviceId = "effort_findByPage";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("start" ,start);
-			context.put("limit" ,limit);
-			context.put("effort" ,effort);
+			context.put("Profile" ,Profile);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -147,8 +116,8 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 
 	private <T> T callServiceAndCallBack(String serviceId,Context context) throws Exception{
 		Event event = getEvent(serviceId,context);
-		cepcore.process(event);
-		ServiceInfo info = cepcore.getServiceInfo(serviceId);
+		core.process(event);
+		ServiceInfo info = core.getServiceInfo(serviceId);
 		List<Parameter> resultsParam = info.getResults();
 		if (resultsParam==null||resultsParam.size() == 0) {
 			return null;

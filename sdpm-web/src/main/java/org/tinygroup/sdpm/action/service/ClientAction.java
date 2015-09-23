@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
+import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2015-09-22.
@@ -18,9 +21,17 @@ public class ClientAction extends BaseController {
     private ClientService clientService;
 
     @RequestMapping(value = "/list")
-    public String list(Model model) {
-//        model.addAttribute("client", client);
+    public String list(ServiceClient client, Model model) {
+        List<ServiceClient> list = clientService.getClientList(client);
+        model.addAttribute("list", list);
         return "service/client/clientUser.page";
+    }
+
+    @RequestMapping(value = "/list/data")
+    public String listData(Integer limit, Integer start, ServiceClient client, Model model) {
+        Pager<ServiceClient> pager = clientService.findClientPager(start, limit, client);
+        model.addAttribute("pager", pager);
+        return "service/client/clientTableData.pagelet";
     }
 
 
@@ -38,7 +49,7 @@ public class ClientAction extends BaseController {
             clientService.addClient(client);
         } else {
             clientService.updateClient(client);
-    }
+        }
         model.addAttribute("client", client);
         return "service/client/clientUser.page";
     }

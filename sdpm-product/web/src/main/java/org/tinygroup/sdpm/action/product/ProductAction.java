@@ -22,7 +22,6 @@ public class ProductAction{
 	
 	@RequestMapping("/save")
 	public String save(Product product,Model model){
-		System.out.println("11111111111111111111111111111111111111111111111111");
 		productService.addProduct(product);
 		return "/product/page/tabledemo/addProduct.page";
 		

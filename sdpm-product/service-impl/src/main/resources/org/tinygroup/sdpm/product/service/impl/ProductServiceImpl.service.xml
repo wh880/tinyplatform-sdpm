@@ -40,7 +40,7 @@
         <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="findProductPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager&lt;org.tinygroup.sdpm.product.dao.pojo.Product&gt;"/>
+      <service-result name="findProductPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
     <service-method local-name="updateBatch" service-id="product_updateBatch" method-name="updateBatch" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
