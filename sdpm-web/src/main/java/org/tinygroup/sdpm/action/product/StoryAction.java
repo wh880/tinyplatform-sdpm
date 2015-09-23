@@ -14,15 +14,5 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("product/stroy")
 public class StoryAction {
-    @Autowired
-    private StoryService storyService;
-    @RequestMapping("")
-    public String storyAction(ProductStory story, Model model){
-
-        return "product/page/project/togglebox.page";
-    }
-    @RequestMapping("/search")
-    public String storySearchAction(ProductStory story, SearchInfos searchInfos, String groupOperate, Model model){
-        return null;
-    }
+   
 }
