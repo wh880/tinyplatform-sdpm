@@ -36,12 +36,38 @@
             <artifactId>org.tinygroup.publicComponent</artifactId>
             <version>${tiny_ui_version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.frameCommon</artifactId>
-            <version>${tiny_ui_version}</version>
-        </dependency>
+		<!--皮肤 start-->
+		<dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>org.tinygroup.frameTplClean</artifactId>
+			<version>${tiny_ui_version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>org.tinygroup.frameTplAdminflare</artifactId>
+			<version>${tiny_ui_version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>org.tinygroup.frameTplWhite</artifactId>
+			<version>${tiny_ui_version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>org.tinygroup.frameTplSilver</artifactId>
+			<version>${tiny_ui_version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>org.tinygroup.frameTplFresh</artifactId>
+			<version>${tiny_ui_version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>org.tinygroup.frameTplDust</artifactId>
+			<version>${tiny_ui_version}</version>
+		</dependency>
+		<!--皮肤 end-->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.gridSystems</artifactId>
