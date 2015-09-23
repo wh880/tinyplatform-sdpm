@@ -7,14 +7,14 @@
 
 	#@elementItem()
 		#@colLabel()实际开始：#end
-		#dateInputSimple("birthday" "" "YYYY-MM-DD" " style='width:30%'")
+		#dateInputSimple("taskRealStarted" "" "YYYY-MM-DD" " style='width:30%'")
 		#@validateDiv("col-2")#end
 	#end
 
 	#@elementItem()
 		#@colLabel()总消耗：#end
 		#@formControlDiv("col-8")
-			#tinyInput("text" "username" ""{"style":"width:42%","placeholder":"剩余小时","datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+			#tinyInput("text" "Float" ""{"style":"width:42%","placeholder":"剩余小时","datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
 		#end
 		#@validateDiv("col-2")#end
 	#end
@@ -22,7 +22,7 @@
 	#@elementItem()
 		#@colLabel()预计剩余：#end
 		#@formControlDiv("col-8")
-			#tinyInput("text" "username" ""{"style":"width:42%","placeholder":"剩余小时","datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+			#tinyInput("text" "taskLeft" ""{"style":"width:42%","placeholder":"剩余小时","datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
 		#end
 		#@validateDiv("col-2")#end
 	#end

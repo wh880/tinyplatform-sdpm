@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.service.service.inter;
 
-import org.tinygroup.sdpm.service.dao.pojo.Sla;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface SlaService {
      * @param id 主键
      * @return
      */
-    Sla findSla(Integer id);
+    ServiceSla findSla(Integer id);
 
     /**
      * 根据条件查询List
@@ -22,7 +22,7 @@ public interface SlaService {
      * @param sla 用于查询条件
      * @return
      */
-    List<Sla> getSlaList(Sla sla);
+    List<ServiceSla> getSlaList(ServiceSla sla);
 
     /**
      * 新增一个用户
@@ -30,7 +30,7 @@ public interface SlaService {
      * @param sla 新增实体类
      * @return
      */
-    Sla addSla(Sla sla);
+    ServiceSla addSla(ServiceSla sla);
 
     /**
      * 更新用户
@@ -38,7 +38,7 @@ public interface SlaService {
      * @param sla 需要更新的实体类
      * @return
      */
-    Sla updateSla(Sla sla);
+    ServiceSla updateSla(ServiceSla sla);
 
     /**
      * 根据id进行软删除用户

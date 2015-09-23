@@ -11,7 +11,7 @@
         #@thead()
             #@tr("text-c")
                 #@thW("20")ID#end
-                #@thW("30")所有模块#end
+                #@thW("30")所属模块#end
                 #@thW("30")相关需求#end
                 #@thW("50")任务名称#end
                 #@thW("50")类型#end
@@ -49,7 +49,7 @@
                     #@formControlDiv()
                         #@Tselect2F()
                             #@Tselect2Body(
-                                "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                "taskStory" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="CT">Connecticut</option>
                             <option value="DE">Delaware</option>
                             <option value="FL">Florida</option>
@@ -65,13 +65,13 @@
                     #@validateDiv("col-2")#end
                 #end
                 #@th()
-                    #tinyInput("text" "username"""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！"})
+                    #tinyInput("text" "taskName"""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！"})
                 #end
                 #@th()
                     #@formControlDiv( )
                         #@Tselect2F()
                             #@Tselect2Body(
-                                "lang" "T" {"class":"input-text select2","datatype":"*4-16","nullmsg":"不能为空"}) ##,"multiple":"multiple"加上为多选项
+                                "taskType" "T" {"class":"input-text select2","datatype":"*4-16","nullmsg":"不能为空"}) ##,"multiple":"multiple"加上为多选项
                             <option value="T"></option>
                             <option value="CT">Connecticut</option>
                             <option value="DE">Delaware</option>
@@ -91,7 +91,7 @@
                     #@formControlDiv()
                         #@Tselect2F()
                             #@Tselect2Body(
-                                "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                "taskAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="CT">Connecticut</option>
                             <option value="DE">Delaware</option>
                             <option value="FL">Florida</option>
@@ -107,14 +107,14 @@
                     #@validateDiv("col-2")#end
                 #end
                 #@th()
-                    #tinyInput("text" "username")
+                    #tinyInput("text" "taskEstimate")
                 #end
                 #@th()
-                    #tinyInput("text" "username")
+                    #tinyInput("text" "taskDesc")
                 #end
                 #@th()
                     #@formControlDiv()
-                        #@tinySelect()
+                        #@tinySelect("taskPri")
                             #@option()1#end
                             #@option()2#end
                             #@option()3#end

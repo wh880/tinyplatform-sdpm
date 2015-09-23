@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.ClientManager;
-import org.tinygroup.sdpm.service.dao.ClientDao;
-import org.tinygroup.sdpm.service.dao.pojo.Client;
+import org.tinygroup.sdpm.service.dao.ServiceClientDao;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 
 import java.util.List;
 
@@ -16,24 +16,26 @@ import java.util.List;
 @Transactional
 public class ClientManagerImpl implements ClientManager{
     @Autowired
-    private ClientDao clientDao;
-    public Client find(Integer id) { return clientDao.getByKey(id);
+    private ServiceClientDao clientDao;
+
+    public ServiceClient find(Integer id) {
+        return clientDao.getByKey(id);
     }
 
-    public List<Client> getList(Client client) {
+    public List<ServiceClient> getList(ServiceClient client) {
         return clientDao.query(client);
     }
 
-    public Client add(Client client) {
+    public ServiceClient add(ServiceClient client) {
         return clientDao.add(client);
     }
 
-    public Client update(Client client) {
+    public ServiceClient update(ServiceClient client) {
         return clientDao.add(client);
     }
 
     public Integer delete(Integer id) {
-        Client client = new Client();
+        ServiceClient client = new ServiceClient();
         client.setClientId(id);
         client.setDeleted(id);
         return clientDao.edit(client);
@@ -43,7 +45,7 @@ public class ClientManagerImpl implements ClientManager{
         return null;
     }
 
-    public List<Client> findByProduct(Integer productId) {
+    public List<ServiceClient> findByProduct(Integer productId) {
         return null;
     }
 }

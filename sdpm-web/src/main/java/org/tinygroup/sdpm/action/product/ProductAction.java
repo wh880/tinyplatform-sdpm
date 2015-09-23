@@ -23,9 +23,9 @@ public class ProductAction extends BaseController{
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Product product,Model model){
-		
+		System.out.println("11111111111111111111111111111111111111111111111111");
 		productService.addProduct(product);
-		return "product/page/tabledemo/addProduct.page";
+		return "/product/page/tabledemo/addProduct.page";
 		
 	}
 

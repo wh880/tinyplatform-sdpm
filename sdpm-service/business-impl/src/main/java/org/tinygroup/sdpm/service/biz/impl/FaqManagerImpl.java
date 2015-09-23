@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.FaqManager;
-import org.tinygroup.sdpm.service.dao.FaqDao;
-import org.tinygroup.sdpm.service.dao.pojo.Faq;
+import org.tinygroup.sdpm.service.dao.ServiceFaqDao;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
 
 import java.util.List;
 
@@ -16,26 +16,27 @@ import java.util.List;
 @Transactional
 public class FaqManagerImpl implements FaqManager{
     @Autowired
-    private FaqDao faqDao;
-    public Faq find(Integer id) {
+    private ServiceFaqDao faqDao;
+
+    public ServiceFaq find(Integer id) {
         return faqDao.getByKey(id);
     }
 
-    public List<Faq> getList(Faq faq) {
+    public List<ServiceFaq> getList(ServiceFaq faq) {
         return faqDao.query(faq);
     }
 
-    public Faq add(Faq faq) {
+    public ServiceFaq add(ServiceFaq faq) {
         return faqDao.add(faq);
     }
 
-    public Faq update(Faq faq) {
+    public ServiceFaq update(ServiceFaq faq) {
          faqDao.edit(faq);
         return faq;
     }
 
     public Integer delete(Integer id) {
-        Faq faq=new Faq();
+        ServiceFaq faq = new ServiceFaq();
        faq.setFaqId(id);
         faq.setDeleted(id);
         return faqDao.edit(faq);

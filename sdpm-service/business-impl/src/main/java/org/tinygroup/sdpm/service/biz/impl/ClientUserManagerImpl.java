@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.ClientUserManager;
-import org.tinygroup.sdpm.service.dao.ClientUserDao;
-import org.tinygroup.sdpm.service.dao.pojo.ClientUser;
+import org.tinygroup.sdpm.service.dao.ServiceClientUserDao;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser;
 
 import java.util.List;
 
@@ -16,24 +16,26 @@ import java.util.List;
 @Transactional
 public class ClientUserManagerImpl implements ClientUserManager {
     @Autowired
-    private ClientUserDao clientUserDao;
+    private ServiceClientUserDao clientUserDao;
 
-    public ClientUser find(Integer id) {return clientUserDao.getByKey(id);}
+    public ServiceClientUser find(Integer id) {
+        return clientUserDao.getByKey(id);
+    }
 
-    public List<ClientUser> getUserList(ClientUser clientUser) {
+    public List<ServiceClientUser> getUserList(ServiceClientUser clientUser) {
         return clientUserDao.query(clientUser);
     }
 
-    public ClientUser add(ClientUser clientUser) {
+    public ServiceClientUser add(ServiceClientUser clientUser) {
         return clientUserDao.add(clientUser);
     }
 
-    public ClientUser update(ClientUser clientUser) {
+    public ServiceClientUser update(ServiceClientUser clientUser) {
         clientUserDao.edit(clientUser);
         return clientUser;
     }
 
-    public ClientUser delete(Integer id) {
+    public ServiceClientUser delete(Integer id) {
         clientUserDao.deleteByKey(id);
         return null;
     }
