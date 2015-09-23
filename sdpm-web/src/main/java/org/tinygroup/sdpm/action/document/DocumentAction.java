@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.docment.service.inter.DocService;
 import org.tinygroup.sdpm.document.dao.pojo.Doc;
 import org.tinygroup.sdpm.document.dao.pojo.DocLib;
 import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
+import org.tinygroup.sdpm.document.service.inter.DocService;
 
 /**
  * @date 2015/09/21
@@ -30,9 +30,9 @@ public class DocumentAction extends BaseController{
 	public void getList(Model model)
 	{
 		//
-		Doc doc = new Doc();
-		List<Doc> doclist = docservice.findDocByDocClassOrderBy(doc);
-		model.addAttribute("doclist",doclist);
+		//Doc doc = new Doc();
+		//List<Doc> doclist = docservice.findDocByDocClassOrderBy(doc);
+		//model.addAttribute("doclist",doclist);
 	}
 	@RequestMapping(value="/add-doc",method=RequestMethod.POST)
 	public String adddoc(Doc doc)
