@@ -49,10 +49,10 @@
 
             #for(i:[1..2])
             #@tr()
-                #@th()    ${i}    #end
+                #@th()${i}#end
                 #@th()
                     #@formControlDiv("col-8")
-                        #@tinySelect("lang" "zh" {"class":"input-text"})
+                        #@tinySelect("perTask" "zh" {"class":"input-text"})
                             #@tinyOptionItem("zh")概要设计#end
                             #@tinyOptionItem("en")/2#end
                             #@tinyOptionItem("ta")/3#end
@@ -87,7 +87,7 @@
                 #@th()
 
                     #@formControlDiv("col-8")
-                        #@tinySelect("lang" "zh" {"class":"input-text"})
+                        #@tinySelect("taskrelationAction " "zh" {"class":"input-text"})
                             #@tinyOptionItem("zh")才能开始#end
                             #@tinyOptionItem("en")才能完成#end
                         #end
