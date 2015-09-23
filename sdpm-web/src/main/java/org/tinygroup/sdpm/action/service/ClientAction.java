@@ -33,8 +33,9 @@ public class ClientAction extends BaseController {
 
 
     @RequestMapping("/form")
-    public String form(ServiceClient client, Model model) {
-        if (client != null) {
+    public String form(Integer id, Model model) {
+        if (id != null) {
+            ServiceClient client = clientService.findClient(id);
             model.addAttribute("client", client);
         }
         return "service/client/clientAdd.page";
