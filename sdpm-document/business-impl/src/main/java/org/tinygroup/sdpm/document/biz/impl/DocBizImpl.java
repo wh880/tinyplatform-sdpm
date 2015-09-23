@@ -1,10 +1,10 @@
-package org.tinygroup.document.biz.impl;
+package org.tinygroup.sdpm.document.biz.impl;
 
 import java.util.Date;
 import java.util.List;
 
-import org.tinygroup.document.biz.inter.DocBiz;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.document.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.dao.DocDao;
 import org.tinygroup.sdpm.document.dao.DocLibDao;
 import org.tinygroup.sdpm.document.dao.HistorydocDao;
