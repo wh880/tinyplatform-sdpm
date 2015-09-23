@@ -42,6 +42,7 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @Repository
 public class ServiceClientDaoImpl extends TinyDslDaoSupport implements ServiceClientDao {
 
+
     public ServiceClient add(ServiceClient serviceClient) {
         return getDslTemplate().insertAndReturnKey(serviceClient, new InsertGenerateCallback<ServiceClient>() {
             public Insert generate(ServiceClient t) {
@@ -256,5 +257,17 @@ public class ServiceClientDaoImpl extends TinyDslDaoSupport implements ServiceCl
             select.orderBy(orderByElements.toArray(new OrderByElement[0]));
         }
         return select;
+    }
+
+    public Integer softDelete(Integer id) {
+        return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
+            public Update generate(Integer id) {
+                Update update = update(SERVICE_CLIENTTABLE).set(
+                        SERVICE_CLIENTTABLE.DELETED.value(DELETE_YES)).where(
+                        SERVICE_CLIENTTABLE.CLIENT_ID.eq(id));
+                return update;
+            }
+        });
+
     }
 }

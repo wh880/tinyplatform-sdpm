@@ -1,12 +1,14 @@
 package org.tinygroup.sdpm.project.biz.impl;
 
-import com.sun.jmx.snmp.tasks.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
 import org.tinygroup.sdpm.project.dao.ProjectTaskDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -26,6 +28,15 @@ public class TaskManagerImpl implements TaskManager {
     public List<ProjectTask> findList(ProjectTask task) {
         return taskDao.query(task);
     }
+
+    public Pager<ProjectTask> findPager(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc) {
+        if (StringUtil.isBlank(sortName)) {
+            return taskDao.queryPager(start, limit, task);
+        }
+        OrderBy orderBy = new OrderBy(sortName, asc);
+        return taskDao.queryPager(start, limit, task, orderBy);
+    }
+
 
     public ProjectTask add(ProjectTask task) {
         return taskDao.add(task);

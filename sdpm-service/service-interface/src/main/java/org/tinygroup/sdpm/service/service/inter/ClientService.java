@@ -15,7 +15,12 @@ public interface ClientService {
      */
     ServiceClient findClient(Integer id);
 
-    Pager<ServiceClient> findClientPager(Integer start, Integer limit, ServiceClient serviceClient);
+    /**
+     * 查找数据库的所有记录
+     *
+     * @return
+     */
+    Pager<ServiceClient> findClientPager(Integer start, Integer limit, ServiceClient client);
 
     /**
      * 根据条件查询List

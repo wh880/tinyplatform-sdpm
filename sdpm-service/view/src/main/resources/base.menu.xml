@@ -3,10 +3,10 @@
 <menu id="service" parent-id="0" name="客服" href="/service/client/list" icon="icon-phone" sort="300"
       isShow="1">
     <menu id="client" name="客户" href="/service/client/list" sort="100" isShow="1">
-        <menu id="client-edit" name="编辑" href="/service/client/clientAdd.page"
+        <menu id="client-edit" name="编辑" href="/service/client/form"
               icon="icon-pencil" sort="1" isShow="1"
               scope="service-cil"/>
-        <menu id="client-del" name="删除" href="#" icon="icon-remove" sort="1" isShow="1"
+        <menu id="client-del" name="删除" href="/service/client/delete" icon="icon-remove" sort="1" isShow="1"
               scope="service-cil"/>
         <menu id="client-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="service-cil-batchdel"/>

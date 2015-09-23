@@ -30,17 +30,17 @@ public class ObtainFileProcessor extends AbstractFileProcessor {
         XStream stream = XStreamFactory
                 .getXStream(ObtainHandle.Obtain_XSTREAM_);
         for (FileObject fileObject : deleteList) {
-            LOGGER.logMessage(LogLevel.INFO, "正在移除obtain文件[{0}]",
+            LOGGER.logMessage(LogLevel.INFO, "姝ｅ湪绉婚櫎obtain鏂囦欢[{0}]",
                     fileObject.getAbsolutePath());
             Obtains obtains = (Obtains)caches.get(fileObject.getAbsolutePath());
             if(obtains!=null){
                 obtainHandleImpl.removeObtains(obtains);
                 caches.remove(fileObject.getAbsolutePath());
-            }            LOGGER.logMessage(LogLevel.INFO, "移除obtain文件[{0}]结束",
+            }            LOGGER.logMessage(LogLevel.INFO, "绉婚櫎obtain鏂囦欢[{0}]缁撴潫",
                     fileObject.getAbsolutePath());
         }
         for (FileObject fileObject : changeList) {
-            LOGGER.logMessage(LogLevel.INFO, "正在加载obtain文件[{0}]",
+            LOGGER.logMessage(LogLevel.INFO, "姝ｅ湪鍔犺浇obtain鏂囦欢[{0}]",
                     fileObject.getAbsolutePath());
             Obtains oldObtains = (Obtains)caches.get(fileObject.getAbsolutePath());
             if(oldObtains!=null){
@@ -50,7 +50,7 @@ public class ObtainFileProcessor extends AbstractFileProcessor {
                     .fromXML(fileObject.getInputStream());
             obtainHandleImpl.addObtain(obtains,fileObject.getAbsolutePath());
             caches.put(fileObject.getAbsolutePath(), obtains);
-            LOGGER.logMessage(LogLevel.INFO, "加载obtain文件[{0}]结束",
+            LOGGER.logMessage(LogLevel.INFO, "鍔犺浇obtain鏂囦欢[{0}]缁撴潫",
                     fileObject.getAbsolutePath());
         }
     }
