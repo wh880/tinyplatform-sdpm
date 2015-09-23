@@ -12,11 +12,11 @@
       </service-parameters>
       <service-result name="updateReleaseResult" required="false" is-array="false" type="int"/>
     </service-method>
-    <service-method local-name="updateBatch" service-id="product_updateBatch" method-name="updateBatch" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+    <service-method local-name="updateBatchRelease" service-id="product_updateBatchRelease" method-name="updateBatchRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
         <service-parameter name="releases" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease" collection-type="java.util.List" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="updateBatchResult" required="false" is-array="true" type="int"/>
+      <service-result name="updateBatchReleaseResult" required="false" is-array="true" type="int"/>
     </service-method>
     <service-method local-name="deleteRelease" service-id="product_deleteRelease" method-name="deleteRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
