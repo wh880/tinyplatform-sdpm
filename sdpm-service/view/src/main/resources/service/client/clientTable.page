@@ -32,7 +32,7 @@
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
                 #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})客户ID#end
                 #@tinyTh({"class":"","rel":"sortname"})客户名称#end
-                #@tinyTh({"class":"","rel":"sortname"})客户部门#end
+                #@tinyTh({"class":"","rel":"sortname"})客户编号#end
                 #@tinyTh({"class":"sorting","rel":"sortname"})客户登记人#end
                 #@tinyTh({"class":"sorting","rel":"sortname"})客户登记时间#end
                 #@tinyTh({"class":"sorting","rel":"sortname"})客户状态#end
