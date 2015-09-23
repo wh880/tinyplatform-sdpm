@@ -184,7 +184,7 @@
 
 
                 #end
-                #@tinyTableContent("../../data/tabledata.pagelet") ##取数据地址 总数据
+                #@tinyTableContent(TINT_CONTEXT_PATH+"/product/story/search") ##取数据地址 总数据
                     #@thead()
                         #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
                             #@tinyTh({"width":"6"})<input type="checkbox" value="">#end
