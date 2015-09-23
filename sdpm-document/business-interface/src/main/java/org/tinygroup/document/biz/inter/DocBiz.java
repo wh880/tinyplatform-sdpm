@@ -1,4 +1,4 @@
-package org.tinygroup.docment.biz.inter;
+package org.tinygroup.document.biz.inter;
 
 import java.util.List;
 

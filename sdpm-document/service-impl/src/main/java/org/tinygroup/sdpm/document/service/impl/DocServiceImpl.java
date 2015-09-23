@@ -1,16 +1,16 @@
-package org.tinygroup.sdpm.docment.service.impl;
+package org.tinygroup.sdpm.document.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.tinygroup.docment.biz.inter.DocBiz;
+import org.tinygroup.document.biz.inter.DocBiz;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.sdpm.docment.service.inter.DocService;
 import org.tinygroup.sdpm.document.dao.pojo.Doc;
 import org.tinygroup.sdpm.document.dao.pojo.DocLib;
 import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
+import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.tinysqldsl.Pager;
 
 /**
