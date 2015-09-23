@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
 import org.tinygroup.sdpm.org.dao.OrgUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -32,6 +33,10 @@ public class UserManagerImpl implements UserManager {
 
     public OrgUser find(String id) {
         return orgUserDao.getByKey(id);
+    }
+
+    public Pager<OrgUser> findPager(Integer start, Integer limit, OrgUser orgUser) {
+        return orgUserDao.queryPager(start, limit, orgUser);
     }
 
     public List<OrgUser> findList(OrgUser orgUser) {
