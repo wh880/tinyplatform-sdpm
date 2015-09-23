@@ -26,7 +26,7 @@ public class ReleaseServiceImpl implements ReleaseService{
 		return releaseManger.update(release);
 	}
 
-	public int[] updateBatch(List<ProductRelease> releases) {
+	public int[] updateBatchRelease(List<ProductRelease> releases) {
 		
 		return releaseManger.updateBatch(releases);
 	}

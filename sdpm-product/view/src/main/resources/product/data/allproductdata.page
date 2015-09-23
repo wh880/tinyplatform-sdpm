@@ -1,19 +1,18 @@
-#macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
-#end
+#setTinyItemCount(pagerProduct.totalCount)
 
 
 
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+
+#set(records=pagerProduct.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+
+#for(product:pagerProduct.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="product">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">${var}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">现金管理</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">${product.productId}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">${product.productName}</a>#end
 	#@td()1#end
 	#@td()0#end
 	#@td()0#end
@@ -23,7 +22,7 @@
 	#@td()8#end
 	#@td()0#end
 	#@td()1#end
-	  #@td()
+	#@td()
 	 	#iconOperations("#myModal" "icon-off " "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet" "ml-5")&nbsp;
 		<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-module-editor.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;
 		  #@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)<i class="icon-remove"></i>#end

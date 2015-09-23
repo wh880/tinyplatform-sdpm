@@ -28,13 +28,20 @@ import org.tinygroup.event.Event;
 import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
-import org.tinygroup.sdpm.common.util.sql.SearchInfos;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 
-@Component("storyService")
+@Component
 public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.service.StoryService {
+	
 	@Autowired
-	CEPCore cepCore;
+	CEPCore cepcore;
+
+	public CEPCore getCore() {
+		return cepcore;
+	}
+
+	public void setCore(CEPCore cepcore) {
+		this.cepcore = cepcore;
+	}
 
 	private Event getEvent(String serviceId,Context context) throws Exception{
 		Event event = new Event();
@@ -98,8 +105,8 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 		}
 	}
 
-	public int[] updateBatch(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductStory> stories) {
-		String serviceId = "product_updateBatch";
+	public int[] updateBatchStory(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductStory> stories) {
+		String serviceId = "product_updateBatchStory";
 
 		try{
 			Context context = new ContextImpl();
@@ -126,7 +133,7 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductStory> findStoryPager(int start, int limit, ProductStory story, SearchInfos searchInfos, String groupOperate, String columnName, boolean asc) {
+	public org.tinygroup.tinysqldsl.Pager findStoryPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductStory story ,org.tinygroup.sdpm.common.util.sql.SearchInfos searchInfos ,java.lang.String groupOperate ,java.lang.String columnName ,boolean asc) {
 		String serviceId = "product_findStoryPager";
 
 		try{
@@ -147,8 +154,8 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 
 	private <T> T callServiceAndCallBack(String serviceId,Context context) throws Exception{
 		Event event = getEvent(serviceId,context);
-		cepCore.process(event);
-		ServiceInfo info = cepCore.getServiceInfo(serviceId);
+		cepcore.process(event);
+		ServiceInfo info = cepcore.getServiceInfo(serviceId);
 		List<Parameter> resultsParam = info.getResults();
 		if (resultsParam==null||resultsParam.size() == 0) {
 			return null;

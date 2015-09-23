@@ -28,8 +28,10 @@ import org.tinygroup.event.Event;
 import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
+
 @Component
 public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.service.ProductService {
+	
 	@Autowired
 	CEPCore cepcore;
 
@@ -118,7 +120,7 @@ public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.Product> findProductPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.Product product ,java.lang.String columnName ,boolean asc) {
+	public org.tinygroup.tinysqldsl.Pager findProductPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.Product product ,java.lang.String columnName ,boolean asc) {
 		String serviceId = "product_findProductPager";
 
 		try{
@@ -135,8 +137,8 @@ public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public int[] updateBatch(java.util.List<org.tinygroup.sdpm.product.dao.pojo.Product> products) {
-		String serviceId = "product_updateBatch";
+	public int[] updateBatchProduct(java.util.List<org.tinygroup.sdpm.product.dao.pojo.Product> products) {
+		String serviceId = "product_updateBatchProduct";
 
 		try{
 			Context context = new ContextImpl();
