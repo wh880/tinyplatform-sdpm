@@ -11,9 +11,10 @@
     <name>sdpm-product-web</name>
     <packaging>war</packaging>
     <url>http://maven.apache.org</url>
+     <!-- 项目属性 -->
     <properties>
+        <validator.version>5.1.1.Final</validator.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--可以自定义标签对,可以在其它地方用{标签名引用}-->
     </properties>
     <dependencies>
     	
@@ -39,6 +40,12 @@
             <artifactId>sdpm-product-view</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-productLine-view</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-product-service-impl</artifactId>
@@ -51,16 +58,54 @@
         </dependency>
         
         
+         <!--spring版本-->
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-productLine-view</artifactId>
-            <version>${project.version}</version>
+            <artifactId>org.tinygroup.springutil</artifactId>
+            <version>${tiny_version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.tinygroup</groupId>
+                    <artifactId>org.tinygroup.spring256</artifactId>
+                </exclusion>
+                <!--<exclusion>-->
+                <!--<groupId>org.tinygroup</groupId>-->
+                <!--<artifactId>org.tinygroup.spring305</artifactId>-->
+                <!--</exclusion>-->
+            </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.spring305</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+        <!--引入SpringMVC-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.springmvc</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+        <!-- bean validate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${validator.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.validate</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
+        <!--数据库安装-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.databasebuinstaller</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.templateweblayer</artifactId>
@@ -76,36 +121,43 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.serviceprocessor</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.flowprocessor</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.cepcoreimpl</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.flowservicecomponent</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.flowbasiccomponent</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.jcscache</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

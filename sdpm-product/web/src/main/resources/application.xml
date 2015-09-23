@@ -304,6 +304,10 @@
 
 	<!--tiny-processor实现 -->
 	<tiny-processors>
+		 <tiny-processor id="springMvcTinyProcessor" class="springMvcTinyProcessor">
+            <servlet-mapping url-pattern=".*"></servlet-mapping>
+        </tiny-processor>
+		
 		 <tiny-processor id="umUploadTinyProcessor" class="umUploadTinyProcessor">
 			<servlet-mapping url-pattern=".*\.umupload"></servlet-mapping>
 		</tiny-processor>
