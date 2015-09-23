@@ -10,7 +10,6 @@
 #if (pagesize>records-pagesize*(page-1))
 #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
 	#@td()<input type="checkbox" value="1" name="product-plan">#end
