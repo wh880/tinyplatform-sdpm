@@ -34,7 +34,7 @@ public class TaskManagerImpl implements TaskManager {
             return taskDao.queryPager(start, limit, task);
         }
         OrderBy orderBy = new OrderBy(sortName, asc);
-        return taskDao.queryPager(start, limit, task, orderBy);
+        return taskDao.queryPager(start, limit, task, orderBy);        
     }
 
 

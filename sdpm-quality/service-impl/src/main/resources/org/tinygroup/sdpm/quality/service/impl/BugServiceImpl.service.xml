@@ -30,5 +30,15 @@
       </service-parameters>
       <service-result name="batchUpdateBugResult" required="false" is-array="true" type="int"/>
     </service-method>
+    <service-method local-name="findBugListPager" service-id="quality_findBugListPager" method-name="findBugListPager" cacheable="false" category="org.tinygroup.sdpm.quality.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="bug" type="org.tinygroup.sdpm.quality.dao.pojo.QualityBug" required="false" is-array="false"/>
+        <service-parameter name="sortName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findBugListPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
   </service-component>
 </service-components>
