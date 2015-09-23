@@ -10,7 +10,9 @@
         #end
     #end
 
-    #@tinyForm("thisform" "" "" {"class":"test"})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/faq/save" "post" {"class":""})
+
+ #*   #@tinyForm("thisform" "" "" {"class":"test"})*#
 
         #@elementItem()
             #@sdpmItem("产品名称" "*")
@@ -80,7 +82,8 @@
             <div class="col-5"></div>
         </div>
         #end
-#end
+#*#end*#
+    #end
 
 
 <script type="text/javascript">
@@ -191,4 +194,7 @@
         });
     });
 </script>
+
+
+
     #end
