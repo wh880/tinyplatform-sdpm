@@ -2,32 +2,32 @@ package org.tinygroup.sdpm.system.service.inter;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.system.dao.pojo.History;
+import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 
 public interface HistoryService {
 	/**
 	 * 增加动态
-	 * @param History
+	 * @param SystemHistory
 	 * @return
 	 */
-	History add(History history);
+	SystemHistory add(SystemHistory systemHistory);
 	/**
 	 * 修改动态
-	 * @param History
+	 * @param SystemHistory
 	 * @return
 	 */
-	History updata(History history);
+	SystemHistory updata(SystemHistory systemHistory);
 	/**
 	 * 删除动态
-	 * @param History
+	 * @param SystemHistory
 	 * @return
 	 */
-	Integer delete(History history);
+	Integer delete(SystemHistory systemHistory);
 	/**
 	 * 查询动态
-	 * @param History
+	 * @param SystemHistory
 	 * @return
 	 */
-	List<History> find(History history);
+	List<SystemHistory> find(SystemHistory systemHistory);
 
 }

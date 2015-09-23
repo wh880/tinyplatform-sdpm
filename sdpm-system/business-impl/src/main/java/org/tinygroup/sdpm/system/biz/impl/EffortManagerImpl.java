@@ -7,65 +7,73 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.system.biz.inter.EffortManager;
-import org.tinygroup.sdpm.system.dao.EffortDao;
-import org.tinygroup.sdpm.system.dao.pojo.Effort;
+import org.tinygroup.sdpm.system.biz.inter.EffortManager;
+import org.tinygroup.sdpm.system.dao.SystemEffortDao;
+import org.tinygroup.sdpm.system.dao.SystemEffortDao;
+import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
+import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.tinysqldsl.Pager;
 @Service
 @Transactional
 public class EffortManagerImpl implements EffortManager {
 	@Autowired
-    private EffortDao effortDao;
-	public Effort add(Effort effort) {
+    private SystemEffortDao systemEffortDao;
+	public SystemEffort add(SystemEffort systemEffort) {
 		// TODO Auto-generated method stub
-		return effortDao.add(effort);
+		return systemEffortDao.add(systemEffort);
 	}
 
-	public Effort updata(Effort effort) {
+	public SystemEffort updata(SystemEffort systemEffort) {
 		// TODO Auto-generated method stub
-		effortDao.edit(effort);
-		return effort;
+		systemEffortDao.edit(systemEffort);
+		return systemEffort;
 	}
 
-	public Integer delete(Effort effort) {
+	public Integer delete(SystemEffort SystemEffort) {
 		// TODO Auto-generated method stub
-		int pk=effort.getEffortId();
-		return effortDao.deleteByKey(pk);
+		int pk=SystemEffort.getEffortId();
+		return systemEffortDao.deleteByKey(pk);
 	}
 
-	public List<Effort> findByAccount(String account) {
+	public List<SystemEffort> findByAccount(String effortAccount) {
 		// TODO Auto-generated method stub
-		Effort effort= new Effort();
-		effort.setEffortAccount(account);
-		return effortDao.query(effort);
+		SystemEffort systemEffort= new SystemEffort();
+		systemEffort.setEffortAccount(effortAccount);
+		return systemEffortDao.query(systemEffort);
 	}
 
-	public List<Effort> findByProject(int projectId) {
+	public List<SystemEffort> findByProject(int project) {
 		// TODO Auto-generated method stub
-		Effort effort = new Effort();
-		effort.setEffortProject(projectId);
-		return effortDao.query(effort);
+		SystemEffort systemEffort = new SystemEffort();
+		systemEffort.setEffortProject(project);
+		return systemEffortDao.query(systemEffort);
 	}
 
-	public Pager<Effort> findByPage(int start, int limit, Effort effort) {
+	public Pager<SystemEffort> findByPage(int start, int limit, SystemEffort SystemEffort) {
 		// TODO Auto-generated method stub
-		return effortDao.queryPager(start, limit, effort);
+		return systemEffortDao.queryPager(start, limit, SystemEffort);
 	}
 
-	public List<Effort> findByDate(Date date) {
+	public List<SystemEffort> findByDate(Date date) {
 		// TODO Auto-generated method stub
-		Effort effort = new Effort();
-		effort.setEffortDate(date);
-		return effortDao.query(effort);
+		SystemEffort systemEffort = new SystemEffort();
+		systemEffort.setEffortDate(date);
+		return systemEffortDao.query(systemEffort);
 	}
 
-	public List<Effort> find(Effort effort) {
+	public List<SystemEffort> find(SystemEffort systemEffort) {
 		// TODO Auto-generated method stub
-		return effortDao.query(effort);
+		return systemEffortDao.query(systemEffort);
 	}
 
-	public List<Effort> findBetweenDate(Date begindate, Date enddate) {
+	public List<SystemEffort> findBetweenDate(Date begindate, Date enddate) {
 		// TODO Auto-generated method stub
-		return effortDao.findBetweenDate(begindate, enddate);
+		return null;
 	}
+
+//public List<SystemEffort> findBetweenDate(Date begindate, Date enddate) {
+//		// TODO Auto-generated method stub
+////		return SystemEffortDao.findBetweenDate(begindate, enddate);
+//	}
 
 }

@@ -2,38 +2,38 @@ package org.tinygroup.sdpm.system.biz.inter;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.system.dao.pojo.Profile;
+import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 
 public interface ProfileManager {
 	/**
 	 * 附件添加
-	 * @param Profile
+	 * @param SystemProfile
 	 * @return
 	 */
-	Profile add(Profile Profile);
+	SystemProfile add(SystemProfile SystemProfile);
 	/**
 	 * 批量添加附件
-	 * @param Profile
+	 * @param SystemProfile
 	 * @return 附件List
 	 */
-	int[] batchAdd(List<Profile> Profiles);
+	int[] batchAdd(List<SystemProfile> SystemProfiles);
 	/**
 	 * 查询
-	 * @param Profile
+	 * @param SystemProfile
 	 * @return
 	 */
-	List<Profile> find(Profile Profile);
+	List<SystemProfile> find(SystemProfile SystemProfile);
 	/**
 	 * 删除附件
-	 * @param Profile
+	 * @param SystemProfile
 	 * @return
 	 */
-	Integer delete(Profile Profile);
+	Integer delete(SystemProfile SystemProfile);
 	/**
 	 * 更新附件信息
-	 * @param Profile
+	 * @param SystemProfile
 	 * @return
 	 */
-	Profile updataProfile(Profile Profile);
+	SystemProfile updataSystemProfile(SystemProfile SystemProfile);
 	
 }

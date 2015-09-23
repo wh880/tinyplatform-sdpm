@@ -6,38 +6,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.system.biz.inter.ProfileManager;
-import org.tinygroup.sdpm.system.dao.ProfileDao;
-import org.tinygroup.sdpm.system.dao.pojo.Profile;
+import org.tinygroup.sdpm.system.dao.SystemProfileDao;
+import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 @Service
 @Transactional
 public class ProfileManagerImpl implements ProfileManager {
 	@Autowired
-    private ProfileDao profileDao;
-	public Profile add(Profile Profile) {
+    private SystemProfileDao systemProfileDao;
+	public SystemProfile add(SystemProfile systemProfile) {
 		// TODO Auto-generated method stub
-		return profileDao.add(Profile);
+		return systemProfileDao.add(systemProfile);
 	}
 
-	public int[] batchAdd(List<Profile> Profiles) {
+	public int[] batchAdd(List<SystemProfile> systemProfiles) {
 		// TODO Auto-generated method stub
-		return profileDao.batchInsert(Profiles);
+		return systemProfileDao.batchInsert(systemProfiles);
 	}
 
-	public List<Profile> find(Profile Profile) {
+	public List<SystemProfile> find(SystemProfile systemProfile) {
 		// TODO Auto-generated method stub
-		return profileDao.query(Profile);
+		return systemProfileDao.query(systemProfile);
 	}
 
-	public Integer delete(Profile Profile) {
+	public Integer delete(SystemProfile systemProfile) {
 		// TODO Auto-generated method stub
-		int pk=Profile.getFileId();
-		return profileDao.deleteByKey(pk);
+		int pk=systemProfile.getFileId();
+		return systemProfileDao.deleteByKey(pk);
 	}
 
-	public Profile updataProfile(Profile Profile) {
+	public SystemProfile updataSystemProfile(SystemProfile systemProfile) {
 		// TODO Auto-generated method stub 
-		profileDao.edit(Profile);
-		return Profile;
+		systemProfileDao.edit(systemProfile);
+		return systemProfile;
 	}
 
 }

@@ -6,34 +6,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.system.biz.inter.HistoryManager;
-import org.tinygroup.sdpm.system.dao.HistoryDao;
-import org.tinygroup.sdpm.system.dao.pojo.History;
+import org.tinygroup.sdpm.system.dao.SystemHistoryDao;
+import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 @Service
 @Transactional
 public class HistoryManagerImpl implements HistoryManager {
 	@Autowired
-	private HistoryDao histroyDao;
+	private SystemHistoryDao histroyDao;
 
-	public History add(History history) {
+	public SystemHistory add(SystemHistory systemHistory) {
 		// TODO Auto-generated method stub
-		return histroyDao.add(history);
+		return histroyDao.add(systemHistory);
 	}
 
-	public History updata(History history) {
+	public SystemHistory updata(SystemHistory systemHistory) {
 		// TODO Auto-generated method stub
-		histroyDao.edit(history);
-		return history;
+		histroyDao.edit(systemHistory);
+		return systemHistory;
 	}
 
-	public Integer delete(History history) {
+	public Integer delete(SystemHistory systemHistory) {
 		// TODO Auto-generated method stub
-		int pk=history.getHistoryId();
+		int pk=systemHistory.getHistoryId();
 		return histroyDao.deleteByKey(pk);
 	}
 
-	public List<History> find(History history) {
+	public List<SystemHistory> find(SystemHistory systemHistory) {
 		// TODO Auto-generated method stub
-		return histroyDao.query(history);
+		return histroyDao.query(systemHistory);
 	}
 	
 
