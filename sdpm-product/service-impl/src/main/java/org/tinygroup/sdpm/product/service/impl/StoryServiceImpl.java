@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.sql.SearchInfos;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
@@ -46,9 +47,9 @@ public class StoryServiceImpl implements StoryService {
 		return storyManager.findList(story, columnName, asc);
 	}
 
-	public Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story,String columnName,boolean asc) {
-		
-		return storyManager.findPager(start, limit, story, columnName, asc);
+	public Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story, SearchInfos searchInfos, String groupOperate, String columnName, boolean asc) {
+		return storyManager.findPager(start,limit,story,searchInfos,groupOperate,columnName,asc);
 	}
+
 
 }

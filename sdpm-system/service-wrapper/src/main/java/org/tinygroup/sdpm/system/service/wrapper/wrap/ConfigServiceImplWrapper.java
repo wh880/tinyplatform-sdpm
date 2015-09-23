@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.system.wrapper;
+package org.tinygroup.sdpm.system.service.wrapper.wrap;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,16 +27,16 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.DictService {
+public class ConfigServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.ConfigService {
 
-	CEPCore cepcore;
+	CEPCore core;
 
 	public CEPCore getCore() {
-		return cepcore;
+		return core;
 	}
 
-	public void setCore(CEPCore cepcore) {
-		this.cepcore = cepcore;
+	public void setCore(CEPCore core) {
+		this.core = core;
 	}
 
 	private Event getEvent(String serviceId,Context context) throws Exception{
@@ -49,12 +49,12 @@ public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.SystemDict addDict(org.tinygroup.sdpm.system.dao.pojo.SystemDict dict) {
-		String serviceId = "system_addDict";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemConfig addConfig(org.tinygroup.sdpm.system.dao.pojo.SystemConfig config) {
+		String serviceId = "system_addConfig";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("dict" ,dict);
+			context.put("config" ,config);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service
 		}
 	}
 
-	public int deleteDict(java.lang.Integer dictId) {
-		String serviceId = "system_deleteDict";
+	public int deleteConfig(java.lang.Integer configId) {
+		String serviceId = "system_deleteConfig";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("dictId" ,dictId);
+			context.put("configId" ,configId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service
 		}
 	}
 
-	public int updateDict(org.tinygroup.sdpm.system.dao.pojo.SystemDict dict) {
-		String serviceId = "system_updateDict";
+	public int updateConfig(org.tinygroup.sdpm.system.dao.pojo.SystemConfig config) {
+		String serviceId = "system_updateConfig";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("dict" ,dict);
+			context.put("config" ,config);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,12 +88,12 @@ public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.SystemDict findDict(java.lang.Integer dictId) {
-		String serviceId = "system_findDict";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemConfig findConfig(java.lang.Integer configId) {
+		String serviceId = "system_findConfig";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("dictId" ,dictId);
+			context.put("configId" ,configId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -101,12 +101,12 @@ public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemDict> findDictList(org.tinygroup.sdpm.system.dao.pojo.SystemDict dict ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "system_findDictList";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemConfig> findConfigList(org.tinygroup.sdpm.system.dao.pojo.SystemConfig config ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findConfigList";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("dict" ,dict);
+			context.put("config" ,config);
 			context.put("columnName" ,columnName);
 			context.put("asc" ,asc);
 
@@ -116,14 +116,14 @@ public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.SystemDict> findDictPager(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemDict dict ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "system_findDictPager";
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.SystemConfig> findConfigPager(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemConfig config ,java.lang.String columnName ,boolean asc) {
+		String serviceId = "system_findConfigPager";
 
 		try{
 			Context context = new ContextImpl();
 			context.put("start" ,start);
 			context.put("limit" ,limit);
-			context.put("dict" ,dict);
+			context.put("config" ,config);
 			context.put("columnName" ,columnName);
 			context.put("asc" ,asc);
 
@@ -133,12 +133,12 @@ public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service
 		}
 	}
 
-	public int[] updateBatchDict(java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemDict> dicts) {
-		String serviceId = "system_updateBatchDict";
+	public int[] updateBatchConfig(java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemConfig> configs) {
+		String serviceId = "system_updateBatchConfig";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("dicts" ,dicts);
+			context.put("configs" ,configs);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -148,8 +148,8 @@ public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service
 
 	private <T> T callServiceAndCallBack(String serviceId,Context context) throws Exception{
 		Event event = getEvent(serviceId,context);
-		cepcore.process(event);
-		ServiceInfo info = cepcore.getServiceInfo(serviceId);
+		core.process(event);
+		ServiceInfo info = core.getServiceInfo(serviceId);
 		List<Parameter> resultsParam = info.getResults();
 		if (resultsParam==null||resultsParam.size() == 0) {
 			return null;
