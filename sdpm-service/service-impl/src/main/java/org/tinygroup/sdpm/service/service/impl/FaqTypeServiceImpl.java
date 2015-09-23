@@ -3,7 +3,7 @@ package org.tinygroup.sdpm.service.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.service.biz.inter.FaqTypeManager;
-import org.tinygroup.sdpm.service.dao.pojo.FaqType;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceFaqType;
 import org.tinygroup.sdpm.service.service.inter.FaqTypeService;
 
 import java.util.List;
@@ -15,23 +15,24 @@ import java.util.List;
 public class FaqTypeServiceImpl implements FaqTypeService {
     @Autowired
     private FaqTypeManager faqTypeManager;
-    public FaqType findFaqType(Integer id) {
+
+    public ServiceFaqType findFaqType(Integer id) {
         return faqTypeManager.find(id);
     }
 
-    public List<FaqType> getFaqTypeList(FaqType faqType) {
+    public List<ServiceFaqType> getFaqTypeList(ServiceFaqType faqType) {
         return faqTypeManager.getList(faqType);
     }
 
-    public FaqType addFaqType(FaqType faqType) {
+    public ServiceFaqType addFaqType(ServiceFaqType faqType) {
         return faqTypeManager.add(faqType);
     }
 
-    public FaqType updateFaqType(FaqType faqType) {
+    public ServiceFaqType updateFaqType(ServiceFaqType faqType) {
         return faqTypeManager.update(faqType);
     }
 
-    public List<FaqType> deleteFaqType(Integer id) {
+    public List<ServiceFaqType> deleteFaqType(Integer id) {
         return faqTypeManager.delete(id);
     }
 }

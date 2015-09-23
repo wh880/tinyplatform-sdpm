@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.service.service.inter;
 
-import org.tinygroup.sdpm.service.dao.pojo.Client;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface ClientService {
      * @param id 主键
      * @return
      */
-    Client findClient(Integer id);
+    ServiceClient findClient(Integer id);
 
     /**
      * 根据条件查询List
@@ -20,7 +20,7 @@ public interface ClientService {
      * @param client 用于查询条件
      * @return
      */
-    List<Client> getClientList(Client client);
+    List<ServiceClient> getClientList(ServiceClient client);
 
     /**
      * 新增一个客户
@@ -28,7 +28,7 @@ public interface ClientService {
      * @param client 新增实体类
      * @return
      */
-    Client addClient(Client client);
+    ServiceClient addClient(ServiceClient client);
 
     /**
      * 更新客户
@@ -36,7 +36,7 @@ public interface ClientService {
      * @param client 需要更新的实体类
      * @return
      */
-    Client updateClient(Client client);
+    ServiceClient updateClient(ServiceClient client);
 
     /**
      * 根据id进行软删除客户
@@ -61,5 +61,5 @@ public interface ClientService {
      * @param productId 主键
      * @return
      */
-    List<Client> findClientByProduct(Integer productId);
+    List<ServiceClient> findClientByProduct(Integer productId);
 }

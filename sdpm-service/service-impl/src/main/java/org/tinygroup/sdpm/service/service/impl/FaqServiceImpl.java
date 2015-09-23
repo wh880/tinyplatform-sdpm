@@ -3,9 +3,8 @@ package org.tinygroup.sdpm.service.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.service.biz.inter.FaqManager;
-import org.tinygroup.sdpm.service.dao.pojo.Faq;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
 import org.tinygroup.sdpm.service.service.inter.FaqService;
-
 
 import java.util.List;
 
@@ -16,19 +15,20 @@ import java.util.List;
 public class FaqServiceImpl implements FaqService{
     @Autowired
     private FaqManager faqManager;
-    public Faq findFaq(Integer id) {
+
+    public ServiceFaq findFaq(Integer id) {
         return faqManager.find(id);
     }
 
-    public List<Faq> getFaqList(Faq faq) {
+    public List<ServiceFaq> getFaqList(ServiceFaq faq) {
         return faqManager.getList(faq);
     }
 
-    public Faq addFaq(Faq faq) {
+    public ServiceFaq addFaq(ServiceFaq faq) {
         return faqManager.add(faq);
     }
 
-    public Faq updateFaq(Faq faq) {
+    public ServiceFaq updateFaq(ServiceFaq faq) {
         return faqManager.update(faq);
     }
 

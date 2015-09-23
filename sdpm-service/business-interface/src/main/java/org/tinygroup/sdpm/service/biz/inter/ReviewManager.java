@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.service.biz.inter;
 
-import org.tinygroup.sdpm.service.dao.pojo.Review;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface ReviewManager {
      * @param id 主键
      * @return
      */
-    Review find(Integer id);
+    ServiceReview find(Integer id);
 
     /**
      * 根据产品模块id回访中的请求
@@ -22,7 +22,7 @@ public interface ReviewManager {
      * @param moldeId 主键
      * @return
      */
-    Review findByMolde(String moldeId);
+    ServiceReview findByMolde(String moldeId);
 
     /**
      * 根据条件查询List
@@ -30,7 +30,7 @@ public interface ReviewManager {
      * @param review 用于查询条件
      * @return
      */
-    List<Review> getList(Review review);
+    List<ServiceReview> getList(ServiceReview review);
 
     /**
      * 将请求指派成员进行回访
@@ -38,7 +38,7 @@ public interface ReviewManager {
      * @param review 新增实体类
      * @return
      */
-    Review add(Review review);
+    ServiceReview add(ServiceReview review);
 
     /**
      * 更新faq
@@ -46,6 +46,6 @@ public interface ReviewManager {
      * @param review 需要更新的实体类
      * @return
      */
-    Review update(Review review);
+    ServiceReview update(ServiceReview review);
 }
 

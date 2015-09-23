@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.service.dao.pojo.Client;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 
 /**
@@ -25,7 +25,7 @@ public class ClientAction extends BaseController {
 
 
     @RequestMapping("/form")
-    public String form(Client client, Model model) {
+    public String form(ServiceClient client, Model model) {
         if (client != null) {
             model.addAttribute("client", client);
         }
@@ -33,7 +33,7 @@ public class ClientAction extends BaseController {
     }
 
     @RequestMapping(value = "/save")
-    public String save(Client client, Model model) {
+    public String save(ServiceClient client, Model model) {
         if (client.getClientId() == null) {
             clientService.addClient(client);
         } else {

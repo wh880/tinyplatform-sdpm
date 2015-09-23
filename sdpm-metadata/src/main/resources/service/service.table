@@ -1,5 +1,5 @@
 <tables id="cc20e453383145a0933299ef9c1ebb4e" package-name="org.tinygroup.alm.service">
-  <table id="2d685b3a39e54ddb987b9bb717da6cbd" name="client" title="客户信息表" schema="" package-name="">
+  <table id="2d685b3a39e54ddb987b9bb717da6cbd" name="service_client" title="客户信息表" schema="" package-name="">
     <description></description>
     <table-field standard-field-id="1786285066dd4f408bbae01233a96b53" primary="true" unique="true" not-null="true" id="client_id" auto-increase="true"/>
     <table-field standard-field-id="e89bcf64ae874aa0890d8327301bc817" primary="false" unique="true" not-null="true" id="client_name" auto-increase="false"/>
@@ -14,14 +14,14 @@
     <table-field standard-field-id="398e31c8923d47868aa9e180fa975d11" primary="false" unique="false" not-null="false" id="user_post" auto-increase="false"/>
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
   </table>
-  <table id="2f8a21de7c27415591ad8265cf63edeb" name="client_user" title="客户联系人信息表" package-name="">
+  <table id="2f8a21de7c27415591ad8265cf63edeb" name="service_client_user" title="客户联系人信息表" package-name="">
     <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
     <table-field standard-field-id="1786285066dd4f408bbae01233a96b53" primary="false" unique="false" not-null="true" id="client_id" auto-increase="false"/>
     <table-field standard-field-id="f4a2dd1dcbb649f3bcd3eef8f6602a3f" primary="false" unique="false" not-null="true" id="user_account" auto-increase="false"/>
     <table-field standard-field-id="2cca0dec07cc49859fceac7289b6d0df" primary="false" unique="false" not-null="true" id="user_phone" auto-increase="false"/>
     <table-field standard-field-id="398e31c8923d47868aa9e180fa975d11" primary="false" unique="false" not-null="false" id="user_post" auto-increase="false"/>
   </table>
-  <table id="575a6e070e1a4e3691eef395f8c5a133" name="faq" title="问答表" package-name="">
+  <table id="575a6e070e1a4e3691eef395f8c5a133" name="service_faq" title="问答表" package-name="">
     <table-field standard-field-id="b237b780903149a5b941906cee7ad32c" primary="true" unique="true" not-null="true" id="faq_id" auto-increase="true"/>
     <table-field standard-field-id="123cfdd2e43b4822b26ccb665e6b0a31" primary="false" unique="false" not-null="false" id="faq_type" auto-increase="false"/>
     <table-field standard-field-id="8b15df3898f846139cb18ac32494ff2c" primary="false" unique="false" not-null="false" id="faq_question" auto-increase="false"/>
@@ -36,7 +36,7 @@
     <table-field standard-field-id="6e57184592d541dd89018be9b92201a6" primary="false" unique="false" not-null="false" id="faq_replied_by" auto-increase="false"/>
     <table-field standard-field-id="b30a14aecb4e4235a27eb5f9f676df7f" primary="false" unique="false" not-null="false" id="faq_reply_date" auto-increase="false"/>
   </table>
-  <table id="2bc7ecbfb7dd4a729b65c4c9dd54c1e9" name="faq_type" title="faq分类" package-name="">
+  <table id="2bc7ecbfb7dd4a729b65c4c9dd54c1e9" name="service_faq_type" title="faq分类" package-name="">
     <table-field standard-field-id="c83a241663e541c6b5cbea631a848388" primary="true" unique="true" not-null="true" id="faq_type_id" auto-increase="true"/>
     <table-field standard-field-id="123cfdd2e43b4822b26ccb665e6b0a31" primary="false" unique="false" not-null="true" id="faq_type" auto-increase="false"/>
     <table-field standard-field-id="57510782cae14bc3a7b1f5925d324d85" primary="false" unique="false" not-null="true" id="faq_parent_type_id" auto-increase="false"/>
@@ -44,7 +44,7 @@
     <table-field standard-field-id="6171afc19fb141789e00ea6496d9a315" primary="false" unique="false" not-null="false" id="faq_created_by" auto-increase="false"/>
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
   </table>
-  <table id="b5cda01bf71f494b8efea5e94f71c6d9" name="reply" title="客服回复表" package-name="">
+  <table id="b5cda01bf71f494b8efea5e94f71c6d9" name="service_reply" title="客服回复表" package-name="">
     <table-field standard-field-id="a2bef96d21dd47da9bea8bb643538918" primary="true" unique="true" not-null="true" id="reply_id" auto-increase="true"/>
     <table-field standard-field-id="7d045d07a379467799bb865c513acad8" primary="false" unique="false" not-null="true" id="client_request_id" auto-increase="false"/>
     <table-field standard-field-id="c8d123b6a19e44dc86e8d98e0cca9b1d" primary="false" unique="false" not-null="false" id="reply_opinion" auto-increase="false"/>
@@ -56,7 +56,7 @@
     <table-field standard-field-id="af8d53fc0d2a4dd3b19afc69063bcbf0" primary="false" unique="false" not-null="true" id="reply_date" auto-increase="false"/>
     <table-field standard-field-id="c457a69854e24534a2bff327ed642e6c" primary="false" unique="false" not-null="true" id="reply_done" auto-increase="false"/>
   </table>
-  <table id="aa05b252d3c442bfb4bfca4da35a1629" name="request" title="客户请求表" package-name="">
+  <table id="aa05b252d3c442bfb4bfca4da35a1629" name="service_request" title="客户请求表" package-name="">
     <table-field standard-field-id="7d045d07a379467799bb865c513acad8" primary="true" unique="true" not-null="true" id="request_id" auto-increase="true"/>
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="true" id="product_id" auto-increase="false"/>
     <table-field standard-field-id="32fc494251074a329bdfa8b6600ce738" primary="false" unique="false" not-null="false" id="module_id" auto-increase="false"/>
@@ -89,7 +89,7 @@
     <table-field standard-field-id="41c60fff265346af8c40da9d584af5f3" primary="false" unique="false" not-null="false" id="replier" auto-increase="false"/>
     <table-field standard-field-id="af8d53fc0d2a4dd3b19afc69063bcbf0" primary="false" unique="false" not-null="false" id="reply_date" auto-increase="false"/>
   </table>
-  <table id="13763221be294c16babcf4243d3daad3" name="review" title="客服回访表" package-name="">
+  <table id="13763221be294c16babcf4243d3daad3" name="service_review" title="客服回访表" package-name="">
     <table-field standard-field-id="5c02810ba43f465fbeaad1e30c5e1c6b" primary="true" unique="true" not-null="true" id="review_id" auto-increase="true"/>
     <table-field standard-field-id="7d045d07a379467799bb865c513acad8" primary="false" unique="false" not-null="true" id="request_id" auto-increase="false"/>
     <table-field standard-field-id="6cf77ba24b7d450dbac1b0569b309943" primary="false" unique="false" not-null="true" id="review_spec" auto-increase="false"/>
@@ -100,7 +100,7 @@
     <table-field standard-field-id="ce78d2a1b7a840d298da9e7367125394" primary="false" unique="false" not-null="true" id="review_score" auto-increase="false"/>
     <table-field standard-field-id="32da3f7c3ac84999af02c6a48f721c88" primary="false" unique="false" not-null="false" id="review_type" auto-increase="false"/>
   </table>
-  <table id="9398bc0d1e584881a5b8fbd9f8b6e60e" name="sla" title="服务级别协议表" package-name="">
+  <table id="9398bc0d1e584881a5b8fbd9f8b6e60e" name="service_sla" title="服务级别协议表" package-name="">
     <table-field standard-field-id="f201054bde4c4d7e83bda49cc76f24a0" primary="true" unique="true" not-null="true" id="sla_id" auto-increase="true"/>
     <table-field standard-field-id="4e3b803e6e8a4b918207fc9916c70a38" primary="false" unique="false" not-null="true" id="service_level" auto-increase="false"/>
     <table-field standard-field-id="403263c8770744b4ab1a8c9b8ca735fc" primary="false" unique="false" not-null="true" id="service_deadline" auto-increase="false"/>

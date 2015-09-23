@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.ReviewManager;
-import org.tinygroup.sdpm.service.dao.ReviewDao;
-import org.tinygroup.sdpm.service.dao.pojo.Review;
+import org.tinygroup.sdpm.service.dao.ServiceReviewDao;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
 
 import java.util.List;
 
@@ -16,22 +16,25 @@ import java.util.List;
 @Transactional
 public class ReviewManagerImpl implements ReviewManager{
     @Autowired
-    private ReviewDao reviewDao;
-    public Review find(Integer id) { return reviewDao.getByKey(id);}
+    private ServiceReviewDao reviewDao;
 
-    public Review findByMolde(String moldeId) {
+    public ServiceReview find(Integer id) {
+        return reviewDao.getByKey(id);
+    }
+
+    public ServiceReview findByMolde(String moldeId) {
         return null;
     }
 
-    public List<Review> getList(Review review) {
+    public List<ServiceReview> getList(ServiceReview review) {
         return reviewDao.query(review);
     }
 
-    public Review add(Review review) {
+    public ServiceReview add(ServiceReview review) {
         return reviewDao.add(review);
     }
 
-    public Review update(Review review) {
+    public ServiceReview update(ServiceReview review) {
         reviewDao.edit(review);
         return review;
     }
