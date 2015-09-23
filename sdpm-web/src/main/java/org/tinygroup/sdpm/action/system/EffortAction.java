@@ -22,5 +22,10 @@ public class EffortAction extends BaseController{
 		return "project/note/tableData.page";
 		
 	}
+	@RequestMapping("add")
+	public String add(SystemEffort systemEffort,Model model){
+		effortService.save(systemEffort);
+		return "redirect:" + "/system/effort/list/";
+	}
 
 }
