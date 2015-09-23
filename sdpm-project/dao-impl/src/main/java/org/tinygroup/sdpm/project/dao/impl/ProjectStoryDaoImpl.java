@@ -40,7 +40,8 @@ import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-@LogClass("project")
+
+@LogClass("story")
 @Repository
 public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectStoryDao {
 	@LogMethod("add")

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.ClientManager;
 import org.tinygroup.sdpm.service.dao.ServiceClientDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -14,12 +15,16 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class ClientManagerImpl implements ClientManager{
+public class ClientManagerImpl implements ClientManager {
     @Autowired
     private ServiceClientDao clientDao;
 
     public ServiceClient find(Integer id) {
         return clientDao.getByKey(id);
+    }
+
+    public Pager<ServiceClient> findPager(Integer start, Integer limit, ServiceClient serviceClient) {
+        return clientDao.queryPager(start, limit, serviceClient);
     }
 
     public List<ServiceClient> getList(ServiceClient client) {
