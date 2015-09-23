@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -31,6 +32,10 @@ public class UserServiceImpl implements UserService {
 
     public OrgUser findUser(String id) {
         return userManager.find(id);
+    }
+
+    public Pager<OrgUser> findUserPager(Integer start, Integer limit, OrgUser orgUser) {
+        return userManager.findPager(start, limit, orgUser);
     }
 
     public List<OrgUser> findUserList(OrgUser orgUser) {

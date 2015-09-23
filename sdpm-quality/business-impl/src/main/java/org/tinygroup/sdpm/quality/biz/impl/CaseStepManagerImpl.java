@@ -6,20 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.quality.biz.inter.CaseStepManager;
-import org.tinygroup.sdpm.quality.dao.CaseStepDao;
-import org.tinygroup.sdpm.quality.dao.pojo.CaseStep;
+import org.tinygroup.sdpm.quality.dao.QualityCaseStepDao;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
 
 @Service        //注解，告诉spring创建一个实现类的实例
 @Transactional  //开启事务
 public class CaseStepManagerImpl implements CaseStepManager {
 	@Autowired
-	private CaseStepDao casestepdao;
+	private QualityCaseStepDao casestepdao;
 	
-	public CaseStep find(Integer id){
+	public QualityCaseStep find(Integer id){
 		return casestepdao.getByKey(id);
 	}
 	
-	public CaseStep add(CaseStep casestep){
+	public QualityCaseStep add(QualityCaseStep casestep){
 		
 		return casestepdao.add(casestep);
 	}
@@ -29,7 +29,7 @@ public class CaseStepManagerImpl implements CaseStepManager {
 		return casestepdao.deleteByKeys(id);
 	}
 	
-	public List<CaseStep> findList(CaseStep casestep){
+	public List<QualityCaseStep> findList(QualityCaseStep casestep){
 		return casestepdao.query(casestep);
 	}
 }

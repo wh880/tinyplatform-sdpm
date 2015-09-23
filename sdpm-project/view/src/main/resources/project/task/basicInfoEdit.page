@@ -200,7 +200,7 @@
         <td style="width:75%">
             #@formControlDiv("col-8")
 			     	#@tinyDateInput(
-                "taskEstStared" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
+                "taskEstStared" "2015-09-23" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
       			#end
         </td>
     </tr>
@@ -209,7 +209,7 @@
         <td style="width:75%">
             #@formControlDiv("col-8")
 			     	#@tinyDateInput(
-                "taskRealStarted" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
+                "taskRealStarted" "2015-09-23" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
       			#end
         </td>
     </tr>
@@ -218,7 +218,7 @@
         <td style="width:75%">
             #@formControlDiv("col-8")
 			     	#@tinyDateInput(
-                "taskDeadLine" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
+                "taskDeadLine" "2015-09-23" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
       			#end
         </td>
     </tr>
@@ -239,7 +239,7 @@
     <tr>
         <td style="float:right;padding:3px 10px;font-size:15px">预计剩余</td>
         <td style="width:75%">
-            <input name="taskLeft"type="text" value="天" style="height:33px"/>
+            <input name="taskLeft"type="text" value="1.1" style="height:33px"/>
         </td>
     </tr>
 </table>
@@ -275,7 +275,7 @@
     <tr>
         <td style="float:right;padding:3px 5px;font-size:15px">完成时间</td>
         <td style="width:75%">
-            <input name="askFinishedDate" type="text" style="width:210px;height:33px"/>
+            <input name="taskFinishedDate" type="text" value="2015-09-23" style="width:210px;height:33px"/>
         </td>
     </tr>
     <tr>
@@ -302,7 +302,7 @@
     <tr>
         <td style="float:right;padding:3px 5px;font-size:15px">取消时间</td>
         <td>
-            <input name="taskCanceledDate" type="text" style="width:210px;height:33px"/>
+            <input name="taskCanceledDate" type="text" value="2015-09-23" style="width:210px;height:33px"/>
         </td>
     </tr>
     <tr>
@@ -350,7 +350,7 @@
     <tr>
         <td style="float:right;padding:3px 5px;font-size:15px">关闭时间</td>
         <td>
-            <input name="taskCloseDate" type="text" style="width:210px;height:33px"/>
+            <input name="taskCloseDate" type="text" value="2015-09-23" style="width:210px;height:33px"/>
         </td>
     </tr>
 </table>

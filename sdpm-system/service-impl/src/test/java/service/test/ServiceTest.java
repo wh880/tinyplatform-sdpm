@@ -1,10 +1,5 @@
 package service.test;
 
-import org.tinygroup.context.Context;
-import org.tinygroup.context.impl.ContextImpl;
-import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
-
-import util.ServiceTestUtil;
 import junit.framework.TestCase;
 
 /**
@@ -14,7 +9,7 @@ public class ServiceTest extends TestCase{
 //    /**
 //     * 测试正常用法 对象入参 对象出参
 //     */
-//    public void testUserAdd() {
+public void testUserAdd() {
 //        Context context = new ContextImpl();
 //        SystemDict dict = new SystemDict();
 //        dict.setDictKey("id");
@@ -23,5 +18,5 @@ public class ServiceTest extends TestCase{
 //        ServiceTestUtil.execute("addDict", context);
 //
 //        Object user2 = context.get("");
-//    }
+}
 }

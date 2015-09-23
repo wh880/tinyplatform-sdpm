@@ -1,32 +1,24 @@
-#macro setTinyItemCount(num)
-<input type="hidden" name="records" value="${num}"/>
-#end
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-    #set(pagesize=records-(page-1)*pagesize)
-#end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(pager.totalPages)
+#for(var:pager.records)
 #@tr()
-    #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()001${page}#end
+    #@td()<input type="checkbox" value="${var.orgUserId}" name="idCheck">#end
     #@td()
-    <a href="${TINY_CONTEXT_PATH}/organization/user/todocalendarAdmin.page">习近平</a>#end
-    #@td()主席#end
-    #@td()研发工程师#end
+    <a href="${TINY_CONTEXT_PATH}/organization/user/todocalendarAdmin.page">${var.orgUserRealName}</a>#end
+    #@td()${var.orgUserAccount}#end
+    #@td()${var.orgUserRole}#end
     #@td()
-    <a href="mailto:wangyi@163.com">wangyi@163.com</a>
+    <a href="mailto:wangyi@163.com">${var.orgUserEmail}</a>
     #end
-    #@td()男#end
-    #@td()1234556667#end
-    #@td()2015-08-21#end
-    #@td()2015-08-21#end
+    #@td()${var.orgUserGender}#end
+    #@td()${var.orgUserPhone}#end
+    #@td()${var.orgUserJoin}#end
+    #@td()${var.orgUserLast}#end
     #@td()
         #set(map={"org-user-edit":[665,448],"org-user-delete":[550,150]})
         #foreach(m:menuManager.getScopeMenus("org-user"))
             #if(m.id=="org-user-edit")
-            <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var.orgUserId}"
+               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #else
                 #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?id="+var "ml-5")
             #end

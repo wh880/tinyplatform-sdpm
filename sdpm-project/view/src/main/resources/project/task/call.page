@@ -34,7 +34,7 @@
 
         #@elementItem()
             #@sdpmItem("客户联系人")
-                #tinyInput("text" "username" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":
+                #tinyInput("text" "orgUserAccount" "abcdefg"{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":
                     "用户名不能为空！","id":"username","class":"input-text"})
             #end
         #end

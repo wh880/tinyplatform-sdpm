@@ -7,27 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.quality.biz.inter.TestRunManager;
-import org.tinygroup.sdpm.quality.dao.TestRunDao;
-import org.tinygroup.sdpm.quality.dao.pojo.TestRun;
+import org.tinygroup.sdpm.quality.dao.QualityTestRunDao;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 
 @Service
 @Transactional
 public class TestRunManagerImpl implements TestRunManager {
 
 		@Autowired
-		private TestRunDao testrundao;
+		private QualityTestRunDao testrundao;
 		
-		public List<TestRun> findList(TestRun testrun){
+		public List<QualityTestRun> findList(QualityTestRun testrun){
 			return testrundao.query(testrun);
 		}
 		
-		public int update(TestRun testrun){
+		public int update(QualityTestRun testrun){
 			testrun.setTestRunLastRunDate(new Date());
 			return testrundao.edit(testrun);
 		}
 		
-		public int[] batchUpdate(List<TestRun> testruns){
-			TestRun testrun = new TestRun();
+		public int[] batchUpdate(List<QualityTestRun> testruns){
+			QualityTestRun testrun = new QualityTestRun();
 			testrun.setTestRunLastRunDate(new Date());
 			return testrundao.batchUpdate(testruns);
 		}

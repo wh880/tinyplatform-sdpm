@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.quality.biz.inter.CaseStepManager;
-import org.tinygroup.sdpm.quality.dao.pojo.CaseStep;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
 import org.tinygroup.sdpm.quality.service.inter.CaseStepService;
 
 @Component
@@ -14,11 +14,11 @@ public class CaseStepServiceImpl implements CaseStepService {
 	@Autowired
 	private CaseStepManager casestepmanager;
 	
-	public CaseStep findById(int id){
+	public QualityCaseStep findById(int id){
 		return casestepmanager.find(id);
 	}
 	
-	public CaseStep addCaseStep(CaseStep casestep){
+	public QualityCaseStep addCaseStep(QualityCaseStep casestep){
 		
 		return casestepmanager.add(casestep);
 	}
@@ -27,7 +27,7 @@ public class CaseStepServiceImpl implements CaseStepService {
 		return casestepmanager.delete(id);
 	}
 	
-	public List<CaseStep> findCaseStepList(CaseStep casestep){
+	public List<QualityCaseStep> findCaseStepList(QualityCaseStep casestep){
 		return casestepmanager.findList(casestep);
 	}
 }

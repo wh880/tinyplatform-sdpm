@@ -110,6 +110,14 @@
                     </div>
                     <div class="infoContent">
                         <p class="titleName">账号信息</p>
+                    ##                        #@gridSysRow()
+                    ##                            #@colLabel("col-4")<span class="c-red">*</span>用户ID：#end
+                    ##                            #@gridSysCol(6)
+                    ##                                #tinyInput(
+                    ##                                    "text" "orgUserId" user?.orgUserId {"datatype":"","id":"请求标题","class":
+                    ##                                    "input-text"})
+                    ##                            #end
+                    ##                        #end
                         #@gridSysRow()
                             #@colLabel("col-4")<span class="c-red">*</span>用户名：#end
                             #@gridSysCol(6)
