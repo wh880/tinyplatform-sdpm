@@ -1,25 +1,14 @@
-#macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
-#end
-
-
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
-#end
 #setTinyItemCount(52)
 
-#for(var:[1..list])
+#for(l:list)
 #@tr()
     #@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()${var}#end
-	
-	#@td()2015.9.23#end
-	#@td()root#end
-	#@td()12#end
-	#@td() 2 #end
-	#@td() task #end
+	#@td()${l.effortId}#end
+	#@td()${l.effortDate}#end
+	#@td()${l.effortAccount}#end
+	#@td()${l.effortWork}#end
+	#@td() ${l.effortConsumed}#end
+	#@td() ${l.effortObjectType} #end
 		
 	
 #end
