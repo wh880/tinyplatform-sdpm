@@ -17,7 +17,7 @@ import org.tinygroup.tinysqldsl.Pager;
 @Transactional
 public class StoryManagerImpl implements StoryManager{
 	
-	@Autowired
+	@Autowired(required=false)
 	private ProductStoryDao productStoryDao;
 	
 	public ProductStory add(ProductStory story) {

@@ -40,10 +40,7 @@ public class ClientManagerImpl implements ClientManager {
     }
 
     public Integer delete(Integer id) {
-        ServiceClient client = new ServiceClient();
-        client.setClientId(id);
-        client.setDeleted(id);
-        return clientDao.edit(client);
+        return clientDao.softDelete(id);
     }
 
     public Integer deleteBatch(Integer id) {

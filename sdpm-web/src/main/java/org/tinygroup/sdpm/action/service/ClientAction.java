@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.tinysqldsl.Pager;
-
-import java.util.List;
 
 /**
  * Created by Administrator on 2015-09-22.
@@ -22,8 +21,6 @@ public class ClientAction extends BaseController {
 
     @RequestMapping(value = "/list")
     public String list(ServiceClient client, Model model) {
-        List<ServiceClient> list = clientService.getClientList(client);
-        model.addAttribute("list", list);
         return "service/client/clientUser.page";
     }
 
@@ -36,8 +33,9 @@ public class ClientAction extends BaseController {
 
 
     @RequestMapping("/form")
-    public String form(ServiceClient client, Model model) {
-        if (client != null) {
+    public String form(Integer id, Model model) {
+        if (id != null) {
+            ServiceClient client = clientService.findClient(id);
             model.addAttribute("client", client);
         }
         return "service/client/clientAdd.page";
@@ -54,10 +52,12 @@ public class ClientAction extends BaseController {
         return "service/client/clientUser.page";
     }
 
+    @ResponseBody
     @RequestMapping(value = "/delete")
     public String delete(Integer id) {
         clientService.deleteClient(id);
-        return "/service/client/clientUser.page";
+
+        return "success";
     }
 
 }

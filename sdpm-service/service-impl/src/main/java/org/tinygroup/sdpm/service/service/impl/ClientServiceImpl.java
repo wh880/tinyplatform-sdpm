@@ -21,8 +21,8 @@ public class ClientServiceImpl implements ClientService {
         return clientManager.find(id);
     }
 
-    public Pager<ServiceClient> findClientPager(Integer start, Integer limit, ServiceClient serviceClient) {
-        return clientManager.findPager(start, limit, serviceClient);
+    public Pager<ServiceClient> findClientPager(Integer start, Integer limit, ServiceClient client) {
+        return clientManager.findPager(start, limit, client);
     }
 
     public List<ServiceClient> getClientList(ServiceClient client) {
