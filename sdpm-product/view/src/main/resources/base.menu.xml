@@ -216,7 +216,7 @@
 
     </menu>
 
-    <menu id="allproduct" parent-id="myproduct" name="所有产品" href="/product/page/tabledemo/product-listall.page" sort="6"
+    <menu id="allproduct" parent-id="myproduct" name="所有产品" href="/product/list" sort="6"
           isShow="1" permission="Permission" scope="product-menu" icon="icon-globe"></menu>
 
     <menu id="newproduct" parent-id="myproduct" name="添加产品" href="/product/page/tabledemo/addProduct.page" sort="5"
