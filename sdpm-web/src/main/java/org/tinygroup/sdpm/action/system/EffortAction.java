@@ -16,12 +16,10 @@ public class EffortAction extends BaseController{
 	private EffortService effortService;
 	@RequestMapping("list")
 	public String list(Effort effort,Model model){
-		if(effort==null){
-			effort = new Effort();
-		}
+		
 		List<Effort> list = effortService.find(effort);
 		model.addAttribute("list", list);
-		return "project/note/notetable.pagelet";
+		return "project/note/tabledata.pagelet";
 		
 	}
 

@@ -22,7 +22,7 @@
                             <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">上周</a>
                             <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">本月</a>
                             <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">上月</a>
-                            <a href="${TINY_CONTEXT_PATH}/system/effrot/list">所有日志</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">所有日志</a>
                         </td>
                         <td style="float:left">
                             <div style="width:150px">
