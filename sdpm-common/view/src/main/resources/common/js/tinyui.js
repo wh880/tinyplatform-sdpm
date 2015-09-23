@@ -1,4 +1,4 @@
-
+	tinyTplList.sort(function(a,b){return a.sort>b.sort?1:-1});
 
     var storageSupported = (typeof(window.Storage) !== "undefined");
 
@@ -10,13 +10,15 @@
     }
 
     var testTheme = function (name) {
-        for (var j = 1; j < demo_themes.length; j++) {
-            if (demo_themes[j].name === name) {
-                return demo_themes[j].name;
-            }
-        }
-        return 'clean';
-    }
+		var themeid=0;
+		for (var j=1; j<tinyTplList.length; j++) {
+			if (tinyTplList[j].name === name) {
+				themeid=j;
+				break;
+			}
+		}
+		return tinyTplList[themeid].name;
+	}
 
     var loadDemoSettings = function () {
         var result = {
@@ -30,8 +32,8 @@
             tinycontainer: false,
             menupos: "left",
             mmstate: "expanded",
-            theme: 'clean',
-            tiny_FullScreen: false
+            theme: tinyTplList[0].name,//'clean',
+            tiny_FullScreen: false,
         };
 
         if (storageSupported) {
@@ -127,12 +129,12 @@
 
     var getThemesTemplate = function () {
         result = '';
-        for (var i = 0, l = demo_themes.length - 1; i <= l; i++) {
+        for (var i = 0, l = tinyTplList.length - 1; i <= l; i++) {
             if (i % 2 == 0) {
                 result = result + '<div class="demo-themes-row">';
-                result = result + '<a href="#" class="demo-theme" data-theme="' + demo_themes[i].name + '"><div class="theme-preview"><img src="' + demo_themes[i].img + '" alt=""></div><div class="overlay"></div><span>' + demo_themes[i].title + '</span></a>';
+                result = result + '<a href="#" class="demo-theme" data-theme="' + tinyTplList[i].name + '"><div class="theme-preview"><img src="' + tinyTplList[i].img + '" alt=""></div><div class="overlay"></div><span>' + tinyTplList[i].title + '</span></a>';
             } else {
-                result = result + '<a href="#" class="demo-theme" data-theme="' + demo_themes[i].name + '"><div class="theme-preview"><img src="' + demo_themes[i].img + '" alt=""></div><div class="overlay"></div><span>' + demo_themes[i].title + '</span></a>';
+                result = result + '<a href="#" class="demo-theme" data-theme="' + tinyTplList[i].name + '"><div class="theme-preview"><img src="' + tinyTplList[i].img + '" alt=""></div><div class="overlay"></div><span>' + tinyTplList[i].title + '</span></a>';
                 result = result + '</div>';
             }
             if (i == l && i % 2 == 0) {
@@ -158,7 +160,7 @@
 
     var panel_width = 260;
 
-    var demo_themes = [
+    /*var demo_themes = [
         {name: 'default', title: '默认', img: contextPath + '/common/img/themes/default.png'},
         {name: 'clean', title: '深色', img: contextPath + '/common/img/themes/dark.png'},
         {name: 'asphalt', title: '沥青', img: contextPath + '/common/img/themes/asphalt.png'},
@@ -169,7 +171,7 @@
         {name: 'fresh', title: '绿色', img: contextPath + '/common/img/themes/green.png'},
         {name: 'silver', title: '黑色', img: contextPath + '/common/img/themes/black.png'},
         {name: 'white', title: '时尚', img: contextPath + '/common/img/themes/fashion.png'}
-    ];
+    ];*/
 
     var demo_settings = loadDemoSettings();
     if (demo_settings.tiny_FullScreen) {
@@ -421,54 +423,50 @@
     ];
 
     var demo_template = [
-        '<div id="demo-settings">',
-        ' <a href="#" id="demo-settings-toggler"><i class="fa fa-gear fa-spin"></i></a>',
-        ' <h5 class="header">设置选项</h5>',
-        ' <div>',
-        '   <ul id="demo-settings-list">',
-        '     <li class="clearfix">',
-        '       <span>固定导航条</span>',
-        '       <div class="demo-checkbox"><input type="checkbox" id="demo-fixed-navbar" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.fixed_navbar) ? ' checked="checked"' : '' ) + '></div>',
-        '     </li>',
-        '     <li class="clearfix">',
-        '       <span>固定主菜单</span>',
-        '       <div class="demo-checkbox"><input type="checkbox" id="demo-fixed-menu" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.fixed_menu) ? ' checked="checked"' : '' ) + '></div>',
-        '     </li>',
-        //'     <li class="clearfix">',
-        //'       <span>左右换位置</span>',
-        // '       <div class="demo-checkbox"><input type="checkbox" id="demo-rtl" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.rtl) ? ' checked="checked"' : '' ) + '></div>',
-        // '     </li>',
-
-        '     <li class="clearfix">',
-        '       <span>固定导航菜单</span>',
-        '       <div class="demo-checkbox"><input type="checkbox" id="demo-position-fixed" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.position_fixed) ? ' checked="checked"' : '' ) + '></div>',
-        '     </li>',
-        '     <li class="clearfix">',
-        '       <span>固定页脚</span>',
-        '       <div class="demo-checkbox"><input type="checkbox" id="demo-footer-fixed" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.footer_fixed) ? ' checked="checked"' : '' ) + '></div>',
-        '     </li>',
-        
-        /*'     <li class="clearfix">',
-         '       <span>菜单在顶部</span>',
-         '       <div class="demo-checkbox"><input type="checkbox" id="demo-menu-ontop" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.menu_ontop) ? ' checked="checked"' : '' ) + '></div>',
-         '     </li>',*/
-
-        '     <li class="clearfix">',
-        '       <span>固定宽度</span>',
-        '       <div class="demo-checkbox"><input type="checkbox" id="demo-tinycontainer" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.tinycontainer) ? ' checked="checked"' : '' ) + '></div>',
-        '     </li>',
-        /*'     <li class="clearfix">',
-         '       <span>隐藏菜单</span>',
-         '       <div class="demo-checkbox"><input type="checkbox" id="demo-no-menu" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.no_menu) ? ' checked="checked"' : '' ) + '></div>',
-         '     </li>',*/
-        '   </ul>',
-        ' </div>',
-        ' <h5 class="header">主题风格</h5>',
-        ' <div id="demo-themes">',
-        getThemesTemplate(),
-        ' </div>',
-        '</div>'
-    ];
+	  '<div id="demo-settings">',
+	  ' <a href="#" id="demo-settings-toggler"><i class="fa fa-gear fa-spin"></i></a>',
+	  ' <h5 class="header">设置选项</h5>',
+	  ' <div>',
+	  '   <ul id="demo-settings-list">',
+	  '     <li class="clearfix">',
+	  '       <span>固定导航条</span>',
+	  '       <div class="demo-checkbox"><input type="checkbox" id="demo-fixed-navbar" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.fixed_navbar) ? ' checked="checked"' : '' ) + '></div>',
+	  '     </li>',
+	  '     <li class="clearfix">',
+	  '       <span>固定主菜单</span>',
+	  '       <div class="demo-checkbox"><input type="checkbox" id="demo-fixed-menu" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.fixed_menu) ? ' checked="checked"' : '' ) + '></div>',
+	  '     </li>',
+	  '     <li class="clearfix">',
+	  '       <span>固定导航菜单</span>',
+	  '       <div class="demo-checkbox"><input type="checkbox" id="demo-position-fixed" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.position_fixed) ? ' checked="checked"' : '' ) + '></div>',
+	  '     </li>',
+	  '     <li class="clearfix">',
+	  '       <span>固定页脚</span>',
+	  '       <div class="demo-checkbox"><input type="checkbox" id="demo-footer-fixed" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.footer_fixed) ? ' checked="checked"' : '' ) + '></div>',
+	  '     </li>',
+	  '     <li class="clearfix">',
+	  '       <span>菜单位置</span>',
+	  '       <div class="demo-checkbox"><input type="radio" name="navposition" value="left" id="navpositionleft" ' + ((demo_settings.menupos=="left") ? ' checked="checked"' : '' ) + '><label for="navpositionleft">左边</label> <input type="radio" name="navposition" id="navpositiontop" value="top"' + ((demo_settings.menupos=="top") ? ' checked="checked"' : '' ) + '><label for="navpositiontop">顶部</label> </div>',
+	  '     </li>',
+	  '     <li class="clearfix">',
+	  '       <span>固定宽度</span>',
+	  '       <div class="demo-checkbox"><input type="checkbox" id="demo-tinycontainer" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.tinycontainer) ? ' checked="checked"' : '' ) + '></div>',
+	  '     </li>',
+	  '     <li class="clearfix">',
+	  '       <span>隐藏宏代码</span>',
+	  '       <div class="demo-checkbox"><input type="checkbox" id="hide-macro" class="demo-settings-switcher" data-class="switcher-sm"' + ((demo_settings.CUSTOM_HIDE_MACRO=="true") ? ' checked="checked"' : '' ) + '></div>',
+	  '     </li>',
+	  '   </ul>',
+	  ' </div>'
+	];
+	if(tinyTplList.length>1){
+		demo_template.push(
+		  ' <h5 class="header">主题风格</h5>',
+		  ' <div id="demo-themes">',
+			  getThemesTemplate(),
+		  ' </div>',
+		  '</div>');
+	}
 
 // Initialize
 //
