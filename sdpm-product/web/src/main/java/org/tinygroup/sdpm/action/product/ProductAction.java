@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.weblayer.mvc.annotation.Controller;
@@ -16,7 +15,7 @@ import org.tinygroup.weblayer.mvc.annotation.Controller;
  */
 @Controller
 @RequestMapping("/product")
-public class ProductAction extends BaseController{
+public class ProductAction{
 	
 	@Autowired
 	private ProductService productService;
