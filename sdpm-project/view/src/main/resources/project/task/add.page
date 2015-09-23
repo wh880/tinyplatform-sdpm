@@ -103,7 +103,7 @@
 		#@sdpmItem("任务描述")
 			#@formControlDiv("col-8")
 				#tinyInput(
-					"text" "taskDesc" ""{"placeholder":"任务没描述","datatype":"*4-16","id":
+					"text" "taskDesc" ""{"placeholder":"任务描述","datatype":"*4-16","id":
 					"username",
 					"class":"input-text"})
 			#end
@@ -127,7 +127,7 @@
 	#@elementItem()
 		#@sdpmItem("最初预计")
 			#@formControlDiv("col-8")
-				#tinyInput("text" "taskEstimate" ""{"placeholder":"任务名称","datatype":"*4-16","id":
+				#tinyInput("text" "taskEstimate" ""{"placeholder":"最初预计","datatype":"*4-16","id":
 					"username","class":"input-text"})
 			#end
 		#end

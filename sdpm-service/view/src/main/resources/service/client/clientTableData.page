@@ -1,29 +1,23 @@
 #macro setTinyItemCount(num)
 <input type="hidden" name="records" value="${num}"/>
 #end
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-    #set(pagesize=records-(page-1)*pagesize)
-#end
-#setTinyItemCount(52)
-#foreach(var:[1..pagesize])
+#setTinyItemCount(pager.totalPages)
+#foreach(var:pager.records)
     #@tr()
-        #@td()<input type="checkbox" value="${var}" name="idCheck">#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientProduct.page">001</a>#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">恒生</a>#end
-        #@td()银行部#end
-        #@td()习近平#end
-        #@td()2015-09-09#end
-        #@td()正常#end
+        #@td()<input type="checkbox" value="${var.clientId}" name="idCheck">#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientProduct.page">${var.clientId}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">${var.clientName}</a>#end
+        #@td()${var.clientDeptId}#end
+        #@td()${var.clientCreatedBy}#end
+        #@td()${var.clientCreateDate}#end
+        #@td()${var.clientStatus}#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("service-cil"))
                 #if(m.id != "client-del")
                    #* #iconOperations("#myModal" m.icon m.name "650" "350" m.href+"?id="+var "ml-5")*#
-                <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var}"
+                <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var.clientId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
-                 #*   #@tinyTableItemRemove("#" "${m.id}")<i class="${m.icon}"></i>#end*#
                     #@tinyTableItemRemove("#" "id")<i class="${m.icon}"></i>#end
                 #end
             #end

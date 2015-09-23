@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.service.biz.inter.ClientManager;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -18,6 +19,10 @@ public class ClientServiceImpl implements ClientService {
 
     public ServiceClient findClient(Integer id) {
         return clientManager.find(id);
+    }
+
+    public Pager<ServiceClient> findClientPager(Integer start, Integer limit, ServiceClient serviceClient) {
+        return clientManager.findPager(start, limit, serviceClient);
     }
 
     public List<ServiceClient> getClientList(ServiceClient client) {

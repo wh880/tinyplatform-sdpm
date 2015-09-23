@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.service.biz.inter;
 
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public interface ClientManager {
      * @return
      */
     ServiceClient find(Integer id);
+
+    Pager<ServiceClient> findPager(Integer start, Integer limit, ServiceClient serviceClient);
 
     /**
      * 根据条件查询List

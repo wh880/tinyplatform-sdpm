@@ -9,7 +9,7 @@ import org.tinygroup.sdpm.system.biz.inter.EffortManager;
 import org.tinygroup.sdpm.system.dao.pojo.Effort;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.tinysqldsl.Pager;
-@Component("effortService")
+@Component
 public class EffortServiceImpl implements EffortService {
 	@Autowired
     private EffortManager  effortManager;
