@@ -12,10 +12,10 @@ public interface TaskManager {
     /**
      * 根据主键id查找用户
      *
-     * @param id 主键
+     * @param taskId 主键
      * @return
      */
-    ProjectTask find(int id);
+    ProjectTask find(int taskId);
 
     /**
      * 根据条件查询List

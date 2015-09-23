@@ -26,7 +26,7 @@
 <div style="width:70%;float:left" class="">
 
     <div class="infoContent">
-        <p class="titleName">项目名称>编辑</p>
+        <p class="titleName">${task?.taskName}>编辑</p>
 
         #@elementItem()
             <div class="col-12">
