@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
 import org.tinygroup.sdpm.service.service.inter.FaqService;
+
+import java.util.List;
 /*import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.commons.tools.StringUtil;*/
@@ -16,7 +18,7 @@ import org.tinygroup.commons.tools.StringUtil;*/
 public class FaqAction extends BaseController {
     @Autowired
     private FaqService faqService;
-
+/*新增问题*/
     @RequestMapping("/form")
     public String form(ServiceFaq faq, Model model) {
         /*if (faq.getFaqId() == null) {}*/
@@ -28,7 +30,7 @@ public class FaqAction extends BaseController {
         }
         return "/service/faq/addquestion.page";
     }
-
+  /* 保存*/
     @RequestMapping("/save")
     public String save(ServiceFaq faq ,Model model)
     {
@@ -43,6 +45,22 @@ public class FaqAction extends BaseController {
         model.addAttribute("faq",faq);
         return "/service/faq/faqmenu.page";
     }
+    /*把所有数据查询出来*/
+    @RequestMapping("/list")
+    public String list(ServiceFaq faq,Model model)
+    {
+        List<ServiceFaq> list=faqService.getFaqList(faq);
+        model.addAttribute("list",list);
+        return "/service/faq/faqmenu.page";
+    }
+    /*删除*/
+    @RequestMapping("/delete")
+    public String delete(Integer id)
+    {
+        faqService.deleteFaq(id);
+        return "/service/faq/faqmenu.page";
+    }
+
 
 
 }
