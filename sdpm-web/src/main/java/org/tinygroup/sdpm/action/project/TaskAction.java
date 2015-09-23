@@ -21,13 +21,15 @@ public class TaskAction extends BaseController {
     @Autowired
     private TaskService taskService;
 
-    @RequestMapping("form")
-    public String form(Integer taskId) {
+    @RequestMapping("edit")
+    public String form(Integer taskId, Model model) {
         if (taskId != null) {
-            //ProjectTask task = taskService.
-            return null;
+            ProjectTask task = taskService.findTask(taskId);
+            model.addAttribute("task", task);
+            //还需要查询其他相关任务剩余时间的信息
+            return "project/task/edit.page";
         }
-        return null;
+        return "error";
     }
 
     @RequestMapping("/findList")
