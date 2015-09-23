@@ -41,7 +41,7 @@
             #@formControlDiv("col-8")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
