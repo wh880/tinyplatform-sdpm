@@ -45,23 +45,9 @@
 				</span>
                 #div(divClass="clearfix")
             #end
-        ##operationbar end
-            #@fullCalendar("fullCalendar")
-                #@externalEvents("external-events")
-                    #@h4()可拖动事件#end
-                    #@fcEvent()我的事件1#end
-                    #@fcEvent()我的事件2#end
-                    #@fcEvent()我的事件3#end
-                    #@fcEvent()我的事件4#end
-                    #@fcEvent()我的事件5#end
-                    #@eventButtons("drop-remove")
-                    放下后即可删除
-                    #end
-                #end
-                #@calendar("calendar")#end
-            #end
+           #include("table.page")
 
-            #fullCalendarInit("#external-events .fc-event" "#calendar")
+        
         #end
     #end
 #end

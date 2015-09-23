@@ -34,7 +34,7 @@
 		#@elementItem()
 			#@sdpmItem("指派给")
 				#@Tselect2F()
-					#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+					#@Tselect2Body("bugAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -51,7 +51,7 @@
 		#@elementItem()
 			#@sdpmItem("优先级")
 				#@Tselect2F()
-					#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+					#@Tselect2Body("priority" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -68,7 +68,7 @@
 
 		#@elementItem()
 			#@sdpmItem("抄送")
-				#tinyInput("text" "username" ""{"placeholder":"抄送","datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+				#tinyInput("text" "bugMailto" ""{"placeholder":"抄送","datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
 			#end
 		#end
 

@@ -62,7 +62,7 @@
         #@elementItem()
             #@sdpmItem("指派给")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("taskAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -80,7 +80,7 @@
         #@elementItem()
             #@sdpmItem("预计剩余")
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+                    <input name=" taskLeft" type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
             #end

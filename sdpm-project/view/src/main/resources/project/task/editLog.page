@@ -10,14 +10,14 @@
             #@tr()
                 #@th()日期#end
                 #@td()
-                    #@tinyDateInput("birthday" "2015-08-12" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
+                    #@tinyDateInput("taskOpenedDate" "2015-08-12" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
                         "日期不能为空"})#end
                 #end
             #end
             #@tr()
                 #@th()耗时#end
                 #@td()
-                    #tinyInput("text" "耗时" ""{"datatype":"","id":"关键词","class":"input-text"})
+                    #tinyInput("text" "taskConsumed" ""{"datatype":"","id":"关键词","class":"input-text"})
                 #end
             #end
             #@tr()

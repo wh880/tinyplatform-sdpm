@@ -26,13 +26,13 @@
         <p class="titleName">指派</p>
         #@elementItem()
             #@sdpmItem("实际开始")
-                #dateInputSimple("birthday" "" "YYYY-MM-DD")
+                #dateInputSimple("taskRealStarted" "" "YYYY-MM-DD")
             #end
         #end
         #@elementItem()
             #@sdpmItem("总消耗")
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+                    <input name="Float" type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
                     <span class="input-group-addon" id="all-time">小时</span>
                 </div>
             #end

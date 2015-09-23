@@ -34,7 +34,7 @@
 		#@elementItem()
 			#@colLabel()总消耗#end
 			#@formControlDiv("col-8")
-				#tinyInput("text" "comsume-time" ""{"placeholder":"单位是小时","id":"comsume-time","class":"input-text","datatype":"*4-16","nullmsg":"请输入时间（小时）"})
+				#tinyInput("text" "Float" ""{"placeholder":"单位是小时","id":"comsume-time","class":"input-text","datatype":"*4-16","nullmsg":"请输入时间（小时）"})
 			#end
 			#@validateDiv("col-2")#end
 		#end
@@ -42,7 +42,7 @@
 			#@colLabel()指派给#end
 			#@formControlDiv("col-8")
 				#@Tselect2F()
-					#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+					#@Tselect2Body("taskAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -60,7 +60,7 @@
 		#@elementItem()
 			#@colLabel()完成时间#end
 			#@formControlDiv("skin-minimal col-5")
-				#dateInputSimple("birthday" "" "YYYY-MM-DD")
+				#dateInputSimple("taskFinishedDate" "" "YYYY-MM-DD")
 			#end
 			#@validateDiv("col-2")#end
 		#end

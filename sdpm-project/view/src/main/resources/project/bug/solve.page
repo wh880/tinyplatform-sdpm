@@ -34,7 +34,7 @@
 		#@elementItem()
 			#@sdpmItem("解决方案")
 				#@Tselect2F()
-					#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+					#@Tselect2Body("bugResolution" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -51,7 +51,7 @@
 		#@elementItem()
 			#@sdpmItem("解决版本")
 				#@Tselect2F()
-					#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+					#@Tselect2Body("bugResolvedBuild" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
@@ -68,7 +68,7 @@
 		#@elementItem()
 			#@sdpmItem("指派给")
 				#@Tselect2F()
-					#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+					#@Tselect2Body("bugAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Connecticut</option>
                         <option value="DE">Delaware</option>
                         <option value="FL">Florida</option>
