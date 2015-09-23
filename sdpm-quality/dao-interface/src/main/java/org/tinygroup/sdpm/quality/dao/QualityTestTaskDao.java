@@ -18,8 +18,8 @@ package org.tinygroup.sdpm.quality.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
-import org.tinygroup.sdpm.quality.dao.pojo.CaseStep;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 
-public interface CaseStepDao extends BaseDao<CaseStep,Integer> {
+public interface QualityTestTaskDao extends BaseDao<QualityTestTask,Integer> {
 
 }

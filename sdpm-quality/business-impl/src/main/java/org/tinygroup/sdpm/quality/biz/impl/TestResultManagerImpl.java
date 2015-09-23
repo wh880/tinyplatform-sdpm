@@ -6,25 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.quality.biz.inter.TestResultManager;
-import org.tinygroup.sdpm.quality.dao.TestResultDao;
-import org.tinygroup.sdpm.quality.dao.pojo.TestResult;
+import org.tinygroup.sdpm.quality.dao.QualityTestResultDao;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult;
 
 @Service
 @Transactional
 public class TestResultManagerImpl implements TestResultManager {
 	
 	@Autowired
-	private TestResultDao testresultdao;
+	private QualityTestResultDao testresultdao;
 	
-	public List<TestResult> findList(TestResult testresult){
+	public List<QualityTestResult> findList(QualityTestResult testresult){
 		return testresultdao.query(testresult);
 	}
 	
-	public TestResult find(int id){
+	public QualityTestResult find(int id){
 		return testresultdao.getByKey(id);
 	}
 	
-	public int update(TestResult testresult){
+	public int update(QualityTestResult testresult){
 		return testresultdao.edit(testresult);
 	}
 }

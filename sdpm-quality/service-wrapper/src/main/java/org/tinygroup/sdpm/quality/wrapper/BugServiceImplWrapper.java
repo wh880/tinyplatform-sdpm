@@ -19,7 +19,6 @@ package org.tinygroup.sdpm.quality.wrapper;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -28,7 +27,6 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-@Component("bugService")
 public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service.inter.BugService {
 
 	CEPCore cepcore;
@@ -51,7 +49,7 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		return event;
 	}
 
-	public java.util.List<org.tinygroup.sdpm.quality.dao.pojo.Bug> findBugList(org.tinygroup.sdpm.quality.dao.pojo.Bug bug) {
+	public java.util.List<org.tinygroup.sdpm.quality.dao.pojo.QualityBug> findBugList(org.tinygroup.sdpm.quality.dao.pojo.QualityBug bug) {
 		String serviceId = "quality_findBugList";
 
 		try{
@@ -64,7 +62,7 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public org.tinygroup.sdpm.quality.dao.pojo.Bug addBug(org.tinygroup.sdpm.quality.dao.pojo.Bug bug) {
+	public org.tinygroup.sdpm.quality.dao.pojo.QualityBug addBug(org.tinygroup.sdpm.quality.dao.pojo.QualityBug bug) {
 		String serviceId = "quality_addBug";
 
 		try{
@@ -77,7 +75,7 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public org.tinygroup.sdpm.quality.dao.pojo.Bug findById(int id) {
+	public org.tinygroup.sdpm.quality.dao.pojo.QualityBug findById(int id) {
 		String serviceId = "quality_findById";
 
 		try{
@@ -90,7 +88,7 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public int updateBug(org.tinygroup.sdpm.quality.dao.pojo.Bug bug) {
+	public int updateBug(org.tinygroup.sdpm.quality.dao.pojo.QualityBug bug) {
 		String serviceId = "quality_updateBug";
 
 		try{
@@ -103,7 +101,7 @@ public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service
 		}
 	}
 
-	public int[] batchUpdateBug(java.util.List<org.tinygroup.sdpm.quality.dao.pojo.Bug> bugs) {
+	public int[] batchUpdateBug(java.util.List<org.tinygroup.sdpm.quality.dao.pojo.QualityBug> bugs) {
 		String serviceId = "quality_batchUpdateBug";
 
 		try{

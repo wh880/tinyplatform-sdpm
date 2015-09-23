@@ -2,7 +2,7 @@ package org.tinygroup.sdpm.quality.biz.inter;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.quality.dao.pojo.TestTask;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 
 public interface TestTaskManager {
 
@@ -11,19 +11,19 @@ public interface TestTaskManager {
 	 * @param testtask
 	 * @return
 	 */
-	List<TestTask> findList(TestTask testtask);
+	List<QualityTestTask> findList(QualityTestTask testtask);
 	/**
 	 * 提交测试
 	 * @param testtask
 	 * @return
 	 */
-	TestTask add(TestTask testtask);
+	QualityTestTask add(QualityTestTask testtask);
 	/**
 	 * 编辑测试
 	 * @param testtask
 	 * @return
 	 */
-	int update(TestTask testtask);
+	int update(QualityTestTask testtask);
 	/**
 	 * 删除测试
 	 * @param id

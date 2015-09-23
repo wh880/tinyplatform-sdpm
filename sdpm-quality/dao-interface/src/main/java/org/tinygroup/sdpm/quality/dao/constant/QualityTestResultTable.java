@@ -23,9 +23,9 @@ import org.tinygroup.tinysqldsl.base.Table;
  * 测试结果表
  * 
  */
-public class TestResultTable extends Table {
+public class QualityTestResultTable extends Table {
 
-	public static final TestResultTable TESTRESULTTABLE = new TestResultTable();
+	public static final QualityTestResultTable QUALITY_TESTRESULTTABLE = new QualityTestResultTable();
 
 	/** 
 	 * 测试结果
@@ -76,8 +76,8 @@ public class TestResultTable extends Table {
 	public final Column TESTRESULT_DATE = new Column(this, "testResult_date");
 
 
-	private TestResultTable() {
-		super("testResult");
+	private QualityTestResultTable() {
+		super("quality_testResult");
 	}
 
 }

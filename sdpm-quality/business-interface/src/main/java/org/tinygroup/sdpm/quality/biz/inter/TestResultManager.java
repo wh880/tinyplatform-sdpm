@@ -2,7 +2,7 @@ package org.tinygroup.sdpm.quality.biz.inter;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.quality.dao.pojo.TestResult;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult;
 
 public interface TestResultManager {
 	
@@ -11,18 +11,18 @@ public interface TestResultManager {
 	 * @param testresult
 	 * @return
 	 */
-	List<TestResult> findList(TestResult testresult);
+	List<QualityTestResult> findList(QualityTestResult testresult);
 	/**
 	 * 通过主键id查询
 	 * @param id
 	 * @return
 	 */
-	TestResult find(int id);
+	QualityTestResult find(int id);
 	/**
 	 * 编辑
 	 * @param testresult
 	 * @return
 	 */
-	int update(TestResult testresult);
+	int update(QualityTestResult testresult);
 
 }

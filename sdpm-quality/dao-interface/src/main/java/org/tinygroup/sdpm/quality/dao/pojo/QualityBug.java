@@ -23,7 +23,7 @@ import java.util.Date;
  * 缺陷表
  * 
  */
-public class Bug implements Serializable {
+public class QualityBug implements Serializable {
 
 	/** 
 	 * Bug编号

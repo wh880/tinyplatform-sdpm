@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.quality.biz.inter.TestCaseManager;
-import org.tinygroup.sdpm.quality.dao.pojo.TestCase;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 
 @Component
@@ -13,23 +13,23 @@ public class TestCaseServiceImpl implements TestCaseService {
 	@Autowired
 	private TestCaseManager testcasemanager;
 	
-	public List<TestCase> findTestCaseList(TestCase testcase){
+	public List<QualityTestCase> findTestCaseList(QualityTestCase testcase){
 		return testcasemanager.findList(testcase);
 	}
 	
-	public TestCase findById(int id){
+	public QualityTestCase findById(int id){
 		return testcasemanager.find(id);
 	}
 	
-	public TestCase addTestCase(TestCase testcase){
+	public QualityTestCase addTestCase(QualityTestCase testcase){
 		return testcasemanager.add(testcase);
 	}
 	
-	public int updateTestCase(TestCase testcase){
+	public int updateTestCase(QualityTestCase testcase){
 		return testcasemanager.update(testcase);
 	}
 	
-	public int[] batchUpdateTestCase(List<TestCase> testcases){
+	public int[] batchUpdateTestCase(List<QualityTestCase> testcases){
 		return testcasemanager.batchUpdate(testcases);
 	}
 	
@@ -37,7 +37,7 @@ public class TestCaseServiceImpl implements TestCaseService {
 		return testcasemanager.delete(id);
 	}
 	
-	public int[] batchDeleteTestCase(List<TestCase> testcases){
+	public int[] batchDeleteTestCase(List<QualityTestCase> testcases){
 		return testcasemanager.batchDelete(testcases);
 	}
 }
