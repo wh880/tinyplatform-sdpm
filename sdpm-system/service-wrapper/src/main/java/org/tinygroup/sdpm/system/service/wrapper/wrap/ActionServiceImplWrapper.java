@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.system.wrapper;
+package org.tinygroup.sdpm.system.service.wrapper.wrap;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,16 +27,16 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-public class SysModuleServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.SysModuleService {
+public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.ActionService {
 
-	CEPCore cepcore;
+	CEPCore core;
 
 	public CEPCore getCore() {
-		return cepcore;
+		return core;
 	}
 
-	public void setCore(CEPCore cepcore) {
-		this.cepcore = cepcore;
+	public void setCore(CEPCore core) {
+		this.core = core;
 	}
 
 	private Event getEvent(String serviceId,Context context) throws Exception{
@@ -49,12 +49,12 @@ public class SysModuleServiceImplWrapper implements org.tinygroup.sdpm.system.se
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.SysModule edit(org.tinygroup.sdpm.system.dao.pojo.SysModule sysModule) {
-		String serviceId = "edit";
+	public org.tinygroup.sdpm.system.dao.pojo.Action add(org.tinygroup.sdpm.system.dao.pojo.Action action) {
+		String serviceId = "system_action_add_1";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("sysModule" ,sysModule);
+			context.put("action" ,action);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class SysModuleServiceImplWrapper implements org.tinygroup.sdpm.system.se
 		}
 	}
 
-	public int deleteById(int id) {
-		String serviceId = "deleteById";
+	public org.tinygroup.sdpm.system.dao.pojo.Action updata(org.tinygroup.sdpm.system.dao.pojo.Action action) {
+		String serviceId = "system_action_updata_1";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("id" ,id);
+			context.put("action" ,action);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class SysModuleServiceImplWrapper implements org.tinygroup.sdpm.system.se
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SysModule> findByRoot(int root) {
-		String serviceId = "findByRoot";
+	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.Action action) {
+		String serviceId = "system_action_delete_1";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("root" ,root);
+			context.put("action" ,action);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,25 +88,12 @@ public class SysModuleServiceImplWrapper implements org.tinygroup.sdpm.system.se
 		}
 	}
 
-	public int delete(org.tinygroup.sdpm.system.dao.pojo.SysModule sysModule) {
-		String serviceId = "delete";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Action> find(org.tinygroup.sdpm.system.dao.pojo.Action action) {
+		String serviceId = "system_action_find_1";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("sysModule" ,sysModule);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	public org.tinygroup.sdpm.system.dao.pojo.SysModule findById(int id) {
-		String serviceId = "findById";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("id" ,id);
+			context.put("action" ,action);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -116,8 +103,8 @@ public class SysModuleServiceImplWrapper implements org.tinygroup.sdpm.system.se
 
 	private <T> T callServiceAndCallBack(String serviceId,Context context) throws Exception{
 		Event event = getEvent(serviceId,context);
-		cepcore.process(event);
-		ServiceInfo info = cepcore.getServiceInfo(serviceId);
+		core.process(event);
+		ServiceInfo info = core.getServiceInfo(serviceId);
 		List<Parameter> resultsParam = info.getResults();
 		if (resultsParam==null||resultsParam.size() == 0) {
 			return null;
