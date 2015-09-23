@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
@@ -29,15 +30,15 @@ public class TaskAction extends BaseController {
         }
         return "project/task/datalist.pagelet";
     }
-//
-//    @RequestMapping(value = "/save", method = RequestMethod.POST)
-//    public String save(OrgUser user, Model model) {
-//        if (StringUtil.isBlank(user.getOrgUserId())) {
-//            taskService.addTask();
-//        } else {
-//            taskService.updateTask();
-//        }
-//        model.addAttribute("user", user);
-//        return "organization/common/addUser.page";
-//    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(ProjectTask task, Model model) {
+        if (task.getTaskId() == null) {
+            taskService.addTask(task);
+        } else {
+            taskService.updateTask(task);
+        }
+        model.addAttribute("task", task);
+        return "project/task/index.page";
+    }
 }

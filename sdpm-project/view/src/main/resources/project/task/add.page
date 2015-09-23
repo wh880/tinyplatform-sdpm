@@ -17,12 +17,13 @@
 	##body end
 	#end
 #end
-#@tinyForm("thisform" "" "" {"class":"test","enctype":"multipart/form-data"})
+#@tinyForm("addTaskForm" TINY_CONTEXT_PATH+"/project/task/save" "" {"class":"test","enctype":"multipart/form-data"})
 <div style="width:70%;float:left" class="pageleftpart">
 <div class="infoContent">
     <p class="titleName">建任务</p>
 	#@elementItem()
 		#@sdpmItem("所属项目")
+            <input type="hidden" name="taskProject" value="1"/>
 		#end
 	#end
 	#@elementItem()
@@ -47,14 +48,14 @@
 			#@Tselect2F()
 				#@Tselect2Body("taskType" "" {"class":"input-text select2","placeholder":"任务类型","datatype":"*4-16","nullmsg":"任务类型不能为空！"}) ##,"multiple":"multiple"加上为多选项
                     <option value=""></option>
-                    <option value="CT">设计</option>
-                    <option value="DE">开发</option>
-                    <option value="FL">测试</option>
-                    <option value="GA">研究</option>
-                    <option value="IN">讨论</option>
-                    <option value="ME">界面</option>
-                    <option value="MD">事物</option>
-                    <option value="MD">其他</option>
+                    <option value="a">设计</option>
+                    <option value="b">开发</option>
+                    <option value="c">测试</option>
+                    <option value="d">研究</option>
+                    <option value="e">讨论</option>
+                    <option value="f">界面</option>
+                    <option value="g">事物</option>
+                    <option value="h">其他</option>
 				#end
 			##填写任意内容，侦听需重新填加 A侦听已内置
 
@@ -65,13 +66,9 @@
 		#@sdpmItem("指派给")
 			#@Tselect2F()
 				#@Tselect2Body("taskAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="IN">Indiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
+                    <option value="admin">admin</option>
+                    <option value="test1">test1</option>
+                    <option value="test2">test2</option>
 				#end
 			##填写任意内容，侦听需重新填加 A侦听已内置
 				#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
@@ -83,13 +80,9 @@
 			#@Tselect2F()
 				#@Tselect2Body("taskStory" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     <option value=""></option>
-					<option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="IN">Indiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
+                    <option value="1">需求一</option>
+                    <option value="2">需求二</option>
+                    <option value="3">需求三</option>
 				#end
 			##填写任意内容，侦听需重新填加 A侦听已内置
 				#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/project/demand/index.page">全部</a>#end
@@ -120,13 +113,11 @@
 		#@sdpmItem("优先级")
 			#@Tselect2F()
 				#@Tselect2Body("taskPri" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="IN">Indiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
 				#end
 			##填写任意内容，侦听需重新填加 A侦听已内置
 
