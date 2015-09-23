@@ -70,6 +70,16 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-system-service-impl</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-system-service-wrapper</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-common-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
