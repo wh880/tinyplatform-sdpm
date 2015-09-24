@@ -79,7 +79,7 @@
             #@sdpmItem("任务名称")
                 #@formControlDiv("col-8")
                     #tinyInput(
-                        "text" "taskName" ""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
+                        "text" "taskName" "abcdefg"{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
                         "username","class":
                         "input-text"})
                 #end
@@ -89,7 +89,7 @@
             #@sdpmItem("任务描述")
                 #@formControlDiv("col-8")
                     #tinyInput(
-                        "text" "taskDesc" ""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
+                        "text" "taskDesc" "任务描述"{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
                         "username",
                         "class":"input-text"})
                 #end
@@ -115,7 +115,7 @@
         #@elementItem()
             #@sdpmItem("最初预计")
                 #@formControlDiv("col-8")
-                    #tinyInput("text" "taskEstimate" ""{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
+                    #tinyInput("text" "taskEstimate" "1.1"{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"用户名不能为空！","id":
                         "username","class":"input-text"})
                 #end
                 #end

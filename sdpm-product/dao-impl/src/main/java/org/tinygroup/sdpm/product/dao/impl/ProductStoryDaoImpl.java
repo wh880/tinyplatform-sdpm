@@ -22,6 +22,7 @@ import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
+import static org.tinygroup.tinysqldsl.base.FragmentSql.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
-@LogClass("productStory")
+//@LogClass("productStory")
 @Repository
 public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductStoryDao {
 
@@ -437,5 +438,18 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
 		}
 		return select;
+	}
+
+	public Pager<ProductStory> complexQuery(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys) {
+		if (productStory == null) {
+			productStory = new ProductStory();
+		}
+		return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
+
+			public Select generate(ProductStory t) {
+				Select select = MysqlSelect.selectFrom(PRODUCT_STORYTABLE).where(fragmentCondition(condition));
+				return addOrderByElements(select, orderBys);
+			}
+		});
 	}
 }

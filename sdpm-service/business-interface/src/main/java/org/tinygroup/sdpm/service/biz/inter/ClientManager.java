@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.service.biz.inter;
 
-import org.tinygroup.sdpm.service.dao.pojo.Client;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -14,7 +15,9 @@ public interface ClientManager {
      * @param id 主键
      * @return
      */
-    Client find(Integer id);
+    ServiceClient find(Integer id);
+
+    Pager<ServiceClient> findPager(Integer start, Integer limit, ServiceClient serviceClient);
 
     /**
      * 根据条件查询List
@@ -22,7 +25,7 @@ public interface ClientManager {
      * @param client 用于查询条件
      * @return
      */
-    List<Client> getList(Client client);
+    List<ServiceClient> getList(ServiceClient client);
 
     /**
      * 新增一个客户
@@ -30,7 +33,7 @@ public interface ClientManager {
      * @param client 新增实体类
      * @return
      */
-    Client add(Client client);
+    ServiceClient add(ServiceClient client);
 
     /**
      * 更新客户
@@ -38,7 +41,7 @@ public interface ClientManager {
      * @param client 需要更新的实体类
      * @return
      */
-    Client update(Client client);
+    ServiceClient update(ServiceClient client);
 
     /**
      * 根据id进行软删除客户
@@ -63,5 +66,5 @@ public interface ClientManager {
      * @param productId 主键
      * @return
      */
-    List<Client> findByProduct(Integer productId);
+    List<ServiceClient> findByProduct(Integer productId);
 }

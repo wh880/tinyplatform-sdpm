@@ -5,31 +5,31 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
-import org.tinygroup.sdpm.system.dao.pojo.Action;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 @Component
 public class ActionServiceImpl implements ActionService {
 	@Autowired
     private ActionManager actionManager;
-	public Action add(Action action) {
+	public SystemAction add(SystemAction systemAction) {
 		// TODO Auto-generated method stub
-		return actionManager.add(action);
+		return actionManager.add(systemAction);
 	}
 
-	public Action updata(Action action) {
+	public SystemAction updata(SystemAction systemAction) {
 		// TODO Auto-generated method stub
 		
-		return actionManager.updata(action);
+		return actionManager.updata(systemAction);
 	}
 
-	public Integer delete(Action action) {
+	public Integer delete(SystemAction systemAction) {
 		// TODO Auto-generated method stub
-		return actionManager.delete(action);
+		return actionManager.delete(systemAction);
 	}
 
-	public List<Action> find(Action action) {
+	public List<SystemAction> find(SystemAction systemAction) {
 		// TODO Auto-generated method stub
-		return actionManager.find(action);
+		return actionManager.find(systemAction);
 	}
 
 }

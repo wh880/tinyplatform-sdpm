@@ -6,32 +6,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.quality.biz.inter.TestTaskManager;
-import org.tinygroup.sdpm.quality.dao.TestTaskDao;
-import org.tinygroup.sdpm.quality.dao.pojo.TestTask;
+import org.tinygroup.sdpm.quality.dao.QualityTestTaskDao;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 
 @Service
 @Transactional
 public class TestTaskManagerImpl implements TestTaskManager {
 	
 	@Autowired
-	private TestTaskDao testtaskdao;
+	private QualityTestTaskDao testtaskdao;
 	
-	public List<TestTask> findList(TestTask testtask){
+	public List<QualityTestTask> findList(QualityTestTask testtask){
 		return testtaskdao.query(testtask);
 	}
 	
-	public TestTask add(TestTask testtask){
+	public QualityTestTask add(QualityTestTask testtask){
 		return testtaskdao.add(testtask);
 	}
 	
-	public int update(TestTask testtask){
+	public int update(QualityTestTask testtask){
 		return testtaskdao.edit(testtask);
 	}
 	
 	public int delete(int id){
-		TestTask testtask = new TestTask();
+		QualityTestTask testtask = new QualityTestTask();
 		testtask.setTestversionId(id);
-		testtask.setDeleted(TestTask.DELETE_YES);
+		testtask.setDeleted(QualityTestTask.DELETE_YES);
 		return testtaskdao.edit(testtask);
 	}
 }

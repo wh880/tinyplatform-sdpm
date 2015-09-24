@@ -29,15 +29,8 @@ import org.tinygroup.event.ServiceRequest;
 
 public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.DictService {
 
-	CEPCore cepcore;
+	CEPCore cepCore;
 
-	public CEPCore getCore() {
-		return cepcore;
-	}
-
-	public void setCore(CEPCore cepcore) {
-		this.cepcore = cepcore;
-	}
 
 	private Event getEvent(String serviceId,Context context) throws Exception{
 		Event event = new Event();
@@ -148,8 +141,8 @@ public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service
 
 	private <T> T callServiceAndCallBack(String serviceId,Context context) throws Exception{
 		Event event = getEvent(serviceId,context);
-		cepcore.process(event);
-		ServiceInfo info = cepcore.getServiceInfo(serviceId);
+		cepCore.process(event);
+		ServiceInfo info = cepCore.getServiceInfo(serviceId);
 		List<Parameter> resultsParam = info.getResults();
 		if (resultsParam==null||resultsParam.size() == 0) {
 			return null;

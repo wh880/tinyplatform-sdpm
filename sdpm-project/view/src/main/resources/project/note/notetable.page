@@ -1,0 +1,56 @@
+#!set(activeTitle="日志管理",activeMenuId=currentPageId)
+
+#set(name="note")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span class="f">
+				<table>
+                    <tr>
+                        <td style="width:360px">
+                            <a href="${TINY_CONTEXT_PATH}/project/note/index.page" class="active_btn">日历</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">今日</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">昨日</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">本周</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">上周</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">本月</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">上月</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">所有日志</a>
+                        </td>
+                        <td style="float:left">
+                            <div style="width:150px">
+                                #@Tselect2F()
+                                    #@Tselect2Body(
+                                        "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                        <option value="CT">Connecticut</option>
+                                        <option value="DE">Delaware</option>
+                                        <option value="FL">Florida</option>
+                                        <option value="GA">Georgia</option>
+                                        <option value="IN">Indiana</option>
+                                        <option value="ME">Maine</option>
+                                        <option value="MD">Maryland</option>
+                                    #end
+                                #end
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+				</span>
+                #div(divClass="clearfix")
+            #end
+           #include("table.page")
+
+        
+        #end
+    #end
+#end
+<script type="text/javascript">
+    $(".select2").select2();
+</script>

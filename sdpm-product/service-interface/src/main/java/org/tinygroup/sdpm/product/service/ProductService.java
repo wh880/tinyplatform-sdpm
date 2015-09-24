@@ -27,7 +27,7 @@ public interface ProductService {
 	 * @param products
 	 * @return
 	 */
-	int[] updateBatch(List<Product> products);
+	int[] updateBatchProduct(List<Product> products);
 	
 	/**
 	 * 根据产品ID删除
@@ -57,7 +57,7 @@ public interface ProductService {
 	 * @param product
 	 * @return
 	 */
-	Pager<Product> findProductPager (int start ,int limit ,Product product,String columnName,boolean asc);
+	Pager<Product> findProductPager (int start ,int limit ,Product product, String oeder,String ordertype);
 	
 	
 }

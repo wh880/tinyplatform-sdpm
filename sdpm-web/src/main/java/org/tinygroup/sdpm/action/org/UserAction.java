@@ -9,6 +9,9 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 /**
  * 用户管理控制器
@@ -22,7 +25,7 @@ public class UserAction extends BaseController {
 
     @RequestMapping("/form")
     public String form(String id, Model model) {
-        if (!StringUtil.isBlank(id)) {
+        if (id != null) {
             OrgUser user = userService.findUser(id);
             model.addAttribute("user", user);
         }
@@ -37,6 +40,20 @@ public class UserAction extends BaseController {
             userService.updateUser(user);
         }
         model.addAttribute("user", user);
-        return "organization/common/addUser.page";
+        return "redirect:/org/user/list/";
+    }
+
+    @RequestMapping("/list")
+    public String list(OrgUser orgUser, Model model) {
+        List<OrgUser> list = userService.findUserList(orgUser);
+        model.addAttribute("list", list);
+        return "organization/user/user.page";
+    }
+
+    @RequestMapping("/list/data")
+    public String listData(Integer start, Integer limit, OrgUser orgUser, Model model) {
+        Pager<OrgUser> pager = userService.findUserPager(start, limit, orgUser);
+        model.addAttribute("pager", pager);
+        return "organization/user/userTableData.pagelet";
     }
 }

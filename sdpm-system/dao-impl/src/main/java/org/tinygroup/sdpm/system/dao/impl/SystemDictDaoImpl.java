@@ -37,9 +37,8 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
+import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.system.dao.SystemDictDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -50,12 +49,10 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-
 @Repository
-@LogClass("systemDict")
+@LogClass("systemDictDao")
 public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDao {
 
-	@LogMethod("add")
 	public SystemDict add(SystemDict systemDict) {
 		return getDslTemplate().insertAndReturnKey(systemDict, new InsertGenerateCallback<SystemDict>() {
 			public Insert generate(SystemDict t) {
@@ -71,7 +68,6 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 		});
 	}
 
-	@LogMethod("edit")
 	public int edit(SystemDict systemDict) {
 		if(systemDict == null || systemDict.getDictId() == null){
 			return 0;
@@ -91,7 +87,6 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 		});
 	}
 
-	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -103,7 +98,6 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 		});
 	}
 
-	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -187,7 +181,6 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 			return batchInsert(true ,systemDicts);
 	}
 
-	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<SystemDict> systemDicts) {
 		if (CollectionUtil.isEmpty(systemDicts)) {
 			return new int[0];
@@ -207,7 +200,6 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 		});
 	}
 
-	@LogMethod("batchDelete")
 	public int[] batchDelete(List<SystemDict> systemDicts) {
 		if (CollectionUtil.isEmpty(systemDicts)) {
 			return new int[0];
@@ -226,7 +218,6 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 		});
 	}
 
-	@LogMethod("addOrderByElements")
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {

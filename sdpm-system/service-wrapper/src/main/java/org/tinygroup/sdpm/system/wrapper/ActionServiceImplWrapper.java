@@ -49,12 +49,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Action add(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_add_1";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemAction add(org.tinygroup.sdpm.system.dao.pojo.SystemAction systemAction) {
+		String serviceId = "action_add";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("systemAction" ,systemAction);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Action updata(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_updata_1";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemAction updata(org.tinygroup.sdpm.system.dao.pojo.SystemAction systemAction) {
+		String serviceId = "system_updata";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("systemAction" ,systemAction);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_delete_1";
+	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.SystemAction systemAction) {
+		String serviceId = "system_delete";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("systemAction" ,systemAction);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,12 +88,12 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Action> find(org.tinygroup.sdpm.system.dao.pojo.Action action) {
-		String serviceId = "system_action_find_1";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemAction> find(org.tinygroup.sdpm.system.dao.pojo.SystemAction systemAction) {
+		String serviceId = "system_find";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("action" ,action);
+			context.put("systemAction" ,systemAction);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

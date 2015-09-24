@@ -4,26 +4,26 @@
 
 
 
-#set(records=5,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=bugPager.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(5)
+#setTinyItemCount(bugPager.totalCount)
 
-#for(var:bug)
+#for(var:bugPager.totalCount)
 #@tr()
     #@td()<input type="checkbox" value="1" name="userid">#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${var.bugId}</a>#end
-    #@td()${var.bugSeverity}#end
-    #@td()${var.priority}#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${var.bugTitle}</a>#end
-    #@td()${var.bugStatus}#end
-    #@td()${var.bugOpenedBy}#end
-    #@td()${var.bugOpenedDate}#end
-    #@td()${var.bugAssignedTo}#end
-    #@td()${var.bugResolvedBy}#end
-    #@td()${var.bugResolution}#end
-    #@td()${var.bugResolvedDate}#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${var?.bugId}</a>#end
+    #@td()${var?.bugSeverity}#end
+    #@td()${var?.priority}#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${var?.bugTitle}</a>#end
+    #@td()${var?.bugStatus}#end
+    #@td()${var?.bugOpenedBy}#end
+    #@td()${var?.bugOpenedDate}#end
+    #@td()${var?.bugAssignedTo}#end
+    #@td()${var?.bugResolvedBy}#end
+    #@td()${var?.bugResolution}#end
+    #@td()${var?.bugResolvedDate}#end
     #@td()
     	#foreach(m:menuManager.getScopeMenus("testbug-op"))
              	<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>			

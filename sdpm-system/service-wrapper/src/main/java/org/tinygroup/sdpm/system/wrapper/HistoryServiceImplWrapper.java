@@ -49,12 +49,12 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.History add(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_add_1";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemHistory add(org.tinygroup.sdpm.system.dao.pojo.SystemHistory systemHistory) {
+		String serviceId = "system_add";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("systemHistory" ,systemHistory);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.History updata(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_updata_1";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemHistory updata(org.tinygroup.sdpm.system.dao.pojo.SystemHistory systemHistory) {
+		String serviceId = "system_updata";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("systemHistory" ,systemHistory);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_delete_1";
+	public java.lang.Integer delete(org.tinygroup.sdpm.system.dao.pojo.SystemHistory systemHistory) {
+		String serviceId = "system_delete";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("systemHistory" ,systemHistory);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,12 +88,12 @@ public class HistoryServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.History> find(org.tinygroup.sdpm.system.dao.pojo.History history) {
-		String serviceId = "system_histroy_find_1";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemHistory> find(org.tinygroup.sdpm.system.dao.pojo.SystemHistory systemHistory) {
+		String serviceId = "system_find";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("history" ,history);
+			context.put("systemHistory" ,systemHistory);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

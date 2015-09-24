@@ -28,8 +28,10 @@ import org.tinygroup.event.Event;
 import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
+
 @Component
 public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.service.ReleaseService {
+	
 	@Autowired
 	CEPCore cepcore;
 
@@ -77,8 +79,8 @@ public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public int[] updateBatch(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> releases) {
-		String serviceId = "product_updateBatch";
+	public int[] updateBatchRelease(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> releases) {
+		String serviceId = "product_updateBatchRelease";
 
 		try{
 			Context context = new ContextImpl();
@@ -118,7 +120,7 @@ public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> findReleasePager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductRelease release ,java.lang.String columnName ,boolean asc) {
+	public org.tinygroup.tinysqldsl.Pager findReleasePager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductRelease release ,java.lang.String columnName ,boolean asc) {
 		String serviceId = "product_findReleasePager";
 
 		try{

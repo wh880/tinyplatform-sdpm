@@ -28,8 +28,10 @@ import org.tinygroup.event.Event;
 import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
+
 @Component
 public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.service.StoryService {
+	
 	@Autowired
 	CEPCore cepcore;
 
@@ -103,8 +105,8 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 		}
 	}
 
-	public int[] updateBatch(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductStory> stories) {
-		String serviceId = "product_updateBatch";
+	public int[] updateBatchStory(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductStory> stories) {
+		String serviceId = "product_updateBatchStory";
 
 		try{
 			Context context = new ContextImpl();
@@ -131,7 +133,7 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductStory> findStoryPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductStory story ,java.lang.String columnName ,boolean asc) {
+	public org.tinygroup.tinysqldsl.Pager findStoryPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductStory story ,org.tinygroup.sdpm.common.util.sql.SearchInfos searchInfos ,java.lang.String groupOperate ,java.lang.String columnName ,boolean asc) {
 		String serviceId = "product_findStoryPager";
 
 		try{
@@ -139,6 +141,8 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 			context.put("start" ,start);
 			context.put("limit" ,limit);
 			context.put("story" ,story);
+			context.put("searchInfos" ,searchInfos);
+			context.put("groupOperate" ,groupOperate);
 			context.put("columnName" ,columnName);
 			context.put("asc" ,asc);
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <menu id="project" parent-id="0" name="迭代" href="/project/task/index.page" icon="icon-book" sort="700" isShow="1">
-    <menu id="task" parent-id="project" name="任务" href="/project/task/form" icon="" sort="1" isShow="1">
+    <menu id="task" parent-id="project" name="任务" href="/project/task/index.page" icon="" sort="1" isShow="1">
         <menu id="pro-task-call" name="指派" href="/project/task/call.page" icon="icon-hand-right" sort="20" isShow="1"
               scope="pro-task-op"/>
         <menu id="pro-task-start" name="开始" href="/project/task/start.page" icon="icon-play" sort="15" isShow="1"
@@ -12,7 +12,7 @@
               scope="pro-task-op"/>
         <menu id="pro-task-close" name="关闭" href="/project/task/close.page" icon="icon-off" sort="6" isShow="1"
               scope="pro-task-op"/>
-        <menu id="pro-task-edit" name="编辑" href="/project/task/edit.page" icon="icon-pencil" sort="4" isShow="1"
+        <menu id="pro-task-edit" name="编辑" href="/project/task/edit" icon="icon-pencil" sort="4" isShow="1"
               scope="pro-task-op"/>
 
         <menu id="task-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">

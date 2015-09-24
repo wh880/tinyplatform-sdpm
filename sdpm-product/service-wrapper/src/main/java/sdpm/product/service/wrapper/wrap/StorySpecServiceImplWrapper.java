@@ -28,8 +28,10 @@ import org.tinygroup.event.Event;
 import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
+
 @Component
 public class StorySpecServiceImplWrapper implements org.tinygroup.sdpm.product.service.StorySpecService {
+	
 	@Autowired
 	CEPCore cepcore;
 
@@ -79,7 +81,7 @@ public class StorySpecServiceImplWrapper implements org.tinygroup.sdpm.product.s
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec> findStorySpecPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec storySpec ,java.lang.String columnName ,boolean asc) {
+	public org.tinygroup.tinysqldsl.Pager findStorySpecPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec storySpec ,java.lang.String columnName ,boolean asc) {
 		String serviceId = "product_findStorySpecPager";
 
 		try{

@@ -1,7 +1,7 @@
 package org.tinygroup.sdpm.quality.service.inter;
 
 import java.util.List;
-import org.tinygroup.sdpm.quality.dao.pojo.Bug;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface BugService {
@@ -11,34 +11,45 @@ public interface BugService {
 	 * @param id
 	 * @return
 	 */
-	Bug findById(int id);
+	QualityBug findById(int id);
 	
 	/**
 	 * 根据条件查询d
 	 * @param bug
 	 * @return
 	 */
-	List<Bug> findBugList(Bug type);	
+	List<QualityBug> findBugList(QualityBug type);	
 	
 	/**
 	 * 提Bug
 	 * @param bug
 	 * @return
 	 */
-	Bug addBug(Bug bug);
+	QualityBug addBug(QualityBug bug);
 
 	/**
 	 * 修改
 	 * @param bug
 	 * @return
 	 */
-	int updateBug(Bug bug);
+	int updateBug(QualityBug bug);
+	
 	/**
 	 * 批量修改
 	 * @param bugs
 	 * @return
 	 */
-	int[] batchUpdateBug(List<Bug> bugs);
+	int[] batchUpdateBug(List<QualityBug> bugs);
 	
+	/**
+	 * 分页查询
+	 * @param start
+	 * @param limit
+	 * @param bug
+	 * @param sortName
+	 * @param asc
+	 * @return
+	 */
+	Pager<QualityBug> findBugListPager(Integer start,Integer limit,QualityBug bug,String sortName,boolean asc);
 	
 }

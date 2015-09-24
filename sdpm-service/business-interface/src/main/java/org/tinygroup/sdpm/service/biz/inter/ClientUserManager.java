@@ -1,7 +1,6 @@
 package org.tinygroup.sdpm.service.biz.inter;
 
-import org.omg.CORBA.INTERNAL;
-import org.tinygroup.sdpm.service.dao.pojo.ClientUser;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ public interface ClientUserManager {
      * @param id 主键
      * @return
      */
-    ClientUser find(Integer id);
+    ServiceClientUser find(Integer id);
 
     /**
      * 根据条件查询List
@@ -23,7 +22,7 @@ public interface ClientUserManager {
      * @param clientUser 用于查询条件
      * @return
      */
-    List<ClientUser> getUserList(ClientUser clientUser);
+    List<ServiceClientUser> getUserList(ServiceClientUser clientUser);
 
     /**
      * 新增一个客户联系人
@@ -31,7 +30,7 @@ public interface ClientUserManager {
      * @param clientUser 新增实体类
      * @return
      */
-    ClientUser add(ClientUser clientUser);
+    ServiceClientUser add(ServiceClientUser clientUser);
 
     /**
      * 更新客户联系人
@@ -39,7 +38,7 @@ public interface ClientUserManager {
      * @param clientUser 需要更新的实体类
      * @return
      */
-    ClientUser update(ClientUser clientUser);
+    ServiceClientUser update(ServiceClientUser clientUser);
 
     /**
      * 根据id进行批量软删除客户
@@ -47,5 +46,5 @@ public interface ClientUserManager {
      * @param id 主键
      * @return
      */
-    ClientUser delete(Integer id);
+    ServiceClientUser delete(Integer id);
 }

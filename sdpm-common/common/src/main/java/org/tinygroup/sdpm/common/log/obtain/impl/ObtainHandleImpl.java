@@ -27,7 +27,7 @@ public class ObtainHandleImpl implements ObtainHandle {
             for (Obtain obtain : obtains.getObtainList()) {
                 String key = obtain.getName();
                 if(isRepeat(key,filePath)){
-                    throw new RuntimeException("obtain:["+key+"]ÒÑ´æÔÚ.");
+                    throw new RuntimeException("obtain:["+key+"]å·²å­˜åœ¨.");
                 }
                 obtainDict.put(obtain.getName(), obtain);
                 pathRecord.put(obtain.getName(),filePath);
@@ -47,7 +47,7 @@ public class ObtainHandleImpl implements ObtainHandle {
 
     public boolean isRepeat(String key,String filePath){
         if (obtainDict.containsKey(key)){
-            LOGGER.logMessage(LogLevel.INFO, "ÕıÔÚ½øĞĞobtain:[{0}]ÖØ¸´ÅĞ¶¨", key);
+            LOGGER.logMessage(LogLevel.INFO, "æ­£åœ¨è¿›è¡Œobtain:[{0}]é‡å¤åˆ¤å®š..", key);
             String path = pathRecord.get(key);
             if(path.contains(".jar")){
                 if(filePath.contains(".jar")){

@@ -30,6 +30,11 @@
        <artifactId>sdpm-system-business-impl</artifactId>
        <version>${project.version}</version>
     </dependency>
+     <dependency>
+       <groupId>org.tinygroup</groupId>
+       <artifactId>sdpm-system-dao-impl</artifactId>
+       <version>${project.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.tinygroup</groupId>
       <artifactId>org.tinygroup.flow</artifactId>
@@ -45,11 +50,7 @@
 	    <artifactId>org.tinygroup.pageflowbasiccomponent</artifactId>
 	    <version>${tiny_version}</version>
 	  </dependency>
-    <dependency>
-  <groupId>org.tinygroup</groupId>
-      <artifactId>org.tinygroup.tinydbflowcomponent</artifactId>
-      <version>${tiny_version}</version>
-    </dependency>
+
       <dependency>
           <groupId>org.tinygroup</groupId>
           <artifactId>org.tinygroup.testutil</artifactId>

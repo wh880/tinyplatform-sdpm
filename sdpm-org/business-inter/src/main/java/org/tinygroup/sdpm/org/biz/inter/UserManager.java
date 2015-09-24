@@ -16,6 +16,7 @@
 package org.tinygroup.sdpm.org.biz.inter;
 
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -27,6 +28,14 @@ public interface UserManager {
      * @return
      */
     OrgUser find(String id);
+
+    /**
+     * 根据主键id查找用户
+     *
+     * @param id 主键
+     * @return
+     */
+    Pager<OrgUser> findPager(Integer start, Integer limit, OrgUser orgUser);
 
     /**
      * 根据条件查询List

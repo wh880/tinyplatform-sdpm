@@ -35,6 +35,7 @@
         #end
     </div>
     <div style="text-align:right;margin:right">
+        #*问答页面的编辑和删除*#
         #@aExtendButton("btn-primary btn-sm" "addquestion.page")编辑#end
         #@delItemsdpm("#action" "id" "/service/faq/faqmenu.page" {"class":"btn radius btn-danger btn-sm"})
             删除#end

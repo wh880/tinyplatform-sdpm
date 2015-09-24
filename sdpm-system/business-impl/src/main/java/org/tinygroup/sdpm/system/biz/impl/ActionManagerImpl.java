@@ -3,37 +3,37 @@ package org.tinygroup.sdpm.system.biz.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
-import org.tinygroup.sdpm.system.dao.ActionDao;
-import org.tinygroup.sdpm.system.dao.ProfileDao;
-import org.tinygroup.sdpm.system.dao.pojo.Action;
+import org.tinygroup.sdpm.system.dao.SystemActionDao;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 @Service
 @Transactional
 public class ActionManagerImpl implements ActionManager {
 	@Autowired
-    private ActionDao actionDao;
-	public Action add(Action action) {
+    private SystemActionDao systemActionDao;
+	public SystemAction add(SystemAction SystemAction) {
 		// TODO Auto-generated method stub
-		return actionDao.add(action);
+		return systemActionDao.add(SystemAction);
 	}
 
-	public Action updata(Action action) {
+	public SystemAction updata(SystemAction SystemAction) {
 		// TODO Auto-generated method stub
-		actionDao.edit(action);
-		return action;
+		systemActionDao.edit(SystemAction);
+		return SystemAction;
 	}
 
-	public Integer delete(Action action) {
+	public Integer delete(SystemAction SystemAction) {
 		// TODO Auto-generated method stub
-		int pk=action.getActionId();
-		return actionDao.deleteByKey(pk);
+		int pk=SystemAction.getActionId();
+		return systemActionDao.deleteByKey(pk);
 	}
 
-	public List<Action> find(Action action) {
+	public List<SystemAction> find(SystemAction SystemAction) {
 		// TODO Auto-generated method stub
-		return actionDao.query(action);
+		return systemActionDao.query(SystemAction);
 	}
 
 }

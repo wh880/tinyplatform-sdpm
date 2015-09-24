@@ -54,10 +54,10 @@
                     #@td()${lFor.index}#end
                     #@td()
                         #@tinyDateInput(
-                            "birthday" "2015-08-12" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
+                            "taskOpenedDate" "2015-08-12" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
                             "日期不能为空"})#end
                     #end
-                    #@td()#tinyInput("text" "耗时" ""{"datatype":"","id":"关键词","class":"input-text"})#end
+                    #@td()#tinyInput("text" "Float" "1.1"{"datatype":"","id":"关键词","class":"input-text"})#end
                     #@td()#tinyInput("text" "工作内容" ""{"datatype":"","id":"关键词","class":"input-text"})#end
                     #@td()
                     #end

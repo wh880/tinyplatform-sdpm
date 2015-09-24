@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.service.biz.inter;
 
-import org.tinygroup.sdpm.service.dao.pojo.Sla;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface SlaManager {
      * @param id 主键
      * @return
      */
-    Sla find(Integer id);
+    ServiceSla find(Integer id);
 
     /**
      * 根据条件查询List
@@ -22,7 +22,7 @@ public interface SlaManager {
      * @param sla 用于查询条件
      * @return
      */
-    List<Sla> getList(Sla sla);
+    List<ServiceSla> getList(ServiceSla sla);
 
     /**
      * 新增一个用户
@@ -30,7 +30,7 @@ public interface SlaManager {
      * @param sla 新增实体类
      * @return
      */
-    Sla add(Sla sla);
+    ServiceSla add(ServiceSla sla);
 
     /**
      * 更新用户
@@ -38,7 +38,7 @@ public interface SlaManager {
      * @param sla 需要更新的实体类
      * @return
      */
-    Sla update(Sla sla);
+    ServiceSla update(ServiceSla sla);
 
     /**
      * 根据id进行软删除用户
@@ -55,5 +55,13 @@ public interface SlaManager {
      * @return
      */
     Integer deleteBatch(Integer id);
+
+    /**
+     * 根据客户id条件查询List
+     *
+     * @param clientId 用于查询条件
+     * @return
+     */
+    List<ServiceSla> getListByClientId(Integer clientId);
 }
 

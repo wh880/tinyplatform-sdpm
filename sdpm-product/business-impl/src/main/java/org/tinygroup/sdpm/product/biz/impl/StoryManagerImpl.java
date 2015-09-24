@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.sql.SearchInfos;
+import org.tinygroup.sdpm.common.util.sql.SqlUtil;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -15,7 +17,7 @@ import org.tinygroup.tinysqldsl.Pager;
 @Transactional
 public class StoryManagerImpl implements StoryManager{
 	
-	@Autowired
+	@Autowired(required=false)
 	private ProductStoryDao productStoryDao;
 	
 	public ProductStory add(ProductStory story) {
@@ -51,9 +53,16 @@ public class StoryManagerImpl implements StoryManager{
 		return productStoryDao.query(story, new OrderBy(columnName, asc));
 	}
 
-	public Pager<ProductStory> findPager(int start, int limit, ProductStory story,String columnName,boolean asc) {
-		
-		return productStoryDao.queryPager(start, limit, story, new OrderBy(columnName, asc));
+	public Pager<ProductStory> findPager(int start, int limit, ProductStory story, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
+		String condition = SqlUtil.toSql(conditions.getInfos(),groupOperate);
+		OrderBy orderBy = null;
+		if(columnName != null && !"".equals(columnName)){
+			orderBy = new OrderBy(columnName, asc);
+		}
+		if(condition !=null && !"".equals(condition)){
+			return productStoryDao.complexQuery(start,limit,story,condition,orderBy);
+		}
+		return productStoryDao.queryPager(start, limit, story, orderBy);
 	}
 	
 	

@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.SlaManager;
-import org.tinygroup.sdpm.service.dao.pojo.Sla;
-import org.tinygroup.sdpm.service.dao.SlaDao;
+import org.tinygroup.sdpm.service.dao.ServiceSlaDao;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 
 import java.util.List;
 
@@ -16,26 +16,27 @@ import java.util.List;
 @Transactional
 public class SlaManagerImpl implements SlaManager{
     @Autowired
-    private SlaDao slaDao;
-    public Sla find(Integer id) {
+    private ServiceSlaDao slaDao;
+
+    public ServiceSla find(Integer id) {
         return slaDao.getByKey(id);
     }
 
-    public List<Sla> getList(Sla sla) {
+    public List<ServiceSla> getList(ServiceSla sla) {
         return slaDao.query(sla);
     }
 
-    public Sla add(Sla sla) {
+    public ServiceSla add(ServiceSla sla) {
         return slaDao.add(sla);
     }
 
-    public Sla update(Sla sla) {
+    public ServiceSla update(ServiceSla sla) {
         slaDao.edit(sla);
         return sla;
     }
 
     public Integer delete(Integer id) {
-       Sla sla=new Sla();
+        ServiceSla sla = new ServiceSla();
         sla.setSlaId(id);
         sla.setDeleted(id);
         return slaDao.edit(sla);
@@ -43,5 +44,9 @@ public class SlaManagerImpl implements SlaManager{
 
     public Integer deleteBatch(Integer id) {
         return  null;
+    }
+
+    public List<ServiceSla> getListByClientId(Integer clientId) {
+        return slaDao.getListByClientId(clientId);
     }
 }

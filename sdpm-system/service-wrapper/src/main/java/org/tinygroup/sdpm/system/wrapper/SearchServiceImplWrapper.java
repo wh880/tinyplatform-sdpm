@@ -29,14 +29,14 @@ import org.tinygroup.event.ServiceRequest;
 
 public class SearchServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.SearchService {
 
-	CEPCore cepcore;
+	CEPCore core;
 
 	public CEPCore getCore() {
-		return cepcore;
+		return core;
 	}
 
-	public void setCore(CEPCore cepcore) {
-		this.cepcore = cepcore;
+	public void setCore(CEPCore core) {
+		this.core = core;
 	}
 
 	private Event getEvent(String serviceId,Context context) throws Exception{
@@ -148,8 +148,8 @@ public class SearchServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 
 	private <T> T callServiceAndCallBack(String serviceId,Context context) throws Exception{
 		Event event = getEvent(serviceId,context);
-		cepcore.process(event);
-		ServiceInfo info = cepcore.getServiceInfo(serviceId);
+		core.process(event);
+		ServiceInfo info = core.getServiceInfo(serviceId);
 		List<Parameter> resultsParam = info.getResults();
 		if (resultsParam==null||resultsParam.size() == 0) {
 			return null;

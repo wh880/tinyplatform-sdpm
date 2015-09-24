@@ -3,7 +3,7 @@ package org.tinygroup.sdpm.system.service.inter;
 import java.util.Date;
 import java.util.List;
 
-import org.tinygroup.sdpm.system.dao.pojo.Effort;
+import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface EffortService {
@@ -13,26 +13,26 @@ public interface EffortService {
 	 * @param date
 	 * @return
 	 */
-	 List<Effort> findByDate(Date date);
+	 List<SystemEffort> findByDate(Date date);
 	 
 	/**
 	 * 保存日志
-	 * @param effort
+	 * @param SystemEffort
 	 * @return
 	 */
 	
-	 Effort save(Effort effort);
+	 SystemEffort save(SystemEffort systemEffort);
 	/**
 	 * 根据登记人查询
 	 * @param account
 	 * @return
 	 */
-	 List<Effort> findByAccount(String account);
+	 List<SystemEffort> findByAccount(String account);
 	/**
 	 * 查询所有字段
 	 * @return
 	 */
-	 List<Effort> find(Effort effort);
+	 List<SystemEffort> find(SystemEffort systemEffort);
 	 /**
 	  * 根据时间段查询
 	  * @param lastdate
@@ -40,21 +40,21 @@ public interface EffortService {
 	  * @return
 	  */
 
-	 List<Effort> findBetweenDate(Date begindate,Date enddate);
+	 List<SystemEffort> findBetweenDate(Date begindate,Date enddate);
 	 /**
 	  * 通过projectID查询所有数据
 	  * @param projectId
 	  * @return
 	  */
-	 List<Effort> findByProject(int projectId);
+	 List<SystemEffort> findByProject(int projectId);
 	 /**
 	  * 分页查询
 	  * @param start
 	  * @param limit
-	  * @param effort
+	  * @param SystemEffort
 	  * @return
 	  */
-	 Pager<Effort> findByPage(int start,int limit,Effort effort);
+	 Pager<SystemEffort> findByPage(int start,int limit,SystemEffort systemEffort);
 	 
 	
 }

@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.FaqTypeManager;
-import org.tinygroup.sdpm.service.dao.pojo.FaqType;
-import org.tinygroup.sdpm.service.dao.FaqTypeDao;
+import org.tinygroup.sdpm.service.dao.ServiceFaqTypeDao;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceFaqType;
+
 import java.util.List;
 
 /**
@@ -15,26 +16,27 @@ import java.util.List;
 @Transactional
 public class FaqTypeManagerImpl implements FaqTypeManager{
     @Autowired
-    private FaqTypeDao faqTypeDao;
-    public FaqType find(Integer id) {
+    private ServiceFaqTypeDao faqTypeDao;
+
+    public ServiceFaqType find(Integer id) {
         return faqTypeDao.getByKey(id);
     }
 
-    public List<FaqType> getList(FaqType faqType) {
+    public List<ServiceFaqType> getList(ServiceFaqType faqType) {
         return faqTypeDao.query(faqType);
     }
 
-    public FaqType add(FaqType faqType) {
+    public ServiceFaqType add(ServiceFaqType faqType) {
         return faqTypeDao.add(faqType);
     }
 
-    public FaqType update(FaqType faqType) {
+    public ServiceFaqType update(ServiceFaqType faqType) {
          faqTypeDao.edit(faqType);
         return faqType;
     }
 
-    public List<FaqType> delete(Integer id) {
-        FaqType faqType=new FaqType();
+    public List<ServiceFaqType> delete(Integer id) {
+        ServiceFaqType faqType = new ServiceFaqType();
         faqType.setFaqTypeId(id);
         faqType.setDeleted(id);
         return faqTypeDao.query(faqType);

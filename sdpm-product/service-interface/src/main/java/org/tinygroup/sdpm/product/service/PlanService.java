@@ -25,7 +25,7 @@ public interface PlanService{
 	 * @param plan
 	 * @return
 	 */
-	int[] updateBatch(List<ProductPlan> plan);
+	int[] updateBatchPlan(List<ProductPlan> plan);
 	
 	/**
 	 * 根据计划ID删除计划

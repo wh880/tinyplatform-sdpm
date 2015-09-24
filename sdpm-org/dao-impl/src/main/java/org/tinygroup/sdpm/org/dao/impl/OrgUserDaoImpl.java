@@ -46,7 +46,6 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
 		return getDslTemplate().insertAndReturnKey(orgUser, new InsertGenerateCallback<OrgUser>() {
 			public Insert generate(OrgUser t) {
 				Insert insert = insertInto(ORG_USERTABLE).values(
-						ORG_USERTABLE.ORG_USER_ID.value(t.getOrgUserId()),
 					ORG_USERTABLE.ORG_DEPT_ID.value(t.getOrgDeptId()),
 					ORG_USERTABLE.ORG_USER_ACCOUNT.value(t.getOrgUserAccount()),
 					ORG_USERTABLE.ORG_USER_PASSWORD.value(t.getOrgUserPassword()),

@@ -29,7 +29,7 @@
     $(function () {
         $("#sleProject-select").on("change", function (e) {
             window.location.href = "${TINY_CONTEXT_PATH}/project/task/index.page?selItem="
-                    + $(this).find("option:selected").text() + "&itemid=" + $(this).val();
+                    + $(this).find("option:selected").text() + "&itemid=" + $(this).val() + "&stat=" + $();
             //val() 选择选择项的value
         });
     });

@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.ClientManager;
-import org.tinygroup.sdpm.service.dao.ClientDao;
-import org.tinygroup.sdpm.service.dao.pojo.Client;
+import org.tinygroup.sdpm.service.dao.ServiceClientDao;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -14,36 +15,39 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class ClientManagerImpl implements ClientManager{
+public class ClientManagerImpl implements ClientManager {
     @Autowired
-    private ClientDao clientDao;
-    public Client find(Integer id) { return clientDao.getByKey(id);
+    private ServiceClientDao clientDao;
+
+    public ServiceClient find(Integer id) {
+        return clientDao.getByKey(id);
     }
 
-    public List<Client> getList(Client client) {
+    public Pager<ServiceClient> findPager(Integer start, Integer limit, ServiceClient serviceClient) {
+        return clientDao.queryPager(start, limit, serviceClient);
+    }
+
+    public List<ServiceClient> getList(ServiceClient client) {
         return clientDao.query(client);
     }
 
-    public Client add(Client client) {
+    public ServiceClient add(ServiceClient client) {
         return clientDao.add(client);
     }
 
-    public Client update(Client client) {
+    public ServiceClient update(ServiceClient client) {
         return clientDao.add(client);
     }
 
     public Integer delete(Integer id) {
-        Client client = new Client();
-        client.setClientId(id);
-        client.setDeleted(id);
-        return clientDao.edit(client);
+        return clientDao.softDelete(id);
     }
 
     public Integer deleteBatch(Integer id) {
         return null;
     }
 
-    public List<Client> findByProduct(Integer productId) {
+    public List<ServiceClient> findByProduct(Integer productId) {
         return null;
     }
 }

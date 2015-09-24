@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.service.service.inter;
 
-import org.tinygroup.sdpm.service.dao.pojo.Request;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface RequestService {
      * @param id 主键
      * @return
      */
-    Request findRequest(Integer id);
+    ServiceRequest findRequest(Integer id);
 
     /**
      * 根据产品模块id查找请求
@@ -22,7 +22,7 @@ public interface RequestService {
      * @param moldeId 主键
      * @return
      */
-    Request findRequestByMolde(String moldeId);
+    ServiceRequest findRequestByMolde(String moldeId);
 
     /**
      * 根据条件查询List
@@ -30,7 +30,7 @@ public interface RequestService {
      * @param request 用于查询条件
      * @return
      */
-    List<Request> getRequestList(Request request);
+    List<ServiceRequest> getRequestList(ServiceRequest request);
 
     /**
      * 新增请求
@@ -38,7 +38,7 @@ public interface RequestService {
      * @param request 新增实体类
      * @return
      */
-    Request addRequest(Request request);
+    ServiceRequest addRequest(ServiceRequest request);
 
     /**
      * 更新faq
@@ -46,7 +46,7 @@ public interface RequestService {
      * @param request 需要更新的实体类
      * @return
      */
-    Request updateRequest(Request request);
+    ServiceRequest updateRequest(ServiceRequest request);
 
     /**
      * 根据id进行软删除请求

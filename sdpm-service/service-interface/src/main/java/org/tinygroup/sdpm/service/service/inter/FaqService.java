@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.service.service.inter;
 
-import org.tinygroup.sdpm.service.dao.pojo.Faq;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface FaqService {
      * @param id 主键
      * @return
      */
-    Faq findFaq(Integer id);
+    ServiceFaq findFaq(Integer id);
 
     /**
      * 根据条件查询List
@@ -22,7 +22,7 @@ public interface FaqService {
      * @param faq 用于查询条件
      * @return
      */
-    List<Faq> getFaqList(Faq faq);
+    List<ServiceFaq> getFaqList(ServiceFaq faq);
 
     /**
      * 新增一个faq
@@ -30,7 +30,7 @@ public interface FaqService {
      * @param faq 新增实体类
      * @return
      */
-    Faq addFaq(Faq faq);
+    ServiceFaq addFaq(ServiceFaq faq);
 
     /**
      * 更新faq
@@ -38,7 +38,7 @@ public interface FaqService {
      * @param faq 需要更新的实体类
      * @return
      */
-    Faq updateFaq(Faq faq);
+    ServiceFaq updateFaq(ServiceFaq faq);
 
     /**
      * 根据id进行软删除faq

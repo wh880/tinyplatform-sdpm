@@ -1,0 +1,16 @@
+#setTinyItemCount(52)
+
+#for(l:list)
+#@tr()
+    #@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()${l.effortId}#end
+	#@td()${l.effortDate}#end
+	#@td()${l.effortAccount}#end
+	#@td()${l.effortWork}#end
+	#@td() ${l.effortConsumed}#end
+	#@td() ${l.effortObjectType} #end
+		
+	
+#end
+#end	
+	

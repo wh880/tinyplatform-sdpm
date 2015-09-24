@@ -49,8 +49,8 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		return event;
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Effort> findByDate(java.util.Date date) {
-		String serviceId = "effort_findByDate";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemEffort> findByDate(java.util.Date date) {
+		String serviceId = "system_findByDate";
 
 		try{
 			Context context = new ContextImpl();
@@ -62,12 +62,12 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Effort save(org.tinygroup.sdpm.system.dao.pojo.Effort effort) {
-		String serviceId = "effort_save";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemEffort save(org.tinygroup.sdpm.system.dao.pojo.SystemEffort systemEffort) {
+		String serviceId = "system_save";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("effort" ,effort);
+			context.put("systemEffort" ,systemEffort);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,8 +75,8 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Effort> findByAccount(java.lang.String account) {
-		String serviceId = "effort_findByAccount";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemEffort> findByAccount(java.lang.String account) {
+		String serviceId = "system_findByAccount";
 
 		try{
 			Context context = new ContextImpl();
@@ -88,12 +88,12 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Effort> find(org.tinygroup.sdpm.system.dao.pojo.Effort effort) {
-		String serviceId = "effort_find";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemEffort> find(org.tinygroup.sdpm.system.dao.pojo.SystemEffort systemEffort) {
+		String serviceId = "system_find";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("effort" ,effort);
+			context.put("systemEffort" ,systemEffort);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -101,8 +101,8 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Effort> findBetweenDate(java.util.Date begindate ,java.util.Date enddate) {
-		String serviceId = "effort_findBetweenDate";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemEffort> findBetweenDate(java.util.Date begindate ,java.util.Date enddate) {
+		String serviceId = "system_findBetweenDate";
 
 		try{
 			Context context = new ContextImpl();
@@ -115,8 +115,8 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Effort> findByProject(int projectId) {
-		String serviceId = "effort_findByProject";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemEffort> findByProject(int projectId) {
+		String serviceId = "system_findByProject";
 
 		try{
 			Context context = new ContextImpl();
@@ -128,14 +128,14 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.Effort> findByPage(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.Effort effort) {
-		String serviceId = "effort_findByPage";
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.SystemEffort> findByPage(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemEffort SystemEffort) {
+		String serviceId = "system_findByPage";
 
 		try{
 			Context context = new ContextImpl();
 			context.put("start" ,start);
 			context.put("limit" ,limit);
-			context.put("effort" ,effort);
+			context.put("SystemEffort" ,SystemEffort);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

@@ -37,9 +37,8 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
+import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.system.dao.SystemConfigDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -50,11 +49,10 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-@LogClass("systemConfig")
 @Repository
+@LogClass("systemConfig")
 public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConfigDao {
 
-	@LogMethod("add")
 	public SystemConfig add(SystemConfig systemConfig) {
 		return getDslTemplate().insertAndReturnKey(systemConfig, new InsertGenerateCallback<SystemConfig>() {
 			public Insert generate(SystemConfig t) {
@@ -70,8 +68,7 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 			}
 		});
 	}
-	
-	@LogMethod("edit")
+
 	public int edit(SystemConfig systemConfig) {
 		if(systemConfig == null || systemConfig.getConfigId() == null){
 			return 0;
@@ -90,8 +87,7 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 			}
 		});
 	}
-	
-	@LogMethod("deleteByKey")
+
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -102,8 +98,7 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 			}
 		});
 	}
-	
-	@LogMethod("deleteByKeys")
+
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -187,7 +182,6 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 			return batchInsert(true ,systemConfigs);
 	}
 
-	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<SystemConfig> systemConfigs) {
 		if (CollectionUtil.isEmpty(systemConfigs)) {
 			return new int[0];
@@ -207,7 +201,6 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 		});
 	}
 
-	@LogMethod("batchDelete")
 	public int[] batchDelete(List<SystemConfig> systemConfigs) {
 		if (CollectionUtil.isEmpty(systemConfigs)) {
 			return new int[0];
@@ -227,7 +220,6 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 		});
 	}
 
-	@LogMethod("addOrderByElements")
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {

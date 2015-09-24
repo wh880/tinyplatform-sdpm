@@ -43,12 +43,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	public Pager<Product> findProductPager(int start, int limit,
-			Product product, String columnName,boolean asc) {
-
-		return productManager.findPager(start, limit, product, columnName, asc);
+			Product product, String order,String ordertype) {
+		
+		
+		return productManager.findPager(start, limit, product, order, ordertype);
 	}
 
-	public int[] updateBatch(List<Product> products) {
+	public int[] updateBatchProduct(List<Product> products) {
 
 		return productManager.updateBatch(products);
 	}

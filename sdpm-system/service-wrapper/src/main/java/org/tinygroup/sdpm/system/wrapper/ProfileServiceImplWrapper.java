@@ -49,12 +49,12 @@ public class ProfileServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		return event;
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Profile add(org.tinygroup.sdpm.system.dao.pojo.Profile Profile) {
-		String serviceId = "add";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemProfile add(org.tinygroup.sdpm.system.dao.pojo.SystemProfile systemProfile) {
+		String serviceId = "system_add";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("Profile" ,Profile);
+			context.put("systemProfile" ,systemProfile);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -62,12 +62,12 @@ public class ProfileServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public int[] batchAdd(java.util.List<org.tinygroup.sdpm.system.dao.pojo.Profile> Profiles) {
-		String serviceId = "batchAdd";
+	public int[] batchAdd(java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemProfile> systemProfiles) {
+		String serviceId = "system_batchAdd";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("Profiles" ,Profiles);
+			context.put("systemProfiles" ,systemProfiles);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -75,12 +75,12 @@ public class ProfileServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.Profile> find(org.tinygroup.sdpm.system.dao.pojo.Profile Profile) {
-		String serviceId = "find";
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemProfile> find(org.tinygroup.sdpm.system.dao.pojo.SystemProfile systemProfile) {
+		String serviceId = "system_find";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("Profile" ,Profile);
+			context.put("systemProfile" ,systemProfile);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -88,12 +88,12 @@ public class ProfileServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public int delete(org.tinygroup.sdpm.system.dao.pojo.Profile Profile) {
-		String serviceId = "delete";
+	public int delete(org.tinygroup.sdpm.system.dao.pojo.SystemProfile systemProfile) {
+		String serviceId = "system_delete";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("Profile" ,Profile);
+			context.put("systemProfile" ,systemProfile);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -101,12 +101,12 @@ public class ProfileServiceImplWrapper implements org.tinygroup.sdpm.system.serv
 		}
 	}
 
-	public org.tinygroup.sdpm.system.dao.pojo.Profile edit(org.tinygroup.sdpm.system.dao.pojo.Profile Profile) {
-		String serviceId = "edit";
+	public org.tinygroup.sdpm.system.dao.pojo.SystemProfile edit(org.tinygroup.sdpm.system.dao.pojo.SystemProfile systemProfile) {
+		String serviceId = "system_edit";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("Profile" ,Profile);
+			context.put("systemProfile" ,systemProfile);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

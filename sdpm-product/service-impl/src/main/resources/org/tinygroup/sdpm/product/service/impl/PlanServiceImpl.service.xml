@@ -24,11 +24,11 @@
       </service-parameters>
       <service-result name="findPlanResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan"/>
     </service-method>
-    <service-method local-name="updateBatch" service-id="product_updateBatch" method-name="updateBatch" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+    <service-method local-name="updateBatchPlan" service-id="product_updateBatchPlan" method-name="updateBatchPlan" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
         <service-parameter name="plan" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan" collection-type="java.util.List" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="updateBatchResult" required="false" is-array="true" type="int"/>
+      <service-result name="updateBatchPlanResult" required="false" is-array="true" type="int"/>
     </service-method>
     <service-method local-name="findPlanList" service-id="product_findPlanList" method-name="findPlanList" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
@@ -46,7 +46,7 @@
         <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="findProductPlanPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager&lt;org.tinygroup.sdpm.product.dao.pojo.ProductPlan&gt;"/>
+      <service-result name="findProductPlanPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
   </service-component>
 </service-components>

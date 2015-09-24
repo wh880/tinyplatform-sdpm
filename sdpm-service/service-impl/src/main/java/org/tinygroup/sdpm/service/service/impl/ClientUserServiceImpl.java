@@ -2,9 +2,8 @@ package org.tinygroup.sdpm.service.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tinygroup.sdpm.service.biz.inter.ClientManager;
 import org.tinygroup.sdpm.service.biz.inter.ClientUserManager;
-import org.tinygroup.sdpm.service.dao.pojo.ClientUser;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser;
 import org.tinygroup.sdpm.service.service.inter.ClientUserService;
 
 import java.util.List;
@@ -16,23 +15,24 @@ import java.util.List;
 public class ClientUserServiceImpl implements ClientUserService{
     @Autowired
     private ClientUserManager clientUserManager;
-    public ClientUser findClientUser(Integer id) {
+
+    public ServiceClientUser findClientUser(Integer id) {
         return clientUserManager.find(id);
     }
 
-    public List<ClientUser> getClientUserList(ClientUser clientUser) {
+    public List<ServiceClientUser> getClientUserList(ServiceClientUser clientUser) {
         return clientUserManager.getUserList(clientUser);
     }
 
-    public ClientUser addClientUser(ClientUser clientUser) {
+    public ServiceClientUser addClientUser(ServiceClientUser clientUser) {
         return clientUserManager.add(clientUser);
     }
 
-    public ClientUser updateClientUser(ClientUser clientUser) {
+    public ServiceClientUser updateClientUser(ServiceClientUser clientUser) {
         return clientUserManager.update(clientUser);
     }
 
-    public ClientUser deleteClientUser(Integer id) {
+    public ServiceClientUser deleteClientUser(Integer id) {
         return clientUserManager.delete(id);
     }
 }

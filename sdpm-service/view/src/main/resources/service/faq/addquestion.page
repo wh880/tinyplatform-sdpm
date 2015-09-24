@@ -10,41 +10,43 @@
         #end
     #end
 
-    #@tinyForm("thisform" "" "" {"class":"test"})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/faq/save" "post" {"class":""})
+
+ #*   #@tinyForm("thisform" "" "" {"class":"test"})*#
 
         #@elementItem()
             #@sdpmItem("产品名称" "*")
-                #@tinySelect("lang" "ch" {"class":"input-text select2","rel":"22"})
+                #@tinySelect("productId" "ch" {"class":"input-text select2","rel":"22","id":"productId"})
                     #@tinyOptionItem("ch")请选择#end
-                    #@tinyOptionItem("zh")支付宝#end
-                    #@tinyOptionItem("en")余额宝#end
-                    #@tinyOptionItem("ta")财付通#end
+                    #@tinyOptionItem("02")支付宝#end
+                    #@tinyOptionItem("03")余额宝#end
+                    #@tinyOptionItem("04")财付通#end
                 #end
             #end
         #end
 
         #@elementItem()
             #@sdpmItem("创建人")
-                #tinyInput("text" "username" ""{"placeholder":"","id":"faq_created_by","class":"input-text"})
+                #tinyInput("text" "faqCreatedBy" ""{"placeholder":"","id":"faqCreatedBy","class":"input-text"})
             #end
         #end
         #@elementItem()
             #@sdpmItem("创建时间")
                 #@tinyDateInput(
-                    "birthday" "" "YYYY-MM-DD" {"style":"width:200px","placeholder":"","id":"faq_create_date"})#end
+                     "faqCreateDate" "" "YYYY-MM-DD" {"style":"width:200px","placeholder":"","id":"faqCreateDate"})#end
             #end
         #end
         #@elementItem()
             #@sdpmItem("问题" "*")
-                #tinyInput("text" "username" ""{"placeholder":"","datatype":"*4-16","nullmsg":
-                    "问题不能为空！","id":"faq_id","class":"input-text"})
+                #tinyInput("text" "faqQuestion" ""{"placeholder":"","datatype":"*4-16","nullmsg":
+                    "问题不能为空！","id":"faqQuestion","class":"input-text"})
             #end
         #end
 
         #@elementItem()
             #@sdpmItem("问题类型")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("faqType" "IN" {"class":"input-text select2","id":"faqType"}) ##,"multiple":"multiple"加上为多选项
                     <option value="IN">请选择</option>
                     <option value="CT">第一类问题</option>
                     <option value="DE">第二类问题</option>
@@ -62,7 +64,7 @@
             <div class="col-2 text-r"><label>回答：</label></div>
 
             <div class="col-9">
-                #@Teditor("content" "content" {"initialFrameHeight":"280"})Say something#end</div>
+                #@Teditor("content" "faqAnswer" {"initialFrameHeight":"280"})Say something#end</div>
         </div>
         #end
 
@@ -80,7 +82,8 @@
             <div class="col-5"></div>
         </div>
         #end
-#end
+#*#end*#
+    #end
 
 
 <script type="text/javascript">
@@ -142,7 +145,6 @@
     });
     $(function(){
 
-        $("form[name=thisform").attr("action",'#link("/Validform_post.html")');
         $("form[name=thisform").Validform({
             tiptype:2,
             usePlugin:{
@@ -191,4 +193,7 @@
         });
     });
 </script>
+
+
+
     #end

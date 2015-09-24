@@ -2,31 +2,31 @@ package org.tinygroup.sdpm.system.service.inter;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.system.dao.pojo.Action;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 
 public interface ActionService {
 	/**
 	 * 增加动态
-	 * @param action
+	 * @param SystemAction
 	 * @return
 	 */
-	Action add(Action action);
+	SystemAction add(SystemAction SystemAction);
 	/**
 	 * 修改动态
-	 * @param action
+	 * @param SystemAction
 	 * @return
 	 */
-	Action updata(Action action);
+	SystemAction updata(SystemAction SystemAction);
 	/**
 	 * 删除动态
-	 * @param action
+	 * @param SystemAction
 	 * @return
 	 */
-	Integer delete(Action action);
+	Integer delete(SystemAction SystemAction);
 	/**
 	 * 查询动态
-	 * @param action
+	 * @param SystemAction
 	 * @return
 	 */
-	List<Action> find(Action action);
+	List<SystemAction> find(SystemAction SystemAction);
 }

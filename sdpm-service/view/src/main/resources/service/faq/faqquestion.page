@@ -4,6 +4,9 @@
     #foreach(var:[1..5])
         #@normalLiItemsconment(1 "../faq/questionAnswer.page" "访问项目管理，可以绑定域名吗？" "")
         ##        <a href="${TINY_CONTEXT_PATH}/service/faq/addquestion.page" >#buttonIcon(iconClass="icon-pencil")编辑</a>
+
+
+        #*faqmenu问题后面的编辑和删除*#
             #set(m1=menuManager.getMenu("faq-edit"))
             #if(m1)
             <a href="${TINY_CONTEXT_PATH}${m1.href}?id=${var}">#buttonIcon(iconClass="icon-pencil")${m1.name}</a>

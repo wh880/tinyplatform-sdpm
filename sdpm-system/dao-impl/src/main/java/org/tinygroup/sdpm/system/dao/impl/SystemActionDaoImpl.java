@@ -1,0 +1,265 @@
+/**
+ *  Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
+ *
+ *  Licensed under the GPL, Version 3.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *       http://www.gnu.org/licenses/gpl.html
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+package org.tinygroup.sdpm.system.dao.impl;
+
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.*;
+import static org.tinygroup.tinysqldsl.Select.*;
+import static org.tinygroup.tinysqldsl.Insert.*;
+import static org.tinygroup.tinysqldsl.Delete.*;
+import static org.tinygroup.tinysqldsl.Update.*;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+import org.tinygroup.tinysqldsl.Delete;
+import org.tinygroup.tinysqldsl.Insert;
+import org.tinygroup.tinysqldsl.Select;
+import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.SystemActionDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+@Repository
+@LogClass("action")
+public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActionDao {
+	@LogMethod("add")
+	public SystemAction add(SystemAction systemAction) {
+		return getDslTemplate().insertAndReturnKey(systemAction, new InsertGenerateCallback<SystemAction>() {
+			public Insert generate(SystemAction t) {
+				Insert insert = insertInto(SYSTEM_ACTIONTABLE).values(
+					SYSTEM_ACTIONTABLE.ACTION_ID.value(t.getActionId()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.value(t.getActionObjectType()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECTID.value(t.getActionObjectID()),
+					SYSTEM_ACTIONTABLE.ACTION_PROJECT.value(t.getActionProject()),
+					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.value(t.getActionProduct()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTOR.value(t.getActionActor()),
+					SYSTEM_ACTIONTABLE.ACTION_DATE.value(t.getActionDate()),
+					SYSTEM_ACTIONTABLE.ACTION_COMMENT.value(t.getActionComment()),
+					SYSTEM_ACTIONTABLE.ACTION_EXTRA.value(t.getActionExtra()),
+					SYSTEM_ACTIONTABLE.ACTION_READ.value(t.getActionRead()),
+					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.value(t.getActionEfforted()));
+				return insert;
+			}
+		});
+	}
+
+	public int edit(SystemAction systemAction) {
+		if(systemAction == null || systemAction.getActionId() == null){
+			return 0;
+		}
+		return getDslTemplate().update(systemAction, new UpdateGenerateCallback<SystemAction>() {
+			public Update generate(SystemAction t) {
+				Update update = update(SYSTEM_ACTIONTABLE).set(
+					SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.value(t.getActionObjectType()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECTID.value(t.getActionObjectID()),
+					SYSTEM_ACTIONTABLE.ACTION_PROJECT.value(t.getActionProject()),
+					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.value(t.getActionProduct()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTOR.value(t.getActionActor()),
+					SYSTEM_ACTIONTABLE.ACTION_DATE.value(t.getActionDate()),
+					SYSTEM_ACTIONTABLE.ACTION_COMMENT.value(t.getActionComment()),
+					SYSTEM_ACTIONTABLE.ACTION_EXTRA.value(t.getActionExtra()),
+					SYSTEM_ACTIONTABLE.ACTION_READ.value(t.getActionRead()),
+					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.value(t.getActionEfforted())).where(
+					SYSTEM_ACTIONTABLE.ACTION_ID.eq(t.getActionId()));
+				return update;
+			}
+		});
+	}
+
+	public int deleteByKey(Integer pk){
+		if(pk == null){
+			return 0;
+		}
+		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
+			public Delete generate(Serializable pk) {
+				return delete(SYSTEM_ACTIONTABLE).where(SYSTEM_ACTIONTABLE.ACTION_ID.eq(pk));
+			}
+		});
+	}
+
+	public int deleteByKeys(Integer... pks) {
+		if(pks == null || pks.length == 0){
+			return 0;
+		}
+		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
+			public Delete generate(Serializable[] t) {
+				return delete(SYSTEM_ACTIONTABLE).where(SYSTEM_ACTIONTABLE.ACTION_ID.in(t));
+		}
+		},pks);
+	}
+
+	public SystemAction getByKey(Integer pk) {
+		return getDslTemplate().getByKey(pk, SystemAction.class, new SelectGenerateCallback<Serializable>() {
+		@SuppressWarnings("rawtypes")
+		public Select generate(Serializable t) {
+			return selectFrom(SYSTEM_ACTIONTABLE).where(SYSTEM_ACTIONTABLE.ACTION_ID.eq(t));
+			}
+		});
+	}
+
+	public List<SystemAction> query(SystemAction systemAction ,final OrderBy... orderBies) {
+		if(systemAction==null){
+			systemAction=new SystemAction();
+		}
+		return getDslTemplate().query(systemAction, new SelectGenerateCallback<SystemAction>() {
+
+			@SuppressWarnings("rawtypes")
+			public Select generate(SystemAction t) {
+				Select select = selectFrom(SYSTEM_ACTIONTABLE).where(
+				and(
+					SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.eq(t.getActionObjectType()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECTID.eq(t.getActionObjectID()),
+					SYSTEM_ACTIONTABLE.ACTION_PROJECT.eq(t.getActionProject()),
+					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.eq(t.getActionProduct()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(t.getActionActor()),
+					SYSTEM_ACTIONTABLE.ACTION_DATE.eq(t.getActionDate()),
+					SYSTEM_ACTIONTABLE.ACTION_COMMENT.eq(t.getActionComment()),
+					SYSTEM_ACTIONTABLE.ACTION_EXTRA.eq(t.getActionExtra()),
+					SYSTEM_ACTIONTABLE.ACTION_READ.eq(t.getActionRead()),
+					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.eq(t.getActionEfforted())));
+		return addOrderByElements(select, orderBies);
+			}
+		});
+	}
+
+	public Pager<SystemAction> queryPager(int start,int limit ,SystemAction systemAction ,final OrderBy... orderBies) {
+		if(systemAction==null){
+			systemAction=new SystemAction();
+		}
+		return getDslTemplate().queryPager(start, limit, systemAction, false, new SelectGenerateCallback<SystemAction>() {
+
+			public Select generate(SystemAction t) {
+				Select select = MysqlSelect.selectFrom(SYSTEM_ACTIONTABLE).where(
+				and(
+					SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.eq(t.getActionObjectType()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECTID.eq(t.getActionObjectID()),
+					SYSTEM_ACTIONTABLE.ACTION_PROJECT.eq(t.getActionProject()),
+					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.eq(t.getActionProduct()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(t.getActionActor()),
+					SYSTEM_ACTIONTABLE.ACTION_DATE.eq(t.getActionDate()),
+					SYSTEM_ACTIONTABLE.ACTION_COMMENT.eq(t.getActionComment()),
+					SYSTEM_ACTIONTABLE.ACTION_EXTRA.eq(t.getActionExtra()),
+					SYSTEM_ACTIONTABLE.ACTION_READ.eq(t.getActionRead()),
+					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.eq(t.getActionEfforted())));
+		return addOrderByElements(select, orderBies);
+			}
+		});
+	}
+
+	public int[] batchInsert(boolean autoGeneratedKeys ,List<SystemAction> systemActions) {
+		if (CollectionUtil.isEmpty(systemActions)) {
+			return new int[0];
+		}
+		return getDslTemplate().batchInsert(autoGeneratedKeys, systemActions, new NoParamInsertGenerateCallback() {
+
+			public Insert generate() {
+				return insertInto(SYSTEM_ACTIONTABLE).values(
+					SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.value(new JdbcNamedParameter("actionObjectType")),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECTID.value(new JdbcNamedParameter("actionObjectID")),
+					SYSTEM_ACTIONTABLE.ACTION_PROJECT.value(new JdbcNamedParameter("actionProject")),
+					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.value(new JdbcNamedParameter("actionProduct")),
+					SYSTEM_ACTIONTABLE.ACTION_ACTOR.value(new JdbcNamedParameter("actionActor")),
+					SYSTEM_ACTIONTABLE.ACTION_DATE.value(new JdbcNamedParameter("actionDate")),
+					SYSTEM_ACTIONTABLE.ACTION_COMMENT.value(new JdbcNamedParameter("actionComment")),
+					SYSTEM_ACTIONTABLE.ACTION_EXTRA.value(new JdbcNamedParameter("actionExtra")),
+					SYSTEM_ACTIONTABLE.ACTION_READ.value(new JdbcNamedParameter("actionRead")),
+					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.value(new JdbcNamedParameter("actionEfforted")));
+			}
+		});
+	}
+
+	public int[] batchInsert(List<SystemAction> systemActions){
+			return batchInsert(true ,systemActions);
+	}
+
+	public int[] batchUpdate(List<SystemAction> systemActions) {
+		if (CollectionUtil.isEmpty(systemActions)) {
+			return new int[0];
+		}
+		return getDslTemplate().batchUpdate(systemActions, new NoParamUpdateGenerateCallback() {
+
+			public Update generate() {
+				return update(SYSTEM_ACTIONTABLE).set(
+					SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.value(new JdbcNamedParameter("actionObjectType")),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECTID.value(new JdbcNamedParameter("actionObjectID")),
+					SYSTEM_ACTIONTABLE.ACTION_PROJECT.value(new JdbcNamedParameter("actionProject")),
+					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.value(new JdbcNamedParameter("actionProduct")),
+					SYSTEM_ACTIONTABLE.ACTION_ACTOR.value(new JdbcNamedParameter("actionActor")),
+					SYSTEM_ACTIONTABLE.ACTION_DATE.value(new JdbcNamedParameter("actionDate")),
+					SYSTEM_ACTIONTABLE.ACTION_COMMENT.value(new JdbcNamedParameter("actionComment")),
+					SYSTEM_ACTIONTABLE.ACTION_EXTRA.value(new JdbcNamedParameter("actionExtra")),
+					SYSTEM_ACTIONTABLE.ACTION_READ.value(new JdbcNamedParameter("actionRead")),
+					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.value(new JdbcNamedParameter("actionEfforted"))).where(
+				SYSTEM_ACTIONTABLE.ACTION_ID.eq(new JdbcNamedParameter("actionId")));
+			}
+		});
+	}
+
+	public int[] batchDelete(List<SystemAction> systemActions) {
+		if (CollectionUtil.isEmpty(systemActions)) {
+			return new int[0];
+		}
+		return getDslTemplate().batchDelete(systemActions, new NoParamDeleteGenerateCallback() {
+
+			public Delete generate() {
+				return delete(SYSTEM_ACTIONTABLE).where(and(
+				SYSTEM_ACTIONTABLE.ACTION_ID.eq(new JdbcNamedParameter("actionId")),
+				SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.eq(new JdbcNamedParameter("actionObjectType")),
+				SYSTEM_ACTIONTABLE.ACTION_OBJECTID.eq(new JdbcNamedParameter("actionObjectID")),
+				SYSTEM_ACTIONTABLE.ACTION_PROJECT.eq(new JdbcNamedParameter("actionProject")),
+				SYSTEM_ACTIONTABLE.ACTION_PRODUCT.eq(new JdbcNamedParameter("actionProduct")),
+				SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(new JdbcNamedParameter("actionActor")),
+				SYSTEM_ACTIONTABLE.ACTION_DATE.eq(new JdbcNamedParameter("actionDate")),
+				SYSTEM_ACTIONTABLE.ACTION_COMMENT.eq(new JdbcNamedParameter("actionComment")),
+				SYSTEM_ACTIONTABLE.ACTION_EXTRA.eq(new JdbcNamedParameter("actionExtra")),
+				SYSTEM_ACTIONTABLE.ACTION_READ.eq(new JdbcNamedParameter("actionRead")),
+				SYSTEM_ACTIONTABLE.ACTION_EFFORTED.eq(new JdbcNamedParameter("actionEfforted"))));
+			}
+		});
+	}
+
+	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
+}

@@ -2,7 +2,7 @@ package org.tinygroup.sdpm.system.service.inter;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.system.dao.pojo.Profile;
+import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 
 
 public interface ProfileService {
@@ -11,30 +11,30 @@ public interface ProfileService {
 	 * @param 
 	 * @return 附件
 	 */
-    Profile add(Profile Profile);
+    SystemProfile add(SystemProfile systemProfile);
    /**
     * 批量添加附件
     * @return
     */
-    int[] batchAdd(List<Profile> Profiles);
+    int[] batchAdd(List<SystemProfile> systemProfiles);
    /**
     * 查询附件信息
     * @param
     * @return 附件信息表
     */
-    List<Profile> find(Profile Profile);
+    List<SystemProfile> find(SystemProfile systemProfile);
     /**
      * 删除附件信息
-     * @param Profile
+     * @param SystemProfile
      * @return
      */
-    int delete(Profile Profile);
+    int delete(SystemProfile systemProfile);
     /**
      * 编辑附件
-     * @param Profile
+     * @param SystemProfile
      * @return Flie 对象
      */
     
-    Profile edit(Profile Profile);
+    SystemProfile edit(SystemProfile systemProfile);
  
 }

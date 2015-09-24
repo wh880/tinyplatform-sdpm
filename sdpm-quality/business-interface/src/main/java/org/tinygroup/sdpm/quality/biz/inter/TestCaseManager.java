@@ -1,7 +1,7 @@
 package org.tinygroup.sdpm.quality.biz.inter;
 
 import java.util.List;
-import org.tinygroup.sdpm.quality.dao.pojo.TestCase;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 
 public interface TestCaseManager {
 	
@@ -10,31 +10,31 @@ public interface TestCaseManager {
 	 * @param festcase
 	 * @return
 	 */
-	List<TestCase> findList(TestCase festcase);
+	List<QualityTestCase> findList(QualityTestCase festcase);
 	/**
 	 * 通过主键id查询
 	 * @param story
 	 * @return
 	 */
-	TestCase find(Integer id);
+	QualityTestCase find(Integer id);
 	/**
 	 * 建用例
 	 * @param testcase
 	 * @return
 	 */
-	TestCase add(TestCase testcase);
+	QualityTestCase add(QualityTestCase testcase);
 	/**
 	 * 用例修改
 	 * @param testcase
 	 * @return
 	 */
-	Integer update(TestCase testcase);
+	Integer update(QualityTestCase testcase);
 	/**
 	 * 批量修改
 	 * @param testcases
 	 * @return
 	 */
-	int [] batchUpdate(List<TestCase> testcases);
+	int[] batchUpdate(List<QualityTestCase> testcases);
 	/**
 	 * 删除用例
 	 * @param id
@@ -46,6 +46,6 @@ public interface TestCaseManager {
 	 * @param id
 	 * @return
 	 */
-	int[] batchDelete(List<TestCase> testcases);
+	int[] batchDelete(List<QualityTestCase> testcases);
 
 }

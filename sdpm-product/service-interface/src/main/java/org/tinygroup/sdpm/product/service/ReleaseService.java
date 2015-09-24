@@ -24,7 +24,7 @@ public interface ReleaseService {
      * @param releases
      * @return
      */
-    int[] updateBatch(List<ProductRelease> releases);
+    int[] updateBatchRelease(List<ProductRelease> releases);
     /**
      * 根据发布对象删除
      * @param release

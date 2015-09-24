@@ -22,24 +22,24 @@
 		 			#@th()	${i}	#end
 		 			#@th()	
 						
-							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:150px","datatype":"*","placeholder":"选择日期"})#end
+							#@tinyDateInput("taskOpenedDate" "2015-02-22" "YYYY-MM-DD" {"style":"width:150px","datatype":"*","placeholder":"选择日期"})#end
 						
 						#@validateDiv("col-2")#end
 			 		#end
 		 			#@th()
 		 			
-		 				 #tinyInput("text" "username")
+		 				 #tinyInput("text" "taskConsumed""1.1")
 		 			
 		 			#end
 		 			
 		 			#@th()
 		 			
-		 				 #tinyInput("text" "username")
+		 				 #tinyInput("text" "taskLeft""1.1")
 		 			#end
 		 			
 		 			#@th()
 		 			
-		 				 #tinyInput("text" "username")
+		 				 #tinyInput("text" "username""")
 		 			
 		 			#end
 		 		#end
