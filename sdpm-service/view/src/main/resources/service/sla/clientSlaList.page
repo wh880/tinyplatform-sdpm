@@ -14,6 +14,7 @@
             #@gridSysCol(4)
                 #@div(divClass="infoContent")
                     <p class="titleName">支付宝协议</p>
+
                     <div>
                         #@table("")
                             #@tbody()
@@ -49,11 +50,14 @@
                         #end
                     </div>
                     <div style="text-align:right;margin:right">
-                       #* #@aModal("#myModal3" "编辑" "800" "500" "btn radius btn-primary btn-sm"
-                            "/service/sla/clientSlaEdit.pagelet")编辑#end*#
-                       #@aExtendButton("btn-primary  btn-sm" "../sla/slaAdd.page")编辑#end
+
+                    #* clientsla页面的编辑和删除*#
+                    #* #@aExtendButton("btn-primary  btn-sm" "../sla/slaAdd.page")编辑#end*#
+                        #@aExtendButton("btn-primary  btn-sm" TINY_CONTEXT_PATH+"/service/sla/form")编辑#end
+                    #* #@delItemsdpm(
+                         "#action" "id" "/service/sla/clientsla.page" {"class":"btn radius btn-danger btn-sm"})删除#end*#
                         #@delItemsdpm(
-                            "#action" "id" "/service/sla/clientsla.page" {"class":"btn radius btn-danger btn-sm"})删除#end
+                            "#action" "id" "/service/sla/delete" {"class":"btn radius btn-danger btn-sm"})删除#end
                     </div>
                 #end
             #end

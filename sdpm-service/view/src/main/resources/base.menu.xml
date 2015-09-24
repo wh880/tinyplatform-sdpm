@@ -72,12 +72,15 @@
               scope="service-request-oper"/>
     </menu>
 
-    <menu id="sla" name="协议" href="/service/sla/sla.page" sort="100" isShow="1">
+    <!-- <menu id="sla" name="协议" href="/service/sla/sla.page" sort="100" isShow="1">-->
+    <menu id="sla" name="协议" href="/service/sla/list" sort="100" isShow="1">
         <menu id="sla-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="service-sla-batchdel"/>
-        <menu id="sla-edit" name="编辑" href="/service/sla/slaAdd.page" icon="icon-pencil" sort="1" isShow="1"
+        <!--<menu id="sla-edit" name="编辑" href="/service/sla/slaAdd.page" icon="icon-pencil" sort="1" isShow="1"-->
+        <menu id="sla-edit" name="编辑" href="/service/sla/form" icon="icon-pencil" sort="1" isShow="1"
               scope="service-sla"/>
-        <menu id="sla-del" name="删除" href="/service/serviceReq/requestEdit.page" icon="icon-remove" sort="1" isShow="1"
+        <!--<menu id="sla-del" name="删除" href="/service/serviceReq/requestEdit.page" icon="icon-remove" sort="1" isShow="1"-->
+        <menu id="sla-del" name="删除" href="/service/sla/delete" icon="icon-remove" sort="1" isShow="1"
               scope="service-sla"/>
         <menu id="sla-export" name="导出" href="/service/serviceCom/serviceExport.pagelet" icon="icon-download-alt"
               sort="1" isShow="1"
