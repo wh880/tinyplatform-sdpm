@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
@@ -44,15 +45,18 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/findPager")
-    public String findPager(Integer start, Integer limit, String order, String ordertype, Integer projectId, Model model) {
+    public String findPager(Integer start, Integer limit, String order, String ordertype, String statu, String choose, String group, Integer projectId, Model model) {
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;
         }
         ProjectTask task = new ProjectTask();
         task.setTaskProject(projectId);
-        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc);
+        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, TaskStatusUtil.getCondition(statu, choose), group);
         model.addAttribute("taskPager", taskPager);
+        model.addAttribute("statu", statu);
+        model.addAttribute("choose", choose);
+        model.addAttribute("group", group);
         return "project/task/datalist.pagelet";
     }
 

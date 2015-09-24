@@ -119,11 +119,11 @@
               sort="1" isShow="1"
               scope="org-company-edit"/>
     </menu>
-    <menu id="organizationAddUser" name="添加用户" href="/organization/common/addUser.page" icon="icon-plus" sort="1"
+    <menu id="organizationAddUser" name="添加用户" href="/organization/user/addUser.page" icon="icon-plus" sort="1"
           isShow="1"
           scope="org-menu">
     </menu>
-    <menu id="organizationAddGroup" name="添加角色 " href="/organization/common/addGroup.page" icon="icon-group" sort="1"
+    <menu id="organizationAddGroup" name="添加角色 " href="/organization/privilege/addGroup.page" icon="icon-group" sort="1"
           isShow="1"
           scope="org-menu">
     </menu>

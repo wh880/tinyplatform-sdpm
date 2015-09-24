@@ -24,19 +24,18 @@ public class DocAction {
 		model.addAttribute("docpager", docpager);
 		return "/document/document";
 	}
-	@RequestMapping(value="/add/add-doc",method=RequestMethod.POST)
+	@RequestMapping(value="/add-doc/add",method=RequestMethod.POST)
 	public String addDoc(Doc doc,Model model)
 	{
 		Doc ret = docservice.createNewDoc(doc);
-		//docservice.getEditRecord(doc.getDocId());
 		model.addAttribute("doc", ret);
-		return "redirect:"+"/document/document.page";
+		return "redirect:"+"/document/document";
 	}
-	@RequestMapping(value="/add/add-doclib",method=RequestMethod.POST)
+	@RequestMapping(value="/add-doclib/add",method=RequestMethod.POST)
 	public String addDocLib(DocLib doclib,Model model)
 	{
 		docservice.createNewDocLib(doclib);
-		return "redirect:"+"/document/document.page";
+		return "redirect:"+"/document/document";
 	}
 	@RequestMapping(value="/delete/doc/{docid}",method=RequestMethod.DELETE)
 	public String delDoc(@PathVariable Integer docid)
@@ -50,7 +49,7 @@ public class DocAction {
 	{
 		int ret = docservice.deleteDoclibById(doclibid);
 		//if(ret==0)return "/document/Error.page";
-		return "redirect:"+"/document/document.page";
+		return "redirect:"+"/document/document";
 	}
 
 }
