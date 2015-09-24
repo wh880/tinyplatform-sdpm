@@ -12,6 +12,7 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.tinysqldsl.Pager;
 
+
 /**
  * Created by chenpeng15668 on 2015-9-22
  */
@@ -24,24 +25,31 @@ public class BugAction extends BaseController {
 	private BugService bugService;
 	
 	//
-	@RequestMapping("/form")
+	/*@RequestMapping("/111")
 	public String form(Integer id,Model model){
 		
 		return "";
-	}
+	}*/
 	
-	
-	
-	@RequestMapping("/findBug")
-	public String findBugPager(Integer start,Integer limit,String order,Integer id,Model model){
-		boolean asc = true;		
-		if("desc".equals(order)){
-			asc = false;
-		}
+	@RequestMapping("/findList")
+	public String findList(Integer id,Model model){
 		QualityBug bug = new QualityBug();
 		bug.setProductId(id);
-		Pager<QualityBug> bugPager = bugService.findBugListPager(start, limit, bug, order, asc);
-		model.addAttribute("bugPager",bugPager);
+		List<QualityBug> buglist = bugService.findBugList(bug);
+		model.addAttribute("buglist",buglist);
+		return "testManagement/data/BugData.pagelet";
+	}
+	
+	@RequestMapping("/findBug")
+	public String findBugPager(Integer start,Integer limit,String order,String ordertype,Integer id,QualityBug bug,Model model){
+		boolean asc = true;		
+		if("desc".equals(ordertype)){
+			asc = false;
+		}
+		//QualityBug bug = new QualityBug();
+		bug.setProductId(id);
+		Pager<QualityBug> bugpager = bugService.findBugListPager(start, limit, bug, order, asc);
+		model.addAttribute("bugpager",bugpager);
 		return "testManagement/data/BugData.pagelet";
 	}
 	

@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.quality.service.inter;
 import java.util.List;
 
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface TestCaseService {
 	/**
@@ -47,4 +48,14 @@ public interface TestCaseService {
 	 * @return
 	 */
 	int[] batchDeleteTestCase(List<QualityTestCase> testcases);
+	/**
+	 * 分页查询
+	 * @param start
+	 * @param limit
+	 * @param testcase
+	 * @param sortName
+	 * @param asc
+	 * @return
+	 */
+	Pager<QualityTestCase> findTestCasePager(Integer start,Integer limit,QualityTestCase testcase,String sortName,boolean asc);
 }

@@ -10,18 +10,18 @@
 #end
 #setTinyItemCount(28)
 
-#for(var:[1..pagesize])
+#for(c:casePager)
 					#@tr()
 						#@td()<input type="checkbox" value="1" name="userid">#end
-						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${var}</a>#end
-						#@td()1#end
-						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">标题</a>#end
-						#@td()我是类型#end
-						#@td()admin#end
-						#@td()test#end
-						#@td()test#end
-						#@td()success#end
-						#@td()正常#end
+						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${c?.caseId}</a>#end
+						#@td()${c?priority}#end
+						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${c?.caseTitle}</a>#end
+						#@td()${c?caseType}#end
+						#@td()${c?caseOpenedBy}#end
+						#@td()${c?caseLastRunner}#end
+						#@td()${c?caseLastRunDate}#end
+						#@td()${c?caseLastRunResult}#end
+						#@td()${c?caseStatus}#end
 						 #@td()					 					 			                       			
                          	#foreach(m:menuManager.getScopeMenus("testcase-op"))
                          		#if(m.id=="teditioncase"||m.id=="tproposecase")

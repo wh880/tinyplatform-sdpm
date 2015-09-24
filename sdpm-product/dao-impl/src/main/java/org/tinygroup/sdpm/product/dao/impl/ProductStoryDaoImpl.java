@@ -429,7 +429,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		}
 		return select;
 	}
-	
+
 	public Pager<ProductStory> complexQuery(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys) {
 		if (productStory == null) {
 			productStory = new ProductStory();
@@ -437,7 +437,43 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
 
 			public Select generate(ProductStory t) {
-				Select select = MysqlSelect.selectFrom(PRODUCT_STORYTABLE).where(fragmentCondition(condition));
+				Select select = MysqlSelect.selectFrom(PRODUCT_STORYTABLE).where(and(
+						fragmentCondition(condition),
+						PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
+						PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
+						PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(t.getStoryParentId()),
+						PRODUCT_STORYTABLE.MODULE_ID.eq(t.getModuleId()),
+						PRODUCT_STORYTABLE.PLAN_ID.eq(t.getPlanId()),
+						PRODUCT_STORYTABLE.STORY_STATUS.eq(t.getStoryStatus()),
+						PRODUCT_STORYTABLE.STORY_SOURCE.eq(t.getStorySource()),
+						PRODUCT_STORYTABLE.STORY_FROM_BUG.eq(t.getStoryFromBug()),
+						PRODUCT_STORYTABLE.STORY_TITLE.eq(t.getStoryTitle()),
+						PRODUCT_STORYTABLE.STORY_KEYWORDS.eq(t.getStoryKeywords()),
+						PRODUCT_STORYTABLE.STORY_TYPE.eq(t.getStoryType()),
+						PRODUCT_STORYTABLE.STORY_PRI.eq(t.getStoryPri()),
+						PRODUCT_STORYTABLE.STORY_ESTIMATE.eq(t.getStoryEstimate()),
+						PRODUCT_STORYTABLE.STORY_STAGE.eq(t.getStoryStage()),
+						PRODUCT_STORYTABLE.STORY_MAILTO.eq(t.getStoryMailto()),
+						PRODUCT_STORYTABLE.STORY_OPENED_BY.eq(t.getStoryOpenedBy()),
+						PRODUCT_STORYTABLE.STORY_OPENED_DATE.eq(t.getStoryOpenedDate()),
+						PRODUCT_STORYTABLE.STORY_ASSIGNED_TO.eq(t.getStoryAssignedTo()),
+						PRODUCT_STORYTABLE.STORY_ASSIGNED_DATE.eq(t.getStoryAssignedDate()),
+						PRODUCT_STORYTABLE.STORY_LAST_EDITED_BY.eq(t.getStoryLastEditedBy()),
+						PRODUCT_STORYTABLE.STORY_LAST_EDITED_DATE.eq(t.getStoryLastEditedDate()),
+						PRODUCT_STORYTABLE.STORY_REVIEWED_BY.eq(t.getStoryReviewedBy()),
+						PRODUCT_STORYTABLE.STORY_REVIEWED_DATE.eq(t.getStoryReviewedDate()),
+						PRODUCT_STORYTABLE.STORY_CLOSED_BY.eq(t.getStoryClosedBy()),
+						PRODUCT_STORYTABLE.STORY_CLOSED_DATE.eq(t.getStoryClosedDate()),
+						PRODUCT_STORYTABLE.STORY_CLOSED_REASON.eq(t.getStoryClosedReason()),
+						PRODUCT_STORYTABLE.TO_BUG.eq(t.getToBug()),
+						PRODUCT_STORYTABLE.STORY_LINK_STORIES.eq(t.getStoryLinkStories()),
+						PRODUCT_STORYTABLE.STORY_CHILD_STORIES.eq(t.getStoryChildStories()),
+						PRODUCT_STORYTABLE.STORY_DUPLICATE_STORY.eq(t.getStoryDuplicateStory()),
+						PRODUCT_STORYTABLE.STORY_VERSION.eq(t.getStoryVersion()),
+						PRODUCT_STORYTABLE.BUILD_ID.eq(t.getBuildId()),
+						PRODUCT_STORYTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()),
+						PRODUCT_STORYTABLE.DELETED.eq(t.getDeleted())
+				));
 				return addOrderByElements(select, orderBys);
 			}
 		});

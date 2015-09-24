@@ -6,10 +6,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.quality.biz.inter.TestCaseManager;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
+import org.tinygroup.tinysqldsl.Pager;
 
+/**
+ * Created by chenpeng15668 on 2015-9-24
+ */
 @Service
 @Transactional
 public class TestCaseManagerImpl implements TestCaseManager {
@@ -53,5 +59,13 @@ public class TestCaseManagerImpl implements TestCaseManager {
 			testCase.setDeleted(QualityTestCase.DELETE_YES);
 		}
 		return testcasedao.batchUpdate(testcases);
+	}
+	
+	public Pager<QualityTestCase> findPager(Integer start,Integer limit,QualityTestCase testcase,String sortName,boolean asc){
+		if(StringUtil.isBlank(sortName)){
+			return testcasedao.queryPager(start, limit, testcase);
+		}
+		OrderBy order = new OrderBy(sortName, asc);
+		return testcasedao.queryPager(start, limit, testcase, order);
 	}
 }
