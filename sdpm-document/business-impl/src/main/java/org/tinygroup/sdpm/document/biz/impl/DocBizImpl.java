@@ -47,7 +47,7 @@ public class DocBizImpl implements DocBiz {
 		doc.setDocDeleted("N");
 		doc.setDocViews(0);
 		Doc temp = docdao.add(doc);
-		//历史记录操作
+		//历史记录操作，如果temp返回的不行，那就用doc就好
 		his.setDocId(temp.getDocId());his.setRecTime(new Date());his.setRecWho(temp.getDocAddedBy());
 		hisdocdao.add(his);
 		
@@ -120,7 +120,7 @@ public class DocBizImpl implements DocBiz {
 
 	public List<Historydoc> docHistory(Integer docid) {
 		// 这个很重要了，显示历史操作数据的，涵盖操作时间和责任人。
-		return null;//hisdocdao.getWithSameDocId(docid);
+		return hisdocdao.getEditHistory(docid);
 	}
 
 

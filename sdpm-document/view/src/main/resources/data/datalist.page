@@ -9,14 +9,15 @@
 #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(52)
-#for(var:[1..pagesize])
+##for(var:[1..pagesize])
+#foreach(l:docpager.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="../document/doc-view.page">${page}</a>#end
-	#@td()<a href="../document/doc-view.page">文档标题${page}</a>#end
-	#@td()网页（类型）#end
-	#@td()阿炉添加#end
-	#@td()2015/03/25 21:49#end
+	#@td()<a href="../document/doc-view.page">${l?.getDocId}</a>#end
+	#@td()<a href="../document/doc-view.page">${l?.getDocTitle()}</a>#end
+	#@td()${l?.getDocType()}#end
+	#@td()${l?.getDocAddedBy()}#end
+	#@td()${l?.getDocAddedDate()}#end
 	 #@td()
 	 	#foreach(m:menuManager.getScopeMenus("doc-op"))
 			#if(m.id != "docdelete")

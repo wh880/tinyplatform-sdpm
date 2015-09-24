@@ -21,8 +21,9 @@ public interface DocBiz {
 	public List<Doc> getDocByEntity(Doc doc);
 	public DocLib getDocLibById(Integer key);
 	public List<Historydoc> docHistory(Integer docid);
-	//查询后分页吧~
+	//查询后分页吧~//可以排序OrderBy id asc
 	public Pager<Doc> queryItemWithPage(Integer start,Integer limited,Doc doc);
+	//public Pager<Historydoc> queryHisItem(Integer docid);
 	public int batchDelDocByIds(Integer...keys);
 
 }
