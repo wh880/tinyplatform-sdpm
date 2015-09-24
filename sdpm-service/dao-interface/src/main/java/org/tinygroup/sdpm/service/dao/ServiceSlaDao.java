@@ -23,4 +23,6 @@ import java.util.List;
 
 public interface ServiceSlaDao extends BaseDao<ServiceSla, Integer> {
     List<ServiceSla> getListByClientId(Integer clientId);
+
+    Integer softDelete(Integer id);
 }
