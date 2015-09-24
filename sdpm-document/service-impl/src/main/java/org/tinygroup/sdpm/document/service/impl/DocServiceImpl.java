@@ -55,15 +55,15 @@ public class DocServiceImpl implements DocService{
 		return docbiz.getDocLibById(id);
 	}
 	
-	public List<Historydoc> getEditRecord(Integer docid)
-	{
-		//获取历史记录
-		//取数据
-		//List<Historydoc> list = docbiz.docHistory(docid);
-		//for(int i=list.size();i>=0;i--){
-		//list.get(i).getRecTime();list.get(i).getRecWho();}
-		return docbiz.docHistory(docid);
-	}
+//	public List<Historydoc> getEditRecord(Integer docid)
+//	{
+//		//获取历史记录
+//		//取数据
+//		//List<Historydoc> list = docbiz.docHistory(docid);
+//		//for(int i=list.size();i>=0;i--){
+//		//list.get(i).getRecTime();list.get(i).getRecWho();}
+//		return docbiz.docHistory(docid);
+//	}
 
 	public List<Doc> findDocByDocClass(Doc doc) {
 		// 

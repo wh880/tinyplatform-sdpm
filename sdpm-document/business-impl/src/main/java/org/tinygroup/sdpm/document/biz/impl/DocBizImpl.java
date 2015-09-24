@@ -3,6 +3,11 @@ package org.tinygroup.sdpm.document.biz.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.dao.DocDao;
@@ -22,12 +27,15 @@ import org.tinygroup.tinysqldsl.Pager;
  * @date 2015/09/21
  * @author alu
  */
+@Service
+@Transactional
 public class DocBizImpl implements DocBiz {
 	//
+	@Autowired
 	private DocDao docdao;
+	@Autowired
 	private DocLibDao doclibdao;
-	private HistorydocDao hisdocdao;
-	private Historydoc his = null;
+	
 
 	public DocLib addDocLib(DocLib doclib) {
 		// 添加文档库
@@ -48,8 +56,8 @@ public class DocBizImpl implements DocBiz {
 		doc.setDocViews(0);
 		Doc temp = docdao.add(doc);
 		//历史记录操作，如果temp返回的不行，那就用doc就好
-		his.setDocId(temp.getDocId());his.setRecTime(new Date());his.setRecWho(temp.getDocAddedBy());
-		hisdocdao.add(his);
+//		his.setDocId(temp.getDocId());his.setRecTime(new Date());his.setRecWho(temp.getDocAddedBy());
+//		hisdocdao.add(his);
 		
 		return temp;
 	}
@@ -62,8 +70,8 @@ public class DocBizImpl implements DocBiz {
 		doc.setDocEditedDate(new Date());
 		
 		//历史记录操作
-		his.setDocId(doc.getDocId());his.setRecTime(doc.getDocEditedDate());his.setRecWho(doc.getDocEditedBy());
-		hisdocdao.add(his);
+//		his.setDocId(doc.getDocId());his.setRecTime(doc.getDocEditedDate());his.setRecWho(doc.getDocEditedBy());
+//		hisdocdao.add(his);
 		return docdao.edit(doc);
 	}
 
@@ -118,10 +126,10 @@ public class DocBizImpl implements DocBiz {
 		return docdao.deleteByKeys(keys);
 	}
 
-	public List<Historydoc> docHistory(Integer docid) {
-		// 这个很重要了，显示历史操作数据的，涵盖操作时间和责任人。
-		return hisdocdao.getEditHistory(docid);
-	}
+//	public List<Historydoc> docHistory(Integer docid) {
+//		// 这个很重要了，显示历史操作数据的，涵盖操作时间和责任人。
+//		return hisdocdao.getEditHistory(docid);
+//	}
 
 
 }

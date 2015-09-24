@@ -25,7 +25,7 @@ public interface DocService {
 	//find
 	public Doc findDocById(Integer id);
 	//文档操作记录
-	public List<Historydoc> getEditRecord(Integer docid);
+//	public List<Historydoc> getEditRecord(Integer docid);
 	public DocLib findDoclibById(Integer id);
 	//list
 	public List<Doc> findDocByDocClass(Doc doc);
