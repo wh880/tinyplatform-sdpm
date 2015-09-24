@@ -12,10 +12,8 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.dao.DocDao;
 import org.tinygroup.sdpm.document.dao.DocLibDao;
-import org.tinygroup.sdpm.document.dao.HistorydocDao;
 import org.tinygroup.sdpm.document.dao.pojo.Doc;
 import org.tinygroup.sdpm.document.dao.pojo.DocLib;
-import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
 import org.tinygroup.tinysqldsl.Pager;
 
 /**
@@ -54,12 +52,8 @@ public class DocBizImpl implements DocBiz {
 		doc.setDocEditedBy(doc.getDocAddedBy());
 		doc.setDocDeleted("N");
 		doc.setDocViews(0);
-		Doc temp = docdao.add(doc);
-		//历史记录操作，如果temp返回的不行，那就用doc就好
-//		his.setDocId(temp.getDocId());his.setRecTime(new Date());his.setRecWho(temp.getDocAddedBy());
-//		hisdocdao.add(his);
+		return docdao.add(doc);
 		
-		return temp;
 	}
 
 	public int updtDoc(Doc doc) {
@@ -68,10 +62,6 @@ public class DocBizImpl implements DocBiz {
 		doc.setDocAddedDate(docdao.getByKey(doc.getDocId()).getDocAddedDate());
 		doc.setDocDeleted(docdao.getByKey(doc.getDocId()).getDocDeleted());
 		doc.setDocEditedDate(new Date());
-		
-		//历史记录操作
-//		his.setDocId(doc.getDocId());his.setRecTime(doc.getDocEditedDate());his.setRecWho(doc.getDocEditedBy());
-//		hisdocdao.add(his);
 		return docdao.edit(doc);
 	}
 
@@ -125,11 +115,6 @@ public class DocBizImpl implements DocBiz {
 		// 
 		return docdao.deleteByKeys(keys);
 	}
-
-//	public List<Historydoc> docHistory(Integer docid) {
-//		// 这个很重要了，显示历史操作数据的，涵盖操作时间和责任人。
-//		return hisdocdao.getEditHistory(docid);
-//	}
 
 
 }
