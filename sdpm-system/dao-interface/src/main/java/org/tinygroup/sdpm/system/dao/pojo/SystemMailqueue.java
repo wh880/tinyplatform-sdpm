@@ -16,14 +16,13 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 邮件队列
  * 
  */
-public class SystemMailqueue implements Serializable{
+public class SystemMailqueue {
 
 	/** 
 	 * 邮件队列ID

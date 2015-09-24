@@ -37,8 +37,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.SystemActionDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -51,16 +49,16 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 @Repository
-@LogClass("action")
+
 public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActionDao {
-	@LogMethod("add")
+
 	public SystemAction add(SystemAction systemAction) {
 		return getDslTemplate().insertAndReturnKey(systemAction, new InsertGenerateCallback<SystemAction>() {
 			public Insert generate(SystemAction t) {
 				Insert insert = insertInto(SYSTEM_ACTIONTABLE).values(
 					SYSTEM_ACTIONTABLE.ACTION_ID.value(t.getActionId()),
-					SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.value(t.getActionObjectType()),
-					SYSTEM_ACTIONTABLE.ACTION_OBJECTID.value(t.getActionObjectID()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.value(t.getActionObjectType()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.value(t.getActionObjectId()),
 					SYSTEM_ACTIONTABLE.ACTION_PROJECT.value(t.getActionProject()),
 					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.value(t.getActionProduct()),
 					SYSTEM_ACTIONTABLE.ACTION_ACTOR.value(t.getActionActor()),
@@ -81,8 +79,8 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 		return getDslTemplate().update(systemAction, new UpdateGenerateCallback<SystemAction>() {
 			public Update generate(SystemAction t) {
 				Update update = update(SYSTEM_ACTIONTABLE).set(
-					SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.value(t.getActionObjectType()),
-					SYSTEM_ACTIONTABLE.ACTION_OBJECTID.value(t.getActionObjectID()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.value(t.getActionObjectType()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.value(t.getActionObjectId()),
 					SYSTEM_ACTIONTABLE.ACTION_PROJECT.value(t.getActionProject()),
 					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.value(t.getActionProduct()),
 					SYSTEM_ACTIONTABLE.ACTION_ACTOR.value(t.getActionActor()),
@@ -138,8 +136,8 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 			public Select generate(SystemAction t) {
 				Select select = selectFrom(SYSTEM_ACTIONTABLE).where(
 				and(
-					SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.eq(t.getActionObjectType()),
-					SYSTEM_ACTIONTABLE.ACTION_OBJECTID.eq(t.getActionObjectID()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(t.getActionObjectType()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(t.getActionObjectId()),
 					SYSTEM_ACTIONTABLE.ACTION_PROJECT.eq(t.getActionProject()),
 					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.eq(t.getActionProduct()),
 					SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(t.getActionActor()),
@@ -162,8 +160,8 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 			public Select generate(SystemAction t) {
 				Select select = MysqlSelect.selectFrom(SYSTEM_ACTIONTABLE).where(
 				and(
-					SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.eq(t.getActionObjectType()),
-					SYSTEM_ACTIONTABLE.ACTION_OBJECTID.eq(t.getActionObjectID()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(t.getActionObjectType()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(t.getActionObjectId()),
 					SYSTEM_ACTIONTABLE.ACTION_PROJECT.eq(t.getActionProject()),
 					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.eq(t.getActionProduct()),
 					SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(t.getActionActor()),
@@ -185,8 +183,8 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 
 			public Insert generate() {
 				return insertInto(SYSTEM_ACTIONTABLE).values(
-					SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.value(new JdbcNamedParameter("actionObjectType")),
-					SYSTEM_ACTIONTABLE.ACTION_OBJECTID.value(new JdbcNamedParameter("actionObjectID")),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.value(new JdbcNamedParameter("actionObjectType")),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.value(new JdbcNamedParameter("actionObjectId")),
 					SYSTEM_ACTIONTABLE.ACTION_PROJECT.value(new JdbcNamedParameter("actionProject")),
 					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.value(new JdbcNamedParameter("actionProduct")),
 					SYSTEM_ACTIONTABLE.ACTION_ACTOR.value(new JdbcNamedParameter("actionActor")),
@@ -211,8 +209,8 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 
 			public Update generate() {
 				return update(SYSTEM_ACTIONTABLE).set(
-					SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.value(new JdbcNamedParameter("actionObjectType")),
-					SYSTEM_ACTIONTABLE.ACTION_OBJECTID.value(new JdbcNamedParameter("actionObjectID")),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.value(new JdbcNamedParameter("actionObjectType")),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.value(new JdbcNamedParameter("actionObjectId")),
 					SYSTEM_ACTIONTABLE.ACTION_PROJECT.value(new JdbcNamedParameter("actionProject")),
 					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.value(new JdbcNamedParameter("actionProduct")),
 					SYSTEM_ACTIONTABLE.ACTION_ACTOR.value(new JdbcNamedParameter("actionActor")),
@@ -235,8 +233,8 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 			public Delete generate() {
 				return delete(SYSTEM_ACTIONTABLE).where(and(
 				SYSTEM_ACTIONTABLE.ACTION_ID.eq(new JdbcNamedParameter("actionId")),
-				SYSTEM_ACTIONTABLE.ACTION_OBJECTTYPE.eq(new JdbcNamedParameter("actionObjectType")),
-				SYSTEM_ACTIONTABLE.ACTION_OBJECTID.eq(new JdbcNamedParameter("actionObjectID")),
+				SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(new JdbcNamedParameter("actionObjectType")),
+				SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(new JdbcNamedParameter("actionObjectId")),
 				SYSTEM_ACTIONTABLE.ACTION_PROJECT.eq(new JdbcNamedParameter("actionProject")),
 				SYSTEM_ACTIONTABLE.ACTION_PRODUCT.eq(new JdbcNamedParameter("actionProduct")),
 				SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(new JdbcNamedParameter("actionActor")),

@@ -16,14 +16,13 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 系统日志表
  * 
  */
-public class SystemAction implements Serializable{
+public class SystemAction {
 
 	/** 
 	 * 系统日志ID
@@ -41,7 +40,7 @@ public class SystemAction implements Serializable{
 	 * 对象ID
 	 * 
 	 */
-	private Integer actionObjectID;
+	private Integer actionObjectId;
 
 	/** 
 	 * 所属项目
@@ -108,12 +107,12 @@ public class SystemAction implements Serializable{
 		return actionObjectType;
 	}
 
-	public void setActionObjectID(Integer actionObjectID){
-		this. actionObjectID = actionObjectID;
+	public void setActionObjectId(Integer actionObjectId){
+		this. actionObjectId = actionObjectId;
 	}
 
-	public Integer getActionObjectID(){
-		return actionObjectID;
+	public Integer getActionObjectId(){
+		return actionObjectId;
 	}
 
 	public void setActionProject(Integer actionProject){

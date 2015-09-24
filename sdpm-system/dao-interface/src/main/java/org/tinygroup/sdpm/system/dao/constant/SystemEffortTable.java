@@ -37,13 +37,13 @@ public class SystemEffortTable extends Table {
 	 * 日志对象
 	 * 
 	 */
-	public final Column EFFORT_OBJECTTYPE = new Column(this, "effort_objectType");
+	public final Column EFFORT_OBJECT_TYPE = new Column(this, "effort_object_type");
 
 	/** 
 	 * 对象ID
 	 * 
 	 */
-	public final Column EFFORT_OBJECTID = new Column(this, "effort_objectID");
+	public final Column EFFORT_OBJECT_ID = new Column(this, "effort_object_id");
 
 	/** 
 	 * 所属产品
