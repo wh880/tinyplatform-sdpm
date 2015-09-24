@@ -28,7 +28,6 @@ public class OrgUser implements Serializable {
 	public static String DELETE_NO = "0";
 	/**
 	 * 用户编号
-	 *
 	 */
 	private String orgUserId;
 	/**
@@ -166,9 +165,9 @@ public class OrgUser implements Serializable {
 	 *
 	 */
 	private String orgUserDeleted;
-
 	public OrgUser() {
 		setOrgUserDeleted(DELETE_NO);
+
 	}
 
 	public String getOrgUserId() {
