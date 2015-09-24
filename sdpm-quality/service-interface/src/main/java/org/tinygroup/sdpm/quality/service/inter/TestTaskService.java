@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.quality.service.inter;
 import java.util.List;
 
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface TestTaskService {
 	/**
@@ -29,4 +30,5 @@ public interface TestTaskService {
 	 * @return
 	 */
 	int deleteById(int id);
+	Pager<QualityTestTask> findTestTaskPager(Integer start,Integer limit,QualityTestTask testtask,String sortName,boolean asc);
 }
