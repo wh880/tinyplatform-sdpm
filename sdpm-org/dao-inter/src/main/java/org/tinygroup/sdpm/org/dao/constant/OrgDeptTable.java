@@ -69,7 +69,7 @@ public class OrgDeptTable extends Table {
 	 */
 	public final Column ORG_DEPT_POSITION = new Column(this, "org_dept_position");
 
-	/**
+	/** 
 	 * 负责人 
 	 * 
 	 */
