@@ -4,7 +4,7 @@
 
 ###searchZtreeInit("treeDemo" "/data/tree/dict.js" "#test")
 #macro ztreeClick()
-	loadURL('#link("/system/dict/tree"+"moduleId=1")', $("#tBox"));
+	loadURL('#link("/system/dict/tree?moduleId=1")', $("#tBox"));
 #end
 
 ###@h2()${activeTitle}#end
