@@ -4,7 +4,7 @@
 
 ###searchZtreeInit("treeDemo" "/data/tree/dict.js" "#test")
 #macro ztreeClick()
-	loadURL('#link("/system/page/dictionaries/dictitem_list.pagelet")', $("#tBox"));
+	loadURL('#link("/system/dict/tree"+"moduleId=1")', $("#tBox"));
 #end
 
 ###@h2()${activeTitle}#end
@@ -12,7 +12,7 @@
 	#@divDataTablebox()
 	    #@tableHeaderBar()${activeTitle}#end
 		#@leftTreeCol()
-			#@searchZtreeWithInit("treeDemo" "height:454px;" "/system/page/dictionaries/data/tree/dict.js")
+			#@searchZtreeWithInit("treeDemo" "height:454px;" "/system/module/tree")
 			#end
 		#end
     	#@tableBox("tBox")
