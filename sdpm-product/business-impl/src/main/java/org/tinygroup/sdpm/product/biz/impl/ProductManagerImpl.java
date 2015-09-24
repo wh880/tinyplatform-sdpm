@@ -19,11 +19,17 @@ public class ProductManagerImpl implements ProductManager{
 	private ProductDao productDao;
 	
 	public Product add(Product product) {
-
+		
+		if(1==product.getAcl()){
+			product.setProductWhiteList("");
+		}
 		return productDao.add(product);
 	}
 
 	public int update(Product product) {
+		if(1==product.getAcl()){
+			product.setProductWhiteList("");
+		}
 
 		return productDao.edit(product);
 	}
