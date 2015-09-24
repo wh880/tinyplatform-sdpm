@@ -37,10 +37,7 @@ public class SlaManagerImpl implements SlaManager {
     }
 
     public Integer delete(Integer id) {
-        ServiceSla sla = new ServiceSla();
-        sla.setSlaId(id);
-        sla.setDeleted(id);
-        return slaDao.edit(sla);
+        return slaDao.softDelete(id);
     }
 
     public Integer deleteBatch(Integer id) {
