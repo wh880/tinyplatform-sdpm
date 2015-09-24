@@ -16,7 +16,21 @@ public interface MenuManager {
 
     void removeMenu(String menuId);
 
+    /**
+     * 获取一级子菜单
+     *
+     * @param parentId
+     * @return
+     */
     List<Menu> getChildMenus(String parentId);
+
+    /**
+     * 获取所有子菜单
+     *
+     * @param parentId
+     * @return
+     */
+    List<Menu> getAllChildMenus(String parentId);
 
     List<Menu> getScopeMenus(String scope);
 

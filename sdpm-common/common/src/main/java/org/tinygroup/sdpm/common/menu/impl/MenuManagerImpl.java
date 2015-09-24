@@ -90,15 +90,14 @@ public class MenuManagerImpl implements MenuManager {
     }
 
     public List<Menu> getChildMenus(String parentId) {
-        Menu menu = menuMap.get(parentId);
-        List<Menu> childMenus = null;
-        if (menu != null) {
-            childMenus = menu.getChildMenus();
-            if (childMenus != null) {
-                Collections.sort(childMenus);
-            }
-        }
+        List<Menu> childMenus = getChildren(parentId);
         return findShow(childMenus);
+    }
+
+    public List<Menu> getAllChildMenus(String parentId) {
+        List<Menu> childMenus = new ArrayList<Menu>();
+        getChildren(parentId, childMenus);
+        return childMenus;
     }
 
     public List<Menu> getScopeMenus(String scope) {
@@ -125,6 +124,44 @@ public class MenuManagerImpl implements MenuManager {
     public List<Menu> getMenus() {
         return new ArrayList<Menu>(menuMap.values());
     }
+
+    /**
+     * 获取某一级的所有子菜单，并进行排序
+     *
+     * @param parentId
+     * @return
+     */
+    private List<Menu> getChildren(String parentId) {
+        Menu menu = menuMap.get(parentId);
+        List<Menu> childMenus = null;
+        if (menu != null) {
+            childMenus = menu.getChildMenus();
+            if (childMenus != null) {
+                Collections.sort(childMenus);
+            }
+        }
+        return childMenus;
+    }
+
+    /**
+     * 递归调用找出子菜单。
+     *
+     * @param parentId
+     * @return
+     */
+    private void getChildren(String parentId, List<Menu> childList) {
+        Menu menu = menuMap.get(parentId);
+        if (menu != null) {
+            List<Menu> childMenus = menu.getChildMenus();
+            if (childMenus != null) {
+                childList.addAll(childMenus);
+                for (Menu m : childMenus) {
+                    getChildren(m.getId(), childList);
+                }
+            }
+        }
+    }
+
 
     private List<Menu> findShow(List<Menu> list) {
         Predicate<Menu> predicate = new Predicate<Menu>() {
