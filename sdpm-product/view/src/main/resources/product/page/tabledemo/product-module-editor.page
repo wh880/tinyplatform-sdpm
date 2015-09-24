@@ -1,9 +1,32 @@
 
+#macro Tcheckboxes(name checkedValue mapInfo)
+#bodyContent
+<script type="text/javascript">
+$(function(){
+	var checkvalstr="${checkedValue}";
+	var checkval=checkvalstr.split(",");
+	$("input[name=${name}]").each(function(e){
+		if(checkval.indexOf(this.value)>-1){
+			this.checked=true;
+		}else{
+			this.checked=false;
+		}
+	});
+})
+</script>
+#end
+
+#macro Tcheckbox(value)
+	#set(checkId=(mapInfo?.id)?:fmt("check%d",rand()))
+	<div class="radio-box"><input type="checkbox" name="${name}" class="icheckbox icheckbox-blue #getmapVal("class",mapInfo)" id="${checkId}" value="${value}" #getmapInfo(mapInfo)/><label for="${checkId}">#bodyContent</label></div>
+#end
+
+
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-overview",sonitem="<li>"+"概况"+"</li>")
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/update" "post" {"class":"test"})
 <div style="width:100%;float:center" class="pageleftpart">
    <div class="infoContent">
         <p class="titleName">编辑</p>
@@ -109,14 +132,19 @@
     #@elementItem("whitelistBox" product?.acl!=1?'hidden':'')
         	#@colLabel()分组白名单#end
 			#@skinMinimal()
-				#labelCheckbox(ckId="whitelistBox" labelText="管理员" ckChecked="checked")
-				#labelCheckbox(ckId="whitelistBox" labelText="研发")
-				#labelCheckbox(ckId="whitelistBox" labelText="测试")
-				#labelCheckbox(ckId="whitelistBox" labelText="项目经理")
-				#labelCheckbox(ckId="whitelistBox" labelText="产品经理")
-				#labelCheckbox(ckId="whitelistBox" labelText="研发主管")
-				#labelCheckbox(ckId="whitelistBox" labelText="产品主管")
-				#labelCheckbox(ckId="whitelistBox" labelText="测试主管")
+				#@Tcheckboxes("productWhiteList" product?.productWhiteList)
+					#@Tcheckbox("admin")管理员#end
+					#@Tcheckbox("develop")研发#end
+					#@Tcheckbox("test")测试#end
+					#@Tcheckbox("projectManager")项目经理#end
+					#@Tcheckbox("productManager")产品经理#end
+					#@Tcheckbox("developSupervisor")研发主管#end
+					#@Tcheckbox("productSupervisor")产品主管#end
+					#@Tcheckbox("testSupervisor")测试主管#end
+				#end
+				
+				
+				
 			#end
         #@validateDiv("col-2")#end
       #end
@@ -147,3 +175,4 @@ function setWhite(acl)
     acl == '1' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
 }
 </script>
+
