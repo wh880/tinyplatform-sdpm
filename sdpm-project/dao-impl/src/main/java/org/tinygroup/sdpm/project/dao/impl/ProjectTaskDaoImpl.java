@@ -38,6 +38,7 @@ import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 //@LogClass("task")
@@ -168,6 +169,51 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
 			public Select generate(ProjectTask t) {
 				Select select = selectFrom(PROJECT_TASKTABLE).where(
 						and(
+								PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
+								PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
+								PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
+								PROJECT_TASKTABLE.TASK_FROM_BUG.eq(t.getTaskFromBug()),
+								PROJECT_TASKTABLE.TASK_NAME.eq(t.getTaskName()),
+								PROJECT_TASKTABLE.TASK_TYPE.eq(t.getTaskType()),
+								PROJECT_TASKTABLE.TASK_PRI.eq(t.getTaskPri()),
+								PROJECT_TASKTABLE.TASK_ESTIMATE.eq(t.getTaskEstimate()),
+								PROJECT_TASKTABLE.TASK_CONSUMED.eq(t.getTaskConsumed()),
+								PROJECT_TASKTABLE.TASK_LEFT.eq(t.getTaskLeft()),
+								PROJECT_TASKTABLE.TASK_DEAD_LINE.eq(t.getTaskDeadLine()),
+								PROJECT_TASKTABLE.TASK_STATUS.eq(t.getTaskStatus()),
+								PROJECT_TASKTABLE.TASK_MAILTO.eq(t.getTaskMailto()),
+								PROJECT_TASKTABLE.TASK_DESC.eq(t.getTaskDesc()),
+								PROJECT_TASKTABLE.TASK_OPEN_BY.eq(t.getTaskOpenBy()),
+								PROJECT_TASKTABLE.TASK_OPENED_DATE.eq(t.getTaskOpenedDate()),
+								PROJECT_TASKTABLE.TASK_ASSIGNED_TO.eq(t.getTaskAssignedTo()),
+								PROJECT_TASKTABLE.TASK_ASSIGNED_DATE.eq(t.getTaskAssignedDate()),
+								PROJECT_TASKTABLE.TASK_EST_STARED.eq(t.getTaskEstStared()),
+								PROJECT_TASKTABLE.TASK_REAL_STARTED.eq(t.getTaskRealStarted()),
+								PROJECT_TASKTABLE.TASK_FINISHED_BY.eq(t.getTaskFinishedBy()),
+								PROJECT_TASKTABLE.TASK_FINISHED_DATE.eq(t.getTaskFinishedDate()),
+								PROJECT_TASKTABLE.TASK_CANCELED_BY.eq(t.getTaskCanceledBy()),
+								PROJECT_TASKTABLE.TASK_CANCELED_DATE.eq(t.getTaskCanceledDate()),
+								PROJECT_TASKTABLE.TASK_CLOSED_BY.eq(t.getTaskClosedBy()),
+								PROJECT_TASKTABLE.TASK_CLOSE_DATE.eq(t.getTaskCloseDate()),
+								PROJECT_TASKTABLE.TASK_CLOSED_REASON.eq(t.getTaskClosedReason()),
+								PROJECT_TASKTABLE.TASK_LAST_EDITED_BY.eq(t.getTaskLastEditedBy()),
+								PROJECT_TASKTABLE.TASK_LAST_EDITED_DATE.eq(t.getTaskLastEditedDate()),
+								PROJECT_TASKTABLE.TASK_DELETED.eq(t.getTaskDeleted())));
+				return addOrderByElements(select, orderBies);
+			}
+		});
+	}
+
+	public Pager<ProjectTask> queryPagerByStuta(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderBies) {
+		if (projectTask == null) {
+			projectTask = new ProjectTask();
+		}
+		return getDslTemplate().queryPager(start, limit, projectTask, false, new SelectGenerateCallback<ProjectTask>() {
+
+			public Select generate(ProjectTask t) {
+				Select select = MysqlSelect.selectFrom(PROJECT_TASKTABLE).where(
+						and(
+								fragmentCondition(condition),
 								PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
 								PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
 								PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
