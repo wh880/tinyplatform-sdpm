@@ -38,8 +38,6 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -51,11 +49,9 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
-@LogClass("productPlan")
 @Repository
 public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlanDao {
 
-	@LogMethod("add")
 	public ProductPlan add(ProductPlan productPlan) {
 		return getDslTemplate().insertAndReturnKey(productPlan, new InsertGenerateCallback<ProductPlan>() {
 			public Insert generate(ProductPlan t) {
@@ -65,15 +61,14 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 					PRODUCT_PLANTABLE.PRODUCT_ID.value(t.getProductId()),
 					PRODUCT_PLANTABLE.PLAN_NAME.value(t.getPlanName()),
 					PRODUCT_PLANTABLE.PLAN_SPEC.value(t.getPlanSpec()),
-					PRODUCT_PLANTABLE.PLAN_BEGINDATE.value(t.getPlanBeginDate()),
-					PRODUCT_PLANTABLE.PLAN_ENDDATE.value(t.getPlanEndDate()),
+					PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.value(t.getPlanBeginDate()),
+					PRODUCT_PLANTABLE.PLAN_END_DATE.value(t.getPlanEndDate()),
 					PRODUCT_PLANTABLE.DELETED.value(t.getDeleted()));
 				return insert;
 			}
 		});
 	}
 
-	@LogMethod("edit")
 	public int edit(ProductPlan productPlan) {
 		if(productPlan == null || productPlan.getPlanId() == null){
 			return 0;
@@ -85,8 +80,8 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 					PRODUCT_PLANTABLE.PRODUCT_ID.value(t.getProductId()),
 					PRODUCT_PLANTABLE.PLAN_NAME.value(t.getPlanName()),
 					PRODUCT_PLANTABLE.PLAN_SPEC.value(t.getPlanSpec()),
-					PRODUCT_PLANTABLE.PLAN_BEGINDATE.value(t.getPlanBeginDate()),
-					PRODUCT_PLANTABLE.PLAN_ENDDATE.value(t.getPlanEndDate()),
+					PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.value(t.getPlanBeginDate()),
+					PRODUCT_PLANTABLE.PLAN_END_DATE.value(t.getPlanEndDate()),
 					PRODUCT_PLANTABLE.DELETED.value(t.getDeleted())).where(
 					PRODUCT_PLANTABLE.PLAN_ID.eq(t.getPlanId()));
 				return update;
@@ -94,7 +89,6 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 		});
 	}
 
-	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -106,7 +100,6 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 		});
 	}
 
-	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -127,7 +120,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 		});
 	}
 
-	public List<ProductPlan> query(ProductPlan productPlan ,final OrderBy... orderBies) {
+	public List<ProductPlan> query(ProductPlan productPlan ,final OrderBy... orderArgs) {
 		if(productPlan==null){
 			productPlan=new ProductPlan();
 		}
@@ -141,15 +134,15 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 					PRODUCT_PLANTABLE.PRODUCT_ID.eq(t.getProductId()),
 					PRODUCT_PLANTABLE.PLAN_NAME.eq(t.getPlanName()),
 					PRODUCT_PLANTABLE.PLAN_SPEC.eq(t.getPlanSpec()),
-					PRODUCT_PLANTABLE.PLAN_BEGINDATE.eq(t.getPlanBeginDate()),
-					PRODUCT_PLANTABLE.PLAN_ENDDATE.eq(t.getPlanEndDate()),
+					PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.eq(t.getPlanBeginDate()),
+					PRODUCT_PLANTABLE.PLAN_END_DATE.eq(t.getPlanEndDate()),
 					PRODUCT_PLANTABLE.DELETED.eq(t.getDeleted())));
-		return addOrderByElements(select, orderBies);
+			return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
 
-	public Pager<ProductPlan> queryPager(int start,int limit ,ProductPlan productPlan ,final OrderBy... orderBies) {
+	public Pager<ProductPlan> queryPager(int start,int limit ,ProductPlan productPlan ,final OrderBy... orderArgs) {
 		if(productPlan==null){
 			productPlan=new ProductPlan();
 		}
@@ -162,10 +155,10 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 					PRODUCT_PLANTABLE.PRODUCT_ID.eq(t.getProductId()),
 					PRODUCT_PLANTABLE.PLAN_NAME.eq(t.getPlanName()),
 					PRODUCT_PLANTABLE.PLAN_SPEC.eq(t.getPlanSpec()),
-					PRODUCT_PLANTABLE.PLAN_BEGINDATE.eq(t.getPlanBeginDate()),
-					PRODUCT_PLANTABLE.PLAN_ENDDATE.eq(t.getPlanEndDate()),
+					PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.eq(t.getPlanBeginDate()),
+					PRODUCT_PLANTABLE.PLAN_END_DATE.eq(t.getPlanEndDate()),
 					PRODUCT_PLANTABLE.DELETED.eq(t.getDeleted())));
-		return addOrderByElements(select, orderBies);
+			return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
@@ -182,8 +175,8 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 					PRODUCT_PLANTABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
 					PRODUCT_PLANTABLE.PLAN_NAME.value(new JdbcNamedParameter("planName")),
 					PRODUCT_PLANTABLE.PLAN_SPEC.value(new JdbcNamedParameter("planSpec")),
-					PRODUCT_PLANTABLE.PLAN_BEGINDATE.value(new JdbcNamedParameter("planBeginDate")),
-					PRODUCT_PLANTABLE.PLAN_ENDDATE.value(new JdbcNamedParameter("planEndDate")),
+					PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.value(new JdbcNamedParameter("planBeginDate")),
+					PRODUCT_PLANTABLE.PLAN_END_DATE.value(new JdbcNamedParameter("planEndDate")),
 					PRODUCT_PLANTABLE.DELETED.value(new JdbcNamedParameter("deleted")));
 			}
 		});
@@ -193,7 +186,6 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 			return batchInsert(true ,productPlans);
 	}
 
-	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<ProductPlan> productPlans) {
 		if (CollectionUtil.isEmpty(productPlans)) {
 			return new int[0];
@@ -206,15 +198,14 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 					PRODUCT_PLANTABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
 					PRODUCT_PLANTABLE.PLAN_NAME.value(new JdbcNamedParameter("planName")),
 					PRODUCT_PLANTABLE.PLAN_SPEC.value(new JdbcNamedParameter("planSpec")),
-					PRODUCT_PLANTABLE.PLAN_BEGINDATE.value(new JdbcNamedParameter("planBeginDate")),
-					PRODUCT_PLANTABLE.PLAN_ENDDATE.value(new JdbcNamedParameter("planEndDate")),
+					PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.value(new JdbcNamedParameter("planBeginDate")),
+					PRODUCT_PLANTABLE.PLAN_END_DATE.value(new JdbcNamedParameter("planEndDate")),
 					PRODUCT_PLANTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
 				PRODUCT_PLANTABLE.PLAN_ID.eq(new JdbcNamedParameter("planId")));
 			}
 		});
 	}
 
-	@LogMethod("batchDelete")
 	public int[] batchDelete(List<ProductPlan> productPlans) {
 		if (CollectionUtil.isEmpty(productPlans)) {
 			return new int[0];
@@ -228,14 +219,13 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 				PRODUCT_PLANTABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId")),
 				PRODUCT_PLANTABLE.PLAN_NAME.eq(new JdbcNamedParameter("planName")),
 				PRODUCT_PLANTABLE.PLAN_SPEC.eq(new JdbcNamedParameter("planSpec")),
-				PRODUCT_PLANTABLE.PLAN_BEGINDATE.eq(new JdbcNamedParameter("planBeginDate")),
-				PRODUCT_PLANTABLE.PLAN_ENDDATE.eq(new JdbcNamedParameter("planEndDate")),
+				PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.eq(new JdbcNamedParameter("planBeginDate")),
+				PRODUCT_PLANTABLE.PLAN_END_DATE.eq(new JdbcNamedParameter("planEndDate")),
 				PRODUCT_PLANTABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
 			}
 		});
 	}
 
-	@LogMethod("addOrderByElements")
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {

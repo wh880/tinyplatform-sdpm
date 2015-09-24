@@ -32,7 +32,7 @@ public class ProductManagerImpl implements ProductManager{
 		
 		Product product = new Product();
 		product.setProductId(productId);
-		product.setDeleted(Product.DELETE_YES);
+		product.setDeleted(FieldUtil.DELETE_YES);
 		return productDao.edit(product);
 	}
 
