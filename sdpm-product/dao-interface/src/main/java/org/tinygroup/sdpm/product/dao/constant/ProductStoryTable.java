@@ -49,7 +49,7 @@ public class ProductStoryTable extends Table {
 	 * 父需求ID
 	 * 
 	 */
-	public final Column STORY_PARENTID = new Column(this, "story_parentId");
+	public final Column STORY_PARENT_ID = new Column(this, "story_parent_id");
 
 	/** 
 	 * 模块ID
@@ -80,7 +80,7 @@ public class ProductStoryTable extends Table {
 	 * 来源Bug
 	 * 
 	 */
-	public final Column STORY_FROMBUG = new Column(this, "story_fromBug");
+	public final Column STORY_FROM_BUG = new Column(this, "story_from_bug");
 
 	/** 
 	 * 需求标题
@@ -128,91 +128,91 @@ public class ProductStoryTable extends Table {
 	 * 由谁创建
 	 * 
 	 */
-	public final Column STORY_OPENEDBY = new Column(this, "story_openedBy");
+	public final Column STORY_OPENED_BY = new Column(this, "story_opened_by");
 
 	/** 
 	 * 创建日期
 	 * 
 	 */
-	public final Column STORY_OPENEDDATE = new Column(this, "story_openedDate");
+	public final Column STORY_OPENED_DATE = new Column(this, "story_opened_date");
 
 	/** 
 	 * 需求指派
 	 * 
 	 */
-	public final Column STORY_ASSIGNEDTO = new Column(this, "story_assignedTo");
+	public final Column STORY_ASSIGNED_TO = new Column(this, "story_assigned_to");
 
 	/** 
 	 * 需求指派日期
 	 * 
 	 */
-	public final Column STORY_ASSIGNEDDATE = new Column(this, "story_assignedDate");
+	public final Column STORY_ASSIGNED_DATE = new Column(this, "story_assigned_date");
 
 	/** 
 	 * 需求上次编辑者
 	 * 
 	 */
-	public final Column STORY_LASTEDITEDBY = new Column(this, "story_lastEditedBy");
+	public final Column STORY_LAST_EDITED_BY = new Column(this, "story_last_edited_by");
 
 	/** 
 	 * 需求上次编辑日期
 	 * 
 	 */
-	public final Column STORY_LASTEDITEDDATE = new Column(this, "story_lastEditedDate");
+	public final Column STORY_LAST_EDITED_DATE = new Column(this, "story_last_edited_date");
 
 	/** 
 	 * 需求审核人
 	 * 
 	 */
-	public final Column STORY_REVIEWEDBY = new Column(this, "story_reviewedBy");
+	public final Column STORY_REVIEWED_BY = new Column(this, "story_reviewed_by");
 
 	/** 
 	 * 需求审核日期
 	 * 
 	 */
-	public final Column STORY_REVIEWEDDATE = new Column(this, "story_reviewedDate");
+	public final Column STORY_REVIEWED_DATE = new Column(this, "story_reviewed_date");
 
 	/** 
 	 * 需求关闭者
 	 * 
 	 */
-	public final Column STORY_CLOSEDBY = new Column(this, "story_closedBy");
+	public final Column STORY_CLOSED_BY = new Column(this, "story_closed_by");
 
 	/** 
 	 * 需求关闭日期
 	 * 
 	 */
-	public final Column STORY_CLOSEDDATE = new Column(this, "story_closedDate");
+	public final Column STORY_CLOSED_DATE = new Column(this, "story_closed_date");
 
 	/** 
 	 * 需求关闭原因
 	 * 
 	 */
-	public final Column STORY_CLOSEDREASON = new Column(this, "story_closedReason");
+	public final Column STORY_CLOSED_REASON = new Column(this, "story_closed_reason");
 
 	/** 
 	 * 待定（关联bug）
 	 * 
 	 */
-	public final Column TOBUG = new Column(this, "toBug");
+	public final Column TO_BUG = new Column(this, "to_bug");
 
 	/** 
 	 * 关联需求
 	 * 
 	 */
-	public final Column STORY_LINKSTORIES = new Column(this, "story_linkStories");
+	public final Column STORY_LINK_STORIES = new Column(this, "story_link_stories");
 
 	/** 
 	 * 细分需求
 	 * 
 	 */
-	public final Column STORY_CHILDSTORIES = new Column(this, "story_childStories");
+	public final Column STORY_CHILD_STORIES = new Column(this, "story_child_stories");
 
 	/** 
 	 * 重复需求ID
 	 * 
 	 */
-	public final Column STORY_DUPLICATESTORY = new Column(this, "story_duplicateStory");
+	public final Column STORY_DUPLICATE_STORY = new Column(this, "story_duplicate_story");
 
 	/** 
 	 * 需求版本

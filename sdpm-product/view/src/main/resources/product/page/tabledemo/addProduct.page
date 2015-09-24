@@ -95,7 +95,7 @@
             #@colLabel()访问控制：#end
             #@skinMinimal("col-8")
 
-			<div>#@tinyRadio("acl" "0" "" {"onclick":"setWhite(this.value)"}) 默认设置(有项目视图权限，即可访问) #end</div>
+			<div>#@tinyRadio("acl" "0" "" {"checked":"checked","onclick":"setWhite(this.value)"}) 默认设置(有项目视图权限，即可访问) #end</div>
         	<div>#@tinyRadio("acl" "2" "" {"onclick":"setWhite(this.value)"}) 私有项目(只有项目团队成员才能访问) #end</div>
         	<div>#@tinyRadio("acl" "1" "" {"onclick":"setWhite(this.value)"}) 自定义白名单(团队成员和白名单的成员可以访问) #end</div>
 			
