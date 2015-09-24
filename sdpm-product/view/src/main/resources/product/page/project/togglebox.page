@@ -22,43 +22,45 @@
 ##operationbar start
     #@div(divClass="operationbar")
     <span class="f">
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" class="active_btn">未关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">全部需求</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">指派给我</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">由我创建</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">由我评审</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">由我关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">草稿</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">激活</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">已变更</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">待关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">已关闭</a>
-					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-				</span>
+        #foreach(m:menuManager.getScopeMenus("demand-state"))
+            #if(m.id=="notclosed")
+                <a href="${TINY_CONTEXT_PATH}${m.href}" class="active_btn">${m.name}</a>
+            #else
+                #if(m.id!="showsearchmore")
+                    <a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a>
+                #else
+                    <a href="${m.href}" id="${m.id}">#buttonIcon(iconClass="${m.icon}")${m.name}</a>
+
+                #end
+            #end
+        #end
+    </span>
+
+
 
 
     <span class="r">
         #foreach(m:menuManager.getScopeMenus("product-io"))
             #if(m.id=="product-demand-input")
                 #@aModal("#myModal" "导入" "600" "65" "btn-class"
-                    "/product/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")导入#end
-
+                    "/product/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")
+                    导入#end
             #else
-
                 #if(m.id=="product-demand-output")
                     #@buttonGroup()
-                        #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出  #@spanCaret()#end#end
+                        #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")
+                            导出  #@spanCaret()#end#end
                         #@ulDropdownMenu("downMenuSty")
                             <p>#@iconOperations(
-                                "#myModal" "" "导出" "400" "254"  "/product/page/tabledemo/product-export-data.pagelet"
+                                "#myModal" "" "导出" "400" "254"
+                                "/product/page/tabledemo/product-export-data.pagelet"
                                 "ml-5")
                                 &nbsp;导出数据#end</p>
-
                             #@iconOperations(
-                                "#myModal" "" "导出" "700" "64" "/product/page/tabledemo/product-export-template.pagelet"
+                                "#myModal" "" "导出" "700" "64"
+                                "/product/page/tabledemo/product-export-template.pagelet"
                                 "ml-5")
                                 &nbsp;导出模板#end
-
                         #end
                     #end
                 #else
@@ -108,67 +110,67 @@
                     #foreach(m:menuManager.getScopeMenus("product-oper"))
                         #if(m.id=="product-demand-operation")
                             #@buttonGroup()
-                            
-                               #@dropdownItempatent("dropdownSm" "btn-primary" "操作" "#")
-                         	
-                                #@ulDropdownMenu(dropdownMenuClass="multi-level")
-                                    #@dropdownsLi("dropdown-submenu")
-									#@dropdownA(""　"javascript:void(0);")指派给#end
-	                                        #@dropdownsUl("dropdown-menu")
-	                                            #@dropdownItem("javascript:void(0);")admin#end
-	                                            #@dropdownItem("javascript:void(0);")张三#end
-	                                            #@dropdownItem("javascript:void(0);")lisi#end
-	                                        #end
-	                                #end
 
-                                    #@dropdownsLi("dropdown-submenu")
-									#@dropdownA(""　"javascript:void(0);")阶段#end
-	                                        #@dropdownsUl("dropdown-menu")
-	                                            #@dropdownItem("javascript:void(0);")空#end
-	                                            #@dropdownItem("javascript:void(0);")未开始#end
-	                                            #@dropdownItem("javascript:void(0);")已计划#end
-	                                            #@dropdownItem("javascript:void(0);")已立项#end
-	                                            #@dropdownItem("javascript:void(0);")研发中#end
-	                                            #@dropdownItem("javascript:void(0);")完毕#end
-	                                            #@dropdownItem("javascript:void(0);")测试中#end
-	                                            #@dropdownItem("javascript:void(0);")测试完毕#end
-	                                            #@dropdownItem("javascript:void(0);")已验收#end
-	                                            #@dropdownItem("javascript:void(0);")已发布#end
-	                                        #end
-                                    #end
+                                #@dropdownItempatent("dropdownSm" "btn-primary" "操作" "#")
 
-                                    #@dropdownsLi("dropdown-submenu")
-									#@dropdownA(""　"javascript:void(0);")计划#end
-                                        #@dropdownsUl("dropdown-menu")
-                                            #@dropdownItem("javascript:void(0);")空#end
-                                            #@dropdownItem("javascript:void(0);")计划1#end
-                                            #@dropdownItem("javascript:void(0);")计划2#end
+                                    #@ulDropdownMenu(dropdownMenuClass="multi-level")
+                                        #@dropdownsLi("dropdown-submenu")
+                                            #@dropdownA(""　"javascript:void(0);")指派给#end
+                                            #@dropdownsUl("dropdown-menu")
+                                                #@dropdownItem("javascript:void(0);")admin#end
+                                                #@dropdownItem("javascript:void(0);")张三#end
+                                                #@dropdownItem("javascript:void(0);")lisi#end
+                                            #end
                                         #end
-                                    #end
 
-                                   #@dropdownsLi("dropdown-submenu")
-									#@dropdownA(""　"javascript:void(0);")评审#end
-                                         #@dropdownsUl("dropdown-menu")
-                                            #@dropdownItem("javascript:void(0);")确认通过#end
-                                            #@dropdownItem("javascript:void(0);")有待明确#end
-                                        #*		                		#@liDivider()<hr/>#end*#
-                                            #@dropdownsLi("dropdown-submenu")
-											#@dropdownA(""　"javascript:void(0);")拒绝#end
-                                                #@dropdownsUl("dropdown-menu")
-                                                    #@dropdownItem("javascript:void(0);")已完成#end
-                                                    #@dropdownItem("javascript:void(0);")延期#end
-                                                    #@dropdownItem("javascript:void(0);")不做#end
-                                                    #@dropdownItem("javascript:void(0);")已取消#end
-                                                    #@dropdownItem("javascript:void(0);")计划如此#end
+                                        #@dropdownsLi("dropdown-submenu")
+                                            #@dropdownA(""　"javascript:void(0);")阶段#end
+                                            #@dropdownsUl("dropdown-menu")
+                                                #@dropdownItem("javascript:void(0);")空#end
+                                                #@dropdownItem("javascript:void(0);")未开始#end
+                                                #@dropdownItem("javascript:void(0);")已计划#end
+                                                #@dropdownItem("javascript:void(0);")已立项#end
+                                                #@dropdownItem("javascript:void(0);")研发中#end
+                                                #@dropdownItem("javascript:void(0);")完毕#end
+                                                #@dropdownItem("javascript:void(0);")测试中#end
+                                                #@dropdownItem("javascript:void(0);")测试完毕#end
+                                                #@dropdownItem("javascript:void(0);")已验收#end
+                                                #@dropdownItem("javascript:void(0);")已发布#end
+                                            #end
+                                        #end
+
+                                        #@dropdownsLi("dropdown-submenu")
+                                            #@dropdownA(""　"javascript:void(0);")计划#end
+                                            #@dropdownsUl("dropdown-menu")
+                                                #@dropdownItem("javascript:void(0);")空#end
+                                                #@dropdownItem("javascript:void(0);")计划1#end
+                                                #@dropdownItem("javascript:void(0);")计划2#end
+                                            #end
+                                        #end
+
+                                        #@dropdownsLi("dropdown-submenu")
+                                            #@dropdownA(""　"javascript:void(0);")评审#end
+                                            #@dropdownsUl("dropdown-menu")
+                                                #@dropdownItem("javascript:void(0);")确认通过#end
+                                                #@dropdownItem("javascript:void(0);")有待明确#end
+                                            #*		                		#@liDivider()<hr/>#end*#
+                                                #@dropdownsLi("dropdown-submenu")
+                                                    #@dropdownA(""　"javascript:void(0);")拒绝#end
+                                                    #@dropdownsUl("dropdown-menu")
+                                                        #@dropdownItem("javascript:void(0);")已完成#end
+                                                        #@dropdownItem("javascript:void(0);")延期#end
+                                                        #@dropdownItem("javascript:void(0);")不做#end
+                                                        #@dropdownItem("javascript:void(0);")已取消#end
+                                                        #@dropdownItem("javascript:void(0);")计划如此#end
+                                                    #end
                                                 #end
                                             #end
                                         #end
                                     #end
                                 #end
-                                #end
                             #end
                         #end
-                        #end
+                    #end
 
 
 
@@ -176,10 +178,10 @@
 
                     #foreach(m:menuManager.getScopeMenus("product-del"))
                         #if(m.id=="product-demand-del")
-                    #@aModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger"
-                        "/product/page/tabledemo/product-demand-del.pagelet")批量关闭#end
-                            #end
+                            #@aModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger"
+                                "/product/page/tabledemo/product-demand-del.pagelet")批量关闭#end
                         #end
+                    #end
 
 
 

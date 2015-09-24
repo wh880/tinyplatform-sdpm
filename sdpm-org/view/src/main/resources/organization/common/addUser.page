@@ -72,23 +72,23 @@
                                 #tinyInput("text" "orgUserRole" user?.orgUserRole{"datatype":"","class":"input-text"})
                             #end
                         #end
-                        #@gridSysRow()
-                            #@colLabel("col-4")权限：#end
-                            #@gridSysCol(6)
-                                #@Tselect2F()
-                                    #@Tselect2Body(
-                                        "lang" "权限" {"class":"input-text select2","style":"width:296px","multiple":
-                                        "multiple"})
-                                        <option value="1">权限</option>
-                                        <option value="2">研发</option>
-                                        <option value="3">测试</option>
-                                        <option value="4">管理</option>
-                                        <option value="5">需求设计</option>
-                                    #end
-                                    #@Tselect2Fix()<a href="#" class="r">增加</a><a href="#">全部</a>#end
-                                #end
-                            #end
-                        #end
+                    ##                        #@gridSysRow()
+                    ##                            #@colLabel("col-4")权限：#end
+                    ##                            #@gridSysCol(6)
+                    ##                                #@Tselect2F()
+                    ##                                    #@Tselect2Body(
+                    ##                                        "lang" "权限" {"class":"input-text select2","style":"width:296px","multiple":
+                    ##                                        "multiple"})
+                    ##                                        <option value="1">权限</option>
+                    ##                                        <option value="2">研发</option>
+                    ##                                        <option value="3">测试</option>
+                    ##                                        <option value="4">管理</option>
+                    ##                                        <option value="5">需求设计</option>
+                    ##                                    #end
+                    ##                                    #@Tselect2Fix()<a href="#" class="r">增加</a><a href="#">全部</a>#end
+                    ##                                #end
+                    ##                            #end
+                    ##                        #end
                         #@gridSysRow()
                             #@colLabel("col-4")加入日期：#end
                             #@gridSysCol(6)
@@ -176,7 +176,7 @@
                             #@colLabel("col-4")Skype：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserSKYPE" user?.orgUserSKYPE{"placeholder":"","datatype":"*","nullmsg":
+                                    "text" "orgUserSkype" user?.orgUserSkype{"placeholder":"","datatype":"*","nullmsg":
                                     "",
                                     "id":"name","class":
                                     "input-text"})
@@ -218,7 +218,7 @@
                             #@colLabel("col-4")旺旺：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserWANGWANG" user?.orgUserWANGWANG {"placeholder":"","datatype":"*",
+                                    "text" "orgUserWangWang" user?.orgUserWangWang {"placeholder":"","datatype":"*",
                                     "nullmsg":
                                     "","id":"name","class":
                                     "input-text"})

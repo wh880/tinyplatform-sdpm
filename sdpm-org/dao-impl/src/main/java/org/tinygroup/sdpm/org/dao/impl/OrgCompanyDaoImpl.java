@@ -38,7 +38,6 @@ import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-
 @Repository
 public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDao {
 
@@ -51,7 +50,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
 					ORG_COMPANYTABLE.ORG_COMPANY_PHONE.value(t.getOrgCompanyPhone()),
 					ORG_COMPANYTABLE.ORG_COMPANY_FAX.value(t.getOrgCompanyFax()),
 					ORG_COMPANYTABLE.ORG_COMPANY_ADDRESS.value(t.getOrgCompanyAddress()),
-					ORG_COMPANYTABLE.ORG_COMPANY_ZIPCODE.value(t.getOrgCompanyZipCode()),
+						ORG_COMPANYTABLE.ORG_COMPANY_ZIP_CODE.value(t.getOrgCompanyZipCode()),
 					ORG_COMPANYTABLE.ORG_COMPANY_WEBSITE.value(t.getOrgCompanyWebsite()),
 					ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.value(t.getOrgCompanyBackyard()),
 					ORG_COMPANYTABLE.ORG_COMPANY_GUEST.value(t.getOrgCompanyGuest()),
@@ -73,7 +72,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
 					ORG_COMPANYTABLE.ORG_COMPANY_PHONE.value(t.getOrgCompanyPhone()),
 					ORG_COMPANYTABLE.ORG_COMPANY_FAX.value(t.getOrgCompanyFax()),
 					ORG_COMPANYTABLE.ORG_COMPANY_ADDRESS.value(t.getOrgCompanyAddress()),
-					ORG_COMPANYTABLE.ORG_COMPANY_ZIPCODE.value(t.getOrgCompanyZipCode()),
+						ORG_COMPANYTABLE.ORG_COMPANY_ZIP_CODE.value(t.getOrgCompanyZipCode()),
 					ORG_COMPANYTABLE.ORG_COMPANY_WEBSITE.value(t.getOrgCompanyWebsite()),
 					ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.value(t.getOrgCompanyBackyard()),
 					ORG_COMPANYTABLE.ORG_COMPANY_GUEST.value(t.getOrgCompanyGuest()),
@@ -130,7 +129,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
 					ORG_COMPANYTABLE.ORG_COMPANY_PHONE.eq(t.getOrgCompanyPhone()),
 					ORG_COMPANYTABLE.ORG_COMPANY_FAX.eq(t.getOrgCompanyFax()),
 					ORG_COMPANYTABLE.ORG_COMPANY_ADDRESS.eq(t.getOrgCompanyAddress()),
-					ORG_COMPANYTABLE.ORG_COMPANY_ZIPCODE.eq(t.getOrgCompanyZipCode()),
+						ORG_COMPANYTABLE.ORG_COMPANY_ZIP_CODE.eq(t.getOrgCompanyZipCode()),
 					ORG_COMPANYTABLE.ORG_COMPANY_WEBSITE.eq(t.getOrgCompanyWebsite()),
 					ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.eq(t.getOrgCompanyBackyard()),
 					ORG_COMPANYTABLE.ORG_COMPANY_GUEST.eq(t.getOrgCompanyGuest()),
@@ -154,7 +153,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
 					ORG_COMPANYTABLE.ORG_COMPANY_PHONE.eq(t.getOrgCompanyPhone()),
 					ORG_COMPANYTABLE.ORG_COMPANY_FAX.eq(t.getOrgCompanyFax()),
 					ORG_COMPANYTABLE.ORG_COMPANY_ADDRESS.eq(t.getOrgCompanyAddress()),
-					ORG_COMPANYTABLE.ORG_COMPANY_ZIPCODE.eq(t.getOrgCompanyZipCode()),
+						ORG_COMPANYTABLE.ORG_COMPANY_ZIP_CODE.eq(t.getOrgCompanyZipCode()),
 					ORG_COMPANYTABLE.ORG_COMPANY_WEBSITE.eq(t.getOrgCompanyWebsite()),
 					ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.eq(t.getOrgCompanyBackyard()),
 					ORG_COMPANYTABLE.ORG_COMPANY_GUEST.eq(t.getOrgCompanyGuest()),
@@ -177,7 +176,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
 					ORG_COMPANYTABLE.ORG_COMPANY_PHONE.value(new JdbcNamedParameter("orgCompanyPhone")),
 					ORG_COMPANYTABLE.ORG_COMPANY_FAX.value(new JdbcNamedParameter("orgCompanyFax")),
 					ORG_COMPANYTABLE.ORG_COMPANY_ADDRESS.value(new JdbcNamedParameter("orgCompanyAddress")),
-					ORG_COMPANYTABLE.ORG_COMPANY_ZIPCODE.value(new JdbcNamedParameter("orgCompanyZipCode")),
+						ORG_COMPANYTABLE.ORG_COMPANY_ZIP_CODE.value(new JdbcNamedParameter("orgCompanyZipCode")),
 					ORG_COMPANYTABLE.ORG_COMPANY_WEBSITE.value(new JdbcNamedParameter("orgCompanyWebsite")),
 					ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.value(new JdbcNamedParameter("orgCompanyBackyard")),
 					ORG_COMPANYTABLE.ORG_COMPANY_GUEST.value(new JdbcNamedParameter("orgCompanyGuest")),
@@ -203,7 +202,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
 					ORG_COMPANYTABLE.ORG_COMPANY_PHONE.value(new JdbcNamedParameter("orgCompanyPhone")),
 					ORG_COMPANYTABLE.ORG_COMPANY_FAX.value(new JdbcNamedParameter("orgCompanyFax")),
 					ORG_COMPANYTABLE.ORG_COMPANY_ADDRESS.value(new JdbcNamedParameter("orgCompanyAddress")),
-					ORG_COMPANYTABLE.ORG_COMPANY_ZIPCODE.value(new JdbcNamedParameter("orgCompanyZipCode")),
+						ORG_COMPANYTABLE.ORG_COMPANY_ZIP_CODE.value(new JdbcNamedParameter("orgCompanyZipCode")),
 					ORG_COMPANYTABLE.ORG_COMPANY_WEBSITE.value(new JdbcNamedParameter("orgCompanyWebsite")),
 					ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.value(new JdbcNamedParameter("orgCompanyBackyard")),
 					ORG_COMPANYTABLE.ORG_COMPANY_GUEST.value(new JdbcNamedParameter("orgCompanyGuest")),
@@ -227,7 +226,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
 				ORG_COMPANYTABLE.ORG_COMPANY_PHONE.eq(new JdbcNamedParameter("orgCompanyPhone")),
 				ORG_COMPANYTABLE.ORG_COMPANY_FAX.eq(new JdbcNamedParameter("orgCompanyFax")),
 				ORG_COMPANYTABLE.ORG_COMPANY_ADDRESS.eq(new JdbcNamedParameter("orgCompanyAddress")),
-				ORG_COMPANYTABLE.ORG_COMPANY_ZIPCODE.eq(new JdbcNamedParameter("orgCompanyZipCode")),
+						ORG_COMPANYTABLE.ORG_COMPANY_ZIP_CODE.eq(new JdbcNamedParameter("orgCompanyZipCode")),
 				ORG_COMPANYTABLE.ORG_COMPANY_WEBSITE.eq(new JdbcNamedParameter("orgCompanyWebsite")),
 				ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.eq(new JdbcNamedParameter("orgCompanyBackyard")),
 				ORG_COMPANYTABLE.ORG_COMPANY_GUEST.eq(new JdbcNamedParameter("orgCompanyGuest")),

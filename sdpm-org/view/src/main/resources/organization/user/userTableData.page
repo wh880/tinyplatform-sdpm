@@ -2,20 +2,20 @@
 #for(var:pager.records)
 #@tr()
     #@td()<input type="checkbox" value="${var.orgUserId}" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/organization/user/todocalendarAdmin.page">${var.orgUserRealName}</a>#end
-    #@td()${var.orgUserAccount}#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/organization/user/todocalendarAdmin.page">${var?.orgUserRealName}</a>#end
+    #@td()${var?.orgUserAccount}#end
     #@td()${var.orgUserRole}#end
     #@td()
-    <a href="mailto:wangyi@163.com">${var.orgUserEmail}</a>
+    <a href="mailto:wangyi@163.com">${var?.orgUserEmail}</a>
     #end
-    #@td()${var.orgUserGender}#end
-    #@td()${var.orgUserPhone}#end
-    #@td()${var.orgUserJoin}#end
+    #@td()${var?.orgUserGender}#end
+    #@td()${var?.orgUserPhone}#end
+    #@td()${var?.orgUserJoin}#end
     #@td()
         #set(map={"org-user-edit":[665,448],"org-user-delete":[550,150]})
         #foreach(m:menuManager.getScopeMenus("org-user"))
             #if(m.id=="org-user-edit")
-            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var.orgUserId}"
+            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var?.orgUserId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #else
                 #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?id="+var "ml-5")

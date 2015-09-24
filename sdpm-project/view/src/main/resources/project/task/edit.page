@@ -6,7 +6,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #import("/org/tinygroup/icon/components/icon.component")
-
+#set(name="task")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -69,7 +69,7 @@
             <div class="col-5">
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit" class="commitBtn" formaction=TINY_CONTEXT_PATH+"/project/task/save">保存</button>
             </div>
             <div class="col-1">
                ## <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>

@@ -1,21 +1,17 @@
 
 
-#macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
-#end
 
-
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=pagerPlan.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 #set(pagesize=records-(page-1)*pagesize)
 #end
-#for(var:[1..pagesize])
+#setTinyItemCount(pagerPlan.totalCount)
+#for(product:pagerPlan.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="product-plan">#end
-	#@td()${var}#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-plan/product-al-req.page">基金计划</a>#end
-	#@td()体验金#end
+	#@td()${plan.planId}#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-plan/product-al-req.page">${plan.planName}</a>#end
+	#@td()${plan.planSpec}#end
 	#@td()2015-09-02#end
 	#@td()2015-10-02#end
 	 #@td()
