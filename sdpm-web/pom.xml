@@ -110,6 +110,16 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-document-service-impl</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-document-service-wrapper</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-product-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
