@@ -24,8 +24,6 @@ import java.io.Serializable;
  */
 public class OrgDept implements Serializable {
 
-	public static String DELETE_YES = "1";
-	public static String DELETE_NO = "0";
 	/** 
 	 * 部门编号
 	 * 

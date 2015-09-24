@@ -60,7 +60,7 @@ public class OrgUser implements Serializable {
 	 * 昵称
 	 *
 	 */
-	private String orgUserNickname;
+	private String orgUserNickName;
 	/**
 	 * 源代码账号
 	 *
@@ -90,7 +90,7 @@ public class OrgUser implements Serializable {
 	 * Skype
 	 *
 	 */
-	private String orgUserSKYPE;
+	private String orgUserSkype;
 	/**
 	 * QQ
 	 *
@@ -110,7 +110,7 @@ public class OrgUser implements Serializable {
 	 * 旺旺
 	 *
 	 */
-	private String orgUserWANGWANG;
+	private String orgUserWangWang;
 	/**
 	 * 手机
 	 *
@@ -219,12 +219,12 @@ public class OrgUser implements Serializable {
 		this.orgUserRealName = orgUserRealName;
 	}
 
-	public String getOrgUserNickname() {
-		return orgUserNickname;
+	public String getOrgUserNickName() {
+		return orgUserNickName;
 	}
 
-	public void setOrgUserNickname(String orgUserNickname) {
-		this.orgUserNickname = orgUserNickname;
+	public void setOrgUserNickName(String orgUserNickName) {
+		this.orgUserNickName = orgUserNickName;
 	}
 
 	public String getOrgUserSubmitter() {
@@ -267,12 +267,12 @@ public class OrgUser implements Serializable {
 		this.orgUserEmail = orgUserEmail;
 	}
 
-	public String getOrgUserSKYPE() {
-		return orgUserSKYPE;
+	public String getOrgUserSkype() {
+		return orgUserSkype;
 	}
 
-	public void setOrgUserSKYPE(String orgUserSKYPE) {
-		this.orgUserSKYPE = orgUserSKYPE;
+	public void setOrgUserSkype(String orgUserSkype) {
+		this.orgUserSkype = orgUserSkype;
 	}
 
 	public String getOrgUserQQ() {
@@ -299,12 +299,12 @@ public class OrgUser implements Serializable {
 		this.orgUserGTalk = orgUserGTalk;
 	}
 
-	public String getOrgUserWANGWANG() {
-		return orgUserWANGWANG;
+	public String getOrgUserWangWang() {
+		return orgUserWangWang;
 	}
 
-	public void setOrgUserWANGWANG(String orgUserWANGWANG) {
-		this.orgUserWANGWANG = orgUserWANGWANG;
+	public void setOrgUserWangWang(String orgUserWangWang) {
+		this.orgUserWangWang = orgUserWangWang;
 	}
 
 	public String getOrgUserMobile() {

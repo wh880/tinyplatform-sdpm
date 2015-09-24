@@ -1,4 +1,4 @@
-#!set(activeTitle="组织管理",activeMenuId=currentPageId)
+#!set(activeTitle="组织管理",activeMenuId=currentPageId,treeid=treeid?:"0")
 
 #import("/common/component/form.component")
 
@@ -18,14 +18,17 @@
     }
 </style>
 #set(name="organizationPrivilege")
+
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()
             #include("/organization/common/tab.page")
         #end
         #@tabBodyCol("ptop-5")
+
             #@div(divClass="operationbar")
             <span style="padding-top:5px;float:left">
+
                 <a href="${TINY_REQUEST_URI}?treeid=0" ${treeid=='0'?" class='active_btn'":""}>所有权限</a>
                 <a href="${TINY_REQUEST_URI}?treeid=home" ${treeid=='home'?" class='active_btn'":""}>我的地盘</a>
                 <a href="${TINY_REQUEST_URI}?treeid=productLine" ${treeid
@@ -98,7 +101,7 @@
 
     var zNodes = [
 
-        #foreach(m:menuManager.getMenus())
+        #foreach(m:menuManager.getAllChildMenus(treeid))
             {id: '${m.id}', pId: '${m.parentId}', name: "${m.name}", open: true},
         #end
     ];

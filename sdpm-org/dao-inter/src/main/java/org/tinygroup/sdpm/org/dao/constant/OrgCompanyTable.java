@@ -61,7 +61,7 @@ public class OrgCompanyTable extends Table {
 	 * 邮政编码
 	 * 
 	 */
-	public final Column ORG_COMPANY_ZIPCODE = new Column(this, "org_company_ZipCode");
+	public final Column ORG_COMPANY_ZIP_CODE = new Column(this, "org_company_zip_code");
 
 	/** 
 	 * 官网
