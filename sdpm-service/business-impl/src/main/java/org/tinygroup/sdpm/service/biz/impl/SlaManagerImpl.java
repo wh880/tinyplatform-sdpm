@@ -45,4 +45,8 @@ public class SlaManagerImpl implements SlaManager{
     public Integer deleteBatch(Integer id) {
         return  null;
     }
+
+    public List<ServiceSla> getListByClientId(Integer clientId) {
+        return slaDao.getListByClientId(clientId);
+    }
 }

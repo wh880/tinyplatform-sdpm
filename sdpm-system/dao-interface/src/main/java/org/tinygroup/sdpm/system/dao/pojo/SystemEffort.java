@@ -16,14 +16,13 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 日志表单
  * 
  */
-public class SystemEffort implements Serializable{
+public class SystemEffort {
 
 	/** 
 	 * 日志编号
@@ -41,7 +40,7 @@ public class SystemEffort implements Serializable{
 	 * 对象ID
 	 * 
 	 */
-	private Integer effortObjectID;
+	private Integer effortObjectId;
 
 	/** 
 	 * 所属产品
@@ -114,12 +113,12 @@ public class SystemEffort implements Serializable{
 		return effortObjectType;
 	}
 
-	public void setEffortObjectID(Integer effortObjectID){
-		this. effortObjectID = effortObjectID;
+	public void setEffortObjectId(Integer effortObjectId){
+		this. effortObjectId = effortObjectId;
 	}
 
-	public Integer getEffortObjectID(){
-		return effortObjectID;
+	public Integer getEffortObjectId(){
+		return effortObjectId;
 	}
 
 	public void setEffortProduct(String effortProduct){

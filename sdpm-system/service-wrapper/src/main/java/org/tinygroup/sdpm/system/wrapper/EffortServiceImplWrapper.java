@@ -128,7 +128,7 @@ public class EffortServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.SystemEffort> findByPage(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemEffort SystemEffort) {
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.system.dao.pojo.SystemEffort> findByPage(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemEffort SystemEffort, String sortName, boolean asc) {
 		String serviceId = "system_findByPage";
 
 		try{

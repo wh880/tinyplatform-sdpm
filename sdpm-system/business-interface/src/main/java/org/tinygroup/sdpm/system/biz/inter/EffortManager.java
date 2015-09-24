@@ -67,7 +67,7 @@ public interface EffortManager {
 	  * @param SystemEffort
 	  * @return
 	  */
-	 Pager<SystemEffort> findByPage(int start,int limit,SystemEffort SystemEffort);
+	 Pager<SystemEffort> findByPage(int start,int limit,SystemEffort SystemEffort,String sortName, boolean asc);
 	 
 	
 }

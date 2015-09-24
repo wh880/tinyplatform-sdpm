@@ -37,7 +37,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.system.dao.SystemHistoryDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -50,7 +49,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 @Repository
-@LogClass("systemHistory")
 public class SystemHistoryDaoImpl extends TinyDslDaoSupport implements SystemHistoryDao {
 
 	public SystemHistory add(SystemHistory systemHistory) {

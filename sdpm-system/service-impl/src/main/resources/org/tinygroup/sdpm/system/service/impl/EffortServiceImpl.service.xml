@@ -37,13 +37,5 @@
       </service-parameters>
       <service-result name="findByProjectResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort"/>
     </service-method>
-    <service-method local-name="findByPage" service-id="system_findByPage" method-name="findByPage" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
-      <service-parameters>
-        <service-parameter name="start" type="int" required="false" is-array="false"/>
-        <service-parameter name="limit" type="int" required="false" is-array="false"/>
-        <service-parameter name="SystemEffort" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findByPageResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager&lt;org.tinygroup.sdpm.system.dao.pojo.SystemEffort&gt;"/>
-    </service-method>
   </service-component>
 </service-components>

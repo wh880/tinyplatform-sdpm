@@ -37,13 +37,13 @@ public class SystemSearchTable extends Table {
 	 * 搜索对象类型
 	 * 
 	 */
-	public final Column SEARCH_OBJECTTYPE = new Column(this, "search_objectType");
+	public final Column SEARCH_OBJECT_TYPE = new Column(this, "search_object_type");
 
 	/** 
 	 * 搜索对象ID
 	 * 
 	 */
-	public final Column SEARCH_OBJECTID = new Column(this, "search_objectID");
+	public final Column SEARCH_OBJECT_ID = new Column(this, "search_object_id");
 
 	/** 
 	 * 搜索名称	
@@ -61,13 +61,13 @@ public class SystemSearchTable extends Table {
 	 * 搜索添加日期
 	 * 
 	 */
-	public final Column SEARCH_ADDEDDATE = new Column(this, "search_addedDate");
+	public final Column SEARCH_ADDED_DATE = new Column(this, "search_added_date");
 
 	/** 
 	 * 搜索编辑日期
 	 * 
 	 */
-	public final Column SEARCH_EDITEDDATE = new Column(this, "search_editedDate");
+	public final Column SEARCH_EDITED_DATE = new Column(this, "search_edited_date");
 
 	/** 
 	 * 已删除

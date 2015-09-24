@@ -55,5 +55,13 @@ public interface SlaManager {
      * @return
      */
     Integer deleteBatch(Integer id);
+
+    /**
+     * 根据客户id条件查询List
+     *
+     * @param clientId 用于查询条件
+     * @return
+     */
+    List<ServiceSla> getListByClientId(Integer clientId);
 }
 

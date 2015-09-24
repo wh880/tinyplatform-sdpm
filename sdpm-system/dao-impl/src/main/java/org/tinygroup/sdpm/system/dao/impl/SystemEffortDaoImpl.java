@@ -37,7 +37,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.dao.SystemEffortDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -50,7 +49,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 @Repository
-@LogClass("systemEffort")
 public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffortDao {
 
 	public SystemEffort add(SystemEffort systemEffort) {
@@ -58,8 +56,8 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 			public Insert generate(SystemEffort t) {
 				Insert insert = insertInto(SYSTEM_EFFORTTABLE).values(
 					SYSTEM_EFFORTTABLE.EFFORT_ID.value(t.getEffortId()),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECTTYPE.value(t.getEffortObjectType()),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECTID.value(t.getEffortObjectID()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.value(t.getEffortObjectType()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.value(t.getEffortObjectId()),
 					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.value(t.getEffortProduct()),
 					SYSTEM_EFFORTTABLE.EFFORT_PROJECT.value(t.getEffortProject()),
 					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.value(t.getEffortAccount()),
@@ -81,8 +79,8 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 		return getDslTemplate().update(systemEffort, new UpdateGenerateCallback<SystemEffort>() {
 			public Update generate(SystemEffort t) {
 				Update update = update(SYSTEM_EFFORTTABLE).set(
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECTTYPE.value(t.getEffortObjectType()),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECTID.value(t.getEffortObjectID()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.value(t.getEffortObjectType()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.value(t.getEffortObjectId()),
 					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.value(t.getEffortProduct()),
 					SYSTEM_EFFORTTABLE.EFFORT_PROJECT.value(t.getEffortProject()),
 					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.value(t.getEffortAccount()),
@@ -139,8 +137,8 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 			public Select generate(SystemEffort t) {
 				Select select = selectFrom(SYSTEM_EFFORTTABLE).where(
 				and(
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECTTYPE.eq(t.getEffortObjectType()),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECTID.eq(t.getEffortObjectID()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.eq(t.getEffortObjectType()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.eq(t.getEffortObjectId()),
 					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.eq(t.getEffortProduct()),
 					SYSTEM_EFFORTTABLE.EFFORT_PROJECT.eq(t.getEffortProject()),
 					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.eq(t.getEffortAccount()),
@@ -164,8 +162,8 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 			public Select generate(SystemEffort t) {
 				Select select = MysqlSelect.selectFrom(SYSTEM_EFFORTTABLE).where(
 				and(
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECTTYPE.eq(t.getEffortObjectType()),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECTID.eq(t.getEffortObjectID()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.eq(t.getEffortObjectType()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.eq(t.getEffortObjectId()),
 					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.eq(t.getEffortProduct()),
 					SYSTEM_EFFORTTABLE.EFFORT_PROJECT.eq(t.getEffortProject()),
 					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.eq(t.getEffortAccount()),
@@ -188,8 +186,8 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 
 			public Insert generate() {
 				return insertInto(SYSTEM_EFFORTTABLE).values(
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECTTYPE.value(new JdbcNamedParameter("effortObjectType")),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECTID.value(new JdbcNamedParameter("effortObjectID")),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.value(new JdbcNamedParameter("effortObjectType")),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.value(new JdbcNamedParameter("effortObjectId")),
 					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.value(new JdbcNamedParameter("effortProduct")),
 					SYSTEM_EFFORTTABLE.EFFORT_PROJECT.value(new JdbcNamedParameter("effortProject")),
 					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.value(new JdbcNamedParameter("effortAccount")),
@@ -215,8 +213,8 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 
 			public Update generate() {
 				return update(SYSTEM_EFFORTTABLE).set(
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECTTYPE.value(new JdbcNamedParameter("effortObjectType")),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECTID.value(new JdbcNamedParameter("effortObjectID")),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.value(new JdbcNamedParameter("effortObjectType")),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.value(new JdbcNamedParameter("effortObjectId")),
 					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.value(new JdbcNamedParameter("effortProduct")),
 					SYSTEM_EFFORTTABLE.EFFORT_PROJECT.value(new JdbcNamedParameter("effortProject")),
 					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.value(new JdbcNamedParameter("effortAccount")),
@@ -240,8 +238,8 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 			public Delete generate() {
 				return delete(SYSTEM_EFFORTTABLE).where(and(
 				SYSTEM_EFFORTTABLE.EFFORT_ID.eq(new JdbcNamedParameter("effortId")),
-				SYSTEM_EFFORTTABLE.EFFORT_OBJECTTYPE.eq(new JdbcNamedParameter("effortObjectType")),
-				SYSTEM_EFFORTTABLE.EFFORT_OBJECTID.eq(new JdbcNamedParameter("effortObjectID")),
+				SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.eq(new JdbcNamedParameter("effortObjectType")),
+				SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.eq(new JdbcNamedParameter("effortObjectId")),
 				SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.eq(new JdbcNamedParameter("effortProduct")),
 				SYSTEM_EFFORTTABLE.EFFORT_PROJECT.eq(new JdbcNamedParameter("effortProject")),
 				SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.eq(new JdbcNamedParameter("effortAccount")),

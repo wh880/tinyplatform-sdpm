@@ -16,14 +16,13 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 附件表
  * 
  */
-public class SystemProfile implements Serializable{
+public class SystemProfile {
 
 	/** 
 	 * 附件ID
@@ -65,7 +64,7 @@ public class SystemProfile implements Serializable{
 	 * 附件对象ID
 	 * 
 	 */
-	private Integer fileObjectID;
+	private Integer fileObjectId;
 
 	/** 
 	 * 由谁添加
@@ -146,12 +145,12 @@ public class SystemProfile implements Serializable{
 		return fileObjectType;
 	}
 
-	public void setFileObjectID(Integer fileObjectID){
-		this. fileObjectID = fileObjectID;
+	public void setFileObjectId(Integer fileObjectId){
+		this. fileObjectId = fileObjectId;
 	}
 
-	public Integer getFileObjectID(){
-		return fileObjectID;
+	public Integer getFileObjectId(){
+		return fileObjectId;
 	}
 
 	public void setFileAddedBy(String fileAddedBy){

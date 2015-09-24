@@ -16,14 +16,12 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
-import java.io.Serializable;
-
 
 /** 
  * 操作历史表
  * 
  */
-public class SystemHistory implements Serializable{
+public class SystemHistory {
 
 	/** 
 	 * 操作历史ID

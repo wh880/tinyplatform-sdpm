@@ -334,4 +334,15 @@ public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDa
         }
         return select;
     }
+
+    public List<ServiceSla> getListByClientId(Integer clientId) {
+        {
+            Select select;
+            //Select select = selectFrom(USERTABLE).where(USERTABLE.NAME.eq("xdy"));
+            // MysqlSelect select1;
+            //select1 = selectFrom(USERTABLE).limit(1, 10);
+            select = selectFrom(SERVICE_SLATABLE).where(SERVICE_SLATABLE.CLIENT_ID.eq(clientId));
+            return getDslSession().fetchList(select, ServiceSla.class);
+        }
+    }
 }
