@@ -44,6 +44,8 @@
                 <!-- 需要加的自己署名 -->
                 <!-- Hulk's Paht -->
                 <class-path path="E:\TinyWork\sdpm\sdpm-product\view\src\main\resources"/>
+                <!-- 杰森斯坦森-->
+                <class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources"/>
                
 
         </class-paths>

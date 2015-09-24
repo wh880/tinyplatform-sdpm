@@ -6,9 +6,9 @@
 #set(name="client")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-       #* #@div(divClass="dropdownBox dropdownBoxes")
-            #include("/service/serviceCom/dropdownMenu.page")
-        #end*#
+    #* #@div(divClass="dropdownBox dropdownBoxes")
+         #include("/service/serviceCom/dropdownMenu.page")
+     #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
@@ -34,43 +34,60 @@
 
         #@tabWithInit("tab_demo" "optionsBox")
         <div style="width:100%;float:left">
-            #@gridSystem24Col("girdrap")
-                #foreach(var:slas)
-                    #@gridSystemCol(7)
-                        #@div(divClass="infoContent")
-                            <p class="titleName"><a
-                                    href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">${var.slaTitle}</a>
-                            </p>
+        ##            #@gridSystem24Col("girdrap")
+        ##                #foreach(var:slas)
+
+            #@noRespsGridSystem()
+                #@gridSysRow()
+                    #foreach(var:slas)
+                    <div class="slaInfoBox">
+                        #gridSysCol(2)
+                        #@gridSysCol(10)
                             #@gridSysRow()
                                 #@gridSysCol(4)协议名称#end
                                 #@gridSysCol(8)<a
                                         href="${TINY_CONTEXT_PATH}/service/sla/slaContent.page">${var.slaTitle}</a>#end
-                                #@gridSysCol(4)服务级别#end
-                                #@gridSysCol(8)${serviceLevel}#end
-                                #@gridSysCol(4)服务期限#end
-                                #@gridSysCol(8)${serviceDeadline}#end
-                                #@gridSysCol(4)批准人#end
-                                #@gridSysCol(8)${slaReviewedBy}#end
-                                #@gridSysCol(4)批准时间#end
-                                #@gridSysCol(8)${slaReviewDate}#end
                             #end
-                            <div style="text-align:right;margin:right">
+
+                            #@gridSysRow()
+                                #@gridSysCol(4)服务级别#end
+                                #@gridSysCol(8)${var.serviceLevel}#end
+                            #end
+                            #@gridSysRow()
+                                #@gridSysCol(4)服务期限#end
+                                #@gridSysCol(8)
+                                    #if(var.serviceDeadline)${formatDate(var.serviceDeadline,"yyyy-MM-dd")}#end
+                                #end
+                            #end
+                            #@gridSysRow()
+                                #@gridSysCol(4)批准人#end
+                                #@gridSysCol(8)${var.slaReviewedBy}#end
+                            #end
+                            #@gridSysRow()
+                                #@gridSysCol(4)批准时间#end
+                                #@gridSysCol(8) #if(var.slaReviewDate)${formatDate
+                                    (var.serviceDeadline,"yyyy-MM-dd")}#end
+                                #end
+                            #end
+                            <div style="text-align:right;margin:right;padding-right:15px">
                                 #@aExtendButton("btn-primary btn-sm" "../sla/slaAdd.page")编辑#end
                                 #@delItemsdpm(
                                     "#action" "id" "/service/client/clientProduct.page" {"class":
                                     "btn radius btn-danger btn-sm"})
                                     删除#end
                             </div>
+                            </div>
 
                         #end
-                        #@simpleModal("myModal3"+varFor.index "编辑")#end
                     #end
                 #end
             #end
         </div>
         #end
+    ##            #end
 
     #end
+
 #end
 #@simpleModal("myModal1" "导出")#end
 #@simpleModal("myModal2" "新建产品")#end
@@ -90,3 +107,33 @@
         });
     });
 </script>
+
+##                    #@gridSystemCol(7)
+##                        #@div(divClass="infoContent")
+##                            <p class="titleName"><a
+##                                    href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">${var.slaTitle}</a>
+##                            </p>
+##                            #@gridSysRow()
+##                                #@gridSysCol(4)协议名称#end
+##                                #@gridSysCol(8)<a
+##                                        href="${TINY_CONTEXT_PATH}/service/sla/slaContent.page">${var.slaTitle}</a>#end
+##                                #@gridSysCol(4)服务级别#end
+##                                #@gridSysCol(8) ${var?.serviceDeadline?var.serviceLevel:"&nbsp;"}#end
+##                                #@gridSysCol(4)服务期限#end
+##                                #@gridSysCol(8) ${var?.serviceDeadline?formatDate(var.serviceDeadline,"yyyy-MM-dd"):" "}#end
+##                                #@gridSysCol(4)批准人#end
+##                                #@gridSysCol(8) ${slaReviewedBy?:"&nbsp;"}#end
+##                                #@gridSysCol(4)批准时间#end
+##                                #@gridSysCol(8) ${var?.slaReviewDate?formatDate(var.slaReviewDate,"yyyy-MM-dd"):" "}#end
+##                            #end
+##                            <div style="text-align:right;margin:right">
+##                                #@aExtendButton("btn-primary btn-sm" "../sla/slaAdd.page")编辑#end
+##                                #@delItemsdpm(
+##                                    "#action" "id" "/service/client/clientProduct.page" {"class":
+##                                    "btn radius btn-danger btn-sm"})
+##                                    删除#end
+##                            </div>
+##
+##                        #end
+##                        #@simpleModal("myModal3"+varFor.index "编辑")#end
+##                    #end

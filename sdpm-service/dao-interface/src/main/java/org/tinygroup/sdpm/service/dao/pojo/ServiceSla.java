@@ -25,11 +25,15 @@ import java.util.Date;
 public class ServiceSla {
 
 	public static Integer DELETE_YES=1;
-	public static Integer DELETE_NO=1;
+	public static Integer DELETE_NO=0;
+	public static Integer CLENTID_YES=1;
+	public static Integer CLENTID_NO=0;
 
 	public ServiceSla()
 	{
 		setDeleted(DELETE_NO);
+		setClientId(CLENTID_NO);
+
 	}
 
 	/** 
@@ -52,7 +56,7 @@ public class ServiceSla {
 
 
 	/*关联客户表的客户名称*/
-	private  String  ServiceName;
+	private  Integer  serviceName;
 
 
 	/** 

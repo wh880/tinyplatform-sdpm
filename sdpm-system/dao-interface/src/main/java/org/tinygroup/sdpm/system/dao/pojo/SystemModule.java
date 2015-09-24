@@ -16,12 +16,14 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
+import java.io.Serializable;
+
 
 /** 
  * 系统模块表
  * 
  */
-public class SystemModule {
+public class SystemModule implements Serializable{
 
 	/** 
 	 * 模块根节点
