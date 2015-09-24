@@ -16,140 +16,138 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
-import java.io.Serializable;
-
 
 /** 
  * 系统模块表
  * 
  */
-public class SystemModule implements Serializable{
-
-	/** 
-	 * 模块ID
-	 * 
-	 */
-	private Integer sysModuleId;
+public class SystemModule {
 
 	/** 
 	 * 模块根节点
 	 * 
 	 */
-	private Integer sysModuleRoot;
+	private Integer moduleRoot;
 
 	/** 
 	 * 模块名称
 	 * 
 	 */
-	private String sysModuleName;
+	private String moduleName;
 
 	/** 
 	 * 模块地址
 	 * 
 	 */
-	private String sysModulePath;
+	private String modulePath;
 
 	/** 
 	 * 模块父节点
 	 * 
 	 */
-	private Integer sysModuleParent;
+	private Integer moduleParent;
 
 	/** 
 	 * 模块等级
 	 * 
 	 */
-	private Integer sysModuleGrade;
+	private Integer moduleGrade;
 
 	/** 
 	 * 模块次序
 	 * 
 	 */
-	private Integer sysModuleOrder;
+	private Integer moduleOrder;
 
 	/** 
 	 * 模块类型
 	 * 
 	 */
-	private String sysModuleType;
+	private String moduleType;
 
 	/** 
 	 * 模块归属
 	 * 
 	 */
-	private String sysModuleOwner;
+	private String moduleOwner;
+
+	/** 
+	 * 模块ID
+	 * 
+	 */
+	private Integer moduleId;
 
 
-	public void setSysModuleId(Integer sysModuleId){
-		this. sysModuleId = sysModuleId;
+	public void setModuleRoot(Integer moduleRoot){
+		this. moduleRoot = moduleRoot;
 	}
 
-	public Integer getSysModuleId(){
-		return sysModuleId;
+	public Integer getModuleRoot(){
+		return moduleRoot;
 	}
 
-	public void setSysModuleRoot(Integer sysModuleRoot){
-		this. sysModuleRoot = sysModuleRoot;
+	public void setModuleName(String moduleName){
+		this. moduleName = moduleName;
 	}
 
-	public Integer getSysModuleRoot(){
-		return sysModuleRoot;
+	public String getModuleName(){
+		return moduleName;
 	}
 
-	public void setSysModuleName(String sysModuleName){
-		this. sysModuleName = sysModuleName;
+	public void setModulePath(String modulePath){
+		this. modulePath = modulePath;
 	}
 
-	public String getSysModuleName(){
-		return sysModuleName;
+	public String getModulePath(){
+		return modulePath;
 	}
 
-	public void setSysModulePath(String sysModulePath){
-		this. sysModulePath = sysModulePath;
+	public void setModuleParent(Integer moduleParent){
+		this. moduleParent = moduleParent;
 	}
 
-	public String getSysModulePath(){
-		return sysModulePath;
+	public Integer getModuleParent(){
+		return moduleParent;
 	}
 
-	public void setSysModuleParent(Integer sysModuleParent){
-		this. sysModuleParent = sysModuleParent;
+	public void setModuleGrade(Integer moduleGrade){
+		this. moduleGrade = moduleGrade;
 	}
 
-	public Integer getSysModuleParent(){
-		return sysModuleParent;
+	public Integer getModuleGrade(){
+		return moduleGrade;
 	}
 
-	public void setSysModuleGrade(Integer sysModuleGrade){
-		this. sysModuleGrade = sysModuleGrade;
+	public void setModuleOrder(Integer moduleOrder){
+		this. moduleOrder = moduleOrder;
 	}
 
-	public Integer getSysModuleGrade(){
-		return sysModuleGrade;
+	public Integer getModuleOrder(){
+		return moduleOrder;
 	}
 
-	public void setSysModuleOrder(Integer sysModuleOrder){
-		this. sysModuleOrder = sysModuleOrder;
+	public void setModuleType(String moduleType){
+		this. moduleType = moduleType;
 	}
 
-	public Integer getSysModuleOrder(){
-		return sysModuleOrder;
+	public String getModuleType(){
+		return moduleType;
 	}
 
-	public void setSysModuleType(String sysModuleType){
-		this. sysModuleType = sysModuleType;
+	public void setModuleOwner(String moduleOwner){
+		this. moduleOwner = moduleOwner;
 	}
 
-	public String getSysModuleType(){
-		return sysModuleType;
+	public String getModuleOwner(){
+		return moduleOwner;
 	}
 
-	public void setSysModuleOwner(String sysModuleOwner){
-		this. sysModuleOwner = sysModuleOwner;
+	public void setModuleId(Integer moduleId){
+		this. moduleId = moduleId;
 	}
 
-	public String getSysModuleOwner(){
-		return sysModuleOwner;
+	public Integer getModuleId(){
+		return moduleId;
 	}
 
 }

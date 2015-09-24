@@ -37,7 +37,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.dao.SystemProfileDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -50,7 +49,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 @Repository
-@LogClass("systemProfile")
 public class SystemProfileDaoImpl extends TinyDslDaoSupport implements SystemProfileDao {
 
 	public SystemProfile add(SystemProfile systemProfile) {
@@ -62,10 +60,10 @@ public class SystemProfileDaoImpl extends TinyDslDaoSupport implements SystemPro
 					SYSTEM_PROFILETABLE.FILE_TITLE.value(t.getFileTitle()),
 					SYSTEM_PROFILETABLE.FILE_EXTENSION.value(t.getFileExtension()),
 					SYSTEM_PROFILETABLE.FILE_SIZE.value(t.getFileSize()),
-					SYSTEM_PROFILETABLE.FILE_OBJECTTYPE.value(t.getFileObjectType()),
-					SYSTEM_PROFILETABLE.FILE_OBJECTID.value(t.getFileObjectID()),
-					SYSTEM_PROFILETABLE.FILE_ADDEDBY.value(t.getFileAddedBy()),
-					SYSTEM_PROFILETABLE.FILE_ADDEDDATE.value(t.getFileAddedDate()),
+					SYSTEM_PROFILETABLE.FILE_OBJECT_TYPE.value(t.getFileObjectType()),
+					SYSTEM_PROFILETABLE.FILE_OBJECT_ID.value(t.getFileObjectId()),
+					SYSTEM_PROFILETABLE.FILE_ADDED_BY.value(t.getFileAddedBy()),
+					SYSTEM_PROFILETABLE.FILE_ADDED_DATE.value(t.getFileAddedDate()),
 					SYSTEM_PROFILETABLE.FILE_DOWNLOADS.value(t.getFileDownloads()),
 					SYSTEM_PROFILETABLE.FILE_EXTRA.value(t.getFileExtra()),
 					SYSTEM_PROFILETABLE.FILE_DELETED.value(t.getFileDeleted()));
@@ -85,10 +83,10 @@ public class SystemProfileDaoImpl extends TinyDslDaoSupport implements SystemPro
 					SYSTEM_PROFILETABLE.FILE_TITLE.value(t.getFileTitle()),
 					SYSTEM_PROFILETABLE.FILE_EXTENSION.value(t.getFileExtension()),
 					SYSTEM_PROFILETABLE.FILE_SIZE.value(t.getFileSize()),
-					SYSTEM_PROFILETABLE.FILE_OBJECTTYPE.value(t.getFileObjectType()),
-					SYSTEM_PROFILETABLE.FILE_OBJECTID.value(t.getFileObjectID()),
-					SYSTEM_PROFILETABLE.FILE_ADDEDBY.value(t.getFileAddedBy()),
-					SYSTEM_PROFILETABLE.FILE_ADDEDDATE.value(t.getFileAddedDate()),
+					SYSTEM_PROFILETABLE.FILE_OBJECT_TYPE.value(t.getFileObjectType()),
+					SYSTEM_PROFILETABLE.FILE_OBJECT_ID.value(t.getFileObjectId()),
+					SYSTEM_PROFILETABLE.FILE_ADDED_BY.value(t.getFileAddedBy()),
+					SYSTEM_PROFILETABLE.FILE_ADDED_DATE.value(t.getFileAddedDate()),
 					SYSTEM_PROFILETABLE.FILE_DOWNLOADS.value(t.getFileDownloads()),
 					SYSTEM_PROFILETABLE.FILE_EXTRA.value(t.getFileExtra()),
 					SYSTEM_PROFILETABLE.FILE_DELETED.value(t.getFileDeleted())).where(
@@ -143,10 +141,10 @@ public class SystemProfileDaoImpl extends TinyDslDaoSupport implements SystemPro
 					SYSTEM_PROFILETABLE.FILE_TITLE.eq(t.getFileTitle()),
 					SYSTEM_PROFILETABLE.FILE_EXTENSION.eq(t.getFileExtension()),
 					SYSTEM_PROFILETABLE.FILE_SIZE.eq(t.getFileSize()),
-					SYSTEM_PROFILETABLE.FILE_OBJECTTYPE.eq(t.getFileObjectType()),
-					SYSTEM_PROFILETABLE.FILE_OBJECTID.eq(t.getFileObjectID()),
-					SYSTEM_PROFILETABLE.FILE_ADDEDBY.eq(t.getFileAddedBy()),
-					SYSTEM_PROFILETABLE.FILE_ADDEDDATE.eq(t.getFileAddedDate()),
+					SYSTEM_PROFILETABLE.FILE_OBJECT_TYPE.eq(t.getFileObjectType()),
+					SYSTEM_PROFILETABLE.FILE_OBJECT_ID.eq(t.getFileObjectId()),
+					SYSTEM_PROFILETABLE.FILE_ADDED_BY.eq(t.getFileAddedBy()),
+					SYSTEM_PROFILETABLE.FILE_ADDED_DATE.eq(t.getFileAddedDate()),
 					SYSTEM_PROFILETABLE.FILE_DOWNLOADS.eq(t.getFileDownloads()),
 					SYSTEM_PROFILETABLE.FILE_EXTRA.eq(t.getFileExtra()),
 					SYSTEM_PROFILETABLE.FILE_DELETED.eq(t.getFileDeleted())));
@@ -168,10 +166,10 @@ public class SystemProfileDaoImpl extends TinyDslDaoSupport implements SystemPro
 					SYSTEM_PROFILETABLE.FILE_TITLE.eq(t.getFileTitle()),
 					SYSTEM_PROFILETABLE.FILE_EXTENSION.eq(t.getFileExtension()),
 					SYSTEM_PROFILETABLE.FILE_SIZE.eq(t.getFileSize()),
-					SYSTEM_PROFILETABLE.FILE_OBJECTTYPE.eq(t.getFileObjectType()),
-					SYSTEM_PROFILETABLE.FILE_OBJECTID.eq(t.getFileObjectID()),
-					SYSTEM_PROFILETABLE.FILE_ADDEDBY.eq(t.getFileAddedBy()),
-					SYSTEM_PROFILETABLE.FILE_ADDEDDATE.eq(t.getFileAddedDate()),
+					SYSTEM_PROFILETABLE.FILE_OBJECT_TYPE.eq(t.getFileObjectType()),
+					SYSTEM_PROFILETABLE.FILE_OBJECT_ID.eq(t.getFileObjectId()),
+					SYSTEM_PROFILETABLE.FILE_ADDED_BY.eq(t.getFileAddedBy()),
+					SYSTEM_PROFILETABLE.FILE_ADDED_DATE.eq(t.getFileAddedDate()),
 					SYSTEM_PROFILETABLE.FILE_DOWNLOADS.eq(t.getFileDownloads()),
 					SYSTEM_PROFILETABLE.FILE_EXTRA.eq(t.getFileExtra()),
 					SYSTEM_PROFILETABLE.FILE_DELETED.eq(t.getFileDeleted())));
@@ -192,10 +190,10 @@ public class SystemProfileDaoImpl extends TinyDslDaoSupport implements SystemPro
 					SYSTEM_PROFILETABLE.FILE_TITLE.value(new JdbcNamedParameter("fileTitle")),
 					SYSTEM_PROFILETABLE.FILE_EXTENSION.value(new JdbcNamedParameter("fileExtension")),
 					SYSTEM_PROFILETABLE.FILE_SIZE.value(new JdbcNamedParameter("fileSize")),
-					SYSTEM_PROFILETABLE.FILE_OBJECTTYPE.value(new JdbcNamedParameter("fileObjectType")),
-					SYSTEM_PROFILETABLE.FILE_OBJECTID.value(new JdbcNamedParameter("fileObjectID")),
-					SYSTEM_PROFILETABLE.FILE_ADDEDBY.value(new JdbcNamedParameter("fileAddedBy")),
-					SYSTEM_PROFILETABLE.FILE_ADDEDDATE.value(new JdbcNamedParameter("fileAddedDate")),
+					SYSTEM_PROFILETABLE.FILE_OBJECT_TYPE.value(new JdbcNamedParameter("fileObjectType")),
+					SYSTEM_PROFILETABLE.FILE_OBJECT_ID.value(new JdbcNamedParameter("fileObjectId")),
+					SYSTEM_PROFILETABLE.FILE_ADDED_BY.value(new JdbcNamedParameter("fileAddedBy")),
+					SYSTEM_PROFILETABLE.FILE_ADDED_DATE.value(new JdbcNamedParameter("fileAddedDate")),
 					SYSTEM_PROFILETABLE.FILE_DOWNLOADS.value(new JdbcNamedParameter("fileDownloads")),
 					SYSTEM_PROFILETABLE.FILE_EXTRA.value(new JdbcNamedParameter("fileExtra")),
 					SYSTEM_PROFILETABLE.FILE_DELETED.value(new JdbcNamedParameter("fileDeleted")));
@@ -219,10 +217,10 @@ public class SystemProfileDaoImpl extends TinyDslDaoSupport implements SystemPro
 					SYSTEM_PROFILETABLE.FILE_TITLE.value(new JdbcNamedParameter("fileTitle")),
 					SYSTEM_PROFILETABLE.FILE_EXTENSION.value(new JdbcNamedParameter("fileExtension")),
 					SYSTEM_PROFILETABLE.FILE_SIZE.value(new JdbcNamedParameter("fileSize")),
-					SYSTEM_PROFILETABLE.FILE_OBJECTTYPE.value(new JdbcNamedParameter("fileObjectType")),
-					SYSTEM_PROFILETABLE.FILE_OBJECTID.value(new JdbcNamedParameter("fileObjectID")),
-					SYSTEM_PROFILETABLE.FILE_ADDEDBY.value(new JdbcNamedParameter("fileAddedBy")),
-					SYSTEM_PROFILETABLE.FILE_ADDEDDATE.value(new JdbcNamedParameter("fileAddedDate")),
+					SYSTEM_PROFILETABLE.FILE_OBJECT_TYPE.value(new JdbcNamedParameter("fileObjectType")),
+					SYSTEM_PROFILETABLE.FILE_OBJECT_ID.value(new JdbcNamedParameter("fileObjectId")),
+					SYSTEM_PROFILETABLE.FILE_ADDED_BY.value(new JdbcNamedParameter("fileAddedBy")),
+					SYSTEM_PROFILETABLE.FILE_ADDED_DATE.value(new JdbcNamedParameter("fileAddedDate")),
 					SYSTEM_PROFILETABLE.FILE_DOWNLOADS.value(new JdbcNamedParameter("fileDownloads")),
 					SYSTEM_PROFILETABLE.FILE_EXTRA.value(new JdbcNamedParameter("fileExtra")),
 					SYSTEM_PROFILETABLE.FILE_DELETED.value(new JdbcNamedParameter("fileDeleted"))).where(
@@ -244,10 +242,10 @@ public class SystemProfileDaoImpl extends TinyDslDaoSupport implements SystemPro
 				SYSTEM_PROFILETABLE.FILE_TITLE.eq(new JdbcNamedParameter("fileTitle")),
 				SYSTEM_PROFILETABLE.FILE_EXTENSION.eq(new JdbcNamedParameter("fileExtension")),
 				SYSTEM_PROFILETABLE.FILE_SIZE.eq(new JdbcNamedParameter("fileSize")),
-				SYSTEM_PROFILETABLE.FILE_OBJECTTYPE.eq(new JdbcNamedParameter("fileObjectType")),
-				SYSTEM_PROFILETABLE.FILE_OBJECTID.eq(new JdbcNamedParameter("fileObjectID")),
-				SYSTEM_PROFILETABLE.FILE_ADDEDBY.eq(new JdbcNamedParameter("fileAddedBy")),
-				SYSTEM_PROFILETABLE.FILE_ADDEDDATE.eq(new JdbcNamedParameter("fileAddedDate")),
+				SYSTEM_PROFILETABLE.FILE_OBJECT_TYPE.eq(new JdbcNamedParameter("fileObjectType")),
+				SYSTEM_PROFILETABLE.FILE_OBJECT_ID.eq(new JdbcNamedParameter("fileObjectId")),
+				SYSTEM_PROFILETABLE.FILE_ADDED_BY.eq(new JdbcNamedParameter("fileAddedBy")),
+				SYSTEM_PROFILETABLE.FILE_ADDED_DATE.eq(new JdbcNamedParameter("fileAddedDate")),
 				SYSTEM_PROFILETABLE.FILE_DOWNLOADS.eq(new JdbcNamedParameter("fileDownloads")),
 				SYSTEM_PROFILETABLE.FILE_EXTRA.eq(new JdbcNamedParameter("fileExtra")),
 				SYSTEM_PROFILETABLE.FILE_DELETED.eq(new JdbcNamedParameter("fileDeleted"))));

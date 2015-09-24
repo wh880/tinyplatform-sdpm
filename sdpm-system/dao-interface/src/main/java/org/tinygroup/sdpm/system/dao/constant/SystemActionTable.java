@@ -37,13 +37,13 @@ public class SystemActionTable extends Table {
 	 * 对象类型
 	 * 
 	 */
-	public final Column ACTION_OBJECTTYPE = new Column(this, "action_objectType");
+	public final Column ACTION_OBJECT_TYPE = new Column(this, "action_object_type");
 
 	/** 
 	 * 对象ID
 	 * 
 	 */
-	public final Column ACTION_OBJECTID = new Column(this, "action_objectID");
+	public final Column ACTION_OBJECT_ID = new Column(this, "action_object_id");
 
 	/** 
 	 * 所属项目

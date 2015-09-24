@@ -11,7 +11,7 @@
   </table>
   <table id="52d013ba76aa4a968dcba9005ca3fccd" name="system_search" title="模块搜索表" package-name="">
     <table-field standard-field-id="20a7f050dd5f4726828fd67445d1378f" primary="true" unique="true" not-null="true" id="searchindex_id" auto-increase="true"/>
-    <table-field standard-field-id="c512358f477c406ca15dc07ef5c1c4a8" primary="false" unique="false" not-null="false" id="search_objectType" auto-increase="false"/>
+    <table-field standard-field-id="c512358f477c406ca15dc07ef5c1c4a8" primary="false" unique="false" not-null="false" id="search_object_type" auto-increase="false"/>
     <table-field standard-field-id="5c5229c53bad4cf3afbbeccaf348bb0a" primary="false" unique="false" not-null="false" id="search_objectID" auto-increase="false"/>
     <table-field standard-field-id="22819ace1ac644a19e15bf14034a3b06" primary="false" unique="false" not-null="false" id="search_title" auto-increase="false"/>
     <table-field standard-field-id="9ea372d0291e48ad92b0ccc832485b65" primary="false" unique="false" not-null="false" id="search_content" auto-increase="false"/>
@@ -30,8 +30,8 @@
   <table id="10dd982b856643ce8a43a91db3c98695" name="system_effort" title="日志表单" schema="" package-name="">
     <description></description>
     <table-field standard-field-id="02058421c0be48dcab02f68cf7490361" primary="true" unique="true" not-null="true" id="effort_id" auto-increase="true"/>
-    <table-field standard-field-id="41c2d4fa69994d27b18ce0512040b599" primary="false" unique="false" not-null="true" id="effort_objectType" auto-increase="false"/>
-    <table-field standard-field-id="4f1e941334234d2c99bde0ff28a3d757" primary="false" unique="false" not-null="true" id="effort_objectID" auto-increase="false"/>
+    <table-field standard-field-id="41c2d4fa69994d27b18ce0512040b599" primary="false" unique="false" not-null="true" id="effort_object_type" auto-increase="false"/>
+    <table-field standard-field-id="4f1e941334234d2c99bde0ff28a3d757" primary="false" unique="false" not-null="true" id="effort_object_id" auto-increase="false"/>
     <table-field standard-field-id="20e466bed2f746bdbaa7cfb3c98d6c78" primary="false" unique="false" not-null="true" id="effort_product" auto-increase="false"/>
     <table-field standard-field-id="c757c19c5c7e42e4bb25eb49244f2067" primary="false" unique="false" not-null="true" id="effort_project" auto-increase="false"/>
     <table-field standard-field-id="646f793a61ea4c8e95d7cf89815a6c13" primary="false" unique="false" not-null="true" id="effort_account" auto-increase="false"/>
@@ -69,7 +69,6 @@
     <table-field standard-field-id="d73b76d0dbeb413097168d488ac4d433" primary="false" unique="false" not-null="true" id="mailqueue_failReason" auto-increase="false"/>
   </table>
   <table id="c363d485f21f48908797a82cd98069de" name="system_module" title="系统模块表">
-    <table-field standard-field-id="324591d593d540abae13d2672c3be6fd" primary="true" unique="true" not-null="true" id="sys_module_id" auto-increase="true"/>
     <table-field standard-field-id="a8b7ed7bee72419997a08ab782097fc0" primary="false" unique="false" not-null="true" id="sys_module_root" auto-increase="false"/>
     <table-field standard-field-id="130ca8fdee194bfc9f97ff107e561595" primary="false" unique="false" not-null="true" id="sys_module_name" auto-increase="false"/>
     <table-field standard-field-id="1518400fe07c4cc3a78bd5c6023f9edb" primary="false" unique="false" not-null="true" id="sys_module_path" auto-increase="false"/>
@@ -78,6 +77,7 @@
     <table-field standard-field-id="a5526dab212f42e6b680bafef91b87d5" primary="false" unique="false" not-null="true" id="sys_module_order" auto-increase="false"/>
     <table-field standard-field-id="5d794a1e323844e991dcfcb834dfd0aa" primary="false" unique="false" not-null="true" id="sys_module_type" auto-increase="false"/>
     <table-field standard-field-id="9164a45fb4cc4abc98dacebd2bfcde85" primary="false" unique="false" not-null="true" id="sys_module_owner" auto-increase="false"/>
+    <table-field standard-field-id="32fc494251074a329bdfa8b6600ce738" primary="true" unique="true" not-null="true" id="module_id" auto-increase="true"/>
   </table>
   <table id="fca559f6b24f4216bdd0af4a88aa1a6a" name="system_history" title="操作历史表">
     <table-field standard-field-id="a3c0dbee7bda4ec990d8bcfcbee2ee1f" primary="true" unique="true" not-null="true" id="history_id" auto-increase="true"/>

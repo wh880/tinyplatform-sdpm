@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.biz.inter.EffortManager;
 import org.tinygroup.sdpm.system.biz.inter.EffortManager;
 import org.tinygroup.sdpm.system.dao.SystemEffortDao;
@@ -49,9 +51,13 @@ public class EffortManagerImpl implements EffortManager {
 		return systemEffortDao.query(systemEffort);
 	}
 
-	public Pager<SystemEffort> findByPage(int start, int limit, SystemEffort SystemEffort) {
+	public Pager<SystemEffort> findByPage(int start, int limit, SystemEffort SystemEffort,String sortName, boolean asc) {
 		// TODO Auto-generated method stub
+		if (StringUtil.isBlank(sortName)) {
 		return systemEffortDao.queryPager(start, limit, SystemEffort);
+		 }
+		OrderBy orderBy = new OrderBy(sortName, asc);
+		return systemEffortDao.queryPager(start, limit, SystemEffort, orderBy);
 	}
 
 	public List<SystemEffort> findByDate(Date date) {

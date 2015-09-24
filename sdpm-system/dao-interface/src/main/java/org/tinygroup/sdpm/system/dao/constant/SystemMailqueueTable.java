@@ -61,13 +61,13 @@ public class SystemMailqueueTable extends Table {
 	 * 添加日期
 	 * 
 	 */
-	public final Column MAILQUEUE_ADDEDDATE = new Column(this, "mailqueue_addedDate");
+	public final Column MAILQUEUE_ADDED_DATE = new Column(this, "mailqueue_added_date");
 
 	/** 
 	 * 邮箱队列由谁添加
 	 * 
 	 */
-	public final Column MAILQUEUE_ADDEDBY = new Column(this, "mailqueue_addedBy");
+	public final Column MAILQUEUE_ADDED_BY = new Column(this, "mailqueue_added_by");
 
 	/** 
 	 * 传送时间
@@ -85,7 +85,7 @@ public class SystemMailqueueTable extends Table {
 	 * 传送失败理由
 	 * 
 	 */
-	public final Column MAILQUEUE_FAILREASON = new Column(this, "mailqueue_failReason");
+	public final Column MAILQUEUE_FAIL_REASON = new Column(this, "mailqueue_fail_reason");
 
 
 	private SystemMailqueueTable() {

@@ -28,58 +28,58 @@ public class SystemModuleTable extends Table {
 	public static final SystemModuleTable SYSTEM_MODULETABLE = new SystemModuleTable();
 
 	/** 
-	 * 模块ID
-	 * 
-	 */
-	public final Column SYS_MODULE_ID = new Column(this, "sys_module_id");
-
-	/** 
 	 * 模块根节点
 	 * 
 	 */
-	public final Column SYS_MODULE_ROOT = new Column(this, "sys_module_root");
+	public final Column MODULE_ROOT = new Column(this, "module_root");
 
 	/** 
 	 * 模块名称
 	 * 
 	 */
-	public final Column SYS_MODULE_NAME = new Column(this, "sys_module_name");
+	public final Column MODULE_NAME = new Column(this, "module_name");
 
 	/** 
 	 * 模块地址
 	 * 
 	 */
-	public final Column SYS_MODULE_PATH = new Column(this, "sys_module_path");
+	public final Column MODULE_PATH = new Column(this, "module_path");
 
 	/** 
 	 * 模块父节点
 	 * 
 	 */
-	public final Column SYS_MODULE_PARENT = new Column(this, "sys_module_parent");
+	public final Column MODULE_PARENT = new Column(this, "module_parent");
 
 	/** 
 	 * 模块等级
 	 * 
 	 */
-	public final Column SYS_MODULE_GRADE = new Column(this, "sys_module_grade");
+	public final Column MODULE_GRADE = new Column(this, "module_grade");
 
 	/** 
 	 * 模块次序
 	 * 
 	 */
-	public final Column SYS_MODULE_ORDER = new Column(this, "sys_module_order");
+	public final Column MODULE_ORDER = new Column(this, "module_order");
 
 	/** 
 	 * 模块类型
 	 * 
 	 */
-	public final Column SYS_MODULE_TYPE = new Column(this, "sys_module_type");
+	public final Column MODULE_TYPE = new Column(this, "module_type");
 
 	/** 
 	 * 模块归属
 	 * 
 	 */
-	public final Column SYS_MODULE_OWNER = new Column(this, "sys_module_owner");
+	public final Column MODULE_OWNER = new Column(this, "module_owner");
+
+	/** 
+	 * 模块ID
+	 * 
+	 */
+	public final Column MODULE_ID = new Column(this, "module_id");
 
 
 	private SystemModuleTable() {

@@ -33,7 +33,7 @@ public class ProductAction {
 	public String list(Product product,
 			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "10") int pagesize,
-			@RequestParam(required = false, defaultValue = "product_id")String order, 
+			@RequestParam(required = false, defaultValue = "productId")String order, 
 			@RequestParam(required = false, defaultValue = "asc")String ordertype, Model model) {
 
 		Pager<Product> pagerProduct = productService.findProductPager(page, pagesize, product, order,ordertype);

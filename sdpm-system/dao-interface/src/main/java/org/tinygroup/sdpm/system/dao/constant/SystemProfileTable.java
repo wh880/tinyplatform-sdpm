@@ -61,25 +61,25 @@ public class SystemProfileTable extends Table {
 	 * 附件文件类型
 	 * 
 	 */
-	public final Column FILE_OBJECTTYPE = new Column(this, "file_objectType");
+	public final Column FILE_OBJECT_TYPE = new Column(this, "file_object_type");
 
 	/** 
 	 * 附件对象ID
 	 * 
 	 */
-	public final Column FILE_OBJECTID = new Column(this, "file_objectID");
+	public final Column FILE_OBJECT_ID = new Column(this, "file_object_id");
 
 	/** 
 	 * 由谁添加
 	 * 
 	 */
-	public final Column FILE_ADDEDBY = new Column(this, "file_addedBy");
+	public final Column FILE_ADDED_BY = new Column(this, "file_added_by");
 
 	/** 
 	 * 附件添加日期
 	 * 
 	 */
-	public final Column FILE_ADDEDDATE = new Column(this, "file_addedDate");
+	public final Column FILE_ADDED_DATE = new Column(this, "file_added_date");
 
 	/** 
 	 * 下载次数

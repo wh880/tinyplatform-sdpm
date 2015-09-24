@@ -11,7 +11,7 @@ public interface ModuleService {
 	 * @param SystemModule
 	 * @return
 	 */
-	 SystemModule edit(SystemModule SystemModule);
+	 SystemModule edit(SystemModule systemModule);
 	 
 	/**
 	 * 删除ById
@@ -30,7 +30,7 @@ public interface ModuleService {
 	  * @param SystemModule
 	  * @return
 	  */
-	 int delete(SystemModule SystemModule);
+	 int delete(SystemModule systemModule);
 	 /**
 	  * 通过ID查询对象
 	  * @param id

@@ -53,9 +53,7 @@ public class ProductManagerImpl implements ProductManager{
 	}
 
 	public Pager<Product> findPager(int start, int limit, Product product, String order,String ordertype) {
-		System.out.println("--------------------------");
-		System.out.println(ordertype);
-		return productDao.queryPager((start-1)*limit, limit, product, new OrderBy(order, "asc".equals(ordertype)?true:false));
+		return productDao.queryPager((start-1)*limit, limit, product, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
 
 }
