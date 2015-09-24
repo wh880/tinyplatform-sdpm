@@ -1,4 +1,7 @@
 #import("/org/tinygroup/button/components/button_smart.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="客户管理",activeMenuId=currentPageId)
 #set(name="client")
 #@div()
@@ -28,9 +31,62 @@
             #end
         ##operationbar end
         #end
-        #include("/service/client/clientProductList.page")
+
+        #@tabWithInit("tab_demo" "optionsBox")
+        <div style="width:100%;float:left">
+            #@gridSystem24Col("girdrap")
+                #foreach(var:slas)
+                    #@gridSystemCol(7)
+                        #@div(divClass="infoContent")
+                            <p class="titleName"><a
+                                    href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">${var.slaTitle}</a>
+                            </p>
+                            #@gridSysRow()
+                                #@gridSysCol(4)协议名称#end
+                                #@gridSysCol(8)<a
+                                        href="${TINY_CONTEXT_PATH}/service/sla/slaContent.page">${var.slaTitle}</a>#end
+                                #@gridSysCol(4)服务级别#end
+                                #@gridSysCol(8)${serviceLevel}#end
+                                #@gridSysCol(4)服务期限#end
+                                #@gridSysCol(8)${serviceDeadline}#end
+                                #@gridSysCol(4)批准人#end
+                                #@gridSysCol(8)${slaReviewedBy}#end
+                                #@gridSysCol(4)批准时间#end
+                                #@gridSysCol(8)${slaReviewDate}#end
+                            #end
+                            <div style="text-align:right;margin:right">
+                                #@aExtendButton("btn-primary btn-sm" "../sla/slaAdd.page")编辑#end
+                                #@delItemsdpm(
+                                    "#action" "id" "/service/client/clientProduct.page" {"class":
+                                    "btn radius btn-danger btn-sm"})
+                                    删除#end
+                            </div>
+
+                        #end
+                        #@simpleModal("myModal3"+varFor.index "编辑")#end
+                    #end
+                #end
+            #end
+        </div>
+        #end
+
     #end
 #end
 #@simpleModal("myModal1" "导出")#end
 #@simpleModal("myModal2" "新建产品")#end
 
+<script>
+    $(function () {
+        $(".infoContent").on("click", ".clientDelete", function () {
+            //console.log($(this).attr("itemId"))
+//            var that = this;
+            layer.confirm('确定要删除该记录？', function (index) {
+                //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                //$.ajax()
+                //console.log(index);
+//                layer.msg($("已删除").attr("deleteList"), 1);
+                layer.msg('已删除', 1);
+            })
+        });
+    });
+</script>
