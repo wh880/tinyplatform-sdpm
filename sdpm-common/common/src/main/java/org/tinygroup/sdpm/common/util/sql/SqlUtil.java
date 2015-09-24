@@ -23,13 +23,12 @@ public class SqlUtil {
             int count = 0;
             if(total[i]!=0){
                 for(int j = 0; j<3; j++){
-                    count++;
                     searchInfo = searchInfos.get(j+3*i);
-                    if(searchInfo.getField()!=null&&!"".equals(searchInfo.getField())){
-                        sql.append(searchInfo.getRelation()==null||"".equals(searchInfo.getRelation())?" ":" "+searchInfo.getRelation());
-                        if(nullMark == 1){
-                            if(total[i] - j >0){
-                                sql.append(" (");
+                    if(searchInfo.getValue()!=null&&!"".equals(searchInfo.getValue())){
+                        count++;
+                        if(nullMark == 0){
+                            if(j>0 && count -1 < total[i]){
+                                sql.append(" "+searchInfo.getRelation());
                             }
                         }
                         if((j+3*i)%3 == 0){
@@ -58,9 +57,10 @@ public class SqlUtil {
                             nullMark = 1;
                         }
                     }
+                    if(count == total[i])break;
                 }
             }
-            if(i == 0){
+            if(i == 0 && total[1]!=0&&total[0]!=0){
                 sql.append(" "+groupOperate);
             }
         }
@@ -70,7 +70,21 @@ public class SqlUtil {
 
     private static String seanSearchInfoAppend( SearchInfo searchInfo){
         StringBuffer sql = new StringBuffer();
-        return sql.append(" "+searchInfo.getField()).append(" "+searchInfo.getOperate()).append(" "+searchInfo.getValue()).toString();
+        String operate = searchInfo.getOperate();
+        String operateAndValue = null;
+        if("包含".equals(operate)){
+            operateAndValue = "like '%"+searchInfo.getValue()+"%'";
+        }else if("介于".equals(operate)){
+            String[] values = searchInfo.getValue().split(",");
+            operateAndValue = "between "+values[0]+" and "+values[1]+" ";
+        }else if("不包含".equals(operate)){
+            operateAndValue = "not like '%"+searchInfo.getValue()+"%'";
+        }else if("从属于".equals(operate)){
+            operateAndValue = "in ("+searchInfo.getValue()+")";
+        }else{
+            operateAndValue = operate+" "+searchInfo.getValue();
+        }
+        return sql.append(" "+searchInfo.getField()).append(operateAndValue).toString();
     }
 
     private static int[] totalFields(List<SearchInfo> searchInfos, int n){
@@ -79,7 +93,7 @@ public class SqlUtil {
             int count = 0;
             for (int j = 0; j < 3; j++) {
                 SearchInfo searchInfo = searchInfos.get(j+3*i);
-                if(searchInfo.getField()!=null&&!"".equals(searchInfo.getField())){
+                if(searchInfo.getValue()!=null&&!"".equals(searchInfo.getValue())){
                     count++;
                 }
             }
