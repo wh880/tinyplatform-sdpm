@@ -22,6 +22,20 @@ public class SlaAction extends BaseController{
         }
         return "/service/sla/slaAdd.page";
     }
+    @RequestMapping("/save")
+    public  String save(ServiceSla sla,Model model)
+    {
+
+
+            slaService.addSla(sla);
+
+       /* else
+        {
+            slaService.updateSla(sla);
+        }*/
+        model.addAttribute("sla",sla);
+        return "/service/sla/sla.page";
+    }
 
 
 

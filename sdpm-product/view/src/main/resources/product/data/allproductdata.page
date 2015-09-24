@@ -24,7 +24,7 @@
 			#if(m.id=="allproduct-close")
 				#iconOperations("#myModal" "icon-off " "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet" "ml-5")&nbsp;
 				#elseif(m.id=="allproduct-edit")
-                <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-module-editor.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;
+                <a href="${TINY_CONTEXT_PATH}/product/find?productId=${product.productId}" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;
 				#else
 				#@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)<i class="icon-remove"></i>#end
 			#end
