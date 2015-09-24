@@ -38,8 +38,6 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.product.dao.ProductStorySpecDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -51,11 +49,9 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
-@LogClass("productStorySpec")
 @Repository
 public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements ProductStorySpecDao {
 
-	@LogMethod("add")
 	public ProductStorySpec add(ProductStorySpec productStorySpec) {
 		return getDslTemplate().insertAndReturnKey(productStorySpec, new InsertGenerateCallback<ProductStorySpec>() {
 			public Insert generate(ProductStorySpec t) {
@@ -71,7 +67,6 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		});
 	}
 
-	@LogMethod("edit")
 	public int edit(ProductStorySpec productStorySpec) {
 		if(productStorySpec == null || productStorySpec.getCompanyId() == null){
 			return 0;
@@ -91,7 +86,6 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		});
 	}
 
-	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -103,7 +97,6 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		});
 	}
 
-	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -124,7 +117,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		});
 	}
 
-	public List<ProductStorySpec> query(ProductStorySpec productStorySpec ,final OrderBy... orderBies) {
+	public List<ProductStorySpec> query(ProductStorySpec productStorySpec ,final OrderBy... orderArgs) {
 		if(productStorySpec==null){
 			productStorySpec=new ProductStorySpec();
 		}
@@ -140,12 +133,12 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 					PRODUCT_STORYSPECTABLE.STORY_TITLE.eq(t.getStoryTitle()),
 					PRODUCT_STORYSPECTABLE.STORY_SPEC.eq(t.getStorySpec()),
 					PRODUCT_STORYSPECTABLE.STORY_VERIFICATION.eq(t.getStoryVerification())));
-		return addOrderByElements(select, orderBies);
+			return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
 
-	public Pager<ProductStorySpec> queryPager(int start,int limit ,ProductStorySpec productStorySpec ,final OrderBy... orderBies) {
+	public Pager<ProductStorySpec> queryPager(int start,int limit ,ProductStorySpec productStorySpec ,final OrderBy... orderArgs) {
 		if(productStorySpec==null){
 			productStorySpec=new ProductStorySpec();
 		}
@@ -160,7 +153,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 					PRODUCT_STORYSPECTABLE.STORY_TITLE.eq(t.getStoryTitle()),
 					PRODUCT_STORYSPECTABLE.STORY_SPEC.eq(t.getStorySpec()),
 					PRODUCT_STORYSPECTABLE.STORY_VERIFICATION.eq(t.getStoryVerification())));
-		return addOrderByElements(select, orderBies);
+			return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
@@ -187,7 +180,6 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 			return batchInsert(true ,productStorySpecs);
 	}
 
-	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<ProductStorySpec> productStorySpecs) {
 		if (CollectionUtil.isEmpty(productStorySpecs)) {
 			return new int[0];
@@ -207,7 +199,6 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		});
 	}
 
-	@LogMethod("batchDelete")
 	public int[] batchDelete(List<ProductStorySpec> productStorySpecs) {
 		if (CollectionUtil.isEmpty(productStorySpecs)) {
 			return new int[0];
@@ -226,7 +217,6 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		});
 	}
 
-	@LogMethod("addOrderByElementss")
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {

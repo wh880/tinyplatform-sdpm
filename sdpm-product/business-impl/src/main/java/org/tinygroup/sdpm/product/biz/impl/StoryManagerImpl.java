@@ -29,7 +29,7 @@ public class StoryManagerImpl implements StoryManager{
 		
 		ProductStory story = new ProductStory();
 		story.setStoryId(storyId);
-		story.setDeleted(ProductStory.DELETE_YES);
+		story.setDeleted(FieldUtil.DELETE_YES);
 		return productStoryDao.edit(story);
 	}
 

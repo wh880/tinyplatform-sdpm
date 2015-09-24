@@ -28,6 +28,18 @@ public interface TaskManager {
     Pager<ProjectTask> findPager(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc);
 
     /**
+     * 加入状态
+     * @param start
+     * @param limit
+     * @param task
+     * @param sortName
+     * @param asc
+     * @param conditon
+     * @return
+     */
+    public Pager<ProjectTask> findPagerByStatu(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String conditon);
+
+    /**
      * 新增有一个用户
      *
      * @param task 新增实体类

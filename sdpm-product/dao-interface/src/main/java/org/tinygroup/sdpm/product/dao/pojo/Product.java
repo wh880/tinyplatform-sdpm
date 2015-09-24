@@ -16,17 +16,13 @@
 
 package org.tinygroup.sdpm.product.dao.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 产品表
  * 
  */
-public class Product implements Serializable{
-	
-	public static int DELETE_YES = 1;
-    public static int DELETE_NO = 0;
+public class Product {
 
 	/** 
 	 * 产品ID

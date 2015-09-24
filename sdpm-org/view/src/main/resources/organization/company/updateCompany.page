@@ -1,6 +1,5 @@
 #@noRespsGridSystem()
     #@tinyForm("thisform" TINY_CONTEXT_PATH+"/org/company/save" "post" {"class":""})
-        #hiddenInput(hiddenInputName="orgUserId" hiddenInputValue=cmsArticle?.articleId)
         #@gridSysRow()
             #@colLabel("col-3")<span class="c-red">*</span>公司名称：#end
             #@gridSysCol(7)
@@ -74,8 +73,9 @@
         #@gridSysRow()
             #@colLabel("col-3")匿名登录：#end
             #@gridSysCol(7)
-                #@tinyRadio("sex" "man" "women" {"nullmsg":"请选择性别！","datatype":"*"})允许#end
-                #@tinyRadio("sex" "women" "women")不允许#end
+                #@tinyRadio(
+                    "orgCompanyGuest" "1" company?.orgCompanyGuest?:"0" {"nullmsg":"请选择性别！","datatype":"*"})允许#end
+                #@tinyRadio("orgCompanyGuest" "0" company?.orgCompanyGuest?:"0")不允许#end
             #end
         #end
         #@gridSysRow()

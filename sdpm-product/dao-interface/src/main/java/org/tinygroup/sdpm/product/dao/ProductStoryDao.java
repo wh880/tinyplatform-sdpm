@@ -17,13 +17,12 @@
 package org.tinygroup.sdpm.product.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
-
-    public Pager<ProductStory> complexQuery(int start, int limit, ProductStory productStory, String condition, OrderBy ...orderBys);
+		
+	public Pager<ProductStory> complexQuery(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys);
 
 }

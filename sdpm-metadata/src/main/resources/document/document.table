@@ -28,11 +28,4 @@
     <table-field standard-field-id="9282649ea9b249eb9df0c2f9581c625c" primary="false" unique="false" not-null="false" id="doc_lib_addtime" auto-increase="false"/>
     <table-field standard-field-id="8842a366405a4f35a57ba0e5f5ac66f3" primary="false" unique="false" not-null="false" id="doc_lib_updtime" auto-increase="false"/>
   </table>
-  <table id="c5fdcc775a0348f8bbec82b020fed67e" name="historydoc" title="文档编辑历史记录">
-    <description></description>
-    <table-field standard-field-id="ca754aa8cc3d4cfe8eb8c883b1793fe6" primary="true" unique="true" not-null="true" id="record_id" auto-increase="true"/>
-    <table-field standard-field-id="157b6bcd380345ecb1bbb2b6005b92f7" primary="false" unique="false" not-null="false" id="doc_id" auto-increase="false"/>
-    <table-field standard-field-id="1e7bd4421b7a46d8b020fd681fa922df" primary="false" unique="false" not-null="false" id="rec_time" auto-increase="false"/>
-    <table-field standard-field-id="b86c9303eb134a2286f2acd69013cc38" primary="false" unique="false" not-null="false" id="rec_who" auto-increase="false"/>
-  </table>
 </tables>

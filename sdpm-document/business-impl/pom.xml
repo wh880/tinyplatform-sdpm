@@ -22,7 +22,7 @@
     </dependency>
     <dependency>
        <groupId>org.tinygroup</groupId>
-       <artifactId>sdpm-document-dao-interface</artifactId>
+       <artifactId>sdpm-document-dao-impl</artifactId>
         <version>${tiny_sdpm_version}</version>
     </dependency>
     <dependency>
