@@ -22,6 +22,11 @@
     </dependency>
     <dependency>
        <groupId>org.tinygroup</groupId>
+       <artifactId>sdpm-quality-service-impl</artifactId>
+        <version>${tiny_sdpm_version}</version>
+    </dependency>
+    <dependency>
+       <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-quality-business-interface</artifactId>
         <version>${tiny_sdpm_version}</version>
     </dependency>

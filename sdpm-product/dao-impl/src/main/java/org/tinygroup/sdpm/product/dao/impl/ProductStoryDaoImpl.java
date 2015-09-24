@@ -447,7 +447,44 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
 
 			public Select generate(ProductStory t) {
-				Select select = MysqlSelect.selectFrom(PRODUCT_STORYTABLE).where(fragmentCondition(condition));
+				Select select = MysqlSelect.selectFrom(PRODUCT_STORYTABLE).where(and(
+						fragmentCondition(condition),
+						PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
+						PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
+						PRODUCT_STORYTABLE.STORY_PARENTID.eq(t.getStoryParentId()),
+						PRODUCT_STORYTABLE.MODULE_ID.eq(t.getModuleId()),
+						PRODUCT_STORYTABLE.PLAN_ID.eq(t.getPlanId()),
+						PRODUCT_STORYTABLE.STORY_STATUS.eq(t.getStoryStatus()),
+						PRODUCT_STORYTABLE.STORY_SOURCE.eq(t.getStorySource()),
+						PRODUCT_STORYTABLE.STORY_FROMBUG.eq(t.getStoryFromBug()),
+						PRODUCT_STORYTABLE.STORY_TITLE.eq(t.getStoryTitle()),
+						PRODUCT_STORYTABLE.STORY_KEYWORDS.eq(t.getStoryKeywords()),
+						PRODUCT_STORYTABLE.STORY_TYPE.eq(t.getStoryType()),
+						PRODUCT_STORYTABLE.STORY_PRI.eq(t.getStoryPri()),
+						PRODUCT_STORYTABLE.STORY_ESTIMATE.eq(t.getStoryEstimate()),
+						PRODUCT_STORYTABLE.STORY_STAGE.eq(t.getStoryStage()),
+						PRODUCT_STORYTABLE.STORY_MAILTO.eq(t.getStoryMailto()),
+						PRODUCT_STORYTABLE.STORY_OPENEDBY.eq(t.getStoryOpenedBy()),
+						PRODUCT_STORYTABLE.STORY_OPENEDDATE.eq(t.getStoryOpenedDate()),
+						PRODUCT_STORYTABLE.STORY_ASSIGNEDTO.eq(t.getStoryAssignedTo()),
+						PRODUCT_STORYTABLE.STORY_ASSIGNEDDATE.eq(t.getStoryAssignedDate()),
+						PRODUCT_STORYTABLE.STORY_LASTEDITEDBY.eq(t.getStoryLastEditedBy()),
+						PRODUCT_STORYTABLE.STORY_LASTEDITEDDATE.eq(t.getStoryLastEditedDate()),
+						PRODUCT_STORYTABLE.STORY_REVIEWEDBY.eq(t.getStoryReviewedBy()),
+						PRODUCT_STORYTABLE.STORY_REVIEWEDDATE.eq(t.getStoryReviewedDate()),
+						PRODUCT_STORYTABLE.STORY_CLOSEDBY.eq(t.getStoryClosedBy()),
+						PRODUCT_STORYTABLE.STORY_CLOSEDDATE.eq(t.getStoryClosedDate()),
+						PRODUCT_STORYTABLE.STORY_CLOSEDREASON.eq(t.getStoryClosedReason()),
+						PRODUCT_STORYTABLE.TOBUG.eq(t.getToBug()),
+						PRODUCT_STORYTABLE.STORY_LINKSTORIES.eq(t.getStoryLinkStories()),
+						PRODUCT_STORYTABLE.STORY_CHILDSTORIES.eq(t.getStoryChildStories()),
+						PRODUCT_STORYTABLE.STORY_DUPLICATESTORY.eq(t.getStoryDuplicateStory()),
+						PRODUCT_STORYTABLE.STORY_VERSION.eq(t.getStoryVersion()),
+						PRODUCT_STORYTABLE.BUILD_ID.eq(t.getBuildId()),
+						PRODUCT_STORYTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()),
+						PRODUCT_STORYTABLE.DELETED.eq(t.getDeleted())
+
+				));
 				return addOrderByElements(select, orderBys);
 			}
 		});
