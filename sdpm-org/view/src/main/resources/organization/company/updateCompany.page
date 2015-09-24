@@ -1,10 +1,12 @@
 #@noRespsGridSystem()
-    #@tinyForm("thisform" "" "" {"class":""})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/org/company/save" "post" {"class":""})
+        #hiddenInput(hiddenInputName="orgUserId" hiddenInputValue=cmsArticle?.articleId)
         #@gridSysRow()
             #@colLabel("col-3")<span class="c-red">*</span>公司名称：#end
             #@gridSysCol(7)
                 #tinyInput(
-                    "text" "name" ""{"placeholder":"输入公司名称","datatype":"*","nullmsg":"请输入公司名称！","id":"name","class":
+                    "text" "orgCompanyName" company?.orgCompanyName{"placeholder":"输入公司名称","datatype":"*","nullmsg":
+                    "请输入公司名称！","id":"name","class":
                     "input-text"})
             #end
 
@@ -13,7 +15,8 @@
             #@colLabel("col-3")联系电话：#end
             #@gridSysCol(7)
                 #tinyInput(
-                    "text" "phone" ""{"placeholder":"请输入联系电话","datatype":"*4-16","nullmsg":"联系电话不能为空！","id":"phone",
+                    "text" "orgCompanyPhone" company?.orgCompanyPhone {"placeholder":"请输入联系电话","datatype":"*4-16",
+                    "nullmsg":"联系电话不能为空！","id":"phone",
                     "class":
                     "input-text"})
             #end
@@ -22,7 +25,8 @@
             #@colLabel("col-3")传真：#end
             #@gridSysCol(7)
                 #tinyInput(
-                    "text" "phone" ""{"placeholder":"请输入传真","datatype":"*4-16","nullmsg":"联系电话不能为空！","id":"phone",
+                    "text" "orgCompanyFax" company?.orgCompanyFax{"placeholder":"请输入传真","datatype":"*4-16","nullmsg":
+                    "联系电话不能为空！","id":"phone",
                     "class":
                     "input-text"})
             #end
@@ -31,7 +35,8 @@
             #@colLabel("col-3")通讯地址：#end
             #@gridSysCol(7)
                 #tinyInput(
-                    "text" "phone" ""{"placeholder":"请输入联系电话","datatype":"*4-16","nullmsg":"联系电话不能为空！","id":"phone",
+                    "text" "orgCompanyAddress" company?.orgCompanyAddress{"placeholder":"请输入联系电话","datatype":"*4-16",
+                    "nullmsg":"联系电话不能为空！","id":"phone",
                     "class":
                     "input-text"})
             #end
@@ -40,7 +45,8 @@
             #@colLabel("col-3")邮政编码：#end
             #@gridSysCol(7)
                 #tinyInput(
-                    "text" "phone" ""{"placeholder":"请输入联系电话","datatype":"*4-16","nullmsg":"联系电话不能为空！","id":"phone",
+                    "text" "orgCompanyZipCode" company?.orgCompanyZipCode{"placeholder":"请输入联系电话","datatype":"*4-16",
+                    "nullmsg":"联系电话不能为空！","id":"phone",
                     "class":
                     "input-text"})
             #end
@@ -49,7 +55,8 @@
             #@colLabel("col-3")官网：#end
             #@gridSysCol(7)
                 #tinyInput(
-                    "text" "phone" ""{"placeholder":"请输入联系电话","datatype":"*4-16","nullmsg":"联系电话不能为空！","id":"phone",
+                    "text" "orgCompanyWebsite" company?.orgCompanyWebsite{"placeholder":"请输入联系电话","datatype":"*4-16",
+                    "nullmsg":"联系电话不能为空！","id":"phone",
                     "class":
                     "input-text"})
             #end
@@ -58,7 +65,8 @@
             #@colLabel("col-3")内网：#end
             #@gridSysCol(7)
                 #tinyInput(
-                    "text" "phone" ""{"placeholder":"请输入联系电话","datatype":"*4-16","nullmsg":"联系电话不能为空！","id":"phone",
+                    "text" "orgCompanyBackyard" company?.orgCompanyBackyard{"placeholder":"请输入联系电话","datatype":"*4-16",
+                    "nullmsg":"联系电话不能为空！","id":"phone",
                     "class":
                     "input-text"})
             #end

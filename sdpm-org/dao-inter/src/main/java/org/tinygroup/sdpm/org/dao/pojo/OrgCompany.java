@@ -26,6 +26,8 @@ public class OrgCompany implements Serializable {
 
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
+
+
 	/**
 	 * 公司编号
 	 *
@@ -83,6 +85,7 @@ public class OrgCompany implements Serializable {
 	private String orgCompanyDeleted;
 
 	public OrgCompany() {
+		setOrgCompanyId(1);
 		setOrgCompanyDeleted(DELETE_NO);
 	}
 
