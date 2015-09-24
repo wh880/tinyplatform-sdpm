@@ -33,9 +33,10 @@ public class ProductAction {
 	public String list(Product product,
 			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "10") int pagesize,
-			String columnName, boolean asc, Model model) {
+			@RequestParam(required = false, defaultValue = "product_id")String order, 
+			@RequestParam(required = false, defaultValue = "asc")String ordertype, Model model) {
 
-		Pager<Product> pagerProduct = productService.findProductPager(page, pagesize, null, "productId",true);
+		Pager<Product> pagerProduct = productService.findProductPager(page, pagesize, product, order,ordertype);
 		
 		model.addAttribute("pagerProduct", pagerProduct);
 		return "/product/data/allproductdata.pagelet";
