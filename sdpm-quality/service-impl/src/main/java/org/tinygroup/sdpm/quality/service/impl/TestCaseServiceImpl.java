@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.quality.biz.inter.TestCaseManager;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
+import org.tinygroup.tinysqldsl.Pager;
 
 @Component
 public class TestCaseServiceImpl implements TestCaseService {
@@ -39,5 +40,9 @@ public class TestCaseServiceImpl implements TestCaseService {
 	
 	public int[] batchDeleteTestCase(List<QualityTestCase> testcases){
 		return testcasemanager.batchDelete(testcases);
+	}
+	
+	public Pager<QualityTestCase> findTestCasePager(Integer start,Integer limit,QualityTestCase testcase,String sortName,boolean asc){
+		return testcasemanager.findPager(start, limit, testcase, sortName, asc);
 	}
 }

@@ -88,6 +88,8 @@
         <!--<artifactId>sdpm-service-view</artifactId>-->
         <!--<version>${tiny_sdpm_version}</version>-->
         <!--</dependency>-->
+        
+        <!-- quality -->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-quality-view</artifactId>
@@ -118,6 +120,7 @@
             <artifactId>sdpm-productLine-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+        <!-- quality end -->
 
         <!-- project -->
         <dependency>
