@@ -28,6 +28,14 @@ public class ProductAction {
 		return "/product/page/tabledemo/addProduct.page";
 
 	}
+	
+	@RequestMapping("/find")
+	public String find(Integer productId,Model model){
+		
+		Product product = productService.findProduct(productId);
+		model.addAttribute("product", product);
+		return "/product/page/tabledemo/product-module-editor.page";
+	}
 
 	@RequestMapping("/list")
 	public String list(Product product,
