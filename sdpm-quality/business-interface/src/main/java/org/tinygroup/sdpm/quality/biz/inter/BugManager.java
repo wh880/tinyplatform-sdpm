@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.quality.biz.inter;
 import java.util.List;
 
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface BugManager {
 	/**
@@ -18,6 +19,12 @@ public interface BugManager {
 	 * @return
 	 */
 	List<QualityBug> findList(QualityBug type);	
+	
+	/**
+	 * 分页查询
+	 * @return
+	 */
+	Pager<QualityBug> findPager(Integer start,Integer limit,QualityBug bug,String sortName,boolean asc);
 	
 	/**
 	 * 提Bug

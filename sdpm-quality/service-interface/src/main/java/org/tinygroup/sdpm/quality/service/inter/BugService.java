@@ -33,6 +33,7 @@ public interface BugService {
 	 * @return
 	 */
 	int updateBug(QualityBug bug);
+	
 	/**
 	 * 批量修改
 	 * @param bugs
@@ -40,5 +41,15 @@ public interface BugService {
 	 */
 	int[] batchUpdateBug(List<QualityBug> bugs);
 	
+	/**
+	 * 分页查询
+	 * @param start
+	 * @param limit
+	 * @param bug
+	 * @param sortName
+	 * @param asc
+	 * @return
+	 */
+	Pager<QualityBug> findBugListPager(Integer start,Integer limit,QualityBug bug,String sortName,boolean asc);
 	
 }

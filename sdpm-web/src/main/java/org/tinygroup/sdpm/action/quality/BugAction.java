@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
+import org.tinygroup.tinysqldsl.Pager;
 
 /**
  * Created by chenpeng15668 on 2015-9-22
@@ -22,14 +23,25 @@ public class BugAction extends BaseController {
 	@Autowired
 	private BugService bugService;
 	
+	//
 	@RequestMapping("/form")
 	public String form(Integer id,Model model){
+		
+		return "";
+	}
+	
+	
+	
+	@RequestMapping("/findBug")
+	public String findBugPager(Integer start,Integer limit,String order,Integer id,Model model){
+		boolean asc = true;		
+		if("desc".equals(order)){
+			asc = false;
+		}
 		QualityBug bug = new QualityBug();
-		if(id != null){
-			bug.setProductId(id);
-			List<QualityBug> buglist = bugService.findBugList(bug);
-			model.addAttribute("bug",buglist);
-		}	
+		bug.setProductId(id);
+		Pager<QualityBug> bugPager = bugService.findBugListPager(start, limit, bug, order, asc);
+		model.addAttribute("bugPager",bugPager);
 		return "testManagement/data/BugData.pagelet";
 	}
 	
