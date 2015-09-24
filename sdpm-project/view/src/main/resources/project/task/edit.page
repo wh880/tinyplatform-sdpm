@@ -21,8 +21,8 @@
     #end
 #end
 
-
-#@tinyForm("thisform" "" "" {"class":"test","enctype":"multipart/form-data"})
+###macro tinyForm(formname action method formMapInfo)
+#@tinyForm("thisform" "/project/task/edit" "post" {"class":"test","enctype":"multipart/form-data"})
 <div style="width:70%;float:left" class="">
 
     <div class="infoContent">
@@ -33,7 +33,7 @@
                 <div class="col-2 text-r"><label>任务描述：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("content" "taskDesc" {"initialFrameHeight":"150"})Say something#end</div>
+                    #@Teditor("content" "taskDesc" {"initialFrameHeight":"150"})${task?.taskDesc}#end</div>
             </div>
         #end
         #@elementItem()
