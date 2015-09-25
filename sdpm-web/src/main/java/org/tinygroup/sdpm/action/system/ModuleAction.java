@@ -33,6 +33,7 @@ public class ModuleAction extends BaseController{
 		  response.setContentType("application/json; charset=UTF-8");
 		  List<Map<String, Object>> mapList = Lists.newArrayList();
 	     String[] title = {"花湖", "哈哈", "可以", "这是"};
+	     SystemModule systemModule = new SystemModule();
 	     for (int i = 1; i < 5; i++) {
 	            Map<String, Object> mapTop = Maps.newHashMap();
 	            mapTop.put("id", "p" + i);
@@ -41,7 +42,9 @@ public class ModuleAction extends BaseController{
 	            mapTop.put("isParent", true);
 	            mapTop.put("name", title[i - 1]);
 	            mapList.add(mapTop);
-	            List<SystemModule> list = moduleService.findByRoot(i);
+	          
+	            systemModule.setModuleId(i);
+	            List<SystemModule> list = moduleService.findModules(systemModule);
 	            for (SystemModule s : list) {
 	                Map<String, Object> map = Maps.newHashMap();
 	                map.put("id", s.getModuleId());

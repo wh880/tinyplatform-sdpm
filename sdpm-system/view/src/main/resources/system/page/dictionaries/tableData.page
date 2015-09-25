@@ -1,7 +1,5 @@
-#set(records=dictPager.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-    #set(pagesize=records-(page-1)*pagesize)
-#end
+#set(editpagePath="/system/page/dictionaries/dictitem_edit.pagelet",editpageModalId="dictitemEditModal",editpageModal="#"+editpageModalId)
+#set(viewpagePath=TINY_CONTEXT_PATH+"/system/dict/check?dictId=1",viewpageModalId="dictitemViewModal",viewpageModal="#"+viewpageModalId)
 #setTinyItemCount(dictPager.totalCount)
 
 #for(d:dictPager.records)
@@ -10,13 +8,14 @@
 	#@td()${d?.dictId}#end
 	#@td()${d?.dictKey}#end
 	#@td()${d?.dictValue}#end
-	#@td() ${d?.moduleId}#end
+	#@td()${d?.moduleId}#end
 	#@td()${d?.dictSort}#end
 	
 	#@td("f-14 user-manage")
 						#foreach(m in menuManager.getScopeMenus("dictitem-op"))
 							#if(m.id!="dictitem-del")
-								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "" "" m.href "ml-5")
+								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal
+								 m.icon m.name "" "" m.href +"?dictId="+d?.dictId"ml-5")
 							#else
 								#iconOperation(m.icon m.name "ml-5 delBtn")
 							#end
@@ -27,4 +26,4 @@
 		
 	
 #end
-#end	
+#end

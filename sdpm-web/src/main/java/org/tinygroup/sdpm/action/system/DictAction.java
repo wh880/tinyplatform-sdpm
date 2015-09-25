@@ -42,6 +42,11 @@ public class DictAction extends BaseController{
 	       model.addAttribute("dictPager",dictPager);
 	       return "system/page/dictionaries/tableData.pagelet"; 
 	   }
-			
+	@RequestMapping("check")
+    public String checkDict(Integer dictId,Model model){
+    	 SystemDict dict =dictService.findDict(dictId);
+    	 model.addAttribute("dict", dict);
+    	 return "system/page/dictionaries/dictitem_view.pagelet";
+     }
 
 }
