@@ -6,9 +6,9 @@
 #set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-       #* #@div(divClass="dropdownBox")
-            #include("/service/serviceCom/dropdownMenu.page")
-        #end*#
+    #* #@div(divClass="dropdownBox")
+         #include("/service/serviceCom/dropdownMenu.page")
+     #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
@@ -42,8 +42,12 @@
     ##            #end
     ##        </div>
     <div style="text-align:right;margin:right">
-        #@aExtendButton("btn-primary btn-sm" "slaAdd.page")编辑#end
-        #@delItemsdpm("#action" "id" "/service/client/clientProduct.page" {"class":"btn radius btn-danger btn-sm"})
+    #*slacontent页面的编辑删除*#
+    #* #@aExtendButton("btn-primary btn-sm" "slaAdd.page")编辑#end*#
+        #@aExtendButton("btn-primary btn-sm" TINY_CONTEXT_PATH+"/service/sla/form")编辑#end
+    #*#@delItemsdpm("#action" "id" "/service/client/clientProduct.page" {"class":"btn radius btn-danger btn-sm"})
+        删除#end*#
+        #@delItemsdpm("#action" "id" "/service/sla/delete" {"class":"btn radius btn-danger btn-sm"})
             删除#end
     </div>
     #end

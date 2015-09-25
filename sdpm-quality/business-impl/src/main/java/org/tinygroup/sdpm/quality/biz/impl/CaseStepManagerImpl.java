@@ -31,5 +31,5 @@ public class CaseStepManagerImpl implements CaseStepManager {
 	
 	public List<QualityCaseStep> findList(QualityCaseStep casestep){
 		return casestepdao.query(casestep);
-	}
+	}	
 }

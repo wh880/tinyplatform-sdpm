@@ -34,7 +34,31 @@
          <menu id="tbugback" name="返回" href="/testManagement/page/Bug.page" icon="icon-level-up" sort="1"
               isShow="1" scope="testbuginfo-tab"></menu> 
          <menu id="tbugnext" name="下一个Bug" href="/testManagement/page/bugInfo.page" icon="icon-chevron-right" sort="1"
-              isShow="1" scope="testbuginfo-tab"></menu>                   
+              isShow="1" scope="testbuginfo-tab"></menu> 
+         <menu id="tbugstatus" name="未关闭" href="#" icon="" sort="12"
+              isShow="1" scope="testbugleft-tab"></menu> 
+         <menu id="tbugall" name="所有" href="#" icon="" sort="11"
+              isShow="1" scope="testbugleft-tab"></menu>
+         <menu id="tbugassigntome" name="指派给我 " href="#" icon="" sort="10"
+              isShow="1" scope="testbugleft-tab"></menu>  
+         <menu id="tbugbuildbyme" name="由我创建"  href="#" icon="" sort="9"
+              isShow="1" scope="testbugleft-tab"></menu> 
+         <menu id="tbugsolvebyme" name="由我解决"  href="#" icon="" sort="8"
+              isShow="1" scope="testbugleft-tab"></menu> 
+         <menu id="tbugnotsure" name="未确认"  href="#" icon="" sort="7"
+              isShow="1" scope="testbugleft-tab"></menu>  
+         <menu id="tbugnotassign" name="未指派"  href="#" icon="" sort="6"
+              isShow="1" scope="testbugleft-tab"></menu> 
+         <menu id="tbugnotsolve" name="未解决"  href="#" icon="" sort="5"
+              isShow="1" scope="testbugleft-tab"></menu>  
+         <menu id="tbuglong" name="久未处理"  href="#" icon="" sort="4"
+              isShow="1" scope="testbugleft-tab"></menu>
+         <menu id="tbugtimeup" name="被延期"  href="#" icon="" sort="3"
+              isShow="1" scope="testbugleft-tab"></menu> 
+         <menu id="tbugneedchange" name="需求变动"  href="#" icon="" sort="2"
+              isShow="1" scope="testbugleft-tab"></menu>
+         <menu id="tsearch" name="搜索"  href="#" icon="" sort="1"
+              isShow="1" scope="testbugleft-tab,testcaseleft-tab"></menu>                       
     </menu>
     <menu id="qualityCases" parent-id="quality" name="用例" href="/testManagement/page/cases.page" icon="" sort="1"
           isShow="1">    	 
@@ -65,8 +89,16 @@
        <menu id="tnoteedit" name="编辑" href="/testManagement/page/editLog.pagelet" icon="icon-pencil" sort="2"
               isShow="1" scope="testcasenote-op"></menu> 
        <menu id="tnotedelete" name="删除" href="" icon="icon-remove" sort="1"
-              isShow="1" scope="testcasenote-op"></menu>          
-		 </menu>		 
+              isShow="1" scope="testcasenote-op"></menu>
+       <menu id="tcaseall" name="所有"  href="#" icon="" sort="5"
+              isShow="1" scope="testcaseleft-tab"></menu> 
+        <menu id="tcaseneedchange" name="需求变动"  href="#" icon="" sort="4"
+              isShow="1" scope="testcaseleft-tab"></menu> 
+        <menu id="tcasesee" name="分组查看"  href="#" icon="" sort="3"
+              isShow="1" scope="testcaseleft-tab"></menu> 
+         <menu id="tcasenodemand" name="零用例需求"  href="#" icon="" sort="2"
+              isShow="1" scope="testcaseleft-tab"></menu>      
+	</menu>		 
     <menu id="qualityVersion" parent-id="quality" name="版本" href="/testManagement/page/version.page" icon=""
               sort="1"       isShow="1">
       	<menu id="tversionSituation" name="概况" href="/testManagement/page/versionSituation.page" icon="icon-file" sort="4"
@@ -96,6 +128,10 @@
        <menu id="tverdelete" name="删除" href="" icon="icon-remove" sort="2"
               isShow="1" scope="testverinfo-tab"></menu>
        <menu id="tverback" name="返回" href="" icon="icon-level-up" sort="1"
-              isShow="1" scope="testverinfo-tab"></menu>                  
-      	</menu>      	               
+              isShow="1" scope="testverinfo-tab"></menu> 
+       <menu id="tvernotest" name="待测版本"  href="#" icon="" sort="1"
+              isShow="1" scope="testverleft-tab"></menu> 
+	   <menu id="tvertest" name="待测版本"  href="#" icon="" sort="1"
+              isShow="1" scope="testverleft-tab"></menu>                       
+    </menu>      	               
 </menu>

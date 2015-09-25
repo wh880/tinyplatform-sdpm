@@ -31,6 +31,7 @@ import org.tinygroup.event.ServiceRequest;
 
 @Component("bugService")
 public class BugServiceImplWrapper implements org.tinygroup.sdpm.quality.service.inter.BugService {
+	
 	@Autowired
 	CEPCore cepcore;
 

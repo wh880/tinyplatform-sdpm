@@ -10,24 +10,23 @@
 #end
 #setTinyItemCount(28)
 
-#for(var:[1..pagesize])
+#for(v:verPager)
 					#@tr()
 						#@td()<input type="checkbox" value="1" name="userid">#end
-						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionInfo.page">${var}</a>#end
-						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionInfo.page">任务名称</a>#end
-						#@td()<a href="${TINY_CONTEXT_PATH}/project/demand/index.page">第20周工作项目</a>#end
-						#@td()Trunk#end
-						#@td()admin#end
-						#@td()2015-07-30#end
-						#@td()2015-07-30#end
-						#@td()进行中#end
-						
+						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionInfo.page">${v?.testversionId}</a>#end
+						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionInfo.page">${v?.testtaskTitle}</a>#end
+						#@td()<a href="${TINY_CONTEXT_PATH}/project/demand/index.page">${v?.projectId}</a>#end
+						#@td()${v?.build}#end
+						#@td()${v?.testtaskOwner}#end
+						#@td()${v?.testtaskBegin}#end
+						#@td()${v?.testtaskEnd}#end
+						#@td()${v?.testtaskStatus}#end					
 						 #@td()
 						 	#foreach(m:menuManager.getScopeMenus("testversion-op"))
 						 		#if(m.id != "tversiondelete")
 						 			<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 						 		#else
-						 			#@tinyTableItemRemove(m.href var)
+						 			#@tinyTableItemRemove(m.href v)
 										<i class="${m.icon}" title="删除"></i>
 									#end
 						 		#end

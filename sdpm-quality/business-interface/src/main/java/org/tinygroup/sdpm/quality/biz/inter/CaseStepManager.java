@@ -3,6 +3,9 @@ package org.tinygroup.sdpm.quality.biz.inter;
 import java.util.List;
 
 import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
+/**
+ * Created by chenpeng15668 on 2015-9-24
+ */
 
 public interface CaseStepManager {
 		
@@ -11,13 +14,13 @@ public interface CaseStepManager {
 		 * @param id
 		 * @return
 		 */
-	QualityCaseStep find(Integer id);
+		QualityCaseStep find(Integer id);
 		/**
 		 * 添加用例步骤
 		 * @param casestep
 		 * @return
 		 */
-	QualityCaseStep add(QualityCaseStep casestep);
+		QualityCaseStep add(QualityCaseStep casestep);
 		/**
 		 * 删除步骤
 		 * @param id
