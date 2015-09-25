@@ -25,7 +25,7 @@ import org.tinygroup.tinysqldsl.base.Table;
  */
 public class QualityCaseStepTable extends Table {
 
-	public static final QualityCaseStepTable QUALITY_CASESTEPTABLE = new QualityCaseStepTable();
+	public static final QualityCaseStepTable QUALITY_CASE_STEPTABLE = new QualityCaseStepTable();
 
 	/** 
 	 * 用例步骤编号
@@ -59,7 +59,7 @@ public class QualityCaseStepTable extends Table {
 
 
 	private QualityCaseStepTable() {
-		super("quality_caseStep");
+		super("quality_case_step");
 	}
 
 }

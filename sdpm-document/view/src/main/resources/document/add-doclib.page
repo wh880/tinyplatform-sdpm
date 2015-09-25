@@ -1,11 +1,11 @@
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" "/document/add-doclib/add" "post" {"class":"add"})
 	#@elementItem()
        #@colLabel("col-3")添加文档库：#end
 			<div class="col-8">
 			#@div(divClass="col-8")
 				
-				#tinyInput("text" "username" ""{"style":"height:29px","placeholder":"文档库名称","id":"username","class":"input-text"})
+				#tinyInput("text" "docLibname" ""{"style":"height:29px","placeholder":"文档库名称","id":"docLibname","class":"input-text"})
 				
 			#end
 			<div class="col-3">

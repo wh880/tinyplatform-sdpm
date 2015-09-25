@@ -12,6 +12,7 @@
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <commons-codec.version>1.9</commons-codec.version>
     </properties>
     <dependencies>
 
@@ -71,6 +72,17 @@
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.database</artifactId>
             <version>${tiny_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.tinygroup</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>

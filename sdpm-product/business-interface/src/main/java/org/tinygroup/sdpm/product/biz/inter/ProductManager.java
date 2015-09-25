@@ -59,7 +59,7 @@ public interface ProductManager {
 	 * @param orderBies
 	 * @return
 	 */
-	Pager<Product> findPager (int start ,int limit ,Product product, String order,String ordertype);
+	Pager<Product> findPager (int page ,int limit ,Product product, String order,String ordertype);
 	
 	
 }

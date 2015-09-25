@@ -9,15 +9,7 @@
 			 <option value="IA">工程项目2</option>
 			 <option value="KS">测试文档1</option>
 			 <option value="KY">测试文档2</option>
-			 <option value="LA">Louisiana</option>
-			 <option value="MN">Minnesota</option>
-			 <option value="MS">Mississippi</option>
-			 <option value="MO">Missouri</option>
-			 <option value="OK">Oklahoma</option>
-			 <option value="SD">South Dakota</option>
-			 <option value="TX">Texas</option>
-			 <option value="TN">Tennessee</option>
-			 <option value="WI">Wisconsin</option>
+		
 		  ##</optgroup>
 		#end
 		#@navSelect2Fix()

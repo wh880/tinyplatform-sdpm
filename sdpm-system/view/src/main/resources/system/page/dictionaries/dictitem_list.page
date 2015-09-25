@@ -2,49 +2,33 @@
 #set(editpagePath="/system/page/dictionaries/dictitem_edit.pagelet",editpageModalId="dictitemEditModal",editpageModal="#"+editpageModalId)
 #set(viewpagePath="/system/page/dictionaries/dictitem_view.pagelet",viewpageModalId="dictitemViewModal",viewpageModal="#"+viewpageModalId)
 #datatablesInitSimple("#dictitemTb" )
+<style>.dataTablebox .tablebox{margin-left:200px;margin-top:4px;}</style>
 #import("/org/tinygroup/table/components/table.component")
-#@tableBox()
-	#@datatable("dictitemTb")
-		#@tableToolbar()
-				#@radiusBtn("btn-danger" "icon-trash" "javascript:;" "deleteBatch") 批量删除#end
-				 #@aModal(editpageModal "添加" "" "" "btn radius btn-primary" editpagePath)
-				 #@simpleI("icon-plus")添加#end
-				#end
+ #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+			#@div(divBaseClass="tinyheaderTools form-inline")
+				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+				 #@mulOperation("muldelete" "http://127.0.0.1:8080/sdpm-service/service/client/test.pagelet")             <a href="javascript:;" class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>#end
+				#*<a href="#" class="btn btn-default btn-sm">产品</a>
+				<a href="#" class="btn btn-success btn-sm">Bug</a>
+				<a href="#" class="btn btn-primary btn-sm">工程</a>
+				<a href="#" class="btn btn-info btn-sm">历史</a>
+				<a href="#" class="btn btn-warning btn-sm">相关</a>*#
 			#end
-			#@thead()
-				#@tr("text-c")
-					#@thW("6")<input type="checkbox" name="idCheck" value="">#end
-					#@thW("96")编码#end
-					#@thW("50")名称#end
-					#@thW("50")值#end
-					#@thW("50")排序号#end
-					#@thW("120")操作#end
-				#end
-			#end
-			#@tbody()
-			#set(objs=[1..5])
-			#for(obj:objs)
-				#@tr("text-c")
-					#@td()<input type="checkbox" value="1" name="idCheck">#end
-					#@td()编码${objFor.index}#end
-					#@td()名称${objFor.index}#end
-					#@td()值${objFor.index}#end
-					#@td()${objFor.index}#end
-					#@td("f-14 user-manage")
-						#foreach(m in menuManager.getScopeMenus("dictitem-op"))
-							#if(m.id!="dictitem-del")
-								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "" "" m.href "ml-5")
-							#else
-								#iconOperation(m.icon m.name "ml-5 delBtn")
-							#end
-							
-						#end
+			#@tinyTableContent(TINY_CONTEXT_PATH+"/system/dict/findPager?moduleId=1") ##取数据地址 总数据
+				#@thead()
+					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+						#@tinyTh({"class":"sorting sorting_asc","rel":"dict_id"})ID#end
+						#@tinyTh({"class":"sorting","rel":"dict_key"})编码#end
+						#@tinyTh({"class":"sorting","rel":"effort_account"})名称#end
+						#@tinyTh({"class":"sorting","rel":"dict_value"})值#end
+						#@tinyTh({"class":"sorting","rel":"dict_sort"})排序号#end
+						#@tinyTh({"class":"sorting","rel":""})操作#end
 						
 					#end
 				#end
 			#end
-			#end
-		#end
 #end
+
 #simpleModal(editpageModalId)
 #simpleViewModal(viewpageModalId)

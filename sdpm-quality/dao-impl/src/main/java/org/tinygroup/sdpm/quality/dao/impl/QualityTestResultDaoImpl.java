@@ -58,15 +58,15 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 	public QualityTestResult add(QualityTestResult qualityTestResult) {
 		return getDslTemplate().insertAndReturnKey(qualityTestResult, new InsertGenerateCallback<QualityTestResult>() {
 			public Insert generate(QualityTestResult t) {
-				Insert insert = insertInto(QUALITY_TESTRESULTTABLE).values(
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_ID.value(t.getTestResultId()),
-					QUALITY_TESTRESULTTABLE.TESTRESULT_RUN.value(t.getTestresultRun()),
-					QUALITY_TESTRESULTTABLE.LINK_CASE.value(t.getLinkCase()),
-					QUALITY_TESTRESULTTABLE.CASE_VERSION.value(t.getCaseVersion()),
-					QUALITY_TESTRESULTTABLE.CASE__RESULT.value(t.getCaseResult()),
-					QUALITY_TESTRESULTTABLE.CASE_STEPRESULTS.value(t.getCaseStepresults()),
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_LAST_RUNNER.value(t.getTestResultLastRunner()),
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_DATE.value(t.getTestResultDate()));
+				Insert insert = insertInto(QUALITY_TEST_RESULTTABLE).values(
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_ID.value(t.getTestResultId()),
+					QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.value(t.getTestresultRun()),
+					QUALITY_TEST_RESULTTABLE.LINK_CASE.value(t.getLinkCase()),
+					QUALITY_TEST_RESULTTABLE.CASE_VERSION.value(t.getCaseVersion()),
+					QUALITY_TEST_RESULTTABLE.CASE__RESULT.value(t.getCaseResult()),
+					QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.value(t.getCaseStepresults()),
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.value(t.getTestResultLastRunner()),
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.value(t.getTestResultDate()));
 				return insert;
 			}
 		});
@@ -78,15 +78,15 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 		}
 		return getDslTemplate().update(qualityTestResult, new UpdateGenerateCallback<QualityTestResult>() {
 			public Update generate(QualityTestResult t) {
-				Update update = update(QUALITY_TESTRESULTTABLE).set(
-					QUALITY_TESTRESULTTABLE.TESTRESULT_RUN.value(t.getTestresultRun()),
-					QUALITY_TESTRESULTTABLE.LINK_CASE.value(t.getLinkCase()),
-					QUALITY_TESTRESULTTABLE.CASE_VERSION.value(t.getCaseVersion()),
-					QUALITY_TESTRESULTTABLE.CASE__RESULT.value(t.getCaseResult()),
-					QUALITY_TESTRESULTTABLE.CASE_STEPRESULTS.value(t.getCaseStepresults()),
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_LAST_RUNNER.value(t.getTestResultLastRunner()),
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_DATE.value(t.getTestResultDate())).where(
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_ID.eq(t.getTestResultId()));
+				Update update = update(QUALITY_TEST_RESULTTABLE).set(
+					QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.value(t.getTestresultRun()),
+					QUALITY_TEST_RESULTTABLE.LINK_CASE.value(t.getLinkCase()),
+					QUALITY_TEST_RESULTTABLE.CASE_VERSION.value(t.getCaseVersion()),
+					QUALITY_TEST_RESULTTABLE.CASE__RESULT.value(t.getCaseResult()),
+					QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.value(t.getCaseStepresults()),
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.value(t.getTestResultLastRunner()),
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.value(t.getTestResultDate())).where(
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_ID.eq(t.getTestResultId()));
 				return update;
 			}
 		});
@@ -98,7 +98,7 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 		}
 		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
 			public Delete generate(Serializable pk) {
-				return delete(QUALITY_TESTRESULTTABLE).where(QUALITY_TESTRESULTTABLE.TEST_RESULT_ID.eq(pk));
+				return delete(QUALITY_TEST_RESULTTABLE).where(QUALITY_TEST_RESULTTABLE.TEST_RESULT_ID.eq(pk));
 			}
 		});
 	}
@@ -109,7 +109,7 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 		}
 		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
 			public Delete generate(Serializable[] t) {
-				return delete(QUALITY_TESTRESULTTABLE).where(QUALITY_TESTRESULTTABLE.TEST_RESULT_ID.in(t));
+				return delete(QUALITY_TEST_RESULTTABLE).where(QUALITY_TEST_RESULTTABLE.TEST_RESULT_ID.in(t));
 		}
 		},pks);
 	}
@@ -118,7 +118,7 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 		return getDslTemplate().getByKey(pk, QualityTestResult.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(QUALITY_TESTRESULTTABLE).where(QUALITY_TESTRESULTTABLE.TEST_RESULT_ID.eq(t));
+			return selectFrom(QUALITY_TEST_RESULTTABLE).where(QUALITY_TEST_RESULTTABLE.TEST_RESULT_ID.eq(t));
 			}
 		});
 	}
@@ -131,15 +131,15 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(QualityTestResult t) {
-				Select select = selectFrom(QUALITY_TESTRESULTTABLE).where(
+				Select select = selectFrom(QUALITY_TEST_RESULTTABLE).where(
 				and(
-					QUALITY_TESTRESULTTABLE.TESTRESULT_RUN.eq(t.getTestresultRun()),
-					QUALITY_TESTRESULTTABLE.LINK_CASE.eq(t.getLinkCase()),
-					QUALITY_TESTRESULTTABLE.CASE_VERSION.eq(t.getCaseVersion()),
-					QUALITY_TESTRESULTTABLE.CASE__RESULT.eq(t.getCaseResult()),
-					QUALITY_TESTRESULTTABLE.CASE_STEPRESULTS.eq(t.getCaseStepresults()),
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_LAST_RUNNER.eq(t.getTestResultLastRunner()),
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_DATE.eq(t.getTestResultDate())));
+					QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.eq(t.getTestresultRun()),
+					QUALITY_TEST_RESULTTABLE.LINK_CASE.eq(t.getLinkCase()),
+					QUALITY_TEST_RESULTTABLE.CASE_VERSION.eq(t.getCaseVersion()),
+					QUALITY_TEST_RESULTTABLE.CASE__RESULT.eq(t.getCaseResult()),
+					QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.eq(t.getCaseStepresults()),
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.eq(t.getTestResultLastRunner()),
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.eq(t.getTestResultDate())));
 			return addOrderByElements(select, orderArgs);
 			}
 		});
@@ -152,15 +152,15 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 		return getDslTemplate().queryPager(start, limit, qualityTestResult, false, new SelectGenerateCallback<QualityTestResult>() {
 
 			public Select generate(QualityTestResult t) {
-				Select select = MysqlSelect.selectFrom(QUALITY_TESTRESULTTABLE).where(
+				Select select = MysqlSelect.selectFrom(QUALITY_TEST_RESULTTABLE).where(
 				and(
-					QUALITY_TESTRESULTTABLE.TESTRESULT_RUN.eq(t.getTestresultRun()),
-					QUALITY_TESTRESULTTABLE.LINK_CASE.eq(t.getLinkCase()),
-					QUALITY_TESTRESULTTABLE.CASE_VERSION.eq(t.getCaseVersion()),
-					QUALITY_TESTRESULTTABLE.CASE__RESULT.eq(t.getCaseResult()),
-					QUALITY_TESTRESULTTABLE.CASE_STEPRESULTS.eq(t.getCaseStepresults()),
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_LAST_RUNNER.eq(t.getTestResultLastRunner()),
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_DATE.eq(t.getTestResultDate())));
+					QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.eq(t.getTestresultRun()),
+					QUALITY_TEST_RESULTTABLE.LINK_CASE.eq(t.getLinkCase()),
+					QUALITY_TEST_RESULTTABLE.CASE_VERSION.eq(t.getCaseVersion()),
+					QUALITY_TEST_RESULTTABLE.CASE__RESULT.eq(t.getCaseResult()),
+					QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.eq(t.getCaseStepresults()),
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.eq(t.getTestResultLastRunner()),
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.eq(t.getTestResultDate())));
 			return addOrderByElements(select, orderArgs);
 			}
 		});
@@ -173,14 +173,14 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 		return getDslTemplate().batchInsert(autoGeneratedKeys, qualityTestResults, new NoParamInsertGenerateCallback() {
 
 			public Insert generate() {
-				return insertInto(QUALITY_TESTRESULTTABLE).values(
-					QUALITY_TESTRESULTTABLE.TESTRESULT_RUN.value(new JdbcNamedParameter("testresultRun")),
-					QUALITY_TESTRESULTTABLE.LINK_CASE.value(new JdbcNamedParameter("linkCase")),
-					QUALITY_TESTRESULTTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
-					QUALITY_TESTRESULTTABLE.CASE__RESULT.value(new JdbcNamedParameter("caseResult")),
-					QUALITY_TESTRESULTTABLE.CASE_STEPRESULTS.value(new JdbcNamedParameter("caseStepresults")),
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_LAST_RUNNER.value(new JdbcNamedParameter("testResultLastRunner")),
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_DATE.value(new JdbcNamedParameter("testResultDate")));
+				return insertInto(QUALITY_TEST_RESULTTABLE).values(
+					QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.value(new JdbcNamedParameter("testresultRun")),
+					QUALITY_TEST_RESULTTABLE.LINK_CASE.value(new JdbcNamedParameter("linkCase")),
+					QUALITY_TEST_RESULTTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
+					QUALITY_TEST_RESULTTABLE.CASE__RESULT.value(new JdbcNamedParameter("caseResult")),
+					QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.value(new JdbcNamedParameter("caseStepresults")),
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.value(new JdbcNamedParameter("testResultLastRunner")),
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.value(new JdbcNamedParameter("testResultDate")));
 			}
 		});
 	}
@@ -196,15 +196,15 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 		return getDslTemplate().batchUpdate(qualityTestResults, new NoParamUpdateGenerateCallback() {
 
 			public Update generate() {
-				return update(QUALITY_TESTRESULTTABLE).set(
-					QUALITY_TESTRESULTTABLE.TESTRESULT_RUN.value(new JdbcNamedParameter("testresultRun")),
-					QUALITY_TESTRESULTTABLE.LINK_CASE.value(new JdbcNamedParameter("linkCase")),
-					QUALITY_TESTRESULTTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
-					QUALITY_TESTRESULTTABLE.CASE__RESULT.value(new JdbcNamedParameter("caseResult")),
-					QUALITY_TESTRESULTTABLE.CASE_STEPRESULTS.value(new JdbcNamedParameter("caseStepresults")),
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_LAST_RUNNER.value(new JdbcNamedParameter("testResultLastRunner")),
-					QUALITY_TESTRESULTTABLE.TEST_RESULT_DATE.value(new JdbcNamedParameter("testResultDate"))).where(
-				QUALITY_TESTRESULTTABLE.TEST_RESULT_ID.eq(new JdbcNamedParameter("testResultId")));
+				return update(QUALITY_TEST_RESULTTABLE).set(
+					QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.value(new JdbcNamedParameter("testresultRun")),
+					QUALITY_TEST_RESULTTABLE.LINK_CASE.value(new JdbcNamedParameter("linkCase")),
+					QUALITY_TEST_RESULTTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
+					QUALITY_TEST_RESULTTABLE.CASE__RESULT.value(new JdbcNamedParameter("caseResult")),
+					QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.value(new JdbcNamedParameter("caseStepresults")),
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.value(new JdbcNamedParameter("testResultLastRunner")),
+					QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.value(new JdbcNamedParameter("testResultDate"))).where(
+				QUALITY_TEST_RESULTTABLE.TEST_RESULT_ID.eq(new JdbcNamedParameter("testResultId")));
 			}
 		});
 	}
@@ -216,15 +216,15 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 		return getDslTemplate().batchDelete(qualityTestResults, new NoParamDeleteGenerateCallback() {
 
 			public Delete generate() {
-				return delete(QUALITY_TESTRESULTTABLE).where(and(
-				QUALITY_TESTRESULTTABLE.TEST_RESULT_ID.eq(new JdbcNamedParameter("testResultId")),
-				QUALITY_TESTRESULTTABLE.TESTRESULT_RUN.eq(new JdbcNamedParameter("testresultRun")),
-				QUALITY_TESTRESULTTABLE.LINK_CASE.eq(new JdbcNamedParameter("linkCase")),
-				QUALITY_TESTRESULTTABLE.CASE_VERSION.eq(new JdbcNamedParameter("caseVersion")),
-				QUALITY_TESTRESULTTABLE.CASE__RESULT.eq(new JdbcNamedParameter("caseResult")),
-				QUALITY_TESTRESULTTABLE.CASE_STEPRESULTS.eq(new JdbcNamedParameter("caseStepresults")),
-				QUALITY_TESTRESULTTABLE.TEST_RESULT_LAST_RUNNER.eq(new JdbcNamedParameter("testResultLastRunner")),
-				QUALITY_TESTRESULTTABLE.TEST_RESULT_DATE.eq(new JdbcNamedParameter("testResultDate"))));
+				return delete(QUALITY_TEST_RESULTTABLE).where(and(
+				QUALITY_TEST_RESULTTABLE.TEST_RESULT_ID.eq(new JdbcNamedParameter("testResultId")),
+				QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.eq(new JdbcNamedParameter("testresultRun")),
+				QUALITY_TEST_RESULTTABLE.LINK_CASE.eq(new JdbcNamedParameter("linkCase")),
+				QUALITY_TEST_RESULTTABLE.CASE_VERSION.eq(new JdbcNamedParameter("caseVersion")),
+				QUALITY_TEST_RESULTTABLE.CASE__RESULT.eq(new JdbcNamedParameter("caseResult")),
+				QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.eq(new JdbcNamedParameter("caseStepresults")),
+				QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.eq(new JdbcNamedParameter("testResultLastRunner")),
+				QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.eq(new JdbcNamedParameter("testResultDate"))));
 			}
 		});
 	}
