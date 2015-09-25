@@ -1,8 +1,8 @@
 package org.tinygroup.sdpm.product.biz.impl;
 
 import java.util.List;
-
 import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,9 +58,9 @@ public class ProductManagerImpl implements ProductManager{
 		return productDao.batchUpdate(products);
 	}
 
-	public List<Product> findList(Product product,String columnName,boolean asc) {
+	public List<Product> findList(Product product, String order,String ordertype) {
 		
-		return productDao.query(product, new OrderBy(columnName, asc));
+		return productDao.query(product,  new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public Pager<Product> findPager(int page, int limit, Product product, String order,String ordertype) {
