@@ -15,7 +15,11 @@
     #@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">${t?.taskName}#end
     #@td()${t?.taskStatus}#end
     #@td()${t?.taskDeadLine}#end
-    #@td()${t?.taskOpenedDate}#end
+    #@td()
+        #if(t.taskOpenedDate)
+            ${formatdate(t.taskOpenedDate,"yyyy-MM-dd")}
+        #end
+    #end
     #@td()${t?.taskAssignedTo}#end
     #@td()${t?.taskFinishedBy}#end
     #@td()

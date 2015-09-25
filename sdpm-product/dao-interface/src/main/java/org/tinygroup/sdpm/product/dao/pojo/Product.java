@@ -23,7 +23,6 @@ import java.util.Date;
  * 产品表
  * 
  */
-public class Product {
 public class Product implements Serializable{
 
 

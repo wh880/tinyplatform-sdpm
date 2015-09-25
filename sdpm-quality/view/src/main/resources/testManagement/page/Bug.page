@@ -177,7 +177,7 @@
 					<a href="#" class="btn btn-info btn-sm">历史</a>
 					<a href="#" class="btn btn-warning btn-sm">相关</a>*#
 				#end
-			#@tinyTableContent(TINY_CONTEXT_PATH+"/quality/bug/findBug?id=1")
+			#@tinyTableContent(TINY_CONTEXT_PATH+"/quality/bug/findBug?bugTitle=3")
 				#@thead()
 					#@tr()
 						#@tinyTh({"width":"6"})<input type="checkbox" name="" value="" />#end
