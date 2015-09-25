@@ -31,7 +31,7 @@ public class QualityCaseStepTable extends Table {
 	 * 用例步骤编号
 	 * 
 	 */
-	public final Column CASESTEP_ID = new Column(this, "caseStep_id");
+	public final Column CASE_STEP_ID = new Column(this, "case_step_id");
 
 	/** 
 	 * 用例编号
@@ -49,13 +49,13 @@ public class QualityCaseStepTable extends Table {
 	 * 描述
 	 * 
 	 */
-	public final Column CASESTEP_DESC = new Column(this, "caseStep_desc");
+	public final Column CASE_STEP_DESC = new Column(this, "case_step_desc");
 
 	/** 
 	 * 用例预期
 	 * 
 	 */
-	public final Column CASESTEP_EXPECT = new Column(this, "caseStep_expect");
+	public final Column CASE_STEP_EXPECT = new Column(this, "case_step_expect");
 
 
 	private QualityCaseStepTable() {

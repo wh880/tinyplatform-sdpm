@@ -31,7 +31,7 @@ public class QualityTestResultTable extends Table {
 	 * 测试结果
 	 * 
 	 */
-	public final Column TESTRESULT_ID = new Column(this, "testResult_id");
+	public final Column TEST_RESULT_ID = new Column(this, "test_result_id");
 
 	/** 
 	 * TESTRESULT_RUN
@@ -55,7 +55,7 @@ public class QualityTestResultTable extends Table {
 	 * 测试结果
 	 * 
 	 */
-	public final Column CASE_RESULT = new Column(this, "case_Result");
+	public final Column CASE__RESULT = new Column(this, "case__result");
 
 	/** 
 	 * 用例步骤结果
@@ -67,13 +67,13 @@ public class QualityTestResultTable extends Table {
 	 * 最后执行人
 	 * 
 	 */
-	public final Column TESTRESULT_LASTRUNNER = new Column(this, "testResult_lastRunner");
+	public final Column TEST_RESULT_LAST_RUNNER = new Column(this, "test_result_last_runner");
 
 	/** 
 	 * 最后执行日期
 	 * 
 	 */
-	public final Column TESTRESULT_DATE = new Column(this, "testResult_date");
+	public final Column TEST_RESULT_DATE = new Column(this, "test_result_date");
 
 
 	private QualityTestResultTable() {
