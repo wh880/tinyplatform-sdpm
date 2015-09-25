@@ -3,7 +3,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-plan",sonitem="<li>"+"计划"+"</li>")
 
-
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %> 
 
 <script>
 
@@ -54,13 +54,6 @@
 	});
  
 </script>
-
-
-
-
-
-
-
 
 
 
