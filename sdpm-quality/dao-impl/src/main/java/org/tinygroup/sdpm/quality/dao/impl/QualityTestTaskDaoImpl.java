@@ -40,8 +40,6 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.quality.dao.QualityTestTaskDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -54,10 +52,9 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
-@LogClass("qualityTestTask")
 @Repository
 public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements QualityTestTaskDao {
-	@LogMethod("add")
+
 	public QualityTestTask add(QualityTestTask qualityTestTask) {
 		return getDslTemplate().insertAndReturnKey(qualityTestTask, new InsertGenerateCallback<QualityTestTask>() {
 			public Insert generate(QualityTestTask t) {
@@ -79,7 +76,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 			}
 		});
 	}
-	@LogMethod("edit")
+
 	public int edit(QualityTestTask qualityTestTask) {
 		if(qualityTestTask == null || qualityTestTask.getTestversionId() == null){
 			return 0;
@@ -104,7 +101,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 			}
 		});
 	}
-	@LogMethod("deleteByKey")
+
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -115,7 +112,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 			}
 		});
 	}
-	@LogMethod("deleteByKeys")
+
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -136,7 +133,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 		});
 	}
 
-	public List<QualityTestTask> query(QualityTestTask qualityTestTask ,final OrderBy... orderBies) {
+	public List<QualityTestTask> query(QualityTestTask qualityTestTask ,final OrderBy... orderArgs) {
 		if(qualityTestTask==null){
 			qualityTestTask=new QualityTestTask();
 		}
@@ -158,12 +155,12 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 					QUALITY_TESTTASKTABLE.TESTTASK_REPORT.eq(t.getTesttaskReport()),
 					QUALITY_TESTTASKTABLE.TESTTASK_STATUS.eq(t.getTesttaskStatus()),
 					QUALITY_TESTTASKTABLE.DELETED.eq(t.getDeleted())));
-		return addOrderByElements(select, orderBies);
+			return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
 
-	public Pager<QualityTestTask> queryPager(int start,int limit ,QualityTestTask qualityTestTask ,final OrderBy... orderBies) {
+	public Pager<QualityTestTask> queryPager(int start,int limit ,QualityTestTask qualityTestTask ,final OrderBy... orderArgs) {
 		if(qualityTestTask==null){
 			qualityTestTask=new QualityTestTask();
 		}
@@ -184,7 +181,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 					QUALITY_TESTTASKTABLE.TESTTASK_REPORT.eq(t.getTesttaskReport()),
 					QUALITY_TESTTASKTABLE.TESTTASK_STATUS.eq(t.getTesttaskStatus()),
 					QUALITY_TESTTASKTABLE.DELETED.eq(t.getDeleted())));
-		return addOrderByElements(select, orderBies);
+			return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
@@ -216,7 +213,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 	public int[] batchInsert(List<QualityTestTask> qualityTestTasks){
 			return batchInsert(true ,qualityTestTasks);
 	}
-	@LogMethod("batchUpdate")
+
 	public int[] batchUpdate(List<QualityTestTask> qualityTestTasks) {
 		if (CollectionUtil.isEmpty(qualityTestTasks)) {
 			return new int[0];
@@ -241,7 +238,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 			}
 		});
 	}
-	@LogMethod("batchDelete")
+
 	public int[] batchDelete(List<QualityTestTask> qualityTestTasks) {
 		if (CollectionUtil.isEmpty(qualityTestTasks)) {
 			return new int[0];
