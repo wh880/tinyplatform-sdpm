@@ -1,6 +1,6 @@
 <tables id="a91b5666002c43eabeebeeae6a8e8b99" package-name="org.tinygroup.alm.document">
   <table id="59549c7852a84135a7f594a6d2081544" name="doc" title="文档表" schema="" package-name="">
-    <description></description>
+    <description>wendang</description>
     <table-field standard-field-id="157b6bcd380345ecb1bbb2b6005b92f7" primary="true" unique="true" not-null="true" id="doc_id" auto-increase="true"/>
     <table-field standard-field-id="51d8b407678c4adfbb36e530c87c7f22" primary="false" unique="false" not-null="false" id="doc_product" auto-increase="false"/>
     <table-field standard-field-id="0dad99e5e3824c3f89a0d03f95baa577" primary="false" unique="false" not-null="false" id="doc_project" auto-increase="false"/>
