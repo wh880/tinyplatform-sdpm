@@ -37,36 +37,36 @@
             <version>${tiny_ui_version}</version>
         </dependency>
 		<!--皮肤 start-->
-		<!--<dependency>
+        <dependency>
 			<groupId>org.tinygroup</groupId>
 			<artifactId>org.tinygroup.frameTplDark</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.frameTplDeepblue</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.frameTplFashion</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.frameTplBlack</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.frameTplGreenyellow</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.frameTplOrange</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency> -->
+        <!--<dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.frameTplDeepblue</artifactId>
+            <version>${tiny_ui_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.frameTplFashion</artifactId>
+            <version>${tiny_ui_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.frameTplBlack</artifactId>
+            <version>${tiny_ui_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.frameTplGreenyellow</artifactId>
+            <version>${tiny_ui_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.frameTplOrange</artifactId>
+            <version>${tiny_ui_version}</version>
+        </dependency> -->
 		<!--皮肤 end-->
         <dependency>
             <groupId>org.tinygroup</groupId>

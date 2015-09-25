@@ -57,7 +57,7 @@ public interface ProductService {
 	 * @param product
 	 * @return
 	 */
-	Pager<Product> findProductPager (int start ,int limit ,Product product, String oeder,String ordertype);
+	Pager<Product> findProductPager (int page ,int limit ,Product product, String oeder,String ordertype);
 	
 	
 }

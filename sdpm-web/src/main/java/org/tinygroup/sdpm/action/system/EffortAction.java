@@ -38,6 +38,6 @@ public class EffortAction extends BaseController{
        effort.setEffortId(effortId);
        Pager<SystemEffort> effortPager = effortService.findByPage(start, limit,effort, order, asc);
        model.addAttribute("effortPager", effortPager);
-       return "project/note/tableData.page"; 
+       return "project/note/tableData.pagelet"; 
    }
 }

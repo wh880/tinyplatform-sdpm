@@ -32,7 +32,6 @@ public interface UserManager {
     /**
      * 根据主键id查找用户
      *
-     * @param id 主键
      * @return
      */
     Pager<OrgUser> findPager(Integer start, Integer limit, OrgUser orgUser);
@@ -69,4 +68,17 @@ public interface UserManager {
      */
     Integer delete(String id);
 
+    /**
+     * 生成安全的密码，生成随机的16位salt并经过1024次 sha-1 hash
+     */
+    String encryptPassword(String plainPassword);
+
+    /**
+     * 验证密码
+     *
+     * @param plainPassword 明文密码
+     * @param password      密文密码
+     * @return 验证成功返回true
+     */
+    boolean validatePassword(String plainPassword, String password);
 }

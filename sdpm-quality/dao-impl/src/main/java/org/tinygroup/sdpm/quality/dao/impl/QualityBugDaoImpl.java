@@ -40,8 +40,6 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -55,9 +53,8 @@ import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
 @Repository
-@LogClass("qualitybug")
 public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDao {
-	@LogMethod("add")
+
 	public QualityBug add(QualityBug qualityBug) {
 		return getDslTemplate().insertAndReturnKey(qualityBug, new InsertGenerateCallback<QualityBug>() {
 			public Insert generate(QualityBug t) {
@@ -116,7 +113,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 			}
 		});
 	}
-	@LogMethod("edit")
+
 	public int edit(QualityBug qualityBug) {
 		if(qualityBug == null || qualityBug.getBugId() == null){
 			return 0;
@@ -178,7 +175,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 			}
 		});
 	}
-	@LogMethod("deleteByKey")
+
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -189,7 +186,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 			}
 		});
 	}
-	@LogMethod("deleteByKeys")
+
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -401,7 +398,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 	public int[] batchInsert(List<QualityBug> qualityBugs){
 			return batchInsert(true ,qualityBugs);
 	}
-	@LogMethod("batchUpdate")
+
 	public int[] batchUpdate(List<QualityBug> qualityBugs) {
 		if (CollectionUtil.isEmpty(qualityBugs)) {
 			return new int[0];
@@ -463,7 +460,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 			}
 		});
 	}
-	@LogMethod("batchDelete")
+
 	public int[] batchDelete(List<QualityBug> qualityBugs) {
 		if (CollectionUtil.isEmpty(qualityBugs)) {
 			return new int[0];

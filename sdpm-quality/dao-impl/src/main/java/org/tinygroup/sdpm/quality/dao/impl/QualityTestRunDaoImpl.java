@@ -58,16 +58,16 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 	public QualityTestRun add(QualityTestRun qualityTestRun) {
 		return getDslTemplate().insertAndReturnKey(qualityTestRun, new InsertGenerateCallback<QualityTestRun>() {
 			public Insert generate(QualityTestRun t) {
-				Insert insert = insertInto(QUALITY_TESTRUNTABLE).values(
-					QUALITY_TESTRUNTABLE.TEST_RUN_ID.value(t.getTestRunId()),
-					QUALITY_TESTRUNTABLE.TASK_ID.value(t.getTaskId()),
-					QUALITY_TESTRUNTABLE.CASE_ID.value(t.getCaseId()),
-					QUALITY_TESTRUNTABLE.CASE_VERSION.value(t.getCaseVersion()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_ASSIGNED_TO.value(t.getTestRunAssignedTo()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUNNER.value(t.getTestRunLastRunner()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_DATE.value(t.getTestRunLastRunDate()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_RESULT.value(t.getTestRunLastRunResult()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_STATUS.value(t.getTestRunStatus()));
+				Insert insert = insertInto(QUALITY_TEST_RUNTABLE).values(
+					QUALITY_TEST_RUNTABLE.TEST_RUN_ID.value(t.getTestRunId()),
+					QUALITY_TEST_RUNTABLE.TASK_ID.value(t.getTaskId()),
+					QUALITY_TEST_RUNTABLE.CASE_ID.value(t.getCaseId()),
+					QUALITY_TEST_RUNTABLE.CASE_VERSION.value(t.getCaseVersion()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_ASSIGNED_TO.value(t.getTestRunAssignedTo()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUNNER.value(t.getTestRunLastRunner()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_DATE.value(t.getTestRunLastRunDate()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_RESULT.value(t.getTestRunLastRunResult()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.value(t.getTestRunStatus()));
 				return insert;
 			}
 		});
@@ -79,16 +79,16 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 		}
 		return getDslTemplate().update(qualityTestRun, new UpdateGenerateCallback<QualityTestRun>() {
 			public Update generate(QualityTestRun t) {
-				Update update = update(QUALITY_TESTRUNTABLE).set(
-					QUALITY_TESTRUNTABLE.TASK_ID.value(t.getTaskId()),
-					QUALITY_TESTRUNTABLE.CASE_ID.value(t.getCaseId()),
-					QUALITY_TESTRUNTABLE.CASE_VERSION.value(t.getCaseVersion()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_ASSIGNED_TO.value(t.getTestRunAssignedTo()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUNNER.value(t.getTestRunLastRunner()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_DATE.value(t.getTestRunLastRunDate()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_RESULT.value(t.getTestRunLastRunResult()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_STATUS.value(t.getTestRunStatus())).where(
-					QUALITY_TESTRUNTABLE.TEST_RUN_ID.eq(t.getTestRunId()));
+				Update update = update(QUALITY_TEST_RUNTABLE).set(
+					QUALITY_TEST_RUNTABLE.TASK_ID.value(t.getTaskId()),
+					QUALITY_TEST_RUNTABLE.CASE_ID.value(t.getCaseId()),
+					QUALITY_TEST_RUNTABLE.CASE_VERSION.value(t.getCaseVersion()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_ASSIGNED_TO.value(t.getTestRunAssignedTo()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUNNER.value(t.getTestRunLastRunner()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_DATE.value(t.getTestRunLastRunDate()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_RESULT.value(t.getTestRunLastRunResult()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.value(t.getTestRunStatus())).where(
+					QUALITY_TEST_RUNTABLE.TEST_RUN_ID.eq(t.getTestRunId()));
 				return update;
 			}
 		});
@@ -100,7 +100,7 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 		}
 		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
 			public Delete generate(Serializable pk) {
-				return delete(QUALITY_TESTRUNTABLE).where(QUALITY_TESTRUNTABLE.TEST_RUN_ID.eq(pk));
+				return delete(QUALITY_TEST_RUNTABLE).where(QUALITY_TEST_RUNTABLE.TEST_RUN_ID.eq(pk));
 			}
 		});
 	}
@@ -111,7 +111,7 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 		}
 		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
 			public Delete generate(Serializable[] t) {
-				return delete(QUALITY_TESTRUNTABLE).where(QUALITY_TESTRUNTABLE.TEST_RUN_ID.in(t));
+				return delete(QUALITY_TEST_RUNTABLE).where(QUALITY_TEST_RUNTABLE.TEST_RUN_ID.in(t));
 		}
 		},pks);
 	}
@@ -120,7 +120,7 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 		return getDslTemplate().getByKey(pk, QualityTestRun.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(QUALITY_TESTRUNTABLE).where(QUALITY_TESTRUNTABLE.TEST_RUN_ID.eq(t));
+			return selectFrom(QUALITY_TEST_RUNTABLE).where(QUALITY_TEST_RUNTABLE.TEST_RUN_ID.eq(t));
 			}
 		});
 	}
@@ -133,16 +133,16 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(QualityTestRun t) {
-				Select select = selectFrom(QUALITY_TESTRUNTABLE).where(
+				Select select = selectFrom(QUALITY_TEST_RUNTABLE).where(
 				and(
-					QUALITY_TESTRUNTABLE.TASK_ID.eq(t.getTaskId()),
-					QUALITY_TESTRUNTABLE.CASE_ID.eq(t.getCaseId()),
-					QUALITY_TESTRUNTABLE.CASE_VERSION.eq(t.getCaseVersion()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_ASSIGNED_TO.eq(t.getTestRunAssignedTo()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUNNER.eq(t.getTestRunLastRunner()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_DATE.eq(t.getTestRunLastRunDate()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_RESULT.eq(t.getTestRunLastRunResult()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_STATUS.eq(t.getTestRunStatus())));
+					QUALITY_TEST_RUNTABLE.TASK_ID.eq(t.getTaskId()),
+					QUALITY_TEST_RUNTABLE.CASE_ID.eq(t.getCaseId()),
+					QUALITY_TEST_RUNTABLE.CASE_VERSION.eq(t.getCaseVersion()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_ASSIGNED_TO.eq(t.getTestRunAssignedTo()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUNNER.eq(t.getTestRunLastRunner()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_DATE.eq(t.getTestRunLastRunDate()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_RESULT.eq(t.getTestRunLastRunResult()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.eq(t.getTestRunStatus())));
 			return addOrderByElements(select, orderArgs);
 			}
 		});
@@ -155,16 +155,16 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 		return getDslTemplate().queryPager(start, limit, qualityTestRun, false, new SelectGenerateCallback<QualityTestRun>() {
 
 			public Select generate(QualityTestRun t) {
-				Select select = MysqlSelect.selectFrom(QUALITY_TESTRUNTABLE).where(
+				Select select = MysqlSelect.selectFrom(QUALITY_TEST_RUNTABLE).where(
 				and(
-					QUALITY_TESTRUNTABLE.TASK_ID.eq(t.getTaskId()),
-					QUALITY_TESTRUNTABLE.CASE_ID.eq(t.getCaseId()),
-					QUALITY_TESTRUNTABLE.CASE_VERSION.eq(t.getCaseVersion()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_ASSIGNED_TO.eq(t.getTestRunAssignedTo()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUNNER.eq(t.getTestRunLastRunner()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_DATE.eq(t.getTestRunLastRunDate()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_RESULT.eq(t.getTestRunLastRunResult()),
-					QUALITY_TESTRUNTABLE.TEST_RUN_STATUS.eq(t.getTestRunStatus())));
+					QUALITY_TEST_RUNTABLE.TASK_ID.eq(t.getTaskId()),
+					QUALITY_TEST_RUNTABLE.CASE_ID.eq(t.getCaseId()),
+					QUALITY_TEST_RUNTABLE.CASE_VERSION.eq(t.getCaseVersion()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_ASSIGNED_TO.eq(t.getTestRunAssignedTo()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUNNER.eq(t.getTestRunLastRunner()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_DATE.eq(t.getTestRunLastRunDate()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_RESULT.eq(t.getTestRunLastRunResult()),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.eq(t.getTestRunStatus())));
 			return addOrderByElements(select, orderArgs);
 			}
 		});
@@ -177,15 +177,15 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 		return getDslTemplate().batchInsert(autoGeneratedKeys, qualityTestRuns, new NoParamInsertGenerateCallback() {
 
 			public Insert generate() {
-				return insertInto(QUALITY_TESTRUNTABLE).values(
-					QUALITY_TESTRUNTABLE.TASK_ID.value(new JdbcNamedParameter("taskId")),
-					QUALITY_TESTRUNTABLE.CASE_ID.value(new JdbcNamedParameter("caseId")),
-					QUALITY_TESTRUNTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
-					QUALITY_TESTRUNTABLE.TEST_RUN_ASSIGNED_TO.value(new JdbcNamedParameter("testRunAssignedTo")),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUNNER.value(new JdbcNamedParameter("testRunLastRunner")),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_DATE.value(new JdbcNamedParameter("testRunLastRunDate")),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_RESULT.value(new JdbcNamedParameter("testRunLastRunResult")),
-					QUALITY_TESTRUNTABLE.TEST_RUN_STATUS.value(new JdbcNamedParameter("testRunStatus")));
+				return insertInto(QUALITY_TEST_RUNTABLE).values(
+					QUALITY_TEST_RUNTABLE.TASK_ID.value(new JdbcNamedParameter("taskId")),
+					QUALITY_TEST_RUNTABLE.CASE_ID.value(new JdbcNamedParameter("caseId")),
+					QUALITY_TEST_RUNTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_ASSIGNED_TO.value(new JdbcNamedParameter("testRunAssignedTo")),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUNNER.value(new JdbcNamedParameter("testRunLastRunner")),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_DATE.value(new JdbcNamedParameter("testRunLastRunDate")),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_RESULT.value(new JdbcNamedParameter("testRunLastRunResult")),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.value(new JdbcNamedParameter("testRunStatus")));
 			}
 		});
 	}
@@ -201,16 +201,16 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 		return getDslTemplate().batchUpdate(qualityTestRuns, new NoParamUpdateGenerateCallback() {
 
 			public Update generate() {
-				return update(QUALITY_TESTRUNTABLE).set(
-					QUALITY_TESTRUNTABLE.TASK_ID.value(new JdbcNamedParameter("taskId")),
-					QUALITY_TESTRUNTABLE.CASE_ID.value(new JdbcNamedParameter("caseId")),
-					QUALITY_TESTRUNTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
-					QUALITY_TESTRUNTABLE.TEST_RUN_ASSIGNED_TO.value(new JdbcNamedParameter("testRunAssignedTo")),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUNNER.value(new JdbcNamedParameter("testRunLastRunner")),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_DATE.value(new JdbcNamedParameter("testRunLastRunDate")),
-					QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_RESULT.value(new JdbcNamedParameter("testRunLastRunResult")),
-					QUALITY_TESTRUNTABLE.TEST_RUN_STATUS.value(new JdbcNamedParameter("testRunStatus"))).where(
-				QUALITY_TESTRUNTABLE.TEST_RUN_ID.eq(new JdbcNamedParameter("testRunId")));
+				return update(QUALITY_TEST_RUNTABLE).set(
+					QUALITY_TEST_RUNTABLE.TASK_ID.value(new JdbcNamedParameter("taskId")),
+					QUALITY_TEST_RUNTABLE.CASE_ID.value(new JdbcNamedParameter("caseId")),
+					QUALITY_TEST_RUNTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_ASSIGNED_TO.value(new JdbcNamedParameter("testRunAssignedTo")),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUNNER.value(new JdbcNamedParameter("testRunLastRunner")),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_DATE.value(new JdbcNamedParameter("testRunLastRunDate")),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_RESULT.value(new JdbcNamedParameter("testRunLastRunResult")),
+					QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.value(new JdbcNamedParameter("testRunStatus"))).where(
+				QUALITY_TEST_RUNTABLE.TEST_RUN_ID.eq(new JdbcNamedParameter("testRunId")));
 			}
 		});
 	}
@@ -222,16 +222,16 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 		return getDslTemplate().batchDelete(qualityTestRuns, new NoParamDeleteGenerateCallback() {
 
 			public Delete generate() {
-				return delete(QUALITY_TESTRUNTABLE).where(and(
-				QUALITY_TESTRUNTABLE.TEST_RUN_ID.eq(new JdbcNamedParameter("testRunId")),
-				QUALITY_TESTRUNTABLE.TASK_ID.eq(new JdbcNamedParameter("taskId")),
-				QUALITY_TESTRUNTABLE.CASE_ID.eq(new JdbcNamedParameter("caseId")),
-				QUALITY_TESTRUNTABLE.CASE_VERSION.eq(new JdbcNamedParameter("caseVersion")),
-				QUALITY_TESTRUNTABLE.TEST_RUN_ASSIGNED_TO.eq(new JdbcNamedParameter("testRunAssignedTo")),
-				QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUNNER.eq(new JdbcNamedParameter("testRunLastRunner")),
-				QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_DATE.eq(new JdbcNamedParameter("testRunLastRunDate")),
-				QUALITY_TESTRUNTABLE.TEST_RUN_LAST_RUN_RESULT.eq(new JdbcNamedParameter("testRunLastRunResult")),
-				QUALITY_TESTRUNTABLE.TEST_RUN_STATUS.eq(new JdbcNamedParameter("testRunStatus"))));
+				return delete(QUALITY_TEST_RUNTABLE).where(and(
+				QUALITY_TEST_RUNTABLE.TEST_RUN_ID.eq(new JdbcNamedParameter("testRunId")),
+				QUALITY_TEST_RUNTABLE.TASK_ID.eq(new JdbcNamedParameter("taskId")),
+				QUALITY_TEST_RUNTABLE.CASE_ID.eq(new JdbcNamedParameter("caseId")),
+				QUALITY_TEST_RUNTABLE.CASE_VERSION.eq(new JdbcNamedParameter("caseVersion")),
+				QUALITY_TEST_RUNTABLE.TEST_RUN_ASSIGNED_TO.eq(new JdbcNamedParameter("testRunAssignedTo")),
+				QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUNNER.eq(new JdbcNamedParameter("testRunLastRunner")),
+				QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_DATE.eq(new JdbcNamedParameter("testRunLastRunDate")),
+				QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_RESULT.eq(new JdbcNamedParameter("testRunLastRunResult")),
+				QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.eq(new JdbcNamedParameter("testRunStatus"))));
 			}
 		});
 	}
