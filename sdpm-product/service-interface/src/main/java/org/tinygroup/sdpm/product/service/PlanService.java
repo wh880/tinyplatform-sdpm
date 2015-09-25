@@ -48,7 +48,7 @@ public interface PlanService{
 	 * @param asc
 	 * @return
 	 */
-	List<ProductPlan> findPlanList(ProductPlan plan,String columnName,boolean asc);
+	List<ProductPlan> findPlanList(ProductPlan productPlan,String order,String ordertype);
 	/**
 	 * 分页查询（排序）
 	 * @param start
@@ -57,6 +57,6 @@ public interface PlanService{
 	 * @param ordertype
 	 * @return
 	 */
-	Pager<ProductPlan> findProductPlanPager(int start,int limit,ProductPlan plan,String order,String ordertype);
+	Pager<ProductPlan> findProductPlanPager(int page,int limit,ProductPlan productPlan,String order,String ordertype);
 	
 }

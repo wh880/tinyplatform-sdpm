@@ -41,15 +41,15 @@ public class PlanServiceImpl implements PlanService {
 		return planManager.updateBatch(plan);
 	}
 
-	public List<ProductPlan> findPlanList(ProductPlan plan,String columnName,boolean asc) {
+	public List<ProductPlan> findPlanList(ProductPlan productPlan,String order,String ordertype) {
 	
-		return planManager.findList(plan, columnName, asc);
+		return planManager.findList(productPlan, order, ordertype);
 	}
 
-	public Pager<ProductPlan> findProductPlanPager(int start, int limit, ProductPlan plan, String order,
+	public Pager<ProductPlan> findProductPlanPager(int page, int limit, ProductPlan productPlan, String order,
 			String ordertype) {
 		
-		return planManager.findPager(start, limit, plan, order, ordertype);
+		return planManager.findPager(page, limit, productPlan, order, ordertype);
 	}
 
 

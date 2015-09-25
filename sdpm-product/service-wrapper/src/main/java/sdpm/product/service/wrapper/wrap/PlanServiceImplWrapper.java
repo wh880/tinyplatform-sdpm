@@ -30,7 +30,7 @@ import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
 @Component
-public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.service.ProductService {
+public class PlanServiceImplWrapper implements org.tinygroup.sdpm.product.service.PlanService {
 	
 	@Autowired
 	CEPCore cepcore;
@@ -53,12 +53,12 @@ public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		return event;
 	}
 
-	public org.tinygroup.sdpm.product.dao.pojo.Product addProduct(org.tinygroup.sdpm.product.dao.pojo.Product product) {
-		String serviceId = "product_addProduct";
+	public org.tinygroup.sdpm.product.dao.pojo.ProductPlan addPlan(org.tinygroup.sdpm.product.dao.pojo.ProductPlan plan) {
+		String serviceId = "product_addPlan";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("product" ,product);
+			context.put("plan" ,plan);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -66,12 +66,12 @@ public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public int updateProduct(org.tinygroup.sdpm.product.dao.pojo.Product product) {
-		String serviceId = "product_updateProduct";
+	public int updatePlan(org.tinygroup.sdpm.product.dao.pojo.ProductPlan plan) {
+		String serviceId = "product_updatePlan";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("product" ,product);
+			context.put("plan" ,plan);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -79,12 +79,12 @@ public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public int deleteProduct(java.lang.Integer productId) {
-		String serviceId = "product_deleteProduct";
+	public int deletePlan(java.lang.Integer planId) {
+		String serviceId = "product_deletePlan";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("productId" ,productId);
+			context.put("planId" ,planId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -92,12 +92,12 @@ public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public org.tinygroup.sdpm.product.dao.pojo.Product findProduct(java.lang.Integer productId) {
-		String serviceId = "product_findProduct";
+	public org.tinygroup.sdpm.product.dao.pojo.ProductPlan findPlan(java.lang.Integer planId) {
+		String serviceId = "product_findPlan";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("productId" ,productId);
+			context.put("planId" ,planId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -105,14 +105,12 @@ public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.Product> findProductList(org.tinygroup.sdpm.product.dao.pojo.Product product ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "product_findProductList";
+	public int[] updateBatchPlan(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductPlan> plan) {
+		String serviceId = "product_updateBatchPlan";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("product" ,product);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
+			context.put("plan" ,plan);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -120,14 +118,12 @@ public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager findProductPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.Product product ,java.lang.String order ,java.lang.String ordertype) {
-		String serviceId = "product_findProductPager";
+	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductPlan> findPlanList(org.tinygroup.sdpm.product.dao.pojo.ProductPlan productPlan ,java.lang.String order ,java.lang.String ordertype) {
+		String serviceId = "product_findPlanList";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("start" ,start);
-			context.put("limit" ,limit);
-			context.put("product" ,product);
+			context.put("productPlan" ,productPlan);
 			context.put("order" ,order);
 			context.put("ordertype" ,ordertype);
 
@@ -137,12 +133,16 @@ public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public int[] updateBatchProduct(java.util.List<org.tinygroup.sdpm.product.dao.pojo.Product> products) {
-		String serviceId = "product_updateBatchProduct";
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductPlan> findProductPlanPager(int page ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductPlan productPlan ,java.lang.String order ,java.lang.String ordertype) {
+		String serviceId = "product_findProductPlanPager";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("products" ,products);
+			context.put("page" ,page);
+			context.put("limit" ,limit);
+			context.put("productPlan" ,productPlan);
+			context.put("order" ,order);
+			context.put("ordertype" ,ordertype);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

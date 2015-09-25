@@ -46,7 +46,7 @@ public interface PlanManager {
 	 * @param orderBies
 	 * @return
 	 */
-	List<ProductPlan> findList(ProductPlan productplan,String columnName,boolean asc);
+	List<ProductPlan> findList(ProductPlan productPlan,String order,String ordertype);
 	/**
 	 * 根据对象查找(分页、排序)
 	 * @param start
@@ -55,7 +55,7 @@ public interface PlanManager {
 	 * @param orderBies
 	 * @return
 	 */
-	Pager<ProductPlan> findPager(int start,int limit,ProductPlan productplan,String order,String ordertype);
+	Pager<ProductPlan> findPager(int start,int limit,ProductPlan productPlan,String order,String ordertype);
 	
 	
 

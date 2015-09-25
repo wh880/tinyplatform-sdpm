@@ -30,5 +30,25 @@
       </service-parameters>
       <service-result name="updateBatchStoryResult" required="false" is-array="true" type="int"/>
     </service-method>
+    <service-method local-name="findStoryList" service-id="product_findStoryList" method-name="findStoryList" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+    <service-method local-name="findStoryPager" service-id="product_findStoryPager" method-name="findStoryPager" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+        <service-parameter name="conditions" type="org.tinygroup.sdpm.common.util.sql.SearchInfos" required="false" is-array="false"/>
+        <service-parameter name="groupOperate" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager&lt;org.tinygroup.sdpm.product.dao.pojo.ProductStory&gt;"/>
+    </service-method>
   </service-component>
 </service-components>
