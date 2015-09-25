@@ -38,8 +38,6 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.product.dao.ProductStorySpecDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -50,67 +48,61 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-
-@LogClass("productStorySpec")
 @Repository
 public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements ProductStorySpecDao {
 
-	@LogMethod("add")
 	public ProductStorySpec add(ProductStorySpec productStorySpec) {
 		return getDslTemplate().insertAndReturnKey(productStorySpec, new InsertGenerateCallback<ProductStorySpec>() {
 			public Insert generate(ProductStorySpec t) {
-				Insert insert = insertInto(PRODUCT_STORYSPECTABLE).values(
-					PRODUCT_STORYSPECTABLE.COMPANY_ID.value(t.getCompanyId()),
-					PRODUCT_STORYSPECTABLE.STORY_ID.value(t.getStoryId()),
-					PRODUCT_STORYSPECTABLE.STORY_VERSION.value(t.getStoryVersion()),
-					PRODUCT_STORYSPECTABLE.STORY_TITLE.value(t.getStoryTitle()),
-					PRODUCT_STORYSPECTABLE.STORY_SPEC.value(t.getStorySpec()),
-					PRODUCT_STORYSPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification()));
+				Insert insert = insertInto(PRODUCT_STORY_SPECTABLE).values(
+					PRODUCT_STORY_SPECTABLE.COMPANY_ID.value(t.getCompanyId()),
+					PRODUCT_STORY_SPECTABLE.STORY_ID.value(t.getStoryId()),
+					PRODUCT_STORY_SPECTABLE.STORY_VERSION.value(t.getStoryVersion()),
+					PRODUCT_STORY_SPECTABLE.STORY_TITLE.value(t.getStoryTitle()),
+					PRODUCT_STORY_SPECTABLE.STORY_SPEC.value(t.getStorySpec()),
+					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification()));
 				return insert;
 			}
 		});
 	}
 
-	@LogMethod("edit")
 	public int edit(ProductStorySpec productStorySpec) {
 		if(productStorySpec == null || productStorySpec.getCompanyId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(productStorySpec, new UpdateGenerateCallback<ProductStorySpec>() {
 			public Update generate(ProductStorySpec t) {
-				Update update = update(PRODUCT_STORYSPECTABLE).set(
-					PRODUCT_STORYSPECTABLE.COMPANY_ID.value(t.getCompanyId()),
-					PRODUCT_STORYSPECTABLE.STORY_ID.value(t.getStoryId()),
-					PRODUCT_STORYSPECTABLE.STORY_VERSION.value(t.getStoryVersion()),
-					PRODUCT_STORYSPECTABLE.STORY_TITLE.value(t.getStoryTitle()),
-					PRODUCT_STORYSPECTABLE.STORY_SPEC.value(t.getStorySpec()),
-					PRODUCT_STORYSPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification())).where(
-					PRODUCT_STORYSPECTABLE.COMPANY_ID.eq(t.getCompanyId()));
+				Update update = update(PRODUCT_STORY_SPECTABLE).set(
+					PRODUCT_STORY_SPECTABLE.COMPANY_ID.value(t.getCompanyId()),
+					PRODUCT_STORY_SPECTABLE.STORY_ID.value(t.getStoryId()),
+					PRODUCT_STORY_SPECTABLE.STORY_VERSION.value(t.getStoryVersion()),
+					PRODUCT_STORY_SPECTABLE.STORY_TITLE.value(t.getStoryTitle()),
+					PRODUCT_STORY_SPECTABLE.STORY_SPEC.value(t.getStorySpec()),
+					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification())).where(
+					PRODUCT_STORY_SPECTABLE.COMPANY_ID.eq(t.getCompanyId()));
 				return update;
 			}
 		});
 	}
 
-	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
 		}
 		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
 			public Delete generate(Serializable pk) {
-				return delete(PRODUCT_STORYSPECTABLE).where(PRODUCT_STORYSPECTABLE.COMPANY_ID.eq(pk));
+				return delete(PRODUCT_STORY_SPECTABLE).where(PRODUCT_STORY_SPECTABLE.COMPANY_ID.eq(pk));
 			}
 		});
 	}
 
-	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
 		}
 		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
 			public Delete generate(Serializable[] t) {
-				return delete(PRODUCT_STORYSPECTABLE).where(PRODUCT_STORYSPECTABLE.COMPANY_ID.in(t));
+				return delete(PRODUCT_STORY_SPECTABLE).where(PRODUCT_STORY_SPECTABLE.COMPANY_ID.in(t));
 		}
 		},pks);
 	}
@@ -119,12 +111,12 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		return getDslTemplate().getByKey(pk, ProductStorySpec.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(PRODUCT_STORYSPECTABLE).where(PRODUCT_STORYSPECTABLE.COMPANY_ID.eq(t));
+			return selectFrom(PRODUCT_STORY_SPECTABLE).where(PRODUCT_STORY_SPECTABLE.COMPANY_ID.eq(t));
 			}
 		});
 	}
 
-	public List<ProductStorySpec> query(ProductStorySpec productStorySpec ,final OrderBy... orderBies) {
+	public List<ProductStorySpec> query(ProductStorySpec productStorySpec ,final OrderBy... orderArgs) {
 		if(productStorySpec==null){
 			productStorySpec=new ProductStorySpec();
 		}
@@ -132,35 +124,35 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(ProductStorySpec t) {
-				Select select = selectFrom(PRODUCT_STORYSPECTABLE).where(
+				Select select = selectFrom(PRODUCT_STORY_SPECTABLE).where(
 				and(
-					PRODUCT_STORYSPECTABLE.COMPANY_ID.eq(t.getCompanyId()),
-					PRODUCT_STORYSPECTABLE.STORY_ID.eq(t.getStoryId()),
-					PRODUCT_STORYSPECTABLE.STORY_VERSION.eq(t.getStoryVersion()),
-					PRODUCT_STORYSPECTABLE.STORY_TITLE.eq(t.getStoryTitle()),
-					PRODUCT_STORYSPECTABLE.STORY_SPEC.eq(t.getStorySpec()),
-					PRODUCT_STORYSPECTABLE.STORY_VERIFICATION.eq(t.getStoryVerification())));
-		return addOrderByElements(select, orderBies);
+					PRODUCT_STORY_SPECTABLE.COMPANY_ID.eq(t.getCompanyId()),
+					PRODUCT_STORY_SPECTABLE.STORY_ID.eq(t.getStoryId()),
+					PRODUCT_STORY_SPECTABLE.STORY_VERSION.eq(t.getStoryVersion()),
+					PRODUCT_STORY_SPECTABLE.STORY_TITLE.eq(t.getStoryTitle()),
+					PRODUCT_STORY_SPECTABLE.STORY_SPEC.eq(t.getStorySpec()),
+					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.eq(t.getStoryVerification())));
+			return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
 
-	public Pager<ProductStorySpec> queryPager(int start,int limit ,ProductStorySpec productStorySpec ,final OrderBy... orderBies) {
+	public Pager<ProductStorySpec> queryPager(int start,int limit ,ProductStorySpec productStorySpec ,final OrderBy... orderArgs) {
 		if(productStorySpec==null){
 			productStorySpec=new ProductStorySpec();
 		}
 		return getDslTemplate().queryPager(start, limit, productStorySpec, false, new SelectGenerateCallback<ProductStorySpec>() {
 
 			public Select generate(ProductStorySpec t) {
-				Select select = MysqlSelect.selectFrom(PRODUCT_STORYSPECTABLE).where(
+				Select select = MysqlSelect.selectFrom(PRODUCT_STORY_SPECTABLE).where(
 				and(
-					PRODUCT_STORYSPECTABLE.COMPANY_ID.eq(t.getCompanyId()),
-					PRODUCT_STORYSPECTABLE.STORY_ID.eq(t.getStoryId()),
-					PRODUCT_STORYSPECTABLE.STORY_VERSION.eq(t.getStoryVersion()),
-					PRODUCT_STORYSPECTABLE.STORY_TITLE.eq(t.getStoryTitle()),
-					PRODUCT_STORYSPECTABLE.STORY_SPEC.eq(t.getStorySpec()),
-					PRODUCT_STORYSPECTABLE.STORY_VERIFICATION.eq(t.getStoryVerification())));
-		return addOrderByElements(select, orderBies);
+					PRODUCT_STORY_SPECTABLE.COMPANY_ID.eq(t.getCompanyId()),
+					PRODUCT_STORY_SPECTABLE.STORY_ID.eq(t.getStoryId()),
+					PRODUCT_STORY_SPECTABLE.STORY_VERSION.eq(t.getStoryVersion()),
+					PRODUCT_STORY_SPECTABLE.STORY_TITLE.eq(t.getStoryTitle()),
+					PRODUCT_STORY_SPECTABLE.STORY_SPEC.eq(t.getStorySpec()),
+					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.eq(t.getStoryVerification())));
+			return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
@@ -172,13 +164,13 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		return getDslTemplate().batchInsert(autoGeneratedKeys, productStorySpecs, new NoParamInsertGenerateCallback() {
 
 			public Insert generate() {
-				return insertInto(PRODUCT_STORYSPECTABLE).values(
-					PRODUCT_STORYSPECTABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
-					PRODUCT_STORYSPECTABLE.STORY_ID.value(new JdbcNamedParameter("storyId")),
-					PRODUCT_STORYSPECTABLE.STORY_VERSION.value(new JdbcNamedParameter("storyVersion")),
-					PRODUCT_STORYSPECTABLE.STORY_TITLE.value(new JdbcNamedParameter("storyTitle")),
-					PRODUCT_STORYSPECTABLE.STORY_SPEC.value(new JdbcNamedParameter("storySpec")),
-					PRODUCT_STORYSPECTABLE.STORY_VERIFICATION.value(new JdbcNamedParameter("storyVerification")));
+				return insertInto(PRODUCT_STORY_SPECTABLE).values(
+					PRODUCT_STORY_SPECTABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
+					PRODUCT_STORY_SPECTABLE.STORY_ID.value(new JdbcNamedParameter("storyId")),
+					PRODUCT_STORY_SPECTABLE.STORY_VERSION.value(new JdbcNamedParameter("storyVersion")),
+					PRODUCT_STORY_SPECTABLE.STORY_TITLE.value(new JdbcNamedParameter("storyTitle")),
+					PRODUCT_STORY_SPECTABLE.STORY_SPEC.value(new JdbcNamedParameter("storySpec")),
+					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(new JdbcNamedParameter("storyVerification")));
 			}
 		});
 	}
@@ -187,7 +179,6 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 			return batchInsert(true ,productStorySpecs);
 	}
 
-	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<ProductStorySpec> productStorySpecs) {
 		if (CollectionUtil.isEmpty(productStorySpecs)) {
 			return new int[0];
@@ -195,19 +186,18 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		return getDslTemplate().batchUpdate(productStorySpecs, new NoParamUpdateGenerateCallback() {
 
 			public Update generate() {
-				return update(PRODUCT_STORYSPECTABLE).set(
-					PRODUCT_STORYSPECTABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
-					PRODUCT_STORYSPECTABLE.STORY_ID.value(new JdbcNamedParameter("storyId")),
-					PRODUCT_STORYSPECTABLE.STORY_VERSION.value(new JdbcNamedParameter("storyVersion")),
-					PRODUCT_STORYSPECTABLE.STORY_TITLE.value(new JdbcNamedParameter("storyTitle")),
-					PRODUCT_STORYSPECTABLE.STORY_SPEC.value(new JdbcNamedParameter("storySpec")),
-					PRODUCT_STORYSPECTABLE.STORY_VERIFICATION.value(new JdbcNamedParameter("storyVerification"))).where(
-				PRODUCT_STORYSPECTABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")));
+				return update(PRODUCT_STORY_SPECTABLE).set(
+					PRODUCT_STORY_SPECTABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
+					PRODUCT_STORY_SPECTABLE.STORY_ID.value(new JdbcNamedParameter("storyId")),
+					PRODUCT_STORY_SPECTABLE.STORY_VERSION.value(new JdbcNamedParameter("storyVersion")),
+					PRODUCT_STORY_SPECTABLE.STORY_TITLE.value(new JdbcNamedParameter("storyTitle")),
+					PRODUCT_STORY_SPECTABLE.STORY_SPEC.value(new JdbcNamedParameter("storySpec")),
+					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(new JdbcNamedParameter("storyVerification"))).where(
+				PRODUCT_STORY_SPECTABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")));
 			}
 		});
 	}
 
-	@LogMethod("batchDelete")
 	public int[] batchDelete(List<ProductStorySpec> productStorySpecs) {
 		if (CollectionUtil.isEmpty(productStorySpecs)) {
 			return new int[0];
@@ -215,18 +205,17 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		return getDslTemplate().batchDelete(productStorySpecs, new NoParamDeleteGenerateCallback() {
 
 			public Delete generate() {
-				return delete(PRODUCT_STORYSPECTABLE).where(and(
-				PRODUCT_STORYSPECTABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")),
-				PRODUCT_STORYSPECTABLE.STORY_ID.eq(new JdbcNamedParameter("storyId")),
-				PRODUCT_STORYSPECTABLE.STORY_VERSION.eq(new JdbcNamedParameter("storyVersion")),
-				PRODUCT_STORYSPECTABLE.STORY_TITLE.eq(new JdbcNamedParameter("storyTitle")),
-				PRODUCT_STORYSPECTABLE.STORY_SPEC.eq(new JdbcNamedParameter("storySpec")),
-				PRODUCT_STORYSPECTABLE.STORY_VERIFICATION.eq(new JdbcNamedParameter("storyVerification"))));
+				return delete(PRODUCT_STORY_SPECTABLE).where(and(
+				PRODUCT_STORY_SPECTABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")),
+				PRODUCT_STORY_SPECTABLE.STORY_ID.eq(new JdbcNamedParameter("storyId")),
+				PRODUCT_STORY_SPECTABLE.STORY_VERSION.eq(new JdbcNamedParameter("storyVersion")),
+				PRODUCT_STORY_SPECTABLE.STORY_TITLE.eq(new JdbcNamedParameter("storyTitle")),
+				PRODUCT_STORY_SPECTABLE.STORY_SPEC.eq(new JdbcNamedParameter("storySpec")),
+				PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.eq(new JdbcNamedParameter("storyVerification"))));
 			}
 		});
 	}
 
-	@LogMethod("addOrderByElementss")
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {

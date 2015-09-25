@@ -25,7 +25,7 @@ import org.tinygroup.tinysqldsl.base.Table;
  */
 public class ProductStorySpecTable extends Table {
 
-	public static final ProductStorySpecTable PRODUCT_STORYSPECTABLE = new ProductStorySpecTable();
+	public static final ProductStorySpecTable PRODUCT_STORY_SPECTABLE = new ProductStorySpecTable();
 
 	/** 
 	 * 公司ID
@@ -65,7 +65,7 @@ public class ProductStorySpecTable extends Table {
 
 
 	private ProductStorySpecTable() {
-		super("product_storySpec");
+		super("product_story_spec");
 	}
 
 }

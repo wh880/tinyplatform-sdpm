@@ -9,10 +9,10 @@
     <table-field standard-field-id="2db31fc4492c400bba36a758c0df2611" primary="false" unique="false" not-null="false" id="story_id" auto-increase="false"/>
     <table-field standard-field-id="d530b2f878d94725b0de97aa83fe6012" primary="false" unique="false" not-null="false" id="story_version" auto-increase="false"/>
     <table-field standard-field-id="8cd36378dabf44a99afef4d1f7e433a0" primary="false" unique="false" not-null="false" id="task_id" auto-increase="false"/>
-    <table-field standard-field-id="b1ed6c1d89a04621898ecee935bb4f0b" primary="false" unique="false" not-null="false" id="toTask_ID" auto-increase="false"/>
-    <table-field standard-field-id="90f1257cbd30488d833abf7f494c4204" primary="false" unique="false" not-null="false" id="toStory_ID" auto-increase="false"/>
-    <table-field standard-field-id="928545e432b74102a25fef4b0f2cb318" primary="false" unique="false" not-null="true" id="Bug_title" auto-increase="false"/>
-    <table-field standard-field-id="6e96a1ee41fa4b5a9959d2a9b14a9c92" primary="false" unique="false" not-null="false" id="keywords" auto-increase="false"/>
+    <table-field standard-field-id="b1ed6c1d89a04621898ecee935bb4f0b" primary="false" unique="false" not-null="false" id="to_task_id" auto-increase="false"/>
+    <table-field standard-field-id="90f1257cbd30488d833abf7f494c4204" primary="false" unique="false" not-null="false" id="to_story_id" auto-increase="false"/>
+    <table-field standard-field-id="928545e432b74102a25fef4b0f2cb318" primary="false" unique="false" not-null="true" id="bug_title" auto-increase="false"/>
+    <table-field standard-field-id="6e96a1ee41fa4b5a9959d2a9b14a9c92" primary="false" unique="false" not-null="false" id="bug_keywords" auto-increase="false"/>
     <table-field standard-field-id="482d5444f0e546138886b874bc66af91" primary="false" unique="false" not-null="false" id="bug_severity" auto-increase="false"/>
     <table-field standard-field-id="aa9be6c1c2094e47af40df0b6f017417" primary="false" unique="false" not-null="false" id="priority" auto-increase="false"/>
     <table-field standard-field-id="ee6041d355a84c4193888496f4e68255" primary="false" unique="false" not-null="false" id="bug_type" auto-increase="false"/>
@@ -122,7 +122,7 @@
     <table-field standard-field-id="8cd36378dabf44a99afef4d1f7e433a0" primary="false" unique="false" not-null="true" id="task_id" auto-increase="false"/>
     <table-field standard-field-id="f3bad42da78e4bd98033bf38287be7d7" primary="false" unique="false" not-null="true" id="case_ID" auto-increase="false"/>
     <table-field standard-field-id="e426ffcf06bd4cc2be2bf6c6b5aef436" primary="false" unique="false" not-null="false" id="case_version" auto-increase="false"/>
-    <table-field standard-field-id="bb1d1f8ede934aef9d04ea14cae8104f" primary="false" unique="false" not-null="false" id="testRun_assignedTo" auto-increase="false"/>
+    <table-field standard-field-id="bb1d1f8ede934aef9d04ea14cae8104f" primary="false" unique="false" not-null="false" id="test_run_assigned_to" auto-increase="false"/>
     <table-field standard-field-id="1f006b59daec4a47b62cf7bbd94f4015" primary="false" unique="false" not-null="false" id="testRun_lastRunner" auto-increase="false"/>
     <table-field standard-field-id="0deaf731dafe4215b1e88551977502e6" primary="false" unique="false" not-null="false" id="testRun_lastRunDate" auto-increase="false"/>
     <table-field standard-field-id="39c7b8234eeb4dc5b892b3e257559e54" primary="false" unique="false" not-null="false" id="testRun_lastRunResult" auto-increase="false"/>

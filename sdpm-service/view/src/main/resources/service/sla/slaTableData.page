@@ -2,29 +2,31 @@
 <input type="hidden" name="records" value="${num}"/>
 #end
 
-#setTinyItemCount(pager.totalPages)
-#foreach(var:pager.records)
+#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#if (pagesize>records-pagesize*(page-1))
+    #set(pagesize=records-(page-1)*pagesize)
+#end
+#setTinyItemCount(52)
+#foreach(var:[1..pagesize])
     #@tr()
-    #* #@td()<input type="checkbox" value="${var.slaId}" name="idCheck">#end
-     #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/clientsla.page">${var.clientId}</a>#end
-     #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">${var.ServiceName}</a>#end
-     #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent.page">${var.slaTitle}#end
-     #@td()${var.cilentProductVision}#end
-     #@td()${var.slaStatus}#end
-     #@td()${var.slaCreatedBy}#end
-     #@td()${var.slaCreateDate}#end
-     #@td()*#
-        #@td()<input type="checkbox" value="${var.clientId}" name="idCheck">#end
+       #* #@td()<input type="checkbox" value="${var.slaId}" name="idCheck">#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/clientsla.page">${var.clientId}</a>#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">${var.slaTitle}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">${var.ServiceName}</a>#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent.page">${var.slaTitle}#end
         #@td()${var.cilentProductVision}#end
-        #@td()${var.serviceLevel}#end
+        #@td()${var.slaStatus}#end
         #@td()${var.slaCreatedBy}#end
-    #* #@td()${slaCreateDate}#end*#
-        #@td()${formatDate(var.slaCreateDate,"yyyy-MM-dd")}#end
+        #@td()${var.slaCreateDate}#end
+        #@td()*#
+        #@td()<input type="checkbox" value="1" name="idCheck">#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/clientsla.page">001</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">恒生</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent.page">服务协议#end
+        #@td()1.1#end
+        #@td()1#end
+        #@td()习近平#end
+        #@td()2015-9-1#end
         #@td()
-        #* sla.page页面的编辑和删除，跳转地址在base.menu.xml中。*#
             #foreach(m:menuManager.getScopeMenus("service-sla"))
                 #if(m.id != "sla-del")
                     <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var}"

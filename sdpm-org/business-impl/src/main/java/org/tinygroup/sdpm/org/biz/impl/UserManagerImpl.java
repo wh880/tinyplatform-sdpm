@@ -58,8 +58,9 @@ public class UserManagerImpl implements UserManager {
     }
 
     public Integer delete(String id) {
-        OrgUser orgUser = new OrgUser();
-        orgUser.setOrgUserId(id);
+        OrgUser orgUser = orgUserDao.getByKey(id);
+        // OrgUser orgUser = new OrgUser();
+        // orgUser.setOrgUserId(id);
         orgUser.setOrgUserDeleted(OrgUser.DELETE_YES);
         return orgUserDao.edit(orgUser);
     }

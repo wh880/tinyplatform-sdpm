@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.tinygroup.sdpm.document.dao.pojo.Doc;
 import org.tinygroup.sdpm.document.dao.pojo.DocLib;
-import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
 import org.tinygroup.tinysqldsl.Pager;
 /**
  * @date 2015/09/21
@@ -13,8 +12,7 @@ import org.tinygroup.tinysqldsl.Pager;
  */
 
 public interface DocService {
-	//Create a new document.如果我的biz层没有把historydoc集合到一起，那么service就可以传递2参数，
-	//比如：(Doc doc,History his)
+	
 	public Doc createNewDoc(Doc doc);
 	//Create a new document library-just a name.
 	public DocLib createNewDocLib(DocLib doclib);
@@ -24,8 +22,6 @@ public interface DocService {
 	public int editDocLibName(DocLib doclib);
 	//find
 	public Doc findDocById(Integer id);
-	//文档操作记录
-	public List<Historydoc> getEditRecord(Integer docid);
 	public DocLib findDoclibById(Integer id);
 	//list
 	public List<Doc> findDocByDocClass(Doc doc);

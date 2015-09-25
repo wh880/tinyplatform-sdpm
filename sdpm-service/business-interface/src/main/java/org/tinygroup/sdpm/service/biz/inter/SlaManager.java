@@ -1,7 +1,6 @@
 package org.tinygroup.sdpm.service.biz.inter;
 
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
-import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -64,7 +63,5 @@ public interface SlaManager {
      * @return
      */
     List<ServiceSla> getListByClientId(Integer clientId);
-
-    Pager<ServiceSla> findPager(Integer start, Integer limit, ServiceSla serviceClient);
 }
 

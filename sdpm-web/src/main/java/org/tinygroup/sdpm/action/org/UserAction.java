@@ -29,7 +29,7 @@ public class UserAction extends BaseController {
             OrgUser user = userService.findUser(id);
             model.addAttribute("user", user);
         }
-        return "organization/common/addUser.page";
+        return "organization/user/addUser.page";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -50,6 +50,17 @@ public class UserAction extends BaseController {
         return "organization/user/user.page";
     }
 
+    @RequestMapping("/delete/page")
+    public String deleteData(String id, Model model) {
+        model.addAttribute("id", id);
+        return "organization/user/delect.pagelet";
+    }
+
+    @RequestMapping("/delete")
+    public String delete(String id) {
+        userService.deleteUser(id);
+        return "redirect:/org/user/list/";
+    }
     @RequestMapping("/list/data")
     public String listData(Integer start, Integer limit, OrgUser orgUser, Model model) {
         Pager<OrgUser> pager = userService.findUserPager(start, limit, orgUser);

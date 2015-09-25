@@ -75,8 +75,9 @@
                                         #@aExtendButton(
                                             "btn-primary btn-sm" TINY_CONTEXT_PATH+m.href+"?id="+var.slaId "" "")编辑#end
                                     #else
-                                        #@delItemsdpm(TINY_CONTEXT_PATH+"/service/client/slaDelete"+"?id="+var.slaId ""
-                                            "" {"class":"btn radius btn-danger btn-sm"}) 删除#end
+                                        #@delItemsdpm(TINY_CONTEXT_PATH+"/service/client/slaDelete"
+                                        var?.slaId TINY_CONTEXT_PATH+"/service/client/slaDelete" {"class":
+                                            "btn radius btn-danger btn-sm"}) 删除#end
                                     #end
                                 #end
                             </div>
@@ -93,19 +94,3 @@
 #end
 #@simpleModal("myModal1" "导出")#end
 #@simpleModal("myModal2" "新建产品")#end
-
-<script>
-    $(function () {
-        $(".infoContent").on("click", ".clientDelete", function () {
-            //console.log($(this).attr("itemId"))
-//            var that = this;
-            layer.confirm('确定要删除该记录？', function (index) {
-                //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
-                //$.ajax()
-                //console.log(index);
-//                layer.msg($("已删除").attr("deleteList"), 1);
-                layer.msg('已删除', 1);
-            })
-        });
-    });
-</script>

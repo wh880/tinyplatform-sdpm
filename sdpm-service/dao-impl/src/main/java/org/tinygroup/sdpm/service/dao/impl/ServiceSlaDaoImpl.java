@@ -343,7 +343,8 @@ public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDa
             //Select select = selectFrom(USERTABLE).where(USERTABLE.NAME.eq("xdy"));
             // MysqlSelect select1;
             //select1 = selectFrom(USERTABLE).limit(1, 10);
-            select = selectFrom(SERVICE_SLATABLE).where(SERVICE_SLATABLE.CLIENT_ID.eq(clientId));
+            select = selectFrom(SERVICE_SLATABLE).where(and(SERVICE_SLATABLE.CLIENT_ID.eq(clientId),
+                    SERVICE_SLATABLE.DELETED.eq(DELETE_NO)));
             return getDslSession().fetchList(select, ServiceSla.class);
         }
     }
@@ -353,7 +354,7 @@ public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDa
             public Update generate(Integer id) {
                 Update update = update(SERVICE_SLATABLE).set(
                         SERVICE_SLATABLE.DELETED.value(DELETE_YES)).where(
-                        SERVICE_SLATABLE.CLIENT_ID.eq(id));
+                        SERVICE_SLATABLE.SLA_ID.eq(id));
                 return update;
             }
         });

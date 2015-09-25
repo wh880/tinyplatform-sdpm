@@ -109,25 +109,25 @@ public class QualityTestCaseTable extends Table {
 	 * 由谁编写
 	 * 
 	 */
-	public final Column CASE_SCRIPTEDBY = new Column(this, "case_scriptedBy");
+	public final Column CASE_SCRIPTED_BY = new Column(this, "case_scripted_by");
 
 	/** 
 	 * 编写日期
 	 * 
 	 */
-	public final Column CASE_SCRIPTEDDATE = new Column(this, "case_scriptedDate");
+	public final Column CASE_SCRIPTED_DATE = new Column(this, "case_scripted_date");
 
 	/** 
 	 * SCRIPTSTATUS
 	 * 
 	 */
-	public final Column SCRIPTSTATUS = new Column(this, "scriptStatus");
+	public final Column SCRIPT_STATUS = new Column(this, "script_status");
 
 	/** 
 	 * SCRIPTLOCATION
 	 * 
 	 */
-	public final Column SCRIPTLOCATION = new Column(this, "scriptLocation");
+	public final Column SCRIPT_LOCATION = new Column(this, "script_location");
 
 	/** 
 	 * 用例状态
@@ -151,25 +151,25 @@ public class QualityTestCaseTable extends Table {
 	 * 由谁创建
 	 * 
 	 */
-	public final Column CASE_OPENEDBY = new Column(this, "case_openedBy");
+	public final Column CASE_OPENED_BY = new Column(this, "case_opened_by");
 
 	/** 
 	 * 创建日期
 	 * 
 	 */
-	public final Column CASE_OPENEDDATE = new Column(this, "case_openedDate");
+	public final Column CASE_OPENED_DATE = new Column(this, "case_opened_date");
 
 	/** 
 	 * 最后修改者
 	 * 
 	 */
-	public final Column CASE_LASTEDITEDBY = new Column(this, "case_lastEditedBy");
+	public final Column CASE_LAST_EDITED_BY = new Column(this, "case_last_edited_by");
 
 	/** 
 	 * 最后修改日期
 	 * 
 	 */
-	public final Column CASE_LASTEDITEDDATE = new Column(this, "case_lastEditedDate");
+	public final Column CASE_LAST_EDITED_DATE = new Column(this, "case_last_edited_date");
 
 	/** 
 	 * 关联用例版本
@@ -187,7 +187,7 @@ public class QualityTestCaseTable extends Table {
 	 * 来源Bug
 	 * 
 	 */
-	public final Column CASE_FROMBUG = new Column(this, "case_fromBug");
+	public final Column CASE_FROM_BUG = new Column(this, "case_from_bug");
 
 	/** 
 	 * 已删除
@@ -199,19 +199,19 @@ public class QualityTestCaseTable extends Table {
 	 * 最后执行人
 	 * 
 	 */
-	public final Column CASE_LASTRUNNER = new Column(this, "case_lastRunner");
+	public final Column CASE_LAST_RUNNER = new Column(this, "case_last_runner");
 
 	/** 
 	 * 最后执行时间
 	 * 
 	 */
-	public final Column CASE_LASTRUNDATE = new Column(this, "case_lastRunDate");
+	public final Column CASE_LAST_RUN_DATE = new Column(this, "case_last_run_date");
 
 	/** 
 	 * 用例执行结果
 	 * 
 	 */
-	public final Column CASE_LASTRUNRESULT = new Column(this, "case_lastRunResult");
+	public final Column CASE_LAST_RUN_RESULT = new Column(this, "case_last_run_result");
 
 
 	private QualityTestCaseTable() {

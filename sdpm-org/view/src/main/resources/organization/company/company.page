@@ -29,9 +29,6 @@
         #end
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
-            ##            <span class="f">
-            ##					<dr>公司信息</dr>
-            ##            </span>
             <span style="float: right">
                 #set(m=menuManager.getMenu("org-company-edit"))
                 #if(m)
@@ -97,7 +94,11 @@
         #@gridSysRow()
             #@colLabel("col-4")匿名登录：#end
             #@gridSysCol(8)
-                <p>${company?.orgCompanyGuest}</p>
+                #if(company?.orgCompanyGuest==1)
+                    <p>允许</p>
+                #else
+                    <p>不允许</p>
+                #end
             #end
         #end
     </div>

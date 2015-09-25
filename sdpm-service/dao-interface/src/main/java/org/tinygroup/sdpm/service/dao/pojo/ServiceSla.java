@@ -25,7 +25,7 @@ import java.util.Date;
 public class ServiceSla {
 
 	public static Integer DELETE_YES=1;
-	public static Integer DELETE_NO = 0;
+	public static Integer DELETE_NO=0;
 	/**
 	 * 服务协议ID
 	 *
@@ -43,7 +43,7 @@ public class ServiceSla {
 	 */
 	private Integer serviceLevel;
 	/*关联客户表的客户名称*/
-	private  String  ServiceName;
+	private  Integer  serviceName;
 	/**
 	 * 服务期限
 	 *

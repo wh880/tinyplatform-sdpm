@@ -91,7 +91,7 @@ public class ClientAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/slaDelete")
     public Map slaDelete(Integer id) {
-        clientService.deleteClient(id);
+        slaService.deleteSla(id);
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "y");
         map.put("info", "删除成功");
