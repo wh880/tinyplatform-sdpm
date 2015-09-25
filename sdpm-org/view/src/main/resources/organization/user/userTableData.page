@@ -1,7 +1,7 @@
 #setTinyItemCount(pager.totalPages)
 #for(var:pager.records)
 #@tr()
-    #@td()<input type="checkbox" value="${var.orgUserId}" name="idCheck">#end
+    #@td()<input type="checkbox" value="${var?.orgUserId}" name="orgUserId">#end
     #@td()<a href="${TINY_CONTEXT_PATH}/organization/user/todocalendarAdmin.page">${var?.orgUserRealName}</a>#end
     #@td()${var?.orgUserAccount}#end
     #@td()${var.orgUserRole}#end
@@ -18,10 +18,9 @@
             <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var?.orgUserId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #else
-                #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?id="+var "ml-5")
+                #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?id="+var?.orgUserId "ml-5")
             #end
 
-        ##       #iconOperations("#myModal" m.icon m.name map[m.id][0] map[m.id][1] m.href+"?id="+var "ml-5")
         #end
 
     #end

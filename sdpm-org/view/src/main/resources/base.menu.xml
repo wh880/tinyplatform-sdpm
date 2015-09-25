@@ -12,7 +12,7 @@
 
         </menu>
 
-        <menu id="org-user-delete" name="删除" href="/organization/user/delect.pagelet" icon="icon-remove" sort="1"
+        <menu id="org-user-delete" name="删除" href="/org/user/delete/page" icon="icon-remove" sort="1"
               isShow="1"
               scope="org-user">
             <map>
