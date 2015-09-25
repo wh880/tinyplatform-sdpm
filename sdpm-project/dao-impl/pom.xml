@@ -17,11 +17,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.gendslcode</artifactId>
-			<version>${tiny_version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
 			<artifactId>sdpm-project-dao-interface</artifactId>
 			<version>${tiny_sdpm_version}</version>
 		</dependency>
