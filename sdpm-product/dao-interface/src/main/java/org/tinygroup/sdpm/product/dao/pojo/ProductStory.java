@@ -16,13 +16,14 @@
 
 package org.tinygroup.sdpm.product.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 需求表
  * 
  */
-public class ProductStory {
+public class ProductStory  implements Serializable{
 
 	/** 
 	 * 需求ID

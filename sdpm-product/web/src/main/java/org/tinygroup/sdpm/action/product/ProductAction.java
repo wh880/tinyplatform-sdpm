@@ -26,7 +26,7 @@ public class ProductAction {
 	public String save(Product product, Model model) {
 		
 		productService.addProduct(product);
-		return "/product/page/tabledemo/addProduct.page";
+		return "/product/page/tabledemo/product-listall.page";
 
 	}
 	
