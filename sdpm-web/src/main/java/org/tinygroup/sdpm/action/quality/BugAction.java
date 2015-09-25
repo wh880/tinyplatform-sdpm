@@ -47,18 +47,53 @@ public class BugAction extends BaseController {
 			asc = false;
 		}
 		//QualityBug bug = new QualityBug();
-		bug.setProductId(id);
+	//	bug.setProductId(id);
 		Pager<QualityBug> bugpager = bugService.findBugListPager(start, limit, bug, order, asc);
 		model.addAttribute("bugpager",bugpager);
 		return "testManagement/data/BugData.pagelet";
 	}
 	
-	/*@RequestMapping("add")
-	public String add(Bug bug,Model model){
-		Bug bugadd =	bugService.addBug(bug);
+	@RequestMapping("/makesure")
+	public String makesure(QualityBug bug ,Model model){
+		int makesure = bugService.updateBug(bug);
+		model.addAttribute("makesure",makesure);
+		return "testManagement/page/tabledemo/makesure.page";
+	}
+	
+	@RequestMapping("/assign")
+	public String assign(QualityBug bug ,Model model){
+		int assign = bugService.updateBug(bug);
+		model.addAttribute("assign",assign);
+		return "testManagement/page/tabledemo/assign.page";
+	}
+	
+	@RequestMapping("/solve")
+	public String solve(QualityBug bug ,Model model){
+		int solve = bugService.updateBug(bug);
+		model.addAttribute("solve",solve);
+		return "testManagement/page/tabledemo/assign.page";
+	}
+	
+	@RequestMapping("/close")
+	public String close(QualityBug bug ,Model model){
+		int close = bugService.updateBug(bug);
+		model.addAttribute("close",close);
+		return "testManagement/page/tabledemo/shutdown.page";
+	}
+	
+	@RequestMapping("/edit")
+	public String edit(QualityBug bug ,Model model){
+		int edit = bugService.updateBug(bug);
+		model.addAttribute("edit",edit);
+		return "testManagement/page/tabledemo/edition.page";
+	}
+			
+	@RequestMapping("add")
+	public String add(QualityBug bug,Model model){
+		QualityBug bugadd =	bugService.addBug(bug);
 		model.addAttribute("bugadd",bugadd);
 		return "testManagement/page/proposeBug.page";
-	}*/
+	}
 	
 	@RequestMapping(value = "/save",method = RequestMethod.POST)
 	public String save(QualityBug bug,Model model){
