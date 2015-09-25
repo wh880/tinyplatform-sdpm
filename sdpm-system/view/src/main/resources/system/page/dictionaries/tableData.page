@@ -1,5 +1,5 @@
 #set(editpagePath="/system/page/dictionaries/dictitem_edit.pagelet",editpageModalId="dictitemEditModal",editpageModal="#"+editpageModalId)
-#set(viewpagePath=TINY_CONTEXT_PATH+"/system/dict/check?dictId=1",viewpageModalId="dictitemViewModal",viewpageModal="#"+viewpageModalId)
+#set(viewpagePath="/system/page/dictionaries/dictitem_view.pagelet",viewpageModalId="dictitemViewModal",viewpageModal="#"+viewpageModalId)
 #setTinyItemCount(dictPager.totalCount)
 
 #for(d:dictPager.records)
@@ -15,7 +15,7 @@
 						#foreach(m in menuManager.getScopeMenus("dictitem-op"))
 							#if(m.id!="dictitem-del")
 								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal
-								 m.icon m.name "" "" m.href +"?dictId="+d?.dictId"ml-5")
+								 m.icon m.name "" "" m.href +"?id="+d?.dictId"ml-5")
 							#else
 								#iconOperation(m.icon m.name "ml-5 delBtn")
 							#end
