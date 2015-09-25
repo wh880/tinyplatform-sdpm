@@ -32,7 +32,7 @@ public class ReleaseMangerImpl implements ReleaseManger{
 
 		ProductRelease productRelease = new ProductRelease();
 		productRelease.setReleaseId(releaseId);
-		productRelease.setDeleted(ProductRelease.DELETE_YES);
+		productRelease.setDeleted(FieldUtil.DELETE_YES);
 		return productReleaseDao.edit(productRelease);
 	}
 

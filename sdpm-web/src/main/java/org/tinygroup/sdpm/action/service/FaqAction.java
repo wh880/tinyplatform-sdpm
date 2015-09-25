@@ -19,44 +19,52 @@ public class FaqAction extends BaseController {
     @Autowired
     private FaqService faqService;
 
-    /*ĞÂÔöÎÊÌâ*/
+    /*æ–°å¢é—®é¢˜*/
     @RequestMapping("/form")
     public String form(ServiceFaq faq, Model model) {
         /*if (faq.getFaqId() == null) {}*/
       /*  Faq faq=faqService.findFaq(id);
             model.addAttribute("faq",faq);*/
-        if (faq != null) {
-            model.addAttribute("faq", faq);
+        if (faq != null)
+        {
+            model.addAttribute("faq",faq);
         }
         return "/service/faq/addquestion.page";
     }
 
-    /* ±£´æ*/
+    /* ä¿å­˜*/
     @RequestMapping("/save")
-    public String save(ServiceFaq faq, Model model) {
-        if (faq.getFaqId() == null) {
+    public String save(ServiceFaq faq ,Model model)
+    {
+        if (faq.getFaqId()==null)
+        {
             faqService.addFaq(faq);
-        } else {
+        }
+        else
+        {
             faqService.updateFaq(faq);
         }
-        model.addAttribute("faq", faq);
+        model.addAttribute("faq",faq);
         return "/service/faq/faqmenu.page";
     }
 
-    /*Í¨¹ı²éÑ¯query½«Êı¾İ²éÑ¯ ³öÀ´*/
+    /*æŠŠæ‰€æœ‰æ•°æ®æŸ¥è¯¢å‡ºæ¥*/
     @RequestMapping("/list")
-    public String list(ServiceFaq faq, Model model) {
-        List<ServiceFaq> list = faqService.getFaqList(faq);
-        model.addAttribute("list", list);
+    public String list(ServiceFaq faq,Model model)
+    {
+        List<ServiceFaq> list=faqService.getFaqList(faq);
+        model.addAttribute("list",list);
         return "/service/faq/faqmenu.page";
     }
 
-    /*É¾³ı*/
+    /*åˆ é™¤*/
     @RequestMapping("/delete")
-    public String delete(Integer id) {
+    public String delete(Integer id)
+    {
         faqService.deleteFaq(id);
         return "/service/faq/faqmenu.page";
     }
+
 
 
 }

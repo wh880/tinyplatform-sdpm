@@ -88,6 +88,8 @@
         <!--<artifactId>sdpm-service-view</artifactId>-->
         <!--<version>${tiny_sdpm_version}</version>-->
         <!--</dependency>-->
+        
+        <!-- quality -->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-quality-view</artifactId>
@@ -110,6 +112,16 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-document-service-impl</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-document-service-wrapper</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-product-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
@@ -128,6 +140,7 @@
             <artifactId>sdpm-productLine-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+        <!-- quality end -->
 
         <!-- project -->
         <dependency>
@@ -263,17 +276,6 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.springutil</artifactId>
-			<version>${tiny_version}</version>
-			 <exclusions>
-             <exclusion>
-          <artifactId>org.tinygroup.spring256</artifactId>
-          <groupId>org.tinygroup</groupId>
-             </exclusion>
-      		</exclusions>
-		</dependency>
     </dependencies>
     <build>
         <finalName>${project.name}</finalName>

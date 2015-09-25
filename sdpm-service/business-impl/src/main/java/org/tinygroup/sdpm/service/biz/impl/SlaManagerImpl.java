@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.SlaManager;
 import org.tinygroup.sdpm.service.dao.ServiceSlaDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
-import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class SlaManagerImpl implements SlaManager {
+public class SlaManagerImpl implements SlaManager{
     @Autowired
     private ServiceSlaDao slaDao;
 
@@ -37,18 +36,17 @@ public class SlaManagerImpl implements SlaManager {
     }
 
     public Integer delete(Integer id) {
-        return slaDao.softDelete(id);
+        ServiceSla sla = new ServiceSla();
+        sla.setSlaId(id);
+        sla.setDeleted(id);
+        return slaDao.edit(sla);
     }
 
     public Integer deleteBatch(Integer id) {
-        return null;
+        return  null;
     }
 
     public List<ServiceSla> getListByClientId(Integer clientId) {
         return slaDao.getListByClientId(clientId);
-    }
-
-    public Pager<ServiceSla> findPager(Integer start, Integer limit, ServiceSla sla) {
-        return slaDao.queryPager(start, limit, sla);
     }
 }

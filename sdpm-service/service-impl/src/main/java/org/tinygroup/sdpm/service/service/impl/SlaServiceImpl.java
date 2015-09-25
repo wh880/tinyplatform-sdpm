@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.service.biz.inter.SlaManager;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.sdpm.service.service.inter.SlaService;
-import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -38,9 +37,5 @@ public class SlaServiceImpl implements SlaService {
 
     public Integer deleteSlaBatch(Integer id) {
         return slaManager.deleteBatch(id);
-    }
-
-    public Pager<ServiceSla> findSlaPager(Integer start, Integer limit, ServiceSla sla) {
-        return slaManager.findPager(start, limit, sla);
     }
 }

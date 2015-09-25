@@ -1,7 +1,6 @@
 package org.tinygroup.sdpm.service.service.inter;
 
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
-import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -56,11 +55,4 @@ public interface SlaService {
      * @return
      */
     Integer deleteSlaBatch(Integer id);
-
-    /**
-     * 查找数据库的所有记录
-     *
-     * @return
-     */
-    Pager<ServiceSla> findSlaPager(Integer start, Integer limit, ServiceSla sla);
 }

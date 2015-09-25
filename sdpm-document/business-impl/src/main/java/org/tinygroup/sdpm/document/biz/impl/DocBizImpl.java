@@ -3,14 +3,17 @@ package org.tinygroup.sdpm.document.biz.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.dao.DocDao;
 import org.tinygroup.sdpm.document.dao.DocLibDao;
-import org.tinygroup.sdpm.document.dao.HistorydocDao;
 import org.tinygroup.sdpm.document.dao.pojo.Doc;
 import org.tinygroup.sdpm.document.dao.pojo.DocLib;
-import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
 import org.tinygroup.tinysqldsl.Pager;
 
 /**
@@ -22,12 +25,15 @@ import org.tinygroup.tinysqldsl.Pager;
  * @date 2015/09/21
  * @author alu
  */
+@Service
+@Transactional
 public class DocBizImpl implements DocBiz {
 	//
+	@Autowired
 	private DocDao docdao;
+	@Autowired
 	private DocLibDao doclibdao;
-	private HistorydocDao hisdocdao;
-	private Historydoc his = null;
+	
 
 	public DocLib addDocLib(DocLib doclib) {
 		// 添加文档库
@@ -46,12 +52,8 @@ public class DocBizImpl implements DocBiz {
 		doc.setDocEditedBy(doc.getDocAddedBy());
 		doc.setDocDeleted("N");
 		doc.setDocViews(0);
-		Doc temp = docdao.add(doc);
-		//历史记录操作
-		his.setDocId(temp.getDocId());his.setRecTime(new Date());his.setRecWho(temp.getDocAddedBy());
-		hisdocdao.add(his);
+		return docdao.add(doc);
 		
-		return temp;
 	}
 
 	public int updtDoc(Doc doc) {
@@ -60,10 +62,6 @@ public class DocBizImpl implements DocBiz {
 		doc.setDocAddedDate(docdao.getByKey(doc.getDocId()).getDocAddedDate());
 		doc.setDocDeleted(docdao.getByKey(doc.getDocId()).getDocDeleted());
 		doc.setDocEditedDate(new Date());
-		
-		//历史记录操作
-		his.setDocId(doc.getDocId());his.setRecTime(doc.getDocEditedDate());his.setRecWho(doc.getDocEditedBy());
-		hisdocdao.add(his);
 		return docdao.edit(doc);
 	}
 
@@ -116,11 +114,6 @@ public class DocBizImpl implements DocBiz {
 	public int batchDelDocByIds(Integer... keys) {
 		// 
 		return docdao.deleteByKeys(keys);
-	}
-
-	public List<Historydoc> docHistory(Integer docid) {
-		// 这个很重要了，显示历史操作数据的，涵盖操作时间和责任人。
-		return null;//hisdocdao.getWithSameDocId(docid);
 	}
 
 

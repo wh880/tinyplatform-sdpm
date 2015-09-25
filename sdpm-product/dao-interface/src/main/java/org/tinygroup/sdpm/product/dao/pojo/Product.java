@@ -24,9 +24,6 @@ import java.util.Date;
  * 
  */
 public class Product implements Serializable{
-	
-	public static int DELETE_YES = 1;
-    public static int DELETE_NO = 0;
 
 	/** 
 	 * 产品ID

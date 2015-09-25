@@ -7,6 +7,8 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +21,8 @@ public class TaskServiceImpl implements TaskService {
     private TaskManager taskManager;
 
     public ProjectTask addTask(ProjectTask task) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        task.setTaskOpenedDate(new Date());
         return taskManager.add(task);
     }
 
@@ -27,8 +31,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
 
-    public Pager<ProjectTask> findPagerTask(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc) {
-
+    public Pager<ProjectTask> findPagerTask(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condititon, String group) {
+        if (condititon != null) {
+            return taskManager.findPagerByStatu(start, limit, task, sortName, asc, condititon);
+        }
         return taskManager.findPager(start, limit, task, sortName, asc);
     }
 
