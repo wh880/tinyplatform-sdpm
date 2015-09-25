@@ -2,7 +2,7 @@
 #import("/org/tinygroup/zTree/components/zTree.component")
 #set(threeMenu="dictionary-entries")
 #set(editpagePath="/system/page/dictionaries/dictitem_edit.pagelet",editpageModalId="dictitemEditModal",editpageModal="#"+editpageModalId)
-#set(viewpagePath=TINY_CONTEXT_PATH+"/system/dict/check?dictId=1",viewpageModalId="dictitemViewModal",viewpageModal="#"+viewpageModalId)
+#set(viewpagePath="/system/page/dictionaries/dictitem_view.pagelet",viewpageModalId="dictitemViewModal",viewpageModal="#"+viewpageModalId)
 ###searchZtreeInit("treeDemo" "/data/tree/dict.js" "#test")
 #macro ztreeClick()
 	loadURL('#link("/system/page/dictionaries/dictitem_list.pagelet")', $("#tBox"));
