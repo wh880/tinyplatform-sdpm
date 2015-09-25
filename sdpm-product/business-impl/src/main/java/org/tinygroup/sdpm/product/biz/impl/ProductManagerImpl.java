@@ -23,7 +23,7 @@ public class ProductManagerImpl implements ProductManager{
 		
 		
 		if(1!=product.getAcl()){
-			product.setProductWhiteList(null);
+			product.setProductWhiteList("");
 		}
 		product.setProductCreatedDate(new Date());
 		product.setDeleted(FieldUtil.DELETE_NO);
@@ -33,7 +33,7 @@ public class ProductManagerImpl implements ProductManager{
 	public int update(Product product) {
 		
 		if(1!=product.getAcl()){
-			product.setProductWhiteList(null);
+			product.setProductWhiteList("");
 		}
 
 		return productDao.edit(product);
