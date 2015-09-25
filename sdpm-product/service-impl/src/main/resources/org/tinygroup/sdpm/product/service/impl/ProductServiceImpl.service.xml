@@ -24,14 +24,6 @@
       </service-parameters>
       <service-result name="findProductResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
     </service-method>
-    <service-method local-name="findProductList" service-id="product_findProductList" method-name="findProductList" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
-      <service-parameters>
-        <service-parameter name="product" type="org.tinygroup.sdpm.product.dao.pojo.Product" required="false" is-array="false"/>
-        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findProductListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
-    </service-method>
     <service-method local-name="updateBatchProduct" service-id="product_updateBatchProduct" method-name="updateBatchProduct" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
         <service-parameter name="products" type="org.tinygroup.sdpm.product.dao.pojo.Product" collection-type="java.util.List" required="false" is-array="false"/>
