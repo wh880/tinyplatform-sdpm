@@ -1,5 +1,5 @@
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" "${TINY_CONTEXT_PATH}/document/add-doclib/add" "post" {"class":"test"})
 	#@elementItem()
        #@colLabel("col-3")添加文档库：#end
 			<div class="col-8">

@@ -18,9 +18,12 @@ public class DocAction {
 	@Autowired
 	private DocService docservice;
 	@RequestMapping(value={"","/document"})
-	public String docList(Doc doc,Model model,@RequestParam(required = false, defaultValue = "1") Integer page)
+	public String docList(Doc doc,Model model,@RequestParam(required = false, defaultValue = "2") Integer page)
 	{
+		//list Doc
 		Pager<Doc> docpager = docservice.findDocRetPager(1, page, doc);
+		//list Doclib name
+		//Pager<DocLib> doclibpager = docservice.(1, page, doclib);
 		model.addAttribute("docpager", docpager);
 		return "/document/document";
 	}

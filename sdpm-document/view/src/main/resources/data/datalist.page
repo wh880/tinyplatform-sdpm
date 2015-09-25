@@ -13,8 +13,8 @@
 #foreach(l:docpager.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="../document/doc-view.page">${l.getDocId()}</a>#end
-	#@td()<a href="../document/doc-view.page">${l?.getDocTitle()}</a>#end
+	#@td()<a href="../document/doc-view">${l.getDocId()}</a>#end
+	#@td()<a href="../document/doc-view">${l?.getDocTitle()}</a>#end
 	#@td()${l?.getDocType()}#end
 	#@td()${l?.getDocAddedBy()}#end
 	#@td()${l?.getDocAddedDate()}#end
@@ -28,7 +28,7 @@
 				#end
 			#end
 		#end
-#*	 	<a href="${TINY_CONTEXT_PATH}/document/table-edit.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>	    
+#*	 	<a href="${TINY_CONTEXT_PATH}/document/table-edit" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>	    
 		#iconOperation(" icon-remove" "删除" "ml-5")
 		#@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)
 								<i class="icon-remove"></i>
