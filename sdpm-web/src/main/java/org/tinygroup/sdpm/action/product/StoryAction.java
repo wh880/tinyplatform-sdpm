@@ -26,7 +26,7 @@ public class StoryAction {
     private ProductService productService;
     @RequestMapping("")
     public String storyAction(ProductStory story, String groupOperate, Model model){
-        List list = productService.findProductList(new Product(),"product_id",false);
+        List list = productService.findProductList(new Product(),"productId","desc");
         model.addAttribute("productList",list);
         model.addAttribute("storyStatus",story.getStoryStatus());
         return "product/page/project/togglebox.page";
