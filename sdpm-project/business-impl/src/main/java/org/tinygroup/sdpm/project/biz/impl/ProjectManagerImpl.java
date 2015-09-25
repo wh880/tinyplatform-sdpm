@@ -3,9 +3,12 @@ package org.tinygroup.sdpm.project.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.dao.ProjectDao;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -25,6 +28,14 @@ public class ProjectManagerImpl implements ProjectManager {
     public List<Project> findList() {
         Project project = new Project();
         return projectDao.query(project);
+    }
+
+    public Pager<Project> findPagerProjects(Integer start, Integer limit, String sortName, boolean asc) {
+        if (StringUtil.isBlank(sortName)) {
+            return projectDao.querytAll(start, limit);
+        }
+        OrderBy orderBy = new OrderBy(sortName, asc);
+        return projectDao.querytAll(start, limit, orderBy);
     }
 
     public Project add(Project project) {

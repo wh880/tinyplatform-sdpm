@@ -22,6 +22,7 @@ public class TaskServiceImpl implements TaskService {
 
     public ProjectTask addTask(ProjectTask task) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String hh = dateFormat.format(new Date());
         task.setTaskOpenedDate(new Date());
         return taskManager.add(task);
     }

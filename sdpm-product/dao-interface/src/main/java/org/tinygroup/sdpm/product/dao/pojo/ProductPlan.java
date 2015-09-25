@@ -19,6 +19,8 @@ package org.tinygroup.sdpm.product.dao.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.joda.time.format.DateTimeFormat;
+
 /** 
  * 计划表
  * 

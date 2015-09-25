@@ -28,186 +28,154 @@ public class Project implements Serializable{
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
 
-	/** 
+	/**
+	 * 项目下任务完成进度
+	 */
+	private float percent;
+	/**
 	 * 项目id
-	 * 
+	 *
 	 */
 	private Integer projectId;
-
-	/** 
+	/**
 	 * 是否作为目录
-	 * 
+	 * <p/>
 	 * 0-false,1-true
 	 */
 	private String projectIsCat;
-
-	/** 
+	/**
 	 * 目录id
-	 * 
 	 */
 	private Integer projectCatId;
-
-	/** 
+	/**
 	 * 项目类型
-	 * 
+	 *
 	 * 0-长期项目，1-短期项目，2-运维项目
 	 */
 	private String projectType;
-
-	/** 
+	/**
 	 * 项目名称
-	 * 
 	 */
 	private String projectName;
-
-	/** 
+	/**
 	 * 项目代号
-	 * 
 	 */
 	private String projectCode;
-
-	/** 
+	/**
 	 * 项目开始日期
-	 * 
 	 */
 	private Date projectBegin;
-
-	/** 
+	/**
 	 * 项目结束日期
-	 * 
 	 */
 	private Date projectEnd;
-
-	/** 
+	/**
 	 * 可用工作日
-	 * 
 	 */
 	private Integer projectDays;
-
-	/** 
+	/**
 	 * 项目状态
-	 * 
 	 */
 	private String projectStatus;
-
-	/** 
+	/**
 	 * 项目所处阶段
-	 * 
+	 *
 	 * 0-未开始，1-进行中，2-已挂起，3-已完成
 	 */
 	private String projectStatge;
-
-	/** 
+	/**
 	 * 优先级
-	 * 
+	 *
 	 * 1，2，3，4
 	 * 递增
 	 */
 	private String projectPri;
-
-	/** 
+	/**
 	 * 项目描述
-	 * 
 	 */
 	private String projectDesc;
-
-	/** 
+	/**
 	 * 由谁创建
-	 * 
 	 */
 	private String projectOpenedBy;
-
-	/** 
+	/**
 	 * 创建日期
-	 * 
 	 */
 	private Date projectOpenedDate;
-
-	/** 
+	/**
 	 * 项目创建版本
-	 * 
 	 */
 	private String projectOpenedVersion;
-
-	/** 
+	/**
 	 * 项目由谁关闭
-	 * 
 	 */
 	private String projectCloseBy;
-
-	/** 
+	/**
 	 * 项目关闭日期
-	 * 
 	 */
 	private Date projectCloseDate;
-
-	/** 
+	/**
 	 * 项目由谁取消
-	 * 
 	 */
 	private String projectCanceledBy;
-
-	/** 
+	/**
 	 * 项目取消日期
-	 * 
 	 */
 	private Date projectCanceledDate;
-
-	/** 
+	/**
 	 * 产品负责人
-	 * 
+	 *
 	 */
 	private String projectPO;
-
-	/** 
+	/**
 	 * 项目负责人
-	 * 
+	 *
 	 */
 	private String projectPM;
-
-	/** 
+	/**
 	 * 测试负责人
-	 * 
+	 *
 	 */
 	private String projectQD;
-
-	/** 
+	/**
 	 * 项目发布负责人
-	 * 
+	 *
 	 */
 	private String projectRD;
-
-	/** 
+	/**
 	 * 团队成员
-	 * 
 	 */
 	private String projectTeam;
-
-	/** 
+	/**
 	 * 访问控制
-	 * 
+	 *
 	 * 0-open,1-private,2-custom
 	 */
 	private String projectAcl;
-
-	/** 
+	/**
 	 * 分组白名单
-	 * 
+	 *
 	 */
 	private String projectWhiteList;
-
-	/** 
+	/**
 	 * 项目排序
-	 * 
+	 *
 	 */
 	private Integer projectOrder;
-
-	/** 
+	/**
 	 * 已删除
-	 * 
+	 *
 	 * 0-未删除，1-删除
 	 */
 	private String projectDeleted;
+
+	public float getPercent() {
+		return percent;
+	}
+
+	public void setPercent(float percent) {
+		this.percent = percent;
+	}
 
 	public Integer getProjectId() {
 		return projectId;

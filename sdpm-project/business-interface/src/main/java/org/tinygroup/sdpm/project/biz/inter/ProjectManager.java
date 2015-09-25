@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -22,6 +23,17 @@ public interface ProjectManager {
      * @return
      */
     List<Project> findList();
+
+    /**
+     * 查询所有的project
+     *
+     * @param start
+     * @param limit
+     * @param sortName
+     * @param asc
+     * @return
+     */
+    public Pager<Project> findPagerProjects(Integer start, Integer limit, String sortName, boolean asc);
 
     /**
      * 新增项目

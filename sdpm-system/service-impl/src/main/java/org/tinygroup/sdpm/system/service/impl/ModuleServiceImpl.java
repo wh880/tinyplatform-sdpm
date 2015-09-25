@@ -21,10 +21,7 @@ public class ModuleServiceImpl implements ModuleService {
 		return SystemModuleManager.deleteById(id);
 	}
 
-	public List<SystemModule> findByRoot(int root) {
-		// TODO Auto-generated method stub
-		return SystemModuleManager.findByRoot(root);
-	}
+	
 
 	public int delete(SystemModule systemModule) {
 		// TODO Auto-generated method stub
@@ -34,6 +31,11 @@ public class ModuleServiceImpl implements ModuleService {
 	public SystemModule findById(int id) {
 		// TODO Auto-generated method stub
 		return SystemModuleManager.findById(id);
+	}
+
+	public List<SystemModule> findModules(SystemModule systemModule) {
+		// TODO Auto-generated method stub
+		return SystemModuleManager.findByModules(systemModule);
 	}
 
 }

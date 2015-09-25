@@ -105,14 +105,14 @@ public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> findReleaseList(org.tinygroup.sdpm.product.dao.pojo.ProductRelease release ,java.lang.String columnName ,boolean asc) {
+	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> findReleaseList(org.tinygroup.sdpm.product.dao.pojo.ProductRelease productRelease ,java.lang.String order ,java.lang.String ordertype) {
 		String serviceId = "product_findReleaseList";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("release" ,release);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
+			context.put("productRelease" ,productRelease);
+			context.put("order" ,order);
+			context.put("ordertype" ,ordertype);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -120,16 +120,16 @@ public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager findReleasePager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductRelease release ,java.lang.String columnName ,boolean asc) {
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> findReleasePager(int page ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductRelease productRelease ,java.lang.String order ,java.lang.String ordertype) {
 		String serviceId = "product_findReleasePager";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("start" ,start);
+			context.put("page" ,page);
 			context.put("limit" ,limit);
-			context.put("release" ,release);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
+			context.put("productRelease" ,productRelease);
+			context.put("order" ,order);
+			context.put("ordertype" ,ordertype);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
