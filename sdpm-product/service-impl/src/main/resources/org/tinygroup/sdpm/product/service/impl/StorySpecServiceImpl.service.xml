@@ -22,7 +22,7 @@
         <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="findStorySpecPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager&lt;org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec&gt;"/>
+      <service-result name="findStorySpecPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
   </service-component>
 </service-components>

@@ -19,6 +19,8 @@ package org.tinygroup.sdpm.product.dao.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /** 
  * 需求表
  * 
@@ -132,6 +134,7 @@ public class ProductStory implements Serializable{
 	 * 创建日期
 	 * 
 	 */
+	@DateTimeFormat
 	private Date storyOpenedDate;
 
 	/** 
@@ -144,6 +147,7 @@ public class ProductStory implements Serializable{
 	 * 需求指派日期
 	 * 
 	 */
+	@DateTimeFormat
 	private Date storyAssignedDate;
 
 	/** 
@@ -156,6 +160,7 @@ public class ProductStory implements Serializable{
 	 * 需求上次编辑日期
 	 * 
 	 */
+	@DateTimeFormat
 	private Date storyLastEditedDate;
 
 	/** 
@@ -168,6 +173,7 @@ public class ProductStory implements Serializable{
 	 * 需求审核日期
 	 * 
 	 */
+	@DateTimeFormat
 	private Date storyReviewedDate;
 
 	/** 
@@ -180,6 +186,7 @@ public class ProductStory implements Serializable{
 	 * 需求关闭日期
 	 * 
 	 */
+	@DateTimeFormat
 	private Date storyClosedDate;
 
 	/** 
