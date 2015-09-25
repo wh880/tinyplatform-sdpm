@@ -25,8 +25,8 @@ public class BugAction extends BaseController {
 	private BugService bugService;
 		
 	@RequestMapping("")
-	public String form(Integer id,Model model){
-		
+	public String form(String get,QualityBug bug,Model model){
+		model.addAttribute("bug", bug);
 		return "/testManagement/page/Bug.page";
 	}
 	
@@ -40,7 +40,7 @@ public class BugAction extends BaseController {
 	}
 	
 	@RequestMapping("/findBug")
-	public String findBugPager(Integer start,Integer limit,String order,String ordertype,Integer id,QualityBug bug,Model model){
+	public String findBugPager(Integer start,Integer limit,String order,String ordertype,QualityBug bug,Model model){
 		boolean asc = true;		
 		if("desc".equals(ordertype)){
 			asc = false;

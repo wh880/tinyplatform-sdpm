@@ -38,15 +38,5 @@
       </service-parameters>
       <service-result name="findPlanListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan"/>
     </service-method>
-    <service-method local-name="findProductPlanPager" service-id="product_findProductPlanPager" method-name="findProductPlanPager" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
-      <service-parameters>
-        <service-parameter name="page" type="int" required="false" is-array="false"/>
-        <service-parameter name="limit" type="int" required="false" is-array="false"/>
-        <service-parameter name="productPlan" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan" required="false" is-array="false"/>
-        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findProductPlanPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager&lt;org.tinygroup.sdpm.product.dao.pojo.ProductPlan&gt;"/>
-    </service-method>
   </service-component>
 </service-components>

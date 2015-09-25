@@ -19,6 +19,8 @@ package org.tinygroup.sdpm.product.dao.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /** 
  * 发布表
  * 
@@ -53,6 +55,7 @@ public class ProductRelease implements Serializable{
 	 * 发布日期
 	 * 
 	 */
+	@DateTimeFormat
 	private Date releaseDate;
 
 	/** 
