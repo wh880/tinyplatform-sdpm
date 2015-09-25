@@ -14,7 +14,7 @@
     <table-field standard-field-id="1e9acfada6fa43a596c487b7a5862d50" primary="false" unique="false" not-null="false" id="org_user_gender" auto-increase="false"/>
     <table-field standard-field-id="140fcb8250da4c8bb63bdd636819ac22" primary="false" unique="false" not-null="false" id="org_user_email" auto-increase="false"/>
     <table-field standard-field-id="2acf3f674b0b44cc958e8ff41b379a99" primary="false" unique="false" not-null="false" id="org_user_SKYPE" auto-increase="false"/>
-    <table-field standard-field-id="cba3c4ed58d140bb89afbf98df52c24c" primary="false" unique="false" not-null="false" id="org_user_qq" auto-increase="false"/>
+    <table-field standard-field-id="cba3c4ed58d140bb89afbf98df52c24c" primary="false" unique="false" not-null="false" id="org_user_q_q" auto-increase="false"/>
     <table-field standard-field-id="9dfd8200d2074729b7829743e2dafb4f" primary="false" unique="false" not-null="false" id="org_user_yahoo" auto-increase="false"/>
     <table-field standard-field-id="7336ab50a9e84a89a40ef5fa03a336f3" primary="false" unique="false" not-null="false" id="org_user_GTalk" auto-increase="false"/>
     <table-field standard-field-id="42fc877c345641f09302c8209097f15b" primary="false" unique="false" not-null="false" id="org_user_WANGWANG" auto-increase="false"/>

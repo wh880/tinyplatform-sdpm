@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.service.service.inter;
 
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -70,4 +71,6 @@ public interface ClientService {
      * @return
      */
     List<ServiceClient> findClientByProduct(Integer productId);
+
+    List<ServiceSla> findSlaByClientId(Integer id);
 }

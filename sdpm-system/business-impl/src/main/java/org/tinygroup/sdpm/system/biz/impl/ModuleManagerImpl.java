@@ -29,14 +29,14 @@ public class ModuleManagerImpl implements ModuleManager{
 	public List<SystemModule> findByRoot(int moduleRoot) {
 		// TODO Auto-generated method stub
 		SystemModule systemModule = new SystemModule();
-		systemModule.setSysModuleRoot(moduleRoot);
+		systemModule.setModuleRoot(moduleRoot);
 		
 		return systemModuleDao.query(systemModule);
 	}
 
 	public int delete(SystemModule systemModule) {
 		// TODO Auto-generated method stub
-		int pk=systemModule.getSysModuleId();
+		int pk=systemModule.getModuleId();
 		return systemModuleDao.deleteByKey(pk);
 	}
 

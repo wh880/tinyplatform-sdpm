@@ -2,7 +2,11 @@ package org.tinygroup.sdpm.quality.biz.inter;
 
 import java.util.List;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
+import org.tinygroup.tinysqldsl.Pager;
 
+/**
+ * Created by chenpeng15668 on 2015-9-24
+ */
 public interface TestCaseManager {
 	
 	/**
@@ -47,5 +51,15 @@ public interface TestCaseManager {
 	 * @return
 	 */
 	int[] batchDelete(List<QualityTestCase> testcases);
+	/**
+	 * 分页查询
+	 * @param start
+	 * @param limit
+	 * @param testsase
+	 * @param sortName
+	 * @param asc
+	 * @return
+	 */
+	Pager<QualityTestCase> findPager(Integer start,Integer limit,QualityTestCase testcase,String sortName,boolean asc);
 
 }

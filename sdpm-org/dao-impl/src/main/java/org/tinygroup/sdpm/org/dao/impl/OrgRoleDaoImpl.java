@@ -1,17 +1,17 @@
 /**
- * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- * <p>
- * Licensed under the GPL, Version 3.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/gpl.html
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *  Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
+ *
+ *  Licensed under the GPL, Version 3.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *       http://www.gnu.org/licenses/gpl.html
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
  */
 
 package org.tinygroup.sdpm.org.dao.impl;
@@ -38,167 +38,166 @@ import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-
 @Repository
 public class OrgRoleDaoImpl extends TinyDslDaoSupport implements OrgRoleDao {
 
-    public OrgRole add(OrgRole orgRole) {
-        return getDslTemplate().insertAndReturnKey(orgRole, new InsertGenerateCallback<OrgRole>() {
-            public Insert generate(OrgRole t) {
-                Insert insert = insertInto(ORG_ROLETABLE).values(
-                        ORG_ROLETABLE.ORG_ROLE_ID.value(t.getOrgRoleId()),
-                        ORG_ROLETABLE.ORG_ROLE_NAME.value(t.getOrgRoleName()),
-                        ORG_ROLETABLE.ORG_ROLE_REMARKS.value(t.getOrgRoleRemarks()),
-                        ORG_ROLETABLE.DELETED.value(t.getDeleted()));
-                return insert;
-            }
-        });
-    }
+	public OrgRole add(OrgRole orgRole) {
+		return getDslTemplate().insertAndReturnKey(orgRole, new InsertGenerateCallback<OrgRole>() {
+			public Insert generate(OrgRole t) {
+				Insert insert = insertInto(ORG_ROLETABLE).values(
+						ORG_ROLETABLE.ORG_ROLE_ID.value(t.getOrgRoleId()),
+						ORG_ROLETABLE.ORG_ROLE_NAME.value(t.getOrgRoleName()),
+						ORG_ROLETABLE.ORG_ROLE_REMARKS.value(t.getOrgRoleRemarks()),
+						ORG_ROLETABLE.DELETED.value(t.getDeleted()));
+				return insert;
+			}
+		});
+	}
 
-    public int edit(OrgRole orgRole) {
-        if (orgRole == null || orgRole.getOrgRoleId() == null) {
-            return 0;
-        }
-        return getDslTemplate().update(orgRole, new UpdateGenerateCallback<OrgRole>() {
-            public Update generate(OrgRole t) {
-                Update update = update(ORG_ROLETABLE).set(
-                        ORG_ROLETABLE.ORG_ROLE_NAME.value(t.getOrgRoleName()),
-                        ORG_ROLETABLE.ORG_ROLE_REMARKS.value(t.getOrgRoleRemarks()),
-                        ORG_ROLETABLE.DELETED.value(t.getDeleted())).where(
-                        ORG_ROLETABLE.ORG_ROLE_ID.eq(t.getOrgRoleId()));
-                return update;
-            }
-        });
-    }
+	public int edit(OrgRole orgRole) {
+		if (orgRole == null || orgRole.getOrgRoleId() == null) {
+			return 0;
+		}
+		return getDslTemplate().update(orgRole, new UpdateGenerateCallback<OrgRole>() {
+			public Update generate(OrgRole t) {
+				Update update = update(ORG_ROLETABLE).set(
+						ORG_ROLETABLE.ORG_ROLE_NAME.value(t.getOrgRoleName()),
+						ORG_ROLETABLE.ORG_ROLE_REMARKS.value(t.getOrgRoleRemarks()),
+						ORG_ROLETABLE.DELETED.value(t.getDeleted())).where(
+						ORG_ROLETABLE.ORG_ROLE_ID.eq(t.getOrgRoleId()));
+				return update;
+			}
+		});
+	}
 
-    public int deleteByKey(Integer pk) {
-        if (pk == null) {
-            return 0;
-        }
-        return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
-            public Delete generate(Serializable pk) {
-                return delete(ORG_ROLETABLE).where(ORG_ROLETABLE.ORG_ROLE_ID.eq(pk));
-            }
-        });
-    }
+	public int deleteByKey(Integer pk) {
+		if (pk == null) {
+			return 0;
+		}
+		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
+			public Delete generate(Serializable pk) {
+				return delete(ORG_ROLETABLE).where(ORG_ROLETABLE.ORG_ROLE_ID.eq(pk));
+			}
+		});
+	}
 
-    public int deleteByKeys(Integer... pks) {
-        if (pks == null || pks.length == 0) {
-            return 0;
-        }
-        return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
-            public Delete generate(Serializable[] t) {
-                return delete(ORG_ROLETABLE).where(ORG_ROLETABLE.ORG_ROLE_ID.in(t));
-            }
-        }, pks);
-    }
+	public int deleteByKeys(Integer... pks) {
+		if (pks == null || pks.length == 0) {
+			return 0;
+		}
+		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
+			public Delete generate(Serializable[] t) {
+				return delete(ORG_ROLETABLE).where(ORG_ROLETABLE.ORG_ROLE_ID.in(t));
+			}
+		}, pks);
+	}
 
-    public OrgRole getByKey(Integer pk) {
-        return getDslTemplate().getByKey(pk, OrgRole.class, new SelectGenerateCallback<Serializable>() {
-            @SuppressWarnings("rawtypes")
-            public Select generate(Serializable t) {
-                return selectFrom(ORG_ROLETABLE).where(ORG_ROLETABLE.ORG_ROLE_ID.eq(t));
-            }
-        });
-    }
+	public OrgRole getByKey(Integer pk) {
+		return getDslTemplate().getByKey(pk, OrgRole.class, new SelectGenerateCallback<Serializable>() {
+			@SuppressWarnings("rawtypes")
+			public Select generate(Serializable t) {
+				return selectFrom(ORG_ROLETABLE).where(ORG_ROLETABLE.ORG_ROLE_ID.eq(t));
+			}
+		});
+	}
 
-    public List<OrgRole> query(OrgRole orgRole, final OrderBy... orderBies) {
-        if (orgRole == null) {
-            orgRole = new OrgRole();
-        }
-        return getDslTemplate().query(orgRole, new SelectGenerateCallback<OrgRole>() {
+	public List<OrgRole> query(OrgRole orgRole, final OrderBy... orderBies) {
+		if (orgRole == null) {
+			orgRole = new OrgRole();
+		}
+		return getDslTemplate().query(orgRole, new SelectGenerateCallback<OrgRole>() {
 
-            @SuppressWarnings("rawtypes")
-            public Select generate(OrgRole t) {
-                Select select = selectFrom(ORG_ROLETABLE).where(
-                        and(
-                                ORG_ROLETABLE.ORG_ROLE_NAME.eq(t.getOrgRoleName()),
-                                ORG_ROLETABLE.ORG_ROLE_REMARKS.eq(t.getOrgRoleRemarks()),
-                                ORG_ROLETABLE.DELETED.eq(t.getDeleted())));
-                return addOrderByElements(select, orderBies);
-            }
-        });
-    }
+			@SuppressWarnings("rawtypes")
+			public Select generate(OrgRole t) {
+				Select select = selectFrom(ORG_ROLETABLE).where(
+						and(
+								ORG_ROLETABLE.ORG_ROLE_NAME.eq(t.getOrgRoleName()),
+								ORG_ROLETABLE.ORG_ROLE_REMARKS.eq(t.getOrgRoleRemarks()),
+								ORG_ROLETABLE.DELETED.eq(t.getDeleted())));
+				return addOrderByElements(select, orderBies);
+			}
+		});
+	}
 
-    public Pager<OrgRole> queryPager(int start, int limit, OrgRole orgRole, final OrderBy... orderBies) {
-        if (orgRole == null) {
-            orgRole = new OrgRole();
-        }
-        return getDslTemplate().queryPager(start, limit, orgRole, false, new SelectGenerateCallback<OrgRole>() {
+	public Pager<OrgRole> queryPager(int start, int limit, OrgRole orgRole, final OrderBy... orderBies) {
+		if (orgRole == null) {
+			orgRole = new OrgRole();
+		}
+		return getDslTemplate().queryPager(start, limit, orgRole, false, new SelectGenerateCallback<OrgRole>() {
 
-            public Select generate(OrgRole t) {
-                Select select = MysqlSelect.selectFrom(ORG_ROLETABLE).where(
-                        and(
-                                ORG_ROLETABLE.ORG_ROLE_NAME.eq(t.getOrgRoleName()),
-                                ORG_ROLETABLE.ORG_ROLE_REMARKS.eq(t.getOrgRoleRemarks()),
-                                ORG_ROLETABLE.DELETED.eq(t.getDeleted())));
-                return addOrderByElements(select, orderBies);
-            }
-        });
-    }
+			public Select generate(OrgRole t) {
+				Select select = MysqlSelect.selectFrom(ORG_ROLETABLE).where(
+						and(
+								ORG_ROLETABLE.ORG_ROLE_NAME.eq(t.getOrgRoleName()),
+								ORG_ROLETABLE.ORG_ROLE_REMARKS.eq(t.getOrgRoleRemarks()),
+								ORG_ROLETABLE.DELETED.eq(t.getDeleted())));
+				return addOrderByElements(select, orderBies);
+			}
+		});
+	}
 
-    public int[] batchInsert(boolean autoGeneratedKeys, List<OrgRole> orgRoles) {
-        if (CollectionUtil.isEmpty(orgRoles)) {
-            return new int[0];
-        }
-        return getDslTemplate().batchInsert(autoGeneratedKeys, orgRoles, new NoParamInsertGenerateCallback() {
+	public int[] batchInsert(boolean autoGeneratedKeys, List<OrgRole> orgRoles) {
+		if (CollectionUtil.isEmpty(orgRoles)) {
+			return new int[0];
+		}
+		return getDslTemplate().batchInsert(autoGeneratedKeys, orgRoles, new NoParamInsertGenerateCallback() {
 
-            public Insert generate() {
-                return insertInto(ORG_ROLETABLE).values(
-                        ORG_ROLETABLE.ORG_ROLE_NAME.value(new JdbcNamedParameter("orgRoleName")),
-                        ORG_ROLETABLE.ORG_ROLE_REMARKS.value(new JdbcNamedParameter("orgRoleRemarks")),
-                        ORG_ROLETABLE.DELETED.value(new JdbcNamedParameter("deleted")));
-            }
-        });
-    }
+			public Insert generate() {
+				return insertInto(ORG_ROLETABLE).values(
+						ORG_ROLETABLE.ORG_ROLE_NAME.value(new JdbcNamedParameter("orgRoleName")),
+						ORG_ROLETABLE.ORG_ROLE_REMARKS.value(new JdbcNamedParameter("orgRoleRemarks")),
+						ORG_ROLETABLE.DELETED.value(new JdbcNamedParameter("deleted")));
+			}
+		});
+	}
 
-    public int[] batchInsert(List<OrgRole> orgRoles) {
-        return batchInsert(true, orgRoles);
-    }
+	public int[] batchInsert(List<OrgRole> orgRoles) {
+		return batchInsert(true, orgRoles);
+	}
 
-    public int[] batchUpdate(List<OrgRole> orgRoles) {
-        if (CollectionUtil.isEmpty(orgRoles)) {
-            return new int[0];
-        }
-        return getDslTemplate().batchUpdate(orgRoles, new NoParamUpdateGenerateCallback() {
+	public int[] batchUpdate(List<OrgRole> orgRoles) {
+		if (CollectionUtil.isEmpty(orgRoles)) {
+			return new int[0];
+		}
+		return getDslTemplate().batchUpdate(orgRoles, new NoParamUpdateGenerateCallback() {
 
-            public Update generate() {
-                return update(ORG_ROLETABLE).set(
-                        ORG_ROLETABLE.ORG_ROLE_NAME.value(new JdbcNamedParameter("orgRoleName")),
-                        ORG_ROLETABLE.ORG_ROLE_REMARKS.value(new JdbcNamedParameter("orgRoleRemarks")),
-                        ORG_ROLETABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
-                        ORG_ROLETABLE.ORG_ROLE_ID.eq(new JdbcNamedParameter("orgRoleId")));
-            }
-        });
-    }
+			public Update generate() {
+				return update(ORG_ROLETABLE).set(
+						ORG_ROLETABLE.ORG_ROLE_NAME.value(new JdbcNamedParameter("orgRoleName")),
+						ORG_ROLETABLE.ORG_ROLE_REMARKS.value(new JdbcNamedParameter("orgRoleRemarks")),
+						ORG_ROLETABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
+						ORG_ROLETABLE.ORG_ROLE_ID.eq(new JdbcNamedParameter("orgRoleId")));
+			}
+		});
+	}
 
-    public int[] batchDelete(List<OrgRole> orgRoles) {
-        if (CollectionUtil.isEmpty(orgRoles)) {
-            return new int[0];
-        }
-        return getDslTemplate().batchDelete(orgRoles, new NoParamDeleteGenerateCallback() {
+	public int[] batchDelete(List<OrgRole> orgRoles) {
+		if (CollectionUtil.isEmpty(orgRoles)) {
+			return new int[0];
+		}
+		return getDslTemplate().batchDelete(orgRoles, new NoParamDeleteGenerateCallback() {
 
-            public Delete generate() {
-                return delete(ORG_ROLETABLE).where(and(
-                        ORG_ROLETABLE.ORG_ROLE_ID.eq(new JdbcNamedParameter("orgRoleId")),
-                        ORG_ROLETABLE.ORG_ROLE_NAME.eq(new JdbcNamedParameter("orgRoleName")),
-                        ORG_ROLETABLE.ORG_ROLE_REMARKS.eq(new JdbcNamedParameter("orgRoleRemarks")),
-                        ORG_ROLETABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
-            }
-        });
-    }
+			public Delete generate() {
+				return delete(ORG_ROLETABLE).where(and(
+						ORG_ROLETABLE.ORG_ROLE_ID.eq(new JdbcNamedParameter("orgRoleId")),
+						ORG_ROLETABLE.ORG_ROLE_NAME.eq(new JdbcNamedParameter("orgRoleName")),
+						ORG_ROLETABLE.ORG_ROLE_REMARKS.eq(new JdbcNamedParameter("orgRoleRemarks")),
+						ORG_ROLETABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
+			}
+		});
+	}
 
-    private Select addOrderByElements(Select select, OrderBy... orderBies) {
-        List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-        for (int i = 0; orderBies != null && i < orderBies.length; i++) {
-            OrderByElement tempElement = orderBies[i].getOrderByElement();
-            if (tempElement != null) {
-                orderByElements.add(tempElement);
-            }
-        }
-        if (orderByElements.size() > 0) {
-            select.orderBy(orderByElements.toArray(new OrderByElement[0]));
-        }
-        return select;
-    }
+	private Select addOrderByElements(Select select, OrderBy... orderBies) {
+		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
+		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			if (tempElement != null) {
+				orderByElements.add(tempElement);
+			}
+		}
+		if (orderByElements.size() > 0) {
+			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
+		}
+		return select;
+	}
 }

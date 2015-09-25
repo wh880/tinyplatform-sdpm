@@ -8,17 +8,27 @@
 #@tabBodyCol("ptop-5")
 ##operationbar start1
 <div class="operationbar" style="height:36px">
-            
+
 				<span class="f">
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page" class="active_btn">今天</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">昨天</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">前天</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">本周</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">上周</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">本月</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">上月</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">所有</a>
-					<span style="left:330px;top:-35px; position:relative; height:10%">
+
+    #foreach(m:menuManager.getScopeMenus("dymanci-time"))
+        #if(m.id=="dymanic-today")
+            <a href="${TINY_CONTEXT_PATH}${m.href}" class="active_btn">${m.name}</a>
+        #else
+            <a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a>
+        #end
+
+    #end
+
+
+
+
+
+
+
+
+
+                    <span style="left:330px;top:-35px; position:relative; height:10%">
                         #@tinyForm("thisform" "" "" {"class":"test"})
                             #@elementItem()
                                 #@formControlDiv("col-2")
@@ -37,9 +47,6 @@
                                                     href="${TINY_CONTEXT_PATH}/product/page/project/dymanicdata.page">去年</a>
                                             </option>
                                         #end
-                                    #*
-                                                                            #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
-                                    *#
                                     #end
                                 #end
                                 #@validateDiv("col-2")#end

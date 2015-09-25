@@ -9,16 +9,16 @@
 				<a href="#" class="btn btn-info btn-sm">历史</a>
 				<a href="#" class="btn btn-warning btn-sm">相关</a>*#
 			#end
-			#@tinyTableContent(TINY_CONTEXT_PATH+"/system/effort/list") ##取数据地址 总数据
+			#@tinyTableContent(TINY_CONTEXT_PATH+"/system/effort/findPager?effortId=1") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-						#@tinyTh({"class":"","rel":"sortname"})ID#end
-						#@tinyTh({"class":"","rel":"sortname"})日期#end
-						#@tinyTh({"class":"","rel":"sortname"})登记人#end
-						#@tinyTh({"class":"","rel":"sortname"})工作内容#end
-						#@tinyTh({"class":"","rel":"sortname"})耗时#end
-						#@tinyTh({"class":"","rel":"sortname"})对象#end
+						#@tinyTh({"class":"sorting sorting_desc","rel":"effort_id"})ID#end
+						#@tinyTh({"class":"sorting","rel":"effort_date"})日期#end
+						#@tinyTh({"class":"sorting","rel":"effort_account"})登记人#end
+						#@tinyTh({"class":"sorting","rel":"effort_work"})工作内容#end
+						#@tinyTh({"class":"sorting","rel":"effort_consumed"})耗时#end
+						#@tinyTh({"class":"sorting","rel":"effort_object_type"})对象#end
 						
 					#end
 				#end

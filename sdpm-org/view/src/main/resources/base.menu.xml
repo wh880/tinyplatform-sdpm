@@ -113,7 +113,7 @@
               scope="org-privilege-addGroup"/>
 
     </menu>
-    <menu id="organizationCompany" name="公司" href="/organization/company/company.page" icon="" sort="1" isShow="1"
+    <menu id="organizationCompany" name="公司" href="/org/company/show" icon="" sort="1" isShow="1"
     >
         <menu id="org-company-edit" name="编辑" href="/organization/company/updateCompany.pagelet" icon="icon-edit"
               sort="1" isShow="1"

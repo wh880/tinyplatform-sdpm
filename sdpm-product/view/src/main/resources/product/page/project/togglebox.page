@@ -1,7 +1,7 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #import("/common/component/linkage.component")
-
+#set(storyTableId = "storyTableId" )
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 #!set(linkName="product-demand",sonitem="
 <li>"+"需求"+"</li>")
@@ -20,8 +20,8 @@
 
 #@tabBodyCol("ptop-5")
 ##operationbar start
-    #@div(divClass="operationbar")
-    <span class="f">
+#@div(divClass="operationbar")
+<span class="f">
 					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" class="active_btn">未关闭</a>
 					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">全部需求</a>
 					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">指派给我</a>
@@ -37,7 +37,7 @@
 				</span>
 
 
-    <span class="r">
+<span class="r">
         #foreach(m:menuManager.getScopeMenus("product-io"))
             #if(m.id=="product-demand-input")
                 #@aModal("#myModal" "导入" "600" "65" "btn-class"
@@ -71,156 +71,156 @@
 
 
 
-        #div(divClass="clearfix")
-        #include("/product/page/event/mulsearch.page")
-    #end
+#div(divClass="clearfix")
+#include("/product/page/event/mulsearch.page")
+#end
 ##operationbar end
 
-    #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
-        #@toggleLeft({"class":"aclass"})
-            #@settoggleLeftTitle()
-            产品需求
-            #end
+#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+#@toggleLeft({"class":"aclass"})
+#@settoggleLeftTitle()
+产品需求
+#end
 
-            #@settoggleLeftBody("treeLeftbox")
-            <ul class="treeList">
-                <li id="listContent" style="display:none; position:absolute;left:74px;">
-                    <ul id="alternative" class="ztree" style="width:126px;min-height:160px;max-height:300px;"></ul>
-                </li>
-            </ul>
-            <ul id="treeDrag" class="ztree"></ul>
-            #end
-
-
-        #end
+#@settoggleLeftBody("treeLeftbox")
+<ul class="treeList">
+    <li id="listContent" style="display:none; position:absolute;left:74px;">
+        <ul id="alternative" class="ztree" style="width:126px;min-height:160px;max-height:300px;"></ul>
+    </li>
+</ul>
+<ul id="treeDrag" class="ztree"></ul>
+#end
 
 
-        #@toggleRight()
-            #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
-                #@div(divBaseClass="tinyheaderTools form-inline")
-                    #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-                <input type="button" value="全选" class="btn btn-default btn-primary "
-                       onclick="selectAllNullorReserve('product-demand','全选');"/>
-                <input type="button" value="反选" class="btn btn-default btn-primary"
-                       onclick="selectAllNullorReserve('product-demand','反选');"/>
-
-
-                    #foreach(m:menuManager.getScopeMenus("product-oper"))
-                        #if(m.id=="product-demand-operation")
-                            #@buttonGroup()
-                            
-                               #@dropdownItempatent("dropdownSm" "btn-primary" "操作" "#")
-                         	
-                                #@ulDropdownMenu(dropdownMenuClass="multi-level")
-                                    #@dropdownsLi("dropdown-submenu")
-									#@dropdownA(""　"javascript:void(0);")指派给#end
-	                                        #@dropdownsUl("dropdown-menu")
-	                                            #@dropdownItem("javascript:void(0);")admin#end
-	                                            #@dropdownItem("javascript:void(0);")张三#end
-	                                            #@dropdownItem("javascript:void(0);")lisi#end
-	                                        #end
-	                                #end
-
-                                    #@dropdownsLi("dropdown-submenu")
-									#@dropdownA(""　"javascript:void(0);")阶段#end
-	                                        #@dropdownsUl("dropdown-menu")
-	                                            #@dropdownItem("javascript:void(0);")空#end
-	                                            #@dropdownItem("javascript:void(0);")未开始#end
-	                                            #@dropdownItem("javascript:void(0);")已计划#end
-	                                            #@dropdownItem("javascript:void(0);")已立项#end
-	                                            #@dropdownItem("javascript:void(0);")研发中#end
-	                                            #@dropdownItem("javascript:void(0);")完毕#end
-	                                            #@dropdownItem("javascript:void(0);")测试中#end
-	                                            #@dropdownItem("javascript:void(0);")测试完毕#end
-	                                            #@dropdownItem("javascript:void(0);")已验收#end
-	                                            #@dropdownItem("javascript:void(0);")已发布#end
-	                                        #end
-                                    #end
-
-                                    #@dropdownsLi("dropdown-submenu")
-									#@dropdownA(""　"javascript:void(0);")计划#end
-                                        #@dropdownsUl("dropdown-menu")
-                                            #@dropdownItem("javascript:void(0);")空#end
-                                            #@dropdownItem("javascript:void(0);")计划1#end
-                                            #@dropdownItem("javascript:void(0);")计划2#end
-                                        #end
-                                    #end
-
-                                   #@dropdownsLi("dropdown-submenu")
-									#@dropdownA(""　"javascript:void(0);")评审#end
-                                         #@dropdownsUl("dropdown-menu")
-                                            #@dropdownItem("javascript:void(0);")确认通过#end
-                                            #@dropdownItem("javascript:void(0);")有待明确#end
-                                        #*		                		#@liDivider()<hr/>#end*#
-                                            #@dropdownsLi("dropdown-submenu")
-											#@dropdownA(""　"javascript:void(0);")拒绝#end
-                                                #@dropdownsUl("dropdown-menu")
-                                                    #@dropdownItem("javascript:void(0);")已完成#end
-                                                    #@dropdownItem("javascript:void(0);")延期#end
-                                                    #@dropdownItem("javascript:void(0);")不做#end
-                                                    #@dropdownItem("javascript:void(0);")已取消#end
-                                                    #@dropdownItem("javascript:void(0);")计划如此#end
-                                                #end
-                                            #end
-                                        #end
-                                    #end
-                                #end
-                                #end
-                            #end
-                        #end
-                        #end
+#end
 
 
 
+#@toggleRight()
+#@tinyTable(storyTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
+#@div(divBaseClass="tinyheaderTools form-inline")
+#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+<input type="button" value="全选" class="btn btn-default btn-primary "
+       onclick="selectAllNullorReserve('product-demand','全选');"/>
+<input type="button" value="反选" class="btn btn-default btn-primary"
+       onclick="selectAllNullorReserve('product-demand','反选');"/>
 
 
-                    #foreach(m:menuManager.getScopeMenus("product-del"))
-                        #if(m.id=="product-demand-del")
-                    #@aModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger"
-                        "/product/page/tabledemo/product-demand-del.pagelet")批量关闭#end
-                            #end
-                        #end
+#foreach(m:menuManager.getScopeMenus("product-oper"))
+#if(m.id=="product-demand-operation")
+#@buttonGroup()
+
+#@dropdownItempatent("dropdownSm" "btn-primary" "操作" "#")
+
+#@ulDropdownMenu(dropdownMenuClass="multi-level")
+#@dropdownsLi("dropdown-submenu")
+#@dropdownA(""　"javascript:void(0);")指派给#end
+#@dropdownsUl("dropdown-menu")
+#@dropdownItem("javascript:void(0);")admin#end
+#@dropdownItem("javascript:void(0);")张三#end
+#@dropdownItem("javascript:void(0);")lisi#end
+#end
+#end
+
+#@dropdownsLi("dropdown-submenu")
+#@dropdownA(""　"javascript:void(0);")阶段#end
+#@dropdownsUl("dropdown-menu")
+#@dropdownItem("javascript:void(0);")空#end
+#@dropdownItem("javascript:void(0);")未开始#end
+#@dropdownItem("javascript:void(0);")已计划#end
+#@dropdownItem("javascript:void(0);")已立项#end
+#@dropdownItem("javascript:void(0);")研发中#end
+#@dropdownItem("javascript:void(0);")完毕#end
+#@dropdownItem("javascript:void(0);")测试中#end
+#@dropdownItem("javascript:void(0);")测试完毕#end
+#@dropdownItem("javascript:void(0);")已验收#end
+#@dropdownItem("javascript:void(0);")已发布#end
+#end
+#end
+
+#@dropdownsLi("dropdown-submenu")
+#@dropdownA(""　"javascript:void(0);")计划#end
+#@dropdownsUl("dropdown-menu")
+#@dropdownItem("javascript:void(0);")空#end
+#@dropdownItem("javascript:void(0);")计划1#end
+#@dropdownItem("javascript:void(0);")计划2#end
+#end
+#end
+
+#@dropdownsLi("dropdown-submenu")
+#@dropdownA(""　"javascript:void(0);")评审#end
+#@dropdownsUl("dropdown-menu")
+#@dropdownItem("javascript:void(0);")确认通过#end
+#@dropdownItem("javascript:void(0);")有待明确#end
+#*		                		#@liDivider()<hr/>#end*#
+#@dropdownsLi("dropdown-submenu")
+#@dropdownA(""　"javascript:void(0);")拒绝#end
+#@dropdownsUl("dropdown-menu")
+#@dropdownItem("javascript:void(0);")已完成#end
+#@dropdownItem("javascript:void(0);")延期#end
+#@dropdownItem("javascript:void(0);")不做#end
+#@dropdownItem("javascript:void(0);")已取消#end
+#@dropdownItem("javascript:void(0);")计划如此#end
+#end
+#end
+#end
+#end
+#end
+#end
+#end
+#end
+#end
 
 
 
-                #end
-                #@tinyTableContent(TINT_CONTEXT_PATH+"/product/story/search") ##取数据地址 总数据
-                    #@thead()
-                        #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-                            #@tinyTh({"width":"6"})<input type="checkbox" value="">#end
-                            #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})ID#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})P#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})需求名称#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})计划#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})来源#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})创建#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})指派#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})预计#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})状态#end
-                            #@tinyTh({"class":"sorting","rel":"sortname"})阶段#end
-                            #@tinyTh({"class":"","rel":"sortname"})操作#end
-                        #end
-                    #end
-                #end
-            ##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
-            <script type="text/javascript">
-                $(function () {
-                    #@dialog("myModal")
-                        #@dialogHeader()对话框标题#end
-                        #@dialogBody()< p> 对话框内容…</p>#end
-                        #@dialogFooter()
-                            #@buttonEnsure()确定#end
-                                #@buttonCancel()关闭#end
-                        #end
-                    #end    $('#${tableId}').on('click', '.delBtn', function (e) {
-                        user_del(this, '1');
-                    });
-                })
-            </script>
 
-            #end
-        #end
-    #end
+
+#foreach(m:menuManager.getScopeMenus("product-del"))
+#if(m.id=="product-demand-del")
+#@aModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger"
+"/product/page/tabledemo/product-demand-del.pagelet")批量关闭#end
+#end
+#end
+#end
+
+#@tinyTableContent(TINY_CONTEXT_PATH+"/product/story/search?"+tinyRequestQueryString) ##取数据地址 总数据
+#@thead()
+#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+#@tinyTh({"width":"6"})<input type="checkbox" value="">#end
+#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})ID#end
+#@tinyTh({"class":"sorting","rel":"sortname"})P#end
+#@tinyTh({"class":"sorting","rel":"sortname"})需求名称#end
+#@tinyTh({"class":"sorting","rel":"sortname"})计划#end
+#@tinyTh({"class":"sorting","rel":"sortname"})来源#end
+#@tinyTh({"class":"sorting","rel":"sortname"})创建#end
+#@tinyTh({"class":"sorting","rel":"sortname"})指派#end
+#@tinyTh({"class":"sorting","rel":"sortname"})预计#end
+#@tinyTh({"class":"sorting","rel":"sortname"})状态#end
+#@tinyTh({"class":"sorting","rel":"sortname"})阶段#end
+#@tinyTh({"class":"","rel":"sortname"})操作#end
+#end
+#end
+#end
+##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
+#@dialog("myModal")
+#@dialogHeader()对话框标题#end
+#@dialogBody()< p> 对话框内容…</p>#end
+#@dialogFooter()
+#@buttonEnsure()确定#end
+#@buttonCancel()关闭#end
+#end
+#end
+<script type="text/javascript">
+    $(function () {
+        $('#${tableId}').on('click', '.delBtn', function (e) {
+            user_del(this, '1');
+        });
+    })
+</script>
+
+#end
+#end
+#end
 
 #end
 

@@ -23,7 +23,7 @@
 
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
-        <p class="titleName">指派</p>
+        <p class="titleName">${task?.taskName}>开始</p>
         #@elementItem()
             #@sdpmItem("实际开始")
                 #dateInputSimple("taskRealStarted" "2014-04-23" "YYYY-MM-DD")
@@ -38,9 +38,9 @@
             #end
         #end
         #@elementItem()
-            #@sdpmItem()
+            #@sdpmItem("预计剩余")
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+                    <input name="taskLeft" type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
                     <span class="input-group-addon" id="last-time">小时</span>
                 </div>
             #end

@@ -26,71 +26,65 @@ public class OrgCompany implements Serializable {
 
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
-	/** 
+	/**
 	 * 公司编号
-	 * 
+	 *
 	 */
 	private Integer orgCompanyId;
-
-	/** 
-	 * 公司名称 
-	 * 
+	/**
+	 * 公司名称
+	 *
 	 */
 	private String orgCompanyName;
-
-	/** 
-	 * 联系电话 
-	 * 
+	/**
+	 * 联系电话
+	 *
 	 */
 	private String orgCompanyPhone;
-
-	/** 
+	/**
 	 * 传真
-	 * 
+	 *
 	 */
 	private String orgCompanyFax;
-
-	/** 
+	/**
 	 * 通讯地址
-	 * 
+	 *
 	 */
 	private String orgCompanyAddress;
-
-	/** 
+	/**
 	 * 邮政编码
-	 * 
+	 *
 	 */
 	private String orgCompanyZipCode;
-
-	/** 
+	/**
 	 * 官网
-	 * 
+	 *
 	 */
 	private String orgCompanyWebsite;
-
-	/** 
+	/**
 	 * 内网
-	 * 
+	 *
 	 */
 	private String orgCompanyBackyard;
-
-	/** 
+	/**
 	 * 匿名登录
-	 * 
+	 *
 	 */
 	private String orgCompanyGuest;
-
-	/** 
+	/**
 	 * 管理员列表
-	 * 
+	 *
 	 */
 	private String orgCompanyAdmins;
-
-	/** 
-	 * 删除标志 
-	 * 
+	/**
+	 * 删除标志
+	 *
 	 */
 	private String orgCompanyDeleted;
+
+	public OrgCompany() {
+		setOrgCompanyDeleted(DELETE_NO);
+	}
 
 	public Integer getOrgCompanyId() {
 		return orgCompanyId;

@@ -29,7 +29,7 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("productId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="CT">产品2</option>
 	                        <option value="DE">产品3</option>
 	                        <option value="FL">产品4</option>
@@ -49,7 +49,7 @@
 					#@div(divClass="col-0")&nbsp;&nbsp#end
 					#@div(divClass="col-3")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="CT">/1/2</option>
 	                        <option value="DE">/2/3</option>
 	                        <option value="IN">/3/4</option>
@@ -70,7 +70,7 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("projectId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">项目1</option>
 	                        <option value="ME">项目2</option>
 	                        <option value="MD">项目3</option>
@@ -89,7 +89,7 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugOpenedBuild" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">版本1</option>
 	                        <option value="ME">版本2</option>
 	                        <option value="MD">版本3</option>
@@ -109,7 +109,7 @@
 						#@formControlDiv("col-8")
 							#@div(divClass="col-5")
 							 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">admin</option>
 	                        <option value="ME">admin2</option>
 	                        <option value="MD">admin3</option>
@@ -125,7 +125,7 @@
 				#@colLabel()Bug标题：#end
 				#@formControlDiv("col-8")
 				#@div(divClass="col-5")
-					#tinyInput("text" "标题" ""{"datatype":"","id":"版本","class":"input-text"})
+					#tinyInput("text" "bugTitle" ""{"datatype":"","id":"版本","class":"input-text"})
 				#end
 				#end
 				#@validateDiv("col-2")#end
@@ -133,7 +133,7 @@
 			#@elementItem()
 				#@colLabel()重现步骤：#end
 				#@formControlDiv("col-8")
-					#@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end
+					#@Teditor("content" "bugSteps" {"initialFrameHeight":"150"})Say something#end
 				#end
 				#@validateDiv("col-2")#end
 			#end
@@ -142,7 +142,7 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 							 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("storyId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">需求1</option>
 	                        <option value="ME">需求2</option>
 	                        <option value="MD">需求3</option>
@@ -159,7 +159,7 @@
 				#@formControlDiv("col-8")
 				#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("taskId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">任务1</option>
 	                        <option value="ME">任务2</option>
 	                        <option value="MD">任务3</option>
@@ -176,7 +176,7 @@
 				#@colLabel()类型/严重程度：#end
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")					                	  
-					#@tinySelect("lang" "1" {"class":"select2"})
+					#@tinySelect("bugType" "1" {"class":"select2"})
 							#@tinyOptionItem("1")代码错误#end
 							#@tinyOptionItem("2")界面优化#end
 							#@tinyOptionItem("3")设计缺陷#end
@@ -194,7 +194,7 @@
 					#@div(divClass="col-0")&nbsp&nbsp#end
 					#@div(divClass="col-3")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugSeverity" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">1</option>
 	                        <option value="ME">2</option>
 	                        <option value="MD">3</option>
@@ -208,7 +208,7 @@
 				#@colLabel()系统/浏览器：#end
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")					 
-					#@tinySelect("lang" "1" {"class":"select2"})
+					#@tinySelect("operatingSystem" "1" {"class":"select2"})
 							#@tinyOptionItem("1")全部#end
 							#@tinyOptionItem("2")Windows#end
 							#@tinyOptionItem("3")Windows 8#end
@@ -227,7 +227,7 @@
 					#end
 					#@div(divClass="col-0")&nbsp&nbsp#end
 					#@div(divClass="col-3")					
-					#@tinySelect("lang" "zh" {"class":"select2"})
+					#@tinySelect("browser" "zh" {"class":"select2"})
 							#@tinyOptionItem("zh")全部#end
 							#@tinyOptionItem("1")IE系列#end
 							#@tinyOptionItem("1")IE11#end
@@ -259,7 +259,7 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugMailto" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">部长</option>
 	                        <option value="ME">admin</option>
 	                        <option value="MD">admin2</option>
@@ -271,7 +271,7 @@
 					#@tinySelect("lang" "zh" {"class":"select2"})
 							#@tinyOptionItem("zh")老张#end
 							#@tinyOptionItem("1")老王#end
-							#@tinyOptionItem("1")老黑#end
+							#@tinyOptionItem("2")老黑#end
 							
 					#end
 					#end
@@ -283,7 +283,7 @@
 				#@colLabel()关键词：#end
 				#@formControlDiv("col-8")
 				#@div(divClass="col-5")
-					#tinyInput("text" "关键词" ""{"datatype":"","id":"关键词","class":"input-text"})
+					#tinyInput("text" "bugKeywords" ""{"datatype":"","id":"关键词","class":"input-text"})
 				#end
 				#end
 				#@validateDiv("col-2")#end

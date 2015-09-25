@@ -18,49 +18,45 @@ import org.tinygroup.commons.tools.StringUtil;*/
 public class FaqAction extends BaseController {
     @Autowired
     private FaqService faqService;
-/*新增问题*/
+
+    /*新增问题*/
     @RequestMapping("/form")
     public String form(ServiceFaq faq, Model model) {
         /*if (faq.getFaqId() == null) {}*/
       /*  Faq faq=faqService.findFaq(id);
             model.addAttribute("faq",faq);*/
-        if (faq != null)
-        {
-            model.addAttribute("faq",faq);
+        if (faq != null) {
+            model.addAttribute("faq", faq);
         }
         return "/service/faq/addquestion.page";
     }
-  /* 保存*/
+
+    /* 保存*/
     @RequestMapping("/save")
-    public String save(ServiceFaq faq ,Model model)
-    {
-        if (faq.getFaqId()==null)
-        {
+    public String save(ServiceFaq faq, Model model) {
+        if (faq.getFaqId() == null) {
             faqService.addFaq(faq);
-        }
-        else
-        {
+        } else {
             faqService.updateFaq(faq);
         }
-        model.addAttribute("faq",faq);
-        return "/service/faq/faqmenu.page";
-    }
-    /*把所有数据查询出来*/
-    @RequestMapping("/list")
-    public String list(ServiceFaq faq,Model model)
-    {
-        List<ServiceFaq> list=faqService.getFaqList(faq);
-        model.addAttribute("list",list);
-        return "/service/faq/faqmenu.page";
-    }
-    /*删除*/
-    @RequestMapping("/delete")
-    public String delete(Integer id)
-    {
-        faqService.deleteFaq(id);
+        model.addAttribute("faq", faq);
         return "/service/faq/faqmenu.page";
     }
 
+    /*通过查询query将数据查询 出来*/
+    @RequestMapping("/list")
+    public String list(ServiceFaq faq, Model model) {
+        List<ServiceFaq> list = faqService.getFaqList(faq);
+        model.addAttribute("list", list);
+        return "/service/faq/faqmenu.page";
+    }
+
+    /*删除*/
+    @RequestMapping("/delete")
+    public String delete(Integer id) {
+        faqService.deleteFaq(id);
+        return "/service/faq/faqmenu.page";
+    }
 
 
 }

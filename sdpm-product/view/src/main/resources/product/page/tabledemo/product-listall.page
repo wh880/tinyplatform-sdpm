@@ -16,8 +16,8 @@
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox"  value="">#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})产品名称#end
+						#@tinyTh({"class":"sorting","rel":"productId"})ID#end
+						#@tinyTh({"class":"sorting","rel":"productName"})产品名称#end
 						#@tinyTh({"class":"","rel":"sortname"})激活需求#end
 						#@tinyTh({"class":"","rel":"sortname"})已变更需求#end
 						#@tinyTh({"class":"","rel":"sortname"})草稿需求#end

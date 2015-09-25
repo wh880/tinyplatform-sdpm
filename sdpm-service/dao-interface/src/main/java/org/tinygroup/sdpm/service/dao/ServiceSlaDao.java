@@ -19,6 +19,10 @@ package org.tinygroup.sdpm.service.dao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 
-public interface ServiceSlaDao extends BaseDao<ServiceSla, Integer> {
+import java.util.List;
 
+public interface ServiceSlaDao extends BaseDao<ServiceSla, Integer> {
+    List<ServiceSla> getListByClientId(Integer clientId);
+
+    Integer softDelete(Integer id);
 }

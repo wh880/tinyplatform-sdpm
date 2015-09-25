@@ -24,8 +24,8 @@ import java.util.Date;
  * 
  */
 public class SystemSearch implements Serializable{
-	public static Integer DELETE_YES = 1;
-	public static Integer DELETE_NO = 0;
+	public static int DELETE_YES = 1;
+    public static int DELETE_NO = 0;
 
 	/** 
 	 * 搜索ID
@@ -43,7 +43,7 @@ public class SystemSearch implements Serializable{
 	 * 搜索对象ID
 	 * 
 	 */
-	private Integer searchObjectID;
+	private Integer searchObjectId;
 
 	/** 
 	 * 搜索名称	
@@ -92,12 +92,12 @@ public class SystemSearch implements Serializable{
 		return searchObjectType;
 	}
 
-	public void setSearchObjectID(Integer searchObjectID){
-		this. searchObjectID = searchObjectID;
+	public void setSearchObjectId(Integer searchObjectId){
+		this. searchObjectId = searchObjectId;
 	}
 
-	public Integer getSearchObjectID(){
-		return searchObjectID;
+	public Integer getSearchObjectId(){
+		return searchObjectId;
 	}
 
 	public void setSearchTitle(String searchTitle){

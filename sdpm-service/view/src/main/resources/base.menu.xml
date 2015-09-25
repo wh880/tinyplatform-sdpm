@@ -16,23 +16,31 @@
               sort="1" isShow="1"
               scope="service-cil-export"/>
         <menu id="linkman" name="联系人" href="/service/client/clientInfo.page" sort="100" isShow="1">
-            <menu id="linkman-edit"  sort="1" isShow="1"
+            <menu id="linkman-edit" sort="1" isShow="1"
                   scope="linkman-cil"/>
-            <menu id="linkman-del" name="删除" href="/service/client/clientUser.page" icon="icon-remove" sort="1" isShow="1"
+            <menu id="linkman-del" name="删除" href="/service/client/clientUser.page" icon="icon-remove" sort="1"
+                  isShow="1"
                   scope="linkman-cil"/>
-            <menu id="linkman-new"   sort="1" isShow="1"
+            <menu id="linkman-new" sort="1" isShow="1"
                   scope="linkman-cil-batchdel"/>
         </menu>
+        <menu id="clientSla_edit" name="协议编辑" href="/service/client/slaEdit" sort="1" isShow="1" scope="clientSla"/>
+        <menu id="clientSla_delete" name="协议删除" href="/service/client/slaDelete" sort="1" isShow="1" scope="clientSla"/>
+        <menu id="clientSla-add" name="绑定协议" href="/service/client/slaEdit" icon="icon-plus" sort="1" isShow="1"
+              scope="service-sla-add"/>
+        <menu id="clientSla-export" name="导出" href="/service/sla/slaExport.pagelet" icon="icon-download-alt"
+              sort="1" isShow="1"
+              scope="service-sla-export"/>
     </menu>
 
 
     <!--<menu id="linkman" name="联系人" href="/service/client/clientInfo.page" sort="100" isShow="1">-->
-        <!--<menu id="linkman-edit"  sort="1" isShow="1"-->
-              <!--scope="linkman-cil"/>-->
-        <!--<menu id="linkman-del" name="删除" href="/service/client/clientUser.page" icon="icon-remove" sort="1" isShow="1"-->
-              <!--scope="linkman-cil"/>-->
-        <!--<menu id="linkman-new"   sort="1" isShow="1"-->
-              <!--scope="linkman-cil-batchdel"/>-->
+    <!--<menu id="linkman-edit"  sort="1" isShow="1"-->
+    <!--scope="linkman-cil"/>-->
+    <!--<menu id="linkman-del" name="删除" href="/service/client/clientUser.page" icon="icon-remove" sort="1" isShow="1"-->
+    <!--scope="linkman-cil"/>-->
+    <!--<menu id="linkman-new"   sort="1" isShow="1"-->
+    <!--scope="linkman-cil-batchdel"/>-->
     <!--</menu>-->
     <menu id="request" name="需求" href="/service/serviceReq/request.page" sort="100" isShow="1">
         <menu id="request-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
@@ -72,12 +80,15 @@
               scope="service-request-oper"/>
     </menu>
 
-    <menu id="sla" name="协议" href="/service/sla/sla.page" sort="100" isShow="1">
+    <!-- <menu id="sla" name="协议" href="/service/sla/sla.page" sort="100" isShow="1">-->
+    <menu id="sla" name="协议" href="/service/sla/list" sort="100" isShow="1">
         <menu id="sla-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="service-sla-batchdel"/>
-        <menu id="sla-edit" name="编辑" href="/service/sla/slaAdd.page" icon="icon-pencil" sort="1" isShow="1"
+        <!--<menu id="sla-edit" name="编辑" href="/service/sla/slaAdd.page" icon="icon-pencil" sort="1" isShow="1"-->
+        <menu id="sla-edit" name="编辑" href="/service/sla/form" icon="icon-pencil" sort="1" isShow="1"
               scope="service-sla"/>
-        <menu id="sla-del" name="删除" href="/service/serviceReq/requestEdit.page" icon="icon-remove" sort="1" isShow="1"
+        <!--<menu id="sla-del" name="删除" href="/service/serviceReq/requestEdit.page" icon="icon-remove" sort="1" isShow="1"-->
+        <menu id="sla-del" name="删除" href="/service/sla/delete" icon="icon-remove" sort="1" isShow="1"
               scope="service-sla"/>
         <menu id="sla-export" name="导出" href="/service/serviceCom/serviceExport.pagelet" icon="icon-download-alt"
               sort="1" isShow="1"

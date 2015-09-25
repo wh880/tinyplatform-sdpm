@@ -253,6 +253,17 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>org.tinygroup.springutil</artifactId>
+			<version>${tiny_version}</version>
+			 <exclusions>
+             <exclusion>
+          <artifactId>org.tinygroup.spring256</artifactId>
+          <groupId>org.tinygroup</groupId>
+             </exclusion>
+      		</exclusions>
+		</dependency>
     </dependencies>
     <build>
         <finalName>${project.name}</finalName>

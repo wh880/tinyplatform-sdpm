@@ -24,8 +24,8 @@ import java.io.Serializable;
  * 
  */
 public class SystemConfig implements Serializable{
-	public static Integer DELETE_YES = 1;
-	public static Integer DELETE_NO = 0;
+	public static int DELETE_YES = 1;
+    public static int DELETE_NO = 0;
 
 	/** 
 	 * 配置ID

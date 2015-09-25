@@ -18,8 +18,7 @@
         #@elementItem()
             #@colLabel()产品名称：#end
             #@formControlDiv("col-3")
-                #tinyInput("text" "productName" ""{"placeholder":"","nullmsg":"请输入产品名称！","id":"productName","class":
-                    "input-text"})
+                #tinyInput("text" "productName" ""{"placeholder":"","nullmsg":"请输入产品名称！","id":"productName","class":"input-text"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -95,12 +94,9 @@
         #@elementItem()
             #@colLabel()访问控制：#end
             #@skinMinimal("col-8")
-                    #labelRadio1Sty(rId="aclopen" rName="acl" rValue="0" labelText="默认设置(有项目视图权限，即可访问)"
-                        "setWhite(this.value);" rChecked="checked")</br>
-                    #labelRadio1Sty(rId="aclprivate" rName="acl" rValue="2" labelText="私有项目(只有项目团队成员才能访问)"
-                        "setWhite(this.value);")</br>
-                    #labelRadio1Sty(rId="aclcustom" rName="acl" rValue="1" labelText="自定义白名单(团队成员和白名单的成员可以访问)"
-                        "setWhite(this.value);")</br>
+                    #labelRadio1Sty(rId="aclopen" rName="acl" rValue="0" labelText="默认设置(有项目视图权限，即可访问)" "setWhite(this.value);" rChecked="checked")</br>
+                    #labelRadio1Sty(rId="aclprivate" rName="acl" rValue="2" labelText="私有项目(只有项目团队成员才能访问)" "setWhite(this.value);")</br>
+                    #labelRadio1Sty(rId="aclcustom" rName="acl" rValue="1" labelText="自定义白名单(团队成员和白名单的成员可以访问)" "setWhite(this.value);")</br>
 
             #end
             #@validateDiv("col-2")#end
@@ -140,6 +136,6 @@
 
     <script type="text/javascript">
         function setWhite(acl) {
-            acl == 'custom' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
+            acl == '1' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
         }
     </script>

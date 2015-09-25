@@ -64,13 +64,9 @@
 
 
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/plan/save" "post" {"class":""})
     <div class="infoContent">
         <p class="titleName">编辑</p>
- 
-#*    <div class="RTtitle">
-        <button type="submit" id="submit" class="commitBtn">保存</button>
-    </div>*#
      #@elementItem()
         #@colLabel()产品:#end
         #@formControlDiv("col-4")

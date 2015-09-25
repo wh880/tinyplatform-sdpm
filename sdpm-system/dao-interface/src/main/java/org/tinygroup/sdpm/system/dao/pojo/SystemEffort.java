@@ -41,7 +41,7 @@ public class SystemEffort implements Serializable{
 	 * 对象ID
 	 * 
 	 */
-	private Integer effortObjectID;
+	private Integer effortObjectId;
 
 	/** 
 	 * 所属产品
@@ -114,12 +114,12 @@ public class SystemEffort implements Serializable{
 		return effortObjectType;
 	}
 
-	public void setEffortObjectID(Integer effortObjectID){
-		this. effortObjectID = effortObjectID;
+	public void setEffortObjectId(Integer effortObjectId){
+		this. effortObjectId = effortObjectId;
 	}
 
-	public Integer getEffortObjectID(){
-		return effortObjectID;
+	public Integer getEffortObjectId(){
+		return effortObjectId;
 	}
 
 	public void setEffortProduct(String effortProduct){

@@ -120,7 +120,7 @@ public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager findProductPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.Product product ,java.lang.String columnName ,boolean asc) {
+	public org.tinygroup.tinysqldsl.Pager findProductPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.Product product ,java.lang.String order ,java.lang.String ordertype) {
 		String serviceId = "product_findProductPager";
 
 		try{
@@ -128,8 +128,8 @@ public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 			context.put("start" ,start);
 			context.put("limit" ,limit);
 			context.put("product" ,product);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
+			context.put("order" ,order);
+			context.put("ordertype" ,ordertype);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

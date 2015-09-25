@@ -50,9 +50,9 @@ public class EffortServiceImpl implements EffortService {
 		return effortManager.findByProject(projectId);
 	}
 
-	public Pager<SystemEffort> findByPage(int start, int limit, SystemEffort SystemEffort) {
+	public Pager<SystemEffort> findByPage(int start, int limit, SystemEffort SystemEffort, String sortName, boolean asc) {
 		// TODO Auto-generated method stub
-		return effortManager.findByPage(start, limit, SystemEffort);
+		return effortManager.findByPage(start, limit, SystemEffort, sortName, asc);
 	}
 
 }

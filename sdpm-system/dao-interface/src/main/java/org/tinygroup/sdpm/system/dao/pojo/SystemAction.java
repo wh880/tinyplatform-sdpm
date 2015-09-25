@@ -41,7 +41,7 @@ public class SystemAction implements Serializable{
 	 * 对象ID
 	 * 
 	 */
-	private Integer actionObjectID;
+	private Integer actionObjectId;
 
 	/** 
 	 * 所属项目
@@ -108,12 +108,12 @@ public class SystemAction implements Serializable{
 		return actionObjectType;
 	}
 
-	public void setActionObjectID(Integer actionObjectID){
-		this. actionObjectID = actionObjectID;
+	public void setActionObjectId(Integer actionObjectId){
+		this. actionObjectId = actionObjectId;
 	}
 
-	public Integer getActionObjectID(){
-		return actionObjectID;
+	public Integer getActionObjectId(){
+		return actionObjectId;
 	}
 
 	public void setActionProject(Integer actionProject){

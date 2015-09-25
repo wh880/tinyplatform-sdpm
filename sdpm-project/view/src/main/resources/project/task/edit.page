@@ -6,7 +6,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #import("/org/tinygroup/icon/components/icon.component")
-
+#set(name="task")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -21,8 +21,8 @@
     #end
 #end
 
-
-#@tinyForm("thisform" "" "" {"class":"test","enctype":"multipart/form-data"})
+###macro tinyForm(formname action method formMapInfo)
+#@tinyForm("thisform" "/project/task/edit" "post" {"class":"test","enctype":"multipart/form-data"})
 <div style="width:70%;float:left" class="">
 
     <div class="infoContent">
@@ -33,7 +33,7 @@
                 <div class="col-2 text-r"><label>任务描述：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("content" "taskDesc" {"initialFrameHeight":"150"})Say something#end</div>
+                    #@Teditor("content" "taskDesc" {"initialFrameHeight":"150"})${task?.taskDesc}#end</div>
             </div>
         #end
         #@elementItem()
@@ -69,7 +69,7 @@
             <div class="col-5">
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit" class="commitBtn" formaction=TINY_CONTEXT_PATH+"/project/task/save">保存</button>
             </div>
             <div class="col-1">
                ## <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>

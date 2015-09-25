@@ -1,0 +1,28 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.quality.service.impl.CaseStepServiceImpl" bean="">
+    <service-method local-name="findById" service-id="quality_findById" method-name="findById" cacheable="false" category="org.tinygroup.sdpm.quality.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep"/>
+    </service-method>
+    <service-method local-name="addCaseStep" service-id="quality_addCaseStep" method-name="addCaseStep" cacheable="false" category="org.tinygroup.sdpm.quality.service.impl">
+      <service-parameters>
+        <service-parameter name="casestep" type="org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addCaseStepResult" required="false" is-array="false" type="org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep"/>
+    </service-method>
+    <service-method local-name="deleteById" service-id="quality_deleteById" method-name="deleteById" cacheable="false" category="org.tinygroup.sdpm.quality.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteByIdResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="findCaseStepList" service-id="quality_findCaseStepList" method-name="findCaseStepList" cacheable="false" category="org.tinygroup.sdpm.quality.service.impl">
+      <service-parameters>
+        <service-parameter name="casestep" type="org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findCaseStepListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep"/>
+    </service-method>
+  </service-component>
+</service-components>
