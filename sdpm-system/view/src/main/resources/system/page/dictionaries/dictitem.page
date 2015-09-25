@@ -12,7 +12,7 @@
 	#@divDataTablebox()
 	    #@tableHeaderBar()${activeTitle}#end
 		#@leftTreeCol()
-			#@searchZtreeWithInit("treeDemo" "height:454px;" "/system/page/dictionaries/data/tree/dict.js")
+			#@searchZtreeWithInit("treeDemo" "height:454px;" "/system/module/tree")
 			#end
 		#end
     	#@tableBox("tBox")
