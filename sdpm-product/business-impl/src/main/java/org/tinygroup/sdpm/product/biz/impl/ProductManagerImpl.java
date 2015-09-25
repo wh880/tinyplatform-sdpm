@@ -21,23 +21,19 @@ public class ProductManagerImpl implements ProductManager{
 	
 	public Product add(Product product) {
 		
-		if(1==product.getAcl()){
-			product.setProductWhiteList("");
-		}
 		
 		if(1!=product.getAcl()){
-			product.setProductWhiteList("");
+			product.setProductWhiteList(null);
 		}
-		//product.setProductCreatedDate(new Date());
+		product.setProductCreatedDate(new Date());
+		product.setDeleted(FieldUtil.DELETE_NO);
 		return productDao.add(product);
 	}
 
 	public int update(Product product) {
-		if(1==product.getAcl()){
-			product.setProductWhiteList("");
-		}
+		
 		if(1!=product.getAcl()){
-			product.setProductWhiteList("");
+			product.setProductWhiteList(null);
 		}
 
 		return productDao.edit(product);
@@ -67,8 +63,9 @@ public class ProductManagerImpl implements ProductManager{
 		return productDao.query(product, new OrderBy(columnName, asc));
 	}
 
-	public Pager<Product> findPager(int start, int limit, Product product, String order,String ordertype) {
-		return productDao.queryPager((start-1)*limit, limit, product, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+	public Pager<Product> findPager(int page, int limit, Product product, String order,String ordertype) {
+		
+		return productDao.queryPager((page-1)*limit, limit, product, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
 
 }
