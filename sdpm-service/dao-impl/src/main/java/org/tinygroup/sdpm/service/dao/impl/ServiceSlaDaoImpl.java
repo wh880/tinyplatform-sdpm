@@ -42,6 +42,8 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @Repository
 public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDao {
 
+    public static Integer DELETE_YES = 1;
+    public static Integer DELETE_NO = 0;
     public ServiceSla add(ServiceSla serviceSla) {
         return getDslTemplate().insertAndReturnKey(serviceSla, new InsertGenerateCallback<ServiceSla>() {
             public Insert generate(ServiceSla t) {
@@ -341,8 +343,21 @@ public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDa
             //Select select = selectFrom(USERTABLE).where(USERTABLE.NAME.eq("xdy"));
             // MysqlSelect select1;
             //select1 = selectFrom(USERTABLE).limit(1, 10);
-            select = selectFrom(SERVICE_SLATABLE).where(SERVICE_SLATABLE.CLIENT_ID.eq(clientId));
+            select = selectFrom(SERVICE_SLATABLE).where(and(SERVICE_SLATABLE.CLIENT_ID.eq(clientId),
+                    SERVICE_SLATABLE.DELETED.eq(DELETE_NO)));
             return getDslSession().fetchList(select, ServiceSla.class);
         }
+    }
+
+    public Integer softDelete(Integer id) {
+        return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
+            public Update generate(Integer id) {
+                Update update = update(SERVICE_SLATABLE).set(
+                        SERVICE_SLATABLE.DELETED.value(DELETE_YES)).where(
+                        SERVICE_SLATABLE.SLA_ID.eq(id));
+                return update;
+            }
+        });
+
     }
 }
