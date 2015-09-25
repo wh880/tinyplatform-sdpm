@@ -75,7 +75,7 @@
     <table-field standard-field-id="ba346a40ad5f492ca7cff6c724600df9" primary="false" unique="false" not-null="false" id="story_spec" auto-increase="false"/>
     <table-field standard-field-id="196dbdfea33c43649227901605968e7c" primary="false" unique="false" not-null="false" id="story_verification" auto-increase="false"/>
   </table>
-  <table id="c837f18a2be346d18dc1e5213181b212" name="product_release" title="发布表" package-name="">
+  <table id="c837f18a2be346d18dc1e5213181b212" name="product_release" title="发布表" schema="" package-name="">
     <table-field standard-field-id="fcd9ccc8418d40bf94a7caa53175ef4c" primary="true" unique="true" not-null="true" id="release_id" auto-increase="false"/>
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
     <table-field standard-field-id="d375c0a459c0490d840add34075e27f5" primary="false" unique="false" not-null="false" id="build_id" auto-increase="false"/>

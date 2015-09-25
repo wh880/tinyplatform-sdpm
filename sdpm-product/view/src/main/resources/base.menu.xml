@@ -126,24 +126,7 @@
         <menu id="showsearchmore" name="搜索" href="#" icon="icon-search" sort="23" isShow="1" scope="demand-state"/>
 
 
-        <menu id="allproduct-close" name="关闭" href=""
-              icon="icon-off" sort="22" isShow="1" scope="allproduct-op">
-            <map>
-                <property key="type" value="close"/>
-            </map>
-        </menu>
-        <menu id="allproduct-edit" name="编辑" href="/product/find?productId=//$//{product.productId//}"
-              icon="icon-pencil" sort="21" isShow="1" scope="allproduct-op">
-            <map>
-                <property key="type" value="editor"/>
-            </map>
-        </menu>
-        <menu id="allproduct-delete" name="删除" href="/tinyuiweb/action/del.pagelet"
-              icon="icon-remove" sort="20" isShow="1" scope="allproduct-op">
-            <map>
-                <property key="type" value="delete"/>
-            </map>
-        </menu>
+       
         <menu id="allproduct-close" name="关闭" href="/product/page/tabledemo/overview-close.pagelet"
               icon="icon-off" sort="22" isShow="1" scope="allproduct-op">
             <map>
