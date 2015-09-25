@@ -25,9 +25,7 @@
 			#if(m.map.type=="close")
 				#iconOperations("#myModal" m.icon m.name "865" "500" url "ml-5")&nbsp;
 				#elseif(m.map.type=="editor")
-
                 <a href="${TINY_CONTEXT_PATH}${eval(m.href)}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;
-				
 			#end
 		#end
 	#end

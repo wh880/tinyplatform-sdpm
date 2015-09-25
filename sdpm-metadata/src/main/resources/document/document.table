@@ -1,6 +1,6 @@
 <tables id="a91b5666002c43eabeebeeae6a8e8b99" package-name="org.tinygroup.alm.document">
   <table id="59549c7852a84135a7f594a6d2081544" name="doc" title="文档表" schema="" package-name="">
-    <description></description>
+    <description>wendang</description>
     <table-field standard-field-id="157b6bcd380345ecb1bbb2b6005b92f7" primary="true" unique="true" not-null="true" id="doc_id" auto-increase="true"/>
     <table-field standard-field-id="51d8b407678c4adfbb36e530c87c7f22" primary="false" unique="false" not-null="false" id="doc_product" auto-increase="false"/>
     <table-field standard-field-id="0dad99e5e3824c3f89a0d03f95baa577" primary="false" unique="false" not-null="false" id="doc_project" auto-increase="false"/>
@@ -12,20 +12,19 @@
     <table-field standard-field-id="b4eafda448574c2f8a419c484c97def2" primary="false" unique="false" not-null="false" id="doc_type" auto-increase="false"/>
     <table-field standard-field-id="09a6fd6e09ef40e0b3b387aebe3ab8e7" primary="false" unique="false" not-null="false" id="doc_content" auto-increase="false"/>
     <table-field standard-field-id="cc191e36888f4414938be77d84babd0e" primary="false" unique="false" not-null="false" id="doc_url" auto-increase="false"/>
-    <table-field standard-field-id="9ff7f502031949b58c91d60bcf927863" primary="false" unique="false" not-null="false" id="attach_url" auto-increase="false"/>
     <table-field standard-field-id="b2dad0bf75e34c4abed7b3d9b1af4896" primary="false" unique="false" not-null="false" id="doc_views" auto-increase="false"/>
-    <table-field standard-field-id="334e1412adb4444dad2e951a1f167453" primary="false" unique="false" not-null="false" id="doc_addedBy" auto-increase="false"/>
-    <table-field standard-field-id="389533862bbd4507a77bda520ddde316" primary="false" unique="false" not-null="false" id="doc_addedDate" auto-increase="false"/>
+    <table-field standard-field-id="334e1412adb4444dad2e951a1f167453" primary="false" unique="false" not-null="false" id="doc_added_by" auto-increase="false"/>
+    <table-field standard-field-id="389533862bbd4507a77bda520ddde316" primary="false" unique="false" not-null="false" id="doc_added_date" auto-increase="false"/>
     <table-field standard-field-id="4b7d87df878e4f92aa9e85b4d3079be1" primary="false" unique="false" not-null="false" id="doc_editedBy" auto-increase="false"/>
     <table-field standard-field-id="59a569420f764db3b2a292c350d740ca" primary="false" unique="false" not-null="false" id="doc_editedDate" auto-increase="false"/>
     <table-field standard-field-id="4240a1ee3cc04b6f9621e95ed93b8b22" primary="false" unique="false" not-null="false" id="doc_deleted" auto-increase="false"/>
   </table>
-  <table id="56f136998f6c43208337c635b20390b2" name="docLib" title="文档库表" package-name="">
+  <table id="56f136998f6c43208337c635b20390b2" name="doclib" title="文档库表" package-name="">
     <description>文档相关的</description>
     <table-field standard-field-id="509aa7b0d6ee413ab1f3b4ad99e28843" primary="true" unique="true" not-null="true" id="doc_libid" auto-increase="true"/>
     <table-field standard-field-id="95b70aee2d1e4c9dbf04e6688ffb9bee" primary="false" unique="false" not-null="false" id="doc_libname" auto-increase="false"/>
     <table-field standard-field-id="2655a73603e54dd98679d4163bd0851f" primary="false" unique="false" not-null="false" id="doc_lib_deleted" auto-increase="false"/>
-    <table-field standard-field-id="9282649ea9b249eb9df0c2f9581c625c" primary="false" unique="false" not-null="false" id="doc_lib_addtime" auto-increase="false"/>
-    <table-field standard-field-id="8842a366405a4f35a57ba0e5f5ac66f3" primary="false" unique="false" not-null="false" id="doc_lib_updtime" auto-increase="false"/>
+    <table-field standard-field-id="9282649ea9b249eb9df0c2f9581c625c" primary="false" unique="false" not-null="false" id="doc_lib_added_date" auto-increase="false"/>
+    <table-field standard-field-id="8842a366405a4f35a57ba0e5f5ac66f3" primary="false" unique="false" not-null="false" id="doc_lib_edited_date" auto-increase="false"/>
   </table>
 </tables>

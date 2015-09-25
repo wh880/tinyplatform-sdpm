@@ -18,18 +18,19 @@
         #end
     #end
    #* #@tinyForm("thisform" "" "" {"class":"test"})*#
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/sla/save" ""{"class":"test"})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/sla/save" "post" {"class":""})
     <div style="width:100%;float:left" class="pageleftpart">
         <div class="infoContent">
         ##            <p class="titleName">编辑协议</p>
             #@elementItem()
                 #@sdpmItem("客户名称" "*")
                     #@Tselect2F()
-                        #@Tselect2Body("ServiceName" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body(
+                            "clientId" "sla.clientId" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="IN">请选择</option>
-                            <option value="01">恒生</option>
-                            <option value="02">阿里</option>
-                            <option value="03">网易</option>
+                            <option value="02">恒生</option>
+                            <option value="03">阿里</option>
+                            <option value="04">网易</option>
                         #end
                         #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/clientAdd.page"
                                           class="r ">增加</a>#end
@@ -40,9 +41,9 @@
                 #@sdpmItem("产品名称" "*")
                     #@tinySelect("productId" "ch" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
                         #@tinyOptionItem("ch")请选择#end
-                        #@tinyOptionItem("01")支付宝#end
-                        #@tinyOptionItem("02")余额宝#end
-                        #@tinyOptionItem("03")财付通#end
+                        #@tinyOptionItem("02")支付宝#end
+                        #@tinyOptionItem("03")余额宝#end
+                        #@tinyOptionItem("04")财付通#end
                     #end
                 #end
             #end
@@ -57,10 +58,10 @@
                 #@sdpmItem("服务级别" "*")
                     #@tinySelect("serviceLevel" "zh" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
                         #@tinyOptionItem("zh")请选择#end
-                        #@tinyOptionItem("01")0基础#end
-                        #@tinyOptionItem("02")1潜力#end
-                        #@tinyOptionItem("03")2核心#end
-                        #@tinyOptionItem("04")3vip#end
+                        #@tinyOptionItem("02")0基础#end
+                        #@tinyOptionItem("03")1潜力#end
+                        #@tinyOptionItem("04")2核心#end
+                        #@tinyOptionItem("05")3vip#end
                     #end
                 #end
             #end
@@ -78,7 +79,8 @@
             #@elementItem()
                 #@sdpmItem("服务响应时限")
                     #tinyInput(
-                        "text" "serviceReplyTimeLimit" ""{"datatype":"","class":"input-text select2"})
+                        "text" "serviceReplyTimeLimit" ""{"datatype":"","id":"serviceReplyTimeLimit","class":
+                        "input-text select2"})
                 #end
             #end
             #@elementItem()

@@ -45,7 +45,7 @@ public interface StoryService {
 	 * 根据产品对象查找
 	 * @return
 	 */
-	List<ProductStory> findStoryList(ProductStory story,String columnName,boolean asc);
+	List<ProductStory> findStoryList(ProductStory story,String order,String ordertype);
 	/**
 	 * 分页查询
 	 * @param start

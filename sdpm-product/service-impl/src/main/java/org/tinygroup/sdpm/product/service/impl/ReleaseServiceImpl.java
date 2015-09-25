@@ -36,15 +36,15 @@ public class ReleaseServiceImpl implements ReleaseService{
 		return releaseManger.delete(releaseId);
 	}
 
-	public List<ProductRelease> findReleaseList(ProductRelease release,String columnName,boolean asc) {
+	public List<ProductRelease> findReleaseList(ProductRelease productRelease,String order,String ordertype) {
 		
-		return releaseManger.findList(release, columnName, asc);
+		return releaseManger.findList(productRelease, order, ordertype);
 	}
 
 
-	public Pager<ProductRelease> findReleasePager(int start, int limit, ProductRelease release,String columnName,boolean asc) {
+	public Pager<ProductRelease> findReleasePager(int page, int limit, ProductRelease productRelease,String order,String ordertype) {
 
-		return releaseManger.findPager(start, limit, release, columnName, asc);
+		return releaseManger.findPager(page, limit, productRelease, order, ordertype);
 	}
 	
 

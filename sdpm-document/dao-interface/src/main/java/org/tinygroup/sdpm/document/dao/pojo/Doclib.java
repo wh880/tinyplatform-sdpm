@@ -16,6 +16,7 @@
 
 package org.tinygroup.sdpm.document.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
@@ -23,21 +24,26 @@ import java.util.Date;
  * 
  * 文档相关的
  */
-public class DocLib {
+public class Doclib implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/** 
 	 * 文档库ID
 	 * 
 	 * 文档库ID
 	 */
-	private Integer docLibid;
+	private Integer docLibId;
 
 	/** 
 	 * 文档库名字
 	 * 
 	 * 文档库名字
 	 */
-	private String docLibname;
+	private String docLibName;
 
 	/** 
 	 * 删除文档库标志
@@ -51,30 +57,30 @@ public class DocLib {
 	 * 
 	 * 文档库添加时间
 	 */
-	private Date docLibAddtime;
+	private Date docLibAddedDate;
 
 	/** 
 	 * 文档库名称更新时间
 	 * 
 	 * 文档库名称更新时间
 	 */
-	private Date docLibUpdtime;
+	private Date docLibEditedDate;
 
 
-	public void setDocLibid(Integer docLibid){
-		this. docLibid = docLibid;
+	public void setDocLibId(Integer docLibId){
+		this. docLibId = docLibId;
 	}
 
-	public Integer getDocLibid(){
-		return docLibid;
+	public Integer getDocLibId(){
+		return docLibId;
 	}
 
-	public void setDocLibname(String docLibname){
-		this. docLibname = docLibname;
+	public void setDocLibName(String docLibName){
+		this. docLibName = docLibName;
 	}
 
-	public String getDocLibname(){
-		return docLibname;
+	public String getDocLibName(){
+		return docLibName;
 	}
 
 	public void setDocLibDeleted(String docLibDeleted){
@@ -85,20 +91,20 @@ public class DocLib {
 		return docLibDeleted;
 	}
 
-	public void setDocLibAddtime(Date docLibAddtime){
-		this. docLibAddtime = docLibAddtime;
+	public void setDocLibAddedDate(Date docLibAddedDate){
+		this. docLibAddedDate = docLibAddedDate;
 	}
 
-	public Date getDocLibAddtime(){
-		return docLibAddtime;
+	public Date getDocLibAddedDate(){
+		return docLibAddedDate;
 	}
 
-	public void setDocLibUpdtime(Date docLibUpdtime){
-		this. docLibUpdtime = docLibUpdtime;
+	public void setDocLibEditedDate(Date docLibEditedDate){
+		this. docLibEditedDate = docLibEditedDate;
 	}
 
-	public Date getDocLibUpdtime(){
-		return docLibUpdtime;
+	public Date getDocLibEditedDate(){
+		return docLibEditedDate;
 	}
 
 }

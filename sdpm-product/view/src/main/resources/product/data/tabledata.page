@@ -4,7 +4,7 @@
 #@tr()
     #@td()<input type="checkbox" value="1" name="product-demand">#end
     #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">${story.storyId}</a>#end
-    #@td()@#end
+    #@td()${story.storyPri}#end
     #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">${story.storyTitle}</a>#end
     #@td()${story.planId}#end
     #@td()${story.storySource}#end

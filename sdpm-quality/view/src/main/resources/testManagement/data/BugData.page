@@ -16,7 +16,7 @@
     #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${var?.bugId}</a>#end
     #@td()${var?.bugSeverity}#end
     #@td()${var?.priority}#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${var?.bugTitle}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">[${var?.bugStatus}]${var?.bugTitle}</a>#end
     #@td()${var?.bugStatus}#end
     #@td()${var?.bugOpenedBy}#end
     #@td()${var?.bugOpenedDate}#end
