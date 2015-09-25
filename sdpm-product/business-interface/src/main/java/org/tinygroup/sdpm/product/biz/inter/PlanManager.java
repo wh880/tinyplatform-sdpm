@@ -25,12 +25,14 @@ public interface PlanManager {
 	 * @return
 	 */
 	int[] updateBatch(List<ProductPlan> productplan);
-	/**
-	 * 根据计划ID删除计划
-	 * @parm plan
-	 * @ruturn
-	 */
-	int delete(Integer planId);
+	
+	 /**
+     * 根据id进行软删除计划
+     *
+     * @param id 主键
+     * @return
+     */
+    Integer delete(Integer planId);
 	/**
 	 * 根据Id查找
 	 * @param planId
@@ -53,7 +55,7 @@ public interface PlanManager {
 	 * @param orderBies
 	 * @return
 	 */
-	Pager<ProductPlan> findPager(int start,int limit,ProductPlan productplan,String columnName,boolean asc);
+	Pager<ProductPlan> findPager(int start,int limit,ProductPlan productplan,String order,String ordertype);
 	
 	
 

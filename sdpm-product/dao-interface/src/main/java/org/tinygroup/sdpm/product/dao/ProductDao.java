@@ -21,5 +21,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 
 public interface ProductDao extends BaseDao<Product,Integer> {
+	
+    
 
 }

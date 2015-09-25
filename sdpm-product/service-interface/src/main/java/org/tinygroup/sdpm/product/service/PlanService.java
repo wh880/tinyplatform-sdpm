@@ -44,7 +44,8 @@ public interface PlanService{
 	/**
 	 * 根据对象查找
 	 * @param plan
-	 * @param orderBies
+	 * @param columnName
+	 * @param asc
 	 * @return
 	 */
 	List<ProductPlan> findPlanList(ProductPlan plan,String columnName,boolean asc);
@@ -53,9 +54,9 @@ public interface PlanService{
 	 * @param start
 	 * @param limit
 	 * @param plan
-	 * @param orderBies
+	 * @param ordertype
 	 * @return
 	 */
-	Pager<ProductPlan> findProductPlanPager(int start,int limit,ProductPlan plan,String columnName,boolean asc);
+	Pager<ProductPlan> findProductPlanPager(int start,int limit,ProductPlan plan,String order,String ordertype);
 	
 }

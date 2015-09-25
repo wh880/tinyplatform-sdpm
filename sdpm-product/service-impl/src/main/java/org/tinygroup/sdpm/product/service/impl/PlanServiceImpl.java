@@ -1,14 +1,13 @@
 package org.tinygroup.sdpm.product.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.biz.inter.PlanManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 @Component
 public class PlanServiceImpl implements PlanService {
@@ -47,9 +46,15 @@ public class PlanServiceImpl implements PlanService {
 		return planManager.findList(plan, columnName, asc);
 	}
 
-	public Pager<ProductPlan> findProductPlanPager(int start, int limit, ProductPlan plan,String columnName,boolean asc) {
+	public Pager<ProductPlan> findProductPlanPager(int start, int limit, ProductPlan plan, String order,
+			String ordertype) {
 		
-		return planManager.findPager(start, limit, plan, columnName, asc);
+		return planManager.findPager(start, limit, plan, order, ordertype);
 	}
+
+
+
+
+
 
 }

@@ -12,5 +12,6 @@
 
     <!-- 启动aop的注解解析器-->
     <aop:aspectj-autoproxy/>
+    <mvc:annotation-driven /> 
 
 </beans>
