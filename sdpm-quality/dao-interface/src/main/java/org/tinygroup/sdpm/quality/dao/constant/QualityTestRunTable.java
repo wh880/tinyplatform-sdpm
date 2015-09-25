@@ -25,7 +25,7 @@ import org.tinygroup.tinysqldsl.base.Table;
  */
 public class QualityTestRunTable extends Table {
 
-	public static final QualityTestRunTable QUALITY_TESTRUNTABLE = new QualityTestRunTable();
+	public static final QualityTestRunTable QUALITY_TEST_RUNTABLE = new QualityTestRunTable();
 
 	/** 
 	 * 执行编号
@@ -83,7 +83,7 @@ public class QualityTestRunTable extends Table {
 
 
 	private QualityTestRunTable() {
-		super("quality_testRun");
+		super("quality_test_run");
 	}
 
 }

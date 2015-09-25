@@ -58,12 +58,12 @@ public class QualityCaseStepDaoImpl extends TinyDslDaoSupport implements Quality
 	public QualityCaseStep add(QualityCaseStep qualityCaseStep) {
 		return getDslTemplate().insertAndReturnKey(qualityCaseStep, new InsertGenerateCallback<QualityCaseStep>() {
 			public Insert generate(QualityCaseStep t) {
-				Insert insert = insertInto(QUALITY_CASESTEPTABLE).values(
-					QUALITY_CASESTEPTABLE.CASE_STEP_ID.value(t.getCaseStepId()),
-					QUALITY_CASESTEPTABLE.CASE_ID.value(t.getCaseId()),
-					QUALITY_CASESTEPTABLE.CASE_VERSION.value(t.getCaseVersion()),
-					QUALITY_CASESTEPTABLE.CASE_STEP_DESC.value(t.getCaseStepDesc()),
-					QUALITY_CASESTEPTABLE.CASE_STEP_EXPECT.value(t.getCaseStepExpect()));
+				Insert insert = insertInto(QUALITY_CASE_STEPTABLE).values(
+					QUALITY_CASE_STEPTABLE.CASE_STEP_ID.value(t.getCaseStepId()),
+					QUALITY_CASE_STEPTABLE.CASE_ID.value(t.getCaseId()),
+					QUALITY_CASE_STEPTABLE.CASE_VERSION.value(t.getCaseVersion()),
+					QUALITY_CASE_STEPTABLE.CASE_STEP_DESC.value(t.getCaseStepDesc()),
+					QUALITY_CASE_STEPTABLE.CASE_STEP_EXPECT.value(t.getCaseStepExpect()));
 				return insert;
 			}
 		});
@@ -75,12 +75,12 @@ public class QualityCaseStepDaoImpl extends TinyDslDaoSupport implements Quality
 		}
 		return getDslTemplate().update(qualityCaseStep, new UpdateGenerateCallback<QualityCaseStep>() {
 			public Update generate(QualityCaseStep t) {
-				Update update = update(QUALITY_CASESTEPTABLE).set(
-					QUALITY_CASESTEPTABLE.CASE_ID.value(t.getCaseId()),
-					QUALITY_CASESTEPTABLE.CASE_VERSION.value(t.getCaseVersion()),
-					QUALITY_CASESTEPTABLE.CASE_STEP_DESC.value(t.getCaseStepDesc()),
-					QUALITY_CASESTEPTABLE.CASE_STEP_EXPECT.value(t.getCaseStepExpect())).where(
-					QUALITY_CASESTEPTABLE.CASE_STEP_ID.eq(t.getCaseStepId()));
+				Update update = update(QUALITY_CASE_STEPTABLE).set(
+					QUALITY_CASE_STEPTABLE.CASE_ID.value(t.getCaseId()),
+					QUALITY_CASE_STEPTABLE.CASE_VERSION.value(t.getCaseVersion()),
+					QUALITY_CASE_STEPTABLE.CASE_STEP_DESC.value(t.getCaseStepDesc()),
+					QUALITY_CASE_STEPTABLE.CASE_STEP_EXPECT.value(t.getCaseStepExpect())).where(
+					QUALITY_CASE_STEPTABLE.CASE_STEP_ID.eq(t.getCaseStepId()));
 				return update;
 			}
 		});
@@ -92,7 +92,7 @@ public class QualityCaseStepDaoImpl extends TinyDslDaoSupport implements Quality
 		}
 		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
 			public Delete generate(Serializable pk) {
-				return delete(QUALITY_CASESTEPTABLE).where(QUALITY_CASESTEPTABLE.CASE_STEP_ID.eq(pk));
+				return delete(QUALITY_CASE_STEPTABLE).where(QUALITY_CASE_STEPTABLE.CASE_STEP_ID.eq(pk));
 			}
 		});
 	}
@@ -103,7 +103,7 @@ public class QualityCaseStepDaoImpl extends TinyDslDaoSupport implements Quality
 		}
 		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
 			public Delete generate(Serializable[] t) {
-				return delete(QUALITY_CASESTEPTABLE).where(QUALITY_CASESTEPTABLE.CASE_STEP_ID.in(t));
+				return delete(QUALITY_CASE_STEPTABLE).where(QUALITY_CASE_STEPTABLE.CASE_STEP_ID.in(t));
 		}
 		},pks);
 	}
@@ -112,7 +112,7 @@ public class QualityCaseStepDaoImpl extends TinyDslDaoSupport implements Quality
 		return getDslTemplate().getByKey(pk, QualityCaseStep.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(QUALITY_CASESTEPTABLE).where(QUALITY_CASESTEPTABLE.CASE_STEP_ID.eq(t));
+			return selectFrom(QUALITY_CASE_STEPTABLE).where(QUALITY_CASE_STEPTABLE.CASE_STEP_ID.eq(t));
 			}
 		});
 	}
@@ -125,12 +125,12 @@ public class QualityCaseStepDaoImpl extends TinyDslDaoSupport implements Quality
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(QualityCaseStep t) {
-				Select select = selectFrom(QUALITY_CASESTEPTABLE).where(
+				Select select = selectFrom(QUALITY_CASE_STEPTABLE).where(
 				and(
-					QUALITY_CASESTEPTABLE.CASE_ID.eq(t.getCaseId()),
-					QUALITY_CASESTEPTABLE.CASE_VERSION.eq(t.getCaseVersion()),
-					QUALITY_CASESTEPTABLE.CASE_STEP_DESC.eq(t.getCaseStepDesc()),
-					QUALITY_CASESTEPTABLE.CASE_STEP_EXPECT.eq(t.getCaseStepExpect())));
+					QUALITY_CASE_STEPTABLE.CASE_ID.eq(t.getCaseId()),
+					QUALITY_CASE_STEPTABLE.CASE_VERSION.eq(t.getCaseVersion()),
+					QUALITY_CASE_STEPTABLE.CASE_STEP_DESC.eq(t.getCaseStepDesc()),
+					QUALITY_CASE_STEPTABLE.CASE_STEP_EXPECT.eq(t.getCaseStepExpect())));
 			return addOrderByElements(select, orderArgs);
 			}
 		});
@@ -143,12 +143,12 @@ public class QualityCaseStepDaoImpl extends TinyDslDaoSupport implements Quality
 		return getDslTemplate().queryPager(start, limit, qualityCaseStep, false, new SelectGenerateCallback<QualityCaseStep>() {
 
 			public Select generate(QualityCaseStep t) {
-				Select select = MysqlSelect.selectFrom(QUALITY_CASESTEPTABLE).where(
+				Select select = MysqlSelect.selectFrom(QUALITY_CASE_STEPTABLE).where(
 				and(
-					QUALITY_CASESTEPTABLE.CASE_ID.eq(t.getCaseId()),
-					QUALITY_CASESTEPTABLE.CASE_VERSION.eq(t.getCaseVersion()),
-					QUALITY_CASESTEPTABLE.CASE_STEP_DESC.eq(t.getCaseStepDesc()),
-					QUALITY_CASESTEPTABLE.CASE_STEP_EXPECT.eq(t.getCaseStepExpect())));
+					QUALITY_CASE_STEPTABLE.CASE_ID.eq(t.getCaseId()),
+					QUALITY_CASE_STEPTABLE.CASE_VERSION.eq(t.getCaseVersion()),
+					QUALITY_CASE_STEPTABLE.CASE_STEP_DESC.eq(t.getCaseStepDesc()),
+					QUALITY_CASE_STEPTABLE.CASE_STEP_EXPECT.eq(t.getCaseStepExpect())));
 			return addOrderByElements(select, orderArgs);
 			}
 		});
@@ -161,11 +161,11 @@ public class QualityCaseStepDaoImpl extends TinyDslDaoSupport implements Quality
 		return getDslTemplate().batchInsert(autoGeneratedKeys, qualityCaseSteps, new NoParamInsertGenerateCallback() {
 
 			public Insert generate() {
-				return insertInto(QUALITY_CASESTEPTABLE).values(
-					QUALITY_CASESTEPTABLE.CASE_ID.value(new JdbcNamedParameter("caseId")),
-					QUALITY_CASESTEPTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
-					QUALITY_CASESTEPTABLE.CASE_STEP_DESC.value(new JdbcNamedParameter("caseStepDesc")),
-					QUALITY_CASESTEPTABLE.CASE_STEP_EXPECT.value(new JdbcNamedParameter("caseStepExpect")));
+				return insertInto(QUALITY_CASE_STEPTABLE).values(
+					QUALITY_CASE_STEPTABLE.CASE_ID.value(new JdbcNamedParameter("caseId")),
+					QUALITY_CASE_STEPTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
+					QUALITY_CASE_STEPTABLE.CASE_STEP_DESC.value(new JdbcNamedParameter("caseStepDesc")),
+					QUALITY_CASE_STEPTABLE.CASE_STEP_EXPECT.value(new JdbcNamedParameter("caseStepExpect")));
 			}
 		});
 	}
@@ -181,12 +181,12 @@ public class QualityCaseStepDaoImpl extends TinyDslDaoSupport implements Quality
 		return getDslTemplate().batchUpdate(qualityCaseSteps, new NoParamUpdateGenerateCallback() {
 
 			public Update generate() {
-				return update(QUALITY_CASESTEPTABLE).set(
-					QUALITY_CASESTEPTABLE.CASE_ID.value(new JdbcNamedParameter("caseId")),
-					QUALITY_CASESTEPTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
-					QUALITY_CASESTEPTABLE.CASE_STEP_DESC.value(new JdbcNamedParameter("caseStepDesc")),
-					QUALITY_CASESTEPTABLE.CASE_STEP_EXPECT.value(new JdbcNamedParameter("caseStepExpect"))).where(
-				QUALITY_CASESTEPTABLE.CASE_STEP_ID.eq(new JdbcNamedParameter("caseStepId")));
+				return update(QUALITY_CASE_STEPTABLE).set(
+					QUALITY_CASE_STEPTABLE.CASE_ID.value(new JdbcNamedParameter("caseId")),
+					QUALITY_CASE_STEPTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
+					QUALITY_CASE_STEPTABLE.CASE_STEP_DESC.value(new JdbcNamedParameter("caseStepDesc")),
+					QUALITY_CASE_STEPTABLE.CASE_STEP_EXPECT.value(new JdbcNamedParameter("caseStepExpect"))).where(
+				QUALITY_CASE_STEPTABLE.CASE_STEP_ID.eq(new JdbcNamedParameter("caseStepId")));
 			}
 		});
 	}
@@ -198,12 +198,12 @@ public class QualityCaseStepDaoImpl extends TinyDslDaoSupport implements Quality
 		return getDslTemplate().batchDelete(qualityCaseSteps, new NoParamDeleteGenerateCallback() {
 
 			public Delete generate() {
-				return delete(QUALITY_CASESTEPTABLE).where(and(
-				QUALITY_CASESTEPTABLE.CASE_STEP_ID.eq(new JdbcNamedParameter("caseStepId")),
-				QUALITY_CASESTEPTABLE.CASE_ID.eq(new JdbcNamedParameter("caseId")),
-				QUALITY_CASESTEPTABLE.CASE_VERSION.eq(new JdbcNamedParameter("caseVersion")),
-				QUALITY_CASESTEPTABLE.CASE_STEP_DESC.eq(new JdbcNamedParameter("caseStepDesc")),
-				QUALITY_CASESTEPTABLE.CASE_STEP_EXPECT.eq(new JdbcNamedParameter("caseStepExpect"))));
+				return delete(QUALITY_CASE_STEPTABLE).where(and(
+				QUALITY_CASE_STEPTABLE.CASE_STEP_ID.eq(new JdbcNamedParameter("caseStepId")),
+				QUALITY_CASE_STEPTABLE.CASE_ID.eq(new JdbcNamedParameter("caseId")),
+				QUALITY_CASE_STEPTABLE.CASE_VERSION.eq(new JdbcNamedParameter("caseVersion")),
+				QUALITY_CASE_STEPTABLE.CASE_STEP_DESC.eq(new JdbcNamedParameter("caseStepDesc")),
+				QUALITY_CASE_STEPTABLE.CASE_STEP_EXPECT.eq(new JdbcNamedParameter("caseStepExpect"))));
 			}
 		});
 	}

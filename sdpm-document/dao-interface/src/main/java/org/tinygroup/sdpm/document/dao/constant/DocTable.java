@@ -105,13 +105,6 @@ public class DocTable extends Table {
 	public final Column DOC_URL = new Column(this, "doc_url");
 
 	/** 
-	 * 附件链接
-	 * 
-	 * 附件url，路径
-	 */
-	public final Column ATTACH_URL = new Column(this, "attach_url");
-
-	/** 
 	 * DOC查阅次数
 	 * 
 	 * 查阅次数
@@ -123,28 +116,28 @@ public class DocTable extends Table {
 	 * 
 	 * 由谁添加
 	 */
-	public final Column DOC_ADDEDBY = new Column(this, "doc_addedBy");
+	public final Column DOC_ADDED_BY = new Column(this, "doc_added_by");
 
 	/** 
 	 * DOC添加时间
 	 * 
 	 * 添加时间
 	 */
-	public final Column DOC_ADDEDDATE = new Column(this, "doc_addedDate");
+	public final Column DOC_ADDED_DATE = new Column(this, "doc_added_date");
 
 	/** 
 	 * 由谁编辑
 	 * 
 	 * 由谁编辑
 	 */
-	public final Column DOC_EDITEDBY = new Column(this, "doc_editedBy");
+	public final Column DOC_EDITED_BY = new Column(this, "doc_edited_by");
 
 	/** 
 	 * 文档编辑时间
 	 * 
 	 * 编辑时间
 	 */
-	public final Column DOC_EDITEDDATE = new Column(this, "doc_editedDate");
+	public final Column DOC_EDITED_DATE = new Column(this, "doc_edited_date");
 
 	/** 
 	 * 文档删除标志

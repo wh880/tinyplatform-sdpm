@@ -25,7 +25,7 @@ import org.tinygroup.tinysqldsl.base.Table;
  */
 public class QualityTestTaskTable extends Table {
 
-	public static final QualityTestTaskTable QUALITY_TESTTASKTABLE = new QualityTestTaskTable();
+	public static final QualityTestTaskTable QUALITY_TEST_TASKTABLE = new QualityTestTaskTable();
 
 	/** 
 	 * 测试版本编号
@@ -107,7 +107,7 @@ public class QualityTestTaskTable extends Table {
 
 
 	private QualityTestTaskTable() {
-		super("quality_testTask");
+		super("quality_test_task");
 	}
 
 }

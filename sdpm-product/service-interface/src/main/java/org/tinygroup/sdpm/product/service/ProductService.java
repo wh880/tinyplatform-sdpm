@@ -50,14 +50,14 @@ public interface ProductService {
 	 * @param product
 	 * @return
 	 */
-	List<Product> findProductList(Product product,String columnName,boolean asc);
+	List<Product> findProductList(Product product, String order,String ordertype);
 	
 	/**
 	 * 根据对象查找(排序、分页)
 	 * @param product
 	 * @return
 	 */
-	Pager<Product> findProductPager (int start ,int limit ,Product product, String oeder,String ordertype);
+	Pager<Product> findProductPager (int page ,int limit ,Product product, String order,String ordertype);
 	
 	
 }

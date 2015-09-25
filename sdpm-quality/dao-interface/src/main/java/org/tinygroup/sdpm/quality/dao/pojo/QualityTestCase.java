@@ -26,7 +26,7 @@ import java.util.Date;
 public class QualityTestCase implements Serializable {
 	
 	public static int DELETE_YES = 1;
-	public static int DELETE_NO = 1;
+	public static int DELETE_NO = 0;
 	/** 
 	 * 用例编号
 	 * 

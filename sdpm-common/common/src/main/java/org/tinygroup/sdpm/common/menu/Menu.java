@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by Hulk on 2015/8/27.
  */
 @XStreamAlias("menu")
-public class Menu implements Serializable, Comparable {
+public class Menu implements Serializable, Comparable<Menu> {
     public static String IS_SHOW_YES = "1";
     public static String IS_SHOW_NO = "0";
 
@@ -146,12 +146,9 @@ public class Menu implements Serializable, Comparable {
         this.map = map;
     }
 
-    public int compareTo(Object o) {
-        if (o != null) {
-            Menu menu = (Menu) o;
-            if (menu.getSort() != null) {
-                return menu.getSort() - sort;
-            }
+    public int compareTo(Menu o) {
+        if (o != null && o.getSort() != null) {
+            return o.getSort() - sort;
         }
         return 0;
     }

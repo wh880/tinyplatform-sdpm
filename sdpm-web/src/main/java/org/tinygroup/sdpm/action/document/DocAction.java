@@ -8,21 +8,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tinygroup.sdpm.document.dao.pojo.Doc;
-import org.tinygroup.sdpm.document.dao.pojo.DocLib;
+import org.tinygroup.sdpm.document.dao.pojo.Doclib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.tinysqldsl.Pager;
 
 @Controller
-@RequestMapping(value="/document")
+@RequestMapping(value={"/document","/document/document.page"})
 public class DocAction {
 	@Autowired
 	private DocService docservice;
 	@RequestMapping(value={"","/document"})
-	public String docList(Doc doc,Model model,@RequestParam(required = false, defaultValue = "1") Integer page)
+	public String docIndex(Doc doc,Model model,@RequestParam(required = false, defaultValue = "2") Integer page)
 	{
-		Pager<Doc> docpager = docservice.findDocRetPager(1, page, doc);
+		//list Doc
+		Pager<Doc> docpager = docservice.findDocRetPager(0, page, doc);
+		//list Doclib name
+		//Pager<DocLib> doclibpager = docservice.(1, page, doclib);
 		model.addAttribute("docpager", docpager);
-		return "/document/document";
+		return "/document/document.page";
+	}
+	@RequestMapping(value="/document/datalist")
+	public String docList(Doc doc,Model model)
+	{
+		return "/data/datalist.pagelet";
 	}
 	@RequestMapping(value="/add-doc/add",method=RequestMethod.POST)
 	public String addDoc(Doc doc,Model model)
@@ -32,10 +40,10 @@ public class DocAction {
 		return "redirect:"+"/document/document";
 	}
 	@RequestMapping(value="/add-doclib/add",method=RequestMethod.POST)
-	public String addDocLib(DocLib doclib,Model model)
+	public String addDocLib(Doclib doclib,Model model)
 	{
 		docservice.createNewDocLib(doclib);
-		return "redirect:"+"/document/document";
+		return "redirect:"+"/document/document.page";
 	}
 	@RequestMapping(value="/delete/doc/{docid}",method=RequestMethod.DELETE)
 	public String delDoc(@PathVariable Integer docid)
