@@ -28,13 +28,16 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
@@ -44,10 +47,20 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @Repository
 public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 
+
 	public Pager<Project> querytAll(int start, int limit, final OrderBy... orderBies) {
-		return getDslTemplate().queryPager(start, limit, null, false, new SelectGenerateCallback<Project>() {
+
+		Project project = new Project();
+
+		return getDslTemplate().queryPager(start, limit, project, false, new SelectGenerateCallback<Project>() {
 			public Select generate(Project t) {
-				Select select = MysqlSelect.selectFrom(PROJECTTABLE);
+				Select select = MysqlSelect.select(PROJECTTABLE.ALL,
+						FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent"))
+						.from(PROJECTTABLE).join(
+								Join.leftJoin(PROJECT_TASKTABLE,
+										PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
+						.groupBy(PROJECTTABLE.PROJECT_ID);
+
 				return addOrderByElements(select, orderBies);
 			}
 		});
