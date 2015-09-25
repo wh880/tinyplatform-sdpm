@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 //import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.dao.pojo.Doc;
-import org.tinygroup.sdpm.document.dao.pojo.DocLib;
+import org.tinygroup.sdpm.document.dao.pojo.Doclib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -29,7 +29,7 @@ public class DocServiceImpl implements DocService{
 		return docbiz.addDoc(doc);
 	}
 
-	public DocLib createNewDocLib(DocLib doclib) {
+	public Doclib createNewDocLib(Doclib doclib) {
 		// 
 		return docbiz.addDocLib(doclib);
 	}
@@ -39,7 +39,7 @@ public class DocServiceImpl implements DocService{
 		return docbiz.updtDoc(doc);
 	}
 
-	public int editDocLibName(DocLib doclib) {
+	public int editDocLibName(Doclib doclib) {
 		// 
 		return docbiz.updtDocLib(doclib);
 	}
@@ -49,7 +49,7 @@ public class DocServiceImpl implements DocService{
 		return docbiz.getDocById(id);
 	}
 
-	public DocLib findDoclibById(Integer id) {
+	public Doclib findDoclibById(Integer id) {
 		// 
 		return docbiz.getDocLibById(id);
 	}
