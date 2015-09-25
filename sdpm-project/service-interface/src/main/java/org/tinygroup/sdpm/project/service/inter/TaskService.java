@@ -44,7 +44,7 @@ public interface TaskService {
      * @param sortName
      * @return
      */
-    public Pager<ProjectTask> findPagerTask(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc);
+    public Pager<ProjectTask> findPagerTask(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condition, String group);
 
     /**
      * 根据taskId主键查询

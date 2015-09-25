@@ -17,8 +17,11 @@
 package org.tinygroup.sdpm.project.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
+    public Pager<ProjectTask> queryPagerByStuta(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderBies);
 
 }
