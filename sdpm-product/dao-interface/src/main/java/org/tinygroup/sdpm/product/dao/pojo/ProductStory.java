@@ -23,10 +23,10 @@ import java.util.Date;
  * 需求表
  * 
  */
-public class ProductStory implements Serializable {
-	
-	public static int DELETE_YES = 1;
-    public static int DELETE_NO = 0;
+public class ProductStory  implements Serializable{
+
+
+
 
 	/** 
 	 * 需求ID

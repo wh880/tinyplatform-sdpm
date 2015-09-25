@@ -29,7 +29,7 @@ public class UserAction extends BaseController {
             OrgUser user = userService.findUser(id);
             model.addAttribute("user", user);
         }
-        return "organization/common/addUser.page";
+        return "organization/user/addUser.page";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)

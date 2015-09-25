@@ -18,13 +18,9 @@ public class CompanyAction extends BaseController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(OrgCompany company, Model model) {
-        if (company.getOrgCompanyId() == null) {
-            companyService.addCompany(company);
-        } else {
-            companyService.updateCompany(company);
-        }
+        companyService.updateCompany(company);
         model.addAttribute("company", company);
-        return "organization/company/updateCompany.page";
+        return "redirect:/org/company/show/";
     }
 
     @RequestMapping("/show")
@@ -32,6 +28,13 @@ public class CompanyAction extends BaseController {
         OrgCompany company = companyService.findCompany(1);
         model.addAttribute("company", company);
         return "organization/company/company.page";
+    }
+
+    @RequestMapping("/edit")
+    public String edit(Model model) {
+        OrgCompany company = companyService.findCompany(1);
+        model.addAttribute("company", company);
+        return "organization/company/updateCompany.pagelet";
     }
 
 }

@@ -41,23 +41,17 @@ public class BugAction extends BaseController {
 	}
 	
 	@RequestMapping("/findBug")
-	public String findBugPager(Integer start,Integer limit,String order,String ordertype,Integer id,Model model){
+	public String findBugPager(Integer start,Integer limit,String order,String ordertype,Integer id,QualityBug bug,Model model){
 		boolean asc = true;		
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
-		QualityBug bug = new QualityBug();
+		//QualityBug bug = new QualityBug();
 		bug.setProductId(id);
 		Pager<QualityBug> bugpager = bugService.findBugListPager(start, limit, bug, order, asc);
 		model.addAttribute("bugpager",bugpager);
 		return "testManagement/data/BugData.pagelet";
 	}
-	
-	/*@RequestMapping("/makesure")
-	public String makesure(Integer id,Model model){
-		
-		return "";
-	}*/
 	
 	/*@RequestMapping("add")
 	public String add(Bug bug,Model model){

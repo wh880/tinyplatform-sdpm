@@ -7,9 +7,9 @@
 #set(name="client")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-    #* #@div(divClass="dropdownBox dropdownBoxes")
-         #include("/service/serviceCom/dropdownMenu.page")
-     #end*#
+       #* #@div(divClass="dropdownBox dropdownBoxes")
+            #include("/service/serviceCom/dropdownMenu.page")
+        #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
@@ -21,53 +21,54 @@
                     #@colLabel("col-4")客户名称：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
-                        <p>${client.clientName}</p>
+                        <p>恒生电子</p>
                     #end
-                #end
-                #@gridSysRow()
                     #@colLabel("col-4")客户编号：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
-                        <p>${client.clientNO}</p>
+                        <p>10088</p>
                     #end
-                #end
-                #@gridSysRow()
+                ##                    #@colLabel("col-4")公司联系人：#end
+                ##                    #@gridSysCol(1)#end
+                ##                    #@gridSysCol(7)
+                ##                        <p>习近平</p>
+                ##                    #end
+                ##                    #@colLabel("col-4")联系人电话：#end
+                ##                    #@gridSysCol(1)#end
+                ##                    #@gridSysCol(7)
+                ##                        <p>13615263726</p>
+                ##                    #end
                     #@colLabel("col-4")客户部门：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
-                        <p>${client.clientDeptId}</p>
+                        <p>银行部</p>
                     #end
-                #end
-                #@gridSysRow()
                     #@colLabel("col-4")客户登记人：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
-                        <p>${client.clientCreatedBy}</p>
+                        <p>明明</p>
                     #end
-                #end
-                #@gridSysRow()
                     #@colLabel("col-4")客户登记时间：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
-                        <p>#if(client.clientCreateDate)${formatDate(client.clientCreateDate,"yyyy-MM-dd")}#end</p>
+                        <p>2015-8-1</p>
                     #end
-                #end
-                #@gridSysRow()
                     #@colLabel("col-4")客户描述：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
-                        <p>${client.clientSpec}</p>
+                        <p>客户经营金融业务，前景广阔。</p>
                     #end
-                #end
-                #@gridSysRow()
                     #@colLabel("col-4")客户状态：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
-                        <p>${client.clientStatus}</p>
+                        <p>正常</p>
                     #end
                 #end
             #end
             <div style="text-align:right;margin:right">
+                #*#@aModal("#myModal1" "编辑" "600" "348" "btn radius btn-primary btn-sm"
+                    "/service/client/companyInfoEdit.pagelet")编辑
+                #end*#
                 #@aExtendButton("btn-primary btn-sm" "../client/clientAdd.page")编辑#end
                 #@delItemsdpm("#action" "id" "/service/client/clientUser.page" {"class":"btn radius btn-danger btn-sm"})
                     删除#end
@@ -97,8 +98,7 @@
                             #end
                         #end
                         #foreach(m:menuManager.getScopeMenus("linkman-cil"))
-                            <a href="${TINY_CONTEXT_PATH}${m.href}"
-                               title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                            <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                         #end
                         #set(m2=menuManager.getMenu("linkman-new"))
                         #if(m2)

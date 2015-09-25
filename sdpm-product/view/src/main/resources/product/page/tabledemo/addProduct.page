@@ -12,6 +12,7 @@
 #end
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/save" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/save" "" {"class":""})
 <div style="width:100%;float:center" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">添加产品</p>
@@ -94,24 +95,41 @@
         #@elementItem()
             #@colLabel()访问控制：#end
             #@skinMinimal("col-8")
-                    #labelRadio1Sty(rId="aclopen" rName="acl" rValue="0" labelText="默认设置(有项目视图权限，即可访问)" "setWhite(this.value);" rChecked="checked")</br>
-                    #labelRadio1Sty(rId="aclprivate" rName="acl" rValue="2" labelText="私有项目(只有项目团队成员才能访问)" "setWhite(this.value);")</br>
-                    #labelRadio1Sty(rId="aclcustom" rName="acl" rValue="1" labelText="自定义白名单(团队成员和白名单的成员可以访问)" "setWhite(this.value);")</br>
 
+			<div>#@tinyRadio("acl" "0" "" {"checked":"checked","onclick":"setWhite(this.value)"}) 默认设置(有项目视图权限，即可访问) #end</div>
+        	<div>#@tinyRadio("acl" "2" "" {"onclick":"setWhite(this.value)"}) 私有项目(只有项目团队成员才能访问) #end</div>
+        	<div>#@tinyRadio("acl" "1" "" {"onclick":"setWhite(this.value)"}) 自定义白名单(团队成员和白名单的成员可以访问) #end</div>
+			
+			#@Tradioes("acl" "0" {"onclick":"setWhite(this.value)"})
+       			<div>#@Tradio("0") 默认设置(有项目视图权限，即可访问)#end</div>
+       			<div>#@Tradio("2") 私有项目(只有项目团队成员才能访问)#end</div>
+       			<div>#@Tradio("1") 自定义白名单(团队成员和白名单的成员可以访问)#end</div>
+       		#end
             #end
             #@validateDiv("col-2")#end
         #end
         #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
             #@colLabel()分组白名单#end
             #@skinMinimal("col-8")
-                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="管理员")
-                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="研发")
-                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="测试")
-                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="项目经理")
-                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="产品经理")
-                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="研发主管")
-                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="产品主管")
-                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="测试主管")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="管理员" ckValue="admin")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="研发" ckValue="develop")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="测试" ckValue="test")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="项目经理" ckValue="projectManager")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="产品经理" ckValue="productManager")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="研发主管" ckValue="developSupervisor")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="产品主管" ckValue="productSupervisor")
+                #labelCheckbox(ckId="whitelistBox" ckName="productWhiteList" labelText="测试主管" ckValue="testSupervisor")
+            	#@Tcheckboxes("productWhiteList" "")
+					#@Tcheckbox("admin")管理员#end
+					#@Tcheckbox("develop")研发#end
+					#@Tcheckbox("test")测试#end
+					#@Tcheckbox("projectManager")项目经理#end
+					#@Tcheckbox("productManager")产品经理#end
+					#@Tcheckbox("developSupervisor")研发主管#end
+					#@Tcheckbox("productSupervisor")产品主管#end
+					#@Tcheckbox("testSupervisor")测试主管#end
+				#end 
+             
             #end
             #@validateDiv("col-2")#end
         #end

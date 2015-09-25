@@ -8,26 +8,20 @@ import org.tinygroup.convert.objectxml.xstream.ObjectToXml;
 import org.tinygroup.sdpm.common.util.sql.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Controller
 @RequestMapping("product/story")
 public class StoryAction {
     @Autowired
     private StoryService storyService;
-    @Autowired
-    private ProductService productService;
     @RequestMapping("")
     public String storyAction(ProductStory story, String groupOperate, Model model,HttpServletResponse response){
-        List productList = productService.findProductList(new Product(),"product_created_date",false);
-        model.addAttribute("productList",productList);
         model.addAttribute("storyStatus",story.getStoryStatus());
         return "product/page/project/togglebox.page";
     }

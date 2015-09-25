@@ -37,36 +37,36 @@
             <version>${tiny_ui_version}</version>
         </dependency>
 		<!--皮肤 start-->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.frameTplClean</artifactId>
+			<artifactId>org.tinygroup.frameTplDark</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.frameTplAdminflare</artifactId>
+			<artifactId>org.tinygroup.frameTplDeepblue</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.frameTplWhite</artifactId>
+			<artifactId>org.tinygroup.frameTplFashion</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.frameTplSilver</artifactId>
+			<artifactId>org.tinygroup.frameTplBlack</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.frameTplFresh</artifactId>
+			<artifactId>org.tinygroup.frameTplGreenyellow</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.frameTplDust</artifactId>
+			<artifactId>org.tinygroup.frameTplOrange</artifactId>
 			<version>${tiny_ui_version}</version>
-		</dependency>
+		</dependency> -->
 		<!--皮肤 end-->
         <dependency>
             <groupId>org.tinygroup</groupId>

@@ -5,11 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+//import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.dao.pojo.Doc;
 import org.tinygroup.sdpm.document.dao.pojo.DocLib;
-import org.tinygroup.sdpm.document.dao.pojo.Historydoc;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -53,16 +52,6 @@ public class DocServiceImpl implements DocService{
 	public DocLib findDoclibById(Integer id) {
 		// 
 		return docbiz.getDocLibById(id);
-	}
-	
-	public List<Historydoc> getEditRecord(Integer docid)
-	{
-		//获取历史记录
-		//取数据
-		//List<Historydoc> list = docbiz.docHistory(docid);
-		//for(int i=list.size();i>=0;i--){
-		//list.get(i).getRecTime();list.get(i).getRecWho();}
-		return docbiz.docHistory(docid);
 	}
 
 	public List<Doc> findDocByDocClass(Doc doc) {
