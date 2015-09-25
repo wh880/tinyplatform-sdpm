@@ -29,33 +29,29 @@ public class ModuleAction extends BaseController{
 //	}
 	@ResponseBody
 	@RequestMapping("tree")
-	public List<Map<String,Object>> ajax(HttpServletResponse response){
-		  response.setContentType("application/json; charset=UTF-8");
-		  List<Map<String, Object>> mapList = Lists.newArrayList();
-	     String[] title = {"花湖", "哈哈", "可以", "这是"};
-	     SystemModule systemModule = new SystemModule();
-	     for (int i = 1; i < 5; i++) {
-	            Map<String, Object> mapTop = Maps.newHashMap();
-	            mapTop.put("id", "p" + i);
-	            mapTop.put("pId", 0);
-	            mapTop.put("open", true);
-	            mapTop.put("isParent", true);
-	            mapTop.put("name", title[i - 1]);
-	            mapList.add(mapTop);
-	          
-	            systemModule.setModuleId(i);
-	            List<SystemModule> list = moduleService.findModules(systemModule);
-	            for (SystemModule s : list) {
-	                Map<String, Object> map = Maps.newHashMap();
-	                map.put("id", s.getModuleId());
-	                map.put("pId", "p" + i);
-	                map.put("name", s.getModuleName());
-	                mapList.add(map);
-	            }
-	        }
-	        return mapList;
-		
+	public List<Map<String,Object>> ajax(SystemModule systemModule,HttpServletResponse response){
+		response.setContentType("application/json; charset=UTF-8");
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		List<SystemModule> list = moduleService.findModules(systemModule);
+		mergeModule(list,mapList,0);
+		return mapList;
 	}
 	
 
+	private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, int parent){
+		for(SystemModule systemModule : systemModules){
+			if(systemModule.getModuleParent() == parent){
+				int size = maps.size();
+				Map<String, Object> mapTop = Maps.newHashMap();
+				mapTop.put("id", "p" + systemModule.getModuleId());
+				mapTop.put("pId", parent!=0?"p"+parent:parent);
+				mapTop.put("open", true);
+				mergeModule(systemModules,maps,systemModule.getModuleId());
+				mapTop.put("isParent", maps.size()>size?true:false);
+				mapTop.put("name",systemModule.getModuleName());
+				maps.add(mapTop);
+//				systemModules.remove(i);
+			}
+		}
+	}
 }
