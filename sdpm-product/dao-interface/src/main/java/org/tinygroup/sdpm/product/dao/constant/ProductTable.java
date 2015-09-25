@@ -110,25 +110,25 @@ public class ProductTable extends Table {
 	 * 白名单
 	 * 
 	 */
-	public final Column PRODUCT_WHITE_LIST = new Column(this, "product_white_list");
+	public final Column PRODUCT_WHITELIST = new Column(this, "product_whiteList");
 
 	/** 
 	 * 创建者
 	 * 
 	 */
-	public final Column PRODUCT_CREATED_BY = new Column(this, "product_created_by");
+	public final Column PRODUCT_CREATEDBY = new Column(this, "product_createdBy");
 
 	/** 
 	 * 创建日期
 	 * 
 	 */
-	public final Column PRODUCT_CREATED_DATE = new Column(this, "product_created_date");
+	public final Column PRODUCT_CREATEDDATE = new Column(this, "product_createdDate");
 
 	/** 
 	 * 创建版本
 	 * 
 	 */
-	public final Column PRODUCT_CREATED_VERSION = new Column(this, "product_created_version");
+	public final Column PRODUCT_CREATEDVERSION = new Column(this, "product_createdVersion");
 
 	/** 
 	 * 已删除

@@ -32,7 +32,7 @@ public class PlanManagerImpl implements PlanManager{
 		
 		ProductPlan plan = new ProductPlan();
 		plan.setPlanId(planId);
-		plan.setDeleted(FieldUtil.DELETE_YES);
+		plan.setDeleted(ProductPlan.DELETE_YES);
 		return productPlanDao.edit(plan);
 	}
 

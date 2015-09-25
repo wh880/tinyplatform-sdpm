@@ -27,7 +27,7 @@
     <table-field standard-field-id="c995bd2c65d44022803b93c42e68dd78" primary="false" unique="false" not-null="false" id="product_whiteList" auto-increase="false"/>
     <table-field standard-field-id="c7e8356f9bea4a26801fcc5bc3eddbff" primary="false" unique="false" not-null="false" id="product_createdBy" auto-increase="false"/>
     <table-field standard-field-id="c97bbba549674da3bf7688b351ed34b9" primary="false" unique="false" not-null="false" id="product_createdDate" auto-increase="false"/>
-    <table-field standard-field-id="b9c09ba271a74c9d991fbb38373025c2" primary="false" unique="false" not-null="false" id="product_created_version" auto-increase="false"/>
+    <table-field standard-field-id="b9c09ba271a74c9d991fbb38373025c2" primary="false" unique="false" not-null="false" id="product_createdVersion" auto-increase="false"/>
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
   </table>
   <table id="16f7307880c149aa89b5f3dc7cc18dcc" name="product_story" title="需求表" package-name="">

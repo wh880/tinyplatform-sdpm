@@ -24,26 +24,9 @@ public class ProductAction {
 
 	@RequestMapping("/save")
 	public String save(Product product, Model model) {
-		
 		productService.addProduct(product);
 		return "/product/page/tabledemo/product-listall.page";
 
-	}
-	
-	@RequestMapping("/update")
-	public String update(Product product){
-
-		productService.updateProduct(product);
-		
-		return "/product/page/tabledemo/product-listall.page";
-	}
-	
-	@RequestMapping("/find")
-	public String find(Integer productId,Model model){
-		
-		Product product = productService.findProduct(productId);
-		model.addAttribute("product", product);
-		return "/product/page/tabledemo/product-module-editor.page";
 	}
 
 	@RequestMapping("/list")

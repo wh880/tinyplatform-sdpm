@@ -38,6 +38,8 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -49,9 +51,11 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+@LogClass("product")
 @Repository
 public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 
+@LogMethod("add")
 	public Product add(Product product) {
 		return getDslTemplate().insertAndReturnKey(product, new InsertGenerateCallback<Product>() {
 			public Insert generate(Product t) {
@@ -69,16 +73,17 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 					PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.value(t.getProductQualityManager()),
 					PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.value(t.getProductDeliveryManager()),
 					PRODUCTTABLE.ACL.value(t.getAcl()),
-					PRODUCTTABLE.PRODUCT_WHITE_LIST.value(t.getProductWhiteList()),
-					PRODUCTTABLE.PRODUCT_CREATED_BY.value(t.getProductCreatedBy()),
-					PRODUCTTABLE.PRODUCT_CREATED_DATE.value(t.getProductCreatedDate()),
-					PRODUCTTABLE.PRODUCT_CREATED_VERSION.value(t.getProductCreatedVersion()),
+					PRODUCTTABLE.PRODUCT_WHITELIST.value(t.getProductWhiteList()),
+					PRODUCTTABLE.PRODUCT_CREATEDBY.value(t.getProductCreatedBy()),
+					PRODUCTTABLE.PRODUCT_CREATEDDATE.value(t.getProductCreatedDate()),
+					PRODUCTTABLE.PRODUCT_CREATEDVERSION.value(t.getProductCreatedVersion()),
 					PRODUCTTABLE.DELETED.value(t.getDeleted()));
 				return insert;
 			}
 		});
 	}
 
+@LogMethod("edit")
 	public int edit(Product product) {
 		if(product == null || product.getProductId() == null){
 			return 0;
@@ -98,10 +103,10 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 					PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.value(t.getProductQualityManager()),
 					PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.value(t.getProductDeliveryManager()),
 					PRODUCTTABLE.ACL.value(t.getAcl()),
-					PRODUCTTABLE.PRODUCT_WHITE_LIST.value(t.getProductWhiteList()),
-					PRODUCTTABLE.PRODUCT_CREATED_BY.value(t.getProductCreatedBy()),
-					PRODUCTTABLE.PRODUCT_CREATED_DATE.value(t.getProductCreatedDate()),
-					PRODUCTTABLE.PRODUCT_CREATED_VERSION.value(t.getProductCreatedVersion()),
+					PRODUCTTABLE.PRODUCT_WHITELIST.value(t.getProductWhiteList()),
+					PRODUCTTABLE.PRODUCT_CREATEDBY.value(t.getProductCreatedBy()),
+					PRODUCTTABLE.PRODUCT_CREATEDDATE.value(t.getProductCreatedDate()),
+					PRODUCTTABLE.PRODUCT_CREATEDVERSION.value(t.getProductCreatedVersion()),
 					PRODUCTTABLE.DELETED.value(t.getDeleted())).where(
 					PRODUCTTABLE.PRODUCT_ID.eq(t.getProductId()));
 				return update;
@@ -109,6 +114,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		});
 	}
 
+@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -120,6 +126,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		});
 	}
 
+@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -140,7 +147,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		});
 	}
 
-	public List<Product> query(Product product ,final OrderBy... orderArgs) {
+	public List<Product> query(Product product ,final OrderBy... orderBies) {
 		if(product==null){
 			product=new Product();
 		}
@@ -162,17 +169,17 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 					PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(t.getProductQualityManager()),
 					PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(t.getProductDeliveryManager()),
 					PRODUCTTABLE.ACL.eq(t.getAcl()),
-					PRODUCTTABLE.PRODUCT_WHITE_LIST.eq(t.getProductWhiteList()),
-					PRODUCTTABLE.PRODUCT_CREATED_BY.eq(t.getProductCreatedBy()),
-					PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(t.getProductCreatedDate()),
-					PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(t.getProductCreatedVersion()),
+					PRODUCTTABLE.PRODUCT_WHITELIST.eq(t.getProductWhiteList()),
+					PRODUCTTABLE.PRODUCT_CREATEDBY.eq(t.getProductCreatedBy()),
+					PRODUCTTABLE.PRODUCT_CREATEDDATE.eq(t.getProductCreatedDate()),
+					PRODUCTTABLE.PRODUCT_CREATEDVERSION.eq(t.getProductCreatedVersion()),
 					PRODUCTTABLE.DELETED.eq(t.getDeleted())));
-			return addOrderByElements(select, orderArgs);
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<Product> queryPager(int start,int limit ,Product product ,final OrderBy... orderArgs) {
+	public Pager<Product> queryPager(int start,int limit ,Product product ,final OrderBy... orderBies) {
 		if(product==null){
 			product=new Product();
 		}
@@ -193,12 +200,12 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 					PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(t.getProductQualityManager()),
 					PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(t.getProductDeliveryManager()),
 					PRODUCTTABLE.ACL.eq(t.getAcl()),
-					PRODUCTTABLE.PRODUCT_WHITE_LIST.eq(t.getProductWhiteList()),
-					PRODUCTTABLE.PRODUCT_CREATED_BY.eq(t.getProductCreatedBy()),
-					PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(t.getProductCreatedDate()),
-					PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(t.getProductCreatedVersion()),
+					PRODUCTTABLE.PRODUCT_WHITELIST.eq(t.getProductWhiteList()),
+					PRODUCTTABLE.PRODUCT_CREATEDBY.eq(t.getProductCreatedBy()),
+					PRODUCTTABLE.PRODUCT_CREATEDDATE.eq(t.getProductCreatedDate()),
+					PRODUCTTABLE.PRODUCT_CREATEDVERSION.eq(t.getProductCreatedVersion()),
 					PRODUCTTABLE.DELETED.eq(t.getDeleted())));
-			return addOrderByElements(select, orderArgs);
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -223,10 +230,10 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 					PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.value(new JdbcNamedParameter("productQualityManager")),
 					PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.value(new JdbcNamedParameter("productDeliveryManager")),
 					PRODUCTTABLE.ACL.value(new JdbcNamedParameter("acl")),
-					PRODUCTTABLE.PRODUCT_WHITE_LIST.value(new JdbcNamedParameter("productWhiteList")),
-					PRODUCTTABLE.PRODUCT_CREATED_BY.value(new JdbcNamedParameter("productCreatedBy")),
-					PRODUCTTABLE.PRODUCT_CREATED_DATE.value(new JdbcNamedParameter("productCreatedDate")),
-					PRODUCTTABLE.PRODUCT_CREATED_VERSION.value(new JdbcNamedParameter("productCreatedVersion")),
+					PRODUCTTABLE.PRODUCT_WHITELIST.value(new JdbcNamedParameter("productWhiteList")),
+					PRODUCTTABLE.PRODUCT_CREATEDBY.value(new JdbcNamedParameter("productCreatedBy")),
+					PRODUCTTABLE.PRODUCT_CREATEDDATE.value(new JdbcNamedParameter("productCreatedDate")),
+					PRODUCTTABLE.PRODUCT_CREATEDVERSION.value(new JdbcNamedParameter("productCreatedVersion")),
 					PRODUCTTABLE.DELETED.value(new JdbcNamedParameter("deleted")));
 			}
 		});
@@ -236,6 +243,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 			return batchInsert(true ,products);
 	}
 
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<Product> products) {
 		if (CollectionUtil.isEmpty(products)) {
 			return new int[0];
@@ -256,16 +264,17 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 					PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.value(new JdbcNamedParameter("productQualityManager")),
 					PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.value(new JdbcNamedParameter("productDeliveryManager")),
 					PRODUCTTABLE.ACL.value(new JdbcNamedParameter("acl")),
-					PRODUCTTABLE.PRODUCT_WHITE_LIST.value(new JdbcNamedParameter("productWhiteList")),
-					PRODUCTTABLE.PRODUCT_CREATED_BY.value(new JdbcNamedParameter("productCreatedBy")),
-					PRODUCTTABLE.PRODUCT_CREATED_DATE.value(new JdbcNamedParameter("productCreatedDate")),
-					PRODUCTTABLE.PRODUCT_CREATED_VERSION.value(new JdbcNamedParameter("productCreatedVersion")),
+					PRODUCTTABLE.PRODUCT_WHITELIST.value(new JdbcNamedParameter("productWhiteList")),
+					PRODUCTTABLE.PRODUCT_CREATEDBY.value(new JdbcNamedParameter("productCreatedBy")),
+					PRODUCTTABLE.PRODUCT_CREATEDDATE.value(new JdbcNamedParameter("productCreatedDate")),
+					PRODUCTTABLE.PRODUCT_CREATEDVERSION.value(new JdbcNamedParameter("productCreatedVersion")),
 					PRODUCTTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
 				PRODUCTTABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId")));
 			}
 		});
 	}
 
+@LogMethod("batchDelete")
 	public int[] batchDelete(List<Product> products) {
 		if (CollectionUtil.isEmpty(products)) {
 			return new int[0];
@@ -287,15 +296,16 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 				PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(new JdbcNamedParameter("productQualityManager")),
 				PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(new JdbcNamedParameter("productDeliveryManager")),
 				PRODUCTTABLE.ACL.eq(new JdbcNamedParameter("acl")),
-				PRODUCTTABLE.PRODUCT_WHITE_LIST.eq(new JdbcNamedParameter("productWhiteList")),
-				PRODUCTTABLE.PRODUCT_CREATED_BY.eq(new JdbcNamedParameter("productCreatedBy")),
-				PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(new JdbcNamedParameter("productCreatedDate")),
-				PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(new JdbcNamedParameter("productCreatedVersion")),
+				PRODUCTTABLE.PRODUCT_WHITELIST.eq(new JdbcNamedParameter("productWhiteList")),
+				PRODUCTTABLE.PRODUCT_CREATEDBY.eq(new JdbcNamedParameter("productCreatedBy")),
+				PRODUCTTABLE.PRODUCT_CREATEDDATE.eq(new JdbcNamedParameter("productCreatedDate")),
+				PRODUCTTABLE.PRODUCT_CREATEDVERSION.eq(new JdbcNamedParameter("productCreatedVersion")),
 				PRODUCTTABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
 			}
 		});
 	}
 
+@LogMethod("addOrderByElements")
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {

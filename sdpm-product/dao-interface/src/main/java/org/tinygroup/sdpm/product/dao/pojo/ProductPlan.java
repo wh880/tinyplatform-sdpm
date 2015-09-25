@@ -23,7 +23,11 @@ import java.util.Date;
  * 计划表
  * 
  */
+public class ProductPlan {
 public class ProductPlan  implements Serializable{
+
+
+
 
 	/** 
 	 * 计划ID

@@ -61,13 +61,13 @@ public class ProductPlanTable extends Table {
 	 * 计划开始时间
 	 * 
 	 */
-	public final Column PLAN_BEGIN_DATE = new Column(this, "plan_begin_date");
+	public final Column PLAN_BEGINDATE = new Column(this, "plan_beginDate");
 
 	/** 
 	 * 计划结束时间
 	 * 
 	 */
-	public final Column PLAN_END_DATE = new Column(this, "plan_end_date");
+	public final Column PLAN_ENDDATE = new Column(this, "plan_endDate");
 
 	/** 
 	 * 已删除

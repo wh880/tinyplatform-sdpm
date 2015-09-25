@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.product.biz.impl;
 
 import java.util.List;
+
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,10 @@ public class ProductManagerImpl implements ProductManager{
 	
 	public Product add(Product product) {
 		
+		if(1==product.getAcl()){
+			product.setProductWhiteList("");
+		}
+		
 		if(1!=product.getAcl()){
 			product.setProductWhiteList("");
 		}
@@ -28,6 +33,9 @@ public class ProductManagerImpl implements ProductManager{
 	}
 
 	public int update(Product product) {
+		if(1==product.getAcl()){
+			product.setProductWhiteList("");
+		}
 		if(1!=product.getAcl()){
 			product.setProductWhiteList("");
 		}

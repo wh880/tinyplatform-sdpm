@@ -38,6 +38,8 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -49,9 +51,11 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
+@LogClass("productRelease")
 @Repository
 public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductReleaseDao {
 
+	@LogMethod("add")
 	public ProductRelease add(ProductRelease productRelease) {
 		return getDslTemplate().insertAndReturnKey(productRelease, new InsertGenerateCallback<ProductRelease>() {
 			public Insert generate(ProductRelease t) {
@@ -69,7 +73,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 			}
 		});
 	}
-
+@LogMethod("edit")
 	public int edit(ProductRelease productRelease) {
 		if(productRelease == null || productRelease.getReleaseId() == null){
 			return 0;
@@ -90,7 +94,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 			}
 		});
 	}
-
+@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -101,7 +105,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 			}
 		});
 	}
-
+@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -122,7 +126,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 		});
 	}
 
-	public List<ProductRelease> query(ProductRelease productRelease ,final OrderBy... orderArgs) {
+	public List<ProductRelease> query(ProductRelease productRelease ,final OrderBy... orderBies) {
 		if(productRelease==null){
 			productRelease=new ProductRelease();
 		}
@@ -140,12 +144,12 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 					PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(t.getReleaseBugs()),
 					PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t.getReleaseDesc()),
 					PRODUCT_RELEASETABLE.DELETED.eq(t.getDeleted())));
-			return addOrderByElements(select, orderArgs);
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<ProductRelease> queryPager(int start,int limit ,ProductRelease productRelease ,final OrderBy... orderArgs) {
+	public Pager<ProductRelease> queryPager(int start,int limit ,ProductRelease productRelease ,final OrderBy... orderBies) {
 		if(productRelease==null){
 			productRelease=new ProductRelease();
 		}
@@ -162,7 +166,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 					PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(t.getReleaseBugs()),
 					PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t.getReleaseDesc()),
 					PRODUCT_RELEASETABLE.DELETED.eq(t.getDeleted())));
-			return addOrderByElements(select, orderArgs);
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}
@@ -191,6 +195,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 			return batchInsert(true ,productReleases);
 	}
 
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<ProductRelease> productReleases) {
 		if (CollectionUtil.isEmpty(productReleases)) {
 			return new int[0];
@@ -212,6 +217,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 		});
 	}
 
+	@LogMethod("batchDelete")
 	public int[] batchDelete(List<ProductRelease> productReleases) {
 		if (CollectionUtil.isEmpty(productReleases)) {
 			return new int[0];
@@ -233,6 +239,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 		});
 	}
 
+	@LogMethod("addOrderByElements")
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
