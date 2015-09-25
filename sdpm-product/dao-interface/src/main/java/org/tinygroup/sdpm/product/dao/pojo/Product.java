@@ -25,9 +25,6 @@ import java.util.Date;
  */
 public class Product implements Serializable{
 
-
-
-
 	/** 
 	 * 产品ID
 	 * 

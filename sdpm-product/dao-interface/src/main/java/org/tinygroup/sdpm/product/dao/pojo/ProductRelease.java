@@ -23,10 +23,7 @@ import java.util.Date;
  * 发布表
  * 
  */
-public class ProductRelease  implements Serializable{
-
-
-
+public class ProductRelease implements Serializable{
 
 	/** 
 	 * 发布ID
