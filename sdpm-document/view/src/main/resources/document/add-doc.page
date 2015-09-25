@@ -12,7 +12,7 @@
 	#end
 #end
 #include("doc-tab.page")
-#@tinyForm("thisform" "url" "post" {"class":""})
+#@tinyForm("thisform" "${TINY_CONTEXT_PATH}/document/add-doc/add" "post" {"class":"add"})
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">创建文档</p>
