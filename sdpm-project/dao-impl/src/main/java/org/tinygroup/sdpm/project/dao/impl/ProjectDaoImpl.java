@@ -43,6 +43,16 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @LogClass("project")
 @Repository
 public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
+
+	public Pager<Project> querytAll(int start, int limit, final OrderBy... orderBies) {
+		return getDslTemplate().queryPager(start, limit, null, false, new SelectGenerateCallback<Project>() {
+			public Select generate(Project t) {
+				Select select = MysqlSelect.selectFrom(PROJECTTABLE);
+				return addOrderByElements(select, orderBies);
+			}
+		});
+	}
+
 	@LogMethod("add")
 	public Project add(Project project) {
 		return getDslTemplate().insertAndReturnKey(project, new InsertGenerateCallback<Project>() {

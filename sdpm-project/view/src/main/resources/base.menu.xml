@@ -33,7 +33,7 @@
 
         <menu id="protab"  name="项目" href="/project/task/index.page" icon="" sort="1" isShow="1">
 
-            <menu id="project-op-all" name="所有项目" href="/project/allProject.page" icon="icon-list" sort="1" isShow="1"
+            <menu id="project-op-all" name="所有项目" href="/project/findProjects" icon="icon-list" sort="1" isShow="1"
                   scope="project-op"/>
             <menu id="project-op-add" name="添加项目" href="/project/addProject.page" icon="icon-plus" sort="1" isShow="1"
                   scope="project-op"/>

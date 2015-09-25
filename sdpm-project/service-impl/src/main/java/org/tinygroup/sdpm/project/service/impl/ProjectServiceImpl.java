@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -36,5 +37,10 @@ public class ProjectServiceImpl implements ProjectService {
 
     public List<Project> findByProjectList(List<Integer> list) {
         return null;
+    }
+
+    public Pager<Project> findProjects(Integer start, Integer limit, String order, String ordertype) {
+
+        return projectManager.findPagerProjects(start, limit, order, "asc".equals(ordertype) ? true : false);
     }
 }

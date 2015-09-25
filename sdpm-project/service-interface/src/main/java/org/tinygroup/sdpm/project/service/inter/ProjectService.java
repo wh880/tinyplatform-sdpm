@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.service.inter;
 
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -30,6 +31,17 @@ public interface ProjectService {
      * @return
      */
     public Project findByName(String projectName);
+
+    /**
+     * 查询所有项目
+     *
+     * @param start
+     * @param limit
+     * @param ordertype
+     * @param order
+     * @return
+     */
+    public Pager<Project> findProjects(Integer start, Integer limit, String order, String ordertype);
 
     /**
      * 根据项目id查找
