@@ -20,8 +20,11 @@
     ##body end
     #end
 #end
-#@tinyForm("thisform" "" "" {"class":"test"})
-
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/save" "post" {"class":"test"})
+    #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
+    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
+    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
+    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
 
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
