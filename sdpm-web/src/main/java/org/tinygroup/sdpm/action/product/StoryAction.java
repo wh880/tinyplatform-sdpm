@@ -25,7 +25,7 @@ public class StoryAction {
     @Autowired
     private ProductService productService;
     @RequestMapping("")
-    public String storyAction(ProductStory story, String groupOperate, Model model){
+    public String storyAction(ProductStory story, String groupOperate, Model model, HttpServletRequest request){
         List list = productService.findProductList(new Product(),"productId","desc");
         model.addAttribute("productList",list);
         model.addAttribute("storyStatus",story.getStoryStatus());
