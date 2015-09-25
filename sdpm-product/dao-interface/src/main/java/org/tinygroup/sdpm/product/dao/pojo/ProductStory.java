@@ -23,7 +23,6 @@ import java.util.Date;
  * 需求表
  * 
  */
-public class ProductStory {
 public class ProductStory  implements Serializable{
 
 
