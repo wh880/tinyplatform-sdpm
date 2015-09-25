@@ -48,5 +48,10 @@ public class DictAction extends BaseController{
     	 model.addAttribute("dict", dict);
     	 return "system/page/dictionaries/dictitem_view.pagelet";
      }
+	@RequestMapping("delete")
+	public String deleteDict(Integer dictId){
+		dictService.deleteDict(dictId);
+		return "system/page/dictionaries/dictitem.page";
+	}
 
 }
