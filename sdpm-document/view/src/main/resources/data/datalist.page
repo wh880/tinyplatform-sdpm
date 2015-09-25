@@ -13,8 +13,8 @@
 #foreach(l:docpager.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="../document/doc-view.page">${l.docId}</a>#end
-	#@td()<a href="../document/doc-view.page">${l.docTitle}</a>#end
+	#@td()<a href="../document/doc-view.page">${l?.docId}</a>#end
+	#@td()<a href="../document/doc-view.page">${l?.docTitle}</a>#end
 	#@td()${l?.getDocType()}#end
 	#@td()${l?.getDocAddedBy()}#end
 	#@td()${l?.getDocAddedDate()}#end

@@ -19,8 +19,11 @@
 #end
 
 
-#@tinyForm("thisform" "" "" {"class":"test"})
-
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/save" "post" {"class":"test"})
+    #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
+    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
+    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
+    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>开始</p>
@@ -65,7 +68,7 @@
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
             </div>
             <div class="col-5"></div>
         </div>

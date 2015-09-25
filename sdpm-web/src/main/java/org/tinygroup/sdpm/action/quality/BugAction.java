@@ -23,13 +23,12 @@ public class BugAction extends BaseController {
 
 	@Autowired
 	private BugService bugService;
-	
-	//
-	/*@RequestMapping("/111")
+		
+	@RequestMapping("")
 	public String form(Integer id,Model model){
 		
-		return "";
-	}*/
+		return "/testManagement/page/Bug.page";
+	}
 	
 	@RequestMapping("/findList")
 	public String findList(Integer id,Model model){
@@ -47,7 +46,7 @@ public class BugAction extends BaseController {
 			asc = false;
 		}
 		//QualityBug bug = new QualityBug();
-	//	bug.setProductId(id);
+		//	bug.setProductId(id);
 		Pager<QualityBug> bugpager = bugService.findBugListPager(start, limit, bug, order, asc);
 		model.addAttribute("bugpager",bugpager);
 		return "testManagement/data/BugData.pagelet";

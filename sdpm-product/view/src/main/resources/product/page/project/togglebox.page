@@ -187,16 +187,16 @@
 #@thead()
 #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 #@tinyTh({"width":"6"})<input type="checkbox" value="">#end
-#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})ID#end
-#@tinyTh({"class":"sorting","rel":"sortname"})P#end
-#@tinyTh({"class":"sorting","rel":"sortname"})需求名称#end
-#@tinyTh({"class":"sorting","rel":"sortname"})计划#end
-#@tinyTh({"class":"sorting","rel":"sortname"})来源#end
-#@tinyTh({"class":"sorting","rel":"sortname"})创建#end
-#@tinyTh({"class":"sorting","rel":"sortname"})指派#end
-#@tinyTh({"class":"sorting","rel":"sortname"})预计#end
-#@tinyTh({"class":"sorting","rel":"sortname"})状态#end
-#@tinyTh({"class":"sorting","rel":"sortname"})阶段#end
+#@tinyTh({"class":"sorting sorting_desc","rel":"story_id"})ID#end
+#@tinyTh({"class":"sorting","rel":"story_pri"})P#end
+#@tinyTh({"class":"sorting","rel":"story_name"})需求名称#end
+#@tinyTh({"class":"sorting","rel":"plan_id"})计划#end
+#@tinyTh({"class":"sorting","rel":"story_source"})来源#end
+#@tinyTh({"class":"sorting","rel":"story_opened_by"})创建#end
+#@tinyTh({"class":"sorting","rel":"story_assigned_to"})指派#end
+#@tinyTh({"class":"sorting","rel":"story_estimate"})预计#end
+#@tinyTh({"class":"sorting","rel":"story_status"})状态#end
+#@tinyTh({"class":"sorting","rel":"story_stage"})阶段#end
 #@tinyTh({"class":"","rel":"sortname"})操作#end
 #end
 #end

@@ -22,7 +22,27 @@
 #end
 
 ###macro tinyForm(formname action method formMapInfo)
-#@tinyForm("thisform" "/project/task/edit" "post" {"class":"test","enctype":"multipart/form-data"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/save" "post" {"class":"test","enctype":"multipart/form-data"})
+    #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
+    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
+    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
+    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
+##    #hiddenInput(hiddenInputName="task" hiddenInputValue=task?.taskId)
+##    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
+##    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
+##    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
+##    #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
+##    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
+##    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
+##    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
+##    #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
+##    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
+##    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
+##    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
+##    #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
+##    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
+##    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
+##    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
 <div style="width:70%;float:left" class="">
 
     <div class="infoContent">
@@ -69,7 +89,7 @@
             <div class="col-5">
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn" formaction=TINY_CONTEXT_PATH+"/project/task/save">保存</button>
+                <button style="float: left" type="submit" id="submit" class="commitBtn" >保存</button>
             </div>
             <div class="col-1">
                ## <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
