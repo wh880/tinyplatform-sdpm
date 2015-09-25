@@ -33,7 +33,7 @@
 #end
 
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/save" "post" {"class":"test"})
 
 <div style="width:100%;float:left" class="pageleftpart">
     <div class="infoContent">
