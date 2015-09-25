@@ -21,13 +21,12 @@
 	#@td()1#end
 	#@td()
 		#foreach(m:menuManager.getScopeMenus("allproduct-op"))
-			#if(m.map.type=="close")
-				#iconOperations("#myModal" m.icon m.name "865" "448" m.href "ml-5")&nbsp;
-				#elseif(m.map.type=="editor")
-
-                <a href="${TINY_CONTEXT_PATH}${eval(m.href)}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;
+			#if(m.id=="allproduct-close")
+				#iconOperations("#myModal" "icon-off " "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet" "ml-5")&nbsp;
+				#elseif(m.id=="allproduct-edit")
+                <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-module-editor.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;
 				#else
-				#@tinyTableItemRemove("${m.href}" var)<i class="${m.icon}"></i>#end
+				#@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)<i class="icon-remove"></i>#end
 			#end
 		#end
 	#end

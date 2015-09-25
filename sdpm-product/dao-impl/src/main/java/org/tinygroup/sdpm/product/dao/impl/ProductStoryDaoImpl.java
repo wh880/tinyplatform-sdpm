@@ -23,7 +23,6 @@ import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 import static org.tinygroup.tinysqldsl.base.FragmentSql.*;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +48,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-
 @Repository
 public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductStoryDao {
 
@@ -419,7 +417,10 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
-			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			OrderByElement tempElement = null;
+			if(orderBies[i]!=null){
+				tempElement = orderBies[i].getOrderByElement();
+			}
 			if (tempElement != null) {
 				orderByElements.add(tempElement);
 			}

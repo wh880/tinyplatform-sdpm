@@ -31,7 +31,7 @@ public class QualityTestRunTable extends Table {
 	 * 执行编号
 	 * 
 	 */
-	public final Column TESTRUN_ID = new Column(this, "testRun_id");
+	public final Column TEST_RUN_ID = new Column(this, "test_run_id");
 
 	/** 
 	 * 任务id
@@ -55,31 +55,31 @@ public class QualityTestRunTable extends Table {
 	 * 指派给
 	 * 
 	 */
-	public final Column TESTRUN_ASSIGNEDTO = new Column(this, "testRun_assignedTo");
+	public final Column TEST_RUN_ASSIGNED_TO = new Column(this, "test_run_assigned_to");
 
 	/** 
 	 * 最后执行人
 	 * 
 	 */
-	public final Column TESTRUN_LASTRUNNER = new Column(this, "testRun_lastRunner");
+	public final Column TEST_RUN_LAST_RUNNER = new Column(this, "test_run_last_runner");
 
 	/** 
 	 * 最后执行日期
 	 * 
 	 */
-	public final Column TESTRUN_LASTRUNDATE = new Column(this, "testRun_lastRunDate");
+	public final Column TEST_RUN_LAST_RUN_DATE = new Column(this, "test_run_last_run_date");
 
 	/** 
 	 * 最后执行结果
 	 * 
 	 */
-	public final Column TESTRUN_LASTRUNRESULT = new Column(this, "testRun_lastRunResult");
+	public final Column TEST_RUN_LAST_RUN_RESULT = new Column(this, "test_run_last_run_result");
 
 	/** 
 	 * 测试执行状态
 	 * 
 	 */
-	public final Column TESTRUN_STATUS = new Column(this, "testRun_status");
+	public final Column TEST_RUN_STATUS = new Column(this, "test_run_status");
 
 
 	private QualityTestRunTable() {

@@ -90,6 +90,7 @@
         #@colLabel()产品描述：#end
 	#@formControlDiv("col-8")
 			#@Teditor("content1" "content1" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})${product.productDesc}#end
+			#@Teditor("productDesc" "productDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})${product.productDesc}#end
 	#end
         #@validateDiv("col-2")#end
 #end

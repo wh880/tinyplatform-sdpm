@@ -79,13 +79,13 @@ public class QualityBugTable extends Table {
 	 * 转任务
 	 * 
 	 */
-	public final Column TOTASK_ID = new Column(this, "toTask_id");
+	public final Column TO_TASK_ID = new Column(this, "to_task_id");
 
 	/** 
 	 * 转需求
 	 * 
 	 */
-	public final Column TOSTORY_ID = new Column(this, "toStory_id");
+	public final Column TO_STORY_ID = new Column(this, "to_story_id");
 
 	/** 
 	 * Bug标题
@@ -121,7 +121,7 @@ public class QualityBugTable extends Table {
 	 * 操作系统
 	 * 
 	 */
-	public final Column OPERATINGSYSTEM = new Column(this, "operatingSystem");
+	public final Column OPERATING_SYSTEM = new Column(this, "operating_system");
 
 	/** 
 	 * 浏览器
@@ -163,7 +163,7 @@ public class QualityBugTable extends Table {
 	 * 激活次数
 	 * 
 	 */
-	public final Column BUG_ACTIVATEDCOUNT = new Column(this, "bug_activatedCount");
+	public final Column BUG_ACTIVATED_COUNT = new Column(this, "bug_activated_count");
 
 	/** 
 	 * 抄送给
@@ -175,37 +175,37 @@ public class QualityBugTable extends Table {
 	 * 由谁创建
 	 * 
 	 */
-	public final Column BUG_OPENEDBY = new Column(this, "bug_openedBy");
+	public final Column BUG_OPENED_BY = new Column(this, "bug_opened_by");
 
 	/** 
 	 * 创建日期
 	 * 
 	 */
-	public final Column BUG_OPENEDDATE = new Column(this, "bug_openedDate");
+	public final Column BUG_OPENED_DATE = new Column(this, "bug_opened_date");
 
 	/** 
 	 * 影响版本
 	 * 
 	 */
-	public final Column BUG_OPENEDBUILD = new Column(this, "bug_openedBuild");
+	public final Column BUG_OPENED_BUILD = new Column(this, "bug_opened_build");
 
 	/** 
 	 * 指派给
 	 * 
 	 */
-	public final Column BUG_ASSIGNEDTO = new Column(this, "bug_assignedTo");
+	public final Column BUG_ASSIGNED_TO = new Column(this, "bug_assigned_to");
 
 	/** 
 	 * 指派日期
 	 * 
 	 */
-	public final Column BUG_ASSIGNEDDATE = new Column(this, "bug_assignedDate");
+	public final Column BUG_ASSIGNED_DATE = new Column(this, "bug_assigned_date");
 
 	/** 
 	 * 解决者
 	 * 
 	 */
-	public final Column BUG_RESOLVEDBY = new Column(this, "bug_resolvedBy");
+	public final Column BUG_RESOLVED_BY = new Column(this, "bug_resolved_by");
 
 	/** 
 	 * 解决方案
@@ -217,31 +217,31 @@ public class QualityBugTable extends Table {
 	 * 解决版本
 	 * 
 	 */
-	public final Column BUG_RESOLVEDBUILD = new Column(this, "bug_resolvedBuild");
+	public final Column BUG_RESOLVED_BUILD = new Column(this, "bug_resolved_build");
 
 	/** 
 	 * 解决日期
 	 * 
 	 */
-	public final Column BUG_RESOLVEDDATE = new Column(this, "bug_resolvedDate");
+	public final Column BUG_RESOLVED_DATE = new Column(this, "bug_resolved_date");
 
 	/** 
 	 * 由谁关闭
 	 * 
 	 */
-	public final Column BUG_CLOSEDBY = new Column(this, "bug_closedBy");
+	public final Column BUG_CLOSED_BY = new Column(this, "bug_closed_by");
 
 	/** 
 	 * 关闭日期
 	 * 
 	 */
-	public final Column BUG_CLOSEDDATE = new Column(this, "bug_closedDate");
+	public final Column BUG_CLOSED_DATE = new Column(this, "bug_closed_date");
 
 	/** 
 	 * 重复Bug的ID
 	 * 
 	 */
-	public final Column BUG_DUPLICATEBUG = new Column(this, "bug_duplicateBug");
+	public final Column BUG_DUPLICATE_BUG = new Column(this, "bug_duplicate_bug");
 
 	/** 
 	 * 相关Bug
@@ -301,7 +301,7 @@ public class QualityBugTable extends Table {
 	 * BUG_REPOTYPE
 	 * 
 	 */
-	public final Column BUG_REPOTYPE = new Column(this, "bug_repoType");
+	public final Column BUG_REPO_TYPE = new Column(this, "bug_repo_type");
 
 	/** 
 	 * 测试任务编号
@@ -313,13 +313,13 @@ public class QualityBugTable extends Table {
 	 * 最后修改者
 	 * 
 	 */
-	public final Column BUG_LASTEDITEDBY = new Column(this, "bug_lastEditedBy");
+	public final Column BUG_LAST_EDITED_BY = new Column(this, "bug_last_edited_by");
 
 	/** 
 	 * 最后修改日期
 	 * 
 	 */
-	public final Column BUG_LASTEDITEDDATE = new Column(this, "bug_lastEditedDate");
+	public final Column BUG_LAST_EDITED_DATE = new Column(this, "bug_last_edited_date");
 
 	/** 
 	 * 已删除
