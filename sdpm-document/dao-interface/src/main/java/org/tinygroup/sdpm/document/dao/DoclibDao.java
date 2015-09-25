@@ -18,8 +18,8 @@ package org.tinygroup.sdpm.document.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
-import org.tinygroup.sdpm.document.dao.pojo.DocLib;
+import org.tinygroup.sdpm.document.dao.pojo.Doclib;
 
-public interface DocLibDao extends BaseDao<DocLib,Integer> {
+public interface DoclibDao extends BaseDao<Doclib,Integer> {
 
 }
