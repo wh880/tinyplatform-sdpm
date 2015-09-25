@@ -76,7 +76,8 @@
                                             "btn-primary btn-sm" TINY_CONTEXT_PATH+m.href+"?id="+var.slaId "" "")编辑#end
                                     #else
                                         #@delItemsdpm(TINY_CONTEXT_PATH+"/service/client/slaDelete"
-                                        var?.slaId "" {"class":"btn radius btn-danger btn-sm"}) 删除#end
+                                        var?.slaId TINY_CONTEXT_PATH+"/service/client/slaDelete" {"class":
+                                            "btn radius btn-danger btn-sm"}) 删除#end
                                     #end
                                 #end
                             </div>
