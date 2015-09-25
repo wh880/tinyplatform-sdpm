@@ -5,133 +5,163 @@
     <menu id="product-demand" parent-id="myproduct" name="需求" href="/product/page/project/togglebox.page"
           scope="liop,l2op" sort="15" isShow="1" permission="Permission">
         <menu id="product-demand-change" name="需求变更" href="/product/page/tabledemo/product-demand-change.page"
-              icon="icon-random" sort="35" isShow="1"
+              icon="icon-random" sort="55" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-review" name="需求评审" href="/product/page/tabledemo/product-demand-review.page"
-              icon="icon-search" sort="34" isShow="1"
+              icon="icon-search" sort="54" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-close" name="需求关闭" href="/product/page/tabledemo/product-demand-close.page"
-              icon="icon-off" sort="33" isShow="1"
+              icon="icon-off" sort="53" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-edit" name="需求编辑" href="/product/page/tabledemo/demand-edit.page" icon="icon-pencil"
-              sort="32" isShow="1"
+              sort="52" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-input" name="导入" href="/product/page/tabledemo/product-import.pagelet"
               icon="icon-download-alt"
-              sort="31" isShow="1"
+              sort="51" isShow="1"
               scope="product-io"/>
         <menu id="product-demand-output" name="导出" href="" icon=""
-              sort="30" isShow="1"
+              sort="50" isShow="1"
               scope="product-io"/>
         <menu id="product-demand-report" name="报表" href="/product/page/tabledemo/product-report.page"
               icon="icon-bar-chart"
-              sort="29" isShow="1"
+              sort="49" isShow="1"
               scope="product-io"/>
         <menu id="product-demand-add" name="提需求" href="/product/page/tabledemo/product-demand-add.page" icon="icon-plus"
-              sort="28" isShow="1"
+              sort="48" isShow="1"
               scope="product-io"/>
         <menu id="product-demand-operation" name="操作" href="" icon=""
-              sort="27" isShow="1"
+              sort="47" isShow="1"
               scope="product-oper"/>
-        <menu id="product-demand-del" name="批量关闭" href="" icon="" sort="26" isShow="1" scope="product-del"/>
+        <menu id="product-demand-del" name="批量关闭" href="" icon="" sort="46" isShow="1" scope="product-del"/>
 
-        <menu id="demand_log" name="日志" href="/product/page/tabledemo/product-log.pagelet" icon="icon-time" sort="25"
+        <menu id="demand_log" name="日志" href="/product/page/tabledemo/product-log.pagelet" icon="icon-time" sort="45"
               isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="aModal"/>
             </map>
         </menu>
         <menu id="demand-alteration" name="变更" href="/product/page/tabledemo/product-demand-change.page"
-              icon="icon-random" sort="24" isShow="1" scope="pro_demand_log">
+              icon="icon-random" sort="44" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
         <menu id="demand_close" name="关闭" href="/product/page/tabledemo/product-demand-close.page" icon="icon-off "
-              sort="23" isShow="1" scope="pro_demand_log">
+              sort="43" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-        <menu id="demand_set" name="建用例" href="/testManagement/page/proposecase.page" icon="icon-sitemap" sort="22"
+        <menu id="demand_set" name="建用例" href="/testManagement/page/proposecase.page" icon="icon-sitemap" sort="42"
               isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-        <menu id="demand-edit" name="编辑" href="/product/page/tabledemo/demand-edit.page" icon="icon-pencil" sort="21"
+        <menu id="demand-edit" name="编辑" href="/product/page/tabledemo/demand-edit.page" icon="icon-pencil" sort="41"
               isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon"/>
             </map>
         </menu>
-        <menu id="demand_note" name="备注" href="#" icon="beizhu icon-comment-alt" sort="20" isShow="1"
+        <menu id="demand_note" name="备注" href="#" icon="beizhu icon-comment-alt" sort="40" isShow="1"
               scope="pro_demand_log">
             <map>
                 <property key="type" value="beizhu"/>
             </map>
         </menu>
         <menu id="demand_copy" name="复制" href="/product/page/tabledemo/product-demand-add.page" icon="icon-copy"
-              sort="19" isShow="1" scope="pro_demand_log">
+              sort="39" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon"/>
             </map>
         </menu>
-        <menu id="demand-delete" name="删除" href="#" icon="icon-remove" sort="18" isShow="1" scope="pro_demand_log">
+        <menu id="demand-delete" name="删除" href="#" icon="icon-remove" sort="38" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="del"/>
             </map>
         </menu>
-        <menu id="demand-back" name="返回" href="/product/page/project/togglebox.page" icon="icon-reply" sort="17"
+        <menu id="demand-back" name="返回" href="/product/page/project/togglebox.page" icon="icon-reply" sort="37"
               isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon"/>
             </map>
         </menu>
         <menu id="demand-last" name="上一个" href="/product/page/project/demdtablehref.page"
-              icon="icon-pre icon-chevron-left" sort="16" isShow="1" scope="pro_demand_log">
+              icon="icon-pre icon-chevron-left" sort="36" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon"/>
             </map>
         </menu>
         <menu id="demand-next" name="下一个" href="/product/page/project/demdtablehref.page"
-              icon="icon-pre icon-chevron-right" sort="15" isShow="1" scope="pro_demand_log">
+              icon="icon-pre icon-chevron-right" sort="35" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon"/>
             </map>
         </menu>
 
-        <menu id="notclosed" name="未关闭" href="/product/page/project/togglebox.page" icon="" sort="14" isShow="1"
+        <menu id="notclosed" name="未关闭" href="/product/page/project/togglebox.page" icon="" sort="34" isShow="1"
               scope="demand-state"/>
-        <menu id="allrequirements" name="全部需求" href="/product/page/project/togglebox.page" icon="" sort="13" isShow="1"
+        <menu id="allrequirements" name="全部需求" href="/product/page/project/togglebox.page" icon="" sort="33" isShow="1"
               scope="demand-state"/>
-        <menu id="assignedtome" name="指派给我" href="/product/page/project/togglebox.page" icon="" sort="12" isShow="1"
+        <menu id="assignedtome" name="指派给我" href="/product/page/project/togglebox.page" icon="" sort="32" isShow="1"
               scope="demand-state"/>
-        <menu id="createdbyme" name="由我创建" href="/product/page/project/togglebox.page" icon="" sort="11" isShow="1"
+        <menu id="createdbyme" name="由我创建" href="/product/page/project/togglebox.page" icon="" sort="31" isShow="1"
               scope="demand-state"/>
-        <menu id="reviewbyme" name="由我评审" href="/product/page/project/togglebox.page" icon="" sort="10" isShow="1"
+        <menu id="reviewbyme" name="由我评审" href="/product/page/project/togglebox.page" icon="" sort="30" isShow="1"
               scope="demand-state"/>
-        <menu id="closebyme" name="由我关闭" href="/product/page/project/togglebox.page" icon="" sort="9" isShow="1"
+        <menu id="closebyme" name="由我关闭" href="/product/page/project/togglebox.page" icon="" sort="29" isShow="1"
               scope="demand-state"/>
-        <menu id="draft" name="草稿" href="/product/page/project/togglebox.page" icon="" sort="8" isShow="1"
+        <menu id="draft" name="草稿" href="/product/page/project/togglebox.page" icon="" sort="28" isShow="1"
               scope="demand-state"/>
-        <menu id="activation" name="激活" href="/product/page/project/togglebox.page" icon="" sort="7" isShow="1"
+        <menu id="activation" name="激活" href="/product/page/project/togglebox.page" icon="" sort="27" isShow="1"
               scope="demand-state"/>
-        <menu id="changed" name="已变更" href="/product/page/project/togglebox.page" icon="" sort="6" isShow="1"
+        <menu id="changed" name="已变更" href="/product/page/project/togglebox.page" icon="" sort="26" isShow="1"
               scope="demand-state"/>
-        <menu id="stayclose" name="待关闭" href="/product/page/project/togglebox.page" icon="" sort="5" isShow="1"
+        <menu id="stayclose" name="待关闭" href="/product/page/project/togglebox.page" icon="" sort="25" isShow="1"
               scope="demand-state"/>
-        <menu id="closed" name="已关闭" href="/product/page/project/togglebox.page" icon="" sort="4" isShow="1"
+        <menu id="closed" name="已关闭" href="/product/page/project/togglebox.page" icon="" sort="24" isShow="1"
               scope="demand-state"/>
-        <menu id="showsearchmore" name="搜索" href="#" icon="icon-search" sort="3" isShow="1" scope="demand-state"/>
+        <menu id="showsearchmore" name="搜索" href="#" icon="icon-search" sort="23" isShow="1" scope="demand-state"/>
 
-        <menu id="allproduct-close" name="关闭" href="" icon="icon-off"
-              sort="2" isShow="1" scope="allproduct-op"/>
 
-        <menu id="allproduct-edit" name="编辑" href="/product/page/tabledemo/product-module-editor.page"
-              icon="icon-pencil" sort="1" isShow="1" scope="allproduct-op"/>
-
-        <menu id="allproduct-delete" name="删除" href="" icon="icon-remove" sort="0" isShow="1" scope="allproduct-op"/>
+        <menu id="allproduct-close" name="关闭" href=""
+              icon="icon-off" sort="22" isShow="1" scope="allproduct-op">
+            <map>
+                <property key="type" value="close"/>
+            </map>
+        </menu>
+        <menu id="allproduct-edit" name="编辑" href="/product/find?productId=//$//{product.productId//}"
+              icon="icon-pencil" sort="21" isShow="1" scope="allproduct-op">
+            <map>
+                <property key="type" value="editor"/>
+            </map>
+        </menu>
+        <menu id="allproduct-delete" name="删除" href="/tinyuiweb/action/del.pagelet"
+              icon="icon-remove" sort="20" isShow="1" scope="allproduct-op">
+            <map>
+                <property key="type" value="delete"/>
+            </map>
+        </menu>
+        <menu id="allproduct-close" name="关闭" href="/product/page/tabledemo/overview-close.pagelet"
+              icon="icon-off" sort="22" isShow="1" scope="allproduct-op">
+            <map>
+                <property key="type" value="close"/>
+            </map>
+        </menu>
+        <menu id="allproduct-edit" name="编辑" href="/product/find?productId=${product.productId}"
+              icon="icon-pencil" sort="21" isShow="1" scope="allproduct-op">
+            <map>
+                <property key="type" value="editor"/>
+            </map>
+        </menu>
+        <menu id="allproduct-delete" name="删除" href="/tinyuiweb/action/del.pagelet"
+              icon="icon-remove" sort="20" isShow="1" scope="allproduct-op">
+            <map>
+                <property key="type" value="delete"/>
+            </map>
+        </menu>
 
 
     </menu>

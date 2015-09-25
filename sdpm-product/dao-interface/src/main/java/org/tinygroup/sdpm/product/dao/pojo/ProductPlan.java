@@ -23,10 +23,11 @@ import java.util.Date;
  * 计划表
  * 
  */
-public class ProductPlan implements Serializable {
-	
-	public static int DELETE_YES = 1;
-    public static int DELETE_NO = 0;
+public class ProductPlan {
+public class ProductPlan  implements Serializable{
+
+
+
 
 	/** 
 	 * 计划ID

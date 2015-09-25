@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.product.biz.impl;
 
 import java.util.List;
 
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +20,25 @@ public class ProductManagerImpl implements ProductManager{
 	private ProductDao productDao;
 	
 	public Product add(Product product) {
-
+		
+		if(1==product.getAcl()){
+			product.setProductWhiteList("");
+		}
+		
+		if(1!=product.getAcl()){
+			product.setProductWhiteList("");
+		}
+		//product.setProductCreatedDate(new Date());
 		return productDao.add(product);
 	}
 
 	public int update(Product product) {
+		if(1==product.getAcl()){
+			product.setProductWhiteList("");
+		}
+		if(1!=product.getAcl()){
+			product.setProductWhiteList("");
+		}
 
 		return productDao.edit(product);
 	}
@@ -32,7 +47,7 @@ public class ProductManagerImpl implements ProductManager{
 		
 		Product product = new Product();
 		product.setProductId(productId);
-		product.setDeleted(Product.DELETE_YES);
+		product.setDeleted(FieldUtil.DELETE_YES);
 		return productDao.edit(product);
 	}
 

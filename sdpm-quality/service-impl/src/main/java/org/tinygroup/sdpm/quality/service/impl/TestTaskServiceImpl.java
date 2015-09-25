@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.quality.biz.inter.TestTaskManager;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
+import org.tinygroup.tinysqldsl.Pager;
 
 @Component
 public class TestTaskServiceImpl implements TestTaskService {
@@ -28,5 +29,9 @@ public class TestTaskServiceImpl implements TestTaskService {
 	
 	public int deleteById(int id){
 		return testtaskmanager.delete(id);
+	}
+	
+	public Pager<QualityTestTask> findTestTaskPager(Integer start,Integer limit,QualityTestTask testtask,String sortName,boolean asc){
+		return testtaskmanager.findPager(start, limit, testtask, sortName, asc);
 	}
 }

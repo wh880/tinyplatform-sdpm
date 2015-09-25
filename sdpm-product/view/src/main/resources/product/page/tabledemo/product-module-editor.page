@@ -3,21 +3,22 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-overview",sonitem="<li>"+"概况"+"</li>")
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/update" "post" {"class":"test"})
 <div style="width:100%;float:center" class="pageleftpart">
    <div class="infoContent">
         <p class="titleName">编辑</p>
+        #tinyInput("text" "productId" product.productId {"class":"input-text hidden"})
  #@elementItem()
         #@colLabel()产品名称：#end
         #@formControlDiv("col-4")
-          #tinyInput("text" "33" product.productName {"nullmsg":"请输入产品名称！","id":"33","class":"input-text"})
+          #tinyInput("text" "productName" product.productName {"nullmsg":"请输入产品名称！","id":"33","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
  #end
 #@elementItem()
         #@colLabel()产品代号：#end
         #@formControlDiv("col-4")
-          #tinyInput("text" "33" product.productCode {"nullmsg":"请输入产品名称！","id":"33","class":"input-text"})
+          #tinyInput("text" "productCode" product.productCode {"nullmsg":"请输入产品名称！","id":"33","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
 #end
@@ -25,7 +26,7 @@
 		#@colLabel()产品负责人：#end
 		#@formControlDiv("col-4")
 			#@Tselect2F()
-                    #@Tselect2Body("lang" product.productOwner {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("productOwner" product.productOwner {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="xubin">xubin</option>
                         <option value="admin">admin</option>
                         <option value="FL">开发主管</option>
@@ -43,7 +44,7 @@
 		#@colLabel()测试负责人：#end
 		#@formControlDiv("col-4")
 			#@Tselect2F()
-                    #@Tselect2Body("lang" product.productQualityManager {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("productQualityManager" product.productQualityManager {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="xubin">xubin</option>
                         <option value="admin">admin</option>
                         <option value="FL">测试C</option>
@@ -59,7 +60,7 @@
 		#@colLabel()发布负责人：#end
 		#@formControlDiv("col-4")
 			#@Tselect2F()
-                    #@Tselect2Body("lang" product.productDeliveryManager {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("productDeliveryManager" product.productDeliveryManager {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                        <option value="xubin">xubin</option>
                         <option value="admin">admin</option>
                         <option value="FL">测试C</option>
@@ -75,7 +76,7 @@
         #@colLabel()状态：#end
         #@formControlDiv("col-4")
              #@Tselect2F()
-                    #@Tselect2Body("lang" product.productStatus {"class":"input-text"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("productStatus" product.productStatus {"class":"input-text"}) ##,"multiple":"multiple"加上为多选项
                        <option value="0">正常</option>
                        <option value="1">结束</option>
                     #end
@@ -89,6 +90,7 @@
         #@colLabel()产品描述：#end
 	#@formControlDiv("col-8")
 			#@Teditor("content1" "content1" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})${product.productDesc}#end
+			#@Teditor("productDesc" "productDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})${product.productDesc}#end
 	#end
         #@validateDiv("col-2")#end
 #end
@@ -97,26 +99,32 @@
 		#@elementItem()
         #@colLabel()访问控制：#end
         #@skinMinimal("col-8")
-       
-        	<div>#@tinyRadio("acl" "0" product?.acl {"onclick":"setWhite(this.value)"}) 默认设置(有项目视图权限，即可访问) #end</div>
-        	<div>#@tinyRadio("acl" "2" product?.acl {"onclick":"setWhite(this.value)"}) 私有项目(只有项目团队成员才能访问) #end</div>
-        	<div>#@tinyRadio("acl" "1" product?.acl {"onclick":"setWhite(this.value)"}) 自定义白名单(团队成员和白名单的成员可以访问) #end</div>
-        
-
+       	
+       		#@Tradioes("acl" product?.acl {"onclick":"setWhite(this.value)"})
+       			<div>#@Tradio("0") 默认设置(有项目视图权限，即可访问)#end</div>
+       			<div>#@Tradio("2") 私有项目(只有项目团队成员才能访问)#end</div>
+       			<div>#@Tradio("1") 自定义白名单(团队成员和白名单的成员可以访问)#end</div>
+       		#end
+       		
 		#end
         #@validateDiv("col-2")#end
     #end
     #@elementItem("whitelistBox" product?.acl!=1?'hidden':'')
         	#@colLabel()分组白名单#end
 			#@skinMinimal()
-				#labelCheckbox(ckId="whitelistBox" labelText="管理员" ckChecked="checked")
-				#labelCheckbox(ckId="whitelistBox" labelText="研发")
-				#labelCheckbox(ckId="whitelistBox" labelText="测试")
-				#labelCheckbox(ckId="whitelistBox" labelText="项目经理")
-				#labelCheckbox(ckId="whitelistBox" labelText="产品经理")
-				#labelCheckbox(ckId="whitelistBox" labelText="研发主管")
-				#labelCheckbox(ckId="whitelistBox" labelText="产品主管")
-				#labelCheckbox(ckId="whitelistBox" labelText="测试主管")
+				#@Tcheckboxes("productWhiteList" product?.productWhiteList)
+					#@Tcheckbox("admin")管理员#end
+					#@Tcheckbox("develop")研发#end
+					#@Tcheckbox("test")测试#end
+					#@Tcheckbox("projectManager")项目经理#end
+					#@Tcheckbox("productManager")产品经理#end
+					#@Tcheckbox("developSupervisor")研发主管#end
+					#@Tcheckbox("productSupervisor")产品主管#end
+					#@Tcheckbox("testSupervisor")测试主管#end
+				#end
+				
+				
+				
 			#end
         #@validateDiv("col-2")#end
       #end
@@ -138,6 +146,7 @@
     #end
 
 #end
+<br/>
   
 <script type="text/javascript">
 
@@ -147,3 +156,4 @@ function setWhite(acl)
     acl == '1' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
 }
 </script>
+
