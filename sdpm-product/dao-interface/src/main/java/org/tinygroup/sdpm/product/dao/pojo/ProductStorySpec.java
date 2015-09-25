@@ -23,10 +23,7 @@ import java.io.Serializable;
  * 需求表述表
  * 
  */
-public class ProductStorySpec  implements Serializable{
-
-
-
+public class ProductStorySpec implements Serializable{
 
 	/** 
 	 * 公司ID
