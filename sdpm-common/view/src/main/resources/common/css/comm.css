@@ -2,7 +2,7 @@
 #bodyrap  #content-wrapper{padding:100px 8px 18px;}
 .dataTables_wrapper .DT-lf-right .DT-per-page{display:none}.theme-clean #main-menu #content-wrapper{padding:53px 10px 18px}
 .ajax-loading-animation{font-size:20px;margin-left:10px;}
-.optionsBox .tabBar{margin-bottom:5px;}
+.optionsBox .tabBar{margin-bottom:0px;}
 @media (min-width:768px) {
 .menu-on-top #content-wrapper{padding-top:98px}
 .menu-on-top #main-menu{height:46px}
