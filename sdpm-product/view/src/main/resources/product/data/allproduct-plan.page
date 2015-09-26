@@ -1,4 +1,3 @@
-
 #set(records=productPlan.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 #set(pagesize=records-(page-1)*pagesize)
@@ -10,8 +9,8 @@
 	#@td()${plan?.planId}#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-plan/product-al-req.page">${plan?.planName}</a>#end
 	#@td()${plan?.planSpec}#end
-	#@td()${plan?.planBeginDate}#end
-	#@td()${plan?.planEndDate}#end
+	#@td()${formatDate(plan?.planBeginDate,'yyyy年MM月dd日')}#end
+	#@td()${formatDate(plan?.planEndDate,'yyyy年MM月dd日')}#end
 	 #@td()
 		 #foreach(m:menuManager.getScopeMenus("product-pl"))
 			 #if(m.id!="product-plan-remove")

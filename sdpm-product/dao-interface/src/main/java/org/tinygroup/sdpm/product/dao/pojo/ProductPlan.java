@@ -17,6 +17,7 @@
 package org.tinygroup.sdpm.product.dao.pojo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -61,14 +62,14 @@ public class ProductPlan implements Serializable{
 	 * 计划开始时间
 	 * 
 	 */
-	@DateTimeFormat(pattern="yyyy/MM/dd hh:mm") 
+	@DateTimeFormat(pattern="yyyy-MM-dd") 
 	private Date planBeginDate;
 
 	/** 
 	 * 计划结束时间
 	 * 
 	 */
-	@DateTimeFormat(pattern="yyyy/MM/dd hh:mm") 
+	@DateTimeFormat(pattern="yyyy-MM-dd") 
 	private Date planEndDate;
 
 	/** 
