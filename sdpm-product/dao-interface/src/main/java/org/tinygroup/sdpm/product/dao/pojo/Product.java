@@ -124,7 +124,7 @@ public class Product implements Serializable{
 	 * 创建日期
 	 * 
 	 */
-	@DateTimeFormat
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date productCreatedDate;
 
 	/** 
