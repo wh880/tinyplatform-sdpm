@@ -25,8 +25,9 @@ public class BugAction extends BaseController {
 	private BugService bugService;
 		
 	@RequestMapping("")
-	public String form(String get,QualityBug bug,Model model){
-		model.addAttribute("bug", bug);
+	public String form(String get,Model model){
+		
+		model.addAttribute("get", get);
 		return "/testManagement/page/Bug.page";
 	}
 	
