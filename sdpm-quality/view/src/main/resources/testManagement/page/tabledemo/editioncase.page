@@ -35,7 +35,7 @@
 #end
     ##tabbody end
 <br>
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/save" "post" {"class":"test"})
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
     		<p class="titleName">编辑</p>

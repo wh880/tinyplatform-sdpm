@@ -21,7 +21,7 @@
 	#end
 #end
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/save" "post" {"class":"test"})
 	<div style="width:67%;float:left">
     	<div class="infoContent">
     		<p class="titleName">指派</p>
@@ -31,7 +31,7 @@
     #@elementItem()
     	 #@sdpmItem("指派给")       	
              #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">A</option>
 	                        <option value="ME">B</option>
 	                        <option value="MD">C</option>
@@ -42,7 +42,7 @@
     #@elementItem()
         #@sdpmItem("抄送给") 
             #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugMailto" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">A</option>
 	                        <option value="ME">B</option>
 	                        <option value="MD">C</option>
