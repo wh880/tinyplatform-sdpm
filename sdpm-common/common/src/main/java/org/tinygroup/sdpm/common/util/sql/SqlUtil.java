@@ -72,17 +72,17 @@ public class SqlUtil {
         StringBuffer sql = new StringBuffer();
         String operate = searchInfo.getOperate();
         String operateAndValue = null;
-        if("包含".equals(operate)){
-            operateAndValue = "like '%"+searchInfo.getValue()+"%'";
-        }else if("介于".equals(operate)){
+        if("include".equals(operate)){
+            operateAndValue = " like '%"+searchInfo.getValue()+"%'";
+        }else if("between".equals(operate)){
             String[] values = searchInfo.getValue().split(",");
-            operateAndValue = "between "+values[0]+" and "+values[1]+" ";
-        }else if("不包含".equals(operate)){
-            operateAndValue = "not like '%"+searchInfo.getValue()+"%'";
-        }else if("从属于".equals(operate)){
-            operateAndValue = "in ("+searchInfo.getValue()+")";
+            operateAndValue = " between "+values[0]+" and "+values[1]+" ";
+        }else if("noinclude".equals(operate)){
+            operateAndValue = " not like '%"+searchInfo.getValue()+"%'";
+        }else if("belong".equals(operate)){
+            operateAndValue = " in ("+searchInfo.getValue()+")";
         }else{
-            operateAndValue = operate+" "+searchInfo.getValue();
+            operateAndValue =" "+ operate+" "+searchInfo.getValue();
         }
         return sql.append(" "+searchInfo.getField()).append(operateAndValue).toString();
     }

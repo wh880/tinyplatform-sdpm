@@ -11,7 +11,6 @@ import java.util.List;
 
 @Component
 public class PlanServiceImpl implements PlanService {
-	
 	@Autowired
 	private PlanManager planManager;
 	

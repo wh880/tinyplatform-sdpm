@@ -48,7 +48,7 @@
         <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="findStoryPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager&lt;org.tinygroup.sdpm.product.dao.pojo.ProductStory&gt;"/>
+      <service-result name="findStoryPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
   </service-component>
 </service-components>

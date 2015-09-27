@@ -22,8 +22,6 @@ public class PlanManagerImpl implements PlanManager{
 	
 	public ProductPlan add(ProductPlan plan) {
 		
-		plan.setPlanBeginDate(new Date());
-		plan.setPlanEndDate(new Date());
 		return productPlanDao.add(plan);
 	}
 

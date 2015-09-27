@@ -2,10 +2,8 @@ package org.tinygroup.sdpm.product.service;
 
 import java.util.List;
 
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.tinysqldsl.Pager;
-
 
 public interface PlanService{
 	/**
