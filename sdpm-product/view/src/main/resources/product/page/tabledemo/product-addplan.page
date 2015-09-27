@@ -27,7 +27,63 @@ RegExp.$1.length==1? o[k] :
 return format;
 }
 
+
 	$(document).ready(function(){
+	
+	
+	
+#*	setInterval(function(event){
+		
+		
+		
+	},100);*#
+	
+	var oldvalue = "";
+	$("input[name='planBeginDate']").bind("click",function(){
+		oldvalue = $(this).val();
+		
+	});
+	
+	$("input[name='planBeginDate']").bind("blur input propertychange",function(){
+	
+		var newvalue = $(this).val();
+	
+		if(newvalue!=""&&newvalue!=oldvalue){
+			if($("input[name='endTime']:checked")[0]){
+				$("input[name='endTime']:checked").trigger('click');
+			}
+			
+			
+			
+		}
+	});
+	
+	var oldvalueend = "";
+	$("input[name='planEndDate']").bind("click",function(){
+		oldvalueend = $(this).val();
+		
+	});
+	$("input[name='planEndDate']").bind("blur",function(){
+		var newvalueend = $(this).val();
+		var dateend =new Date(Date.parse(newvalueend.replace(/-/g, "/")));
+		var datestart = new Date(Date.parse($("input[name='planBeginDate']").val().replace(/-/g, "/")));
+		
+		
+		if(newvalueend!=""&&newvalueend!=oldvalueend){
+			
+			if(dateend<=datestart){
+				$("input[name='planEndDate']").val(oldvalueend);
+				alert("结束日期必须大于开始日期");
+				
+			}else{
+				$("input[name='endTime']:checked").attr("checked",false);
+			}
+			
+		}
+	});
+
+	
+	
 		
 		$("input[name='endTime']").each(function(){
 			
@@ -61,7 +117,9 @@ return format;
 					}
 					$("input[name='planEndDate']").val(end.format("yyyy-MM-dd"));
 				}else{
+					this.checked=false;
 					alert("请选择开始日期");
+					
 				}
 				
 				
@@ -73,7 +131,6 @@ return format;
 	});
  
 </script>
-
 
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/plan/save" "post" {"class":""})
@@ -97,14 +154,14 @@ return format;
     #@elementItem()
         #@colLabel()开始日期:#end
         #@formControlDiv("col-4")
-           #@tinyDateInput("planBeginDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+           #@tinyDateInput("planBeginDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","id":"qwe","readonly":"readonly"})#end
         #end
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
         #@colLabel()结束日期:#end
         #@formControlDiv("col-4")
-        	 #@tinyDateInput("planEndDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+        	 #@tinyDateInput("planEndDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","readonly":"readonly"})#end
         #end
          <div  class="col-6"> 
          	
