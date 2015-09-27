@@ -21,18 +21,20 @@
 #@tabBodyCol("ptop-5")
 ##operationbar start
 #@div(divClass="operationbar")
+#set(urlProduct = productId!=null?'productId='+productId+'&':'')
+#set(urlModule = moduleId!=null?'moduleId='+moduleId+'&':'')
 <span class="f">
-					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=1" class="${choose == 1?active_btn:''}">未关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=2" class="${choose == 2?active_btn:''}">全部需求</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=3&storyAssignedTo=${user.user_id}" class="${choose == 3?active_btn:''}">指派给我</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=4&storyOpenedBy=${user.user_id}" class="${choose == 4?active_btn:''}">由我创建</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=5&storyReviewedBy=${user.user_id}" class="${choose == 5?active_btn:''}">由我评审</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=6&storyClosedBy=${user.user_id}" class="${choose == 6?active_btn:''}">由我关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=7&storyStatus=Draft" class="${choose == 7?active_btn:''}">草稿</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=8&storyStatus=Active" class="${choose == 8?active_btn:''}">激活</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=9&storyStatus=changed" class="${choose == 9?active_btn:''}">已变更</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=10&storyStage=Acceptance" class="${choose == 10?active_btn:''}">待关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=11&storyStatus=closed" class="${choose == 11?active_btn:''}">已关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=1&currentPageId=3" class="${choose == 1?'active_btn':''}">未关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=2&currentPageId=3" class="${choose == 2?'active_btn':''}">全部需求</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=3&currentPageId=3" class="${choose == 3?'active_btn':''}">指派给我</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=4&currentPageId=3" class="${choose == 4?'active_btn':''}">由我创建</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=5&currentPageId=3" class="${choose == 5?'active_btn':''}">由我评审</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=6&currentPageId=3" class="${choose == 6?'active_btn':''}">由我关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=7&currentPageId=3" class="${choose == 7?'active_btn':''}">草稿</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=8&currentPageId=3" class="${choose == 8?'active_btn':''}">激活</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=9&currentPageId=3" class="${choose == 9?'active_btn':''}">已变更</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=10&currentPageId=3" class="${choose == 10?'active_btn':''}">待关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=11&currentPageId=3" class="${choose == 11?'active_btn':''}">已关闭</a>
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 

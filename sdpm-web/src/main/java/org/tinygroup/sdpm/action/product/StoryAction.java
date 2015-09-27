@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.convert.objectxml.xstream.ObjectToXml;
+import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.common.util.sql.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -25,15 +26,20 @@ public class StoryAction {
     @Autowired
     private ProductService productService;
     @RequestMapping("")
-    public String storyAction(ProductStory story, String groupOperate, Model model, HttpServletRequest request){
-        List list = productService.findProductList(new Product(),"productId","desc");
+    public String storyAction(ProductStory story, String groupOperate, Model model, HttpServletRequest request, HttpServletResponse response){
+        String queryString = request.getQueryString();
+        List<Product> list = productService.findProductList(new Product(),"productId","desc");
         model.addAttribute("productList",list);
-        model.addAttribute("storyStatus",story.getStoryStatus());
+        if("currentPageId=3".equals(queryString)){
+            return "redirect:/product/story?"+"productId="+list.get(0).getProductId()+"&choose=1&"+queryString;
+        }else if(!queryString.contains("choose")){
+            return "redirect:/product/story?choose=1&"+queryString;
+        }
         return "product/page/project/togglebox.page";
     }
     @RequestMapping("/search")
-    public String storySearchAction(int page, int pagesize, ProductStory story,String groupOperate, SearchInfos searchInfos, String order, String ordertype, Model model, HttpServletRequest request){
-        Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
+    public String storySearchAction(int page, int pagesize, ProductStory story, String choose, String groupOperate, SearchInfos searchInfos, String order, String ordertype, Model model, HttpServletRequest request){
+        Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList",p);
         return "product/data/tabledata.pagelet";
     }

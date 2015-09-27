@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="myproduct" parent-id="0" name="产品" href="/product/page/project/togglebox.page" icon="icon-desktop" sort="800"
+<menu id="myproduct" parent-id="0" name="产品" href="/product/story" icon="icon-desktop" sort="800"
       isShow="1" permission="Permission">
 
     <menu id="product-demand" parent-id="myproduct" name="需求" href="/product/page/project/togglebox.page"

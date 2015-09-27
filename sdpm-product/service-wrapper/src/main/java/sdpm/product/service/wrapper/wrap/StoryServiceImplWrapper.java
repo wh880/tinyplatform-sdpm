@@ -133,7 +133,7 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductStory> findStoryPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductStory story ,org.tinygroup.sdpm.common.util.sql.SearchInfos conditions ,java.lang.String groupOperate ,java.lang.String columnName ,boolean asc) {
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductStory> findStoryPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductStory story ,java.lang.String statusCondition, org.tinygroup.sdpm.common.util.sql.SearchInfos conditions ,java.lang.String groupOperate ,java.lang.String columnName ,boolean asc) {
 		String serviceId = "product_findStoryPager";
 
 		try{
@@ -141,6 +141,7 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 			context.put("start" ,start);
 			context.put("limit" ,limit);
 			context.put("story" ,story);
+			context.put("statusCondition",statusCondition);
 			context.put("conditions" ,conditions);
 			context.put("groupOperate" ,groupOperate);
 			context.put("columnName" ,columnName);
