@@ -55,7 +55,7 @@ public class ProductRelease implements Serializable{
 	 * 发布日期
 	 * 
 	 */
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat
 	private Date releaseDate;
 
 	/** 
