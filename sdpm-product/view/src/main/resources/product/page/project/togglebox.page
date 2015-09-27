@@ -21,7 +21,7 @@
 #@tabBodyCol("ptop-5")
 ##operationbar start
 #@div(divClass="operationbar")
-<span class="f">
+#*<span class="f">
 					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=1" class="${choose == 1?active_btn:''}">未关闭</a>
 					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=2" class="${choose == 2?active_btn:''}">全部需求</a>
 					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=3&storyAssignedTo=${user.user_id}" class="${choose == 3?active_btn:''}">指派给我</a>
@@ -34,7 +34,7 @@
 					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=10&storyStage=Acceptance" class="${choose == 10?active_btn:''}">待关闭</a>
 					<a href="${TINY_CONTEXT_PATH}/product/story?${tinyRequestQueryString}&choose=11&storyStatus=closed" class="${choose == 11?active_btn:''}">已关闭</a>
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-				</span>
+				</span>*#
 
 
 <span class="r">
