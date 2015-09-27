@@ -22,5 +22,7 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface ProjectDao extends BaseDao<Project,Integer> {
-    public Pager<Project> querytAll(int start, int limit, final OrderBy... orderBies);
+    public Pager<Project> querytAll(int start, int limit, final Project project, final OrderBy... orderBies);
+
+    public Project getTime(Project project);
 }

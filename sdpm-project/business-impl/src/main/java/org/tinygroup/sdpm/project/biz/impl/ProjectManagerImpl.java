@@ -31,11 +31,19 @@ public class ProjectManagerImpl implements ProjectManager {
     }
 
     public Pager<Project> findPagerProjects(Integer start, Integer limit, String sortName, boolean asc) {
+        Project project = new Project();
+        Pager<Project> projectPager = null;
         if (StringUtil.isBlank(sortName)) {
-            return projectDao.querytAll(start, limit);
+            projectPager = projectDao.queryPager(start, limit, project);
+        } else {
+            OrderBy orderBy = new OrderBy(sortName, asc);
+            projectPager = projectDao.queryPager(start, limit, project, orderBy);
         }
-        OrderBy orderBy = new OrderBy(sortName, asc);
-        return projectDao.querytAll(start, limit, orderBy);
+
+        for (Project p : projectPager.getRecords()) {
+            p.setPercent(projectDao.getTime(p).getPercent());
+        }
+        return projectPager;
     }
 
     public Project add(Project project) {

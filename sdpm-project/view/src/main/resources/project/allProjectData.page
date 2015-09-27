@@ -26,7 +26,7 @@
 
     <div class="progress-bars text-l" style="width:110px">
         format("%.2f",d)p?.percent
-        <span class="sr-modern" style="width:${format(" %.2f",p.percent*100)}"></span>
+        <span class="sr-modern" style="width:${format(" %.2f%%",p.percent*100)}"></span>
 		</div>
     <span style="left:115px; float:left;height: 0; position: relative;top: -14px">${format("%.2f",p.percent*100)}</span>
 		
