@@ -21,41 +21,41 @@ package org.tinygroup.sdpm.service.dao.pojo;
  * 
  */
 public class ServiceClientUser {
-
-	/** 
+	public static Integer DELETE_YES = 1;
+	public static Integer DELETE_NO = 0;
+	/**
 	 * 逻辑ID
-	 * 
+	 *
 	 */
 	private Integer id;
-
-	/** 
+	/**
 	 * 客户ID
-	 * 
+	 *
 	 */
 	private Integer clientId;
-
-	/** 
+	/**
 	 * 客户联系人
-	 * 
+	 *
 	 */
 	private String userAccount;
-
-	/** 
+	/**
 	 * 客户联系电话
-	 * 
+	 *
 	 */
 	private String userPhone;
-
-	/** 
+	/**
 	 * 联系人职务
-	 * 
+	 *
 	 */
 	private String userPost;
-
 	/**
 	 * 已删除
 	 */
 	private Integer deleted;
+
+	public ServiceClientUser() {
+		setDeleted(DELETE_NO);
+	}
 
 	public Integer getId() {
 		return id;

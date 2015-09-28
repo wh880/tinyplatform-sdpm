@@ -27,17 +27,17 @@
 			#@tbody()
 ##			#set(objs=[["性别","SEX"],["年龄","AGE"],["教育程度","EDUCATION"],["残疾等级","DISABILITYGRADE"],["残疾类别","DISABILITYTYPE"],["角色类型","ROLETYPE"],["用户状态","USERSTATUS"],["岗位任职规则属性","JOBRULE"],["岗位职责规则属性","JOBRESP"],
 ##			["1","2"],["1","2"],["1","2"]])
-			#for(d:dictList)
+			#for(mo:list)
 				#@tr("text-c")
 					#@td()<input type="checkbox" value="1" name="idCheck">#end
-					#@td()${d?.dictKey}#end
-					#@td()${d?.dictValue}#end
+					#@td()${mo?.moduleName}#end
+					#@td()${mo?.moduleTitle}#end
 					#@td("f-14 user-manage")
 						#foreach(m in menuManager.getScopeMenus("dict-op"))
 							#if(m.id!="dict-del")
-								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "460" "158" m.href +"?dictId="+d?.dictId "ml-5")
+								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "460" "158" m.href +"?moduleId="+mo?.moduleId "ml-5")
 							#else
-								#iconOperation(m.icon m.name "ml-5 delBtn" m.href+"?dictId="+d?.dictId)
+								#iconOperation(m.icon m.name "ml-5 delBtn" m.href+"?moduleId="+mo?.moduleId)
 							#end
 							
 						#end
