@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.sdpm.service.service.inter.SlaService;
@@ -51,10 +52,18 @@ public class ClientAction extends BaseController {
 
     @RequestMapping(value = "/save")
     public String save(ServiceClient client, Model model) {
+        //新建用户联系人表
+        ServiceClientUser serviceClientUser = new ServiceClientUser();
+        serviceClientUser.setUserPhone(client.getUserPhone());
+        serviceClientUser.setUserAccount(client.getUserAccount());
+        serviceClientUser.setClientId(client.getClientId());
+        serviceClientUser.setUserPost(client.getUserPost());
         if (client.getClientId() == null) {
             clientService.addClient(client);
+            clientService.addClientUser(serviceClientUser);
         } else {
             clientService.updateClient(client);
+
         }
         model.addAttribute("client", client);
         return "service/client/clientUser.page";

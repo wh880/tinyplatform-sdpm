@@ -11,7 +11,7 @@ $(function () {
                 data: {action: "del", id: $(that).attr("data-removeid")},
                 dataType: "json",
                 success: function (data) {
-                    if (data.status == "success") {
+                    if (data.status == "success" || data.status == "y") {
                         layer.msg(data.info);
                         setTimeout(function () {
                             window.location.href = url;

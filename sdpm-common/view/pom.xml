@@ -66,7 +66,7 @@
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.frameTplOrange</artifactId>
             <version>${tiny_ui_version}</version>
-        </dependency>
+        </dependency> 
 		<!--皮肤 end-->
         <dependency>
             <groupId>org.tinygroup</groupId>
