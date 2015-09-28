@@ -48,8 +48,8 @@ public class StoryServiceImpl implements StoryService {
 		return storyManager.findList(story, order, ordertype);
 	}
 
-	public Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
-		return storyManager.findPager(start, limit, story, conditions, groupOperate, columnName, asc);
+	public Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
+		return storyManager.findPager(start, limit, story,statusCondition, conditions, groupOperate, columnName, asc);
 	}
 
 

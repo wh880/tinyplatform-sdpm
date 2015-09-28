@@ -43,6 +43,7 @@
         <service-parameter name="start" type="int" required="false" is-array="false"/>
         <service-parameter name="limit" type="int" required="false" is-array="false"/>
         <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+        <service-parameter name="statusCondition" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="conditions" type="org.tinygroup.sdpm.common.util.sql.SearchInfos" required="false" is-array="false"/>
         <service-parameter name="groupOperate" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
