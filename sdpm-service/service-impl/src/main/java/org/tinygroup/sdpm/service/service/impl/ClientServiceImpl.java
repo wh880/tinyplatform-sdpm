@@ -65,4 +65,11 @@ public class ClientServiceImpl implements ClientService {
         return clientUserManager.add(clientUser);
     }
 
+    public ServiceClientUser updateClientUser(ServiceClientUser clientUser) {
+        return clientUserManager.update(clientUser);
+    }
+
+    public List<ServiceClientUser> getAllClientUser(ServiceClientUser clientUser) {
+        return clientUserManager.getUserList(clientUser);
+    }
 }
