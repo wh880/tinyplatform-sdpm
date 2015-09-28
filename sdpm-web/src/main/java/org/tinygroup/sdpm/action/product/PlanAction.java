@@ -66,7 +66,6 @@ public class PlanAction  extends BaseController{
 
 	@RequestMapping("/list")
 	public String list(ProductPlan plan,
-
 			@RequestParam(required = false,defaultValue = "1")int page,
 			@RequestParam(required = false,defaultValue = "10")int pagesize,
 			@RequestParam(required = false,defaultValue = "planId")String order,
@@ -76,7 +75,7 @@ public class PlanAction  extends BaseController{
 
 		model.addAttribute("productPlan",pagerProductPlan);
 
-		return "/product/data/allproduct-release.pagelet";
+		return "/product/data/allproduct-plan.pagelet";
 	}
 
 	
