@@ -35,7 +35,7 @@
               isShow="1" scope="testbuginfo-tab"></menu> 
          <menu id="tbugnext" name="下一个Bug" href="/testManagement/page/bugInfo.page" icon="icon-chevron-right" sort="1"
               isShow="1" scope="testbuginfo-tab"></menu> 
-         <menu id="tbugstatus" name="未关闭" href="/quality/bug?bugStatus=1%26get=tbugstatus" icon="" sort="12"
+         <menu id="tbugstatus" name="未关闭" href="/quality/bug?bugStatus=1&amp;get=tbugstatus" icon="" sort="12"
               isShow="1" scope="testbugleft-tab"></menu> 
          <menu id="tbugall" name="所有" href="/quality/bug?get=tbugall" icon="" sort="11"
               isShow="1" scope="testbugleft-tab"></menu>
