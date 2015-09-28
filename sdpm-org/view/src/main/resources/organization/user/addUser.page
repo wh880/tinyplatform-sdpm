@@ -31,8 +31,6 @@
         #@gridSysCol(3)#end
         #@gridSysCol(6)
             #@tinyForm("thisform" TINY_CONTEXT_PATH+"/org/user/save" "post" {"class":""})
-                #hiddenInput(hiddenInputName="orgUserId" hiddenInputValue=cmsArticle?.articleId)
-
             <imput type="hidden" name="orgUserId" value="${user?.orgUserId}"/>
                 #@noRespsGridSystem()
                     #@gridSysRow()
