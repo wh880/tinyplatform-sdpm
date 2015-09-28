@@ -25,71 +25,78 @@ import java.util.Date;
 public class ServiceClient {
 	public static Integer DELETE_YES = 1;
 	public static Integer DELETE_NO = 0;
-	/**
+	/** 
 	 * 客户ID
-	 *
+	 * 
 	 */
 	private Integer clientId;
-	/**
+
+	/** 
 	 * 客户名称
-	 *
+	 * 
 	 */
 	private String clientName;
-	/**
+
+	/** 
 	 * 客户描述
-	 *
+	 * 
 	 */
 	private String clientSpec;
-	/**
+
+	/** 
 	 * 客户编号
-	 *
+	 * 
 	 */
 	private String clientNO;
-	/**
+
+	/** 
 	 * 客户单位/部门ID
-	 *
+	 * 
 	 */
 	private Integer clientDeptId;
-	/**
+
+	/** 
 	 * 客户登记人
-	 *
+	 * 
 	 */
 	private String clientCreatedBy;
-	/**
+
+	/** 
 	 * 客户登记时间
-	 *
+	 * 
 	 */
 	private Date clientCreateDate;
-	/**
+
+	/** 
 	 * 客户状态
-	 *
+	 * 
 	 * 0-停止；1-活跃
 	 */
 	private Integer clientStatus;
-	/**
+
+	/** 
 	 * 客户联系电话
-	 *
+	 * 
 	 */
 	private String userPhone;
-	/**
+
+	/** 
 	 * 客户联系人
-	 *
+	 * 
 	 */
 	private String userAccount;
-	/**
+
+	/** 
 	 * 联系人职务
-	 *
+	 * 
 	 */
 	private String userPost;
-	/**
+
+	/** 
 	 * 已删除
-	 *
+	 * 
 	 */
 	private Integer deleted;
-
-	public ServiceClient() {
-		setDeleted(DELETE_NO);
-	}
 
 	public Integer getClientId() {
 		return clientId;

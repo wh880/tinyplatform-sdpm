@@ -19,13 +19,15 @@ package org.tinygroup.sdpm.product.dao.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 /** 
  * 计划表
  * 
  */
 public class ProductPlan implements Serializable{
+	
+	public static Integer DELETE_YES=1;
+	public static Integer DELETE_NO=0;
+
 
 	/** 
 	 * 计划ID
@@ -61,14 +63,12 @@ public class ProductPlan implements Serializable{
 	 * 计划开始时间
 	 * 
 	 */
-	@DateTimeFormat(pattern="yyyy/MM/dd hh:mm") 
 	private Date planBeginDate;
 
 	/** 
 	 * 计划结束时间
 	 * 
 	 */
-	@DateTimeFormat(pattern="yyyy/MM/dd hh:mm") 
 	private Date planEndDate;
 
 	/** 
@@ -78,6 +78,9 @@ public class ProductPlan implements Serializable{
 	private Integer deleted;
 
 
+	public ProductPlan() {
+		setDeleted(DELETE_NO);
+	}
 	public void setPlanId(Integer planId){
 		this. planId = planId;
 	}

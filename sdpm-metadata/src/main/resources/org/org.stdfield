@@ -1,5 +1,5 @@
 <standard-fields>
-  <standard-field id="c7d7754bfa85454993ffd049f902f1be" name="org_user_id" title="用户编号" business-type-id="095e594e1550424b9643c7e2279e85be" default="">
+  <standard-field id="c7d7754bfa85454993ffd049f902f1be" name="org_user_id" title="用户编号" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default="">
     <description></description>
   </standard-field>
   <standard-field id="6e55b0ac4e64416da2cac4a793e8762b" name="org_user_account" title="用户名" business-type-id="095e594e1550424b9643c7e2279e85be">

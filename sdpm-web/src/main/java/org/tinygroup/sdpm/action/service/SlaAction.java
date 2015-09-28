@@ -19,9 +19,10 @@ public class SlaAction extends BaseController {
     @Autowired
     private SlaService slaService;
 
-    @RequestMapping("form")
-    public String form(ServiceSla sla, Model model) {
-        if (sla != null) {
+    @RequestMapping("/form")
+    public String form(Integer id, Model model) {
+        if (id != null) {
+            ServiceSla sla = slaService.findSla(id);
             model.addAttribute("sla", sla);
         }
         return "/service/sla/slaAdd.page";

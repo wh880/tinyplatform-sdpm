@@ -26,6 +26,7 @@ import org.tinygroup.event.Event;
 import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
+import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 
 public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.DictService {
 
@@ -149,6 +150,11 @@ public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service
 	}
 		return event.getServiceRequest().getContext()
 			.get(resultsParam.get(0).getName());
+	}
+
+	public List<SystemDict> findDictList(SystemDict dict) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

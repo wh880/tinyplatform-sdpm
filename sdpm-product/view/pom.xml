@@ -26,6 +26,11 @@
         <version>${tiny_sdpm_version}</version>
     </dependency>-->
     <dependency>
+         <groupId>org.tinygroup</groupId>
+         <artifactId>org.tinygroup.jquery</artifactId>
+         <version>${tiny_ui_version}</version>
+     </dependency>
+    <dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-product-service-interface</artifactId>
         <version>${tiny_sdpm_version}</version>
@@ -79,11 +84,7 @@
 			<version>${tiny_ui_version}</version>
 		</dependency> 
 		
-	<!--	<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.jquery</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>
+		
 			<dependency>
 			<groupId>org.tinygroup</groupId>
 			<artifactId>org.tinygroup.bootstrap</artifactId>
@@ -175,54 +176,7 @@
 			<artifactId>org.tinygroup.jqueryUi</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.widget</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.layer</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>
 		
-		<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.zTree</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.UEditor</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.bootstrapDate</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.interfaceElements</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.uiupload</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.fullCalendar</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>-->
-		
-		<!-- 这是一个折叠的依赖 -->
-		<dependency>
-	<groupId>org.tinygroup</groupId>
-	<artifactId>org.tinygroup.fold</artifactId>
-	<version>${tiny_ui_version}</version>
-	</dependency>
     
   </dependencies>
 </project>

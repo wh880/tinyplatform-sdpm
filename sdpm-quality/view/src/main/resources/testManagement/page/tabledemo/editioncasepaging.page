@@ -10,7 +10,7 @@
 					#@th()所属产品#end
 					#@td()
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("productId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="CT">产品2</option>
 	                        <option value="DE">产品3</option>
 	                        <option value="FL">产品4</option>
@@ -27,7 +27,7 @@
 					#@th()所属模块#end
 					#@td()
 						  #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="CT">/1/2</option>
 	                        <option value="DE">/2/3</option>
 	                        <option value="IN">/3/4</option>
@@ -40,7 +40,7 @@
 				#@th()相关需求#end
 				#@td()
 							 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("storyId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">需求1</option>
 	                        <option value="ME">需求2</option>
 	                        <option value="MD">需求3</option>
@@ -55,7 +55,7 @@
 				#@th()用例类型#end
 				#@td()
 				#@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("caseType" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">1</option>
 	                        <option value="ME">2</option>
 	                        <option value="MD">3</option>
@@ -67,7 +67,7 @@
 				#@th()试用阶段#end
 				#@td()
 					#@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("caseStage" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">1</option>
 	                        <option value="ME">2</option>
 	                        <option value="MD">3</option>
@@ -79,7 +79,7 @@
 				#@th()优先级#end
 				#@td() 
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("priority" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">1</option>
 	                        <option value="ME">2</option>
 	                        <option value="MD">3</option>
@@ -91,7 +91,7 @@
 				#@th()用例状态#end
 				#@td()
 				 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("caseStatus" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">1</option>
 	                        <option value="ME">2</option>
 	                        <option value="MD">3</option>
@@ -102,12 +102,12 @@
 			#@tr()
 				#@th()关键词#end
 				#@td()
-					#tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+					#tinyInput("text" "caseKeywords" ""{"datatype":"","id":"版本","class":"input-text"})
 				#end
 			#end
 			#@tr()
 				#@th()相关用例#end
-				#@td()#tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
+				#@td()#tinyInput("text" "linkCase" ""{"datatype":"","id":"抄送给","class":"input-text"})
 				#end
 			#end
 		#end

@@ -62,6 +62,20 @@ public interface TaskManager {
      * @return
      */
     Integer updateTask(ProjectTask task);
+    /**
+     * 更新用户
+     *
+     * @param task 需要更新的实体类
+     * @return
+     */
+    Integer updateEditTask(ProjectTask task);
+    /**
+     * 更新用户
+     *
+     * @param task 需要更新的实体类
+     * @return
+     */
+    Integer updateCallTask(ProjectTask task);
 
     /**
      * 根据id进行软删除用户

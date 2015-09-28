@@ -25,12 +25,14 @@ public interface PlanService{
 	 */
 	int[] updateBatchPlan(List<ProductPlan> plan);
 	
-	/**
-	 * 根据计划ID删除计划
-	 * @parm plan
-	 * @ruturn
-	 */
-	int deletePlan(Integer planId);
+
+    /**
+     * 根据id进行软删除用户
+     *
+     * @param id 主键
+     * @return
+     */
+    Integer deletePlan(Integer planId);
 	
 	/**
 	 * 根据Id查找

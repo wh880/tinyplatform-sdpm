@@ -52,6 +52,11 @@ public class ServiceClientUser {
 	 */
 	private String userPost;
 
+	/**
+	 * 已删除
+	 */
+	private Integer deleted;
+
 	public Integer getId() {
 		return id;
 	}
@@ -90,6 +95,14 @@ public class ServiceClientUser {
 
 	public void setUserPost(String userPost){
 		this. userPost = userPost;
+	}
+
+	public Integer getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Integer deleted) {
+		this.deleted = deleted;
 	}
 
 }

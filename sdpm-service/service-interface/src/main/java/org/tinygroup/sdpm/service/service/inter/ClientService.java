@@ -83,4 +83,13 @@ public interface ClientService {
      */
     ServiceClientUser addClientUser(ServiceClientUser clientUser);
 
+    /**
+     * 编辑一个客户联系人
+     *
+     * @param clientUser 编辑实体类
+     * @return
+     */
+    ServiceClientUser updateClientUser(ServiceClientUser clientUser);
+
+    List<ServiceClientUser> getAllClientUser(ServiceClientUser clientUser);
 }

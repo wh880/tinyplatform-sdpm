@@ -1,16 +1,13 @@
 ###seltreeInit("dictitemTree" "/data/tree/dict.js")
 #@formHorizoontalValidate("" "dictitem-add")
 		#@rowCol("col-3" "编码：" "col-5" "*")
-			#@inputTextx("dictitemCode" "编码" "*" "编码不能为空")#end
-		#end
-		#@rowCol("col-3" "名称：" "col-5" "*")
-			#@inputTextx("dictitemName" "名称" "*" "名称不能为空")#end
+			#@inputTextx("dictKey" dict?.dictKey "*" "编码不能为空")#end
 		#end
 		#@rowCol("col-3" "值：" "col-5" "*")
-			#@inputTextx("dictitemValue" "值" "*" "值不能为空")#end
+			#@inputTextx("dictValue" dict?.dictValue "*" "值不能为空")#end
 		#end
 		#@rowCol("col-3" "排序号：" "col-5")
-			#@inputTextx("sortNo" "排序号" "/^[0-9]*$/")#end
+			#@inputTextx("dictSort" dict?.dictSort "/^[0-9]*$/")#end
 		#end
 		#@rowCol("col-3" "字典类型：" "col-5" "*")
 			#@tinySelectOrAdd("dictType" "dictType" "" "" "/system/page/dictionaries/data/select/dict.js" "/system/page/dictionaries/dict_edit.pagelet")#end

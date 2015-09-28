@@ -1,2 +1,19 @@
-    #include("/project/task/taskMenu.page")
-	#include("/project/allProjectList.page")
+#set(name="task")
+#@div()
+	#@tabWithInit("tab_demo" "optionsBox")
+		#@div(divClass="dropdownBox")
+			#include("/project/dropdownMenu.page")
+		#end
+		#@tabHead()
+			#include("/project/protab.page")
+		#end
+	##head end
+		#@tabBodyCol("ptop-5")
+		##operationbar start
+			#include("/project/task/taskMenu.page")
+		##operationbay end
+		#end
+	##body end
+	#end
+#end
+#include("/project/allProjectList.page")

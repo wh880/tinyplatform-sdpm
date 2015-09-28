@@ -51,6 +51,15 @@ public class ClientAction extends BaseController {
         return "service/client/clientAdd.page";
     }
 
+    @RequestMapping("/edit")
+    public String edit(Integer id, Model model) {
+        if (id != null) {
+            ServiceClient client = clientService.findClient(id);
+            model.addAttribute("client", client);
+        }
+        return "service/client/clientEdit.page";
+    }
+
     @RequestMapping(value = "/save")
     public String save(ServiceClient client, Model model) {
         ServiceClientUser serviceClientUser = new ServiceClientUser();
@@ -122,7 +131,21 @@ public class ClientAction extends BaseController {
         if (id != null) {
             ServiceClient client = clientService.findClient(id);
             model.addAttribute("client", client);
+            ServiceClientUser clientUser = new ServiceClientUser();
+            clientUser.setClientId(id);
+            List<ServiceClientUser> clientUsers = clientService.getAllClientUser(clientUser);
+            model.addAttribute("clientUsers", clientUsers);
         }
         return "service/client/clientInfo.page";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteClientUser")
+    public Map deleteClientUser(Integer id) {
+        clientService.deleteClient(id);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "y");
+        map.put("info", "删除成功");
+        return map;
     }
 }

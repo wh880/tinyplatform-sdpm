@@ -24,10 +24,7 @@ public class PlanServiceImpl implements PlanService {
 		return planManager.update(plan);
 	}
 
-	public int deletePlan(Integer planId) {
 
-		return planManager.delete(planId);
-	}
 
 	public ProductPlan findPlan(Integer planId) {
 
@@ -51,9 +48,10 @@ public class PlanServiceImpl implements PlanService {
 		return planManager.findPager(page, limit, productPlan, order, ordertype);
 	}
 
-
-
-
+	public Integer deletePlan(Integer planId) {
+		
+		return planManager.delete(planId);
+	}
 
 
 }

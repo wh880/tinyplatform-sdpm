@@ -1,8 +1,8 @@
 #@divHorizontal()
 	#@viewRowCol("代码：")
-		sex
+		${dict?.dictKey}
 	#end
 	#@viewRowCol("中文名：")
-		性别
+	   ${dict?.dictValue}
 	#end					
 #end

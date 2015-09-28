@@ -26,13 +26,13 @@ public interface PlanManager {
 	 */
 	int[] updateBatch(List<ProductPlan> productplan);
 	
-	 /**
-     * 根据id进行软删除计划
-     *
-     * @param id 主键
-     * @return
-     */
-    Integer delete(Integer planId);
+	
+	/**
+	 * 根据ID进行软删除
+	 * @param planId
+	 * @return
+	 */
+	 Integer delete(Integer planId);
 	/**
 	 * 根据Id查找
 	 * @param planId

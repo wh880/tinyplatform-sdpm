@@ -20,14 +20,15 @@
 	##body end
 	#end
 #end
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/save" "post" {"class":"test"})
+#@tinyForm("closeForm" TINY_CONTEXT_PATH+"/project/task/save" "post" {"class":"test"})
 	#hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
 	#hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
 	#hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
 	#hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
+	#hiddenInput(hiddenInputName="taskStatus" hiddenInputValue="6")
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
-        <p class="titleName">${task?.taskName}>编辑关闭</p>
+        <p class="titleName">${task?.taskName}>关闭</p>
 	##在边框的右上角加需要的按钮或者别的，根据需求选择是否添加
 	#*<div class="RTtitle">
         <button type="submit" id="submit" class="commitBtn">保存</button>

@@ -57,6 +57,11 @@ public class ServiceClientUserTable extends Table {
 	 */
 	public final Column USER_POST = new Column(this, "user_post");
 
+	/**
+	 * 已删除
+	 */
+	public final Column DELETED = new Column(this, "deleted");
+
 
 	private ServiceClientUserTable() {
 		super("service_client_user");

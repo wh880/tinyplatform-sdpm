@@ -16,7 +16,7 @@
 						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${l.caseId}</a>#end
 						#@td()
 						#@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("caseVersion" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">版本1</option>
 	                        <option value="ME">版本2</option>
 	                        <option value="MD">版本3</option>

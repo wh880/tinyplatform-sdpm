@@ -1,27 +1,23 @@
-#macro setTinyItemCount(num)
-<input type="hidden" name="records" value="${num}"/>
-#end
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-    #set(pagesize=records-(page-1)*pagesize)
-#end
-#setTinyItemCount(52)
-#foreach(var:[1..pagesize])
+#setTinyItemCount(pager.totalPages)
+#foreach(var:pager.records)
 #@tr()
-    #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()001${page}#end
-    #@td()习近平#end
-    #@td()主席#end
+    #@td()<input type="checkbox" value="${var?.orgRoleId}" name="orgRoleId">#end
+    #@td()${var?.orgRoleId}#end
+    #@td()${var?.orgRoleName}#end
+    #@td()${var?.orgRoleRemarks}#end
     #@td()
         #set(map={"org-privilege-user":[700,300],"org-privilege-copy":[700,300],"org-privilege-edit":[600,200]})
         #foreach(m:menuManager.getScopeMenus("org-privilege"))
             #if(m.id == "org-privilege-maintain"||m.id=="org-privilege-user"||m.id=="org-privilege-edit")
-            <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var?.orgRoleId}"
+               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            #elseif(m.id=="org-privilege-copy")
+                #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?id="+var?.orgRoleId "ml-5")
             #else
-                #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?id="+var "ml-5")
+                #@tinyTableItemRemove(TINY_CONTEXT_PATH+m.href var.orgRoleId)<i class=${m.icon}></i>#end
             #end
         #end
-    <a><i class="icon-remove" itemId="deleteList"></i></a>
+    ##  <a><i class="icon-remove" itemId="deleteList"></i></a>
     #end
 #end
 #end
