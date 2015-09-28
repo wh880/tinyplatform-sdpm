@@ -88,7 +88,7 @@ public class BugAction extends BaseController {
 		return "testManagement/page/tabledemo/edition.page";
 	}
 			
-	@RequestMapping("add")
+	@RequestMapping("/add")
 	public String add(QualityBug bug,Model model){
 		QualityBug bugadd =	bugService.addBug(bug);
 		model.addAttribute("bugadd",bugadd);
