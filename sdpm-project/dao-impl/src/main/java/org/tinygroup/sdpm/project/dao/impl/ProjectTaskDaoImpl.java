@@ -129,7 +129,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
 	}
 
 	@LogMethod("editTask")
-	public int editTask(ProjectTask projectTask) {
+	public Integer editTask(ProjectTask projectTask) {
 		if (projectTask == null || projectTask.getTaskId() == null) {
 			return 0;
 		}
@@ -161,6 +161,33 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
 			}
 		});
 	}
+
+	@LogMethod("editcall")
+	public Integer editcall(ProjectTask projectTask) {
+		if (projectTask == null || projectTask.getTaskId() == null) {
+			return 0;
+		}
+//		return getDslTemplate().update(projectTask, new UpdateGenerateCallback<ProjectTask>() {
+//			public Update generate(ProjectTask t) {
+//				Update update = update(PROJECT_TASKTABLE).set(
+//						PROJECT_TASKTABLE.TASK_PROJECT.value(t.getTaskProject()),
+//						PROJECT_TASKTABLE.TASK_NAME.value(t.getTaskName()),
+//						PROJECT_TASKTABLE.TASK_TYPE.value(t.getTaskType()),
+//						PROJECT_TASKTABLE.TASK_LEFT.value(t.getTaskLeft()),
+//						PROJECT_TASKTABLE.TASK_STATUS.value(t.getTaskStatus()),
+//						PROJECT_TASKTABLE.TASK_ASSIGNED_TO.value(t.getTaskAssignedTo())).where(
+//						PROJECT_TASKTABLE.TASK_ID.eq(t.getTaskId()));
+//				return update;
+//			}
+//		});
+		Update update = update(PROJECT_TASKTABLE).set(
+				PROJECT_TASKTABLE.TASK_ASSIGNED_TO.value(projectTask.getTaskAssignedTo()),
+				PROJECT_TASKTABLE.TASK_LEFT.value(projectTask.getTaskLeft()),
+				PROJECT_TASKTABLE.TASK_STATUS.value(projectTask.getTaskStatus())).where(PROJECT_TASKTABLE.TASK_ID.eq(projectTask.getTaskId()));
+		getDslSession().execute(update);
+		return null;
+	}
+
 	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk) {
 		if (pk == null) {

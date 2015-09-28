@@ -24,4 +24,7 @@ import org.tinygroup.tinysqldsl.Pager;
 public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
     public Pager<ProjectTask> queryPagerByStuta(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderBies);
 
+    Integer editTask(ProjectTask task);
+
+    Integer editcall(ProjectTask task);
 }
