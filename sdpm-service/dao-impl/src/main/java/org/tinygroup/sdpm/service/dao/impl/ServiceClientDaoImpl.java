@@ -263,7 +263,7 @@ public class ServiceClientDaoImpl extends TinyDslDaoSupport implements ServiceCl
         return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
             public Update generate(Integer id) {
                 Update update = update(SERVICE_CLIENTTABLE).set(
-                        SERVICE_CLIENTTABLE.DELETED.value(DELETE_YES)).where(
+                        SERVICE_CLIENTTABLE.DELETED.value(ServiceClient.DELETE_YES)).where(
                         SERVICE_CLIENTTABLE.CLIENT_ID.eq(id));
                 return update;
             }

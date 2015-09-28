@@ -138,4 +138,14 @@ public class ClientAction extends BaseController {
         }
         return "service/client/clientInfo.page";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteClientUser")
+    public Map deleteClientUser(Integer id) {
+        clientService.deleteClient(id);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "y");
+        map.put("info", "删除成功");
+        return map;
+    }
 }

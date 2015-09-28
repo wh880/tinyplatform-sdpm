@@ -23,13 +23,6 @@ import java.util.Date;
  * 
  */
 public class ServiceFaqType {
-	public static Integer DELETE_YES=1;
-	public static Integer DELETE_NO=1;
-
-	public ServiceFaqType()
-	{
-		setDeleted(DELETE_NO);
-	}
 
 	/** 
 	 * 问题类型id

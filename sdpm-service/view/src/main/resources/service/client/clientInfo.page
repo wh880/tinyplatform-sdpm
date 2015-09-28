@@ -106,11 +106,9 @@
                                 <a href="${TINY_CONTEXT_PATH}${m.href}"
                                    title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                             #end
-                            #set(m2=menuManager.getMenu("linkman-new"))
+                            #set(m2=menuManager.getMenu("linkman-del"))
                             #if(m2)
-                                #@aModal("#myModal1" "新建" "500" "200" "icon-book"
-                                    "/service/client/companyInfoEdit2.pagelet")新建
-                                #end
+                                #@tinyTableItemRemove(TINY_CONTEXT_PATH+m2.href var.clientId)<i class=${m.icon}></i>#end
                             #end
                         </td>
                     </tr>

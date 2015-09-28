@@ -5,6 +5,7 @@
 
 
 #@tinyForm("thisform" "" "post" {"class":"test"})
+    #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue=task?.taskStatus)
 ##若改为弹出框，table的样式需要修改为无边框样式
     #@tableBordered("table-border")
         #@thead()
