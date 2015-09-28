@@ -63,7 +63,8 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
 					SYSTEM_MODULETABLE.MODULE_ORDER.value(t.getModuleOrder()),
 					SYSTEM_MODULETABLE.MODULE_TYPE.value(t.getModuleType()),
 					SYSTEM_MODULETABLE.MODULE_OWNER.value(t.getModuleOwner()),
-					SYSTEM_MODULETABLE.MODULE_ID.value(t.getModuleId()));
+					SYSTEM_MODULETABLE.MODULE_ID.value(t.getModuleId()),
+					SYSTEM_MODULETABLE.MODULE_TITLE.value(t.getModuleTitle()));
 				return insert;
 			}
 		});
@@ -83,7 +84,8 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
 					SYSTEM_MODULETABLE.MODULE_GRADE.value(t.getModuleGrade()),
 					SYSTEM_MODULETABLE.MODULE_ORDER.value(t.getModuleOrder()),
 					SYSTEM_MODULETABLE.MODULE_TYPE.value(t.getModuleType()),
-					SYSTEM_MODULETABLE.MODULE_OWNER.value(t.getModuleOwner())).where(
+					SYSTEM_MODULETABLE.MODULE_OWNER.value(t.getModuleOwner()),
+					SYSTEM_MODULETABLE.MODULE_TITLE.value(t.getModuleTitle())).where(
 					SYSTEM_MODULETABLE.MODULE_ID.eq(t.getModuleId()));
 				return update;
 			}
@@ -138,7 +140,8 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
 					SYSTEM_MODULETABLE.MODULE_GRADE.eq(t.getModuleGrade()),
 					SYSTEM_MODULETABLE.MODULE_ORDER.eq(t.getModuleOrder()),
 					SYSTEM_MODULETABLE.MODULE_TYPE.eq(t.getModuleType()),
-					SYSTEM_MODULETABLE.MODULE_OWNER.eq(t.getModuleOwner())));
+					SYSTEM_MODULETABLE.MODULE_OWNER.eq(t.getModuleOwner()),
+					SYSTEM_MODULETABLE.MODULE_TITLE.eq(t.getModuleTitle())));
 		return addOrderByElements(select, orderBies);
 			}
 		});
@@ -160,7 +163,8 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
 					SYSTEM_MODULETABLE.MODULE_GRADE.eq(t.getModuleGrade()),
 					SYSTEM_MODULETABLE.MODULE_ORDER.eq(t.getModuleOrder()),
 					SYSTEM_MODULETABLE.MODULE_TYPE.eq(t.getModuleType()),
-					SYSTEM_MODULETABLE.MODULE_OWNER.eq(t.getModuleOwner())));
+					SYSTEM_MODULETABLE.MODULE_OWNER.eq(t.getModuleOwner()),
+					SYSTEM_MODULETABLE.MODULE_TITLE.eq(t.getModuleTitle())));
 		return addOrderByElements(select, orderBies);
 			}
 		});
@@ -181,8 +185,8 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
 					SYSTEM_MODULETABLE.MODULE_GRADE.value(new JdbcNamedParameter("moduleGrade")),
 					SYSTEM_MODULETABLE.MODULE_ORDER.value(new JdbcNamedParameter("moduleOrder")),
 					SYSTEM_MODULETABLE.MODULE_TYPE.value(new JdbcNamedParameter("moduleType")),
-					SYSTEM_MODULETABLE.MODULE_OWNER.value(new JdbcNamedParameter("moduleOwner"))
-);
+					SYSTEM_MODULETABLE.MODULE_OWNER.value(new JdbcNamedParameter("moduleOwner")),
+					SYSTEM_MODULETABLE.MODULE_TITLE.value(new JdbcNamedParameter("moduleTitle")));
 			}
 		});
 	}
@@ -206,7 +210,8 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
 					SYSTEM_MODULETABLE.MODULE_GRADE.value(new JdbcNamedParameter("moduleGrade")),
 					SYSTEM_MODULETABLE.MODULE_ORDER.value(new JdbcNamedParameter("moduleOrder")),
 					SYSTEM_MODULETABLE.MODULE_TYPE.value(new JdbcNamedParameter("moduleType")),
-					SYSTEM_MODULETABLE.MODULE_OWNER.value(new JdbcNamedParameter("moduleOwner"))).where(
+					SYSTEM_MODULETABLE.MODULE_OWNER.value(new JdbcNamedParameter("moduleOwner")),
+					SYSTEM_MODULETABLE.MODULE_TITLE.value(new JdbcNamedParameter("moduleTitle"))).where(
 				SYSTEM_MODULETABLE.MODULE_ID.eq(new JdbcNamedParameter("moduleId")));
 			}
 		});
@@ -228,7 +233,8 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
 				SYSTEM_MODULETABLE.MODULE_ORDER.eq(new JdbcNamedParameter("moduleOrder")),
 				SYSTEM_MODULETABLE.MODULE_TYPE.eq(new JdbcNamedParameter("moduleType")),
 				SYSTEM_MODULETABLE.MODULE_OWNER.eq(new JdbcNamedParameter("moduleOwner")),
-				SYSTEM_MODULETABLE.MODULE_ID.eq(new JdbcNamedParameter("moduleId"))));
+				SYSTEM_MODULETABLE.MODULE_ID.eq(new JdbcNamedParameter("moduleId")),
+				SYSTEM_MODULETABLE.MODULE_TITLE.eq(new JdbcNamedParameter("moduleTitle"))));
 			}
 		});
 	}

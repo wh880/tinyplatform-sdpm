@@ -81,6 +81,12 @@ public class SystemModuleTable extends Table {
 	 */
 	public final Column MODULE_ID = new Column(this, "module_id");
 
+	/** 
+	 * 中文名
+	 * 
+	 */
+	public final Column MODULE_TITLE = new Column(this, "module_title");
+
 
 	private SystemModuleTable() {
 		super("system_module");
