@@ -64,14 +64,11 @@ public class TaskAction extends BaseController {
     }
     @RequestMapping("close")
     public String close(Integer taskId, Model model) {
-        if (taskId != null) {
-            ProjectTask task = taskService.findTask(taskId);
-            model.addAttribute("task", task);
-            //还需要查询其他相关任务剩余时间的信息
-            return "project/task/close.page";
-        }
-        return "error";
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+        return "project/task/close.page";
     }
+
     @RequestMapping("start")
     public String start(Integer taskId, Model model) {
         if (taskId != null) {
