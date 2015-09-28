@@ -19,6 +19,7 @@
     #end
    #* #@tinyForm("thisform" "" "" {"class":"test"})*#
     #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/sla/save" "post" {"class":""})
+    <input type="hidden" name="slaId" value="${sla?.slaId}"/>
     <div style="width:100%;float:left" class="pageleftpart">
         <div class="infoContent">
         ##            <p class="titleName">编辑协议</p>
@@ -28,11 +29,11 @@
                     #*#@Tselect2Body(
                         "clientId" "sla.clientId" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项*#
                         #@Tselect2Body(
-                            "clientId" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="IN">请选择</option>
-                            <option value="02">恒生</option>
-                            <option value="03">阿里</option>
-                            <option value="04">网易</option>
+                            "clientId" sla?.clientId{"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="0">恒生</option>
+                            <option value="1">云融</option>
+                            <option value="2">阿里</option>
+                            <option value="3">网易</option>
                         #end
                         #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/clientAdd.page"
                                           class="r ">增加</a>#end
@@ -41,11 +42,12 @@
             #end
             #@elementItem()
                 #@sdpmItem("产品名称" "*")
-                    #@tinySelect("productId" "ch"{"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
-                        #@tinyOptionItem("ch")请选择#end
-                        #@tinyOptionItem("02")支付宝#end
-                        #@tinyOptionItem("03")余额宝#end
-                        #@tinyOptionItem("04")财付通#end
+                    #@tinySelect(
+                        "productId" sla?.productId {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        #@tinyOptionItem("0")恒生#end
+                        #@tinyOptionItem("1")支付宝#end
+                        #@tinyOptionItem("2")余额宝#end
+                        #@tinyOptionItem("3")财付通#end
                     #end
                 #end
             #end
@@ -59,12 +61,12 @@
             #end
             #@elementItem()
                 #@sdpmItem("服务级别" "*")
-                    #@tinySelect("serviceLevel" "zh" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
-                        #@tinyOptionItem("zh")请选择#end
-                        #@tinyOptionItem("02")0基础#end
-                        #@tinyOptionItem("03")1潜力#end
-                        #@tinyOptionItem("04")2核心#end
-                        #@tinyOptionItem("05")3vip#end
+                    #@tinySelect(
+                        "serviceLevel" sla?.serviceLevel{"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        #@tinyOptionItem("0")基础#end
+                        #@tinyOptionItem("1")潜力#end
+                        #@tinyOptionItem("2")核心#end
+                        #@tinyOptionItem("3")vip#end
                     #end
                 #end
             #end
@@ -118,13 +120,13 @@
             #end
             #@elementItem()
                 #@sdpmItem("服务级别协议" "*")
-                    #@tinySelect("slaStatus" "aa" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
-                        #@tinyOptionItem("aa")请选择#end
-                        #@tinyOptionItem("01")0新建#end
-                        #@tinyOptionItem("02")1生效#end
-                        #@tinyOptionItem("03")2到期#end
-                        #@tinyOptionItem("04")3作废#end
-                        #@tinyOptionItem("05")4关闭#end
+                    #@tinySelect(
+                        "slaStatus" sla?.slaStatus {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        #@tinyOptionItem("0")新建#end
+                        #@tinyOptionItem("1")生效#end
+                        #@tinyOptionItem("2")到期#end
+                        #@tinyOptionItem("3")作废#end
+                        #@tinyOptionItem("4")关闭#end
                     #end
                 #end
             #end
