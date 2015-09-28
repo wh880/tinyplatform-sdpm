@@ -6,7 +6,7 @@
     #@tr()
         #@td()<input type="checkbox" value="${var.clientId}" name="idCheck">#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientSla?id=${var.clientId}">${var.clientId}</a>#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">${var.clientName}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientDetail?id=${var.clientId}">${var.clientName}</a>#end
         #@td()${var.clientNO}#end
         #@td()${var.clientCreatedBy}#end
         #@td()${formatDate(var.clientCreateDate,"yyyy-MM-dd")}#*${var.clientCreateDate}*##end

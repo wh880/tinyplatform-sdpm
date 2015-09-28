@@ -19,12 +19,6 @@ package org.tinygroup.sdpm.product.dao.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-/** 
- * 产品表
- * 
- */
 
 public class Product implements Serializable{
 
@@ -124,7 +118,6 @@ public class Product implements Serializable{
 	 * 创建日期
 	 * 
 	 */
-	@DateTimeFormat
 	private Date productCreatedDate;
 
 	/** 

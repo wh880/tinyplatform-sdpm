@@ -1,5 +1,5 @@
 <service-components>
-  <service-component type="org.tinygroup.sdpm.product.service.impl.StorySpecServiceImpl" bean="org.tinygroup.sdpm.product.service">
+  <service-component type="org.tinygroup.sdpm.product.service.impl.StorySpecServiceImpl" bean="">
     <service-method local-name="findStorySpec" service-id="product_findStorySpec" method-name="findStorySpec" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
         <service-parameter name="storyId" type="java.lang.Integer" required="false" is-array="false"/>
