@@ -9,7 +9,7 @@
 
 #set(name="documentDocu")
 #include("doc-tab.page")
-#@tinyForm("thisform" "url" "post" {"class":""})
+#@tinyForm("this--form" TINY_CONTEXT_PATH+"/document/edit-doc/save" "post" {"class":"edit"})
 	<div style="width:100%">
     	<div class="infoContent">
 			<p class="titleName">编辑</p>
@@ -18,13 +18,13 @@
          <div class="col-2 text-r"><label>所属文档库：</label></div>
          <div class="col-4">
           #@Tselect2F()
-	          #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                <option value="IN">A</option>
+	          #@Tselect2Body("docLib" doc?.docLib {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                <option value="${doc?.docLib}">${doc?.docLib}</option>
 	               <option value="ME">B</option>
 	                <option value="MD">C</option>
 	               #end                
 	           #@Tselect2Fix()
-	           	<a href="${TINY_CONTEXT_PATH}/document/document.page">全部</a>#end
+	           	<a href="#">全部</a>#end
               #end
               	</div>
        		</div>
@@ -34,8 +34,8 @@
          <div class="col-2 text-r"><label>所属分类：</label></div>
          <div class="col-4">
           #@Tselect2F()
-	          #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                <option value="IN">1</option>
+	          #@Tselect2Body("docModule" doc?.docModule {"class":"input-text select2"}) 
+	                <option value="${doc?.docModule}">${doc?.docModule}</option>
 	               <option value="ME">2</option>
 	                <option value="MD">3</option>
 	               #end                	         
@@ -47,7 +47,7 @@
         <div class="col-12">
          <div class="col-2 text-r"><label>文档类型：</label></div>
          	<div class="col-4">
-          		文件
+          		${doc?.docType}
               	</div>
        		</div>
      #end
@@ -55,7 +55,7 @@
         <div class="col-12">
          <div class="col-2 text-r"><label>文档标题：</label></div>
          		<div class="col-4">
-           	 	#tinyInput("text" "文档标题" ""{"datatype":"*","id":"文档标题","class":"input-text"})
+           	 	#@tinyInput("text" "docTitle" doc.docTitle {"datatype":"*","id":"docTitle","class":"input-text"})${doc?.docTitle}#end
               	</div>
        	</div>
      #end
@@ -63,7 +63,7 @@
         <div class="col-12">
          <div class="col-2 text-r"><label>关键字：</label></div>
          		<div class="col-4">
-           	 	#tinyInput("text" "关键字" ""{"datatype":"","id":"关键字","class":"input-text"})
+           	 	#tinyInput("text" "docKeywords" doc.docKeywords {"datatype":"","id":"docKeywords","class":"input-text"})
               	</div>
        	</div>
      #end
@@ -71,7 +71,7 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>文档摘要：</label></div>
                 <div class="col-6">
-                    #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+                    #@Teditor("docDigest" "content" {"initialFrameHeight":"150"})${doc?.docDigest}#end</div>
        			</div>
         #end
         #@elementItem()
@@ -79,7 +79,7 @@
                 <div class="col-2 text-r"><label>文档备注：</label></div>
 
                 <div class="col-6">
-                    #@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end</div>
+                    #@Teditor("beizhu" "content" {"initialFrameHeight":"150"})beizhu#end</div>
             </div>
         #end
         #@elementItem()

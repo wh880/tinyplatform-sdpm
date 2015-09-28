@@ -4,12 +4,12 @@
 	icon="icon-inbox" sort="500" isShow="1" permission="Permission">
 	<menu id="doc-my" parent-id="idocument" name="文档"
 		href="/document/document.page" icon="" sort="1" isShow="1">
-		<menu id="docedit" name="编辑" href="/document/table-edit.page"
+		<menu id="docedit" name="编辑" href="/document/doc-edit"
 			icon="icon-pencil" sort="2" isShow="1"
 			scope="doc-op,product-ar,pro-document-op"></menu>
 		<menu id="docdelete" name="删除" href="/tinyuiweb/action/del.pagelet"
 			icon="icon-remove" sort="1" isShow="1" scope="doc-op"></menu>
-		<menu id="add-doc" name="创建文档" href="/document/table-edit.page"
+		<menu id="add-doc" name="创建文档" href="/document/add-doc.page"
 			icon="icon-plus" sort="1" isShow="1" scope="add-doc"></menu>
 	</menu>
 </menu>

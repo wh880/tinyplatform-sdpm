@@ -12,7 +12,7 @@
         ##operationbar start
             #@div(divClass="operationbar")
             <span class="f">
-            	<a href="${TINY_CONTEXT_PATH}/document/document">按模块浏览</a>
+            	<a href="${TINY_CONTEXT_PATH}/document">按模块浏览</a>
             	<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
             	         	
             </span>
