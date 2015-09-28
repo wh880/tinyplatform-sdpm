@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.PlanService;
+import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.tinysqldsl.Pager;
 
 /**
@@ -20,6 +21,9 @@ import org.tinygroup.tinysqldsl.Pager;
 public class PlanAction {
 	@Autowired
 	private PlanService planService;
+	
+	@Autowired
+	private ProductService productService;
 
 	@RequestMapping("/save")
 	public String save(ProductPlan productPlan, Model model) {
