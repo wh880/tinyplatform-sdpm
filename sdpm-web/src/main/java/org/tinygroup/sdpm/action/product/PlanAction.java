@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -18,7 +19,7 @@ import org.tinygroup.tinysqldsl.Pager;
  */
 @Controller
 @RequestMapping("/product/plan")
-public class PlanAction {
+public class PlanAction  extends BaseController{
 	@Autowired
 	private PlanService planService;
 	
@@ -52,9 +53,9 @@ public class PlanAction {
 		
 		ProductPlan plan = planService.findPlan(planId);
 		
-		model.addAttribute("productPlan",plan);
+		model.addAttribute("plan",plan);
 		
-		return "";
+		return "/product/page/tabledemo/product-plan-update.page";
 	}
 
 	@RequestMapping("/list")

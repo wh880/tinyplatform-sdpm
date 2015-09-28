@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.tinysqldsl.Pager;
@@ -17,7 +18,7 @@ import org.tinygroup.tinysqldsl.Pager;
  */
 @Controller
 @RequestMapping("/product")
-public class ProductAction {
+public class ProductAction  extends BaseController{
 
 	@Autowired
 	private ProductService productService;
