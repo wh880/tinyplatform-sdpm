@@ -39,7 +39,7 @@
 			tiptype:2,
 			beforeSubmit : function(form) {
 				var options = {
-					url:"#link("/page/ajax.pagelet")",##暂时固定
+					url:form.action,
 					type:"post",
 					success:function(data){
 						if($(form).parents(".modal")){
