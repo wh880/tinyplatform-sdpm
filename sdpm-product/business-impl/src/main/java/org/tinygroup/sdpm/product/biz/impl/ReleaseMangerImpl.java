@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.biz.inter.ReleaseManger;
 import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.tinysqldsl.Pager;
 

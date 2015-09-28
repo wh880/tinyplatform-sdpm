@@ -24,6 +24,10 @@ import java.util.Date;
  * 
  */
 public class ProductPlan implements Serializable{
+	
+	public static Integer DELETE_YES=1;
+	public static Integer DELETE_NO=0;
+
 
 	/** 
 	 * 计划ID
@@ -74,6 +78,9 @@ public class ProductPlan implements Serializable{
 	private Integer deleted;
 
 
+	public ProductPlan() {
+		setDeleted(DELETE_NO);
+	}
 	public void setPlanId(Integer planId){
 		this. planId = planId;
 	}
