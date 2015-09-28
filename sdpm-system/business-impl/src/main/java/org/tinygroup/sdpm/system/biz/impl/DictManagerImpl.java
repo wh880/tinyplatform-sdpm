@@ -55,10 +55,16 @@ public class DictManagerImpl implements DictManager {
 			boolean asc) {
 		Pager<SystemDict> pagerDict= systemDictDao.queryPager(start, limit, dict,  new OrderBy(columnName, asc));
 //		Pager<SystemDict> pager;
-		for(int i=0;i<pagerDict.getRecords().size();i++){
-			if(pagerDict.getRecords().get(i).getDeleted()==1){
-				pagerDict.getRecords().remove(i);
-			}
+		if(pagerDict.getRecords()!=null&&pagerDict.getRecords().size()>0){
+			List<SystemDict> list = pagerDict.getRecords();
+			int listSize = pagerDict.getRecords().size();
+		    for(int i=0;i<listSize;i++){
+			  if(list.get(i).getDeleted()==1){
+				list.remove(i);
+			  }
+		   }
+		   pagerDict.setRecords(list);
+		   pagerDict.setTotalCount(list.size());
 		}
 		return pagerDict;
 	}
