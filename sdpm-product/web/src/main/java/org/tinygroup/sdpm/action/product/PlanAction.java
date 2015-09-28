@@ -52,7 +52,7 @@ public class PlanAction {
 		
 		model.addAttribute("productPlan",plan);
 		
-		return "";
+		return "/product/page/tabledemo/product-plan-update";
 	}
 
 	@RequestMapping("/list")
