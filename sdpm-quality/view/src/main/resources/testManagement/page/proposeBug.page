@@ -30,11 +30,11 @@
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("productId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">产品2</option>
-	                        <option value="DE">产品3</option>
-	                        <option value="FL">产品4</option>
-	                        <option value="GA">产品5</option>
-	                        <option value="IN">产品1</option>
+	                        <option value="CT">2</option>
+	                        <option value="DE">3</option>
+	                        <option value="FL">4</option>
+	                        <option value="GA">5</option>
+	                        <option value="IN">1</option>
 	                    	#end                  
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
@@ -71,9 +71,9 @@
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("projectId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">项目1</option>
-	                        <option value="ME">项目2</option>
-	                        <option value="MD">项目3</option>
+	                        <option value="IN">1</option>
+	                        <option value="ME">2</option>
+	                        <option value="MD">3</option>
 	                    	#end                
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
@@ -90,9 +90,9 @@
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("bugOpenedBuild" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">版本1</option>
-	                        <option value="ME">版本2</option>
-	                        <option value="MD">版本3</option>
+	                        <option value="IN">1</option>
+	                        <option value="ME">2</option>
+	                        <option value="MD">3</option>
 	                    	#end                
 #*	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
@@ -143,9 +143,9 @@
 					#@div(divClass="col-5")
 							 #@Tselect2F()
 	                   		 #@Tselect2Body("storyId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">需求1</option>
-	                        <option value="ME">需求2</option>
-	                        <option value="MD">需求3</option>
+	                        <option value="IN">1</option>
+	                        <option value="ME">2</option>
+	                        <option value="MD">3</option>
 	                    	#end                
 	                      	#@Tselect2Fix()
 	                      	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
@@ -160,9 +160,9 @@
 				#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("taskId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">任务1</option>
-	                        <option value="ME">任务2</option>
-	                        <option value="MD">任务3</option>
+	                        <option value="IN">1</option>
+	                        <option value="ME">2</option>
+	                        <option value="MD">3</option>
 	                    	#end                
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/project/task/add.page" class="r ">增加</a>
@@ -377,8 +377,6 @@
         });
     });
     $(function(){
-
-        $("form[name=thisform").attr("action",'#link("/Validform_post.html")');
         $("form[name=thisform").Validform({
             tiptype:2,
             usePlugin:{

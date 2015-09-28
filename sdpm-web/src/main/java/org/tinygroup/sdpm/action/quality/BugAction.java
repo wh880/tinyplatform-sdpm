@@ -41,57 +41,45 @@ public class BugAction extends BaseController {
 	}
 	
 	@RequestMapping("/findBug")
-	public String findBugPager(Integer start,Integer limit,String order,String ordertype,Integer id,Model model){
+	public String findBugPager(Integer start,Integer limit,String order,String ordertype,QualityBug bug,Model model){
 		boolean asc = true;		
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
-		QualityBug bug = new QualityBug();
-			bug.setProductId(id);
+		//QualityBug bug = new QualityBug();
+		//	bug.setProductId(id);
 		Pager<QualityBug> bugpager = bugService.findBugListPager(start, limit, bug, order, asc);
 		model.addAttribute("bugpager",bugpager);
 		return "testManagement/data/BugData.pagelet";
 	}
 	
 	@RequestMapping("/makesure")
-	public String makesure(QualityBug bug ,Model model){
-		int makesure = bugService.updateBug(bug);
-		model.addAttribute("makesure",makesure);
+	public String makesure(){
 		return "testManagement/page/tabledemo/makesure.page";
 	}
 	
 	@RequestMapping("/assign")
-	public String assign(QualityBug bug ,Model model){
-		int assign = bugService.updateBug(bug);
-		model.addAttribute("assign",assign);
+	public String assign(){
 		return "testManagement/page/tabledemo/assign.page";
 	}
 	
 	@RequestMapping("/solve")
-	public String solve(QualityBug bug ,Model model){
-		int solve = bugService.updateBug(bug);
-		model.addAttribute("solve",solve);
+	public String solve(){
 		return "testManagement/page/tabledemo/assign.page";
 	}
 	
 	@RequestMapping("/close")
-	public String close(QualityBug bug ,Model model){
-		int close = bugService.updateBug(bug);
-		model.addAttribute("close",close);
+	public String close(){
 		return "testManagement/page/tabledemo/shutdown.page";
 	}
 	
 	@RequestMapping("/edit")
-	public String edit(QualityBug bug ,Model model){
-		int edit = bugService.updateBug(bug);
-		model.addAttribute("edit",edit);
+	public String edit(){
 		return "testManagement/page/tabledemo/edition.page";
 	}
 			
 	@RequestMapping("/add")
-	public String add(QualityBug bug,Model model){
-		QualityBug bugadd =	bugService.addBug(bug);
-		model.addAttribute("bugadd",bugadd);
+	public String add(){
 		return "testManagement/page/proposeBug.page";
 	}
 	
@@ -103,6 +91,6 @@ public class BugAction extends BaseController {
 			bugService.updateBug(bug);
 		}	
 		model.addAttribute("bugsave",bug);
-		return "testManagement/page/Bug.page";
+		return "redirect:"+"quality/bug";
 	}
 }
