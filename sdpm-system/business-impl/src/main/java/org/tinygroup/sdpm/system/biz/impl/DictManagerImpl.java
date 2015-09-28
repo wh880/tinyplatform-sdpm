@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.system.biz.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,11 +57,12 @@ public class DictManagerImpl implements DictManager {
 		Pager<SystemDict> pagerDict= systemDictDao.queryPager(start, limit, dict,  new OrderBy(columnName, asc));
 //		Pager<SystemDict> pager;
 		if(pagerDict.getRecords()!=null&&pagerDict.getRecords().size()>0){
-			List<SystemDict> list = pagerDict.getRecords();
-			int listSize = pagerDict.getRecords().size();
+			List<SystemDict> list = new ArrayList<SystemDict>();
+			List<SystemDict> pagerList = pagerDict.getRecords();
+			int listSize = pagerList.size();
 		    for(int i=0;i<listSize;i++){
-			  if(list.get(i).getDeleted()==1){
-				list.remove(i);
+			  if(pagerList.get(i).getDeleted()==0){
+				list.add(pagerList.get(i));
 			  }
 		   }
 		   pagerDict.setRecords(list);
