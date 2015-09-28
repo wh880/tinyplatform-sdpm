@@ -41,7 +41,7 @@
         <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="findConfigPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager&lt;org.tinygroup.sdpm.system.dao.pojo.SystemConfig&gt;"/>
+      <service-result name="findConfigPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager;"/>
     </service-method>
     <service-method local-name="updateBatchConfig" service-id="system_updateBatchConfig" method-name="updateBatchConfig" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>
