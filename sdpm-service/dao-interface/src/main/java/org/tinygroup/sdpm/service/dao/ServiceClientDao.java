@@ -20,9 +20,6 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 
 public interface ServiceClientDao extends BaseDao<ServiceClient, Integer> {
-    public static Integer DELETE_YES = 1;
-    public static Integer DELETE_NO = 0;
-
     public Integer softDelete(Integer id);
 
 }

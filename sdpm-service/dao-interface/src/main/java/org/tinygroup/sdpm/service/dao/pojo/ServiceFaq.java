@@ -23,14 +23,8 @@ import java.util.Date;
  * 
  */
 public class ServiceFaq {
-	public static Integer DELETE_YES = 1;
-	public static Integer DELETE_NO = 0;
 
-	public ServiceFaq() {
-		setDeleted(DELETE_NO);
-	}
-
-	/**
+	/** 
 	 * 问答ID
 	 * 
 	 */
