@@ -48,7 +48,7 @@ public interface DictManager {
 	 * @param config
 	 * @return
 	 */
-	List<SystemDict> findList(SystemDict dict,String columnName,boolean asc);
+	List<SystemDict> findList(SystemDict dict);
 	/**
 	 * 分页查询
 	 * @param start
@@ -59,5 +59,6 @@ public interface DictManager {
 	 * @return
 	 */
 	Pager<SystemDict> findPager(int start,int limit,SystemDict dict,String columnName,boolean asc);
+
 	
 }

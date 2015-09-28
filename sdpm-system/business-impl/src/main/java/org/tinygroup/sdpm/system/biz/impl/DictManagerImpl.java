@@ -47,9 +47,9 @@ public class DictManagerImpl implements DictManager {
 		return systemDictDao.batchUpdate(dicts);
 	}
 
-	public List<SystemDict> findList(SystemDict dict, String columnName, boolean asc) {
+	public List<SystemDict> findList(SystemDict dict) {
 		
-		return systemDictDao.query(dict, new OrderBy(columnName, asc));
+		return systemDictDao.query(dict);
 	}
 
 	public Pager<SystemDict> findPager(int start, int limit, SystemDict dict, String columnName,

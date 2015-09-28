@@ -8,7 +8,6 @@
 	#@td()${d?.dictId}#end
 	#@td()${d?.dictKey}#end
 	#@td()${d?.dictValue}#end
-	#@td()${d?.moduleId}#end
 	#@td()${d?.dictSort}#end
 	
 	#@td("f-14 user-manage")

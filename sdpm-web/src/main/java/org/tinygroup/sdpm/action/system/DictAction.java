@@ -17,17 +17,10 @@ public class DictAction extends BaseController{
 	@Autowired
 	private DictService dictService;
 	@RequestMapping("list")
-	public String list(Integer moduleId, String columnName,String ordertype,Model model){
-		  boolean asc = true;
-	       if ("desc".equals(ordertype)) {
-	           asc = false;
-	       }
-	       SystemDict dict = new SystemDict();
-	       dict.setModuleId(moduleId);
-	       columnName="dict_id";
-		List<SystemDict> dictList  =dictService.findDictList(dict, columnName, asc);
+	public String list(SystemDict dict,Model model){
+		List<SystemDict> dictList  =dictService.findDictList(dict);
 		   model.addAttribute("dictList", dictList);
-		return "system/page/dictionaries/dictitem_list.pagelet";
+		return "/system/page/dictionaries/dict_list.page";
 		
 	}
 	@RequestMapping("findPager")
@@ -51,6 +44,17 @@ public class DictAction extends BaseController{
 	@RequestMapping("delete")
 	public String deleteDict(Integer dictId){
 		dictService.deleteDict(dictId);
+		return "system/page/dictionaries/dictitem.page";
+	}
+	@RequestMapping("save")
+	public String saveDict(SystemDict systemDict ,Model model){
+		if(systemDict.getDictId()==null){
+			
+			dictService.addDict(systemDict);
+		}
+		else{
+			dictService.updateDict(systemDict);
+		}
 		return "system/page/dictionaries/dictitem.page";
 	}
 
