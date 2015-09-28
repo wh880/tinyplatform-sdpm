@@ -45,6 +45,12 @@ public class TaskServiceImpl implements TaskService {
     public Integer updateTask(ProjectTask task) {
         return taskManager.update(task);
     }
+    public Integer updatEditTask(ProjectTask task) {
+        return taskManager.update(task);
+    }
+    public Integer updatCallTask(ProjectTask task) {
+        return taskManager.update(task);
+    }
 
     public Pager<ProjectTask> findComplexTask() {
         return null;

@@ -117,4 +117,24 @@ public class TaskAction extends BaseController {
         model.addAttribute("task", task);
         return "project/task/index.page";
     }
+    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
+    public String editsave(ProjectTask task, Model model) {
+        if (task.getTaskId() == null) {
+            taskService.addTask(task);
+        } else {
+            taskService.updatEditTask(task);
+        }
+        model.addAttribute("task", task);
+        return "project/task/index.page";
+    }
+    @RequestMapping(value = "/callsave", method = RequestMethod.POST)
+    public String callsave(ProjectTask task, Model model) {
+        if (task.getTaskId() == null) {
+            taskService.addTask(task);
+        } else {
+            taskService.updatCallTask(task);
+        }
+        model.addAttribute("task", task);
+        return "project/task/index.page";
+    }
 }
