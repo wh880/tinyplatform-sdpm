@@ -17,7 +17,8 @@
 
         #set(m2=menuManager.getMenu("org-user-add"))
         #if(m2)
-            #@aExtendButton("btn radius btn-primary btn-sm" m2.href)#buttonIcon(iconClass=m2.icon)添加#end
+            #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+
+                "/org/user/form")#buttonIcon(iconClass=m2.icon)添加#end
         #end
     ##        #@aModal(editpageModal "添加" "865" "420" "btn radius btn-primary btn-sm" editpagePath)
     ##            #@simpleI("icon-plus")添加#end

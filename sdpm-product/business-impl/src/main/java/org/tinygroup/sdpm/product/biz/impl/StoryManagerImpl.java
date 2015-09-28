@@ -10,6 +10,7 @@ import org.tinygroup.sdpm.common.util.sql.SearchInfos;
 import org.tinygroup.sdpm.common.util.sql.SqlUtil;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.tinysqldsl.Pager;
 

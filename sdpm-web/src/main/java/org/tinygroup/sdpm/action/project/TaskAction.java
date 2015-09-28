@@ -3,14 +3,19 @@ package org.tinygroup.sdpm.action.project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
+import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -21,6 +26,22 @@ import java.util.List;
 public class TaskAction extends BaseController {
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private ProjectService projectService;
+
+    @RequestMapping("index")
+    public String index(@CookieValue(required = false) Integer projectId, HttpServletResponse response) {
+        if (projectId == null) {
+            List<Project> list = projectService.findList();
+            if (list == null || list.isEmpty()) {
+                return "redirct:/project/add";
+            }
+            Project first = list.get(0);
+            projectId = first.getProjectId();
+            CookieUtils.setCookie(response, "projectId", projectId.toString(), -1);
+        }
+        return "?????";
+    }
 
     @RequestMapping("edit")
     public String form(Integer taskId, Model model) {
@@ -32,6 +53,7 @@ public class TaskAction extends BaseController {
         }
         return "error";
     }
+
     @RequestMapping("call")
     public String call(Integer taskId, Model model) {
         if (taskId != null) {
@@ -42,6 +64,7 @@ public class TaskAction extends BaseController {
         }
         return "error";
     }
+
     @RequestMapping("finish")
     public String finish(Integer taskId, Model model) {
         if (taskId != null) {
@@ -52,6 +75,7 @@ public class TaskAction extends BaseController {
         }
         return "error";
     }
+
     @RequestMapping("note")
     public String note(Integer taskId, Model model) {
         if (taskId != null) {
@@ -62,6 +86,7 @@ public class TaskAction extends BaseController {
         }
         return "error";
     }
+
     @RequestMapping("close")
     public String close(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
@@ -113,6 +138,28 @@ public class TaskAction extends BaseController {
             taskService.addTask(task);
         } else {
             taskService.updateTask(task);
+        }
+        model.addAttribute("task", task);
+        return "project/task/index.page";
+    }
+
+    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
+    public String editSave(ProjectTask task, Model model) {
+        if (task.getTaskId() == null) {
+            taskService.addTask(task);
+        } else {
+            taskService.updatEditTask(task);
+        }
+        model.addAttribute("task", task);
+        return "project/task/index.page";
+    }
+
+    @RequestMapping(value = "/callsave", method = RequestMethod.POST)
+    public String callSave(ProjectTask task, Model model) {
+        if (task.getTaskId() == null) {
+            taskService.addTask(task);
+        } else {
+            taskService.updatCallTask(task);
         }
         model.addAttribute("task", task);
         return "project/task/index.page";

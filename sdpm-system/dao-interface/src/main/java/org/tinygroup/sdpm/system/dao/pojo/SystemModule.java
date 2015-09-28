@@ -79,6 +79,12 @@ public class SystemModule implements Serializable{
 	 */
 	private Integer moduleId;
 
+	/** 
+	 * 中文名
+	 * 
+	 */
+	private String moduleTitle;
+
 
 	public void setModuleRoot(Integer moduleRoot){
 		this. moduleRoot = moduleRoot;
@@ -150,6 +156,14 @@ public class SystemModule implements Serializable{
 
 	public Integer getModuleId(){
 		return moduleId;
+	}
+
+	public void setModuleTitle(String moduleTitle){
+		this. moduleTitle = moduleTitle;
+	}
+
+	public String getModuleTitle(){
+		return moduleTitle;
 	}
 
 }

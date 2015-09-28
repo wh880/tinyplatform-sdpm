@@ -8,7 +8,13 @@
     #@td()
     <a href="mailto:wangyi@163.com">${var?.orgUserEmail}</a>
     #end
-    #@td()${var?.orgUserGender}#end
+    #@td()
+        #if(var?.orgUserGender=="0")
+        男
+        #else
+        女
+        #end
+    #end
     #@td()${var?.orgUserPhone}#end
     #@td()${var?.orgUserJoin}#end
     #@td()
