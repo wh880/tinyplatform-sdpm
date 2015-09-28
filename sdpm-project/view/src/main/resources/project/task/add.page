@@ -23,7 +23,7 @@
     <p class="titleName">建任务</p>
 	#@elementItem()
 		#@sdpmItem("所属项目")
-            <input type="hidden" name="taskProject" value="111"/>
+            <input type="hidden" name="taskProject" value="1"/>
 		#end
 	#end
 	#@elementItem()

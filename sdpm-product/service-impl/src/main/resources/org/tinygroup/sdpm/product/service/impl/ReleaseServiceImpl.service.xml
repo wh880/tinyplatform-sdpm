@@ -26,19 +26,19 @@
     </service-method>
     <service-method local-name="findReleaseList" service-id="product_findReleaseList" method-name="findReleaseList" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
-        <service-parameter name="release" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease" required="false" is-array="false"/>
-        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+        <service-parameter name="productRelease" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findReleaseListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease"/>
     </service-method>
     <service-method local-name="findReleasePager" service-id="product_findReleasePager" method-name="findReleasePager" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
-        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="page" type="int" required="false" is-array="false"/>
         <service-parameter name="limit" type="int" required="false" is-array="false"/>
-        <service-parameter name="release" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease" required="false" is-array="false"/>
-        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+        <service-parameter name="productRelease" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findReleasePagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>

@@ -24,23 +24,23 @@ import org.tinygroup.tinysqldsl.base.Table;
  * 
  * 文档相关的
  */
-public class DocLibTable extends Table {
+public class DoclibTable extends Table {
 
-	public static final DocLibTable DOCLIBTABLE = new DocLibTable();
+	public static final DoclibTable DOCLIBTABLE = new DoclibTable();
 
 	/** 
 	 * 文档库ID
 	 * 
 	 * 文档库ID
 	 */
-	public final Column DOC_LIBID = new Column(this, "doc_libid");
+	public final Column DOC_LIB_ID = new Column(this, "doc_lib_id");
 
 	/** 
 	 * 文档库名字
 	 * 
 	 * 文档库名字
 	 */
-	public final Column DOC_LIBNAME = new Column(this, "doc_libname");
+	public final Column DOC_LIB_NAME = new Column(this, "doc_lib_name");
 
 	/** 
 	 * 删除文档库标志
@@ -54,18 +54,18 @@ public class DocLibTable extends Table {
 	 * 
 	 * 文档库添加时间
 	 */
-	public final Column DOC_LIB_ADDTIME = new Column(this, "doc_lib_addtime");
+	public final Column DOC_LIB_ADDED_DATE = new Column(this, "doc_lib_added_date");
 
 	/** 
 	 * 文档库名称更新时间
 	 * 
 	 * 文档库名称更新时间
 	 */
-	public final Column DOC_LIB_UPDTIME = new Column(this, "doc_lib_updtime");
+	public final Column DOC_LIB_EDITED_DATE = new Column(this, "doc_lib_edited_date");
 
 
-	private DocLibTable() {
-		super("docLib");
+	private DoclibTable() {
+		super("doclib");
 	}
 
 }

@@ -48,13 +48,14 @@ public class StoryManagerImpl implements StoryManager{
 		return productStoryDao.batchUpdate(stories);
 	}
 
-	public List<ProductStory> findList(ProductStory story,String columnName,boolean asc) {
+	public List<ProductStory> findList(ProductStory story,String order,String ordertype) {
 		
-		return productStoryDao.query(story, new OrderBy(columnName, asc));
+		return productStoryDao.query(story,new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
 
-	public Pager<ProductStory> findPager(int start, int limit, ProductStory story, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
+	public Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
 		String condition = SqlUtil.toSql(conditions.getInfos(),groupOperate);
+		condition = condition!=null&&!"".equals(condition)?(statusCondition!=null&&!"".equals(statusCondition)?condition+" and "+statusCondition:condition):statusCondition;
 		OrderBy orderBy = null;
 		if(columnName != null && !"".equals(columnName)){
 			orderBy = new OrderBy(columnName, asc);

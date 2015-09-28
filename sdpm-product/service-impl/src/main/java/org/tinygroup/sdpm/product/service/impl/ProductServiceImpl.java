@@ -37,9 +37,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 
-	public List<Product> findProductList(Product product, String columnName,boolean asc) {
+	public List<Product> findProductList(Product product, String order,String ordertype) {
 
-		return productManager.findList(product, columnName, asc);
+		return productManager.findList(product, order, ordertype);
 	}
 
 	public Pager<Product> findProductPager(int page, int limit,

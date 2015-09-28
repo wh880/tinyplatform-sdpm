@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.dao.DocDao;
-import org.tinygroup.sdpm.document.dao.DocLibDao;
+import org.tinygroup.sdpm.document.dao.DoclibDao;
 import org.tinygroup.sdpm.document.dao.pojo.Doc;
-import org.tinygroup.sdpm.document.dao.pojo.DocLib;
+import org.tinygroup.sdpm.document.dao.pojo.Doclib;
 import org.tinygroup.tinysqldsl.Pager;
 
 /**
@@ -32,13 +32,13 @@ public class DocBizImpl implements DocBiz {
 	@Autowired
 	private DocDao docdao;
 	@Autowired
-	private DocLibDao doclibdao;
+	private DoclibDao doclibdao;
 	
 
-	public DocLib addDocLib(DocLib doclib) {
+	public Doclib addDocLib(Doclib doclib) {
 		// 添加文档库
-		doclib.setDocLibAddtime(new Date());
-		doclib.setDocLibUpdtime(new Date());
+		doclib.setDocLibAddedDate(new Date());
+		doclib.setDocLibEditedDate(new Date());
 		doclib.setDocLibDeleted("N");//这个标志是char类型（一个字节）
 		
 		return doclibdao.add(doclib);
@@ -65,11 +65,11 @@ public class DocBizImpl implements DocBiz {
 		return docdao.edit(doc);
 	}
 
-	public int updtDocLib(DocLib doclib) {
+	public int updtDocLib(Doclib doclib) {
 		//更新文档库
-		doclib.setDocLibAddtime(doclibdao.getByKey(doclib.getDocLibid()).getDocLibAddtime());
-		doclib.setDocLibDeleted(doclibdao.getByKey(doclib.getDocLibid()).getDocLibDeleted());
-		doclib.setDocLibUpdtime(new Date());
+		doclib.setDocLibAddedDate(doclibdao.getByKey(doclib.getDocLibId()).getDocLibAddedDate());
+		doclib.setDocLibDeleted(doclibdao.getByKey(doclib.getDocLibId()).getDocLibDeleted());
+		doclib.setDocLibEditedDate(new Date());
 		return doclibdao.edit(doclib);
 	}
 
@@ -101,7 +101,7 @@ public class DocBizImpl implements DocBiz {
 		return docdao.query(doc);
 	}
 
-	public DocLib getDocLibById(Integer key) {
+	public Doclib getDocLibById(Integer key) {
 		// 
 		return doclibdao.getByKey(key);
 	}

@@ -118,14 +118,14 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductStory> findStoryList(org.tinygroup.sdpm.product.dao.pojo.ProductStory story ,java.lang.String columnName ,boolean asc) {
+	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductStory> findStoryList(org.tinygroup.sdpm.product.dao.pojo.ProductStory story ,java.lang.String order ,java.lang.String ordertype) {
 		String serviceId = "product_findStoryList";
 
 		try{
 			Context context = new ContextImpl();
 			context.put("story" ,story);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
+			context.put("order" ,order);
+			context.put("ordertype" ,ordertype);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -133,7 +133,7 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager findStoryPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductStory story ,org.tinygroup.sdpm.common.util.sql.SearchInfos searchInfos ,java.lang.String groupOperate ,java.lang.String columnName ,boolean asc) {
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductStory> findStoryPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductStory story ,java.lang.String statusCondition, org.tinygroup.sdpm.common.util.sql.SearchInfos conditions ,java.lang.String groupOperate ,java.lang.String columnName ,boolean asc) {
 		String serviceId = "product_findStoryPager";
 
 		try{
@@ -141,7 +141,8 @@ public class StoryServiceImplWrapper implements org.tinygroup.sdpm.product.servi
 			context.put("start" ,start);
 			context.put("limit" ,limit);
 			context.put("story" ,story);
-			context.put("searchInfos" ,searchInfos);
+			context.put("statusCondition",statusCondition);
+			context.put("conditions" ,conditions);
 			context.put("groupOperate" ,groupOperate);
 			context.put("columnName" ,columnName);
 			context.put("asc" ,asc);

@@ -50,7 +50,7 @@ public class ModuleServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 	}
 
 	public org.tinygroup.sdpm.system.dao.pojo.SystemModule edit(org.tinygroup.sdpm.system.dao.pojo.SystemModule systemModule) {
-		String serviceId = "system_edit";
+		String serviceId = "module_edit";
 
 		try{
 			Context context = new ContextImpl();
@@ -63,7 +63,7 @@ public class ModuleServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 	}
 
 	public int deleteById(int id) {
-		String serviceId = "system_deleteById";
+		String serviceId = "module_deleteById";
 
 		try{
 			Context context = new ContextImpl();
@@ -75,21 +75,8 @@ public class ModuleServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemModule> findByRoot(int root) {
-		String serviceId = "system_findByRoot";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("root" ,root);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
 	public int delete(org.tinygroup.sdpm.system.dao.pojo.SystemModule systemModule) {
-		String serviceId = "system_delete";
+		String serviceId = "module_delete";
 
 		try{
 			Context context = new ContextImpl();
@@ -102,11 +89,24 @@ public class ModuleServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 	}
 
 	public org.tinygroup.sdpm.system.dao.pojo.SystemModule findById(int id) {
-		String serviceId = "system_findById";
+		String serviceId = "module_findById";
 
 		try{
 			Context context = new ContextImpl();
 			context.put("id" ,id);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemModule> findModules(org.tinygroup.sdpm.system.dao.pojo.SystemModule systemModule) {
+		String serviceId = "module_findModules";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("systemModule" ,systemModule);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

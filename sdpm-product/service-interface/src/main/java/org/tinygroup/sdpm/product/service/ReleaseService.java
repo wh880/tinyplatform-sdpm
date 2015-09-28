@@ -37,7 +37,7 @@ public interface ReleaseService {
      * @param release
      * @return
      */
-    List<ProductRelease> findReleaseList(ProductRelease release,String columnName,boolean asc);
+    List<ProductRelease> findReleaseList(ProductRelease productRelease,String order,String ordertype);
    
     /**
      * 分页查询 
@@ -47,5 +47,5 @@ public interface ReleaseService {
      * @param orderBies
      * @return
      */
-    Pager<ProductRelease>  findReleasePager(int start,int limit,ProductRelease release,String columnName,boolean asc);
+    Pager<ProductRelease>  findReleasePager(int page,int limit,ProductRelease productRelease,String order,String ordertype);
 }

@@ -22,14 +22,14 @@ public class StorySpecServiceImpl implements StorySpecService {
 		return storySpecManager.find(storyId);
 	}
 
-	public List<ProductStorySpec> findStorySpecList(ProductStorySpec storySpec,String columnName,boolean asc) {
+	public List<ProductStorySpec> findStorySpecList(ProductStorySpec storySpec,String order,String ordertype) {
 		
-		return storySpecManager.findList(storySpec, columnName, asc);
+		return storySpecManager.findList(storySpec, order, ordertype);
 	}
 
-	public Pager<ProductStorySpec> findStorySpecPager(int start, int limit, ProductStorySpec storySpec,String columnName,boolean asc) {
+	public Pager<ProductStorySpec> findStorySpecPager(int page, int limit, ProductStorySpec storySpec,String order,String ordertype) {
 		
-		return storySpecManager.findPager(start, limit, storySpec, columnName, asc);
+		return storySpecManager.findPager(page, limit, storySpec, order, ordertype);
 	}
 
 

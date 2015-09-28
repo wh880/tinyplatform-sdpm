@@ -66,12 +66,11 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_TYPE.value(t.getDocType()),
 					DOCTABLE.DOC_CONTENT.value(t.getDocContent()),
 					DOCTABLE.DOC_URL.value(t.getDocUrl()),
-					DOCTABLE.ATTACH_URL.value(t.getAttachUrl()),
 					DOCTABLE.DOC_VIEWS.value(t.getDocViews()),
-					DOCTABLE.DOC_ADDEDBY.value(t.getDocAddedBy()),
-					DOCTABLE.DOC_ADDEDDATE.value(t.getDocAddedDate()),
-					DOCTABLE.DOC_EDITEDBY.value(t.getDocEditedBy()),
-					DOCTABLE.DOC_EDITEDDATE.value(t.getDocEditedDate()),
+					DOCTABLE.DOC_ADDED_BY.value(t.getDocAddedBy()),
+					DOCTABLE.DOC_ADDED_DATE.value(t.getDocAddedDate()),
+					DOCTABLE.DOC_EDITED_BY.value(t.getDocEditedBy()),
+					DOCTABLE.DOC_EDITED_DATE.value(t.getDocEditedDate()),
 					DOCTABLE.DOC_DELETED.value(t.getDocDeleted()));
 				return insert;
 			}
@@ -95,12 +94,11 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_TYPE.value(t.getDocType()),
 					DOCTABLE.DOC_CONTENT.value(t.getDocContent()),
 					DOCTABLE.DOC_URL.value(t.getDocUrl()),
-					DOCTABLE.ATTACH_URL.value(t.getAttachUrl()),
 					DOCTABLE.DOC_VIEWS.value(t.getDocViews()),
-					DOCTABLE.DOC_ADDEDBY.value(t.getDocAddedBy()),
-					DOCTABLE.DOC_ADDEDDATE.value(t.getDocAddedDate()),
-					DOCTABLE.DOC_EDITEDBY.value(t.getDocEditedBy()),
-					DOCTABLE.DOC_EDITEDDATE.value(t.getDocEditedDate()),
+					DOCTABLE.DOC_ADDED_BY.value(t.getDocAddedBy()),
+					DOCTABLE.DOC_ADDED_DATE.value(t.getDocAddedDate()),
+					DOCTABLE.DOC_EDITED_BY.value(t.getDocEditedBy()),
+					DOCTABLE.DOC_EDITED_DATE.value(t.getDocEditedDate()),
 					DOCTABLE.DOC_DELETED.value(t.getDocDeleted())).where(
 					DOCTABLE.DOC_ID.eq(t.getDocId()));
 				return update;
@@ -159,12 +157,11 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_TYPE.eq(t.getDocType()),
 					DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
 					DOCTABLE.DOC_URL.eq(t.getDocUrl()),
-					DOCTABLE.ATTACH_URL.eq(t.getAttachUrl()),
 					DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
-					DOCTABLE.DOC_ADDEDBY.eq(t.getDocAddedBy()),
-					DOCTABLE.DOC_ADDEDDATE.eq(t.getDocAddedDate()),
-					DOCTABLE.DOC_EDITEDBY.eq(t.getDocEditedBy()),
-					DOCTABLE.DOC_EDITEDDATE.eq(t.getDocEditedDate()),
+					DOCTABLE.DOC_ADDED_BY.eq(t.getDocAddedBy()),
+					DOCTABLE.DOC_ADDED_DATE.eq(t.getDocAddedDate()),
+					DOCTABLE.DOC_EDITED_BY.eq(t.getDocEditedBy()),
+					DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
 					DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
 		return addOrderByElements(select, orderBies);
 			}
@@ -190,12 +187,11 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_TYPE.eq(t.getDocType()),
 					DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
 					DOCTABLE.DOC_URL.eq(t.getDocUrl()),
-					DOCTABLE.ATTACH_URL.eq(t.getAttachUrl()),
 					DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
-					DOCTABLE.DOC_ADDEDBY.eq(t.getDocAddedBy()),
-					DOCTABLE.DOC_ADDEDDATE.eq(t.getDocAddedDate()),
-					DOCTABLE.DOC_EDITEDBY.eq(t.getDocEditedBy()),
-					DOCTABLE.DOC_EDITEDDATE.eq(t.getDocEditedDate()),
+					DOCTABLE.DOC_ADDED_BY.eq(t.getDocAddedBy()),
+					DOCTABLE.DOC_ADDED_DATE.eq(t.getDocAddedDate()),
+					DOCTABLE.DOC_EDITED_BY.eq(t.getDocEditedBy()),
+					DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
 					DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
 		return addOrderByElements(select, orderBies);
 			}
@@ -220,12 +216,11 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_TYPE.value(new JdbcNamedParameter("docType")),
 					DOCTABLE.DOC_CONTENT.value(new JdbcNamedParameter("docContent")),
 					DOCTABLE.DOC_URL.value(new JdbcNamedParameter("docUrl")),
-					DOCTABLE.ATTACH_URL.value(new JdbcNamedParameter("attachUrl")),
 					DOCTABLE.DOC_VIEWS.value(new JdbcNamedParameter("docViews")),
-					DOCTABLE.DOC_ADDEDBY.value(new JdbcNamedParameter("docAddedBy")),
-					DOCTABLE.DOC_ADDEDDATE.value(new JdbcNamedParameter("docAddedDate")),
-					DOCTABLE.DOC_EDITEDBY.value(new JdbcNamedParameter("docEditedBy")),
-					DOCTABLE.DOC_EDITEDDATE.value(new JdbcNamedParameter("docEditedDate")),
+					DOCTABLE.DOC_ADDED_BY.value(new JdbcNamedParameter("docAddedBy")),
+					DOCTABLE.DOC_ADDED_DATE.value(new JdbcNamedParameter("docAddedDate")),
+					DOCTABLE.DOC_EDITED_BY.value(new JdbcNamedParameter("docEditedBy")),
+					DOCTABLE.DOC_EDITED_DATE.value(new JdbcNamedParameter("docEditedDate")),
 					DOCTABLE.DOC_DELETED.value(new JdbcNamedParameter("docDeleted")));
 			}
 		});
@@ -253,12 +248,11 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 					DOCTABLE.DOC_TYPE.value(new JdbcNamedParameter("docType")),
 					DOCTABLE.DOC_CONTENT.value(new JdbcNamedParameter("docContent")),
 					DOCTABLE.DOC_URL.value(new JdbcNamedParameter("docUrl")),
-					DOCTABLE.ATTACH_URL.value(new JdbcNamedParameter("attachUrl")),
 					DOCTABLE.DOC_VIEWS.value(new JdbcNamedParameter("docViews")),
-					DOCTABLE.DOC_ADDEDBY.value(new JdbcNamedParameter("docAddedBy")),
-					DOCTABLE.DOC_ADDEDDATE.value(new JdbcNamedParameter("docAddedDate")),
-					DOCTABLE.DOC_EDITEDBY.value(new JdbcNamedParameter("docEditedBy")),
-					DOCTABLE.DOC_EDITEDDATE.value(new JdbcNamedParameter("docEditedDate")),
+					DOCTABLE.DOC_ADDED_BY.value(new JdbcNamedParameter("docAddedBy")),
+					DOCTABLE.DOC_ADDED_DATE.value(new JdbcNamedParameter("docAddedDate")),
+					DOCTABLE.DOC_EDITED_BY.value(new JdbcNamedParameter("docEditedBy")),
+					DOCTABLE.DOC_EDITED_DATE.value(new JdbcNamedParameter("docEditedDate")),
 					DOCTABLE.DOC_DELETED.value(new JdbcNamedParameter("docDeleted"))).where(
 				DOCTABLE.DOC_ID.eq(new JdbcNamedParameter("docId")));
 			}
@@ -284,12 +278,11 @@ public class DocDaoImpl extends TinyDslDaoSupport implements DocDao {
 				DOCTABLE.DOC_TYPE.eq(new JdbcNamedParameter("docType")),
 				DOCTABLE.DOC_CONTENT.eq(new JdbcNamedParameter("docContent")),
 				DOCTABLE.DOC_URL.eq(new JdbcNamedParameter("docUrl")),
-				DOCTABLE.ATTACH_URL.eq(new JdbcNamedParameter("attachUrl")),
 				DOCTABLE.DOC_VIEWS.eq(new JdbcNamedParameter("docViews")),
-				DOCTABLE.DOC_ADDEDBY.eq(new JdbcNamedParameter("docAddedBy")),
-				DOCTABLE.DOC_ADDEDDATE.eq(new JdbcNamedParameter("docAddedDate")),
-				DOCTABLE.DOC_EDITEDBY.eq(new JdbcNamedParameter("docEditedBy")),
-				DOCTABLE.DOC_EDITEDDATE.eq(new JdbcNamedParameter("docEditedDate")),
+				DOCTABLE.DOC_ADDED_BY.eq(new JdbcNamedParameter("docAddedBy")),
+				DOCTABLE.DOC_ADDED_DATE.eq(new JdbcNamedParameter("docAddedDate")),
+				DOCTABLE.DOC_EDITED_BY.eq(new JdbcNamedParameter("docEditedBy")),
+				DOCTABLE.DOC_EDITED_DATE.eq(new JdbcNamedParameter("docEditedDate")),
 				DOCTABLE.DOC_DELETED.eq(new JdbcNamedParameter("docDeleted"))));
 			}
 		});

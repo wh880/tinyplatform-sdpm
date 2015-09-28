@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="quality" parent-id="0" name="测试" href="/testManagement/page/Bug.page" icon="icon-pencil" sort="600"
+<menu id="quality" parent-id="0" name="测试" href="/quality/bug?get=tbugstatus" icon="icon-pencil" sort="600"
       isShow="1">
-    <menu id="qualityBug" parent-id="quality" name="Bug" href="/testManagement/page/Bug.page" icon="" sort="1"
+    <menu id="qualityBug" parent-id="quality" name="Bug" href="/quality/bug?bugStatus=1" icon="" sort="1"
           isShow="1">
-    	 <menu id="tmakesure" name="确认" href="/testManagement/page/tabledemo/makesure.page" icon="icon-search" sort="6"
+    	 <menu id="tmakesure" name="确认" href="/quality/bug/makesure" icon="icon-search" sort="6"
               isShow="1" scope="testbug-op,testbuginfo-tab"></menu>
-         <menu id="tassign" name="指派" href="/testManagement/page/tabledemo/assign.page" icon=" icon-hand-right" sort="5"
+         <menu id="tassign" name="指派" href="/quality/bug/assign" icon=" icon-hand-right" sort="5"
               isShow="1" scope="testbug-op,testbuginfo-tab"></menu>
-         <menu id="tsolution" name="解决" href="/testManagement/page/tabledemo/solution.page" icon="icon-ok-sign" sort="4"
+         <menu id="tsolution" name="解决" href="/quality/bug/solve" icon="icon-ok-sign" sort="4"
               isShow="1" scope="testbug-op,testbuginfo-tab"></menu>
-         <menu id="tshutdown" name="关闭" href="/testManagement/page/tabledemo/shutdown.page" icon="icon-off" sort="3"
+         <menu id="tshutdown" name="关闭" href="/quality/bug/close" icon="icon-off" sort="3"
               isShow="1" scope="testbug-op"></menu>
-         <menu id="tedition" name="编辑" href="/testManagement/page/tabledemo/edition.page" icon="icon-pencil" sort="2"
+         <menu id="tedition" name="编辑" href="/quality/bug/edit" icon="icon-pencil" sort="2"
               isShow="1" scope="testbug-op,pro-bug-op,testbuginfo-tab"></menu>
-         <menu id="tproposeBug" name="复制" href="/testManagement/page/proposeBug.page" icon="icon-copy" sort="1"
+         <menu id="tproposeBug" name="复制" href="/quality/bug/add" icon="icon-copy" sort="1"
               isShow="1" scope="testbug-op,pro-bug-op,testbuginfo-tab"></menu>
          <menu id="tbuginput" name="导入" href="/testManagement/page/tabledemo/importBug.pagelet" icon="icon-download-alt" sort="4"
               isShow="1" scope="testbug-tab"></menu>  
@@ -21,7 +21,7 @@
               isShow="1" scope="testbug-tab"></menu>
          <menu id="tbugreport" name="报表" href="/testManagement/page/reportform.page" icon="icon-plus-sign" sort="2"
               isShow="1" scope="testbug-tab"></menu>
-         <menu id="tbugpro" name="提Bug" href="/testManagement/page/proposeBug.page" icon="icon-plus" sort="1"
+         <menu id="tbugpro" name="提Bug" href="/quality/bug/add" icon="icon-plus" sort="1"
               isShow="1" scope="testbug-tab"></menu>    
          <menu id="tbugnote" name="日志" href="/testManagement/page/addLog.pagelet" icon="icon-time" sort="7"
               isShow="1" scope="testbuginfo-tab"></menu>         
@@ -35,27 +35,27 @@
               isShow="1" scope="testbuginfo-tab"></menu> 
          <menu id="tbugnext" name="下一个Bug" href="/testManagement/page/bugInfo.page" icon="icon-chevron-right" sort="1"
               isShow="1" scope="testbuginfo-tab"></menu> 
-         <menu id="tbugstatus" name="未关闭" href="#" icon="" sort="12"
+         <menu id="tbugstatus" name="未关闭" href="/quality/bug?bugStatus=1%26get=tbugstatus" icon="" sort="12"
               isShow="1" scope="testbugleft-tab"></menu> 
-         <menu id="tbugall" name="所有" href="#" icon="" sort="11"
+         <menu id="tbugall" name="所有" href="/quality/bug?get=tbugall" icon="" sort="11"
               isShow="1" scope="testbugleft-tab"></menu>
-         <menu id="tbugassigntome" name="指派给我 " href="#" icon="" sort="10"
+         <menu id="tbugassigntome" name="指派给我 " href="/quality/bug?bugAssignedTo=1" icon="" sort="10"
               isShow="1" scope="testbugleft-tab"></menu>  
-         <menu id="tbugbuildbyme" name="由我创建"  href="#" icon="" sort="9"
+         <menu id="tbugbuildbyme" name="由我创建"  href="/quality/bug?bugOpenedBy=1" icon="" sort="9"
               isShow="1" scope="testbugleft-tab"></menu> 
-         <menu id="tbugsolvebyme" name="由我解决"  href="#" icon="" sort="8"
+         <menu id="tbugsolvebyme" name="由我解决"  href="/quality/bug?bugResolvedBy=1" icon="" sort="8"
               isShow="1" scope="testbugleft-tab"></menu> 
-         <menu id="tbugnotsure" name="未确认"  href="#" icon="" sort="7"
+         <menu id="tbugnotsure" name="未确认"  href="/quality/bug?bugConfirmed=0" icon="" sort="7"
               isShow="1" scope="testbugleft-tab"></menu>  
-         <menu id="tbugnotassign" name="未指派"  href="#" icon="" sort="6"
+         <menu id="tbugnotassign" name="未指派"  href="/quality/bug?bugAssignedTo=0" icon="" sort="6"
               isShow="1" scope="testbugleft-tab"></menu> 
-         <menu id="tbugnotsolve" name="未解决"  href="#" icon="" sort="5"
+         <menu id="tbugnotsolve" name="未解决"  href="/quality/bug?bugResolvedBy=0" icon="" sort="5"
               isShow="1" scope="testbugleft-tab"></menu>  
-         <menu id="tbuglong" name="久未处理"  href="#" icon="" sort="4"
+         <menu id="tbuglong" name="久未处理"  href="/quality/bug?bugResolvedDate.before('2015/9/25')" icon="" sort="4"
               isShow="1" scope="testbugleft-tab"></menu>
-         <menu id="tbugtimeup" name="被延期"  href="#" icon="" sort="3"
+         <menu id="tbugtimeup" name="被延期"  href="/quality/bug" icon="" sort="3"
               isShow="1" scope="testbugleft-tab"></menu> 
-         <menu id="tbugneedchange" name="需求变动"  href="#" icon="" sort="2"
+         <menu id="tbugneedchange" name="需求变动"  href="/quality/bug?toStoryId=1" icon="" sort="2"
               isShow="1" scope="testbugleft-tab"></menu>
          <menu id="tsearch" name="搜索"  href="#" icon="" sort="1"
               isShow="1" scope="testbugleft-tab,testcaseleft-tab"></menu>                       

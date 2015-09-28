@@ -23,7 +23,7 @@ public interface ModuleManager {
 	 * @param root
 	 * @return
 	 */
-	 List<SystemModule> findByRoot(int root);
+	 List<SystemModule> findByModules(SystemModule systemModule);
 	 /**
 	  * 通过对象进行删除
 	  * @param SystemModule

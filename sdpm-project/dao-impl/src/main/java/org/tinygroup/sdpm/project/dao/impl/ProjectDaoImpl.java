@@ -28,13 +28,16 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
@@ -43,6 +46,35 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @LogClass("project")
 @Repository
 public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
+	public Project getTime(Project project) {
+		Select select = MysqlSelect.select(PROJECTTABLE.ALL,
+				FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent"))
+				.from(PROJECTTABLE)
+				.join(Join.leftJoin(PROJECT_TASKTABLE,
+						PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
+				.where(
+						PROJECTTABLE.PROJECT_ID.eq(project.getProjectId())
+				);
+		return getDslSession().fetchOneResult(select, project.getClass());
+	}
+
+	public Pager<Project> querytAll(int start, int limit, final Project project, final OrderBy... orderBies) {
+		return getDslTemplate().queryPager(start, limit, project, false, new SelectGenerateCallback<Project>() {
+			public Select generate(Project t) {
+				Select select = MysqlSelect.select(PROJECTTABLE.ALL,
+						FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent"))
+						.from(PROJECTTABLE)
+						.join(Join.leftJoin(PROJECT_TASKTABLE,
+										PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
+						.where(and(
+								PROJECTTABLE.PROJECT_ID.eq(t.getProjectId()))
+						);
+
+				return addOrderByElements(select, orderBies);
+			}
+		});
+	}
+
 	@LogMethod("add")
 	public Project add(Project project) {
 		return getDslTemplate().insertAndReturnKey(project, new InsertGenerateCallback<Project>() {

@@ -2,10 +2,8 @@ package org.tinygroup.sdpm.product.service;
 
 import java.util.List;
 
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.tinysqldsl.Pager;
-
 
 public interface PlanService{
 	/**
@@ -44,18 +42,19 @@ public interface PlanService{
 	/**
 	 * 根据对象查找
 	 * @param plan
-	 * @param orderBies
+	 * @param columnName
+	 * @param asc
 	 * @return
 	 */
-	List<ProductPlan> findPlanList(ProductPlan plan,String columnName,boolean asc);
+	List<ProductPlan> findPlanList(ProductPlan productPlan,String order,String ordertype);
 	/**
 	 * 分页查询（排序）
 	 * @param start
 	 * @param limit
 	 * @param plan
-	 * @param orderBies
+	 * @param ordertype
 	 * @return
 	 */
-	Pager<ProductPlan> findProductPlanPager(int start,int limit,ProductPlan plan,String columnName,boolean asc);
+	Pager<ProductPlan> findProductPlanPager(int page,int limit,ProductPlan productPlan,String order,String ordertype);
 	
 }

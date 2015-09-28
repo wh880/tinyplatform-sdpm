@@ -2,31 +2,34 @@
 	<input type="hidden" name="records" value="${num}"/>
 #end
 
-
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=projectPager.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(records)
+#for(p:projectPager.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()${var}#end
-	#@td()项目${page}#end
-	#@td()12#end
-	#@td()121#end
-	#@td()121#end
-	#@td()121#end
-	#@td()121#end
-	#@td()121#end
+	#@td()${p?.projectId}#end
+	#@td()${p?.projectName}#end
+	#@td()${p?.projectCode}#end
 	#@td()
-	#set(rm=(rand("int")%100)+"%")
-    <div class="progress-bars text-l" style="width:110px">
-			<span class="sr-modern" style="width:${rm}"></span>
+		#if(p.projectEnd)
+			${formatdate(p.projectEnd,"yyyy-MM-dd")}
+		#end
+	#end
+	#@td()121#end
+	#@td()121#end
+	#@td()121#end
 
+	#@td()
+
+    <div class="progress-bars text-l" style="width:110px">
+        format("%.2f",d)p?.percent
+        <span class="sr-modern" style="width:${format(" %.2f%%",p.percent*100)}"></span>
 		</div>
-    <span style="left:115px; float:left;height: 0; position: relative;top: -14px">${rm}</span>
+    <span style="left:115px; float:left;height: 0; position: relative;top: -14px">${format
+        ("%.2f%%",p.percent*100)}</span>
 		
 	#end
 	#@td()暂无#end

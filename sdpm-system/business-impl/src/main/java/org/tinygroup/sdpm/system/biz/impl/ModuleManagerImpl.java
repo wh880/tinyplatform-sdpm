@@ -26,13 +26,7 @@ public class ModuleManagerImpl implements ModuleManager{
 		return systemModuleDao.deleteByKey(id);
 	}
 
-	public List<SystemModule> findByRoot(int moduleRoot) {
-		// TODO Auto-generated method stub
-		SystemModule systemModule = new SystemModule();
-		systemModule.setModuleRoot(moduleRoot);
-		
-		return systemModuleDao.query(systemModule);
-	}
+	
 
 	public int delete(SystemModule systemModule) {
 		// TODO Auto-generated method stub
@@ -43,6 +37,11 @@ public class ModuleManagerImpl implements ModuleManager{
 	public SystemModule findById(int id) {
 		// TODO Auto-generated method stub
 		return systemModuleDao.getByKey(id);
+	}
+
+	public List<SystemModule> findByModules(SystemModule systemModule) {
+		// TODO Auto-generated method stub
+		return systemModuleDao.query(systemModule);
 	}
 
 }

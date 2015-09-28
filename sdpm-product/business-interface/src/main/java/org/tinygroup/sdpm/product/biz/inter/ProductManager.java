@@ -49,7 +49,7 @@ public interface ProductManager {
 	 * @param product
 	 * @return
 	 */
-	List<Product> findList(Product product,String columnName,boolean asc);
+	List<Product> findList(Product product, String order,String ordertype);
 	
 	/**
 	 * 根据对象查找(分页、排序)

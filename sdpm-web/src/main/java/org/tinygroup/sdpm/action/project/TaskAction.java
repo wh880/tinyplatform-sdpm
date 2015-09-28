@@ -32,6 +32,56 @@ public class TaskAction extends BaseController {
         }
         return "error";
     }
+    @RequestMapping("call")
+    public String call(Integer taskId, Model model) {
+        if (taskId != null) {
+            ProjectTask task = taskService.findTask(taskId);
+            model.addAttribute("task", task);
+            //还需要查询其他相关任务剩余时间的信息
+            return "project/task/call.page";
+        }
+        return "error";
+    }
+    @RequestMapping("finish")
+    public String finish(Integer taskId, Model model) {
+        if (taskId != null) {
+            ProjectTask task = taskService.findTask(taskId);
+            model.addAttribute("task", task);
+            //还需要查询其他相关任务剩余时间的信息
+            return "project/task/finish.page";
+        }
+        return "error";
+    }
+    @RequestMapping("note")
+    public String note(Integer taskId, Model model) {
+        if (taskId != null) {
+            ProjectTask task = taskService.findTask(taskId);
+            model.addAttribute("task", task);
+            //还需要查询其他相关任务剩余时间的信息
+            return "project/task/note.page";
+        }
+        return "error";
+    }
+    @RequestMapping("close")
+    public String close(Integer taskId, Model model) {
+        if (taskId != null) {
+            ProjectTask task = taskService.findTask(taskId);
+            model.addAttribute("task", task);
+            //还需要查询其他相关任务剩余时间的信息
+            return "project/task/close.page";
+        }
+        return "error";
+    }
+    @RequestMapping("start")
+    public String start(Integer taskId, Model model) {
+        if (taskId != null) {
+            ProjectTask task = taskService.findTask(taskId);
+            model.addAttribute("task", task);
+            //还需要查询其他相关任务剩余时间的信息
+            return "project/task/start.page";
+        }
+        return "error";
+    }
 
     @RequestMapping("/findList")
     public String findList(Integer projectId, Model model) {

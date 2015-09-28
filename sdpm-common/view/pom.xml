@@ -42,7 +42,7 @@
 			<artifactId>org.tinygroup.frameTplDark</artifactId>
 			<version>${tiny_ui_version}</version>
 		</dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.frameTplDeepblue</artifactId>
             <version>${tiny_ui_version}</version>
@@ -66,7 +66,7 @@
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.frameTplOrange</artifactId>
             <version>${tiny_ui_version}</version>
-        </dependency> -->
+        </dependency>
 		<!--皮肤 end-->
         <dependency>
             <groupId>org.tinygroup</groupId>

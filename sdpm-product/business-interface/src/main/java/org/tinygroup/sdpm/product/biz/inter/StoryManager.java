@@ -45,7 +45,7 @@ public interface StoryManager {
 	 * @param story
 	 * @return
 	 */
-	List<ProductStory> findList(ProductStory story,String columnName,boolean asc);
+	List<ProductStory> findList(ProductStory story,String order,String ordertype);
 	/**
 	 * 分页查询（排序）
 	 * @param start
@@ -53,7 +53,7 @@ public interface StoryManager {
 	 * @param story
 	 * @return
 	 */
-	Pager<ProductStory> findPager(int start, int limit, ProductStory story, SearchInfos condition, String groupOperate, String columnName, boolean asc);
+	Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc);
 
 
 }

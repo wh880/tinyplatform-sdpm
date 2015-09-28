@@ -16,13 +16,19 @@
 
 package org.tinygroup.sdpm.document.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 文档表
  * 
  */
-public class Doc {
+public class Doc implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/** 
 	 * 文档ID
@@ -100,13 +106,6 @@ public class Doc {
 	 * 文档url
 	 */
 	private String docUrl;
-
-	/** 
-	 * 附件链接
-	 * 
-	 * 附件url，路径
-	 */
-	private String attachUrl;
 
 	/** 
 	 * DOC查阅次数
@@ -237,14 +236,6 @@ public class Doc {
 
 	public String getDocUrl(){
 		return docUrl;
-	}
-
-	public void setAttachUrl(String attachUrl){
-		this. attachUrl = attachUrl;
-	}
-
-	public String getAttachUrl(){
-		return attachUrl;
 	}
 
 	public void setDocViews(Integer docViews){

@@ -64,9 +64,9 @@
 
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/plan/save" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/plan/save" "post" {"class":""})
     <div class="infoContent">
-        <p class="titleName">编辑</p>
+        <p class="titleName">创建新计划</p>
      #@elementItem()
         #@colLabel()产品:#end
         #@formControlDiv("col-4")
@@ -77,7 +77,7 @@
     #@elementItem()
         #@colLabel()名称:#end
         #@formControlDiv("col-4")
-          #tinyInput("text" "username" ""{"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+          #tinyInput("text" "planName" ""{"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end
@@ -85,14 +85,14 @@
     #@elementItem()
         #@colLabel()开始日期:#end
         #@formControlDiv("col-4")
-           #@tinyDateInput("start-time" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+           #@tinyDateInput("" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
         #@colLabel()结束日期:#end
         #@formControlDiv("col-4")
-        	 #@tinyDateInput("end-time" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+        	 #@tinyDateInput("" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end
          <div  class="col-6"> 
          	
@@ -125,7 +125,7 @@
     #@elementItem()
         #@colLabel()描述:#end
         #@formControlDiv("col-10")
-           #@Teditor("content3" "content3" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})备注...最少输入10个字符#end
+           #@Teditor("planSpec" "" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})备注...最少输入10个字符#end
         #end
         #@validateDiv("col-2")#end
     #end

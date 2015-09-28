@@ -1,7 +1,7 @@
 #include("/system/page/event/common.page")
-#set(editpagePath="/system/page/dictionaries/dictitem_edit.pagelet",editpageModalId="dictitemEditModal",editpageModal="#"+editpageModalId)
-#set(viewpagePath="/system/page/dictionaries/dictitem_view.pagelet",viewpageModalId="dictitemViewModal",viewpageModal="#"+viewpageModalId)
-#datatablesInitSimple("#dictitemTb" )
+
+
+
 <style>.dataTablebox .tablebox{margin-left:200px;margin-top:4px;}</style>
 #import("/org/tinygroup/table/components/table.component")
  #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
@@ -30,5 +30,3 @@
 			#end
 #end
 
-#simpleModal(editpageModalId)
-#simpleViewModal(viewpageModalId)

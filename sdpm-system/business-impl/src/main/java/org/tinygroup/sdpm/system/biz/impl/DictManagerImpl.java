@@ -53,8 +53,14 @@ public class DictManagerImpl implements DictManager {
 
 	public Pager<SystemDict> findPager(int start, int limit, SystemDict dict, String columnName,
 			boolean asc) {
-		
-		return systemDictDao.queryPager(start, limit, dict,  new OrderBy(columnName, asc));
+		Pager<SystemDict> pagerDict= systemDictDao.queryPager(start, limit, dict,  new OrderBy(columnName, asc));
+//		Pager<SystemDict> pager;
+		for(int i=0;i<pagerDict.getRecords().size();i++){
+			if(pagerDict.getRecords().get(i).getDeleted()==1){
+				pagerDict.getRecords().remove(i);
+			}
+		}
+		return pagerDict;
 	}
 
 
