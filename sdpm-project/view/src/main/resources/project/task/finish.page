@@ -25,6 +25,7 @@
 	#hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
 	#hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
 	#hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
+	#hiddenInput(hiddenInputName="taskStatus" hiddenInputValue=task?.taskStatus)
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>编辑完成</p>
