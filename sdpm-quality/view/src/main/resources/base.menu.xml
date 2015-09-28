@@ -74,9 +74,9 @@
               isShow="1" scope="testcase-op"></menu>      
         <menu id="add-case" name="建用例" href="/testManagement/page/proposecase.page" icon="icon-sitemap" sort="3"
               isShow="1" scope="demand-op,product-de,testcase-tab,testbuginfo-tab"></menu> 
-        <menu id="tcaseinput" name="导入" href="/testManagement/page/tabledemo/importBug.pagelet" icon="icon-download-alt" sort="3"
+        <menu id="tcaseinput" name="导入" href="/testManagement/page/tabledemo/importBug.pagelet" icon="icon-download-alt" sort="5"
               isShow="1" scope="testcase-tab"></menu>  
-        <menu id="tcaseoutput" name="导出" href="/testManagement/page/tabledemo/exportBugData.pagelet" icon="icon-upload-alt" sort="2"
+        <menu id="tcaseoutput" name="导出" href="/testManagement/page/tabledemo/exportBugData.pagelet" icon="icon-upload-alt" sort="4"
               isShow="1" scope="testcase-tab"></menu>
         <menu id="tcasenote" name="日志" href="/testManagement/page/addLog.pagelet" icon="icon-time" sort="6"
               isShow="1" scope="testcaseinfo-tab"></menu>
