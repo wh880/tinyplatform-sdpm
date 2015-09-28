@@ -22,7 +22,7 @@ import java.io.Serializable;
  * 测试用例步骤表
  * 
  */
-public class QualityCaseStep implements Serializable {
+public class QualityCaseStep implements Serializable{
 
 	/** 
 	 * 用例步骤编号

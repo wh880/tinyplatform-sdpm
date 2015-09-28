@@ -17,17 +17,10 @@ public class DictAction extends BaseController{
 	@Autowired
 	private DictService dictService;
 	@RequestMapping("list")
-	public String list(Integer moduleId, String columnName,String ordertype,Model model){
-		  boolean asc = true;
-	       if ("desc".equals(ordertype)) {
-	           asc = false;
-	       }
-	       SystemDict dict = new SystemDict();
-	       dict.setModuleId(moduleId);
-	       columnName="dict_id";
-		List<SystemDict> dictList  =dictService.findDictList(dict, columnName, asc);
+	public String list(SystemDict dict,Model model){
+		List<SystemDict> dictList  =dictService.findDictList(dict);
 		   model.addAttribute("dictList", dictList);
-		return "system/page/dictionaries/dictitem_list.pagelet";
+		return "/system/page/dictionaries/dict_list.page";
 		
 	}
 	@RequestMapping("findPager")
@@ -48,9 +41,27 @@ public class DictAction extends BaseController{
     	 model.addAttribute("dict", dict);
     	 return "system/page/dictionaries/dictitem_view.pagelet";
      }
+	@RequestMapping("check2")
+    public String checkDict2(Integer dictId,Model model){
+    	 SystemDict dict =dictService.findDict(dictId);
+    	 model.addAttribute("dict", dict);
+    	 return "/system/page/dictionaries/dict_view.pagelet";
+     }
 	@RequestMapping("delete")
 	public String deleteDict(Integer dictId){
 		dictService.deleteDict(dictId);
+		return "system/page/dictionaries/dictitem.page";
+	}
+	@RequestMapping("save")
+	public String saveDict(SystemDict systemDict ,Model model){
+		if(systemDict.getDictId()==null){
+			
+			dictService.addDict(systemDict);
+		}
+		else{
+			dictService.updateDict(systemDict);
+		}
+		model.addAttribute("dict", systemDict);
 		return "system/page/dictionaries/dictitem.page";
 	}
 

@@ -16,16 +16,17 @@
 
 package org.tinygroup.sdpm.quality.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
  * 测试任务表
  * 
  */
-public class QualityTestTask {
+public class QualityTestTask implements Serializable {
 	
 	public static int DELETE_YES = 1;
-	public static int DELETE_NO = 0;
+	public static int DELETE_NO = 1;
 
 	/** 
 	 * 测试版本编号
@@ -52,10 +53,10 @@ public class QualityTestTask {
 	private Integer projectId;
 
 	/** 
-	 * 项目版本
+	 * 名称编号
 	 * 
 	 */
-	private String build;
+	private String buildName;
 
 	/** 
 	 * 负责人
@@ -138,12 +139,12 @@ public class QualityTestTask {
 		return projectId;
 	}
 
-	public void setBuild(String build){
-		this. build = build;
+	public void setBuildName(String buildName){
+		this. buildName = buildName;
 	}
 
-	public String getBuild(){
-		return build;
+	public String getBuildName(){
+		return buildName;
 	}
 
 	public void setTesttaskOwner(String testtaskOwner){

@@ -7,7 +7,6 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.tinysqldsl.Pager;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +20,7 @@ public class TaskServiceImpl implements TaskService {
     private TaskManager taskManager;
 
     public ProjectTask addTask(ProjectTask task) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        String hh = dateFormat.format(new Date());
+        task.setTaskStatus("0");
         task.setTaskOpenedDate(new Date());
         return taskManager.add(task);
     }

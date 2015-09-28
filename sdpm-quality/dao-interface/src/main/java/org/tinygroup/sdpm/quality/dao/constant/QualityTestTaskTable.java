@@ -52,10 +52,10 @@ public class QualityTestTaskTable extends Table {
 	public final Column PROJECT_ID = new Column(this, "project_id");
 
 	/** 
-	 * 项目版本
+	 * 名称编号
 	 * 
 	 */
-	public final Column BUILD = new Column(this, "build");
+	public final Column BUILD_NAME = new Column(this, "build_name");
 
 	/** 
 	 * 负责人

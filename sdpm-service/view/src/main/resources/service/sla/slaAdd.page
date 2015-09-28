@@ -25,8 +25,10 @@
             #@elementItem()
                 #@sdpmItem("客户名称" "*")
                     #@Tselect2F()
+                    #*#@Tselect2Body(
+                        "clientId" "sla.clientId" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项*#
                         #@Tselect2Body(
-                            "clientId" "sla.clientId" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            "clientId" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="IN">请选择</option>
                             <option value="02">恒生</option>
                             <option value="03">阿里</option>
@@ -39,7 +41,7 @@
             #end
             #@elementItem()
                 #@sdpmItem("产品名称" "*")
-                    #@tinySelect("productId" "ch" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                    #@tinySelect("productId" "ch"{"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
                         #@tinyOptionItem("ch")请选择#end
                         #@tinyOptionItem("02")支付宝#end
                         #@tinyOptionItem("03")余额宝#end
@@ -50,7 +52,8 @@
             #@elementItem()
                 #@sdpmItem("产品版本" "*")
                     #tinyInput(
-                        "text" "cilentProductVision" ""{"datatype":"*","id":"cilentProductVision","nullmsg":"产品版本不能为空","class":
+                        "text" "cilentProductVision" sla?.cilentProductVision{"datatype":"*","id":"cilentProductVision",
+                        "nullmsg":"产品版本不能为空","class":
                         "input-text"})
                 #end
             #end
@@ -68,40 +71,49 @@
             #@elementItem()
                 #@sdpmItem("服务协议标题" "*")
                     #tinyInput(
-                        "text" "slaTitle" ""{"datatype":"*","id":"slaTitle","nullmsg":"协议标题不能为空！","class":"input-text"})
+                        "text" "slaTitle"sla?.slaTitle{"datatype":"*","id":"slaTitle","nullmsg":"协议标题不能为空！","class":
+                        "input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务工时上限")
-                    #tinyInput("text" "serviceEffortLimit" ""{"datatype":"","id":"serviceEffortLimit","class":"input-text select2"})
+                    #tinyInput(
+                        "text" "serviceEffortLimit" sla?.serviceEffortLimit{"datatype":"","id":"serviceEffortLimit",
+                        "class":"input-text select2"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务响应时限")
                     #tinyInput(
-                        "text" "serviceReplyTimeLimit" ""{"datatype":"","id":"serviceReplyTimeLimit","class":
+                        "text" "serviceReplyTimeLimit" sla?.serviceReplyTimeLimit{"datatype":"","id":
+                        "serviceReplyTimeLimit","class":
                         "input-text select2"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("需求回访时限")
                     #tinyInput(
-                        "text" "serviceReviewTimeLimit" ""{"datatype":"","id":"serviceReviewTimeLimit","class":"input-text select2"})
+                        "text" "serviceReviewTimeLimit" sla?.serviceReviewTimeLimit{"datatype":"","id":
+                        "serviceReviewTimeLimit","class":"input-text select2"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务请求数上限")
-                    #tinyInput("text" "serviceRequestLimit" ""{"datatype":"","id":"serviceRequestLimit","class":"input-text"})
+                    #tinyInput(
+                        "text" "serviceRequestLimit" sla?.serviceRequestLimit{"datatype":"","id":"serviceRequestLimit",
+                        "class":"input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("现场服务次数上限")
-                    #tinyInput("text" "serviceTsOnsiteLimit" ""{"datatype":"","id":"serviceTsOnsiteLimit","class":"input-text"})
+                    #tinyInput("text" "serviceTsOnsiteLimit" sla?.serviceTsOnsiteLimit{"datatype":"","id":
+                        "serviceTsOnsiteLimit","class":"input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务专员")
-                    #tinyInput("text" "serviceSpecialist" ""{"datatype":"","id":"serviceSpecialist","class":"input-text"})
+                    #tinyInput("text" "serviceSpecialist" sla?.serviceSpecialist{"datatype":"","id":"serviceSpecialist",
+                        "class":"input-text"})
                 #end
             #end
             #@elementItem()
@@ -119,31 +131,36 @@
             #@elementItem()
                 #@sdpmItem("服务期限" "*")
                     #@tinyDateInput(
-                        "serviceDeadline" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
+                        "serviceDeadline" sla?.serviceDeadline "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                        "nullmsg":
                         "日期不能为空","placeholder":"请输入日期"})#end
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("创建人")
-                    #tinyInput("text" "slaCreatedBy" ""{"datatype":"","id":"slaCreatedBy","class":"input-text"})
+                    #tinyInput(
+                        "text" "slaCreatedBy" sla?.slaCreatedBy{"datatype":"","id":"slaCreatedBy","class":"input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("创建时间")
                     #@tinyDateInput(
-                        "slaCreateDate" "" "YYYY-MM-DD" {"style":"width:200px","id":"slaCreateDate","datatype":
+                        "slaCreateDate" sla?.slaCreateDate "YYYY-MM-DD" {"style":"width:200px","id":"slaCreateDate",
+                        "datatype":
                         "*","nullmsg":"日期不能为空","placeholder":""})#end
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("批准人")
-                    #tinyInput("text" "slaReviewedBy" ""{"datatype":"","id":"slaReviewedBy","class":"input-text"})
+                    #tinyInput("text" "slaReviewedBy" sla?.slaReviewedBy{"datatype":"","id":"slaReviewedBy","class":
+                        "input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("批准时间")
                     #@tinyDateInput(
-                        "slaReviewDate" "" "YYYY-MM-DD" {"style":"width:200px","id":"slaReviewDate","datatype":
+                        "slaReviewDate" sla?.slaReviewDate "YYYY-MM-DD" {"style":"width:200px","id":"slaReviewDate",
+                        "datatype":
                         "*","nullmsg":
                         "日期不能为空","placeholder":""})#end
                 #end

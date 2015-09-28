@@ -1,32 +1,26 @@
-
 #set(records=productPlan.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(productPlan.totalCount)
-#for(plan:productPlan.records)
+#setTinyItemCount(productPlan?.totalCount)
+#for(plan:productPlan?.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="product-plan">#end
 	#@td()${plan?.planId}#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-plan/product-al-req.page">${plan?.planName}</a>#end
 	#@td()${plan?.planSpec}#end
-	#@td()${plan?.planBeginDate}#end
-	#@td()${plan?.planEndDate}#end
+	#@td()${plan?.planBeginDate?formatDate(plan?.planBeginDate,'yyyy年MM月dd日'):""}#end
+	#@td()${plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy年MM月dd日'):""}#end
 	 #@td()
 		 #foreach(m:menuManager.getScopeMenus("product-pl"))
-		 	#if(m.id=="product-plan-edit")
-		 	     <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${eval(m.href)}"><i class="${m.icon}"></i></a>
-		 	     #elseif(m.id!="product-plan-remove")
-		 	          <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${m.href}"><i class="${m.icon}"></i></a>
-		 	     #else
-		 	     	 #iconOperations("#myModal" m.icon m.name "865" "500" url "ml-5")&nbsp;
-		 	#end
-		 
-#*			 #if(m.id!="product-plan-remove")
-             <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${m.href}"><i class="${m.icon}"></i></a>
+		  #set(url=eval(m.href))
+			 #if(m.id!="product-plan-remove")
+			
+             <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${url}"><i class="${m.icon}"></i></a>
 				 #else
 				 #iconOperations("#myModal" m.icon m.name "865" "500" url "ml-5")&nbsp;
-			 #end*#
+#*				&nbsp; #@tinyTableItemRemove("#" "id")<i class="icon-remove"></i>#end*#
+			 #end
 		 #end
 	#end
 #end
