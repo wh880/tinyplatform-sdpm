@@ -15,8 +15,8 @@
     #@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">${t?.taskName}#end
     #if(t.taskStatus)
         #@td()${showStatuMap.get(t.taskStatus)}#end
-        #else
-            #@td()#end
+    #else
+        #@td()#end
     #end
 
     #@td()${t?.taskDeadLine}#end
@@ -29,36 +29,40 @@
     #@td()${t?.taskFinishedBy}#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("pro-task-op"))
-            ##逻辑判断，根据状态判断是否可选择。
-            ##1.关闭，则
-           #if(t.taskStatus == 6)
-               #if(m.sort != 10 || m.sort!= 4)
-                   <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-               #else
-                   <a href="${TINY_CONTEXT_PATH}${m.href}?taskId=${t?.taskId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-               #end
-           #elseif(t.taskStatus == 1)
-               #if(m.sort == 6)
-                   <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-               #else
-                   <a href="${TINY_CONTEXT_PATH}${m.href}?taskId=${t?.taskId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-               #end
-           #elseif(t.taskStatus == 3)
-               #if(m.sort == 8 || m.sort == 15)
-                   <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-               #else
-                   <a href="${TINY_CONTEXT_PATH}${m.href}?taskId=${t?.taskId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-               #end
-           #elseif(t.taskStatus == 2)
-               #if(m.sort == 6 || m.sort == 15)
-                   <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-               #else
-                   <a href="${TINY_CONTEXT_PATH}${m.href}?taskId=${t?.taskId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-               #end
-           #else
-               无
-               #break()
-           #end
+        ##逻辑判断，根据状态判断是否可选择。
+        ##1.关闭，则
+            #if(t.taskStatus == 6)
+                #if(m.sort != 10 || m.sort!= 4)
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #elseif(t.taskStatus == 1)
+                #if(m.sort == 6)
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #elseif(t.taskStatus == 3)
+                #if(m.sort == 8 || m.sort == 15)
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #elseif(t.taskStatus == 2)
+                #if(m.sort == 6 || m.sort == 15)
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #else
+                无
+                #break()
+            #end
         #end
     #end
 #end
