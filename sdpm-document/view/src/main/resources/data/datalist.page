@@ -1,27 +1,20 @@
-#macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
-#end
 
 
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
-#end
-#setTinyItemCount(52)
+#setTinyItemCount(docpager.getTotalCount())
+${docpager.getTotalCount()}
 ##for(var:[1..pagesize])
-#foreach(l:docpager.records)
+#foreach(l:docpager.getRecords())
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="../document/doc-view.page">${l?.docId}</a>#end
-	#@td()<a href="../document/doc-view.page">${l?.docTitle}</a>#end
+	#@td()<a href="/document/doc-view/${l?.docId}">${l?.docId}</a>#end
+	#@td()<a href="/document/doc-view/${l?.docId}">${l?.docTitle}</a>#end
 	#@td()${l?.getDocType()}#end
 	#@td()${l?.getDocAddedBy()}#end
 	#@td()${l?.getDocAddedDate()}#end
 	 #@td()
 	 	#foreach(m:menuManager.getScopeMenus("doc-op"))
 			#if(m.id != "docdelete")
-				<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+				<a href="${TINY_CONTEXT_PATH}${m.href}/${l?.docId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 			#else
 				#@tinyTableItemRemove(m.href var)
 					<i class="${m.icon}" title="删除"></i>
