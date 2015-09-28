@@ -19,8 +19,6 @@ package sdpm.product.service.wrapper.wrap;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -29,10 +27,8 @@ import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
 
-@Component
-public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.service.ReleaseService {
-	
-	@Autowired
+public class PlanServiceImplWrapper implements org.tinygroup.sdpm.product.service.PlanService {
+
 	CEPCore cepcore;
 
 	public CEPCore getCore() {
@@ -53,12 +49,12 @@ public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		return event;
 	}
 
-	public org.tinygroup.sdpm.product.dao.pojo.ProductRelease addRelease(org.tinygroup.sdpm.product.dao.pojo.ProductRelease release) {
-		String serviceId = "product_addRelease";
+	public org.tinygroup.sdpm.product.dao.pojo.ProductPlan addPlan(org.tinygroup.sdpm.product.dao.pojo.ProductPlan plan) {
+		String serviceId = "product_addPlan";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("release" ,release);
+			context.put("plan" ,plan);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -66,12 +62,12 @@ public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public int updateRelease(org.tinygroup.sdpm.product.dao.pojo.ProductRelease release) {
-		String serviceId = "product_updateRelease";
+	public int updatePlan(org.tinygroup.sdpm.product.dao.pojo.ProductPlan plan) {
+		String serviceId = "product_updatePlan";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("release" ,release);
+			context.put("plan" ,plan);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -79,12 +75,12 @@ public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public int[] updateBatchRelease(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> releases) {
-		String serviceId = "product_updateBatchRelease";
+	public org.tinygroup.sdpm.product.dao.pojo.ProductPlan findPlan(java.lang.Integer planId) {
+		String serviceId = "product_findPlan";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("releases" ,releases);
+			context.put("planId" ,planId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -92,12 +88,12 @@ public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public int deleteRelease(java.lang.Integer releaseId) {
-		String serviceId = "product_deleteRelease";
+	public int[] updateBatchPlan(java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductPlan> plan) {
+		String serviceId = "product_updateBatchPlan";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("releaseId" ,releaseId);
+			context.put("plan" ,plan);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -105,12 +101,12 @@ public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> findReleaseList(org.tinygroup.sdpm.product.dao.pojo.ProductRelease productRelease ,java.lang.String order ,java.lang.String ordertype) {
-		String serviceId = "product_findReleaseList";
+	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.ProductPlan> findPlanList(org.tinygroup.sdpm.product.dao.pojo.ProductPlan productPlan ,java.lang.String order ,java.lang.String ordertype) {
+		String serviceId = "product_findPlanList";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("productRelease" ,productRelease);
+			context.put("productPlan" ,productPlan);
 			context.put("order" ,order);
 			context.put("ordertype" ,ordertype);
 
@@ -120,16 +116,29 @@ public class ReleaseServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.ProductRelease> findReleasePager(int page ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductRelease productRelease ,java.lang.String order ,java.lang.String ordertype) {
-		String serviceId = "product_findReleasePager";
+	public org.tinygroup.tinysqldsl.Pager findProductPlanPager(int page ,int limit ,org.tinygroup.sdpm.product.dao.pojo.ProductPlan productPlan ,java.lang.String order ,java.lang.String ordertype) {
+		String serviceId = "product_findProductPlanPager";
 
 		try{
 			Context context = new ContextImpl();
 			context.put("page" ,page);
 			context.put("limit" ,limit);
-			context.put("productRelease" ,productRelease);
+			context.put("productPlan" ,productPlan);
 			context.put("order" ,order);
 			context.put("ordertype" ,ordertype);
+
+			return callServiceAndCallBack(serviceId,context);
+		}catch(Exception e){
+			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
+		}
+	}
+
+	public java.lang.Integer deletePlan(java.lang.Integer planId) {
+		String serviceId = "product_deletePlan";
+
+		try{
+			Context context = new ContextImpl();
+			context.put("planId" ,planId);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){

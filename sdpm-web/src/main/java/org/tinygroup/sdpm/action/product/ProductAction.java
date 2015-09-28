@@ -27,7 +27,7 @@ public class ProductAction  extends BaseController{
 	@Autowired
 	private ProductService productService;
 
-@RequestMapping("")
+	@RequestMapping("")
 	public String productAction(HttpServletRequest request){
 		List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
 		if(list == null){

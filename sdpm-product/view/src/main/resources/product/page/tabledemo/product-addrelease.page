@@ -3,7 +3,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-release",sonitem="<li>"+"发布"+"</li>")
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/release/save" "post" {"class":""})
 #*<div style="width:70%;float:left" class="pageleftpart">*#
     <div class="infoContent">
         <p class="titleName">编辑</p>
@@ -15,7 +15,7 @@
      #@elementItem()
         #@colLabel()发布名称:#end
         #@formControlDiv("col-4")
-        	#tinyInput("text" "username" ""{"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+        	#tinyInput("text" "releaseName" ""{"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
        #end
         #@validateDiv("col-2")#end
       #end
@@ -23,7 +23,7 @@
         #@colLabel()版本:#end
        #@formControlDiv("col-4")
 			#@Tselect2F()
-                #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #@Tselect2Body("buildId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     <option value="CT">Admin</option>
                     <option value="DE">Demo</option>
                     <option value="FL">Me</option>
@@ -38,7 +38,7 @@
     #@elementItem()
         #@colLabel()发布日期:#end
         #@formControlDiv("col-4")
-           #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+           #@tinyDateInput("releaseDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end
         #@validateDiv("col-2")#end
     #end
@@ -46,7 +46,7 @@
     #@elementItem()
         #@colLabel()描述:#end
         #@formControlDiv("col-8")
-           #@Teditor("content3" "content3" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})备注...最少输入10个字符#end
+           #@Teditor("releaseDesc" "content3" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})备注...最少输入10个字符#end
         #end
         #@validateDiv("col-2")#end
     #end

@@ -17,6 +17,7 @@
 package org.tinygroup.sdpm.product.dao.impl;
 
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
@@ -245,4 +246,16 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 		}
 		return select;
 	}
+	
+	public Integer softDelete(Integer id) {
+        return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
+            public Update generate(Integer id) {
+                Update update = update(PRODUCT_PLANTABLE).set(
+                		PRODUCT_PLANTABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
+                		PRODUCT_PLANTABLE.PLAN_ID.eq(id));
+                return update;
+            }
+        });
+
+    }
 }

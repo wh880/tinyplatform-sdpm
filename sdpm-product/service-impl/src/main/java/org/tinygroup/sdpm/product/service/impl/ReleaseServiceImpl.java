@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.biz.inter.ReleaseManger;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.service.ReleaseService;
 import org.tinygroup.tinysqldsl.Pager;
@@ -31,10 +32,6 @@ public class ReleaseServiceImpl implements ReleaseService{
 		return releaseManger.updateBatch(releases);
 	}
 
-	public int deleteRelease(Integer releaseId) {
-		
-		return releaseManger.delete(releaseId);
-	}
 
 	public List<ProductRelease> findReleaseList(ProductRelease productRelease,String order,String ordertype) {
 		
@@ -46,6 +43,18 @@ public class ReleaseServiceImpl implements ReleaseService{
 
 		return releaseManger.findPager(page, limit, productRelease, order, ordertype);
 	}
+
+	public Integer deletePlan(Integer releaseId) {
+		
+		return releaseManger.delete(releaseId);
+	}
+
+	public ProductRelease findRelease(Integer releaseId) {
+		
+		return releaseManger.find(releaseId);
+	}
+
+	
 	
 
 
