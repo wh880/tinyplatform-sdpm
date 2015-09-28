@@ -95,7 +95,7 @@
                         #@tinyOptionItem("en")联系人二#end
                         #@tinyOptionItem("ta")联系人三#end
                     #end
-                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/companyInfoEdit2.page" class="r ">增加</a>
+                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/companyInfoEdit.page" class="r ">增加</a>
                     #end
                 #end
             #end

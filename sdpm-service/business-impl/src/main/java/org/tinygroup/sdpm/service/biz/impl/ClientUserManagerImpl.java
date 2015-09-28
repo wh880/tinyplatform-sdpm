@@ -35,8 +35,7 @@ public class ClientUserManagerImpl implements ClientUserManager {
         return clientUser;
     }
 
-    public ServiceClientUser delete(Integer id) {
-        clientUserDao.deleteByKey(id);
-        return null;
+    public Integer delete(Integer id) {
+        return clientUserDao.softDelete(id);
     }
 }

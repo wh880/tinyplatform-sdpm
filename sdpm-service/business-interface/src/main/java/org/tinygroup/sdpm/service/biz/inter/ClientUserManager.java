@@ -46,5 +46,5 @@ public interface ClientUserManager {
      * @param id 主键
      * @return
      */
-    ServiceClientUser delete(Integer id);
+    Integer delete(Integer id);
 }

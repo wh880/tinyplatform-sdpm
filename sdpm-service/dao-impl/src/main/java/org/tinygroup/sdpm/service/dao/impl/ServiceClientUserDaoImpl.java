@@ -22,6 +22,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.service.dao.ServiceClientUserDao;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
@@ -213,5 +214,17 @@ public class ServiceClientUserDaoImpl extends TinyDslDaoSupport implements Servi
 			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
 		}
 		return select;
+	}
+
+	public Integer softDelete(Integer id) {
+		return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
+			public Update generate(Integer id) {
+				Update update = update(SERVICE_CLIENT_USERTABLE).set(
+						SERVICE_CLIENT_USERTABLE.DELETED.value(ServiceClient.DELETE_YES)).where(
+						SERVICE_CLIENT_USERTABLE.CLIENT_ID.eq(id));
+				return update;
+			}
+		});
+
 	}
 }

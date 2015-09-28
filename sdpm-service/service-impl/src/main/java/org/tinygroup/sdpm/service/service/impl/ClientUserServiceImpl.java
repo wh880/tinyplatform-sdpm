@@ -32,7 +32,7 @@ public class ClientUserServiceImpl implements ClientUserService{
         return clientUserManager.update(clientUser);
     }
 
-    public ServiceClientUser deleteClientUser(Integer id) {
+    public Integer deleteClientUser(Integer id) {
         return clientUserManager.delete(id);
     }
 }

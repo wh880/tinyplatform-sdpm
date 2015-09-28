@@ -10,6 +10,7 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
+import org.tinygroup.sdpm.service.service.inter.ClientUserService;
 import org.tinygroup.sdpm.service.service.inter.SlaService;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -27,7 +28,8 @@ public class ClientAction extends BaseController {
     private ClientService clientService;
     @Autowired
     private SlaService slaService;
-
+    @Autowired
+    private ClientUserService clientUserService;
 
     @RequestMapping(value = "/list")
     public String list(ServiceClient client, Model model) {
@@ -142,10 +144,28 @@ public class ClientAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/deleteClientUser")
     public Map deleteClientUser(Integer id) {
-        clientService.deleteClient(id);
+        clientService.deleteClientUser(id);
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "y");
         map.put("info", "删除成功");
         return map;
+    }
+
+    @RequestMapping(value = "/clientUserUpdate/date")
+    public String clientUserUpdate(Integer id, Model model) {
+        if (id != null) {
+            ServiceClientUser clientUser = clientUserService.findClientUser(id);
+            model.addAttribute("clientUser", clientUser);
+        }
+        return "service/client/companyInfoEdit.pagelet";
+    }
+
+    @RequestMapping(value = "/clientUserUpdate")
+    public String updateClientUser(ServiceClientUser clientUser) {
+        if (clientUser.getId() != null) {
+            clientUserService.updateClientUser(clientUser);
+        } else
+            clientUserService.addClientUser(clientUser);
+        return "service/client/clientInfo.page";
     }
 }
