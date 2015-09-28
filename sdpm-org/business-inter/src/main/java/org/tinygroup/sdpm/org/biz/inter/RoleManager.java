@@ -16,6 +16,9 @@
 package org.tinygroup.sdpm.org.biz.inter;
 
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
+import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 public interface RoleManager {
     /**
@@ -26,6 +29,23 @@ public interface RoleManager {
      */
     OrgRole find(Integer id);
 
+    /**
+     * 查找Role的list
+     *
+     * @param start
+     * @param limit
+     * @param orgRole
+     * @return
+     */
+    Pager<OrgRole> findPager(Integer start, Integer limit, OrgRole orgRole);
+
+    /**
+     * 根据条件查询List
+     *
+     * @param orgRole 用于查询条件
+     * @return
+     */
+    List<OrgRole> findList(OrgRole orgRole);
     /**
      * 新增有一Role
      *
