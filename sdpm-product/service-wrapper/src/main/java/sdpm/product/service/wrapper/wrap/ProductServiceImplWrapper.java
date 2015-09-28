@@ -105,14 +105,14 @@ public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.Product> findProductList(org.tinygroup.sdpm.product.dao.pojo.Product product ,java.lang.String columnName ,boolean asc) {
+	public java.util.List<org.tinygroup.sdpm.product.dao.pojo.Product> findProductList(org.tinygroup.sdpm.product.dao.pojo.Product product ,java.lang.String order ,java.lang.String ordertype) {
 		String serviceId = "product_findProductList";
 
 		try{
 			Context context = new ContextImpl();
 			context.put("product" ,product);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
+			context.put("order" ,order);
+			context.put("ordertype" ,ordertype);
 
 			return callServiceAndCallBack(serviceId,context);
 		}catch(Exception e){
@@ -120,12 +120,12 @@ public class ProductServiceImplWrapper implements org.tinygroup.sdpm.product.ser
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager findProductPager(int start ,int limit ,org.tinygroup.sdpm.product.dao.pojo.Product product ,java.lang.String order ,java.lang.String ordertype) {
+	public org.tinygroup.tinysqldsl.Pager<org.tinygroup.sdpm.product.dao.pojo.Product> findProductPager(int page ,int limit ,org.tinygroup.sdpm.product.dao.pojo.Product product ,java.lang.String order ,java.lang.String ordertype) {
 		String serviceId = "product_findProductPager";
 
 		try{
 			Context context = new ContextImpl();
-			context.put("start" ,start);
+			context.put("page" ,page);
 			context.put("limit" ,limit);
 			context.put("product" ,product);
 			context.put("order" ,order);

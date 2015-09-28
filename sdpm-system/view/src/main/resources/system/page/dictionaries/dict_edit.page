@@ -1,9 +1,16 @@
 #import("/system/page/dictionaries/components/form.component")
-#@formHorizoontalValidate("" "dict_edit")
+#@formHorizoontalValidate(TINY_CONTEXT_PATH+"/system/dict/save2" "dict_edit")
+    <input type="hidden" name="dictId" value="${dict?.dictId}"/>
 	#@rowCol("col-3" "代码：" "col-5" "*")
-		#@inputTextx("dictValue" "代码" "*" "代码不能为空")#end
+		#@inputTextx("dictKey" dict?.dictKey "*" "代码不能为空")#end
 	#end
 	#@rowCol("col-3" "中文名：" "col-5" "*")
-		#@inputTextx("dictName" "中文名" "*" "代码不能为空")#end
-	#end		
+		#@inputTextx("dictValue" dict?.dictValue "*" "代码不能为空")#end
+	#end
+##	 #@div(divClass="col-12 col-offset-4 form-inline")
+##          #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+##     #end		
 #end
+
+
+         

@@ -31,9 +31,7 @@
         #@gridSysCol(3)#end
         #@gridSysCol(6)
             #@tinyForm("thisform" TINY_CONTEXT_PATH+"/org/user/save" "post" {"class":""})
-                #hiddenInput(hiddenInputName="orgUserId" hiddenInputValue=cmsArticle?.articleId)
-
-            <imput type="hidden" name="orgUserId" value="${user?.orgUserId}"/>
+            <input type="hidden" name="orgUserId" value="${user?.orgUserId}"/>
                 #@noRespsGridSystem()
                     #@gridSysRow()
                     <div class="infoContent">
@@ -242,20 +240,7 @@
 
                             #end
                         #end
-                    </div>
 
-
-                    <div class="infoContent">
-                        <p class="titleName">安全验证</p>
-                        #@gridSysRow()
-                            #@colLabel("col-4")<span class="c-red">*</span>请输入密码：#end
-                            #@gridSysCol(6)
-                                #tinyInput(
-                                    "password" "name" "" {"placeholder":"","datatype":"*","nullmsg":"请输入密码！","id":
-                                    "name",
-                                    "class":"input-text"})
-                            #end
-                        #end
                         #@gridSysRow()
                             #@div(divClass="col-8 col-offset-4 form-inline")
                                 #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})

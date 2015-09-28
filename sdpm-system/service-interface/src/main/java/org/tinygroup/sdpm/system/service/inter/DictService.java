@@ -47,7 +47,7 @@ public interface DictService {
 	 * @param config
 	 * @return
 	 */
-	List<SystemDict> findDictList(SystemDict dict,String columnName,boolean asc);
+	List<SystemDict> findDictList(SystemDict dict);
 	
 	/**
 	 * 根据对象查找(分页、排序)

@@ -64,14 +64,11 @@ public class TaskAction extends BaseController {
     }
     @RequestMapping("close")
     public String close(Integer taskId, Model model) {
-        if (taskId != null) {
-            ProjectTask task = taskService.findTask(taskId);
-            model.addAttribute("task", task);
-            //还需要查询其他相关任务剩余时间的信息
-            return "project/task/close.page";
-        }
-        return "error";
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+        return "project/task/close.page";
     }
+
     @RequestMapping("start")
     public String start(Integer taskId, Model model) {
         if (taskId != null) {
@@ -116,6 +113,26 @@ public class TaskAction extends BaseController {
             taskService.addTask(task);
         } else {
             taskService.updateTask(task);
+        }
+        model.addAttribute("task", task);
+        return "project/task/index.page";
+    }
+    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
+    public String editsave(ProjectTask task, Model model) {
+        if (task.getTaskId() == null) {
+            taskService.addTask(task);
+        } else {
+            taskService.updatEditTask(task);
+        }
+        model.addAttribute("task", task);
+        return "project/task/index.page";
+    }
+    @RequestMapping(value = "/callsave", method = RequestMethod.POST)
+    public String callsave(ProjectTask task, Model model) {
+        if (task.getTaskId() == null) {
+            taskService.addTask(task);
+        } else {
+            taskService.updatCallTask(task);
         }
         model.addAttribute("task", task);
         return "project/task/index.page";

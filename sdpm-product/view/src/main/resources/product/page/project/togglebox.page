@@ -21,18 +21,20 @@
 #@tabBodyCol("ptop-5")
 ##operationbar start
 #@div(divClass="operationbar")
+#set(urlProduct = productId!=null?'productId='+productId+'&':'')
+#set(urlModule = moduleId!=null?'moduleId='+moduleId+'&':'')
 <span class="f">
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" class="active_btn">未关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">全部需求</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">指派给我</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">由我创建</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">由我评审</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">由我关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">草稿</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">激活</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">已变更</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">待关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">已关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=1&currentPageId=3" class="${choose == 1?'active_btn':''}">未关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=2&currentPageId=3" class="${choose == 2?'active_btn':''}">全部需求</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=3&currentPageId=3" class="${choose == 3?'active_btn':''}">指派给我</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=4&currentPageId=3" class="${choose == 4?'active_btn':''}">由我创建</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=5&currentPageId=3" class="${choose == 5?'active_btn':''}">由我评审</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=6&currentPageId=3" class="${choose == 6?'active_btn':''}">由我关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=7&currentPageId=3" class="${choose == 7?'active_btn':''}">草稿</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=8&currentPageId=3" class="${choose == 8?'active_btn':''}">激活</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=9&currentPageId=3" class="${choose == 9?'active_btn':''}">已变更</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=10&currentPageId=3" class="${choose == 10?'active_btn':''}">待关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=11&currentPageId=3" class="${choose == 11?'active_btn':''}">已关闭</a>
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 
@@ -182,14 +184,13 @@
 #end
 #end
 #end
-
 #@tinyTableContent(TINY_CONTEXT_PATH+"/product/story/search?"+tinyRequestQueryString) ##取数据地址 总数据
 #@thead()
 #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 #@tinyTh({"width":"6"})<input type="checkbox" value="">#end
 #@tinyTh({"class":"sorting sorting_desc","rel":"story_id"})ID#end
 #@tinyTh({"class":"sorting","rel":"story_pri"})P#end
-#@tinyTh({"class":"sorting","rel":"story_name"})需求名称#end
+#@tinyTh({"class":"sorting","rel":"story_title"})需求名称#end
 #@tinyTh({"class":"sorting","rel":"plan_id"})计划#end
 #@tinyTh({"class":"sorting","rel":"story_source"})来源#end
 #@tinyTh({"class":"sorting","rel":"story_opened_by"})创建#end

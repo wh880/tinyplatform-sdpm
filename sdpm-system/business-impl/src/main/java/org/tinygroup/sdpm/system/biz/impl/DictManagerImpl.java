@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.system.biz.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,15 +47,37 @@ public class DictManagerImpl implements DictManager {
 		return systemDictDao.batchUpdate(dicts);
 	}
 
-	public List<SystemDict> findList(SystemDict dict, String columnName, boolean asc) {
-		
-		return systemDictDao.query(dict, new OrderBy(columnName, asc));
+	public List<SystemDict> findList(SystemDict dict) {
+		List<SystemDict> list = systemDictDao.query(dict);
+		if(list.size()>0){
+			int size = list.size();
+			for(int i=0;i<size;i++){
+				if(list.get(i).getDeleted()==1){
+					list.remove(i);
+				}
+					
+			}
+		}
+		return list;
 	}
 
 	public Pager<SystemDict> findPager(int start, int limit, SystemDict dict, String columnName,
 			boolean asc) {
-		
-		return systemDictDao.queryPager(start, limit, dict,  new OrderBy(columnName, asc));
+		Pager<SystemDict> pagerDict= systemDictDao.queryPager(start, limit, dict,  new OrderBy(columnName, asc));
+//		Pager<SystemDict> pager;
+		if(pagerDict.getRecords()!=null&&pagerDict.getRecords().size()>0){
+			List<SystemDict> list = new ArrayList<SystemDict>();
+			List<SystemDict> pagerList = pagerDict.getRecords();
+			int listSize = pagerList.size();
+		    for(int i=0;i<listSize;i++){
+			  if(pagerList.get(i).getDeleted()==0){
+				list.add(pagerList.get(i));
+			  }
+		   }
+		   pagerDict.setRecords(list);
+		   pagerDict.setTotalCount(list.size());
+		}
+		return pagerDict;
 	}
 
 

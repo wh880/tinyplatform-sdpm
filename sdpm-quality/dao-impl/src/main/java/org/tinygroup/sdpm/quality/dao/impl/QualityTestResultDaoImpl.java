@@ -16,19 +16,16 @@
 
 package org.tinygroup.sdpm.quality.dao.impl;
 
+
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityTestResultTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
-
 import java.io.Serializable;
-
 import java.util.ArrayList;
-
 import java.util.List;
-
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -38,7 +35,7 @@ import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult;
 import org.tinygroup.sdpm.quality.dao.QualityTestResultDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -230,8 +227,11 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 	}
 
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		if (orderBies == null) {
+			return select;
+		}
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+		for (int i = 0; orderBies[i] != null && i < orderBies.length; i++) {
 			OrderByElement tempElement = orderBies[i].getOrderByElement();
 			if (tempElement != null) {
 				orderByElements.add(tempElement);

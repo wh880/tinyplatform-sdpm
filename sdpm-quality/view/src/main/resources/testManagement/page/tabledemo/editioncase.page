@@ -35,7 +35,7 @@
 #end
     ##tabbody end
 <br>
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/save" "post" {"class":"test"})
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
     		<p class="titleName">编辑</p>
@@ -46,7 +46,7 @@
         	<div class="col-10">
         	#@colLabel("col-2")用例名称：#end
         	<div class="col-4">
-           		#tinyInput("text" "111" ""{"datatype":"","id":"111","class":"input-text","placeholder":""})
+           		#tinyInput("text" "caseTitle" ""{"datatype":"","id":"111","class":"input-text","placeholder":""})
            </div>
            </div>
         #end
@@ -55,7 +55,7 @@
         	<div class="col-10">
 			#@colLabel("col-2")前置条件：#end
         	#@formControlDiv("col-10")
-                	#@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符"})请输入内容#end          
+                	#@tinyTextarea("casePrecondition" {"placeholder":"说点什么...最少输入10个字符"})请输入内容#end          
             #end
             </div>
         #end

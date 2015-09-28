@@ -63,7 +63,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 					QUALITY_TEST_TASKTABLE.TESTTASK_TITLE.value(t.getTesttaskTitle()),
 					QUALITY_TEST_TASKTABLE.PRODUCT_ID.value(t.getProductId()),
 					QUALITY_TEST_TASKTABLE.PROJECT_ID.value(t.getProjectId()),
-					QUALITY_TEST_TASKTABLE.BUILD.value(t.getBuild()),
+					QUALITY_TEST_TASKTABLE.BUILD_NAME.value(t.getBuildName()),
 					QUALITY_TEST_TASKTABLE.TESTTASK_OWNER.value(t.getTesttaskOwner()),
 					QUALITY_TEST_TASKTABLE.PRIORITY.value(t.getPriority()),
 					QUALITY_TEST_TASKTABLE.TESTTASK_BEGIN.value(t.getTesttaskBegin()),
@@ -87,7 +87,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 					QUALITY_TEST_TASKTABLE.TESTTASK_TITLE.value(t.getTesttaskTitle()),
 					QUALITY_TEST_TASKTABLE.PRODUCT_ID.value(t.getProductId()),
 					QUALITY_TEST_TASKTABLE.PROJECT_ID.value(t.getProjectId()),
-					QUALITY_TEST_TASKTABLE.BUILD.value(t.getBuild()),
+					QUALITY_TEST_TASKTABLE.BUILD_NAME.value(t.getBuildName()),
 					QUALITY_TEST_TASKTABLE.TESTTASK_OWNER.value(t.getTesttaskOwner()),
 					QUALITY_TEST_TASKTABLE.PRIORITY.value(t.getPriority()),
 					QUALITY_TEST_TASKTABLE.TESTTASK_BEGIN.value(t.getTesttaskBegin()),
@@ -146,7 +146,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 					QUALITY_TEST_TASKTABLE.TESTTASK_TITLE.eq(t.getTesttaskTitle()),
 					QUALITY_TEST_TASKTABLE.PRODUCT_ID.eq(t.getProductId()),
 					QUALITY_TEST_TASKTABLE.PROJECT_ID.eq(t.getProjectId()),
-					QUALITY_TEST_TASKTABLE.BUILD.eq(t.getBuild()),
+					QUALITY_TEST_TASKTABLE.BUILD_NAME.eq(t.getBuildName()),
 					QUALITY_TEST_TASKTABLE.TESTTASK_OWNER.eq(t.getTesttaskOwner()),
 					QUALITY_TEST_TASKTABLE.PRIORITY.eq(t.getPriority()),
 					QUALITY_TEST_TASKTABLE.TESTTASK_BEGIN.eq(t.getTesttaskBegin()),
@@ -172,7 +172,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 					QUALITY_TEST_TASKTABLE.TESTTASK_TITLE.eq(t.getTesttaskTitle()),
 					QUALITY_TEST_TASKTABLE.PRODUCT_ID.eq(t.getProductId()),
 					QUALITY_TEST_TASKTABLE.PROJECT_ID.eq(t.getProjectId()),
-					QUALITY_TEST_TASKTABLE.BUILD.eq(t.getBuild()),
+					QUALITY_TEST_TASKTABLE.BUILD_NAME.eq(t.getBuildName()),
 					QUALITY_TEST_TASKTABLE.TESTTASK_OWNER.eq(t.getTesttaskOwner()),
 					QUALITY_TEST_TASKTABLE.PRIORITY.eq(t.getPriority()),
 					QUALITY_TEST_TASKTABLE.TESTTASK_BEGIN.eq(t.getTesttaskBegin()),
@@ -197,7 +197,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 					QUALITY_TEST_TASKTABLE.TESTTASK_TITLE.value(new JdbcNamedParameter("testtaskTitle")),
 					QUALITY_TEST_TASKTABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
 					QUALITY_TEST_TASKTABLE.PROJECT_ID.value(new JdbcNamedParameter("projectId")),
-					QUALITY_TEST_TASKTABLE.BUILD.value(new JdbcNamedParameter("build")),
+					QUALITY_TEST_TASKTABLE.BUILD_NAME.value(new JdbcNamedParameter("buildName")),
 					QUALITY_TEST_TASKTABLE.TESTTASK_OWNER.value(new JdbcNamedParameter("testtaskOwner")),
 					QUALITY_TEST_TASKTABLE.PRIORITY.value(new JdbcNamedParameter("priority")),
 					QUALITY_TEST_TASKTABLE.TESTTASK_BEGIN.value(new JdbcNamedParameter("testtaskBegin")),
@@ -225,7 +225,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 					QUALITY_TEST_TASKTABLE.TESTTASK_TITLE.value(new JdbcNamedParameter("testtaskTitle")),
 					QUALITY_TEST_TASKTABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
 					QUALITY_TEST_TASKTABLE.PROJECT_ID.value(new JdbcNamedParameter("projectId")),
-					QUALITY_TEST_TASKTABLE.BUILD.value(new JdbcNamedParameter("build")),
+					QUALITY_TEST_TASKTABLE.BUILD_NAME.value(new JdbcNamedParameter("buildName")),
 					QUALITY_TEST_TASKTABLE.TESTTASK_OWNER.value(new JdbcNamedParameter("testtaskOwner")),
 					QUALITY_TEST_TASKTABLE.PRIORITY.value(new JdbcNamedParameter("priority")),
 					QUALITY_TEST_TASKTABLE.TESTTASK_BEGIN.value(new JdbcNamedParameter("testtaskBegin")),
@@ -251,7 +251,7 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 				QUALITY_TEST_TASKTABLE.TESTTASK_TITLE.eq(new JdbcNamedParameter("testtaskTitle")),
 				QUALITY_TEST_TASKTABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId")),
 				QUALITY_TEST_TASKTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")),
-				QUALITY_TEST_TASKTABLE.BUILD.eq(new JdbcNamedParameter("build")),
+				QUALITY_TEST_TASKTABLE.BUILD_NAME.eq(new JdbcNamedParameter("buildName")),
 				QUALITY_TEST_TASKTABLE.TESTTASK_OWNER.eq(new JdbcNamedParameter("testtaskOwner")),
 				QUALITY_TEST_TASKTABLE.PRIORITY.eq(new JdbcNamedParameter("priority")),
 				QUALITY_TEST_TASKTABLE.TESTTASK_BEGIN.eq(new JdbcNamedParameter("testtaskBegin")),
@@ -265,8 +265,11 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 	}
 
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		if (orderBies == null) {
+			return select;
+		}
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+		for (int i = 0; orderBies[i] != null && i < orderBies.length; i++) {
 			OrderByElement tempElement = orderBies[i].getOrderByElement();
 			if (tempElement != null) {
 				orderByElements.add(tempElement);

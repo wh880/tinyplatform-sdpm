@@ -31,15 +31,15 @@
                onclick="selectAllNullorReserve('product-plan','反选');"/>
 
         #end
-        #@tinyTableContent("../../data/allproduct-plan.pagelet") ##取数据地址 总数据
+        #@tinyTableContent(TINY_CONTEXT_PATH+"/product/plan/list") ##取数据地址 总数据
             #@thead()
                 #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
                     #@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})名称#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})描述#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})开始日期#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})结束日期#end
+                    #@tinyTh({"class":"sorting","rel":"planId"})ID#end
+                    #@tinyTh({"class":"sorting","rel":"planName"})名称#end
+                    #@tinyTh({"class":"sorting","rel":"planSpec"})描述#end
+                    #@tinyTh({"class":"sorting","rel":"planBeginDate"})开始日期#end
+                    #@tinyTh({"class":"sorting","rel":"planEndDate"})结束日期#end
                     #@tinyTh({"class":"","rel":"sortname"})操作#end
                 #end
             #end

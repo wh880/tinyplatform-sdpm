@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.service.service.inter;
 
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -73,4 +74,22 @@ public interface ClientService {
     List<ServiceClient> findClientByProduct(Integer productId);
 
     List<ServiceSla> findSlaByClientId(Integer id);
+
+    /**
+     * 新增一个客户联系人
+     *
+     * @param clientUser 新增实体类
+     * @return
+     */
+    ServiceClientUser addClientUser(ServiceClientUser clientUser);
+
+    /**
+     * 编辑一个客户联系人
+     *
+     * @param clientUser 编辑实体类
+     * @return
+     */
+    ServiceClientUser updateClientUser(ServiceClientUser clientUser);
+
+    List<ServiceClientUser> getAllClientUser(ServiceClientUser clientUser);
 }

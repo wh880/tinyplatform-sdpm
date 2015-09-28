@@ -24,8 +24,8 @@ import java.io.Serializable;
  */
 public class OrgRole implements Serializable {
 
-	public static String DELETE_YES = "1";
-	public static String DELETE_NO = "0";
+	public static Integer DELETE_YES = 1;
+	public static Integer DELETE_NO = 0;
 	/** 
 	 * 角色ID
 	 * 
@@ -49,6 +49,10 @@ public class OrgRole implements Serializable {
 	 * 
 	 */
 	private Integer deleted;
+
+	public OrgRole() {
+		setDeleted(DELETE_NO);
+	}
 
 	public Integer getOrgRoleId() {
 		return orgRoleId;

@@ -1,7 +1,7 @@
 #include("/system/page/event/common.page")
-#set(editpagePath="/system/page/dictionaries/dictitem_edit.pagelet",editpageModalId="dictitemEditModal",editpageModal="#"+editpageModalId)
-#set(viewpagePath="/system/page/dictionaries/dictitem_view.pagelet",viewpageModalId="dictitemViewModal",viewpageModal="#"+viewpageModalId)
-#datatablesInitSimple("#dictitemTb" )
+
+
+
 <style>.dataTablebox .tablebox{margin-left:200px;margin-top:4px;}</style>
 #import("/org/tinygroup/table/components/table.component")
  #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
@@ -20,8 +20,7 @@
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
 						#@tinyTh({"class":"sorting sorting_asc","rel":"dict_id"})ID#end
 						#@tinyTh({"class":"sorting","rel":"dict_key"})编码#end
-						#@tinyTh({"class":"sorting","rel":"effort_account"})名称#end
-						#@tinyTh({"class":"sorting","rel":"dict_value"})值#end
+						#@tinyTh({"class":"sorting","rel":"dict_value"})中文名#end
 						#@tinyTh({"class":"sorting","rel":"dict_sort"})排序号#end
 						#@tinyTh({"class":"sorting","rel":""})操作#end
 						
@@ -30,5 +29,3 @@
 			#end
 #end
 
-#simpleModal(editpageModalId)
-#simpleViewModal(viewpageModalId)

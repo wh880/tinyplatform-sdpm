@@ -10,6 +10,7 @@ import org.tinygroup.sdpm.common.util.sql.SearchInfos;
 import org.tinygroup.sdpm.common.util.sql.SqlUtil;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -53,8 +54,9 @@ public class StoryManagerImpl implements StoryManager{
 		return productStoryDao.query(story,new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
 
-	public Pager<ProductStory> findPager(int start, int limit, ProductStory story, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
+	public Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
 		String condition = SqlUtil.toSql(conditions.getInfos(),groupOperate);
+		condition = condition!=null&&!"".equals(condition)?(statusCondition!=null&&!"".equals(statusCondition)?condition+" and "+statusCondition:condition):statusCondition;
 		OrderBy orderBy = null;
 		if(columnName != null && !"".equals(columnName)){
 			orderBy = new OrderBy(columnName, asc);

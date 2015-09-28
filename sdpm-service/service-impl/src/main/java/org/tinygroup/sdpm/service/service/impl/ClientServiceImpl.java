@@ -3,8 +3,10 @@ package org.tinygroup.sdpm.service.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.service.biz.inter.ClientManager;
+import org.tinygroup.sdpm.service.biz.inter.ClientUserManager;
 import org.tinygroup.sdpm.service.biz.inter.SlaManager;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.tinysqldsl.Pager;
@@ -18,6 +20,8 @@ import java.util.List;
 public class ClientServiceImpl implements ClientService {
     @Autowired
     private ClientManager clientManager;
+    @Autowired
+    private ClientUserManager clientUserManager;
     @Autowired
     private SlaManager slaManager;
 
@@ -57,4 +61,15 @@ public class ClientServiceImpl implements ClientService {
         return slaManager.getListByClientId(id);
     }
 
+    public ServiceClientUser addClientUser(ServiceClientUser clientUser) {
+        return clientUserManager.add(clientUser);
+    }
+
+    public ServiceClientUser updateClientUser(ServiceClientUser clientUser) {
+        return clientUserManager.update(clientUser);
+    }
+
+    public List<ServiceClientUser> getAllClientUser(ServiceClientUser clientUser) {
+        return clientUserManager.getUserList(clientUser);
+    }
 }

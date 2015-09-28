@@ -36,7 +36,8 @@ public class ClientManagerImpl implements ClientManager {
     }
 
     public ServiceClient update(ServiceClient client) {
-        return clientDao.add(client);
+        clientDao.edit(client);
+        return client;
     }
 
     public Integer delete(Integer id) {

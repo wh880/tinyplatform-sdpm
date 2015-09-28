@@ -9,18 +9,18 @@
     <service-method local-name="findStorySpecList" service-id="product_findStorySpecList" method-name="findStorySpecList" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
         <service-parameter name="storySpec" type="org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec" required="false" is-array="false"/>
-        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findStorySpecListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec"/>
     </service-method>
     <service-method local-name="findStorySpecPager" service-id="product_findStorySpecPager" method-name="findStorySpecPager" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
-        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="page" type="int" required="false" is-array="false"/>
         <service-parameter name="limit" type="int" required="false" is-array="false"/>
         <service-parameter name="storySpec" type="org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec" required="false" is-array="false"/>
-        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findStorySpecPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>

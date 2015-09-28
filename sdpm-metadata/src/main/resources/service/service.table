@@ -20,6 +20,7 @@
     <table-field standard-field-id="f4a2dd1dcbb649f3bcd3eef8f6602a3f" primary="false" unique="false" not-null="true" id="user_account" auto-increase="false"/>
     <table-field standard-field-id="2cca0dec07cc49859fceac7289b6d0df" primary="false" unique="false" not-null="true" id="user_phone" auto-increase="false"/>
     <table-field standard-field-id="398e31c8923d47868aa9e180fa975d11" primary="false" unique="false" not-null="false" id="user_post" auto-increase="false"/>
+    <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="true" id="deleted" auto-increase="false"/>
   </table>
   <table id="575a6e070e1a4e3691eef395f8c5a133" name="service_faq" title="问答表" package-name="">
     <table-field standard-field-id="b237b780903149a5b941906cee7ad32c" primary="true" unique="true" not-null="true" id="faq_id" auto-increase="true"/>

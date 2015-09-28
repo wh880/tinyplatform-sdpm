@@ -36,9 +36,9 @@ public class DictServiceImpl implements DictService {
 		return dictManager.find(dictId);
 	}
 
-	public List<SystemDict> findDictList(SystemDict dict, String columnName, boolean asc) {
+	public List<SystemDict> findDictList(SystemDict dict) {
 
-		return dictManager.findList(dict, columnName, asc);
+		return dictManager.findList(dict);
 	}
 
 	public Pager<SystemDict> findDictPager(int start, int limit, SystemDict dict, String columnName, boolean asc) {

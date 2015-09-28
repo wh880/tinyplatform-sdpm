@@ -22,7 +22,7 @@ public interface StorySpecManager {
 	 * @param orderBies
 	 * @return
 	 */
-	List<ProductStorySpec> findList(ProductStorySpec storySpec,String columnName,boolean asc);
+	List<ProductStorySpec> findList(ProductStorySpec storySpec,String order,String ordertype);
 
 	/**
 	 * 分页查询
@@ -32,7 +32,7 @@ public interface StorySpecManager {
 	 * @param orderBies
 	 * @return
 	 */
-	Pager<ProductStorySpec> findPager(int start, int limit, ProductStorySpec storySpec,String columnName,boolean asc);
+	Pager<ProductStorySpec> findPager(int start, int limit, ProductStorySpec storySpec,String order,String ordertype);
 	
 
 }

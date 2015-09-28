@@ -1,9 +1,5 @@
 ##import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
 #!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
-
-
-	
-	
 		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
@@ -14,20 +10,20 @@
 				<a href="#" class="btn btn-info btn-sm">历史</a>
 				<a href="#" class="btn btn-warning btn-sm">相关</a>*#
 			#end
-			#@tinyTableContent("allProjectData.pagelet") ##取数据地址 总数据
+			#@tinyTableContent(TINY_CONTEXT_PATH+"/project/findProjects") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})项目名称#end
-						#@tinyTh({"class":"","rel":"sortname"})项目代号#end
-						#@tinyTh({"class":"","rel":"sortname"})结束日期#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})项目状态#end
-						#@tinyTh({"class":"","rel":"sortname"})总预计#end
-						#@tinyTh({"class":"","rel":"sortname"})总消耗#end
-						#@tinyTh({"class":"","rel":"sortname"})总剩余#end
-						#@tinyTh({"class":"","rel":"sortname"})进度#end
-						#@tinyTh({"class":"","rel":"sortname"})燃尽图#end
+						#@tinyTh({"class":"sorting","rel":"project_id"})ID#end
+						#@tinyTh({"class":"sorting","rel":"project_name"})项目名称#end
+						#@tinyTh({"class":"sorting","rel":"project_code"})项目代号#end
+						#@tinyTh({"class":"sorting","rel":"project_end"})结束日期#end
+						#@tinyTh({"class":"sorting","rel":"project_status"})项目状态#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})总预计#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})总消耗#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})总剩余#end
+						#@tinyTh({"class":"sorting","rel":"sortname"})进度#end
+
 					#end
 				#end
 			#end

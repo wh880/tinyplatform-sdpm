@@ -68,9 +68,14 @@
                 #end
             #end
             <div style="text-align:right;margin:right">
-                #@aExtendButton("btn-primary btn-sm" "../client/clientAdd.page")编辑#end
-                #@delItemsdpm("#action" "id" "/service/client/clientUser.page" {"class":"btn radius btn-danger btn-sm"})
-                    删除#end
+                #foreach(m:menuManager.getScopeMenus("service-cil"))
+                    #if(m.id != "client-del")
+                        #@aExtendButton("btn-primary btn-sm" TINY_CONTEXT_PATH+m.href+"?id="+client.clientId)编辑#end
+                    #else
+                        #@delItemsdpm(TINY_CONTEXT_PATH+m.href client.clientId TINY_CONTEXT_PATH+"/service/client/list"{
+                            "class":"btn radius btn-danger btn-sm"}) 删除#end
+                    #end
+                #end
             </div>
         #end
 
@@ -85,29 +90,29 @@
                         #@tinyTh({"class":"","rel":"sortname"})操作#end
                     #end
                 #end
-                <tr>
-                    <td>徐丹洋</td>
-                    <td>12345678901</td>
-                    <td>员工</td>
-                    <td>
-                        #set(m1=menuManager.getMenu("linkman-edit"))
-                        #if(m1)
-                            #@aModal("#myModal1" "编辑" "500" "200""icon-pencil"
-                                "/service/client/companyInfoEdit2.pagelet")编辑
+                #foreach(var:clientUsers)
+                    <tr>
+                        <td>${var.userAccount}</td>
+                        <td>${var.userPost}</td>
+                        <td>${var.userPhone}</td>
+                        <td>
+                            #set(m1=menuManager.getMenu("linkman-edit"))
+                            #if(m1)
+                                #@aModal("#myModal1" "编辑" "500" "200""icon-pencil"
+                                    "/service/client/companyInfoEdit2.pagelet")编辑
+                                #end
                             #end
-                        #end
-                        #foreach(m:menuManager.getScopeMenus("linkman-cil"))
-                            <a href="${TINY_CONTEXT_PATH}${m.href}"
-                               title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-                        #end
-                        #set(m2=menuManager.getMenu("linkman-new"))
-                        #if(m2)
-                            #@aModal("#myModal1" "新建" "500" "200" "icon-book"
-                                "/service/client/companyInfoEdit2.pagelet")新建
+                            #foreach(m:menuManager.getScopeMenus("linkman-cil"))
+                                <a href="${TINY_CONTEXT_PATH}${m.href}"
+                                   title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                             #end
-                        #end
-                    </td>
-                </tr>
+                            #set(m2=menuManager.getMenu("linkman-del"))
+                            #if(m2)
+                                #@tinyTableItemRemove(TINY_CONTEXT_PATH+m2.href var.clientId)<i class=${m.icon}></i>#end
+                            #end
+                        </td>
+                    </tr>
+                #end
             #end
         #end
     </div>

@@ -19,16 +19,14 @@ package org.tinygroup.sdpm.product.dao.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-/** 
- * 产品表
- * 
- */
+
 public class Product implements Serializable{
 
 	/** 
 	 * 产品ID
 	 * 
 	 */
+	
 	private Integer productId;
 
 	/** 

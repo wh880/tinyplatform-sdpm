@@ -23,7 +23,7 @@
 
 #end
 
-    #@tinyForm("thisform" "url" "post" {"class":""})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/case/save" "post" {"class":""})
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">建用例</p>
@@ -32,7 +32,7 @@
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("productId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="CT">产品2</option>
 	                        <option value="DE">产品3</option>
 	                        <option value="FL">产品4</option>
@@ -52,7 +52,7 @@
 					#@div(divClass="col-0")&nbsp;&nbsp#end
 					#@div(divClass="col-3")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="CT">/1/2</option>
 	                        <option value="DE">/2/3</option>
 	                        <option value="IN">/3/4</option>
@@ -73,7 +73,7 @@
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
                      #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("caseType" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">1</option>
 	                        <option value="ME">2</option>
 	                        <option value="MD">3</option>
@@ -89,7 +89,7 @@
             #@formControlDiv("col-8")
                #@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("caseStage" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">版本1</option>
 	                        <option value="ME">版本2</option>
 	                        <option value="MD">版本3</option>
@@ -109,7 +109,7 @@
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
 					#@selectRadiusBox("select_boxes")
-	                        #@select(selectName="demo2" selectClass="select")
+	                        #@select(selectName="priority" selectClass="select")
 	                            #@optionSelected("") #end
 	                            #@optionItem("")1#end
 	                            #@optionItem("")2#end
@@ -126,7 +126,7 @@
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
 							 #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("storyId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">需求1</option>
 	                        <option value="ME">需求2</option>
 	                        <option value="MD">需求3</option>
@@ -142,7 +142,7 @@
             #@colLabel()用例标题：#end
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
-                #tinyInput("text" "影响版本" ""{"datatype":"*10-500","id":"版本","class":"input-text"})
+                #tinyInput("text" "caseTitle" ""{"datatype":"*10-500","id":"版本","class":"input-text"})
             #end
             #end
             #@validateDiv("col-2")#end
@@ -150,10 +150,11 @@
         #@elementItem()
             #@colLabel()前置条件：#end
             #@formControlDiv("col-8")
-                #@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符"})请输入内容#end          
+                #@tinyTextarea("casePrecondition" {"placeholder":"说点什么...最少输入10个字符"})请输入内容#end          
             #end
             #@validateDiv("col-2")#end
         #end
+        ##暂留、、、、、、、、、、、、、、、、、
         #@elementItem()
             #@colLabel()用例步骤：#end
             #@table("tableBoxes col-8")
@@ -187,7 +188,7 @@
             #@colLabel()关键词：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
-                	#tinyInput("text" "关键词" ""{"datatype":"","id":"关键词","class":"input-text"})
+                	#tinyInput("text" "caseKeywords" ""{"datatype":"","id":"关键词","class":"input-text"})
             	#end
             #end
             #@validateDiv("col-2")#end

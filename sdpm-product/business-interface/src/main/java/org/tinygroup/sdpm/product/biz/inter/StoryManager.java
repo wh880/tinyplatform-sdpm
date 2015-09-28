@@ -53,7 +53,7 @@ public interface StoryManager {
 	 * @param story
 	 * @return
 	 */
-	Pager<ProductStory> findPager(int start, int limit, ProductStory story, SearchInfos conditions, String groupOperate, String columnName, boolean asc);
+	Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc);
 
 
 }

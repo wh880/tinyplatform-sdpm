@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="myproduct" parent-id="0" name="产品" href="/product/page/project/togglebox.page" icon="icon-desktop" sort="800"
+<menu id="myproduct" parent-id="0" name="产品" href="/product/story" icon="icon-desktop" sort="800"
       isShow="1" permission="Permission">
 
     <menu id="product-demand" parent-id="myproduct" name="需求" href="/product/page/project/togglebox.page"
@@ -159,10 +159,10 @@
               href="/product/page/tabledemo/relation-plan/product-al-bug.page?cname=bug" icon="icon-bug" sort="13"
               isShow="1"
               scope="product-pl"/>
-        <menu id="product-plan-edit" name="计划编辑" href="/product/page/tabledemo/product-addplan.page" icon="icon-pencil"
+        <menu id="product-plan-edit" name="计划编辑" href="/product/plan/find?planId=${plan.planId}" icon="icon-pencil"
               sort="12" isShow="1"
               scope="product-pl"/>
-        <menu id="product-plan-remove" name="删除" href="#" icon="icon-remove" sort="11" isShow="1"
+        <menu id="product-plan-remove" name="删除" href="/product/plan/delete?planId=${plan.planId}" icon="icon-remove" sort="11" isShow="1"
               scope="product-pl"/>
         <menu id="product-plan-add" name="创建计划" href="" icon="" sort="10" isShow="1"
               scope="product-addpl"/>

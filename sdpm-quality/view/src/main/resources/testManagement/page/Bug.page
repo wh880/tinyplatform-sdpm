@@ -18,7 +18,7 @@
 			#@div(divClass="operationbar")
 				<span class="f">
 #*					<a href="#" class="active_btn">未关闭</a>*#
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page" class="active_btn">未关闭</a>
+#*					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page" class="active_btn">未关闭</a>
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">所有</a>
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">指派给我</a>
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">由我创建</a>
@@ -29,7 +29,14 @@
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">久未处理</a>
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">被延期</a>
 					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">需求变动</a>
-					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>*#
+					#foreach(m:menuManager.getScopeMenus("testbugleft-tab"))
+						#if(m.id != "tsearch")
+							<a href="${TINY_CONTEXT_PATH}${m.href}"  ${m.id}==${get}?class="active_btn":"">${m.name}</a>
+						#else
+							<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+						#end
+					#end
 				</span>
 				<span class="r">
 			##		#set(m1=menuManager.getMenu("tbugoutput"))
@@ -54,7 +61,7 @@
     						#@aModal("#myModal" m.name "400" "80" "" m.href "ml-5")
 								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;
 						#else
-							<a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;
+							<a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
     					#end
     				#end
     				#end
@@ -170,14 +177,9 @@
 						</div>*#
 					</div>					
 					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-					
-#*					<a href="#" class="btn btn-default btn-sm">产品</a>
-					<a href="#" class="btn btn-success btn-sm">Bug</a>
-					<a href="#" class="btn btn-primary btn-sm">工程</a>
-					<a href="#" class="btn btn-info btn-sm">历史</a>
-					<a href="#" class="btn btn-warning btn-sm">相关</a>*#
 				#end
-			#@tinyTableContent(TINY_CONTEXT_PATH+"/quality/bug/findBug?bugTitle=1")
+		##	#set(requestStatuString = tinyRequestQueryString!=null ?"&"+tinyRequestQueryString:"")
+			#@tinyTableContent(TINY_CONTEXT_PATH+"/quality/bug/findBug?id=1")
 				#@thead()
 					#@tr()
 						#@tinyTh({"width":"6"})<input type="checkbox" name="" value="" />#end
@@ -186,13 +188,13 @@
 						#@tinyTh({"class":"sorting","rel":"priority"})P#end
 						#@tinyTh({"class":"sorting","rel":"bug_title"})Bug标题#end
 						#@tinyTh({"class":"sorting","rel":"bug_status","style":"color:#333"})状态#end
-						#@tinyTh({"class":"sorting","rel":"bug_openedBy"})创建#end
-						#@tinyTh({"class":"sorting","rel":"bug_openedDate"})创建日期#end
-						#@tinyTh({"class":"sorting","rel":"bug_assignedTo"})指派给#end
-						#@tinyTh({"class":"sorting","rel":"bug_resolvedBy"})解决#end
+						#@tinyTh({"class":"sorting","rel":"bug_opened_by"})创建#end
+						#@tinyTh({"class":"sorting","rel":"bug_opened_date"})创建日期#end
+						#@tinyTh({"class":"sorting","rel":"bug_assigned_to"})指派给#end
+						#@tinyTh({"class":"sorting","rel":"bug_resolved_by"})解决#end
 						#@tinyTh({"class":"sorting","rel":"bug_resolution"})方案#end
-						#@tinyTh({"class":"sorting","rel":"bug_resolvedDate"})解决日期#end
-						#@tinyTh({"csortinglass":"sorting","rel":""})操作#end
+						#@tinyTh({"class":"sorting","rel":"bug_resolved_date"})解决日期#end
+						#@tinyTh({"class":"","rel":""})操作#end
 					#end
 				#end
 				<script type="text/javascript">

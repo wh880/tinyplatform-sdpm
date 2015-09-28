@@ -1,6 +1,7 @@
 #@tinyForm("thisform" "" "" {"class":"test"})
     #@div(divClass="infoContent")
-    <p class="titleName">前置条件</p>
+   <p><b>前置条件&nbsp</b>${testcase?.casePrecondition}</p>
+  		
         #@tableStriped()
             #@thead()
                 #@tr()
@@ -25,7 +26,10 @@
 	                    	#end                
                 	  #end
                     #end
-                    #@td()#tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
+                    #@td()
+                    #@tinyTextarea("remark" {"datatype":"","nullmsg":"描述不能为空！"})#end
+                    
+                  ##  #tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
                     #end
                 #end
 

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.biz.inter.ReleaseManger;
 import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -46,14 +47,15 @@ public class ReleaseMangerImpl implements ReleaseManger{
 		return productReleaseDao.batchUpdate(releases);
 	}
 
-	public List<ProductRelease> findList(ProductRelease release,String columnName,boolean asc) {
+	public List<ProductRelease> findList(ProductRelease release, String order,String ordertype) {
 		
-		return productReleaseDao.query(release, new OrderBy(columnName, asc));
+		return productReleaseDao.query(release,  new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
 
-	public Pager<ProductRelease> findPager(int start, int limit, ProductRelease release,String columnName,boolean asc) {
+	public Pager<ProductRelease> findPager(int page, int limit, ProductRelease release, String order,String ordertype) {
 		
-		return productReleaseDao.queryPager(start, limit, release, new OrderBy(columnName, asc));
+		return productReleaseDao.queryPager((page-1)*limit, limit, release, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
+
 
 	}

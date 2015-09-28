@@ -66,13 +66,9 @@ Priority:0-low,1-common,2-urgent</description>
     <description>0-停止；1-活跃</description>
   </standard-field>
   <standard-field id="76a989f068ca4f70b6abb8271684e992" name="request_status" title="请求状态" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="">
-    <description>请求状态0-created新建(用户可见),1-doing处理中(用户可见)，&#xd;
-2-rejected拒绝（回复后用户可见）,&#xd;
-3-toProduct转出（回复后用户可见）,&#xd;
-4-planned已接受【由产品模块需求纳入计划触发/客服直接处理】&#xd;
-（回复后用户可见），&#xd;
-5-postponed挂起，6-finished已完成【由产品模块需求阶段】&#xd;
-，7-released已发放(用户可见),8-retrunVisit已回访(用户可见),&#xd;
+    <description>&#xd;
+请求状态0-created新建,1-doing处理中，2-rejected拒绝,3-toProduct转出（回复后用户可见）,4-planned已接受【由产品模块需求纳入计划触发/客服直接处理】&#xd;
+（回复后用户可见），5-postponed挂起，6-finished已完成【由产品模块需求阶段】，7-released已发放(用户可见),8-retrunVisit已回访(用户可见),&#xd;
  9-reopen【回访不通过】(用户可见)，10-close关闭【状态8，并且review结果是pass】</description>
   </standard-field>
   <standard-field id="32da3f7c3ac84999af02c6a48f721c88" name="review_type" title="回访类型" business-type-id="ccd3e83b1cae428987599fb95985fa70">

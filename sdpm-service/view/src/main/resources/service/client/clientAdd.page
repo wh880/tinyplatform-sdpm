@@ -32,6 +32,7 @@
 <div style="width:80%;margin-left: 20px;" class="pageleftpart">
 <div class="infoContent">
     <p class="titleName">新建客户</p>
+    <input type="hidden" name="clientId" value="${client?.clientId}"/>
         #@elementItem()
             #@sdpmItem("客户名称" "*")
                 #tinyInput(
@@ -84,9 +85,9 @@
         #@elementItem()
             #@sdpmItem("客户登记时间" "*")
                 #@tinyDateInput(
-                    "clientCreateDate" client?.clientCreateDate "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
-                    "nullmsg":
-                    "日期不能为空","placeholder":"请输入日期"})#end
+                    "clientCreateDate" formatDate(client?.clientCreateDate,
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
             #end
         #end
     #@elementItem()

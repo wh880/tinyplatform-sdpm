@@ -79,4 +79,5 @@
   <standard-field id="13a94f229214469bb423e60c807c85ae" name="history_old" title="上一条历史" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="8fbba64711854fa2b578e316737b475c" name="history_new" title="当前历史" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="8e46079f520c494f94c3d3c70e42d9fb" name="history_diff" title="对比" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
+  <standard-field id="958e740f99614e509772e09a3889cfb5" name="module_title" title="中文名" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
 </standard-fields>

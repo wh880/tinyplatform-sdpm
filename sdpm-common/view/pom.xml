@@ -36,13 +36,13 @@
             <artifactId>org.tinygroup.publicComponent</artifactId>
             <version>${tiny_ui_version}</version>
         </dependency>
-		<!--皮肤 start-->
+        <!--皮肤 start-->
         <dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>org.tinygroup.frameTplDark</artifactId>
-			<version>${tiny_ui_version}</version>
-		</dependency>
-        <!--<dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.frameTplDark</artifactId>
+            <version>${tiny_ui_version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.frameTplDeepblue</artifactId>
             <version>${tiny_ui_version}</version>
@@ -66,8 +66,8 @@
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.frameTplOrange</artifactId>
             <version>${tiny_ui_version}</version>
-        </dependency> -->
-		<!--皮肤 end-->
+        </dependency>
+        <!--皮肤 end-->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.gridSystems</artifactId>
@@ -195,18 +195,10 @@
             <version>${tiny_ui_version}</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-common-view-uicomponent</artifactId>
             <version>${tiny_sdpm_version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
