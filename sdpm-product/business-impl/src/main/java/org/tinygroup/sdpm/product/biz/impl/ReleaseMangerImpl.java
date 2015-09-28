@@ -29,13 +29,11 @@ public class ReleaseMangerImpl implements ReleaseManger{
 		return productReleaseDao.edit(release);
 	}
 
-	public int delete(Integer releaseId) {
+	public Integer delete(Integer releaseId) {
+			
+			return productReleaseDao.softDelete(releaseId);
+		}
 
-		ProductRelease productRelease = new ProductRelease();
-		productRelease.setReleaseId(releaseId);
-		productRelease.setDeleted(FieldUtil.DELETE_YES);
-		return productReleaseDao.edit(productRelease);
-	}
 
 	public ProductRelease find(Integer releaseId) {
 
