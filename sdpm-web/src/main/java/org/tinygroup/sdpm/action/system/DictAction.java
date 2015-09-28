@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
@@ -52,7 +53,12 @@ public class DictAction extends BaseController{
 		dictService.deleteDict(dictId);
 		return "system/page/dictionaries/dictitem.page";
 	}
-	@RequestMapping("save")
+	@RequestMapping("delete2")
+	public String deleteDict2(Integer dictId){
+		dictService.deleteDict(dictId);
+		return "system/page/dictionaries/dict_list.page";
+	}
+	@RequestMapping(value ="save",method = RequestMethod.POST)
 	public String saveDict(SystemDict systemDict ,Model model){
 		if(systemDict.getDictId()==null){
 			
@@ -64,5 +70,18 @@ public class DictAction extends BaseController{
 		model.addAttribute("dict", systemDict);
 		return "system/page/dictionaries/dictitem.page";
 	}
+	@RequestMapping(value ="save2",method = RequestMethod.POST)
+	public String saveDict2(SystemDict systemDict ,Model model){
+		if(systemDict.getDictId()==null){
+			
+			dictService.addDict(systemDict);
+		}
+		else{
+			dictService.updateDict(systemDict);
+		}
+		model.addAttribute("dict", systemDict);
+		return "system/page/dictionaries/dict_list.pagelet";
+	}
+
 
 }
