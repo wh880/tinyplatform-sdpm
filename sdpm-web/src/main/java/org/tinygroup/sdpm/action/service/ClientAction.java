@@ -28,6 +28,7 @@ public class ClientAction extends BaseController {
     @Autowired
     private SlaService slaService;
 
+
     @RequestMapping(value = "/list")
     public String list(ServiceClient client, Model model) {
         return "service/client/clientUser.page";
@@ -52,14 +53,14 @@ public class ClientAction extends BaseController {
 
     @RequestMapping(value = "/save")
     public String save(ServiceClient client, Model model) {
-        //新建用户联系人表
         ServiceClientUser serviceClientUser = new ServiceClientUser();
-        serviceClientUser.setUserPhone(client.getUserPhone());
-        serviceClientUser.setUserAccount(client.getUserAccount());
-        serviceClientUser.setClientId(client.getClientId());
-        serviceClientUser.setUserPost(client.getUserPost());
         if (client.getClientId() == null) {
-            clientService.addClient(client);
+            client = clientService.addClient(client);
+            //新建用户联系人表
+            serviceClientUser.setUserPhone(client.getUserPhone());
+            serviceClientUser.setUserAccount(client.getUserAccount());
+            serviceClientUser.setClientId(client.getClientId());
+            serviceClientUser.setUserPost(client.getUserPost());
             clientService.addClientUser(serviceClientUser);
         } else {
             clientService.updateClient(client);
