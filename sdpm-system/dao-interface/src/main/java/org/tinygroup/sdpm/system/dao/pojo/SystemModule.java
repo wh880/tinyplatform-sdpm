@@ -16,14 +16,12 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
-import java.io.Serializable;
-
 
 /** 
  * 系统模块表
  * 
  */
-public class SystemModule implements Serializable{
+public class SystemModule {
 
 	/** 
 	 * 模块根节点
@@ -78,6 +76,12 @@ public class SystemModule implements Serializable{
 	 * 
 	 */
 	private Integer moduleId;
+
+	/** 
+	 * 中文名
+	 * 
+	 */
+	private String moduleTitle;
 
 
 	public void setModuleRoot(Integer moduleRoot){
@@ -150,6 +154,14 @@ public class SystemModule implements Serializable{
 
 	public Integer getModuleId(){
 		return moduleId;
+	}
+
+	public void setModuleTitle(String moduleTitle){
+		this. moduleTitle = moduleTitle;
+	}
+
+	public String getModuleTitle(){
+		return moduleTitle;
 	}
 
 }

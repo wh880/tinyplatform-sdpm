@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.product.biz.impl;
+package org.tinygroup.sdpm.product.dao.impl;
 
 public class FieldUtil {
 	
@@ -17,4 +17,5 @@ public class FieldUtil {
 
 		return buffer.toString();
 	}
+	
 }

@@ -1,6 +1,5 @@
 package org.tinygroup.sdpm.product.biz.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.biz.inter.PlanManager;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
-import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -48,19 +47,19 @@ public class PlanManagerImpl implements PlanManager{
 		return productPlanDao.queryPager((start-1)*limit, limit, productPlan, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
 
-	public Integer delete(Integer planId) {
-		
 
-		ProductPlan productPlan = new ProductPlan();
-		productPlan.setPlanId(planId);
-		productPlan.setDeleted(FieldUtil.DELETE_YES);
-		return productPlanDao.edit(productPlan);
-	}
 
 	public List<ProductPlan> findList(ProductPlan productplan, String order, String ordertype) {
 		
 		return productPlanDao.query(productplan,  new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
+
+
+	public Integer delete(Integer planId) {
+		
+		return productPlanDao.softDelete(planId);
+	}
+
 
 	
 
