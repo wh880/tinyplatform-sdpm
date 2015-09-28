@@ -26,11 +26,11 @@ public interface ReleaseManger{
      */
     int[] updateBatch(List<ProductRelease> releases);
     /**
-     * 根据发布ID删除
-     * @param release
-     * @return
-     */
-    int delete(Integer releaseId);
+	 * 根据ID进行软删除
+	 * @param planId
+	 * @return
+	 */
+	 Integer delete(Integer releaseId);
     /**
      * 查找发布
      * @param release

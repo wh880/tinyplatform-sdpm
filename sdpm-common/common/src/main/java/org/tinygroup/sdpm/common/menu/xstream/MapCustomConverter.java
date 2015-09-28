@@ -9,7 +9,6 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.mapper.Mapper;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -22,17 +21,16 @@ public class MapCustomConverter extends AbstractCollectionConverter {
     }
 
     @Override
-    public boolean canConvert(Class aClass) {
-        return aClass.equals(HashMap.class);
+    public boolean canConvert(Class type) {
+        return type.equals(HashMap.class);
     }
 
     @Override
     public void marshal(Object source, HierarchicalStreamWriter hierarchicalStreamWriter, MarshallingContext marshallingContext) {
         Map map = (Map) source;
-        for (Iterator iterator = map.entrySet().iterator(); iterator.hasNext(); ) {
-            Map.Entry entry = (Entry) iterator.next();
+        for (Object o : map.entrySet()) {
+            Entry entry = (Entry) o;
             ExtendedHierarchicalStreamWriterHelper.startNode(hierarchicalStreamWriter, "property", Entry.class);
-
             hierarchicalStreamWriter.addAttribute("key", entry.getKey().toString());
             hierarchicalStreamWriter.addAttribute("value", entry.getValue().toString());
             hierarchicalStreamWriter.endNode();
@@ -41,7 +39,7 @@ public class MapCustomConverter extends AbstractCollectionConverter {
 
     @Override
     public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
-        Map map = (Map) createCollection(context.getRequiredType());
+        Map<String, Object> map = (Map<String, Object>) createCollection(context.getRequiredType());
         populateMap(reader, context, map);
         return map;
     }

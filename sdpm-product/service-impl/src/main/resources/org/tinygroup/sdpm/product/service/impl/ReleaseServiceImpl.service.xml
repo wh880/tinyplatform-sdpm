@@ -1,30 +1,24 @@
 <service-components>
   <service-component type="org.tinygroup.sdpm.product.service.impl.ReleaseServiceImpl" bean="">
-    <service-method local-name="addRelease" service-id="product_addRelease" method-name="addRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+    <service-method local-name="addRelease" service-id="product_addRelease_1" method-name="addRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
         <service-parameter name="release" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="addReleaseResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease"/>
     </service-method>
-    <service-method local-name="updateRelease" service-id="product_updateRelease" method-name="updateRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+    <service-method local-name="updateRelease" service-id="product_updateRelease_1" method-name="updateRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
         <service-parameter name="release" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="updateReleaseResult" required="false" is-array="false" type="int"/>
     </service-method>
-    <service-method local-name="updateBatchRelease" service-id="product_updateBatchRelease" method-name="updateBatchRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+    <service-method local-name="updateBatchRelease" service-id="product_updateBatchRelease_1" method-name="updateBatchRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
         <service-parameter name="releases" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease" collection-type="java.util.List" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="updateBatchReleaseResult" required="false" is-array="true" type="int"/>
     </service-method>
-    <service-method local-name="deleteRelease" service-id="product_deleteRelease" method-name="deleteRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
-      <service-parameters>
-        <service-parameter name="releaseId" type="java.lang.Integer" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="deleteReleaseResult" required="false" is-array="false" type="int"/>
-    </service-method>
-    <service-method local-name="findReleaseList" service-id="product_findReleaseList" method-name="findReleaseList" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+    <service-method local-name="findReleaseList" service-id="product_findReleaseList_1" method-name="findReleaseList" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
         <service-parameter name="productRelease" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease" required="false" is-array="false"/>
         <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
@@ -32,7 +26,7 @@
       </service-parameters>
       <service-result name="findReleaseListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease"/>
     </service-method>
-    <service-method local-name="findReleasePager" service-id="product_findReleasePager" method-name="findReleasePager" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+    <service-method local-name="findReleasePager" service-id="product_findReleasePager_1" method-name="findReleasePager" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
       <service-parameters>
         <service-parameter name="page" type="int" required="false" is-array="false"/>
         <service-parameter name="limit" type="int" required="false" is-array="false"/>
@@ -41,6 +35,18 @@
         <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findReleasePagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="deletePlan" service-id="product_deletePlan" method-name="deletePlan" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="releaseId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deletePlanResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="findRelease" service-id="product_findRelease" method-name="findRelease" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="releaseId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findReleaseResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease"/>
     </service-method>
   </service-component>
 </service-components>

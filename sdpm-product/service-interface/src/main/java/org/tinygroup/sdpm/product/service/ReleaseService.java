@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.product.service;
 import java.util.List;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -26,11 +27,19 @@ public interface ReleaseService {
      */
     int[] updateBatchRelease(List<ProductRelease> releases);
     /**
-     * 根据发布对象删除
-     * @param release
+     * 根据id进行软删除用户
+     *
+     * @param id 主键
      * @return
      */
-    int deleteRelease(Integer releaseId);
+    Integer deletePlan(Integer releaseId);
+    
+    /**
+	 * 根据Id查找
+	 * @param planId
+	 * @return
+	 */
+	ProductRelease findRelease(Integer releaseId);
    
     /**
      * 查找发布

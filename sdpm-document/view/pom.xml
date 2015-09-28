@@ -156,11 +156,6 @@
       </dependency>
       <dependency>
           <groupId>org.tinygroup</groupId>
-          <artifactId>org.tinygroup.bootstrapDate</artifactId>
-          <version>${tiny_ui_version}</version>
-      </dependency>
-      <dependency>
-          <groupId>org.tinygroup</groupId>
           <artifactId>org.tinygroup.interfaceElements</artifactId>
           <version>${tiny_ui_version}</version>
       </dependency>

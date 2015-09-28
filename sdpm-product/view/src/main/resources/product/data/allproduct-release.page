@@ -1,21 +1,16 @@
-#macro setTinyItemCount(num)
-<input type="hidden" name="records" value="${num}"/>
-#end
 
-
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=productRelease.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(productRelease?.totalCount)
+#for(release:productRelease?.records)
 #@tr()
     #@td()<input type="checkbox" value="1" name="product-release">#end
-    #@td()${var}#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-release/product-al-req.page">工程发布</a>#end
-    #@td()2.20.1#end
-    #@td()2015-09-02#end
+    #@td()${release?.releaseId}#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-release/product-al-req.page">${release?.releaseName}</a>#end
+    #@td()${release?.buildId}#end
+    #@td()${release?.releaseDate?formatDate(release?.releaseDate,'yyyy年MM月dd日'):""}#end
     #@td()
 
         #foreach(m:menuManager.getScopeMenus("product-re"))
