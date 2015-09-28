@@ -21,6 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.org.biz.inter.RoleManager;
 import org.tinygroup.sdpm.org.dao.OrgRoleDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
+import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -30,6 +33,14 @@ public class RoleManagerImpl implements RoleManager {
 
     public OrgRole find(Integer id) {
         return orgRoleDao.getByKey(id);
+    }
+
+    public Pager<OrgRole> findPager(Integer start, Integer limit, OrgRole orgRole) {
+        return orgRoleDao.queryPager(start, limit, orgRole);
+    }
+
+    public List<OrgRole> findList(OrgRole orgRole) {
+        return orgRoleDao.query(orgRole);
     }
 
     public OrgRole add(OrgRole orgRole) {
@@ -42,6 +53,8 @@ public class RoleManagerImpl implements RoleManager {
     }
 
     public Integer delete(Integer id) {
-        return null;
+        OrgRole orgRole = orgRoleDao.getByKey(id);
+        orgRole.setDeleted(OrgRole.DELETE_YES);
+        return orgRoleDao.edit(orgRole);
     }
 }

@@ -13,10 +13,7 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
-/**
- * 用户管理控制器
- * Created by Hulk on 2015/9/16.
- */
+
 @Controller
 @RequestMapping("/org/user")
 public class UserAction extends BaseController {
