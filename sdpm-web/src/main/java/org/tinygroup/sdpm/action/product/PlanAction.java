@@ -1,10 +1,14 @@
 package org.tinygroup.sdpm.action.product;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.PlanService;
@@ -40,13 +44,15 @@ public class PlanAction  extends BaseController{
 		
 	}
 	
+	@ResponseBody
 	@RequestMapping("/delete")
-	public String delete(Integer planId){
-		
-		planService.deletePlan(planId);
-		
-		return "redirect:" + "/product/page/project/product-plan.page";
-	}
+	public Map delete(Integer planId) {
+        planService.deletePlan(planId);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
+    }
 	
 	@RequestMapping("/find")
 	public String find(Integer planId,Model model){

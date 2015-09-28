@@ -48,8 +48,17 @@ public class DictManagerImpl implements DictManager {
 	}
 
 	public List<SystemDict> findList(SystemDict dict) {
-		
-		return systemDictDao.query(dict);
+		List<SystemDict> list = systemDictDao.query(dict);
+		if(list.size()>0){
+			int size = list.size();
+			for(int i=0;i<size;i++){
+				if(list.get(i).getDeleted()==1){
+					list.remove(i);
+				}
+					
+			}
+		}
+		return list;
 	}
 
 	public Pager<SystemDict> findPager(int start, int limit, SystemDict dict, String columnName,
