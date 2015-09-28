@@ -144,7 +144,6 @@
     });
     $(function(){
 
-        $("form[name=thisform").attr("action",'#link("/Validform_post.html")');
         $("form[name=thisform").Validform({
             tiptype:2,
             usePlugin:{

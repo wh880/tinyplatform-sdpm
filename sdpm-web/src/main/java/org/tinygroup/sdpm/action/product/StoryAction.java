@@ -23,16 +23,10 @@ import java.util.List;
 public class StoryAction {
     @Autowired
     private StoryService storyService;
-    @Autowired
-    private ProductService productService;
     @RequestMapping("")
     public String storyAction(ProductStory story, String groupOperate, Model model, HttpServletRequest request, HttpServletResponse response){
         String queryString = request.getQueryString();
-        List<Product> list = productService.findProductList(new Product(),"productId","desc");
-        model.addAttribute("productList",list);
-        if("currentPageId=3".equals(queryString)){
-            return "redirect:/product/story?"+"productId="+list.get(0).getProductId()+"&choose=1&"+queryString;
-        }else if(!queryString.contains("choose")){
+       if(!queryString.contains("choose")){
             return "redirect:/product/story?choose=1&"+queryString;
         }
         return "product/page/project/togglebox.page";

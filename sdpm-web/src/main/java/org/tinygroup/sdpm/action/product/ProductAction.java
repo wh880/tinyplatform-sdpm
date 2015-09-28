@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
-import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.weblayer.mvc.annotation.Controller;import org.tinygroup.tinysqldsl.Pager;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 产品控制器
@@ -17,20 +20,21 @@ import org.tinygroup.tinysqldsl.Pager;
  *
  */
 @Controller
-@RequestMapping("/product")
+@RequestMapping("product")
 public class ProductAction  extends BaseController{
 
 	@Autowired
 	private ProductService productService;
 
-	@RequestMapping("/save")
-	public String save(Product product, Model model) {
-		
-		productService.addProduct(product);
-		return "redirect:" + "/product/page/tabledemo/product-listall.page";
-
-	}
-	
+@RequestMapping("")
+	public String productAction(HttpServletRequest request){
+		List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
+		if(list == null){
+			list = productService.findProductList(new Product(),"productId","desc");
+			request.getSession().setAttribute("productList",list);
+		}
+		return "redirect:/product/story?"+"productId="+list.get(0).getProductId()+"&choose=1&"+request.getQueryString();
+	}	
 	@RequestMapping("/update")
 	public String update(Product product){
 
