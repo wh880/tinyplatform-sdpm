@@ -24,7 +24,7 @@
 
         <menu id="org-user-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="org-user-batchdel"/>
-        <menu id="org-user-add" name="增加" href="../user/addUser.page" icon="icon-plus" sort="1" isShow="1"
+        <menu id="org-user-add" name="增加" href="addUser.page" icon="icon-plus" sort="1" isShow="1"
               scope="org-user-add"/>
 
         <menu id="org-user-gtask" name="待办" href="/organization/user/todo.page" icon="" sort="1"
