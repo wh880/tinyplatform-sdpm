@@ -36,8 +36,9 @@
 	});
 </script>
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/story/update?"+tinyRequestQueryString "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/story/update" "" {"class":"test"})
 #hiddenInput("","deleted","","1")
+#hiddenInput("","storyId","",story?.storyId)
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">关闭</p>
