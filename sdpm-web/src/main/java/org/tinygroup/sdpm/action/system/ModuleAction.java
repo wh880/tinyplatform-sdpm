@@ -36,7 +36,26 @@ public class ModuleAction extends BaseController{
 		mergeModule(list,mapList,0);
 		return mapList;
 	}
-	
+	@RequestMapping("list")
+	public String findModule(SystemModule systemModule,Model model){
+		List<SystemModule> list = moduleService.findModules(systemModule);
+		model.addAttribute("list", list);
+		return "/system/page/dictionaries/dict_list.page";
+	}
+	@RequestMapping("view")
+	public String viewModule(Integer moduleId,Model model){
+		SystemModule module= moduleService.findById(moduleId);
+		model.addAttribute("module", module);
+		return "/system/page/dictionaries/dict_view.pagelet";
+	}
+	@RequestMapping("delete")
+	public String deleteModule(Integer moduleId)
+	{
+		if(moduleId!=null){
+			moduleService.deleteById(moduleId);
+		}
+		return "redirect: list";
+	}
 
 	private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, int parent){
 		for(SystemModule systemModule : systemModules){

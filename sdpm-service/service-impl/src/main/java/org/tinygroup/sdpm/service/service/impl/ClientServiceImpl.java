@@ -72,4 +72,8 @@ public class ClientServiceImpl implements ClientService {
     public List<ServiceClientUser> getAllClientUser(ServiceClientUser clientUser) {
         return clientUserManager.getUserList(clientUser);
     }
+
+    public Integer deleteClientUser(Integer id) {
+        return clientUserManager.delete(id);
+    }
 }

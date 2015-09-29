@@ -91,5 +91,13 @@ public interface ClientService {
      */
     ServiceClientUser updateClientUser(ServiceClientUser clientUser);
 
+    /**
+     * 查找一个客户的所有联系人
+     *
+     * @param clientUser 编辑实体类
+     * @return
+     */
     List<ServiceClientUser> getAllClientUser(ServiceClientUser clientUser);
+
+    Integer deleteClientUser(Integer id);
 }

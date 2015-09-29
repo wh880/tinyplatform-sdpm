@@ -17,12 +17,6 @@
     <dependencies>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-common-view-uicomponent</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.jquery</artifactId>
             <version>${tiny_ui_version}</version>
         </dependency>
@@ -172,11 +166,6 @@
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.UEditor</artifactId>
-            <version>${tiny_ui_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.bootstrapDate</artifactId>
             <version>${tiny_ui_version}</version>
         </dependency>
         <dependency>
