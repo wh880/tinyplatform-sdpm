@@ -12,7 +12,7 @@
 	#@datatable("dictListTb")
 		#@tableToolbar()
 				#@radiusBtn("btn-danger" "icon-trash" "javascript:;" "deleteBatch") 批量删除#end
-				 #@aModal(editpageModal "添加" "460" "158" "btn radius btn-primary" editpagePath)
+				 #@aModal(editpageModal "添加" "460" "158" "btn radius btn-primary" "/system/module/find")
 						#@simpleI("icon-plus")添加#end
 				#end
 			#end
