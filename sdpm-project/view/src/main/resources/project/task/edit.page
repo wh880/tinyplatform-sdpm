@@ -22,7 +22,7 @@
 #end
 
 ###macro tinyForm(formname action method formMapInfo)
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/save" "post" {"class":"test","enctype":"multipart/form-data"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/editsave" "post" {"class":"test","enctype":"multipart/form-data"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
     #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
     #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
