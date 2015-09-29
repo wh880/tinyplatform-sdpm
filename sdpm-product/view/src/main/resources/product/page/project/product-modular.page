@@ -2,7 +2,6 @@
 #import("/org/tinygroup/table/components/table.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/Smart-treeview/components/treeview_smart.component")
-#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 #!set(linkName="product-modular",sonitem="
 <li>"+"模板"+"</li>")
 

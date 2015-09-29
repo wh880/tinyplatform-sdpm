@@ -20,8 +20,9 @@ public class TaskServiceImpl implements TaskService {
     private TaskManager taskManager;
 
     public ProjectTask addTask(ProjectTask task) {
-        task.setTaskStatus("0");
+        task.setTaskStatus("1");
         task.setTaskOpenedDate(new Date());
+        task.setTaskProject(1);
         return taskManager.add(task);
     }
 
@@ -45,11 +46,27 @@ public class TaskServiceImpl implements TaskService {
     public Integer updateTask(ProjectTask task) {
         return taskManager.update(task);
     }
-    public Integer updatEditTask(ProjectTask task) {
-        return taskManager.update(task);
+    public Integer updateEditTask(ProjectTask task) {
+        task.setTaskProject(1);
+        return taskManager.updateEditTask(task);
     }
-    public Integer updatCallTask(ProjectTask task) {
-        return taskManager.update(task);
+    public Integer updateCallTask(ProjectTask task) {
+        return taskManager.updateCallTask(task);
+    }
+    public Integer updateFinishTask(ProjectTask task) {
+        task.setTaskFinishedDate(new Date());
+        task.setTaskStatus("3");
+        return taskManager.updateFinishTask(task);
+    }
+    public Integer updateStartTask(ProjectTask task) {
+        task.setTaskRealStarted(new Date());
+        task.setTaskStatus("2");
+        return taskManager.updateStartTask(task);
+    }
+    public Integer updateCloseTask(ProjectTask task) {
+        task.setTaskCloseDate(new Date());
+        task.setTaskStatus("6");
+        return null;
     }
 
     public Pager<ProjectTask> findComplexTask() {

@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.quality;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class BugAction extends BaseController {
 	@Autowired
 	private BugService bugService;
 		
-	@RequestMapping
+	@RequestMapping("")
 	public String form(String get,Model model){
 		
 		model.addAttribute("get", get);
@@ -37,7 +38,7 @@ public class BugAction extends BaseController {
 		bug.setProductId(id);
 		List<QualityBug> buglist = bugService.findBugList(bug);
 		model.addAttribute("buglist",buglist);
-		return "testManagement/data/BugData.pagelet";
+		return "/testManagement/data/BugData.pagelet";
 	}
 	
 	@RequestMapping("/findBug")
@@ -50,47 +51,67 @@ public class BugAction extends BaseController {
 		//	bug.setProductId(id);
 		Pager<QualityBug> bugpager = bugService.findBugListPager(start, limit, bug, order, asc);
 		model.addAttribute("bugpager",bugpager);
-		return "testManagement/data/BugData.pagelet";
+		return "/testManagement/data/BugData.pagelet";
 	}
 	
 	@RequestMapping("/makesure")
-	public String makesure(){
-		return "testManagement/page/tabledemo/makesure.page";
+	public String makesure(Integer bugId,Model model){
+		QualityBug bug = new QualityBug();
+	    bug = bugService.findById(bugId);
+	    model.addAttribute("bug",bug);
+		return "/testManagement/page/tabledemo/makesure.page";
 	}
 	
 	@RequestMapping("/assign")
-	public String assign(){
-		return "testManagement/page/tabledemo/assign.page";
+	public String assign(Integer bugId,Model model){		
+		QualityBug bug = new QualityBug();
+		bug = bugService.findById(bugId);
+		//bug.setBugAssignedDate(new Date());
+		model.addAttribute("bug", bug);
+		return "/testManagement/page/tabledemo/assign.page";
 	}
 	
 	@RequestMapping("/solve")
-	public String solve(){
-		return "testManagement/page/tabledemo/assign.page";
+	public String solve(Integer bugId,Model model){
+		QualityBug bug = new QualityBug();
+		bug = bugService.findById(bugId);
+		bug.setBugResolvedDate(new Date());
+		model.addAttribute("bug", bug);
+		return "/testManagement/page/tabledemo/solution.page";
 	}
 	
 	@RequestMapping("/close")
-	public String close(){
-		return "testManagement/page/tabledemo/shutdown.page";
+	public String close(Integer bugId,Model model){
+		QualityBug bug = new QualityBug();
+		bug = bugService.findById(bugId);
+		bug.setBugClosedDate(new Date());
+		model.addAttribute("bug", bug);
+		return "/testManagement/page/tabledemo/shutdown.page";
 	}
 	
 	@RequestMapping("/edit")
-	public String edit(){
-		return "testManagement/page/tabledemo/edition.page";
+	public String edit(Integer bugId,Model model){
+		QualityBug bug = new QualityBug();
+		bug = bugService.findById(bugId);
+		model.addAttribute("bug", bug);
+		return "/testManagement/page/tabledemo/edition.page";
 	}
 			
 	@RequestMapping("/add")
 	public String add(){
-		return "testManagement/page/proposeBug.page";
+		return "/testManagement/page/proposeBug.page";
 	}
 	
 	@RequestMapping(value = "/save",method = RequestMethod.POST)
 	public String save(QualityBug bug,Model model){
 		if(bug.getBugId() == null){
-			bugService.addBug(bug);
+			bug.setBugOpenedDate(new Date());
+			bugService.addBug(bug);			
 		}else{
+			bug.setBugLastEditedDate(new Date());
 			bugService.updateBug(bug);
 		}	
-		model.addAttribute("bugsave",bug);
-		return "redirect:"+"quality/bug";
+	//	model.addAttribute("bugsave",bug);
+		return "redirect:"+"/quality/bug";
 	}
 }

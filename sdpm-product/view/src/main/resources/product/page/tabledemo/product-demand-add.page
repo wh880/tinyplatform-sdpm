@@ -1,6 +1,5 @@
-#!set(linkName="product-demand",sonitem="
-<li>"+"需求"+"</li>")
-#@tinyForm("thisform" "" "" {"class":"test","enctype":"multipart/form-data"})
+#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
+
 
 <script>
 
@@ -45,6 +44,9 @@
 
 
 
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/story/save" "" {"class":"test","enctype":"multipart/form-data"})
+
+
 <div style="width:100%;" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">提需求</p>
@@ -54,7 +56,7 @@
             #@formControlDiv("col-4")
                 <div class="col-6">
                     #@Tselect2F()
-                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("productId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="CT">Admin</option>
                             <option value="DE">Demo</option>
                             <option value="FL">Me</option>
@@ -67,7 +69,7 @@
                 </div>
                 <div class="col-6">
                     #@Tselect2F()
-                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="CT">Admin</option>
                             <option value="DE">Demo</option>
                             <option value="FL">Me</option>
@@ -87,7 +89,7 @@
             #@colLabel()所属计划：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("planId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Admin</option>
                         <option value="DE">Demo</option>
                         <option value="FL">Me</option>
@@ -105,8 +107,7 @@
             #@formControlDiv("col-4")
                 <div id="demand-sources">
                     #@Tselect2F()
-                        #@Tselect2Body(
-                            "demand-sources" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("storySource" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="customer">客户</option>
                             <option value="request">请求</option>
                             <option value="user">用户</option>
@@ -149,7 +150,7 @@
         #@elementItem()
             #@colLabel()需求名称：#end
             #@formControlDiv("col-4")
-                #tinyInput("text" "email" ""{"datatype":"e","nullmsg":"请输入描述！","id":"email","class":"input-text"})
+                #tinyInput("text" "storyTitle" ""{"datatype":"e","nullmsg":"请输入描述！","id":"email","class":"input-text"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -158,7 +159,7 @@
         #@elementItem()
             #@colLabel()需求描述：#end
             #@formControlDiv("col-8")
-                #@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"描述不能为空！"})
+                #@tinyTextarea("storySpec" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"描述不能为空！"})
                     内容走起#end
             #end
             #@validateDiv("col-2")#end
@@ -167,7 +168,7 @@
         #@elementItem()
             #@colLabel()验收标准：#end
             #@formControlDiv("col-8")
-                #@tinyTextarea("remark" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-200"})内容走起#end
+                #@tinyTextarea("storyVerification" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-200"})内容走起#end
             #end
             #@validateDiv("col-2")#end
         #end
@@ -176,7 +177,7 @@
             #@colLabel()优先级：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("storyPri" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Admin</option>
                         <option value="DE">Demo</option>
                         <option value="FL">Me</option>
@@ -192,7 +193,7 @@
             #@colLabel()预计工时：#end
             #@formControlDiv("col-4")
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" name="storyEstimate" placeholder="" aria-describedby="basic-addon2">
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
             #end
@@ -202,7 +203,7 @@
         #@elementItem()
             #@sdpmItem("由谁评审")
                 #@Tselect2F()
-                    #@Tselect2Body("reviewed" "IN" {"class":"input-text select2"})
+                    #@Tselect2Body("storyReviewedBy" "IN" {"class":"input-text select2"})
                         <option value="CT">Admin</option>
                         <option value="DE">Demo</option>
                         <option value="FL">Me</option>
@@ -216,7 +217,7 @@
             #@checkboxBox()
 
                 #@label(labelFor="checkbox-6")
-                    #input(inputId="story_reviewed" inputName="story_reviewed" inputType="checkbox")
+                    #input(inputId="story_reviewed" inputName="storyReviewedBy" inputType="checkbox")
                     不需要评审
                 #end
             #end
@@ -227,8 +228,7 @@
             #@colLabel()抄送给：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body(
-                        "lang" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("storyMailto" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">Admin</option>
                         <option value="DE">Demo</option>
                         <option value="FL">TOM</option>
@@ -245,7 +245,7 @@
         #@elementItem()
             #@colLabel()关键词：#end
             #@formControlDiv("col-4")
-                #tinyInput("text" "email" ""{"datatype":"e","nullmsg":"请输入名称！","id":"email","class":"input-text"})
+                #tinyInput("text" "storyKeywords" ""{"datatype":"e","nullmsg":"请输入名称！","id":"email","class":"input-text"})
             #end
             #@validateDiv("col-2")#end
         #end

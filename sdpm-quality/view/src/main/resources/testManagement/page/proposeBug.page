@@ -20,7 +20,8 @@
 	#@tabBodyCol("ptop-5")
 ##operationbar start1
 #end
-	#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/save" "post" {"class":""})
+	#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/save?bugStatus=0" "post" {"class":""})
+	#hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">提Bug</p>
@@ -29,12 +30,12 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("productId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">2</option>
-	                        <option value="DE">3</option>
-	                        <option value="FL">4</option>
-	                        <option value="GA">5</option>
-	                        <option value="IN">1</option>
+	                   		 #@Tselect2Body("productId" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">2</option>
+	                        <option value="2">3</option>
+	                        <option value="3">4</option>
+	                        <option value="4">5</option>
+	                        <option value="5">1</option>
 	                    	#end                  
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
@@ -49,10 +50,10 @@
 					#@div(divClass="col-0")&nbsp;&nbsp#end
 					#@div(divClass="col-3")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">/1/2</option>
-	                        <option value="DE">/2/3</option>
-	                        <option value="IN">/3/4</option>
+	                   		 #@Tselect2Body("moduleId" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">/1/2</option>
+	                        <option value="2">/2/3</option>
+	                        <option value="3">/3/4</option>
 	                    	#end                
                 	  #end
 #*					#@tinySelect("lang" "zh" {"class":"select2"})
@@ -70,10 +71,10 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("projectId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
+	                   		 #@Tselect2Body("projectId" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
 	                    	#end                
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
@@ -89,10 +90,10 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("bugOpenedBuild" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
+	                   		 #@Tselect2Body("bugOpenedBuild" "1" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
 	                    	#end                
 #*	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
@@ -109,10 +110,10 @@
 						#@formControlDiv("col-8")
 							#@div(divClass="col-5")
 							 #@Tselect2F()
-	                   		 #@Tselect2Body("bugAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">admin</option>
-	                        <option value="ME">admin2</option>
-	                        <option value="MD">admin3</option>
+	                   		 #@Tselect2Body("bugAssignedTo" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">admin</option>
+	                        <option value="2">admin2</option>
+	                        <option value="3">admin3</option>
 	                    	#end                
 	                       ###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 	 		#end
@@ -122,11 +123,20 @@
 				#@validateDiv("col-2")#end
 			#end
 			#@elementItem()
-				#@colLabel()Bug标题：#end
+				#@colLabel()Bug标题/优先级：#end
 				#@formControlDiv("col-8")
 				#@div(divClass="col-5")
-					#tinyInput("text" "bugTitle" ""{"datatype":"","id":"版本","class":"input-text"})
+					#tinyInput("text" "bugTitle" ""{"datatype":"*","id":"版本","class":"input-text"})
 				#end
+				#@div(divClass="col-0")&nbsp&nbsp#end
+                	 #@div(divClass="col-3")					
+					#@tinySelect("priority" "1" {"class":"select2"})
+							#@tinyOptionItem("3")1#end
+							#@tinyOptionItem("1")2#end
+							#@tinyOptionItem("2")3#end
+							
+					#end
+					#end
 				#end
 				#@validateDiv("col-2")#end
 			#end
@@ -142,10 +152,10 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 							 #@Tselect2F()
-	                   		 #@Tselect2Body("storyId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
+	                   		 #@Tselect2Body("storyId" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="2">1</option>
+	                        <option value="1">2</option>
+	                        <option value="3">3</option>
 	                    	#end                
 	                      	#@Tselect2Fix()
 	                      	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
@@ -159,10 +169,10 @@
 				#@formControlDiv("col-8")
 				#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("taskId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
+	                   		 #@Tselect2Body("taskId" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
 	                    	#end                
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/project/task/add.page" class="r ">增加</a>
@@ -194,10 +204,10 @@
 					#@div(divClass="col-0")&nbsp&nbsp#end
 					#@div(divClass="col-3")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("bugSeverity" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
+	                   		 #@Tselect2Body("bugSeverity" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
 	                    	#end                
 	                    	###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 	  #end
@@ -266,19 +276,10 @@
 	                    	#end                
                 	  #end
                 	 #end
-                	 #@div(divClass="col-0")&nbsp&nbsp#end
-                	 #@div(divClass="col-3")					
-					#@tinySelect("lang" "zh" {"class":"select2"})
-							#@tinyOptionItem("zh")老张#end
-							#@tinyOptionItem("1")老王#end
-							#@tinyOptionItem("2")老黑#end
-							
-					#end
-					#end
 				#end
 				#@validateDiv("col-2")#end
 			#end
-
+ 
 			#@elementItem()
 				#@colLabel()关键词：#end
 				#@formControlDiv("col-8")

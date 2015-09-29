@@ -44,4 +44,15 @@ public class ModuleManagerImpl implements ModuleManager{
 		return systemModuleDao.query(systemModule);
 	}
 
+	public SystemModule add(SystemModule systemModule) {
+		// TODO Auto-generated method stub
+		return systemModuleDao.add(systemModule);
+	}
+
+	public SystemModule editNameAndTitle(SystemModule systemModule) {
+		// TODO Auto-generated method stub
+		systemModuleDao.editNameAndTitle(systemModule);
+		return systemModule;
+	}
+
 }

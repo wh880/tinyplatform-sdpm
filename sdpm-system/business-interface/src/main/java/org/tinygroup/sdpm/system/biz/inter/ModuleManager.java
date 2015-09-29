@@ -10,7 +10,13 @@ public interface ModuleManager {
 	 * @param SystemModule
 	 * @return
 	 */
-	 SystemModule edit(SystemModule SystemModule);
+	 SystemModule edit(SystemModule systemModule);
+	 /**
+	  * 编辑代码和中文名
+	  * @param SystemModule
+	  * @return
+	  */
+	 SystemModule editNameAndTitle(SystemModule systemModule);
 	 
 	/**
 	 * 删除ById
@@ -29,11 +35,17 @@ public interface ModuleManager {
 	  * @param SystemModule
 	  * @return
 	  */
-	 int delete(SystemModule SystemModule);
+	 int delete(SystemModule systemModule);
 	 /**
 	  * 通过ID查询对象
 	  * @param id
 	  * @return
 	  */
 	 SystemModule findById(int id);
+	 /**
+	  * 添加模块
+	  * @param systemModule
+	  * @return
+	  */
+	 SystemModule add(SystemModule systemModule);
 }

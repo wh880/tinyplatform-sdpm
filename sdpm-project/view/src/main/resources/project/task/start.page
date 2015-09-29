@@ -19,7 +19,7 @@
 #end
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/save" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/startsave" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
     #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
     #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
@@ -36,7 +36,7 @@
         #@elementItem()
             #@sdpmItem("总消耗")
                 <div class="input-group">
-                    <input name="Float" type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+                    <input name="taskConsumed" type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
                     <span class="input-group-addon" id="all-time">小时</span>
                 </div>
             #end

@@ -80,5 +80,9 @@ public class DictManagerImpl implements DictManager {
 		return pagerDict;
 	}
 
+	public List<SystemDict> findList(SystemDict dict, String columnName, boolean asc) {
+		return systemDictDao.query(dict,new OrderBy(columnName,asc));
+	}
+
 
 }

@@ -6,7 +6,7 @@
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
 
-#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+#!set(activeMenuId=currentPageId)
 #!set(linkName="product-release",sonitem="
 <li>"+"发布"+"</li>")
 

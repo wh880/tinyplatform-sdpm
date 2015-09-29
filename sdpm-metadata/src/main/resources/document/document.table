@@ -1,4 +1,4 @@
-<tables id="a91b5666002c43eabeebeeae6a8e8b99" package-name="org.tinygroup.alm.document">
+<tables id="a91b5666002c43eabeebeeae6a8e8b99" >
   <table id="59549c7852a84135a7f594a6d2081544" name="doc" title="文档表" schema="" package-name="">
     <description>wendang</description>
     <table-field standard-field-id="157b6bcd380345ecb1bbb2b6005b92f7" primary="true" unique="true" not-null="true" id="doc_id" auto-increase="true"/>

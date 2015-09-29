@@ -1,5 +1,6 @@
 #import("/org/tinygroup/publicComponent/macro/navselect.component")
 #set(productId = productId == null?productList?.get(0)?.productId:productId)
+
 #@navSelect2("product" "product")
 	#@navSelect2Nav()
 		#if(productId)
@@ -38,7 +39,7 @@
 	
 		$(function(){
 			$("#product-select").on("change",function(){
-				window.location.href='${TINY_CONTEXT_PATH}/product/story?currentPageId=3&productId='+$(this).find("option:selected").val();
+				window.location.href='${TINY_CONTEXT_PATH}/product?currentPageId=3&productId='+$(this).find("option:selected").val();
 			});
 		});
 	
