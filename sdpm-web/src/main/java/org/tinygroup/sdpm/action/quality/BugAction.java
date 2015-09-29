@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.quality;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,29 +55,45 @@ public class BugAction extends BaseController {
 	}
 	
 	@RequestMapping("/makesure")
-	public String makesure(){
+	public String makesure(Integer bugId,Model model){
 		QualityBug bug = new QualityBug();
-		bug.getBugId();
+	    bug = bugService.findById(bugId);
+	    model.addAttribute("bug",bug);
 		return "/testManagement/page/tabledemo/makesure.page";
 	}
 	
 	@RequestMapping("/assign")
-	public String assign(){
+	public String assign(Integer bugId,Model model){		
+		QualityBug bug = new QualityBug();
+		bug = bugService.findById(bugId);
+		//bug.setBugAssignedDate(new Date());
+		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/assign.page";
 	}
 	
 	@RequestMapping("/solve")
-	public String solve(){
-		return "/testManagement/page/tabledemo/assign.page";
+	public String solve(Integer bugId,Model model){
+		QualityBug bug = new QualityBug();
+		bug = bugService.findById(bugId);
+		bug.setBugResolvedDate(new Date());
+		model.addAttribute("bug", bug);
+		return "/testManagement/page/tabledemo/solution.page";
 	}
 	
 	@RequestMapping("/close")
-	public String close(){
+	public String close(Integer bugId,Model model){
+		QualityBug bug = new QualityBug();
+		bug = bugService.findById(bugId);
+		bug.setBugClosedDate(new Date());
+		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/shutdown.page";
 	}
 	
 	@RequestMapping("/edit")
-	public String edit(){
+	public String edit(Integer bugId,Model model){
+		QualityBug bug = new QualityBug();
+		bug = bugService.findById(bugId);
+		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/edition.page";
 	}
 			
@@ -88,8 +105,10 @@ public class BugAction extends BaseController {
 	@RequestMapping(value = "/save",method = RequestMethod.POST)
 	public String save(QualityBug bug,Model model){
 		if(bug.getBugId() == null){
-			bugService.addBug(bug);
+			bug.setBugOpenedDate(new Date());
+			bugService.addBug(bug);			
 		}else{
+			bug.setBugLastEditedDate(new Date());
 			bugService.updateBug(bug);
 		}	
 	//	model.addAttribute("bugsave",bug);
