@@ -68,7 +68,7 @@ public interface TaskService {
      * @param projectTask
      * @return
      */
-    public Integer updatEditTask(ProjectTask projectTask);
+    public Integer updateEditTask(ProjectTask projectTask);
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
      * 注意：1.状态不可逆转 2.有前置条件判断
@@ -76,7 +76,23 @@ public interface TaskService {
      * @param projectTask
      * @return
      */
-    public Integer updatCallTask(ProjectTask projectTask);
+    public Integer updateCallTask(ProjectTask projectTask);
+    /**
+     * 跟新任务，包括指派，开始，完成，关闭，编辑
+     * 注意：1.状态不可逆转 2.有前置条件判断
+     *
+     * @param projectTask
+     * @return
+     */
+    public Integer updateStartTask(ProjectTask projectTask);
+    /**
+     * 跟新任务，包括指派，开始，完成，关闭，编辑
+     * 注意：1.状态不可逆转 2.有前置条件判断
+     *
+     * @param projectTask
+     * @return
+     */
+    public Integer updateFinishTask(ProjectTask projectTask);
 
     /**
      * 复杂查询

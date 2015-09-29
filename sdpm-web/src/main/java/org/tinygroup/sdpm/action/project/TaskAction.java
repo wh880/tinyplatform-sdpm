@@ -148,7 +148,7 @@ public class TaskAction extends BaseController {
         if (task.getTaskId() == null) {
             taskService.addTask(task);
         } else {
-            taskService.updatEditTask(task);
+            taskService.updateEditTask(task);
         }
         model.addAttribute("task", task);
         return "project/task/index.page";
@@ -159,7 +159,27 @@ public class TaskAction extends BaseController {
         if (task.getTaskId() == null) {
             taskService.addTask(task);
         } else {
-            taskService.updatCallTask(task);
+            taskService.updateCallTask(task);
+        }
+        model.addAttribute("task", task);
+        return "project/task/index.page";
+    }
+    @RequestMapping(value = "/finishsave", method = RequestMethod.POST)
+    public String finishsave(ProjectTask task, Model model) {
+        if (task.getTaskId() == null) {
+            taskService.addTask(task);
+        } else {
+            taskService.updateFinishTask(task);
+        }
+        model.addAttribute("task", task);
+        return "project/task/index.page";
+    }
+    @RequestMapping(value = "/startsave", method = RequestMethod.POST)
+    public String startsave(ProjectTask task, Model model) {
+        if (task.getTaskId() == null) {
+            taskService.addTask(task);
+        } else {
+            taskService.updateStartTask(task);
         }
         model.addAttribute("task", task);
         return "project/task/index.page";
