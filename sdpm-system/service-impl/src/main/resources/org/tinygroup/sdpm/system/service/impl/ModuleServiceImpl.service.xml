@@ -1,5 +1,5 @@
 <service-components>
-  <service-component type="org.tinygroup.sdpm.system.service.impl.ModuleServiceImpl" bean="moduleService">
+  <service-component type="org.tinygroup.sdpm.system.service.impl.ModuleServiceImpl" bean="">
     <service-method local-name="edit" service-id="module_edit" method-name="edit" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>
         <service-parameter name="systemModule" type="org.tinygroup.sdpm.system.dao.pojo.SystemModule" required="false" is-array="false"/>

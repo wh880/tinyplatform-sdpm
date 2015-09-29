@@ -1,5 +1,5 @@
 <service-components>
-  <service-component type="org.tinygroup.sdpm.system.service.impl.DictServiceImpl" bean="dictService">
+  <service-component type="org.tinygroup.sdpm.system.service.impl.DictServiceImpl" bean="">
 
     <service-method local-name="addDict" service-id="dict_addDict" method-name="addDict" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>

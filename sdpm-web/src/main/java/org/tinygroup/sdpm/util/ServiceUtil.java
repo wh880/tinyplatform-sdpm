@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -15,6 +16,7 @@ import java.util.UUID;
 /**
  * Created by wangll13383 on 2015/9/28.
  */
+@Component
 public class ServiceUtil {
     @Autowired
     CEPCore cepcore;

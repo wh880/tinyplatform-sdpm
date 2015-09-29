@@ -21,16 +21,17 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#@Tselect2F()
-	                   		 #@Tselect2Body("docProduct" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">产品2</option>
-	                        <option value="DE">产品3</option>
-	                        <option value="FL">产品4</option>
-	                        <option value="GA">产品5</option>
-	                        <option value="IN">产品1</option>
+	                   		 #@Tselect2Body("docProduct" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">产品1</option>
+	                        <option value="2">产品2</option>
+	                        <option value="3">产品3</option>
+	                        <option value="4">产品4</option>
+	                        <option value="5">产品5</option>
+	                        
 	                    	#end                  
 	                    	#@Tselect2Fix()
-	                    	<a href="/document/add-doclib.page" class="r ">增加</a>
-	                    	<a href="/document/all-doclib">全部</a>#end
+	                    	<a href="#" class="r ">增加</a>
+	                    	<a href="#">全部</a>#end
                 	  #end
                 	  #end
                 	  #end
@@ -41,12 +42,13 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="IN">产品1</option>
 	                        <option value="CT">产品2</option>
 	                        <option value="DE">产品3</option>
 	                        <option value="FL">产品4</option>
 	                        <option value="GA">产品5</option>
-	                        <option value="IN">产品1</option>
+	            
 	                    	#end                  	                    	
                 	  #end
                 	  #end
@@ -56,9 +58,9 @@
 			#@elementItem()
         			#@colLabel()文档类型#end
 					#@skinMinimal("mt-20")
-    					#labelRadio1(rId="typefile" rName="docType" rValue="file" labelText="文件" "setType(this.value);")
-    					#labelRadio1(rId="typeurl" rName="docType" rValue="url" labelText="链接" "setType(this.value);")   								
-    					#labelRadio1(rId="typetext" rName="docType" rValue="text" labelText="网页" "setType(this.value);")
+    					#labelRadio1(rId="typefile" rName="docType" rValue="文件" labelText="文件" "setType(this.value);")
+    					#labelRadio1(rId="typeurl" rName="docType" rValue="链接" labelText="链接" "setType(this.value);")   								
+    					#labelRadio1(rId="typetext" rName="docType" rValue="网页" labelText="网页" "setType(this.value);")
 					
 					#end
         			#@validateDiv("col-2")#end
@@ -77,7 +79,7 @@
 					#@colLabel()文档URL#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docurl" ""{"placeholder":"相应的链接地址","datatype":"*4-16","id":"docurl","class":"input-text"})
+					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*4-16","id":"docUrl","class":"input-text"})
 					#end
 					#end
 				#end
@@ -95,12 +97,12 @@
 			#@elementItem()
 					#@colLabel()文档摘要#end
 					#@formControlDiv("col-8")
-						#@Teditor("docDegist" "content1" {"initialFrameHeight":"200"})Say something#end
+						#@Teditor("docDigest" "docDigest" {"initialFrameHeight":"200"})Say something#end
 					#end
 					#@validateDiv("col-2")#end
 				#end	
 										
-			#@elementItem()
+			#@elementItem(elementId="fileBox")
 				#@colLabel()附件：#end
 				#@formControlDiv("col-8")					
 					#include("fileupload.page")
@@ -110,8 +112,8 @@
 			#end
 			#@elementItem(elementId="contentBox" eleItemClass="hidden")
 					#@colLabel()文档正文#end
-					#@formControlDiv("col-6")
-						#@tinyueditor("content" "content")说点什么...最少输入10个字符#end
+					#@formControlDiv("col-8")
+						#@tinyueditor("docContent" "docContent")说点什么...最少输入10个字符#end
 					#end					
 					#@validateDiv("col-2")#end
 			#end
@@ -137,13 +139,13 @@
 /* Set doc type. */
 function setType(type)
 {
-	if(type == 'url')
+	if(type == '链接')
 	{
 		$('#urlBox').removeClass('hidden');
 		$('#fileBox').addClass('hidden');
 		$('#contentBox').addClass('hidden');
 	}
-	else if(type == 'text')
+	else if(type == '网页')
 	{
 		$('#urlBox').addClass('hidden');
 		$('#fileBox').addClass('hidden');

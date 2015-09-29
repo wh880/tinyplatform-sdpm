@@ -58,6 +58,24 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 		return getDslSession().fetchOneResult(select, project.getClass());
 	}
 
+	//用于重现错误，要删除
+	public Pager<Project> tquerytAll(int start, int limit, final Project project2, final OrderBy... orderBies) {
+		Project project = new Project();
+
+		return getDslTemplate().queryPager(start, limit, project, false, new SelectGenerateCallback<Project>() {
+			public Select generate(Project t) {
+				Select select = MysqlSelect.select(PROJECTTABLE.ALL,
+						FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent"))
+						.from(PROJECTTABLE).join(
+								Join.leftJoin(PROJECT_TASKTABLE,
+										PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
+						.groupBy(PROJECTTABLE.PROJECT_ID);
+
+				return addOrderByElements(select, orderBies);
+			}
+		});
+	}
+
 	public Pager<Project> querytAll(int start, int limit, final Project project, final OrderBy... orderBies) {
 		return getDslTemplate().queryPager(start, limit, project, false, new SelectGenerateCallback<Project>() {
 			public Select generate(Project t) {

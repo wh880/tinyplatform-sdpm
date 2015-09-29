@@ -24,7 +24,7 @@ public class BugManagerImpl implements BugManager {
 	}
 	
 	public QualityBug add(QualityBug bug){
-		bug.setBugOpenedDate(new Date());		
+				
 		return bugdao.add(bug);
 	}
 	
@@ -33,13 +33,12 @@ public class BugManagerImpl implements BugManager {
 	}
 	
 	public Integer update(QualityBug bug){
-		bug.setBugLastEditedDate(new Date());
+		
 		return bugdao.edit(bug);
 	}
 	
 	public int[] batchUpdate(List<QualityBug> bugs){
-		QualityBug bug = new QualityBug();
-		bug.setBugLastEditedDate(new Date());
+		
 		return bugdao.batchUpdate(bugs);
 	}
 	
