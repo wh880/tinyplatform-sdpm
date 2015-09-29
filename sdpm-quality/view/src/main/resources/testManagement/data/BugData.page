@@ -26,7 +26,7 @@
     #@td()${var?.bugResolvedDate}#end
     #@td()
     	#foreach(m:menuManager.getScopeMenus("testbug-op"))
-             	<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>			
+             	<a href="${TINY_CONTEXT_PATH}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>			
 		 #end
 #*    	<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/makesure.page" title="确认">#buttonIcon(iconClass=
         "icon-search")</a>
