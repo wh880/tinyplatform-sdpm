@@ -33,11 +33,12 @@ public class ProductAction  extends BaseController{
 	public String productAction(HttpServletRequest request, WebContext webContext){
 		List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
 		String oldUrl = webContext.get("oldUrl");
-		if(list == null){
-			list = productService.findProductList(new Product(),"productId","desc");
+		if(list == null|| list.size()==0){
+			list = productService.findProductList(null,"productId","desc");
 			request.getSession().setAttribute("productList",list);
 		}
-		return "redirect:/product/story?"+"productId="+list.get(0).getProductId()+"&choose=1"+request.getQueryString()==null?"":("&"+request.getQueryString());
+		
+		return "redirect:/product/story?"+(list.size()>0?("productId="+list.get(0).getProductId()):"")+"&choose=1"+(request.getQueryString()==null?"":("&"+request.getQueryString()));
 	}	
 	
 	@RequestMapping("/update")

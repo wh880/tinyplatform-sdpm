@@ -20,8 +20,9 @@ public class TaskServiceImpl implements TaskService {
     private TaskManager taskManager;
 
     public ProjectTask addTask(ProjectTask task) {
-        task.setTaskStatus("0");
+        task.setTaskStatus("1");
         task.setTaskOpenedDate(new Date());
+        task.setTaskProject(1);
         return taskManager.add(task);
     }
 
