@@ -49,4 +49,10 @@ public class ModuleManagerImpl implements ModuleManager{
 		return systemModuleDao.add(systemModule);
 	}
 
+	public SystemModule editNameAndTitle(SystemModule systemModule) {
+		// TODO Auto-generated method stub
+		systemModuleDao.editNameAndTitle(systemModule);
+		return systemModule;
+	}
+
 }

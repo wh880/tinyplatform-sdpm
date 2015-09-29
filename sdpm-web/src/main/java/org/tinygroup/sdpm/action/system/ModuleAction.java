@@ -60,8 +60,14 @@ public class ModuleAction extends BaseController{
 	}
 	@RequestMapping("find")
 	public String find(Integer moduleId,Model model){
+		if(moduleId!=null){
 		SystemModule module= moduleService.findById(moduleId);
 		model.addAttribute("module", module);
+		}
+		else{
+			SystemModule module = new SystemModule();
+			model.addAttribute("module", module);
+		}
 		return "/system/page/dictionaries/dict_edit.pagelet";
 	}
 	@RequestMapping("save")

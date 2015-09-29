@@ -152,9 +152,14 @@ public class ClientAction extends BaseController {
     }
 
     @RequestMapping(value = "/clientUserUpdate/date")
-    public String clientUserUpdate(Integer id, Model model) {
+    public String clientUserUpdate(Integer id, Integer clientId, Model model) {
         if (id != null) {
             ServiceClientUser clientUser = clientUserService.findClientUser(id);
+            model.addAttribute("clientUser", clientUser);
+        }
+        if (id == null && clientId != null) {
+            ServiceClientUser clientUser = new ServiceClientUser();
+            clientUser.setClientId(clientId);
             model.addAttribute("clientUser", clientUser);
         }
         return "service/client/companyInfoEdit.pagelet";
@@ -165,7 +170,7 @@ public class ClientAction extends BaseController {
         if (clientUser.getId() != null) {
             clientUserService.updateClientUser(clientUser);
         } else
-            clientUserService.addClientUser(clientUser);
-        return "service/client/clientInfo.page";
+            clientUser = clientUserService.addClientUser(clientUser);
+        return "redirect:/service/client/clientDetail?id=" + clientUser.getClientId();
     }
 }

@@ -20,7 +20,7 @@
 	#end
 #end
 			
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/save" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/save?bugStatus=1" "post" {"class":"test"})
 	<div style="width:67%;float:left">
     	<div class="infoContent">
     		<p class="titleName">确认</p>
@@ -41,10 +41,10 @@
     #@elementItem()
     	#@sdpmItem("优先级")
                #@Tselect2F()
-	                   		 #@Tselect2Body("priority" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
+	                   		 #@Tselect2Body("priority" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
 	                    	#end                
                 #end
    		#end 
