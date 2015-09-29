@@ -15,6 +15,7 @@ import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class TaskAction extends BaseController {
     private ProjectService projectService;
 
     @RequestMapping("index")
-    public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, Model model) {
+    public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model) {
         List<Project> list = projectService.findList();
         Project selProject = new Project();
         if (list == null || list.isEmpty()) {
@@ -57,8 +58,10 @@ public class TaskAction extends BaseController {
                 }
             }
         }
-        model.addAttribute("selProject", selProject);
-        model.addAttribute("projectList", list);
+        //model.addAttribute("selProject", selProject);
+        //model.addAttribute("projectList", list);
+        request.getSession().setAttribute("selProject", selProject);
+        request.getSession().setAttribute("projectList", list);
         return "project/task/index.page";
     }
 

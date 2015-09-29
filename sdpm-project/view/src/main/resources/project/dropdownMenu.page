@@ -1,6 +1,8 @@
 #@navSelect2("sleProject" "sleProject")
     #@navSelect2Nav()
-        ${selProject.projectName}
+        #if(selProject)
+            ${selProject.projectName}
+        #end
     <span class="caret"></span>
     #end
     #@navSelect2Body()
@@ -13,19 +15,19 @@
     ##            <option value="1">我是网金社</option>
     ##            <option value="2">我是呀开会11</option>
     ##            <option value="3">项其他项目</option>
-        </optgroup>
-        #end
-        #@navSelect2Fix()
-        <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page">#buttonIcon(iconClass="icon-plus-sign")
-            添加项目 </a>
-        #end
-        #@dialog("myModal")
-            #@dialogHeader()对话框标题#end
-            #@dialogBody()<p>对话框内容…</p>#end
-            #@dialogFooter()
-            #end
+    </optgroup>
+    #end
+    #@navSelect2Fix()
+    <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page">#buttonIcon(iconClass="icon-plus-sign")
+        添加项目 </a>
+    #end
+    #@dialog("myModal")
+        #@dialogHeader()对话框标题#end
+        #@dialogBody()<p>对话框内容…</p>#end
+        #@dialogFooter()
         #end
     #end
+#end
 #end
 <script type="text/javascript">
     $(function () {
