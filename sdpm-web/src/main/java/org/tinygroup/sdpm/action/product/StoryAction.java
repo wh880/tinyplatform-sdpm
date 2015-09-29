@@ -23,6 +23,7 @@ import java.util.List;
 public class StoryAction {
     @Autowired
     private StoryService storyService;
+   
     @RequestMapping("")
     public String storyAction(ProductStory story, String groupOperate, Model model, HttpServletRequest request, HttpServletResponse response){
         String queryString = request.getQueryString();
@@ -31,6 +32,26 @@ public class StoryAction {
         }
         return "product/page/project/togglebox.page";
     }
+    
+    @RequestMapping("save")
+    public String save(ProductStory productStory){
+    	
+    	storyService.addStory(productStory);
+    	return "redirect:" + "product/story/search";
+    }
+    
+    public String update(ProductStory productStory){
+    	
+    	storyService.updateStory(productStory);
+    	return "redirect:" + "product/story/search";
+    }
+    
+    public String updateBatch(List<ProductStory> stories){
+    	
+    	storyService.updateBatchStory(stories);
+    	return "";
+    }
+    
     @RequestMapping("/search")
     public String storySearchAction(int page, int pagesize, ProductStory story, String choose, String groupOperate, SearchInfos searchInfos, String order, String ordertype, Model model, HttpServletRequest request){
         Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
