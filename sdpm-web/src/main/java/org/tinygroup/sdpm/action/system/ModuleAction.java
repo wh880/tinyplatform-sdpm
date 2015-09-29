@@ -39,7 +39,9 @@ public class ModuleAction extends BaseController{
 		return mapList;
 	}
 	@RequestMapping("list")
-	public String findModule(SystemModule systemModule,Model model){
+	public String findModule(String moduleType,Model model){
+		SystemModule systemModule= new SystemModule();
+		systemModule.setModuleType(moduleType);
 		List<SystemModule> list = moduleService.findModules(systemModule);
 		model.addAttribute("list", list);
 		return "/system/page/dictionaries/dict_list.page";
@@ -73,10 +75,11 @@ public class ModuleAction extends BaseController{
 	@RequestMapping("save")
 	public String saveModule(SystemModule systemModule,Model model){
 		if(systemModule.getModuleId()==null){
+			
 			moduleService.add(systemModule);
 		}
 		else{
-			moduleService.edit(systemModule);
+			moduleService.eidtNameAndTiele(systemModule);
 		}
 		return "redirect: list";
 	}

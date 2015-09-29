@@ -44,6 +44,7 @@
 ####          #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
 ####     #end		
 ###end
+###set(module?.moduleType="dict")
  #@tinyForm("thisform" TINY_CONTEXT_PATH+"/system/module/save" "post" {"class":""})
       <input type="hidden" name="moduleId" value="${module?.moduleId}"/>
        #@gridSysRow()
