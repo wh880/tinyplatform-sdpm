@@ -39,6 +39,7 @@ public class ProductAction  extends BaseController{
 		}
 		return "redirect:/product/story?"+"productId="+list.get(0).getProductId()+"&choose=1"+request.getQueryString()==null?"":("&"+request.getQueryString());
 	}	
+	
 	@RequestMapping("/update")
 	public String update(Product product){
 

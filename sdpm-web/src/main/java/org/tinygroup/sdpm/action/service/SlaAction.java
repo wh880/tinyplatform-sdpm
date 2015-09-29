@@ -31,7 +31,7 @@ public class SlaAction extends BaseController {
     @RequestMapping("/save")
     public String save(ServiceSla sla, Model model) {
         if (sla.getSlaId() == null) {
-            slaService.addSla(sla);
+            sla = slaService.addSla(sla);
         } else {
             slaService.updateSla(sla);
         }

@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.action.quality;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +28,7 @@ public class TestCaseAction extends BaseController {
 		return "testManagement/page/cases.page";
 	}
 	
-	@RequestMapping("findPager")
+	@RequestMapping("/findPager")
 	public String findPager(Integer start,Integer limit,String order,String ordertype,QualityTestCase testcase,Model model){
 		boolean asc = true;		
 		if("desc".equals(ordertype)){
@@ -37,12 +39,12 @@ public class TestCaseAction extends BaseController {
 		return "testManagement/data/BugData.pagelet";
 	}
 	
-	@RequestMapping("add")
+	@RequestMapping("/add")
 	public String add(){
 		return "testManagement/page/proposecase.page";
 	}
 	
-	@RequestMapping(value = "save",method = RequestMethod.POST)
+	@RequestMapping(value = "/save",method = RequestMethod.POST)
 	public String save(QualityTestCase testcase,Model model){
 		if(testcase.getCaseId() == null){
 			testCaseService.addTestCase(testcase);
@@ -53,6 +55,43 @@ public class TestCaseAction extends BaseController {
 		return "redirect:"+"quality/testcase";
 	}
 	
+	@RequestMapping(value = "/batchSave",method = RequestMethod.POST)
+	public String batchSave(List<QualityTestCase> testcases,Model model){
+		testCaseService.batchUpdateTestCase(testcases);
+		model.addAttribute("testcases",testcases);
+		return "redirect:"+"quality/testcase";
+	}
 	
-
+	@RequestMapping("/execution")
+	public String execution(){
+		return "/testManagement/page/tabledemo/execution.pagelet";
+	}
+	
+	//预留，需要新增一个页面
+	@RequestMapping("/batchExecution")
+	public String batchExecution(){
+		return "";
+	}
+	
+	@RequestMapping("/result")
+	public String result(){
+		return "/testManagement/page/tabledemo/result.pagelet";
+	}
+	
+	@RequestMapping("/edit")
+	public String edit(){
+		return "/testManagement/page/tabledemo/editioncase.page";
+	}	
+	
+	@RequestMapping("/delete")
+	public String delete(Integer testCaseId,Model model){
+		testCaseService.deleteById(testCaseId);
+		return "redirect:"+"quality/testcase";
+	}
+	
+	@RequestMapping("/batchDelete")
+	public String batchDelete(List<QualityTestCase> testcases,Model model){
+		testCaseService.batchDeleteTestCase(testcases);
+		return "redirect"+"quality/testcase";
+	}
 }
