@@ -87,7 +87,7 @@
 #@settoggleLeftBody("treeLeftbox")
 #@zTreeList(call("link","/system/module/tree?moduleType=story&moduleRoot=1"))
 #setzTreeValMap({"id":"moduleId","name":"truename","pid":"moduleParent"}) ##key值为固定
-#zTreeSetLinkUrl("http://127.0.0.1:8080/tinyuiweb/mytree.page?id=" )
+#zTreeSetLinkUrl("http://127.0.0.1:8080/tinyuiweb/mytree.page" )
 #zTreeSetAddUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
 #zTreeSetEditUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
 #zTreeSetDelUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")

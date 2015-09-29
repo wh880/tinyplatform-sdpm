@@ -43,6 +43,12 @@ public interface ModuleService {
 	  * @return
 	  */
 	 SystemModule add(SystemModule systemModule);
+	 /**
+	  * 编辑title ang name
+	  * @param systemModule
+	  * @return
+	  */
+	 SystemModule eidtNameAndTiele(SystemModule systemModule);
 	
 	 
 	 

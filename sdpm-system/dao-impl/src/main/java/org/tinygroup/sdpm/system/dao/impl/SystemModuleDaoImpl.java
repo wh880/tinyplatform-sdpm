@@ -91,6 +91,20 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
 			}
 		});
 	}
+	public int editNameAndTitle(SystemModule systemModule) {
+		if(systemModule == null || systemModule.getModuleId() == null){
+			return 0;
+		}
+		return getDslTemplate().update(systemModule, new UpdateGenerateCallback<SystemModule>() {
+			public Update generate(SystemModule t) {
+				Update update = update(SYSTEM_MODULETABLE).set(
+					SYSTEM_MODULETABLE.MODULE_NAME.value(t.getModuleName()),
+					SYSTEM_MODULETABLE.MODULE_TITLE.value(t.getModuleTitle())).where(
+					SYSTEM_MODULETABLE.MODULE_ID.eq(t.getModuleId()));
+				return update;
+			}
+		});
+	}
 
 	public int deleteByKey(Integer pk){
 		if(pk == null){

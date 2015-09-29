@@ -45,12 +45,13 @@ public class StoryAction {
     	return "redirect:" + "/product/page/project/togglebox.page";
     }
     
+    @RequestMapping("update")
     public String update(ProductStory productStory){
     	
     	storyService.updateStory(productStory);
     	return "redirect:" + "/product/page/project/togglebox.page";
     }
-    
+    @RequestMapping("updateBatch")
     public String updateBatch(List<ProductStory> stories){
     	
     	storyService.updateBatchStory(stories);
@@ -61,10 +62,8 @@ public class StoryAction {
     public String find(Integer storyId,Model model){
     	
     	ProductStory productStory = storyService.findStory(storyId);
-    	ProductStorySpec productStorySpec = storySpecService.findStorySpec(storyId);
     	model.addAttribute("story", productStory);
-    	model.addAttribute("storySpec", productStorySpec);
-    	return "/product/page/tabledemo/demand-edit.page";
+    	return "/product/page/tabledemo/editbaseinfo.pagelet";
     }
     
     @RequestMapping("/search")

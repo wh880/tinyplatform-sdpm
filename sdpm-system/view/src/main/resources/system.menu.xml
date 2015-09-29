@@ -13,9 +13,9 @@
               isShow="1"></menu> -->
     </menu>
     
-    <menu id="dictionaries" parent-id="mysystem" name="数据字典" href="/system/page/dictionaries/dict_list.page" icon="" sort="200"
+    <menu id="dictionaries" parent-id="mysystem" name="数据字典" href="/system/module/list?moduleType=dict" icon="" sort="200"
           isShow="1">
-        <menu id="dictionary-type" parent-id="dictionaries" name="字典类型管理" href="/system/module/list" icon="" sort="200" isShow="1">
+        <menu id="dictionary-type" parent-id="dictionaries" name="字典类型管理" href="/system/module/list?moduleType=dict" icon="" sort="200" isShow="1">
              <menu id="dict-view" parent-id="dictionary-type" name="查看" href="/system/module/view" icon="icon-eye-open" sort="300" isShow="1" scope="dict-op"></menu>
         	 <menu id="dict-edit" parent-id="dictionary-type" name="编辑" href="/system/module/find" icon="icon-edit" sort="200" isShow="1" scope="dict-op"></menu>
         	 <menu id="dict-del" parent-id="dictionary-type" name="删除" href="/system/module/delete" icon="icon-trash" sort="100" isShow="1" scope="dict-op"></menu>
