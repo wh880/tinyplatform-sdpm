@@ -1,12 +1,14 @@
-
+#@tinyForm("this--form" TINY_CONTEXT_PATH+"/document/edit-doclib/save" "post" {"class":"edit"})
+<input type="hidden" name="docLibId" value="${doclib?.docLibId}"/>
 #@colLabel()#end
 <div class="col-8">
 #@div(divClass="col-8")
 	
-	#tinyInput("text" "username" ""{"style":"height:29px","placeholder":"产品文档库","id":"username","class":"input-text"})
+	#tinyInput("text" "docLibId" doclib?.docLibName {"style":"height:29px","placeholder":"产品文档库","id":"docLibId","class":"input-text"})
 	
 #end
 <div class="col-3">
 <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
 </div>
 </div>
+#end

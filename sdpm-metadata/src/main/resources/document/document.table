@@ -12,6 +12,7 @@
     <table-field standard-field-id="b4eafda448574c2f8a419c484c97def2" primary="false" unique="false" not-null="false" id="doc_type" auto-increase="false"/>
     <table-field standard-field-id="09a6fd6e09ef40e0b3b387aebe3ab8e7" primary="false" unique="false" not-null="false" id="doc_content" auto-increase="false"/>
     <table-field standard-field-id="cc191e36888f4414938be77d84babd0e" primary="false" unique="false" not-null="false" id="doc_url" auto-increase="false"/>
+    <table-field standard-field-id="7190a6bc86514e0e8941b7fcddb9d8a2" primary="false" unique="false" not-null="false" id="doc_attach" auto-increase="false"/>
     <table-field standard-field-id="b2dad0bf75e34c4abed7b3d9b1af4896" primary="false" unique="false" not-null="false" id="doc_views" auto-increase="false"/>
     <table-field standard-field-id="334e1412adb4444dad2e951a1f167453" primary="false" unique="false" not-null="false" id="doc_added_by" auto-increase="false"/>
     <table-field standard-field-id="389533862bbd4507a77bda520ddde316" primary="false" unique="false" not-null="false" id="doc_added_date" auto-increase="false"/>

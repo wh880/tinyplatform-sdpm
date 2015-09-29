@@ -106,6 +106,13 @@ public class Doc implements Serializable{
 	 * 文档url
 	 */
 	private String docUrl;
+	
+	/** 
+	 * 文档附件
+	 * 
+	 * 文档附件
+	 */
+	private String docAttach;
 
 	/** 
 	 * DOC查阅次数
@@ -284,6 +291,14 @@ public class Doc implements Serializable{
 
 	public String getDocDeleted(){
 		return docDeleted;
+	}
+
+	public String getDocAttach() {
+		return docAttach;
+	}
+
+	public void setDocAttach(String docAttach) {
+		this.docAttach = docAttach;
 	}
 
 }

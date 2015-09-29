@@ -5,14 +5,14 @@
 #import("/org/tinygroup/fold/components/fold.component")
 <style> </style>
 #set(name="documentDocu")
-#set(abstract="这个摘要很好看啊，内容很精彩啊！",keywords="关键字 精彩 好看",tach="good.jpg")
+
 #include("doc-tab.page")
 #@div()
 	#@p(pClass="title_sty")
 		<span class="f"> 版本名称</span>
 		<span class="r">
 					
-			<a href="${TINY_CONTEXT_PATH}/document/table-edit.page" title="编辑">
+			<a href="${TINY_CONTEXT_PATH}/document/doc-edit/${doc?.docId}" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp
 				#@delItemsdpm("" 3 "")
         	        	#buttonIcon(iconClass="icon-remove")#end&nbsp
@@ -20,28 +20,27 @@
 				#buttonIcon(iconClass="icon-level-up")</a>
 		</span>
 	#end
-#@tinyForm("thisform" "" "" {"class":"test"})
 <div style="width:70%;float:left" class="pageleftpart">
 	#@div(divClass="infoContent")
         <p class="titleName">文档摘要</p>
-        ${abstract}
+        ${doc?.docDigest}
     #end
     #@div(divClass="infoContent")
         <p class="titleName">关键字</p>
-        ${keywords}
+        ${doc?.docKeywords}
     #end
     #@div(divClass="infoContent")
         <p class="titleName">附件</p>
-        ${tach}
+        ${doc?.docUrl}
     #end
     #@div(divClass="infoContent")
         <p class="titleName">历史记录</p>
         #include("../data/historyRecord.page")
     #end
     <center>		
-			<a href="${TINY_CONTEXT_PATH}/document/table-edit.page" title="编辑">
+			<a href="${TINY_CONTEXT_PATH}/document/doc-edit/${doc?.docId}" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			#@delItemsdpm("" 3 "")
+			#@delItemsdpm("" 3 "fff")
         	        	#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp;
 			<a href="${TINY_CONTEXT_PATH}/document/document.page" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
@@ -52,7 +51,7 @@
  ##    #include("basic-info.page")
 </div>
 #end
-#end		
+		
 ##遗漏的弹出框
 <script type="text/javascript">
 
