@@ -1,5 +1,5 @@
 ##import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
-#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+#!set(activeMenuId=currentPageId)
 <style>
 .infoContent{font-size:12px;margin:0 4px 6px; padding:6px; border:#eee 1px solid;}
 .infoContent .titleName{margin-top:-15px;}

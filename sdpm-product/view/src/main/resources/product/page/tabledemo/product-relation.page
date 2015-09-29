@@ -1,5 +1,5 @@
 #import("/org/tinygroup/form/components/form.component")
-#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+#!set(activeMenuId=currentPageId)
 <style>
 	.infoContent{margin:18px 4px 10px 5px; padding:6px; border:#eee 1px solid;}
 	.infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:13px;}
