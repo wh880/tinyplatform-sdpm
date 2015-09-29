@@ -212,6 +212,33 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
 		return null;
 	}
 
+	@LogMethod("editfinish")
+	public Integer editfinish(ProjectTask projectTask) {
+		if (projectTask == null || projectTask.getTaskId() == null) {
+			return 0;
+		}
+		Update update = update(PROJECT_TASKTABLE).set(
+				PROJECT_TASKTABLE.TASK_FINISHED_BY.value(projectTask.getTaskFinishedBy()),
+				PROJECT_TASKTABLE.TASK_FINISHED_DATE.value(projectTask.getTaskFinishedDate()),
+				PROJECT_TASKTABLE.TASK_STATUS.value(projectTask.getTaskStatus()),
+				PROJECT_TASKTABLE.TASK_CONSUMED.value(projectTask.getTaskConsumed())).where(PROJECT_TASKTABLE.TASK_ID.eq(projectTask.getTaskId()));
+		getDslSession().execute(update);
+		return null;
+	}
+	@LogMethod("editstart")
+	public Integer editstart(ProjectTask projectTask) {
+		if (projectTask == null || projectTask.getTaskId() == null) {
+			return 0;
+		}
+		Update update = update(PROJECT_TASKTABLE).set(
+				PROJECT_TASKTABLE.TASK_REAL_STARTED.value(projectTask.getTaskRealStarted()),
+				PROJECT_TASKTABLE.TASK_LEFT.value(projectTask.getTaskLeft()),
+				PROJECT_TASKTABLE.TASK_STATUS.value(projectTask.getTaskStatus()),
+				PROJECT_TASKTABLE.TASK_CONSUMED.value(projectTask.getTaskConsumed())).where(PROJECT_TASKTABLE.TASK_ID.eq(projectTask.getTaskId()));
+		getDslSession().execute(update);
+		return null;
+	}
+
 	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk) {
 		if (pk == null) {

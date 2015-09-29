@@ -1,5 +1,5 @@
 #import("/system/page/dictionaries/components/form.component")
-#@formHorizoontalValidate(TINY_CONTEXT_PATH+"/system/dict/save2" "dict_edit")
+#@formHorizoontalValidate(TINY_CONTEXT_PATH+"/system/module/save" "dict_edit")
     <input type="hidden" name="dictId" value="${dict?.dictId}"/>
 	#@rowCol("col-3" "代码：" "col-5" "*")
 		#@inputTextx("dictKey" dict?.dictKey "*" "代码不能为空")#end

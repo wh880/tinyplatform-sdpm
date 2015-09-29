@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.service.ReleaseService;
 import org.tinygroup.tinysqldsl.Pager;
@@ -22,7 +23,7 @@ import org.tinygroup.tinysqldsl.Pager;
  */
 @Controller
 @RequestMapping("product/release")
-public class ReleaseAction {
+public class ReleaseAction extends BaseController{
 
 	@Autowired
 	private ReleaseService releaseService;
@@ -67,7 +68,7 @@ public class ReleaseAction {
 		Pager<ProductRelease> pagerProductRelease = releaseService.findReleasePager(page, pagesize, release, order, ordertype);
 		
 		model.addAttribute("productRelease",pagerProductRelease);
-		return "/product/data/allproduct-plan.pagelet";
+		return "/product/data/allproduct-release.pagelet";
 		}
 }
 

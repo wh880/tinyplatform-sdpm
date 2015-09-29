@@ -1,4 +1,4 @@
-<tables id="3cebde70fa5346d0a5a9d7b575e05478" package-name="org.tinygroup.alm.quality">
+<tables id="3cebde70fa5346d0a5a9d7b575e05478">
   <table id="bcd99e5662f846938519f9f1ea6de27c" name="quality_bug" title="缺陷表" schema="" package-name="">
     <description></description>
     <table-field standard-field-id="6c98afc28df84e42bc25ff10b754c588" primary="true" unique="true" not-null="true" id="bug_id" auto-increase="true"/>

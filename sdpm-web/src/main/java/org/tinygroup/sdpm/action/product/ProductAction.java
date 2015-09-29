@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.product;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.spi.http.HttpContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.weblayer.WebContext;
 
 /**
  * 产品控制器
@@ -28,14 +30,16 @@ public class ProductAction  extends BaseController{
 	private ProductService productService;
 
 	@RequestMapping("")
-	public String productAction(HttpServletRequest request){
+	public String productAction(HttpServletRequest request, WebContext webContext){
 		List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
+		String oldUrl = webContext.get("oldUrl");
 		if(list == null){
 			list = productService.findProductList(new Product(),"productId","desc");
 			request.getSession().setAttribute("productList",list);
 		}
-		return "redirect:/product/story?"+"productId="+list.get(0).getProductId()+"&choose=1&"+request.getQueryString();
+		return "redirect:/product/story?"+"productId="+list.get(0).getProductId()+"&choose=1"+request.getQueryString()==null?"":("&"+request.getQueryString());
 	}	
+	
 	@RequestMapping("/update")
 	public String update(Product product){
 
