@@ -91,23 +91,29 @@
                     #end
                 #end
                 #foreach(var:clientUsers)
+                ##                    <input type="hidden" name="clientId" value="${clientUser?.clientId}"/>
                     <tr>
-                        <td>${var.userAccount}</td>
-                        <td>${var.userPost}</td>
-                        <td>${var.userPhone}</td>
+                        <td>${var?.userAccount}</td>
+                        <td>${var?.userPost}</td>
+                        <td>${var?.userPhone}</td>
                         <td>
-
+                            #set(m=menuManager.getMenu("linkman-edit"))
+                            #if(m)
+                                #@aModal(
+                                    "#myModal1" m.name "500" "200" m.icon m.href+"?id="+var?.id)
+                                #end
+                            #end
 
                             #set(m1=menuManager.getMenu("linkman-new"))
                             #if(m1)
                                 #@aModal(
-                                    "#myModal1" m1.name "500" "200" m1.icon TINY_CONTEXT_PATH+m1.href)
+                                    "#myModal1" m1.name "500" "200" m1.icon m1.href+"?clientId="+var?.clientId)
                                 #end
                             #end
 
                             #set(m2=menuManager.getMenu("linkman-del"))
                             #if(m2)
-                                #@tinyTableItemRemove(TINY_CONTEXT_PATH+m2.href var.id)<i class=${m2.icon}></i>#end
+                                #@tinyTableItemRemove(TINY_CONTEXT_PATH+m2.href var?.id)<i class=${m2.icon}></i>#end
                             #end
                         </td>
                     </tr>
@@ -119,4 +125,33 @@
 #end
 #@simpleModal("myModal1" "")#end
 
+<script>
+    $(function () {
+        $(".infoContent").on("click", ".Item-Remove", function () {
+            var that = this;
+            layer.confirm('确定要删除该记录？', function (index) {
+                $.ajax({
+                    url: $(that).attr("data-url"),
+                    data: {id: $(that).attr("data-id")},
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "success" || data.status == "y") {
+                            layer.msg(data.info, 2, -1);
+                            setTimeout(function () {
+                                layer.closeAll();
+                                window.location.href = window.location.href;
+                            }, 300);
+                        } else {
+                            var msg = data.info ? data.info : "系统出错";
+                            layer.msg(msg);
+                        }
+                    },
+                    error: function () {
+                        layer.msg("系统出错");
+                    }
+                });
 
+            });
+        });
+    })
+</script>
