@@ -111,7 +111,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		return getDslTemplate().getByKey(pk, ProductStorySpec.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(PRODUCT_STORY_SPECTABLE).where(PRODUCT_STORY_SPECTABLE.COMPANY_ID.eq(t));
+			return selectFrom(PRODUCT_STORY_SPECTABLE).where(PRODUCT_STORY_SPECTABLE.STORY_ID.eq(t));
 			}
 		});
 	}
