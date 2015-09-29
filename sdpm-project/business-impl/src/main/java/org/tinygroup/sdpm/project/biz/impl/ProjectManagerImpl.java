@@ -44,6 +44,8 @@ public class ProjectManagerImpl implements ProjectManager {
             p.setPercent(projectDao.getTime(p).getPercent());
         }
         return projectPager;
+        //用于重现错误
+        //return projectDao.tquerytAll(start, limit, new Project());
     }
 
     public Project add(Project project) {

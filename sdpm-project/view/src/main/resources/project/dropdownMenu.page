@@ -1,16 +1,18 @@
 #@navSelect2("sleProject" "sleProject")
-    #@navSelect2Nav()#if(selItem)
-        ${selItem}
-    #else
-    我是网金社
-    #end<span class="caret"></span>#end
+    #@navSelect2Nav()
+        ${selProject.projectName}
+    <span class="caret"></span>
+    #end
     #@navSelect2Body()
         #@navSelect2Data()
         <option value=""></option>
         <optgroup label="项目">
-            <option value="1">我是网金社</option>
-            <option value="2">我是呀开会11</option>
-            <option value="3">项其他项目</option>
+            #for(p:projectList)
+            <option value="${p?.projectId}">${p?.projectName}</option>
+        #end
+    ##            <option value="1">我是网金社</option>
+    ##            <option value="2">我是呀开会11</option>
+    ##            <option value="3">项其他项目</option>
         </optgroup>
         #end
         #@navSelect2Fix()
@@ -28,9 +30,13 @@
 <script type="text/javascript">
     $(function () {
         $("#sleProject-select").on("change", function (e) {
-            window.location.href = "${TINY_CONTEXT_PATH}/project/task/index.page?selItem="
-                    + $(this).find("option:selected").text() + "&itemid=" + $(this).val() + "&stat=" + $();
-            //val() 选择选择项的value
+        ##            window.location.href = "${TINY_CONTEXT_PATH}/project/task/index.page?selItem="
+        ##                    + $(this).find("option:selected").text() + "&itemid=" + $(this).val() + "&stat=" + $();
+        ##            //val() 选择选择项的value
+            window.location.href = "${TINY_CONTEXT_PATH}/projectmanage/select?projectId="
+                    + $(this).find("option:selected").val()
+                    + "&oldUrl=${tinyRequestRequestURI.substring(9)}";
+            console.log("ggg");
         });
     });
 </script>
