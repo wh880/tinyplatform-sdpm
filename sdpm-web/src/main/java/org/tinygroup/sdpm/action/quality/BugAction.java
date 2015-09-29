@@ -26,8 +26,9 @@ public class BugAction extends BaseController {
 	private BugService bugService;
 		
 	@RequestMapping("")
-	public String form(String get,Model model){
-		
+	public String form(String get,QualityBug bug,Model model){
+		List<QualityBug> bugList = bugService.findBugList(bug);
+		model.addAttribute("bugList", bugList);
 		model.addAttribute("get", get);
 		return "/testManagement/page/Bug.page";
 	}
@@ -52,6 +53,11 @@ public class BugAction extends BaseController {
 		Pager<QualityBug> bugpager = bugService.findBugListPager(start, limit, bug, order, asc);
 		model.addAttribute("bugpager",bugpager);
 		return "/testManagement/data/BugData.pagelet";
+	}
+	
+	@RequestMapping("/reportForm")
+	public String reportForm(){
+		return "/testManagement/page/reportform.page";
 	}
 	
 	@RequestMapping("/makesure")
@@ -100,6 +106,21 @@ public class BugAction extends BaseController {
 	@RequestMapping("/add")
 	public String add(){
 		return "/testManagement/page/proposeBug.page";
+	}
+	
+	@RequestMapping("/copy")
+	public String copy(Integer bugId,Model model){
+		QualityBug bug = new QualityBug();
+		bug = bugService.findById(bugId);
+		model.addAttribute("copy",bug);
+		return "/testManagement/page/copyBug.page";
+	}
+	
+	@RequestMapping(value = "/copySave",method = RequestMethod.POST)
+	public String copySave(QualityBug bug,Model model){
+		bug.setBugOpenedDate(new Date());
+		bugService.addBug(bug);
+		return "redirect:"+"/quality/bug"; 
 	}
 	
 	@RequestMapping(value = "/save",method = RequestMethod.POST)

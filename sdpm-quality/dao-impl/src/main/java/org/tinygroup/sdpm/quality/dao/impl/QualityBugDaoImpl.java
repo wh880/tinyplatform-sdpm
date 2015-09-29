@@ -175,6 +175,15 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 			}
 		});
 	}
+	
+/*	public Integer editMakeSure(QualityBug bug){
+		if(bug == null || bug.getBugId() == null){
+			return 0;
+		}
+		Update update = update(QUALITY_BUGTABLE).set(
+				QUALITY_BUGTABLE.BUG)
+				getDslSession()
+	}*/
 
 	public int deleteByKey(Integer pk){
 		if(pk == null){

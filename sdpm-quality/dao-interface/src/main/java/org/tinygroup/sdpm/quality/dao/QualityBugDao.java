@@ -21,5 +21,10 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 
 public interface QualityBugDao extends BaseDao<QualityBug,Integer> {
-
+	
+	/*Integer editMakeSure(QualityBug bug);
+	Integer editAssign(QualityBug bug);
+	Integer editSolution(QualityBug bug);
+	Integer editClose(QualityBug bug);
+*/
 }
