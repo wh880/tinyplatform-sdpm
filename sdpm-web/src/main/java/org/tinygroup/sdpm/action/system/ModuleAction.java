@@ -21,12 +21,6 @@ import com.google.common.collect.Maps;
 public class ModuleAction extends BaseController{
 	@Autowired
 	private ModuleService moduleService;
-//	@RequestMapping("List")
-//	public String listModule(Integer root,Model model){
-//		List<SystemModule> list = moduleService.findByRoot(root);
-//		model.addAttribute("list", list);
-//		return "syys";
-//	}
 	@ResponseBody
 	@RequestMapping("tree")
 	public List<Map<String,Object>> ajax(SystemModule systemModule,HttpServletResponse response){
@@ -58,7 +52,7 @@ public class ModuleAction extends BaseController{
 		if(moduleId!=null){
 			moduleService.deleteById(moduleId);
 		}
-		return "redirect: list";
+		return "redirect: list?moduleType=dict";
 	}
 	@RequestMapping("find")
 	public String find(Integer moduleId,Model model){
@@ -68,6 +62,7 @@ public class ModuleAction extends BaseController{
 		}
 		else{
 			SystemModule module = new SystemModule();
+			moduleService.findModules(module);
 			model.addAttribute("module", module);
 		}
 		return "/system/page/dictionaries/dict_edit.pagelet";
@@ -75,13 +70,18 @@ public class ModuleAction extends BaseController{
 	@RequestMapping("save")
 	public String saveModule(SystemModule systemModule,Model model){
 		if(systemModule.getModuleId()==null){
+			systemModule.setModuleRoot(0);
+			systemModule.setModuleGrade(0);
+			systemModule.setModuleOrder(0);
+			systemModule.setModulePath("1,2,3");
+			systemModule.setModuleOwner("dict");
 			
 			moduleService.add(systemModule);
 		}
 		else{
 			moduleService.eidtNameAndTiele(systemModule);
 		}
-		return "redirect: list";
+		return "redirect: list?moduleType=dict";
 	}
 
 	private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, int parent){
