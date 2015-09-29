@@ -14,9 +14,9 @@
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${var}#end
 	#@td()产品${page}#end
-	#@td()12#end
-	#@td()121#end
-	#@td()12#end
+	#@td()你好23！#end
+	#@td()11#end
+	#@td()1#end
 	#@td()12#end
 	#@td()12#end
 	#@td()12#end

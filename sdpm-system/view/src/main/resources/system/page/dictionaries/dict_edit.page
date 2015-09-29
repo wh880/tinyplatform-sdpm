@@ -45,8 +45,30 @@
 ####     #end		
 ###end
 ###set(module?.moduleType="dict")
- #@tinyForm("thisform" TINY_CONTEXT_PATH+"/system/module/save" "post" {"class":""})
+ #@tinyForm("dictEditform" TINY_CONTEXT_PATH+"/system/module/save" "post" {"class":""})
       <input type="hidden" name="moduleId" value="${module?.moduleId}"/>
+       <input type="hidden" name="moduleType" value="dict"/>
+       #@gridSysRow()
+        
+	     #@colLabel("col-4")父节点：#end
+	           #@gridSysCol(6)
+	               #@Tselect2F()
+	                    #@Tselect2Body("moduleParent" module?.moduleParent {"class":
+	                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                                    <option value="0">0</option>
+	                                    <option value="1">1</option>
+	                                    <option value="2">2</option>
+	                                    <option value="3">3</option>
+	                                    <option value="4">4</option>
+	                                    
+	                      #end
+	                   #@Tselect2Fix()
+	                     <a href="#" class="r">增加</a>
+	                     <a href="#">全部</a>
+	                                 #end
+	                                #end
+	              #end
+	        #end
        #@gridSysRow()
            #@colLabel("col-4")<span class="c-red">*</span>代码：#end
                #@gridSysCol(6)

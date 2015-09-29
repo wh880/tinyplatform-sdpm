@@ -20,9 +20,12 @@
 <p style="width:100%;float:left">
 ##        #@gridSysCol(8)
     #@div(divClass="infoContent")
-    <p class="titleName">阿里巴巴</p>
+    #*  <p class="titleName">阿里巴巴</p>*#
+    <p class="titleName">协议内容</p>
     ##        <div>
     ##            #@table("协议详情")
+        #foreach(var:slas)
+
         #@tbody()
             #@tr()
             <div class="text-c"><h4>支付宝出售协议</h4></div>
@@ -32,12 +35,16 @@
                     #@gridSysCol(2)#end
                     #@gridSysCol(8)
                         #@tr()
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议支付宝出售协议支付宝出售协议付宝出售协议</p>
+                        #*<p>&nbsp;&nbsp;&nbsp;&nbsp;支付宝出售协议</p>*#
+                        #* <p>&nbsp;&nbsp;&nbsp;&nbsp;${var.slaSpec}</p>*#
+                            #@th()协议具体内容为：#end
+                            #@td()${var.slaSpec}#end
                         #end
                     #end
                     #@gridSysCol(2)#end
                 #end
             #end
+        #end
         #end
     ##            #end
     ##        </div>

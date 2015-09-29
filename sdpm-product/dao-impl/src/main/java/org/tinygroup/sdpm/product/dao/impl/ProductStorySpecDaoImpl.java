@@ -27,7 +27,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -48,13 +48,15 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-@Repository
+
+@Component
 public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements ProductStorySpecDao {
 
 	public ProductStorySpec add(ProductStorySpec productStorySpec) {
 		return getDslTemplate().insertAndReturnKey(productStorySpec, new InsertGenerateCallback<ProductStorySpec>() {
 			public Insert generate(ProductStorySpec t) {
 				Insert insert = insertInto(PRODUCT_STORY_SPECTABLE).values(
+					PRODUCT_STORY_SPECTABLE.STORYSPEC_ID.value(t.getStoryspecId()),
 					PRODUCT_STORY_SPECTABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCT_STORY_SPECTABLE.STORY_ID.value(t.getStoryId()),
 					PRODUCT_STORY_SPECTABLE.STORY_VERSION.value(t.getStoryVersion()),
@@ -67,7 +69,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 	}
 
 	public int edit(ProductStorySpec productStorySpec) {
-		if(productStorySpec == null || productStorySpec.getCompanyId() == null){
+		if(productStorySpec == null || productStorySpec.getStoryspecId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(productStorySpec, new UpdateGenerateCallback<ProductStorySpec>() {
@@ -79,7 +81,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 					PRODUCT_STORY_SPECTABLE.STORY_TITLE.value(t.getStoryTitle()),
 					PRODUCT_STORY_SPECTABLE.STORY_SPEC.value(t.getStorySpec()),
 					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification())).where(
-					PRODUCT_STORY_SPECTABLE.COMPANY_ID.eq(t.getCompanyId()));
+					PRODUCT_STORY_SPECTABLE.STORYSPEC_ID.eq(t.getStoryspecId()));
 				return update;
 			}
 		});
@@ -91,7 +93,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		}
 		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
 			public Delete generate(Serializable pk) {
-				return delete(PRODUCT_STORY_SPECTABLE).where(PRODUCT_STORY_SPECTABLE.COMPANY_ID.eq(pk));
+				return delete(PRODUCT_STORY_SPECTABLE).where(PRODUCT_STORY_SPECTABLE.STORYSPEC_ID.eq(pk));
 			}
 		});
 	}
@@ -102,7 +104,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		}
 		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
 			public Delete generate(Serializable[] t) {
-				return delete(PRODUCT_STORY_SPECTABLE).where(PRODUCT_STORY_SPECTABLE.COMPANY_ID.in(t));
+				return delete(PRODUCT_STORY_SPECTABLE).where(PRODUCT_STORY_SPECTABLE.STORYSPEC_ID.in(t));
 		}
 		},pks);
 	}
@@ -111,7 +113,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		return getDslTemplate().getByKey(pk, ProductStorySpec.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(PRODUCT_STORY_SPECTABLE).where(PRODUCT_STORY_SPECTABLE.STORY_ID.eq(t));
+			return selectFrom(PRODUCT_STORY_SPECTABLE).where(PRODUCT_STORY_SPECTABLE.STORYSPEC_ID.eq(t));
 			}
 		});
 	}
@@ -193,7 +195,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 					PRODUCT_STORY_SPECTABLE.STORY_TITLE.value(new JdbcNamedParameter("storyTitle")),
 					PRODUCT_STORY_SPECTABLE.STORY_SPEC.value(new JdbcNamedParameter("storySpec")),
 					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(new JdbcNamedParameter("storyVerification"))).where(
-				PRODUCT_STORY_SPECTABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")));
+				PRODUCT_STORY_SPECTABLE.STORYSPEC_ID.eq(new JdbcNamedParameter("storyspecId")));
 			}
 		});
 	}
@@ -206,6 +208,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 
 			public Delete generate() {
 				return delete(PRODUCT_STORY_SPECTABLE).where(and(
+				PRODUCT_STORY_SPECTABLE.STORYSPEC_ID.eq(new JdbcNamedParameter("storyspecId")),
 				PRODUCT_STORY_SPECTABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")),
 				PRODUCT_STORY_SPECTABLE.STORY_ID.eq(new JdbcNamedParameter("storyId")),
 				PRODUCT_STORY_SPECTABLE.STORY_VERSION.eq(new JdbcNamedParameter("storyVersion")),

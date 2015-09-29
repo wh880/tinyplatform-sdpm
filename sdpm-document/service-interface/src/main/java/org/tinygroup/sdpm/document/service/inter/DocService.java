@@ -27,6 +27,7 @@ public interface DocService {
 	public List<Doc> findDocByDocClass(Doc doc);
 	//page
 	public Pager<Doc> findDocRetPager(int start,int limit ,Doc doc);
+	public Pager<Doclib> findDoclibRetPager(int start,int limit ,Doclib doclib);
 	//delete
 	public int deleteDocById(Integer id);
 	public int deleteDoclibById(Integer id);

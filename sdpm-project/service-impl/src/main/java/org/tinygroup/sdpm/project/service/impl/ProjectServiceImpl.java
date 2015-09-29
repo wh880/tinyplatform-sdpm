@@ -24,7 +24,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public List<Project> findList() {
-        return null;
+        return projectManager.findList();
     }
 
     public Project findByName(String projectName) {

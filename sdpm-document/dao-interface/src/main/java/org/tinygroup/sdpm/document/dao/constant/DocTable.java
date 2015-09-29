@@ -103,6 +103,13 @@ public class DocTable extends Table {
 	 * 文档url
 	 */
 	public final Column DOC_URL = new Column(this, "doc_url");
+	
+	/** 
+	 * 文档附件
+	 * 
+	 * 文档附件
+	 */
+	public final Column DOC_ATTACH = new Column(this, "doc_attach");
 
 	/** 
 	 * DOC查阅次数

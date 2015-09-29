@@ -16,35 +16,18 @@
 
 package org.tinygroup.sdpm.productLine.dao.impl;
 
+import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.*;
-import static org.tinygroup.tinysqldsl.Select.*;
-import static org.tinygroup.tinysqldsl.Insert.*;
-import static org.tinygroup.tinysqldsl.Delete.*;
-import static org.tinygroup.tinysqldsl.Update.*;
-
 import java.io.Serializable;
-
 import java.util.ArrayList;
-
 import java.util.List;
 
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.Pager;
+import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-	import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
-import org.tinygroup.sdpm.productLine.dao.ProductLineDao;
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -52,90 +35,96 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-
-
-@LogClass("productLine")
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.productLine.dao.ProductLineDao;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
+import org.tinygroup.tinysqldsl.Delete;
+import org.tinygroup.tinysqldsl.Insert;
+import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.Select;
+import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
+@Repository
 public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLineDao {
 
-	@LogMethod("add")
 	public ProductLine add(ProductLine productLine) {
 		return getDslTemplate().insertAndReturnKey(productLine, new InsertGenerateCallback<ProductLine>() {
 			public Insert generate(ProductLine t) {
-				Insert insert = insertInto(PRODUCTLINETABLE).values(
-					PRODUCTLINETABLE.PRODUCTLINE_ID.value(t.getProductLineId()),
-					PRODUCTLINETABLE.COMPANY_ID.value(t.getCompanyId()),
-					PRODUCTLINETABLE.DEPT_ID.value(t.getDeptId()),
-					PRODUCTLINETABLE.PRODUCTLINE_ROOT.value(t.getProductLineRoot()),
-					PRODUCTLINETABLE.PRODUCTLINE_PARENT.value(t.getProductLineParent()),
-					PRODUCTLINETABLE.PRODUCTLINE_NAME.value(t.getProductLineName()),
-					PRODUCTLINETABLE.PRODUCTLINE_CODE.value(t.getProductLineCode()),
-					PRODUCTLINETABLE.PRODUCTLINE_ORDER.value(t.getProductLineOrder()),
-					PRODUCTLINETABLE.PRODUCTLINE_SPEC.value(t.getProductLineSpec()),
-					PRODUCTLINETABLE.PRODUCTLINE_STATUS.value(t.getProductLineStatus()),
-					PRODUCTLINETABLE.PRODUCTLINE_OWNER.value(t.getProductLineOwner()),
-					PRODUCTLINETABLE.PRODUCTLINE_QUALITY_MANAGER.value(t.getProductLineQualityManager()),
-					PRODUCTLINETABLE.PRODUCTLINE_DELIVERY_MANAGER.value(t.getProductLineDeliveryManager()),
-					PRODUCTLINETABLE.ACL.value(t.getAcl()),
-					PRODUCTLINETABLE.PRODUCTLINE_WHITELIST.value(t.getProductLineWhiteList()),
-					PRODUCTLINETABLE.PRODUCTLINE_CREATEDBY.value(t.getProductLineCreatedBy()),
-					PRODUCTLINETABLE.PRODUCTLINE_CREATEDDATE.value(t.getProductLineCreatedDate()),
-					PRODUCTLINETABLE.DELETED.value(t.getDeleted()));
+				Insert insert = insertInto(PRODUCT_LINETABLE).values(
+					PRODUCT_LINETABLE.PRODUCT_LINE_ID.value(t.getProductLineId()),
+					PRODUCT_LINETABLE.COMPANY_ID.value(t.getCompanyId()),
+					PRODUCT_LINETABLE.DEPT_ID.value(t.getDeptId()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.value(t.getProductLineRoot()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_PARENT.value(t.getProductLineParent()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_NAME.value(t.getProductLineName()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CODE.value(t.getProductLineCode()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_ORDER.value(t.getProductLineOrder()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_SPEC.value(t.getProductLineSpec()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.value(t.getProductLineStatus()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.value(t.getProductLineOwner()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.value(t.getProductLineQualityManager()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.value(t.getProductLineDeliveryManager()),
+					PRODUCT_LINETABLE.ACL.value(t.getAcl()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.value(t.getProductLineWhiteList()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.value(t.getProductLineCreatedBy()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.value(t.getProductLineCreatedDate()),
+					PRODUCT_LINETABLE.DELETED.value(t.getDeleted()));
 				return insert;
 			}
 		});
 	}
-	
-	@LogMethod("edit")
+
 	public int edit(ProductLine productLine) {
 		if(productLine == null || productLine.getProductLineId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(productLine, new UpdateGenerateCallback<ProductLine>() {
 			public Update generate(ProductLine t) {
-				Update update = update(PRODUCTLINETABLE).set(
-					PRODUCTLINETABLE.COMPANY_ID.value(t.getCompanyId()),
-					PRODUCTLINETABLE.DEPT_ID.value(t.getDeptId()),
-					PRODUCTLINETABLE.PRODUCTLINE_ROOT.value(t.getProductLineRoot()),
-					PRODUCTLINETABLE.PRODUCTLINE_PARENT.value(t.getProductLineParent()),
-					PRODUCTLINETABLE.PRODUCTLINE_NAME.value(t.getProductLineName()),
-					PRODUCTLINETABLE.PRODUCTLINE_CODE.value(t.getProductLineCode()),
-					PRODUCTLINETABLE.PRODUCTLINE_ORDER.value(t.getProductLineOrder()),
-					PRODUCTLINETABLE.PRODUCTLINE_SPEC.value(t.getProductLineSpec()),
-					PRODUCTLINETABLE.PRODUCTLINE_STATUS.value(t.getProductLineStatus()),
-					PRODUCTLINETABLE.PRODUCTLINE_OWNER.value(t.getProductLineOwner()),
-					PRODUCTLINETABLE.PRODUCTLINE_QUALITY_MANAGER.value(t.getProductLineQualityManager()),
-					PRODUCTLINETABLE.PRODUCTLINE_DELIVERY_MANAGER.value(t.getProductLineDeliveryManager()),
-					PRODUCTLINETABLE.ACL.value(t.getAcl()),
-					PRODUCTLINETABLE.PRODUCTLINE_WHITELIST.value(t.getProductLineWhiteList()),
-					PRODUCTLINETABLE.PRODUCTLINE_CREATEDBY.value(t.getProductLineCreatedBy()),
-					PRODUCTLINETABLE.PRODUCTLINE_CREATEDDATE.value(t.getProductLineCreatedDate()),
-					PRODUCTLINETABLE.DELETED.value(t.getDeleted())).where(
-					PRODUCTLINETABLE.PRODUCTLINE_ID.eq(t.getProductLineId()));
+				Update update = update(PRODUCT_LINETABLE).set(
+					PRODUCT_LINETABLE.COMPANY_ID.value(t.getCompanyId()),
+					PRODUCT_LINETABLE.DEPT_ID.value(t.getDeptId()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.value(t.getProductLineRoot()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_PARENT.value(t.getProductLineParent()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_NAME.value(t.getProductLineName()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CODE.value(t.getProductLineCode()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_ORDER.value(t.getProductLineOrder()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_SPEC.value(t.getProductLineSpec()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.value(t.getProductLineStatus()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.value(t.getProductLineOwner()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.value(t.getProductLineQualityManager()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.value(t.getProductLineDeliveryManager()),
+					PRODUCT_LINETABLE.ACL.value(t.getAcl()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.value(t.getProductLineWhiteList()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.value(t.getProductLineCreatedBy()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.value(t.getProductLineCreatedDate()),
+					PRODUCT_LINETABLE.DELETED.value(t.getDeleted())).where(
+					PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(t.getProductLineId()));
 				return update;
 			}
 		});
 	}
-	
-	@LogMethod("deleteByKey")
+
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
 		}
 		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
 			public Delete generate(Serializable pk) {
-				return delete(PRODUCTLINETABLE).where(PRODUCTLINETABLE.PRODUCTLINE_ID.eq(pk));
+				return delete(PRODUCT_LINETABLE).where(PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(pk));
 			}
 		});
 	}
 
-	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
 		}
 		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
 			public Delete generate(Serializable[] t) {
-				return delete(PRODUCTLINETABLE).where(PRODUCTLINETABLE.PRODUCTLINE_ID.in(t));
+				return delete(PRODUCT_LINETABLE).where(PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(t));
 		}
 		},pks);
 	}
@@ -144,12 +133,12 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		return getDslTemplate().getByKey(pk, ProductLine.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(PRODUCTLINETABLE).where(PRODUCTLINETABLE.PRODUCTLINE_ID.eq(t));
+			return selectFrom(PRODUCT_LINETABLE).where(PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(t));
 			}
 		});
 	}
 
-	public List<ProductLine> query(ProductLine productLine ,final OrderBy... orderBies) {
+	public List<ProductLine> query(ProductLine productLine ,final OrderBy... orderArgs) {
 		if(productLine==null){
 			productLine=new ProductLine();
 		}
@@ -157,57 +146,57 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(ProductLine t) {
-				Select select = selectFrom(PRODUCTLINETABLE).where(
+				Select select = selectFrom(PRODUCT_LINETABLE).where(
 				and(
-					PRODUCTLINETABLE.COMPANY_ID.eq(t.getCompanyId()),
-					PRODUCTLINETABLE.DEPT_ID.eq(t.getDeptId()),
-					PRODUCTLINETABLE.PRODUCTLINE_ROOT.eq(t.getProductLineRoot()),
-					PRODUCTLINETABLE.PRODUCTLINE_PARENT.eq(t.getProductLineParent()),
-					PRODUCTLINETABLE.PRODUCTLINE_NAME.eq(t.getProductLineName()),
-					PRODUCTLINETABLE.PRODUCTLINE_CODE.eq(t.getProductLineCode()),
-					PRODUCTLINETABLE.PRODUCTLINE_ORDER.eq(t.getProductLineOrder()),
-					PRODUCTLINETABLE.PRODUCTLINE_SPEC.eq(t.getProductLineSpec()),
-					PRODUCTLINETABLE.PRODUCTLINE_STATUS.eq(t.getProductLineStatus()),
-					PRODUCTLINETABLE.PRODUCTLINE_OWNER.eq(t.getProductLineOwner()),
-					PRODUCTLINETABLE.PRODUCTLINE_QUALITY_MANAGER.eq(t.getProductLineQualityManager()),
-					PRODUCTLINETABLE.PRODUCTLINE_DELIVERY_MANAGER.eq(t.getProductLineDeliveryManager()),
-					PRODUCTLINETABLE.ACL.eq(t.getAcl()),
-					PRODUCTLINETABLE.PRODUCTLINE_WHITELIST.eq(t.getProductLineWhiteList()),
-					PRODUCTLINETABLE.PRODUCTLINE_CREATEDBY.eq(t.getProductLineCreatedBy()),
-					PRODUCTLINETABLE.PRODUCTLINE_CREATEDDATE.eq(t.getProductLineCreatedDate()),
-					PRODUCTLINETABLE.DELETED.eq(t.getDeleted())));
-		return addOrderByElements(select, orderBies);
+					PRODUCT_LINETABLE.COMPANY_ID.eq(t.getCompanyId()),
+					PRODUCT_LINETABLE.DEPT_ID.eq(t.getDeptId()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.eq(t.getProductLineRoot()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_PARENT.eq(t.getProductLineParent()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_NAME.eq(t.getProductLineName()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CODE.eq(t.getProductLineCode()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_ORDER.eq(t.getProductLineOrder()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_SPEC.eq(t.getProductLineSpec()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.eq(t.getProductLineStatus()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.eq(t.getProductLineOwner()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.eq(t.getProductLineQualityManager()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.eq(t.getProductLineDeliveryManager()),
+					PRODUCT_LINETABLE.ACL.eq(t.getAcl()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.eq(t.getProductLineWhiteList()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.eq(t.getProductLineCreatedBy()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.eq(t.getProductLineCreatedDate()),
+					PRODUCT_LINETABLE.DELETED.eq(t.getDeleted())));
+			return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
 
-	public Pager<ProductLine> queryPager(int start,int limit ,ProductLine productLine ,final OrderBy... orderBies) {
+	public Pager<ProductLine> queryPager(int start,int limit ,ProductLine productLine ,final OrderBy... orderArgs) {
 		if(productLine==null){
 			productLine=new ProductLine();
 		}
 		return getDslTemplate().queryPager(start, limit, productLine, false, new SelectGenerateCallback<ProductLine>() {
 
 			public Select generate(ProductLine t) {
-				Select select = MysqlSelect.selectFrom(PRODUCTLINETABLE).where(
+				Select select = MysqlSelect.selectFrom(PRODUCT_LINETABLE).where(
 				and(
-					PRODUCTLINETABLE.COMPANY_ID.eq(t.getCompanyId()),
-					PRODUCTLINETABLE.DEPT_ID.eq(t.getDeptId()),
-					PRODUCTLINETABLE.PRODUCTLINE_ROOT.eq(t.getProductLineRoot()),
-					PRODUCTLINETABLE.PRODUCTLINE_PARENT.eq(t.getProductLineParent()),
-					PRODUCTLINETABLE.PRODUCTLINE_NAME.eq(t.getProductLineName()),
-					PRODUCTLINETABLE.PRODUCTLINE_CODE.eq(t.getProductLineCode()),
-					PRODUCTLINETABLE.PRODUCTLINE_ORDER.eq(t.getProductLineOrder()),
-					PRODUCTLINETABLE.PRODUCTLINE_SPEC.eq(t.getProductLineSpec()),
-					PRODUCTLINETABLE.PRODUCTLINE_STATUS.eq(t.getProductLineStatus()),
-					PRODUCTLINETABLE.PRODUCTLINE_OWNER.eq(t.getProductLineOwner()),
-					PRODUCTLINETABLE.PRODUCTLINE_QUALITY_MANAGER.eq(t.getProductLineQualityManager()),
-					PRODUCTLINETABLE.PRODUCTLINE_DELIVERY_MANAGER.eq(t.getProductLineDeliveryManager()),
-					PRODUCTLINETABLE.ACL.eq(t.getAcl()),
-					PRODUCTLINETABLE.PRODUCTLINE_WHITELIST.eq(t.getProductLineWhiteList()),
-					PRODUCTLINETABLE.PRODUCTLINE_CREATEDBY.eq(t.getProductLineCreatedBy()),
-					PRODUCTLINETABLE.PRODUCTLINE_CREATEDDATE.eq(t.getProductLineCreatedDate()),
-					PRODUCTLINETABLE.DELETED.eq(t.getDeleted())));
-		return addOrderByElements(select, orderBies);
+					PRODUCT_LINETABLE.COMPANY_ID.eq(t.getCompanyId()),
+					PRODUCT_LINETABLE.DEPT_ID.eq(t.getDeptId()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.eq(t.getProductLineRoot()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_PARENT.eq(t.getProductLineParent()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_NAME.eq(t.getProductLineName()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CODE.eq(t.getProductLineCode()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_ORDER.eq(t.getProductLineOrder()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_SPEC.eq(t.getProductLineSpec()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.eq(t.getProductLineStatus()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.eq(t.getProductLineOwner()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.eq(t.getProductLineQualityManager()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.eq(t.getProductLineDeliveryManager()),
+					PRODUCT_LINETABLE.ACL.eq(t.getAcl()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.eq(t.getProductLineWhiteList()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.eq(t.getProductLineCreatedBy()),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.eq(t.getProductLineCreatedDate()),
+					PRODUCT_LINETABLE.DELETED.eq(t.getDeleted())));
+			return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
@@ -219,24 +208,24 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		return getDslTemplate().batchInsert(autoGeneratedKeys, productLines, new NoParamInsertGenerateCallback() {
 
 			public Insert generate() {
-				return insertInto(PRODUCTLINETABLE).values(
-					PRODUCTLINETABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
-					PRODUCTLINETABLE.DEPT_ID.value(new JdbcNamedParameter("deptId")),
-					PRODUCTLINETABLE.PRODUCTLINE_ROOT.value(new JdbcNamedParameter("productLineRoot")),
-					PRODUCTLINETABLE.PRODUCTLINE_PARENT.value(new JdbcNamedParameter("productLineParent")),
-					PRODUCTLINETABLE.PRODUCTLINE_NAME.value(new JdbcNamedParameter("productLineName")),
-					PRODUCTLINETABLE.PRODUCTLINE_CODE.value(new JdbcNamedParameter("productLineCode")),
-					PRODUCTLINETABLE.PRODUCTLINE_ORDER.value(new JdbcNamedParameter("productLineOrder")),
-					PRODUCTLINETABLE.PRODUCTLINE_SPEC.value(new JdbcNamedParameter("productLineSpec")),
-					PRODUCTLINETABLE.PRODUCTLINE_STATUS.value(new JdbcNamedParameter("productLineStatus")),
-					PRODUCTLINETABLE.PRODUCTLINE_OWNER.value(new JdbcNamedParameter("productLineOwner")),
-					PRODUCTLINETABLE.PRODUCTLINE_QUALITY_MANAGER.value(new JdbcNamedParameter("productLineQualityManager")),
-					PRODUCTLINETABLE.PRODUCTLINE_DELIVERY_MANAGER.value(new JdbcNamedParameter("productLineDeliveryManager")),
-					PRODUCTLINETABLE.ACL.value(new JdbcNamedParameter("acl")),
-					PRODUCTLINETABLE.PRODUCTLINE_WHITELIST.value(new JdbcNamedParameter("productLineWhiteList")),
-					PRODUCTLINETABLE.PRODUCTLINE_CREATEDBY.value(new JdbcNamedParameter("productLineCreatedBy")),
-					PRODUCTLINETABLE.PRODUCTLINE_CREATEDDATE.value(new JdbcNamedParameter("productLineCreatedDate")),
-					PRODUCTLINETABLE.DELETED.value(new JdbcNamedParameter("deleted")));
+				return insertInto(PRODUCT_LINETABLE).values(
+					PRODUCT_LINETABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
+					PRODUCT_LINETABLE.DEPT_ID.value(new JdbcNamedParameter("deptId")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.value(new JdbcNamedParameter("productLineRoot")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_PARENT.value(new JdbcNamedParameter("productLineParent")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_NAME.value(new JdbcNamedParameter("productLineName")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CODE.value(new JdbcNamedParameter("productLineCode")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_ORDER.value(new JdbcNamedParameter("productLineOrder")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_SPEC.value(new JdbcNamedParameter("productLineSpec")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.value(new JdbcNamedParameter("productLineStatus")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.value(new JdbcNamedParameter("productLineOwner")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.value(new JdbcNamedParameter("productLineQualityManager")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.value(new JdbcNamedParameter("productLineDeliveryManager")),
+					PRODUCT_LINETABLE.ACL.value(new JdbcNamedParameter("acl")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.value(new JdbcNamedParameter("productLineWhiteList")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.value(new JdbcNamedParameter("productLineCreatedBy")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.value(new JdbcNamedParameter("productLineCreatedDate")),
+					PRODUCT_LINETABLE.DELETED.value(new JdbcNamedParameter("deleted")));
 			}
 		});
 	}
@@ -245,7 +234,6 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 			return batchInsert(true ,productLines);
 	}
 
-	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<ProductLine> productLines) {
 		if (CollectionUtil.isEmpty(productLines)) {
 			return new int[0];
@@ -253,30 +241,29 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		return getDslTemplate().batchUpdate(productLines, new NoParamUpdateGenerateCallback() {
 
 			public Update generate() {
-				return update(PRODUCTLINETABLE).set(
-					PRODUCTLINETABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
-					PRODUCTLINETABLE.DEPT_ID.value(new JdbcNamedParameter("deptId")),
-					PRODUCTLINETABLE.PRODUCTLINE_ROOT.value(new JdbcNamedParameter("productLineRoot")),
-					PRODUCTLINETABLE.PRODUCTLINE_PARENT.value(new JdbcNamedParameter("productLineParent")),
-					PRODUCTLINETABLE.PRODUCTLINE_NAME.value(new JdbcNamedParameter("productLineName")),
-					PRODUCTLINETABLE.PRODUCTLINE_CODE.value(new JdbcNamedParameter("productLineCode")),
-					PRODUCTLINETABLE.PRODUCTLINE_ORDER.value(new JdbcNamedParameter("productLineOrder")),
-					PRODUCTLINETABLE.PRODUCTLINE_SPEC.value(new JdbcNamedParameter("productLineSpec")),
-					PRODUCTLINETABLE.PRODUCTLINE_STATUS.value(new JdbcNamedParameter("productLineStatus")),
-					PRODUCTLINETABLE.PRODUCTLINE_OWNER.value(new JdbcNamedParameter("productLineOwner")),
-					PRODUCTLINETABLE.PRODUCTLINE_QUALITY_MANAGER.value(new JdbcNamedParameter("productLineQualityManager")),
-					PRODUCTLINETABLE.PRODUCTLINE_DELIVERY_MANAGER.value(new JdbcNamedParameter("productLineDeliveryManager")),
-					PRODUCTLINETABLE.ACL.value(new JdbcNamedParameter("acl")),
-					PRODUCTLINETABLE.PRODUCTLINE_WHITELIST.value(new JdbcNamedParameter("productLineWhiteList")),
-					PRODUCTLINETABLE.PRODUCTLINE_CREATEDBY.value(new JdbcNamedParameter("productLineCreatedBy")),
-					PRODUCTLINETABLE.PRODUCTLINE_CREATEDDATE.value(new JdbcNamedParameter("productLineCreatedDate")),
-					PRODUCTLINETABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
-				PRODUCTLINETABLE.PRODUCTLINE_ID.eq(new JdbcNamedParameter("productLineId")));
+				return update(PRODUCT_LINETABLE).set(
+					PRODUCT_LINETABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
+					PRODUCT_LINETABLE.DEPT_ID.value(new JdbcNamedParameter("deptId")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.value(new JdbcNamedParameter("productLineRoot")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_PARENT.value(new JdbcNamedParameter("productLineParent")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_NAME.value(new JdbcNamedParameter("productLineName")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CODE.value(new JdbcNamedParameter("productLineCode")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_ORDER.value(new JdbcNamedParameter("productLineOrder")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_SPEC.value(new JdbcNamedParameter("productLineSpec")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.value(new JdbcNamedParameter("productLineStatus")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.value(new JdbcNamedParameter("productLineOwner")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.value(new JdbcNamedParameter("productLineQualityManager")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.value(new JdbcNamedParameter("productLineDeliveryManager")),
+					PRODUCT_LINETABLE.ACL.value(new JdbcNamedParameter("acl")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.value(new JdbcNamedParameter("productLineWhiteList")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.value(new JdbcNamedParameter("productLineCreatedBy")),
+					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.value(new JdbcNamedParameter("productLineCreatedDate")),
+					PRODUCT_LINETABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
+				PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(new JdbcNamedParameter("productLineId")));
 			}
 		});
 	}
 
-	@LogMethod("batchDelete")
 	public int[] batchDelete(List<ProductLine> productLines) {
 		if (CollectionUtil.isEmpty(productLines)) {
 			return new int[0];
@@ -284,34 +271,39 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		return getDslTemplate().batchDelete(productLines, new NoParamDeleteGenerateCallback() {
 
 			public Delete generate() {
-				return delete(PRODUCTLINETABLE).where(and(
-				PRODUCTLINETABLE.PRODUCTLINE_ID.eq(new JdbcNamedParameter("productLineId")),
-				PRODUCTLINETABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")),
-				PRODUCTLINETABLE.DEPT_ID.eq(new JdbcNamedParameter("deptId")),
-				PRODUCTLINETABLE.PRODUCTLINE_ROOT.eq(new JdbcNamedParameter("productLineRoot")),
-				PRODUCTLINETABLE.PRODUCTLINE_PARENT.eq(new JdbcNamedParameter("productLineParent")),
-				PRODUCTLINETABLE.PRODUCTLINE_NAME.eq(new JdbcNamedParameter("productLineName")),
-				PRODUCTLINETABLE.PRODUCTLINE_CODE.eq(new JdbcNamedParameter("productLineCode")),
-				PRODUCTLINETABLE.PRODUCTLINE_ORDER.eq(new JdbcNamedParameter("productLineOrder")),
-				PRODUCTLINETABLE.PRODUCTLINE_SPEC.eq(new JdbcNamedParameter("productLineSpec")),
-				PRODUCTLINETABLE.PRODUCTLINE_STATUS.eq(new JdbcNamedParameter("productLineStatus")),
-				PRODUCTLINETABLE.PRODUCTLINE_OWNER.eq(new JdbcNamedParameter("productLineOwner")),
-				PRODUCTLINETABLE.PRODUCTLINE_QUALITY_MANAGER.eq(new JdbcNamedParameter("productLineQualityManager")),
-				PRODUCTLINETABLE.PRODUCTLINE_DELIVERY_MANAGER.eq(new JdbcNamedParameter("productLineDeliveryManager")),
-				PRODUCTLINETABLE.ACL.eq(new JdbcNamedParameter("acl")),
-				PRODUCTLINETABLE.PRODUCTLINE_WHITELIST.eq(new JdbcNamedParameter("productLineWhiteList")),
-				PRODUCTLINETABLE.PRODUCTLINE_CREATEDBY.eq(new JdbcNamedParameter("productLineCreatedBy")),
-				PRODUCTLINETABLE.PRODUCTLINE_CREATEDDATE.eq(new JdbcNamedParameter("productLineCreatedDate")),
-				PRODUCTLINETABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
+				return delete(PRODUCT_LINETABLE).where(and(
+				PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(new JdbcNamedParameter("productLineId")),
+				PRODUCT_LINETABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")),
+				PRODUCT_LINETABLE.DEPT_ID.eq(new JdbcNamedParameter("deptId")),
+				PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.eq(new JdbcNamedParameter("productLineRoot")),
+				PRODUCT_LINETABLE.PRODUCT_LINE_PARENT.eq(new JdbcNamedParameter("productLineParent")),
+				PRODUCT_LINETABLE.PRODUCT_LINE_NAME.eq(new JdbcNamedParameter("productLineName")),
+				PRODUCT_LINETABLE.PRODUCT_LINE_CODE.eq(new JdbcNamedParameter("productLineCode")),
+				PRODUCT_LINETABLE.PRODUCT_LINE_ORDER.eq(new JdbcNamedParameter("productLineOrder")),
+				PRODUCT_LINETABLE.PRODUCT_LINE_SPEC.eq(new JdbcNamedParameter("productLineSpec")),
+				PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.eq(new JdbcNamedParameter("productLineStatus")),
+				PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.eq(new JdbcNamedParameter("productLineOwner")),
+				PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.eq(new JdbcNamedParameter("productLineQualityManager")),
+				PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.eq(new JdbcNamedParameter("productLineDeliveryManager")),
+				PRODUCT_LINETABLE.ACL.eq(new JdbcNamedParameter("acl")),
+				PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.eq(new JdbcNamedParameter("productLineWhiteList")),
+				PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.eq(new JdbcNamedParameter("productLineCreatedBy")),
+				PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.eq(new JdbcNamedParameter("productLineCreatedDate")),
+				PRODUCT_LINETABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
 			}
 		});
 	}
 
-	@LogMethod("addOrderByElements")
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		if (orderBies == null) {
+			return select;
+		}
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
-			OrderByElement tempElement = orderBies[i].getOrderByElement();
+		for (int i = 0; orderBies!= null && i < orderBies.length; i++) {
+			OrderByElement tempElement = null;
+			if(orderBies[i]!=null){
+				tempElement = orderBies[i].getOrderByElement();
+			}
 			if (tempElement != null) {
 				orderByElements.add(tempElement);
 			}
@@ -321,4 +313,16 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		}
 		return select;
 	}
+	
+	public Integer softDelete(Integer id) {
+        return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
+            public Update generate(Integer id) {
+                Update update = update(PRODUCT_LINETABLE).set(
+                		PRODUCT_LINETABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
+                				PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(id));
+                return update;
+            }
+        });
+
+    }
 }

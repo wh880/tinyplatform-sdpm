@@ -6,6 +6,7 @@ import org.tinygroup.metadata.config.stdfield.StandardField;
 import org.tinygroup.metadata.util.MetadataUtil;
 import org.tinygroup.sdpm.common.util.sort.SortUtil;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,33 +15,44 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by wangll13383 on 2015/9/21.
  */
 public class StdUtil {
-    private static Map<String,String> stdMap = new ConcurrentHashMap<String, String>();
+    private static Map<String,Map<String,String>> tableStdMap = new ConcurrentHashMap<String, Map<String,String>>();
+
+    private static Map<String,String> tablePrimary = new HashMap<String, String>();
 
     private static Map<String,String> tableMap = new ConcurrentHashMap<String, String>();
 
     public static void stdProcess(List<Table> tables){
         for(Table table : tables){
             tableMap.put(resolveName(table.getName()),table.getName());
-            addStd(table);
+            Map<String,String> stdMap = new HashMap<String, String>();
+            addStd(table,table,stdMap);
+            tableStdMap.put(table.getName(),stdMap);
         }
     }
 
-    public static String getTitle(String name){
-        return stdMap.get(name);
+    public static String getTitle(String tableName, String feildName){
+        return tableStdMap.get(tableMap.get(tableName)).get(feildName);
     }
 
-    private static void addStd(Object object){
+    public static String getPrimary(String tableName){
+        return tablePrimary.get(tableName);
+    }
+
+    private static void addStd(Table t,Object object, Map<String,String> stdMap){
         Table table = null;
         TableField tableField = null;
         if(object instanceof Table){
             table = (Table) object;
             for (TableField field : table.getFieldList()){
-                addStd(field);
+                addStd(t,field,stdMap);
             }
         }else if (object instanceof  TableField){
             tableField = (TableField) object;
             StandardField standardField = MetadataUtil.getStandardField(tableField.getStandardFieldId(),StdUtil.class.getClassLoader());
             stdMap.put(standardField.getName(),standardField.getTitle());
+            if(tableField.getPrimary()){
+                tablePrimary.put(t.getName(),standardField.getName());
+            }
         }
     }
 
@@ -51,7 +63,7 @@ public class StdUtil {
             for(int i = 1; i < names.length; i++){
                 char[] c = names[i].toCharArray();
                 c[0] = (char)(c[0]-32);
-                result.append(c.toString());
+                result.append(String.valueOf(c));
             }
             return result.toString();
         }

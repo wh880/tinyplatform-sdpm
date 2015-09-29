@@ -1,19 +1,13 @@
 #@navSelect2()
-	#@navSelect2Nav()文档库 ${id}<span class="caret"></span>#end
+	#@navSelect2Nav()文档库<span class="caret"></span>#end
 	#@navSelect2Body()
 		  #@navSelect2Data()
-		  ##<optgroup label="Central Time Zone">
-			 <option value="24">云融项目一</option>
-			 <option value="AR">银行官网一</option>
-			 <option value="IL">工程项目1</option>
-			 <option value="IA">工程项目2</option>
-			 <option value="KS">测试文档1</option>
-			 <option value="KY">测试文档2</option>
-		
-		  ##</optgroup>
+		  #foreach(var:doclibpager?.getRecords())
+		  <option value="${var?.docLibName}">${var?.docLibName}</option>
+		  #end
 		#end
 		#@navSelect2Fix()
-		<a href="${TINY_CONTEXT_PATH}/document/document.page">全部</a>#end
+		<a href="#">全部</a>#end
 	#end
 	<script type="text/javascript">
 	<!--

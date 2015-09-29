@@ -68,7 +68,8 @@
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
   </table>
   <table id="58b2365c896646dc8d04b5539f40cd67" name="product_story_spec" title="需求表述表" package-name="">
-    <table-field standard-field-id="2f31dbd7abc04051a071e456a4bcd85e" primary="false" unique="false" not-null="true" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="67ace46d5ae741c8af5b9cdfc7a72a30" primary="true" unique="true" not-null="true" id="storyspec_id" auto-increase="true"/>
+    <table-field standard-field-id="2f31dbd7abc04051a071e456a4bcd85e" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
     <table-field standard-field-id="2db31fc4492c400bba36a758c0df2611" primary="false" unique="false" not-null="false" id="story_id" auto-increase="false"/>
     <table-field standard-field-id="d530b2f878d94725b0de97aa83fe6012" primary="false" unique="false" not-null="false" id="story_version" auto-increase="false"/>
     <table-field standard-field-id="b82777e73fcd488cb571f5d5671558d4" primary="false" unique="false" not-null="false" id="story_title" auto-increase="false"/>

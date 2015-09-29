@@ -32,4 +32,9 @@ public class ProjectAction extends BaseController {
         model.addAttribute("projectPager", projectPager);
         return "project/allProjectData.pagelet";
     }
+
+    @RequestMapping("add")
+    public String addPage() {
+        return "project/addProject.page";
+    }
 }
