@@ -47,4 +47,12 @@ public interface ClientUserManager {
      * @return
      */
     Integer delete(Integer id);
+
+    /**
+     * 根据客户id进行全部客户联系人的删除
+     *
+     * @param id 客户id
+     * @return
+     */
+    Integer deleteAll(Integer id);
 }

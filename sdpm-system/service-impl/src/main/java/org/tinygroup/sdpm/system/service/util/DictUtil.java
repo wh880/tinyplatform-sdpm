@@ -2,25 +2,19 @@ package org.tinygroup.sdpm.system.service.util;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.tinygroup.beancontainer.BeanContainerFactory;
-import org.tinygroup.context.Context;
-import org.tinygroup.context.impl.ContextImpl;
 import org.tinygroup.sdpm.system.biz.inter.DictManager;
 import org.tinygroup.sdpm.system.biz.inter.ModuleManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by wangll13383 on 2015/9/28.
  */
-@Component
+//@Component
 public class DictUtil implements InitializingBean {
     private static   Map<String,List<SystemDict>> dictMap = new HashMap<String, List<SystemDict>>();
     private static boolean isStarted = false;

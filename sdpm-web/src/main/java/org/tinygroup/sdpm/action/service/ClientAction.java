@@ -85,6 +85,7 @@ public class ClientAction extends BaseController {
     @RequestMapping(value = "/delete")
     public Map delete(Integer id) {
         clientService.deleteClient(id);
+        clientUserService.deleteAllClientUser(id);
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "y");
         map.put("info", "删除成功");

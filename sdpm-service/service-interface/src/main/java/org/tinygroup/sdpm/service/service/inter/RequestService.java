@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.service.service.inter;
 
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -63,5 +64,12 @@ public interface RequestService {
      * @return
      */
     Integer deleteRequestBatch(Integer... id);
+
+    /**
+     * 查找数据库的所有记录
+     *
+     * @return
+     */
+    Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, ServiceRequest clientRequest);
 }
 

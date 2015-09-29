@@ -66,7 +66,7 @@
               isShow="1" scope="service-request-r"/>
         <menu id="request-form" name="报表" icon="icon-bar-chart" href="/service/serviceReq/reportform.page" sort="1"
               isShow="1" scope="service-request-r"/>
-        <menu id="request-add" name="新增请求" icon="icon-plus" href="/service/serviceReq/add.page" sort="1"
+        <menu id="request-add" name="新增请求" icon="icon-plus" href="/service/request/form" sort="1"
               isShow="1" scope="service-request-r"/>
         <menu id="service-request-operation" name="操作" href="" icon=""
               sort="1" isShow="1"
