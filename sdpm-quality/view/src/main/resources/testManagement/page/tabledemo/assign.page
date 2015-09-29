@@ -33,8 +33,8 @@
              #@Tselect2F()
 	                   		 #@Tselect2Body("bugAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">A</option>
-	                        <option value="ME">B</option>
-	                        <option value="MD">C</option>
+	                        <option value="BD">B</option>
+	                        <option value="CH">C</option>
 	                    	#end                
               #end  
          #end   
@@ -42,10 +42,10 @@
     #@elementItem()
         #@sdpmItem("抄送给") 
             #@Tselect2F()
-	                   		 #@Tselect2Body("bugMailto" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">A</option>
-	                        <option value="ME">B</option>
-	                        <option value="MD">C</option>
+	                   		 #@Tselect2Body("bugMailto" "1" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">A</option>
+	                        <option value="2">B</option>
+	                        <option value="3">C</option>
 	                    	#end                
               #end 
      	#end
