@@ -36,4 +36,10 @@ public interface ModuleManager {
 	  * @return
 	  */
 	 SystemModule findById(int id);
+	 /**
+	  * 添加模块
+	  * @param systemModule
+	  * @return
+	  */
+	 SystemModule add(SystemModule systemModule);
 }
