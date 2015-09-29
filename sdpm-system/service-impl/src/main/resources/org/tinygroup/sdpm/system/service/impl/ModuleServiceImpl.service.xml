@@ -1,0 +1,40 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.system.service.impl.ModuleServiceImpl" bean="moduleService">
+    <service-method local-name="edit" service-id="module_edit" method-name="edit" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemModule" type="org.tinygroup.sdpm.system.dao.pojo.SystemModule" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="editResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemModule"/>
+    </service-method>
+    <service-method local-name="deleteById" service-id="module_deleteById" method-name="deleteById" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteByIdResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="delete" service-id="module_delete" method-name="delete" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemModule" type="org.tinygroup.sdpm.system.dao.pojo.SystemModule" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="findById" service-id="module_findById" method-name="findById" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemModule"/>
+    </service-method>
+    <service-method local-name="findModules" service-id="module_findModules" method-name="findModules" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemModule" type="org.tinygroup.sdpm.system.dao.pojo.SystemModule" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findModulesResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemModule"/>
+    </service-method>
+    <service-method local-name="add" service-id="module_add" method-name="add" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemModule" type="org.tinygroup.sdpm.system.dao.pojo.SystemModule" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemModule"/>
+    </service-method>
+  </service-component>
+</service-components>
