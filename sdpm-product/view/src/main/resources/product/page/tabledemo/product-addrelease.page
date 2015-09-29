@@ -23,7 +23,7 @@
         #@colLabel()版本:#end
        #@formControlDiv("col-4")
 			#@Tselect2F()
-                #@Tselect2Body("" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #@Tselect2Body("buildId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     <option value="CT">Admin</option>
                     <option value="DE">Demo</option>
                     <option value="FL">Me</option>
@@ -38,7 +38,7 @@
     #@elementItem()
         #@colLabel()发布日期:#end
         #@formControlDiv("col-4")
-           #@tinyDateInput("" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+           #@tinyDateInput("releaseDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end
         #@validateDiv("col-2")#end
     #end
