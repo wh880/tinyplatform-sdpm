@@ -39,9 +39,9 @@ public class StoryAction {
     }
     
     @RequestMapping("save")
-    public String save(ProductStory productStory){
+    public String save(ProductStory productStory,ProductStorySpec storySpec){
     	
-    	storyService.addStory(productStory);
+    	storyService.addStory(productStory, storySpec);
     	return "redirect:" + "/product/page/project/togglebox.page";
     }
     

@@ -28,6 +28,12 @@ public class ProductStorySpecTable extends Table {
 	public static final ProductStorySpecTable PRODUCT_STORY_SPECTABLE = new ProductStorySpecTable();
 
 	/** 
+	 * 需求描述ID
+	 * 
+	 */
+	public final Column STORYSPEC_ID = new Column(this, "storyspec_id");
+
+	/** 
 	 * 公司ID
 	 * 
 	 */
