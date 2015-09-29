@@ -21,8 +21,6 @@ public class ModuleServiceImpl implements ModuleService {
 		return SystemModuleManager.deleteById(id);
 	}
 
-	
-
 	public int delete(SystemModule systemModule) {
 		// TODO Auto-generated method stub
 		return  SystemModuleManager.delete(systemModule);
@@ -42,5 +40,6 @@ public class ModuleServiceImpl implements ModuleService {
 		// TODO Auto-generated method stub
 		return SystemModuleManager.add(systemModule);
 	}
+
 
 }
