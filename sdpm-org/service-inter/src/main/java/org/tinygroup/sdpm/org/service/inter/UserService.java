@@ -63,4 +63,13 @@ public interface UserService {
      */
     Integer deleteUser(String id);
 
+    /**
+     * 验证密码
+     *
+     * @param plainPassword 明文密码
+     * @param password      密文密码
+     * @return 验证成功返回true
+     */
+    boolean validatePassword(String plainPassword, String password);
+
 }
