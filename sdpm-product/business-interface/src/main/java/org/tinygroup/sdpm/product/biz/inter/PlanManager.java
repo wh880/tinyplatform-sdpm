@@ -43,7 +43,8 @@ public interface PlanManager {
 	/**
 	 * 根据对象查找(排序)
 	 * @param productplan
-	 * @param orderBies
+	 * @param order
+	 * @param ordertype
 	 * @return
 	 */
 	List<ProductPlan> findList(ProductPlan productPlan,String order,String ordertype);

@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.productLine.biz.inter;
 import java.util.List;
 
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface ProductLineManager {
 	
@@ -21,6 +22,13 @@ public interface ProductLineManager {
 	int update(ProductLine productLine);
 	
 	/**
+	 * 批量编辑
+	 * @param productLine
+	 * @return
+	 */
+	int[] updateBatch(List<ProductLine> productLine);
+	
+	/**
 	 * 根据Id删除
 	 * @param productLineId
 	 * @return
@@ -35,9 +43,22 @@ public interface ProductLineManager {
 	ProductLine find(Integer productLineId);
 	
 	/**
-	 * 根据对象查找
+	 * 根据对象查找(排序)
 	 * @param productLine
+	 * @param order
+	 * @param ordertype
 	 * @return
 	 */
-	List<ProductLine> findList(ProductLine productLine);
+	List<ProductLine> findlist(ProductLine productLine,String order,String ordertype);
+	
+	/**
+	 * 对象查找(分页、排序)
+	 * @param page
+	 * @param pagesize
+	 * @param productLine
+	 * @param order
+	 * @param ordertype
+	 * @return
+	 */
+	Pager<ProductLine> findPager(int page,int pagesize,ProductLine productLine,String order,String ordertype);
 }

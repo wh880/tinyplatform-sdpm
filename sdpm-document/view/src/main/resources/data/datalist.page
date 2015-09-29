@@ -6,8 +6,8 @@ ${docpager.getTotalCount()}
 #foreach(l:docpager.getRecords())
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="/document/doc-view/${l?.docId}">${l?.docId}</a>#end
-	#@td()<a href="/document/doc-view/${l?.docId}">${l?.docTitle}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view/${l?.docId}">${l?.docId}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view/${l?.docId}">${l?.docTitle}</a>#end
 	#@td()${l?.getDocType()}#end
 	#@td()${l?.getDocAddedBy()}#end
 	#@td()${l?.getDocAddedDate()}#end
@@ -16,7 +16,8 @@ ${docpager.getTotalCount()}
 			#if(m.id != "docdelete")
 				<a href="${TINY_CONTEXT_PATH}${m.href}/${l?.docId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 			#else
-				#@tinyTableItemRemove(m.href var)
+			##不会配置
+				#@tinyTableItemRemove(TINY_CONTEXT_PATH+m.href l.docId)
 					<i class="${m.icon}" title="删除"></i>
 				#end
 			#end

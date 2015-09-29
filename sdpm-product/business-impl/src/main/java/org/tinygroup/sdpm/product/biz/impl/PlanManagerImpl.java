@@ -39,21 +39,15 @@ public class PlanManagerImpl implements PlanManager{
 		return productPlanDao.batchUpdate(productplan);
 	}
 
-	
-
-
 	public Pager<ProductPlan> findPager(int start, int limit, ProductPlan productPlan, String order, String ordertype) {
 		
 		return productPlanDao.queryPager((start-1)*limit, limit, productPlan, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
 
-
-
 	public List<ProductPlan> findList(ProductPlan productplan, String order, String ordertype) {
 		
 		return productPlanDao.query(productplan,  new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
-
 
 	public Integer delete(Integer planId) {
 		

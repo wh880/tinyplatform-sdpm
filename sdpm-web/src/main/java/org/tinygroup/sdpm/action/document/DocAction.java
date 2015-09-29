@@ -18,13 +18,14 @@ public class DocAction {
 	@Autowired
 	private DocService docservice;
 	@RequestMapping(value={"","/document"})
-	public String docIndex(Doc doc,Model model)
+	public String docIndex(Doc doc,Doclib doclib,Model model,int limit)
 	{
 		//list Doc
 		//Pager<Doc> docpager = docservice.findDocRetPager(0, page, doc);
 		//list Doclib name
-		//Pager<DocLib> doclibpager = docservice.(1, page, doclib);
-		//model.addAttribute("docpager", docpager);
+		Pager<Doclib> doclibpager = docservice.findDoclibRetPager(0, limit, doclib);
+		model.addAttribute("doclibpager", doclibpager);
+		//doclibpager.getRecords()
 		return "/document/document.page";
 	}
 	@RequestMapping(value="/data/doclist")
@@ -35,11 +36,25 @@ public class DocAction {
 		return "/data/datalist.pagelet";
 	}
 	@RequestMapping(value="/doc-edit/{docid}")
-	public String editDoc(Doc doc,Model model,@PathVariable Integer docid)
+	public String editDoc(Doc doc,Doclib doclib,Model model,@PathVariable Integer docid)
 	{
 		doc = docservice.findDocById(docid);
+		Pager<Doclib> doclibpager = docservice.findDoclibRetPager(0, 100, doclib);
 		model.addAttribute("doc", doc);
+		model.addAttribute("doclibpager", doclibpager);
 		return "/document/table-edit.page";
+	}
+	@RequestMapping("/doc/view/{docid}")
+	public String docView(Doc doc,Model model,@PathVariable Integer docid){
+		doc = docservice.findDocById(docid);
+		model.addAttribute("doc",doc);
+		return "/document/doc-view.page";
+	}
+	@RequestMapping(value="/edit-doclib/save")
+	public String editDoclib(Doclib doclib)
+	{
+		docservice.editDocLibName(doclib);
+		return "redirect:"+"/document/document.page";
 	}
 	@RequestMapping(value="/edit-doc/save")
 	public String saveDoc(Doc doc,Model model)
@@ -47,26 +62,31 @@ public class DocAction {
 		docservice.editDoc(doc);
 		return "redirect:"+"/document/document.page";
 	}
+	@RequestMapping(value="/add-doc")
+	public String createDoc()
+	{
+		return "/document/add-doc.page";
+	}
 	@RequestMapping(value="/add-doc/add",method=RequestMethod.POST)
 	public String addDoc(Doc doc,Model model)
 	{
 		Doc ret = docservice.createNewDoc(doc);
 		model.addAttribute("doc", ret);
-		return "/document/document.page";
+		return "redirect:"+"/document/document.page";
 	}
 	@RequestMapping(value="/add-doclib/add",method=RequestMethod.POST)
 	public String addDocLib(Doclib doclib,Model model)
 	{
 		docservice.createNewDocLib(doclib);
-		return "/document/document.page";
+		return "redirect:"+"/document/document.page";
 	}
-	@RequestMapping(value="/delete/doc/{docid}",method=RequestMethod.DELETE)
-	public String delDoc(@PathVariable Integer docid)
+	@RequestMapping(value="/delete/doc")
+	public String delDoc(Integer id)
 	{
 		/*int ret = */
-		docservice.deleteDocById(docid);
+		docservice.deleteDocById(id);
 		//if(ret==0)return "/document/Error.page";
-		return "/document/document.page";
+		return "redirect:"+"/document/document.page";
 	}
 	@RequestMapping(value="/delete/doclib/{doclibid}",method=RequestMethod.DELETE)
 	public String delDocLib(@PathVariable Integer doclibid)

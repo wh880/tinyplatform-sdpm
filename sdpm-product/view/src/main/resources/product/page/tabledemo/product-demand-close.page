@@ -36,14 +36,15 @@
 	});
 </script>
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/story/update?"+tinyRequestQueryString "" {"class":"test"})
+#hiddenInput("","deleted","","1")
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">关闭</p>
      #@elementItem()
         #@colLabel()关闭原因：#end
         #@formControlDiv("col-3")
-            #@tinySelect("demand-close-cause" "zh" {"class":"input-text","rel":"22"})
+            #@tinySelect("storyClosedReason" story?.storyClosedReason {"class":"input-text","rel":"22"})
 			#@tinyOptionItem("completed")已完成#end
 			#@tinyOptionItem("subdivision")已细分#end
 			#@tinyOptionItem("repeat")重复#end
@@ -57,14 +58,14 @@
      #@elementItem("subdivision")
         #@colLabel()细分需求：#end
         #@formControlDiv("col-3")
-          #tinyInput("text" "username" ""{"datatype":"*4-16","nullmsg":"细分需求不能为空！","id":"username","class":"input-text"})
+          #tinyInput("text" "storyChildStories" "" {"datatype":"*4-16","nullmsg":"细分需求不能为空！","id":"username","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end
      #@elementItem("repeat")
         #@colLabel()重复需求：#end
         #@formControlDiv("col-3")
-          #tinyInput("text" "username" ""{"datatype":"*4-16","nullmsg":"重复需求不能为空！","id":"username","class":"input-text"})
+          #tinyInput("text" "storyDuplicateStory" ""{"datatype":"*4-16","nullmsg":"重复需求不能为空！","id":"username","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end

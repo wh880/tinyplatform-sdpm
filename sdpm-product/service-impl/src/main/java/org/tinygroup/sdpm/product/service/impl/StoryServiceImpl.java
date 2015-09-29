@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.common.util.sql.SearchInfos;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -16,9 +17,9 @@ public class StoryServiceImpl implements StoryService {
 	@Autowired
 	private StoryManager storyManager;
 	
-	public ProductStory addStory(ProductStory story) {
+	public ProductStory addStory(ProductStory story,ProductStorySpec storySpec) {
 
-		return storyManager.add(story);
+		return storyManager.add(story, storySpec);
 	}
 
 	public int deleteStory(Integer storyId) {

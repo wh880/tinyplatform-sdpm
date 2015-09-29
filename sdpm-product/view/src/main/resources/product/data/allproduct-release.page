@@ -12,24 +12,14 @@
     #@td()${release?.buildId}#end
     #@td()${release?.releaseDate?formatDate(release?.releaseDate,'yyyy年MM月dd日'):""}#end
     #@td()
-
-        #foreach(m:menuManager.getScopeMenus("product-re"))
-            #if(m.id!="product-release-remove")
-            <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${m.href}"><i class="${m.icon}"></i></a>
-            #else
-            &nbsp; #@tinyTableItemRemove("#" "id")<i class="icon-remove"></i>#end
-            #end
-        #end
+			#foreach(m:menuManager.getScopeMenus("product-re"))
+			#set(url=eval(m.href))
+			  #if(m.id!="product-release-remove")
+			      <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${url}"><i class="${m.icon}"></i></a>
+			      #else
+			      &nbsp;#@tinyTableItemRemove(TINY_CONTEXT_PATH+url release.releaseId)<i class="${m.icon}"></i>#end
+			       #end
+			#end
     #end
 #end
-#end
-
-
-#@dialog("myModal")
-    #@dialogHeader()对话框标题#end
-    #@dialogBody()<p>对话框内容…</p>#end
-    #@dialogFooter()
-        #@buttonEnsure()确定#end
-        #@buttonCancel()关闭#end
-    #end
 #end

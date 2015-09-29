@@ -15,6 +15,7 @@ import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -30,17 +31,38 @@ public class TaskAction extends BaseController {
     private ProjectService projectService;
 
     @RequestMapping("index")
-    public String index(@CookieValue(required = false) Integer projectId, HttpServletResponse response) {
-        if (projectId == null) {
-            List<Project> list = projectService.findList();
-            if (list == null || list.isEmpty()) {
-                return "redirct:/project/add";
+    public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model) {
+        List<Project> list = projectService.findList();
+        Project selProject = new Project();
+        if (list == null || list.isEmpty()) {
+            return "redirect:/project/add";
+        } else {
+            if (cookie_projectId == null) {
+                selProject = list.get(0);
+                //maxAge=-1意为永久
+                CookieUtils.setCookie(response, "cookie_projectId", selProject.getProjectId().toString(), -1);
+            } else {
+                boolean flag = false;
+                for (Project p : list) {
+                    if (p.getProjectId() == cookie_projectId) {
+                        selProject = p;
+                        CookieUtils.setCookie(response, "cookie_projectId", cookie_projectId.toString(), -1);
+                        flag = true;
+                        break;
+                    }
+                }
+                //若数据库中无cookies中projectId对应的项目，则返回选中第一条
+                if (!flag) {
+                    selProject = list.get(0);
+                    CookieUtils.setCookie(response, "cookie_projectId", selProject.getProjectId().toString(), -1);
+                }
             }
-            Project first = list.get(0);
-            projectId = first.getProjectId();
-            CookieUtils.setCookie(response, "projectId", projectId.toString(), -1);
         }
-        return "?????";
+        //model.addAttribute("selProject", selProject);
+        //model.addAttribute("projectList", list);
+        request.getSession().setAttribute("selProject", selProject);
+        request.getSession().setAttribute("projectList", list);
+        return "project/task/index.page";
     }
 
     @RequestMapping("edit")
@@ -174,6 +196,7 @@ public class TaskAction extends BaseController {
         model.addAttribute("task", task);
         return "project/task/index.page";
     }
+
     @RequestMapping(value = "/finishsave", method = RequestMethod.POST)
     public String finishsave(ProjectTask task, Model model) {
         if (task.getTaskId() == null) {
@@ -184,6 +207,7 @@ public class TaskAction extends BaseController {
         model.addAttribute("task", task);
         return "project/task/index.page";
     }
+
     @RequestMapping(value = "/startsave", method = RequestMethod.POST)
     public String startsave(ProjectTask task, Model model) {
         if (task.getTaskId() == null) {
