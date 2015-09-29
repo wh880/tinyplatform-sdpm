@@ -42,22 +42,22 @@ public class DictAction extends BaseController{
     	 model.addAttribute("dict", dict);
     	 return "system/page/dictionaries/dictitem_view.pagelet";
      }
-	@RequestMapping("check2")
-    public String checkDict2(Integer dictId,Model model){
-    	 SystemDict dict =dictService.findDict(dictId);
-    	 model.addAttribute("dict", dict);
-    	 return "/system/page/dictionaries/dict_view.pagelet";
-     }
+//	@RequestMapping("check2")
+//    public String checkDict2(Integer dictId,Model model){
+//    	 SystemDict dict =dictService.findDict(dictId);
+//    	 model.addAttribute("dict", dict);
+//    	 return "/system/page/dictionaries/dict_view.pagelet";
+//     }
 	@RequestMapping("delete")
 	public String deleteDict(Integer dictId){
 		dictService.deleteDict(dictId);
 		return "system/page/dictionaries/dictitem.page";
 	}
-	@RequestMapping("delete2")
-	public String deleteDict2(Integer dictId){
-		dictService.deleteDict(dictId);
-		return "system/page/dictionaries/dict_list.page";
-	}
+//	@RequestMapping("delete2")
+//	public String deleteDict2(Integer dictId){
+//		dictService.deleteDict(dictId);
+//		return "system/page/dictionaries/dict_list.page";
+//	}
 	@RequestMapping(value ="save",method = RequestMethod.POST)
 	public String saveDict(SystemDict systemDict ,Model model){
 		if(systemDict.getDictId()==null){
@@ -70,18 +70,18 @@ public class DictAction extends BaseController{
 		model.addAttribute("dict", systemDict);
 		return "system/page/dictionaries/dictitem.page";
 	}
-	@RequestMapping(value ="save2",method = RequestMethod.POST)
-	public String saveDict2(SystemDict systemDict ,Model model){
-		if(systemDict.getDictId()==null){
-			
-			dictService.addDict(systemDict);
-		}
-		else{
-			dictService.updateDict(systemDict);
-		}
-		model.addAttribute("dict", systemDict);
-		return "system/page/dictionaries/dict_list.pagelet";
-	}
+//	@RequestMapping(value ="save2",method = RequestMethod.POST)
+//	public String saveDict2(SystemDict systemDict ,Model model){
+//		if(systemDict.getDictId()==null){
+//			
+//			dictService.addDict(systemDict);
+//		}
+//		else{
+//			dictService.updateDict(systemDict);
+//		}
+//		model.addAttribute("dict", systemDict);
+//		return "system/page/dictionaries/dict_list.pagelet";
+//	}
 
 
 }

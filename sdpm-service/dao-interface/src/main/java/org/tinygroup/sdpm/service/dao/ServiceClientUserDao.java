@@ -20,5 +20,5 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser;
 
 public interface ServiceClientUserDao extends BaseDao<ServiceClientUser, Integer> {
-
+    public Integer softDelete(Integer id);
 }

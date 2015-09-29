@@ -214,7 +214,7 @@
                 #end
                 #@tr()
                     #@th()总耗时#end
-                    #@td()${task?.Float}
+                    #@td()${task?.taskConsumed}
                         #@simpleModal("myModal" "新增日志")#end
                         #@iconOperations("#myModal" "icon-time" "新增日志" "900" "400"
                             "/project/task/consumeTime.pagelet" "ml-5")#end
