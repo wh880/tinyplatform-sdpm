@@ -24,13 +24,10 @@ public class PlanServiceImpl implements PlanService {
 		return planManager.update(plan);
 	}
 
-
-
 	public ProductPlan findPlan(Integer planId) {
 
 		return planManager.find(planId);
 	}
-
 
 	public int[] updateBatchPlan(List<ProductPlan> plan) {
 		

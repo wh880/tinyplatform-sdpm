@@ -32,7 +32,7 @@ public interface ReleaseService {
      * @param id 主键
      * @return
      */
-    Integer deletePlan(Integer releaseId);
+    Integer deleteRelease(Integer releaseId);
     
     /**
 	 * 根据Id查找

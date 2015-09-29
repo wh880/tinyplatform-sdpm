@@ -1,28 +1,25 @@
-#macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
-#end
 
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=productLine.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(productLine?.totalCount)
+#for(productLine:productLine?.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="productLine">#end
-	#@td()${var}#end
+	#@td()${productLine?.productLineId}#end
 	#@td()
-		<a href="${TINY_CONTEXT_PATH}/productLine/page/project/overview.page"> 产品线${page} </a>	
+		<a href="${TINY_CONTEXT_PATH}/productLine/page/project/overview.page">${productLine?.productLineName}</a>	
 	#end
-	#@td()12#end
-	#@td()121#end
-	#@td()12#end
-	#@td()12#end
-	#@td()12#end
-	#@td()12#end
-	#@td()21#end
-	#@td()313#end
-	#@td()31#end
+	#@td()${productLine?.productLineCode}#end
+	#@td()${productLine?.companyId}#end
+	#@td()${productLine?.deptId}#end
+	#@td()${productLine?.productLineRoot}#end
+	#@td()${productLine?.productLineParent}#end
+	#@td()${productLine?.productLineOwner}#end
+	#@td()${productLine?.productLineQualityManager}#end
+	#@td()${productLine?.productLineDeliveryManager}#end
+	#@td()${productLine?.productLineStatus}#end
 	#@td()
 		<a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/add.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;
 		  #@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)<i class="icon-remove"></i>#end

@@ -24,9 +24,9 @@
        #@formControlDiv("col-4")
 			#@Tselect2F()
                 #@Tselect2Body("buildId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="CT">Admin</option>
-                    <option value="DE">Demo</option>
-                    <option value="FL">Me</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
                 #end
             
                 #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
@@ -46,7 +46,7 @@
     #@elementItem()
         #@colLabel()描述:#end
         #@formControlDiv("col-8")
-           #@Teditor("releaseDesc" "content3" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})备注...最少输入10个字符#end
+           #@Teditor("releaseDesc" "releaseDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})备注...最少输入10个字符#end
         #end
         #@validateDiv("col-2")#end
     #end
