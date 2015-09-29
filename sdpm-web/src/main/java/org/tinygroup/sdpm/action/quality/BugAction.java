@@ -24,7 +24,7 @@ public class BugAction extends BaseController {
 	@Autowired
 	private BugService bugService;
 		
-	@RequestMapping
+	@RequestMapping("")
 	public String form(String get,Model model){
 		
 		model.addAttribute("get", get);
@@ -37,7 +37,7 @@ public class BugAction extends BaseController {
 		bug.setProductId(id);
 		List<QualityBug> buglist = bugService.findBugList(bug);
 		model.addAttribute("buglist",buglist);
-		return "testManagement/data/BugData.pagelet";
+		return "/testManagement/data/BugData.pagelet";
 	}
 	
 	@RequestMapping("/findBug")
@@ -50,37 +50,39 @@ public class BugAction extends BaseController {
 		//	bug.setProductId(id);
 		Pager<QualityBug> bugpager = bugService.findBugListPager(start, limit, bug, order, asc);
 		model.addAttribute("bugpager",bugpager);
-		return "testManagement/data/BugData.pagelet";
+		return "/testManagement/data/BugData.pagelet";
 	}
 	
 	@RequestMapping("/makesure")
 	public String makesure(){
-		return "testManagement/page/tabledemo/makesure.page";
+		QualityBug bug = new QualityBug();
+		bug.getBugId();
+		return "/testManagement/page/tabledemo/makesure.page";
 	}
 	
 	@RequestMapping("/assign")
 	public String assign(){
-		return "testManagement/page/tabledemo/assign.page";
+		return "/testManagement/page/tabledemo/assign.page";
 	}
 	
 	@RequestMapping("/solve")
 	public String solve(){
-		return "testManagement/page/tabledemo/assign.page";
+		return "/testManagement/page/tabledemo/assign.page";
 	}
 	
 	@RequestMapping("/close")
 	public String close(){
-		return "testManagement/page/tabledemo/shutdown.page";
+		return "/testManagement/page/tabledemo/shutdown.page";
 	}
 	
 	@RequestMapping("/edit")
 	public String edit(){
-		return "testManagement/page/tabledemo/edition.page";
+		return "/testManagement/page/tabledemo/edition.page";
 	}
 			
 	@RequestMapping("/add")
 	public String add(){
-		return "testManagement/page/proposeBug.page";
+		return "/testManagement/page/proposeBug.page";
 	}
 	
 	@RequestMapping(value = "/save",method = RequestMethod.POST)
@@ -90,7 +92,7 @@ public class BugAction extends BaseController {
 		}else{
 			bugService.updateBug(bug);
 		}	
-		model.addAttribute("bugsave",bug);
-		return "redirect:"+"quality/bug";
+	//	model.addAttribute("bugsave",bug);
+		return "redirect:"+"/quality/bug";
 	}
 }
