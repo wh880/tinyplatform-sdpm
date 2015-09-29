@@ -1,44 +1,51 @@
 <service-components>
   <service-component type="org.tinygroup.sdpm.system.service.impl.DictServiceImpl" bean="dictService">
-    <service-method local-name="addDict" service-id="system_addDict" method-name="addDict" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+
+    <service-method local-name="addDict" service-id="dict_addDict" method-name="addDict" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>
         <service-parameter name="dict" type="org.tinygroup.sdpm.system.dao.pojo.SystemDict" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="addDictResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemDict"/>
     </service-method>
-    <service-method local-name="deleteDict" service-id="system_deleteDict" method-name="deleteDict" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+
+    <service-method local-name="deleteDict" service-id="dict_deleteDict" method-name="deleteDict" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>
         <service-parameter name="dictId" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="deleteDictResult" required="false" is-array="false" type="int"/>
     </service-method>
-    <service-method local-name="updateDict" service-id="system_updateDict" method-name="updateDict" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+
+    <service-method local-name="updateDict" service-id="dict_updateDict" method-name="updateDict" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>
         <service-parameter name="dict" type="org.tinygroup.sdpm.system.dao.pojo.SystemDict" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="updateDictResult" required="false" is-array="false" type="int"/>
     </service-method>
-    <service-method local-name="findDict" service-id="system_findDict" method-name="findDict" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+
+    <service-method local-name="findDict" service-id="dict_findDict" method-name="findDict" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>
         <service-parameter name="dictId" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findDictResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemDict"/>
     </service-method>
-    <service-method local-name="findDictList" service-id="system_findDictList" method-name="findDictList" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+
+    <service-method local-name="findDictList" service-id="dict_findDictList" method-name="findDictList" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>
         <service-parameter name="dict" type="org.tinygroup.sdpm.system.dao.pojo.SystemDict" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findDictListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemDict"/>
     </service-method>
-    <service-method local-name="findDictPager" service-id="system_findDictPager" method-name="findDictPager" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+
+    <service-method local-name="updateBatchDict" service-id="dict_updateBatchDict" method-name="updateBatchDict" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>
+
         <service-parameter name="start" type="int" required="false" is-array="false"/>
         <service-parameter name="limit" type="int" required="false" is-array="false"/>
         <service-parameter name="dict" type="org.tinygroup.sdpm.system.dao.pojo.SystemDict" required="false" is-array="false"/>
         <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="findDictPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager;"/>
+      <service-result name="findDictPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
     <service-method local-name="updateBatchDict" service-id="system_updateBatchDict" method-name="updateBatchDict" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>
