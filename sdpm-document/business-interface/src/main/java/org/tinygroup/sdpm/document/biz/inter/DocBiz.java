@@ -21,6 +21,7 @@ public interface DocBiz {
 	public Doclib getDocLibById(Integer key);
 	//查询后分页吧~//可以排序OrderBy id asc
 	public Pager<Doc> queryItemWithPage(Integer start,Integer limited,Doc doc);
+	public Pager<Doclib> queryItemWithPage(Integer start,Integer limited,Doclib doclib);
 	public int batchDelDocByIds(Integer...keys);
 
 }

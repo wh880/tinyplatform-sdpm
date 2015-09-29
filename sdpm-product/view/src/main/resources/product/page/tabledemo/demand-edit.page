@@ -3,10 +3,11 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
-#!set(linkName="product-demand",sonitem="
-<li>"+"需求"+"</li>")
+#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/story/update" "" {"class":"test"})
+#hiddenInput(hiddenInputName="storyId",hiddenInputValue=storySpec.storyId)
+
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">编辑</p>
@@ -19,7 +20,7 @@
             <p class="titleName">描述需求</p>
 
             <div>
-                这里要描述需求的内容
+             	${storySpec?.storySpec}
             </div>
         #end
 
@@ -27,7 +28,7 @@
             <p class="titleName">验收标准</p>
 
             <div>
-                妖精哪里跑！！！
+              	${storySpec?.storyVerification}
             </div>
         #end
 
@@ -65,12 +66,13 @@
 
 </div>
 
+	
+	<div style="width:30%;float:right">
+    #TypeInfo("demand" storySpec?.storyId)
+</div>
 
 
 #end
 
 
 
-<div style="width:30%;float:right">
-    #TypeInfo("demand")
-</div>

@@ -13,6 +13,7 @@
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/client/clientUserUpdate" "post" {"class":"test"})
 <input type="hidden" name="id" value="${clientUser?.id}"/>
+<input type="hidden" name="clientId" value="${clientUser?.clientId}"/>
     #@noRespsGridSystem()
             #@gridSysRow()
                 #@colLabel("col-3")客户联系人：#end
@@ -32,7 +33,7 @@
             #@colLabel("col-3")联系人电话：#end
             #@gridSysCol(5)
                 #tinyInput(
-                    "text" "userPhone" clientUser?.user_phone {"datatype":"","id":"user_phone","class":"input-text"})
+                    "text" "userPhone" clientUser?.userPhone {"datatype":"","id":"user_phone","class":"input-text"})
             #end
         #end
     #end

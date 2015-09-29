@@ -3,10 +3,10 @@
     <description>文档ID，主键，唯一标示</description>
   </standard-field>
   <standard-field id="51d8b407678c4adfbb36e530c87c7f22" name="doc_product" title="所属产品" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
-    <description>所属产品</description>
+    <description>所属产品，存放产品ID作为索引</description>
   </standard-field>
   <standard-field id="0dad99e5e3824c3f89a0d03f95baa577" name="doc_project" title="所属项目" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
-    <description>所属项目</description>
+    <description>所属项目，存储项目ID作为索引</description>
   </standard-field>
   <standard-field id="b4c51ca729444d619a90b285dbec71dc" name="doc_lib" title="所属文档库" business-type-id="095e594e1550424b9643c7e2279e85be">
     <description>所属文档库</description>
@@ -64,5 +64,8 @@
   </standard-field>
   <standard-field id="8842a366405a4f35a57ba0e5f5ac66f3" name="doc_lib_edited_date" title="文档库名称更新时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff">
     <description>文档库名称更新时间</description>
+  </standard-field>
+  <standard-field id="7190a6bc86514e0e8941b7fcddb9d8a2" name="doc_attach" title="附件" business-type-id="27ebfcdc558c477da425a46e566d4637">
+    <description>放文档附件路径吧，标准字段类型根本没有存储二进制文件的类型。有点遗憾。</description>
   </standard-field>
 </standard-fields>

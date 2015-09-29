@@ -10,10 +10,10 @@
         <menu id="product-demand-review" name="需求评审" href="/product/page/tabledemo/product-demand-review.page"
               icon="icon-search" sort="54" isShow="1"
               scope="product-de"/>
-        <menu id="product-demand-close" name="需求关闭" href="/product/page/tabledemo/product-demand-close.page"
+        <menu id="product-demand-close" name="需求关闭" href="/product/page/tabledemo/product-demand-close.page?storyId=${story.storyId}"
               icon="icon-off" sort="53" isShow="1"
               scope="product-de"/>
-        <menu id="product-demand-edit" name="需求编辑" href="/product/page/tabledemo/demand-edit.page" icon="icon-pencil"
+        <menu id="product-demand-edit" name="需求编辑" href="/product/storySpec/find?storyId=${story.storyId}" icon="icon-pencil"
               sort="52" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-input" name="导入" href="/product/page/tabledemo/product-import.pagelet"
@@ -47,7 +47,7 @@
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-        <menu id="demand_close" name="关闭" href="/product/page/tabledemo/product-demand-close.page" icon="icon-off "
+        <menu id="demand_close" name="关闭" href="/product/page/tabledemo/product-demand-close.page?storyId=${story.storyId}e" icon="icon-off "
               sort="43" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon-href"/>
@@ -59,7 +59,7 @@
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-        <menu id="demand-edit" name="编辑" href="/product/page/tabledemo/demand-edit.page" icon="icon-pencil" sort="41"
+        <menu id="demand-edit" name="编辑" href="/product/storySpec/find?storyId=${story.storyId}" icon="icon-pencil" sort="41"
               isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon"/>

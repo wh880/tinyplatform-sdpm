@@ -44,7 +44,7 @@
 
 
 
-#@tinyForm("thisform" "/product/story/save" "" {"class":"test","enctype":"multipart/form-data"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/story/save" "" {"class":"test","enctype":"multipart/form-data"})
 
 
 <div style="width:100%;" class="pageleftpart">
@@ -69,7 +69,7 @@
                 </div>
                 <div class="col-6">
                     #@Tselect2F()
-                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="CT">Admin</option>
                             <option value="DE">Demo</option>
                             <option value="FL">Me</option>

@@ -21,6 +21,7 @@
 #end
 			
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/save" "" {"class":"test"})
+#hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
 	<div style="width:67%;float:left">
     	<div class="infoContent">
     		<p class="titleName">关闭</p>

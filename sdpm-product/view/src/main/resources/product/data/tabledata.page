@@ -15,7 +15,8 @@
     #@td()${story.storyStage}#end
     #@td()
      #foreach(m:menuManager.getScopeMenus("product-de"))
-        <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${m.href}"><i class="${m.icon}"></i></a>
+     #set(url=eval(m.href))
+        <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${url}"><i class="${m.icon}"></i></a>
         #end
     #end
 #end
