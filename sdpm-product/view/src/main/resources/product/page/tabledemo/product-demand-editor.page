@@ -4,7 +4,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="demand")
 
-#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+#!set(activeMenuId=currentPageId)
 #@toggleBox({"class":"open shrinkage"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 	#@toggleLeft({"class":"aclass"})
 		#@settoggleLeftTitle("fa-bullhorn")&nbsp;相关信息#end

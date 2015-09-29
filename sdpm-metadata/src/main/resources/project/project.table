@@ -1,4 +1,4 @@
-<tables id="dd14ed2a3efc4eaa8831ba02c3f3aa2e" package-name="org.tinygroup.alm.project">
+<tables id="dd14ed2a3efc4eaa8831ba02c3f3aa2e" >
   <table id="cbcedea659a442ef88eca868880f9667" name="project" title="项目" schema="" package-name="">
     <description></description>
     <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="true" unique="true" not-null="true" id="project_id" auto-increase="true"/>

@@ -16,7 +16,6 @@
     #import("/org/tinygroup/button/components/button.component")
     #import("/org/tinygroup/form/components/form.component")
     #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
-#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
 <div style="margin: 5px">
     #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
         #@toggleLeft({"class":"aclass"})

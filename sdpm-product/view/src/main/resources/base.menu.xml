@@ -13,7 +13,7 @@
         <menu id="product-demand-close" name="需求关闭" href="/product/page/tabledemo/product-demand-close.page"
               icon="icon-off" sort="53" isShow="1"
               scope="product-de"/>
-        <menu id="product-demand-edit" name="需求编辑" href="/product/page/tabledemo/demand-edit.page" icon="icon-pencil"
+        <menu id="product-demand-edit" name="需求编辑" href="/product/story/find?storyId=${story.storyId}" icon="icon-pencil"
               sort="52" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-input" name="导入" href="/product/page/tabledemo/product-import.pagelet"

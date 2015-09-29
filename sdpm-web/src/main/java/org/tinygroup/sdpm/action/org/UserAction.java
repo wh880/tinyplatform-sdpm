@@ -30,9 +30,14 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(OrgUser user, Model model) {
+    public String save(OrgUser user, Model model, String password1, String password2) {
         if (StringUtil.isBlank(user.getOrgUserId())) {
-            userService.addUser(user);
+            if (password1.equals(password2)) {
+                user.setOrgUserPassword(password1);
+                userService.addUser(user);
+            } else {
+                return "organization/user/addUser.page";
+            }
         } else {
             userService.updateUser(user);
         }
@@ -54,8 +59,15 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/delete")
-    public String delete(String id) {
-        userService.deleteUser(id);
+    public String delete(String id, String password) {
+        OrgUser orgUser = userService.findUser(id);
+        String password1 = orgUser.getOrgUserPassword();
+        if (userService.validatePassword(password, password1)) {
+            userService.deleteUser(id);
+        } else {
+            return "organization/user/delect.pagelet";
+        }
+
         return "redirect:/org/user/list/";
     }
     @RequestMapping("/list/data")

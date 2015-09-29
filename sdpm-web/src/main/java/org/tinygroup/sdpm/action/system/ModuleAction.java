@@ -33,7 +33,9 @@ public class ModuleAction extends BaseController{
 		response.setContentType("application/json; charset=UTF-8");
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		List<SystemModule> list = moduleService.findModules(systemModule);
-		mergeModule(list,mapList,0);
+		if(list !=null&&list.size()>0){
+			mergeModule(list,mapList,0);
+		}
 		return mapList;
 	}
 	@RequestMapping("list")
@@ -53,6 +55,22 @@ public class ModuleAction extends BaseController{
 	{
 		if(moduleId!=null){
 			moduleService.deleteById(moduleId);
+		}
+		return "redirect: list";
+	}
+	@RequestMapping("find")
+	public String find(Integer moduleId,Model model){
+		SystemModule module= moduleService.findById(moduleId);
+		model.addAttribute("module", module);
+		return "/system/page/dictionaries/dict_edit.pagelet";
+	}
+	@RequestMapping("save")
+	public String saveModule(SystemModule systemModule,Model model){
+		if(systemModule.getModuleId()==null){
+			moduleService.add(systemModule);
+		}
+		else{
+			moduleService.edit(systemModule);
 		}
 		return "redirect: list";
 	}
