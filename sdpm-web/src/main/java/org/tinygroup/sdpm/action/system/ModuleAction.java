@@ -56,6 +56,22 @@ public class ModuleAction extends BaseController{
 		}
 		return "redirect: list";
 	}
+	@RequestMapping("find")
+	public String find(Integer moduleId,Model model){
+		SystemModule module= moduleService.findById(moduleId);
+		model.addAttribute("module", module);
+		return "/system/page/dictionaries/dict_edit.pagelet";
+	}
+	@RequestMapping("save")
+	public String saveModule(SystemModule systemModule,Model model){
+		if(systemModule.getModuleId()==null){
+			moduleService.add(systemModule);
+		}
+		else{
+			moduleService.edit(systemModule);
+		}
+		return "redirect: list";
+	}
 
 	private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, int parent){
 		for(SystemModule systemModule : systemModules){

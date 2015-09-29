@@ -19,6 +19,8 @@ package org.tinygroup.sdpm.system.wrapper;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -26,9 +28,11 @@ import org.tinygroup.event.Event;
 import org.tinygroup.event.Parameter;
 import org.tinygroup.event.ServiceInfo;
 import org.tinygroup.event.ServiceRequest;
-
+import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
+import org.tinygroup.tinysqldsl.Pager;
+@Component
 public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service.inter.DictService {
-
+    @Autowired
 	CEPCore cepcore;
 
 	public CEPCore getCore() {
@@ -114,22 +118,8 @@ public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager; findDictPager(int start ,int limit ,org.tinygroup.sdpm.system.dao.pojo.SystemDict dict ,java.lang.String columnName ,boolean asc) {
-		String serviceId = "system_findDictPager";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("start" ,start);
-			context.put("limit" ,limit);
-			context.put("dict" ,dict);
-			context.put("columnName" ,columnName);
-			context.put("asc" ,asc);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
+	
+	
 
 	public int[] updateBatchDict(java.util.List<org.tinygroup.sdpm.system.dao.pojo.SystemDict> dicts) {
 		String serviceId = "system_updateBatchDict";
@@ -154,6 +144,12 @@ public class DictServiceImplWrapper implements org.tinygroup.sdpm.system.service
 	}
 		return event.getServiceRequest().getContext()
 			.get(resultsParam.get(0).getName());
+	}
+
+	public Pager<SystemDict> findDictPager(int start, int limit,
+			SystemDict dict, String columnName, boolean asc) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
