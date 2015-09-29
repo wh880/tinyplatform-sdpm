@@ -76,7 +76,7 @@ public class PlanAction  extends BaseController{
 
 		model.addAttribute("productPlan",pagerProductPlan);
 
-		return "/product/data/allproduct-release.pagelet";
+		return "/product/data/allproduct-plan.pagelet";
 	}
 
 	

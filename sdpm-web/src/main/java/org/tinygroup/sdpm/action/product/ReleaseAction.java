@@ -67,7 +67,7 @@ public class ReleaseAction {
 		Pager<ProductRelease> pagerProductRelease = releaseService.findReleasePager(page, pagesize, release, order, ordertype);
 		
 		model.addAttribute("productRelease",pagerProductRelease);
-		return "/product/data/allproduct-plan.pagelet";
+		return "/product/data/allproduct-release.pagelet";
 		}
 }
 
