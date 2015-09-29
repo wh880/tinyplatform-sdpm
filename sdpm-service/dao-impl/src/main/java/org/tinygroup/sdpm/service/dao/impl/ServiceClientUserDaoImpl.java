@@ -115,12 +115,12 @@ public class ServiceClientUserDaoImpl extends TinyDslDaoSupport implements Servi
 			@SuppressWarnings("rawtypes")
 			public Select generate(ServiceClientUser t) {
 				Select select = selectFrom(SERVICE_CLIENT_USERTABLE).where(
-//				and(
-						SERVICE_CLIENT_USERTABLE.CLIENT_ID.eq(t.getClientId()));
+						and(
+								SERVICE_CLIENT_USERTABLE.CLIENT_ID.eq(t.getClientId()),
 					/*SERVICE_CLIENT_USERTABLE.USER_ACCOUNT.eq(t.getUserAccount()),
 					SERVICE_CLIENT_USERTABLE.USER_PHONE.eq(t.getUserPhone()),
-					SERVICE_CLIENT_USERTABLE.USER_POST.eq(t.getUserPost()),
-					SERVICE_CLIENT_USERTABLE.DELETED.eq(t.getDeleted())*/
+					SERVICE_CLIENT_USERTABLE.USER_POST.eq(t.getUserPost()),*/
+								SERVICE_CLIENT_USERTABLE.DELETED.eq(t.getDeleted())));
 				return addOrderByElements(select, orderBies);
 			}
 		});
@@ -221,7 +221,7 @@ public class ServiceClientUserDaoImpl extends TinyDslDaoSupport implements Servi
 			public Update generate(Integer id) {
 				Update update = update(SERVICE_CLIENT_USERTABLE).set(
 						SERVICE_CLIENT_USERTABLE.DELETED.value(ServiceClient.DELETE_YES)).where(
-						SERVICE_CLIENT_USERTABLE.CLIENT_ID.eq(id));
+						SERVICE_CLIENT_USERTABLE.ID.eq(id));
 				return update;
 			}
 		});

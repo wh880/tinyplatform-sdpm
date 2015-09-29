@@ -11,6 +11,7 @@ import org.tinygroup.sdpm.system.service.inter.ModuleService;
 public class ModuleServiceImpl implements ModuleService {
 	@Autowired
     private ModuleManager SystemModuleManager;
+    
 	public SystemModule edit(SystemModule systemModule) {
 		// TODO Auto-generated method stub
 		return SystemModuleManager.edit(systemModule);
@@ -20,8 +21,6 @@ public class ModuleServiceImpl implements ModuleService {
 		// TODO Auto-generated method stub
 		return SystemModuleManager.deleteById(id);
 	}
-
-	
 
 	public int delete(SystemModule systemModule) {
 		// TODO Auto-generated method stub
@@ -37,5 +36,13 @@ public class ModuleServiceImpl implements ModuleService {
 		// TODO Auto-generated method stub
 		return SystemModuleManager.findByModules(systemModule);
 	}
+
+	public SystemModule add(SystemModule systemModule) {
+		// TODO Auto-generated method stub
+		return SystemModuleManager.add(systemModule);
+	}
+    public SystemModule eidtNameAndTiele(SystemModule systemModule){
+    return SystemModuleManager.editNameAndTitle(systemModule);
+    }
 
 }

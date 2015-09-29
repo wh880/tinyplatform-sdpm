@@ -3,7 +3,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
-#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+#!set(activeMenuId=currentPageId)
 #!set(linkName="product-plan",sonitem="<li>"+"计划"+"</li>")
 
 

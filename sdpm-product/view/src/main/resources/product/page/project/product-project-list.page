@@ -1,6 +1,6 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
-#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+#!set(activeMenuId=currentPageId)
 #!set(linkName="product-project",sonitem="<li>"+"项目"+"</li>")
 
 #@tabBodyCol("ptop-5")

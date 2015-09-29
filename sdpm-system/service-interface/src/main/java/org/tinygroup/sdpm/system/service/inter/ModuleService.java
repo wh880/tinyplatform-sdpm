@@ -37,6 +37,19 @@ public interface ModuleService {
 	  * @return
 	  */
 	 SystemModule findById(int id);
+	 /**
+	  * 添加模块
+	  * @param systemModule
+	  * @return
+	  */
+	 SystemModule add(SystemModule systemModule);
+	 /**
+	  * 编辑title ang name
+	  * @param systemModule
+	  * @return
+	  */
+	 SystemModule eidtNameAndTiele(SystemModule systemModule);
+	
 	 
 	 
 }

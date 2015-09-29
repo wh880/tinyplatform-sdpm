@@ -1,5 +1,5 @@
 ##import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
-#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+#!set(activeMenuId=currentPageId)
 
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 	#@toggleLeft({"class":"aclass"})

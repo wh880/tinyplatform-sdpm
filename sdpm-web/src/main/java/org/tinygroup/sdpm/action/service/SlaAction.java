@@ -6,11 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
+import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.sdpm.service.service.inter.SlaService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -18,7 +21,10 @@ import java.util.Map;
 public class SlaAction extends BaseController {
     @Autowired
     private SlaService slaService;
+    @Autowired
+    private ClientService clientService;
 
+    /*查询*/
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
         if (id != null) {
@@ -28,6 +34,7 @@ public class SlaAction extends BaseController {
         return "/service/sla/slaAdd.page";
     }
 
+    /*新增和修改*/
     @RequestMapping("/save")
     public String save(ServiceSla sla, Model model) {
         if (sla.getSlaId() == null) {
@@ -39,7 +46,7 @@ public class SlaAction extends BaseController {
         return "/service/sla/sla.page";
     }
 
-    /*"/list"和"/list/data"是实现sla开始 页面表中数据的显示*/
+    /*"和“/form”拼凑成查询语句，/list"和"/list/data"是实现sla开始 页面表中数据的显示*/
     @RequestMapping(value = "/list")
     public String list(ServiceSla sla, Model model) {
         return "/service/sla/sla.page";
@@ -60,6 +67,20 @@ public class SlaAction extends BaseController {
         map.put("status", "success");
         map.put("info", "删除成功");
         return map;
+    }
+
+    /* 协议下面，点击“客户ID”进入*/
+    @RequestMapping(value = "/slaClient")
+    public String showClient(Integer id, Model model) {
+        List<ServiceSla> slas = slaService.findSlaBySlaId(id);
+        ServiceClient client = clientService.findClient(id);
+        model.addAttribute("client", client);
+        model.addAttribute("slas", slas);
+        return "service/sla/clientsla.page";
+       /* ServiceClient client = clientService.findClient(id);
+        model.addAttribute("client", client);
+        model.addAttribute("slas", slas);
+        return "service/client/clientProduct.page";*/
     }
 
 }

@@ -57,4 +57,10 @@ public class UserServiceImpl implements UserService {
     public Integer deleteUser(String id) {
         return userManager.delete(id);
     }
+
+    public boolean validatePassword(String plainPassword, String password) {
+        return userManager.validatePassword(plainPassword, password);
+    }
+
+
 }

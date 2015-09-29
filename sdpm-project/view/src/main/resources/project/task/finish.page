@@ -20,7 +20,7 @@
 	##body end
 	#end
 #end
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/save" "post" {"class":"test","enctype":"multipart/form-data"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/finishsave" "post" {"class":"test","enctype":"multipart/form-data"})
 	#hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
 	#hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
 	#hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
@@ -37,7 +37,7 @@
 		#@elementItem()
 			#@colLabel()总消耗#end
 			#@formControlDiv("col-8")
-				#tinyInput("text" "Float" "1.1"{"placeholder":"单位是小时","id":"comsume-time","class":"input-text","datatype":"*4-16","nullmsg":"请输入时间（小时）"})
+				#tinyInput("text" "taskConsumed" "1.1"{"placeholder":"单位是小时","id":"comsume-time","class":"input-text","datatype":"*4-16","nullmsg":"请输入时间（小时）"})
 			#end
 			#@validateDiv("col-2")#end
 		#end

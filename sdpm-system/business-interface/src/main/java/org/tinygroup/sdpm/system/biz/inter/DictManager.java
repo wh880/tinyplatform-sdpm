@@ -60,5 +60,5 @@ public interface DictManager {
 	 */
 	Pager<SystemDict> findPager(int start,int limit,SystemDict dict,String columnName,boolean asc);
 
-	
+	List<SystemDict> findList(SystemDict dict,String columnName,boolean asc);
 }

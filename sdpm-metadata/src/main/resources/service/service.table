@@ -1,4 +1,4 @@
-<tables id="cc20e453383145a0933299ef9c1ebb4e" package-name="org.tinygroup.alm.service">
+<tables id="cc20e453383145a0933299ef9c1ebb4e">
   <table id="2d685b3a39e54ddb987b9bb717da6cbd" name="service_client" title="客户信息表" schema="" package-name="">
     <description></description>
     <table-field standard-field-id="1786285066dd4f408bbae01233a96b53" primary="true" unique="true" not-null="true" id="client_id" auto-increase="true"/>
