@@ -26,7 +26,7 @@ public class StoryAction {
     @RequestMapping("")
     public String storyAction(ProductStory story, String groupOperate, Model model, HttpServletRequest request, HttpServletResponse response){
         String queryString = request.getQueryString();
-       if(!queryString.contains("choose")){
+       if(queryString!=null&&!queryString.contains("choose")){
             return "redirect:/product/story?choose=1&"+queryString;
         }
         return "product/page/project/togglebox.page";

@@ -38,7 +38,7 @@
         <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="findDictPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager;"/>
+      <service-result name="findDictPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
     <service-method local-name="updateBatchDict" service-id="system_updateBatchDict" method-name="updateBatchDict" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
       <service-parameters>

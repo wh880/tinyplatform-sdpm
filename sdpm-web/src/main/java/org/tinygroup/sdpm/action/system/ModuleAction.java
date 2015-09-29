@@ -33,7 +33,9 @@ public class ModuleAction extends BaseController{
 		response.setContentType("application/json; charset=UTF-8");
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		List<SystemModule> list = moduleService.findModules(systemModule);
-		mergeModule(list,mapList,0);
+		if(list !=null&&list.size()>0){
+			mergeModule(list,mapList,0);
+		}
 		return mapList;
 	}
 	@RequestMapping("list")
