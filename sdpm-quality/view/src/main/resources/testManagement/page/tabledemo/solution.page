@@ -35,7 +35,7 @@
         <div class="col-12">
          	<div class="col-2 text-r"><label>解决方案：</label></div>
          		<div class="col-4">
-            #@tinySelect("bugResolution" "zh" {"class":"input-text","rel":"22","onclick":"setType(this.value)"})
+            #@tinySelect("bugResolution" bug?.bugResolution {"class":"input-text","rel":"22","onclick":"setType(this.value)"})
                 #@tinyOptionItem("0")#end
                 #@tinyOptionItem("1")设计如此#end
                 #@tinyOptionItem("2")重复Bug#end
@@ -53,7 +53,7 @@
         <div class="col-12">
          	<div class="col-2 text-r"><label>重复ID：</label></div>
          		<div class="col-4">
-           			#tinyInput("text" "bugDuplicateBug" ""{"datatype":"","id":"111","class":"input-text","placeholder":""})
+           			#tinyInput("text" "bugDuplicateBug" bug?.bugDuplicateBug {"datatype":"","id":"111","class":"input-text","placeholder":""})
               </div>
        </div>
      #end
@@ -62,7 +62,7 @@
          	<div class="col-2 text-r"><label>解决版本：</label></div>
          		<div class="col-4">
             #@Tselect2F()
-	             #@Tselect2Body("bugResolvedBuild" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	             #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                  <option value="IN">版本1</option>
 	                  <option value="ME">版本2</option>
 	                  <option value="MD">版本3</option>
@@ -77,7 +77,7 @@
         <div class="col-12">
          	<div class="col-2 text-r"><label>解决日期：</label></div>
          		<div class="col-4">
-            #@tinyDateInput("bugResolvedDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+            #@tinyDateInput("bugResolvedDate" bug?.bugResolvedDate "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         		</div>
         </div>
     #end
@@ -86,7 +86,7 @@
          	<div class="col-2 text-r"><label>指派给：</label></div>
          		<div class="col-4">
             #@Tselect2F()
-	             #@Tselect2Body("bugAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	             #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                  <option value="IN">A</option>
 	                  <option value="ME">B</option>
 	                  <option value="MD">C</option>
