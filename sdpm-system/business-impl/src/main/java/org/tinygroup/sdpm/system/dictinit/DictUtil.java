@@ -2,6 +2,9 @@ package org.tinygroup.sdpm.system.dictinit;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.tinygroup.beancontainer.BeanContainerFactory;
+import org.tinygroup.sdpm.system.biz.impl.DictManagerImpl;
+import org.tinygroup.sdpm.system.biz.impl.ModuleManagerImpl;
 import org.tinygroup.sdpm.system.biz.inter.DictManager;
 import org.tinygroup.sdpm.system.biz.inter.ModuleManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
@@ -18,10 +21,8 @@ import java.util.Map;
 public class DictUtil{
     private static   Map<String,List<SystemDict>> dictMap = new HashMap<String, List<SystemDict>>();
     private static boolean isStarted = false;
-    @Autowired
-    private static DictManager dictManager;
-    @Autowired
-    private static ModuleManager moduleManager;
+    private static DictManager dictManager = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(DictManagerImpl.class);
+    private static ModuleManager moduleManager = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(ModuleManagerImpl.class);
     public static void init(){
         if(!isStarted) {
             SystemModule systemModule = new SystemModule();
