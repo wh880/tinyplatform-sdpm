@@ -4,7 +4,7 @@
 <div class="col-8">
 #@div(divClass="col-8")
 	
-	#tinyInput("text" "docLibId" doclib?.docLibName {"style":"height:29px","placeholder":"产品文档库","id":"docLibId","class":"input-text"})
+	#tinyInput("text" "docLibName" doclib?.docLibName {"style":"height:29px","placeholder":"产品文档库","id":"docLibId","class":"input-text"})
 	
 #end
 <div class="col-3">

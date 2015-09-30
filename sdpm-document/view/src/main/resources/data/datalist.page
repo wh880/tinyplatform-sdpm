@@ -16,7 +16,6 @@ ${docpager.getTotalCount()}
 			#if(m.id != "docdelete")
 				<a href="${TINY_CONTEXT_PATH}${m.href}/${l?.docId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 			#else
-			##不会配置
 				#@tinyTableItemRemove(TINY_CONTEXT_PATH+m.href l.docId)
 					<i class="${m.icon}" title="删除"></i>
 				#end

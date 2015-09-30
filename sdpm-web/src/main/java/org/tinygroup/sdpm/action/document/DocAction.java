@@ -50,8 +50,15 @@ public class DocAction {
 		model.addAttribute("doc",doc);
 		return "/document/doc-view.page";
 	}
+	@RequestMapping(value="/edit-doclib")
+	public String editDoclib(Doclib doclib,Model model,Integer doclibid)
+	{
+		doclib = docservice.findDoclibById(doclibid);
+		model.addAttribute("doclib", doclib);
+		return "/document/edit-doclib.pagelet";
+	}
 	@RequestMapping(value="/edit-doclib/save")
-	public String editDoclib(Doclib doclib)
+	public String updtDoclib(Doclib doclib)
 	{
 		docservice.editDocLibName(doclib);
 		return "redirect:"+"/document/document.page";
@@ -81,10 +88,10 @@ public class DocAction {
 		return "redirect:"+"/document/document.page";
 	}
 	@RequestMapping(value="/delete/doc")
-	public String delDoc(Integer id)
+	public String delDoc(Integer docid)
 	{
 		/*int ret = */
-		docservice.deleteDocById(id);
+		docservice.deleteDocById(docid);
 		//if(ret==0)return "/document/Error.page";
 		return "redirect:"+"/document/document.page";
 	}
