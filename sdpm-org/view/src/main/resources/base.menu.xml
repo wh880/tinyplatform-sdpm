@@ -51,7 +51,7 @@
         <menu id="org-user-projectAdmin" name="项目" href="/organization/user/projectAdmin.page" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
-        <menu id="org-user-profileAdmin" name="档案" href="/organization/user/profileAdmin.page" icon="" sort="1"
+        <menu id="org-user-profileAdmin" name="档案" href="/org/company/show/profile" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
         <menu id="org-user-export" name="导出" href="/organization/common/fileOutput.pagelet" icon="icon-download-alt"

@@ -19,7 +19,13 @@
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()部门结构#end
             #@settoggleLeftBody("treeLeftbox")
-                #include("/organization/common/moduleTree.page")
+                #@zTreeList(call("link","/organization/common/ztreeData.pagelet"))
+                    #setzTreeValMap({"id":"modelid","name":"truename","pid":"parentid"}) ##key值为固定
+                    #zTreeSetLinkUrl("http://127.0.0.1:8080/tinyuiweb/mytree.page" )
+                    #zTreeSetAddUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
+                    #zTreeSetEditUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
+                    #zTreeSetDelUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
+                #end
             #end
         #end
         #@toggleRight()

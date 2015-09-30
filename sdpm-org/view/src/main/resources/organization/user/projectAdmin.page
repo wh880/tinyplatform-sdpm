@@ -25,10 +25,11 @@
                     &nbsp;&gt;
                     #foreach(m:menuManager.getScopeMenus("org-user-detail"))
                         #if(m.id=="org-user-projectAdmin")
-                            <a href="${TINY_CONTEXT_PATH}${m.href}" class="active_btn">${m.name}</a>
+                            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var?.orgUserId}"
+                               class="active_btn">${m.name}</a>
 
                         #else
-                            <a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a>
+                            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var?.orgUserId}">${m.name}</a>
                         #end
                     #end
 

@@ -47,9 +47,10 @@
                     &nbsp;&gt;
                     #foreach(m:menuManager.getScopeMenus("org-user-detail"))
                         #if(m.id=="org-user-profileAdmin")
-                            <a href="${TINY_CONTEXT_PATH}${m.href}" class="active_btn">${m.name}</a>
+                            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var?.orgUserId}"
+                               class="active_btn">${m.name}</a>
                         #else
-                            <a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a>
+                            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var?.orgUserId}">${m.name}</a>
 
                         #end
                     #end
@@ -61,11 +62,6 @@
                         #@aModal("#myModal" m.name "800" "400" ""
                         m.href)#buttonIcon(iconClass="icon-edit")${m.name}#end
                     #end
-                ##            #@aModal("#myModal" "修改档案" "800" "400" "" "/organization/user/profileAdminEdit.pagelet")
-                ##
-                ##                #@simpleI("icon-edit")修改档案#end
-                ##
-                ##            #end
                     #@dialog("myModal")
                         #@dialogHeader()公司#end
                         #@dialogBody()<p></p>#end
@@ -92,24 +88,25 @@
 
         #@gridSysCol(6)
             #@tinyForm("thisform" "" "" {"class":"formText"})
+
             <div class="infoContent">
                 <p class="titleName">账号信息</p>
                 #@gridSysRow()
                     #@colLabel("col-4")用户名：#end
                     #@gridSysCol(8)
-                        <p>张三</p>
+                        <p>${user?.orgUserAccount}</p>
                     #end
                 #end
                 #@gridSysRow()
                     #@colLabel("col-4")邮箱：#end
                     #@gridSysCol(8)
-                        <p>mahuateng@qq.com</p>
+                        <p>${user?.orgUserEmail}</p>
                     #end
                 #end
                 #@gridSysRow()
                     #@colLabel("col-4")源代码账号：#end
                     #@gridSysCol(8)
-                        <p>研发部门</p>
+                        <p>${user?.orgUserSubmitter}</p>
                     #end
                 #end
             </div>
@@ -120,37 +117,37 @@
                 #@gridSysRow()
                     #@colLabel("col-4")真实姓名：#end
                     #@gridSysCol(8)
-                        <p>张三</p>
+                        <p>${user?.orgUserRealName}</p>
                     #end
                 #end
                 #@gridSysRow()
                     #@colLabel("col-4")性别：#end
                     #@gridSysCol(8)
-                        <p>女</p>
+                        <p>${user?.orgUserGender}</p>
                     #end
                 #end
                 #@gridSysRow()
                     #@colLabel("col-4")所属部门：#end
                     #@gridSysCol(8)
-                        <p>研发部门</p>
+                        <p>${user?.orgDeptId}</p>
                     #end
                 #end
                 #@gridSysRow()
                     #@colLabel("col-4")职位：#end
                     #@gridSysCol(8)
-                        <p>攻城狮</p>
+                        <p>${user?.orgUserRole}</p>
                     #end
                 #end
-                #@gridSysRow()
-                    #@colLabel("col-4")权限：#end
-                    #@gridSysCol(8)
-                        <p>管理员</p>
-                    #end
-                #end
+            ##                #@gridSysRow()
+            ##                    #@colLabel("col-4")权限：#end
+            ##                    #@gridSysCol(8)
+            ##                        <p>${user?.orgUserSubmitter}</p>
+            ##                    #end
+            ##                #end
                 #@gridSysRow()
                     #@colLabel("col-4")加入日期：#end
                     #@gridSysCol(8)
-                        <p>2016-1-1</p>
+                        <p>${user?.orgUserJoin}</p>
                     #end
                 #end
             </div>
@@ -160,61 +157,61 @@
                 #@gridSysRow()
                     #@colLabel("col-4")Skype：#end
                     #@gridSysCol(8)
-                        <p>Skype</p>
+                        <p>${user?.orgUserSkype}</p>
                     #end
                 #end
                 #@gridSysRow()
                     #@colLabel("col-4")QQ：#end
                     #@gridSysCol(8)
-                        <p>123456</p>
+                        <p>${user?.orgUserQQ}</p>
                     #end
                 #end
                 #@gridSysRow()
                     #@colLabel("col-4")雅虎通：#end
                     #@gridSysCol(8)
-                        <p>雅虎通</p>
+                        <p>${user?.orgUserYahoo}</p>
                     #end
                 #end
-                #@gridSysRow()
-                    #@colLabel("col-4")职位：#end
-                    #@gridSysCol(8)
-                        <p>攻城狮</p>
-                    #end
-                #end
+            ##                #@gridSysRow()
+            ##                    #@colLabel("col-4")职位：#end
+            ##                    #@gridSysCol(8)
+            ##                        <p>${user?.orgUserGTalk}</p>
+            ##                    #end
+            ##                #end
                 #@gridSysRow()
                     #@colLabel("col-4")Gtalk：#end
                     #@gridSysCol(8)
-                        <p>Gtalk</p>
+                        <p>${user?.orgUserGTalk}</p>
                     #end
                 #end
                 #@gridSysRow()
                     #@colLabel("col-4")旺旺：#end
                     #@gridSysCol(8)
-                        <p>旺旺</p>
+                        <p>${user?.orgUserWangWang}</p>
                     #end
                 #end
                 #@gridSysRow()
                     #@colLabel("col-4")手机：#end
                     #@gridSysCol(8)
-                        <p>手机</p>
+                        <p>${user?.orgUserMobile}</p>
                     #end
                 #end
                 #@gridSysRow()
                     #@colLabel("col-4")电话：#end
                     #@gridSysCol(8)
-                        <p>电话</p>
+                        <p>${user?.orgUserPhone}</p>
                     #end
                 #end
                 #@gridSysRow()
                     #@colLabel("col-4")通讯地址：#end
                     #@gridSysCol(8)
-                        <p>杭州恒生电子</p>
+                        <p>${user?.orgUserAddress}</p>
                     #end
                 #end
                 #@gridSysRow()
                     #@colLabel("col-4")邮编：#end
                     #@gridSysCol(8)
-                        <p>1241241</p>
+                        <p>${user?.orgUserZipCode}</p>
                     #end
                 #end
             </div>

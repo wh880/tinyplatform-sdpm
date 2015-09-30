@@ -76,4 +76,12 @@ public class UserAction extends BaseController {
         model.addAttribute("pager", pager);
         return "organization/user/userTableData.pagelet";
     }
+
+    @RequestMapping("/show/profile")
+    public String show(String id, Model model) {
+        OrgUser user = userService.findUser(id);
+        model.addAttribute("user", user);
+        return "organization/user/profileAdmin.page";
+    }
+
 }
