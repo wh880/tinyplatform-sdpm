@@ -5,6 +5,7 @@ import org.tinygroup.database.config.table.TableField;
 import org.tinygroup.metadata.config.stdfield.StandardField;
 import org.tinygroup.metadata.util.MetadataUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,9 +53,8 @@ public class StdUtil {
             try {
                 stdMap.put(NameUtil.resolveNameAsc(standardField.getName()), standardField.getTitle());
             }catch (Exception e){
-                throw new RuntimeException("添加标准字段["+standardField.getId()+"]时出错");
-            }
-            if(tableField.getPrimary()){
+                throw new RuntimeException("��ӱ�׼�ֶ�["+standardField.getId()+"]ʱ����");
+            }            if(tableField.getPrimary()){
                 tablePrimary.put(t.getName(),standardField.getName());
             }
         }

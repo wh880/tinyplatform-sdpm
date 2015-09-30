@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.biz.inter;
 
 
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -55,4 +56,16 @@ public interface TeamManager {
      * @return
      */
     Integer delete(int id);
+
+    /**
+     * 查询
+     *
+     * @param team
+     * @param start
+     * @param limit
+     * @param order
+     * @param asc
+     * @return
+     */
+    public Pager<ProjectTeam> findPager(ProjectTeam team, Integer start, Integer limit, String order, boolean asc);
 }

@@ -3,9 +3,12 @@ package org.tinygroup.sdpm.project.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.project.biz.inter.TeamManager;
 import org.tinygroup.sdpm.project.dao.ProjectTeamDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -44,5 +47,14 @@ public class TeamManagerImpl implements TeamManager {
         return teamDao.deleteByKey(id);
     }
 
+    public Pager<ProjectTeam> findPager(ProjectTeam team, Integer start, Integer limit, String order, boolean asc) {
+        if (StringUtil.isBlank(order)) {
+            return teamDao.queryPager(start, limit, team);
+        } else {
+            OrderBy orderBy = new OrderBy(order, asc);
+            return teamDao.queryPager(start, limit, team, orderBy);
+        }
+
+    }
 
 }
