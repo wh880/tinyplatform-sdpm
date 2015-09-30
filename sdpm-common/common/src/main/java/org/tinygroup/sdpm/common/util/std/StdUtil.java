@@ -4,7 +4,6 @@ import org.tinygroup.database.config.table.Table;
 import org.tinygroup.database.config.table.TableField;
 import org.tinygroup.metadata.config.stdfield.StandardField;
 import org.tinygroup.metadata.util.MetadataUtil;
-import org.tinygroup.sdpm.common.util.sort.SortUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,8 +29,12 @@ public class StdUtil {
         }
     }
 
-    public static String getTitle(String tableName, String feildName){
+    public static String getField(String tableName, String feildName) {
         return tableStdMap.get(tableMap.get(tableName)).get(feildName);
+    }
+
+    public static Map<String, String> getField(String table) {
+        return tableStdMap.get(table);
     }
 
     public static String getPrimary(String tableName){

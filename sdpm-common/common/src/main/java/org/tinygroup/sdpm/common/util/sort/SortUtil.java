@@ -25,15 +25,15 @@ public class SortUtil {
         return result;
     }
 
-    private static String resolverName(String name){
+    public static String resolverName(String name) {
         if(!name.contains("_")){
             char[] n = name.toCharArray();
             StringBuffer result = new StringBuffer();
             for(char c :n){
-                if(c>=65&&c<=97){
-                    result.append("_").append(c);
+                if (c >= 65 && c < 97) {
+                    result.append("_").append((char) (c + 32));
                 }else{
-                    result.append((char)(c-32));
+                    result.append(c);
                 }
 
             }

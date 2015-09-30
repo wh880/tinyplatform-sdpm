@@ -22,6 +22,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
+import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.project.dao.ProjectTaskDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.tinysqldsl.*;
@@ -245,11 +246,9 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
 //				return update;
 //			}
 //		});
-        Update update = update(PROJECT_TASKTABLE).set(
-                PROJECT_TASKTABLE.TASK_ASSIGNED_TO.value(projectTask.getTaskAssignedTo()),
-                PROJECT_TASKTABLE.TASK_LEFT.value(projectTask.getTaskLeft()),
-                PROJECT_TASKTABLE.TASK_STATUS.value(projectTask.getTaskStatus())).where(PROJECT_TASKTABLE.TASK_ID.eq(projectTask.getTaskId()));
+        Update update = UpdateUtil.getUpdate(PROJECT_TASKTABLE, projectTask);
         getDslSession().execute(update);
+
         return null;
     }
 

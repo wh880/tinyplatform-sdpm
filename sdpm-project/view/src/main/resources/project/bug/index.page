@@ -2,17 +2,27 @@
 
 #set(name="bug")
 #@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-			#@div(divClass="dropdownBox")
-				#include("/project/dropdownMenu.page")
-			#end
-			#@tabHead()
-				#include("/project/protab.page")
-			#end
-			#@tabBodyCol("ptop-5")
-
-			##operationbar end
-			#include("/project/bug/bugTogglebox.page")
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+    ##head end
+        #@tabBodyCol("ptop-5")
+        ##operationbar start
+            #@div(divClass="operationbar")
+            <span class="f">
+                    <font style="font-weight: bold">Bug列表</font>
+                </span>
+            <span class="r">
+                    <a href="${TINY_CONTEXT_PATH}" title="提Bug">#buttonIcon(iconClass="icon-plus")提Bug</a>
+                </span>
+            #end
+        ##operationbay end
+        #end
+    ##body end
+    #end
 #end
-#end
-#end
+#include("/project/bug/bugTogglebox.page")

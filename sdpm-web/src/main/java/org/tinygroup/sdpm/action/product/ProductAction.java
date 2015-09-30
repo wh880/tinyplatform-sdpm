@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -23,7 +24,7 @@ import org.tinygroup.weblayer.WebContext;
  *
  */
 @Controller
-@RequestMapping("product")
+@RequestMapping("/product")
 public class ProductAction  extends BaseController{
 
 	@Autowired
@@ -34,7 +35,7 @@ public class ProductAction  extends BaseController{
 		List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
 		String oldUrl = webContext.get("oldUrl");
 		if(list == null|| list.size()==0){
-			list = productService.findProductList(null,"productId","desc");
+			list = productService.findProductList(new Product(),"productId","desc");
 			request.getSession().setAttribute("productList",list);
 		}
 		
@@ -47,6 +48,19 @@ public class ProductAction  extends BaseController{
 		productService.updateProduct(product);
 		
 		return "redirect:" + "/product/page/tabledemo/product-listall.page";
+	}
+	
+	@ResponseBody
+	@RequestMapping("sessionset")
+	public boolean sessionSet(Integer productId,HttpServletRequest request){
+		if(productId!=null){
+			request.getSession().setAttribute("sessionProductId", productId);
+			return true;
+		}else{
+			request.getSession().removeAttribute("sessionProductId");
+			return false;
+		}
+		
 	}
 	
 	@RequestMapping("/delete")
