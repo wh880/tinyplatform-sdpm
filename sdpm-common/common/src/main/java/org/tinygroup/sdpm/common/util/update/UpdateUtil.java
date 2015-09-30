@@ -23,17 +23,21 @@ public class UpdateUtil {
         for(Field field : fields){
             Method method = null;
             Object value = null;
-            try {
-                method = object.getClass().getMethod(getMethodName(field.getName()));
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
+            if (StdUtil.getField(table.getName()).containsKey(resolverName(field.getName()))) {
+                try {
+                    method = object.getClass().getMethod(getMethodName(field.getName()));
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
             }
-            try {
-                value = method.invoke(object);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+            if (method != null) {
+                try {
+                    value = method.invoke(object);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
             }
             if(value != null){
                 String tableField = resolverName(field.getName());
@@ -64,7 +68,7 @@ public class UpdateUtil {
             char[] n = name.toCharArray();
             StringBuffer result = new StringBuffer();
             for(char c :n){
-                if(c>=65&&c<=97){
+                if (c >= 65 && c < 97) {
                     result.append("_").append((char)(c+32));
                 }else{
                     result.append((c));
