@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.system.service.util;
+package org.tinygroup.sdpm.system.dictinit;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +15,14 @@ import java.util.Map;
  * Created by wangll13383 on 2015/9/28.
  */
 //@Component
-public class DictUtil implements InitializingBean {
+public class DictUtil{
     private static   Map<String,List<SystemDict>> dictMap = new HashMap<String, List<SystemDict>>();
     private static boolean isStarted = false;
     @Autowired
-    private DictManager dictManager;
+    private static DictManager dictManager;
     @Autowired
-    private ModuleManager moduleManager;
-    private void init(){
+    private static ModuleManager moduleManager;
+    public static void init(){
         if(!isStarted) {
             SystemModule systemModule = new SystemModule();
             systemModule.setModuleType("dict");
@@ -31,15 +31,15 @@ public class DictUtil implements InitializingBean {
             isStarted = true;
         }
     }
-    public  List<SystemDict> getDict(String dictType){
+    public static  List<SystemDict> getDict(String dictType){
         return dictMap.get(dictType);
     }
 
-    public void afterPropertiesSet() throws Exception {
-        init();
-    }
+//    public void afterPropertiesSet() throws Exception {
+//        init();
+//    }
 
-    private void mergeDict(List<SystemModule> systemModules){
+    private static void mergeDict(List<SystemModule> systemModules){
         for(SystemModule systemModule : systemModules){
            {
                SystemDict dict = new SystemDict();
