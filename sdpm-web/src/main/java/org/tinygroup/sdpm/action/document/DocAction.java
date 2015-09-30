@@ -21,7 +21,7 @@ public class DocAction {
 	public String docIndex(Doc doc,Doclib doclib,Model model,int limit)
 	{
 		//list Doc
-		//Pager<Doc> docpager = docservice.findDocRetPager(0, page, doc);
+		//Pager<Doc> docpager = docservice.findDocRetPager(0, limit, doc);
 		//list Doclib name
 		Pager<Doclib> doclibpager = docservice.findDoclibRetPager(0, limit, doclib);
 		model.addAttribute("doclibpager", doclibpager);
