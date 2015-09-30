@@ -13,59 +13,59 @@
 			       		#@tbody()
 			       			#@tr()
 								#@td()所属产品#end
-			       				#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">产品1</a>#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">${bug?.productId}</a>#end
 			       			#end
 			       			#@tr()
 								#@td()所属模块#end
-			       				#@td()/#end
+			       				#@td()${bug?.moduleId}#end
 			       			#end
 			       			#@tr()
 								#@td()所属计划#end
-			       				#@td()/#end
+			       				#@td()${bug?.planId}#end
 			       			#end
 			       			#@tr()
 								#@td()Bug类型#end
-			       				#@td()代码错误#end
+			       				#@td()${bug?.bugType}#end
 			       			#end
 			       			#@tr()
 								#@td()严重程度#end
-			       				#@td()3#end
+			       				#@td()${bug?.bugSeverity}#end
 			       			#end
 			       			#@tr()
 								#@td()优先级#end
-			       				#@td()3#end
+			       				#@td()${bug?.priority}#end
 			       			#end
 			       			#@tr()
 								#@td()Bug状态#end
-			       				#@td()激活#end
+			       				#@td()${bug?.bugStatus}#end
 			       			#end
 			       			#@tr()
 								#@td()激活次数#end
-			       				#@td()3#end
+			       				#@td()${bug?.bugActivatedCount}#end
 			       			#end
 			       			#@tr()
 								#@td()是否确认#end
-			       				#@td()未确认#end
+			       				#@td()${bug?.bugConfirmed}#end
 			       			#end
 			       			#@tr()
 								#@td()当前指派#end
-			       				#@td()admin 于 2015-09-09 17:16:43#end
+			       				#@td()${bug?.bugAssignedTo} 于 ${bug?.bugAssignedDate}#end
 			       			#end
 			       			#@tr()
 								#@td()操作系统#end
-			       				#@td()#end
+			       				#@td()${bug?.operatingSystem}#end
 			       			#end
 			       			#@tr()
 								#@td()浏览器#end
-			       				#@td()#end
+			       				#@td()${bug?.browser}#end
 			       			#end
 			       			#@tr()
 								#@td()关键词#end
-			       				#@td()#end
+			       				#@td()${bug?.bugKeywords}#end
 			       			#end
 			       			#@tr()
 								#@td()抄送给#end
-			       				#@td()#end
+			       				#@td()${bug?.bugMailto}#end
 			       			#end
 			       		#end
 				 #end
@@ -77,15 +77,15 @@
 			       		#@tbody()
 			       			#@tr()
 								#@td()所属项目#end
-			       				#@td()#end
+			       				#@td()${bug?.projectId}#end
 			       			#end
 			       			#@tr()
 								#@td()相关需求#end
-			       				#@td()#end
+			       				#@td()${bug?.storyId}#end
 			       			#end
 			       			#@tr()
 								#@td()相关任务#end
-			       				#@td()#end
+			       				#@td()${bug?.taskId}#end
 			       			#end
 			       		#end
 			 #end
@@ -108,31 +108,31 @@
 			       		#@tbody()
 			       			#@tr()
 								#@td()由谁创建#end
-			       				#@td()admin 于 2015-09-09 17:16:43#end
+			       				#@td()${bug?.bugOpenedBy} 于 ${bug?.bugOpenedDate}#end
 			       			#end
 			       			#@tr()
 								#@td()影响版本#end
-			       				#@td()111#end
+			       				#@td()${bug?.bugOpenedBuild}#end
 			       			#end
 			       			#@tr()
 								#@td()由谁解决#end
-			       				#@td()#end
+			       				#@td()${bug?.bugResolvedBy}#end
 			       			#end
 			       			#@tr()
 								#@td()解决版本#end
-			       				#@td()#end
+			       				#@td()${bug?.bugResolvedBuild}#end
 			       			#end
 			       			#@tr()
 								#@td()解决方案#end
-			       				#@td()#end
+			       				#@td()${bug?.bugResolution}#end
 			       			#end
 			       			#@tr()
 								#@td()由谁关闭#end
-			       				#@td()#end
+			       				#@td()${bug?.bugClosedBy}#end
 			       			#end
 			       			#@tr()
 								#@td()最后修改#end
-			       				#@td()#end
+			       				#@td()${bug?.bugLastEditedBy}#end
 			       			#end
 			       		#end
 			 #end
@@ -143,29 +143,29 @@
 			       		#@thead()
 			       		#end
 			       		#@tbody()
-			       			#@tr()
+#*			       			#@tr()
 								#@td()生源用例#end
-			       				#@td()#end
+			       				#@td()${bug?.bugLastEditedBy}#end
 			       			#end
 			       			#@tr()
 								#@td()生成用例#end
-			       				#@td()#end
-			       			#end
+			       				#@td()${bug?.bugLastEditedBy}#end
+			       			#end*#
 			       			#@tr()
 								#@td()相关BUG#end
-			       				#@td()#end
+			       				#@td()${bug?.linkBug}#end
 			       			#end
 			       			#@tr()
 								#@td()相关用例#end
-			       				#@td()#end
+			       				#@td()${bug?.linkCase}#end
 			       			#end
 			       			#@tr()
 								#@td()转需求#end
-			       				#@td()#end
+			       				#@td()${bug?.toStoryId}#end
 			       			#end
 			       			#@tr()
 								#@td()转任务#end
-			       				#@td()#end
+			       				#@td()${bug?.toTaskId}#end
 			       			#end
 			       		#end
 			 #end
