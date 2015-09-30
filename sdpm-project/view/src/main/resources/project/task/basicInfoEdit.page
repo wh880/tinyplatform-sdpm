@@ -7,23 +7,7 @@
             #@tbody()
                 #@tr()
                     #@th()所属项目#end
-                    #@td() #@formControlDiv("col-8")
-                        #@Tselect2F()
-                            #@Tselect2Body(
-                                "taskProject" task?.taskProject {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="IN">Indiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
-                            #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                        #end
-                        #@validateDiv("col-2")#end
-                    #end
+                    #@td() 1
                     #end
                 #end
                 #@tr()
@@ -52,13 +36,13 @@
                         #@Tselect2F()
                             #@Tselect2Body(
                                 "taskStory" task?.taskStory {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="IN">Indiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
+                                <option value="1">Connecticut</option>
+                                <option value="2">Delaware</option>
+                                <option value="3">Florida</option>
+                                <option value="4">Georgia</option>
+                                <option value="5">Indiana</option>
+                                <option value="6">Maine</option>
+                                <option value="7">Maryland</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
@@ -112,13 +96,12 @@
                         #@Tselect2F()
                             #@Tselect2Body(
                                 "taskStatus" task?.taskStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="IN">Indiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
+                                <option value="1">未开始</option>
+                                <option value="2">进行中</option>
+                                <option value="3">已完成</option>
+                                <option value="4">已暂停</option>
+                                <option value="5">已取消</option>
+                                <option value="6">已关闭</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
@@ -130,15 +113,12 @@
                     #@th()优先级#end
                     #@td()#@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body(
-                                "taskPri" task?.taskPri {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="IN">Indiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
+                            #@Tselect2Body("taskPri" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
@@ -150,8 +130,7 @@
                     #@th()抄送给#end
                     #@td()#@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body(
-                                "taskPri" task?.taskPri {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("taskMailto" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                 <option value="CT">Connecticut</option>
                                 <option value="DE">Delaware</option>
                                 <option value="FL">Florida</option>
@@ -161,7 +140,7 @@
                                 <option value="MD">Maryland</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
                         #end
                         #@validateDiv("col-2")#end
                     #end#end

@@ -66,7 +66,7 @@ public class TaskServiceImpl implements TaskService {
     public Integer updateCloseTask(ProjectTask task) {
         task.setTaskCloseDate(new Date());
         task.setTaskStatus("6");
-        return null;
+        return taskManager.updateCloseTask(task);
     }
 
     public Pager<ProjectTask> findComplexTask() {

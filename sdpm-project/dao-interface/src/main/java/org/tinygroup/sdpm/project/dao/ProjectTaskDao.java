@@ -39,4 +39,6 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
     Integer editfinish(ProjectTask task);
 
     Integer editstart(ProjectTask task);
+
+    Integer editclose(ProjectTask task);
 }

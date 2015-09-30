@@ -117,4 +117,6 @@ public interface TaskManager {
      * @return
      */
     Integer delete(int id);
+
+    Integer updateCloseTask(ProjectTask task);
 }
