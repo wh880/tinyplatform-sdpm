@@ -97,7 +97,9 @@
         <menu id="tcasesee" name="分组查看"  href="#" icon="" sort="3"
               isShow="1" scope="testcaseleft-tab"></menu> 
          <menu id="tcasenodemand" name="零用例需求"  href="#" icon="" sort="2"
-              isShow="1" scope="testcaseleft-tab"></menu>      
+              isShow="1" scope="testcaseleft-tab"></menu> 
+        <menu id="tcaseserach" name="搜索"  href="#" icon="" sort="1"
+              isShow="1" scope="testcaseleft-tab"></menu>     
 	</menu>		 
     <menu id="qualityVersion" parent-id="quality" name="版本" href="/testManagement/page/version.page" icon=""
               sort="1"       isShow="1">

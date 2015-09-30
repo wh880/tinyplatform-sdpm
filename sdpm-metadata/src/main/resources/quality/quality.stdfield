@@ -73,7 +73,7 @@
   <standard-field id="5c4ed17618134ece8c869756c3aa5292" name="bug_v2" title="BUG_V2" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default=""/>
   <standard-field id="682cae09812d41c6b726a3d7c7a2e770" name="test_result_id" title="测试结果" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="c076c31364c64d809887f04dcc9c0318" name="testresult_run" title="TESTRESULT_RUN" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
-  <standard-field id="5a140e9f3c3e4fd88ba6d8895606344d" name="case__result" title="测试结果" business-type-id="095e594e1550424b9643c7e2279e85be" default="-0"/>
+  <standard-field id="5a140e9f3c3e4fd88ba6d8895606344d" name="case_result" title="测试结果" business-type-id="095e594e1550424b9643c7e2279e85be" default="0"/>
   <standard-field id="142d02cd9d80455f8863beef028354e5" name="case_stepresults" title="用例步骤结果" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" default=""/>
   <standard-field id="8555ec8d0f9842848790d0b62faf31d8" name="test_result_last_runner" title="最后执行人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="79038eaa3ce942da87919d70b4af6a66" name="test_result_date" title="最后执行日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default=""/>
