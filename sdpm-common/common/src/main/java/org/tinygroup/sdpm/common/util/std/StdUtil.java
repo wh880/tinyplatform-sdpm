@@ -49,7 +49,11 @@ public class StdUtil {
         }else if (object instanceof  TableField){
             tableField = (TableField) object;
             StandardField standardField = MetadataUtil.getStandardField(tableField.getStandardFieldId(),StdUtil.class.getClassLoader());
-            stdMap.put(NameUtil.resolveNameAsc(standardField.getName()),standardField.getTitle());
+            try {
+                stdMap.put(NameUtil.resolveNameAsc(standardField.getName()), standardField.getTitle());
+            }catch (Exception e){
+                throw new RuntimeException("添加标准字段["+standardField.getId()+"]时出错");
+            }
             if(tableField.getPrimary()){
                 tablePrimary.put(t.getName(),standardField.getName());
             }

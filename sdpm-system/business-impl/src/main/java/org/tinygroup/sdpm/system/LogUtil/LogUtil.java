@@ -18,9 +18,13 @@ import java.util.Date;
  * Created by wangll13383 on 2015/9/30.
  */
 public class LogUtil {
-    private static ActionManager actionManager = BeanContainerFactory.getBeanContainer(LogUtil.class.getClassLoader()).getBean(ActionManagerImpl.class);
+    private static ActionManager actionManager;
+    private static HistoryManager historyManager;
 
-    private static HistoryManager historyManager = BeanContainerFactory.getBeanContainer(LogUtil.class.getClassLoader()).getBean(HistoryManagerImpl.class);
+    static {
+        actionManager = BeanContainerFactory.getBeanContainer(LogUtil.class.getClassLoader()).getBean(ActionManagerImpl.class);
+        historyManager = BeanContainerFactory.getBeanContainer(LogUtil.class.getClassLoader()).getBean(HistoryManagerImpl.class);
+    }
 
     public static void log(Object oldObject, Object newObject, SystemAction systemAction){
         systemAction.setActionDate(new Date());
@@ -28,7 +32,8 @@ public class LogUtil {
         recordEdit(oldObject,newObject,systemAction);
     }
     public static void log(SystemAction systemAction){
-
+        systemAction.setActionDate(new Date());
+        actionManager.add(systemAction);
     }
 
     private static void recordEdit( Object oldObject, Object newObject, SystemAction systemAction){
