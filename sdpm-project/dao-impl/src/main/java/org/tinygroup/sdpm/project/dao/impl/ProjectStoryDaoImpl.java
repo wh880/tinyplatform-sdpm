@@ -44,6 +44,12 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @LogClass("story")
 @Repository
 public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectStoryDao {
+
+	public List<ProjectStory> findByProjectID(Integer projectId) {
+		Select select = selectFrom(PROJECT_STORYTABLE).where(PROJECT_STORYTABLE.PROJECT_ID.eq(projectId));
+		return getDslSession().fetchList(select, ProjectStory.class);
+	}
+
 	@LogMethod("add")
 	public ProjectStory add(ProjectStory projectStory) {
 		return getDslTemplate().insertAndReturnKey(projectStory, new InsertGenerateCallback<ProjectStory>() {

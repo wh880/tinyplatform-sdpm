@@ -37,8 +37,12 @@ public class BeforeAction {
     }
 
     @RequestMapping("/select")
-    public String selectProject(Integer projectId, String oldUrl, Model model, HttpServletResponse response) {
+    public String selectProject(Integer projectId, String oldUrl, Model model, HttpServletResponse response, HttpServletRequest request) {
         CookieUtils.setCookie(response, "cookie_projectId", projectId.toString(), -1);
+        Project selProject = projectService.findById(projectId);
+        List<Project> list = projectService.findList();
+        request.getSession().setAttribute("selProject", selProject);
+        request.getSession().setAttribute("projectList", list);
         return "redirect:" + oldUrl;
     }
 

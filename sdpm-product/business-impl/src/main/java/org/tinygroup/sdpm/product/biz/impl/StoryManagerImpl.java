@@ -1,7 +1,5 @@
 package org.tinygroup.sdpm.product.biz.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +13,8 @@ import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -65,7 +65,7 @@ public class StoryManagerImpl implements StoryManager{
 	}
 
 	public Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
-		String condition = SqlUtil.toSql(conditions.getInfos(),groupOperate);
+		String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
 		condition = condition!=null&&!"".equals(condition)?(statusCondition!=null&&!"".equals(statusCondition)?condition+" and "+statusCondition:condition):statusCondition;
 		OrderBy orderBy = null;
 		if(columnName != null && !"".equals(columnName)){

@@ -52,7 +52,7 @@ public class ProductLineAction extends BaseController {
 	public String find(Integer productLineId,Model model){
 		ProductLine productLine = productLineService.findProductLine(productLineId);
 		model.addAttribute("productLine",productLine);
-		return "/productLine/page/tabledemo/add.page";
+		return "/productLine/page/tabledemo/update.page";
 	}
 	
 	@RequestMapping("/list")
@@ -63,6 +63,7 @@ public class ProductLineAction extends BaseController {
 			@RequestParam(required=false,defaultValue="asc")String ordertype,Model model){
 		
 		Pager<ProductLine> pagerProductLine = productLineService.findProductLinePager(page, pagesize, productLine, order, ordertype);
+		
 		model.addAttribute("productLine",pagerProductLine);
 		return "/productLine/data/productLinedata.pagelet";
 	}

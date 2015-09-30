@@ -126,7 +126,7 @@
 				#@colLabel()Bug标题/优先级：#end
 				#@formControlDiv("col-8")
 				#@div(divClass="col-5")
-					#tinyInput("text" "bugTitle" ""{"datatype":"*","id":"版本","class":"input-text"})
+					#tinyInput("text" "bugTitle" bug?.bugTitle {"datatype":"*","id":"版本","class":"input-text"})
 				#end
 				#@div(divClass="col-0")&nbsp&nbsp#end
                 	 #@div(divClass="col-3")					
@@ -186,19 +186,19 @@
 				#@colLabel()类型/严重程度：#end
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")					                	  
-					#@tinySelect("bugType" "1" {"class":"select2"})
-							#@tinyOptionItem("1")代码错误#end
-							#@tinyOptionItem("2")界面优化#end
-							#@tinyOptionItem("3")设计缺陷#end
-							#@tinyOptionItem("4")配置相关#end
-							#@tinyOptionItem("5")安装部署#end
-							#@tinyOptionItem("6")安全相关#end
-							#@tinyOptionItem("7")性能问题#end
-							#@tinyOptionItem("8")标准规范#end
-							#@tinyOptionItem("9")测试脚本#end
-							#@tinyOptionItem("10")代码改进#end
-							#@tinyOptionItem("11")其他#end
-							#@tinyOptionItem("12")同上#end
+					#@tinySelect("bugType" bug?.bugType {"class":"select2"})
+							#@tinyOptionItem("A")代码错误#end
+							#@tinyOptionItem("B")界面优化#end
+							#@tinyOptionItem("C")设计缺陷#end
+							#@tinyOptionItem("D")配置相关#end
+							#@tinyOptionItem("E")安装部署#end
+							#@tinyOptionItem("F")安全相关#end
+							#@tinyOptionItem("G")性能问题#end
+							#@tinyOptionItem("H")标准规范#end
+							#@tinyOptionItem("I")测试脚本#end
+							#@tinyOptionItem("J")代码改进#end
+							#@tinyOptionItem("K")其他#end
+							#@tinyOptionItem("L")同上#end
 					#end
 					#end
 					#@div(divClass="col-0")&nbsp&nbsp#end
@@ -218,7 +218,7 @@
 				#@colLabel()系统/浏览器：#end
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")					 
-					#@tinySelect("operatingSystem" "1" {"class":"select2"})
+					#@tinySelect("operatingSystem" bug?.operatingSystem {"class":"select2"})
 							#@tinyOptionItem("1")全部#end
 							#@tinyOptionItem("2")Windows#end
 							#@tinyOptionItem("3")Windows 8#end
@@ -237,28 +237,28 @@
 					#end
 					#@div(divClass="col-0")&nbsp&nbsp#end
 					#@div(divClass="col-3")					
-					#@tinySelect("browser" "zh" {"class":"select2"})
-							#@tinyOptionItem("zh")全部#end
-							#@tinyOptionItem("1")IE系列#end
-							#@tinyOptionItem("1")IE11#end
-							#@tinyOptionItem("1")IE10#end
-							#@tinyOptionItem("1")IE9#end
-							#@tinyOptionItem("1")IE8#end
-							#@tinyOptionItem("1")IE7#end
-							#@tinyOptionItem("1")IE6#end
-							#@tinyOptionItem("1")chrome#end
-							#@tinyOptionItem("1")Firefox系列#end
-							#@tinyOptionItem("1")Firefox4#end
-							#@tinyOptionItem("1")Firefox3#end
-							#@tinyOptionItem("1")Firefox2#end
-							#@tinyOptionItem("1")opera系列#end
-							#@tinyOptionItem("1")opera10#end
-							#@tinyOptionItem("1")opera9#end
-							#@tinyOptionItem("1")Safari#end
-							#@tinyOptionItem("1")遨游#end
-							#@tinyOptionItem("1")UC#end
-							#@tinyOptionItem("1")其他#end
-							#@tinyOptionItem("1")同上#end
+					#@tinySelect("browser" bug?.browser {"class":"select2"})
+							#@tinyOptionItem("A")全部#end
+							#@tinyOptionItem("B")IE系列#end
+							#@tinyOptionItem("C")IE11#end
+							#@tinyOptionItem("D")IE10#end
+							#@tinyOptionItem("E")IE9#end
+							#@tinyOptionItem("F")IE8#end
+							#@tinyOptionItem("G")IE7#end
+							#@tinyOptionItem("H")IE6#end
+							#@tinyOptionItem("I")chrome#end
+							#@tinyOptionItem("J")Firefox系列#end
+							#@tinyOptionItem("K")Firefox4#end
+							#@tinyOptionItem("L")Firefox3#end
+							#@tinyOptionItem("M")Firefox2#end
+							#@tinyOptionItem("N")opera系列#end
+							#@tinyOptionItem("O")opera10#end
+							#@tinyOptionItem("P")opera9#end
+							#@tinyOptionItem("Q")Safari#end
+							#@tinyOptionItem("R")遨游#end
+							#@tinyOptionItem("S")UC#end
+							#@tinyOptionItem("T")其他#end
+							#@tinyOptionItem("U")同上#end
 							
 					#end
 					#end
@@ -284,7 +284,7 @@
 				#@colLabel()关键词：#end
 				#@formControlDiv("col-8")
 				#@div(divClass="col-5")
-					#tinyInput("text" "bugKeywords" "" {"datatype":"","id":"关键词","class":"input-text"})
+					#tinyInput("text" "bugKeywords" bug?.bugKeywords {"datatype":"","id":"关键词","class":"input-text"})
 				#end
 				#end
 				#@validateDiv("col-2")#end

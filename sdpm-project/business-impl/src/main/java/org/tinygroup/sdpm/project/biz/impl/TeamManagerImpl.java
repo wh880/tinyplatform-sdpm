@@ -28,6 +28,10 @@ public class TeamManagerImpl implements TeamManager {
         return teamDao.query(team);
     }
 
+    public List<ProjectTeam> findByProjectId(Integer projectId) {
+        return teamDao.findByProjectId(projectId);
+    }
+
     public ProjectTeam add(ProjectTeam team) {
         return teamDao.add(team);
     }
@@ -39,4 +43,6 @@ public class TeamManagerImpl implements TeamManager {
     public Integer delete(int id) {
         return teamDao.deleteByKey(id);
     }
+
+
 }

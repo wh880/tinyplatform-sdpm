@@ -20,7 +20,9 @@ public interface TeamService {
 
     /**
      * 查询项目下的所有成员
+     * @param projectId
+     * @return
      */
-    public List<ProjectTeam> findByProjectId(int projectId);
+    public List<ProjectTeam> findTeamByProjectId(Integer projectId);
 
 }
