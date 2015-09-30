@@ -1,0 +1,322 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+<style>
+    .select_boxes{margin-top:0}
+</style>
+
+
+#set(name="qualityBug")
+#@div()
+#@tabWithInit("tab_demo" "optionsBox")
+	#@div(divClass="dropdownBox")
+		#include("/testManagement/page/dropdownMenu.page")
+	#end
+	#@tabHead()
+		#include("/testManagement/page/Tab.page")
+	#end
+
+	#@tabBodyCol("ptop-5")
+##operationbar start1
+#end
+	#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/copySave?bugConfirmed=0" "post" {"class":""})
+		#hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
+	<div style="width:100%">
+    	<div class="infoContent">
+    		<p class="titleName">提Bug</p>
+			#@elementItem()
+				#@colLabel()产品模块：#end
+				#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+					 #@Tselect2F()
+	                   		 #@Tselect2Body("productId" bug?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">2</option>
+	                        <option value="2">3</option>
+	                        <option value="3">4</option>
+	                        <option value="4">5</option>
+	                        <option value="5">1</option>
+	                    	#end                  
+	                    	#@Tselect2Fix()
+	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
+                	  #end
+#*					#@tinySelect("lang" "1" {"class":"select2"})
+							#@tinyOptionItem("1")日本三菱#end
+							#@tinyOptionItem("2")销售系统#end
+							#@tinyOptionItem("3")国产需求#end
+					#end*#
+					#end
+					#@div(divClass="col-0")&nbsp;&nbsp#end
+					#@div(divClass="col-3")
+					 #@Tselect2F()
+	                   		 #@Tselect2Body("moduleId" bug?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">/1/2</option>
+	                        <option value="2">/2/3</option>
+	                        <option value="3">/3/4</option>
+	                    	#end                
+                	  #end
+#*					#@tinySelect("lang" "zh" {"class":"select2"})
+							#@tinyOptionItem("zh")/首页#end
+							#@tinyOptionItem("en")/轮播图#end
+							#@tinyOptionItem("ta")/导航#end
+					#end*#
+					#end
+#*					#buttonRadiusDefault(caption="维护模板")
+					#buttonRadiusDefault(caption="刷新")*#
+				#end
+			#end
+			#@elementItem()
+				#@colLabel()所属项目：#end
+				#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+					 #@Tselect2F()
+	                   		 #@Tselect2Body("projectId" bug?.projectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
+	                    	#end                
+	                    	#@Tselect2Fix()
+	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
+	                    	#end
+                	  #end
+                	 #end
+				#end
+				#@validateDiv("col-2")#end
+			#end
+			#@elementItem()
+				#@colLabel()影响版本：#end
+				#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+					 #@Tselect2F()
+	                   		 #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
+	                    	#end                
+#*	                    	#@Tselect2Fix()
+	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
+	                    	#end*#
+                	  #end
+                	 #end
+				#end
+				#@validateDiv("col-2")#end
+			#end
+
+			#@elementItem()
+				#@colLabel()当前指派：#end
+						#@formControlDiv("col-8")
+							#@div(divClass="col-5")
+							 #@Tselect2F()
+	                   		 #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">admin</option>
+	                        <option value="2">admin2</option>
+	                        <option value="3">admin3</option>
+	                    	#end                
+	                       ###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                	 		#end
+                	  #end
+							#@validateDiv("col-2")#end
+				#end
+				#@validateDiv("col-2")#end
+			#end
+			#@elementItem()
+				#@colLabel()Bug标题/优先级：#end
+				#@formControlDiv("col-8")
+				#@div(divClass="col-5")
+					#tinyInput("text" "bugTitle" ""{"datatype":"*","id":"版本","class":"input-text"})
+				#end
+				#@div(divClass="col-0")&nbsp&nbsp#end
+                	 #@div(divClass="col-3")					
+					#@tinySelect("priority" bug?.priority {"class":"select2"})
+							#@tinyOptionItem("3")1#end
+							#@tinyOptionItem("1")2#end
+							#@tinyOptionItem("2")3#end
+							
+					#end
+					#end
+				#end
+				#@validateDiv("col-2")#end
+			#end
+			#@elementItem()
+				#@colLabel()重现步骤：#end
+				#@formControlDiv("col-8")
+					#@Teditor("content" "bugSteps" {"initialFrameHeight":"150"})Say something#end
+				#end
+				#@validateDiv("col-2")#end
+			#end
+			#@elementItem()
+				#@colLabel()相关需求：#end
+				#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+							 #@Tselect2F()
+	                   		 #@Tselect2Body("storyId" bug?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="2">1</option>
+	                        <option value="1">2</option>
+	                        <option value="3">3</option>
+	                    	#end                
+	                      	#@Tselect2Fix()
+	                      	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
+	                      	<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">全部</a>#end
+                			#end
+					#end
+				#end
+			#end
+			#@elementItem()
+				#@colLabel()相关任务：#end
+				#@formControlDiv("col-8")
+				#@div(divClass="col-5")
+					 #@Tselect2F()
+	                   		 #@Tselect2Body("taskId" bug?.taskId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
+	                    	#end                
+	                    	#@Tselect2Fix()
+	                    	<a href="${TINY_CONTEXT_PATH}/project/task/add.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH}/project/task/index.page">全部</a>#end
+                	  #end
+                #end
+				#end
+				#@validateDiv("col-2")#end
+			#end
+			#@elementItem()
+				#@colLabel()类型/严重程度：#end
+				#@formControlDiv("col-8")
+					#@div(divClass="col-5")					                	  
+					#@tinySelect("bugType" "1" {"class":"select2"})
+							#@tinyOptionItem("1")代码错误#end
+							#@tinyOptionItem("2")界面优化#end
+							#@tinyOptionItem("3")设计缺陷#end
+							#@tinyOptionItem("4")配置相关#end
+							#@tinyOptionItem("5")安装部署#end
+							#@tinyOptionItem("6")安全相关#end
+							#@tinyOptionItem("7")性能问题#end
+							#@tinyOptionItem("8")标准规范#end
+							#@tinyOptionItem("9")测试脚本#end
+							#@tinyOptionItem("10")代码改进#end
+							#@tinyOptionItem("11")其他#end
+							#@tinyOptionItem("12")同上#end
+					#end
+					#end
+					#@div(divClass="col-0")&nbsp&nbsp#end
+					#@div(divClass="col-3")
+					 #@Tselect2F()
+	                   		 #@Tselect2Body("bugSeverity" bug?.bugSeverity {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
+	                    	#end                
+	                    	###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                	  #end
+					#end
+				#end
+			#end
+			#@elementItem()
+				#@colLabel()系统/浏览器：#end
+				#@formControlDiv("col-8")
+					#@div(divClass="col-5")					 
+					#@tinySelect("operatingSystem" "1" {"class":"select2"})
+							#@tinyOptionItem("1")全部#end
+							#@tinyOptionItem("2")Windows#end
+							#@tinyOptionItem("3")Windows 8#end
+							#@tinyOptionItem("4")Windows 7#end
+							#@tinyOptionItem("5")Windows Vista#end
+							#@tinyOptionItem("6")Windows XP#end
+							#@tinyOptionItem("7")Android#end
+							#@tinyOptionItem("8")WP7#end
+							#@tinyOptionItem("9")Symbian#end
+							#@tinyOptionItem("10")Linux#end
+							#@tinyOptionItem("11")OSX#end
+							#@tinyOptionItem("11")Unix#end
+							#@tinyOptionItem("11")其他#end
+							#@tinyOptionItem("12")同上#end
+					#end
+					#end
+					#@div(divClass="col-0")&nbsp&nbsp#end
+					#@div(divClass="col-3")					
+					#@tinySelect("browser" "zh" {"class":"select2"})
+							#@tinyOptionItem("zh")全部#end
+							#@tinyOptionItem("1")IE系列#end
+							#@tinyOptionItem("1")IE11#end
+							#@tinyOptionItem("1")IE10#end
+							#@tinyOptionItem("1")IE9#end
+							#@tinyOptionItem("1")IE8#end
+							#@tinyOptionItem("1")IE7#end
+							#@tinyOptionItem("1")IE6#end
+							#@tinyOptionItem("1")chrome#end
+							#@tinyOptionItem("1")Firefox系列#end
+							#@tinyOptionItem("1")Firefox4#end
+							#@tinyOptionItem("1")Firefox3#end
+							#@tinyOptionItem("1")Firefox2#end
+							#@tinyOptionItem("1")opera系列#end
+							#@tinyOptionItem("1")opera10#end
+							#@tinyOptionItem("1")opera9#end
+							#@tinyOptionItem("1")Safari#end
+							#@tinyOptionItem("1")遨游#end
+							#@tinyOptionItem("1")UC#end
+							#@tinyOptionItem("1")其他#end
+							#@tinyOptionItem("1")同上#end
+							
+					#end
+					#end
+				#end
+			#end										
+			#@elementItem()
+				#@colLabel()抄送给：#end
+				#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+					 #@Tselect2F()
+	                   		 #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="IN">部长</option>
+	                        <option value="ME">admin</option>
+	                        <option value="MD">admin2</option>
+	                    	#end                
+                	  #end
+                	 #end
+				#end
+				#@validateDiv("col-2")#end
+			#end
+ 
+			#@elementItem()
+				#@colLabel()关键词：#end
+				#@formControlDiv("col-8")
+				#@div(divClass="col-5")
+					#tinyInput("text" "bugKeywords" "" {"datatype":"","id":"关键词","class":"input-text"})
+				#end
+				#end
+				#@validateDiv("col-2")#end
+			#end
+			#@elementItem()
+				#@colLabel()附件：#end
+				#@formControlDiv("col-8")					
+					#include("/testManagement/page/fileupload.page")
+#*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#				
+				#end
+				#@validateDiv("col-2")#end
+			#end
+			#@elementItem()
+       		 	<div class="col-12">
+            	<div class="col-5">
+                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+            	</div>
+            	<div class="col-1"></div>
+            	<div class="col-1">
+#*                <a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">
+                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>*#
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+           		 </div>
+            	<div class="col-5"></div>
+        		</div>
+			#end
+			<br>
+		#end
+		</div>
+	</div>
+	#end
+#end
+<script>
+	$('select.select2').select2()
+</script>

@@ -21,5 +21,8 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 
 public interface ProductLineDao extends BaseDao<ProductLine,Integer> {
+	
+	Integer softDelete(Integer id);
+	
 
 }

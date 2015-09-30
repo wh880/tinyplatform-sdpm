@@ -35,4 +35,8 @@ public class ClientUserServiceImpl implements ClientUserService{
     public Integer deleteClientUser(Integer id) {
         return clientUserManager.delete(id);
     }
+
+    public Integer deleteAllClientUser(Integer id) {
+        return clientUserManager.deleteAll(id);
+    }
 }

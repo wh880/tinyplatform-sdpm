@@ -10,28 +10,26 @@
 #set(name="request")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-      #*  #@div(divClass="dropdownBox")
-            #include("/service/serviceCom/dropdownMenu.page")
-        #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
     <br>
     #end
 #end
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/request/save" "post" {"class":""})
 <div style="width:80%;margin-left: 20px;" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">请求</p>
-
+        <input type="hidden" name="clientRequestId" value="${request?.clientRequestId}"/>
         #@elementItem()
             #@sdpmItem("产品名称")
                 #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body(
+                        "productId" request?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("ch")请选择#end
-                        #@tinyOptionItem("zh")产品一#end
-                        #@tinyOptionItem("en")产品二#end
-                        #@tinyOptionItem("ta")产品三#end
+                        #@tinyOptionItem("1")支付宝#end
+                        #@tinyOptionItem("2")余额宝#end
+                        #@tinyOptionItem("3")财付通#end
                     #end
                 ##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/sla/slaAdd.page" class="r ">增加</a><a
                 ##                            href="${TINY_CONTEXT_PATH}/service/sla/sla.page">全部</a>#end
@@ -41,11 +39,17 @@
         #@elementItem()
             #@sdpmItem("请求类型" "*")
                 #@Tselect2F()
-                    #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("1")请选择#end
-                        #@tinyOptionItem("2")类型一#end
-                        #@tinyOptionItem("3")类型二#end
-                        #@tinyOptionItem("4")类型三#end
+                    #@Tselect2Body("requestType" request?.requestType {"class":
+                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("ch")请选择#end
+                        #@tinyOptionItem("0")缺陷#end
+                        #@tinyOptionItem("1")适应性#end
+                        #@tinyOptionItem("2")完善#end
+                        #@tinyOptionItem("3")个性化#end
+                        #@tinyOptionItem("4")全新#end
+                        #@tinyOptionItem("5")训练#end
+                        #@tinyOptionItem("6")支持#end
+                        #@tinyOptionItem("7")疑惑#end
                     #end
                 #end
             #end
@@ -53,11 +57,12 @@
         #@elementItem()
             #@sdpmItem("请求优先级" "*")
                 #@Tselect2F()
-                    #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("1")请选择#end
-                        #@tinyOptionItem("2")1#end
-                        #@tinyOptionItem("3")2#end
-                        #@tinyOptionItem("4")3#end
+                    #@Tselect2Body(
+                        "requestPre" request?.requestPre {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("ch")请选择#end
+                        #@tinyOptionItem("0")低#end
+                        #@tinyOptionItem("1")中#end
+                        #@tinyOptionItem("2")高#end
                     #end
                 #end
             #end
@@ -65,7 +70,8 @@
         #@elementItem()
             #@sdpmItem("请求模块")
                 #@Tselect2F()
-                    #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body(
+                        "moduleId" request?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("1")请选择#end
                         #@tinyOptionItem("2")模块一#end
                         #@tinyOptionItem("3")模块二#end
@@ -78,34 +84,32 @@
         #@elementItem()
             #@sdpmItem("客户名称" "*")
                 #@Tselect2F()
-                    #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("1")请选择#end
-                        #@tinyOptionItem("2")客户一#end
-                        #@tinyOptionItem("3")客户二#end
-                        #@tinyOptionItem("4")客户三#end
+                    #@Tselect2Body(
+                        "clientId" request?.clientId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("ch")请选择#end
+                        #@tinyOptionItem("1")恒生#end
+                        #@tinyOptionItem("2")华为#end
+                        #@tinyOptionItem("3")大华股份#end
+                        #@tinyOptionItem("4")海康威视#end
                     #end
                 #end
             #end
         #end
         #@elementItem()
             #@sdpmItem("客户联系人" "*")
-                #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("ch")请选择#end
-                        #@tinyOptionItem("zh")联系人一#end
-                        #@tinyOptionItem("en")联系人二#end
-                        #@tinyOptionItem("ta")联系人三#end
-                    #end
-                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/companyInfoEdit.page" class="r ">增加</a>
-                    #end
-                #end
+                #tinyInput(
+                    "text" "requester" request?.requester{"placeholder":"请输入请求标题","datatype":"","nullmsg":"请求标题不能为空！",
+                    "id":
+                    "request_title",
+                    "class":"input-text"})
             #end
         #end
 
         #@elementItem()
             #@sdpmItem("请求标题" "*")
                 #tinyInput(
-                    "text" "request_title" ""{"placeholder":"请输入请求标题","datatype":"*","nullmsg":"请求标题不能为空！","id":
+                    "text" "requestTitle" requester?.requestTitle{"placeholder":"请输入请求标题","datatype":"*","nullmsg":
+                    "请求标题不能为空！","id":
                     "request_title",
                     "class":"input-text"})
             #end
@@ -115,13 +119,14 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>请求描述：</label></div>
                 <div class="col-9">
-                    #@Teditor("content" "content" {"initialFrameHeight":"280"})Say something#end</div>
+                    #@Teditor("content" "requestSpec" {"initialFrameHeight":"280"})${requester?.requestSpec}#end</div>
             </div>
         #end
         #@elementItem()
             #@sdpmItem("请求状态" "*")
                 #@Tselect2F()
-                    #@Tselect2Body("lanqg" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("requestStatus" requester?.requestStatus {"class":
+                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("1")请选择#end
                         #@tinyOptionItem("2")新建#end
                         #@tinyOptionItem("3")待回访#end
@@ -135,14 +140,15 @@
         #@elementItem()
             #@sdpmItem("请求提交时间" "*")
                 #@tinyDateInput(
-                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
-                    "日期不能为空"})#end
+                    "requestSubmitDate" formatDate(requester?.requestSubmitDate,
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
             #end
         #end
         #@elementItem()
             #@sdpmItem("请求承诺回复时间")
-                #@tinyDateInput(
-                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":""})#end
+                #@tinyDateInput( "requestSubmitDate" formatDate(requester?.requestSubmitDate,
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":""})#end
             #end
         #end
 

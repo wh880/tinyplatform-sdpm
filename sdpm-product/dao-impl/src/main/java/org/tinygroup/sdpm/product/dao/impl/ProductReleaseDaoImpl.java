@@ -250,9 +250,9 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 	public Integer softDelete(Integer id) {
         return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
             public Update generate(Integer id) {
-                Update update = update(PRODUCT_PLANTABLE).set(
-                		PRODUCT_PLANTABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
-                		PRODUCT_PLANTABLE.PLAN_ID.eq(id));
+                Update update = update(PRODUCT_RELEASETABLE).set(
+                		PRODUCT_RELEASETABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
+                		PRODUCT_RELEASETABLE.RELEASE_ID.eq(id));
                 return update;
             }
         });

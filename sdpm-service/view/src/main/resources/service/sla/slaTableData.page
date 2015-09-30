@@ -12,7 +12,8 @@
      #@td()${var.slaCreateDate}#end
      #@td()*#
         #@td()<input type="checkbox" value="${var.slaId}" name="idCheck">#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/clientsla.page">${var.slaId}</a>#end
+    #* #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/clientsla.page">${var.slaId}</a>#end*#
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaClient?id=${var.clientId}">${var.productId}</a>#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">${var.clientId}</a>#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent.page">${var.slaTitle}#end
         #@td()${var.cilentProductVision}#end

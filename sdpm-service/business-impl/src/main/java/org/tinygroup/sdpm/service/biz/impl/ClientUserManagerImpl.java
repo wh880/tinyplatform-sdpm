@@ -38,4 +38,9 @@ public class ClientUserManagerImpl implements ClientUserManager {
     public Integer delete(Integer id) {
         return clientUserDao.softDelete(id);
     }
+
+    public Integer deleteAll(Integer id) {
+        return clientUserDao.softAllDelete(id);
+    }
+
 }

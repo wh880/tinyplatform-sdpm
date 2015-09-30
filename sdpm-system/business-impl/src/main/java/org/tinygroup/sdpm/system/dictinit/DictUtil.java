@@ -1,34 +1,29 @@
-package org.tinygroup.sdpm.system.service.util;
+package org.tinygroup.sdpm.system.dictinit;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.tinygroup.beancontainer.BeanContainerFactory;
-import org.tinygroup.context.Context;
-import org.tinygroup.context.impl.ContextImpl;
+import org.tinygroup.sdpm.system.biz.impl.DictManagerImpl;
+import org.tinygroup.sdpm.system.biz.impl.ModuleManagerImpl;
 import org.tinygroup.sdpm.system.biz.inter.DictManager;
 import org.tinygroup.sdpm.system.biz.inter.ModuleManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by wangll13383 on 2015/9/28.
  */
-@Component
-public class DictUtil implements InitializingBean {
+//@Component
+public class DictUtil{
     private static   Map<String,List<SystemDict>> dictMap = new HashMap<String, List<SystemDict>>();
     private static boolean isStarted = false;
-    @Autowired
-    private DictManager dictManager;
-    @Autowired
-    private ModuleManager moduleManager;
-    private void init(){
+    private static DictManager dictManager = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(DictManagerImpl.class);
+    private static ModuleManager moduleManager = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(ModuleManagerImpl.class);
+    public static void init(){
         if(!isStarted) {
             SystemModule systemModule = new SystemModule();
             systemModule.setModuleType("dict");
@@ -37,15 +32,15 @@ public class DictUtil implements InitializingBean {
             isStarted = true;
         }
     }
-    public  List<SystemDict> getDict(String dictType){
+    public static  List<SystemDict> getDict(String dictType){
         return dictMap.get(dictType);
     }
 
-    public void afterPropertiesSet() throws Exception {
-        init();
-    }
+//    public void afterPropertiesSet() throws Exception {
+//        init();
+//    }
 
-    private void mergeDict(List<SystemModule> systemModules){
+    private static void mergeDict(List<SystemModule> systemModules){
         for(SystemModule systemModule : systemModules){
            {
                SystemDict dict = new SystemDict();

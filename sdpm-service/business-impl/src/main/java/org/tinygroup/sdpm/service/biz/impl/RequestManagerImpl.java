@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.RequestManager;
 import org.tinygroup.sdpm.service.dao.ServiceRequestDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -51,5 +52,9 @@ public class RequestManagerImpl implements RequestManager{
 
 
         return requestDao.deleteByKeys(id);
+    }
+
+    public Pager<ServiceRequest> findPager(Integer start, Integer limit, ServiceRequest serviceRequest) {
+        return requestDao.queryPager(start, limit, serviceRequest);
     }
 }

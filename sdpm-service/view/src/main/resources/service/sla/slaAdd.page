@@ -133,9 +133,9 @@
             #@elementItem()
                 #@sdpmItem("服务期限" "*")
                     #@tinyDateInput(
-                        "serviceDeadline" sla?.serviceDeadline "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
-                        "nullmsg":
-                        "日期不能为空","placeholder":"请输入日期"})#end
+                        "serviceDeadline" formatDate(sla?.serviceDeadline,
+                        "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                    "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
                 #end
             #end
             #@elementItem()
@@ -147,7 +147,8 @@
             #@elementItem()
                 #@sdpmItem("创建时间")
                     #@tinyDateInput(
-                        "slaCreateDate" sla?.slaCreateDate "YYYY-MM-DD" {"style":"width:200px","id":"slaCreateDate",
+                        "slaCreateDate" formatDate(sla?.slaCreateDate,
+                        "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","id":"slaCreateDate",
                         "datatype":
                         "*","nullmsg":"日期不能为空","placeholder":""})#end
                 #end
@@ -161,7 +162,8 @@
             #@elementItem()
                 #@sdpmItem("批准时间")
                     #@tinyDateInput(
-                        "slaReviewDate" sla?.slaReviewDate "YYYY-MM-DD" {"style":"width:200px","id":"slaReviewDate",
+                        "slaReviewDate" formatDate(sla?.slaReviewDate,
+                        "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","id":"slaReviewDate",
                         "datatype":
                         "*","nullmsg":
                         "日期不能为空","placeholder":""})#end
@@ -172,7 +174,7 @@
                     <div class="col-2 text-r"><label>协议表述：</label></div>
 
                     <div class="col-9">
-                        #@Teditor("content" "slaSpec" {"initialFrameHeight":"150"})Say something#end</div>
+                        #@Teditor("content" "slaSpec" {"initialFrameHeight":"150"})#end</div>
                 </div>
             #end
         </div>

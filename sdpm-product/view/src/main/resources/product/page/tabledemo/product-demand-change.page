@@ -26,7 +26,8 @@
 </script>
 
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/story/update" "" {"class":"test"})
+#hiddenInput("","storyId","",story.storyId)
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">变更</p>
@@ -38,7 +39,7 @@
       #@elementItem()
             #@sdpmItem("由谁评审")
                 #@Tselect2F()
-                    #@Tselect2Body("reviewed" "IN" {"class":"input-text select2"})
+                    #@Tselect2Body("storyReviewedBy" story?.storyReviewedBy {"class":"input-text select2"})
                         <option value="CT">Admin</option>
                         <option value="DE">Demo</option>
                         <option value="FL">Me</option>
@@ -62,7 +63,7 @@
         #@elementItem()
             #@sdpmItem("需求名称")
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2" style="width:296px">
+                    <input type="text" name="storyTitle" value="${storySpec?.storyTitle}" class="form-control" placeholder="" aria-describedby="basic-addon2" style="width:296px">
                 </div>
             #end
         #end
@@ -72,7 +73,10 @@
                 <div class="col-2 text-r"><label>需求描述：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("content1" "content1" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("content1" "storySpec" {"initialFrameHeight":"150"})
+                    
+                    	${storySpec?.storySpec}
+                    #end</div>
             </div>
         #end
         
@@ -80,7 +84,9 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>验收标准：</label></div>
                 <div class="col-9">
-                    #@Teditor("content2" "content2" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("content2" "storyVerification" {"initialFrameHeight":"150"})
+                    	${storySpec?.storyVerification}
+                    #end</div>
             </div>
         #end
 

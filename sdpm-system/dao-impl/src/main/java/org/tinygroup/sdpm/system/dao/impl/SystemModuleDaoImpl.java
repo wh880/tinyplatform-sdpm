@@ -98,6 +98,7 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
 		return getDslTemplate().update(systemModule, new UpdateGenerateCallback<SystemModule>() {
 			public Update generate(SystemModule t) {
 				Update update = update(SYSTEM_MODULETABLE).set(
+					SYSTEM_MODULETABLE.MODULE_PARENT.value(t.getModuleParent()),
 					SYSTEM_MODULETABLE.MODULE_NAME.value(t.getModuleName()),
 					SYSTEM_MODULETABLE.MODULE_TITLE.value(t.getModuleTitle())).where(
 					SYSTEM_MODULETABLE.MODULE_ID.eq(t.getModuleId()));
