@@ -1,6 +1,7 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 
 #@div(divClass="operationbar")
+##左侧按钮
 <span class="f">
     <a href="${TINY_CONTEXT_PATH}/project/task/index.page?choose=1" "ml-5" class=${choose
     =="1"?"active_btn":""}>未关闭</a>
@@ -17,20 +18,22 @@
     <a href="${TINY_CONTEXT_PATH}/project/task/index.page?choose=7" "ml-5" class=${choose
     =="7"?"active_btn":""}>指派给我</a>
 ##更多
+
     #include("/project/task/maplist.page")
-    <div class="btn-group btnDropDown">
-        <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            ${statuMap.get(statu==null?"0":statu)}
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="dLabel">
+<div class="btn-group btnDropDown">
+    <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        ${statuMap.get(statu==null?"0":statu)}
+        <span class="caret"></span>
+    </a>
+<ul class="dropdown-menu" aria-labelledby="dLabel">
     #for(var : statuMap.keySet() )
     #if(var != 0)
         <li><a href="${TINY_CONTEXT_PATH}/project/task/index.page?statu=${var}">${statuMap.get(var)}</a></li>
     #end
 #end
-        </ul>
-    </div>
+</ul>
+</div>
+
 ##分组查看
     <div class="btn-group btnDropDown">
         <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -53,6 +56,7 @@
     <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 </span>
 
+##右侧按钮
 <span class="r">
     #set(m1=menuManager.getMenu("pro-task-input"))
     #if(m1)
@@ -99,6 +103,6 @@
     #end
 </span>
 
-    #div(divClass="clearfix")
-    #include("/project/mulsearch.page")
+#div(divClass="clearfix")
+#include("/project/mulsearch.page")
 #end
