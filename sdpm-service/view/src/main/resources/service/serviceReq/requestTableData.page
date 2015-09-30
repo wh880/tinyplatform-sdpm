@@ -2,25 +2,37 @@
 <input type="hidden" name="records" value="${num}"/>
 #end
 
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-    #set(pagesize=records-(page-1)*pagesize)
-#end
-#setTinyItemCount(52)
-#foreach(var:[1..pagesize])
+#setTinyItemCount(pager.totalPages)
+#foreach(var:pager.records)
     #@tr()
-        #@td()<input type="checkbox" value="1" name="idCheck">#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/serviceReq/add.page">001</a>#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">恒生</a>#end
-        #@td()请求标题#end
-        #@td()请求优先级#end
-        #@td()状态#end
-        #@td()请求承诺回复时间#end
-        #@td()指派#end
+        #@td()<input type="checkbox" value="${var.clientRequestId}" name="idCheck">#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/serviceReq/add.page">${var.clientRequestId}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">${var.clientId}</a>#end
+        #@td()${var.requestTitle}#end
+        #@td()${var.requestPre}#end
+        #@td()${var.requestStatus}#end
+        #@td()${var.requestCommitmentDate}#end
+        #@td()" "#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("service-request"))
-            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #if(m)
+                <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
             #end
+
+            #set(m1=menuManager.getMenu("request-close"))
+            #if(m1)
+                #@aModal(
+                    "#myModal" m1.name "500" "150" m1.icon m1.href+"?id="+var?.clientRequestId)
+                #end
+            #end
+
+            #set(m2=menuManager.getMenu("request-delete"))
+            #if(m2)
+                #@tinyTableItemRemove(TINY_CONTEXT_PATH+m2.href var?.clientRequestId)<i class=${m2.icon}></i>#end
+            #end
+
         #end
     #end
 #end
+#@simpleModal(myModal)#end
