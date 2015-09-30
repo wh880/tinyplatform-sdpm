@@ -1,7 +1,7 @@
 package org.tinygroup.sdpm.Function;
 
 import org.tinygroup.beancontainer.BeanContainerFactory;
-import org.tinygroup.sdpm.system.service.util.DictUtil;
+import org.tinygroup.sdpm.system.dictinit.DictUtil;
 import org.tinygroup.template.*;
 import org.tinygroup.template.function.AbstractTemplateFunction;
 
@@ -16,10 +16,9 @@ public class DictFunction extends AbstractTemplateFunction {
 
     public Object execute(Template template, TemplateContext context, Object... parameters) throws TemplateException {
 
-        DictUtil dictUtil = BeanContainerFactory.getBeanContainer(this.getClass().getClassLoader()).getBean(DictUtil.class);
         if(parameters.length == 0){
             throw new RuntimeException("字典项名称不能为空");
         }
-        return dictUtil.getDict(parameters[0].toString());
+        return DictUtil.getDict(parameters[0].toString());
     }
 }
