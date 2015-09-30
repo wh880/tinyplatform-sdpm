@@ -84,5 +84,10 @@ public class DictManagerImpl implements DictManager {
 		return systemDictDao.query(dict,new OrderBy(columnName,asc));
 	}
 
+	public int bechDelete(Integer...ids) {
+		// TODO Auto-generated method stub
+		return systemDictDao.deleteByKeys(ids);
+	}
+
 
 }

@@ -61,4 +61,10 @@ public interface DictManager {
 	Pager<SystemDict> findPager(int start,int limit,SystemDict dict,String columnName,boolean asc);
 
 	List<SystemDict> findList(SystemDict dict,String columnName,boolean asc);
+	/**
+	 * 批量删除
+	 * @param ids
+	 * @return
+	 */
+	int bechDelete(Integer...ids);
 }

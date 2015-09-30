@@ -11,7 +11,9 @@
 #@tableBox()
 	#@datatable("dictListTb")
 		#@tableToolbar()
-				#@radiusBtn("btn-danger" "icon-trash" "javascript:;" "deleteBatch") 批量删除#end
+				 #@mulOperation("muldelete" call("link","/system/module/batchDelete"))            
+				 	#@radiusBtn("btn-danger" "icon-trash" "javascript:") 批量删除#end
+				 #end
 				 #@aModal(editpageModal "添加" "460" "158" "btn radius btn-primary" "/system/module/find")
 						#@simpleI("icon-plus")添加#end
 				#end
@@ -29,7 +31,7 @@
 ##			["1","2"],["1","2"],["1","2"]])
 			#for(mo:list)
 				#@tr("text-c")
-					#@td()<input type="checkbox" value="1" name="idCheck">#end
+					#@td()<input type="checkbox" value="${mo?.moduleId}" name="idCheck">#end
 					#@td()${mo?.moduleName}#end
 					#@td()${mo?.moduleTitle}#end
 					#@td("f-14 user-manage")

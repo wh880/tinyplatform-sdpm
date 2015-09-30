@@ -267,4 +267,9 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
 		}
 		return select;
 	}
+
+	public int batchdelete(String ids) {
+		Delete delete = delete(SYSTEM_MODULETABLE).where(SYSTEM_MODULETABLE.MODULE_ID.in(ids));
+		return getDslSession().execute(delete);
+	}
 }
