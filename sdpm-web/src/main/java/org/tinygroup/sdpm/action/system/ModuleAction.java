@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.system;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.weblayer.WebContext;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -26,6 +28,7 @@ public class ModuleAction extends BaseController{
 	public List<Map<String,Object>> ajax(SystemModule systemModule,HttpServletResponse response){
 		response.setContentType("application/json; charset=UTF-8");
 		List<Map<String, Object>> mapList = Lists.newArrayList();
+		systemModule.setModuleType("dict");
 		List<SystemModule> list = moduleService.findModules(systemModule);
 		if(list !=null&&list.size()>0){
 			mergeModule(list,mapList,0);
@@ -55,8 +58,17 @@ public class ModuleAction extends BaseController{
 		return "redirect: list?moduleType=dict";
 	}
 	@RequestMapping("find")
-	public String find(Integer moduleId,Model model){
+	public String find(HttpServletRequest request, WebContext webContext,Integer moduleId,Model model){
+		List<SystemModule> list = (List<SystemModule>) request.getSession().getAttribute("moduleList");
+		String oldUrl = webContext.get("oldUrl");
+		if(list==null||list.size()==0){
+			SystemModule systemModule = new SystemModule();
+			systemModule.setModuleType("dict");
+		    list=moduleService.findModules(systemModule);
+		    request.getSession().setAttribute("moduleList", list);
+		}
 		if(moduleId!=null){
+			
 		SystemModule module= moduleService.findById(moduleId);
 		model.addAttribute("module", module);
 		}
