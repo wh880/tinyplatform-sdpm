@@ -4,7 +4,7 @@
 		    <info name="versionInfo" title="版本信息" resource="projectRelease" infoParameter="" url="/project/task/relation-release/releasebaseinfo.pagelet"/>
 	</type-info>
 	<type-info name="qualityBugEdition" >
-    	    <info name="BugEditionInfo" title="基本信息" resource="qualityBugEdition" infoParameter="" url="/testManagement/page/tabledemo/editionpaging.pagelet"/>
+    	    <info name="BugEditionInfo" title="基本信息" resource="qualityBugEdition" infoParameter="bugId" url="/quality/bug/editionPaging"/>
     	   
     	</type-info>
     	<type-info name="qualityCaseEdition" >

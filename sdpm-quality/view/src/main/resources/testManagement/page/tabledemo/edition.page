@@ -80,7 +80,7 @@
         #end
         </div>
         <div style="width: 30%;float: right">
-       #TypeInfo("qualityBugEdition")
+       #TypeInfo("qualityBugEdition" bug?.bugId)
 ##       #include("/testManagement/page/tabledemo/editionpaging.page")
     </div>
 #end

@@ -43,6 +43,7 @@
     <table-field standard-field-id="39620b293f4f4c7580ab9a2adcd09baa" primary="false" unique="false" not-null="false" id="result" auto-increase="false"/>
     <table-field standard-field-id="0b825f5b94964c9bb897b6d7e46bc521" primary="false" unique="false" not-null="false" id="repo" auto-increase="false"/>
     <table-field standard-field-id="6b9f288452bf434b800682d537a0fe46" primary="false" unique="false" not-null="false" id="entry" auto-increase="false"/>
+    <table-field standard-field-id="f52e09114a0a47a2ae47b517f11e5ac8" primary="false" unique="false" not-null="false" id="bug_from_case" auto-increase="false"/>
     <table-field standard-field-id="83e5fcc53b104488918293c7d077635c" primary="false" unique="false" not-null="false" id="lines" auto-increase="false"/>
     <table-field standard-field-id="5eaade48b6504899be41bb710c6a96a9" primary="false" unique="false" not-null="false" id="v1" auto-increase="false"/>
     <table-field standard-field-id="5c4ed17618134ece8c869756c3aa5292" primary="false" unique="false" not-null="false" id="V2" auto-increase="false"/>

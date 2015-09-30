@@ -143,14 +143,14 @@
 			       		#@thead()
 			       		#end
 			       		#@tbody()
-#*			       			#@tr()
+			       			#@tr()
 								#@td()生源用例#end
-			       				#@td()${bug?.bugLastEditedBy}#end
+			       				#@td()${bug?.bugFromCase}#end
 			       			#end
 			       			#@tr()
 								#@td()生成用例#end
-			       				#@td()${bug?.bugLastEditedBy}#end
-			       			#end*#
+			       				#@td()${case?.caseFromBug}#end
+			       			#end
 			       			#@tr()
 								#@td()相关BUG#end
 			       				#@td()${bug?.linkBug}#end
