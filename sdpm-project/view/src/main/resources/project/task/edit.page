@@ -108,10 +108,11 @@
 
     #end
 </div>
-#end
 <div style="width:30%;float:right">
     #TypeInfo("projectEdit")
 </div>
+
+#end
 
 <script>
     $('select.select2').select2()

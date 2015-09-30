@@ -44,6 +44,12 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @LogClass("team")
 @Repository
 public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeamDao {
+
+	public List<ProjectTeam> findByProjectId(Integer projectId) {
+		Select select = selectFrom(PROJECT_TEAMTABLE).where(PROJECT_TEAMTABLE.PROJECT_ID.eq(projectId));
+		return getDslSession().fetchList(select, ProjectTeam.class);
+	}
+
 	@LogMethod("add")
 	public ProjectTeam add(ProjectTeam projectTeam) {
 		return getDslTemplate().insertAndReturnKey(projectTeam, new InsertGenerateCallback<ProjectTeam>() {
