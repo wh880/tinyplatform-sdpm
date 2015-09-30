@@ -1,32 +1,29 @@
 #macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
+<input type="hidden" name="records" value="${num}"/>
 #end
 
 
 
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=bugPage.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
+    #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(records)
+#for(b : bugPage.getRecords())
 #@tr()
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page"> ${var}</a>#end
-	#@td()一级#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">北京</a>#end
-	#@td()空指针异常#end
-	#@td()2013/03/25#end
-	#@td()admin#end
-	#@td()admin#end
-	#@td()方案一#end
-	 #@td()
-	 	<a href="${TINY_CONTEXT_PATH}/project/bug/commit.page" title="确认">#buttonIcon(iconClass="icon-search")</a>
-		<a href="${TINY_CONTEXT_PATH}/project/bug/call.page" title="指派">#buttonIcon(iconClass="icon-hand-right")</a>
-		<a href="${TINY_CONTEXT_PATH}/project/bug/solve.page" title="解决">#buttonIcon(iconClass="icon-ok-sign")</a>
-		<a href="${TINY_CONTEXT_PATH}/project/bug/close.page" title="关闭">#buttonIcon(iconClass="icon-off")</a>
-		<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/edition.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
-		<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page" title="复制">#buttonIcon(iconClass="icon-copy")</a>
-	#end
+    #@td()<input type="checkbox" value="1" name="idCheck">#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${b?.bugId}</a>#end
+    #@td()${b?.bugSeverity}#end
+    #@td()${b?.priority}#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${b?.bugTitle}#end
+    #@td()${b?.bugOpenedBy}#end
+    #@td()${b?.bugAssignedTo}#end
+    #@td()${b?.bugResolvedBy}#end
+    #@td()${b?.bugResolution}#end
+    #@td()
+        #foreach(m:menuManager.getScopeMenus("pro-bug-op"))
+            <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+        #end
+    #end
 #end
 #end

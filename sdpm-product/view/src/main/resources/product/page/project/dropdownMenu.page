@@ -5,7 +5,7 @@
 	#@navSelect2Nav()
 		#if(productId)
 			#for(product : productList)
-				#if(product?.productId == productId)
+				#if(product?.productId == sessionProductId)
 					${product?.productName}
 				#end
 			#end
@@ -34,12 +34,27 @@
 		#end
 	#end
 
+#hiddenInput("productIdHidden","productId","","")
 
 	<script type="text/javascript">
-	
+		
 		$(function(){
 			$("#product-select").on("change",function(){
-				window.location.href='${TINY_CONTEXT_PATH}/product?currentPageId=3&productId='+$(this).find("option:selected").val();
+				var dateValue = $(this).val();
+				$.post("${TINY_CONTEXT_PATH}/product/sessionset",{productId:dateValue},function(result){
+					if(true==result){
+						 window.location.reload();
+					}else{
+						alert("产品ID值为空");
+					}
+				
+				});
+	##				$("#productIdHidden").val($(this).val());
+	##				$(".switchClass").each(function(){
+	##					var hrefnew = this.href + "&productId=" + $("#productIdHidden").val();
+	##					this.href = hrefnew;
+	##				});
+	##				window.location.href='${TINY_CONTEXT_PATH}/product/story?currentPageId=3&productId='+$(this).find("option:selected").val();
 			});
 		});
 	
