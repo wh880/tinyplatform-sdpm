@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.project.biz.inter.TeamManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class TeamServiceImpl implements TeamService {
     @Autowired
     private TeamManager teamManager;
+
     public int save(ProjectTeam team) {
         return 0;
     }
@@ -25,5 +27,10 @@ public class TeamServiceImpl implements TeamService {
 
     public List<ProjectTeam> findTeamByProjectId(Integer projectId) {
         return teamManager.findByProjectId(projectId);
+    }
+
+    public Pager<ProjectTeam> findPager(ProjectTeam team, Integer start, Integer limit, String order, String ordertype) {
+        boolean asc = ordertype == "asc" ? true : false;
+        return teamManager.findPager(team, start, limit, order, asc);
     }
 }

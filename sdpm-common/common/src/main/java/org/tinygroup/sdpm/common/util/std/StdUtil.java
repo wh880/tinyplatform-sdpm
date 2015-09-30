@@ -5,6 +5,7 @@ import org.tinygroup.database.config.table.TableField;
 import org.tinygroup.metadata.config.stdfield.StandardField;
 import org.tinygroup.metadata.util.MetadataUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,12 @@ public class StdUtil {
         }else if (object instanceof  TableField){
             tableField = (TableField) object;
             StandardField standardField = MetadataUtil.getStandardField(tableField.getStandardFieldId(),StdUtil.class.getClassLoader());
-            stdMap.put(NameUtil.resolveNameAsc(standardField.getName()),standardField.getTitle());
+            try {
+                stdMap.put(NameUtil.resolveNameAsc(standardField.getName()), standardField.getTitle());
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new RuntimeException(standardField.getId());
+            }
             if(tableField.getPrimary()){
                 tablePrimary.put(t.getName(),standardField.getName());
             }
