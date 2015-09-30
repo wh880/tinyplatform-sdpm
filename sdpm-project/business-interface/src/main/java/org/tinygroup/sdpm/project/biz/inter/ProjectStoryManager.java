@@ -3,7 +3,6 @@ package org.tinygroup.sdpm.project.biz.inter;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,10 +12,10 @@ public interface ProjectStoryManager {
     /**
      * 根据projectId查找关联产品
      *
-     * @param projectStory 对象
+     * @param projectId 对象
      * @return
      */
-    ArrayList<Integer> findArrayStory(ProjectStory projectStory);
+    public List<ProjectStory> findSrotys(Integer projectId);
 
     /**
      * 根据条件查询List

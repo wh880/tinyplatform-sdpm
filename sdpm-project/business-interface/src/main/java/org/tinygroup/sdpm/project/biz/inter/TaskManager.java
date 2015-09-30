@@ -25,6 +25,24 @@ public interface TaskManager {
      */
     List<ProjectTask> findList(ProjectTask task);
 
+    /**
+     * 根据需求查询任务数量
+     *
+     * @param storyId
+     * @return
+     */
+    public Integer getTaskSumByStory(Integer storyId);
+
+    /**
+     * 无状态查询
+     *
+     * @param start
+     * @param limit
+     * @param task
+     * @param sortName
+     * @param asc
+     * @return
+     */
     Pager<ProjectTask> findPager(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc);
 
     /**

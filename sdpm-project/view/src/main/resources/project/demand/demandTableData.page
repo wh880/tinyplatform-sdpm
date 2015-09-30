@@ -4,23 +4,23 @@
 
 
 
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=storys.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(records)
+#for(s:storys.getRecords())
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"> ${page}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"> 北京</a>#end
-	#@td()总需求#end
-	#@td()MT#end
-	#@td()admin#end
-	#@td()2015/09/11#end
-	#@td()1#end
-	#@td()阶段二#end
-	#@td()555#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"> ${s?.storyId}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"> ${s?.storyPri}</a>#end
+	#@td()${s?.storyTitle}#end
+	#@td()${s?.storyOpenedBy}#end
+	#@td()${s?.storyAssignedTo}#end
+	#@td()${s?.storyEstimate}#end
+	#@td()${s?.storyStatus}#end
+	#@td()${s?.storyStage}#end
+	#@td()${s?.taskNumber}#end
 	 #@td()
 		 #foreach(m:menuManager.getScopeMenus("demand-op"))
 			 #if(m.id != "rm-demand")

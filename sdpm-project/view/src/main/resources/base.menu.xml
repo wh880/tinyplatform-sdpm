@@ -27,7 +27,8 @@
                   scope="pro-taskmenu2-op"/>
             <menu id="pro-task-batchadd" name="批量增加" href="/project/task/batchAdd.page" icon="icon-plus-sign" sort="6" isShow="1"
                   scope="pro-taskmenu2-op"/>
-            <menu id="pro-task-proposeversion" name="建任务" href="/project/task/add.page" icon="icon-plus" sort="4" isShow="1"
+            <menu id="pro-task-proposeversion" name="建任务" href="/project/task/preadd" icon="icon-plus" sort="4"
+                  isShow="1"
                   scope="pro-taskmenu2-op"/>
         </menu>
 

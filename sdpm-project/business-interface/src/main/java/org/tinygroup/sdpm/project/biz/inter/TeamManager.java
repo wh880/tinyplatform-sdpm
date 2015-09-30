@@ -26,6 +26,13 @@ public interface TeamManager {
     List<ProjectTeam> findListAccount(int projectId);
 
     /**
+     * 根据项目id查团队成员
+     * @param projectId
+     * @return
+     */
+    public List<ProjectTeam> findByProjectId(Integer projectId);
+
+    /**
      * 新增有一个成员
      *
      * @param team 新增实体类
