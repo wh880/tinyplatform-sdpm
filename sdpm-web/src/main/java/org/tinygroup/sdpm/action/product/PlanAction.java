@@ -2,6 +2,9 @@ package org.tinygroup.sdpm.action.product;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +33,9 @@ public class PlanAction  extends BaseController{
 	private ProductService productService;
 
 	@RequestMapping("/save")
-	public String save(ProductPlan productPlan, Model model) {
+	public String save(ProductPlan productPlan, Model model,HttpServletRequest request) {
+		
+		productPlan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 		planService.addPlan(productPlan);
 		return "redirect:" + "/product/page/project/product-plan.page";
 	}
@@ -68,8 +73,9 @@ public class PlanAction  extends BaseController{
 			@RequestParam(required = false,defaultValue = "1")int page,
 			@RequestParam(required = false,defaultValue = "10")int pagesize,
 			@RequestParam(required = false,defaultValue = "planId")String order,
-			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model){
-
+			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model,HttpServletRequest request){
+		
+		plan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 		Pager<ProductPlan>  pagerProductPlan = planService.findProductPlanPager(page, pagesize, plan, order, ordertype);
 
 		model.addAttribute("productPlan",pagerProductPlan);

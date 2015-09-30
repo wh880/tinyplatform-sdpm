@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
-@RequestMapping("product/story")
+@RequestMapping("/product/story")
 public class StoryAction extends BaseController{
     @Autowired
     private StoryService storyService;
@@ -37,14 +37,14 @@ public class StoryAction extends BaseController{
        if(queryString!=null&&!queryString.contains("choose")){
             return "redirect:/product/story?choose=1&"+queryString;
         }
-        return "product/page/project/togglebox.page";
+        return "/product/page/project/togglebox.page";
     }
     
   
     
     @RequestMapping("/save")
-    public String save(ProductStory productStory,ProductStorySpec storySpec){
-    	
+    public String save(ProductStory productStory,ProductStorySpec storySpec,HttpServletRequest request){
+    	productStory.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
     	storyService.addStory(productStory, storySpec);
     	return "redirect:" + "/product/page/project/togglebox.page";
     }
@@ -93,7 +93,9 @@ public class StoryAction extends BaseController{
     
     @RequestMapping("/search")
     public String storySearchAction(int page, int pagesize, ProductStory story, String choose, String groupOperate, SearchInfos searchInfos, String order, String ordertype, Model model, HttpServletRequest request){
-        Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
+        
+    	story.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+    	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList",p);
         return "product/data/tabledata.pagelet";
     }
