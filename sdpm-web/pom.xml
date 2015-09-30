@@ -22,7 +22,9 @@
             <artifactId>sdpm-metadata</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
-
+		
+		
+	
         <!--common-->
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -120,6 +122,9 @@
             <artifactId>sdpm-document-service-wrapper</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+      	<!-- quality end -->
+      	
+        <!-- product -->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-product-view</artifactId>
@@ -135,13 +140,26 @@
             <artifactId>sdpm-product-service-wrapper</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+        <!-- product end -->
+        	
+        <!-- productLine -->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-productLine-view</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
-        <!-- quality end -->
-
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-productLine-service-impl</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-productLine-service-wrapper</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
+        <!-- productLine end -->
+        
         <!-- project -->
         <dependency>
             <groupId>org.tinygroup</groupId>

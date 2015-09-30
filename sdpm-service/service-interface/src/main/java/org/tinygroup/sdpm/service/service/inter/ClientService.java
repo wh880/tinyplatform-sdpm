@@ -99,5 +99,11 @@ public interface ClientService {
      */
     List<ServiceClientUser> getAllClientUser(ServiceClientUser clientUser);
 
+    /**
+     * 删除一个客户联系人
+     *
+     * @param id 客户联系人表的主键
+     * @return
+     */
     Integer deleteClientUser(Integer id);
 }

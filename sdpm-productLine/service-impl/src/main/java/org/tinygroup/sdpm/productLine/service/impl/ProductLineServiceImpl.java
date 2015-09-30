@@ -7,8 +7,9 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.productLine.biz.inter.ProductLineManager;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
+import org.tinygroup.tinysqldsl.Pager;
 
-@Component()
+@Component
 public class ProductLineServiceImpl implements ProductLineService {
 	
 	@Autowired
@@ -29,9 +30,29 @@ public class ProductLineServiceImpl implements ProductLineService {
 		return productLineManager.find(productLineId);
 	}
 
-	public List<ProductLine> findProductLineList(ProductLine productLine) {
-
-		return productLineManager.findList(productLine);
+	public int[] updatebatchProductLine(List<ProductLine> productLine) {
+		
+		return productLineManager.updateBatch(productLine);
 	}
+
+	public int deleteProductLine(Integer productLineId) {
+		
+		return productLineManager.delete(productLineId);
+	}
+
+	public List<ProductLine> findProductLineList(ProductLine productLine, String order, String ordertype) {
+		
+		return productLineManager.findlist(productLine, order, ordertype);
+	}
+
+	public Pager<ProductLine> findProductLinePager(int page, int pagesize, ProductLine productLine, String order,
+			String ordertype) {
+		
+		return productLineManager.findPager(page, pagesize, productLine, order, ordertype);
+	}
+
+	
+
+
 
 }

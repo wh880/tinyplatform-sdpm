@@ -21,12 +21,6 @@ import com.google.common.collect.Maps;
 public class ModuleAction extends BaseController{
 	@Autowired
 	private ModuleService moduleService;
-//	@RequestMapping("List")
-//	public String listModule(Integer root,Model model){
-//		List<SystemModule> list = moduleService.findByRoot(root);
-//		model.addAttribute("list", list);
-//		return "syys";
-//	}
 	@ResponseBody
 	@RequestMapping("tree")
 	public List<Map<String,Object>> ajax(SystemModule systemModule,HttpServletResponse response){
@@ -39,7 +33,9 @@ public class ModuleAction extends BaseController{
 		return mapList;
 	}
 	@RequestMapping("list")
-	public String findModule(SystemModule systemModule,Model model){
+	public String findModule(String moduleType,Model model){
+		SystemModule systemModule= new SystemModule();
+		systemModule.setModuleType(moduleType);
 		List<SystemModule> list = moduleService.findModules(systemModule);
 		model.addAttribute("list", list);
 		return "/system/page/dictionaries/dict_list.page";
@@ -56,23 +52,36 @@ public class ModuleAction extends BaseController{
 		if(moduleId!=null){
 			moduleService.deleteById(moduleId);
 		}
-		return "redirect: list";
+		return "redirect: list?moduleType=dict";
 	}
 	@RequestMapping("find")
 	public String find(Integer moduleId,Model model){
+		if(moduleId!=null){
 		SystemModule module= moduleService.findById(moduleId);
 		model.addAttribute("module", module);
+		}
+		else{
+			SystemModule module = new SystemModule();
+			moduleService.findModules(module);
+			model.addAttribute("module", module);
+		}
 		return "/system/page/dictionaries/dict_edit.pagelet";
 	}
 	@RequestMapping("save")
 	public String saveModule(SystemModule systemModule,Model model){
 		if(systemModule.getModuleId()==null){
+			systemModule.setModuleRoot(0);
+			systemModule.setModuleGrade(0);
+			systemModule.setModuleOrder(0);
+			systemModule.setModulePath("1,2,3");
+			systemModule.setModuleOwner("dict");
+			
 			moduleService.add(systemModule);
 		}
 		else{
-			moduleService.edit(systemModule);
+			moduleService.eidtNameAndTiele(systemModule);
 		}
-		return "redirect: list";
+		return "redirect: list?moduleType=dict";
 	}
 
 	private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, int parent){

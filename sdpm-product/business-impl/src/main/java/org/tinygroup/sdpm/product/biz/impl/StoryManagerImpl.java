@@ -10,8 +10,10 @@ import org.tinygroup.sdpm.common.util.sql.SearchInfos;
 import org.tinygroup.sdpm.common.util.sql.SqlUtil;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
+import org.tinygroup.sdpm.product.dao.ProductStorySpecDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.tinysqldsl.Pager;
 
 @Service
@@ -21,9 +23,17 @@ public class StoryManagerImpl implements StoryManager{
 	@Autowired(required=false)
 	private ProductStoryDao productStoryDao;
 	
-	public ProductStory add(ProductStory story) {
-
-		return productStoryDao.add(story);
+	@Autowired
+	private ProductStorySpecDao storySpecDao;
+	
+	public ProductStory add(ProductStory story,ProductStorySpec storySpec) {
+		
+		story.setDeleted(FieldUtil.DELETE_NO);
+		story = productStoryDao.add(story);
+		storySpec.setStoryId(story.getStoryId());
+		storySpecDao.add(storySpec);
+		
+		return story;
 	}
 
 	public int delete(Integer storyId) {

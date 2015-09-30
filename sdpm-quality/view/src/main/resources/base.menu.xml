@@ -13,13 +13,13 @@
               isShow="1" scope="testbug-op"></menu>
          <menu id="tedition" name="编辑" href="/quality/bug/edit" icon="icon-pencil" sort="2"
               isShow="1" scope="testbug-op,pro-bug-op,testbuginfo-tab"></menu>
-         <menu id="tproposeBug" name="复制" href="/quality/bug/add" icon="icon-copy" sort="1"
+         <menu id="tproposeBug" name="复制" href="/quality/bug/copy" icon="icon-copy" sort="1"
               isShow="1" scope="testbug-op,pro-bug-op,testbuginfo-tab"></menu>
          <menu id="tbuginput" name="导入" href="/testManagement/page/tabledemo/importBug.pagelet" icon="icon-download-alt" sort="4"
               isShow="1" scope="testbug-tab"></menu>  
          <menu id="tbugoutput" name="导出" href="" icon="icon-upload-alt" sort="3"
               isShow="1" scope="testbug-tab"></menu>
-         <menu id="tbugreport" name="报表" href="/testManagement/page/reportform.page" icon="icon-plus-sign" sort="2"
+         <menu id="tbugreport" name="报表" href="/quality/bug/reportForm" icon="icon-plus-sign" sort="2"
               isShow="1" scope="testbug-tab"></menu>
          <menu id="tbugpro" name="提Bug" href="/quality/bug/add" icon="icon-plus" sort="1"
               isShow="1" scope="testbug-tab"></menu>    
@@ -39,23 +39,23 @@
               isShow="1" scope="testbugleft-tab"></menu> 
          <menu id="tbugall" name="所有" href="/quality/bug?get=tbugall" icon="" sort="11"
               isShow="1" scope="testbugleft-tab"></menu>
-         <menu id="tbugassigntome" name="指派给我 " href="/quality/bug?bugAssignedTo=1" icon="" sort="10"
+         <menu id="tbugassigntome" name="指派给我 " href="/quality/bug?bugAssignedTo=1&amp;get=tbugassigntome" icon="" sort="10"
               isShow="1" scope="testbugleft-tab"></menu>  
-         <menu id="tbugbuildbyme" name="由我创建"  href="/quality/bug?bugOpenedBy=1" icon="" sort="9"
+         <menu id="tbugbuildbyme" name="由我创建"  href="/quality/bug?bugOpenedBy=1&amp;get=tbugbuildbyme" icon="" sort="9"
               isShow="1" scope="testbugleft-tab"></menu> 
-         <menu id="tbugsolvebyme" name="由我解决"  href="/quality/bug?bugResolvedBy=1" icon="" sort="8"
+         <menu id="tbugsolvebyme" name="由我解决"  href="/quality/bug?bugResolvedBy=1&amp;get=tbugsolvebyme" icon="" sort="8"
               isShow="1" scope="testbugleft-tab"></menu> 
-         <menu id="tbugnotsure" name="未确认"  href="/quality/bug?bugConfirmed=0" icon="" sort="7"
+         <menu id="tbugnotsure" name="未确认"  href="/quality/bug?bugConfirmed=0&amp;get=tbugnotsure" icon="" sort="7"
               isShow="1" scope="testbugleft-tab"></menu>  
-         <menu id="tbugnotassign" name="未指派"  href="/quality/bug?bugAssignedTo=0" icon="" sort="6"
+         <menu id="tbugnotassign" name="未指派"  href="/quality/bug?bugAssignedTo=0&amp;get=tbugnotassign" icon="" sort="6"
               isShow="1" scope="testbugleft-tab"></menu> 
-         <menu id="tbugnotsolve" name="未解决"  href="/quality/bug?bugResolvedBy=0" icon="" sort="5"
+         <menu id="tbugnotsolve" name="未解决"  href="/quality/bug?bugResolvedBy=0&amp;get=tbugnotsolve" icon="" sort="5"
               isShow="1" scope="testbugleft-tab"></menu>  
-         <menu id="tbuglong" name="久未处理"  href="/quality/bug?bugResolvedDate.before('2015/9/25')" icon="" sort="4"
+         <menu id="tbuglong" name="久未处理"  href="/quality/bug?bugResolvedDate.before(2015/9/25)&amp;get=tbuglong" icon="" sort="4"
               isShow="1" scope="testbugleft-tab"></menu>
-         <menu id="tbugtimeup" name="被延期"  href="/quality/bug" icon="" sort="3"
+         <menu id="tbugtimeup" name="被延期"  href="/quality/bug?get=tbugtimeup" icon="" sort="3"
               isShow="1" scope="testbugleft-tab"></menu> 
-         <menu id="tbugneedchange" name="需求变动"  href="/quality/bug?toStoryId=1" icon="" sort="2"
+         <menu id="tbugneedchange" name="需求变动"  href="/quality/bug?toStoryId=1&amp;get=tbugneedchange" icon="" sort="2"
               isShow="1" scope="testbugleft-tab"></menu>
          <menu id="tsearch" name="搜索"  href="#" icon="" sort="1"
               isShow="1" scope="testbugleft-tab,testcaseleft-tab"></menu>                       

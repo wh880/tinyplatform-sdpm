@@ -25,4 +25,6 @@ public interface ProjectDao extends BaseDao<Project,Integer> {
     public Pager<Project> querytAll(int start, int limit, final Project project, final OrderBy... orderBies);
 
     public Project getTime(Project project);
+
+    public Pager<Project> tquerytAll(int start, int limit, final Project project, final OrderBy... orderBies);
 }

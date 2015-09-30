@@ -3,19 +3,16 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-release",sonitem="<li>"+"发布"+"</li>")
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/release/save" "post" {"class":""})
-#*<div style="width:70%;float:left" class="pageleftpart">*#
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/release/update" "post" {"class":""})
+
+	#tinyInput("text" "releaseId" release.releaseId {"class":"input-text hidden"})
     <div class="infoContent">
         <p class="titleName">编辑</p>
- 
-#*    <div class="RTtitle">
-        <button type="submit" id="submit" class="commitBtn">保存</button>
-    </div>*#
 
      #@elementItem()
         #@colLabel()发布名称:#end
         #@formControlDiv("col-4")
-        	#tinyInput("text" "releaseName" ""{"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+        	#tinyInput("text" "releaseName" release?.releaseName {"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
        #end
         #@validateDiv("col-2")#end
       #end
@@ -23,10 +20,10 @@
         #@colLabel()版本:#end
        #@formControlDiv("col-4")
 			#@Tselect2F()
-                #@Tselect2Body("buildId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="CT">Admin</option>
-                    <option value="DE">Demo</option>
-                    <option value="FL">Me</option>
+                #@Tselect2Body("buildId" release?.buildId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
                 #end
             
                 #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
@@ -38,7 +35,7 @@
     #@elementItem()
         #@colLabel()发布日期:#end
         #@formControlDiv("col-4")
-           #@tinyDateInput("releaseDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+           #@tinyDateInput("releaseDate" release?.releaseDate?formatDate(release?.releaseDate,'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end
         #@validateDiv("col-2")#end
     #end
@@ -46,7 +43,7 @@
     #@elementItem()
         #@colLabel()描述:#end
         #@formControlDiv("col-8")
-           #@Teditor("releaseDesc" "content3" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})备注...最少输入10个字符#end
+           #@Teditor("releaseDesc" "releaseDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})${release?.releaseDesc}#end
         #end
         #@validateDiv("col-2")#end
     #end
@@ -54,7 +51,6 @@
    #@elementItem()
         <div class="col-12">
                 <div class="col-2 text-r"><label>附件：</label></div>
-
                 <div class="col-9">
                   #@formControlDiv("col-12")
 		   				#include("/product/page/event/fileupload.page")

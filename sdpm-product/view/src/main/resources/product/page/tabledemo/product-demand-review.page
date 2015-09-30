@@ -7,8 +7,9 @@
 #!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/story/update" "" {"class":"test"})
 
+#hiddenInput("","storyId","",story.storyId)
 
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
@@ -22,7 +23,7 @@
    #@daterangepickerPosition()
         #@colLabel()评审时间：#end
         #@formControlDiv("col-8")
-           #@tinyDateInput("pingshendate" "" "YYYY-MM-DD" {"style":"width:258px","datatype":"*","nullmsg":"日期不能为空"})#end
+           #@tinyDateInput("storyReviewedDate" story?.storyReviewedDate?formatDate(story?.storyReviewedDate,'yyyy-MM-dd'):"" "YYYY-MM-DD" {"style":"width:258px","datatype":"*","nullmsg":"日期不能为空"})#end
         #end
         #@validateDiv("col-2")#end
     #end
@@ -32,7 +33,7 @@
       #@elementItem()
         #@colLabel()评审结果：#end
         #@formControlDiv("col-4")
-             #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
+             #@tinySelect("storyStatus" story?.storyStatus {"class":"input-text","rel":"22"})
 			#@tinyOptionItem("zh")确认通过#end
 			#@tinyOptionItem("en")有待明确#end
 			#@tinyOptionItem("ta")拒绝#end
@@ -45,7 +46,7 @@
             #@sdpmItem("指派给")
                 <div class="input-group">
              #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2","style":"width:296px"})
+                    #@Tselect2Body("storyAssignedTo" story?.storyAssignedTo {"class":"input-text select2","style":"width:296px"})
                         <option value="ZX">开发人员</option>
                         <option value="CV">测试人员</option>
                         <option value="BN">实施人员</option>
@@ -62,7 +63,7 @@
             #@sdpmItem("由谁评审")
             	
              #@Tselect2F()
-                    #@Tselect2Body("lang" "IN" {"class":"input-text select2","style":"width:296px","multiple":"multiple"})
+                    #@Tselect2Body("storyReviewedBy" story?.storyReviewedBy {"class":"input-text select2","style":"width:296px","multiple":"multiple"})
                         <option value="ZX">开发人员</option>
                         <option value="CV">测试人员</option>
                         <option value="BN">实施人员</option>

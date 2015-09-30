@@ -116,5 +116,8 @@ public class DocBizImpl implements DocBiz {
 		return docdao.deleteByKeys(keys);
 	}
 
-
+	public Pager<Doclib> queryItemWithPage(Integer start, Integer limited, Doclib doclib) {
+		// 分页
+		return doclibdao.queryPager(start, limited, doclib);
+	}
 }

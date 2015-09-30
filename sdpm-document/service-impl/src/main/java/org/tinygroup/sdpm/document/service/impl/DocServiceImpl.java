@@ -63,6 +63,11 @@ public class DocServiceImpl implements DocService{
 		// 
 		return docbiz.queryItemWithPage(start, limit, doc);
 	}
+	
+	public Pager<Doclib> findDoclibRetPager(int start, int limit, Doclib doclib) {
+		// 
+		return docbiz.queryItemWithPage(start, limit, doclib);
+	}
 
 	public int deleteDocById(Integer id) {
 		// 

@@ -227,4 +227,15 @@ public class ServiceClientUserDaoImpl extends TinyDslDaoSupport implements Servi
 		});
 
 	}
+
+	public Integer softAllDelete(Integer id) {
+		return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
+			public Update generate(Integer id) {
+				Update update = update(SERVICE_CLIENT_USERTABLE).set(
+						SERVICE_CLIENT_USERTABLE.DELETED.value(ServiceClient.DELETE_YES)).where(
+						SERVICE_CLIENT_USERTABLE.CLIENT_ID.eq(id));
+				return update;
+			}
+		});
+	}
 }

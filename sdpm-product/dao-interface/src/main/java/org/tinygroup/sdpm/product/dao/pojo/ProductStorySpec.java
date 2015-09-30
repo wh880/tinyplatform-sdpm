@@ -16,14 +16,18 @@
 
 package org.tinygroup.sdpm.product.dao.pojo;
 
-import java.io.Serializable;
-
 
 /** 
  * 需求表述表
  * 
  */
-public class ProductStorySpec implements Serializable{
+public class ProductStorySpec {
+
+	/** 
+	 * 需求描述ID
+	 * 
+	 */
+	private Integer storyspecId;
 
 	/** 
 	 * 公司ID
@@ -61,6 +65,14 @@ public class ProductStorySpec implements Serializable{
 	 */
 	private String storyVerification;
 
+
+	public void setStoryspecId(Integer storyspecId){
+		this. storyspecId = storyspecId;
+	}
+
+	public Integer getStoryspecId(){
+		return storyspecId;
+	}
 
 	public void setCompanyId(Integer companyId){
 		this. companyId = companyId;

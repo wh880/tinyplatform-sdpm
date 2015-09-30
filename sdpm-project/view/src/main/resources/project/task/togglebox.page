@@ -17,7 +17,8 @@
                  #@mulOperation("muldelete" "http://127.0.0.1:8080/sdpm-service/service/client/test.pagelet")             <a href="javascript:;" class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>#end
             #end
             #set(requestStatuString = tinyRequestQueryString!=null ?"&"+tinyRequestQueryString:"")
-            #@tinyTableContent(TINY_CONTEXT_PATH+"/project/task/findPager?projectId=1"+requestStatuString) ##取数据地址 总数据
+            #@tinyTableContent(TINY_CONTEXT_PATH+
+                "/project/task/findPager?projectId="+cookie_projectId+requestStatuString) ##取数据地址 总数据
                 #@thead()
                     #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
                         #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

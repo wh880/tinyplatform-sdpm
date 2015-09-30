@@ -20,7 +20,8 @@
 	#end
 #end
 			
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/save?bugStatus=1" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/save?bugConfirmed=1" "post" {"class":"test"})
+	#hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
 	<div style="width:67%;float:left">
     	<div class="infoContent">
     		<p class="titleName">确认</p>
@@ -30,7 +31,7 @@
     #@elementItem()
             #@sdpmItem("指派给")
 	            #@Tselect2F()
-	                   		 #@Tselect2Body("bugAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">A</option>
 	                        <option value="ME">B</option>
 	                        <option value="MD">C</option>
@@ -92,110 +93,3 @@
 		#end
 	</div>
 #end
-
-<script type="text/javascript">
-    $(function(){
-        $(".selectList").each(function(){
-            var url = "#link('/getDist.html')";
-            var areaJson;
-            var temp_html;
-            var oProvince = $(this).find(".province");
-            var oCity = $(this).find(".city");
-            var oDistrict = $(this).find(".district");
-            //初始化省
-            var province = function(){
-                $.each(areaJson,function(i,province){
-                    temp_html+="<option value='"+province.p+"'>"+province.p+"</option>";
-                });
-                oProvince.html(temp_html);
-                city();
-            };
-            //赋值市
-            var city = function(){
-                temp_html = "";
-                var n = oProvince.get(0).selectedIndex;
-                $.each(areaJson[n].c,function(i,city){
-                    temp_html+="<option value='"+city.ct+"'>"+city.ct+"</option>";
-                });
-                oCity.html(temp_html);
-                district();
-            };
-            //赋值县
-            var district = function(){
-                temp_html = "";
-                var m = oProvince.get(0).selectedIndex;
-                var n = oCity.get(0).selectedIndex;
-                if(typeof(areaJson[m].c[n].d) == "undefined"){
-                    oDistrict.css("display","none");
-                }else{
-                    oDistrict.css("display","inline");
-                    $.each(areaJson[m].c[n].d,function(i,district){
-                        temp_html+="<option value='"+district.dt+"'>"+district.dt+"</option>";
-                    });
-                    oDistrict.html(temp_html);
-                };
-            };
-            //选择省改变市
-            oProvince.change(function(){
-                city();
-            });
-            //选择市改变县
-            oCity.change(function(){
-                district();
-            });
-            //获取json数据
-            $.getJSON(url,function(data){
-                areaJson = data;
-                province();
-            });
-        });
-    });
-    $(function(){
-        $("form[name=thisform").Validform({
-            tiptype:2,
-            usePlugin:{
-                //datepicker:{},//日期控件校验;
-                passwordstrength:{
-                    minLen:6,//设置密码长度最小值，默认为0;
-                    maxLen:18,//设置密码长度最大值，默认为30;
-                    trigger:function(obj,error){
-                        //该表单元素的keyup和blur事件会触发该函数的执行;
-                        //obj:当前表单元素jquery对象;
-                        //error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
-                        //console.log(error);
-                        if(error){
-                            obj.parent().find(".Validform_checktip").show();
-                            obj.parent().find(".passwordStrength").hide();
-                        }else{
-                            obj.parent().find(".passwordStrength").show();
-                        }
-                    }
-                }
-            },
-            ajaxPost:true,
-            beforeCheck:function(curform){
-                //在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
-                //这里明确return false的话将不会继续执行验证操作;
-            },
-            beforeSubmit:function(curform){
-                //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
-                //这里明确return false的话表单将不会提交;
-            },
-            callback:function(data){
-                if(data.status=="y"){
-                    setTimeout(function(){
-                        $.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
-                    },2000);
-                }
-                //返回数据data是json对象，{"info":"demo info","status":"y"}
-                //info: 输出提示信息;
-                //status: 返回提交数据的状态,是否提交成功。如可以用"y"表示提交成功，"n"表示提交失败，在Validform_post.html文件返回数据里自定字符，主要用在callback函数里根据该值执行相应的回调操作;
-                //你也可以在Validform_post.html文件返回更多信息在这里获取，进行相应操作；
-                //ajax遇到服务端错误时也会执行回调，这时的data是{ status:**, statusText:**, readyState:**, responseText:** }；
-
-                //这里执行回调操作;
-                //注意：如果不是ajax方式提交表单，传入callback，这时data参数是当前表单对象，回调函数会在表单验证全部通过后执行，然后判断是否提交表单，如果callback里明确return false，则表单不会提交，如果return true或没有return，则会提交表单。
-            }
-        });
-    });
-</script>

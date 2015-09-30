@@ -44,7 +44,7 @@ public class ReleaseServiceImpl implements ReleaseService{
 		return releaseManger.findPager(page, limit, productRelease, order, ordertype);
 	}
 
-	public Integer deletePlan(Integer releaseId) {
+	public Integer deleteRelease(Integer releaseId) {
 		
 		return releaseManger.delete(releaseId);
 	}

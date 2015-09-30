@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.service.biz.inter.RequestManager;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -43,4 +44,10 @@ public class RequestServiceImpl implements RequestService {
     public Integer deleteRequestBatch(Integer... id) {
         return requestManager.deleteBatch(id);
     }
+
+    public Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, ServiceRequest clientRequest) {
+        return requestManager.findPager(start, limit, clientRequest);
+    }
+
+
 }

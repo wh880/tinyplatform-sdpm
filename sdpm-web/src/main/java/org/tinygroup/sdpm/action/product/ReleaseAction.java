@@ -29,7 +29,7 @@ public class ReleaseAction extends BaseController{
 	private ReleaseService releaseService;
 	
 	@RequestMapping("/save")
-	public  String save(ProductRelease productRelease){
+	public  String save(ProductRelease productRelease,Model model){
 		releaseService.addRelease(productRelease);
 			return "redirect:" + "/product/page/project/product-release.page";
 	}
@@ -44,9 +44,9 @@ public class ReleaseAction extends BaseController{
 	@ResponseBody
 	@RequestMapping("/delete")
 	public Map delete(Integer releaseId){
-		releaseService.deletePlan(releaseId);
+		releaseService.deleteRelease(releaseId);
 		Map<String,String> map = new HashMap<String, String>();
-		map.put("status", "sucess");
+		map.put("status", "success");
 		map.put("info","删除成功");
 		return map;
 	}
@@ -54,8 +54,8 @@ public class ReleaseAction extends BaseController{
 	@RequestMapping("find")
 		public String find(Integer releaseId,Model model){
 			ProductRelease release = releaseService.findRelease(releaseId);
-			model.addAttribute("productRelease",release);
-			return "redirect:" + "/product/page/project/product-release.page";
+			model.addAttribute("release",release);
+			return  "/product/page/tabledemo/product-release-update.page";
 		}
 	
 	@RequestMapping("list")

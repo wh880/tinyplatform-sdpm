@@ -10,12 +10,12 @@
                     #@th()所属产品#end
                     #@td()
                       #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">产品2</option>
-	                        <option value="DE">产品3</option>
-	                        <option value="FL">产品4</option>
-	                        <option value="GA">产品5</option>
-	                        <option value="IN">产品1</option>
+	                   		 #@Tselect2Body("productId" bug?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">产品2</option>
+	                        <option value="2">产品3</option>
+	                        <option value="3">产品4</option>
+	                        <option value="4">产品5</option>
+	                        <option value="5">产品1</option>
 	                    	#end                  
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
@@ -26,20 +26,20 @@
                 #@tr()
                     #@th()所属模块#end
                     #@td() 
-	                    #@selectRadiusBox("select_boxes")
-	                        #@select(selectName="demo2" selectClass="select")
-	                            #@optionSelected("") #end
-	                            #@optionItem("确认")确认#end
-	                            #@optionItem("未确认")未确认#end
-	                        #end
-	                    #end
+	                   #@Tselect2F()
+	                   		 #@Tselect2Body("moduleId" bug?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">/1/2</option>
+	                        <option value="2">/2/3</option>
+	                        <option value="3">/3/4</option>
+	                    	#end                
+                	  #end
                 	 #end
                 #end
                 #@tr()
                     #@th()Bug类型#end
                     #@td()
                      #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugType" bug?.bugType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">代码错误</option>
 	                        <option value="ME">界面优化</option>
 	                        <option value="MD">设计缺陷</option>
@@ -73,36 +73,34 @@
                 #@tr()
                     #@th()优先级#end
                     #@td()
-                     	#@selectRadiusBox("select_boxes")
-	                        #@select(selectName="demo2" selectClass="select")
-	                            #@optionSelected("") #end
-	                            #@optionItem("")1#end
-	                            #@optionItem("")2#end
-	                            #@optionItem("")3#end
-	                        #end
-	                    #end
+                    	#@Tselect2F()
+	                   		 #@Tselect2Body("priority" bug?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
+	                    	#end                
+                	  #end
                 	#end
                 #end
                 #@tr()
                     #@th()Bug状态#end
                     #@td()
-	                    #@selectRadiusBox("select_boxes")
-	                        #@select(selectName="demo2" selectClass="select")
-	                            #@optionSelected("") #end
-	                            #@optionItem("确认")确认#end
-	                            #@optionItem("未确认")未确认#end
-	                        #end
-	                    #end
+                    	#@Tselect2F()
+	                   		 #@Tselect2Body("bugStatus" bug?.bugStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="IN">未关闭</option>
+	                        <option value="MD">关闭</option>
+	                    	#end                
+                	  	#end
                     #end
                 #end
                 #@tr()
                     #@th()指派给#end
                     #@td()
                          #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">A</option>
-	                        <option value="ME">B</option>
-	                        <option value="MD">C</option>
+	                        <option value="MD">B</option>
+	                        <option value="ME">C</option>
 	                    	#end                
                 	  	#end
                         #@validateDiv("col-2")#end
@@ -111,32 +109,25 @@
                 #@tr()
                     #@th()操作系统#end
                     #@td()
-                    #@selectRadiusBox("select_boxes")
-                        #@select(selectName="demo2" selectClass="select")
-                            #@optionSelected("") #end
-                            #@optionItem("1")全部#end
-                            #@optionItem("1")Windows#end
-                            #@optionItem("1")Windows 8#end
-                            #@optionItem("1")Windows 7#end
-                            #@optionItem("1")Windows Vista#end
-                            #@optionItem("1")Windows XP#end
-                            #@optionItem("1")Windows 2012#end
-                            #@optionItem("1")Windows 2008#end
-                            #@optionItem("1")Windows 2003#end
-                            #@optionItem("1")Windows 2000#end
-                            #@optionItem("1")Android#end
-                            #@optionItem("1")WP8#end
-                            #@optionItem("1")WP7#end
-                            #@optionItem("1")Symbian#end
-                            #@optionItem("1")Linux#end
-                            #@optionItem("1")FreeBSD#end
-                            #@optionItem("1")OSX#end
-                            #@optionItem("1")Unix#end
-                            #@optionItem("1")其他#end
-                            #@optionItem("1")同上#end
-                        #end
-                    #end
-                    #end
+                    #@Tselect2F()
+	                   		 #@Tselect2Body("operatingSystem" bug?.operatingSystem {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="A">全部</option>
+	                        <option value="B">Windows</option>
+	                        <option value="B">Windows 8</option>
+	                        <option value="B">Windows 7</option>
+	                        <option value="B">Windows XP</option>
+	                        <option value="B">Android</option>
+	                        <option value="B">WP8</option>
+	                        <option value="B">WP7</option>
+	                        <option value="B">Symbian</option>
+	                        <option value="B">Linux</option>
+	                        <option value="B">OSX</option>
+	                        <option value="B">Unix</option>
+	                        <option value="B">其他</option>
+	                        <option value="B">同上</option>
+	                        
+	                    	#end                
+                	#end
                 #end
                 #@tr()
                     #@th()浏览器#end
@@ -174,14 +165,14 @@
                 #@tr()
                     #@th()关键词#end
                     #@td()
-                        #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                        #tinyInput("text" "bugKeywords" ""{"datatype":"","id":"版本","class":"input-text"})
                     #end
                 #end
                 #@tr()
                     #@th()抄送给#end
                     	#@td()
                     	#@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugMailto" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
 		                        <option value="IN">A</option>
 		                        <option value="ME">B</option>
 		                        <option value="MD">C</option>
@@ -203,10 +194,10 @@
                     #@th()所属项目#end
                     #@td()
                     #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">项目1</option>
-	                        <option value="ME">项目2</option>
-	                        <option value="MD">项目3</option>
+	                   		 #@Tselect2Body("projectId" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">项目1</option>
+	                        <option value="2">项目2</option>
+	                        <option value="3">项目3</option>
 	                    	#end                
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
@@ -219,10 +210,10 @@
                     #@th()相关任务#end
                     #@td()
                     #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">任务1</option>
-	                        <option value="ME">任务2</option>
-	                        <option value="MD">任务3</option>
+	                   		 #@Tselect2Body("taskId" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="1">任务1</option>
+	                        <option value="2">任务2</option>
+	                        <option value="3">任务3</option>
 	                    	#end                
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/project/task/add.page" class="r ">增加</a>
@@ -244,7 +235,7 @@
                     #@th()由谁创建#end
                     #@td()
                     #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugOpenedBy" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">A</option>
 	                        <option value="ME">B</option>
 	                        <option value="MD">C</option>
@@ -256,7 +247,7 @@
                     #@th()影响版本#end
                     #@td()
                    #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugOpenedBuild" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">版本1</option>
 	                        <option value="ME">版本2</option>
 	                        <option value="MD">版本3</option>
@@ -268,7 +259,7 @@
                     #@th()解决者#end
                     #@td()
                         #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugResolvedBy" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="CT">Connecticut</option>
 	                        <option value="DE">Delaware</option>
 	                        <option value="FL">Florida</option>
@@ -284,14 +275,14 @@
                 #end
                 #@tr()
                     #@th()解决日期#end
-                    #@td()#tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
+                    #@td()#tinyInput("text" "bugResolvedDate" ""{"datatype":"","id":"抄送给","class":"input-text"})
                     #end
                 #end
                 #@tr()
                     #@th()解决版本#end
                     #@td()
                         #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugResolvedBuild" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">版本1</option>
 	                        <option value="ME">版本2</option>
 	                        <option value="MD">版本3</option>
@@ -304,7 +295,7 @@
                     #@th()解决方案#end
                     #@td()
                     #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugResolution" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">方案1</option>
 	                        <option value="ME">方案2</option>
 	                        <option value="MD">方案3</option>
@@ -316,7 +307,7 @@
                     #@th()由谁关闭#end
                     #@td()
                         #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("bugClosedBy" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">A</option>
 	                        <option value="ME">B</option>
 	                        <option value="MD">C</option>
@@ -328,13 +319,13 @@
                 #@tr()
                     #@th()重复ID#end
                     #@td()
-                    	#tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
+                    	#tinyInput("text" "bugDuplicateBug" ""{"datatype":"","id":"抄送给","class":"input-text"})
                     #end
                 #end
                 #@tr()
                     #@th()关闭日期#end
                     #@td()
-                    	#@tinyDateInput("birthday" "2015-08-12" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end
+                    	#@tinyDateInput("tinyDateInput" "2015-08-12" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end
                     #end
                 #end               
             #end
@@ -349,12 +340,12 @@
             #@tbody()
                 #@tr()
                     #@th()相关Bug#end
-                    #@td()#tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
+                    #@td()#tinyInput("text" "linkBug" ""{"datatype":"","id":"抄送给","class":"input-text"})
                     #end
                 #end
                 #@tr()
                     #@th()相关用例#end
-                    #@td()#tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
+                    #@td()#tinyInput("text" "linkCase" ""{"datatype":"","id":"抄送给","class":"input-text"})
                     #end
                 #end
             #end
