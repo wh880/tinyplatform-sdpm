@@ -51,6 +51,11 @@ public class DictServiceImpl implements DictService {
 		return dictManager.updateBatch(dicts);
 	}
 
+	public int batchDelete(Integer... ids) {
+		// TODO Auto-generated method stub
+		return dictManager.bechDelete(ids);
+	}
+
 	
 	
 

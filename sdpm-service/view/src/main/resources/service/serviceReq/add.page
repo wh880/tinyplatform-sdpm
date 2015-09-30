@@ -108,7 +108,7 @@
         #@elementItem()
             #@sdpmItem("请求标题" "*")
                 #tinyInput(
-                    "text" "requestTitle" requester?.requestTitle{"placeholder":"请输入请求标题","datatype":"*","nullmsg":
+                    "text" "requestTitle" request?.requestTitle{"placeholder":"请输入请求标题","datatype":"*","nullmsg":
                     "请求标题不能为空！","id":
                     "request_title",
                     "class":"input-text"})
@@ -119,13 +119,13 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>请求描述：</label></div>
                 <div class="col-9">
-                    #@Teditor("content" "requestSpec" {"initialFrameHeight":"280"})${requester?.requestSpec}#end</div>
+                    #@Teditor("content" "requestSpec" {"initialFrameHeight":"280"})${request?.requestSpec}#end</div>
             </div>
         #end
         #@elementItem()
             #@sdpmItem("请求状态" "*")
                 #@Tselect2F()
-                    #@Tselect2Body("requestStatus" requester?.requestStatus {"class":
+                    #@Tselect2Body("requestStatus" request?.requestStatus {"class":
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("1")请选择#end
                         #@tinyOptionItem("2")新建#end
@@ -140,14 +140,14 @@
         #@elementItem()
             #@sdpmItem("请求提交时间" "*")
                 #@tinyDateInput(
-                    "requestSubmitDate" formatDate(requester?.requestSubmitDate,
+                    "requestSubmitDate" formatDate(request?.requestSubmitDate,
                     "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
                 "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
             #end
         #end
         #@elementItem()
             #@sdpmItem("请求承诺回复时间")
-                #@tinyDateInput( "requestSubmitDate" formatDate(requester?.requestSubmitDate,
+                #@tinyDateInput("requestCommitmentDate" formatDate(request?.requestCommitmentDate,
                     "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":""})#end
             #end
         #end

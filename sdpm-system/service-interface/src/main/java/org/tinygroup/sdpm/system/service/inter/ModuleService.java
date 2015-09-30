@@ -49,6 +49,8 @@ public interface ModuleService {
 	  * @return
 	  */
 	 SystemModule eidtNameAndTiele(SystemModule systemModule);
+	 
+	 int bachDelete(String ids);
 	
 	 
 	 

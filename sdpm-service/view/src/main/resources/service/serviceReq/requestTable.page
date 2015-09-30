@@ -40,7 +40,7 @@
                 "btn radius btn-danger" "icon-trash" "javascript:;" "deleteBatch" "batchDel") ${m1.name}#end
         #end
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/service/serviceReq/requestTableData.pagelet" 81) ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/service/request/list/data") ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
@@ -49,7 +49,7 @@
                 #@tinyTh({"class":"","rel":"sortname"})请求标题#end
                 #@tinyTh({"class":"","rel":"sortname"})请求优先级#end
                 #@tinyTh({"class":"","rel":"sortname"})状态#end
-                #@tinyTh({"class":"","rel":"sortname"})回访预期时间#end
+                #@tinyTh({"class":"","rel":"sortname"})请求承诺完成时间#end
                 #@tinyTh({"class":"sorting","rel":"sortname"})指派#end
                 #@tinyTh({"class":"","rel":"sortname"})操作#end
             #end

@@ -20,5 +20,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 
 public interface ServiceRequestDao extends BaseDao<ServiceRequest, Integer> {
+    Integer close(ServiceRequest clientRequest);
 
+    Integer softDelete(Integer id);
 }

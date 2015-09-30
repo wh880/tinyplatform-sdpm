@@ -6,29 +6,29 @@
 </style>*#
 #set(name="team")
 #@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-			#@div(divClass="dropdownBox")
-				#include("/project/dropdownMenu.page")
-			#end
-			#@tabHead()
-				#include("/project/protab.page")
-			#end				
-			#@tabBodyCol("ptop-5")
-			#@div(divClass="operationbar")
-				<span class="f">
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span class="f">
 					团队成员
 				</span>
-				<span class="r c">
+            <span class="r c">
 ##					<a href="${TINY_CONTEXT_PATH}/project/team/teamManage.page">#buttonIcon(iconClass="icon-user")团队管理</a>
-	#foreach(m:menuManager.getScopeMenus("pro-teammenu-op"))
+    #foreach(m:menuManager.getScopeMenus("pro-teammenu-op"))
         <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-	#end
+    #end
 				</span>
-				#div(divClass="clearfix")
-			#end
-			##operationbar end
-			#include("/project/team/table.page")
-			
-#end
-#end
+                #div(divClass="clearfix")
+            #end
+        ##operationbar end
+            #include("/project/team/manageTable.page")
+
+        #end
+    #end
 #end

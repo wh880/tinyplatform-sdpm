@@ -48,4 +48,10 @@ public interface ModuleManager {
 	  * @return
 	  */
 	 SystemModule add(SystemModule systemModule);
+	 /**
+	  * 批量删除
+	  * @param ids
+	  * @return
+	  */
+	 int batchDelete(String ids);
 }

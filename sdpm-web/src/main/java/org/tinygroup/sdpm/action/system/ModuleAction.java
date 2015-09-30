@@ -28,7 +28,7 @@ public class ModuleAction extends BaseController{
 	public List<Map<String,Object>> ajax(SystemModule systemModule,HttpServletResponse response){
 		response.setContentType("application/json; charset=UTF-8");
 		List<Map<String, Object>> mapList = Lists.newArrayList();
-		systemModule.setModuleType("dict");
+//		systemModule.setModuleType("dict");
 		List<SystemModule> list = moduleService.findModules(systemModule);
 		if(list !=null&&list.size()>0){
 			mergeModule(list,mapList,0);
@@ -95,7 +95,17 @@ public class ModuleAction extends BaseController{
 		}
 		return "redirect: list?moduleType=dict";
 	}
-
+	@RequestMapping("")
+   public String batchDelete(String ids){
+//	  String[] sids = ids.split(",");
+//	  Integer[] intIds = new Integer[sids.length];
+//		for(int i=0;i<sids.length;i++){
+//			intIds[i] = Integer.valueOf(sids[i]);
+//		}
+	   moduleService.bachDelete(ids);
+	  
+	   return "success";
+   }
 	private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, int parent){
 		for(SystemModule systemModule : systemModules){
 			if(systemModule.getModuleParent() == parent){

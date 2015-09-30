@@ -18,9 +18,8 @@ package org.tinygroup.sdpm.system.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
-import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.dao.pojo.Holiday;
 
-public interface SystemModuleDao extends BaseDao<SystemModule,Integer> {
-	int editNameAndTitle(SystemModule systemModule); 
-	int batchdelete(String ids);
+public interface HolidayDao extends BaseDao<Holiday,Integer> {
+
 }

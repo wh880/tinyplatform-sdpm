@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015-09-28.
@@ -42,12 +46,35 @@ public class RequestAction extends BaseController {
 
     @RequestMapping(value = "/save")
     public String save(ServiceRequest clientRequest, Model model) {
-        if (clientRequest.getClientId() == null) {
+        if (clientRequest.getClientRequestId() == null) {
             requestService.addRequest(clientRequest);
         } else {
             requestService.updateRequest(clientRequest);
         }
         model.addAttribute("request", clientRequest);
-        return "service/serviceReq/request.page";
+        return "redirect:/service/request/list";
+    }
+
+    @RequestMapping(value = "/close")//关闭请求
+    public String close(Integer id, Model model) {
+        model.addAttribute("clientRequestId", id);
+        return "service/serviceReq/closeRequest.pagelet";
+    }
+
+    @RequestMapping(value = "/close/date")
+    public String closed(ServiceRequest clientRequest, Model model) {
+        if (clientRequest.getClientRequestId() != null)
+            requestService.closeRequest(clientRequest);
+        return "redirect:/service/request/list";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public Map delete(Integer id) {
+        requestService.deleteRequest(id);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "y");
+        map.put("info", "删除成功");
+        return map;
     }
 }

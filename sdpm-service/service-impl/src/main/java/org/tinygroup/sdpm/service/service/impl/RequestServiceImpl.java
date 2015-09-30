@@ -49,5 +49,9 @@ public class RequestServiceImpl implements RequestService {
         return requestManager.findPager(start, limit, clientRequest);
     }
 
+    public Integer closeRequest(ServiceRequest clientRequest) {
+        return requestManager.close(clientRequest);
+    }
+
 
 }

@@ -19,8 +19,10 @@ public class BuildServiceImpl implements BuildService {
         return null;
     }
 
-    public Pager<ProjectBuild> findPager(int page, int pagesize, int projectId) {
-        return null;
+    public Pager<ProjectBuild> findPager(Integer projectId, Integer start, Integer limit, String order, boolean asc) {
+        ProjectBuild build = new ProjectBuild();
+        build.setBuildProject(projectId);
+        return buildManager.findPager(build, start, limit, order, asc);
     }
 
     public ProjectBuild updateBuild(ProjectBuild build) {
