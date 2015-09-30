@@ -4,21 +4,20 @@
 
 
 
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=buildPager.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#foreach(var:[1..pagesize])
+#setTinyItemCount(records)
+#foreach(b : buildPager.getRecords())
     #@tr()
-        #@td()<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page">${page}</a>#end
-        #@td()我是产品#end
-        #@td()1#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page">32</a>#end
-        #@td()12#end
-        #@td()www.baidu.com#end
-        #@td()2015/08/09#end
-        #@td()admin#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page">${b?.buildId}</a>#end
+        #@td()${b?.buildProduct}#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page">${b?.buildName}#end
+        #@td()${b?.buildScmPath}</a>#end
+        #@td()${b?.buildFilePath}#end
+        #@td()${b?.buildDate}#end
+        #@td()${b?.buildBuilder}#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("pro-version-op"))
                 #if(m.id != "pro-version-delete")
