@@ -28,6 +28,7 @@
 		<span class="f">
 			用例名称</span>
 		<span class="r">
+		##加一个转bug
 			#foreach(m:menuManager.getScopeMenus("testcaseinfo-tab"))
 				#if(m.id=="tcasenote"||m.id=="texecution"||m.id=="tresult")
 					#@aModal("#myModal" m.name "800" "400" "" m.href "ml-5")

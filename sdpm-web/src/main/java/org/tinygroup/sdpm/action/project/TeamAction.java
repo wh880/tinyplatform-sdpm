@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 
@@ -16,6 +17,8 @@ import org.tinygroup.sdpm.project.service.inter.TeamService;
 public class TeamAction extends BaseController {
     @Autowired
     private TeamService teamService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("manage")
     public String manage(ProjectTeam team, Model model) {
@@ -23,7 +26,7 @@ public class TeamAction extends BaseController {
     }
 
     @RequestMapping("find")
-    public String find() {
+    public String find(Model model) {
         return "";
     }
 }

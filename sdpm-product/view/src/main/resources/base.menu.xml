@@ -2,7 +2,7 @@
 <menu id="myproduct" parent-id="0" name="产品" href="/product" icon="icon-desktop" sort="800"
       isShow="1" permission="Permission">
 
-    <menu id="product-demand" parent-id="myproduct" name="需求" href="/product/page/project/togglebox.page"
+    <menu id="product-demand" parent-id="myproduct" name="需求" href="/product/story?currentPageId=3"
           scope="liop,l2op" sort="15" isShow="1" permission="Permission">
         <menu id="product-demand-change" name="需求变更" href="/product/story/productDemandChange/findPager?storyId=${story.storyId}"
               icon="icon-random" sort="55" isShow="1"
@@ -202,10 +202,10 @@
               href="/product/page/tabledemo/relation-release/product-al-bug.page?cname=bug" icon="icon-bug" sort="13"
               isShow="1"
               scope="product-re"/>
-        <menu id="product-release-edit" name="发布编辑" href="/product/page/tabledemo/product-addrelease.page"
+        <menu id="product-release-edit" name="发布编辑" href="/product/release/find?releaseId=${release.releaseId}"
               icon="icon-pencil" sort="12" isShow="1"
               scope="product-re"/>
-        <menu id="product-release-remove" name="删除" href="#" icon="icon-remove" sort="11" isShow="1"
+        <menu id="product-release-remove" name="删除" href="/product/release/delete?releaseId=${release.releaseId}" icon="icon-remove" sort="11" isShow="1"
               scope="product-re"/>
         <menu id="product-release-add" name="创建发布" href="" icon="" sort="10" isShow="1"
               scope="product-addre"/>

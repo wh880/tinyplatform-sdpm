@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.biz.inter;
 
 
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -24,6 +25,18 @@ public interface BuildManager {
      * @return
      */
     List<ProjectBuild> findList(ProjectBuild build);
+
+    /**
+     * 分页查询
+     *
+     * @param build
+     * @param start
+     * @param limit
+     * @param order
+     * @param asc
+     * @return
+     */
+    public Pager<ProjectBuild> findPager(ProjectBuild build, Integer start, Integer limit, String order, boolean asc);
 
     /**
      * 新增有一个版本

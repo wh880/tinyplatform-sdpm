@@ -24,17 +24,22 @@ public class UpdateUtil {
         for(Field field : fields){
             Method method = null;
             Object value = null;
-            try {
+
+		try {
                 method = object.getClass().getMethod(NameUtil.toMethod(field.getName()));
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
+
             }
-            try {
-                value = method.invoke(object);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+           
+            if (method != null) {
+                try {
+                    value = method.invoke(object);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
             }
             if(value != null){
                 String tableField = field.getName();
@@ -55,4 +60,4 @@ public class UpdateUtil {
     }
 
 
-}
+   }

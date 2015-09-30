@@ -24,6 +24,14 @@ import org.tinygroup.tinysqldsl.Pager;
 public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
     public Pager<ProjectTask> queryPagerByStuta(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderBies);
 
+    /**
+     * 根据storyid相关任务数量
+     *
+     * @param storyId
+     * @return
+     */
+    public Integer getSumByStory(Integer storyId);
+
     Integer editTask(ProjectTask task);
 
     Integer editcall(ProjectTask task);
@@ -31,4 +39,6 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
     Integer editfinish(ProjectTask task);
 
     Integer editstart(ProjectTask task);
+
+    Integer editclose(ProjectTask task);
 }

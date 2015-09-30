@@ -42,7 +42,7 @@
   <table id="d4d4c89595ba4df6ae02d2c70a8ced31" name="project_build" title="版本" package-name="">
     <table-field standard-field-id="d375c0a459c0490d840add34075e27f5" primary="true" unique="true" not-null="true" id="version_id" auto-increase="true"/>
     <table-field standard-field-id="c2eff8527271417b8a64e48d1e448562" primary="false" unique="false" not-null="true" id="version_product" auto-increase="false"/>
-    <table-field standard-field-id="bfbdd7d31ee44d52a0e598ec2a5435a2" primary="false" unique="true" not-null="true" id="version_project" auto-increase="false"/>
+    <table-field standard-field-id="bfbdd7d31ee44d52a0e598ec2a5435a2" primary="false" unique="false" not-null="true" id="version_project" auto-increase="false"/>
     <table-field standard-field-id="27b1f072f029411e930cd4b6fdb804ad" primary="false" unique="false" not-null="true" id="version_name" auto-increase="false"/>
     <table-field standard-field-id="d95ddb81995949f39760a718372669c2" primary="false" unique="false" not-null="true" id="build_scm_path" auto-increase="false"/>
     <table-field standard-field-id="8dde271313cf4c318deed6fe090c246a" primary="false" unique="false" not-null="true" id="build_file_path" auto-increase="false"/>

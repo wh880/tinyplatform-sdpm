@@ -3,6 +3,8 @@ package org.tinygroup.sdpm.action.product;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +31,11 @@ public class ReleaseAction extends BaseController{
 	private ReleaseService releaseService;
 	
 	@RequestMapping("/save")
-	public  String save(ProductRelease productRelease,Model model){
+	public  String save(ProductRelease productRelease,Model model,HttpServletRequest request){
+		
+		productRelease.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 		releaseService.addRelease(productRelease);
-			return "redirect:" + "/product/page/project/product-release.page";
+		return "redirect:" + "/product/page/project/product-release.page";
 	}
 	
 	@RequestMapping("/update")
@@ -63,8 +67,9 @@ public class ReleaseAction extends BaseController{
 		@RequestParam(required=false,defaultValue="1")int page,
 		@RequestParam(required=false,defaultValue="10")int pagesize,
 		@RequestParam(required=false,defaultValue="releaseId")String order,
-		@RequestParam(required=false,defaultValue="asc")String ordertype,Model model ){
+		@RequestParam(required=false,defaultValue="asc")String ordertype,Model model,HttpServletRequest request ){
 		
+		release.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 		Pager<ProductRelease> pagerProductRelease = releaseService.findReleasePager(page, pagesize, release, order, ordertype);
 		
 		model.addAttribute("productRelease",pagerProductRelease);

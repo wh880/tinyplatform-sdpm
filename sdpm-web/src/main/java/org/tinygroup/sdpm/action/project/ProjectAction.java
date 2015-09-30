@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.tinysqldsl.Pager;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by shenly13343 on 2015-09-21.
@@ -17,6 +20,8 @@ import org.tinygroup.tinysqldsl.Pager;
 public class ProjectAction extends BaseController {
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private TeamService teamService;
 
     @RequestMapping("/find")
     public String find(Integer projectId, Model model) {
@@ -34,7 +39,8 @@ public class ProjectAction extends BaseController {
     }
 
     @RequestMapping("add")
-    public String addPage() {
+    public String addPage(Model model, HttpServletRequest request) {
+
         return "project/addProject.page";
     }
 }

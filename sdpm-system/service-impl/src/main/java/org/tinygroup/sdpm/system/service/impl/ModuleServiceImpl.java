@@ -45,4 +45,9 @@ public class ModuleServiceImpl implements ModuleService {
     return SystemModuleManager.editNameAndTitle(systemModule);
     }
 
+	public int bachDelete(String ids) {
+		// TODO Auto-generated method stub
+		return SystemModuleManager.batchDelete(ids);
+	}
+
 }

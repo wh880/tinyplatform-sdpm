@@ -55,7 +55,7 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 		return getDslTemplate().insertAndReturnKey(systemDict, new InsertGenerateCallback<SystemDict>() {
 			public Insert generate(SystemDict t) {
 				Insert insert = insertInto(SYSTEM_DICTTABLE).values(
-					SYSTEM_DICTTABLE.DICT_ID.value(t.getDictId()),
+//					SYSTEM_DICTTABLE.DICT_ID.value(t.getDictId()),
 					SYSTEM_DICTTABLE.DICT_KEY.value(t.getDictKey()),
 					SYSTEM_DICTTABLE.DICT_VALUE.value(t.getDictValue()),
 					SYSTEM_DICTTABLE.DICT_SORT.value(t.getDictSort()),

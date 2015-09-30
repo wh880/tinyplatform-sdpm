@@ -3,15 +3,23 @@ package org.tinygroup.sdpm.action.quality;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.tinysqldsl.Pager;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -27,8 +35,8 @@ public class BugAction extends BaseController {
 		
 	@RequestMapping("")
 	public String form(String get,QualityBug bug,Model model){
-		List<QualityBug> bugList = bugService.findBugList(bug);
-		model.addAttribute("bugList", bugList);
+		bugService.findBugList(bug);
+		model.addAttribute("bug", bug);
 		model.addAttribute("get", get);
 		return "/testManagement/page/Bug.page";
 	}
@@ -102,6 +110,14 @@ public class BugAction extends BaseController {
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/edition.page";
 	}
+	
+	@RequestMapping("/editionPaging")
+	public String editionPaging(Integer bugId,Model model){
+		QualityBug bug = new QualityBug();
+		bug = bugService.findById(bugId);
+		model.addAttribute("bug", bug);
+		return "/testManagement/page/tabledemo/editionpaging.pagelet";
+	}
 			
 	@RequestMapping("/add")
 	public String add(){
@@ -134,5 +150,18 @@ public class BugAction extends BaseController {
 		}	
 	//	model.addAttribute("bugsave",bug);
 		return "redirect:"+"/quality/bug";
+	}
+
+	@RequestMapping("/projectFindList")
+	public String projectFindList(Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
+		Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+		boolean asc = ordertype == "asc" ? true : false;
+		QualityBug bug = new QualityBug();
+		bug.setProjectId(projectId);
+		Pager<QualityBug> page = bugService.findBugListPager(start, limit, bug, order, asc);
+		model.addAttribute("bugPage", page);
+		page.getRecords();
+		page.getTotalCount();
+		return "project/bug/bugViewTableData.pagelet";
 	}
 }

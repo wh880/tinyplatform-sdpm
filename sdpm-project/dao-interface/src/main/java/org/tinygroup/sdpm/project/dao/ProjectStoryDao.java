@@ -19,6 +19,8 @@ package org.tinygroup.sdpm.project.dao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 
-public interface ProjectStoryDao extends BaseDao<ProjectStory, Integer> {
+import java.util.List;
 
+public interface ProjectStoryDao extends BaseDao<ProjectStory, Integer> {
+    public List<ProjectStory> findByProjectID(Integer projectId);
 }

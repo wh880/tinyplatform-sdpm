@@ -23,7 +23,7 @@ public class TeamServiceImpl implements TeamService {
         return 0;
     }
 
-    public List<ProjectTeam> findByProjectId(int projectId) {
-        return null;
+    public List<ProjectTeam> findTeamByProjectId(Integer projectId) {
+        return teamManager.findByProjectId(projectId);
     }
 }

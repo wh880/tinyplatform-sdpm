@@ -22,4 +22,5 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 
 public interface SystemModuleDao extends BaseDao<SystemModule,Integer> {
 	int editNameAndTitle(SystemModule systemModule); 
+	int batchdelete(String ids);
 }

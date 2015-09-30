@@ -3,44 +3,21 @@
 #end
 #set(name="bug")
 
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=bugPage.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(records)
+#for(b : bugPage.getRecords())
 #@tr()
     #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${var}</a>#end
-    #@td()一级#end
-    #@td()1</a>#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">标题#end
-    #@td()状态#end
-    #@td()
-        #@tinySelect("bugResolvedBy")
-            #@option("1")1#end
-            #@option("2")2#end
-            #@option("3")3#end
-            #@option("4")4#end
-        #end
-    #end
-    #@td()
-        admin
-##        #@Tselect2F()
-##            #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-##            <option value="CT">Connecticut</option>
-##            <option value="DE">Delaware</option>
-##            <option value="FL">Florida</option>
-##            <option value="GA">Georgia</option>
-##            <option value="IN">Indiana</option>
-##            <option value="ME">Maine</option>
-##            <option value="MD">Maryland</option>
-##            #end
-##        ##填写任意内容，侦听需重新填加 A侦听已内置
-##            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-##        #end
-
-    #end
+    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${b?.bugId}</a>#end
+    #@td()${b?.bugId}#end
+    #@td()${b?.bugId}#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${b?.bugId}#end
+    #@td()${b?.bugId}#end
+    #@td()${b?.bugId}#end
+    #@td()${b?.bugId}#end
     #@td()
         #tinyInput("text" "bugOpenedBuild" ""{"datatype":"","id":"版本","class":"input-text"})
     #end

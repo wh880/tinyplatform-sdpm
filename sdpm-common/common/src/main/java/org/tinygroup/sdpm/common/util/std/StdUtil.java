@@ -5,8 +5,6 @@ import org.tinygroup.database.config.table.TableField;
 import org.tinygroup.metadata.config.stdfield.StandardField;
 import org.tinygroup.metadata.util.MetadataUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
-import org.tinygroup.sdpm.common.util.sort.SortUtil;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +22,7 @@ public class StdUtil {
 
     public static void stdProcess(List<Table> tables){
         for(Table table : tables){
+
             tableMap.put(NameUtil.resolveNameAsc(table.getName()),table.getName());
             Map<String,String> stdMap = new HashMap<String, String>();
             addStd(table,table,stdMap);
@@ -31,7 +30,7 @@ public class StdUtil {
         }
     }
 
-    public static String getTitle(String tableName, String feildName){
+    public static String getField(String tableName, String feildName) {
         return tableStdMap.get(tableMap.get(tableName)).get(feildName);
     }
 
@@ -57,4 +56,5 @@ public class StdUtil {
         }
     }
 
+   
 }

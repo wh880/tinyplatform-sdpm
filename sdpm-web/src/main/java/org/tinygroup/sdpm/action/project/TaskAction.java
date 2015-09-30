@@ -13,6 +13,7 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
+import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,8 @@ public class TaskAction extends BaseController {
     private TaskService taskService;
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private TeamService teamService;
 
     @RequestMapping("index")
     public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model) {
@@ -217,5 +220,13 @@ public class TaskAction extends BaseController {
         }
         model.addAttribute("task", task);
         return "project/task/index.page";
+    }
+
+    @RequestMapping("/preadd")
+    public String preadd(HttpServletRequest request, Model model) {
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+
+        model.addAttribute("team", teamService.findTeamByProjectId(projectId));
+        return "project/task/add.page";
     }
 }
