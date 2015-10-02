@@ -16,13 +16,16 @@
 
 package org.tinygroup.sdpm.system.dao.pojo;
 
+import java.io.Serializable;
+
 
 /** 
  * 假期表
  * 
  */
-public class Holiday {
-
+public class Holiday implements Serializable{
+	public static int DELETE_YES = 1;
+    public static int DELETE_NO = 0;
 	/** 
 	 * 假期ID
 	 * 

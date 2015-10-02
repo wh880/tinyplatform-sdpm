@@ -234,4 +234,21 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 		}
 		return select;
 	}
+
+	public int softDelete(Holiday holiday) {
+		// TODO Auto-generated method stub
+		if(holiday == null || holiday.getHolidayId() == null){
+			return 0;
+		}
+		return getDslTemplate().update(holiday, new UpdateGenerateCallback<Holiday>() {
+			public Update generate(Holiday t) {
+				Update update = update(HOLIDAYTABLE).set(
+					
+					HOLIDAYTABLE.HOLIDAY_DELETED.value(t.getHolidayDeleted())
+					).where(
+					HOLIDAYTABLE.HOLIDAY_ID.eq(t.getHolidayId()));
+				return update;
+			}
+		});
+	}
 }

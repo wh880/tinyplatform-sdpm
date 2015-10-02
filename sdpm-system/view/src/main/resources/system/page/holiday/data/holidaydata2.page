@@ -1,7 +1,7 @@
 #include("/system/page/event/common.page")
 
-###setTinyItemCount(holiday.totalCount)
-#for(h:list)
+#setTinyItemCount(holiday.totalCount)
+#for(h:holiday.records)
 #@tr()
 	#@td()<input type="checkbox" value="${h?.holidayId}" name="idCheck">#end
 	#@td()${h?.holidayId}#end

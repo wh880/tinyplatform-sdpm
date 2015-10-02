@@ -10,23 +10,23 @@ public interface ActionManager {
 	 * @param SystemAction
 	 * @return
 	 */
-	SystemAction add(SystemAction SystemAction);
+	SystemAction add(SystemAction systemAction);
 	/**
 	 * 修改动态
 	 * @param SystemAction
 	 * @return
 	 */
-	SystemAction updata(SystemAction SystemAction);
+	SystemAction updata(SystemAction systemAction);
 	/**
 	 * 删除动态
 	 * @param SystemAction
 	 * @return
 	 */
-	Integer delete(SystemAction SystemAction);
+	Integer delete(SystemAction systemAction);
 	/**
 	 * 查询动态
 	 * @param SystemAction
 	 * @return
 	 */
-	List<SystemAction> find(SystemAction SystemAction);
+	List<SystemAction> find(SystemAction systemAction);
 }

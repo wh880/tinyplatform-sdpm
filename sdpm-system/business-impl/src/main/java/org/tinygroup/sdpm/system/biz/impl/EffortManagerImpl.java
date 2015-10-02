@@ -9,10 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.biz.inter.EffortManager;
-import org.tinygroup.sdpm.system.biz.inter.EffortManager;
 import org.tinygroup.sdpm.system.dao.SystemEffortDao;
-import org.tinygroup.sdpm.system.dao.SystemEffortDao;
-import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.tinysqldsl.Pager;
 @Service
