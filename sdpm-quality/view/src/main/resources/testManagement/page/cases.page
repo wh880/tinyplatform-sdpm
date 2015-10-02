@@ -35,7 +35,7 @@
 		             #if(m.id == "tcaseserach")
 		             	<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 		             #else
-		             	<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==get?'active_btn':''}>${m.name}</a>
+		             	<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==get?'active_btn':''}">${m.name}</a>
 		             #end
 		             #end
 		         #end  				

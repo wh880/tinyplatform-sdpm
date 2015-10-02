@@ -58,7 +58,7 @@
          <menu id="tbugneedchange" name="需求变动"  href="/quality/bug?toStoryId=1&amp;get=tbugneedchange&amp;productId=1" icon="" sort="2"
               isShow="1" scope="testbugleft-tab"></menu>
          <menu id="tsearch" name="搜索"  href="#" icon="" sort="1"
-              isShow="1" scope="testbugleft-tab,testcaseleft-tab"></menu>                       
+              isShow="1" scope="testbugleft-tab"></menu>                       
     </menu>
     <menu id="qualityCases" parent-id="quality" name="用例" href="/quality/testcase/?get=tcaseall&amp;productId=1" icon="" sort="1"
           isShow="1">    	 
@@ -133,7 +133,7 @@
               isShow="1" scope="testverinfo-tab"></menu> 
        <menu id="tvernotest" name="待测版本"  href="#" icon="" sort="1"
               isShow="1" scope="testverleft-tab"></menu> 
-	   <menu id="tvertest" name="待测版本"  href="#" icon="" sort="1"
+	   <menu id="tvertest" name="已测版本"  href="#" icon="" sort="1"
               isShow="1" scope="testverleft-tab"></menu>                       
     </menu>      	               
 </menu>

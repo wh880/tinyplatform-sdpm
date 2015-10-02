@@ -15,7 +15,7 @@
 			#@div(divClass="operationbar")
 				<span class="f">
 					#foreach(m:menuManager.getScopeMenus("testverleft-tab"))
-						<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==get?'active_btn':''}>${m.name}</a>
+						<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==get?'active_btn':''}">${m.name}</a>
     				#end    					
 					</span>
 				<span class="r">
