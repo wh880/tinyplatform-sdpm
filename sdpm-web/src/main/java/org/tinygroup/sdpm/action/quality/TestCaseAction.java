@@ -39,7 +39,7 @@ public class TestCaseAction extends BaseController {
 		}
 		Pager<QualityTestCase> casepager = testCaseService.findTestCasePager(start, limit, testcase, order,asc);
 		model.addAttribute("casepager",casepager);
-		return "testManagement/data/BugData.pagelet";
+		return "testManagement/data/casesData.pagelet";
 	}
 	
 	@RequestMapping("/add")
@@ -102,6 +102,7 @@ public class TestCaseAction extends BaseController {
 	@RequestMapping(value = "/copySave",method = RequestMethod.POST)
 	public String copySave(QualityTestCase testCase,Model model){
 		testCaseService.addTestCase(testCase);
+		model.addAttribute("testCase", testCase);
 		return "redirect:"+"quality/testcase";
 	}
 	
