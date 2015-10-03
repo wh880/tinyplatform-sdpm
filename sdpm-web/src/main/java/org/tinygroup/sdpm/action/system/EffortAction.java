@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.system;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +18,26 @@ public class EffortAction extends BaseController{
 	private EffortService effortService;
 	@RequestMapping("list")
 	public String list(SystemEffort effort,Model model){
-		
-		List<SystemEffort> list = effortService.find(effort);
-		model.addAttribute("list", list);
-		return "project/note/tableData.page";
+		String order="effort_date";
+		String orderTpye="desc";
+		List<SystemEffort> list = effortService.findList(effort, order, orderTpye);
+		List<SystemEffort> effortList = new ArrayList<SystemEffort>();
+		if(list.size()>5){
+			for(int i=0;i<5;i++){
+				effortList.add(list.get(i));
+			}
+		}
+		else{
+			effortList=list;
+		}
+		model.addAttribute("list", effortList);
+		return "project/task/note.page";
 		
 	}
-	@RequestMapping("add")
+	@RequestMapping("save")
 	public String add(SystemEffort systemEffort,Model model){
 		effortService.save(systemEffort);
-		return "redirect:" + "/system/effort/list/";
+		return "project/note/notetable.page";
 	}
 	@RequestMapping("findPager")
    public String findPager(Integer start,Integer limit,String order ,String ordertype, Integer effortId, Model model){

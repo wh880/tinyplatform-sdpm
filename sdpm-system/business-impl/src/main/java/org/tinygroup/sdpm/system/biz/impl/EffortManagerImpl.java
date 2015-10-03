@@ -74,6 +74,12 @@ public class EffortManagerImpl implements EffortManager {
 		return null;
 	}
 
+	public List<SystemEffort> findList(SystemEffort systemEffort, String order,
+			String orderType) {
+		// TODO Auto-generated method stub
+		return systemEffortDao.query(systemEffort, new OrderBy(order, !("desc".equals(orderType))?true:false));
+	}
+
 //public List<SystemEffort> findBetweenDate(Date begindate, Date enddate) {
 //		// TODO Auto-generated method stub
 ////		return SystemEffortDao.findBetweenDate(begindate, enddate);
