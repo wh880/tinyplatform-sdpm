@@ -26,6 +26,7 @@ import java.io.Serializable;
 public class Holiday implements Serializable{
 	public static int DELETE_YES = 1;
     public static int DELETE_NO = 0;
+
 	/** 
 	 * 假期ID
 	 * 
@@ -67,6 +68,12 @@ public class Holiday implements Serializable{
 	 * 
 	 */
 	private Integer companyId;
+
+	/** 
+	 * 假期描述
+	 * 
+	 */
+	private String holidayDetail;
 
 
 	public void setHolidayId(Integer holidayId){
@@ -123,6 +130,14 @@ public class Holiday implements Serializable{
 
 	public Integer getCompanyId(){
 		return companyId;
+	}
+
+	public void setHolidayDetail(String holidayDetail){
+		this. holidayDetail = holidayDetail;
+	}
+
+	public String getHolidayDetail(){
+		return holidayDetail;
 	}
 
 }

@@ -69,6 +69,12 @@ public class HolidayTable extends Table {
 	 */
 	public final Column COMPANY_ID = new Column(this, "company_id");
 
+	/** 
+	 * 假期描述
+	 * 
+	 */
+	public final Column HOLIDAY_DETAIL = new Column(this, "holiday_detail");
+
 
 	private HolidayTable() {
 		super("holiday");
