@@ -144,7 +144,7 @@ $(document).ready(function(){
                  	<input type="file" style="width:100%"/>
                  </div>
 				 <div class="col-5" style="float:right;">   
-				   <input type="text" class="form-control" placeholder="标题：" tabindex="-1" style="width:100%"/>
+				   <input type="text" name="docAttach" class="form-control" placeholder="标题：" tabindex="-1" style="width:100%"/>
 			     </div> 
 				
 			</div>

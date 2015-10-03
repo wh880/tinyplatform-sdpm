@@ -1,14 +1,8 @@
 #import("/org/tinygroup/button/components/button_smart.component")
-#!set(activeTitle="产品文档库",activeMenuId=currentPageId)
-#*<style>
-.barBtnsty a{height:34px;line-height:20px;border:#ddd 1px solid;color:#333;background:#eee; padding:5px 18px;display:inline-block}
-.barBtnsty a:hover{color:#f90;background:#eef}
-</style>*#
+#!set(activeTitle="产品文档",activeMenuId=currentPageId)
+
 #include("common.page")
-
 #include("doc-tab.page")
-    ##head end
-
         ##operationbar start
             #@div(divClass="operationbar")
             <span class="f">
