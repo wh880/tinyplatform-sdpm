@@ -53,5 +53,5 @@ public interface ModuleManager {
 	  * @param ids
 	  * @return
 	  */
-	 int batchDelete(String ids);
+	 int batchDelete(Integer...ids);
 }

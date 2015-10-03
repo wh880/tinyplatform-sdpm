@@ -88,6 +88,9 @@ public class ModuleAction extends BaseController{
 			systemModule.setModuleOrder(0);
 			systemModule.setModulePath("1,2,3");
 			systemModule.setModuleOwner("dict");
+			if(systemModule.getModuleParent()==null){
+				systemModule.setModuleParent(0);
+			}
 			
 			moduleService.add(systemModule);
 		}
@@ -96,14 +99,15 @@ public class ModuleAction extends BaseController{
 		}
 		return "redirect: list?moduleType=dict";
 	}
-	@RequestMapping("bachDelete")
-   public Map batchDelete(String ids){
-//	  String[] sids = ids.split(",");
-//	  Integer[] intIds = new Integer[sids.length];
-//		for(int i=0;i<sids.length;i++){
-//			intIds[i] = Integer.valueOf(sids[i]);
-//		}
-	 int i= moduleService.bachDelete(ids);
+	@ResponseBody
+	@RequestMapping("batchDelete")
+   public Map<String, String> batchDelete(String ids){
+	  String[] sids = ids.split(",");
+	  Integer[] intIds = new Integer[sids.length];
+		for(int i=0;i<sids.length;i++){
+			intIds[i] = Integer.valueOf(sids[i]);
+		}
+	    moduleService.batchDelete(intIds);
 	   Map<String, String> map = new HashedMap();
 	   map.put("info", "success");
 	   	map.put("status","y" );

@@ -41,5 +41,5 @@ public interface HolidayManager {
 	 */
 	
 	Pager<Holiday> findByPage(int start,int limit,Holiday holiday,String sortName, boolean asc);
- 
+    
 }

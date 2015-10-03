@@ -15,7 +15,7 @@
 		#foreach(m in menuManager.getScopeMenus("myholiday-op"))
 			#if("myholiday-del"!=m.id)
 				
-				<a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${m.href}"?holidayId="${h?.holidayId}"><i class="${m.icon}"></i></a>
+				<a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${m.href}?holidayId=${h?.holidayId}"><i class="${m.icon}"></i></a>
 			#else
 				#iconOperation(m.icon m.name "ml-5 delBtn"m.href+"?holidayId="+h?.holidayId)
 			#end

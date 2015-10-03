@@ -1,12 +1,15 @@
 package org.tinygroup.sdpm.action.system;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
 import org.tinygroup.sdpm.system.service.inter.HolidayService;
@@ -33,8 +36,9 @@ public class HolidayAction extends BaseController{
 	@RequestMapping("find")
 	public String find(Holiday holiday,Model model){
 		List<Holiday> list = holidayService.find(holiday);
-		model.addAttribute("list", list);
-		return "/system/page/holiday/data/holidaydata.pagelet";
+		Holiday newholiday=list.get(0);
+		model.addAttribute("holiday", newholiday);
+		return "/system/page/holiday/edit.page";
 	}
 	@RequestMapping(value ="save",method = RequestMethod.POST)
 	public String saveHoliday(Holiday holiday,Model model){
@@ -44,14 +48,32 @@ public class HolidayAction extends BaseController{
 			holidayService.update(holiday);
 		}
 		model.addAttribute("holiday", holiday);
-		return " ";
+		return "/system/page/holiday/holiday.page";
 	}
-   public String deleteHoliday(Integer holidayId){
-	   if(holidayId!=null){
-		   Holiday holiday = new Holiday();
-		   holiday.setHolidayId(holidayId);
-		   holidayService.delete(holiday);
-	   }
-	 return " ";
-   }
+//	@ResponseBody
+//	@RequestMapping("delete")
+//    public Map<String, String> deleteHoliday(Integer holidayId){
+//	   Map<String, String> map = new HashedMap();
+//	   if(holidayId!=null){
+//		   Holiday holiday = new Holiday();
+//		   holiday.setHolidayId(holidayId);
+//		   holidayService.delete(holiday);
+//		   map.put("info", "删除成功");
+//		   map.put("status", "y");
+//	     }
+//	   else{
+//		   map.put("info", "删除失败");
+//		   map.put("status", "n");
+//	   }
+//	   return map;
+//     }
+	@RequestMapping("delete")
+	public String deleteHoliday(Integer holidayId){
+		if(holidayId!=null){
+			   Holiday holiday = new Holiday();
+			   holiday.setHolidayId(holidayId);
+			   holidayService.delete(holiday);
+	    }
+		return "/system/page/holiday/holiday.page";
+	}
 }
