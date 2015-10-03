@@ -24,10 +24,11 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
+
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -36,11 +37,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.select.OrderByElement;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
 import org.tinygroup.sdpm.system.dao.HolidayDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -48,7 +50,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-@Repository
+
 public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 
 	public Holiday add(Holiday holiday) {
@@ -62,7 +64,8 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 					HOLIDAYTABLE.HOLIDAY_TYPE.value(t.getHolidayType()),
 					HOLIDAYTABLE.HOLIDAY_DELETED.value(t.getHolidayDeleted()),
 					HOLIDAYTABLE.COMPANY_ID.value(t.getCompanyId()),
-					HOLIDAYTABLE.HOLIDAY_DETAIL.value(t.getHolidayDetail()));
+					HOLIDAYTABLE.HOLIDAY_DETAIL.value(t.getHolidayDetail()),
+					HOLIDAYTABLE.HOILIDAY_REMARK.value(t.getHoilidayRemark()));
 				return insert;
 			}
 		});
@@ -81,7 +84,8 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 					HOLIDAYTABLE.HOLIDAY_TYPE.value(t.getHolidayType()),
 					HOLIDAYTABLE.HOLIDAY_DELETED.value(t.getHolidayDeleted()),
 					HOLIDAYTABLE.COMPANY_ID.value(t.getCompanyId()),
-					HOLIDAYTABLE.HOLIDAY_DETAIL.value(t.getHolidayDetail())).where(
+					HOLIDAYTABLE.HOLIDAY_DETAIL.value(t.getHolidayDetail()),
+					HOLIDAYTABLE.HOILIDAY_REMARK.value(t.getHoilidayRemark())).where(
 					HOLIDAYTABLE.HOLIDAY_ID.eq(t.getHolidayId()));
 				return update;
 			}
@@ -135,7 +139,8 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 					HOLIDAYTABLE.HOLIDAY_TYPE.eq(t.getHolidayType()),
 					HOLIDAYTABLE.HOLIDAY_DELETED.eq(t.getHolidayDeleted()),
 					HOLIDAYTABLE.COMPANY_ID.eq(t.getCompanyId()),
-					HOLIDAYTABLE.HOLIDAY_DETAIL.eq(t.getHolidayDetail())));
+					HOLIDAYTABLE.HOLIDAY_DETAIL.eq(t.getHolidayDetail()),
+					HOLIDAYTABLE.HOILIDAY_REMARK.eq(t.getHoilidayRemark())));
 			return addOrderByElements(select, orderArgs);
 			}
 		});
@@ -156,7 +161,8 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 					HOLIDAYTABLE.HOLIDAY_TYPE.eq(t.getHolidayType()),
 					HOLIDAYTABLE.HOLIDAY_DELETED.eq(t.getHolidayDeleted()),
 					HOLIDAYTABLE.COMPANY_ID.eq(t.getCompanyId()),
-					HOLIDAYTABLE.HOLIDAY_DETAIL.eq(t.getHolidayDetail())));
+					HOLIDAYTABLE.HOLIDAY_DETAIL.eq(t.getHolidayDetail()),
+					HOLIDAYTABLE.HOILIDAY_REMARK.eq(t.getHoilidayRemark())));
 			return addOrderByElements(select, orderArgs);
 			}
 		});
@@ -176,7 +182,8 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 					HOLIDAYTABLE.HOLIDAY_TYPE.value(new JdbcNamedParameter("holidayType")),
 					HOLIDAYTABLE.HOLIDAY_DELETED.value(new JdbcNamedParameter("holidayDeleted")),
 					HOLIDAYTABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
-					HOLIDAYTABLE.HOLIDAY_DETAIL.value(new JdbcNamedParameter("holidayDetail")));
+					HOLIDAYTABLE.HOLIDAY_DETAIL.value(new JdbcNamedParameter("holidayDetail")),
+					HOLIDAYTABLE.HOILIDAY_REMARK.value(new JdbcNamedParameter("hoilidayRemark")));
 			}
 		});
 	}
@@ -199,7 +206,8 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 					HOLIDAYTABLE.HOLIDAY_TYPE.value(new JdbcNamedParameter("holidayType")),
 					HOLIDAYTABLE.HOLIDAY_DELETED.value(new JdbcNamedParameter("holidayDeleted")),
 					HOLIDAYTABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
-					HOLIDAYTABLE.HOLIDAY_DETAIL.value(new JdbcNamedParameter("holidayDetail"))).where(
+					HOLIDAYTABLE.HOLIDAY_DETAIL.value(new JdbcNamedParameter("holidayDetail")),
+					HOLIDAYTABLE.HOILIDAY_REMARK.value(new JdbcNamedParameter("hoilidayRemark"))).where(
 				HOLIDAYTABLE.HOLIDAY_ID.eq(new JdbcNamedParameter("holidayId")));
 			}
 		});
@@ -220,11 +228,12 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 				HOLIDAYTABLE.HOLIDAY_TYPE.eq(new JdbcNamedParameter("holidayType")),
 				HOLIDAYTABLE.HOLIDAY_DELETED.eq(new JdbcNamedParameter("holidayDeleted")),
 				HOLIDAYTABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")),
-				HOLIDAYTABLE.HOLIDAY_DETAIL.eq(new JdbcNamedParameter("holidayDetail"))));
+				HOLIDAYTABLE.HOLIDAY_DETAIL.eq(new JdbcNamedParameter("holidayDetail")),
+				HOLIDAYTABLE.HOILIDAY_REMARK.eq(new JdbcNamedParameter("hoilidayRemark"))));
 			}
 		});
 	}
-	
+
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {

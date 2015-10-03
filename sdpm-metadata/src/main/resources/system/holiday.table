@@ -9,5 +9,6 @@
     <table-field standard-field-id="941258c83a8c49a490d5afa2ec35ccfa" primary="false" unique="false" not-null="false" id="holiday_deleted" auto-increase="false"/>
     <table-field standard-field-id="2f31dbd7abc04051a071e456a4bcd85e" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
     <table-field standard-field-id="9a509de6efec40ac818dd415b28afa03" primary="false" unique="false" not-null="false" id="holiday_detail" auto-increase="false"/>
+    <table-field standard-field-id="0c492fe9411e4c70b1f1cfa5d48b6b2e" primary="false" unique="false" not-null="false" id="hoiliday_remark" auto-increase="false"/>
   </table>
 </tables>

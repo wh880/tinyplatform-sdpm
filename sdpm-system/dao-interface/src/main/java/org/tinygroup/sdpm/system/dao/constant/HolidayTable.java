@@ -75,6 +75,12 @@ public class HolidayTable extends Table {
 	 */
 	public final Column HOLIDAY_DETAIL = new Column(this, "holiday_detail");
 
+	/** 
+	 * 假期备注
+	 * 
+	 */
+	public final Column HOILIDAY_REMARK = new Column(this, "hoiliday_remark");
+
 
 	private HolidayTable() {
 		super("holiday");

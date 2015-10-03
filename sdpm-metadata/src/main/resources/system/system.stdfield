@@ -89,4 +89,5 @@
   <standard-field id="9402fee0aa7e45b78bbcffc0c9be543e" name="holiday_type" title="假期类型" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
   <standard-field id="941258c83a8c49a490d5afa2ec35ccfa" name="holiday_deleted" title="删除标志位" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
   <standard-field id="9a509de6efec40ac818dd415b28afa03" name="holiday_detail" title="假期描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
+  <standard-field id="0c492fe9411e4c70b1f1cfa5d48b6b2e" name="hoiliday_remark" title="假期备注" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
 </standard-fields>
