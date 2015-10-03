@@ -23,10 +23,13 @@ public class TestCaseAction extends BaseController {
 	@Autowired
 	private TestCaseService testCaseService;
 	
-	@RequestMapping
-	public String form(Integer get){
+	@RequestMapping("")
+	public String form(String get,QualityTestCase testCase,Model model){
+		testCaseService.findTestCaseList(testCase);
+		model.addAttribute("get", get);
+		model.addAttribute("testCase", testCase);
 		return "testManagement/page/cases.page";
-	}
+	}	
 	
 	@RequestMapping("/findPager")
 	public String findPager(Integer start,Integer limit,String order,String ordertype,QualityTestCase testcase,Model model){
@@ -36,7 +39,7 @@ public class TestCaseAction extends BaseController {
 		}
 		Pager<QualityTestCase> casepager = testCaseService.findTestCasePager(start, limit, testcase, order,asc);
 		model.addAttribute("casepager",casepager);
-		return "testManagement/data/BugData.pagelet";
+		return "testManagement/data/casesData.pagelet";
 	}
 	
 	@RequestMapping("/add")
@@ -63,7 +66,9 @@ public class TestCaseAction extends BaseController {
 	}
 	
 	@RequestMapping("/execution")
-	public String execution(){
+	public String execution(Integer caseId,Model model){
+		 QualityTestCase testcase = testCaseService.findById(caseId);
+		 model.addAttribute("testcase", testcase);
 		return "/testManagement/page/tabledemo/execution.pagelet";
 	}
 	
@@ -74,14 +79,32 @@ public class TestCaseAction extends BaseController {
 	}
 	
 	@RequestMapping("/result")
-	public String result(){
+	public String result(Integer caseId,Model model){
+		QualityTestCase testCase = testCaseService.findById(caseId);
+		model.addAttribute("testCase", testCase);
 		return "/testManagement/page/tabledemo/result.pagelet";
 	}
 	
 	@RequestMapping("/edit")
-	public String edit(){
+	public String edit(Integer caseId,Model model){
+		QualityTestCase testCase = testCaseService.findById(caseId);
+		model.addAttribute("testCase", testCase);
 		return "/testManagement/page/tabledemo/editioncase.page";
-	}	
+	}
+	
+	@RequestMapping("/copy")
+	public String copy(Integer caseId,Model model){
+		QualityTestCase testCase = testCaseService.findById(caseId);
+		model.addAttribute("testCase", testCase);
+		return "/testManagement/page/copyCase.page";
+	}
+	
+	@RequestMapping(value = "/copySave",method = RequestMethod.POST)
+	public String copySave(QualityTestCase testCase,Model model){
+		testCaseService.addTestCase(testCase);
+		model.addAttribute("testCase", testCase);
+		return "redirect:"+"quality/testcase";
+	}
 	
 	@RequestMapping("/delete")
 	public String delete(Integer testCaseId,Model model){

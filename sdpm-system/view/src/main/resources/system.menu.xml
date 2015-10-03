@@ -5,8 +5,8 @@
     <menu id="holiday" parent-id="mysystem" name="节假日管理" href="/system/page/holiday/manage.page" icon="" sort="300" isShow="1">
         <menu id="manage" parent-id="holiday" name="管理" href="/system/page/holiday/manage.page" icon="" sort="200" isShow="1"></menu>
         <menu id="myholiday" parent-id="holiday" name="节假日" href="/system/page/holiday/holiday.page" icon="" sort="100" isShow="1">
-        	<menu id="myholiday-edit" parent-id="myholiday" name="编辑" href="/system/page/holiday/edit.page" icon="icon-pencil" sort="300" isShow="1" scope="myholiday-op"></menu>
-        	 <menu id="myholiday-del" parent-id="myholiday" name="删除" href="javascript:;" icon="icon-remove" sort="200" isShow="1" scope="myholiday-op"></menu>
+        	<menu id="myholiday-edit" parent-id="myholiday" name="编辑" href="/system/holiday/find" icon="icon-pencil" sort="300" isShow="1" scope="myholiday-op"></menu>
+        	 <menu id="myholiday-del" parent-id="myholiday" name="删除" href="/system/holiday/delete" icon="icon-remove" sort="200" isShow="1" scope="myholiday-op"></menu>
         	
         </menu>
        <!--  <menu id="working" parent-id="holiday" name="工作日" href="/system/page/holiday/working.page" icon="" sort="3"

@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.service.inter;
 
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -24,5 +25,17 @@ public interface TeamService {
      * @return
      */
     public List<ProjectTeam> findTeamByProjectId(Integer projectId);
+
+    /**
+     * 查询
+     *
+     * @param team
+     * @param start
+     * @param limit
+     * @param order
+     * @param ordertype
+     * @return
+     */
+    public Pager<ProjectTeam> findPager(ProjectTeam team, Integer start, Integer limit, String order, String ordertype);
 
 }

@@ -55,11 +55,12 @@ public class StoryAction extends BaseController{
     	storyService.updateStory(productStory);
     	return "redirect:" + "/product/page/project/togglebox.page";
     }
+    
     @RequestMapping("/updateBatch")
     public String updateBatch(List<ProductStory> stories){
     	
     	storyService.updateBatchStory(stories);
-    	return "";
+    	return "redirect:" + "/product/page/project/togglebox.page";
     }
     
     @RequestMapping("/find")

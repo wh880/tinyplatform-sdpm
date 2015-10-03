@@ -38,6 +38,7 @@
   <standard-field id="39620b293f4f4c7580ab9a2adcd09baa" name="bug_result" title="BUG_RESULT" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="0b825f5b94964c9bb897b6d7e46bc521" name="bug_repo" title="BUG_REPO" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="6b9f288452bf434b800682d537a0fe46" name="bug_entry" title="BUG_ENTRY" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="f52e09114a0a47a2ae47b517f11e5ac8" name="bug_from_case" title="来源用例" business-type-id="ccd3e83b1cae428987599fb95985fa70"/>
   <standard-field id="83e5fcc53b104488918293c7d077635c" name="bug_lines" title="BUG_LINES" business-type-id="286a6bca92b34779bcb6fc8809f0a666" default=""/>
   <standard-field id="5eaade48b6504899be41bb710c6a96a9" name="bug_v1" title="BUG_V1" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default=""/>
   <standard-field id="94b9073805c646418fe2e5f7e1291b35" name="bug_repo_type" title="BUG_REPOTYPE" business-type-id="095e594e1550424b9643c7e2279e85be"/>
@@ -72,8 +73,7 @@
   <standard-field id="5c4ed17618134ece8c869756c3aa5292" name="bug_v2" title="BUG_V2" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default=""/>
   <standard-field id="682cae09812d41c6b726a3d7c7a2e770" name="test_result_id" title="测试结果" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="c076c31364c64d809887f04dcc9c0318" name="testresult_run" title="TESTRESULT_RUN" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
-  <standard-field id="5a140e9f3c3e4fd88ba6d8895606344d" name="case__result" title="测试结果" business-type-id="095e594e1550424b9643c7e2279e85be" default="-0"/>
-  <standard-field id="142d02cd9d80455f8863beef028354e5" name="case_stepresults" title="用例步骤结果" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" default=""/>
+  <standard-field id="5a140e9f3c3e4fd88ba6d8895606344d" name="case__result" title="测试结果" business-type-id="095e594e1550424b9643c7e2279e85be" default="-0"/>  <standard-field id="142d02cd9d80455f8863beef028354e5" name="case_stepresults" title="用例步骤结果" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" default=""/>
   <standard-field id="8555ec8d0f9842848790d0b62faf31d8" name="test_result_last_runner" title="最后执行人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="79038eaa3ce942da87919d70b4af6a66" name="test_result_date" title="最后执行日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default=""/>
   <standard-field id="ea2c2898819a460e8a1394fb2fef5096" name="test_run_id" title="执行编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>

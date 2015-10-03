@@ -13,7 +13,7 @@
      #@div(divClass="infoContent")
 	        <p class="titleName">描述</p>
 	       	<div>
-	       		这里要描述需求的内容
+	       		${holiday?.holidayDetail}
 	       	</div>
 		#end
 
@@ -22,7 +22,7 @@
 			#@elementItem("" "edui-Box")
          				<b class="titleNames">备注</b>
 					#@formControlDiv("col-12")
-					#@Teditor("content2" "content2" {"initialFrameHeight":"300" ,"datatype":"*10-300"})#end
+					#@Teditor("hoilidayRemark" "" {"initialFrameHeight":"300" ,"datatype":"*10-300"})${holiday?.hoilidayRemark}#end
 					#end
        				#@validateDiv("col-4")#end
     		#end

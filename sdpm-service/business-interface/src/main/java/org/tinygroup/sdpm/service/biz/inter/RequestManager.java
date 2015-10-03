@@ -71,5 +71,12 @@ public interface RequestManager {
      * @return
      */
     Pager<ServiceRequest> findPager(Integer start, Integer limit, ServiceRequest serviceRequest);
+
+    /**
+     * 关闭请求
+     *
+     * @return
+     */
+    Integer close(ServiceRequest clientRequest);
 }
 

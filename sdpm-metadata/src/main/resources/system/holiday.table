@@ -1,0 +1,14 @@
+<tables>
+  <table id="fc76ee63c9474df99276ece3c6b1ff66" name="holiday" title="假期表" schema="" package-name="">
+    <description></description>
+    <table-field standard-field-id="706740c7a21f47a5b2c68fe1d68efa9d" primary="true" unique="true" not-null="true" id="holiday_id" auto-increase="true"/>
+    <table-field standard-field-id="ca40b596b0b6409e8127fdbd2ee47209" primary="false" unique="false" not-null="true" id="holiday_name" auto-increase="false"/>
+    <table-field standard-field-id="83df7b72ac664c56be7ebd85717afcdd" primary="false" unique="false" not-null="false" id="holiday_account" auto-increase="false"/>
+    <table-field standard-field-id="13ef62dd19e14454ba6c9f1ff98dd8b9" primary="false" unique="false" not-null="true" id="holiday_date" auto-increase="false"/>
+    <table-field standard-field-id="9402fee0aa7e45b78bbcffc0c9be543e" primary="false" unique="false" not-null="false" id="holiday_type" auto-increase="false"/>
+    <table-field standard-field-id="941258c83a8c49a490d5afa2ec35ccfa" primary="false" unique="false" not-null="false" id="holiday_deleted" auto-increase="false"/>
+    <table-field standard-field-id="2f31dbd7abc04051a071e456a4bcd85e" primary="false" unique="false" not-null="false" id="company_id" auto-increase="false"/>
+    <table-field standard-field-id="9a509de6efec40ac818dd415b28afa03" primary="false" unique="false" not-null="false" id="holiday_detail" auto-increase="false"/>
+    <table-field standard-field-id="0c492fe9411e4c70b1f1cfa5d48b6b2e" primary="false" unique="false" not-null="false" id="hoiliday_remark" auto-increase="false"/>
+  </table>
+</tables>

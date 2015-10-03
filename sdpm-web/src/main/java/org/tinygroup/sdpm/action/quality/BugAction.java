@@ -1,5 +1,11 @@
 package org.tinygroup.sdpm.action.quality;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +35,8 @@ public class BugAction extends BaseController {
 		
 	@RequestMapping("")
 	public String form(String get,QualityBug bug,Model model){
-		List<QualityBug> bugList = bugService.findBugList(bug);
-		model.addAttribute("bugList", bugList);
+		bugService.findBugList(bug);
+		model.addAttribute("bug", bug);
 		model.addAttribute("get", get);
 		return "/testManagement/page/Bug.page";
 	}
@@ -103,6 +109,14 @@ public class BugAction extends BaseController {
 		bug = bugService.findById(bugId);
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/edition.page";
+	}
+	
+	@RequestMapping("/editionPaging")
+	public String editionPaging(Integer bugId,Model model){
+		QualityBug bug = new QualityBug();
+		bug = bugService.findById(bugId);
+		model.addAttribute("bug", bug);
+		return "/testManagement/page/tabledemo/editionpaging.pagelet";
 	}
 			
 	@RequestMapping("/add")

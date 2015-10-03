@@ -390,4 +390,31 @@ public class ServiceRequestDaoImpl extends TinyDslDaoSupport implements ServiceR
         }
         return select;
     }
+
+    public Integer close(ServiceRequest serviceRequest) {
+        if (serviceRequest == null || serviceRequest.getClientRequestId() == null) {
+            return 0;
+        }
+        return getDslTemplate().update(serviceRequest, new UpdateGenerateCallback<ServiceRequest>() {
+            public Update generate(ServiceRequest t) {
+                Update update = update(SERVICE_REQUESTTABLE).set(
+                        SERVICE_REQUESTTABLE.REQUEST_CLOSED_BY.value(t.getRequestClosedBy()),
+                        SERVICE_REQUESTTABLE.REQUEST_CLOSE_DATE.value(t.getRequestCloseDate())).where(
+                        SERVICE_REQUESTTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()));
+                return update;
+            }
+        });
+    }
+
+    public Integer softDelete(Integer id) {
+        return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
+            public Update generate(Integer id) {
+                Update update = update(SERVICE_REQUESTTABLE).set(
+                        SERVICE_REQUESTTABLE.DELETED.value(ServiceRequest.DELETE_YES)).where(
+                        SERVICE_REQUESTTABLE.CLIENT_REQUEST_ID.eq(id));
+                return update;
+            }
+        });
+
+    }
 }

@@ -35,7 +35,7 @@
               scope="service-sla-export"/>
     </menu>
 
-    <menu id="request" name="需求" href="/service/serviceReq/request.page" sort="100" isShow="1">
+    <menu id="request" name="需求" href="/service/request/list" sort="100" isShow="1">
         <menu id="request-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="service-req-batchdel"/>
         <menu id="request-solve" name="回复" href="/service/serviceReq/requestsolve.page" icon="icon-wrench " sort="1"
@@ -44,8 +44,10 @@
               isShow="1" scope="service-request"/>
         <menu id="request-edit" name="变更" href="/service/serviceReq/request.page" icon="icon-random" sort="1"
               isShow="1" scope="service-request"/>
-        <menu id="request-close" name="关闭" href="#" icon="icon-off" sort="1"
-              isShow="1" scope="service-request"/>
+        <menu id="request-close" name="关闭" href="/service/request/close" icon="icon-off" sort="1"
+              isShow="1" scope="service-request2"/>
+        <menu id="request-delete" name="删除" href="/service/request/delete" icon="icon-remove" sort="1"
+              isShow="1" scope="service-request2"/>
         <menu id="request-open" name="未回复" href="/service/serviceReq/request.page" sort="1"
               isShow="1" scope="service-request-list"/>
         <menu id="request-all" name="全部请求" href="/service/serviceReq/request.page" sort="1"
@@ -88,6 +90,16 @@
               scope="service-sla-r"/>
         <menu id="sla-add" name="新建协议" href="/service/sla/form" icon="icon-plus" sort="1" isShow="1"
               scope="service-sla-r"/>
+        <!--下面是协议里面，点击“详情”页面后的“编辑”和“删除”-->
+        <menu id="clientSla_editContent" name="协议编辑" href="/service/sla/slaEdit" sort="1" isShow="1"
+              scope="clientSlaContent"/>
+        <menu id="clientSla_deleteContent" name="协议删除" href="/service/sla/slaDelete" sort="1" isShow="1"
+              scope="clientSlaContent"/>
+        <!--下面是协议里面，点击“协议描述”页面后的“编辑”和“删除”-->
+        <menu id="Sla_editContent" name="协议编辑" href="/service/sla/slaContentEdit" sort="1" isShow="1"
+              scope="SlaContent"/>
+        <menu id="Sla_deleteContent" name="协议删除" href="/service/sla/slaContentDelete" sort="1" isShow="1"
+              scope="SlaContent"/>
     </menu>
     <menu id="faq" name="FAQ" href="/service/faq/faqmenu.page" sort="100" isShow="1">
         <!--<menu id="faq-edit" name="编辑" href="/service/faq/addquestion.page" icon="icon-pencil" sort="1" isShow="1"-->

@@ -59,5 +59,11 @@ public interface DictService {
 	 * @return
 	 */
 	Pager<SystemDict> findDictPager(int start,int limit,SystemDict dict,String columnName,boolean asc);
+	/**
+	 * 批量删除
+	 * @param ids
+	 * @return
+	 */
+	int batchDelete(Integer...ids);
 
 }

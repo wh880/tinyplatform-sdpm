@@ -13,7 +13,7 @@
         ##operationbar star
             #@div(divClass="operationbar")
             <span class="f">
-					<a href="#" class="active_btn">阿里巴巴公司</a>
+					<a href="#" class="active_btn">${client.clientName}</a>
             #* <a href="${TINY_CONTEXT_PATH}/service/sla/slaClient?id=${var.clientId}"
                 class="active_btn">${var.clientId}</a>*#
             </span>

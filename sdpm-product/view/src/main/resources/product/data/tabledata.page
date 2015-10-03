@@ -1,8 +1,51 @@
 
+
+
+<script >
+	
+	$(document).ready(function(){
+	
+		$(".secondMenu").each(function(){
+			
+			$(this).on("click",function(){
+				var inputname = $(this).attr("tabindex");
+				var inputvalue = $(this).html().trim();
+				var i = 0;
+				$("input[type='checkbox']").each(function(){
+					
+					if(this.checked==true){
+						var hm = "<input type='hidden' name='" +inputname + "[" + i +"]' value='" + inputvalue + "'/>";
+						this.name = this.name +　"[" + i +"]";
+						
+						$(this).parent().append(hm);
+			  		
+			  			++i;
+					}
+				
+				});
+				
+				$("form[name='storyform']").trigger("submit");
+				
+				
+				
+			});
+			
+		});
+	
+	});
+	
+</script>
+
 #setTinyItemCount(storyList.getTotalCount())
+
+#@tinyForm("storyform" TINY_CONTEXT_PATH+"/product/story/updateBatch" "" {"class":"test"})
+
 #for(story:storyList.getRecords())
 #@tr()
-    #@td()<input type="checkbox" value="1" name="product-demand">#end
+    #@td()
+    	<input type="checkbox" value="${story.storyId}" id="fieldid" name="storyId">
+    	
+    #end
     #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">${story.storyId}</a>#end
     #@td()${story.storyPri}#end
     #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">${story.storyTitle}</a>#end
@@ -19,6 +62,7 @@
         <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${url}"><i class="${m.icon}"></i></a>
         #end
     #end
+#end
 #end
 #end
 

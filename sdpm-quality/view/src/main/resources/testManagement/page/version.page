@@ -14,8 +14,9 @@
 			##operationbar start1
 			#@div(divClass="operationbar")
 				<span class="f">
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page" class="active_btn">待测版本</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page">已测试版本</a>
+					#foreach(m:menuManager.getScopeMenus("testverleft-tab"))
+						<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==get?'active_btn':''}">${m.name}</a>
+    				#end    					
 					</span>
 				<span class="r">
 					#foreach(m:menuManager.getScopeMenus("testversion-tab"))

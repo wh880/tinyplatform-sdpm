@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu id="productLine" parent-id="0" name="产品线" href="/productLine/page/project/productLine.page" icon="icon-th-large"
-      sort="900" isShow="1">
+	sort="900" isShow="1">
 
-    <menu id="line-product" parent-id="productLine" name="产品" href="/productLine/page/project/productLine.page" icon=""
-          sort="200" isShow="1" scope="productLine-left"></menu>
-    <menu id="overview" parent-id="productLine" name="概况" href="/productLine/page/project/overview.page" icon=""
-          sort="100" isShow="1" scope="productLine-left"></menu>
-          
-    <menu id="productLine-list" parent-id="productLine" name="所有产品线" href="/productLine/page/tabledemo/list.page" icon="icon-globe"
-          sort="400" isShow="1" scope="productLine-right">
-             <menu id="allproductline-edit" name="产品线编辑" href="/productLine/find?productLineId=${productLine.productLineId}" icon="icon-pencil"
-              sort="100" isShow="1"scope="productLine-all"/>
-          	 <menu id="allproductline-remove" name="删除" href="/productLine/delete?productLineId=${productLine.productLineId}" icon="icon-remove" sort="99" isShow="1"
-              scope="productLine-all"/>
-          </menu> 
-    <menu id="productLine-add" parent-id="productLine" name="添加产品线" href="/productLine/page/tabledemo/add.page" icon="icon-plus-sign"
-          sort="200" isShow="1" scope="productLine-right"></menu>      
+	<menu id="line-product" parent-id="productLine" name="产品" href="/productLine/page/project/productLine.page" icon="" sort="200"
+		isShow="1" scope="productLine-left"></menu>
+	<menu id="overview" parent-id="productLine" name="概况" href="/productLine/page/project/overview.page" icon="" sort="100"
+		isShow="1" scope="productLine-left"></menu>
+
+	<menu id="productLine-list" parent-id="productLine" name="所有产品线" href="/productLine/page/tabledemo/list.page" icon="icon-globe" sort="400"
+		isShow="1" scope="productLine-right">
+		<menu id="allproductline-edit" name="产品线编辑" href="/productLine/find?productLineId=${productLine.productLineId}"
+			icon="icon-pencil" sort="100" isShow="1" scope="productLine-all" />
+		<menu id="allproductline-remove" name="删除" href="/productLine/delete?productLineId=${productLine.productLineId}"
+			icon="icon-remove" sort="99" isShow="1" scope="productLine-all" />
+	</menu>
+	<menu id="productLine-add" parent-id="productLine" name="添加产品线" href="/productLine/page/tabledemo/add.page" icon="icon-plus-sign"
+		sort="200" isShow="1" scope="productLine-right"></menu>
 </menu>

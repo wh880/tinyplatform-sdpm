@@ -55,7 +55,7 @@ public class QualityTestResultTable extends Table {
 	 * 测试结果
 	 * 
 	 */
-	public final Column CASE__RESULT = new Column(this, "case__result");
+	public final Column CASE_RESULT = new Column(this, "case_result");
 
 	/** 
 	 * 用例步骤结果

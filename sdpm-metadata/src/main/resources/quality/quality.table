@@ -43,6 +43,7 @@
     <table-field standard-field-id="39620b293f4f4c7580ab9a2adcd09baa" primary="false" unique="false" not-null="false" id="result" auto-increase="false"/>
     <table-field standard-field-id="0b825f5b94964c9bb897b6d7e46bc521" primary="false" unique="false" not-null="false" id="repo" auto-increase="false"/>
     <table-field standard-field-id="6b9f288452bf434b800682d537a0fe46" primary="false" unique="false" not-null="false" id="entry" auto-increase="false"/>
+    <table-field standard-field-id="f52e09114a0a47a2ae47b517f11e5ac8" primary="false" unique="false" not-null="false" id="bug_from_case" auto-increase="false"/>
     <table-field standard-field-id="83e5fcc53b104488918293c7d077635c" primary="false" unique="false" not-null="false" id="lines" auto-increase="false"/>
     <table-field standard-field-id="5eaade48b6504899be41bb710c6a96a9" primary="false" unique="false" not-null="false" id="v1" auto-increase="false"/>
     <table-field standard-field-id="5c4ed17618134ece8c869756c3aa5292" primary="false" unique="false" not-null="false" id="V2" auto-increase="false"/>
@@ -74,7 +75,7 @@
     <table-field standard-field-id="efcbc3136d414189b034e5c90edd8585" primary="false" unique="false" not-null="false" id="case_stage" auto-increase="false"/>
     <table-field standard-field-id="6b50c99857824d8eba929155e647e154" primary="false" unique="false" not-null="false" id="case_howRun" auto-increase="false"/>
     <table-field standard-field-id="a0df855060bc427ab2c3bd67b66f42f0" primary="false" unique="false" not-null="false" id="case_scriptedBy" auto-increase="false"/>
-    <table-field standard-field-id="3f7c5172d79e4d3c9f06d234276c9074" primary="false" unique="false" not-null="false" id="case_scriptedDate" auto-increase="false"/>
+    <table-field standard-field-id="3f7c5172d79e4d3c9f06d234276c9074" primary="false" unique="false" not-null="false" id="case_scripted_date" auto-increase="false"/>
     <table-field standard-field-id="306f7286b0ad487ebf2de0a813134410" primary="false" unique="false" not-null="false" id="scriptStatus" auto-increase="false"/>
     <table-field standard-field-id="6c7952142648466e8d39d205f9fd569e" primary="false" unique="false" not-null="false" id="scriptLocation" auto-increase="false"/>
     <table-field standard-field-id="09384f9c0bb94db8be96a2b043c66635" primary="false" unique="false" not-null="false" id="case_status" auto-increase="false"/>
@@ -112,7 +113,7 @@
     <table-field standard-field-id="c076c31364c64d809887f04dcc9c0318" primary="false" unique="false" not-null="false" id="run" auto-increase="false"/>
     <table-field standard-field-id="24ac4d6214c04529b4df86d1b7a2e53d" primary="false" unique="false" not-null="false" id="link_case" auto-increase="false"/>
     <table-field standard-field-id="e426ffcf06bd4cc2be2bf6c6b5aef436" primary="false" unique="false" not-null="false" id="case_version" auto-increase="false"/>
-    <table-field standard-field-id="5a140e9f3c3e4fd88ba6d8895606344d" primary="false" unique="false" not-null="false" id="case_Result" auto-increase="false"/>
+    <table-field standard-field-id="5a140e9f3c3e4fd88ba6d8895606344d" primary="false" unique="false" not-null="false" id="case_result" auto-increase="false"/>
     <table-field standard-field-id="142d02cd9d80455f8863beef028354e5" primary="false" unique="false" not-null="false" id="case_stepresults" auto-increase="false"/>
     <table-field standard-field-id="8555ec8d0f9842848790d0b62faf31d8" primary="false" unique="false" not-null="false" id="testResult_lastRunner" auto-increase="false"/>
     <table-field standard-field-id="79038eaa3ce942da87919d70b4af6a66" primary="false" unique="false" not-null="false" id="testResult_date" auto-increase="false"/>

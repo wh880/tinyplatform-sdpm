@@ -78,7 +78,7 @@ public class ClientAction extends BaseController {
 
         }
         model.addAttribute("client", client);
-        return "service/client/clientUser.page";
+        return "redirect:/service/client/list";
     }
 
     @ResponseBody

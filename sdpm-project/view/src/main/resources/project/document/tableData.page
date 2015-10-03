@@ -1,29 +1,25 @@
 #macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
+<input type="hidden" name="records" value="${num}"/>
 #end
 
 
 
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=docPager.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
+    #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(records)
+#for(d:docPager.getRecords())
 #@tr()
-	
-	#@td()<a href="${TINY_CONTEXT_PATH}/document/tab.page"> ${page}</a>#end
-	#@td()北京#end
-	#@td()中南海#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/document/tab.page">67</a> #end
-	#@td()2013/03/25#end
-	#@td()67#end
-	
-	
-	
-	 #@td()
-		<a href="${TINY_CONTEXT_PATH}/document/table-edit.page" title="编辑">#buttonIcon(iconClass="icon-pencil")
-		#iconOperation(" icon-remove" "删除" "ml-5")
-	#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/document/tab.page"> ${d?.docId}</a>#end
+    #@td()${d?.docModule}#end
+    #@td()${d?.docTitle}#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/document/tab.page">${d?.docId}</a> #end
+    #@td()${d?.docAddedBy}#end
+    #@td()${d?.docAddedDate}#end
+    #@td()
+    <a href="${TINY_CONTEXT_PATH}/document/table-edit.page" title="编辑">#buttonIcon(iconClass="icon-pencil")
+        #iconOperation(" icon-remove" "删除" "ml-5")
+    #end
 #end
 #end

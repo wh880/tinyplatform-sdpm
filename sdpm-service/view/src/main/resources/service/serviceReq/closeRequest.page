@@ -1,0 +1,34 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="服务管理",activeMenuId=currentPageId)
+<style>
+    .select_boxes {
+        margin-top: 0
+    }
+</style>
+#set(name="request")
+
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/request/close/date" "post" {"class":"test"})
+<input type="hidden" name="clientRequestId" value="${clientRequestId}"/>
+    #@noRespsGridSystem()
+        #@gridSysRow()
+            #@colLabel("col-3")关闭人：#end
+            #@gridSysCol(5)
+                #tinyInput("text" "requestClosedBy" "" {"datatype":"","id":"user_account","class":
+                    "input-text"})
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-3")关闭时间：#end
+            #@gridSysCol(5)
+                #@tinyDateInput("requestCloseDate" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                    "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
+            #end
+        #end
+    #end
+#end
+
+
+

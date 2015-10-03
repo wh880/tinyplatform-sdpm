@@ -1,32 +1,23 @@
 #include("/system/page/event/common.page")
 
-#macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
-#end
-
-
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
-#end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(holiday.totalCount)
+#for(h:holiday.records)
 #@tr()
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()${var}#end
+	#@td()<input type="checkbox" value="${h?.holidayId}" name="idCheck">#end
+	#@td()${h?.holidayId}#end
 	#@td()
-		<a title="国庆节"  href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">国庆节${page}</a>
+		<a title="国庆节"  href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">${h?.holidayName}</a>
 	#end
-	#@td()2015.10.1#end
-	#@td()admin#end
-	#@td()放假#end
+	#@td()${h?.holidayDate}#end
+	#@td()${h?.holidayAccount}#end
+	#@td()${h?.holidayType}#end
 	#@td()
 		#foreach(m in menuManager.getScopeMenus("myholiday-op"))
 			#if("myholiday-del"!=m.id)
-				<a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${m.href}"><i class="${m.icon}"></i></a>
+				
+				<a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${m.href}?holidayId=${h?.holidayId}"><i class="${m.icon}"></i></a>
 			#else
-				#iconOperation(m.icon m.name "ml-5 delBtn")
+				#iconOperation(m.icon m.name "ml-5 delBtn"m.href+"?holidayId="+h?.holidayId)
 			#end
 			
 		#end
