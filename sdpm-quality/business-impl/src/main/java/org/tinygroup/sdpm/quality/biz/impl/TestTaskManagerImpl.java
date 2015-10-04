@@ -46,4 +46,11 @@ public class TestTaskManagerImpl implements TestTaskManager {
 		OrderBy order = new OrderBy(sortName, asc);
 		return testtaskdao.queryPager(start, limit, testtask, order);
 	}
+
+	public QualityTestTask find(Integer id) {
+		if(id != null){
+			return testtaskdao.getByKey(id);
+		}
+		return null;
+	}
 }

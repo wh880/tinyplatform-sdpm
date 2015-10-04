@@ -128,7 +128,7 @@ public class BugAction extends BaseController {
 	public String copy(Integer bugId,Model model){
 		QualityBug bug = new QualityBug();
 		bug = bugService.findById(bugId);
-		model.addAttribute("copy",bug);
+		model.addAttribute("bug",bug);
 		return "/testManagement/page/copyBug.page";
 	}
 	

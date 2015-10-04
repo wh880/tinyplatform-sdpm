@@ -19,6 +19,10 @@ public class TestTaskServiceImpl implements TestTaskService {
 		return testtaskmanager.findList(testtask);
 	}
 	
+	public QualityTestTask findById(Integer id){
+		return testtaskmanager.find(id);
+	}
+	
 	public QualityTestTask addTestTask(QualityTestTask testtask){
 		return testtaskmanager.add(testtask);
 	}

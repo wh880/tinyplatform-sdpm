@@ -20,7 +20,8 @@
 ##operationbar start1
 
 #end
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/version/save" "post" {"class":""})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/version/save" "post" {"class":"test"})
+    #hiddenInput(hiddenInputName="testversionId" hiddenInputValue=testTask?.testversionId)
     <div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">提交测试</p>
@@ -29,7 +30,7 @@
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("projectId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("projectId" testTask?.projectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">项目1</option>
 	                        <option value="ME">项目2</option>
 	                        <option value="MD">项目3</option>
@@ -47,7 +48,7 @@
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("buildName" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("buildName" testTask?.buildName {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">版本1</option>
 	                        <option value="ME">版本2</option>
 	                        <option value="MD">版本3</option>
@@ -66,7 +67,7 @@
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("testtaskOwner" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("testtaskOwner" testTask?.testtaskOwner {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">A</option>
 	                        <option value="ME">B</option>
 	                        <option value="MD">C</option>
@@ -86,7 +87,7 @@
             #@formControlDiv("col-8")
                     #@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("priority" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("priority" testTask?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">1</option>
 	                        <option value="ME">2</option>
 	                        <option value="MD">3</option>
@@ -101,7 +102,7 @@
             #@colLabel()开始日期：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
-                #@tinyDateInput("testtaskBegin" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
+                #@tinyDateInput("testtaskBegin" testTask?.testtaskBegin "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
            		#end
             #end
             #@validateDiv("col-2")#end
@@ -110,7 +111,7 @@
             #@colLabel()结束日期：#end
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
-                #@tinyDateInput("testtaskEnd" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
+                #@tinyDateInput("testtaskEnd" testTask?.testtaskEnd "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
            		#end
             #end
             #@validateDiv("col-2")#end
@@ -120,7 +121,7 @@
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
 						#@Tselect2F()
-	                   		 #@Tselect2Body("testtaskStatus" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("testtaskStatus" testTask?.testtaskStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">未开始</option>
 	                        <option value="ME">未关闭</option>
 	                        <option value="MD">未完成</option>
@@ -134,7 +135,7 @@
             #@colLabel()任务名称：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
-                	#tinyInput("text" "testtaskTitle" ""{"datatype":"*10-500","id":"关键词","class":"input-text"})
+                	#tinyInput("text" "testtaskTitle" testTask?.testtaskTitle {"datatype":"*10-500","id":"关键词","class":"input-text"})
                 #end
             #end
             #@validateDiv("col-2")#end

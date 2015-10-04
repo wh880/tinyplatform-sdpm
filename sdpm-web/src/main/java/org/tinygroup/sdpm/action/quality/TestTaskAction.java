@@ -15,13 +15,13 @@ import org.tinygroup.tinysqldsl.Pager;
  */
 
 @Controller
-@RequestMapping("quality/testTask")
+@RequestMapping("quality/version")
 public class TestTaskAction extends BaseController {
 	
 	@Autowired
 	private TestTaskService testTaskService;
 	
-	@RequestMapping
+	@RequestMapping("")
 	public String form(String get,Model model){
 		return "/testManagement/page/version.page";
 	}
@@ -32,8 +32,8 @@ public class TestTaskAction extends BaseController {
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
-		Pager<QualityTestTask> testtaskpager = testTaskService.findTestTaskPager(start, limit, testtask, order, asc);
-		model.addAttribute("testtaskpager",testtaskpager);
+		Pager<QualityTestTask> verpager = testTaskService.findTestTaskPager(start, limit, testtask, order, asc);
+		model.addAttribute("verpager",verpager);
 		return "/testManagement/data/versionData.pagelet";
 	}
 	
@@ -45,7 +45,7 @@ public class TestTaskAction extends BaseController {
 			testTaskService.updateTestTask(testtask);
 		}
 		model.addAttribute("testtask",testtask);
-		return "redirect:"+"quality/testTask";
+		return "redirect:"+"quality/version";
 	}
 	
 	@RequestMapping("/add")
@@ -64,7 +64,9 @@ public class TestTaskAction extends BaseController {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit(){
+	public String edit(Integer testversionId,Model model){
+		QualityTestTask testTask = testTaskService.findById(testversionId);
+		model.addAttribute("testTask",testTask);	
 		return "/testManagement/page/tabledemo/editionversion.page";
 	}
 }

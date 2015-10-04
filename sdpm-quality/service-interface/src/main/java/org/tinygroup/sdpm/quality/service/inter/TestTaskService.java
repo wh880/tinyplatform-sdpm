@@ -13,6 +13,12 @@ public interface TestTaskService {
 	 */
 	List<QualityTestTask> findTestTaskList(QualityTestTask testtask);
 	/**
+	 * 通过Id查询
+	 * @param id
+	 * @return
+	 */
+	QualityTestTask findById(Integer id);
+	/**
 	 * 提交测试
 	 * @param testtask
 	 * @return
