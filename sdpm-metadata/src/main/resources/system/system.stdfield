@@ -29,8 +29,8 @@
   <standard-field id="488614bbfcc5404aa5b4ddda4cef56d8" name="effort_date" title="日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="75dacdf666084a95b5a5faf4cf6a2527" name="effort_left" title="剩余" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35"/>
   <standard-field id="494874a140a54ab9a00d92382c8c67be" name="effort_consumed" title="耗时" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35"/>
-  <standard-field id="a6dbb44cffaa49519898a71944b5c78f" name="effort_begin" title="开始" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
-  <standard-field id="b5034e7b78254e7b82b4e3e01ede383a" name="effort_end" title="已关闭" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="a6dbb44cffaa49519898a71944b5c78f" name="effort_begin" title="开始" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
+  <standard-field id="b5034e7b78254e7b82b4e3e01ede383a" name="effort_end" title="已关闭" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
   <standard-field id="8f7f46caee354c88a4068200c4045973" name="file_id" title="附件ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="11dc002e23a649e48888fabb340fae2e" name="file_pathname" title="附件地址" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
   <standard-field id="d730aee459ec4b5db375eb24063ae7cc" name="file_title" title="附件名" business-type-id="a30696c1e44441ecad77a832afd3731d"/>
