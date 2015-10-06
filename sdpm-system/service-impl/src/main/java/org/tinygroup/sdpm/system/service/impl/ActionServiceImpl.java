@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
+import org.tinygroup.tinysqldsl.Pager;
 @Component
 public class ActionServiceImpl implements ActionService {
 	@Autowired
@@ -30,6 +31,12 @@ public class ActionServiceImpl implements ActionService {
 	public List<SystemAction> find(SystemAction systemAction) {
 		// TODO Auto-generated method stub
 		return actionManager.find(systemAction);
+	}
+
+	public Pager<SystemAction> findByPager(int start, int limit,
+			SystemAction systemAction, String sortName, boolean asc) {
+		// TODO Auto-generated method stub
+		return actionManager.findByPage(start, limit, systemAction, sortName, asc);
 	}
 
 }

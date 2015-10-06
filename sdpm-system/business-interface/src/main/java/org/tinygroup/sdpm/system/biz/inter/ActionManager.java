@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.system.biz.inter;
 import java.util.List;
 
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface ActionManager {
 	/**
@@ -29,4 +30,14 @@ public interface ActionManager {
 	 * @return
 	 */
 	List<SystemAction> find(SystemAction systemAction);
+	/**
+	 * 分页查询
+	 * @param start
+	 * @param limit
+	 * @param systemAction
+	 * @param sortName
+	 * @param asc
+	 * @return
+	 */
+	Pager<SystemAction> findByPage(int start ,int limit,SystemAction systemAction,String sortName,boolean asc);
 }
