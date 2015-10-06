@@ -24,6 +24,7 @@
 #end
 
     #@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/case/save" "post" {"class":""})
+    #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testCase?.caseId)
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">建用例</p>
@@ -32,7 +33,7 @@
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("productId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("productId" testCase?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="CT">产品2</option>
 	                        <option value="DE">产品3</option>
 	                        <option value="FL">产品4</option>
@@ -52,7 +53,7 @@
 					#@div(divClass="col-0")&nbsp;&nbsp#end
 					#@div(divClass="col-3")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("moduleId" testCase?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="CT">/1/2</option>
 	                        <option value="DE">/2/3</option>
 	                        <option value="IN">/3/4</option>
@@ -73,7 +74,7 @@
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
                      #@Tselect2F()
-	                   		 #@Tselect2Body("caseType" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("caseType" testCase?.caseType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">1</option>
 	                        <option value="ME">2</option>
 	                        <option value="MD">3</option>
@@ -89,7 +90,7 @@
             #@formControlDiv("col-8")
                #@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("caseStage" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("caseStage" testCase?.caseStage {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">版本1</option>
 	                        <option value="ME">版本2</option>
 	                        <option value="MD">版本3</option>
@@ -108,14 +109,12 @@
             #@colLabel()优先级：#end
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
-					#@selectRadiusBox("select_boxes")
-	                        #@select(selectName="priority" selectClass="select")
-	                            #@optionSelected("") #end
-	                            #@optionItem("")1#end
-	                            #@optionItem("")2#end
-	                            #@optionItem("")3#end
-	                        #end
-	                    #end
+					#@tinySelect("priority" testCase?.priority {"class":"select2"})
+							#@tinyOptionItem("3")1#end
+							#@tinyOptionItem("1")2#end
+							#@tinyOptionItem("2")3#end
+							
+					#end
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -126,7 +125,7 @@
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
 							 #@Tselect2F()
-	                   		 #@Tselect2Body("storyId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("storyId" testCase?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="IN">需求1</option>
 	                        <option value="ME">需求2</option>
 	                        <option value="MD">需求3</option>
@@ -142,7 +141,7 @@
             #@colLabel()用例标题：#end
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
-                #tinyInput("text" "caseTitle" ""{"datatype":"*10-500","id":"版本","class":"input-text"})
+                #tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"*10-500","id":"版本","class":"input-text"})
             #end
             #end
             #@validateDiv("col-2")#end
@@ -188,7 +187,7 @@
             #@colLabel()关键词：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
-                	#tinyInput("text" "caseKeywords" ""{"datatype":"","id":"关键词","class":"input-text"})
+                	#tinyInput("text" "caseKeywords" testCase?.caseKeywords {"datatype":"","id":"关键词","class":"input-text"})
             	#end
             #end
             #@validateDiv("col-2")#end

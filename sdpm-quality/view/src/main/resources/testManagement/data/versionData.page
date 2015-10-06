@@ -4,13 +4,13 @@
 
 
 
-#set(records=28,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=verpager.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 	#set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(28)
+#setTinyItemCount(verpager.totalCount)
 
-#for(v:verPager)
+#for(v:verpager.records)
 					#@tr()
 						#@td()<input type="checkbox" value="1" name="userid">#end
 						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionInfo.page">${v?.testversionId}</a>#end
@@ -24,7 +24,7 @@
 						 #@td()
 						 	#foreach(m:menuManager.getScopeMenus("testversion-op"))
 						 		#if(m.id != "tversiondelete")
-						 			<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+						 			<a href="${TINY_CONTEXT_PATH}${m.href}?testversionId=${v?.testversionId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 						 		#else
 						 			#@tinyTableItemRemove(m.href v)
 										<i class="${m.icon}" title="删除"></i>

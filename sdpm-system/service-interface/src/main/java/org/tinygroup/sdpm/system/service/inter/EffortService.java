@@ -55,6 +55,14 @@ public interface EffortService {
 	  * @return
 	  */
 	 Pager<SystemEffort> findByPage(int start,int limit,SystemEffort systemEffort, String sortName, boolean asc);
+	 /**
+	  * 排序查询
+	  * @param systemEffort
+	  * @param order
+	  * @param orderTpye
+	  * @return
+	  */
+	 List<SystemEffort> findList(SystemEffort systemEffort,String order,String orderTpye);
 	 
 	
 }
