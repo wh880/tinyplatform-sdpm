@@ -24,7 +24,7 @@ public class DocAction {
 		//List<Doclib> listDoclib = docservice.findDoclibList(doclib);
 		//for(int i=0;i<listDoclib.size();i++)
 		//	listDoclib.get(i);
-		Pager<Doclib> doclibpager = docservice.findDoclibRetPager(0, 10, doclib);
+		Pager<Doclib> doclibpager = docservice.findDoclibRetPager(0, 20, doclib);
 		model.addAttribute("doclibpager", doclibpager);
 		//doclibpager.getRecords()
 		return "/document/document.page";
@@ -42,7 +42,7 @@ public class DocAction {
 	@RequestMapping(value="/doc/add")
 	public String createDoc(Doclib doclib,Model model)
 	{
-		model.addAttribute("doclib", docservice.findDocById(doclib.getDocLibId()));
+		model.addAttribute("doclib", docservice.findDoclibById(doclib.getDocLibId()));
 		return "/document/add-doc.page";
 	}
 	@RequestMapping(value="/doc/edit")
@@ -65,7 +65,7 @@ public class DocAction {
 			docservice.editDoc(doc);
 		doc = docservice.createNewDoc(doc);
 		model.addAttribute("doc", doc);
-		return "redirect:"+"/document/document.page";
+		return "redirect:"+"/document/document";
 	}
 	@RequestMapping(value="/doc/delete")
 	public String delDoc(Integer docid)
@@ -73,7 +73,7 @@ public class DocAction {
 		/*int ret = */
 		docservice.deleteDocById(docid);
 		//if(ret==0)return "/document/Error.page";
-		return "redirect:"+"/document/document.page";
+		return "redirect:"+"/document/document";
 	}
 	@RequestMapping(value="/doclib/add")
 	public String addDocLib()
@@ -93,7 +93,7 @@ public class DocAction {
 		if(doclib.getDocLibId()!=null||doclib.getDocLibId()!=0)
 			docservice.editDocLibName(doclib);
 		docservice.createNewDocLib(doclib);
-		return "redirect:"+"/document/document.page";
+		return "redirect:"+"/document/document";
 	}
 	@RequestMapping(value="/doclib/delete")
 	public String delDocLib(Integer doclibid)

@@ -11,12 +11,12 @@
 		<span class="f"> 版本名称</span>
 		<span class="r">
 					
-			<a href="${TINY_CONTEXT_PATH}/document/doc-edit/${doc.docId}" title="编辑">
+			<a href="${TINY_CONTEXT_PATH}/document/doc/edit?docid=${doc.docId}" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp
-				#@tinyTableItemRemove(TINY_CONTEXT_PATH+"/document/delete/doc?docid=" doc.docId)
+				#@tinyTableItemRemove(TINY_CONTEXT_PATH+"/document/doc/delete" doc.docId)
 					#buttonIcon(iconClass="icon-remove")
 				#end
-			<a href="${TINY_CONTEXT_PATH}/document/document.page" title="返回">
+			<a href="${TINY_CONTEXT_PATH}/document" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>
 		</span>
 	#end
@@ -44,9 +44,9 @@
         #include("../data/historyRecord.page")
     #end
     <center>		
-			<a href="${TINY_CONTEXT_PATH}/document/doc-edit/${doc?.docId}" title="编辑">
+			<a href="${TINY_CONTEXT_PATH}/document/doc/edit?docid=${doc?.docId}" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			#@tinyTableItemRemove(TINY_CONTEXT_PATH+"/document/delete/doc" doc.docId)
+			#@tinyTableItemRemove(TINY_CONTEXT_PATH+"/document/doc/delete" doc.docId)
 					#buttonIcon(iconClass="icon-remove")
 				#end
 				&nbsp&nbsp;
