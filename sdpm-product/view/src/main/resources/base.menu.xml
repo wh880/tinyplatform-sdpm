@@ -152,11 +152,11 @@
     <menu id="product-plan" parent-id="myproduct" name="计划" href="/product/page/project/product-plan.page" sort="14"
           isShow="1" permission="Permission">
         <menu id="product-plan-demand" name="关联需求"
-              href="/product/page/tabledemo/relation-plan/product-al-req.page?cname=demand" icon="icon-link" sort="14"
+              href="/product/plan/forword/reRelateStory?planId=${plan.planId}" icon="icon-link" sort="14"
               isShow="1"
               scope="product-pl"/>
         <menu id="product-plan-bug" name="关联BUG"
-              href="/product/page/tabledemo/relation-plan/product-al-bug.page?cname=bug" icon="icon-bug" sort="13"
+              href="/product/plan/forword/reRelateBug?planId=${plan.planId}" icon="icon-bug" sort="13"
               isShow="1"
               scope="product-pl"/>
         <menu id="product-plan-edit" name="计划编辑" href="/product/plan/find?planId=${plan.planId}" icon="icon-pencil"
@@ -164,25 +164,21 @@
               scope="product-pl"/>
         <menu id="product-plan-remove" name="删除" href="/product/plan/delete?planId=${plan.planId}" icon="icon-remove" sort="11" isShow="1"
               scope="product-pl"/>
-        <menu id="product-plan-add" name="创建计划" href="" icon="" sort="10" isShow="1"
+        <menu id="product-plan-add" name="创建计划" href="#" icon="" sort="10" isShow="1"
               scope="product-addpl"/>
-        <menu id="product-plan-log" name="日志" href="" icon="" sort="9" isShow="1"
+        <menu id="product-plan-log" name="日志" href="/product/page/tabledemo/product-log.pagelet" icon="icon-time" sort="9" isShow="1"
               scope="product-log"/>
-        <menu id="product-plan-req" name="关联需求"
-              href="/product/page/tabledemo/relation-plan/product-al-req.page?cname=demand" icon="icon-link" sort="8"
+        <menu id="product-plan-req" name="关联需求"  href="/product/plan/forword/reRelateStory?planId=${planId}" icon="icon-link" sort="8"
               isShow="1"
               scope="product-log"/>
-        <menu id="product-plan-bg" name="关联BUG"
-              href="/product/page/tabledemo/relation-plan/product-al-bug.page?cname=bug" icon="icon-bug" sort="7"
+        <menu id="product-plan-bg" name="关联BUG" href="/product/plan/forword/reRelateBug?planId=${planId}" icon="icon-bug" sort="7"
               isShow="1"
               scope="product-log"/>
-        <menu id="product-plan-editor" name="编辑" href="" icon="" sort="6" isShow="1"
+        <menu id="product-plan-editor" name="编辑" href="#" icon="icon-pencil" sort="6" isShow="1"
               scope="product-log"/>
-        <menu id="product-plan-del" name="删除" href="" icon="" sort="5" isShow="1"
+        <menu id="product-plan-del" name="删除" href="#" icon="icon-remove" sort="5" isShow="1"
               scope="product-log"/>
-        <menu id="product-plan-back" name="返回" href="/product/page/project/product-plan.page" icon="icon-reply" sort="4"
-              isShow="1"
-              scope="product-log"/>
+        <menu id="product-plan-back" name="" href="/product/page/project/product-plan.page" icon="icon-reply" sort="4" isShow="1"  scope="product-log"/>
         <menu id="plan-table-bug" name="关联BUG" href="" icon="" sort="3" isShow="1"
               scope="table-bug"/>
         <menu id="plan-table-del" name="删除" href="" icon="" sort="2" isShow="1"

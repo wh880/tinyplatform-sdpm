@@ -531,12 +531,16 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 	}
 
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+
 		if (orderBies == null) {
 			return select;
 		}
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies[i] != null && i < orderBies.length; i++) {
-			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			OrderByElement tempElement = null;
+			if(orderBies[i]!=null){
+				tempElement = orderBies[i].getOrderByElement();
+			}
 			if (tempElement != null) {
 				orderByElements.add(tempElement);
 			}
@@ -545,5 +549,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
 		}
 		return select;
-	}
+	
+		
+		}
 }

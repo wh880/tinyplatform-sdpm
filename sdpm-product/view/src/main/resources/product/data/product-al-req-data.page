@@ -1,25 +1,19 @@
-#macro setTinyItemCount(num)
-<input type="hidden" name="records" value="${num}"/>
-#end
-
-
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=storyList.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
-    #set(pagesize=records-(page-1)*pagesize)
+#set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(storyList?.totalCount)
+#for(story:storyList.getRecords())
 #@tr()
-    #@td()<input type="checkbox" value="1" name="product-al-req">#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">${var}</a>#end
+    #@td()<input type="checkbox" value="${story?.storyId}" id="fieldid" name="storyId">#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">${story?.storyId}</a>#end
     #@td()@#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">个性化需求</a>#end
-    #@td()产品经理#end
-    #@td()项目经理#end
-    #@td()开发人员#end
-    #@td()半年#end
-    #@td()进行中#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">${story?.storyTitle}</a>#end
+    #@td()${story?.storyOpenedBy}#end
+    #@td()${story?.storyAssignedTo}#end
+    #@td()${story?.storyEstimate}#end
+    #@td()${story?.storyStatus}#end
+    #@td()${story?.storyStage}#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("table-bug"))
             #if(m.id=="plan-table-bug")

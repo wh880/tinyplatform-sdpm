@@ -1,26 +1,19 @@
-#macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
-#end
-
-
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=bugList?.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(bugList?.totalCount)
+#for(bug:bugList.getRecords())
 #@tr()
-	#@td()<input type="checkbox" value="1" name="product-al-bug">#end
-	#@td()${var}#end
+	#@td()<input type="checkbox" value="${bug.bugId}" name="bugId">#end
+	#@td()${bug.bugId}#end
 	#@td()@#end
 	#@td()
-	
-		<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page"> 测试BUG  </a> 
+		<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page"> ${bug.bugTitle} </a> 
 	#end
-	#@td()Admin#end
-	#@td()产品经理#end
-	#@td()进行中#end
+	#@td()${bug.bugOpenedBy} #end
+	#@td()${bug.bugAssignedTo} #end
+	#@td()${bug.bugTitle} #end
 	#@td()
 		#@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)<i class="icon-remove"></i>#end
 	#end
