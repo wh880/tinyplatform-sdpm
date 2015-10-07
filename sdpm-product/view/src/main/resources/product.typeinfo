@@ -15,7 +15,7 @@
 	</type-info>
 	
 	<type-info name="productRelease"  >
-	    <info name="demandInfo" title="发布信息" infoParameter="" url="/product/page/tabledemo/relation-release/releasebaseinfo.pagelet" resource="productRelease"/>
+	    <info name="demandInfo" title="发布信息" infoParameter="releaseId" url="/product/release/find/relateStory" resource="productRelease"/>
 	</type-info>
 	
 	<type-info name="demandhref"  >

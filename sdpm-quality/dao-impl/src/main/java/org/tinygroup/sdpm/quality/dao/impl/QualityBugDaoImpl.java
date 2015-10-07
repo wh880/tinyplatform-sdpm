@@ -532,7 +532,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 
-		if (orderBies == null) {
+		if (orderBies == null||orderBies.length==0) {
 			return select;
 		}
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();

@@ -2,7 +2,7 @@
 	#@div(divClass="infoContent")
 	        <p class="titleName">描述</p>
 	       	<div>
-                &nbsp;&nbsp;&nbsp;八戒哪里跑！！
+                &nbsp;&nbsp;&nbsp;${release?.releaseDesc}
 	       	</div>
 		#end
       
@@ -12,7 +12,7 @@
 	   <li>
 	    #@elementItem()
 	 
-		<p>&nbsp;&nbsp;&nbsp;123456</p>
+		<p>&nbsp;&nbsp;&nbsp;产品：</b>${release?.productId}</p>
 	
 		#end
 	   </li>
@@ -20,7 +20,15 @@
 	    <li>
 	    #@elementItem()
 	 
-		<p><b>&nbsp;&nbsp;&nbsp;名称:</b> 计划XXX</p>
+		<p><b>&nbsp;&nbsp;&nbsp;名称：</b>${release?.releaseName}</p>
+	
+		#end
+	   </li>
+	   
+	    <li>
+	    #@elementItem()
+	 
+		<p><b>&nbsp;&nbsp;&nbsp;版本：</b>${release?.buildId}</p>
 	
 		#end
 	   </li>
@@ -28,18 +36,12 @@
 	   <li>
 	    #@elementItem()
 	  
-		<p><b>&nbsp;&nbsp;&nbsp;开始日期:</b>1970-01-01</p>
+		<p><b>&nbsp;&nbsp;&nbsp;发布日期：</b>${release?.releaseDate?formatDate(release?.releaseDate,'yyyy-MM-dd'):""}</p>
 	
 		#end
 	   </li>
 	   
-	   <li>
-	    #@elementItem()
-	     
-		<p><b>&nbsp;&nbsp;&nbsp;结束日期:</b>1970-01-01</p>
-
-		#end
-	   </li>
+	   
 	       	
 </ul>			
       #end

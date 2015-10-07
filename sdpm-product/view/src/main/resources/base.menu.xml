@@ -190,12 +190,12 @@
     <menu id="product-release" parent-id="myproduct" name="发布" href="/product/page/project/product-release.page"
           sort="13" isShow="1" permission="Permission">
         <menu id="product-release-demand" name="关联需求"
-              href="/product/page/tabledemo/relation-release/product-al-req.page?cname=demand" icon="icon-link"
+              href="/product/release/forword/reRelateStory?releaseId=${release.releaseId}" icon="icon-link"
               sort="14"
               isShow="1"
               scope="product-re"/>
         <menu id="product-release-bug" name="关联BUG"
-              href="/product/page/tabledemo/relation-release/product-al-bug.page?cname=bug" icon="icon-bug" sort="13"
+              href="/product/release/forword/reRelateBug?releaseId=${release.releaseId}" icon="icon-bug" sort="13"
               isShow="1"
               scope="product-re"/>
         <menu id="product-release-edit" name="发布编辑" href="/product/release/find?releaseId=${release.releaseId}"
@@ -205,21 +205,21 @@
               scope="product-re"/>
         <menu id="product-release-add" name="创建发布" href="" icon="" sort="10" isShow="1"
               scope="product-addre"/>
-        <menu id="product-release-log" name="日志" href="" icon="" sort="9" isShow="1"
+        <menu id="product-release-log" name="日志" href="/product/page/tabledemo/product-log.pagelet" icon="icon-time" sort="9" isShow="1"
               scope="product-relog"/>
         <menu id="product-release-req" name="关联需求"
-              href="/product/page/tabledemo/relation-release/product-al-req.page?cname=demand" icon="icon-link" sort="8"
+              href="/product/release/forword/reRelateStory?releaseId=${releaseId}" icon="icon-link" sort="8"
               isShow="1"
               scope="product-relog"/>
         <menu id="product-release-bg" name="关联BUG"
-              href="/product/page/tabledemo/relation-release/product-al-bug.page?cname=bug" icon="icon-bug" sort="7"
+              href="/product/release/forword/reRelateBug?releaseId=${releaseId}" icon="icon-bug" sort="7"
               isShow="1"
               scope="product-relog"/>
-        <menu id="product-release-editor" name="编辑" href="" icon="" sort="6" isShow="1"
+        <menu id="product-release-editor" name="编辑发布" href="/product/page/tabledemo/product-addrelease.pagelet" icon="icon-common-edit icon-pencil" sort="6" isShow="1"
               scope="product-relog"/>
-        <menu id="product-release-del" name="删除" href="" icon="" sort="5" isShow="1"
+        <menu id="product-release-del" name="删除" href="#" icon="icon-remove" sort="5" isShow="1"
               scope="product-relog"/>
-        <menu id="product-release-back" name="返回" href="/product/page/project/product-plan.page" icon="icon-reply"
+        <menu id="product-release-back" name="返回" href="#" icon="icon-reply"
               sort="4" isShow="1"
               scope="product-relog"/>
         <menu id="release-table-rebug" name="关联BUG" href="" icon="" sort="3" isShow="1"

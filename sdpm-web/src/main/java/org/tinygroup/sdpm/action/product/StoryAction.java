@@ -117,11 +117,15 @@ public class StoryAction extends BaseController{
         model.addAttribute("storyList",p);
         
         if("reRelateStory".equals(relate)){
-        	return "/product/data/product-al-req-data.pagelet";
+        	return "/product/data/plan/product-al-req-data.pagelet";
         }else if ("noRelateStory".equals(relate)) {
-        	return "/product/data/product-al-no-req-data.pagelet";
+        	return "/product/data/plan/product-al-no-req-data.pagelet";
+		}else if ("reRelateStoryRelease".equals(relate)) {
+        	return "/product/data/release/product-al-req-data.pagelet";
+		}else if ("noRelateStoryRelease".equals(relate)) {
+        	return "/product/data/release/product-al-no-req-data.pagelet";
 		}
-        return "product/data/tabledata.pagelet";
+        return "";
     }
     @RequestMapping("/bugSearch/{relate}")
     public String bugListAction(@PathVariable(value="relate")String relate,int page, int pagesize,
@@ -129,15 +133,20 @@ public class StoryAction extends BaseController{
     		@RequestParam(required = false, defaultValue = "bugId") String order, 
     		@RequestParam(required = false, defaultValue = "asc") String ordertype,
     		Model model, HttpServletRequest request){
-    	bug.setPlanId(1);
     	bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-    	Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize, bug, FieldUtil.stringFormat(order), "asc".equals(ordertype)?true:false);
+    	Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize, bug, null, "asc".equals(ordertype)?true:false);
     	model.addAttribute("bugList",p);
     	
     	if ("reRelateBug".equals(relate)) {
-        	return "/product/data/product-al-bug-data.pagelet";
+        	return "/product/data/plan/product-al-bug-data.pagelet";
 		}else if ("noRelateBug".equals(relate)) {
-        	return "/product/data/product-al-no-bug-data.pagelet";
+        	return "/product/data/plan/product-al-no-bug-data.pagelet";
+		}else if ("reRelateBugRelease".equals(relate)) {
+        	return "/product/data/release/product-al-bug-data.pagelet";
+		}else if ("noRelateBugRelease".equals(relate)) {
+        	return "/product/data/release/product-al-no-bug-data.pagelet";
+		}else if ("leRelateBugRelease".equals(relate)) {
+        	return "/product/data/release/product-al-le-bug-data.pagelet";
 		}
     	return "";
     }

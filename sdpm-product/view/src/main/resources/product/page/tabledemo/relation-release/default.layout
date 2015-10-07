@@ -14,26 +14,19 @@
 
 <span class="r">
   #foreach(m:menuManager.getScopeMenus("product-relog"))
+  #set(url=eval(m.href))
       #if(m.id=="product-release-log")
-          #@aModal("#myModal" "新增日志" "1000" "500" "btn-class"
-              "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
+      	#@aModal("#myModal" m.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m.icon)日志#end
+      #elseif(m.id=="product-release-del")    
+      	#@delItemsdpm(url)#buttonIcon(iconClass=m.icon)#end
+      #elseif(m.id=="product-release-editor")
+      	 #iconOperations("#myModal" m.icon m.name "865" "448" url "ml-5")
+      #elseif(m.id=="product-release-back")
+      	 <a href="${TINY_CONTEXT_PATH}${url}"  title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
       #else
-          #if(m.id=="product-release-del")
-              #@delItemsdpm("#")#buttonIcon(iconClass="icon-remove")#end
-
-          #else
-              #if(m.id=="product-release-editor")
-                  #iconOperations("#myModal" "icon-common-edit icon-pencil" "编辑发布" "865" "448"
-                      "/product/page/tabledemo/product-addrelease.pagelet" "ml-5")
-              #else
-                  #if(m.id=="product-release-back")
-                      <a href="${TINY_CONTEXT_PATH}/product/page/project/product-release.page"
-                         title="返回">#buttonIcon(iconClass="icon-reply")</a>
-                  #else
-                      <a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;
-                  #end
-              #end
-          #end
+      	 <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;
+      
+         
       #end
   #end
 
@@ -52,14 +45,12 @@
             #@tabHead()
 
                 #if("demand"==type)
-                    #@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-release/product-al-req.page" cname==
-                        "demand"?"Current":"")
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/product/release/forword/reRelateStory?releaseId="+releaseId cname=="demand"?"Current":"")
                         #@buttons("","icon-lightbulb")
                             已完成需求
                         #end
                     #end
-                    #@aHeadCol(TINY_CONTEXT_PATH+
-                        "/product/page/tabledemo/relation-release/product-al-no-req.page" cname=="no-demand"?"Current":
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/product/release/forword/noRelateStory?releaseId="+releaseId cname=="no-demand"?"Current":
                         "")
                         #@buttons("","icon-unlink")
                             未关联需求
@@ -69,8 +60,7 @@
                     <div class="r">
                         #foreach(m:menuManager.getScopeMenus("table-rebug"))
                             #if(m.id=="release-table-rebug")
-                                #@aHeadCol(TINY_CONTEXT_PATH+
-                                    "/product/page/tabledemo/relation-release/product-al-bug.page" cname=="link-demand"?
+                                #@aHeadCol(TINY_CONTEXT_PATH+"/product/release/forword/reRelateBug?releaseId="+releaseId cname=="link-demand"?
                                     "Current":"")
                                     #@buttons("","icon-bug")
                                         关联BUG
@@ -90,27 +80,23 @@
                 #end
 
                 #if("bug"==type)
-                    #@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-release/product-al-bug.page" cname==
-                        "bug"?"Current":"")
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/product/release/forword/reRelateBug?releaseId="+releaseId cname=="bug"?"Current":"")
                         #@buttons("","icon-bug green")
                             已解决Bug
                         #end
                     #end
-                    #@aHeadCol(TINY_CONTEXT_PATH+
-                        "/product/page/tabledemo/relation-release/product-al-no-bug.page" cname=="no-bug"?"Current":"")
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/product/release/forword/noRelateBug?releaseId="+releaseId cname=="no-bug"?"Current":"")
                         #@buttons("","icon-unlink")
                             未关联Bug
                         #end
                     #end
-                    #@aHeadCol(TINY_CONTEXT_PATH+
-                        "/product/page/tabledemo/relation-release/product-al-le-bug.page" cname=="le-bug"?"Current":"")
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/product/release/forword/leRelateBug?releaseId="+releaseId cname=="le-bug"?"Current":"")
                         #@buttons("","icon-bug green")
                             遗留Bug
                         #end
                     #end
                     <div class="r">
-                        #@aHeadCol(TINY_CONTEXT_PATH+
-                            "/product/page/tabledemo/relation-release/product-al-req.page" cname=="link-demand"?
+                        #@aHeadCol(TINY_CONTEXT_PATH+"/product/release/forword/reRelateStory?releaseId="+releaseId cname=="link-demand"?
                             "Current":"")
                             #@buttons("","icon-link")
                                 关联需求
@@ -151,6 +137,6 @@
     #end
 </div>
 <div style="width:30%;float:right">
-    #TypeInfo("productRelease")
+    #TypeInfo("productRelease" releaseId)
 </div>
 #end
