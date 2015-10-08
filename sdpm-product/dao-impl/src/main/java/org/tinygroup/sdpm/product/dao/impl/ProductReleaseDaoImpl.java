@@ -38,6 +38,7 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -76,16 +77,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 		}
 		return getDslTemplate().update(productRelease, new UpdateGenerateCallback<ProductRelease>() {
 			public Update generate(ProductRelease t) {
-				Update update = update(PRODUCT_RELEASETABLE).set(
-					PRODUCT_RELEASETABLE.PRODUCT_ID.value(t.getProductId()),
-					PRODUCT_RELEASETABLE.BUILD_ID.value(t.getBuildId()),
-					PRODUCT_RELEASETABLE.RELEASE_NAME.value(t.getReleaseName()),
-					PRODUCT_RELEASETABLE.RELEASE_DATE.value(t.getReleaseDate()),
-					PRODUCT_RELEASETABLE.RELEASE_STORIES.value(t.getReleaseStories()),
-					PRODUCT_RELEASETABLE.RELEASE_BUGS.value(t.getReleaseBugs()),
-					PRODUCT_RELEASETABLE.RELEASE_DESC.value(t.getReleaseDesc()),
-					PRODUCT_RELEASETABLE.DELETED.value(t.getDeleted())).where(
-					PRODUCT_RELEASETABLE.RELEASE_ID.eq(t.getReleaseId()));
+				Update update = UpdateUtil.getUpdate(PRODUCT_RELEASETABLE, t);
 				return update;
 			}
 		});

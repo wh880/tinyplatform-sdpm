@@ -37,6 +37,7 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.ProductStorySpecDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -74,14 +75,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		}
 		return getDslTemplate().update(productStorySpec, new UpdateGenerateCallback<ProductStorySpec>() {
 			public Update generate(ProductStorySpec t) {
-				Update update = update(PRODUCT_STORY_SPECTABLE).set(
-					PRODUCT_STORY_SPECTABLE.COMPANY_ID.value(t.getCompanyId()),
-					PRODUCT_STORY_SPECTABLE.STORY_ID.value(t.getStoryId()),
-					PRODUCT_STORY_SPECTABLE.STORY_VERSION.value(t.getStoryVersion()),
-					PRODUCT_STORY_SPECTABLE.STORY_TITLE.value(t.getStoryTitle()),
-					PRODUCT_STORY_SPECTABLE.STORY_SPEC.value(t.getStorySpec()),
-					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification())).where(
-					PRODUCT_STORY_SPECTABLE.STORYSPEC_ID.eq(t.getStoryspecId()));
+				Update update = UpdateUtil.getUpdate(PRODUCT_STORY_SPECTABLE, t);
 				return update;
 			}
 		});

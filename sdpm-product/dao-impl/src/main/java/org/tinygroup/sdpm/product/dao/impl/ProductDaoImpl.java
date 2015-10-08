@@ -38,6 +38,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.tinysqldsl.Delete;
@@ -87,25 +88,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		}
 		return getDslTemplate().update(product, new UpdateGenerateCallback<Product>() {
 			public Update generate(Product t) {
-				Update update = update(PRODUCTTABLE).set(
-					PRODUCTTABLE.COMPANY_ID.value(t.getCompanyId()),
-					PRODUCTTABLE.DEPT_ID.value(t.getDeptId()),
-					PRODUCTTABLE.PRODUCTLINE_ID.value(t.getProductLineId()),
-					PRODUCTTABLE.PRODUCT_NAME.value(t.getProductName()),
-					PRODUCTTABLE.PRODUCT_CODE.value(t.getProductCode()),
-					PRODUCTTABLE.PRODUCT_ORDER.value(t.getProductOrder()),
-					PRODUCTTABLE.PRODUCT_STATUS.value(t.getProductStatus()),
-					PRODUCTTABLE.PRODUCT_DESC.value(t.getProductDesc()),
-					PRODUCTTABLE.PRODUCT_OWNER.value(t.getProductOwner()),
-					PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.value(t.getProductQualityManager()),
-					PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.value(t.getProductDeliveryManager()),
-					PRODUCTTABLE.ACL.value(t.getAcl()),
-					PRODUCTTABLE.PRODUCT_WHITE_LIST.value(t.getProductWhiteList()),
-					PRODUCTTABLE.PRODUCT_CREATED_BY.value(t.getProductCreatedBy()),
-					PRODUCTTABLE.PRODUCT_CREATED_DATE.value(t.getProductCreatedDate()),
-					PRODUCTTABLE.PRODUCT_CREATED_VERSION.value(t.getProductCreatedVersion()),
-					PRODUCTTABLE.DELETED.value(t.getDeleted())).where(
-					PRODUCTTABLE.PRODUCT_ID.eq(t.getProductId()));
+				Update update = UpdateUtil.getUpdate(PRODUCTTABLE, t);
 				return update;
 			}
 		});
