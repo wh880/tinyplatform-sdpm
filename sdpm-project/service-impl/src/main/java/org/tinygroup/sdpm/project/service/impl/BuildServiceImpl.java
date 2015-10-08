@@ -25,11 +25,14 @@ public class BuildServiceImpl implements BuildService {
         return buildManager.findPager(build, start, limit, order, asc);
     }
 
-    public ProjectBuild updateBuild(ProjectBuild build) {
-        return null;
+    public int updateBuild(ProjectBuild build) {
+        return buildManager.update(build);
     }
 
     public Integer deleteBuild(Integer buildId) {
         return null;
+    }
+    public ProjectBuild findBuild(Integer id){
+        return buildManager.find(id);
     }
 }

@@ -1,0 +1,136 @@
+package org.tinygroup.sdpm.action.product;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.spi.http.HttpContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.weblayer.WebContext;
+
+/**
+ * 产品控制器
+ * 
+ * @author Administrator
+ *
+ */
+@Controller
+@RequestMapping("/product")
+public class ProductAction  extends BaseController{
+
+	@Autowired
+	private ProductService productService;
+	
+	@Autowired
+	private UserService  userService;
+
+	@RequestMapping("")
+	public String productAction(HttpServletRequest request, WebContext webContext){
+		List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
+		String oldUrl = webContext.get("oldUrl");
+		if(list == null|| list.size()==0){
+			list = productService.findProductList(new Product(),"productId","desc");
+			request.getSession().setAttribute("productList",list);
+			
+			if(null==request.getSession().getAttribute("sessionProductId")||""==request.getSession().getAttribute("sessionProductId")){
+				request.getSession().setAttribute("sessionProductId",list.get(0).getProductId());
+			}
+		}
+		
+		return "redirect:/product/story?"+(list.size()>0?("productId="+list.get(0).getProductId()):"")+"&choose=1"+(request.getQueryString()==null?"":("&"+request.getQueryString()));
+	}	
+	
+	@RequestMapping("/update")
+	public String update(Product product){
+
+		productService.updateProduct(product);
+		
+		return "redirect:" + "/product/page/tabledemo/product-listall.page";
+	}
+	
+	@ResponseBody
+	@RequestMapping("sessionset")
+	public boolean sessionSet(Integer productId,HttpServletRequest request){
+		if(productId!=null){
+			request.getSession().setAttribute("sessionProductId", productId);
+			return true;
+		}else{
+			request.getSession().removeAttribute("sessionProductId");
+			return false;
+		}
+		
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(Integer productId){
+		
+		productService.deleteProduct(productId);
+		return "redirect:" + "/product/page/tabledemo/product-listall.page";
+	}
+	
+	@RequestMapping("/find")
+	public String find(Integer productId,Model model){
+		
+		Product product = productService.findProduct(productId);
+		model.addAttribute("product", product);
+		return "/product/page/tabledemo/product-module-editor.page";
+	}
+	
+	@RequestMapping("/find/{forward}")
+	public String find(@PathVariable(value="forward")String forward,Integer productId,Model model,HttpServletRequest request){
+		
+		if(productId==null){
+			productId = (Integer) request.getSession().getAttribute("sessionProductId");
+		}
+		
+		Product product = productService.findProduct(productId);
+		model.addAttribute("product", product);
+		
+		if ("overview".equals(forward)) {
+			return "/product/page/project/overview.page";
+		}else if ("baseinfo".equals(forward)) {
+			return "/product/page/tabledemo/baseinfo.pagelet";
+		}
+		return "";
+	}
+
+	@RequestMapping("/list")
+	public String list(Product product,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "10") int pagesize,
+			@RequestParam(required = false, defaultValue = "productId")String order, 
+			@RequestParam(required = false, defaultValue = "asc")String ordertype, Model model) {
+
+		Pager<Product> pagerProduct = productService.findProductPager(page, pagesize, product, order,ordertype);
+		
+		model.addAttribute("pagerProduct", pagerProduct);
+		return "/product/data/allproductdata.pagelet";
+	}
+	
+	@RequestMapping("/findManager")
+	public String findManager(Integer productId,Model model){
+		
+		OrgUser productOwner = userService.findUser(productService.findProduct(productId).getProductOwner().toString());
+		OrgUser productQualityManager = userService.findUser(productService.findProduct(productId).getProductQualityManager().toString());
+		OrgUser productDeliveryManager = userService.findUser(productService.findProduct(productId).getProductDeliveryManager().toString());
+		
+		model.addAttribute("productOwner", productOwner);
+		model.addAttribute("productQualityManager", productQualityManager);
+		model.addAttribute("productDeliveryManager", productDeliveryManager);
+		
+		return "/organization/userbaseinfo.pagelet";
+	}
+
+}

@@ -62,4 +62,8 @@ public class RequestManagerImpl implements RequestManager{
     public Integer saveReply(ServiceRequest clientRequest) {
         return requestDao.saveReply(clientRequest);
     }
+
+    public Integer changeStatus(Integer id) {
+        return requestDao.changeStatus(id);
+    }
 }

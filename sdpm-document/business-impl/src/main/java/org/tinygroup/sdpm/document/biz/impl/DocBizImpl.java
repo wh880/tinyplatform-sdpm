@@ -40,7 +40,6 @@ public class DocBizImpl implements DocBiz {
 		doclib.setDocLibAddedDate(new Date());
 		doclib.setDocLibEditedDate(new Date());
 		doclib.setDocLibDeleted("N");//这个标志是char类型（一个字节）
-		
 		return doclibdao.add(doclib);
 	}
 
@@ -52,8 +51,7 @@ public class DocBizImpl implements DocBiz {
 		doc.setDocEditedBy(doc.getDocAddedBy());
 		doc.setDocDeleted("N");
 		doc.setDocViews(0);
-		return docdao.add(doc);
-		
+		return docdao.add(doc);	
 	}
 
 	public int updtDoc(Doc doc) {
@@ -94,12 +92,13 @@ public class DocBizImpl implements DocBiz {
 		return docdao.getByKey(key);
 	}
 
-	public List<Doc> getDocByEntity(Doc doc) {
-		// 
-		if(doc == null)
-			doc = new Doc();
+	public List<Doc> getDocList(Doc doc) {
 		return docdao.query(doc);
 	}
+	public List<Doclib> getDoclibList(Doclib doclib) {
+		return doclibdao.query(doclib);
+	}
+
 
 	public Doclib getDocLibById(Integer key) {
 		// 

@@ -9,7 +9,7 @@ public class NameUtil {
             char[] n = name.toCharArray();
             StringBuffer result = new StringBuffer();
             for(char c :n){
-                if(c>=65&&c<=97){
+                if(c>=65&&c<=90){
                     result.append("_").append((char)(c+32));
                 }else{
                     result.append((c));

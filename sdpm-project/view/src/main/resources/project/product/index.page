@@ -5,48 +5,39 @@
 #!set(activeTitle="项目管理",activeMenuId=currentPageId)
 
 #set(name="product")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@div(divClass="dropdownBox")
-            #include("/project/dropdownMenu.page")
-        #end
-        #@tabHead()
-            #include("/project/protab.page")
-        #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-            <span class="f">
-					关联产品
-				</span>
-                #div(divClass="clearfix")
+#@tinyForm("linkProduct" TINY_CONTEXT_PATH+"/project/product/save" "post")
+    #@div()
+        #@tabWithInit("tab_demo" "optionsBox")
+            #@div(divClass="dropdownBox")
+                #include("/project/dropdownMenu.page")
             #end
-        ##operationbar end
-            #@table()
-                #@tr()
-                    #@td()
-                        #@elementItem()
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首d页#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首aaa页#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页aa#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首aw页#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页a#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首dr页#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首aa页#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首eedd页#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首dd页#end#end
-                            #@gridSysCol(2)#@tinyCheckbox("checkbox2" "01" "02")首页#end#end
+            #@tabHead()
+                #include("/project/protab.page")
+            #end
+            #@tabBodyCol("ptop-5")
+                #@div(divClass="operationbar")
+                <span class="f">关联产品</span>
+                    #div(divClass="clearfix")
+                #end
+            ##operationbar end
+                #@table()
+                    #@tr()
+                        #@td()
+                            #@Tcheckboxes("array" linkString)
+                                #for(p : productList)
+                                #@gridSysCol(2)
+                                    #@Tcheckbox(p.productId)${p?.productName}#end
+                                #end
+                            #end
                         #end
                     #end
                 #end
             #end
-        <center>
-            <a href="#">#buttonRadiusPrimary(caption="保存")</a></center>
         #end
+    <center>
+        <input type="submit" class="radius btn-primary btn" value="保存">
+    ##<a href="#">#buttonRadiusPrimary(caption="保存")</a>
+    </center>
     #end
+#end
 #end

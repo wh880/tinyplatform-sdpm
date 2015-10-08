@@ -1,6 +1,11 @@
 package org.tinygroup.sdpm.action.product;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +62,7 @@ public class StoryAction extends BaseController{
     }
     
     @RequestMapping("/update")
-    public String update(ProductStory productStory, String operateType){
+    public String update(ProductStory productStory){
     	storyService.updateStory(productStory);
         ProductStory story = storyService.findStory(productStory.getStoryId());
         OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute("user");
@@ -73,12 +78,20 @@ public class StoryAction extends BaseController{
     @ResponseBody
     @RequestMapping("/updateBatch")
     public int[] updateBatch(@RequestBody ProductStory[] stories){
-    	int o = stories.length;
-    	
     	
     	return storyService.updateBatchStory(stories);
     }
     
+	@ResponseBody
+	@RequestMapping("/delete")
+	public Map delete(Integer storyId) {
+		storyService.deleteStory(storyId);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
+    }
+	
     @RequestMapping("/find")
     public String find(Integer storyId,Model model){
     	

@@ -20,5 +20,5 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 
 public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
-
+    Integer edits (ProjectBuild projectBuild);
 }

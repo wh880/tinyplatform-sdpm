@@ -40,4 +40,24 @@ public class HolidayServiceImpl implements HolidayService {
 		return holidayManager.findByPage(start, limit, holiday, sortName, asc);
 	}
 
+	public int[] batchAdd(List<Holiday> holidayList) {
+		// TODO Auto-generated method stub
+		return holidayManager.batchadd(holidayList);
+	}
+
+	public Holiday findById(int id) {
+		// TODO Auto-generated method stub
+		return holidayManager.findById(id);
+	}
+
+	public List<Holiday> findByIds(Integer... ids) {
+		// TODO Auto-generated method stub
+		return holidayManager.findByIds(ids);
+	}
+
+	public int[] batchSofeDelete(List<Holiday> list) {
+		// TODO Auto-generated method stub
+		return holidayManager.batchSoftDelete(list);
+	}
+
 }

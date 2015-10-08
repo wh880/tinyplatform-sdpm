@@ -1,4 +1,4 @@
-#@tinyForm("thisform" "" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/system/holiday/batchDelete" "post" {"class":"test"})
 	
 	 #@tableStriped()
 	 	
@@ -6,8 +6,8 @@
 	 		#@tr()
 	 			#@th()	ID	#end
 	 			#@th()	名称	#end
-	 			#@th()	当前状态	#end
-	 			#@th()	关闭原因	#end
+##	 			#@th()	当前状态	#end
+##	 			#@th()	关闭原因	#end
 	 			#@th()	备注	#end
 	 		#end
 	 	
@@ -15,31 +15,38 @@
 	 	
 	 	#@tbody()
 	 		
-	 		#for(i:[1..8])
+	 		#for(i:holiday)
 				#@tr()
-		 			#@td()	${i}	#end
-		 			#@td()	国庆节${i}	#end
-		 			#@td()	激活	#end
-		 			#@td()	
-		 				#@formControlDiv("col-8")
-
-				            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
-				
-				                #@tinyOptionItem("zh")已完成#end
-				
-				                #@tinyOptionItem("en")延期#end
-				
-				                #@tinyOptionItem("ta")已取消#end
-				
-				            #end
-				
-				        #end
-
-
-		 			#end
+		 			#@td()	${i?.holidayId}	#end
+		 			<input type="hidden" name="holiday[${iFor.index}].holidayId" value="${i?.holidayId}"/>
+		 			#@td()	${i?.holidayName}	#end
+		 			<input type="hidden" name="holiday[${iFor.index}].holidayName" value="${i?.holidayName}"/>
+		 			
+##		 			#@td()	激活	#end
+##		 			#@td()	
+##		 				#@formControlDiv("col-8")
+##
+##				            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
+##				
+##				                #@tinyOptionItem("zh")已完成#end
+##				
+##				                #@tinyOptionItem("en")延期#end
+##				
+##				                #@tinyOptionItem("ta")已取消#end
+##				
+##				            #end
+##				
+##				        #end
+##
+##
+##		 			#end
 		 			#@td()
 		 			
-		 				 #tinyInput("text" "username")
+##		 				 #tinyInput("text" "username")
+		 				 #tinyInput(
+                         "text" "holiday["+iFor.index+"].hoilidayRemark" i?.hoilidayRemark {"datatype":"","id":"请求标题","class":
+                             "input-text"})
+                        
 		 			
 		 			#end
 		 		#end
@@ -48,5 +55,11 @@
 	 	#end
 	 	
 	 #end
+	  #@formControlDiv("col-15")
+	  #@div(divClass="col-8 col-offset-2 form-inline")
+      #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+      #end
+      #end
+      
 #end
 	

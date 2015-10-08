@@ -41,6 +41,12 @@ public interface PlanManager {
 	 */
 	ProductPlan find(Integer planId);
 	/**
+	 * 根据对象查询
+	 * @param plan
+	 * @return
+	 */
+	List<ProductPlan> findList(ProductPlan plan);
+	/**
 	 * 根据对象查找(排序)
 	 * @param productplan
 	 * @param order

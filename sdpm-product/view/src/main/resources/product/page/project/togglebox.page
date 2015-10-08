@@ -188,7 +188,7 @@
 #@tinyTableContent(TINY_CONTEXT_PATH+"/product/story/search?"+tinyRequestQueryString) ##取数据地址 总数据
 #@thead()
 #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-#@tinyTh({"width":"6"})<input type="checkbox" value="" name="storyId">#end
+#@tinyTh({"width":"6"})<input type="checkbox" value="" name="storyId" id="checkboxall">#end
 #@tinyTh({"class":"sorting sorting_desc","rel":"story_id"})ID#end
 #@tinyTh({"class":"sorting","rel":"story_pri"})P#end
 #@tinyTh({"class":"sorting","rel":"story_title"})需求名称#end

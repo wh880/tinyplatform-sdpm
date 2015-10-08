@@ -5,18 +5,18 @@
 #import("/org/tinygroup/fold/components/fold.component")
 <style> </style>
 #set(name="documentDocu")
-
 #include("doc-tab.page")
 #@div()
 	#@p(pClass="title_sty")
 		<span class="f"> 版本名称</span>
 		<span class="r">
 					
-			<a href="${TINY_CONTEXT_PATH}/document/doc-edit/${doc?.docId}" title="编辑">
+			<a href="${TINY_CONTEXT_PATH}/document/doc/edit?docid=${doc.docId}" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp
-				#@delItemsdpm("" 3 "")
-        	        	#buttonIcon(iconClass="icon-remove")#end&nbsp
-			<a href="${TINY_CONTEXT_PATH}/document/document.page" title="返回">
+				#@tinyTableItemRemove(TINY_CONTEXT_PATH+"/document/doc/delete" doc.docId)
+					#buttonIcon(iconClass="icon-remove")
+				#end
+			<a href="${TINY_CONTEXT_PATH}/document" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>
 		</span>
 	#end
@@ -30,19 +30,27 @@
         ${doc?.docKeywords}
     #end
     #@div(divClass="infoContent")
-        <p class="titleName">附件</p>
-        ${doc?.docUrl}
+    #if(doc.docType=='链接')
+        <p class="titleName">文档URL </p>
+        ${doc.docUrl}
+    #elseif(doc.docType=='文件')<p class="titleName">附件 </p>
+    ${doc.docAttach} 
+    #else <p class="titleName">网页</p>
+    ${doc.docContent} 
+    #end
     #end
     #@div(divClass="infoContent")
         <p class="titleName">历史记录</p>
         #include("../data/historyRecord.page")
     #end
     <center>		
-			<a href="${TINY_CONTEXT_PATH}/document/doc-edit/${doc?.docId}" title="编辑">
+			<a href="${TINY_CONTEXT_PATH}/document/doc/edit?docid=${doc?.docId}" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			#@delItemsdpm("" 3 "fff")
-        	        	#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/document/document.page" title="返回">
+			#@tinyTableItemRemove(TINY_CONTEXT_PATH+"/document/doc/delete" doc.docId)
+					#buttonIcon(iconClass="icon-remove")
+				#end
+				&nbsp&nbsp;
+			<a href="${TINY_CONTEXT_PATH}/document" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
 	</center>
 </div>

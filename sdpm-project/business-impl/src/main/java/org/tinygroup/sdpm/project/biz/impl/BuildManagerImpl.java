@@ -21,8 +21,8 @@ public class BuildManagerImpl implements BuildManager {
     @Autowired
     private ProjectBuildDao projectBuildDao;
 
-    public ProjectBuild find(String id) {
-        return null;
+    public ProjectBuild find(Integer id) {
+        return projectBuildDao.getByKey(id);
     }
 
     public Pager<ProjectBuild> findPager(ProjectBuild build, Integer start, Integer limit, String order, boolean asc) {
@@ -44,7 +44,7 @@ public class BuildManagerImpl implements BuildManager {
     }
 
     public int update(ProjectBuild build) {
-        return projectBuildDao.edit(build);
+        return projectBuildDao.edits(build);
     }
 
     public Integer delete(int id) {

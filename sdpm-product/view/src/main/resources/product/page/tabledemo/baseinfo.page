@@ -7,47 +7,44 @@
 		       		#@tbody()
 		       			#@tr()
 							#@td()<b>产品名称</b>#end
-		       				#@td()<b>禅道测试</b>#end
+		       				#@td()<b>${product?.productName}</b>#end
 		       			#end
 		       			#@tr()
 							#@td()产品代号#end
-		       				#@td()ChanDao0001#end
+		       				#@td()${product?.productCode}#end
 		       			#end
 		       			#@tr()
 							#@td()产品负责人#end
-		       				#@td()Demo#end
+		       				#@td()${product?.productOwner}#end
 		       			#end
 		       			#@tr()
 							#@td()测试负责人#end
-		       				#@td()测试甲#end
+		       				#@td()${product?.productQualityManager}#end
 		       			#end
 		       			#@tr()
 							#@td()发布负责人#end
-		       				#@td()开发甲#end
+		       				#@td()${product?.productDeliveryManager}#end
 		       			#end
 		       			#@tr()
 							#@td()状态#end
-		       				#@td()<font color="green">正常</font>#end
+		       				#@td()<font color="green">${product?.productStatus}</font>#end
 		       			#end
 		       			#@tr()
 							#@td()访问控制#end
-		       				#@td()默认设置(有产品视图权限，即可访问)#end
+		       				#@td()${product?.acl}#end
 		       			#end
-		       			#@tr()
-							#@td()发布负责人#end
-		       				#@td()开发甲#end
-		       			#end
+		       			
 		       			#@tr()
 							#@td()分组白名单#end
-		       				#@td()#end
+		       				#@td()${product?.productWhiteList}#end
 		       			#end
 		       			#@tr()
 							#@td()由谁创建#end
-		       				#@td()Demo#end
+		       				#@td()${product?.productCreatedBy}#end
 		       			#end	
 		       			#@tr()
-							#@td()创建日期#end
-		       				#@td()2015-08-27 09:18:22#end
+							#@td()创建日期#end 
+		       				#@td()${product?.productCreatedDate?formatDate(product?.productCreatedDate,'yyyy年MM月dd日'):""}#end
 		       			#end	
 		       		#end
 		       	#end

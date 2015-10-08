@@ -30,9 +30,7 @@
         <menu id="product-demand-add" name="提需求" href="/product/page/tabledemo/product-demand-add.page" icon="icon-plus"
               sort="48" isShow="1"
               scope="product-io"/>
-        <menu id="product-demand-operation" name="操作" href="" icon=""
-              sort="47" isShow="1"
-              scope="product-oper"/>
+        <menu id="product-demand-operation" name="操作" href="" icon="" sort="47" isShow="1" scope="product-oper"/>
         <menu id="product-demand-del" name="批量关闭" href="" icon="" sort="46" isShow="1" scope="product-del"/>
 
         <menu id="demand_log" name="日志" href="/product/page/tabledemo/product-log.pagelet" icon="icon-time" sort="45"
@@ -152,39 +150,42 @@
     <menu id="product-plan" parent-id="myproduct" name="计划" href="/product/page/project/product-plan.page" sort="14"
           isShow="1" permission="Permission">
         <menu id="product-plan-demand" name="关联需求"
-              href="/product/plan/forword/reRelateStory?planId=${plan.planId}" icon="icon-link" sort="14"
+              href="/product/plan/forword/reRelateStory?planId=${plan.planId}" icon="icon-link" sort="94"
               isShow="1"
               scope="product-pl"/>
         <menu id="product-plan-bug" name="关联BUG"
-              href="/product/plan/forword/reRelateBug?planId=${plan.planId}" icon="icon-bug" sort="13"
+              href="/product/plan/forword/reRelateBug?planId=${plan.planId}" icon="icon-bug" sort="93"
               isShow="1"
               scope="product-pl"/>
         <menu id="product-plan-edit" name="计划编辑" href="/product/plan/find?planId=${plan.planId}" icon="icon-pencil"
-              sort="12" isShow="1"
+              sort="92" isShow="1"
               scope="product-pl"/>
-        <menu id="product-plan-remove" name="删除" href="/product/plan/delete?planId=${plan.planId}" icon="icon-remove" sort="11" isShow="1"
+        <menu id="product-plan-remove" name="删除" href="/product/plan/delete?planId=${plan.planId}" icon="icon-remove" sort="91" isShow="1"
               scope="product-pl"/>
-        <menu id="product-plan-add" name="创建计划" href="#" icon="" sort="10" isShow="1"
+        <menu id="product-plan-add" name="创建计划" href="#" icon="" sort="90" isShow="1"
               scope="product-addpl"/>
-        <menu id="product-plan-log" name="日志" href="/product/page/tabledemo/product-log.pagelet" icon="icon-time" sort="9" isShow="1"
+        <menu id="product-plan-log" name="日志" href="/product/page/tabledemo/product-log.pagelet" icon="icon-time" sort="89" isShow="1"
               scope="product-log"/>
-        <menu id="product-plan-req" name="关联需求"  href="/product/plan/forword/reRelateStory?planId=${planId}" icon="icon-link" sort="8"
+        <menu id="product-plan-req" name="关联需求"  href="/product/plan/forword/reRelateStory?planId=${planId}" icon="icon-link" sort="88"
               isShow="1"
               scope="product-log"/>
-        <menu id="product-plan-bg" name="关联BUG" href="/product/plan/forword/reRelateBug?planId=${planId}" icon="icon-bug" sort="7"
+        <menu id="product-plan-bg" name="关联BUG" href="/product/plan/forword/reRelateBug?planId=${planId}" icon="icon-bug" sort="87"
               isShow="1"
               scope="product-log"/>
-        <menu id="product-plan-editor" name="编辑" href="#" icon="icon-pencil" sort="6" isShow="1"
+        <menu id="product-plan-editor" name="编辑" href="#" icon="icon-pencil" sort="86" isShow="1"
               scope="product-log"/>
-        <menu id="product-plan-del" name="删除" href="#" icon="icon-remove" sort="5" isShow="1"
+        <menu id="product-plan-del" name="删除" href="#" icon="icon-remove" sort="85" isShow="1"
               scope="product-log"/>
-        <menu id="product-plan-back" name="" href="/product/page/project/product-plan.page" icon="icon-reply" sort="4" isShow="1"  scope="product-log"/>
-        <menu id="plan-table-bug" name="关联BUG" href="" icon="" sort="3" isShow="1"
+        <menu id="product-plan-back" name="" href="/product/page/project/product-plan.page" icon="icon-reply" sort="84" isShow="1"  scope="product-log"/>
+        <menu id="plan-table-bug" name="关联BUG" href="" icon="" sort="83" isShow="1"
               scope="table-bug"/>
-        <menu id="plan-table-del" name="删除" href="" icon="" sort="2" isShow="1"
+        <menu id="plan-table-del" name="删除" href="" icon="" sort="82" isShow="1"
               scope="table-del"/>
-        <menu id="product-plan-badel" name="批量删除" href="" icon="" sort="1" isShow="1"
+        <menu id="product-plan-badel" name="批量删除" href="" icon="" sort="81" isShow="1"
               scope="plan-badel"/>
+        <menu id="linkstory" name="删除" href="/product/story/delete?storyId=${story.storyId}" icon="icon-remove" sort="80" isShow="1" scope="plan-linkdemand"/>
+ 		<menu id="linkbug" name="删除" href="/quality/bug/delete?bugId=${bug.bugId}" icon="icon-remove" sort="79" isShow="1" scope="plan-linkbug"/>
+        
     </menu>
 
     <menu id="product-release" parent-id="myproduct" name="发布" href="/product/page/project/product-release.page"
@@ -230,7 +231,8 @@
               scope="table-export"/>
         <menu id="product-release-badel" name="批量删除" href="" icon="" sort="1" isShow="1"
               scope="release-badel"/>
-
+   <menu id="aboutstory" name="删除" href="/product/story/delete?storyId=${story.storyId}" icon="icon-remove" sort="1" isShow="1" scope="release-linkdemand"/>
+ 		<menu id="aboutbug" name="删除" href="/quality/bug/delete?bugId=${bug.bugId}" icon="icon-remove" sort="1" isShow="1" scope="release-linkbug"/>
     </menu>
 
     <menu id="product-roadmap" parent-id="myproduct" name="路线图" href="/product/page/project/product-roadmap.page"
@@ -252,14 +254,14 @@
     <menu id="product-modular" parent-id="myproduct" name="模块" href="/product/page/project/product-modular.page"
           sort="9" isShow="1" permission="Permission"></menu>
 
-    <menu id="product-overview" parent-id="myproduct" name="概况" href="/product/page/project/overview.page" sort="8"
+    <menu id="product-overview" parent-id="myproduct" name="概况" href="/product/find/overview?productId=${sessionProductId}" sort="8"
           isShow="1" permission="Permission">
 
-        <menu id="product-overview-close" name="关闭" href="" icon="" sort="10" isShow="1" scope="overview-cl"/>
-        <menu id="product-overview-editor" name="编辑" href="/product/page/tabledemo/product-module-editor.page"
+         <menu id="product-overview-close" name="关闭" href="/product/page/tabledemo/overview-close.pagelet" icon="icon-off" sort="10" isShow="1" scope="overview-cl"/>
+        <menu id="product-overview-editor" name="编辑" href="/product/find?productId=${product.productId}"
               icon="icon-pencil" sort="9" isShow="1" scope="overview-cl"/>
-        <menu id="product-overview-delete" name="删除" href="" icon="" sort="8" isShow="1" scope="overview-cl"/>
-        <menu id="product-overview-back" name="返回" href="/product/page/project/togglebox.page" icon="icon-reply"
+        <menu id="product-overview-delete" name="删除" href="javascript:void(0);" icon="icon-remove" sort="8" isShow="1" scope="overview-cl"/>
+        <menu id="product-overview-back" name="返回" href="javascript:history.go(-1)" icon="icon-reply"
               sort="7" isShow="1" scope="overview-cl"/>
 
 

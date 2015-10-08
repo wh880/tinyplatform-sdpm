@@ -54,6 +54,11 @@ public class PlanManagerImpl implements PlanManager{
 		return productPlanDao.softDelete(planId);
 	}
 
+	public List<ProductPlan> findList(ProductPlan plan) {
+		
+		return productPlanDao.query(plan, null);
+	}
+
 
 	
 

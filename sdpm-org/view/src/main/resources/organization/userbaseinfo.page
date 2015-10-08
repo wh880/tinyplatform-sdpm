@@ -14,47 +14,47 @@
                 #@tbody()
                     #@tr()
                         #@td()<b>ID</b>#end
-                        #@td()<b>001</b>#end
+                        #@td()<b>${productOwner?.orgUserId}</b>#end
                     #end
                     #@tr()
                         #@td()真实姓名#end
-                        #@td()习近平#end
+                        #@td()${productOwner?.orgUserRealName}#end
                     #end
                     #@tr()
                         #@td()用户名#end
-                        #@td()admin#end
+                        #@td()${productOwner?.orgUserAccount}#end
                     #end
                     #@tr()
                         #@td()职位#end
-                        #@td()测试#end
+                        #@td()${productOwner?.orgUserRole}#end
                     #end
                     #@tr()
                         #@td()邮箱#end
-                        #@td()123@123.com#end
+                        #@td()${productOwner?.orgUserEmail}#end
                     #end
                     #@tr()
                         #@td()性别#end
-                        #@td()男#end
+                        #@td()${productOwner?.orgUserGender}#end
                     #end
                     #@tr()
                         #@td()电话#end
-                        #@td()123444555#end
+                        #@td()${productOwner?.orgUserPhone}#end
                     #end
                     #@tr()
                         #@td()QQ#end
-                        #@td()86996758689#end
+                        #@td()${productOwner?.orgUserQQ}#end
                     #end
                     #@tr()
                         #@td()加入日期#end
-                        #@td()20150909#end
+                        #@td()${productOwner?.orgUserJoin}#end
                     #end
                     #@tr()
                         #@td()最后登录#end
-                        #@td()20150909#end
+                        #@td()${productOwner?.orgUserLast}#end
                     #end
                     #@tr()
                         #@td()访问次数#end
-                        #@td()11#end
+                        #@td()${productOwner?.orgUserVisits}#end
                     #end
                 #end
             #end
@@ -67,47 +67,47 @@
                 #@tbody()
                     #@tr()
                         #@td()<b>ID</b>#end
-                        #@td()<b>001</b>#end
+                        #@td()<b>${productOwner?.orgUserId}</b>#end
                     #end
                     #@tr()
                         #@td()真实姓名#end
-                        #@td()习近平#end
+                        #@td()${productOwner?.orgUserRealName}#end
                     #end
                     #@tr()
                         #@td()用户名#end
-                        #@td()admin#end
+                        #@td()${productOwner?.orgUserAccount}#end
                     #end
                     #@tr()
                         #@td()职位#end
-                        #@td()测试#end
+                        #@td()${productOwner?.orgUserRole}#end
                     #end
                     #@tr()
                         #@td()邮箱#end
-                        #@td()123@123.com#end
+                        #@td()${productOwner?.orgUserEmail}#end
                     #end
                     #@tr()
                         #@td()性别#end
-                        #@td()男#end
+                        #@td()${productOwner?.orgUserGender}#end
                     #end
                     #@tr()
                         #@td()电话#end
-                        #@td()123444555#end
+                        #@td()${productOwner?.orgUserPhone}#end
                     #end
                     #@tr()
                         #@td()QQ#end
-                        #@td()86996758689#end
+                        #@td()${productOwner?.orgUserQQ}#end
                     #end
                     #@tr()
                         #@td()加入日期#end
-                        #@td()20150909#end
+                        #@td()${productOwner?.orgUserJoin}#end
                     #end
                     #@tr()
                         #@td()最后登录#end
-                        #@td()20150909#end
+                        #@td()${productOwner?.orgUserLast}#end
                     #end
                     #@tr()
                         #@td()访问次数#end
-                        #@td()11#end
+                        #@td()${productOwner?.orgUserVisits}#end
                     #end
                 #end
             #end
@@ -119,47 +119,47 @@
                 #@tbody()
                     #@tr()
                         #@td()<b>ID</b>#end
-                        #@td()<b>001</b>#end
+                        #@td()<b>${productOwner?.orgUserId}</b>#end
                     #end
                     #@tr()
                         #@td()真实姓名#end
-                        #@td()习近平#end
+                        #@td()${productOwner?.orgUserRealName}#end
                     #end
                     #@tr()
                         #@td()用户名#end
-                        #@td()admin#end
+                        #@td()${productOwner?.orgUserAccount}#end
                     #end
                     #@tr()
                         #@td()职位#end
-                        #@td()测试#end
+                        #@td()${productOwner?.orgUserRole}#end
                     #end
                     #@tr()
                         #@td()邮箱#end
-                        #@td()123@123.com#end
+                        #@td()${productOwner?.orgUserEmail}#end
                     #end
                     #@tr()
                         #@td()性别#end
-                        #@td()男#end
+                        #@td()${productOwner?.orgUserGender}#end
                     #end
                     #@tr()
                         #@td()电话#end
-                        #@td()123444555#end
+                        #@td()${productOwner?.orgUserPhone}#end
                     #end
                     #@tr()
                         #@td()QQ#end
-                        #@td()86996758689#end
+                        #@td()${productOwner?.orgUserQQ}#end
                     #end
                     #@tr()
                         #@td()加入日期#end
-                        #@td()20150909#end
+                        #@td()${productOwner?.orgUserJoin}#end
                     #end
                     #@tr()
                         #@td()最后登录#end
-                        #@td()20150909#end
+                        #@td()${productOwner?.orgUserLast}#end
                     #end
                     #@tr()
                         #@td()访问次数#end
-                        #@td()11#end
+                        #@td()${productOwner?.orgUserVisits}#end
                     #end
                 #end
             #end

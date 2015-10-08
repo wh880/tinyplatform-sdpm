@@ -20,7 +20,7 @@ public interface StoryManager {
 	 * @param storyId
 	 * @return
 	 */
-	int delete(Integer storyId);
+	Integer delete(Integer storyId);
 	
 	/**
 	 * 编辑
@@ -40,6 +40,12 @@ public interface StoryManager {
 	 * @return
 	 */
 	ProductStory find(Integer storyId);
+	/**
+	 * 根据对象查询
+	 * @param story
+	 * @return
+	 */
+	List<ProductStory> findList(ProductStory story);
 	/**
 	 * 根据对象查找（排序）
 	 * @param story

@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.system;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
@@ -35,15 +37,34 @@ public class HolidayAction extends BaseController{
 	}
 	@RequestMapping("find")
 	public String find(Holiday holiday,Model model){
-		List<Holiday> list = holidayService.find(holiday);
-		Holiday newholiday=list.get(0);
-		model.addAttribute("holiday", newholiday);
+		Holiday day = holidayService.findById(holiday.getHolidayId());
+		
+		model.addAttribute("holiday", day);
 		return "/system/page/holiday/edit.page";
 	}
 	@RequestMapping(value ="save",method = RequestMethod.POST)
-	public String saveHoliday(Holiday holiday,Model model){
+	public String saveHoliday(@RequestParam(required = false)String selectList,Holiday holiday,Model model){
 		if(holiday.getHolidayId()==null){
-			holidayService.add(holiday);
+			List<Holiday> holidayList = new ArrayList<Holiday>();
+			String[] dates=selectList.split(",");
+			for(int i=0,n=dates.length;i<n;i++){
+				Holiday day = new Holiday();
+				
+		     	day.setCompanyId(holiday.getCompanyId());
+				
+				day.setHoilidayRemark(holiday.getHoilidayRemark());
+				
+				day.setHolidayAccount(holiday.getHolidayAccount());
+				
+				day.setHolidayDate(dates[i]);
+				day.setHolidayDeleted(holiday.getHolidayDeleted());
+				day.setHolidayDetail(holiday.getHolidayDetail());
+				day.setHolidayName(holiday.getHolidayName());
+				day.setHolidayType(holiday.getHolidayType());
+				holidayList.add(day);
+			}
+			
+			holidayService.batchAdd(holidayList);
 		}else{
 			holidayService.update(holiday);
 		}
@@ -82,4 +103,27 @@ public class HolidayAction extends BaseController{
 		model.addAttribute("holiday", holidayList);
 		return "/system/page/holiday/manage.page";
 	}
+	@RequestMapping("findIds")
+	public String findIds(String ids,Model model){
+		String[] sids = ids.split(",");
+		Integer[] intIds = new Integer[sids.length];
+		for(int i=0;i<sids.length;i++){
+			intIds[i] = Integer.valueOf(sids[i]);
+		}
+		List<Holiday> holidayList=holidayService.findByIds(intIds);
+		model.addAttribute("holiday", holidayList);
+		return "/system/page/holiday/batch-del.pagelet";
+	}
+	@RequestMapping("batchDelete")
+	public String batchDelete(Holiday[] holiday)
+	{
+		List<Holiday> holidays= new ArrayList<Holiday>();
+		for(int i=0,n=holiday.length;i<n;i++){
+			holiday[i].setHolidayDeleted(1);
+			holidays.add(holiday[i]);
+		}
+		holidayService.batchSofeDelete(holidays);
+		return  "/system/page/holiday/holiday.page";
+	}
+	
 }
