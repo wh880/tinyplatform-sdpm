@@ -20,7 +20,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /** 
- * 日志表单
+ * 日志表
  * 
  */
 public class SystemEffort implements Serializable{
@@ -32,16 +32,10 @@ public class SystemEffort implements Serializable{
 	private Integer effortId;
 
 	/** 
-	 * 日志对象
+	 * 所属项目
 	 * 
 	 */
-	private String effortObjectType;
-
-	/** 
-	 * 对象ID
-	 * 
-	 */
-	private Integer effortObjectId;
+	private Integer effortProject;
 
 	/** 
 	 * 所属产品
@@ -50,22 +44,16 @@ public class SystemEffort implements Serializable{
 	private String effortProduct;
 
 	/** 
-	 * 所属项目
-	 * 
-	 */
-	private Integer effortProject;
-
-	/** 
-	 * 登记人
-	 * 
-	 */
-	private String effortAccount;
-
-	/** 
 	 * 工作内容
 	 * 
 	 */
 	private String effortWork;
+
+	/** 
+	 * 耗时
+	 * 
+	 */
+	private Float effortConsumed;
 
 	/** 
 	 * 日期
@@ -80,22 +68,34 @@ public class SystemEffort implements Serializable{
 	private Float effortLeft;
 
 	/** 
-	 * 耗时
-	 * 
-	 */
-	private Float effortConsumed;
-
-	/** 
 	 * 开始
 	 * 
 	 */
-	private Integer effortBegin;
+	private String effortBegin;
 
 	/** 
 	 * 已关闭
 	 * 
 	 */
-	private Integer effortEnd;
+	private String effortEnd;
+
+	/** 
+	 * 对象ID
+	 * 
+	 */
+	private Integer effortObjectId;
+
+	/** 
+	 * 日志对象
+	 * 
+	 */
+	private String effortObjectType;
+
+	/** 
+	 * 登记人
+	 * 
+	 */
+	private String effortAccount;
 
 
 	public void setEffortId(Integer effortId){
@@ -106,20 +106,12 @@ public class SystemEffort implements Serializable{
 		return effortId;
 	}
 
-	public void setEffortObjectType(String effortObjectType){
-		this. effortObjectType = effortObjectType;
+	public void setEffortProject(Integer effortProject){
+		this. effortProject = effortProject;
 	}
 
-	public String getEffortObjectType(){
-		return effortObjectType;
-	}
-
-	public void setEffortObjectId(Integer effortObjectId){
-		this. effortObjectId = effortObjectId;
-	}
-
-	public Integer getEffortObjectId(){
-		return effortObjectId;
+	public Integer getEffortProject(){
+		return effortProject;
 	}
 
 	public void setEffortProduct(String effortProduct){
@@ -130,28 +122,20 @@ public class SystemEffort implements Serializable{
 		return effortProduct;
 	}
 
-	public void setEffortProject(Integer effortProject){
-		this. effortProject = effortProject;
-	}
-
-	public Integer getEffortProject(){
-		return effortProject;
-	}
-
-	public void setEffortAccount(String effortAccount){
-		this. effortAccount = effortAccount;
-	}
-
-	public String getEffortAccount(){
-		return effortAccount;
-	}
-
 	public void setEffortWork(String effortWork){
 		this. effortWork = effortWork;
 	}
 
 	public String getEffortWork(){
 		return effortWork;
+	}
+
+	public void setEffortConsumed(Float effortConsumed){
+		this. effortConsumed = effortConsumed;
+	}
+
+	public Float getEffortConsumed(){
+		return effortConsumed;
 	}
 
 	public void setEffortDate(Date effortDate){
@@ -170,28 +154,44 @@ public class SystemEffort implements Serializable{
 		return effortLeft;
 	}
 
-	public void setEffortConsumed(Float effortConsumed){
-		this. effortConsumed = effortConsumed;
-	}
-
-	public Float getEffortConsumed(){
-		return effortConsumed;
-	}
-
-	public void setEffortBegin(Integer effortBegin){
+	public void setEffortBegin(String effortBegin){
 		this. effortBegin = effortBegin;
 	}
 
-	public Integer getEffortBegin(){
+	public String getEffortBegin(){
 		return effortBegin;
 	}
 
-	public void setEffortEnd(Integer effortEnd){
+	public void setEffortEnd(String effortEnd){
 		this. effortEnd = effortEnd;
 	}
 
-	public Integer getEffortEnd(){
+	public String getEffortEnd(){
 		return effortEnd;
+	}
+
+	public void setEffortObjectId(Integer effortObjectId){
+		this. effortObjectId = effortObjectId;
+	}
+
+	public Integer getEffortObjectId(){
+		return effortObjectId;
+	}
+
+	public void setEffortObjectType(String effortObjectType){
+		this. effortObjectType = effortObjectType;
+	}
+
+	public String getEffortObjectType(){
+		return effortObjectType;
+	}
+
+	public void setEffortAccount(String effortAccount){
+		this. effortAccount = effortAccount;
+	}
+
+	public String getEffortAccount(){
+		return effortAccount;
 	}
 
 }

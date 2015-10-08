@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu id="quality" parent-id="0" name="测试" href="/quality/bug?get=tbugstatus&amp;productId=1" icon="icon-pencil" sort="600"
       isShow="1">
-    <menu id="qualityBug" parent-id="quality" name="Bug" href="/quality/bug?bugStatus=1" icon="" sort="1"
+    <menu id="qualityBug" parent-id="quality" name="Bug" href="/quality/bug?bugStatus=1&amp;get=tbugstatus&amp;productId=1" icon="" sort="1"
           isShow="1">
     	 <menu id="tmakesure" name="确认" href="/quality/bug/makesure" icon="icon-search" sort="6"
               isShow="1" scope="testbug-op,testbuginfo-tab"></menu>
@@ -58,21 +58,21 @@
          <menu id="tbugneedchange" name="需求变动"  href="/quality/bug?toStoryId=1&amp;get=tbugneedchange&amp;productId=1" icon="" sort="2"
               isShow="1" scope="testbugleft-tab"></menu>
          <menu id="tsearch" name="搜索"  href="#" icon="" sort="1"
-              isShow="1" scope="testbugleft-tab,testcaseleft-tab"></menu>                       
+              isShow="1" scope="testbugleft-tab"></menu>                       
     </menu>
-    <menu id="qualityCases" parent-id="quality" name="用例" href="/testManagement/page/cases.page" icon="" sort="1"
+    <menu id="qualityCases" parent-id="quality" name="用例" href="/quality/testcase/?get=tcaseall&amp;productId=1" icon="" sort="1"
           isShow="1">    	 
-         <menu id="texecution" name="执行" href="/testManagement/page/tabledemo/execution.pagelet" icon="icon-play" sort="5"
+         <menu id="texecution" name="执行" href="/quality/testcase/execution" icon="icon-play" sort="5"
               isShow="1" scope="testcase-op,testcaseinfo-tab"></menu>
-         <menu id="tresult" name="结果" href="/testManagement/page/tabledemo/result.pagelet" icon="icon-flag" sort="4"
+         <menu id="tresult" name="结果" href="/quality/testcase/result" icon="icon-flag" sort="4"
               isShow="1" scope="testcase-op,testcaseinfo-tab"></menu> 
-         <menu id="teditioncase" name="编辑" href="/testManagement/page/tabledemo/editioncase.page" icon="icon-pencil" sort="3"
+         <menu id="teditioncase" name="编辑" href="/quality/testcase/edit" icon="icon-pencil" sort="3"
               isShow="1" scope="testcase-op,testcaseinfo-tab"></menu>
-         <menu id="tproposecase" name="复制" href="/testManagement/page/proposecase.page" icon="icon-copy" sort="2"
+         <menu id="tproposecase" name="复制" href="/quality/testcase/copy" icon="icon-copy" sort="2"
               isShow="1" scope="testcase-op"></menu> 
-         <menu id="tcasedelete" name="删除" href="/tinyuiweb/action/del.pagelet" icon="icon-remove" sort="1"
+         <menu id="tcasedelete" name="删除" href="/quality/testcase/delete" icon="icon-remove" sort="1"
               isShow="1" scope="testcase-op"></menu>      
-        <menu id="add-case" name="建用例" href="/testManagement/page/proposecase.page" icon="icon-sitemap" sort="3"
+        <menu id="add-case" name="建用例" href="/quality/testcase/add" icon="icon-sitemap" sort="3"
               isShow="1" scope="demand-op,product-de,testcase-tab,testbuginfo-tab"></menu> 
         <menu id="tcaseinput" name="导入" href="/testManagement/page/tabledemo/importBug.pagelet" icon="icon-download-alt" sort="5"
               isShow="1" scope="testcase-tab"></menu>  
@@ -82,24 +82,26 @@
               isShow="1" scope="testcaseinfo-tab"></menu>
         <menu id="tcaseremark" name="备注" href="" icon="icon-comment-alt" sort="2"
               isShow="1" scope="testcaseinfo-tab"></menu>
-        <menu id="tcaseinfodelete" name="删除" href="" icon="icon-remove" sort="1"
+        <menu id="tcaseinfodelete" name="删除" href="/quality/testcase/delete" icon="icon-remove" sort="1"
               isShow="1" scope="testcaseinfo-tab"></menu>
-       <menu id="tcaseback" name="返回" href="/testManagement/page/cases.page" icon="icon-level-up" sort="1"
+       <menu id="tcaseback" name="返回" href="" icon="icon-level-up" sort="1"
               isShow="1" scope="testcaseinfo-tab"></menu>
        <menu id="tnoteedit" name="编辑" href="/testManagement/page/editLog.pagelet" icon="icon-pencil" sort="2"
               isShow="1" scope="testcasenote-op"></menu> 
        <menu id="tnotedelete" name="删除" href="" icon="icon-remove" sort="1"
               isShow="1" scope="testcasenote-op"></menu>
-       <menu id="tcaseall" name="所有"  href="#" icon="" sort="5"
+       <menu id="tcaseall" name="所有"  href="/quality/testcase?get=tcaseall&amp;productId=1" icon="" sort="5"
               isShow="1" scope="testcaseleft-tab"></menu> 
-        <menu id="tcaseneedchange" name="需求变动"  href="#" icon="" sort="4"
+        <menu id="tcaseneedchange" name="需求变动"  href="/quality/testcase?get=tcaseneedchange&amp;productId=1" icon="" sort="4"
               isShow="1" scope="testcaseleft-tab"></menu> 
         <menu id="tcasesee" name="分组查看"  href="#" icon="" sort="3"
               isShow="1" scope="testcaseleft-tab"></menu> 
-         <menu id="tcasenodemand" name="零用例需求"  href="#" icon="" sort="2"
-              isShow="1" scope="testcaseleft-tab"></menu>      
+         <menu id="tcasenodemand" name="零用例需求"  href="/quality/testcase?get=tcasenodemand&amp;productId=1" icon="" sort="2"
+              isShow="1" scope="testcaseleft-tab"></menu> 
+        <menu id="tcaseserach" name="搜索"  href="#" icon="" sort="1"
+              isShow="1" scope="testcaseleft-tab"></menu>     
 	</menu>		 
-    <menu id="qualityVersion" parent-id="quality" name="版本" href="/testManagement/page/version.page" icon=""
+    <menu id="qualityVersion" parent-id="quality" name="版本" href="/quality/version/?get=tvernotest&amp;productId=1" icon=""
               sort="1"       isShow="1">
       	<menu id="tversionSituation" name="概况" href="/testManagement/page/versionSituation.page" icon="icon-file" sort="4"
               isShow="1" scope="testversion-op"></menu> 
@@ -113,9 +115,9 @@
               scope="pro-version-op"/>     
         <menu id="tversion" name="版本 " href="/testManagement/page/version.page" icon="icon-smile" sort="4"
               isShow="1" scope="pro-test-op"></menu>
-        <menu id="tversionedit" name="编辑版本 " href="/testManagement/page/tabledemo/editionversion.page" icon="icon-pencil" sort="2"
+        <menu id="tversionedit" name="编辑版本 " href="/quality/version/edit" icon="icon-pencil" sort="2"
               isShow="1" scope="pro-test-op,testverinfo-tab"></menu> 
-        <menu id="tversionpro" name="提交测试 " href="/testManagement/page/proposeversion.page" icon="icon-plus" sort="1"
+        <menu id="tversionpro" name="提交测试 " href="/quality/version/add" icon="icon-plus" sort="1"
               isShow="1" scope="testversion-tab"></menu> 
        <menu id="tvernote" name="日志" href="/testManagement/page/addLog.pagelet" icon="icon-time" sort="6"
               isShow="1" scope="testverinfo-tab"></menu>
@@ -129,9 +131,9 @@
               isShow="1" scope="testverinfo-tab"></menu>
        <menu id="tverback" name="返回" href="" icon="icon-level-up" sort="1"
               isShow="1" scope="testverinfo-tab"></menu> 
-       <menu id="tvernotest" name="待测版本"  href="#" icon="" sort="1"
+       <menu id="tvernotest" name="待测版本"  href="/quality/version/?get=tvernotest&amp;productId=1&amp;testtaskStatus=0" icon="" sort="1"
               isShow="1" scope="testverleft-tab"></menu> 
-	   <menu id="tvertest" name="待测版本"  href="#" icon="" sort="1"
+	   <menu id="tvertest" name="已测版本"  href="/quality/version/?get=tvertest&amp;productId=1&amp;testtaskStatus=0" icon="" sort="1"
               isShow="1" scope="testverleft-tab"></menu>                       
     </menu>      	               
 </menu>

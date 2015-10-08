@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.system.service.inter;
 import java.util.List;
 
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface HistoryService {
 	/**
@@ -29,5 +30,15 @@ public interface HistoryService {
 	 * @return
 	 */
 	List<SystemHistory> find(SystemHistory systemHistory);
+	/**
+	 * 分页查询
+	 * @param start
+	 * @param limit
+	 * @param systemHistory
+	 * @param sortName
+	 * @param asc
+	 * @return
+	 */
+	Pager<SystemHistory> findByPager(int start,int limit,SystemHistory systemHistory,String	sortName,boolean asc);
 
 }

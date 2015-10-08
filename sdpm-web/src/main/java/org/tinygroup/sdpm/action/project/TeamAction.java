@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
+import org.tinygroup.tinysqldsl.Pager;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by wangying14938 on 2015-09-22.团队
@@ -26,7 +30,12 @@ public class TeamAction extends BaseController {
     }
 
     @RequestMapping("find")
-    public String find(Model model) {
-        return "";
+    public String find(Model model, HttpServletRequest request, Integer start, Integer limit, String order, String ordertype) {
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        ProjectTeam team = new ProjectTeam();
+        team.setProjectId(projectId);
+        Pager<ProjectTeam> pager = teamService.findPager(team, start, limit, order, ordertype);
+        model.addAttribute("teamPager", pager);
+        return "project/team/manageTableData.pagelet";
     }
 }

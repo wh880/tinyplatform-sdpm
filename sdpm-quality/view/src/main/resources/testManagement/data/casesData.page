@@ -4,13 +4,13 @@
 
 
 
-#set(records=28,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=casepager.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 	#set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(28)
+#setTinyItemCount(casepager.totalCount)
 
-#for(c:casePager)
+#for(c:casepager.records)
 					#@tr()
 						#@td()<input type="checkbox" value="1" name="userid">#end
 						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${c?.caseId}</a>#end
@@ -25,7 +25,7 @@
 						 #@td()					 					 			                       			
                          	#foreach(m:menuManager.getScopeMenus("testcase-op"))
                          		#if(m.id=="teditioncase"||m.id=="tproposecase")
-            						<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            						<a href="${TINY_CONTEXT_PATH}${m.href}?caseId=${c?.caseId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             					#else
             						#if(m.id=="texecution"||m.id=="tresult")
             							#iconOperations("#myModal" m.icon m.name "865" "400" m.href "ml-1")            											

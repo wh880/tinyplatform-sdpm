@@ -15,7 +15,7 @@
 	#@divDataTablebox()
 	    #@tableHeaderBar()${activeTitle}#end
 		#@leftTreeCol()
-			#@searchZtreeWithInit("treeDemo" "height:454px;" "/system/module/tree")
+			#@searchZtreeWithInit("treeDemo" "height:454px;" "/system/module/tree?moduleType=dict")
 			#end
 		#end
     	#@tableBox("tBox")

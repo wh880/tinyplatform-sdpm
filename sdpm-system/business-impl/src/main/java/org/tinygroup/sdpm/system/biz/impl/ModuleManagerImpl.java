@@ -55,9 +55,9 @@ public class ModuleManagerImpl implements ModuleManager{
 		return systemModule;
 	}
 
-	public int batchDelete(String ids) {
+	public int batchDelete(Integer...ids) {
 		// TODO Auto-generated method stub
-		return systemModuleDao.batchdelete(ids);
+		return systemModuleDao.deleteByKeys(ids);
 	}
 
 }

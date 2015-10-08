@@ -18,9 +18,9 @@
     ##operationbar start1
         #@div(divClass="operationbar")
         <span class="f">
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page" class="active_btn">所有</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">需求变动</a>					
-						#@buttonGroup()
+        		#foreach(m:menuManager.getScopeMenus("testcaseleft-tab"))
+    				#if(m.id=="tcasesee")
+    					#@buttonGroup()
 		                    #@buttonDropdown("more" buttonClass="btnDropDown")分组查看 
 		                     	#@spanCaret()#end
 		                    #end
@@ -31,8 +31,14 @@
 		                        #@liDivider()#end
 		                    #end
 		                #end
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">零用例需求</a>
-					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+		             #else
+		             #if(m.id == "tcaseserach")
+		             	<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+		             #else
+		             	<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==get?'active_btn':''}">${m.name}</a>
+		             #end
+		             #end
+		         #end  				
 				</span>
         <span class="r">
 				#foreach(m:menuManager.getScopeMenus("testcase-tab"))
@@ -101,7 +107,8 @@
 
 
 #end
-#@tinyTableContent("../data/casesData.pagelet")
+#set(requestStatuString = tinyRequestQueryString!=null ?"&"+tinyRequestQueryString:"")
+#@tinyTableContent(TINY_CONTEXT_PATH+"/quality/testcase/findPager?"+requestStatuString)
 #@thead()
 #@tr()
 #@tinyTh({"width":"6"})<input type="checkbox" name="" value="">#end

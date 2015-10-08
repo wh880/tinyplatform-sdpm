@@ -29,16 +29,16 @@
 				#@aModal("#myModal" "添加" "500" "276" "btn radius btn-primary" "/system/page/holiday/holiday-add.pagelet")添加#end
 			
 			#end
-			#@tinyTableContent("data/holidaydata.pagelet") ##取数据地址 总数据
+			#@tinyTableContent(TINY_CONTEXT_PATH+"/system/holiday/findPager") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-						#@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})名称#end
-						#@tinyTh({"class":"","rel":"sortname"})日期#end
-						#@tinyTh({"class":"","rel":"sortname"})创建者#end
-						#@tinyTh({"class":"","rel":"sortname"})类型#end
-						#@tinyTh({"class":"","rel":"sortname"})操作#end
+						#@tinyTh({"class":"sorting sorting_asc","rel":"holiday_id"})ID#end
+						#@tinyTh({"class":"sorting","rel":"holiday_name"})名称#end
+						#@tinyTh({"class":"sorting","rel":"holiday_date"})日期#end
+						#@tinyTh({"class":"sorting","rel":"holiday_account"})创建者#end
+						#@tinyTh({"class":"sorting","rel":"holiday_type"})类型#end
+						#@tinyTh({"class":"","rel":""})操作#end
 					#end
 				#end
 			#end

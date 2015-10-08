@@ -4,18 +4,22 @@
 
 
 
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=teamPager.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 	#set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(records)
+#for(t:teamPager.getRecords())
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/organization/userTodo.page">admin</a> #end
-	#@td()1#end
-	#@td()2015-8-28#end
-	#@td()4#end
-
+	#@td()<a href="${TINY_CONTEXT_PATH}/organization/userTodo.page">${t?.teamAccount}</a> #end
+	#@td()${t?.teamRole}#end
+	#@td()${t?.teamJoin}#end
+	#@td()${t?.teamDays}#end
+	#@td()${t?.teamHours}#end
+	#@td()48#end
+	#@td()
+    删除按钮
+	#end
 #end
 #end

@@ -117,53 +117,53 @@
 
 #@ulDropdownMenu(dropdownMenuClass="multi-level")
 #@dropdownsLi("dropdown-submenu")
-#@dropdownA(""　"javascript:void(0);")指派给#end
+#@dropdownA("firstMenu"　"javascript:void(0);")指派给#end
 #@dropdownsUl("dropdown-menu")
-#@dropdownItem("javascript:void(0);")admin#end
-#@dropdownItem("javascript:void(0);")张三#end
-#@dropdownItem("javascript:void(0);")lisi#end
+#@dropdownItem("javascript:void(0);" "storyAssignedTo" "secondMenu")admin#end
+#@dropdownItem("javascript:void(0);" "storyAssignedTo" "secondMenu")张三#end
+#@dropdownItem("javascript:void(0);" "storyAssignedTo" "secondMenu")lisi#end
 #end
 #end
 
 #@dropdownsLi("dropdown-submenu")
-#@dropdownA(""　"javascript:void(0);")阶段#end
+#@dropdownA("firstMenu"　"javascript:void(0);")阶段#end
 #@dropdownsUl("dropdown-menu")
-#@dropdownItem("javascript:void(0);")空#end
-#@dropdownItem("javascript:void(0);")未开始#end
-#@dropdownItem("javascript:void(0);")已计划#end
-#@dropdownItem("javascript:void(0);")已立项#end
-#@dropdownItem("javascript:void(0);")研发中#end
-#@dropdownItem("javascript:void(0);")完毕#end
-#@dropdownItem("javascript:void(0);")测试中#end
-#@dropdownItem("javascript:void(0);")测试完毕#end
-#@dropdownItem("javascript:void(0);")已验收#end
-#@dropdownItem("javascript:void(0);")已发布#end
+#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")空#end
+#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")未开始#end
+#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已计划#end
+#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已立项#end
+#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")研发中#end
+#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")完毕#end
+#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")测试中#end
+#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")测试完毕#end
+#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已验收#end
+#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已发布#end
 #end
 #end
 
 #@dropdownsLi("dropdown-submenu")
-#@dropdownA(""　"javascript:void(0);")计划#end
+#@dropdownA("firstMenu"　"javascript:void(0);")计划#end
 #@dropdownsUl("dropdown-menu")
-#@dropdownItem("javascript:void(0);")空#end
-#@dropdownItem("javascript:void(0);")计划1#end
-#@dropdownItem("javascript:void(0);")计划2#end
+#@dropdownItem("javascript:void(0);" "planId" "secondMenu")空#end
+#@dropdownItem("javascript:void(0);" "planId" "secondMenu")计划1#end
+#@dropdownItem("javascript:void(0);" "planId" "secondMenu")计划2#end
 #end
 #end
 
 #@dropdownsLi("dropdown-submenu")
-#@dropdownA(""　"javascript:void(0);")评审#end
+#@dropdownA("firstMenu"　"javascript:void(0);")评审#end
 #@dropdownsUl("dropdown-menu")
-#@dropdownItem("javascript:void(0);")确认通过#end
-#@dropdownItem("javascript:void(0);")有待明确#end
+#@dropdownItem("javascript:void(0);" "storyStatus" "secondMenu")确认通过#end
+#@dropdownItem("javascript:void(0);" "storyStatus" "secondMenu")有待明确#end
 #*		                		#@liDivider()<hr/>#end*#
 #@dropdownsLi("dropdown-submenu")
-#@dropdownA(""　"javascript:void(0);")拒绝#end
+#@dropdownA("secondMenu"　"javascript:void(0);")拒绝#end
 #@dropdownsUl("dropdown-menu")
-#@dropdownItem("javascript:void(0);")已完成#end
-#@dropdownItem("javascript:void(0);")延期#end
-#@dropdownItem("javascript:void(0);")不做#end
-#@dropdownItem("javascript:void(0);")已取消#end
-#@dropdownItem("javascript:void(0);")计划如此#end
+#@dropdownItem("javascript:void(0);" "" "thirdMenu")已完成#end
+#@dropdownItem("javascript:void(0);" "" "thirdMenu")延期#end
+#@dropdownItem("javascript:void(0);" "" "thirdMenu")不做#end
+#@dropdownItem("javascript:void(0);" "" "thirdMenu")已取消#end
+#@dropdownItem("javascript:void(0);" "" "thirdMenu")计划如此#end
 #end
 #end
 #end

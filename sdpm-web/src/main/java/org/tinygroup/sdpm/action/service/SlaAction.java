@@ -77,10 +77,47 @@ public class SlaAction extends BaseController {
         model.addAttribute("client", client);
         model.addAttribute("slas", slas);
         return "service/sla/clientsla.page";
-       /* ServiceClient client = clientService.findClient(id);
-        model.addAttribute("client", client);
-        model.addAttribute("slas", slas);
-        return "service/client/clientProduct.page";*/
     }
 
+    /*下面是协议里面，点击“详情”页面后的“编辑”和“删除”*/
+    @RequestMapping(value = "/slaEdit")
+    public String slaEdit(Integer id, Model model) {
+        if (id != null) {
+            ServiceSla sla = slaService.findSla(id);
+            model.addAttribute("sla", sla);
+        }
+        return "/service/sla/slaAdd.page";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/slaDelete")
+    public Map slaDelete(Integer id) {
+        slaService.deleteSla(id);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "y");
+        map.put("info", "删除成功");
+        return map;
+    }
+
+    /*协议的“协议标题”页面，协议具体内容查找出来*/
+    @RequestMapping(value = "/slaContent")
+    public String slaContent(Integer id, Model model) {
+        /*if (id != null) {
+            ServiceSla sla = slaService.findSla(id);
+            model.addAttribute("sla", sla);
+        }*/
+        ServiceSla sla = slaService.findSla(id);
+        model.addAttribute("sla", sla);
+        return "service/sla/slaContent.page";
+    }
+
+    /*协议的“协议标题”页面，里面的编辑和删除*/
+    @RequestMapping(value = "/slaContentEdit")
+    public String slaContentEdit(Integer id, Model model) {
+        if (id != null) {
+            ServiceSla sla = slaService.findSla(id);
+            model.addAttribute("sla", sla);
+        }
+        return "/service/sla/slaAdd.page";
+    }
 }

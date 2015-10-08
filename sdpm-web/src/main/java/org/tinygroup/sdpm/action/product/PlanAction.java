@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -66,6 +67,42 @@ public class PlanAction  extends BaseController{
 		model.addAttribute("plan",plan);
 		
 		return "/product/page/tabledemo/product-plan-update.page";
+	}
+	
+	@RequestMapping("/find/{forwordPager}")
+	public String find(@PathVariable(value="forwordPager")String forwordPager,Integer planId,Model model){
+		
+		ProductPlan plan = planService.findPlan(planId);
+		
+		model.addAttribute("plan",plan);
+		
+		
+		
+		if("relateStory".equals(forwordPager)){
+			return "/product/page/tabledemo/relation-plan/planbaseinfo.pagelet";
+		}
+		
+		return "/product/page/tabledemo/relation-plan/planbaseinfo.pagelet";
+	}
+	
+	@RequestMapping("/forword/{forwordPager}")
+	public String forword(@PathVariable(value="forwordPager")String forwordPager,Integer planId,Model model){
+		
+		model.addAttribute("planId",planId);
+		
+		if ("reRelateStory".equals(forwordPager)) {
+			return "/product/page/tabledemo/relation-plan/product-al-req.page";
+		}else if("noRelateStory".equals(forwordPager)){
+			return "/product/page/tabledemo/relation-plan/product-al-no-req.page";
+		}else if ("reRelateBug".equals(forwordPager)) {
+			return "product/page/tabledemo/relation-plan/product-al-bug.page";
+		}else if ("noRelateBug".equals(forwordPager)) {
+			return "product/page/tabledemo/relation-plan/product-al-no-bug.page";
+		}
+		
+		
+		
+		return "/product/page/tabledemo/relation-plan/planbaseinfo.pagelet";
 	}
 
 	@RequestMapping("/list")

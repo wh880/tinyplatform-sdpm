@@ -1,15 +1,25 @@
 package org.tinygroup.sdpm.action.system;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.tinysqldsl.Pager;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 @Controller
 @RequestMapping("system/effort")
 public class EffortAction extends BaseController{
@@ -17,16 +27,26 @@ public class EffortAction extends BaseController{
 	private EffortService effortService;
 	@RequestMapping("list")
 	public String list(SystemEffort effort,Model model){
-		
-		List<SystemEffort> list = effortService.find(effort);
-		model.addAttribute("list", list);
-		return "project/note/tableData.page";
+		String order="effort_date";
+		String orderTpye="desc";
+		List<SystemEffort> list = effortService.findList(effort, order, orderTpye);
+		List<SystemEffort> effortList = new ArrayList<SystemEffort>();
+		if(list.size()>5){
+			for(int i=0;i<5;i++){
+				effortList.add(list.get(i));
+			}
+		}
+		else{
+			effortList=list;
+		}
+		model.addAttribute("list", effortList);
+		return "project/task/note.page";
 		
 	}
-	@RequestMapping("add")
+	@RequestMapping("save")
 	public String add(SystemEffort systemEffort,Model model){
 		effortService.save(systemEffort);
-		return "redirect:" + "/system/effort/list/";
+		return "project/note/notetable.page";
 	}
 	@RequestMapping("findPager")
    public String findPager(Integer start,Integer limit,String order ,String ordertype, Integer effortId, Model model){
@@ -40,4 +60,24 @@ public class EffortAction extends BaseController{
        model.addAttribute("effortPager", effortPager);
        return "project/note/tableData.pagelet"; 
    }
+	@ResponseBody
+	@RequestMapping("event")
+	public List<Map<String, Object>> effortEvent(SystemEffort systemEffort,HttpServletResponse response)
+	{
+		response.setContentType("application/json; charset=UTF-8");
+		List<Map<String, Object>> maplist = Lists.newArrayList();
+		List<SystemEffort> list = effortService.find(systemEffort);
+		if(list!=null&&list.size()>0){
+			for(int i=0,size=list.size();i<size;i++){
+				SystemEffort effort =list.get(i);
+				Map<String, Object> map = Maps.newHashMap();
+				map.put("id",effort.getEffortId());
+				map.put("title", effort.getEffortWork());
+				map.put("start", effort.getEffortBegin());
+				map.put("end", effort.getEffortEnd());
+				maplist.add(map);
+			}
+		}
+		return maplist;
+	}
 }

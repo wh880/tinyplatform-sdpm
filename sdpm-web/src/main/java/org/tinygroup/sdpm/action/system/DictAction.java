@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.system;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,14 +79,17 @@ public class DictAction extends BaseController{
 	}
 	@ResponseBody
 	@RequestMapping("batchDelete")
-    public String bechDelete(String ids){
+    public Map<String, String> bechDelete(String ids){
 		String[] sids = ids.split(",");
 		Integer[] intIds = new Integer[sids.length];
 		for(int i=0;i<sids.length;i++){
 			intIds[i] = Integer.valueOf(sids[i]);
 		} 
-   	dictService.batchDelete(intIds);
-		return "success";
+	   	dictService.batchDelete(intIds);
+	   	Map<String, String> map = new HashedMap();
+	   	map.put("info", "success");
+	   	map.put("status","y" );
+   		return map;
    }
 
 }

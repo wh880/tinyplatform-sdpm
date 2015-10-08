@@ -10,23 +10,17 @@
 	#@div(divClass="operationbar")
 
 				<span class="r" >
-                    #foreach(m:menuManager.getScopeMenus("product-log"))
-                        #if(m.id=="product-plan-log")
-                            #@aModal("#myModal" "新增日志" "1000" "500" "btn-class" "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
-                            #else
-                                #if(m.id=="product-plan-del")
-                                    #@delItemsdpm("#")#buttonIcon(iconClass="icon-remove")#end
-                                    #else
-                                       #if(m.id=="product-plan-editor")
-                                           <a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-addplan.page"><i class="icon-pencil"></i></a>&nbsp;
-                                           #else
-                                              #if(m.id=="product-plan-back")
-                                                  <a href="${TINY_CONTEXT_PATH}/product/page/project/product-plan.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
-                                                  #else
-                                                  <a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass="${m.icon}")${m.name}</a>&nbsp;
-                                              #end
-                                       #end
-                                #end
+                    #foreach(m:menuManager?.getScopeMenus("product-log"))
+                    	#set(url=eval(m?.href))
+                        #if(m?.id=="product-plan-log")
+                            #@aModal("#myModal" m?.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m?.icon)${m?.name}#end
+                        #elseif(m?.id=="product-plan-del")
+                        	#@delItemsdpm(url)#buttonIcon(iconClass=m?.icon)#end
+                        #elseif(m?.id=="product-plan-editor")
+                        	 <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${url}"><i class="${m?.icon}"></i></a>&nbsp;
+                        #else
+                        	 <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m?.icon)${m?.name}</a>&nbsp;
+                                          
                         #end
                     #end
 
@@ -41,12 +35,12 @@
 				#@tabHead()
 
 					#if("demand"==type)
-						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="demand"?"Current":"")
+						#@aHeadCol(TINY_CONTEXT_PATH+"/product/plan/forword/reRelateStory?planId="+planId cname=="demand"?"Current":"")
 							#@buttons("","icon-lightbulb")
 								已关联需求
 							#end
 						#end
-						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-no-req.page" cname=="no-demand"?"Current":"")
+						#@aHeadCol(TINY_CONTEXT_PATH+"/product/plan/forword/noRelateStory?planId="+planId cname=="no-demand"?"Current":"")
 							#@buttons("","icon-unlink")
 								未关联需求
 							#end
@@ -55,7 +49,7 @@
 							<div class="r">
                         #foreach(m:menuManager.getScopeMenus("table-bug"))
                             #if(m.id=="plan-table-bug")
-							#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="link-bug"?"Current":"")
+							#@aHeadCol(TINY_CONTEXT_PATH+"/product/plan/forword/reRelateBug?planId="+planId cname=="link-bug"?"Current":"")
 							#@buttons("","icon-bug")
 								关联BUG
 							#end
@@ -77,12 +71,12 @@
 					#end
 
 					#if("bug"==type)
-						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-bug.page" cname=="bug"?"Current":"")
+						#@aHeadCol(TINY_CONTEXT_PATH+"/product/plan/forword/reRelateBug?planId="+planId cname=="bug"?"Current":"")
 							#@buttons("","icon-bug green")
 								已关联Bug
 							#end
 						#end
-						#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-no-bug.page" cname=="no-bug"?"Current":"")
+						#@aHeadCol(TINY_CONTEXT_PATH+"/product/plan/forword/noRelateBug?planId="+planId cname=="no-bug"?"Current":"")
 							#@buttons("","icon-unlink")
 								未关联Bug
 							#end
@@ -90,7 +84,7 @@
 
 							<div class="r">
 
-							#@aHeadCol(TINY_CONTEXT_PATH+"/product/page/tabledemo/relation-plan/product-al-req.page" cname=="link-demand"?"Current":"")
+							#@aHeadCol(TINY_CONTEXT_PATH+"/product/plan/forword/reRelateStory?planId="+planId cname=="link-demand"?"Current":"")
 							#@buttons("","icon-link")
 								关联需求
 							#end
@@ -126,7 +120,7 @@
 
 
 <div style="width:30%;float:right" >
-	#TypeInfo("productPlan")
+	#TypeInfo("productPlan" planId)
 </div>
 
 #end

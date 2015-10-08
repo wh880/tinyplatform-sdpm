@@ -278,6 +278,12 @@ public class QualityBug implements Serializable {
 	private String bugEntry;
 
 	/** 
+	 * 来源用例
+	 * 
+	 */
+	private Integer bugFromCase;
+
+	/** 
 	 * BUG_LINES
 	 * 
 	 */
@@ -660,6 +666,14 @@ public class QualityBug implements Serializable {
 
 	public String getBugEntry(){
 		return bugEntry;
+	}
+
+	public void setBugFromCase(Integer bugFromCase){
+		this. bugFromCase = bugFromCase;
+	}
+
+	public Integer getBugFromCase(){
+		return bugFromCase;
 	}
 
 	public void setBugLines(String bugLines){

@@ -49,8 +49,12 @@ public interface ModuleService {
 	  * @return
 	  */
 	 SystemModule eidtNameAndTiele(SystemModule systemModule);
-	 
-	 int bachDelete(String ids);
+	 /**
+	  * 批量删除
+	  * @param ids
+	  * @return
+	  */
+	 int batchDelete(Integer...ids);
 	
 	 
 	 

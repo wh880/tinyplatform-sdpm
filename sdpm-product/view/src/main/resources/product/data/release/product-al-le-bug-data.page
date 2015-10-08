@@ -1,0 +1,17 @@
+#set(records=bugList?.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#if (pagesize>records-pagesize*(page-1))
+#set(pagesize=records-(page-1)*pagesize)
+#end
+#setTinyItemCount(bugList?.totalCount)
+#for(bug:bugList?.getRecords())
+#@tr()
+	#@td()<input type="checkbox" value="1" name="releaseId">#end
+	#@td()${bug?.bugId} #end
+	#@td()${bug?.priority} #end
+	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${bug?.bugTitle}</a>#end
+	#@td()${bug?.bugStatus}#end
+	#@td()${bug?.bugOpenedBy}#end
+	#@td()${bug?.bugOpenedDate?formatDate(bug?.bugOpenedDate,'yyyy-MM-dd'):""}#end
+	
+#end
+#end

@@ -35,7 +35,8 @@
 #end
     ##tabbody end
 <br>
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/save" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/testcase/save" "post" {"class":"test"})
+#hiddenInput(hiddenInputName="caseId" hiddenInputValue=testcase?.caseId)
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
     		<p class="titleName">编辑</p>
@@ -46,7 +47,7 @@
         	<div class="col-10">
         	#@colLabel("col-2")用例名称：#end
         	<div class="col-4">
-           		#tinyInput("text" "caseTitle" ""{"datatype":"","id":"111","class":"input-text","placeholder":""})
+           		#tinyInput("text" "caseTitle" casepager?.caseTitle {"datatype":"","id":"111","class":"input-text","placeholder":""})
            </div>
            </div>
         #end

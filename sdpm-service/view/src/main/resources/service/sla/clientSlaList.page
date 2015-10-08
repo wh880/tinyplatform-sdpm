@@ -19,11 +19,11 @@
                     <div>
                         #@table("")
                             #@tbody()
-                                #@tr()
-                                    #@th(thStyle="width:150px")协议ID#end
-                                    #@td()${var.clientId}#end
-                                #*#@td()001#end*#
-                                #end
+                            #* #@tr()
+                                 #@th(thStyle="width:150px")协议ID#end
+                                 #@td()${var.slaId}#end
+                          ##   #@td()001#end
+                             #end*#
                                 #@tr()
                                     #@th()产品名称#end
                                     #@td()${var.productId}#end
@@ -59,15 +59,22 @@
                             #end
                     </div>
                     <div style="text-align:right;margin:right">
-                    #* #@aModal("#myModal3" "编辑" "800" "500" "btn radius btn-primary btn-sm"
-                         "/service/sla/clientSlaEdit.pagelet")编辑#end*#
-                        #@aExtendButton("btn-primary  btn-sm" "../sla/slaAdd.page")编辑#end
+                    #* ##   #@aExtendButton("btn-primary  btn-sm" "../sla/slaAdd.page")编辑#end
+                        #@aExtendButton("btn-primary  btn-sm" "../sla/slaEdit?id=${var.productId}")编辑#end
                         #@delItemsdpm(
-                            "#action" "id" "/service/sla/clientsla.page" {"class":"btn radius btn-danger btn-sm"})删除#end
+                            "#action" "id" "/service/sla/clientsla.page" {"class":"btn radius btn-danger btn-sm"})删除#end*#
+                        #foreach(m:menuManager.getScopeMenus("clientSlaContent"))
+                            #if(m.id != "clientSla_deleteContent")
+                                #@aExtendButton(
+                                    "btn-primary btn-sm" TINY_CONTEXT_PATH+m.href+"?id="+var.slaId "" "")编辑#end
+                            #else
+                                #@delItemsdpm(TINY_CONTEXT_PATH+m.href var?.slaId "" {
+                                    "class":"btn radius btn-danger btn-sm"}) 删除#end
+                            #end
+                        #end
                     </div>
                 #end
                 #end
-        ##            #@simpleModal("myModal3"+varFor.index "编辑")#end
             #end
 
     </div>

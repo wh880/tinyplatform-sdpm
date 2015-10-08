@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -87,6 +88,9 @@ public class ModuleAction extends BaseController{
 			systemModule.setModuleOrder(0);
 			systemModule.setModulePath("1,2,3");
 			systemModule.setModuleOwner("dict");
+			if(systemModule.getModuleParent()==null){
+				systemModule.setModuleParent(0);
+			}
 			
 			moduleService.add(systemModule);
 		}
@@ -95,16 +99,19 @@ public class ModuleAction extends BaseController{
 		}
 		return "redirect: list?moduleType=dict";
 	}
-	@RequestMapping("")
-   public String batchDelete(String ids){
-//	  String[] sids = ids.split(",");
-//	  Integer[] intIds = new Integer[sids.length];
-//		for(int i=0;i<sids.length;i++){
-//			intIds[i] = Integer.valueOf(sids[i]);
-//		}
-	   moduleService.bachDelete(ids);
-	  
-	   return "success";
+	@ResponseBody
+	@RequestMapping("batchDelete")
+   public Map<String, String> batchDelete(String ids){
+	  String[] sids = ids.split(",");
+	  Integer[] intIds = new Integer[sids.length];
+		for(int i=0;i<sids.length;i++){
+			intIds[i] = Integer.valueOf(sids[i]);
+		}
+	    moduleService.batchDelete(intIds);
+	   Map<String, String> map = new HashedMap();
+	   map.put("info", "success");
+	   	map.put("status","y" );
+	   return map;
    }
 	private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, int parent){
 		for(SystemModule systemModule : systemModules){

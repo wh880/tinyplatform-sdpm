@@ -12,20 +12,20 @@ public interface EffortManager {
 	 * @param SystemEffort
 	 * @return
 	 */
-	SystemEffort add(SystemEffort SystemEffort);
+	SystemEffort add(SystemEffort systemEffort);
 	
 	/**
 	 * 更新日志
 	 * @param SystemEffort
 	 * @return
 	 */
-	SystemEffort updata(SystemEffort SystemEffort);
+	SystemEffort updata(SystemEffort systemEffort);
 	/**
 	 * 查询所有的日志
 	 * @param SystemEffort
 	 * @return
 	 */
-	List<SystemEffort> find(SystemEffort SystemEffort);
+	List<SystemEffort> find(SystemEffort systemEffort);
 	/**
 	 * 通过当前时间查询
 	 * @param date
@@ -40,7 +40,7 @@ public interface EffortManager {
 	 */
 	
 	
-	Integer delete(SystemEffort SystemEffort);
+	Integer delete(SystemEffort systemEffort);
 	/**
 	 * 通过时间段查询
 	 * @param begindate
@@ -67,7 +67,16 @@ public interface EffortManager {
 	  * @param SystemEffort
 	  * @return
 	  */
-	 Pager<SystemEffort> findByPage(int start,int limit,SystemEffort SystemEffort,String sortName, boolean asc);
+	 Pager<SystemEffort> findByPage(int start,int limit,SystemEffort systemEffort,String sortName, boolean asc);
+	 /**
+	  * 排序查询
+	  * @param systemEffort
+	  * @param order
+	  * @param orderType
+	  * @return
+	  */
+	 
+	 List<SystemEffort> findList(SystemEffort systemEffort,String order,String orderType);
 	 
 	
 }

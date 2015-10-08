@@ -56,17 +56,17 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 			public Insert generate(SystemEffort t) {
 				Insert insert = insertInto(SYSTEM_EFFORTTABLE).values(
 					SYSTEM_EFFORTTABLE.EFFORT_ID.value(t.getEffortId()),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.value(t.getEffortObjectType()),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.value(t.getEffortObjectId()),
-					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.value(t.getEffortProduct()),
 					SYSTEM_EFFORTTABLE.EFFORT_PROJECT.value(t.getEffortProject()),
-					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.value(t.getEffortAccount()),
+					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.value(t.getEffortProduct()),
 					SYSTEM_EFFORTTABLE.EFFORT_WORK.value(t.getEffortWork()),
+					SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.value(t.getEffortConsumed()),
 					SYSTEM_EFFORTTABLE.EFFORT_DATE.value(t.getEffortDate()),
 					SYSTEM_EFFORTTABLE.EFFORT_LEFT.value(t.getEffortLeft()),
-					SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.value(t.getEffortConsumed()),
 					SYSTEM_EFFORTTABLE.EFFORT_BEGIN.value(t.getEffortBegin()),
-					SYSTEM_EFFORTTABLE.EFFORT_END.value(t.getEffortEnd()));
+					SYSTEM_EFFORTTABLE.EFFORT_END.value(t.getEffortEnd()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.value(t.getEffortObjectId()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.value(t.getEffortObjectType()),
+					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.value(t.getEffortAccount()));
 				return insert;
 			}
 		});
@@ -79,17 +79,17 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 		return getDslTemplate().update(systemEffort, new UpdateGenerateCallback<SystemEffort>() {
 			public Update generate(SystemEffort t) {
 				Update update = update(SYSTEM_EFFORTTABLE).set(
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.value(t.getEffortObjectType()),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.value(t.getEffortObjectId()),
-					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.value(t.getEffortProduct()),
 					SYSTEM_EFFORTTABLE.EFFORT_PROJECT.value(t.getEffortProject()),
-					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.value(t.getEffortAccount()),
+					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.value(t.getEffortProduct()),
 					SYSTEM_EFFORTTABLE.EFFORT_WORK.value(t.getEffortWork()),
+					SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.value(t.getEffortConsumed()),
 					SYSTEM_EFFORTTABLE.EFFORT_DATE.value(t.getEffortDate()),
 					SYSTEM_EFFORTTABLE.EFFORT_LEFT.value(t.getEffortLeft()),
-					SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.value(t.getEffortConsumed()),
 					SYSTEM_EFFORTTABLE.EFFORT_BEGIN.value(t.getEffortBegin()),
-					SYSTEM_EFFORTTABLE.EFFORT_END.value(t.getEffortEnd())).where(
+					SYSTEM_EFFORTTABLE.EFFORT_END.value(t.getEffortEnd()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.value(t.getEffortObjectId()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.value(t.getEffortObjectType()),
+					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.value(t.getEffortAccount())).where(
 					SYSTEM_EFFORTTABLE.EFFORT_ID.eq(t.getEffortId()));
 				return update;
 			}
@@ -127,7 +127,7 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 		});
 	}
 
-	public List<SystemEffort> query(SystemEffort systemEffort ,final OrderBy... orderBies) {
+	public List<SystemEffort> query(SystemEffort systemEffort ,final OrderBy... orderArgs) {
 		if(systemEffort==null){
 			systemEffort=new SystemEffort();
 		}
@@ -137,23 +137,23 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 			public Select generate(SystemEffort t) {
 				Select select = selectFrom(SYSTEM_EFFORTTABLE).where(
 				and(
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.eq(t.getEffortObjectType()),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.eq(t.getEffortObjectId()),
-					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.eq(t.getEffortProduct()),
 					SYSTEM_EFFORTTABLE.EFFORT_PROJECT.eq(t.getEffortProject()),
-					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.eq(t.getEffortAccount()),
+					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.eq(t.getEffortProduct()),
 					SYSTEM_EFFORTTABLE.EFFORT_WORK.eq(t.getEffortWork()),
+					SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.eq(t.getEffortConsumed()),
 					SYSTEM_EFFORTTABLE.EFFORT_DATE.eq(t.getEffortDate()),
 					SYSTEM_EFFORTTABLE.EFFORT_LEFT.eq(t.getEffortLeft()),
-					SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.eq(t.getEffortConsumed()),
 					SYSTEM_EFFORTTABLE.EFFORT_BEGIN.eq(t.getEffortBegin()),
-					SYSTEM_EFFORTTABLE.EFFORT_END.eq(t.getEffortEnd())));
-		return addOrderByElements(select, orderBies);
+					SYSTEM_EFFORTTABLE.EFFORT_END.eq(t.getEffortEnd()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.eq(t.getEffortObjectId()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.eq(t.getEffortObjectType()),
+					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.eq(t.getEffortAccount())));
+			return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
 
-	public Pager<SystemEffort> queryPager(int start,int limit ,SystemEffort systemEffort ,final OrderBy... orderBies) {
+	public Pager<SystemEffort> queryPager(int start,int limit ,SystemEffort systemEffort ,final OrderBy... orderArgs) {
 		if(systemEffort==null){
 			systemEffort=new SystemEffort();
 		}
@@ -162,18 +162,18 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 			public Select generate(SystemEffort t) {
 				Select select = MysqlSelect.selectFrom(SYSTEM_EFFORTTABLE).where(
 				and(
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.eq(t.getEffortObjectType()),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.eq(t.getEffortObjectId()),
-					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.eq(t.getEffortProduct()),
 					SYSTEM_EFFORTTABLE.EFFORT_PROJECT.eq(t.getEffortProject()),
-					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.eq(t.getEffortAccount()),
+					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.eq(t.getEffortProduct()),
 					SYSTEM_EFFORTTABLE.EFFORT_WORK.eq(t.getEffortWork()),
+					SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.eq(t.getEffortConsumed()),
 					SYSTEM_EFFORTTABLE.EFFORT_DATE.eq(t.getEffortDate()),
 					SYSTEM_EFFORTTABLE.EFFORT_LEFT.eq(t.getEffortLeft()),
-					SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.eq(t.getEffortConsumed()),
 					SYSTEM_EFFORTTABLE.EFFORT_BEGIN.eq(t.getEffortBegin()),
-					SYSTEM_EFFORTTABLE.EFFORT_END.eq(t.getEffortEnd())));
-		return addOrderByElements(select, orderBies);
+					SYSTEM_EFFORTTABLE.EFFORT_END.eq(t.getEffortEnd()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.eq(t.getEffortObjectId()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.eq(t.getEffortObjectType()),
+					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.eq(t.getEffortAccount())));
+			return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
@@ -186,17 +186,17 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 
 			public Insert generate() {
 				return insertInto(SYSTEM_EFFORTTABLE).values(
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.value(new JdbcNamedParameter("effortObjectType")),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.value(new JdbcNamedParameter("effortObjectId")),
-					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.value(new JdbcNamedParameter("effortProduct")),
 					SYSTEM_EFFORTTABLE.EFFORT_PROJECT.value(new JdbcNamedParameter("effortProject")),
-					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.value(new JdbcNamedParameter("effortAccount")),
+					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.value(new JdbcNamedParameter("effortProduct")),
 					SYSTEM_EFFORTTABLE.EFFORT_WORK.value(new JdbcNamedParameter("effortWork")),
+					SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.value(new JdbcNamedParameter("effortConsumed")),
 					SYSTEM_EFFORTTABLE.EFFORT_DATE.value(new JdbcNamedParameter("effortDate")),
 					SYSTEM_EFFORTTABLE.EFFORT_LEFT.value(new JdbcNamedParameter("effortLeft")),
-					SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.value(new JdbcNamedParameter("effortConsumed")),
 					SYSTEM_EFFORTTABLE.EFFORT_BEGIN.value(new JdbcNamedParameter("effortBegin")),
-					SYSTEM_EFFORTTABLE.EFFORT_END.value(new JdbcNamedParameter("effortEnd")));
+					SYSTEM_EFFORTTABLE.EFFORT_END.value(new JdbcNamedParameter("effortEnd")),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.value(new JdbcNamedParameter("effortObjectId")),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.value(new JdbcNamedParameter("effortObjectType")),
+					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.value(new JdbcNamedParameter("effortAccount")));
 			}
 		});
 	}
@@ -213,17 +213,17 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 
 			public Update generate() {
 				return update(SYSTEM_EFFORTTABLE).set(
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.value(new JdbcNamedParameter("effortObjectType")),
-					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.value(new JdbcNamedParameter("effortObjectId")),
-					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.value(new JdbcNamedParameter("effortProduct")),
 					SYSTEM_EFFORTTABLE.EFFORT_PROJECT.value(new JdbcNamedParameter("effortProject")),
-					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.value(new JdbcNamedParameter("effortAccount")),
+					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.value(new JdbcNamedParameter("effortProduct")),
 					SYSTEM_EFFORTTABLE.EFFORT_WORK.value(new JdbcNamedParameter("effortWork")),
+					SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.value(new JdbcNamedParameter("effortConsumed")),
 					SYSTEM_EFFORTTABLE.EFFORT_DATE.value(new JdbcNamedParameter("effortDate")),
 					SYSTEM_EFFORTTABLE.EFFORT_LEFT.value(new JdbcNamedParameter("effortLeft")),
-					SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.value(new JdbcNamedParameter("effortConsumed")),
 					SYSTEM_EFFORTTABLE.EFFORT_BEGIN.value(new JdbcNamedParameter("effortBegin")),
-					SYSTEM_EFFORTTABLE.EFFORT_END.value(new JdbcNamedParameter("effortEnd"))).where(
+					SYSTEM_EFFORTTABLE.EFFORT_END.value(new JdbcNamedParameter("effortEnd")),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.value(new JdbcNamedParameter("effortObjectId")),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.value(new JdbcNamedParameter("effortObjectType")),
+					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.value(new JdbcNamedParameter("effortAccount"))).where(
 				SYSTEM_EFFORTTABLE.EFFORT_ID.eq(new JdbcNamedParameter("effortId")));
 			}
 		});
@@ -238,17 +238,17 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 			public Delete generate() {
 				return delete(SYSTEM_EFFORTTABLE).where(and(
 				SYSTEM_EFFORTTABLE.EFFORT_ID.eq(new JdbcNamedParameter("effortId")),
-				SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.eq(new JdbcNamedParameter("effortObjectType")),
-				SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.eq(new JdbcNamedParameter("effortObjectId")),
-				SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.eq(new JdbcNamedParameter("effortProduct")),
 				SYSTEM_EFFORTTABLE.EFFORT_PROJECT.eq(new JdbcNamedParameter("effortProject")),
-				SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.eq(new JdbcNamedParameter("effortAccount")),
+				SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.eq(new JdbcNamedParameter("effortProduct")),
 				SYSTEM_EFFORTTABLE.EFFORT_WORK.eq(new JdbcNamedParameter("effortWork")),
+				SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.eq(new JdbcNamedParameter("effortConsumed")),
 				SYSTEM_EFFORTTABLE.EFFORT_DATE.eq(new JdbcNamedParameter("effortDate")),
 				SYSTEM_EFFORTTABLE.EFFORT_LEFT.eq(new JdbcNamedParameter("effortLeft")),
-				SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.eq(new JdbcNamedParameter("effortConsumed")),
 				SYSTEM_EFFORTTABLE.EFFORT_BEGIN.eq(new JdbcNamedParameter("effortBegin")),
-				SYSTEM_EFFORTTABLE.EFFORT_END.eq(new JdbcNamedParameter("effortEnd"))));
+				SYSTEM_EFFORTTABLE.EFFORT_END.eq(new JdbcNamedParameter("effortEnd")),
+				SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.eq(new JdbcNamedParameter("effortObjectId")),
+				SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.eq(new JdbcNamedParameter("effortObjectType")),
+				SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.eq(new JdbcNamedParameter("effortAccount"))));
 			}
 		});
 	}
@@ -256,7 +256,10 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
-			OrderByElement tempElement = orderBies[i].getOrderByElement();
+			OrderByElement tempElement = null;
+			if(orderBies[i] != null){
+				tempElement = orderBies[i].getOrderByElement();
+			}
 			if (tempElement != null) {
 				orderByElements.add(tempElement);
 			}

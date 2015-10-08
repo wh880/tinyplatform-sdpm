@@ -16,16 +16,19 @@
 
 package org.tinygroup.sdpm.quality.dao.impl;
 
-
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityTestResultTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
+
 import java.io.Serializable;
+
 import java.util.ArrayList;
+
 import java.util.List;
+
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -35,7 +38,7 @@ import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.select.OrderByElement;
+	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult;
 import org.tinygroup.sdpm.quality.dao.QualityTestResultDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -60,7 +63,7 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 					QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.value(t.getTestresultRun()),
 					QUALITY_TEST_RESULTTABLE.LINK_CASE.value(t.getLinkCase()),
 					QUALITY_TEST_RESULTTABLE.CASE_VERSION.value(t.getCaseVersion()),
-					QUALITY_TEST_RESULTTABLE.CASE__RESULT.value(t.getCaseResult()),
+					QUALITY_TEST_RESULTTABLE.CASE_RESULT.value(t.getCaseResult()),
 					QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.value(t.getCaseStepresults()),
 					QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.value(t.getTestResultLastRunner()),
 					QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.value(t.getTestResultDate()));
@@ -79,7 +82,7 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 					QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.value(t.getTestresultRun()),
 					QUALITY_TEST_RESULTTABLE.LINK_CASE.value(t.getLinkCase()),
 					QUALITY_TEST_RESULTTABLE.CASE_VERSION.value(t.getCaseVersion()),
-					QUALITY_TEST_RESULTTABLE.CASE__RESULT.value(t.getCaseResult()),
+					QUALITY_TEST_RESULTTABLE.CASE_RESULT.value(t.getCaseResult()),
 					QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.value(t.getCaseStepresults()),
 					QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.value(t.getTestResultLastRunner()),
 					QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.value(t.getTestResultDate())).where(
@@ -133,7 +136,7 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 					QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.eq(t.getTestresultRun()),
 					QUALITY_TEST_RESULTTABLE.LINK_CASE.eq(t.getLinkCase()),
 					QUALITY_TEST_RESULTTABLE.CASE_VERSION.eq(t.getCaseVersion()),
-					QUALITY_TEST_RESULTTABLE.CASE__RESULT.eq(t.getCaseResult()),
+					QUALITY_TEST_RESULTTABLE.CASE_RESULT.eq(t.getCaseResult()),
 					QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.eq(t.getCaseStepresults()),
 					QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.eq(t.getTestResultLastRunner()),
 					QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.eq(t.getTestResultDate())));
@@ -154,7 +157,7 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 					QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.eq(t.getTestresultRun()),
 					QUALITY_TEST_RESULTTABLE.LINK_CASE.eq(t.getLinkCase()),
 					QUALITY_TEST_RESULTTABLE.CASE_VERSION.eq(t.getCaseVersion()),
-					QUALITY_TEST_RESULTTABLE.CASE__RESULT.eq(t.getCaseResult()),
+					QUALITY_TEST_RESULTTABLE.CASE_RESULT.eq(t.getCaseResult()),
 					QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.eq(t.getCaseStepresults()),
 					QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.eq(t.getTestResultLastRunner()),
 					QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.eq(t.getTestResultDate())));
@@ -174,7 +177,7 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 					QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.value(new JdbcNamedParameter("testresultRun")),
 					QUALITY_TEST_RESULTTABLE.LINK_CASE.value(new JdbcNamedParameter("linkCase")),
 					QUALITY_TEST_RESULTTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
-					QUALITY_TEST_RESULTTABLE.CASE__RESULT.value(new JdbcNamedParameter("caseResult")),
+					QUALITY_TEST_RESULTTABLE.CASE_RESULT.value(new JdbcNamedParameter("caseResult")),
 					QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.value(new JdbcNamedParameter("caseStepresults")),
 					QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.value(new JdbcNamedParameter("testResultLastRunner")),
 					QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.value(new JdbcNamedParameter("testResultDate")));
@@ -197,7 +200,7 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 					QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.value(new JdbcNamedParameter("testresultRun")),
 					QUALITY_TEST_RESULTTABLE.LINK_CASE.value(new JdbcNamedParameter("linkCase")),
 					QUALITY_TEST_RESULTTABLE.CASE_VERSION.value(new JdbcNamedParameter("caseVersion")),
-					QUALITY_TEST_RESULTTABLE.CASE__RESULT.value(new JdbcNamedParameter("caseResult")),
+					QUALITY_TEST_RESULTTABLE.CASE_RESULT.value(new JdbcNamedParameter("caseResult")),
 					QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.value(new JdbcNamedParameter("caseStepresults")),
 					QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.value(new JdbcNamedParameter("testResultLastRunner")),
 					QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.value(new JdbcNamedParameter("testResultDate"))).where(
@@ -218,7 +221,7 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
 				QUALITY_TEST_RESULTTABLE.TESTRESULT_RUN.eq(new JdbcNamedParameter("testresultRun")),
 				QUALITY_TEST_RESULTTABLE.LINK_CASE.eq(new JdbcNamedParameter("linkCase")),
 				QUALITY_TEST_RESULTTABLE.CASE_VERSION.eq(new JdbcNamedParameter("caseVersion")),
-				QUALITY_TEST_RESULTTABLE.CASE__RESULT.eq(new JdbcNamedParameter("caseResult")),
+				QUALITY_TEST_RESULTTABLE.CASE_RESULT.eq(new JdbcNamedParameter("caseResult")),
 				QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.eq(new JdbcNamedParameter("caseStepresults")),
 				QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.eq(new JdbcNamedParameter("testResultLastRunner")),
 				QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.eq(new JdbcNamedParameter("testResultDate"))));

@@ -27,16 +27,22 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
 
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype) {
         List<ProjectStory> storyList = projectStoryManager.findSrotys(projectId);
-        String condition = " story_id in (";
-        String storys = "";
-        for (ProjectStory story : storyList) {
-            if (StringUtil.isBlank(storys)) {
-                storys = storys + story.getStoryId().toString();
-            } else {
-                storys = "," + story.getStoryId().toString();
+        String condition = "";
+        if (storyList == null || storyList.isEmpty()) {
+            condition = null;
+        } else {
+            condition = " story_id in (";
+            String storys = "";
+            for (ProjectStory story : storyList) {
+                if (StringUtil.isBlank(storys)) {
+                    storys = storys + story.getStoryId().toString();
+                } else {
+                    storys = "," + story.getStoryId().toString();
+                }
             }
+            condition = condition + storys + ")";
         }
-        condition = condition + storys + ")";
+
         boolean asc = ordertype == "asc" ? true : false;
         Pager<ProductStory> pager = storyManager.findPager(start, limit, null, condition, null, null, order, asc);
         for (ProductStory s : pager.getRecords()) {

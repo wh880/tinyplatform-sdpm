@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.HistoryManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
+import org.tinygroup.tinysqldsl.Pager;
 @Component
 public class HistoryServiceImpl implements HistoryService {
 	@Autowired
@@ -30,5 +31,12 @@ public class HistoryServiceImpl implements HistoryService {
 		// TODO Auto-generated method stub
 		return historyManager.find(systemHistory);
 	}
+
+	public Pager<SystemHistory> findByPager(int start, int limit,
+			SystemHistory systemHistory, String sortName, boolean asc) {
+		// TODO Auto-generated method stub
+		return historyManager.findByPager(start, limit, systemHistory, sortName, asc);
+	}
+	
 
 }

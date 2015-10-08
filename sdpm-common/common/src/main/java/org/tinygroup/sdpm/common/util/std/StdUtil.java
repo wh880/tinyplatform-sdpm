@@ -4,6 +4,7 @@ import org.tinygroup.database.config.table.Table;
 import org.tinygroup.database.config.table.TableField;
 import org.tinygroup.metadata.config.stdfield.StandardField;
 import org.tinygroup.metadata.util.MetadataUtil;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,8 @@ public class StdUtil {
 
     public static void stdProcess(List<Table> tables){
         for(Table table : tables){
-            tableMap.put(resolveName(table.getName()),table.getName());
+
+            tableMap.put(NameUtil.resolveNameAsc(table.getName()),table.getName());
             Map<String,String> stdMap = new HashMap<String, String>();
             addStd(table,table,stdMap);
             tableStdMap.put(table.getName(),stdMap);
@@ -31,10 +33,6 @@ public class StdUtil {
 
     public static String getField(String tableName, String feildName) {
         return tableStdMap.get(tableMap.get(tableName)).get(feildName);
-    }
-
-    public static Map<String, String> getField(String table) {
-        return tableStdMap.get(table);
     }
 
     public static String getPrimary(String tableName){
@@ -52,24 +50,15 @@ public class StdUtil {
         }else if (object instanceof  TableField){
             tableField = (TableField) object;
             StandardField standardField = MetadataUtil.getStandardField(tableField.getStandardFieldId(),StdUtil.class.getClassLoader());
-            stdMap.put(standardField.getName(),standardField.getTitle());
-            if(tableField.getPrimary()){
+            try {
+                stdMap.put(NameUtil.resolveNameAsc(standardField.getName()), standardField.getTitle());
+            }catch (Exception e){
+                throw new RuntimeException("标准字段" + standardField.getId() + "出错");
+            }            if(tableField.getPrimary()){
                 tablePrimary.put(t.getName(),standardField.getName());
             }
         }
     }
 
-    private static String resolveName(String name){
-        if(name.contains("_")){
-            String[] names = name.split("_");
-            StringBuffer result = new StringBuffer().append(names[0]);
-            for(int i = 1; i < names.length; i++){
-                char[] c = names[i].toCharArray();
-                c[0] = (char)(c[0]-32);
-                result.append(String.valueOf(c));
-            }
-            return result.toString();
-        }
-        return name;
-    }
+   
 }

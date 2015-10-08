@@ -40,7 +40,6 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
-import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -102,6 +101,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 					QUALITY_BUGTABLE.BUG_RESULT.value(t.getBugResult()),
 					QUALITY_BUGTABLE.BUG_REPO.value(t.getBugRepo()),
 					QUALITY_BUGTABLE.BUG_ENTRY.value(t.getBugEntry()),
+					QUALITY_BUGTABLE.BUG_FROM_CASE.value(t.getBugFromCase()),
 					QUALITY_BUGTABLE.BUG_LINES.value(t.getBugLines()),
 					QUALITY_BUGTABLE.BUG_V1.value(t.getBugV1()),
 					QUALITY_BUGTABLE.BUG_V2.value(t.getBugV2()),
@@ -115,26 +115,68 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		});
 	}
 
-	public int edit(final QualityBug qualityBug) {
+	public int edit(QualityBug qualityBug) {
 		if(qualityBug == null || qualityBug.getBugId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(qualityBug, new UpdateGenerateCallback<QualityBug>() {
 			public Update generate(QualityBug t) {
-				Update update = UpdateUtil.getUpdate(QUALITY_BUGTABLE, qualityBug);
+				Update update = update(QUALITY_BUGTABLE).set(
+					QUALITY_BUGTABLE.PRODUCT_ID.value(t.getProductId()),
+					QUALITY_BUGTABLE.MODULE_ID.value(t.getModuleId()),
+					QUALITY_BUGTABLE.PROJECT_ID.value(t.getProjectId()),
+					QUALITY_BUGTABLE.PLAN_ID.value(t.getPlanId()),
+					QUALITY_BUGTABLE.STORY_ID.value(t.getStoryId()),
+					QUALITY_BUGTABLE.STORY_VERSION.value(t.getStoryVersion()),
+					QUALITY_BUGTABLE.TASK_ID.value(t.getTaskId()),
+					QUALITY_BUGTABLE.TO_TASK_ID.value(t.getToTaskId()),
+					QUALITY_BUGTABLE.TO_STORY_ID.value(t.getToStoryId()),
+					QUALITY_BUGTABLE.BUG_TITLE.value(t.getBugTitle()),
+					QUALITY_BUGTABLE.BUG_KEYWORDS.value(t.getBugKeywords()),
+					QUALITY_BUGTABLE.BUG_SEVERITY.value(t.getBugSeverity()),
+					QUALITY_BUGTABLE.PRIORITY.value(t.getPriority()),
+					QUALITY_BUGTABLE.BUG_TYPE.value(t.getBugType()),
+					QUALITY_BUGTABLE.OPERATING_SYSTEM.value(t.getOperatingSystem()),
+					QUALITY_BUGTABLE.BROWSER.value(t.getBrowser()),
+					QUALITY_BUGTABLE.HARDWARE.value(t.getHardware()),
+					QUALITY_BUGTABLE.BUG_FOUND.value(t.getBugFound()),
+					QUALITY_BUGTABLE.BUG_STEPS.value(t.getBugSteps()),
+					QUALITY_BUGTABLE.BUG_STATUS.value(t.getBugStatus()),
+					QUALITY_BUGTABLE.BUG_CONFIRMED.value(t.getBugConfirmed()),
+					QUALITY_BUGTABLE.BUG_ACTIVATED_COUNT.value(t.getBugActivatedCount()),
+					QUALITY_BUGTABLE.BUG_MAILTO.value(t.getBugMailto()),
+					QUALITY_BUGTABLE.BUG_OPENED_BY.value(t.getBugOpenedBy()),
+					QUALITY_BUGTABLE.BUG_OPENED_DATE.value(t.getBugOpenedDate()),
+					QUALITY_BUGTABLE.BUG_OPENED_BUILD.value(t.getBugOpenedBuild()),
+					QUALITY_BUGTABLE.BUG_ASSIGNED_TO.value(t.getBugAssignedTo()),
+					QUALITY_BUGTABLE.BUG_ASSIGNED_DATE.value(t.getBugAssignedDate()),
+					QUALITY_BUGTABLE.BUG_RESOLVED_BY.value(t.getBugResolvedBy()),
+					QUALITY_BUGTABLE.BUG_RESOLUTION.value(t.getBugResolution()),
+					QUALITY_BUGTABLE.BUG_RESOLVED_BUILD.value(t.getBugResolvedBuild()),
+					QUALITY_BUGTABLE.BUG_RESOLVED_DATE.value(t.getBugResolvedDate()),
+					QUALITY_BUGTABLE.BUG_CLOSED_BY.value(t.getBugClosedBy()),
+					QUALITY_BUGTABLE.BUG_CLOSED_DATE.value(t.getBugClosedDate()),
+					QUALITY_BUGTABLE.BUG_DUPLICATE_BUG.value(t.getBugDuplicateBug()),
+					QUALITY_BUGTABLE.LINK_BUG.value(t.getLinkBug()),
+					QUALITY_BUGTABLE.LINK_CASE.value(t.getLinkCase()),
+					QUALITY_BUGTABLE.CASE_VERSION.value(t.getCaseVersion()),
+					QUALITY_BUGTABLE.BUG_RESULT.value(t.getBugResult()),
+					QUALITY_BUGTABLE.BUG_REPO.value(t.getBugRepo()),
+					QUALITY_BUGTABLE.BUG_ENTRY.value(t.getBugEntry()),
+					QUALITY_BUGTABLE.BUG_FROM_CASE.value(t.getBugFromCase()),
+					QUALITY_BUGTABLE.BUG_LINES.value(t.getBugLines()),
+					QUALITY_BUGTABLE.BUG_V1.value(t.getBugV1()),
+					QUALITY_BUGTABLE.BUG_V2.value(t.getBugV2()),
+					QUALITY_BUGTABLE.BUG_REPO_TYPE.value(t.getBugRepoType()),
+					QUALITY_BUGTABLE.TESTTASK.value(t.getTesttask()),
+					QUALITY_BUGTABLE.BUG_LAST_EDITED_BY.value(t.getBugLastEditedBy()),
+					QUALITY_BUGTABLE.BUG_LAST_EDITED_DATE.value(t.getBugLastEditedDate()),
+					QUALITY_BUGTABLE.DELETED.value(t.getDeleted())).where(
+					QUALITY_BUGTABLE.BUG_ID.eq(t.getBugId()));
 				return update;
 			}
 		});
 	}
-	
-/*	public Integer editMakeSure(QualityBug bug){
-		if(bug == null || bug.getBugId() == null){
-			return 0;
-		}
-		Update update = update(QUALITY_BUGTABLE).set(
-				QUALITY_BUGTABLE.BUG)
-				getDslSession()
-	}*/
 
 	public int deleteByKey(Integer pk){
 		if(pk == null){
@@ -218,6 +260,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 					QUALITY_BUGTABLE.BUG_RESULT.eq(t.getBugResult()),
 					QUALITY_BUGTABLE.BUG_REPO.eq(t.getBugRepo()),
 					QUALITY_BUGTABLE.BUG_ENTRY.eq(t.getBugEntry()),
+					QUALITY_BUGTABLE.BUG_FROM_CASE.eq(t.getBugFromCase()),
 					QUALITY_BUGTABLE.BUG_LINES.eq(t.getBugLines()),
 					QUALITY_BUGTABLE.BUG_V1.eq(t.getBugV1()),
 					QUALITY_BUGTABLE.BUG_V2.eq(t.getBugV2()),
@@ -281,6 +324,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 					QUALITY_BUGTABLE.BUG_RESULT.eq(t.getBugResult()),
 					QUALITY_BUGTABLE.BUG_REPO.eq(t.getBugRepo()),
 					QUALITY_BUGTABLE.BUG_ENTRY.eq(t.getBugEntry()),
+					QUALITY_BUGTABLE.BUG_FROM_CASE.eq(t.getBugFromCase()),
 					QUALITY_BUGTABLE.BUG_LINES.eq(t.getBugLines()),
 					QUALITY_BUGTABLE.BUG_V1.eq(t.getBugV1()),
 					QUALITY_BUGTABLE.BUG_V2.eq(t.getBugV2()),
@@ -343,6 +387,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 					QUALITY_BUGTABLE.BUG_RESULT.value(new JdbcNamedParameter("bugResult")),
 					QUALITY_BUGTABLE.BUG_REPO.value(new JdbcNamedParameter("bugRepo")),
 					QUALITY_BUGTABLE.BUG_ENTRY.value(new JdbcNamedParameter("bugEntry")),
+					QUALITY_BUGTABLE.BUG_FROM_CASE.value(new JdbcNamedParameter("bugFromCase")),
 					QUALITY_BUGTABLE.BUG_LINES.value(new JdbcNamedParameter("bugLines")),
 					QUALITY_BUGTABLE.BUG_V1.value(new JdbcNamedParameter("bugV1")),
 					QUALITY_BUGTABLE.BUG_V2.value(new JdbcNamedParameter("bugV2")),
@@ -408,6 +453,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 					QUALITY_BUGTABLE.BUG_RESULT.value(new JdbcNamedParameter("bugResult")),
 					QUALITY_BUGTABLE.BUG_REPO.value(new JdbcNamedParameter("bugRepo")),
 					QUALITY_BUGTABLE.BUG_ENTRY.value(new JdbcNamedParameter("bugEntry")),
+					QUALITY_BUGTABLE.BUG_FROM_CASE.value(new JdbcNamedParameter("bugFromCase")),
 					QUALITY_BUGTABLE.BUG_LINES.value(new JdbcNamedParameter("bugLines")),
 					QUALITY_BUGTABLE.BUG_V1.value(new JdbcNamedParameter("bugV1")),
 					QUALITY_BUGTABLE.BUG_V2.value(new JdbcNamedParameter("bugV2")),
@@ -471,6 +517,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 				QUALITY_BUGTABLE.BUG_RESULT.eq(new JdbcNamedParameter("bugResult")),
 				QUALITY_BUGTABLE.BUG_REPO.eq(new JdbcNamedParameter("bugRepo")),
 				QUALITY_BUGTABLE.BUG_ENTRY.eq(new JdbcNamedParameter("bugEntry")),
+				QUALITY_BUGTABLE.BUG_FROM_CASE.eq(new JdbcNamedParameter("bugFromCase")),
 				QUALITY_BUGTABLE.BUG_LINES.eq(new JdbcNamedParameter("bugLines")),
 				QUALITY_BUGTABLE.BUG_V1.eq(new JdbcNamedParameter("bugV1")),
 				QUALITY_BUGTABLE.BUG_V2.eq(new JdbcNamedParameter("bugV2")),
@@ -484,8 +531,12 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 	}
 
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+
+		if (orderBies == null||orderBies.length==0) {
+			return select;
+		}
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+		for (int i = 0; orderBies[i] != null && i < orderBies.length; i++) {
 			OrderByElement tempElement = null;
 			if(orderBies[i]!=null){
 				tempElement = orderBies[i].getOrderByElement();
@@ -498,5 +549,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
 		}
 		return select;
-	}
+	
+		
+		}
 }

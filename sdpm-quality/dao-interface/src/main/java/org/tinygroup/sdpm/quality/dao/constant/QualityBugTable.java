@@ -280,6 +280,12 @@ public class QualityBugTable extends Table {
 	public final Column BUG_ENTRY = new Column(this, "bug_entry");
 
 	/** 
+	 * 来源用例
+	 * 
+	 */
+	public final Column BUG_FROM_CASE = new Column(this, "bug_from_case");
+
+	/** 
 	 * BUG_LINES
 	 * 
 	 */
