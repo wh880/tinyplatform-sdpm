@@ -1,11 +1,9 @@
-
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
             #include("/document/dropdownMenu.page")
         #end
         #@tabHead()
-        
             #include("tab.page")
             
         	<span class="r" style="position:relative;top:2px;height:0">
@@ -15,7 +13,7 @@
 						#buttonIcon(iconClass="icon-remove")删除
 					#end &nbsp
 					
-					#@aModal("#myModal" "添加文档库" "400" "80" "" "/docment/doclib/add")
+					#@aModal("#myModal" "添加文档库" "400" "80" "class-m" "/document/doclib/add")
 						#buttonIcon(iconClass="icon-plus-sign")添加文档库#end
 			</span>
         #end

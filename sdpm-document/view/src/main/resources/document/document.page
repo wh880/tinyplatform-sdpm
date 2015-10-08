@@ -12,7 +12,7 @@
             </span>
             <span class="r">
             #foreach(addm:menuManager.getScopeMenus("add-doc"))
-            	<a href="${TINY_CONTEXT_PATH}${addm.href}">#buttonIcon(iconClass=addm.icon)$!{addm.name}</a>
+            	<a href="${TINY_CONTEXT_PATH}${addm.href}?libname=${libname}">#buttonIcon(iconClass=addm.icon)$!{addm.name}</a>
             #end
             </span>
             #include("mulsearch.page") 

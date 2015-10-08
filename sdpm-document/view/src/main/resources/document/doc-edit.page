@@ -9,7 +9,7 @@
 
 #set(name="documentDocu")
 #include("doc-tab.page")
-#@tinyForm("this--form" TINY_CONTEXT_PATH+"/document/edit-doc/save" "post" {"class":"edit"})
+#@tinyForm("this--form" TINY_CONTEXT_PATH+"/document/doc/save" "post" {"class":"edit"})
 <input name="docId" type="hidden" value="${doc?.docId}"/>
 	<div style="width:100%">
     	<div class="infoContent">
@@ -20,8 +20,7 @@
          <div class="col-4">
           #@Tselect2F()
 	          #@Tselect2Body("docLib" doc?.docLib {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                <option value="${doc?.docLib}">${doc?.docLib}</option>
-	               #foreach(var:doclibpager?.getRecords())
+	               #foreach(var:liblist)
 	               <option value="${var?.docLibName}">${var?.docLibName}</option>
 	               #end
 	                
@@ -39,8 +38,8 @@
           #@Tselect2F()
 	          #@Tselect2Body("docModule" doc?.docModule {"class":"input-text select2"}) 
 	                <option value="${doc?.docModule}">${doc?.docModule}</option>
-	               <option value="ME">2</option>
-	                <option value="MD">3</option>
+	               <option value="ME">ME</option>
+	                <option value="MD">MD</option>
 	               #end                	         
               #end
               	</div>
@@ -116,7 +115,7 @@
             </div>
             <div class="col-1"></div>
             <div class="col-1">
-                <a href="${TINY_CONTEXT_PATH}/document/document.page">
+                <a href="${TINY_CONTEXT_PATH}/document/doc/list?libname=${doc?.docLib}">
                 <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
             </div>
             <div class="col-5"></div>
