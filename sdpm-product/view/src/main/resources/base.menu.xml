@@ -30,9 +30,7 @@
         <menu id="product-demand-add" name="提需求" href="/product/page/tabledemo/product-demand-add.page" icon="icon-plus"
               sort="48" isShow="1"
               scope="product-io"/>
-        <menu id="product-demand-operation" name="操作" href="" icon=""
-              sort="47" isShow="1"
-              scope="product-oper"/>
+        <menu id="product-demand-operation" name="操作" href="" icon="" sort="47" isShow="1" scope="product-oper"/>
         <menu id="product-demand-del" name="批量关闭" href="" icon="" sort="46" isShow="1" scope="product-del"/>
 
         <menu id="demand_log" name="日志" href="/product/page/tabledemo/product-log.pagelet" icon="icon-time" sort="45"
@@ -256,14 +254,14 @@
     <menu id="product-modular" parent-id="myproduct" name="模块" href="/product/page/project/product-modular.page"
           sort="9" isShow="1" permission="Permission"></menu>
 
-    <menu id="product-overview" parent-id="myproduct" name="概况" href="/product/page/project/overview.page" sort="8"
+    <menu id="product-overview" parent-id="myproduct" name="概况" href="/product/find/overview?productId=${sessionProductId}" sort="8"
           isShow="1" permission="Permission">
 
-        <menu id="product-overview-close" name="关闭" href="" icon="" sort="10" isShow="1" scope="overview-cl"/>
-        <menu id="product-overview-editor" name="编辑" href="/product/page/tabledemo/product-module-editor.page"
+         <menu id="product-overview-close" name="关闭" href="/product/page/tabledemo/overview-close.pagelet" icon="icon-off" sort="10" isShow="1" scope="overview-cl"/>
+        <menu id="product-overview-editor" name="编辑" href="/product/find?productId=${product.productId}"
               icon="icon-pencil" sort="9" isShow="1" scope="overview-cl"/>
-        <menu id="product-overview-delete" name="删除" href="" icon="" sort="8" isShow="1" scope="overview-cl"/>
-        <menu id="product-overview-back" name="返回" href="/product/page/project/togglebox.page" icon="icon-reply"
+        <menu id="product-overview-delete" name="删除" href="javascript:void(0);" icon="icon-remove" sort="8" isShow="1" scope="overview-cl"/>
+        <menu id="product-overview-back" name="返回" href="javascript:history.go(-1)" icon="icon-reply"
               sort="7" isShow="1" scope="overview-cl"/>
 
 
