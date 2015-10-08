@@ -170,7 +170,7 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 					HOLIDAYTABLE.HOLIDAY_ACCOUNT.eq(t.getHolidayAccount()),
 					HOLIDAYTABLE.HOLIDAY_DATE.eq(t.getHolidayDate()),
 					HOLIDAYTABLE.HOLIDAY_TYPE.eq(t.getHolidayType()),
-					HOLIDAYTABLE.HOLIDAY_DELETED.eq(t.getHolidayDeleted()),
+					HOLIDAYTABLE.HOLIDAY_DELETED.eq(0),
 					HOLIDAYTABLE.COMPANY_ID.eq(t.getCompanyId()),
 					HOLIDAYTABLE.HOLIDAY_DETAIL.eq(t.getHolidayDetail()),
 					HOLIDAYTABLE.HOILIDAY_REMARK.eq(t.getHoilidayRemark())));

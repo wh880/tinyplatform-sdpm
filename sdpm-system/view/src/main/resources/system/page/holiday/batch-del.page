@@ -18,9 +18,10 @@
 	 		#for(i:holiday)
 				#@tr()
 		 			#@td()	${i?.holidayId}	#end
-		 			<input type="hidden" name="holiday[${iFor.index}].holidayId" value="${i?.holidayId}"/>
+		 			<input type="hidden" name="holiday[${iFor.index-1}].holidayId" value="${i?.holidayId}"/>
 		 			#@td()	${i?.holidayName}	#end
-		 			<input type="hidden" name="holiday[${iFor.index}].holidayName" value="${i?.holidayName}"/>
+		 			<input type="hidden" name="holiday[${iFor.index-1}].holidayName" value="${i?.holidayName}"/>
+		 			<input type="hidden" name="holiday[${iFor.index-1}].holidayDeleted" value="1"/>
 		 			
 ##		 			#@td()	激活	#end
 ##		 			#@td()	
@@ -44,7 +45,7 @@
 		 			
 ##		 				 #tinyInput("text" "username")
 		 				 #tinyInput(
-                         "text" "holiday["+iFor.index+"].hoilidayRemark" i?.hoilidayRemark {"datatype":"","id":"请求标题","class":
+                         "text" "holiday["+(iFor.index-1)+"].hoilidayRemark" i?.hoilidayRemark {"datatype":"","id":"请求标题","class":
                              "input-text"})
                         
 		 			
@@ -55,6 +56,8 @@
 	 	#end
 	 	
 	 #end
+##	 #set(holiday.setHoliday(day))
+##<input type="hidden" name="day[${iFor.index}].holidayName" value="${i?.holidayName}"/>
 	  #@formControlDiv("col-15")
 	  #@div(divClass="col-8 col-offset-2 form-inline")
       #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
