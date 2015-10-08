@@ -47,5 +47,12 @@ public interface ReviewManager {
      * @return
      */
     ServiceReview update(ServiceReview review);
+    /**
+     * 根据请求ID找到回访记录
+     *
+     * @param
+     * @return
+     */
+    ServiceReview findByRequestId(Integer id);
 }
 

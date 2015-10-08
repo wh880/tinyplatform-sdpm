@@ -35,4 +35,8 @@ public class ReviewServiceImpl implements ReviewService {
     public ServiceReview updateReview(ServiceReview review) {
         return reviewManager.update(review);
     }
+
+    public ServiceReview findReviewByRequestId(Integer id) {
+        return reviewManager.findByRequestId(id);
+    }
 }

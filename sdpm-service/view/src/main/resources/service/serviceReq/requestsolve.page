@@ -10,17 +10,18 @@
             #include("/service/serviceCom/tab.page")
         #end
         #@div()
-            #@tinyForm("thisform" "url" "post" {"class":""})
+            #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/request/replySave" "post" {"class":""})
 
             <div style="width:70%;margin-left: 200px" class="pageleftpart">
             <div class="infoContent">
                 <p class="titleName">回复</p>
+                <input type="hidden" name="clientRequestId" value=${request?.clientRequestId}></input>
                 #@elementItem()
                 <div class="col-12">
                     <div class="col-2 text-r"><label><span class="c-red">*</span>请求标题：</label></div>
 
                     <div class="col-9">
-                        <td>解决软件运行速度问题</td>
+                        <td>${request?.requestTitle}</td>
                     </div>
                 #end
                 #@elementItem()
@@ -28,7 +29,7 @@
                     <div class="col-2 text-r"><label>请求描述：</label></div>
 
                     <div class="col-9">
-                        <td>解决软件运行速度问题方法解决软件运行速度问题方法解决软件运行速度问题方法解决软件运行速度问题方法解决软件运行速度问题方法解决软件运行速度问题方法</td>
+                        <td>${request?.requestSpec}</td>
                     </div>
                     #@validateDiv("col-2")#end
                 #end
@@ -39,20 +40,20 @@
                         <div class="col-2 text-r"><label><span class="c-red">*</span>回复描述：</label></div>
 
                         <div class="col-9">
-                            #@Teditor("content2" "content2" {"initialFrameHeight":"150"})Say something#end</div>
+                            #@Teditor("content2" "replySpec" {"initialFrameHeight":"150"})${request?.replySpec}#end</div>
                     </div>
                     #@validateDiv("col-2")#end
                 #end
                 #@elementItem()
                     #@sdpmItem("回复人")
-                        #tinyInput("text" "回复人" ""{"datatype":"","id":"解决人员","class":"input-text"})
+                        #tinyInput("text" "replier" request?.replier{"datatype":"","id":"解决人员","class":"input-text"})
                     #end
                 #end
                 #@elementItem()
 
                     #@sdpmItem("回复处理时间")
                         #@tinyDateInput(
-                            "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
+                            "replyDate" formatDate(request?.replyDate,"yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
                             "日期不能为空"})#end
                     #end
                     #@validateDiv("col-2")#end

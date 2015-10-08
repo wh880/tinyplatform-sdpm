@@ -20,5 +20,5 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
 
 public interface ServiceReviewDao extends BaseDao<ServiceReview, Integer> {
-
+    public ServiceReview findByRequestId(Integer id);
 }
