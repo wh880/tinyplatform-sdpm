@@ -16,11 +16,19 @@
 
 package org.tinygroup.sdpm.system.dao;
 
-import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import java.util.List;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
 
 public interface HolidayDao extends BaseDao<Holiday,Integer> {
 	int softDelete(Holiday holiday);
+	List<Holiday> findByKeys(Integer...ids);
+	/**
+	 * 批量软删除
+	 * @param list
+	 * @return
+	 */
+	int[] batchsoftdelete(List<Holiday> list);
 
 }
