@@ -89,6 +89,9 @@ public class SlaAction extends BaseController {
             ServiceSla sla = slaService.findSla(id);
             model.addAttribute("sla", sla);
         }
+        ServiceClient client = new ServiceClient();
+        List<ServiceClient> list = clientService.getClientList(client);
+        model.addAttribute("list", list);
         return "/service/sla/slaAdd.page";
     }
 
@@ -121,9 +124,11 @@ public class SlaAction extends BaseController {
             ServiceSla sla = slaService.findSla(id);
             model.addAttribute("sla", sla);
         }
+        ServiceClient client = new ServiceClient();
+        List<ServiceClient> list = clientService.getClientList(client);
+        model.addAttribute("list", list);
         return "/service/sla/slaAdd.page";
     }
-
     @ResponseBody
     @RequestMapping(value = "/slaContentDelete")
     public Map slaTitleDelete(Integer id) {

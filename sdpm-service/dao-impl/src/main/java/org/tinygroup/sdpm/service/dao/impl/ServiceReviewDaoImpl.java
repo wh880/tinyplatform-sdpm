@@ -64,6 +64,7 @@ public class ServiceReviewDaoImpl extends TinyDslDaoSupport implements ServiceRe
         if (serviceReview == null || serviceReview.getReviewId() == null) {
             return 0;
         }
+
         return getDslTemplate().update(serviceReview, new UpdateGenerateCallback<ServiceReview>() {
             public Update generate(ServiceReview t) {
                 Update update = update(SERVICE_REVIEWTABLE).set(

@@ -35,6 +35,10 @@ public class StdUtil {
         return tableStdMap.get(tableMap.get(tableName)).get(feildName);
     }
 
+    public static Map<String, String> getField(String tableName) {
+        return tableStdMap.get(tableName);
+    }
+
     public static String getPrimary(String tableName){
         return tablePrimary.get(tableName);
     }
@@ -55,7 +59,7 @@ public class StdUtil {
             }catch (Exception e){
                 throw new RuntimeException("标准字段" + standardField.getId() + "出错");
             }            if(tableField.getPrimary()){
-                tablePrimary.put(t.getName(),standardField.getName());
+                tablePrimary.put(t.getName(),NameUtil.resolveNameAsc(standardField.getName()));
             }
         }
     }
