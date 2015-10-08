@@ -77,6 +77,11 @@ public interface EffortManager {
 	  */
 	 
 	 List<SystemEffort> findList(SystemEffort systemEffort,String order,String orderType);
-	 
+	 /**
+	  * 批量删除
+	  * @param ids
+	  * @return
+	  */
+	 int batchDelete(Integer...ids);
 	
 }

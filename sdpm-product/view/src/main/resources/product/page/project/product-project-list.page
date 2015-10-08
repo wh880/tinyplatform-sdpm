@@ -20,20 +20,17 @@
 			<input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('product-project','全选');" />
             <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('product-project','反选');" />
            
-				
-#*				#@aModal("#myModal" "批量编辑" "1200" "500" "btn radius btn-primary" "/product/page/tabledemo/product-editall.pagelet")批量编辑#end
-				*#
 			#end
-			#@tinyTableContent("../../data/allproduct-project.pagelet") ##取数据地址 总数据
+			#@tinyTableContent(TINY_CONTEXT_PATH+"/product/project/list") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
-						#@tinyTh({"class":"","rel":"sortname"})ID#end
-						#@tinyTh({"class":"","rel":"sortname"})项目名称#end
-						#@tinyTh({"class":"","rel":"sortname"})项目代号#end
-						#@tinyTh({"class":"","rel":"sortname"})结束日期#end
-						#@tinyTh({"class":"","rel":"sortname"})项目状态#end
-						#@tinyTh({"class":"","rel":"sortname"})总预计#end
+						#@tinyTh({"class":"","rel":"projectId"})ID#end
+						#@tinyTh({"class":"","rel":"projectName"})项目名称#end
+						#@tinyTh({"class":"","rel":"projectCode"})项目代号#end
+						#@tinyTh({"class":"","rel":"projectEnd"})结束日期#end
+						#@tinyTh({"class":"","rel":"projectStatus"})项目状态#end
+						#@tinyTh({"class":"","rel":"projectDays"})总预计#end
 						#@tinyTh({"class":"","rel":"sortname"})总消耗#end
 						#@tinyTh({"class":"","rel":"sortname"})总剩余#end
 						#@tinyTh({"class":"","rel":"sortname"})进度#end
