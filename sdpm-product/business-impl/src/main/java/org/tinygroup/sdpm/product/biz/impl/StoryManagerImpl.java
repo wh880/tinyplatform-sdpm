@@ -76,6 +76,11 @@ public class StoryManagerImpl implements StoryManager{
 		}
 		return productStoryDao.queryPager(start, limit, story, orderBy);
 	}
+
+	public List<ProductStory> findList(ProductStory story) {
+		
+		return productStoryDao.query(story, null);
+	}
 	
 	
 }

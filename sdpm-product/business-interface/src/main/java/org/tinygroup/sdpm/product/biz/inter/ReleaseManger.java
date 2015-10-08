@@ -38,6 +38,12 @@ public interface ReleaseManger{
      */
     ProductRelease find(Integer releaseId);
     /**
+     * 根据对象查询
+     * @param productRelease
+     * @return
+     */
+    List<ProductRelease> findList(ProductRelease productRelease);
+    /**
      * 根据对象查找(排序)
      * @param release
      * @param orderBies

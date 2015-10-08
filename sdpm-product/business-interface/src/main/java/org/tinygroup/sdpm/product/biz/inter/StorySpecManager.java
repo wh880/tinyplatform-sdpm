@@ -17,6 +17,12 @@ public interface StorySpecManager {
 	ProductStorySpec find(Integer storyId);
 	
 	/**
+	 * 根据对象查询
+	 * @param storySpec
+	 * @return
+	 */
+	List<ProductStorySpec> findList(ProductStorySpec storySpec);
+	/**
 	 * 根据需求对象查找
 	 * @param storySpec
 	 * @param orderBies

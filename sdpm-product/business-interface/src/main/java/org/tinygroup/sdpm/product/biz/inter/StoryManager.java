@@ -42,6 +42,12 @@ public interface StoryManager {
 	 */
 	ProductStory find(Integer storyId);
 	/**
+	 * 根据对象查询
+	 * @param story
+	 * @return
+	 */
+	List<ProductStory> findList(ProductStory story);
+	/**
 	 * 根据对象查找（排序）
 	 * @param story
 	 * @return
