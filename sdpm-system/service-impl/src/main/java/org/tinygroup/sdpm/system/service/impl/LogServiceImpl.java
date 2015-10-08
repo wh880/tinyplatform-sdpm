@@ -31,7 +31,7 @@ public class LogServiceImpl implements LogService{
 
     public void log(Object oldObject, Object newObject, SystemAction systemAction){
         systemAction.setActionDate(new Date());
-        actionManager.add(systemAction);
+        systemAction = actionManager.add(systemAction);
         if(oldObject != null) {
             recordEdit(oldObject, newObject, systemAction);
         }
@@ -52,8 +52,9 @@ public class LogServiceImpl implements LogService{
                 SystemHistory systemHistory = new SystemHistory();
                 systemHistory.setHistoryAction(systemAction.getActionId());
                 systemHistory.setHistoryField(field.getName());
-                systemHistory.setHistoryOld(String.valueOf(oldObject));
-                systemHistory.setHistoryNew(String.valueOf(newObject));
+                System.out.println(String.valueOf((oldObject == null?"":oldValue)));
+                systemHistory.setHistoryOld(String.valueOf((oldObject == null?"":oldValue)));
+                systemHistory.setHistoryNew(String.valueOf((newObject == null?"":newValue)));
                 historyManager.add(systemHistory);
             }
 
@@ -61,6 +62,11 @@ public class LogServiceImpl implements LogService{
     }
 
     private boolean compare(Object oldOne, Object newOne){
+        if(oldOne == null&&newOne == null){
+            return true;
+        }else if(newOne == null){
+            return true;
+        }
         return oldOne.equals(newOne);
     }
 

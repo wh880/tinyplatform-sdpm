@@ -63,11 +63,12 @@ public class StoryAction extends BaseController{
     
     @RequestMapping("/update")
     public String update(ProductStory productStory){
-    	storyService.updateStory(productStory);
         ProductStory story = storyService.findStory(productStory.getStoryId());
+    	storyService.updateStory(productStory);
         OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute("user");
         SystemAction action = new SystemAction();
         action.setActionObjectId(productStory.getStoryId());
+        action.setActionProduct(String.valueOf(story.getProductId()));
         action.setActionObjectType("story");
         action.setActionActor(user != null?user.getOrgUserId():"0");
         logService.log(story,productStory,action);
