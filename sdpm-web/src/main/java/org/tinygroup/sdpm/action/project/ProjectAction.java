@@ -39,8 +39,12 @@ public class ProjectAction extends BaseController {
     }
 
     @RequestMapping("add")
-    public String addPage(Model model, HttpServletRequest request) {
-
+    public String addPage() {
         return "project/addProject.page";
+    }
+
+    @RequestMapping("/allProject")
+    public String jumpAllProject() {
+        return "project/allProject.page";
     }
 }
