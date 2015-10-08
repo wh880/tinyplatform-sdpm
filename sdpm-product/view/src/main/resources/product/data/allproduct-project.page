@@ -1,25 +1,21 @@
-#macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
-#end
 
 
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=project.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(project?.totalCount)
+#for(project:project?.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="product-project">#end
-	#@td()${var}#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/project/task/index.page">产品项目${page}</a>#end
-	#@td()SD09#end
-	#@td()2015-09-02#end
-	#@td()进行中#end
-	#@td()14天#end
-	#@td()12天#end
-	#@td()4天#end
+	#@td()${project?.projectId}#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/project/task/index.page">${project?.projectName}</a>#end
+	#@td()${project?.projectCode}#end
+	#@td()${project?.projectEnd}#end
+	#@td()${project?.projectStatus}#end
+	#@td()${project?.projectId}#end
+	#@td()${project?.projectId}#end
+	#@td()${project?.projectId}#end
 	#@td("text-l")
 	#set(rm=(rand("int")%100)+"%")
 		<div class="progress-bars" style="width:110px">

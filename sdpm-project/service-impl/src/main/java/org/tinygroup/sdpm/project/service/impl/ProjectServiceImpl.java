@@ -19,9 +19,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectManager projectManager;
 
-    public Project add(Project project) {
-        return projectManager.add(project);
-    }
+   
 
     public List<Project> findList() {
         return projectManager.findList();
@@ -43,4 +41,21 @@ public class ProjectServiceImpl implements ProjectService {
 
         return projectManager.findPagerProjects(start, limit, order, "asc".equals(ordertype) ? true : false);
     }
+
+	public Project addProject(Project project) {
+		
+		return projectManager.add(project);
+	}
+
+	public List<Project> findProjectList(Project project, String order, String ordertype) {
+		
+		return projectManager.findList(project, order, ordertype);
+	}
+
+	public Pager<Project> findProjectPager(int page, int pagesize, Project project, String order, String ordertype) {
+		
+		return projectManager.findPager(page, pagesize, project, order, ordertype);
+	}
+
+	
 }
