@@ -15,6 +15,17 @@ public class BuildServiceImpl implements BuildService {
     @Autowired
     private BuildManager buildManager;
 
+    public Integer softDeleteBuild(Integer buildId) {
+        if (buildId == null || buildId <= 0) {
+            return 0;
+        } else {
+            ProjectBuild build = new ProjectBuild();
+            build.setBuildId(buildId);
+            build.setBuildDeleted(build.DELETE_YES);
+            return buildManager.softDelete(build);
+        }
+    }
+
     public ProjectBuild add(ProjectBuild build) {
         return null;
     }
@@ -22,6 +33,7 @@ public class BuildServiceImpl implements BuildService {
     public Pager<ProjectBuild> findPager(Integer projectId, Integer start, Integer limit, String order, boolean asc) {
         ProjectBuild build = new ProjectBuild();
         build.setBuildProject(projectId);
+        build.setBuildDeleted(build.DELETE_NO);
         return buildManager.findPager(build, start, limit, order, asc);
     }
 
@@ -32,7 +44,8 @@ public class BuildServiceImpl implements BuildService {
     public Integer deleteBuild(Integer buildId) {
         return null;
     }
-    public ProjectBuild findBuild(Integer id){
+
+    public ProjectBuild findBuild(Integer id) {
         return buildManager.find(id);
     }
 }

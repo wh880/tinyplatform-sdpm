@@ -9,6 +9,13 @@ import org.tinygroup.tinysqldsl.Pager;
 public interface BuildService {
 
     /**
+     * 根据版本的逻辑id软删除
+     * @param buildId
+     * @return
+     */
+    public Integer softDeleteBuild(Integer buildId);
+
+    /**
      * 创建版本
      *
      * @param projectBuild

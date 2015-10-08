@@ -3,20 +3,18 @@ package org.tinygroup.sdpm.action.project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by wangying14938 on 2015-09-22.版本
@@ -87,4 +85,21 @@ public class BuildAction extends BaseController {
         model.addAttribute("build", build);
         return "project/version/index.page";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public Map<String, String> delete(Integer id, Model model) {
+        Integer res = buildService.softDeleteBuild(id);
+        Map<String, String> map = new HashMap<String, String>();
+        if (res > 0) {
+            map.put("status", "y");
+            map.put("info", "删除成功");
+        } else {
+            map.put("status", "n");
+            map.put("info", "删除失败");
+        }
+
+        return map;
+    }
+
 }
