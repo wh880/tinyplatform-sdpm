@@ -6,20 +6,22 @@
 
 #set(records=teamPager.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
-	#set(pagesize=records-(page-1)*pagesize)
+    #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
 #for(t:teamPager.getRecords())
 #@tr()
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/organization/userTodo.page">${t?.teamAccount}</a> #end
-	#@td()${t?.teamRole}#end
-	#@td()${t?.teamJoin}#end
-	#@td()${t?.teamDays}#end
-	#@td()${t?.teamHours}#end
-	#@td()48#end
-	#@td()
-    删除按钮
-	#end
+    #@td()<input type="checkbox" value="1" name="idCheck">#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/organization/userTodo.page">${t?.teamAccount}</a> #end
+    #@td()${t?.teamRole}#end
+    #@td()${t?.teamJoin}#end
+    #@td()${t?.teamDays}#end
+    #@td()${t?.teamHours}#end
+    #@td()48#end
+    #@td()
+        #foreach(m:menuManager.getScopeMenus("pro-team-op"))
+            #@tinyTableItemRemove(TINY_CONTEXT_PATH+m.href t.id)<i class=${m.icon}></i>#end
+        #end
+    #end
 #end
 #end
