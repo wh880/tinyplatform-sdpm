@@ -28,4 +28,6 @@ public interface ServiceRequestDao extends BaseDao<ServiceRequest, Integer> {
     Integer saveReply(ServiceRequest clientRequest);
 
     Pager<ServiceRequest> queryPagerBy(int start, int limit, ServiceRequest t, Integer statues, OrderBy... orderArgs);
+
+    Integer changeStatus(Integer id);
 }

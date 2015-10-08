@@ -38,7 +38,9 @@
 
             #@elementItem()
                 #@sdpmItem("回访者" "*")
-                    #tinyInput("text" "reviewer" review?.reviewer{"datatype":"*","nullmsg":"回访者不能为空","id":"回复人员","class":"input-text"})
+                    #tinyInput(
+                        "text" "reviewer" review?.reviewer {"datatype":"*","nullmsg":"回访者不能为空","id":"回复人员","class":
+                        "input-text"})
                 #end
             #end
 
