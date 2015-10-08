@@ -20,9 +20,9 @@ public class DeptAction extends BaseController {
     private DeptService deptService;
 
     @RequestMapping("/add")
-    public String addDept(Integer orgDeptId, String orgDeptName) {
+    public String addDept(Integer orgDeptParent, String orgDeptName) {
         OrgDept dept = new OrgDept();
-        dept.setOrgDeptParent(orgDeptId);
+        dept.setOrgDeptParent(orgDeptParent);
         dept.setOrgDeptName(orgDeptName);
         deptService.addDept(dept);
         return "organization/user/user.page";
