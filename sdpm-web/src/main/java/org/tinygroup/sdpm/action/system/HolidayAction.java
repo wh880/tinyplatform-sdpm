@@ -76,4 +76,10 @@ public class HolidayAction extends BaseController{
 	    }
 		return "/system/page/holiday/holiday.page";
 	}
+	@RequestMapping("manage")
+	public String manage(Holiday holiday,Model model){
+		List<Holiday> holidayList = holidayService.find(holiday);
+		model.addAttribute("holiday", holidayList);
+		return "/system/page/holiday/manage.page";
+	}
 }

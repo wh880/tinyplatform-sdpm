@@ -17,7 +17,8 @@
             <span class="r">
 				#set(m1=menuManager.getMenu("pro-demand-report"))
                 #if(m1)
-                    #@aModal("#myModal" "项目名称>导出数据" "750" "100" "" "/project/task/outputData.pagelet")
+                    #@aModal(
+                        "#myModal" selProject.projectName+">导出数据" "750" "100" "" "/project/task/outputData.pagelet")
                         #buttonIcon(iconClass="icon-upload-alt")导出数据#end
                     #@dialog("myModal")
                         #@dialogHeader()#end
