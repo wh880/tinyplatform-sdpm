@@ -111,7 +111,7 @@
         <menu id="pro-version-look" name="查看bug" href="/project/bug/index.page" icon="icon-eye-open" sort="20"
               isShow="1"
               scope="pro-version-op"/>
-        <menu id="pro-version-edit" name="编辑版本" href="/project/version/edit.page" icon="icon-pencil" sort="15" isShow="1"
+        <menu id="pro-version-edit" name="编辑版本" href="/project/version/edit" icon="icon-pencil" sort="15" isShow="1"
               scope="pro-version-op"/>
         <menu id="pro-version-delete" name="删除" href="" icon="icon-remove" sort="10" isShow="1"
               scope="pro-version-op"/>

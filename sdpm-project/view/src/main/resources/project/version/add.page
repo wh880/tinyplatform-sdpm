@@ -21,7 +21,7 @@
 	#end
 #end
 
-#@tinyForm("thisform" "" "" {"class":"test","enctype":"multipart/form-data"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/version/save" "" {"class":"test","enctype":"multipart/form-data"})
 
 
 ##<div style="width:100%;float:left" class="pageleftpart">
@@ -30,14 +30,14 @@
 	#@elementItem()
 		#@sdpmItem("解决版本")
 			#@Tselect2F()
-				#@Tselect2Body("buildId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="IN">Indiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
+				#@Tselect2Body("buildId" "4" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="1">Connecticut</option>
+                    <option value="2">Delaware</option>
+                    <option value="3">Florida</option>
+                    <option value="4">Georgia</option>
+                    <option value="5">Indiana</option>
+                    <option value="6">Maine</option>
+                    <option value="7">Maryland</option>
 				#end
 			##填写任意内容，侦听需重新填加 A侦听已内置
 				#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/testmanagement/page/proposeversion.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/testmanagement/page/version.page">全部</a>#end
@@ -47,15 +47,15 @@
 	#@elementItem()
 		#@sdpmItem("产品")
 			#@Tselect2F()
-				#@Tselect2Body("buildProduct" "T" {"class":"input-text select2","datatype":"*4-16","nullmsg":"产品不能为空！"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="T"></option>
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="IN">Indiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
+				#@Tselect2Body("buildProduct" "1" {"class":"input-text select2","datatype":"*4-16","nullmsg":"产品不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="1"></option>
+                    <option value="2">Connecticut</option>
+                    <option value="3">Delaware</option>
+                    <option value="4">Florida</option>
+                    <option value="5">Georgia</option>
+                    <option value="6">Indiana</option>
+                    <option value="7">Maine</option>
+                    <option value="8">Maryland</option>
 				#end
 			##填写任意内容，侦听需重新填加 A侦听已内置
 				#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end

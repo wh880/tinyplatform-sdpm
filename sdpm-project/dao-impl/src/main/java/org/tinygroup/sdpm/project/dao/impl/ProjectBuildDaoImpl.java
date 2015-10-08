@@ -23,6 +23,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
+import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.tinysqldsl.*;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
@@ -65,29 +67,38 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 			}
 		});
 	}
-	@LogMethod("edit")
+
 	public int edit(ProjectBuild projectBuild) {
+		return 0;
+	}
+
+	@LogMethod("edits")
+	public Integer edits(ProjectBuild projectBuild) {
 		if (projectBuild == null || projectBuild.getBuildId() == null) {
 			return 0;
 		}
-		return getDslTemplate().update(projectBuild, new UpdateGenerateCallback<ProjectBuild>() {
-			public Update generate(ProjectBuild t) {
-				Update update = update(PROJECT_BUILDTABLE).set(
-						PROJECT_BUILDTABLE.BUILD_PRODUCT.value(t.getBuildProduct()),
-						PROJECT_BUILDTABLE.BUILD_PROJECT.value(t.getBuildProject()),
-						PROJECT_BUILDTABLE.BUILD_NAME.value(t.getBuildName()),
-						PROJECT_BUILDTABLE.BUILD_SCM_PATH.value(t.getBuildScmPath()),
-						PROJECT_BUILDTABLE.BUILD_FILE_PATH.value(t.getBuildFilePath()),
-						PROJECT_BUILDTABLE.BUILD_DATE.value(t.getBuildDate()),
-						PROJECT_BUILDTABLE.BUILD_STORIES.value(t.getBuildStories()),
-						PROJECT_BUILDTABLE.BUILD_BUGS.value(t.getBuildBugs()),
-						PROJECT_BUILDTABLE.BUILD_BUILDER.value(t.getBuildBuilder()),
-						PROJECT_BUILDTABLE.BUILD_DESC.value(t.getBuildDesc()),
-						PROJECT_BUILDTABLE.BUILD_DELETED.value(t.getBuildDeleted())).where(
-						PROJECT_BUILDTABLE.BUILD_ID.eq(t.getBuildId()));
-				return update;
-			}
-		});
+//		return getDslTemplate().update(projectBuild, new UpdateGenerateCallback<ProjectBuild>() {
+//			public Update generate(ProjectBuild t) {
+//				Update update = update(PROJECT_BUILDTABLE).set(
+//						PROJECT_BUILDTABLE.BUILD_PRODUCT.value(t.getBuildProduct()),
+//						PROJECT_BUILDTABLE.BUILD_PROJECT.value(t.getBuildProject()),
+//						PROJECT_BUILDTABLE.BUILD_NAME.value(t.getBuildName()),
+//						PROJECT_BUILDTABLE.BUILD_SCM_PATH.value(t.getBuildScmPath()),
+//						PROJECT_BUILDTABLE.BUILD_FILE_PATH.value(t.getBuildFilePath()),
+//						PROJECT_BUILDTABLE.BUILD_DATE.value(t.getBuildDate()),
+//						PROJECT_BUILDTABLE.BUILD_STORIES.value(t.getBuildStories()),
+//						PROJECT_BUILDTABLE.BUILD_BUGS.value(t.getBuildBugs()),
+//						PROJECT_BUILDTABLE.BUILD_BUILDER.value(t.getBuildBuilder()),
+//						PROJECT_BUILDTABLE.BUILD_DESC.value(t.getBuildDesc()),
+//						PROJECT_BUILDTABLE.BUILD_DELETED.value(t.getBuildDeleted())).where(
+//						PROJECT_BUILDTABLE.BUILD_ID.eq(t.getBuildId()));
+//				return update;
+//			}
+//		});
+		Update update = UpdateUtil.getUpdate(PROJECT_BUILDTABLE,projectBuild);
+		getDslSession().execute(update);
+
+		return 0;
 	}
 	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk) {
