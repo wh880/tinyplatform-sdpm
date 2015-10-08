@@ -23,6 +23,8 @@ import java.util.Date;
  * 
  */
 public class ServiceFaq {
+	public static Integer DELETE_YES = 1;
+	public static Integer DELETE_NO = 0;
 
 	/** 
 	 * 问答ID
@@ -101,6 +103,10 @@ public class ServiceFaq {
 	 * 
 	 */
 	private Date faqReplyDate;
+
+	public ServiceFaq() {
+		setDeleted(DELETE_NO);
+	}
 
 	public Integer getFaqId() {
 		return faqId;
