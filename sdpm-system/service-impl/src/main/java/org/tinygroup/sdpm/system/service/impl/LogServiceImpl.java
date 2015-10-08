@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.tinygroup.beancontainer.BeanContainerFactory;
 import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.biz.inter.HistoryManager;
 import org.tinygroup.sdpm.system.dao.SystemActionDao;
@@ -29,9 +28,7 @@ public class LogServiceImpl implements LogService{
     private HistoryManager historyManager;
 
     public void log(Object oldObject, Object newObject, SystemAction systemAction){
-        OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute("user");
         systemAction.setActionDate(new Date());
-        systemAction.setActionActor(user != null?user.getOrgUserRole():"0");
         actionManager.add(systemAction);
         if(oldObject != null) {
             recordEdit(oldObject, newObject, systemAction);

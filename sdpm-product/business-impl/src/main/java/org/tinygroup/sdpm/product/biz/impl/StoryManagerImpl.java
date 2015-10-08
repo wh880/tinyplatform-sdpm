@@ -12,7 +12,6 @@ import org.tinygroup.sdpm.product.dao.ProductStorySpecDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
-import org.tinygroup.sdpm.system.dao.impl.LogUtil.LogUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;

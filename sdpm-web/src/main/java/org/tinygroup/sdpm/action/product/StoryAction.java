@@ -67,7 +67,6 @@ public class StoryAction extends BaseController{
         ProductStory story = storyService.findStory(productStory.getStoryId());
         OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute("user");
         SystemAction action = new SystemAction();
-        action.setActionDate(new Date());
         action.setActionObjectId(productStory.getStoryId());
         action.setActionObjectType("story");
         action.setActionActor(user != null?user.getOrgUserId():"0");
