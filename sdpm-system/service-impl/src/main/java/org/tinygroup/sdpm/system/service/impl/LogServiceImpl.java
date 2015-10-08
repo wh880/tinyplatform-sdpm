@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.system.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.tinygroup.beancontainer.BeanContainerFactory;
 import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -21,6 +22,7 @@ import java.util.Date;
 /**
  * Created by wangll13383 on 2015/10/8.
  */
+@Component
 public class LogServiceImpl implements LogService{
     @Autowired
     private ActionManager actionManager;
