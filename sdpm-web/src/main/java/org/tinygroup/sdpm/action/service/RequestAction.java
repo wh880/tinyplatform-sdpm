@@ -52,7 +52,7 @@ public class RequestAction extends BaseController {
             model.addAttribute("request", clientRequest);
         }
         ServiceClient client = new ServiceClient();
-        List<ServiceClient> list=clientService.getClientList(client);
+        List<ServiceClient> list = clientService.getClientList(client);
         model.addAttribute("list", list);
         return "service/serviceReq/add.page";
     }
@@ -112,9 +112,11 @@ public class RequestAction extends BaseController {
     public String review(Integer id, Model model) {
         if (id != null) {
             ServiceRequest clientRequest = requestService.findRequest(id);
-            ServiceReview review = reviewService.findReviewByRequestId(id);
             model.addAttribute("request", clientRequest);
-            model.addAttribute("review", review);
+            if (clientRequest.getRequestStatus() == ServiceRequest.RETURNVISIT) {
+                ServiceReview review = reviewService.findReviewByRequestId(id);
+                model.addAttribute("review", review);
+            }
         }
         return "service/serviceReq/requestViewList.page";
     }
@@ -126,6 +128,7 @@ public class RequestAction extends BaseController {
         } else {
             reviewService.updateReview(review);
         }
+        reviewService.changeStatus(review.getClientRequestId());
         model.addAttribute("review", review);
         return "redirect:/service/request/list";
     }

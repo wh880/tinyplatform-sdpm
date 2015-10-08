@@ -54,4 +54,12 @@ public interface ReviewService {
      * @return
      */
     ServiceReview findReviewByRequestId(Integer id);
+
+    /**
+     * 根据status改变request表中的状态
+     *
+     * @param
+     * @return
+     */
+    Integer changeStatus(Integer requestId);
 }
