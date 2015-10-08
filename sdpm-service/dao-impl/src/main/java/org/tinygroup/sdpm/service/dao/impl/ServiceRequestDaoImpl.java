@@ -417,4 +417,64 @@ public class ServiceRequestDaoImpl extends TinyDslDaoSupport implements ServiceR
         });
 
     }
+
+    public Integer saveReply(ServiceRequest serviceRequest) {
+        if (serviceRequest == null || serviceRequest.getClientRequestId() == null) {
+            return 0;
+        }
+        return getDslTemplate().update(serviceRequest, new UpdateGenerateCallback<ServiceRequest>() {
+            public Update generate(ServiceRequest t) {
+                Update update = update(SERVICE_REQUESTTABLE).set(
+                        SERVICE_REQUESTTABLE.REPLY_SPEC.value(t.getReplySpec()),
+                        SERVICE_REQUESTTABLE.REPLY_DATE.value(t.getReplyDate()),
+                        SERVICE_REQUESTTABLE.REPLIER.value(t.getReplier())).where(
+                        SERVICE_REQUESTTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()));
+                return update;
+            }
+        });
+    }
+
+    public Pager<ServiceRequest> queryPagerBy(int start, int limit, ServiceRequest serviceRequest, final Integer statues, final OrderBy... orderArgs) {
+        if (serviceRequest == null) {
+            serviceRequest = new ServiceRequest();
+        }
+        return getDslTemplate().queryPager(start, limit, serviceRequest, false, new SelectGenerateCallback<ServiceRequest>() {
+
+            public Select generate(ServiceRequest t) {
+                Select select = MysqlSelect.selectFrom(SERVICE_REQUESTTABLE).where(
+                        and(
+                                SERVICE_REQUESTTABLE.PRODUCT_ID.eq(t.getProductId()),
+                                SERVICE_REQUESTTABLE.MODULE_ID.eq(t.getModuleId()),
+                                SERVICE_REQUESTTABLE.REQUEST_NO.eq(t.getRequestNo()),
+                                SERVICE_REQUESTTABLE.REQUEST_TYPE.eq(t.getRequestType()),
+                                SERVICE_REQUESTTABLE.REQUEST_PRE.eq(t.getRequestPre()),
+                                SERVICE_REQUESTTABLE.REQUEST_TITLE.eq(t.getRequestTitle()),
+                                SERVICE_REQUESTTABLE.REQUEST_KEYWORDS.eq(t.getRequestKeywords()),
+                                SERVICE_REQUESTTABLE.REQUEST_SPEC.eq(t.getRequestSpec()),
+                                SERVICE_REQUESTTABLE.REQUEST_IS_ABNORMAL.eq(t.getRequestIsAbnormal()),
+                                SERVICE_REQUESTTABLE.CLIENT_ID.eq(t.getClientId()),
+                                SERVICE_REQUESTTABLE.REQUESTER.eq(t.getRequester()),
+                                SERVICE_REQUESTTABLE.REQUEST_SUBMIT_BY.eq(t.getRequestSubmitBy()),
+                                SERVICE_REQUESTTABLE.REQUEST_SUBMIT_DATE.eq(t.getRequestSubmitDate()),
+                                SERVICE_REQUESTTABLE.REQUEST_REPLY_DATE.eq(t.getRequestReplyDate()),
+                                SERVICE_REQUESTTABLE.REQUEST_COMMITMENT_DATE.eq(t.getRequestCommitmentDate()),
+                                SERVICE_REQUESTTABLE.REQUEST_REVIEWER.eq(t.getRequestReviewer()),
+                                SERVICE_REQUESTTABLE.REQUEST_REVIEW_DATE.eq(t.getRequestReviewDate()),
+                                SERVICE_REQUESTTABLE.REQUEST_LAST_EDITED_BY.eq(t.getRequestLastEditedBy()),
+                                SERVICE_REQUESTTABLE.REQUEST_LAST_EDIT_DATE.eq(t.getRequestLastEditDate()),
+                                SERVICE_REQUESTTABLE.REQUEST_RELEASE_DATE.eq(t.getRequestReleaseDate()),
+                                SERVICE_REQUESTTABLE.REQUEST_CLOSED_BY.eq(t.getRequestClosedBy()),
+                                SERVICE_REQUESTTABLE.REQUEST_CLOSE_DATE.eq(t.getRequestCloseDate()),
+                                SERVICE_REQUESTTABLE.REQUEST_OPEN_COUNT.eq(t.getRequestOpenCount()),
+                                SERVICE_REQUESTTABLE.REQUEST_STATUS.eq(statues),
+                                SERVICE_REQUESTTABLE.REQUEST_TRANS_TO.eq(t.getRequestTransTo()),
+                                SERVICE_REQUESTTABLE.REQUEST_TRANS_ID.eq(t.getRequestTransId()),
+                                SERVICE_REQUESTTABLE.DELETED.eq(t.getDeleted()),
+                                SERVICE_REQUESTTABLE.REPLY_SPEC.eq(t.getReplySpec()),
+                                SERVICE_REQUESTTABLE.REPLIER.eq(t.getReplier()),
+                                SERVICE_REQUESTTABLE.REPLY_DATE.eq(t.getReplyDate())));
+                return addOrderByElements(select, orderArgs);
+            }
+        });
+    }
 }

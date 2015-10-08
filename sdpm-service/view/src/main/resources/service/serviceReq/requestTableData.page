@@ -6,17 +6,17 @@
 #foreach(var:pager.records)
     #@tr()
         #@td()<input type="checkbox" value="${var.clientRequestId}" name="idCheck">#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/serviceReq/add.page">${var.clientRequestId}</a>#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">${var.clientId}</a>#end
+    ##        #@td()<a href="${TINY_CONTEXT_PATH}/service/serviceReq/add.page">${var.clientRequestId}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientDetail?id=${var.clientId}">${var.clientId}</a>#end
         #@td()${var.requestTitle}#end
         #@td()${var.requestPre}#end
         #@td()${var.requestStatus}#end
-        #@td()${var.requestCommitmentDate}#end
+        #@td()${formatDate(var.requestCommitmentDate,"yyyy-MM-dd")}#end
         #@td()" "#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("service-request"))
                 #if(m)
-                <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var.clientRequestId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
             #end
 

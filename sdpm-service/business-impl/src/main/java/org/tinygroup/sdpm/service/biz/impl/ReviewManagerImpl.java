@@ -38,4 +38,8 @@ public class ReviewManagerImpl implements ReviewManager{
         reviewDao.edit(review);
         return review;
     }
+
+    public ServiceReview findByRequestId(Integer id) {
+        return reviewDao.findByRequestId(id);
+    }
 }

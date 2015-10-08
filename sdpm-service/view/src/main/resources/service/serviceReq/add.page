@@ -87,10 +87,9 @@
                     #@Tselect2Body(
                         "clientId" request?.clientId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("ch")请选择#end
-                        #@tinyOptionItem("1")恒生#end
-                        #@tinyOptionItem("2")华为#end
-                        #@tinyOptionItem("3")大华股份#end
-                        #@tinyOptionItem("4")海康威视#end
+                        #foreach(l:list)
+                            #@tinyOptionItem(l.clientId)${l?.clientName}#end
+                        #end
                     #end
                 #end
             #end
@@ -99,9 +98,7 @@
             #@sdpmItem("客户联系人" "*")
                 #tinyInput(
                     "text" "requester" request?.requester{"placeholder":"请输入请求标题","datatype":"","nullmsg":"请求标题不能为空！",
-                    "id":
-                    "request_title",
-                    "class":"input-text"})
+                    "id":"request_title","class":"input-text"})
             #end
         #end
 
@@ -128,11 +125,11 @@
                     #@Tselect2Body("requestStatus" request?.requestStatus {"class":
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("1")请选择#end
-                        #@tinyOptionItem("2")新建#end
-                        #@tinyOptionItem("3")待回访#end
-                        #@tinyOptionItem("4")已回访#end
-                        #@tinyOptionItem("5")被拒绝#end
-                        #@tinyOptionItem("6")处理中#end
+                        #@tinyOptionItem("0")新建#end
+                        #@tinyOptionItem("6")待回访#end
+                        #@tinyOptionItem("8")已回访#end
+                        #@tinyOptionItem("2")被拒绝#end
+                        #@tinyOptionItem("1")处理中#end
                     #end
                 #end
             #end
