@@ -52,4 +52,11 @@ public interface BugService {
 	 */
 	Pager<QualityBug> findBugListPager(Integer start,Integer limit,QualityBug bug,String sortName,boolean asc);
 	
+	/**
+	 * 删除
+	 * @param bugId
+	 * @return
+	 */
+	Integer deleteBug(Integer bugId);
+	
 }

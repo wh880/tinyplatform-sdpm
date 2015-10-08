@@ -38,13 +38,7 @@ public class StoryManagerImpl implements StoryManager{
 		return story;
 	}
 
-	public int delete(Integer storyId) {
-		
-		ProductStory story = new ProductStory();
-		story.setStoryId(storyId);
-		story.setDeleted(FieldUtil.DELETE_YES);
-		return productStoryDao.edit(story);
-	}
+	
 
 	public int update(ProductStory story) {
 
@@ -87,6 +81,13 @@ public class StoryManagerImpl implements StoryManager{
 	public List<ProductStory> findList(ProductStory story) {
 		
 		return productStoryDao.query(story, null);
+	}
+
+
+
+	public Integer delete(Integer storyId) {
+		
+		return productStoryDao.softDelete(storyId) ;
 	}
 	
 	

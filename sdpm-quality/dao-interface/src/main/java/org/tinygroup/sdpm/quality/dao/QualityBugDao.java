@@ -21,5 +21,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 
 public interface QualityBugDao extends BaseDao<QualityBug,Integer> {
+	
+	Integer softDelete(Integer id);
 
 }
