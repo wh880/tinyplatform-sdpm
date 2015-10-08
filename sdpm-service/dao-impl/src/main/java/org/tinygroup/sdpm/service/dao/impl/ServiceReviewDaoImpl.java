@@ -64,6 +64,7 @@ public class ServiceReviewDaoImpl extends TinyDslDaoSupport implements ServiceRe
         if (serviceReview == null || serviceReview.getReviewId() == null) {
             return 0;
         }
+
         return getDslTemplate().update(serviceReview, new UpdateGenerateCallback<ServiceReview>() {
             public Update generate(ServiceReview t) {
                 Update update = update(SERVICE_REVIEWTABLE).set(
@@ -235,5 +236,14 @@ public class ServiceReviewDaoImpl extends TinyDslDaoSupport implements ServiceRe
             select.orderBy(orderByElements.toArray(new OrderByElement[0]));
         }
         return select;
+    }
+
+    public ServiceReview findByRequestId(Integer id) {
+        return getDslTemplate().getByKey(id, ServiceReview.class, new SelectGenerateCallback<Serializable>() {
+            @SuppressWarnings("rawtypes")
+            public Select generate(Serializable t) {
+                return selectFrom(SERVICE_REVIEWTABLE).where(SERVICE_REVIEWTABLE.CLIENT_REQUEST_ID.eq(t));
+            }
+        });
     }
 }

@@ -21,7 +21,7 @@ public interface StoryService {
 	 * @param storyId
 	 * @return
 	 */
-	int deleteStory(Integer storyId);
+	Integer deleteStory(Integer storyId);
 	
 	/**
 	 * 编辑
@@ -34,7 +34,7 @@ public interface StoryService {
 	 * @param stories
 	 * @return
 	 */
-	int[] updateBatchStory(List<ProductStory> stories);
+	int[] updateBatchStory(ProductStory[] stories);
 	/**
 	 * 根据需求ID查找
 	 * @param storyId

@@ -81,9 +81,9 @@
 
     <menu id="demand" parent-id="project" name="需求" href="/project/demand/index.page" icon="" sort="1" isShow="1">
         <menu id="rm-demand" name="需求移出" href="/" icon="icon-remove" sort="1" isShow="1" scope="demand-op"/>
-        <menu id="batch-distribute-task" name="分解任务" href="/project/task/add.page" icon="icon-smile" sort="1" isShow="1"
+        <menu id="batch-distribute-task" name="分解任务" href="/project/task/preadd" icon="icon-smile" sort="1" isShow="1"
               scope="demand-op"/>
-        <menu id="distribute-task" name="批量分解" href="/project/task/batchAdd.page" icon="icon-paste" sort="1" isShow="1"
+        <menu id="distribute-task" name="批量分解" href="/project/task/batchadd" icon="icon-paste" sort="1" isShow="1"
               scope="demand-op"/>
 
         <menu id="demand-menu" name="任务菜单" href="/project/demand/index.page" icon="" sort="1" isShow="1">
@@ -111,10 +111,9 @@
         <menu id="pro-version-look" name="查看bug" href="/project/bug/index.page" icon="icon-eye-open" sort="20"
               isShow="1"
               scope="pro-version-op"/>
-        <menu id="pro-version-edit" name="编辑版本" href="/project/version/edit.page" icon="icon-pencil" sort="15" isShow="1"
+        <menu id="pro-version-edit" name="编辑版本" href="/project/version/edit" icon="icon-pencil" sort="15" isShow="1"
               scope="pro-version-op"/>
-        <menu id="pro-version-delete" name="删除" href="" icon="icon-remove" sort="10" isShow="1"
-              scope="pro-version-op"/>
+
 
         <menu id="version-menu" name="任务菜单" href="/project/version/index.page" icon="" sort="1" isShow="1">
             <menu id="pro-version-report" name="新建版本" href="/project/version/add.page" icon="icon-plus" sort="8" isShow="1"
@@ -154,7 +153,8 @@
         </menu>
     </menu>
 
-    <menu id="product" parent-id="project" name="产品" href="/project/product/index.page" icon="" sort="1" isShow="1">
+    <menu id="product" parent-id="project" name="产品" href="/project/product/findLinkProduct" icon="" sort="1"
+          isShow="1">
     </menu>
 
     <menu id="survey" parent-id="project" name="概况" href="/project/survey/index.page" icon="" sort="1" isShow="1">

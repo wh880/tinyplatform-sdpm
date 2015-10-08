@@ -44,13 +44,24 @@
         #@validateDiv("col-2")#end
     #end
 
-    #@elementItem()
+##    #@elementItem()
+##    #@daterangepickerPosition()
+##        #@colLabel()日期：#end
+##        #@formControlDiv("col-6")
+####        	 #@dateMultipleSelect()
+####        	 #end
+##           #@tinyDateInput("holidayDate" holiday?.holidayDate "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end
+##        #end
+##        #@validateDiv("col-2")#end
+##    #end
+##    #end
+  #@elementItem()
     #@daterangepickerPosition()
         #@colLabel()日期：#end
         #@formControlDiv("col-6")
-##        	 #@dateMultipleSelect()
-##        	 #end
-           #@tinyDateInput("holidayDate" holiday?.holidayDate "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end
+        	 #@dateMultipleSelect("selectList" holiday?.holidayDate)
+        	 #end
+#*           #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end*#
         #end
         #@validateDiv("col-2")#end
     #end

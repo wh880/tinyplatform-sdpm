@@ -17,10 +17,17 @@
 package org.tinygroup.sdpm.service.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface ServiceRequestDao extends BaseDao<ServiceRequest, Integer> {
     Integer close(ServiceRequest clientRequest);
 
     Integer softDelete(Integer id);
+    Integer saveReply(ServiceRequest clientRequest);
+
+    Pager<ServiceRequest> queryPagerBy(int start, int limit, ServiceRequest t, Integer statues, OrderBy... orderArgs);
+
+    Integer changeStatus(Integer id);
 }

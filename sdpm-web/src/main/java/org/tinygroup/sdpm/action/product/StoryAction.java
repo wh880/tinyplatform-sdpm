@@ -1,6 +1,11 @@
 package org.tinygroup.sdpm.action.product;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,11 +67,21 @@ public class StoryAction extends BaseController{
     
     @ResponseBody
     @RequestMapping("/updateBatch")
-    public int[] updateBatch(@RequestBody List<ProductStory> stories){
+    public int[] updateBatch(@RequestBody ProductStory[] stories){
     	
     	return storyService.updateBatchStory(stories);
     }
     
+	@ResponseBody
+	@RequestMapping("/delete")
+	public Map delete(Integer storyId) {
+		storyService.deleteStory(storyId);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
+    }
+	
     @RequestMapping("/find")
     public String find(Integer storyId,Model model){
     	

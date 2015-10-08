@@ -77,4 +77,24 @@ public class HolidayManagerImpl implements HolidayManager {
 		
 	}
 
+	public int[] batchadd(List<Holiday> holidayList) {
+		// TODO Auto-generated method stub
+		return holidayDao.batchInsert(holidayList);
+	}
+
+	public Holiday findById(int id) {
+		// TODO Auto-generated method stub
+		return holidayDao.getByKey(id);
+	}
+
+	public List<Holiday> findByIds(Integer... ids) {
+		// TODO Auto-generated method stub
+		return holidayDao.findByKeys(ids);
+	}
+
+	public int[] batchSoftDelete(List<Holiday> list) {
+		// TODO Auto-generated method stub
+		return holidayDao.batchsoftdelete(list);
+	}
+
 }

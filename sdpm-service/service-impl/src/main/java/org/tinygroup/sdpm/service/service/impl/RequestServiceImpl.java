@@ -45,12 +45,16 @@ public class RequestServiceImpl implements RequestService {
         return requestManager.deleteBatch(id);
     }
 
-    public Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, ServiceRequest clientRequest) {
-        return requestManager.findPager(start, limit, clientRequest);
+    public Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, Integer status,ServiceRequest clientRequest) {
+        return requestManager.findPager(start, limit,status, clientRequest);
     }
 
     public Integer closeRequest(ServiceRequest clientRequest) {
         return requestManager.close(clientRequest);
+    }
+
+    public Integer saveReply(ServiceRequest clientRequest) {
+        return requestManager.saveReply(clientRequest);
     }
 
 

@@ -17,6 +17,7 @@
 package org.tinygroup.sdpm.product.dao.impl;
 
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
@@ -415,6 +416,9 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 	}
 
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		if(orderBies==null||orderBies.length==0){
+			return select;
+		}
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
 			OrderByElement tempElement = null;
@@ -479,4 +483,16 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			}
 		});
 	}
+	
+	public Integer softDelete(Integer id) {
+        return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
+            public Update generate(Integer id) {
+                Update update = update(PRODUCT_STORYTABLE).set(
+                		PRODUCT_STORYTABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
+                				PRODUCT_STORYTABLE.STORY_ID.eq(id));
+                return update;
+            }
+        });
+
+    }
 }

@@ -17,7 +17,6 @@ import java.util.List;
 public class ReviewManagerImpl implements ReviewManager{
     @Autowired
     private ServiceReviewDao reviewDao;
-
     public ServiceReview find(Integer id) {
         return reviewDao.getByKey(id);
     }
@@ -37,5 +36,9 @@ public class ReviewManagerImpl implements ReviewManager{
     public ServiceReview update(ServiceReview review) {
         reviewDao.edit(review);
         return review;
+    }
+
+    public ServiceReview findByRequestId(Integer id) {
+        return reviewDao.findByRequestId(id);
     }
 }

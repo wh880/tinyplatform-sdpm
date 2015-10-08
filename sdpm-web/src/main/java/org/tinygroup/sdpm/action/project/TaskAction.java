@@ -68,7 +68,7 @@ public class TaskAction extends BaseController {
         return "project/task/index.page";
     }
 
-    @RequestMapping("edit")
+    @RequestMapping("/edit")
     public String form(Integer taskId, Model model) {
         if (taskId != null) {
             ProjectTask task = taskService.findTask(taskId);
@@ -79,7 +79,7 @@ public class TaskAction extends BaseController {
         return "error";
     }
 
-    @RequestMapping("call")
+    @RequestMapping("/call")
     public String call(Integer taskId, Model model) {
         if (taskId != null) {
             ProjectTask task = taskService.findTask(taskId);
@@ -90,7 +90,7 @@ public class TaskAction extends BaseController {
         return "error";
     }
 
-    @RequestMapping("finish")
+    @RequestMapping("/finish")
     public String finish(Integer taskId, Model model) {
         if (taskId != null) {
             ProjectTask task = taskService.findTask(taskId);
@@ -101,7 +101,7 @@ public class TaskAction extends BaseController {
         return "error";
     }
 
-    @RequestMapping("note")
+    @RequestMapping("/note")
     public String note(Integer taskId, Model model) {
         if (taskId != null) {
             ProjectTask task = taskService.findTask(taskId);
@@ -112,14 +112,14 @@ public class TaskAction extends BaseController {
         return "error";
     }
 
-    @RequestMapping("close")
+    @RequestMapping("/close")
     public String close(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
         return "project/task/close.page";
     }
 
-    @RequestMapping("start")
+    @RequestMapping("/start")
     public String start(Integer taskId, Model model) {
         if (taskId != null) {
             ProjectTask task = taskService.findTask(taskId);
@@ -228,5 +228,15 @@ public class TaskAction extends BaseController {
 
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
         return "project/task/add.page";
+    }
+    @RequestMapping("/batchadd")
+    public String batchadd(Integer taskId, Model model) {
+        if (taskId != null) {
+            ProjectTask task = taskService.findTask(taskId);
+            model.addAttribute("task", task);
+            //还需要查询其他相关任务剩余时间的信息
+            return "project/task/batchAdd.page";
+        }
+        return "project/task/batchAdd.page";
     }
 }

@@ -49,19 +49,18 @@
     ##            #end
     ##        </div>
     <div style="text-align:right;margin:right">
-           #@aExtendButton("btn-primary btn-sm" TINY_CONTEXT_PATH+"/service/sla/form")编辑#end
-           #@delItemsdpm("#action" "id" "/service/client/clientProduct.page" {"class":"btn radius btn-danger btn-sm"})
-            删除#end
-    #* #foreach(m:menuManager.getScopeMenus("SlaContent"))
-         #if(m.id != "Sla_deleteContent")
-             #@aExtendButton(
-                 "btn-primary btn-sm" TINY_CONTEXT_PATH+m.href+"?id="+var.slaId "" "")编辑#end
-         #else
-             #@delItemsdpm(TINY_CONTEXT_PATH+m.href var?.slaId "" {
-                 "class":
-                 "btn radius btn-danger btn-sm"}) 删除#end
-         #end
-     #end*#
+    #*  #@aExtendButton("btn-primary btn-sm" TINY_CONTEXT_PATH+"/service/sla/form")编辑#end
+      #@delItemsdpm("#action" "id" "/service/client/clientProduct.page" {"class":"btn radius btn-danger btn-sm"})
+       删除#end*#
+        #foreach(m:menuManager.getScopeMenus("SlaContent"))
+            #if(m.id != "Sla_deleteContent")
+                #@aExtendButton(
+                    "btn-primary btn-sm" TINY_CONTEXT_PATH+m.href+"?id="+sla?.slaId "" "")编辑#end
+            #else
+                #@delItemsdpm(TINY_CONTEXT_PATH+m.href var?.slaId "" {
+                    "class":"btn radius btn-danger btn-sm"}) 删除#end
+            #end
+        #end
     </div>
     #end
 <div class="infoContent">

@@ -20,5 +20,5 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 
 public interface ProjectProductDao extends BaseDao<ProjectProduct, Integer> {
-
+    public int deleteByProjectId(Integer projectId);
 }

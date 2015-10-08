@@ -34,7 +34,7 @@ public interface BuildService {
      * @param projectBuild
      * @return
      */
-    public ProjectBuild updateBuild(ProjectBuild projectBuild);
+    public int updateBuild(ProjectBuild projectBuild);
 
     /**
      * 根据id删除
@@ -43,4 +43,12 @@ public interface BuildService {
      * @return
      */
     public Integer deleteBuild(Integer buildId);
+    /**
+     * 根据id查找
+     *
+     * @param buildId
+     * @return
+     */
+    public ProjectBuild findBuild(Integer buildId);
+
 }

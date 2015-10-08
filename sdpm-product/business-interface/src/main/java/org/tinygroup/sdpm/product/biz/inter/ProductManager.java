@@ -45,6 +45,13 @@ public interface ProductManager {
 	Product find(Integer productId);
 	
 	/**
+	 * 根据对象查找
+	 * @param product
+	 * @return
+	 */
+	List<Product> findList(Product product);
+	
+	/**
 	 * 根据对象查找(排序)
 	 * @param product
 	 * @return

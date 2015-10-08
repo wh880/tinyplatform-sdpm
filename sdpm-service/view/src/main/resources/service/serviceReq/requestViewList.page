@@ -9,49 +9,49 @@
 </style>
 #set(name="request")
 #@div()
-    #@tinyForm("thisform" "url" "post" {"class":""})
-
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/request/reviewSave" "post" {"class":""})
+    <input type="hidden" name="clientRequestId" value="${request?.clientRequestId}"/>
+    <input type="hidden" name="requester" value="${request?.requester}"/>
     <div style="width:70%;margin-left: 200px" class="pageleftpart">
         <div class="infoContent">
             <p class="titleName">回访</p>
-            #@elementItem()
 
+            #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>请求描述：</label></div>
 
                 <div class="col-9">
-                    <td></td>
+                    <td>${request?.requestSpec}</td>
                 </div>
                 #@validateDiv("col-2")#end
             #end
 
-            #@elementItem()
-                #@sdpmItem("联系人")
-                    #@Tselect2F()
-                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            #@tinyOptionItem("ch")请选择#end
-                            #@tinyOptionItem("zh")张三#end
-                            #@tinyOptionItem("en")李四#end
-                            #@tinyOptionItem("ta")习近平#end
-                        #end
-                    #end
-                #end
-            #end
+        #@elementItem()
+        <div class="col-12">
+            <div class="col-2 text-r"><label>联系人：</label></div>
+
+            <div class="col-9">
+                <td>${request?.requester}</td>
+            </div>
+            #@validateDiv("col-2")#end
+        #end
 
             #@elementItem()
                 #@sdpmItem("回访者" "*")
-                    #tinyInput("text" "回访者" ""{"datatype":"*","nullmsg":"回访者不能为空","id":"回复人员","class":"input-text"})
+                    #tinyInput(
+                        "text" "reviewer" review?.reviewer {"datatype":"*","nullmsg":"回访者不能为空","id":"回复人员","class":
+                        "input-text"})
                 #end
             #end
 
             #@elementItem()
                 #@sdpmItem("回访类型")
                     #@Tselect2F()
-                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("reviewType" review?.reviewType{"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             #@tinyOptionItem("ch")请选择#end
-                            #@tinyOptionItem("zh")类型1#end
-                            #@tinyOptionItem("en")类型2#end
-                            #@tinyOptionItem("ta")类型3#end
+                            #@tinyOptionItem("0")发放回访#end
+                            #@tinyOptionItem("1")拒绝需求回访#end
+                            #@tinyOptionItem("2")无修改需求回访#end
                         #end
                     #end
                 #end
@@ -59,11 +59,13 @@
             #@elementItem()
                 #@sdpmItem("回访评分" "*")
                     #@Tselect2F()
-                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("reviewScore" review?.reviewScore {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             #@tinyOptionItem("ch")请选择#end
-                            #@tinyOptionItem("zh")满意#end
-                            #@tinyOptionItem("en")一般#end
-                            #@tinyOptionItem("ta")不满意#end
+                            #@tinyOptionItem("0")很不满意#end
+                            #@tinyOptionItem("1")不满意#end
+                            #@tinyOptionItem("2")一般#end
+                            #@tinyOptionItem("3")满意#end
+                            #@tinyOptionItem("4")非常满意#end
                         #end
                     #end
                 #end
@@ -71,7 +73,7 @@
             #@elementItem()
                 #@sdpmItem("回访时间" "*")
                     #@tinyDateInput(
-                        "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+                        "reviewDate" formatDate(review?.reviewDate,"yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
                 #end
                 #@validateDiv("col-2")#end
             #end
@@ -81,7 +83,7 @@
                     <div class="col-2 text-r"><label><span class="c-red">*</span>回访描述：</label></div>
 
                     <div class="col-9">
-                        #@Teditor("content2" "content2" {"initialFrameHeight":"150"})Say something#end</div>
+                        #@Teditor("content2" "reviewSpec" {"initialFrameHeight":"150"})${review?.reviewSpec}#end</div>
                 </div>
                 #@validateDiv("col-2")#end
             #end
@@ -90,7 +92,7 @@
             #@elementItem()
                 #@colLabel()是否通过：#end
                 #@formControlDiv("col-8")
-                    #tinySwitcher("isvip" "是" "否") ##第二个为选中状态 第三参数为数据库返回时的数据
+                    #tinySwitcher("reviewResult" "1" "1") ##第二个为选中状态 第三参数为数据库返回时的数据
                 #end
             #end
 
@@ -113,60 +115,6 @@
     #end
 #end
 
-
-    <script type="text/javascript">
-
-        $(function () {
-
-            $("form[name=thisform").attr("action", '#link("/Validform_post.html")');
-            $("form[name=thisform").Validform({
-                tiptype: 2,
-                usePlugin: {
-                    //datepicker:{},//日期控件校验;
-                    passwordstrength: {
-                        minLen: 6,//设置密码长度最小值，默认为0;
-                        maxLen: 18,//设置密码长度最大值，默认为30;
-                        trigger: function (obj, error) {
-                            //该表单元素的keyup和blur事件会触发该函数的执行;
-                            //obj:当前表单元素jquery对象;
-                            //error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
-                            //console.log(error);
-                            if (error) {
-                                obj.parent().find(".Validform_checktip").show();
-                                obj.parent().find(".passwordStrength").hide();
-                            } else {
-                                obj.parent().find(".passwordStrength").show();
-                            }
-                        }
-                    }
-                },
-                ajaxPost: true,
-                beforeCheck: function (curform) {
-                    //在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
-                    //这里明确return false的话将不会继续执行验证操作;
-                },
-                beforeSubmit: function (curform) {
-                    //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
-                    //这里明确return false的话表单将不会提交;
-                },
-                callback: function (data) {
-                    if (data.status == "y") {
-                        setTimeout(function () {
-                            $.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
-                        }, 2000);
-                    }
-                    //返回数据data是json对象，{"info":"demo info","status":"y"}
-                    //info: 输出提示信息;
-                    //status: 返回提交数据的状态,是否提交成功。如可以用"y"表示提交成功，"n"表示提交失败，在Validform_post.html文件返回数据里自定字符，主要用在callback函数里根据该值执行相应的回调操作;
-                    //你也可以在Validform_post.html文件返回更多信息在这里获取，进行相应操作；
-                    //ajax遇到服务端错误时也会执行回调，这时的data是{ status:**, statusText:**, readyState:**, responseText:** }；
-
-                    //这里执行回调操作;
-                    //注意：如果不是ajax方式提交表单，传入callback，这时data参数是当前表单对象，回调函数会在表单验证全部通过后执行，然后判断是否提交表单，如果callback里明确return false，则表单不会提交，如果return true或没有return，则会提交表单。
-                }
-            });
-        });
-    </script>
     <script type="text/javascript">
         $(".select2").select2();
     </script>

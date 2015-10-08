@@ -26,6 +26,19 @@ import java.util.Date;
 public class ServiceRequest {
 	public static Integer DELETE_YES = 1;
 	public static Integer DELETE_NO = 0;
+	public static Integer CREATED = 0;
+	public static Integer DOING = 1;
+	public static Integer REJECTED = 2;
+	public static Integer TOPRODUCT = 3;
+	public static Integer PLANNED = 4;
+	public static Integer POSTPONED = 5;
+	public static Integer FINISHED = 6;
+	public static Integer RELEASED = 7;
+	public static Integer RETURNVISIT = 8;
+	public static Integer REOPEN = 9;
+	public static Integer CLOSE = 10;
+
+	private String clientName;
 	/**
 	 * 请求ID
 	 *
@@ -235,6 +248,14 @@ public class ServiceRequest {
 
 	public ServiceRequest() {
 		setDeleted(DELETE_NO);
+	}
+
+	public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
 	}
 
 	public Integer getClientRequestId() {

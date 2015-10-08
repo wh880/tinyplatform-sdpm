@@ -58,8 +58,14 @@ public class ProductManagerImpl implements ProductManager{
 
 		return productDao.batchUpdate(products);
 	}
-
+	
+	public List<Product> findList(Product product){
+		
+		return productDao.query(product, null);
+	}
+	
 	public List<Product> findList(Product product, String order,String ordertype) {
+		
 		
 		return productDao.query(product,  new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}

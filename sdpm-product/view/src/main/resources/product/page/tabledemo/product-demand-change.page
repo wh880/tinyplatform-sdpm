@@ -13,10 +13,10 @@
 		
 			var vm = this.checked;
 			if(vm==true){
-				$("select[name='reviewed']").attr("disabled","disabled");
+				$("select[name='storyReviewedBy']").attr("disabled","disabled");
 			}
 			if(vm==false){
-				$("select[name='reviewed']").removeAttr("disabled");
+				$("select[name='storyReviewedBy']").removeAttr("disabled");
 			}
 			
 			

@@ -16,7 +16,7 @@ public interface BuildManager {
      * @param id 主键
      * @return
      */
-    ProjectBuild find(String id);
+    ProjectBuild find(Integer id);
 
     /**
      * 根据条件查询List

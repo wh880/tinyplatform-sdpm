@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.system;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +28,7 @@ public class EffortAction extends BaseController{
 	@Autowired
 	private EffortService effortService;
 	@RequestMapping("list")
-	public String list(SystemEffort effort,Model model){
+	public String list(int taskId,SystemEffort effort,Model model){
 		String order="effort_date";
 		String orderTpye="desc";
 		List<SystemEffort> list = effortService.findList(effort, order, orderTpye);
@@ -39,12 +41,17 @@ public class EffortAction extends BaseController{
 		else{
 			effortList=list;
 		}
+		model.addAttribute("taskId", taskId);
 		model.addAttribute("list", effortList);
 		return "project/task/note.page";
 		
 	}
 	@RequestMapping("save")
 	public String add(SystemEffort systemEffort,Model model){
+		if(systemEffort.getEffortId()==null){
+			
+		systemEffort.setEffortBegin(new SimpleDateFormat("yyyy-MM-dd").format(systemEffort.getEffortDate()));
+		}
 		effortService.save(systemEffort);
 		return "project/note/notetable.page";
 	}
@@ -79,5 +86,18 @@ public class EffortAction extends BaseController{
 			}
 		}
 		return maplist;
+	}
+	@RequestMapping("batchDelete")
+	public Map<String, String> batchDelete(String ids){
+		String[] sids = ids.split(",");
+		Integer[] intIds = new Integer[sids.length];
+		for(int i=0;i<sids.length;i++){
+			intIds[i] = Integer.valueOf(sids[i]);
+		} 
+		effortService.batchDelete(intIds);
+		Map<String, String> map = new HashedMap();
+		map.put("info", "success");
+	   	map.put("status","y" );
+   		return map;
 	}
 }

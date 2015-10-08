@@ -22,7 +22,7 @@ public class StoryServiceImpl implements StoryService {
 		return storyManager.add(story, storySpec);
 	}
 
-	public int deleteStory(Integer storyId) {
+	public Integer deleteStory(Integer storyId) {
 
 		return storyManager.delete(storyId);
 	}
@@ -37,7 +37,7 @@ public class StoryServiceImpl implements StoryService {
 		return storyManager.find(storyId);
 	}
 
-	public int[] updateBatchStory(List<ProductStory> stories) {
+	public int[] updateBatchStory(ProductStory[] stories) {
 		
 		return storyManager.updateBatch(stories);
 	}

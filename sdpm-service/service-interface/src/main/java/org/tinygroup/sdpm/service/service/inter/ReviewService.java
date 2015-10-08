@@ -47,4 +47,19 @@ public interface ReviewService {
      * @return
      */
     ServiceReview updateReview(ServiceReview review);
+    /**
+     * 根据请求ID找到回访记录
+     *
+     * @param
+     * @return
+     */
+    ServiceReview findReviewByRequestId(Integer id);
+
+    /**
+     * 根据status改变request表中的状态
+     *
+     * @param
+     * @return
+     */
+    Integer changeStatus(Integer requestId);
 }

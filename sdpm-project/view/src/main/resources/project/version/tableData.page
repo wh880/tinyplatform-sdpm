@@ -11,6 +11,7 @@
 #setTinyItemCount(records)
 #foreach(b : buildPager.getRecords())
     #@tr()
+
         #@td()<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page">${b?.buildId}</a>#end
         #@td()${b?.buildProduct}#end
         #@td()<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page">${b?.buildName}#end
@@ -21,7 +22,7 @@
         #@td()
             #foreach(m:menuManager.getScopeMenus("pro-version-op"))
                 #if(m.id != "pro-version-delete")
-                <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                <a href="${TINY_CONTEXT_PATH}${m.href}?buildId=${b?.buildId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
                     #@delItemsdpm(m.href 5)#buttonIcon(iconClass=m.icon)#end
                 #end

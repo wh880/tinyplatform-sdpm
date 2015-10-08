@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.project.biz.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,10 +9,9 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.dao.ProjectDao;
+import org.tinygroup.sdpm.project.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
-
-import java.util.List;
 
 /**
  * Created by shenly13343 on 2015-09-18.
@@ -62,4 +63,19 @@ public class ProjectManagerImpl implements ProjectManager {
         project.setProjectDeleted(project.DELETE_YES);
         return projectDao.edit(project);
     }
+
+	public Project find(Integer projectId) {
+		
+		return projectDao.getByKey(projectId);
+	}
+
+	public List<Project> findList(Project project, String order, String ordertype) {
+		
+		return projectDao.query(project,new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+	}
+
+	public Pager<Project> findPager(int start, int limit, Project project, String order, String ordertype) {
+		
+		return projectDao.queryPager((start-1)*limit, limit, project, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+	}
 }

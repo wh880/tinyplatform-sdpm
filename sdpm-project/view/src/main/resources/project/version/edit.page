@@ -21,7 +21,12 @@
 	#end
 #end
 
-#@tinyForm("thisform" "" "" {"class":"test","enctype":"multipart/form-data"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/version/editsave" "" {"class":"test","enctype":"multipart/form-data"})
+	#hiddenInput(hiddenInputName="buildId" hiddenInputValue=build?.buildId)
+	#hiddenInput(hiddenInputName="buildName" hiddenInputValue=build?.buildName)
+	#hiddenInput(hiddenInputName="buildScmPath" hiddenInputValue=build?.buildScmPath)
+	#hiddenInput(hiddenInputName="buildFilePath" hiddenInputValue=build?.buildFilePath)
+
 
 
 ##<div style="width:100%;float:left" class="pageleftpart">
@@ -31,14 +36,14 @@
 	#@elementItem()
 		#@sdpmItem("产品")
 			#@Tselect2F()
-				#@Tselect2Body("buildProduct" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="IN">Indiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
+				#@Tselect2Body("buildProduct" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
 				#end
 			##填写任意内容，侦听需重新填加 A侦听已内置
 				#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
