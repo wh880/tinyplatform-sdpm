@@ -30,10 +30,10 @@
                         "clientId" "sla.clientId" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项*#
                         #@Tselect2Body(
                             "clientId" sla?.clientId{"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="0">恒生</option>
-                            <option value="1">云融</option>
-                            <option value="2">阿里</option>
-                            <option value="3">网易</option>
+                            #@tinyOptionItem("ch")请选择#end
+                            #foreach(l:list)
+                                #@tinyOptionItem(l.clientId)${l?.clientName}#end
+                            #end
                         #end
                         #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/form"
                                           class="r ">增加</a>#end
@@ -44,6 +44,7 @@
                 #@sdpmItem("产品名称" "*")
                     #@tinySelect(
                         "productId" sla?.productId {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        #@tinyOptionItem("ch")请选择#end
                         #@tinyOptionItem("0")支付宝#end
                         #@tinyOptionItem("1")余额宝#end
                         #@tinyOptionItem("2")财付通#end
@@ -63,6 +64,7 @@
                 #@sdpmItem("服务级别" "*")
                     #@tinySelect(
                         "serviceLevel" sla?.serviceLevel{"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        #@tinyOptionItem("ch")请选择#end
                         #@tinyOptionItem("0")基础#end
                         #@tinyOptionItem("1")潜力#end
                         #@tinyOptionItem("2")核心#end
@@ -122,6 +124,7 @@
                 #@sdpmItem("服务级别协议" "*")
                     #@tinySelect(
                         "slaStatus" sla?.slaStatus {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        #@tinyOptionItem("ch")请选择#end
                         #@tinyOptionItem("0")新建#end
                         #@tinyOptionItem("1")生效#end
                         #@tinyOptionItem("2")到期#end
