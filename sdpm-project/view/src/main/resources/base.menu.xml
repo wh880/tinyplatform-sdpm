@@ -154,7 +154,8 @@
         </menu>
     </menu>
 
-    <menu id="product" parent-id="project" name="产品" href="/project/product/index.page" icon="" sort="1" isShow="1">
+    <menu id="product" parent-id="project" name="产品" href="/project/product/findLinkProduct" icon="" sort="1"
+          isShow="1">
     </menu>
 
     <menu id="survey" parent-id="project" name="概况" href="/project/survey/index.page" icon="" sort="1" isShow="1">

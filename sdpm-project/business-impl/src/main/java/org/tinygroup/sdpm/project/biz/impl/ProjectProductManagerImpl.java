@@ -7,6 +7,7 @@ import org.tinygroup.sdpm.project.biz.inter.ProjectProductManager;
 import org.tinygroup.sdpm.project.dao.ProjectProductDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,15 +19,21 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
     @Autowired
     private ProjectProductDao projectProductDao;
 
-    public List<ProjectProduct> findProductList(int projectId) {
-        ProjectProduct projectProduct = new ProjectProduct();
-        projectProduct.setProjectId(projectId);
-        return projectProductDao.query(projectProduct);
+    public void addLink(Integer[] array, Integer projectId) {
+        projectProductDao.deleteByProjectId(projectId);
+        List<ProjectProduct> list = new ArrayList<ProjectProduct>();
+        for (Integer productId : array) {
+            ProjectProduct t = new ProjectProduct();
+            t.setProjectId(projectId);
+            t.setProductId(productId);
+            list.add(t);
+        }
+        if (list != null || !list.isEmpty()) {
+            projectProductDao.batchInsert(list);
+        }
     }
 
-    public List<ProjectProduct> findProjcetList(int productId) {
-        ProjectProduct projectProduct = new ProjectProduct();
-        projectProduct.setProductId(productId);
+    public List<ProjectProduct> findList(ProjectProduct projectProduct) {
         return projectProductDao.query(projectProduct);
     }
 
