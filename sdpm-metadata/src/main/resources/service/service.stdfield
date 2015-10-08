@@ -54,8 +54,8 @@ Priority:0-low,1-common,2-urgent</description>
     <description>服务请求逻辑编号</description>
   </standard-field>
   <standard-field id="d2a7fc5ffb494f0a9b6198d6d4cabeb8" name="release_request" title="关联用户需求单" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
-  <standard-field id="ce78d2a1b7a840d298da9e7367125394" name="review_score" title="回访评分" business-type-id="ccd3e83b1cae428987599fb95985fa70">
-    <description>0很不满意，2不满意，3一般，4满意，5非常满意&#xd;
+  <standard-field id="ce78d2a1b7a840d298da9e7367125394" name="review_score" title="回访评分" business-type-id="ccd3e83b1cae428987599fb95985fa70" default="">
+    <description>0很不满意，1不满意，2一般，3满意，4非常满意&#xd;
 </description>
   </standard-field>
   <standard-field id="61a2377884014234b2a9d53d080692f8" name="request_reply_date" title="请求回复时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>

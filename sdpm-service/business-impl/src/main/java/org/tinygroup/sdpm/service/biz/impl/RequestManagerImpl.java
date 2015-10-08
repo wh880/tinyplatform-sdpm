@@ -51,11 +51,15 @@ public class RequestManagerImpl implements RequestManager{
         return requestDao.deleteByKeys(id);
     }
 
-    public Pager<ServiceRequest> findPager(Integer start, Integer limit, ServiceRequest serviceRequest) {
-        return requestDao.queryPager(start, limit, serviceRequest);
+    public Pager<ServiceRequest> findPager(Integer start, Integer limit,  Integer status,ServiceRequest serviceRequest) {
+        return requestDao.queryPagerBy(start, limit,serviceRequest,status);
     }
 
     public Integer close(ServiceRequest clientRequest) {
         return requestDao.close(clientRequest);
+    }
+
+    public Integer saveReply(ServiceRequest clientRequest) {
+        return requestDao.saveReply(clientRequest);
     }
 }

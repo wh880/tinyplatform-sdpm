@@ -236,4 +236,13 @@ public class ServiceReviewDaoImpl extends TinyDslDaoSupport implements ServiceRe
         }
         return select;
     }
+
+    public ServiceReview findByRequestId(Integer id) {
+        return getDslTemplate().getByKey(id, ServiceReview.class, new SelectGenerateCallback<Serializable>() {
+            @SuppressWarnings("rawtypes")
+            public Select generate(Serializable t) {
+                return selectFrom(SERVICE_REVIEWTABLE).where(SERVICE_REVIEWTABLE.CLIENT_REQUEST_ID.eq(t));
+            }
+        });
+    }
 }

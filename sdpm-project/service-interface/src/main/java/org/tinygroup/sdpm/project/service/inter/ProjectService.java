@@ -1,9 +1,9 @@
 package org.tinygroup.sdpm.project.service.inter;
 
-import org.tinygroup.sdpm.project.dao.pojo.Project;
-import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.tinysqldsl.Pager;
 
 /**
  * Created by shenly13343 on 2015-09-17.
@@ -15,7 +15,7 @@ public interface ProjectService {
      * @param project
      * @return
      */
-    public Project add(Project project);
+     Project addProject(Project project);
 
     /**
      * 查找所有项目
@@ -59,4 +59,27 @@ public interface ProjectService {
      * @return
      */
     public List<Project> findByProjectList(List<Integer> list);
+    
+    /**
+     * 对象查询(排序)
+     * @param productLine
+     * @param order
+     * @param ordertype
+     * @return
+     */
+	List<Project> findProjectList(Project project,String order,String ordertype);
+	
+	
+	/**
+	 * 分页查询(排序)
+	 * @param page
+	 * @param pagesize
+	 * @param productLine
+	 * @param order
+	 * @param ordertype
+	 * @return
+	 */
+	Pager<Project> findProjectPager(int page,int pagesize,Project project,String order,String ordertype);
+
+
 }

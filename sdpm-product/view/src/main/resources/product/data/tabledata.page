@@ -12,7 +12,8 @@
 				var inputvalue = $(this).html().trim();
 				var storyList = new Array();
 				$("input[type='checkbox']").each(function(){
-					if(this.checked==true){
+					
+					if(this.checked==true&&this.id!="checkboxall"){
 						var storyid = $(this).val();
 						if("storyAssignedTo"==inputname){
 							storyList.push({storyId:storyid,storyAssignedTo:inputvalue});
@@ -20,24 +21,25 @@
 					}
 					
 				});
+	
+				if(storyList.length>0){
+					$.ajax({
+						type: "POST",
+						url: "${TINY_CONTEXT_PATH}/product/story/updateBatch",
+					   	data: JSON.stringify(storyList),//将对象序列化成JSON字符串
+					   	dataType:"json",
+					   	contentType : 'application/json;charset=utf-8', //设置请求头信息
+						success: function(data){
+							
+							alert('success');
+							window.location.reload(); 
+						},
+						error: function(res){
+							alert("失败");
+						}
+					});
+				}
 				
-				alert(JSON.stringify(storyList));
-				
-				$.ajax({
-					type: "POST",
-					url: "${TINY_CONTEXT_PATH}/product/story/updateBatch",
-				   	data: JSON.stringify(storyList),//将对象序列化成JSON字符串
-				   	dataType:"json",
-				   	contentType : 'application/json;charset=utf-8', //设置请求头信息
-					success: function(data){
-						
-						alert('success');
-						window.location.reload(); 
-					},
-					error: function(res){
-						alert(res);
-					}
-				});
 																		
 								
 				

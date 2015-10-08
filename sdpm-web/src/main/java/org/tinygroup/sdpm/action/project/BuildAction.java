@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -29,4 +30,22 @@ public class BuildAction extends BaseController {
         model.addAttribute("buildPager", pager);
         return "project/version/tableData.pagelet";
     }
+    @RequestMapping("add")
+    public String form(Integer taskId, Model model) {
+        if (taskId != null) {
+            return "project/task/add.page";
+        }
+        return "error";
+    }
+
+    @RequestMapping("batchadd")
+    public String call(Integer taskId, Model model) {
+        if (taskId != null) {
+
+            return "project/task/batchAdd.page";
+        }
+        return "error";
+    }
+
+
 }

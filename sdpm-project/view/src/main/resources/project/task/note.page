@@ -8,7 +8,7 @@
     #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue=task?.taskStatus)
     #hiddenInput(hiddenInputName="effortId" hiddenInputValue=effort?.effortId)
     #hiddenInput(hiddenInputName="effortObjectType" hiddenInputValue="task")
-     #hiddenInput(hiddenInputName="effortObjectId" hiddenInputValue="1")
+    #hiddenInput(hiddenInputName="effortObjectId" hiddenInputValue=taskId)
 ##若改为弹出框，table的样式需要修改为无边框样式
     #@tableBordered("table-border")
         #@thead()
