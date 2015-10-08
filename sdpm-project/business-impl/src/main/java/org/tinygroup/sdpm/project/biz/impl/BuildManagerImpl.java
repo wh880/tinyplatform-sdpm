@@ -21,6 +21,10 @@ public class BuildManagerImpl implements BuildManager {
     @Autowired
     private ProjectBuildDao projectBuildDao;
 
+    public Integer softDelete(ProjectBuild build) {
+        return projectBuildDao.softDelete(build);
+    }
+
     public ProjectBuild find(Integer id) {
         return projectBuildDao.getByKey(id);
     }

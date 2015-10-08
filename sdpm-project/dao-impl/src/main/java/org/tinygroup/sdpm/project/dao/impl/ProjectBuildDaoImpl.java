@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
-import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
@@ -46,6 +45,8 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @LogClass("build")
 @Repository
 public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBuildDao {
+
+
 	@LogMethod("add")
 	public ProjectBuild add(ProjectBuild projectBuild) {
 		return getDslTemplate().insertAndReturnKey(projectBuild, new InsertGenerateCallback<ProjectBuild>() {
@@ -100,6 +101,13 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 
 		return 0;
 	}
+
+	public Integer softDelete(ProjectBuild build) {
+		Update update = update(PROJECT_BUILDTABLE).set(PROJECT_BUILDTABLE.BUILD_DELETED.value(build.getBuildDeleted()))
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(build.getBuildId()));
+		return getDslSession().execute(update);
+	}
+
 	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk) {
 		if (pk == null) {
