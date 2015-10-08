@@ -34,7 +34,7 @@ public interface StoryManager {
 	 * @param stories
 	 * @return
 	 */
-	int[] updateBatch(List<ProductStory> stories);
+	int[] updateBatch(ProductStory[] stories);
 	/**
 	 * 根据需求ID查找
 	 * @param storyId

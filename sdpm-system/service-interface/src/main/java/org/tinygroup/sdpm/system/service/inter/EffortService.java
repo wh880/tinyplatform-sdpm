@@ -63,6 +63,10 @@ public interface EffortService {
 	  * @return
 	  */
 	 List<SystemEffort> findList(SystemEffort systemEffort,String order,String orderTpye);
-	 
-	
+	 /**
+	  * 批量删除
+	  * @param ids
+	  * @return
+	  */
+	 int batchDelete(Integer...ids);
 }

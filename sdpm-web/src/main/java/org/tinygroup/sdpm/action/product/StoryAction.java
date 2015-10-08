@@ -1,5 +1,8 @@
 package org.tinygroup.sdpm.action.product;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,7 +65,9 @@ public class StoryAction extends BaseController{
     
     @ResponseBody
     @RequestMapping("/updateBatch")
-    public int[] updateBatch(@RequestBody List<ProductStory> stories){
+    public int[] updateBatch(@RequestBody ProductStory[] stories){
+    	int o = stories.length;
+    	
     	
     	return storyService.updateBatchStory(stories);
     }

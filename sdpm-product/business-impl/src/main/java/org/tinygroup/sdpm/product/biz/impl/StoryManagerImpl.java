@@ -14,6 +14,8 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -54,9 +56,14 @@ public class StoryManagerImpl implements StoryManager{
 		return productStoryDao.getByKey(storyId);
 	}
 
-	public int[] updateBatch(List<ProductStory> stories) {
+	public int[] updateBatch(ProductStory[] stories) {
 		
-		return productStoryDao.batchUpdate(stories);
+		List<ProductStory>  productStories = new ArrayList<ProductStory>();
+    	if(stories!=null&&stories.length>0){
+    		productStories = Arrays.asList(stories);
+    	}
+		
+		return productStoryDao.batchUpdate(productStories);
 	}
 
 	public List<ProductStory> findList(ProductStory story,String order,String ordertype) {

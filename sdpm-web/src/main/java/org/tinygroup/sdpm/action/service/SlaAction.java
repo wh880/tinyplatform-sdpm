@@ -31,6 +31,9 @@ public class SlaAction extends BaseController {
             ServiceSla sla = slaService.findSla(id);
             model.addAttribute("sla", sla);
         }
+        ServiceClient client = new ServiceClient();
+        List<ServiceClient> list = clientService.getClientList(client);
+        model.addAttribute("list", list);
         return "/service/sla/slaAdd.page";
     }
 
@@ -69,7 +72,7 @@ public class SlaAction extends BaseController {
         return map;
     }
 
-    /* 协议下面，点击“客户ID”进入*/
+    /* 协议里面，点击“详情”进入*/
     @RequestMapping(value = "/slaClient")
     public String showClient(Integer id, Model model) {
         List<ServiceSla> slas = slaService.findSlaBySlaId(id);
@@ -79,7 +82,7 @@ public class SlaAction extends BaseController {
         return "service/sla/clientsla.page";
     }
 
-    /*下面是协议里面，点击“详情”页面后的“编辑”和“删除”*/
+    /*下面是协议里面，点击“详情”里面“编辑”和“删除”*/
     @RequestMapping(value = "/slaEdit")
     public String slaEdit(Integer id, Model model) {
         if (id != null) {
@@ -120,5 +123,15 @@ public class SlaAction extends BaseController {
         }
         return "/service/sla/slaAdd.page";
     }
-    /*协议的“客户名称”*/
+
+    @ResponseBody
+    @RequestMapping(value = "/slaContentDelete")
+    public Map slaTitleDelete(Integer id) {
+        slaService.deleteSla(id);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "y");
+        map.put("info", "删除成功");
+        return map;
+    }
+    /*协议的“客户名称”跳转到客户，根据徐丹阳的页面来的*/
 }
