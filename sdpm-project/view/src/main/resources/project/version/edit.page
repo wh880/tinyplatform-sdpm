@@ -24,6 +24,8 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/version/editsave" "" {"class":"test","enctype":"multipart/form-data"})
 	#hiddenInput(hiddenInputName="buildId" hiddenInputValue=build?.buildId)
 	#hiddenInput(hiddenInputName="buildName" hiddenInputValue=build?.buildName)
+	#hiddenInput(hiddenInputName="buildScmPath" hiddenInputValue=build?.buildScmPath)
+	#hiddenInput(hiddenInputName="buildFilePath" hiddenInputValue=build?.buildFilePath)
 
 
 

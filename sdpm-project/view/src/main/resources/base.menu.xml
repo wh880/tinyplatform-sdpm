@@ -113,8 +113,7 @@
               scope="pro-version-op"/>
         <menu id="pro-version-edit" name="编辑版本" href="/project/version/edit" icon="icon-pencil" sort="15" isShow="1"
               scope="pro-version-op"/>
-        <menu id="pro-version-delete" name="删除" href="" icon="icon-remove" sort="10" isShow="1"
-              scope="pro-version-op"/>
+
 
         <menu id="version-menu" name="任务菜单" href="/project/version/index.page" icon="" sort="1" isShow="1">
             <menu id="pro-version-report" name="新建版本" href="/project/version/add.page" icon="icon-plus" sort="8" isShow="1"
