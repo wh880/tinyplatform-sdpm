@@ -35,7 +35,7 @@
                             <option value="2">阿里</option>
                             <option value="3">网易</option>
                         #end
-                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/clientAdd.page"
+                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/form"
                                           class="r ">增加</a>#end
                     #end
                 #end
