@@ -10,8 +10,6 @@ import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.tinysqldsl.Pager;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * Created by shenly13343 on 2015-09-21.
  */
