@@ -16,10 +16,12 @@
 <input type="hidden" name="clientId" value="${clientUser?.clientId}"/>
     #@noRespsGridSystem()
             #@gridSysRow()
+            <span class="c-red">${star}</span>
                 #@colLabel("col-3")客户联系人：#end
                 #@gridSysCol(5)
-                    #tinyInput("text" "userAccount" clientUser?.userAccount {"datatype":"","id":"user_account","class":
-                        "input-text"})
+                    #tinyInput("text" "userAccount" clientUser?.userAccount {"datatype":"*","nullmsg":"客户联系人不能为空","id":
+                        "user_account",
+                        "class":""})
                 #end
             #end
             #@gridSysRow()

@@ -26,6 +26,7 @@ import java.util.Date;
 public class ServiceRequest {
 	public static Integer DELETE_YES = 1;
 	public static Integer DELETE_NO = 0;
+	private String clientName;
 	/**
 	 * 请求ID
 	 *
@@ -235,6 +236,14 @@ public class ServiceRequest {
 
 	public ServiceRequest() {
 		setDeleted(DELETE_NO);
+	}
+
+	public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
 	}
 
 	public Integer getClientRequestId() {

@@ -26,12 +26,14 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.tinygroup.sdpm.service.dao.constant.ServiceClientTable.SERVICE_CLIENTTABLE;
 import static org.tinygroup.sdpm.service.dao.constant.ServiceRequestTable.SERVICE_REQUESTTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
@@ -441,7 +443,8 @@ public class ServiceRequestDaoImpl extends TinyDslDaoSupport implements ServiceR
         return getDslTemplate().queryPager(start, limit, serviceRequest, false, new SelectGenerateCallback<ServiceRequest>() {
 
             public Select generate(ServiceRequest t) {
-                Select select = MysqlSelect.selectFrom(SERVICE_REQUESTTABLE).where(
+                Select select = MysqlSelect.selectFrom(SERVICE_REQUESTTABLE).join(
+                        Join.leftJoin(SERVICE_CLIENTTABLE, SERVICE_REQUESTTABLE.CLIENT_ID.eq(SERVICE_CLIENTTABLE.CLIENT_ID))).where(
                         and(
                                 SERVICE_REQUESTTABLE.PRODUCT_ID.eq(t.getProductId()),
                                 SERVICE_REQUESTTABLE.MODULE_ID.eq(t.getModuleId()),
