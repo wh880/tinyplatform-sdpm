@@ -35,11 +35,11 @@
     <table-field standard-field-id="7f7e1f2fb38a47c5b2e3b08dba7e8ce8" primary="true" unique="true" not-null="true" id="org_dept_id" auto-increase="true"/>
     <table-field standard-field-id="6733cc238cea46378fa1eb9c6d03be56" primary="false" unique="false" not-null="true" id="org_dept_name" auto-increase="false"/>
     <table-field standard-field-id="9ba50db58dad450fad33c88ab44967f9" primary="false" unique="false" not-null="true" id="org_dept_parent" auto-increase="false"/>
-    <table-field standard-field-id="1b27dc18ebce48b68616feb689ae7744" primary="false" unique="false" not-null="true" id="org_dept_path" auto-increase="false"/>
-    <table-field standard-field-id="cdeb079d5e57484d975ea7e9fe8740ae" primary="false" unique="false" not-null="true" id="org_dept_grade" auto-increase="false"/>
-    <table-field standard-field-id="14a373b325f8473db17dc99cec5de9b9" primary="false" unique="false" not-null="true" id="org_dept_order" auto-increase="false"/>
-    <table-field standard-field-id="9de62ab4d83a4dc2972a8ffb90b2c225" primary="false" unique="false" not-null="true" id="org_dept_position" auto-increase="false"/>
-    <table-field standard-field-id="9c70d54486424630a724f8c01530d8c6" primary="false" unique="false" not-null="true" id="org_dept_manager" auto-increase="false"/>
+    <table-field standard-field-id="1b27dc18ebce48b68616feb689ae7744" primary="false" unique="false" not-null="false" id="org_dept_path" auto-increase="false"/>
+    <table-field standard-field-id="cdeb079d5e57484d975ea7e9fe8740ae" primary="false" unique="false" not-null="false" id="org_dept_grade" auto-increase="false"/>
+    <table-field standard-field-id="14a373b325f8473db17dc99cec5de9b9" primary="false" unique="false" not-null="false" id="org_dept_order" auto-increase="false"/>
+    <table-field standard-field-id="9de62ab4d83a4dc2972a8ffb90b2c225" primary="false" unique="false" not-null="false" id="org_dept_position" auto-increase="false"/>
+    <table-field standard-field-id="9c70d54486424630a724f8c01530d8c6" primary="false" unique="false" not-null="false" id="org_dept_manager" auto-increase="false"/>
   </table>
   <table id="50a09faa7598459b8654ba86b6e7e5bc" name="org_company" title="公司表" package-name="">
     <description></description>

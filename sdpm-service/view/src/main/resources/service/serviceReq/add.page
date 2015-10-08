@@ -124,7 +124,7 @@
                 #@Tselect2F()
                     #@Tselect2Body("requestStatus" request?.requestStatus {"class":
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("1")请选择#end
+                        #@tinyOptionItem("ch")请选择#end
                         #@tinyOptionItem("0")新建#end
                         #@tinyOptionItem("6")待回访#end
                         #@tinyOptionItem("8")已回访#end
