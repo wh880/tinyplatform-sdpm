@@ -10,7 +10,7 @@
 
 #for(l:effortPager.records)
 #@tr()
-    #@td()<input type="checkbox" value="1" name="idCheck">#end
+    #@td()<input type="checkbox" value="${l?.effortId}" name="idCheck">#end
 	#@td()${l?.effortId}#end
 	#@td()${l?.effortDate}#end
 	#@td()${l?.effortAccount}#end

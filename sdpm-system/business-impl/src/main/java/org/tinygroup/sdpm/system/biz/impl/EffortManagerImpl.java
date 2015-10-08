@@ -17,6 +17,8 @@ import org.tinygroup.tinysqldsl.Pager;
 public class EffortManagerImpl implements EffortManager {
 	@Autowired
     private SystemEffortDao systemEffortDao;
+	
+	
 	public SystemEffort add(SystemEffort systemEffort) {
 		// TODO Auto-generated method stub
 		return systemEffortDao.add(systemEffort);
@@ -78,6 +80,11 @@ public class EffortManagerImpl implements EffortManager {
 			String orderType) {
 		// TODO Auto-generated method stub
 		return systemEffortDao.query(systemEffort, new OrderBy(order, !("desc".equals(orderType))?true:false));
+	}
+
+	public int batchDelete(Integer... ids) {
+		// TODO Auto-generated method stub
+		return systemEffortDao.deleteByKeys(ids);
 	}
 
 //public List<SystemEffort> findBetweenDate(Date begindate, Date enddate) {

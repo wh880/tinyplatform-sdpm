@@ -20,6 +20,11 @@
 			<artifactId>sdpm-system-business-interface</artifactId>
 			<version>${project.version}</version>
 	</dependency>
+	<dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>sdpm-project-business-interface</artifactId>
+			<version>${project.version}</version>
+	</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
