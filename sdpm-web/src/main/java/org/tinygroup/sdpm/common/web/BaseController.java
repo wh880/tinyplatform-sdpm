@@ -8,6 +8,7 @@ import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
 import org.tinygroup.sdpm.common.beanvalidator.BeanValidators;
 import org.tinygroup.sdpm.common.util.DateUtils;
+import org.tinygroup.sdpm.system.service.inter.LogService;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
@@ -26,6 +27,11 @@ public abstract class BaseController {
      */
     protected Logger logger = LoggerFactory.getLogger(BaseController.class);
 
+    /**
+     * 动态记录对象
+     */
+    @Autowired
+    protected LogService logService;
     /**
      * 验证Bean实例对象
      */

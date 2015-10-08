@@ -1,10 +1,5 @@
 package org.tinygroup.sdpm.action.product;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
-import org.tinygroup.sdpm.common.util.sql.SearchInfos;
+import org.tinygroup.sdpm.common.log.LogPrepareUtil;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
@@ -26,7 +23,10 @@ import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.Date;
 
 @Controller
 @RequestMapping("/product/story")
@@ -57,9 +57,16 @@ public class StoryAction extends BaseController{
     }
     
     @RequestMapping("/update")
-    public String update(ProductStory productStory){
-    	
+    public String update(ProductStory productStory, String operateType){
     	storyService.updateStory(productStory);
+        ProductStory story = storyService.findStory(productStory.getStoryId());
+        OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute("user");
+        SystemAction action = new SystemAction();
+        action.setActionDate(new Date());
+        action.setActionObjectId(productStory.getStoryId());
+        action.setActionObjectType("story");
+        action.setActionActor(user != null?user.getOrgUserId():"0");
+        logService.log(story,productStory,action);
     	return "redirect:" + "/product/page/project/togglebox.page";
     }
     

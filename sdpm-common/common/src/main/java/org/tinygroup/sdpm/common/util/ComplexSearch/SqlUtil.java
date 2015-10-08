@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.common.util.sql;
+package org.tinygroup.sdpm.common.util.ComplexSearch;
 
 import java.util.List;
 
@@ -7,15 +7,14 @@ import java.util.List;
  */
 public class SqlUtil {
 
-    private static boolean isNull = true;
-
     public static String toSql(List<SearchInfo> searchInfos, String groupOperate){
+        boolean isNull = true;
         StringBuffer sql = new StringBuffer();
         int size = searchInfos.size();
         int nullMark = 0;
         SearchInfo searchInfo;
         int num =(size/3)+ (size%3==0?0:1);
-        int total[] = totalFields(searchInfos,num);
+        int total[] = totalFields(searchInfos,num,isNull);
         if(isNull){
             return null;
         }
@@ -87,7 +86,7 @@ public class SqlUtil {
         return sql.append(" "+searchInfo.getField()).append(operateAndValue).toString();
     }
 
-    private static int[] totalFields(List<SearchInfo> searchInfos, int n){
+    private static int[] totalFields(List<SearchInfo> searchInfos, int n, boolean isNull){
         int result[] = new int[n];
         for(int i = 0;i<n;i++) {
             int count = 0;

@@ -8,7 +8,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.tinygroup.beancontainer.BeanContainerFactory;
 import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
-import org.tinygroup.sdpm.common.log.LogUtil;
 import org.tinygroup.sdpm.common.log.obtain.inter.Obtain;
 
 import javax.servlet.http.HttpSession;

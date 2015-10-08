@@ -39,5 +39,5 @@ public interface ActionManager {
 	 * @param asc
 	 * @return
 	 */
-	Pager<SystemAction> findByPage(int start ,int limit,SystemAction systemAction,String sortName,boolean asc);
+	public Pager<SystemAction> findByPage(int start, int limit,SystemAction systemAction, String sortName, boolean asc) ;
 }

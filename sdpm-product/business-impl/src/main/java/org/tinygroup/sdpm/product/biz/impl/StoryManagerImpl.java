@@ -4,14 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.sdpm.common.util.sql.SearchInfos;
-import org.tinygroup.sdpm.common.util.sql.SqlUtil;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
 import org.tinygroup.sdpm.product.dao.ProductStorySpecDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
+import org.tinygroup.sdpm.system.dao.impl.LogUtil.LogUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -34,7 +35,6 @@ public class StoryManagerImpl implements StoryManager{
 		story = productStoryDao.add(story);
 		storySpec.setStoryId(story.getStoryId());
 		storySpecDao.add(storySpec);
-		
 		return story;
 	}
 
