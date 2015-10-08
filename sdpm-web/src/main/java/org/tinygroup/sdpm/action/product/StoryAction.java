@@ -66,8 +66,6 @@ public class StoryAction extends BaseController{
     @ResponseBody
     @RequestMapping("/updateBatch")
     public int[] updateBatch(@RequestBody ProductStory[] stories){
-    	int o = stories.length;
-    	
     	
     	return storyService.updateBatchStory(stories);
     }
