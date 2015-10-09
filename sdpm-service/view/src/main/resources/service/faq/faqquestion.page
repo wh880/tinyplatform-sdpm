@@ -14,7 +14,8 @@
             #end
             #set(m2=menuManager.getMenu("faq-del"))
             #if(m2)
-                #@delItemsdpm("#action" "id" m2.href {"class":m2.icon})${m2.name}#end
+            #*#@delItemsdpm(TINY_CONTEXT_PATH+m2.href l.faqId m2.href {"class":m2.icon})${m2.name}#end*#
+                #@delItemsdpm(TINY_CONTEXT_PATH+m2.href l.faqId "../faq/list"{"class":m2.icon})${m2.name}#end
             #end
             #@dialog("myModal")
                 #@dialogHeader()对话框标题#end

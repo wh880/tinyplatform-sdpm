@@ -40,6 +40,13 @@ public interface StoryManager {
 	 * @return
 	 */
 	ProductStory find(Integer storyId);
+	
+	/**
+	 * 根据多个id查找
+	 * @param storyId
+	 * @return
+	 */
+	List<ProductStory> findList(Integer... storyId);
 	/**
 	 * 根据对象查询
 	 * @param story

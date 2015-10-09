@@ -30,7 +30,7 @@ public class BuildServiceImpl implements BuildService {
     public ProjectBuild add(ProjectBuild build) {
         build.setBuildStories("");
         build.setBuildBugs("");
-        build.setBuildDeleted("");
+        build.setBuildDeleted(build.DELETE_NO);
         return buildManager.add(build);
     }
 

@@ -3,6 +3,7 @@
 	#if(libname)${libname}#else 文档库#end<span class="caret"></span>#end
 	#@navSelect2Body()
 		  #@navSelect2Data()
+		  <option value=""></option>
 		  #foreach(doclib:liblist)
 		  <option value="${doclib?.docLibName}">${doclib?.docLibName}</option>
 		  #end

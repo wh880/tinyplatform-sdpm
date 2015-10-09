@@ -30,6 +30,9 @@
 					success: function(data){
 						for(var i=0;i<data.length;data){
 							var em = "<option value='"+data[i][opKey]+"'>"+ data[i][opvalue] +"</option>";
+							if(i==0){
+								em = "<option selected='selected' value='"+data[i][opKey]+"'>"+ data[i][opvalue] +"</option>";
+							}
 							sele.append(em);
 							++i;
 						}
