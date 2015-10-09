@@ -41,8 +41,4 @@ public class ReviewManagerImpl implements ReviewManager{
     public ServiceReview findByRequestId(Integer id) {
         return reviewDao.findByRequestId(id);
     }
-
-    public int[] updateReview(List<ServiceReview> list, String name) {
-        return reviewDao.batchUpdateReview(list, name);
-    }
 }

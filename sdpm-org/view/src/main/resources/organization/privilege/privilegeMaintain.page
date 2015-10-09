@@ -99,17 +99,47 @@
         }
     };
 
-    var zNodes = [
-
+    var zNodes = [];
         #foreach(m:menuManager.getAllChildMenus(treeid))
-            {id: '${m.id}', pId: '${m.parentId}', name: "${m.name}", open: true},
+        zNodes.push({
+            id: '${m.id}',
+            pId: '${m.parentId}',
+            name: "${m.name}",
+            open: true,
+            checked: ${orgRoleMenus.contains(m.id)? 'true' : 'false'
+        }
+        })
+        ;
         #end
-    ];
 
 
     $(document).ready(function () {
-
+        var $ztree=
         $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        $("input[name=submitbtn]").on("click", function () {
+            var nodes =$ztree.getCheckedNodes(true);
+            var checkarr = [];
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                checkarr.push(nodes[i].id);
+            }
+            $.ajax({
+                url: "${TINY_CONTEXT_PATH}/org/roleMenu/save",
+                type: "post",
+                traditional: true,
+                data: {ids: checkarr, id:${id}},
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == "y") {
+                        layer.msg(data.info, 2, 1, function () {
+                            window.location.href = "${TINY_CONTEXT_PATH}/org/privilege/list"
+                        })
+                        // window.location.href="/"
+                    } else {
+                        layer.msg(data.info)
+                    }
+                }
+            })
+        })
 
     });
     //-->

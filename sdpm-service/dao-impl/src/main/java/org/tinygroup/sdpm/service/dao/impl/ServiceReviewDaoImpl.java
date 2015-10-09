@@ -246,18 +246,4 @@ public class ServiceReviewDaoImpl extends TinyDslDaoSupport implements ServiceRe
             }
         });
     }
-
-    public int[] batchUpdateReview(List<ServiceReview> list, final String name) {
-        if (CollectionUtil.isEmpty(list)) {
-            return new int[0];
-        }
-        return getDslTemplate().batchUpdate(list, new NoParamUpdateGenerateCallback() {
-
-            public Update generate() {
-                return update(SERVICE_REVIEWTABLE).set(
-                        SERVICE_REVIEWTABLE.REVIEWER.value(new JdbcNamedParameter(name))).where(
-                        SERVICE_REVIEWTABLE.CLIENT_REQUEST_ID.eq(new JdbcNamedParameter("ReviewId")));
-            }
-        });
-    }
 }

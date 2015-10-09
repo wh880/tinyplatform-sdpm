@@ -58,12 +58,12 @@ public interface RequestManager {
     Integer delete(Integer id);
 
     /**
-     * 根据id进行批量软删除请求
+     * 根据list进行批量软删除请求
      *
-     * @param id 主键
+     * @param
      * @return
      */
-    Integer deleteBatch(Integer... id);
+    int[] deleteBatch(List<ServiceRequest> list);
 
     /**
      * 分页查找所有请求

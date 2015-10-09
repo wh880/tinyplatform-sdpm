@@ -7,6 +7,8 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.Date;
+
 /**
  * Created by shenly13343 on 2015-09-20.
  */
@@ -25,9 +27,11 @@ public class BuildServiceImpl implements BuildService {
             return buildManager.softDelete(build);
         }
     }
-
     public ProjectBuild add(ProjectBuild build) {
-        return null;
+        build.setBuildStories("");
+        build.setBuildBugs("");
+        build.setBuildDeleted(build.DELETE_NO);
+        return buildManager.add(build);
     }
 
     public Pager<ProjectBuild> findPager(Integer projectId, Integer start, Integer limit, String order, boolean asc) {

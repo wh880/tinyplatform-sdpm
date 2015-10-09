@@ -19,10 +19,6 @@ package org.tinygroup.sdpm.service.dao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
 
-import java.util.List;
-
 public interface ServiceReviewDao extends BaseDao<ServiceReview, Integer> {
     ServiceReview findByRequestId(Integer id);
-
-    int[] batchUpdateReview(List<ServiceReview> list, String name);
 }

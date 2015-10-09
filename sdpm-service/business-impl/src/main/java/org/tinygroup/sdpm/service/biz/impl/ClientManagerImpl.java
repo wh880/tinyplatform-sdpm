@@ -44,8 +44,8 @@ public class ClientManagerImpl implements ClientManager {
         return clientDao.softDelete(id);
     }
 
-    public Integer deleteBatch(Integer id) {
-        return null;
+    public int[] deleteBatch(List<ServiceClient> list) {
+        return clientDao.softDeleteBatch(list);
     }
 
     public List<ServiceClient> findByProduct(Integer productId) {

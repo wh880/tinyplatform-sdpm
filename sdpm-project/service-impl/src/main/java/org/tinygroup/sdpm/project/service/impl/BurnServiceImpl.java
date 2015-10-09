@@ -25,7 +25,9 @@ public class BurnServiceImpl implements BurnService {
     }
 
     public List<ProjectBurn> findBurnByProjectId(int projectId) {
-        return null;
+        ProjectBurn projectBurn = new ProjectBurn();
+        projectBurn.setProjectId(projectId);
+        return burnManager.findList(projectBurn);
     }
 
     public Integer deleteBurnByProjectDate(int projectId, String date) {

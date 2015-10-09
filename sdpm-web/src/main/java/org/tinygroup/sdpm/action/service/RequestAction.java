@@ -159,4 +159,26 @@ public class RequestAction extends BaseController {
         }
         return requestService.updateReview(list);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/batchDelete")
+    public Map batchDelete(String ids) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (ids == null) {
+            map.put("status", "n");
+            map.put("info", "删除失败");
+            return map;
+        }
+        List<ServiceRequest> list = new ArrayList<ServiceRequest>();
+        for (String s : ids.split(",")) {
+            ServiceRequest serviceRequest = new ServiceRequest();
+            serviceRequest.setClientRequestId(Integer.valueOf(s));
+            serviceRequest.setDeleted(serviceRequest.DELETE_YES);
+            list.add(serviceRequest);
+        }
+        requestService.deleteBatchRequest(list);
+        map.put("status", "y");
+        map.put("info", "删除成功");
+        return map;
+    }
 }

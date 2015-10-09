@@ -7,8 +7,8 @@
         #setTinyTablePageSize([8,10,20,50,100,200])
         #set(m1=menuManager.getMenu("client-batchdel"))
         #if(m1)
-            #@mulOperation("muldelete" "http://127.0.0.1:8080/sdpm-service/service/client/test.pagelet")
-            <a href="javascript:;" class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
+            #@mulOperation("muldelete" TINY_CONTEXT_PATH+"/service/client/batchDelete")
+            <a class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
             #end
         #end
 

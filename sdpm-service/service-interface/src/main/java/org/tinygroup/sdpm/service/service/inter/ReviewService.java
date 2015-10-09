@@ -62,12 +62,4 @@ public interface ReviewService {
      * @return
      */
     Integer changeStatus(Integer requestId);
-
-    /**
-     * 指派回访人员
-     *
-     * @param
-     * @return
-     */
-    int[] updateReview(List<ServiceReview> list, String name);
 }

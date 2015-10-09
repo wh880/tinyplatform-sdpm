@@ -4,28 +4,90 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
 #!set(linkName="demand")
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/system/holiday/save" "post" {"class":"test"})
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">编辑</p>
  
 
-     #@div(divClass="infoContent")
-	        <p class="titleName">描述</p>
-	       	<div>
-	       		${holiday?.holidayDetail}
-	       	</div>
-		#end
+##     #@div(divClass="infoContent")
+##	        <p class="titleName">描述</p>
+##	       	<div>
+##	       		${holiday?.holidayDetail}
+##	       	</div>
+##	       	
+##		#end
+                <input type="hidden" name="holidayId" value="${holiday?.holidayId}"/>
+                <input type="hidden" name="holidayDeleted" value="0"/>
+				 #@elementItem()
+			        #@colLabel()名称：#end
+				        #@formControlDiv("col-8")
+				          #tinyInput("text" "holidayName" holiday?.holidayName{"id":"yujigongshi","class":"input-text"})
+				        #end
+			        #@validateDiv("col-2")#end
+			      #end
+			 	
+				 #@elementItem()
+			        #@colLabel()类型：#end
+				        #@formControlDiv("col-8")
+					       #@tinySelect("lang" holiday?.holidayType {"class":"input-text","rel":"22"})
+								#@tinyOptionItem("放假")放假#end
+								#@tinyOptionItem("工作")工作#end
+							#end
+						#end
+			        #@validateDiv("col-2")#end
+			      #end
+			 
+		
+			      #@elementItem()
+			        #@colLabel()日期：#end
+				        #@formControlDiv("col-8")
+				         #@tinyDateInput("holidayDate" holiday?.holidayDate "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end
+	      				#end
+			        #@validateDiv("col-2")#end
+			      #end
+			
+			
+			
+				 #@elementItem()
+			        #@colLabel()创建者：#end
+				        #@formControlDiv("col-8")
+				        	 #@Tselect2F()
+			                    #@Tselect2Body("holidayAccount" holiday?.holidayAccount {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+			                         <option value="Mck">Mck</option>
+			                        <option value="wll">wll</option>
+			                        <option value="zch">zch</option>
+			                        <option value="gzc">gzc</option>
+			                        <option value="cp">cp</option>
+			                        <option value="xbb">xbb</option>
+			                        <option value="wj">wj</option>
+			                    #end
+			                
+			                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+			                #end
+				        	 
+				        	 
+				        #end
+			        #@validateDiv("col-2")#end
+			      #end
+			 
+        #@elementItem()
+        #@colLabel()描述：#end
+	    #@formControlDiv("col-8")
+		#@tinyTextarea("holidayDetail" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"备注不能为空！"})${holiday?.holidayDetail}#end
+	    #end
+        #@validateDiv("col-2")#end
+        #end
 
 		
-		
-			#@elementItem("" "edui-Box")
-         				<b class="titleNames">备注</b>
-					#@formControlDiv("col-12")
-					#@Teditor("hoilidayRemark" "" {"initialFrameHeight":"300" ,"datatype":"*10-300"})${holiday?.hoilidayRemark}#end
-					#end
-       				#@validateDiv("col-4")#end
-    		#end
+##		
+##			#@elementItem("" "edui-Box")
+##         				<b class="titleNames">备注</b>
+##					#@formControlDiv("col-12")
+##					#@Teditor("hoilidayRemark" "" {"initialFrameHeight":"300" ,"datatype":"*10-300"})${holiday?.hoilidayRemark}#end
+##					#end
+##       				#@validateDiv("col-4")#end
+##    		#end
  </div>
 
  
@@ -39,7 +101,9 @@
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="backBtn"><a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" >返回</a></button>
+##                <button style="float: left" type="submit" id="submit" class="commitBtn">返回</button>
+                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+                 
             </div>
             <div class="col-5"></div>
         </div>
@@ -47,8 +111,8 @@
     <br>
 </div>
 #end
+##<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" >  </a>
 
-
-<div style="width:30%;float:right">
-		#TypeInfo("holiday-edit")
-</div>
+##<div style="width:30%;float:right">
+##		#TypeInfo("holiday-edit")
+##</div>

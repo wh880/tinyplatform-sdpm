@@ -270,4 +270,18 @@ public class ServiceClientDaoImpl extends TinyDslDaoSupport implements ServiceCl
         });
 
     }
+
+    public int[] softDeleteBatch(List<ServiceClient> list) {
+        if (CollectionUtil.isEmpty(list)) {
+            return new int[0];
+        }
+        return getDslTemplate().batchUpdate(list, new NoParamUpdateGenerateCallback() {
+
+            public Update generate() {
+                return update(SERVICE_CLIENTTABLE).set(
+                        SERVICE_CLIENTTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
+                        SERVICE_CLIENTTABLE.CLIENT_ID.eq(new JdbcNamedParameter("clientId")));
+            }
+        });
+    }
 }

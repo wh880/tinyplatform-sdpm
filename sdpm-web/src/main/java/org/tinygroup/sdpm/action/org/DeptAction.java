@@ -72,15 +72,17 @@ public class DeptAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/data")
-    public List data() {
+    public List data(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<OrgDept> deptList = deptService.findDeptList(new OrgDept());
-        Map<String, Object> map1 = new HashMap<String, Object>();
-        map1.put("id", -1);
-        map1.put("pId", 0);
-        map1.put("name", "all");
+        if (check == null || !check.equals("n")) {
+            Map<String, Object> map1 = new HashMap<String, Object>();
+            map1.put("id", -1);
+            map1.put("pId", 0);
+            map1.put("name", "所有部门");
+            list.add(map1);
+        }
 
-        list.add(map1);
         for (OrgDept d : deptList) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", d.getOrgDeptId());
