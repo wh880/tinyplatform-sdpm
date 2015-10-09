@@ -77,7 +77,7 @@
     /**
      * Compute the end date for project.
      *
-     * @param  int    $delta
+     * @param  int
      * @access public
      * @return void
      */
