@@ -3,15 +3,16 @@
     #for(a:action)
    
     #@foldItem(a?.actionActor+", 由 "+a?.actionDate+ "指派给" +a?.actionActor)
+                          记录详情<br>
         #for(h:history)
                                      
         #if(h?.historyAction==a?.actionId)
-                                  记录详情<br>
-                                      修改了
+                                  
+              ${a?.actionAction}
 ##                                      <p>预计剩余</p>
                                       值为 
             
-               "${h?.historyOld}"，新值为 "${h?.historyNew}"。
+               "${h?.historyOld}"，新值为 "${h?.historyNew}"。<br>
                #end
         #end
 		

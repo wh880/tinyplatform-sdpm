@@ -88,6 +88,16 @@ public class StoryManagerImpl implements StoryManager{
 		
 		return productStoryDao.softDelete(storyId) ;
 	}
+
+
+
+	public List<ProductStory> findList(Integer... storyId) {
+
+		return productStoryDao.getByKeys(storyId);
+	}
+
+
+
 	
 	
 }
