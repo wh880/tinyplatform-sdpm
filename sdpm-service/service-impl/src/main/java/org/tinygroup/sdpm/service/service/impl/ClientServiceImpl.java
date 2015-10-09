@@ -49,8 +49,8 @@ public class ClientServiceImpl implements ClientService {
         return clientManager.delete(id);
     }
 
-    public Integer deleteBatchClient(Integer id) {
-        return clientManager.deleteBatch(id);
+    public int[] deleteBatchClient(List<ServiceClient> list) {
+        return clientManager.deleteBatch(list);
     }
 
     public List<ServiceClient> findClientByProduct(Integer productId) {
