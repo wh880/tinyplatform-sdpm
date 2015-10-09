@@ -6,43 +6,43 @@
 		       		#@tbody()
 		       			#@tr()
 							#@td()<b>产品线名称</b>#end
-		       				#@td()<b>产品线XXX</b>#end
+		       				#@td()<b>${productLine?.productLineName}</b>#end
 		       			#end
 		       			#@tr()
 							#@td()产品线编号#end
-		       				#@td()ChanDao0001#end
+		       				#@td()${productLine?.productLineCode}#end
 		       			#end
 		       			#@tr()
 							#@td()所属公司#end
-		       				#@td()ChanDao0001#end
+		       				#@td()${productLine?.companyId}#end
 		       			#end
 		       			#@tr()
 							#@td()所属部门#end
-		       				#@td()ChanDao0001#end
+		       				#@td()${productLine?.deptId}#end
 		       			#end
 		       			#@tr()
 							#@td()节点路径#end
-		       				#@td()ChanDao0001#end
+		       				#@td()${productLine?.productLineParent}#end
 		       			#end
 		       			#@tr()
 							#@td()产品线经理#end
-		       				#@td()Demo#end
+		       				#@td()${productLine?.productLineOwner}#end
 		       			#end
 		       			#@tr()
 							#@td()产品线质量经理#end
-		       				#@td()测试甲#end
+		       				#@td()${productLine?.productLineQualityManager}#end
 		       			#end
 		       			#@tr()
 							#@td()产品交付经理#end
-		       				#@td()测试甲#end
+		       				#@td()${productLine?.productLineDeliveryManager}#end
 		       			#end
 		       			#@tr()
 							#@td()状态#end
-		       				#@td()<font color="green">正常</font>#end
+		       				#@td()<font color="green">${productLine?.productLineStatus}</font>#end
 		       			#end
 		       			#@tr()
 							#@td()访问控制#end
-		       				#@td()默认设置(有产品视图权限，即可访问)#end
+		       				#@td()${productLine?.acl}#end
 		       			#end
 		       			#@tr()
 							#@td()分组白名单#end
@@ -50,11 +50,11 @@
 		       			#end
 		       			#@tr()
 							#@td()由谁创建#end
-		       				#@td()Demo#end
+		       				#@td()${productLine?.productLineCreatedBy}#end
 		       			#end	
 		       			#@tr()
 							#@td()创建日期#end
-		       				#@td()2015-08-27 09:18:22#end
+		       				#@td()${productLine?.productLineCreatedDate}#end
 		       			#end	
 		       		#end
 		       	#end
