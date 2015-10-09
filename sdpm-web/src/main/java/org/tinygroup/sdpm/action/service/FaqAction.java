@@ -83,4 +83,25 @@ public class FaqAction extends BaseController {
         model.addAttribute("faqs", faqs);
         return "/service/faq/questionAnswer.page";
     }
+
+    /*点击问题进去，显示里面的编辑和删除*/
+    @RequestMapping(value = "/faqContentEdit")
+    public String slaContentEdit(Integer id, Model model) {
+        if (id != null) {
+            ServiceFaq faq = faqService.findFaq(id);
+            model.addAttribute("faq", faq);
+        }
+
+        return "/service/faq/addquestion.page";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/faqContentDelete")
+    public Map faqTitleDelete(Integer id) {
+        faqService.deleteFaq(id);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "y");
+        map.put("info", "删除成功");
+        return map;
+    }
 }
