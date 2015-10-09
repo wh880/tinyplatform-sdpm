@@ -7,9 +7,9 @@
             #include("tab.page")
             
         	<span class="r" style="position:relative;top:2px;height:0">
-        	        #@aModal("#myModal" "编辑" "400" "80" "class-m" "/document/doclib/edit?doclibid="+var?.doclibid)
+        	        #@aModal("#myModal" "编辑" "400" "80" "class-m" "/document/doclib/edit?libname="+libname)
         	        	#buttonIcon(iconClass="icon-edit-sign")编辑&nbsp;#end
-        	        #@tinyTableItemRemove(TINY_CONTEXT_PATH+"/document/doclib/delete" var?.doclibid)
+        	        #@tinyTableItemRemove(TINY_CONTEXT_PATH+"/document/doclib/delete" doclibid)
 						#buttonIcon(iconClass="icon-remove")删除
 					#end &nbsp
 					

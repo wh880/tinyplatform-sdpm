@@ -1,4 +1,5 @@
 #import("/org/tinygroup/button/components/button_smart.component")
+#import("/org/tinygroup/table/components/tinytable.component")
 #!set(activeTitle="产品文档",activeMenuId=currentPageId)
 
 #include("common.page")
