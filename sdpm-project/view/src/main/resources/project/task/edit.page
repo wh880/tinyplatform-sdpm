@@ -24,26 +24,11 @@
 ###macro tinyForm(formname action method formMapInfo)
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/editsave" "post" {"class":"test","enctype":"multipart/form-data"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
-    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
-    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
-    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
-    #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue=task?.taskStatus)
-##    #hiddenInput(hiddenInputName="task" hiddenInputValue=task?.taskId)
 ##    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
 ##    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
 ##    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
-##    #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
-##    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
-##    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
-##    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
-##    #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
-##    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
-##    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
-##    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
-##    #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
-##    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
-##    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
-##    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
+##    #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue=task?.taskStatus)
+
 <div style="width:70%;float:left" class="">
 
     <div class="infoContent">

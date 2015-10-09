@@ -61,7 +61,7 @@
             <div class="col-2 text-r"><label>回答：</label></div>
 
             <div class="col-9">
-                #@Teditor("content" "faqAnswer" {"initialFrameHeight":"280"})Say something#end</div>
+                #@Teditor("content" "faqAnswer" {"initialFrameHeight":"280"})#end</div>
         </div>
         #end
 

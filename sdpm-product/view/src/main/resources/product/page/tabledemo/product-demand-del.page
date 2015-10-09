@@ -1,4 +1,5 @@
-#@tinyForm("thisform" "" "post" {"class":"test"})
+
+#@tinyForm("batchCloseForm" TINY_CONTEXT_PATH+"/product/story/closeBatch" "post" {"class":"test"})
 	
 	 #@tableStriped()
 	 	
@@ -15,15 +16,16 @@
 	 	
 	 	#@tbody()
 	 		
-	 		#for(i:[1..8])
+	 		#for(story:storyList)
 				#@tr()
-		 			#@td()	${i}	#end
-		 			#@td()	产品${i}	#end
-		 			#@td()	激活	#end
+					#@td()	${story?.storyId}	#end
+		 			#@td()	${story?.storyTitle}	#end
+		 			#@td()	${story?.storyStatus}	#end
 		 			#@td()	
+		 			#hiddenInput("","productStories["+(storyFor.index-1)+"].storyId","",story?.storyId)
 		 				#@formControlDiv("col-8")
-
-				            #@tinySelect("lang" "zh" {"class":"input-text","rel":"22"})
+			
+				            #@tinySelect("productStories["+(storyFor.index-1)+"].storyClosedReason" story?.storyClosedReason {"class":"input-text","rel":"22"})
 				
 				                #@tinyOptionItem("zh")已完成#end
 				
@@ -39,7 +41,7 @@
 		 			#end
 		 			#@td()
 		 			
-		 				 #tinyInput("text" "username")
+		 				 #tinyInput("text" "")
 		 			
 		 			#end
 		 		#end
@@ -47,6 +49,9 @@
 	 	
 	 	#end
 	 	
+	 #end
+	 
+	 #@submitButton(submitButtonValue="保存")
 	 #end
 #end
 	

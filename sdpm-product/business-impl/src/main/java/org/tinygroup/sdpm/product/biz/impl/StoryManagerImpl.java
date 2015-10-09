@@ -49,14 +49,11 @@ public class StoryManagerImpl implements StoryManager{
 		return productStoryDao.getByKey(storyId);
 	}
 
-	public int[] updateBatch(ProductStory[] stories) {
+	public int[] updateBatch(List<ProductStory> stories) {
 		
-		List<ProductStory>  productStories = new ArrayList<ProductStory>();
-    	if(stories!=null&&stories.length>0){
-    		productStories = Arrays.asList(stories);
-    	}
 		
-		return productStoryDao.batchUpdate(productStories);
+		
+		return productStoryDao.batchUpdate(stories);
 	}
 
 	public List<ProductStory> findList(ProductStory story,String order,String ordertype) {
