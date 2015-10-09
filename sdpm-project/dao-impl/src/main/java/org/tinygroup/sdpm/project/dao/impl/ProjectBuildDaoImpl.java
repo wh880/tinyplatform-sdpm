@@ -78,24 +78,6 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 		if (projectBuild == null || projectBuild.getBuildId() == null) {
 			return 0;
 		}
-//		return getDslTemplate().update(projectBuild, new UpdateGenerateCallback<ProjectBuild>() {
-//			public Update generate(ProjectBuild t) {
-//				Update update = update(PROJECT_BUILDTABLE).set(
-//						PROJECT_BUILDTABLE.BUILD_PRODUCT.value(t.getBuildProduct()),
-//						PROJECT_BUILDTABLE.BUILD_PROJECT.value(t.getBuildProject()),
-//						PROJECT_BUILDTABLE.BUILD_NAME.value(t.getBuildName()),
-//						PROJECT_BUILDTABLE.BUILD_SCM_PATH.value(t.getBuildScmPath()),
-//						PROJECT_BUILDTABLE.BUILD_FILE_PATH.value(t.getBuildFilePath()),
-//						PROJECT_BUILDTABLE.BUILD_DATE.value(t.getBuildDate()),
-//						PROJECT_BUILDTABLE.BUILD_STORIES.value(t.getBuildStories()),
-//						PROJECT_BUILDTABLE.BUILD_BUGS.value(t.getBuildBugs()),
-//						PROJECT_BUILDTABLE.BUILD_BUILDER.value(t.getBuildBuilder()),
-//						PROJECT_BUILDTABLE.BUILD_DESC.value(t.getBuildDesc()),
-//						PROJECT_BUILDTABLE.BUILD_DELETED.value(t.getBuildDeleted())).where(
-//						PROJECT_BUILDTABLE.BUILD_ID.eq(t.getBuildId()));
-//				return update;
-//			}
-//		});
 		Update update = UpdateUtil.getUpdate(PROJECT_BUILDTABLE,projectBuild);
 		getDslSession().execute(update);
 
