@@ -14,7 +14,13 @@ public class SqlUtil {
         int nullMark = 0;
         SearchInfo searchInfo;
         int num =(size/3)+ (size%3==0?0:1);
-        int total[] = totalFields(searchInfos,num,isNull);
+        int total[] = totalFields(searchInfos,num);
+        for(int i : total){
+            if(i > 0){
+                isNull = false;
+                break;
+            }
+        }
         if(isNull){
             return null;
         }
@@ -86,7 +92,7 @@ public class SqlUtil {
         return sql.append(" "+searchInfo.getField()).append(operateAndValue).toString();
     }
 
-    private static int[] totalFields(List<SearchInfo> searchInfos, int n, boolean isNull){
+    private static int[] totalFields(List<SearchInfo> searchInfos, int n){
         int result[] = new int[n];
         for(int i = 0;i<n;i++) {
             int count = 0;
@@ -95,9 +101,6 @@ public class SqlUtil {
                 if(searchInfo.getValue()!=null&&!"".equals(searchInfo.getValue())){
                     count++;
                 }
-            }
-            if(count != 0){
-                isNull = false;
             }
             result[i] = count;
         }

@@ -37,7 +37,7 @@
                 <div class="col-2 text-r"><label>重现步骤：&nbsp</label></div>
 
                 <div class="col-9">
-                    #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+                    #@Teditor("bugSteps" "bugSteps" {"initialFrameHeight":"150"})Say something#end</div>
             </div>
         #end
         <br/>

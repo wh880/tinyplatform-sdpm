@@ -1,4 +1,5 @@
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/testCase/execute" "" {"class":"test"})
+#hiddenInput(hiddenInputName="caseId" hiddenInputValue=testcase?.caseId)
     #@div(divClass="infoContent")
    <p><b>前置条件&nbsp</b>${testcase?.casePrecondition}</p>
   		
@@ -13,26 +14,26 @@
                 #end
             #end
             #@tbody()
-                #@tr()
-                    #@th()1#end
-                    #@td()表格内容#end
-                    #@td()表格内容#end
-                    #@td()
-                    #@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">一级棒</option>
-	                        <option value="ME">挺好</option>
-	                        <option value="MD">加油</option>
-	                    	#end                
-                	  #end
-                    #end
-                    #@td()
-                    #@tinyTextarea("remark" {"datatype":"","nullmsg":"描述不能为空！"})#end
-                    
-                  ##  #tinyInput("text" "抄送给" ""{"datatype":"","id":"抄送给","class":"input-text"})
+                #for(caseStep:caseSteps)
+                    #@tr()
+                        #@th()${caseStepFor.index}#end
+                        #@td()${caseStep?.caseStepDesc}#end
+                        #@td()${caseStep?.caseStepExpect}#end
+                        #@td()
+                        #@Tselect2F()
+                            #@Tselect2Body("caseStepResultList["+(caseStepFor.index-1)+"].result" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="1">通过</option>
+                            <option value="0">失败</option>
+                            <option value="2">阻塞</option>
+                            #end
+                        #end
+                        #end
+                        #@td()
+                        #@tinyTextarea("caseStepResultList["+(caseStepFor.index-1)+"].real" {"datatype":"","nullmsg":"描述不能为空！"})#end
+
+                        #end
                     #end
                 #end
-
             #end
         #end
         <center>
@@ -43,8 +44,44 @@
 		</center>
     #end
     #@div(divClass="infoContent")
-    <p class="titleName">测试结果   共执行0次</p>
-		#include("../historyRecord.page")
+    <p class="titleName">测试结果   共执行${testResults.size()}次</p>
+    #for(result : testResults)
+        #@foldMenu("" "Tinyfold3" "" "width:100%")
+            #@foldItem("#"+result?.testResultId+"   "+result?.testResultDate+" 由 "+result?.testResultLastRunner+"执行   "+result?.caseResult)
+                #@tableStriped()
+                    #@thead()
+                    #@tr()
+                        #@th()编号#end
+                        #@th()步骤#end
+                        #@th()预期 #end
+                        #@th()测试结果 #end
+                        #@th()实际情况#end
+                    #end
+                    #end
+                    #@tbody()
+                        #set(sResults = stepResults?.get(result?.testResultId))
+                        #for(caseStep:caseSteps)
+                            #@tr()
+                                #@th()${caseStepFor.index}#end
+                                #@td()${caseStep?.caseStepDesc}#end
+                                #@td()${caseStep?.caseStepExpect}#end
+                                #@td()${sResults?.get(caseStepFor.index-1)?.result}#end
+                                #@td()${sResults?.get(caseStepFor.index-1)?.real}#end
+                            #end
+                        #end
+                    #end
+                #end
+            #end
+        #end
+    #end
+    <script type="text/javascript">
+        $(function(){
+            $(".Hui_aside").scrollTop(380);
+            /*折叠*/
+            /*5个参数顺序不可打乱，分别是：相应区,隐藏显示的内容,速度,类型,事件*/
+            $.Tinyfold("#Tinyfold3 .item h4","#Tinyfold3 .item .info","",3,"click");
+        });
+    </script>
     #end
 
 #end
