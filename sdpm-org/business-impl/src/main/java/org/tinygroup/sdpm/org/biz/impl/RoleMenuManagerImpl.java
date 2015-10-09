@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- * <p>
+ * <p/>
  * Licensed under the GPL, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
+ * <p/>
  * http://www.gnu.org/licenses/gpl.html
- * <p>
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,6 +22,8 @@ import org.tinygroup.sdpm.org.biz.inter.RoleMenuManager;
 import org.tinygroup.sdpm.org.dao.OrgRoleMenuDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 
+import java.util.List;
+
 
 @Service
 @Transactional
@@ -33,8 +35,16 @@ public class RoleMenuManagerImpl implements RoleMenuManager {
         return orgRoleMenuDao.getByKey(id);
     }
 
+    public OrgRoleMenu findId(String id) {
+        return orgRoleMenuDao.getByMenuId(id);
+    }
+
     public OrgRoleMenu add(OrgRoleMenu orgRoleMenu) {
         return orgRoleMenuDao.add(orgRoleMenu);
+    }
+
+    public void batchAdd(List<OrgRoleMenu> orgRoleMenuList) {
+        orgRoleMenuDao.batchInsert(orgRoleMenuList);
     }
 
     public OrgRoleMenu update(OrgRoleMenu orgRoleMenu) {

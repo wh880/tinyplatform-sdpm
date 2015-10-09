@@ -17,6 +17,8 @@ package org.tinygroup.sdpm.org.service.inter;
 
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 
+import java.util.List;
+
 public interface RoleMenuService {
     /**
      * 根据主键id查找角色菜单
@@ -25,6 +27,9 @@ public interface RoleMenuService {
      * @return
      */
     OrgRoleMenu findRoleMenu(Integer id);
+
+
+    OrgRoleMenu findRoleMenuId(String id);
 
     /**
      * 新增有一个角色菜单
@@ -49,5 +54,7 @@ public interface RoleMenuService {
      * @return
      */
     Integer deleteRoleMenu(Integer id);
+
+    void batchAddRoleMenu(List<OrgRoleMenu> orgRoleMenuList);
 
 }

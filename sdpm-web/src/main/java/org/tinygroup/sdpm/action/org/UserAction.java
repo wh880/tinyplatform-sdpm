@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.DeptService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -19,7 +20,7 @@ import java.util.List;
 public class UserAction extends BaseController {
     @Autowired
     private UserService userService;
-
+    private DeptService deptService;
     @RequestMapping("/form")
     public String form(String id, Model model) {
         if (id != null) {

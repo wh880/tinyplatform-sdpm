@@ -99,6 +99,15 @@ public class OrgRoleMenuDaoImpl extends TinyDslDaoSupport implements OrgRoleMenu
 		});
 	}
 
+	public OrgRoleMenu getByMenuId(String pk) {
+		return getDslTemplate().getByKey(pk, OrgRoleMenu.class, new SelectGenerateCallback<Serializable>() {
+			@SuppressWarnings("rawtypes")
+			public Select generate(Serializable t) {
+				return selectFrom(ORG_ROLE_MENUTABLE).where(ORG_ROLE_MENUTABLE.ORG_ROLE_MENU_ID.eq(t));
+			}
+		});
+	}
+
 	public List<OrgRoleMenu> query(OrgRoleMenu orgRoleMenu, final OrderBy... orderBies) {
 		if (orgRoleMenu == null) {
 			orgRoleMenu = new OrgRoleMenu();

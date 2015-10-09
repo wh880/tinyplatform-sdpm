@@ -45,18 +45,16 @@
         #@gridSysCol(3)
         #end
         #@gridSysCol(6)
-            #@tinyForm("thisform" TINY_CONTEXT_PATH+"/org/privilege/save" "post" {"class":"test"})
-                #@gridSysRow()
-                <ul id="treeDemo" class="ztree" style="width:100%;min-height:360px;max-height:300px;"></ul>
+            #@gridSysRow()
+            <ul id="treeDemo" class="ztree" style="width:100%;min-height:360px;max-height:300px;"></ul>
 
-                <div style="padding-top: 20px;float: right">
-                    #@div(divClass="col-7 col-offset-5 form-inline")
+            <div style="padding-top: 20px;float: right">
+                #@div(divClass="col-7 col-offset-5 form-inline")
                         #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
                     #end
-                </div>
+            </div>
 
 
-                #end
             #end
 
         #end

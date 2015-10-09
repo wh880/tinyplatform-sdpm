@@ -7,6 +7,8 @@ import org.tinygroup.sdpm.org.biz.inter.RoleMenuManager;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 import org.tinygroup.sdpm.org.service.inter.RoleMenuService;
 
+import java.util.List;
+
 @Component
 public class RoleMenuServiceImpl implements RoleMenuService {
 
@@ -17,8 +19,16 @@ public class RoleMenuServiceImpl implements RoleMenuService {
         return roleMenuManager.find(id);
     }
 
+    public OrgRoleMenu findRoleMenuId(String id) {
+        return roleMenuManager.findId(id);
+    }
+
     public OrgRoleMenu addRoleMenu(OrgRoleMenu orgRoleMenu) {
         return roleMenuManager.add(orgRoleMenu);
+    }
+
+    public void batchAddRoleMenu(List<OrgRoleMenu> orgRoleMenuList) {
+        roleMenuManager.batchAdd(orgRoleMenuList);
     }
 
     public OrgRoleMenu updateRoleMenu(OrgRoleMenu orgRoleMenu) {
