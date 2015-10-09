@@ -14,6 +14,7 @@ import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.service.service.inter.ReviewService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,5 +132,31 @@ public class RequestAction extends BaseController {
         reviewService.changeStatus(review.getClientRequestId());
         model.addAttribute("review", review);
         return "redirect:/service/request/list";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/solveBy")
+    public int[] solveBy(Integer[] ids, String name) {
+        List<ServiceRequest> list = new ArrayList<ServiceRequest>();
+        for (Integer id : ids) {
+            ServiceRequest serviceRequest = new ServiceRequest();
+            serviceRequest.setClientRequestId(id);
+            serviceRequest.setReplier(name);
+            list.add(serviceRequest);
+        }
+        return requestService.updateReply(list);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/reviewBy")
+    public int[] reviewBy(Integer[] ids, String name) {
+        List<ServiceRequest> list = new ArrayList<ServiceRequest>();
+        for (Integer id : ids) {
+            ServiceRequest serviceRequest = new ServiceRequest();
+            serviceRequest.setClientRequestId(id);
+            serviceRequest.setRequestReviewer(name);
+            list.add(serviceRequest);
+        }
+        return requestService.updateReview(list);
     }
 }

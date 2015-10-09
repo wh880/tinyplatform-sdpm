@@ -45,4 +45,8 @@ public class ReviewServiceImpl implements ReviewService {
     public Integer changeStatus(Integer requestId) {
         return requestManager.changeStatus(requestId);
     }
+
+    public int[] updateReview(List<ServiceReview> list, String name) {
+        return reviewManager.updateReview(list, name);
+    }
 }
