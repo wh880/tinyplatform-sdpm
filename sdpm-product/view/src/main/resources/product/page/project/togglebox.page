@@ -194,8 +194,7 @@
 
                     #foreach(m:menuManager.getScopeMenus("product-del"))
                         #if(m.id=="product-demand-del")
-                            #@aModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger"
-                                "/product/page/tabledemo/product-demand-del.pagelet")批量关闭#end
+                            #@btnModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger" "/product/page/tabledemo/product-demand-del.page")批量关闭#end
                         #end
                     #end
                 #end
