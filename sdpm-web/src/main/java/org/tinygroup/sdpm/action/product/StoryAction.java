@@ -70,6 +70,7 @@ public class StoryAction extends BaseController{
         action.setActionObjectId(productStory.getStoryId());
         action.setActionProduct(String.valueOf(story.getProductId()));
         action.setActionObjectType("story");
+        action.setActionAction("edit");
         action.setActionActor(user != null?user.getOrgUserId():"0");
         logService.log(story,productStory,action);
     	return "redirect:" + "/product/page/project/togglebox.page";

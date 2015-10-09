@@ -27,4 +27,8 @@ public class TestResultManagerImpl implements TestResultManager {
 	public int update(QualityTestResult testresult){
 		return testresultdao.edit(testresult);
 	}
+
+	public QualityTestResult add(QualityTestResult qualityTestResult) {
+		return testresultdao.add(qualityTestResult);
+	}
 }
