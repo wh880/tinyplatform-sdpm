@@ -32,7 +32,7 @@
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>*#
 					#foreach(m:menuManager.getScopeMenus("testbugleft-tab"))
 						#if(m.id != "tsearch")
-							<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==get?'active_btn':''}">${m.name}</a>
+							<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==status?'active_btn':''}">${m.name}</a>
 						#else
 							<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 						#end

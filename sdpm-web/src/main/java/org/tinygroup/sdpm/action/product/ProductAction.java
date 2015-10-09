@@ -37,9 +37,8 @@ public class ProductAction  extends BaseController{
 	private UserService  userService;
 
 	@RequestMapping("")
-	public String productAction(HttpServletRequest request, WebContext webContext){
+	public String productAction(HttpServletRequest request){
 		List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
-		String oldUrl = webContext.get("oldUrl");
 		if(list == null|| list.size()==0){
 			list = productService.findProductList(new Product(),"productId","desc");
 			request.getSession().setAttribute("productList",list);
