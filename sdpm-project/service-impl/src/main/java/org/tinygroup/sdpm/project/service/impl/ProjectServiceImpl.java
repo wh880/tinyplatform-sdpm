@@ -43,7 +43,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
 	public Project addProject(Project project) {
-		
+        //设置其他初始值
+
 		return projectManager.add(project);
 	}
 

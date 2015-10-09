@@ -1,8 +1,4 @@
-#macro setTinyItemCount(num)
-<input type="hidden" name="records" value="${num}"/>
-#end
-
-#setTinyItemCount(pager.totalPages)
+#setTinyItemCount(pager.totalCount)
 #foreach(var:pager.records)
     #@tr()
         #@td()<input type="checkbox" value="${var.clientRequestId}" name="idCheck">#end
@@ -12,11 +8,13 @@
         #@td()${var.requestPre}#end
         #@td()${var.requestStatus}#end
         #@td()${formatDate(var.requestCommitmentDate,"yyyy-MM-dd")}#end
-        #@td()" "#end
+        #@td()${var.replier}#end
+        #@td()${var.requestReviewer}#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("service-request"))
                 #if(m)
-                <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var.clientRequestId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var.clientRequestId}"
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
             #end
 
@@ -36,3 +34,78 @@
     #end
 #end
 #@simpleModal(myModal)#end
+
+<script>
+    $(document).ready(function () {
+        $(".secondMenu").each(function () {
+            $(this).on("click", function () {
+                var inputname = $(this).attr("tabindex");
+                var inputvalue = $(this).html().trim();
+                var ids = [];
+                var href = $(this).attr("href");
+//                alert(href);
+                $("input[type='checkbox']").each(function () {
+                    if (this.checked == true && this.id != "checkboxall") {
+                        var clientId = $(this).val();
+                        if ("records" == inputname) {
+                            ids.push(clientId);
+                        }
+                    }
+                });
+                if (ids.length > 0) {
+                    $.ajax({
+                        url: href,
+                        type: "post",
+                        traditional: true,
+                        data: {ids: ids, name: inputvalue},
+                        dataType: "json",
+//                        contentType: 'application/json;charset=utf-8', //设置请求头信息
+                        success: function (data) {
+                            alert('success');
+                            window.location.reload();
+                        },
+                        error: function (res) {
+                            alert("失败");
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+    });
+    //    $(document).ready(function () {
+    //        $(".secondMenu").each(function () {
+    //            $(this).on("click", function () {
+    //                var inputname = $(this).attr("tabindex");
+    //                var inputvalue = $(this).html().trim();
+    //                var ids = [];
+    //                $("input[type='checkbox']").each(function () {
+    //                    if (this.checked == true && this.id != "checkboxall") {
+    //                        var clientId = $(this).val();
+    //                        if ("records" == inputname) {
+    //                            ids.push(clientId);
+    //                        }
+    //                    }
+    //                });
+    //                alert(ids);
+    //                alert(inputvalue);
+    //                if (ids.length > 0) {
+    //                    $.ajax({
+    //                        url: $(this).attr("href"),
+    //                        type: "post",
+    //                        traditional: true,
+    //                        data: {ids: ids, name: inputvalue},
+    //                        dataType: "json",
+    //                        success: function (data) {
+    //                            window.location.reload();
+    //                        }
+    //                        error: function (res) {
+    //                            alert("失败");
+    //                        }
+    //                    });
+    //                }
+    //                return false;
+    //            });
+    //        });
+    //    });
+</script>

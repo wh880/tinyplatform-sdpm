@@ -91,6 +91,7 @@ public class UserAction extends BaseController {
     public List<OrgUser> findUser(OrgUser orgUser){
     	
     	List<OrgUser> list = userService.findUserList(orgUser);
+    	
     	return list;
     }
 

@@ -44,11 +44,8 @@ public class RequestManagerImpl implements RequestManager{
         return requestDao.softDelete(id);
     }
 
-    public Integer deleteBatch(Integer... id) {
-        ServiceRequest request = new ServiceRequest();
-
-
-        return requestDao.deleteByKeys(id);
+    public int[] deleteBatch(List<ServiceRequest> list) {
+        return requestDao.softDeleteBatch(list);
     }
 
     public Pager<ServiceRequest> findPager(Integer start, Integer limit,  Integer status,ServiceRequest serviceRequest) {
@@ -65,5 +62,13 @@ public class RequestManagerImpl implements RequestManager{
 
     public Integer changeStatus(Integer id) {
         return requestDao.changeStatus(id);
+    }
+
+    public int[] updateReply(List<ServiceRequest> list) {
+        return requestDao.batchUpdateReply(list);
+    }
+
+    public int[] updateReview(List<ServiceRequest> list) {
+        return requestDao.batchUpdateReview(list);
     }
 }

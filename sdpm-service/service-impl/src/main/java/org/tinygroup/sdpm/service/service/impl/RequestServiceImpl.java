@@ -41,9 +41,6 @@ public class RequestServiceImpl implements RequestService {
         return requestManager.delete(id);
     }
 
-    public Integer deleteRequestBatch(Integer... id) {
-        return requestManager.deleteBatch(id);
-    }
 
     public Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, Integer status,ServiceRequest clientRequest) {
         return requestManager.findPager(start, limit,status, clientRequest);
@@ -57,5 +54,16 @@ public class RequestServiceImpl implements RequestService {
         return requestManager.saveReply(clientRequest);
     }
 
+    public int[] updateReply(List<ServiceRequest> list) {
+        return requestManager.updateReply(list);
+    }
+
+    public int[] updateReview(List<ServiceRequest> list) {
+        return requestManager.updateReview(list);
+    }
+
+    public int[] deleteBatchRequest(List<ServiceRequest> list) {
+        return requestManager.deleteBatch(list);
+    }
 
 }

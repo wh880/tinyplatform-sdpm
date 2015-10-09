@@ -45,4 +45,5 @@ public class ReviewServiceImpl implements ReviewService {
     public Integer changeStatus(Integer requestId) {
         return requestManager.changeStatus(requestId);
     }
+
 }

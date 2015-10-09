@@ -85,5 +85,6 @@
     <table-field standard-field-id="aa3abd25422e48fd92ace02365b2ec4b" primary="false" unique="false" not-null="false" id="action_extra" auto-increase="false"/>
     <table-field standard-field-id="ed0fdaa8df4b424999ddc2a33aeb1154" primary="false" unique="false" not-null="false" id="action_read" auto-increase="false"/>
     <table-field standard-field-id="db74df04c6164a6db9a0f5af85dd58f9" primary="false" unique="false" not-null="false" id="action_efforted" auto-increase="false"/>
+    <table-field standard-field-id="81872ca2ef8c4eb186888e9900f7e04c" primary="false" unique="false" not-null="false" id="action_action" auto-increase="false"/>
   </table>
 </tables>

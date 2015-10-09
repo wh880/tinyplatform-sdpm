@@ -57,13 +57,7 @@ public interface RequestService {
      */
     Integer deleteRequest(Integer id);
 
-    /**
-     * 根据id进行批量软删除请求
-     *
-     * @param id 主键
-     * @return
-     */
-    Integer deleteRequestBatch(Integer... id);
+
 
     /**
      * 查找数据库的所有记录
@@ -84,5 +78,17 @@ public interface RequestService {
      * @return
      */
     Integer saveReply(ServiceRequest clientRequest);
+
+    int[] updateReply(List<ServiceRequest> list);
+
+    int[] updateReview(List<ServiceRequest> list);
+
+    /**
+     * 根据id进行批量软删除请求
+     *
+     * @param
+     * @return
+     */
+    int[] deleteBatchRequest(List<ServiceRequest> list);
 }
 

@@ -494,4 +494,47 @@ public class ServiceRequestDaoImpl extends TinyDslDaoSupport implements ServiceR
         });
 
     }
+
+    public int[] batchUpdateReview(List<ServiceRequest> list) {
+        if (CollectionUtil.isEmpty(list)) {
+            return new int[0];
+        }
+        return getDslTemplate().batchUpdate(list, new NoParamUpdateGenerateCallback() {
+            public Update generate() {
+                return update(SERVICE_REQUESTTABLE).set(
+                        SERVICE_REQUESTTABLE.REQUEST_REVIEWER.value(new JdbcNamedParameter("requestReviewer"))).where(
+                        SERVICE_REQUESTTABLE.CLIENT_REQUEST_ID.eq(new JdbcNamedParameter("clientRequestId")));
+            }
+        });
+
+    }
+
+    public int[] softDeleteBatch(List<ServiceRequest> list) {
+        if (CollectionUtil.isEmpty(list)) {
+            return new int[0];
+        }
+        return getDslTemplate().batchUpdate(list, new NoParamUpdateGenerateCallback() {
+
+            public Update generate() {
+                return update(SERVICE_REQUESTTABLE).set(
+                        SERVICE_REQUESTTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
+                        SERVICE_REQUESTTABLE.CLIENT_REQUEST_ID.eq(new JdbcNamedParameter("clientRequestId")));
+            }
+        });
+    }
+
+    public int[] batchUpdateReply(List<ServiceRequest> list) {
+        if (CollectionUtil.isEmpty(list)) {
+            return new int[0];
+        }
+        return getDslTemplate().batchUpdate(list, new NoParamUpdateGenerateCallback() {
+
+            public Update generate() {
+                return update(SERVICE_REQUESTTABLE).set(
+                        SERVICE_REQUESTTABLE.REPLIER.value(new JdbcNamedParameter("replier"))).where(
+                        SERVICE_REQUESTTABLE.CLIENT_REQUEST_ID.eq(new JdbcNamedParameter("clientRequestId")));
+            }
+        });
+    }
+
 }

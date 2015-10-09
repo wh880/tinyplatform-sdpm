@@ -2,7 +2,7 @@
   <table id="2d685b3a39e54ddb987b9bb717da6cbd" name="service_client" title="客户信息表" schema="" package-name="">
     <description></description>
     <table-field standard-field-id="1786285066dd4f408bbae01233a96b53" primary="true" unique="true" not-null="true" id="client_id" auto-increase="true"/>
-    <table-field standard-field-id="e89bcf64ae874aa0890d8327301bc817" primary="false" unique="false" not-null="true" id="client_name" auto-increase="false"/>
+    <table-field standard-field-id="e89bcf64ae874aa0890d8327301bc817" primary="false" unique="true" not-null="true" id="client_name" auto-increase="false"/>
     <table-field standard-field-id="2257ec3a6d074affb282cc504df6cc1a" primary="false" unique="false" not-null="false" id="client_spec" auto-increase="false"/>
     <table-field standard-field-id="2dec1562279d4b00a2c1b29c439e8079" primary="false" unique="false" not-null="false" id="client_n_o" auto-increase="false"/>
     <table-field standard-field-id="2aff382b705a4ef0a0e0c67bbfdb2964" primary="false" unique="false" not-null="false" id="client_dept_id" auto-increase="false"/>
@@ -95,7 +95,7 @@
     <table-field standard-field-id="7d045d07a379467799bb865c513acad8" primary="false" unique="false" not-null="true" id="request_id" auto-increase="false"/>
     <table-field standard-field-id="6cf77ba24b7d450dbac1b0569b309943" primary="false" unique="false" not-null="true" id="review_spec" auto-increase="false"/>
     <table-field standard-field-id="5ace7904dd0d47a09aaeb45202ef4d40" primary="false" unique="false" not-null="false" id="requester" auto-increase="false"/>
-    <table-field standard-field-id="ccff4edf5898442a9c3bb4124ff47dce" primary="false" unique="false" not-null="true" id="reviewer" auto-increase="false"/>
+    <table-field standard-field-id="ccff4edf5898442a9c3bb4124ff47dce" primary="false" unique="false" not-null="false" id="reviewer" auto-increase="false"/>
     <table-field standard-field-id="9b1b5ef9cbf94c02bc98decf6e8b1d16" primary="false" unique="false" not-null="true" id="review_date" auto-increase="false"/>
     <table-field standard-field-id="74c6cb9c070841968e68c5281621cec6" primary="false" unique="false" not-null="true" id="review_result" auto-increase="false"/>
     <table-field standard-field-id="ce78d2a1b7a840d298da9e7367125394" primary="false" unique="false" not-null="true" id="review_score" auto-increase="false"/>

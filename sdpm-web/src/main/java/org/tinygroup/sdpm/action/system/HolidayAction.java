@@ -8,6 +8,7 @@ import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -115,14 +116,11 @@ public class HolidayAction extends BaseController{
 		return "/system/page/holiday/batch-del.pagelet";
 	}
 	@RequestMapping("batchDelete")
-	public String batchDelete(Holiday[] holiday)
+	public String batchDelete(Holidays holidays)
 	{
-		List<Holiday> holidays= new ArrayList<Holiday>();
-		for(int i=0,n=holiday.length;i<n;i++){
-			holiday[i].setHolidayDeleted(1);
-			holidays.add(holiday[i]);
-		}
-		holidayService.batchSofeDelete(holidays);
+	   List<Holiday> holiday= holidays.getHoliday();
+	 
+		holidayService.batchSofeDelete(holiday);
 		return  "/system/page/holiday/holiday.page";
 	}
 	

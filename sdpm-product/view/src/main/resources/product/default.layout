@@ -15,6 +15,39 @@
         min-width: 75px
     }
 </style>
+<script >
+	function ajaxRead(ajaxType,opKey,opvalue){
+		var selectCheck = "select[ajaxType='"+ajaxType+"']";
+		$(selectCheck).each(function(){
+				
+				var sele = $(this);	
+				$.ajax({
+					type: "POST",
+					url: "${TINY_CONTEXT_PATH}"+$(this).attr('url'),
+				   	data: $(this).attr('data'),
+				   	dataType:"json",
+				   	contentType : 'application/json;charset=utf-8', //设置请求头信息
+					success: function(data){
+						for(var i=0;i<data.length;data){
+							var em = "<option value='"+data[i][opKey]+"'>"+ data[i][opvalue] +"</option>";
+							if(i==0){
+								em = "<option selected='selected' value='"+data[i][opKey]+"'>"+ data[i][opvalue] +"</option>";
+							}
+							sele.append(em);
+							++i;
+						}
+						
+					},
+					error: function(res){
+						alert("失败");
+					}
+				});
+				
+				
+			});
+			
+	}
+</script>
 
 
 #@div()
