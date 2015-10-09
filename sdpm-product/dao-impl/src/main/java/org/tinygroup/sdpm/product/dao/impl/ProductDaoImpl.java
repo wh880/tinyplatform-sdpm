@@ -16,6 +16,8 @@
 
 package org.tinygroup.sdpm.product.dao.impl;
 
+import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
@@ -41,6 +43,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Pager;
@@ -114,6 +117,20 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 				return delete(PRODUCTTABLE).where(PRODUCTTABLE.PRODUCT_ID.in(t));
 		}
 		},pks);
+	}
+	
+	public List<Product> getByKeys(Integer... pk){
+		
+		SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
+			@SuppressWarnings("rawtypes")
+			public Select generate(Serializable[] t) {
+
+				return selectFrom(PRODUCTTABLE).where(PRODUCTTABLE.PRODUCT_ID.in(t));
+			}
+			
+		};
+		Select select = callback.generate(pk);
+		return getDslSession().fetchList(select, Product.class);
 	}
 
 	public Product getByKey(Integer pk) {
@@ -303,5 +320,15 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		return select;
 	}
 
-	
+	public Integer softDelete(Integer id) {
+        return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
+            public Update generate(Integer id) {
+                Update update = update(PRODUCTTABLE).set(
+                		PRODUCTTABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
+                		PRODUCTTABLE.PRODUCT_ID.eq(id));
+                return update;
+            }
+        });
+
+    }
 }

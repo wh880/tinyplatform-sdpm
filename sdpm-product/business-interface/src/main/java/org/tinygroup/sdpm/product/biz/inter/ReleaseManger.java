@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface ReleaseManger{
@@ -37,6 +38,13 @@ public interface ReleaseManger{
      * @return
      */
     ProductRelease find(Integer releaseId);
+    
+    /**
+	 * 根据多个id查找
+	 * @param releaseId
+	 * @return
+	 */
+	List<ProductRelease> findList(Integer... releaseId);
     /**
      * 根据对象查询
      * @param productRelease

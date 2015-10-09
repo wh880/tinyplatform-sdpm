@@ -54,4 +54,9 @@ public class ProductServiceImpl implements ProductService {
 		return productManager.updateBatch(products);
 	}
 
+	public List<Product> findProductList(Integer... productId) {
+
+		return productManager.findList(productId);
+	}
+
 }

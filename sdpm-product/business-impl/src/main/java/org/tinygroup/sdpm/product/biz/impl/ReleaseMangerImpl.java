@@ -60,5 +60,10 @@ public class ReleaseMangerImpl implements ReleaseManger{
 		return productReleaseDao.query(productRelease, null);
 	}
 
+	public List<ProductRelease> findList(Integer... releaseId) {
+
+		return productReleaseDao.getByKeys(releaseId);
+	}
+
 
 	}

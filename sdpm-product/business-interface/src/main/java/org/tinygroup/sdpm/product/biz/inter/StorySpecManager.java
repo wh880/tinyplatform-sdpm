@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -15,6 +16,13 @@ public interface StorySpecManager {
 	 * @return
 	 */
 	ProductStorySpec find(Integer storyId);
+	
+	/**
+	 * 根据多个id查找
+	 * @param storyspecId
+	 * @return
+	 */
+	List<ProductStorySpec> findList(Integer... storyspecId);
 	
 	/**
 	 * 根据对象查询

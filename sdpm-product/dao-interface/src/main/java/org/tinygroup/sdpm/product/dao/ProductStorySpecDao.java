@@ -16,10 +16,13 @@
 
 package org.tinygroup.sdpm.product.dao;
 
-import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import java.util.List;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 
 public interface ProductStorySpecDao extends BaseDao<ProductStorySpec,Integer> {
-
+	
+	List<ProductStorySpec> getByKeys(Integer... id);
 }

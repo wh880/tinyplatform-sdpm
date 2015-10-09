@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.product.service;
 import java.util.List;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.tinysqldsl.Pager;
@@ -40,6 +41,14 @@ public interface ReleaseService {
 	 * @return
 	 */
 	ProductRelease findRelease(Integer releaseId);
+	
+	/**
+	 * 根据多个ID查找
+	 * @param releaseId
+	 * @return
+	 */
+	List<ProductRelease> findReleaseList(Integer... releaseId);
+	
    
     /**
      * 查找发布
