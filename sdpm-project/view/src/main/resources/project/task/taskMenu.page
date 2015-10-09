@@ -3,9 +3,9 @@
 #@div(divClass="operationbar")
 ##左侧按钮
 <span class="f">
-    <a href="${TINY_CONTEXT_PATH}/project/task/index.page?choose=1" "ml-5" class=${choose
+    <a href="${TINY_CONTEXT_PATH}/project/task/index?choose=1" "ml-5" class=${choose
     =="1"?"active_btn":""}>未关闭</a>
-    <a href="${TINY_CONTEXT_PATH}/project/task/index.page?choose=2" "ml-5" class=${choose
+    <a href="${TINY_CONTEXT_PATH}/project/task/index?choose=2" "ml-5" class=${choose
     =="2"?"active_btn":""}>所有</a>
     <a href="${TINY_CONTEXT_PATH}/project/task/index.page?choose=3" "ml-5" class=${choose
     =="3"?"active_btn":""}>看板</a>
@@ -15,7 +15,7 @@
     =="5"?"active_btn":""}>日历</a>
     <a href="${TINY_CONTEXT_PATH}/project/burn/init?choose=6" "ml-5" class=${choose
     =="6"?"active_btn":""}>燃尽图</a>
-    <a href="${TINY_CONTEXT_PATH}/project/task/index.page?choose=7" "ml-5" class=${choose
+    <a href="${TINY_CONTEXT_PATH}/project/task/index?choose=7" "ml-5" class=${choose
     =="7"?"active_btn":""}>指派给我</a>
 ##更多
 
