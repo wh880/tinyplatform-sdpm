@@ -33,7 +33,7 @@
 #end
 
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/add" "" {"class":"test"})
 
 <div style="width:100%;float:left" class="pageleftpart">
     <div class="infoContent">
@@ -71,14 +71,10 @@
 		#@elementItem()
 			#@sdpmItem("项目类型")
 				#@Tselect2F()
-					#@Tselect2Body("projectType" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="IN">Indiana</option>
-                        <option value="ME">Maine</option>
-                        <option value="MD">Maryland</option>
+					#@Tselect2Body("projectType" "0" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="0">长期项目</option>
+                        <option value="1">短期项目</option>
+                        <option value="2">运维项目</option>
 					#end
 				##填写任意内容，侦听需重新填加 A侦听已内置
 					##@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
@@ -89,17 +85,23 @@
 	##
 		#@elementItem()
 			#@sdpmItem("团队名称")
-				#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+				#tinyInput("text" "projectTeam" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":
+					"标题不能为空！","id":"username","class":"input-text"})
 			#end
 		#end
 		#@elementItem()
 			#@sdpmItem("关联产品")
-				#tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+			###tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+				#@tinySelect("linkProduct" "zh" {"class":"input-text select2","rel":"22","multiple":"multiple"})
+					#for(p : prodcutList)
+					#@tinyOptionItem(p.productId)${p.productName}#end
+				#end
+			#end
 			#end
 		#end
 		#@elementItem()
 			#@sdpmItem("项目描述")
-				#@Teditor("content" "content" {"initialFrameHeight":"200"})Say something#end
+				#@Teditor("projectDesc" "content" {"initialFrameHeight":"200"})Say something#end
 			#end
 		#end
 		#@elementItem()
