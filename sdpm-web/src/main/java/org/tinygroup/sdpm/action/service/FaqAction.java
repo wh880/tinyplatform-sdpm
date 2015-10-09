@@ -43,8 +43,7 @@ public class FaqAction extends BaseController {
         {
             faq = faqService.updateFaq(faq);
         }
-        model.addAttribute("faq",faq);
-        return "/service/faq/faqmenu.page";
+        return "redirect:/service/faq/list";
     }
 
     /*对问题进行“编辑”*/
@@ -75,5 +74,13 @@ public class FaqAction extends BaseController {
         map.put("status", "success");
         map.put("info", "删除成功");
         return map;
+    }
+
+    /*点击问题进去，显示里面的问题和答案。由faqquestion.page跳转过来。*/
+    @RequestMapping("/questionAnswer")
+    public String questionAnswer(Integer id, Model model) {
+        ServiceFaq faqs = faqService.findFaq(id);
+        model.addAttribute("faqs", faqs);
+        return "/service/faq/questionAnswer.page";
     }
 }

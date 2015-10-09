@@ -23,15 +23,19 @@
             #include("/service/serviceCom/tab.page")
         #end
     #end
-    #set(ans= "把zentao/config/my.php 里面install的值改成false。访问禅道，会自动进入安装页面，所有数据都会清空。")
+#* #set(ans= "把zentao/config/my.php 里面install的值改成false。访问禅道，会自动进入安装页面，所有数据都会清空。")*#
+
+#* #set(ans= lfaq.faqAnswer)*#
+
 <div style="width: 75%;float: left">
 ##       #@div(divClass="infoContent")
     #@div(divClass="question_info")
     ##        #@table("问答页面")
         <p class="titleName">问答页面</p>
         #@gridSysRow()
-            #@gridSysCol(12)1.如何初始化项目管理数据库？#end
-            #@gridSysCol(12)${ans}#end
+        #*#@gridSysCol(12)1.如何初始化项目管理数据库？#end*#
+            #@gridSysCol(12)${faqs.faqQuestion}#end
+            #@gridSysCol(12)${faqs.faqAnswer}#end
         #end
     </div>
     <div style="text-align:right;margin:right">

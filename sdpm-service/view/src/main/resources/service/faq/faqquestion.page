@@ -1,9 +1,8 @@
 #@OlTopList()
-#* #topItem(1 "../page/questiondb.page" "如何初始化项目管理数据库？" "18:12")*#
-##    #@normalLiItemsconment(1 "../page/questiondb.page" "访问项目管理，可以绑定域名吗？" "")
+
     #foreach(l:list)
-        #@normalLiItemsconment(1 "../faq/questionAnswer.page" l.faqQuestion "")
-        ##        <a href="${TINY_CONTEXT_PATH}/service/faq/addquestion.page" >#buttonIcon(iconClass="icon-pencil")编辑</a>
+    #*#@normalLiItemsconment(1 "../faq/questionAnswer.page" l.faqQuestion "")*#
+        #@normalLiItemsconment(1 "../faq/questionAnswer?id="+l.faqId l.faqQuestion "")
 
 
         #*faqmenu问题后面的编辑和删除*#
