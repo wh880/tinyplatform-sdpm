@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="quality" parent-id="0" name="测试" href="/quality/bug?get=tbugstatus&amp;productId=1" icon="icon-pencil" sort="600"
+<menu id="quality" parent-id="0" name="测试" href="/quality" icon="icon-pencil" sort="600"
       isShow="1">
-    <menu id="qualityBug" parent-id="quality" name="Bug" href="/quality/bug?bugStatus=1&amp;get=tbugstatus&amp;productId=1" icon="" sort="1"
+    <menu id="qualityBug" parent-id="quality" name="Bug" href="/quality/bug?currentPageId=5" icon="" sort="1"
           isShow="1">
     	 <menu id="tmakesure" name="确认" href="/quality/bug/makesure" icon="icon-search" sort="6"
               isShow="1" scope="testbug-op,testbuginfo-tab"></menu>
          <menu id="tassign" name="指派" href="/quality/bug/assign" icon=" icon-hand-right" sort="5"
               isShow="1" scope="testbug-op,testbuginfo-tab"></menu>
-         <menu id="tsolution" name="解决" href="/quality/bug/solve" icon="icon-ok-sign" sort="4"
+         <menu id="tsolution" name="解决" href="/quality/bug/toSolve" icon="icon-ok-sign" sort="4"
               isShow="1" scope="testbug-op,testbuginfo-tab"></menu>
-         <menu id="tshutdown" name="关闭" href="/quality/bug/close" icon="icon-off" sort="3"
+         <menu id="tshutdown" name="关闭" href="/quality/bug/toClose" icon="icon-off" sort="3"
               isShow="1" scope="testbug-op"></menu>
-         <menu id="tedition" name="编辑" href="/quality/bug/edit" icon="icon-pencil" sort="2"
+         <menu id="tedition" name="编辑" href="/quality/bug/toEdit" icon="icon-pencil" sort="2"
               isShow="1" scope="testbug-op,pro-bug-op,testbuginfo-tab"></menu>
-         <menu id="tproposeBug" name="复制" href="/quality/bug/copy" icon="icon-copy" sort="1"
+         <menu id="tproposeBug" name="复制" href="/quality/bug/toCopy" icon="icon-copy" sort="1"
               isShow="1" scope="testbug-op,pro-bug-op,testbuginfo-tab"></menu>
          <menu id="tbuginput" name="导入" href="/testManagement/page/tabledemo/importBug.pagelet" icon="icon-download-alt" sort="4"
               isShow="1" scope="testbug-tab"></menu>  
@@ -55,12 +55,12 @@
               isShow="1" scope="testbugleft-tab"></menu>
          <menu id="tbugtimeup" name="被延期"  href="/quality/bug?get=tbugtimeup&amp;productId=1" icon="" sort="3"
               isShow="1" scope="testbugleft-tab"></menu> 
-         <menu id="tbugneedchange" name="需求变动"  href="/quality/bug?toStoryId=1&amp;get=tbugneedchange&amp;productId=1" icon="" sort="2"
+         <menu id="bugEleven" name="需求变动"  href="/quality/bug?toStoryId=1&amp;get=tbugneedchange&amp;productId=1" icon="" sort="2"
               isShow="1" scope="testbugleft-tab"></menu>
          <menu id="tsearch" name="搜索"  href="#" icon="" sort="1"
               isShow="1" scope="testbugleft-tab"></menu>                       
     </menu>
-    <menu id="qualityCases" parent-id="quality" name="用例" href="/quality/testcase/?get=tcaseall&amp;productId=1" icon="" sort="1"
+    <menu id="qualityCases" parent-id="quality" name="用例" href="/quality/testCase?currentPageId=5" icon="" sort="1"
           isShow="1">    	 
          <menu id="texecution" name="执行" href="/quality/testcase/execution" icon="icon-play" sort="5"
               isShow="1" scope="testcase-op,testcaseinfo-tab"></menu>

@@ -20,26 +20,37 @@
 
 #@tabBodyCol("ptop-5")
 ##operationbar start
-#@div(divClass="operationbar")
-#set(urlProduct = productId!=null?'productId='+productId+'&':'')
-#set(urlModule = moduleId!=null?'moduleId='+moduleId+'&':'')
-<span class="f">
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=1&currentPageId=3" class="${choose == 1?'active_btn':''}">未关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=2&currentPageId=3" class="${choose == 2?'active_btn':''}">全部需求</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=3&currentPageId=3" class="${choose == 3?'active_btn':''}">指派给我</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=4&currentPageId=3" class="${choose == 4?'active_btn':''}">由我创建</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=5&currentPageId=3" class="${choose == 5?'active_btn':''}">由我评审</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=6&currentPageId=3" class="${choose == 6?'active_btn':''}">由我关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=7&currentPageId=3" class="${choose == 7?'active_btn':''}">草稿</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=8&currentPageId=3" class="${choose == 8?'active_btn':''}">激活</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=9&currentPageId=3" class="${choose == 9?'active_btn':''}">已变更</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=10&currentPageId=3" class="${choose == 10?'active_btn':''}">待关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=11&currentPageId=3" class="${choose == 11?'active_btn':''}">已关闭</a>
+    #@div(divClass="operationbar")
+        #set(urlProduct = productId!=null?'productId='+productId+'&':'')
+        #set(urlModule = moduleId!=null?'moduleId='+moduleId+'&':'')
+    <span class="f">
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=1&currentPageId=3"
+                       class="${choose == 1?'active_btn':''}">未关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=2&currentPageId=3"
+                       class="${choose == 2?'active_btn':''}">全部需求</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=3&currentPageId=3"
+                       class="${choose == 3?'active_btn':''}">指派给我</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=4&currentPageId=3"
+                       class="${choose == 4?'active_btn':''}">由我创建</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=5&currentPageId=3"
+                       class="${choose == 5?'active_btn':''}">由我评审</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=6&currentPageId=3"
+                       class="${choose == 6?'active_btn':''}">由我关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=7&currentPageId=3"
+                       class="${choose == 7?'active_btn':''}">草稿</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=8&currentPageId=3"
+                       class="${choose == 8?'active_btn':''}">激活</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=9&currentPageId=3"
+                       class="${choose == 9?'active_btn':''}">已变更</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=10&currentPageId=3"
+                       class="${choose == 10?'active_btn':''}">待关闭</a>
+					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=11&currentPageId=3"
+                       class="${choose == 11?'active_btn':''}">已关闭</a>
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 
 
-<span class="r">
+    <span class="r">
         #foreach(m:menuManager.getScopeMenus("product-io"))
             #if(m.id=="product-demand-input")
                 #@aModal("#myModal" "导入" "600" "65" "btn-class"
@@ -73,156 +84,159 @@
 
 
 
-#div(divClass="clearfix")
-#include("/product/page/event/mulsearch.page")
-#end
+        #div(divClass="clearfix")
+        #include("/product/page/event/mulsearch.page")
+    #end
 ##operationbar end
 
-#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
-#@toggleLeft({"class":"aclass"})
-#@settoggleLeftTitle()
-产品需求
-#end
+    #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+        #@toggleLeft({"class":"aclass"})
+            #@settoggleLeftTitle()
+            产品需求
+            #end
 
-#@settoggleLeftBody("treeLeftbox")
-#@zTreeList(call("link","/system/module/tree?moduleType=story&moduleRoot=1"))
-#setzTreeValMap({"id":"moduleId","name":"truename","pid":"moduleParent"}) ##key值为固定
-#zTreeSetLinkUrl("http://127.0.0.1:8080/tinyuiweb/mytree.page" )
-#zTreeSetAddUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
-#zTreeSetEditUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
-#zTreeSetDelUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
-#end
-#end
-
-
-#end
+            #@settoggleLeftBody("treeLeftbox")
+                #@zTreeList(call("link","/system/module/tree?moduleType=story&moduleRoot=1"))
+                    #setzTreeValMap({"id":"moduleId","name":"truename","pid":"moduleParent"}) ##key值为固定
+                    #zTreeSetLinkUrl("http://127.0.0.1:8080/tinyuiweb/mytree.page" )
+                    #zTreeSetAddUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
+                    #zTreeSetEditUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
+                    #zTreeSetDelUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
+                #end
+            #end
 
 
-
-#@toggleRight()
-#@tinyTable(storyTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
-#@div(divBaseClass="tinyheaderTools form-inline")
-#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-<input type="button" value="全选" class="btn btn-default btn-primary "
-       onclick="selectAllNullorReserve('storyId','全选');"/>
-<input type="button" value="反选" class="btn btn-default btn-primary"
-       onclick="selectAllNullorReserve('storyId','反选');"/>
-
-
-#foreach(m:menuManager.getScopeMenus("product-oper"))
-#if(m.id=="product-demand-operation")
-#@buttonGroup()
-
-#@dropdownItempatent("dropdownSm" "btn-primary" "操作" "#")
-
-#@ulDropdownMenu(dropdownMenuClass="multi-level")
-#@dropdownsLi("dropdown-submenu")
-#@dropdownA("firstMenu"　"javascript:void(0);")指派给#end
-#@dropdownsUl("dropdown-menu")
-#@dropdownItem("javascript:void(0);" "storyAssignedTo" "secondMenu")admin#end
-#@dropdownItem("javascript:void(0);" "storyAssignedTo" "secondMenu")张三#end
-#@dropdownItem("javascript:void(0);" "storyAssignedTo" "secondMenu")lisi#end
-#end
-#end
-
-#@dropdownsLi("dropdown-submenu")
-#@dropdownA("firstMenu"　"javascript:void(0);")阶段#end
-#@dropdownsUl("dropdown-menu")
-#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")空#end
-#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")未开始#end
-#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已计划#end
-#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已立项#end
-#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")研发中#end
-#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")完毕#end
-#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")测试中#end
-#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")测试完毕#end
-#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已验收#end
-#@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已发布#end
-#end
-#end
-
-#@dropdownsLi("dropdown-submenu")
-#@dropdownA("firstMenu"　"javascript:void(0);")计划#end
-#@dropdownsUl("dropdown-menu")
-#@dropdownItem("javascript:void(0);" "planId" "secondMenu")空#end
-#@dropdownItem("javascript:void(0);" "planId" "secondMenu")计划1#end
-#@dropdownItem("javascript:void(0);" "planId" "secondMenu")计划2#end
-#end
-#end
-
-#@dropdownsLi("dropdown-submenu")
-#@dropdownA("firstMenu"　"javascript:void(0);")评审#end
-#@dropdownsUl("dropdown-menu")
-#@dropdownItem("javascript:void(0);" "storyStatus" "secondMenu")确认通过#end
-#@dropdownItem("javascript:void(0);" "storyStatus" "secondMenu")有待明确#end
-#*		                		#@liDivider()<hr/>#end*#
-#@dropdownsLi("dropdown-submenu")
-#@dropdownA("secondMenu"　"javascript:void(0);")拒绝#end
-#@dropdownsUl("dropdown-menu")
-#@dropdownItem("javascript:void(0);" "" "thirdMenu")已完成#end
-#@dropdownItem("javascript:void(0);" "" "thirdMenu")延期#end
-#@dropdownItem("javascript:void(0);" "" "thirdMenu")不做#end
-#@dropdownItem("javascript:void(0);" "" "thirdMenu")已取消#end
-#@dropdownItem("javascript:void(0);" "" "thirdMenu")计划如此#end
-#end
-#end
-#end
-#end
-#end
-#end
-#end
-#end
-#end
+        #end
 
 
 
+        #@toggleRight()
+            #@tinyTable(storyTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
+                #@div(divBaseClass="tinyheaderTools form-inline")
+                    #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+                <input type="button" value="全选" class="btn btn-default btn-primary "
+                       onclick="selectAllNullorReserve('storyId','全选');"/>
+                <input type="button" value="反选" class="btn btn-default btn-primary"
+                       onclick="selectAllNullorReserve('storyId','反选');"/>
 
 
-#foreach(m:menuManager.getScopeMenus("product-del"))
-#if(m.id=="product-demand-del")
-#@aModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger"
-"/product/page/tabledemo/product-demand-del.pagelet")批量关闭#end
-#end
-#end
-#end
-#@tinyTableContent(TINY_CONTEXT_PATH+"/product/story/search?"+tinyRequestQueryString) ##取数据地址 总数据
-#@thead()
-#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-#@tinyTh({"width":"6"})<input type="checkbox" value="" name="storyId" id="checkboxall">#end
-#@tinyTh({"class":"sorting sorting_desc","rel":"story_id"})ID#end
-#@tinyTh({"class":"sorting","rel":"story_pri"})P#end
-#@tinyTh({"class":"sorting","rel":"story_title"})需求名称#end
-#@tinyTh({"class":"sorting","rel":"plan_id"})计划#end
-#@tinyTh({"class":"sorting","rel":"story_source"})来源#end
-#@tinyTh({"class":"sorting","rel":"story_opened_by"})创建#end
-#@tinyTh({"class":"sorting","rel":"story_assigned_to"})指派#end
-#@tinyTh({"class":"sorting","rel":"story_estimate"})预计#end
-#@tinyTh({"class":"sorting","rel":"story_status"})状态#end
-#@tinyTh({"class":"sorting","rel":"story_stage"})阶段#end
-#@tinyTh({"class":"","rel":"sortname"})操作#end
-#end
-#end
-#end
-##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
-#@dialog("myModal")
-#@dialogHeader()对话框标题#end
-#@dialogBody()< p> 对话框内容…</p>#end
-#@dialogFooter()
-#@buttonEnsure()确定#end
-#@buttonCancel()关闭#end
-#end
-#end
-<script type="text/javascript">
-    $(function () {
-        $('#${tableId}').on('click', '.delBtn', function (e) {
-            user_del(this, '1');
-        });
-    })
-</script>
+                    #foreach(m:menuManager.getScopeMenus("product-oper"))
+                        #if(m.id=="product-demand-operation")
+                            #@buttonGroup()
 
-#end
-#end
-#end
+                                #@dropdownItempatent("dropdownSm" "btn-primary" "操作" "#")
+
+                                    #@ulDropdownMenu(dropdownMenuClass="multi-level")
+                                        #@dropdownsLi("dropdown-submenu")
+                                            #@dropdownA("firstMenu"　"javascript:void(0);")指派给#end
+                                            #@dropdownsUl("dropdown-menu")
+                                                #@dropdownItem(
+                                                    "javascript:void(0);" "storyAssignedTo" "secondMenu")admin#end
+                                                #@dropdownItem(
+                                                    "javascript:void(0);" "storyAssignedTo" "secondMenu")张三#end
+                                                #@dropdownItem(
+                                                    "javascript:void(0);" "storyAssignedTo" "secondMenu")lisi#end
+                                            #end
+                                        #end
+
+                                        #@dropdownsLi("dropdown-submenu")
+                                            #@dropdownA("firstMenu"　"javascript:void(0);")阶段#end
+                                            #@dropdownsUl("dropdown-menu")
+                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")空#end
+                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")未开始#end
+                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已计划#end
+                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已立项#end
+                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")研发中#end
+                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")完毕#end
+                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")测试中#end
+                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")测试完毕#end
+                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已验收#end
+                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已发布#end
+                                            #end
+                                        #end
+
+                                        #@dropdownsLi("dropdown-submenu")
+                                            #@dropdownA("firstMenu"　"javascript:void(0);")计划#end
+                                            #@dropdownsUl("dropdown-menu")
+                                                #@dropdownItem("javascript:void(0);" "planId" "secondMenu")空#end
+                                                #@dropdownItem("javascript:void(0);" "planId" "secondMenu")计划1#end
+                                                #@dropdownItem("javascript:void(0);" "planId" "secondMenu")计划2#end
+                                            #end
+                                        #end
+
+                                        #@dropdownsLi("dropdown-submenu")
+                                            #@dropdownA("firstMenu"　"javascript:void(0);")评审#end
+                                            #@dropdownsUl("dropdown-menu")
+                                                #@dropdownItem("javascript:void(0);" "storyStatus" "secondMenu")确认通过#end
+                                                #@dropdownItem("javascript:void(0);" "storyStatus" "secondMenu")有待明确#end
+                                            #*		                		#@liDivider()<hr/>#end*#
+                                                #@dropdownsLi("dropdown-submenu")
+                                                    #@dropdownA("secondMenu"　"javascript:void(0);")拒绝#end
+                                                    #@dropdownsUl("dropdown-menu")
+                                                        #@dropdownItem("javascript:void(0);" "" "thirdMenu")已完成#end
+                                                        #@dropdownItem("javascript:void(0);" "" "thirdMenu")延期#end
+                                                        #@dropdownItem("javascript:void(0);" "" "thirdMenu")不做#end
+                                                        #@dropdownItem("javascript:void(0);" "" "thirdMenu")已取消#end
+                                                        #@dropdownItem("javascript:void(0);" "" "thirdMenu")计划如此#end
+                                                    #end
+                                                #end
+                                            #end
+                                        #end
+                                    #end
+                                #end
+                            #end
+                        #end
+                    #end
+
+
+
+
+
+                    #foreach(m:menuManager.getScopeMenus("product-del"))
+                        #if(m.id=="product-demand-del")
+                            #@aModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger"
+                                "/product/page/tabledemo/product-demand-del.pagelet")批量关闭#end
+                        #end
+                    #end
+                #end
+                #@tinyTableContent(TINY_CONTEXT_PATH+"/product/story/search?"+tinyRequestQueryString) ##取数据地址 总数据
+                    #@thead()
+                        #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+                            #@tinyTh({"width":"6"})<input type="checkbox" value="" name="storyId" id="checkboxall">#end
+                            #@tinyTh({"class":"sorting sorting_desc","rel":"story_id"})ID#end
+                            #@tinyTh({"class":"sorting","rel":"story_pri"})P#end
+                            #@tinyTh({"class":"sorting","rel":"story_title"})需求名称#end
+                            #@tinyTh({"class":"sorting","rel":"plan_id"})计划#end
+                            #@tinyTh({"class":"sorting","rel":"story_source"})来源#end
+                            #@tinyTh({"class":"sorting","rel":"story_opened_by"})创建#end
+                            #@tinyTh({"class":"sorting","rel":"story_assigned_to"})指派#end
+                            #@tinyTh({"class":"sorting","rel":"story_estimate"})预计#end
+                            #@tinyTh({"class":"sorting","rel":"story_status"})状态#end
+                            #@tinyTh({"class":"sorting","rel":"story_stage"})阶段#end
+                            #@tinyTh({"class":"","rel":"sortname"})操作#end
+                        #end
+                    #end
+                #end
+            ##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
+                #@dialog("myModal")
+                    #@dialogHeader()对话框标题#end
+                    #@dialogBody()< p> 对话框内容…</p>#end
+                    #@dialogFooter()
+                        #@buttonEnsure()确定#end
+                        #@buttonCancel()关闭#end
+                    #end
+                #end
+            <script type="text/javascript">
+                $(function () {
+                    $('#${tableId}').on('click', '.delBtn', function (e) {
+                        user_del(this, '1');
+                    });
+                })
+            </script>
+
+            #end
+        #end
+    #end
 
 #end
 

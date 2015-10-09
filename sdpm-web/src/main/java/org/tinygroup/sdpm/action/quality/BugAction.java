@@ -14,10 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,10 +40,11 @@ public class BugAction extends BaseController {
 	private BugService bugService;
 		
 	@RequestMapping("")
-	public String form(String get,QualityBug bug,Model model){
-		bugService.findBugList(bug);
-		model.addAttribute("bug", bug);
-		model.addAttribute("get", get);
+	public String form(String get,QualityBug bug, HttpServletRequest request){
+		String queryString = request.getQueryString();
+		if(queryString!=null&&!queryString.contains("status")){
+			return "redirect:/quality/bug?status=tbugstatus&"+queryString;
+		}
 		return "/testManagement/page/Bug.page";
 	}
 	
@@ -54,13 +58,12 @@ public class BugAction extends BaseController {
 	}
 	
 	@RequestMapping("/findBug")
-	public String findBugPager(Integer start,Integer limit,String order,String ordertype,QualityBug bug,Model model){
+	public String findBugPager(Integer start,Integer limit,String order,String ordertype,QualityBug bug,Model model,HttpServletRequest request){
 		boolean asc = true;		
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
-		//QualityBug bug = new QualityBug();
-		//	bug.setProductId(id);
+		bug.setProductId((Integer) request.getSession().getAttribute("qualityProductId"));
 		Pager<QualityBug> bugpager = bugService.findBugListPager(start, limit, bug, order, asc);
 		model.addAttribute("bugpager",bugpager);
 		return "/testManagement/data/BugData.pagelet";
@@ -78,14 +81,42 @@ public class BugAction extends BaseController {
 	    model.addAttribute("bug",bug);
 		return "/testManagement/page/tabledemo/makesure.page";
 	}
-	
+	@RequestMapping("/sure")
+	public String makesure(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
+		bug.setBugConfirmed(1);
+		bugService.updateBug(bug);
+
+		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
+		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
+		systemAction.setActionProject(bug.getProductId());
+		systemAction.setActionObjectType("makeSure");
+		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
+		logService.log(systemAction);
+		return "redirect:"+"/quality/bug";
+	}
+
 	@RequestMapping("/assign")
 	public String assign(Integer bugId,Model model){		
-		QualityBug bug = new QualityBug();
-		bug = bugService.findById(bugId);
-		//bug.setBugAssignedDate(new Date());
+		QualityBug bug = bugService.findById(bugId);
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/assign.page";
+	}
+
+	@RequestMapping("/assignTo")
+	public String assign(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
+		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
+		bug.setBugAssignedDate(new Date());
+		bug.setBugAssignedTo(user != null?user.getOrgUserId():"0");
+		bugService.updateBug(bug);
+
+		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
+		systemAction.setActionProject(bug.getProductId());
+		systemAction.setActionObjectType("assignTo");
+		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
+		logService.log(systemAction);
+		return "redirect:"+"/quality/bug";
 	}
 	
 	@ResponseBody
@@ -98,7 +129,7 @@ public class BugAction extends BaseController {
         return map;
     }
 	
-	@RequestMapping("/solve")
+	@RequestMapping("/toSolve")
 	public String solve(Integer bugId,Model model){
 		QualityBug bug = new QualityBug();
 		bug = bugService.findById(bugId);
@@ -106,8 +137,24 @@ public class BugAction extends BaseController {
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/solution.page";
 	}
+	@RequestMapping("/solve")
+	public String solve(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
+		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
+		bug.setBugResolvedBy(user != null?user.getOrgUserId():"0");
+		bug.setBugResolvedDate(new Date());
+		bug.setBugStatus("2");
+		bugService.updateBug(bug);
+
+		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
+		systemAction.setActionProject(bug.getProductId());
+		systemAction.setActionObjectType("resolve");
+		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
+		logService.log(systemAction);
+		return "redirect:"+"/quality/bug";
+	}
 	
-	@RequestMapping("/close")
+	@RequestMapping("/toClose")
 	public String close(Integer bugId,Model model){
 		QualityBug bug = new QualityBug();
 		bug = bugService.findById(bugId);
@@ -115,13 +162,47 @@ public class BugAction extends BaseController {
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/shutdown.page";
 	}
+
+	@RequestMapping("/close")
+	public String close(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
+		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
+		bug.setBugClosedBy(user != null?user.getOrgUserId():"0");
+		bug.setBugClosedDate(new Date());
+		bug.setBugStatus("3");
+		bugService.updateBug(bug);
+
+		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
+		systemAction.setActionProject(bug.getProductId());
+		systemAction.setActionObjectType("close");
+		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
+		logService.log(systemAction);
+		return "redirect:"+"/quality/bug";
+	}
 	
-	@RequestMapping("/edit")
+	@RequestMapping("/toEdit")
 	public String edit(Integer bugId,Model model){
 		QualityBug bug = new QualityBug();
 		bug = bugService.findById(bugId);
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/edition.page";
+	}
+
+	@RequestMapping("/edit")
+	public String edit(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
+		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
+		QualityBug qualityBug = bugService.findById(bug.getBugId());
+		bug.setBugLastEditedBy(user != null?user.getOrgUserId():"0");
+		bug.setBugLastEditedDate(new Date());
+		bugService.updateBug(bug);
+
+		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
+		systemAction.setActionProject(bug.getProductId());
+		systemAction.setActionObjectType("edit");
+		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
+		logService.log(qualityBug,bug,systemAction);
+		return "redirect:"+"/quality/bug";
 	}
 	
 	@RequestMapping("/editionPaging")
@@ -137,31 +218,42 @@ public class BugAction extends BaseController {
 		return "/testManagement/page/proposeBug.page";
 	}
 	
-	@RequestMapping("/copy")
+	@RequestMapping("/toCopy")
 	public String copy(Integer bugId,Model model){
-		QualityBug bug = new QualityBug();
-		bug = bugService.findById(bugId);
+		QualityBug bug = bugService.findById(bugId);
 		model.addAttribute("bug",bug);
 		return "/testManagement/page/copyBug.page";
 	}
 	
-	@RequestMapping(value = "/copySave",method = RequestMethod.POST)
-	public String copySave(QualityBug bug,Model model){
+	@RequestMapping(value = "/copy",method = RequestMethod.POST)
+	public String copySave(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
+		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
 		bug.setBugOpenedDate(new Date());
+		bug.setBugOpenedBy(user != null?user.getOrgUserId():"0");
 		bugService.addBug(bug);
-		return "redirect:"+"/quality/bug"; 
+
+		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
+		systemAction.setActionProject(bug.getProductId());
+		systemAction.setActionObjectType("copyBug");
+		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
+		logService.log(systemAction);
+		return "redirect:"+"/quality/bug";
 	}
 	
 	@RequestMapping(value = "/save",method = RequestMethod.POST)
-	public String save(QualityBug bug,Model model){
-		if(bug.getBugId() == null){
-			bug.setBugOpenedDate(new Date());
-			bugService.addBug(bug);			
-		}else{
-			bug.setBugLastEditedDate(new Date());
-			bugService.updateBug(bug);
-		}	
-	//	model.addAttribute("bugsave",bug);
+	public String save(QualityBug bug,SystemAction systemAction, HttpServletRequest request){
+		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
+		bug.setBugOpenedDate(new Date());
+		bug.setBugOpenedBy(user != null?user.getOrgUserId():"0");
+		bugService.addBug(bug);
+
+		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
+		systemAction.setActionProject(bug.getProductId());
+		systemAction.setActionObjectType("openBug");
+		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
+		logService.log(systemAction);
 		return "redirect:"+"/quality/bug";
 	}
 

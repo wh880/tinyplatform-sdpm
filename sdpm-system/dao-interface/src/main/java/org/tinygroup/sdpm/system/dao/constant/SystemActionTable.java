@@ -56,6 +56,10 @@ public class SystemActionTable extends Table {
 	 * 
 	 */
 	public final Column ACTION_PRODUCT = new Column(this, "action_product");
+	/**
+	 * 动作
+	 */
+	public final Column ACTION_ACTION = new Column(this, "action_action");
 
 	/** 
 	 * 操作者

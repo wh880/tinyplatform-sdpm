@@ -93,5 +93,9 @@ public interface RequestManager {
      * @return
      */
     Integer changeStatus(Integer id);
+
+    int[] updateReply(List<ServiceRequest> list);
+
+    int[] updateReview(List<ServiceRequest> list);
 }
 

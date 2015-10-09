@@ -20,11 +20,10 @@
 	#@tabBodyCol("ptop-5")
 ##operationbar start1
 #end
-	#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/copySave?bugConfirmed=0" "post" {"class":""})
-		#hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
+	#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/copy" "post" {"class":""})
 	<div style="width:100%">
     	<div class="infoContent">
-    		<p class="titleName">提Bug</p>
+    		<p class="titleName">复制Bug</p>
 			#@elementItem()
 				#@colLabel()产品模块：#end
 				#@formControlDiv("col-8")
@@ -126,7 +125,7 @@
 				#@colLabel()Bug标题/优先级：#end
 				#@formControlDiv("col-8")
 				#@div(divClass="col-5")
-					#tinyInput("text" "bugTitle" ""{"datatype":"*","id":"版本","class":"input-text"})
+					#tinyInput("text" "bugTitle" bug?.bugTitle {"datatype":"*","id":"版本","class":"input-text"})
 				#end
 				#@div(divClass="col-0")&nbsp&nbsp#end
                 	 #@div(divClass="col-3")					

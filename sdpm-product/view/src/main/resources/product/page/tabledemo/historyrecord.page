@@ -1,14 +1,28 @@
 #import("/org/tinygroup/fold/components/fold.component")
 #@foldMenu("" "Tinyfold3" "" "width:100%")
-    #@foldItem("2015-08-26 09:19:52, 由 Demo 指派给 Demo")记录详情<br>
-		修改了<p>预计剩余</p>值为 "0"，新值为 "2"。
+    #for(a:action)
+   
+    #@foldItem(a?.actionActor+", 由 "+a?.actionDate+ "指派给" +a?.actionActor)
+        #for(h:history)
+                                     
+        #if(h?.historyAction==a?.actionId)
+                                  记录详情<br>
+                                      修改了
+##                                      <p>预计剩余</p>
+                                      值为 
+            
+               "${h?.historyOld}"，新值为 "${h?.historyNew}"。
+               #end
+        #end
+		
 	 #end
-	 #@foldItem("2015-08-25 09:15:58, 由 Demo 开始启动")记录详情<br>
-		修改了<p>预计剩余</p>值为 "0"，新值为 "2"。
-	 #end
-	 #@foldItem("2015-08-24 09:16:58, 由 Demo 指派给 Mack")记录详情<br>
-		修改了<p>预计剩余</p>值为 "0"，新值为 "2"。
-	 #end
+	#end
+##	 #@foldItem("2015-08-25 09:15:58, 由 Demo 开始启动")记录详情<br>
+##		修改了<p>预计剩余</p>值为 "0"，新值为 "2"。
+##	 #end
+##	 #@foldItem("2015-08-24 09:16:58, 由 Demo 指派给 Mack")记录详情<br>
+##		修改了<p>预计剩余</p>值为 "0"，新值为 "2"。
+##	 #end
 #end 
 <script type="text/javascript">
 $(function(){
