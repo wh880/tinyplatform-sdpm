@@ -8,35 +8,40 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.tinysqldsl.Pager;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by chenpeng15668 on 2015-9-24
  */
 
 @Controller
-@RequestMapping("quality/testcase")
+@RequestMapping("quality/testCase")
 public class TestCaseAction extends BaseController {
 	
 	@Autowired
 	private TestCaseService testCaseService;
 	
 	@RequestMapping("")
-	public String form(String get,QualityTestCase testCase,Model model){
-		testCaseService.findTestCaseList(testCase);
-		model.addAttribute("get", get);
-		model.addAttribute("testCase", testCase);
+	public String form(String get,QualityTestCase testCase, HttpServletRequest request){
+		String queryString = request.getQueryString();
+		if(queryString!=null&&!queryString.contains("status")){
+			return "redirect:quality/testCase?status=tcaseall&"+queryString;
+		}
 		return "testManagement/page/cases.page";
 	}	
 	
 	@RequestMapping("/findPager")
-	public String findPager(Integer start,Integer limit,String order,String ordertype,QualityTestCase testcase,Model model){
+	public String findPager(Integer start,Integer limit,String order,String ordertype,QualityTestCase testcase,Model model, HttpServletRequest request){
 		boolean asc = true;		
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
+		testcase.setProductId((Integer) request.getSession().getAttribute("qualityProductId"));
 		Pager<QualityTestCase> casepager = testCaseService.findTestCasePager(start, limit, testcase, order,asc);
 		model.addAttribute("casepager",casepager);
 		return "testManagement/data/casesData.pagelet";
