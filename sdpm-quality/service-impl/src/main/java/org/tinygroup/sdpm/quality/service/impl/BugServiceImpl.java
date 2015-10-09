@@ -20,6 +20,7 @@ public class BugServiceImpl implements BugService {
 	}
 	
 	public QualityBug addBug(QualityBug bug){
+		bug.setBugStatus("1");
 		return bugmanager.add(bug);
 	}
 	

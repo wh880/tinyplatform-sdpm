@@ -1,6 +1,44 @@
 #*
 #!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 *#
+
+<script >
+
+	
+	$(document).ready(function(){
+		
+		ajaxRead("orguser","orgUserId","orgUserAccount");
+		
+#*		$("select[ajaxType='orguser']").each(function(){
+			
+			var sele = $(this);	
+		
+			$.ajax({
+				type: "POST",
+				url: "${TINY_CONTEXT_PATH}"+$(this).attr('url'),
+			   	data: $(this).attr('data'),
+			   	dataType:"json",
+			   	contentType : 'application/json;charset=utf-8', //设置请求头信息
+				success: function(data){
+					for(var i=0;i<data.length;data){
+						var em = "<option value='"+data[i].orgUserId+"'>"+ data[i].orgUserAccount +"</option>";
+						sele.append(em);
+						++i;
+					}
+					
+				},
+				error: function(res){
+					alert("失败");
+				}
+			});
+			
+			
+		});*#
+		
+	});
+	
+</script>
+
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 
@@ -29,7 +67,7 @@
             #@colLabel()产品负责人：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("productOwner" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("productOwner" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":"orguser","data":""}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">A</option>
                         <option value="DE">B</option>
                         <option value="FL">C</option>
@@ -47,7 +85,7 @@
             #@colLabel()测试负责人：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("productQualityManager" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("productQualityManager" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":"orguser","data":""}) ##,"multiple":"multiple"加上为多选项
                         <option value="CT">甲</option>
                         <option value="DE">乙</option>
                         <option value="FL">丙</option>
@@ -63,10 +101,8 @@
             #@colLabel()发布负责人：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("productDeliveryManager" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="CT">项目经理</option>
-                        <option value="DE">产品经理</option>
-                        <option value="FL">开发主管</option>
+                    #@Tselect2Body("productDeliveryManager" "IN" {"class":"input-text select2 ","url":"/org/user/userList","ajaxType":"orguser","data":""}) ##,"multiple":"multiple"加上为多选项
+                        
                     #end
 
                     #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
@@ -96,8 +132,8 @@
             #end
             #@validateDiv("col-2")#end
         #end
-        #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
-            #@colLabel()分组白名单#end
+        #@elementItem(elementId="whitelistBox" eleItemClass="hidden")
+            #@colLabel()分组白名单：#end
             #@skinMinimal("col-8")
             	#@Tcheckboxes("productWhiteList" "")
 					#@Tcheckbox("admin")管理员#end

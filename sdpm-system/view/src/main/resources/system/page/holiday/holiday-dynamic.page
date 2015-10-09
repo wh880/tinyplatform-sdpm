@@ -20,12 +20,14 @@
 	            </tr>*#
 	            <tr>
 					<td  width="100%">
-						${a?.actionDate}, admin 
-						<em>删除了</em> 假期
+						${a?.actionDate}, ${a?.actionActor} 
+						<em>删除了</em> 假期   
+						
 						<a href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">${a?.actionObjectId}</a>。
-					</td>
+					</td> 
+					
 				</tr>
-	         #end
+	            #end
         </table>
 	</div>
 </div>

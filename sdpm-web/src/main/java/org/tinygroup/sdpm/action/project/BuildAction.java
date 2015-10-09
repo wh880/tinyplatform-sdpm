@@ -87,7 +87,7 @@ public class BuildAction extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/delete")
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public Map<String, String> delete(Integer id, Model model) {
         Integer res = buildService.softDeleteBuild(id);
         Map<String, String> map = new HashMap<String, String>();

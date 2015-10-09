@@ -17,6 +17,10 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
+import org.tinygroup.sdpm.system.service.inter.ActionService;
+import org.tinygroup.sdpm.system.service.inter.HistoryService;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.weblayer.WebContext;
 
@@ -35,10 +39,17 @@ public class ProductAction  extends BaseController{
 	
 	@Autowired
 	private UserService  userService;
+	
+	@Autowired
+	private HistoryService historyService;
+	
+	@Autowired
+	private ActionService actionService;
 
 	@RequestMapping("")
-	public String productAction(HttpServletRequest request){
+	public String productAction(HttpServletRequest request, WebContext webContext){
 		List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
+		String oldUrl = webContext.get("oldUrl");
 		if(list == null|| list.size()==0){
 			list = productService.findProductList(new Product(),"productId","desc");
 			request.getSession().setAttribute("productList",list);
@@ -95,7 +106,14 @@ public class ProductAction  extends BaseController{
 		}
 		
 		Product product = productService.findProduct(productId);
+		SystemHistory history = new SystemHistory();
+		List<SystemHistory> histories = historyService.find(history);
+		SystemAction action = new SystemAction();
+		action.setActionObjectType("story");
+		List<SystemAction> actions = actionService.find(action);
+		model.addAttribute("action", actions);
 		model.addAttribute("product", product);
+		model.addAttribute("history", histories);
 		
 		if ("overview".equals(forward)) {
 			return "/product/page/project/overview.page";
