@@ -66,4 +66,12 @@ public class RequestManagerImpl implements RequestManager{
     public Integer changeStatus(Integer id) {
         return requestDao.changeStatus(id);
     }
+
+    public int[] updateReply(List<ServiceRequest> list) {
+        return requestDao.batchUpdateReply(list);
+    }
+
+    public int[] updateReview(List<ServiceRequest> list) {
+        return requestDao.batchUpdateReview(list);
+    }
 }

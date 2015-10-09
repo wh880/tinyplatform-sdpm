@@ -84,5 +84,9 @@ public interface RequestService {
      * @return
      */
     Integer saveReply(ServiceRequest clientRequest);
+
+    int[] updateReply(List<ServiceRequest> list);
+
+    int[] updateReview(List<ServiceRequest> list);
 }
 

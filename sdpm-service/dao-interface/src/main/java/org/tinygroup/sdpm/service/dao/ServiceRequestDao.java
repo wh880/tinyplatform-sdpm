@@ -21,6 +21,8 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.List;
+
 public interface ServiceRequestDao extends BaseDao<ServiceRequest, Integer> {
     Integer close(ServiceRequest clientRequest);
 
@@ -29,5 +31,8 @@ public interface ServiceRequestDao extends BaseDao<ServiceRequest, Integer> {
 
     Pager<ServiceRequest> queryPagerBy(int start, int limit, ServiceRequest t, Integer statues, OrderBy... orderArgs);
 
+    int[] batchUpdateReply(List<ServiceRequest> list);
     Integer changeStatus(Integer id);
+
+    int[] batchUpdateReview(List<ServiceRequest> list);
 }

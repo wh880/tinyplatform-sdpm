@@ -57,5 +57,12 @@ public class RequestServiceImpl implements RequestService {
         return requestManager.saveReply(clientRequest);
     }
 
+    public int[] updateReply(List<ServiceRequest> list) {
+        return requestManager.updateReply(list);
+    }
+
+    public int[] updateReview(List<ServiceRequest> list) {
+        return requestManager.updateReview(list);
+    }
 
 }

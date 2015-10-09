@@ -54,5 +54,13 @@ public interface ReviewManager {
      * @return
      */
     ServiceReview findByRequestId(Integer id);
+
+    /**
+     * 指派回访
+     *
+     * @param
+     * @return
+     */
+    int[] updateReview(List<ServiceReview> list, String name);
 }
 

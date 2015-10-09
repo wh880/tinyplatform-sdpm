@@ -16,6 +16,7 @@
 
 package org.tinygroup.sdpm.service.dao.pojo;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 
@@ -23,7 +24,7 @@ import java.util.Date;
  * 客户请求表
  *
  */
-public class ServiceRequest {
+public class ServiceRequest implements Serializable {
 	public static Integer DELETE_YES = 1;
 	public static Integer DELETE_NO = 0;
 	public static Integer CREATED = 0;
