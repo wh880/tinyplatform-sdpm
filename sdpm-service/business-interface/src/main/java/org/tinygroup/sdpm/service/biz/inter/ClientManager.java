@@ -52,12 +52,12 @@ public interface ClientManager {
     Integer delete(Integer id);
 
     /**
-     * 根据id进行批量软删除客户
+     * 根据list.id进行批量软删除客户
      *
-     * @param id 主键
+     * @param
      * @return
      */
-    Integer deleteBatch(Integer id);
+    int[] deleteBatch(List<ServiceClient> list);
 
 
     /**

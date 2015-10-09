@@ -7,6 +7,52 @@
 <li>"+"需求"+"</li>")
 
 
+<script>
+	
+	$(document).ready(function(){
+	
+		$(".batchCloseFormsSubmit").on("click",function(){
+			$("form[name='batchCloseForm']").trigger("submit");
+		
+		});
+	
+		
+		$("#betchClose").on("mousedown",function(){
+			
+			
+			var href = $(this).attr("href");
+			if(href.indexOf('?')>0){
+				href = href.substring(0,href.indexOf('?'));
+			}
+			
+			var checklist=[];
+			$("input:checked").each(function(){
+				if("checkboxall"!=$(this).attr("id")){
+					checklist.push($(this).val());
+				}
+				
+			});	
+			if(checklist.length==0){
+				alert("请选择数据");
+			}
+			var data = ""
+			for(var i=0;i<checklist.length;i++){
+				if(i==0){
+					data = data + "?storyId=" + checklist[i];
+				}else{
+					data = data + "&storyId=" + checklist[i];
+				}
+			}
+			$(this).attr("href",href+data);
+		});
+		
+		
+	});
+	
+</script>
+
+
+
 #macro liDropdownMenu(rName)
 <li class="dropdown-submenu">
     <a tabindex="-1" data-toggle="tab">${rName}</a>
@@ -191,11 +237,10 @@
 
 
 
-
                     #foreach(m:menuManager.getScopeMenus("product-del"))
                         #if(m.id=="product-demand-del")
-                            #@aModal("#myModal" "关闭" "1000" "500" "btn radius btn-danger"
-                                "/product/page/tabledemo/product-demand-del.pagelet")批量关闭#end
+                        #set(dae=[34,36])
+                            #@btnModal("#myModal" "关闭" "1000" "400" "btn radius btn-danger" "/product/story/findByKeys" "betchClose")批量关闭#end
                         #end
                     #end
                 #end
@@ -222,7 +267,7 @@
                     #@dialogHeader()对话框标题#end
                     #@dialogBody()< p> 对话框内容…</p>#end
                     #@dialogFooter()
-                        #@buttonEnsure()确定#end
+                        #@buttonEnsure("batchCloseFormsSubmit")确定#end
                         #@buttonCancel()关闭#end
                     #end
                 #end

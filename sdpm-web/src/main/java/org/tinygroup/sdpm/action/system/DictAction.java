@@ -16,6 +16,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.DictService;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.weblayer.WebContext;
 @Controller
 @RequestMapping("system/dict")
 public class DictAction extends BaseController{
@@ -91,5 +92,10 @@ public class DictAction extends BaseController{
 	   	map.put("status","y" );
    		return map;
    }
+	public String findTree(WebContext webContext){
+		String str=webContext.get("mo");
+	
+		return"";
+	}
 
 }

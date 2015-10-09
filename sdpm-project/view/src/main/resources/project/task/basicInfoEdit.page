@@ -113,7 +113,7 @@
                     #@th()优先级#end
                     #@td()#@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body("taskPri" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("taskPri" task?.taskPri {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -130,7 +130,7 @@
                     #@th()抄送给#end
                     #@td()#@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body("taskMailto" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("taskMailto" task?.taskMailto {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                 <option value="CT">Connecticut</option>
                                 <option value="DE">Delaware</option>
                                 <option value="FL">Florida</option>

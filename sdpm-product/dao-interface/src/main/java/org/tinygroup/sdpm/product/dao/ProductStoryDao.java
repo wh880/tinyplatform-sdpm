@@ -16,6 +16,8 @@
 
 package org.tinygroup.sdpm.product.dao;
 
+import java.util.List;
+
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -26,4 +28,6 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 	public Pager<ProductStory> complexQuery(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys);
 	
 	Integer softDelete(Integer id);
+	
+	List<ProductStory> getByKeys(Integer... id);
 }

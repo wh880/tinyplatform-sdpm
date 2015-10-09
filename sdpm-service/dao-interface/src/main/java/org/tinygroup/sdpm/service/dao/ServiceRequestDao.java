@@ -35,4 +35,6 @@ public interface ServiceRequestDao extends BaseDao<ServiceRequest, Integer> {
     Integer changeStatus(Integer id);
 
     int[] batchUpdateReview(List<ServiceRequest> list);
+
+    int[] softDeleteBatch(List<ServiceRequest> list);
 }

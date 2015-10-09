@@ -50,5 +50,10 @@ public class PlanServiceImpl implements PlanService {
 		return planManager.delete(planId);
 	}
 
+	public List<ProductPlan> findPlanList(Integer... planId) {
+
+		return planManager.findList(planId);
+	}
+
 
 }

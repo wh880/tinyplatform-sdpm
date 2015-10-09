@@ -51,6 +51,11 @@ public class ProductLineServiceImpl implements ProductLineService {
 		return productLineManager.findPager(page, pagesize, productLine, order, ordertype);
 	}
 
+	public List<ProductLine> findlist(ProductLine productLine) {
+		
+		return productLineManager.findList(productLine);
+	}
+
 	
 
 

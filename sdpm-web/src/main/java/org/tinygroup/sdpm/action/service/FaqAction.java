@@ -4,14 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
 import org.tinygroup.sdpm.service.service.inter.FaqService;
 
+import java.util.HashMap;
 import java.util.List;
-/*import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.tinygroup.commons.tools.StringUtil;*/
+import java.util.Map;
+
 
 @Controller
 @RequestMapping("/service/faq")
@@ -42,8 +43,7 @@ public class FaqAction extends BaseController {
         {
             faq = faqService.updateFaq(faq);
         }
-        model.addAttribute("faq",faq);
-        return "/service/faq/faqmenu.page";
+        return "redirect:/service/faq/list";
     }
 
     /*对问题进行“编辑”*/
@@ -65,13 +65,43 @@ public class FaqAction extends BaseController {
         return "/service/faq/faqmenu.page";
     }
     /*删除*/
+    @ResponseBody
     @RequestMapping("/delete")
-    public String delete(Integer id)
+    public Map delete(Integer id)
     {
         faqService.deleteFaq(id);
-        return "/service/faq/faqmenu.page";
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
     }
 
+    /*点击问题进去，显示里面的问题和答案。由faqquestion.page跳转过来。*/
+    @RequestMapping("/questionAnswer")
+    public String questionAnswer(Integer id, Model model) {
+        ServiceFaq faqs = faqService.findFaq(id);
+        model.addAttribute("faqs", faqs);
+        return "/service/faq/questionAnswer.page";
+    }
 
+    /*点击问题进去，显示里面的编辑和删除*/
+    @RequestMapping(value = "/faqContentEdit")
+    public String slaContentEdit(Integer id, Model model) {
+        if (id != null) {
+            ServiceFaq faq = faqService.findFaq(id);
+            model.addAttribute("faq", faq);
+        }
 
+        return "/service/faq/addquestion.page";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/faqContentDelete")
+    public Map faqTitleDelete(Integer id) {
+        faqService.deleteFaq(id);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "y");
+        map.put("info", "删除成功");
+        return map;
+    }
 }

@@ -37,7 +37,7 @@ public class StoryServiceImpl implements StoryService {
 		return storyManager.find(storyId);
 	}
 
-	public int[] updateBatchStory(ProductStory[] stories) {
+	public int[] updateBatchStory(List<ProductStory> stories) {
 		
 		return storyManager.updateBatch(stories);
 	}
@@ -48,7 +48,13 @@ public class StoryServiceImpl implements StoryService {
 	}
 
 	public Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
+	
 		return storyManager.findPager(start, limit, story,statusCondition, conditions, groupOperate, columnName, asc);
+	}
+
+	public List<ProductStory> findStoryList(Integer... storyId) {
+
+		return storyManager.findList(storyId);
 	}
 
 

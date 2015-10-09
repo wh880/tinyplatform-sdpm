@@ -14,6 +14,7 @@ import org.tinygroup.sdpm.service.service.inter.ClientUserService;
 import org.tinygroup.sdpm.service.service.inter.SlaService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,6 +88,28 @@ public class ClientAction extends BaseController {
         clientService.deleteClient(id);
         clientUserService.deleteAllClientUser(id);
         Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "y");
+        map.put("info", "删除成功");
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/batchDelete")
+    public Map batchDelete(String ids) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (ids == null) {
+            map.put("status", "n");
+            map.put("info", "删除失败");
+            return map;
+        }
+        List<ServiceClient> list = new ArrayList<ServiceClient>();
+        for (String s : ids.split(",")) {
+            ServiceClient serviceClient = new ServiceClient();
+            serviceClient.setClientId(Integer.valueOf(s));
+            serviceClient.setDeleted(serviceClient.DELETE_YES);
+            list.add(serviceClient);
+        }
+        clientService.deleteBatchClient(list);
         map.put("status", "y");
         map.put("info", "删除成功");
         return map;

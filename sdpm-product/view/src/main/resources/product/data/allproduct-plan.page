@@ -7,7 +7,7 @@
 #@tr()
 	#@td()<input type="checkbox" value="1" name="product-plan">#end
 	#@td()${plan?.planId}#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/relation-plan/product-al-req.page">${plan?.planName}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/product/plan/forword/reRelateStory?planId=${plan.planId}">${plan?.planName}</a>#end
 	#@td()${plan?.planSpec}#end
 	#@td()${plan?.planBeginDate?formatDate(plan?.planBeginDate,'yyyy年MM月dd日'):""}#end
 	#@td()${plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy年MM月dd日'):""}#end

@@ -17,6 +17,7 @@
 package org.tinygroup.sdpm.product.dao.impl;
 
 import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.PRODUCT_RELEASETABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
@@ -41,6 +42,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Pager;
@@ -102,6 +104,20 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 				return delete(PRODUCT_PLANTABLE).where(PRODUCT_PLANTABLE.PLAN_ID.in(t));
 		}
 		},pks);
+	}
+	
+	public List<ProductPlan> getByKeys(Integer... pk){
+		
+		SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
+			@SuppressWarnings("rawtypes")
+			public Select generate(Serializable[] t) {
+
+				return selectFrom(PRODUCT_PLANTABLE).where(PRODUCT_PLANTABLE.PLAN_ID.in(t));
+			}
+			
+		};
+		Select select = callback.generate(pk);
+		return getDslSession().fetchList(select, ProductPlan.class);
 	}
 
 	public ProductPlan getByKey(Integer pk) {

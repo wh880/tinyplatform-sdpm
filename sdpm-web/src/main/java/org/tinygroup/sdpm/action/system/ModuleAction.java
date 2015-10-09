@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.system;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -59,15 +60,14 @@ public class ModuleAction extends BaseController{
 		return "redirect: list?moduleType=dict";
 	}
 	@RequestMapping("find")
-	public String find(HttpServletRequest request, WebContext webContext,Integer moduleId,Model model){
-		List<SystemModule> list = (List<SystemModule>) request.getSession().getAttribute("moduleList");
-		String oldUrl = webContext.get("oldUrl");
-		if(list==null||list.size()==0){
+	public String find(Integer moduleId,Model model){
+		
+		    List<SystemModule> list = new ArrayList<SystemModule>();
 			SystemModule systemModule = new SystemModule();
 			systemModule.setModuleType("dict");
 		    list=moduleService.findModules(systemModule);
-		    request.getSession().setAttribute("moduleList", list);
-		}
+		    model.addAttribute("moduleList", list);
+		
 		if(moduleId!=null){
 			
 		SystemModule module= moduleService.findById(moduleId);

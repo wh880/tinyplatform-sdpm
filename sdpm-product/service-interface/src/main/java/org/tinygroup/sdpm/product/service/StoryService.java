@@ -33,13 +33,20 @@ public interface StoryService {
 	 * @param stories
 	 * @return
 	 */
-	int[] updateBatchStory(ProductStory[] stories);
+	int[] updateBatchStory(List<ProductStory> stories);
 	/**
 	 * 根据需求ID查找
 	 * @param storyId
 	 * @return
 	 */
 	ProductStory findStory(Integer storyId);
+	
+	/**
+	 * 根据多个ID查找
+	 * @param storyId
+	 * @return
+	 */
+	List<ProductStory> findStoryList(Integer... storyId);
 	
 	/**
 	 * 根据产品对象查找

@@ -19,7 +19,7 @@
 	</type-info>
 	
 	<type-info name="demandhref"  >
-	    <info name="demandInfo" title="需求信息" infoParameter="" url="/product/page/tabledemo/hrefbaseinfo.pagelet" resource="demandhref"/>
+	    <info name="demandInfo" title="需求信息" infoParameter="storyId" url="/product/story/productDemandDetail/findPager" resource="demandhref"/>
 	</type-info>
 	
 </type-infos>

@@ -80,9 +80,9 @@
     #@td()
     	<input type="checkbox" value="${story.storyId}" id="fieldid" name="storyId">
     #end
-    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">${story.storyId}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyId}</a>#end
     #@td()${story.storyPri}#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page">${story.storyTitle}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
     #@td()${story.planId}#end
     #@td()${story.storySource}#end
     #@td()${story.storyOpenedBy}#end

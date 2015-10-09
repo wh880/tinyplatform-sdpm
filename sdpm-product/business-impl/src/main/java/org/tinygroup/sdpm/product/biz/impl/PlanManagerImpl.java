@@ -59,6 +59,11 @@ public class PlanManagerImpl implements PlanManager{
 		return productPlanDao.query(plan, null);
 	}
 
+	public List<ProductPlan> findList(Integer... planId) {
+
+		return productPlanDao.getByKeys(planId);
+	}
+
 
 	
 

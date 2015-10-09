@@ -11,6 +11,7 @@ import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.tinysqldsl.Pager;
 
 @Service
@@ -73,6 +74,11 @@ public class ProductManagerImpl implements ProductManager{
 	public Pager<Product> findPager(int page, int limit, Product product, String order,String ordertype) {
 		
 		return productDao.queryPager((page-1)*limit, limit, product, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+	}
+
+	public List<Product> findList(Integer... productId) {
+
+		return productDao.getByKeys(productId);
 	}
 
 }

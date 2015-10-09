@@ -1,8 +1,4 @@
-#macro setTinyItemCount(num)
-<input type="hidden" name="records" value="${num}"/>
-#end
-
-#setTinyItemCount(pager.totalPages)
+#setTinyItemCount(pager.totalCount)
 #foreach(var:pager.records)
     #@tr()
         #@td()<input type="checkbox" value="${var.clientRequestId}" name="idCheck">#end
@@ -13,6 +9,7 @@
         #@td()${var.requestStatus}#end
         #@td()${formatDate(var.requestCommitmentDate,"yyyy-MM-dd")}#end
         #@td()${var.replier}#end
+        #@td()${var.requestReviewer}#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("service-request"))
                 #if(m)

@@ -19,9 +19,9 @@
 #set(name="client")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-      #*  #@div(divClass="dropdownBox")
-            #include("/service/serviceCom/dropdownMenu.page")
-        #end*#
+    #*  #@div(divClass="dropdownBox")
+          #include("/service/serviceCom/dropdownMenu.page")
+      #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
@@ -30,9 +30,9 @@
 #end
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/client/save" "post" {"class":""})
 <div style="width:80%;margin-left: 20px;" class="pageleftpart">
-<div class="infoContent">
-    <p class="titleName">新建客户</p>
-    <input type="hidden" name="clientId" value="${client?.clientId}"/>
+    <div class="infoContent">
+        <p class="titleName">新建客户</p>
+        <input type="hidden" name="clientId" value="${client?.clientId}"/>
         #@elementItem()
             #@sdpmItem("客户名称" "*")
                 #tinyInput(
@@ -62,25 +62,25 @@
                     "client_created_by","class":""})
             #end
         #end
-    #@elementItem()
-        #@sdpmItem("客户联系人" "*")
-            #tinyInput(
-                "text" "userAccount" client?.userAccount {"datatype":"*","nullmsg":"客户联系人不能为空","id":"user_account",
-                "class":""})#end
-    #end
+        #@elementItem()
+            #@sdpmItem("客户联系人" "*")
+                #tinyInput(
+                    "text" "userAccount" client?.userAccount {"datatype":"*","nullmsg":"客户联系人不能为空","id":"user_account",
+                    "class":""})#end
+        #end
 
-    #@elementItem()
+        #@elementItem()
             #@sdpmItem("客户电话" "*")
                 #tinyInput(
                     "text" "userPhone" client?.userPhone {"datatype":"/^[0-9\.]{11,12}$/","nullmsg":"客户电话不能为空","id":
                     "user_phone","class":""})
             #end
         #end
-    #@elementItem()
-        #@sdpmItem("联系人职务")
-            #tinyInput(
-                "text" "userPost" client?.userPost {"id":"user_post"})#end
-    #end
+        #@elementItem()
+            #@sdpmItem("联系人职务")
+                #tinyInput(
+                    "text" "userPost" client?.userPost {"id":"user_post"})#end
+        #end
 
         #@elementItem()
             #@sdpmItem("客户登记时间" "*")
@@ -90,39 +90,93 @@
                 "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
             #end
         #end
-    #@elementItem()
-        <div class="col-12">
-            <div class="col-2 text-r"><label>客户描述：</label></div>
-            <div class="col-9">
-                #@Teditor("content" "clientSpec" {"initialFrameHeight":"280"})#end</div>
-        </div>
-    #end
-    #@elementItem()
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>客户描述：</label></div>
+                <div class="col-9">
+                    #@Teditor("content" "clientSpec" {"initialFrameHeight":"280"})#end</div>
+            </div>
+        #end
+        #@elementItem()
             #@colLabel()状态是否正常：#end
             #@formControlDiv("col-8")
                 #tinySwitcher("clientStatus" "1" "1") ##第二个为选中状态 第三参数为数据库返回时的数据
             #end
         #end
-    <br/>
+        <br/>
     </div>
-    ##           /*************保存
-        #@elementItem()
-            <div class="col-12">
-                <div class="col-5">
+##           /*************保存
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
 
-                </div>
-                <div class="col-1">
-                    <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-                </div>
-                <div class="col-1">
-                   #* <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>*#
-                       #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-                </div>
-                <div class="col-5"></div>
             </div>
-        #end
-##    #end
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+            #* <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>*#
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
     <br>
 </div>
-</div>
+
 #end
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2,
+            usePlugin: {
+                //datepicker:{},//日期控件校验;
+                passwordstrength: {
+                    minLen: 6,//设置密码长度最小值，默认为0;
+                    maxLen: 18,//设置密码长度最大值，默认为30;
+                    trigger: function (obj, error) {
+                        //该表单元素的keyup和blur事件会触发该函数的执行;
+                        //obj:当前表单元素jquery对象;
+                        //error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
+                        //console.log(error);
+                        if (error) {
+                            obj.parent().find(".Validform_checktip").show();
+                            obj.parent().find(".passwordStrength").hide();
+                        } else {
+                            obj.parent().find(".passwordStrength").show();
+                        }
+                    }
+                }
+            },
+            //ajaxPost:true,
+            beforeCheck: function (curform) {
+                //在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
+                //这里明确return false的话将不会继续执行验证操作;
+            },
+            beforeSubmit: function (curform) {
+                $(curform).ajaxSubmit({
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "y") {
+                            layer.msg(data.info, 2, -1);
+                        } else {
+                            layer.msg(data.info);
+                        }
+                        try {
+                            $(curform).parents(".modal:first").find(".modal-header .close").trigger("click");//弹出框关闭
+                            $("table.tinytable").trigger("initnav"); ////可配合TINYTABLE 做刷新
+                        } catch (e) {
+                        }
+                    },
+                    error: function () {
+                        layer.msg(data.info);
+                    }
+                });
+                return false;
+
+                //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
+                //这里明确return false的话表单将不会提交;
+            }
+        });
+    });
+</script>
