@@ -66,6 +66,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 					SYSTEM_ACTIONTABLE.ACTION_COMMENT.value(t.getActionComment()),
 					SYSTEM_ACTIONTABLE.ACTION_EXTRA.value(t.getActionExtra()),
 					SYSTEM_ACTIONTABLE.ACTION_READ.value(t.getActionRead()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTION.value(t.getActionAction()),
 					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.value(t.getActionEfforted()));
 				return insert;
 			}
@@ -88,6 +89,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 					SYSTEM_ACTIONTABLE.ACTION_COMMENT.value(t.getActionComment()),
 					SYSTEM_ACTIONTABLE.ACTION_EXTRA.value(t.getActionExtra()),
 					SYSTEM_ACTIONTABLE.ACTION_READ.value(t.getActionRead()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTION.value(t.getActionAction()),
 					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.value(t.getActionEfforted())).where(
 					SYSTEM_ACTIONTABLE.ACTION_ID.eq(t.getActionId()));
 				return update;
@@ -145,6 +147,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 					SYSTEM_ACTIONTABLE.ACTION_COMMENT.eq(t.getActionComment()),
 					SYSTEM_ACTIONTABLE.ACTION_EXTRA.eq(t.getActionExtra()),
 					SYSTEM_ACTIONTABLE.ACTION_READ.eq(t.getActionRead()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTION.eq(t.getActionAction()),
 					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.eq(t.getActionEfforted())));
 		return addOrderByElements(select, orderBies);
 			}
@@ -169,6 +172,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 					SYSTEM_ACTIONTABLE.ACTION_COMMENT.eq(t.getActionComment()),
 					SYSTEM_ACTIONTABLE.ACTION_EXTRA.eq(t.getActionExtra()),
 					SYSTEM_ACTIONTABLE.ACTION_READ.eq(t.getActionRead()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTION.eq(t.getActionAction()),
 					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.eq(t.getActionEfforted())));
 		return addOrderByElements(select, orderBies);
 			}
@@ -192,6 +196,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 					SYSTEM_ACTIONTABLE.ACTION_COMMENT.value(new JdbcNamedParameter("actionComment")),
 					SYSTEM_ACTIONTABLE.ACTION_EXTRA.value(new JdbcNamedParameter("actionExtra")),
 					SYSTEM_ACTIONTABLE.ACTION_READ.value(new JdbcNamedParameter("actionRead")),
+					SYSTEM_ACTIONTABLE.ACTION_ACTION.value(new JdbcNamedParameter("actionAction")),
 					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.value(new JdbcNamedParameter("actionEfforted")));
 			}
 		});
@@ -218,6 +223,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 					SYSTEM_ACTIONTABLE.ACTION_COMMENT.value(new JdbcNamedParameter("actionComment")),
 					SYSTEM_ACTIONTABLE.ACTION_EXTRA.value(new JdbcNamedParameter("actionExtra")),
 					SYSTEM_ACTIONTABLE.ACTION_READ.value(new JdbcNamedParameter("actionRead")),
+					SYSTEM_ACTIONTABLE.ACTION_ACTION.value(new JdbcNamedParameter("actionAction")),
 					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.value(new JdbcNamedParameter("actionEfforted"))).where(
 				SYSTEM_ACTIONTABLE.ACTION_ID.eq(new JdbcNamedParameter("actionId")));
 			}
@@ -242,6 +248,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 				SYSTEM_ACTIONTABLE.ACTION_COMMENT.eq(new JdbcNamedParameter("actionComment")),
 				SYSTEM_ACTIONTABLE.ACTION_EXTRA.eq(new JdbcNamedParameter("actionExtra")),
 				SYSTEM_ACTIONTABLE.ACTION_READ.eq(new JdbcNamedParameter("actionRead")),
+				SYSTEM_ACTIONTABLE.ACTION_ACTION.eq(new JdbcNamedParameter("actionAction")),
 				SYSTEM_ACTIONTABLE.ACTION_EFFORTED.eq(new JdbcNamedParameter("actionEfforted"))));
 			}
 		});

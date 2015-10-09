@@ -60,6 +60,12 @@ public class SystemAction implements Serializable{
 	 * 
 	 */
 	private String actionActor;
+	/**
+	 * 动作
+	 */
+	private String actionAction;
+
+	
 
 	/** 
 	 * 系统日志日期
@@ -178,6 +184,13 @@ public class SystemAction implements Serializable{
 
 	public Integer getActionEfforted(){
 		return actionEfforted;
+	}
+	public String getActionAction() {
+		return actionAction;
+	}
+
+	public void setActionAction(String actionAction) {
+		this.actionAction = actionAction;
 	}
 
 }
