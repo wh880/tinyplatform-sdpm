@@ -18,30 +18,25 @@ public class ActionManagerImpl implements ActionManager {
 	@Autowired
     private SystemActionDao systemActionDao;
 	public SystemAction add(SystemAction systemAction) {
-		// TODO Auto-generated method stub
 		return systemActionDao.add(systemAction);
 	}
 
 	public SystemAction updata(SystemAction systemAction) {
-		// TODO Auto-generated method stub
 		systemActionDao.edit(systemAction);
 		return systemAction;
 	}
 
 	public Integer delete(SystemAction systemAction) {
-		// TODO Auto-generated method stub
 		int pk=systemAction.getActionId();
 		return systemActionDao.deleteByKey(pk);
 	}
 
 	public List<SystemAction> find(SystemAction SystemAction) {
-		// TODO Auto-generated method stub
 		return systemActionDao.query(SystemAction);
 	}
 
 	public Pager<SystemAction> findByPage(int start, int limit,
 			SystemAction systemAction, String sortName, boolean asc) {
-		// TODO Auto-generated method stub
 		if(StringUtil.isBlank(sortName)){
 			return systemActionDao.queryPager(start, limit, systemAction);
 		}

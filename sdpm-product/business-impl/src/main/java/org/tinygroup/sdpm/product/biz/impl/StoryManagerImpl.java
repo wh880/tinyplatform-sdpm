@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.sdpm.common.util.sql.SearchInfos;
-import org.tinygroup.sdpm.common.util.sql.SqlUtil;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
 import org.tinygroup.sdpm.product.dao.ProductStorySpecDao;
@@ -34,17 +34,10 @@ public class StoryManagerImpl implements StoryManager{
 		story = productStoryDao.add(story);
 		storySpec.setStoryId(story.getStoryId());
 		storySpecDao.add(storySpec);
-		
 		return story;
 	}
 
-	public int delete(Integer storyId) {
-		
-		ProductStory story = new ProductStory();
-		story.setStoryId(storyId);
-		story.setDeleted(FieldUtil.DELETE_YES);
-		return productStoryDao.edit(story);
-	}
+	
 
 	public int update(ProductStory story) {
 
@@ -82,6 +75,18 @@ public class StoryManagerImpl implements StoryManager{
 			return productStoryDao.complexQuery(start,limit,story,condition,orderBy);
 		}
 		return productStoryDao.queryPager(start, limit, story, orderBy);
+	}
+
+	public List<ProductStory> findList(ProductStory story) {
+		
+		return productStoryDao.query(story, null);
+	}
+
+
+
+	public Integer delete(Integer storyId) {
+		
+		return productStoryDao.softDelete(storyId) ;
 	}
 	
 	

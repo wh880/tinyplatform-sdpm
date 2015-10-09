@@ -22,10 +22,14 @@
 	#end
 
 	<div style="width:70%;float:right">
-		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+		#@tinyTable("tblid") ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-				#@aModal("#myModal" "批量删除" "1200" "500" "btn radius btn-primary" "/system/page/holiday/batch-del.pagelet")批量删除#end
+				#@radiusBtn("btn-danger spmuldet" "icon-trash" "javascript:","delete") 批量删除#end
+				#@aModal("#myModal" "批量删除" "1200" "500" "hidenmuldel hide" "/system/holiday/findIds")#end
+##                #@mulOperation("muldelete" call("link","/system/holiday/findIds"))            
+##				 	#@radiusBtn("btn-danger" "icon-trash" "javascript:") 批量删除#end
+##				 #end
 				#@aModal("#myModal" "添加" "500" "276" "btn radius btn-primary" "/system/page/holiday/holiday-add.pagelet")添加#end
 			
 			#end
@@ -38,6 +42,7 @@
 						#@tinyTh({"class":"sorting","rel":"holiday_date"})日期#end
 						#@tinyTh({"class":"sorting","rel":"holiday_account"})创建者#end
 						#@tinyTh({"class":"sorting","rel":"holiday_type"})类型#end
+						#@tinyTh({"class":"sorting","rel":"holiday_type"})描述#end
 						#@tinyTh({"class":"","rel":""})操作#end
 					#end
 				#end
@@ -52,3 +57,27 @@
 		
 	
 #end
+<script>
+	$(function(){		
+		var href=$(".hidenmuldel").attr("href");
+		$(".spmuldet").on("click",function(){
+			var checklist=[];
+			$("#tblid input[name=idCheck]:checked").each(function(){
+				checklist.push($(this).val());
+			});			
+			$(".hidenmuldel").attr("href",href+"?ids="+checklist.join(",")).trigger("click");
+		})
+	});
+</script>
+##<script>
+##	$(function(){
+##		$("#delete").click(function(){
+##			if($("input[name='idCheck']:checked").size()<=0){
+##				layer.alert('至少要选择一条！');
+##			}
+##			
+##		});
+##		
+##	}); 
+##</script>
+

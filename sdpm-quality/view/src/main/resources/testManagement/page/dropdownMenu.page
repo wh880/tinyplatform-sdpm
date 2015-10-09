@@ -1,30 +1,63 @@
-#@navSelect2()
-	#@navSelect2Nav()工程 ${id}<span class="caret"></span>#end
-	#@navSelect2Body()
-		  #@navSelect2Data()
-		  <option value=""></option>
-		  <optgroup label="产品1">
-			 <option value="24">产品11</option>
-			 <option value="AR">产品12</option>
-		  </optgroup>
-		#end
-		#@navSelect2Fix()
-			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>
-		#end
-	#end
+#import("/org/tinygroup/publicComponent/macro/navselect.component")
+#set(productId = productId == null?productList?.get(0)?.productId:productId)
+
+#@navSelect2("product" "product")
+#@navSelect2Nav()
+#if(productId)
+#for(product : productList)
+#if(product?.productId == qualityProductId)
+${product?.productName}
 #end
-	<script type="text/javascript">
-	<!--
+#end
+#else
+产品
+#end
+
+<span class="caret"></span>#end
+#@navSelect2Body()
+#@navSelect2Data()
+<option value=""></option>
+<optgroup label="产品">
+	#for(product : productList)
+	<option value="${product?.productId}">${product?.productName}</option>
+	#end
+</optgroup>
+
+#end
+#@navSelect2Fix()
+
+<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page" class="r">所有产品</a>&nbsp;
+<!--新增产品-->
+<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page">添加产品</a>&nbsp;
+
+
+#end
+#end
+
+#hiddenInput("productIdHidden","productId","","")
+
+<script type="text/javascript">
+
 	$(function(){
-		$("#${sid}-select").on("change",function(){
-			//console.log("do something")
-			window.location.href='productNew.page?currentPageId=${currentPageId}&id='+$(this).val();
-			console.log('productNew.page?currentPageId=${currentPageId}&id='+$(this).val())
+		$("#product-select").on("change",function(){
+			var dateValue = $(this).val();
+			$.post("${TINY_CONTEXT_PATH}/quality/changeProduct",{productId:dateValue},function(result){
+				if(true==result){
+					window.location.reload();
+				}else{
+					alert("产品ID值为空");
+				}
+
+			});
+	##				$("#productIdHidden").val($(this).val());
+	##				$(".switchClass").each(function(){
+				##					var hrefnew = this.href + "&productId=" + $("#productIdHidden").val();
+	##					this.href = hrefnew;
+	##				});
+	##				window.location.href='${TINY_CONTEXT_PATH}/product/story?currentPageId=3&productId='+$(this).find("option:selected").val();
 		});
 	});
-	//-->
-	</script>
-	
-	
-	
+
+</script>
+#end
+

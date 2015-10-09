@@ -8,7 +8,7 @@
 	<!-- Without vertical padding -->
 	<div class="panel-content">
 		<table class="table  table-striped "> 
-			#for(i:[1..5])
+			#for(a:action)
 	
 #*				<tr>
 					<td>9月09日 14:39</td> 
@@ -20,9 +20,9 @@
 	            </tr>*#
 	            <tr>
 					<td  width="100%">
-						9月08日 17:22, admin 
+						${a?.actionDate}, admin 
 						<em>删除了</em> 假期
-						<a href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">国庆节1</a>。
+						<a href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">${a?.actionObjectId}</a>。
 					</td>
 				</tr>
 	         #end

@@ -51,4 +51,9 @@ public class BugManagerImpl implements BugManager {
 		}		
 	}
 
+	public Integer delete(Integer id) {
+		
+		return bugdao.softDelete(id);
+	}
+
 }

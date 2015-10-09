@@ -24,12 +24,13 @@ public class UpdateUtil {
         for(Field field : fields){
             Method method = null;
             Object value = null;
+            if (StdUtil.getField(table.getName()).containsKey(field.getName())) {
+                try {
+                    method = object.getClass().getMethod(NameUtil.toMethod(field.getName()));
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
 
-		try {
-                method = object.getClass().getMethod(NameUtil.toMethod(field.getName()));
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-
+                }
             }
            
             if (method != null) {
@@ -45,7 +46,7 @@ public class UpdateUtil {
                 String tableField = field.getName();
                 String primaryField = StdUtil.getPrimary(table.getName())!=null?StdUtil.getPrimary(table.getName()).toLowerCase():"";
                 if(!tableField.toLowerCase().equals(primaryField)){
-                    Column column = new Column(tableField);
+                    Column column = new Column(NameUtil.resolveNameDesc(tableField));
                     column.setTable(table);
                     values.add(new Value(column,value));
                 }else{
@@ -53,7 +54,7 @@ public class UpdateUtil {
                 }
             }
         }
-        Column primary = new Column(StdUtil.getPrimary(table.getName()));
+        Column primary = new Column(NameUtil.resolveNameDesc(StdUtil.getPrimary(NameUtil.resolveNameDesc(table.getName()))));
         primary.setTable(table);
         Value[] values1 = new Value[values.size()];
         return Update.update(table).set( values.toArray(values1)).where(primary.eq(primaryValue));

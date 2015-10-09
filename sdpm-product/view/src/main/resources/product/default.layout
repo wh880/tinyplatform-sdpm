@@ -31,8 +31,10 @@
         #@tabHead()
 
             #foreach(m in menuManager.getChildMenus("myproduct"))
+            	#set(url=eval(m.href))
                 #if(m.scope!="product-menu")
-                    #@aHeadCol(TINY_CONTEXT_PATH+m.href linkName==m.id?"Current":"")${m.name}#end
+                
+                    #@aHeadCol(TINY_CONTEXT_PATH+url linkName==m.id?"Current":"")${m.name}#end
                 #end
             #end
         #*

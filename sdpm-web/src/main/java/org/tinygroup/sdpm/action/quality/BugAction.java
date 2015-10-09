@@ -1,7 +1,9 @@
 package org.tinygroup.sdpm.action.quality;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -51,13 +54,12 @@ public class BugAction extends BaseController {
 	}
 	
 	@RequestMapping("/findBug")
-	public String findBugPager(Integer start,Integer limit,String order,String ordertype,QualityBug bug,Model model){
+	public String findBugPager(Integer start,Integer limit,String order,String ordertype,QualityBug bug,Model model,HttpServletRequest request){
 		boolean asc = true;		
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
-		//QualityBug bug = new QualityBug();
-		//	bug.setProductId(id);
+		bug.setProductId((Integer) request.getSession().getAttribute("qualityProductId"));
 		Pager<QualityBug> bugpager = bugService.findBugListPager(start, limit, bug, order, asc);
 		model.addAttribute("bugpager",bugpager);
 		return "/testManagement/data/BugData.pagelet";
@@ -84,6 +86,16 @@ public class BugAction extends BaseController {
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/assign.page";
 	}
+	
+	@ResponseBody
+	@RequestMapping("/delete")
+	public Map delete(Integer bugId) {
+		bugService.deleteBug(bugId);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
+    }
 	
 	@RequestMapping("/solve")
 	public String solve(Integer bugId,Model model){

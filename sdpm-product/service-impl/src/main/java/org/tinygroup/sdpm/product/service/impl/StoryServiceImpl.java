@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tinygroup.sdpm.common.util.sql.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
@@ -22,7 +22,7 @@ public class StoryServiceImpl implements StoryService {
 		return storyManager.add(story, storySpec);
 	}
 
-	public int deleteStory(Integer storyId) {
+	public Integer deleteStory(Integer storyId) {
 
 		return storyManager.delete(storyId);
 	}

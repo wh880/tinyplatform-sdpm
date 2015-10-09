@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -83,6 +84,14 @@ public class UserAction extends BaseController {
         OrgUser user = userService.findUser(id);
         model.addAttribute("user", user);
         return "organization/user/profileAdmin.page";
+    }
+    
+    @ResponseBody
+    @RequestMapping("/userList")
+    public List<OrgUser> findUser(OrgUser orgUser){
+    	
+    	List<OrgUser> list = userService.findUserList(orgUser);
+    	return list;
     }
 
 }

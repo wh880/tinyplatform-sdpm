@@ -41,5 +41,28 @@ public interface HolidayService {
 	 * @return
 	 */
 	Pager<Holiday> findByPage(int start,int limit,Holiday holiday,String sortName,boolean asc);
-	
+	/**
+	 * 批量增加
+	 * @param holidayList
+	 * @return
+	 */
+	int[] batchAdd(List<Holiday> holidayList);
+	/**
+	 * 通过Id 查询
+	 * @param id
+	 * @return
+	 */
+	Holiday findById(int id);
+	/**
+	 * 通过Ids查询
+	 * @param ids
+	 * @return
+	 */
+	List<Holiday> findByIds(Integer...ids);
+	/**
+	 * 批量软删除
+	 * @param list
+	 * @return
+	 */
+	int[] batchSofeDelete(List<Holiday> list);
 }

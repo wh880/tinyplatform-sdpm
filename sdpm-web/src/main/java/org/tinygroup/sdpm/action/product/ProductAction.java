@@ -8,10 +8,13 @@ import javax.xml.ws.spi.http.HttpContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.tinysqldsl.Pager;
@@ -29,14 +32,20 @@ public class ProductAction  extends BaseController{
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private UserService  userService;
 
 	@RequestMapping("")
-	public String productAction(HttpServletRequest request, WebContext webContext){
+	public String productAction(HttpServletRequest request){
 		List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
-		String oldUrl = webContext.get("oldUrl");
 		if(list == null|| list.size()==0){
 			list = productService.findProductList(new Product(),"productId","desc");
 			request.getSession().setAttribute("productList",list);
+			
+			if(null==request.getSession().getAttribute("sessionProductId")||""==request.getSession().getAttribute("sessionProductId")){
+				request.getSession().setAttribute("sessionProductId",list.get(0).getProductId());
+			}
 		}
 		
 		return "redirect:/product/story?"+(list.size()>0?("productId="+list.get(0).getProductId()):"")+"&choose=1"+(request.getQueryString()==null?"":("&"+request.getQueryString()));
@@ -77,6 +86,24 @@ public class ProductAction  extends BaseController{
 		model.addAttribute("product", product);
 		return "/product/page/tabledemo/product-module-editor.page";
 	}
+	
+	@RequestMapping("/find/{forward}")
+	public String find(@PathVariable(value="forward")String forward,Integer productId,Model model,HttpServletRequest request){
+		
+		if(productId==null){
+			productId = (Integer) request.getSession().getAttribute("sessionProductId");
+		}
+		
+		Product product = productService.findProduct(productId);
+		model.addAttribute("product", product);
+		
+		if ("overview".equals(forward)) {
+			return "/product/page/project/overview.page";
+		}else if ("baseinfo".equals(forward)) {
+			return "/product/page/tabledemo/baseinfo.pagelet";
+		}
+		return "";
+	}
 
 	@RequestMapping("/list")
 	public String list(Product product,
@@ -89,6 +116,20 @@ public class ProductAction  extends BaseController{
 		
 		model.addAttribute("pagerProduct", pagerProduct);
 		return "/product/data/allproductdata.pagelet";
+	}
+	
+	@RequestMapping("/findManager")
+	public String findManager(Integer productId,Model model){
+		
+		OrgUser productOwner = userService.findUser(productService.findProduct(productId).getProductOwner().toString());
+		OrgUser productQualityManager = userService.findUser(productService.findProduct(productId).getProductQualityManager().toString());
+		OrgUser productDeliveryManager = userService.findUser(productService.findProduct(productId).getProductDeliveryManager().toString());
+		
+		model.addAttribute("productOwner", productOwner);
+		model.addAttribute("productQualityManager", productQualityManager);
+		model.addAttribute("productDeliveryManager", productDeliveryManager);
+		
+		return "/organization/userbaseinfo.pagelet";
 	}
 
 }

@@ -2,8 +2,7 @@ package org.tinygroup.sdpm.product.biz.inter;
 
 import java.util.List;
 
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.sdpm.common.util.sql.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.tinysqldsl.Pager;
@@ -21,7 +20,7 @@ public interface StoryManager {
 	 * @param storyId
 	 * @return
 	 */
-	int delete(Integer storyId);
+	Integer delete(Integer storyId);
 	
 	/**
 	 * 编辑
@@ -41,6 +40,12 @@ public interface StoryManager {
 	 * @return
 	 */
 	ProductStory find(Integer storyId);
+	/**
+	 * 根据对象查询
+	 * @param story
+	 * @return
+	 */
+	List<ProductStory> findList(ProductStory story);
 	/**
 	 * 根据对象查找（排序）
 	 * @param story

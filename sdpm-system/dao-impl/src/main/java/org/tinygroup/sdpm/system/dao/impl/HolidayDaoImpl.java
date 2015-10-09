@@ -120,6 +120,19 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 			}
 		});
 	}
+	public List<Holiday> getByKeys(Integer...pks){
+		List<Holiday> list = new ArrayList<Holiday>();
+		if(pks==null||pks.length==0){
+			
+			return list;
+		}
+		for(int i=0,n=pks.length;i<n;i++){
+			Holiday holiday = new Holiday();
+			holiday = getByKey(pks[i]);
+			list.add(holiday);
+		}
+		return list;
+	}
 
 	public List<Holiday> query(Holiday holiday ,final OrderBy... orderArgs) {
 		if(holiday==null){
@@ -157,7 +170,7 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 					HOLIDAYTABLE.HOLIDAY_ACCOUNT.eq(t.getHolidayAccount()),
 					HOLIDAYTABLE.HOLIDAY_DATE.eq(t.getHolidayDate()),
 					HOLIDAYTABLE.HOLIDAY_TYPE.eq(t.getHolidayType()),
-					HOLIDAYTABLE.HOLIDAY_DELETED.eq(t.getHolidayDeleted()),
+					HOLIDAYTABLE.HOLIDAY_DELETED.eq(0),
 					HOLIDAYTABLE.COMPANY_ID.eq(t.getCompanyId()),
 					HOLIDAYTABLE.HOLIDAY_DETAIL.eq(t.getHolidayDetail()),
 					HOLIDAYTABLE.HOILIDAY_REMARK.eq(t.getHoilidayRemark())));
@@ -261,6 +274,37 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 					).where(
 					HOLIDAYTABLE.HOLIDAY_ID.eq(t.getHolidayId()));
 				return update;
+			}
+		});
+	}
+
+	public List<Holiday> findByKeys(Integer... ids) {
+		// TODO Auto-generated method stub
+		List<Holiday> list = new ArrayList<Holiday>();
+		if(ids==null||ids.length==0){
+			
+			return list;
+		}
+		for(int i=0,n=ids.length;i<n;i++){
+			Holiday holiday = new Holiday();
+			holiday = getByKey(ids[i]);
+			list.add(holiday);
+		}
+		return list;
+	}
+
+	public int[] batchsoftdelete(List<Holiday> list) {
+		// TODO Auto-generated method stub
+		if (CollectionUtil.isEmpty(list)) {
+			return new int[0];
+		}
+		return getDslTemplate().batchUpdate(list, new NoParamUpdateGenerateCallback() {
+
+			public Update generate() {
+				return update(HOLIDAYTABLE).set(
+					HOLIDAYTABLE.HOLIDAY_DELETED.value(new JdbcNamedParameter("holidayDeleted")),
+					HOLIDAYTABLE.HOILIDAY_REMARK.value(new JdbcNamedParameter("hoilidayRemark"))).where(
+				HOLIDAYTABLE.HOLIDAY_ID.eq(new JdbcNamedParameter("holidayId")));
 			}
 		});
 	}

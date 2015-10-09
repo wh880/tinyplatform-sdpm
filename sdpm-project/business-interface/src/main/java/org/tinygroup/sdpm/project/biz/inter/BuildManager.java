@@ -10,13 +10,22 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-18.
  */
 public interface BuildManager {
+
+    /**
+     * 软删除
+     *
+     * @param build
+     * @return
+     */
+    public Integer softDelete(ProjectBuild build);
+
     /**
      * 根据主键id查找用户
      *
      * @param id 主键
      * @return
      */
-    ProjectBuild find(String id);
+    ProjectBuild find(Integer id);
 
     /**
      * 根据条件查询List

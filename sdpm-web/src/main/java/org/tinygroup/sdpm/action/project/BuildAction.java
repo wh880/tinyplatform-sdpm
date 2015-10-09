@@ -4,14 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by wangying14938 on 2015-09-22.版本
@@ -30,22 +33,73 @@ public class BuildAction extends BaseController {
         model.addAttribute("buildPager", pager);
         return "project/version/tableData.pagelet";
     }
-    @RequestMapping("add")
-    public String form(Integer taskId, Model model) {
-        if (taskId != null) {
-            return "project/task/add.page";
+
+//    @RequestMapping("/look")
+//    public String look(Integer buildId, Model model) {
+//        if (buildId != null) {
+//            ProjectBuild build = buildService.;
+//            model.addAttribute("build", build);
+//            //还需要查询其他相关任务剩余时间的信息
+//            return "project/bug/index.page";
+//        }
+//        return "error";
+//    }
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(ProjectBuild build, Model model) {
+      if (build.getBuildId() == null) {
+         buildService.add(build);
+     } else {
+          buildService.updateBuild(build);
+      }
+      model.addAttribute("build", build);
+       return "project/version/index.page";
+    }
+
+    @RequestMapping("/edit")
+    public String form(Integer buildId, Model model) {
+        if (buildId != null) {
+            ProjectBuild build = buildService.findBuild(buildId);
+            model.addAttribute("build", build);
+            //还需要查询其他相关任务剩余时间的信息
+            return "project/version/edit.page";
         }
         return "error";
     }
-
-    @RequestMapping("batchadd")
-    public String call(Integer taskId, Model model) {
-        if (taskId != null) {
-
-            return "project/task/batchAdd.page";
+    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
+    public String editSave(ProjectBuild build, Model model) {
+        if (build.getBuildId() == null) {
+            buildService.add(build);
+        } else {
+            buildService.updateBuild(build);
         }
-        return "error";
+        model.addAttribute("build", build);
+        return "project/version/index.page";
+    }
+    @RequestMapping(value = "/addsave", method = RequestMethod.POST)
+    public String addSave(ProjectBuild build, Model model) {
+        if (build.getBuildId() == null) {
+            buildService.add(build);
+        } else {
+            buildService.updateBuild(build);
+        }
+        model.addAttribute("build", build);
+        return "project/version/index.page";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public Map<String, String> delete(Integer id, Model model) {
+        Integer res = buildService.softDeleteBuild(id);
+        Map<String, String> map = new HashMap<String, String>();
+        if (res > 0) {
+            map.put("status", "y");
+            map.put("info", "删除成功");
+        } else {
+            map.put("status", "n");
+            map.put("info", "删除失败");
+        }
+
+        return map;
+    }
 
 }

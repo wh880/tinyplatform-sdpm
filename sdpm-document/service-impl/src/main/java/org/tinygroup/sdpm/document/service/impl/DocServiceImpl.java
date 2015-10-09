@@ -54,9 +54,13 @@ public class DocServiceImpl implements DocService{
 		return docbiz.getDocLibById(id);
 	}
 
-	public List<Doc> findDocByDocClass(Doc doc) {
+	public List<Doc> findDocList(Doc doc) {
 		// 
-		return docbiz.getDocByEntity(doc);
+		return docbiz.getDocList(doc);
+	}
+	public List<Doclib> findDoclibList(Doclib doclib) {
+		// 
+		return docbiz.getDoclibList(doclib);
 	}
 
 	public Pager<Doc> findDocRetPager(int start, int limit, Doc doc) {

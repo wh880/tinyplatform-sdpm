@@ -151,7 +151,7 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 					SYSTEM_DICTTABLE.DICT_VALUE.eq(t.getDictValue()),
 					SYSTEM_DICTTABLE.DICT_SORT.eq(t.getDictSort()),
 					SYSTEM_DICTTABLE.MODULE_ID.eq(t.getModuleId()),
-					SYSTEM_DICTTABLE.DELETED.eq(t.getDeleted())));
+					SYSTEM_DICTTABLE.DELETED.eq(0)));
 		return addOrderByElements(select, orderBies);
 			}
 		});

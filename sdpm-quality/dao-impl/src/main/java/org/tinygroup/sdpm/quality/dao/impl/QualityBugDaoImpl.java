@@ -530,4 +530,18 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		}
 		return select;
 	}
+	
+	
+
+	public Integer softDelete(Integer id) {
+        return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
+            public Update generate(Integer id) {
+                Update update = update(QUALITY_BUGTABLE).set(
+                		QUALITY_BUGTABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
+                				QUALITY_BUGTABLE.BUG_ID.eq(id));
+                return update;
+            }
+        });
+
+    }
 }

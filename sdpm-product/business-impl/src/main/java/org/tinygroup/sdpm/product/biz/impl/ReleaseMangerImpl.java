@@ -55,5 +55,10 @@ public class ReleaseMangerImpl implements ReleaseManger{
 		return productReleaseDao.queryPager((page-1)*limit, limit, release, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
 
+	public List<ProductRelease> findList(ProductRelease productRelease) {
+		
+		return productReleaseDao.query(productRelease, null);
+	}
+
 
 	}

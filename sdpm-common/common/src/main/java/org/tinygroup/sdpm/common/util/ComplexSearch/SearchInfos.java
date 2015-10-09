@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.common.util.sql;
+package org.tinygroup.sdpm.common.util.ComplexSearch;
 
 import java.io.Serializable;
 import java.util.ArrayList;

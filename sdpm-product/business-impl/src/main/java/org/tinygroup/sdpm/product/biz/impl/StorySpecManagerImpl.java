@@ -34,6 +34,11 @@ public class StorySpecManagerImpl implements StorySpecManager{
 		return productStorySpecDao.queryPager((page-1)*limit, limit, storySpec, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
 
+	public List<ProductStorySpec> findList(ProductStorySpec storySpec) {
+		
+		return productStorySpecDao.query(storySpec, null);
+	}
+
 	
 	
 }
