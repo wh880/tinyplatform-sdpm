@@ -1,13 +1,9 @@
 package org.tinygroup.sdpm.action.product;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +27,6 @@ import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
 
-import java.util.Date;
 
 @Controller
 @RequestMapping("/product/story")
@@ -42,6 +37,7 @@ public class StoryAction extends BaseController{
     private StorySpecService storySpecService;
     @Autowired
 	private BugService bugService;
+
    
     @RequestMapping("")
     public String storyAction(ProductStory story, String groupOperate, Model model, HttpServletRequest request, HttpServletResponse response){
@@ -116,8 +112,12 @@ public class StoryAction extends BaseController{
 		}else if ("productDemandChange".equals(forwordPager)) {
 			
 			return "/product/page/tabledemo/product-demand-change.page";
+		}else if ("productDemandDetail".equals(forwordPager)) {
+			
+			return "/product/page/tabledemo/hrefbaseinfo.pagelet";
 		}
-    	return "/product/page/tabledemo/"+forwordPager;
+    	
+    	return "";
     }
     
     @RequestMapping("/search")
