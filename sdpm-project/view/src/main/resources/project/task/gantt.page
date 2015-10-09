@@ -5,35 +5,36 @@
 
 #set(name="task")
 #@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-		#@div(divClass="dropdownBox")
-			#include("/project/dropdownMenu.page")
-		#end
-		#@tabHead()
-			#include("/project/protab.page")
-		#end
-	##head end
-		#@tabBodyCol("ptop-5")
-		##operationbar start
-			#include("/project/task/taskMenu.page")
-		##operationbay end
-		#end
-	##body end
-            #@div(divClass="operationbar")
-            <span class="f">
-    <a href="${TINY_CONTEXT_PATH}/project/task/viewingtask.page" "ml-5" class=${type
-                =="noclose"?"active_btn":""}>查看任务关系</a>
-                <a href="${TINY_CONTEXT_PATH}/project/task/maintenancetask.page" "ml-5" class=${type=="all"?"active_btn":""}>维护任务关系</a>
-</span>
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+    ##head end
+        #@tabBodyCol("ptop-5")
+        ##operationbar start
+            #include("/project/task/taskMenu.page")
+        ##operationbay end
+        #end
+    ##body end
+        #@div(divClass="operationbar")
+        <span class="f">
+            <a href="${TINY_CONTEXT_PATH}/project/task/viewingtask.page" "ml-5" class=${type
+            =="noclose"?"active_btn":""}>查看任务关系</a>
+            <a href="${TINY_CONTEXT_PATH}/project/task/maintenancetask.page" "ml-5" class=${type
+            =="all"?"active_btn":""}>维护任务关系</a>
+        </span>
 
-            #end
+        #end
 
     #end
 #end
 
 #@h2() #end
 <div style="margin-right:20px">
-	#@gantt("save.jsp",500)
+    #@gantt("save.jsp",500)
         {"tasks":[
         {"id":-1,"name":"Gantt
         editor","code":"","level":0,"status":"STATUS_ACTIVE","canWrite":true,"start":1396994400000,"duration":21,"end":1399672799999,"startIsMilestone":true,"endIsMilestone":false,"collapsed":false,"assigs":[],"hasChild":true}
@@ -50,7 +51,7 @@
         ,{"id":-8,"name":"test on
         chrome","code":"","level":2,"status":"STATUS_SUSPENDED","canWrite":true,"start":1399327200000,"duration":2,"end":1399499999999,"startIsMilestone":false,"endIsMilestone":false,"collapsed":false,"assigs":[],"depends":"6","hasChild":false}
         ],"selectedRow":0,"canWrite":true,"canWriteOnParent":true}
-	#end
+    #end
 </div>
 #@ganttInit()#end
 

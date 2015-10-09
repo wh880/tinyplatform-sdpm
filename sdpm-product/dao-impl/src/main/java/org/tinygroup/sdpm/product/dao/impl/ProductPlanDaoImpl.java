@@ -38,6 +38,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.tinysqldsl.Delete;
@@ -75,15 +76,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 		}
 		return getDslTemplate().update(productPlan, new UpdateGenerateCallback<ProductPlan>() {
 			public Update generate(ProductPlan t) {
-				Update update = update(PRODUCT_PLANTABLE).set(
-					PRODUCT_PLANTABLE.COMPANY_ID.value(t.getCompanyId()),
-					PRODUCT_PLANTABLE.PRODUCT_ID.value(t.getProductId()),
-					PRODUCT_PLANTABLE.PLAN_NAME.value(t.getPlanName()),
-					PRODUCT_PLANTABLE.PLAN_SPEC.value(t.getPlanSpec()),
-					PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.value(t.getPlanBeginDate()),
-					PRODUCT_PLANTABLE.PLAN_END_DATE.value(t.getPlanEndDate()),
-					PRODUCT_PLANTABLE.DELETED.value(t.getDeleted())).where(
-					PRODUCT_PLANTABLE.PLAN_ID.eq(t.getPlanId()));
+				Update update = UpdateUtil.getUpdate(PRODUCT_PLANTABLE, t);
 				return update;
 			}
 		});

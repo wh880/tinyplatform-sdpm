@@ -172,7 +172,7 @@
         <menu id="product-plan-bg" name="关联BUG" href="/product/plan/forword/reRelateBug?planId=${planId}" icon="icon-bug" sort="87"
               isShow="1"
               scope="product-log"/>
-        <menu id="product-plan-editor" name="编辑" href="#" icon="icon-pencil" sort="86" isShow="1"
+        <menu id="product-plan-editor" name="编辑" href="/product/plan/find?planId=${planId}" icon="icon-pencil" sort="86" isShow="1"
               scope="product-log"/>
         <menu id="product-plan-del" name="删除" href="#" icon="icon-remove" sort="85" isShow="1"
               scope="product-log"/>
@@ -216,7 +216,7 @@
               href="/product/release/forword/reRelateBug?releaseId=${releaseId}" icon="icon-bug" sort="7"
               isShow="1"
               scope="product-relog"/>
-        <menu id="product-release-editor" name="编辑发布" href="/product/page/tabledemo/product-addrelease.pagelet" icon="icon-common-edit icon-pencil" sort="6" isShow="1"
+        <menu id="product-release-editor" name="编辑发布" href="/product/release/find?releaseId=${releaseId}" icon="icon-common-edit icon-pencil" sort="6" isShow="1"
               scope="product-relog"/>
         <menu id="product-release-del" name="删除" href="#" icon="icon-remove" sort="5" isShow="1"
               scope="product-relog"/>

@@ -13,7 +13,7 @@
     =="4"?"active_btn":""}>甘特图</a>
     <a href="${TINY_CONTEXT_PATH}/project/task/calendar.page?choose=5" "ml-5" class=${choose
     =="5"?"active_btn":""}>日历</a>
-    <a href="${TINY_CONTEXT_PATH}/project/task/projectBurn.page?choose=6" "ml-5" class=${choose
+    <a href="${TINY_CONTEXT_PATH}/project/burn/init?choose=6" "ml-5" class=${choose
     =="6"?"active_btn":""}>燃尽图</a>
     <a href="${TINY_CONTEXT_PATH}/project/task/index.page?choose=7" "ml-5" class=${choose
     =="7"?"active_btn":""}>指派给我</a>

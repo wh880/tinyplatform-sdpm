@@ -21,12 +21,10 @@ public class FaqAction extends BaseController {
 
     /*新增问题*/
     @RequestMapping("/form")
-    public String form(ServiceFaq faq, Model model) {
-        /*if (faq.getFaqId() == null) {}*/
-      /*  Faq faq=faqService.findFaq(id);
-            model.addAttribute("faq",faq);*/
-        if (faq != null)
+    public String form(Integer id, Model model) {
+        if (id != null)
         {
+            ServiceFaq faq = faqService.findFaq(id);
             model.addAttribute("faq",faq);
         }
         return "/service/faq/addquestion.page";
@@ -38,17 +36,27 @@ public class FaqAction extends BaseController {
     {
         if (faq.getFaqId()==null)
         {
-            faqService.addFaq(faq);
+            faq = faqService.addFaq(faq);
         }
         else
         {
-            faqService.updateFaq(faq);
+            faq = faqService.updateFaq(faq);
         }
         model.addAttribute("faq",faq);
         return "/service/faq/faqmenu.page";
     }
 
-    /*把所有数据查询出来*/
+    /*对问题进行“编辑”*/
+    @RequestMapping("/edit")
+    public String edit(Integer id, Model model) {
+        if (id != null) {
+            ServiceFaq faq = faqService.findFaq(id);
+            model.addAttribute("faq", faq);
+        }
+        return "/service/faq/addquestion.page";
+    }
+
+    /*把faqmenu页面的所有问题都查询出来*/
     @RequestMapping("/list")
     public String list(ServiceFaq faq,Model model)
     {
@@ -56,7 +64,6 @@ public class FaqAction extends BaseController {
         model.addAttribute("list",list);
         return "/service/faq/faqmenu.page";
     }
-
     /*删除*/
     @RequestMapping("/delete")
     public String delete(Integer id)
