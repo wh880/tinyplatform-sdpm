@@ -30,6 +30,7 @@ public interface RoleMenuManager {
 
     OrgRoleMenu findId(String id);
 
+    List<OrgRoleMenu> findMenuIds(Integer id);
     /**
      * 新增有一个角色菜单
      *

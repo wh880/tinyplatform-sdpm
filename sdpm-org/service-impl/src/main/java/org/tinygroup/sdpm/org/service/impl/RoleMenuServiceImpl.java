@@ -19,6 +19,10 @@ public class RoleMenuServiceImpl implements RoleMenuService {
         return roleMenuManager.find(id);
     }
 
+    public List<OrgRoleMenu> findMenuByRoleId(Integer roleId) {
+        return roleMenuManager.findMenuIds(roleId);
+    }
+
     public OrgRoleMenu findRoleMenuId(String id) {
         return roleMenuManager.findId(id);
     }

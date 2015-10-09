@@ -19,7 +19,10 @@ package org.tinygroup.sdpm.org.dao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 
+import java.util.List;
+
 public interface OrgRoleMenuDao extends BaseDao<OrgRoleMenu, Integer> {
     OrgRoleMenu getByMenuId(String pk);
 
+    List<OrgRoleMenu> getByRoleId(Integer roleId);
 }

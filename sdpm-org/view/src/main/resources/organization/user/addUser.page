@@ -47,7 +47,9 @@
                         #@gridSysRow()
                             #@colLabel("col-4")所属部门：#end
                             #@gridSysCol(6)
-                                #@selZtree("orgDeptId" ,"")
+                                #TzTreeSelect("orgDeptId" "" {"class":"input-text","data-URL":TINY_CONTEXT_PATH+
+                                    "/org/dept/data?check=n"} )
+                            ## #@selZtree("orgDeptId" ,"")
 
                                 ##                                #@Tselect2F()
                                 ##                                    #@Tselect2Body("orgDeptId" user?.orgDeptId {"class":
@@ -69,8 +71,8 @@
                                 ##                                    <a href="${TINY_CONTEXT_PATH}/org/user/form" class="r">增加</a>
                                 ##                                    <a href="#">全部</a>
                                 ##                                #end
+
                             #end
-                        #end
                         #end
                         #@gridSysRow()
                             #@colLabel("col-4")职位：#end
