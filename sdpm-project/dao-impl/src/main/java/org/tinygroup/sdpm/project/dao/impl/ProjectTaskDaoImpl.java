@@ -175,55 +175,32 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         if (projectTask == null || projectTask.getTaskId() == null) {
             return 0;
         }
-//		return getDslTemplate().update(projectTask, new UpdateGenerateCallback<ProjectTask>() {
-//			public Update generate(ProjectTask t) {
-//				Update update = update(PROJECT_TASKTABLE).set(
-//							PROJECT_TASKTABLE.TASK_PROJECT.value(t.getTaskProject()),
-//							PROJECT_TASKTABLE.TASK_STORY.value(t.getTaskStory()),
-//							PROJECT_TASKTABLE.TASK_TYPE.value(t.getTaskType()),
-//							PROJECT_TASKTABLE.TASK_PRI.value(t.getTaskPri()),
-//							PROJECT_TASKTABLE.TASK_ESTIMATE.value(t.getTaskEstimate()),
-//							PROJECT_TASKTABLE.TASK_LEFT.value(t.getTaskLeft()),
-//							PROJECT_TASKTABLE.TASK_DEAD_LINE.value(t.getTaskDeadLine()),
-//							PROJECT_TASKTABLE.TASK_STATUS.value(t.getTaskStatus()),
-//							PROJECT_TASKTABLE.TASK_MAILTO.value(t.getTaskMailto()),
-//							PROJECT_TASKTABLE.TASK_DESC.value(t.getTaskDesc()),
-//							PROJECT_TASKTABLE.TASK_ASSIGNED_TO.value(t.getTaskAssignedTo()),
-//							PROJECT_TASKTABLE.TASK_EST_STARED.value(t.getTaskEstStared()),
-//							PROJECT_TASKTABLE.TASK_REAL_STARTED.value(t.getTaskRealStarted()),
-//							PROJECT_TASKTABLE.TASK_FINISHED_BY.value(t.getTaskFinishedBy()),
-//							PROJECT_TASKTABLE.TASK_FINISHED_DATE.value(t.getTaskFinishedDate()),
-//							PROJECT_TASKTABLE.TASK_CANCELED_BY.value(t.getTaskCanceledBy()),
-//							PROJECT_TASKTABLE.TASK_CANCELED_DATE.value(t.getTaskCanceledDate()),
-//							PROJECT_TASKTABLE.TASK_CLOSED_BY.value(t.getTaskClosedBy()),
-//							PROJECT_TASKTABLE.TASK_CLOSE_DATE.value(t.getTaskCloseDate()),
-//							PROJECT_TASKTABLE.TASK_CLOSED_REASON.value(t.getTaskClosedReason())).where(
-//						PROJECT_TASKTABLE.TASK_ID.eq(t.getTaskId()));
-//				return update;
-//			}
-//		});
-        Update update = update(PROJECT_TASKTABLE).set(
-                PROJECT_TASKTABLE.TASK_PROJECT.value(projectTask.getTaskProject()),
-                PROJECT_TASKTABLE.TASK_STORY.value(projectTask.getTaskStory()),
-                PROJECT_TASKTABLE.TASK_TYPE.value(projectTask.getTaskType()),
-                PROJECT_TASKTABLE.TASK_PRI.value(projectTask.getTaskPri()),
-                PROJECT_TASKTABLE.TASK_ESTIMATE.value(projectTask.getTaskEstimate()),
-                PROJECT_TASKTABLE.TASK_LEFT.value(projectTask.getTaskLeft()),
-                PROJECT_TASKTABLE.TASK_DEAD_LINE.value(projectTask.getTaskDeadLine()),
-                PROJECT_TASKTABLE.TASK_STATUS.value(projectTask.getTaskStatus()),
-                PROJECT_TASKTABLE.TASK_MAILTO.value(projectTask.getTaskMailto()),
-                PROJECT_TASKTABLE.TASK_DESC.value(projectTask.getTaskDesc()),
-                PROJECT_TASKTABLE.TASK_ASSIGNED_TO.value(projectTask.getTaskAssignedTo()),
-                PROJECT_TASKTABLE.TASK_EST_STARED.value(projectTask.getTaskEstStared()),
-                PROJECT_TASKTABLE.TASK_REAL_STARTED.value(projectTask.getTaskRealStarted()),
-                PROJECT_TASKTABLE.TASK_FINISHED_BY.value(projectTask.getTaskFinishedBy()),
-                PROJECT_TASKTABLE.TASK_FINISHED_DATE.value(projectTask.getTaskFinishedDate()),
-                PROJECT_TASKTABLE.TASK_CANCELED_BY.value(projectTask.getTaskCanceledBy()),
-                PROJECT_TASKTABLE.TASK_CANCELED_DATE.value(projectTask.getTaskCanceledDate()),
-                PROJECT_TASKTABLE.TASK_CLOSED_BY.value(projectTask.getTaskClosedBy()),
-                PROJECT_TASKTABLE.TASK_CLOSE_DATE.value(projectTask.getTaskCloseDate()),
-                PROJECT_TASKTABLE.TASK_CLOSED_REASON.value(projectTask.getTaskClosedReason())).where(
-                PROJECT_TASKTABLE.TASK_ID.eq(projectTask.getTaskId()));
+
+//        Update update = update(PROJECT_TASKTABLE).set(
+//                PROJECT_TASKTABLE.TASK_PROJECT.value(projectTask.getTaskProject()),
+//                PROJECT_TASKTABLE.TASK_STORY.value(projectTask.getTaskStory()),
+//                PROJECT_TASKTABLE.TASK_TYPE.value(projectTask.getTaskType()),
+//                PROJECT_TASKTABLE.TASK_PRI.value(projectTask.getTaskPri()),
+//                PROJECT_TASKTABLE.TASK_ESTIMATE.value(projectTask.getTaskEstimate()),
+//                PROJECT_TASKTABLE.TASK_LEFT.value(projectTask.getTaskLeft()),
+//                PROJECT_TASKTABLE.TASK_DEAD_LINE.value(projectTask.getTaskDeadLine()),
+//                PROJECT_TASKTABLE.TASK_STATUS.value(projectTask.getTaskStatus()),
+//                PROJECT_TASKTABLE.TASK_MAILTO.value(projectTask.getTaskMailto()),
+//                PROJECT_TASKTABLE.TASK_DESC.value(projectTask.getTaskDesc()),
+//                PROJECT_TASKTABLE.TASK_ASSIGNED_TO.value(projectTask.getTaskAssignedTo()),
+//                PROJECT_TASKTABLE.TASK_EST_STARED.value(projectTask.getTaskEstStared()),
+//                PROJECT_TASKTABLE.TASK_REAL_STARTED.value(projectTask.getTaskRealStarted()),
+//                PROJECT_TASKTABLE.TASK_FINISHED_BY.value(projectTask.getTaskFinishedBy()),
+//                PROJECT_TASKTABLE.TASK_FINISHED_DATE.value(projectTask.getTaskFinishedDate()),
+//                PROJECT_TASKTABLE.TASK_CANCELED_BY.value(projectTask.getTaskCanceledBy()),
+//                PROJECT_TASKTABLE.TASK_CANCELED_DATE.value(projectTask.getTaskCanceledDate()),
+//                PROJECT_TASKTABLE.TASK_CLOSED_BY.value(projectTask.getTaskClosedBy()),
+//                PROJECT_TASKTABLE.TASK_CLOSE_DATE.value(projectTask.getTaskCloseDate()),
+//                PROJECT_TASKTABLE.TASK_CLOSED_REASON.value(projectTask.getTaskClosedReason())).where(
+//                PROJECT_TASKTABLE.TASK_ID.eq(projectTask.getTaskId()));
+//        getDslSession().execute(update);
+//        return null;
+        Update update = UpdateUtil.getUpdate(PROJECT_TASKTABLE, projectTask);
         getDslSession().execute(update);
         return null;
     }
