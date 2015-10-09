@@ -28,15 +28,20 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectStoryTable.PROJECT_STORYTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
@@ -269,6 +274,28 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                 PROJECT_TASKTABLE.TASK_CLOSED_REASON.value(projectTask.getTaskClosedReason())).where(PROJECT_TASKTABLE.TASK_ID.eq(projectTask.getTaskId()));
         getDslSession().execute(update);
         return null;
+    }
+
+    public ProjectTask findTaskStory(Integer taskId) {
+        Select select = select(PROJECT_TASKTABLE.ALL, PRODUCT_STORY_SPECTABLE.STORY_SPEC).from(PROJECT_TASKTABLE)
+                .join(Join.leftJoin(
+                        PROJECT_STORYTABLE, PROJECT_TASKTABLE.TASK_ID.eq(PROJECT_STORYTABLE.STORY_ID)
+                        )
+                )
+                .join(Join.leftJoin(
+                        PRODUCT_STORYTABLE, PROJECT_TASKTABLE.TASK_STORY.eq(PRODUCT_STORYTABLE.STORY_ID)
+                        )
+                )
+                .join(Join.leftJoin(
+                        PRODUCT_STORY_SPECTABLE,
+                        and(PRODUCT_STORY_SPECTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
+                                PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(PRODUCT_STORY_SPECTABLE.STORY_VERSION)
+                        )
+                ))
+                .where(
+                        PROJECT_TASKTABLE.TASK_ID.eq(taskId)
+                );
+        return getDslSession().fetchOneResult(select, ProjectTask.class);
     }
 
     @LogMethod("deleteByKey")

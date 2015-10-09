@@ -10,9 +10,9 @@
 #for(t:taskPager.records)
 #@tr()
     #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">${t?.taskId}</a> #end
+    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/findTask?taskId=${t?.taskId}">${t?.taskId}</a> #end
     #@td()${t?.taskPri}</a>#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">${t?.taskName}#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/findTask?taskId=${t?.taskId}">${t?.taskName}#end
     #if(t.taskStatus)
         #@td()${showStatuMap.get(t.taskStatus)}#end
     #else

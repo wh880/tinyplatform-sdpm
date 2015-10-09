@@ -167,6 +167,7 @@ public class TaskAction extends BaseController {
         model.addAttribute("task", task);
         return "project/task/index.page";
     }
+
     @RequestMapping(value = "/closesave", method = RequestMethod.POST)
     public String closesave(ProjectTask task, Model model) {
         if (task.getTaskId() == null) {
@@ -229,6 +230,7 @@ public class TaskAction extends BaseController {
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
         return "project/task/add.page";
     }
+
     @RequestMapping("/batchadd")
     public String batchadd(Integer taskId, Model model) {
         if (taskId != null) {
@@ -240,5 +242,12 @@ public class TaskAction extends BaseController {
         return "project/task/batchAdd.page";
     }
 
+    @RequestMapping("/findTask")
+    public String findTask(Model model, Integer taskId) {
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+
+        return "project/task/IDLink.page";
+    }
 
 }

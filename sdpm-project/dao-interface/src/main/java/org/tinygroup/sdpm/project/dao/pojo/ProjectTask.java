@@ -27,196 +27,178 @@ public class ProjectTask implements Serializable {
 
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
-	/** 
+
+	/**
+	 * 关联需求及需求描述表
+	 */
+	private String storySpec;
+	/**
 	 * 任务id
-	 * 
+	 *
 	 */
 	private Integer taskId;
-
-	/** 
+	/**
 	 * 任务所属项目
-	 * 
 	 */
 	private Integer taskProject;
-
-	/** 
+	/**
 	 * 任务相关需求
-	 * 
+	 *
 	 */
 	private Integer taskStory;
-
-	/** 
+	/**
 	 * 需求版本
-	 * 
+	 *
 	 * 需求变更后自动增长
 	 */
 	private Integer taskStoryVersion;
-
-	/** 
+	/**
 	 * 来源bug
-	 * 
+	 *
 	 */
 	private Integer taskFromBug;
-
-	/** 
+	/**
 	 * 任务名称
-	 * 
+	 *
 	 */
 	private String taskName;
-
-	/** 
+	/**
 	 * 任务类型
-	 * 
+	 *
 	 */
 	private String taskType;
-
-	/** 
+	/**
 	 * 任务优先级
-	 * 
+	 *
 	 * 1，2，4，5
 	 * 递增
 	 */
 	private String taskPri;
-
-	/** 
+	/**
 	 * 最初预计
-	 * 
+	 *
 	 */
 	private Float taskEstimate;
-
-	/** 
+	/**
 	 * 总消耗
-	 * 
+	 *
 	 */
 	private Float taskConsumed;
-
-	/** 
+	/**
 	 * 预计剩余
-	 * 
+	 *
 	 */
 	private Float taskLeft;
-
-	/** 
+	/**
 	 * 截止日期
-	 * 
+	 *
 	 */
 	private Date taskDeadLine;
-
-	/** 
+	/**
 	 * 任务状态
-	 * 
+	 *
 	 * 0-等待，1-未开始，2-进行中，3-已完成，4-已暂停，5-已取消,6-已关闭
 	 */
 	private String taskStatus;
-
-	/** 
+	/**
 	 * 抄送给
-	 * 
+	 *
 	 */
 	private String taskMailto;
-
-	/** 
+	/**
 	 * 任务描述
-	 * 
+	 *
 	 */
 	private String taskDesc;
-
-	/** 
+	/**
 	 * 由谁创建
-	 * 
+	 *
 	 */
 	private String taskOpenBy;
-
-	/** 
+	/**
 	 * 创建日期
-	 * 
+	 *
 	 */
 	private Date taskOpenedDate;
-
-	/** 
+	/**
 	 * 指派给
-	 * 
+	 *
 	 */
 	private String taskAssignedTo;
-
-	/** 
+	/**
 	 * 指派日期
-	 * 
+	 *
 	 */
 	private Date taskAssignedDate;
-
-	/** 
+	/**
 	 * 预计开始
-	 * 
+	 *
 	 */
 	private Date taskEstStared;
-
-	/** 
+	/**
 	 * 实际开始
-	 * 
+	 *
 	 */
 	private Date taskRealStarted;
-
-	/** 
+	/**
 	 * 由谁完成
-	 * 
+	 *
 	 */
 	private String taskFinishedBy;
-
-	/** 
+	/**
 	 * 完成时间
-	 * 
+	 *
 	 */
 	private Date taskFinishedDate;
-
-	/** 
+	/**
 	 * 由谁取消
-	 * 
+	 *
 	 */
 	private String taskCanceledBy;
-
-	/** 
+	/**
 	 * 取消时间
-	 * 
+	 *
 	 */
 	private Date taskCanceledDate;
-
-	/** 
+	/**
 	 * 由谁关闭
-	 * 
+	 *
 	 */
 	private String taskClosedBy;
-
-	/** 
+	/**
 	 * 关闭时间
-	 * 
+	 *
 	 */
 	private Date taskCloseDate;
-
-	/** 
+	/**
 	 * 关闭原因
-	 * 
+	 *
 	 */
 	private String taskClosedReason;
-
-	/** 
+	/**
 	 * 最后修改
-	 * 
+	 *
 	 */
 	private String taskLastEditedBy;
-
-	/** 
+	/**
 	 * 最后修改日期
-	 * 
+	 *
 	 */
 	private Date taskLastEditedDate;
-
-	/** 
+	/**
 	 * 已删除
-	 * 
+	 *
 	 * 0-未删除，1-已删除
 	 */
 	private String taskDeleted;
+
+	public String getStorySpec() {
+		return storySpec;
+	}
+
+	public void setStorySpec(String storySpec) {
+		this.storySpec = storySpec;
+	}
 
 	public Integer getTaskId() {
 		return taskId;
