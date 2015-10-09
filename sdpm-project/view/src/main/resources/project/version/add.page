@@ -28,21 +28,7 @@
 <div class="infoContent">
     <p class="titleName">新建版本</p>
 	#@elementItem()
-		#@sdpmItem("解决版本")
-			#@Tselect2F()
-				#@Tselect2Body("buildId" "4" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="1">Connecticut</option>
-                    <option value="2">Delaware</option>
-                    <option value="3">Florida</option>
-                    <option value="4">Georgia</option>
-                    <option value="5">Indiana</option>
-                    <option value="6">Maine</option>
-                    <option value="7">Maryland</option>
-				#end
-			##填写任意内容，侦听需重新填加 A侦听已内置
-				#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/testmanagement/page/proposeversion.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/testmanagement/page/version.page">全部</a>#end
-			#end
-		#end
+            <input type="hidden" name="buildProject" value="${selProject.projectId}"/>
 	#end
 	#@elementItem()
 		#@sdpmItem("产品")

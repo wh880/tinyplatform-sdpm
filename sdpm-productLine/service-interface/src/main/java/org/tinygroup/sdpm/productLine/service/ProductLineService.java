@@ -14,6 +14,13 @@ public interface ProductLineService {
 	ProductLine addProductLine(ProductLine productLine);
 	
 	/**
+	 * 查找所有产品线
+	 * @param productLine
+	 * @return
+	 */
+	List<ProductLine> findlist(ProductLine productLine);
+	
+	/**
 	 * 编辑产品线
 	 * @param productLine
 	 * @return

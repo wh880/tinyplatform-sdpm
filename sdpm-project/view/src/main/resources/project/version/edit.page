@@ -23,12 +23,6 @@
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/version/editsave" "" {"class":"test","enctype":"multipart/form-data"})
 	#hiddenInput(hiddenInputName="buildId" hiddenInputValue=build?.buildId)
-	#hiddenInput(hiddenInputName="buildName" hiddenInputValue=build?.buildName)
-	#hiddenInput(hiddenInputName="buildScmPath" hiddenInputValue=build?.buildScmPath)
-	#hiddenInput(hiddenInputName="buildFilePath" hiddenInputValue=build?.buildFilePath)
-
-
-
 ##<div style="width:100%;float:left" class="pageleftpart">
 <div class="infoContent">
     <p class="titleName">编辑版本</p>
@@ -36,7 +30,7 @@
 	#@elementItem()
 		#@sdpmItem("产品")
 			#@Tselect2F()
-				#@Tselect2Body("buildProduct" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+				#@Tselect2Body("buildProduct" build.buildProduct {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -52,13 +46,13 @@
 	#end
 	#@elementItem()
 		#@sdpmItem("名称编号")
-			#tinyInput("text" "buildName" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+			#tinyInput("text" "buildName" build.buildName {"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
 		#end
 	#end
 	#@elementItem()
 		#@sdpmItem("构建者")
 			#@Tselect2F()
-				#@Tselect2Body("buildBuilder" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+				#@Tselect2Body("buildBuilder" build.buildBuilder {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     <option value="CT">Connecticut</option>
                     <option value="DE">Delaware</option>
                     <option value="FL">Florida</option>
@@ -82,14 +76,14 @@
 
 	#@elementItem()
 		#@sdpmItem("源代码地址")
-			#tinyInput("buildScmPath" "username" ""{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+			#tinyInput("text" "buildScmPath" build.buildScmPath{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
 		#end
 	#end
 
 ##
 	#@elementItem()
 		#@sdpmItem("下载地址")
-			#tinyInput("buildFilePath" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+			#tinyInput("text" "buildFilePath" build.buildFilePath{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
 		#end
 	#end
 	#@elementItem()

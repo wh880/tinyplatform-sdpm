@@ -168,6 +168,28 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		}
 		},pks);
 	}
+	
+	
+	
+	@SuppressWarnings("rawtypes")
+	public <T> T getByKeys(Serializable pk, Class<T> requiredType,SelectGenerateCallback<Serializable> callback) {
+		Select select=callback.generate(pk);
+		return getDslSession().fetchOneResult(select, requiredType);
+	}
+	
+	public List<ProductStory> getByKeys(Integer... pk){
+		
+		SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
+			@SuppressWarnings("rawtypes")
+			public Select generate(Serializable[] t) {
+
+				return selectFrom(PRODUCT_STORYTABLE).where(PRODUCT_STORYTABLE.STORY_ID.in(t));
+			}
+			
+		};
+		Select select = callback.generate(pk);
+		return getDslSession().fetchList(select, ProductStory.class);
+	}
 
 	public ProductStory getByKey(Integer pk) {
 		return getDslTemplate().getByKey(pk, ProductStory.class, new SelectGenerateCallback<Serializable>() {

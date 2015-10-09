@@ -21,7 +21,7 @@
 	#end
 #end
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/save" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/assignTo" "post" {"class":"test"})
 #hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
 	<div style="width:67%;float:left">
     	<div class="infoContent">
@@ -57,7 +57,7 @@
                 <div class="col-2 text-r"><label>备注：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})Say something#end</div>
             </div>
         #end
         <br/>

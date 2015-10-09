@@ -41,6 +41,13 @@ public interface ProductLineManager {
 	 * @return
 	 */
 	ProductLine find(Integer productLineId);
+	/**
+	 * 
+	 * 查找所有项目
+	 * @param productLine
+	 * @return
+	 */
+	List<ProductLine> findList(ProductLine productLine);
 	
 	/**
 	 * 根据对象查找(排序)

@@ -15,7 +15,7 @@
 		$("#subdivision").hide();
 		$("#repeat").hide();
 		
-		$("select[name='demand-close-cause']").on("change",function(){
+		$("select[name='storyClosedReason']").on("change",function(){
 			var subdivision = $("#subdivision");
 			var repeat = $("#repeat");
 			if($(this).val()=='subdivision'){

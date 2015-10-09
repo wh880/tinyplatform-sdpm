@@ -2,8 +2,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="产品概况",activeMenuId=currentPageId)
-#!set(linkName="product-demand",sonitem="
-<li>"+"需求"+"</li>")
+#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 
 #include("/product/page/event/common.page")
 #set(name="version")
@@ -30,12 +29,14 @@
 
 #@tabWithInit("tab_demo" "optionsBox")
 
+#hiddenInput("","storyId","",storySpec.storyId)
+
     #@div(divClass="operationbar")
     <span class="f">
 					<a href="#" class="active_btn">这是一条演示用的需求</a>
 			</span>
     <span class="r">
-        #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
+#*        #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
             #if(m.map.type=="aModal")
                 #@aModal("#myModal" "新增日志" "1000" "500" "btn-class"
                     "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
@@ -48,18 +49,30 @@
             #elseif(m.map.type=="del")
                 #@delItemsdpm("${m.href}")#buttonIcon(iconClass=m.icon)#end
             #end
-
-        #end
+        #end*#
+        
+         #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
+         #set(url=eval(m.href))
+           #if(m.map.type=="aModal")
+                 #@aModal("#myModal" m.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m.icon)${m.name}#end
+           #elseif(m.map.type=="icon-href")
+           		 <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+           #elseif(m.map.type=="icon")
+           		 <a href="${TINY_CONTEXT_PATH}${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+           #elseif(m.map.type=="note")
+           		  <a href="${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)
+           #end
+         #end
     </span>
     #end
 
 
-<div style="width:70%;float:right">
+<div style="width:70%;float:left">
     #@div(divClass="infoContent")
         <p class="titleName">产品描述</p>
 
         <div>
-            描述啊啊啊啊啊
+           ${storySpec?.storySpec}
         </div>
     #end
 
@@ -67,7 +80,7 @@
         <p class="titleName">验收标准</p>
 
         <div>
-            描述啊啊啊啊啊
+          ${storySpec?.storyVerification}
         </div>
     #end
 
@@ -88,20 +101,17 @@
 
     <div style="text-align:center;margin:auto">
 <span>
-    #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
-        #if(m.map.type=="aModal")
-            #@aModal("#myModal" "新增日志" "1000" "500" "btn-class"
-                "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end&nbsp;
-        #elseif(m.map.type=="icon-href")
-            <a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;
-        #elseif(m.map.type=="icon")
-            <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;
-        #elseif(m.map.type=="note")
-             #buttonIcon(iconClass=m.icon) &nbsp;
-        #elseif(m.map.type=="del")
-            #@delItemsdpm("${m.href}")#buttonIcon(iconClass=m.icon)#end&nbsp;
-        #end
-    #end
+   #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
+           #if(m.map.type=="aModal")
+                 #@aModal("#myModal" m.name "1000" "500" "btn-class" m.href)#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;
+           #elseif(m.map.type=="icon-href")
+           		 <a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;
+           #elseif(m.map.type=="icon")
+           		 <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;
+           #elseif(m.map.type=="note")
+           		  <a href="#" title="${m.name}">#buttonIcon(iconClass=m.icon)&nbsp;
+           #end
+         #end
 </span>
     </div>
 
@@ -117,29 +127,28 @@
             #@validateDiv("col-2")#end
         #end
         <br>
-        #@elementItem()
-            <div class="col-12">
-                <div class="col-5">
+      
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
 
-                </div>
-                <div class="col-1">
-                    <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-                </div>
-                <div class="col-1">
-                    <a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">
-                        <button style="float: left" type="button" id="back" class="backBtn">返回</button>
-                    </a>
-                </div>
-                <div class="col-5"></div>
             </div>
-        #end
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
     </div>
 
 </div>
 
 <div style="width:30%;float:right">
 #*#include("/product/page/tabledemo/hrefbaseinfo.page")*#
-	#TypeInfo("demandhref")
+	#TypeInfo("demandhref" storySpec.storyId)
 </div>
 
 

@@ -11,7 +11,7 @@
     #end
 
     #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/faq/save" "post" {"class":""})
-
+    <input type="hidden" name="faqId" value="${faq?.faqId}"/>
  #*   #@tinyForm("thisform" "" "" {"class":"test"})*#
 
         #@elementItem()

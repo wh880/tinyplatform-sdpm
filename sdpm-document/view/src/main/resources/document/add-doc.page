@@ -44,11 +44,11 @@
 					#@div(divClass="col-5")
 					#@Tselect2F()
 	                   		 #@Tselect2Body("docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">产品1</option>
-	                        <option value="CT">产品2</option>
-	                        <option value="DE">产品3</option>
-	                        <option value="FL">产品4</option>
-	                        <option value="GA">产品5</option>
+	                        <option value="IN">分类1</option>
+	                        <option value="CT">分类2</option>
+	                        <option value="DE">分类3</option>
+	                        <option value="FL">分类4</option>
+	                        <option value="GA">分类5</option>
 	            
 	                    	#end                  	                    	
                 	  #end

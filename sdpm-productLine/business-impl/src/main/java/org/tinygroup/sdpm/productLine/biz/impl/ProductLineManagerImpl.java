@@ -56,6 +56,11 @@ public class ProductLineManagerImpl implements ProductLineManager{
 		return productLineDao.batchUpdate(productLine);
 	}
 
+	public List<ProductLine> findList(ProductLine productLine) {
+	
+		return productLineDao.query(productLine);
+	}
+
 	
 
 	
