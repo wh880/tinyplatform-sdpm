@@ -10,6 +10,9 @@
 		ajaxRead("orgUser","orgUserId","orgUserAccount");
 		ajaxRead("product","productId","productName");
 		ajaxRead("systemModel","moduleId","moduleName");
+		
+		
+		
 
         $("select[name='demand-sources']").bind('change', function () {
 
@@ -73,10 +76,8 @@
                 </div>
                 <div class="col-6">
                     #@Tselect2F()
-                        #@Tselect2Body("moduleId" "IN" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":"systemModel","data":""}) ##,"multiple":"multiple"加上为多选项
-                            <option value="CT">Admin</option>
-                            <option value="DE">Demo</option>
-                            <option value="FL">Me</option>
+                        #@Tselect2Body("moduleId" "IN" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":"systemModel","data":"moduleType=product","relateElem":"relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
+                            
                         #end
 
                         #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a><a
