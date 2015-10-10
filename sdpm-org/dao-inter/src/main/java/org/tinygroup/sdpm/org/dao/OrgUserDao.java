@@ -17,9 +17,10 @@
 package org.tinygroup.sdpm.org.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface OrgUserDao extends BaseDao<OrgUser,String> {
-
+    Pager<OrgUser> getPagerByDeptId(int start, int limit, final Integer deptId, final OrderBy... orderBies);
 }

@@ -24,6 +24,7 @@ public class UserAction extends BaseController {
     private UserService userService;
     @Autowired
     private DeptService deptService;
+
     @RequestMapping("/form")
     public String form(String id, Model model) {
         if (id != null) {
@@ -53,8 +54,8 @@ public class UserAction extends BaseController {
 
     @RequestMapping("/list")
     public String list(OrgUser orgUser, Model model) {
-        List<OrgUser> list = userService.findUserList(orgUser);
-        model.addAttribute("list", list);
+//        List<OrgUser> list = userService.findUserList(orgUser);
+//        model.addAttribute("list", list);
         return "organization/user/user.page";
     }
 
@@ -76,10 +77,16 @@ public class UserAction extends BaseController {
 
         return "redirect:/org/user/list/";
     }
+
     @RequestMapping("/list/data")
-    public String listData(Integer start, Integer limit, OrgUser orgUser, Model model) {
-        Pager<OrgUser> pager = userService.findUserPager(start, limit, orgUser);
-        model.addAttribute("pager", pager);
+    public String listData(Integer orgDeptId, Integer start, Integer limit, OrgUser orgUser, Model model) {
+        if (orgDeptId == null || orgDeptId == -1) {
+            Pager<OrgUser> pager = userService.findUserPager(start, limit, orgUser);
+            model.addAttribute("pager", pager);
+        } else {
+            Pager<OrgUser> pager = userService.findUserByDeptId(start, limit, orgDeptId);
+            model.addAttribute("pager", pager);
+        }
         return "organization/user/userTableData.pagelet";
     }
 
@@ -89,14 +96,14 @@ public class UserAction extends BaseController {
         model.addAttribute("user", user);
         return "organization/user/profileAdmin.page";
     }
-    
+
     @ResponseBody
     @RequestMapping("/userList")
-    public List<OrgUser> findUser(OrgUser orgUser){
-    	
-    	List<OrgUser> list = userService.findUserList(orgUser);
-    	
-    	return list;
+    public List<OrgUser> findUser(OrgUser orgUser) {
+
+        List<OrgUser> list = userService.findUserList(orgUser);
+
+        return list;
     }
 
 }

@@ -44,6 +44,14 @@ public interface UserManager {
      */
     List<OrgUser> findList(OrgUser orgUser);
 
+
+    /**
+     * 根据部门查询用户list
+     *
+     * @param deptId
+     * @return
+     */
+    Pager<OrgUser> findUserListByDeptId(Integer start, Integer limit, Integer deptId);
     /**
      * 新增有一个用户
      *
