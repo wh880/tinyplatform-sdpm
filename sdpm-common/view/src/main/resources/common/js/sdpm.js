@@ -12,12 +12,12 @@ $(function () {
                 dataType: "json",
                 success: function (data) {
                     if (data.status == "success" || data.status == "y") {
-                        layer.msg(data.info);
+                        layer.msg(data.info, 8, 9);
                         setTimeout(function () {
                             window.location.href = url;
                         }, 300)
                     } else {
-                        layer.msg(data.info);
+                        layer.msg(data.info, 2, 8);
                     }
                 },
                 error: function () {

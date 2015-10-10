@@ -19,11 +19,13 @@
             </span>
             <span class="r">
                 #foreach(m:menuManager.getScopeMenus("pro-taskInfo-op"))
-                    <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                    <a href="${TINY_CONTEXT_PATH}${m.href}?taskId=${task.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                 #end
 
                 #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
-                    <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                    <a href="${TINY_CONTEXT_PATH}${m.href}?taskId=${task.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
 
                 #set(m1=menuManager.getMenu("pro-Info-close"))
@@ -79,11 +81,11 @@
     #end
     <center>
         #foreach(m:menuManager.getScopeMenus("pro-taskInfo-op"))
-            <a href="${TINY_CONTEXT_PATH}${m.href}"
+            <a href="${TINY_CONTEXT_PATH}${m.href}?taskId=${task.taskId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
         #end
         #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
-            <a href="${TINY_CONTEXT_PATH}${m.href}"
+            <a href="${TINY_CONTEXT_PATH}${m.href}?taskId=${task.taskId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
         #end
         #set(m1=menuManager.getMenu("pro-Info-close"))

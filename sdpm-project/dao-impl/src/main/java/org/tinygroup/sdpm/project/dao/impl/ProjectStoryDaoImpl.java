@@ -45,10 +45,20 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @Repository
 public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectStoryDao {
 
+
 	public List<ProjectStory> findByProjectID(Integer projectId) {
 		Select select = selectFrom(PROJECT_STORYTABLE).where(PROJECT_STORYTABLE.PROJECT_ID.eq(projectId));
 		return getDslSession().fetchList(select, ProjectStory.class);
 	}
+
+	public Integer deleteByProjectStory(Integer projectId, Integer storyId) {
+		Delete delete = delete(PROJECT_STORYTABLE).where(and(
+				PROJECT_STORYTABLE.PROJECT_ID.eq(projectId),
+				PROJECT_STORYTABLE.STORY_ID.eq(storyId)
+		));
+		return getDslSession().execute(delete);
+	}
+
 
 	@LogMethod("add")
 	public ProjectStory add(ProjectStory projectStory) {
