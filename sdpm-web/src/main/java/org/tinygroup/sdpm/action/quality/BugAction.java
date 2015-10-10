@@ -91,7 +91,7 @@ public class BugAction extends BaseController {
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(bug.getProjectId());
 		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("makeSure");
+		systemAction.setActionActor("makeSure");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
 		return "redirect:"+"/quality/bug";
@@ -115,7 +115,7 @@ public class BugAction extends BaseController {
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(bug.getProjectId());
 		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("assignTo");
+		systemAction.setActionActor("assignTo");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
 		return "redirect:"+"/quality/bug";
@@ -151,7 +151,7 @@ public class BugAction extends BaseController {
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(bug.getProjectId());
 		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("resolve");
+		systemAction.setActionActor("resolve");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
 		return "redirect:"+"/quality/bug";
@@ -178,7 +178,7 @@ public class BugAction extends BaseController {
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(bug.getProjectId());
 		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("close");
+		systemAction.setActionActor("close");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
 		return "redirect:"+"/quality/bug";
@@ -204,7 +204,7 @@ public class BugAction extends BaseController {
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(bug.getProjectId());
 		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("edit");
+		systemAction.setActionActor("edit");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(qualityBug,bug,systemAction);
 		return "redirect:"+"/quality/bug";
@@ -241,7 +241,7 @@ public class BugAction extends BaseController {
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(bug.getProjectId());
 		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("copyBug");
+		systemAction.setActionActor("copyBug");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
 		return "redirect:"+"/quality/bug";
@@ -258,7 +258,7 @@ public class BugAction extends BaseController {
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(bug.getProjectId());
 		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("openBug");
+		systemAction.setActionActor("openBug");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
 		return "redirect:"+"/quality/bug";

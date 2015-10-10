@@ -50,8 +50,5 @@
 	 	#end
 	 	
 	 #end
-	 
-	 #@submitButton(submitButtonValue="保存")
-	 #end
 #end
 	

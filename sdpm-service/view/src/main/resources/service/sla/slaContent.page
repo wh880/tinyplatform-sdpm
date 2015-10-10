@@ -28,16 +28,14 @@
 
         #@tbody()
             #@tr()
-            <div class="text-c"><h4>支付宝出售协议</h4></div>
+            #* <div class="text-c"><h4>支付宝出售协议</h4></div>*#
             #end
             #@noRespsGridSystem()
                 #@gridSysRow()
                     #@gridSysCol(2)#end
                     #@gridSysCol(8)
                         #@tr()
-                        #* <p>&nbsp;&nbsp;&nbsp;&nbsp;支付宝出售协议</p>*#
-                        #* <p>&nbsp;&nbsp;&nbsp;&nbsp;${var.slaSpec}</p>*#
-                            #@th()协议具体内容为：#end
+                        #*#@th()协议具体内容为：#end*#
                             #@td()${sla.slaSpec}#end
                         #end
                     #end
