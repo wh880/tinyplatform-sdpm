@@ -9,7 +9,7 @@
             #@radiusBtn(
                 "btn radius btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel") ${m1.name}#end
         #end    #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/service/sla/list/data" ) ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/service/sla/list/data?status="+status) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

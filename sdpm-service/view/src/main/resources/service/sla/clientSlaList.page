@@ -14,8 +14,8 @@
         #foreach(var:slas)
             #@gridSysCol(4)
                 #@div(divClass="infoContent")
-                    <p class="titleName">支付宝协议</p>
-
+                #*<p class="titleName">支付宝协议</p>*#
+                    <p class="titleName">${var.slaTitle}</p>
                     <div>
                         #@table("")
                             #@tbody()

@@ -25,6 +25,10 @@ public class FaqManagerImpl implements FaqManager{
     public List<ServiceFaq> getList(ServiceFaq faq) {
         return faqDao.query(faq);
     }
+     /*分页显示调用的方法 */
+    /*public Pager<ServiceFaq> getpage(int start, int limit) {
+        return faqDao.queryPager( start,  limit);
+    }*/
 
     public ServiceFaq add(ServiceFaq faq) {
         return faqDao.add(faq);
@@ -41,4 +45,11 @@ public class FaqManagerImpl implements FaqManager{
         faq.setDeleted(id);
         return faqDao.edit(faq);
     }
+
+
+    /*查询问题总条数*/
+    public Integer selectcount(Integer id) {
+        return faqDao.SelectByKey();
+    }
+
 }

@@ -25,6 +25,14 @@ public interface FaqService {
     List<ServiceFaq> getFaqList(ServiceFaq faq);
 
     /**
+     * 分页
+     *
+     * @param faq 用于查询条件
+     * @return
+     */
+   /* Pager<ServiceFaq> getFaqpage(int start, int limit);*/
+
+    /**
      * 新增一个faq
      *
      * @param faq 新增实体类
@@ -47,4 +55,12 @@ public interface FaqService {
      * @return
      */
     Integer deleteFaq(Integer id);
+
+    /**
+     * 查询faq中问题的数目
+     *
+     * @param id 主键
+     * @return
+     */
+    Integer selectcount(Integer id);
 }
