@@ -58,7 +58,7 @@ public class StoryManagerImpl implements StoryManager{
 	}
 
 	public List<ProductStory> findList(ProductStory story,String order,String ordertype) {
-		return productStoryDao.query(story,order == null?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+		return productStoryDao.query(story,(order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {

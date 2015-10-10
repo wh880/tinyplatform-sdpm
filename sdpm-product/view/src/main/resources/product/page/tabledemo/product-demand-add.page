@@ -2,7 +2,17 @@
 
 
 <script>
+##relateElem = relateModelTwo  opKey = moduleType  moduleRoot
+##,"onchange":"relateChange('relateModelTwo','moduleRoot')"
 
+#*		function relateChange(relateElem,opKey){
+			var em = "select[relateElem='"+relateElem+"']";alert(this.value);
+			var data = $(em).attr("data")+"&"+ opKey +"=" + $(this).val();
+			
+			$(em).attr("data",data);
+			$(em).trigger("ajaxRead");
+		}*#
+		
     $(document).ready(function () {
     
 		
@@ -10,7 +20,6 @@
 		ajaxRead("orgUser","orgUserId","orgUserAccount");
 		ajaxRead("product","productId","productName");
 		ajaxRead("systemModel","moduleId","moduleName");
-		
 		
 		
 
