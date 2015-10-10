@@ -47,7 +47,10 @@ public class BeforeAction {
     }
 
     @RequestMapping("/build/index")
-    public String jumpBuildIndex() {
+    public String jumpBuildIndex(Model model, HttpServletRequest request) {
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Project project = projectService.findById(projectId);
+        model.addAttribute("project", project);
         return "project/version/index.page";
     }
 
