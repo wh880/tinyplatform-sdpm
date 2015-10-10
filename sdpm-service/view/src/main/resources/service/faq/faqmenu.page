@@ -3,7 +3,7 @@
 #import("/common/component/project.component")
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
 ##     #import("/fulimanageui/form.component")
-#set(totalNum=81,pageSize=10,pages=toInt(totalNum/pageSize))
+#set(totalNum=81,pageSize=10,pages=toInt(totalNum/pageSize+1))
 <style>
     .faqSty {
         margin: 5px;
