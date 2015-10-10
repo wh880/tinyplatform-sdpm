@@ -82,4 +82,12 @@ public interface ProjectService {
 	Pager<Project> findProjectPager(int page,int pagesize,Project project,String order,String ordertype);
 
 
+    /**
+     * 更新项目，包括指派，开始，完成，关闭，编辑
+     * 注意：1.状态不可逆转 2.有前置条件判断
+     *
+     * @param project
+     * @return
+     */
+    public Integer updateProject(Project project);
 }

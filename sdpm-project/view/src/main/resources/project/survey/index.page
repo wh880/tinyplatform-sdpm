@@ -71,7 +71,7 @@
                 #end
 
                 #foreach(m:menuManager.getScopeMenus("pro-surveymenu2-op"))
-                    <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                    <a href="${TINY_CONTEXT_PATH}${m.href}?projectId=${project?.projectId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
 
                 #set(m4=menuManager.getMenu("pro-survey-remove"))
