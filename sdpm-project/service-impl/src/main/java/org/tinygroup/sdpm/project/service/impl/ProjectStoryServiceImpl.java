@@ -48,7 +48,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
             condition = condition + storys + ")";
         }
 
-        boolean asc = ordertype == "asc" ? true : false;
+        boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProductStory> pager = storyManager.findPager(start, limit, null, condition, null, null, order, asc);
         for (ProductStory s : pager.getRecords()) {
             s.setTaskNumber(taskManager.getTaskSumByStory(s.getStoryId()));

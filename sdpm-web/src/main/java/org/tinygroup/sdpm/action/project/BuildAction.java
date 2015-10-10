@@ -28,7 +28,7 @@ public class BuildAction extends BaseController {
     @RequestMapping("/find")
     public String find(Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
-        boolean asc = ordertype == "asc" ? true : false;
+        boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProjectBuild> pager = buildService.findPager(projectId, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
         return "project/version/tableData.pagelet";

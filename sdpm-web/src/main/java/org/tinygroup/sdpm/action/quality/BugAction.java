@@ -1,20 +1,11 @@
 package org.tinygroup.sdpm.action.quality;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -25,7 +16,9 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -267,7 +260,7 @@ public class BugAction extends BaseController {
 	@RequestMapping("/projectFindList")
 	public String projectFindList(Model model, Integer page, Integer limit, String order, String ordertype, HttpServletRequest request) {
 		Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
-		boolean asc = ordertype == "asc" ? true : false;
+		boolean asc = "asc".equals(ordertype) ? true : false;
 		QualityBug bug = new QualityBug();
 		bug.setProjectId(projectId);
 		Pager<QualityBug> bugPage = bugService.findBugListPager(limit*(page-1), limit, bug, order, asc);

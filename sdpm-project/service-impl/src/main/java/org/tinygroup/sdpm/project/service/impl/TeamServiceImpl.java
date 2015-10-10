@@ -30,7 +30,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     public Pager<ProjectTeam> findPager(ProjectTeam team, Integer start, Integer limit, String order, String ordertype) {
-        boolean asc = ordertype == "asc" ? true : false;
+        boolean asc = "asc".equals(ordertype) ? true : false;
         return teamManager.findPager(team, start, limit, order, asc);
     }
 }
