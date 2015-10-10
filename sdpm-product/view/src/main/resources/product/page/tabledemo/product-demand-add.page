@@ -205,7 +205,7 @@
         #@elementItem()
             #@sdpmItem("由谁评审")
                 #@Tselect2F()
-                    #@Tselect2Body("storyReviewedBy" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":"orguser","data":""})
+                    #@Tselect2Body("storyReviewedBy" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":"orguser","data":"orgDeptId=23&orgUserAccount=zhangsan"})
                         
                     #end
 

@@ -47,6 +47,13 @@ public interface ProductService {
 	Product findProduct(Integer productId);
 	
 	/**
+	 * 根据产品ID查找
+	 * @param plan
+	 * @return
+	 */
+	List<Product> findProductList(Product product);
+	
+	/**
 	 * 根据多个ID查找
 	 * @param productId
 	 * @return
