@@ -21,7 +21,7 @@
             <span class="r">
 				#set(m1=menuManager.getMenu("pro-survey-delay"))
                 #if(m1)
-                    #@aModal("#myModal" "${selProject.projectName}>延期" "750" "400" "" "/project/survey/delay.pagelet")
+                    #@aModal("#myModal" selProject.projectName+">延期" "750" "400" "" "/project/survey/delay.pagelet")
                         #buttonIcon(iconClass="icon-calendar")延期
                     #end
                     #@dialog("myModal")
@@ -38,7 +38,7 @@
                 #set(m2=menuManager.getMenu("pro-survey-hangon"))
                 #if(m2)
                     #@aModal(
-                        "#myModa2" "${selProject.projectName}>挂起" "750" "250" "" "/project/survey/hang-up.pagelet")
+                        "#myModa2" selProject.projectName+">挂起" "750" "250" "" "/project/survey/hang-up.pagelet")
                         #buttonIcon(iconClass="icon-pause")挂起
                     #end
                     #@dialog("myModa2")
@@ -55,7 +55,7 @@
                 #set(m3=menuManager.getMenu("pro-survey-finish"))
                 #if(m3)
                     #@aModal(
-                        "#myModa3" "${selProject.projectName}>结束" "750" "250" "" "/project/survey/hang-up.pagelet")
+                        "#myModa3" selProject.projectName+">结束" "750" "250" "" "/project/survey/hang-up.pagelet")
                         #buttonIcon(iconClass="icon-off")结束
                     #end
                     #@dialog("myModa3")

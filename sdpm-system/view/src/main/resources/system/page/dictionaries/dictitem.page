@@ -23,3 +23,20 @@
 	#end
 #simpleModal(editpageModalId)
 #simpleViewModal(viewpageModalId)
+<script>
+	$(document).ready(function(){
+            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        });
+            
+            function onCheck(e,treeId,treeNode){
+            var treeObj=$.fn.zTree.getZTreeObj("treeDemo"),
+            nodes=treeObj.getCheckedNodes(true),
+            var v=nodes[0];
+            alert(v);
+##            for(var i=0;i<nodes.length;i++){
+##            v+=nodes[i].name + ",";
+####            alert(nodes[i].id); //获取选中节点的值
+##            }
+            
+            }
+</script>

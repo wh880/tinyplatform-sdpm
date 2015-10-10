@@ -47,30 +47,10 @@
                         #@gridSysRow()
                             #@colLabel("col-4")所属部门：#end
                             #@gridSysCol(6)
-                                #TzTreeSelect("orgDeptId" "" {"class":"input-text","data-URL":TINY_CONTEXT_PATH+
+                                #TzTreeSelect(
+                                    "orgDeptId" dept?.orgDeptId {"class":"input-text","data-URL":TINY_CONTEXT_PATH+
                                     "/org/dept/data?check=n"} )
-                            ## #@selZtree("orgDeptId" ,"")
 
-                                ##                                #@Tselect2F()
-                                ##                                    #@Tselect2Body("orgDeptId" user?.orgDeptId {"class":
-                                ##                                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                ##
-                                ##                                        #for(m:deptList)
-                                ##                                        <option value="${m.orgDeptId}">${m.orgDeptName}</option>
-                                ##                                    #end
-                                ##
-                                ##
-                                ##                                ##                                        <option value="1111">部门0</option>
-                                ##                                ##                                        <option value="2222">部门1</option>
-                                ##                                ##                                        <option value="33">部门2</option>
-                                ##                                ##                                        <option value="444">部门3</option>
-                                ##                                ##                                        <option value="555">部门4</option>
-                                ##                                ##                                        <option value="666">部门5</option>
-                                ##                                #end
-                                ##                                #@Tselect2Fix()
-                                ##                                    <a href="${TINY_CONTEXT_PATH}/org/user/form" class="r">增加</a>
-                                ##                                    <a href="#">全部</a>
-                                ##                                #end
 
                             #end
                         #end

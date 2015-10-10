@@ -108,7 +108,7 @@
 
 #end
 #set(requestStatuString = tinyRequestQueryString!=null ?tinyRequestQueryString:"")
-#@tinyTableContent(TINY_CONTEXT_PATH+"/quality/testcase/findPager?"+requestStatuString)
+#@tinyTableContent(TINY_CONTEXT_PATH+"/quality/testCase/findPager?"+requestStatuString)
 #@thead()
 #@tr()
 #@tinyTh({"width":"6"})<input type="checkbox" name="" value="">#end

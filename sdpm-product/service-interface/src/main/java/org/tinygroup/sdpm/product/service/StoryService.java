@@ -33,7 +33,7 @@ public interface StoryService {
 	 * @param stories
 	 * @return
 	 */
-	int[] updateBatchStory(ProductStory[] stories);
+	int[] updateBatchStory(List<ProductStory> stories);
 	/**
 	 * 根据需求ID查找
 	 * @param storyId

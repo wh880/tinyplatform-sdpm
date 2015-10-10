@@ -54,6 +54,11 @@ public class ReleaseServiceImpl implements ReleaseService{
 		return releaseManger.find(releaseId);
 	}
 
+	public List<ProductRelease> findReleaseList(Integer... releaseId) {
+
+		return releaseManger.findList(releaseId);
+	}
+
 	
 	
 

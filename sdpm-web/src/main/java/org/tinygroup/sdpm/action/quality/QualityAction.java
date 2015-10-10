@@ -33,7 +33,7 @@ public class QualityAction extends BaseController {
             request.getSession().removeAttribute("qualityProductId");
             request.getSession().setAttribute("qualityProductId",list.size()>0?list.get(0).getProductId():0);
         }
-        return "redirect:/quality/bug?status=1"+(request.getQueryString()==null?"":("&"+request.getQueryString()));
+        return "redirect:/quality/bug?status=tbugstatus"+(request.getQueryString()==null?"":("&"+request.getQueryString()));
 
     }
     @ResponseBody

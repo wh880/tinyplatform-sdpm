@@ -34,16 +34,10 @@ public class BuildAction extends BaseController {
         return "project/version/tableData.pagelet";
     }
 
-//    @RequestMapping("/look")
-//    public String look(Integer buildId, Model model) {
-//        if (buildId != null) {
-//            ProjectBuild build = buildService.;
-//            model.addAttribute("build", build);
-//            //还需要查询其他相关任务剩余时间的信息
-//            return "project/bug/index.page";
-//        }
-//        return "error";
-//    }
+    @RequestMapping("/look")
+    public String look(Integer buildId, Model model) {
+            return "project/bug/index.page";
+    }
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(ProjectBuild build, Model model) {
       if (build.getBuildId() == null) {

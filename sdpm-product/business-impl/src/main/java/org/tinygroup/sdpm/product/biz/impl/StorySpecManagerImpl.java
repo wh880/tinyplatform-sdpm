@@ -39,6 +39,11 @@ public class StorySpecManagerImpl implements StorySpecManager{
 		return productStorySpecDao.query(storySpec, null);
 	}
 
+	public List<ProductStorySpec> findList(Integer... storyspecId) {
+
+		return productStorySpecDao.getByKeys(storyspecId);
+	}
+
 	
 	
 }

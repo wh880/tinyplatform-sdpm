@@ -22,7 +22,7 @@ public class TaskManagerImpl implements TaskManager {
     private ProjectTaskDao taskDao;
 
     public ProjectTask find(int id) {
-        return taskDao.getByKey(id);
+        return taskDao.findTaskStory(id);
     }
 
     public List<ProjectTask> findList(ProjectTask task) {

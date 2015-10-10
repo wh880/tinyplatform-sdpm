@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action.project.util;
 
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,12 +25,24 @@ public class TaskStatusUtil {
         status.put("9", "task_status = 5");
     }
 
-    public static String getCondition(String statu, String choose) {
+    public static String getCondition(String statu, String choose, HttpServletRequest request) {
         if (statu != null && choose == null) {
             return status.get(statu);
         } else if (statu == null && choose != null) {
-            return null;
+            /**
+             * choose = 1 未关闭
+             * choose = 2 所有
+             * choose = 7 指派给我
+             */
 
+            if ("1".equals(choose)) {
+                return "task_status != 6";
+            } else if ("2".equals(choose)) {
+                return null;
+            } else if ("7".equals(choose)) {
+                //return "task_assigned_to = '"+request.getSession().getAttribute("userId")+"'";
+                return null;
+            } else return null;
         } else return null;
 
     }

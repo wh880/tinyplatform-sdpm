@@ -3,46 +3,37 @@
 #end
 
 
+${casepager?.totalCount+1}
 
-#set(records=casepager.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-	#set(pagesize=records-(page-1)*pagesize)
-#end
-#setTinyItemCount(casepager.totalCount)
-
-#for(c:casepager.records)
+#setTinyItemCount(casepager?.totalCount)
+dfhfhgfhg
+#for(c:casepager?.records)
 					#@tr()
 						#@td()<input type="checkbox" value="1" name="userid">#end
 						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${c?.caseId}</a>#end
-						#@td()${c?priority}#end
+						#@td()${c?.priority}#end
 						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${c?.caseTitle}</a>#end
-						#@td()${c?caseType}#end
-						#@td()${c?caseOpenedBy}#end
-						#@td()${c?caseLastRunner}#end
-						#@td()${c?caseLastRunDate}#end
-						#@td()${c?caseLastRunResult}#end
-						#@td()${c?caseStatus}#end
-						 #@td()					 					 			                       			
+						#@td()${c?.caseType}#end
+						#@td()${c?.caseOpenedBy}#end
+						#@td()${c?.caseLastRunner}#end
+						#@td()${c?.caseLastRunDate}#end
+						#@td()${c?.caseLastRunResult}#end
+						#@td()${c?.caseStatus}#end
+						 #@td()
                          	#foreach(m:menuManager.getScopeMenus("testcase-op"))
                          		#if(m.id=="teditioncase"||m.id=="tproposecase")
             						<a href="${TINY_CONTEXT_PATH}${m.href}?caseId=${c?.caseId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             					#else
             						#if(m.id=="texecution"||m.id=="tresult")
-            							#iconOperations("#myModal" m.icon m.name "865" "400" m.href "ml-1")            											
-            						#else            																	
+            							#iconOperations("#myModal" m.icon m.name "865" "400" m.href+"?caseId="+c?.caseId "ml-1")
+            						#else
 										#@tinyTableItemRemove(m.href var)
 											<i class="${m.icon}" title="删除"></i>
 										#end
-									#end									
+									#end
 								#end
-                         	#end		 					
-#*							#iconOperations("#myModal" "icon-play" "执行" "865" "400" "/testManagement/page/tabledemo/execution.pagelet" "ml-5")
-							#iconOperations("#myModal" "icon-flag" "结果" "600" "200" "/testManagement/page/tabledemo/result.pagelet" "ml-5")
-                         	<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editioncase.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
-                         	<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page" title="复制">#buttonIcon(iconClass="icon-copy")</a>
-                         	#@tinyTableItemRemove("/tinyuiweb/action/del.pagelet" var)
-								<i class="icon-remove"></i>
-							#end*#						
+                         	#end
+
 						#end
 					#end
 				#end

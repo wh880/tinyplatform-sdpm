@@ -142,14 +142,14 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/findPager")
-    public String findPager(Integer start, Integer limit, String order, String ordertype, String statu, String choose, String group, Integer projectId, Model model) {
+    public String findPager(Integer start, Integer limit, String order, String ordertype, String statu, String choose, String group, Integer projectId, Model model, HttpServletRequest request) {
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;
         }
         ProjectTask task = new ProjectTask();
         task.setTaskProject(projectId);
-        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, TaskStatusUtil.getCondition(statu, choose), group);
+        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, TaskStatusUtil.getCondition(statu, choose, request), group);
         model.addAttribute("taskPager", taskPager);
         model.addAttribute("statu", statu);
         model.addAttribute("choose", choose);
@@ -167,6 +167,7 @@ public class TaskAction extends BaseController {
         model.addAttribute("task", task);
         return "project/task/index.page";
     }
+
     @RequestMapping(value = "/closesave", method = RequestMethod.POST)
     public String closesave(ProjectTask task, Model model) {
         if (task.getTaskId() == null) {
@@ -229,6 +230,7 @@ public class TaskAction extends BaseController {
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
         return "project/task/add.page";
     }
+
     @RequestMapping("/batchadd")
     public String batchadd(Integer taskId, Model model) {
         if (taskId != null) {
@@ -239,4 +241,13 @@ public class TaskAction extends BaseController {
         }
         return "project/task/batchAdd.page";
     }
+
+    @RequestMapping("/findTask")
+    public String findTask(Model model, Integer taskId) {
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+
+        return "project/task/IDLink.page";
+    }
+
 }

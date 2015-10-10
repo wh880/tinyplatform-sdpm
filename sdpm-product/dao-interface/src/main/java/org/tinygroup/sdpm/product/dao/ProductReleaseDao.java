@@ -16,12 +16,16 @@
 
 package org.tinygroup.sdpm.product.dao;
 
-import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import java.util.List;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 
 public interface ProductReleaseDao extends BaseDao<ProductRelease,Integer> {
 	
 	Integer softDelete(Integer id);
+	
+	List<ProductRelease> getByKeys(Integer... id);
 
 }

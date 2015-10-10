@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.product.service;
 import java.util.List;
 
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface PlanService{
@@ -40,6 +41,13 @@ public interface PlanService{
 	 * @return
 	 */
 	ProductPlan findPlan(Integer planId);
+	
+	/**
+	 * 根据多个ID查找
+	 * @param planId
+	 * @return
+	 */
+	List<ProductPlan> findPlanList(Integer... planId);
 	
 	/**
 	 * 根据对象查找

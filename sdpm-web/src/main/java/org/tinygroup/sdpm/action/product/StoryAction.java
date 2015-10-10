@@ -1,9 +1,15 @@
 package org.tinygroup.sdpm.action.product;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +26,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
+import org.tinygroup.sdpm.product.dao.pojo.StoryCollection;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -66,6 +73,7 @@ public class StoryAction extends BaseController{
         action.setActionObjectId(productStory.getStoryId());
         action.setActionProduct(String.valueOf(story.getProductId()));
         action.setActionObjectType("story");
+        action.setActionAction("edit");
         action.setActionActor(user != null?user.getOrgUserId():"0");
         logService.log(story,productStory,action);
     	return "redirect:" + "/product/page/project/togglebox.page";
@@ -74,8 +82,18 @@ public class StoryAction extends BaseController{
     @ResponseBody
     @RequestMapping("/updateBatch")
     public int[] updateBatch(@RequestBody ProductStory[] stories){
+    	List<ProductStory>  productStories = new ArrayList<ProductStory>();
+    	if(stories!=null&&stories.length>0){
+    		productStories = Arrays.asList(stories);
+    	}
+    	return storyService.updateBatchStory(productStories);
+    }
+    
+    @RequestMapping("/closeBatch")
+    public String closeBatch(StoryCollection stories){
     	
-    	return storyService.updateBatchStory(stories);
+    	storyService.updateBatchStory(stories.getProductStories());
+    	return "redirect:/product/story?currentPageId=3";
     }
     
 	@ResponseBody
@@ -95,6 +113,14 @@ public class StoryAction extends BaseController{
     	model.addAttribute("story", productStory);
     	return "/product/page/tabledemo/editbaseinfo.pagelet";
     }
+    
+	@RequestMapping("/findByKeys")
+	public String findByKeys(Integer[] storyId,Model model){
+		//storyId =new  Integer[]{33,34,35,36};
+		List<ProductStory> storyList = storyService.findStoryList(storyId);
+		model.addAttribute("storyList", storyList);
+		return "/product/page/tabledemo/product-demand-del.pagelet";
+	}
     
     @RequestMapping("/{forwordPager}/findPager")
     public String find(Integer storyId,@PathVariable(value="forwordPager")String forwordPager,Model model){

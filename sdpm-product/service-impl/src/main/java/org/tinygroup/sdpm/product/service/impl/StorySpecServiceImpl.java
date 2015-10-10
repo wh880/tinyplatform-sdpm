@@ -32,5 +32,10 @@ public class StorySpecServiceImpl implements StorySpecService {
 		return storySpecManager.findPager(page, limit, storySpec, order, ordertype);
 	}
 
+	public List<ProductStorySpec> findStorySpecList(Integer... storyspecId) {
+
+		return storySpecManager.findList(storyspecId);
+	}
+
 
 }
