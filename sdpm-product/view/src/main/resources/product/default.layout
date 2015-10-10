@@ -31,8 +31,11 @@
 							var em = "<option value='"+data[i][opKey]+"'>"+ data[i][opvalue] +"</option>";
 							sele.append(em);
 							
+						}
+						if(sele.attr("multiple")!="multiple"){
+							sele.val(data[0][opKey]).trigger("change");
 						}						
-						sele.val(data[0][opKey]).trigger("change");
+						
 						
 					},
 					error: function(res){

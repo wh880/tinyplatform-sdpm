@@ -8,6 +8,7 @@
 		
 		ajaxRead("productPlan","planId","planName");
 		ajaxRead("orguser","orgUserId","orgUserAccount");
+		ajaxRead("product","productId","productName");
 
         $("select[name='demand-sources']").bind('change', function () {
 
@@ -32,10 +33,10 @@
 
             var vm = this.checked;
             if (vm == true) {
-                $("select[name='reviewed']").attr("disabled", "disabled");
+                $("select[name='storyReviewedBy']").attr("disabled", "disabled");
             }
             if (vm == false) {
-                $("select[name='reviewed']").removeAttr("disabled");
+                $("select[name='storyReviewedBy']").removeAttr("disabled");
             }
 
 
@@ -60,10 +61,8 @@
             #@formControlDiv("col-4")
                 <div class="col-6">
                     #@Tselect2F()
-                        #@Tselect2Body("productId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="CT">Admin</option>
-                            <option value="DE">Demo</option>
-                            <option value="FL">Me</option>
+                        #@Tselect2Body("productId" "IN" {"class":"input-text select2","url":"/product/productList","ajaxType":"product","data":""}) ##,"multiple":"multiple"加上为多选项
+                            
                         #end
 
                         #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page "
@@ -217,7 +216,7 @@
             #@checkboxBox()
 
                 #@label(labelFor="checkbox-6")
-                    #input(inputId="story_reviewed" inputName="storyReviewedBy" inputType="checkbox")
+                    #input(inputId="story_reviewed" inputName="storyReviewedBy1" inputType="checkbox" )
                     不需要评审
                 #end
             #end

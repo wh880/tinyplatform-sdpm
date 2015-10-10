@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.weblayer.WebContext;
@@ -129,4 +130,13 @@ public class ModuleAction extends BaseController{
 			}
 		}
 	}
+	
+	@ResponseBody
+    @RequestMapping("/moduleList")
+    public List<SystemModule> findProduct(SystemModule module){
+    	
+    	List<SystemModule> list = moduleService.findModules(module);
+    	
+    	return list;
+    }
 }

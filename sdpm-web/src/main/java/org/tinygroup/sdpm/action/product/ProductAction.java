@@ -156,7 +156,7 @@ public class ProductAction  extends BaseController{
 	
 	@ResponseBody
     @RequestMapping("/productList")
-    public List<Product> findUser(Product product){
+    public List<Product> findProduct(Product product){
     	
     	List<Product> list = productService.findProductList(product);
     	
