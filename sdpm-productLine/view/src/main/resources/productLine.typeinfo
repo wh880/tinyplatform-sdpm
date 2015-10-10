@@ -1,7 +1,8 @@
 <type-infos>
-	<type-info name="productLine" >
-	    <info name="productInfo" title="产品线信息" infoParameter="" url="/productLine/page/tabledemo/other-information.pagelet" resource="productLine"/>
-	    <info name="productOwnerInfo" title="父产品线信息" infoParameter="" url="/productLine/page/tabledemo/other-information.pagelet" resource="productLine"/>
-
+	
+	
+	<type-info name="productLine"  >
+	    <info name="productInfo" title="产品线信息" infoParameter="productLineId" url="/productLine/find/productLineDetail" resource="productLine"/>
+	    <info name="productOwnerInfo" title="父产品线信息" infoParameter="productLineId" url="/productLine/find/productLineDetail" resource="productLine"/>
 	</type-info>
 </type-infos>

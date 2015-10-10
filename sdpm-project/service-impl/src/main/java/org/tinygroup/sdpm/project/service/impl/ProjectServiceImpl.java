@@ -57,6 +57,9 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		return projectManager.findPager(page, pagesize, project, order, ordertype);
 	}
+    public Integer updateProject(Project project) {
+        return projectManager.update(project);
+    }
 
-	
+
 }

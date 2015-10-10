@@ -48,4 +48,13 @@ public interface ProjectStoryManager {
      * @return
      */
     Integer delete(int id);
+
+    /**
+     * 根据项目和需求删除关联
+     *
+     * @param projectId
+     * @param storyId
+     * @return
+     */
+    public Integer deleteByProjectStory(Integer projectId, Integer storyId);
 }

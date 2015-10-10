@@ -30,22 +30,15 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("productId" bug?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">2</option>
-	                        <option value="2">3</option>
-	                        <option value="3">4</option>
-	                        <option value="4">5</option>
-	                        <option value="5">1</option>
+	                   		 #@Tselect2Body("productId" product?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                       	 #foreach(product : productList)
+	                       		 <option value="${product?.productId}">${product?.productName}</option>
+	                       	 #end	                     
 	                    	#end                  
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
                 	  #end
-#*					#@tinySelect("lang" "1" {"class":"select2"})
-							#@tinyOptionItem("1")日本三菱#end
-							#@tinyOptionItem("2")销售系统#end
-							#@tinyOptionItem("3")国产需求#end
-					#end*#
 					#end
 					#@div(divClass="col-0")&nbsp;&nbsp#end
 					#@div(divClass="col-3")

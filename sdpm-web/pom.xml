@@ -107,6 +107,8 @@
             <artifactId>sdpm-quality-service-wrapper</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+       <!-- quality end -->
+              	
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-document-view</artifactId>
@@ -122,7 +124,7 @@
             <artifactId>sdpm-document-service-wrapper</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
-      	<!-- quality end -->
+
       	
         <!-- product -->
         <dependency>

@@ -59,4 +59,9 @@ public class ProductServiceImpl implements ProductService {
 		return productManager.findList(productId);
 	}
 
+	public List<Product> findProductList(Product product) {
+
+		return productManager.findList(product);
+	}
+
 }

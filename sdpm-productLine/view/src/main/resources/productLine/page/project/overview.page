@@ -13,20 +13,34 @@
 					<a href="#" class="active_btn">产品线概况</a>
 			</span>
 			<span class="r">
-				#@iconOperations("#myModal" "icon-off" "关闭" "800" "500" "/productLine/page/tabledemo/close.pagelet" "ml-5")关闭#end
-					
-				<a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/add.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
-				<a href="#" title="删除">#buttonIcon(iconClass="icon-common-delete icon-remove")</a>
-				<a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+			#foreach(m:menuManager.getScopeMenus("productLine-overview"))
+				#set(url=eval(m?.href))
+				#if(m.map.type=="aModal")
+					#@iconOperations("#myModal" m.icon m.name "800" "500" url "ml-5")${m.name}#end
+				#elseif(m.map.type=="editor")
+                    <a href="${TINY_CONTEXT_PATH}${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+				#elseif(m.map.type=="delete")
+					#@tinyTableItemRemove(TINY_CONTEXT_PATH+url productLine.productLineId)<i class="${m.icon}"></i>#end
+				#else
+                    <a href="javascript :;" onClick="javascript :history.back(-1);"
+                       title="返回">#buttonIcon(iconClass=m.icon)</a>
+				#end
+			#end
+
+
+			#*				#@iconOperations("#myModal" "icon-off" "关闭" "800" "500" "/productLine/page/tabledemo/close.pagelet" "ml-5")关闭#end
+                            <a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/add.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
+                            <a href="#" title="删除">#buttonIcon(iconClass="icon-common-delete icon-remove")</a>
+                            <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>*#
 			</span>
 		#end
 	#end
 
-	<div style="width:70%;float:right">
+	<div style="width:70%;float:left">
 		#@div(divClass="infoContent")
 	        <p class="titleName">描述</p>
 	       	<div>
-	       		描述啊啊啊啊啊
+	       		${productLine.productLineSpec}
 	       	</div>
 		#end
 		
@@ -46,7 +60,7 @@
 		#end
 	</div>
 	<div style="width:30%;float:right"> 
-		#TypeInfo("productLine")
+		#TypeInfo("productLine" productLine.productLineId)
     </div>
 	
 		

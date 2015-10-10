@@ -9,4 +9,6 @@ import org.tinygroup.tinysqldsl.Pager;
  */
 public interface ProjectStoryService {
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype);
+
+    public Integer deleteProjectStory(Integer projectId, Integer storyId);
 }

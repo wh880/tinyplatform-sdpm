@@ -30,4 +30,8 @@ public class CaseStepServiceImpl implements CaseStepService {
 	public List<QualityCaseStep> findCaseStepList(QualityCaseStep casestep){
 		return casestepmanager.findList(casestep);
 	}
+
+	public int[] batchAdd(List<QualityCaseStep> qualityCaseSteps) {
+		return casestepmanager.batchAdd(qualityCaseSteps);
+	}
 }
