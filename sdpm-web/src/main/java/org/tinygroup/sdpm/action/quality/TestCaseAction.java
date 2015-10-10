@@ -71,14 +71,14 @@ public class TestCaseAction extends BaseController {
 			testCaseService.updateTestCase(testcase);
 		}
 		model.addAttribute("testcase", testcase);
-		return "redirect:"+"quality/testcase";
+		return "redirect:"+"quality/testCase";
 	}
 	
 	@RequestMapping(value = "/batchSave",method = RequestMethod.POST)
 	public String batchSave(List<QualityTestCase> testcases,Model model){
 		testCaseService.batchUpdateTestCase(testcases);
 		model.addAttribute("testcases",testcases);
-		return "redirect:"+"quality/testcase";
+		return "redirect:"+"quality/testCase";
 	}
 	
 	@RequestMapping("/execution")
@@ -167,19 +167,22 @@ public class TestCaseAction extends BaseController {
 	public String copySave(QualityTestCase testCase,Model model){
 		testCaseService.addTestCase(testCase);
 		model.addAttribute("testCase", testCase);
-		return "redirect:"+"quality/testcase";
+		return "redirect:"+"quality/testCase";
 	}
 	
 	@RequestMapping("/delete")
 	public String delete(Integer testCaseId,Model model){
 		testCaseService.deleteById(testCaseId);
-		return "redirect:"+"quality/testcase";
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("status", "success");
+		map.put("info", "删除成功");
+		return "redirect:"+"quality/testCase";
 	}
 	
 	@RequestMapping("/batchDelete")
 	public String batchDelete(List<QualityTestCase> testcases,Model model){
 		testCaseService.batchDeleteTestCase(testcases);
-		return "redirect"+"quality/testcase";
+		return "redirect"+"quality/testCase";
 	}
 
 	private String mergeResult(List<CaseStepResult> caseStepResults){
