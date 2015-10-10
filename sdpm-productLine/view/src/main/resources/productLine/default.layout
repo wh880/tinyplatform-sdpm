@@ -1,8 +1,6 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/button/components/button_common.component")
-
 #import("/org/tinygroup/button/components/button.component")
-
 #!set(activeTitle="产品线管理",activeMenuId=currentPageId)
 #include("/productLine/page/event/common.page")
 
@@ -20,8 +18,8 @@
 		
 		#@tabHead()
 				#foreach(m in menuManager.getScopeMenus("productLine-left"))
-					
-					#@aHeadCol(TINY_CONTEXT_PATH+m.href m.id==linkName?"Current":"")${m.name}#end
+					#set(url=eval(m.href))
+					#@aHeadCol(TINY_CONTEXT_PATH+url linkName==m.id?"Current":"")${m.name}#end
 				#end
 				
 

@@ -36,6 +36,10 @@ public class ProjectStoryManagerImpl implements ProjectStoryManager {
     }
 
     public Integer delete(int id) {
-        return null;
+        return projectStoryDao.deleteByKey(id);
+    }
+
+    public Integer deleteByProjectStory(Integer projectId, Integer storyId) {
+        return projectStoryDao.deleteByProjectStory(projectId, storyId);
     }
 }

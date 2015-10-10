@@ -33,7 +33,12 @@ public class PlanServiceImpl implements PlanService {
 		
 		return planManager.updateBatch(plan);
 	}
-
+	
+	public List<ProductPlan> findPlanList(ProductPlan productPlan) {
+		
+		return planManager.findList(productPlan);
+	}
+	
 	public List<ProductPlan> findPlanList(ProductPlan productPlan,String order,String ordertype) {
 	
 		return planManager.findList(productPlan, order, ordertype);

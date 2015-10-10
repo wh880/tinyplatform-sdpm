@@ -7,16 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResult;
 import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResults;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.quality.dao.pojo.*;
 import org.tinygroup.sdpm.quality.service.inter.CaseStepService;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.quality.service.inter.TestResultService;
 import org.tinygroup.sdpm.quality.service.inter.TestRunService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +39,9 @@ public class TestCaseAction extends BaseController {
 	@Autowired
 	private CaseStepService caseStepService;
 	@Autowired
-	private TestRunService testRunService;
+	private ModuleService moduleService;
+	@Autowired
+	private StoryService storyService;
 	@Autowired
 	private TestResultService testResultService;
 	@RequestMapping("")
@@ -64,21 +71,26 @@ public class TestCaseAction extends BaseController {
 	}
 	
 	@RequestMapping(value = "/save",method = RequestMethod.POST)
-	public String save(QualityTestCase testcase,Model model){
-		if(testcase.getCaseId() == null){
-			testCaseService.addTestCase(testcase);
-		}else{
-			testCaseService.updateTestCase(testcase);
-		}
-		model.addAttribute("testcase", testcase);
-		return "redirect:"+"quality/testCase";
+	public String save(QualityTestCase testcase,String[] step, String[] expect ,HttpServletRequest request){
+		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
+		testcase = testCaseService.addTestCase(testcase);
+		caseStepService.batchAdd(insertStep(step,expect,testcase));
+
+		SystemAction systemAction = new SystemAction();
+		systemAction.setActionObjectId(testcase.getCaseId());
+		systemAction.setActionProduct(String.valueOf(testcase.getProductId()));
+		systemAction.setActionObjectType("case");
+		systemAction.setActionAction("open");
+		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
+		logService.log(systemAction);
+		return "redirect:"+"/quality/testCase";
 	}
 	
 	@RequestMapping(value = "/batchSave",method = RequestMethod.POST)
 	public String batchSave(List<QualityTestCase> testcases,Model model){
 		testCaseService.batchUpdateTestCase(testcases);
 		model.addAttribute("testcases",testcases);
-		return "redirect:"+"quality/testCase";
+		return "redirect:"+"/quality/testCase";
 	}
 	
 	@RequestMapping("/execution")
@@ -131,21 +143,7 @@ public class TestCaseAction extends BaseController {
 	
 	@RequestMapping("/result")
 	public String result(Integer caseId,Model model){
-		QualityTestCase testCase = testCaseService.findById(caseId);
-		QualityCaseStep qualityCaseStep = new QualityCaseStep();
-		qualityCaseStep.setCaseId(caseId);
-		List<QualityCaseStep> qualityCaseSteps = caseStepService.findCaseStepList(qualityCaseStep);
-		QualityTestResult qualityTestResult = new QualityTestResult();
-		qualityTestResult.setLinkCase(caseId);
-		List<QualityTestResult> qualityTestResults = testResultService.findTestResultList(qualityTestResult);
-		Map<String,List<CaseStepResult>> caseStepResults = new HashMap<String, List<CaseStepResult>>();
-		for(QualityTestResult qualityTestResult1 : qualityTestResults){
-			caseStepResults.put(String.valueOf(qualityTestResult1.getTestResultId()),resolveResult(qualityTestResult1));
-		}
-		model.addAttribute("testcase", testCase);
-		model.addAttribute("caseSteps",qualityCaseSteps);
-		model.addAttribute("testResults",qualityTestResults);
-		model.addAttribute("stepResults",caseStepResults);
+		execution(caseId,model);
 		return "/testManagement/page/tabledemo/result.pagelet";
 	}
 	
@@ -183,6 +181,17 @@ public class TestCaseAction extends BaseController {
 	public String batchDelete(List<QualityTestCase> testcases,Model model){
 		testCaseService.batchDeleteTestCase(testcases);
 		return "redirect"+"quality/testCase";
+	}
+	@ResponseBody
+	@RequestMapping("/ajax/story")
+	public List<ProductStory> getStory(ProductStory productStory){
+		return storyService.findStoryList(productStory,null,null);
+	}
+	@ResponseBody
+	@RequestMapping("/ajax/module")
+	public List<SystemModule> getModule(SystemModule systemModule){
+		systemModule.setModuleType("story");
+		return moduleService.findModules(systemModule);
 	}
 
 	private String mergeResult(List<CaseStepResult> caseStepResults){
@@ -224,5 +233,18 @@ public class TestCaseAction extends BaseController {
 			caseStepResults.add(caseStepResult);
 		}
 		return caseStepResults;
+	}
+
+	private List<QualityCaseStep> insertStep(String[] steps, String[] expects, QualityTestCase tcase){
+		List<QualityCaseStep> qualityCaseSteps = new ArrayList<QualityCaseStep>();
+		for(int i =0; i<steps.length; i++){
+			QualityCaseStep qualityCaseStep = new QualityCaseStep();
+			qualityCaseStep.setCaseId(tcase.getCaseId());
+			qualityCaseStep.setCaseVersion(tcase.getCaseVersion());
+			qualityCaseStep.setCaseStepDesc(steps[i]);
+			qualityCaseStep.setCaseStepExpect(expects[i]);
+			qualityCaseSteps.add(qualityCaseStep);
+		}
+		return qualityCaseSteps;
 	}
 }

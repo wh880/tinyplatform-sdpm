@@ -40,6 +40,13 @@ public interface UserService {
     List<OrgUser> findUserList(OrgUser orgUser);
 
     /**
+     * 根据部门Id查询list
+     * @param deptId
+     * @return
+     */
+    Pager<OrgUser> findUserByDeptId(Integer start, Integer limit, Integer deptId);
+
+    /**
      * 新增有一个用户
      *
      * @param orgUser 新增实体类

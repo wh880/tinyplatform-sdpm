@@ -49,8 +49,16 @@ public interface PlanService{
 	 */
 	List<ProductPlan> findPlanList(Integer... planId);
 	
+
 	/**
 	 * 根据对象查找
+	 * @param plan
+	 * @return
+	 */
+	List<ProductPlan> findPlanList(ProductPlan productPlan);
+	
+	/**
+	 * 根据对象查找(排序)
 	 * @param plan
 	 * @param columnName
 	 * @param asc

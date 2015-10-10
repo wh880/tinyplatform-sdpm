@@ -68,9 +68,7 @@
             #@formControlDiv("col-3")
                 #@Tselect2F()
                     #@Tselect2Body("productOwner" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":"orguser","data":""}) ##,"multiple":"multiple"加上为多选项
-                        <option value="CT">A</option>
-                        <option value="DE">B</option>
-                        <option value="FL">C</option>
+                        
                     #end
 
                     #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
@@ -86,9 +84,7 @@
             #@formControlDiv("col-3")
                 #@Tselect2F()
                     #@Tselect2Body("productQualityManager" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":"orguser","data":""}) ##,"multiple":"multiple"加上为多选项
-                        <option value="CT">甲</option>
-                        <option value="DE">乙</option>
-                        <option value="FL">丙</option>
+                       
                     #end
 
                     #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end

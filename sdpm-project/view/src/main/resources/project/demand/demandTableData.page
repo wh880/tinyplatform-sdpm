@@ -12,8 +12,10 @@
 #for(s:storys.getRecords())
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"> ${s?.storyId}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/demdtablehref.page"> ${s?.storyPri}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/product/storySpec/find/productDemandDetail?storyId=${s?.storyId}">${s
+        ?.storyId}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/product/storySpec/find/productDemandDetail?storyId=${s?.storyId}">${s
+        ?.storyPri}</a>#end
 	#@td()${s?.storyTitle}#end
 	#@td()${s?.storyOpenedBy}#end
 	#@td()${s?.storyAssignedTo}#end
@@ -26,7 +28,7 @@
 			 #if(m.id != "rm-demand")
              <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 			 #else
-				 #@delItemsdpm(m.href 5)#buttonIcon(iconClass=m.icon)#end
+				 #@delItemsdpm(TINY_CONTEXT_PATH+m.href s.storyId)#buttonIcon(iconClass=m.icon)#end
 			 #end
 		 #end
 	#end

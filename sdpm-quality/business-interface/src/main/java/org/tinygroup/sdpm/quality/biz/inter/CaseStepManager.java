@@ -33,4 +33,6 @@ public interface CaseStepManager {
 		 * @return
 		 */
 		List<QualityCaseStep> findList(QualityCaseStep casestep);
+
+		int[] batchAdd(List<QualityCaseStep> qualityCaseSteps);
 }

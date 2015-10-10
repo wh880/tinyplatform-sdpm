@@ -42,6 +42,10 @@ public class UserServiceImpl implements UserService {
         return userManager.findList(orgUser);
     }
 
+    public Pager<OrgUser> findUserByDeptId(Integer start, Integer limit, Integer deptId) {
+        return userManager.findUserListByDeptId(start, limit, deptId);
+    }
+
     public OrgUser addUser(OrgUser orgUser) {
         String password = orgUser.getOrgUserPassword();
         orgUser.setOrgUserPassword(userManager.encryptPassword(password));
