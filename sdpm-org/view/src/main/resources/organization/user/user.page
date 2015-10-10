@@ -21,7 +21,7 @@
             #@settoggleLeftBody("treeLeftbox")
                 #@zTreeList(call("link","/org/dept/data"))
                     #setzTreeValMap({"id":"orgDeptId","name":"orgDeptName","pid":"orgDeptParent"}) ##key值为固定
-                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/organization/user/user.page" )
+                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/org/user/list" )
                     #zTreeSetAddUrl(TINY_CONTEXT_PATH+"/org/dept/add")
                     #zTreeSetEditUrl(TINY_CONTEXT_PATH+"/org/dept/edit")
                     #zTreeSetDelUrl(TINY_CONTEXT_PATH+"/org/dept/delete")
