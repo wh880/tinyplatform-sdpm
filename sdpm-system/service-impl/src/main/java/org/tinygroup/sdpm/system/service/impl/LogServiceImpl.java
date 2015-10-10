@@ -65,6 +65,8 @@ public class LogServiceImpl implements LogService{
             return true;
         }else if(newOne == null){
             return true;
+        }else if(oldOne == null){
+        	return false;
         }
         return oldOne.equals(newOne);
     }

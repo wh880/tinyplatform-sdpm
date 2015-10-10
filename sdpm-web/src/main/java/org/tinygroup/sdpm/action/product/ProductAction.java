@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.product;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
@@ -23,6 +25,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.weblayer.WebContext;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.List;
 
 /**
@@ -150,5 +153,13 @@ public class ProductAction  extends BaseController{
 		
 		return "/organization/userbaseinfo.pagelet";
 	}
-
+	
+	@ResponseBody
+    @RequestMapping("/productList")
+    public List<Product> findProduct(Product product){
+    	
+    	List<Product> list = productService.findProductList(product);
+    	
+    	return list;
+    }
 }
