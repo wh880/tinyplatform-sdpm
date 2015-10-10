@@ -1,10 +1,10 @@
-<tables id="a91b5666002c43eabeebeeae6a8e8b99" >
-  <table id="59549c7852a84135a7f594a6d2081544" name="doc" title="文档表" schema="" package-name="">
+<tables id="a91b5666002c43eabeebeeae6a8e8b99">
+  <table id="59549c7852a84135a7f594a6d2081544" name="document_doc" title="文档表" schema="" package-name="">
     <description>wendang</description>
     <table-field standard-field-id="157b6bcd380345ecb1bbb2b6005b92f7" primary="true" unique="true" not-null="true" id="doc_id" auto-increase="true"/>
     <table-field standard-field-id="51d8b407678c4adfbb36e530c87c7f22" primary="false" unique="false" not-null="false" id="doc_product" auto-increase="false"/>
     <table-field standard-field-id="0dad99e5e3824c3f89a0d03f95baa577" primary="false" unique="false" not-null="false" id="doc_project" auto-increase="false"/>
-    <table-field standard-field-id="b4c51ca729444d619a90b285dbec71dc" primary="false" unique="false" not-null="false" id="doc_lib" auto-increase="false"/>
+    <table-field standard-field-id="509aa7b0d6ee413ab1f3b4ad99e28843" primary="false" unique="false" not-null="false" id="doc_lib_id" auto-increase="false"/>
     <table-field standard-field-id="99697402b1524b2980168f11bc9dfcef" primary="false" unique="false" not-null="false" id="doc_module" auto-increase="false"/>
     <table-field standard-field-id="d6d1423caf944b84abf98afe24cee8e3" primary="false" unique="false" not-null="false" id="doc_title" auto-increase="false"/>
     <table-field standard-field-id="2e92cb2e69804ff4aaefe411a2e4c4f1" primary="false" unique="false" not-null="false" id="doc_digest" auto-increase="false"/>
@@ -20,9 +20,9 @@
     <table-field standard-field-id="59a569420f764db3b2a292c350d740ca" primary="false" unique="false" not-null="false" id="doc_editedDate" auto-increase="false"/>
     <table-field standard-field-id="4240a1ee3cc04b6f9621e95ed93b8b22" primary="false" unique="false" not-null="false" id="doc_deleted" auto-increase="false"/>
   </table>
-  <table id="56f136998f6c43208337c635b20390b2" name="doclib" title="文档库表" package-name="">
+  <table id="56f136998f6c43208337c635b20390b2" name="document_doclib" title="文档库表" package-name="">
     <description>文档相关的</description>
-    <table-field standard-field-id="509aa7b0d6ee413ab1f3b4ad99e28843" primary="true" unique="true" not-null="true" id="doc_libid" auto-increase="true"/>
+    <table-field standard-field-id="509aa7b0d6ee413ab1f3b4ad99e28843" primary="true" unique="true" not-null="true" id="doc_lib_id" auto-increase="true"/>
     <table-field standard-field-id="95b70aee2d1e4c9dbf04e6688ffb9bee" primary="false" unique="false" not-null="false" id="doc_libname" auto-increase="false"/>
     <table-field standard-field-id="2655a73603e54dd98679d4163bd0851f" primary="false" unique="false" not-null="false" id="doc_lib_deleted" auto-increase="false"/>
     <table-field standard-field-id="9282649ea9b249eb9df0c2f9581c625c" primary="false" unique="false" not-null="false" id="doc_lib_added_date" auto-increase="false"/>

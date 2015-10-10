@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.document.biz.impl;
 
+import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.List;
 
@@ -8,12 +9,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.file.FileDealUtil;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
-import org.tinygroup.sdpm.document.dao.DocDao;
-import org.tinygroup.sdpm.document.dao.DoclibDao;
-import org.tinygroup.sdpm.document.dao.pojo.Doc;
-import org.tinygroup.sdpm.document.dao.pojo.Doclib;
+import org.tinygroup.sdpm.document.dao.DocumentDocDao;
+import org.tinygroup.sdpm.document.dao.DocumentDoclibDao;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
 import org.tinygroup.tinysqldsl.Pager;
 
 /**
@@ -30,31 +33,31 @@ import org.tinygroup.tinysqldsl.Pager;
 public class DocBizImpl implements DocBiz {
 	//
 	@Autowired
-	private DocDao docdao;
+	private DocumentDocDao docdao;
 	@Autowired
-	private DoclibDao doclibdao;
+	private DocumentDoclibDao doclibdao;
 	
 
-	public Doclib addDocLib(Doclib doclib) {
+	public DocumentDoclib addDocLib(DocumentDoclib doclib) {
 		// 添加文档库
 		doclib.setDocLibAddedDate(new Date());
 		doclib.setDocLibEditedDate(new Date());
-		doclib.setDocLibDeleted("N");//这个标志是char类型（一个字节）
+	
 		return doclibdao.add(doclib);
 	}
 
-	public Doc addDoc(Doc doc) {
+	public DocumentDoc addDoc(DocumentDoc doc) {
 		// 添加文档
 		//if(doc.getDocType()!="file")doc.setAttachUrl(null);
 		doc.setDocAddedDate(new Date());
 		doc.setDocEditedDate(new Date());
 		doc.setDocEditedBy(doc.getDocAddedBy());
-		doc.setDocDeleted("N");
+	
 		doc.setDocViews(0);
 		return docdao.add(doc);	
 	}
 
-	public int updtDoc(Doc doc) {
+	public int updtDoc(DocumentDoc doc) {
 		// 更新（编辑）
 		doc.setDocAddedBy(docdao.getByKey(doc.getDocId()).getDocAddedBy());
 		doc.setDocAddedDate(docdao.getByKey(doc.getDocId()).getDocAddedDate());
@@ -63,7 +66,7 @@ public class DocBizImpl implements DocBiz {
 		return docdao.edit(doc);
 	}
 
-	public int updtDocLib(Doclib doclib) {
+	public int updtDocLib(DocumentDoclib doclib) {
 		//更新文档库
 		doclib.setDocLibAddedDate(doclibdao.getByKey(doclib.getDocLibId()).getDocLibAddedDate());
 		doclib.setDocLibDeleted(doclibdao.getByKey(doclib.getDocLibId()).getDocLibDeleted());
@@ -72,42 +75,43 @@ public class DocBizImpl implements DocBiz {
 	}
 
 	public int delDocById(Integer key) {
-		// 如果是假动作，那就是关键位标志置为“D”
-		//Doc doc = docdao.getByKey(key);
-		//doc.setDocDeleted("D");
-		//return docdao.edit(doc);
-		return docdao.deleteByKey(key);
+		DocumentDoc doc = docdao.getByKey(key);
+		doc.setDocDeleted(DocumentDoc.DELETE_YES);
+		return docdao.edit(doc);
 	}
 
 	public int delDocLibById(Integer key) {
-		// 如果是假动作，那就是关键位标志置为“D”
-		//DocLib doclib = doclibdao.getByKey(key);
-		//doclib.setDocDeleted("D");
-		//return doclibdao.edit(doclib);
-		return doclibdao.deleteByKey(key);
+		DocumentDoclib doclib = doclibdao.getByKey(key);
+		doclib.setDocLibDeleted(DocumentDoclib.DELETE_YES);
+		return doclibdao.edit(doclib);
 	}
 
-	public Doc getDocById(Integer key) {
+	public DocumentDoc getDocById(Integer key) {
 		// 
 		return docdao.getByKey(key);
 	}
 
-	public List<Doc> getDocList(Doc doc) {
+	public List<DocumentDoc> getDocList(DocumentDoc doc) {
 		return docdao.query(doc);
 	}
-	public List<Doclib> getDoclibList(Doclib doclib) {
+	public List<DocumentDoclib> getDoclibList(DocumentDoclib doclib) {
 		return doclibdao.query(doclib);
 	}
 
 
-	public Doclib getDocLibById(Integer key) {
+	public DocumentDoclib getDocLibById(Integer key) {
 		// 
 		return doclibdao.getByKey(key);
 	}
 
-	public Pager<Doc> queryItemWithPage(Integer start, Integer limited, Doc doc) {
+	public Pager<DocumentDoc> queryItemWithPage(Integer start,Integer limit,DocumentDoc doc,String sortName,boolean asc) {
 		// 分页
-		return docdao.queryPager(start, limited, doc);
+		if(StringUtil.isBlank(sortName)){
+			return docdao.queryPager(start, limit, doc);
+		}else{
+			OrderBy orderby = new OrderBy(sortName,asc);
+			return docdao.queryPager(start, limit, doc, orderby);
+		}	
 	}
 
 	public int batchDelDocByIds(Integer... keys) {
@@ -115,8 +119,13 @@ public class DocBizImpl implements DocBiz {
 		return docdao.deleteByKeys(keys);
 	}
 
-	public Pager<Doclib> queryItemWithPage(Integer start, Integer limited, Doclib doclib) {
+	public Pager<DocumentDoclib> queryItemWithPage(Integer start, Integer limit,DocumentDoclib doclib,String sortName, boolean asc) {
 		// 分页
-		return doclibdao.queryPager(start, limited, doclib);
+		if(StringUtil.isBlank(sortName)){
+			return doclibdao.queryPager(start, limit, doclib);
+		}else{
+			OrderBy orderby = new OrderBy(sortName, asc);
+			return doclibdao.queryPager(start, limit, doclib , orderby);
+		}
 	}
 }

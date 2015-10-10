@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 //import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
-import org.tinygroup.sdpm.document.dao.pojo.Doc;
-import org.tinygroup.sdpm.document.dao.pojo.Doclib;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -24,53 +24,53 @@ public class DocServiceImpl implements DocService{
 	@Autowired
 	private DocBiz docbiz;
 
-	public Doc createNewDoc(Doc doc) {
+	public DocumentDoc createNewDoc(DocumentDoc doc) {
 		// 
 		return docbiz.addDoc(doc);
 	}
 
-	public Doclib createNewDocLib(Doclib doclib) {
+	public DocumentDoclib createNewDocLib(DocumentDoclib doclib) {
 		// 
 		return docbiz.addDocLib(doclib);
 	}
 
-	public int editDoc(Doc doc) {
+	public int editDoc(DocumentDoc doc) {
 		// 
 		return docbiz.updtDoc(doc);
 	}
 
-	public int editDocLibName(Doclib doclib) {
+	public int editDocLibName(DocumentDoclib doclib) {
 		// 
 		return docbiz.updtDocLib(doclib);
 	}
 
-	public Doc findDocById(Integer id) {
+	public DocumentDoc findDocById(Integer id) {
 		// 
 		return docbiz.getDocById(id);
 	}
 
-	public Doclib findDoclibById(Integer id) {
+	public DocumentDoclib findDoclibById(Integer id) {
 		// 
 		return docbiz.getDocLibById(id);
 	}
 
-	public List<Doc> findDocList(Doc doc) {
+	public List<DocumentDoc> findDocList(DocumentDoc doc) {
 		// 
 		return docbiz.getDocList(doc);
 	}
-	public List<Doclib> findDoclibList(Doclib doclib) {
+	public List<DocumentDoclib> findDoclibList(DocumentDoclib doclib) {
 		// 
 		return docbiz.getDoclibList(doclib);
 	}
 
-	public Pager<Doc> findDocRetPager(int start, int limit, Doc doc) {
+	public Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc,String sortName,boolean asc) {
 		// 
-		return docbiz.queryItemWithPage(start, limit, doc);
+		return docbiz.queryItemWithPage(start, limit, doc,sortName, asc);
 	}
 	
-	public Pager<Doclib> findDoclibRetPager(int start, int limit, Doclib doclib) {
+	public Pager<DocumentDoclib> findDoclibRetPager(Integer start, Integer limit,DocumentDoclib doclib,String sortName, boolean asc) {
 		// 
-		return docbiz.queryItemWithPage(start, limit, doclib);
+		return docbiz.queryItemWithPage(start, limit, doclib,sortName, asc);
 	}
 
 	public int deleteDocById(Integer id) {

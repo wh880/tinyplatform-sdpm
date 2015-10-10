@@ -6,31 +6,31 @@
 			#@tbody()
 	    		#@tr()
 	    			#@th()所属文档库:#end
-	    			#@td()wll产品1#end
+	    			#@td()${docLib?.docLibName}#end
 	    		#end
 	    		#@tr()
 	    			#@th()所属分类:#end
-	    			#@td()文档类型二#end
+	    			#@td()${doc?.docModule}#end
 	    		#end
 	    		#@tr()
 	    			#@th()文档类型:#end
-	    			#@td()文件#end
+	    			#@td()${doc?.docType}#end
 	    		#end
 	    		#@tr()
 	    			#@th()由谁添加:#end
-	    			#@td()admin#end
+	    			#@td()${doc?.docAddedBy}#end
 	    		#end
 	    		#@tr()
 	    			#@th()添加时间:#end
-	    			#@td()2015-1-1#end
+	    			#@td()${doc?.docAddedDate}#end
 	    		#end
 	    		#@tr()
 	    			#@th()由谁编辑:#end
-	    			#@td()admin#end
+	    			#@td()${doc?.docEditedBy}#end
 	    		#end
 	    		#@tr()
 	    			#@th()编辑时间:#end
-	    			#@td()2-11 00-00-00#end
+	    			#@td()${doc?.docEditedDate}#end
 	    		#end
 	    		
 	    	#end	
