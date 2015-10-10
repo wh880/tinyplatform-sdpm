@@ -7,8 +7,9 @@
     
 		
 		ajaxRead("productPlan","planId","planName");
-		ajaxRead("orguser","orgUserId","orgUserAccount");
+		ajaxRead("orgUser","orgUserId","orgUserAccount");
 		ajaxRead("product","productId","productName");
+		ajaxRead("systemModel","moduleId","moduleName");
 
         $("select[name='demand-sources']").bind('change', function () {
 
@@ -72,7 +73,7 @@
                 </div>
                 <div class="col-6">
                     #@Tselect2F()
-                        #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("moduleId" "IN" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":"systemModel","data":""}) ##,"multiple":"multiple"加上为多选项
                             <option value="CT">Admin</option>
                             <option value="DE">Demo</option>
                             <option value="FL">Me</option>
@@ -204,7 +205,7 @@
         #@elementItem()
             #@sdpmItem("由谁评审")
                 #@Tselect2F()
-                    #@Tselect2Body("storyReviewedBy" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":"orguser","data":"orgDeptId=23&orgUserAccount=zhangsan"})
+                    #@Tselect2Body("storyReviewedBy" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":"orgUser","data":"orgDeptId=23&orgUserAccount=zhangsan"})
                         
                     #end
 
@@ -227,7 +228,7 @@
             #@colLabel()抄送给：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("storyMailto" "IN" {"class":"input-text select2","multiple":"multiple","url":"/org/user/userList","ajaxType":"orguser","data":""}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("storyMailto" "IN" {"class":"input-text select2","multiple":"multiple","url":"/org/user/userList","ajaxType":"orgUser","data":""}) ##,"multiple":"multiple"加上为多选项
                     #end
 
                 #*  #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#
