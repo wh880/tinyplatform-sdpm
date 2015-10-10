@@ -1,16 +1,8 @@
 package org.tinygroup.sdpm.action.productLine;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +11,10 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.tinysqldsl.Pager;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 产品线控制器
@@ -31,13 +27,6 @@ public class ProductLineAction extends BaseController {
 	
 	@Autowired
 	private ProductLineService productLineService;
-/*	
-	@RequestMapping("index")
-	public String index(@CookieValue(required=false) Integer cookie_productLineId,HttpServletRequest request,HttpServletResponse response,Model model){
-		List<ProductLine> list = productLineService.findlist(productLine);
-	}
-	*/
-	
 	
 	@RequestMapping("/save")
 	public String save(ProductLine productLine,Model model){
