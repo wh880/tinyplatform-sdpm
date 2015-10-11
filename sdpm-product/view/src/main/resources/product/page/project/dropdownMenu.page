@@ -39,7 +39,7 @@
 		
 		$(function(){
 			$("#product-select").on("change",function(){
-				var dateValue = $(this).val();
+				var dateValue = $("#product-select").val();
 				$.post("${TINY_CONTEXT_PATH}/product/sessionset",{productId:dateValue},function(result){
 					if(true==result){
 						 window.location.reload();

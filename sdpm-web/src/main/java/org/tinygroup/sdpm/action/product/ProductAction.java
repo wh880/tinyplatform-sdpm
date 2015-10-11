@@ -55,7 +55,11 @@ public class ProductAction  extends BaseController{
 		List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
 		String oldUrl = webContext.get("oldUrl");
 		if(list == null|| list.size()==0){
-			list = productService.findProductList(new Product(),"productId","desc");
+			Product product = new Product();
+			if(request.getSession().getAttribute("sessionProductLineId")!=null){
+				product.setProductLineId((Integer)request.getSession().getAttribute("sessionProductLineId"));
+			}
+			list = productService.findProductList(product,"productId","desc");
 			request.getSession().setAttribute("productList",list);
 			
 			if(request.getSession().getAttribute("sessionProductId")==null){
