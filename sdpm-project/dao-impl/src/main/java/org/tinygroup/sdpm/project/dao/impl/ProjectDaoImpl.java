@@ -23,6 +23,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
+import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.project.dao.ProjectDao;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.*;
@@ -133,44 +134,13 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 	}
 	@LogMethod("edit")
 	public int edit(Project project) {
-		if(project == null || project.getProjectId() == null){
-			return 0;
-		}
-		return getDslTemplate().update(project, new UpdateGenerateCallback<Project>() {
-			public Update generate(Project t) {
-				Update update = update(PROJECTTABLE).set(
-					PROJECTTABLE.PROJECT_IS_CAT.value(t.getProjectIsCat()),
-					PROJECTTABLE.PROJECT_CAT_ID.value(t.getProjectCatId()),
-					PROJECTTABLE.PROJECT_TYPE.value(t.getProjectType()),
-					PROJECTTABLE.PROJECT_NAME.value(t.getProjectName()),
-					PROJECTTABLE.PROJECT_CODE.value(t.getProjectCode()),
-					PROJECTTABLE.PROJECT_BEGIN.value(t.getProjectBegin()),
-					PROJECTTABLE.PROJECT_END.value(t.getProjectEnd()),
-					PROJECTTABLE.PROJECT_DAYS.value(t.getProjectDays()),
-					PROJECTTABLE.PROJECT_STATUS.value(t.getProjectStatus()),
-					PROJECTTABLE.PROJECT_STATGE.value(t.getProjectStatge()),
-					PROJECTTABLE.PROJECT_PRI.value(t.getProjectPri()),
-					PROJECTTABLE.PROJECT_DESC.value(t.getProjectDesc()),
-					PROJECTTABLE.PROJECT_OPENED_BY.value(t.getProjectOpenedBy()),
-					PROJECTTABLE.PROJECT_OPENED_DATE.value(t.getProjectOpenedDate()),
-					PROJECTTABLE.PROJECT_OPENED_VERSION.value(t.getProjectOpenedVersion()),
-					PROJECTTABLE.PROJECT_CLOSE_BY.value(t.getProjectCloseBy()),
-					PROJECTTABLE.PROJECT_CLOSE_DATE.value(t.getProjectCloseDate()),
-					PROJECTTABLE.PROJECT_CANCELED_BY.value(t.getProjectCanceledBy()),
-					PROJECTTABLE.PROJECT_CANCELED_DATE.value(t.getProjectCanceledDate()),
-					PROJECTTABLE.PROJECT_PO.value(t.getProjectPO()),
-					PROJECTTABLE.PROJECT_PM.value(t.getProjectPM()),
-					PROJECTTABLE.PROJECT_QD.value(t.getProjectQD()),
-					PROJECTTABLE.PROJECT_RD.value(t.getProjectRD()),
-					PROJECTTABLE.PROJECT_TEAM.value(t.getProjectTeam()),
-					PROJECTTABLE.PROJECT_ACL.value(t.getProjectAcl()),
-					PROJECTTABLE.PROJECT_WHITE_LIST.value(t.getProjectWhiteList()),
-					PROJECTTABLE.PROJECT_ORDER.value(t.getProjectOrder()),
-					PROJECTTABLE.PROJECT_DELETED.value(t.getProjectDeleted())).where(
-					PROJECTTABLE.PROJECT_ID.eq(t.getProjectId()));
-				return update;
+
+			if (project == null || project.getProjectId() == null) {
+				return 0;
 			}
-		});
+			Update update = UpdateUtil.getUpdate(PROJECTTABLE, project);
+			getDslSession().execute(update);
+		return 0;
 	}
 	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
