@@ -41,6 +41,13 @@ public interface ReleaseService {
 	 * @return
 	 */
 	ProductRelease findRelease(Integer releaseId);
+
+    /**
+     *根据对象查找
+     * @param release
+     * @return
+     */
+    List<ProductRelease> findReleaseList(ProductRelease release);
 	
 	/**
 	 * 根据多个ID查找

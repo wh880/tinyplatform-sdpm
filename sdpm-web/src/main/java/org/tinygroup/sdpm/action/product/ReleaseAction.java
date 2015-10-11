@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action.product;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -113,5 +114,12 @@ public class ReleaseAction extends BaseController{
 		model.addAttribute("productRelease",pagerProductRelease);
 		return "/product/data/allproduct-release.pagelet";
 		}
+
+	@ResponseBody
+	@RequestMapping("/releaseList")
+	public List<ProductRelease> findRelease(ProductRelease release){
+		List<ProductRelease> list = releaseService.findReleaseList(release);
+		return list;
+	}
 }
 

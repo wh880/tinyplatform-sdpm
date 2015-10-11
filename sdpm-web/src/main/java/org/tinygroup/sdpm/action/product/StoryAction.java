@@ -201,5 +201,14 @@ public class StoryAction extends BaseController{
 		}
     	return "";
     }
+
+    @ResponseBody
+    @RequestMapping("/storyList")
+    public List<ProductStory> findStory(ProductStory story){
+
+        List<ProductStory> list = storyService.findStoryList(story);
+
+        return list;
+    }
     
 }

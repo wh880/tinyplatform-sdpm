@@ -23,6 +23,7 @@
 		
 		
 
+
         $("select[name='demand-sources']").bind('change', function () {
 
 
@@ -120,21 +121,9 @@
                 <div id="demand-sources">
                     #@Tselect2F()
                         #@Tselect2Body("storySource" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="customer">客户</option>
-                            <option value="request">请求</option>
-                            <option value="user">用户</option>
-                            <option value="FL">产品经理</option>
-                            <option value="CT">市场</option>
-                            <option value="CT">客服</option>
-                            <option value="CT">竞争对手</option>
-                            <option value="CT">合作伙伴</option>
-                            <option value="CT">开发人员</option>
-                            <option value="CT">测试人员</option>
-                            <option value="CT">Bug</option>
-                            <option value="CT">其他</option>
+
                         #end
 
-                    #*  #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#
                     #end
                 </div>
                 <span class="customer-request" style="display:none">
@@ -150,7 +139,6 @@
                                 <option value="FL">Me</option>
                             #end
 
-                        #*   #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#
                         #end
                     </div>
                 </span>

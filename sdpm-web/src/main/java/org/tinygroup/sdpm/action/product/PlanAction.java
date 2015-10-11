@@ -124,7 +124,7 @@ public class PlanAction  extends BaseController{
 
 	@ResponseBody
     @RequestMapping("/planList")
-    public List<ProductPlan> findUser(ProductPlan plan){
+    public List<ProductPlan> findPlan(ProductPlan plan){
     	
     	List<ProductPlan> list = planService.findPlanList(plan);
     	

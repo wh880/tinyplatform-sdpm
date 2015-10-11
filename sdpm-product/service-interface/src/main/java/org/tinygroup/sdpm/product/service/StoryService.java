@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.product.service;
 import java.util.List;
 
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.tinysqldsl.Pager;
@@ -47,7 +48,12 @@ public interface StoryService {
 	 * @return
 	 */
 	List<ProductStory> findStoryList(Integer... storyId);
-	
+	/**
+	 * 根据对象查找
+	 * @param story
+     * @return
+     */
+	List<ProductStory> findStoryList(ProductStory story);
 	/**
 	 * 根据产品对象查找
 	 * @return
