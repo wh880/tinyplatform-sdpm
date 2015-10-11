@@ -52,15 +52,10 @@ public class ProductAction  extends BaseController{
 
 	@RequestMapping("")
 	public String productAction(HttpServletRequest request, WebContext webContext){
-		List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
+		List<Product> sessionList = (List<Product>) request.getSession().getAttribute("productList");
 		String oldUrl = webContext.get("oldUrl");
-		if(list == null|| list.size()==0){
-			Product product = new Product();
-			if(request.getSession().getAttribute("sessionProductLineId")!=null){
-				product.setProductLineId((Integer)request.getSession().getAttribute("sessionProductLineId"));
-			}
-			list = productService.findProductList(product,"productId","desc");
-			request.getSession().setAttribute("productList",list);
+		List<Product> list = SessionUtil.ProductRefresh(request, productService);
+		if(sessionList == null|| sessionList.size()==0){
 			
 			if(request.getSession().getAttribute("sessionProductId")==null){
 				request.getSession().setAttribute("sessionProductId",list.size()>0?list.get(0).getProductId():null);
@@ -71,18 +66,23 @@ public class ProductAction  extends BaseController{
 	}	
 	
 	@RequestMapping("/save")
-	public String save(Product product, Model model) {
+	public String save(Product product, Model model,HttpServletRequest request) {
 		
-		productService.addProduct(product);
+		if(request.getSession().getAttribute("sessionProductLineId")!=null){
+			product.setProductLineId((Integer)request.getSession().getAttribute("sessionProductLineId"));
+		}
+		product = productService.addProduct(product);
+		SessionUtil.ProductRefresh(request, productService);
+		request.getSession().setAttribute("sessionProductId",product.getProductId());
 		return "redirect:" + "/product/page/tabledemo/product-listall.page";
 
 	}
 	
 	@RequestMapping("/update")
-	public String update(Product product){
+	public String update(Product product,HttpServletRequest request){
 
 		productService.updateProduct(product);
-		
+		SessionUtil.ProductRefresh(request, productService);
 		return "redirect:" + "/product/page/tabledemo/product-listall.page";
 	}
 	
@@ -100,9 +100,10 @@ public class ProductAction  extends BaseController{
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(Integer productId){
+	public String delete(Integer productId,HttpServletRequest request){
 		
 		productService.deleteProduct(productId);
+		SessionUtil.ProductRefresh(request, productService);
 		return "redirect:" + "/product/page/tabledemo/product-listall.page";
 	}
 	

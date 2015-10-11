@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="myproduct" parent-id="0" name="产品" href="productLine" icon="icon-desktop" sort="800"
+<menu id="myproduct" parent-id="0" name="产品" href="/productLine/toProduct" icon="icon-desktop" sort="800"
       isShow="1" permission="Permission">
 
     <menu id="product-demand" parent-id="myproduct" name="需求" href="/product/story?currentPageId=3"
@@ -226,7 +226,7 @@
  		<menu id="aboutbug" name="删除" href="/quality/bug/delete?bugId=${bug.bugId}" icon="icon-remove" sort="1" isShow="1" scope="release-linkbug"/>
     </menu>
 
-    <menu id="product-roadmap" parent-id="myproduct" name="路线图" href="/product/page/project/product-roadmap.page"
+    <menu id="product-roadmap" parent-id="myproduct" name="路线图" href="/product/common/roadMap"
           sort="12" isShow="1" permission="Permission"></menu>
 
     <menu id="product-archive" parent-id="myproduct" name="文档" href="/product/page/project/archive-list.page"

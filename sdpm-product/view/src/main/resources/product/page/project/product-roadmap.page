@@ -13,33 +13,44 @@
 			##operationbar end
 		
 #@timeMainBox()
-
-    #@historyMenu()
-
-      #@year("first" "#")2015年#end
-
-      #@dateItem("green")
-
-          #dateHead("2015" "06" "08")
-
-          #@dateBody("发布全新Tiny框架的2.0版本")升级全新默认界面和工具；新增组件等功能#end
-
-      #end
-
-
-
-     #@dateItem()
-
-       #dateHead("2015" "04" "19")
-
-       #@dateBody("Tiny框架升级到1.2")新增支持度全球最好，修复BUG：#end
-
-      #end
-
-  #end
-
- 
-
+#set(planClass="org.tinygroup.sdpm.product.dao.pojo.ProductPlan")
+#set(releaseClass="org.tinygroup.sdpm.product.dao.pojo.ProductRelease")
+#set(compTime=now())
+	#foreach(roadMap:list)
+		#if(instance(roadMap,planClass))
+##			#set(compTime=roadMap.planEndDate)
+		#end
+		
+#*		#set(timeYear=formatDate(compTime,'yyyy年'))	
+		
+		#@historyMenu()
+		
+		
+			#if(formatDate(compTime,'yyyy年')!=timeYear)
+				#set(timeYear=formatDate(compTime,'yyyy年'))	
+				#@year("first" "#") ${timeYear} #end
+			#else
+				
+				#@dateItem("green")
+	
+		         	#dateHead(formatDate(compTime,'yyyy') formatDate(compTime,'MM') formatDate(compTime,'dd'))
+					
+					#if(instance(map,planClass))
+						#@dateBody(map.planName) ${map.planSpec}  #end
+					#else
+						#@dateBody(map.releaseName) ${map.releaseDesc}  #end	
+					#end
+		
+		     	 #end
+			
+			#end
+		#end*#
+		
+		
+	
+	
+	#end
+	
 #end
 		
 #end
