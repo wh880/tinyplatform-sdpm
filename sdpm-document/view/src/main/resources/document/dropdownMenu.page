@@ -1,9 +1,8 @@
 #import("/org/tinygroup/publicComponent/macro/navselect.component")
-#set(libId = libId == null?libList?.get(0)?.docLibId:docLibId)
 
 #@navSelect2("docLibName" "lib-id")
 	#@navSelect2Nav()
-	#if(libId)
+	#if(documentLibId)
 		#for(lib : libList)
 			#if(lib?.docLibId == documentLibId)
 				${lib?.docLibName}

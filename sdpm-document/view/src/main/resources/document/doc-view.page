@@ -15,7 +15,7 @@
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp
 				#@tinyTableItemRemove(TINY_CONTEXT_PATH+"/document/doc/delete" doc.docId)
 					#buttonIcon(iconClass="icon-remove")
-				#end
+				#end&nbsp
 			<a href="${TINY_CONTEXT_PATH}/document" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>
 		</span>
