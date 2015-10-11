@@ -50,4 +50,9 @@ public class ModuleServiceImpl implements ModuleService {
 		return SystemModuleManager.batchDelete(ids);
 	}
 
+	public List<SystemModule> findModuleList(SystemModule systemModule){
+
+		return SystemModuleManager.findList(systemModule);
+	}
+
 }
