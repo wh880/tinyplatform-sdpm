@@ -62,6 +62,8 @@ public class DeptAction extends BaseController {
             Map<String, Object> map1 = new HashMap<String, Object>();
             map1.put("id", -1);
             map1.put("pId", 0);
+            map1.put("add", true);
+            map1.put("edit", true);
             map1.put("name", "所有部门");
             list.add(map1);
         }
