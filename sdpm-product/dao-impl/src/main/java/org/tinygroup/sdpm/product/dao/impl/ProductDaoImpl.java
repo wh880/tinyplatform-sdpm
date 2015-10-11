@@ -65,7 +65,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 					PRODUCTTABLE.PRODUCT_ID.value(t.getProductId()),
 					PRODUCTTABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCTTABLE.DEPT_ID.value(t.getDeptId()),
-					PRODUCTTABLE.PRODUCTLINE_ID.value(t.getProductLineId()),
+					PRODUCTTABLE.PRODUCT_LINE_ID.value(t.getProductLineId()),
 					PRODUCTTABLE.PRODUCT_NAME.value(t.getProductName()),
 					PRODUCTTABLE.PRODUCT_CODE.value(t.getProductCode()),
 					PRODUCTTABLE.PRODUCT_ORDER.value(t.getProductOrder()),
@@ -154,7 +154,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 				and(
 					PRODUCTTABLE.COMPANY_ID.eq(t.getCompanyId()),
 					PRODUCTTABLE.DEPT_ID.eq(t.getDeptId()),
-					PRODUCTTABLE.PRODUCTLINE_ID.eq(t.getProductLineId()),
+					PRODUCTTABLE.PRODUCT_LINE_ID.eq(t.getProductLineId()),
 					PRODUCTTABLE.PRODUCT_NAME.eq(t.getProductName()),
 					PRODUCTTABLE.PRODUCT_CODE.eq(t.getProductCode()),
 					PRODUCTTABLE.PRODUCT_ORDER.eq(t.getProductOrder()),
@@ -185,7 +185,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 				and(
 					PRODUCTTABLE.COMPANY_ID.eq(t.getCompanyId()),
 					PRODUCTTABLE.DEPT_ID.eq(t.getDeptId()),
-					PRODUCTTABLE.PRODUCTLINE_ID.eq(t.getProductLineId()),
+					PRODUCTTABLE.PRODUCT_LINE_ID.eq(t.getProductLineId()),
 					PRODUCTTABLE.PRODUCT_NAME.eq(t.getProductName()),
 					PRODUCTTABLE.PRODUCT_CODE.eq(t.getProductCode()),
 					PRODUCTTABLE.PRODUCT_ORDER.eq(t.getProductOrder()),
@@ -215,7 +215,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 				return insertInto(PRODUCTTABLE).values(
 					PRODUCTTABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
 					PRODUCTTABLE.DEPT_ID.value(new JdbcNamedParameter("deptId")),
-					PRODUCTTABLE.PRODUCTLINE_ID.value(new JdbcNamedParameter("productLineId")),
+					PRODUCTTABLE.PRODUCT_LINE_ID.value(new JdbcNamedParameter("productLineId")),
 					PRODUCTTABLE.PRODUCT_NAME.value(new JdbcNamedParameter("productName")),
 					PRODUCTTABLE.PRODUCT_CODE.value(new JdbcNamedParameter("productCode")),
 					PRODUCTTABLE.PRODUCT_ORDER.value(new JdbcNamedParameter("productOrder")),
@@ -248,7 +248,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 				return update(PRODUCTTABLE).set(
 					PRODUCTTABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
 					PRODUCTTABLE.DEPT_ID.value(new JdbcNamedParameter("deptId")),
-					PRODUCTTABLE.PRODUCTLINE_ID.value(new JdbcNamedParameter("productLineId")),
+					PRODUCTTABLE.PRODUCT_LINE_ID.value(new JdbcNamedParameter("productLineId")),
 					PRODUCTTABLE.PRODUCT_NAME.value(new JdbcNamedParameter("productName")),
 					PRODUCTTABLE.PRODUCT_CODE.value(new JdbcNamedParameter("productCode")),
 					PRODUCTTABLE.PRODUCT_ORDER.value(new JdbcNamedParameter("productOrder")),
@@ -279,7 +279,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 				PRODUCTTABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId")),
 				PRODUCTTABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")),
 				PRODUCTTABLE.DEPT_ID.eq(new JdbcNamedParameter("deptId")),
-				PRODUCTTABLE.PRODUCTLINE_ID.eq(new JdbcNamedParameter("productLineId")),
+				PRODUCTTABLE.PRODUCT_LINE_ID.eq(new JdbcNamedParameter("productLineId")),
 				PRODUCTTABLE.PRODUCT_NAME.eq(new JdbcNamedParameter("productName")),
 				PRODUCTTABLE.PRODUCT_CODE.eq(new JdbcNamedParameter("productCode")),
 				PRODUCTTABLE.PRODUCT_ORDER.eq(new JdbcNamedParameter("productOrder")),

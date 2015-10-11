@@ -24,12 +24,6 @@ public class ProductManagerImpl implements ProductManager{
 	
 	public Product add(Product product) {
 		
-		
-		if(1!=product.getAcl()){
-			product.setProductWhiteList("");
-		}
-		product.setProductCreatedDate(new Date());
-		product.setDeleted(FieldUtil.DELETE_NO);
 		return productDao.add(product);
 	}
 
