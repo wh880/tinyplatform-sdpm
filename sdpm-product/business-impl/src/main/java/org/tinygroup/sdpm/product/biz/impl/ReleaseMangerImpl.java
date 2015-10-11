@@ -48,12 +48,12 @@ public class ReleaseMangerImpl implements ReleaseManger{
 
 	public List<ProductRelease> findList(ProductRelease release, String order,String ordertype) {
 		
-		return productReleaseDao.query(release,  (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameAsc(order), !("desc".equals(ordertype))?true:false));
+		return productReleaseDao.query(release,  (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public Pager<ProductRelease> findPager(int page, int limit, ProductRelease release, String order,String ordertype) {
 		
-		return productReleaseDao.queryPager((page-1)*limit, limit, release, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameAsc(order), !("desc".equals(ordertype))?true:false));
+		return productReleaseDao.queryPager((page-1)*limit, limit, release, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public List<ProductRelease> findList(ProductRelease productRelease) {
