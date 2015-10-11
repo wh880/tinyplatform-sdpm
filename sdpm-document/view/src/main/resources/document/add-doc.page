@@ -12,8 +12,9 @@
 	#end
 #end
 #include("doc-tab.page")
-#@tinyForm("this--form" TINY_CONTEXT_PATH+"/document/doc/save" "post" {"class":"add"})
-<input type="hidden" name="docLib" value="${libname}"/>
+#@tinyForm("this--form" TINY_CONTEXT_PATH+"/document/doc/addSave" "post" {"class":"add"})
+#*<input type="hidden" name="docLibId" value="${doc?.docLibId}"/>
+<input type="hidden" name="docId" value="${doc?.docId}"/>*#
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">创建文档</p>
@@ -22,13 +23,10 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#@Tselect2F()
-	                   		 #@Tselect2Body("docProduct" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">产品1</option>
-	                        <option value="2">产品2</option>
-	                        <option value="3">产品3</option>
-	                        <option value="4">产品4</option>
-	                        <option value="5">产品5</option>
-	                        
+	                   		 #@Tselect2Body("docProduct" product?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        #foreach(product : productList)
+	                        	 <option value="${product?.productId}">${product?.productName}</option>
+	                        #end	                       	                    	                        
 	                    	#end                  
 	                    	#@Tselect2Fix()
 	                    	<a href="#" class="r ">增加</a>

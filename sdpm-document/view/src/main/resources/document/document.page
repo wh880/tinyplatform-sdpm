@@ -7,13 +7,13 @@
         ##operationbar start
             #@div(divClass="operationbar")
             <span class="f">
-            	<a href="${TINY_CONTEXT_PATH}/document" class="active_btn">按模块浏览</a>
+            	<a href="#" class="active_btn">按模块浏览</a>
             	<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
             	         	
             </span>
             <span class="r">
             #foreach(addm:menuManager.getScopeMenus("add-doc"))
-            	<a href="${TINY_CONTEXT_PATH}${addm.href}?libId=${libId}">#buttonIcon(iconClass=addm.icon)$!{addm.name}</a>
+            	<a href="${TINY_CONTEXT_PATH}${addm.href}">#buttonIcon(iconClass=addm.icon)$!{addm.name}</a>
             #end
             </span>
             #include("mulsearch.page") 

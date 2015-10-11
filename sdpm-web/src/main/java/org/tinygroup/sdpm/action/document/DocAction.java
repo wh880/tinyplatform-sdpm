@@ -1,19 +1,24 @@
 package org.tinygroup.sdpm.action.document;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.weblayer.WebContext;
 
@@ -22,31 +27,29 @@ import org.tinygroup.weblayer.WebContext;
 public class DocAction {
 	@Autowired
 	private DocService docservice;
+	@Autowired
+	private ProductService productService;
 	
 	@RequestMapping("")
-	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model)
-	{
-	//	doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
-		//List<Doclib> list = (List<Doclib>)request.getSession().getAttribute("liblist");
-		//if(list==null||list.size()==0){
-		List<DocumentDoclib> list=docservice.findDoclibList(new DocumentDoclib());
-			//request.getSession().setAttribute("liblist",list);
-			model.addAttribute("libList",list);
-		//}
-		//	model.addAttribute("libname", libname);
-			if(null==request.getSession().getAttribute("documentLibId")||""==request.getSession().getAttribute("documentLibId")){
-				
+	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange)
+	{		
+		List<DocumentDoclib> list=docservice.findDoclibList(new DocumentDoclib());				
+		if(list.size()>0&&!("true".equals(change))&&!("true".equals(docChange))){
+			if(null==request.getSession().getAttribute("documentLibId")||doclib.getDocLibId()==null){
 				request.getSession().setAttribute("documentLibId",list.get(0).getDocLibId());
-			}else{
-				
+			}else {
 				request.getSession().setAttribute("documentLibId",doclib.getDocLibId());
 			}
+		}else{			
+				request.getSession().setAttribute("documentLibId","");
+		}
+		model.addAttribute("libList",list);		
 		return "/document/document.page";
 		//return "redirect:/document/document?"+(list.size()>0?("lib="+list.get(0).getDocLibName()):"");
 	}
 	
 	@RequestMapping(value="/doc/list")
-	public String docList(HttpServletRequest request,Integer page,Integer limit,String order,String ordertype,DocumentDoc doc,Integer libId,Model model)
+	public String docList(HttpServletRequest request,Integer page,Integer limit,String order,String ordertype,DocumentDoc doc,Model model)
 	{
 		boolean asc = true;		
 		if("desc".equals(ordertype)){
@@ -60,64 +63,97 @@ public class DocAction {
 	}
 	
 	@RequestMapping(value="/doc/add")
-	public String createDoc(HttpServletRequest request,DocumentDoc doc,DocumentDoclib doclib,Model model,String libname)
-	{
-		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
-		model.addAttribute("libname", libname);
+	public String createDoc()
+	{		
 		return "/document/add-doc.page";
 	}
 	
+	@RequestMapping(value="/doc/addSave",method=RequestMethod.POST)
+	public String addSave(HttpServletRequest request,DocumentDoc doc,Model model){	
+		List<Product> product = productService.findProductList(new Product());
+		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
+		docservice.createNewDoc(doc);
+		model.addAttribute("productList", product);
+		return "redirect:"+"/document?docChange=true";
+	}
+	
 	@RequestMapping(value="/doc/edit")
-	public String editDoc(DocumentDoc doc,Model model,String libname,Integer docid)
-	{
-		doc = docservice.findDocById(docid);
-		model.addAttribute("doc", doc);
-		model.addAttribute("libname", libname);
+	public String editDoc(Model model,Integer docId)
+	{	
+		DocumentDoc doc = new DocumentDoc();
+		doc = docservice.findDocById(docId);
 		return "/document/doc-edit.page";
 	}
 	
+	@RequestMapping(value="/doc/editSave",method=RequestMethod.POST)
+	public String editSave(HttpServletRequest request,DocumentDoc doc,Model model){	
+		List<Product> product = productService.findProductList(new Product());
+		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
+		List<DocumentDoclib> list = docservice.findDoclibList(new DocumentDoclib());
+		docservice.editDoc(doc);
+		model.addAttribute("productList", product);
+		model.addAttribute("doc", doc);
+		model.addAttribute("libList", list);
+		return "redirect:"+"/document?docChange=true";
+	}
+	
 	@RequestMapping("/doc/view")
-	public String docView(DocumentDoc doc,Model model,String libname,Integer docid){
+	public String docView(HttpServletRequest request,DocumentDoc doc,Model model,Integer docid){
 		
+		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
 		doc = docservice.findDocById(docid);		
 		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
 		model.addAttribute("doc",doc);
 		model.addAttribute("docLib",docLib);
-		model.addAttribute("libname", libname);
 		return "/document/doc-view.page";
 	}
 	
 	@RequestMapping(value="/doc/save",method=RequestMethod.POST)
-	public String saveDoc(DocumentDoc doc,Model model)
+	public String saveDoc(HttpServletRequest request,DocumentDoc doc,Model model)
 	{
-		if(doc.getDocId()==null||doc.getDocId()==0)
-			doc = docservice.createNewDoc(doc);
-		else
+		if(doc.getDocId()==null||doc.getDocId()==0){
+			doc = docservice.createNewDoc(doc);			
+		}
+		else{
 			docservice.editDoc(doc);
-		model.addAttribute("doc", doc);
-		return "redirect:"+"/document"/*+"?libname="+doc.getDocLib()*/;
-	}
-	
-	@RequestMapping(value="/doc/delete")
-	public String delDoc(Integer id)
-	{
-		/*int ret = */
-		docservice.deleteDocById(id);
-		//if(ret==0)return "/document/Error.page";
+		}
 		return "redirect:"+"/document";
 	}
 	
-	@RequestMapping(value="/doclib/add")
+	@ResponseBody
+	@RequestMapping(value="/doc/delete")
+	public Map delDoc(Integer id)
+	{
+		docservice.deleteDocById(id);
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("status", "success");
+	    map.put("info", "删除成功");
+	    return map;
+	}
+	
+	@RequestMapping(value="/doclib/toAdd")
 	public String addDocLib()
 	{
 		return "/document/add-doclib.pagelet";
 	}
 	
+/*	@RequestMapping(value="/doclib/add")
+	public String add(HttpServletRequest request,Model model){
+		DocumentDoclib doclib = new DocumentDoclib();
+		if(doclib.getDocLibId()==null||doclib.getDocLibId()==0){
+			docservice.createNewDocLib(doclib);
+			request.getSession().setAttribute("documentLibId",doclib.getDocLibId());
+		}else
+			docservice.editDocLibName(doclib);
+		
+		model.addAttribute("doclib", doclib);
+		return "/document/doclib-edit.pagelet";
+	}*/
+	
 	@RequestMapping(value="/doclib/edit")
-	public String editDoclib(DocumentDoclib doclib,Model model,String libname)
+	public String editDoclib(DocumentDoclib doclib,Model model,Integer libId)
 	{
-		//doclib = docservice.findDoclibById(doclibid);
-		doclib.setDocLibName(libname);
+		doclib = docservice.findDoclibById(libId);
 		//if(doclib.getDocLibName()==null||doclib.getDocLibName()==""){
 			List<DocumentDoclib> liblist = docservice.findDoclibList(doclib);
 			if(liblist.size()>0)
@@ -128,21 +164,26 @@ public class DocAction {
 	}
 	
 	@RequestMapping(value="/doclib/save")
-	public String saveDoclib(DocumentDoclib doclib)
+	public String saveDoclib(HttpServletRequest request,DocumentDoclib doclib)
 	{
-		if(doclib.getDocLibId()==null||doclib.getDocLibId()==0)
-			docservice.createNewDocLib(doclib);
-		else
+		if(doclib.getDocLibId()==null||doclib.getDocLibId()==0){
+			doclib = docservice.createNewDocLib(doclib);
+			request.getSession().setAttribute("documentLibId", doclib.getDocLibId());
+		}else {
 			docservice.editDocLibName(doclib);
-		return "redirect:"+"/document";
+		}	
+		return "redirect:"+"/document?change=true";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/doclib/delete")
-	public String delDocLib(Integer id)
+	public Map delDocLib(Integer id)
 	{
-		/*int ret = */
 		docservice.deleteDoclibById(id);
-		//if(ret==0)return "/document/Error.page";
-		return "redirect:"+"/document";
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("status", "success");
+	    map.put("info", "删除成功");
+	    return map;
 	}
+	
 }
