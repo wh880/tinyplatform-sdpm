@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action.product;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -107,11 +108,20 @@ public class ReleaseAction extends BaseController{
 		@RequestParam(required=false,defaultValue="releaseId")String order,
 		@RequestParam(required=false,defaultValue="asc")String ordertype,Model model,HttpServletRequest request ){
 		
-		release.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+		if(request.getSession().getAttribute("sessionProductId")!=null){
+			release.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+		}
 		Pager<ProductRelease> pagerProductRelease = releaseService.findReleasePager(page, pagesize, release, order, ordertype);
 		
 		model.addAttribute("productRelease",pagerProductRelease);
 		return "/product/data/allproduct-release.pagelet";
 		}
+
+	@ResponseBody
+	@RequestMapping("/releaseList")
+	public List<ProductRelease> findRelease(ProductRelease release){
+		List<ProductRelease> list = releaseService.findReleaseList(release);
+		return list;
+	}
 }
 

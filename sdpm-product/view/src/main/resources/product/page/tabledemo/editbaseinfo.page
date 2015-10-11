@@ -1,3 +1,29 @@
+<script>
+    $(document).ready(function(){
+
+        ajaxRead("eidtpro","productId","productName");
+        ajaxRead("eidtmod","moduleId","moduleName");
+        ajaxRead("eidtfrom","storyId","storySource");
+        ajaxRead("eidtPri","storyId","storyPri");
+        ajaxRead("send","storyId","storyPri");
+        ajaxRead("assign","storyId","storyAssignedTo");
+
+        $("#story_reviewed").on("click",function(){
+
+            var vm = this.checked;
+            if(vm==true){
+                $("select[name='storyReviewedBy']").attr("disabled","disabled");
+            }
+            if(vm==false){
+                $("select[name='storyReviewedBy']").removeAttr("disabled");
+            }
+
+
+        });
+
+    });
+</script>
+
     #@div(divClass="infoContent")
     <p class="titleName">基本信息</p>
 
@@ -7,11 +33,8 @@
                 #@colLabel()产品：#end
                 #@formControlDiv("col-8")
                     #@Tselect2F()
-                        #@Tselect2Body("productId" story?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="2">产品A</option>
-                            <option value="3">产品B</option>
-                            <option value="1">产品C</option>
-                            <option value="4">产品D</option>
+                        #@Tselect2Body("productId" story?.productId {"class":"input-text select2","url":"/product/productList","ajaxType":"eidtpro","data":""}) ##,"multiple":"multiple"加上为多选项
+
                         #end
 
                         #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page " class="r ">增加</a><a href=" ${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
@@ -29,11 +52,8 @@
                 #@colLabel()所属模块：#end
                 #@formControlDiv("col-8")
                     #@Tselect2F()
-                        #@Tselect2Body("moduleId" story?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="4">模块A</option>
-                            <option value="2">模块B</option>
-                            <option value="3">模块C</option>
-                            <option value="1">产品D</option>
+                        #@Tselect2Body("moduleId" story?.moduleId {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":"eidtmod","data":""}) ##,"multiple":"multiple"加上为多选项
+
                         #end
 
                       #*  #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#
@@ -47,13 +67,8 @@
             #@elementItem()
                 #@colLabel()来源：#end
                 #@formControlDiv("col-8")
-                    #@tinySelect("storySource" stroy?.storySource {"class":"input-text ","rel":"22"})
-                        #@tinyOptionItem("5")5#end
-                        #@tinyOptionItem("1")qqqqqqqq#end
-                        #@tinyOptionItem("ta")3#end
-                        #@tinyOptionItem("ta")4#end
-                        #@tinyOptionItem("ta")5#end
-                        #@tinyOptionItem("ta")6#end
+                    #@tinySelect("storySource" stroy?.storySource {"class":"input-text ","rel":"22","url":"/product/story/storyList","ajaxType":"eidtfrom","data":""})
+
                     #end
                 #end
                 #@validateDiv("col-2")#end
@@ -63,7 +78,7 @@
         <li>
             #@elementItem()
                 #@colLabel()当前状态：#end
-                <p >${stroy?.storyStatus}</p>
+              ${story?.storyStatus}
             #end
         </li>
 
@@ -71,10 +86,8 @@
             #@elementItem()
                 #@colLabel()优先级：#end
                 #@formControlDiv("col-8")
-                    #@tinySelect("storyPri" story?.storyPri {"class":"input-text ","rel":"22"})
-                        #@tinyOptionItem("1")1#end
-                        #@tinyOptionItem("2")2#end
-                        #@tinyOptionItem("4")3#end
+                    #@tinySelect("storyPri" story?.storyPri {"class":"input-text ","rel":"22","url":"/product/story/storyList","ajaxType":"eidtPri","data":""})
+
                     #end
                 #end
                 #@validateDiv("col-2")#end
@@ -85,7 +98,10 @@
             #@elementItem()
                 #@colLabel()预计工时：#end
                 #@formControlDiv("col-8")
-                    #tinyInput("text" "storyEstimate" story?.storyEstimate {"id":"storyEstimate","class":"input-text"})
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="storyEstimate" placeholder="" aria-describedby="basic-addon2">
+                        <span class="input-group-addon" id="basic-addon2">小时</span>
+                    </div>
                 #end
                 #@validateDiv("col-2")#end
             #end
@@ -108,7 +124,7 @@
                 #@colLabel()抄送给：#end
                 #@formControlDiv("col-8")
                     #@Tselect2F()
-                        #@Tselect2Body("storyMailto" story?.storyMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("storyMailto" story?.storyMailto {"class":"input-text select2","multiple":"multiple","url":"/product/story/storyList","ajaxType":"send","data":""}) ##,"multiple":"multiple"加上为多选项
                             <option value="CT">Admin</option>
                             <option value="1">Demo</option>
                             <option value="FL">TOM</option>
@@ -141,10 +157,8 @@
                 #@colLabel()指派给：#end
                 #@formControlDiv("col-8")
                     #@Tselect2F()
-                        #@Tselect2Body("storyAssignedTo" story?.storyAssignedTo {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="CT">开发人员</option>
-                            <option value="1">测试人员</option>
-                            <option value="FL">实施人员</option>
+                        #@Tselect2Body("storyAssignedTo" story?.storyAssignedTo {"class":"input-text select2","url":"/product/story/storyList","ajaxType":"assign","data":""}) ##,"multiple":"multiple"加上为多选项
+
                         #end
 
                       #*  #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#

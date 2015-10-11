@@ -54,4 +54,11 @@ public interface ModuleManager {
 	  * @return
 	  */
 	 int batchDelete(Integer...ids);
+
+	/**
+	 * 根据条件查询list
+	 * @param orgDept
+	 * @return
+     */
+	List<SystemModule> findList(SystemModule systemModule);
 }

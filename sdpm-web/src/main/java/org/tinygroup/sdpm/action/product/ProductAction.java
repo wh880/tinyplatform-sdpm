@@ -55,16 +55,28 @@ public class ProductAction  extends BaseController{
 		List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
 		String oldUrl = webContext.get("oldUrl");
 		if(list == null|| list.size()==0){
-			list = productService.findProductList(new Product(),"productId","desc");
+			Product product = new Product();
+			if(request.getSession().getAttribute("sessionProductLineId")!=null){
+				product.setProductLineId((Integer)request.getSession().getAttribute("sessionProductLineId"));
+			}
+			list = productService.findProductList(product,"productId","desc");
 			request.getSession().setAttribute("productList",list);
 			
-			if(null==request.getSession().getAttribute("sessionProductId")||""==request.getSession().getAttribute("sessionProductId")){
-				request.getSession().setAttribute("sessionProductId",list.get(0).getProductId());
+			if(request.getSession().getAttribute("sessionProductId")==null){
+				request.getSession().setAttribute("sessionProductId",list.size()>0?list.get(0).getProductId():null);
 			}
 		}
 		
 		return "redirect:/product/story?"+(list.size()>0?("productId="+list.get(0).getProductId()):"")+"&choose=1"+(request.getQueryString()==null?"":("&"+request.getQueryString()));
 	}	
+	
+	@RequestMapping("/save")
+	public String save(Product product, Model model) {
+		
+		productService.addProduct(product);
+		return "redirect:" + "/product/page/tabledemo/product-listall.page";
+
+	}
 	
 	@RequestMapping("/update")
 	public String update(Product product){

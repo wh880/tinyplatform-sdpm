@@ -32,6 +32,8 @@ import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.tinysqldsl.Pager;
 
 
@@ -44,6 +46,8 @@ public class StoryAction extends BaseController{
     private StorySpecService storySpecService;
     @Autowired
 	private BugService bugService;
+    @Autowired
+    private ModuleService moduleService;
 
    
     @RequestMapping("")
@@ -150,7 +154,9 @@ public class StoryAction extends BaseController{
     @RequestMapping("/search")
     public String storySearchAction(int page, int pagesize, ProductStory story, String choose, String groupOperate, SearchInfos searchInfos, String order, String ordertype, Model model, HttpServletRequest request){
         
-    	story.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+    	if(request.getSession().getAttribute("sessionProductId")!=null){
+    		story.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+    	}
     	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList",p);
         return "product/data/tabledata.pagelet";
@@ -201,5 +207,42 @@ public class StoryAction extends BaseController{
 		}
     	return "";
     }
-    
+
+    @ResponseBody
+    @RequestMapping("/storyList")
+    public List<ProductStory> findStory(ProductStory story){
+
+        List<ProductStory> list = storyService.findStoryList(story);
+
+        return list;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/data")
+    public List data(String check) {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<SystemModule> moduleList = moduleService.findModuleList(new SystemModule());
+        if (check == null || !check.equals("n")) {
+            Map<String, Object> map1 = new HashMap<String, Object>();
+            map1.put("id", -1);
+            map1.put("pId", 0);
+            map1.put("name", "所有部门");
+            list.add(map1);
+        }
+
+        for (SystemModule d : moduleList) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", d.getModuleId());
+            map.put("pId", d.getModuleParent());
+            map.put("open", true);
+            map.put("add", true);
+            map.put("edit", true);
+            map.put("name", d.getModuleName());
+            list.add(map);
+        }
+        return list;
+
+    }
+
 }

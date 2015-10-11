@@ -60,4 +60,9 @@ public class ModuleManagerImpl implements ModuleManager{
 		return systemModuleDao.deleteByKeys(ids);
 	}
 
+	public List<SystemModule> findList(SystemModule systemModule){
+
+		return systemModuleDao.query(systemModule);
+	}
+
 }

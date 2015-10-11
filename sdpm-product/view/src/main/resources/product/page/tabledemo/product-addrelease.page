@@ -3,6 +3,14 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-release",sonitem="<li>"+"发布"+"</li>")
 
+<script>
+    $(document).ready(function(){
+
+        ajaxRead("addrel","moduleId","moduleName");
+
+    });
+</script>
+
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/release/save" "post" {"class":""})
 #*<div style="width:70%;float:left" class="pageleftpart">*#
     <div class="infoContent">
@@ -23,10 +31,8 @@
         #@colLabel()版本:#end
        #@formControlDiv("col-4")
 			#@Tselect2F()
-                #@Tselect2Body("buildId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                #@Tselect2Body("buildId" "IN" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":"addrel","data":""}) ##,"multiple":"multiple"加上为多选项
+
                 #end
             
                 #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end

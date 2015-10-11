@@ -114,7 +114,10 @@ public class PlanAction  extends BaseController{
 			@RequestParam(required = false,defaultValue = "planId")String order,
 			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model,HttpServletRequest request){
 		
-		plan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+		if(request.getSession().getAttribute("sessionProductId")!=null){
+			plan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+		}
+		
 		Pager<ProductPlan>  pagerProductPlan = planService.findProductPlanPager(page, pagesize, plan, order, ordertype);
 
 		model.addAttribute("productPlan",pagerProductPlan);
@@ -124,7 +127,7 @@ public class PlanAction  extends BaseController{
 
 	@ResponseBody
     @RequestMapping("/planList")
-    public List<ProductPlan> findUser(ProductPlan plan){
+    public List<ProductPlan> findPlan(ProductPlan plan){
     	
     	List<ProductPlan> list = planService.findPlanList(plan);
     	

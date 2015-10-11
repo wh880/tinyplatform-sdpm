@@ -55,7 +55,13 @@ public interface ModuleService {
 	  * @return
 	  */
 	 int batchDelete(Integer...ids);
-	
+
+	/**
+	 * 根据条件查询LIST
+	 * @param systemModule
+	 * @return
+     */
+	List<SystemModule> findModuleList(SystemModule systemModule);
 	 
 	 
 }

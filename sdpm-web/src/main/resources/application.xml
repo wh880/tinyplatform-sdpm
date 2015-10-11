@@ -28,48 +28,51 @@
         <application-processor bean="fileResolverProcessor"></application-processor>
         <!--<application-processor bean="bundleApplicationProcessor"></application-processor>-->
         <!--<application-processor bean="dictLoadProcessor"></application-processor>-->
-            <application-processor bean="serviceApplicationProcessor"></application-processor>
+        <application-processor bean="serviceApplicationProcessor"></application-processor>
         <application-processor bean="tinyListenerProcessor"></application-processor>
         <application-processor bean="fileMonitorProcessor"></application-processor>
         <application-processor bean="tinyTemplateConfigProcessor"></application-processor>
-<application-processor bean="databaseInstallerProcessor"></application-processor>
-      <!--    <application-processor bean="dictInitProcessor"></application-processor>  -->
-        <application-processor bean="stdProcessor"></application-processor>    </application-processors>
+        <application-processor bean="databaseInstallerProcessor"></application-processor>
+        <!--<application-processor bean="dictInitProcessor"></application-processor>-->
+        <application-processor bean="stdProcessor"></application-processor>
+    </application-processors>
 
     <!-- 这里是文件搜索器相关配置，如果配置请参考file-resolver-configuration配置手册 -->
     <file-resolver-configuration
             resolve-classpath="true">
         <class-paths>
-                <!-- 需要加的自己署名 -->
-                <!-- Hulk's Paht -->
-                <class-path path="E:\workspace\sdpm\sdpm-org\view\src\main\resources"/>
-                <!-- 徐丹洋-->
-                <class-path path="D:\sdpm\sdpm-service\view\src\main\resources"/>
-                <!-- 杰森斯坦森-->
-                <class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources"/>
-                <class-path path="E:\Tiny_Fork\sdpm\sdpm-productLine\view\src\main\resources"/>
-                <!-- 明明-->
-                <class-path path="D:\webspaces\sdpm\sdpm-service\view\src\main\resources"/>
-                <!-- 高志超-->
-                <class-path path="E:\git\sdpm\sdpm-org\view\src\main\resources"/>
-                <!-- 沈立宇-->
-                <class-path path="E:\TinyWorkSpace\sdpm\sdpm-project\view\src\main\resources"/>
-                <!-- 王莹-->
-                <class-path path="F:\daochu\sdpm\sdpm-project\view\src\main\resources"/>
-                <!-- 蒙初开-->
-                <class-path path="E:\sdpm\sdpm-project\view\src\main\resources"/>
-                <class-path path="E:\sdpm\sdpm-system\view\src\main\resources"/>
-                 <class-path path="E:\sdpm\sdpm-product\view\src\main\resources"/>
-                <!-- 陈朋-->
-                <class-path path="D:\GitFile\sdpm\sdpm-quality\view\src\main\resources"/>
-                <class-path path="D:\GitFile\sdpm\sdpm-document\view\src\main\resources"/>
-                <!-- 许斌-->
-                <class-path path="E:\TinyWork\sdpm\sdpm-product\view\src\main\resources"/>
-                <!--wll -->
-                <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>
-                <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
-                <!--alu -->
-                <class-path path="D:\TinyFramworkTest\sdpm\sdpm-document\view\src\main\resources"/>
+            <!-- 需要加的自己署名 -->
+            <!-- Hulk's Paht -->
+            <class-path path="E:\workspace\sdpm\sdpm-org\view\src\main\resources"/>
+            <!-- 徐丹洋-->
+            <class-path path="D:\sdpm\sdpm-service\view\src\main\resources"/>
+            <!-- 杰森斯坦森-->
+            <class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources"/>
+            <class-path path="E:\Tiny_Fork\sdpm\sdpm-productLine\view\src\main\resources"/>
+            <class-path path="E:\Tiny_Fork\sdpm\sdpm-service\view\src\main\resources"/>
+            <!-- 明明-->
+            <class-path path="D:\webspaces\sdpm\sdpm-service\view\src\main\resources"/>
+            <!-- 高志超-->
+            <class-path path="E:\git\sdpm\sdpm-org\view\src\main\resources"/>
+            <!-- 沈立宇-->
+            <class-path path="E:\TinyWorkSpace\sdpm\sdpm-project\view\src\main\resources"/>
+            <!-- 王莹-->
+            <class-path path="F:\daochu\sdpm\sdpm-project\view\src\main\resources"/>
+            <!-- 蒙初开-->
+            <class-path path="E:\sdpm\sdpm-project\view\src\main\resources"/>
+            <class-path path="E:\sdpm\sdpm-system\view\src\main\resources"/>
+            <class-path path="E:\sdpm\sdpm-product\view\src\main\resources"/>
+            <!-- 陈朋-->
+            <class-path path="D:\GitFile\sdpm\sdpm-quality\view\src\main\resources"/>
+            <class-path path="D:\GitFile\sdpm\sdpm-document\view\src\main\resources"/>
+            <!-- 许斌-->
+            <class-path path="E:\workspace\project\sdpm\sdpm-product\view\src\main\resources"/>
+            <class-path path="E:\TinyWork\sdpm\sdpm-product\view\src\main\resources"/>
+            <!--wll -->
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
+            <!--alu -->
+            <class-path path="D:\TinyFramworkTest\sdpm\sdpm-document\view\src\main\resources"/>
 
         </class-paths>
         <include-patterns>
@@ -674,12 +677,12 @@
     </template-config>
 
 
-        <datasource id="aaaa" type="org.apache.commons.dbcp.BasicDataSource">
-                <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-                <property name="url"
-                          value="jdbc:mysql://192.168.51.28/sdpm?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
-                <property name="username" value="root"/>
-                <property name="password" value="123456"/>
-        </datasource>
+    <datasource id="aaaa" type="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://192.168.51.28/sdpm?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </datasource>
 
 </application>

@@ -42,12 +42,12 @@ public class PlanManagerImpl implements PlanManager{
 
 	public Pager<ProductPlan> findPager(int start, int limit, ProductPlan productPlan, String order, String ordertype) {
 		
-		return productPlanDao.queryPager((start-1)*limit, limit, productPlan, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameAsc(order), !("desc".equals(ordertype))?true:false));
+		return productPlanDao.queryPager((start-1)*limit, limit, productPlan, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public List<ProductPlan> findList(ProductPlan productplan, String order, String ordertype) {
 		
-		return productPlanDao.query(productplan, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameAsc(order), !("desc".equals(ordertype))?true:false));
+		return productPlanDao.query(productplan, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public Integer delete(Integer planId) {

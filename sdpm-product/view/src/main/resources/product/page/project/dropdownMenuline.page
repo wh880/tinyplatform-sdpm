@@ -2,54 +2,26 @@
 
 #@navSelect2("productLine" "productLine")
 	#@navSelect2Nav()
-	#if(item)
-	${item}
-	#else
-	产品线
-	#end
+		#if(productLineList)
+			#for(productLine : productLineList)
+				#if(productLine?.productLineId == sessionProductLineId)
+					${productLine?.productLineName}
+				#end
+			#end
+		#else
+			产品
+		#end
+	
 	<span class="caret"></span>#end
 	#@navSelect2Body()
 		  #@navSelect2Data()
 		  <option value=""></option>
-		  <optgroup label="Central Time Zone">
-			 <option value="24">Alabama</option>
-			 <option value="AR">Arkansas</option>
-			 <option value="IL">Illinois</option>
-			 <option value="IA">Iowa</option>
-			 <option value="KS">Kansas</option>
-			 <option value="KY">Kentucky</option>
-			 <option value="LA">Louisiana</option>
-			 <option value="MN">Minnesota</option>
-			 <option value="MS">Mississippi</option>
-			 <option value="MO">Missouri</option>
-			 <option value="OK">Oklahoma</option>
-			 <option value="SD">South Dakota</option>
-			 <option value="TX">Texas</option>
-			 <option value="TN">Tennessee</option>
-			 <option value="WI">Wisconsin</option>
+		  <optgroup label="产品">
+			  #for(productLine : productLineList)
+			  	<option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
+			  #end
 		  </optgroup>
-		  <optgroup label="Eastern Time Zone">
-			 <option value="CT">Connecticut</option>
-			 <option value="DE">Delaware</option>
-			 <option value="FL">Florida</option>
-			 <option value="GA">Georgia</option>
-			 <option value="IN">Indiana</option>
-			 <option value="ME">Maine</option>
-			 <option value="MD">Maryland</option>
-			 <option value="MA">Massachusetts</option>
-			 <option value="MI">Michigan</option>
-			 <option value="NH">New Hampshire</option>
-			 <option value="NJ">New Jersey</option>
-			 <option value="NY">New York</option>
-			 <option value="NC">North Carolina</option>
-			 <option value="OH">Ohio</option>
-			 <option value="PA">Pennsylvania</option>
-			 <option value="RI">Rhode Island</option>
-			 <option value="SC">South Carolina</option>
-			 <option value="VT">Vermont</option>
-			 <option value="VA">Virginia</option>
-			 <option value="WV">West Virginia</option>
-			</optgroup>
+
 		#end
 		#@navSelect2Fix()
 			
@@ -60,23 +32,28 @@
 		
 		#end
 	#end
-#*	<script type="text/javascript">
-	<!--
-	$(function(){
-		$("#${sid}-select").on("change",function(){
-			//console.log("do something")
-			window.location.href='togglebox.page?currentPageId=${currentPageId}&id='+$(this).val();
-			console.log('productNew.page?currentPageId=${currentPageId}&id='+$(this).val())
-		});
-	});
-	//-->
-	</script>*#
-	
+
+#hiddenInput("productLineIdHidden","productLineId","","")
+
 	<script type="text/javascript">
-	
+		
 		$(function(){
 			$("#productLine-select").on("change",function(){
-				window.location.href='${TINY_CONTEXT_PATH}/product/page/project/togglebox.page?item='+$(this).find("option:selected").text();
+				var dateValue = $(this).val();
+				$.post("${TINY_CONTEXT_PATH}/productLine/sessionset",{productLineId:dateValue},function(result){
+					if(true==result){
+						window.location.reload();
+					}else{
+						alert("产品线ID值为空");
+					}
+				
+				});
+	##				$("#productIdHidden").val($(this).val());
+	##				$(".switchClass").each(function(){
+	##					var hrefnew = this.href + "&productId=" + $("#productIdHidden").val();
+	##					this.href = hrefnew;
+	##				});
+	##				window.location.href='${TINY_CONTEXT_PATH}/product/story?currentPageId=3&productId='+$(this).find("option:selected").val();
 			});
 		});
 	

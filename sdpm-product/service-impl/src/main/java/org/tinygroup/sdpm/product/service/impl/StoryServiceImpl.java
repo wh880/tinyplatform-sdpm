@@ -57,5 +57,9 @@ public class StoryServiceImpl implements StoryService {
 		return storyManager.findList(storyId);
 	}
 
+	public List<ProductStory> findStoryList(ProductStory story){
+
+		return storyManager.findList(story);
+	}
 
 }

@@ -3,22 +3,46 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-overview",sonitem="<li>"+"概况"+"</li>")
 
+<script>
+    $(document).ready(function(){
+
+        ajaxRead("owner","productId","productOwner");
+        ajaxRead("qualityMnager","productId","productQualityManager");
+        ajaxRead("deliveryManagerManager","productId","productDeliveryManager");
+
+        $("#story_reviewed").on("click",function(){
+
+            var vm = this.checked;
+            if(vm==true){
+                $("select[name='storyReviewedBy']").attr("disabled","disabled");
+            }
+            if(vm==false){
+                $("select[name='storyReviewedBy']").removeAttr("disabled");
+            }
+
+
+        });
+
+    });
+</script>
+
+
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/update" "post" {"class":"test"})
 <div style="width:100%;float:center" class="pageleftpart">
    <div class="infoContent">
         <p class="titleName">编辑</p>
-        #tinyInput("text" "productId" product.productId {"class":"input-text hidden"})
+        #tinyInput("text" "productId" product?.productId {"class":"input-text hidden"})
  #@elementItem()
         #@colLabel()产品名称：#end
         #@formControlDiv("col-4")
-          #tinyInput("text" "productName" product.productName {"nullmsg":"请输入产品名称！","id":"33","class":"input-text"})
+          #tinyInput("text" "productName" product?.productName {"nullmsg":"请输入产品名称！","id":"33","class":"input-text","url":""})
         #end
         #@validateDiv("col-2")#end
  #end
 #@elementItem()
         #@colLabel()产品代号：#end
         #@formControlDiv("col-4")
-          #tinyInput("text" "productCode" product.productCode {"nullmsg":"请输入产品名称！","id":"33","class":"input-text"})
+          #tinyInput("text" "productCode" product?.productCode {"nullmsg":"请输入产品名称！","id":"33","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
 #end
@@ -26,15 +50,8 @@
 		#@colLabel()产品负责人：#end
 		#@formControlDiv("col-4")
 			#@Tselect2F()
-                    #@Tselect2Body("productOwner" product.productOwner {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="xubin">xubin</option>
-                        <option value="admin">admin</option>
-                        <option value="FL">开发主管</option>
+                    #@Tselect2Body("productOwner" product?.productOwner {"class":"input-text select2","url":"/product/productList","ajaxType":"owner","data":""}) ##,"multiple":"multiple"加上为多选项
                     #end
-                
-#*
-                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-*#
                 #end
 
 		#end
@@ -44,10 +61,8 @@
 		#@colLabel()测试负责人：#end
 		#@formControlDiv("col-4")
 			#@Tselect2F()
-                    #@Tselect2Body("productQualityManager" product.productQualityManager {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="xubin">xubin</option>
-                        <option value="admin">admin</option>
-                        <option value="FL">测试C</option>
+                    #@Tselect2Body("productQualityManager" product?.productQualityManager {"class":"input-text select2","url":"/product/productList","ajaxType":"qualityMnager","data":""}) ##,"multiple":"multiple"加上为多选项
+
                     #end
                 
                  #*   #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#
@@ -60,13 +75,8 @@
 		#@colLabel()发布负责人：#end
 		#@formControlDiv("col-4")
 			#@Tselect2F()
-                    #@Tselect2Body("productDeliveryManager" product.productDeliveryManager {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                       <option value="xubin">xubin</option>
-                        <option value="admin">admin</option>
-                        <option value="FL">测试C</option>
+                    #@Tselect2Body("productDeliveryManager" product?.productDeliveryManager {"class":"input-text select2","url":"/product/productList","ajaxType":"deliveryManagerManager","data":""}) ##,"multiple":"multiple"加上为多选项
                     #end
-                
-                  #*  #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#
                 #end
 
 		#end
@@ -76,21 +86,19 @@
         #@colLabel()状态：#end
         #@formControlDiv("col-4")
              #@Tselect2F()
-                    #@Tselect2Body("productStatus" product.productStatus {"class":"input-text"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("productStatus" product?.productStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                        <option value="0">正常</option>
                        <option value="1">结束</option>
                     #end
-                
-                  #*  #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#
-                #end
-        #end
-        #@validateDiv("col-2")#end
+              #end
+        #end        
+          #@validateDiv("col-2")#end
 #end
 #@elementItem()
         #@colLabel()产品描述：#end
 	#@formControlDiv("col-8")
-			#@Teditor("content1" "content1" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})${product.productDesc}#end
-			#@Teditor("productDesc" "productDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})${product.productDesc}#end
+			#@Teditor("content1" "content1" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})${product?.productDesc}#end
+			#@Teditor("productDesc" "productDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})${product?.productDesc}#end
 	#end
         #@validateDiv("col-2")#end
 #end

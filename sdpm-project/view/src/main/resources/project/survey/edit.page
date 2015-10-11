@@ -51,7 +51,7 @@
                     #@colLabel()项目名称#end
                     #@formControlDiv("col-8")
                         #tinyInput(
-                            "text" "projectName" ""{"style":"width:300px","placeholder":"请输入项目名称","datatype":"*4-16",
+                            "text" "projectName" project?.projectName{"style":"width:300px","placeholder":"请输入项目名称","datatype":"*4-16",
                             "nullmsg":"项目名称不能为空！","id":"","class":"input-text"})
                     #end
                     #@validateDiv("col-2")#end
@@ -60,7 +60,7 @@
                     #@colLabel()项目代号#end
                     #@formControlDiv("col-8")
                         #tinyInput(
-                            "text" "projectCode" ""{"style":"width:300px","placeholder":"请输入项目代号","datatype":"*4-16",
+                            "text" "projectCode" project?.projectCode{"style":"width:300px","placeholder":"请输入项目代号","datatype":"*4-16",
                             "nullmsg":"项目代号不能为空！","id":"","class":"input-text"})
                     #end
                     #@validateDiv("col-2")#end
@@ -69,7 +69,7 @@
                     #@colLabel()起始日期#end
                     #@formControlDiv("col-8")
                         #@tinyDateInput(
-                            "projectBegin" "" "YYYY-MM-DD" {"style":"width:260px","datatype":"*","nullmsg":"日期不能为空",
+                            "projectBegin" project?.projectBegin "YYYY-MM-DD" {"style":"width:260px","datatype":"*","nullmsg":"日期不能为空",
                             "placeholder":"选择日期"})#end
                     #end
                     #@validateDiv("col-2")#end
@@ -78,7 +78,7 @@
                     #@colLabel()结束日期#end
                     #@formControlDiv("col-8")
                         #@tinyDateInput(
-                            "projectEnd" "" "YYYY-MM-DD" {"style":"width:260px","datatype":"*","nullmsg":"日期不能为空",
+                            "projectEnd" project?.projectEnd "YYYY-MM-DD" {"style":"width:260px","datatype":"*","nullmsg":"日期不能为空",
                             "placeholder":"选择日期"})#end
                     #end
                     #@validateDiv("col-2")#end
@@ -88,7 +88,7 @@
                     <div class="input-group">
                         <input name="projectDays" type="text" class="form-control" placeholder=""
                                aria-describedby="basic-addon2">
-                        <span class="input-group-addon" id="basic-addon2">小时</span>
+                        <span class="input-group-addon" id="basic-addon2">${project?.projectDays}小时</span>
                     </div>
                     #end
                 #end
@@ -96,7 +96,7 @@
                     #@sdpmItem("项目类型")
                         #@Tselect2F()
                             #@Tselect2Body(
-                                "projectType" "0" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                "projectType" project?.projectType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="0">长期项目</option>
                             <option value="1">短期项目</option>
                             <option value="2">运维项目</option>
@@ -109,7 +109,7 @@
                 #@elementItem()
                     #@sdpmItem("团队名称")
                         #tinyInput(
-                            "text" "projectTeam" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":
+                            "text" "projectTeam" project?.projectTeam{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":
                             "标题不能为空！","id":"username","class":"input-text"})
                     #end
                 #end
@@ -117,7 +117,7 @@
                     #@colLabel()项目状态#end
                     #@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("projectStatus" project?.projectStatus; {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="CT">Connecticut</option>
                             <option value="DE">Delaware</option>
                             <option value="FL">Florida</option>
@@ -136,7 +136,7 @@
                     #@colLabel()产品负责人#end
                     #@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("projectPO" project?.projectPO {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="CT">Connecticut</option>
                             <option value="DE">Delaware</option>
                             <option value="FL">Florida</option>
@@ -157,7 +157,7 @@
                     #@colLabel()项目负责人#end
                     #@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("projectPM" project?.projectPM {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="CT">Connecticut</option>
                             <option value="DE">Delaware</option>
                             <option value="FL">Florida</option>
@@ -178,7 +178,7 @@
                     #@colLabel()测试负责人#end
                     #@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("projectQD" project?.projectQD {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="CT">Connecticut</option>
                             <option value="DE">Delaware</option>
                             <option value="FL">Florida</option>
@@ -199,7 +199,7 @@
                     #@colLabel()发布负责人#end
                     #@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("proectRD;" project?.projectRD {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="CT">Connecticut</option>
                             <option value="DE">Delaware</option>
                             <option value="FL">Florida</option>
@@ -219,7 +219,7 @@
                 #@elementItem()
                     #@sdpmItem("关联产品")
                     ###tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
-                        #@tinySelect("linkProduct" "zh" {"class":"input-text select2","rel":"22","multiple":"multiple"})
+                        #@tinySelect("linkProduct" project?.linkProduct {"class":"input-text select2","rel":"22","multiple":"multiple"})
                             #for(p : prodcutList)
                             #@tinyOptionItem(p.productId)${p.productName}#end
                         #end
@@ -228,7 +228,7 @@
             <br/>
                 #@elementItem()
                     #@sdpmItem("项目描述")
-                        #@Teditor("projectDesc" "content" {"initialFrameHeight":"200"})Say something#end
+                        #@Teditor("projectDesc" "content" {"initialFrameHeight":"200"})${project?.projectDesc}#end
                     #end
                 #end
                 #@elementItem()

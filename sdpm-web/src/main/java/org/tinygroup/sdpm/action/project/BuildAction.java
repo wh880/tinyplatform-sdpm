@@ -80,6 +80,7 @@ public class BuildAction extends BaseController {
         return "project/version/index.page";
     }
 
+
     @ResponseBody
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public Map<String, String> delete(Integer id, Model model) {
@@ -94,6 +95,19 @@ public class BuildAction extends BaseController {
         }
 
         return map;
+    }
+
+    @RequestMapping("/product-al-bug")
+    public String jumpalBug() {
+        return "/project/task/relation-release/product-al-bug.page";
+    }
+    @RequestMapping("/product-al-le-bug")
+    public String jumpleBug() {
+        return "/project/task/relation-release/product-al-le-bug.page";
+    }
+    @RequestMapping("/product-al-no-bug")
+    public String jumpanoBug() {
+        return "/project/task/relation-release/product-al-no-bug.page";
     }
 
 }
