@@ -178,9 +178,9 @@
             #@formControlDiv("col-4")
                 #@Tselect2F()
                     #@Tselect2Body("storyPri" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="CT">Admin</option>
-                        <option value="DE">Demo</option>
-                        <option value="FL">Me</option>
+                        <option value="1">Admin</option>
+                        <option value="2">Demo</option>
+                        <option value="3">Me</option>
                     #end
 
                 #* #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#
@@ -203,7 +203,7 @@
         #@elementItem()
             #@sdpmItem("由谁评审")
                 #@Tselect2F()
-                    #@Tselect2Body("storyReviewedBy" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":"orgUser","data":"orgDeptId=23&orgUserAccount=zhangsan"})
+                    #@Tselect2Body("storyReviewedBy" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":"orgUser","data":""})
                         
                     #end
 

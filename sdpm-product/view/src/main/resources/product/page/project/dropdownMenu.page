@@ -2,7 +2,7 @@
 
 #@navSelect2("product" "product")
 	#@navSelect2Nav()
-		#if(productId)
+		#if(productList)
 			#for(product : productList)
 				#if(product?.productId == sessionProductId)
 					${product?.productName}

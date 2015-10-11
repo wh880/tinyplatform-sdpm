@@ -58,7 +58,7 @@ public class ProductAction  extends BaseController{
 			list = productService.findProductList(new Product(),"productId","desc");
 			request.getSession().setAttribute("productList",list);
 			
-			if(null==request.getSession().getAttribute("sessionProductId")){
+			if(request.getSession().getAttribute("sessionProductId")==null){
 				request.getSession().setAttribute("sessionProductId",list.size()>0?list.get(0).getProductId():null);
 			}
 		}
