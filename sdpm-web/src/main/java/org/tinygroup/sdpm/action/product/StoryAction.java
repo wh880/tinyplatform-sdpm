@@ -150,7 +150,9 @@ public class StoryAction extends BaseController{
     @RequestMapping("/search")
     public String storySearchAction(int page, int pagesize, ProductStory story, String choose, String groupOperate, SearchInfos searchInfos, String order, String ordertype, Model model, HttpServletRequest request){
         
-    	story.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+    	if(request.getSession().getAttribute("sessionProductId")!=null){
+    		story.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+    	}
     	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList",p);
         return "product/data/tabledata.pagelet";
