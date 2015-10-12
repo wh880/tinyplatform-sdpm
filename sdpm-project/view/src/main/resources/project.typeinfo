@@ -4,7 +4,7 @@
 	    <info name="productInfo" title="产品信息" infoParameter="" url="/product/page/tabledemo/baseinfo.pagelet" resource="product"/>
 	</type-info>	
 	<type-info name="projectEdit"  >
-	    <info name="projectInfo" title="项目信息" infoParameter="taskId" url="/project/task/basicInfoEdit.pagelet" resource="projectEdit"/>
+	    <info name="projectInfo" title="项目信息" infoParameter="taskId" url="/project/task/basicInfoEdit" resource="projectEdit"/>
 	</type-info>
 	<type-info name="projectView"  >
 	    <info name="projectInfo" title="项目信息" infoParameter="" url="/project/task/basicInfoView.pagelet" resource="projectView"/>

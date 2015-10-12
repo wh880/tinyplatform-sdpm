@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +38,10 @@ public class TaskAction extends BaseController {
     private ProjectService projectService;
     @Autowired
     private TeamService teamService;
+    @Autowired
+    private ModuleService moduleService;
+    @Autowired
+    private ProjectStoryService storyService;
 
     @RequestMapping("index")
     public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model) {
@@ -96,10 +105,13 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/finish")
-    public String finish(Integer taskId, Model model) {
+    public String finish(Integer taskId, Model model, HttpServletRequest request) {
         if (taskId != null) {
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+            List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
             ProjectTask task = taskService.findTask(taskId);
             model.addAttribute("task", task);
+            model.addAttribute("teamList", teamList);
             //还需要查询其他相关任务剩余时间的信息
             return "project/task/finish.page";
         }
@@ -174,23 +186,26 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/closesave", method = RequestMethod.POST)
-    public String closesave(ProjectTask task, Model model) {
-        if (task.getTaskId() == null) {
-            taskService.addTask(task);
-        } else {
-            taskService.updateCloseTask(task);
-        }
-        model.addAttribute("task", task);
+    public String closesave(ProjectTask task, Model model, SystemAction systemAction) {
+        taskService.updateCloseTask(task);
+
+        systemAction.setActionObjectId(task.getTaskId());
+        systemAction.setActionProject(task.getTaskProject());
+        systemAction.setActionObjectType("task");
+        systemAction.setActionActor("close");
+        logService.log(systemAction);
         return "project/task/index.page";
     }
 
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public String editSave(ProjectTask task, Model model) {
-        if (task.getTaskId() == null) {
-            taskService.addTask(task);
-        } else {
-            taskService.updateEditTask(task);
-        }
+    public String editSave(ProjectTask task, Model model, SystemAction systemAction) {
+        taskService.updateEditTask(task);
+
+        systemAction.setActionObjectId(task.getTaskId());
+        systemAction.setActionProject(task.getTaskProject());
+        systemAction.setActionObjectType("task");
+        systemAction.setActionActor("close");
+        logService.log(systemAction);
         model.addAttribute("task", task);
         return "project/task/index.page";
     }
@@ -257,8 +272,22 @@ public class TaskAction extends BaseController {
 
     @RequestMapping("/basicInfoEdit")
     public String basicInfoEdit(Integer taskId, Model model) {
+        ProjectTask task = taskService.findTask(taskId);
+        String projectName = projectService.findById(task.getTaskProject()).getProjectName();
+        List<ProjectTeam> teamList = teamService.findTeamByProjectId(task.getTaskProject());
+        SystemModule systemModule = new SystemModule();
+        systemModule.setModuleRoot(task.getTaskProject());
+        systemModule.setModuleType("project");
+        List<SystemModule> modulesList = moduleService.findModuleList(systemModule);
 
-        return "project/task/basicInfoEdit.page";
+        List<ProductStory> storyList = storyService.findStoryByProject(task.getTaskProject());
+
+        model.addAttribute("task", task);
+        model.addAttribute("projectName", projectName);
+        model.addAttribute("teamList", teamList);
+        model.addAttribute("modulesList", modulesList);
+        model.addAttribute("storyList", storyList);
+        return "project/task/basicInfoEdit.pagelet";
     }
 
 }

@@ -3,7 +3,13 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
-
+<style>
+    .infoPage-right .infoContent th {
+        width: 80px;
+        vertical-align: middle;
+        text-align: right;
+    }
+</style>
 #set(name="survey")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -110,7 +116,7 @@
             #include("/project/recordlist.page")
         #end
     </div>
-    <div style="width:30%;float:right">
+    <div style="width:30%;float:right" class="infoPage-right">
         #TypeInfo("project")
     </div>
     #end
