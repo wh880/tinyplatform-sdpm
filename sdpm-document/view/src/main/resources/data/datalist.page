@@ -2,7 +2,7 @@
 ##${docpager.getTotalCount()}
 #foreach(l:docpager.getRecords())
 #@tr()
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
+	#@td()<input type="checkbox" value="${l?.docId}" name="idCheck" id="checkboxall">#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view?libId=${l?.docLibId}&docid=${l?.docId}">${l?.docId}</a>#end
 	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view?libId=${l?.docLibId}&docid=${l?.docId}">${l?.docTitle}</a>#end
 	#@td()${l?.getDocType()}#end
