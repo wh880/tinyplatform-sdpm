@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
@@ -40,13 +41,15 @@ public class RequestAction extends BaseController {
     }
 
     @RequestMapping(value = "/list/data")
-    public String listData(Integer limit, Integer start, ServiceRequest clientRequest, Integer status, Integer operation, Model model) {
+    public String listData(Integer limit, Integer start, ServiceRequest clientRequest, Integer status, Integer operation, Model model,
+                           @RequestParam(required = false, defaultValue = "clientName") String order,
+                           @RequestParam(required = false, defaultValue = "asc") String ordertype) {
         if (operation != null && operation == 1) {
-            Pager<ServiceRequest> pager = requestService.findReplyByMe(start, limit, operation, clientRequest);
+            Pager<ServiceRequest> pager = requestService.findReplyByMe(start, limit, operation, clientRequest, order, ordertype);
             model.addAttribute("pager", pager);
             return "service/serviceReq/requestTableData.pagelet";
         }
-        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest);
+        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, order, ordertype);
         model.addAttribute("pager", pager);
         return "service/serviceReq/requestTableData.pagelet";
     }

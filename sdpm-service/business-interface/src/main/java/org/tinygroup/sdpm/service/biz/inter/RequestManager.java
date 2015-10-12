@@ -70,13 +70,13 @@ public interface RequestManager {
      *
      * @return
      */
-    Pager<ServiceRequest> findPager(Integer start, Integer limit, Integer status, ServiceRequest serviceRequest);
+    Pager<ServiceRequest> findPager(Integer start, Integer limit, Integer status, ServiceRequest serviceRequest, String order, String ordertype);
     /**
      * 分页查找由我解决的请求
      *
      * @return
      */
-    Pager<ServiceRequest> findReplyByMePager(Integer start, Integer limit, Integer status, ServiceRequest serviceRequest);
+    Pager<ServiceRequest> findReplyByMePager(Integer start, Integer limit, Integer status, ServiceRequest serviceRequest, String order, String ordertype);
 
     /**
      * 关闭请求

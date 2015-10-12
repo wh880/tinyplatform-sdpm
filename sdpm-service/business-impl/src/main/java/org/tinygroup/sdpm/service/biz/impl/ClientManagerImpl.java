@@ -3,6 +3,8 @@ package org.tinygroup.sdpm.service.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.service.biz.inter.ClientManager;
 import org.tinygroup.sdpm.service.dao.ServiceClientDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
@@ -23,8 +25,8 @@ public class ClientManagerImpl implements ClientManager {
         return clientDao.getByKey(id);
     }
 
-    public Pager<ServiceClient> findPager(Integer start, Integer limit, ServiceClient serviceClient) {
-        return clientDao.queryPager(start, limit, serviceClient);
+    public Pager<ServiceClient> findPager(Integer start, Integer limit, ServiceClient serviceClient, String order, String ordertype) {
+        return clientDao.queryPager(start, limit, serviceClient, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
     }
 
     public List<ServiceClient> getList(ServiceClient client) {
