@@ -42,12 +42,12 @@ public class BugManagerImpl implements BugManager {
 		return bugdao.batchUpdate(bugs);
 	}
 	
-	public Pager<QualityBug> findPager(Integer start,Integer limit,QualityBug bug,String sortName,boolean asc){
+	public Pager<QualityBug> findPager(Integer start,Integer limit,String conditions,QualityBug bug,String sortName,boolean asc){
 		if(StringUtil.isBlank(sortName)){
-			return bugdao.queryPager(start, limit, bug);
+			return bugdao.queryPager(start,limit,conditions,bug);
 		}else{
 			OrderBy orderby = new OrderBy(sortName,asc);
-			return bugdao.queryPager(start, limit, bug, orderby);
+			return bugdao.queryPager(start, limit, conditions, bug, orderby);
 		}		
 	}
 

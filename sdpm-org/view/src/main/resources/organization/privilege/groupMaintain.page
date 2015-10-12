@@ -18,98 +18,86 @@
     }
 </style>
 #set(name="organizationPrivilege")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/organization/common/tab.page")
-        #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-            <span class="f">
-					<dr>角色成员维护</dr>
-            </span>
-
-
-            </span>
-                #div(divClass="clearfix")
-
+#@tinyForm("roleUserManager" TINY_CONTEXT_PATH+"/org/roleUser/save" "post")
+<input type="hidden" name="id" value="${id}"/>
+    #@div()
+        #@tabWithInit("tab_demo" "optionsBox")
+            #@tabHead()
+                #include("/organization/common/tab.page")
             #end
-        #end
+            #@tabBodyCol("ptop-5")
+                #@div(divClass="operationbar")
+                <span class="f">角色成员维护</span>
+                    #div(divClass="clearfix")
 
-    #end
-#end
-
-
-#@noRespsGridSystem()
-    #@gridSysRow()
-        #@gridSysCol(3)
-        #end
-        #@gridSysCol(6)
-            #@gridSysRow()
-            <ul id="treeDemo" class="ztree" style="width:100%;min-height:360px;max-height:300px;"></ul>
-
-            <div style="padding-top: 20px;float: right">
-                #@div(divClass="col-7 col-offset-5 form-inline")
-                        #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+                #end
+                #@table()
+                    #@tr()
+                        #@td()
+                            #@Tcheckboxes("array" linkString)
+                                #for(p : userList)
+                                #@gridSysCol(2)
+                                    #@Tcheckbox(p.orgUserId)${p?.orgUserRealName}#end
+                                #end
+                            #end
+                        #end
                     #end
-            </div>
-
-
+                #end
             #end
-
-        #end
-        #@gridSysCol(3)
         #end
 
     #end
+<center>
+    <input type="submit" class="radius btn-primary btn" value="保存">
+</center>
+#end
 #end
 
 
-
-<SCRIPT type="text/javascript">
-    <!--
-    var setting = {
-        check: {
-            enable: true
-        },
-        data: {
-            simpleData: {
-                enable: true
-            }
-        }
-    };
-
-    var zNodes = [
-
-
-        {id: 4, pId: 0, name: "研发部", open: true, nocheck: true},
-        {id: 41, pId: 4, name: "张三"},
-        {id: 42, pId: 4, name: "李四"},
-        {id: 43, pId: 4, name: "王五"},
-        {id: 44, pId: 4, name: "赵六"},
-        {id: 45, pId: 4, name: "刘八"},
-        {id: 46, pId: 4, name: "宋九"},
-        {id: 47, pId: 4, name: "吴十"},
-        {id: 5, pId: 0, name: "测试中心", open: true, nocheck: true},
-        {id: 51, pId: 5, name: "测试妹子1"},
-        {id: 52, pId: 5, name: "测试妹子2"},
-        {id: 53, pId: 5, name: "测试妹子3"},
-        {id: 54, pId: 5, name: "测试妹子4)"},
-        {id: 8, pId: 0, name: "信息中心", open: true, nocheck: true},
-        {id: 81, pId: 8, name: "信息汉子1"},
-        {id: 82, pId: 8, name: "信息汉子2", open: true, nocheck: true},
-        {id: 91, pId: 82, name: "信息汉子3"},
-        {id: 92, pId: 82, name: "信息汉子4", open: true, nocheck: true},
-        {id: 102, pId: 92, name: "信息汉子5"},
-    ];
-
-
-    $(document).ready(function () {
-
-        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-
-    });
-    //-->
-</SCRIPT>
+##<SCRIPT type="text/javascript">
+##    <!--
+##    var setting = {
+##        check: {
+##            enable: true
+##        },
+##        data: {
+##            simpleData: {
+##                enable: true
+##            }
+##        }
+##    };
+##
+##    var zNodes = [
+##
+##
+##        {id: 4, pId: 0, name: "研发部", open: true, nocheck: true},
+##        {id: 41, pId: 4, name: "张三"},
+##        {id: 42, pId: 4, name: "李四"},
+##        {id: 43, pId: 4, name: "王五"},
+##        {id: 44, pId: 4, name: "赵六"},
+##        {id: 45, pId: 4, name: "刘八"},
+##        {id: 46, pId: 4, name: "宋九"},
+##        {id: 47, pId: 4, name: "吴十"},
+##        {id: 5, pId: 0, name: "测试中心", open: true, nocheck: true},
+##        {id: 51, pId: 5, name: "测试妹子1"},
+##        {id: 52, pId: 5, name: "测试妹子2"},
+##        {id: 53, pId: 5, name: "测试妹子3"},
+##        {id: 54, pId: 5, name: "测试妹子4)"},
+##        {id: 8, pId: 0, name: "信息中心", open: true, nocheck: true},
+##        {id: 81, pId: 8, name: "信息汉子1"},
+##        {id: 82, pId: 8, name: "信息汉子2", open: true, nocheck: true},
+##        {id: 91, pId: 82, name: "信息汉子3"},
+##        {id: 92, pId: 82, name: "信息汉子4", open: true, nocheck: true},
+##        {id: 102, pId: 92, name: "信息汉子5"},
+##    ];
+##
+##
+##    $(document).ready(function () {
+##
+##        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+##
+##    });
+##    //-->
+##</SCRIPT>
 
 

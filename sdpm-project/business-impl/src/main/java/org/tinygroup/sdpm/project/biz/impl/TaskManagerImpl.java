@@ -66,7 +66,7 @@ public class TaskManagerImpl implements TaskManager {
     }
 
     public Integer updateEditTask(ProjectTask task) {
-        return taskDao.editTask(task);
+        return taskDao.updateColum(task);
     }
 
     public Integer updateCallTask(ProjectTask task) {
@@ -74,14 +74,14 @@ public class TaskManagerImpl implements TaskManager {
     }
 
     public Integer updateFinishTask(ProjectTask task) {
-        return taskDao.editfinish(task);
+        return taskDao.updateColum(task);
     }
 
     public Integer updateStartTask(ProjectTask task) {
         return taskDao.editstart(task);
     }
     public Integer updateCloseTask(ProjectTask task) {
-        return taskDao.editclose(task);
+        return taskDao.updateColum(task);
     }
 
     public Integer delete(int id) {

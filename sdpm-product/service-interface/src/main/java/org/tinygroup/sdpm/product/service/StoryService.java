@@ -3,7 +3,6 @@ package org.tinygroup.sdpm.product.service;
 import java.util.List;
 
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
@@ -43,6 +42,8 @@ public interface StoryService {
 	 */
 	ProductStory findStory(Integer storyId);
 	
+/*	Pager<ProductStory> findUserPaging(Integer start, Integer limit, ProductStory story);
+*/	
 	/**
 	 * 根据多个ID查找
 	 * @param storyId

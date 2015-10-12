@@ -24,7 +24,7 @@ public interface BugManager {
 	 * 分页查询
 	 * @return
 	 */
-	Pager<QualityBug> findPager(Integer start,Integer limit,QualityBug bug,String sortName,boolean asc);
+	Pager<QualityBug> findPager(Integer start,Integer limit,String conditions,QualityBug bug,String sortName,boolean asc);
 	
 	/**
 	 * 提Bug

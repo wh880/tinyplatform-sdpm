@@ -47,24 +47,23 @@
         #set(m1=menuManager.getMenu("request-batchdel"))
         #if(m1)
             #@mulOperation("muldelete" TINY_CONTEXT_PATH+"/service/request/batchDelete")
-            <a class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
+            <a class="btn radius btn-danger"><i class="icon-trash"></i> 批量删除</a>
             #end
-        ##            #@radiusBtn(
-        ##                "btn radius btn-danger" "icon-trash" "javascript:;" "deleteBatch" "batchDel") ${m1.name}#end
         #end
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/service/request/list/data?status="+status) ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/service/request/list/data?status="+status+
+        "&operation="+operation) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
             ##                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})请求ID#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})客户名称#end
-                #@tinyTh({"class":"","rel":"sortname"})请求标题#end
-                #@tinyTh({"class":"","rel":"sortname"})请求优先级#end
-                #@tinyTh({"class":"","rel":"sortname"})状态#end
-                #@tinyTh({"class":"","rel":"sortname"})请求承诺完成时间#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})指派回复#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})指派回访#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"clientName"})客户名称#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"requestTitle"})请求标题#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"requestPre"})请求优先级#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"requestStatus"})状态#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"requestCommitmentDate"})请求承诺完成时间#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"replier"})指派回复#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"requestReviewer"})指派回访#end
                 #@tinyTh({"class":"","rel":"sortname"})操作#end
             #end
         #end

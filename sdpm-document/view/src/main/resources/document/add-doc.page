@@ -18,7 +18,7 @@
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">创建文档</p>
-			#@elementItem()
+#*			#@elementItem()
 					#@colLabel()所属产品#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
@@ -34,7 +34,7 @@
                 	  #end
                 	  #end
                 	  #end
-				#end				
+				#end				*#
 	
 			#@elementItem()
 					#@colLabel()所属分类#end

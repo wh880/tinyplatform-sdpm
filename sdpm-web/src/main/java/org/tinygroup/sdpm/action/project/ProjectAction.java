@@ -92,4 +92,43 @@ public class ProjectAction extends BaseController {
         model.addAttribute("project", project);
         return "project/survey/index.page";
     }
+    @RequestMapping(value = "/delaysave", method = RequestMethod.POST)
+    public String delaySave(Project project, Model model) {
+        if (project.getProjectId() == null) {
+            projectService.addProject(project);
+        } else {
+            projectService.updateProject(project);
+        }
+        model.addAttribute("project", project);
+        return "redirect:/projectmanage/survey/index";
+    }
+    @RequestMapping("/delay")
+    public String delay(Integer projectId, Model model) {
+        if (projectId != null) {
+            Project project = projectService.findById(projectId);
+            model.addAttribute("project", project);
+            //还需要查询其他相关任务剩余时间的信息
+            return "/project/survey/delay.pagelet";
+        }
+        return "error";
+    }
+
+    @RequestMapping("/hangup")
+    public String hangup(Integer projectId, Model model) {
+        if (projectId != null) {
+            Project project = projectService.findById(projectId);
+            model.addAttribute("project", project);
+            //还需要查询其他相关任务剩余时间的信息
+            return "/project/survey/hang-up.pagelet";
+        }
+        return "error";
+    }
+
+    @RequestMapping("/basicInformation")
+    public String basicInformation(Integer projectID, Model model){
+
+        Project project = projectService.findById(projectID);
+        model.addAttribute("project", project);
+        return "project/survey/basicInformation.pagelet";
+    }
 }

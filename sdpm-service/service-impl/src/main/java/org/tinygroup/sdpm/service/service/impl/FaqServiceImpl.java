@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.service.biz.inter.FaqManager;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
 import org.tinygroup.sdpm.service.service.inter.FaqService;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -25,9 +26,9 @@ public class FaqServiceImpl implements FaqService{
     }
 
     /*分页*/
-/*public Pager<ServiceFaq> getFaqpage(int start, int limit) {
-    return faqManager.getpage( start, limit);
-}*/
+    public Pager<ServiceFaq> getFaqpage(Integer start, Integer limit, ServiceFaq faq) {
+        return faqManager.getpage(start, limit, faq);
+    }
     public ServiceFaq addFaq(ServiceFaq faq) {
         return faqManager.add(faq);
     }

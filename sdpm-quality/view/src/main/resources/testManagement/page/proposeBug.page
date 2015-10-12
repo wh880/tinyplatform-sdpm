@@ -30,11 +30,27 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("productId" product?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                       	 #foreach(product : productList)
+	                   		 #@Tselect2Body("productId" product?.productId?:qualityProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                       	 #foreach(product : qualityProductList)
 	                       		 <option value="${product?.productId}">${product?.productName}</option>
 	                       	 #end	                     
-	                    	#end                  
+	                    	#end
+							<script type="text/javascript">
+								$("#${sid}").on("change",function(){
+									var pId = $("#${sid}  option:selected").val();
+									#if(bug?.moduleId)
+										ajaxRead("moduleId","moduleId","moduleTitle","/quality/bug/ajax/module?productId="+pId,${bug?.moduleId});
+									#else
+										ajaxRead("moduleId","moduleId","moduleTitle","/quality/bug/ajax/module?productId="+pId,12);
+									#end
+									#if(bug?.storyId)
+										ajaxRead("storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId,${bug?.storyId});
+									#else
+										ajaxRead("storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId);
+									#end
+
+								})
+							</script>
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
@@ -44,10 +60,9 @@
 					#@div(divClass="col-3")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("moduleId" bug?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">/1/2</option>
-	                        <option value="2">/2/3</option>
-	                        <option value="3">/3/4</option>
-	                    	#end                
+
+	                    	#end
+
                 	  #end
 #*					#@tinySelect("lang" "zh" {"class":"select2"})
 							#@tinyOptionItem("zh")/首页#end
@@ -65,10 +80,20 @@
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("projectId" bug?.projectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">1</option>
-	                        <option value="2">2</option>
-	                        <option value="3">3</option>
-	                    	#end                
+								#foreach(project : projectList)
+									<option value="${project?.projectId}">${project?.projectName}</option>
+								#end
+							#end
+							<script type="text/javascript">
+								$("#${sid}").on("change",function(){
+									var pId = $("#${sid}  option:selected").val();
+									#if(bug?.storyId)
+									ajaxRead("taskId","taskId","taskName","/quality/bug/ajax/task?projectId="+pId,${bug?.storyId});
+									#else
+									ajaxRead("taskId","taskId","taskName","/quality/bug/ajax/task?projectId="+pId,12);
+									#end
+								})
+							</script>
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
@@ -146,9 +171,12 @@
 					#@div(divClass="col-5")
 							 #@Tselect2F()
 	                   		 #@Tselect2Body("storyId" bug?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="2">1</option>
-	                        <option value="1">2</option>
-	                        <option value="3">3</option>
+								<script type="text/javascript">
+									$(document).ready(function(){
+										var pId = $("select[name=productId]  option:selected").val();
+										ajaxRead("storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId);
+									});
+								</script>
 	                    	#end                
 	                      	#@Tselect2Fix()
 	                      	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
@@ -312,5 +340,43 @@
 #end
 <script>
 	$('select.select2').select2()
+</script>
+<script type="text/javascript">
+	$(".select2").select2();
+
+	function ajaxRead(toName,opKey,opvalue,url,value){
+		var selectCheck = "select[name="+toName+"]";
+		$(selectCheck).each(function(){
+			var sele = $(this);
+			var s;
+			$.ajax({
+				type: "POST",
+				url: "${TINY_CONTEXT_PATH}"+url,
+				data: $(this).attr('data'),
+				dataType:"json",
+				success: function(data){
+					for(var i=0,l=data.length;i<l;i++){
+						alert(data[i][opKey]+" "+value);
+						if(data[i][opKey] == value){
+							s = "selected";
+						}else{
+							s="";
+						}
+						var em = "<option value='"+data[i][opKey]+"'"+s+" >"+ data[i][opvalue] +"</option>";
+						sele.append(em);
+
+					}
+					sele.val(data[0][opKey]).trigger("change");
+
+				},
+				error: function(res){
+					alert("失败");
+				}
+			});
+
+
+		});
+
+	}
 </script>
 

@@ -3,21 +3,27 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
-<style> </style>
 #set(name="documentDocu")
 #include("doc-tab.page")
 #@div()
 	#@p(pClass="title_sty")
 		<span class="f"> 版本名称</span>
 		<span class="r">
-					
-			<a href="${TINY_CONTEXT_PATH}/document/doc/edit?docId=${doc?.docId}" title="编辑">
-				#buttonIcon(iconClass="icon-pencil")</a>&nbsp
-				#@tinyTableItemRemove(TINY_CONTEXT_PATH+"/document/doc/delete" doc.docId)
-					#buttonIcon(iconClass="icon-remove")
-				#end&nbsp
-			<a href="${TINY_CONTEXT_PATH}/document" title="返回">
-				#buttonIcon(iconClass="icon-level-up")</a>
+			#foreach(m:menuManager.getScopeMenus("doc-view-op"))
+				#if(m.id == "doc-view-delete")
+					#@delItemsdpm(TINY_CONTEXT_PATH+m.href doc?.docId TINY_CONTEXT_PATH+"/document")
+						#buttonIcon(iconClass=m.icon)
+					#end&nbsp
+				#else
+				#if(m.id == "doc-view-edit")
+					<a href="${TINY_CONTEXT_PATH}${m.href}?docId=${doc?.docId}" title="${m.name}">
+						#buttonIcon(iconClass=m.icon)</a>&nbsp
+				#else
+					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+						#buttonIcon(iconClass=m.icon)</a>&nbsp
+				#end	
+				#end
+			#end											
 		</span>
 	#end
 <div style="width:70%;float:left" class="pageleftpart">
@@ -44,14 +50,21 @@
         #include("../data/historyRecord.page")
     #end
     <center>		
-			<a href="${TINY_CONTEXT_PATH}/document/doc/edit?docid=${doc?.docId}" title="编辑">
-				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			#@tinyTableItemRemove(TINY_CONTEXT_PATH+"/document/doc/delete" doc.docId)
-					#buttonIcon(iconClass="icon-remove")
+		#foreach(m:menuManager.getScopeMenus("doc-view-op"))
+				#if(m.id == "doc-view-delete")
+					#@delItemsdpm(TINY_CONTEXT_PATH+m.href doc?.docId TINY_CONTEXT_PATH+"/document")
+						#buttonIcon(iconClass=m.icon)
+					#end&nbsp
+				#else
+				#if(m.id == "doc-view-edit")
+					<a href="${TINY_CONTEXT_PATH}${m.href}?docId=${doc?.docId}" title="${m.name}">
+						#buttonIcon(iconClass=m.icon)</a>&nbsp
+				#else
+					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+						#buttonIcon(iconClass=m.icon)</a>&nbsp
+				#end	
 				#end
-				&nbsp&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/document" title="返回">
-				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
+		#end
 	</center>
 </div>
 <div style="width:30%;float:right;">

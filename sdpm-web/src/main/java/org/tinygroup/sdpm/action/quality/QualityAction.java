@@ -21,10 +21,10 @@ public class QualityAction extends BaseController {
     private ProductService productService;
     @RequestMapping("")
     public String qualityAction(HttpServletRequest request){
-        List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
+        List<Product> list = (List<Product>) request.getSession().getAttribute("qualityProductList");
         if(list == null|| list.size()==0){
             list = productService.findProductList(new Product(),"productId","desc");
-            request.getSession().setAttribute("productList",list);
+            request.getSession().setAttribute("qualityProductList",list);
         }
 
         if(null==request.getSession().getAttribute("qualityProductId")||""==request.getSession().getAttribute("qualityProductId")){

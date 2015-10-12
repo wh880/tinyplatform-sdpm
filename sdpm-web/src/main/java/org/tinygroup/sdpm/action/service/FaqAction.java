@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
 import org.tinygroup.sdpm.service.service.inter.FaqService;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -59,7 +59,7 @@ public class FaqAction extends BaseController {
 
     /*把faqmenu页面的所有问题都查询出来*/
     @RequestMapping("/list")
-    public String list(ServiceFaq faq, Integer id,
+    public String list(ServiceFaq serviceFaq, Integer id, Integer start, Integer limit,
                        @RequestParam(required = false, defaultValue = "1") int page,
                        @RequestParam(required = false, defaultValue = "10") int pageSize,
                        @RequestParam(required = false, defaultValue = "faqId") String order,
@@ -67,13 +67,14 @@ public class FaqAction extends BaseController {
                        Model model)
     {
         /*查询问题总条数*/
-        Integer totalNum = faqService.selectcount(id);
-
-        List<ServiceFaq> list=faqService.getFaqList(faq);
+        /*Integer totalNum = faqService.selectcount(id);*/
+        /*List<ServiceFaq> list=faqService.getFaqList(faq);*/
         /*分页*/
-       /* Pager<ServiceFaq> list=faqService.getFaqpage(int start,int limit);*/
-        model.addAttribute("list",list);
-        model.addAttribute("totalNum", totalNum);
+        start = (page - 1) * pageSize;
+        limit = pageSize;
+        Pager<ServiceFaq> list = faqService.getFaqpage(start, limit, serviceFaq);
+        model.addAttribute("pager", list);//list.CurrentPage
+        //model.addAttribute("totalNum", totalNum);
         return "/service/faq/faqmenu.page";
     }
     /*删除*/

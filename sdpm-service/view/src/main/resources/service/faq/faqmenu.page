@@ -4,7 +4,7 @@
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
 ##     #import("/fulimanageui/form.component")
 
-#set(pageSize=10,pages=toInt(totalNum/pageSize+1))
+##set(pageSize=10,pages=toInt(totalNum/pageSize+1))
 <style>
     .faqSty {
         margin: 5px;
@@ -65,11 +65,10 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
                 #end
             ##以下内容，加载faq右边页面-“具体的5个问题以及问题后面的编辑和删除按钮”，包含在faqquestion.page里面
                 #include("/service/faq/faqquestion.page")
-            ##以上内容，加载faq右边页面-“具体的5个问题以及问题后面的编辑和删除按钮”，包含在faqquestion.page里面
             #end
 
         ##    以下实现faqmenu.page页面下面的分页
-        <div class="btnsty-page">#tinyPageNav("bodyconentrap" page pages "")</div>
+        <div class="btnsty-page">#tinyPageNav("bodyconentrap" pager.currentPage pager.totalPages "")</div>
         ##与上面一行的区别，是将“1”改为“page”,page为当前页码，“10”为总页码<div class="btnsty-page">#tinyPageNav("bodyconentrap" page 10 "../page/faqmenu.page")</div>
         ##    以上实现faqmenu.page页面下面的分页
         #end
