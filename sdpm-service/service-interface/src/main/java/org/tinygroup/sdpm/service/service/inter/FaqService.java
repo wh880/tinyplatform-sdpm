@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.service.service.inter;
 
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public interface FaqService {
      * @param faq 用于查询条件
      * @return
      */
-   /* Pager<ServiceFaq> getFaqpage(int start, int limit);*/
+    Pager<ServiceFaq> getFaqpage(Integer start, Integer limit, ServiceFaq faq);
 
     /**
      * 新增一个faq
