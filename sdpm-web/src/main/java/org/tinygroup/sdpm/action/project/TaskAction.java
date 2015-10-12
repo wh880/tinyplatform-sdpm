@@ -11,6 +11,7 @@ import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
@@ -80,9 +81,13 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/call")
-    public String call(Integer taskId, Model model) {
+    public String call(Integer taskId, Model model, HttpServletRequest request) {
         if (taskId != null) {
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
             ProjectTask task = taskService.findTask(taskId);
+            List<ProjectTeam> team = teamService.findTeamByProjectId(projectId);
+
+            model.addAttribute("teamList", team);
             model.addAttribute("task", task);
             //还需要查询其他相关任务剩余时间的信息
             return "project/task/call.page";
