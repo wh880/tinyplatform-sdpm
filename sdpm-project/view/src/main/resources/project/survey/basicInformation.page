@@ -16,6 +16,7 @@
                 #@tr()
                     #@td()起止时间#end
                     #@td()${selProject?.projectBegin}~${selProject?.projectEnd}#end
+                ##                #formatDate(selProject?.projectBegin, "yyyy-MM-dd")~#formatDate(selProject?.projectEnd, "yyyy-MM-dd")
                 #end
                 #@tr()
                     #@td()可用工作日#end

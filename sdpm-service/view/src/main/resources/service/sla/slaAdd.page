@@ -177,7 +177,7 @@
                     <div class="col-2 text-r"><label>协议表述：</label></div>
 
                     <div class="col-9">
-                        #@Teditor("content" "slaSpec" {"initialFrameHeight":"150"})#end</div>
+                        #@Teditor("content" "slaSpec" {"initialFrameHeight":"150"})${sla?.slaSpec}#end</div>
                 </div>
             #end
         </div>
