@@ -14,7 +14,10 @@ import org.tinygroup.sdpm.org.service.inter.DeptService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -78,9 +81,32 @@ public class UserAction extends BaseController {
         return "redirect:/org/user/list/";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/batchDelete")
+    public Map batchDelete(String ids) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (ids == null) {
+            map.put("status", "n");
+            map.put("info", "删除失败");
+            return map;
+        }
+        List<OrgUser> list = new ArrayList<OrgUser>();
+        for (String s : ids.split(",")) {
+            OrgUser orgUser = new OrgUser();
+            orgUser.setOrgUserId(s);
+            orgUser.setOrgUserDeleted(OrgUser.DELETE_YES);
+            list.add(orgUser);
+        }
+        userService.deleteBatchUser(list);
+        map.put("status", "y");
+        map.put("info", "删除成功");
+        return map;
+    }
+
     @RequestMapping("/list/data")
     public String listData(Integer orgDeptId, Integer start, Integer limit, OrgUser orgUser, Model model) {
         if (orgDeptId == null || orgDeptId == -1) {
+            orgUser.setOrgDeptId(null);
             Pager<OrgUser> pager = userService.findUserPager(start, limit, orgUser);
             model.addAttribute("pager", pager);
         } else {

@@ -322,6 +322,22 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         });
     }
 
+
+    public int[] softDeleteBatch(List<OrgUser> list) {
+        if (CollectionUtil.isEmpty(list)) {
+            return new int[0];
+        }
+        return getDslTemplate().batchUpdate(list, new NoParamUpdateGenerateCallback() {
+
+            public Update generate() {
+                return update(ORG_USERTABLE).set(
+                        ORG_USERTABLE.ORG_USER_DELETED.value(new JdbcNamedParameter("orgUserDeleted"))).where(
+                        ORG_USERTABLE.ORG_USER_ID.eq(new JdbcNamedParameter("orgUserId")));
+            }
+        });
+    }
+
+
     public int[] batchDelete(List<OrgUser> orgUsers) {
         if (CollectionUtil.isEmpty(orgUsers)) {
             return new int[0];
