@@ -76,9 +76,8 @@ public class ClientAction extends BaseController {
             clientService.addClientUser(serviceClientUser);
         } else {
             clientService.updateClient(client);
-
+            model.addAttribute("client", client);
         }
-        model.addAttribute("client", client);
         return "redirect:/service/client/list";
     }
 

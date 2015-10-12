@@ -52,6 +52,11 @@ public class RequestManagerImpl implements RequestManager{
         return requestDao.queryPagerBy(start, limit,serviceRequest,status);
     }
 
+    public Pager<ServiceRequest> findReplyByMePager(Integer start, Integer limit, Integer operation, ServiceRequest serviceRequest) {
+        return requestDao.queryPagerReplyByMe(start, limit, serviceRequest, operation);
+    }
+
+
     public Integer close(ServiceRequest clientRequest) {
         return requestDao.close(clientRequest);
     }

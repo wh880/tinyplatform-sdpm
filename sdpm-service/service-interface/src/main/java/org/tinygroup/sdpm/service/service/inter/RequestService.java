@@ -67,6 +67,13 @@ public interface RequestService {
     Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, Integer status,ServiceRequest clientRequest);
 
     /**
+     * 查找数据库的由我解决的记录
+     *
+     * @return
+     */
+    Pager<ServiceRequest> findReplyByMe(Integer start, Integer limit, Integer status, ServiceRequest clientRequest);
+
+    /**
      * 关闭请求
      *
      * @return
@@ -79,8 +86,20 @@ public interface RequestService {
      */
     Integer saveReply(ServiceRequest clientRequest);
 
+    /**
+     * 指派回复
+     *
+     * @param
+     * @return
+     */
     int[] updateReply(List<ServiceRequest> list);
 
+    /**
+     * 指派回访
+     *
+     * @param
+     * @return
+     */
     int[] updateReview(List<ServiceRequest> list);
 
     /**

@@ -33,13 +33,19 @@ public class RequestAction extends BaseController {
     private ClientService clientService;
 
     @RequestMapping(value = "/list")
-    public String list(ServiceRequest clientRequest, Integer status, Model model) {
+    public String list(Integer operation, Integer status, Model model) {
         model.addAttribute("status", status);
+        model.addAttribute("operation", operation);
         return "service/serviceReq/request.page";
     }
 
     @RequestMapping(value = "/list/data")
-    public String listData(Integer limit, Integer start, ServiceRequest clientRequest, Integer status, Model model) {
+    public String listData(Integer limit, Integer start, ServiceRequest clientRequest, Integer status, Integer operation, Model model) {
+        if (operation != null && operation == 1) {
+            Pager<ServiceRequest> pager = requestService.findReplyByMe(start, limit, operation, clientRequest);
+            model.addAttribute("pager", pager);
+            return "service/serviceReq/requestTableData.pagelet";
+        }
         Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest);
         model.addAttribute("pager", pager);
         return "service/serviceReq/requestTableData.pagelet";

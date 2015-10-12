@@ -25,8 +25,9 @@
             #@sdpmItem("产品名称")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "productId" request?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("ch")请选择#end
+                        "productId" request?.productId {"placeholder":"产品名称","datatype":"*","nullmsg":"请求标题不能为空！","id":
+                        "request_title", "class":"input-text select2"})  ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("")请选择#end
                         #@tinyOptionItem("1")支付宝#end
                         #@tinyOptionItem("2")余额宝#end
                         #@tinyOptionItem("3")财付通#end
@@ -39,9 +40,11 @@
         #@elementItem()
             #@sdpmItem("请求类型" "*")
                 #@Tselect2F()
-                    #@Tselect2Body("requestType" request?.requestType {"class":
-                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("ch")请选择#end
+                    #@Tselect2Body(
+                        "requestType" request?.requestType {"placeholder":"请求类型","datatype":"*","nullmsg":"请求类型不能为空！",
+                        "id":
+                        "request_title", "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("")请选择#end
                         #@tinyOptionItem("0")缺陷#end
                         #@tinyOptionItem("1")适应性#end
                         #@tinyOptionItem("2")完善#end
@@ -58,8 +61,10 @@
             #@sdpmItem("请求优先级" "*")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "requestPre" request?.requestPre {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("ch")请选择#end
+                        "requestPre" request?.requestPre {"placeholder":"请求优先级","datatype":"*","nullmsg":"请求优先级不能为空！",
+                        "id":
+                        "request_title", "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("")请选择#end
                         #@tinyOptionItem("0")低#end
                         #@tinyOptionItem("1")中#end
                         #@tinyOptionItem("2")高#end
@@ -72,7 +77,7 @@
                 #@Tselect2F()
                     #@Tselect2Body(
                         "moduleId" request?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("1")请选择#end
+                        #@tinyOptionItem("")请选择#end
                         #@tinyOptionItem("2")模块一#end
                         #@tinyOptionItem("3")模块二#end
                         #@tinyOptionItem("4")模块三#end
@@ -85,8 +90,9 @@
             #@sdpmItem("客户名称" "*")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "clientId" request?.clientId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("ch")请选择#end
+                        "clientId" request?.clientId {"placeholder":"客户名称","datatype":"*","nullmsg":"客户名称不能为空！","id":
+                        "request_title", "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("")请选择#end
                         #foreach(l:list)
                             #@tinyOptionItem(l.clientId)${l?.clientName}#end
                         #end
@@ -97,7 +103,8 @@
         #@elementItem()
             #@sdpmItem("客户联系人" "*")
                 #tinyInput(
-                    "text" "requester" request?.requester{"placeholder":"请输入请求标题","datatype":"*","nullmsg":"请求标题不能为空！",
+                    "text" "requester" request?.requester{"placeholder":"请输入客户联系人","datatype":"*","nullmsg":
+                    "客户联系人不能为空！",
                     "id":"request_title","class":"input-text"})
             #end
         #end
@@ -105,10 +112,9 @@
         #@elementItem()
             #@sdpmItem("请求标题" "*")
                 #tinyInput(
-                    "text" "requestTitle" request?.requestTitle{"placeholder":"请输入请求标题","datatype":"*","nullmsg":
+                    "text" "requestTitle" request?.requestTitle{"placeholder":"请求标题","datatype":"*","nullmsg":
                     "请求标题不能为空！","id":
-                    "request_title",
-                    "class":"input-text"})
+                    "request_title", "class":"input-text select2"})
             #end
         #end
 
@@ -122,9 +128,11 @@
         #@elementItem()
             #@sdpmItem("请求状态" "*")
                 #@Tselect2F()
-                    #@Tselect2Body("requestStatus" request?.requestStatus {"class":
-                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("ch")请选择#end
+                    #@Tselect2Body(
+                        "requestStatus" request?.requestStatus {"placeholder":"请求状态","datatype":"*","nullmsg":
+                        "请求状态不能为空！","id":
+                        "request_title", "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("")请选择#end
                         #@tinyOptionItem("0")新建#end
                         #@tinyOptionItem("6")待回访#end
                         #@tinyOptionItem("8")已回访#end
