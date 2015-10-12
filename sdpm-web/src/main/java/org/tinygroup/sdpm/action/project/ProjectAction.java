@@ -123,14 +123,12 @@ public class ProjectAction extends BaseController {
         }
         return "error";
     }
+
     @RequestMapping("/basicInformation")
-    public String basicInformation(Integer projectId, Model model) {
-        if (projectId != null) {
-            Project project = projectService.findById(projectId);
-            model.addAttribute("project", project);
-            //还需要查询其他相关任务剩余时间的信息
-            return "/project/survey/basicInformation.pagelet";
-        }
-        return "error";
+    public String basicInformation(Integer projectID, Model model){
+
+        Project project = projectService.findById(projectID);
+        model.addAttribute("project", project);
+        return "project/survey/basicInformation.pagelet";
     }
 }
