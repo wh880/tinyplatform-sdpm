@@ -7,6 +7,8 @@
 #import("/org/tinygroup/table/components/table.component")
 #import("/org/tinygroup/icon/components/icon.component")
 #set(name="task")
+
+
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -25,7 +27,8 @@
 #@tinyForm(
     "thisform" TINY_CONTEXT_PATH+"/project/task/editsave" "post" {"class":"test","enctype":"multipart/form-data"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
-<div style="width:70%;float:left" class="">
+    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
+<div class="infoPage-left">
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>编辑</p>
         #@elementItem()
@@ -40,7 +43,7 @@
                 <div class="col-2 text-r"><label>备注：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("contents" "contents" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("contents" "actionComment" {"initialFrameHeight":"150"})#end</div>
             </div>
         #end
         #@elementItem()
@@ -81,7 +84,7 @@
 
     #end
 </div>
-<div style="width:30%;float:right">
+<div class="infoPage-right">
     #TypeInfo("projectEdit", task?.taskId)
 </div>
 
@@ -89,4 +92,7 @@
 
 <script>
     $('select.select2').select2()
+    $(function () {
+        $("form").Validform({});
+    })
 </script>

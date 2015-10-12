@@ -11,6 +11,7 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +25,18 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     private StoryManager storyManager;
     @Autowired
     private TaskManager taskManager;
+
+
+    public List<ProductStory> findStoryByProject(Integer projectId) {
+        List<ProjectStory> projectStoryList = projectStoryManager.findSrotys(projectId);
+        List<Integer> storyList = new ArrayList<Integer>();
+        for (ProjectStory projectStory : projectStoryList) {
+            storyList.add(projectStory.getStoryId());
+        }
+        Integer[] i = new Integer[storyList.size()];
+        List<ProductStory> list = storyManager.findList(storyList.toArray(i));
+        return list;
+    }
 
     public Integer deleteProjectStory(Integer projectId, Integer storyId) {
         return projectStoryManager.deleteByProjectStory(projectId, storyId);
