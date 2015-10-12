@@ -50,7 +50,7 @@ public interface BugService {
 	 * @param asc
 	 * @return
 	 */
-	Pager<QualityBug> findBugListPager(Integer start,Integer limit,QualityBug bug,String sortName,boolean asc);
+	Pager<QualityBug> findBugListPager(Integer start,Integer limit, String conditions, QualityBug bug,String sortName,boolean asc);
 	
 	/**
 	 * 删除

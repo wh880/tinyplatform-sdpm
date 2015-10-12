@@ -36,8 +36,8 @@ public class BugServiceImpl implements BugService {
 		return bugmanager.batchUpdate(bugs);
 	}
 	
-	public Pager<QualityBug> findBugListPager(Integer start,Integer limit,QualityBug bug,String sortName,boolean asc){
-		return bugmanager.findPager(start, limit, bug, sortName, asc);	
+	public Pager<QualityBug> findBugListPager(Integer start,Integer limit,String conditions,QualityBug bug,String sortName,boolean asc){
+		return bugmanager.findPager(start, limit, conditions, bug, sortName, asc);
 	}
 
 	public Integer deleteBug(Integer bugId) {
