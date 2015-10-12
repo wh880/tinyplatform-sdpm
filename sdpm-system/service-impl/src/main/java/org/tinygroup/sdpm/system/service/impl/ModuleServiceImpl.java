@@ -38,7 +38,7 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	public SystemModule add(SystemModule systemModule) {
-		// TODO Auto-generated method stub
+
 		return SystemModuleManager.add(systemModule);
 	}
     public SystemModule eidtNameAndTiele(SystemModule systemModule){
