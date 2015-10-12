@@ -1,29 +1,27 @@
-#macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
-#end
 
-
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=pager.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(pager?.totalCount)
+#for(l:pager?.records)
 #@tr()
 
 	#@td()<input type="checkbox" value="1" name="product-archive">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/document/table-edit.page">${page}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/document/table-edit.page">工程管理类</a>#end
-	#@td()项目管理经验#end
-	#@td()产品经理#end
-	#@td()2015-09-02#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view?libId=${l?.docLibId}&docid=${l?.docId}">${l?.docId}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view?libId=${l?.docLibId}&docid=${l?.docId}">${l?.docModule}</a>#end
+	#@td()${l?.docTitle}#end
+	#@td()${l?.docAddedBy}#end
+	#@td()${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy年MM月dd日'):""}#end
 	#@td()
-		#foreach(m:menuManager.getScopeMenus("product-ar"))
-			#if(m.id!="product-archive-remove")
-            <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${m.href}"><i class="${m.icon}"></i></a>
+	
+	
+		#foreach(m:menuManager.getScopeMenus("archive-oper"))
+		 #set(url=eval(m.href))
+			#if(m.id=="product-archive-edit")
+             <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${url}"><i class="${m.icon}"></i></a>
 			#else
-            &nbsp; #@tinyTableItemRemove("#" "id")<i class="icon-remove"></i>#end
+          &nbsp;#@tinyTableItemRemove(TINY_CONTEXT_PATH+url l.docId)<i class="${m.icon}"></i>#end
 			#end
 
 		#end

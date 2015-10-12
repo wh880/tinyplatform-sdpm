@@ -150,7 +150,7 @@
         #@elementItem()
             #@colLabel()需求名称：#end
             #@formControlDiv("col-4")
-                #tinyInput("text" "storyTitle" ""{"datatype":"e","nullmsg":"请输入描述！","id":"email","class":"input-text"})
+                #tinyInput("text" "storyTitle" ""{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"请输入描述！","id":"email","class":"input-text"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -159,8 +159,7 @@
         #@elementItem()
             #@colLabel()需求描述：#end
             #@formControlDiv("col-8")
-                #@tinyTextarea("storySpec" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"描述不能为空！"})
-                    内容走起#end
+                #@tinyTextarea("storySpec" {"placeholder":"请输入需求描述","datatype":"*10-500","nullmsg":"描述不能为空！"})#end
             #end
             #@validateDiv("col-2")#end
         #end
@@ -168,7 +167,7 @@
         #@elementItem()
             #@colLabel()验收标准：#end
             #@formControlDiv("col-8")
-                #@tinyTextarea("storyVerification" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-200"})内容走起#end
+                #@tinyTextarea("storyVerification" {"placeholder":"请输入验收标准","datatype":"*10-200"})#end
             #end
             #@validateDiv("col-2")#end
         #end
@@ -269,4 +268,14 @@
     #end
 </div>
 #end
+
+
+    
+    <script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+        });
+    });
+</script>
 

@@ -118,13 +118,10 @@
                     #@formControlDiv("col-8")
                         #@Tselect2F()
                             #@Tselect2Body("projectStatus" project?.projectStatus; {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="IN">Indiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
+                            <option value="0">未开始</option>
+                            <option value="1">进行中</option>
+                            <option value="2">已挂起</option>
+                            <option value="3">已完成</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
 
@@ -146,9 +143,9 @@
                             <option value="MD">Maryland</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page"
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page"
                                               class="r ">增加</a><a
-                                    href="${TINY_CONTEXT_PATH}/organization/user/add.page">全部</a>#end
+                                    href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end
@@ -167,9 +164,9 @@
                             <option value="MD">Maryland</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page"
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page"
                                               class="r ">增加</a><a
-                                    href="${TINY_CONTEXT_PATH}/organization/user/add.page">全部</a>#end
+                                    href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end
@@ -188,9 +185,9 @@
                             <option value="MD">Maryland</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page"
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page"
                                               class="r ">增加</a><a
-                                    href="${TINY_CONTEXT_PATH}/organization/user/add.page">全部</a>#end
+                                    href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end
