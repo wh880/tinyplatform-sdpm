@@ -65,4 +65,10 @@ public interface RoleMenuService {
 
     void batchAddRoleMenu(List<OrgRoleMenu> orgRoleMenuList);
 
+    /**
+     * 根据角色Id删除该角色的权限
+     *
+     * @param roleId
+     */
+    void batchDeleteRoleMenu(List<OrgRoleMenu> orgRoleMenuList);
 }

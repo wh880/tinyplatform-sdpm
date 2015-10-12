@@ -85,13 +85,9 @@
         <menu id="org-privilege-maintain" name="权限维护" href="/org/roleMenu/show"
               icon="icon-lock" sort="1" isShow="1"
               scope="org-privilege"/>
-        <menu id="org-privilege-user" name="成员维护" href="/organization/privilege/groupMaintain.page"
+        <menu id="org-privilege-user" name="成员维护" href="/org/roleUser/show"
               icon="icon-sitemap" sort="1" isShow="1"
               scope="org-privilege">
-            <map>
-                <property key="width" value="700"/>
-                <property key="heigth" value="300"/>
-            </map>
         </menu>
 
         <menu id="org-privilege-copy" name="复制角色" href="/organization/privilege/groupCopy.pagelet" icon="icon-copy"

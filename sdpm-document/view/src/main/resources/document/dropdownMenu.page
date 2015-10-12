@@ -16,7 +16,9 @@
 		  <option value=""></option>
 		  <optgroup label="文档">
 		  #foreach(doclib:libList)
-		  <option value="${doclib?.docLibId}">${doclib?.docLibName}</option>
+		  #if(doclib?.docLibDeleted != "1")
+		 	 <option value="${doclib?.docLibId}">${doclib?.docLibName}</option>
+		  #end
 		  #end
 		  </optgroup>
 		#end

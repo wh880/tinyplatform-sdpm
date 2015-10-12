@@ -101,17 +101,19 @@
 
     <div style="text-align:center;margin:auto">
 <span>
-   #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
-           #if(m.map.type=="aModal")
-                 #@aModal("#myModal" m.name "1000" "500" "btn-class" m.href)#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;
-           #elseif(m.map.type=="icon-href")
-           		 <a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;
-           #elseif(m.map.type=="icon")
-           		 <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;
-           #elseif(m.map.type=="note")
-           		  <a href="#" title="${m.name}">#buttonIcon(iconClass=m.icon)&nbsp;
-           #end
-         #end
+	   #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
+	   &nbsp;&nbsp;
+		 #set(url=eval(m.href))
+		   #if(m.map.type=="aModal")
+		         #@aModal("#myModal" m.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m.icon)${m.name}#end
+		   #elseif(m.map.type=="icon-href")
+		   		 <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+		   #elseif(m.map.type=="icon")
+		   		 <a href="${TINY_CONTEXT_PATH}${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+		   #elseif(m.map.type=="note")
+		   		  <a href="${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)
+		   #end
+		 #end
 </span>
     </div>
 

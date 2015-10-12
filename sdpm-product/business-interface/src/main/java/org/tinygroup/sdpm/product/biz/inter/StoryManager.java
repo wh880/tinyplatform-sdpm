@@ -5,6 +5,7 @@ import java.util.List;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
+import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface StoryManager {
@@ -67,6 +68,21 @@ public interface StoryManager {
 	 * @return
 	 */
 	Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc);
-
-
+	
+	/**
+	 * 产品需求数量分类
+	 * @param story
+	 * @return
+	 */
+	List<StoryCount> productStoryCount(ProductStory story);
+	
+	/**
+	 * 模块需求数量分类
+	 * @param story
+	 * @return
+	 */
+	List<StoryCount> modelStoryCount(ProductStory story);
+	
+	
+	
 }

@@ -93,117 +93,135 @@
         #@toggleRight("tableBoxessty")
         
             #@settoggleLeftTitle()报表#end
+           
             
             <table class="table table-border table-bordered" cellspacing="0">
             	
+#*            	产品需求数量分布*#
             	#@centerAlignTr()       
             		 #@th("text-r" "vertical-align:middle;width:20%")
             			#@pieChart(pieChartStyle="width:600px;margin:0 auto;")
-							<!---myTable5 start---->
-						   <table id='myTable5'>
-								<caption>会员地区分布</caption>
+            			
+            				 <table id='productStory'>
+								<caption>产品需求数量分布</caption>
 								<thead>
 									<tr>
 										<th></th>
-										<th>河北</th>
-										<th>河南</th>
-										<th>湖北</th>
-										<th>湖南</th>
-										<th>山东</th>
-										<th>山西</th>
+										#for(productStory:productStoryCount)
+											<th>${productStory.name}</th>
+										#end
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr>
+										<th></th>
+										#for(productStory:productStoryCount)
+											<td>${productStory.number}</td>
+										#end
+									</tr>
+								</tbody>
+							</table>
+            				
+
+						   
+							
+							
+			
+						#end
+			
+						#pieChartInit("#productStory" "PieChart" "No of players" "Month",600,350)
+            			
+            		#end
+            		
+            		
+            		<td  style="vertical-align:middle;">
+            			#*            				产品需求数量分布*#
+            			 <table class="table table-border table-bordered" cellspacing="0">
+            			 	 #@theadCenterMenu()   #@th()产品#end        #@th()需求数#end  #@th()百分比#end #end
+            			 	 
+            			 	 #for(productStory:productStoryCount)
+								#@centerAlignTr()        
+	            			 	 	
+	            			 	 	#@td()${productStory?.name}#end  
+	            			 	 	#@td()${productStory?.number}#end      
+	            			 	 	#@td()${productStory?.percentToString}#end     
+	            			 	 #end
+							#end
+            			 	
+            			 	
+            			 
+            			 </table>
+            			
+
+            			
+            		</td>
+            	
+            	#end
+            	
+	#*            				模块需求数量分布*#
+            	#@centerAlignTr()       
+            		 #@th("text-r" "vertical-align:middle;width:20%")
+            			#@pieChart(pieChartStyle="width:600px;margin:0 auto;")
+            			
+            				 
+            				
+
+						   <table id='modelStory'>
+								<caption>模块需求数量分布</caption>
+								<thead>
+									<tr>
+									
+										<th></th>
+										#for(modelStory:modelStoryCount)
+											<th>${modelStory.name}</th>
+										#end
+										
+										
 										
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<th>1200</th>
-										<td>540</td>
-										<td>300</td>
-										<td>150</td>
-										<td>180</td>
-										<td>120</td>
-										<td>180</td>
-									</tr>
-								</tbody>
-							</table>  
-							
-							
-			#*				<!---myTable5 end---->
-							<!---myTable1 start---->
-						   <table id='myTable1'>
-								<caption>会员性别分布</caption>
-								<thead>
-									<tr>
 										<th></th>
-										<th>男</th>
-										<th>女</th>
+										#for(modelStory:modelStoryCount)
+											<td>${modelStory.number}</td>
+										#end
 									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th>1000</th>
-										<td>450</td>
-										<td>550</td>
-										</tr>
 								</tbody>
 							</table>  
-							<!---myTable1 end---->*#
+							
+							
+			
 						#end
 			
-						#pieChartInit("#myTable5" "PieChart" "No of players" "Month",600,350)
+						#pieChartInit("#modelStory" "PieChart" "No of players" "Month",600,350)
             			
             		#end
             		
             		
-            		#@td()
+            		<td  style="vertical-align:middle;">
+
+            			
+            			
+#*            			模块需求数量分布*#
             			 <table class="table table-border table-bordered" cellspacing="0">
-            			 	#!set(num=2000)
-            			 	 #@theadCenterMenu()   #@th()会员地区#end        #@th()需求数#end  #@th()百分比#end #end
-            			 	 #@centerAlignTr()        
-            			 	 	
-            			 	 	#@td()河北#end  
-            			 	 	#@td()1200#end      
-            			 	 	#@td() 
-            			 	 		${sum}
-            			 	 	#end     
-            			 	 #end
-            			 	  #@centerAlignTr()        
-            			 	 	#@td()河南#end
-            			 	 	#@td()1200#end        
-            			 	 	#@td()
-            			 	 	${540/200}
-            			 	 	 #end     
-            			 	 #end
-            			 	  #@centerAlignTr()        
-            			 	 	#@td()湖北#end 
-            			 	 	#@td()1200#end       
-            			 	 	#@td()
-            			 	 		
-            			 	 	#end     
-            			 	 #end
-            			 	  #@centerAlignTr()        
-            			 	 	#@td()湖南#end 
-            			 	 	#@td()1200#end       
-            			 	 	#@td()
-            			 	 	#end     
-            			 	 #end
-            			 	  #@centerAlignTr()        
-            			 	 	#@td()山东#end  
-            			 	 	#@td()1200#end      
-            			 	 	#@td()
-            			 	 	#end     
-            			 	 #end
-            			 	  #@centerAlignTr()        
-            			 	 	#@td()山西#end  
-            			 	 	#@td()1200#end      
-            			 	 	#@td()
-            			 	 	#end     
-            			 	 #end
+            			 	 #@theadCenterMenu()   #@th()模块#end        #@th()需求数#end  #@th()百分比#end #end
+            			 	 
+            			 	 #for(modelStory:modelStoryCount)
+								#@centerAlignTr()        
+	            			 	 	
+	            			 	 	#@td()${modelStory?.name}#end  
+	            			 	 	#@td()${modelStory?.number}#end      
+	            			 	 	#@td()${modelStory?.percentToString}#end     
+	            			 	 #end
+							#end
+            			 	
             			 	
             			 
             			 </table>
             			
-            		#end
+            		</td>
             	
             	#end
             	

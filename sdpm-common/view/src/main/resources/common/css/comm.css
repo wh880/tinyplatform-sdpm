@@ -1,41 +1,146 @@
 /**整体框架个性化设置start**/
-#bodyrap  #content-wrapper{padding:100px 8px 18px;}
-.dataTables_wrapper .DT-lf-right .DT-per-page{display:none}.theme-clean #main-menu #content-wrapper{padding:53px 10px 18px}
-.ajax-loading-animation{font-size:20px;margin-left:10px;}
-.optionsBox .tabBar{margin-bottom:5px;}
-@media (min-width:768px) {
-.menu-on-top #content-wrapper{padding-top:98px}
-.menu-on-top #main-menu{height:46px}
-.menu-on-top #main-menu .navigation>li>ul{top:44px}
-.menu-on-top #main-menu .navigation>li>a>span.mm-text {display:inline-block;}
-.menu-on-top #main-menu .navigation>li>a i{padding-right:3px;width:auto;display:inline-block;}
-.menu-on-top #main-menu .navigation>li{width:111px;white-space:nowrap;}
-.menu-on-top #main-menu .navigation>li.mm-dropdown>a:after{top:28px!important}
-.menu-on-top #main-menu .navigation > li *:not(span){background:#fbfbfb!important}
-.menu-on-top #main-menu .navigation > li *:not(span):hover{background:#fff!important}
-.menu-on-top #main-menu .navigation>li.active>a{background:#fefefe!important}
-#bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus,.theme-clean .pagination>li.active>a, .theme-clean .pagination>li.active>a:focus, .theme-clean .pagination>li.active>a:hover, .theme-clean .pagination>li.active>span{background:#369;border:#369 1px solid!important}
-#bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus{border:#369 1px solid!important}
-#bodyrap.theme-clean .btn-primary:hover {background:#2a4f85!important;}
-#main-navbar .navbar-nav.pull-right{margin-right:21px;}
-#bodyrap.theme-clean #main-menu .mmc-dropdown-open-ul a:after, .theme-default #main-menu .navigation a:after{background:none}
-#bodyrap.theme-asphalt .optionsBox .tabBar .switchClass.Current{background:#3BC2A9}
-#bodyrap.theme-asphalt .optionsBox .tabBar .switchClass:hover{background:#52bdb4}
-#bodyrap.theme-purple-hills .optionsBox .tabBar .switchClass.Current{background:#857198}
-#bodyrap.theme-purple-hills .optionsBox .tabBar .switchClass:hover{background:#a48ad4}
-#bodyrap.theme-dust .optionsBox .tabBar .switchClass.Current{background:#7a6f6f}
-#bodyrap.theme-dust .optionsBox .tabBar .switchClass:hover{background:#8a6f6f}
-#bodyrap.theme-fresh .optionsBox .tabBar .switchClass.Current{background:#50b5d3}
-#bodyrap.theme-fresh .optionsBox .tabBar .switchClass:hover{background:#64bed8}
-#bodyrap.theme-white .optionsBox .tabBar .switchClass.Current{background:#b9662b}
-#bodyrap.theme-white .optionsBox .tabBar .switchClass:hover{background:#985813}
+#bodyrap #content-wrapper {
+    padding: 100px 8px 18px;
 }
+
+.dataTables_wrapper .DT-lf-right .DT-per-page {
+    display: none
+}
+
+.theme-clean #main-menu #content-wrapper {
+    padding: 53px 10px 18px
+}
+
+.ajax-loading-animation {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.optionsBox .tabBar {
+    margin-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+    .menu-on-top #content-wrapper {
+        padding-top: 98px
+    }
+
+    .menu-on-top #main-menu {
+        height: 46px
+    }
+
+    .menu-on-top #main-menu .navigation > li > ul {
+        top: 44px
+    }
+
+    .menu-on-top #main-menu .navigation > li > a > span.mm-text {
+        display: inline-block;
+    }
+
+    .menu-on-top #main-menu .navigation > li > a i {
+        padding-right: 3px;
+        width: auto;
+        display: inline-block;
+    }
+
+    .menu-on-top #main-menu .navigation > li {
+        width: 111px;
+        white-space: nowrap;
+    }
+
+    .menu-on-top #main-menu .navigation > li.mm-dropdown > a:after {
+        top: 28px !important
+    }
+
+    .menu-on-top #main-menu .navigation > li *:not(span) {
+        background: #fbfbfb !important
+    }
+
+    .menu-on-top #main-menu .navigation > li *:not(span):hover {
+        background: #fff !important
+    }
+
+    .menu-on-top #main-menu .navigation > li.active > a {
+        background: #fefefe !important
+    }
+
+    #bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus, .theme-clean .pagination > li.active > a, .theme-clean .pagination > li.active > a:focus, .theme-clean .pagination > li.active > a:hover, .theme-clean .pagination > li.active > span {
+        background: #369;
+        border: #369 1px solid !important
+    }
+
+    #bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus {
+        border: #369 1px solid !important
+    }
+
+    #bodyrap.theme-clean .btn-primary:hover {
+        background: #2a4f85 !important;
+    }
+
+    #main-navbar .navbar-nav.pull-right {
+        margin-right: 21px;
+    }
+
+    #bodyrap.theme-clean #main-menu .mmc-dropdown-open-ul a:after, .theme-default #main-menu .navigation a:after {
+        background: none
+    }
+
+    #bodyrap.theme-asphalt .optionsBox .tabBar .switchClass.Current {
+        background: #3BC2A9
+    }
+
+    #bodyrap.theme-asphalt .optionsBox .tabBar .switchClass:hover {
+        background: #52bdb4
+    }
+
+    #bodyrap.theme-purple-hills .optionsBox .tabBar .switchClass.Current {
+        background: #857198
+    }
+
+    #bodyrap.theme-purple-hills .optionsBox .tabBar .switchClass:hover {
+        background: #a48ad4
+    }
+
+    #bodyrap.theme-dust .optionsBox .tabBar .switchClass.Current {
+        background: #7a6f6f
+    }
+
+    #bodyrap.theme-dust .optionsBox .tabBar .switchClass:hover {
+        background: #8a6f6f
+    }
+
+    #bodyrap.theme-fresh .optionsBox .tabBar .switchClass.Current {
+        background: #50b5d3
+    }
+
+    #bodyrap.theme-fresh .optionsBox .tabBar .switchClass:hover {
+        background: #64bed8
+    }
+
+    #bodyrap.theme-white .optionsBox .tabBar .switchClass.Current {
+        background: #b9662b
+    }
+
+    #bodyrap.theme-white .optionsBox .tabBar .switchClass:hover {
+        background: #985813
+    }
+}
+
 /**select2特有**/
-#bodyrap .select2-results{margin:5px;}
+#bodyrap .select2-results {
+    margin: 5px;
+}
 
 /**标题**/
-.panelNobr{background:#edf0f1;padding:5px 10px;border-bottom:#ddd 1px solid;}
-.panel-content{padding:10px;}
+.panelNobr {
+    background: #edf0f1;
+    padding: 5px 10px;
+    border-bottom: #ddd 1px solid;
+}
+
+.panel-content {
+    padding: 10px;
+}
 
 /**整体框架个性化设置end**/
 
@@ -97,7 +202,6 @@
     border-radius: 4px;
 }
 
-
 .pageleftpart .infoContent {
     margin-right: 15px;
 }
@@ -124,7 +228,7 @@
 
 .infoContent ul li label {
     font-weight: normal;
-    width:24%;
+    width: 24%;
     font-size: 12px;
 }
 
@@ -169,14 +273,14 @@
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
     background-color: #1a4f85;
     border: none;
-    padding:6px 16px;
+    padding: 6px 16px;
     font-size: 13px;
     line-height: 1.5;
     border-radius: 3px;
     color: #fff;
 }
 
-a.btn.btn-sm.backBtn,backBtn {
+a.btn.btn-sm.backBtn, backBtn {
     text-shadow: 0 1px 0 #fff;
     background-color: #f5f5f5;
     border: 1px solid #ccc;
@@ -188,20 +292,47 @@ a.btn.btn-sm.backBtn,backBtn {
 }
 
 /*新选项卡*/
-.tab-pane .tabInfocontents{border:none;padding:10px 6px;margin-top:8px;margin-bottom:-8px;}
-.tabInfocontents .HuiTab .tabBar,.tabInfocontents .HuiTab .tabBar span{background:none; font-weight:normal;border-bottom:none}
-.tabInfocontents .HuiTab .tabBar span:hover{background:#f9fafe;border-bottom:#ddd 1px solid;color:#369}
-.tabInfocontents .HuiTab .tabBar span.Current{font-weight:bold;color:#333;border:#ddd 1px solid;background: #fff;border-bottom: none;}
-.tabInfocontents .HuiTab .tabBorder{border:#ddd 1px solid; padding:12px 10px;margin-top:-3px;}
+.tab-pane .tabInfocontents {
+    border: none;
+    padding: 10px 6px;
+    margin-top: 8px;
+    margin-bottom: -8px;
+}
+
+.tabInfocontents .HuiTab .tabBar, .tabInfocontents .HuiTab .tabBar span {
+    background: none;
+    font-weight: normal;
+    border-bottom: none
+}
+
+.tabInfocontents .HuiTab .tabBar span:hover {
+    background: #f9fafe;
+    border-bottom: #ddd 1px solid;
+    color: #369
+}
+
+.tabInfocontents .HuiTab .tabBar span.Current {
+    font-weight: bold;
+    color: #333;
+    border: #ddd 1px solid;
+    background: #fff;
+    border-bottom: none;
+}
+
+.tabInfocontents .HuiTab .tabBorder {
+    border: #ddd 1px solid;
+    padding: 12px 10px;
+    margin-top: -3px;
+}
 
 /*访问控制*/
-.hidden_namesty{
-    margin-left:17%
+.hidden_namesty {
+    margin-left: 17%
 }
 
 /*访问控制白名单*/
-.label_title{
-    width:100px
+.label_title {
+    width: 100px
 }
 
 /*org三级菜单格式*/
@@ -266,4 +397,25 @@ a.btn.btn-sm.backBtn,backBtn {
 /*表格重置*/
 .infoContent .table > tbody > tr > td, .infoContent .table > tbody > tr > th, .infoContent.table > thead > tr > td, .infoContent.table > thead > tr > th {
     border-top: none;
+}
+
+/*详情页排版，右侧typeinfo排版*/
+.infoPage-left {
+    width: 70%;
+    float: left
+}
+
+.infoPage-right {
+    width: 30%;
+    float: right
+}
+
+.infoPage-right .infoContent th {
+    width: 80px;
+    vertical-align: middle;
+    text-align: right;
+}
+
+.infoPage-right .infoContent table tr td {
+    width: 200px;
 }

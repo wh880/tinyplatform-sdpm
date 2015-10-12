@@ -2,7 +2,8 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
-
+#set(requestStatuString = tinyRequestQueryString!=null ?tinyRequestQueryString:"")
+#set(qualityProduct = "")
 #set(name="qualityBug")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
@@ -17,22 +18,10 @@
 			##operationbar star
 			#@div(divClass="operationbar")
 				<span class="f">
-#*					<a href="#" class="active_btn">未关闭</a>*#
-#*					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page" class="active_btn">未关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">所有</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">指派给我</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">由我创建</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">由我解决</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">未确认</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">未指派</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">未解决</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">久未处理</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">被延期</a>
-					<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">需求变动</a>
-					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>*#
+
 					#foreach(m:menuManager.getScopeMenus("testbugleft-tab"))
 						#if(m.id != "tsearch")
-							<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==get?'active_btn':''}">${m.name}</a>
+							<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==status?'active_btn':''}">${m.name}</a>
 						#else
 							<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 						#end
@@ -81,13 +70,19 @@
 			#end
 			##operationbar end
 			#end
-			
+
 			#@toggleBox({"class":"open"})
 				#@toggleLeft({"class":"aclass"})
-					#@settoggleLeftTitle()管理系统#end
-					#@settoggleLeftBody("treeLeftbox")
-						#include("/testManagement/page/moduleTree.page")
-					#end
+					#@settoggleLeftTitle()${qualityProduct?.productName}#end
+						#@settoggleLeftBody("treeLeftbox")
+							#@zTreeList(call("link","/system/module/tree?moduleType=story&moduleRoot="+qualityProduct?.productId))
+								#setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
+								#zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/quality/bug?status="+status+"&currentPageId=5")
+								#zTreeSetAddUrl(TINY_CONTEXT_PATH+"/system/module/ajax/save?moduleType=story&moduleRoot="+qualityProduct?.productId)
+								#zTreeSetEditUrl(TINY_CONTEXT_PATH+"/system/module/ajax/save")
+								#zTreeSetDelUrl(TINY_CONTEXT_PATH+"/system/module/ajax/delete")
+							#end
+						#end
 				#end
 			
 			#@toggleRight()
@@ -176,7 +171,6 @@
 					</div>					
 					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				#end
-			#set(requestStatuString = tinyRequestQueryString!=null ?tinyRequestQueryString:"")
 			#@tinyTableContent(TINY_CONTEXT_PATH+"/quality/bug/findBug?"+requestStatuString)
 				#@thead()
 					#@tr()
