@@ -58,6 +58,7 @@
     <table-field standard-field-id="03ee1372ef3b480681b5aaa5032f35d7" primary="false" unique="false" not-null="false" id="task_project" auto-increase="false"/>
     <table-field standard-field-id="dfa99c9c348b4bb6a4aef3b27bfa7bbf" primary="false" unique="false" not-null="false" id="task_story" auto-increase="false"/>
     <table-field standard-field-id="831bc52d5d5b43f989178551619c0bf6" primary="false" unique="false" not-null="false" id="task_story_version" auto-increase="false"/>
+    <table-field standard-field-id="7c34fb19edc74d36a42ad2add274e79b" primary="false" unique="false" not-null="false" id="task_model" auto-increase="false"/>
     <table-field standard-field-id="7421ce33884541ccb87cc2c2dd45d74c" primary="false" unique="false" not-null="false" id="task_from_bug" auto-increase="false"/>
     <table-field standard-field-id="23aba5dca629484db6d0d7d95b905c79" primary="false" unique="false" not-null="true" id="task_name" auto-increase="false"/>
     <table-field standard-field-id="5b511aed51c44ca79423ffc1768ea355" primary="false" unique="false" not-null="true" id="task_type" auto-increase="false"/>

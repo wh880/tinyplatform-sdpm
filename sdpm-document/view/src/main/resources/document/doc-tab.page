@@ -6,13 +6,20 @@
         #@tabHead()
             #include("tab.page")          
         	<span class="r" style="position:relative;top:2px;height:0">
-        	        #@aModal("#myModal" "编辑" "400" "80" "class-m" "/document/doclib/edit?libname="+libname)
-        	        	#buttonIcon(iconClass="icon-edit-sign")编辑&nbsp;#end
-        	        #@tinyTableItemRemove(TINY_CONTEXT_PATH+"/document/doclib/delete" doclibid)
-						#buttonIcon(iconClass="icon-remove")删除
-					#end &nbsp					
-					#@aModal("#myModal" "添加文档库" "400" "80" "class-m" "/document/doclib/toAdd")
-						#buttonIcon(iconClass="icon-plus-sign")添加文档库#end
+        		#foreach(m:menuManager.getScopeMenus("doclib-op"))
+					#if(m.id == "doclib-edit")
+						#@aModal("#myModal" m.name "400" "80" "class-m" m.href)
+        	        		#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp
+        	       	#else
+        	       		#if(m.id == "doclib-delete")
+        	       			 #@delItemsdpm(TINY_CONTEXT_PATH+m.href documentLibId TINY_CONTEXT_PATH+"/document")
+								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp	
+						#else	
+							#@aModal("#myModal" m.name "400" "80" "class-m" m.href)
+								#buttonIcon(iconClass=m.icon)${m.name}#end			
+        	       		#end
+					#end
+				#end					
 			</span>
         #end
         #@tabBodyCol("ptop-5")#end

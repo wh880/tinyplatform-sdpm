@@ -3,6 +3,8 @@ package org.tinygroup.sdpm.service.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.service.biz.inter.RequestManager;
 import org.tinygroup.sdpm.service.dao.ServiceRequestDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
@@ -15,7 +17,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class RequestManagerImpl implements RequestManager{
+public class RequestManagerImpl implements RequestManager {
     @Autowired
     private ServiceRequestDao requestDao;
 
@@ -48,12 +50,14 @@ public class RequestManagerImpl implements RequestManager{
         return requestDao.softDeleteBatch(list);
     }
 
-    public Pager<ServiceRequest> findPager(Integer start, Integer limit,  Integer status,ServiceRequest serviceRequest) {
-        return requestDao.queryPagerBy(start, limit,serviceRequest,status);
+    public Pager<ServiceRequest> findPager(Integer start, Integer limit, Integer status, ServiceRequest serviceRequest,
+                                           String order, String ordertype) {
+        return requestDao.queryPagerBy(start, limit, serviceRequest, status, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
     }
 
-    public Pager<ServiceRequest> findReplyByMePager(Integer start, Integer limit, Integer operation, ServiceRequest serviceRequest) {
-        return requestDao.queryPagerReplyByMe(start, limit, serviceRequest, operation);
+    public Pager<ServiceRequest> findReplyByMePager(Integer start, Integer limit, Integer operation, ServiceRequest serviceRequest,
+                                                    String order, String ordertype) {
+        return requestDao.queryPagerReplyByMe(start, limit, serviceRequest, operation, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
     }
 
 

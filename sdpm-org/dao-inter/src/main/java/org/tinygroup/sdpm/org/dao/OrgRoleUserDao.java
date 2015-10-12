@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package org.tinygroup.sdpm.service.dao;
+package org.tinygroup.sdpm.org.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 
 import java.util.List;
 
-public interface ServiceClientDao extends BaseDao<ServiceClient, Integer> {
-    Integer softDelete(Integer id);
+public interface OrgRoleUserDao extends BaseDao<OrgRoleUser, Integer> {
+    List<OrgRoleUser> getByRoleId(Integer roleId);
 
-    int[] softDeleteBatch(List<ServiceClient> list);
-
-    ServiceClient judge(String clientName);
+    int deleteByRoleId(Integer roleId);
 }

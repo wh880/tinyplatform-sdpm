@@ -29,8 +29,8 @@ public class ClientServiceImpl implements ClientService {
         return clientManager.find(id);
     }
 
-    public Pager<ServiceClient> findClientPager(Integer start, Integer limit, ServiceClient client) {
-        return clientManager.findPager(start, limit, client);
+    public Pager<ServiceClient> findClientPager(Integer start, Integer limit, ServiceClient client, String order, String ordertype) {
+        return clientManager.findPager(start, limit, client, order, ordertype);
     }
 
     public List<ServiceClient> getClientList(ServiceClient client) {
@@ -76,4 +76,9 @@ public class ClientServiceImpl implements ClientService {
     public Integer deleteClientUser(Integer id) {
         return clientUserManager.delete(id);
     }
+
+    public ServiceClient judgeClient(String clientName) {
+        return clientManager.judgeClient(clientName);
+    }
+
 }
