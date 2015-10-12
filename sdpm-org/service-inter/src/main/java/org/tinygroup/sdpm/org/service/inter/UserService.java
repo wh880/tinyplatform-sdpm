@@ -71,6 +71,13 @@ public interface UserService {
     Integer deleteUser(String id);
 
     /**
+     * 批量删除用户
+     *
+     * @param list
+     * @return
+     */
+    int[] deleteBatchUser(List<OrgUser> list);
+    /**
      * 验证密码
      *
      * @param plainPassword 明文密码

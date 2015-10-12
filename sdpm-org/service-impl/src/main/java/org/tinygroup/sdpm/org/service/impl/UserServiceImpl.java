@@ -62,6 +62,10 @@ public class UserServiceImpl implements UserService {
         return userManager.delete(id);
     }
 
+    public int[] deleteBatchUser(List<OrgUser> list) {
+        return userManager.deleteBatch(list);
+    }
+
     public boolean validatePassword(String plainPassword, String password) {
         return userManager.validatePassword(plainPassword, password);
     }

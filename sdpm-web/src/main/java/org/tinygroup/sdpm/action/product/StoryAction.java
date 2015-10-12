@@ -82,7 +82,23 @@ public class StoryAction extends BaseController{
         logService.log(story,productStory,action);
     	return "redirect:" + "/product/page/project/togglebox.page";
     }
+
+    @RequestMapping("/list")
+    public String list(ProductStory productStory, Model model) {
+        return "/product/page/project/togglebox.page";
+    }
     
+    @RequestMapping("/list/data")
+    public String listData(Integer moduleId,Integer start,Integer limit,ProductStory productStory,Model model){
+    	if (moduleId == null || moduleId == -1){
+    		
+    	}else{
+    		
+    	}
+    	return "";
+    }
+    
+
     @ResponseBody
     @RequestMapping("/updateBatch")
     public int[] updateBatch(@RequestBody ProductStory[] stories){
@@ -157,6 +173,9 @@ public class StoryAction extends BaseController{
     	if(request.getSession().getAttribute("sessionProductId")!=null){
     		story.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
     	}
+    	if (story.getModuleId()==-1) {
+    		story.setModuleId(null);
+		}
     	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList",p);
         return "product/data/tabledata.pagelet";

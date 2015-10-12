@@ -21,6 +21,10 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.List;
+
 public interface OrgUserDao extends BaseDao<OrgUser,String> {
     Pager<OrgUser> getPagerByDeptId(int start, int limit, final Integer deptId, final OrderBy... orderBies);
+
+    int[] softDeleteBatch(List<OrgUser> list);
 }

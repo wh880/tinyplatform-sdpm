@@ -122,7 +122,7 @@
                 <div class="col-2 text-r"><label>请求描述：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end</div>
+                    #@Teditor("content1" "content1" {"initialFrameHeight":"150"})#end</div>
             </div>
             #@validateDiv("col-2")#end
         #end
@@ -215,7 +215,7 @@
 ##                <div class="col-2 text-r"><label>请求表述：</label></div>
 ##
 ##                <div class="col-9">
-##                    #@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end</div>
+##                    #@Teditor("content1" "content1" {"initialFrameHeight":"150"})#end</div>
 ##            </div>
 ##            #@validateDiv("col-2")#end
 ##        #end
@@ -245,7 +245,7 @@
 ##                <div class="col-2 text-r"><label>解决方案：</label></div>
 ##
 ##                <div class="col-9">
-##                    #@Teditor("content2" "content2" {"initialFrameHeight":"150"})Say something#end</div>
+##                    #@Teditor("content2" "content2" {"initialFrameHeight":"150"})#end</div>
 ##            </div>
 ##            #@validateDiv("col-2")#end
 ##        #end
@@ -288,7 +288,7 @@
 ##                <div class="col-2 text-r"><label>回访记录：</label></div>
 ##
 ##                <div class="col-9">
-##                    #@Teditor("content3" "content3" {"initialFrameHeight":"150"})Say something#end</div>
+##                    #@Teditor("content3" "content3" {"initialFrameHeight":"150"})#end</div>
 ##            </div>
 ##            #@validateDiv("col-2")#end
 ##        #end

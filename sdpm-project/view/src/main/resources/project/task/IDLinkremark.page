@@ -135,7 +135,7 @@
             <p class="titleName">备注</p>
 
             <div>
-                #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end</div>
+                #@Teditor("content" "content" {"initialFrameHeight":"150"})#end</div>
         </div>
         #end
 

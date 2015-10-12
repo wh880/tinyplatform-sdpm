@@ -77,6 +77,13 @@ public interface UserManager {
     Integer delete(String id);
 
     /**
+     * 批量删除用户
+     *
+     * @param list
+     * @return
+     */
+    int[] deleteBatch(List<OrgUser> list);
+    /**
      * 生成安全的密码，生成随机的16位salt并经过1024次 sha-1 hash
      */
     String encryptPassword(String plainPassword);
