@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.service.biz.inter;
 
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ ServiceFaq find(Integer id);
      * @param faq 用于分页
      * @return
      */
-    /*Pager<ServiceFaq> getpage(int start, int limit);*/
+    Pager<ServiceFaq> getpage(Integer start, Integer limit, ServiceFaq serviceFaq);
 
     /**
      * 新增一个faq

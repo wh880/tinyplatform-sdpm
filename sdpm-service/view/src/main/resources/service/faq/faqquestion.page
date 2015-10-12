@@ -1,6 +1,6 @@
 #@OlTopList()
 
-    #foreach(l:list)
+    #foreach(l:pager.records)
     #*#@normalLiItemsconment(1 "../faq/questionAnswer.page" l.faqQuestion "")*#
         #@normalLiItemsconment(1 "../faq/questionAnswer?id="+l.faqId l.faqQuestion "")
 
