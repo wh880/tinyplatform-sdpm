@@ -35,7 +35,7 @@
             #@sdpmItem("客户名称" "*")
                 #tinyInput(
                     "text" "clientName" client?.clientName {"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！",
-                    "id":"clientName","class":"input-text","ajaxurl":"/service/client/judgeClient"})
+                    "id":"clientName","class":"input-text","ajaxurl":TINY_CONTEXT_PATH+"/service/client/judgeClient"})
             #end
         #end
         #@elementItem()

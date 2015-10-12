@@ -106,4 +106,6 @@ public interface ClientService {
      * @return
      */
     Integer deleteClientUser(Integer id);
+
+    ServiceClient judgeClient(String clientName);
 }

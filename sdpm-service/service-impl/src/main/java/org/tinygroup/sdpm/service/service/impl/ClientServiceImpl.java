@@ -76,4 +76,9 @@ public class ClientServiceImpl implements ClientService {
     public Integer deleteClientUser(Integer id) {
         return clientUserManager.delete(id);
     }
+
+    public ServiceClient judgeClient(String clientName) {
+        return clientManager.judgeClient(clientName);
+    }
+
 }
