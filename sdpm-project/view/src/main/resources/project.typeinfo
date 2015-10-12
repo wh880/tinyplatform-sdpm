@@ -1,8 +1,8 @@
 <type-infos>
 	<type-info name="project"  >
-	    <info name="projectInfo" title="项目信息" infoParameter="" url="/project/basicInformation?projectId=${selProject?.projectId}"  resource="project"/>
-	    <info name="productInfo" title="产品信息" infoParameter="" url="/product/page/tabledemo/baseinfo.pagelet" resource="product"/>
-	</type-info>	
+	    <info name="projectInfo" title="项目信息" infoParameter="projectId" url="/project/basicInformation"  resource="project"/>
+	    <info name="productInfo" title="产品信息" infoParameter="productId" url="/product/find/baseinfo" resource="product"/>
+	</type-info>
 	<type-info name="projectEdit"  >
 	    <info name="projectInfo" title="项目信息" infoParameter="taskId" url="/project/task/basicInfoEdit" resource="projectEdit"/>
 	</type-info>

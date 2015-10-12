@@ -5,6 +5,9 @@
 	<menu id="doc-my" parent-id="idocument" name="文档"
 		href="/document" icon="" sort="1" isShow="1">
 		
+		<menu id="batch-delete" name="批量删除" href="#"
+			icon="" sort="3" isShow="1"	scope="docdelete-op"></menu>
+		
 		<menu id="doclib-edit" name="编辑" href="/document/doclib/edit"
 			icon="icon-edit-sign" sort="3" isShow="1"	scope="doclib-op"></menu>
 		<menu id="doclib-delete" name="删除" href="/document/doclib/delete"

@@ -34,17 +34,37 @@
         ##operationbar end
         #end
 
+    #* #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+         #@toggleLeft({"class":"aclass"})
+             #@settoggleLeftTitle()所有产品#end
+             #@settoggleLeftBody("treeLeftbox")
+                 #include("/service/serviceCom/moduleTree.page")
+             #end
+         #end
+         #@toggleRight()
+             #include("/service/sla/slaTable.page")
+         #end
+     #end*#
+    #*实现左侧树2015-10-12,21:17*#
         #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
             #@toggleLeft({"class":"aclass"})
                 #@settoggleLeftTitle()所有产品#end
                 #@settoggleLeftBody("treeLeftbox")
-                    #include("/service/serviceCom/moduleTree.page")
+                    #@zTreeList(call("link","/org/dept/data"))
+                        #setzTreeValMap({"id":"orgDeptId","name":"orgDeptName","pid":"orgDeptParent"}) ##key值为固定
+                        #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/org/user/list" )
+                        #zTreeSetAddUrl(TINY_CONTEXT_PATH+"/org/dept/add")
+                        #zTreeSetEditUrl(TINY_CONTEXT_PATH+"/org/dept/edit")
+                        #zTreeSetDelUrl(TINY_CONTEXT_PATH+"/org/dept/delete")
+                    #end
                 #end
             #end
             #@toggleRight()
                 #include("/service/sla/slaTable.page")
             #end
         #end
+
+
     #end
 #end
 #@simpleModal("myModal" "导出")#end

@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 
 public interface ProductDao extends BaseDao<Product,Integer> {
@@ -27,5 +28,7 @@ public interface ProductDao extends BaseDao<Product,Integer> {
 	Integer softDelete(Integer id);
 	
 	List<Product> getByKeys(Integer... id);
+	
+	List<ProductAndLine> getProductAndLine(Product t);
 
 }

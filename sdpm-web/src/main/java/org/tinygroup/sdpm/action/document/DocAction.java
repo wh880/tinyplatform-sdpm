@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.document;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,6 @@ import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.weblayer.WebContext;
 
 @Controller
 @RequestMapping(value="/document")
@@ -141,6 +141,17 @@ public class DocAction {
 	    return map;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/doc/batchDelete")
+	public Map bctchDelDoc(Integer[] docId)
+	{		
+		docservice.deleteDocByIds(docId);
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("status", "success");
+	    map.put("info", "删除成功");
+	    return map;
+	}
+	
 	@RequestMapping(value="/doclib/toAdd")
 	public String addDocLib()
 	{
@@ -187,11 +198,16 @@ public class DocAction {
 	@RequestMapping(value="/doclib/delete")
 	public Map delDocLib(Integer id)
 	{
+		DocumentDoclib doclib = new DocumentDoclib();
+		List<DocumentDoclib> list = docservice.findDoclibList(doclib);
+		if(id != list.get(0).getDocLibId() && id != list.get(1).getDocLibId()){
 		docservice.deleteDoclibById(id);
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("status", "success");
 	    map.put("info", "删除成功");
 	    return map;
+		}
+		return null;
 	}
 	
 	//产品文档

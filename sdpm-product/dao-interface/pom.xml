@@ -20,6 +20,11 @@
        <artifactId>sdpm-common-base-dao</artifactId>
         <version>${tiny_sdpm_version}</version>
     </dependency>
+    <dependency>
+       <groupId>org.tinygroup</groupId>
+       <artifactId>sdpm-productLine-dao-interface</artifactId>
+        <version>${tiny_sdpm_version}</version>
+    </dependency>
     
    
         <!--引入SpringMVC-->

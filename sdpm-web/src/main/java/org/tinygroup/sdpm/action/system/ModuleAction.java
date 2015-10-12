@@ -251,13 +251,13 @@ public class ModuleAction extends BaseController {
     public List dataone(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<SystemModule> moduleList = moduleService.findModuleList(new SystemModule());
-        if (check == null || !check.equals("n")) {
+     /*   if (check == null || !check.equals("n")) {
             Map<String, Object> map1 = new HashMap<String, Object>();
             map1.put("id", -1);
             map1.put("pId", 0);
             map1.put("name", "所有模板");
             list.add(map1);
-        }
+        }*/
 
         for (SystemModule d : moduleList) {
             Map<String, Object> map = new HashMap<String, Object>();
