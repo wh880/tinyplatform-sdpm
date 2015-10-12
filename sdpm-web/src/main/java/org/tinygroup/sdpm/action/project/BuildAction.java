@@ -28,22 +28,16 @@ public class BuildAction extends BaseController {
     @RequestMapping("/find")
     public String find(Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
-        boolean asc = ordertype == "asc" ? true : false;
+        boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProjectBuild> pager = buildService.findPager(projectId, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
         return "project/version/tableData.pagelet";
     }
 
-//    @RequestMapping("/look")
-//    public String look(Integer buildId, Model model) {
-//        if (buildId != null) {
-//            ProjectBuild build = buildService.;
-//            model.addAttribute("build", build);
-//            //还需要查询其他相关任务剩余时间的信息
-//            return "project/bug/index.page";
-//        }
-//        return "error";
-//    }
+    @RequestMapping("/look")
+    public String look(Integer buildId, Model model) {
+            return "project/bug/index.page";
+    }
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(ProjectBuild build, Model model) {
       if (build.getBuildId() == null) {
@@ -86,6 +80,7 @@ public class BuildAction extends BaseController {
         return "project/version/index.page";
     }
 
+
     @ResponseBody
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public Map<String, String> delete(Integer id, Model model) {
@@ -100,6 +95,19 @@ public class BuildAction extends BaseController {
         }
 
         return map;
+    }
+
+    @RequestMapping("/product-al-bug")
+    public String jumpalBug() {
+        return "/project/task/relation-release/product-al-bug.page";
+    }
+    @RequestMapping("/product-al-le-bug")
+    public String jumpleBug() {
+        return "/project/task/relation-release/product-al-le-bug.page";
+    }
+    @RequestMapping("/product-al-no-bug")
+    public String jumpanoBug() {
+        return "/project/task/relation-release/product-al-no-bug.page";
     }
 
 }

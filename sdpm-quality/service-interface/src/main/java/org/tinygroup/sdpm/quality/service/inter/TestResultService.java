@@ -23,4 +23,6 @@ public interface TestResultService {
 	 * @return
 	 */
 	int updateTestResult(QualityTestResult testresult);
+
+	QualityTestResult add(QualityTestResult qualityTestResult);
 }

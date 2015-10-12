@@ -25,7 +25,12 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     @Autowired
     private TaskManager taskManager;
 
+    public Integer deleteProjectStory(Integer projectId, Integer storyId) {
+        return projectStoryManager.deleteByProjectStory(projectId, storyId);
+    }
+
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype) {
+
         List<ProjectStory> storyList = projectStoryManager.findSrotys(projectId);
         String condition = "";
         if (storyList == null || storyList.isEmpty()) {
@@ -37,13 +42,13 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
                 if (StringUtil.isBlank(storys)) {
                     storys = storys + story.getStoryId().toString();
                 } else {
-                    storys = "," + story.getStoryId().toString();
+                    storys = storys + "," + story.getStoryId().toString();
                 }
             }
             condition = condition + storys + ")";
         }
 
-        boolean asc = ordertype == "asc" ? true : false;
+        boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProductStory> pager = storyManager.findPager(start, limit, null, condition, null, null, order, asc);
         for (ProductStory s : pager.getRecords()) {
             s.setTaskNumber(taskManager.getTaskSumByStory(s.getStoryId()));

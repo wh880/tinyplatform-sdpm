@@ -6,6 +6,9 @@
 #set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
+       #* #@div(divClass="dropdownBox")
+            #include("/service/serviceCom/dropdownMenu.page")
+        #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
@@ -13,20 +16,26 @@
     #end
 #end
 #@tabWithInit("tab_demo" "optionsBox")
+##tabbody end
 <p style="width:100%;float:left">
 ##        #@gridSysCol(8)
     #@div(divClass="infoContent")
+    #*  <p class="titleName">阿里巴巴</p>*#
     <p class="titleName">协议内容</p>
+    ##        <div>
+    ##            #@table("协议详情")
+
 
         #@tbody()
             #@tr()
-            <div class="text-c"><h4>${sla.slaTitle}</h4></div>
+            #* <div class="text-c"><h4>支付宝出售协议</h4></div>*#
             #end
             #@noRespsGridSystem()
                 #@gridSysRow()
                     #@gridSysCol(2)#end
                     #@gridSysCol(8)
                         #@tr()
+                        #*#@th()协议具体内容为：#end*#
                             #@td()${sla.slaSpec}#end
                         #end
                     #end
@@ -38,6 +47,9 @@
     ##            #end
     ##        </div>
     <div style="text-align:right;margin:right">
+    #*  #@aExtendButton("btn-primary btn-sm" TINY_CONTEXT_PATH+"/service/sla/form")编辑#end
+      #@delItemsdpm("#action" "id" "/service/client/clientProduct.page" {"class":"btn radius btn-danger btn-sm"})
+       删除#end*#
         #foreach(m:menuManager.getScopeMenus("SlaContent"))
             #if(m.id != "Sla_deleteContent")
                 #@aExtendButton(

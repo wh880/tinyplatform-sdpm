@@ -1,16 +1,7 @@
 <input type="hidden" name="slaId" value="${num}"/>
-#setTinyItemCount(pager.totalPages)
+#setTinyItemCount(pager.totalCount)
 #foreach(var:pager.records)
     #@tr()
-    #* #@td()<input type="checkbox" value="${var.slaId}" name="idCheck">#end
-     #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/clientsla.page">${var.clientId}</a>#end
-     #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">${var.ServiceName}</a>#end
-     #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent.page">${var.slaTitle}#end
-     #@td()${var.cilentProductVision}#end
-     #@td()${var.slaStatus}#end
-     #@td()${var.slaCreatedBy}#end
-     #@td()${var.slaCreateDate}#end
-     #@td()*#
         #@td()<input type="checkbox" value="${var.slaId}" name="idCheck">#end
     #* #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">${var.clientId}</a>#end*#
         #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientDetail?id=${var.clientId}">${var.clientId}</a>#end

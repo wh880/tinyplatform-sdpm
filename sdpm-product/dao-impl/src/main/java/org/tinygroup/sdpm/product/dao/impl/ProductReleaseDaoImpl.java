@@ -19,6 +19,7 @@ package org.tinygroup.sdpm.product.dao.impl;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.*;
+import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
@@ -40,6 +41,7 @@ import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -103,6 +105,20 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 				return delete(PRODUCT_RELEASETABLE).where(PRODUCT_RELEASETABLE.RELEASE_ID.in(t));
 		}
 		},pks);
+	}
+	
+	public List<ProductRelease> getByKeys(Integer... pk){
+		
+		SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
+			@SuppressWarnings("rawtypes")
+			public Select generate(Serializable[] t) {
+
+				return selectFrom(PRODUCT_RELEASETABLE).where(PRODUCT_RELEASETABLE.RELEASE_ID.in(t));
+			}
+			
+		};
+		Select select = callback.generate(pk);
+		return getDslSession().fetchList(select, ProductRelease.class);
 	}
 
 	public ProductRelease getByKey(Integer pk) {

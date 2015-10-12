@@ -48,6 +48,10 @@ public class UserManagerImpl implements UserManager {
         return orgUserDao.query(orgUser);
     }
 
+    public Pager<OrgUser> findUserListByDeptId(Integer start, Integer limit, Integer deptId) {
+        return orgUserDao.getPagerByDeptId(start, limit, deptId);
+    }
+
     public OrgUser add(OrgUser orgUser) {
         return orgUserDao.add(orgUser);
     }

@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action.product;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -112,7 +114,10 @@ public class PlanAction  extends BaseController{
 			@RequestParam(required = false,defaultValue = "planId")String order,
 			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model,HttpServletRequest request){
 		
-		plan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+		if(request.getSession().getAttribute("sessionProductId")!=null){
+			plan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+		}
+		
 		Pager<ProductPlan>  pagerProductPlan = planService.findProductPlanPager(page, pagesize, plan, order, ordertype);
 
 		model.addAttribute("productPlan",pagerProductPlan);
@@ -120,7 +125,14 @@ public class PlanAction  extends BaseController{
 		return "/product/data/allproduct-plan.pagelet";
 	}
 
-	
+	@ResponseBody
+    @RequestMapping("/planList")
+    public List<ProductPlan> findPlan(ProductPlan plan){
+    	
+    	List<ProductPlan> list = planService.findPlanList(plan);
+    	
+    	return list;
+    }
 
 	
 }

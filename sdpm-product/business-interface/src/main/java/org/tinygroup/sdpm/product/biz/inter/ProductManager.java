@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface ProductManager {
@@ -43,6 +44,13 @@ public interface ProductManager {
 	 * @return
 	 */
 	Product find(Integer productId);
+	
+	/**
+	 * 根据多个id查找
+	 * @param productId
+	 * @return
+	 */
+	List<Product> findList(Integer... productId);
 	
 	/**
 	 * 根据对象查找

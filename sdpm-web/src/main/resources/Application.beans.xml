@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="org.tinygroup.sdpm.*"/>
@@ -69,7 +69,6 @@
                 <ref bean="customSqlFileResolver"/>
                 <ref bean="viewFileResolver"/>
                 <ref bean="procedureFileResolver"/>
-
             </list>
         </property>
     </bean>
@@ -92,7 +91,7 @@
         <property name="dataSource" ref="dynamicDataSource"/>
     </bean>
 
-    <bean id="dslSession" name="dslSession" scope="prototype"
+    <bean id="dslSession" name="dslSession"
           class="org.tinygroup.jdbctemplatedslsession.SimpleDslSession">
         <constructor-arg>
             <ref bean="dynamicDataSource"/>

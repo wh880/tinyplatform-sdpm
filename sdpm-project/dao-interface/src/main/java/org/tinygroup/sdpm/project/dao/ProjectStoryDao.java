@@ -23,4 +23,7 @@ import java.util.List;
 
 public interface ProjectStoryDao extends BaseDao<ProjectStory, Integer> {
     public List<ProjectStory> findByProjectID(Integer projectId);
+
+    public Integer deleteByProjectStory(Integer projectId, Integer storyId);
+
 }

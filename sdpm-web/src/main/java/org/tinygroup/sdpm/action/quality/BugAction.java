@@ -1,20 +1,11 @@
 package org.tinygroup.sdpm.action.quality;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -25,7 +16,9 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -58,13 +51,13 @@ public class BugAction extends BaseController {
 	}
 	
 	@RequestMapping("/findBug")
-	public String findBugPager(Integer start,Integer limit,String order,String ordertype,QualityBug bug,Model model,HttpServletRequest request){
+	public String findBugPager(Integer page,Integer limit,String order,String ordertype,QualityBug bug,Model model,HttpServletRequest request){
 		boolean asc = true;		
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
 		bug.setProductId((Integer) request.getSession().getAttribute("qualityProductId"));
-		Pager<QualityBug> bugpager = bugService.findBugListPager(start, limit, bug, order, asc);
+		Pager<QualityBug> bugpager = bugService.findBugListPager(limit*(page-1), limit, bug, order, asc);
 		model.addAttribute("bugpager",bugpager);
 		return "/testManagement/data/BugData.pagelet";
 	}
@@ -89,8 +82,9 @@ public class BugAction extends BaseController {
 		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
 		systemAction.setActionObjectId(bug.getBugId());
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(bug.getProductId());
-		systemAction.setActionObjectType("makeSure");
+		systemAction.setActionProject(bug.getProjectId());
+		systemAction.setActionObjectType("bug");
+		systemAction.setActionActor("makeSure");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
 		return "redirect:"+"/quality/bug";
@@ -112,8 +106,9 @@ public class BugAction extends BaseController {
 
 		systemAction.setActionObjectId(bug.getBugId());
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(bug.getProductId());
-		systemAction.setActionObjectType("assignTo");
+		systemAction.setActionProject(bug.getProjectId());
+		systemAction.setActionObjectType("bug");
+		systemAction.setActionActor("assignTo");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
 		return "redirect:"+"/quality/bug";
@@ -147,8 +142,9 @@ public class BugAction extends BaseController {
 
 		systemAction.setActionObjectId(bug.getBugId());
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(bug.getProductId());
-		systemAction.setActionObjectType("resolve");
+		systemAction.setActionProject(bug.getProjectId());
+		systemAction.setActionObjectType("bug");
+		systemAction.setActionActor("resolve");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
 		return "redirect:"+"/quality/bug";
@@ -173,8 +169,9 @@ public class BugAction extends BaseController {
 
 		systemAction.setActionObjectId(bug.getBugId());
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(bug.getProductId());
-		systemAction.setActionObjectType("close");
+		systemAction.setActionProject(bug.getProjectId());
+		systemAction.setActionObjectType("bug");
+		systemAction.setActionActor("close");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
 		return "redirect:"+"/quality/bug";
@@ -198,8 +195,9 @@ public class BugAction extends BaseController {
 
 		systemAction.setActionObjectId(bug.getBugId());
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(bug.getProductId());
-		systemAction.setActionObjectType("edit");
+		systemAction.setActionProject(bug.getProjectId());
+		systemAction.setActionObjectType("bug");
+		systemAction.setActionActor("edit");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(qualityBug,bug,systemAction);
 		return "redirect:"+"/quality/bug";
@@ -234,8 +232,9 @@ public class BugAction extends BaseController {
 
 		systemAction.setActionObjectId(bug.getBugId());
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(bug.getProductId());
-		systemAction.setActionObjectType("copyBug");
+		systemAction.setActionProject(bug.getProjectId());
+		systemAction.setActionObjectType("bug");
+		systemAction.setActionActor("copyBug");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
 		return "redirect:"+"/quality/bug";
@@ -250,23 +249,24 @@ public class BugAction extends BaseController {
 
 		systemAction.setActionObjectId(bug.getBugId());
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(bug.getProductId());
-		systemAction.setActionObjectType("openBug");
+		systemAction.setActionProject(bug.getProjectId());
+		systemAction.setActionObjectType("bug");
+		systemAction.setActionActor("openBug");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
 		return "redirect:"+"/quality/bug";
 	}
 
 	@RequestMapping("/projectFindList")
-	public String projectFindList(Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
+	public String projectFindList(Model model, Integer page, Integer limit, String order, String ordertype, HttpServletRequest request) {
 		Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
-		boolean asc = ordertype == "asc" ? true : false;
+		boolean asc = "asc".equals(ordertype) ? true : false;
 		QualityBug bug = new QualityBug();
 		bug.setProjectId(projectId);
-		Pager<QualityBug> page = bugService.findBugListPager(start, limit, bug, order, asc);
-		model.addAttribute("bugPage", page);
-		page.getRecords();
-		page.getTotalCount();
+		Pager<QualityBug> bugPage = bugService.findBugListPager(limit*(page-1), limit, bug, order, asc);
+		model.addAttribute("bugPage", bugPage);
+		bugPage.getRecords();
+		bugPage.getTotalCount();
 		return "project/bug/bugViewTableData.pagelet";
 	}
 }

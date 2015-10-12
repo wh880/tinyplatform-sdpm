@@ -3,12 +3,7 @@
     #@foldItem("2015-08-26 09:19:52, 由 Demo 指派给 Demo")记录详情<br>
 		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
 	 #end
-	 #@foldItem("2015-08-25 09:15:58, 由 Demo 开始启动")记录详情<br>
-		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
-	 #end
-	 #@foldItem("2015-08-24 09:16:58, 由 Demo 指派给 Mack")记录详情<br>
-		修改了<b>预计剩余</b>值为 "0"，新值为 "2"。
-	 #end
+
 #end
 <script type="text/javascript">
 $(function(){

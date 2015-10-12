@@ -9,8 +9,10 @@
 
 #set(name="documentDocu")
 #include("doc-tab.page")
-#@tinyForm("this--form" TINY_CONTEXT_PATH+"/document/doc/save" "post" {"class":"edit"})
+#@tinyForm("this--form" TINY_CONTEXT_PATH+"/document/doc/editSave" "post" {"class":"edit"})
 <input name="docId" type="hidden" value="${doc?.docId}"/>
+<input name="productId" type="hidden" value="${product?.productId}"/>
+<input name="docLibId" type="hidden" value="${libList?.docLibId}"/>
 	<div style="width:100%">
     	<div class="infoContent">
 			<p class="titleName">编辑</p>
@@ -19,15 +21,15 @@
          <div class="col-2 text-r"><label>所属文档库：</label></div>
          <div class="col-4">
           #@Tselect2F()
-	          #@Tselect2Body("docLib" doc?.docLib {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	               #foreach(var:liblist)
-	               <option value="${var?.docLibName}">${var?.docLibName}</option>
+	          #@Tselect2Body("docLibId" var?.docLibId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	               #foreach(var:libList)
+	               	<option value="${var?.docLibId}">${var?.docLibName}</option>
 	               #end
 	                
 	               #end                
-	           #@Tselect2Fix()
+#*	           #@Tselect2Fix()
 	           	<a href="#">全部</a>#end
-              #end
+               #end*#
               	</div>
        		</div>
      #end
@@ -37,10 +39,11 @@
          <div class="col-4">
           #@Tselect2F()
 	          #@Tselect2Body("docModule" doc?.docModule {"class":"input-text select2"}) 
+#*        		 #foreach(var:libList)
 	                <option value="${doc?.docModule}">${doc?.docModule}</option>
-	               <option value="ME">ME</option>
-	                <option value="MD">MD</option>
-	               #end                	         
+	            #end *#
+	            <option value="1">分类1</option>
+	          #end                	         
               #end
               	</div>
        		</div>
@@ -115,8 +118,7 @@
             </div>
             <div class="col-1"></div>
             <div class="col-1">
-                <a href="${TINY_CONTEXT_PATH}/document/doc/list?libname=${doc?.docLib}">
-                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
             </div>
             <div class="col-5"></div>
         </div>
@@ -130,6 +132,5 @@
 #end     
 
 <script type="text/javascript">
-    $(".select2").select2();
-    
+    $(".select2").select2();    
 </script>

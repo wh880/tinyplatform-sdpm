@@ -8,9 +8,6 @@
   <standard-field id="0dad99e5e3824c3f89a0d03f95baa577" name="doc_project" title="所属项目" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
     <description>所属项目，存储项目ID作为索引</description>
   </standard-field>
-  <standard-field id="b4c51ca729444d619a90b285dbec71dc" name="doc_lib" title="所属文档库" business-type-id="095e594e1550424b9643c7e2279e85be">
-    <description>所属文档库</description>
-  </standard-field>
   <standard-field id="99697402b1524b2980168f11bc9dfcef" name="doc_module" title="所属分类" business-type-id="095e594e1550424b9643c7e2279e85be">
     <description>所属分类</description>
   </standard-field>
@@ -32,10 +29,10 @@
   <standard-field id="cc191e36888f4414938be77d84babd0e" name="doc_url" title="文档url" business-type-id="27ebfcdc558c477da425a46e566d4637">
     <description>文档url</description>
   </standard-field>
-  <standard-field id="b2dad0bf75e34c4abed7b3d9b1af4896" name="doc_views" title="DOC查阅次数" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
+  <standard-field id="b2dad0bf75e34c4abed7b3d9b1af4896" name="doc_views" title="DOC查阅次数" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0">
     <description>查阅次数</description>
   </standard-field>
-  <standard-field id="334e1412adb4444dad2e951a1f167453" name="doc_added_by" title="DOC由谁添加" business-type-id="095e594e1550424b9643c7e2279e85be">
+  <standard-field id="334e1412adb4444dad2e951a1f167453" name="doc_added_by" title="DOC由谁添加" business-type-id="095e594e1550424b9643c7e2279e85be" default="">
     <description>由谁添加</description>
   </standard-field>
   <standard-field id="389533862bbd4507a77bda520ddde316" name="doc_added_date" title="DOC添加时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff">
@@ -47,7 +44,7 @@
   <standard-field id="59a569420f764db3b2a292c350d740ca" name="doc_edited_date" title="文档编辑时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff">
     <description>编辑时间</description>
   </standard-field>
-  <standard-field id="4240a1ee3cc04b6f9621e95ed93b8b22" name="doc_deleted" title="文档删除标志" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629">
+  <standard-field id="4240a1ee3cc04b6f9621e95ed93b8b22" name="doc_deleted" title="文档删除标志" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">
     <description>已删除</description>
   </standard-field>
   <standard-field id="509aa7b0d6ee413ab1f3b4ad99e28843" name="doc_lib_id" title="文档库ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
@@ -56,7 +53,7 @@
   <standard-field id="95b70aee2d1e4c9dbf04e6688ffb9bee" name="doc_lib_name" title="文档库名字" business-type-id="a30696c1e44441ecad77a832afd3731d">
     <description>文档库名字</description>
   </standard-field>
-  <standard-field id="2655a73603e54dd98679d4163bd0851f" name="doc_lib_deleted" title="删除文档库标志" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629">
+  <standard-field id="2655a73603e54dd98679d4163bd0851f" name="doc_lib_deleted" title="删除文档库标志" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">
     <description>已删除，并不真正删除数据，只是相应比标志位变参而已。</description>
   </standard-field>
   <standard-field id="9282649ea9b249eb9df0c2f9581c625c" name="doc_lib_added_date" title="文档库添加时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff">

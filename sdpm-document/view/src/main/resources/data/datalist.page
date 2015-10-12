@@ -3,15 +3,15 @@
 #foreach(l:docpager.getRecords())
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view?libname=${l?.docLib}&docid=${l?.docId}">${l?.docId}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view?libname=${l?.docLib}&docid=${l?.docId}">${l?.docTitle}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view?libId=${l?.docLibId}&docid=${l?.docId}">${l?.docId}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view?libId=${l?.docLibId}&docid=${l?.docId}">${l?.docTitle}</a>#end
 	#@td()${l?.getDocType()}#end
 	#@td()${l?.getDocAddedBy()}#end
 	#@td()${l?.getDocAddedDate()}#end
 	 #@td()
 	 	#foreach(m:menuManager.getScopeMenus("doc-op"))
 			#if(m.id != "docdelete")
-				<a href="${TINY_CONTEXT_PATH}${m.href}?libname=${l?.docLib}&docid=${l?.docId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+				<a href="${TINY_CONTEXT_PATH}${m.href}?docId=${l?.docId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 			#else
 				#@tinyTableItemRemove(TINY_CONTEXT_PATH+m.href l.docId)
 					<i class="${m.icon}" title="删除"></i>

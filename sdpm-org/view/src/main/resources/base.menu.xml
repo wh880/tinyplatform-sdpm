@@ -82,7 +82,7 @@
     </menu>
     <menu id="organizationPrivilege" name="角色" href="/org/privilege/list" icon="" sort="1" isShow="1"
     >
-        <menu id="org-privilege-maintain" name="权限维护" href="/organization/privilege/privilegeMaintain.page"
+        <menu id="org-privilege-maintain" name="权限维护" href="/org/roleMenu/show"
               icon="icon-lock" sort="1" isShow="1"
               scope="org-privilege"/>
         <menu id="org-privilege-user" name="成员维护" href="/organization/privilege/groupMaintain.page"

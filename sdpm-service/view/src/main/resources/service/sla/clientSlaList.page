@@ -14,8 +14,8 @@
         #foreach(var:slas)
             #@gridSysCol(4)
                 #@div(divClass="infoContent")
-                    <p class="titleName">支付宝协议</p>
-
+                #*<p class="titleName">支付宝协议</p>*#
+                    <p class="titleName">${var.slaTitle}</p>
                     <div>
                         #@table("")
                             #@tbody()
@@ -33,8 +33,8 @@
                                 #end
                                 #@tr()
                                     #@th()协议内容#end
-                                    #@td()<a
-                                            href="${TINY_CONTEXT_PATH}/service/sla/slaContent?id=${var.slaId}">${var.slaSpec}#end
+                                    #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent?id=${var.slaId}">详情#end
+                                #*#@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent?id=${var.slaId}">${var.slaSpec}#end*#
                                 #* #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent.page">详情#end*#
                                 #end
                                 #@tr()

@@ -7,55 +7,55 @@
             #@tbody()
                 #@tr()
                     #@th()项目名称#end
-                    #@td()文化大革命#end
+                    #@td()${selProject?.projectName}#end
                 #end
                 #@tr()
                     #@td()项目代号#end
-                    #@td()wg#end
+                    #@td()${selProject?.projectCode}#end
                 #end
                 #@tr()
                     #@td()起止时间#end
-                    #@td()111~222#end
+                    #@td()${selProject?.projectBegin}~${selProject?.projectEnd}#end
                 #end
                 #@tr()
                     #@td()可用工作日#end
-                    #@td()1#end
+                    #@td()${selProject?.projectDays}#end
                 #end
                 #@tr()
                     #@td()项目类型#end
-                    #@td()短期项目#end
+                    #@td()${selProject?.projectType}#end
                 #end
                 #@tr()
                     #@td()项目状态#end
-                    #@td()进行中#end
+                    #@td()${selProject?.projectStatus}#end
                 #end
                 #@tr()
                     #@td()项目负责人#end
-                    #@td()#end
+                    #@td()${selProject?.projectPM}#end
                 #end
                 #@tr()
                     #@td()产品负责人#end
-                    #@td()#end
+                    #@td()${selProject?.projectPO}#end
                 #end
                 #@tr()
                     #@td()测试负责人#end
-                    #@td()#end
+                    #@td()${selProject?.projectQD}#end
                 #end
                 #@tr()
                     #@td()发布负责人#end
-                    #@td()#end
+                    #@td()${selProject?.projectRD}#end
                 #end
                 #@tr()
                     #@td()相关产品#end
-                    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">中华明国#end
+                    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">${selProduct?.productName}#end
                 #end
                 #@tr()
                     #@td()访问控制#end
-                    #@td()默认设置(有项目视图权限，即可访问)#end
+                    #@td()${selProject?.projectAcl}(有项目视图权限，即可访问)#end
                 #end
                 #@tr()
                     #@td()分组白名单#end
-                    #@td()#end
+                    #@td()${selProject?.projectWhiteList}#end
                 #end
             #end
         #end
@@ -65,16 +65,16 @@
         <table>
             <tr>
                 <td rowspan="4">工时统计</td>
-                <td>总共预计20工时</td>
+                <td>总共预计${selProject?.projectDays}工时</td>
             </tr>
             <tr>
-                <td>可用工时483.0工时</td>
+                <td>可用工时${selProject?.projectDays}工时</td>
             </tr>
             <tr>
-                <td>已经消耗1工时</td>
+                <td>已经消耗${selProject?.projectDays}工时</td>
             </tr>
             <tr>
-                <td>预计剩余19工时</td>
+                <td>预计剩余${selProject?.projectDays}工时</td>
             </tr>
         </table>
     #end

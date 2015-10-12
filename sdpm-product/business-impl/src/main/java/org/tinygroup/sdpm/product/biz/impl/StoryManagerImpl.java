@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
 import org.tinygroup.sdpm.product.dao.ProductStorySpecDao;
@@ -49,19 +50,15 @@ public class StoryManagerImpl implements StoryManager{
 		return productStoryDao.getByKey(storyId);
 	}
 
-	public int[] updateBatch(ProductStory[] stories) {
+	public int[] updateBatch(List<ProductStory> stories) {
 		
-		List<ProductStory>  productStories = new ArrayList<ProductStory>();
-    	if(stories!=null&&stories.length>0){
-    		productStories = Arrays.asList(stories);
-    	}
 		
-		return productStoryDao.batchUpdate(productStories);
+		
+		return productStoryDao.batchUpdate(stories);
 	}
 
 	public List<ProductStory> findList(ProductStory story,String order,String ordertype) {
-		
-		return productStoryDao.query(story,new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+		return productStoryDao.query(story,(order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {

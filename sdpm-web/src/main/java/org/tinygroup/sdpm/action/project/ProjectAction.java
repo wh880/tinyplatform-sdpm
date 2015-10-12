@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -68,5 +69,27 @@ public class ProjectAction extends BaseController {
     @RequestMapping("/allProject")
     public String jumpAllProject() {
         return "project/allProject.page";
+    }
+
+    @RequestMapping("/edit")
+    public String form(Integer projectId, Model model) {
+        if (projectId != null) {
+            Project project = projectService.findById(projectId);
+            model.addAttribute("project", project);
+            //还需要查询其他相关任务剩余时间的信息
+            return "project/survey/edit.page";
+        }
+        return "error";
+    }
+
+    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
+    public String editSave(Project project, Model model) {
+        if (project.getProjectId() == null) {
+            projectService.addProject(project);
+        } else {
+            projectService.updateProject(project);
+        }
+        model.addAttribute("project", project);
+        return "project/survey/index.page";
     }
 }

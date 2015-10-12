@@ -24,6 +24,10 @@ public class FaqServiceImpl implements FaqService{
         return faqManager.getList(faq);
     }
 
+    /*分页*/
+/*public Pager<ServiceFaq> getFaqpage(int start, int limit) {
+    return faqManager.getpage( start, limit);
+}*/
     public ServiceFaq addFaq(ServiceFaq faq) {
         return faqManager.add(faq);
     }
@@ -34,5 +38,10 @@ public class FaqServiceImpl implements FaqService{
 
     public Integer deleteFaq(Integer id) {
         return faqManager.delete(id);
+    }
+
+    /*查询问题总条数*/
+    public Integer selectcount(Integer id) {
+        return faqManager.selectcount(id);
     }
 }

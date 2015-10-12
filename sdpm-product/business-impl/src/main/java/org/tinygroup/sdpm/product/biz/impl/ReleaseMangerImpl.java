@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.product.biz.inter.ReleaseManger;
 import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
@@ -47,17 +48,22 @@ public class ReleaseMangerImpl implements ReleaseManger{
 
 	public List<ProductRelease> findList(ProductRelease release, String order,String ordertype) {
 		
-		return productReleaseDao.query(release,  new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+		return productReleaseDao.query(release,  (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public Pager<ProductRelease> findPager(int page, int limit, ProductRelease release, String order,String ordertype) {
 		
-		return productReleaseDao.queryPager((page-1)*limit, limit, release, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+		return productReleaseDao.queryPager((page-1)*limit, limit, release, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public List<ProductRelease> findList(ProductRelease productRelease) {
 		
 		return productReleaseDao.query(productRelease, null);
+	}
+
+	public List<ProductRelease> findList(Integer... releaseId) {
+
+		return productReleaseDao.getByKeys(releaseId);
 	}
 
 

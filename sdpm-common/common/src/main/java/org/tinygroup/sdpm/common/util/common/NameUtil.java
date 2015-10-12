@@ -5,6 +5,9 @@ package org.tinygroup.sdpm.common.util.common;
  */
 public class NameUtil {
     public static String resolveNameDesc(String name){
+        if(name == null){
+            return null;
+        }
         if(!name.contains("_")){
             char[] n = name.toCharArray();
             StringBuffer result = new StringBuffer();
@@ -28,6 +31,9 @@ public class NameUtil {
     }
 
     public static String resolveNameAsc(String name){
+        if(name == null){
+            return null;
+        }
         if(name.contains("_")){
             String[] names = name.split("_");
             StringBuffer result = new StringBuffer().append(names[0]);

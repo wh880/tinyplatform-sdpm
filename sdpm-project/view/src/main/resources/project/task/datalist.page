@@ -2,7 +2,7 @@
 <input type="hidden" name="records" value="${num}"/>
 #end
 #include("/project/task/maplist.page")
-#set(records=taskPager.records.size(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=taskPager.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
@@ -10,9 +10,9 @@
 #for(t:taskPager.records)
 #@tr()
     #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">${t?.taskId}</a> #end
+    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/findTask?taskId=${t?.taskId}">${t?.taskId}</a> #end
     #@td()${t?.taskPri}</a>#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">${t?.taskName}#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/project/task/findTask?taskId=${t?.taskId}">${t?.taskName}#end
     #if(t.taskStatus)
         #@td()${showStatuMap.get(t.taskStatus)}#end
     #else

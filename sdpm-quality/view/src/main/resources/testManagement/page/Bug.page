@@ -32,7 +32,7 @@
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>*#
 					#foreach(m:menuManager.getScopeMenus("testbugleft-tab"))
 						#if(m.id != "tsearch")
-							<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==status?'active_btn':''}">${m.name}</a>
+							<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==get?'active_btn':''}">${m.name}</a>
 						#else
 							<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 						#end
@@ -75,8 +75,6 @@
 							  	#end
 						#end
                     
-			##		<a href="${TINY_CONTEXT_PATH}/testManagement/page/reportform.page">#buttonIcon(iconClass="icon-plus-sign")报表</a>&nbsp;
-			##		<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page">#buttonIcon(iconClass="icon-plus")建Bug</a>
 				</span>
 				#div(divClass="clearfix")
 				#include("/testManagement/page/mulsearch.page")

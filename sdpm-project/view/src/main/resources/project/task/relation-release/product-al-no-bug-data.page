@@ -18,7 +18,7 @@
     #@td()121#end
     #@td()admin#end
     #@td()
-        #@tinyTableItemRemove("" "1")<i class="icon-remove"></i>#end
+        #@tinyTableItemRemove(TINY_CONTEXT_PATH+"/project/version/delete" "1")<i class="icon-remove"></i>#end
     #end
 
 #end

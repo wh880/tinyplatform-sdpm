@@ -67,8 +67,6 @@
 	                       <a href="${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 	                #elseif(m.id=="product-overview-editor")       
 	                         <a href="${TINY_CONTEXT_PATH}${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-	
-	
 	                #end
 	            #end
 

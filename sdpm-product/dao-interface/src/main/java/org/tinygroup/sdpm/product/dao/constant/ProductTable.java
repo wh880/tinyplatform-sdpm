@@ -49,7 +49,7 @@ public class ProductTable extends Table {
 	 * 产品线ID
 	 * 
 	 */
-	public final Column PRODUCTLINE_ID = new Column(this, "productLine_id");
+	public final Column PRODUCT_LINE_ID = new Column(this, "product_line_id");
 
 	/** 
 	 * 产品名称

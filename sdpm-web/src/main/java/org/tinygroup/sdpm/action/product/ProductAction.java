@@ -15,6 +15,7 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
@@ -22,6 +23,10 @@ import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.weblayer.WebContext;
+
+import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
 
 /**
  * 产品控制器
@@ -47,25 +52,37 @@ public class ProductAction  extends BaseController{
 
 	@RequestMapping("")
 	public String productAction(HttpServletRequest request, WebContext webContext){
-		List<Product> list = (List<Product>) request.getSession().getAttribute("productList");
+		List<Product> sessionList = (List<Product>) request.getSession().getAttribute("productList");
 		String oldUrl = webContext.get("oldUrl");
-		if(list == null|| list.size()==0){
-			list = productService.findProductList(new Product(),"productId","desc");
-			request.getSession().setAttribute("productList",list);
+		List<Product> list = SessionUtil.ProductRefresh(request, productService);
+		if(sessionList == null|| sessionList.size()==0){
 			
-			if(null==request.getSession().getAttribute("sessionProductId")||""==request.getSession().getAttribute("sessionProductId")){
-				request.getSession().setAttribute("sessionProductId",list.get(0).getProductId());
+			if(request.getSession().getAttribute("sessionProductId")==null){
+				request.getSession().setAttribute("sessionProductId",list.size()>0?list.get(0).getProductId():null);
 			}
 		}
 		
 		return "redirect:/product/story?"+(list.size()>0?("productId="+list.get(0).getProductId()):"")+"&choose=1"+(request.getQueryString()==null?"":("&"+request.getQueryString()));
 	}	
 	
+	@RequestMapping("/save")
+	public String save(Product product, Model model,HttpServletRequest request) {
+		
+		if(request.getSession().getAttribute("sessionProductLineId")!=null){
+			product.setProductLineId((Integer)request.getSession().getAttribute("sessionProductLineId"));
+		}
+		product = productService.addProduct(product);
+		SessionUtil.ProductRefresh(request, productService);
+		request.getSession().setAttribute("sessionProductId",product.getProductId());
+		return "redirect:" + "/product/page/tabledemo/product-listall.page";
+
+	}
+	
 	@RequestMapping("/update")
-	public String update(Product product){
+	public String update(Product product,HttpServletRequest request){
 
 		productService.updateProduct(product);
-		
+		SessionUtil.ProductRefresh(request, productService);
 		return "redirect:" + "/product/page/tabledemo/product-listall.page";
 	}
 	
@@ -83,9 +100,10 @@ public class ProductAction  extends BaseController{
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(Integer productId){
+	public String delete(Integer productId,HttpServletRequest request){
 		
 		productService.deleteProduct(productId);
+		SessionUtil.ProductRefresh(request, productService);
 		return "redirect:" + "/product/page/tabledemo/product-listall.page";
 	}
 	
@@ -148,5 +166,13 @@ public class ProductAction  extends BaseController{
 		
 		return "/organization/userbaseinfo.pagelet";
 	}
-
+	
+	@ResponseBody
+    @RequestMapping("/productList")
+    public List<Product> findProduct(Product product){
+    	
+    	List<Product> list = productService.findProductList(product);
+    	
+    	return list;
+    }
 }

@@ -22,16 +22,16 @@
 				#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:;" "deleteBatch" "batchDel")&nbsp;批量删除#end
 				
 			#end
-			#@tinyTableContent(TINY_CONTEXT_PATH+"/document/doc/list?libname="+libname) ##取数据地址 总数据
+			#@tinyTableContent(TINY_CONTEXT_PATH+"/document/doc/list") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})文档标题#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})文档类型#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})由谁添加#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})添加时间#end
-						#@tinyTh({"class":"","rel":"sortname"})操作#end
+						#@tinyTh({"class":"sorting","rel":"doc_id"})ID#end
+						#@tinyTh({"class":"sorting","rel":"doc_title"})文档标题#end
+						#@tinyTh({"class":"sorting","rel":"doc_type"})文档类型#end
+						#@tinyTh({"class":"sorting","rel":"doc_added_by"})由谁添加#end
+						#@tinyTh({"class":"sorting","rel":"doc_added_date"})添加时间#end
+						#@tinyTh({"class":"","rel":""})操作#end
 					#end
 				#end
 			#end

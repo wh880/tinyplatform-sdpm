@@ -7,27 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.tinysqldsl.Pager;
 
 @Service
 @Transactional
 public class ProductManagerImpl implements ProductManager{
-	
+
 	@Autowired
 	private ProductDao productDao;
 	
 	public Product add(Product product) {
 		
-		
-		if(1!=product.getAcl()){
-			product.setProductWhiteList("");
-		}
-		product.setProductCreatedDate(new Date());
-		product.setDeleted(FieldUtil.DELETE_NO);
 		return productDao.add(product);
 	}
 
@@ -67,12 +63,17 @@ public class ProductManagerImpl implements ProductManager{
 	public List<Product> findList(Product product, String order,String ordertype) {
 		
 		
-		return productDao.query(product,  new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+		return productDao.query(product,  (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public Pager<Product> findPager(int page, int limit, Product product, String order,String ordertype) {
 		
-		return productDao.queryPager((page-1)*limit, limit, product, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+		return productDao.queryPager((page-1)*limit, limit, product, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+	}
+
+	public List<Product> findList(Integer... productId) {
+
+		return productDao.getByKeys(productId);
 	}
 
 }

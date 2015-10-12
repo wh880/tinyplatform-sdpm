@@ -4,16 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by wangying14938 on 2015-09-22.需求
@@ -57,4 +59,21 @@ public class ProjectstoryAction extends BaseController {
 //        }
 //        return null;
 //    }
+
+    @ResponseBody
+    @RequestMapping("/delete")
+    public Map<String, String> delete(Integer id, HttpServletRequest request) {
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        //根据id进行软删
+        Map<String, String> map = new HashMap<String, String>();
+        Integer result = projectStoryService.deleteProjectStory(projectId, id);
+        if (result > 0) {
+            map.put("status", "y");
+            map.put("info", "删除成功");
+        } else {
+            map.put("status", "n");
+            map.put("info", "删除失败");
+        }
+        return map;
+    }
 }

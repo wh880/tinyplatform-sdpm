@@ -1,7 +1,6 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
-#!set(linkName="product-plan",sonitem="
-<li>"+"计划"+"</li>")
+#!set(linkName="product-plan",sonitem="<li>"+"计划"+"</li>")
 
 
 #@tabBodyCol("ptop-5")
@@ -10,11 +9,11 @@
     <span class="f">
 					<span class="active_btn">浏览计划</span>
 				</span>
-        #foreach(m:menuManager.getScopeMenus("product-addpl"))
-            #if(m.id=="product-plan-add")
+        #foreach(m:menuManager?.getScopeMenus("product-addpl"))
+        #set(url=eval(m?.href))
+            #if(m?.id=="product-plan-add")
             <span class="r">
-					<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-addplan.page">#buttonIcon(iconClass=
-                        "icon-plus")创建计划</a>&nbsp;
+					<a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m?.icon)创建计划</a>&nbsp;
 				</span>
                 #end
             #end

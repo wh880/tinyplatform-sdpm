@@ -25,4 +25,6 @@ public interface TestResultManager {
 	 */
 	int update(QualityTestResult testresult);
 
+	QualityTestResult add(QualityTestResult qualityTestResult);
+
 }

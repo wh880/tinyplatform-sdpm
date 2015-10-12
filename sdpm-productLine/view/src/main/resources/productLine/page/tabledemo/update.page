@@ -3,15 +3,7 @@
 #include("/productLine/page/event/mytree.page")
 #set(linkName="overview")
 
-#macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
-	<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked") checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass) class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio" onclick="${radioOther}"/>
-#end
-#macro labelRadio1(rId rName rChecked rValue rClass radioOther labelText)
-	#@radioBox()
-		#radio1(rId=rId rName=rName rChecked=rChecked rValue=rValue rClass=rClass radioOthe=radioOther)
-		#@label(ckId)${labelText}#end
-	#end
-#end
+
 
 
 #@toggleBox({"class":"open"})
@@ -37,9 +29,8 @@
 	#@toggleRight()
 		
 				
-		#@tinyForm("thisform" TINY_CONTEXT_PATH+"/productLine/update" "post" {"class":""})
-		
-			#tinyInput("text" "productLineId" productLine.productLineId {"class":"input-text hidden"})
+		#@tinyForm("thisform" TINY_CONTEXT_PATH+"/productLine/update" "post" )
+		#hiddenInput("","productLineId","",productLine?.productLineId)
 			
 			#@elementItem()
 				#@colLabel()产品线名称：#end

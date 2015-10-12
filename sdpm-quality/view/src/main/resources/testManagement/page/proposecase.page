@@ -23,7 +23,7 @@
 
 #end
 
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/case/save" "post" {"class":""})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/testCase/save" "post" {"class":""})
     #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testCase?.caseId)
 	<div style="width:100%">
     	<div class="infoContent">
@@ -33,40 +33,37 @@
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("productId" testCase?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">产品2</option>
-	                        <option value="DE">产品3</option>
-	                        <option value="FL">产品4</option>
-	                        <option value="GA">产品5</option>
-	                        <option value="IN">产品1</option>
+                            #@Tselect2Body("productId" testCase?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                #for(product : productList)
+                                <option value="${product?.productId}">${product?.productName}</option>
+                                #end
 	                    	#end                  
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
+                    <script type="text/javascript">
+                        $("#${sid}").on("change",function(){
+                            var pId = $("#${sid}  option:selected").val();
+                            ajaxRead("moduleId","moduleId","moduleTitle","/quality/testCase/ajax/module?productId="+pId);
+                            ajaxRead("storyId","storyId","storyTitle","/quality/testCase/ajax/story?productId="+pId);
+                        })
+                    </script>
                 	  #end
-#*					#@tinySelect("lang" "1" {"class":"select2"})
-							#@tinyOptionItem("1")日本三菱#end
-							#@tinyOptionItem("2")销售系统#end
-							#@tinyOptionItem("3")国产需求#end
-					#end*#
+
 					#end
 					#@div(divClass="col-0")&nbsp;&nbsp#end
 					#@div(divClass="col-3")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("moduleId" testCase?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">/1/2</option>
-	                        <option value="DE">/2/3</option>
-	                        <option value="IN">/3/4</option>
-	                    	#end                
+                            #@Tselect2Body("moduleId" testCase?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                    	#end
+                        <script type="text/javascript">
+                            $(document).ready(function(){
+                                var pId = $("select[name=productId] option:selected").val();
+                                ajaxRead("moduleId","moduleId","moduleTitle","/quality/testCase/ajax/module?productId="+pId);
+                            });
+                        </script>
                 	  #end
-#*					#@tinySelect("lang" "zh" {"class":"select2"})
-							#@tinyOptionItem("zh")/首页#end
-							#@tinyOptionItem("en")/轮播图#end
-							#@tinyOptionItem("ta")/导航#end
-					#end*#
 					#end
-#*					#buttonRadiusDefault(caption="维护模板")
-					#buttonRadiusDefault(caption="刷新")*#
 				#end
         #end
         #@elementItem()
@@ -75,9 +72,9 @@
             	#@div(divClass="col-5")
                      #@Tselect2F()
 	                   		 #@Tselect2Body("caseType" testCase?.caseType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
 	                    	#end                
                 	  #end
                 #end
@@ -91,14 +88,10 @@
                #@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("caseStage" testCase?.caseStage {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">版本1</option>
-	                        <option value="ME">版本2</option>
-	                        <option value="MD">版本3</option>
-	                    	#end                
-#*	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
-	                    	#end*#
+	                        <option value="1">版本1</option>
+	                        <option value="2">版本2</option>
+	                        <option value="3">版本3</option>
+	                    	#end
                 	  #end
                 #end
             #end
@@ -113,7 +106,6 @@
 							#@tinyOptionItem("3")1#end
 							#@tinyOptionItem("1")2#end
 							#@tinyOptionItem("2")3#end
-							
 					#end
                 #end
             #end
@@ -124,16 +116,21 @@
             #@colLabel()相关需求：#end
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
-							 #@Tselect2F()
+                        #@Tselect2F()
 	                   		 #@Tselect2Body("storyId" testCase?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">需求1</option>
-	                        <option value="ME">需求2</option>
-	                        <option value="MD">需求3</option>
+
 	                    	#end                
 	                      	#@Tselect2Fix()
-	                      	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
-	                      	<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">全部</a>#end
-                			#end
+                                <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
+                                <a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">全部</a>
+                            #end
+                            <script type="text/javascript">
+                                $(document).ready(function(){
+                                    var pId = $("select[name=productId]  option:selected").val();
+                                    ajaxRead("storyId","storyId","storyTitle","/quality/testCase/ajax/story?productId="+pId);
+                                });
+                            </script>
+                        #end
 					#end
 			#end
         #end
@@ -169,8 +166,8 @@
                     #for(i:[1..3])
                     #@tr()
                         #@td()${i}#end
-                        #@td()#inputRadiusDefaultText()#end
-                        #@td()#inputRadiusDefaultText()#end
+                        #@td()#tinyInput("text" "step" testCase?.caseTitle {"datatype":"*10-500","id":"版本","class":"input-text"})#end
+                        #@td()#tinyInput("text" "expect" testCase?.caseTitle {"datatype":"*10-500","id":"版本","class":"input-text"})#end
                         #@td()#@div()
                             #buttonRadiusPrimary(btClass="btn-small" caption="之前添加")
                             #buttonRadiusPrimary(btClass="btn-small" caption="之后添加")
@@ -208,8 +205,6 @@
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-#*            <a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
-                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>*#
                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
             </div>
             <div class="col-5"></div>
@@ -222,6 +217,34 @@
 
 <script type="text/javascript">
     $(".select2").select2();
+
+    function ajaxRead(toName,opKey,opvalue,url){
+        var selectCheck = "select[name="+toName+"]";
+        $(selectCheck).each(function(){
+            var sele = $(this);
+            $.ajax({
+                type: "POST",
+                url: "${TINY_CONTEXT_PATH}"+url,
+                data: $(this).attr('data'),
+                dataType:"json",
+                success: function(data){
+                    for(var i=0,l=data.length;i<l;i++){
+                        var em = "<option value='"+data[i][opKey]+"'>"+ data[i][opvalue] +"</option>";
+                        sele.append(em);
+
+                    }
+                    sele.val(data[0][opKey]).trigger("change");
+
+                },
+                error: function(res){
+                    alert("失败");
+                }
+            });
+
+
+        });
+
+    }
 </script>
 
 

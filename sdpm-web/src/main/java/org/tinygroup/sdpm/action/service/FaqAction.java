@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
@@ -43,8 +44,7 @@ public class FaqAction extends BaseController {
         {
             faq = faqService.updateFaq(faq);
         }
-        model.addAttribute("faq",faq);
-        return "/service/faq/faqmenu.page";
+        return "redirect:/service/faq/list";
     }
 
     /*对问题进行“编辑”*/
@@ -59,10 +59,21 @@ public class FaqAction extends BaseController {
 
     /*把faqmenu页面的所有问题都查询出来*/
     @RequestMapping("/list")
-    public String list(ServiceFaq faq,Model model)
+    public String list(ServiceFaq faq, Integer id,
+                       @RequestParam(required = false, defaultValue = "1") int page,
+                       @RequestParam(required = false, defaultValue = "10") int pageSize,
+                       @RequestParam(required = false, defaultValue = "faqId") String order,
+                       @RequestParam(required = false, defaultValue = "asc") String ordertype,
+                       Model model)
     {
+        /*查询问题总条数*/
+        Integer totalNum = faqService.selectcount(id);
+
         List<ServiceFaq> list=faqService.getFaqList(faq);
+        /*分页*/
+       /* Pager<ServiceFaq> list=faqService.getFaqpage(int start,int limit);*/
         model.addAttribute("list",list);
+        model.addAttribute("totalNum", totalNum);
         return "/service/faq/faqmenu.page";
     }
     /*删除*/
@@ -76,4 +87,35 @@ public class FaqAction extends BaseController {
         map.put("info", "删除成功");
         return map;
     }
+
+    /*点击问题进去，显示里面的问题和答案。由faqquestion.page跳转过来。*/
+    @RequestMapping("/questionAnswer")
+    public String questionAnswer(Integer id, Model model) {
+        ServiceFaq faqs = faqService.findFaq(id);
+        model.addAttribute("faqs", faqs);
+        return "/service/faq/questionAnswer.page";
+    }
+
+    /*点击问题进去，显示里面的编辑和删除*/
+    @RequestMapping(value = "/faqContentEdit")
+    public String slaContentEdit(Integer id, Model model) {
+        if (id != null) {
+            ServiceFaq faq = faqService.findFaq(id);
+            model.addAttribute("faq", faq);
+        }
+
+        return "/service/faq/addquestion.page";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/faqContentDelete")
+    public Map faqTitleDelete(Integer id) {
+        faqService.deleteFaq(id);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "y");
+        map.put("info", "删除成功");
+        return map;
+    }
+    /*查找问题数量*/
+
 }

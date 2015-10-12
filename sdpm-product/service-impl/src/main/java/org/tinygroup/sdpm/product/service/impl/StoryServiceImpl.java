@@ -37,7 +37,7 @@ public class StoryServiceImpl implements StoryService {
 		return storyManager.find(storyId);
 	}
 
-	public int[] updateBatchStory(ProductStory[] stories) {
+	public int[] updateBatchStory(List<ProductStory> stories) {
 		
 		return storyManager.updateBatch(stories);
 	}
@@ -57,5 +57,9 @@ public class StoryServiceImpl implements StoryService {
 		return storyManager.findList(storyId);
 	}
 
+	public List<ProductStory> findStoryList(ProductStory story){
+
+		return storyManager.findList(story);
+	}
 
 }

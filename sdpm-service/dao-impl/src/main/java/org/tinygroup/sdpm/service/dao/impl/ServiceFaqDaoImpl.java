@@ -35,6 +35,7 @@ import java.util.List;
 import static org.tinygroup.sdpm.service.dao.constant.ServiceFaqTable.SERVICE_FAQTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
@@ -264,4 +265,13 @@ public class ServiceFaqDaoImpl extends TinyDslDaoSupport implements ServiceFaqDa
         }
         return select;
     }
+
+    /*查询问题总条数*/
+    public Integer SelectByKey() {
+        Select select = select(SERVICE_FAQTABLE.FAQ_ID.count()).from(SERVICE_FAQTABLE);
+        return getDslSession().count(select);
+    }
+
+
+
 }

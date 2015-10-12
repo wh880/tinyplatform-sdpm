@@ -16,6 +16,8 @@
 
 package org.tinygroup.sdpm.product.dao.impl;
 
+import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
@@ -41,6 +43,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Pager;
@@ -62,7 +65,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 					PRODUCTTABLE.PRODUCT_ID.value(t.getProductId()),
 					PRODUCTTABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCTTABLE.DEPT_ID.value(t.getDeptId()),
-					PRODUCTTABLE.PRODUCTLINE_ID.value(t.getProductLineId()),
+					PRODUCTTABLE.PRODUCT_LINE_ID.value(t.getProductLineId()),
 					PRODUCTTABLE.PRODUCT_NAME.value(t.getProductName()),
 					PRODUCTTABLE.PRODUCT_CODE.value(t.getProductCode()),
 					PRODUCTTABLE.PRODUCT_ORDER.value(t.getProductOrder()),
@@ -115,6 +118,20 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		}
 		},pks);
 	}
+	
+	public List<Product> getByKeys(Integer... pk){
+		
+		SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
+			@SuppressWarnings("rawtypes")
+			public Select generate(Serializable[] t) {
+
+				return selectFrom(PRODUCTTABLE).where(PRODUCTTABLE.PRODUCT_ID.in(t));
+			}
+			
+		};
+		Select select = callback.generate(pk);
+		return getDslSession().fetchList(select, Product.class);
+	}
 
 	public Product getByKey(Integer pk) {
 		return getDslTemplate().getByKey(pk, Product.class, new SelectGenerateCallback<Serializable>() {
@@ -137,7 +154,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 				and(
 					PRODUCTTABLE.COMPANY_ID.eq(t.getCompanyId()),
 					PRODUCTTABLE.DEPT_ID.eq(t.getDeptId()),
-					PRODUCTTABLE.PRODUCTLINE_ID.eq(t.getProductLineId()),
+					PRODUCTTABLE.PRODUCT_LINE_ID.eq(t.getProductLineId()),
 					PRODUCTTABLE.PRODUCT_NAME.eq(t.getProductName()),
 					PRODUCTTABLE.PRODUCT_CODE.eq(t.getProductCode()),
 					PRODUCTTABLE.PRODUCT_ORDER.eq(t.getProductOrder()),
@@ -168,7 +185,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 				and(
 					PRODUCTTABLE.COMPANY_ID.eq(t.getCompanyId()),
 					PRODUCTTABLE.DEPT_ID.eq(t.getDeptId()),
-					PRODUCTTABLE.PRODUCTLINE_ID.eq(t.getProductLineId()),
+					PRODUCTTABLE.PRODUCT_LINE_ID.eq(t.getProductLineId()),
 					PRODUCTTABLE.PRODUCT_NAME.eq(t.getProductName()),
 					PRODUCTTABLE.PRODUCT_CODE.eq(t.getProductCode()),
 					PRODUCTTABLE.PRODUCT_ORDER.eq(t.getProductOrder()),
@@ -198,7 +215,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 				return insertInto(PRODUCTTABLE).values(
 					PRODUCTTABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
 					PRODUCTTABLE.DEPT_ID.value(new JdbcNamedParameter("deptId")),
-					PRODUCTTABLE.PRODUCTLINE_ID.value(new JdbcNamedParameter("productLineId")),
+					PRODUCTTABLE.PRODUCT_LINE_ID.value(new JdbcNamedParameter("productLineId")),
 					PRODUCTTABLE.PRODUCT_NAME.value(new JdbcNamedParameter("productName")),
 					PRODUCTTABLE.PRODUCT_CODE.value(new JdbcNamedParameter("productCode")),
 					PRODUCTTABLE.PRODUCT_ORDER.value(new JdbcNamedParameter("productOrder")),
@@ -231,7 +248,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 				return update(PRODUCTTABLE).set(
 					PRODUCTTABLE.COMPANY_ID.value(new JdbcNamedParameter("companyId")),
 					PRODUCTTABLE.DEPT_ID.value(new JdbcNamedParameter("deptId")),
-					PRODUCTTABLE.PRODUCTLINE_ID.value(new JdbcNamedParameter("productLineId")),
+					PRODUCTTABLE.PRODUCT_LINE_ID.value(new JdbcNamedParameter("productLineId")),
 					PRODUCTTABLE.PRODUCT_NAME.value(new JdbcNamedParameter("productName")),
 					PRODUCTTABLE.PRODUCT_CODE.value(new JdbcNamedParameter("productCode")),
 					PRODUCTTABLE.PRODUCT_ORDER.value(new JdbcNamedParameter("productOrder")),
@@ -262,7 +279,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 				PRODUCTTABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId")),
 				PRODUCTTABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")),
 				PRODUCTTABLE.DEPT_ID.eq(new JdbcNamedParameter("deptId")),
-				PRODUCTTABLE.PRODUCTLINE_ID.eq(new JdbcNamedParameter("productLineId")),
+				PRODUCTTABLE.PRODUCT_LINE_ID.eq(new JdbcNamedParameter("productLineId")),
 				PRODUCTTABLE.PRODUCT_NAME.eq(new JdbcNamedParameter("productName")),
 				PRODUCTTABLE.PRODUCT_CODE.eq(new JdbcNamedParameter("productCode")),
 				PRODUCTTABLE.PRODUCT_ORDER.eq(new JdbcNamedParameter("productOrder")),
@@ -303,5 +320,15 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		return select;
 	}
 
-	
+	public Integer softDelete(Integer id) {
+        return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
+            public Update generate(Integer id) {
+                Update update = update(PRODUCTTABLE).set(
+                		PRODUCTTABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
+                		PRODUCTTABLE.PRODUCT_ID.eq(id));
+                return update;
+            }
+        });
+
+    }
 }

@@ -29,19 +29,17 @@
             #@div(divClass="operationbar")
             <span style="padding-top:5px;float:left">
 
-                <a href="${TINY_REQUEST_URI}?treeid=0" ${treeid=='0'?" class='active_btn'":""}>所有权限</a>
-                <a href="${TINY_REQUEST_URI}?treeid=home" ${treeid=='home'?" class='active_btn'":""}>我的地盘</a>
-                <a href="${TINY_REQUEST_URI}?treeid=productLine" ${treeid
-                =='productLine'?" class='active_btn'":""}>产品线</a>
-                <a href="${TINY_REQUEST_URI}?treeid=myproduct" ${treeid=='myproduct'?" class='active_btn'":""}>产品</a>
-                <a href="${TINY_REQUEST_URI}?treeid=project" ${treeid=='project'?" class='active_btn'":""}>迭代</a>
-                <a href="${TINY_REQUEST_URI}?treeid=quality" ${treeid=='quality'?" class='active_btn'":""}>测试</a>
-                <a href="${TINY_REQUEST_URI}?treeid=idocument" ${treeid=='idocument'?" class='active_btn'":""}>文档</a>
-                <a href="${TINY_REQUEST_URI}?treeid=statistic" ${treeid=='statistic'?" class='active_btn'":""}>统计</a>
-                <a href="${TINY_REQUEST_URI}?treeid=service" ${treeid=='service'?" class='active_btn'":""}>客服</a>
-                <a href="${TINY_REQUEST_URI}?treeid=organization" ${treeid
-                =='organization'?" class='active_btn'":""}>组织</a>
-                <a href="${TINY_REQUEST_URI}?treeid=mysystem" ${treeid=='mysystem'?" class='active_btn'":""}>系统</a>
+                <a href="${TINY_CONTEXT_PATH}/org/roleMenu/show?treeid=0&id=${id}" ${treeid=='0'?" class='active_btn'":""}>所有权限</a>
+                <a href="${TINY_CONTEXT_PATH}/org/roleMenu/show?treeid=home&id=${id}" ${treeid=='home'?" class='active_btn'":""}>我的地盘</a>
+                <a href="${TINY_CONTEXT_PATH}/org/roleMenu/show?treeid=productLine&id=${id}" ${treeid=='productLine'?" class='active_btn'":""}>产品线</a>
+                <a href="${TINY_CONTEXT_PATH}/org/roleMenu/show?treeid=myproduct&id=${id}" ${treeid=='myproduct'?" class='active_btn'":""}>产品</a>
+                <a href="${TINY_CONTEXT_PATH}/org/roleMenu/show?treeid=project&id=${id}" ${treeid=='project'?" class='active_btn'":""}>迭代</a>
+                <a href="${TINY_CONTEXT_PATH}/org/roleMenu/show?treeid=quality&id=${id}" ${treeid=='quality'?" class='active_btn'":""}>测试</a>
+                <a href="${TINY_CONTEXT_PATH}/org/roleMenu/show?treeid=idocument&id=${id}" ${treeid=='idocument'?" class='active_btn'":""}>文档</a>
+                <a href="${TINY_CONTEXT_PATH}/org/roleMenu/show?treeid=statistic&id=${id}" ${treeid=='statistic'?" class='active_btn'":""}>统计</a>
+                <a href="${TINY_CONTEXT_PATH}/org/roleMenu/show?treeid=service&id=${id}" ${treeid=='service'?" class='active_btn'":""}>客服</a>
+                <a href="${TINY_CONTEXT_PATH}/org/roleMenu/show?treeid=organization&id=${id}" ${treeid=='organization'?" class='active_btn'":""}>组织</a>
+                <a href="${TINY_CONTEXT_PATH}/org/roleMenu/show?treeid=mysystem&id=${id}" ${treeid=='mysystem'?" class='active_btn'":""}>系统</a>
          </span>
                 #@tinyForm("thisform" "" "" {"class":"test"})
                     #@formControlDiv("col-2")
@@ -99,17 +97,47 @@
         }
     };
 
-    var zNodes = [
-
+    var zNodes = [];
         #foreach(m:menuManager.getAllChildMenus(treeid))
-            {id: '${m.id}', pId: '${m.parentId}', name: "${m.name}", open: true},
+        zNodes.push({
+            id: '${m.id}',
+            pId: '${m.parentId}',
+            name: "${m.name}",
+            open: true,
+            checked: ${orgRoleMenus.contains(m.id)? 'true' : 'false'
+        }
+        })
+        ;
         #end
-    ];
 
 
     $(document).ready(function () {
-
+        var $ztree=
         $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        $("input[name=submitbtn]").on("click", function () {
+            var nodes =$ztree.getCheckedNodes(true);
+            var checkarr = [];
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                checkarr.push(nodes[i].id);
+            }
+            $.ajax({
+                url: "${TINY_CONTEXT_PATH}/org/roleMenu/save",
+                type: "post",
+                traditional: true,
+                data: {ids: checkarr, id:${id}},
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == "y") {
+                        layer.msg(data.info, 2, 1, function () {
+                            window.location.href = "${TINY_CONTEXT_PATH}/org/privilege/list"
+                        })
+                        // window.location.href="/"
+                    } else {
+                        layer.msg(data.info)
+                    }
+                }
+            })
+        })
 
     });
     //-->

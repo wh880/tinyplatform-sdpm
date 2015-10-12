@@ -3,7 +3,6 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     <display-name>Archetype Created Web Application</display-name>
-    <!-- Define Velocity template compiler -->
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
@@ -18,8 +17,6 @@
     <filter>
         <filter-name>TinyFilter</filter-name>
         <filter-class>org.tinygroup.weblayer.TinyHttpFilter</filter-class>
-        <!-- <init-param> <param-name>contextProcessFlows</param-name> <param-value>defaultTinyFlow,aaFlow</param-value>
-            </init-param> -->
     </filter>
 
     <filter-mapping>

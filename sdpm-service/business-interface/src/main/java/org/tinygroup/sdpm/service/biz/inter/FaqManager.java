@@ -24,6 +24,14 @@ ServiceFaq find(Integer id);
     List<ServiceFaq> getList(ServiceFaq faq);
 
     /**
+     * 分页
+     *
+     * @param faq 用于分页
+     * @return
+     */
+    /*Pager<ServiceFaq> getpage(int start, int limit);*/
+
+    /**
      * 新增一个faq
      *
      * @param faq 新增实体类
@@ -46,4 +54,8 @@ ServiceFaq find(Integer id);
      * @return
      */
     Integer delete(Integer id);
+
+
+    /*查询问题总条数*/
+    Integer selectcount(Integer id);
 }

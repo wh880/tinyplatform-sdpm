@@ -2,8 +2,8 @@ package org.tinygroup.sdpm.document.service.inter;
 
 import java.util.List;
 
-import org.tinygroup.sdpm.document.dao.pojo.Doc;
-import org.tinygroup.sdpm.document.dao.pojo.Doclib;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
 import org.tinygroup.tinysqldsl.Pager;
 /**
  * @date 2015/09/21
@@ -13,22 +13,22 @@ import org.tinygroup.tinysqldsl.Pager;
 
 public interface DocService {
 	
-	public Doc createNewDoc(Doc doc);
+	public DocumentDoc createNewDoc(DocumentDoc doc);
 	//Create a new document library-just a name.
-	public Doclib createNewDocLib(Doclib doclib);
+	public DocumentDoclib createNewDocLib(DocumentDoclib doclib);
 	//Edit document
-	public int editDoc(Doc doc);
+	public int editDoc(DocumentDoc doc);
 	//Edit document library name.
-	public int editDocLibName(Doclib doclib);
+	public int editDocLibName(DocumentDoclib doclib);
 	//find
-	public Doc findDocById(Integer id);
-	public Doclib findDoclibById(Integer id);
+	public DocumentDoc findDocById(Integer id);
+	public DocumentDoclib findDoclibById(Integer id);
 	//list
-	public List<Doc> findDocList(Doc doc);
-	public List<Doclib> findDoclibList(Doclib doclib);
+	public List<DocumentDoc> findDocList(DocumentDoc doc);
+	public List<DocumentDoclib> findDoclibList(DocumentDoclib doclib);
 	//page
-	public Pager<Doc> findDocRetPager(int start,int limit ,Doc doc);
-	public Pager<Doclib> findDoclibRetPager(int start,int limit ,Doclib doclib);
+	public Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc,String sortName,boolean asc);
+	public Pager<DocumentDoclib> findDoclibRetPager(Integer start,Integer limit,DocumentDoclib doclib,String sortName,boolean asc);
 	//delete
 	public int deleteDocById(Integer id);
 	public int deleteDoclibById(Integer id);

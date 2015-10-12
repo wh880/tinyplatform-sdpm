@@ -1,21 +1,33 @@
+#import("/org/tinygroup/publicComponent/macro/navselect.component")
+
 #@navSelect2("docLibName" "lib-id")
 	#@navSelect2Nav()
-	#if(libname)${libname}#else 文档库#end<span class="caret"></span>#end
+	#if(documentLibId)
+		#for(lib : libList)
+			#if(lib?.docLibId == documentLibId)
+				${lib?.docLibName}
+			#end
+		#end
+	#else 文档库
+	#end
+		<span class="caret"></span>#end
 	#@navSelect2Body()
 		  #@navSelect2Data()
 		  <option value=""></option>
-		  #foreach(doclib:liblist)
-		  <option value="${doclib?.docLibName}">${doclib?.docLibName}</option>
+		  <optgroup label="文档">
+		  #foreach(doclib:libList)
+		  <option value="${doclib?.docLibId}">${doclib?.docLibName}</option>
 		  #end
+		  </optgroup>
 		#end
-		#@navSelect2Fix()<a href="#">全部</a>#end
+		##@navSelect2Fix()<a href="#">全部</a>#end
 	#end
 #end
 <script type="text/javascript">
 <!--
 	$(function(){
 		$("#lib-id-select").on("change",function(){		
-			window.location.href='${TINY_CONTEXT_PATH}/document?libname='+$(this).find("option:selected").text();
+			window.location.href='${TINY_CONTEXT_PATH}/document?docLibId='+$(this).find("option:selected").val();
 		});
 	});
 //-->
