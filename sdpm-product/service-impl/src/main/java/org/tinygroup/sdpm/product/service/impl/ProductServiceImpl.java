@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -62,6 +63,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> findProductList(Product product) {
 
 		return productManager.findList(product);
+	}
+
+	public List<ProductAndLine> getProductAndLine(Product product) {
+
+		return productManager.getProductAndLine(product);
 	}
 
 }

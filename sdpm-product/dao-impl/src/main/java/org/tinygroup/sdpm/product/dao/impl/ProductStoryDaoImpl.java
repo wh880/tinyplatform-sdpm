@@ -570,7 +570,9 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 	}
 
 	public List<StoryCount> modelStoryCount(ProductStory t) {
-		
+		if(t==null){
+			t=new ProductStory();
+		}
 		int nm = getCount(t);
 		Select select = select(SYSTEM_MODULETABLE.MODULE_NAME.as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
 				FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
@@ -618,6 +620,10 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 	}
 	
 public List<StoryCount> productStoryCount(ProductStory t) {
+		
+		if(t==null){
+			t=new ProductStory();
+		}
 		
 		int nm = getCount(t);
 		Select select = select(PRODUCTTABLE.PRODUCT_NAME.as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),

@@ -27,10 +27,12 @@ import org.tinygroup.sdpm.product.dao.ProductStoryDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.impl.ProductStoryDaoImpl;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCollection;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
+import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -53,15 +55,11 @@ public class StoryAction extends BaseController{
     @Autowired
     private ModuleService moduleService;
     
-    @Autowired
-    private ProductStoryDao productStoryDao;
-    
     
    
     @RequestMapping("")
     public String storyAction(ProductStory story, String groupOperate, Model model, HttpServletRequest request, HttpServletResponse response){
-    	List<StoryCount> list = productStoryDao.modelStoryCount(new ProductStory());
-    	
+
     	
     	String queryString = request.getQueryString();
        if(queryString!=null&&!queryString.contains("choose")){
