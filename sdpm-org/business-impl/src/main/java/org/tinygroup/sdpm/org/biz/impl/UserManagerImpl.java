@@ -69,6 +69,9 @@ public class UserManagerImpl implements UserManager {
         return orgUserDao.edit(orgUser);
     }
 
+    public int[] deleteBatch(List<OrgUser> list) {
+        return orgUserDao.softDeleteBatch(list);
+    }
     /**
      * 生成安全的密码，生成随机的16位salt并经过1024次 sha-1 hash
      */

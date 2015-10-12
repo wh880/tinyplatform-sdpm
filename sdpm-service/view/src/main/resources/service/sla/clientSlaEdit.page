@@ -52,7 +52,7 @@
             #@colLabel("col-3")<span class="c-red">*</span>协议内容：#end
             #@gridSysCol(8)
                 #@Teditor(
-                    "content" "content" {"initialFrameHeight":"150","datatype":"*","id":"sla_spec"})Say something#end
+                    "content" "content" {"initialFrameHeight":"150","datatype":"*","id":"sla_spec"})#end
             #end
         #end
         #@gridSysRow()
