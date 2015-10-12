@@ -51,4 +51,8 @@ public class ClientManagerImpl implements ClientManager {
     public List<ServiceClient> findByProduct(Integer productId) {
         return null;
     }
+
+    public ServiceClient judgeClient(String clientName) {
+        return clientDao.judge(clientName);
+    }
 }

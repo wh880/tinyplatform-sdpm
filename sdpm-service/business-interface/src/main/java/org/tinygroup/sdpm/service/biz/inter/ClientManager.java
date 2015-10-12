@@ -67,4 +67,6 @@ public interface ClientManager {
      * @return
      */
     List<ServiceClient> findByProduct(Integer productId);
+
+    ServiceClient judgeClient(String clientName);
 }

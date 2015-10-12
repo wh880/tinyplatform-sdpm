@@ -197,8 +197,25 @@ public class ClientAction extends BaseController {
         return "redirect:/service/client/clientDetail?id=" + clientUser.getClientId();
     }
 
+    @ResponseBody
     @RequestMapping(value = "/judgeClient")
-    public String judgeClient() {
-        return null;
+    public Map judgeClient(String name, String param) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (param != null) {
+            String clientName = param;
+            ServiceClient serviceClient = clientService.judgeClient(clientName);
+            if (serviceClient != null) {
+                map.put("status", "n");
+                map.put("info", "该客户已存在");
+                return map;
+            } else {
+                map.put("status", "y");
+                map.put("info", "");
+                return map;
+            }
+        }
+        map.put("status", "n");
+        map.put("info", "请输入客户名称");
+        return map;
     }
 }
