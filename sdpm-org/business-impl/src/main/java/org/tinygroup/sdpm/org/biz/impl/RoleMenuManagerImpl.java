@@ -60,5 +60,9 @@ public class RoleMenuManagerImpl implements RoleMenuManager {
     public Integer delete(Integer id) {
         return 0;
     }
+
+    public void batchDelete(List<OrgRoleMenu> orgRoleMenuList) {
+        orgRoleMenuDao.batchDelete(orgRoleMenuList);
+    }
 }
 
