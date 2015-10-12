@@ -21,30 +21,32 @@
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/startsave" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
-    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
-    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
-    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
-    #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue=task?.taskStatus)
+##    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
+##    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
+##    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
+##    #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue=task?.taskStatus)
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>开始</p>
         #@elementItem()
             #@sdpmItem("实际开始")
-                #dateInputSimple("taskRealStarted" "2014-04-23" "YYYY-MM-DD")
+                #dateInputSimple("taskRealStarted" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD")
             #end
         #end
         #@elementItem()
             #@sdpmItem("总消耗")
                 <div class="input-group">
-                    <input name="taskConsumed" type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+                    <input name="taskConsumed" type="text" class="form-control" placeholder=""
+                           aria-describedby="basic-addon2">
                     <span class="input-group-addon" id="all-time">小时</span>
                 </div>
             #end
         #end
         #@elementItem()
-            #@sdpmItem("预计剩余")
+            #@sdpmItem("预计剩余") ##预计剩余需要判断，当为0时，标识为完成
                 <div class="input-group">
-                    <input name="taskLeft" type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+                    <input name="taskLeft" type="text" class="form-control" placeholder=""
+                           aria-describedby="basic-addon2">
                     <span class="input-group-addon" id="last-time">小时</span>
                 </div>
             #end

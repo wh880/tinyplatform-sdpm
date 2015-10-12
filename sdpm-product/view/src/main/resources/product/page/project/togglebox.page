@@ -150,25 +150,6 @@
             #end
         #end
 
-       #* #@toggleLeft({"class":"aclass"})
-            #@settoggleLeftTitle()
-            产品需求
-            #end
-
-            #@settoggleLeftBody("treeLeftbox")
-                #@zTreeList(call("link","/system/module/tree?moduleType=story&moduleRoot=1"))
-                    #setzTreeValMap({"id":"moduleId","name":"truename","pid":"moduleParent"}) ##key值为固定
-                    #zTreeSetLinkUrl("http://127.0.0.1:8080/tinyuiweb/mytree.page" )
-                    #zTreeSetAddUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
-                    #zTreeSetEditUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
-                    #zTreeSetDelUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
-                #end
-            #end
-
-
-        #end*#
-
-
 
         #@toggleRight()
             #@tinyTable(storyTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID

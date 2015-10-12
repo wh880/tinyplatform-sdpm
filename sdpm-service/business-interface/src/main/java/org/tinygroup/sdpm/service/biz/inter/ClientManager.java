@@ -17,7 +17,7 @@ public interface ClientManager {
      */
     ServiceClient find(Integer id);
 
-    Pager<ServiceClient> findPager(Integer start, Integer limit, ServiceClient serviceClient);
+    Pager<ServiceClient> findPager(Integer start, Integer limit, ServiceClient serviceClient, String order, String ordertype);
 
     /**
      * 根据条件查询List

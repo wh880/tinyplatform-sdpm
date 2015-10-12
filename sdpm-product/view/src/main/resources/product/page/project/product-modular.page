@@ -15,7 +15,7 @@
             #@settoggleLeftBody("treeLeftbox")
                 #@zTreeList(call("link","/system/module/dataone"))
                     #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
-                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/product/story" )
+                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/product/page/project/product-modular.page" )
                     #zTreeSetAddUrl(TINY_CONTEXT_PATH+"/system/module/promodule/add")
                     #zTreeSetEditUrl(TINY_CONTEXT_PATH+"/system/module/promodule/edit")
                     #zTreeSetDelUrl(TINY_CONTEXT_PATH+"/system/module/promodule/deleteTree")

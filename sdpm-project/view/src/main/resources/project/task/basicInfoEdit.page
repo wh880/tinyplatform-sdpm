@@ -7,24 +7,21 @@
             #@tbody()
                 #@tr()
                     #@th()所属项目#end
-                    #@td() 1
+                    #@td()
+                        #if(projectName)
+                            ${projectName}
+                        #end
                     #end
                 #end
                 #@tr()
                     #@th()所属模块#end
                     #@td()#@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body(
-                                "moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="IN">Indiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
+                            #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"})
+                                #foreach(m : modulesList)
+                                    <option value="${m.moduleId}">m.moduleTitle</option>
+                                #end
                             #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                         #end
                         #@validateDiv("col-2")#end
@@ -32,37 +29,29 @@
                 #end
                 #@tr()
                     #@th()相关需求#end
-                    #@td()#@formControlDiv("col-8")
-                        #@Tselect2F()
-                            #@Tselect2Body(
-                                "taskStory" task?.taskStory {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value="1">Connecticut</option>
-                                <option value="2">Delaware</option>
-                                <option value="3">Florida</option>
-                                <option value="4">Georgia</option>
-                                <option value="5">Indiana</option>
-                                <option value="6">Maine</option>
-                                <option value="7">Maryland</option>
+                    #@td()
+                        #@formControlDiv("col-8")
+                            #@Tselect2F()
+                                #@Tselect2Body("taskStory" task?.taskStory {"class":"input-text select2"})
+                                    #foreach(s : storyList)
+                                        <option value="${s.storyId}">${s.storyTitle}</option>
+                                    #end
+                                #end
+                                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                             #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                            #@validateDiv("col-2")#end
                         #end
-                        #@validateDiv("col-2")#end
-                    #end#end
+                    #end
                 #end
                 #@tr()
                     #@th()指派给#end
                     #@td()#@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body(
-                                "taskAssignedTo" task?.taskAssignedTo {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="IN">Indiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
+                            #@Tselect2Body("taskAssignedTo" task?.taskAssignedTo {"class":
+                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                #foreach(t : teamList)
+                                    <option value="${t.teamAccount}">${t.teamAccount}</option>
+                                #end
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
@@ -76,13 +65,14 @@
                         #@Tselect2F()
                             #@Tselect2Body(
                                 "taskType" task?.taskType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="IN">Indiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
+                                <option value="1">设计</option>
+                                <option value="2">开发</option>
+                                <option value="3">测试</option>
+                                <option value="4">研究</option>
+                                <option value="5">讨论</option>
+                                <option value="8">界面</option>
+                                <option value="7">事物</option>
+                                <option value="8">其他</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
@@ -95,13 +85,14 @@
                     #@td()#@formControlDiv("col-8")
                         #@Tselect2F()
                             #@Tselect2Body(
-                                "taskStatus" task?.taskStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                "taskStatus" task?.taskStatus {"class":
+                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                 <option value="1">未开始</option>
                                 <option value="2">进行中</option>
                                 <option value="3">已完成</option>
                                 <option value="4">已暂停</option>
                                 <option value="5">已取消</option>
-                                <option value="6">已关闭</option>
+                                <option value="8">已关闭</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
@@ -113,7 +104,8 @@
                     #@th()优先级#end
                     #@td()#@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body("taskPri" task?.taskPri {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body(
+                                "taskPri" task?.taskPri {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -128,32 +120,27 @@
                 #end
                 #@tr()
                     #@th()抄送给#end
-                    #@td()#@formControlDiv("col-8")
-                        #@Tselect2F()
-                            #@Tselect2Body("taskMailto" task?.taskMailto {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="IN">Indiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
+                    #@td()
+                        #@formControlDiv("col-8")
+                            #@Tselect2F()
+                                #@Tselect2Body("taskMailto" task?.taskMailto {"class":"input-text select2","multiple":
+                                    "multiple"}) ##,"multiple":"multiple"加上为多选项
+                                    #foreach(t : teamList)
+                                        <option value="${t.teamAccount}">${t.teamAccount}</option>
+                                    #end
+                                #end
+                                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page"
+                                                  class="r ">增加</a>
+                                    <a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
                             #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
+                            #@validateDiv("col-2")#end
                         #end
-                        #@validateDiv("col-2")#end
-                    #end#end
+                    #end
                 #end
 
             #end
         #end
     #end
-
-
-
-
-
 
     #@div(divClass="infoContent")
         <p class="titleName">工时信息</p>
@@ -163,54 +150,80 @@
             #@tbody()
                 #@tr()
                     #@th()预计开始#end
-                    #@td() #@formControlDiv("col-8")
-                        #@tinyDateInput(
-                            "taskEstStared" task?.taskEstStared "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
-                    #end
+                    #@td()
+                        #@formControlDiv("col-8")
+                            #@tinyDateInput(
+                                "taskEstStared" task?.taskEstStared "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                            #end
+                        #end
                     #end
                 #end
                 #@tr()
                     #@th()实际开始#end
-                    #@td()#@formControlDiv("col-8")
-                        #@tinyDateInput(
-                            "taskRealStarted" task?.taskRealStarted "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
-                    #end#end
+                    #@td()
+                        #@formControlDiv("col-8")
+                            #if(task.taskRealStarted)
+                                #@tinyDateInput("taskRealStarted" formatDate(task.taskRealStarted,
+                                    "YYYY-MM-DD") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                                #end
+                            #else
+                                #@tinyDateInput("taskRealStarted" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*",
+                                    "placeholder":"选择日期"})
+                                #end
+                            #end
+
+                        #end
+                    #end
                 #end
                 #@tr()
                     #@th()截止日期#end
-                    #@td()#@formControlDiv("col-8")
-                        #@tinyDateInput(
-                            "taskDeadLine" task?.taskDeadLine "YYYY-MM-DD" {"style":"width:140px","datatype":"*","placeholder":"选择日期"})#end
-                    #end#end
+                    #@td()
+                        #@formControlDiv("col-8")
+                            #@tinyDateInput(
+                                "taskDeadLine" task?.taskDeadLine "YYYY-MM-DD" {"datatype":"*",
+                                "placeholder":"选择日期"})
+                            #end
+                        #end#end
                 #end
                 #@tr()
                     #@th()最初预计#end
-                    #@td()#@formControlDiv("col-8")
-                        #tinyInput("text" "taskEstimate" task?.taskEstimate {"placeholder":"最初预计","datatype":"*4-16","nullmsg":"任务名称不能为空！","id":
-                            "username","class":
-                            "input-text"})
-                    #end#end
+                    #@td()
+                        #@formControlDiv("col-8")
+                            #tinyInput(
+                                "text" "taskEstimate" task?.taskEstimate {"placeholder":"最初预计","datatype":"*4-18",
+                                "nullmsg":
+                                "任务名称不能为空！","id":
+                                "username","class":
+                                "input-text"})
+                        #end
+                    #end
                 #end
                 #@tr()
                     #@th()总耗时#end
                     #@td()${task?.taskConsumed}
                         #@simpleModal("myModal" "新增日志")#end
                         #@iconOperations("#myModal" "icon-time" "新增日志" "900" "400"
-                            "/project/task/consumeTime.pagelet" "ml-5")#end
+                            "/project/task/consumeTime.pagelet" "ml-5")
+                        #end
                     #end
                 #end
                 #@tr()
                     #@th()预计剩余#end
-                    #@td()#@formControlDiv("col-8")
-                        #tinyInput("text" "taskLeft" task?.taskLeft {"placeholder":"预计剩余","datatype":"*4-16","nullmsg":"任务名称不能为空！","id":
-                            "username","class":
-                            "input-text"})
-                    #end#end
+                    #@td()
+                        #@formControlDiv("col-8")
+                            #tinyInput(
+                                "text" "taskLeft" task?.taskLeft {"placeholder":"预计剩余","datatype":"*4-18","nullmsg":
+                                "任务名称不能为空！","id":
+                                "username","class":
+                                "input-text"})
+                        #end
+                    #end
                 #end
 
             #end
         #end
     #end
+
     #@div(divClass="infoContent")
         <p class="titleName">任务的一生</p>
         #@table()
@@ -225,108 +238,121 @@
             #end
             #@tr()
                 #@th()由谁完成#end
-                #@td()#@formControlDiv("col-8")
-                    #@Tselect2F()
-                        #@Tselect2Body("taskFinishedBy" task?.taskFinishedBy {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="IN">Indiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
+                #@td()
+                    #@formControlDiv("col-8")
+                        #@Tselect2F()
+                            #@Tselect2Body("taskFinishedBy" task?.taskFinishedBy {"class":
+                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                #foreach(t : teamList)
+                                    <option value="${t.teamAccount}">${t.teamAccount}</option>
+                                #end
+                            #end
+                        ##填写任意内容，侦听需重新填加 A侦听已内置
+                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                         #end
-                    ##填写任意内容，侦听需重新填加 A侦听已内置
-                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                        #@validateDiv("col-2")#end
                     #end
-                    #@validateDiv("col-2")#end
-                #end#end
+                #end
             #end
             #@tr()
                 #@th()完成时间#end
-                #@td()#@formControlDiv("col-8")
-                    #tinyInput("text" "taskFinishedDate" task?.taskFinishedDate {"placeholder":"完成时间","datatype":"*4-16","nullmsg":"任务名称不能为空！","id":
-                        "username","class":
-                        "input-text"})
-                #end#end
+                #@td()
+                    #@formControlDiv("col-8")
+                        #if(task.taskFinishedDate)
+                            #tinyInput("text" "taskFinishedDate" formatDate(task.taskFinishedDate, "yyyy-MM-dd")
+                        {"placeholder":"完成时间","datatype":"*4-18","nullmsg":"任务名称不能为空！","id":"username","class":"input-text"})
+                        #else
+                            #tinyInput("text" "taskFinishedDate" ""
+                            {"placeholder":"完成时间","datatype":"*4-18","nullmsg":"任务名称不能为空！","id":"username","class":
+                                "input-text"})
+                        #end
+                    #end
+                #end
             #end
             #@tr()
                 #@th()由谁取消#end
-                #@td()#@formControlDiv("col-8")
-                    #@Tselect2F()
-                        #@Tselect2Body("taskCanceledBy" task?.taskCanceledBy {"class":"input-text select2"})
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="IN">Indiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
+                #@td()
+                    #@formControlDiv("col-8")
+                        #@Tselect2F()
+                            #@Tselect2Body("taskCanceledBy" task?.taskCanceledBy {"class":"input-text select2"})
+                                #foreach(t : teamList)
+                                    <option value="${t.teamAccount}">${t.teamAccount}</option>
+                                #end
+                            #end
+                        ##填写任意内容，侦听需重新填加 A侦听已内置
+                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                         #end
-                    ##填写任意内容，侦听需重新填加 A侦听已内置
-                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                        #@validateDiv("col-2")#end
                     #end
-                    #@validateDiv("col-2")#end
-                #end#end
+                #end
             #end
             #@tr()
                 #@th()取消时间#end
-                #@td()#@formControlDiv("col-8")
-                    #tinyInput("text" "taskCanceledDate" task?.taskCanceledDate {"placeholder":"取消时间","datatype":"*4-16","nullmsg":"任务名称不能为空！","id":
-                        "username","class":
-                        "input-text"})
-                #end#end
+                #@td()
+                    #@formControlDiv("col-8")
+                        #tinyInput(
+                            "text" "taskCanceledDate" task?.taskCanceledDate {"placeholder":"取消时间","datatype":"*4-18",
+                            "nullmsg":"任务名称不能为空！","id":"username","class":"input-text"})
+                    #end
+                #end
             #end
             #@tr()
                 #@th()由谁关闭#end
-                #@td()#@formControlDiv("col-8")
-                    #@Tselect2F()
-                        #@Tselect2Body("taskClosedBy" task?.taskClosedBy {"class":"input-text select2"})
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="IN">Indiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
+                #@td()
+                    #@formControlDiv("col-8")
+                        #@Tselect2F()
+                            #@Tselect2Body("taskClosedBy" task?.taskClosedBy {"class":"input-text select2"})
+                                #foreach(t : teamList)
+                                    <option value="${t.teamAccount}">${t.teamAccount}</option>
+                                #end
+                            #end
+                        ##填写任意内容，侦听需重新填加 A侦听已内置
+                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                         #end
-                    ##填写任意内容，侦听需重新填加 A侦听已内置
-                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                    #end
-                    #@validateDiv("col-2")#end
-                #end#end
+                        #@validateDiv("col-2")#end
+                    #end#end
             #end
             #@tr()
                 #@th()关闭原因#end
-                #@td()#@formControlDiv("col-8")
-                    #@Tselect2F()
-                        #@Tselect2Body("taskClosedReason" task?.taskClosedReason {"class":"input-text select2"})
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="IN">Indiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
+                #@td()
+                    #@formControlDiv("col-8")
+                        #@Tselect2F()
+                            #@Tselect2Body("taskClosedReason" task?.taskClosedReason {"class":"input-text select2"})
+                                <option value="1">已经完成</option>
+                                <option value="2">已经关闭</option>
+                            #end
+                        ##填写任意内容，侦听需重新填加 A侦听已内置
+                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                         #end
-                    ##填写任意内容，侦听需重新填加 A侦听已内置
-                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                        #@validateDiv("col-2 validmsg")#end
                     #end
-                    #@validateDiv("col-2")#end
-                #end#end
+                #end
             #end
             #@tr()
                 #@th()关闭时间#end
-                #@td()#@formControlDiv("col-8")
-                    #tinyInput("text" "taskCloseDate" task?.taskCloseDate {"placeholder":"关闭时间","datatype":"*4-16","nullmsg":"任务名称不能为空！","id":
-                        "username","class":
-                        "input-text"})
-                #end#end
-            #end
+                #@td()
+                    #if(task.taskCloseDate)
+                        #@formControlDiv("col-8")
+                            #tinyInput("text" "taskCloseDate" formatDate(task.taskCloseDate,
+                                "yyyy-MM-dd") {"placeholder":"关闭时间",
+                        "datatype":"*4-18",
+                        "nullmsg":"任务名称不能为空！",
+                        "id":"username",
+                        "class":"input-text"
+                        })
+                        #end
+                    #else
+                        #tinyInput("text" "taskCloseDate" "" {
+                            "placeholder":"关闭时间",
+                            "datatype":"*4-18",
+                            "nullmsg":"任务名称不能为空！",
+                            "id":"username",
+                            "class":"input-text"
+                        })
+                    #end
 
+                #end
+            #end
         #end
     #end
-
-
-
 </div>
