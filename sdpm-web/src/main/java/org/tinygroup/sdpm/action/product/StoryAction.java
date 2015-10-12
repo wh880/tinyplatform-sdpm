@@ -23,10 +23,14 @@ import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.product.dao.ProductStoryDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
+import org.tinygroup.sdpm.product.dao.impl.ProductStoryDaoImpl;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCollection;
+import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -48,11 +52,18 @@ public class StoryAction extends BaseController{
 	private BugService bugService;
     @Autowired
     private ModuleService moduleService;
-
+    
+    @Autowired
+    private ProductStoryDao productStoryDao;
+    
+    
    
     @RequestMapping("")
     public String storyAction(ProductStory story, String groupOperate, Model model, HttpServletRequest request, HttpServletResponse response){
-        String queryString = request.getQueryString();
+    	List<StoryCount> list = productStoryDao.modelStoryCount(new ProductStory());
+    	
+    	
+    	String queryString = request.getQueryString();
        if(queryString!=null&&!queryString.contains("choose")){
             return "redirect:/product/story?choose=1&"+queryString;
         }
@@ -210,7 +221,7 @@ public class StoryAction extends BaseController{
     		@RequestParam(required = false, defaultValue = "asc") String ordertype,
     		Model model, HttpServletRequest request){
     	bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-    	Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize, bug, null, "asc".equals(ordertype)?true:false);
+    	Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,null, bug, null, "asc".equals(ordertype)?true:false);
     	model.addAttribute("bugList",p);
     	
     	if ("reRelateBug".equals(relate)) {
@@ -262,6 +273,17 @@ public class StoryAction extends BaseController{
         }
         return list;
 
+    }
+    @RequestMapping("/report")
+    public String report(ProductStory story,Model model){
+    		
+    	List<StoryCount> productStoryCount =  storyService.productStoryCount(story);
+    	List<StoryCount> modelStoryCount =  storyService.modelStoryCount(story);
+    	model.addAttribute("productStoryCount", productStoryCount);
+    	model.addAttribute("modelStoryCount", modelStoryCount);
+    	
+    	
+    	return "/product/page/tabledemo/product-report.page";
     }
 
 }

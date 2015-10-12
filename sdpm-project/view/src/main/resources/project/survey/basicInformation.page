@@ -6,7 +6,7 @@
             #end
             #@tbody()
                 #@tr()
-                    #@th()项目名称#end
+                    #@td()项目名称#end
                     #@td()${selProject?.projectName}#end
                 #end
                 #@tr()

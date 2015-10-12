@@ -74,7 +74,7 @@ public class BeforeAction {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
         Project project = projectService.findById(projectId);
         model.addAttribute("selProject", project);
-        return "project/survey/index.page";
+        return "/project/survey/index.page";
     }
 
     @RequestMapping("/select")

@@ -1,16 +1,16 @@
 #import("/org/tinygroup/publicComponent/macro/navselect.component")
-#set(productId = productId == null?productList?.get(0)?.productId:productId)
-
 #@navSelect2("product" "product")
 #@navSelect2Nav()
-#if(productId)
-#for(product : productList)
+#if(qualityProductId)
+#for(product : qualityProductList)
 #if(product?.productId == qualityProductId)
 ${product?.productName}
+#set(qualityProduct = product)
+#break
 #end
 #end
 #else
-产品
+无产品
 #end
 
 <span class="caret"></span>#end
@@ -18,7 +18,7 @@ ${product?.productName}
 #@navSelect2Data()
 <option value=""></option>
 <optgroup label="产品">
-	#for(product : productList)
+	#for(product : qualityProductList)
 	<option value="${product?.productId}">${product?.productName}</option>
 	#end
 </optgroup>
