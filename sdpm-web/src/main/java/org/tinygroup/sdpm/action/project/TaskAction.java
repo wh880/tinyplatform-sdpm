@@ -250,4 +250,10 @@ public class TaskAction extends BaseController {
         return "project/task/IDLink.page";
     }
 
+    @RequestMapping("/basicInfoEdit")
+    public String basicInfoEdit(Integer taskId, Model model) {
+
+        return "project/task/basicInfoEdit.page";
+    }
+
 }

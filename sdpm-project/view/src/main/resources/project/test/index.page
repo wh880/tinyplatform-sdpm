@@ -6,28 +6,28 @@
 </style>*#
 #set(name="test")
 #@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-			#@div(divClass="dropdownBox")
-				#include("/project/dropdownMenu.page")
-			#end
-			#@tabHead()
-				#include("/project/protab.page")
-			#end				
-			#@tabBodyCol("ptop-5")
-			#@div(divClass="operationbar")
-				<span class="f">
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span class="f">
 					测试列表
 				</span>
-				<span class="r c">
+            <span class="r c">
 ##					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-plus")提交测试</a>
-	#foreach(m:menuManager.getScopeMenus("pro-testmenu-op"))
+    #foreach(m:menuManager.getScopeMenus("pro-testmenu-op"))
         <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-	#end
+    #end
 				</span>
-				#div(divClass="clearfix")
-			#end
-			##operationbar end
-			#include("/project/test/table.page")
-#end
-#end
+                #div(divClass="clearfix")
+            #end
+        ##operationbar end
+            #include("/project/test/table.page")
+        #end
+    #end
 #end

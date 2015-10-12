@@ -58,7 +58,7 @@
 	
 	#@div(divId="comment" divStyle="display:none;" divClass="infoContent")
 		<p class="titleName">备注</p>
-		#@Teditor("content1" "content1" {"initialFrameHeight":"150"})Say something#end
+		#@Teditor("content1" "content1" {"initialFrameHeight":"150"})#end
 		<a href="#">#buttonRadiusPrimary(caption="保存")</a>
       	<a href="${TINY_CONTEXT_PATH}/project/task/edit.page">#buttonDefault(caption="返回")</a>
 	#end
