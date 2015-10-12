@@ -1,7 +1,7 @@
 
 #@div(divClass="infoContent")
 <p class="titleName">基本信息</p>
-	#@tinyForm("thisform" "" "" {"class":"test"})
+##	#@tinyForm("thisform" "" "" {"class":"test"})
     	#@table("adjustTable")
 			#@tbody()
 	    		#@tr()
@@ -35,5 +35,5 @@
 	    		
 	    	#end	
     	#end   	
-    #end
+   ## #end
 #end

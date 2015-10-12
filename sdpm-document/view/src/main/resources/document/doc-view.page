@@ -11,7 +11,7 @@
 		<span class="f"> 版本名称</span>
 		<span class="r">
 					
-			<a href="${TINY_CONTEXT_PATH}/document/doc/edit?docid=${doc.docId}" title="编辑">
+			<a href="${TINY_CONTEXT_PATH}/document/doc/edit?docId=${doc?.docId}" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp
 				#@tinyTableItemRemove(TINY_CONTEXT_PATH+"/document/doc/delete" doc.docId)
 					#buttonIcon(iconClass="icon-remove")
@@ -55,7 +55,7 @@
 	</center>
 </div>
 <div style="width:30%;float:right;">
-		#TypeInfo("docInfo")
+		#TypeInfo("docInfo" doc?.docId)
  ##    #include("basic-info.page")
 </div>
 #end
