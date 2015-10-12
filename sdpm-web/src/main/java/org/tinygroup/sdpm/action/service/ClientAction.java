@@ -196,4 +196,9 @@ public class ClientAction extends BaseController {
             clientUser = clientUserService.addClientUser(clientUser);
         return "redirect:/service/client/clientDetail?id=" + clientUser.getClientId();
     }
+
+    @RequestMapping(value = "/judgeClient")
+    public String judgeClient() {
+        return null;
+    }
 }

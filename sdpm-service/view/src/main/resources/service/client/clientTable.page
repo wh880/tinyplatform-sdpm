@@ -30,7 +30,7 @@
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"","rel":"sortname"})客户名称#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"clientName"})客户名称#end
                 #@tinyTh({"class":"","rel":"sortname"})客户编号#end
                 #@tinyTh({"class":"sorting","rel":"sortname"})客户登记人#end
                 #@tinyTh({"class":"sorting","rel":"sortname"})客户登记时间#end

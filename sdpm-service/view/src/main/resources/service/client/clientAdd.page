@@ -35,8 +35,7 @@
             #@sdpmItem("客户名称" "*")
                 #tinyInput(
                     "text" "clientName" client?.clientName {"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！",
-                    "id":"client_name",
-                    "class":"input-text"})
+                    "id":"clientName","class":"input-text","ajaxurl":"/service/client/judgeClient"})
             #end
         #end
         #@elementItem()
@@ -126,48 +125,9 @@
 <script type="text/javascript">
     $(function () {
         $("form[name=thisform").Validform({
-            tiptype: 2,
-            usePlugin: {
-                //datepicker:{},//日期控件校验;
-                passwordstrength: {
-                    minLen: 6,//设置密码长度最小值，默认为0;
-                    maxLen: 18,//设置密码长度最大值，默认为30;
-                    trigger: function (obj, error) {
-                        //该表单元素的keyup和blur事件会触发该函数的执行;
-                        //obj:当前表单元素jquery对象;
-                        //error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
-                        //console.log(error);
-                        if (error) {
-                            obj.parent().find(".Validform_checktip").show();
-                            obj.parent().find(".passwordStrength").hide();
-                        } else {
-                            obj.parent().find(".passwordStrength").show();
-                        }
-                    }
-                }
-            },
-            //ajaxPost:true,
-            beforeCheck: function (curform) {
-                //在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
-                //这里明确return false的话将不会继续执行验证操作;
-            },
-            beforeSubmit: function (curform) {
-                $(curform).ajaxSubmit({
-                    dataType: "json",
-                    success: function (data) {
-                        if (data.status == "y") {
-                            layer.msg(data.info, 2, -1);
-                        } else {
-                            layer.msg(data.info);
-                        }
-                        try {
-                            $(curform).parents(".modal:first").find(".modal-header .close").trigger("click");//弹出框关闭
-                            $("table.tinytable").trigger("initnav"); ////可配合TINYTABLE 做刷新
-                        } catch (e) {
-                        }
-                    },
-                    error: function () {
-                        layer.msg(data.info);
-                    }
-                });
-                return false;
+            tiptype: 2
+        });
+    });
+</script>
+
+
