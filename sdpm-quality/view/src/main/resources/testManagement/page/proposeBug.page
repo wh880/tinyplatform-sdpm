@@ -39,14 +39,14 @@
 								$("#${sid}").on("change",function(){
 									var pId = $("#${sid}  option:selected").val();
 									#if(bug?.moduleId)
-										ajaxRead("moduleId","moduleId","moduleTitle","/quality/bug/ajax/module?productId="+pId,${bug?.moduleId});
+										ajaxRead("${sid}","moduleId","moduleId","moduleTitle","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId});
 									#else
-										ajaxRead("moduleId","moduleId","moduleTitle","/quality/bug/ajax/module?productId="+pId,12);
+										ajaxRead("${sid}","moduleId","moduleId","moduleTitle","/quality/bug/ajax/module?moduleRoot="+pId);
 									#end
 									#if(bug?.storyId)
-										ajaxRead("storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId,${bug?.storyId});
+										ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId,${bug?.storyId});
 									#else
-										ajaxRead("storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId);
+										ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId);
 									#end
 
 								})
@@ -79,21 +79,23 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("projectId" bug?.projectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 								#foreach(project : projectList)
 									<option value="${project?.projectId}">${project?.projectName}</option>
 								#end
 							#end
-							<script type="text/javascript">
-								$("#${sid}").on("change",function(){
-									var pId = $("#${sid}  option:selected").val();
-									#if(bug?.storyId)
-									ajaxRead("taskId","taskId","taskName","/quality/bug/ajax/task?projectId="+pId,${bug?.storyId});
+			<script type="text/javascript">
+				$("#${sid}").on("change",function(){
+					var pId = $("#${sid}  option:selected").val();
+									#if(bug?.taskId)
+					ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId});
 									#else
-									ajaxRead("taskId","taskId","taskName","/quality/bug/ajax/task?projectId="+pId,12);
+					ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId);
 									#end
-								})
-							</script>
+
+
+				})
+			</script>
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
@@ -171,12 +173,7 @@
 					#@div(divClass="col-5")
 							 #@Tselect2F()
 	                   		 #@Tselect2Body("storyId" bug?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-								<script type="text/javascript">
-									$(document).ready(function(){
-										var pId = $("select[name=productId]  option:selected").val();
-										ajaxRead("storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId);
-									});
-								</script>
+
 	                    	#end                
 	                      	#@Tselect2Fix()
 	                      	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
@@ -190,10 +187,8 @@
 				#@formControlDiv("col-8")
 				#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("taskId" bug?.taskId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">1</option>
-	                        <option value="2">2</option>
-	                        <option value="3">3</option>
+							#@Tselect2Body("taskId" bug?.taskId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
 	                    	#end                
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/project/task/add.page" class="r ">增加</a>
@@ -344,7 +339,7 @@
 <script type="text/javascript">
 	$(".select2").select2();
 
-	function ajaxRead(toName,opKey,opvalue,url,value){
+	function ajaxRead(id,toName,opKey,opvalue,url,value){
 		var selectCheck = "select[name="+toName+"]";
 		$(selectCheck).each(function(){
 			var sele = $(this);
@@ -356,7 +351,6 @@
 				dataType:"json",
 				success: function(data){
 					for(var i=0,l=data.length;i<l;i++){
-						alert(data[i][opKey]+" "+value);
 						if(data[i][opKey] == value){
 							s = "selected";
 						}else{
@@ -366,7 +360,12 @@
 						sele.append(em);
 
 					}
-					sele.val(data[0][opKey]).trigger("change");
+					if(data[0] != null) {
+						sele.val(data[0][opKey]).trigger("change");
+					}else{
+						sele.empty();
+						$("#s2id_"+sele.attr("id")).find("span[class=select2-chosen]").empty();
+					}
 
 				},
 				error: function(res){
