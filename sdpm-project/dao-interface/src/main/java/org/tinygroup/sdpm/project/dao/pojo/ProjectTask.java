@@ -53,8 +53,12 @@ public class ProjectTask implements Serializable {
 	 */
 	private Integer taskStoryVersion;
 	/**
+	 * 关联任务表
+	 */
+
+	private Integer taskModel;
+	/**
 	 * 来源bug
-	 *
 	 */
 	private Integer taskFromBug;
 	/**
@@ -64,7 +68,6 @@ public class ProjectTask implements Serializable {
 	private String taskName;
 	/**
 	 * 任务类型
-	 *
 	 */
 	private String taskType;
 	/**
@@ -191,6 +194,14 @@ public class ProjectTask implements Serializable {
 	 * 0-未删除，1-已删除
 	 */
 	private String taskDeleted;
+
+	public Integer getTaskModel() {
+		return taskModel;
+	}
+
+	public void setTaskModel(Integer taskModel) {
+		this.taskModel = taskModel;
+	}
 
 	public String getStorySpec() {
 		return storySpec;

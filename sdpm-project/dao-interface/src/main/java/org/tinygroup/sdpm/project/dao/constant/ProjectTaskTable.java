@@ -52,6 +52,10 @@ public class ProjectTaskTable extends Table {
 	 */
 	public final Column TASK_STORY_VERSION = new Column(this, "task_story_version");
 
+	/**
+	 *
+	 */
+	public final Column TASK_MODEL = new Column(this, "task_model");
 	/** 
 	 * 来源bug
 	 * 
