@@ -210,7 +210,7 @@ public class StoryAction extends BaseController{
     		@RequestParam(required = false, defaultValue = "asc") String ordertype,
     		Model model, HttpServletRequest request){
     	bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-    	Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize, bug, null, "asc".equals(ordertype)?true:false);
+    	Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,null, bug, null, "asc".equals(ordertype)?true:false);
     	model.addAttribute("bugList",p);
     	
     	if ("reRelateBug".equals(relate)) {
