@@ -6,6 +6,7 @@ import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("system/module")
+@RequestMapping("/system/module")
 public class ModuleAction extends BaseController {
     @Autowired
     private ModuleService moduleService;
@@ -148,11 +149,80 @@ public class ModuleAction extends BaseController {
     public List data(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<SystemModule> moduleList = moduleService.findModuleList(new SystemModule());
-        if (check == null || !check.equals("n")) {
+        /*if (check == null || !check.equals("n")) {
             Map<String, Object> map1 = new HashMap<String, Object>();
             map1.put("id", -1);
             map1.put("pId", 0);
             map1.put("name", "所有部门");
+            list.add(map1);
+        }
+*/
+        for (SystemModule d : moduleList) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", d.getModuleId());
+            map.put("pId", d.getModuleParent());
+            map.put("open", true);
+            map.put("add", true);
+            map.put("edit", true);
+            map.put("name", d.getModuleName());
+            list.add(map);
+        }
+        return list;
+
+    }
+
+
+    @RequestMapping("/{forwordPager}/add")
+    public String addModule(SystemModule module,@PathVariable(value="forwordPager")String forwordPager) {
+      
+        moduleService.add(module);
+        
+        if("story".equals(forwordPager)){
+    		return "/product/page/project/togglebox.page";
+    	}else if ("promodule".equals(forwordPager)) {
+    		return "/product/page/project/product-modular.page";
+    	}
+        return "";
+        
+    }
+
+
+    @RequestMapping("/{forwordPager}/edit")
+     public  String editModule(Integer moduleId,String moduleName,@PathVariable(value="forwordPager")String forwordPager) {
+        SystemModule module = moduleService.findById(moduleId);
+        module.setModuleName(moduleName);
+        moduleService.edit(module);
+        
+        if("story".equals(forwordPager)){
+    		return "/product/page/project/togglebox.page";
+    	}else if ("promodule".equals(forwordPager)) {
+    		return "/product/page/project/product-modular.page";
+    	}
+        return "";
+    }
+
+
+    @RequestMapping("/{forwordPager}/deleteTree")
+    public String deleteSystemModule(Integer moduleId,@PathVariable(value="forwordPager")String forwordPager){
+        moduleService.deleteById(moduleId);
+        if("story".equals(forwordPager)){
+    		return "/product/page/project/togglebox.page";
+    	}else if ("promodule".equals(forwordPager)) {
+    		return "/product/page/project/product-modular.page";
+    	}
+        return "";
+    }
+    
+    @ResponseBody
+    @RequestMapping("/dataone")
+    public List dataone(String check) {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<SystemModule> moduleList = moduleService.findModuleList(new SystemModule());
+        if (check == null || !check.equals("n")) {
+            Map<String, Object> map1 = new HashMap<String, Object>();
+            map1.put("id", -1);
+            map1.put("pId", 0);
+            map1.put("name", "所有模板");
             list.add(map1);
         }
 

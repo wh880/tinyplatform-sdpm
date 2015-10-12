@@ -22,6 +22,6 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
 public interface ServiceFaqDao extends BaseDao<ServiceFaq, Integer> {
     /*查询问题总条数*/
     Integer SelectByKey();
-    /*Pager<ServiceFaq> queryPager(int start, int limit,ServiceFaq serviceFaq,final OrderBy... orderBies);*/
+   /* Pager<ServiceFaq> queryPager(int start, int limit,ServiceFaq serviceFaq);*/
 
 }

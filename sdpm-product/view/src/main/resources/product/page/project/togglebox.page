@@ -136,24 +136,19 @@
 ##operationbar end
 
     #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
-        #@toggleLeft({"class":"aclass"})
-            #@settoggleLeftTitle()
-            产品需求
-            #end
 
+        #@toggleLeft({"class":"aclass"})
+            #@settoggleLeftTitle()产品需求#end
             #@settoggleLeftBody("treeLeftbox")
-                #@zTreeList(call("link","/system/module/tree?moduleType=story&moduleRoot=1"))
-                    #setzTreeValMap({"id":"moduleId","name":"truename","pid":"moduleParent"}) ##key值为固定
-                    #zTreeSetLinkUrl("http://127.0.0.1:8080/tinyuiweb/mytree.page" )
-                    #zTreeSetAddUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
-                    #zTreeSetEditUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
-                    #zTreeSetDelUrl("http://127.0.0.1:8080/tinyuiweb/mytree.pagelet")
+                #@zTreeList(call("link","/system/module/data"))
+                    #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
+                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/product/story" )
+                    #zTreeSetAddUrl(TINY_CONTEXT_PATH+"/system/module/story/add?moduleType=story")
+                    #zTreeSetEditUrl(TINY_CONTEXT_PATH+"/system/module/story/edit")
+                    #zTreeSetDelUrl(TINY_CONTEXT_PATH+"/system/module/story/deleteTree")
                 #end
             #end
-
-
         #end
-
 
 
         #@toggleRight()

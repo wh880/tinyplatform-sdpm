@@ -31,6 +31,8 @@ public interface ServiceRequestDao extends BaseDao<ServiceRequest, Integer> {
 
     Pager<ServiceRequest> queryPagerBy(int start, int limit, ServiceRequest t, Integer statues, OrderBy... orderArgs);
 
+    Pager<ServiceRequest> queryPagerReplyByMe(int start, int limit, ServiceRequest t, Integer operation, OrderBy... orderArgs);
+
     int[] batchUpdateReply(List<ServiceRequest> list);
     Integer changeStatus(Integer id);
 

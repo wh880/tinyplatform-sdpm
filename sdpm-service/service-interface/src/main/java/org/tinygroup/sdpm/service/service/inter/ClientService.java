@@ -22,7 +22,8 @@ public interface ClientService {
      *
      * @return
      */
-    Pager<ServiceClient> findClientPager(Integer start, Integer limit, ServiceClient client);
+    Pager<ServiceClient> findClientPager(Integer start, Integer limit, ServiceClient client, String order,
+                                         String ordertype);
 
     /**
      * 根据条件查询List
@@ -106,4 +107,6 @@ public interface ClientService {
      * @return
      */
     Integer deleteClientUser(Integer id);
+
+    ServiceClient judgeClient(String clientName);
 }

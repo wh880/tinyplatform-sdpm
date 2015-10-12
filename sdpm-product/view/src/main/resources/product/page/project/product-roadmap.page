@@ -15,41 +15,78 @@
 #@timeMainBox()
 #set(planClass="org.tinygroup.sdpm.product.dao.pojo.ProductPlan")
 #set(releaseClass="org.tinygroup.sdpm.product.dao.pojo.ProductRelease")
-#set(compTime=now())
+#set(timeYear="0")
+#set(endindex=1)
 	#foreach(roadMap:list)
-		#if(instance(roadMap,planClass))
-##			#set(compTime=roadMap.planEndDate)
-		#end
-		
-#*		#set(timeYear=formatDate(compTime,'yyyy年'))	
+##	${formatDate(list?[roadMapFor.index]?.planEndDate?list?[roadMapFor.index]?.planEndDate:list?[roadMapFor.index]?.releaseDate,'yyyy')}
+##	${formatDate(roadMap?.planEndDate?roadMap?.planEndDate:roadMap?.releaseDate,'yyyy')}
+	
+	#if(roadMapFor.last||formatDate(roadMap?.planEndDate?roadMap?.planEndDate:roadMap?.releaseDate,'yyyy')!=formatDate(list?[roadMapFor.index]?.planEndDate?list?[roadMapFor.index]?.planEndDate:list?[roadMapFor.index]?.releaseDate,'yyyy'))
 		
 		#@historyMenu()
-		
-		
-			#if(formatDate(compTime,'yyyy年')!=timeYear)
-				#set(timeYear=formatDate(compTime,'yyyy年'))	
-				#@year("first" "#") ${timeYear} #end
-			#else
-				
-				#@dateItem("green")
-	
-		         	#dateHead(formatDate(compTime,'yyyy') formatDate(compTime,'MM') formatDate(compTime,'dd'))
-					
-					#if(instance(map,planClass))
-						#@dateBody(map.planName) ${map.planSpec}  #end
-					#else
-						#@dateBody(map.releaseName) ${map.releaseDesc}  #end	
-					#end
-		
-		     	 #end
+        #@year("roadMapFor.index" "#")${formatDate(roadMap?.planEndDate?roadMap?.planEndDate:roadMap?.releaseDate,'yyyy')}年#end
+			#foreach(road:list)
+				#if(roadFor.index>=endindex&&roadFor.index<=roadMapFor.index)
+					#set(compTime=road?.planEndDate?road?.planEndDate:road?.releaseDate)
+					#@dateItem()
+
+			            #dateHead(formatDate(compTime,'yyyy') formatDate(compTime,'MM') formatDate(compTime,'dd'))
 			
+			            #if(road?.planEndDate)
+							#@dateBody(road?.planName) 
+								[${formatDate(road?.planBeginDate,"yyyy.MM.dd")}--${formatDate(road?.planBeginDate,"yyyy.MM.dd")}] <br/>
+								${road?.planSpec} 
+							#end
+						#else
+							#@dateBody(road?.releaseName) ${road?.releaseDesc}  #end	
+						#end
+			
+			        #end
+					
+					
+					
+				#end
+				#if(roadFor.index==roadMapFor.index)
+					#set(endindex=roadMapFor.index+1)
+					#break
+				#end
+				
 			#end
-		#end*#
-		
-		
-	
-	
+			
+		#end
 	#end
+		
+		
+		
+	#end
+#*		#set(compTime=roadMap?.planEndDate?roadMap?.planEndDate:roadMap?.releaseDate)	
+			
+		${formatDate(compTime,'yyyy')}==${timeYear}
+		#if(formatDate(compTime,'yyyy')!=timeYear)
+			#set(timeYear=formatDate(compTime,'yyyy'))
+			#@historyMenu()
+			#@year(roadMapFor.index "#") ${formatDate(compTime,'yyyy')}年 #end
+		#end
+		
+		
+				
+			#@dateItem()
+
+	         	#dateHead(formatDate(compTime,'yyyy') formatDate(compTime,'MM') formatDate(compTime,'dd'))
+				
+				#if(roadMap?.planEndDate)
+					#@dateBody(map?.planName) ${map?.planSpec}  #end
+				#else
+					#@dateBody(map?.releaseName) ${map?.releaseDesc}  #end	
+				#end
+	
+	     	#end
+			*#
+		
+		
+	
+	
+	
 	
 #end
 		

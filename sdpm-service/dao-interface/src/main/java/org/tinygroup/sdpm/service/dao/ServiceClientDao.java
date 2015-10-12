@@ -25,4 +25,6 @@ public interface ServiceClientDao extends BaseDao<ServiceClient, Integer> {
     Integer softDelete(Integer id);
 
     int[] softDeleteBatch(List<ServiceClient> list);
+
+    ServiceClient judge(String clientName);
 }
