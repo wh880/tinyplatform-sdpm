@@ -233,18 +233,20 @@ public class DocAction {
 		
 		DocumentDoc doc = docservice.findDocById(docId);
 		model.addAttribute("doc", doc);
-		return "";
+		return "/document/doc-edit.page";
 	}
 	
 	@RequestMapping("/product/{type}/updateDoc")
 	public String saveDocument(DocumentDoc doc,@PathVariable(value="type")String type){
 		if("save".equals(type)){
 			docservice.createNewDoc(doc);
+			return "redirect:"+"/product/page/project/archive-list.page";
 		}else if ("update".equals(type)) {
-			
+
 			docservice.editDoc(doc);
-		}		
-		return "redirect:"+"/document/product/doc";
+			return "redirect:"+"/document/product/doc";
+		}
+		return "";
 	}
 	
 	
