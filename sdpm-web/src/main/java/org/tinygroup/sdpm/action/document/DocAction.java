@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.HttpRequestHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
@@ -199,9 +201,52 @@ public class DocAction {
 	
 	//产品文档
 	@RequestMapping("/product/doc")
-	public String product(HttpServletRequest request){		
+	public String product(HttpServletRequest request,Model model){
+		Product product = new Product();
+		List<Product> list = productService.findProductList(new Product());
+		if(list.size() > 0){
+			if(null==request.getSession().getAttribute("sessionProductId")||product.getProductId()==null){
+				request.getSession().setAttribute("sessionProductId",list.get(0).getProductId());
+			}else {
+				request.getSession().setAttribute("sessionProductId",product.getProductId());
+			}
+		}
+		model.addAttribute("productList", list);
+		return "/product/page/project/archive-list.page";
+	}
+	
+	@RequestMapping("/product/doc/list")
+	public String productList(DocumentDoc doc,HttpServletRequest request,Integer page,Integer limit,String order,String ordertype,Model model){
+		
+		doc.setDocProduct((Integer) request.getSession().getAttribute("sessionProductId"));
+		boolean asc = true;		
+		if("desc".equals(ordertype)){
+			asc = false;
+		}
+		Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, NameUtil.resolveNameDesc(order), asc);
+		model.addAttribute("pager", docpager);
+		return "/product/data/archivedata.pagelet";
+	}
+	
+	@RequestMapping("/product/findDoc")
+	public String findDocument(Integer docId,Model model){
+		
+		DocumentDoc doc = docservice.findDocById(docId);
+		model.addAttribute("doc", doc);
 		return "";
 	}
+	
+	@RequestMapping("/product/{type}/updateDoc")
+	public String saveDocument(DocumentDoc doc,@PathVariable(value="type")String type){
+		if("save".equals(type)){
+			docservice.createNewDoc(doc);
+		}else if ("update".equals(type)) {
+			
+			docservice.editDoc(doc);
+		}		
+		return "redirect:"+"/document/product/doc";
+	}
+	
 	
 	//项目文档
 	@RequestMapping("/product/doc")
