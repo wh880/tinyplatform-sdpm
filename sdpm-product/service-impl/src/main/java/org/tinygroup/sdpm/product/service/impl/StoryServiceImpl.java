@@ -8,6 +8,7 @@ import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
+import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -60,6 +61,16 @@ public class StoryServiceImpl implements StoryService {
 	public List<ProductStory> findStoryList(ProductStory story){
 
 		return storyManager.findList(story);
+	}
+
+	public List<StoryCount> productStoryCount(ProductStory story) {
+
+		return storyManager.productStoryCount(story);
+	}
+
+	public List<StoryCount> modelStoryCount(ProductStory story) {
+
+		return storyManager.modelStoryCount(story);
 	}
 
 }

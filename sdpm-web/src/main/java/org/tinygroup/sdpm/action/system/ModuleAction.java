@@ -61,6 +61,17 @@ public class ModuleAction extends BaseController {
         }
         return "redirect: list?moduleType=dict";
     }
+    @ResponseBody
+    @RequestMapping("ajax/delete")
+    public Map<String, String> ajaxDeleteModule(Integer moduleId) {
+        if (moduleId != null) {
+            moduleService.deleteById(moduleId);
+        }
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
+    }
 
     @RequestMapping("find")
     public String find(Integer moduleId, Model model) {
@@ -90,7 +101,7 @@ public class ModuleAction extends BaseController {
             systemModule.setModuleGrade(0);
             systemModule.setModuleOrder(0);
             systemModule.setModulePath("1,2,3");
-            systemModule.setModuleOwner("dict");
+            systemModule.setModuleType("dict");
             if (systemModule.getModuleParent() == null) {
                 systemModule.setModuleParent(0);
             }
@@ -100,6 +111,26 @@ public class ModuleAction extends BaseController {
             moduleService.eidtNameAndTiele(systemModule);
         }
         return "redirect: list?moduleType=dict";
+    }
+    @ResponseBody
+    @RequestMapping("ajax/save")
+    public Map<String, String> ajaxSaveModule(SystemModule systemModule) {
+        if (systemModule.getModuleId() == null) {
+            systemModule.setModuleGrade(0);
+            systemModule.setModuleOrder(0);
+            systemModule.setModulePath("1,2,3");
+            if (systemModule.getModuleParent() == null) {
+                systemModule.setModuleParent(0);
+            }
+
+            moduleService.add(systemModule);
+        } else {
+            moduleService.eidtNameAndTiele(systemModule);
+        }
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "成功");
+        return map;
     }
 
     @ResponseBody
@@ -122,11 +153,13 @@ public class ModuleAction extends BaseController {
             if (systemModule.getModuleParent() == parent) {
                 int size = maps.size();
                 Map<String, Object> mapTop = Maps.newHashMap();
-                mapTop.put("id", "p" + systemModule.getModuleId());
-                mapTop.put("pId", parent != 0 ? "p" + parent : parent);
+                mapTop.put("id", systemModule.getModuleId());
+                mapTop.put("pId", parent != 0 ? parent : parent);
                 mapTop.put("open", true);
                 mergeModule(systemModules, maps, systemModule.getModuleId());
                 mapTop.put("isParent", maps.size() > size ? true : false);
+                mapTop.put("add", true);
+                mapTop.put("edit", true);
                 mapTop.put("name", systemModule.getModuleName());
                 maps.add(mapTop);
 //				systemModules.remove(i);
@@ -218,13 +251,13 @@ public class ModuleAction extends BaseController {
     public List dataone(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<SystemModule> moduleList = moduleService.findModuleList(new SystemModule());
-        if (check == null || !check.equals("n")) {
+     /*   if (check == null || !check.equals("n")) {
             Map<String, Object> map1 = new HashMap<String, Object>();
             map1.put("id", -1);
             map1.put("pId", 0);
             map1.put("name", "所有模板");
             list.add(map1);
-        }
+        }*/
 
         for (SystemModule d : moduleList) {
             Map<String, Object> map = new HashMap<String, Object>();

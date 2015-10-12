@@ -25,8 +25,10 @@ import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.expression.FragmentExpressionSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.formitem.FragmentFromItemSql;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
@@ -271,6 +273,71 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 					QUALITY_BUGTABLE.BUG_LAST_EDITED_DATE.eq(t.getBugLastEditedDate()),
 					QUALITY_BUGTABLE.DELETED.eq(t.getDeleted())));
 			return addOrderByElements(select, orderArgs);
+			}
+		});
+	}
+
+	public Pager<QualityBug> queryPager(int start, int limit , final String conditions, QualityBug qualityBug , final OrderBy... orderArgs) {
+		if(qualityBug==null){
+			qualityBug=new QualityBug();
+		}
+		return getDslTemplate().queryPager(start, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
+
+			public Select generate(QualityBug t) {
+				Select select = MysqlSelect.selectFrom(QUALITY_BUGTABLE).where(
+						and(
+								FragmentExpressionSql.fragmentCondition("".equals(conditions)?null:conditions),
+								QUALITY_BUGTABLE.PRODUCT_ID.eq(t.getProductId()),
+								QUALITY_BUGTABLE.MODULE_ID.eq(t.getModuleId()),
+								QUALITY_BUGTABLE.PROJECT_ID.eq(t.getProjectId()),
+								QUALITY_BUGTABLE.PLAN_ID.eq(t.getPlanId()),
+								QUALITY_BUGTABLE.STORY_ID.eq(t.getStoryId()),
+								QUALITY_BUGTABLE.STORY_VERSION.eq(t.getStoryVersion()),
+								QUALITY_BUGTABLE.TASK_ID.eq(t.getTaskId()),
+								QUALITY_BUGTABLE.TO_TASK_ID.eq(t.getToTaskId()),
+								QUALITY_BUGTABLE.TO_STORY_ID.eq(t.getToStoryId()),
+								QUALITY_BUGTABLE.BUG_TITLE.eq(t.getBugTitle()),
+								QUALITY_BUGTABLE.BUG_KEYWORDS.eq(t.getBugKeywords()),
+								QUALITY_BUGTABLE.BUG_SEVERITY.eq(t.getBugSeverity()),
+								QUALITY_BUGTABLE.PRIORITY.eq(t.getPriority()),
+								QUALITY_BUGTABLE.BUG_TYPE.eq(t.getBugType()),
+								QUALITY_BUGTABLE.OPERATING_SYSTEM.eq(t.getOperatingSystem()),
+								QUALITY_BUGTABLE.BROWSER.eq(t.getBrowser()),
+								QUALITY_BUGTABLE.HARDWARE.eq(t.getHardware()),
+								QUALITY_BUGTABLE.BUG_FOUND.eq(t.getBugFound()),
+								QUALITY_BUGTABLE.BUG_STEPS.eq(t.getBugSteps()),
+								QUALITY_BUGTABLE.BUG_STATUS.eq(t.getBugStatus()),
+								QUALITY_BUGTABLE.BUG_CONFIRMED.eq(t.getBugConfirmed()),
+								QUALITY_BUGTABLE.BUG_ACTIVATED_COUNT.eq(t.getBugActivatedCount()),
+								QUALITY_BUGTABLE.BUG_MAILTO.eq(t.getBugMailto()),
+								QUALITY_BUGTABLE.BUG_OPENED_BY.eq(t.getBugOpenedBy()),
+								QUALITY_BUGTABLE.BUG_OPENED_DATE.eq(t.getBugOpenedDate()),
+								QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(t.getBugOpenedBuild()),
+								QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(t.getBugAssignedTo()),
+								QUALITY_BUGTABLE.BUG_ASSIGNED_DATE.eq(t.getBugAssignedDate()),
+								QUALITY_BUGTABLE.BUG_RESOLVED_BY.eq(t.getBugResolvedBy()),
+								QUALITY_BUGTABLE.BUG_RESOLUTION.eq(t.getBugResolution()),
+								QUALITY_BUGTABLE.BUG_RESOLVED_BUILD.eq(t.getBugResolvedBuild()),
+								QUALITY_BUGTABLE.BUG_RESOLVED_DATE.eq(t.getBugResolvedDate()),
+								QUALITY_BUGTABLE.BUG_CLOSED_BY.eq(t.getBugClosedBy()),
+								QUALITY_BUGTABLE.BUG_CLOSED_DATE.eq(t.getBugClosedDate()),
+								QUALITY_BUGTABLE.BUG_DUPLICATE_BUG.eq(t.getBugDuplicateBug()),
+								QUALITY_BUGTABLE.LINK_BUG.eq(t.getLinkBug()),
+								QUALITY_BUGTABLE.LINK_CASE.eq(t.getLinkCase()),
+								QUALITY_BUGTABLE.CASE_VERSION.eq(t.getCaseVersion()),
+								QUALITY_BUGTABLE.BUG_RESULT.eq(t.getBugResult()),
+								QUALITY_BUGTABLE.BUG_REPO.eq(t.getBugRepo()),
+								QUALITY_BUGTABLE.BUG_ENTRY.eq(t.getBugEntry()),
+								QUALITY_BUGTABLE.BUG_FROM_CASE.eq(t.getBugFromCase()),
+								QUALITY_BUGTABLE.BUG_LINES.eq(t.getBugLines()),
+								QUALITY_BUGTABLE.BUG_V1.eq(t.getBugV1()),
+								QUALITY_BUGTABLE.BUG_V2.eq(t.getBugV2()),
+								QUALITY_BUGTABLE.BUG_REPO_TYPE.eq(t.getBugRepoType()),
+								QUALITY_BUGTABLE.TESTTASK.eq(t.getTesttask()),
+								QUALITY_BUGTABLE.BUG_LAST_EDITED_BY.eq(t.getBugLastEditedBy()),
+								QUALITY_BUGTABLE.BUG_LAST_EDITED_DATE.eq(t.getBugLastEditedDate()),
+								QUALITY_BUGTABLE.DELETED.eq(t.getDeleted())));
+				return addOrderByElements(select, orderArgs);
 			}
 		});
 	}

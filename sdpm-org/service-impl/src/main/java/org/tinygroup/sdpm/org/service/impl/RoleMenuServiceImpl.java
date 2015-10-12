@@ -42,4 +42,8 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     public Integer deleteRoleMenu(Integer id) {
         return roleMenuManager.delete(id);
     }
+
+    public void batchDeleteRoleMenu(List<OrgRoleMenu> orgRoleMenuList) {
+        roleMenuManager.batchDelete(orgRoleMenuList);
+    }
 }

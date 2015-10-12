@@ -21,6 +21,7 @@ import java.util.List;
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
@@ -30,4 +31,10 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 	Integer softDelete(Integer id);
 	
 	List<ProductStory> getByKeys(Integer... id);
+	
+	List<StoryCount> modelStoryCount(ProductStory story);
+	
+	int getCount(ProductStory story);
+	
+	List<StoryCount> productStoryCount(ProductStory t);
 }

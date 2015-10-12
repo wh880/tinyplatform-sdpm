@@ -73,8 +73,8 @@ public class BeforeAction {
     public String jumpSurveyIndex(Model model, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
         Project project = projectService.findById(projectId);
-        model.addAttribute("selProject", project);
-        return "project/survey/index.page";
+        model.addAttribute("project", project);
+        return "/project/survey/index.page";
     }
 
     @RequestMapping("/select")
