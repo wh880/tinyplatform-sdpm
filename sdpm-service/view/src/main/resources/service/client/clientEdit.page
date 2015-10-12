@@ -106,5 +106,12 @@
 ##    #end
     <br>
 </div>
-</div>
 #end
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+
+        });
+    });
+</script>

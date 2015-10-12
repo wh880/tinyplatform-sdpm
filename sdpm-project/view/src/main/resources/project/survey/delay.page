@@ -28,7 +28,7 @@
      #@elementItem()
         #@colLabel()备注：#end
 	#@formControlDiv("col-8")
-		#@tinyueditor("content" "content")Say something#end
+        #@tinyueditor("content" "content")#end
 	#end
         #@validateDiv("col-2")#end
     #end

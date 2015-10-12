@@ -145,7 +145,7 @@
                     #@elementItem()
                         #@sdpmItem("文档摘要")
                             #@formControlDiv("col-8")
-                                #@Teditor("content1" "docDigest" {"initialFrameHeight":"200"})Say something#end
+                                #@Teditor("content1" "docDigest" {"initialFrameHeight":"200"})#end
                             #end
                         #end
                     #end

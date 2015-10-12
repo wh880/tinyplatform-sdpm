@@ -52,11 +52,11 @@
               isShow="1" scope="service-request-list"/>
         <menu id="request-all" name="全部请求" href="/service/request/list" sort="1"
               isShow="1" scope="service-request-list"/>
-        <menu id="request-tome" name="由我回复" href="/service/serviceReq/request.page" sort="1"
+        <menu id="request-tome" name="由我回复" href="/service/request/list?operation=1" sort="1"
               isShow="1" scope="service-request-list"/>
         <!--<menu id="request-byme" name="由我创建" href="/service/serviceReq/request.page" sort="1"-->
               <!--isShow="1" scope="service-request-list"/>-->
-        <menu id="request-review-byme" name="由我回访" href="/service/serviceReq/request.page" sort="1"
+        <menu id="request-review-byme" name="由我回访" href="/service/request/list?operation=2" sort="1"
               isShow="1" scope="service-request-list"/>
         <menu id="request-need-review" name="待回访" href="/service/request/list?status=6" sort="1"
               isShow="1" scope="service-request-list"/>
@@ -66,8 +66,8 @@
               isShow="1" scope="service-request-list"/>
         <menu id="request-export" name="导出" href="/service/serviceCom/serviceExport.pagelet" sort="1"
               isShow="1" scope="service-request-r"/>
-        <menu id="request-form" name="报表" icon="icon-bar-chart" href="/service/serviceReq/reportform.page" sort="1"
-              isShow="1" scope="service-request-r"/>
+        <!--<menu id="request-form" name="报表" icon="icon-bar-chart" href="/service/serviceReq/reportform.page" sort="1"-->
+        <!--isShow="1" scope="service-request-r"/>-->
         <menu id="request-add" name="新增请求" icon="icon-plus" href="/service/request/form" sort="1"
               isShow="1" scope="service-request-r"/>
         <menu id="service-request-operation" name="操作" href="" icon=""

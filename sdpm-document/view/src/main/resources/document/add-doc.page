@@ -96,7 +96,7 @@
 			#@elementItem()
 					#@colLabel()文档摘要#end
 					#@formControlDiv("col-8")
-						#@Teditor("docDigest" "docDigest" {"initialFrameHeight":"200"})Say something#end
+						#@Teditor("docDigest" "docDigest" {"initialFrameHeight":"200"})#end
 					#end
 					#@validateDiv("col-2")#end
 				#end	

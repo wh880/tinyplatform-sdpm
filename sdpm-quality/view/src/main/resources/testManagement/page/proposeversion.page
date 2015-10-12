@@ -143,7 +143,7 @@
         #@elementItem()
             #@colLabel()描述：#end
             #@formControlDiv("col-8")
-                #@Teditor("content" "testtaskDesc" {"initialFrameHeight":"150"})Say something#end
+                #@Teditor("content" "testtaskDesc" {"initialFrameHeight":"150"})#end
             #end
             #@validateDiv("col-2")#end
         #end

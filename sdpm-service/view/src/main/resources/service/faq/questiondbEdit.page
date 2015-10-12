@@ -20,7 +20,7 @@
                     <label></label>
                 </div>
                 <div class="col-10">
-                    #@Teditor("content" "content" {"initialFrameHeight":"350"})Say something#end</div>
+                    #@Teditor("content" "content" {"initialFrameHeight":"350"})#end</div>
             </div>
         #end
         <br/>

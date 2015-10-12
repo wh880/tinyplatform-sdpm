@@ -76,9 +76,8 @@ public class ClientAction extends BaseController {
             clientService.addClientUser(serviceClientUser);
         } else {
             clientService.updateClient(client);
-
+            model.addAttribute("client", client);
         }
-        model.addAttribute("client", client);
         return "redirect:/service/client/list";
     }
 
@@ -196,5 +195,10 @@ public class ClientAction extends BaseController {
         } else
             clientUser = clientUserService.addClientUser(clientUser);
         return "redirect:/service/client/clientDetail?id=" + clientUser.getClientId();
+    }
+
+    @RequestMapping(value = "/judgeClient")
+    public String judgeClient() {
+        return null;
     }
 }

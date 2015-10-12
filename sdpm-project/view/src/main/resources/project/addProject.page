@@ -108,7 +108,7 @@
 #end
 #@elementItem()
     #@sdpmItem("项目描述")
-        #@Teditor("projectDesc" "content" {"initialFrameHeight":"200"})Say something#end
+        #@Teditor("projectDesc" "content" {"initialFrameHeight":"200"})#end
     #end
 #end
 #@elementItem()

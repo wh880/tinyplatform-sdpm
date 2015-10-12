@@ -7,12 +7,12 @@
 ##脚本
 #include("common.page")
 
-#set(name="documentDocu")
+##set(name="document")
 #include("doc-tab.page")
-#@tinyForm("this--form" TINY_CONTEXT_PATH+"/document/doc/editSave" "post" {"class":"edit"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/document/doc/editSave" "post" {"class":"edit"})
 <input name="docId" type="hidden" value="${doc?.docId}"/>
 <input name="productId" type="hidden" value="${product?.productId}"/>
-<input name="docLibId" type="hidden" value="${libList?.docLibId}"/>
+##<input name="docLibId" type="hidden" value="${libList?.docLibId}"/>
 	<div style="width:100%">
     	<div class="infoContent">
 			<p class="titleName">编辑</p>
@@ -32,6 +32,7 @@
                #end*#
               	</div>
        		</div>
+       	#end
      #end
      #@elementItem()
         <div class="col-12">
@@ -60,7 +61,7 @@
         <div class="col-12">
          <div class="col-2 text-r"><label>文档标题：</label></div>
          		<div class="col-4">
-           	 	#@tinyInput("text" "docTitle" doc.docTitle {"datatype":"*","id":"docTitle","class":"input-text"})${doc?.docTitle}#end
+           	 	#@tinyInput("text" "docTitle" doc?.docTitle {"datatype":"*","id":"docTitle","class":"input-text"})${doc?.docTitle}#end
               	</div>
        	</div>
      #end
@@ -68,7 +69,7 @@
         <div class="col-12">
          <div class="col-2 text-r"><label>关键字：</label></div>
          		<div class="col-4">
-           	 	#tinyInput("text" "docKeywords" doc.docKeywords {"datatype":"","id":"docKeywords","class":"input-text"})
+           	 	#tinyInput("text" "docKeywords" doc?.docKeywords {"datatype":"","id":"docKeywords","class":"input-text"})
               	</div>
        	</div>
      #end
@@ -83,7 +84,7 @@
 					#@colLabel()文档URL#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docUrl" doc.docUrl{"placeholder":"相应的链接地址","datatype":"*4-16","id":"docUrl","class":"input-text"})
+					#tinyInput("text" "docUrl" doc?.docUrl{"placeholder":"相应的链接地址","datatype":"*4-16","id":"docUrl","class":"input-text"})
 					#end
 					#end
 				#end

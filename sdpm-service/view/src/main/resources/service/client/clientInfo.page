@@ -100,14 +100,14 @@
                             #set(m=menuManager.getMenu("linkman-edit"))
                             #if(m)
                                 #@aModal(
-                                    "#myModal1" m.name "500" "200" m.icon m.href+"?id="+var?.id)
+                                    "#myModal1" m.name "580" "300" m.icon m.href+"?id="+var?.id)
                                 #end
                             #end
 
                             #set(m1=menuManager.getMenu("linkman-new"))
                             #if(m1)
                                 #@aModal(
-                                    "#myModal1" m1.name "500" "200" m1.icon m1.href+"?clientId="+var?.clientId)
+                                    "#myModal1" m1.name "580" "300" m1.icon m1.href+"?clientId="+var?.clientId)
                                 #end
                             #end
 

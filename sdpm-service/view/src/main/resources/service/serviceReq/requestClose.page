@@ -34,7 +34,7 @@
         #@elementItem()
             #@colLabel()备注&nbsp#end
             #@formControlDiv("col-8")
-                #@Teditor("content" "content" {"initialFrameHeight":"150"})Say something#end
+                #@Teditor("content" "content" {"initialFrameHeight":"150"})#end
             #end
             #@validateDiv("col-2")#end
         #end

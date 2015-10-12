@@ -45,6 +45,9 @@ public class RequestServiceImpl implements RequestService {
     public Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, Integer status,ServiceRequest clientRequest) {
         return requestManager.findPager(start, limit,status, clientRequest);
     }
+    public Pager<ServiceRequest> findReplyByMe(Integer start, Integer limit, Integer operation,ServiceRequest clientRequest) {
+        return requestManager.findReplyByMePager(start, limit,operation, clientRequest);
+    }
 
     public Integer closeRequest(ServiceRequest clientRequest) {
         return requestManager.close(clientRequest);

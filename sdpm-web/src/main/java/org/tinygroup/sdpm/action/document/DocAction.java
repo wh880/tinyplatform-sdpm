@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.Doc;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,6 @@ public class DocAction {
 			}else {
 				request.getSession().setAttribute("documentLibId",doclib.getDocLibId());
 			}
-		}else{			
-				request.getSession().setAttribute("documentLibId","");
 		}
 		model.addAttribute("libList",list);		
 		return "/document/document.page";
@@ -55,7 +54,7 @@ public class DocAction {
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
-		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
+		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
 		Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, order, asc);
 		model.addAttribute("docpager", docpager);
 	//	model.addAttribute("libId", libId);
@@ -71,41 +70,53 @@ public class DocAction {
 	@RequestMapping(value="/doc/addSave",method=RequestMethod.POST)
 	public String addSave(HttpServletRequest request,DocumentDoc doc,Model model){	
 		List<Product> product = productService.findProductList(new Product());
-		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
+		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
 		docservice.createNewDoc(doc);
 		model.addAttribute("productList", product);
 		return "redirect:"+"/document?docChange=true";
 	}
 	
 	@RequestMapping(value="/doc/edit")
-	public String editDoc(Model model,Integer docId)
+	public String editDoc(HttpServletRequest request,Model model,Integer docId)
 	{	
 		DocumentDoc doc = new DocumentDoc();
+		List<Product> product = productService.findProductList(new Product());
+		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
+	//	List<DocumentDoclib> list = docservice.findDoclibList(new DocumentDoclib());
 		doc = docservice.findDocById(docId);
+		model.addAttribute("productList", product);
+		model.addAttribute("doc", doc);
+	//	model.addAttribute("libList", list);
 		return "/document/doc-edit.page";
 	}
 	
 	@RequestMapping(value="/doc/editSave",method=RequestMethod.POST)
-	public String editSave(HttpServletRequest request,DocumentDoc doc,Model model){	
-		List<Product> product = productService.findProductList(new Product());
-		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
-		List<DocumentDoclib> list = docservice.findDoclibList(new DocumentDoclib());
+	public String editSave(DocumentDoc doc,Model model){			
 		docservice.editDoc(doc);
-		model.addAttribute("productList", product);
-		model.addAttribute("doc", doc);
-		model.addAttribute("libList", list);
 		return "redirect:"+"/document?docChange=true";
 	}
 	
 	@RequestMapping("/doc/view")
 	public String docView(HttpServletRequest request,DocumentDoc doc,Model model,Integer docid){
 		
-		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
+		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
 		doc = docservice.findDocById(docid);		
 		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
 		model.addAttribute("doc",doc);
 		model.addAttribute("docLib",docLib);
 		return "/document/doc-view.page";
+	}
+	
+	@RequestMapping("/doc/viewInfo")
+	public String viewInfo(HttpServletRequest request, Integer docId, Model model){
+		DocumentDoc doc = new DocumentDoc();
+		DocumentDoclib docLib = new DocumentDoclib();
+		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
+		doc = docservice.findDocById(docId);
+		docLib = docservice.findDoclibById(doc.getDocLibId());
+		model.addAttribute("doc",doc);
+		model.addAttribute("docLib",docLib);
+		return "/document/basic-info.pagelet";
 	}
 	
 	@RequestMapping(value="/doc/save",method=RequestMethod.POST)
@@ -184,6 +195,18 @@ public class DocAction {
 		map.put("status", "success");
 	    map.put("info", "删除成功");
 	    return map;
+	}
+	
+	//产品文档
+	@RequestMapping("/product/doc")
+	public String product(HttpServletRequest request){		
+		return "";
+	}
+	
+	//项目文档
+	@RequestMapping("/product/doc")
+	public String prodject(HttpServletRequest request){		
+		return "";
 	}
 	
 }
