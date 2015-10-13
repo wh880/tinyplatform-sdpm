@@ -35,14 +35,6 @@
                         #end
                     #end
                 </span>
-                <span style="padding-top:5px;float:right">
-                    #set(m=menuManager.getMenu("org-user-export"))
-                    #if(m)
-                        #@aModal("#myModal" m.name "600" "100" ""
-                        m.href)#buttonIcon(iconClass="icon-download-alt")导出#end
-                    #end
-
-                </span>
                     #div(divClass="clearfix")
                 #end
 

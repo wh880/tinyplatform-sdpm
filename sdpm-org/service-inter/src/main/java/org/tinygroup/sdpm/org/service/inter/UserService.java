@@ -29,6 +29,14 @@ public interface UserService {
      */
     OrgUser findUser(String id);
 
+    /**
+     * 根据主键id查找用户
+     *
+     * @param account 用户名
+     * @return
+     */
+    OrgUser findUserByAccount(String account);
+
     Pager<OrgUser> findUserPager(Integer start, Integer limit, OrgUser orgUser);
 
     /**

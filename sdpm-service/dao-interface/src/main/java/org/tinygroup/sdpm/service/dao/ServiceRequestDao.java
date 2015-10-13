@@ -29,7 +29,7 @@ public interface ServiceRequestDao extends BaseDao<ServiceRequest, Integer> {
     Integer softDelete(Integer id);
     Integer saveReply(ServiceRequest clientRequest);
 
-    Pager<ServiceRequest> queryPagerBy(int start, int limit, ServiceRequest t, Integer statues, OrderBy... orderArgs);
+    Pager<ServiceRequest> queryPagerBy(int start, int limit, ServiceRequest t, Integer statues, Integer treeId, OrderBy... orderArgs);
 
     Pager<ServiceRequest> queryPagerReplyByMe(int start, int limit, ServiceRequest t, Integer operation, OrderBy... orderArgs);
 

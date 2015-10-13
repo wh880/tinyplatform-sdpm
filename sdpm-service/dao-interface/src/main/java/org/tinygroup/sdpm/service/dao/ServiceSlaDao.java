@@ -26,7 +26,8 @@ import java.util.List;
 public interface ServiceSlaDao extends BaseDao<ServiceSla, Integer> {
     List<ServiceSla> getListByClientId(Integer clientId);
 
-    Pager<ServiceSla> queryPager2(int start, int limit, ServiceSla serviceSla, final OrderBy... orderBies);
+    Pager<ServiceSla> queryPagerTree(int start, int limit, ServiceSla serviceSla, Integer treeId, final OrderBy... orderBies);
+
 
     Integer softDelete(Integer id);
 }

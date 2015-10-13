@@ -74,15 +74,15 @@
             #end
 
         #end
-        #@tinyTableContent("../../data/tinydynamicdata.pagelet") ##取数据地址 总数据
+        #@tinyTableContent(TINY_CONTEXT_PATH+"/system/action/list") ##取数据地址 总数据
             #@thead()
                 #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                     #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})日期#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})操作者#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})动作#end
-                    #@tinyTh({"class":"sorting","rel":"sortname","style":"color:#333"})对象类型#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
+                    #@tinyTh({"class":"sorting","rel":"actionDate"})日期#end
+                    #@tinyTh({"class":"sorting","rel":"actionActor"})操作者#end
+                    #@tinyTh({"class":"sorting","rel":"actionAction"})动作#end
+                    #@tinyTh({"class":"sorting","rel":"actionObjectType"})对象类型#end
+                    #@tinyTh({"class":"sorting","rel":"actionObjectId"})ID#end
                     #@tinyTh({"class":"","rel":"sortname"})对象名称#end
                 #end
             #end

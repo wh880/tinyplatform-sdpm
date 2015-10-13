@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.function;
+package org.tinygroup.sdpm.Function;
 
 import org.tinygroup.sdpm.system.dictinit.DictUtil;
 import org.tinygroup.template.Template;
@@ -19,6 +19,9 @@ public class DictFunction extends AbstractTemplateFunction {
 
         if(parameters.length == 0){
             throw new RuntimeException("字典项名称不能为空");
+        }
+        if(parameters.length>1){
+            return DictUtil.getDict(parameters[0].toString(),parameters[1].toString());
         }
         return DictUtil.getDict(parameters[0].toString());
     }

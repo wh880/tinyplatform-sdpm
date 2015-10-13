@@ -26,8 +26,6 @@
             #@elementItem()
                 #@sdpmItem("客户名称" "*")
                     #@Tselect2F()
-                    #*#@Tselect2Body(
-                        "clientId" "sla.clientId" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项*#
                         #@Tselect2Body(
                             "clientId" sla?.clientId{"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             #@tinyOptionItem("ch")请选择#end
@@ -42,13 +40,14 @@
             #end
             #@elementItem()
                 #@sdpmItem("产品名称" "*")
-                    #@tinySelect(
-                        "productId" sla?.productId {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
-                        #@tinyOptionItem("ch")请选择#end
-                        #@tinyOptionItem("0")支付宝#end
-                        #@tinyOptionItem("1")余额宝#end
-                        #@tinyOptionItem("2")财付通#end
-                        #@tinyOptionItem("3")陆金所#end
+                    #@Tselect2F()
+                        #@Tselect2Body(
+                            "productId" sla?.productId{"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@tinyOptionItem("ch")请选择#end
+                            #foreach(l:slas)
+                                #@tinyOptionItem(l.productId)${l?.productName}#end
+                            #end
+                        #end
                     #end
                 #end
             #end

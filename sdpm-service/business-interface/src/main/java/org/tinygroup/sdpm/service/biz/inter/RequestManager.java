@@ -70,7 +70,7 @@ public interface RequestManager {
      *
      * @return
      */
-    Pager<ServiceRequest> findPager(Integer start, Integer limit, Integer status, ServiceRequest serviceRequest, String order, String ordertype);
+    Pager<ServiceRequest> findPager(Integer start, Integer limit, Integer status, ServiceRequest serviceRequest, Integer treeId, String order, String ordertype);
     /**
      * 分页查找由我解决的请求
      *

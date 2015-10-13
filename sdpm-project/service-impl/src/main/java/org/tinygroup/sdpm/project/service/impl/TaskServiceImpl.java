@@ -19,6 +19,18 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskManager taskManager;
 
+    public Integer batchAdd(List<ProjectTask> taskList, Integer projectId) {
+        for (ProjectTask task : taskList) {
+            task.setTaskLastEditedDate(new Date());
+            task.setTaskOpenedDate(new Date());
+            task.setTaskStatus("1");
+            task.setTaskDeleted(task.DELETE_NO);
+            task.setTaskProject(projectId);
+        }
+        int[] res = taskManager.batchAdd(taskList);
+        return res.length;
+    }
+
     public ProjectTask addTask(ProjectTask task) {
         task.setTaskStatus("1");
         task.setTaskOpenedDate(new Date());

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
+import org.tinygroup.sdpm.action.system.ModuleUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -100,8 +101,25 @@ public class BugAction extends BaseController {
 	public String makesure(Integer bugId,Model model){
 		QualityBug bug = new QualityBug();
 	    bug = bugService.findById(bugId);
+		List<OrgUser> orgUsers = userService.findUserList(null);
 	    model.addAttribute("bug",bug);
+		model.addAttribute("userList",orgUsers);
 		return "/testManagement/page/tabledemo/makesure.page";
+	}
+	@RequestMapping("batch/sure")
+	public Map makesure(String[] bugId,Model model){
+		if(bugId.length>0){
+			for(String id : bugId){
+				QualityBug bug = bugService.findById(Integer.valueOf(id));
+				bug.setBugConfirmed(1);
+				bugService.updateBug(bug);
+			}
+		}
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("status", "success");
+		map.put("info", "成功");
+		return map;
 	}
 	@RequestMapping("/sure")
 	public String makesure(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
