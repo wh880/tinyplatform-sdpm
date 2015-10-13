@@ -8,13 +8,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
+import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.sdpm.service.service.inter.SlaService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +32,8 @@ public class SlaAction extends BaseController {
     private ClientService clientService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ProductLineService productLineService;
 
     /*查询*/
     @RequestMapping("/form")
@@ -66,8 +72,8 @@ public class SlaAction extends BaseController {
     }
 
     @RequestMapping(value = "/list/data")
-    public String listData(Integer limit, Integer start, ServiceSla sla, Model model) {
-        Pager<ServiceSla> pager = slaService.findSlaPager(start, limit, sla);
+    public String listData(Integer limit, Integer start, ServiceSla sla, Integer treeId, Model model) {
+        Pager<ServiceSla> pager = slaService.findSlaPager(start, limit, sla, treeId);
         model.addAttribute("pager", pager);
         return "service/sla/slaTableData.pagelet";
     }
@@ -109,6 +115,10 @@ public class SlaAction extends BaseController {
         }
         ServiceClient client = new ServiceClient();
         List<ServiceClient> list = clientService.getClientList(client);
+        /*调用product的服务，查询出产品表的对象*/
+        Product product = new Product();
+        List<Product> slas = productService.findProductList(product);
+        model.addAttribute("slas", slas);
         model.addAttribute("list", list);
         return "/service/sla/slaAdd.page";
     }
@@ -140,6 +150,10 @@ public class SlaAction extends BaseController {
         }
         ServiceClient client = new ServiceClient();
         List<ServiceClient> list = clientService.getClientList(client);
+        /*调用product的服务，查询出产品表的对象*/
+        Product product = new Product();
+        List<Product> slas = productService.findProductList(product);
+        model.addAttribute("slas", slas);
         model.addAttribute("list", list);
         return "/service/sla/slaAdd.page";
     }
@@ -151,5 +165,32 @@ public class SlaAction extends BaseController {
         map.put("status", "y");
         map.put("info", "删除成功");
         return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("/treeData")
+    public List data(String check) {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<ProductAndLine> productLists = productService.getProductAndLine(new Product());
+        List<ProductLine> productLines = productLineService.findlist(new ProductLine());
+
+        for (ProductLine d : productLines) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", "p" + d.getProductLineId());
+            map.put("pId", 0);
+            map.put("name", d.getProductLineName());
+            map.put("open", true);
+            map.put("clickAble", false);
+            list.add(map);
+        }
+        for (ProductAndLine d : productLists) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", d.getProductId());
+            map.put("pId", "p" + d.getProductLineId());
+            map.put("name", d.getProductName());
+            map.put("open", true);
+            list.add(map);
+        }
+        return list;
     }
 }
