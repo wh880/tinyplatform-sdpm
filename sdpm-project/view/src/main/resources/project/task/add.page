@@ -30,14 +30,12 @@
     #@elementItem()
         #@sdpmItem("所属模块")
             #@Tselect2F()
-                #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="IN">Indiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
+                #@Tselect2Body("moduleId" story.moduleId==null?"":story.moduleId {"class":
+                    "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    <option value=""></option>
+                    #foreach(m : moduleList)
+                        <option value=${m.moduleId}>${m.moduleName}</option>
+                    #end
                 #end
             ##填写任意内容，侦听需重新填加 A侦听已内置
                     #@Tselect2Fix()</a><a
@@ -52,14 +50,14 @@
                     "taskType" "" {"class":"input-text select2","placeholder":"任务类型","datatype":"*4-16","nullmsg":
                     "任务类型不能为空！"}) ##,"multiple":"multiple"加上为多选项
                     <option value=""></option>
-                    <option value="a">设计</option>
-                    <option value="b">开发</option>
-                    <option value="c">测试</option>
-                    <option value="d">研究</option>
-                    <option value="e">讨论</option>
-                    <option value="f">界面</option>
-                    <option value="g">事物</option>
-                    <option value="h">其他</option>
+                    <option value="1">设计</option>
+                    <option value="2">开发</option>
+                    <option value="3">测试</option>
+                    <option value="4">研究</option>
+                    <option value="5">讨论</option>
+                    <option value="6">界面</option>
+                    <option value="7">事物</option>
+                    <option value="8">其他</option>
                 #end
             ##填写任意内容，侦听需重新填加 A侦听已内置
 
@@ -70,118 +68,114 @@
         #@sdpmItem("指派给")
             #@Tselect2F()
                 #@Tselect2Body("taskAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    #for(t : team)
-                    <option value="${t.teamAccount}">${t.teamAccount}</option>
-
+                    #foreach(t : team)
+                        <option value="${t.teamAccount}">${t.teamAccount}</option>
+                    #end
+                #end
+            ##填写任意内容，侦听需重新填加 A侦听已内置
+                #@Tselect2Fix()
+                    <a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a>
+                    <a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>
                 #end
             #end
-        ##填写任意内容，侦听需重新填加 A侦听已内置
-            #@Tselect2Fix()
-                <a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a>
-                <a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("相关需求")
+            #@Tselect2F()
+                #@Tselect2Body("taskStory" story.storyId==null?"":story.storyId {"class":
+                    "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    <option value=""></option>
+                    #foreach(s : storyList)
+                        <option value=${s.storyId}>${s.storyTitle}</option>
+                    #end
+                #end
+            ##填写任意内容，侦听需重新填加 A侦听已内置
+                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
+                                  class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/project/demand/index.page">全部</a>#end
             #end
         #end
     #end
-#end
-#@elementItem()
-    #@sdpmItem("相关需求")
-        #@Tselect2F()
-            #@Tselect2Body("taskStory" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                <option value=""></option>
-                <option value="1">需求一</option>
-                <option value="2">需求二</option>
-                <option value="3">需求三</option>
+    #@elementItem()
+        #@sdpmItem("任务名称")
+            #@formControlDiv("col-8")
+                #tinyInput(
+                    "text" "taskName" "abcdefg"{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！","id":
+                    "username","class":
+                    "input-text"})
             #end
-        ##填写任意内容，侦听需重新填加 A侦听已内置
-            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
-                              class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/project/demand/index.page">全部</a>#end
         #end
     #end
-#end
-#@elementItem()
-    #@sdpmItem("任务名称")
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "taskName" "abcdefg"{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！","id":
-                "username","class":
-                "input-text"})
-        #end
-    #end
-#end
-#@elementItem()
-    #@sdpmItem("任务描述")
-        #@formControlDiv("col-8")
-            #tinyInput(
-                "text" "taskDesc" "任务描述"{"placeholder":"任务描述","datatype":"*4-16","id":
-                "username",
-                "class":"input-text"})
-        #end
-    #end
-#end
-#@elementItem()
-    #@sdpmItem("优先级")
-        #@Tselect2F()
-            #@Tselect2Body("taskPri" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+    #@elementItem()
+        #@sdpmItem("任务描述")
+            #@formControlDiv("col-8")
+                #tinyInput(
+                    "text" "taskDesc" "任务描述"{"placeholder":"任务描述","datatype":"*4-16","id":
+                    "username",
+                    "class":"input-text"})
             #end
-        ##填写任意内容，侦听需重新填加 A侦听已内置
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("优先级")
+            #@Tselect2F()
+                #@Tselect2Body("taskPri" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                #end
+            ##填写任意内容，侦听需重新填加 A侦听已内置
 
-        #end
-    #end
-#end
-#@elementItem()
-    #@sdpmItem("最初预计")
-        #@formControlDiv("col-8")
-            #tinyInput("text" "taskEstimate" "1.1"{"placeholder":"最初预计","datatype":"*4-16","id":
-                "username","class":"input-text"})
-        #end
-    #end
-#end
-#@elementItem()
-    #@sdpmItem("抄送给")
-        #@Tselect2F()
-            #@Tselect2Body("taskMailto" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                <option value="CT">Connecticut</option>
-                <option value="DE">Delaware</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="IN">Indiana</option>
-                <option value="ME">Maine</option>
-                <option value="MD">Maryland</option>
             #end
-        ##填写任意内容，侦听需重新填加 A侦听已内置
-            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a><a
-                    href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
         #end
     #end
-#end
-#@elementItem()
-    #@sdpmItem("附件")
-        #fileWithInput("file-1")
-    #end
-#end
-#@elementItem()
-    #@sdpmItem("添加之后")
-        #@formControlDiv("skin-minimal col-9")
-            #@tinyRadio("sex" "man" "man" {"nullmsg":"请选择性别！","datatype":"*"})继续为需求添加任务#end
-            #@tinyRadio("sex" "women" "man")返回任务列表#end
-            #@tinyRadio("sex" "secret" "man")返回需求列表#end
+    #@elementItem()
+        #@sdpmItem("最初预计")
+            #@formControlDiv("col-8")
+                #tinyInput("text" "taskEstimate" "1.1"{"placeholder":"最初预计","datatype":"*4-16","id":
+                    "username","class":"input-text"})
+            #end
         #end
     #end
-#end
+    #@elementItem()
+        #@sdpmItem("抄送给")
+            #@Tselect2F()
+                #@Tselect2Body("taskMailto" "" {"class":"input-text select2","multiple":"multiple"}) ##加上为多选项
+                    #foreach(t : team)
+                        <option value="${t.teamAccount}">${t.teamAccount}</option>
+                    #end
+                #end
+            ##填写任意内容，侦听需重新填加 A侦听已内置
+                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a><a
+                        href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
+            #end
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("附件")
+            #fileWithInput("file-1")
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("添加之后")
+            #@formControlDiv("skin-minimal col-9")
+                #@tinyRadio("sex" "man" "man" {"nullmsg":"请选择性别！","datatype":"*"})继续为需求添加任务#end
+                #@tinyRadio("sex" "women" "man")返回任务列表#end
+                #@tinyRadio("sex" "secret" "man")返回需求列表#end
+            #end
+        #end
+    #end
 
-#@elementItem()
-    <div class="col-12">
-        <div class="col-2 text-r"><label>备注：</label></div>
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-2 text-r"><label>备注：</label></div>
 
-        <div class="col-9">
-            #@Teditor("content" "content" {"initialFrameHeight":"150"})#end</div>
-    </div>
-#end
+            <div class="col-9">
+                #@Teditor("content" "content" {"initialFrameHeight":"150"})#end</div>
+        </div>
+    #end
     <br/>
 #end
 </div>
