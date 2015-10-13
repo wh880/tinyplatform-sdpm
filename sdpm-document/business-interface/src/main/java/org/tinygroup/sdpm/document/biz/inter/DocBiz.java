@@ -23,6 +23,6 @@ public interface DocBiz {
 	//查询后分页吧~//可以排序OrderBy id asc
 	public Pager<DocumentDoc> queryItemWithPage(Integer start,Integer limit,DocumentDoc doc,String sortName,boolean asc);
 	public Pager<DocumentDoclib> queryItemWithPage(Integer start, Integer limit,DocumentDoclib doclib,String sortName, boolean asc);
-	public int batchDelDocByIds(Integer...keys);
+	public int[] batchDelDocByIds(List<DocumentDoc> keys);
 
 }

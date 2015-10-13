@@ -16,10 +16,14 @@
 
 package org.tinygroup.sdpm.document.dao;
 
+import java.util.List;
+
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 
 public interface DocumentDocDao extends BaseDao<DocumentDoc,Integer> {
+	
+	int[] batchUpdateDel(List<DocumentDoc> documentDocs);
 
 }
