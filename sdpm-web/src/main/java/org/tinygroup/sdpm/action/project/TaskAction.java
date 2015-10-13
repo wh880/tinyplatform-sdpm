@@ -10,6 +10,7 @@ import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
@@ -42,6 +43,8 @@ public class TaskAction extends BaseController {
     private ModuleService moduleService;
     @Autowired
     private ProjectStoryService storyService;
+    @Autowired
+    private StoryService productStoryService;
 
     @RequestMapping("index")
     public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model) {
@@ -247,7 +250,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/preadd")
-    public String preadd(HttpServletRequest request, Model model) {
+    public String preadd(HttpServletRequest request, Model model, Integer storyId) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
 
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
@@ -255,8 +258,13 @@ public class TaskAction extends BaseController {
         module.setModuleType("project");
         module.setModuleRoot(projectId);
         List<SystemModule> moduleList = moduleService.findModuleList(module);
-
         List<ProductStory> storyList = storyService.findStoryByProject(projectId);
+        ProductStory story = new ProductStory();
+        if (storyId != null) {
+            story = productStoryService.findStory(storyId);
+            model.addAttribute("story", story);
+        }
+
 
         model.addAttribute("moduleList", moduleList);
         model.addAttribute("storyList", storyList);

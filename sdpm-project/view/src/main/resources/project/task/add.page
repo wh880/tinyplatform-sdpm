@@ -30,7 +30,8 @@
     #@elementItem()
         #@sdpmItem("所属模块")
             #@Tselect2F()
-                #@Tselect2Body("moduleId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #@Tselect2Body("moduleId" story.moduleId==null?"":story.moduleId {"class":
+                    "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     <option value=""></option>
                     #foreach(m : moduleList)
                         <option value=${m.moduleId}>${m.moduleName}</option>
@@ -82,7 +83,8 @@
     #@elementItem()
         #@sdpmItem("相关需求")
             #@Tselect2F()
-                #@Tselect2Body("taskStory" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #@Tselect2Body("taskStory" story.storyId==null?"":story.storyId {"class":
+                    "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     <option value=""></option>
                     #foreach(s : storyList)
                         <option value=${s.storyId}>${s.storyTitle}</option>
