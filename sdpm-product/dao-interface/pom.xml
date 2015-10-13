@@ -25,8 +25,13 @@
        <artifactId>sdpm-productLine-dao-interface</artifactId>
         <version>${tiny_sdpm_version}</version>
     </dependency>
+    <dependency>
+       <groupId>org.tinygroup</groupId>
+       <artifactId>sdpm-org-dao-inter</artifactId>
+        <version>${tiny_sdpm_version}</version>
+    </dependency>
     
-   
+    
         <!--引入SpringMVC-->
     <!--     <dependency>
             <groupId>org.tinygroup</groupId>

@@ -10,6 +10,7 @@ import java.util.TreeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
@@ -116,6 +117,9 @@ public class StoryManagerImpl implements StoryManager {
 		return productStoryDao.planStoryCount(story, null);
 	}
 
+	/*A_productCount,B_moduleCount,C_planCount,
+	 * storySource,storyStatus,storyStage,storyPri,storyEstimate,
+	 * storyOpenedBy,storyAssignedTo,storyClosedReason,storyVersion*/
 	public Map<String, List<StoryCount>> report(String fields,ProductStory story) {
 		if(fields.equals("")||fields==null){
 			return  null;
@@ -129,16 +133,24 @@ public class StoryManagerImpl implements StoryManager {
 				});
 		if(fields.contains("productCount")){
 			map.put("A_productCount", productStoryDao.productStoryCount(story));
-		}else if (fields.contains("B_moduleCount")) {
+		}
+		if (fields.contains("B_moduleCount")) {
 			map.put("B_moduleCount", productStoryDao.modelStoryCount(story));
-		}else if (fields.contains("C_planCount")) {
+		}
+		if (fields.contains("C_planCount")) {
 			map.put("C_planCount", productStoryDao.planStoryCount(story, null));
 		}
 		char nm = 'D';
 		for (String field : fields.split(",")) {
 			
 			if(!("A_productCount".equals(field.trim())||"B_moduleCount".equals(field.trim())||"C_planCount".equals(field.trim()))){
-				map.put(nm+"_"+field, productStoryDao.fieldStoryCount(story, field));
+				
+				if("storyOpenedBy".equals(field.trim())||"storyAssignedTo".equals(field.trim())){
+					map.put(nm+"_"+field, productStoryDao.userStoryCount(story, field));
+				}else{
+					map.put(nm+"_"+field, productStoryDao.fieldStoryCount(story, field));
+				}
+				
 				nm+=1;
 			}
 			

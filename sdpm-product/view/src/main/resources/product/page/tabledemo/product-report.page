@@ -14,6 +14,14 @@
 <script>
 	$(document).ready(function(){
 		
+		$("#roadSubmit").unbind("click").bind("click",function(){
+			if($("input:checked").length>0){
+				$("form[name='thisform']").trigger("submit");
+			}else{
+				alert('请选择');
+			}
+		});
+		
 		$(".but1").unbind("click").bind("click",function(){
 			 $(".navbody input[type='checkbox']").each(function(){
 			 	this.checked=true
@@ -67,25 +75,41 @@
         #@toggleLeft({"class":"aclass","style":"width:250px;height:450px;overflow:auto"})
             #@settoggleLeftTitle()请选择报表类型#end
             #@settoggleLeftBody()
+            	#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/story/report" "post" {"class":"test"})
                     #@skinMinimal()
-                        #labelCheckbox(ckId="checkbox-1" ckName="chexkitem" labelText="产品需求数量")
-                        #labelCheckbox(ckId="checkbox-3" ckName="chexkitem" labelText="模块需求数量")
-                        #labelCheckbox(ckId="checkbox-4" ckName="chexkitem" labelText="需求来源统计")
-                        #labelCheckbox(ckId="checkbox-5" ckName="chexkitem" labelText="计划进行统计")
-                        #labelCheckbox(ckId="checkbox-6" ckName="chexkitem" labelText="状态进行统计")
-                        #labelCheckbox(ckId="checkbox-7" ckName="chexkitem" labelText="所处阶段进行统计")
-                        #labelCheckbox(ckId="checkbox-8" ckName="chexkitem" labelText="优先级进行统计")
-                        #labelCheckbox(ckId="checkbox-9" ckName="chexkitem" labelText="预计工时进行统计")
-                        #labelCheckbox(ckId="checkbox-10" ckName="chexkitem" labelText="由谁创建来进行统计")
-                        #labelCheckbox(ckId="checkbox-11" ckName="chexkitem" labelText="由谁指派来进行统计")
-                        #labelCheckbox(ckId="checkbox-12" ckName="chexkitem" labelText="当前指派来进行统计")
-                        #labelCheckbox(ckId="checkbox-13" ckName="chexkitem" labelText="关闭原因来进行统计")
-                        #labelCheckbox(ckId="checkbox-14" ckName="chexkitem" labelText="变更次数来进行统计")
+#*                    	#@Tcheckboxes("productWhiteList" product?.productWhiteList)
+							#@Tcheckbox("admin")产品需求数量#end<br/>
+							#@Tcheckbox("admin")模块需求数量#end<br/>
+							#@Tcheckbox("admin")需求来源统计#end<br/>
+							#@Tcheckbox("admin")计划进行统计#end<br/>
+							#@Tcheckbox("admin")状态进行统计#end<br/>
+							#@Tcheckbox("admin")所处阶段进行统计#end<br/>
+							#@Tcheckbox("admin")优先级进行统计#end<br/>
+							#@Tcheckbox("admin")预计工时进行统计#end<br/>
+							#@Tcheckbox("admin")由谁创建来进行统计#end<br/>
+							#@Tcheckbox("admin")由谁指派来进行统计#end<br/>
+							#@Tcheckbox("admin")当前指派来进行统计#end<br/>
+							#@Tcheckbox("admin")关闭原因来进行统计#end<br/>
+							#@Tcheckbox("admin")变更次数来进行统计#end<br/>
+							
+						#end*#
+                        #labelCheckbox(ckId="checkbox-1" ckName="chexkitem" ckValue="A_productCount" labelText="产品需求数量")
+                        #labelCheckbox(ckId="checkbox-3" ckName="chexkitem" ckValue="B_moduleCount" labelText="模块需求数量")
+                        #labelCheckbox(ckId="checkbox-4" ckName="chexkitem" ckValue="C_planCount" labelText="需求来源统计")
+                        #labelCheckbox(ckId="checkbox-5" ckName="chexkitem" ckValue="storySource" labelText="计划进行统计")
+                        #labelCheckbox(ckId="checkbox-6" ckName="chexkitem" ckValue="storyStatus" labelText="状态进行统计")
+                        #labelCheckbox(ckId="checkbox-7" ckName="chexkitem" ckValue="storyStage" labelText="所处阶段进行统计")
+                        #labelCheckbox(ckId="checkbox-8" ckName="chexkitem" ckValue="storyPri" labelText="优先级进行统计")
+                        #labelCheckbox(ckId="checkbox-9" ckName="chexkitem" ckValue="storyEstimate" labelText="预计工时进行统计")
+                        #labelCheckbox(ckId="checkbox-10" ckName="chexkitem" ckValue="storyOpenedBy" labelText="由谁创建来进行统计")
+                        #labelCheckbox(ckId="checkbox-12" ckName="chexkitem" ckValue="storyAssignedTo" labelText="当前指派来进行统计")
+                        #labelCheckbox(ckId="checkbox-13" ckName="chexkitem" ckValue="storyClosedReason" labelText="关闭原因来进行统计")
+                        #labelCheckbox(ckId="checkbox-14" ckName="chexkitem" ckValue="storyVersion" labelText="变更次数来进行统计")
                     #end
                		 #buttonRadiusDefault(btId="but1" btClass="but1" caption="全选")
 			        #buttonRadiusDefault(btId="but2" btClass="but2" caption="反选")
-			        #buttonRadiusDanger(caption="生成报表")    
-
+			        #buttonRadiusDanger(btId="roadSubmit" caption="生成报表") 
+				 #end
             #end
            
         #end 
@@ -96,208 +120,68 @@
            
             
             <table class="table table-border table-bordered" cellspacing="0">
-            	
-#*            	产品需求数量分布*#
-            	#@centerAlignTr()       
-            		 #@th("text-r" "vertical-align:middle;width:20%")
-            			#@pieChart(pieChartStyle="width:600px;margin:0 auto;")
-            			
-            				 <table id='productStory'>
-								<caption>产品需求数量分布</caption>
-								<thead>
-									<tr>
-										<th></th>
-										#for(productStory:productStoryCount)
-											<th>${productStory.name}</th>
-										#end
-									</tr>
-								</thead>
-								
-								<tbody>
-									<tr>
-										<th></th>
-										#for(productStory:productStoryCount)
-											<td>${productStory.number}</td>
-										#end
-									</tr>
-								</tbody>
-							</table>
-            				
-
-						   
-							
-							
-			
-						#end
-			
-						#pieChartInit("#productStory" "PieChart" "No of players" "Month",600,350)
-            			
-            		#end
             		
             		
-            		<td  style="vertical-align:middle;">
-            			#*            				产品需求数量分布*#
-            			 <table class="table table-border table-bordered" cellspacing="0">
-            			 	 #@theadCenterMenu()   #@th()产品#end        #@th()需求数#end  #@th()百分比#end #end
-            			 	 
-            			 	 #for(productStory:productStoryCount)
-								#@centerAlignTr()        
-	            			 	 	
-	            			 	 	#@td()${productStory?.name}#end  
-	            			 	 	#@td()${productStory?.number}#end      
-	            			 	 	#@td()${productStory?.percentToString}#end     
-	            			 	 #end
-							#end
-            			 	
-            			 	
-            			 
-            			 </table>
-            			
-
-            			
-            		</td>
-            	
-            	#end
-            	
-	#*            				模块需求数量分布*#
-            	#@centerAlignTr()       
-            		 #@th("text-r" "vertical-align:middle;width:20%")
-            			#@pieChart(pieChartStyle="width:600px;margin:0 auto;")
-            			
-            				 
-            				
-
-						   <table id='modelStory'>
-								<caption>模块需求数量分布</caption>
-								<thead>
-									<tr>
+            	#foreach(roadMap:map)
+    					
+    					#@centerAlignTr()       
+	            		 #@th("text-r" "vertical-align:middle;width:20%")
+	            			#@pieChart(pieChartStyle="width:600px;margin:0 auto;")
+	            				 <table id='${roadMap?.key}'>
+									<caption>${roadMap?.key}需求数量分布</caption>
+									<thead>
+										<tr>
+											<th></th>
+											#for(road:roadMap?.value)
+												<th>${road?.name}</th>
+											#end
+										</tr>
+									</thead>
 									
-										<th></th>
-										#for(modelStory:modelStoryCount)
-											<th>${modelStory.name}</th>
-										#end
-										
-										
-										
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th></th>
-										#for(modelStory:modelStoryCount)
-											<td>${modelStory.number}</td>
-										#end
-									</tr>
-								</tbody>
-							</table>  
-							
-							
-			
-						#end
-			
-						#pieChartInit("#modelStory" "PieChart" "No of players" "Month",600,350)
-            			
-            		#end
-            		
-            		
-            		<td  style="vertical-align:middle;">
-
-            			
-            			
-#*            			模块需求数量分布*#
-            			 <table class="table table-border table-bordered" cellspacing="0">
-            			 	 #@theadCenterMenu()   #@th()模块#end        #@th()需求数#end  #@th()百分比#end #end
-            			 	 
-            			 	 #for(modelStory:modelStoryCount)
-								#@centerAlignTr()        
-	            			 	 	
-	            			 	 	#@td()${modelStory?.name}#end  
-	            			 	 	#@td()${modelStory?.number}#end      
-	            			 	 	#@td()${modelStory?.percentToString}#end     
-	            			 	 #end
+									<tbody>
+										<tr>
+											<th></th>
+											#for(road:roadMap?.value)
+												<td>${road?.number}</td>
+											#end
+										</tr>
+									</tbody>
+								</table>
+				
 							#end
-            			 	
-            			 	
-            			 
-            			 </table>
-            			
-            		</td>
-            	
-            	#end
-            	
-            	
-            	#*            				计划需求数量分布*#
-            	#@centerAlignTr()       
-            		 #@th("text-r" "vertical-align:middle;width:20%")
-            			#@pieChart(pieChartStyle="width:600px;margin:0 auto;")
-            			
-            				 
-            				
-
-						   <table id='planStory'>
-								<caption>计划需求数量分布</caption>
-								<thead>
-									<tr>
-									
-										<th></th>
-										#for(planStory:planStoryCount)
-											<th>${planStory.name}</th>
-										#end
-										
-										
-										
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th></th>
-										#for(planStory:planStoryCount)
-											<td>${planStory.number}</td>
-										#end
-									</tr>
-								</tbody>
-							</table>  
-							
-							
-			
-						#end
-			
-						#pieChartInit("#planStory" "PieChart" "No of players" "Month",600,350)
-            			
-            		#end
+							#pieChartInit("#"+roadMap?.key "PieChart" "No of players" "Month",600,350)
+	            			
+	            		#end
+	            		
+	            		
+	            		<td  style="vertical-align:middle;">
+	            			#*            				产品需求数量分布*#
+	            			 <table class="table table-border table-bordered" cellspacing="0">
+	            			 	 #@theadCenterMenu()   #@th()分类#end        #@th()需求数#end  #@th()百分比#end #end
+	            			 	 
+	            			 	 #for(road:roadMap?.value)
+									#@centerAlignTr()        
+		            			 	 	
+		            			 	 	#@td()${road?.name}#end  
+		            			 	 	#@td()${road?.number}#end      
+		            			 	 	#@td()${road?.percentToString}#end     
+		            			 	 #end
+								#end
+	            			 	
+	            			 	
+	            			 
+	            			 </table>
+	            			
+	
+	            			
+	            		</td>
+	            	
+	            	#end
+					            				
+    			#end
             		
-            		
-            		<td  style="vertical-align:middle;">
-
-            			
-            			
-#*            			模块需求数量分布*#
-            			 <table class="table table-border table-bordered" cellspacing="0">
-            			 	 #@theadCenterMenu()   #@th()计划#end        #@th()需求数#end  #@th()百分比#end #end
-            			 	 
-            			 	 #for(planStory:planStoryCount)
-								#@centerAlignTr()        
-	            			 	 	
-	            			 	 	#@td()${planStory?.name}#end  
-	            			 	 	#@td()${planStory?.number}#end      
-	            			 	 	#@td()${planStory?.percentToString}#end     
-	            			 	 #end
-							#end
-            			 	
-            			 	
-            			 
-            			 </table>
-            			
-            		</td>
-            	
-            	#end
-            	
-            
-            
             </table>
             
-            
-           
 
         #end
     #end

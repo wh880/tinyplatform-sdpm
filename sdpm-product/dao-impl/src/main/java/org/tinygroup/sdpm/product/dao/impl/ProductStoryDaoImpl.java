@@ -20,6 +20,7 @@ import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_
 import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MODULETABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.*;
@@ -554,8 +555,8 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		return storyCounts;
 	}
 	
-public List<StoryCount> productStoryCount(ProductStory t) {
-		
+	public List<StoryCount> productStoryCount(ProductStory t) {
+			
 		if(t==null){
 			t=new ProductStory();
 		}
@@ -590,9 +591,25 @@ public List<StoryCount> productStoryCount(ProductStory t) {
 		List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
 		return storyCounts;
 		
-		
-		
 	}
+	
+	public List<StoryCount> userStoryCount(ProductStory t,String field) {
+		
+		if(t==null){
+			t=new ProductStory();
+		}
+	
+		Column column = new Column(PRODUCT_STORYTABLE, NameUtil.resolveNameDesc(field));
+		int nm = getCount(t,column.isNotNull());
+		
+		Select select = select(ORG_USERTABLE.ORG_USER_REAL_NAME.as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
+				FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
+				.from(PRODUCT_STORYTABLE).join(leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(column))).where(and(storyPueryCondition(t, column.isNotNull()))).groupBy(column);
+		
+		List<StoryCount> storyCounts =  getDslSession().fetchList(select, StoryCount.class);
+		return storyCounts;
+	}
+	
 	
 	public List<StoryCount> fieldStoryCount(ProductStory t,String field) {
 		
