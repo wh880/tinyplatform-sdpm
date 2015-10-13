@@ -13,7 +13,9 @@ import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -82,7 +84,7 @@ public class BuildAction extends BaseController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/delete")
     public Map<String, String> delete(Integer id, Model model) {
         Integer res = buildService.softDeleteBuild(id);
         Map<String, String> map = new HashMap<String, String>();
@@ -109,5 +111,28 @@ public class BuildAction extends BaseController {
     public String jumpanoBug() {
         return "/project/task/relation-release/product-al-no-bug.page";
     }
+    @ResponseBody
+    @RequestMapping(value="/batchDelete")
+    public Map bctchDelDoc(String ids)
+    {
+        Map<String,String> map = new HashMap<String,String>();
+        if(ids == null || ids == ""){
+            map.put("status", "fail");
+            map.put("info", "请至少选择一条数据");
+            return map;
+        }
+        List<ProjectBuild> list = new ArrayList<ProjectBuild>();
+        for(String s : ids.split(",")){
+            ProjectBuild build= new ProjectBuild();
+            build.setBuildId(Integer.valueOf(s));
+            build.setBuildDeleted("1");
+            list.add(build);
+        }
+        buildService.deleteBuildByIds(list);
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
+    }
+
 
 }
