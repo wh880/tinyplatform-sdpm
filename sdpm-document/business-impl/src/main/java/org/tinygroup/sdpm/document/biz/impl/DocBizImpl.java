@@ -114,9 +114,9 @@ public class DocBizImpl implements DocBiz {
 		}	
 	}
 
-	public int batchDelDocByIds(Integer... keys) {
+	public int[] batchDelDocByIds(List<DocumentDoc> keys) {
 		// 
-		return docdao.deleteByKeys(keys);
+		return docdao.batchUpdateDel(keys);
 	}
 
 	public Pager<DocumentDoclib> queryItemWithPage(Integer start, Integer limit,DocumentDoclib doclib,String sortName, boolean asc) {

@@ -38,16 +38,9 @@
 							<script type="text/javascript">
 								$("#${sid}").on("change",function(){
 									var pId = $("#${sid}  option:selected").val();
-									#if(bug?.moduleId)
-										ajaxRead("${sid}","moduleId","moduleId","moduleTitle","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId});
-									#else
-										ajaxRead("${sid}","moduleId","moduleId","moduleTitle","/quality/bug/ajax/module?moduleRoot="+pId);
-									#end
-									#if(bug?.storyId)
-										ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId,${bug?.storyId});
-									#else
-										ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId);
-									#end
+									ajaxRead("${sid}","moduleId","moduleId","moduleTitle","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId?:0});
+
+
 
 								})
 							</script>
@@ -59,10 +52,16 @@
 					#@div(divClass="col-0")&nbsp;&nbsp#end
 					#@div(divClass="col-3")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("moduleId" bug?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
+	                   		 #@Tselect2Body("moduleId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+									<option value="0">/</option>
 	                    	#end
-
+							<script type="text/javascript">
+								$("#${sid}").on("change",function(){
+									var mId = $("#${sid}  option:selected").val();
+									var pId = $("select[name=productId]  option:selected").val();
+									ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId+"&moduleId="+mId,${bug?.storyId?:0});
+								})
+							</script>
                 	  #end
 #*					#@tinySelect("lang" "zh" {"class":"select2"})
 							#@tinyOptionItem("zh")/首页#end
@@ -87,11 +86,8 @@
 			<script type="text/javascript">
 				$("#${sid}").on("change",function(){
 					var pId = $("#${sid}  option:selected").val();
-									#if(bug?.taskId)
-					ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId});
-									#else
-					ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId);
-									#end
+
+					ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0});
 
 
 				})
@@ -130,10 +126,11 @@
 						#@formControlDiv("col-8")
 							#@div(divClass="col-5")
 							 #@Tselect2F()
-	                   		 #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">admin</option>
-	                        <option value="2">admin2</option>
-	                        <option value="3">admin3</option>
+	                   		 #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+								<option value="0">/</option>
+								#foreach(user : userList)
+								<option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+								#end
 	                    	#end                
 	                       ###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 	 		#end
@@ -163,7 +160,7 @@
 			#@elementItem()
 				#@colLabel()重现步骤：#end
 				#@formControlDiv("col-8")
-					#@Teditor("content" "bugSteps" {"initialFrameHeight":"150"})#end
+					#@Teditor("bugSteps" "bugSteps" {"initialFrameHeight":"150"})${bug?.bugSteps}#end
 				#end
 				#@validateDiv("col-2")#end
 			#end
@@ -172,7 +169,7 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 							 #@Tselect2F()
-	                   		 #@Tselect2Body("storyId" bug?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("storyId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
 	                    	#end                
 	                      	#@Tselect2Fix()
@@ -279,17 +276,17 @@
 					#end
 					#end
 				#end
-			#end										
+			#end
 			#@elementItem()
 				#@colLabel()抄送给：#end
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">部长</option>
-	                        <option value="ME">admin</option>
-	                        <option value="MD">admin2</option>
-	                    	#end                
+								#foreach(user : userList)
+								<option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+								#end
+	                    	#end
                 	  #end
                 	 #end
 				#end
@@ -350,22 +347,21 @@
 				data: $(this).attr('data'),
 				dataType:"json",
 				success: function(data){
+					sele.empty();
+					var em = "<option value='0' selected  >/</option>";
+					sele.append(em);
 					for(var i=0,l=data.length;i<l;i++){
-						if(data[i][opKey] == value){
-							s = "selected";
-						}else{
-							s="";
-						}
-						var em = "<option value='"+data[i][opKey]+"'"+s+" >"+ data[i][opvalue] +"</option>";
+						var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
 						sele.append(em);
 
 					}
-					if(data[0] != null) {
+
+					if(value!=null) {
+						sele.val(value).trigger("change");
+					}else {
 						sele.val(data[0][opKey]).trigger("change");
-					}else{
-						sele.empty();
-						$("#s2id_"+sele.attr("id")).find("span[class=select2-chosen]").empty();
 					}
+
 
 				},
 				error: function(res){

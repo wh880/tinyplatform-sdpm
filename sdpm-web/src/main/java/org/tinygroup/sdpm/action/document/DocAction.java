@@ -1,11 +1,11 @@
 package org.tinygroup.sdpm.action.document;
 
-import java.io.Serializable;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.print.Doc;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,10 +82,15 @@ public class DocAction {
 	public String editDoc(HttpServletRequest request,Model model,Integer docId)
 	{	
 		DocumentDoc doc = new DocumentDoc();
-		List<Product> product = productService.findProductList(new Product());
+	//	List<Product> product = productService.findProductList(new Product());
 		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
 		doc = docservice.findDocById(docId);
 		model.addAttribute("doc", doc);
+		if(doc.getDocLibId() == 1){
+			return "/document/doc-edit-product.page";
+		}else if(doc.getDocLibId() == 0){
+			return "/document/doc-edit-project.page";	
+		}
 		return "/document/doc-edit.page";
 	}
 	
@@ -143,10 +148,22 @@ public class DocAction {
 	
 	@ResponseBody
 	@RequestMapping(value="/doc/batchDelete")
-	public Map bctchDelDoc(Integer[] docId)
+	public Map bctchDelDoc(String ids)
 	{		
-		docservice.deleteDocByIds(docId);
 		Map<String,String> map = new HashMap<String,String>();
+		if(ids == null){
+			map.put("status", "fail");
+		    map.put("info", "删除失败");
+			return map;
+		}
+		 List<DocumentDoc> list = new ArrayList<DocumentDoc>();
+		for(String s : ids.split(",")){			
+			DocumentDoc doc= new DocumentDoc();
+			doc.setDocId(Integer.valueOf(s));
+			doc.setDocDeleted("1");
+			list.add(doc);
+		}	
+		docservice.deleteDocByIds(list);
 		map.put("status", "success");
 	    map.put("info", "删除成功");
 	    return map;

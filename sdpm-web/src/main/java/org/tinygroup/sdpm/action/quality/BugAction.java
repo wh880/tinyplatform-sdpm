@@ -10,6 +10,7 @@ import org.tinygroup.sdpm.action.quality.util.QualityUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -48,6 +49,9 @@ public class BugAction extends BaseController {
 	private ProjectService projectService;
 	@Autowired
 	private TaskService taskService;
+	@Autowired
+	private UserService userService;
+
 	@RequestMapping("")
 	public String form(String get,QualityBug bug, HttpServletRequest request){
 		String queryString = request.getQueryString();
@@ -237,7 +241,9 @@ public class BugAction extends BaseController {
 	@RequestMapping("/add")
 	public String add(Model model){
 		List<Project> projects = projectService.findProjectList(null,null,null);
+		List<OrgUser> orgUsers = userService.findUserList(null);
 		model.addAttribute("projectList",projects);
+		model.addAttribute("userList",orgUsers);
 		return "/testManagement/page/proposeBug.page";
 	}
 	
@@ -258,6 +264,9 @@ public class BugAction extends BaseController {
 	@ResponseBody
 	@RequestMapping("/ajax/story")
 	public List<ProductStory> getStory(ProductStory productStory){
+		if(productStory.getModuleId()==0){
+			productStory.setModuleId(null);
+		}
 		return storyService.findStoryList(productStory,null,null);
 	}
 

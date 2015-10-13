@@ -10,6 +10,7 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
@@ -75,6 +76,8 @@ public class ProjectAction extends BaseController {
     public String form(Integer projectId, Model model) {
         if (projectId != null) {
             Project project = projectService.findById(projectId);
+            List<ProjectTeam> teamList = teamService.findTeamByProjectId(project.getProjectId());
+            model.addAttribute("teamList", teamList);
             model.addAttribute("project", project);
             //还需要查询其他相关任务剩余时间的信息
             return "project/survey/edit.page";
@@ -126,7 +129,6 @@ public class ProjectAction extends BaseController {
 
     @RequestMapping("/basicInformation")
     public String basicInformation(Integer projectID, Model model){
-
         Project project = projectService.findById(projectID);
         model.addAttribute("project", project);
         return "project/survey/basicInformation.pagelet";

@@ -21,7 +21,7 @@
   <standard-field id="e556843a31c04e6e8dd1b0529d819be2" name="bug_opened_by" title="由谁创建" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="d9ea02040dbc4194a4baa5b57fa950f2" name="bug_opened_date" title="创建日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="7bb5fd99170c4df89df6cd61850954af" name="bug_opened_build" title="影响版本" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
-  <standard-field id="eb02f2d321ee4ead83adc8c5ee218ec9" name="bug_assigned_to" title="指派给" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="eb02f2d321ee4ead83adc8c5ee218ec9" name="bug_assigned_to" title="指派给" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="b54fce73322640ec8af2d309d5e3a401" name="bug_assigned_date" title="指派日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default=""/>
   <standard-field id="f80fb8982e2f494c92589bcfa279c9b3" name="bug_resolved_by" title="解决者" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="cf3ddd2cb6e04826a78ba49ed696a3cf" name="bug_resolution" title="解决方案" business-type-id="095e594e1550424b9643c7e2279e85be"/>

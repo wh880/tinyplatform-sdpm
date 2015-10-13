@@ -159,7 +159,10 @@ public class DocumentDoc implements Serializable {
 	 * 已删除
 	 */
 	private String docDeleted;
-
+	
+	public DocumentDoc(){
+		docDeleted = "0";
+	}
 
 	public void setDocId(Integer docId){
 		this. docId = docId;

@@ -32,19 +32,19 @@
                 #end
                 #@tr()
                     #@td()项目负责人#end
-                    #@td()${selProject?.projectPM}#end
+                    #@td()${selProject?.projectPm}#end
                 #end
                 #@tr()
                     #@td()产品负责人#end
-                    #@td()${selProject?.projectPO}#end
+                    #@td()${selProject?.projectPo}#end
                 #end
                 #@tr()
                     #@td()测试负责人#end
-                    #@td()${selProject?.projectQD}#end
+                    #@td()${selProject?.projectQd}#end
                 #end
                 #@tr()
                     #@td()发布负责人#end
-                    #@td()${selProject?.projectRD}#end
+                    #@td()${selProject?.projectRd}#end
                 #end
                 #@tr()
                     #@td()相关产品#end
