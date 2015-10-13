@@ -19,7 +19,7 @@
     #@td()12#end
     #@td()admin#end
     #@td()
-        #iconOperation(" icon-remove" "删除" "ml-5" "" "" TINY_CONTEXT_PATH+"/project/version/delete")
+        #iconOperation("" "icon-remove"  "删除"  "ml-5" ""  TINY_CONTEXT_PATH+"/project/version/delete")
     #end
 
 #end

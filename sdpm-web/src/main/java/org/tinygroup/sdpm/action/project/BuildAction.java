@@ -8,8 +8,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
+import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.project.service.inter.TeamService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +34,15 @@ import java.util.Map;
 public class BuildAction extends BaseController {
     @Autowired
     private BuildService buildService;
+    @Autowired
+    private ProjectService projectService;
+    @Autowired
+    private TeamService teamService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private ProjectProductService projectProductService;
+
 
     @RequestMapping("/find")
     public String find(Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
@@ -52,7 +69,7 @@ public class BuildAction extends BaseController {
     }
 
     @RequestMapping("/edit")
-    public String form(Integer buildId, Model model) {
+    public String edit(Integer buildId, Model model) {
         if (buildId != null) {
             ProjectBuild build = buildService.findBuild(buildId);
             model.addAttribute("build", build);
@@ -133,6 +150,25 @@ public class BuildAction extends BaseController {
         map.put("info", "删除成功");
         return map;
     }
+
+    @RequestMapping("/add")
+    public String add(HttpServletRequest request,Integer buildId, Model model) {
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        SystemModule module = new SystemModule();
+        module.setModuleType("project");
+        module.setModuleRoot(projectId);
+        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
+        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
+        model.addAttribute("teamList", teamList);
+        model.addAttribute("prodcutList", list);
+        if (buildId != null) {
+            ProjectBuild build =buildService.findBuild(buildId);
+            model.addAttribute("build",build);
+
+        }
+        return "project/version/add.page";
+    }
+
 
 
 }
