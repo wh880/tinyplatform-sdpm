@@ -44,4 +44,9 @@ public class BugServiceImpl implements BugService {
 		
 		return bugmanager.delete(bugId);
 	}
+
+	public int[] batchDeleteBug(List<QualityBug> bugIds) {
+		
+		return bugmanager.batchDelete(bugIds);
+	}
 }

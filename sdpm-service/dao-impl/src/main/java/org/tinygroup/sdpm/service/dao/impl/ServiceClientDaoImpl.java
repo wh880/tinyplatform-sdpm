@@ -26,6 +26,7 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.service.dao.constant.ServiceClientTable.SERVICE_CLIENTTABLE;
+import static org.tinygroup.sdpm.service.dao.constant.ServiceSlaTable.SERVICE_SLATABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
@@ -294,4 +296,32 @@ public class ServiceClientDaoImpl extends TinyDslDaoSupport implements ServiceCl
             return null;
         }
     }
+
+    public Pager<ServiceClient> findByProduct(int start, int limit, final Integer treeId, final OrderBy... orderArgs) {
+
+        ServiceClient serviceClient = new ServiceClient();
+
+        return getDslTemplate().queryPager(start, limit, serviceClient, false, new SelectGenerateCallback<ServiceClient>() {
+
+            public Select generate(ServiceClient t) {
+                Select select = MysqlSelect.selectFrom(SERVICE_CLIENTTABLE).join(
+                        Join.leftJoin(SERVICE_SLATABLE, SERVICE_CLIENTTABLE.CLIENT_ID.eq(SERVICE_SLATABLE.CLIENT_ID))).where(
+                        and(
+                                SERVICE_SLATABLE.PRODUCT_ID.eq(treeId),
+                                SERVICE_CLIENTTABLE.CLIENT_NAME.eq(t.getClientName()),
+                                SERVICE_CLIENTTABLE.CLIENT_SPEC.eq(t.getClientSpec()),
+                                SERVICE_CLIENTTABLE.CLIENT_N_O.eq(t.getClientNO()),
+                                SERVICE_CLIENTTABLE.CLIENT_DEPT_ID.eq(t.getClientDeptId()),
+                                SERVICE_CLIENTTABLE.CLIENT_CREATED_BY.eq(t.getClientCreatedBy()),
+                                SERVICE_CLIENTTABLE.CLIENT_CREATE_DATE.eq(t.getClientCreateDate()),
+                                SERVICE_CLIENTTABLE.CLIENT_STATUS.eq(t.getClientStatus()),
+                                SERVICE_CLIENTTABLE.USER_PHONE.eq(t.getUserPhone()),
+                                SERVICE_CLIENTTABLE.USER_ACCOUNT.eq(t.getUserAccount()),
+                                SERVICE_CLIENTTABLE.USER_POST.eq(t.getUserPost()),
+                                SERVICE_CLIENTTABLE.DELETED.eq(t.getDeleted())));
+                return addOrderByElements(select, orderArgs);
+            }
+        });
+    }
+
 }

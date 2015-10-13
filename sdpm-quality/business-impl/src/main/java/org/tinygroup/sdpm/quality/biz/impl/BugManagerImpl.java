@@ -57,4 +57,9 @@ public class BugManagerImpl implements BugManager {
 		return bugdao.softDelete(id);
 	}
 
+	public int[] batchDelete(List<QualityBug> bugIds) {
+		
+		return bugdao.batchUpdateDel(bugIds);
+	}
+
 }

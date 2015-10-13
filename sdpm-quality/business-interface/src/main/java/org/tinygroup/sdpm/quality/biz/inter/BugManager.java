@@ -47,9 +47,18 @@ public interface BugManager {
 	int[] batchUpdate(List<QualityBug> bugs);
 	
 	/**
+	 * 批量删除
+	 * @param bugIds
+	 * @return
+	 */
+	int[] batchDelete(List<QualityBug> bugIds);
+	
+	/**
 	 * 删除
 	 * @param bug
 	 * @return
 	 */
 	Integer delete(Integer id);
+	
+	
 }

@@ -48,9 +48,15 @@ public class ClientAction extends BaseController {
     }
 
     @RequestMapping(value = "/list/data")
-    public String listData(Integer limit, Integer start, ServiceClient client, Model model,
+    public String listData(Integer limit, Integer start, ServiceClient client, Model model, Integer treeId,
                            @RequestParam(required = false, defaultValue = "clientName") String order,
                            @RequestParam(required = false, defaultValue = "asc") String ordertype) {
+
+        if (treeId != null) {
+            Pager<ServiceClient> pager = clientService.findClientPagerByPid(start, limit, treeId, order, ordertype);
+            model.addAttribute("pager", pager);
+            return "service/client/clientTableData.pagelet";
+        }
         Pager<ServiceClient> pager = clientService.findClientPager(start, limit, client, order, ordertype);
         model.addAttribute("pager", pager);
         return "service/client/clientTableData.pagelet";
@@ -243,6 +249,8 @@ public class ClientAction extends BaseController {
             map.put("id", "p" + d.getProductLineId());
             map.put("pId", 0);
             map.put("name", d.getProductLineName());
+            map.put("open", true);
+            map.put("clickAble", false);
             list.add(map);
         }
         for (ProductAndLine d : productLists) {
@@ -250,6 +258,7 @@ public class ClientAction extends BaseController {
             map.put("id", d.getProductId());
             map.put("pId", "p" + d.getProductLineId());
             map.put("name", d.getProductName());
+            map.put("open", true);
             list.add(map);
         }
         return list;

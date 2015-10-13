@@ -43,4 +43,6 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 	List<StoryCount> planStoryCount(ProductStory story,ProductPlan plan);
 	
 	List<StoryCount> fieldStoryCount(ProductStory t,String field);
+	
+	int[] batchUpdateDel(List<ProductStory> ids);
 }
