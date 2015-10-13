@@ -25,6 +25,8 @@ import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.FragmentExpressionSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
@@ -277,7 +279,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		});
 	}
 
-	public Pager<QualityBug> queryPager(int start, int limit , final String conditions, QualityBug qualityBug , final OrderBy... orderArgs) {
+	public Pager<QualityBug> queryPager(int start, int limit , final Condition conditions, QualityBug qualityBug , final OrderBy... orderArgs) {
 		if(qualityBug==null){
 			qualityBug=new QualityBug();
 		}
@@ -286,7 +288,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 			public Select generate(QualityBug t) {
 				Select select = MysqlSelect.selectFrom(QUALITY_BUGTABLE).where(
 						and(
-								FragmentExpressionSql.fragmentCondition("".equals(conditions)?null:conditions),
+								conditions,
 								QUALITY_BUGTABLE.PRODUCT_ID.eq(t.getProductId()),
 								QUALITY_BUGTABLE.MODULE_ID.eq(t.getModuleId()),
 								QUALITY_BUGTABLE.PROJECT_ID.eq(t.getProjectId()),
