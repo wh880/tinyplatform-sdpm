@@ -9,6 +9,9 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-18.
  */
 public interface TaskManager {
+
+    public int[] batchAdd(List<ProjectTask> taskList);
+
     /**
      * 根据主键id查找用户
      *

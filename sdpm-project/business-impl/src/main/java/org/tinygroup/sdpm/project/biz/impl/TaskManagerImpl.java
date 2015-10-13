@@ -21,6 +21,10 @@ public class TaskManagerImpl implements TaskManager {
     @Autowired
     private ProjectTaskDao taskDao;
 
+    public int[] batchAdd(List<ProjectTask> taskList) {
+        return taskDao.batchInsert(taskList);
+    }
+
     public ProjectTask find(int id) {
         return taskDao.findTaskStory(id);
     }

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -262,9 +263,9 @@ public class TaskAction extends BaseController {
         ProductStory story = new ProductStory();
         if (storyId != null) {
             story = productStoryService.findStory(storyId);
-            model.addAttribute("story", story);
-        }
 
+        }
+        model.addAttribute("story", story);
 
         model.addAttribute("moduleList", moduleList);
         model.addAttribute("storyList", storyList);
@@ -311,4 +312,38 @@ public class TaskAction extends BaseController {
         return "project/task/basicInfoEdit.pagelet";
     }
 
+    @RequestMapping("/preBatchAdd")
+    public String preBatchAdd(Model model, HttpServletRequest request) {
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        model.addAttribute("teamList", teamService.findTeamByProjectId(projectId));
+
+        List<ProductStory> storyList = storyService.findStoryByProject(projectId);
+        model.addAttribute("storyList", storyList);
+
+        SystemModule systemModule = new SystemModule();
+        systemModule.setModuleRoot(projectId);
+        systemModule.setModuleType("project");
+        List<SystemModule> modulesList = moduleService.findModuleList(systemModule);
+        model.addAttribute("modulesList", modulesList);
+
+        return "project/task/batchAdd.page";
+    }
+
+    @RequestMapping("/batchAdd")
+    public String batchAdd(Tasks tasks, HttpServletRequest request) {
+        List<ProjectTask> taskList = tasks.getTaskList();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (StringUtil.isBlank(taskList.get(i).getTaskName())) {
+                taskList.remove(i);
+                i--;
+            }
+        }
+        if (taskList.isEmpty()) {
+            return "project/task/index.page";
+        } else {
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+            taskService.batchAdd(taskList, projectId);
+            return "project/task/index.page";
+        }
+    }
 }
