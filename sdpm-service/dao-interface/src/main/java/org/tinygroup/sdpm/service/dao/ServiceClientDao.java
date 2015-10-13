@@ -17,7 +17,9 @@
 package org.tinygroup.sdpm.service.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -27,4 +29,6 @@ public interface ServiceClientDao extends BaseDao<ServiceClient, Integer> {
     int[] softDeleteBatch(List<ServiceClient> list);
 
     ServiceClient judge(String clientName);
+
+    Pager<ServiceClient> findByProduct(int start, int limit, Integer treeId, OrderBy... orderArgs);
 }

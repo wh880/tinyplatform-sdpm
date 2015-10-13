@@ -18,8 +18,9 @@
                 #@settoggleLeftTitle()所有产品#end
                 #@settoggleLeftBody("treeLeftbox")
                     #@zTreeList(call("link","/service/client/treeData"))
-                        #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
-                        #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/product/story" )
+                        #setzTreeValMap({"id":"treeId","name":"pName","pid":
+                            "pId"}) ##Id中带"p"的为productLine的ID，其余的为productde ID
+                        #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/service/client/list" )
                     #end
                 #end
             #end

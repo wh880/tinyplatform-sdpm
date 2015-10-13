@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
@@ -49,7 +50,18 @@ public class SlaAction extends BaseController {
         return "/service/sla/sla.page";
     }
 
-    /*"和“/form”拼凑成查询语句，/list"和"/list/data"是实现sla开始 页面表中数据的显示*/
+    /*注解的意义是，想根据产品id找到产品名称。"和“/form”拼凑成查询语句，/list"和"/list/data"是实现sla开始 页面表中数据的显示*/
+   /* @RequestMapping(value = "/list")
+    public String list(ServiceSla sla, Model model) {
+        return "/service/sla/sla.page";
+    }
+
+    @RequestMapping(value = "/list/data")
+    public String listData(Integer limit, Integer start, ServiceSla sla, Model model) {
+        Pager<ServiceSla> pager = slaService.findSlaPager(start, limit, sla);
+        model.addAttribute("pager", pager);
+        return "service/sla/slaTableData.pagelet";
+    }*/
     @RequestMapping(value = "/list")
     public String list(ServiceSla sla, Model model) {
         return "/service/sla/sla.page";
@@ -72,11 +84,28 @@ public class SlaAction extends BaseController {
         return map;
     }
 
-    /* 协议里面，点击“详情”进入*/
-    @RequestMapping(value = "/slaClient")
+    /* 协议里面，点击“详情”进入。注解的意义是，想根据产品id找到产品名称*/
+    /*@RequestMapping(value = "/slaClient")
     public String showClient(Integer id, Model model) {
         List<ServiceSla> slas = slaService.findSlaBySlaId(id);
         ServiceClient client = clientService.findClient(id);
+        model.addAttribute("client", client);
+        model.addAttribute("slas", slas);
+        return "service/sla/clientsla.page";
+    }*/
+    @RequestMapping(value = "/slaClient")
+    public String showClient(Integer id, Integer limit, Integer start, ServiceSla sla,
+                             @RequestParam(required = false, defaultValue = "1") int page,
+                             @RequestParam(required = false, defaultValue = "10") int pageSize,
+                             @RequestParam(required = false, defaultValue = "faqId") String order,
+                             @RequestParam(required = false, defaultValue = "asc") String ordertype,
+                             Model model) {
+        start = (page - 1) * pageSize;
+        limit = pageSize;
+        List<ServiceSla> slas = slaService.findSlaBySlaId(id);
+        ServiceClient client = clientService.findClient(id);
+        /*Pager<ServiceSla> pager = slaService.findSlaPager2(start, limit, sla);*/
+       /* model.addAttribute("pager", pager);*/
         model.addAttribute("client", client);
         model.addAttribute("slas", slas);
         return "service/sla/clientsla.page";

@@ -57,4 +57,8 @@ public class BuildManagerImpl implements BuildManager {
         build.setBuildDeleted(build.DELETE_YES);
         return projectBuildDao.edit(build);
     }
+    public int[] batchDelBuildByIds(List<ProjectBuild> keys) {
+        //
+        return projectBuildDao.batchUpdateDel(keys);
+    }
 }

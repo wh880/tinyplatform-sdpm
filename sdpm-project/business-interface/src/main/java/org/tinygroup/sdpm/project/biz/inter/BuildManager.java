@@ -70,4 +70,6 @@ public interface BuildManager {
      * @return
      */
     Integer delete(int id);
+
+    public int[] batchDelBuildByIds(List<ProjectBuild> keys);
 }

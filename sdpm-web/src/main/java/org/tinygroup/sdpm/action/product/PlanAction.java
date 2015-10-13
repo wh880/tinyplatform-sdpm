@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.PlanService;
@@ -136,5 +138,28 @@ public class PlanAction  extends BaseController{
     	return list;
     }
 
+	
+	@ResponseBody
+	@RequestMapping(value="/batchDelete")
+	public Map bctchDelPlan(String ids)
+	{		
+		Map<String,String> map = new HashMap<String,String>();
+		if(ids == null){
+			map.put("status", "fail");
+		    map.put("info", "删除失败");
+			return map;
+		}
+		 List<ProductPlan> list = new ArrayList<ProductPlan>();
+		for(String s : ids.split(",")){			
+			ProductPlan plan= new ProductPlan();
+			plan.setPlanId(Integer.valueOf(s));
+			plan.setDeleted(1);
+			list.add(plan);
+		}	
+		planService.deleteBatchPlan(list);
+		map.put("status", "success");
+	    map.put("info", "删除成功");
+	    return map;
+	}
 	
 }
