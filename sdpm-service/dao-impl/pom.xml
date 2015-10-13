@@ -26,5 +26,15 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>sdpm-product-dao-interface</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>sdpm-product-dao-interface</artifactId>
+          <version>${tiny_sdpm_version}</version>
+      </dependency>
   </dependencies>
 </project>

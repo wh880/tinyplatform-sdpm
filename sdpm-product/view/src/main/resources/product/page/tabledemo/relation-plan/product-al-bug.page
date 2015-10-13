@@ -12,8 +12,9 @@
 			<input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('bugId','全选');" />
             <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('bugId','反选');" />
             
-				#@aModal("#myModal" "批量移除" "1200" "500" "btn radius btn-danger" "/product/page/tabledemo/product-editall.pagelet")批量删除#end
-			#end
+  						#@mulOperation("muldelete" TINY_CONTEXT_PATH+"/quality/bug/batchDelete")
+            					<a class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
+            			  #end			#end
 			#@tinyTableContent(TINY_CONTEXT_PATH +　"/product/story/bugSearch/reRelateBug?deleted=0") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序

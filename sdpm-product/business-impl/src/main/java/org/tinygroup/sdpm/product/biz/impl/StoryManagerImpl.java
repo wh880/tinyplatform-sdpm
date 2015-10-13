@@ -110,6 +110,20 @@ public class StoryManagerImpl implements StoryManager{
 
 
 
+	public List<StoryCount> planStoryCount(ProductStory story) {
+
+		return productStoryDao.planStoryCount(story, null);
+	}
+
+
+
+	public int[] deleteBatch(List<ProductStory> ids) {
+		// TODO Auto-generated method stub
+		return productStoryDao.batchUpdateDel(ids);
+	}
+
+
+
 	
 	
 }

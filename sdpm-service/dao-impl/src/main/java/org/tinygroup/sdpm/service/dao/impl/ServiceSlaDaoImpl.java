@@ -16,6 +16,7 @@
 
 package org.tinygroup.sdpm.service.dao.impl;
 
+
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
@@ -26,12 +27,15 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
+import static org.tinygroup.sdpm.service.dao.constant.ServiceClientTable.SERVICE_CLIENTTABLE;
 import static org.tinygroup.sdpm.service.dao.constant.ServiceSlaTable.SERVICE_SLATABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
@@ -133,15 +137,23 @@ public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDa
         }, pks);
     }
 
+    /* public ServiceSla getByKey(Integer pk) {
+         return getDslTemplate().getByKey(pk, ServiceSla.class, new SelectGenerateCallback<Serializable>() {
+             @SuppressWarnings("rawtypes")
+             public Select generate(Serializable t) {
+                 return selectFrom(SERVICE_SLATABLE).where(SERVICE_SLATABLE.SLA_ID.eq(t));
+             }
+         });
+     }*/
+/*仿照上面的代码，增加：根据产品id查找产品名称*/
     public ServiceSla getByKey(Integer pk) {
         return getDslTemplate().getByKey(pk, ServiceSla.class, new SelectGenerateCallback<Serializable>() {
             @SuppressWarnings("rawtypes")
             public Select generate(Serializable t) {
-                return selectFrom(SERVICE_SLATABLE).where(SERVICE_SLATABLE.SLA_ID.eq(t));
+                return selectFrom(SERVICE_SLATABLE).join(Join.leftJoin(PRODUCTTABLE, SERVICE_SLATABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID))).where(SERVICE_SLATABLE.SLA_ID.eq(t));
             }
         });
     }
-
     public List<ServiceSla> query(ServiceSla serviceSla, final OrderBy... orderBies) {
         if (serviceSla == null) {
             serviceSla = new ServiceSla();
@@ -186,7 +198,7 @@ public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDa
         return getDslTemplate().queryPager(start, limit, serviceSla, false, new SelectGenerateCallback<ServiceSla>() {
 
             public Select generate(ServiceSla t) {
-                Select select = MysqlSelect.selectFrom(SERVICE_SLATABLE).where(
+                Select select = MysqlSelect.selectFrom(SERVICE_SLATABLE).join(Join.leftJoin(SERVICE_CLIENTTABLE, SERVICE_SLATABLE.CLIENT_ID.eq(SERVICE_CLIENTTABLE.CLIENT_ID))).where(
                         and(
                                 SERVICE_SLATABLE.SERVICE_LEVEL.eq(t.getServiceLevel()),
                                 SERVICE_SLATABLE.SERVICE_DEADLINE.eq(t.getServiceDeadline()),
@@ -215,6 +227,42 @@ public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDa
         });
     }
 
+    /*点击协议的“详情”，根据产品id找到产品名称*/
+    public Pager<ServiceSla> queryPager2(int start, int limit, ServiceSla serviceSla, final OrderBy... orderBies) {
+        if (serviceSla == null) {
+            serviceSla = new ServiceSla();
+        }
+        return getDslTemplate().queryPager(start, limit, serviceSla, false, new SelectGenerateCallback<ServiceSla>() {
+
+            public Select generate(ServiceSla t) {
+                Select select = MysqlSelect.selectFrom(SERVICE_SLATABLE).join(Join.leftJoin(PRODUCTTABLE, SERVICE_SLATABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID))).where(
+                        and(
+                                SERVICE_SLATABLE.SERVICE_LEVEL.eq(t.getServiceLevel()),
+                                SERVICE_SLATABLE.SERVICE_DEADLINE.eq(t.getServiceDeadline()),
+                                SERVICE_SLATABLE.CLIENT_ID.eq(t.getClientId()),
+                                SERVICE_SLATABLE.PRODUCT_ID.eq(t.getProductId()),
+                                SERVICE_SLATABLE.SLA_TITLE.eq(t.getSlaTitle()),
+                                SERVICE_SLATABLE.SLA_SPEC.eq(t.getSlaSpec()),
+                                SERVICE_SLATABLE.SERVICE_REPLY_TIME_LIMIT.eq(t.getServiceReplyTimeLimit()),
+                                SERVICE_SLATABLE.SERVICE_REVIEW_TIME_LIMIT.eq(t.getServiceReviewTimeLimit()),
+                                SERVICE_SLATABLE.SERVICE_EFFORT_LIMIT.eq(t.getServiceEffortLimit()),
+                                SERVICE_SLATABLE.SERVICE_REQUEST_LIMIT.eq(t.getServiceRequestLimit()),
+                                SERVICE_SLATABLE.SERVICE_TS_ONSITE_LIMIT.eq(t.getServiceTsOnsiteLimit()),
+                                SERVICE_SLATABLE.SERVICE_SPECIALIST.eq(t.getServiceSpecialist()),
+                                SERVICE_SLATABLE.SLA_STATUS.eq(t.getSlaStatus()),
+                                SERVICE_SLATABLE.SLA_CREATED_BY.eq(t.getSlaCreatedBy()),
+                                SERVICE_SLATABLE.SLA_CREATE_DATE.eq(t.getSlaCreateDate()),
+                                SERVICE_SLATABLE.SLA_REVIEWED_BY.eq(t.getSlaReviewedBy()),
+                                SERVICE_SLATABLE.SLA_REVIEW_DATE.eq(t.getSlaReviewDate()),
+                                SERVICE_SLATABLE.SLA_CLOSED_BY.eq(t.getSlaClosedBy()),
+                                SERVICE_SLATABLE.SLA_CLOSE_DATE.eq(t.getSlaCloseDate()),
+                                SERVICE_SLATABLE.SLA_OPEN_COUNT.eq(t.getSlaOpenCount()),
+                                SERVICE_SLATABLE.DELETED.eq(t.getDeleted()),
+                                SERVICE_SLATABLE.CILENT_PRODUCT_VISION.eq(t.getCilentProductVision())));
+                return addOrderByElements(select, orderBies);
+            }
+        });
+    }
     public int[] batchInsert(boolean autoGeneratedKeys, List<ServiceSla> serviceSlas) {
         if (CollectionUtil.isEmpty(serviceSlas)) {
             return new int[0];
@@ -343,7 +391,7 @@ public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDa
             //Select select = selectFrom(USERTABLE).where(USERTABLE.NAME.eq("xdy"));
             // MysqlSelect select1;
             //select1 = selectFrom(USERTABLE).limit(1, 10);
-            select = selectFrom(SERVICE_SLATABLE).where(and(SERVICE_SLATABLE.CLIENT_ID.eq(clientId),
+            select = selectFrom(SERVICE_SLATABLE).join(Join.leftJoin(PRODUCTTABLE, SERVICE_SLATABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID))).where(and(SERVICE_SLATABLE.CLIENT_ID.eq(clientId),
                     SERVICE_SLATABLE.DELETED.eq(DELETE_NO)));
             return getDslSession().fetchList(select, ServiceSla.class);
         }

@@ -42,6 +42,12 @@ public interface BugService {
 	int[] batchUpdateBug(List<QualityBug> bugs);
 	
 	/**
+	 * 批量删除
+	 * @param bugIds
+	 * @return
+	 */
+	int[]  batchDeleteBug(List<QualityBug> bugIds);
+	/**
 	 * 分页查询
 	 * @param start
 	 * @param limit

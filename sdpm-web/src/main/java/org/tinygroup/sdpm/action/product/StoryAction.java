@@ -28,10 +28,12 @@ import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.impl.ProductStoryDaoImpl;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCollection;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
+import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
@@ -54,6 +56,7 @@ public class StoryAction extends BaseController{
 	private BugService bugService;
     @Autowired
     private ModuleService moduleService;
+
     
     
    
@@ -277,11 +280,38 @@ public class StoryAction extends BaseController{
     		
     	List<StoryCount> productStoryCount =  storyService.productStoryCount(story);
     	List<StoryCount> modelStoryCount =  storyService.modelStoryCount(story);
+    	List<StoryCount> planStoryCount =  storyService.planStoryCount(story);
+    	
     	model.addAttribute("productStoryCount", productStoryCount);
     	model.addAttribute("modelStoryCount", modelStoryCount);
+    	model.addAttribute("planStoryCount", planStoryCount);
     	
     	
     	return "/product/page/tabledemo/product-report.page";
     }
+    
+
+	@ResponseBody
+	@RequestMapping(value="/batchDelete")
+	public Map bctchDelStory(String ids)
+	{		
+		Map<String,String> map = new HashMap<String,String>();
+		if(ids == null){
+			map.put("status", "fail");
+		    map.put("info", "删除失败");
+			return map;
+		}
+		 List<ProductStory> list = new ArrayList<ProductStory>();
+		for(String s : ids.split(",")){			
+			ProductStory story= new ProductStory();
+			story.setStoryId(Integer.valueOf(s));
+			story.setDeleted(1);
+			list.add(story);
+		}	
+		storyService.deleteBatchStory(list);
+		map.put("status", "success");
+	    map.put("info", "删除成功");
+	    return map;
+	}
 
 }

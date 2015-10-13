@@ -60,5 +60,10 @@ public class PlanServiceImpl implements PlanService {
 		return planManager.findList(planId);
 	}
 
+	public int[] deleteBatchPlan(List<ProductPlan> ids) {
+		
+		return planManager.deleteBatch(ids);
+	}
+
 
 }

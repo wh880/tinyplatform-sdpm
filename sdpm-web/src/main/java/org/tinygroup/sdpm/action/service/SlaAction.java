@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
@@ -23,6 +26,8 @@ public class SlaAction extends BaseController {
     private SlaService slaService;
     @Autowired
     private ClientService clientService;
+    @Autowired
+    private ProductService productService;
 
     /*查询*/
     @RequestMapping("/form")
@@ -31,8 +36,13 @@ public class SlaAction extends BaseController {
             ServiceSla sla = slaService.findSla(id);
             model.addAttribute("sla", sla);
         }
+        /*调用client的服务，查询出客户表的对象*/
         ServiceClient client = new ServiceClient();
         List<ServiceClient> list = clientService.getClientList(client);
+        /*调用product的服务，查询出产品表的对象*/
+        Product product = new Product();
+        List<Product> slas = productService.findProductList(product);
+        model.addAttribute("slas", slas);
         model.addAttribute("list", list);
         return "/service/sla/slaAdd.page";
     }
@@ -49,7 +59,7 @@ public class SlaAction extends BaseController {
         return "/service/sla/sla.page";
     }
 
-    /*"和“/form”拼凑成查询语句，/list"和"/list/data"是实现sla开始 页面表中数据的显示*/
+    /*注解的意义是，想根据产品id找到产品名称。"和“/form”拼凑成查询语句，/list"和"/list/data"是实现sla开始 页面表中数据的显示*/
     @RequestMapping(value = "/list")
     public String list(ServiceSla sla, Model model) {
         return "/service/sla/sla.page";
@@ -72,9 +82,17 @@ public class SlaAction extends BaseController {
         return map;
     }
 
-    /* 协议里面，点击“详情”进入*/
+    /* 协议里面，点击“详情”进入。注解的意义是，想根据产品id找到产品名称*/
     @RequestMapping(value = "/slaClient")
-    public String showClient(Integer id, Model model) {
+    public String showClient(Integer id, Integer limit, Integer start, ServiceSla sla,
+                             @RequestParam(required = false, defaultValue = "1") int page,
+                             @RequestParam(required = false, defaultValue = "10") int pageSize,
+                             @RequestParam(required = false, defaultValue = "faqId") String order,
+                             @RequestParam(required = false, defaultValue = "asc") String ordertype,
+                             Model model) {
+        start = (page - 1) * pageSize;
+        limit = pageSize;
+        /*在dao层，findSlaBySlaId调用的方法中，增加了根据产品id查找产品名称*/
         List<ServiceSla> slas = slaService.findSlaBySlaId(id);
         ServiceClient client = clientService.findClient(id);
         model.addAttribute("client", client);
@@ -108,10 +126,6 @@ public class SlaAction extends BaseController {
     /*协议的“协议标题”页面，协议具体内容查找出来*/
     @RequestMapping(value = "/slaContent")
     public String slaContent(Integer id, Model model) {
-        /*if (id != null) {
-            ServiceSla sla = slaService.findSla(id);
-            model.addAttribute("sla", sla);
-        }*/
         ServiceSla sla = slaService.findSla(id);
         model.addAttribute("sla", sla);
         return "service/sla/slaContent.page";
@@ -138,5 +152,4 @@ public class SlaAction extends BaseController {
         map.put("info", "删除成功");
         return map;
     }
-    /*协议的“客户名称”跳转到客户，根据徐丹阳的页面来的*/
 }

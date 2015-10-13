@@ -3,6 +3,8 @@ package org.tinygroup.sdpm.project.service.inter;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.List;
+
 /**
  * Created by shenly13343 on 2015-09-20.
  */
@@ -58,4 +60,5 @@ public interface BuildService {
      */
     public ProjectBuild findBuild(Integer buildId);
 
+    public int[] deleteBuildByIds(List<ProjectBuild> ids);
 }

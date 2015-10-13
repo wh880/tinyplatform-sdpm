@@ -566,4 +566,18 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
         });
 
     }
+	
+	public int[] batchUpdateDel(List<QualityBug> ids) {
+		if(CollectionUtil.isEmpty(ids)){
+			return new int[0];
+		}
+		return getDslTemplate().batchUpdate(ids, new NoParamUpdateGenerateCallback(){
+			
+			public Update generate() {
+				return update(QUALITY_BUGTABLE).set(
+						QUALITY_BUGTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
+								QUALITY_BUGTABLE.BUG_ID.eq(new JdbcNamedParameter("bugId")));
+			}
+		});
+	}
 }

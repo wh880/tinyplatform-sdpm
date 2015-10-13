@@ -1,25 +1,28 @@
 #@noRespsGridSystem()
-    #@tinyForm("thisform" "" "" {"class":"test"})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/org/privilege/copyRole" "" {"class":"test"})
+    <input type="hidden" name="orgRoleId" value="${id}"/>
         #@gridSysRow()
             #@colLabel("col-2")角色名称：#end
             #@gridSysCol(8)
                 #tinyInput(
-                    "text" "username" ""{"placeholder":"字母/中文/数字/下划线","nullmsg":"用户名不能为空！","id":"username","class":
+                    "text" "orgRoleName" ""{"placeholder":"","nullmsg":"","id":"username","class":
                     "input-text"})
             #end
         #end
         #@gridSysRow()
             #@colLabel("col-2")角色描述：#end
             #@gridSysCol(8)
-                #@textarea(textareaStyle="width:100%" textareaPlaceholder="说点什么...")#end
+                #tinyInput("text" "orgRoleRemarks" ""{"datatype":"","class":"input-text"})
 
             #end
         #end
         #@gridSysRow()
             #@colLabel("col-2")选项：#end
             #@gridSysCol(8)
-                #@tinyCheckbox("checkbox2" "01" "02")复制权限#end
-                #@tinyCheckbox("checkbox2" "01" "02")复制用户#end
+                #@Tcheckboxes("copyPart" )
+                    #@Tcheckbox("copyPrivilege")复制权限#end
+                    #@Tcheckbox("copyUser")复制用户#end
+                #end
             #end
         #end
     #end

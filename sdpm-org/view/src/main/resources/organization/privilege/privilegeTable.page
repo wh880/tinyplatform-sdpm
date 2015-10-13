@@ -1,4 +1,4 @@
-#setTinyItemCount(pager.totalPages)
+#setTinyItemCount(pager.totalCount)
 #foreach(var:pager.records)
 #@tr()
     #@td()<input type="checkbox" value="${var?.orgRoleId}" name="orgRoleId">#end

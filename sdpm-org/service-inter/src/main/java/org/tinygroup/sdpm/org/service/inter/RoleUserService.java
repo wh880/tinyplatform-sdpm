@@ -55,4 +55,12 @@ public interface RoleUserService {
      * @return
      */
     Integer deleteRoleUser(Integer id);
+
+    /**
+     * 角色复制下面的用户复制
+     *
+     * @param orgRoleIdNew
+     * @param orgRoleId
+     */
+    void copyRoleUser(Integer orgRoleIdNew, Integer orgRoleId);
 }

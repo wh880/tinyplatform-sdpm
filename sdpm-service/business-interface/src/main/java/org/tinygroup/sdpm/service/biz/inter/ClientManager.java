@@ -61,12 +61,18 @@ public interface ClientManager {
 
 
     /**
-     * 根据id进行批量软删除客户
+     * 根据产品树id查找相应客户
      *
-     * @param productId 主键
+     * @param treeId 主键
      * @return
      */
-    List<ServiceClient> findByProduct(Integer productId);
+    Pager<ServiceClient> findByProduct(Integer start, Integer limit, Integer treeId, String order, String ordertype);
 
+    /**
+     * 在新建或编辑用户时判断该用户是否已存在
+     *
+     * @param
+     * @return
+     */
     ServiceClient judgeClient(String clientName);
 }

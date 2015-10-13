@@ -39,4 +39,14 @@ public class RoleUserServiceImpl implements RoleUserService {
     public Integer deleteRoleUser(Integer id) {
         return roleUserManager.delete(id);
     }
+
+    public void copyRoleUser(Integer orgRoleIdNew, Integer orgRoleId) {
+        List<OrgRoleUser> orgRoleUserList = roleUserManager.findUserIds(orgRoleId);
+        for (OrgRoleUser roleUser : orgRoleUserList) {
+            roleUser.setOrgRoleId(orgRoleIdNew);
+        }
+        if (orgRoleUserList != null || !orgRoleUserList.isEmpty()) {
+            roleUserManager.batchAdd(orgRoleUserList);
+        }
+    }
 }
