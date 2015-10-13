@@ -25,7 +25,8 @@
         <menu id="task-menu2" name="任务菜单2" href="/project/task/index.page" icon="" sort="1" isShow="1">
             <menu id="pro-task-report" name="报表" href="/project/task/reportform.page" icon="icon-bar-chart" sort="8" isShow="1"
                   scope="pro-taskmenu2-op"/>
-            <menu id="pro-task-batchadd" name="批量增加" href="/project/task/batchAdd.page" icon="icon-plus-sign" sort="6" isShow="1"
+            <menu id="pro-task-batchadd" name="批量增加" href="/project/task/preBatchAdd" icon="icon-plus-sign" sort="6"
+                  isShow="1"
                   scope="pro-taskmenu2-op"/>
             <menu id="pro-task-proposeversion" name="建任务" href="/project/task/preadd" icon="icon-plus" sort="4"
                   isShow="1"
@@ -115,7 +116,7 @@
               scope="pro-version-op"/>
 
         <menu id="version-menu" name="任务菜单" href="/project/version/index.page" icon="" sort="1" isShow="1">
-            <menu id="pro-version-report" name="新建版本" href="/project/version/add.page" icon="icon-plus" sort="8" isShow="1"
+            <menu id="pro-version-report" name="新建版本" href="/project/version/add" icon="icon-plus" sort="8" isShow="1"
                   scope="pro-versionmenu-op"/>
         </menu>
 
@@ -166,7 +167,7 @@
                   scope="pro-surveymenu-op"/>
         </menu>
 
-        <menu id="survey-menu2" name="任务菜单2" href="/project/survey/index.page" icon="" sort="1" isShow="1">
+        <menu id="survey-menu2" name="任务菜单2" href="/projectmanage/survey/index" icon="" sort="1" isShow="1">
             <menu id="pro-survey-edit" name="编辑" href="/project/edit" icon="icon-pencil" sort="8" isShow="1"
                   scope="pro-surveymenu2-op"/>
             <menu id="pro-survey-remove" name="" href="" icon="" sort="6" isShow="1"

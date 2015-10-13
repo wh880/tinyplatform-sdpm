@@ -117,6 +117,13 @@ public class StoryManagerImpl implements StoryManager{
 
 
 
+	public int[] deleteBatch(List<ProductStory> ids) {
+		// TODO Auto-generated method stub
+		return productStoryDao.batchUpdateDel(ids);
+	}
+
+
+
 	
 	
 }

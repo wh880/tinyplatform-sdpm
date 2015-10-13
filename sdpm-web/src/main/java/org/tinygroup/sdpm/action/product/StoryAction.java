@@ -289,5 +289,29 @@ public class StoryAction extends BaseController{
     	
     	return "/product/page/tabledemo/product-report.page";
     }
+    
+
+	@ResponseBody
+	@RequestMapping(value="/batchDelete")
+	public Map bctchDelStory(String ids)
+	{		
+		Map<String,String> map = new HashMap<String,String>();
+		if(ids == null){
+			map.put("status", "fail");
+		    map.put("info", "删除失败");
+			return map;
+		}
+		 List<ProductStory> list = new ArrayList<ProductStory>();
+		for(String s : ids.split(",")){			
+			ProductStory story= new ProductStory();
+			story.setStoryId(Integer.valueOf(s));
+			story.setDeleted(1);
+			list.add(story);
+		}	
+		storyService.deleteBatchStory(list);
+		map.put("status", "success");
+	    map.put("info", "删除成功");
+	    return map;
+	}
 
 }

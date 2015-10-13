@@ -11,7 +11,6 @@
 #include("doc-tab.page")
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/document/doc/editSave" "post" {"class":"edit"})
 <input name="docId" type="hidden" value="${doc?.docId}"/>
-##<input name="productId" type="hidden" value="${product?.productId}"/>
 	<div style="width:100%">
     	<div class="infoContent">
 			<p class="titleName">编辑</p>
@@ -20,19 +19,55 @@
          <div class="col-2 text-r"><label>所属文档库&nbsp</label></div>
          <div class="col-4">
           #@Tselect2F()
-	          #@Tselect2Body("docLibId" var?.docLibId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	          #@Tselect2Body("docLibId" doc?.docLibId {"class":"input-text select2","onclick":"setType(this.value)"}) ##,"multiple":"multiple"加上为多选项
 	               #foreach(var:libList)
-	               	<option value="${var?.docLibId}">${var?.docLibName}</option>
+	               	#if(var?.docLibDeleted != "1")
+	               		<option value="${var?.docLibId}">${var?.docLibName}</option>
+	               	#end
 	               #end
-	                
 	               #end                
-#*	           #@Tselect2Fix()
-	           	<a href="#">全部</a>#end
-               #end*#
               	</div>
        		</div>
        	#end
      #end
+     
+     #@elementItem(elementId="project" eleItemClass="hidden")
+					#@colLabel()所属项目#end
+					#@formControlDiv("col-8")
+					#@div(divClass="col-6")
+					#@Tselect2F()
+	                   		#@Tselect2Body("docProject" doc?.project {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        #foreach(project : projectList)
+	                        	 <option value="${project?.projectId}">${project?.projectName}</option>
+	                        #end	                       	                    	                        
+	                    	#end 
+	                    	#@Tselect2Fix()
+	                    	<a href="${TINY_CONTEXT_PATH}/project/preadd" class="r">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH}/">全部</a>#end                 	                    	
+                	  #end
+                	  #end
+                	  #end
+	 		#end			
+			
+    		 #@elementItem(elementId="product" eleItemClass="hidden")
+					#@colLabel()所属产品#end
+					#@formControlDiv("col-8")
+					#@div(divClass="col-6")
+					#@Tselect2F()
+	                   		#@Tselect2Body("docProduct" doc?.product {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        #foreach(product : productList)
+	                        	 <option value="${product?.productId}">${product?.productName}</option>
+	                        #end	                       	                    	                        
+	                    	#end                  
+	                    	#@Tselect2Fix()
+	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
+                	  #end
+                	  #end
+                	  #end
+			#end
+			
+			 				
      #@elementItem()
         <div class="col-12">
          <div class="col-2 text-r"><label>所属分类&nbsp</label></div>
@@ -131,6 +166,21 @@
         #@dialogBody()<p></p>#end
 #end     
 
-<script type="text/javascript">
-    $(".select2").select2();    
-</script>
+   <script type="text/javascript">
+					    $(".select2").select2(); 
+
+					    function setType(type){
+					 
+							if(type == 1){
+								$('#product').removeClass('hidden');
+							}
+							else if(type == 2){
+								$('#project').removeClass('hidden');
+								$('#product').removeClass('hidden');			
+							}else{
+								$('#project').addClass('hidden');
+								$('#product').addClass('hidden');	
+								}	
+						}    
+					</script>
+

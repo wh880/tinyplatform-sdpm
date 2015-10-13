@@ -11,6 +11,8 @@ import java.util.Map;
  */
 public interface TaskService {
 
+    public Integer batchAdd(List<ProjectTask> taskList, Integer projectId);
+
     /**
      * 新建任务
      *

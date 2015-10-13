@@ -666,4 +666,18 @@ public List<StoryCount> productStoryCount(ProductStory t) {
 				return con;
 	}
 	
+	public int[] batchUpdateDel(List<ProductStory> ids) {
+		if(CollectionUtil.isEmpty(ids)){
+			return new int[0];
+		}
+		return getDslTemplate().batchUpdate(ids, new NoParamUpdateGenerateCallback(){
+			
+			public Update generate() {
+				return update(PRODUCT_STORYTABLE).set(
+						PRODUCT_STORYTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
+								PRODUCT_STORYTABLE.STORY_ID.eq(new JdbcNamedParameter("storyId")));
+			}
+		});
+	}
+	
 }

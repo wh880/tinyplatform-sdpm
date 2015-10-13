@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.dao.SystemActionDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
@@ -35,14 +36,12 @@ public class ActionManagerImpl implements ActionManager {
 		return systemActionDao.query(SystemAction);
 	}
 
-	public Pager<SystemAction> findByPage(int start, int limit,
-			SystemAction systemAction, String sortName, boolean asc) {
-		if(StringUtil.isBlank(sortName)){
-			return systemActionDao.queryPager(start, limit, systemAction);
-		}
-		OrderBy orderBy = new OrderBy(sortName, asc);
-		
-		return systemActionDao.queryPager(start, limit, systemAction, orderBy);
+	public Pager<SystemAction> findByPage(int start, int limit, SystemAction systemAction, String order,
+			String ordertype) {
+	
+		return systemActionDao.queryPager((start-1)*limit, limit, systemAction, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
 	}
+
+	
 
 }

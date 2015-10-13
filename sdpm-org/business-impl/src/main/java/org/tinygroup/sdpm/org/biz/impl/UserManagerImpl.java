@@ -40,6 +40,16 @@ public class UserManagerImpl implements UserManager {
         return orgUserDao.getByKey(id);
     }
 
+    public OrgUser findUserByAccount(String account) {
+        OrgUser orgUser = new OrgUser();
+        orgUser.setOrgUserAccount(account);
+        List<OrgUser> list = orgUserDao.query(orgUser);
+        if (list != null && !list.isEmpty()) {
+            return list.get(0);
+        }
+        return null;
+    }
+
     public Pager<OrgUser> findPager(Integer start, Integer limit, OrgUser orgUser) {
         return orgUserDao.queryPager(start, limit, orgUser);
     }
@@ -72,6 +82,7 @@ public class UserManagerImpl implements UserManager {
     public int[] deleteBatch(List<OrgUser> list) {
         return orgUserDao.softDeleteBatch(list);
     }
+
     /**
      * 生成安全的密码，生成随机的16位salt并经过1024次 sha-1 hash
      */

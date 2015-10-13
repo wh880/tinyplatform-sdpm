@@ -12,30 +12,12 @@
 	#end
 #end
 #include("doc-tab.page")
-#@tinyForm("this--form" TINY_CONTEXT_PATH+"/document/doc/addSave" "post" {"class":"add"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/document/doc/addSave" "post" {"class":"add"})
 #*<input type="hidden" name="docLibId" value="${doc?.docLibId}"/>
 <input type="hidden" name="docId" value="${doc?.docId}"/>*#
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">创建文档</p>
-#*			#@elementItem()
-					#@colLabel()所属产品#end
-					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
-					#@Tselect2F()
-	                   		 #@Tselect2Body("docProduct" product?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        #foreach(product : productList)
-	                        	 <option value="${product?.productId}">${product?.productName}</option>
-	                        #end	                       	                    	                        
-	                    	#end                  
-	                    	#@Tselect2Fix()
-	                    	<a href="#" class="r ">增加</a>
-	                    	<a href="#">全部</a>#end
-                	  #end
-                	  #end
-                	  #end
-				#end				*#
-	
 			#@elementItem()
 					#@colLabel()所属分类#end
 					#@formControlDiv("col-8")
@@ -69,7 +51,7 @@
 					#@colLabel()文档标题#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docTitle" ""{"placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"docTitle","class":"input-text"})
+					#tinyInput("text" "docTitle" ""{"placeholder":"*","datatype":"*4-16","nullmsg":"标题不能为空！","id":"docTitle","class":"input-text"})
 					#end
 					#end
 				#end
@@ -156,4 +138,5 @@ function setType(type)
 		$('#contentBox').addClass('hidden');
 	}
 }
+ 
 </script>
