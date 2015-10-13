@@ -114,7 +114,7 @@ public class ProductLineAction extends BaseController {
 		
 	}
 	
-	@RequestMapping("")
+	@RequestMapping("toProduct")
 	public String productLineAction(HttpServletRequest request){
 		List<ProductLine> list = (List<ProductLine>) request.getSession().getAttribute("productLineList");
 		if(list == null|| list.size()==0){

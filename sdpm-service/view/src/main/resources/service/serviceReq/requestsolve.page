@@ -35,15 +35,14 @@
                 #end
 
                 #@elementItem()
-
-                    <div class="col-12">
-                        <div class="col-2 text-r"><label><span class="c-red">*</span>回复描述：</label></div>
-
-                        <div class="col-9">
-                            #@Teditor("content2" "replySpec" {"initialFrameHeight":"150"})${request?.replySpec}#end</div>
-                    </div>
+                    <div class="col-2 text-r"><label><span class="c-red">*</span>回复描述：</label></div>
+                    #@formControlDiv("col-8")
+                        #@tinyTextarea("replySpec" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":
+                            "描述不能为空！"})${request?.replySpec}#end
+                    #end
                     #@validateDiv("col-2")#end
                 #end
+
                 #@elementItem()
                     #@sdpmItem("回复人")
                         #tinyInput("text" "replier" request?.replier{"datatype":"","id":"解决人员","class":"input-text"})
@@ -53,8 +52,9 @@
 
                     #@sdpmItem("回复处理时间")
                         #@tinyDateInput(
-                            "replyDate" formatDate(request?.replyDate,"yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
-                            "日期不能为空"})#end
+                            "replyDate" formatDate(request?.replyDate,
+                            "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
+                        "日期不能为空"})#end
                     #end
                     #@validateDiv("col-2")#end
 
@@ -83,4 +83,10 @@
 #end
 #@simpleModal("myModal1" "导出")#end
 #@simpleModal("myModal2" "新建产品")#end
-
+    <script type="text/javascript">
+        $(function () {
+            $("form[name=thisform").Validform({
+                tiptype: 2
+            });
+        });
+    </script>

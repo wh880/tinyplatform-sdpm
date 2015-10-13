@@ -6,7 +6,6 @@
 ${casepager?.totalCount+1}
 
 #setTinyItemCount(casepager?.totalCount)
-dfhfhgfhg
 #for(c:casepager?.records)
 					#@tr()
 						#@td()<input type="checkbox" value="1" name="userid">#end

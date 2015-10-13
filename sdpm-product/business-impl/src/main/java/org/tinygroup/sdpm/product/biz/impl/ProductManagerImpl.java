@@ -12,6 +12,7 @@ import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -74,6 +75,11 @@ public class ProductManagerImpl implements ProductManager{
 	public List<Product> findList(Integer... productId) {
 
 		return productDao.getByKeys(productId);
+	}
+
+	public List<ProductAndLine> getProductAndLine(Product product) {
+
+		return productDao.getProductAndLine(product);
 	}
 
 }

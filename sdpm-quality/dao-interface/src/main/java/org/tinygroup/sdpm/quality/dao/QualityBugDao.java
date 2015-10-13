@@ -18,10 +18,14 @@ package org.tinygroup.sdpm.quality.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 public interface QualityBugDao extends BaseDao<QualityBug,Integer> {
 	
 	Integer softDelete(Integer id);
 
+    public Pager<QualityBug> queryPager(int start, int limit , final Condition conditions, QualityBug qualityBug , final OrderBy... orderArgs);
 }

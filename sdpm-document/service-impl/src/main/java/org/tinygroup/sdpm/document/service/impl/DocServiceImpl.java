@@ -83,9 +83,9 @@ public class DocServiceImpl implements DocService{
 		return docbiz.delDocLibById(id);
 	}
 
-	public int deleteDocByIds(Integer... keys) {
+	public int[] deleteDocByIds(List<DocumentDoc> ids) {
 		// 
-		return docbiz.batchDelDocByIds(keys);
+		return docbiz.batchDelDocByIds(ids);
 	}
 
 }

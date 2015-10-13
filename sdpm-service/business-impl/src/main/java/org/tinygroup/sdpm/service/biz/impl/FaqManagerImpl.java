@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.FaqManager;
 import org.tinygroup.sdpm.service.dao.ServiceFaqDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -26,9 +27,10 @@ public class FaqManagerImpl implements FaqManager{
         return faqDao.query(faq);
     }
      /*分页显示调用的方法 */
-    /*public Pager<ServiceFaq> getpage(int start, int limit) {
-        return faqDao.queryPager( start,  limit);
-    }*/
+     public Pager<ServiceFaq> getpage(Integer start, Integer limit, ServiceFaq serviceFaq) {
+        /*ServiceFaq faq = new ServiceFaq();*/
+         return faqDao.queryPager(start, limit, serviceFaq);
+     }
 
     public ServiceFaq add(ServiceFaq faq) {
         return faqDao.add(faq);

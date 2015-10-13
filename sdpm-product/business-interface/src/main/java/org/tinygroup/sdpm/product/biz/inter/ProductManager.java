@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -76,5 +77,10 @@ public interface ProductManager {
 	 */
 	Pager<Product> findPager (int page ,int limit ,Product product, String order,String ordertype);
 	
-	
+	/**
+	 * 根据对象查找(包含产品线的部分信息)
+	 * @param product
+	 * @return
+	 */
+	List<ProductAndLine> getProductAndLine(Product product);
 }

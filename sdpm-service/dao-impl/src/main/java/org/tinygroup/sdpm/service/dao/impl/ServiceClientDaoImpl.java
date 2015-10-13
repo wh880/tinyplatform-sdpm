@@ -284,4 +284,14 @@ public class ServiceClientDaoImpl extends TinyDslDaoSupport implements ServiceCl
             }
         });
     }
+
+    public ServiceClient judge(String clientName) {
+        Select select;
+        try {
+            select = selectFrom(SERVICE_CLIENTTABLE).where(SERVICE_CLIENTTABLE.CLIENT_NAME.eq(clientName));
+            return getDslSession().fetchOneResult(select, ServiceClient.class);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

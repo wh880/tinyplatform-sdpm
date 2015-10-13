@@ -4,8 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
+import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
@@ -31,6 +37,10 @@ public class ClientAction extends BaseController {
     private SlaService slaService;
     @Autowired
     private ClientUserService clientUserService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private ProductLineService productLineService;
 
     @RequestMapping(value = "/list")
     public String list(ServiceClient client, Model model) {
@@ -38,8 +48,10 @@ public class ClientAction extends BaseController {
     }
 
     @RequestMapping(value = "/list/data")
-    public String listData(Integer limit, Integer start, ServiceClient client, Model model) {
-        Pager<ServiceClient> pager = clientService.findClientPager(start, limit, client);
+    public String listData(Integer limit, Integer start, ServiceClient client, Model model,
+                           @RequestParam(required = false, defaultValue = "clientName") String order,
+                           @RequestParam(required = false, defaultValue = "asc") String ordertype) {
+        Pager<ServiceClient> pager = clientService.findClientPager(start, limit, client, order, ordertype);
         model.addAttribute("pager", pager);
         return "service/client/clientTableData.pagelet";
     }
@@ -76,9 +88,8 @@ public class ClientAction extends BaseController {
             clientService.addClientUser(serviceClientUser);
         } else {
             clientService.updateClient(client);
-
+            model.addAttribute("client", client);
         }
-        model.addAttribute("client", client);
         return "redirect:/service/client/list";
     }
 
@@ -196,5 +207,51 @@ public class ClientAction extends BaseController {
         } else
             clientUser = clientUserService.addClientUser(clientUser);
         return "redirect:/service/client/clientDetail?id=" + clientUser.getClientId();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/judgeClient")
+    public Map judgeClient(String name, String param) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (param != null) {
+            String clientName = param;
+            ServiceClient serviceClient = clientService.judgeClient(clientName);
+            if (serviceClient != null) {
+                map.put("status", "n");
+                map.put("info", "该客户已存在");
+                return map;
+            } else {
+                map.put("status", "y");
+                map.put("info", "");
+                return map;
+            }
+        }
+        map.put("status", "n");
+        map.put("info", "请输入客户名称");
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("/treeData")
+    public List data(String check) {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<ProductAndLine> productLists = productService.getProductAndLine(new Product());
+        List<ProductLine> productLines = productLineService.findlist(new ProductLine());
+
+        for (ProductLine d : productLines) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", "p" + d.getProductLineId());
+            map.put("pId", 0);
+            map.put("name", d.getProductLineName());
+            list.add(map);
+        }
+        for (ProductAndLine d : productLists) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", d.getProductId());
+            map.put("pId", "p" + d.getProductLineId());
+            map.put("name", d.getProductName());
+            list.add(map);
+        }
+        return list;
     }
 }

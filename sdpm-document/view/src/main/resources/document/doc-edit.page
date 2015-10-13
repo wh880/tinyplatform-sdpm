@@ -7,39 +7,42 @@
 ##脚本
 #include("common.page")
 
-#set(name="documentDocu")
+##set(name="document")
 #include("doc-tab.page")
-#@tinyForm("this--form" TINY_CONTEXT_PATH+"/document/doc/save" "post" {"class":"edit"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/document/doc/editSave" "post" {"class":"edit"})
 <input name="docId" type="hidden" value="${doc?.docId}"/>
+##<input name="productId" type="hidden" value="${product?.productId}"/>
 	<div style="width:100%">
     	<div class="infoContent">
 			<p class="titleName">编辑</p>
     #@elementItem()
         <div class="col-12">
-         <div class="col-2 text-r"><label>所属文档库：</label></div>
+         <div class="col-2 text-r"><label>所属文档库&nbsp</label></div>
          <div class="col-4">
           #@Tselect2F()
-	          #@Tselect2Body("docLib" doc?.docLib {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	               #foreach(var:liblist)
-	               	<option value="${var?.docLibName}">${var?.docLibName}</option>
+	          #@Tselect2Body("docLibId" var?.docLibId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	               #foreach(var:libList)
+	               	<option value="${var?.docLibId}">${var?.docLibName}</option>
 	               #end
 	                
 	               #end                
-	           #@Tselect2Fix()
+#*	           #@Tselect2Fix()
 	           	<a href="#">全部</a>#end
-              #end
+               #end*#
               	</div>
        		</div>
+       	#end
      #end
      #@elementItem()
         <div class="col-12">
-         <div class="col-2 text-r"><label>所属分类：</label></div>
+         <div class="col-2 text-r"><label>所属分类&nbsp</label></div>
          <div class="col-4">
           #@Tselect2F()
 	          #@Tselect2Body("docModule" doc?.docModule {"class":"input-text select2"}) 
-        		 #foreach(var:liblist)
+#*        		 #foreach(var:libList)
 	                <option value="${doc?.docModule}">${doc?.docModule}</option>
-	            #end 
+	            #end *#
+	            <option value="1">分类1</option>
 	          #end                	         
               #end
               	</div>
@@ -47,7 +50,7 @@
      #end
      #@elementItem()
         <div class="col-12">
-         <div class="col-2 text-r"><label>文档类型：</label></div>
+         <div class="col-2 text-r"><label>文档类型&nbsp</label></div>
          	<div class="col-4">
           		${doc?.docType}
               	</div>
@@ -55,38 +58,38 @@
      #end
      #@elementItem()
         <div class="col-12">
-         <div class="col-2 text-r"><label>文档标题：</label></div>
+         <div class="col-2 text-r"><label>文档标题&nbsp</label></div>
          		<div class="col-4">
-           	 	#@tinyInput("text" "docTitle" doc.docTitle {"datatype":"*","id":"docTitle","class":"input-text"})${doc?.docTitle}#end
+           	 	#@tinyInput("text" "docTitle" doc?.docTitle {"datatype":"*","id":"docTitle","class":"input-text"})${doc?.docTitle}#end
               	</div>
        	</div>
      #end
      #@elementItem()
         <div class="col-12">
-         <div class="col-2 text-r"><label>关键字：</label></div>
+         <div class="col-2 text-r"><label>关键字&nbsp</label></div>
          		<div class="col-4">
-           	 	#tinyInput("text" "docKeywords" doc.docKeywords {"datatype":"","id":"docKeywords","class":"input-text"})
+           	 	#tinyInput("text" "docKeywords" doc?.docKeywords {"datatype":"","id":"docKeywords","class":"input-text"})
               	</div>
        	</div>
      #end
      #@elementItem()
             <div class="col-12">
-                <div class="col-2 text-r"><label>文档摘要：</label></div>
+                <div class="col-2 text-r"><label>文档摘要&nbsp</label></div>
                 <div class="col-6">
                     #@Teditor("docDigest" "content" {"initialFrameHeight":"150"})${doc?.docDigest}#end</div>
        			</div>
         #end
         #@elementItem(elementId="urlBox" eleItemClass="hidden")
-					#@colLabel()文档URL#end
+					#@colLabel()文档URL&nbsp#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docUrl" doc.docUrl{"placeholder":"相应的链接地址","datatype":"*4-16","id":"docUrl","class":"input-text"})
+					#tinyInput("text" "docUrl" doc?.docUrl{"placeholder":"相应的链接地址","datatype":"*4-16","id":"docUrl","class":"input-text"})
 					#end
 					#end
 				#end
 				
         #@elementItem(elementId="contentBox" eleItemClass="hidden")
-					#@colLabel()文档正文#end
+					#@colLabel()文档正文&nbsp#end
 					#@formControlDiv("col-8")
 						#@tinyueditor("docContent" "docContent")说点什么...最少输入10个字符#end
 					#end					
@@ -94,7 +97,7 @@
 			#end
         #@elementItem()
             <div class="col-12">
-                <div class="col-2 text-r"><label>文档备注：</label></div>
+                <div class="col-2 text-r"><label>文档备注&nbsp</label></div>
 
                 <div class="col-6">
                     #@Teditor("beizhu" "content" {"initialFrameHeight":"150"})应该判断docType的值，如果是网页类型要显示那些编辑框，如果是文件类型要显示哪些框？#end</div>
@@ -102,7 +105,7 @@
         #end
         #@elementItem(elementId="fileBox" eleItemClass="hidden")
     	<div class="col-12">
-         <div class="col-2 text-r"><label>附件：</label></div>
+         <div class="col-2 text-r"><label>附件</label></div>
          	<div class="col-6">
              #include("fileupload.page")
              </div>

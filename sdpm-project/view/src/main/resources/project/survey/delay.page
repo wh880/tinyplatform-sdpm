@@ -1,16 +1,17 @@
 
-#@tinyForm("thisform" "" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/delaysave" "post" {"class":"test"})
+    #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
 	#@elementItem()
         #@colLabel()起始日期#end
         #@formControlDiv("col-8")
-			 #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","nullmsg":"日期不能为空","placeholder":"选择日期"})#end						 
+			 #@tinyDateInput("projectBegin" project?.projectBegin "YYYY-MM-DD" {"style":"width:140px","datatype":"*","nullmsg":"日期不能为空","placeholder":"选择日期"})#end
       	#end
         #@validateDiv("col-2")#end
       #end
       #@elementItem()
         #@colLabel()结束日期#end
         #@formControlDiv("col-8")
-			 #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*","nullmsg":"日期不能为空","placeholder":"选择日期"})#end						 
+			 #@tinyDateInput("projectEnd" project?.projectEnd "YYYY-MM-DD" {"style":"width:140px","datatype":"*","nullmsg":"日期不能为空","placeholder":"选择日期"})#end
       	#end
       	#@validateDiv("col-2")#end
       #end
@@ -18,7 +19,8 @@
         #@colLabel()可用工作日#end
         #@formControlDiv("col-2")
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+            <input name="projectDays" value=${project?.projectDays} type="text" class="form-control" placeholder=""
+                   aria-describedby="basic-addon2">
             <span class="input-group-addon" id="basic-addon2">天</span>
         </div>
 
@@ -28,7 +30,7 @@
      #@elementItem()
         #@colLabel()备注：#end
 	#@formControlDiv("col-8")
-		#@tinyueditor("content" "content")Say something#end
+        #@tinyueditor("content" "content")#end
 	#end
         #@validateDiv("col-2")#end
     #end

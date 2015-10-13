@@ -26,16 +26,18 @@ public class RoleMenuAction extends BaseController {
     public Map<String, String> save(Integer id, String[] ids) {
         List<OrgRoleMenu> list = new ArrayList<OrgRoleMenu>();
         List<OrgRoleMenu> orgRoleMenus = roleMenuService.findMenuByRoleId(id);
-        List<String> orgRoleMenusIds = initMenuIdList(orgRoleMenus);
+        roleMenuService.batchDeleteRoleMenu(orgRoleMenus);
+        // List<String> orgRoleMenusIds = initMenuIdList(orgRoleMenus);
         for (String i : ids) {
-            if (orgRoleMenusIds.contains(i)) {
-                continue;
-            } else {
+
+//            if (orgRoleMenusIds.contains(i)) {
+//                continue;
+//            } else {
                 OrgRoleMenu orgRoleMenu = new OrgRoleMenu();
                 orgRoleMenu.setOrgRoleId(id);
                 orgRoleMenu.setOrgRoleMenuId(i);
                 list.add(orgRoleMenu);
-            }
+            // }
         }
         if (!list.isEmpty()) {
             roleMenuService.batchAddRoleMenu(list);

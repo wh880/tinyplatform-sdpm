@@ -6,7 +6,7 @@
             #end
             #@tbody()
                 #@tr()
-                    #@th()项目名称#end
+                    #@td()项目名称#end
                     #@td()${selProject?.projectName}#end
                 #end
                 #@tr()
@@ -16,6 +16,7 @@
                 #@tr()
                     #@td()起止时间#end
                     #@td()${selProject?.projectBegin}~${selProject?.projectEnd}#end
+                ##                #formatDate(selProject?.projectBegin, "yyyy-MM-dd")~#formatDate(selProject?.projectEnd, "yyyy-MM-dd")
                 #end
                 #@tr()
                     #@td()可用工作日#end
@@ -31,19 +32,19 @@
                 #end
                 #@tr()
                     #@td()项目负责人#end
-                    #@td()${selProject?.projectPM}#end
+                    #@td()${selProject?.projectPm}#end
                 #end
                 #@tr()
                     #@td()产品负责人#end
-                    #@td()${selProject?.projectPO}#end
+                    #@td()${selProject?.projectPo}#end
                 #end
                 #@tr()
                     #@td()测试负责人#end
-                    #@td()${selProject?.projectQD}#end
+                    #@td()${selProject?.projectQd}#end
                 #end
                 #@tr()
                     #@td()发布负责人#end
-                    #@td()${selProject?.projectRD}#end
+                    #@td()${selProject?.projectRd}#end
                 #end
                 #@tr()
                     #@td()相关产品#end

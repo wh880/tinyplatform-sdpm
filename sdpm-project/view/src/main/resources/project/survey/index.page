@@ -6,6 +6,7 @@
 
 #set(name="survey")
 #@div()
+    #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
             #include("/project/dropdownMenu.page")
@@ -21,53 +22,26 @@
             <span class="r">
 				#set(m1=menuManager.getMenu("pro-survey-delay"))
                 #if(m1)
-                    #@aModal("#myModal" selProject.projectName+">延期" "750" "400" "" "/project/survey/delay.pagelet")
-                        #buttonIcon(iconClass="icon-calendar")延期
-                    #end
-                    #@dialog("myModal")
-                        #@dialogHeader()#end
-                        #@dialogBody()
-                            <p></p>
-                        #end
-                        #@dialogFooter()
-                            #@buttonEnsure()确定#end
-                            #@buttonCancel()关闭#end
-                        #end
+
+                    #@aModal(
+                        "#m" selProject.projectName+">延期" "750" "350" "" "/project/delay?projectId="+selProject.projectId)#buttonIcon(iconClass="icon-calendar")延期
                     #end
                 #end
                 #set(m2=menuManager.getMenu("pro-survey-hangon"))
                 #if(m2)
                     #@aModal(
-                        "#myModa2" selProject.projectName+">挂起" "750" "250" "" "/project/survey/hang-up.pagelet")
+                        "#m" selProject.projectName+">挂起" "750" "250" "" "/project/survey/hang-up.pagelet")
                         #buttonIcon(iconClass="icon-pause")挂起
                     #end
-                    #@dialog("myModa2")
-                        #@dialogHeader()#end
-                        #@dialogBody()
-                            <p></p>
-                        #end
-                        #@dialogFooter()
-                            #@buttonEnsure()确定#end
-                            #@buttonCancel()关闭#end
-                        #end
-                    #end
+
                 #end
                 #set(m3=menuManager.getMenu("pro-survey-finish"))
                 #if(m3)
                     #@aModal(
-                        "#myModa3" selProject.projectName+">结束" "750" "250" "" "/project/survey/hang-up.pagelet")
+                        "#m" selProject.projectName+">结束" "750" "250" "" "/project/survey/hang-up.pagelet")
                         #buttonIcon(iconClass="icon-off")结束
                     #end
-                    #@dialog("myModa3")
-                        #@dialogHeader()#end
-                        #@dialogBody()
-                            <p></p>
-                        #end
-                        #@dialogFooter()
-                            #@buttonEnsure()确定#end
-                            #@buttonCancel()关闭#end
-                        #end
-                    #end
+
                 #end
 
                 #foreach(m:menuManager.getScopeMenus("pro-surveymenu2-op"))
@@ -76,17 +50,8 @@
 
                 #set(m4=menuManager.getMenu("pro-survey-remove"))
                 #if(m4)
-                    #@aModal("#myModa4" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
-                    #@dialog("myModa4")
-                        #@dialogHeader()#end
-                        #@dialogBody()
-                            <h4>确定删除吗?</h4>
-                        #end
-                        #@dialogFooter()
-                            #@buttonEnsure()确定#end
-                            #@buttonCancel()关闭#end
-                        #end
-                    #end
+                    #@aModal("#m" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
+
                 #end
 
 				</span>
@@ -94,39 +59,27 @@
             #end
         #end
 
-    <div style="width:70%;float:left">
-        #@div(divClass="infoContent")
-            <p class="titleName">
-                项目描述
-            </p>
 
-            <div>
-                ${selProject.projectDesc}
-            </div>
-        #end
-        #@div(divClass="infoContent")
-            <p class="titleName">历史记录</p>
-        ##加入后，js代码会导致页面排版混乱
-            #include("/project/recordlist.page")
-        #end
-    </div>
-    <div style="width:30%;float:right">
-        #TypeInfo("project")
-    </div>
     #end
 #end
+<div class="infoPage-left">
+    #@div(divClass="infoContent")
+        <p class="titleName">
+            项目描述
+        </p>
 
+        <div>
+            ${selProject.projectDesc}
+        </div>
+    #end
+    #@div(divClass="infoContent")
+        <p class="titleName">历史记录</p>
+    ##加入后，js代码会导致页面排版混乱
+        #include("/project/recordlist.page")
+    #end
+</div>
+<div class="infoPage-right">
+    #TypeInfo("project", selProject?.projectId)
+</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+#@simpleModal("m" "")#end

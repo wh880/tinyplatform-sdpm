@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="myproduct" parent-id="0" name="产品" href="productLine" icon="icon-desktop" sort="800"
+<menu id="myproduct" parent-id="0" name="产品" href="/productLine/toProduct" icon="icon-desktop" sort="800"
       isShow="1" permission="Permission">
 
     <menu id="product-demand" parent-id="myproduct" name="需求" href="/product/story?currentPageId=3"
@@ -13,7 +13,7 @@
         <menu id="product-demand-close" name="需求关闭" href="/product/story/productDemandClose/findPager?storyId=${story.storyId}"
               icon="icon-off" sort="53" isShow="1"
               scope="product-de"/>
-        <menu id="product-demand-edit" name="需求编辑" href="/product/storySpec/find?storyId=${story.storyId}" icon="icon-pencil"
+        <menu id="product-demand-edit" name="需求编辑" href="/product/storySpec/find?stozryId=${story.storyId}" icon="icon-pencil"
               sort="52" isShow="1"
               scope="product-de"/>
         <menu id="product-demand-input" name="导入" href="/product/page/tabledemo/product-import.pagelet"
@@ -23,7 +23,7 @@
         <menu id="product-demand-output" name="导出" href="" icon=""
               sort="50" isShow="1"
               scope="product-io"/>
-        <menu id="product-demand-report" name="报表" href="/product/page/tabledemo/product-report.page"
+        <menu id="product-demand-report" name="报表" href="/product/story/report"
               icon="icon-bar-chart"
               sort="49" isShow="1"
               scope="product-io"/>
@@ -226,7 +226,7 @@
  		<menu id="aboutbug" name="删除" href="/quality/bug/delete?bugId=${bug.bugId}" icon="icon-remove" sort="1" isShow="1" scope="release-linkbug"/>
     </menu>
 
-    <menu id="product-roadmap" parent-id="myproduct" name="路线图" href="/product/page/project/product-roadmap.page"
+    <menu id="product-roadmap" parent-id="myproduct" name="路线图" href="/product/common/roadMap"
           sort="12" isShow="1" permission="Permission"></menu>
 
     <menu id="product-archive" parent-id="myproduct" name="文档" href="/product/page/project/archive-list.page"
@@ -237,12 +237,17 @@
         <menu id="product-archive-badel" name="批量删除" href="" icon="" sort="9" isShow="1" scope="archive-badel"/>
         <menu id="product-archive-add" name="创建文档" href="" icon="" sort="8" isShow="1" scope="archive-add"/>
 
+        <menu id="product-archive-edit" name="编辑" href="/document/doc/edit?docId=${l.docId}" icon="icon-pencil" sort="7" isShow="1" scope="archive-oper"/>
+
+        <menu id="product-archive-del" name="删除" href="/document/doc/delete?docId=${l.docId}" icon="icon-remove" sort="6" isShow="1" scope="archive-oper"/>
+
+
     </menu>
 
     <menu id="product-project" parent-id="myproduct" name="项目" href="/product/page/project/product-project-list.page"
           sort="10" isShow="1" permission="Permission"></menu>
 
-    <menu id="product-modular" parent-id="myproduct" name="模块" href="/product/page/project/product-modular.page"
+    <menu id="product-modular" parent-id="myproduct" name="模块" href="/system/module/findProductModule?moduleParent=0"
           sort="9" isShow="1" permission="Permission"></menu>
 
     <menu id="product-overview" parent-id="myproduct" name="概况" href="/product/find/overview?productId=${sessionProductId}" sort="8"

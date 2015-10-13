@@ -19,11 +19,13 @@ package org.tinygroup.sdpm.product.dao.impl;
 import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
+import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.select.Join.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,6 +45,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
@@ -331,4 +334,35 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         });
 
     }
+	
+	public List<ProductAndLine> getProductAndLine(Product t){
+		
+		if(t==null){
+			t = new Product();
+		}
+		Select select = select(PRODUCTTABLE.PRODUCT_ID,PRODUCTTABLE.PRODUCT_NAME,PRODUCT_LINETABLE.PRODUCT_LINE_ID,PRODUCT_LINETABLE.PRODUCT_LINE_NAME)
+				.from(PRODUCTTABLE).join(leftJoin(PRODUCT_LINETABLE, PRODUCTTABLE.PRODUCT_LINE_ID.eq(PRODUCT_LINETABLE.PRODUCT_LINE_ID))).where(
+						and(
+								PRODUCTTABLE.COMPANY_ID.eq(t.getCompanyId()),
+								PRODUCTTABLE.DEPT_ID.eq(t.getDeptId()),
+								PRODUCTTABLE.PRODUCT_LINE_ID.eq(t.getProductLineId()),
+								PRODUCTTABLE.PRODUCT_NAME.eq(t.getProductName()),
+								PRODUCTTABLE.PRODUCT_CODE.eq(t.getProductCode()),
+								PRODUCTTABLE.PRODUCT_ORDER.eq(t.getProductOrder()),
+								PRODUCTTABLE.PRODUCT_STATUS.eq(t.getProductStatus()),
+								PRODUCTTABLE.PRODUCT_DESC.eq(t.getProductDesc()),
+								PRODUCTTABLE.PRODUCT_OWNER.eq(t.getProductOwner()),
+								PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(t.getProductQualityManager()),
+								PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(t.getProductDeliveryManager()),
+								PRODUCTTABLE.ACL.eq(t.getAcl()),
+								PRODUCTTABLE.PRODUCT_WHITE_LIST.eq(t.getProductWhiteList()),
+								PRODUCTTABLE.PRODUCT_CREATED_BY.eq(t.getProductCreatedBy()),
+								PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(t.getProductCreatedDate()),
+								PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(t.getProductCreatedVersion()),
+								PRODUCTTABLE.DELETED.eq(t.getDeleted())));
+		return getDslSession().fetchList(select, ProductAndLine.class);
+		
+		/*select product.product_id,product.product_name,product_line.product_line_id,product_line.product_line_name  
+		 * from product left join product_line on product.product_line_id=product_line.product_line_id;*/
+	}
 }

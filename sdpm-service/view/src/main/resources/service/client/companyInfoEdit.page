@@ -1,4 +1,3 @@
-
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
@@ -14,32 +13,42 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/client/clientUserUpdate" "post" {"class":"test"})
 <input type="hidden" name="id" value="${clientUser?.id}"/>
 <input type="hidden" name="clientId" value="${clientUser?.clientId}"/>
-    #@noRespsGridSystem()
-            #@gridSysRow()
-            <span class="c-red">${star}</span>
-                #@colLabel("col-3")客户联系人：#end
-                #@gridSysCol(5)
-                    #tinyInput("text" "userAccount" clientUser?.userAccount {"datatype":"*","nullmsg":"客户联系人不能为空","id":
-                        "user_account",
-                        "class":""})
-                #end
-            #end
-            #@gridSysRow()
-                #@colLabel("col-3")联系人职务：#end
-                #@gridSysCol(5)
-                    #tinyInput(
-                        "text" "userPost" clientUser?.userPost {"datatype":"","id":"user_post","class":"input-text"})
-                #end
-            #end
-        #@gridSysRow()
-            #@colLabel("col-3")联系人电话：#end
-            #@gridSysCol(5)
-                #tinyInput(
-                    "text" "userPhone" clientUser?.userPhone {"datatype":"","id":"user_phone","class":"input-text"})
-            #end
+##    #@noRespsGridSystem()
+    #@elementItem()
+
+        #@colLabel("col-3")<span class="c-red">*</span>客户联系人：#end
+        #@formControlDiv("col-6")
+            #tinyInput("text" "userAccount" clientUser?.userAccount {"datatype":"*","nullmsg":"客户联系人不能为空","id":
+                "user_account","class":""})
         #end
+        #@validateDiv("col-3")#end
     #end
+    #@elementItem()
+        #@colLabel("col-3")联系人职务：#end
+        #@formControlDiv("col-6")
+            #tinyInput("text" "userPost" clientUser?.userPost {"datatype":"","id":"user_post","class":"input-text"})
+        #end
+        #@validateDiv("col-3")#end
+    #end
+    #@elementItem()
+        #@colLabel("col-3")<span class="c-red">*</span>联系人电话：#end
+        #@formControlDiv("col-6")
+            #tinyInput(
+                "text" "userPhone" clientUser?.userPhone {"datatype":"/^[0-9\.]{11,12}$/","nullmsg":"客户电话不能为空","id":
+                "user_phone","class":""})
+        #end
+        #@validateDiv("col-3")#end
+    #end
+
+##    #end
 #end
 
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
 
+        });
+    });
+</script>
 

@@ -32,7 +32,7 @@ public interface DocService {
 	//delete
 	public int deleteDocById(Integer id);
 	public int deleteDoclibById(Integer id);
-	public int deleteDocByIds(Integer... keys);
+	public int[] deleteDocByIds(List<DocumentDoc> ids);
 	
 
 }

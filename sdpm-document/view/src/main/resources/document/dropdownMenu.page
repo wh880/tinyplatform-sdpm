@@ -1,9 +1,8 @@
 #import("/org/tinygroup/publicComponent/macro/navselect.component")
-#set(libId = libId == null?libList?.get(0)?.docLibId:docLibId)
 
 #@navSelect2("docLibName" "lib-id")
 	#@navSelect2Nav()
-	#if(libId)
+	#if(documentLibId)
 		#for(lib : libList)
 			#if(lib?.docLibId == documentLibId)
 				${lib?.docLibName}
@@ -17,7 +16,9 @@
 		  <option value=""></option>
 		  <optgroup label="文档">
 		  #foreach(doclib:libList)
-		  <option value="${doclib?.docLibId}">${doclib?.docLibName}</option>
+		  #if(doclib?.docLibDeleted != "1")
+		 	 <option value="${doclib?.docLibId}">${doclib?.docLibName}</option>
+		  #end
 		  #end
 		  </optgroup>
 		#end

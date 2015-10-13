@@ -9,11 +9,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +39,12 @@ public class TaskAction extends BaseController {
     private ProjectService projectService;
     @Autowired
     private TeamService teamService;
+    @Autowired
+    private ModuleService moduleService;
+    @Autowired
+    private ProjectStoryService storyService;
+    @Autowired
+    private StoryService productStoryService;
 
     @RequestMapping("index")
     public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model) {
@@ -80,9 +93,13 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/call")
-    public String call(Integer taskId, Model model) {
+    public String call(Integer taskId, Model model, HttpServletRequest request) {
         if (taskId != null) {
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
             ProjectTask task = taskService.findTask(taskId);
+            List<ProjectTeam> team = teamService.findTeamByProjectId(projectId);
+
+            model.addAttribute("teamList", team);
             model.addAttribute("task", task);
             //还需要查询其他相关任务剩余时间的信息
             return "project/task/call.page";
@@ -91,10 +108,13 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/finish")
-    public String finish(Integer taskId, Model model) {
+    public String finish(Integer taskId, Model model, HttpServletRequest request) {
         if (taskId != null) {
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+            List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
             ProjectTask task = taskService.findTask(taskId);
             model.addAttribute("task", task);
+            model.addAttribute("teamList", teamList);
             //还需要查询其他相关任务剩余时间的信息
             return "project/task/finish.page";
         }
@@ -142,12 +162,15 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/findPager")
-    public String findPager(Integer start, Integer limit, String order, String ordertype, String statu, String choose, String group, Integer projectId, Model model, HttpServletRequest request) {
+    public String findPager(Integer start, Integer limit, String order, String ordertype, String statu, String choose, String group, Integer projectId, Model model, HttpServletRequest request, Integer moduleId) {
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;
         }
         ProjectTask task = new ProjectTask();
+        if (moduleId != null) {
+            task.setTaskModel(moduleId);
+        }
         task.setTaskProject(projectId);
         Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, TaskStatusUtil.getCondition(statu, choose, request), group);
         model.addAttribute("taskPager", taskPager);
@@ -169,23 +192,26 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/closesave", method = RequestMethod.POST)
-    public String closesave(ProjectTask task, Model model) {
-        if (task.getTaskId() == null) {
-            taskService.addTask(task);
-        } else {
-            taskService.updateCloseTask(task);
-        }
-        model.addAttribute("task", task);
+    public String closesave(ProjectTask task, Model model, SystemAction systemAction) {
+        taskService.updateCloseTask(task);
+
+        systemAction.setActionObjectId(task.getTaskId());
+        systemAction.setActionProject(task.getTaskProject());
+        systemAction.setActionObjectType("task");
+        systemAction.setActionActor("close");
+        logService.log(systemAction);
         return "project/task/index.page";
     }
 
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public String editSave(ProjectTask task, Model model) {
-        if (task.getTaskId() == null) {
-            taskService.addTask(task);
-        } else {
-            taskService.updateEditTask(task);
-        }
+    public String editSave(ProjectTask task, Model model, SystemAction systemAction) {
+        taskService.updateEditTask(task);
+
+        systemAction.setActionObjectId(task.getTaskId());
+        systemAction.setActionProject(task.getTaskProject());
+        systemAction.setActionObjectType("task");
+        systemAction.setActionActor("close");
+        logService.log(systemAction);
         model.addAttribute("task", task);
         return "project/task/index.page";
     }
@@ -224,10 +250,25 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/preadd")
-    public String preadd(HttpServletRequest request, Model model) {
+    public String preadd(HttpServletRequest request, Model model, Integer storyId) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
 
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
+        SystemModule module = new SystemModule();
+        module.setModuleType("project");
+        module.setModuleRoot(projectId);
+        List<SystemModule> moduleList = moduleService.findModuleList(module);
+        List<ProductStory> storyList = storyService.findStoryByProject(projectId);
+        ProductStory story = new ProductStory();
+        if (storyId != null) {
+            story = productStoryService.findStory(storyId);
+            model.addAttribute("story", story);
+        }
+
+
+        model.addAttribute("moduleList", moduleList);
+        model.addAttribute("storyList", storyList);
+
         return "project/task/add.page";
     }
 
@@ -248,6 +289,26 @@ public class TaskAction extends BaseController {
         model.addAttribute("task", task);
 
         return "project/task/IDLink.page";
+    }
+
+    @RequestMapping("/basicInfoEdit")
+    public String basicInfoEdit(Integer taskId, Model model) {
+        ProjectTask task = taskService.findTask(taskId);
+        String projectName = projectService.findById(task.getTaskProject()).getProjectName();
+        List<ProjectTeam> teamList = teamService.findTeamByProjectId(task.getTaskProject());
+        SystemModule systemModule = new SystemModule();
+        systemModule.setModuleRoot(task.getTaskProject());
+        systemModule.setModuleType("project");
+        List<SystemModule> modulesList = moduleService.findModuleList(systemModule);
+
+        List<ProductStory> storyList = storyService.findStoryByProject(task.getTaskProject());
+
+        model.addAttribute("task", task);
+        model.addAttribute("projectName", projectName);
+        model.addAttribute("teamList", teamList);
+        model.addAttribute("modulesList", modulesList);
+        model.addAttribute("storyList", storyList);
+        return "project/task/basicInfoEdit.pagelet";
     }
 
 }

@@ -13,6 +13,7 @@ import org.tinygroup.sdpm.product.dao.ProductStorySpecDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
+import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -91,6 +92,20 @@ public class StoryManagerImpl implements StoryManager{
 	public List<ProductStory> findList(Integer... storyId) {
 
 		return productStoryDao.getByKeys(storyId);
+	}
+
+
+
+	public List<StoryCount> productStoryCount(ProductStory story) {
+
+		return productStoryDao.productStoryCount(story);
+	}
+
+
+
+	public List<StoryCount> modelStoryCount(ProductStory story) {
+
+		return productStoryDao.modelStoryCount(story);
 	}
 
 

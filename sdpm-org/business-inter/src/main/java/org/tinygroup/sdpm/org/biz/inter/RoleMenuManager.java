@@ -58,5 +58,7 @@ public interface RoleMenuManager {
 
     void batchAdd(List<OrgRoleMenu> orgRoleMenuList);
 
+    void batchDelete(List<OrgRoleMenu> orgRoleMenuList);
+
 
 }

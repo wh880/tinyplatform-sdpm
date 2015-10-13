@@ -72,4 +72,4 @@
 #end
 
 #simpleModal(editpageModalId)
-#fullCalendarInit("#external-events .fc-event" "#calendar")
+###fullCalendarInit("#external-events .fc-event" "#calendar")

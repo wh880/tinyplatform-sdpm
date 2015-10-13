@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.template.rumtime.convert.IntegerBigDecimal;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -74,7 +73,7 @@ public class BeforeAction {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
         Project project = projectService.findById(projectId);
         model.addAttribute("project", project);
-        return "project/survey/index.page";
+        return "/project/survey/index.page";
     }
 
     @RequestMapping("/select")
@@ -85,6 +84,12 @@ public class BeforeAction {
         request.getSession().setAttribute("selProject", selProject);
         request.getSession().setAttribute("projectList", list);
         return "redirect:" + oldUrl;
+    }
+
+    @RequestMapping("/selModel")
+    public String selModel(Integer moduleId) {
+
+        return "redirect:/project/task/index.page?moduleId=" + moduleId;
     }
 
 }

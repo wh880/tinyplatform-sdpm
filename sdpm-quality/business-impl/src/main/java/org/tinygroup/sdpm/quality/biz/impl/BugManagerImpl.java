@@ -12,6 +12,7 @@ import org.tinygroup.sdpm.quality.biz.inter.BugManager;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.expression.FragmentExpressionSql;
 
 @Service        
 @Transactional  
@@ -42,12 +43,12 @@ public class BugManagerImpl implements BugManager {
 		return bugdao.batchUpdate(bugs);
 	}
 	
-	public Pager<QualityBug> findPager(Integer start,Integer limit,QualityBug bug,String sortName,boolean asc){
+	public Pager<QualityBug> findPager(Integer start,Integer limit,String conditions,QualityBug bug,String sortName,boolean asc){
 		if(StringUtil.isBlank(sortName)){
-			return bugdao.queryPager(start, limit, bug);
+			return bugdao.queryPager(start,limit,(((conditions!=null&&!"".equals(conditions))? FragmentExpressionSql.fragmentCondition(conditions):null)),bug);
 		}else{
 			OrderBy orderby = new OrderBy(sortName,asc);
-			return bugdao.queryPager(start, limit, bug, orderby);
+			return bugdao.queryPager(start, limit, (((conditions!=null&&!"".equals(conditions))?FragmentExpressionSql.fragmentCondition(conditions):null)), bug, orderby);
 		}		
 	}
 

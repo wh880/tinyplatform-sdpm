@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
+import org.tinygroup.sdpm.org.service.inter.RoleMenuService;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
+import org.tinygroup.sdpm.org.service.inter.RoleUserService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.HashMap;
@@ -20,6 +22,10 @@ import java.util.Map;
 public class RoleAction extends BaseController {
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private RoleMenuService roleMenuService;
+    @Autowired
+    private RoleUserService roleUserService;
 
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
@@ -39,6 +45,24 @@ public class RoleAction extends BaseController {
         }
         model.addAttribute("role", role);
         return "redirect:/org/privilege/list/";
+    }
+
+
+    @RequestMapping("/copyRole")
+    public String copyRole(Integer orgRoleId, String orgRoleName, String orgRoleRemarks, String[] copyPart) {
+        OrgRole orgRole1 = new OrgRole();
+        orgRole1.setOrgRoleName(orgRoleName);
+        orgRole1.setOrgRoleRemarks(orgRoleRemarks);
+        OrgRole orgRole2 = roleService.addRole(orgRole1);
+        Integer orgRoleIdNew = orgRole2.getOrgRoleId();
+        for (String check : copyPart) {
+            if (check.equals("copyPrivilege")) {
+                roleMenuService.copyRoleMenu(orgRoleIdNew, orgRoleId);
+            } else {
+                roleUserService.copyRoleUser(orgRoleIdNew, orgRoleId);
+            }
+        }
+        return "redirect:/org/privilege/list";
     }
 
     @ResponseBody

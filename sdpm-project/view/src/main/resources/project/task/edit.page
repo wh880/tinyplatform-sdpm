@@ -7,6 +7,8 @@
 #import("/org/tinygroup/table/components/table.component")
 #import("/org/tinygroup/icon/components/icon.component")
 #set(name="task")
+
+
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -22,22 +24,16 @@
 #end
 
 ###macro tinyForm(formname action method formMapInfo)
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/editsave" "post" {"class":"test","enctype":"multipart/form-data"})
+#@tinyForm(
+    "thisform" TINY_CONTEXT_PATH+"/project/task/editsave" "post" {"class":"test","enctype":"multipart/form-data"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
-##    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
-##    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
-##    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
-##    #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue=task?.taskStatus)
-
-<div style="width:70%;float:left" class="">
-
+    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
+<div class="infoPage-left">
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>编辑</p>
-
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>任务描述：</label></div>
-
                 <div class="col-9">
                     #@Teditor("content" "taskDesc" {"initialFrameHeight":"150"})${task?.taskDesc}#end</div>
             </div>
@@ -47,7 +43,7 @@
                 <div class="col-2 text-r"><label>备注：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("contents" "contents" {"initialFrameHeight":"150"})Say something#end</div>
+                    #@Teditor("contents" "actionComment" {"initialFrameHeight":"150"})#end</div>
             </div>
         #end
         #@elementItem()
@@ -66,8 +62,6 @@
                 </table>
             </div>
         #end
-
-
     </div>
     </div>
     #@elementItem()
@@ -75,13 +69,10 @@
             <div class="col-5">
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn" >保存</button>
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-               ## <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>
-                   #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
-                ##   <button onclick="javascript:history.go(-1)" style="float: left" type="submit" id="submit" class="backBtn">返回</button>
-
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
             </div>
             <div class="col-5"></div>
         </div>
@@ -93,12 +84,15 @@
 
     #end
 </div>
-<div style="width:30%;float:right">
-    #TypeInfo("projectEdit")
+<div class="infoPage-right">
+    #TypeInfo("projectEdit", task?.taskId)
 </div>
 
 #end
 
 <script>
     $('select.select2').select2()
+    $(function () {
+        $("form").Validform({});
+    })
 </script>

@@ -13,33 +13,81 @@
 			##operationbar end
 		
 #@timeMainBox()
+#set(planClass="org.tinygroup.sdpm.product.dao.pojo.ProductPlan")
+#set(releaseClass="org.tinygroup.sdpm.product.dao.pojo.ProductRelease")
+#set(timeYear="0")
+#set(endindex=1)
+	#foreach(roadMap:list)
+##	${formatDate(list?[roadMapFor.index]?.planEndDate?list?[roadMapFor.index]?.planEndDate:list?[roadMapFor.index]?.releaseDate,'yyyy')}
+##	${formatDate(roadMap?.planEndDate?roadMap?.planEndDate:roadMap?.releaseDate,'yyyy')}
+	
+	#if(roadMapFor.last||formatDate(roadMap?.planEndDate?roadMap?.planEndDate:roadMap?.releaseDate,'yyyy')!=formatDate(list?[roadMapFor.index]?.planEndDate?list?[roadMapFor.index]?.planEndDate:list?[roadMapFor.index]?.releaseDate,'yyyy'))
+		
+		#@historyMenu()
+        #@year("roadMapFor.index" "#")${formatDate(roadMap?.planEndDate?roadMap?.planEndDate:roadMap?.releaseDate,'yyyy')}年#end
+			#foreach(road:list)
+				#if(roadFor.index>=endindex&&roadFor.index<=roadMapFor.index)
+					#set(compTime=road?.planEndDate?road?.planEndDate:road?.releaseDate)
+					#@dateItem()
 
-    #@historyMenu()
+			            #dateHead(formatDate(compTime,'yyyy') formatDate(compTime,'MM') formatDate(compTime,'dd'))
+			
+			            #if(road?.planEndDate)
+							#@dateBody(road?.planName) 
+								[${formatDate(road?.planBeginDate,"yyyy.MM.dd")}--${formatDate(road?.planBeginDate,"yyyy.MM.dd")}] <br/>
+								${road?.planSpec} 
+							#end
+						#else
+							#@dateBody(road?.releaseName) ${road?.releaseDesc}  #end	
+						#end
+			
+			        #end
+					
+					
+					
+				#end
+				#if(roadFor.index==roadMapFor.index)
+					#set(endindex=roadMapFor.index+1)
+					#break
+				#end
+				
+			#end
+			
+		#end
+	#end
+		
+		
+		
+	#end
+#*		#set(compTime=roadMap?.planEndDate?roadMap?.planEndDate:roadMap?.releaseDate)	
+			
+		${formatDate(compTime,'yyyy')}==${timeYear}
+		#if(formatDate(compTime,'yyyy')!=timeYear)
+			#set(timeYear=formatDate(compTime,'yyyy'))
+			#@historyMenu()
+			#@year(roadMapFor.index "#") ${formatDate(compTime,'yyyy')}年 #end
+		#end
+		
+		
+				
+			#@dateItem()
 
-      #@year("first" "#")2015年#end
-
-      #@dateItem("green")
-
-          #dateHead("2015" "06" "08")
-
-          #@dateBody("发布全新Tiny框架的2.0版本")升级全新默认界面和工具；新增组件等功能#end
-
-      #end
-
-
-
-     #@dateItem()
-
-       #dateHead("2015" "04" "19")
-
-       #@dateBody("Tiny框架升级到1.2")新增支持度全球最好，修复BUG：#end
-
-      #end
-
-  #end
-
- 
-
+	         	#dateHead(formatDate(compTime,'yyyy') formatDate(compTime,'MM') formatDate(compTime,'dd'))
+				
+				#if(roadMap?.planEndDate)
+					#@dateBody(map?.planName) ${map?.planSpec}  #end
+				#else
+					#@dateBody(map?.releaseName) ${map?.releaseDesc}  #end	
+				#end
+	
+	     	#end
+			*#
+		
+		
+	
+	
+	
+	
 #end
 		
 #end
