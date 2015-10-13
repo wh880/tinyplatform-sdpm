@@ -15,7 +15,9 @@ import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -54,6 +56,8 @@ public class BugAction extends BaseController {
 	private TaskService taskService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private BuildService buildService;
 
 	@RequestMapping("")
 	public String form(String get,QualityBug bug, HttpServletRequest request){
@@ -173,9 +177,12 @@ public class BugAction extends BaseController {
 	
 	@RequestMapping("/toSolve")
 	public String solve(Integer bugId,Model model){
+//		List<ProjectBuild> projectBuilds = buildService.findPager()
 		QualityBug bug = new QualityBug();
 		bug = bugService.findById(bugId);
 		bug.setBugResolvedDate(new Date());
+		List<OrgUser> orgUsers = userService.findUserList(null);
+		model.addAttribute("userList",orgUsers);
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/solution.page";
 	}
@@ -183,7 +190,6 @@ public class BugAction extends BaseController {
 	public String solve(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
 		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
 		bug.setBugResolvedBy(user != null?user.getOrgUserId():"0");
-		bug.setBugResolvedDate(new Date());
 		bug.setBugStatus("2");
 		bugService.updateBug(bug);
 
@@ -252,8 +258,11 @@ public class BugAction extends BaseController {
 	
 	@RequestMapping("/editionPaging")
 	public String editionPaging(Integer bugId,Model model){
-		QualityBug bug = new QualityBug();
-		bug = bugService.findById(bugId);
+		QualityBug bug = bugService.findById(bugId);
+		List<Project> projects = projectService.findProjectList(null,null,null);
+		List<OrgUser> orgUsers = userService.findUserList(null);
+		model.addAttribute("projectList",projects);
+		model.addAttribute("userList",orgUsers);
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/editionpaging.pagelet";
 	}

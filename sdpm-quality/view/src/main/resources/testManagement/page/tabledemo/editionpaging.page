@@ -9,30 +9,40 @@
                 #@tr()
                     #@th()所属产品#end
                     #@td()
-                      #@Tselect2F()
-	                   		 #@Tselect2Body("productId" bug?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">产品2</option>
-	                        <option value="2">产品3</option>
-	                        <option value="3">产品4</option>
-	                        <option value="4">产品5</option>
-	                        <option value="5">产品1</option>
-	                    	#end                  
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
-                	  #end
+                        #@Tselect2F()
+                        #@Tselect2Body("productId" bug?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #foreach(product : qualityProductList)
+                        <option value="${product?.productId}">${product?.productName}</option>
+                        #end
+                        #end
+                        <script type="text/javascript">
+                            $("#${sid}").on("change",function(){
+                                var pId = $("#${sid}  option:selected").val();
+                                ajaxRead("${sid}","moduleId","moduleId","moduleTitle","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId?:0});
+
+                            })
+                        </script>
+                        #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
+                        <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
+                        #end
                 	 #end
                  #end
                 #@tr()
                     #@th()所属模块#end
-                    #@td() 
-	                   #@Tselect2F()
-	                   		 #@Tselect2Body("moduleId" bug?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">/1/2</option>
-	                        <option value="2">/2/3</option>
-	                        <option value="3">/3/4</option>
-	                    	#end                
-                	  #end
+                    #@td()
+                        #@Tselect2F()
+                        #@Tselect2Body("moduleId" bug?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="0">/</option>
+                        #end
+                        <script type="text/javascript">
+                            $("#${sid}").on("change",function(){
+                                var mId = $("#${sid}  option:selected").val();
+                                var pId = $("select[name=productId]  option:selected").val();
+                                ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId+"&moduleId="+mId,${bug?.storyId?:0});
+                            })
+                        </script>
+                        #end
                 	 #end
                 #end
                 #@tr()
@@ -97,13 +107,15 @@
                 #@tr()
                     #@th()指派给#end
                     #@td()
-                         #@Tselect2F()
-	                   		 #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">A</option>
-	                        <option value="MD">B</option>
-	                        <option value="ME">C</option>
-	                    	#end                
-                	  	#end
+                        #@Tselect2F()
+                        #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="0">/</option>
+                        #foreach(user : userList)
+                        <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+                        #end
+                        #end
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                        #end
                         #@validateDiv("col-2")#end
                     #end
                 #end
@@ -165,13 +177,13 @@
                 #@tr()
                     #@th()抄送给#end
                     	#@td()
-                    	#@Tselect2F()
-	                   		 #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-		                        <option value="IN">A</option>
-		                        <option value="ME">B</option>
-		                        <option value="MD">C</option>
-	                    	#end                
-                	  	#end
+                            #@Tselect2F()
+                            #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(user : userList)
+                            <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+                            #end
+                            #end
+                            #end
                 	  	#end
                     #end
                 #end
@@ -187,32 +199,52 @@
                 #@tr()
                     #@th()所属项目#end
                     #@td()
-                    #@Tselect2F()
-	                   		 #@Tselect2Body("projectId" bug?.projectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">项目1</option>
-	                        <option value="2">项目2</option>
-	                        <option value="3">项目3</option>
-	                    	#end                
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
-	                    	#end
-                	#end
+                        #@Tselect2F()
+                        #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #foreach(project : projectList)
+                        <option value="${project?.projectId}">${project?.projectName}</option>
+                        #end
+                        #end
+                        <script type="text/javascript">
+                            $("#${sid}").on("change",function(){
+                                var pId = $("#${sid}  option:selected").val();
+
+                                ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0});
+
+
+                            })
+                        </script>
+                        #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
+                        <a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
+                        #end
+                        #end
                  #end
                 #end
+                    #@tr()
+                    #@th()相关需求#end
+                    #@td()
+                        #@Tselect2F()
+                        #@Tselect2Body("storyId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+                        #end
+                        #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
+                        <a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">全部</a>#end
+                        #end
+                    #end
+                    #end
                 #@tr()
                     #@th()相关任务#end
                     #@td()
-                    #@Tselect2F()
-	                   		 #@Tselect2Body("taskId" bug?.taskId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">任务1</option>
-	                        <option value="2">任务2</option>
-	                        <option value="3">任务3</option>
-	                    	#end                
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/project/task/add.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/project/task/index.page">全部</a>#end
-                	  #end
+                        #@Tselect2F()
+                        #@Tselect2Body("taskId" bug?.taskId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+                        #end
+                        #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH}/project/task/add.page" class="r ">增加</a>
+                        <a href="${TINY_CONTEXT_PATH}/project/task/index.page">全部</a>#end
+                        #end
                     #end
                 #end
             #end
@@ -228,13 +260,15 @@
                 #@tr()
                     #@th()由谁创建#end
                     #@td()
-                    #@Tselect2F()
-	                   		 #@Tselect2Body("bugOpenedBy" bug?.bugOpenedBy {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">A</option>
-	                        <option value="ME">B</option>
-	                        <option value="MD">C</option>
-	                    	#end                
-                	  #end
+                        #@Tselect2F()
+                        #@Tselect2Body("bugOpenedBy" bug?.bugOpenedBy?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="0">/</option>
+                        #foreach(user : userList)
+                        <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+                        #end
+                        #end
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                        #end
                     #end
                 #end
                 #@tr()
@@ -252,23 +286,22 @@
                 #@tr()
                     #@th()解决者#end
                     #@td()
-                        #@Tselect2F()
-	                   		 #@Tselect2Body("bugResolvedBy" bug?.bugResolvedBy {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">Connecticut</option>
-	                        <option value="DE">Delaware</option>
-	                        <option value="FL">Florida</option>
-	                        <option value="GA">Georgia</option>
-	                        <option value="IN">Indiana</option>
-	                        <option value="ME">Maine</option>
-	                        <option value="MD">Maryland</option>
-	                    	#end                
-	                  	  #end
+                            #@Tselect2F()
+                            #@Tselect2Body("bugResolvedBy" bug?.bugResolvedBy?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="0">/</option>
+                            #foreach(user : userList)
+                            <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+                            #end
+                            #end
+                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                            #end
                         #@validateDiv("col-2")#end
                     #end
                 #end
                 #@tr()
                     #@th()解决日期#end
-                    #@td()#tinyInput("text" "bugResolvedDate" bug?.bugResolvedDate {"datatype":"","id":"抄送给","class":"input-text"})
+                    #@td()
+                        #@tinyDateInput("bugResolvedDate" formatDate(bug?.bugResolvedDate,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空"})#end
                     #end
                 #end
                 #@tr()
@@ -289,9 +322,9 @@
                     #@td()
                     #@Tselect2F()
 	                   		 #@Tselect2Body("bugResolution" bug?.bugResolution {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">方案1</option>
-	                        <option value="ME">方案2</option>
-	                        <option value="MD">方案3</option>
+	                        <option value="1">方案1</option>
+	                        <option value="2">方案2</option>
+	                        <option value="3">方案3</option>
 	                    	#end                
                 	  #end
                 	  #end
@@ -299,13 +332,15 @@
                 #@tr()
                     #@th()由谁关闭#end
                     #@td()
-                        #@Tselect2F()
-	                   		 #@Tselect2Body("bugClosedBy" bug?.bugClosedBy {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">A</option>
-	                        <option value="ME">B</option>
-	                        <option value="MD">C</option>
-	                    	#end                
-	                   #end
+                            #@Tselect2F()
+                            #@Tselect2Body("bugClosedBy" bug?.bugClosedBy?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="0">/</option>
+                            #foreach(user : userList)
+                            <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+                            #end
+                            #end
+                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                            #end
                         #@validateDiv("col-2")#end
                     #end
                 #end
@@ -318,7 +353,7 @@
                 #@tr()
                     #@th()关闭日期#end
                     #@td()
-                    	#@tinyDateInput("bugClosedDate" bug?.bugClosedDate "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end
+                        #@tinyDateInput("bugClosedDate" formatDate(bug?.bugClosedDate,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空"})#end
                     #end
                 #end               
             #end
@@ -356,3 +391,44 @@
 <script>
 	$('select.select2').select2()
 </script>
+    <script type="text/javascript">
+        $(".select2").select2();
+
+        function ajaxRead(id,toName,opKey,opvalue,url,value){
+            var selectCheck = "select[name="+toName+"]";
+            $(selectCheck).each(function(){
+                var sele = $(this);
+                var s;
+                $.ajax({
+                    type: "POST",
+                    url: "${TINY_CONTEXT_PATH}"+url,
+                    data: $(this).attr('data'),
+                    dataType:"json",
+                    success: function(data){
+                        sele.empty();
+                        var em = "<option value='0' selected  >/</option>";
+                        sele.append(em);
+                        for(var i=0,l=data.length;i<l;i++){
+                            var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+                            sele.append(em);
+
+                        }
+
+                        if(value!=null) {
+                            sele.val(value).trigger("change");
+                        }else {
+                            sele.val(data[0][opKey]).trigger("change");
+                        }
+
+
+                    },
+                    error: function(res){
+                        alert("失败");
+                    }
+                });
+
+
+            });
+
+        }
+    </script>
