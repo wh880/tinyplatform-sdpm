@@ -76,4 +76,23 @@ public class ProjectstoryAction extends BaseController {
         }
         return map;
     }
+
+    @RequestMapping("/preLinkStory")
+    public String preLinkStory() {
+
+        return "project/demand/relateDemand.page";
+    }
+
+    @RequestMapping("/findStory")
+    public String findStory(Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Pager<ProductStory> storyList = projectStoryService.findStoryToLink(projectId, start, limit, order, ordertype);
+        model.addAttribute("storyList", storyList);
+        return "project/demand/relateDemandTableData.pagelet";
+    }
+
+    @RequestMapping("/linkStory")
+    public String linkStory(Integer[] storyIds, HttpServletRequest request) {
+        return "project/demand/index.page";
+    }
 }

@@ -20,5 +20,10 @@
             <artifactId>sdpm-common-base-dao</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-product-dao-interface</artifactId>
+            <version>${tiny_sdpm_version}</version>
+        </dependency>
     </dependencies>
 </project>

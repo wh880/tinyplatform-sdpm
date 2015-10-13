@@ -42,6 +42,10 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         return projectStoryManager.deleteByProjectStory(projectId, storyId);
     }
 
+    public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String ordertype) {
+        return projectStoryManager.findStoryToLink(projectId, start, limit, order, ordertype);
+    }
+
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype) {
 
         List<ProjectStory> storyList = projectStoryManager.findSrotys(projectId);

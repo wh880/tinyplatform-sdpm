@@ -2,26 +2,20 @@
 	<input type="hidden" name="records" value="${num}"/>
 #end
 
-
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=storyList.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
+	#set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(records)
+#for(s : storyList.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()${var}#end
-	#@td()北京#end
-	#@td()修改#end
-	#@td()网金社#end
-	#@td()需求一#end
-	#@td()计划一 #end
-	#@td()admin #end
-	#@td() 2016/01/01#end
-	
-		
-	
+	#@td()${s?.storyId}#end
+	#@td()${s?.storyPri}#end
+	#@td()${s?.productName}#end
+	#@td()${s?.storyTitle}#end
+	#@td()${s?.planName}#end
+	#@td()${s?.storyOpenedBy}#end
+	#@td()${s?.storyEstimate}#end
 #end
 #end

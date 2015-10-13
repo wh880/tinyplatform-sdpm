@@ -30,6 +30,14 @@ public class ProductStory implements Serializable{
 	 */
 	private Integer taskNumber;
 	/**
+	 * 用于项目下需求模块关联需求列表显示所属项目
+	 */
+	private String productName;
+	/**
+	 * 用于项目下需求模块关联需求列表显示所属计划
+	 */
+	private String planName;
+	/**
 	 * 需求ID
 	 *
 	 */
@@ -494,4 +502,19 @@ public class ProductStory implements Serializable{
 		this. deleted = deleted;
 	}
 
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getPlanName() {
+		return planName;
+	}
+
+	public void setPlanName(String planName) {
+		this.planName = planName;
+	}
 }
