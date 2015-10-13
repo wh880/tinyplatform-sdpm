@@ -86,9 +86,9 @@
                 #@elementItem()
                     #@sdpmItem("可用工作日")
                     <div class="input-group">
-                        <input name="projectDays" type="text" class="form-control" placeholder=""
+                        <input name="projectDays" type="text" class="form-control" placeholder="" value= ${project?.projectDays}
                                aria-describedby="basic-addon2">
-                        <span class="input-group-addon" id="basic-addon2">${project?.projectDays}小时</span>
+                        <span class="input-group-addon" id="basic-addon2">小时</span>
                     </div>
                     #end
                 #end
@@ -143,9 +143,9 @@
                             <option value="MD">Maryland</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page"
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/org/user/form"
                                               class="r ">增加</a><a
-                                    href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
+                                    href="${TINY_CONTEXT_PATH}/org/user/list">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end
@@ -164,9 +164,9 @@
                             <option value="MD">Maryland</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page"
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/org/user/form"
                                               class="r ">增加</a><a
-                                    href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
+                                    href="${TINY_CONTEXT_PATH}/org/user/list">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end
@@ -185,9 +185,9 @@
                             <option value="MD">Maryland</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page"
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/org/user/form"
                                               class="r ">增加</a><a
-                                    href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
+                                    href="${TINY_CONTEXT_PATH}/org/user/list">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end
@@ -206,9 +206,9 @@
                             <option value="MD">Maryland</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page"
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/org/user/form"
                                               class="r ">增加</a><a
-                                    href="${TINY_CONTEXT_PATH}/organization/user/add.page">全部</a>#end
+                                    href="${TINY_CONTEXT_PATH}/org/user/list">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end
