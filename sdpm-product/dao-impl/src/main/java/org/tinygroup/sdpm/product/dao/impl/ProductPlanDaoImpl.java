@@ -48,6 +48,7 @@ import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
@@ -166,7 +167,10 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 					PRODUCT_PLANTABLE.PLAN_SPEC.eq(t.getPlanSpec()),
 					PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.eq(t.getPlanBeginDate()),
 					PRODUCT_PLANTABLE.PLAN_END_DATE.eq(t.getPlanEndDate()),
-					PRODUCT_PLANTABLE.DELETED.eq(t.getDeleted())));
+					PRODUCT_PLANTABLE.DELETED.eq(t.getDeleted()))
+					
+						
+						);
 			return addOrderByElements(select, orderArgs);
 			}
 		});
@@ -269,5 +273,14 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 
     }
 	
-    
+    public static Condition planPueryCondition(ProductPlan t){
+		return t==null?null:and(
+				PRODUCT_PLANTABLE.COMPANY_ID.eq(t.getCompanyId()),
+				PRODUCT_PLANTABLE.PRODUCT_ID.eq(t.getProductId()),
+				PRODUCT_PLANTABLE.PLAN_NAME.eq(t.getPlanName()),
+				PRODUCT_PLANTABLE.PLAN_SPEC.eq(t.getPlanSpec()),
+				PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.eq(t.getPlanBeginDate()),
+				PRODUCT_PLANTABLE.PLAN_END_DATE.eq(t.getPlanEndDate()),
+				PRODUCT_PLANTABLE.DELETED.eq(t.getDeleted()));
+	}
 }

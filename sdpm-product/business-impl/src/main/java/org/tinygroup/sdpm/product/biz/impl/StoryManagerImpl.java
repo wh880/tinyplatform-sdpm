@@ -110,6 +110,13 @@ public class StoryManagerImpl implements StoryManager{
 
 
 
+	public List<StoryCount> planStoryCount(ProductStory story) {
+
+		return productStoryDao.planStoryCount(story, null);
+	}
+
+
+
 	
 	
 }
