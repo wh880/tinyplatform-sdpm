@@ -32,6 +32,14 @@ public interface UserManager {
     /**
      * 根据主键id查找用户
      *
+     * @param account 用户名
+     * @return
+     */
+    OrgUser findUserByAccount(String account);
+
+    /**
+     * 根据主键id查找用户
+     *
      * @return
      */
     Pager<OrgUser> findPager(Integer start, Integer limit, OrgUser orgUser);
