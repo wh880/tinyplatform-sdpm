@@ -78,4 +78,9 @@ public class StoryServiceImpl implements StoryService {
 		return storyManager.planStoryCount(story);
 	}
 
+	public int[] deleteBatchStory(List<ProductStory> ids) {
+		// TODO Auto-generated method stub
+		return storyManager.deleteBatch(ids);
+	}
+
 }

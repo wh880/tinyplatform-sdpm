@@ -12,7 +12,9 @@
         <input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('releaseId','全选');" />
         <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('releaseId','反选');" />
             
-        #@aModal("#myModal" "批量移除" "1200" "500" "btn radius btn-danger" "/product/page/tabledemo/product-editall.pagelet")批量删除#end
+        	  #@mulOperation("muldelete" TINY_CONTEXT_PATH+"/quality/bug/batchDelete")
+            					<a class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
+            			  #end
 
     #end
     #@tinyTableContent(TINY_CONTEXT_PATH +　"/product/story/bugSearch/reRelateBugRelease?deleted=0") ##取数据地址 总数据
