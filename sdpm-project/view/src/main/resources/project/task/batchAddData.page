@@ -59,19 +59,22 @@
                             <option value="MD">Maryland</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/project/demand/index.page">全部</a>#end
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
+                                              class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/project/demand/index.page">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end
                 #end
                 #@th()
-                    #tinyInput("text" "taskName""ancdefg"{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！"})
+                    #tinyInput(
+                        "text" "taskName""ancdefg"{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！"})
                 #end
                 #@th()
                     #@formControlDiv( )
                         #@Tselect2F()
                             #@Tselect2Body(
-                                "taskType" "T" {"class":"input-text select2","datatype":"*4-16","nullmsg":"不能为空"}) ##,"multiple":"multiple"加上为多选项
+                                "taskType" "T" {"class":"input-text select2","datatype":"*4-16","nullmsg":
+                                "不能为空"}) ##,"multiple":"multiple"加上为多选项
                             <option value="T"></option>
                             <option value="CT">Connecticut</option>
                             <option value="DE">Delaware</option>
@@ -101,7 +104,8 @@
                             <option value="MD">Maryland</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a><a
+                                    href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end

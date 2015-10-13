@@ -25,6 +25,8 @@ import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -322,4 +324,29 @@ public class BugAction extends BaseController {
 		bugPage.getTotalCount();
 		return "project/bug/bugViewTableData.pagelet";
 	}
+	
+	//批量删除（软） 产品下面的计划、发布关联BUG表上使用的
+	@ResponseBody
+	@RequestMapping(value="/batchDelete")
+	public Map bctchDelBug(String ids)
+	{		
+		Map<String,String> map = new HashMap<String,String>();
+		if(ids == null){
+			map.put("status", "fail");
+		    map.put("info", "删除失败");
+			return map;
+		}
+		 List<QualityBug> list = new ArrayList<QualityBug>();
+		for(String s : ids.split(",")){			
+			QualityBug bug= new QualityBug();
+			bug.setBugId(Integer.valueOf(s));
+			bug.setDeleted(1);
+			list.add(bug);
+		}	
+		bugService.batchDeleteBug(list);
+		map.put("status", "success");
+	    map.put("info", "删除成功");
+	    return map;
+	}
+
 }

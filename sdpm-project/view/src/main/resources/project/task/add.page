@@ -119,7 +119,7 @@
     #@elementItem()
         #@sdpmItem("优先级")
             #@Tselect2F()
-                #@Tselect2Body("taskPri" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #@Tselect2Body("taskPri" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
