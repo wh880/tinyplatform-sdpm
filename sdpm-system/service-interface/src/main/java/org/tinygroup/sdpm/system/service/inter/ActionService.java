@@ -36,8 +36,8 @@ public interface ActionService {
 	 * @param limit
 	 * @param systemAction
 	 * @param sortName
-	 * @param asc
+	 * @param ordertype
 	 * @return
 	 */
-	Pager<SystemAction> findByPager(int start,int limit,SystemAction systemAction,String sortName ,boolean asc);
+	Pager<SystemAction> findSystemActionPager(int page,int pagesize,SystemAction action,String order ,String ordertype);
 }

@@ -113,9 +113,7 @@ public class PlanAction  extends BaseController{
 	public String list(ProductPlan plan,
 			@RequestParam(required = false,defaultValue = "1")int page,
 			@RequestParam(required = false,defaultValue = "10")int pagesize,
-			@RequestParam(required = false,defaultValue = "p" +
-					"" +
-					"lanId")String order,
+			@RequestParam(required = false,defaultValue = "planId")String order,
 			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model,HttpServletRequest request){
 		
 		if(request.getSession().getAttribute("sessionProductId")!=null){
