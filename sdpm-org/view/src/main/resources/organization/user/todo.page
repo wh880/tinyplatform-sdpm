@@ -1,5 +1,8 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
 
+/**
+待删除文件
+*/
 #import("/common/component/form.component")
 #set(editpagePath=
     "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
