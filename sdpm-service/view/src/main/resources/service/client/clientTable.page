@@ -26,7 +26,7 @@
 
     ##    <a title="权限维护" href=userBatchAddpagePath>#buttonIcon(iconClass="添加" "865" "420","btn radius btn-info")</a>
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/service/client/list/data") ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/service/client/list/data?treeId="+treeId) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

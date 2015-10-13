@@ -65,6 +65,11 @@ public class PlanManagerImpl implements PlanManager{
 		return productPlanDao.getByKeys(planId);
 	}
 
+	public int[] deleteBatch(List<ProductPlan> ids) {
+		
+		return productPlanDao.batchUpdateDel(ids);
+	}
+
 
 	
 

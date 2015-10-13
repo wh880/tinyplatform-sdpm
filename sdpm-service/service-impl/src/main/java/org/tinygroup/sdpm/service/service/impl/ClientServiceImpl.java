@@ -33,6 +33,10 @@ public class ClientServiceImpl implements ClientService {
         return clientManager.findPager(start, limit, client, order, ordertype);
     }
 
+    public Pager<ServiceClient> findClientPagerByPid(Integer start, Integer limit, Integer treeId, String order, String ordertype) {
+        return clientManager.findByProduct(start, limit, treeId, order, ordertype);
+    }
+
     public List<ServiceClient> getClientList(ServiceClient client) {
         return clientManager.getList(client);
     }
@@ -54,7 +58,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     public List<ServiceClient> findClientByProduct(Integer productId) {
-        return clientManager.findByProduct(productId);
+        return null;
     }
 
     public List<ServiceSla> findSlaByClientId(Integer id) {

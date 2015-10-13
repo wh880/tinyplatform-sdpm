@@ -21,7 +21,7 @@
         	 <menu id="dict-del" parent-id="dictionary-type" name="删除" href="/system/module/delete" icon="icon-trash" sort="100" isShow="1" scope="dict-op"></menu>
         	  
         </menu>
-        <menu id="dictionary-entries" parent-id="dictionaries" name="字典项" href="/system/page/dictionaries/dictitem.page" icon="" sort="100" isShow="1">
+        <menu id="dictionary-entries" parent-id="dictionaries" name="字典项" href="/system/dict" icon="" sort="100" isShow="1">
         	<menu id="dictitem-view" parent-id="dictionary-entries" name="查看" href="/system/dict/check" icon="icon-eye-open" sort="300" isShow="1" scope="dictitem-op"></menu>
         	<menu id="dictitem-edit" parent-id="dictionary-entries" name="编辑" href="/system/dict/find" icon="icon-edit" sort="200" isShow="1" scope="dictitem-op"></menu>
         	<menu id="dictitem-del" parent-id="dictionary-entries" name="删除" href="/system/dict/delete" icon="icon-trash" sort="100" isShow="1" scope="dictitem-op"></menu>

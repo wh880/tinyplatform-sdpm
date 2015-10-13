@@ -126,22 +126,22 @@ public class Project implements Serializable{
 	 * 产品负责人
 	 *
 	 */
-	private String projectPO;
+	private String projectPo;
 	/**
 	 * 项目负责人
 	 *
 	 */
-	private String projectPM;
+	private String projectPm;
 	/**
 	 * 测试负责人
 	 *
 	 */
-	private String projectQD;
+	private String projectQd;
 	/**
 	 * 项目发布负责人
 	 *
 	 */
-	private String projectRD;
+	private String projectRd;
 	/**
 	 * 团队成员
 	 */
@@ -337,36 +337,36 @@ public class Project implements Serializable{
 		this. projectCanceledDate = projectCanceledDate;
 	}
 
-	public String getProjectPO() {
-		return projectPO;
+	public String getProjectPo() {
+		return projectPo;
 	}
 
-	public void setProjectPO(String projectPO){
-		this. projectPO = projectPO;
+	public void setProjectPo(String projectPo){
+		this. projectPo = projectPo;
 	}
 
-	public String getProjectPM() {
-		return projectPM;
+	public String getProjectPm() {
+		return projectPm;
 	}
 
-	public void setProjectPM(String projectPM){
-		this. projectPM = projectPM;
+	public void setProjectPm(String projectPm){
+		this. projectPm = projectPm;
 	}
 
-	public String getProjectQD() {
-		return projectQD;
+	public String getProjectQd() {
+		return projectQd;
 	}
 
-	public void setProjectQD(String projectQD){
-		this. projectQD = projectQD;
+	public void setProjectQd(String projectQd){
+		this. projectQd = projectQd;
 	}
 
-	public String getProjectRD() {
-		return projectRD;
+	public String getProjectRd() {
+		return projectRd;
 	}
 
-	public void setProjectRD(String projectRD){
-		this. projectRD = projectRD;
+	public void setProjectRd(String projectRd){
+		this. projectRd = projectRd;
 	}
 
 	public String getProjectTeam() {

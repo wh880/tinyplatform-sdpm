@@ -29,6 +29,9 @@ public class ClientManagerImpl implements ClientManager {
         return clientDao.queryPager(start, limit, serviceClient, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
     }
 
+    public Pager<ServiceClient> findByProduct(Integer start, Integer limit, Integer treeId, String order, String ordertype) {
+        return clientDao.findByProduct(start, limit, treeId, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
+    }
     public List<ServiceClient> getList(ServiceClient client) {
         return clientDao.query(client);
     }
@@ -50,9 +53,6 @@ public class ClientManagerImpl implements ClientManager {
         return clientDao.softDeleteBatch(list);
     }
 
-    public List<ServiceClient> findByProduct(Integer productId) {
-        return null;
-    }
 
     public ServiceClient judgeClient(String clientName) {
         return clientDao.judge(clientName);

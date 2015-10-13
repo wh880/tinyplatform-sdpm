@@ -7,7 +7,9 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.tinysqldsl.Pager;
 
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by shenly13343 on 2015-09-20.
@@ -51,5 +53,9 @@ public class BuildServiceImpl implements BuildService {
 
     public ProjectBuild findBuild(Integer id) {
         return buildManager.find(id);
+    }
+    public int[] deleteBuildByIds(List<ProjectBuild> ids) {
+        //
+        return buildManager.batchDelBuildByIds(ids);
     }
 }

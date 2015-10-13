@@ -133,14 +133,10 @@
                     #@colLabel()产品负责人#end
                     #@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body("projectPO" project?.projectPO {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="IN">Indiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
+                            #@Tselect2Body("projectPo" project?.projectPO {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                #foreach(t : teamList)
+                                <option value="${t.teamAccount}">${t.teamAccount}</option>
+                                #end
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/org/user/form"
@@ -154,14 +150,10 @@
                     #@colLabel()项目负责人#end
                     #@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body("projectPM" project?.projectPM {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="IN">Indiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
+                            #@Tselect2Body("projectPm" project?.projectPm {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                #foreach(t : teamList)
+                                <option value="${t.teamAccount}">${t.teamAccount}</option>
+                                #end
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/org/user/form"
@@ -175,14 +167,10 @@
                     #@colLabel()测试负责人#end
                     #@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body("projectQD" project?.projectQD {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="IN">Indiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
+                            #@Tselect2Body("projectQd" project?.projectQd {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                #foreach(t : teamList)
+                                <option value="${t.teamAccount}">${t.teamAccount}</option>
+                                #end
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/org/user/form"
@@ -196,14 +184,10 @@
                     #@colLabel()发布负责人#end
                     #@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body("proectRD;" project?.projectRD {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="IN">Indiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
+                            #@Tselect2Body("projectRd;" project?.projectRd {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                #foreach(t : teamList)
+                                <option value="${t.teamAccount}">${t.teamAccount}</option>
+                                #end
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/org/user/form"

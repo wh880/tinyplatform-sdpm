@@ -51,4 +51,9 @@ public class SlaManagerImpl implements SlaManager {
     public Pager<ServiceSla> findPager(Integer start, Integer limit, ServiceSla sla) {
         return slaDao.queryPager(start, limit, sla);
     }
+
+    /*点击协议的“详情”，根据产品id找到产品名称*/
+    public Pager<ServiceSla> findPager2(Integer start, Integer limit, ServiceSla sla) {
+        return slaDao.queryPager2(start, limit, sla);
+    }
 }

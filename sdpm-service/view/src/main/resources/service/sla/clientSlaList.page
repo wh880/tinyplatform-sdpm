@@ -21,7 +21,7 @@
                             #@tbody()
                                 #@tr()
                                     #@th()产品名称#end
-                                    #@td()${var.productId}#end
+                                    #@td()${var.productName}#end
                                 #end
                                 #@tr()
                                     #@th()产品版本#end

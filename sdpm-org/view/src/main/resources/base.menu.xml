@@ -27,9 +27,6 @@
         <menu id="org-user-add" name="增加" href="addUser.page" icon="icon-plus" sort="1" isShow="1"
               scope="org-user-add"/>
 
-        <menu id="org-user-gtask" name="待办" href="/organization/user/todo.page" icon="" sort="1"
-              isShow="1"
-              scope="org-user-detail"/>
         <menu id="org-user-storyAdmin" name="需求" href="/organization/user/storyAdmin.page" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
@@ -62,10 +59,10 @@
               scope="org-user-editprofile"/>
 
     </menu>
-    <menu id="organizationGtask" name="待办" href="/organization/gtask/gtasks.page" icon="" sort="1"
-          isShow="1"
-    >
-    </menu>
+    <!--<menu id="organizationGtask" name="待办" href="/organization/gtask/gtasks.page" icon="" sort="1"-->
+    <!--isShow="1"-->
+    <!-->-->
+    <!--</menu>-->
     <menu id="organizationLog" name="日志" href="/organization/log/log.page" icon="" sort="1"
           isShow="1"
     >
@@ -76,10 +73,10 @@
     <menu id="organizationActive" name="动态" href="/organization/active/active.page" icon="" sort="1" isShow="1"
     >
     </menu>
-    <menu id="organizationDepartment" name="部门" href="/organization/department/department.page" icon="" sort="1"
-          isShow="1"
-    >
-    </menu>
+    <!--<menu id="organizationDepartment" name="部门" href="/organization/department/department.page" icon="" sort="1"-->
+    <!--isShow="1"-->
+    <!-->-->
+    <!--</menu>-->
     <menu id="organizationPrivilege" name="角色" href="/org/privilege/list" icon="" sort="1" isShow="1"
     >
         <menu id="org-privilege-maintain" name="权限维护" href="/org/roleMenu/show"

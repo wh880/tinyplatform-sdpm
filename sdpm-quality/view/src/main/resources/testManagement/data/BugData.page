@@ -12,12 +12,12 @@
 
 #for(var:bugpager.records)
 #@tr()
-    #@td()<input type="checkbox" value="1" name="userid">#end
+    #@td()<input type="checkbox" value="${var?.bugId}" name="bugId">#end
     #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${var?.bugId}</a>#end
     #@td()${var?.bugSeverity}#end
     #@td()${var?.priority}#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">[${var?.bugConfirmed}]${var?.bugTitle}</a>#end
-    #@td()${var?.bugStatus}#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">[${var?.bugConfirmed==1?"已确认":"未确认"}]${var?.bugTitle}</a>#end
+    #@td()${getDict("bugStatus",var?.bugStatus)}#end
     #@td()${var?.bugOpenedBy}#end
     #@td()${var?.bugOpenedDate}#end
     #@td()${var?.bugAssignedTo}#end
@@ -28,11 +28,9 @@
     	#foreach(m:menuManager.getScopeMenus("testbug-op"))
              	<a href="${TINY_CONTEXT_PATH}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>			
 		 #end
-
-
-
     ##"icon-pencil"
     ##buttonRadiusLink(caption="/testManagement/page/proposeBug")
     #end
 #end
 #end
+

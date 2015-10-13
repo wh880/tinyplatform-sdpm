@@ -2,7 +2,7 @@
 #for(var:pager.records)
 #@tr()
     #@td()<input type="checkbox" value="${var?.orgUserId}" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/organization/user/todocalendarAdmin.page?id=${var?.orgUserId}">${var
+    #@td()<a href="${TINY_CONTEXT_PATH}/organization/user/storyAdmin.page?id=${var?.orgUserId}">${var
         ?.orgUserRealName}</a>#end
     #@td()${var?.orgUserAccount}#end
     #@td()${var.orgUserRole}#end

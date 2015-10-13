@@ -34,6 +34,10 @@ public class UserServiceImpl implements UserService {
         return userManager.find(id);
     }
 
+    public OrgUser findUserByAccount(String account) {
+        return userManager.findUserByAccount(account);
+    }
+
     public Pager<OrgUser> findUserPager(Integer start, Integer limit, OrgUser orgUser) {
         return userManager.findPager(start, limit, orgUser);
     }
