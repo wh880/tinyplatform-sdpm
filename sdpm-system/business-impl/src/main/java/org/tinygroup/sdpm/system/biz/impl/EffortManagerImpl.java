@@ -87,6 +87,23 @@ public class EffortManagerImpl implements EffortManager {
 		return systemEffortDao.deleteByKeys(ids);
 	}
 
+	public Pager<SystemEffort> findByDate(int start, int limit,
+			SystemEffort effort, Date startDate, Date endDate, String sortName,
+			boolean asc) {
+		// TODO Auto-generated method stub
+		if (StringUtil.isBlank(sortName)) {
+			return systemEffortDao.findByDate(start, limit, effort, startDate, endDate);
+		}
+		OrderBy orderBy = new OrderBy(sortName, asc);
+		return systemEffortDao.findByDate(start, limit, effort, startDate, endDate, orderBy);
+	}
+
+	public SystemEffort findById(int id) {
+		// TODO Auto-generated method stub
+		return systemEffortDao.getByKey(id);
+	}
+
+	
 //public List<SystemEffort> findBetweenDate(Date begindate, Date enddate) {
 //		// TODO Auto-generated method stub
 ////		return SystemEffortDao.findBetweenDate(begindate, enddate);

@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.system.service.inter;
 import java.util.Date;
 import java.util.List;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -69,4 +70,22 @@ public interface EffortService {
 	  * @return
 	  */
 	 int batchDelete(Integer...ids);
+	 /**
+	  * 根据时间段查询
+	  * @param start
+	  * @param limit
+	  * @param effort
+	  * @param startDate
+	  * @param endDate
+	  * @param orderArgs
+	  * @return
+	  */
+	 public Pager<SystemEffort> findByDate(int start, int limit, SystemEffort effort,Date startDate,
+			 Date endDate, String sortName,boolean asc);
+	 /**
+	  * 通过ID查询
+	  * @param id
+	  * @return
+	  */
+	 SystemEffort findById(int id);
 }

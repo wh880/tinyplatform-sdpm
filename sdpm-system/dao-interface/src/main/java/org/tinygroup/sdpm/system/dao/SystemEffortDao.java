@@ -16,10 +16,15 @@
 
 package org.tinygroup.sdpm.system.dao;
 
-import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
+
+import java.util.Date;
+
+import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface SystemEffortDao extends BaseDao<SystemEffort,Integer> {
-
+    public Pager<SystemEffort> findByDate(int start, int limit, SystemEffort effort,Date startDate,Date endDate, OrderBy... orderArgs);
 }
