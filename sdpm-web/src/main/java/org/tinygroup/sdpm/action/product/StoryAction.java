@@ -276,7 +276,7 @@ public class StoryAction extends BaseController{
 
     }
     @RequestMapping("/report")
-    public String report(ProductStory story,Model model){
+    public String report(ProductStory story,String fields,Model model){
     		
     	List<StoryCount> productStoryCount =  storyService.productStoryCount(story);
     	List<StoryCount> modelStoryCount =  storyService.modelStoryCount(story);
@@ -286,8 +286,13 @@ public class StoryAction extends BaseController{
     	model.addAttribute("modelStoryCount", modelStoryCount);
     	model.addAttribute("planStoryCount", planStoryCount);
     	
+    	fields = "A_productCount,storyStatus";
+    	Map<String, List<StoryCount>> map = storyService.report(fields, story);
+    	model.addAttribute("map", map);
     	
     	return "/product/page/tabledemo/product-report.page";
     }
+    
+    
 
 }

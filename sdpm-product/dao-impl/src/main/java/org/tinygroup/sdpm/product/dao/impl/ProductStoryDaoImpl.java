@@ -545,11 +545,11 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		if(t==null){
 			t=new ProductStory();
 		}
-		int nm = getCount(t,null);
+		int nm = getCount(t,PRODUCT_STORYTABLE.MODULE_ID.isNotNull());
 		Select select = select(SYSTEM_MODULETABLE.MODULE_NAME.as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
 				FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
 				.from(PRODUCT_STORYTABLE).join(leftJoin(SYSTEM_MODULETABLE, SYSTEM_MODULETABLE.MODULE_ID.eq(PRODUCT_STORYTABLE.MODULE_ID)))
-				.where(and(storyPueryCondition(t))).groupBy(PRODUCT_STORYTABLE.MODULE_ID);
+				.where(and(storyPueryCondition(t,PRODUCT_STORYTABLE.MODULE_ID.isNotNull()))).groupBy(PRODUCT_STORYTABLE.MODULE_ID);
 		List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
 		return storyCounts;
 	}
@@ -582,11 +582,11 @@ public List<StoryCount> productStoryCount(ProductStory t) {
 			plan=new ProductPlan();
 		}
 		
-		int nm = getCount(t,null);
+		int nm = getCount(t,PRODUCT_STORYTABLE.PLAN_ID.isNotNull());
 		Select select = select(PRODUCT_PLANTABLE.PLAN_NAME .as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
 				FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
 				.from(PRODUCT_STORYTABLE).join(leftJoin(PRODUCT_PLANTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID)))
-				.where(and(storyPueryCondition(t))).groupBy(PRODUCT_STORYTABLE.PLAN_ID);
+				.where(and(storyPueryCondition(t,PRODUCT_STORYTABLE.PLAN_ID.isNotNull()))).groupBy(PRODUCT_STORYTABLE.PLAN_ID);
 		List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
 		return storyCounts;
 		
@@ -620,7 +620,7 @@ public List<StoryCount> productStoryCount(ProductStory t) {
 
 	public static Condition[] storyPueryCondition(ProductStory t,Condition... condition){
 		
-				Condition[] con = t==null?new Condition[]{PRODUCT_STORYTABLE.STORY_TITLE.isNotNull()}:new Condition[]{
+				Condition[] con = t==null?new Condition[]{PRODUCT_STORYTABLE.STORY_ID.isNotNull()}:new Condition[]{
 						PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
 						PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
 						PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(t.getStoryParentId()),
