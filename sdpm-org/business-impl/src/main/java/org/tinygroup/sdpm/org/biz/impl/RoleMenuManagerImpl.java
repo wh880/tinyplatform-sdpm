@@ -64,5 +64,6 @@ public class RoleMenuManagerImpl implements RoleMenuManager {
     public void batchDelete(List<OrgRoleMenu> orgRoleMenuList) {
         orgRoleMenuDao.batchDelete(orgRoleMenuList);
     }
+
 }
 
