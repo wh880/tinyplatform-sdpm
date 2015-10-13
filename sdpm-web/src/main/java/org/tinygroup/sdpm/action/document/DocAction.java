@@ -23,6 +23,8 @@ import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.tinysqldsl.Pager;
 
 @Controller
@@ -32,6 +34,8 @@ public class DocAction {
 	private DocService docservice;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ProjectService projectService;
 	
 	@RequestMapping("")
 	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange)
@@ -64,9 +68,24 @@ public class DocAction {
 	}
 	
 	@RequestMapping(value="/doc/add")
-	public String createDoc()
+	public String createDoc(HttpServletRequest request ,Model model)
 	{		
-		return "/document/add-doc.page";
+		Integer libid = (Integer) request.getSession().getAttribute("documentLibId");
+		if(libid == 1){
+			Product product = new Product();
+			List<Product> list = productService.findProductList(product);
+			model.addAttribute("productList", list);
+			return "/document/add-doc-product.page";
+		}else if(libid == 2){	
+			List<Project> list = projectService.findList();
+			Product product = new Product();
+			List<Product> list1 = productService.findProductList(product);
+			model.addAttribute("productList", list1);
+			model.addAttribute("projectList", list);
+			return "/document/add-doc-project.page";
+		}else{
+		return "/document/add-doc.page";	
+		}
 	}
 	
 	@RequestMapping(value="/doc/addSave",method=RequestMethod.POST)
@@ -82,15 +101,9 @@ public class DocAction {
 	public String editDoc(HttpServletRequest request,Model model,Integer docId)
 	{	
 		DocumentDoc doc = new DocumentDoc();
-	//	List<Product> product = productService.findProductList(new Product());
 		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
 		doc = docservice.findDocById(docId);
 		model.addAttribute("doc", doc);
-		if(doc.getDocLibId() == 1){
-			return "/document/doc-edit-product.page";
-		}else if(doc.getDocLibId() == 0){
-			return "/document/doc-edit-project.page";	
-		}
 		return "/document/doc-edit.page";
 	}
 	
@@ -151,9 +164,9 @@ public class DocAction {
 	public Map bctchDelDoc(String ids)
 	{		
 		Map<String,String> map = new HashMap<String,String>();
-		if(ids == null){
+		if(ids == null || ids == ""){
 			map.put("status", "fail");
-		    map.put("info", "删除失败");
+		    map.put("info", "请至少选择一条数据");
 			return map;
 		}
 		 List<DocumentDoc> list = new ArrayList<DocumentDoc>();
@@ -174,19 +187,6 @@ public class DocAction {
 	{
 		return "/document/add-doclib.pagelet";
 	}
-	
-/*	@RequestMapping(value="/doclib/add")
-	public String add(HttpServletRequest request,Model model){
-		DocumentDoclib doclib = new DocumentDoclib();
-		if(doclib.getDocLibId()==null||doclib.getDocLibId()==0){
-			docservice.createNewDocLib(doclib);
-			request.getSession().setAttribute("documentLibId",doclib.getDocLibId());
-		}else
-			docservice.editDocLibName(doclib);
-		
-		model.addAttribute("doclib", doclib);
-		return "/document/doclib-edit.pagelet";
-	}*/
 	
 	@RequestMapping(value="/doclib/edit")
 	public String editDoclib(HttpServletRequest request,DocumentDoclib doclib,Model model)

@@ -40,14 +40,10 @@ public class SlaServiceImpl implements SlaService {
         return slaManager.deleteBatch(id);
     }
 
-    public Pager<ServiceSla> findSlaPager(Integer start, Integer limit, ServiceSla sla) {
-        return slaManager.findPager(start, limit, sla);
+    public Pager<ServiceSla> findSlaPager(Integer start, Integer limit, ServiceSla sla, Integer treeId) {
+        return slaManager.findPager(start, limit, sla, treeId);
     }
 
-    /*点击协议的“详情”，根据产品id找到产品名称*/
-    public Pager<ServiceSla> findSlaPager2(Integer start, Integer limit, ServiceSla sla) {
-        return slaManager.findPager2(start, limit, sla);
-    }
     /*2015/9/29,实现协议里面，点击客户ID，页面数据显示，新增的方法*/
     public List<ServiceSla> findSlaBySlaId(Integer id) {
         return slaManager.getListByClientId(id);

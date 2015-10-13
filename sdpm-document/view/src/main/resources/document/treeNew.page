@@ -5,16 +5,26 @@
 
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 	#@toggleLeft({"class":"aclass"})
-		#@settoggleLeftTitle()#if(libname)${libname}#else产品文档库 #end #end
+		#@settoggleLeftTitle()
+			#if(documentLibId)
+				#for(lib : libList)
+					#if(lib?.docLibId == documentLibId)
+						${lib?.docLibName}
+					#end
+				#end
+			#else产品文档库 #end 
+		#end
 		#@settoggleLeftBody("treeLeftbox")
-			<ul class="treeList">
-				<li id="listContent" style="display:none; position:absolute;left:74px;">
-					<ul id="alternative" class="ztree" style="width:126px;min-height:160px;max-height:300px;"></ul>
-				</li>
-			</ul>
-			<ul id="treeDrag" class="ztree"></ul>
+			 #@zTreeList(call("link","/system/module/data"))
+                    #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
+                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/document" )
+                    #zTreeSetAddUrl(TINY_CONTEXT_PATH+"/system/module/story/add?moduleType=story")
+                    #zTreeSetEditUrl(TINY_CONTEXT_PATH+"/system/module/story/edit")
+                    #zTreeSetDelUrl(TINY_CONTEXT_PATH+"/system/module/story/deleteTree")
+               #end
 		#end
 	#end
+	
 	#@toggleRight()
 		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")

@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.product.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -78,8 +79,13 @@ public class StoryServiceImpl implements StoryService {
 		return storyManager.planStoryCount(story);
 	}
 
+	public Map<String, List<StoryCount>> report(String fields,
+			ProductStory story) {
+
+		return storyManager.report(fields, story);
+	}
 	public int[] deleteBatchStory(List<ProductStory> ids) {
-		// TODO Auto-generated method stub
+
 		return storyManager.deleteBatch(ids);
 	}
 

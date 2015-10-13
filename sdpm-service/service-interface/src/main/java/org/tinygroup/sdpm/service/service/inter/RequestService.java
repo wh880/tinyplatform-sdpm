@@ -64,14 +64,14 @@ public interface RequestService {
      *
      * @return
      */
-    Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, Integer status, ServiceRequest clientRequest, String order, String ordertype);
+    Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, Integer status, ServiceRequest clientRequest, Integer tree, String order, String ordertype);
 
     /**
      * 查找数据库的由我解决的记录
      *
      * @return
      */
-    Pager<ServiceRequest> findReplyByMe(Integer start, Integer limit, Integer status, ServiceRequest clientRequest, String order, String ordertype);
+    Pager<ServiceRequest> findReplyByMe(Integer start, Integer limit, Integer operation, ServiceRequest clientRequest, String order, String ordertype);
 
     /**
      * 关闭请求

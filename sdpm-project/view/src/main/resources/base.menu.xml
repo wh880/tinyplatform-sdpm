@@ -90,7 +90,8 @@
                   scope="pro-demandmenu-op"/>
             <menu id="pro-demand-add" name="新增需求" href="/product/page/tabledemo/product-demand-add.page" icon="icon-plus-sign" sort="6" isShow="1"
                   scope="pro-demandmenu-op"/>
-            <menu id="pro-demand-relation" name="关联需求" href="/project/demand/relateDemand.page" icon="icon-plus" sort="4" isShow="1"
+            <menu id="pro-demand-relation" name="关联需求" href="/project/demand/preLinkStory" icon="icon-plus" sort="4"
+                  isShow="1"
                   scope="pro-demandmenu-op"/>
         </menu>
     </menu>
@@ -116,7 +117,7 @@
               scope="pro-version-op"/>
 
         <menu id="version-menu" name="任务菜单" href="/project/version/index.page" icon="" sort="1" isShow="1">
-            <menu id="pro-version-report" name="新建版本" href="/project/version/add.page" icon="icon-plus" sort="8" isShow="1"
+            <menu id="pro-version-report" name="新建版本" href="/project/version/add" icon="icon-plus" sort="8" isShow="1"
                   scope="pro-versionmenu-op"/>
         </menu>
 
@@ -167,7 +168,7 @@
                   scope="pro-surveymenu-op"/>
         </menu>
 
-        <menu id="survey-menu2" name="任务菜单2" href="/project/survey/index.page" icon="" sort="1" isShow="1">
+        <menu id="survey-menu2" name="任务菜单2" href="/projectmanage/survey/index" icon="" sort="1" isShow="1">
             <menu id="pro-survey-edit" name="编辑" href="/project/edit" icon="icon-pencil" sort="8" isShow="1"
                   scope="pro-surveymenu2-op"/>
             <menu id="pro-survey-remove" name="" href="" icon="" sort="6" isShow="1"

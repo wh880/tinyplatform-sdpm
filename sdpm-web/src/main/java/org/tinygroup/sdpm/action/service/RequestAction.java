@@ -41,15 +41,16 @@ public class RequestAction extends BaseController {
     }
 
     @RequestMapping(value = "/list/data")
-    public String listData(Integer limit, Integer start, ServiceRequest clientRequest, Integer status, Integer operation, Model model,
+    public String listData(Integer limit, Integer start, ServiceRequest clientRequest, Integer status, Integer operation, Integer treeId, Model model,
                            @RequestParam(required = false, defaultValue = "clientName") String order,
                            @RequestParam(required = false, defaultValue = "asc") String ordertype) {
+
         if (operation != null && operation == 1) {
             Pager<ServiceRequest> pager = requestService.findReplyByMe(start, limit, operation, clientRequest, order, ordertype);
             model.addAttribute("pager", pager);
             return "service/serviceReq/requestTableData.pagelet";
         }
-        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, order, ordertype);
+        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, order, ordertype);
         model.addAttribute("pager", pager);
         return "service/serviceReq/requestTableData.pagelet";
     }

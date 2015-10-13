@@ -29,9 +29,12 @@ public class ActionServiceImpl implements ActionService {
 		return actionManager.find(systemAction);
 	}
 
-	public Pager<SystemAction> findByPager(int start, int limit,
-			SystemAction systemAction, String sortName, boolean asc) {
-		return actionManager.findByPage(start,limit,systemAction,sortName,asc);
+	public Pager<SystemAction> findSystemActionPager(int page, int pagesize, SystemAction action, String order,
+			String ordertype) {
+		
+		return actionManager.findByPage(page, pagesize, action, order, ordertype);
 	}
+
+
 
 }

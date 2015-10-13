@@ -1,8 +1,9 @@
-#@tinyForm("thisform" call("link","/Validform_post.html") "post" {"class":""})
+#@tinyForm("thisform" call("link","system/effort/operate") "post" {"class":""})
+    <input type="hidden" name="effortId" value="${effort.effortId}"/>
 	#@elementItem()
 		#@colLabel()是否删除：#end
 		#@formControlDiv("col-8")
-			#Tswitcher("isvip" ["不是","是"] "不是")##第二个为选中与非选中时的值为一数组 第三参数为数据库返回时的数据
+			#Tswitcher("isvip" ["y","n"] "delete")##第二个为选中与非选中时的值为一数组 第三参数为数据库返回时的数据
 		#end
 	#end
 	#@elementItem()
