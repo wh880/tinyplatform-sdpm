@@ -37,10 +37,10 @@
   </standard-field>
   <standard-field id="c1b67b7db4674da8a314bf02239ed35f" name="project_canceled_by" title="项目由谁取消" business-type-id="286a6bca92b34779bcb6fc8809f0a666"/>
   <standard-field id="24dca11728884b14bd9be06764b46426" name="project_canceled_date" title="项目取消日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="b8f47ec967ba40b8b33e8deb5ec37fc8" name="project_PO" title="产品负责人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="9cf8e03af53c48378961f3f5a84348ae" name="project_PM" title="项目负责人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="05e4444c3a0b40e398fff266f48eba84" name="project_QD" title="测试负责人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="7eff7598a0f14505a4e7a54a8a146a36" name="project_RD" title="项目发布负责人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="b8f47ec967ba40b8b33e8deb5ec37fc8" name="project_po" title="产品负责人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="9cf8e03af53c48378961f3f5a84348ae" name="project_pm" title="项目负责人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="05e4444c3a0b40e398fff266f48eba84" name="project_qd" title="测试负责人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="7eff7598a0f14505a4e7a54a8a146a36" name="project_rd" title="项目发布负责人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="24ab9c69d3f64babbfc9a345d0cac3eb" name="project_team" title="团队成员" business-type-id="a30696c1e44441ecad77a832afd3731d">
     <description></description>
   </standard-field>

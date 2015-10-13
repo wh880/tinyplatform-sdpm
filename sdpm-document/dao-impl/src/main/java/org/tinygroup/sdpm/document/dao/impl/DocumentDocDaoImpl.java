@@ -268,6 +268,21 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 			}
 		});
 	}
+	
+	public int[] batchUpdateDel(List<DocumentDoc> documentDocs){
+		if (CollectionUtil.isEmpty(documentDocs)) {
+			return new int[0];
+		}
+		return getDslTemplate().batchUpdate(documentDocs, new NoParamUpdateGenerateCallback() {
+			
+			public Update generate() {
+				return update(DOCUMENT_DOCTABLE).set(
+					DOCUMENT_DOCTABLE.DOC_DELETED.value(new JdbcNamedParameter("docDeleted"))).where(
+				DOCUMENT_DOCTABLE.DOC_ID.eq(new JdbcNamedParameter("docId")));
+			}
+		});
+		
+	}
 
 	public int[] batchDelete(List<DocumentDoc> documentDocs) {
 		if (CollectionUtil.isEmpty(documentDocs)) {

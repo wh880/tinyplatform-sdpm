@@ -258,6 +258,9 @@ public class BugAction extends BaseController {
 	@ResponseBody
 	@RequestMapping("/ajax/story")
 	public List<ProductStory> getStory(ProductStory productStory){
+		if(productStory.getModuleId()==0){
+			productStory.setModuleId(null);
+		}
 		return storyService.findStoryList(productStory,null,null);
 	}
 
