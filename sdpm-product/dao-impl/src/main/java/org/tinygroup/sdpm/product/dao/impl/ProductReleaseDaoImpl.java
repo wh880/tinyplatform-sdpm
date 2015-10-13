@@ -36,10 +36,12 @@ import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
@@ -274,4 +276,15 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
         });
 
     }
+	public static Condition releasePueryCondition(ProductRelease t){
+		return t==null?null:and(
+						PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t.getProductId()),
+						PRODUCT_RELEASETABLE.BUILD_ID.eq(t.getBuildId()),
+						PRODUCT_RELEASETABLE.RELEASE_NAME.eq(t.getReleaseName()),
+						PRODUCT_RELEASETABLE.RELEASE_DATE.eq(t.getReleaseDate()),
+						PRODUCT_RELEASETABLE.RELEASE_STORIES.eq(t.getReleaseStories()),
+						PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(t.getReleaseBugs()),
+						PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t.getReleaseDesc()),
+						PRODUCT_RELEASETABLE.DELETED.eq(t.getDeleted()));
+	}
 }

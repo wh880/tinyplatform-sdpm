@@ -73,4 +73,9 @@ public class StoryServiceImpl implements StoryService {
 		return storyManager.modelStoryCount(story);
 	}
 
+	public List<StoryCount> planStoryCount(ProductStory story) {
+
+		return storyManager.planStoryCount(story);
+	}
+
 }

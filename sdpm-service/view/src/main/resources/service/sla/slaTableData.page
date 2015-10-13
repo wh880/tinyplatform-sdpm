@@ -4,7 +4,7 @@
     #@tr()
         #@td()<input type="checkbox" value="${var.slaId}" name="idCheck">#end
     #* #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientInfo.page">${var.clientId}</a>#end*#
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientDetail?id=${var.clientId}">${var.clientId}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientDetail?id=${var.clientId}">${var.clientName}</a>#end
         #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent?id=${var.slaId}">${var.slaTitle}#end
         #@td()${var.cilentProductVision}#end
         #@td()${var.serviceLevel}#end

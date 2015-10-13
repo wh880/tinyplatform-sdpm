@@ -17,12 +17,16 @@
 package org.tinygroup.sdpm.service.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
 public interface ServiceSlaDao extends BaseDao<ServiceSla, Integer> {
     List<ServiceSla> getListByClientId(Integer clientId);
+
+    Pager<ServiceSla> queryPager2(int start, int limit, ServiceSla serviceSla, final OrderBy... orderBies);
 
     Integer softDelete(Integer id);
 }

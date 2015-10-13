@@ -17,6 +17,7 @@
 package org.tinygroup.sdpm.product.dao.impl;
 
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.PRODUCT_RELEASETABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.*;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.tinysqldsl.Select.*;
@@ -35,13 +36,16 @@ import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
+import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.ProductStorySpecDao;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -248,5 +252,15 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
 		}
 		return select;
+	}
+	
+	public static Condition productStorySpecPueryCondition(ProductStorySpec t){
+		return t==null?null:and(
+						PRODUCT_STORY_SPECTABLE.COMPANY_ID.eq(t.getCompanyId()),
+						PRODUCT_STORY_SPECTABLE.STORY_ID.eq(t.getStoryId()),
+						PRODUCT_STORY_SPECTABLE.STORY_VERSION.eq(t.getStoryVersion()),
+						PRODUCT_STORY_SPECTABLE.STORY_TITLE.eq(t.getStoryTitle()),
+						PRODUCT_STORY_SPECTABLE.STORY_SPEC.eq(t.getStorySpec()),
+						PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.eq(t.getStoryVerification()));
 	}
 }

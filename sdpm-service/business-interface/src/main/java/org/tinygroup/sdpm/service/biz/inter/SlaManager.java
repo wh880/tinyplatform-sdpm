@@ -66,5 +66,7 @@ public interface SlaManager {
     List<ServiceSla> getListByClientId(Integer clientId);
 
     Pager<ServiceSla> findPager(Integer start, Integer limit, ServiceSla serviceClient);
+
+    Pager<ServiceSla> findPager2(Integer start, Integer limit, ServiceSla serviceClient);
 }
 
