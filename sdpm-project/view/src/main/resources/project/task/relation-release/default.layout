@@ -17,7 +17,7 @@
         "icon-link")关联需求</a>&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page?cname=bug">#buttonIcon(iconClass=
                     "icon-bug")关联Bug</a>&nbsp;
-<a href="${TINY_CONTEXT_PATH}/project/version/edit.page">#buttonIcon(iconClass=
+<a href="${TINY_CONTEXT_PATH}/project/version/edit?buildId=${build?.buildId}">#buttonIcon(iconClass=
         "icon-pencil")编辑发布</a>&nbsp;
 
     #iconOperation(" icon-remove" "删除发布" "ml-5")
