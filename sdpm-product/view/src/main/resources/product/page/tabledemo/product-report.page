@@ -225,6 +225,73 @@
             	
             	#end
             	
+            	
+            	#*            				计划需求数量分布*#
+            	#@centerAlignTr()       
+            		 #@th("text-r" "vertical-align:middle;width:20%")
+            			#@pieChart(pieChartStyle="width:600px;margin:0 auto;")
+            			
+            				 
+            				
+
+						   <table id='planStory'>
+								<caption>计划需求数量分布</caption>
+								<thead>
+									<tr>
+									
+										<th></th>
+										#for(planStory:planStoryCount)
+											<th>${planStory.name}</th>
+										#end
+										
+										
+										
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th></th>
+										#for(planStory:planStoryCount)
+											<td>${planStory.number}</td>
+										#end
+									</tr>
+								</tbody>
+							</table>  
+							
+							
+			
+						#end
+			
+						#pieChartInit("#planStory" "PieChart" "No of players" "Month",600,350)
+            			
+            		#end
+            		
+            		
+            		<td  style="vertical-align:middle;">
+
+            			
+            			
+#*            			模块需求数量分布*#
+            			 <table class="table table-border table-bordered" cellspacing="0">
+            			 	 #@theadCenterMenu()   #@th()计划#end        #@th()需求数#end  #@th()百分比#end #end
+            			 	 
+            			 	 #for(planStory:planStoryCount)
+								#@centerAlignTr()        
+	            			 	 	
+	            			 	 	#@td()${planStory?.name}#end  
+	            			 	 	#@td()${planStory?.number}#end      
+	            			 	 	#@td()${planStory?.percentToString}#end     
+	            			 	 #end
+							#end
+            			 	
+            			 	
+            			 
+            			 </table>
+            			
+            		</td>
+            	
+            	#end
+            	
             
             
             </table>

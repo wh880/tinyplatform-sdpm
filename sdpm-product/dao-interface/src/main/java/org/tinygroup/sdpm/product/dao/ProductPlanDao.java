@@ -27,5 +27,7 @@ public interface ProductPlanDao extends BaseDao<ProductPlan,Integer> {
 	Integer softDelete(Integer id);
 	
 	List<ProductPlan> getByKeys(Integer... id);
+	
+	int[] batchUpdateDel(List<ProductPlan> ids);
 
 }

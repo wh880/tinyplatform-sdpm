@@ -46,12 +46,14 @@ import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.Table;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
@@ -364,5 +366,27 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		
 		/*select product.product_id,product.product_name,product_line.product_line_id,product_line.product_line_name  
 		 * from product left join product_line on product.product_line_id=product_line.product_line_id;*/
+	}
+	
+	public static Condition productPueryCondition(Product t){
+		return 
+				t==null?null:and(
+						PRODUCTTABLE.COMPANY_ID.eq(t.getCompanyId()),
+						PRODUCTTABLE.DEPT_ID.eq(t.getDeptId()),
+						PRODUCTTABLE.PRODUCT_LINE_ID.eq(t.getProductLineId()),
+						PRODUCTTABLE.PRODUCT_NAME.eq(t.getProductName()),
+						PRODUCTTABLE.PRODUCT_CODE.eq(t.getProductCode()),
+						PRODUCTTABLE.PRODUCT_ORDER.eq(t.getProductOrder()),
+						PRODUCTTABLE.PRODUCT_STATUS.eq(t.getProductStatus()),
+						PRODUCTTABLE.PRODUCT_DESC.eq(t.getProductDesc()),
+						PRODUCTTABLE.PRODUCT_OWNER.eq(t.getProductOwner()),
+						PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(t.getProductQualityManager()),
+						PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(t.getProductDeliveryManager()),
+						PRODUCTTABLE.ACL.eq(t.getAcl()),
+						PRODUCTTABLE.PRODUCT_WHITE_LIST.eq(t.getProductWhiteList()),
+						PRODUCTTABLE.PRODUCT_CREATED_BY.eq(t.getProductCreatedBy()),
+						PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(t.getProductCreatedDate()),
+						PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(t.getProductCreatedVersion()),
+						PRODUCTTABLE.DELETED.eq(t.getDeleted()));
 	}
 }

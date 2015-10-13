@@ -14,8 +14,8 @@
             #@settoggleLeftTitle()模板#end
             #@settoggleLeftBody("treeLeftbox")
                 #@zTreeList(call("link","/system/module/dataone"))
-                    #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
-                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/product/page/project/product-modular.page" )
+                    #setzTreeValMap({"pid":"moduleId","name":"moduleName","id":"moduleParent"}) ##key值为固定
+                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/system/module/findProductModule" )
                     #zTreeSetAddUrl(TINY_CONTEXT_PATH+"/system/module/promodule/add")
                     #zTreeSetEditUrl(TINY_CONTEXT_PATH+"/system/module/promodule/edit")
                     #zTreeSetDelUrl(TINY_CONTEXT_PATH+"/system/module/promodule/deleteTree")
@@ -40,7 +40,7 @@
                     产品XXX
                 #end
                 #@th("text-l" )
-                    #@elementItem()
+#*                    #@elementItem()
                         #@formControlDiv()
                             #@tinySelect("" "" {"class":"col-4"})
                                 #@tinyOptionItem("zh")admin#end
@@ -55,23 +55,42 @@
                             #buttonRadiusDefault(btClass="btn btn-default btn-primary" caption="复制")
                         #end
                         #@validateDiv("col-2")#end
-                    #end
-                    #for(i:[1..10])
-                    #@elementItem()
-                        #@formControlDiv("col-4")
-                            #tinyInput(
-                                "text" "product-id" ""{"placeholder":"","nullmsg":"代号不能为空！","id":"product-id","class":
-                                "input-text"})
-                        #end
-                        #@validateDiv("col-2")#end
-                    #end
-                #end
-
+                    #end*#
+                    #for(modules:list)
+	                    #@elementItem()
+	                        #@formControlDiv("col-4")
+	                            #tinyInput("text" "product-id" modules.moduleName {"placeholder":"","nullmsg":"代号不能为空！","id":"product-id","class":"input-text"})
+	                        #end
+	                        #@validateDiv("col-2")#end
+	                    #end
+	                #end
+	                 #for(modules:[1..5])
+	                    #@elementItem()
+	                        #@formControlDiv("col-4")
+	                            #tinyInput("text" "product-id" "" {"placeholder":"","nullmsg":"代号不能为空！","id":"product-id","class":"input-text"})
+	                        #end
+	                        #@validateDiv("col-2")#end
+	                    #end
+	                #end
+						#@elementItem()
+					    <div class="col-12">
+					        <div class="col-5">
+					
+					        </div>
+					        <div class="col-1">
+					            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+					        </div>
+					        <div class="col-1">
+					            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+					        </div>
+					        <div class="col-5"></div>
+					
+					    #end
             #end
         #end
 
     #end
-
+  
 </table>
 
 

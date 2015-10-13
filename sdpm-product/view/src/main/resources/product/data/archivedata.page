@@ -7,9 +7,9 @@
 #for(l:pager?.records)
 #@tr()
 
-	#@td()<input type="checkbox" value="1" name="product-archive">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view?libId=${l?.docLibId}&docid=${l?.docId}">${l?.docId}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view?libId=${l?.docLibId}&docid=${l?.docId}">${l?.docModule}</a>#end
+	#@td()<input type="checkbox" value="${l?.docId}" name="idCheck">#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view?docid=${l?.docId}">${l?.docId}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH}/document/doc/view?docid=${l?.docId}">${l?.docModule}</a>#end
 	#@td()${l?.docTitle}#end
 	#@td()${l?.docAddedBy}#end
 	#@td()${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy年MM月dd日'):""}#end

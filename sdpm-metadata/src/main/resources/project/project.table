@@ -21,10 +21,10 @@
     <table-field standard-field-id="2c89172a50054d1495789ff49ed9b0e1" primary="false" unique="false" not-null="false" id="project_close_date" auto-increase="false"/>
     <table-field standard-field-id="c1b67b7db4674da8a314bf02239ed35f" primary="false" unique="false" not-null="false" id="project_canceled_by" auto-increase="false"/>
     <table-field standard-field-id="24dca11728884b14bd9be06764b46426" primary="false" unique="false" not-null="false" id="project_canceled_date" auto-increase="false"/>
-    <table-field standard-field-id="b8f47ec967ba40b8b33e8deb5ec37fc8" primary="false" unique="false" not-null="false" id="project_PO" auto-increase="false"/>
-    <table-field standard-field-id="9cf8e03af53c48378961f3f5a84348ae" primary="false" unique="false" not-null="false" id="project_PM" auto-increase="false"/>
-    <table-field standard-field-id="05e4444c3a0b40e398fff266f48eba84" primary="false" unique="false" not-null="false" id="project_QD" auto-increase="false"/>
-    <table-field standard-field-id="7eff7598a0f14505a4e7a54a8a146a36" primary="false" unique="false" not-null="false" id="project_RD" auto-increase="false"/>
+    <table-field standard-field-id="b8f47ec967ba40b8b33e8deb5ec37fc8" primary="false" unique="false" not-null="false" id="project_po" auto-increase="false"/>
+    <table-field standard-field-id="9cf8e03af53c48378961f3f5a84348ae" primary="false" unique="false" not-null="false" id="project_pm" auto-increase="false"/>
+    <table-field standard-field-id="05e4444c3a0b40e398fff266f48eba84" primary="false" unique="false" not-null="false" id="project_qd" auto-increase="false"/>
+    <table-field standard-field-id="7eff7598a0f14505a4e7a54a8a146a36" primary="false" unique="false" not-null="false" id="project_rd" auto-increase="false"/>
     <table-field standard-field-id="24ab9c69d3f64babbfc9a345d0cac3eb" primary="false" unique="false" not-null="false" id="project_team" auto-increase="false"/>
     <table-field standard-field-id="779f3ff51d8444c88cfb9542ad85060a" primary="false" unique="false" not-null="false" id="project_acl" auto-increase="false"/>
     <table-field standard-field-id="f3b59b52574b4f1e8a8e80f9d9f00c05" primary="false" unique="false" not-null="false" id="project_white_list" auto-increase="false"/>

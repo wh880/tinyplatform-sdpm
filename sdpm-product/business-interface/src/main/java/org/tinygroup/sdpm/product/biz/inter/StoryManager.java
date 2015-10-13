@@ -83,6 +83,12 @@ public interface StoryManager {
 	 */
 	List<StoryCount> modelStoryCount(ProductStory story);
 	
+	/**
+	 * 计划需求数量分类
+	 * @param story
+	 * @return
+	 */
+	List<StoryCount> planStoryCount(ProductStory story);
 	
 	
 }

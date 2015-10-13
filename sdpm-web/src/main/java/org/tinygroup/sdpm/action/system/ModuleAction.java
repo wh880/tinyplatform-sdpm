@@ -234,7 +234,9 @@ public class ModuleAction extends BaseController {
     @RequestMapping("/data")
     public List data(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        List<SystemModule> moduleList = moduleService.findModuleList(new SystemModule());
+        SystemModule module = new SystemModule();
+        module.setModuleType("story");
+        List<SystemModule> moduleList = moduleService.findModuleList(module);
         /*if (check == null || !check.equals("n")) {
             Map<String, Object> map1 = new HashMap<String, Object>();
             map1.put("id", -1);
@@ -303,14 +305,10 @@ public class ModuleAction extends BaseController {
     @RequestMapping("/dataone")
     public List dataone(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        List<SystemModule> moduleList = moduleService.findModuleList(new SystemModule());
-     /*   if (check == null || !check.equals("n")) {
-            Map<String, Object> map1 = new HashMap<String, Object>();
-            map1.put("id", -1);
-            map1.put("pId", 0);
-            map1.put("name", "所有模板");
-            list.add(map1);
-        }*/
+        SystemModule module= new SystemModule();
+        module.setModuleType("story");
+        		
+        List<SystemModule> moduleList = moduleService.findModuleList(module);
 
         for (SystemModule d : moduleList) {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -324,5 +322,15 @@ public class ModuleAction extends BaseController {
         }
         return list;
 
+    }
+    @RequestMapping("/findProductModule")
+    public String findProductModule(SystemModule module, Model model) {
+    	if(module.getModuleParent()==null){
+    		module.setModuleParent(0);
+    	}
+    	module.setModuleType("story");
+        List<SystemModule> list = moduleService.findModules(module);
+        model.addAttribute("list", list);
+        return "/product/page/project/product-modular.page";
     }
 }

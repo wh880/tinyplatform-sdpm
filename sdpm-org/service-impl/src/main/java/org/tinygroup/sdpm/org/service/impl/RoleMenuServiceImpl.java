@@ -46,4 +46,14 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     public void batchDeleteRoleMenu(List<OrgRoleMenu> orgRoleMenuList) {
         roleMenuManager.batchDelete(orgRoleMenuList);
     }
+
+    public void copyRoleMenu(Integer orgRoleIdNew, Integer orgRoleId) {
+        List<OrgRoleMenu> orgRoleMenuList = roleMenuManager.findMenuIds(orgRoleId);
+        for (OrgRoleMenu roleMenu : orgRoleMenuList) {
+            roleMenu.setOrgRoleId(orgRoleIdNew);
+        }
+        if (orgRoleMenuList != null || !orgRoleMenuList.isEmpty()) {
+            roleMenuManager.batchAdd(orgRoleMenuList);
+        }
+    }
 }

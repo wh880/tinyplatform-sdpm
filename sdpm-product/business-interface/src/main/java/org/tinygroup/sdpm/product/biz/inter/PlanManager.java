@@ -29,6 +29,12 @@ public interface PlanManager {
 	
 	
 	/**
+	 * 根据ID批量删除
+	 * @param ids
+	 * @return
+	 */
+	int[] deleteBatch(List<ProductPlan> ids);
+	/**
 	 * 根据ID进行软删除
 	 * @param planId
 	 * @return
