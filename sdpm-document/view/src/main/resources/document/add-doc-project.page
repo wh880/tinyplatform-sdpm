@@ -18,6 +18,45 @@
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">创建文档</p>
+			 #@elementItem()
+					#@colLabel()所属项目#end
+					#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+					#@Tselect2F()
+	                   		#@Tselect2Body("docProject" doc?.project {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        #foreach(project : projectList)
+	                        	#if(project?.projectDeleted !="1")
+	                        	 	<option value="${project?.projectId}">${project?.projectName}</option>
+	                        	#end
+	                        #end	                       	                    	                        
+	                    	#end 
+	                    	#@Tselect2Fix()
+	                    	<a href="${TINY_CONTEXT_PATH}/project/preadd" class="r">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH}/">全部</a>#end                 	                    	
+                	  #end
+                	  #end
+                	  #end
+	 		#end	 			
+    		 #@elementItem()
+					#@colLabel()所属产品#end
+					#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+					#@Tselect2F()
+	                   		#@Tselect2Body("docProduct" doc?.product {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        #foreach(product : productList)
+	                        	#if(product?.projectDeleted != 1)
+	                        	 <option value="${product?.productId}">${product?.productName}</option>
+	                       		#end
+	                        #end	                       	                    	                        
+	                    	#end                  
+	                    	#@Tselect2Fix()
+	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
+                	  #end
+                	  #end
+                	  #end
+			#end	
+	
 			#@elementItem()
 					#@colLabel()所属分类#end
 					#@formControlDiv("col-8")
@@ -138,5 +177,4 @@ function setType(type)
 		$('#contentBox').addClass('hidden');
 	}
 }
- 
 </script>
