@@ -58,4 +58,7 @@ public class BuildServiceImpl implements BuildService {
         //
         return buildManager.batchDelBuildByIds(ids);
     }
+    public List<ProjectBuild> findListBuild(ProjectBuild projectBuild){
+        return buildManager.findList(projectBuild);
+    }
 }
