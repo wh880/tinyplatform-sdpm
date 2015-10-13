@@ -25,6 +25,16 @@ import java.util.Date;
 public class ServiceClient {
 	public static Integer DELETE_YES = 1;
 	public static Integer DELETE_NO = 0;
+
+//	public Integer getProductId() {
+//		return productId;
+//	}
+//
+//	public void setProductId(Integer productId) {
+//		this.productId = productId;
+//	}
+//
+//	private Integer productId;
 	/**
 	 * 客户ID
 	 *

@@ -19,8 +19,11 @@ package org.tinygroup.sdpm.project.dao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 
+import java.util.List;
+
 public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
     Integer edits (ProjectBuild projectBuild);
 
     public Integer softDelete(ProjectBuild build);
+    public int[] batchUpdateDel(List<ProjectBuild> builds);
 }

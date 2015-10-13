@@ -35,6 +35,13 @@ public interface StoryService {
 	 * @return
 	 */
 	int[] updateBatchStory(List<ProductStory> stories);
+	
+	/**
+	 * 根据id批量删除
+	 * @param ids
+	 * @return
+	 */
+	int[] deleteBatchStory(List<ProductStory> ids);
 	/**
 	 * 根据需求ID查找
 	 * @param storyId
@@ -83,4 +90,11 @@ public interface StoryService {
 	 * @return
 	 */
 	List<StoryCount> modelStoryCount(ProductStory story);
+	
+	/**
+	 * 计划需求数量分类
+	 * @param story
+	 * @return
+	 */
+	List<StoryCount> planStoryCount(ProductStory story);
 }

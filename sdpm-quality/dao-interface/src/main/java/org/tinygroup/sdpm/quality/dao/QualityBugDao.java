@@ -16,6 +16,8 @@
 
 package org.tinygroup.sdpm.quality.dao;
 
+import java.util.List;
+
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -28,4 +30,6 @@ public interface QualityBugDao extends BaseDao<QualityBug,Integer> {
 	Integer softDelete(Integer id);
 
     public Pager<QualityBug> queryPager(int start, int limit , final Condition conditions, QualityBug qualityBug , final OrderBy... orderArgs);
+    
+    int[] batchUpdateDel(List<QualityBug> ids);
 }

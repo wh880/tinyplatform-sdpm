@@ -1,6 +1,49 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
+#macro initBatchAction()
+<script>
+	$(function () {
+		$("#${tableId} .secondMenu").on("click", function () {
+			var inputname = $(this).attr("tabindex");
+			var inputvalue = $(this).html().trim();
+			var ids = [];
+			var href = $(this).attr("href");
+			$("#${tableId} input[type='checkbox']").each(function () {
+				if (this.checked == true && this.id != "checkboxall") {
+					var clientId = $(this).val();
+					//if ("records" == inputname) {
+					ids.push(clientId);
+					// }
+				}
+			});
+			if (ids.length > 0) {
+				$.ajax({
+					url: href,
+					type: "post",
+					traditional: true,
+					data: {ids: ids, name: inputvalue},
+					dataType: "json",
+					success: function (data) {
+						// alert('success');
+						if(data.status=="y") {
+							layer.msg(data.info, 3, 1);
+							$("#${tableId}").trigger("refresh");
+						}else{
+							layer.msg(data.info)
+						}
+					},
+					error: function (res) {
+						layer.msg("失败")
+						//alert("失败");
+					}
+				});
+			}
+			return false;
+		});
+	});
+</script>
+#end
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 #set(requestStatuString = tinyRequestQueryString!=null ?tinyRequestQueryString:"")
 #set(qualityProduct = "")
@@ -101,7 +144,7 @@
 								<li>
 									#foreach(m:menuManager.getScopeMenus("testbug-op"))
 										#if(m.id=="tmakesure")
-											<a href="${TINY_CONTEXT_PATH}${m.href}">
+											<a href="${TINY_CONTEXT_PATH}/quality/bug/batch/sure">
 												${m.name}</a>
 										#end
 									#end
@@ -174,7 +217,7 @@
 			#@tinyTableContent(TINY_CONTEXT_PATH+"/quality/bug/findBug?"+requestStatuString)
 				#@thead()
 					#@tr()
-						#@tinyTh({"width":"6"})<input type="checkbox" name="" value="" />#end
+						#@tinyTh({"width":"6"})<input type="checkbox" name="bugId" value="" />#end
 						#@tinyTh({"class":"sorting","rel":"bug_id"})ID#end
 						#@tinyTh({"class":"sorting","rel":"bug_severity"})级别#end
 						#@tinyTh({"class":"sorting","rel":"priority"})P#end
@@ -190,12 +233,13 @@
 					#end
 				#end
 				<script type="text/javascript">
-				$(function(){
-					$('#${tableId}').on('click','.delBtn',function(e){
-						user_del(this,'1');
-					});
-				})
-			</script>
+					$(function(){
+						$('#${tableId}').on('click','.delBtn',function(e){
+							user_del(this,'1');
+						});
+					})
+				</script>
+			#initBatchAction()
 			#end
 			#end
 			##tinytable end

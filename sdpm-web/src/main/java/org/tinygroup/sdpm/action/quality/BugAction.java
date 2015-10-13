@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
+import org.tinygroup.sdpm.action.system.ModuleUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -25,6 +26,8 @@ import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -98,8 +101,25 @@ public class BugAction extends BaseController {
 	public String makesure(Integer bugId,Model model){
 		QualityBug bug = new QualityBug();
 	    bug = bugService.findById(bugId);
+		List<OrgUser> orgUsers = userService.findUserList(null);
 	    model.addAttribute("bug",bug);
+		model.addAttribute("userList",orgUsers);
 		return "/testManagement/page/tabledemo/makesure.page";
+	}
+	@RequestMapping("batch/sure")
+	public Map makesure(String[] bugId,Model model){
+		if(bugId.length>0){
+			for(String id : bugId){
+				QualityBug bug = bugService.findById(Integer.valueOf(id));
+				bug.setBugConfirmed(1);
+				bugService.updateBug(bug);
+			}
+		}
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("status", "success");
+		map.put("info", "成功");
+		return map;
 	}
 	@RequestMapping("/sure")
 	public String makesure(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
@@ -322,4 +342,29 @@ public class BugAction extends BaseController {
 		bugPage.getTotalCount();
 		return "project/bug/bugViewTableData.pagelet";
 	}
+	
+	//批量删除（软） 产品下面的计划、发布关联BUG表上使用的
+	@ResponseBody
+	@RequestMapping(value="/batchDelete")
+	public Map bctchDelBug(String ids)
+	{		
+		Map<String,String> map = new HashMap<String,String>();
+		if(ids == null){
+			map.put("status", "fail");
+		    map.put("info", "删除失败");
+			return map;
+		}
+		 List<QualityBug> list = new ArrayList<QualityBug>();
+		for(String s : ids.split(",")){			
+			QualityBug bug= new QualityBug();
+			bug.setBugId(Integer.valueOf(s));
+			bug.setDeleted(1);
+			list.add(bug);
+		}	
+		bugService.batchDeleteBug(list);
+		map.put("status", "success");
+	    map.put("info", "删除成功");
+	    return map;
+	}
+
 }

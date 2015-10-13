@@ -261,4 +261,18 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 		}
 		return select;
 	}
+	public int[] batchUpdateDel(List<ProjectBuild> builds){
+		if (CollectionUtil.isEmpty(builds)) {
+			return new int[0];
+		}
+		return getDslTemplate().batchUpdate(builds, new NoParamUpdateGenerateCallback() {
+
+			public Update generate() {
+				return update(PROJECT_BUILDTABLE).set(
+						PROJECT_BUILDTABLE.BUILD_DELETED.value(new JdbcNamedParameter("buildDeleted"))).where(
+						PROJECT_BUILDTABLE.BUILD_ID.eq(new JdbcNamedParameter("buildId")));
+			}
+		});
+
+	}
 }

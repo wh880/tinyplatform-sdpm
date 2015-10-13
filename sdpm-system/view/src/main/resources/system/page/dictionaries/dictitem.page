@@ -3,40 +3,41 @@
 #set(threeMenu="dictionary-entries")
 #set(editpagePath="/system/page/dictionaries/dictitem_edit.pagelet",editpageModalId="dictitemEditModal",editpageModal="#"+editpageModalId)
 #set(viewpagePath="/system/page/dictionaries/dictitem_view.pagelet",viewpageModalId="dictitemViewModal",viewpageModal="#"+viewpageModalId)
-###searchZtreeInit("treeDemo" "/data/tree/dict.js" "#test")
+#searchZtreeInit("treeDemo" "/data/tree/dict.js" "#test")
 #macro ztreeClick()
-	if(!treeNode.isParent){
-	loadURL('#link("/system/page/dictionaries/dictitem_list.pagelet")', $("#tBox"));
-	}
+if(!treeNode.isParent){
+var id = treeNode.id;
+loadURL('#link("/system/dict/dictItem?moduleId='+id+'")', $("#tBox"));
+}
 #end
 
 ###@h2()${activeTitle}#end
-	
-	#@divDataTablebox()
-	    #@tableHeaderBar()${activeTitle}#end
-		#@leftTreeCol()
-			#@searchZtreeWithInit("treeDemo" "height:454px;" "/system/module/tree?moduleType=dict")
-			#end
-		#end
-    	#@tableBox("tBox")
-    	#end
-	#end
+
+#@divDataTablebox()
+#@tableHeaderBar()字典项#end
+#@leftTreeCol()
+#@searchZtreeWithInit("treeDemo" "height:454px;" "/system/module/tree?moduleType=dict")
+#end
+#end
+#@tableBox("tBox")
+#end
+#end
 #simpleModal(editpageModalId)
 #simpleViewModal(viewpageModalId)
 <script>
 	$(document).ready(function(){
-            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-        });
-            
-            function onCheck(e,treeId,treeNode){
-            var treeObj=$.fn.zTree.getZTreeObj("treeDemo"),
-            nodes=treeObj.getCheckedNodes(true),
-            var v=nodes[0];
-            alert(v);
+		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+	});
+
+	function onCheck(e,treeId,treeNode){
+		var treeObj=$.fn.zTree.getZTreeObj("treeDemo"),
+				nodes=treeObj.getCheckedNodes(true),
+		var v=nodes[0];
+		alert(v);
 ##            for(var i=0;i<nodes.length;i++){
-##            v+=nodes[i].name + ",";
+		##            v+=nodes[i].name + ",";
 ####            alert(nodes[i].id); //获取选中节点的值
-##            }
-            
-            }
+		##            }
+
+	}
 </script>

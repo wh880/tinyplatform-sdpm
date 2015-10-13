@@ -26,6 +26,9 @@ public class ServiceSla {
 
 	public static Integer DELETE_YES=1;
 	public static Integer DELETE_NO=0;
+	/*在faq的pojo中，添加客户名称*/
+	private String clientName;
+	private String productName;
 	/**
 	 * 服务协议ID
 	 *
@@ -159,6 +162,22 @@ public class ServiceSla {
 
 	public ServiceSla() {
 		setDeleted(DELETE_NO);
+	}
+
+	public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 	public Integer getSlaId() {
