@@ -83,6 +83,20 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 			}
 		});
 	}
+	
+	public int[] batchUpdateDel(List<ProductPlan> ids) {
+		if(CollectionUtil.isEmpty(ids)){
+			return new int[0];
+		}
+		return getDslTemplate().batchUpdate(ids, new NoParamUpdateGenerateCallback(){
+			
+			public Update generate() {
+				return update(PRODUCT_PLANTABLE).set(
+						PRODUCT_PLANTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
+								PRODUCT_PLANTABLE.PLAN_ID.eq(new JdbcNamedParameter("planId")));
+			}
+		});
+	}
 
 	public int deleteByKey(Integer pk){
 		if(pk == null){
