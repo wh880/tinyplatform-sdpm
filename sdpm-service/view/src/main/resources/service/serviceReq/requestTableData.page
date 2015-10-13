@@ -35,77 +35,50 @@
 #end
 #@simpleModal(myModal)#end
 
+#*macro getMapInfoJson(map) #for(var i:map) ,${var.key}="${var.value}
+        "${key}":"${i}"
+    #end
+#end*#
+#macro initBatchAction(map)
 <script>
-    $(document).ready(function () {
-        $(".secondMenu").each(function () {
-            $(this).on("click", function () {
-                var inputname = $(this).attr("tabindex");
-                var inputvalue = $(this).html().trim();
-                var ids = [];
-                var href = $(this).attr("href");
-//                alert(href);
-                $("input[type='checkbox']").each(function () {
-                    if (this.checked == true && this.id != "checkboxall") {
-                        var clientId = $(this).val();
-                        if ("records" == inputname) {
-                            ids.push(clientId);
-                        }
-                    }
-                });
-                if (ids.length > 0) {
-                    $.ajax({
-                        url: href,
-                        type: "post",
-                        traditional: true,
-                        data: {ids: ids, name: inputvalue},
-                        dataType: "json",
-//                        contentType: 'application/json;charset=utf-8', //设置请求头信息
-                        success: function (data) {
-                            alert('success');
-                            window.location.reload();
-                        },
-                        error: function (res) {
-                            alert("失败");
-                        }
-                    });
-                }
-                return false;
-            });
+$(function () {
+    $("#${tableId} .secondMenu").on("click", function () {
+        var inputname = $(this).attr("tabindex");
+        var inputvalue = $(this).html().trim();
+        var ids = [];
+        var href = $(this).attr("href");
+        $("#${tableId} input[type='checkbox']").each(function () {
+            if (this.checked == true && this.id != "checkboxall") {
+                var clientId = $(this).val();
+                //if ("records" == inputname) {
+                    ids.push(clientId);
+               // }
+            }
         });
+        if (ids.length > 0) {
+            $.ajax({
+                url: href,
+                type: "post",
+                traditional: true,
+                data: {ids: ids, name: inputvalue},
+                dataType: "json",
+                success: function (data) {
+                   // alert('success');
+                    if(data.status=="y") {
+                        layer.msg(data.info, 3, 1);
+                        $("#${tableId}").trigger("refresh");
+                    }else{
+                        layer.msg(data.info)
+                    }
+                },
+                error: function (res) {
+                    layer.msg("失败")
+                    //alert("失败");
+                }
+            });
+        }
+        return false;
     });
-    //    $(document).ready(function () {
-    //        $(".secondMenu").each(function () {
-    //            $(this).on("click", function () {
-    //                var inputname = $(this).attr("tabindex");
-    //                var inputvalue = $(this).html().trim();
-    //                var ids = [];
-    //                $("input[type='checkbox']").each(function () {
-    //                    if (this.checked == true && this.id != "checkboxall") {
-    //                        var clientId = $(this).val();
-    //                        if ("records" == inputname) {
-    //                            ids.push(clientId);
-    //                        }
-    //                    }
-    //                });
-    //                alert(ids);
-    //                alert(inputvalue);
-    //                if (ids.length > 0) {
-    //                    $.ajax({
-    //                        url: $(this).attr("href"),
-    //                        type: "post",
-    //                        traditional: true,
-    //                        data: {ids: ids, name: inputvalue},
-    //                        dataType: "json",
-    //                        success: function (data) {
-    //                            window.location.reload();
-    //                        }
-    //                        error: function (res) {
-    //                            alert("失败");
-    //                        }
-    //                    });
-    //                }
-    //                return false;
-    //            });
-    //        });
-    //    });
+});
 </script>
+#end

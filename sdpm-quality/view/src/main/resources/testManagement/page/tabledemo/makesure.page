@@ -31,22 +31,23 @@
     #@elementItem()
             #@sdpmItem("指派给")
 	            #@Tselect2F()
-	                   		 #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">A</option>
-	                        <option value="ME">B</option>
-	                        <option value="MD">C</option>
-	                    	#end                
-                	  #end	             
+	                #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+						<option value="0">/</option>
+						#foreach(user : userList)
+							<option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+						#end
+	                #end
+                #end
         	#end
     #end
     #@elementItem()
     	#@sdpmItem("优先级")
                #@Tselect2F()
-	                   		 #@Tselect2Body("priority" bug?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">1</option>
-	                        <option value="2">2</option>
-	                        <option value="3">3</option>
-	                    	#end                
+					 #@Tselect2Body("priority" bug?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					#end
                 #end
    		#end 
     #end
@@ -55,9 +56,9 @@
         #@sdpmItem("抄送给")
              #@Tselect2F()
 	               #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">A</option>
-	                        <option value="ME">B</option>
-	                        <option value="MD">C</option>
+						#foreach(user : userList)
+						<option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+						#end
 	          		#end                
         	 #end
     	#end

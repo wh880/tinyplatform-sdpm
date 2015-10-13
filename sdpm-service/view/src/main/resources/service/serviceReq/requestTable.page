@@ -68,6 +68,7 @@
             #end
         #end
     #end
+    #initBatchAction()
 #end
 #@simpleModal("myModal" "用户编辑")#end
 #@simpleModal("myModal2" "用户删除")#end

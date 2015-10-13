@@ -20,6 +20,7 @@ import java.util.Map;
 //@Component
 public class DictUtil{
     private static   Map<String,List<SystemDict>> dictMap = new HashMap<String, List<SystemDict>>();
+    private static   Map<String,Map<String,String>> dictValueMap = new HashMap<String, Map<String,String>>();
     private static boolean isStarted = false;
     private static DictManager dictManager = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(DictManagerImpl.class);
     private static ModuleManager moduleManager = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(ModuleManagerImpl.class);
@@ -36,6 +37,10 @@ public class DictUtil{
         return dictMap.get(dictType);
     }
 
+    public static  String getDict(String dictType,String key ){
+        return dictValueMap.get(dictType).get(key);
+    }
+
 //    public void afterPropertiesSet() throws Exception {
 //        init();
 //    }
@@ -46,8 +51,13 @@ public class DictUtil{
                SystemDict dict = new SystemDict();
                dict.setModuleId(systemModule.getModuleId());
                List<SystemDict> dicts = dictManager.findList(dict,"dict_sort",true);
+               Map<String,String> keyValue = new HashMap<String, String>();
+               for(SystemDict dict1 : dicts){
+                   keyValue.put(dict1.getDictKey(),dict1.getDictValue());
+               }
                if(dicts != null&&dicts.size()>0){
                    dictMap.put(systemModule.getModuleName(),dicts);
+                   dictValueMap.put(systemModule.getModuleName(),keyValue);
                }
             }
         }

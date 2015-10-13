@@ -1,47 +1,45 @@
-###seltreeInit("dictitemTree" "/data/tree/dict.js")
-###@formHorizoontalValidate("" "dictitem-add")
-##		#@rowCol("col-3" "编码：" "col-5" "*")
-##			#@inputTextx("dictKey" "" "*" "编码不能为空")${dict?.dictKey}#end
-##		#end
-##		#@rowCol("col-3" "值：" "col-5" "*")
-##			#@inputTextx("dictValue" "" "*" "值不能为空")${dict?.dictValue}#end
-##		#end
-##		#@rowCol("col-3" "排序号：" "col-5")
-##			#@inputTextx("dictSort" "" "/^[0-9]*$/")${dict?.dictSort}#end
-##		#end
-##		#@rowCol("col-3" "字典类型：" "col-5" "*")
-##			#@tinySelectOrAdd("dictType" "dictType" "" "" "/system/page/dictionaries/data/select/dict.js" "/system/page/dictionaries/dict_edit.pagelet")#end
-##		#end
-###end
+
 #@tinyForm("dictitemEditForm" TINY_CONTEXT_PATH+"/system/dict/save" "post" {"class":""})
-      <input type="hidden" name="dictId" value="${dict?.dictId}"/>
-      <input type="hidden" name="deleted" value="0"/>
-       #@gridSysRow()
-           #@colLabel("col-4")<span class="c-red">*</span>代码：#end
-               #@gridSysCol(6)
-                  #tinyInput(
-                         "text" "dictKey" dict?.dictKey {"datatype":"","id":"请求标题","class":
-                             "input-text"})
-                         #end
-         #end
-       #@gridSysRow()
-           #@colLabel("col-4")<span class="c-red">*</span>中文名：#end
-               #@gridSysCol(6)
-                  #tinyInput(
-                         "text" "dictValue"dict?.dictValue {"datatype":"","id":"请求标题","class":
-                             "input-text"})
-                         #end
-         #end
-          #@gridSysRow()
-           #@colLabel("col-4")<span class="c-red">*</span>排序：#end
-               #@gridSysCol(6)
-                  #tinyInput(
-                         "text" "dictSort" dict?.dictSort {"datatype":"","id":"请求标题","class":
-                             "input-text"})
-                         #end
-         #end
-         	#@rowCol("col-4" "字典类型：" "col-5" "*")
-			#@tinySelectOrAdd("dictType" "dictType" "" "" "/system/page/dictionaries/data/select/dict.js" "/system/module/find")#end
-		#end
- 
- #end
+<input type="hidden" name="dictId" value="${dict?.dictId}"/>
+<input type="hidden" name="deleted" value="0"/>
+#@gridSysRow()
+#@colLabel("col-4")<span class="c-red">*</span>代码：#end
+#@gridSysCol(6)
+#tinyInput("text" "dictKey" dict?.dictKey {"datatype":"","id":"请求标题","class":"input-text"})
+#end
+#end
+#@gridSysRow()
+#@colLabel("col-4")<span class="c-red">*</span>中文名：#end
+#@gridSysCol(6)
+#tinyInput("text" "dictValue"dict?.dictValue {"datatype":"","id":"请求标题","class":"input-text"})
+#end
+#end
+#@gridSysRow()
+#@colLabel("col-4")<span class="c-red">*</span>排序：#end
+#@gridSysCol(6)
+#tinyInput("text" "dictSort" dict?.dictSort {"datatype":"","id":"请求标题","class":"input-text"})
+#end
+#end
+#@gridSysRow()
+#@colLabel("col-4")<span class="c-red">*</span>字典类型：#end
+#@gridSysCol(6)
+#if(moduleList)
+#@Tselect2F()
+
+#@Tselect2Body("moduleId" module?.moduleId?:dictModule?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+#for(m:moduleList)
+<option value="${m.moduleId}">${m.moduleName}</option>
+#end
+#end
+#@Tselect2Fix()
+<a href="#" class="r">增加</a>
+<a href="#">全部</a>
+#end
+#end
+#else
+${module?.moduleName}
+<input type="hidden" name="moduleId" value="${module?.moduleId}"/>
+#end
+#end
+#end
+#end
