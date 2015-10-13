@@ -251,6 +251,16 @@ public class TaskAction extends BaseController {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
 
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
+        SystemModule module = new SystemModule();
+        module.setModuleType("project");
+        module.setModuleRoot(projectId);
+        List<SystemModule> moduleList = moduleService.findModuleList(module);
+
+        List<ProductStory> storyList = storyService.findStoryByProject(projectId);
+
+        model.addAttribute("moduleList", moduleList);
+        model.addAttribute("storyList", storyList);
+
         return "project/task/add.page";
     }
 
