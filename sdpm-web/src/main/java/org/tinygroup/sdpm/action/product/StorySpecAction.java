@@ -27,9 +27,9 @@ public class StorySpecAction extends BaseController{
 	}
 	
 	@RequestMapping("/find/{forward}")
-	public String find(@PathVariable(value="forward")String forward,Integer storyId,ProductStory story,Model model){
+	public String find(@PathVariable(value="forward")String forward,ProductStory story,Model model){
 		
-		ProductStorySpec storySpec = specService.findStorySpec(storyId);
+		ProductStorySpec storySpec = specService.findStorySpec(story.getStoryId());
 		model.addAttribute("storySpec", storySpec);
 		
 		if ("productDemandDetail".equals(forward)) {

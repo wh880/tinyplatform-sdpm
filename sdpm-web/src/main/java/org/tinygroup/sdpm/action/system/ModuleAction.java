@@ -329,7 +329,7 @@ public class ModuleAction extends BaseController {
     		module.setModuleParent(0);
     	}
     	module.setModuleType("story");
-        List<SystemModule> list = moduleService.findModules(module);
+        List<SystemModule> list = moduleService.findAllModules(module);
         model.addAttribute("list", list);
         return "/product/page/project/product-modular.page";
     }
