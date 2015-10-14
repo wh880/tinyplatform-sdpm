@@ -30,7 +30,7 @@ public class ModuleUtil {
 
     public static String getCondition(int moduleId,ModuleService moduleService){
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("int(");
+        stringBuffer.append("in (");
         mergeModuleContidion(stringBuffer,moduleId,moduleService);
         stringBuffer.append(")");
         return stringBuffer.toString();
@@ -38,7 +38,7 @@ public class ModuleUtil {
 
     public static String getConditionByRoot(int rootId, ModuleService moduleService){
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("int(");
+        stringBuffer.append("in (");
         SystemModule systemModule = new SystemModule();
         systemModule.setModuleRoot(rootId);
         List<SystemModule> systemModules = moduleService.findModuleList(systemModule);

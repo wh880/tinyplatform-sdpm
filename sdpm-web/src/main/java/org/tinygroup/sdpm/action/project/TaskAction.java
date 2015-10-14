@@ -180,11 +180,14 @@ public class TaskAction extends BaseController {
         ProjectTask task = new ProjectTask();
         task.setTaskProject(projectId);
         String moduleIds = "";
-        if (moduleId != null && !moduleId.contains("p")) {
-            moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId), moduleService);
-        } else {
-            moduleIds = moduleId;
+        if (!StringUtil.isBlank(moduleId)) {
+            if (moduleId.contains("p")) {
+                moduleIds = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)), moduleService);
+            } else {
+                moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId), moduleService);
+            }
         }
+
 
         String condition = TaskStatusUtil.getCondition(statu, choose, request, moduleIds);
         Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, condition, group);
