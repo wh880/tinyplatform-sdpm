@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 //import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
@@ -63,9 +64,9 @@ public class DocServiceImpl implements DocService{
 		return docbiz.getDoclibList(doclib);
 	}
 
-	public Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc,String sortName,boolean asc) {
+	public Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc,SearchInfos conditions,String groupOperate, String sortName,boolean asc) {
 		// 
-		return docbiz.queryItemWithPage(start, limit, doc,sortName, asc);
+		return docbiz.queryItemWithPage(start, limit, doc, conditions, groupOperate, sortName, asc);
 	}
 	
 	public Pager<DocumentDoclib> findDoclibRetPager(Integer start, Integer limit,DocumentDoclib doclib,String sortName, boolean asc) {
