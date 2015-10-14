@@ -183,6 +183,10 @@ public class BugAction extends BaseController {
 		bug.setBugResolvedDate(new Date());
 		List<OrgUser> orgUsers = userService.findUserList(null);
 		model.addAttribute("userList",orgUsers);
+		ProjectBuild p = new ProjectBuild();
+		p.setBuildProduct(bug.getProductId());
+		List<ProjectBuild> projectBuilds = buildService.findListBuild(p);
+		model.addAttribute("buildList",projectBuilds);
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/solution.page";
 	}
@@ -232,8 +236,7 @@ public class BugAction extends BaseController {
 	
 	@RequestMapping("/toEdit")
 	public String edit(Integer bugId,Model model){
-		QualityBug bug = new QualityBug();
-		bug = bugService.findById(bugId);
+		QualityBug bug = bugService.findById(bugId);
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/edition.page";
 	}
@@ -261,8 +264,12 @@ public class BugAction extends BaseController {
 		QualityBug bug = bugService.findById(bugId);
 		List<Project> projects = projectService.findProjectList(null,null,null);
 		List<OrgUser> orgUsers = userService.findUserList(null);
+		ProjectBuild p = new ProjectBuild();
+		p.setBuildProduct(bug.getProductId());
+		List<ProjectBuild> projectBuilds = buildService.findListBuild(p);
 		model.addAttribute("projectList",projects);
 		model.addAttribute("userList",orgUsers);
+		model.addAttribute("buildList",projectBuilds);
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/editionpaging.pagelet";
 	}
@@ -279,7 +286,15 @@ public class BugAction extends BaseController {
 	@RequestMapping("/toCopy")
 	public String copy(Integer bugId,Model model){
 		QualityBug bug = bugService.findById(bugId);
-		model.addAttribute("bug",bug);
+		List<Project> projects = projectService.findProjectList(null,null,null);
+		List<OrgUser> orgUsers = userService.findUserList(null);
+		ProjectBuild p = new ProjectBuild();
+		p.setBuildProduct(bug.getProductId());
+		List<ProjectBuild> projectBuilds = buildService.findListBuild(p);
+		model.addAttribute("projectList",projects);
+		model.addAttribute("userList",orgUsers);
+		model.addAttribute("buildList",projectBuilds);
+		model.addAttribute("bug", bug);
 		return "/testManagement/page/copyBug.page";
 	}
 

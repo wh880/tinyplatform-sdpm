@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
@@ -54,7 +55,7 @@ public class DocAction {
 	}
 	
 	@RequestMapping(value="/doc/list")
-	public String docList(HttpServletRequest request,Integer page,Integer limit,String order,String ordertype,DocumentDoc doc,Model model)
+	public String docList(HttpServletRequest request,Integer page,Integer limit,String order,String ordertype,DocumentDoc doc,Model model ,String groupOperate, SearchInfos searchInfos)
 	{
 		doc.setDocDeleted("0");
 		boolean asc = true;		
@@ -62,7 +63,7 @@ public class DocAction {
 			asc = false;
 		}
 		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
-		Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, order, asc);
+		Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, searchInfos,groupOperate, order, asc);
 		model.addAttribute("docpager", docpager);
 		return "/data/datalist.pagelet";
 	}
@@ -244,14 +245,14 @@ public class DocAction {
 	}
 	
 	@RequestMapping("/product/doc/list")
-	public String productList(DocumentDoc doc,HttpServletRequest request,Integer page,Integer limit,String order,String ordertype,Model model){
+	public String productList(DocumentDoc doc,HttpServletRequest request,Integer page,Integer limit,String order,String ordertype,String groupOperate, SearchInfos searchInfos, Model model){
 		
 		doc.setDocProduct((Integer) request.getSession().getAttribute("sessionProductId"));
 		boolean asc = true;		
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
-		Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, NameUtil.resolveNameDesc(order), asc);
+		Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc,searchInfos,groupOperate, NameUtil.resolveNameDesc(order), asc);
 		model.addAttribute("pager", docpager);
 		return "/product/data/archivedata.pagelet";
 	}

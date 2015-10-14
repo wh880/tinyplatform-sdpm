@@ -27,7 +27,7 @@
         <menu id="org-user-add" name="增加" href="addUser.page" icon="icon-plus" sort="1" isShow="1"
               scope="org-user-add"/>
 
-        <menu id="org-user-storyAdmin" name="需求" href="/organization/user/storyAdmin.page" icon="" sort="1"
+        <menu id="org-user-storyAdmin" name="需求" href="/org/user/story" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
         <menu id="org-user-taskAdmin" name="任务" href="/organization/user/taskAdmin.page" icon="" sort="1"

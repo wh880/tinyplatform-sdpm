@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ModuleUtil {
 
-    public static void mergeModuleContidion(StringBuffer condition,int moduleId , ModuleService moduleService){
+    private static void mergeModuleContidion(StringBuffer condition,int moduleId , ModuleService moduleService){
         SystemModule systemModule = new SystemModule();
         systemModule.setModuleParent(moduleId);
         if(!condition.toString().contains("in")){
@@ -29,5 +29,12 @@ public class ModuleUtil {
             condition.append(","+moduleId);
         }
 
+    }
+
+    public static String getCondition(int moduleId,ModuleService moduleService){
+        StringBuffer stringBuffer = new StringBuffer();
+        mergeModuleContidion(stringBuffer,moduleId,moduleService);
+        stringBuffer.append(")");
+        return stringBuffer.toString();
     }
 }
