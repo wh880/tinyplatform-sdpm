@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
-import org.tinygroup.sdpm.action.system.ProfileAction;
+import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
@@ -78,13 +78,9 @@ public class StoryAction extends BaseController{
     	
     	productStory.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
     	ProductStory story=storyService.addStory(productStory, storySpec);
-    	 ProfileAction profileAction = new ProfileAction();
+    	 ProfileUtil profileUtil = new ProfileUtil();
     	 
-         for(int i=0,n=file.length;i<n;i++){
-        	 if(!file[i].isEmpty()&&file[i].getSize()!=0){
-        	 profileAction.upload(file[i],story.getStoryId(),"story",title[i]);
-        	 }
-         }
+         profileUtil.uploads(file, story.getStoryId(), "story", title);
     	return "redirect:" + "/product/page/project/togglebox.page";
     }
     
