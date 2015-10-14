@@ -69,15 +69,25 @@ public class BuildAction extends BaseController {
     }
 
     @RequestMapping("/edit")
-    public String edit(Integer buildId, Model model) {
+    public String edit(HttpServletRequest request,Integer buildId, Model model) {
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        SystemModule module = new SystemModule();
+        module.setModuleType("project");
+        module.setModuleRoot(projectId);
+        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
+        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
+        model.addAttribute("teamList", teamList);
+        model.addAttribute("prodcutList", list);
         if (buildId != null) {
-            ProjectBuild build = buildService.findBuild(buildId);
-            model.addAttribute("build", build);
-            //还需要查询其他相关任务剩余时间的信息
-            return "project/version/edit.page";
+            ProjectBuild build =buildService.findBuild(buildId);
+            model.addAttribute("build",build);
+
         }
-        return "error";
+        return "project/version/edit.page";
     }
+
+
+
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
     public String editSave(ProjectBuild build, Model model) {
         if (build.getBuildId() == null) {
