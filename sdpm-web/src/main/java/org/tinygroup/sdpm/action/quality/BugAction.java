@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
+import org.tinygroup.sdpm.action.system.ModuleUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -190,10 +191,6 @@ public class BugAction extends BaseController {
 		bug.setBugResolvedDate(new Date());
 		List<OrgUser> orgUsers = userService.findUserList(null);
 		model.addAttribute("userList",orgUsers);
-		ProjectBuild p = new ProjectBuild();
-		p.setBuildProduct(bug.getProductId());
-		List<ProjectBuild> projectBuilds = buildService.findListBuild(p);
-		model.addAttribute("buildList",projectBuilds);
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/solution.page";
 	}
@@ -243,7 +240,8 @@ public class BugAction extends BaseController {
 	
 	@RequestMapping("/toEdit")
 	public String edit(Integer bugId,Model model){
-		QualityBug bug = bugService.findById(bugId);
+		QualityBug bug = new QualityBug();
+		bug = bugService.findById(bugId);
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/edition.page";
 	}
@@ -271,12 +269,8 @@ public class BugAction extends BaseController {
 		QualityBug bug = bugService.findById(bugId);
 		List<Project> projects = projectService.findProjectList(null,null,null);
 		List<OrgUser> orgUsers = userService.findUserList(null);
-		ProjectBuild p = new ProjectBuild();
-		p.setBuildProduct(bug.getProductId());
-		List<ProjectBuild> projectBuilds = buildService.findListBuild(p);
 		model.addAttribute("projectList",projects);
 		model.addAttribute("userList",orgUsers);
-		model.addAttribute("buildList",projectBuilds);
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/editionpaging.pagelet";
 	}
@@ -293,15 +287,7 @@ public class BugAction extends BaseController {
 	@RequestMapping("/toCopy")
 	public String copy(Integer bugId,Model model){
 		QualityBug bug = bugService.findById(bugId);
-		List<Project> projects = projectService.findProjectList(null,null,null);
-		List<OrgUser> orgUsers = userService.findUserList(null);
-		ProjectBuild p = new ProjectBuild();
-		p.setBuildProduct(bug.getProductId());
-		List<ProjectBuild> projectBuilds = buildService.findListBuild(p);
-		model.addAttribute("projectList",projects);
-		model.addAttribute("userList",orgUsers);
-		model.addAttribute("buildList",projectBuilds);
-		model.addAttribute("bug", bug);
+		model.addAttribute("bug",bug);
 		return "/testManagement/page/copyBug.page";
 	}
 
@@ -398,6 +384,29 @@ public class BugAction extends BaseController {
 	    return map;
 	}
 	
-
+	//产品计划、发布关联BUG下面的搜索按钮使用
+	@RequestMapping("/linkBug")
+    public String bugAction(ProductPlan plan,QualityBug bug, String groupOperate, Model model, HttpServletRequest request, HttpServletResponse response){
+    	String queryString = request.getQueryString();
+   /*    if(queryString!=null&&!queryString.contains("choose")){
+            return "redirect:/product/story?choose=1&"+queryString;
+        }*/
+        return "/product/plan/forword/noRelateBug?planId"+plan.getPlanId();
+    }
+	
+	   @RequestMapping("/searchBug")
+	    public String   SearchAction(int page, int pagesize, ProductStory story, String choose, String groupOperate, SearchInfos searchInfos, String order, String ordertype, Model model, HttpServletRequest request){
+	        
+	    	if(request.getSession().getAttribute("sessionProductId")!=null){
+	    		story.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+	    	}
+	    	/*if (story.getModuleId()==-1) {
+	    		story.setModuleId(null);
+			}*/
+	    	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
+	        model.addAttribute("storyList",p);
+	        return "product/data/tabledata.pagelet";
+	    }
+	   
 	
 }
