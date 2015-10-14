@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
@@ -32,6 +34,8 @@ public class RequestAction extends BaseController {
     private ReviewService reviewService;
     @Autowired
     private ClientService clientService;
+    @Autowired
+    private ProductService productService;
 
     @RequestMapping(value = "/list")
     public String list(Integer operation, Integer status, Model model) {
@@ -63,8 +67,10 @@ public class RequestAction extends BaseController {
             model.addAttribute("request", clientRequest);
         }
         ServiceClient client = new ServiceClient();
-        List<ServiceClient> list = clientService.getClientList(client);
-        model.addAttribute("list", list);
+        List<ServiceClient> clientList = clientService.getClientList(client);
+        List<Product> productList = productService.findProductList(new Product());
+        model.addAttribute("clientList", clientList);
+        model.addAttribute("productList", productList);
         return "service/serviceReq/add.page";
     }
 
@@ -140,7 +146,7 @@ public class RequestAction extends BaseController {
             reviewService.updateReview(review);
         }
         reviewService.changeStatus(review.getClientRequestId());
-        model.addAttribute("review", review);
+//        model.addAttribute("review", review);
         return "redirect:/service/request/list";
     }
 

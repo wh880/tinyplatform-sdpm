@@ -49,7 +49,7 @@ public class ClientAction extends BaseController {
 
     @RequestMapping(value = "/list/data")
     public String listData(Integer limit, Integer start, ServiceClient client, Model model, Integer treeId,
-                           @RequestParam(required = false, defaultValue = "clientName") String order,
+                           @RequestParam(required = false, defaultValue = "clientCreateDate") String order,
                            @RequestParam(required = false, defaultValue = "asc") String ordertype) {
 
         if (treeId != null) {
@@ -141,14 +141,6 @@ public class ClientAction extends BaseController {
         return "service/client/clientProduct.page";
     }
 
-    @RequestMapping("/slaEdit")
-    public String slaEdit(Integer id, Model model) {
-        if (id != null) {
-            ServiceSla sla = slaService.findSla(id);
-            model.addAttribute("sla", sla);//待定....根据明明页面上的来
-        }
-        return "service/sla/slaAdd.page";
-    }
 
     @ResponseBody
     @RequestMapping(value = "/slaDelete")
