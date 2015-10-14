@@ -266,7 +266,9 @@ public class BugAction extends BaseController {
 	@RequestMapping("/editionPaging")
 	public String editionPaging(Integer bugId,Model model){
 		QualityBug bug = bugService.findById(bugId);
-		List<Project> projects = projectService.findProjectList(null,null,null);
+		Project p = new Project();
+		p.setProjectDeleted("0");
+		List<Project> projects = projectService.findProjectList(p,null,null);
 		List<OrgUser> orgUsers = userService.findUserList(null);
 		model.addAttribute("projectList",projects);
 		model.addAttribute("userList",orgUsers);
@@ -294,7 +296,11 @@ public class BugAction extends BaseController {
 	@RequestMapping("/ajax/module")
 	public List<SystemModule> getModule(SystemModule systemModule){
 		systemModule.setModuleType("story");
-		return moduleService.findModules(systemModule);
+		List<SystemModule> moduleList = moduleService.findModules(systemModule);
+		for(SystemModule module : moduleList){
+			module.setModuleName(ModuleUtil.getPath(module.getModuleId(),"/",moduleService,null,false));
+		}
+		return moduleList;
 	}
 
 	@ResponseBody

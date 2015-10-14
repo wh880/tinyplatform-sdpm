@@ -52,6 +52,9 @@ public class ModuleUtil {
 
     public static String getPath(int moduleId, String division, ModuleService moduleService,String root, boolean openRoot){
         SystemModule module = moduleService.findById(moduleId);
+        if(module.getModulePath()==null||module.getModulePath()==""){
+            return module.getModuleName();
+        }
         if(openRoot){
             return root+division+mergePath(division,module.getModulePath().substring(1),moduleService)+division+module.getModuleName();
         }
@@ -61,9 +64,13 @@ public class ModuleUtil {
     private static String mergePath(String division, String paths, ModuleService moduleService){
         String[] path = paths.split(",");
         if(path.length>1){
-            return moduleService.findById(Integer.parseInt(path[0])).getModuleName()+division+ mergePath(division,paths.substring(path[0].length()+1),moduleService);
-        }else{
-            return moduleService.findById(Integer.parseInt(path[0])).getModuleName();
+            return division+moduleService.findById(Integer.parseInt(path[0])).getModuleName()+division+ mergePath(division,paths.substring(path[0].length()+1),moduleService);
+        }else if(path.length>0){
+            if("".equals(path[0])){
+                return "";
+            }
+            return division+moduleService.findById(Integer.parseInt(path[0])).getModuleName();
         }
+        return "";
     }
 }
