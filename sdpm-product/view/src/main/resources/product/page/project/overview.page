@@ -18,9 +18,8 @@
 
 			#foreach(m:menuManager.getScopeMenus("overview-cl"))
 			#set(url=eval(m?.href))
-                #if(m.id=="product-overview-delete")
-                    #@delItemsdpm("#")#buttonIcon(iconClass="icon-remove")#end&nbsp
-                #elseif(m.id=="product-overview-close")
+             
+                #if(m.id=="product-overview-close")
                         #@iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet""ml-5")关闭#end
                 #elseif(m.id=="product-overview-back")
                        <a href="${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
@@ -59,9 +58,7 @@
                 #foreach(m:menuManager.getScopeMenus("overview-cl"))
                 &nbsp;&nbsp;&nbsp;
 				#set(url=eval(m?.href))
-	                #if(m.id=="product-overview-delete")
-	                    #@delItemsdpm("#")#buttonIcon(iconClass="icon-remove")#end
-	                #elseif(m.id=="product-overview-close")
+	                #if(m.id=="product-overview-close")
 	                        #@iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet""ml-5")关闭#end
 	                #elseif(m.id=="product-overview-back")
 	                       <a href="${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
