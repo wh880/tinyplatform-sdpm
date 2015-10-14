@@ -77,8 +77,8 @@ public class ServiceReviewTable extends Table {
 
 	/** 
 	 * 回访评分
-	 * 
-	 * 0很不满意，2不满意，3一般，4满意，5非常满意
+	 *
+	 * 0很不满意，1不满意，2一般，3满意，4非常满意
 	 */
 	public final Column REVIEW_SCORE = new Column(this, "review_score");
 

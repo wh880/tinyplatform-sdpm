@@ -63,5 +63,5 @@ public interface FaqService {
      * @param id 主键
      * @return
      */
-    Integer selectcount(Integer id);
+   /* Integer selectcount(Integer id);*/
 }

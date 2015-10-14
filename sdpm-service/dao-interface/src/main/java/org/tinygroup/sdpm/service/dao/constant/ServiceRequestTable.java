@@ -189,7 +189,7 @@ public class ServiceRequestTable extends Table {
 
 	/** 
 	 * 请求状态
-	 *
+	 * 
 	 * 请求状态0-created新建,1-doing处理中，2-rejected拒绝,3-toProduct转出（回复后用户可见）,4-planned已接受【由产品模块需求纳入计划触发/客服直接处理】
 	 * （回复后用户可见），5-postponed挂起，6-finished已完成【由产品模块需求阶段】，7-released已发放(用户可见),8-retrunVisit已回访(用户可见),
 	 * 9-reopen【回访不通过】(用户可见)，10-close关闭【状态8，并且review结果是pass】

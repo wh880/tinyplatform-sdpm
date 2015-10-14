@@ -347,7 +347,7 @@ public class BugAction extends BaseController {
 	}
 
 	@RequestMapping("/projectFindList")
-	public String projectFindList(Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
+	public String projectFindList(Model model, Integer start, Integer limit,String order, String ordertype, HttpServletRequest request) {
 		Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
 		boolean asc = "asc".equals(ordertype) ? true : false;
 		QualityBug bug = new QualityBug();
