@@ -27,9 +27,7 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by wangying14938 on 2015-09-22.任务
@@ -364,40 +362,7 @@ public class TaskAction extends BaseController {
         }
     }
 
-    @RequestMapping("/batchDel")
-    public Map<String, String> batchDel(String ids, HttpServletRequest request) {
-        Map<String, String> map = new HashMap<String, String>();
-        String[] id = ids.split(",");
-        if (id.length > 0) {
-            String condition = "";
-            for (int i = 0; i < id.length; i++) {
-                if (StringUtil.isBlank(condition)) {
-                    condition = condition + "task_id in (" + id[i];
-                } else {
-                    condition = condition + "," + id[i];
-                }
-            }
-            condition = condition + ")";
 
-
-            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
-            condition = condition + " and ";
-            condition = condition + "project_id=" + projectId;
-            Integer res = taskService.batchSoftDel(condition);
-            if (res > 0) {
-                map.put("statu", "y");
-                map.put("info", "删除成功");
-            } else {
-                map.put("statu", "n");
-                map.put("info", "删除失败");
-            }
-        } else {
-            map.put("statu", "n");
-            map.put("info", "未选择");
-        }
-
-        return map;
-    }
 
 
 }

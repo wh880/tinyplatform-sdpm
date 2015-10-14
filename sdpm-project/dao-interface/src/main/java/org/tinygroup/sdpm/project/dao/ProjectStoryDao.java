@@ -22,6 +22,9 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import java.util.List;
 
 public interface ProjectStoryDao extends BaseDao<ProjectStory, Integer> {
+
+    public Integer batchtDel(String condition);
+
     public List<ProjectStory> findByProjectID(Integer projectId);
 
     public Integer deleteByProjectStory(Integer projectId, Integer storyId);
