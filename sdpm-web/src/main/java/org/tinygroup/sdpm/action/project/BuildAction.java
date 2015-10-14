@@ -55,17 +55,17 @@ public class BuildAction extends BaseController {
 
     @RequestMapping("/look")
     public String look(Integer buildId, Model model) {
-            return "project/bug/index.page";
+        return "project/bug/index.page";
     }
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(ProjectBuild build, Model model) {
-      if (build.getBuildId() == null) {
-         buildService.add(build);
-     } else {
-          buildService.updateBuild(build);
-      }
-      model.addAttribute("build", build);
-       return "project/version/index.page";
+        if (build.getBuildId() == null) {
+            buildService.add(build);
+        } else {
+            buildService.updateBuild(build);
+        }
+        model.addAttribute("build", build);
+        return "project/version/index.page";
     }
 
     @RequestMapping("/edit")
@@ -189,6 +189,15 @@ public class BuildAction extends BaseController {
         return "error";
     }
 
-
+    @RequestMapping("/releasebaseinfo")
+    public String releasebaseinfo(Integer buildId, Model model) {
+        if (buildId != null) {
+            ProjectBuild build = buildService.findBuild(buildId);
+            model.addAttribute("build", build);
+            //还需要查询其他相关任务剩余时间的信息
+            return "/project/task/relation-release/releasebaseinfo.pagelet";
+        }
+        return "error";
+    }
 
 }
