@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.file.FileDealUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.dao.DocumentDocDao;
 import org.tinygroup.sdpm.document.dao.DocumentDoclibDao;
@@ -104,14 +106,20 @@ public class DocBizImpl implements DocBiz {
 		return doclibdao.getByKey(key);
 	}
 
-	public Pager<DocumentDoc> queryItemWithPage(Integer start,Integer limit,DocumentDoc doc,String sortName,boolean asc) {
+	public Pager<DocumentDoc> queryItemWithPage(Integer start,Integer limit,DocumentDoc doc,SearchInfos conditions,
+			String groupOperate, String sortName,boolean asc) {
 		// 分页
-		if(StringUtil.isBlank(sortName)){
-			return docdao.queryPager(start, limit, doc);
-		}else{
-			OrderBy orderby = new OrderBy(sortName,asc);
-			return docdao.queryPager(start, limit, doc, orderby);
-		}	
+		String condition = conditions != null ? SqlUtil.toSql(
+				conditions.getInfos(), groupOperate) : "";
+		OrderBy orderBy = null;
+		if (sortName != null && !"".equals(sortName)) {
+			orderBy = new OrderBy(sortName, asc);
+		}
+		if (condition != null && !"".equals(condition)) {
+			return docdao.complexQuery(start, limit, doc, condition,
+					orderBy);
+		}
+		return docdao.queryPager(start, limit, doc, orderBy);
 	}
 
 	public int[] batchDelDocByIds(List<DocumentDoc> keys) {
@@ -128,4 +136,5 @@ public class DocBizImpl implements DocBiz {
 			return doclibdao.queryPager(start, limit, doclib , orderby);
 		}
 	}
+
 }

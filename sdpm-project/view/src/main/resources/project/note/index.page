@@ -15,14 +15,14 @@
 				<table>
                     <tr>
                         <td style="width:360px">
-                            <a href="${TINY_CONTEXT_PATH}/project/note/index.page" class="active_btn">日历</a>
-                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">今日</a>
-                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">昨日</a>
-                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">本周</a>
-                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">上周</a>
-                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">本月</a>
-                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">上月</a>
-                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page">所有日志</a>
+                           <a href="${TINY_CONTEXT_PATH}/project/note/index.page" class="active_btn">日历</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page?date=1">今日</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page?date=2">昨日</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page?date=3">本周</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page?date=4">上周</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page?date=5">本月</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page?date=6">上月</a>
+                            <a href="${TINY_CONTEXT_PATH}/project/note/notetable.page?date=0">所有日志</a>
                         </td>
                         <td style="float:left">
                             <div style="width:150px">

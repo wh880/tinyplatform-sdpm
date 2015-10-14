@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.tinysqldsl.Pager;
@@ -32,6 +34,8 @@ import com.google.common.collect.Maps;
 public class EffortAction extends BaseController{
 	@Autowired
 	private EffortService effortService;
+	@Autowired
+	private TaskService taskService;
 	@RequestMapping("list")
 	public String list(int taskId,SystemEffort effort,Model model){
 		String order="effort_date";
@@ -92,6 +96,7 @@ public class EffortAction extends BaseController{
 		}
 		return maplist;
 	}
+	@ResponseBody
 	@RequestMapping("batchDelete")
 	public Map<String, String> batchDelete(String ids){
 		String[] sids = ids.split(",");
@@ -163,9 +168,14 @@ public class EffortAction extends BaseController{
 	       return "project/note/tableData.pagelet"; 
 	}
 	@RequestMapping("calendar")
-	public String calendar(String Action,@RequestParam(required = false)String id,Model model){
+	public String calendar(String Action,@RequestParam(required = false)String id,String date, Model model) throws Exception{
+
+		ProjectTask task= new ProjectTask();
+		List<ProjectTask> taskList = taskService.findListTask(task);
+		model.addAttribute("taskList", taskList);
 		if(Action.equals("add")){
 			SystemEffort effort = new SystemEffort();
+			effort.setEffortBegin(date);
 			model.addAttribute("effort", effort);
 		}
 		if(Action.equals("edit")){
@@ -175,20 +185,30 @@ public class EffortAction extends BaseController{
 		}
 		return "project/note/calendarEvent.pagelet";
 	}
+	@ResponseBody
 	@RequestMapping("operate")
-	public String operate(SystemEffort effort,String delete,Model model){
-		if(delete.equals("y")){
+	public Map<String, String> operate(SystemEffort effort,String date,String isvip,Model model){
+		Map<String, String> map = new HashedMap();
+		if(isvip.equals("y")){
 			effortService.batchDelete(effort.getEffortId());
-			return "project/note/index.page";
+			map.put("status", "y");
+			map.put("info", "1");
+		    
+			return map;
 		}
-		else if(delete.equals("n"))
+		else if(isvip.equals("n"))
 		{ 
 			effortService.save(effort);
-			return "project/note/index.page";
+			map.put("status", "y");
+			map.put("info", "1");
+		    
+			return map;
 			
 		}
 		else{
-			return "error";
+			map.put("status", "y");
+			map.put("info", "2");
+			return map;
 		}
 	}
 	
