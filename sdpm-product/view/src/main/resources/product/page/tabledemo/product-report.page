@@ -13,6 +13,8 @@
 
 <script>
 	$(document).ready(function(){
+	
+		
 		
 		$("#roadSubmit").unbind("click").bind("click",function(){
 			if($("input:checked").length>0){
@@ -128,7 +130,7 @@
 	            		 #@th("text-r" "vertical-align:middle;width:20%")
 	            			#@pieChart(pieChartStyle="width:600px;margin:0 auto;")
 	            				 <table id='${roadMap?.key}'>
-									<caption>${roadMap?.key}需求数量分布</caption>
+									<caption name="${roadMap?.key}"></caption>
 									<thead>
 										<tr>
 											<th></th>
