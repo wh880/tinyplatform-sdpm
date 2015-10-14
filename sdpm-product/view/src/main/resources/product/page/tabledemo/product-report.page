@@ -13,6 +13,14 @@
 
 <script>
 	$(document).ready(function(){
+		var fields = $("#hiddenFields").val().split(',');
+		for(var i=0,l=fields.length;i<l;i++){
+			var checkfie = $('input[value="'+fields[i]+'" ]');
+			checkfie.attr("checked","checked");
+			$("caption[name='"+fields[i]+"']").html(checkfie.next().html());
+					
+		}
+		
 		
 		$("#roadSubmit").unbind("click").bind("click",function(){
 			if($("input:checked").length>0){
@@ -93,18 +101,20 @@
 							#@Tcheckbox("admin")变更次数来进行统计#end<br/>
 							
 						#end*#
+						
+						#hiddenInput("hiddenFields","","",fields)
                         #labelCheckbox(ckId="checkbox-1" ckName="chexkitem" ckValue="A_productCount" labelText="产品需求数量")
                         #labelCheckbox(ckId="checkbox-3" ckName="chexkitem" ckValue="B_moduleCount" labelText="模块需求数量")
-                        #labelCheckbox(ckId="checkbox-4" ckName="chexkitem" ckValue="C_planCount" labelText="需求来源统计")
-                        #labelCheckbox(ckId="checkbox-5" ckName="chexkitem" ckValue="storySource" labelText="计划进行统计")
-                        #labelCheckbox(ckId="checkbox-6" ckName="chexkitem" ckValue="storyStatus" labelText="状态进行统计")
-                        #labelCheckbox(ckId="checkbox-7" ckName="chexkitem" ckValue="storyStage" labelText="所处阶段进行统计")
-                        #labelCheckbox(ckId="checkbox-8" ckName="chexkitem" ckValue="storyPri" labelText="优先级进行统计")
-                        #labelCheckbox(ckId="checkbox-9" ckName="chexkitem" ckValue="storyEstimate" labelText="预计工时进行统计")
-                        #labelCheckbox(ckId="checkbox-10" ckName="chexkitem" ckValue="storyOpenedBy" labelText="由谁创建来进行统计")
-                        #labelCheckbox(ckId="checkbox-12" ckName="chexkitem" ckValue="storyAssignedTo" labelText="当前指派来进行统计")
-                        #labelCheckbox(ckId="checkbox-13" ckName="chexkitem" ckValue="storyClosedReason" labelText="关闭原因来进行统计")
-                        #labelCheckbox(ckId="checkbox-14" ckName="chexkitem" ckValue="storyVersion" labelText="变更次数来进行统计")
+                        #labelCheckbox(ckId="checkbox-4" ckName="chexkitem" ckValue="D_storySource" labelText="需求来源统计")
+                        #labelCheckbox(ckId="checkbox-5" ckName="chexkitem" ckValue="C_planCount" labelText="计划进行统计")
+                        #labelCheckbox(ckId="checkbox-6" ckName="chexkitem" ckValue="E_storyStatus" labelText="状态进行统计")
+                        #labelCheckbox(ckId="checkbox-7" ckName="chexkitem" ckValue="F_storyStage" labelText="所处阶段进行统计")
+                        #labelCheckbox(ckId="checkbox-8" ckName="chexkitem" ckValue="G_storyPri" labelText="优先级进行统计")
+                        #labelCheckbox(ckId="checkbox-9" ckName="chexkitem" ckValue="H_storyEstimate" labelText="预计工时进行统计")
+                        #labelCheckbox(ckId="checkbox-10" ckName="chexkitem" ckValue="I_storyOpenedBy" labelText="由谁创建来进行统计")
+                        #labelCheckbox(ckId="checkbox-12" ckName="chexkitem" ckValue="G_storyAssignedTo" labelText="当前指派来进行统计")
+                        #labelCheckbox(ckId="checkbox-13" ckName="chexkitem" ckValue="K_storyClosedReason" labelText="关闭原因来进行统计")
+                        #labelCheckbox(ckId="checkbox-14" ckName="chexkitem" ckValue="L_storyVersion" labelText="变更次数来进行统计")
                     #end
                		 #buttonRadiusDefault(btId="but1" btClass="but1" caption="全选")
 			        #buttonRadiusDefault(btId="but2" btClass="but2" caption="反选")
@@ -128,7 +138,7 @@
 	            		 #@th("text-r" "vertical-align:middle;width:20%")
 	            			#@pieChart(pieChartStyle="width:600px;margin:0 auto;")
 	            				 <table id='${roadMap?.key}'>
-									<caption>${roadMap?.key}需求数量分布</caption>
+									<caption name="${roadMap?.key}"></caption>
 									<thead>
 										<tr>
 											<th></th>

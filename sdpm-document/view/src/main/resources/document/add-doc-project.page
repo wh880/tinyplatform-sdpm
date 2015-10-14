@@ -178,3 +178,29 @@ function setType(type)
 	}
 }
 </script>
+#*
+<script type="text/javascript">
+     var 产品=[
+     for(int i=0;i<${projectList}.length;i++){
+     	[for(int j=0;j<${productList}.length)
+     	]
+     	}
+     ];
+
+     function getCity(){
+         //获得省份下拉框的对象
+         var sltProvince=document.form1.province;
+         //获得城市下拉框的对象
+         var sltCity=document.form1.city;         
+         //得到对应省份的城市数组
+         var provinceCity=city[sltProvince.selectedIndex - 1];
+ 
+         //清空城市下拉框，仅留提示选项
+         sltCity.length=1;
+ 
+         //将城市数组中的值填充到城市下拉框中
+         for(var i=0;i<provinceCity.length;i++){
+             sltCity[i+1]=new Option(provinceCity[i],provinceCity[i]);
+         }
+     }
+ </script>*#

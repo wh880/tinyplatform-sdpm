@@ -27,6 +27,9 @@ public class EffortServiceImpl implements EffortService {
 	public SystemEffort save(SystemEffort systemEffort) {
 		// TODO Auto-generated method stub
 		if(systemEffort.getEffortId()==null){
+			
+	
+		if(systemEffort.getEffortBegin()==null&&systemEffort.getEffortEnd()==null){
 		ProjectTask task=
 			 taskManager.find(systemEffort.getEffortObjectId());
 			if(task.getTaskCanceledDate()!=null||task.getTaskFinishedDate()!=null){
@@ -40,6 +43,8 @@ public class EffortServiceImpl implements EffortService {
 					systemEffort.setEffortEnd(new SimpleDateFormat("yyyy-MM-dd").format(task.getTaskCloseDate()));
 				}
 			}
+		return effortManager.add(systemEffort);
+		}
 		return effortManager.add(systemEffort);
 		}
 		else{

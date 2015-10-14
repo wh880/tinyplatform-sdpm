@@ -1,39 +1,103 @@
-#@tinyForm("thisform" call("link","system/effort/operate") "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/system/effort/operate" "post" {"class":""})
     <input type="hidden" name="effortId" value="${effort.effortId}"/>
+    <input type="hidden" name="effortObjectType" value="task"/>
 	#@elementItem()
 		#@colLabel()是否删除：#end
 		#@formControlDiv("col-8")
-			#Tswitcher("isvip" ["y","n"] "delete")##第二个为选中与非选中时的值为一数组 第三参数为数据库返回时的数据
+			#Tswitcher("isvip" ["n","y"] "n")##第二个为选中与非选中时的值为一数组 第三参数为数据库返回时的数据
 		#end
 	#end
 	#@elementItem()
-		#@colLabel()名称：#end
+		#@colLabel()日志内容：#end
 		#@formControlDiv("col-8")
-			#tinyInput("text" "email" ""{"placeholder":"名称","datatype":"*","id":"email"})
+			#tinyInput("text" "effortWork" effort?.effortWork {"placeholder":"日志内容","datatype":"*","id":"effortWork"})
 		#end
 		#@validateDiv("col-2")#end
 	#end
 
 	#@elementItem()
-		#@colLabel()下拉：#end
+		#@colLabel()创建者：#end
 		#@formControlDiv("col-8")
-			#@tinySelect("lang" "zh" {"class":"input-text select2"})
-				#@tinyOptionItem("zh")中国#end
-				#@tinyOptionItem("en")英国#end
-				#@tinyOptionItem("ta")泰国#end
+			#@tinySelect("effortAccount" effort?.effortAccount {"class":"input-text select2"})
+				#@tinyOptionItem("wll")wll#end
+				#@tinyOptionItem("lal")lal#end
+				#@tinyOptionItem("zch")zch#end
 			#end
 		#end
 		#@validateDiv("col-2")#end
 	#end
-
-
 	#@elementItem()
-		#@colLabel()备注：#end
+		#@colLabel()所属任务：#end
 		#@formControlDiv("col-8")
-			#@Teditor("contentId" "contentName" {"initialFrameHeight":"700"})最后一个MAP参数为Ueditor的初始化参数 会自动带入 #end
+		  #@Tselect2F()
+	                    #@Tselect2Body("effortObjectId" effort?.effortObjectId {"class":
+	                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+##	                                  <option value="0">/</option>
+	                                  #for(t:taskList) 
+	                                  
+	                                  <option value="${t.taskId}">${t.taskName}</option>
+	                                  #end
+	                                   
+##	                                    <option value="1">1</option>
+##	                                    <option value="2">2</option>
+##	                                    <option value="3">3</option>
+##	                                    <option value="4">4</option>
+	                                    
+	                      #end
+	                   #@Tselect2Fix()
+	                     <a href="#" class="r">增加</a>
+	                     <a href="#">全部</a>
+	                                 #end
+	                                #end
 		#end
 		#@validateDiv("col-2")#end
 	#end
+	#if(!effort?.effortId)
+	
+	#@elementItem()
+		#@colLabel()日志日期：#end
+		#@formControlDiv("col-8")
+			 #@tinyDateInput(
+                            "effortDate" effort?.effortBegin "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
+                            "日期不能为空"})#end
+		#end
+		#@validateDiv("col-2")#end
+	#end
+	#end
+	#@elementItem()
+		#@colLabel()开始时间：#end
+		#@formControlDiv("col-8")
+			 #@tinyDateInput(
+                            "effortBegin" effort?.effortBegin "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
+                            "日期不能为空"})#end
+		#end
+		#@validateDiv("col-2")#end
+	#end
+	#@elementItem()
+		#@colLabel()结束时间：#end
+		#@formControlDiv("col-8")
+			 #@tinyDateInput(
+                            "effortEnd" effort?.effortEnd "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
+                            "日期不能为空"})#end
+		#end
+		#@validateDiv("col-2")#end
+	#end
+	#@elementItem()
+		#@colLabel()耗时：#end
+		#@formControlDiv("col-8")
+		#tinyInput("text" "effortConsumed" effort?.effortConsumed {"placeholder":"日志内容","datatype":"*","id":"effortConsumed"})
+		#end
+		#@validateDiv("col-2")#end
+	#end
+
+
+##	#@elementItem()
+##		#@colLabel()备注：#end
+##		#@formControlDiv("col-8")
+##			#@Teditor("contentId" "contentName" {"initialFrameHeight":"700"})最后一个MAP参数为Ueditor的初始化参数 会自动带入 #end
+##		#end
+##		#@validateDiv("col-2")#end
+##	#end
 
 #end
 
@@ -47,7 +111,7 @@ $(function(){
 			dataType:"json",
 			success:function(data){
 				if(data.status=="y"){
-					layer.msg(data.info,2, -1);
+					layer.msg(data.info,2, 1);
 				}else{
 					layer.msg(data.info);
 				}
