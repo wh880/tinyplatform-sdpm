@@ -51,6 +51,14 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @Repository
 public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTaskDao {
 
+    public Integer batchSoftDel(String condition) {
+        Update update = update(PROJECT_TASKTABLE).set(PROJECT_TASKTABLE.TASK_DELETED.value(1))
+                .where(
+                        fragmentCondition(condition)
+                );
+        return getDslSession().execute(update);
+    }
+
     public Integer getSumByStory(Integer storyId) {
         Select select = selectFrom(PROJECT_TASKTABLE).where(PROJECT_TASKTABLE.TASK_STORY.eq(storyId));
         return getDslSession().count(select);
@@ -142,7 +150,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         PROJECT_TASKTABLE.TASK_PROJECT.value(t.getTaskProject()),
                         PROJECT_TASKTABLE.TASK_STORY.value(t.getTaskStory()),
                         PROJECT_TASKTABLE.TASK_STORY_VERSION.value(t.getTaskStoryVersion()),
-                        PROJECT_TASKTABLE.TASK_MODEL.value(t.getTaskModel()),
+                        PROJECT_TASKTABLE.TASK_MOMODULE.value(t.getTaskModule()),
                         PROJECT_TASKTABLE.TASK_FROM_BUG.value(t.getTaskFromBug()),
                         PROJECT_TASKTABLE.TASK_NAME.value(t.getTaskName()),
                         PROJECT_TASKTABLE.TASK_TYPE.value(t.getTaskType()),
@@ -309,7 +317,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                                 PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
                                 PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
                                 PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
-                                PROJECT_TASKTABLE.TASK_MODEL.eq(t.getTaskModel()),
+                                PROJECT_TASKTABLE.TASK_MOMODULE.eq(t.getTaskModule()),
                                 PROJECT_TASKTABLE.TASK_FROM_BUG.eq(t.getTaskFromBug()),
                                 PROJECT_TASKTABLE.TASK_NAME.eq(t.getTaskName()),
                                 PROJECT_TASKTABLE.TASK_TYPE.eq(t.getTaskType()),
@@ -355,8 +363,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                                 PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
                                 PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
                                 PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
-                                PROJECT_TASKTABLE.TASK_MODEL.eq(t.getTaskModel()),
-                                PROJECT_TASKTABLE.TASK_MODEL.eq(t.getTaskModel()),
+                                PROJECT_TASKTABLE.TASK_MOMODULE.eq(t.getTaskModule()),
                                 PROJECT_TASKTABLE.TASK_FROM_BUG.eq(t.getTaskFromBug()),
                                 PROJECT_TASKTABLE.TASK_NAME.eq(t.getTaskName()),
                                 PROJECT_TASKTABLE.TASK_TYPE.eq(t.getTaskType()),
@@ -401,7 +408,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                                 PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
                                 PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
                                 PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
-                                PROJECT_TASKTABLE.TASK_MODEL.eq(t.getTaskModel()),
+                                PROJECT_TASKTABLE.TASK_MOMODULE.eq(t.getTaskModule()),
                                 PROJECT_TASKTABLE.TASK_FROM_BUG.eq(t.getTaskFromBug()),
                                 PROJECT_TASKTABLE.TASK_NAME.eq(t.getTaskName()),
                                 PROJECT_TASKTABLE.TASK_TYPE.eq(t.getTaskType()),
@@ -445,7 +452,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         PROJECT_TASKTABLE.TASK_PROJECT.value(new JdbcNamedParameter("taskProject")),
                         PROJECT_TASKTABLE.TASK_STORY.value(new JdbcNamedParameter("taskStory")),
                         PROJECT_TASKTABLE.TASK_STORY_VERSION.value(new JdbcNamedParameter("taskStoryVersion")),
-                        PROJECT_TASKTABLE.TASK_MODEL.value(new JdbcNamedParameter("taskModel")),
+                        PROJECT_TASKTABLE.TASK_MOMODULE.value(new JdbcNamedParameter("taskModel")),
                         PROJECT_TASKTABLE.TASK_FROM_BUG.value(new JdbcNamedParameter("taskFromBug")),
                         PROJECT_TASKTABLE.TASK_NAME.value(new JdbcNamedParameter("taskName")),
                         PROJECT_TASKTABLE.TASK_TYPE.value(new JdbcNamedParameter("taskType")),
@@ -493,7 +500,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         PROJECT_TASKTABLE.TASK_PROJECT.value(new JdbcNamedParameter("taskProject")),
                         PROJECT_TASKTABLE.TASK_STORY.value(new JdbcNamedParameter("taskStory")),
                         PROJECT_TASKTABLE.TASK_STORY_VERSION.value(new JdbcNamedParameter("taskStoryVersion")),
-                        PROJECT_TASKTABLE.TASK_MODEL.value(new JdbcNamedParameter("taskModel")),
+                        PROJECT_TASKTABLE.TASK_MOMODULE.value(new JdbcNamedParameter("taskModel")),
                         PROJECT_TASKTABLE.TASK_FROM_BUG.value(new JdbcNamedParameter("taskFromBug")),
                         PROJECT_TASKTABLE.TASK_NAME.value(new JdbcNamedParameter("taskName")),
                         PROJECT_TASKTABLE.TASK_TYPE.value(new JdbcNamedParameter("taskType")),
@@ -539,7 +546,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         PROJECT_TASKTABLE.TASK_PROJECT.eq(new JdbcNamedParameter("taskProject")),
                         PROJECT_TASKTABLE.TASK_STORY.eq(new JdbcNamedParameter("taskStory")),
                         PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(new JdbcNamedParameter("taskStoryVersion")),
-                        PROJECT_TASKTABLE.TASK_MODEL.eq(new JdbcNamedParameter("taskModel")),
+                        PROJECT_TASKTABLE.TASK_MOMODULE.eq(new JdbcNamedParameter("taskModule")),
                         PROJECT_TASKTABLE.TASK_FROM_BUG.eq(new JdbcNamedParameter("taskFromBug")),
                         PROJECT_TASKTABLE.TASK_NAME.eq(new JdbcNamedParameter("taskName")),
                         PROJECT_TASKTABLE.TASK_TYPE.eq(new JdbcNamedParameter("taskType")),

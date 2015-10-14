@@ -25,6 +25,14 @@ public class ProjectStoryManagerImpl implements ProjectStoryManager {
     @Autowired
     private ProjectProductDao projectProductDao;
 
+    public Integer batchtDel(String condition) {
+        return projectStoryDao.batchtDel(condition);
+    }
+
+    public int[] linkStory(List<ProjectStory> projectStoryList) {
+        return projectStoryDao.batchInsert(projectStoryList);
+    }
+
     public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String oredertype) {
         if (order == null) {
             return projectProductDao.findStory(projectId, start, limit);

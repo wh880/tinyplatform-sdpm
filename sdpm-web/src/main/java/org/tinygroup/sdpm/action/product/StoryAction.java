@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action.product;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,9 +19,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
+import org.tinygroup.sdpm.action.system.ModuleUtil;
+import org.tinygroup.sdpm.action.system.ProfileAction;
 import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
@@ -62,7 +67,7 @@ public class StoryAction extends BaseController{
    
     @RequestMapping("")
     public String storyAction(ProductStory story, String groupOperate, Model model, HttpServletRequest request, HttpServletResponse response){
-
+      
     	
     	String queryString = request.getQueryString();
        if(queryString!=null&&!queryString.contains("choose")){
@@ -74,7 +79,14 @@ public class StoryAction extends BaseController{
   
     
     @RequestMapping("/save")
-    public String save(ProductStory productStory,ProductStorySpec storySpec,HttpServletRequest request){
+    public String save(ProductStory productStory,ProductStorySpec storySpec,@RequestParam(value = "file", required = false)MultipartFile file,HttpServletRequest request) throws IOException{
+    	 ProfileAction profileAction = new ProfileAction();
+//         for(int i=0,n=files.getMultipartFiles().size();i<n;i++){
+//      	   if(!files.getMultipartFiles().get(i).isEmpty()){
+//      		   profileAction.upload(files.getMultipartFiles().get(i));
+//      	   }
+//         }
+    	 profileAction.upload(file);
     	productStory.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
     	storyService.addStory(productStory, storySpec);
     	return "redirect:" + "/product/page/project/togglebox.page";
@@ -188,7 +200,11 @@ public class StoryAction extends BaseController{
     	/*if (story.getModuleId()==-1) {
     		story.setModuleId(null);
 		}*/
-    	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
+    	String condition = StoryUtil.getStatusCondition(choose,request);
+    	if(story.getModuleId()!=null&&story.getModuleId()>0){
+    		condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + ModuleUtil.getCondition(story.getModuleId(), moduleService);
+    	}
+    	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, condition,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList",p);
         return "product/data/tabledata.pagelet";
     }

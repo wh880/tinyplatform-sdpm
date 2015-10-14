@@ -56,7 +56,7 @@ public class ProjectTask implements Serializable {
 	 * 关联任务表
 	 */
 
-	private Integer taskModel;
+	private Integer taskModule;
 	/**
 	 * 来源bug
 	 */
@@ -195,12 +195,12 @@ public class ProjectTask implements Serializable {
 	 */
 	private String taskDeleted;
 
-	public Integer getTaskModel() {
-		return taskModel;
+	public Integer getTaskModule() {
+		return taskModule;
 	}
 
-	public void setTaskModel(Integer taskModel) {
-		this.taskModel = taskModel;
+	public void setTaskModule(Integer taskModule) {
+		this.taskModule = taskModule;
 	}
 
 	public String getStorySpec() {

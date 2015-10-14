@@ -1,6 +1,8 @@
 package org.tinygroup.sdpm.action.project.util;
 
 
+import org.tinygroup.commons.tools.StringUtil;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,9 +27,10 @@ public class TaskStatusUtil {
         status.put("9", "task_status = 5");
     }
 
-    public static String getCondition(String statu, String choose, HttpServletRequest request) {
+    public static String getCondition(String statu, String choose, HttpServletRequest request, String moduleIds) {
+        String condition = "";
         if (statu != null && choose == null) {
-            return status.get(statu);
+            condition = status.get(statu);
         } else if (statu == null && choose != null) {
             /**
              * choose = 1 未关闭
@@ -36,14 +39,22 @@ public class TaskStatusUtil {
              */
 
             if ("1".equals(choose)) {
-                return "task_status != 6";
+                condition = "task_status != 6";
             } else if ("2".equals(choose)) {
-                return null;
+                condition = "";
             } else if ("7".equals(choose)) {
-                //return "task_assigned_to = '"+request.getSession().getAttribute("userId")+"'";
-                return null;
-            } else return null;
-        } else return null;
+                //condition = "task_assigned_to = '"+request.getSession().getAttribute("userId")+"'";
+            } else condition = "";
+        } else condition = "";
 
+        if (!StringUtil.isBlank(moduleIds)) {
+            if (StringUtil.isBlank(condition)) {
+                condition = "task_module " + moduleIds;
+            } else {
+                condition = "and task_module " + moduleIds;
+            }
+        }
+//task_model
+        return condition;
     }
 }

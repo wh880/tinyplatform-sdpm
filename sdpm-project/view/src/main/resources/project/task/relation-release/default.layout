@@ -92,6 +92,6 @@
     #end
 </div>
 <div style="width:30%;float:right">
-    #TypeInfo("projectRelease")
+    #TypeInfo("build"，build?.buildId)
 </div>
 #end

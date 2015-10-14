@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
@@ -18,6 +19,10 @@ import java.util.Map;
 public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskManager taskManager;
+
+    public Integer batchSoftDel(String condition) {
+        return taskManager.batchSoftDel(condition);
+    }
 
     public Integer batchAdd(List<ProjectTask> taskList, Integer projectId) {
         for (ProjectTask task : taskList) {
@@ -44,7 +49,7 @@ public class TaskServiceImpl implements TaskService {
 
 
     public Pager<ProjectTask> findPagerTask(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condititon, String group) {
-        if (condititon != null) {
+        if (!StringUtil.isBlank(condititon)) {
             return taskManager.findPagerByStatu(start, limit, task, sortName, asc, condititon);
         }
         return taskManager.findPager(start, limit, task, sortName, asc);

@@ -63,6 +63,7 @@ import org.tinygroup.tinysqldsl.base.Table;
 import org.tinygroup.tinysqldsl.expression.FragmentExpressionSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 @Repository
@@ -275,7 +276,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 					PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
 					PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
 					PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(t.getStoryParentId()),
-					PRODUCT_STORYTABLE.MODULE_ID.eq(t.getModuleId()),
+					/*PRODUCT_STORYTABLE.MODULE_ID.eq(t.getModuleId()),*/
 					PRODUCT_STORYTABLE.PLAN_ID.eq(t.getPlanId()),
 					PRODUCT_STORYTABLE.STORY_STATUS.eq(t.getStoryStatus()),
 					PRODUCT_STORYTABLE.STORY_SOURCE.eq(t.getStorySource()),
@@ -536,8 +537,13 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 
     }
 	
-	public int getCount(ProductStory t,Condition... condition){
-		Select select = select(PRODUCT_STORYTABLE.STORY_ID.count()).from(PRODUCT_STORYTABLE).where(and(storyPueryCondition(t,condition)));
+	public int getCount(ProductStory t,Join join,Condition... condition){
+		Select select = null;
+		if(join==null){
+			 select = select(PRODUCT_STORYTABLE.STORY_ID.count()).from(PRODUCT_STORYTABLE).where(and(storyPueryCondition(t,condition)));
+		}else{
+			 select = select(PRODUCT_STORYTABLE.STORY_ID.count()).from(PRODUCT_STORYTABLE).join(join).where(and(storyPueryCondition(t,condition)));
+		}
 		
 		return getDslSession().count(select);
 	}
@@ -547,7 +553,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			if(t==null){
 				t=new ProductStory();
 			}
-			int nm = getCount(t,PRODUCT_STORYTABLE.MODULE_ID.isNotNull());
+			int nm = getCount(t,leftJoin(SYSTEM_MODULETABLE, SYSTEM_MODULETABLE.MODULE_ID.eq(PRODUCT_STORYTABLE.MODULE_ID)),PRODUCT_STORYTABLE.MODULE_ID.isNotNull());
 			Select select = select(SYSTEM_MODULETABLE.MODULE_NAME.as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
 					FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
 					.from(PRODUCT_STORYTABLE).join(leftJoin(SYSTEM_MODULETABLE, SYSTEM_MODULETABLE.MODULE_ID.eq(PRODUCT_STORYTABLE.MODULE_ID)))
@@ -555,6 +561,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
 			return storyCounts;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -566,7 +573,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 				t=new ProductStory();
 			}
 			
-			int nm = getCount(t,PRODUCT_STORYTABLE.PRODUCT_ID.isNotNull());
+			int nm = getCount(t,leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_STORYTABLE.PRODUCT_ID)),PRODUCT_STORYTABLE.PRODUCT_ID.isNotNull());
 			Select select = select(PRODUCTTABLE.PRODUCT_NAME.as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
 					FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
 					.from(PRODUCT_STORYTABLE).join(leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_STORYTABLE.PRODUCT_ID)))
@@ -574,6 +581,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
 			return storyCounts;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		
@@ -592,7 +600,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 				plan=new ProductPlan();
 			}
 			
-			int nm = getCount(t,PRODUCT_STORYTABLE.PLAN_ID.isNotNull());
+			int nm = getCount(t,leftJoin(PRODUCT_PLANTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID)),PRODUCT_STORYTABLE.PLAN_ID.isNotNull());
 			Select select = select(PRODUCT_PLANTABLE.PLAN_NAME .as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
 					FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
 					.from(PRODUCT_STORYTABLE).join(leftJoin(PRODUCT_PLANTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID)))
@@ -600,6 +608,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
 			return storyCounts;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		
@@ -613,7 +622,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			}
 		
 			Column column = new Column(PRODUCT_STORYTABLE, NameUtil.resolveNameDesc(field));
-			int nm = getCount(t,column.isNotNull());
+			int nm = getCount(t,leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(column)),column.isNotNull());
 			
 			Select select = select(ORG_USERTABLE.ORG_USER_REAL_NAME.as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
 					FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
@@ -622,6 +631,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			List<StoryCount> storyCounts =  getDslSession().fetchList(select, StoryCount.class);
 			return storyCounts;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -635,7 +645,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			}
 		
 			Column column = new Column(PRODUCT_STORYTABLE, NameUtil.resolveNameDesc(field));
-			int nm = getCount(t,column.isNotNull());
+			int nm = getCount(t,null,column.isNotNull());
 			
 			Select select = select(column.as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
 					FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
@@ -643,6 +653,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			
 			return getDslSession().fetchList(select, StoryCount.class);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

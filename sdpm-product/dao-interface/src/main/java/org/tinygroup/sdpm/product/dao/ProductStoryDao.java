@@ -25,6 +25,7 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.select.Join;
 
 public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 
@@ -36,7 +37,7 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 	
 	List<StoryCount> modelStoryCount(ProductStory story);
 	
-	int getCount(ProductStory story,Condition... condition);
+	int getCount(ProductStory story,Join join,Condition... condition);
 	
 	List<StoryCount> productStoryCount(ProductStory t);
 	

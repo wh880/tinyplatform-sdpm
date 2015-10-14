@@ -26,9 +26,9 @@
                   isShow="1"
                   scope="linkman-cil"/>
         </menu>
-        <menu id="clientSla_edit" name="协议编辑" href="/service/client/slaEdit" sort="1" isShow="1" scope="clientSla"/>
+        <menu id="clientSla_edit" name="协议编辑" href="/service/sla/form" sort="1" isShow="1" scope="clientSla"/>
         <menu id="clientSla_delete" name="协议删除" href="/service/client/slaDelete" sort="1" isShow="1" scope="clientSla"/>
-        <menu id="clientSla-add" name="绑定协议" href="/service/client/slaEdit" icon="icon-plus" sort="1" isShow="1"
+        <menu id="clientSla-add" name="绑定协议" href="/service/sla/form" icon="icon-plus" sort="1" isShow="1"
               scope="service-sla-add"/>
         <menu id="clientSla-export" name="导出" href="/service/sla/slaExport.pagelet" icon="icon-download-alt"
               sort="1" isShow="1"
@@ -50,7 +50,7 @@
               isShow="1" scope="service-request2"/>
         <menu id="request-open" name="未回复" href="/service/request/list?status=0" sort="1"
               isShow="1" scope="service-request-list"/>
-        <menu id="request-all" name="全部请求" href="/service/request/list" sort="1"
+        <menu id="request-all" name="全部请求" href="/service/request/list?status=" sort="1"
               isShow="1" scope="service-request-list"/>
         <menu id="request-tome" name="由我回复" href="/service/request/list?operation=1" sort="1"
               isShow="1" scope="service-request-list"/>
