@@ -51,6 +51,11 @@ public class SlaManagerImpl implements SlaManager {
     public Pager<ServiceSla> findPager(Integer start, Integer limit, ServiceSla sla, Integer treeId) {
         return slaDao.queryPagerTree(start, limit, sla, treeId);
     }
-
+    public ServiceSla judgeClient(String clientName) {
+        return slaDao.judge(clientName);
+    }
+    public int[] deleteBatch(List<ServiceSla> list) {
+        return slaDao.softDeleteBatch(list);
+    }
 
 }

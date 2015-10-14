@@ -177,4 +177,5 @@ public class FaqAction extends BaseController {
         }
         return list;
     }
+
 }

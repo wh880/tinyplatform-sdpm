@@ -70,4 +70,6 @@ public interface SlaService {
      * @return
      */
     List<ServiceSla> findSlaBySlaId(Integer id);
+    ServiceSla judgeClient(String clientName);
+    int[] deleteBatchSla(List<ServiceSla> list);
 }

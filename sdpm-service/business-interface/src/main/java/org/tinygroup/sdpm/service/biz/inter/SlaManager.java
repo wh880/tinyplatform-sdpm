@@ -66,6 +66,7 @@ public interface SlaManager {
     List<ServiceSla> getListByClientId(Integer clientId);
 
     Pager<ServiceSla> findPager(Integer start, Integer limit, ServiceSla serviceClient, Integer treeId);
-
+    ServiceSla judgeClient(String clientName);
+    int[] deleteBatch(List<ServiceSla> list);
 }
 

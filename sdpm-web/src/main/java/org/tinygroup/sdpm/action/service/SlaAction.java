@@ -193,4 +193,44 @@ public class SlaAction extends BaseController {
         }
         return list;
     }
+    /*sla必填项校验*/
+    @ResponseBody
+    @RequestMapping(value = "/judgeClient")
+    public Map judgeClient(String name, String param) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (param != null)
+        {
+            String productVersion = param;
+            ServiceSla serviceSla = slaService.judgeClient(productVersion);
+            map.put("status", "y");
+            map.put("info", "");
+            return map;
+        }
+        map.put("status", "n");
+        map.put("info", "请输入产品版本");
+        return map;
+    }
+    /*sla批量删除*/
+    @ResponseBody
+    @RequestMapping(value = "/batchDelete")
+    public Map batchDelete(String ids) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (ids == null) {
+            map.put("status", "n");
+            map.put("info", "删除失败");
+            return map;
+        }
+        List<ServiceSla> list = new ArrayList<ServiceSla>();
+        for (String s : ids.split(",")) {
+            ServiceSla serviceSla = new ServiceSla();
+            serviceSla.setSlaId(Integer.valueOf(s));
+            serviceSla.setDeleted(serviceSla.DELETE_YES);
+            list.add(serviceSla);
+        }
+        slaService.deleteBatchSla(list);
+        map.put("status", "y");
+        map.put("info", "删除成功");
+        return map;
+    }
+
 }
