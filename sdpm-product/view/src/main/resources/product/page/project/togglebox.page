@@ -92,7 +92,7 @@
                        class="${choose == 10?'active_btn':''}">待关闭</a>
 					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=11&currentPageId=3"
                        class="${choose == 11?'active_btn':''}">已关闭</a>
-					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+					<a href="javascript:void(0);" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 
 

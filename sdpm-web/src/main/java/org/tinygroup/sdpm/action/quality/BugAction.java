@@ -6,13 +6,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
 import org.tinygroup.sdpm.action.system.ModuleUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
@@ -28,6 +32,7 @@ import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,7 +63,10 @@ public class BugAction extends BaseController {
 	private UserService userService;
 	@Autowired
 	private BuildService buildService;
-
+	@Autowired
+	private PlanService planService;
+	
+	
 	@RequestMapping("")
 	public String form(String get,QualityBug bug, HttpServletRequest request){
 		String queryString = request.getQueryString();
@@ -375,5 +383,7 @@ public class BugAction extends BaseController {
 	    map.put("info", "删除成功");
 	    return map;
 	}
+	
 
+	
 }
