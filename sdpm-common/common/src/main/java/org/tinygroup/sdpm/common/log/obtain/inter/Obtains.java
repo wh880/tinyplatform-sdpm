@@ -15,7 +15,6 @@ public class Obtains {
     private String name;
     @XStreamImplicit
     private List<Obtain> obtainList;
-
     public String getName() {
         return name;
     }
