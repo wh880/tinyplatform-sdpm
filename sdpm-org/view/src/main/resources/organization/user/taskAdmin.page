@@ -25,10 +25,10 @@
                     &nbsp;&gt;
                     #foreach(m:menuManager.getScopeMenus("org-user-detail"))
                         #if(m.id=="org-user-taskAdmin")
-                            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${id}"
+                            <a href="${TINY_CONTEXT_PATH}${m.href}?choose=3&id=${id}"
                                class="active_btn">${m.name}</a>
                         #else
-                            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${id}">${m.name}</a>
+                            <a href="${TINY_CONTEXT_PATH}${m.href}?choose=3&id=${id}">${m.name}</a>
                         #end
                     #end
                 </span>
@@ -36,11 +36,16 @@
                 #end
 
             <span class="barBoxs">
-            <a href="../user/taskAdmin.page" class="active_btn">指派给他</a>
-            <a href="../user/taskAdmin.page">由他创建</a>
-            <a href="../user/taskAdmin.page">由他完成</a>
-            <a href="../user/taskAdmin.page">由他关闭</a>
-            <a href="../user/taskAdmin.page">由他取消</a>
+            <a href="${TINY_CONTEXT_PATH}/org/user/task?choose=3&id=${id}"
+               class="${choose == 3?'active_btn':''}">指派给他</a>
+            <a href="${TINY_CONTEXT_PATH}/org/user/task?choose=4&id=${id}"
+               class="${choose == 4?'active_btn':''}">由他创建</a>
+            <a href="${TINY_CONTEXT_PATH}/org/user/task?choose=5&id=${id}"
+               class="${choose == 5?'active_btn':''}">由他完成</a>
+            <a href="${TINY_CONTEXT_PATH}/org/user/task?choose=6&id=${id}"
+               class="${choose == 6?'active_btn':''}">由他关闭</a>
+            <a href="${TINY_CONTEXT_PATH}/org/user/task?choose=7&id=${id}"
+               class="${choose == 7?'active_btn':''}">由他取消</a>
         </span>
             #end
         #end
@@ -51,20 +56,19 @@
     #@div(divClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([8,10,20,50,100,200])
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/organization/user/userTaskTable.pagelet") ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/org/user/task/search?"+tinyRequestQueryString) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
 
-                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})P#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})所属项目#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})任务名称#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})预计时间#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})消耗时间#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})剩余时间#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})截止#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})状态#end
+                #@tinyTh({"class":"","rel":"task_id"})ID#end
+                #@tinyTh({"class":"","rel":"task_pri"})P#end
+                #@tinyTh({"class":"","rel":"task_project"})所属项目#end
+                #@tinyTh({"class":"","rel":"task_name"})任务名称#end
+                #@tinyTh({"class":"","rel":"task_estimate"})预计时间#end
+                #@tinyTh({"class":"","rel":"task_consumed"})消耗时间#end
+                #@tinyTh({"class":"","rel":"task_left"})剩余时间#end
+                #@tinyTh({"class":"","rel":"taskDeadLine"})截止#end
+                #@tinyTh({"class":"","rel":"task_statu","style":"color:#f00"})状态#end
 
             #end
         #end

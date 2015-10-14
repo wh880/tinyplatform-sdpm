@@ -14,6 +14,8 @@ import org.tinygroup.sdpm.org.service.inter.DeptService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +34,8 @@ public class UserAction extends BaseController {
     private DeptService deptService;
     @Autowired
     private StoryService storyService;
+    @Autowired
+    private TaskService taskService;
 
     @RequestMapping("/form")
     public String form(String id, Model model) {
@@ -146,29 +150,54 @@ public class UserAction extends BaseController {
     @RequestMapping("/story/search")
     public String storySearchAction(String id, int page, int pagesize, String choose, ProductStory story, String order, String ordertype, Model model, HttpServletRequest request) {
 
-        if (choose.equals(3) || choose.equals(null)) {
-            story.setStoryAssignedTo(id);
-            Pager<ProductStory> p1 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, "asc".equals(ordertype) ? true : false);
-            model.addAttribute("storyList", p1);
+        if (choose.equals("6")) {
+            story.setStoryClosedBy(id);
+            Pager<ProductStory> p4 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
+            model.addAttribute("storyList", p4);
 
-        } else if (choose.equals(4)) {
+        } else if (choose.equals("4")) {
             story.setStoryOpenedBy(id);
-            Pager<ProductStory> p2 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, "asc".equals(ordertype) ? true : false);
+            Pager<ProductStory> p2 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p2);
 
-        } else if (choose.equals(5)) {
+        } else if (choose.equals("5")) {
             story.setStoryReviewedBy(id);
-            Pager<ProductStory> p3 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, "asc".equals(ordertype) ? true : false);
+            Pager<ProductStory> p3 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p3);
 
         } else {
-            story.setStoryClosedBy(id);
-            Pager<ProductStory> p4 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, "asc".equals(ordertype) ? true : false);
-            model.addAttribute("storyList", p4);
+            story.setStoryAssignedTo(id);
+            Pager<ProductStory> p1 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
+            model.addAttribute("storyList", p1);
 
         }
         return "organization/user/userStoryTable.pagelet";
     }
 
 
+    @RequestMapping("/task")
+    public String taskJump() {
+        return "/organization/user/taskAdmin.page";
+    }
+
+    @RequestMapping("/task/search")
+    public String taskSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, ProjectTask task, String order, String ordertype, Model model, HttpServletRequest request) {
+        OrgUser user = userService.findUser(id);
+        String account = user.getOrgUserAccount();
+        ProjectTask task1 = new ProjectTask();
+        if (choose.equals("7")) {
+            task.setTaskCanceledBy(account);
+        } else if (choose.equals("4")) {
+            task.setTaskOpenBy(account);
+        } else if (choose.equals("5")) {
+            task.setTaskFinishedBy(account);
+        } else if (choose.equals("6")) {
+            task.setTaskClosedBy(account);
+        } else {
+            task.setTaskAssignedTo(account);
+        }
+        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task1, order, false, null, null);
+        model.addAttribute("taskPager", taskPager);
+        return "/organization/user/userTaskTable.pagelet";
+    }
 }

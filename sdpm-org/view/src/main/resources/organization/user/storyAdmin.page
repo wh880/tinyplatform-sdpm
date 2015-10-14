@@ -26,7 +26,7 @@
                             <a href="${TINY_CONTEXT_PATH}${m.href}?choose=3&id=${id}"
                                class="active_btn">${m.name}</a>
                         #else
-                            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${id}">${m.name}</a>
+                            <a href="${TINY_CONTEXT_PATH}${m.href}?choose=3&id=${id}">${m.name}</a>
                         #end
                     #end
 

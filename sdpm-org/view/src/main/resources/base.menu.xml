@@ -30,7 +30,7 @@
         <menu id="org-user-storyAdmin" name="需求" href="/org/user/story" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
-        <menu id="org-user-taskAdmin" name="任务" href="/organization/user/taskAdmin.page" icon="" sort="1"
+        <menu id="org-user-taskAdmin" name="任务" href="/org/user/task" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
         <menu id="org-user-bugAdmin" name="缺陷" href="/organization/user/bugAdmin.page" icon="" sort="1"
