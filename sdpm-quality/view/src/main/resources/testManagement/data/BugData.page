@@ -19,11 +19,11 @@
     #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">[${var?.bugConfirmed==1?"已确认":"未确认"}]${var?.bugTitle}</a>#end
     #@td()${getDict("bugStatus",var?.bugStatus)}#end
     #@td()${var?.bugOpenedBy}#end
-    #@td()${var?.bugOpenedDate}#end
+    #@td()${formatDate(var?.bugOpenedDate,"yyyy-MM-dd")}#end
     #@td()${var?.bugAssignedTo}#end
     #@td()${var?.bugResolvedBy}#end
     #@td()${var?.bugResolution}#end
-    #@td()${var?.bugResolvedDate}#end
+    #@td()${formatDate(var?.bugResolvedDate,"yyyy-MM-dd")}#end
     #@td()
     	#foreach(m:menuManager.getScopeMenus("testbug-op"))
              	<a href="${TINY_CONTEXT_PATH}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>			

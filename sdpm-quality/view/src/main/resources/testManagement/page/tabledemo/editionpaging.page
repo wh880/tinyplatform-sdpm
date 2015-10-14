@@ -10,7 +10,8 @@
                     #@th()所属产品#end
                     #@td()
                         #@Tselect2F()
-                        #@Tselect2Body("productId" bug?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("productId" bug?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="0">/</option>
                         #foreach(product : qualityProductList)
                         <option value="${product?.productId}">${product?.productName}</option>
                         #end
@@ -201,7 +202,8 @@
                     #@td()
                         #@Tselect2F()
                         #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #foreach(project : projectList)
+                        <option value="0">/</option>
+                         #foreach(project : projectList)
                         <option value="${project?.projectId}">${project?.projectName}</option>
                         #end
                         #end
@@ -276,9 +278,10 @@
                     #@td()
                    #@Tselect2F()
 	                   		 #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">版本1</option>
-	                        <option value="ME">版本2</option>
-	                        <option value="MD">版本3</option>
+                                <option value="0">/</option>
+                                #foreach(build : buildList)
+                                <option value="${build?.buildId}">${build?.buildName}</option>
+                                #end
 	                    	#end                
                 	  #end
                     #end
@@ -309,9 +312,10 @@
                     #@td()
                         #@Tselect2F()
 	                   		 #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">版本1</option>
-	                        <option value="ME">版本2</option>
-	                        <option value="MD">版本3</option>
+                                <option value="0">/</option>
+                                #foreach(build : buildList)
+                                <option value="${build?.buildId}">${build?.buildName}</option>
+                                #end
 	                    	#end                
                 	  #end
                         #@validateDiv("col-2")#end

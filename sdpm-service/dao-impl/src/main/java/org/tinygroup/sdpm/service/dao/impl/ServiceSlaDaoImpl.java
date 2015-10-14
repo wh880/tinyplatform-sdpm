@@ -361,6 +361,7 @@ public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDa
         }
     }
 
+    /*在queryPage方法的基础上修改得来，加入参数treeId*/
     public Pager<ServiceSla> queryPagerTree(int start, int limit, ServiceSla serviceSla, final Integer treeId, final OrderBy... orderBies) {
         if (serviceSla == null) {
             serviceSla = new ServiceSla();
