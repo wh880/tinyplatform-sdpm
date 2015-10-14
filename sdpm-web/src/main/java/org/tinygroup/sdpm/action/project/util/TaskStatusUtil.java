@@ -47,25 +47,14 @@ public class TaskStatusUtil {
             } else condition = "";
         } else condition = "";
 
-        if (moduleIds != null) {
+        if (!StringUtil.isBlank(moduleIds)) {
             if (StringUtil.isBlank(condition)) {
-                if (moduleIds.contains("p")) {
-                    moduleIds = moduleIds.substring(1);
-                    condition = "task_product=" + moduleIds;
-                } else {
-                    condition = "task_model" + moduleIds;
-                }
+                condition = "task_module " + moduleIds;
             } else {
-                condition = condition + " and ";
-                if (moduleIds.contains("p")) {
-                    moduleIds = moduleIds.substring(1);
-                    condition = "task_product=" + moduleIds;
-                } else {
-                    condition = "task_model" + moduleIds;
-                }
+                condition = "and task_module " + moduleIds;
             }
         }
-
+//task_model
         return condition;
     }
 }
