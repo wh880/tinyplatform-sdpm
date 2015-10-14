@@ -35,8 +35,8 @@ public class ObtainHandleImpl implements ObtainHandle {
         }
     }
 
-    public Map<String, Obtain> getDict() {
-        return obtainDict;
+    public Obtain getDict(String key) {
+        return obtainDict.get(key);
     }
 
     public void removeObtains(Obtains obtains) {

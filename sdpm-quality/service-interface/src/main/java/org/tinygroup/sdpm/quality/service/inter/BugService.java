@@ -11,7 +11,7 @@ public interface BugService {
 	 * @param id
 	 * @return
 	 */
-	QualityBug findById(int id);
+	QualityBug findById(Integer id);
 	
 	/**
 	 * 根据条件查询d

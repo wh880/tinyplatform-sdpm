@@ -1,11 +1,17 @@
 package org.tinygroup.sdpm.action.system;
 
 import org.tinygroup.beancontainer.BeanContainerFactory;
+import org.tinygroup.sdpm.common.log.obtain.impl.ObtainHandleImpl;
+import org.tinygroup.sdpm.common.log.obtain.inter.Obtain;
+import org.tinygroup.sdpm.common.log.obtain.inter.ObtainHandle;
+import org.tinygroup.sdpm.common.log.obtain.inter.ObtainParameter;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.impl.LogServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.LogService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Date;
 
 /**
@@ -14,6 +20,8 @@ import java.util.Date;
 public class LogUtil {
     //之后要换成服务包装类型
     public final static LogService LOGSERVICE = BeanContainerFactory.getBeanContainer(LogUtil.class.getClassLoader()).getBean(LogServiceImpl.class);
+
+    private final static ObtainHandle OBTAIN_HANDLE = BeanContainerFactory.getBeanContainer(LogUtil.class.getClassLoader()).getBean(ObtainHandleImpl.class);
 
     public static void log(String objectType, int objectId, int project, int product, String actor, String action ,String comment ,Object oldObject, Object newObject){
         SystemAction systemAction = new SystemAction();
@@ -35,6 +43,45 @@ public class LogUtil {
     public static void log(String objectType, int objectId, int project, int product, String actor, String action){
         log(objectType,objectId,project,product,actor,action,null,null,null);
     }
+
+    public static Object getObjectById(int id,String type){
+        Obtain obtain = OBTAIN_HANDLE.getDict(type);
+        return getValue(id,obtain);
+    }
+
+    public static String getInfoUrl(String type){
+        return OBTAIN_HANDLE.getDict(type).getUrl();
+    }
+
+    private static Object getValue(int id, Obtain obtain){
+        Class[] parameter = new Class[obtain.getParameters().size()];
+        Object value = null;
+        for(int i = 0;i<obtain.getParameters().size(); i++){
+            try {
+                parameter[i]=Class.forName(obtain.getParameters().get(i).getType());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            Object serviceWapper = BeanContainerFactory
+                    .getBeanContainer(LogUtil.class.getClassLoader())
+                    .getBean(Class.forName(obtain.getType()));
+            Method method = serviceWapper.getClass().getMethod(obtain.getMethod(),parameter);
+            value = method.invoke(serviceWapper,id);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException("obtain moduleType不存在");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
+
     static class Oprate{
         public final static String CREATED = "created";          //创建
         public final static String OPENED = "opened";             //创建
