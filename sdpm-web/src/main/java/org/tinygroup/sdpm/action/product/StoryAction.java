@@ -78,13 +78,9 @@ public class StoryAction extends BaseController{
     	
     	productStory.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
     	ProductStory story=storyService.addStory(productStory, storySpec);
-    	 ProfileAction profileAction = new ProfileAction();
+    	 ProfileUtil profileUtil = new ProfileUtil();
     	 
-         for(int i=0,n=file.length;i<n;i++){
-        	 if(!file[i].isEmpty()&&file[i].getSize()!=0){
-        	 profileAction.upload(file[i],story.getStoryId(),"story",title[i]);
-        	 }
-         }
+         profileUtil.uploads(file, story.getStoryId(), "story", title);
     	return "redirect:" + "/product/page/project/togglebox.page";
     }
     
