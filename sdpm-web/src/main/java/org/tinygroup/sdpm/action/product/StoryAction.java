@@ -196,7 +196,7 @@ public class StoryAction extends BaseController{
 		}*/
     	String condition = StoryUtil.getStatusCondition(choose,request);
     	if(story.getModuleId()!=null&&story.getModuleId()>0){
-    		condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + ModuleUtil.getCondition(story.getModuleId(), moduleService);
+    		condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + ModuleUtil.getCondition(story.getModuleId(), moduleService);
     	}
     	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, condition,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList",p);
