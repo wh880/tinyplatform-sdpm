@@ -14,7 +14,6 @@
         #foreach(var:slas)
             #@gridSysCol(4)
                 #@div(divClass="infoContent")
-                #*<p class="titleName">支付宝协议</p>*#
                     <p class="titleName">${var.slaTitle}</p>
                     <div>
                         #@table("")
@@ -55,7 +54,8 @@
                                 #@aExtendButton(
                                     "btn-primary btn-sm" TINY_CONTEXT_PATH+m.href+"?id="+var.slaId "" "")编辑#end
                             #else
-                                #@delItemsdpm(TINY_CONTEXT_PATH+m.href var?.slaId "" {
+                                #@delItemsdpm(TINY_CONTEXT_PATH+m.href var?.slaId TINY_CONTEXT_PATH+
+                                    "/service/sla/list" {
                                     "class":"btn radius btn-danger btn-sm"}) 删除#end
                             #end
                         #end

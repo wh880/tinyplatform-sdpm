@@ -46,14 +46,21 @@
                     "问题不能为空！","id":"faqQuestion","class":"input-text"})
             #end
         #end
+    #*#@elementItem()
+        #@sdpmItem("问题类型" "*")
+            #@tinySelect("faqType" faq?.faqType{"class":"input-text select2","rel":"22","id":"productId"})
+                #@tinyOptionItem("ch")请选择#end
+                #@tinyOptionItem("00")第一类问题#end
+                #@tinyOptionItem("01")第二类问题#end
+                #@tinyOptionItem("02")第三类问题#end
+            #end
+        #end
+    #end*#
         #@elementItem()
             #@sdpmItem("问题类型" "*")
-                #@tinySelect("faqType" faq?.faqType{"class":"input-text select2","rel":"22","id":"productId"})
-                    #@tinyOptionItem("ch")请选择#end
-                    #@tinyOptionItem("00")第一类问题#end
-                    #@tinyOptionItem("01")第二类问题#end
-                    #@tinyOptionItem("02")第三类问题#end
-                #end
+                #TzTreeSelect(
+                    "orgDeptId" faq?.faqType{"class":"input-text","data-URL":TINY_CONTEXT_PATH+
+                    "/service/faq/data?check=n"} )
             #end
         #end
         #@elementItem()

@@ -1,7 +1,19 @@
 package org.tinygroup.sdpm.util;
 
+import org.tinygroup.beancontainer.BeanContainerFactory;
+import org.tinygroup.sdpm.common.log.obtain.impl.ObtainHandleImpl;
+import org.tinygroup.sdpm.common.log.obtain.inter.Obtain;
+import org.tinygroup.sdpm.common.log.obtain.inter.ObtainHandle;
+import org.tinygroup.sdpm.common.log.obtain.inter.ObtainParameter;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.impl.LogServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.LogService;
+import org.tinygroup.sdpm.util.SpringContextHolder;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Date;
 
 /**
  * Created by wangll13383 on 2015/10/13.
@@ -9,7 +21,7 @@ import org.tinygroup.sdpm.system.service.inter.LogService;
 public class LogUtil {
     //之后要换成服务包装类型
     public final static LogService logService = SpringContextHolder.getBean(LogServiceImpl.class);
-
+    private final static ObtainHandle obtainHandle = BeanContainerFactory.getBeanContainer(LogUtil.class.getClassLoader()).getBean(ObtainHandleImpl.class);
     public static void log(LogOperateObject objectType, LogAction action, String objectId, String userId) {
         saveLog(objectType.getOprateObject(), action.getAction(), objectId, userId, null, null, null, null, null);
     }
@@ -29,16 +41,16 @@ public class LogUtil {
     protected static void saveLog(String objectType, String action, String objectId, String userId,
                                   String project, String product,
                                   Object oldObject, Object newObject, String comment) {
-//        SystemAction systemAction = new SystemAction();
-//        systemAction.setActionAction(action);
-//        systemAction.setActionProduct(String.valueOf(product));
-//        systemAction.setActionProject(project);
-//        systemAction.setActionObjectType(objectType);
-//        systemAction.setActionDate(new Date());
-//        systemAction.setActionObjectId(objectId);
-//        systemAction.setActionActor(actor);
-//        systemAction.setActionComment(comment);
-//        logService.log(oldObject, newObject, systemAction);
+        SystemAction systemAction = new SystemAction();
+        systemAction.setActionAction(action);
+        systemAction.setActionProduct(String.valueOf(product));
+        systemAction.setActionProject(Integer.parseInt(project));
+        systemAction.setActionObjectType(objectType);
+        systemAction.setActionDate(new Date());
+        systemAction.setActionObjectId(Integer.parseInt(objectId));
+        systemAction.setActionActor(userId);
+        systemAction.setActionComment(comment);
+        logService.log(oldObject, newObject, systemAction);
     }
 
     public enum LogAction {

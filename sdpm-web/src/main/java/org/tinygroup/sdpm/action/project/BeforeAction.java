@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,8 @@ import java.util.List;
 public class BeforeAction {
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private ModuleService moduleService;
 
 //    @RequestMapping("/task/index")
 //    public String jumpTaskIndex(@CookieValue(required = false) Integer projectId, HttpServletResponse response, HttpServletRequest request, Model model) {
@@ -87,9 +90,8 @@ public class BeforeAction {
     }
 
     @RequestMapping("/selModel")
-    public String selModel(Integer moduleId) {
-
-        return "redirect:/project/task/index.page?moduleId=" + moduleId;
+    public String selModel(String moduleId) {
+        return "redirect:/project/task/index?moduleId=" + moduleId;
     }
 
 }

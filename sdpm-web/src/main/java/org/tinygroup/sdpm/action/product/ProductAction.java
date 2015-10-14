@@ -86,6 +86,14 @@ public class ProductAction  extends BaseController{
 		return "redirect:" + "/product/page/tabledemo/product-listall.page";
 	}
 	
+	@RequestMapping("/edit")
+	public String edit(Product product,HttpServletRequest request){
+
+		productService.updateProduct(product);
+		SessionUtil.ProductRefresh(request, productService);
+		return "redirect:" + "/product/find/overview?productId="+product.getProductId();
+	}
+	
 	@ResponseBody
 	@RequestMapping("sessionset")
 	public boolean sessionSet(Integer productId,HttpServletRequest request){

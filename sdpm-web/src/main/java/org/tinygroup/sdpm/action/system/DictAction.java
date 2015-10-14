@@ -63,11 +63,14 @@ public class DictAction extends BaseController{
 		model.addAttribute("dict", dict);
 		return "system/page/dictionaries/dictitem_view.pagelet";
 	}
-
+    @ResponseBody
 	@RequestMapping("delete")
-	public String deleteDict(Integer dictId){
+	public Map<String, String> deleteDict(Integer dictId){
+    	Map<String, String> map = new HashedMap();
 		dictService.deleteDict(dictId);
-		return "system/page/dictionaries/dictitem.page";
+		 map.put("status", "success");
+	     map.put("info", "删除成功");
+		return map;
 	}
 
 	@RequestMapping(value ="save",method = RequestMethod.POST)

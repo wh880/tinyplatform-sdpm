@@ -1,7 +1,7 @@
 #@div(divClass="infoContent")
 <p class="titleName">描述</p>
 <div>
-    八戒哪里跑
+        ${build?.buildDesc}
 </div>
 #end
 
@@ -11,7 +11,9 @@
     <li>
         #@elementItem()
 
-            <p>123456</p>
+            <p>
+                    ${build?.buildDesc}
+            </p>
 
         #end
     </li>
@@ -19,7 +21,9 @@
     <li>
         #@elementItem()
 
-            <p><b>名称:</b> 计划XXX</p>
+            <p><b>名称:</b>
+                    ${build?.buildName}
+            </p>
 
         #end
     </li>
@@ -27,7 +31,9 @@
     <li>
         #@elementItem()
 
-            <p><b>开始日期:</b>1970-01-01</p>
+            <p><b>打包日期:</b>
+                    ${build?.buildDate}
+            </p>
 
         #end
     </li>
@@ -35,9 +41,29 @@
     <li>
         #@elementItem()
 
-            <p><b>结束日期:</b>1970-01-01</p>
+            <p><b>构建者:</b>
+                    ${build?.buildBuilder}
+            </p>
 
         #end
+    </li>
+    <li>
+            #@elementItem()
+
+                <p><b>源代码地址:</b>
+                        ${build?.buildScmPath}
+                </p>
+
+            #end
+    </li>
+    <li>
+            #@elementItem()
+
+                <p><b>下载地址:</b>
+                        ${build?.buildFilePath}
+                </p>
+
+            #end
     </li>
 
 </ul>

@@ -5,7 +5,7 @@
 
 ##
 #macro delItemsdpm(doAction delId backUrl mapInfo)
-<a href="${backUrl}" data-removeid="${delId}" data-action="${doAction}" #getmapInfo(mapInfo)>#bodyContent</a>
+<a href="${backUrl}" data-removeid="${delId}" data-action="${doAction}" #getMapInfo(mapInfo)>#bodyContent</a>
 #end
 
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
@@ -46,11 +46,11 @@
         #end
 
 
-        #@elementItem()
-            #@sdpmItem("客户部门")
-                #tinyInput("text" "clientDeptId" client?.clientDeptId {"id":"client_dept_id","class":"input-text"})
-            #end
-        #end
+##        #@elementItem()
+##            #@sdpmItem("客户部门")
+##                #tinyInput("text" "clientDeptId" client?.clientDeptId {"id":"client_dept_id","class":"input-text"})
+##            #end
+##        #end
 
         #@elementItem()
             #@sdpmItem("客户登记人" "*")
@@ -97,7 +97,7 @@
         #@elementItem()
             #@colLabel()状态是否正常：#end
             #@formControlDiv("col-8")
-                #tinySwitcher("clientStatus" "1" "1") ##第二个为选中状态 第三参数为数据库返回时的数据
+                #Tswitcher("clientStatus" ["0","1"] "1") ##第二个为选中状态 第三参数为数据库返回时的数据
             #end
         #end
         <br/>

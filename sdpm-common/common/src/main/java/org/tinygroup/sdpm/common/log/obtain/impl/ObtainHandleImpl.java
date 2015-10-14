@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.common.log.obtain.impl;
 
 import org.springframework.stereotype.Repository;
+import org.tinygroup.beancontainer.BeanContainerFactory;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
@@ -8,6 +9,8 @@ import org.tinygroup.sdpm.common.log.obtain.inter.Obtain;
 import org.tinygroup.sdpm.common.log.obtain.inter.Obtains;
 import org.tinygroup.sdpm.common.log.obtain.inter.ObtainHandle;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -35,8 +38,47 @@ public class ObtainHandleImpl implements ObtainHandle {
         }
     }
 
-    public Map<String, Obtain> getDict() {
-        return obtainDict;
+    public Object getObjectById(int id,String type){
+        Obtain obtain = getDict(type);
+        if(obtain==null)return null;
+        return getValue(id,obtain);
+    }
+
+    public String getInfoUrl(String type){
+        return getDict(type).getUrl();
+    }
+
+    private Object getValue(int id, Obtain obtain){
+        Class[] parameter = new Class[obtain.getParameters().size()];
+        Object value = null;
+        for(int i = 0;i<obtain.getParameters().size(); i++){
+            try {
+                parameter[i]=Class.forName(obtain.getParameters().get(i).getType());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            Object serviceWapper = BeanContainerFactory
+                    .getBeanContainer(ObtainHandleImpl.class.getClassLoader())
+                    .getBean(Class.forName(obtain.getType()));
+            Method method = serviceWapper.getClass().getMethod(obtain.getMethod(),parameter);
+            value = method.invoke(serviceWapper,id);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException("obtain moduleType不存在");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
+
+    public Obtain getDict(String key) {
+        return obtainDict.get(key);
     }
 
     public void removeObtains(Obtains obtains) {

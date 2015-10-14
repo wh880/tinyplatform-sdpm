@@ -33,12 +33,6 @@ public class ServiceFaq {
 	private Integer faqId;
 
 	/** 
-	 * 问答类型
-	 * 
-	 */
-	private String faqType;
-
-	/** 
 	 * 问题描述
 	 * 
 	 */
@@ -104,6 +98,10 @@ public class ServiceFaq {
 	 */
 	private Date faqReplyDate;
 
+	/**
+	 * 问题类型id
+	 */
+	private Integer faqTypeId;
 	public ServiceFaq() {
 		setDeleted(DELETE_NO);
 	}
@@ -114,14 +112,6 @@ public class ServiceFaq {
 
 	public void setFaqId(Integer faqId){
 		this. faqId = faqId;
-	}
-
-	public String getFaqType() {
-		return faqType;
-	}
-
-	public void setFaqType(String faqType){
-		this. faqType = faqType;
 	}
 
 	public String getFaqQuestion() {
@@ -210,6 +200,14 @@ public class ServiceFaq {
 
 	public void setFaqReplyDate(Date faqReplyDate){
 		this. faqReplyDate = faqReplyDate;
+	}
+
+	public Integer getFaqTypeId() {
+		return faqTypeId;
+	}
+
+	public void setFaqTypeId(Integer faqTypeId) {
+		this.faqTypeId = faqTypeId;
 	}
 
 }

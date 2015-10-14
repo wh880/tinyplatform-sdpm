@@ -42,10 +42,10 @@
                     &nbsp;&gt;
                     #foreach(m:menuManager.getScopeMenus("org-user-detail"))
                         #if(m.id=="org-user-bugAdmin")
-                            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${id}"
+                            <a href="${TINY_CONTEXT_PATH}${m.href}?choose=3&id=${id}"
                                class="active_btn">${m.name}</a>
                         #else
-                            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${id}">${m.name}</a>
+                            <a href="${TINY_CONTEXT_PATH}${m.href}?choose=3&id=${id}">${m.name}</a>
                         #end
                     #end
                 </span>
@@ -53,14 +53,14 @@
                 #end
 
             <span class="barBoxs">
-          <a href="logcalendarAdmin.page">日历日志</a>
-					<a href="../user/bugAdmin.page" class="active_btn">今天</a>
-					<a href="../user/bugAdmin.page">昨天</a>
-					<a href="../user/bugAdmin.page">本周</a>
-					<a href="../user/bugAdmin.page">上周</a>
-					<a href="../user/bugAdmin.page">本月</a>
-					<a href="../user/bugAdmin.page">上月</a>
-					<a href="../user/bugAdmin.page">所有</a>
+                <a href="${TINY_CONTEXT_PATH}/org/user/bug?choose=3&id=${id}"
+                   class="${choose == 3?'active_btn':''}">指派给他</a>
+                <a href="${TINY_CONTEXT_PATH}/org/user/bug?choose=4&id=${id}"
+                   class="${choose == 4?'active_btn':''}">由他创建</a>
+                <a href="${TINY_CONTEXT_PATH}/org/user/bug?choose=5&id=${id}"
+                   class="${choose == 5?'active_btn':''}">由他解决</a>
+                <a href="${TINY_CONTEXT_PATH}/org/user/bug?choose=6&id=${id}"
+                   class="${choose == 6?'active_btn':''}">由他关闭</a>
         </span>
             #end
         #end
@@ -73,18 +73,16 @@
     #@div(divClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([8,10,20,50,100,200])
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/organization/user/bugAdminTable.pagelet") ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/org/user/bug/search?"+tinyRequestQueryString) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"","rel":"sortname"})ID#end
-                #@tinyTh({"class":"","rel":"sortname"})级别#end
-                #@tinyTh({"class":"","rel":"sortname"})P#end
-                #@tinyTh({"class":"","rel":"sortname"})类型#end
-                #@tinyTh({"class":"","rel":"sortname"})BUG标题#end
-                #@tinyTh({"class":"","rel":"sortname"})创建#end
-                #@tinyTh({"class":"","rel":"sortname"})解决者#end
-                #@tinyTh({"class":"","rel":"sortname"})方案#end
+                #@tinyTh({"class":"","rel":"bug_id"})ID#end
+                #@tinyTh({"class":"","rel":"bug_severity"})级别#end
+                #@tinyTh({"class":"","rel":"priority"})P#end
+                #@tinyTh({"class":"","rel":"bug_title"})BUG标题#end
+                #@tinyTh({"class":"","rel":"bug_opened_by"})创建#end
+                #@tinyTh({"class":"","rel":"bug_resolved_by"})解决者#end
+                #@tinyTh({"class":"","rel":"bug_resolution"})方案#end
             #end
         #end
     #end

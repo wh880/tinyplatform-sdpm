@@ -23,6 +23,8 @@ import java.util.Date;
  * 
  */
 public class ServiceFaqType {
+	public static Integer DELETE_YES = 1;
+	public static Integer DELETE_NO = 0;
 
 	/** 
 	 * 问题类型id
@@ -59,6 +61,10 @@ public class ServiceFaqType {
 	 * 
 	 */
 	private Integer deleted;
+
+	public ServiceFaqType() {
+		setDeleted(DELETE_NO);
+	}
 
 	public Integer getFaqTypeId() {
 		return faqTypeId;

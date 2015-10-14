@@ -55,7 +55,7 @@ public class ProjectTaskTable extends Table {
 	/**
 	 *
 	 */
-	public final Column TASK_MODEL = new Column(this, "task_model");
+	public final Column TASK_MOMODULE = new Column(this, "task_module");
 	/** 
 	 * 来源bug
 	 * 

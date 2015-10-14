@@ -24,7 +24,7 @@ public class BugServiceImpl implements BugService {
 		return bugmanager.add(bug);
 	}
 	
-	public QualityBug findById(int id){
+	public QualityBug findById(Integer id){
 		return bugmanager.find(id);
 	}
 	

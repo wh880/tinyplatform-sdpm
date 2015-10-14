@@ -25,12 +25,12 @@
             #@sdpmItem("产品名称")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "productId" request?.productId {"placeholder":"产品名称","datatype":"*","nullmsg":"请求标题不能为空！","id":
+                        "productId" request?.productId {"placeholder":"产品名称","datatype":"*","nullmsg":"产品名称不能为空！","id":
                         "request_title", "class":"input-text select2"})  ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("1")支付宝#end
-                        #@tinyOptionItem("2")余额宝#end
-                        #@tinyOptionItem("3")财付通#end
+                        #foreach(l:productList)
+                            #@tinyOptionItem(l.productId)${l?.productName}#end
+                        #end
                     #end
                 ##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/sla/slaAdd.page" class="r ">增加</a><a
                 ##                            href="${TINY_CONTEXT_PATH}/service/sla/sla.page">全部</a>#end
@@ -93,7 +93,7 @@
                         "clientId" request?.clientId {"placeholder":"客户名称","datatype":"*","nullmsg":"客户名称不能为空！","id":
                         "request_title", "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
-                        #foreach(l:list)
+                        #foreach(l:clientList)
                             #@tinyOptionItem(l.clientId)${l?.clientName}#end
                         #end
                     #end

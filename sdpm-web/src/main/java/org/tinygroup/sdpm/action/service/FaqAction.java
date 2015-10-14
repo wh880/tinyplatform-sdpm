@@ -8,10 +8,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceFaqType;
 import org.tinygroup.sdpm.service.service.inter.FaqService;
+import org.tinygroup.sdpm.service.service.inter.FaqTypeService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -20,6 +24,8 @@ import java.util.Map;
 public class FaqAction extends BaseController {
     @Autowired
     private FaqService faqService;
+    @Autowired
+    private FaqTypeService faqTypeService;
 
     /*新增问题*/
     @RequestMapping("/form")
@@ -117,6 +123,58 @@ public class FaqAction extends BaseController {
         map.put("info", "删除成功");
         return map;
     }
-    /*查找问题数量*/
 
+    /*实现faq里面的左侧树*/
+    @RequestMapping("/addTree")
+    public String addDept(Integer faqParentTypeId, String faqType) {
+        ServiceFaqType serviceFaqType = new ServiceFaqType();
+        serviceFaqType.setFaqParentTypeId(faqParentTypeId);
+        serviceFaqType.setFaqType(faqType);
+        faqTypeService.addFaqType(serviceFaqType);
+        return "organization/user/user.page";
+    }
+
+    @RequestMapping("/editTree")
+    public String editDept(Integer faqTypeId, String faqType) {
+        ServiceFaqType type = faqTypeService.findFaqType(faqTypeId);
+        type.setFaqType(faqType);
+        faqTypeService.updateFaqType(type);
+        return "service/faq/faqmenu.page";
+    }
+
+    @RequestMapping("/deleteTree")
+    public String deleteDept(Integer faqTypeId) {
+        faqTypeService.deleteFaqType(faqTypeId);
+        return "service/faq/faqmenu.page";
+    }
+
+    @ResponseBody
+    @RequestMapping("/data")
+    public List data(String check) {
+        ServiceFaqType faq = new ServiceFaqType();
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<ServiceFaqType> faqs = faqTypeService.getFaqTypeList(faq);
+        if (check == null || !check.equals("n")) {
+            Map<String, Object> map1 = new HashMap<String, Object>();
+            map1.put("id", -1);
+            map1.put("pId", 0);
+            map1.put("open", true);
+            map1.put("add", true);
+            map1.put("edit", true);
+            map1.put("name", "所有问题");
+            list.add(map1);
+        }
+
+        for (ServiceFaqType d : faqs) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", d.getFaqTypeId());
+            map.put("pId", d.getFaqParentTypeId());
+            map.put("open", true);
+            map.put("add", true);
+            map.put("edit", true);
+            map.put("name", d.getFaqType());
+            list.add(map);
+        }
+        return list;
+    }
 }

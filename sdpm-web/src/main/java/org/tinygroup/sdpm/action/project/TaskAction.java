@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
+import org.tinygroup.sdpm.action.system.ModuleUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -48,7 +49,7 @@ public class TaskAction extends BaseController {
     private StoryService productStoryService;
 
     @RequestMapping("index")
-    public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model) {
+    public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model, String moduleId) {
         List<Project> list = projectService.findList();
         Project selProject = new Project();
         if (list == null || list.isEmpty()) {
@@ -79,7 +80,13 @@ public class TaskAction extends BaseController {
         //model.addAttribute("projectList", list);
         request.getSession().setAttribute("selProject", selProject);
         request.getSession().setAttribute("projectList", list);
-        return "project/task/index.page";
+        if (moduleId != null) {
+            model.addAttribute("moduleId", moduleId);
+            return "project/task/index.page";
+        } else {
+            return "project/task/index.page";
+        }
+
     }
 
     @RequestMapping("/edit")
@@ -163,17 +170,25 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/findPager")
-    public String findPager(Integer start, Integer limit, String order, String ordertype, String statu, String choose, String group, Integer projectId, Model model, HttpServletRequest request, Integer moduleId) {
+    public String findPager(Integer start, Integer limit, String order, String ordertype, String statu, String choose, String group, Integer projectId, Model model, HttpServletRequest request, String moduleId) {
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;
         }
         ProjectTask task = new ProjectTask();
-        if (moduleId != null) {
-            task.setTaskModel(moduleId);
-        }
         task.setTaskProject(projectId);
-        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, TaskStatusUtil.getCondition(statu, choose, request), group);
+        String moduleIds = "";
+        if (!StringUtil.isBlank(moduleId)) {
+            if (moduleId.contains("p")) {
+                moduleIds = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)), moduleService);
+            } else {
+                moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId), moduleService);
+            }
+        }
+
+
+        String condition = TaskStatusUtil.getCondition(statu, choose, request, moduleIds);
+        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, condition, group);
         model.addAttribute("taskPager", taskPager);
         model.addAttribute("statu", statu);
         model.addAttribute("choose", choose);
@@ -346,4 +361,8 @@ public class TaskAction extends BaseController {
             return "project/task/index.page";
         }
     }
+
+
+
+
 }

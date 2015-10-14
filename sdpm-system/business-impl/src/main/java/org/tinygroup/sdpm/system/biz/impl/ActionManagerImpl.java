@@ -33,13 +33,27 @@ public class ActionManagerImpl implements ActionManager {
 	}
 
 	public List<SystemAction> find(SystemAction SystemAction) {
-		return systemActionDao.query(SystemAction);
+		List<SystemAction> actions = systemActionDao.query(SystemAction);
+		if(actions.size()>0){
+			for(SystemAction s : actions){
+				s = systemActionDao.getActionAndObject(s);
+				s.setUrl(s.getActionObjectType());
+			}
+		}
+		return actions;
 	}
 
 	public Pager<SystemAction> findByPage(int start, int limit, SystemAction systemAction, String order,
 			String ordertype) {
-	
-		return systemActionDao.queryPager((start-1)*limit, limit, systemAction, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+
+		Pager<SystemAction> pager = systemActionDao.queryPager((start-1)*limit, limit, systemAction, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+		if(pager.getRecords().size()>0){
+			for(SystemAction s : pager.getRecords()){
+				s = systemActionDao.getActionAndObject(s);
+				s.setUrl(s.getActionObjectType());
+			}
+		}
+		return pager;
 	}
 
 	

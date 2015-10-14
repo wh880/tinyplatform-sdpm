@@ -10,7 +10,7 @@ public interface ObtainHandle {
 
     public void addObtain(Obtains obtains, String filePath);
 
-    public Map<String,Obtain> getDict();
+    public Obtain getDict(String key);
 
     public void removeObtains(Obtains obtains);
 }

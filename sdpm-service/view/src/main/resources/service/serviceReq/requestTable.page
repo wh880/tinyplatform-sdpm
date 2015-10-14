@@ -19,7 +19,7 @@
                     #@ulDropdownMenu()
 
                         #@dropdownsLi("dropdown-submenu")
-                            #@dropdownA("firstMenu"　"javascript:void(0);")指派回复#end
+                            #@dropdownA("firstMenu" "javascript:void(0);")指派回复#end
                             #@dropdownsUl("dropdown-menu")
                                 #@dropdownItem(
                                 TINY_CONTEXT_PATH+"/service/request/solveBy" "records" "secondMenu")admin#end
@@ -31,7 +31,7 @@
                         #end
 
                         #@dropdownsLi("dropdown-submenu")
-                            #@dropdownA("firstMenu"　"javascript:void(0);")指派回访#end
+                            #@dropdownA("firstMenu" "javascript:void(0);")指派回访#end
                             #@dropdownsUl("dropdown-menu")
                                 #@dropdownItem(
                                 TINY_CONTEXT_PATH+"/service/request/reviewBy" "records" "secondMenu")admin#end
