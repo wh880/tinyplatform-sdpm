@@ -2,6 +2,7 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
+#set(planbugTableId = "planbugTableId" )
 #include("/product/page/event/common.page")
 #!set(activeMenuId=currentPageId)
 #!set(linkName="product-plan",sonitem="<li>"+"计划"+"</li>")
@@ -98,7 +99,7 @@
 
 						#if("no-bug"==cname)
 							<div style="float:right" >
-								<a href="#" id="showsearchmore-bug">#buttonIcon(iconClass="icon-search")搜索</a>
+								<a href="javascript:void(0);" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 			                </div>
 						#end
 					#end
