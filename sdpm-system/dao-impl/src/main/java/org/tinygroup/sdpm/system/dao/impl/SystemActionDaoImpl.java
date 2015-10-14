@@ -34,6 +34,7 @@ import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
@@ -267,4 +268,16 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 		}
 		return select;
 	}
+
+	public SystemAction getActionAndObject(final SystemAction systemAction) {
+		return getDslTemplate().getByKey(systemAction.getActionId(), SystemAction.class, new SelectGenerateCallback<Serializable>() {
+			@SuppressWarnings("rawtypes")
+			public Select generate(Serializable t) {
+				return select(FragmentSql.fragmentSelect("a.*, "+ActionEnum.getName(systemAction.getActionObjectType())+" objectName"))
+						.from(FragmentSql.fragmentFrom("system_action a JOIN "+ActionEnum.getTable(systemAction.getActionObjectType())+" b ON a.action_object_id = b."+ActionEnum.getPrimary(systemAction.getActionObjectType())))
+						.where(FragmentSql.fragmentCondition("a.action_id="+systemAction.getActionId()));
+			}
+		});
+	}
+
 }

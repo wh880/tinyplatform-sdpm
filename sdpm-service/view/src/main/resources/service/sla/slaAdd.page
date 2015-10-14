@@ -55,8 +55,7 @@
                 #@sdpmItem("产品版本" "*")
                     #tinyInput(
                         "text" "cilentProductVision" sla?.cilentProductVision{"datatype":"*","id":"cilentProductVision",
-                        "nullmsg":"产品版本不能为空","class":
-                        "input-text"})
+                        "nullmsg":"产品版本不能空","class":"input-text"})
                 #end
             #end
             #@elementItem()

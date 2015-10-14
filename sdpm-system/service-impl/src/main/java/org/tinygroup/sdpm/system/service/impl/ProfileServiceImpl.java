@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.ProfileManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
-@Component("SystemProfileService")
+@Component
 public class ProfileServiceImpl implements ProfileService {
 	@Autowired
     private ProfileManager profileManager;

@@ -34,12 +34,6 @@ public class ServiceFaqTable extends Table {
 	public final Column FAQ_ID = new Column(this, "faq_id");
 
 	/** 
-	 * 问答类型
-	 * 
-	 */
-	public final Column FAQ_TYPE = new Column(this, "faq_type");
-
-	/** 
 	 * 问题描述
 	 * 
 	 */
@@ -104,6 +98,11 @@ public class ServiceFaqTable extends Table {
 	 * 
 	 */
 	public final Column FAQ_REPLY_DATE = new Column(this, "faq_reply_date");
+
+	/**
+	 * 问题类型id
+	 */
+	public final Column FAQ_TYPE_ID = new Column(this, "faq_type_id");
 
 
 	private ServiceFaqTable() {

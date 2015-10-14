@@ -25,21 +25,15 @@ import org.tinygroup.sdpm.action.system.ModuleUtil;
 import org.tinygroup.sdpm.action.system.ProfileAction;
 import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
-import org.tinygroup.sdpm.product.dao.ProductStoryDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
-import org.tinygroup.sdpm.product.dao.impl.ProductStoryDaoImpl;
-import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCollection;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
-import org.tinygroup.sdpm.product.service.PlanService;
-import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -78,17 +72,19 @@ public class StoryAction extends BaseController{
     
   
     
-    @RequestMapping("/save")
-    public String save(ProductStory productStory,ProductStorySpec storySpec,@RequestParam(value = "file", required = false)MultipartFile file,HttpServletRequest request) throws IOException{
-    	 ProfileAction profileAction = new ProfileAction();
-//         for(int i=0,n=files.getMultipartFiles().size();i<n;i++){
-//      	   if(!files.getMultipartFiles().get(i).isEmpty()){
-//      		   profileAction.upload(files.getMultipartFiles().get(i));
-//      	   }
-//         }
-    	 profileAction.upload(file);
+   @RequestMapping("/save")
+    public String save(ProductStory productStory,ProductStorySpec storySpec,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,HttpServletRequest request) throws IOException{
+    	
+    	
     	productStory.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-    	storyService.addStory(productStory, storySpec);
+    	ProductStory story=storyService.addStory(productStory, storySpec);
+    	 ProfileAction profileAction = new ProfileAction();
+    	 
+         for(int i=0,n=file.length;i<n;i++){
+        	 if(!file[i].isEmpty()&&file[i].getSize()!=0){
+        	 profileAction.upload(file[i],story.getStoryId(),"story",title[i]);
+        	 }
+         }
     	return "redirect:" + "/product/page/project/togglebox.page";
     }
     
@@ -202,7 +198,7 @@ public class StoryAction extends BaseController{
 		}*/
     	String condition = StoryUtil.getStatusCondition(choose,request);
     	if(story.getModuleId()!=null&&story.getModuleId()>0){
-    		condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + ModuleUtil.getCondition(story.getModuleId(), moduleService);
+    		condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + ModuleUtil.getCondition(story.getModuleId(), moduleService);
     	}
     	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, condition,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList",p);
@@ -216,6 +212,8 @@ public class StoryAction extends BaseController{
     		@RequestParam(required = false, defaultValue = "asc") String ordertype,
     		Model model, HttpServletRequest request){
         
+    	
+    	
     	story.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
     	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,FieldUtil.stringFormat(order),"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList",p);
@@ -232,13 +230,13 @@ public class StoryAction extends BaseController{
         return "";
     }
     @RequestMapping("/bugSearch/{relate}")
-    public String bugListAction(@PathVariable(value="relate")String relate,int page, int pagesize,
-    		QualityBug bug, String choose, String groupOperate, SearchInfos searchInfos,
+    public String bugListAction(@PathVariable(value="relate")String relate,int page, int pagesize,QualityBug bug,SearchInfos searchInfos,
     		@RequestParam(required = false, defaultValue = "bugId") String order, 
     		@RequestParam(required = false, defaultValue = "asc") String ordertype,
     		Model model, HttpServletRequest request){
-    	bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-    	Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,null, bug, null, "asc".equals(ordertype)?true:false);
+    	//bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+    	
+    	Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
     	model.addAttribute("bugList",p);
     	
     	if ("reRelateBug".equals(relate)) {

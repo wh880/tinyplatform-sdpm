@@ -49,9 +49,9 @@ public class FaqManagerImpl implements FaqManager{
     }
 
 
-    /*查询问题总条数*/
+   /* *//*查询问题总条数*//*
     public Integer selectcount(Integer id) {
         return faqDao.SelectByKey();
-    }
+    }*/
 
 }

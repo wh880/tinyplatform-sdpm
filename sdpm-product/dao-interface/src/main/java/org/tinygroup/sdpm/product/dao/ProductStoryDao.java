@@ -29,7 +29,7 @@ import org.tinygroup.tinysqldsl.select.Join;
 
 public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 
-	public Pager<ProductStory> complexQuery(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys);
+	Pager<ProductStory> complexQuery(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys);
 	
 	Integer softDelete(Integer id);
 	
