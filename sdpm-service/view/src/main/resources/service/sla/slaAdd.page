@@ -10,14 +10,10 @@
 #set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-     #*   #@div(divClass="dropdownBox")
-            #include("/service/serviceCom/dropdownMenu.page")
-        #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
     #end
-   #* #@tinyForm("thisform" "" "" {"class":"test"})*#
     #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/sla/save" "post" {"class":""})
     <input type="hidden" name="slaId" value="${sla?.slaId}"/>
     <div style="width:100%;float:left" class="pageleftpart">
@@ -43,7 +39,7 @@
                     #@Tselect2F()
                         #@Tselect2Body(
                             "productId" sla?.productId{"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            #@tinyOptionItem("ch")请选择#end
+                            #@tinyOptionItem("")请选择#end
                             #foreach(l:slas)
                                 #@tinyOptionItem(l.productId)${l?.productName}#end
                             #end
@@ -51,12 +47,12 @@
                     #end
                 #end
             #end
+
             #@elementItem()
                 #@sdpmItem("产品版本" "*")
                     #tinyInput(
                         "text" "cilentProductVision" sla?.cilentProductVision{"datatype":"*","id":"cilentProductVision",
-                        "nullmsg":"产品版本不能为空","class":
-                        "input-text"})
+                        "nullmsg":"产品版本不能为空","class":"input-text"})
                 #end
             #end
             #@elementItem()
@@ -74,8 +70,7 @@
             #@elementItem()
                 #@sdpmItem("服务协议标题" "*")
                     #tinyInput(
-                        "text" "slaTitle"sla?.slaTitle{"datatype":"*","id":"slaTitle","nullmsg":"协议标题不能为空！","class":
-                        "input-text"})
+                        "text" "slaTitle"sla?.slaTitle{"datatype":"*","id":"slaTitle","nullmsg":"协议标题不能为空！","class":"input-text"})
                 #end
             #end
             #@elementItem()
@@ -151,8 +146,8 @@
                     #@tinyDateInput(
                         "slaCreateDate" formatDate(sla?.slaCreateDate,
                         "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","id":"slaCreateDate",
-                        "datatype":
-                        "*","nullmsg":"日期不能为空","placeholder":""})#end
+                    "datatype":
+                    "*","nullmsg":"日期不能为空","placeholder":""})#end
                 #end
             #end
             #@elementItem()
@@ -166,9 +161,9 @@
                     #@tinyDateInput(
                         "slaReviewDate" formatDate(sla?.slaReviewDate,
                         "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","id":"slaReviewDate",
-                        "datatype":
-                        "*","nullmsg":
-                        "日期不能为空","placeholder":""})#end
+                    "datatype":
+                    "*","nullmsg":
+                    "日期不能为空","placeholder":""})#end
                 #end
             #end
             #@elementItem()
@@ -202,6 +197,13 @@
 
 <script type="text/javascript">
     $(".select2").select2();
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+        });
+    });
 </script>
 
 

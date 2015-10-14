@@ -1,3 +1,4 @@
+#include("/project/task/maplist.page")
 <div>
     #@div(divClass="infoContent")
         <p class="titleName">基本信息</p>
@@ -7,55 +8,39 @@
             #@tbody()
                 #@tr()
                     #@th()项目名称#end
-                    #@td()文化大革命#end
+                    #@td()${project?.projectName}#end
                 #end
                 #@tr()
-                    #@td()项目代号#end
-                    #@td()wg#end
-                #end
-                #@tr()
-                    #@td()起止时间#end
-                    #@td()111~222#end
-                #end
-                #@tr()
-                    #@td()可用工作日#end
-                    #@td()1#end
-                #end
-                #@tr()
-                    #@td()项目类型#end
-                    #@td()短期项目#end
-                #end
-                #@tr()
-                    #@td()项目状态#end
-                    #@td()进行中#end
-                #end
-                #@tr()
-                    #@td()项目负责人#end
+                    #@td()所属模块#end
                     #@td()#end
                 #end
                 #@tr()
-                    #@td()产品负责人#end
-                    #@td()#end
+                    #@td()相关需求#end
+                    #@td()
+                        #if(storyTitle)
+                            ${storyTitle}
+                        #end
+                    #end
                 #end
                 #@tr()
-                    #@td()测试负责人#end
-                    #@td()#end
+                    #@td()指派给#end
+                    #@td()${task?.taskAssignedTo}#end
                 #end
                 #@tr()
-                    #@td()发布负责人#end
-                    #@td()#end
+                    #@td()任务类型#end
+                    #@td()${task?.taskType}#end
                 #end
                 #@tr()
-                    #@td()相关产品#end
-                    #@td()<a href="#">中华明国#end
+                    #@td()任务状态#end
+                    #@td()${showStatuMap.get(task?.taskType)}#end
                 #end
                 #@tr()
-                    #@td()访问控制#end
-                    #@td()默认设置(有项目视图权限，即可访问)#end
+                    #@td()优先级#end
+                    #@td()${task?.taskPri}#end
                 #end
                 #@tr()
-                    #@td()分组白名单#end
-                    #@td()#end
+                    #@td()抄送人#end
+                    #@td()${task?.taskMailTo}#end
                 #end
             #end
         #end
@@ -68,27 +53,27 @@
             #@tbody()
                 #@tr()
                     #@td()预计开始#end
-                    #@td()总共预计20工时#end
+                    #@td()${task?.taskEstStared}#end
                 #end
                 #@tr()
                     #@td()实际开始#end
-                    #@td()可用工时483.0工时#end
+                    #@td()${task?.taskRealStarted}#end
                 #end
                 #@tr()
                     #@td()截止日期#end
-                    #@td()已经消耗1工时#end
+                    #@td()${task?.taskDeadLine}#end
                 #end
                 #@tr()
                     #@td()最初预计#end
-                    #@td()已经消耗1工时#end
+                    #@td()${task?.taskEstimate}#end
                 #end
                 #@tr()
                     #@td()总消耗#end
-                    #@td()已经消耗1工时#end
+                    #@td()${task?.taskConsumed}#end
                 #end
                 #@tr()
-                    #@td()截止日期#end
-                    #@td()预计剩余19工时#end
+                    #@td()预计剩余#end
+                    #@td()${task?.taskLeft}#end
                 #end
             #end
         #end
@@ -101,27 +86,27 @@
             #@tbody()
                 #@tr()
                     #@td()由谁创建#end
-                    #@td()admin于2015.09.09#end
+                    #@td()${task?.taskLeft} 在 ${task?.taskOpenedDate}#end
                 #end
                 #@tr()
                     #@td()由谁完成 #end
-                    #@td()admin于2015.09.09#end
+                    #@td()${task?.taskFinishedBy} 在 ${task?.taskFinishedDate}#end
                 #end
                 #@tr()
                     #@td()由谁取消#end
-                    #@td()admin于2015.09.09#end
+                    #@td()${task?.taskCanceledBy} 在 ${task?.taskCanceledDate}#end
                 #end
                 #@tr()
                     #@td()由谁关闭#end
-                    #@td()admin于2015.09.09#end
+                    #@td()${task?.taskClosedBy} 在 ${task?.taskCloseDate}#end
                 #end
                 #@tr()
                     #@td()关闭原因#end
-                    #@td()admin于2015.09.09#end
+                    #@td()${task?.taskClosedReason}#end
                 #end
                 #@tr()
                     #@td()最后编辑#end
-                    #@td()admin于2015.09.09#end
+                    #@td()${task?.taskLastEditedBy} 在 ${task?.taskLastEditedDate}#end
                 #end
             #end
         #end

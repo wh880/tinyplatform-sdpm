@@ -136,11 +136,12 @@ public class ModuleAction extends BaseController {
 
     @RequestMapping("save")
     public String saveModule(SystemModule systemModule, Model model) {
+        SystemModule systemModule1 = moduleService.findById(systemModule.getModuleId());
         if (systemModule.getModuleId() == null) {
             systemModule.setModuleRoot(0);
             systemModule.setModuleGrade(0);
             systemModule.setModuleOrder(0);
-            systemModule.setModulePath("1,2,3");
+            systemModule.setModulePath(moduleService.findById(systemModule.getModuleParent()).getModulePath()+","+systemModule.getModulePath());
             systemModule.setModuleType("dict");
             if (systemModule.getModuleParent() == null) {
                 systemModule.setModuleParent(0);
@@ -148,6 +149,7 @@ public class ModuleAction extends BaseController {
 
             moduleService.add(systemModule);
         } else {
+
             moduleService.eidtNameAndTiele(systemModule);
         }
         return "redirect: list?moduleType=dict";
@@ -155,16 +157,20 @@ public class ModuleAction extends BaseController {
     @ResponseBody
     @RequestMapping("ajax/save")
     public Map<String, String> ajaxSaveModule(SystemModule systemModule) {
+
         if (systemModule.getModuleId() == null) {
             systemModule.setModuleGrade(0);
             systemModule.setModuleOrder(0);
-            systemModule.setModulePath("1,2,3");
+            systemModule.setModulePath(moduleService.findById(systemModule.getModuleParent()).getModulePath()+systemModule.getModuleParent()+",");
             if (systemModule.getModuleParent() == null) {
                 systemModule.setModuleParent(0);
             }
-
             moduleService.add(systemModule);
         } else {
+            SystemModule systemModule1 = moduleService.findById(systemModule.getModuleId());
+            if(systemModule.getModuleParent()!=systemModule1.getModuleParent()){
+                systemModule.setModulePath(moduleService.findById(systemModule.getModuleParent()).getModulePath()+systemModule.getModuleParent()+",");
+            }
             moduleService.eidtNameAndTiele(systemModule);
         }
         Map<String, String> map = new HashMap<String, String>();
@@ -262,16 +268,16 @@ public class ModuleAction extends BaseController {
 
     @RequestMapping("/{forwordPager}/add")
     public String addModule(SystemModule module,@PathVariable(value="forwordPager")String forwordPager) {
-      
+
         moduleService.add(module);
-        
+
         if("story".equals(forwordPager)){
     		return "/product/page/project/togglebox.page";
     	}else if ("promodule".equals(forwordPager)) {
     		return "/product/page/project/product-modular.page";
     	}
         return "";
-        
+
     }
 
 
@@ -280,7 +286,7 @@ public class ModuleAction extends BaseController {
         SystemModule module = moduleService.findById(moduleId);
         module.setModuleName(moduleName);
         moduleService.edit(module);
-        
+
         if("story".equals(forwordPager)){
     		return "/product/page/project/togglebox.page";
     	}else if ("promodule".equals(forwordPager)) {
@@ -300,15 +306,15 @@ public class ModuleAction extends BaseController {
     	}
         return "";
     }
-    
+
     @ResponseBody
     @RequestMapping("/dataone")
     public List dataone(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         SystemModule module= new SystemModule();
         module.setModuleType("story");
-        		
-        List<SystemModule> moduleList = moduleService.findModuleList(module);
+
+        List<SystemModule> moduleList = moduleService.findAllModules(module);
 
         for (SystemModule d : moduleList) {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -325,11 +331,11 @@ public class ModuleAction extends BaseController {
     }
     @RequestMapping("/findProductModule")
     public String findProductModule(SystemModule module, Model model) {
-    	if(module.getModuleParent()==null){
-    		module.setModuleParent(0);
-    	}
+    	
     	module.setModuleType("story");
-        List<SystemModule> list = moduleService.findModules(module);
+    	
+    	module.setModuleType("story");
+        List<SystemModule> list = moduleService.findAllModules(module);
         model.addAttribute("list", list);
         return "/product/page/project/product-modular.page";
     }

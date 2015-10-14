@@ -50,7 +50,7 @@
                 #end
                 #@elementItem()
 
-                    #@sdpmItem("回复处理时间")
+                    #@sdpmItem("回复处理时间" "*")
                         #@tinyDateInput(
                             "replyDate" formatDate(request?.replyDate,
                             "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":

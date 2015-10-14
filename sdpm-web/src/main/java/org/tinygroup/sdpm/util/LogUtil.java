@@ -53,45 +53,6 @@ public class LogUtil {
         logService.log(oldObject, newObject, systemAction);
     }
 
-    public static Object getObjectById(int id,String type){
-        Obtain obtain = obtainHandle.getDict(type);
-        if(obtain==null)return null;
-        return getValue(id,obtain);
-    }
-
-    public static String getInfoUrl(String type){
-        return obtainHandle.getDict(type).getUrl();
-    }
-
-    private static Object getValue(int id, Obtain obtain){
-        Class[] parameter = new Class[obtain.getParameters().size()];
-        Object value = null;
-        for(int i = 0;i<obtain.getParameters().size(); i++){
-            try {
-                parameter[i]=Class.forName(obtain.getParameters().get(i).getType());
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-        try {
-            Object serviceWapper = BeanContainerFactory
-                    .getBeanContainer(LogUtil.class.getClassLoader())
-                    .getBean(Class.forName(obtain.getType()));
-            Method method = serviceWapper.getClass().getMethod(obtain.getMethod(),parameter);
-            value = method.invoke(serviceWapper,id);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RuntimeException("obtain moduleType不存在");
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return value;
-    }
-
     public enum LogAction {
         CREATED("created"),          //创建
         OPENED("opened"),             //创建

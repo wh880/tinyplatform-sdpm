@@ -55,7 +55,7 @@
             $("#${sid}").on("change", function () {
                 console.log("test")
                 var pId = $("#${sid}  option:selected").val();
-                ajaxRead("${sid}", "moduleId", "moduleId", "moduleTitle", "/quality/bug/ajax/module?moduleRoot=" + pId, ${bug?.moduleId?:0});
+                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, ${bug?.moduleId?:0});
 
             })
         });
@@ -63,7 +63,9 @@
                         #@Tselect2Body("productId" bug?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="0">/</option>
                             #foreach(product : qualityProductList)
-                            <option value="${product?.productId}">${product?.productName}</option>
+                                #if(product?.deleted==0)
+                                <option value="${product?.productId}">${product?.productName}</option>
+                                #end
                             #end
                         #end
 

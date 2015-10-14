@@ -1,6 +1,6 @@
 
-##<span id="showsearchmore-demand">搜索</span>
-<form method="get" action="${TINY_CONTEXT_PATH}/quality/bug" id="searchform" class="form-condensed searchform">
+##<span id="showsearchmore-bug">搜索</span>
+<form method="get" action="${TINY_CONTEXT_PATH}/quality/bug" id="searchform" class="form-condensed">
     <div class="hide">
         <select id="operatortemp">
             <option value="=">=</option>
@@ -92,27 +92,9 @@
             <option value="others">其他</option>
             <option value="null">空</option>
         </select>
-        <select id="nowstatustemp">
-            <option value="" selected="selected"></option>
-            <option value="draft">草稿</option>
-            <option value="lived">激活</option>
-            <option value="changed">已变更</option>
-            <option value="null">空</option>
-        </select>
-        <select id="closetemp">
-            <option value="" selected="selected"></option>
-            <option value="completed">已完成</option>
-            <option value="subdivided">已细分</option>
-            <option value="repeat">重复</option>
-            <option value="delay">延期</option>
-            <option value="nodo">不做</option>
-            <option value="cancelled">已取消</option>
-            <option value="designisso">设计如此</option>
-            <option value="null">空</option>
-        </select>
 
 
-	</div>
+    </div>
     <table class="table-condensed table-form" id="task-search">
         <tbody><tr>
             <td class="w-400px">
@@ -202,21 +184,20 @@
             <td class="w-180px">
                 <div class="btn-group">
                     <button type="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
-                 #*   <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
-                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>*#
+
                 </div>
             </td>
             <td>
                 <div style="width:105px;margin-top:3px;">
-					#@Tselect2F()
-						#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="CRM">我的查询</option>
                             <option value="P2P">P2P系统</option>
                             <option value="o2o">o2o系统</option>
-						#end
-					##填写任意内容，侦听需重新填加 A侦听已内置
-						#@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
-					#end
+                        #end
+                    ##填写任意内容，侦听需重新填加 A侦听已内置
+                        #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+                    #end
                 </div>
             </td>
         </tr>
@@ -232,7 +213,7 @@
 <script type="text/javascript">
     <!--
     $(function(){
-        $("#showsearchmore-demand").click(function(){
+        $("#showsearchmore-bug").click(function(){
             $(".searchform").toggleClass("showmore");
         });
         $("#searchmore").click(function(){
@@ -247,144 +228,178 @@
         });
         var itemlist=[]
         itemlist.push({
-            "name":"storyTitle",
-            "title":"需求名称",
+            "name":"bugName",
+            "title":"Bug标题",
             "operator":"include",
             "value":"text"
         });
         itemlist.push({
-            "name":"storyId",
-            "title":"编号",
+            "name":"bugId",
+            "title":"Bug编号",
             "operator":"=",
             "value":"text"
         });
         itemlist.push({
-            "name":"storyKeywords",
+            "name":"bugKeywords",
             "title":"关键词",
             "operator":"include",
             "value":"text"
         });
         itemlist.push({
-            "name":"storyStage",
-            "title":"所处阶段",
-            "operator":"=",
-            "value":"nowstatus"
-        });
-        itemlist.push({
-            "name":"storyPri",
-            "title":"优先级",
-            "operator":"=",
-            "value":"pri"
-        });
-        itemlist.push({
-            "name":"moduleId",
-            "title":"所属模块",
-            "operator":"从属于",
-            "value":"text"
-        });
-        itemlist.push({
-            "name":"planName",
-            "title":"所属计划",
-            "operator":"=",
-            "value":"text"
-        });
-        itemlist.push({
-            "name":"storyEstimate",
-            "title":"预计工时",
-            "operator":"=",
-            "value":"text"
-        });
-        itemlist.push({
-            "name":"moduleId",
-            "title":"来源",
-            "operator":"=",
-            "value":"storySource"
-        });
-        itemlist.push({
-            "name":"storyFromBug",
-            "title":"来源Bug",
-            "operator":"=",
-            "value":"text"
-        });
-        itemlist.push({
-            "name":"storyOpenedBy",
-            "title":"由谁创建",
-            "operator":"=",
-            "value":"user"
-        });
-        itemlist.push({
-            "name":"storyReviewedBy",
-            "title":"由谁评审",
+            "name":"bugSteps",
+            "title":"重现步骤",
             "operator":"include",
-            "value":"user"
+            "value":"text"
         });
         itemlist.push({
-            "name":"storyAssignedTo",
+            "name":"assignedTo",
             "title":"指派给",
             "operator":"=",
             "value":"user"
         });
         itemlist.push({
-            "name":"storyClosedBy",
+            "name":"bugResolvedBy",
+            "title":"解决者",
+            "operator":"=",
+            "value":"user"
+        });
+        itemlist.push({
+            "name":"bugStatus",
+            "title":"Bug状态",
+            "operator":"=",
+            "value":"status"
+        });
+        itemlist.push({
+            "name":"bugConfirmed",
+            "title":"是否确认",
+            "operator":"=",
+            "value":"con"
+        });
+        itemlist.push({
+            "name":"moduleId",
+            "title":"所属模块",
+            "operator":"belong",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"projectId",
+            "title":"所属迭代",
+            "operator":"=",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"bugSeverity",
+            "title":"严重程度",
+            "operator":"=",
+            "value":"pri"
+        });
+        itemlist.push({
+            "name":"priority",
+            "title":"优先级",
+            "operator":"=",
+            "value":"pri"
+        });
+        itemlist.push({
+            "name":"bugType",
+            "title":"Bug类型",
+            "operator":"=",
+            "value":"type"
+        });
+        itemlist.push({
+            "name":"operatingSystem",
+            "title":"操作系统",
+            "operator":"=",
+            "value":"win"
+        });
+        itemlist.push({
+            "name":"browser",
+            "title":"浏览器",
+            "operator":"=",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"bugResolution",
+            "title":"解决方案",
+            "operator":"=",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"bugActivatedCount",
+            "title":"激活次数",
+            "operator":">=",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"toTaskId",
+            "title":"转任务",
+            "operator":"=",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"toStoryId",
+            "title":"转需求",
+            "operator":"=",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"bugOpenedBy",
+            "title":"由谁创建",
+            "operator":"=",
+            "value":"user"
+        });
+        itemlist.push({
+            "name":"bugClosedBy",
             "title":"由谁关闭",
             "operator":"=",
             "value":"user"
         });
         itemlist.push({
-            "name":"storyLastEditedBy",
-            "title":"最后修改",
+            "name":"bugLastEditedBy",
+            "title":"修改者",
             "operator":"=",
             "value":"user"
         });
         itemlist.push({
-            "name":"sendto",
+            "name":"bugMailto",
             "title":"抄送给",
             "operator":"=",
             "value":"user"
         });
         itemlist.push({
-            "name":"storyClosedReason",
-            "title":"关闭原因",
+            "name":"bugOpenedBuild",
+            "title":"影响版本",
             "operator":"=",
-            "value":"close"
-        });
-        itemlist.push({
-            "name":"storyVersion",
-            "title":"版本号",
-            "operator":">=",
             "value":"text"
         });
         itemlist.push({
-            "name":"storyOpenedDate",
+            "name":"bugResolvedBuild",
+            "title":"解决版本",
+            "operator":"=",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"bugOpenedDate",
             "title":"创建日期",
             "operator":"=",
-            "value":"data"
+            "value":"date"
         });
         itemlist.push({
-            "name":"storyReviewedDate",
-            "title":"评审时间",
-            "operator":">=",
-            "value":"data"
-        });
-        itemlist.push({
-            "name":"storyAssignedDate",
+            "name":"bugAssignedDate",
             "title":"指派日期",
-            "operator":">=",
-            "value":"data"
-        });
-        itemlist.push({
-            "name":"storyClosedDate",
-            "title":"关闭日期",
-            "operator":">=",
-            "value":"data"
-        });
-        itemlist.push({
-            "name":"storyLastEditedDate",
-            "title":"最后修改日期",
             "operator":"=",
-            "value":"data"
+            "value":"date"
         });
-
+        itemlist.push({
+            "name":"bugClosedDate",
+            "title":"关闭日期",
+            "operator":"=",
+            "value":"date"
+        });itemlist.push({
+            "name":"bugLastEditedDate",
+            "title":"修改日期",
+            "operator":"=",
+            "value":"date"
+        });
 
         function setValueBox(index,itemIndex){
             $("#operator"+itemIndex).val(itemlist[index]["operator"]);
@@ -404,12 +419,6 @@
                     break;
                 case "date":
                     $("#valueBox"+itemIndex).html('<input type="text" name="infos['+sIndex+'].value" id="value'+itemIndex+'" value="" class="form-control dateinput">');
-                    break;
-                case "nowstatus":
-                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#nowstatustemp").html()));
-                    break;
-                case "close":
-                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#closetemp").html()));
                     break;
             }
         }

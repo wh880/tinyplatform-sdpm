@@ -29,7 +29,7 @@
 
 #@tabWithInit("tab_demo" "optionsBox")
 
-#hiddenInput("","storyId","",storySpec.storyId)
+#hiddenInput("","storyId","",storyId)
 
     #@div(divClass="operationbar")
     <span class="f">
@@ -52,15 +52,15 @@
         #end*#
         
          #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
-         #set(url=eval(m.href))
-           #if(m.map.type=="aModal")
-                 #@aModal("#myModal" m.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m.icon)${m.name}#end
-           #elseif(m.map.type=="icon-href")
-           		 <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-           #elseif(m.map.type=="icon")
-           		 <a href="${TINY_CONTEXT_PATH}${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-           #elseif(m.map.type=="note")
-           		  <a href="${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)
+         #set(url=eval(m?.href))
+           #if(m.?map?.type=="aModal")
+                 #@aModal("#myModal" m.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m?.icon)${m?.name}#end
+           #elseif(m.?map?.type=="icon-href")
+           		 <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m.icon)${m?.name}</a>
+           #elseif(m?.map?.type=="icon")
+           		 <a href="${TINY_CONTEXT_PATH}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
+           #elseif(m?.map?.type=="note")
+           		  <a href="${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)
            #end
          #end
     </span>
@@ -101,17 +101,17 @@
 
     <div style="text-align:center;margin:auto">
 <span>
-	   #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
+	   #foreach(m:menuManager?.getScopeMenus("pro_demand_log"))
 	   &nbsp;&nbsp;
-		 #set(url=eval(m.href))
-		   #if(m.map.type=="aModal")
-		         #@aModal("#myModal" m.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m.icon)${m.name}#end
-		   #elseif(m.map.type=="icon-href")
-		   		 <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-		   #elseif(m.map.type=="icon")
-		   		 <a href="${TINY_CONTEXT_PATH}${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+		 #set(url=eval(m?.href))
+		   #if(m.?map?.type=="aModal")
+		         #@aModal("#myModal" m?.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m?.icon)${m?.name}#end
+		   #elseif(m?.map?.type=="icon-href")
+		   		 <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m?.icon)${m?.name}</a>
+		   #elseif(m?.map?.type=="icon")
+		   		 <a href="${TINY_CONTEXT_PATH}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
 		   #elseif(m.map.type=="note")
-		   		  <a href="${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)
+		   		  <a href="${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)
 		   #end
 		 #end
 </span>
@@ -150,7 +150,7 @@
 
 <div style="width:30%;float:right">
 #*#include("/product/page/tabledemo/hrefbaseinfo.page")*#
-	#TypeInfo("demandhref" storySpec.storyId)
+	#TypeInfo("demandhref" storyId)
 </div>
 
 

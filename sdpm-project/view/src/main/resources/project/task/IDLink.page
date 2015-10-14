@@ -105,7 +105,7 @@
     </center>
 </div>
 <div style="width:30%;float:right">
-    #TypeInfo("information")
+    #TypeInfo("information", task.taskId)
 </div>
 
 

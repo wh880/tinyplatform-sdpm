@@ -57,6 +57,6 @@ ServiceFaq find(Integer id);
     Integer delete(Integer id);
 
 
-    /*查询问题总条数*/
-    Integer selectcount(Integer id);
+/*    *//*查询问题总条数*//*
+    Integer selectcount(Integer id);*/
 }

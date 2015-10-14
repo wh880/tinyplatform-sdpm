@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015-09-18.
  */
-@Component("")
+@Component
 public class FaqServiceImpl implements FaqService{
     @Autowired
     private FaqManager faqManager;
@@ -41,8 +41,8 @@ public class FaqServiceImpl implements FaqService{
         return faqManager.delete(id);
     }
 
-    /*查询问题总条数*/
+    /*查询问题总条数*//*
     public Integer selectcount(Integer id) {
         return faqManager.selectcount(id);
-    }
+    }*/
 }

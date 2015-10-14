@@ -25,8 +25,13 @@ public interface ModuleService {
 	 * @return
 	 */
 	 List<SystemModule> findModules(SystemModule systemModule);
-
-
+	 
+	 /**
+		 * 根据根节点进行递归查询
+		 * @param root
+		 * @return
+		 */
+	 List<SystemModule> findAllModules(SystemModule systemModule);
 
 	 /**
 	  * 通过对象进行删除

@@ -17,9 +17,6 @@
 #set(name="client")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-    #*  #@div(divClass="dropdownBox")
-          #include("/service/serviceCom/dropdownMenu.page")
-      #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
@@ -46,11 +43,11 @@
         #end
 
 
-        #@elementItem()
-            #@sdpmItem("客户部门")
-                #tinyInput("text" "clientDeptId" client?.clientDeptId {"id":"client_dept_id","class":"input-text"})
-            #end
-        #end
+##        #@elementItem()
+##            #@sdpmItem("客户部门")
+##                #tinyInput("text" "clientDeptId" client?.clientDeptId {"id":"client_dept_id","class":"input-text"})
+##            #end
+##        #end
 
         #@elementItem()
             #@sdpmItem("客户登记人" "*")
@@ -97,7 +94,7 @@
         #@elementItem()
             #@colLabel()状态是否正常：#end
             #@formControlDiv("col-8")
-                #tinySwitcher("clientStatus" "1" "1") ##第二个为选中状态 第三参数为数据库返回时的数据
+                #Tswitcher("clientStatus" ["0","1"] "1") ##第二个为选中状态 第三参数为数据库返回时的数据
             #end
         #end
         <br/>

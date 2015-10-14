@@ -27,7 +27,8 @@ public interface ServiceSlaDao extends BaseDao<ServiceSla, Integer> {
     List<ServiceSla> getListByClientId(Integer clientId);
 
     Pager<ServiceSla> queryPagerTree(int start, int limit, ServiceSla serviceSla, Integer treeId, final OrderBy... orderBies);
-
+    ServiceSla judge(String clientName);
 
     Integer softDelete(Integer id);
+    int[] softDeleteBatch(List<ServiceSla> list);
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 
@@ -26,14 +27,14 @@ public class StorySpecAction extends BaseController{
 	}
 	
 	@RequestMapping("/find/{forward}")
-	public String find(@PathVariable(value="forward")String forward,Integer storyId,Model model){
+	public String find(@PathVariable(value="forward")String forward,ProductStory story,Model model){
 		
-		ProductStorySpec storySpec = specService.findStorySpec(storyId);
+		ProductStorySpec storySpec = specService.findStorySpec(story.getStoryId());
 		model.addAttribute("storySpec", storySpec);
 		
 		if ("productDemandDetail".equals(forward)) {
 			
-			return "/product/page/project/demdtablehref.page";
+			return "/product/page/project/demdtablehref.page?storyId="+story.getStoryId();
 		}
 		return "";
 	}

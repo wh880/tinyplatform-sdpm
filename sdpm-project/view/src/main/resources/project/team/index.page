@@ -18,7 +18,7 @@
             <span class="f">
 					团队成员
 				</span>
-            <span class="r c">
+            <span class="r">
 ##					<a href="${TINY_CONTEXT_PATH}/project/team/teamManage.page">#buttonIcon(iconClass="icon-user")团队管理</a>
     #foreach(m:menuManager.getScopeMenus("pro-teammenu-op"))
         <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
