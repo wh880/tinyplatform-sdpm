@@ -89,6 +89,7 @@ public class HolidayAction extends BaseController{
 //	   }
 //	   return map;
 //     }
+	@ResponseBody
 	@RequestMapping("delete")
 	public String deleteHoliday(Integer holidayId){
 		if(holidayId!=null){

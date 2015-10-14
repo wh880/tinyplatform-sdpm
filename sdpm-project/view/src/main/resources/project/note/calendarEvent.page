@@ -85,7 +85,7 @@
 	#@elementItem()
 		#@colLabel()耗时：#end
 		#@formControlDiv("col-8")
-		#tinyInput("text" "effortConsumed" effort?.effortConsumed {"placeholder":"日志内容","datatype":"*","id":"effortConsumed"})
+		#tinyInput("text" "effortConsumed" effort?.effortConsumed {"placeholder":"耗时","datatype":"*","id":"effortConsumed"})
 		#end
 		#@validateDiv("col-2")#end
 	#end
