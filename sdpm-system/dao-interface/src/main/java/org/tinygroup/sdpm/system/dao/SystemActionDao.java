@@ -21,5 +21,5 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 
 public interface SystemActionDao extends BaseDao<SystemAction,Integer> {
-
+    SystemAction getActionAndObject(SystemAction systemAction);
 }

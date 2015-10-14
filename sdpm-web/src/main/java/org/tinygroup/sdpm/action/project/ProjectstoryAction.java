@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -117,6 +118,42 @@ public class ProjectstoryAction extends BaseController {
             map.put("statu", "n");
             map.put("info", "关联失败");
         }
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("/batchDel")
+    public Map<String, String> batchDel(String ids, HttpServletRequest request) {
+        Map<String, String> map = new HashMap<String, String>();
+        String[] id = ids.split(",");
+        if (id.length > 0) {
+            String condition = "";
+            for (int i = 0; i < id.length; i++) {
+                if (StringUtil.isBlank(condition)) {
+                    condition = condition + "story_id in (" + id[i];
+                } else {
+                    condition = condition + "," + id[i];
+                }
+            }
+            condition = condition + ")";
+
+
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+            condition = condition + " and ";
+            condition = condition + "project_id=" + projectId;
+            Integer res = projectStoryService.batchtDel(condition);
+            if (res > 0) {
+                map.put("status", "y");
+                map.put("info", "删除成功");
+            } else {
+                map.put("status", "n");
+                map.put("info", "删除失败");
+            }
+        } else {
+            map.put("status", "n");
+            map.put("info", "未选择");
+        }
+
         return map;
     }
 }

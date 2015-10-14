@@ -12,6 +12,14 @@ import java.util.List;
  */
 public interface ProjectStoryManager {
 
+    public Integer batchtDel(String condition);
+
+    /**
+     * 批量关联
+     *
+     * @param projectStoryList
+     * @return
+     */
     public int[] linkStory(List<ProjectStory> projectStoryList);
 
     /**

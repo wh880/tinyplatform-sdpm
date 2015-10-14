@@ -9,7 +9,7 @@
 #setTinyItemCount(records)
 #for(s:storys.getRecords())
 #@tr()
-    #@td()<input type="checkbox" value="1" name="idCheck">#end
+    #@td()<input type="checkbox" value="${s?.storyId}" name="idCheck">#end
     #@td()<a href="${TINY_CONTEXT_PATH}/product/storySpec/find/productDemandDetail?storyId=${s?.storyId}">${s
         ?.storyId}</a>#end
     #@td()${s?.storyPri}</a>#end

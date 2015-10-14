@@ -39,12 +39,19 @@ import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @LogClass("story")
 @Repository
 public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectStoryDao {
 
+	public Integer batchtDel(String condition) {
+		Delete delete = delete(PROJECT_STORYTABLE).where(
+				fragmentCondition(condition)
+		);
+		return getDslSession().execute(delete);
+	}
 
 	public List<ProjectStory> findByProjectID(Integer projectId) {
 		Select select = selectFrom(PROJECT_STORYTABLE).where(PROJECT_STORYTABLE.PROJECT_ID.eq(projectId));

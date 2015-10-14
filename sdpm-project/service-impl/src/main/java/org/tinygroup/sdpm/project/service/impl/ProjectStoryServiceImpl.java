@@ -27,6 +27,10 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     private TaskManager taskManager;
 
 
+    public Integer batchtDel(String condition) {
+        return projectStoryManager.batchtDel(condition);
+    }
+
     public int[] addLink(List<ProjectStory> projectStoryList) {
         return projectStoryManager.linkStory(projectStoryList);
     }

@@ -12,6 +12,8 @@ import java.util.List;
  */
 public interface ProjectStoryService {
 
+    public Integer batchtDel(String condition);
+
     public int[] addLink(List<ProjectStory> projectStoryList);
 
     public List<ProductStory> findStoryByProject(Integer projectId);
