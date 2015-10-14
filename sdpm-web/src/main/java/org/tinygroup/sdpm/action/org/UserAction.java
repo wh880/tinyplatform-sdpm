@@ -12,8 +12,11 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.DeptService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +30,8 @@ public class UserAction extends BaseController {
     private UserService userService;
     @Autowired
     private DeptService deptService;
+    @Autowired
+    private StoryService storyService;
 
     @RequestMapping("/form")
     public String form(String id, Model model) {
@@ -131,5 +136,39 @@ public class UserAction extends BaseController {
 
         return list;
     }
+
+    @RequestMapping("/story")
+    public String storyJump() {
+
+        return "/organization/user/storyAdmin.page";
+    }
+
+    @RequestMapping("/story/search")
+    public String storySearchAction(String id, int page, int pagesize, String choose, ProductStory story, String order, String ordertype, Model model, HttpServletRequest request) {
+
+        if (choose.equals(3) || choose.equals(null)) {
+            story.setStoryAssignedTo(id);
+            Pager<ProductStory> p1 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, "asc".equals(ordertype) ? true : false);
+            model.addAttribute("storyList", p1);
+
+        } else if (choose.equals(4)) {
+            story.setStoryOpenedBy(id);
+            Pager<ProductStory> p2 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, "asc".equals(ordertype) ? true : false);
+            model.addAttribute("storyList", p2);
+
+        } else if (choose.equals(5)) {
+            story.setStoryReviewedBy(id);
+            Pager<ProductStory> p3 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, "asc".equals(ordertype) ? true : false);
+            model.addAttribute("storyList", p3);
+
+        } else {
+            story.setStoryClosedBy(id);
+            Pager<ProductStory> p4 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, "asc".equals(ordertype) ? true : false);
+            model.addAttribute("storyList", p4);
+
+        }
+        return "organization/user/userStoryTable.pagelet";
+    }
+
 
 }

@@ -12,7 +12,7 @@ import java.util.List;
 @XStreamAlias("obtain")
 public class Obtain {
     @XStreamAsAttribute
-    @XStreamAlias("moduleName")
+    @XStreamAlias("moduleType")
     private String name;
     @XStreamAsAttribute
     @XStreamAlias("classType")
@@ -23,7 +23,9 @@ public class Obtain {
     private String primaryName;
     @XStreamImplicit
     private List<ObtainParameter> parameters;
-
+    @XStreamAsAttribute
+    @XStreamAlias("InfoUrl")
+    private String url;
     public String getPrimaryName() {
         return primaryName;
     }
@@ -62,5 +64,13 @@ public class Obtain {
 
     public void setParameters(List<ObtainParameter> parameters) {
         this.parameters = parameters;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

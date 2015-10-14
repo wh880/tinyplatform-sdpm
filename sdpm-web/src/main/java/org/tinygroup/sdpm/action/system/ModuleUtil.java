@@ -13,9 +13,6 @@ public class ModuleUtil {
     private static void mergeModuleContidion(StringBuffer condition,int moduleId , ModuleService moduleService){
         SystemModule systemModule = new SystemModule();
         systemModule.setModuleParent(moduleId);
-        if(!condition.toString().contains("in")){
-            condition.append(" in (");
-        }
         List<SystemModule> systemModules = moduleService.findModuleList(systemModule);
         if(systemModules.size()>0){
             for(SystemModule module : systemModules){
@@ -33,7 +30,23 @@ public class ModuleUtil {
 
     public static String getCondition(int moduleId,ModuleService moduleService){
         StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("int(");
         mergeModuleContidion(stringBuffer,moduleId,moduleService);
+        stringBuffer.append(")");
+        return stringBuffer.toString();
+    }
+
+    public static String getConditionByRoot(int rootId, ModuleService moduleService){
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("int(");
+        SystemModule systemModule = new SystemModule();
+        systemModule.setModuleRoot(rootId);
+        List<SystemModule> systemModules = moduleService.findModuleList(systemModule);
+        if(systemModules.size()>0){
+            for(SystemModule module : systemModules){
+                mergeModuleContidion(stringBuffer,module.getModuleId(),moduleService);
+            }
+        }
         stringBuffer.append(")");
         return stringBuffer.toString();
     }

@@ -1,27 +1,85 @@
-#macro setTinyItemCount(num)
-<input type="hidden" name="records" value="${num}"/>
-#end
+<script>
+
+    $(document).ready(function () {
+
+        $(".secondMenu").each(function () {
+
+            $(this).on("click", function () {
+                var inputname = $(this).attr("tabindex");
+                var inputvalue = $(this).html().trim();
+                var storyList = new Array();
+                $("input[type='checkbox']").each(function () {
+
+                    if (this.checked == true && this.id != "checkboxall") {
+                        var storyid = $(this).val();
+                        if ("storyAssignedTo" == inputname) {
+                            storyList.push({storyId: storyid, storyAssignedTo: inputvalue});
+                        }
+                    }
+
+                });
+
+                if (storyList.length > 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "${TINY_CONTEXT_PATH}/product/story/updateBatch",
+                        data: JSON.stringify(storyList),//将对象序列化成JSON字符串
+                        dataType: "json",
+                        contentType: 'application/json;charset=utf-8', //设置请求头信息
+                        success: function (data) {
+
+                            alert('success');
+                            window.location.reload();
+                        },
+                        error: function (res) {
+                            alert("失败");
+                        }
+                    });
+                }
 
 
 
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-    #set(pagesize=records-(page-1)*pagesize)
-#end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+
+
+
+            #*				var i = 0;
+                            $("input[type='checkbox']").each(function(){
+
+                                if(this.checked==true){
+                                    var hm = "<input type='hidden' name='productStories"+"[" +i+"]." +inputname + "' value='" + inputvalue + "'/>";
+                                    this.name = "productStories" +　"[" + i +"]." + this.name;
+
+                                    $(this).parent().append(hm);
+
+                                      ++i;
+                                }
+
+                            });
+
+                            $("form[name='storyform']").trigger("submit");
+                            *#
+
+
+            });
+
+        });
+
+    });
+
+</script>
+#setTinyItemCount(storyList.getTotalCount())
+#for(story:storyList.getRecords())
 #@tr()
-    #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()习近平${page}#end
-    #@td()北京#end
+    #@td()${story.storyId}#end
+    #@td()${story.storyPri}#end
     #@td()
-    <a href="${TINY_CONTEXT_PATH}/project/task/index.page">项目名称</a>
+    <a href="${TINY_CONTEXT_PATH}/project/task/index.page">${story.productName}</a>
     #end
-    #@td()67#end
-    #@td()2013/03/25#end
-    #@td()￥320,800#end
-    #@td()￥800#end
-    #@td()￥800#end
-    #@td()100#end
+    #@td()${story.storyTitle}#end
+    #@td()${story.planName}#end
+    #@td()${story.storyOpenedBy}#end
+    #@td()${story.storyEstimate}#end
+    #@td()${story.storyStatus}#end
+    #@td()${story.storyStage}#end
 #end
 #end

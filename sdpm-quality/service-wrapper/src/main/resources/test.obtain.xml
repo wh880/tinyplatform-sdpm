@@ -1,0 +1,6 @@
+<obtains>
+    <!-- type之后要换成服务包装 -->
+    <obtain moduleType="bug" classType="org.tinygroup.sdpm.quality.service.impl.BugServiceImpl" method="findById" primaryName="" InfoUrl="">
+        <obtain_parameter parameterName="id" parameterType="java.lang.Integer" />
+    </obtain>
+</obtains>

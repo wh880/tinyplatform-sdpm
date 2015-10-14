@@ -44,8 +44,13 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()FAQ分类#end
             #@settoggleLeftBody("treeLeftbox")
-                #include("/service/serviceCom/moduleTree.page")
-
+                #@zTreeList(call("link","/service/faq/data"))
+                    #setzTreeValMap({"id":"faqTypeId","name":"faqType","pid":"faqParentTypeId"}) ##key值为固定
+                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/service/faq/list" )
+                    #zTreeSetAddUrl(TINY_CONTEXT_PATH+"/service/faq/addTree")
+                    #zTreeSetEditUrl(TINY_CONTEXT_PATH+"/service/faq/editTree")
+                    #zTreeSetDelUrl(TINY_CONTEXT_PATH+"/service/faq/deleteTree")
+                #end
             #end
         #end
         #@toggleRight()

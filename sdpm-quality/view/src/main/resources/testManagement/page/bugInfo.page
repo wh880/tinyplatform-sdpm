@@ -53,38 +53,10 @@
 				#end		
 				#end				
 			#end
-		
-		
-		
-#*			#@aModal("#myModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
-				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/makesure.page">
-				#buttonIcon(iconClass="icon-search")确认</a>&nbsp&nbsp;	
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/assign.page">
-				#buttonIcon(iconClass="icon-hand-right")指派</a>&nbsp&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">
-				#buttonIcon(iconClass="icon-ok-sign")解决</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page">
-				#buttonIcon(iconClass="icon-lightbulb")提需求</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">
-				#buttonIcon(iconClass="icon-sitemap")建用例</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/edition.page" title="编辑">
-				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			<a  title="备注" onclick="toggle()">
-				#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposeBug.page" title="复制">
-				#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
-			#@delItemsdpm("/sdpm-web/testManagement/page/Bug.page" 3 "/sdpm-web/testManagement/page/Bug.page")
-					#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp					
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page" title="返回">
-				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page" title="下一个Bug">
-				#buttonIcon(iconClass="icon-chevron-right")</a>&nbsp;</span>*#
+
 	#end
 	#@tinyForm("thisform" "url" "post" {"class":""})
-#*	<div class="infoContent">
-    		<p class="titleName">Bug名称</p>*#
-	<div style="width:70%;float:right" class="pageleftpart">
+	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
     		<p class="titleName">重现步骤</p>
     		<p>[步骤]</p>
@@ -144,9 +116,9 @@
 		#end
 		</div>
 		#end
-	<div style="width: 35%;float: right">
+	<div style="width: 30%;float: right">
      #TypeInfo("qualityBugInfo")
-     ## #include("/testManagement/page/bugRightInfo.page")
+
     </div>
 	#end
 	

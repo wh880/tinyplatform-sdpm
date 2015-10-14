@@ -21,6 +21,10 @@ public class TaskManagerImpl implements TaskManager {
     @Autowired
     private ProjectTaskDao taskDao;
 
+    public Integer batchSoftDel(String condition) {
+        return taskDao.batchSoftDel(condition);
+    }
+
     public int[] batchAdd(List<ProjectTask> taskList) {
         return taskDao.batchInsert(taskList);
     }

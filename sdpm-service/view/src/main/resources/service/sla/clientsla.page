@@ -14,8 +14,6 @@
             #@div(divClass="operationbar")
             <span class="f">
 					<a href="#" class="active_btn">${client.clientName}</a>
-            #* <a href="${TINY_CONTEXT_PATH}/service/sla/slaClient?id=${var.clientId}"
-                class="active_btn">${var.clientId}</a>*#
             </span>
             <span class="r">
                 #@iconOperations(

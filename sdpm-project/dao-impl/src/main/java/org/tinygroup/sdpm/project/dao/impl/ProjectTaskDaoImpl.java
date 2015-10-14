@@ -51,6 +51,14 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @Repository
 public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTaskDao {
 
+    public Integer batchSoftDel(String condition) {
+        Update update = update(PROJECT_TASKTABLE).set(PROJECT_TASKTABLE.TASK_DELETED.value(1))
+                .where(
+                        fragmentCondition(condition)
+                );
+        return getDslSession().execute(update);
+    }
+
     public Integer getSumByStory(Integer storyId) {
         Select select = selectFrom(PROJECT_TASKTABLE).where(PROJECT_TASKTABLE.TASK_STORY.eq(storyId));
         return getDslSession().count(select);

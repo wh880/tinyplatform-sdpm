@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
+import org.tinygroup.sdpm.action.system.ModuleUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -26,7 +27,9 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangying14938 on 2015-09-22.任务
@@ -48,7 +51,7 @@ public class TaskAction extends BaseController {
     private StoryService productStoryService;
 
     @RequestMapping("index")
-    public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model) {
+    public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model, String moduleId) {
         List<Project> list = projectService.findList();
         Project selProject = new Project();
         if (list == null || list.isEmpty()) {
@@ -79,7 +82,13 @@ public class TaskAction extends BaseController {
         //model.addAttribute("projectList", list);
         request.getSession().setAttribute("selProject", selProject);
         request.getSession().setAttribute("projectList", list);
-        return "project/task/index.page";
+        if (moduleId != null) {
+            model.addAttribute("moduleId", moduleId);
+            return "project/task/index.page";
+        } else {
+            return "project/task/index.page";
+        }
+
     }
 
     @RequestMapping("/edit")
@@ -163,17 +172,22 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/findPager")
-    public String findPager(Integer start, Integer limit, String order, String ordertype, String statu, String choose, String group, Integer projectId, Model model, HttpServletRequest request, Integer moduleId) {
+    public String findPager(Integer start, Integer limit, String order, String ordertype, String statu, String choose, String group, Integer projectId, Model model, HttpServletRequest request, String moduleId) {
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;
         }
         ProjectTask task = new ProjectTask();
-        if (moduleId != null) {
-            task.setTaskModel(moduleId);
-        }
         task.setTaskProject(projectId);
-        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, TaskStatusUtil.getCondition(statu, choose, request), group);
+        String moduleIds = "";
+        if (moduleId != null && !moduleId.contains("p")) {
+            moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId), moduleService);
+        } else {
+            moduleIds = moduleId;
+        }
+
+        String condition = TaskStatusUtil.getCondition(statu, choose, request, moduleIds);
+        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, condition, group);
         model.addAttribute("taskPager", taskPager);
         model.addAttribute("statu", statu);
         model.addAttribute("choose", choose);
@@ -346,4 +360,41 @@ public class TaskAction extends BaseController {
             return "project/task/index.page";
         }
     }
+
+    @RequestMapping("/batchDel")
+    public Map<String, String> batchDel(String ids, HttpServletRequest request) {
+        Map<String, String> map = new HashMap<String, String>();
+        String[] id = ids.split(",");
+        if (id.length > 0) {
+            String condition = "";
+            for (int i = 0; i < id.length; i++) {
+                if (StringUtil.isBlank(condition)) {
+                    condition = condition + "task_id in (" + id[i];
+                } else {
+                    condition = condition + "," + id[i];
+                }
+            }
+            condition = condition + ")";
+
+
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+            condition = condition + " and ";
+            condition = condition + "project_id=" + projectId;
+            Integer res = taskService.batchSoftDel(condition);
+            if (res > 0) {
+                map.put("statu", "y");
+                map.put("info", "删除成功");
+            } else {
+                map.put("statu", "n");
+                map.put("info", "删除失败");
+            }
+        } else {
+            map.put("statu", "n");
+            map.put("info", "未选择");
+        }
+
+        return map;
+    }
+
+
 }

@@ -22,6 +22,9 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
+
+    public Integer batchSoftDel(String condition);
+
     public Pager<ProjectTask> queryPagerByStuta(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderBies);
 
     /**

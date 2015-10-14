@@ -11,6 +11,14 @@ import java.util.Map;
  */
 public interface TaskService {
 
+    /**
+     * 批量软删除
+     *
+     * @param condition
+     * @return
+     */
+    public Integer batchSoftDel(String condition);
+
     public Integer batchAdd(List<ProjectTask> taskList, Integer projectId);
 
     /**
