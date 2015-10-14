@@ -1,4 +1,44 @@
+<script type="text/javascript">
 
+
+    function ajaxRead(id,toName,opKey,opvalue,url,value){
+        var selectCheck = "select[name="+toName+"]";
+        $(selectCheck).each(function(){
+            var sele = $(this);
+            var s;
+            $.ajax({
+                type: "POST",
+                url: "${TINY_CONTEXT_PATH}"+url,
+                data: $(this).attr('data'),
+                dataType:"json",
+                success: function(data){
+                    sele.empty();
+                    var em = "<option value='0' selected  >/</option>";
+                    sele.append(em);
+                    for(var i=0,l=data.length;i<l;i++){
+                        var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+                        sele.append(em);
+
+                    }
+
+                    if(value!=null) {
+                        sele.val(value).trigger("change");
+                    }else {
+                        sele.val(data[0][opKey]).trigger("change");
+                    }
+
+
+                },
+                error: function(res){
+                    alert("失败");
+                }
+            });
+
+
+        });
+
+    }
+</script>
     #@div(divClass="infoContent")
         <p class="titleName">基本信息</p>
     ##该样式在comm.css样式中自定义
@@ -10,18 +50,23 @@
                     #@th()所属产品#end
                     #@td()
                         #@Tselect2F()
-                        #@Tselect2Body("productId" bug?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #foreach(product : qualityProductList)
-                        <option value="${product?.productId}">${product?.productName}</option>
-                        #end
-                        #end
-                        <script type="text/javascript">
-                            $("#${sid}").on("change",function(){
-                                var pId = $("#${sid}  option:selected").val();
-                                ajaxRead("${sid}","moduleId","moduleId","moduleTitle","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId?:0});
+    <script type="text/javascript">
+        $(function() {
+            $("#${sid}").on("change", function () {
+                console.log("test")
+                var pId = $("#${sid}  option:selected").val();
+                ajaxRead("${sid}", "moduleId", "moduleId", "moduleTitle", "/quality/bug/ajax/module?moduleRoot=" + pId, ${bug?.moduleId?:0});
 
-                            })
-                        </script>
+            })
+        });
+    </script>
+                        #@Tselect2Body("productId" bug?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="0">/</option>
+                            #foreach(product : qualityProductList)
+                            <option value="${product?.productId}">${product?.productName}</option>
+                            #end
+                        #end
+
                         #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
                         <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
@@ -32,14 +77,16 @@
                     #@th()所属模块#end
                     #@td()
                         #@Tselect2F()
-                        #@Tselect2Body("moduleId" bug?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("moduleId" bug?.moduleId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="0">/</option>
                         #end
                         <script type="text/javascript">
-                            $("#${sid}").on("change",function(){
-                                var mId = $("#${sid}  option:selected").val();
-                                var pId = $("select[name=productId]  option:selected").val();
-                                ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId+"&moduleId="+mId,${bug?.storyId?:0});
+                            $(function() {
+                                $("#${sid}").on("change", function () {
+                                    var mId = $("#${sid}  option:selected").val();
+                                    var pId = $("select[name=productId]  option:selected").val();
+                                    ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/quality/bug/ajax/story?productId=" + pId + "&moduleId=" + mId, ${bug?.storyId?:0});
+                                })
                             })
                         </script>
                         #end
@@ -200,20 +247,22 @@
                     #@th()所属项目#end
                     #@td()
                         #@Tselect2F()
+                            <script type="text/javascript">
+                                $("#${sid}").on("change",function(){
+                                    var pId = $("#${sid}  option:selected").val();
+
+                                    ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0});
+
+
+                                })
+                            </script>
                         #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #foreach(project : projectList)
+                        <option value="0">/</option>
+                         #foreach(project : projectList)
                         <option value="${project?.projectId}">${project?.projectName}</option>
                         #end
                         #end
-                        <script type="text/javascript">
-                            $("#${sid}").on("change",function(){
-                                var pId = $("#${sid}  option:selected").val();
 
-                                ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0});
-
-
-                            })
-                        </script>
                         #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
                         <a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
@@ -276,9 +325,10 @@
                     #@td()
                    #@Tselect2F()
 	                   		 #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">版本1</option>
-	                        <option value="ME">版本2</option>
-	                        <option value="MD">版本3</option>
+                                <option value="0">/</option>
+                                #foreach(build : buildList)
+                                <option value="${build?.buildId}">${build?.buildName}</option>
+                                #end
 	                    	#end                
                 	  #end
                     #end
@@ -309,9 +359,10 @@
                     #@td()
                         #@Tselect2F()
 	                   		 #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">版本1</option>
-	                        <option value="ME">版本2</option>
-	                        <option value="MD">版本3</option>
+                                <option value="0">/</option>
+                                #foreach(build : buildList)
+                                <option value="${build?.buildId}">${build?.buildName}</option>
+                                #end
 	                    	#end                
                 	  #end
                         #@validateDiv("col-2")#end
@@ -391,44 +442,3 @@
 <script>
 	$('select.select2').select2()
 </script>
-    <script type="text/javascript">
-        $(".select2").select2();
-
-        function ajaxRead(id,toName,opKey,opvalue,url,value){
-            var selectCheck = "select[name="+toName+"]";
-            $(selectCheck).each(function(){
-                var sele = $(this);
-                var s;
-                $.ajax({
-                    type: "POST",
-                    url: "${TINY_CONTEXT_PATH}"+url,
-                    data: $(this).attr('data'),
-                    dataType:"json",
-                    success: function(data){
-                        sele.empty();
-                        var em = "<option value='0' selected  >/</option>";
-                        sele.append(em);
-                        for(var i=0,l=data.length;i<l;i++){
-                            var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
-                            sele.append(em);
-
-                        }
-
-                        if(value!=null) {
-                            sele.val(value).trigger("change");
-                        }else {
-                            sele.val(data[0][opKey]).trigger("change");
-                        }
-
-
-                    },
-                    error: function(res){
-                        alert("失败");
-                    }
-                });
-
-
-            });
-
-        }
-    </script>

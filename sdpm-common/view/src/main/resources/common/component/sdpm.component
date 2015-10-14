@@ -14,6 +14,50 @@
 
 ##
 #macro delItemsdpm(doAction delId backUrl mapInfo)
-<a href="${backUrl}" data-removeid="${delId}" data-action="${doAction}" #getmapInfo(mapInfo)>#bodyContent</a>
+<a href="${backUrl}" data-removeid="${delId}" data-action="${doAction}" #getMapInfo(mapInfo)>#bodyContent</a>
 #end
 
+#macro initBatchAction(map)
+<script>
+    $(function () {
+        $(".secondMenu").on("click", function () {
+            var inputname = $(this).attr("tabindex");
+            var inputvalue = $(this).html().trim();
+            var ids = [];
+            var href = $(this).attr("href");
+            var dataFix = $(this).attr("tabindex");
+            $("#${tableId} input[type='checkbox']").each(function () {
+                if (this.checked == true && this.id != "checkboxall") {
+                    var clientId = $(this).val();
+                    //if ("records" == inputname) {
+                    ids.push(clientId);
+                    // }
+                }
+            });
+            if (ids.length > 0) {
+                $.ajax({
+                    url: href,
+                    type: "post",
+                    traditional: true,
+                    data: {ids: ids, name: inputvalue, dataFix: dataFix},
+                    dataType: "json",
+                    success: function (data) {
+                        // alert('success');
+                        if (data.status == "y") {
+                            layer.msg(data.info, 3, 1);
+                            $("#${tableId}").trigger("refresh");
+                        } else {
+                            layer.msg(data.info)
+                        }
+                    },
+                    error: function (res) {
+                        layer.msg("失败")
+                        //alert("失败");
+                    }
+                });
+            }
+            return false;
+        });
+    });
+</script>
+#end

@@ -17,10 +17,10 @@
         "icon-link")关联需求</a>&nbsp;
 				<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page?cname=bug">#buttonIcon(iconClass=
                     "icon-bug")关联Bug</a>&nbsp;
-<a href="${TINY_CONTEXT_PATH}/project/version/edit?buildId=${build?.buildId}">#buttonIcon(iconClass=
+<a href="${TINY_CONTEXT_PATH}/project/version/edit?buildId=${b?.buildId}">#buttonIcon(iconClass=
         "icon-pencil")编辑发布</a>&nbsp;
-
-    #iconOperation(" icon-remove" "删除发布" "ml-5")
+        <a href="${TINY_CONTEXT_PATH}/project/version/delete?id=${build?.buildId}" name="删除发布">#buttonIcon(iconClass=
+                "icon-remove")</a>&nbsp;
     <a href="${TINY_CONTEXT_PATH}/product/page/project/product-release.page" title="返回">#buttonIcon(iconClass=
         "icon-reply")</a>
 				</span>#div(divClass="clearfix")
@@ -92,6 +92,6 @@
     #end
 </div>
 <div style="width:30%;float:right">
-    #TypeInfo("projectRelease")
+    #TypeInfo("build"，build?.buildId)
 </div>
 #end

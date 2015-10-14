@@ -63,9 +63,10 @@
          		<div class="col-4">
             #@Tselect2F()
 	             #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                  <option value="IN">版本1</option>
-	                  <option value="ME">版本2</option>
-	                  <option value="MD">版本3</option>
+                    <option value="0">/</option>
+                    #foreach(build : buildList)
+                    <option value="${build?.buildId}">${build?.buildName}</option>
+                    #end
 	               #end                
 	          ##     #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
               #end

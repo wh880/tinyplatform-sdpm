@@ -57,6 +57,8 @@
                 <!--TypeInfo处理器 -->
                 <ref bean="typeInfoProcessor"/>
 
+                <!--Obtain文件加载处理器-->
+                <ref bean="obtainProcessor"/>
                 <!-- database -->
                 <ref bean="constantFileResolver"/>
                 <ref bean="standardTypeFileResolver"/>

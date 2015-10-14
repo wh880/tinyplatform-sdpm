@@ -17,6 +17,9 @@
                  #@mulOperation("muldelete" "http://127.0.0.1:8080/sdpm-service/service/client/test.pagelet")             <a href="javascript:;" class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>#end
             #end
             #set(requestStatuString = tinyRequestQueryString!=null ?"&"+tinyRequestQueryString:"")
+            #if(moduleId)
+                #set(requestStatuString = "&moduleId=" + moduleId)
+            #end
             #@tinyTableContent(TINY_CONTEXT_PATH+
                 "/project/task/findPager?projectId="+cookie_projectId+requestStatuString) ##取数据地址 总数据
                 #@thead()

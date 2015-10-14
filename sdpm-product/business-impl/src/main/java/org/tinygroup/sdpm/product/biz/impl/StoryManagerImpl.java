@@ -131,29 +131,22 @@ public class StoryManagerImpl implements StoryManager {
 						return obj1.compareTo(obj2);
 					}
 				});
-		if(fields.contains("productCount")){
-			map.put("A_productCount", productStoryDao.productStoryCount(story));
-		}
-		if (fields.contains("B_moduleCount")) {
-			map.put("B_moduleCount", productStoryDao.modelStoryCount(story));
-		}
-		if (fields.contains("C_planCount")) {
-			map.put("C_planCount", productStoryDao.planStoryCount(story, null));
-		}
-		char nm = 'D';
+		
+		String newField="";
 		for (String field : fields.split(",")) {
+			newField = field.substring(field.indexOf("_")+1).trim();
 			
-			if(!("A_productCount".equals(field.trim())||"B_moduleCount".equals(field.trim())||"C_planCount".equals(field.trim()))){
-				
-				if("storyOpenedBy".equals(field.trim())||"storyAssignedTo".equals(field.trim())){
-					map.put(nm+"_"+field, productStoryDao.userStoryCount(story, field));
-				}else{
-					map.put(nm+"_"+field, productStoryDao.fieldStoryCount(story, field));
-				}
-				
-				nm+=1;
+			if("A_productCount".equals(field.trim())){
+				map.put(field, productStoryDao.productStoryCount(story));
+			}else if("B_moduleCount".equals(field.trim())){
+				map.put(field, productStoryDao.modelStoryCount(story));
+			}else if("C_planCount".equals(field.trim())){
+				map.put(field, productStoryDao.planStoryCount(story, null));
+			}else if("I_storyOpenedBy".equals(field.trim())||"G_storyAssignedTo".equals(field.trim())){
+				map.put(field, productStoryDao.userStoryCount(story, newField));
+			}else{
+				map.put(field, productStoryDao.fieldStoryCount(story, newField));
 			}
-			
 		}
 		
 		return map;
@@ -164,9 +157,6 @@ public class StoryManagerImpl implements StoryManager {
 		return productStoryDao.batchUpdateDel(ids);
 	}
 
-
-
-	
 	
 
 }

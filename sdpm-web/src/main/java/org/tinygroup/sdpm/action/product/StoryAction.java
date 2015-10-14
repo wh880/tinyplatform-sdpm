@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action.product;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
+import org.tinygroup.sdpm.action.system.ProfileAction;
 import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -62,7 +65,7 @@ public class StoryAction extends BaseController{
    
     @RequestMapping("")
     public String storyAction(ProductStory story, String groupOperate, Model model, HttpServletRequest request, HttpServletResponse response){
-
+      
     	
     	String queryString = request.getQueryString();
        if(queryString!=null&&!queryString.contains("choose")){
@@ -74,7 +77,14 @@ public class StoryAction extends BaseController{
   
     
     @RequestMapping("/save")
-    public String save(ProductStory productStory,ProductStorySpec storySpec,HttpServletRequest request){
+    public String save(ProductStory productStory,ProductStorySpec storySpec,@RequestParam(value = "file", required = false)MultipartFile file,HttpServletRequest request) throws IOException{
+    	 ProfileAction profileAction = new ProfileAction();
+//         for(int i=0,n=files.getMultipartFiles().size();i<n;i++){
+//      	   if(!files.getMultipartFiles().get(i).isEmpty()){
+//      		   profileAction.upload(files.getMultipartFiles().get(i));
+//      	   }
+//         }
+    	 profileAction.upload(file);
     	productStory.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
     	storyService.addStory(productStory, storySpec);
     	return "redirect:" + "/product/page/project/togglebox.page";

@@ -20,12 +20,7 @@
 <p style="width:100%;float:left">
 ##        #@gridSysCol(8)
     #@div(divClass="infoContent")
-    #*  <p class="titleName">阿里巴巴</p>*#
-    <p class="titleName">协议内容</p>
-    ##        <div>
-    ##            #@table("协议详情")
-
-
+    <p class="titleName">${sla.slaTitle}</p>
         #@tbody()
             #@tr()
             #* <div class="text-c"><h4>支付宝出售协议</h4></div>*#
@@ -35,7 +30,6 @@
                     #@gridSysCol(2)#end
                     #@gridSysCol(8)
                         #@tr()
-                        #*#@th()协议具体内容为：#end*#
                             #@td()${sla.slaSpec}#end
                         #end
                     #end
@@ -55,7 +49,7 @@
                 #@aExtendButton(
                     "btn-primary btn-sm" TINY_CONTEXT_PATH+m.href+"?id="+sla?.slaId "" "")编辑#end
             #else
-                #@delItemsdpm(TINY_CONTEXT_PATH+m.href var?.slaId "" {
+                #@delItemsdpm(TINY_CONTEXT_PATH+m.href sla?.slaId TINY_CONTEXT_PATH+"/service/sla/list" {
                     "class":"btn radius btn-danger btn-sm"}) 删除#end
             #end
         #end
