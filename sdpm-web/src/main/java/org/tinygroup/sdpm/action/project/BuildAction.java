@@ -168,6 +168,16 @@ public class BuildAction extends BaseController {
         }
         return "project/version/add.page";
     }
+    @RequestMapping("/productalbug")
+    public String productalbug(Integer buildId, Model model) {
+        if (buildId != null) {
+            ProjectBuild build = buildService.findBuild(buildId);
+            model.addAttribute("build", build);
+            //还需要查询其他相关任务剩余时间的信息
+            return "/project/task/relation-release/product-al-bug.page";
+        }
+        return "error";
+    }
 
 
 

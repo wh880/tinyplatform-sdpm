@@ -1,37 +1,37 @@
 #macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
+<input type="hidden" name="records" value="${num}"/>
 #end
 
 
 
 #set(records=storys.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
+    #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
 #for(s:storys.getRecords())
 #@tr()
-	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/storySpec/find/productDemandDetail?storyId=${s?.storyId}">${s
+    #@td()<input type="checkbox" value="1" name="idCheck">#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/product/storySpec/find/productDemandDetail?storyId=${s?.storyId}">${s
         ?.storyId}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/storySpec/find/productDemandDetail?storyId=${s?.storyId}">${s
-        ?.storyPri}</a>#end
-	#@td()${s?.storyTitle}#end
-	#@td()${s?.storyOpenedBy}#end
-	#@td()${s?.storyAssignedTo}#end
-	#@td()${s?.storyEstimate}#end
-	#@td()${s?.storyStatus}#end
-	#@td()${s?.storyStage}#end
-	#@td()${s?.taskNumber}#end
-	 #@td()
-		 #foreach(m:menuManager.getScopeMenus("demand-op"))
-			 #if(m.id != "rm-demand")
-             <a href="${TINY_CONTEXT_PATH}${m.href}?storyId=${s?.storyId}"
-                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-			 #else
-				 #@delItemsdpm(TINY_CONTEXT_PATH+m.href s.storyId)#buttonIcon(iconClass=m.icon)#end
-			 #end
-		 #end
-	#end
+    #@td()${s?.storyPri}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/product/storySpec/find/productDemandDetail?storyId=${s?.storyId}">${s
+        ?.storyTitle}#end
+    #@td()${s?.storyOpenedBy}#end
+    #@td()${s?.storyAssignedTo}#end
+    #@td()${s?.storyEstimate}#end
+    #@td()${s?.storyStatus}#end
+    #@td()${s?.storyStage}#end
+    #@td()${s?.taskNumber}#end
+    #@td()
+        #foreach(m:menuManager.getScopeMenus("demand-op"))
+            #if(m.id != "rm-demand")
+                <a href="${TINY_CONTEXT_PATH}${m.href}?storyId=${s?.storyId}"
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            #else
+                #@delItemsdpm(TINY_CONTEXT_PATH+m.href s.storyId)#buttonIcon(iconClass=m.icon)#end
+            #end
+        #end
+    #end
 #end
 #end

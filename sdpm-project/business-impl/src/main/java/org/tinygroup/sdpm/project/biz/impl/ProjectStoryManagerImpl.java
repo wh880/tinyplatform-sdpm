@@ -3,10 +3,14 @@ package org.tinygroup.sdpm.project.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.biz.inter.ProjectStoryManager;
+import org.tinygroup.sdpm.project.dao.ProjectProductDao;
 import org.tinygroup.sdpm.project.dao.ProjectStoryDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -18,6 +22,18 @@ import java.util.List;
 public class ProjectStoryManagerImpl implements ProjectStoryManager {
     @Autowired
     private ProjectStoryDao projectStoryDao;
+    @Autowired
+    private ProjectProductDao projectProductDao;
+
+    public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String oredertype) {
+        if (order == null) {
+            return projectProductDao.findStory(projectId, start, limit);
+        } else {
+            OrderBy orderBy = new OrderBy(order, "asc".equals(oredertype) ? true : false);
+            return projectProductDao.findStory(projectId, start, limit, orderBy);
+        }
+
+    }
 
     public List<ProjectStory> findSrotys(Integer projectId) {
         return projectStoryDao.findByProjectID(projectId);

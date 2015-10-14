@@ -25,6 +25,7 @@ import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -268,5 +269,32 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
 			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
 		}
 		return select;
+	}
+
+	public Pager<SystemEffort> findByDate(int start, int limit,
+			SystemEffort effort, final Date startDate, final Date endDate,
+			final OrderBy... orderArgs) {
+		if(effort==null){
+			effort=new SystemEffort();
+		}
+		return getDslTemplate().queryPager(start, limit, effort, false, new SelectGenerateCallback<SystemEffort>() {
+
+			public Select generate(SystemEffort t) {
+				Select select = MysqlSelect.selectFrom(SYSTEM_EFFORTTABLE).where(
+				and(
+					SYSTEM_EFFORTTABLE.EFFORT_PROJECT.eq(t.getEffortProject()),
+					SYSTEM_EFFORTTABLE.EFFORT_PRODUCT.eq(t.getEffortProduct()),
+					SYSTEM_EFFORTTABLE.EFFORT_WORK.eq(t.getEffortWork()),
+					SYSTEM_EFFORTTABLE.EFFORT_CONSUMED.eq(t.getEffortConsumed()),
+					SYSTEM_EFFORTTABLE.EFFORT_DATE.between(startDate, endDate),
+					SYSTEM_EFFORTTABLE.EFFORT_LEFT.eq(t.getEffortLeft()),
+					SYSTEM_EFFORTTABLE.EFFORT_BEGIN.eq(t.getEffortBegin()),
+					SYSTEM_EFFORTTABLE.EFFORT_END.eq(t.getEffortEnd()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_ID.eq(t.getEffortObjectId()),
+					SYSTEM_EFFORTTABLE.EFFORT_OBJECT_TYPE.eq(t.getEffortObjectType()),
+					SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.eq(t.getEffortAccount())));
+			return addOrderByElements(select, orderArgs);
+			}
+		});
 	}
 }

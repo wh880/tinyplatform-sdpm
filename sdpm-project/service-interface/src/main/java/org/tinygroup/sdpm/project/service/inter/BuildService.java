@@ -61,4 +61,11 @@ public interface BuildService {
     public ProjectBuild findBuild(Integer buildId);
 
     public int[] deleteBuildByIds(List<ProjectBuild> ids);
+    /**
+     * 根据任务状态进行查询
+     *
+     * @param projectBuild
+     * @return
+     */
+    public List<ProjectBuild> findListBuild(ProjectBuild projectBuild);
 }

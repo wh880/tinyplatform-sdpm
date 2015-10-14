@@ -84,4 +84,16 @@ public class EffortServiceImpl implements EffortService {
 		return effortManager.batchDelete(ids);
 	}
 
+	public Pager<SystemEffort> findByDate(int start, int limit,
+			SystemEffort effort, Date startDate, Date endDate, String sortName,
+			boolean asc) {
+		// TODO Auto-generated method stub
+		return effortManager.findByDate(start, limit, effort, startDate, endDate, sortName, asc);
+	}
+
+	public SystemEffort findById(int id) {
+		// TODO Auto-generated method stub
+		return effortManager.findById(id);
+	}
+
 }

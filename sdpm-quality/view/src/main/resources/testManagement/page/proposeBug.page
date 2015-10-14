@@ -30,7 +30,7 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("productId" product?.productId?:qualityProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("productId" bug?.productId?:qualityProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                       	 #foreach(product : qualityProductList)
 	                       		 <option value="${product?.productId}">${product?.productName}</option>
 	                       	 #end	                     

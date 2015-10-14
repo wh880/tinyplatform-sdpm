@@ -17,7 +17,7 @@ function tLoadContent(link, contain, className) {
 		  },
 		  success: function(a) {
 				$b.css({
-					 opacity: "0.0"
+					 opacity: "1.0"
 				}).html(a).delay(50).animate({
 					 opacity: "1.0"
 				},

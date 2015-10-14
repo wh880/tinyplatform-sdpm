@@ -17,11 +17,13 @@
 				
 				#div(divClass="clearfix")
 		#end
-		
+	 #@tinyForm("dictEditform" "" "post" {"class":""}) 
 		#@topSearch() 
-		    #simpleText("代码" "" "width:25%")
+		    #simpleText("moduleName" "" "width:25%")
 		    #simpleText("中文名" "" "width:25%")
 		 	#@btnSubmit("icon-search") 搜索#end
+		 	
+		#end
 		#end
 		
 		#pageContent

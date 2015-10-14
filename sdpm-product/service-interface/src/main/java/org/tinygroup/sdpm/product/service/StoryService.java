@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.product.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -97,4 +98,11 @@ public interface StoryService {
 	 * @return
 	 */
 	List<StoryCount> planStoryCount(ProductStory story);
+	
+	/**
+	 * 其他状态需求数量分类
+	 * @param story
+	 * @return
+	 */
+	 Map<String, List<StoryCount>> report(String fields,ProductStory story);
 }

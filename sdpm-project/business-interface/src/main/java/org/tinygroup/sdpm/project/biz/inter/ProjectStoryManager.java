@@ -1,7 +1,9 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -9,6 +11,18 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-21.
  */
 public interface ProjectStoryManager {
+
+    /**
+     * 查找用于关联的需求
+     *
+     * @param projectId
+     * @param start
+     * @param limit
+     * @param order
+     * @param oredertype
+     * @return
+     */
+    public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String oredertype);
     /**
      * 根据projectId查找关联产品
      *

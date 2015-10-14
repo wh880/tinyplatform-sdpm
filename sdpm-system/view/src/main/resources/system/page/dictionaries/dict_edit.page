@@ -55,7 +55,9 @@
 	               #@Tselect2F()
 	                    #@Tselect2Body("moduleParent" module?.moduleParent {"class":
 	                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                                  <option value="0">/</option>
 	                                  #for(m:moduleList) 
+	                                  
 	                                  <option value="${m.moduleId}">${m.moduleName}</option>
 	                                  #end
 	                                   

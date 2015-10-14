@@ -3,26 +3,22 @@ package org.tinygroup.sdpm.action.system;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.collections.map.HashedMap;
-import org.aspectj.weaver.patterns.HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.HttpClientErrorException;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
-import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.DictService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.weblayer.WebContext;
-
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 @RequestMapping("system/dict")
 public class DictAction extends BaseController{
@@ -123,4 +119,10 @@ public class DictAction extends BaseController{
 		return"";
 	}
 
+   @RequestMapping("searsh")
+   public List<SystemDict> searsh(SystemDict systemDict){
+	   List<SystemDict> list = dictService.findDictList(systemDict);
+	   return list;
+	   
+   }
 }
