@@ -72,17 +72,19 @@ public class StoryAction extends BaseController{
     
   
     
-    @RequestMapping("/save")
-    public String save(ProductStory productStory,ProductStorySpec storySpec,@RequestParam(value = "file", required = false)MultipartFile file,HttpServletRequest request) throws IOException{
-    	 ProfileAction profileAction = new ProfileAction();
-//         for(int i=0,n=files.getMultipartFiles().size();i<n;i++){
-//      	   if(!files.getMultipartFiles().get(i).isEmpty()){
-//      		   profileAction.upload(files.getMultipartFiles().get(i));
-//      	   }
-//         }
-    	 profileAction.upload(file);
+   @RequestMapping("/save")
+    public String save(ProductStory productStory,ProductStorySpec storySpec,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,HttpServletRequest request) throws IOException{
+    	
+    	
     	productStory.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-    	storyService.addStory(productStory, storySpec);
+    	ProductStory story=storyService.addStory(productStory, storySpec);
+    	 ProfileAction profileAction = new ProfileAction();
+    	 
+         for(int i=0,n=file.length;i<n;i++){
+        	 if(!file[i].isEmpty()&&file[i].getSize()!=0){
+        	 profileAction.upload(file[i],story.getStoryId(),"story",title[i]);
+        	 }
+         }
     	return "redirect:" + "/product/page/project/togglebox.page";
     }
     
