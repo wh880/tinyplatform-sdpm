@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
-import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -23,6 +22,7 @@ import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,6 +47,7 @@ public class TaskAction extends BaseController {
     private ProjectStoryService storyService;
     @Autowired
     private StoryService productStoryService;
+
 
     @RequestMapping("index")
     public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model, String moduleId) {
@@ -327,6 +328,21 @@ public class TaskAction extends BaseController {
         return "project/task/basicInfoEdit.pagelet";
     }
 
+    @RequestMapping("/basicInformation")
+    public String basicInformation(Integer taskId, Model model) {
+        ProjectTask task = taskService.findTask(taskId);
+        Project project = projectService.findById(task.getTaskProject());
+        model.addAttribute("task", task);
+        model.addAttribute("project", project);
+
+        //查询所属模块string
+        //moduleService.findById(task.getTaskModule());
+        //查询相关需求名字
+        String storyTitle = productStoryService.findStory(task.getTaskStory()).getStoryTitle();
+        model.addAttribute("storyTitle", storyTitle);
+        return "project/task/basicInformation.pagelet";
+    }
+
     @RequestMapping("/preBatchAdd")
     public String preBatchAdd(Model model, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
@@ -361,8 +377,6 @@ public class TaskAction extends BaseController {
             return "project/task/index.page";
         }
     }
-
-
 
 
 }

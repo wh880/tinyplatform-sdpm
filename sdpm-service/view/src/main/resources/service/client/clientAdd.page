@@ -17,9 +17,6 @@
 #set(name="client")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-    #*  #@div(divClass="dropdownBox")
-          #include("/service/serviceCom/dropdownMenu.page")
-      #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end

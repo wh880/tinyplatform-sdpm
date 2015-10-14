@@ -48,4 +48,10 @@ public class SlaServiceImpl implements SlaService {
     public List<ServiceSla> findSlaBySlaId(Integer id) {
         return slaManager.getListByClientId(id);
     }
+    public ServiceSla judgeClient(String clientName) {
+        return slaManager.judgeClient(clientName);
+    }
+    public int[] deleteBatchSla(List<ServiceSla> list) {
+        return slaManager.deleteBatch(list);
+    }
 }

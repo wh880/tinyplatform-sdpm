@@ -314,7 +314,7 @@ public class ModuleAction extends BaseController {
         SystemModule module= new SystemModule();
         module.setModuleType("story");
 
-        List<SystemModule> moduleList = moduleService.findModuleList(module);
+        List<SystemModule> moduleList = moduleService.findAllModules(module);
 
         for (SystemModule d : moduleList) {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -331,11 +331,11 @@ public class ModuleAction extends BaseController {
     }
     @RequestMapping("/findProductModule")
     public String findProductModule(SystemModule module, Model model) {
-    	if(module.getModuleParent()==null){
-    		module.setModuleParent(0);
-    	}
+    	
     	module.setModuleType("story");
-        List<SystemModule> list = moduleService.findModules(module);
+    	
+    	module.setModuleType("story");
+        List<SystemModule> list = moduleService.findAllModules(module);
         model.addAttribute("list", list);
         return "/product/page/project/product-modular.page";
     }

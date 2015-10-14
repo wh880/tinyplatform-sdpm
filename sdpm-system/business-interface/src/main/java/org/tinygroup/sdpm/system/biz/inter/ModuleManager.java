@@ -30,6 +30,13 @@ public interface ModuleManager {
 	 * @return
 	 */
 	 List<SystemModule> findByModules(SystemModule systemModule);
+	 
+	 /**
+		 * 根据根节点递归进行查询
+		 * @param root
+		 * @return
+		 */
+	 List<SystemModule> findModules(SystemModule systemModule,List<SystemModule> list);
 	 /**
 	  * 通过对象进行删除
 	  * @param SystemModule

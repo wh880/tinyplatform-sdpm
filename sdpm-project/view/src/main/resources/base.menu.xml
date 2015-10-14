@@ -58,8 +58,8 @@
         <menu id="task-Info2" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
             <menu id="pro-Info2-edit" name="编辑" href="/project/task/edit" icon="icon-pencil" sort="4" isShow="1"
                   scope="pro-taskInfo2-op"/>
-            <menu id="pro-Info2-remark" name="备注" href="/project/task/IDLinkremark.page" icon="icon-book" sort="10" isShow="1"
-                  scope="pro-taskInfo2-op"/>
+            <!--<menu id="pro-Info2-remark" name="备注" href="/project/task/IDLinkremark.page" icon="icon-book" sort="10" isShow="1"-->
+            <!--scope="pro-taskInfo2-op"/>-->
             <menu id="pro-Info2-copy" name="复制" href="/project/task/add.page" icon="icon-copy" sort="8" isShow="1"
                   scope="pro-taskInfo2-op"/>
             <menu id="pro-Info2-return" name="返回" href="/project/task/index.page" icon="icon-reply" sort="4" isShow="1"
@@ -134,7 +134,8 @@
         <menu id="pro-team-delete" name="删除" href="" icon="icon-remove" sort="10" isShow="1"
               scope="pro-team-op"/>
         <menu id="team-menu" name="任务菜单" href="/project/team/index.page" icon="" sort="1" isShow="1">
-            <menu id="pro-team-report" name="团队管理" href="/project/team/teamManage.page" icon="icon-user" sort="8" isShow="1"
+            <menu id="pro-team-report" name="团队管理" href="/project/team/preTeamManage" icon="icon-user" sort="8"
+                  isShow="1"
                   scope="pro-teammenu-op"/>
         </menu>
     </menu>
