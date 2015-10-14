@@ -146,28 +146,36 @@ public class RequestAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/solveBy")
-    public int[] solveBy(Integer[] ids, String name) {
+    public Map solveBy(Integer[] ids, String name) {
         List<ServiceRequest> list = new ArrayList<ServiceRequest>();
+        Map<String, String> map = new HashMap<String, String>();
         for (Integer id : ids) {
             ServiceRequest serviceRequest = new ServiceRequest();
             serviceRequest.setClientRequestId(id);
             serviceRequest.setReplier(name);
             list.add(serviceRequest);
         }
-        return requestService.updateReply(list);
+        requestService.updateReply(list);
+        map.put("status", "y");
+        map.put("info", "操作成功");
+        return map;
     }
 
     @ResponseBody
     @RequestMapping(value = "/reviewBy")
-    public int[] reviewBy(Integer[] ids, String name) {
+    public Map reviewBy(Integer[] ids, String name) {
         List<ServiceRequest> list = new ArrayList<ServiceRequest>();
+        Map<String, String> map = new HashMap<String, String>();
         for (Integer id : ids) {
             ServiceRequest serviceRequest = new ServiceRequest();
             serviceRequest.setClientRequestId(id);
             serviceRequest.setRequestReviewer(name);
             list.add(serviceRequest);
         }
-        return requestService.updateReview(list);
+        requestService.updateReview(list);
+        map.put("status", "y");
+        map.put("info", "操作成功");
+        return map;
     }
 
     @ResponseBody
