@@ -32,11 +32,11 @@
 </select>
 <select id="pritemp">
 	<option value="0"></option>
-	<option value="3">3</option>
 	<option value="1">1</option>
-	<option value="44">44</option>
 	<option value="2">2</option>
+	<option value="3">3</option>
 	<option value="4">4</option>
+	<option value="5">5</option>
 	<option value="null">空</option>
 </select>
 <select id="statustemp">
@@ -69,6 +69,25 @@
 	<option value="testscript">测试脚本</option>
 	<option value="tracking">事务跟踪</option>
 	<option value="codeimprove">代码改进</option>
+	<option value="others">其他</option>
+	<option value="null">空</option>
+</select>
+<select id="wintemp">
+	<option value="" selected="selected"></option>
+	<option value="Windows">Windows</option>
+	<option value="Windows 8">Windows 8</option>
+	<option value="Windows 7">Windows 7</option>
+	<option value="Windows Vista">Windows Vista</option>
+	<option value="Windows XP">Windows XP</option>
+	<option value="Windows 2012">Windows 2012</option>
+	<option value="Windows 2008">Windows 2008</option>
+	<option value="Windows 2003">Windows 2003</option>
+	<option value="Windows 2000">Windows 2000</option>
+	<option value="Android">Android</option>
+	<option value="IOS">IOS</option>
+	<option value="WP8">WP8</option>
+	<option value="Linux">Linux</option>
+	<option value="Unix">Unix</option>
 	<option value="others">其他</option>
 	<option value="null">空</option>
 </select>
@@ -240,7 +259,7 @@ $(function(){
 		"name":"operatingSystem",
 		"title":"操作系统",
 		"operator":"=",
-		"value":"text"
+		"value":"win"
 	});
 	itemlist.push({
 		"name":"browser",
@@ -281,48 +300,61 @@ $(function(){
 
 	#*下面都没有写*#
 	
+
 	itemlist.push({
-		"name":"estStarted",
-		"title":"预计开始",
+		"name":"bugClosedBy",
+		"title":"由谁关闭",
+		"operator":"=",
+		"value":"user"
+	});
+	itemlist.push({
+		"name":"bugLastEditedBy",
+		"title":"修改者",
+		"operator":"=",
+		"value":"user"
+	});
+	itemlist.push({
+		"name":"bugMailto",
+		"title":"抄送给",
+		"operator":"=",
+		"value":"user"
+	});
+	itemlist.push({
+		"name":"bugOpenedBuild",
+		"title":"影响版本",
+		"operator":"=",
+		"value":"text"
+	});
+	itemlist.push({
+		"name":"bugResolvedBuild",
+		"title":"解决版本",
+		"operator":"=",
+		"value":"text"
+	});
+	itemlist.push({
+		"name":"bugOpenedDate",
+		"title":"创建日期",
 		"operator":"=",
 		"value":"date"
 	});
 	itemlist.push({
-		"name":"realStarted",
-		"title":"实际开始",
-		"operator":"=",
-		"value":"date"
-	});
-	itemlist.push({
-		"name":"assignedDate",
+		"name":"bugAssignedDate",
 		"title":"指派日期",
 		"operator":"=",
 		"value":"date"
 	});
 	itemlist.push({
-		"name":"finishedDate",
-		"title":"完成时间",
+		"name":"bugClosedDate",
+		"title":"关闭日期",
+		"operator":"=",
+		"value":"date"
+	});itemlist.push({
+		"name":"bugLastEditedDate",
+		"title":"修改日期",
 		"operator":"=",
 		"value":"date"
 	});
-	itemlist.push({
-		"name":"closedDate",
-		"title":"关闭时间",
-		"operator":"=",
-		"value":"date"
-	});
-	itemlist.push({
-		"name":"canceledDate",
-		"title":"取消时间",
-		"operator":"=",
-		"value":"date"
-	});
-	itemlist.push({
-		"name":"lastEditedDate",
-		"title":"最后修改日期",
-		"operator":"=",
-		"value":"date"
-	});
+	
 	function setValueBox(index,itemIndex){
 		$("#operator"+itemIndex).val(itemlist[index]["operator"]);
 		switch(itemlist[index]["value"]){
@@ -346,6 +378,9 @@ $(function(){
 				break;
 			case "con":
 				$("#valueBox"+itemIndex).html($('<select name="value'+itemIndex+'" id="value'+itemIndex+'" class="form-control">').html($("#contemp").html()));
+				break;
+			case "win":
+				$("#valueBox"+itemIndex).html($('<select name="value'+itemIndex+'" id="value'+itemIndex+'" class="form-control">').html($("#wintemp").html()));
 				break;
 		}
 	}
