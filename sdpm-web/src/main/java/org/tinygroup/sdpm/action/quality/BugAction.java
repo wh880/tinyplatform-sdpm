@@ -5,9 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
+import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -33,6 +36,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -329,12 +333,20 @@ public class BugAction extends BaseController {
 		return "redirect:"+"/quality/bug";
 	}
 	
-	@RequestMapping(value = "/save",method = RequestMethod.POST)
-	public String save(QualityBug bug,SystemAction systemAction, HttpServletRequest request){
+	@RequestMapping(value = "/save")
+	public String save(QualityBug bug,SystemAction systemAction,@RequestParam(value = "file", required = false)MultipartFile[] file,
+			String[] title, HttpServletRequest request){
 		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
 		bug.setBugOpenedDate(new Date());
 		bug.setBugOpenedBy(user != null?user.getOrgUserId():"0");
-		bugService.addBug(bug);
+		QualityBug qbug=bugService.addBug(bug);
+		ProfileUtil profileUtil = new ProfileUtil();
+		try {
+			profileUtil.uploads(file, qbug.getBugId(), "bug", title);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		systemAction.setActionObjectId(bug.getBugId());
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
