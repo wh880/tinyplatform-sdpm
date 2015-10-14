@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.action.system;
+package org.tinygroup.sdpm.util;
 
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
@@ -25,7 +25,6 @@ public class ModuleUtil {
         }else{
             condition.append(","+moduleId);
         }
-
     }
 
     public static String getCondition(int moduleId,ModuleService moduleService){
@@ -49,5 +48,22 @@ public class ModuleUtil {
         }
         stringBuffer.append(")");
         return stringBuffer.toString();
+    }
+
+    public static String getPath(int moduleId, String division, ModuleService moduleService,String root, boolean openRoot){
+        SystemModule module = moduleService.findById(moduleId);
+        if(openRoot){
+            return root+division+mergePath(division,module.getModulePath().substring(1),moduleService)+division+module.getModuleName();
+        }
+        return mergePath(division,module.getModulePath().substring(2),moduleService)+division+module.getModuleName();
+    }
+
+    private static String mergePath(String division, String paths, ModuleService moduleService){
+        String[] path = paths.split(",");
+        if(path.length>1){
+            return moduleService.findById(Integer.parseInt(path[0])).getModuleName()+division+ mergePath(division,paths.substring(path[0].length()+1),moduleService);
+        }else{
+            return moduleService.findById(Integer.parseInt(path[0])).getModuleName();
+        }
     }
 }
