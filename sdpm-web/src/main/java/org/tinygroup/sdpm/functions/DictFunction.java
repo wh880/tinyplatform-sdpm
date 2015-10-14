@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.Function;
+package org.tinygroup.sdpm.functions;
 
 import org.tinygroup.sdpm.system.dictinit.DictUtil;
 import org.tinygroup.template.Template;

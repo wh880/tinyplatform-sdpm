@@ -61,7 +61,6 @@
 			##operationbar star
 			#@div(divClass="operationbar")
 				<span class="f">
-
 					#foreach(m:menuManager.getScopeMenus("testbugleft-tab"))
 						#if(m.id != "tsearch")
 							<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==status?'active_btn':''}">${m.name}</a>
@@ -71,22 +70,21 @@
 					#end
 				</span>
 				<span class="r">
-			##		#set(m1=menuManager.getMenu("tbugoutput"))
 					#foreach(m:menuManager.getScopeMenus("testbug-tab"))
     				#if(m.id=="tbugoutput")
     					#@buttonGroup()
-		                    		#@buttonDropdown("more" buttonClass="btnDropDown")#buttonIcon(iconClass="icon-upload-alt")导出 
-		                     			#@spanCaret()#end
-		                    		#end
-		                    		#@ulDropdownMenu("downMenuSty")                       
-		                         		<p>
-		                             		#@aModal("#myModal" "导出数据" "550" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出数据#end
-		                         		</p>
-		                         		<p>
- 											#@aModal("#myModal" "导出模板" "550" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出模版#end		                         </p>	
-		                       			</p>
-		                       			 #@liDivider()#end
-		                   			#end
+							#@buttonDropdown("more" buttonClass="btnDropDown")#buttonIcon(iconClass="icon-upload-alt")导出
+								#@spanCaret()#end
+							#end
+							#@ulDropdownMenu("downMenuSty")
+								<p>
+									#@aModal("#myModal" "导出数据" "550" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出数据#end
+								</p>
+								<p>
+									#@aModal("#myModal" "导出模板" "550" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出模版#end		                         </p>
+								</p>
+								 #@liDivider()#end
+							#end
 		                #end&nbsp;
     				#else
     					#if(m.id=="tbuginput")
