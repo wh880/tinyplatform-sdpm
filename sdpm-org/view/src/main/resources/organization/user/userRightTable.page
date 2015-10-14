@@ -37,7 +37,7 @@
                 #@tinyTh({"class":"","rel":"orgUserEmail"})邮箱#end
                 #@tinyTh({"class":"","rel":"orgUserGender"})性别#end
                 #@tinyTh({"class":"","rel":"orgUserPhone"})电话#end
-                #@tinyTh({"class":"sorting","rel":"orgUserJoin"})加入日期#end
+                #@tinyTh({"class":"","rel":"orgUserJoin"})加入日期#end
                 #@tinyTh({"class":"","rel":"sortname"})操作#end
             #end
         #end
