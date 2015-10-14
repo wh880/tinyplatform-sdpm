@@ -2,8 +2,6 @@
 <input type="hidden" name="records" value="${num}"/>
 #end
 
-
-
 #set(records=storys.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)

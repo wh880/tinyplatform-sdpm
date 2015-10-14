@@ -10,6 +10,8 @@ import java.util.List;
  */
 public interface TaskManager {
 
+    public Integer batchSoftDel(String condition);
+
     public int[] batchAdd(List<ProjectTask> taskList);
 
     /**

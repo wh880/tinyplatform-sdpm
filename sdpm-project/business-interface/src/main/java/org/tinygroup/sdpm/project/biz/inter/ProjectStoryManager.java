@@ -12,6 +12,8 @@ import java.util.List;
  */
 public interface ProjectStoryManager {
 
+    public int[] linkStory(List<ProjectStory> projectStoryList);
+
     /**
      * 查找用于关联的需求
      *
