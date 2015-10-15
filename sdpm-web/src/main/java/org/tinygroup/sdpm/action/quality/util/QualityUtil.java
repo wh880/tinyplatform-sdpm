@@ -27,6 +27,7 @@ public class QualityUtil {
     }
 
     public static String getCondition(String status, HttpServletRequest request){
+        if("".equals(status)||status==null)return "";
         OrgUser user = (OrgUser) request.getSession().getAttribute("user");
         if(status == null||"".equals(status))return null;
         switch (statusMap.get(status)){

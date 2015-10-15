@@ -190,10 +190,21 @@ public class StoryAction extends BaseController{
     	/*if (story.getModuleId()==-1) {
     		story.setModuleId(null);
 		}*/
+    	 
+    	
     	String condition = StoryUtil.getStatusCondition(choose,request);
     	if(story.getModuleId()!=null&&story.getModuleId()>0){
-    		condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + ModuleUtil.getCondition(story.getModuleId(), moduleService);
+    		
+    		 SystemModule module = new SystemModule();
+	       	 module.setModuleId(story.getModuleId());
+	   		 StringBuffer stringBuffer = new StringBuffer();
+	   		 stringBuffer.append("in (");
+	   	     ModuleUtil.getConditionByModule(stringBuffer, module, moduleService);
+	   	     stringBuffer.append(")");
+	   	     
+    		condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
     	}
+    	story.setModuleId(null);
     	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, condition,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList",p);
         return "product/data/tabledata.pagelet";

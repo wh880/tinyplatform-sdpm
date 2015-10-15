@@ -68,4 +68,10 @@ public interface ModuleManager {
 	 * @return
      */
 	List<SystemModule> findList(SystemModule systemModule);
+	/**
+	 * 删除module连带编辑字典
+	 * @param id
+	 * @return
+	 */
+	int deleteAndedit(Integer id);
 }
