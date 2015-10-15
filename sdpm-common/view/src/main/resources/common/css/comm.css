@@ -421,3 +421,5 @@ a.btn.btn-sm.backBtn, backBtn {
 }
 /*左侧树 控制max*/
 .togglebox .togglenavpart .treeLeftbox ul.ztree{max-height:400px;}
+
+.dropdown .dropdown-submenu .dropdown-menu{ overflow-y: auto;overflow-X: hidden;max-height: 280px;}
