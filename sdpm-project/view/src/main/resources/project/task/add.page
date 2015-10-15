@@ -91,8 +91,8 @@
                     #end
         ##填写任意内容，侦听需重新填加 A侦听已内置
             #@Tselect2Fix()
-                <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
-                <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
+                <a href="${TINY_CONTEXT_PATH}/product/story/save">新增</a>
+                <a href="${TINY_CONTEXT_PATH}/product/story/search">全部</a>
             #end
                 #end
             #end
@@ -160,6 +160,8 @@
         #@sdpmItem("附件")
             #fileWithInput("file")
         #end
+       #end 
+        
         #@elementItem()
             #@sdpmItem("添加之后")
                 #@formControlDiv("skin-minimal col-9")
@@ -198,7 +200,7 @@
     #end
     <br>
 </div>
-
+ #end
 
 <div style="width:30%;float:right">
     #@div(divClass="infoContent")
