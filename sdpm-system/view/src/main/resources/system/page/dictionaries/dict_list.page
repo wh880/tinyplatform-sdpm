@@ -1,4 +1,5 @@
 #!set(activeTitle="字典类型管理",activeMenuId=currentPageId)
+#!set(page="dict")
 #set(editpagePath="/system/page/dictionaries/dict_edit.pagelet",editpageModalId="dictEditModal",editpageModal="#"+editpageModalId)
 #set(viewpagePath="/system/page/dictionaries/dict_view.pagelet",viewpageModalId="dictViewModal",viewpageModal="#"+viewpageModalId)
 #include("/system/page/event/common.page")
