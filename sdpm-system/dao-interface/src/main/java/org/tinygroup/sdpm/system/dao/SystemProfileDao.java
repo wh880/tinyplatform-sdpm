@@ -21,5 +21,6 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 
 public interface SystemProfileDao extends BaseDao<SystemProfile,Integer> {
-
+	int softDelete(Integer id);
+	int editTitle(SystemProfile systemProfile);
 }

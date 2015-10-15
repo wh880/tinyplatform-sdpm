@@ -36,15 +36,15 @@
         <menu id="org-user-bugAdmin" name="缺陷" href="/org/user/bug" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
-        <menu id="org-user-testtaskAdmin" name="测试" href="/organization/user/testtaskAdmin.page" icon="" sort="1"
+        <menu id="org-user-testtaskAdmin" name="测试" href="/org/user/testtask" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
         <menu id="org-user-activeAdmin" name="动态" href="/organization/user/activeAdmin.page" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
-        <menu id="org-user-logAdmin" name="日志" href="/organization/user/logAdmin.page" icon="" sort="1"
-              isShow="1"
-              scope="org-user-detail"/>
+        <!--<menu id="org-user-logAdmin" name="日志" href="/organization/user/logAdmin.page" icon="" sort="1"-->
+        <!--isShow="1"-->
+        <!--scope="org-user-detail"/>-->
         <menu id="org-user-projectAdmin" name="项目" href="/organization/user/projectAdmin.page" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
@@ -63,13 +63,13 @@
     <!--isShow="1"-->
     <!-->-->
     <!--</menu>-->
-    <menu id="organizationLog" name="日志" href="/organization/log/log.page" icon="" sort="1"
-          isShow="1"
-    >
-        <menu id="org-log-export" name="导出" href="/organization/log/export.pagelet" icon="icon-download-alt"
-              sort="1" isShow="1"
-              scope="org-log-export"/>
-    </menu>
+    <!--<menu id="organizationLog" name="日志" href="/organization/log/log.page" icon="" sort="1"-->
+    <!--isShow="1"-->
+    <!-->-->
+    <!--<menu id="org-log-export" name="导出" href="/organization/log/export.pagelet" icon="icon-download-alt"-->
+    <!--sort="1" isShow="1"-->
+    <!--scope="org-log-export"/>-->
+    <!--</menu>-->
     <menu id="organizationActive" name="动态" href="/organization/active/active.page" icon="" sort="1" isShow="1"
     >
     </menu>

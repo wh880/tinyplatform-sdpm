@@ -62,12 +62,30 @@
          <div class="col-2 text-r"><label>所属文档库&nbsp</label></div>
          <div class="col-4">
           #@Tselect2F()
-	          #@Tselect2Body("docLibId" doc?.docLibId {"class":"input-text select2","onclick":"setType(this.value)"}) ##,"multiple":"multiple"加上为多选项
+
+	          #@Tselect2Body("docLibId" doc?.docLibId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	               <option value="0">/</option>
 	               #foreach(var:libList)
 	               	#if(var?.docLibDeleted != "1")
 	               		<option value="${var?.docLibId}">${var?.docLibName}</option>
 	               	#end
 	               #end
+	               <script type="text/javascript">
+                        $("#${sid}").on("change",function(){
+                            var type = $("#${sid} option:selected").val();
+                           if(type == 1){
+                               $('#product').removeClass('hidden');
+                               $('#project').addClass('hidden');
+                           }
+                           else if(type == 2){
+                               $('#project').removeClass('hidden');
+                               $('#product').removeClass('hidden');
+                           }else{
+                               $('#project').addClass('hidden');
+                               $('#product').addClass('hidden');
+                               }
+                       });
+                   </script>
 	               #end                
               	</div>
        		</div>
@@ -215,23 +233,3 @@
         #@dialogHeader()#end
         #@dialogBody()<p></p>#end
 #end     
-
-   <script type="text/javascript">
-					    $(".select2").select2(); 
-
-					    function setType(type){
-					 
-							if(type == 1){
-								$('#product').removeClass('hidden');
-								$('#project').addClass('hidden');
-							}
-							else if(type == 2){
-								$('#project').removeClass('hidden');
-								$('#product').removeClass('hidden');			
-							}else{
-								$('#project').addClass('hidden');
-								$('#product').addClass('hidden');	
-								}	
-						}    
-	</script>
-

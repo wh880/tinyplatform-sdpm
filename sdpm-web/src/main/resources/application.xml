@@ -73,6 +73,7 @@
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-system\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-document\view\src\main\resources"/>
             <!--alu -->
             <class-path path="D:\TinyFramworkTest\sdpm\sdpm-document\view\src\main\resources"/>
 

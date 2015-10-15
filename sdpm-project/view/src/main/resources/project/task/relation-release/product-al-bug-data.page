@@ -1,25 +1,28 @@
-#macro setTinyItemCount(num)
-<input type="hidden" name="records" value="${num}"/>
-#end
-
-
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=bugList?.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(bugList?.totalCount)
+#for(bug:bugList.getRecords())
 #@tr()
-    #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()${var}#end
-    #@td()PP#end
-    #@td()计划${page}#end
-    #@td()121#end
-    #@td()12#end
-    #@td()admin#end
+    #@td()<input type="checkbox" value="${bug?.bugId}" name="idCheck">#end
+    #@td()${bug?.bugId}#end
     #@td()
-        #iconOperation( "icon-remove"  "删除"  "ml-5"  TINY_CONTEXT_PATH+"/project/version/delete?id="+b?.buildId )
+    @
+    #end
+
+    #@td() <a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page"> ${bug?.bugTitle} #end
+    #@td()${bug?.bugOpenedBy}#end
+    #@td()${bug?.bugResolvedBy} #end
+    #@td()${bug?.bugStatus}#end
+    #@td()
+
+        #foreach(m:menuManager?.getScopeMenus("release-linkbug"))
+            #set(url=eval(m.href))
+            #if("aboutbug"==m.id)
+                #@tinyTableItemRemove(TINY_CONTEXT_PATH+url)<i class="${m.icon}"></i>#end
+            #end
+        #end
     #end
 
 #end

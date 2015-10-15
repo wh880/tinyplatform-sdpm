@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface TeamService {
 
+    public List<ProjectTeam> findTeamList(ProjectTeam team);
     /**
      * 批量添加
      *

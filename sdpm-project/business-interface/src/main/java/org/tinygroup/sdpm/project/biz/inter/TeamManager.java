@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface TeamManager {
 
+
+    public List<ProjectTeam> find(ProjectTeam team);
     /**
      * 批量添加
      *

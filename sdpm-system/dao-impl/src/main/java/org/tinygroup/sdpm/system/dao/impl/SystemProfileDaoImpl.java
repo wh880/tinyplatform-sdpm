@@ -266,4 +266,40 @@ public class SystemProfileDaoImpl extends TinyDslDaoSupport implements SystemPro
 		}
 		return select;
 	}
+
+	public int softDelete(Integer id) {
+		// TODO Auto-generated method stub
+		SystemProfile systemProfile = new SystemProfile();
+		if(id==null){
+			return 0;
+		}
+		systemProfile.setFileId(id);
+		return getDslTemplate().update(systemProfile, new UpdateGenerateCallback<SystemProfile>() {
+			public Update generate(SystemProfile t) {
+				Update update = update(SYSTEM_PROFILETABLE).set(
+					
+					SYSTEM_PROFILETABLE.FILE_DELETED.value(0)).where(
+					SYSTEM_PROFILETABLE.FILE_ID.eq(t.getFileId()));
+				return update;
+			}
+		});
+	}
+
+	public int editTitle(SystemProfile systemProfile) {
+		// TODO Auto-generated method stub
+		if(systemProfile.getFileId()==null){
+		return 0;
+		}
+		return getDslTemplate().update(systemProfile, new UpdateGenerateCallback<SystemProfile>() {
+
+			public Update generate(SystemProfile t) {
+				// TODO Auto-generated method stub
+				Update update = update(SYSTEM_PROFILETABLE).set(
+						SYSTEM_PROFILETABLE.FILE_TITLE.value(t.getFileTitle())).where(
+								SYSTEM_PROFILETABLE.FILE_ID.eq(t.getFileId()));
+				return update;
+			}
+			
+		});
+	}
 }
