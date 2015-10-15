@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.system.dictinit;
+package org.tinygroup.sdpm.common.util.dict.processor;
 
 import org.tinygroup.application.Application;
 import org.tinygroup.application.ApplicationProcessor;
