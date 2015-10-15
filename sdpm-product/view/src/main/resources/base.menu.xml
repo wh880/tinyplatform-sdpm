@@ -40,19 +40,19 @@
                 <property key="type" value="aModal"/>
             </map>
         </menu>
-        <menu id="demand-alteration" name="变更" href="/product/story/productDemandChange/findPager?storyId=${storySpec.storyId}"
+        <menu id="demand-alteration" name="变更" href="/product/story/productDemandChange/findPager?storyId=${storyId}"
               icon="icon-random" sort="44" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-         <menu id="demand-overview" name="评审" href="/product/story/productDemandReview/findPager?storyId=${storySpec.storyId}"
+         <menu id="demand-overview" name="评审" href="/product/story/productDemandReview/findPager?storyId=${storyId}"
               icon="icon-search" sort="43" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-        <menu id="demand_close" name="关闭" href="/product/story/productDemandClose/findPager?storyId=${storySpec.storyId}" icon="icon-off "
+        <menu id="demand_close" name="关闭" href="/product/story/productDemandClose/findPager?storyId=${storyId}" icon="icon-off "
               sort="42" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon-href"/>
@@ -64,7 +64,7 @@
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-        <menu id="demand-edit" name="编辑" href="/product/storySpec/find?storyId=${storySpec.storyId}" icon="icon-pencil" sort="40"
+        <menu id="demand-edit" name="编辑" href="/product/storySpec/find?storyId=${storyId}" icon="icon-pencil" sort="40"
               isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon"/>

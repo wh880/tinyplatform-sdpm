@@ -31,7 +31,7 @@ public class StorySpecAction extends BaseController{
 		
 		ProductStorySpec storySpec = specService.findStorySpec(story.getStoryId());
 		model.addAttribute("storySpec", storySpec);
-		
+		//model.addAttribute("storyId", story.getStoryId());
 		if ("productDemandDetail".equals(forward)) {
 			
 			return "/product/page/project/demdtablehref.page";
