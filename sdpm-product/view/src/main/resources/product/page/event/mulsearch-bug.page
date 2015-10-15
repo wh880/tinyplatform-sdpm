@@ -356,7 +356,7 @@
         });
         itemlist.push({
             "name":"bugLastEditedBy",
-            "title":"修改者",
+            "title":"最后修改者",
             "operator":"=",
             "value":"user"
         });
@@ -397,7 +397,7 @@
             "value":"date"
         });itemlist.push({
             "name":"bugLastEditedDate",
-            "title":"修改日期",
+            "title":"最后修改日期",
             "operator":"=",
             "value":"date"
         });
