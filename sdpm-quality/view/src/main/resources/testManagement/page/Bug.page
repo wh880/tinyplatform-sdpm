@@ -63,7 +63,7 @@
 				<span class="f">
 					#foreach(m:menuManager.getScopeMenus("testbugleft-tab"))
 						#if(m.id != "tsearch")
-							<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==status?'active_btn':''}">${m.name}</a>
+							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="${m.id==status?'active_btn':''}">${m.name}</a>
 						#else
 							<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 						#end
@@ -91,7 +91,7 @@
     						#@aModal("#myModal" m.name "400" "80" "" m.href "ml-5")
 								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;
 						#else
-							<a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
+							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
     					#end
     				#end
     				#end
@@ -118,10 +118,10 @@
 						#@settoggleLeftBody("treeLeftbox")
 							#@zTreeList(call("link","/system/module/tree?moduleType=story&moduleRoot="+qualityProduct?.productId))
 								#setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
-								#zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/quality/bug?status="+status+"&currentPageId=5")
-								#zTreeSetAddUrl(TINY_CONTEXT_PATH+"/system/module/ajax/save?moduleType=story&moduleRoot="+qualityProduct?.productId)
-								#zTreeSetEditUrl(TINY_CONTEXT_PATH+"/system/module/ajax/save")
-								#zTreeSetDelUrl(TINY_CONTEXT_PATH+"/system/module/ajax/delete")
+								#zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/bug?status="+status+"&currentPageId=5")
+								#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=story&moduleRoot="+qualityProduct?.productId)
+								#zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
+								#zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
 							#end
 						#end
 				#end
@@ -142,7 +142,7 @@
 								<li>
 									#foreach(m:menuManager.getScopeMenus("testbug-op"))
 										#if(m.id=="tmakesure")
-											<a href="${TINY_CONTEXT_PATH}/quality/bug/batch/sure">
+											<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/batch/sure">
 												${m.name}</a>
 										#end
 									#end
@@ -150,7 +150,7 @@
 								<li>
 									#foreach(m:menuManager.getScopeMenus("testbug-op"))
 										#if(m.id=="tversiondelete")
-											<a href="${TINY_CONTEXT_PATH}${m.href}">
+											<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">
 												${m.name}</a>
 										#end
 									#end
@@ -161,25 +161,25 @@
 									<a tabindex="-1" href="javascript:void(0);">解决</a>
 									<ul class="dropdown-menu">
 										<li>
-											<a tabindex="-1" href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">设计如此</a>
+											<a tabindex="-1" href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">设计如此</a>
 										</li>
 										<li>
-											<a tabindex="-1" href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">外部原因</a>
+											<a tabindex="-1" href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">外部原因</a>
 										</li>
 										<li class="dropdown-submenu">
 											<a href="javascript:void(0);">
 												已解决</a>
 											<ul class="dropdown-menu">
 												<li>
-													<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">Admin</a>
+													<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">Admin</a>
 												</li>
 												<li>
-													<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">Trunk</a>
+													<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">Trunk</a>
 												</li>
 											</ul>
 										</li>
 										<li>
-											<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/solution.page">延期解决</a>
+											<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">延期解决</a>
 										</li>
 									</ul>
 									#end
@@ -192,11 +192,11 @@
 											指派给</a>
 									<ul class="dropdown-menu">
 										<li>
-											<a tabindex="-1" href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/assign.page">
+											<a tabindex="-1" href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/assign.page">
 											admin</a>
 										</li>
 										<li>
-											<a tabindex="-1" href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/assign.page">
+											<a tabindex="-1" href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/assign.page">
 											admin1</a>
 										</li>										
 									</ul>
@@ -212,7 +212,7 @@
 					</div>					
 					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				#end
-			#@tinyTableContent(TINY_CONTEXT_PATH+"/quality/bug/findBug?"+requestStatuString)
+			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/bug/findBug?"+requestStatuString)
 				#@thead()
 					#@tr()
 						#@tinyTh({"width":"6"})<input type="checkbox" name="bugId" value="" />#end

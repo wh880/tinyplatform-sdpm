@@ -23,7 +23,7 @@
 	#end
 #end
 			
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/solve" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/solve" "post" {"class":"test"})
 #hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">

@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 @Controller
-@RequestMapping("quality/testCase")
+@RequestMapping("/a/quality/testCase")
 public class TestCaseAction extends BaseController {
 	
 	@Autowired
@@ -48,7 +48,7 @@ public class TestCaseAction extends BaseController {
 	public String form(QualityTestCase testCase, HttpServletRequest request){
 		String queryString = request.getQueryString();
 		if(queryString!=null&&!queryString.contains("status")){
-			return "redirect:/quality/testCase?status=tcaseall&"+queryString;
+			return "redirect:/a/quality/testCase?status=tcaseall&"+queryString;
 		}
 		return "testManagement/page/cases.page";
 	}	
@@ -83,14 +83,14 @@ public class TestCaseAction extends BaseController {
 		systemAction.setActionAction("open");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
-		return "redirect:"+"/quality/testCase";
+		return "redirect:"+"/a/quality/testCase";
 	}
 	
 	@RequestMapping(value = "/batchSave",method = RequestMethod.POST)
 	public String batchSave(List<QualityTestCase> testcases,Model model){
 		testCaseService.batchUpdateTestCase(testcases);
 		model.addAttribute("testcases",testcases);
-		return "redirect:"+"/quality/testCase";
+		return "redirect:"+"/a/quality/testCase";
 	}
 	
 	@RequestMapping("/execution")
@@ -132,7 +132,7 @@ public class TestCaseAction extends BaseController {
 		systemAction.setActionAction("run");
 		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
 		logService.log(systemAction);
-		return "redirect:"+"/quality/testCase";
+		return "redirect:"+"/a/quality/testCase";
 	}
 	
 	//预留，需要新增一个页面
@@ -165,7 +165,7 @@ public class TestCaseAction extends BaseController {
 	public String copySave(QualityTestCase testCase,Model model){
 		testCaseService.addTestCase(testCase);
 		model.addAttribute("testCase", testCase);
-		return "redirect:"+"quality/testCase";
+		return "redirect:"+"/a/quality/testCase";
 	}
 	
 	@RequestMapping("/delete")
@@ -174,13 +174,13 @@ public class TestCaseAction extends BaseController {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("status", "success");
 		map.put("info", "删除成功");
-		return "redirect:"+"quality/testCase";
+		return "redirect:"+"/a/quality/testCase";
 	}
 	
 	@RequestMapping("/batchDelete")
 	public String batchDelete(List<QualityTestCase> testcases,Model model){
 		testCaseService.batchDeleteTestCase(testcases);
-		return "redirect"+"quality/testCase";
+		return "redirect:"+"/a/quality/testCase";
 	}
 	@ResponseBody
 	@RequestMapping("/ajax/story")

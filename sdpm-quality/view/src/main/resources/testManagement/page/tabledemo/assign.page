@@ -21,7 +21,7 @@
 	#end
 #end
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/assignTo" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/assignTo" "post" {"class":"test"})
 #hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
 	<div style="width:67%;float:left">
     	<div class="infoContent">
@@ -69,7 +69,7 @@
             </div>
             <div class="col-1"></div>
             <div class="col-1">
-#*                <a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">
+#*                <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/Bug.page">
                 <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>*#
                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
             </div>

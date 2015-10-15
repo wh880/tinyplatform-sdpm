@@ -8,9 +8,9 @@
 #@div()
 	#@div(divClass="tabLayout")
 		#@div(divClass="tabBar cl")
-			<span><a href="${TINY_CONTEXT_PATH}/page/project/Bug.page">Bug</a></span>
-			<span class="Current"><a href="${TINY_CONTEXT_PATH}/page/project/cases.page">用例</a></span>
-			<span><a href="${TINY_CONTEXT_PATH}/page/project/version.page">版本</a></span>
+			<span><a href="${TINY_CONTEXT_PATH+adminPath}/page/project/Bug.page">Bug</a></span>
+			<span class="Current"><a href="${TINY_CONTEXT_PATH+adminPath}/page/project/cases.page">用例</a></span>
+			<span><a href="${TINY_CONTEXT_PATH+adminPath}/page/project/version.page">版本</a></span>
 		#end
 	#end
 			##operationbar start1

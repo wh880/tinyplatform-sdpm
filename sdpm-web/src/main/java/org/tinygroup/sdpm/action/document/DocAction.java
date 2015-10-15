@@ -54,10 +54,10 @@ public class DocAction {
 	private ProfileService profileService;
 	
 	@RequestMapping("")
-	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange)
+	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange,String tree)
 	{	
 		List<DocumentDoclib> list=docservice.findDoclibList(new DocumentDoclib());				
-		if(list.size()>0&&!("true".equals(change))&&!("true".equals(docChange))){
+		if(list.size()>0&&!("true".equals(change))&&!("true".equals(docChange))&&!("true".equals(tree))){
 			if(null==request.getSession().getAttribute("documentLibId")||doclib.getDocLibId()==null){
 				request.getSession().setAttribute("documentLibId",list.get(0).getDocLibId());
 			}else {

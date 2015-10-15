@@ -54,7 +54,7 @@
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-#*            <a href="${TINY_CONTEXT_PATH}/testManagement/page/versionSituation.page">
+#*            <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionSituation.page">
                 <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>*#
                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
             </div>

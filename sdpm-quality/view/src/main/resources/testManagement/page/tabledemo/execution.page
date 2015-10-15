@@ -1,4 +1,4 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/testCase/execute" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/execute" "" {"class":"test"})
 #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testcase?.caseId)
     #@div(divClass="infoContent")
    <p><b>前置条件&nbsp</b>${testcase?.casePrecondition}</p>
