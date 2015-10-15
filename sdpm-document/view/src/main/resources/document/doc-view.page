@@ -43,8 +43,16 @@
     #foreach(f : file)
     	 #set(path=f?.filePathname)
     		<a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
-    		<a href="${TINY_CONTEXT_PATH}/" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>&nbsp
-    		<a href="${TINY_CONTEXT_PATH}/" title="删除">#buttonIcon(iconClass="icon-remove")</a>
+    		#foreach(m:menuManager.getScopeMenus("file-op"))
+				#if(m.id == "file-edit")					
+    				#@aModal("#myModal" m.name "400" "80" "class-m" m.href)
+        	        	#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp
+        	    #else
+        	    	#@tinyTableItemRemove(TINY_CONTEXT_PATH+m.href f?.fileId)
+						<i class="${m.icon}" title="删除"></i>
+				#end
+        	    #end
+        	#end    		
     #end
    
     #else <p class="titleName">网页</p>
