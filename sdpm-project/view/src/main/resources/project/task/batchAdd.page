@@ -71,7 +71,8 @@
                                 #end
                             #end
                             #@Tselect2Fix()
-
+                            <a href="${TINY_CONTEXT_PATH}/product/story/save">新增</a>
+                            <a href="${TINY_CONTEXT_PATH}/product/story/search">全部</a>
                             #end
                         #end
                         #@validateDiv("col-2")#end
