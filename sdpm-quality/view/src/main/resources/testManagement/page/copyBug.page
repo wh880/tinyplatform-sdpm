@@ -93,6 +93,7 @@
 									$("#${sid}").on("change",function(){
 										var pId = $("#${sid}  option:selected").val();
 										ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0});
+										ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProject="+pId,${bug?.buildId?:0});
 									})
 								</script>
 	                    	#@Tselect2Fix()
@@ -110,10 +111,7 @@
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-								<option value="0">/</option>
-								#foreach(build : buildList)
-								<option value="${build?.buildId}">${build?.buildName}</option>
-								#end
+
 	                    	#end                
 #*	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
