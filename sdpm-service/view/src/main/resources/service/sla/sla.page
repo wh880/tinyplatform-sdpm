@@ -25,7 +25,7 @@
 
                 #set(m2=menuManager.getMenu("sla-add"))
                 #if(m2)
-                    <a href="${TINY_CONTEXT_PATH}${m2.href}">#buttonIcon(iconClass=m2.icon)${m2.name}</a>
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m2.href}">#buttonIcon(iconClass=m2.icon)${m2.name}</a>
                 #end
 				</span>
                 #div(divClass="clearfix")
@@ -37,10 +37,10 @@
             #@toggleLeft({"class":"aclass"})
                 #@settoggleLeftTitle()所有产品#end
                 #@settoggleLeftBody("treeLeftbox")
-                    #@zTreeList(call("link","/service/sla/treeData"))
+                    #@zTreeList(call("link",adminPath+"/service/sla/treeData"))
                         #setzTreeValMap({"id":"treeId","name":"pName","pid":
                             "pId"}) ##Id中带"p"的为productLine的ID，其余的为productde ID
-                        #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/service/sla/list" )
+                        #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/service/sla/list" )
                     #end
                 #end
             #end

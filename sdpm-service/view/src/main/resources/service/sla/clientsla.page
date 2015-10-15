@@ -19,8 +19,12 @@
                 #@iconOperations(
                     "#myModal1" "icon-download-alt" "导出" "600" "100" "/service/sla/slaExport.pagelet" "ml-5")
                     导出#end
-                <a href="${TINY_CONTEXT_PATH}/service/sla/slaAdd.page"
-                   title="新建协议">#buttonIcon(iconClass="icon-plus")新建协议</a>
+                #set(m1=menuManager.getMenu("add"))
+                #if(m1)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}">#buttonIcon(iconClass=m1.icon)${m1.name}</a>
+                #end
+            #*<a href="${TINY_CONTEXT_PATH}/service/sla/slaAdd.page"
+               title="新建协议">#buttonIcon(iconClass="icon-plus")新建协议</a>*#
                 <a href="${TINY_CONTEXT_PATH}/service/sla/sla.page"
                    title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
             </span>
