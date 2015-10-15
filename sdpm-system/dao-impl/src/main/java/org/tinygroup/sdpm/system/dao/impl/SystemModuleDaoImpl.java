@@ -18,6 +18,7 @@ package org.tinygroup.sdpm.system.dao.impl;
 
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.*;
+import static org.tinygroup.sdpm.system.dao.constant.SystemDictTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
@@ -116,6 +117,22 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
 				return delete(SYSTEM_MODULETABLE).where(SYSTEM_MODULETABLE.MODULE_ID.eq(pk));
 			}
 		});
+	}
+	public int deletebyKeyAndedit(Integer id){
+		if(id==null){
+			return 0;
+		}else
+		{
+		Delete delete=delete(SYSTEM_MODULETABLE).where(SYSTEM_MODULETABLE.MODULE_ID.eq(id));
+		int n=getDslTemplate().getDslSession().execute(delete);
+		Update update=update(SYSTEM_DICTTABLE).set(SYSTEM_DICTTABLE.DELETED.value(1)).where
+				(SYSTEM_DICTTABLE.MODULE_ID.eq(id));
+		int m=getDslTemplate().getDslSession().execute(update);
+		if(n==1&&m==1){
+			return 1;}
+		}
+		return 1;
+		
 	}
 
 	public int deleteByKeys(Integer... pks) {

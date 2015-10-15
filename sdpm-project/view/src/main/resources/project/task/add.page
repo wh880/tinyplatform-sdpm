@@ -155,7 +155,7 @@
     #end
     #@elementItem()
         #@sdpmItem("附件")
-            #fileWithInput("file-1")
+            #fileWithInput("file")
         #end
     #end
     #@elementItem()
