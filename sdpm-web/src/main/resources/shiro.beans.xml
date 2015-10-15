@@ -108,6 +108,7 @@
     <!--<property name="activeSessionsCacheName" value="shiro-activeSessionCache"/>-->
     <!--<property name="cacheManager" ref="shiroCacheManager"/>-->
     <!--</bean>-->
+
     <!-- 用户授权信息Cache, 采用EhCache -->
     <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManager" ref="ecacheManager"/>
