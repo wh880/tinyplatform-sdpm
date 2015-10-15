@@ -53,9 +53,9 @@
                                 #foreach(m : modulesList)
                                 <option value=${m.moduleId}>${m.moduleName}</option>
                                 #end
-                            ##填写任意内容，侦听需重新填加 A侦听已内置
-                                #@Tselect2Fix()</a><a
-                                        href="${TINY_CONTEXT_PATH}/product/page/project/product-modular.page">全部</a>#end
+                                #@Tselect2Fix()
+
+                                #end
                             #end
                             #@validateDiv("col-2")#end
                         #end
@@ -64,17 +64,15 @@
                         #@Tselect2F()
                             #@Tselect2Body(
                                 "taskList["+i+"].taskStory" "" {"class":
-                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                "input-text select2"})
                             <option value=""></option>
                                 #foreach(s : storyList)
                                 <option value=${s.storyId}>${s.storyTitle}</option>
                                 #end
                             #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a
-                                    href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
-                                    class="r ">增加</a><a
-                                    href="${TINY_CONTEXT_PATH}/project/demand/index.page">全部</a>#end
+                            #@Tselect2Fix()
+
+                            #end
                         #end
                         #@validateDiv("col-2")#end
                     #end
@@ -100,8 +98,6 @@
                                 <option value="7">事物</option>
                                 <option value="8">其他</option>
                                 #end
-                            ##填写任意内容，侦听需重新填加 A侦听已内置
-
                             #end
                         #end
                         #@validateDiv("col-2")#end
@@ -117,10 +113,10 @@
                                     <option value="${t.teamAccount}">${t.teamAccount}</option>
                                     #end
                                 #end
-                            ##填写任意内容，侦听需重新填加 A侦听已内置
-                                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page"
-                                                  class="r ">增加</a><a
-                                        href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
+                                #@Tselect2Fix()
+                                <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
+                                <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
+                                #end
                             #end
                         #end
                         #@validateDiv("col-2")#end
@@ -143,8 +139,6 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                             #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
-
                         #end
                         #@validateDiv("col-2")#end
                     #end

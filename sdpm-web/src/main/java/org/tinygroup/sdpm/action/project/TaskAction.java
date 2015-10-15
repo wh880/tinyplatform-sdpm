@@ -199,8 +199,9 @@ public class TaskAction extends BaseController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(ProjectTask task, Model model) {
+        ProjectTask res = new ProjectTask();
         if (task.getTaskId() == null) {
-            taskService.addTask(task);
+            res = taskService.addTask(task);
         } else {
             taskService.updateTask(task);
         }
