@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.config.Global;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -26,9 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @Controller
-@RequestMapping("/org/user")
+@RequestMapping("a/org/user")
 public class UserAction extends BaseController {
     @Autowired
     private UserService userService;
@@ -65,13 +65,11 @@ public class UserAction extends BaseController {
             userService.updateUser(user);
         }
         model.addAttribute("user", user);
-        return "redirect:/org/user/list/";
+        return "redirect:" + Global.getAdminPath() + "/org/user/list/";
     }
 
     @RequestMapping("/list")
     public String list(OrgUser orgUser, Model model) {
-//        List<OrgUser> list = userService.findUserList(orgUser);
-//        model.addAttribute("list", list);
         return "organization/user/user.page";
     }
 
@@ -90,8 +88,7 @@ public class UserAction extends BaseController {
         } else {
             return "organization/user/delect.pagelet";
         }
-
-        return "redirect:/org/user/list/";
+        return "redirect:" + Global.getAdminPath() + "/org/user/list/";
     }
 
     @ResponseBody
@@ -139,26 +136,21 @@ public class UserAction extends BaseController {
     @ResponseBody
     @RequestMapping("/userList")
     public List<OrgUser> findUser(OrgUser orgUser) {
-
         List<OrgUser> list = userService.findUserList(orgUser);
-
         return list;
     }
 
     @RequestMapping("/story")
     public String storyJump() {
-
         return "/organization/user/storyAdmin.page";
     }
 
     @RequestMapping("/story/search")
     public String storySearchAction(String id, int page, int pagesize, String choose, ProductStory story, String order, String ordertype, Model model, HttpServletRequest request) {
-
         if (choose.equals("6")) {
             story.setStoryClosedBy(id);
             Pager<ProductStory> p4 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p4);
-
         } else if (choose.equals("4")) {
             story.setStoryOpenedBy(id);
             Pager<ProductStory> p2 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
@@ -173,7 +165,6 @@ public class UserAction extends BaseController {
             story.setStoryAssignedTo(id);
             Pager<ProductStory> p1 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p1);
-
         }
         return "organization/user/userStoryTable.pagelet";
     }

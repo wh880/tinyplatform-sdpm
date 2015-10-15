@@ -381,11 +381,6 @@
 
             <dependency>
                 <groupId>org.tinygroup</groupId>
-                <artifactId>org.tinygroup.jcscache</artifactId>
-                <version>${tiny_version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.tinygroup</groupId>
                 <artifactId>org.tinygroup.dict</artifactId>
                 <version>${tiny_version}</version>
             </dependency>

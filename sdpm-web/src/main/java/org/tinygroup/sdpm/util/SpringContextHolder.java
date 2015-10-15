@@ -56,7 +56,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
      */
     public static void clearHolder() {
         if (logger.isEnabled(LogLevel.DEBUG)) {
-            logger.log(LogLevel.DEBUG, "清除SpringContextHolder中的ApplicationContext:" + applicationContext);
+            logger.logMessage(LogLevel.DEBUG, "清除SpringContextHolder中的ApplicationContext:" + applicationContext);
         }
         applicationContext = null;
     }
@@ -66,7 +66,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
      */
     private static void assertContextInjected() {
         if (applicationContext != null) {
-            logger.log(LogLevel.INFO, "applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
+            logger.logMessage(LogLevel.INFO, "applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
         }
     }
 

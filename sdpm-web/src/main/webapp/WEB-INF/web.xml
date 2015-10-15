@@ -10,10 +10,9 @@
     </welcome-file-list>
 
     <listener>
-        <listener-class>
-            org.tinygroup.weblayer.ApplicationStartupListener
-        </listener-class>
+        <listener-class>org.tinygroup.weblayer.ApplicationStartupListener</listener-class>
     </listener>
+
     <filter>
         <filter-name>TinyFilter</filter-name>
         <filter-class>org.tinygroup.weblayer.TinyHttpFilter</filter-class>
