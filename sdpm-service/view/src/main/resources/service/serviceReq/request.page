@@ -12,10 +12,10 @@
             <span class="f">
                #set(m=menuManager.getMenu("request-all"))
                 #if(m)
-                    <a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a>
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">${m.name}</a>
                 #end
                 #foreach(m:menuManager.getScopeMenus("service-request-list"))
-                    <a href="${TINY_CONTEXT_PATH}${m.href}&treeId=${treeId}">${m.name}</a>
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}&treeId=${treeId}">${m.name}</a>
                 #end
                 <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
@@ -24,16 +24,16 @@
                 #set(m1=menuManager.getMenu("request-export"))
                 #if(m1)
                     #@iconOperations(
-                        "#myModal" "icon-download-alt" "导出" "600" "100" m1.href "ml-5")${m1.name}#end
+                        "#myModal" "icon-download-alt" "导出" "600" "300" m1.href "ml-5")${m1.name}#end
                 #end
             ##################报表
             ##                #set(m2=menuManager.getMenu("request-form"))
             ##                #if(m2)
-            ##                    <a href="${TINY_CONTEXT_PATH}${m2.href}">#buttonIcon(iconClass="icon-bar-chart")${m2.name}</a>
+            ##                    <a href="${TINY_CONTEXT_PATH+adminPath}${m2.href}">#buttonIcon(iconClass="icon-bar-chart")${m2.name}</a>
             ##                #end
                 #set(m3=menuManager.getMenu("request-add"))
                 #if(m3)
-                    <a href="${TINY_CONTEXT_PATH}${m3.href}">#buttonIcon(iconClass="icon-plus")${m3.name}</a>
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m3.href}">#buttonIcon(iconClass="icon-plus")${m3.name}</a>
                 #end
 
 				</span>
@@ -47,10 +47,10 @@
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()所有产品#end
             #@settoggleLeftBody("treeLeftbox")
-                #@zTreeList(call("link","/service/client/treeData"))
+                #@zTreeList(call("link",adminPath+"/service/client/treeData"))
                     #setzTreeValMap({"id":"treeId","name":"pName","pid":
                         "pId"}) ##Id中带"p"的为productLine的ID，其余的为productde ID
-                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/service/request/list" )
+                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/service/request/list" )
                 #end
             #end
         #end

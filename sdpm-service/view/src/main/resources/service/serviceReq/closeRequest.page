@@ -10,7 +10,7 @@
 #set(name="request")
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/request/close/date" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/request/close/date" "post" {"class":"test"})
 <input type="hidden" name="clientRequestId" value="${clientRequestId}"/>
     #@noRespsGridSystem()
         #@gridSysRow()

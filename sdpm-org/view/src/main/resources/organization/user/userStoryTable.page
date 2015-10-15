@@ -22,7 +22,7 @@
                 if (storyList.length > 0) {
                     $.ajax({
                         type: "POST",
-                        url: "${TINY_CONTEXT_PATH}/product/story/updateBatch",
+                        url: "${TINY_CONTEXT_PATH+adminPath}/product/story/updateBatch",
                         data: JSON.stringify(storyList),//将对象序列化成JSON字符串
                         dataType: "json",
                         contentType: 'application/json;charset=utf-8', //设置请求头信息
@@ -73,7 +73,7 @@
     #@td()${story.storyId}#end
     #@td()${story.storyPri}#end
     #@td()
-    <a href="${TINY_CONTEXT_PATH}/project/task/index.page">${story.productName}</a>
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">${story.productName}</a>
     #end
     #@td()${story.storyTitle}#end
     #@td()${story.planName}#end

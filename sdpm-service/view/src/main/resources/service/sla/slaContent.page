@@ -41,7 +41,7 @@
     ##            #end
     ##        </div>
     <div style="text-align:right;margin:right">
-    #*  #@aExtendButton("btn-primary btn-sm" TINY_CONTEXT_PATH+"/service/sla/form")编辑#end
+    #*  #@aExtendButton("btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+"/service/sla/form")编辑#end
       #@delItemsdpm("#action" "id" "/service/client/clientProduct.page" {"class":"btn radius btn-danger btn-sm"})
        删除#end*#
         #foreach(m:menuManager.getScopeMenus("SlaContent"))

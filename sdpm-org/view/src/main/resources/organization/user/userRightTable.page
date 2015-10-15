@@ -10,14 +10,14 @@
         #setTinyTablePageSize([8,10,20,50,100,200])
         #set(m1=menuManager.getMenu("org-user-batchdel"))
         #if(m1)
-            #@mulOperation("muldelete" TINY_CONTEXT_PATH+"/org/user/batchDelete")
+            #@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/org/user/batchDelete")
             <a href="javascript:;" class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
             #end
         #end
 
         #set(m2=menuManager.getMenu("org-user-add"))
         #if(m2)
-            #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+
+            #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
                 "/org/user/form")#buttonIcon(iconClass=m2.icon)添加#end
         #end
     ##        #@aModal(editpageModal "添加" "865" "420" "btn radius btn-primary btn-sm" editpagePath)
@@ -27,7 +27,7 @@
     ##            #@simpleI("icon-plus")批量添加#end
     ##        #end
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/org/user/list/data?orgDeptId="+orgDeptId) ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org/user/list/data?orgDeptId="+orgDeptId) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

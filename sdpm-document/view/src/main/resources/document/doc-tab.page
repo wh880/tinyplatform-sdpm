@@ -12,7 +12,7 @@
         	        		#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp
         	       	#else
         	       		#if(m.id == "doclib-delete")
-        	       			 #@delItemsdpm(TINY_CONTEXT_PATH+m.href documentLibId TINY_CONTEXT_PATH+"/document")
+        	       			 #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href documentLibId TINY_CONTEXT_PATH+adminPath+"/document")
 								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp	
 						#else	
 							#@aModal("#myModal" m.name "400" "120" "class-m" m.href)

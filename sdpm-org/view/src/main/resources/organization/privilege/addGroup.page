@@ -28,7 +28,7 @@
 #@noRespsGridSystem()
     #@gridSysCol(3)#end
     #@gridSysCol(6)
-        #@tinyForm("thisform" TINY_CONTEXT_PATH+"/org/privilege/save" "post" {"class":"test"})
+        #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/privilege/save" "post" {"class":"test"})
         <input type="hidden" name="orgRoleId" value="${role?.orgRoleId}"/>
             #@gridSysRow()
                 #@colLabel("col-2")<span class="c-red">*</span>角色名称：#end
