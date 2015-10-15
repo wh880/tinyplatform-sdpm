@@ -26,7 +26,7 @@
             <input type="hidden" name="taskProject" value="${selProject.projectId}"/>
             ${selProject.projectName}
         #end
-    #end
+        #end
     #@elementItem()
         #@sdpmItem("所属模块")
             #@Tselect2F()
@@ -36,13 +36,14 @@
                     #foreach(m : moduleList)
                         <option value=${m.moduleId}>${m.moduleName}</option>
                     #end
-                #end
+                    #end
             ##填写任意内容，侦听需重新填加 A侦听已内置
-                    #@Tselect2Fix()</a><a
-                        href="${TINY_CONTEXT_PATH}/product/page/project/product-modular.page">全部</a>#end
+                #@Tselect2Fix()
+                    <a href="${TINY_CONTEXT_PATH}/product/page/project/product-modular.page">全部</a>
+                #end
+                #end
             #end
         #end
-    #end
     #@elementItem()
         #@sdpmItem("任务类型")
             #@Tselect2F()
@@ -59,11 +60,9 @@
                     <option value="7">事物</option>
                     <option value="8">其他</option>
                 #end
-            ##填写任意内容，侦听需重新填加 A侦听已内置
-
+                #end
             #end
         #end
-    #end
     #@elementItem()
         #@sdpmItem("指派给")
             #@Tselect2F()
@@ -71,41 +70,43 @@
                     #foreach(t : team)
                         <option value="${t.teamAccount}">${t.teamAccount}</option>
                     #end
-                #end
+                    #end
             ##填写任意内容，侦听需重新填加 A侦听已内置
                 #@Tselect2Fix()
-                    <a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a>
-                    <a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>
+                    <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
+                    <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
+                #end
                 #end
             #end
         #end
-    #end
-    #@elementItem()
-        #@sdpmItem("相关需求")
-            #@Tselect2F()
-                #@Tselect2Body("taskStory" story.storyId==null?"":story.storyId {"class":
-                    "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value=""></option>
-                    #foreach(s : storyList)
-                        <option value=${s.storyId}>${s.storyTitle}</option>
+#@elementItem()
+    #@sdpmItem("相关需求")
+        #@Tselect2F()
+            #@Tselect2Body("taskStory" story.storyId==null?"":story.storyId {"class":
+                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                <option value=""></option>
+                #foreach(s : storyList)
+                    <option value=${s.storyId}>${s.storyTitle}</option>
+                #end
                     #end
-                #end
-            ##填写任意内容，侦听需重新填加 A侦听已内置
-                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page"
-                                  class="r ">增加</a><a href="${TINY_CONTEXT_PATH}/project/demand/index.page">全部</a>#end
+        ##填写任意内容，侦听需重新填加 A侦听已内置
+            #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
+                <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
             #end
-        #end
-    #end
+                #end
+            #end
     #@elementItem()
         #@sdpmItem("任务名称")
             #@formControlDiv("col-8")
                 #tinyInput(
-                    "text" "taskName" "abcdefg"{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！","id":
+                    "text" "taskName" "abcdefg"{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！",
+                    "id":
                     "username","class":
                     "input-text"})
             #end
         #end
-    #end
+            #end
     #@elementItem()
         #@sdpmItem("任务描述")
             #@formControlDiv("col-8")
@@ -114,7 +115,7 @@
                     "username",
                     "class":"input-text"})
             #end
-        #end
+                #end
     #end
     #@elementItem()
         #@sdpmItem("优先级")
@@ -130,7 +131,7 @@
 
             #end
         #end
-    #end
+            #end
     #@elementItem()
         #@sdpmItem("最初预计")
             #@formControlDiv("col-8")
@@ -138,7 +139,7 @@
                     "username","class":"input-text"})
             #end
         #end
-    #end
+            #end
     #@elementItem()
         #@sdpmItem("抄送给")
             #@Tselect2F()
@@ -148,52 +149,53 @@
                     #end
                 #end
             ##填写任意内容，侦听需重新填加 A侦听已内置
-                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a><a
-                        href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
+                #@Tselect2Fix()
+                    <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
+                    <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
+                #end
             #end
         #end
     #end
     #@elementItem()
         #@sdpmItem("附件")
-            #fileWithInput("file-1")
+            #fileWithInput("file")
         #end
-    #end
-    #@elementItem()
-        #@sdpmItem("添加之后")
-            #@formControlDiv("skin-minimal col-9")
-                #@tinyRadio("sex" "man" "man" {"nullmsg":"请选择性别！","datatype":"*"})继续为需求添加任务#end
-                #@tinyRadio("sex" "women" "man")返回任务列表#end
-                #@tinyRadio("sex" "secret" "man")返回需求列表#end
+        #@elementItem()
+            #@sdpmItem("添加之后")
+                #@formControlDiv("skin-minimal col-9")
+                    #@tinyRadio("sex" "man" "man" {"nullmsg":"请选择性别！","datatype":"*"})继续为需求添加任务#end
+                    #@tinyRadio("sex" "women" "man")返回任务列表#end
+                    #@tinyRadio("sex" "secret" "man")返回需求列表#end
+                    #end
+                #end
             #end
+
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：</label></div>
+
+                <div class="col-9">
+                    #@Teditor("content" "content" {"initialFrameHeight":"150"})#end</div>
+            </div>
+            #end
+        <br/>
         #end
-    #end
+</div>
 
     #@elementItem()
         <div class="col-12">
-            <div class="col-2 text-r"><label>备注：</label></div>
+            <div class="col-5">
 
-            <div class="col-9">
-                #@Teditor("content" "content" {"initialFrameHeight":"150"})#end</div>
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+            </div>
+            <div class="col-5"></div>
         </div>
     #end
-    <br/>
-#end
-</div>
-
-#@elementItem()
-    <div class="col-12">
-        <div class="col-5">
-
-        </div>
-        <div class="col-1">
-            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-        </div>
-        <div class="col-1">
-            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
-        </div>
-        <div class="col-5"></div>
-    </div>
-#end
     <br>
 </div>
 

@@ -77,5 +77,8 @@ public class ProfileUtil extends BaseController{
 	        profile.setFileSize((int)size);
 	        profileService.add(profile);
 	   }
+	   public void editFile(SystemProfile file){
+		   
+	   }
 	
 }

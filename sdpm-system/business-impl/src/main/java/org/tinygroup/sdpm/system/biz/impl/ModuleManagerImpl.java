@@ -92,4 +92,9 @@ public class ModuleManagerImpl implements ModuleManager{
 		return systemModuleDao.query(systemModule);
 	}
 
+	public int deleteAndedit(Integer id) {
+		// TODO Auto-generated method stub
+		return systemModuleDao.deletebyKeyAndedit(id);
+	}
+
 }

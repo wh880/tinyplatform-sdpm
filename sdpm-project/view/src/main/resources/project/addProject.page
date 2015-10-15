@@ -83,8 +83,6 @@
                     <option value="1">短期项目</option>
                     <option value="2">运维项目</option>
                 #end
-            ##填写任意内容，侦听需重新填加 A侦听已内置
-            ##@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
             #end
         #end
     #end

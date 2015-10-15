@@ -6,8 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
+import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -27,6 +30,8 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -198,9 +203,16 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(ProjectTask task, Model model) {
+    public String save(ProjectTask task,  @RequestParam(value="file",required=false)MultipartFile file,Model model) {
         if (task.getTaskId() == null) {
-            taskService.addTask(task);
+          ProjectTask newtask=  taskService.addTask(task);
+          ProfileUtil profileUtil = new ProfileUtil();
+          try {
+			profileUtil.uploadNoTitle(file, newtask.getTaskId(), "task");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         } else {
             taskService.updateTask(task);
         }
@@ -209,7 +221,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/closesave", method = RequestMethod.POST)
-    public String closesave(ProjectTask task, Model model, SystemAction systemAction) {
+    public String closesave(ProjectTask task,Model model, SystemAction systemAction) {
         taskService.updateCloseTask(task);
 
         systemAction.setActionObjectId(task.getTaskId());
