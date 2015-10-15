@@ -18,7 +18,7 @@ import org.tinygroup.sdpm.system.dao.pojo.Holiday;
 import org.tinygroup.sdpm.system.service.inter.HolidayService;
 import org.tinygroup.tinysqldsl.Pager;
 @Controller
-@RequestMapping("system")
+@RequestMapping("a/system")
 public class HolidayAction extends BaseController{
 	@Autowired
 	private HolidayService holidayService;

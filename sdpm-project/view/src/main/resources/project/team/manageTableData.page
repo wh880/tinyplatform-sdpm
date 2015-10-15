@@ -20,7 +20,7 @@
     #@td()48#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("pro-team-op"))
-            #@tinyTableItemRemove(TINY_CONTEXT_PATH+m.href t.id)<i class=${m.icon}></i>#end
+            #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href t.id)<i class=${m.icon}></i>#end
         #end
     #end
 #end

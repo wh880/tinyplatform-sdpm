@@ -46,4 +46,9 @@ public class ProfileServiceImpl implements ProfileService {
 		return profileManager.softDelete(id);
 	}
 
+	public SystemProfile findById(Integer id) {
+		// TODO Auto-generated method stub
+		return profileManager.findById(id);
+	}
+
 }

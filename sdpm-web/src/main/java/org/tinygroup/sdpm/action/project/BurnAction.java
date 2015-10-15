@@ -23,7 +23,7 @@ import java.util.List;
  * Created by wangying14938 on 2015-09-22.燃尽图
  */
 @Controller
-@RequestMapping("/project/burn")
+@RequestMapping("/a/project/burn")
 public class BurnAction extends BaseController {
     @Autowired
     private BurnService burnService;

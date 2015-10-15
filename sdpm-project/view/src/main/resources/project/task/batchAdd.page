@@ -26,7 +26,7 @@
     #end
 #end
 ##operationbar end
-#@tinyForm("bathAddForm" TINY_CONTEXT_PATH+"/project/task/batchAdd" "post" {"class":"test"})
+#@tinyForm("bathAddForm" TINY_CONTEXT_PATH+adminPath+"/project/task/batchAdd" "post" {"class":"test"})
     #@tableBorder("out-border")
         #@thead()
             #@tr("text-c")

@@ -10,7 +10,7 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
 @Controller
-@RequestMapping("system/history")
+@RequestMapping("a/system/history")
 public class HistoryAction extends BaseController{
 	@Autowired
 	private HistoryService historyService;

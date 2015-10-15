@@ -9,15 +9,16 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 @Controller
-@RequestMapping("system/profile")
+@RequestMapping("a/system/profile")
 public class ProfileAction extends BaseController{
 	@Autowired
 	ProfileService profileService;
 	@RequestMapping("find/{type}")
-	public String  find(SystemProfile profile,@PathVariable(value="type")String type,Model model){
+	public String  find(int fileId,@PathVariable(value="type")String type,Model model){
 		if("doc".equals(type)){
-			profileService.find(profile);
-			return null;
+			SystemProfile profile=profileService.findById(fileId);
+			model.addAttribute("profile", profile);
+			return "/document/file-edit.pagelet";
 		}
 		return null;
 	}
@@ -25,11 +26,11 @@ public class ProfileAction extends BaseController{
 	public String eidt(SystemProfile profile,@PathVariable(value="type")String type,Model model){
 		if("doc".equals(type)){
 			profileService.editTitle(profile);
-			return null;
+			return "redirect:"+"/document/doc/view";
 		}
 		return null;
 	}
-	@RequestMapping("edit/{type}")
+	@RequestMapping("delete/{type}")
 	public String delete(Integer id,@PathVariable(value="type")String type){
 		if("doc".equals(type)){
 			profileService.softDelete(id);

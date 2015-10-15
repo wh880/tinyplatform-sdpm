@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/system/module")
+@RequestMapping("a/system/module")
 public class ModuleAction extends BaseController {
     @Autowired
     private ModuleService moduleService;

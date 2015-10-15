@@ -25,7 +25,7 @@ import java.util.Map;
  * Created by wangying14938 on 2015-09-22.需求
  */
 @Controller
-@RequestMapping("/project/demand")
+@RequestMapping("/a/project/demand")
 public class ProjectstoryAction extends BaseController {
     @Autowired
     private ProjectStoryService projectStoryService;
