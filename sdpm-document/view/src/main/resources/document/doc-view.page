@@ -45,13 +45,13 @@
     		<a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
     		#foreach(m:menuManager.getScopeMenus("file-op"))
 				#if(m.id == "file-edit")					
-    				#@aModal("#myModal" m.name "400" "80" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
-        	        	#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp
+    				#@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
+        	        	#buttonIcon(iconClass=m.icon)#end&nbsp
         	    #else
         	    	#@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId)
 						<i class="${m.icon}" title="删除"></i>
-				#end
-        	    #end</br>
+					#end<br>
+        	    #end
         	#end    		
     #end
    

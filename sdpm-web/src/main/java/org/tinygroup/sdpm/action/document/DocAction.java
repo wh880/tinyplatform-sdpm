@@ -322,7 +322,7 @@ public class DocAction {
 	public String saveDocument(DocumentDoc doc,@PathVariable(value="type")String type){
 		if("save".equals(type)){
 			docservice.createNewDoc(doc);
-			return "redirect:"+"/a/product/page/project/archive-list.page";
+			return "redirect:"+"/product/page/project/archive-list.page";
 		}else if ("update".equals(type)) {
 
 			docservice.editDoc(doc);
