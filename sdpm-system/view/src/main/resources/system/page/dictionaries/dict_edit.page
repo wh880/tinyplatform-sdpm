@@ -45,7 +45,7 @@
 ####     #end		
 ###end
 ###set(module?.moduleType="dict")
- #@tinyForm("dictEditform" TINY_CONTEXT_PATH+"/system/module/save" "post" {"class":""})
+ #@tinyForm("dictEditform" TINY_CONTEXT_PATH+"/a/system/module/save" "post" {"class":""})
       <input type="hidden" name="moduleId" value="${module?.moduleId}"/>
        <input type="hidden" name="moduleType" value="dict"/>
        #@gridSysRow()

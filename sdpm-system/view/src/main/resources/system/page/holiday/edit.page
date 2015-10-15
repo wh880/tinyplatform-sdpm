@@ -4,7 +4,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
 #!set(linkName="demand")
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/system/holiday/save" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/a/system/holiday/save" "post" {"class":"test"})
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">编辑</p>

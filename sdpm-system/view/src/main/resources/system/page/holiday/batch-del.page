@@ -1,4 +1,4 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/system/holiday/batchDelete" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/a/system/holiday/batchDelete" "post" {"class":"test"})
 	
 	 #@tableStriped()
 	 	
