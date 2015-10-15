@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,6 +58,7 @@ public class BuildAction extends BaseController {
     public String look(Integer buildId, Model model) {
         return "project/bug/index.page";
     }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(ProjectBuild build, Model model) {
         if (build.getBuildId() == null) {
@@ -69,7 +71,7 @@ public class BuildAction extends BaseController {
     }
 
     @RequestMapping("/edit")
-    public String edit(HttpServletRequest request,Integer buildId, Model model) {
+    public String edit(HttpServletRequest request, Integer buildId, Model model) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
         SystemModule module = new SystemModule();
         module.setModuleType("project");
@@ -79,13 +81,12 @@ public class BuildAction extends BaseController {
         model.addAttribute("teamList", teamList);
         model.addAttribute("prodcutList", list);
         if (buildId != null) {
-            ProjectBuild build =buildService.findBuild(buildId);
-            model.addAttribute("build",build);
+            ProjectBuild build = buildService.findBuild(buildId);
+            model.addAttribute("build", build);
 
         }
         return "project/version/edit.page";
     }
-
 
 
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
@@ -98,6 +99,7 @@ public class BuildAction extends BaseController {
         model.addAttribute("build", build);
         return "project/version/index.page";
     }
+
     @RequestMapping(value = "/addsave", method = RequestMethod.POST)
     public String addSave(ProjectBuild build, Model model) {
         if (build.getBuildId() == null) {
@@ -130,27 +132,29 @@ public class BuildAction extends BaseController {
     public String jumpalBug() {
         return "/project/task/relation-release/product-al-bug.page";
     }
+
     @RequestMapping("/product-al-le-bug")
     public String jumpleBug() {
         return "/project/task/relation-release/product-al-le-bug.page";
     }
+
     @RequestMapping("/product-al-no-bug")
     public String jumpanoBug() {
         return "/project/task/relation-release/product-al-no-bug.page";
     }
+
     @ResponseBody
-    @RequestMapping(value="/batchDelete")
-    public Map bctchDelDoc(String ids)
-    {
-        Map<String,String> map = new HashMap<String,String>();
-        if(ids == null || ids == ""){
+    @RequestMapping(value = "/batchDelete")
+    public Map bctchDelDoc(String ids) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (ids == null || ids == "") {
             map.put("status", "fail");
             map.put("info", "请至少选择一条数据");
             return map;
         }
         List<ProjectBuild> list = new ArrayList<ProjectBuild>();
-        for(String s : ids.split(",")){
-            ProjectBuild build= new ProjectBuild();
+        for (String s : ids.split(",")) {
+            ProjectBuild build = new ProjectBuild();
             build.setBuildId(Integer.valueOf(s));
             build.setBuildDeleted("1");
             list.add(build);
@@ -162,7 +166,7 @@ public class BuildAction extends BaseController {
     }
 
     @RequestMapping("/add")
-    public String add(HttpServletRequest request,Integer buildId, Model model) {
+    public String add(HttpServletRequest request, Integer buildId, Model model) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
         SystemModule module = new SystemModule();
         module.setModuleType("project");
@@ -172,12 +176,13 @@ public class BuildAction extends BaseController {
         model.addAttribute("teamList", teamList);
         model.addAttribute("prodcutList", list);
         if (buildId != null) {
-            ProjectBuild build =buildService.findBuild(buildId);
-            model.addAttribute("build",build);
+            ProjectBuild build = buildService.findBuild(buildId);
+            model.addAttribute("build", build);
 
         }
         return "project/version/add.page";
     }
+
     @RequestMapping("/productalbug")
     public String productalbug(Integer buildId, Model model) {
         if (buildId != null) {
@@ -200,4 +205,21 @@ public class BuildAction extends BaseController {
         return "error";
     }
 
+    @RequestMapping("/forword/{forwordPager}")
+    public String forword(@PathVariable(value = "forwordPager") String forwordPager, Integer buildId, Model model) {
+        ProjectBuild build = buildService.findBuild(buildId);
+        model.addAttribute("build", build);
+        if ("alBug".equals(forwordPager)) {
+            return "project/task/relation-release/product-al-bug.page";
+        } else if ("alnoBug".equals(forwordPager)) {
+            return "project/task/relation-release/product-al-no-bug.page";
+        } else if ("alleBug".equals(forwordPager)) {
+            return "project/task/relation-release/product-al-le-bug.page";
+        } else if ("alnoReq".equals(forwordPager)) {
+            return "project/task/relation-release/product-al-no-req.page";
+        } else if ("alReq".equals(forwordPager)) {
+            return "project/task/relation-release/product-al-req.page";
+        }
+        return "";
+    }
 }

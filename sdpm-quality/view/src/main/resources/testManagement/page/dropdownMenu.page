@@ -19,7 +19,9 @@ ${product?.productName}
 <option value=""></option>
 <optgroup label="产品">
 	#for(product : qualityProductList)
-	<option value="${product?.productId}">${product?.productName}</option>
+		#if(product?.deleted==0)
+		<option value="${product?.productId}">${product?.productName}</option>
+		#end
 	#end
 </optgroup>
 

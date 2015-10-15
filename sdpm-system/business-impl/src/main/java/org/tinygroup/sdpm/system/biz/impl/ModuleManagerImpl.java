@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.system.biz.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,34 @@ public class ModuleManagerImpl implements ModuleManager{
 	}
 
 	public List<SystemModule> findByModules(SystemModule systemModule) {
-		// TODO Auto-generated method stub
+
 		return systemModuleDao.query(systemModule);
+	}
+	
+	public List<SystemModule> findModules(SystemModule systemModule,List<SystemModule> list) {
+		if(systemModule==null){
+			return null;
+		}
+		if(list==null){
+			list = new ArrayList<SystemModule>();
+		}
+		if(systemModule.getModuleId()!=null&&systemModule.getModuleParent()==null){
+			Integer c = systemModule.getModuleId();
+			systemModule.setModuleParent(c);
+			systemModule.setModuleId(null);
+		}
+		List<SystemModule> modules = systemModuleDao.query(systemModule);
+		if(modules.size()>0){
+			list.addAll(modules);
+			for (SystemModule module : modules) {
+				systemModule.setModuleParent(module.getModuleId());
+				systemModule.setModuleId(null);
+				findModules(systemModule,list);
+			}
+		}
+		return list;
+	
+		
 	}
 
 	public SystemModule add(SystemModule systemModule) {

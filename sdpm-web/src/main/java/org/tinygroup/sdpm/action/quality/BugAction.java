@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
-import org.tinygroup.sdpm.action.system.ModuleUtil;
+import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -19,7 +21,6 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
@@ -29,11 +30,13 @@ import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -267,7 +270,9 @@ public class BugAction extends BaseController {
 	@RequestMapping("/editionPaging")
 	public String editionPaging(Integer bugId,Model model){
 		QualityBug bug = bugService.findById(bugId);
-		List<Project> projects = projectService.findProjectList(null,null,null);
+		Project p = new Project();
+		p.setProjectDeleted("0");
+		List<Project> projects = projectService.findProjectList(p,null,null);
 		List<OrgUser> orgUsers = userService.findUserList(null);
 		model.addAttribute("projectList",projects);
 		model.addAttribute("userList",orgUsers);
@@ -295,7 +300,11 @@ public class BugAction extends BaseController {
 	@RequestMapping("/ajax/module")
 	public List<SystemModule> getModule(SystemModule systemModule){
 		systemModule.setModuleType("story");
-		return moduleService.findModules(systemModule);
+		List<SystemModule> moduleList = moduleService.findModules(systemModule);
+		for(SystemModule module : moduleList){
+			module.setModuleName(ModuleUtil.getPath(module.getModuleId(),"/",moduleService,null,false));
+		}
+		return moduleList;
 	}
 
 	@ResponseBody
@@ -330,12 +339,20 @@ public class BugAction extends BaseController {
 		return "redirect:"+"/quality/bug";
 	}
 	
-	@RequestMapping(value = "/save",method = RequestMethod.POST)
-	public String save(QualityBug bug,SystemAction systemAction, HttpServletRequest request){
+	@RequestMapping(value = "/save")
+	public String save(QualityBug bug,SystemAction systemAction,@RequestParam(value = "file", required = false)MultipartFile[] file,
+			String[] title, HttpServletRequest request){
 		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
 		bug.setBugOpenedDate(new Date());
 		bug.setBugOpenedBy(user != null?user.getOrgUserId():"0");
-		bugService.addBug(bug);
+		QualityBug qbug=bugService.addBug(bug);
+		ProfileUtil profileUtil = new ProfileUtil();
+		try {
+			profileUtil.uploads(file, qbug.getBugId(), "bug", title);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		systemAction.setActionObjectId(bug.getBugId());
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));

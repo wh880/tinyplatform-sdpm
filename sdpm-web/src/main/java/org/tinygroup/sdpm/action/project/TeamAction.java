@@ -6,12 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by wangying14938 on 2015-09-22.团队
@@ -37,5 +39,21 @@ public class TeamAction extends BaseController {
         Pager<ProjectTeam> pager = teamService.findPager(team, start, limit, order, ordertype);
         model.addAttribute("teamPager", pager);
         return "project/team/manageTableData.pagelet";
+    }
+
+    @RequestMapping("/preTeamManage")
+    public String preTeamManage(Model model, HttpServletRequest request) {
+        List<OrgUser> userList = userService.findUserList(new OrgUser());
+        model.addAttribute("userList", userList);
+
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
+        model.addAttribute("teamList", teamList);
+        return "project/team/teamManage.page";
+    }
+
+    @RequestMapping("/teamManageSave")
+    public String teamManageSave(Teams teams) {
+        return "project/team/index.page";
     }
 }

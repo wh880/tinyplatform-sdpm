@@ -56,7 +56,7 @@ public class FileRepository implements ServletContextAware{
 
     private void store(MultipartFile file, File dest) throws IOException {
         try {
-        //    UploadUtils.checkDirAndCreate(dest.getParentFile());
+            UploadUtils.checkDirAndCreate(dest.getParentFile());
             file.transferTo(dest);
         } catch (IOException e) {
             log.error("Transfer file error when upload file", e);
@@ -66,7 +66,7 @@ public class FileRepository implements ServletContextAware{
 
     private void store(File file, File dest) throws IOException {
         try {
-        //    UploadUtils.checkDirAndCreate(dest.getParentFile());
+            UploadUtils.checkDirAndCreate(dest.getParentFile());
             FileUtils.copyFile(file, dest);
         } catch (IOException e) {
             log.error("Transfer file error when upload file", e);

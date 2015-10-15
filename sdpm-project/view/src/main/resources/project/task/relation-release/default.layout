@@ -13,15 +13,15 @@
 <span class="r">
 				#@aModal("#myModal" "新增日志" "1000" "350" "btn-class"
                     "/project/task/note.pagelet")#buttonIcon(iconClass="icon-time")日志#end
-    <a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-req.page?cname=demand">#buttonIcon(iconClass=
+    <a href="${TINY_CONTEXT_PATH}/project/version/forword/alReq?buildId=${build.buildId}">#buttonIcon(iconClass=
         "icon-link")关联需求</a>&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/project/task/relation-release/product-al-bug.page?cname=bug">#buttonIcon(iconClass=
+				<a href="${TINY_CONTEXT_PATH}/project/version/forword/alBug?buildId=${build.buildId}">#buttonIcon(iconClass=
                     "icon-bug")关联Bug</a>&nbsp;
 <a href="${TINY_CONTEXT_PATH}/project/version/edit?buildId=${b?.buildId}">#buttonIcon(iconClass=
-        "icon-pencil")编辑发布</a>&nbsp;
+    "icon-pencil")编辑发布</a>&nbsp;
         <a href="${TINY_CONTEXT_PATH}/project/version/delete?id=${build?.buildId}" name="删除发布">#buttonIcon(iconClass=
-                "icon-remove")</a>&nbsp;
-    <a href="${TINY_CONTEXT_PATH}/product/page/project/product-release.page" title="返回">#buttonIcon(iconClass=
+            "icon-remove")</a>&nbsp;
+    <a href="${TINY_CONTEXT_PATH}/projectmanage/build/index" title="返回">#buttonIcon(iconClass=
         "icon-reply")</a>
 				</span>#div(divClass="clearfix")
 
@@ -34,13 +34,14 @@
         #@tabWithInit("tab_demo" "optionsBox")
             #@tabHead()
                 #if("demand"==type)
-                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/task/relation-release/product-al-req.page" cname=="demand"?
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/version/forword/alReq?buildId="+build.buildId cname==
+                        "demand"?
                         "Current":"")
                         #@buttons("","icon-lightbulb")
                             已完成需求
                         #end
                     #end
-                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/task/relation-release/product-al-no-req.page" cname==
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/version/forword/alnoReq?buildId="+build.buildId cname==
                         "no-demand"?"Current":"")
                         #@buttons("","icon-unlink")
                             未关联需求
@@ -54,19 +55,19 @@
                 #end
 
                 #if("bug"==type)
-                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/task/relation-release/product-al-bug.page" cname=="bug"?
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/version/forword/alBug?buildId="+build.buildId cname=="bug"?
                         "Current":"")
                         #@buttons("","icon-bug green")
                             已解决Bug
                         #end
                     #end
-                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/task/relation-release/product-al-no-bug.page" cname==
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/version/forword/alnoBug?buildId="+build.buildId cname==
                         "no-bug"?"Current":"")
                         #@buttons("","icon-unlink")
                             未关联Bug
                         #end
                     #end
-                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/task/relation-release/product-al-le-bug.page" cname==
+                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/version/forword/alleBug?buildId="+build.buildId cname==
                         "le-bug"?"Current":"")
                         #@buttons("","icon-bug green")
                             遗留Bug
@@ -81,7 +82,8 @@
 
                 <div class="r">
                     #@aModal(
-                        "#myModal" "导出HTML" "700" "130" "icon-upload-alt" "/project/task/relation-release/product-export-html.pagelet")
+                        "#myModal" "导出HTML" "700" "130" "icon-upload-alt"
+                        "/project/task/relation-release/product-export-html.pagelet")
                         导出HTML#end&nbsp;
                 </div>
             #end

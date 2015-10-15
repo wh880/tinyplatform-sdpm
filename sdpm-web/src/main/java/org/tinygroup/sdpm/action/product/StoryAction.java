@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
-import org.tinygroup.sdpm.action.system.ModuleUtil;
-import org.tinygroup.sdpm.action.system.ProfileAction;
+import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
@@ -70,19 +70,15 @@ public class StoryAction extends BaseController{
         return "/product/page/project/togglebox.page";
     }
     
-  
-    
-    @RequestMapping("/save")
-    public String save(ProductStory productStory,ProductStorySpec storySpec,@RequestParam(value = "file", required = false)MultipartFile file,HttpServletRequest request) throws IOException{
-    	 ProfileAction profileAction = new ProfileAction();
-//         for(int i=0,n=files.getMultipartFiles().size();i<n;i++){
-//      	   if(!files.getMultipartFiles().get(i).isEmpty()){
-//      		   profileAction.upload(files.getMultipartFiles().get(i));
-//      	   }
-//         }
-    	 profileAction.upload(file);
+   @RequestMapping("/save")
+    public String save(ProductStory productStory,ProductStorySpec storySpec,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,HttpServletRequest request) throws IOException{
+    	
+    	
     	productStory.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-    	storyService.addStory(productStory, storySpec);
+    	ProductStory story=storyService.addStory(productStory, storySpec);
+    	 ProfileUtil profileUtil = new ProfileUtil();
+    	 
+         profileUtil.uploads(file, story.getStoryId(), "story", title);
     	return "redirect:" + "/product/page/project/togglebox.page";
     }
     

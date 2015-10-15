@@ -16,6 +16,8 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +38,8 @@ public class UserAction extends BaseController {
     private StoryService storyService;
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private BugService bugService;
 
     @RequestMapping("/form")
     public String form(String id, Model model) {
@@ -186,18 +190,42 @@ public class UserAction extends BaseController {
         String account = user.getOrgUserAccount();
         ProjectTask task1 = new ProjectTask();
         if (choose.equals("7")) {
-            task.setTaskCanceledBy(account);
+            task1.setTaskCanceledBy(account);
         } else if (choose.equals("4")) {
-            task.setTaskOpenBy(account);
+            task1.setTaskOpenBy(account);
         } else if (choose.equals("5")) {
-            task.setTaskFinishedBy(account);
+            task1.setTaskFinishedBy(account);
         } else if (choose.equals("6")) {
-            task.setTaskClosedBy(account);
+            task1.setTaskClosedBy(account);
         } else {
-            task.setTaskAssignedTo(account);
+            task1.setTaskAssignedTo(account);
         }
         Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task1, order, false, null, null);
         model.addAttribute("taskPager", taskPager);
         return "/organization/user/userTaskTable.pagelet";
+    }
+
+    @RequestMapping("/bug")
+    public String bugJump() {
+        return "/organization/user/bugAdmin.page";
+    }
+
+    @RequestMapping("/bug/search")
+    public String bugSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, ProjectTask task, String order, String ordertype, Model model, HttpServletRequest request) {
+        OrgUser user = userService.findUser(id);
+        String account = user.getOrgUserAccount();
+        QualityBug bug = new QualityBug();
+        if (choose.equals("6")) {
+            bug.setBugClosedBy(account);
+        } else if (choose.equals("5")) {
+            bug.setBugResolvedBy(account);
+        } else if (choose.equals("4")) {
+            bug.setBugOpenedBy(account);
+        } else {
+            bug.setBugAssignedTo(account);
+        }
+        Pager<QualityBug> bugPager = bugService.findBugListPager(limit * (page - 1), limit, null, bug, order, false);
+        model.addAttribute("bugPager", bugPager);
+        return "/organization/user/bugAdminTable.pagelet";
     }
 }

@@ -409,4 +409,27 @@ public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDa
         });
 
     }
+   /* sla必填项校验*/
+    public ServiceSla judge(String clientName) {
+        Select select;
+        try {
+            select = selectFrom(SERVICE_SLATABLE).where(SERVICE_SLATABLE.CILENT_PRODUCT_VISION.eq(clientName));
+            return getDslSession().fetchOneResult(select, ServiceSla.class);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    public int[] softDeleteBatch(List<ServiceSla> list) {
+        if (CollectionUtil.isEmpty(list)) {
+            return new int[0];
+        }
+        return getDslTemplate().batchUpdate(list, new NoParamUpdateGenerateCallback() {
+
+            public Update generate() {
+                return update(SERVICE_SLATABLE).set(
+                        SERVICE_SLATABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
+                        SERVICE_SLATABLE.SLA_ID.eq(new JdbcNamedParameter("slaId")));
+            }
+        });
+    }
 }

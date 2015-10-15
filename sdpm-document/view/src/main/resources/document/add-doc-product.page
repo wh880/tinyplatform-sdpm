@@ -1,7 +1,51 @@
+
+<script type="text/javascript">
+##二级联动的js
+ function ajaxRead(id,toName,opKey,opvalue,url,value){
+            var selectCheck = "select[name="+toName+"]";
+            $(selectCheck).each(function(){
+                var sele = $(this);
+                var s;
+                $.ajax({
+                    type: "POST",
+                    url: "${TINY_CONTEXT_PATH}"+url,
+                    data: $(this).attr('data'),
+                    dataType:"json",
+                    success: function(data){
+                        sele.empty();
+                        var em = "<option value='0' selected  >/</option>";
+                        sele.append(em);
+                        for(var i=0,l=data.length;i<l;i++){
+                            var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+                            sele.append(em);
+
+                        }
+
+                        if(value!=null) {
+                            sele.val(value).trigger("change");
+                        }else {
+                            sele.val(data[0][opKey]).trigger("change");
+                        }
+
+
+                    },
+                    error: function(res){
+                        alert("失败");
+                    }
+                });
+
+
+            });
+
+        }
+</script>
+
+
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
+
 #macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
  <input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked") checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass) class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio" onclick="${radioOther}"/>
 #end
@@ -11,6 +55,7 @@
 		#@label(ckId)${labelText}#end
 	#end
 #end
+
 #include("doc-tab.page")
 #@tinyForm("thisform" TINY_CONTEXT_PATH+"/document/doc/addSave" "post" {"class":"add"})
 #*<input type="hidden" name="docLibId" value="${doc?.docLibId}"/>
@@ -24,10 +69,18 @@
 					#@div(divClass="col-5")
 					#@Tselect2F()
 	                   		#@Tselect2Body("docProduct" product?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                     	 <option value="0">/</option>
 	                        #foreach(product : productList)
 	                        	 <option value="${product?.productId}">${product?.productName}</option>
 	                        #end	                       	                    	                        
-	                    	#end                  
+	                    	#end   
+	                    	<script type="text/javascript">
+                            $("#${sid}").on("change",function(){
+                                var pId = $("#${sid}  option:selected").val();
+                                ajaxRead("${sid}","docModule","docModule","moduleTitle","/document/ajax/module?moduleRoot="+pId,${doc?.docModule?:0});
+
+                            })
+                        	</script>               
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
@@ -41,13 +94,8 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#@Tselect2F()
-	                   		 #@Tselect2Body("docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">分类1</option>
-	                        <option value="CT">分类2</option>
-	                        <option value="DE">分类3</option>
-	                        <option value="FL">分类4</option>
-	                        <option value="GA">分类5</option>
-	            
+	                   		 #@Tselect2Body("docModule" doc?.docModule?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="0">/</option>	                        	            
 	                    	#end                  	                    	
                 	  #end
                 	  #end
