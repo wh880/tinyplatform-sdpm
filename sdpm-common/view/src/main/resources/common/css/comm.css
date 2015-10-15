@@ -419,3 +419,5 @@ a.btn.btn-sm.backBtn, backBtn {
 .infoPage-right .infoContent table tr td {
     width: 200px;
 }
+/*左侧树 控制max*/
+.togglenavpart .treeLeftbox ul.ztree{max-height:400px;}
