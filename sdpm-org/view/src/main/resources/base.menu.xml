@@ -45,7 +45,7 @@
         <!--<menu id="org-user-logAdmin" name="日志" href="/organization/user/logAdmin.page" icon="" sort="1"-->
         <!--isShow="1"-->
         <!--scope="org-user-detail"/>-->
-        <menu id="org-user-projectAdmin" name="项目" href="/organization/user/projectAdmin.page" icon="" sort="1"
+        <menu id="org-user-projectAdmin" name="项目" href="/org/user/project" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
         <menu id="org-user-profileAdmin" name="档案" href="/org/user/show/profile" icon="" sort="1"

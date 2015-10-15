@@ -14,17 +14,31 @@
     <!-- 项目属性 -->
     <properties>
         <validator.version>5.1.1.Final</validator.version>
+        <shiro.version>1.2.3</shiro.version>
     </properties>
 
     <dependencies>
+        <!--session存储-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.sessionstore</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+        <!--缓存-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.ehcache</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+        <!--元数据定义-->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-metadata</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
-		
-		
-	
+
         <!--common-->
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -48,6 +62,7 @@
             <artifactId>sdpm-org-service-wrapper</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
+
         <!--service-->
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -65,6 +80,8 @@
             <version>${tiny_sdpm_version}</version>
         </dependency>
         <!--service end-->
+
+        <!--system-->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-system-view</artifactId>
@@ -178,11 +195,6 @@
             <artifactId>sdpm-project-service-wrapper</artifactId>
             <version>${tiny_sdpm_version}</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.tinygroup</groupId>-->
-        <!--<artifactId>sdpm-project-dao-interface</artifactId>-->
-        <!--<version>${tiny_sdpm_version}</version>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -284,11 +296,33 @@
             <version>${tiny_version}</version>
         </dependency>
 
+        <!-- SECURITY begin -->
         <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.jcscache</artifactId>
-            <version>${tiny_version}</version>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-cas</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <!-- SECURITY end -->
 
         <dependency>
             <groupId>junit</groupId>

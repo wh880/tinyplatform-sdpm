@@ -25,11 +25,11 @@
                     &nbsp;&gt;
                     #foreach(m:menuManager.getScopeMenus("org-user-detail"))
                         #if(m.id=="org-user-projectAdmin")
-                            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${id}"
+                            <a href="${TINY_CONTEXT_PATH}${m.href}?choose=3&id=${id}"
                                class="active_btn">${m.name}</a>
 
                         #else
-                            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${id}">${m.name}</a>
+                            <a href="${TINY_CONTEXT_PATH}${m.href}?choose=3&id=${id}">${m.name}</a>
                         #end
                     #end
 
@@ -45,20 +45,18 @@
     #@div(divClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([8,10,20,50,100,200])
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/organization/user/userStoryTable.pagelet") ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/org/user/project/search?"+tinyRequestQueryString) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"","rel":"sortname"})ID#end
-                #@tinyTh({"class":"","rel":"sortname"})项目代号#end
-                #@tinyTh({"class":"","rel":"sortname"})项目名称#end
-                #@tinyTh({"class":"","rel":"sortname"})开始时间#end
-                #@tinyTh({"class":"","rel":"sortname"})结束日期#end
-                #@tinyTh({"class":"","rel":"sortname"})状态#end
-                #@tinyTh({"class":"","rel":"sortname"})角色#end
-                #@tinyTh({"class":"","rel":"sortname"})加盟日#end
-                #@tinyTh({"class":"","rel":"sortname"})可用时间/天#end
-
+                #@tinyTh({"class":"","rel":"project_id"})ID#end
+                #@tinyTh({"class":"","rel":"project_code"})项目代号#end
+                #@tinyTh({"class":"","rel":"project_name"})项目名称#end
+                #@tinyTh({"class":"","rel":"project_begin"})开始时间#end
+                #@tinyTh({"class":"","rel":"project_end"})结束日期#end
+                #@tinyTh({"class":"","rel":"project_status"})状态#end
+                #@tinyTh({"class":"","rel":"team_role"})角色#end
+                #@tinyTh({"class":"","rel":"team_join"})加盟日#end
+                #@tinyTh({"class":"","rel":"team_days"})可用时间/天#end
             #end
         #end
     #end

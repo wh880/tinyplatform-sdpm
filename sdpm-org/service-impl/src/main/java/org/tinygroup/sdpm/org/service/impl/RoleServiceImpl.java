@@ -22,6 +22,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleMenuManager roleMenuManager;
+
     @Autowired
     private RoleUserManager roleUserManager;
 
@@ -49,8 +50,13 @@ public class RoleServiceImpl implements RoleService {
         return roleManager.delete(id);
     }
 
+    ////////////////////////////
     public OrgRoleMenu findRoleMenu(Integer id) {
         return roleMenuManager.find(id);
+    }
+
+    public List<OrgRoleMenu> findRoleMenuListByUser(String userId) {
+        return roleMenuManager.findMenuListByUser(userId);
     }
 
     public List<OrgRoleMenu> findMenuByRoleId(Integer roleId) {
@@ -91,6 +97,7 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    /////////////////////////
     public OrgRoleUser findRoleUser(Integer id) {
         return roleUserManager.find(id);
     }
