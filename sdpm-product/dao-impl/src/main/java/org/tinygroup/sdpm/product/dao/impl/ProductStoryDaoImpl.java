@@ -276,7 +276,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 					PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
 					PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
 					PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(t.getStoryParentId()),
-					/*PRODUCT_STORYTABLE.MODULE_ID.eq(t.getModuleId()),*/
+					PRODUCT_STORYTABLE.MODULE_ID.eq(t.getModuleId()),
 					PRODUCT_STORYTABLE.PLAN_ID.eq(t.getPlanId()),
 					PRODUCT_STORYTABLE.STORY_STATUS.eq(t.getStoryStatus()),
 					PRODUCT_STORYTABLE.STORY_SOURCE.eq(t.getStorySource()),
