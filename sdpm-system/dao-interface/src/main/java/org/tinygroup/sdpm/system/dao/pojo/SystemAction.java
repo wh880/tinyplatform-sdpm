@@ -47,7 +47,7 @@ public class SystemAction implements Serializable{
 	 * 所属项目
 	 * 
 	 */
-	private Integer actionProject;
+	private String actionProject;
 
 	/** 
 	 * 所属产品
@@ -141,11 +141,11 @@ public class SystemAction implements Serializable{
 		return actionObjectId;
 	}
 
-	public void setActionProject(Integer actionProject){
+	public void setActionProject(String actionProject){
 		this. actionProject = actionProject;
 	}
 
-	public Integer getActionProject(){
+	public String getActionProject(){
 		return actionProject;
 	}
 

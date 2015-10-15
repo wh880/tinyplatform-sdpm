@@ -18,6 +18,7 @@ package org.tinygroup.sdpm.service.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -31,7 +32,7 @@ public interface ServiceRequestDao extends BaseDao<ServiceRequest, Integer> {
 
     Pager<ServiceRequest> queryPagerBy(int start, int limit, ServiceRequest t, Integer statues, Integer treeId, OrderBy... orderArgs);
 
-    Pager<ServiceRequest> queryPagerReplyByMe(int start, int limit, ServiceRequest t, Integer operation, OrderBy... orderArgs);
+    Pager<ServiceRequest> findOperationByMe(int start, int limit, ServiceRequest t, OrgUser user, Integer treeId, Integer operation, OrderBy... orderArgs);
 
     int[] batchUpdateReply(List<ServiceRequest> list);
     Integer changeStatus(Integer id);

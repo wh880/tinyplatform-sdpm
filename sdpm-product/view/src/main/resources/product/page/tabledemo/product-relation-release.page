@@ -20,7 +20,8 @@
 				<a href="#" id="showsearchmore-bug">#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
 				#iconOperations("#myModal" "icon-common-edit icon-pencil" "编辑发布" "865" "448" "/product/page/tabledemo/product-addrelease.pagelet" "ml-5")
 					#@delItemsdpm("#action" "id" "/product/page/tabledemo/relation-release/product-al-req.page")<i class="icon-remove"></i>#end&nbsp;
-					<a href="${TINY_CONTEXT_PATH}/product/page/project/product-release.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+					<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/product-release.page"
+                       title="返回">#buttonIcon(iconClass="icon-reply")</a>
 			
 				</span>#div(divClass="clearfix")
 				

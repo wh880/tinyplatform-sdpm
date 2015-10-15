@@ -58,7 +58,7 @@ public class UserAction extends BaseController {
     @Autowired
     private ProjectService projectService;
 
-    @RequiresPermissions("这里写菜单的id")
+    @RequiresPermissions("org-user-edit")
     @RequestMapping("/form")
     public String form(String id, Model model) {
         if (id != null) {

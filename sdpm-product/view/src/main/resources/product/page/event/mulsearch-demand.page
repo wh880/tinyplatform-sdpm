@@ -1,6 +1,7 @@
 
 ##<span id="showsearchmore-demand">搜索</span>
-<form method="get" action="${TINY_CONTEXT_PATH}/quality/bug" id="searchform" class="form-condensed searchform">
+<form method="get" action="${TINY_CONTEXT_PATH +adminPath}/quality/bug" id="searchform"
+      class="form-condensed searchform">
     <div class="hide">
         <select id="operatortemp">
             <option value="=">=</option>

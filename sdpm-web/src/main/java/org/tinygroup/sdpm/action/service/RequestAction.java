@@ -17,6 +17,7 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.service.service.inter.ReviewService;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -54,11 +55,18 @@ public class RequestAction extends BaseController {
                            @RequestParam(required = false, defaultValue = "clientName") String order,
                            @RequestParam(required = false, defaultValue = "asc") String ordertype) {
 
-        if (operation != null && operation == 1) {
-            Pager<ServiceRequest> pager = requestService.findReplyByMe(start, limit, operation, clientRequest, order, ordertype);
+        if (operation != null) {
+            OrgUser user = UserUtils.getUser();
+            Pager<ServiceRequest> pager = requestService.findOperationByMe(start, limit, user, clientRequest, treeId, operation, order, ordertype);
             model.addAttribute("pager", pager);
             return "service/serviceReq/requestTableData.pagelet";
         }
+//        if (operation != null && operation == 2) {
+//            OrgUser user = UserUtils.getUser();
+//            Pager<ServiceRequest> pager = requestService.findReviewByMe(start, limit, user, clientRequest,treeId, order, ordertype);
+//            model.addAttribute("pager", pager);
+//            return "service/serviceReq/requestTableData.pagelet";
+//        }
         Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, order, ordertype);
         model.addAttribute("pager", pager);
         return "service/serviceReq/requestTableData.pagelet";

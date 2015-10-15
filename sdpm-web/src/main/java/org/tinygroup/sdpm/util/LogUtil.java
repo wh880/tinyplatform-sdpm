@@ -1,18 +1,11 @@
 package org.tinygroup.sdpm.util;
 
-import org.tinygroup.beancontainer.BeanContainerFactory;
 import org.tinygroup.sdpm.common.log.obtain.impl.ObtainHandleImpl;
-import org.tinygroup.sdpm.common.log.obtain.inter.Obtain;
 import org.tinygroup.sdpm.common.log.obtain.inter.ObtainHandle;
-import org.tinygroup.sdpm.common.log.obtain.inter.ObtainParameter;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
-import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.impl.LogServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.LogService;
-import org.tinygroup.sdpm.util.SpringContextHolder;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Date;
 
 /**
@@ -21,21 +14,22 @@ import java.util.Date;
 public class LogUtil {
     //之后要换成服务包装类型
     public final static LogService logService = SpringContextHolder.getBean(LogServiceImpl.class);
-    private final static ObtainHandle obtainHandle = BeanContainerFactory.getBeanContainer(LogUtil.class.getClassLoader()).getBean(ObtainHandleImpl.class);
+    public final static ObtainHandle obtainHandle = SpringContextHolder.getBean(ObtainHandleImpl.class);
+
     public static void log(LogOperateObject objectType, LogAction action, String objectId, String userId) {
-        saveLog(objectType.getOprateObject(), action.getAction(), objectId, userId, null, null, null, null, null);
+        saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, null, null, null, null, null);
     }
 
     public static void logWithComment(LogOperateObject objectType, LogAction action, String objectId, String userId,
                                       String productId, String projectId,
                                       Object oldObject, Object newObject, String comment) {
-        saveLog(objectType.getOprateObject(), action.getAction(), objectId, userId, productId, projectId, oldObject, newObject, comment);
+        saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, productId, projectId, oldObject, newObject, comment);
     }
 
     public static void changeLog(LogOperateObject objectType, LogAction action, String objectId, String userId,
                                  String productId, String projectId,
                                  Object oldObject, Object newObject) {
-        saveLog(objectType.getOprateObject(), action.getAction(), objectId, userId, productId, projectId, oldObject, newObject, null);
+        saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, productId, projectId, oldObject, newObject, null);
     }
 
     protected static void saveLog(String objectType, String action, String objectId, String userId,
@@ -44,7 +38,7 @@ public class LogUtil {
         SystemAction systemAction = new SystemAction();
         systemAction.setActionAction(action);
         systemAction.setActionProduct(String.valueOf(product));
-        systemAction.setActionProject(Integer.parseInt(project));
+        systemAction.setActionProject(String.valueOf(project));
         systemAction.setActionObjectType(objectType);
         systemAction.setActionDate(new Date());
         systemAction.setActionObjectId(Integer.parseInt(objectId));
@@ -128,7 +122,7 @@ public class LogUtil {
             this.operateObject = value;
         }
 
-        public String getOprateObject() {
+        public String getOperateObject() {
             return operateObject;
         }
     }

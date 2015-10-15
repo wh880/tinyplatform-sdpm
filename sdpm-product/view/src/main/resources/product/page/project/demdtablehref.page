@@ -42,9 +42,9 @@
            #if(m?.map?.type=="aModal")
                  #@aModal("#myModal" m.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m?.icon)${m?.name}#end
            #elseif(m?.map?.type=="icon-href")
-           		 <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m.icon)${m?.name}</a>
+               <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m.icon)${m?.name}</a>
            #elseif(m?.map?.type=="icon")
-           		 <a href="${TINY_CONTEXT_PATH}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
+               <a href="${TINY_CONTEXT_PATH +adminPath}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
            #elseif(m?.map?.type=="note")
            		  <a href="${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)
            #end
@@ -93,9 +93,9 @@
 		   #if(m?.map?.type=="aModal")
 		         #@aModal("#myModal" m?.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m?.icon)${m?.name}#end
 		   #elseif(m?.map?.type=="icon-href")
-		   		 <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m?.icon)${m?.name}</a>
+               <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m?.icon)${m?.name}</a>
 		   #elseif(m?.map?.type=="icon")
-		   		 <a href="${TINY_CONTEXT_PATH}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
+               <a href="${TINY_CONTEXT_PATH +adminPath}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
 		   #elseif(m.map.type=="note")
 		   		  <a href="${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)
 		   #end

@@ -1,18 +1,16 @@
 package org.tinygroup.sdpm.system.biz.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.dao.SystemActionDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 @Service
 @Transactional
 public class ActionManagerImpl implements ActionManager {
@@ -50,7 +48,7 @@ public class ActionManagerImpl implements ActionManager {
 		if(pager.getRecords().size()>0){
 			for(SystemAction s : pager.getRecords()){
 				s = systemActionDao.getActionAndObject(s);
-				s.setUrl(s.getActionObjectType());
+//				s.setUrl(s.getActionObjectType());
 			}
 		}
 		return pager;

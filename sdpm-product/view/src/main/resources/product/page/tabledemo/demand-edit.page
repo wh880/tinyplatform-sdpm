@@ -5,7 +5,7 @@
 #import("/org/tinygroup/fold/components/fold.component")
 #!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/story/update" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/update" "" {"class":"test"})
 #hiddenInput(hiddenInputName="storyId",hiddenInputValue=storySpec.storyId)
 
 <div style="width:70%;float:left" class="pageleftpart">

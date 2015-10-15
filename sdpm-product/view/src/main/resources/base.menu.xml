@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu id="myproduct" parent-id="0" name="产品" href="/productLine/toProduct" icon="icon-desktop" sort="800"
-      isShow="1" permission="Permission">
+      isShow="1">
 
     <menu id="product-demand" parent-id="myproduct" name="需求" href="/product/story?currentPageId=3"
           scope="liop,l2op" sort="15" isShow="1" permission="Permission">
@@ -138,7 +138,7 @@
 
     </menu>
 
-    <menu id="product-plan" parent-id="myproduct" name="计划" href="/product/page/project/product-plan.page" sort="14"
+    <menu id="product-plan" parent-id="myproduct" name="计划" href="/product/plan/content" sort="14"
           isShow="1" permission="Permission">
         <menu id="product-plan-demand" name="关联需求"
               href="/product/plan/forword/reRelateStory?planId=${plan.planId}" icon="icon-link" sort="94"
@@ -179,7 +179,7 @@
         
     </menu>
 
-    <menu id="product-release" parent-id="myproduct" name="发布" href="/product/page/project/product-release.page"
+    <menu id="product-release" parent-id="myproduct" name="发布" href="/product/release/content"
           sort="13" isShow="1" permission="Permission">
         <menu id="product-release-demand" name="关联需求"
               href="/product/release/forword/reRelateStory?releaseId=${release.releaseId}" icon="icon-link"
@@ -229,7 +229,7 @@
     <menu id="product-roadmap" parent-id="myproduct" name="路线图" href="/product/common/roadMap"
           sort="12" isShow="1" permission="Permission"></menu>
 
-    <menu id="product-archive" parent-id="myproduct" name="文档" href="/product/page/project/archive-list.page"
+    <menu id="product-archive" parent-id="myproduct" name="文档" href="/product/doc/content"
           scope="liop" sort="11" isShow="1" permission="Permission">
 
         <menu id="product-archive-remove" name="删除" href="#" icon="icon-remove" sort="10" isShow="1"
@@ -244,7 +244,7 @@
 
     </menu>
 
-    <menu id="product-project" parent-id="myproduct" name="项目" href="/product/page/project/product-project-list.page"
+    <menu id="product-project" parent-id="myproduct" name="项目" href="/product/project/content"
           sort="10" isShow="1" permission="Permission"></menu>
 
     <menu id="product-modular" parent-id="myproduct" name="模块" href="/system/module/findProductModule?moduleParent=0"
@@ -263,7 +263,7 @@
 
     </menu>
 
-    <menu id="product-dynamic" parent-id="myproduct" name="动态" href="/product/page/project/dymanicdata.page" sort="7"
+    <menu id="product-dynamic" parent-id="myproduct" name="动态" href="/product/dynamic/content" sort="7"
           isShow="1" permission="Permission">
         <menu id="product-dymanic-badel" name="批量删除" href="" icon="" sort="9" isShow="1" scope="dymanci-dl"/>
 

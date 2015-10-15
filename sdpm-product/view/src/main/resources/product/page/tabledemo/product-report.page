@@ -73,8 +73,9 @@
 	</span>
     <span class="r">
     	#@aModal("#myModal" "导出HTML" "500" "130" "btn-class" "/product/page/tabledemo/product-export-demand.pagelet")#buttonIcon(iconClass="icon-download-alt")导出#end
-					
-		<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">#buttonIcon(iconClass="icon-goback icon-level-up icon-large icon-rotate-270")返回</a>&nbsp;
+
+        <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/togglebox.page">#buttonIcon(iconClass=
+			"icon-goback icon-level-up icon-large icon-rotate-270")返回</a>&nbsp;
 	</span>
         #div(divClass="clearfix")
     #end
@@ -84,7 +85,7 @@
         #@toggleLeft({"class":"aclass","style":"width:250px;height:450px;overflow:auto"})
             #@settoggleLeftTitle()请选择报表类型#end
             #@settoggleLeftBody()
-            	#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/story/report" "post" {"class":"test"})
+				#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/report" "post" {"class":"test"})
                     #@skinMinimal()
 #*                    	#@Tcheckboxes("productWhiteList" product?.productWhiteList)
 							#@Tcheckbox("admin")产品需求数量#end<br/>

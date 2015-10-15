@@ -12,15 +12,10 @@
             #for(p:projectList)
             <option value="${p?.projectId}">${p?.projectName}</option>
         #end
-    ##            <option value="1">我是网金社</option>
-    ##            <option value="2">我是呀开会11</option>
-    ##            <option value="3">项其他项目</option>
     </optgroup>
     #end
     #@navSelect2Fix()
-    <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page">#buttonIcon(iconClass=
-        "icon-plus-sign")
-        添加项目 </a>
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd">#buttonIcon(iconClass="icon-plus-sign")添加项目</a>
     #end
     #@dialog("myModal")
         #@dialogHeader()对话框标题#end

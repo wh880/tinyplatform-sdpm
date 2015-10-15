@@ -55,8 +55,8 @@ public class StoryAction extends BaseController{
     	
     	String queryString = request.getQueryString();
        if(queryString!=null&&!queryString.contains("choose")){
-            return "redirect:/product/story?choose=1&"+queryString;
-        }
+		   return "redirect:" + adminPath + "/product/story?choose=1&" + queryString;
+	   }
         return "/product/page/project/togglebox.page";
     }
 

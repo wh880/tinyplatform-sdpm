@@ -9,7 +9,7 @@
 #@tr()
 	#@td()<input type="checkbox" value="1" name="product-project">#end
 	#@td()${project?.projectId}#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/project/task/index.page">${project?.projectName}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/project/task/index.page">${project?.projectName}</a>#end
 	#@td()${project?.projectCode}#end
 	#@td()${project?.projectEnd}#end
 	#@td()${project?.projectStatus}#end

@@ -27,6 +27,10 @@ public class HolidayAction extends BaseController{
 		
 		return "/system/page/holiday/manage.page"; 
 	}
+	@RequestMapping("holiday")
+	public String holiday(){
+		return "/system/page/holiday/holiday.page";
+	}
 	@RequestMapping("holiday/findPager")
 	public String fingPage(Integer start ,Integer limit ,
 			String order,String ordertype,Holiday holiday,Model model){

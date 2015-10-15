@@ -88,7 +88,8 @@
         <menu id="demand-menu" name="任务菜单" href="/project/demand/index.page" icon="" sort="1" isShow="1">
             <menu id="pro-demand-report"  sort="8" isShow="1"
                   scope="pro-demandmenu-op"/>
-            <menu id="pro-demand-add" name="新增需求" href="/product/page/tabledemo/product-demand-add.page" icon="icon-plus-sign" sort="6" isShow="1"
+            <menu id="pro-demand-add" name="新增需求" href="/product/story/addstory" icon="icon-plus-sign" sort="6"
+                  isShow="1"
                   scope="pro-demandmenu-op"/>
             <menu id="pro-demand-relation" name="关联需求" href="/project/demand/preLinkStory" icon="icon-plus" sort="4"
                   isShow="1"

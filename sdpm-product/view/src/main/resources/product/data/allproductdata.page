@@ -8,8 +8,8 @@
 #for(product:pagerProduct.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="product">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">${product.productId}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">${product.productName}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/overview.page">${product.productId}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/overview.page">${product.productName}</a>#end
 	#@td()1#end
 	#@td()0#end
 	#@td()0#end
@@ -25,7 +25,8 @@
 			#if(m.map.type=="close")
 				#iconOperations("#myModal" m.icon m.name "865" "500" url "ml-5")&nbsp;
 				#elseif(m.map.type=="editor")
-                <a href="${TINY_CONTEXT_PATH}${eval(m.href)}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;
+                <a href="${TINY_CONTEXT_PATH +adminPath}${eval(m.href)}"
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;
 			#end
 		#end
 	#end

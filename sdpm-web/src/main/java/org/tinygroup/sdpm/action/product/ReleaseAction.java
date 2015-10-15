@@ -34,7 +34,20 @@ public class ReleaseAction extends BaseController{
 	private ReleaseService releaseService;
 	@Autowired
 	private ProductService productService;
-	
+
+
+	@RequestMapping("/content")
+	public String release(HttpServletRequest request, Model model) {
+		int productId = -1;
+		if (request.getSession().getAttribute("sessionProductId") != null) {
+			productId = (Integer) request.getSession().getAttribute("sessionProductId");
+		}
+		Product product = productService.findProduct(productId);
+		model.addAttribute("product", product);
+		return "/product/page/project/product-release.page";
+	}
+
+
 	@RequestMapping("/save")
 	public  String save(ProductRelease productRelease,Model model,HttpServletRequest request){
 		
