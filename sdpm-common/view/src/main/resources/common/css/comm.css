@@ -420,4 +420,4 @@ a.btn.btn-sm.backBtn, backBtn {
     width: 200px;
 }
 /*左侧树 控制max*/
-.togglenavpart .treeLeftbox ul.ztree{max-height:400px;}
+.togglebox .togglenavpart .treeLeftbox ul.ztree{max-height:400px;}
