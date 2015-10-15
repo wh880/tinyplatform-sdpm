@@ -7,7 +7,7 @@
 #include("doc-tab.page")
 #@div()
 	#@p(pClass="title_sty")
-		<span class="f"> 版本名称</span>
+		<span class="f"> 文档名称</span>
 		<span class="r">
 			#foreach(m:menuManager.getScopeMenus("doc-view-op"))
 				#if(m.id == "doc-view-delete")
@@ -36,13 +36,27 @@
         ${doc?.docKeywords}
     #end
     #@div(divClass="infoContent")
-    #if(doc.docType=='链接')
+    #if(doc?.docType=='链接')
         <p class="titleName">文档URL </p>
-        ${doc.docUrl}
+        ${doc?.docUrl}
     #elseif(doc.docType=='文件')<p class="titleName">附件 </p>
-    ${doc.docAttach} 
+    #foreach(f : file)
+    	 #set(path=f?.filePathname)
+    		<a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
+    		#foreach(m:menuManager.getScopeMenus("file-op"))
+				#if(m.id == "file-edit")					
+    				#@aModal("#myModal" m.name "400" "80" "class-m" m.href)
+        	        	#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp
+        	    #else
+        	    	#@tinyTableItemRemove(TINY_CONTEXT_PATH+m.href f?.fileId)
+						<i class="${m.icon}" title="删除"></i>
+				#end
+        	    #end
+        	#end    		
+    #end
+   
     #else <p class="titleName">网页</p>
-    ${doc.docContent} 
+    ${doc?.docContent}
     #end
     #end
     #@div(divClass="infoContent")

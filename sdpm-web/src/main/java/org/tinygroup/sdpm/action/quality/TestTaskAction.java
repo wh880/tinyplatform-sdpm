@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.action.quality;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +24,7 @@ public class TestTaskAction extends BaseController {
 	private TestTaskService testTaskService;
 	
 	@RequestMapping("")
-	public String form(String get,Model model){
+	public String form(HttpServletRequest request,String get,Model model){
 		return "/testManagement/page/version.page";
 	}
 	

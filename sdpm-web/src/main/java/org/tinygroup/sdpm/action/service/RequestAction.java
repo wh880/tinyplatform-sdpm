@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
@@ -36,11 +38,14 @@ public class RequestAction extends BaseController {
     private ClientService clientService;
     @Autowired
     private ProductService productService;
-
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "/list")
     public String list(Integer operation, Integer status, Model model) {
         model.addAttribute("status", status);
         model.addAttribute("operation", operation);
+        List<OrgUser> userList = userService.findUserList(new OrgUser());
+        model.addAttribute("userList", userList);
         return "service/serviceReq/request.page";
     }
 

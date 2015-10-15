@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
+import org.tinygroup.sdpm.product.dao.pojo.*;
+import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.log.LogPrepareUtil;
@@ -30,10 +32,6 @@ import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
-import org.tinygroup.sdpm.product.dao.pojo.StoryCollection;
-import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -55,7 +53,8 @@ public class StoryAction extends BaseController{
 	private BugService bugService;
     @Autowired
     private ModuleService moduleService;
-
+	@Autowired
+	private ProductService productService;
     
     
    
@@ -69,7 +68,20 @@ public class StoryAction extends BaseController{
         }
         return "/product/page/project/togglebox.page";
     }
-    
+
+	@RequestMapping("/addstory")
+	public String addstory(HttpServletRequest request,Model model){
+		int productId = -1;
+		if (request.getSession().getAttribute("sessionProductId")!=null){
+			productId = (Integer)request.getSession().getAttribute("sessionProductId");
+		}
+		Product product = productService.findProduct(productId);
+		model.addAttribute("product",product);
+
+		return "/product/page/tabledemo/product-demand-add.page";
+	}
+
+
    @RequestMapping("/save")
     public String save(ProductStory productStory,ProductStorySpec storySpec,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,HttpServletRequest request) throws IOException{
     	
@@ -190,10 +202,21 @@ public class StoryAction extends BaseController{
     	/*if (story.getModuleId()==-1) {
     		story.setModuleId(null);
 		}*/
+    	 
+    	
     	String condition = StoryUtil.getStatusCondition(choose,request);
     	if(story.getModuleId()!=null&&story.getModuleId()>0){
-    		condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + ModuleUtil.getCondition(story.getModuleId(), moduleService);
+    		
+    		 SystemModule module = new SystemModule();
+	       	 module.setModuleId(story.getModuleId());
+	   		 StringBuffer stringBuffer = new StringBuffer();
+	   		 stringBuffer.append("in (");
+	   	     ModuleUtil.getConditionByModule(stringBuffer, module, moduleService);
+	   	     stringBuffer.append(")");
+	   	     
+    		condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
     	}
+    	story.setModuleId(null);
     	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, condition,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList",p);
         return "product/data/tabledata.pagelet";
@@ -223,6 +246,7 @@ public class StoryAction extends BaseController{
 		}
         return "";
     }
+
     @RequestMapping("/bugSearch/{relate}")
     public String bugListAction(@PathVariable(value="relate")String relate,int page, int pagesize,QualityBug bug,SearchInfos searchInfos,
     		@RequestParam(required = false, defaultValue = "bugId") String order, 

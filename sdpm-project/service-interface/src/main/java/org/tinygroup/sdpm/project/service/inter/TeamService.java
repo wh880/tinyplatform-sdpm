@@ -9,6 +9,23 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-17.
  */
 public interface TeamService {
+
+    public List<ProjectTeam> findTeamList(ProjectTeam team);
+    /**
+     * 批量添加
+     *
+     * @param list
+     * @return
+     */
+    public Integer batchAdd(List<ProjectTeam> list);
+
+    /**
+     * 批量更新
+     *
+     * @param list
+     * @return
+     */
+    public Integer batchUpdate(List<ProjectTeam> list);
     /**
      * 新增成员
      */

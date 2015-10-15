@@ -10,6 +10,24 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-18.
  */
 public interface TeamManager {
+
+
+    public List<ProjectTeam> find(ProjectTeam team);
+    /**
+     * 批量添加
+     *
+     * @param list
+     * @return
+     */
+    public Integer batchAdd(List<ProjectTeam> list);
+
+    /**
+     * 批量更新
+     *
+     * @param list
+     * @return
+     */
+    public Integer batchUpdate(List<ProjectTeam> list);
     /**
      * 根据主键id查找
      *

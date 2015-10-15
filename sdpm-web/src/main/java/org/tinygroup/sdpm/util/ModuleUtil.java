@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.util;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +26,39 @@ public class ModuleUtil {
         }else{
             condition.append(","+moduleId);
         }
+    }
+    
+    public static StringBuffer getConditionByModule(StringBuffer condition,SystemModule systemModule,ModuleService moduleService){
+    	
+    	if(systemModule==null){
+			return null;
+		}
+		if(condition==null){
+			condition = new StringBuffer();
+		}
+		List<SystemModule> modules = new ArrayList<SystemModule>();
+		if(systemModule.getModuleId()==null){
+			modules = moduleService.findModuleList(systemModule);
+		}else{
+			modules.add(moduleService.findById(systemModule.getModuleId()));
+		}
+		if(modules.size()>0){
+			for (SystemModule module : modules) {
+				
+				if(condition.toString().endsWith("(")){
+			            condition.append(" "+module.getModuleId());
+		        }else{
+		            condition.append(","+module.getModuleId());
+		        }
+				int i = module.getModuleId();
+				systemModule.setModuleParent(i);
+				systemModule.setModuleId(null);
+				getConditionByModule(condition,systemModule,moduleService);
+			}
+		}
+    	
+    	
+    	return condition;
     }
 
     public static String getCondition(int moduleId,ModuleService moduleService){

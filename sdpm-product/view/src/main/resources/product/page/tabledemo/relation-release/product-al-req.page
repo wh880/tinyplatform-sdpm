@@ -10,8 +10,8 @@
 			
 			
 			#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置	
-			<input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('releaseId','全选');" />
-     		<input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('releaseId','反选');" />
+			<input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('storyId','全选');" />
+     		<input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('storyId','反选');" />
 
 				#foreach(m:menuManager.getScopeMenus("release-badel"))
 					#if(m.id=="product-release-badel")

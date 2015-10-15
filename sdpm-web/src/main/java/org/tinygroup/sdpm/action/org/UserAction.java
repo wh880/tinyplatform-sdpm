@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.common.config.Global;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -27,8 +26,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @Controller
-@RequestMapping("a/org/user")
+@RequestMapping("/org/user")
 public class UserAction extends BaseController {
     @Autowired
     private UserService userService;
@@ -65,11 +65,13 @@ public class UserAction extends BaseController {
             userService.updateUser(user);
         }
         model.addAttribute("user", user);
-        return "redirect:" + Global.getAdminPath() + "/org/user/list/";
+        return "redirect:"+adminPath+"/org/user/list/";
     }
 
     @RequestMapping("/list")
     public String list(OrgUser orgUser, Model model) {
+//        List<OrgUser> list = userService.findUserList(orgUser);
+//        model.addAttribute("list", list);
         return "organization/user/user.page";
     }
 
@@ -88,7 +90,8 @@ public class UserAction extends BaseController {
         } else {
             return "organization/user/delect.pagelet";
         }
-        return "redirect:" + Global.getAdminPath() + "/org/user/list/";
+
+        return "redirect:/org/user/list/";
     }
 
     @ResponseBody
@@ -136,21 +139,30 @@ public class UserAction extends BaseController {
     @ResponseBody
     @RequestMapping("/userList")
     public List<OrgUser> findUser(OrgUser orgUser) {
+
         List<OrgUser> list = userService.findUserList(orgUser);
+
         return list;
     }
 
     @RequestMapping("/story")
     public String storyJump() {
+
         return "/organization/user/storyAdmin.page";
     }
 
     @RequestMapping("/story/search")
-    public String storySearchAction(String id, int page, int pagesize, String choose, ProductStory story, String order, String ordertype, Model model, HttpServletRequest request) {
+    public String storySearchAction(String id, String account, int page, int pagesize, String choose, ProductStory story, String order, String ordertype, Model model, HttpServletRequest request) {
+
+        if (StringUtil.isBlank(id) && !StringUtil.isBlank(account)) {
+            OrgUser userByAccount = userService.findUserByAccount(account);
+            id = userByAccount.getOrgUserId();
+        }
         if (choose.equals("6")) {
             story.setStoryClosedBy(id);
             Pager<ProductStory> p4 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p4);
+
         } else if (choose.equals("4")) {
             story.setStoryOpenedBy(id);
             Pager<ProductStory> p2 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
@@ -165,6 +177,7 @@ public class UserAction extends BaseController {
             story.setStoryAssignedTo(id);
             Pager<ProductStory> p1 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p1);
+
         }
         return "organization/user/userStoryTable.pagelet";
     }
@@ -218,5 +231,43 @@ public class UserAction extends BaseController {
         Pager<QualityBug> bugPager = bugService.findBugListPager(limit * (page - 1), limit, null, bug, order, false);
         model.addAttribute("bugPager", bugPager);
         return "/organization/user/bugAdminTable.pagelet";
+    }
+
+    @RequestMapping("/testtask")
+    public String testTaskJump() {
+        return "/organization/user/testtaskAdmin.page";
+    }
+
+    @RequestMapping("/testtask/search")
+    public String testTaskSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, QualityTestTask testTask, String order, String ordertype, Model model, HttpServletRequest request) {
+        OrgUser user = userService.findUser(id);
+        String account = user.getOrgUserAccount();
+        QualityTestTask testTask1 = new QualityTestTask();
+        testTask1.setTesttaskOwner(account);
+        Pager<QualityTestTask> testTaskPager = testTaskService.findTestTaskPager(start, limit, testTask1, order, false);
+        model.addAttribute("testTaskPager", testTaskPager);
+
+        return "/organization/user/userTesttaskTable.pagelet";
+    }
+
+    @RequestMapping("/testtask1")
+    public String testTaskJump2() {
+        return "/organization/user/testtaskAdmin1.page";
+    }
+
+    @RequestMapping("/testtask1/search")
+    public String testCaseSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, QualityTestCase testCase, String order, String ordertype, Model model, HttpServletRequest request) {
+        OrgUser user = userService.findUser(id);
+        String account = user.getOrgUserAccount();
+        QualityTestCase testCase1 = new QualityTestCase();
+        if (choose.equals("4")) {
+            testCase1.setCaseScriptedBy(account);
+        }
+        if (choose.equals("5")) {
+            testCase1.setCaseOpenedBy(account);
+        }
+        Pager<QualityTestCase> testCasePager = testCaseService.findTestCasePager(start, limit, testCase1, order, false);
+        model.addAttribute("testCasePager", testCasePager);
+        return "/organization/user/userTestCaseTable.pagelet";
     }
 }

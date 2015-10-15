@@ -17,12 +17,15 @@
                     #@th()所属模块#end
                     #@td()#@formControlDiv("col-9")
                         #@Tselect2F()
-                            #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"})
+                            #@Tselect2Body("moduleId" "" {"class":"input-text select2"})
+                                <option value=""></option>
                                 #foreach(m : modulesList)
                                     <option value="${m.moduleId}">m.moduleTitle</option>
                                 #end
                             #end
-                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                            #@Tselect2Fix()
+
+                            #end
                         #end
                         #@validateDiv("col-2")#end
                     #end#end
@@ -37,7 +40,10 @@
                                         <option value="${s.storyId}">${s.storyTitle}</option>
                                     #end
                                 #end
-                                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                                #@Tselect2Fix()
+                                    <a href="${TINY_CONTEXT_PATH}/product/story/save">新增</a>
+                                    <a href="${TINY_CONTEXT_PATH}/product/story/search">全部</a>
+                                #end
                             #end
                             #@validateDiv("col-2")#end
                         #end
@@ -54,7 +60,10 @@
                                 #end
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                            #@Tselect2Fix()
+                                <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
+                                <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
+                            #end
                         #end
                         #@validateDiv("col-2")#end
                     #end#end
@@ -74,8 +83,7 @@
                                 <option value="7">事物</option>
                                 <option value="9">其他</option>
                             #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+
                         #end
                         #@validateDiv("col-2")#end
                     #end#end
@@ -94,8 +102,6 @@
                                 <option value="5">已取消</option>
                                 <option value="9">已关闭</option>
                             #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                         #end
                         #@validateDiv("col-2")#end
                     #end#end
@@ -112,8 +118,6 @@
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                         #end
                         #@validateDiv("col-2")#end
                     #end#end
@@ -129,9 +133,10 @@
                                         <option value="${t.teamAccount}">${t.teamAccount}</option>
                                     #end
                                 #end
-                                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page"
-                                                  class="r ">增加</a>
-                                    <a href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
+                                #@Tselect2Fix()
+                                    <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
+                                    <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
+                                #end
                             #end
                             #@validateDiv("col-2")#end
                         #end
@@ -247,7 +252,10 @@
                                     #end
                                 #end
                             ##填写任意内容，侦听需重新填加 A侦听已内置
-                                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                                #@Tselect2Fix()
+                                    <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
+                                    <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
+                                #end
                             #end
                             #@validateDiv("col-2")#end
                         #end
@@ -281,7 +289,10 @@
                                     #end
                                 #end
                             ##填写任意内容，侦听需重新填加 A侦听已内置
-                                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                                #@Tselect2Fix()
+                                    <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
+                                    <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
+                                #end
                             #end
                             #@validateDiv("col-2")#end
                         #end
@@ -314,8 +325,10 @@
                                         <option value="${t.teamAccount}">${t.teamAccount}</option>
                                     #end
                                 #end
-                            ##填写任意内容，侦听需重新填加 A侦听已内置
-                                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                                #@Tselect2Fix()
+                                    <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
+                                    <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
+                                #end
                             #end
                             #@validateDiv("col-2")#end
                         #end#end
@@ -329,8 +342,6 @@
                                     <option value="1">已经完成</option>
                                     <option value="2">已经关闭</option>
                                 #end
-                            ##填写任意内容，侦听需重新填加 A侦听已内置
-                                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                             #end
                             #@validateDiv("col-2 validmsg")#end
                         #end

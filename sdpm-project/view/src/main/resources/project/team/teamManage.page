@@ -38,6 +38,7 @@
             #@thW("250px")
                 ${t.teamAccount}
                 <input name="teamList[${a}].teamAccount" value="${t.teamAccount}" type="hidden">
+                <input name="teamList[${a}].id" value="${t.id}" type="hidden">
             #end
             <td>
                 #tinyInput("text" "teamList["+a+"].teamRole" t.teamRole {"datatype":"","class":"input-text"})
@@ -61,7 +62,10 @@
                             <option value="${u.orgUserAccount}">${u.orgUserAccount}</option>
                         #end
                     #end
-                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
+                    #end
                 #end
             </td>
             <td>

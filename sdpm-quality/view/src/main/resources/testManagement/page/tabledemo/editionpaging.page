@@ -254,8 +254,8 @@
                                     var pId = $("#${sid}  option:selected").val();
 
                                     ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0});
-
-
+                                    ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProject="+pId,${bug?.bugOpenedBuild?:0});
+                                    ajaxRead("${sid}","bugResolvedBuild","buildId","buildName","/quality/bug/ajax/build?buildProject="+pId,${bug?.bugResolvedBuild?:0});
                                 })
                             </script>
                         #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -327,10 +327,7 @@
                     #@td()
                    #@Tselect2F()
 	                   		 #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value="0">/</option>
-                                #foreach(build : buildList)
-                                <option value="${build?.buildId}">${build?.buildName}</option>
-                                #end
+
 	                    	#end                
                 	  #end
                     #end
@@ -360,11 +357,8 @@
                     #@th()解决版本#end
                     #@td()
                         #@Tselect2F()
-	                   		 #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value="0">/</option>
-                                #foreach(build : buildList)
-                                <option value="${build?.buildId}">${build?.buildName}</option>
-                                #end
+	                   		 #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
 	                    	#end                
                 	  #end
                         #@validateDiv("col-2")#end

@@ -77,5 +77,17 @@ public class ProfileUtil extends BaseController{
 	        profile.setFileSize((int)size);
 	        profileService.add(profile);
 	   }
+	   public void uploadNoTitles(MultipartFile[] upfile,int id,String type){
+		   for(int i=0,n=upfile.length;i<n;i++){
+			   if(!upfile[i].isEmpty()&&upfile[i].getSize()>0){
+				   try {
+					uploadNoTitle(upfile[i], id, type);
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+			   }
+		   }
+	   }
 	
 }

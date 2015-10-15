@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action.document;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
@@ -29,7 +32,9 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.tinysqldsl.Pager;
 
 @Controller
@@ -45,6 +50,8 @@ public class DocAction {
 	private ModuleService moduleService;
 	@Autowired
 	private ProjectProductService projectProductService;
+	@Autowired
+	private ProfileService profileService;
 	
 	@RequestMapping("")
 	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange)
@@ -98,10 +105,14 @@ public class DocAction {
 	}
 	
 	@RequestMapping(value="/doc/addSave",method=RequestMethod.POST)
-	public String addSave(HttpServletRequest request,DocumentDoc doc,Model model){	
+	public String addSave(HttpServletRequest request,DocumentDoc doc,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,Model model) throws IOException{	
 		List<Product> product = productService.findProductList(new Product());
 		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
-		docservice.createNewDoc(doc);
+		DocumentDoc document = docservice.createNewDoc(doc);
+		
+		ProfileUtil profileUtil = new ProfileUtil();		
+        profileUtil.uploads(file, document.getDocId(), "document", title);
+        
 		model.addAttribute("productList", product);
 		return "redirect:"+"/document?docChange=true";
 	}
@@ -123,11 +134,14 @@ public class DocAction {
 	}
 	
 	@RequestMapping("/doc/view")
-	public String docView(HttpServletRequest request,DocumentDoc doc,Model model,Integer docid){
+	public String docView(HttpServletRequest request,DocumentDoc doc,SystemProfile systemProfile,Model model,Integer docid){
 		
 		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
 		doc = docservice.findDocById(docid);		
 		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
+		systemProfile.setFileObjectType("document");
+		List<SystemProfile> list = profileService.find(systemProfile);
+		model.addAttribute("file",list);
 		model.addAttribute("doc",doc);
 		model.addAttribute("docLib",docLib);
 		return "/document/doc-view.page";
@@ -199,12 +213,12 @@ public class DocAction {
 	
 	@RequestMapping(value="/doclib/edit")
 	public String editDoclib(HttpServletRequest request,DocumentDoclib doclib,Model model)
-	{	
-		//List<DocumentDoclib> liblist = docservice.findDoclibList(doclib);
-		doclib.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));		
-	//	if(liblist.size()>0)
-	//		doclib = liblist.get(0);
+	{		
+		doclib = docservice.findDoclibById((Integer) request.getSession().getAttribute("documentLibId"));
 		model.addAttribute("doclib", doclib);
+		if((Integer) request.getSession().getAttribute("documentLibId") == 1 || (Integer) request.getSession().getAttribute("documentLibId") == 2){
+			return "/document/doclib-no-edit.pagelet";
+		}
 		return "/document/doclib-edit.pagelet";
 	}
 	

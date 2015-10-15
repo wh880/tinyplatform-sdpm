@@ -40,4 +40,15 @@ public class ProfileManagerImpl implements ProfileManager {
 		return systemProfile;
 	}
 
+	public SystemProfile editFileTitle(SystemProfile systemProfile) {
+		// TODO Auto-generated method stub
+		systemProfileDao.editTitle(systemProfile);
+		return systemProfile;
+	}
+
+	public Integer softDelete(Integer id) {
+		// TODO Auto-generated method stub
+		return systemProfileDao.softDelete(id);
+	}
+
 }
