@@ -140,6 +140,7 @@ public class DocAction {
 		doc = docservice.findDocById(docid);		
 		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
 		systemProfile.setFileObjectType("document");
+		systemProfile.setFileObjectId(docid);
 		List<SystemProfile> list = profileService.find(systemProfile);
 		model.addAttribute("file",list);
 		model.addAttribute("doc",doc);
