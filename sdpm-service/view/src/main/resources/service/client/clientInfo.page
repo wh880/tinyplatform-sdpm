@@ -70,9 +70,11 @@
             <div style="text-align:right;margin:right">
                 #foreach(m:menuManager.getScopeMenus("service-cil"))
                     #if(m.id != "client-del")
-                        #@aExtendButton("btn-primary btn-sm" TINY_CONTEXT_PATH+m.href+"?id="+client.clientId)编辑#end
+                        #@aExtendButton("btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+client.clientId)
+                            编辑#end
                     #else
-                        #@delItemsdpm(TINY_CONTEXT_PATH+m.href client.clientId TINY_CONTEXT_PATH+"/service/client/list"{
+                        #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href client.clientId TINY_CONTEXT_PATH+adminPath+adminPath+
+                            "/service/client/list"{
                             "class":"btn radius btn-danger btn-sm"}) 删除#end
                     #end
                 #end
@@ -113,7 +115,8 @@
 
                             #set(m2=menuManager.getMenu("linkman-del"))
                             #if(m2)
-                                #@tinyTableItemRemove(TINY_CONTEXT_PATH+m2.href var?.id)<i class=${m2.icon}></i>#end
+                                #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m2.href var?.id)<i
+                                        class=${m2.icon}></i>#end
                             #end
                         </td>
                     </tr>

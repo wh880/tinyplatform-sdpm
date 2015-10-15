@@ -15,13 +15,13 @@
 			#@div(divClass="operationbar")
 				<span class="f">
 					#foreach(m:menuManager.getScopeMenus("testverleft-tab"))
-						<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==get?'active_btn':''}">${m.name}</a>
+						<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="${m.id==get?'active_btn':''}">${m.name}</a>
     				#end    					
 					</span>
 				<span class="r">
 					#foreach(m:menuManager.getScopeMenus("testversion-tab"))
 						#if(m.id=="tversionpro")
-							<a href="${TINY_CONTEXT_PATH}${m.href}">
+							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">
 								#buttonIcon(iconClass=m.icon)${m.name}</a>
 						#end
 					#end
@@ -53,7 +53,7 @@
 								<li>
 								#foreach(m:menuManager.getScopeMenus("testversion-op"))
 									#if(m.id=="teditionversion")
-									<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page">修改</a>
+									<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/editionversion.page">修改</a>
 									#end
 								#end
 								</li>																
@@ -68,7 +68,7 @@
 					
 				#end
 			#set(requestStatuString = tinyRequestQueryString!=null ?"&"+tinyRequestQueryString:"")
-			#@tinyTableContent(TINY_CONTEXT_PATH+"quality/testTask/findPager?"+requestStatuString)
+			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"quality/testTask/findPager?"+requestStatuString)
 				#@thead()
 					#@tr()
 						#@tinyTh({"width":"6"})<input type="checkbox" name="" value="">#end

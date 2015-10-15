@@ -13,7 +13,7 @@ import org.tinygroup.weblayer.mvc.annotation.Controller;
  */
 
 @Controller
-@RequestMapping("quality/caseStep")
+@RequestMapping("/a/quality/caseStep")
 public class CaseStepAction extends BaseController {
 	
 	@Autowired

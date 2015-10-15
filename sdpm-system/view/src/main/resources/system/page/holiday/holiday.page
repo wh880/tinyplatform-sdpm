@@ -26,14 +26,14 @@
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				#@radiusBtn("btn-danger spmuldet" "icon-trash" "javascript:","delete") 批量删除#end
-				#@aModal("#myModal" "批量删除" "1200" "500" "hidenmuldel hide" "/system/holiday/findIds")#end
+				#@aModal("#myModal" "批量删除" "1200" "500" "hidenmuldel hide" adminPath+"/system/holiday/findIds")#end
 ##                #@mulOperation("muldelete" call("link","/system/holiday/findIds"))            
 ##				 	#@radiusBtn("btn-danger" "icon-trash" "javascript:") 批量删除#end
 ##				 #end
 				#@aModal("#myModal" "添加" "500" "276" "btn radius btn-primary" "/system/page/holiday/holiday-add.pagelet")添加#end
 			
 			#end
-			#@tinyTableContent(TINY_CONTEXT_PATH+"/system/holiday/findPager") ##取数据地址 总数据
+			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/system/holiday/findPager") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end

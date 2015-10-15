@@ -38,7 +38,7 @@ import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.tinysqldsl.Pager;
 
 @Controller
-@RequestMapping(value="/document")
+@RequestMapping(value="/a/document")
 public class DocAction {
 	@Autowired
 	private DocService docservice;
@@ -54,10 +54,10 @@ public class DocAction {
 	private ProfileService profileService;
 	
 	@RequestMapping("")
-	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange)
+	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange,String tree)
 	{	
 		List<DocumentDoclib> list=docservice.findDoclibList(new DocumentDoclib());				
-		if(list.size()>0&&!("true".equals(change))&&!("true".equals(docChange))){
+		if(list.size()>0&&!("true".equals(change))&&!("true".equals(docChange))&&!("true".equals(tree))){
 			if(null==request.getSession().getAttribute("documentLibId")||doclib.getDocLibId()==null){
 				request.getSession().setAttribute("documentLibId",list.get(0).getDocLibId());
 			}else {
@@ -66,7 +66,6 @@ public class DocAction {
 		}
 		request.getSession().setAttribute("libList",list);	
 		return "/document/document.page";
-		//return "redirect:/document/document?"+(list.size()>0?("lib="+list.get(0).getDocLibName()):"");
 	}
 	
 	@RequestMapping(value="/doc/list")
@@ -83,6 +82,7 @@ public class DocAction {
 		return "/data/datalist.pagelet";
 	}
 	
+	//@RequiresPermissions("add-doc")
 	@RequestMapping(value="/doc/add")
 	public String createDoc(HttpServletRequest request ,Model model)
 	{		
@@ -114,7 +114,7 @@ public class DocAction {
         profileUtil.uploads(file, document.getDocId(), "document", title);
         
 		model.addAttribute("productList", product);
-		return "redirect:"+"/document?docChange=true";
+		return "redirect:"+"/a/document?docChange=true";
 	}
 	
 	@RequestMapping(value="/doc/edit")
@@ -130,7 +130,7 @@ public class DocAction {
 	@RequestMapping(value="/doc/editSave",method=RequestMethod.POST)
 	public String editSave(DocumentDoc doc,Model model){			
 		docservice.editDoc(doc);
-		return "redirect:"+"/document?docChange=true";
+		return "redirect:"+"/a/document?docChange=true";
 	}
 	
 	@RequestMapping("/doc/view")
@@ -140,6 +140,7 @@ public class DocAction {
 		doc = docservice.findDocById(docid);		
 		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
 		systemProfile.setFileObjectType("document");
+		systemProfile.setFileObjectId(docid);
 		List<SystemProfile> list = profileService.find(systemProfile);
 		model.addAttribute("file",list);
 		model.addAttribute("doc",doc);
@@ -168,7 +169,7 @@ public class DocAction {
 		else{
 			docservice.editDoc(doc);
 		}
-		return "redirect:"+"/document";
+		return "redirect:"+"/a/document";
 	}
 	
 	@ResponseBody
@@ -213,12 +214,12 @@ public class DocAction {
 	
 	@RequestMapping(value="/doclib/edit")
 	public String editDoclib(HttpServletRequest request,DocumentDoclib doclib,Model model)
-	{	
-		//List<DocumentDoclib> liblist = docservice.findDoclibList(doclib);
-		doclib.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));		
-	//	if(liblist.size()>0)
-	//		doclib = liblist.get(0);
+	{		
+		doclib = docservice.findDoclibById((Integer) request.getSession().getAttribute("documentLibId"));
 		model.addAttribute("doclib", doclib);
+		if((Integer) request.getSession().getAttribute("documentLibId") == 1 || (Integer) request.getSession().getAttribute("documentLibId") == 2){
+			return "/document/doclib-no-edit.pagelet";
+		}
 		return "/document/doclib-edit.pagelet";
 	}
 	
@@ -231,7 +232,7 @@ public class DocAction {
 		}else {
 			docservice.editDocLibName(doclib);
 		}	
-		return "redirect:"+"/document?change=true";
+		return "redirect:"+"/a/document?change=true";
 	}
 	
 	@ResponseBody
@@ -325,7 +326,7 @@ public class DocAction {
 		}else if ("update".equals(type)) {
 
 			docservice.editDoc(doc);
-			return "redirect:"+"/document/product/doc";
+			return "redirect:"+"/a/document/product/doc";
 		}
 		return "";
 	}

@@ -1,4 +1,5 @@
 #!set(activeTitle="字典类型管理",activeMenuId=currentPageId)
+#!set(page="dict")
 #set(editpagePath="/system/page/dictionaries/dict_edit.pagelet",editpageModalId="dictEditModal",editpageModal="#"+editpageModalId)
 #set(viewpagePath="/system/page/dictionaries/dict_view.pagelet",viewpageModalId="dictViewModal",viewpageModal="#"+viewpageModalId)
 #include("/system/page/event/common.page")
@@ -11,10 +12,10 @@
 #@tableBox()
 	#@datatable("dictListTb")
 		#@tableToolbar()
-				 #@mulOperation("muldelete" call("link","/system/module/batchDelete"))            
+				 #@mulOperation("muldelete" call("link",adminPath+"/system/module/batchDelete"))            
 				 	#@radiusBtn("btn-danger" "icon-trash" "javascript:") 批量删除#end
 				 #end
-				 #@aModal(editpageModal "添加" "460" "158" "btn radius btn-primary" "/system/module/find")
+				 #@aModal(editpageModal "添加" "460" "158" "btn radius btn-primary" adminPath+"/system/module/find")
 						#@simpleI("icon-plus")添加#end
 				#end
 			#end
@@ -37,9 +38,9 @@
 					#@td("f-14 user-manage")
 						#foreach(m in menuManager.getScopeMenus("dict-op"))
 							#if(m.id!="dict-del")
-								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "460" "158" m.href +"?moduleId="+mo?.moduleId "ml-5")
+								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "460" "158" adminPath+m.href +"?moduleId="+mo?.moduleId "ml-5")
 							#else
-								#iconOperation(m.icon m.name "ml-5 delBtn" m.href+"?moduleId="+mo?.moduleId)
+								#iconOperation(m.icon m.name "ml-5 delBtn" adminPath+m.href+"?moduleId="+mo?.moduleId)
 							#end
 							
 						#end

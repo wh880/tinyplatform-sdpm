@@ -7,26 +7,27 @@
         #setTinyTablePageSize([8,10,20,50,100,200])
         #set(m1=menuManager.getMenu("client-batchdel"))
         #if(m1)
-            #@mulOperation("muldelete" TINY_CONTEXT_PATH+"/service/client/batchDelete")
+            #@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/service/client/batchDelete")
             <a class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
             #end
         #end
 
         #set(m2=menuManager.getMenu("client-add"))
         #if(m2)
-            #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+
+            #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
                 "/service/client/form")#buttonIcon(iconClass=m2.icon)新建客户#end
         #end
 
         #set(m3=menuManager.getMenu("client-export"))
         #if(m3)
-            #@aModal("#myModal" "" "600" "100" "btn radius btn-primary btn-sm" m3.href)#buttonIcon(iconClass=
+            #@aModal("#myModal" "" "600" "150" "btn radius btn-primary btn-sm"
+                "/service/serviceCom/serviceExport.pagelet")#buttonIcon(iconClass=
                 "icon-download-alt")导出#end
         #end
 
-    ##    <a title="权限维护" href=userBatchAddpagePath>#buttonIcon(iconClass="添加" "865" "420","btn radius btn-info")</a>
+
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/service/client/list/data?treeId="+treeId) ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/service/client/list/data?treeId="+treeId) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

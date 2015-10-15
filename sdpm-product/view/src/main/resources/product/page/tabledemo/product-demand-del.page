@@ -1,5 +1,4 @@
-
-#@tinyForm("batchCloseForm" TINY_CONTEXT_PATH+"/product/story/closeBatch" "post" {"class":"test"})
+#@tinyForm("batchCloseForm" TINY_CONTEXT_PATH +adminPath+"/product/story/closeBatch" "post" {"class":"test"})
 	
 	 #@tableStriped()
 	 	

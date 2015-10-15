@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.common.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -37,6 +38,12 @@ public abstract class BaseController {
      */
     @Autowired
     protected Validator validator;
+
+    /**
+     * 管理基础路径
+     */
+    @Value("${adminPath}")
+    protected String adminPath;
 
     /**
      * 服务端参数有效性验证

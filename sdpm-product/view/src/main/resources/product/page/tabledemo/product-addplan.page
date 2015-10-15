@@ -133,13 +133,16 @@ return format;
 </script>
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/plan/save" "post" {"class":""})
-    <div class="infoContent">
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/plan/save" "post" {"class":""})
+
+
+
+<div class="infoContent">
         <p class="titleName">创建新计划</p>
      #@elementItem()
         #@colLabel()产品:#end
         #@formControlDiv("col-4")
-        	  产品 X X X X
+        	  ${product?.productName}
         #end
         #@validateDiv("col-2")#end
       #end

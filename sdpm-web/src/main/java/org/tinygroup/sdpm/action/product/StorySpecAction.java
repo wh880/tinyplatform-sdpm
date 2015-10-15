@@ -6,13 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 
 @Controller
-@RequestMapping("/product/storySpec")
+@RequestMapping("/a/product/storySpec")
 public class StorySpecAction extends BaseController{
 	
 	@Autowired
@@ -31,7 +30,7 @@ public class StorySpecAction extends BaseController{
 		
 		ProductStorySpec storySpec = specService.findStorySpec(story.getStoryId());
 		model.addAttribute("storySpec", storySpec);
-		
+		//model.addAttribute("storyId", story.getStoryId());
 		if ("productDemandDetail".equals(forward)) {
 			
 			return "/product/page/project/demdtablehref.page";

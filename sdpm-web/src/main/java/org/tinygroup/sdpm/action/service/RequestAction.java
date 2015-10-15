@@ -17,6 +17,7 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.service.service.inter.ReviewService;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import java.util.Map;
  * Created by Administrator on 2015-09-28.
  */
 @Controller
-@RequestMapping("/service/request")
+@RequestMapping("/a/service/request")
 public class RequestAction extends BaseController {
     @Autowired
     private RequestService requestService;
@@ -54,11 +55,18 @@ public class RequestAction extends BaseController {
                            @RequestParam(required = false, defaultValue = "clientName") String order,
                            @RequestParam(required = false, defaultValue = "asc") String ordertype) {
 
-        if (operation != null && operation == 1) {
-            Pager<ServiceRequest> pager = requestService.findReplyByMe(start, limit, operation, clientRequest, order, ordertype);
+        if (operation != null) {
+            OrgUser user = UserUtils.getUser();
+            Pager<ServiceRequest> pager = requestService.findOperationByMe(start, limit, user, clientRequest, treeId, operation, order, ordertype);
             model.addAttribute("pager", pager);
             return "service/serviceReq/requestTableData.pagelet";
         }
+//        if (operation != null && operation == 2) {
+//            OrgUser user = UserUtils.getUser();
+//            Pager<ServiceRequest> pager = requestService.findReviewByMe(start, limit, user, clientRequest,treeId, order, ordertype);
+//            model.addAttribute("pager", pager);
+//            return "service/serviceReq/requestTableData.pagelet";
+//        }
         Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, order, ordertype);
         model.addAttribute("pager", pager);
         return "service/serviceReq/requestTableData.pagelet";
@@ -87,7 +95,7 @@ public class RequestAction extends BaseController {
             requestService.updateRequest(clientRequest);
         }
         model.addAttribute("request", clientRequest);
-        return "redirect:/service/request/list";
+        return "redirect:" + adminPath + "/service/request/list";
     }
 
     @RequestMapping(value = "/close")//关闭请求
@@ -100,7 +108,7 @@ public class RequestAction extends BaseController {
     public String closed(ServiceRequest clientRequest, Model model) {
         if (clientRequest.getClientRequestId() != null)
             requestService.closeRequest(clientRequest);
-        return "redirect:/service/request/list";
+        return "redirect:" + adminPath + "/service/request/list";
     }
 
     @ResponseBody
@@ -152,7 +160,7 @@ public class RequestAction extends BaseController {
         }
         reviewService.changeStatus(review.getClientRequestId());
 //        model.addAttribute("review", review);
-        return "redirect:/service/request/list";
+        return "redirect:" + adminPath + "/service/request/list";
     }
 
     @ResponseBody

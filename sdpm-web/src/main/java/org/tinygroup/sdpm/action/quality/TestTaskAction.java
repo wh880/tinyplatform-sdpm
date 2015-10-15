@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.action.quality;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,14 +17,14 @@ import org.tinygroup.tinysqldsl.Pager;
  */
 
 @Controller
-@RequestMapping("quality/version")
+@RequestMapping("/a/quality/version")
 public class TestTaskAction extends BaseController {
 	
 	@Autowired
 	private TestTaskService testTaskService;
 	
 	@RequestMapping("")
-	public String form(String get,Model model){
+	public String form(HttpServletRequest request,String get,Model model){
 		return "/testManagement/page/version.page";
 	}
 	
@@ -45,7 +47,7 @@ public class TestTaskAction extends BaseController {
 			testTaskService.updateTestTask(testtask);
 		}
 		model.addAttribute("testtask",testtask);
-		return "redirect:"+"quality/version";
+		return "redirect:"+"/a/quality/version";
 	}
 	
 	@RequestMapping("/add")

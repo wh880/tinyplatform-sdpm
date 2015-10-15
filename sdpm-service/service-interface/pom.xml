@@ -25,5 +25,10 @@
           <artifactId>sdpm-service-business-interface</artifactId>
           <version>${tiny_sdpm_version}</version>
       </dependency>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>sdpm-org-dao-inter</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+      </dependency>
   </dependencies>
 </project>

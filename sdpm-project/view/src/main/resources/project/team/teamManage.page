@@ -16,7 +16,7 @@
         #end
     #end
 #end
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/team/teamManageSave" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/team/teamManageSave" "post" {"class":"test"})
     #@table()
     <tr>
         <td>
@@ -63,8 +63,8 @@
                         #end
                     #end
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
                     #end
                 #end
             </td>

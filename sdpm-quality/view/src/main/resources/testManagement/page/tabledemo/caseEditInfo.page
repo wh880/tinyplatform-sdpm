@@ -8,7 +8,7 @@
 	    		#@tr()
 	    			#@th()所属产品#end
 	    			#@td()
-	    			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">产品1#end
+	    			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">产品1#end
 	    		#end
 	    		#@tr()
 	    			#@th()所属模块#end

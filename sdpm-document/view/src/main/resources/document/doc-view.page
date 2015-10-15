@@ -11,15 +11,15 @@
 		<span class="r">
 			#foreach(m:menuManager.getScopeMenus("doc-view-op"))
 				#if(m.id == "doc-view-delete")
-					#@delItemsdpm(TINY_CONTEXT_PATH+m.href doc?.docId TINY_CONTEXT_PATH+"/document")
+					#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document")
 						#buttonIcon(iconClass=m.icon)
 					#end&nbsp
 				#else
 				#if(m.id == "doc-view-edit")
-					<a href="${TINY_CONTEXT_PATH}${m.href}?docId=${doc?.docId}" title="${m.name}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${doc?.docId}" title="${m.name}">
 						#buttonIcon(iconClass=m.icon)</a>&nbsp
 				#else
-					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
 						#buttonIcon(iconClass=m.icon)</a>&nbsp
 				#end	
 				#end
@@ -43,8 +43,16 @@
     #foreach(f : file)
     	 #set(path=f?.filePathname)
     		<a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
-    		<a href="${TINY_CONTEXT_PATH}/" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>&nbsp
-    		<a href="${TINY_CONTEXT_PATH}/" title="删除">#buttonIcon(iconClass="icon-remove")</a>
+    		#foreach(m:menuManager.getScopeMenus("file-op"))
+				#if(m.id == "file-edit")					
+    				#@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
+        	        	#buttonIcon(iconClass=m.icon)#end&nbsp
+        	    #else
+        	    	#@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId)
+						<i class="${m.icon}" title="删除"></i>
+					#end<br>
+        	    #end
+        	#end    		
     #end
    
     #else <p class="titleName">网页</p>
@@ -58,15 +66,15 @@
     <center>		
 		#foreach(m:menuManager.getScopeMenus("doc-view-op"))
 				#if(m.id == "doc-view-delete")
-					#@delItemsdpm(TINY_CONTEXT_PATH+m.href doc?.docId TINY_CONTEXT_PATH+"/document")
+					#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document")
 						#buttonIcon(iconClass=m.icon)
 					#end&nbsp
 				#else
 				#if(m.id == "doc-view-edit")
-					<a href="${TINY_CONTEXT_PATH}${m.href}?docId=${doc?.docId}" title="${m.name}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${doc?.docId}" title="${m.name}">
 						#buttonIcon(iconClass=m.icon)</a>&nbsp
 				#else
-					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
 						#buttonIcon(iconClass=m.icon)</a>&nbsp
 				#end	
 				#end

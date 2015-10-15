@@ -21,6 +21,10 @@ public class TeamManagerImpl implements TeamManager {
     @Autowired
     private ProjectTeamDao teamDao;
 
+    public List<ProjectTeam> find(ProjectTeam team) {
+        return teamDao.query(team);
+    }
+
     public Integer batchAdd(List<ProjectTeam> list) {
         return teamDao.batchInsert(list).length;
     }

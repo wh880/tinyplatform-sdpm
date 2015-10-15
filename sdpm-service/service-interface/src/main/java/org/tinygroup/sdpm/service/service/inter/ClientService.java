@@ -25,6 +25,11 @@ public interface ClientService {
     Pager<ServiceClient> findClientPager(Integer start, Integer limit, ServiceClient client, String order,
                                          String ordertype);
 
+    /**
+     * 通过左树的产品ID查找数据库的所有记录
+     *
+     * @return
+     */
     Pager<ServiceClient> findClientPagerByPid(Integer start, Integer limit, Integer treeId, String order,
                                               String ordertype);
 
@@ -77,6 +82,12 @@ public interface ClientService {
      */
     List<ServiceClient> findClientByProduct(Integer productId);
 
+    /**
+     * 根据客户id查找客户签订的协议
+     *
+     * @param d 主键
+     * @return
+     */
     List<ServiceSla> findSlaByClientId(Integer id);
 
     /**
@@ -111,6 +122,12 @@ public interface ClientService {
      */
     Integer deleteClientUser(Integer id);
 
+    /**
+     * 新建或编辑客户时验证客户名是否存在数据库中
+     *
+     * @param
+     * @return
+     */
     ServiceClient judgeClient(String clientName);
 
 }

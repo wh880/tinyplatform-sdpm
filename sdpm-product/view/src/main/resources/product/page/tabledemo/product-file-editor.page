@@ -92,7 +92,8 @@
          #@elementItem()
   <center>
 	#buttonRadiusDefault(caption="保存")
-	<a href="${TINY_CONTEXT_PATH}/product/page/project/archive-list.page" >#buttonRadiusDefault(caption="返回")</a>
+      <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/archive-list.page">#buttonRadiusDefault(caption=
+          "返回")</a>
 	</center>
 	#end
         

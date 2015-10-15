@@ -36,5 +36,24 @@ public interface ProfileService {
      */
     
     SystemProfile edit(SystemProfile systemProfile);
+    /**
+     * 编辑文件名
+     * @param systemProfile
+     * @return
+     */
+    SystemProfile editTitle(SystemProfile systemProfile);
+    /**
+     * 软删除
+     * @param id
+     * @return
+     */
+    
+    Integer softDelete(Integer id);
+    /**
+     * 通过Id查询
+     * @param id
+     * @return
+     */
+    SystemProfile findById(Integer id);
  
 }

@@ -20,7 +20,7 @@
 	#@tabBodyCol("ptop-5")
 ##operationbar start1
 #end
-	#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/bug/copy" "post" {"class":""})
+	#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/copy" "post" {"class":""})
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">复制Bug</p>
@@ -45,8 +45,8 @@
 									})
 								</script>
 	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
                 	  #end
 #*					#@tinySelect("lang" "1" {"class":"select2"})
 							#@tinyOptionItem("1")日本三菱#end
@@ -97,8 +97,8 @@
 									})
 								</script>
 	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
 	                    	#end
                 	  #end
                 	 #end
@@ -114,8 +114,8 @@
 
 	                    	#end                
 #*	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
 	                    	#end*#
                 	  #end
                 	 #end
@@ -175,8 +175,8 @@
 
 	                    	#end                
 	                      	#@Tselect2Fix()
-	                      	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
-	                      	<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">全部</a>#end
+	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
+	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">全部</a>#end
                 			#end
 					#end
 				#end
@@ -190,8 +190,8 @@
 
 	                    	#end                
 	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/project/task/add.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/project/task/index.page">全部</a>#end
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/add.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">全部</a>#end
                 	  #end
                 #end
 				#end
@@ -319,7 +319,7 @@
             	</div>
             	<div class="col-1"></div>
             	<div class="col-1">
-#*                <a href="${TINY_CONTEXT_PATH}/testManagement/page/Bug.page">
+#*                <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/Bug.page">
                 <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>*#
                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
            		 </div>
@@ -345,7 +345,7 @@
 			var s;
 			$.ajax({
 				type: "POST",
-				url: "${TINY_CONTEXT_PATH}"+url,
+				url: "${TINY_CONTEXT_PATH+adminPath}"+url,
 				data: $(this).attr('data'),
 				dataType:"json",
 				success: function(data){

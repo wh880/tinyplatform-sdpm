@@ -17,6 +17,10 @@ public class TeamServiceImpl implements TeamService {
     @Autowired
     private TeamManager teamManager;
 
+    public List<ProjectTeam> findTeamList(ProjectTeam team) {
+        return teamManager.find(team);
+    }
+
     public Integer batchAdd(List<ProjectTeam> list) {
         return teamManager.batchAdd(list);
     }

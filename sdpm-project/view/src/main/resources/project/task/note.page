@@ -4,7 +4,7 @@
 #set(name="task")
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/system/effort/save" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/system/effort/save" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue=task?.taskStatus)
     #hiddenInput(hiddenInputName="effortId" hiddenInputValue=effort?.effortId)
     #hiddenInput(hiddenInputName="effortObjectType" hiddenInputValue="task")
@@ -45,7 +45,7 @@
                             #@dialogFooter()
                                 #@buttonEnsure()
                                 ##此链接有数据时删除
-                                <a href="${TINY_CONTEXT_PATH}/project/task/index.page">确定</a>#end
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">确定</a>#end
                                 #@buttonCancel()关闭#end
                             #end
                         #end

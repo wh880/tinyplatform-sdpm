@@ -12,7 +12,7 @@
 #for(t:teamPager.getRecords())
 #@tr()
     #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH}//org/user/story?account=${t?.teamAccount}">${t?.teamAccount}</a> #end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}//org/user/story?account=${t?.teamAccount}">${t?.teamAccount}</a> #end
     #@td()${t?.teamRole}#end
     #@td()${t?.teamJoin}#end
     #@td()${t?.teamDays}#end
@@ -20,7 +20,7 @@
     #@td()48#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("pro-team-op"))
-            #@tinyTableItemRemove(TINY_CONTEXT_PATH+m.href t.id)<i class=${m.icon}></i>#end
+            #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href t.id)<i class=${m.icon}></i>#end
         #end
     #end
 #end

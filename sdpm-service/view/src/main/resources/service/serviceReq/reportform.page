@@ -58,7 +58,7 @@
     	#@aModal("#myModal" "导出HTML" "600" "100" "btn-class"
             "/service/serviceCom/serviceExport.pagelet")#buttonIcon(iconClass="icon-download-alt")导出#end
 
-                <a href="${TINY_CONTEXT_PATH}/service/serviceReq/request.page">#buttonIcon(iconClass=
+                <a href="${TINY_CONTEXT_PATH+adminPath}/service/serviceReq/request.page">#buttonIcon(iconClass=
                     "icon-goback icon-level-up icon-large icon-rotate-270")返回</a>&nbsp;
 	</span>
                 #div(divClass="clearfix")

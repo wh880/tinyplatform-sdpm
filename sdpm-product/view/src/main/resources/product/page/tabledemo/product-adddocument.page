@@ -67,7 +67,8 @@
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="backBtn"><a href="${TINY_CONTEXT_PATH}/product/page/project/archive-list.page" >返回</a></button>
+                <button style="float: left" type="submit" id="submit" class="backBtn"><a
+                        href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/archive-list.page">返回</a></button>
             </div>
             <div class="col-5"></div>
         </div>

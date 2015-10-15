@@ -36,4 +36,19 @@ public class ProfileServiceImpl implements ProfileService {
 		return profileManager.updataSystemProfile(systemProfile);
 	}
 
+	public SystemProfile editTitle(SystemProfile systemProfile) {
+		// TODO Auto-generated method stub
+		return profileManager.editFileTitle(systemProfile);
+	}
+
+	public Integer softDelete(Integer id) {
+		// TODO Auto-generated method stub
+		return profileManager.softDelete(id);
+	}
+
+	public SystemProfile findById(Integer id) {
+		// TODO Auto-generated method stub
+		return profileManager.findById(id);
+	}
+
 }

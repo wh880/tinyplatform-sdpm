@@ -18,9 +18,10 @@
                         #elseif(m?.id=="product-plan-del")
                         	#@delItemsdpm(url)#buttonIcon(iconClass=m?.icon)#end
                         #elseif(m?.id=="product-plan-editor")
-                        	 <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${url}"><i class="${m?.icon}"></i></a>&nbsp;
+                            <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i
+                                    class="${m?.icon}"></i></a>&nbsp;
                         #else
-                        	 <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m?.icon)${m?.name}</a>&nbsp;
+                            <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m?.icon)${m?.name}</a>&nbsp;
                                           
                         #end
                     #end
@@ -36,12 +37,14 @@
 				#@tabHead()
 
 					#if("demand"==type)
-						#@aHeadCol(TINY_CONTEXT_PATH+"/product/plan/forword/reRelateStory?planId="+planId cname=="demand"?"Current":"")
+						#@aHeadCol(TINY_CONTEXT_PATH +adminPath+
+							"/product/plan/forword/reRelateStory?planId="+planId cname=="demand"?"Current":"")
 							#@buttons("","icon-lightbulb")
 								已关联需求
 							#end
 						#end
-						#@aHeadCol(TINY_CONTEXT_PATH+"/product/plan/forword/noRelateStory?planId="+planId cname=="no-demand"?"Current":"")
+						#@aHeadCol(TINY_CONTEXT_PATH +adminPath+
+							"/product/plan/forword/noRelateStory?planId="+planId cname=="no-demand"?"Current":"")
 							#@buttons("","icon-unlink")
 								未关联需求
 							#end
@@ -50,7 +53,8 @@
 							<div class="r">
                         #foreach(m:menuManager.getScopeMenus("table-bug"))
                             #if(m.id=="plan-table-bug")
-							#@aHeadCol(TINY_CONTEXT_PATH+"/product/plan/forword/reRelateBug?planId="+planId cname=="link-bug"?"Current":"")
+								#@aHeadCol(TINY_CONTEXT_PATH +adminPath+
+									"/product/plan/forword/reRelateBug?planId="+planId cname=="link-bug"?"Current":"")
 							#@buttons("","icon-bug")
 								关联BUG
 							#end
@@ -72,12 +76,14 @@
 					#end
 
 					#if("bug"==type)
-						#@aHeadCol(TINY_CONTEXT_PATH+"/product/plan/forword/reRelateBug?planId="+planId cname=="bug"?"Current":"")
+						#@aHeadCol(TINY_CONTEXT_PATH +adminPath+
+							"/product/plan/forword/reRelateBug?planId="+planId cname=="bug"?"Current":"")
 							#@buttons("","icon-bug green")
 								已关联Bug
 							#end
 						#end
-						#@aHeadCol(TINY_CONTEXT_PATH+"/product/plan/forword/noRelateBug?planId="+planId cname=="no-bug"?"Current":"")
+						#@aHeadCol(TINY_CONTEXT_PATH +adminPath+
+							"/product/plan/forword/noRelateBug?planId="+planId cname=="no-bug"?"Current":"")
 							#@buttons("","icon-unlink")
 								未关联Bug
 							#end
@@ -85,7 +91,9 @@
 
 							<div class="r">
 
-							#@aHeadCol(TINY_CONTEXT_PATH+"/product/plan/forword/reRelateStory?planId="+planId cname=="link-demand"?"Current":"")
+								#@aHeadCol(TINY_CONTEXT_PATH +adminPath+
+									"/product/plan/forword/reRelateStory?planId="+planId cname=="link-demand"?"Current":
+									"")
 							#@buttons("","icon-link")
 								关联需求
 							#end

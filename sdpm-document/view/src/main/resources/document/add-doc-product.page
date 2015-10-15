@@ -8,7 +8,7 @@
                 var s;
                 $.ajax({
                     type: "POST",
-                    url: "${TINY_CONTEXT_PATH}"+url,
+                    url: "${TINY_CONTEXT_PATH+adminPath}"+url,
                     data: $(this).attr('data'),
                     dataType:"json",
                     success: function(data){
@@ -57,7 +57,7 @@
 #end
 
 #include("doc-tab.page")
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/document/doc/addSave" "post" {"class":"add"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/addSave" "post" {"class":"add","enctype":"multipart/form-data"})
 #*<input type="hidden" name="docLibId" value="${doc?.docLibId}"/>
 <input type="hidden" name="docId" value="${doc?.docId}"/>*#
 	<div style="width:100%">
@@ -68,7 +68,7 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#@Tselect2F()
-	                   		#@Tselect2Body("docProduct" product?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		#@Tselect2Body("docProduct" product?.productId {"class":"input-text select2","enctype":"multipart/form-data"}) ##,"multiple":"multiple"加上为多选项
 	                     	 <option value="0">/</option>
 	                        #foreach(product : productList)
 	                        	 <option value="${product?.productId}">${product?.productName}</option>
@@ -82,8 +82,8 @@
                             })
                         	</script>               
 	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
                 	  #end
                 	  #end
                 	  #end

@@ -11,7 +11,7 @@
     });
 </script>
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/release/save" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/save" "post" {"class":""})
 #*<div style="width:70%;float:left" class="pageleftpart">*#
     <div class="infoContent">
         <p class="titleName">创建新发布</p>

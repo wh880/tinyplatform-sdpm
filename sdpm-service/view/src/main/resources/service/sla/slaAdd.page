@@ -14,7 +14,7 @@
             #include("/service/serviceCom/tab.page")
         #end
     #end
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/sla/save" "post" {"class":""})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/sla/save" "post" {"class":""})
     <input type="hidden" name="slaId" value="${sla?.slaId}"/>
     <div style="width:100%;float:left" class="pageleftpart">
         <div class="infoContent">
@@ -23,13 +23,14 @@
                 #@sdpmItem("客户名称" "*")
                     #@Tselect2F()
                         #@Tselect2Body(
-                            "clientId" sla?.clientId{"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            #@tinyOptionItem("ch")请选择#end
+                            "clientId" sla?.clientId{"datatype":"*","id":"clientId",
+                            "nullmsg":"客户名称不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@tinyOptionItem("")请选择#end
                             #foreach(l:list)
                                 #@tinyOptionItem(l.clientId)${l?.clientName}#end
                             #end
                         #end
-                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/form"
+                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/service/client/form"
                                           class="r ">增加</a>#end
                     #end
                 #end
@@ -38,7 +39,8 @@
                 #@sdpmItem("产品名称" "*")
                     #@Tselect2F()
                         #@Tselect2Body(
-                            "productId" sla?.productId{"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            "productId" sla?.productId{"datatype":"*","id":"productId",
+                            "nullmsg":"产品名称不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             #@tinyOptionItem("")请选择#end
                             #foreach(l:slas)
                                 #@tinyOptionItem(l.productId)${l?.productName}#end
@@ -55,22 +57,37 @@
                         "nullmsg":"产品版本不能为空","class":"input-text"})
                 #end
             #end
+        #* #@elementItem()
+             #@sdpmItem("服务级别" "*")
+                     #@tinySelect("serviceLevel" sla?.serviceLevel{"datatype":"*","id":"serviceLevel","nullmsg":"产品版本不能为空","class":"input-text select2"})
+                         #@tinyOptionItem("")请选择#end
+                         #@tinyOptionItem("0")基础#end
+                         #@tinyOptionItem("1")潜力#end
+                         #@tinyOptionItem("2")核心#end
+                         #@tinyOptionItem("3")vip#end
+                     #end
+             #end
+         #end*#
             #@elementItem()
                 #@sdpmItem("服务级别" "*")
-                    #@tinySelect(
-                        "serviceLevel" sla?.serviceLevel{"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
-                        #@tinyOptionItem("ch")请选择#end
-                        #@tinyOptionItem("0")基础#end
-                        #@tinyOptionItem("1")潜力#end
-                        #@tinyOptionItem("2")核心#end
-                        #@tinyOptionItem("3")vip#end
+                    #@Tselect2F()
+                        #@Tselect2Body(
+                            "serviceLevel" sla?.serviceLevel{"datatype":"*","id":"serviceLevel",
+                            "nullmsg":"产品名称不能为空","class":"input-text select2"})
+                            #@tinyOptionItem("")请选择#end
+                            #@tinyOptionItem("0")基础#end
+                            #@tinyOptionItem("1")潜力#end
+                            #@tinyOptionItem("2")核心#end
+                            #@tinyOptionItem("3")vip#end
+                        #end
                     #end
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务协议标题" "*")
                     #tinyInput(
-                        "text" "slaTitle"sla?.slaTitle{"datatype":"*","id":"slaTitle","nullmsg":"协议标题不能为空！","class":"input-text"})
+                        "text" "slaTitle"sla?.slaTitle{"datatype":"*","id":"slaTitle","nullmsg":"协议标题不能为空！","class":
+                        "input-text"})
                 #end
             #end
             #@elementItem()
@@ -118,7 +135,7 @@
                 #@sdpmItem("服务级别协议" "*")
                     #@tinySelect(
                         "slaStatus" sla?.slaStatus {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
-                        #@tinyOptionItem("ch")请选择#end
+                        #@tinyOptionItem("")请选择#end
                         #@tinyOptionItem("0")新建#end
                         #@tinyOptionItem("1")生效#end
                         #@tinyOptionItem("2")到期#end
@@ -145,9 +162,7 @@
                 #@sdpmItem("创建时间")
                     #@tinyDateInput(
                         "slaCreateDate" formatDate(sla?.slaCreateDate,
-                        "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","id":"slaCreateDate",
-                    "datatype":
-                    "*","nullmsg":"日期不能为空","placeholder":""})#end
+                        "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","id":"slaCreateDate","placeholder":""})#end
                 #end
             #end
             #@elementItem()

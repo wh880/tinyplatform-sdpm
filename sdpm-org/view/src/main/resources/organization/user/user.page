@@ -19,12 +19,12 @@
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()部门结构#end
             #@settoggleLeftBody("treeLeftbox")
-                #@zTreeList(call("link","/org/dept/data"))
+                #@zTreeList(call("link",adminPath+"/org/dept/data"))
                     #setzTreeValMap({"id":"orgDeptId","name":"orgDeptName","pid":"orgDeptParent"}) ##key值为固定
-                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/org/user/list" )
-                    #zTreeSetAddUrl(TINY_CONTEXT_PATH+"/org/dept/add")
-                    #zTreeSetEditUrl(TINY_CONTEXT_PATH+"/org/dept/edit")
-                    #zTreeSetDelUrl(TINY_CONTEXT_PATH+"/org/dept/delete")
+                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/org/user/list" )
+                    #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/org/dept/add")
+                    #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/org/dept/edit")
+                    #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/org/dept/delete")
                 #end
             #end
         #end

@@ -1,7 +1,9 @@
-#@zTreeList(call("link","/system/module/projectTree?moduleType=task&moduleRoot="+selProject?.projectId))
+#@zTreeList(call("link",adminPath+"/system/module/projectTree?moduleType=task&moduleRoot="+selProject?.projectId+
+    "&openProject=1"))
     #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
-    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/projectmanage/selModel")
-    #zTreeSetAddUrl(TINY_CONTEXT_PATH+"/system/module/ajax/save?moduleType=task&moduleRoot="+selProject?.projectId)
-    #zTreeSetEditUrl(TINY_CONTEXT_PATH+"/system/module/ajax/save")
-    #zTreeSetDelUrl(TINY_CONTEXT_PATH+"/system/module/ajax/delete")
+    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/projectmanage/selModel")
+    #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+
+        "/system/module/ajax/save?moduleType=task&moduleRoot="+selProject?.projectId)
+    #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
+    #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
 #end

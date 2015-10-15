@@ -13,7 +13,7 @@
 #for(l:linkPager)
 					#@tr()
 						#@td()<input type="checkbox" value="1" name="userid">#end
-						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${l.caseId}</a>#end
+						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${l.caseId}</a>#end
 						#@td()
 						#@Tselect2F()
 	                   		 #@Tselect2Body("caseVersion" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -24,7 +24,7 @@
                 	  #end
                 	  	#end
 						#@td()${l.priority}#end
-						#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${l.caseTitle}</a>#end
+						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${l.caseTitle}</a>#end
 						#@td()${l.caseType}#end
 						#@td()${l.caseOpenedBy}#end
 						#@td()${l.caseStatus}#end

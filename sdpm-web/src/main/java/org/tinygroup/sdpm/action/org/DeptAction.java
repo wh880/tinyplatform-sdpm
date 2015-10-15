@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/org/dept")
+@RequestMapping("/a/org/dept")
 public class DeptAction extends BaseController {
     @Autowired
     private DeptService deptService;

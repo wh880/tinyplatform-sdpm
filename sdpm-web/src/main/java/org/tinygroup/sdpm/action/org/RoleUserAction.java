@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/org/roleUser")
+@RequestMapping("/a/org/roleUser")
 public class RoleUserAction extends BaseController {
     @Autowired
     RoleUserService roleUserService;
@@ -45,6 +45,6 @@ public class RoleUserAction extends BaseController {
     @RequestMapping("/save")
     public String save(Integer id, String[] array, Model model) {
         roleUserService.addRoleUser(array, id);
-        return "redirect:/org/roleUser/show";
+        return "redirect" + adminPath + "/org/roleUser/show";
     }
 }

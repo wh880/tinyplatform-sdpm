@@ -9,7 +9,7 @@ import org.tinygroup.sdpm.common.web.BaseController;
  */
 
 @Controller
-@RequestMapping("quality/testResult")
+@RequestMapping("/a/quality/testResult")
 public class TestResultAction extends BaseController {
 	
 	

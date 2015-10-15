@@ -24,8 +24,8 @@
             #end
         #end
         <center>
-        	<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page" class="btn btn-success btn-sm">通过</a>
-        	<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page" class="btn btn-warning btn-sm">失败</a>
+        	<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page" class="btn btn-success btn-sm">通过</a>
+        	<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page" class="btn btn-warning btn-sm">失败</a>
         </center>       
     #end
     #@div(divClass="infoContent")

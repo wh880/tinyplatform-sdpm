@@ -217,7 +217,7 @@
         #@toggleRight()
             #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 
-                #@tinyTableContent(TINY_CONTEXT_PATH+"/organization/log/logTableData.pagelet") ##取数据地址 总数据
+                #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/organization/log/logTableData.pagelet") ##取数据地址 总数据
                     #@thead()
 
                         #@div(divBaseClass="tinyheaderTools form-inline")

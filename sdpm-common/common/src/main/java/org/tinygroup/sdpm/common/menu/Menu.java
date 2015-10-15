@@ -15,7 +15,6 @@ import java.util.Map;
 public class Menu implements Serializable, Comparable<Menu> {
     public static String IS_SHOW_YES = "1";
     public static String IS_SHOW_NO = "0";
-
     /**
      * 菜单编号
      */

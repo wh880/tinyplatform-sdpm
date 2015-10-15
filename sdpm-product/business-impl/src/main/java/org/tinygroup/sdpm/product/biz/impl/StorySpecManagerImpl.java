@@ -21,8 +21,10 @@ public class StorySpecManagerImpl implements StorySpecManager{
 	private ProductStorySpecDao productStorySpecDao;
 
 	public ProductStorySpec find(Integer storyId) {
-
-		return productStorySpecDao.getByKey(storyId);
+		ProductStorySpec storySpec = new ProductStorySpec();
+		storySpec.setStoryId(storyId);
+		List<ProductStorySpec> list = productStorySpecDao.query(storySpec,  new OrderBy(NameUtil.resolveNameDesc("storyVersion"), true));
+		return list.size()>0?list.get(0):null;
 	}
 
 	public List<ProductStorySpec> findList(ProductStorySpec storySpec,String order,String ordertype) {

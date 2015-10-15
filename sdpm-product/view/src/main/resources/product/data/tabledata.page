@@ -25,7 +25,7 @@
 				if(storyList.length>0){
 					$.ajax({
 						type: "POST",
-						url: "${TINY_CONTEXT_PATH}/product/story/updateBatch",
+                        url: "${TINY_CONTEXT_PATH +adminPath}/product/story/updateBatch",
 					   	data: JSON.stringify(storyList),//将对象序列化成JSON字符串
 					   	dataType:"json",
 					   	contentType : 'application/json;charset=utf-8', //设置请求头信息
@@ -73,16 +73,18 @@
 
 #setTinyItemCount(storyList.getTotalCount())
 
-#@tinyForm("storyform" TINY_CONTEXT_PATH+"/product/story/updateBatch" "" {"class":"test"})
+#@tinyForm("storyform" TINY_CONTEXT_PATH +adminPath+"/product/story/updateBatch" "" {"class":"test"})
 
 #for(story:storyList.getRecords())
 #@tr()
     #@td()
     	<input type="checkbox" value="${story.storyId}" id="fieldid" name="storyId">
     #end
-    #@td()<a href="${TINY_CONTEXT_PATH}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyId}</a>#end
+	#@td()<a
+            href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyId}</a>#end
     #@td()${story.storyPri}#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
+	#@td()<a
+            href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
     #@td()${story.planId}#end
     #@td()${story.storySource}#end
     #@td()${story.storyOpenedBy}#end
@@ -93,7 +95,7 @@
     #@td()
      #foreach(m:menuManager.getScopeMenus("product-de"))
      #set(url=eval(m.href))
-        <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH}${url}"><i class="${m.icon}"></i></a>
+     <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m.icon}"></i></a>
         #end
     #end
 #end

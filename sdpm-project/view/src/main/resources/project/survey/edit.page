@@ -45,7 +45,7 @@
             #@div(divClass="operationbar")
             <a href="#">项目名称</a>>编辑项目
             #end
-            #@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/editsave" "" {"class":"test"})
+            #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/editsave" "" {"class":"test"})
                 #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
                 #@elementItem()
                     #@colLabel()项目名称#end
@@ -140,8 +140,8 @@
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
-                            <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
                             #end
                         #end
                     #end
@@ -157,9 +157,9 @@
                                 #end
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/org/user/form"
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form"
                                               class="r ">增加</a><a
-                                    href="${TINY_CONTEXT_PATH}/org/user/list">全部</a>#end
+                                    href="${TINY_CONTEXT_PATH+adminPath}/org/user/list">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end
@@ -174,9 +174,9 @@
                                 #end
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/org/user/form"
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form"
                                               class="r ">增加</a><a
-                                    href="${TINY_CONTEXT_PATH}/org/user/list">全部</a>#end
+                                    href="${TINY_CONTEXT_PATH+adminPath}/org/user/list">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end
@@ -191,9 +191,9 @@
                                 #end
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/org/user/form"
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form"
                                               class="r ">增加</a><a
-                                    href="${TINY_CONTEXT_PATH}/org/user/list">全部</a>#end
+                                    href="${TINY_CONTEXT_PATH+adminPath}/org/user/list">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end
@@ -242,7 +242,7 @@
                 #end
                 #@colLabel()#end
             <button style="float: left" type="submit" id="submit" class="commitBtn" >保存</button>
-            <a href="${TINY_CONTEXT_PATH}/project/survey/index.page">#buttonDefault(caption="返回")</a>
+            <a href="${TINY_CONTEXT_PATH+adminPath}/project/survey/index.page">#buttonDefault(caption="返回")</a>
             #end
 
         #end

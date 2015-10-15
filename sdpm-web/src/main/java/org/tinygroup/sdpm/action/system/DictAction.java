@@ -20,7 +20,7 @@ import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.weblayer.WebContext;
 @Controller
-@RequestMapping("system/dict")
+@RequestMapping("a/system/dict")
 public class DictAction extends BaseController{
 	@Autowired
 	private DictService dictService;

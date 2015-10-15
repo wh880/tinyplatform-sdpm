@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.service.biz.inter.RequestManager;
 import org.tinygroup.sdpm.service.dao.ServiceRequestDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
@@ -55,9 +56,9 @@ public class RequestManagerImpl implements RequestManager {
         return requestDao.queryPagerBy(start, limit, serviceRequest, status, treeId, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
     }
 
-    public Pager<ServiceRequest> findReplyByMePager(Integer start, Integer limit, Integer operation, ServiceRequest serviceRequest,
-                                                    String order, String ordertype) {
-        return requestDao.queryPagerReplyByMe(start, limit, serviceRequest, operation, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
+    public Pager<ServiceRequest> findOperationByMe(Integer start, Integer limit, OrgUser user, ServiceRequest serviceRequest, Integer treeId, Integer operation,
+                                                   String order, String ordertype) {
+        return requestDao.findOperationByMe(start, limit, serviceRequest, user, treeId, operation, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
     }
 
 
