@@ -1,8 +1,11 @@
-#@table()
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/form/components/form.component")
+#@table("no-border")
     #@tbody()
         #@tr()
             #@td()
-                #inputText(inputPlaceHolder="文件名")
+                #tinyInput("text" "keywords" "请输入" {"class":"no-border-radius"})
             #end
             #@td()
                 #@selectBox()
@@ -27,6 +30,9 @@
                     #@optionItem("1")选中记录#end
                 #end
             #end#end
+            #@td()
+            <a href="#">#buttonRadiusPrimary(caption="导出")</a>
+            #end
         #end
     #end
 #end

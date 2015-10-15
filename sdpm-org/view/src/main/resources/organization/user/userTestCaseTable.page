@@ -5,9 +5,9 @@
 #setTinyItemCount(records)
 #for(testCase:testCasePager.records)
 #@tr()
-    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${testCase?.caseId}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${testCase?.caseId}</a>#end
     #@td()${testCase?.priority}#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${testCase?.caseTitle}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${testCase?.caseTitle}</a>#end
     #@td()${testCase?.caseType}#end
     #@td()${testCase?.caseOpenedBy}#end
     #@td()${testCase?.caseLastRunner}#end

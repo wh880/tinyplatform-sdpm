@@ -20,7 +20,7 @@
     #@td()
         #foreach(m:menuManager.getScopeMenus("pro-document-op"))
             #if(m.id == "pro-document-delete")
-                #@delItemsdpm(TINY_CONTEXT_PATH+m.href d?.docId)#buttonIcon(iconClass=m.icon)#end
+                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href d?.docId)#buttonIcon(iconClass=m.icon)#end
             #else
             <a href="${TINY_CONTEXT_PATH}${m.href}?docId=${d?.docId}" title="编辑">#buttonIcon(iconClass=m.icon)</a>
             #end

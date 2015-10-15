@@ -28,6 +28,6 @@
     #@td()耗时#end
     #@td()剩余#end
     #@td()
-    <a href="${TINY_CONTEXT_PATH}/project/task/IDLink.page">概要设计</a>#end
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/IDLink.page">概要设计</a>#end
 #end
 #end

@@ -10,7 +10,7 @@
 #set(name="client")
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/client/clientUserUpdate" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/client/clientUserUpdate" "post" {"class":"test"})
 <input type="hidden" name="id" value="${clientUser?.id}"/>
 <input type="hidden" name="clientId" value="${clientUser?.clientId}"/>
 ##    #@noRespsGridSystem()

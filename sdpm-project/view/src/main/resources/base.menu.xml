@@ -35,7 +35,7 @@
 
         <menu id="protab"  name="项目" href="/project/task/index.page" icon="" sort="1" isShow="1">
 
-            <menu id="project-op-all" name="所有项目" href="/project/allProject.page" icon="icon-list" sort="1" isShow="1"
+            <menu id="project-op-all" name="所有项目" href="/project/allProject" icon="icon-list" sort="1" isShow="1"
                   scope="project-op"/>
             <menu id="project-op-add" name="添加项目" href="/project/preadd" icon="icon-plus" sort="1" isShow="1"
                   scope="project-op"/>
@@ -150,7 +150,7 @@
         <menu id="pro-document-delete" name="删除" href="/project/doc/del" icon="icon-remove" sort="10" isShow="1"
               scope="pro-document-op"/>
         <menu id="documentmenu" name="任务菜单" href="/project/document/index.page" icon="" sort="1" isShow="1">
-            <menu id="pro-document-report" name="创建文档" href="/project/document/add.page" icon="icon-plus" sort="8" isShow="1"
+            <menu id="pro-document-report" name="创建文档" href="/project/doc/preAdd" icon="icon-plus" sort="8" isShow="1"
                   scope="pro-documentmenu-op"/>
         </menu>
     </menu>

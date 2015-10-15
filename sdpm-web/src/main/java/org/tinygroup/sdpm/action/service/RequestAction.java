@@ -28,7 +28,7 @@ import java.util.Map;
  * Created by Administrator on 2015-09-28.
  */
 @Controller
-@RequestMapping("/service/request")
+@RequestMapping("/a/service/request")
 public class RequestAction extends BaseController {
     @Autowired
     private RequestService requestService;
@@ -87,7 +87,7 @@ public class RequestAction extends BaseController {
             requestService.updateRequest(clientRequest);
         }
         model.addAttribute("request", clientRequest);
-        return "redirect:/service/request/list";
+        return "redirect:" + adminPath + "/service/request/list";
     }
 
     @RequestMapping(value = "/close")//关闭请求
@@ -100,7 +100,7 @@ public class RequestAction extends BaseController {
     public String closed(ServiceRequest clientRequest, Model model) {
         if (clientRequest.getClientRequestId() != null)
             requestService.closeRequest(clientRequest);
-        return "redirect:/service/request/list";
+        return "redirect:" + adminPath + "/service/request/list";
     }
 
     @ResponseBody
@@ -152,7 +152,7 @@ public class RequestAction extends BaseController {
         }
         reviewService.changeStatus(review.getClientRequestId());
 //        model.addAttribute("review", review);
-        return "redirect:/service/request/list";
+        return "redirect:" + adminPath + "/service/request/list";
     }
 
     @ResponseBody

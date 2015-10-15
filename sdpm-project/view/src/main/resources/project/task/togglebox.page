@@ -19,7 +19,7 @@
             #if(moduleId)
                 #set(requestStatuString = "&moduleId=" + moduleId)
             #end
-            #@tinyTableContent(TINY_CONTEXT_PATH+
+            #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+
                 "/project/task/findPager?projectId="+cookie_projectId+requestStatuString) ##取数据地址 总数据
                 #@thead()
                     #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序

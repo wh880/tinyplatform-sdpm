@@ -45,7 +45,7 @@
             #@div(divClass="operationbar")
             <a href="#">项目名称</a>>编辑项目
             #end
-            #@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/editsave" "" {"class":"test"})
+            #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/editsave" "" {"class":"test"})
                 #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
                 #@elementItem()
                     #@colLabel()项目名称#end

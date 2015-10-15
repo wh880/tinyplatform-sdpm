@@ -17,7 +17,7 @@ import java.util.List;
  * Created by wangying14938 on 2015-09-22.
  */
 @Controller
-@RequestMapping("/project/product")
+@RequestMapping("/a/project/product")
 public class ProjectproductAction extends BaseController {
     @Autowired
     private ProjectProductService projectProductService;
@@ -44,6 +44,6 @@ public class ProjectproductAction extends BaseController {
     public String save(Integer[] array, Model model, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
         projectProductService.addLink(array, projectId);
-        return "redirect:/project/product/findLinkProduct";
+        return "redirect:" + adminPath + "/project/product/findLinkProduct";
     }
 }

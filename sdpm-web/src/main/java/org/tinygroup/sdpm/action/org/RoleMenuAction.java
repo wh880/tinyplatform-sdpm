@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/org/roleMenu")
+@RequestMapping("/a/org/roleMenu")
 public class RoleMenuAction extends BaseController {
     @Autowired
     private RoleMenuService roleMenuService;
