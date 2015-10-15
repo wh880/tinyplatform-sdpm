@@ -147,7 +147,7 @@
     </menu>
 
     <menu id="document" parent-id="project" name="文档" href="/projectmanage/doc/index" icon="" sort="1" isShow="1">
-        <menu id="pro-document-delete" name="删除" href="" icon="icon-remove" sort="10" isShow="1"
+        <menu id="pro-document-delete" name="删除" href="/project/doc/del" icon="icon-remove" sort="10" isShow="1"
               scope="pro-document-op"/>
         <menu id="documentmenu" name="任务菜单" href="/project/document/index.page" icon="" sort="1" isShow="1">
             <menu id="pro-document-report" name="创建文档" href="/project/document/add.page" icon="icon-plus" sort="8" isShow="1"
@@ -158,7 +158,6 @@
     <menu id="product" parent-id="project" name="产品" href="/project/product/findLinkProduct" icon="" sort="1"
           isShow="1">
     </menu>
-
     <menu id="survey" parent-id="project" name="概况" href="/projectmanage/survey/index" icon="" sort="1" isShow="1">
         <menu id="survey-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
             <menu id="pro-survey-delay"  sort="15" isShow="1"
@@ -168,7 +167,6 @@
             <menu id="pro-survey-finish"  sort="10" isShow="1"
                   scope="pro-surveymenu-op"/>
         </menu>
-
         <menu id="survey-menu2" name="任务菜单2" href="/projectmanage/survey/index" icon="" sort="1" isShow="1">
             <menu id="pro-survey-edit" name="编辑" href="/project/edit" icon="icon-pencil" sort="8" isShow="1"
                   scope="pro-surveymenu2-op"/>
@@ -177,13 +175,5 @@
             <menu id="pro-survey-return" name="返回" href="/project/dynamic/index.page" icon="icon-level-up" sort="4" isShow="1"
                   scope="pro-surveymenu2-op"/>
         </menu>
-
-
     </menu>
-
-
-
-
-
-
 </menu>
