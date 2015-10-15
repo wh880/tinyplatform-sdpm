@@ -1,0 +1,18 @@
+#set(records=testCasePager.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#if (pagesize>records-pagesize*(page-1))
+    #set(pagesize=records-(page-1)*pagesize)
+#end
+#setTinyItemCount(records)
+#for(testCase:testCasePager.records)
+#@tr()
+    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${testCase?.caseId}</a>#end
+    #@td()${testCase?.priority}#end
+    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/caseInfo.page">${testCase?.caseTitle}</a>#end
+    #@td()${testCase?.caseType}#end
+    #@td()${testCase?.caseOpenedBy}#end
+    #@td()${testCase?.caseLastRunner}#end
+    #@td()${testCase?.caseLastRunDate}#end
+    #@td()${testCase?.caseLastRunResult}#end
+    #@td()${testCase?.caseStatus}#end
+#end
+#end

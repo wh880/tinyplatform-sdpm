@@ -17,7 +17,11 @@ import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
+import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
+import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +44,10 @@ public class UserAction extends BaseController {
     private TaskService taskService;
     @Autowired
     private BugService bugService;
+    @Autowired
+    private TestCaseService testCaseService;
+    @Autowired
+    private TestTaskService testTaskService;
 
     @RequestMapping("/form")
     public String form(String id, Model model) {
@@ -152,8 +160,12 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/story/search")
-    public String storySearchAction(String id, int page, int pagesize, String choose, ProductStory story, String order, String ordertype, Model model, HttpServletRequest request) {
+    public String storySearchAction(String id, String account, int page, int pagesize, String choose, ProductStory story, String order, String ordertype, Model model, HttpServletRequest request) {
 
+        if (StringUtil.isBlank(id) && !StringUtil.isBlank(account)) {
+            OrgUser userByAccount = userService.findUserByAccount(account);
+            id = userByAccount.getOrgUserId();
+        }
         if (choose.equals("6")) {
             story.setStoryClosedBy(id);
             Pager<ProductStory> p4 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
@@ -227,5 +239,43 @@ public class UserAction extends BaseController {
         Pager<QualityBug> bugPager = bugService.findBugListPager(limit * (page - 1), limit, null, bug, order, false);
         model.addAttribute("bugPager", bugPager);
         return "/organization/user/bugAdminTable.pagelet";
+    }
+
+    @RequestMapping("/testtask")
+    public String testTaskJump() {
+        return "/organization/user/testtaskAdmin.page";
+    }
+
+    @RequestMapping("/testtask/search")
+    public String testTaskSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, QualityTestTask testTask, String order, String ordertype, Model model, HttpServletRequest request) {
+        OrgUser user = userService.findUser(id);
+        String account = user.getOrgUserAccount();
+        QualityTestTask testTask1 = new QualityTestTask();
+        testTask1.setTesttaskOwner(account);
+        Pager<QualityTestTask> testTaskPager = testTaskService.findTestTaskPager(start, limit, testTask1, order, false);
+        model.addAttribute("testTaskPager", testTaskPager);
+
+        return "/organization/user/userTesttaskTable.pagelet";
+    }
+
+    @RequestMapping("/testtask1")
+    public String testTaskJump2() {
+        return "/organization/user/testtaskAdmin1.page";
+    }
+
+    @RequestMapping("/testtask1/search")
+    public String testCaseSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, QualityTestCase testCase, String order, String ordertype, Model model, HttpServletRequest request) {
+        OrgUser user = userService.findUser(id);
+        String account = user.getOrgUserAccount();
+        QualityTestCase testCase1 = new QualityTestCase();
+        if (choose.equals("4")) {
+            testCase1.setCaseScriptedBy(account);
+        }
+        if (choose.equals("5")) {
+            testCase1.setCaseOpenedBy(account);
+        }
+        Pager<QualityTestCase> testCasePager = testCaseService.findTestCasePager(start, limit, testCase1, order, false);
+        model.addAttribute("testCasePager", testCasePager);
+        return "/organization/user/userTestCaseTable.pagelet";
     }
 }
