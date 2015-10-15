@@ -1,4 +1,4 @@
-#@zTreeList(call("link","/system/module/projectTree?moduleType=task&moduleRoot="+selProject?.projectId))
+#@zTreeList(call("link","/a/system/module/projectTree?moduleType=task&moduleRoot="+selProject?.projectId))
     #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
     #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/projectmanage/selModel")
     #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+
