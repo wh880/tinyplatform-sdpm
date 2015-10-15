@@ -3,7 +3,6 @@ package org.tinygroup.sdpm.common.menu;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
-import org.tinygroup.commons.tools.StringUtil;
 
 import java.io.Serializable;
 import java.util.List;
@@ -92,9 +91,6 @@ public class Menu implements Serializable, Comparable<Menu> {
     }
 
     public String getHref() {
-        if (!StringUtil.isBlank(href)) {
-            return "/a" + href;
-        }
         return href;
     }
 
