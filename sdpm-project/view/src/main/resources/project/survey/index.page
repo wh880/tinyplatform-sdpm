@@ -24,7 +24,7 @@
                 #if(m1)
 
                     #@aModal(
-                        "#m" selProject.projectName+">延期" "750" "350" "" "/project/delay?projectId="+selProject.projectId)#buttonIcon(iconClass="icon-calendar")延期
+                        "#m" selProject.projectName+">延期" "750" "350" "" adminPath+"/project/delay?projectId="+selProject.projectId)#buttonIcon(iconClass="icon-calendar")延期
                     #end
                 #end
                 #set(m2=menuManager.getMenu("pro-survey-hangon"))
