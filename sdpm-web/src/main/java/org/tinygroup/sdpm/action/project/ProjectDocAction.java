@@ -9,6 +9,10 @@ import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.service.inter.DocService;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +29,11 @@ import java.util.Map;
 public class ProjectDocAction extends BaseController {
     @Autowired
     private DocService docService;
+    @Autowired
+    private ProjectService projectService;
+    @Autowired
+    private ProductService productService;
+
 
     @RequestMapping("/findList")
     public String findList(Model model, HttpServletRequest request, Integer start, Integer limit, String order, String ordertype) {
@@ -73,5 +82,22 @@ public class ProjectDocAction extends BaseController {
             map.put("info", "删除失败");
         }
         return map;
+    }
+
+    @RequestMapping("/preAdd")
+    public String preAdd(Model model) {
+        List<Project> projectList = projectService.findList();
+        List<Product> productList = productService.findProductList(new Product());
+        //所属分类
+
+        model.addAttribute("projectList", projectList);
+        model.addAttribute("productList", productList);
+        return "project/document/add.page";
+    }
+
+    @RequestMapping("/save")
+    public String save(DocumentDoc doc) {
+        DocumentDoc resDoc = docService.createNewDoc(doc);
+        return "project/document/index.page";
     }
 }

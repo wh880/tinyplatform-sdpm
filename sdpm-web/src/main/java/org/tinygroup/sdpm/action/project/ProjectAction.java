@@ -133,4 +133,9 @@ public class ProjectAction extends BaseController {
         model.addAttribute("project", project);
         return "project/survey/basicInformation.pagelet";
     }
+
+    @RequestMapping("/allProject")
+    public String allProject() {
+        return "project/allProject.page";
+    }
 }
