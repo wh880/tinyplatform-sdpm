@@ -224,7 +224,7 @@ public class TaskAction extends BaseController {
         taskService.updateCloseTask(task);
 
         systemAction.setActionObjectId(task.getTaskId());
-        systemAction.setActionProject(task.getTaskProject());
+        systemAction.setActionProject(String.valueOf(task.getTaskProject()));
         systemAction.setActionObjectType("task");
         systemAction.setActionActor("close");
         logService.log(systemAction);
@@ -236,7 +236,7 @@ public class TaskAction extends BaseController {
         taskService.updateEditTask(task);
 
         systemAction.setActionObjectId(task.getTaskId());
-        systemAction.setActionProject(task.getTaskProject());
+        systemAction.setActionProject(String.valueOf(task.getTaskProject()));
         systemAction.setActionObjectType("task");
         systemAction.setActionActor("close");
         logService.log(systemAction);

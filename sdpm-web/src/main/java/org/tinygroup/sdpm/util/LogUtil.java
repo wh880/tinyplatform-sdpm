@@ -38,7 +38,7 @@ public class LogUtil {
         SystemAction systemAction = new SystemAction();
         systemAction.setActionAction(action);
         systemAction.setActionProduct(String.valueOf(product));
-        systemAction.setActionProject(Integer.parseInt(project));
+        systemAction.setActionProject(String.valueOf(project));
         systemAction.setActionObjectType(objectType);
         systemAction.setActionDate(new Date());
         systemAction.setActionObjectId(Integer.parseInt(objectId));
