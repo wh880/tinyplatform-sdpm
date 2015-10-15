@@ -1,4 +1,4 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/system/effort/operate" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/system/effort/operate" "post" {"class":""})
     <input type="hidden" name="effortId" value="${effort.effortId}"/>
     <input type="hidden" name="effortObjectType" value="task"/>
 	#@elementItem()

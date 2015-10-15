@@ -4,7 +4,7 @@
 #set(name="task")
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/system/effort/save" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/system/effort/save" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue=task?.taskStatus)
     #hiddenInput(hiddenInputName="effortId" hiddenInputValue=effort?.effortId)
     #hiddenInput(hiddenInputName="effortObjectType" hiddenInputValue="task")

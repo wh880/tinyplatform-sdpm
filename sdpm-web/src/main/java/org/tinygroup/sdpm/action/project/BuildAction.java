@@ -11,7 +11,6 @@ import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
-import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
@@ -31,7 +30,7 @@ import java.util.Map;
  * Created by wangying14938 on 2015-09-22.版本
  */
 @Controller
-@RequestMapping("/project/version")
+@RequestMapping("/a/project/version")
 public class BuildAction extends BaseController {
     @Autowired
     private BuildService buildService;

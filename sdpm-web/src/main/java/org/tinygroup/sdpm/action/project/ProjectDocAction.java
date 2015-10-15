@@ -25,7 +25,7 @@ import java.util.Map;
  * Created by shenly13343 on 2015-10-15.
  */
 @Controller
-@RequestMapping("/project/doc")
+@RequestMapping("/a/project/doc")
 public class ProjectDocAction extends BaseController {
     @Autowired
     private DocService docService;

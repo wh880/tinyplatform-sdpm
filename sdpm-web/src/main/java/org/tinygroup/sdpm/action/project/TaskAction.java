@@ -30,7 +30,6 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -38,7 +37,7 @@ import java.util.List;
  * Created by wangying14938 on 2015-09-22.任务
  */
 @Controller
-@RequestMapping("/project/task")
+@RequestMapping("/a/project/task")
 public class TaskAction extends BaseController {
     @Autowired
     private TaskService taskService;
@@ -59,7 +58,7 @@ public class TaskAction extends BaseController {
         List<Project> list = projectService.findList();
         Project selProject = new Project();
         if (list == null || list.isEmpty()) {
-            return "redirect:/project/add";
+            return "redirect:" + adminPath + "/project/add";
         } else {
             if (cookie_projectId == null) {
                 selProject = list.get(0);

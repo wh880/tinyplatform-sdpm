@@ -34,14 +34,16 @@
         #@tabWithInit("tab_demo" "optionsBox")
             #@tabHead()
                 #if("demand"==type)
-                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/version/forword/alReq?buildId="+build.buildId cname==
+                    #@aHeadCol(TINY_CONTEXT_PATH+adminPath+
+                        "/project/version/forword/alReq?buildId="+build.buildId cname==
                         "demand"?
                         "Current":"")
                         #@buttons("","icon-lightbulb")
                             已完成需求
                         #end
                     #end
-                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/version/forword/alnoReq?buildId="+build.buildId cname==
+                    #@aHeadCol(TINY_CONTEXT_PATH+adminPath+
+                        "/project/version/forword/alnoReq?buildId="+build.buildId cname==
                         "no-demand"?"Current":"")
                         #@buttons("","icon-unlink")
                             未关联需求
@@ -55,19 +57,22 @@
                 #end
 
                 #if("bug"==type)
-                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/version/forword/alBug?buildId="+build.buildId cname=="bug"?
+                    #@aHeadCol(TINY_CONTEXT_PATH+adminPath+
+                        "/project/version/forword/alBug?buildId="+build.buildId cname=="bug"?
                         "Current":"")
                         #@buttons("","icon-bug green")
                             已解决Bug
                         #end
                     #end
-                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/version/forword/alnoBug?buildId="+build.buildId cname==
+                    #@aHeadCol(TINY_CONTEXT_PATH+adminPath+
+                        "/project/version/forword/alnoBug?buildId="+build.buildId cname==
                         "no-bug"?"Current":"")
                         #@buttons("","icon-unlink")
                             未关联Bug
                         #end
                     #end
-                    #@aHeadCol(TINY_CONTEXT_PATH+"/project/version/forword/alleBug?buildId="+build.buildId cname==
+                    #@aHeadCol(TINY_CONTEXT_PATH+adminPath+
+                        "/project/version/forword/alleBug?buildId="+build.buildId cname==
                         "le-bug"?"Current":"")
                         #@buttons("","icon-bug green")
                             遗留Bug
