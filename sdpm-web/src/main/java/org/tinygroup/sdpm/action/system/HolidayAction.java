@@ -18,11 +18,16 @@ import org.tinygroup.sdpm.system.dao.pojo.Holiday;
 import org.tinygroup.sdpm.system.service.inter.HolidayService;
 import org.tinygroup.tinysqldsl.Pager;
 @Controller
-@RequestMapping("system/holiday")
+@RequestMapping("system")
 public class HolidayAction extends BaseController{
 	@Autowired
 	private HolidayService holidayService;
-	@RequestMapping("findPager")
+	@RequestMapping("")
+	public String index(){
+		
+		return "/system/page/holiday/manage.page"; 
+	}
+	@RequestMapping("holiday/findPager")
 	public String fingPage(Integer start ,Integer limit ,
 			String order,String ordertype,Holiday holiday,Model model){
 		boolean asc = true;
@@ -36,14 +41,14 @@ public class HolidayAction extends BaseController{
 		model.addAttribute("holiday", holidayPage);
 		return "/system/page/holiday/data/holidaydata.pagelet";
 	}
-	@RequestMapping("find")
+	@RequestMapping("holiday/find")
 	public String find(Holiday holiday,Model model){
 		Holiday day = holidayService.findById(holiday.getHolidayId());
 		
 		model.addAttribute("holiday", day);
 		return "/system/page/holiday/edit.page";
 	}
-	@RequestMapping(value ="save",method = RequestMethod.POST)
+	@RequestMapping(value ="holiday/save",method = RequestMethod.POST)
 	public String saveHoliday(@RequestParam(required = false)String selectList,Holiday holiday,Model model){
 		if(holiday.getHolidayId()==null){
 			List<Holiday> holidayList = new ArrayList<Holiday>();
@@ -90,7 +95,7 @@ public class HolidayAction extends BaseController{
 //	   return map;
 //     }
 	@ResponseBody
-	@RequestMapping("delete")
+	@RequestMapping("holiday/delete")
 	public String deleteHoliday(Integer holidayId){
 		if(holidayId!=null){
 			   Holiday holiday = new Holiday();
@@ -99,13 +104,13 @@ public class HolidayAction extends BaseController{
 	    }
 		return "/system/page/holiday/holiday.page";
 	}
-	@RequestMapping("manage")
+	@RequestMapping("holiday/manage")
 	public String manage(Holiday holiday,Model model){
 		List<Holiday> holidayList = holidayService.find(holiday);
 		model.addAttribute("holiday", holidayList);
 		return "/system/page/holiday/manage.page";
 	}
-	@RequestMapping("findIds")
+	@RequestMapping("holiday/findIds")
 	public String findIds(String ids,Model model){
 		String[] sids = ids.split(",");
 		Integer[] intIds = new Integer[sids.length];
@@ -116,7 +121,7 @@ public class HolidayAction extends BaseController{
 		model.addAttribute("holiday", holidayList);
 		return "/system/page/holiday/batch-del.pagelet";
 	}
-	@RequestMapping("batchDelete")
+	@RequestMapping("holiday/batchDelete")
 	public String batchDelete(Holidays holidays)
 	{
 	   List<Holiday> holiday= holidays.getHoliday();
