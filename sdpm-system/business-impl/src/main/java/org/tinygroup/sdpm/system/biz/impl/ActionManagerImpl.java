@@ -11,6 +11,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.dao.SystemActionDao;
+import org.tinygroup.sdpm.system.dao.impl.ActionEnum;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
 @Service
@@ -50,7 +51,7 @@ public class ActionManagerImpl implements ActionManager {
 		if(pager.getRecords().size()>0){
 			for(SystemAction s : pager.getRecords()){
 				s = systemActionDao.getActionAndObject(s);
-				s.setUrl(s.getActionObjectType());
+				s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));
 			}
 		}
 		return pager;

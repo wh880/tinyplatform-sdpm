@@ -50,7 +50,7 @@ public class ModuleAction extends BaseController {
     }
     @ResponseBody
     @RequestMapping("projectTree")
-    public List<Map<String, Object>> projectTree(SystemModule systemModule, HttpServletResponse response){
+    public List<Map<String, Object>> projectTree(SystemModule systemModule, HttpServletResponse response, int openProject){
         response.setContentType("application/json; charset=UTF-8");
         List<Map<String, Object>> mapList = Lists.newArrayList();
         List<ProjectProduct> projectProducts = projectProductService.findProducts(systemModule.getModuleRoot());
@@ -61,8 +61,10 @@ public class ModuleAction extends BaseController {
         Integer[] pIds = new Integer[integers.size()];
         List<Product> products = productService.findProductList(integers.toArray(pIds));
         mergeProductModule(products,"story",mapList);
-        List<SystemModule> systemModules = moduleService.findModules(systemModule);
-        mergeModule(systemModules, mapList, "0");
+        if(openProject>0) {
+            List<SystemModule> systemModules = moduleService.findModules(systemModule);
+            mergeModule(systemModules, mapList, "0");
+        }
         return mapList;
     }
 

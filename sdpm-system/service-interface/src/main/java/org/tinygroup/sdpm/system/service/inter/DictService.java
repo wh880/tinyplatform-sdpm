@@ -66,4 +66,8 @@ public interface DictService {
 	 */
 	int batchDelete(Integer...ids);
 
+	void deleteAll();
+
+	List<SystemDict> findList(SystemDict dict,String columnName,boolean asc);
+
 }

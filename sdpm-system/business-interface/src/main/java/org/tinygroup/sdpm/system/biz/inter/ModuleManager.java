@@ -74,4 +74,6 @@ public interface ModuleManager {
 	 * @return
 	 */
 	int deleteAndedit(Integer id);
+
+	int deleteByType(String type);
 }

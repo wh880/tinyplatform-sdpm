@@ -33,7 +33,7 @@
         <application-processor bean="fileMonitorProcessor"></application-processor>
         <application-processor bean="tinyTemplateConfigProcessor"></application-processor>
       <!-- <application-processor bean="databaseInstallerProcessor"></application-processor>  -->
-        <application-processor bean="dictInitProcessor"></application-processor>
+        <!--<application-processor bean="dictInitProcessor"></application-processor>-->
         <application-processor bean="stdProcessor"></application-processor>
     </application-processors>
 

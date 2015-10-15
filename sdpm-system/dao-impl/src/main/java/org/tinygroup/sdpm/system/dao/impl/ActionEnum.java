@@ -74,6 +74,9 @@ public class ActionEnum {
     public static String getName(String type){
         return nameMap.get(type);
     }
+    public static String getUrl(String type){
+        return urlMap.get(type);
+    }
 
 //    public  static  void main(String[] args){
 //        SystemAction systemAction = new SystemAction();

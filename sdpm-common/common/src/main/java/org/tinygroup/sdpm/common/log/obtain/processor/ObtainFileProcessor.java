@@ -14,7 +14,7 @@ import org.tinygroup.xstream.XStreamFactory;
  */
 public class ObtainFileProcessor extends AbstractFileProcessor {
 
-    private static final String Obtain_EXT_FILE_NAME = ".obtain.xml";
+    private static final String OBTAIN_EXT_FILE_NAME = ".obtain.xml";
     @Autowired
     private ObtainHandle obtainHandleImpl;
 
@@ -28,7 +28,7 @@ public class ObtainFileProcessor extends AbstractFileProcessor {
 
     public void process() {
         XStream stream = XStreamFactory
-                .getXStream(ObtainHandle.Obtain_XSTREAM_);
+                .getXStream(ObtainHandle.OBTAIN_XSTREAM);
         for (FileObject fileObject : deleteList) {
             LOGGER.logMessage(LogLevel.INFO, "正在移除obtain文件[{0}]",
                     fileObject.getAbsolutePath());
@@ -57,7 +57,7 @@ public class ObtainFileProcessor extends AbstractFileProcessor {
 
     @Override
     protected boolean checkMatch(FileObject fileObject) {
-        return fileObject.getFileName().endsWith(Obtain_EXT_FILE_NAME) || fileObject.getFileName().endsWith(".obtain");
+        return fileObject.getFileName().endsWith(OBTAIN_EXT_FILE_NAME) || fileObject.getFileName().endsWith(".obtain");
     }
 
 }

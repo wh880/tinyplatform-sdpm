@@ -77,5 +77,5 @@ public interface ModuleService {
 	 */
 	public int deleteAndedit(Integer id);
 	 
-	 
+	int deleteByType(String type);
 }
