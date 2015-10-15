@@ -33,7 +33,7 @@
                 #set(m=menuManager.getMenu("org-company-edit"))
                 #if(m)
                     #@aModal("#myModal" m.name "600" "400" ""
-                    m.href)#buttonIcon(iconClass="icon-edit")${m.name}#end
+                    adminPath+m.href)#buttonIcon(iconClass="icon-edit")${m.name}#end
                 #end
                 #@dialog("myModal")
                     #@dialogHeader()公司#end
