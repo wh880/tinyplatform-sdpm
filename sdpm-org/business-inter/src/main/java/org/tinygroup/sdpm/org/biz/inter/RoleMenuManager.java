@@ -28,6 +28,14 @@ public interface RoleMenuManager {
      */
     OrgRoleMenu find(Integer id);
 
+    /**
+     * 根据用户id查找所有角色菜单
+     *
+     * @param userId
+     * @return
+     */
+    List<OrgRoleMenu> findMenuListByUser(String userId);
+
     OrgRoleMenu findId(String id);
 
     List<OrgRoleMenu> findMenuIds(Integer id);

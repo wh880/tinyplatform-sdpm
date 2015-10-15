@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.PlanService;
@@ -53,6 +54,19 @@ public class PlanAction  extends BaseController{
 		planService.updatePlan(plan);
 		return "redirect:" + "/product/page/project/product-plan.page";
 		
+	}
+
+	@RequestMapping("/addplan")
+	public 	String addplan(HttpServletRequest request,Model model){
+
+			int productId = -1;
+			if (request.getSession().getAttribute("sessionProductId")!=null){
+				productId = (Integer)request.getSession().getAttribute("sessionProductId");
+			}
+			Product product = productService.findProduct(productId);
+			model.addAttribute("product",product);
+			return "/product/page/tabledemo/product-addplan.page";
+
 	}
 	
 	@ResponseBody

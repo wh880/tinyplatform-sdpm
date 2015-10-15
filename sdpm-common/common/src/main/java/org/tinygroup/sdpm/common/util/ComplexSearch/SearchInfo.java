@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.common.util.ComplexSearch;
 
+import org.tinygroup.sdpm.common.util.common.NameUtil;
+
 /**
  * Created by wangll13383 on 2015/9/18.
  */
@@ -25,7 +27,7 @@ public class SearchInfo {
     }
 
     public void setField(String field) {
-        this.field = field;
+        this.field = NameUtil.resolveNameDesc(field);
     }
 
     public String getOperate() {

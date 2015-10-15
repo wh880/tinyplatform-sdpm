@@ -17,11 +17,7 @@ import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
-import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
-import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,10 +40,6 @@ public class UserAction extends BaseController {
     private TaskService taskService;
     @Autowired
     private BugService bugService;
-    @Autowired
-    private TestCaseService testCaseService;
-    @Autowired
-    private TestTaskService testTaskService;
 
     @RequestMapping("/form")
     public String form(String id, Model model) {
@@ -73,7 +65,7 @@ public class UserAction extends BaseController {
             userService.updateUser(user);
         }
         model.addAttribute("user", user);
-        return "redirect:/org/user/list/";
+        return "redirect:"+adminPath+"/org/user/list/";
     }
 
     @RequestMapping("/list")
