@@ -22,7 +22,7 @@
 ##operationbar start1
 
 #end
-		#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/version/save" "post" {"class":"test"})
+		#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/version/save" "post" {"class":"test"})
 		#hiddenInput(hiddenInputName="testversionId" hiddenInputValue=testTask?.testversionId)
 			<div style="width:100%">
     			<div class="infoContent">
@@ -38,8 +38,8 @@
 	                        <option value="MD">项目3</option>
 	                    	#end                
 	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
 	                    	#end
                 	  #end
                 	 #end
@@ -57,8 +57,8 @@
 	                        <option value="MD">版本3</option>
 	                    	#end                
 #*	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
 	                    	#end*#
                 	  #end
                 	 #end
@@ -77,8 +77,8 @@
 	                        <option value="MD">C</option>
 	                    	#end                
 #*	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
 	                    	#end*#
                 	  #end
                 	 #end

@@ -8,6 +8,7 @@ import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.menu.Menu;
 import org.tinygroup.sdpm.common.menu.MenuManager;
 import org.tinygroup.sdpm.common.menu.impl.MenuManagerImpl;
@@ -38,6 +39,7 @@ public class UserUtils {
     private static RoleService roleService = SpringContextHolder.getBean(RoleServiceImpl.class);
     private static UserService userService = SpringContextHolder.getBean(UserServiceImpl.class);
     private static MenuManager menuManager = SpringContextHolder.getBean(MenuManagerImpl.class);
+
 
     /**
      * 根据ID获取用户
@@ -188,45 +190,25 @@ public class UserUtils {
         return menuList;
     }
 
-//    /**
-//     * 获取当前用户有权限访问的部门
-//     *
-//     * @return
-//     */
-//    public static List<Office> getOfficeList() {
-//        @SuppressWarnings("unchecked")
-//        List<Office> officeList = (List<Office>) getCache(CACHE_OFFICE_LIST);
-//        if (officeList == null) {
-//            User user = getUser();
-//            if (user.isAdmin()) {
-//                officeList = officeDao.findAllList(new Office());
-//            } else {
-//                Office office = new Office();
-//                office.getSqlMap().put("dsf", BaseService.dataScopeFilter(user, "a", ""));
-//                officeList = officeDao.findList(office);
-//            }
-//            putCache(CACHE_OFFICE_LIST, officeList);
-//        }
-//        return officeList;
-//    }
-
-//	/**
-//	 * 获取当前用户有权限访问的部门
-//	 * @return
-//	 */
-//	public static List<Office> getOfficeAllList(){
-//		List<Office> officeList = (List<Office>)getCache(CACHE_OFFICE_ALL_LIST);
-//		if (officeList == null){
-//			officeList = officeDao.findAllList(new Office());
-//		}
-//		return officeList;
-//	}
-
     /**
      * 获取授权主要对象
      */
     public static Subject getSubject() {
         return SecurityUtils.getSubject();
+    }
+
+    /**
+     * 判断当前用户是否有某个菜单权限
+     *
+     * @param menuId
+     * @return
+     */
+    public static boolean hasMenu(String menuId) {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject != null && !StringUtil.isBlank(menuId)) {
+            return subject.isPermitted(menuId);
+        }
+        return false;
     }
 
     /**

@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.org;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,6 +58,7 @@ public class UserAction extends BaseController {
     @Autowired
     private ProjectService projectService;
 
+    @RequiresPermissions("org-user-edit")
     @RequestMapping("/form")
     public String form(String id, Model model) {
         if (id != null) {
@@ -107,7 +109,7 @@ public class UserAction extends BaseController {
             return "organization/user/delect.pagelet";
         }
 
-        return "redirect:/org/user/list/";
+        return "redirect" + adminPath + "/org/user/list/";
     }
 
     @ResponseBody

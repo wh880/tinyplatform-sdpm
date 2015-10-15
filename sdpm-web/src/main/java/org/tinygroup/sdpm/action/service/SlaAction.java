@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/service/sla")
+@RequestMapping("/a/service/sla")
 public class SlaAction extends BaseController {
     @Autowired
     private SlaService slaService;

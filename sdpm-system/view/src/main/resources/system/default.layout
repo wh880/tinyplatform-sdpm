@@ -12,7 +12,7 @@
 		
 		#@tabHead()
 				#foreach(m in menuManager.getChildMenus("mysystem"))
-					#@aHeadCol(TINY_CONTEXT_PATH+m.href m.id==linkName?"Current":"")${m.name}#end
+					#@aHeadCol(TINY_CONTEXT_PATH+adminPath+m.href m.id==linkName?"Current":"")${m.name}#end
 				#end
 		#end
 		

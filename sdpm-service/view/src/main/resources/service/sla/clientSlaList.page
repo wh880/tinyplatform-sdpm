@@ -32,9 +32,9 @@
                                 #end
                                 #@tr()
                                     #@th()协议内容#end
-                                    #@td()<a href="${TINY_CONTEXT_PATH}/service/sla/slaContent?id=${var.slaId}">详情#end
-                                #*#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/service/sla/slaContent?id=${var.slaId}">${var.slaSpec}#end*#
-                                #* #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/service/sla/slaContent.page">详情#end*#
+                                    #@td()<a
+                                            href="${TINY_CONTEXT_PATH+adminPath}/service/sla/slaContent?id=${var.slaId}">
+                                        详情#end
                                 #end
                                 #@tr()
                                     #@th()创建人#end
@@ -52,11 +52,11 @@
                         #foreach(m:menuManager.getScopeMenus("clientSlaContent"))
                             #if(m.id != "clientSla_deleteContent")
                                 #@aExtendButton(
-                                    "btn-primary btn-sm" TINY_CONTEXT_PATH+m.href+"?id="+var.slaId "" "")编辑#end
+                                    "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+var.slaId "" "")
+                                    编辑#end
                             #else
-                                #@delItemsdpm(TINY_CONTEXT_PATH+m.href var?.slaId TINY_CONTEXT_PATH+
-                                    "/service/sla/list" {
-                                    "class":"btn radius btn-danger btn-sm"}) 删除#end
+                                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href var?.slaId TINY_CONTEXT_PATH+adminPath+
+                                    "/service/sla/list" {"class":"btn radius btn-danger btn-sm"}) 删除#end
                             #end
                         #end
                     </div>

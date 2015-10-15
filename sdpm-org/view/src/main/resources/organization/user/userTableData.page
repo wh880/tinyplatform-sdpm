@@ -6,7 +6,7 @@
 #for(var:pager.records)
 #@tr()
     #@td()<input type="checkbox" value="${var?.orgUserId}" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/org/user/story?choose=3&id=${var?.orgUserId}">${var
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?choose=3&id=${var?.orgUserId}">${var
         ?.orgUserRealName}</a>#end
     #@td()${var?.orgUserAccount}#end
     #@td()${var.orgUserRole}#end
@@ -26,7 +26,7 @@
         #set(map={"org-user-edit":[665,448],"org-user-delete":[550,150]})
         #foreach(m:menuManager.getScopeMenus("org-user"))
             #if(m.id=="org-user-edit")
-            <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var?.orgUserId}"
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${var?.orgUserId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #else
                 #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?id="+var?.orgUserId "ml-5")

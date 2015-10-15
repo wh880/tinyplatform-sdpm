@@ -100,6 +100,8 @@
               scope="SlaContent"/>
         <menu id="Sla_deleteContent" name="协议删除" href="/service/sla/slaContentDelete" sort="1" isShow="1"
               scope="SlaContent"/>
+        <menu id="add" name="新建的协议" href="/service/sla/form" icon="icon-plus-sign" sort="1" isShow="1"
+              scope="service-faq"/>
     </menu>
     <menu id="faq" name="FAQ" href="/service/faq/list" sort="100" isShow="1">
         <!--<menu id="faq-edit" name="编辑" href="/service/faq/addquestion.page" icon="icon-pencil" sort="1" isShow="1"-->

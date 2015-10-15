@@ -39,7 +39,8 @@
                             <option value="MD">Maryland</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()</a><a href="${TINY_CONTEXT_PATH}/product/page/project/product-modular.page">全部</a>#end
+                            #@Tselect2Fix()</a><a
+                                    href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/product-modular.page">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end
@@ -60,8 +61,8 @@
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH}/product/story/save">新增</a>
-                            <a href="${TINY_CONTEXT_PATH}/product/story/search">全部</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search">全部</a>
                             #end
                         #end
                     #end
@@ -106,8 +107,9 @@
                             <option value="MD">Maryland</option>
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a><a
-                                    href="${TINY_CONTEXT_PATH}/organization/user/userRightTable.page">全部</a>#end
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/organization/user/add.page"
+                                              class="r ">增加</a><a
+                                    href="${TINY_CONTEXT_PATH+adminPath}/organization/user/userRightTable.page">全部</a>#end
                         #end
                     #end
                     #@validateDiv("col-2")#end
@@ -138,7 +140,7 @@
 #@td("text-c")
     #@colLabel()#end
 <a href="#">#buttonRadiusPrimary(caption="保存")</a>
-<a href="${TINY_CONTEXT_PATH}/project/task/index.page">#buttonDefault(caption="返回")</a>
+<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">#buttonDefault(caption="返回")</a>
 #end
 
 #end

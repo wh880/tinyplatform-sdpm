@@ -29,7 +29,7 @@
 <!--
 	$(function(){
 		$("#lib-id-select").on("change",function(){		
-			window.location.href='${TINY_CONTEXT_PATH}/document?docLibId='+$(this).find("option:selected").val();
+			window.location.href='${TINY_CONTEXT_PATH+adminPath}/document?docLibId='+$(this).find("option:selected").val();
 		});
 	});
 //-->

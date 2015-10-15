@@ -11,7 +11,7 @@
     @
     #end
 
-    #@td() <a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page"> ${bug?.bugTitle} #end
+    #@td() <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/bugInfo.page"> ${bug?.bugTitle} #end
     #@td()${bug?.bugOpenedBy}#end
     #@td()${bug?.bugResolvedBy} #end
     #@td()${bug?.bugStatus}#end

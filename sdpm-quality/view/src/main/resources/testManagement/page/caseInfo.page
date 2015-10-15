@@ -35,7 +35,7 @@
 						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
 				#else
 				#if(m.id=="teditioncase"||m.id=="tproposecase"||m.id=="tcaseback")
-					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
 						#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
 				#else
 				#if(m.id=="tcaseremark")
@@ -55,16 +55,16 @@
 				#buttonIcon(iconClass="icon-flag-checkered")执行#end&nbsp;&nbsp;
 			#@aModal("#myModal" "结果" "600" "300" "" "/testManagement/page/tabledemo/caseResult.pagelet" "ml-5")
 					#buttonIcon(iconClass="icon-play")结果#end&nbsp;&nbsp;		
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editioncase.page" title="编辑">
+			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/editioncase.page" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
 			<a  title="备注" onclick="toggle()">
 				#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page" title="复制">
+			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/proposecase.page" title="复制">
 				#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
 			#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")
 					#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp				
 
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page" title="返回">
+			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;*#
 				</span>
 	#end
@@ -109,7 +109,7 @@
 						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
 				#else
 				#if(m.id=="teditioncase"||m.id=="tproposecase"||m.id=="tcaseback")
-					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
 						#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
 				#else
 				#if(m.id=="tcaseremark")
@@ -134,7 +134,7 @@
             <div class="col-1"></div>
             <div class="col-1">
             #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-#*                <a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
+#*                <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">
                 <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>*#
             </div>
             <div class="col-5"></div>

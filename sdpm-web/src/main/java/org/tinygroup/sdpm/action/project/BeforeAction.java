@@ -8,7 +8,6 @@ import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.system.service.inter.ModuleService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,22 +21,6 @@ import java.util.List;
 public class BeforeAction extends BaseController {
     @Autowired
     private ProjectService projectService;
-    @Autowired
-    private ModuleService moduleService;
-
-//    @RequestMapping("/task/index")
-//    public String jumpTaskIndex(@CookieValue(required = false) Integer projectId, HttpServletResponse response, HttpServletRequest request, Model model) {
-//        List<Project> list = projectService.findList();
-//        if (list == null || list.isEmpty()) {
-//            return "redirect:/project/add";
-//        }
-//
-//        Project first = list.get(0);
-//        projectId = first.getProjectId();
-//        CookieUtils.setCookie(response, "projectId", projectId.toString(), -1);
-//        model.addAttribute("projectList", list);
-//        return "project/task/index.page";
-//    }
 
     @RequestMapping("/demand/index")
     public String jumpStoryIndex() {
@@ -87,7 +70,7 @@ public class BeforeAction extends BaseController {
         List<Project> list = projectService.findList();
         request.getSession().setAttribute("selProject", selProject);
         request.getSession().setAttribute("projectList", list);
-        return "redirect:" + adminPath + "" + oldUrl;
+        return "redirect:" + oldUrl;
     }
 
     @RequestMapping("/selModel")

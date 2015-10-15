@@ -10,7 +10,7 @@
 		#@div(divClass="operationbar")
 			<span class="f">
 				#foreach(m in menuManager.getChildMenus("dictionaries"))
-						<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==threeMenu?'active_btn':''}">${m.name}</a>
+						<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="${m.id==threeMenu?'active_btn':''}">${m.name}</a>
 				#end
 			</span>	
 				

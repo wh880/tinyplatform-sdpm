@@ -61,7 +61,6 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
                     #@btnSubmit("icon-search")&nbsp;搜问题#end
 
                 <span class="r">
-                ##          <a href="#">#buttonIcon(iconClass="icon-plus")新建协议</a>
                     #set(m1=menuManager.getMenu("faq-add"))
                     #if(m1)
                         <a href="${TINY_CONTEXT_PATH}${m1.href}">#buttonIcon(iconClass=m1.icon)${m1.name}</a>

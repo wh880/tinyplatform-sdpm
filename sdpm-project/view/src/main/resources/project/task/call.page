@@ -41,9 +41,9 @@
     ##                        <option value="MD">Maryland</option>
     ##                    #end
     ##                ##填写任意内容，侦听需重新填加 A侦听已内置
-    ##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/testmanagement/page/proposeBug.page"
+    ##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/testmanagement/page/proposeBug.page"
     ##                                      class="r ">增加</a><a
-    ##                            href="${TINY_CONTEXT_PATH}/testmanagement/page/Bug.page">全部</a>#end
+    ##                            href="${TINY_CONTEXT_PATH+adminPath}/testmanagement/page/Bug.page">全部</a>#end
     ##                #end
     ##
     ##            #end
@@ -59,8 +59,8 @@
                         #end
                     #end
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH}/org/user/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH}/org/user/list" class="r">全部</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
                     #end
                 #end
             #end

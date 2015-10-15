@@ -10,19 +10,20 @@
             #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
         #end
         #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+
-            "/project/task/relation-release/product-al-req.pagelet") ##取数据地址 总数据
+            "/project/version/search/reRelateStory") ##取数据地址 总数据
             #@thead()
                 #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-                    #@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-                    #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})P#end
-                    #@tinyTh({"class":"","rel":"sortname"})需求名称#end
-                    #@tinyTh({"class":"","rel":"sortname"})创建#end
-                    #@tinyTh({"class":"","rel":"sortname"})指派#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})预计#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})状态#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})阶段#end
-                    #@tinyTh({"class":"sorting","rel":"sortname"})操作#end
+                    #@tinyTh({"width":"8"})<input type="checkbox" name="storyId" value="">#end
+                    #@tinyTh({"class":"sorting","rel":"storyId"})ID#end
+                    #@tinyTh({"class":"","rel":"sortname"})P#end
+                    #@tinyTh({"class":"","rel":"storyTitle"})需求名称#end
+                    #@tinyTh({"class":"","rel":"storyOpenedBy"})创建#end
+                    #@tinyTh({"class":"","rel":"storyAssignedTo"})指派#end
+                    #@tinyTh({"class":"sorting","rel":"storyEstimate"})预计#end
+                    #@tinyTh({"class":"sorting","rel":"storyStatus"})状态#end
+                    #@tinyTh({"class":"","rel":"storyStage"})阶段#end
+                    #@tinyTh({"class":"","rel":""})操作#end
+
                 #end
             #end
         #end
