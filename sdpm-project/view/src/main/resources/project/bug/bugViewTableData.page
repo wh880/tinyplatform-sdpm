@@ -12,17 +12,17 @@
 #for(b : bugPage.getRecords())
 #@tr()
     #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${b?.bugId}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/bugInfo.page">${b?.bugId}</a>#end
     #@td()${b?.bugSeverity}#end
     #@td()${b?.priority}#end
-    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${b?.bugTitle}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/bugInfo.page">${b?.bugTitle}#end
     #@td()${b?.bugOpenedBy}#end
     #@td()${b?.bugAssignedTo}#end
     #@td()${b?.bugResolvedBy}#end
     #@td()${b?.bugResolution}#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("pro-bug-op"))
-            <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
         #end
     #end
 #end

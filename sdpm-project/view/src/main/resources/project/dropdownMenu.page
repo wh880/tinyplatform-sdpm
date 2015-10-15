@@ -18,7 +18,8 @@
     </optgroup>
     #end
     #@navSelect2Fix()
-    <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page">#buttonIcon(iconClass="icon-plus-sign")
+    <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page">#buttonIcon(iconClass=
+        "icon-plus-sign")
         添加项目 </a>
     #end
     #@dialog("myModal")
@@ -32,10 +33,10 @@
 <script type="text/javascript">
     $(function () {
         $("#sleProject-select").on("change", function (e) {
-        ##            window.location.href = "${TINY_CONTEXT_PATH}/project/task/index.page?selItem="
+        ##            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/project/task/index.page?selItem="
         ##                    + $(this).find("option:selected").text() + "&itemid=" + $(this).val() + "&stat=" + $();
         ##            //val() 选择选择项的value
-            window.location.href = "${TINY_CONTEXT_PATH}/projectmanage/select?projectId="
+            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/projectmanage/select?projectId="
                     + $(this).find("option:selected").val()
                     + "&oldUrl=${tinyRequestRequestURI.substring(9)}";
             console.log("ggg");

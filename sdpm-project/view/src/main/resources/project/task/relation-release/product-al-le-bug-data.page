@@ -8,7 +8,7 @@
     #@td()<input type="checkbox" value="1" name="releaseId">#end
     #@td()${bug?.bugId} #end
     #@td()${bug?.priority} #end
-    #@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${bug?.bugTitle}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/bugInfo.page">${bug?.bugTitle}</a>#end
     #@td()${bug?.bugStatus}#end
     #@td()${bug?.bugOpenedBy}#end
     #@td()${bug?.bugOpenedDate?formatDate(bug?.bugOpenedDate,'yyyy-MM-dd'):""}#end
