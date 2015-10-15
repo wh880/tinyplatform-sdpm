@@ -3,20 +3,25 @@ package org.tinygroup.sdpm.action.project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.tinygroup.sdpm.action.product.util.StoryUtil;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.product.service.StoryService;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
-import org.tinygroup.sdpm.project.service.inter.BuildService;
-import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
-import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.project.service.inter.TeamService;
+import org.tinygroup.sdpm.project.service.inter.*;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -42,6 +47,10 @@ public class BuildAction extends BaseController {
     private ProductService productService;
     @Autowired
     private ProjectProductService projectProductService;
+    @Autowired
+    private BugService bugService;
+    @Autowired
+    private ProjectStoryService projectStoryService;
 
 
     @RequestMapping("/find")
@@ -221,4 +230,74 @@ public class BuildAction extends BaseController {
         }
         return "";
     }
+
+
+    @RequestMapping("/bugSearch/{relate}")
+    public String bugListAction(@PathVariable(value="relate")String relate, int page, int pagesize, QualityBug bug, SearchInfos searchInfos,
+                                @RequestParam(required = false, defaultValue = "bugId") String order,
+                                @RequestParam(required = false, defaultValue = "asc") String ordertype,
+                                Model model, HttpServletRequest request){
+        //bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+
+        Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+        model.addAttribute("bugList",p);
+
+        if ("reRelateBug".equals(relate)) {
+            return "/project/task/relation-release/product-al-bug-data.pagelet";
+        }else if ("noRelateBug".equals(relate)) {
+            return "/project/task/relation-release/product-al-no-bug-data.pagelet";
+        }else if ("reRelateBugRelease".equals(relate)) {
+            return "/project/task/relation-release/product-al-bug-data.pagelet";
+        }else if ("noRelateBugRelease".equals(relate)) {
+            return "/project/task/relation-release/product-al-no-bug-data.pagelet";
+        }else if ("leRelateBugRelease".equals(relate)) {
+            return "/project/task/relation-release/product-al-le-bug-data.pagelet";
+        }
+        return "";
+    }
+
+
+//    @RequestMapping("/search/{relate}")
+//    public String storyListAction(@PathVariable(value="relate")String relate, int page, int pagesize,
+//                                  ProjectStory story, String choose, String groupOperate, SearchInfos searchInfos,
+//                                  @RequestParam(required = false, defaultValue = "storyId") String order,
+//                                  @RequestParam(required = false, defaultValue = "asc") String ordertype,
+//                                  Model model, HttpServletRequest request){
+//
+//
+//        story.setBuildId((Integer)(request.getSession().getAttribute("sessionProjectId")));
+//        Pager<ProjectStory> p =projectStoryService .findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,FieldUtil.stringFormat(order),"asc".equals(ordertype)?true:false);
+//        model.addAttribute("storyList",p);
+//
+//        if("reRelateStory".equals(relate)){
+//            return "/project/task/relation-release/product-al-req.pagelet";
+//        }else if ("noRelateStory".equals(relate)) {
+//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
+//        }else if ("reRelateStoryRelease".equals(relate)) {
+//            return "/project/task/relation-release/product-al-req-data.pagelet";
+//        }else if ("noRelateStoryRelease".equals(relate)) {
+//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
+//        }
+//        return "";
+//    }
+
+    @RequestMapping("/search/{relate}")
+    public String storyListAction(@PathVariable(value="relate")String relate, Integer start, Integer limit, String order, String ordertype, Model model, HttpServletRequest request){
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Pager<ProductStory> story = projectStoryService.findStoryByProject(projectId, start, limit, order, ordertype);
+        model.addAttribute("storys", story);
+
+        if("reRelateStory".equals(relate)){
+            return "/project/task/relation-release/product-al-req.pagelet";
+        }else if ("noRelateStory".equals(relate)) {
+            return "/project/task/relation-release/product-al-no-req-data.pagelet";
+        }else if ("reRelateStoryRelease".equals(relate)) {
+            return "/project/task/relation-release/product-al-req-data.pagelet";
+        }else if ("noRelateStoryRelease".equals(relate)) {
+            return "/project/task/relation-release/product-al-no-req-data.pagelet";
+        }
+
+        return "";
+    }
+
 }
