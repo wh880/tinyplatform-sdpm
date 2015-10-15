@@ -233,3 +233,25 @@
         #@dialogHeader()#end
         #@dialogBody()<p></p>#end
 #end     
+
+<script type="text/javascript">
+   /*这是显示不同类型编辑框的脚本*/
+   $(function() {
+   var doctypeContent=$.trim($('#doctype').html());
+   switch(doctypeContent){
+   		case "文件":
+   			$('#fileBox').removeClass('hidden');
+   		break;
+   		case "链接":
+   			$('#urlBox').removeClass('hidden');
+   		break;
+   		case "网页":
+   			$('#contentBox').removeClass('hidden');
+   		break;
+   }	
+});
+
+
+ $(".select2").select2(); 
+					  
+	</script>

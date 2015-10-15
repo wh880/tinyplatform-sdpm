@@ -1,0 +1,14 @@
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"" "post" {"class":"edit"})
+<input type="hidden" name="docLibId" value="${doclib?.docLibId}"/>
+#@colLabel()#end
+<div class="col-8">
+#@div(divClass="col-8")
+	
+	#tinyInput("text" "docLibName" doclib?.docLibName {"style":"height:29px","placeholder":"文档库名称","id":"docLibId","class":"input-text"}).${f?.fileExtension}
+	
+#end
+<div class="col-3">
+<button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+</div>
+</div>
+#end

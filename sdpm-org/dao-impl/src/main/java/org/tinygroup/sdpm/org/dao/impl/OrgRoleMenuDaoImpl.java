@@ -26,6 +26,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.org.dao.constant.OrgRoleMenuTable.ORG_ROLE_MENUTABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgRoleUserTable.ORG_ROLE_USERTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
@@ -119,6 +121,12 @@ public class OrgRoleMenuDaoImpl extends TinyDslDaoSupport implements OrgRoleMenu
 //				return addOrderByElements(select);
 //			}
 //		});
+    }
+
+    public List<OrgRoleMenu> findMenuListByUser(String userId) {
+        Select select = selectFrom(ORG_ROLE_MENUTABLE).join(Join.leftOutJoin(ORG_ROLE_USERTABLE, ORG_ROLE_MENUTABLE.ORG_ROLE_ID.eq(ORG_ROLE_USERTABLE.ORG_ROLE_ID)))
+                .where(ORG_ROLE_USERTABLE.ORG_USER_ID.eq(userId));
+        return getDslSession().fetchList(select, OrgRoleMenu.class);
     }
 
     public List<OrgRoleMenu> query(OrgRoleMenu orgRoleMenu, final OrderBy... orderBies) {

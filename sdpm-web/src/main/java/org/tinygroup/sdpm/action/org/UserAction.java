@@ -36,7 +36,7 @@ import java.util.Map;
 
 
 @Controller
-@RequestMapping("/org/user")
+@RequestMapping("/a/org/user")
 public class UserAction extends BaseController {
     @Autowired
     private UserService userService;
@@ -81,7 +81,7 @@ public class UserAction extends BaseController {
             userService.updateUser(user);
         }
         model.addAttribute("user", user);
-        return "redirect:/org/user/list/";
+        return "redirect:" + adminPath + "/org/user/list/";
     }
 
     @RequestMapping("/list")

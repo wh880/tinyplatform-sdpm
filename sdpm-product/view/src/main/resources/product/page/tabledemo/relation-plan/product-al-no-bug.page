@@ -2,11 +2,12 @@
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeMenuId=currentPageId)
 #!set(cname="no-bug",type="bug")
+#set(storyTableId = "storyTableId" )
 
 
 #include("/product/page/event/mulsearch-bug.page")	
 
-		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+		#@tinyTable(storyTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 			
 				
@@ -16,7 +17,7 @@
             #submitButton("submit","关联Bug","btn btn-submit btn-primary","关联")
 				
 			#end
-			#@tinyTableContent(TINY_CONTEXT_PATH +　"/product/story/bugSearch/noRelateBug") ##取数据地址 总数据
+			#@tinyTableContent(TINY_CONTEXT_PATH +　"/product/story/bugSearch/noRelateBug?"+tinyRequestQueryString) ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox" name="bugId" value="">#end

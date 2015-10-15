@@ -140,6 +140,7 @@ public class DocAction {
 		doc = docservice.findDocById(docid);		
 		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
 		systemProfile.setFileObjectType("document");
+		systemProfile.setFileObjectId(docid);
 		List<SystemProfile> list = profileService.find(systemProfile);
 		model.addAttribute("file",list);
 		model.addAttribute("doc",doc);
@@ -213,12 +214,12 @@ public class DocAction {
 	
 	@RequestMapping(value="/doclib/edit")
 	public String editDoclib(HttpServletRequest request,DocumentDoclib doclib,Model model)
-	{	
-		//List<DocumentDoclib> liblist = docservice.findDoclibList(doclib);
-		doclib.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));		
-	//	if(liblist.size()>0)
-	//		doclib = liblist.get(0);
+	{		
+		doclib = docservice.findDoclibById((Integer) request.getSession().getAttribute("documentLibId"));
 		model.addAttribute("doclib", doclib);
+		if((Integer) request.getSession().getAttribute("documentLibId") == 1 || (Integer) request.getSession().getAttribute("documentLibId") == 2){
+			return "/document/doclib-no-edit.pagelet";
+		}
 		return "/document/doclib-edit.pagelet";
 	}
 	

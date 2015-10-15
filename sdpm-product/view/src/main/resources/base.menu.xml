@@ -27,7 +27,7 @@
               icon="icon-bar-chart"
               sort="49" isShow="1"
               scope="product-io"/>
-        <menu id="product-demand-add" name="提需求" href="/product/page/tabledemo/product-demand-add.page" icon="icon-plus"
+        <menu id="product-demand-add" name="提需求" href="/product/story/addstory" icon="icon-plus"
               sort="48" isShow="1"
               scope="product-io"/>
         <menu id="product-demand-operation" name="操作" href="" icon="" sort="47" isShow="1" scope="product-oper"/>
@@ -40,19 +40,19 @@
                 <property key="type" value="aModal"/>
             </map>
         </menu>
-        <menu id="demand-alteration" name="变更" href="/product/story/productDemandChange/findPager?storyId=${storySpec.storyId}"
+        <menu id="demand-alteration" name="变更" href="/product/story/productDemandChange/findPager?storyId=${storyId}"
               icon="icon-random" sort="44" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-         <menu id="demand-overview" name="评审" href="/product/story/productDemandReview/findPager?storyId=${storySpec.storyId}"
+         <menu id="demand-overview" name="评审" href="/product/story/productDemandReview/findPager?storyId=${storyId}"
               icon="icon-search" sort="43" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-        <menu id="demand_close" name="关闭" href="/product/story/productDemandClose/findPager?storyId=${storySpec.storyId}" icon="icon-off "
+        <menu id="demand_close" name="关闭" href="/product/story/productDemandClose/findPager?storyId=${storyId}" icon="icon-off "
               sort="42" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon-href"/>
@@ -64,7 +64,7 @@
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-        <menu id="demand-edit" name="编辑" href="/product/storySpec/find?storyId=${storySpec.storyId}" icon="icon-pencil" sort="40"
+        <menu id="demand-edit" name="编辑" href="/product/storySpec/find?storyId=${storyId}" icon="icon-pencil" sort="40"
               isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon"/>
@@ -153,7 +153,7 @@
               scope="product-pl"/>
         <menu id="product-plan-remove" name="删除" href="/product/plan/delete?planId=${plan.planId}" icon="icon-remove" sort="91" isShow="1"
               scope="product-pl"/>
-        <menu id="product-plan-add" name="创建计划" href="/product/page/tabledemo/product-addplan.page" icon="icon-plus" sort="90" isShow="1"
+        <menu id="product-plan-add" name="创建计划" href="/product/plan/addplan" icon="icon-plus" sort="90" isShow="1"
               scope="product-addpl"/>
         <menu id="product-plan-log" name="日志" href="/product/page/tabledemo/product-log.pagelet" icon="icon-time" sort="89" isShow="1"
               scope="product-log"/>
@@ -287,10 +287,10 @@
 
     </menu>
 
-    <menu id="allproduct" parent-id="myproduct" name="所有产品" href="/product/page/tabledemo/product-listall.page" sort="6"
+    <menu id="allproduct" parent-id="myproduct" name="所有产品" href="/product/allproduct/addition" sort="6"
           isShow="1" permission="Permission" scope="product-menu" icon="icon-globe"></menu>
 
-    <menu id="newproduct" parent-id="myproduct" name="添加产品" href="/product/page/tabledemo/addProduct.page" sort="5"
+    <menu id="newproduct" parent-id="myproduct" name="添加产品" href="/product/addproduct/addition" sort="5"
           isShow="1" permission="Permission" scope="product-menu" icon="icon-plus-sign"></menu>
 
 
