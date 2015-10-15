@@ -1,6 +1,6 @@
 
 ##<span id="showsearchmore">搜索</span>
-<form method="get" action="${TINY_CONTEXT_PATH}/document" id="${docTableId}form" class="form-condensed searchform">
+<form method="get" action="${TINY_CONTEXT_PATH+adminPath}/document" id="${docTableId}form" class="form-condensed searchform">
 	<div class="hide">
 		<select id="operatortemp">
 			<option value="=">=</option>
