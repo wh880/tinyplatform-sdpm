@@ -10,7 +10,7 @@
             #include("/service/serviceCom/tab.page")
         #end
         #@div()
-            #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/request/replySave" "post" {"class":""})
+            #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/request/replySave" "post" {"class":""})
 
             <div style="width:70%;margin-left: 200px" class="pageleftpart">
             <div class="infoContent">

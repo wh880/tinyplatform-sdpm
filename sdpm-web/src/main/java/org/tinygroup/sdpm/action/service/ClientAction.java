@@ -29,7 +29,7 @@ import java.util.Map;
  * Created by Administrator on 2015-09-22.
  */
 @Controller
-@RequestMapping("/service/client")
+@RequestMapping("/a/service/client")
 public class ClientAction extends BaseController {
     @Autowired
     private ClientService clientService;
@@ -96,7 +96,7 @@ public class ClientAction extends BaseController {
             clientService.updateClient(client);
             model.addAttribute("client", client);
         }
-        return "redirect:/service/client/list";
+        return "redirect:" + adminPath + "/service/client/list";
     }
 
     @ResponseBody
@@ -204,7 +204,7 @@ public class ClientAction extends BaseController {
             clientUserService.updateClientUser(clientUser);
         } else
             clientUser = clientUserService.addClientUser(clientUser);
-        return "redirect:/service/client/clientDetail?id=" + clientUser.getClientId();
+        return "redirect:" + adminPath + "/service/client/clientDetail?id=" + clientUser.getClientId();
     }
 
     @ResponseBody

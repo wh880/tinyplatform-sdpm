@@ -2,8 +2,9 @@
 #foreach(var:pager.records)
     #@tr()
         #@td()<input type="checkbox" value="${var.clientRequestId}" name="idCheck">#end
-    ##        #@td()<a href="${TINY_CONTEXT_PATH}/service/serviceReq/add.page">${var.clientRequestId}</a>#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/service/client/clientDetail?id=${var.clientId}">${var.clientName}</a>#end
+    ##        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/service/serviceReq/add.page">${var.clientRequestId}</a>#end
+        #@td()<a
+                href="${TINY_CONTEXT_PATH+adminPath}/service/client/clientDetail?id=${var.clientId}">${var.clientName}</a>#end
         #@td()${var.requestTitle}#end
         #@td()${var.requestPre}#end
         #@td()${var.requestStatus}#end
@@ -13,7 +14,7 @@
         #@td()
             #foreach(m:menuManager.getScopeMenus("service-request"))
                 #if(m)
-                <a href="${TINY_CONTEXT_PATH}${m.href}?id=${var.clientRequestId}"
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${var.clientRequestId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
             #end
@@ -27,7 +28,8 @@
 
             #set(m2=menuManager.getMenu("request-delete"))
             #if(m2)
-                #@tinyTableItemRemove(TINY_CONTEXT_PATH+m2.href var?.clientRequestId)<i class=${m2.icon}></i>#end
+                #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m2.href var?.clientRequestId)<i
+                        class=${m2.icon}></i>#end
             #end
 
         #end

@@ -9,7 +9,7 @@
 </style>
 #set(name="request")
 #@div()
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/request/reviewSave" "post" {"class":""})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/request/reviewSave" "post" {"class":""})
     <input type="hidden" name="clientRequestId" value="${request?.clientRequestId}"/>
     <input type="hidden" name="requester" value="${request?.requester}"/>
     <input type="hidden" name="reviewId" value="${review?.reviewId}"/>
