@@ -27,12 +27,13 @@
                     #end
                 #end
 
-##                <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page">#buttonIcon(iconClass=
+            ##                <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-demand-add.page">#buttonIcon(iconClass=
 ##                    "icon-plus")新增需求</a>
-##					<a href="${TINY_CONTEXT_PATH}/project/demand/relateDemand.page">#buttonIcon(iconClass=
+            ##					<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/relateDemand.page">#buttonIcon(iconClass=
 ##                        "icon-exchange")关联需求</a>
                 #foreach(m:menuManager.getScopeMenus("pro-demandmenu-op"))
-                    <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                 #end
 				</span>
                 #div(divClass="clearfix")

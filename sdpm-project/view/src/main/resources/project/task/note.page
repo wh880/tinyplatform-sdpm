@@ -45,7 +45,7 @@
                             #@dialogFooter()
                                 #@buttonEnsure()
                                 ##此链接有数据时删除
-                                <a href="${TINY_CONTEXT_PATH}/project/task/index.page">确定</a>#end
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">确定</a>#end
                                 #@buttonCancel()关闭#end
                             #end
                         #end

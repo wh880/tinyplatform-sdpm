@@ -1,10 +1,10 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"" "post" {"class":"edit"})
-
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/system/profile/edit/doc" "post" {"class":"edit"})
+<input type="hidden" name="fileId" value="${profile?.fileId}">
 #@colLabel()#end
 <div class="col-8">
 #@div(divClass="col-8")
 	
-	#tinyInput("text" "docLibName" profile?.docLibName {"style":"height:29px","placeholder":"文档库名称","id":"docLibId","class":"input-text"}).${f?.fileExtension}
+	#tinyInput("text" "fileTitle" profile?.fileTitle {"style":"height:29px","placeholder":"文档库名称","id":"docLibId","class":"input-text"}).${f?.fileExtension}
 	
 #end
 <div class="col-3">

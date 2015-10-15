@@ -13,7 +13,8 @@
 				<tr>
 					<td style="float:right;padding:0px 10px;font-size:15px">所属模块</td>
 					<td style="width:75%">
-						中华明国><a href="${TINY_CONTEXT_PATH}/project/task/index.page">12</a>><a href="${TINY_CONTEXT_PATH}/project/task/index.page">商务部</a>
+                        中华明国><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">12</a>><a
+                            href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">商务部</a>
 					</td>
 				</tr>
 				<tr>

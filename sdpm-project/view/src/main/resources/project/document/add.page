@@ -45,8 +45,8 @@
                             #end
                         #end
                         #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH}/project/preadd">增加</a>
-                            <a href="${TINY_CONTEXT_PATH}/project/allProject" class="r">全部</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd">增加</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject" class="r">全部</a>
                         #end
                     #end
                 #end
@@ -63,8 +63,8 @@
                         #end
                     ##填写任意内容，侦听需重新填加 A侦听已内置
                         #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH}/product/save">全部</a>
-                            <a href="${TINY_CONTEXT_PATH}/product/list" class="r">全部</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">新增</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
                         #end
                     #end
                 #end

@@ -1,9 +1,5 @@
 package org.tinygroup.sdpm.action.product;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +11,6 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
@@ -27,7 +22,6 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.weblayer.WebContext;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.List;
 
 /**
@@ -36,7 +30,7 @@ import java.util.List;
  * @author Administrator
  */
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/a/product")
 public class ProductAction extends BaseController {
 
     @Autowired
@@ -66,7 +60,7 @@ public class ProductAction extends BaseController {
             }
         }
 
-        return "redirect:/product/story?" + (list.size() > 0 ? ("productId=" + list.get(0).getProductId()) : "") + "&choose=1" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
+        return "redirect:/a/product/story?" + (list.size() > 0 ? ("productId=" + list.get(0).getProductId()) : "") + "&choose=1" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
     }
 
 
@@ -96,11 +90,11 @@ public class ProductAction extends BaseController {
 
         productService.updateProduct(product);
         SessionUtil.ProductRefresh(request, productService);
-        return "redirect:" + "/product/find/overview?productId=" + product.getProductId();
+        return "redirect:" + adminPath + "/product/find/overview?productId=" + product.getProductId();
     }
 
     @ResponseBody
-    @RequestMapping("sessionset")
+    @RequestMapping("/sessionset")
     public boolean sessionSet(Integer productId, HttpServletRequest request) {
         if (productId != null) {
             request.getSession().setAttribute("sessionProductId", productId);
@@ -163,7 +157,7 @@ public class ProductAction extends BaseController {
         Pager<Product> pagerProduct = productService.findProductPager(page, pagesize, product, order, ordertype);
 
         model.addAttribute("pagerProduct", pagerProduct);
-        return "/product/data/allproductdata.pagelet";
+        return adminPath + "/product/data/allproductdata.pagelet";
     }
 
     @RequestMapping("/findManager")
@@ -190,7 +184,7 @@ public class ProductAction extends BaseController {
     }
 
 
-    @RequestMapping("{forward}/addition")
+    @RequestMapping("/{forward}/addition")
     public String addpro(@PathVariable(value = "forward") String forward,HttpServletRequest request, Model model) {
         int productLineId = -1;
         if (request.getSession().getAttribute("sessionProductLineId") != null) {
@@ -204,8 +198,8 @@ public class ProductAction extends BaseController {
 		if ("addproduct".equals(forward)) {
 			return "/product/page/tabledemo/addProduct.page";
 		} else if ("allproduct".equals(forward)) {
-			return "/product/page/tabledemo/product-listall.page";
-		}
+            return "/product/page/tabledemo/product-listall.page";
+        }
 		return "";
 
     }

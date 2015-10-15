@@ -48,7 +48,8 @@
                 #end
                 #@tr()
                     #@td()相关产品#end
-                    #@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">${selProduct?.productName}#end
+                    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/overview.page">${selProduct
+                        ?.productName}#end
                 #end
                 #@tr()
                     #@td()访问控制#end

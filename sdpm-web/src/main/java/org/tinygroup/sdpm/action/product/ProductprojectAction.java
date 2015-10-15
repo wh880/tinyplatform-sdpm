@@ -1,7 +1,5 @@
 package org.tinygroup.sdpm.action.product;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +10,10 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
-@RequestMapping("/product/project")
+@RequestMapping("/a/product/project")
 public class ProductprojectAction extends BaseController{
 	
 	@Autowired
