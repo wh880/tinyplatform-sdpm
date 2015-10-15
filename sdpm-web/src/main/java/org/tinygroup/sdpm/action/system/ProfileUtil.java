@@ -56,5 +56,26 @@ public class ProfileUtil extends BaseController{
 			   upload(upfiles[i], id, type, title[i]);
 		   }
 	   }
+	   /**
+	    * 添加附件没有标题
+	    * @param upfile
+	    * @param id
+	    * @param type
+	 * @throws IOException 
+	    */
+	   public void uploadNoTitle(MultipartFile upfile,int id,String type) throws IOException{
+		   String origName = upfile.getOriginalFilename();
+	        String ext = FilenameUtils.getExtension(origName);
+	        String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, origName, upfile);
+	        long size= upfile.getSize();
+	        SystemProfile profile = new SystemProfile();
+	        profile.setFileAddedDate(new Date());
+	        profile.setFileObjectId(id); 
+	        profile.setFileObjectType(type);
+	        profile.setFileExtension(ext);
+	        profile.setFilePathname(fileUrl);
+	        profile.setFileSize((int)size);
+	        profileService.add(profile);
+	   }
 	
 }

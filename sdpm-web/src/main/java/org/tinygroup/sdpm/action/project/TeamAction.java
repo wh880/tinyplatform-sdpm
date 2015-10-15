@@ -42,9 +42,18 @@ public class TeamAction extends BaseController {
     }
 
     @RequestMapping("/preTeamManage")
-    public String preTeamManage(Model model) {
+    public String preTeamManage(Model model, HttpServletRequest request) {
         List<OrgUser> userList = userService.findUserList(new OrgUser());
         model.addAttribute("userList", userList);
-        return "";
+
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
+        model.addAttribute("teamList", teamList);
+        return "project/team/teamManage.page";
+    }
+
+    @RequestMapping("/teamManageSave")
+    public String teamManageSave(Teams teams) {
+        return "project/team/index.page";
     }
 }

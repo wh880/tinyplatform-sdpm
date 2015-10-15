@@ -10,6 +10,10 @@
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
             <span class="f">
+               #set(m=menuManager.getMenu("request-all"))
+                #if(m)
+                    <a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a>
+                #end
                 #foreach(m:menuManager.getScopeMenus("service-request-list"))
                     <a href="${TINY_CONTEXT_PATH}${m.href}&treeId=${treeId}">${m.name}</a>
                 #end

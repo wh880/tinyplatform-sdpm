@@ -1,3 +1,46 @@
+<script type="text/javascript">
+
+
+    function ajaxRead(id,toName,opKey,opvalue,url,value){
+        var selectCheck = "select[name="+toName+"]";
+        $(selectCheck).each(function(){
+            var sele = $(this);
+            var s;
+            $.ajax({
+                type: "POST",
+                url: "${TINY_CONTEXT_PATH}"+url,
+                data: $(this).attr('data'),
+                dataType:"json",
+                success: function(data){
+                    sele.empty();
+                    var em = "<option value='0' selected  >/</option>";
+                    sele.append(em);
+                    for(var i=0,l=data.length;i<l;i++){
+                        var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+                        sele.append(em);
+
+                    }
+
+                    if(value!=null) {
+                        sele.val(value).trigger("change");
+                    }else {
+                        sele.val(data[0][opKey]).trigger("change");
+                    }
+
+
+                },
+                error: function(res){
+                    alert("失败");
+                }
+            });
+
+
+        });
+
+    }
+</script>
+
+
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")
@@ -23,13 +66,21 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#@Tselect2F()
-	                   		#@Tselect2Body("docProject" doc?.project {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		#@Tselect2Body("docProject" doc?.docProject?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="0">/</option>
 	                        #foreach(project : projectList)
 	                        	#if(project?.projectDeleted !="1")
 	                        	 	<option value="${project?.projectId}">${project?.projectName}</option>
 	                        	#end
 	                        #end	                       	                    	                        
 	                    	#end 
+	                    	<script type="text/javascript">
+                            $("#${sid}").on("change",function(){
+                                var pId = $("#${sid}  option:selected").val();
+                                ajaxRead("${sid}","docProduct","productId","productName","/document/ajax/product?projectId="+pId,${doc?.docProduct?:0});
+
+                            })
+                        	</script>
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/project/preadd" class="r">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH}/">全部</a>#end                 	                    	
@@ -42,12 +93,12 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#@Tselect2F()
-	                   		#@Tselect2Body("docProduct" doc?.product {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        #foreach(product : productList)
+	                   		#@Tselect2Body("docProduct" doc?.docProduct {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+#*	                        #foreach(product : productList)
 	                        	#if(product?.projectDeleted != 1)
 	                        	 <option value="${product?.productId}">${product?.productName}</option>
 	                       		#end
-	                        #end	                       	                    	                        
+	                        #end	                       	                    	                        *#
 	                    	#end                  
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r">增加</a>

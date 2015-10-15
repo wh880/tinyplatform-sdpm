@@ -70,8 +70,6 @@ public class StoryAction extends BaseController{
         return "/product/page/project/togglebox.page";
     }
     
-  
-    
    @RequestMapping("/save")
     public String save(ProductStory productStory,ProductStorySpec storySpec,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,HttpServletRequest request) throws IOException{
     	

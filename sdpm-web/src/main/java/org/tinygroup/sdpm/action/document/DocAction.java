@@ -25,7 +25,11 @@ import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
+import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.tinysqldsl.Pager;
 
 @Controller
@@ -37,6 +41,10 @@ public class DocAction {
 	private ProductService productService;
 	@Autowired
 	private ProjectService projectService;
+	@Autowired
+	private ModuleService moduleService;
+	@Autowired
+	private ProjectProductService projectProductService;
 	
 	@RequestMapping("")
 	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange)
@@ -226,6 +234,36 @@ public class DocAction {
 	    return map;
 		}
 		return null;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/ajax/module")
+	public List<SystemModule> getModule(SystemModule systemModule){
+		systemModule.setModuleType("document");
+		return moduleService.findModules(systemModule);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/ajax/product")
+	public List<Product> getproduct(Product product,Integer projectId){
+		
+		if(projectId == 0){			
+			return projectProductService.findLinkProduct();
+		}
+		List<ProjectProduct> list = projectProductService.findProducts(projectId);
+		Integer[] i = new Integer[list.size()];
+		List<Integer> list1 = new ArrayList<Integer>();
+		for(int j=0;j<list.size();j++){
+			list1.add(list.get(j).getProductId());
+		}
+		List<Product> productList = productService.findProductList(list1.toArray(i));
+		
+		//查出删除标志位为0的数据,暂未实现功能，故注释
+		
+		/*for(int m=0;m<list.size();m++){
+			productList.get(m).setDeleted(0);
+		}*/
+		return productList;
 	}
 	
 	//产品文档
