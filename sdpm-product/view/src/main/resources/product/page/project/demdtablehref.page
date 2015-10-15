@@ -36,26 +36,12 @@
 					<a href="#" class="active_btn">这是一条演示用的需求</a>
 			</span>
     <span class="r">
-#*        #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
-            #if(m.map.type=="aModal")
-                #@aModal("#myModal" "新增日志" "1000" "500" "btn-class"
-                    "/product/page/tabledemo/product-log.pagelet")#buttonIcon(iconClass="icon-time")日志#end
-            #elseif(m.map.type=="icon-href")
-                <a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-            #elseif(m.map.type=="icon")
-                <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-            #elseif(m.map.type=="note")
-                 #buttonIcon(iconClass=m.icon) &nbsp;
-            #elseif(m.map.type=="del")
-                #@delItemsdpm("${m.href}")#buttonIcon(iconClass=m.icon)#end
-            #end
-        #end*#
-        
+
          #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
          #set(url=eval(m?.href))
-           #if(m.?map?.type=="aModal")
+           #if(m?.map?.type=="aModal")
                  #@aModal("#myModal" m.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m?.icon)${m?.name}#end
-           #elseif(m.?map?.type=="icon-href")
+           #elseif(m?.map?.type=="icon-href")
            		 <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m.icon)${m?.name}</a>
            #elseif(m?.map?.type=="icon")
            		 <a href="${TINY_CONTEXT_PATH}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
@@ -104,7 +90,7 @@
 	   #foreach(m:menuManager?.getScopeMenus("pro_demand_log"))
 	   &nbsp;&nbsp;
 		 #set(url=eval(m?.href))
-		   #if(m.?map?.type=="aModal")
+		   #if(m?.map?.type=="aModal")
 		         #@aModal("#myModal" m?.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m?.icon)${m?.name}#end
 		   #elseif(m?.map?.type=="icon-href")
 		   		 <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass=m?.icon)${m?.name}</a>
@@ -129,7 +115,7 @@
             #@validateDiv("col-2")#end
         #end
         <br>
-      
+
     #@elementItem()
         <div class="col-12">
             <div class="col-5">

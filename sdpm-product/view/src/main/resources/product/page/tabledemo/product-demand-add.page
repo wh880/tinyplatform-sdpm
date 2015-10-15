@@ -1,27 +1,26 @@
-#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
+#!set(linkName="product-demand",sonitem="
+<li>"+"需求"+"</li>")
 
 
 <script>
-##relateElem = relateModelTwo  opKey = moduleType  moduleRoot
-##,"onchange":"relateChange('relateModelTwo','moduleRoot')"
+    ##relateElem = relateModelTwo  opKey = moduleType  moduleRoot
+    ##,"onchange":"relateChange('relateModelTwo','moduleRoot')"
 
-#*		function relateChange(relateElem,opKey){
-			var em = "select[relateElem='"+relateElem+"']";alert(this.value);
-			var data = $(em).attr("data")+"&"+ opKey +"=" + $(this).val();
-			
-			$(em).attr("data",data);
-			$(em).trigger("ajaxRead");
-		}*#
-		
+    #*		function relateChange(relateElem,opKey){
+                var em = "select[relateElem='"+relateElem+"']";alert(this.value);
+                var data = $(em).attr("data")+"&"+ opKey +"=" + $(this).val();
+
+                $(em).attr("data",data);
+                $(em).trigger("ajaxRead");
+            }*#
+
     $(document).ready(function () {
-    
-		
-		ajaxRead("productPlan","planId","planName");
-		ajaxRead("orgUser","orgUserId","orgUserAccount");
-		ajaxRead("product","productId","productName");
-		ajaxRead("systemModel","moduleId","moduleName");
-		
-		
+
+
+        ajaxRead("productPlan", "planId", "planName");
+        ajaxRead("orgUser", "orgUserId", "orgUserAccount");
+        ajaxRead("product", "productId", "productName");
+        ajaxRead("systemModel", "moduleId", "moduleName");
 
 
         $("select[name='demand-sources']").bind('change', function () {
@@ -75,8 +74,10 @@
             #@formControlDiv("col-4")
                 <div class="col-6">
                     #@Tselect2F()
-                        #@Tselect2Body("productId" "IN" {"class":"input-text select2","url":"/product/productList","ajaxType":"product","data":""}) ##,"multiple":"multiple"加上为多选项
-                            
+                        #@Tselect2Body(
+                            "productId" "IN" {"class":"input-text select2","url":"/product/productList","ajaxType":
+                            "product","data":""}) ##,"multiple":"multiple"加上为多选项
+
                         #end
 
                         #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page "
@@ -86,8 +87,11 @@
                 </div>
                 <div class="col-6">
                     #@Tselect2F()
-                        #@Tselect2Body("moduleId" "IN" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":"systemModel","data":"moduleType=product","relateElem":"relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
-                            
+                        #@Tselect2Body(
+                            "moduleId" "IN" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":
+                            "systemModel","data":"moduleType=product","relateElem":
+                            "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
+
                         #end
 
                         #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a><a
@@ -104,8 +108,10 @@
             #@colLabel()所属计划：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("planId" "IN" {"class":"input-text select2","url":"/product/plan/planList","ajaxType":"productPlan","data":"productId=16&companyId=1"}) ##,"multiple":"multiple"加上为多选项
-                      
+                    #@Tselect2Body(
+                        "planId" "IN" {"class":"input-text select2","url":"/product/plan/planList","ajaxType":
+                        "productPlan","data":"productId=16&companyId=1"}) ##,"multiple":"multiple"加上为多选项
+
                     #end
 
                     #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-addplan.page"
@@ -122,7 +128,7 @@
                     #@Tselect2F()
                         #@Tselect2Body("storySource" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
-                        #end
+                    #end
 
                     #end
                 </div>
@@ -150,7 +156,9 @@
         #@elementItem()
             #@colLabel()需求名称：#end
             #@formControlDiv("col-4")
-                #tinyInput("text" "storyTitle" ""{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"请输入描述！","id":"email","class":"input-text"})
+                #tinyInput(
+                    "text" "storyTitle" ""{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"请输入描述！","id":"email",
+                    "class":"input-text"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -192,7 +200,8 @@
             #@colLabel()预计工时：#end
             #@formControlDiv("col-4")
                 <div class="input-group">
-                    <input type="text" class="form-control" name="storyEstimate" placeholder="" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" name="storyEstimate" placeholder=""
+                           aria-describedby="basic-addon2">
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
             #end
@@ -202,8 +211,10 @@
         #@elementItem()
             #@sdpmItem("由谁评审")
                 #@Tselect2F()
-                    #@Tselect2Body("storyReviewedBy" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":"orgUser","data":""})
-                        
+                    #@Tselect2Body(
+                        "storyReviewedBy" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":
+                        "orgUser","data":""})
+
                     #end
 
                 #*  #@Tselect2Fix()<a href="http://www.baidu.com" class="r "></a><a href="#"></a>#end*#
@@ -225,7 +236,8 @@
             #@colLabel()抄送给：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("storyMailto" "IN" {"class":"input-text select2","multiple":"multiple","url":"/org/user/userList","ajaxType":"orgUser","data":""}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("storyMailto" "IN" {"class":"input-text select2","multiple":"multiple","url":
+                        "/org/user/userList","ajaxType":"orgUser","data":""}) ##,"multiple":"multiple"加上为多选项
                     #end
 
                 #*  #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#
@@ -238,7 +250,8 @@
         #@elementItem()
             #@colLabel()关键词：#end
             #@formControlDiv("col-4")
-                #tinyInput("text" "storyKeywords" ""{"datatype":"e","nullmsg":"请输入名称！","id":"email","class":"input-text"})
+                #tinyInput(
+                    "text" "storyKeywords" ""{"datatype":"*","nullmsg":"请输入名称！","id":"text","class":"input-text"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -270,12 +283,12 @@
 #end
 
 
-    
+
     <script type="text/javascript">
-    $(function () {
-        $("form[name=thisform").Validform({
-            tiptype: 2
+        $(function () {
+            $("form[name=thisform").Validform({
+                tiptype: 2
+            });
         });
-    });
-</script>
+    </script>
 
