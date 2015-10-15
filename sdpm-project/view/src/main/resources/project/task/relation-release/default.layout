@@ -94,6 +94,6 @@
     #end
 </div>
 <div style="width:30%;float:right">
-    #TypeInfo("build"，build?.buildId)
+    #TypeInfo("build",build?.buildId)
 </div>
 #end
