@@ -133,7 +133,7 @@ return format;
 </script>
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/plan/update" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/plan/update" "post" {"class":""})
 	
 	#tinyInput("text" "planId" plan.planId {"class":"input-text hidden"})
     <div class="infoContent">

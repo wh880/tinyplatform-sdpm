@@ -13,10 +13,8 @@ import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.weblayer.WebContext;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +25,7 @@ import java.util.Map;
  *
  */
 @Controller
-@RequestMapping("/productLine")
+@RequestMapping("/a/productLine")
 public class ProductLineAction extends BaseController {
 	
 	@Autowired
@@ -113,8 +111,8 @@ public class ProductLineAction extends BaseController {
 		}
 		
 	}
-	
-	@RequestMapping("toProduct")
+
+	@RequestMapping("/toProduct")
 	public String productLineAction(HttpServletRequest request){
 		List<ProductLine> list = (List<ProductLine>) request.getSession().getAttribute("productLineList");
 		if(list == null|| list.size()==0){
@@ -125,8 +123,8 @@ public class ProductLineAction extends BaseController {
 				request.getSession().setAttribute("sessionProductLineId",list.size()>0?list.get(0).getProductLineId():null);
 			}
 		}
-		
-		return "redirect:/product";
+
+		return "redirect:" + adminPath + "/product";
 	}	
 	
 }

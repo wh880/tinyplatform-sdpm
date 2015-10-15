@@ -1,6 +1,7 @@
 
 ##<span id="showsearchmore-bug">搜索</span>
-<form method="get" action="${TINY_CONTEXT_PATH}/product/plan/forword/noRelateBug" id="${storyTableId}form" class="form-condensed searchform">
+<form method="get" action="${TINY_CONTEXT_PATH +adminPath}/product/plan/forword/noRelateBug" id="${storyTableId}form"
+      class="form-condensed searchform">
     <div class="hide">
         <select id="operatortemp">
             <option value="=">=</option>

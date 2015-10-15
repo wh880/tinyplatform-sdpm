@@ -24,10 +24,10 @@
 
 		#end
 		#@navSelect2Fix()
-			
-			<a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/list.page" class="r">所有产品线</a>&nbsp;
+
+        <a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/tabledemo/list.page" class="r">所有产品线</a>&nbsp;
 			<!--新增产品-->
-			<a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/add.page">添加产品线</a>&nbsp;
+        <a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/tabledemo/add.page">添加产品线</a>&nbsp;
 			
 		
 		#end
@@ -40,7 +40,7 @@
 		$(function(){
 			$("#productLine-select").on("change",function(){
 				var dateValue = $(this).val();
-				$.post("${TINY_CONTEXT_PATH}/productLine/sessionset",{productLineId:dateValue},function(result){
+                $.post("${TINY_CONTEXT_PATH +adminPath}/productLine/sessionset", {productLineId: dateValue}, function (result) {
 					if(true==result){
 						window.location.reload();
 					}else{
@@ -53,7 +53,7 @@
 	##					var hrefnew = this.href + "&productId=" + $("#productIdHidden").val();
 	##					this.href = hrefnew;
 	##				});
-	##				window.location.href='${TINY_CONTEXT_PATH}/product/story?currentPageId=3&productId='+$(this).find("option:selected").val();
+			##				window.location.href='${TINY_CONTEXT_PATH +adminPath}/product/story?currentPageId=3&productId='+$(this).find("option:selected").val();
 			});
 		});
 	

@@ -27,7 +27,7 @@
 </script>
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/edit" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/edit" "post" {"class":"test"})
 <div style="width:100%;float:center" class="pageleftpart">
    <div class="infoContent">
         <p class="titleName">编辑</p>

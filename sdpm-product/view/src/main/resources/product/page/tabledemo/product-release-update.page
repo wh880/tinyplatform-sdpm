@@ -3,7 +3,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-release",sonitem="<li>"+"发布"+"</li>")
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/release/update" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/update" "post" {"class":""})
 
 	#tinyInput("text" "releaseId" release.releaseId {"class":"input-text hidden"})
     <div class="infoContent">

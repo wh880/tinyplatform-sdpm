@@ -48,6 +48,27 @@ public class ProductAction extends BaseController {
     @Autowired
     private ProductLineService productLineService;
 
+
+    @RequestMapping("/{forward}/content")
+    public String doc(@PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
+        int productId = -1;
+        if (request.getSession().getAttribute("sessionProductId") != null) {
+            productId = (Integer) request.getSession().getAttribute("sessionProductId");
+        }
+        Product product = productService.findProduct(productId);
+        model.addAttribute("product", product);
+        if ("doc".equals(forward)) {
+            return "/product/page/project/archive-list.page";
+        } else if ("project".equals(forward)) {
+            return "/product/page/project/product-project-list.page";
+        } else if ("dynamic".equals(forward)) {
+            return "/product/page/project/dymanicdata.page";
+        }
+        return "";
+    }
+
+
+
     @RequestMapping("")
     public String productAction(HttpServletRequest request, WebContext webContext) {
         List<Product> sessionList = (List<Product>) request.getSession().getAttribute("productList");

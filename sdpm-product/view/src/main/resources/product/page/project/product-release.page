@@ -14,7 +14,7 @@
 				#foreach(m:menuManager.getScopeMenus("product-addre"))
 					#if(m.id=="product-release-add")
 				<span class="r">
-					<a title="编辑发布" class="ml-5" href="${TINY_CONTEXT_PATH}/product/release/addRelease"><i
+					<a title="编辑发布" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}/product/release/addRelease"><i
                             class="icon-plus"></i>创建发布</a>
 				</span>
 						#end
@@ -32,7 +32,7 @@
             #*				#@aModal("#myModal" "批量编辑" "1200" "500" "btn radius btn-primary" "/product/page/tabledemo/product-editall.pagelet")批量编辑#end
                             *#
 			#end
-			#@tinyTableContent(TINY_CONTEXT_PATH+"/product/release/list?deleted=0") ##取数据地址 总数据
+				#@tinyTableContent(TINY_CONTEXT_PATH +adminPath+"/product/release/list?deleted=0") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end

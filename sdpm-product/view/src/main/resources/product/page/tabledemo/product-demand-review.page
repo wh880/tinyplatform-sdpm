@@ -30,7 +30,7 @@
     });
 </script>
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/story/update" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/update" "" {"class":"test"})
 
 #hiddenInput("","storyId","",story.storyId)
 

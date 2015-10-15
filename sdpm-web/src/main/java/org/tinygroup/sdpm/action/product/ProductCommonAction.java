@@ -38,7 +38,7 @@ public class ProductCommonAction   extends BaseController{
 		System.out.println(list.get(0));
 	}
 
-	@RequestMapping("/a/roadMap")
+	@RequestMapping("/roadMap")
 	public String roadMap(HttpServletRequest request,Model model){
 
 		ProductPlan plan = new ProductPlan();

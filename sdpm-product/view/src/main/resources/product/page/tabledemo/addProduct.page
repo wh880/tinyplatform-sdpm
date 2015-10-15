@@ -15,7 +15,7 @@
 		
 			$.ajax({
 				type: "POST",
-				url: "${TINY_CONTEXT_PATH}"+$(this).attr('url'),
+				url: "${TINY_CONTEXT_PATH +adminPath}"+$(this).attr('url'),
 			   	data: $(this).attr('data'),
 			   	dataType:"json",
 			   	contentType : 'application/json;charset=utf-8', //设置请求头信息
@@ -42,7 +42,7 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/save" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/save" "post" {"class":""})
 <div style="width:100%;float:center" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">添加产品</p>
