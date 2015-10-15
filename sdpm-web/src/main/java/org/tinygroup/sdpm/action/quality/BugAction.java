@@ -21,6 +21,7 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
@@ -102,6 +103,10 @@ public class BugAction extends BaseController {
 		String conditions = QualityUtil.getCondition(status,request);
 		bug.setModuleId((Integer) request.getSession().getAttribute("bugModuleId"));
 		bug.setProductId((Integer) request.getSession().getAttribute("qualityProductId"));
+		if(bug.getModuleId()!=null){
+			conditions = ("".equals(conditions)?" module_id ":conditions+" and module_id ")+ModuleUtil.getCondition(bug.getModuleId(),moduleService);
+			bug.setModuleId(null);
+		}
 		Pager<QualityBug> bugpager = bugService.findBugListPager(limit*(page-1), limit,conditions, bug, order, asc);
 		model.addAttribute("bugpager",bugpager);
 		return "/testManagement/data/BugData.pagelet";
@@ -188,7 +193,6 @@ public class BugAction extends BaseController {
 	
 	@RequestMapping("/toSolve")
 	public String solve(Integer bugId,Model model){
-//		List<ProjectBuild> projectBuilds = buildService.findPager()
 		QualityBug bug = new QualityBug();
 		bug = bugService.findById(bugId);
 		bug.setBugResolvedDate(new Date());
@@ -320,6 +324,12 @@ public class BugAction extends BaseController {
 	@RequestMapping("/ajax/task")
 	public List<ProjectTask> getStory(ProjectTask projectTask){
 		return taskService.findListTask(projectTask);
+	}
+
+	@ResponseBody
+	@RequestMapping("/ajax/build")
+	public List<ProjectBuild> getBuild(ProjectBuild projectBuild){
+		return buildService.findListBuild(projectBuild);
 	}
 	
 	@RequestMapping(value = "/copy",method = RequestMethod.POST)
