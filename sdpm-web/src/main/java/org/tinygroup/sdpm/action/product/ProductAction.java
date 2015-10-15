@@ -198,7 +198,7 @@ public class ProductAction extends BaseController {
 		if ("addproduct".equals(forward)) {
 			return "/product/page/tabledemo/addProduct.page";
 		} else if ("allproduct".equals(forward)) {
-            return s "/product/page/tabledemo/product-listall.page";
+            return "/product/page/tabledemo/product-listall.page";
         }
 		return "";
 
