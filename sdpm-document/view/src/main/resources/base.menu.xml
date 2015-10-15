@@ -33,9 +33,9 @@
 		<menu id="doc-view-back" name ="返回" href="/document"
 			icon="icon-level-up" sort="1" isShow="1" scope="doc-view-op"></menu>
 			
-		<menu id="file-edit" name ="编辑" href="#"
+		<menu id="file-edit" name ="编辑" href="/system/profile/find/doc"
 			icon="icon-pencil" sort="3" isShow="1" scope="file-op"></menu>
-		<menu id="file-delete" name ="删除" href="#"
+		<menu id="file-delete" name ="删除" href="/system/profile/delete/doc"
 			icon="icon-remove" sort="2" isShow="1" scope="file-op"></menu>
 	</menu>
 </menu>
