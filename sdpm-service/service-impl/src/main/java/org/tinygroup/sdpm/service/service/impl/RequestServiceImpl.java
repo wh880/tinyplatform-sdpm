@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.service.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.service.biz.inter.RequestManager;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
@@ -46,8 +47,8 @@ public class RequestServiceImpl implements RequestService {
         return requestManager.findPager(start, limit, status, clientRequest, treeId, order, ordertype);
     }
 
-    public Pager<ServiceRequest> findReplyByMe(Integer start, Integer limit, Integer operation, ServiceRequest clientRequest, String order, String ordertype) {
-        return requestManager.findReplyByMePager(start, limit, operation, clientRequest, order, ordertype);
+    public Pager<ServiceRequest> findOperationByMe(Integer start, Integer limit, OrgUser user, ServiceRequest clientRequest, Integer treeId, Integer operation, String order, String ordertype) {
+        return requestManager.findOperationByMe(start, limit, user, clientRequest, treeId, operation, order, ordertype);
     }
 
     public Integer closeRequest(ServiceRequest clientRequest) {
