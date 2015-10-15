@@ -12,7 +12,7 @@
 	#end
 #end
 #include("doc-tab.page")
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/document/doc/addSave" "post" {"class":"add"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+"/document/doc/addSave" "post" {"class":"add","enctype":"multipart/form-data"})
 #*<input type="hidden" name="docLibId" value="${doc?.docLibId}"/>
 <input type="hidden" name="docId" value="${doc?.docId}"/>*#
 	<div style="width:100%">

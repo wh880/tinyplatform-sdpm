@@ -233,5 +233,5 @@
 								$('#product').addClass('hidden');	
 								}	
 						}    
-					</script>
+	</script>
 

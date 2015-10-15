@@ -15,7 +15,7 @@
 				#tinyInput("file" "file" ""{"class":"form-control"})
 			#end
 			#@td()
-				#tinyInput("text" "username" ""{"class":"form-control" ,"placeholder":"标题"})
+				#tinyInput("text" "title" ""{"class":"form-control" ,"placeholder":"标题"})
 			#end
 			#@td("w-p125")
 					#iconOperations(iconOperationsIcon="icon-chevron-up",iconOperationsTitle="之前添加",iconOperationsCls="btn btn-small btn-default addpre")
@@ -31,7 +31,7 @@
 				#tinyInput("file" "file" ""{"class":"form-control"})
 			#end
 			#@td()
-				#tinyInput("text" "username" ""{"class":"form-control" ,"placeholder":"标题"})
+				#tinyInput("text" "title" ""{"class":"form-control" ,"placeholder":"标题"})
 			#end
 		#@td("w-p125")
 				#iconOperations(iconOperationsIcon="icon-chevron-up",iconOperationsTitle="之前添加",iconOperationsCls="btn btn-small btn-default addpre")
