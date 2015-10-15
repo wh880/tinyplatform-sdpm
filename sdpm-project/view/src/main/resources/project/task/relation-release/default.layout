@@ -19,7 +19,7 @@
                     "icon-bug")关联Bug</a>&nbsp;
 <a href="${TINY_CONTEXT_PATH+adminPath}/project/version/edit?buildId=${b?.buildId}">#buttonIcon(iconClass=
     "icon-pencil")编辑发布</a>&nbsp;
-        <a href="${TINY_CONTEXT_PATH+adminPath}/project/version/delete?id=${build?.buildId}"
+        <a href="${TINY_CONTEXT_PATH+adminPath}/project/version/delete?id=${b?.buildId}"
            name="删除发布">#buttonIcon(iconClass=
             "icon-remove")</a>&nbsp;
     <a href="${TINY_CONTEXT_PATH+adminPath}/projectmanage/build/index" title="返回">#buttonIcon(iconClass=

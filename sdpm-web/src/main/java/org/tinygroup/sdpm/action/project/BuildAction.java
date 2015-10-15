@@ -282,7 +282,7 @@ public class BuildAction extends BaseController {
 //    }
 
     @RequestMapping("/search/{relate}")
-    public String storyListAction(@PathVariable(value="relate")String relate, Integer start, Integer limit, String order, String ordertype, Model model, HttpServletRequest request){
+    public String storyListAction(@PathVariable(value="relate")String relate, Integer start, Integer limit,@RequestParam(required = false, defaultValue = "storyId") String order, @RequestParam(required = false, defaultValue = "asc")String ordertype, Model model, HttpServletRequest request){
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
         Pager<ProductStory> story = projectStoryService.findStoryByProject(projectId, start, limit, order, ordertype);
         model.addAttribute("storys", story);
