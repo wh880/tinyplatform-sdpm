@@ -35,7 +35,7 @@
 #end
     ##tabbody end
 <br>
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/testcase/save" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testcase/save" "post" {"class":"test"})
 #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testcase?.caseId)
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">

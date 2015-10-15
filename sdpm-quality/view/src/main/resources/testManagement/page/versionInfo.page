@@ -34,11 +34,11 @@
 						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
 				#else 
 				#if(m.id=="tverbegin"||m.id=="tverclose"||m.id=="tvercase"||m.id=="tversionLink")
-					<a href="${TINY_CONTEXT_PATH}${m.href}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">
 						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
 				#else
 				#if(m.id=="tverback"||m.id=="tversionedit")
-					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
 						#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
 				#else
 					#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")
@@ -50,18 +50,18 @@
 			
 #*			#@aModal("#myModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
 				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/versionStart.page">
+			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/versionStart.page">
 				#buttonIcon(iconClass="icon-play")开始</a>&nbsp;&nbsp;
-				<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionEnd.page">
+				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionEnd.page">
 				#buttonIcon(iconClass="icon-off")关闭</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">
+			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">
 				#buttonIcon(iconClass="icon-smile")用例</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/versionLink.page">
+			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionLink.page">
 				#buttonIcon(iconClass="icon-link")关联用例</a>&nbsp;&nbsp;		
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/tabledemo/editionversion.page" title="编辑">
+			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/editionversion.page" title="编辑">
 				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
 			#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")#buttonIcon(iconClass="icon-remove")#end&nbsp				
-			<a href="${TINY_CONTEXT_PATH}/testManagement/page/version.page" title="返回">
+			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/version.page" title="返回">
 				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;*#
 				</span>
 	#end
@@ -87,11 +87,11 @@
 						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
 				#else 
 				#if(m.id=="tverbegin"||m.id=="tverclose"||m.id=="tvercase"||m.id=="tversionLink")
-					<a href="${TINY_CONTEXT_PATH}${m.href}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">
 						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
 				#else
 				#if(m.id=="tverback"||m.id=="tversionedit")
-					<a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
 						#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
 				#else
 					#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")
