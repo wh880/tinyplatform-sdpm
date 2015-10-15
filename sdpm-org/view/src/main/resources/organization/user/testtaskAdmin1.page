@@ -69,17 +69,17 @@
     #@div(divClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([8,10,20,50,100,200])
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+"/org/user/testtask/search?"+tinyRequestQueryString) ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+"/org/user/testtask1/search?"+tinyRequestQueryString) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-
-                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
                 #@tinyTh({"class":"","rel":"sortname"})ID#end
-                #@tinyTh({"class":"","rel":"sortname"})任务名称#end
-                #@tinyTh({"class":"","rel":"sortname"})所属项目#end
-                #@tinyTh({"class":"","rel":"sortname"})版本#end
-                #@tinyTh({"class":"","rel":"sortname"})开始日期#end
-                #@tinyTh({"class":"","rel":"sortname"})结束日期#end
+                #@tinyTh({"class":"","rel":"sortname"})P#end
+                #@tinyTh({"class":"","rel":"sortname"})用例标题#end
+                #@tinyTh({"class":"","rel":"sortname"})类型#end
+                #@tinyTh({"class":"","rel":"sortname"})创建#end
+                #@tinyTh({"class":"","rel":"sortname"})执行人#end
+                #@tinyTh({"class":"","rel":"sortname"})执行时间#end
+                #@tinyTh({"class":"","rel":"sortname"})结果#end
                 #@tinyTh({"class":"","rel":"sortname"})状态#end
             #end
         #end

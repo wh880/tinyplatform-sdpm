@@ -5,7 +5,7 @@
 #setTinyItemCount(bugList?.totalCount)
 #for(bug:bugList?.getRecords())
 #@tr()
-	#@td()<input type="checkbox" value="1" name="releaseId">#end
+	#@td()<input type="checkbox" value="1" name="bugId">#end
 	#@td()${bug?.bugId} #end
 	#@td()${bug?.priority} #end
 	#@td()<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page">${bug?.bugTitle}</a>#end

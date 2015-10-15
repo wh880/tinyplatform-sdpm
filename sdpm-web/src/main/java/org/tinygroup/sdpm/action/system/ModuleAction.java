@@ -124,10 +124,17 @@ public class ModuleAction extends BaseController {
     @RequestMapping("delete")
     public String deleteModule(Integer moduleId) {
         if (moduleId != null) {
-            moduleService.deleteById(moduleId);
+            moduleService.deleteAndedit(moduleId);
         }
         return "redirect: list?moduleType=dict";
     }
+//    @RequestMapping("dcit/delete")
+//    public String dictdeleteModule(Integer moduleId) {
+//        if (moduleId != null) {
+//            moduleService.deleteAndedit(moduleId);
+//        }
+//        return "redirect: "+"list?moduleType=dict";
+//    }
     @ResponseBody
     @RequestMapping("ajax/delete")
     public Map<String, String> ajaxDeleteModule(Integer moduleId) {
