@@ -5,7 +5,7 @@
 #!set(activeTitle="项目管理",activeMenuId=currentPageId)
 
 #set(name="product")
-#@tinyForm("linkProduct" TINY_CONTEXT_PATH+"/project/product/save" "post")
+#@tinyForm("linkProduct" TINY_CONTEXT_PATH+adminPath+"/project/product/save" "post")
     #@div()
         #@tabWithInit("tab_demo" "optionsBox")
             #@div(divClass="dropdownBox")

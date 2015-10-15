@@ -1,4 +1,4 @@
-#@tinyForm("thisform"  TINY_CONTEXT_PATH+"/project/delaysave" "post" {"class":""})
+#@tinyForm("thisform"  TINY_CONTEXT_PATH+adminPath+"/project/delaysave" "post" {"class":""})
 	#hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
 	#hiddenInput(hiddenInputName="projectName" hiddenInputValue=project?.projectName)
 						#@elementItem()

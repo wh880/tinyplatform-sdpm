@@ -12,7 +12,7 @@
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
             <span class="f">
-					<a href="${TINY_CONTEXT_PATH}/service/client/clientDetail?id=${client.clientId}"
+					<a href="${TINY_CONTEXT_PATH}${adminPath}/service/client/clientDetail?id=${client.clientId}"
                        class="active_btn">${client.clientName}</a>
             </span>
             <span class="r">
@@ -25,11 +25,11 @@
 
                 #set(m2=menuManager.getMenu("clientSla-add"))
                 #if(m2)
-                    <a href="${TINY_CONTEXT_PATH}${m2.href}"
+                    <a href="${TINY_CONTEXT_PATH}${adminPath}${m2.href}"
                        title="绑定产品">#buttonIcon(iconClass="icon-plus")${m2.name}</a>
                 #end
 
-                <a href="${TINY_CONTEXT_PATH}/service/client/list"
+                <a href="${TINY_CONTEXT_PATH}${adminPath}/service/client/list"
                    title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
             </span>
             #end
@@ -46,7 +46,7 @@
                             #@gridSysRow()
                                 #@gridSysCol(4)协议名称#end
                                 #@gridSysCol(8)<a
-                                        href="${TINY_CONTEXT_PATH}/service/client/slaDetail?id=${var.slaId}">${var.slaTitle}</a>#end
+                                        href="${TINY_CONTEXT_PATH}${adminPath}/service/client/slaDetail?id=${var.slaId}">${var.slaTitle}</a>#end
                             #end
 
                             #@gridSysRow()
@@ -73,9 +73,10 @@
                                 #foreach(m:menuManager.getScopeMenus("clientSla"))
                                     #if(m.id != "clientSla_delete")
                                         #@aExtendButton(
-                                            "btn-primary btn-sm" TINY_CONTEXT_PATH+m.href+"?id="+var.slaId "" "")编辑#end
+                                            "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+var.slaId ""
+                                            "")编辑#end
                                     #else
-                                        #@delItemsdpm(TINY_CONTEXT_PATH+m.href var?.slaId "" {
+                                        #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href var?.slaId "" {
                                             "class":
                                             "btn radius btn-danger btn-sm"}) 删除#end
                                     #end

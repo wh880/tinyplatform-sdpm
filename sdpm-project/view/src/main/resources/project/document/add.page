@@ -32,7 +32,8 @@
 <div class="infoContent">
     <p class="titleName">新建版本</p>
     #@div()
-        #@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/doc/save" "" {"class":"test","enctype":"multipart/form-data"})
+        #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/doc/save" "" {"class":"test","enctype":
+            "multipart/form-data"})
             #@elementItem()
                 #@sdpmItem("所属项目")
                     #@Tselect2F()

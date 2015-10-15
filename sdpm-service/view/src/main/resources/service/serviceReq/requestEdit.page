@@ -30,8 +30,8 @@
                         #@tinyOptionItem("en")产品二#end
                         #@tinyOptionItem("ta")产品三#end
                     #end
-                ##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/sla/slaAdd.page" class="r ">增加</a><a
-                ##                            href="${TINY_CONTEXT_PATH}/service/sla/sla.page">全部</a>#end
+                ##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/service/sla/slaAdd.page" class="r ">增加</a><a
+                ##                            href="${TINY_CONTEXT_PATH+adminPath}/service/sla/sla.page">全部</a>#end
                 #end
             #end
         #end
@@ -95,7 +95,8 @@
                         #@tinyOptionItem("en")联系人二#end
                         #@tinyOptionItem("ta")联系人三#end
                     #end
-                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/client/companyInfoEdit.page" class="r ">增加</a>
+                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/service/client/companyInfoEdit.page"
+                                      class="r ">增加</a>
                     #end
                 #end
             #end
@@ -267,7 +268,7 @@
 ##                        <option value="CT">张三</option>
 ##                        <option value="DE">李四</option>
 ##                    #end
-##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/organization/user/add.page" class="r ">增加</a><a
+##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/organization/user/add.page" class="r ">增加</a><a
 ##                            href="#">全部</a>#end
 ##                #end
 ##            #end

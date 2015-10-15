@@ -19,7 +19,7 @@
 #end
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/task/startsave" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/startsave" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
 ##    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
 ##    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)

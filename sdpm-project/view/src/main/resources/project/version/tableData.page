@@ -24,7 +24,7 @@
                 #if(m.id != "pro-version-delete")
                 <a href="${TINY_CONTEXT_PATH}${m.href}?buildId=${b?.buildId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
-                    #@delItemsdpm(TINY_CONTEXT_PATH+m.href b.buildId)#buttonIcon(iconClass=m.icon)#end
+                    #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href b.buildId)#buttonIcon(iconClass=m.icon)#end
                 #end
 
             #end
