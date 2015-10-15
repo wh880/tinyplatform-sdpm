@@ -7,10 +7,10 @@
  #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-				 #@mulOperation("muldelete" call("link","/a/system/dict/batchDelete"))            
+				 #@mulOperation("muldelete" call("link",adminPath+"/system/dict/batchDelete"))            
 				 	#@radiusBtn("btn-danger" "icon-trash" "javascript:") 批量删除#end
 				 #end
-				 #@aModal(editpageModal "添加" "500" "200" "btn radius btn-primary" "/a/system/dict/find")
+				 #@aModal(editpageModal "添加" "500" "200" "btn radius btn-primary" adminPath+"/system/dict/find")
 						#@simpleI("icon-plus")添加#end
 				 #end
 				#*<a href="#" class="btn btn-default btn-sm">产品</a>

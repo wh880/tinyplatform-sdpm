@@ -1,5 +1,5 @@
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/a/system/holiday/save" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/system/holiday/save" "post" {"class":"test"})
     <input type="hidden" name="dictId" value="${holiday?.holidayId}"/>
     <input type="hidden" name="holidayDeleted" value="0"/>
     #@elementItem()
