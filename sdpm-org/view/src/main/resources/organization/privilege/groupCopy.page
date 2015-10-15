@@ -1,5 +1,5 @@
 #@noRespsGridSystem()
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/org/privilege/copyRole" "" {"class":"test"})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/privilege/copyRole" "" {"class":"test"})
     <input type="hidden" name="orgRoleId" value="${id}"/>
         #@gridSysRow()
             #@colLabel("col-2")角色名称：#end
