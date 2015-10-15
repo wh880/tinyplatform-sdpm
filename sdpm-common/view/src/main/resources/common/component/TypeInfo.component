@@ -66,7 +66,7 @@ function tLoadContent(link, contain, className) {
 				</ul>
 				<div class="tab-content tab-content02">
 				#for(name : urlMap.keySet())
-				    #contentDiv("tab"+nameFor.index urlMap.get(name) nameFor.index==1?"active":"")
+				    #contentDiv("tab"+nameFor.index adminPath+urlMap.get(name) nameFor.index==1?"active":"")
 				#end
 				</div>
 			</div>
