@@ -51,4 +51,9 @@ public class ProfileManagerImpl implements ProfileManager {
 		return systemProfileDao.softDelete(id);
 	}
 
+	public SystemProfile findById(Integer id) {
+		// TODO Auto-generated method stub
+		return systemProfileDao.getByKey(id);
+	}
+
 }

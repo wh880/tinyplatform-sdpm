@@ -23,7 +23,7 @@
     <br>
     #end
 #end
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/client/save" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/client/save" "post" {"class":""})
 <div style="width:80%;margin-left: 20px;" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">新建客户</p>
@@ -32,7 +32,7 @@
             #@sdpmItem("客户名称" "*")
                 #tinyInput(
                     "text" "clientName" client?.clientName {"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！",
-                    "id":"clientName","class":"input-text","ajaxurl":TINY_CONTEXT_PATH+"/service/client/judgeClient"})
+                    "id":"clientName","class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/service/client/judgeClient"})
             #end
         #end
         #@elementItem()

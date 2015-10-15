@@ -21,7 +21,7 @@ import java.util.List;
  * Created by wangying14938 on 2015-09-22.团队
  */
 @Controller
-@RequestMapping("/project/team")
+@RequestMapping("/a/project/team")
 public class TeamAction extends BaseController {
     @Autowired
     private TeamService teamService;

@@ -21,7 +21,8 @@
     #end
 #end
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/project/version/save" "" {"class":"test","enctype":"multipart/form-data"})
+#@tinyForm(
+    "thisform" TINY_CONTEXT_PATH+adminPath+"/project/version/save" "" {"class":"test","enctype":"multipart/form-data"})
 
 
 ##<div style="width:100%;float:left" class="pageleftpart">

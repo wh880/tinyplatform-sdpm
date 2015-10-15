@@ -1,4 +1,4 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/org/user/delete" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/user/delete" "post" {"class":"test"})
 <input type="hidden" name="id" value="${id}"/>
     #@elementItem()
         #@colLabel("col-3")<span class="c-red">*</span>请输入密码：#end

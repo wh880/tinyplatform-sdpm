@@ -23,7 +23,7 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-21.
  */
 @Controller
-@RequestMapping("/project")
+@RequestMapping("/a/project")
 public class ProjectAction extends BaseController {
     @Autowired
     private ProjectService projectService;
@@ -103,7 +103,7 @@ public class ProjectAction extends BaseController {
             projectService.updateProject(project);
         }
         model.addAttribute("project", project);
-        return "redirect:/projectmanage/survey/index";
+        return "redirect:" + adminPath + "/projectmanage/survey/index";
     }
     @RequestMapping("/delay")
     public String delay(Integer projectId, Model model) {
@@ -132,5 +132,10 @@ public class ProjectAction extends BaseController {
         Project project = projectService.findById(projectID);
         model.addAttribute("project", project);
         return "project/survey/basicInformation.pagelet";
+    }
+
+    @RequestMapping("/allProject")
+    public String allProject() {
+        return "project/allProject.page";
     }
 }

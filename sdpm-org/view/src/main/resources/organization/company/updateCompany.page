@@ -1,5 +1,5 @@
 #@noRespsGridSystem()
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/org/company/save" "post" {"class":""})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/company/save" "post" {"class":""})
         #@gridSysRow()
             #@colLabel("col-3")<span class="c-red">*</span>公司名称：#end
             #@gridSysCol(7)

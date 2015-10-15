@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.util.CookieUtils;
+import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
@@ -17,8 +18,8 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-28.
  */
 @Controller
-@RequestMapping("/projectmanage")
-public class BeforeAction {
+@RequestMapping("/a/projectmanage")
+public class BeforeAction extends BaseController {
     @Autowired
     private ProjectService projectService;
     @Autowired
@@ -86,12 +87,12 @@ public class BeforeAction {
         List<Project> list = projectService.findList();
         request.getSession().setAttribute("selProject", selProject);
         request.getSession().setAttribute("projectList", list);
-        return "redirect:" + oldUrl;
+        return "redirect:" + adminPath + "" + oldUrl;
     }
 
     @RequestMapping("/selModel")
     public String selModel(String moduleId) {
-        return "redirect:/project/task/index?moduleId=" + moduleId;
+        return "redirect:" + adminPath + "/project/task/index?moduleId=" + moduleId;
     }
 
 }
