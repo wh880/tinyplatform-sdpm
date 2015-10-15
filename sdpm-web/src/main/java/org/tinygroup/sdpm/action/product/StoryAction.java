@@ -234,6 +234,7 @@ public class StoryAction extends BaseController{
 		}
         return "";
     }
+
     @RequestMapping("/bugSearch/{relate}")
     public String bugListAction(@PathVariable(value="relate")String relate,int page, int pagesize,QualityBug bug,SearchInfos searchInfos,
     		@RequestParam(required = false, defaultValue = "bugId") String order, 

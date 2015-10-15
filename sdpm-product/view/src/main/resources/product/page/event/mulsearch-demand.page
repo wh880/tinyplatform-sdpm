@@ -254,7 +254,7 @@
         });
         itemlist.push({
             "name":"storyId",
-            "title":"编号",
+            "title":"需求编号",
             "operator":"=",
             "value":"text"
         });
@@ -272,7 +272,7 @@
         });
         itemlist.push({
             "name":"storyPri",
-            "title":"优先级",
+            "title":"需求优先级",
             "operator":"=",
             "value":"pri"
         });
@@ -295,10 +295,10 @@
             "value":"text"
         });
         itemlist.push({
-            "name":"moduleId",
+            "name":"storySource",
             "title":"来源",
             "operator":"=",
-            "value":"storySource"
+            "value":"user"
         });
         itemlist.push({
             "name":"storyFromBug",
@@ -332,16 +332,16 @@
         });
         itemlist.push({
             "name":"storyLastEditedBy",
-            "title":"最后修改",
+            "title":"上次编辑者",
             "operator":"=",
             "value":"user"
         });
-        itemlist.push({
+       /* itemlist.push({
             "name":"sendto",
             "title":"抄送给",
             "operator":"=",
             "value":"user"
-        });
+        });*/
         itemlist.push({
             "name":"storyClosedReason",
             "title":"关闭原因",
@@ -380,7 +380,7 @@
         });
         itemlist.push({
             "name":"storyLastEditedDate",
-            "title":"最后修改日期",
+            "title":"上次修改日期",
             "operator":"=",
             "value":"data"
         });

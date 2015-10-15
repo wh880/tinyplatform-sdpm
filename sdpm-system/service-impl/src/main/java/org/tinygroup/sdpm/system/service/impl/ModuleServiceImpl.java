@@ -11,56 +11,61 @@ import org.tinygroup.sdpm.system.service.inter.ModuleService;
 @Component
 public class ModuleServiceImpl implements ModuleService {
 	@Autowired
-    private ModuleManager SystemModuleManager;
+    private ModuleManager systemModuleManager;
     
 	public SystemModule edit(SystemModule systemModule) {
 		// TODO Auto-generated method stub
-		return SystemModuleManager.edit(systemModule);
+		return systemModuleManager.edit(systemModule);
 	}
 
 	public int deleteById(int id) {
 		// TODO Auto-generated method stub
-		return SystemModuleManager.deleteById(id);
+		return systemModuleManager.deleteById(id);
 	}
 
 	public int delete(SystemModule systemModule) {
 		// TODO Auto-generated method stub
-		return  SystemModuleManager.delete(systemModule);
+		return  systemModuleManager.delete(systemModule);
 	}
 
 	public SystemModule findById(int id) {
 		// TODO Auto-generated method stub
-		return SystemModuleManager.findById(id);
+		return systemModuleManager.findById(id);
 	}
 
 	public List<SystemModule> findModules(SystemModule systemModule) {
 		// TODO Auto-generated method stub
 		
-		return SystemModuleManager.findByModules(systemModule);
+		return systemModuleManager.findByModules(systemModule);
 	}
 	
 	public List<SystemModule> findAllModules(SystemModule systemModule) {
 		// TODO Auto-generated method stub
 		
-		return SystemModuleManager.findModules(systemModule,new ArrayList<SystemModule>());
+		return systemModuleManager.findModules(systemModule,new ArrayList<SystemModule>());
 	}
 
 	public SystemModule add(SystemModule systemModule) {
 
-		return SystemModuleManager.add(systemModule);
+		return systemModuleManager.add(systemModule);
 	}
     public SystemModule eidtNameAndTiele(SystemModule systemModule){
-    return SystemModuleManager.editNameAndTitle(systemModule);
+    return systemModuleManager.editNameAndTitle(systemModule);
     }
 
 	public int batchDelete(Integer...ids) {
 		// TODO Auto-generated method stub
-		return SystemModuleManager.batchDelete(ids);
+		return systemModuleManager.batchDelete(ids);
 	}
 
 	public List<SystemModule> findModuleList(SystemModule systemModule){
 
-		return SystemModuleManager.findList(systemModule);
+		return systemModuleManager.findList(systemModule);
+	}
+
+	public int deleteAndedit(Integer id) {
+		// TODO Auto-generated method stub
+		return systemModuleManager.deleteAndedit(id);
 	}
 
 }

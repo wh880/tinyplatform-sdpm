@@ -5,7 +5,7 @@
 #setTinyItemCount(bugList?.totalCount)
 #for(bug:bugList?.getRecords())
 #@tr()
-	#@td()<input type="checkbox" value="${bug?.bugId}" name="releaseId">#end
+	#@td()<input type="checkbox" value="${bug?.bugId}" name="bugId">#end
 	#@td()${bug?.bugId}#end
 	#@td()@#end
 	#@td()

@@ -34,7 +34,7 @@ public class StorySpecAction extends BaseController{
 		
 		if ("productDemandDetail".equals(forward)) {
 			
-			return "/product/page/project/demdtablehref.page?storyId="+story.getStoryId();
+			return "/product/page/project/demdtablehref.page";
 		}
 		return "";
 	}

@@ -70,6 +70,12 @@ public interface ModuleService {
 	 * @return
      */
 	List<SystemModule> findModuleList(SystemModule systemModule);
+	/**
+	 * 删除联动编辑Dict
+	 * @param id
+	 * @return
+	 */
+	public int deleteAndedit(Integer id);
 	 
 	 
 }
