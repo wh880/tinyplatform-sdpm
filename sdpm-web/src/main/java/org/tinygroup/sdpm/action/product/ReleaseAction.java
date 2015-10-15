@@ -1,11 +1,5 @@
 package org.tinygroup.sdpm.action.product;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
+import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.ReleaseService;
 import org.tinygroup.tinysqldsl.Pager;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -27,11 +27,13 @@ import org.tinygroup.tinysqldsl.Pager;
  *
  */
 @Controller
-@RequestMapping("/product/release")
+@RequestMapping("/a/product/release")
 public class ReleaseAction extends BaseController{
 
 	@Autowired
 	private ReleaseService releaseService;
+	@Autowired
+	private ProductService productService;
 	
 	@RequestMapping("/save")
 	public  String save(ProductRelease productRelease,Model model,HttpServletRequest request){
@@ -123,5 +125,15 @@ public class ReleaseAction extends BaseController{
 		List<ProductRelease> list = releaseService.findReleaseList(release);
 		return list;
 	}
-}
 
+	@RequestMapping("/addRelease")
+	public String addRelease(HttpServletRequest request, Model model) {
+		int productId = -1;
+		if (request.getSession().getAttribute("sessionProductId") != null) {
+			productId = (Integer) request.getSession().getAttribute("sessionProductId");
+		}
+		Product product = productService.findProduct(productId);
+		model.addAttribute("product", product);
+		return "/product/page/tabledemo/product-addrelease.page";
+	}
+}
