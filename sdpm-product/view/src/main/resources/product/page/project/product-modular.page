@@ -37,7 +37,7 @@
             #@rightAlignTr()
 
                 #@th("text-r" "vertical-align:middle;width:20%")
-                    产品XXX
+                   ${modulePath}
                 #end
                 #@th("text-l" )
 #*                    #@elementItem()

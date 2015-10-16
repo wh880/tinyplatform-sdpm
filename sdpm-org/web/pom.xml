@@ -10,7 +10,7 @@
     <artifactId>sdpm-org-web</artifactId>
     <name>sdpm-org-web</name>
     <packaging>war</packaging>
-    <url>http://maven.apache.org</url>
+
     <dependencies>
         <dependency>
             <groupId>org.tinygroup</groupId>

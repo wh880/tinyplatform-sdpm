@@ -9,15 +9,4 @@
     </parent>
     <artifactId>sdpm-common-view-uicomponent</artifactId>
     <name>sdpm-common-view-uicomponent</name>
-    <url>http://maven.apache.org</url>
-    <properties>
-    </properties>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>

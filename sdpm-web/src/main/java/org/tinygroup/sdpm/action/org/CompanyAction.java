@@ -20,7 +20,7 @@ public class CompanyAction extends BaseController {
     public String save(OrgCompany company, Model model) {
         companyService.updateCompany(company);
         model.addAttribute("company", company);
-        return "redirect" + adminPath + "/org/company/show/";
+        return "redirect:" + adminPath + "/org/company/show/";
     }
 
     @RequestMapping("/show")
