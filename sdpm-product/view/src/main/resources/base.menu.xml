@@ -267,21 +267,21 @@
           isShow="1" permission="Permission">
         <menu id="product-dymanic-badel" name="批量删除" href="" icon="" sort="9" isShow="1" scope="dymanci-dl"/>
 
-        <menu id="dymanic-today" name="今天" href="/product/page/project/dymanicdata.page" icon="" sort="8" isShow="1"
+        <menu id="today" name="今天" href="/product/page/project/dymanicdata.page?choice=today" icon="" sort="8" isShow="1"
               scope="dymanci-time"/>
-        <menu id="dymanic-yesterday" name="昨天" href="/product/page/project/dymanicdata.page" icon="" sort="7" isShow="1"
+        <menu id="yesterday" name="昨天" href="/product/page/project/dymanicdata.page?choice=yesterday" icon="" sort="7" isShow="1"
               scope="dymanci-time"/>
-        <menu id="dymanic-lastyesterday" name="前天" href="/product/page/project/dymanicdata.page" icon="" sort="6"
+        <menu id="beforeYesterday" name="前天" href="/product/page/project/dymanicdata.page?choice=beforeYesterday" icon="" sort="6"
               isShow="1" scope="dymanci-time"/>
-        <menu id="dymanic-thisweek" name="本周" href="/product/page/project/dymanicdata.page" icon="" sort="5" isShow="1"
+        <menu id="thisWeek" name="本周" href="/product/page/project/dymanicdata.page?choice=thisWeek" icon="" sort="5" isShow="1"
               scope="dymanci-time"/>
-        <menu id="dymanic-lastweek" name="上周" href="/product/page/project/dymanicdata.page" icon="" sort="4" isShow="1"
+        <menu id="lastWeek" name="上周" href="/product/page/project/dymanicdata.page?choice=lastWeek" icon="" sort="4" isShow="1"
               scope="dymanci-time"/>
-        <menu id="dymanic-thismonth" name="本月" href="/product/page/project/dymanicdata.page" icon="" sort="3" isShow="1"
+        <menu id="thisMonth" name="本月" href="/product/page/project/dymanicdata.page?choice=thisMonth" icon="" sort="3" isShow="1"
               scope="dymanci-time"/>
-        <menu id="dymanic-lastmonth" name="上月" href="/product/page/project/dymanicdata.page" icon="" sort="2" isShow="1"
+        <menu id="lastMonth" name="上月" href="/product/page/project/dymanicdata.page?choice=lastMonth" icon="" sort="2" isShow="1"
               scope="dymanci-time"/>
-        <menu id="dymanic-alltime" name="所有" href="/product/page/project/dymanicdata.page" icon="" sort="1" isShow="1"
+        <menu id="all" name="所有" href="/product/page/project/dymanicdata.page?choice=all" icon="" sort="1" isShow="1"
               scope="dymanci-time"/>
 
 

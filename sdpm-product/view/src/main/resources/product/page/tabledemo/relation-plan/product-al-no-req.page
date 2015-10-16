@@ -2,10 +2,11 @@
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeMenuId=currentPageId)
 #!set(cname="no-demand",type="demand")
+#set(storyTableId = "storyTableId" )
 
 #include("/product/page/event/mulsearch-demand.page")	
 
-		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+		#@tinyTable(storyTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 			
 			

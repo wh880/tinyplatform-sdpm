@@ -3,7 +3,9 @@ package org.tinygroup.sdpm.action.project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.CookieUtils;
@@ -156,4 +158,24 @@ public class ProjectstoryAction extends BaseController {
 
         return map;
     }
+
+
+//    @RequestMapping("/search/{relate}")
+//    public String storyListAction(@PathVariable(value="relate")String relate, Integer start, Integer limit, @RequestParam(required = false, defaultValue = "storyId") String order, @RequestParam(required = false, defaultValue = "asc")String ordertype, Model model, HttpServletRequest request){
+//        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+//        Pager<ProductStory> story = projectStoryService.findStoryByProject(projectId, start, limit, order, ordertype);
+//        model.addAttribute("story", story);
+//
+//        if("reRelateStory".equals(relate)){
+//            return "/project/task/relation-release/product-al-req.pagelet";
+//        }else if ("noRelateStory".equals(relate)) {
+//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
+//        }else if ("reRelateStoryRelease".equals(relate)) {
+//            return "/project/task/relation-release/product-al-req-data.pagelet";
+//        }else if ("noRelateStoryRelease".equals(relate)) {
+//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
+//        }
+//
+//        return "";
+//    }
 }

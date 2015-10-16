@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.system.biz.impl;
 
+import java.util.List;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +12,7 @@ import org.tinygroup.sdpm.system.dao.SystemActionDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
 
-import java.util.List;
+
 
 @Service
 @Transactional
@@ -43,18 +45,29 @@ public class ActionManagerImpl implements ActionManager {
         return actions;
     }
 
-    public Pager<SystemAction> findByPage(int start, int limit, SystemAction systemAction, String order,
-                                          String ordertype) {
-
-        Pager<SystemAction> pager = systemActionDao.queryPager((start - 1) * limit, limit, systemAction, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
-        if (pager.getRecords().size() > 0) {
-            for (SystemAction s : pager.getRecords()) {
-                s = systemActionDao.getActionAndObject(s);
-                //s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));			}
-            }
-        }
-        return pager;
+    public Pager<SystemAction> findByPage(int start, int limit, SystemAction systemAction, String order,String ordertype) {
+    	
+    	Pager<SystemAction> pager = systemActionDao.queryPager((start-1)*limit, limit,systemAction, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+		if(pager.getRecords().size()>0){
+			for(SystemAction s : pager.getRecords()){
+				s = systemActionDao.getActionAndObject(s);
+				s.setUrl(s.getActionObjectType());
+			}
+		}
+		return pager;
+    	
     }
 
+public Pager<SystemAction> queryPager(int start,int limit ,Condition condition,SystemAction systemAction , String order,String ordertype){
+		
+		Pager<SystemAction> pager = systemActionDao.queryPager((start-1)*limit, limit,condition, systemAction, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+		if(pager.getRecords().size()>0){
+			for(SystemAction s : pager.getRecords()){
+				s = systemActionDao.getActionAndObject(s);
+				s.setUrl(s.getActionObjectType());
+			}
+		}
+		return pager;
+	}
 
 }
