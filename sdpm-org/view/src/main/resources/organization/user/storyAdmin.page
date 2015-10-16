@@ -13,28 +13,65 @@
             #@div(divClass="operationbar")
                 #@tinyForm("thisform" "" "" {"class":"test"})
                     #@formControlDiv("col-1")
-                        #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                            #@tinyOptionItem("zh")中国#end
-                            #@tinyOptionItem("en")英国#end
-                            #@tinyOptionItem("ta")泰国#end
+                        #@navSelect2("user" "user")
+                            #@navSelect2Nav()
+                                #if(userList)
+                                    #for(user:userList)
+                                    #if(user?.orgUserId == id)
+                                        ${user?.orgUserRealName}
+                                    #end
+                                #end
+                            #else
+                            用户
+                            #end
+
+                        <span class="caret"></span>#end
+                        #@navSelect2Body()
+                            #@navSelect2Data()
+                            <option value=""></option>
+                            <optgroup label="用户">
+                                #for(user:userList)
+                                <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+                            #end
+                        </optgroup>
+
                         #end
-                    #end
-                <span style="padding-top: 5px;float: left">
-                    &nbsp;&gt;
-                    #foreach(m:menuManager.getScopeMenus("org-user-detail"))
-                        #if(m.id=="org-user-storyAdmin")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}"
-                               class="active_btn">${m.name}</a>
-                        #else
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}">${m.name}</a>
+                        #@navSelect2Fix()
+                        <a href="${TINY_CONTEXT_PATH +adminPath}/org/user/list" class="r">所有用户 </a>&nbsp;
+                        <a href="${TINY_CONTEXT_PATH +adminPath}/org/user/form">添加用户</a>&nbsp;
                         #end
                     #end
 
-                </span>
-                    #div(divClass="clearfix")
+                    #hiddenInput("userIdHidden","orgUserId","","")
+
+                <script type="text/javascript">
+
+                    $(function () {
+                        $("#user-select").on("change", function () {
+                            window.location.href = "${TINY_CONTEXT_PATH +adminPath}/org/user/story?choose=3&id=" + $(this).val();
+                        });
+                    });
+
+                </script>
                 #end
 
-            <span class="barBoxs">
+            #end
+        <span style="padding-top: 5px;float: left">
+                    &nbsp;&gt;
+            #foreach(m:menuManager.getScopeMenus("org-user-detail"))
+                #if(m.id=="org-user-storyAdmin")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}"
+                       class="active_btn">${m.name}</a>
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}">${m.name}</a>
+                #end
+            #end
+
+                </span>
+            #div(divClass="clearfix")
+        #end
+
+    <span class="barBoxs">
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?choose=3&id=${id}"
                    class="${choose == 3?'active_btn':''}">指派给我</a>
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?choose=4&id=${id}"
@@ -44,9 +81,9 @@
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?choose=6&id=${id}"
                    class="${choose == 6?'active_btn':''}">由我关闭</a>
         </span>
-            #end
-        #end
     #end
+#end
+#end
 #end
 
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID

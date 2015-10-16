@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -12,6 +11,7 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectBurn;
 import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
+import org.tinygroup.sdpm.util.CookieUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
@@ -36,7 +36,7 @@ public class BurnAction extends BaseController {
     public String initBurn(HttpServletRequest request, Model model, Integer choose, Integer interval) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
         if (interval == null) {
-            interval = 5;
+            interval = 3;
         }
         /**
          * 1.获取项目的起始、结束日期

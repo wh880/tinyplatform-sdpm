@@ -28,6 +28,10 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     private TaskManager taskManager;
 
 
+    public List<ProjectStory> findByProjectStory(ProjectStory projectStory) {
+        return projectStoryManager.findList(projectStory);
+    }
+
     public Integer batchtDel(String condition) {
         return projectStoryManager.batchtDel(condition);
     }

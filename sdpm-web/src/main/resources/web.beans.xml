@@ -3,6 +3,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="dictFunction" class="org.tinygroup.sdpm.functions.DictFunction"/>
+    <bean id="stdFunction" class="org.tinygroup.sdpm.functions.StdFunction"/>
     <bean id="dictHandle" class="org.tinygroup.sdpm.dict.impl.DictHandleImpl" scope="singleton"></bean>
     <bean id="dictFileProcessor" class="org.tinygroup.sdpm.dict.processor.DictFileProcessor" >
         <!--<property name="scan" value="true"></property>-->

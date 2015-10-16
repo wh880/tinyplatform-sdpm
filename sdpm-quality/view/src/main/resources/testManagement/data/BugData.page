@@ -20,7 +20,7 @@
     #@td()${getDict("bugStatus",var?.bugStatus)}#end
     #@td()${var?.bugOpenedBy}#end
     #@td()${formatDate(var?.bugOpenedDate,"yyyy-MM-dd")}#end
-    #@td()${var?.bugAssignedTo}#end
+    #@td()${var?.assignedUser}#end
     #@td()${var?.bugResolvedBy}#end
     #@td()${var?.bugResolution}#end
     #@td()${formatDate(var?.bugResolvedDate,"yyyy-MM-dd")}#end

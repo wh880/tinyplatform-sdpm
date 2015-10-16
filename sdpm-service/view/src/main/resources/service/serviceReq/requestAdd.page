@@ -36,7 +36,7 @@
                 #@elementItem()
                     #@colLabel()客户ID：#end
                     #@formControlDiv("col-8")
-                        #tinyInput("text" "服务协议ID" ""{"datatype":"","id":"协议ID","class":"input-text"})
+                        #tinyInput("text" "服务协议ID" ""{"id":"协议ID","class":"input-text"})
                     #end
                     #@validateDiv("col-2")#end
                 #end
@@ -72,7 +72,7 @@
                 #@elementItem()
                     #@colLabel()请求标题：#end
                     #@formControlDiv("col-8")
-                        #tinyInput("text" "服务协议ID" ""{"datatype":"","id":"协议ID","class":"input-text"})
+                        #tinyInput("text" "服务协议ID" ""{"id":"协议ID","class":"input-text"})
                     #end
                     #@validateDiv("col-2")#end
                 #end
@@ -87,42 +87,42 @@
                 #@elementItem()
                     #@colLabel()服务响应时限：#end
                     #@formControlDiv("col-8")
-                        #tinyInput("text" "影响版本" "单位为小时（不含节假日）"{"datatype":"","id":"版本","class":"input-text"})
+                        #tinyInput("text" "影响版本" "单位为小时（不含节假日）"{"id":"版本","class":"input-text"})
                     #end
                     #@validateDiv("col-2")#end
                 #end
                 #@elementItem()
                     #@colLabel()需求回访时限：#end
                     #@formControlDiv("col-8")
-                        #tinyInput("text" "影响版本" "单位工作日"{"datatype":"","id":"版本","class":"input-text"})
+                        #tinyInput("text" "影响版本" "单位工作日"{"id":"版本","class":"input-text"})
                     #end
                     #@validateDiv("col-2")#end
                 #end
                 #@elementItem()
                     #@colLabel()服务工时上限：#end
                     #@formControlDiv("col-8")
-                        #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                        #tinyInput("text" "影响版本" ""{"id":"版本","class":"input-text"})
                     #end
                     #@validateDiv("col-2")#end
                 #end
                 #@elementItem()
                     #@colLabel()服务请求数上限：#end
                     #@formControlDiv("col-8")
-                        #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                        #tinyInput("text" "影响版本" ""{"id":"版本","class":"input-text"})
                     #end
                     #@validateDiv("col-2")#end
                 #end
                 #@elementItem()
                     #@colLabel()服务专员：#end
                     #@formControlDiv("col-8")
-                        #tinyInput("text" "影响版本" "可以多人，间隔符英文,"{"datatype":"","id":"版本","class":"input-text"})
+                        #tinyInput("text" "影响版本" "可以多人，间隔符英文,"{"id":"版本","class":"input-text"})
                     #end
                     #@validateDiv("col-2")#end
                 #end
                 #@elementItem()
                     #@colLabel()服务工时上限：#end
                     #@formControlDiv("col-8")
-                        #tinyInput("text" "影响版本" ""{"datatype":"","id":"版本","class":"input-text"})
+                        #tinyInput("text" "影响版本" ""{"id":"版本","class":"input-text"})
                     #end
                     #@validateDiv("col-2")#end
                 #end#

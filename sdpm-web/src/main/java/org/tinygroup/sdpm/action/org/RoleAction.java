@@ -44,7 +44,7 @@ public class RoleAction extends BaseController {
             roleService.updateRole(role);
         }
         model.addAttribute("role", role);
-        return "redirect" + adminPath + "/org/privilege/list/";
+        return "redirect:" + adminPath + "/org/privilege/list/";
     }
 
 
@@ -62,7 +62,7 @@ public class RoleAction extends BaseController {
                 roleUserService.copyRoleUser(orgRoleIdNew, orgRoleId);
             }
         }
-        return "redirect" + adminPath + "/org/privilege/list";
+        return "redirect:" + adminPath + "/org/privilege/list";
     }
 
     @ResponseBody

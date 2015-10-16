@@ -18,7 +18,7 @@
                 <input type="hidden" name="clientRequestId" value=${request?.clientRequestId}></input>
                 #@elementItem()
                 <div class="col-12">
-                    <div class="col-2 text-r"><label><span class="c-red">*</span>请求标题：</label></div>
+                    <div class="col-2 text-r"><label>请求标题：</label></div>
 
                     <div class="col-9">
                         <td>${request?.requestTitle}</td>
@@ -45,22 +45,17 @@
 
                 #@elementItem()
                     #@sdpmItem("回复人")
-                        #tinyInput("text" "replier" request?.replier{"datatype":"","id":"解决人员","class":"input-text"})
+                        #tinyInput("text" "replier" request?.replier{"id":"解决人员","class":"input-text"})
                     #end
                 #end
                 #@elementItem()
-
                     #@sdpmItem("回复处理时间" "*")
                         #@tinyDateInput(
                             "replyDate" formatDate(request?.replyDate,
-                            "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
-                        "日期不能为空"})#end
+                            "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                        "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
                     #end
-                    #@validateDiv("col-2")#end
-
                 #end
-
-
             </div>
                 #@elementItem()
                     <div class="col-12" style="margin-left: 200px">

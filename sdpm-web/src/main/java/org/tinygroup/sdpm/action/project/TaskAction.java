@@ -3,15 +3,11 @@ package org.tinygroup.sdpm.action.project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.action.system.ProfileUtil;
-import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
@@ -25,13 +21,15 @@ import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by wangying14938 on 2015-09-22.任务
@@ -202,16 +200,16 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(ProjectTask task,  @RequestParam(value="file",required=false)MultipartFile file,Model model) {
+    public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
         if (task.getTaskId() == null) {
-          ProjectTask newtask=  taskService.addTask(task);
-          ProfileUtil profileUtil = new ProfileUtil();
-          try {
-			profileUtil.uploadNoTitle(file, newtask.getTaskId(), "task");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            ProjectTask newtask = taskService.addTask(task);
+            ProfileUtil profileUtil = new ProfileUtil();
+            try {
+                profileUtil.uploadNoTitle(file, newtask.getTaskId(), "task");
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         } else {
             taskService.updateTask(task);
         }
@@ -220,7 +218,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/closesave", method = RequestMethod.POST)
-    public String closesave(ProjectTask task,Model model, SystemAction systemAction) {
+    public String closesave(ProjectTask task, Model model, SystemAction systemAction) {
         taskService.updateCloseTask(task);
 
         systemAction.setActionObjectId(String.valueOf(task.getTaskId()));
@@ -283,9 +281,14 @@ public class TaskAction extends BaseController {
 
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
         SystemModule module = new SystemModule();
-        module.setModuleType("project");
+        module.setModuleType("task");
         module.setModuleRoot(projectId);
         List<SystemModule> moduleList = moduleService.findModuleList(module);
+        List<SystemModule> moduleList2 = moduleService.findAllModules(module);
+        for (SystemModule m : moduleList) {
+            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
+        }
+
         List<ProductStory> storyList = storyService.findStoryByProject(projectId);
         ProductStory story = new ProductStory();
         if (storyId != null) {
@@ -387,6 +390,65 @@ public class TaskAction extends BaseController {
             taskService.batchAdd(taskList, projectId);
             return "project/task/index.page";
         }
+    }
+
+    @RequestMapping("/gantt")
+    public String gantt(Model model, String choose) {
+        model.addAttribute("choose", choose);
+        return "project/task/gantt.page";
+    }
+
+    @ResponseBody
+    @RequestMapping("/gantt/init")
+    public List<Map<String, String>> ganttInit(HttpServletRequest request) {
+        List<Map<String, String>> resList = new ArrayList<Map<String, String>>();
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+
+        ProjectTask task = new ProjectTask();
+        task.setTaskProject(projectId);
+        List<ProjectTask> taskList = taskService.findListTask(task);
+
+        for (ProjectTask t : taskList) {
+            SimpleDateFormat format = new SimpleDateFormat("M/d/yyyy");
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("pID", t.getTaskId().toString());
+            map.put("pName", t.getTaskName());
+            if (t.getTaskRealStarted() != null) {
+                map.put("pStart", format.format(t.getTaskRealStarted()));
+            } else {
+                map.put("pStart", "");
+            }
+            if (t.getTaskFinishedDate() != null) {
+                map.put("pEnd", format.format(t.getTaskFinishedDate()));
+            } else {
+                map.put("pEnd", format.format(new Date()));
+            }
+
+            map.put("pColor", t.getTaskPri().toString());
+            map.put("pRes", t.getTaskAssignedTo());
+            //进度
+            float comp;
+            if ((t.getTaskConsumed() == null || t.getTaskConsumed() == 0) || (t.getTaskConsumed() + t.getTaskLeft() == 0)) {
+                comp = 0f;
+            } else {
+                comp = t.getTaskConsumed() / (t.getTaskConsumed() + t.getTaskLeft());
+            }
+            map.put("pComp", String.valueOf(comp * 100));
+            map.put("pGroup", "0");
+            map.put("pParent", "0");
+            map.put("pOpen", "1");
+            map.put("pDepend", "1");
+            map.put("pCaption", "brian");
+            resList.add(map);
+        }
+        return resList;
+    }
+
+    @RequestMapping("/gantt/find")
+    public String ganttFind(Integer id, Model model) {
+        ProjectTask task = taskService.findTask(id);
+        model.addAttribute("task", task);
+        return "project/task/ganttFind.pagelet";
     }
 
 

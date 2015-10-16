@@ -75,7 +75,7 @@ public class StoryManagerImpl implements StoryManager {
 				: statusCondition;
 		OrderBy orderBy = null;
 		if (columnName != null && !"".equals(columnName)) {
-			orderBy = new OrderBy(columnName, asc);
+			orderBy = new OrderBy(NameUtil.resolveNameDesc(columnName), asc);
 		}
 		if (condition != null && !"".equals(condition)) {
 			return productStoryDao.complexQuery(start, limit, story, condition,

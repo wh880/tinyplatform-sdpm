@@ -225,5 +225,16 @@ public class ProductAction extends BaseController {
 
     }
 
+    @RequestMapping("/addDoc")
+    public String addDoc(HttpServletRequest request, Model model) {
+        int productId = -1;
+        if (request.getSession().getAttribute("sessionProductId") != null) {
+            productId = (Integer) request.getSession().getAttribute("sessionProductId");
+        }
+        Product product = productService.findProduct(productId);
+        model.addAttribute("product", product);
+       return  "/product/page/tabledemo/add-doc.page";
+    }
+
 
 }

@@ -11,6 +11,7 @@ import org.tinygroup.sdpm.system.service.impl.DictServiceImpl;
 import org.tinygroup.sdpm.system.service.impl.ModuleServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.DictService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.util.ModuleUtil;
 
 import java.util.*;
 
@@ -100,8 +101,37 @@ public class DictUtil extends DictParent {
         }
     }
 
+    public static void addDict(SystemDict dict){
+        SystemModule module = moduleService.findById(dict.getModuleId());
+        String mPath = ModuleUtil.getPath(module.getModuleParent()==0?module.getModuleId():module.getModuleParent(),"/",moduleService,null,false).substring(1);
+        for(String path : dictMap.keySet()){
+            if(path.contains(mPath)){
+                Map map = dictMap.get(mPath);
+                map.put(dict.getDictKey(),dict.getDictValue());
+                break;
+            }
+        }
+    }
+
+    public static void editDict(SystemDict oldDict, SystemDict newDict){
+        SystemModule module = moduleService.findById(oldDict.getModuleId());
+        String mPath = ModuleUtil.getPath(module.getModuleParent()==0?module.getModuleId():module.getModuleParent(),"/",moduleService,null,false).substring(1);
+        for(String path : dictMap.keySet()){
+            if(path.contains(mPath)){
+                Map map = dictMap.get(mPath);
+                map.remove(oldDict.getDictKey());
+                map.put(newDict.getDictKey(),newDict.getDictValue());
+                break;
+            }
+        }
+    }
+
     public static String getValue(String type,String key){
         return dictMap.get(entryMapping.get(type)).get(key);
+    }
+
+    public static Map<String,String> getValueMap(String type){
+        return dictMap.get(entryMapping.get(type));
     }
 
     public static String getValue(String root,String type,String key){

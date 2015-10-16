@@ -1,4 +1,8 @@
-package org.tinygroup.sdpm.common.util;
+package org.tinygroup.sdpm.util;
+
+import org.tinygroup.logger.LogLevel;
+import org.tinygroup.logger.Logger;
+import org.tinygroup.logger.LoggerFactory;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +15,8 @@ import java.net.URLEncoder;
  * Cookie工具类
  */
 public class CookieUtils {
+
+    protected static final Logger logger = LoggerFactory.getLogger(CookieUtils.class);
 
     /**
      * 设置 Cookie（生成时间为1天）
@@ -36,7 +42,7 @@ public class CookieUtils {
         try {
             cookie.setValue(URLEncoder.encode(value, "utf-8"));
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            logger.logMessage(LogLevel.ERROR, "存储Cookies错误", e);
         }
         response.addCookie(cookie);
     }

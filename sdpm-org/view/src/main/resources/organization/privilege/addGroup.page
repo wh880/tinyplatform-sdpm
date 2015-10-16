@@ -34,7 +34,8 @@
                 #@colLabel("col-2")<span class="c-red">*</span>角色名称：#end
                 #@gridSysCol(7)
                     #tinyInput(
-                        "text" "orgRoleName" role?.orgRoleName {"placeholder":"","nullmsg":"角色名不能为空！","id":"username",
+                        "text" "orgRoleName" role?.orgRoleName {"placeholder":"","datatype":"*","nullmsg":"角色名不能为空！",
+                        "id":"username",
                         "class":
                         "input-text"})
                 #end
@@ -42,7 +43,7 @@
             #@gridSysRow()
                 #@colLabel("col-2")角色描述：#end
                 #@gridSysCol(7)
-                    #tinyInput("text" "orgRoleRemarks" role?.orgRoleRemarks{"datatype":"","class":"input-text"})
+                    #tinyInput("text" "orgRoleRemarks" role?.orgRoleRemarks{"class":"input-text"})
                 #end
             #end
             #@gridSysRow()
@@ -55,3 +56,12 @@
     #end
     #@gridSysCol(3)#end
 #end
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+
+        });
+    });
+</script>

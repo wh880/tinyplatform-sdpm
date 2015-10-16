@@ -132,6 +132,15 @@ return format;
  
 </script>
 
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+        });
+    });
+</script>
+
+
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/plan/update" "post" {"class":""})
 	
@@ -139,16 +148,16 @@ return format;
     <div class="infoContent">
         <p class="titleName">编辑</p>
      #@elementItem()
-        #@colLabel()计划:#end
+        #@colLabel()产品:#end
         #@formControlDiv("col-4")
-        	 计划X X X X
+        	 ${product?.productName}
         #end
         #@validateDiv("col-2")#end
       #end
     #@elementItem()
         #@colLabel()名称:#end
         #@formControlDiv("col-4")
-          #tinyInput("text" "planName" plan?.planName {"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+          #tinyInput("text" "planName" plan?.planName {"datatype":"*","class":"input-text","nullmsg":"计划名称不能为空！","placeholder":""})
         #end
         #@validateDiv("col-2")#end
     #end
@@ -156,7 +165,7 @@ return format;
     #@elementItem()
         #@colLabel()开始日期:#end
         #@formControlDiv("col-4")
-           #@tinyDateInput("planBeginDate" plan?.planBeginDate?formatDate(plan?.planBeginDate,'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","id":"qwe","readonly":"readonly"})#end
+           #@tinyDateInput("planBeginDate" plan?.planBeginDate?formatDate(plan?.planBeginDate,'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","readonly":"readonly"})#end
         #end
         #@validateDiv("col-2")#end
     #end

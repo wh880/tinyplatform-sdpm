@@ -1,6 +1,5 @@
 package org.tinygroup.sdpm.action.org;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,7 +57,7 @@ public class UserAction extends BaseController {
     @Autowired
     private ProjectService projectService;
 
-    @RequiresPermissions("org-user-edit")
+
     @RequestMapping("/form")
     public String form(String id, Model model) {
         if (id != null) {
@@ -109,7 +108,7 @@ public class UserAction extends BaseController {
             return "organization/user/delect.pagelet";
         }
 
-        return "redirect" + adminPath + "/org/user/list/";
+        return "redirect:" + adminPath + "/org/user/list/";
     }
 
     @ResponseBody
@@ -148,8 +147,10 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/show/profile")
-    public String show(String id, Model model) {
+    public String show(String id, OrgUser orgUser, Model model) {
         OrgUser user = userService.findUser(id);
+        List<OrgUser> userList = userService.findUserList(orgUser);
+        model.addAttribute("userList", userList);
         model.addAttribute("user", user);
         return "organization/user/profileAdmin.page";
     }
@@ -164,35 +165,38 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/story")
-    public String storyJump() {
-
+    public String storyJump(OrgUser orgUser, Model model) {
+        List<OrgUser> userList = userService.findUserList(orgUser);
+        model.addAttribute("userList", userList);
         return "/organization/user/storyAdmin.page";
     }
 
     @RequestMapping("/story/search")
     public String storySearchAction(String id, String account, int page, int pagesize, String choose, ProductStory story, String order, String ordertype, Model model, HttpServletRequest request) {
 
-        if (StringUtil.isBlank(id) && !StringUtil.isBlank(account)) {
-            OrgUser userByAccount = userService.findUserByAccount(account);
-            id = userByAccount.getOrgUserId();
+        if (!StringUtil.isBlank(id) && StringUtil.isBlank(account)) {
+            OrgUser userByAccount = userService.findUser(id);
+            account = userByAccount.getOrgUserAccount();
         }
+
         if (choose.equals("6")) {
-            story.setStoryClosedBy(id);
+            story.setStoryClosedBy(account);
             Pager<ProductStory> p4 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
+
             model.addAttribute("storyList", p4);
 
         } else if (choose.equals("4")) {
-            story.setStoryOpenedBy(id);
+            story.setStoryOpenedBy(account);
             Pager<ProductStory> p2 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p2);
 
         } else if (choose.equals("5")) {
-            story.setStoryReviewedBy(id);
+            story.setStoryReviewedBy(account);
             Pager<ProductStory> p3 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p3);
 
         } else {
-            story.setStoryAssignedTo(id);
+            story.setStoryAssignedTo(account);
             Pager<ProductStory> p1 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p1);
 
@@ -200,9 +204,10 @@ public class UserAction extends BaseController {
         return "organization/user/userStoryTable.pagelet";
     }
 
-
     @RequestMapping("/task")
-    public String taskJump() {
+    public String taskJump(OrgUser orgUser, Model model) {
+        List<OrgUser> userList = userService.findUserList(orgUser);
+        model.addAttribute("userList", userList);
         return "/organization/user/taskAdmin.page";
     }
 
@@ -228,7 +233,9 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/bug")
-    public String bugJump() {
+    public String bugJump(OrgUser orgUser, Model model) {
+        List<OrgUser> userList = userService.findUserList(orgUser);
+        model.addAttribute("userList", userList);
         return "/organization/user/bugAdmin.page";
     }
 
@@ -252,7 +259,9 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/testtask")
-    public String testTaskJump() {
+    public String testTaskJump(OrgUser orgUser, Model model) {
+        List<OrgUser> userList = userService.findUserList(orgUser);
+        model.addAttribute("userList", userList);
         return "/organization/user/testtaskAdmin.page";
     }
 
@@ -269,7 +278,9 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/testtask1")
-    public String testTaskJump2() {
+    public String testTaskJump2(OrgUser orgUser, Model model) {
+        List<OrgUser> userList = userService.findUserList(orgUser);
+        model.addAttribute("userList", userList);
         return "/organization/user/testtaskAdmin1.page";
     }
 
@@ -290,7 +301,9 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/project")
-    public String projectJump() {
+    public String projectJump(OrgUser orgUser, Model model) {
+        List<OrgUser> userList = userService.findUserList(orgUser);
+        model.addAttribute("userList", userList);
         return "/organization/user/projectAdmin.page";
     }
 

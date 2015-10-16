@@ -24,4 +24,6 @@ import org.tinygroup.tinysqldsl.Pager;
 public interface ServiceFaqDao extends BaseDao<ServiceFaq, Integer> {
     Pager<ServiceFaq> getPagerByDeptId(int start, int limit, final Integer deptId, final OrderBy... orderBies);
 
+    Integer softDelete(Integer id);
+
 }

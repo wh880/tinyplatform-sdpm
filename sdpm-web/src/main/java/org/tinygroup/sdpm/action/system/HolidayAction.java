@@ -81,33 +81,33 @@ public class HolidayAction extends BaseController{
 		model.addAttribute("holiday", holiday);
 		return "/system/page/holiday/holiday.page";
 	}
-//	@ResponseBody
-//	@RequestMapping("delete")
-//    public Map<String, String> deleteHoliday(Integer holidayId){
-//	   Map<String, String> map = new HashedMap();
-//	   if(holidayId!=null){
-//		   Holiday holiday = new Holiday();
-//		   holiday.setHolidayId(holidayId);
-//		   holidayService.delete(holiday);
-//		   map.put("info", "删除成功");
-//		   map.put("status", "y");
-//	     }
-//	   else{
-//		   map.put("info", "删除失败");
-//		   map.put("status", "n");
-//	   }
-//	   return map;
-//     }
 	@ResponseBody
 	@RequestMapping("holiday/delete")
-	public String deleteHoliday(Integer holidayId){
-		if(holidayId!=null){
-			   Holiday holiday = new Holiday();
-			   holiday.setHolidayId(holidayId);
-			   holidayService.delete(holiday);
-	    }
-		return "/system/page/holiday/holiday.page";
-	}
+    public Map<String, String> deleteHoliday(Integer id){
+	   Map<String, String> map = new HashedMap();
+	   if(id!=null){
+		   Holiday holiday = new Holiday();
+		   holiday.setHolidayId(id);
+		   holidayService.delete(holiday);
+		   map.put("info", "删除成功");
+		   map.put("status", "y");
+	     }
+	   else{
+		   map.put("info", "删除失败");
+		   map.put("status", "n");
+	   }
+	   return map;
+     }
+//	@ResponseBody
+//	@RequestMapping("holiday/delete")
+//	public String deleteHoliday(Integer holidayId){
+//		if(holidayId!=null){
+//			   Holiday holiday = new Holiday();
+//			   holiday.setHolidayId(holidayId);
+//			   holidayService.delete(holiday);
+//	    }
+//		return "/system/page/holiday/holiday.page";
+//	}
 	@RequestMapping("holiday/manage")
 	public String manage(Holiday holiday,Model model){
 		List<Holiday> holidayList = holidayService.find(holiday);

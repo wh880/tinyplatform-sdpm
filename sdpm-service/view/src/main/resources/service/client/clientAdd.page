@@ -94,7 +94,7 @@
         #@elementItem()
             #@colLabel()状态是否正常：#end
             #@formControlDiv("col-8")
-                #Tswitcher("clientStatus" ["0","1"] "1") ##第二个为选中状态 第三参数为数据库返回时的数据
+                #Tswitcher("clientStatus" ["0","1"] client?.clientStatus) ##第二个为选中状态 第三参数为数据库返回时的数据
             #end
         #end
         <br/>
@@ -121,7 +121,7 @@
 #end
 <script type="text/javascript">
     $(function () {
-        $("form[name=thisform").Validform({
+        $("form[name=thisform]").Validform({
             tiptype: 2
         });
     });

@@ -11,17 +11,22 @@
 #setTinyItemCount(52)
 #for(var:[1..pagesize])
 #@tr()
-    #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()${var}#end
-    #@td()PP#end
-    #@td()计划${page}#end
-    #@td()121#end
-    #@td()12#end
-    #@td()admin#end
-    #@td()admin#end
-    #@td()admin#end
+    #@td()<input type="checkbox" value="${story?.storyId}" id="field" name="storyId">#end
+    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${story?.storyId}</a>#end
+    #@td()@#end
+    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${story?.storyTitle}</a>#end
+    #@td()${story?.storyOpenedBy}#end
+    #@td()${story?.storyAssignedTo}#end
+    #@td()${story?.storyEstimate}#end
+    #@td()${story?.storyStatus}#end
+    #@td()${story?.storyStage}#end
     #@td()
-        #iconOperation(" icon-remove" "删除" "ml-5")
+        #foreach(m:menuManager?.getScopeMenus("version-linkdemand"))
+            #set(url=eval(m.href))
+            #if("versionstory"==m.id)
+                #@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+url)<i class="${m.icon}"></i>#end
+            #end
+        #end
     #end
 
 #end
