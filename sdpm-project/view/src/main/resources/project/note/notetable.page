@@ -15,6 +15,7 @@
 				<table>
                     <tr>
                         <td style="width:360px">
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort" class="active_btn">日历</a>
                             <a val="1" class="selDate ${date==1?"active_btn":""}">今天</a>
                             <a val="2" class="selDate ${date==2?"active_btn":""}">昨天</a>
                             <a val="3" class="selDate ${date==3?"active_btn":""}">本周</a>
