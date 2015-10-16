@@ -1,11 +1,10 @@
 package org.tinygroup.sdpm.system.biz.inter;
 
 import java.util.List;
-import org.tinygroup.tinysqldsl.base.Condition;
 
-import org.tinygroup.sdpm.system.dao.impl.OrderBy;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 public interface ActionManager {
 	/**
