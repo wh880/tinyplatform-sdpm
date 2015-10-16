@@ -8,7 +8,7 @@
   <standard-field id="0dad99e5e3824c3f89a0d03f95baa577" name="doc_project" title="所属项目" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
     <description>所属项目，存储项目ID作为索引</description>
   </standard-field>
-  <standard-field id="99697402b1524b2980168f11bc9dfcef" name="doc_module" title="所属分类" business-type-id="095e594e1550424b9643c7e2279e85be">
+  <standard-field id="99697402b1524b2980168f11bc9dfcef" name="doc_module" title="所属分类" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
     <description>所属分类</description>
   </standard-field>
   <standard-field id="d6d1423caf944b84abf98afe24cee8e3" name="doc_title" title="文档标题" business-type-id="27ebfcdc558c477da425a46e566d4637">

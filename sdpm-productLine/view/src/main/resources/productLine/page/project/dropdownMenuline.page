@@ -53,9 +53,9 @@
 		#end
 		#@navSelect2Fix()
 			
-			<a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/list.page" class="r">所有产品线</a>&nbsp;
+			<a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/tabledemo/list.page" class="r">所有产品线</a>&nbsp;
 			<!--新增产品-->
-			<a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/add.page">添加产品线</a>&nbsp;
+			<a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/tabledemo/add.page">添加产品线</a>&nbsp;
 			
 		
 		#end
@@ -76,7 +76,7 @@
 	
 		$(function(){
 			$("#productLine-select").on("change",function(){
-				window.location.href='${TINY_CONTEXT_PATH}/productLine/page/project/productLine.page?item='+$(this).find("option:selected").text();
+				window.location.href='${TINY_CONTEXT_PATH +adminPath}/productLine/page/project/productLine.page?item='+$(this).find("option:selected").text();
 			});
 		});
 	

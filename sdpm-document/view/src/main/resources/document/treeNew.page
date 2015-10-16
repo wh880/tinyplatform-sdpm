@@ -29,8 +29,8 @@
                     #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
                     #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/document?tree=true")
                     #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+saveUrl)
-                    #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/story/edit")
-                    #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/story/deleteTree")
+                    #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/doc/edit")
+                    #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/doc/deleteTree")
              #end
 		#end
 	#end

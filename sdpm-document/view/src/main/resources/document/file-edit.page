@@ -1,12 +1,15 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/system/profile/edit/doc" "post" {"class":"edit"})
 <input type="hidden" name="fileId" value="${profile?.fileId}">
 #@colLabel()#end
-<div class="col-8">
-#@div(divClass="col-8")
+<div class="col-9">
+#@div(divClass="col-7")
 	
-	#tinyInput("text" "fileTitle" profile?.fileTitle {"style":"height:29px","placeholder":"文档库名称","id":"docLibId","class":"input-text"}).${f?.fileExtension}
+	#tinyInput("text" "fileTitle" profile?.fileTitle {"style":"height:30px","placeholder":"附件名称","id":"docLibId","class":"input-text"})
 	
 #end
+<div class="col-2">	
+		.${profile?.fileExtension}
+		</div>
 <div class="col-3">
 <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
 </div>

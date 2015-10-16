@@ -19,7 +19,7 @@
 		#@tabHead()
 				#foreach(m in menuManager.getScopeMenus("productLine-left"))
 					#set(url=eval(m.href))
-					#@aHeadCol(TINY_CONTEXT_PATH+url linkName==m.id?"Current":"")${m.name}#end
+					#@aHeadCol(TINY_CONTEXT_PATH +adminPath+url linkName==m.id?"Current":"")${m.name}#end
 				#end
 				
 
@@ -27,7 +27,7 @@
 		
 		<span class="r" style="position:relative;top:-28px;height:0">
 			#foreach(m in menuManager.getScopeMenus("productLine-right"))
-				<a href="${TINY_CONTEXT_PATH}${m.href} " >#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;
+				<a href="${TINY_CONTEXT_PATH +adminPath}${m.href} " >#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;
 			#end
 		</span>
 			#pageContent

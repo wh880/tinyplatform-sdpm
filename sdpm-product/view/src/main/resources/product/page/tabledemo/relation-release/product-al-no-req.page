@@ -2,11 +2,12 @@
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeMenuId=currentPageId)
 #!set(cname="no-demand",type="demand")
+#set(storyTableId = "storyTableId" )
 
 #include("/product/page/event/mulsearch-demand.page")	
 #@tinyForm("thisform" "" "post" {"class":"test"})
 
-		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+		#@tinyTable(storyTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 			
 			
@@ -16,7 +17,7 @@
        		#submitButton("submit","关联需求","btn btn-submit btn-primary","关联")
 						
 			#end
-			#@tinyTableContent(TINY_CONTEXT_PATH +adminPath +adminPath+　
+			#@tinyTableContent(TINY_CONTEXT_PATH +adminPath +
 				"/product/story/search/noRelateStoryRelease") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序

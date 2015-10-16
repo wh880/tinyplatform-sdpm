@@ -26,7 +26,7 @@ public class ProfileAction extends BaseController{
 	public String eidt(SystemProfile profile,@PathVariable(value="type")String type,Model model){
 		if("doc".equals(type)){
 			profileService.editTitle(profile);
-			return "a/document/doc/view";
+			return "a/document/doc/view?docid="+profile.getFileObjectId();
 		}
 		return null;
 	}
