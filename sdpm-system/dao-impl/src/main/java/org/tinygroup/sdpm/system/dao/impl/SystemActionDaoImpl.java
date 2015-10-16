@@ -17,9 +17,11 @@
 package org.tinygroup.sdpm.system.dao.impl;
 
 import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.SYSTEM_ACTIONTABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
+import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
@@ -139,7 +141,8 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(SystemAction t) {
-				Select select = selectFrom(SYSTEM_ACTIONTABLE).where(
+				Select select = select(SYSTEM_ACTIONTABLE.ALL,FragmentSql.fragmentSelect("org_user_account actorName")).from(SYSTEM_ACTIONTABLE).join(
+						leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(SYSTEM_ACTIONTABLE.ACTION_ACTOR))).where(
 				and(
 					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(t.getActionObjectType()),
 					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(t.getActionObjectId()),
@@ -164,7 +167,8 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 		return getDslTemplate().queryPager(start, limit, systemAction, false, new SelectGenerateCallback<SystemAction>() {
 
 			public Select generate(SystemAction t) {
-				Select select = MysqlSelect.selectFrom(SYSTEM_ACTIONTABLE).where(
+				Select select = select(SYSTEM_ACTIONTABLE.ALL,FragmentSql.fragmentSelect("org_user_account actorName")).from(SYSTEM_ACTIONTABLE).join(
+						leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(SYSTEM_ACTIONTABLE.ACTION_ACTOR))).where(
 				and(
 					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(t.getActionObjectType()),
 					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(t.getActionObjectId()),
