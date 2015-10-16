@@ -219,6 +219,9 @@
 
 <script src="${TINY_CONTEXT_PATH}/login/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
+    if (window != top) {
+        top.location.href = location.href;
+    }
     $(function () {
         //得到焦点
         $("#password").focus(function () {
