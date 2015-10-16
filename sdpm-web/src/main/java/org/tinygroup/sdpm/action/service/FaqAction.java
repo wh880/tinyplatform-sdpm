@@ -111,7 +111,7 @@ public class FaqAction extends BaseController {
         return "/service/faq/questionAnswer.page";
     }
 
-    /*点击问题进去，显示里面的编辑和删除*/
+    /*点击问题进去，显示里面的编辑和删除，2015-10-16,将bese.menu.xml中地址直接跳转到form*/
     @RequestMapping(value = "/faqContentEdit")
     public String slaContentEdit(Integer id, Model model) {
         if (id != null) {

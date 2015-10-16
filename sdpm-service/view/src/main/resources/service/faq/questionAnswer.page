@@ -40,15 +40,13 @@
     </div>
     <div style="text-align:right;margin:right">
     #*点击问题进去，里面的编辑和删除*#
-    #*  #@aExtendButton("btn-primary btn-sm" "addquestion.page")编辑#end
-      #@delItemsdpm("#action" "id" "/service/faq/faqmenu.page" {"class":"btn radius btn-danger btn-sm"})
-          删除#end*#
         #foreach(m:menuManager.getScopeMenus("FaqContent"))
             #if(m.id != "Faq_deleteContent")
                 #@aExtendButton(
-                    "btn-primary btn-sm" TINY_CONTEXT_PATH+m.href+"?id="+faqs?.faqId "" "")编辑#end
+                    "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+faqs?.faqId "" "")编辑#end
             #else
-                #@delItemsdpm(TINY_CONTEXT_PATH+m.href var?.faqId "" {
+                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href faqs?.faqId TINY_CONTEXT_PATH+adminPath+
+                    "/service/faq/list" {
                     "class":"btn radius btn-danger btn-sm"}) 删除#end
             #end
         #end
@@ -60,3 +58,18 @@
 ##第一个问答页面后面的“删除”
 #@simpleModal("myModal3" "编辑")#end
 #@simpleModal("myModal4" "删除")#end
+<script>
+    $(function () {
+        $(".infoContent").on("click", ".clientDelete", function () {
+            //console.log($(this).attr("itemId"))
+//            var that = this;
+            layer.confirm('确定要删除该记录？', function (index) {
+                //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                //$.ajax()
+                //console.log(index);
+//                layer.msg($("已删除").attr("deleteList"), 1);
+                layer.msg('已删除', 1);
+            })
+        });
+    });
+</script>

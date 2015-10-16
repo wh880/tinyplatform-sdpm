@@ -40,7 +40,8 @@ import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @Repository
 public class ServiceFaqDaoImpl extends TinyDslDaoSupport implements ServiceFaqDao {
-
+	public static Integer DELETE_YES = 1;
+	public static Integer DELETE_NO = 0;
 	public ServiceFaq add(ServiceFaq serviceFaq) {
 		return getDslTemplate().insertAndReturnKey(serviceFaq, new InsertGenerateCallback<ServiceFaq>() {
 			public Insert generate(ServiceFaq t) {
@@ -275,5 +276,18 @@ public class ServiceFaqDaoImpl extends TinyDslDaoSupport implements ServiceFaqDa
 						SERVICE_FAQTABLE.FAQ_TYPE_ID.eq(deptId),
 						SERVICE_FAQTABLE.DELETED.eq(0)));
 		return getDslSession().fetchPage(select, start, limit, false, ServiceFaq.class);
+	}
+
+	/*点击问题进去，里面的删除的方法*/
+	public Integer softDelete(Integer id) {
+		return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
+			public Update generate(Integer id) {
+				Update update = update(SERVICE_FAQTABLE).set(
+						SERVICE_FAQTABLE.DELETED.value(DELETE_YES)).where(
+						SERVICE_FAQTABLE.FAQ_ID.eq(id));
+				return update;
+			}
+		});
+
 	}
 }
