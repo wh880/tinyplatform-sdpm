@@ -45,22 +45,17 @@
 
                 #@elementItem()
                     #@sdpmItem("回复人")
-                        #tinyInput("text" "replier" request?.replier{"datatype":"","id":"解决人员","class":"input-text"})
+                        #tinyInput("text" "replier" request?.replier{"id":"解决人员","class":"input-text"})
                     #end
                 #end
                 #@elementItem()
-
                     #@sdpmItem("回复处理时间" "*")
                         #@tinyDateInput(
                             "replyDate" formatDate(request?.replyDate,
-                            "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
-                        "日期不能为空"})#end
+                            "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                        "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
                     #end
-                    #@validateDiv("col-2")#end
-
                 #end
-
-
             </div>
                 #@elementItem()
                     <div class="col-12" style="margin-left: 200px">
@@ -68,7 +63,7 @@
 
                         </div>
                         <div class="col-1">
-                            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                            <button style="float: left" type="button" id="submit" class="commitBtn">保存</button>
                         </div>
                         <div class="col-1">
                             #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
@@ -85,8 +80,12 @@
 #@simpleModal("myModal2" "新建产品")#end
     <script type="text/javascript">
         $(function () {
-            $("form[name=thisform").Validform({
-                tiptype: 2
+            $(function () {
+                $("form[name=thisform]").Validform({
+                    tiptype: 2
+                });
             });
+
+
         });
     </script>

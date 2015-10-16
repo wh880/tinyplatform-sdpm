@@ -10,7 +10,7 @@
               scope="service-cil"/>
         <menu id="client-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="service-cil-batchdel"/>
-        <menu id="client-add" name="新建客户" href="clientAdd.page" icon="icon-plus" sort="1" isShow="1"
+        <menu id="client-add" name="新建客户" href="/service/client/form" icon="icon-plus" sort="1" isShow="1"
               scope="service-cil-add"/>
         <menu id="client-export" name="导出" href="/service/serviceCom/serviceExport.pagelet" icon="icon-download-alt"
               sort="1" isShow="1"
@@ -26,13 +26,16 @@
                   isShow="1"
                   scope="linkman-cil"/>
         </menu>
-        <menu id="clientSla_edit" name="协议编辑" href="/service/sla/form" sort="1" isShow="1" scope="clientSla"/>
-        <menu id="clientSla_delete" name="协议删除" href="/service/client/slaDelete" sort="1" isShow="1" scope="clientSla"/>
-        <menu id="clientSla-add" name="绑定协议" href="/service/sla/form" icon="icon-plus" sort="1" isShow="1"
-              scope="service-sla-add"/>
-        <menu id="clientSla-export" name="导出" href="/service/sla/slaExport.pagelet" icon="icon-download-alt"
-              sort="1" isShow="1"
-              scope="service-sla-export"/>
+        <menu id="client-sla" name="协议" href="/service/client/clientSla" sort="100" isShow="1">
+            <menu id="clientSla_edit" name="协议编辑" href="/service/sla/form" sort="1" isShow="1" scope="clientSla"/>
+            <menu id="clientSla_delete" name="协议删除" href="/service/client/slaDelete" sort="1" isShow="1"
+                  scope="clientSla"/>
+            <menu id="clientSla-add" name="绑定协议" href="/service/sla/form" icon="icon-plus" sort="1" isShow="1"
+                  scope="service-sla-add"/>
+            <menu id="clientSla-export" name="导出" href="/service/sla/slaExport.pagelet" icon="icon-download-alt"
+                  sort="1" isShow="1"
+                  scope="service-sla-export"/>
+        </menu>
     </menu>
 
     <menu id="request" name="需求" href="/service/request/list" sort="100" isShow="1">

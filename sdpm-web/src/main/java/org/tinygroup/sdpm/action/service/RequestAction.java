@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.service;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +42,8 @@ public class RequestAction extends BaseController {
     private ProductService productService;
     @Autowired
     private UserService userService;
+
+    @RequiresPermissions("request")
     @RequestMapping(value = "/list")
     public String list(Integer operation, Integer status, Model model) {
         model.addAttribute("status", status);
@@ -72,7 +75,7 @@ public class RequestAction extends BaseController {
         return "service/serviceReq/requestTableData.pagelet";
     }
 
-
+    @RequiresPermissions("request-add")
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
         if (id != null) {
@@ -98,6 +101,7 @@ public class RequestAction extends BaseController {
         return "redirect:" + adminPath + "/service/request/list";
     }
 
+    @RequiresPermissions("request-close")
     @RequestMapping(value = "/close")//关闭请求
     public String close(Integer id, Model model) {
         model.addAttribute("clientRequestId", id);
@@ -111,6 +115,7 @@ public class RequestAction extends BaseController {
         return "redirect:" + adminPath + "/service/request/list";
     }
 
+    @RequiresPermissions("request-delete")
     @ResponseBody
     @RequestMapping(value = "/delete")
     public Map delete(Integer id) {
@@ -121,6 +126,7 @@ public class RequestAction extends BaseController {
         return map;
     }
 
+    @RequiresPermissions("request-solve")
     @RequestMapping(value = "/reply")
     public String reply(Integer id, Model model) {
         if (id != null) {
@@ -135,9 +141,10 @@ public class RequestAction extends BaseController {
         if (clientRequest != null) {
             requestService.saveReply(clientRequest);
         }
-        return "redirect:/service/request/list";
+        return "redirect:" + adminPath + "/service/request/list";
     }
 
+    @RequiresPermissions("request-back")
     @RequestMapping(value = "/review")
     public String review(Integer id, Model model) {
         if (id != null) {
@@ -163,6 +170,7 @@ public class RequestAction extends BaseController {
         return "redirect:" + adminPath + "/service/request/list";
     }
 
+    @RequiresPermissions("request-tome")
     @ResponseBody
     @RequestMapping(value = "/solveBy")
     public Map solveBy(Integer[] ids, String name) {
@@ -180,6 +188,7 @@ public class RequestAction extends BaseController {
         return map;
     }
 
+    @RequiresPermissions("request-review-byme")
     @ResponseBody
     @RequestMapping(value = "/reviewBy")
     public Map reviewBy(Integer[] ids, String name) {
@@ -197,6 +206,7 @@ public class RequestAction extends BaseController {
         return map;
     }
 
+    @RequiresPermissions("request-batchdel")
     @ResponseBody
     @RequestMapping(value = "/batchDelete")
     public Map batchDelete(String ids) {
