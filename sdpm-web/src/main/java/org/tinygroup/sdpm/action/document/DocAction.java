@@ -359,11 +359,21 @@ public class DocAction {
 		}
 		return "";
 	}
+	@ResponseBody
+	@RequestMapping("/docList")
+	public List<DocumentDoc> findDocumentDoc(DocumentDoc doc) {
+
+		List<DocumentDoc> list = docservice.findDocList(doc);
+
+		return list;
+	}
 	
 	//项目文档
 	@RequestMapping("/project/doc")
 	public String prodject(HttpServletRequest request){		
 		return "";
 	}
+
+
 	
 }

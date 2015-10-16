@@ -132,6 +132,13 @@ return format;
  
 </script>
 
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+        });
+    });
+</script>
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/plan/save" "post" {"class":""})
 
@@ -149,7 +156,7 @@ return format;
     #@elementItem()
         #@colLabel()名称:#end
         #@formControlDiv("col-4")
-          #tinyInput("text" "planName" ""{"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+          #tinyInput("text" "planName" ""{"datatype":"*","nullmsg":"用户名不能为空！","id":"planName","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end
@@ -157,7 +164,7 @@ return format;
     #@elementItem()
         #@colLabel()开始日期:#end
         #@formControlDiv("col-4")
-           #@tinyDateInput("planBeginDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","id":"qwe","readonly":"readonly"})#end
+           #@tinyDateInput("planBeginDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","id":"planBeginDate","readonly":"readonly"})#end
         #end
         #@validateDiv("col-2")#end
     #end

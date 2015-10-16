@@ -2,6 +2,13 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-release",sonitem="<li>"+"发布"+"</li>")
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+        });
+    });
+</script>
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/update" "post" {"class":""})
 
@@ -12,7 +19,7 @@
      #@elementItem()
         #@colLabel()发布名称:#end
         #@formControlDiv("col-4")
-        	#tinyInput("text" "releaseName" release?.releaseName {"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+        	#tinyInput("text" "releaseName" release?.releaseName {"datatype":"*","nullmsg":"发布名称不能为空！","class":"input-text"})
        #end
         #@validateDiv("col-2")#end
       #end
@@ -21,12 +28,20 @@
        #@formControlDiv("col-4")
 			#@Tselect2F()
                 #@Tselect2Body("buildId" release?.buildId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+
                 #end
-            
-                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+
+                <script>
+
+                    ajaxRead("${sid}", "buildId", "buildId", "buildName", "/project/version/buildList");
+
+                </script>
+
+                #@Tselect2Fix()
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                #end
+
             #end
 		#end
         #@validateDiv("col-2")#end
