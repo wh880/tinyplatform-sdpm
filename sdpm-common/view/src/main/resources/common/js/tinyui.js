@@ -201,24 +201,9 @@
 //collapsed
 
 
-    if (demo_settings.menupos == "top") {
-        $("body").addClass("menu-on-top")
 
-    } else {
-        if (demo_settings.mmstate == "collapsed") {
-            $("body").addClass("mmc")
-        }
-    }
     activateTheme();
-    init.push(function () {
-        $("#main-menu").prepend('<div id="topmenurap" style="display:none">' + $("#main-menu #main-menu-inner").html() + '</div>');
-        //var menucount = $(".navigation:first>li").size();
-        //$("#topmenurap .navigation>li").css("width", 100 / menucount + "%");
-        if (demo_settings.menupos == "top") {
-            $("#main-menu #topmenurap").css("display", "block")
-            $("#main-menu>.slimScrollDiv").css("display", "none")
-        }
-    });
+
  $(function () {window.TinyAdmin.start(init);
 
 // Templates
