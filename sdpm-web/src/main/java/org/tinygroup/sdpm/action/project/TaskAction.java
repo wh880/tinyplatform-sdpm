@@ -223,7 +223,7 @@ public class TaskAction extends BaseController {
     public String closesave(ProjectTask task,Model model, SystemAction systemAction) {
         taskService.updateCloseTask(task);
 
-        systemAction.setActionObjectId(task.getTaskId());
+        systemAction.setActionObjectId(String.valueOf(task.getTaskId()));
         systemAction.setActionProject(String.valueOf(task.getTaskProject()));
         systemAction.setActionObjectType("task");
         systemAction.setActionActor("close");
@@ -235,7 +235,7 @@ public class TaskAction extends BaseController {
     public String editSave(ProjectTask task, Model model, SystemAction systemAction) {
         taskService.updateEditTask(task);
 
-        systemAction.setActionObjectId(task.getTaskId());
+        systemAction.setActionObjectId(String.valueOf(task.getTaskId()));
         systemAction.setActionProject(String.valueOf(task.getTaskProject()));
         systemAction.setActionObjectType("task");
         systemAction.setActionActor("close");

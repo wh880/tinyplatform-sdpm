@@ -91,7 +91,7 @@ public class StoryAction extends BaseController{
     	storyService.updateStory(productStory);
         OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute("user");
         SystemAction action = new SystemAction();
-        action.setActionObjectId(productStory.getStoryId());
+        action.setActionObjectId(String.valueOf(productStory.getStoryId()));
         action.setActionProduct(String.valueOf(story.getProductId()));
         action.setActionObjectType("story");
         action.setActionAction("edit");
