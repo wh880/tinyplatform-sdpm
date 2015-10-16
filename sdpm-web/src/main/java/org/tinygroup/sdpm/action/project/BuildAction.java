@@ -294,6 +294,14 @@ public class BuildAction extends BaseController {
     }
 
 
+    @ResponseBody
+    @RequestMapping("/buildList")
+    public List<ProjectBuild> findProjectBuild(ProjectBuild build) {
+
+        List<ProjectBuild> list = buildService.findListBuild(build);
+
+        return list;
+    }
 
 
 }
