@@ -154,7 +154,7 @@
     <menu id="note" parent-id="project" name="日志" href="/system/effort" icon="" sort="1" isShow="1">
     </menu>
 
-    <menu id="dynamic" parent-id="project" name="动态" href="/project/dynamic/index.page" icon="" sort="1" isShow="1">
+    <menu id="dynamic" parent-id="project" name="动态" href="/project/dynamic/index" icon="" sort="1" isShow="1">
     </menu>
 
     <menu id="document" parent-id="project" name="文档" href="/projectmanage/doc/index" icon="" sort="1" isShow="1">
