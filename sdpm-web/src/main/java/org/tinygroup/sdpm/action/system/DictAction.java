@@ -125,11 +125,7 @@ public class DictAction extends BaseController{
 		map.put("status","y" );
 		return map;
 	}
-	public String findTree(WebContext webContext){
-		String str=webContext.get("mo");
-
-		return"";
-	}
+	
 
    @RequestMapping("searsh")
    public List<SystemDict> searsh(SystemDict systemDict){
