@@ -1,7 +1,9 @@
 package org.tinygroup.sdpm.system.biz.inter;
 
 import java.util.List;
+import org.tinygroup.tinysqldsl.base.Condition;
 
+import org.tinygroup.sdpm.system.dao.impl.OrderBy;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -40,4 +42,15 @@ public interface ActionManager {
 	 * @return
 	 */
 	 Pager<SystemAction> findByPage(int start, int limit,SystemAction systemAction, String order, String ordertype) ;
+	 
+	 /**
+	  * 自定义条件查询
+	  * @param start
+	  * @param limit
+	  * @param condition
+	  * @param systemAction
+	  * @param orderBies
+	  * @return
+	  */
+	 Pager<SystemAction> queryPager(int start,int limit ,Condition condition,SystemAction systemAction , String order,String ordertype);
 }

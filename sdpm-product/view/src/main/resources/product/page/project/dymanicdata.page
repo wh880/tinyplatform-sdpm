@@ -11,12 +11,9 @@
 
 				<span class="f">
 
-    #foreach(m:menuManager.getScopeMenus("dymanci-time"))
-        #if(m.id=="dymanic-today")
-            <a href="${TINY_CONTEXT_PATH}${m.href}" class="active_btn">${m.name}</a>
-        #else
-            <a href="${TINY_CONTEXT_PATH}${m.href}">${m.name}</a>
-        #end
+    #foreach(m:menuManager?.getScopeMenus("dymanci-time"))
+   	 #set(url=eval(m?.href))
+            <a href="${TINY_CONTEXT_PATH}${url}" ${choice==m?.id?'class="active_btn"':""}>${m.name}</a>
 
     #end
 
@@ -74,7 +71,7 @@
             #end*#
 
         #end
-        #@tinyTableContent(TINY_CONTEXT_PATH+"/system/action/list") ##取数据地址 总数据
+        #@tinyTableContent(TINY_CONTEXT_PATH+"/system/action/list?"+tinyRequestQueryString) ##取数据地址 总数据
             #@thead()
                 #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                     #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

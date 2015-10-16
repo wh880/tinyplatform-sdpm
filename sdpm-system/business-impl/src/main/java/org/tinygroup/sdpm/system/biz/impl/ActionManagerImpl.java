@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.system.biz.impl;
 
 import java.util.List;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -56,6 +57,17 @@ public class ActionManagerImpl implements ActionManager {
 		return pager;
 	}
 
-	
+	public Pager<SystemAction> queryPager(int start,int limit ,Condition condition,SystemAction systemAction , String order,
+			String ordertype){
+		
+		Pager<SystemAction> pager = systemActionDao.queryPager((start-1)*limit, limit,condition, systemAction, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+		if(pager.getRecords().size()>0){
+			for(SystemAction s : pager.getRecords()){
+				s = systemActionDao.getActionAndObject(s);
+				s.setUrl(s.getActionObjectType());
+			}
+		}
+		return pager;
+	}
 
 }

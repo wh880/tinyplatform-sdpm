@@ -26,6 +26,7 @@ import static org.tinygroup.tinysqldsl.Update.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 import org.springframework.stereotype.Repository;
 import org.tinygroup.tinysqldsl.Delete;
@@ -276,6 +277,31 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 				return select(FragmentSql.fragmentSelect("a.*, "+ActionEnum.getName(systemAction.getActionObjectType())+" objectName"))
 						.from(FragmentSql.fragmentFrom("system_action a JOIN "+ActionEnum.getTable(systemAction.getActionObjectType())+" b ON a.action_object_id = b."+ActionEnum.getPrimary(systemAction.getActionObjectType())))
 						.where(FragmentSql.fragmentCondition("a.action_id="+systemAction.getActionId()));
+			}
+		});
+	}
+	
+	public Pager<SystemAction> queryPager(int start,int limit ,Condition dateCondition,SystemAction systemAction ,final OrderBy... orderBies) {
+		if(systemAction==null){
+			systemAction=new SystemAction();
+		}
+		return getDslTemplate().queryPager(start, limit, systemAction, false, new SelectGenerateCallback<SystemAction>() {
+
+			public Select generate(SystemAction t) {
+				Select select = MysqlSelect.selectFrom(SYSTEM_ACTIONTABLE).where(
+				and(
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(t.getActionObjectType()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(t.getActionObjectId()),
+					SYSTEM_ACTIONTABLE.ACTION_PROJECT.eq(t.getActionProject()),
+					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.eq(t.getActionProduct()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(t.getActionActor()),
+					dateCondition==null?SYSTEM_ACTIONTABLE.ACTION_DATE.eq(t.getActionDate()):dateCondition,
+					SYSTEM_ACTIONTABLE.ACTION_COMMENT.eq(t.getActionComment()),
+					SYSTEM_ACTIONTABLE.ACTION_EXTRA.eq(t.getActionExtra()),
+					SYSTEM_ACTIONTABLE.ACTION_READ.eq(t.getActionRead()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTION.eq(t.getActionAction()),
+					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.eq(t.getActionEfforted())));
+		return addOrderByElements(select, orderBies);
 			}
 		});
 	}

@@ -16,10 +16,15 @@
 
 package org.tinygroup.sdpm.system.dao;
 
-import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import java.util.concurrent.locks.Condition;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.sdpm.system.dao.impl.OrderBy;
+import org.tinygroup.sdpm.system.dao.impl.Pager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 
 public interface SystemActionDao extends BaseDao<SystemAction,Integer> {
     SystemAction getActionAndObject(SystemAction systemAction);
+    
+    Pager<SystemAction> queryPager(int start,int limit , Condition dateCondition,SystemAction systemAction ,final OrderBy... orderBies)；
 }
