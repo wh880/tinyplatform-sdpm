@@ -133,7 +133,7 @@ return format;
 </script>
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/plan/save" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/plan/save" "post" {"class":""})
 
 
 

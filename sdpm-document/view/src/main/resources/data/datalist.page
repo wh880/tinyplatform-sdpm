@@ -11,9 +11,9 @@
 	 #@td()
 	 	#foreach(m:menuManager.getScopeMenus("doc-op"))
 			#if(m.id != "docdelete")
-				<a href="${TINY_CONTEXT_PATH}${m.href}?docId=${l?.docId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+				<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${l?.docId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 			#else
-				#@tinyTableItemRemove(TINY_CONTEXT_PATH+m.href l?.docId)
+				#@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href l?.docId)
 					<i class="${m.icon}" title="删除"></i>
 				#end
 			#end

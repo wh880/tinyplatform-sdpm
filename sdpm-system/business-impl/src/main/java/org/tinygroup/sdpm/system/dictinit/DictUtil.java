@@ -50,6 +50,7 @@ public class DictUtil{
            {
                SystemDict dict = new SystemDict();
                dict.setModuleId(systemModule.getModuleId());
+               dict.setDeleted(0);
                List<SystemDict> dicts = dictManager.findList(dict,"dict_sort",true);
                Map<String,String> keyValue = new HashMap<String, String>();
                for(SystemDict dict1 : dicts){

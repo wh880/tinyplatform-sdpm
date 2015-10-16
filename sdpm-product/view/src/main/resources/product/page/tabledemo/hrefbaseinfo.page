@@ -12,11 +12,13 @@
 		       		#end
 		       			#@tr()
 							#@td()所属产品#end
-		       				#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page">${story?.productId}</a>#end
+							#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/overview.page">${story
+                                ?.productId}</a>#end
 		       			#end
 		       			#@tr()
 							#@td()所属模块#end
-		       				#@td()<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">${story?.moduleId}</a>#end
+							#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/togglebox.page">${story
+                                ?.moduleId}</a>#end
 		       			#end
 		       			#@tr()
 							#@td()所属计划#end

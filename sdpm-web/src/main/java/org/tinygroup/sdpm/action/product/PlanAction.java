@@ -34,7 +34,20 @@ public class PlanAction  extends BaseController{
 	
 	@Autowired
 	private ProductService productService;
-    
+
+
+	@RequestMapping("/content")
+	public String release(HttpServletRequest request, Model model) {
+		int productId = -1;
+		if (request.getSession().getAttribute("sessionProductId") != null) {
+			productId = (Integer) request.getSession().getAttribute("sessionProductId");
+		}
+		Product product = productService.findProduct(productId);
+		model.addAttribute("product", product);
+		return "/product/page/project/product-plan.page";
+	}
+
+
 	@RequestMapping("/save")
 	public String save(ProductPlan productPlan, Model model,HttpServletRequest request) {
 		

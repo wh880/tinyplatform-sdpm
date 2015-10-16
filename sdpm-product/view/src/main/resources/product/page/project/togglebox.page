@@ -70,27 +70,27 @@
         #set(urlProduct = productId!=null?'productId='+productId+'&':'')
         #set(urlModule = moduleId!=null?'moduleId='+moduleId+'&':'')
     <span class="f">
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=1&currentPageId=3"
+					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=1&currentPageId=3"
                        class="${choose == 1?'active_btn':''}">未关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=2&currentPageId=3"
+					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=2&currentPageId=3"
                        class="${choose == 2?'active_btn':''}">全部需求</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=3&currentPageId=3"
+					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=3&currentPageId=3"
                        class="${choose == 3?'active_btn':''}">指派给我</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=4&currentPageId=3"
+					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=4&currentPageId=3"
                        class="${choose == 4?'active_btn':''}">由我创建</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=5&currentPageId=3"
+					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=5&currentPageId=3"
                        class="${choose == 5?'active_btn':''}">由我评审</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=6&currentPageId=3"
+					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=6&currentPageId=3"
                        class="${choose == 6?'active_btn':''}">由我关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=7&currentPageId=3"
+					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=7&currentPageId=3"
                        class="${choose == 7?'active_btn':''}">草稿</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=8&currentPageId=3"
+					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=8&currentPageId=3"
                        class="${choose == 8?'active_btn':''}">激活</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=9&currentPageId=3"
+					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=9&currentPageId=3"
                        class="${choose == 9?'active_btn':''}">已变更</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=10&currentPageId=3"
+					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=10&currentPageId=3"
                        class="${choose == 10?'active_btn':''}">待关闭</a>
-					<a href="${TINY_CONTEXT_PATH}/product/story?${urlProduct}${urlModule}choose=11&currentPageId=3"
+					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=11&currentPageId=3"
                        class="${choose == 11?'active_btn':''}">已关闭</a>
 					<a href="javascript:void(0);" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
@@ -121,7 +121,7 @@
                         #end
                     #end
                 #else
-                    <a class="ml-5" href="${TINY_CONTEXT_PATH}${m.href}"><i
+                    <a class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}"><i
                             class="${m.icon}">&nbsp;${m.name}</i></a>
                 #end
             #end
@@ -140,12 +140,12 @@
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()产品需求#end
             #@settoggleLeftBody("treeLeftbox")
-                #@zTreeList(call("link","/system/module/data"))
+                #@zTreeList(call("link",adminPath+"/system/module/data"))
                     #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
-                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/product/story" )
-                    #zTreeSetAddUrl(TINY_CONTEXT_PATH+"/system/module/story/add?moduleType=story")
-                    #zTreeSetEditUrl(TINY_CONTEXT_PATH+"/system/module/story/edit")
-                    #zTreeSetDelUrl(TINY_CONTEXT_PATH+"/system/module/story/deleteTree")
+                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH +adminPath+"/product/story" )
+                    #zTreeSetAddUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/story/add?moduleType=story")
+                    #zTreeSetEditUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/story/edit")
+                    #zTreeSetDelUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/story/deleteTree")
                 #end
             #end
         #end
@@ -239,7 +239,8 @@
                         #end
                     #end
                 #end
-                #@tinyTableContent(TINY_CONTEXT_PATH+"/product/story/search?"+tinyRequestQueryString) ##取数据地址 总数据
+                #@tinyTableContent(TINY_CONTEXT_PATH +adminPath+
+                    "/product/story/search?"+tinyRequestQueryString) ##取数据地址 总数据
                     #@thead()
                         #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
                             #@tinyTh({"width":"6"})<input type="checkbox" value="" name="storyId" id="checkboxall">#end

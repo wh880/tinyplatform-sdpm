@@ -35,7 +35,7 @@
         #foreach(m:menuManger?.getScopeMenus("product-menu"))
             #set(url=eval(m?.href))
             #if(m?.id="allproduct")
-                <a href="${TINY_CONTEXT_PATH}${url}">#buttonIcon(iconClass="${m.icon}")${m.name}</a>&nbsp;
+                <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass="${m.icon}")${m.name}</a>&nbsp;
             #elseif(m?.id="newproduct")
                 #@aModal("#myModal" m.name "900" "500" "btn-class" url )#buttonIcon(iconClass="${m.icon}")${m.name} #end
             #end
@@ -83,7 +83,7 @@
                 #end &nbsp;
 	             
 				
-					<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-report.page">#buttonIcon(iconClass=
+					<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-report.page">#buttonIcon(iconClass=
                         "icon-bar-chart")报表</a>&nbsp;
                 #@iconOperations("#myModal" "icon-plus-sign" "批量添加" "1300" "500"
                     "/product/page/tabledemo/product-demand-addlist.pagelet" "ml-5")&nbsp;批量添加#end
@@ -234,8 +234,10 @@
                 #@aModal("#myModal" "关闭" "700" "130" "btn-class"
                     "/product/page/tabledemo/user-guanbi.pagelet")#buttonIcon(iconClass="icon-off")关闭#end
 			<a title="编辑" class="ml-5"
-               href="${TINY_CONTEXT_PATH}/product/page/tabledemo/tetails.page">#buttonIcon(iconClass="icon-plus")编辑</a>
-			<a href="${TINY_CONTEXT_PATH}/product/page/project/product.page" title="返回">#buttonIcon(iconClass=
+               href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/tetails.page">#buttonIcon(iconClass=
+                "icon-plus")编辑</a>
+			<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/product.page"
+               title="返回">#buttonIcon(iconClass=
                 "icon-reply")</a>
 				</span>
 

@@ -15,7 +15,7 @@
         	       			 #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href documentLibId TINY_CONTEXT_PATH+adminPath+"/document")
 								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp	
 						#else	
-							#@aModal("#myModal" m.name "400" "120" "class-m" m.href)
+							#@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href)
 								#buttonIcon(iconClass=m.icon)${m.name}#end			
         	       		#end
 					#end

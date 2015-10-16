@@ -77,7 +77,9 @@ public class DictManagerImpl implements DictManager {
 		return systemDictDao.deleteByKeys(ids);
 	}
 
-	
+	public void deleteAll() {
+		systemDictDao.deleteAll();
+	}
 
 
 }

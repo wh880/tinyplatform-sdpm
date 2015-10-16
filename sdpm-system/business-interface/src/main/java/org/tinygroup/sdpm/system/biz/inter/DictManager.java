@@ -67,5 +67,6 @@ public interface DictManager {
 	 * @return
 	 */
 	int bechDelete(Integer...ids);
-	
+
+	void deleteAll();
 }
