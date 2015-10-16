@@ -9,7 +9,7 @@
     =="2"?"active_btn":""}>所有</a>
     <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page?choose=3" "ml-5" class=${choose
     =="3"?"active_btn":""}>看板</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/gantt.page?choose=4" "ml-5" class=${choose
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/gantt?choose=4" "ml-5" class=${choose
     =="4"?"active_btn":""}>甘特图</a>
     <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/calendar.page?choose=5" "ml-5" class=${choose
     =="5"?"active_btn":""}>日历</a>
