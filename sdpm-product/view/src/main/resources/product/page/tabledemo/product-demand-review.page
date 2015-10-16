@@ -4,23 +4,31 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
 
-#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
+#!set(linkName="product-demand",sonitem="
+<li>"+"需求"+"</li>")
 
 
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+        });
+    });
+</script>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
 
-        ajaxRead("assignTo","storyId","storyAssignedTo");
-        ajaxRead("reviewBy","storyId","storyTitle");
+        ajaxRead("assignTo", "storyId", "storyAssignedTo");
+        ajaxRead("reviewBy", "storyId", "storyTitle");
 
-        $("#story_reviewed").on("click",function(){
+        $("#story_reviewed").on("click", function () {
 
             var vm = this.checked;
-            if(vm==true){
-                $("select[name='storyReviewedBy']").attr("disabled","disabled");
+            if (vm == true) {
+                $("select[name='storyReviewedBy']").attr("disabled", "disabled");
             }
-            if(vm==false){
+            if (vm == false) {
                 $("select[name='storyReviewedBy']").removeAttr("disabled");
             }
 
@@ -32,64 +40,78 @@
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/update" "" {"class":"test"})
 
-#hiddenInput("","storyId","",story.storyId)
+    #hiddenInput("","storyId","",story.storyId)
 
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">评审</p>
- 
-    
-       #@elementItem()
-   #@daterangepickerPosition()
-        #@colLabel()评审时间：#end
-        #@formControlDiv("col-8")
-           #@tinyDateInput("storyReviewedDate" story?.storyReviewedDate?formatDate(story?.storyReviewedDate,'yyyy-MM-dd'):"" "YYYY-MM-DD" {"style":"width:258px","datatype":"*","nullmsg":"日期不能为空"})#end
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #end
-    
 
-      #@elementItem()
-        #@colLabel()评审结果：#end
-        #@formControlDiv("col-4")
-             #@tinySelect("storyStatus" story?.storyStatus {"placeholder":"","datatype":"*","nullmsg":"评审结果不能为空！","class":"input-text","rel":"22"})
-			#@tinyOptionItem("zh")确认通过#end
-			#@tinyOptionItem("en")有待明确#end
-			#@tinyOptionItem("ta")拒绝#end
-		#end
+
+        #@elementItem()
+            #@daterangepickerPosition()
+                #@colLabel()评审时间：#end
+                #@formControlDiv("col-8")
+                    #@tinyDateInput("storyReviewedDate" story?.storyReviewedDate?formatDate(story?.storyReviewedDate,
+                        'yyyy-MM-dd'):"" "YYYY-MM-DD" {"style":"width:258px","datatype":"*","nullmsg":"日期不能为空"})#end
+                #end
+                #@validateDiv("col-2")#end
+            #end
         #end
-        #@validateDiv("col-2")#end
-    #end
- 
-      #@elementItem()
+
+
+        #@elementItem()
+            #@colLabel()评审结果：#end
+            #@formControlDiv("col-4")
+                #@tinySelect(
+                    "storyStatus" story?.storyStatus {"placeholder":"","datatype":"*","nullmsg":"评审结果不能为空！","class":
+                    "input-text","rel":"22"})
+                    #@tinyOptionItem("zh")确认通过#end
+                    #@tinyOptionItem("en")有待明确#end
+                    #@tinyOptionItem("ta")拒绝#end
+                #end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+        #@elementItem()
             #@sdpmItem("指派给")
                 <div class="input-group">
-             #@Tselect2F()
-                    #@Tselect2Body("storyAssignedTo" story?.storyAssignedTo {"placeholder":"","datatype":"*","nullmsg":"指派给不能为空！","class":"input-text select2","style":"width:296px","url":"/product/story/storyList","ajaxType":"assignTo","data":"" })
+                    #@Tselect2F()
+                    #@Tselect2Body(
+                        "storyAssignedTo" story?.storyAssignedTo {"placeholder":"","datatype":"*","nullmsg":"指派给不能为空！",
+                        "class":"input-text select2","style":"width:296px" })
 
                     #end
                 #*    #@Tselect2Fix()<a href="#" class="r "></a><a href="#"></a>#end*#
                 #end
+                    <script>
+                        ajaxRead("${sid}", "storyAssignedTo", "orgUserId", "orgUserRealName", "/org/user/userList");
+                    </script>
+
                 </div>
             #end
         #end
- 
+
         #@elementItem()
             #@sdpmItem("由谁评审")
-            	
-             #@Tselect2F()
-                    #@Tselect2Body("storyReviewedBy" story?.storyReviewedBy {"class":"input-text select2","style":"width:296px","multiple":"multiple","url":"/product/story/storyList","ajaxType":"reviewBy","data":""})
+
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "storyReviewedBy" story?.storyReviewedBy {"class":"input-text select2","style":"width:296px",
+                        "multiple":"multiple"})
 
                     #end
-#*
-                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
-*#
+                #*
+                                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+                *#
                 #end
+                <script>
+                    ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
+                </script>
             #end
         #end
 
-         #@elementItem()
+        #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>备注：</label></div>
 
@@ -97,23 +119,23 @@
                     #@Teditor("content3" "content3" {"initialFrameHeight":"150"})#end</div>
             </div>
         #end
-        
-        
+
+
         #@elementItem()
-        <div class="col-12">
+            <div class="col-12">
                 <div class="col-2 text-r"><label>检查影响：</label></div>
 
                 <div class="col-9">
-                  #@formControlDiv("col-12")
+                    #@formControlDiv("col-12")
 	    				#include("/product/page/tabledemo/check-effect.page")
  	    			#end
-       				</div>
+                </div>
             </div>
-   		 #end
-        </div>
+        #end
+    </div>
 
- 
-    
+
+
     #@elementItem()
         <div class="col-12">
             <div class="col-5">
