@@ -14,7 +14,6 @@ import java.util.Date;
 public class LogUtil {
     //之后要换成服务包装类型
     public final static LogService logService = SpringContextHolder.getBean(LogServiceImpl.class);
-    public final static ObtainHandle obtainHandle = SpringContextHolder.getBean(ObtainHandleImpl.class);
 
     public static void log(LogOperateObject objectType, LogAction action, String objectId, String userId) {
         saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, null, null, null, null, null);

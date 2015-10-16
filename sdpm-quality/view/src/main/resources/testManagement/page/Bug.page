@@ -116,7 +116,7 @@
 				#@toggleLeft({"class":"aclass"})
 					#@settoggleLeftTitle()${qualityProduct?.productName}#end
 						#@settoggleLeftBody("treeLeftbox")
-							#@zTreeList(call("link","/system/module/tree?moduleType=story&moduleRoot="+qualityProduct?.productId))
+							#@zTreeList(call("link",adminPath+"/system/module/tree?moduleType=story&moduleRoot="+qualityProduct?.productId))
 								#setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
 								#zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/bug?status="+status+"&currentPageId=5")
 								#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=story&moduleRoot="+qualityProduct?.productId)
