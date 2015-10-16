@@ -15,13 +15,13 @@
 				<table>
                     <tr>
                         <td style="width:360px">
-                            <a val="1" class="selDate ${selDate==1?"active_btn":""}">今天</a>
-                            <a val="2" class="selDate ${selDate==2?"active_btn":""}">昨天</a>
-                            <a val="3" class="selDate ${selDate==3?"active_btn":""}">本周</a>
-                            <a val="4" class="selDate ${selDate==4?"active_btn":""}">上周</a>
-                            <a val="5" class="selDate ${selDate==5?"active_btn":""}">本月</a>
-                            <a val="6" class="selDate ${selDate==6?"active_btn":""}">上月</a>
-                            <a val="0" class="selDate ${selDate==0?"active_btn":""}">所有日志</a>
+                            <a val="1" class="selDate ${date==1?"active_btn":""}">今天</a>
+                            <a val="2" class="selDate ${date==2?"active_btn":""}">昨天</a>
+                            <a val="3" class="selDate ${date==3?"active_btn":""}">本周</a>
+                            <a val="4" class="selDate ${date==4?"active_btn":""}">上周</a>
+                            <a val="5" class="selDate ${date==5?"active_btn":""}">本月</a>
+                            <a val="6" class="selDate ${date==6?"active_btn":""}">上月</a>
+                            <a val="0" class="selDate ${date==0?"active_btn":""}">所有日志</a>
 ##                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/index.page" class="active_btn">日历</a>
 ##                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=1">今日</a>
 ##                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=2">昨日</a>
@@ -62,16 +62,16 @@
     $(".select2").select2();
 </script>
 <script>
-    $(function{
+    $(function(){
         var actionUrl = $("#noteTable").attr("data-url");
         $(".selDate").click(function(e){
-            $("#dynamicTable").attr("data-url", actionUrl + "?selDate=" + $(this).attr("val"));
-            $("#dynamicTable").trigger("refresh");
+            $("#noteTable").attr("data-url", actionUrl + "?date=" + $(this).attr("val"));
+            $("#noteTable").trigger("refresh");
         });
 
         $(".selUser").click(function(e){
-            $("#dynamicTable").attr("data-url", actionUrl + "?teamAccount=" + $(this).attr("val"));
-            $("#dynamicTable").trigger("refresh");
+            $("#noteTable").attr("data-url", actionUrl + "?teamAccount=" + $(this).attr("val"));
+            $("#noteTable").trigger("refresh");
         });
     });
 </script>

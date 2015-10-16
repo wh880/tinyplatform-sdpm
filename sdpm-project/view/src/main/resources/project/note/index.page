@@ -15,7 +15,7 @@
 				<table>
                     <tr>
                         <td style="width:360px">
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/index.page" class="active_btn">日历</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort" class="active_btn">日历</a>
                             <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort/date/1">今日</a>
                             <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort/date/2">昨日</a>
                             <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort/date/3">本周</a>
