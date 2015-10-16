@@ -57,14 +57,14 @@
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
             ##                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})请求ID#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"clientName"})客户名称#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"requestTitle"})请求标题#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"requestPre"})请求优先级#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"requestStatus"})状态#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"requestCommitmentDate"})请求承诺完成时间#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"replier"})指派回复#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"requestReviewer"})指派回访#end
-                #@tinyTh({"class":"","rel":"sortname"})操作#end
+                #@tinyTh({"class":"sorting","rel":"clientName"})客户名称#end
+                #@tinyTh({"class":"sorting","rel":"requestTitle"})请求标题#end
+                #@tinyTh({"class":"sorting","rel":"requestPre"})请求优先级#end
+                #@tinyTh({"class":"sorting","rel":"requestStatus"})状态#end
+                #@tinyTh({"class":"sorting","rel":"requestCommitmentDate"})请求承诺完成时间#end
+                #@tinyTh({"class":"sorting","rel":"replier"})指派回复#end
+                #@tinyTh({"class":"sorting","rel":"requestReviewer"})指派回访#end
+                #@tinyTh()操作#end
             #end
         #end
     #end

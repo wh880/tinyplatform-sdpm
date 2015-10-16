@@ -5,10 +5,10 @@
 #setTinyItemCount(records)
 #for(task:taskPager.records)
 #@tr()
-    #@td()${task.taskId}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${task.taskId}">${task.taskId}</a>#end
     #@td()${task.taskPri}#end
-    #@td()${task.taskProject}#end
-    #@td()${task.taskName}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?">${task.taskProject}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${task.taskId}">${task.taskName}</a>#end
     #@td()${task.taskEstimate}#end
     #@td()${task.taskConsumed}#end
     #@td()${task.taskLeft}#end

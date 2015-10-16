@@ -16,7 +16,7 @@
         #@gridSysRow()
             #@colLabel("col-3")关闭人：#end
             #@gridSysCol(5)
-                #tinyInput("text" "requestClosedBy" "" {,"id":"user_account","class":
+                #tinyInput("text" "requestClosedBy" "" {"id":"user_account","class":
                     "input-text"})
             #end
         #end

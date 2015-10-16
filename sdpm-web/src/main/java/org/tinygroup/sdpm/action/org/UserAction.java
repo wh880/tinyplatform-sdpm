@@ -147,8 +147,10 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/show/profile")
-    public String show(String id, Model model) {
+    public String show(String id, OrgUser orgUser, Model model) {
         OrgUser user = userService.findUser(id);
+        List<OrgUser> userList = userService.findUserList(orgUser);
+        model.addAttribute("userList", userList);
         model.addAttribute("user", user);
         return "organization/user/profileAdmin.page";
     }
@@ -172,28 +174,29 @@ public class UserAction extends BaseController {
     @RequestMapping("/story/search")
     public String storySearchAction(String id, String account, int page, int pagesize, String choose, ProductStory story, String order, String ordertype, Model model, HttpServletRequest request) {
 
-        if (StringUtil.isBlank(id) && !StringUtil.isBlank(account)) {
-            OrgUser userByAccount = userService.findUserByAccount(account);
-            id = userByAccount.getOrgUserId();
+        if (!StringUtil.isBlank(id) && StringUtil.isBlank(account)) {
+            OrgUser userByAccount = userService.findUser(id);
+            account = userByAccount.getOrgUserAccount();
         }
 
         if (choose.equals("6")) {
-            story.setStoryClosedBy(id);
+            story.setStoryClosedBy(account);
             Pager<ProductStory> p4 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
+
             model.addAttribute("storyList", p4);
 
         } else if (choose.equals("4")) {
-            story.setStoryOpenedBy(id);
+            story.setStoryOpenedBy(account);
             Pager<ProductStory> p2 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p2);
 
         } else if (choose.equals("5")) {
-            story.setStoryReviewedBy(id);
+            story.setStoryReviewedBy(account);
             Pager<ProductStory> p3 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p3);
 
         } else {
-            story.setStoryAssignedTo(id);
+            story.setStoryAssignedTo(account);
             Pager<ProductStory> p1 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p1);
 

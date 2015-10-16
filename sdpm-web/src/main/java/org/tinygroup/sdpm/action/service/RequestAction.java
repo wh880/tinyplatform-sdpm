@@ -55,8 +55,8 @@ public class RequestAction extends BaseController {
 
     @RequestMapping(value = "/list/data")
     public String listData(Integer limit, Integer start, ServiceRequest clientRequest, Integer status, Integer operation, Integer treeId, Model model,
-                           @RequestParam(required = false, defaultValue = "clientName") String order,
-                           @RequestParam(required = false, defaultValue = "asc") String ordertype) {
+                           @RequestParam(required = false, defaultValue = "clientRequestId") String order,
+                           @RequestParam(required = false, defaultValue = "desc") String ordertype) {
 
         if (operation != null) {
             OrgUser user = UserUtils.getUser();

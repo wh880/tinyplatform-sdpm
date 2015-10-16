@@ -70,13 +70,13 @@
 #setTinyItemCount(storyList.getTotalCount())
 #for(story:storyList.getRecords())
 #@tr()
-    #@td()${story.storyId}#end
+    #@td()<a
+            href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyId}</a>#end
     #@td()${story.storyPri}#end
-    #@td()
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">${story.productName}</a>
-    #end
-    #@td()${story.storyTitle}#end
-    #@td()${story.planName}#end
+    #@td()${story.productId}#end
+    #@td()<a
+            href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
+    #@td()${story.planId}#end
     #@td()${story.storyOpenedBy}#end
     #@td()${story.storyEstimate}#end
     #@td()${story.storyStatus}#end
