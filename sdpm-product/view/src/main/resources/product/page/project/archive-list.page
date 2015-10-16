@@ -15,9 +15,7 @@
 
         #foreach(m:menuManager.getScopeMenus("archive-add"))
             #if(m.id=="product-archive-add")
-                <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/add-doc.page"
-                   title="创建文档">#buttonIcon(iconClass=
-                    "icon-plus")创建文档</a>
+                <a href="${TINY_CONTEXT_PATH +adminPath}/product/addDoc" title="创建文档">#buttonIcon(iconClass="icon-plus")创建文档</a>
             #end
         #end
 
