@@ -23,6 +23,5 @@
         <module>service-wrapper</module>
         <module>view</module>
         <module>view-uicomponent</module>
-        <module>web</module>
     </modules>
 </project>
