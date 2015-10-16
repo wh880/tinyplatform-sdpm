@@ -241,18 +241,29 @@ public class BuildAction extends BaseController {
                                 Model model, HttpServletRequest request){
         //bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 
-        Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
-        model.addAttribute("bugList",p);
+
 
         if ("reRelateBug".equals(relate)) {
+            bug.setDeleted(0);
+            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-bug-data.pagelet";
         }else if ("noRelateBug".equals(relate)) {
+            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-no-bug-data.pagelet";
         }else if ("reRelateBugRelease".equals(relate)) {
+            bug.setDeleted(0);
+            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-bug-data.pagelet";
         }else if ("noRelateBugRelease".equals(relate)) {
+            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-no-bug-data.pagelet";
         }else if ("leRelateBugRelease".equals(relate)) {
+            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-le-bug-data.pagelet";
         }
         return "";
@@ -282,6 +293,7 @@ public class BuildAction extends BaseController {
         }
         return "";
     }
+
 
 
 
