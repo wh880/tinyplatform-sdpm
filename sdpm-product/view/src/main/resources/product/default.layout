@@ -16,37 +16,51 @@
     }
 </style>
 <script >
-	function ajaxRead(ajaxType,opKey,opvalue){
-		var selectCheck = "select[ajaxType='"+ajaxType+"']";
+	function ajaxRead(id,toName,opKey,opvalue,url,value){
+		var selectCheck = "select[name="+toName+"]";
 		$(selectCheck).each(function(){
-				
-				var sele = $(this);	
-				$.ajax({
-					type: "POST",
-                    url: "${TINY_CONTEXT_PATH +adminPath}" + $(this).attr('url'),
-				   	data: $(this).attr('data'),
-				   	dataType:"json",
-					success: function(data){
-						for(var i=0,l=data.length;i<l;i++){
-							var em = "<option value='"+data[i][opKey]+"'>"+ data[i][opvalue] +"</option>";
-							sele.append(em);
+			var sele = $(this);
+			var s;
+			$.ajax({
+				type: "POST",
+				url: "${TINY_CONTEXT_PATH+adminPath}"+url,
+				data: $(this).attr('data'),
+				dataType:"json",
+				success: function(data){
+					sele.empty();
+					var em = "<option value='0' selected  >/</option>";
+					sele.append(em);
+					for(var i=0,l=data.length;i<l;i++){
+						var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+						sele.append(em);
+
+					}
+					if("multiple"!=sele.attr("multiple")){
+						if(value!=null) {
+							sele.val(value).trigger("change");
+						}else {
+							if(data.length>0){
+								sele.val(data[0][opKey]).trigger("change");
+							}else{
+								sele.val(0).trigger("change");
+							}
 							
 						}
-						if(sele.attr("multiple")!="multiple"){
-							sele.val(data[0][opKey]).trigger("change");
-						}						
-						
-						
-					},
-					error: function(res){
-						alert("失败");
 					}
-				});
-				
-				
+					
+					
+
+
+				},
+				error: function(res){
+					alert("失败");
+				}
 			});
-			
-	}
+
+
+		});
+
+	}  
 	
 	
 
