@@ -23,7 +23,7 @@
         <menu id="product-demand-output" name="导出" href="" icon=""
               sort="50" isShow="1"
               scope="product-io"/>
-        <menu id="product-demand-report" name="报表" href="/product/page/tabledemo/product-report.page"
+        <menu id="product-demand-report" name="报表" href="/product/story/toPager/storyReport"
               icon="icon-bar-chart"
               sort="49" isShow="1"
               scope="product-io"/>

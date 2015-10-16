@@ -22,18 +22,16 @@
         <p class="titleName">请求</p>
         <input type="hidden" name="clientRequestId" value="${request?.clientRequestId}"/>
         #@elementItem()
-            #@sdpmItem("产品名称")
+            #@sdpmItem("产品名称","*")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "productId" request?.productId {"placeholder":"产品名称","datatype":"*","nullmsg":"产品名称不能为空！","id":
-                        "request_title", "class":"input-text select2"})  ##,"multiple":"multiple"加上为多选项
+                        "productId" request?.productId {"placeholder":"产品名称","datatype":"*","nullmsg":"产品名称不能为空！",
+                        "class":"input-text select2"})  ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
                         #foreach(l:productList)
                             #@tinyOptionItem(l.productId)${l?.productName}#end
                         #end
                     #end
-                ##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/service/sla/slaAdd.page" class="r ">增加</a><a
-                ##                            href="${TINY_CONTEXT_PATH+adminPath}/service/sla/sla.page">全部</a>#end
                 #end
             #end
         #end
@@ -42,8 +40,7 @@
                 #@Tselect2F()
                     #@Tselect2Body(
                         "requestType" request?.requestType {"placeholder":"请求类型","datatype":"*","nullmsg":"请求类型不能为空！",
-                        "id":
-                        "request_title", "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
                         #@tinyOptionItem("0")缺陷#end
                         #@tinyOptionItem("1")适应性#end
@@ -62,8 +59,7 @@
                 #@Tselect2F()
                     #@Tselect2Body(
                         "requestPre" request?.requestPre {"placeholder":"请求优先级","datatype":"*","nullmsg":"请求优先级不能为空！",
-                        "id":
-                        "request_title", "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
                         #@tinyOptionItem("0")低#end
                         #@tinyOptionItem("1")中#end
@@ -90,8 +86,8 @@
             #@sdpmItem("客户名称" "*")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "clientId" request?.clientId {"placeholder":"客户名称","datatype":"*","nullmsg":"客户名称不能为空！","id":
-                        "request_title", "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "clientId" request?.clientId {"placeholder":"客户名称","datatype":"*","nullmsg":"客户名称不能为空！","class":
+                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
                         #foreach(l:clientList)
                             #@tinyOptionItem(l.clientId)${l?.clientName}#end
@@ -104,8 +100,7 @@
             #@sdpmItem("客户联系人" "*")
                 #tinyInput(
                     "text" "requester" request?.requester{"placeholder":"请输入客户联系人","datatype":"*","nullmsg":
-                    "客户联系人不能为空！",
-                    "id":"request_title","class":"input-text"})
+                    "客户联系人不能为空！","class":"input-text"})
             #end
         #end
 
@@ -113,8 +108,7 @@
             #@sdpmItem("请求标题" "*")
                 #tinyInput(
                     "text" "requestTitle" request?.requestTitle{"placeholder":"请求标题","datatype":"*","nullmsg":
-                    "请求标题不能为空！","id":
-                    "request_title", "class":"input-text select2"})
+                    "请求标题不能为空！","class":"input-text select2"})
             #end
         #end
 
@@ -130,8 +124,7 @@
                 #@Tselect2F()
                     #@Tselect2Body(
                         "requestStatus" request?.requestStatus {"placeholder":"请求状态","datatype":"*","nullmsg":
-                        "请求状态不能为空！","id":
-                        "request_title", "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "请求状态不能为空！","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
                         #@tinyOptionItem("0")新建#end
                         #@tinyOptionItem("6")待回访#end
@@ -153,7 +146,7 @@
         #@elementItem()
             #@sdpmItem("请求承诺回复时间")
                 #@tinyDateInput("requestCommitmentDate" formatDate(request?.requestCommitmentDate,
-                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px",})#end
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px"})#end
             #end
         #end
 

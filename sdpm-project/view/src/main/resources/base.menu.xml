@@ -117,9 +117,19 @@
         <menu id="pro-version-delete" name="删除" href="/project/version/delete" icon="icon-remove" sort="10" isShow="1"
               scope="pro-version-op"/>
 
-        <menu id="version-menu" name="任务菜单" href="/project/version/index.page" icon="" sort="1" isShow="1">
+        <menu id="version-menu" name="任务菜单" href="/projectmanage/build/index" icon="" sort="1" isShow="1">
             <menu id="pro-version-report" name="新建版本" href="/project/version/add" icon="icon-plus" sort="8" isShow="1"
                   scope="pro-versionmenu-op"/>
+        </menu>
+
+
+        <menu id="version-bug" name="" href="/project/version/productalbug" icon="" sort="1" isShow="1">
+            <menu id="versionbug" name="" href="/quality/bug/delete?bugId=${bug.bugId}" icon="icon-remove" sort="8" isShow="1"
+                  scope="version-linkbug"/>
+        </menu>
+        <menu id="version-story" name="" href="/project/version/productalstory" icon="" sort="1" isShow="1">
+            <menu id="versionstory" name="" href="/product/story/delete?storyId=${story.storyId}" icon="icon-remove" sort="8" isShow="1"
+                  scope="version-linkdemand"/>
         </menu>
 
     </menu>

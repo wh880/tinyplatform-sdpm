@@ -93,14 +93,14 @@
             #@elementItem()
                 #@sdpmItem("服务工时上限")
                     #tinyInput(
-                        "text" "serviceEffortLimit" sla?.serviceEffortLimit{,"id":"serviceEffortLimit",
+                        "text" "serviceEffortLimit" sla?.serviceEffortLimit{"id":"serviceEffortLimit",
                         "class":"input-text select2"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务响应时限")
                     #tinyInput(
-                        "text" "serviceReplyTimeLimit" sla?.serviceReplyTimeLimit{,"id":
+                        "text" "serviceReplyTimeLimit" sla?.serviceReplyTimeLimit{"id":
                         "serviceReplyTimeLimit","class":
                         "input-text select2"})
                 #end
@@ -108,26 +108,26 @@
             #@elementItem()
                 #@sdpmItem("需求回访时限")
                     #tinyInput(
-                        "text" "serviceReviewTimeLimit" sla?.serviceReviewTimeLimit{,"id":
+                        "text" "serviceReviewTimeLimit" sla?.serviceReviewTimeLimit{"id":
                         "serviceReviewTimeLimit","class":"input-text select2"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务请求数上限")
                     #tinyInput(
-                        "text" "serviceRequestLimit" sla?.serviceRequestLimit{,"id":"serviceRequestLimit",
+                        "text" "serviceRequestLimit" sla?.serviceRequestLimit{"id":"serviceRequestLimit",
                         "class":"input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("现场服务次数上限")
-                    #tinyInput("text" "serviceTsOnsiteLimit" sla?.serviceTsOnsiteLimit{,"id":
+                    #tinyInput("text" "serviceTsOnsiteLimit" sla?.serviceTsOnsiteLimit{"id":
                         "serviceTsOnsiteLimit","class":"input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务专员")
-                    #tinyInput("text" "serviceSpecialist" sla?.serviceSpecialist{,"id":"serviceSpecialist",
+                    #tinyInput("text" "serviceSpecialist" sla?.serviceSpecialist{"id":"serviceSpecialist",
                         "class":"input-text"})
                 #end
             #end
@@ -155,7 +155,7 @@
             #@elementItem()
                 #@sdpmItem("创建人")
                     #tinyInput(
-                        "text" "slaCreatedBy" sla?.slaCreatedBy{,"id":"slaCreatedBy","class":"input-text"})
+                        "text" "slaCreatedBy" sla?.slaCreatedBy{"id":"slaCreatedBy","class":"input-text"})
                 #end
             #end
             #@elementItem()
@@ -167,7 +167,7 @@
             #end
             #@elementItem()
                 #@sdpmItem("批准人")
-                    #tinyInput("text" "slaReviewedBy" sla?.slaReviewedBy{,"id":"slaReviewedBy","class":
+                    #tinyInput("text" "slaReviewedBy" sla?.slaReviewedBy{"id":"slaReviewedBy","class":
                         "input-text"})
                 #end
             #end

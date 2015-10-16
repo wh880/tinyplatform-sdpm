@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.system.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
@@ -11,6 +12,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -68,5 +70,18 @@ public class ActionManagerImpl implements ActionManager {
         }
         return pager;
     }
+
+	public Pager<SystemAction> queryBetweenDate(int start, int limit,
+			SystemAction action, Date startDate, Date endDate, String sortName,
+			boolean asc) {
+		// TODO Auto-generated method stub
+		if (StringUtil.isBlank(sortName)) {
+			return systemActionDao.findByDate(start, limit, action, startDate, endDate);
+		}
+		OrderBy orderBy = new OrderBy(sortName, asc);
+		return systemActionDao.findByDate(start, limit, action, startDate, endDate, orderBy);
+	}
+
+	
 
 }

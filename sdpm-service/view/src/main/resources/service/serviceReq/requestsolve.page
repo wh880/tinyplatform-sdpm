@@ -18,7 +18,7 @@
                 <input type="hidden" name="clientRequestId" value=${request?.clientRequestId}></input>
                 #@elementItem()
                 <div class="col-12">
-                    <div class="col-2 text-r"><label><span class="c-red">*</span>请求标题：</label></div>
+                    <div class="col-2 text-r"><label>请求标题：</label></div>
 
                     <div class="col-9">
                         <td>${request?.requestTitle}</td>
@@ -63,7 +63,7 @@
 
                         </div>
                         <div class="col-1">
-                            <button style="float: left" type="button" id="submit" class="commitBtn">保存</button>
+                            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
                         </div>
                         <div class="col-1">
                             #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
@@ -80,12 +80,8 @@
 #@simpleModal("myModal2" "新建产品")#end
     <script type="text/javascript">
         $(function () {
-            $(function () {
-                $("form[name=thisform]").Validform({
-                    tiptype: 2
-                });
+            $("form[name=thisform").Validform({
+                tiptype: 2
             });
-
-
         });
     </script>
