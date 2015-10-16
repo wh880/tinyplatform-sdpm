@@ -14,6 +14,7 @@ import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -29,6 +30,7 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -46,6 +48,8 @@ public class StoryAction extends BaseController{
     private ModuleService moduleService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private UserService userService;
     
     
    
@@ -56,7 +60,9 @@ public class StoryAction extends BaseController{
     	String queryString = request.getQueryString();
        if(queryString!=null&&!queryString.contains("choose")){
 		   return "redirect:" + adminPath + "/product/story?choose=1&" + queryString;
-	   }
+	   }	
+       List<OrgUser> userList = userService.findUserList(null);
+       model.addAttribute("userList", userList);
         return "/product/page/project/togglebox.page";
     }
 

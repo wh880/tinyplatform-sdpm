@@ -171,12 +171,10 @@
                                         #@dropdownsLi("dropdown-submenu")
                                             #@dropdownA("firstMenu"　"javascript:void(0);")指派给#end
                                             #@dropdownsUl("dropdown-menu")
-                                                #@dropdownItem(
-                                                    "javascript:void(0);" "storyAssignedTo" "secondMenu")admin#end
-                                                #@dropdownItem(
-                                                    "javascript:void(0);" "storyAssignedTo" "secondMenu")张三#end
-                                                #@dropdownItem(
-                                                    "javascript:void(0);" "storyAssignedTo" "secondMenu")lisi#end
+                                            	#for(user:userList)
+                                            		#@dropdownItem("javascript:void(0);" "storyAssignedTo" "secondMenu" {"orgUserId":user.orgUserId}) ${user.orgUserRealName} #end
+                                            	#end
+                                            	
                                             #end
                                         #end
 
@@ -235,7 +233,7 @@
                     #foreach(m:menuManager.getScopeMenus("product-del"))
                         #if(m.id=="product-demand-del")
                         #set(dae=[34,36])
-                            #@btnModal("#myModal" "关闭" "1000" "400" "btn radius btn-danger" "/product/story/findByKeys" "betchClose")批量关闭#end
+                            #@btnModal("#myModal" "关闭" "1000" "400" "btn radius btn-danger" adminPath+"/product/story/findByKeys" "betchClose")批量关闭#end
                         #end
                     #end
                 #end

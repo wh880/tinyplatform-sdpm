@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.action.system;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,10 @@ import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.util.ModuleUtil;
 
 import javax.servlet.http.HttpServletResponse;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -392,7 +395,9 @@ public class ModuleAction extends BaseController {
     	
     	module.setModuleType("story");
         List<SystemModule> list = moduleService.findAllModules(module);
+        String modulePath = ModuleUtil.getPath(module.getModuleParent(), ">", moduleService, null, false);
         model.addAttribute("list", list);
+        model.addAttribute("modulePath", modulePath);
         return "/product/page/project/product-modular.page";
     }
 
