@@ -13,7 +13,7 @@
 
     #foreach(m:menuManager?.getScopeMenus("dymanci-time"))
    	 #set(url=eval(m?.href))
-            <a href="${TINY_CONTEXT_PATH}${url}" ${choice==m?.id?'class="active_btn"':""}>${m.name}</a>
+            <a href="${TINY_CONTEXT_PATH}${adminPath}${url}" ${choice==m?.id?'class="active_btn"':""}>${m.name}</a>
     #end
 
                     <span style="left:330px;top:-35px; position:relative; height:10%">
