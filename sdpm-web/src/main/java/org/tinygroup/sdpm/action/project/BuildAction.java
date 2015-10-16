@@ -245,10 +245,12 @@ public class BuildAction extends BaseController {
 
         if ("reRelateBug".equals(relate)) {
             bug.setDeleted(0);
+            bug.setBugStatus("3");
             Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
             model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-bug-data.pagelet";
         }else if ("noRelateBug".equals(relate)) {
+            bug.setProjectId(null);
             Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
             model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-no-bug-data.pagelet";
