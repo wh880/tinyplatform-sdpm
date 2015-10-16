@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dict.util.DictUtil;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.DictService;
@@ -76,11 +77,13 @@ public class DictAction extends BaseController{
 	@RequestMapping(value ="save",method = RequestMethod.POST)
 	public String saveDict(SystemDict systemDict ,Model model){
 		if(systemDict.getDictId()==null){
-
-			dictService.addDict(systemDict);
+			systemDict = dictService.addDict(systemDict);
+			DictUtil.addDict(systemDict);
 		}
 		else{
+			SystemDict oldDict = dictService.findDict(systemDict.getDictId());
 			dictService.updateDict(systemDict);
+			DictUtil.editDict(oldDict,systemDict);
 		}
 		model.addAttribute("dict", systemDict);
 		return "system/page/dictionaries/dictitem.page";

@@ -37,7 +37,7 @@ public class ActionManagerImpl implements ActionManager {
         if (actions.size() > 0) {
             for (SystemAction s : actions) {
                 s = systemActionDao.getActionAndObject(s);
-                s.setUrl(s.getActionObjectType());
+                //s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));
             }
         }
         return actions;
@@ -50,7 +50,7 @@ public class ActionManagerImpl implements ActionManager {
         if (pager.getRecords().size() > 0) {
             for (SystemAction s : pager.getRecords()) {
                 s = systemActionDao.getActionAndObject(s);
-                //s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));			}
+                //s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));
             }
         }
         return pager;

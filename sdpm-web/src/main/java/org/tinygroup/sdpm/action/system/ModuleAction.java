@@ -259,7 +259,7 @@ public class ModuleAction extends BaseController {
 
     private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, String parent) {
         for (SystemModule systemModule : systemModules) {
-            if (!parent.contains("p")&&systemModule.getModuleParent() == Integer.valueOf(parent)) {
+            if (!parent.contains("p")&&systemModule.getModuleParent() == Integer.parseInt(parent)) {
                 mergeSingleModule(systemModules,systemModule,maps,parent);
             }
             if(parent.contains("p")&&systemModule.getModuleParent() == 0){
