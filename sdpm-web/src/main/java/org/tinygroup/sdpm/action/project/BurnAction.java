@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -12,6 +11,7 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectBurn;
 import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
+import org.tinygroup.sdpm.util.CookieUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;

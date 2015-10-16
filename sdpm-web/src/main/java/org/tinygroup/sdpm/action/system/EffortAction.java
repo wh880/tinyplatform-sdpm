@@ -1,17 +1,8 @@
 package org.tinygroup.sdpm.action.system;
 
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
@@ -26,8 +18,10 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.tinysqldsl.Pager;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("a/system/effort")
@@ -139,25 +133,25 @@ public class EffortAction extends BaseController{
 			pager=effortService.findByPage(start, limit, systemEffort, order, asc);
 		}
 		if(date==3){
-			
-			startDate = DateUtil.getFirstDayOfWeek(startDate);
-			endDate= DateUtil.getLastDayOfWeek(startDate);
+
+			startDate = DateUtils.getFirstDayOfWeek(startDate);
+			endDate = DateUtils.getLastDayOfWeek(startDate);
 			pager= effortService.findByDate(start, limit, systemEffort, startDate, endDate, order, asc);
 			
 		}
 		if(date==4){
-			startDate = DateUtil.getFirstDayOfWeek(DateUtil.getLastDayOfLastWeek(startDate));
-			endDate = DateUtil.getLastDayOfLastWeek(endDate);
+			startDate = DateUtils.getFirstDayOfWeek(DateUtils.getLastDayOfLastWeek(startDate));
+			endDate = DateUtils.getLastDayOfLastWeek(endDate);
 			pager = effortService.findByDate(start, limit, systemEffort, startDate, endDate, order, asc);
 			
 		}
 		if(date==5){
-			startDate = DateUtil.getFirstDayOfMonth(startDate);
+			startDate = DateUtils.getFirstDayOfMonth(startDate);
 			pager= effortService.findByDate(start, limit, systemEffort, startDate, endDate, order, asc);
 		}
 		if(date==6){
-			startDate=DateUtil.getFirstDayOfMonth(DateUtil.getLastDayOfLastMonth(startDate));
-			endDate=DateUtil.getLastDayOfLastMonth(endDate);
+			startDate = DateUtils.getFirstDayOfMonth(DateUtils.getLastDayOfLastMonth(startDate));
+			endDate = DateUtils.getLastDayOfLastMonth(endDate);
 			pager = effortService.findByDate(start, limit, systemEffort, startDate, endDate, order, asc);
 		}
 		if(date==0){

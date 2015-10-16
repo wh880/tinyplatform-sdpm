@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <title>SDPM登陆</title>
+    <link rel="shortcut icon" href="${TINY_CONTEXT_PATH}/common/img/tiny32.png">
+    <meta name="keywords" content="Tiny SDPM ">
+    <meta name="description" content="Tiny,TINY,Software Development Process Management">
+    <title>Tiny SDPM登陆</title>
     <style>
         body {
             background: #ebebeb;
@@ -186,7 +189,6 @@
             font-weight: bold;
         }
     </style>
-
 </head>
 <body>
 <div class="top_div"></div>
@@ -199,7 +201,7 @@
     <form class="loginForm" method="post" role="form" action="${TINY_CONTEXT_PATH}/login">
         <div class="userName">
             <span class="u_logo"></span>
-            <input class="ipt" type="text" name="username" placeholder="请输入用户名或邮箱"/>
+            <input class="ipt" type="text" name="username" placeholder="请输入用户名"/>
         </div>
         <div class="loginPassword">
             <span class="p_logo"></span>
@@ -207,16 +209,15 @@
         </div>
         <div class="loginBtn">
             <p class="buttonBox">
-                <span class="leftBtn"><a href="#">忘记密码?</a></span>
+                <span class="leftBtn"><a href="#"></a></span>
 					<span class="rightBtn">
-						<a class="regBtn" href="#">注册</a>
+						<a class="regBtn" href="#"></a>
 						<input class="loginBtn" type="submit" value="登录"/>
 					</span>
             </p>
         </div>
     </form>
 </div>
-
 <script src="${TINY_CONTEXT_PATH}/login/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
     if (window != top) {

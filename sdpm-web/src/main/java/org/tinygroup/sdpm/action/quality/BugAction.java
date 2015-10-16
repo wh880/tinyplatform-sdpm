@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
 import org.tinygroup.sdpm.action.system.ProfileUtil;
-import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -31,18 +30,14 @@ import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
