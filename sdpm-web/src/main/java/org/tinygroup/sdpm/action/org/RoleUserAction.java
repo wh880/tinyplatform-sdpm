@@ -45,6 +45,6 @@ public class RoleUserAction extends BaseController {
     @RequestMapping("/save")
     public String save(Integer id, String[] array, Model model) {
         roleUserService.addRoleUser(array, id);
-        return "redirect" + adminPath + "/org/roleUser/show";
+        return "redirect:" + adminPath + "/org/roleUser/show";
     }
 }
