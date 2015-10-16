@@ -139,7 +139,7 @@ public class FaqAction extends BaseController {
         serviceFaqType.setFaqParentTypeId(faqParentTypeId);
         serviceFaqType.setFaqType(faqType);
         faqTypeService.addFaqType(serviceFaqType);
-        return "organization/user/user.page";
+        return "/service/faq/faqmenu.page";
     }
 
     @RequestMapping("/editTree")
@@ -147,13 +147,14 @@ public class FaqAction extends BaseController {
         ServiceFaqType type = faqTypeService.findFaqType(faqTypeId);
         type.setFaqType(faqType);
         faqTypeService.updateFaqType(type);
-        return "service/faq/faqmenu.page";
+        return "/service/faq/faqmenu.page";
     }
 
     @RequestMapping("/deleteTree")
     public String deleteDept(Integer faqTypeId) {
         faqTypeService.deleteDept(faqTypeId);
-        return "service/faq/faqmenu.page";
+        //return 1;
+        return "/service/faq/faqmenu.page";
     }
 
     @RequestMapping("/listTree")
