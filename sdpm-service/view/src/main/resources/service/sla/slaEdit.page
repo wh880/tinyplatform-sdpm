@@ -47,7 +47,7 @@
             #@colLabel("col-3")创建时间：#end
             #@gridSysCol(5)
                 #@tinyDateInput(
-                    "birthday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"sla_create_date","nullmsg":
+                    "birthday" "" "YYYY-MM-DD" {"style":"width:200px","nullmsg":
                     "日期不能为空"})#end
             #end
         #end
