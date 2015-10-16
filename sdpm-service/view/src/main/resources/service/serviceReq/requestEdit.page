@@ -113,7 +113,7 @@
         #@elementItem()
             #@sdpmItem("请求承诺回复时间")
                 #@tinyDateInput(
-                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px",})#end
+                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px"})#end
             #end
         #end
 

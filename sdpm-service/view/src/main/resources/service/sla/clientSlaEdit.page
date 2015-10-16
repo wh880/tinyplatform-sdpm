@@ -58,7 +58,7 @@
         #@gridSysRow()
             #@colLabel("col-3")创建人：#end
             #@gridSysCol(5)
-                #tinyInput("text" "创建人" ""{,"id":"sla_created_by","class":"input-text"})
+                #tinyInput("text" "创建人" ""{"id":"sla_created_by","class":"input-text"})
             #end
         #end
         #@gridSysRow()
