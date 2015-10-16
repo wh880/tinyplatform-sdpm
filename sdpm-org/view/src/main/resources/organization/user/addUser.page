@@ -40,7 +40,8 @@
                             #@colLabel("col-4")<span class="c-red">*</span>真实姓名：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserRealName" user?.orgUserRealName {"datatype":"","id":"请求标题","class":
+                                    "text" "orgUserRealName" user?.orgUserRealName {"datatype":"*","nullmsg":
+                                    "用户真实姓名不能为空！","id":"org_user_real_name","class":
                                     "input-text"})
                             #end
                         #end
@@ -58,7 +59,7 @@
                         #@gridSysRow()
                             #@colLabel("col-4")职位：#end
                             #@gridSysCol(6)
-                                #tinyInput("text" "orgUserRole" user?.orgUserRole{"datatype":"","class":"input-text"})
+                                #tinyInput("text" "orgUserRole" user?.orgUserRole{"class":"input-text"})
                         #end
                         #end
                         #@gridSysRow()
@@ -86,7 +87,8 @@
                             #@colLabel("col-4")<span class="c-red">*</span>用户名：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserAccount" user?.orgUserAccount {"datatype":"","id":"请求标题","class":
+                                    "text" "orgUserAccount" user?.orgUserAccount {"datatype":"*","nullmsg":"请输入用户名！",
+                                    "id":"请求标题","class":
                                     "input-text"})
                         #end
                         #end
@@ -94,9 +96,7 @@
                             #@colLabel("col-4")邮箱：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserEmail" user?.orgUserEmail {"placeholder":"","datatype":"*","nullmsg":
-                                    "请输入公司名称！","id":
-                                    "name",
+                                    "text" "orgUserEmail" user?.orgUserEmail {"id":"name",
                                     "class":
                                     "input-text"})
                         #end
@@ -127,8 +127,8 @@
                             #@colLabel("col-4")源代码账号：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserSubmitter" user?.orgUserSubmitter{"placeholder":"","datatype":"*",
-                                    "nullmsg":"请输入公司名称！","id":"name",
+                                    "text" "orgUserSubmitter" user?.orgUserSubmitter{"placeholder":""
+                                ,"id":"name",
                                     "class":
                                     "input-text"})
                         #end
@@ -140,8 +140,7 @@
                             #@colLabel("col-4")Skype：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserSkype" user?.orgUserSkype{"placeholder":"","datatype":"*","nullmsg":
-                                    "",
+                                    "text" "orgUserSkype" user?.orgUserSkype{"placeholder":"",
                                     "id":"name","class":
                                     "input-text"})
                         #end
@@ -150,7 +149,7 @@
                             #@colLabel("col-4")QQ：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserQQ" user?.orgUserQQ {"placeholder":"","datatype":"*","nullmsg":"",
+                                    "text" "orgUserQQ" user?.orgUserQQ {"placeholder":"",
                                     "id":
                                     "name","class":
                                     "input-text"})
@@ -160,8 +159,7 @@
                             #@colLabel("col-4")微信：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserYahoo" user?.orgUserYahoo {"placeholder":"","datatype":"*","nullmsg":
-                                    "",
+                                    "text" "orgUserYahoo" user?.orgUserYahoo {"placeholder":"",
                                     "id":"name","class":
                                     "input-text"})
 
@@ -171,8 +169,7 @@
                             #@colLabel("col-4")Gtalk：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserGTalk" user?.orgUserGTalk {"placeholder":"","datatype":"*","nullmsg":
-                                    "",
+                                    "text" "orgUserGTalk" user?.orgUserGTalk {"placeholder":"",
                                     "id":"name","class":
                                     "input-text"})
 
@@ -182,9 +179,8 @@
                             #@colLabel("col-4")旺旺：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserWangWang" user?.orgUserWangWang {"placeholder":"","datatype":"*",
-                                    "nullmsg":
-                                    "","id":"name","class":
+                                    "text" "orgUserWangWang" user?.orgUserWangWang {"placeholder":"",
+                                    "id":"name","class":
                                     "input-text"})
 
                         #end
@@ -193,8 +189,7 @@
                             #@colLabel("col-4")手机：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserMobile" user?.orgUserMobile {"placeholder":"","datatype":"*",
-                                    "nullmsg":"","class":"input-text"})
+                                    "text" "orgUserMobile" user?.orgUserMobile {"placeholder":"","class":"input-text"})
 
                         #end
                         #end
@@ -202,8 +197,7 @@
                             #@colLabel("col-4")电话：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserPhone" user?.orgUserPhone{"placeholder":"","datatype":"*","nullmsg":
-                                    "",
+                                    "text" "orgUserPhone" user?.orgUserPhone{"placeholder":"",
                                     "id":"name","class":
                                     "input-text"})
 
@@ -213,8 +207,7 @@
                             #@colLabel("col-4")通讯地址：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserAddress" user?.orgUserAddress{"placeholder":"","datatype":"*",
-                                    "nullmsg":"",
+                                    "text" "orgUserAddress" user?.orgUserAddress{"placeholder":"",
                                     "id":"name","class":
                                     "input-text"})
 
@@ -224,8 +217,7 @@
                             #@colLabel("col-4")邮编：#end
                             #@gridSysCol(6)
                                 #tinyInput(
-                                    "text" "orgUserZipCode" user?.orgUserZipCode{"placeholder":"","datatype":"*",
-                                    "nullmsg":"",
+                                    "text" "orgUserZipCode" user?.orgUserZipCode{"placeholder":"",
                                     "id":"name","class":
                                     "input-text"})
 
@@ -245,3 +237,11 @@
     #end
 #end
 
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+
+        });
+    });
+</script>

@@ -3,20 +3,27 @@
 #@div(divClass="operationbar")
 ##左侧按钮
 <span class="f">
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?choose=1" "ml-5" class=${choose
-    =="1"?"active_btn":""}>未关闭</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?choose=2" "ml-5" class=${choose
-    =="2"?"active_btn":""}>所有</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page?choose=3" "ml-5" class=${choose
-    =="3"?"active_btn":""}>看板</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/gantt.page?choose=4" "ml-5" class=${choose
-    =="4"?"active_btn":""}>甘特图</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/calendar.page?choose=5" "ml-5" class=${choose
-    =="5"?"active_btn":""}>日历</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/burn/init?choose=6" "ml-5" class=${choose
-    =="6"?"active_btn":""}>燃尽图</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?choose=7" "ml-5" class=${choose
-    =="7"?"active_btn":""}>指派给我</a>
+    <a val="1" "ml-5" class="selChoose ${choose=="1"?"active_btn":""}">未关闭</a>
+    <a val="2" "ml-5" class="selChoose ${choose=="2"?"active_btn":""}">所有</a>
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page?choose=3" "ml-5" class=${choose=="3"?"active_btn":""}>看板</a>
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/gantt?choose=4" "ml-5" class=${choose=="4"?"active_btn":""}>甘特图</a>
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/burn/init?choose=6" "ml-5" class=${choose=="6"?"active_btn":""}>燃尽图</a>
+    <a val="7" "ml-5" class="selChoose ${choose=="7"?"active_btn":""}">指派给我</a>
+
+    <script>
+        $(function () {
+            var actionUrl = $("#taskTable").attr("data-url");
+            $(".selChoose").click(function (e) {
+                $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
+                $(".selChoose").removeClass("active_btn");
+                $(this).addClass("active_btn");
+                $("#taskTable").trigger("refresh");
+                //console.log(actionUrl);
+//            触发ajax请求
+            });
+        });
+    </script>
+
 ##更多
 
     #include("/project/task/maplist.page")
@@ -26,13 +33,24 @@
         <span class="caret"></span>
     </a>
 <ul class="dropdown-menu" aria-labelledby="dLabel">
-    #for(var : statuMap.keySet() )
+    #foreach(var : statuMap.keySet() )
     #if(var != 0)
-        <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page?statu=${var}">${statuMap.get(var)}</a></li>
+        <li><a class="projectMore" val="${var}">${statuMap.get(var)}</a></li>
     #end
 #end
 </ul>
 </div>
+    <script>
+        $(function () {
+            var actionUrl = $("#taskTable").attr("data-url");
+            $(".projectMore").click(function (e) {
+                $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
+                $("#taskTable").trigger("refresh");
+                //console.log(actionUrl);
+//            触发ajax请求
+            });
+        });
+    </script>
 
 ##分组查看
     <div class="btn-group btnDropDown">
@@ -91,13 +109,6 @@
             </ul>
         </div>
     #end
-
-##    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/reportform.page">#buttonIcon(iconClass="icon-bar-chart")
-##        报表</a>&nbsp;
-##    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/batchAdd.page">#buttonIcon(iconClass="icon-plus-sign")
-##        批量增加</a>&nbsp;
-##    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/add.page">#buttonIcon(iconClass="icon-plus")建任务</a>&nbsp;
-
     #foreach(m:menuManager.getScopeMenus("pro-taskmenu2-op"))
         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
     #end

@@ -64,6 +64,6 @@ public interface ActionManager {
 	 * @param orderArgs
 	 * @return
 	 */
-	Pager<SystemAction> queryBetweenDate(int start,int limit,SystemAction action,Date startDate,Date endDate,
+	Pager<SystemAction> queryBetweenDate(int start,int limit,SystemAction action,String startDate,String endDate,
 			String sortName,boolean asc);
 }

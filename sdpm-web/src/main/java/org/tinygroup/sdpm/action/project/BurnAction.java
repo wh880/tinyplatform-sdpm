@@ -36,7 +36,7 @@ public class BurnAction extends BaseController {
     public String initBurn(HttpServletRequest request, Model model, Integer choose, Integer interval) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
         if (interval == null) {
-            interval = 5;
+            interval = 3;
         }
         /**
          * 1.获取项目的起始、结束日期

@@ -101,6 +101,13 @@ public class SystemAction implements Serializable{
 	 */
 	private String  actorName;
 
+	/**
+	 * 对象名称
+	 */
+	private String objectName;
+
+	private String url;
+
 	public String getActorName() {
 		return actorName;
 	}
@@ -108,10 +115,6 @@ public class SystemAction implements Serializable{
 	public void setActorName(String actorName) {
 		this.actorName = actorName;
 	}
-
-	private String objectName;
-
-	private String url;
 
 	public String getUrl() {
 		return url;
@@ -129,93 +132,94 @@ public class SystemAction implements Serializable{
 		this.objectName = objectName;
 	}
 
-	public void setActionId(Integer actionId){
-		this. actionId = actionId;
-	}
-
 	public Integer getActionId(){
 		return actionId;
 	}
 
-	public void setActionObjectType(String actionObjectType){
-		this. actionObjectType = actionObjectType;
+	public void setActionId(Integer actionId) {
+		this.actionId = actionId;
 	}
 
 	public String getActionObjectType(){
 		return actionObjectType;
 	}
 
-	public void setActionObjectId(String actionObjectId){
-		this. actionObjectId = actionObjectId;
+	public void setActionObjectType(String actionObjectType) {
+		this.actionObjectType = actionObjectType;
 	}
 
 	public String getActionObjectId(){
 		return actionObjectId;
 	}
 
-	public void setActionProject(String actionProject){
-		this. actionProject = actionProject;
+	public void setActionObjectId(String actionObjectId) {
+		this.actionObjectId = actionObjectId;
 	}
 
 	public String getActionProject(){
 		return actionProject;
 	}
 
-	public void setActionProduct(String actionProduct){
-		this. actionProduct = actionProduct;
+	public void setActionProject(String actionProject) {
+		this.actionProject = actionProject;
 	}
 
 	public String getActionProduct(){
 		return actionProduct;
 	}
 
-	public void setActionActor(String actionActor){
-		this. actionActor = actionActor;
+	public void setActionProduct(String actionProduct) {
+		this.actionProduct = actionProduct;
 	}
 
 	public String getActionActor(){
 		return actionActor;
 	}
 
-	public void setActionDate(Date actionDate){
-		this. actionDate = actionDate;
+	public void setActionActor(String actionActor) {
+		this.actionActor = actionActor;
 	}
 
 	public Date getActionDate(){
 		return actionDate;
 	}
 
-	public void setActionComment(String actionComment){
-		this. actionComment = actionComment;
+	public void setActionDate(Date actionDate) {
+		this.actionDate = actionDate;
 	}
 
 	public String getActionComment(){
 		return actionComment;
 	}
 
-	public void setActionExtra(String actionExtra){
-		this. actionExtra = actionExtra;
+	public void setActionComment(String actionComment) {
+		this.actionComment = actionComment;
 	}
 
 	public String getActionExtra(){
 		return actionExtra;
 	}
 
-	public void setActionRead(String actionRead){
-		this. actionRead = actionRead;
+	public void setActionExtra(String actionExtra) {
+		this.actionExtra = actionExtra;
 	}
 
 	public String getActionRead(){
 		return actionRead;
 	}
 
-	public void setActionEfforted(Integer actionEfforted){
-		this. actionEfforted = actionEfforted;
+	public void setActionRead(String actionRead) {
+		this.actionRead = actionRead;
 	}
 
 	public Integer getActionEfforted(){
 		return actionEfforted;
 	}
+
+	public void setActionEfforted(Integer actionEfforted) {
+		this.actionEfforted = actionEfforted;
+	}
+
 	public String getActionAction() {
 		return actionAction;
 	}

@@ -331,6 +331,15 @@ public class QualityBug implements Serializable {
 	 */
 	private Integer deleted;
 
+	private String assignedUser;
+
+	public String getAssignedUser() {
+		return assignedUser;
+	}
+
+	public void setAssignedUser(String assignedUser) {
+		this.assignedUser = assignedUser;
+	}
 
 	public void setBugId(Integer bugId){
 		this. bugId = bugId;
