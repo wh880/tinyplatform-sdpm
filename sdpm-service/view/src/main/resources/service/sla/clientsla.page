@@ -19,7 +19,7 @@
                 #@iconOperations(
                     "#myModal1" "icon-download-alt" "导出" "600" "100" "/service/sla/slaExport.pagelet" "ml-5")
                     导出#end
-                #set(m1=menuManager.getMenu("add"))
+                #set(m1=menuManager.getMenu("sla-add"))
                 #if(m1)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}">#buttonIcon(iconClass=m1.icon)${m1.name}</a>
                 #end

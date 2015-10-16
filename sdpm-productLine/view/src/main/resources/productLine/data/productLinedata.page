@@ -9,7 +9,7 @@
 	#@td()<input type="checkbox" value="1" name="productLine">#end
 	#@td()${productLine?.productLineId}#end
 	#@td()
-		<a href="${TINY_CONTEXT_PATH}/productLine/page/project/overview.page">${productLine?.productLineName}</a>	
+		<a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/project/overview.page">${productLine?.productLineName}</a>
 	#end
 	#@td()${productLine?.productLineCode}#end
 	#@td()${productLine?.companyId}#end
@@ -24,9 +24,9 @@
 			#foreach(m:menuManager.getScopeMenus("productLine-all"))
 			#set(url=eval(m.href))
 				#if(m.id=="allproductline-edit")
-					<a title="${m.name}" class="ml-5" href=${TINY_CONTEXT_PATH}${url}><i class="${m.icon}"></i></a>
+					<a title="${m.name}" class="ml-5" href=${TINY_CONTEXT_PATH +adminPath}${url}><i class="${m.icon}"></i></a>
 					#else
-					&nbsp;#@tinyTableItemRemove(TINY_CONTEXT_PATH+url productLine.productLineId)<i class="${m.icon}"></i>#end
+					&nbsp;#@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+url productLine.productLineId)<i class="${m.icon}"></i>#end
 				#end
 			#end
 	#end

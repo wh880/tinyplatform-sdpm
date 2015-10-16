@@ -105,4 +105,5 @@ public interface StoryService {
 	 * @return
 	 */
 	 Map<String, List<StoryCount>> report(String fields,ProductStory story);
+
 }

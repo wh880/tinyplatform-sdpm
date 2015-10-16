@@ -37,7 +37,7 @@
 	#@toggleRight()
 		
 				
-		#@tinyForm("thisform" TINY_CONTEXT_PATH+"/productLine/save" "post" {"class":""})
+		#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/productLine/save" "post" {"class":""})
 			
 			#@elementItem()
 				#@colLabel()产品线名称：#end

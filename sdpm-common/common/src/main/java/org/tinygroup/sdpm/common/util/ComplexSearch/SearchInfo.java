@@ -27,7 +27,7 @@ public class SearchInfo {
     }
 
     public void setField(String field) {
-        this.field = NameUtil.resolveNameDesc(field);
+        this.field = field;
     }
 
     public String getOperate() {

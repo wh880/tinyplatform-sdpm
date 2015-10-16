@@ -16,7 +16,8 @@
 								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal
 								 m.icon m.name "" ""adminPath+m.href +"?dictId="+d?.dictId"ml-5")
 							#else
-								#iconOperation(m.icon m.name "ml-5 delBtn"adminPath+m.href+"?dictId="+d?.dictId)
+##								#iconOperation(m.icon m.name "ml-5 delBtn"adminPath+m.href+"?dictId="+d?.dictId)
+								#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href d?.dictId)#buttonIcon(iconClass=m.icon)#end
 							#end
 							
 						#end

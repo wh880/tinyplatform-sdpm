@@ -67,9 +67,15 @@ public class DictAction extends BaseController{
 	@RequestMapping("delete")
 	public Map<String, String> deleteDict(Integer dictId){
     	Map<String, String> map = new HashedMap();
-		dictService.deleteDict(dictId);
+		int s=dictService.deleteDict(dictId);
+		if(s>0)
+		{
 		 map.put("status", "success");
 	     map.put("info", "删除成功");
+		}else{
+			map.put("status", "n");
+			map.put("info", "删除失败");
+		}
 		return map;
 	}
 
