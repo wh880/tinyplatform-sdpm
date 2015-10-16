@@ -284,7 +284,11 @@
 
                     </script>
 
-                #*  #@Tselect2Fix()<a href="http://www.baidu.com" class="r "></a><a href="#"></a>#end*#
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                    #end
+
                 #end
 
 
@@ -311,7 +315,10 @@
                         ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList");
 
                     </script>
-                #*  #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                    #end
                 #end
             #end
             #@validateDiv("col-2")#end

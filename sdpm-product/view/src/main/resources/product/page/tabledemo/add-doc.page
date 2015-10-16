@@ -12,6 +12,13 @@
     });
 
 </script>
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+        });
+    });
+</script>
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")
@@ -37,13 +44,25 @@
 
         #@elementItem()
             #@colLabel()所属产品：#end
-            #@tinySelect("docProduct" product?.productId {"style":"width:300px","class":"input-text","rel":"22","url":"/product/productList","ajaxType":"docproduct","data":""})
+            #@tinySelect("docProduct" product?.productId {"style":"width:300px","class":"input-text","rel":"22"})
+                <script>
+                    ajaxRead("${sid}", "docProduct", "productId", "productName", "/product/productList");
+                </script>
+
+
+                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
+                                  class="r ">添加</a><a
+                        href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>#end
+
             #end
         #end
 
         #@elementItem()
             #@colLabel()所属分类：#end
-            #@tinySelect("docModule" "IN" {"style":"width:300px","class":"input-text","rel":"22","url":"/system/module/moduleList","ajaxType":"docmodule","data":""})
+            #@tinySelect("docModule" "IN" {"style":"width:300px","class":"input-text","rel":"22"})
+                <script>
+                    ajaxRead("${sid}", "docModule", "docId", "docModule", "/document/docList");
+                </script>
 
             #end
         #end
@@ -63,7 +82,7 @@
             #@colLabel()文档标题：#end
             #@formControlDiv("col-8")
                 #tinyInput(
-                    "text" "docTitle" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"doctitle","class":"input-text"})
+                    "text" "docTitle" ""{"style":"width:300px","placeholder":"请输入文档标题","datatype":"*4-16","nullmsg":"文档标题不能为空！","id":"doctitle","class":"input-text"})
             #end
         #end
         #@validateDiv("col-2")#end

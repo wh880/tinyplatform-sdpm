@@ -237,6 +237,9 @@ public class BuildAction extends BaseController {
                                 @RequestParam(required = false, defaultValue = "asc") String ordertype,
                                 Model model, HttpServletRequest request){
         //bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+
+
+
         if ("reRelateBug".equals(relate)) {
             bug.setDeleted(0);
             bug.setBugStatus("3");
@@ -266,35 +269,18 @@ public class BuildAction extends BaseController {
     }
 
 
-//    @RequestMapping("/search/{relate}")
-//    public String storyListAction(@PathVariable(value="relate")String relate, int page, int pagesize,
-//                                  ProductStory story, String choose, String groupOperate, SearchInfos searchInfos,
-//                                  @RequestParam(required = false, defaultValue = "storyId") String order,
-//                                  @RequestParam(required = false, defaultValue = "asc") String ordertype,
-//                                  Model model, HttpServletRequest request){
-//
-//
-//        story.setStoryId((Integer)(request.getSession().getAttribute("storyId")));
-//        Pager<ProductStory> p =projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,FieldUtil.stringFormat(order),"asc".equals(ordertype)?true:false);
-//        model.addAttribute("story",p);
-//
-//        if("reRelateStory".equals(relate)){
-//            return "/project/task/relation-release/product-al-req-data.pagelet";
-//        }else if ("noRelateStory".equals(relate)) {
-//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
-//        }else if ("reRelateStoryRelease".equals(relate)) {
-//            return "/project/task/relation-release/product-al-req-data.pagelet";
-//        }else if ("noRelateStoryRelease".equals(relate)) {
-//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
-//        }
-//        return "";
-//    }
-
     @RequestMapping("/search/{relate}")
-    public String findStory(@PathVariable(value="relate")String relate,Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
-        Pager<ProductStory> storyList = projectStoryService.findStoryToLink(projectId, start, limit, order, ordertype);
-        model.addAttribute("story", storyList);
+    public String storyListAction(@PathVariable(value="relate")String relate, int page, int pagesize,
+                                  ProductStory story, String choose, String groupOperate, SearchInfos searchInfos,
+                                  @RequestParam(required = false, defaultValue = "storyId") String order,
+                                  @RequestParam(required = false, defaultValue = "asc") String ordertype,
+                                  Model model, HttpServletRequest request){
+
+
+        story.setBuildId((Integer)(request.getSession().getAttribute("sessionBuildId")));
+        Pager<ProductStory> p =projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,FieldUtil.stringFormat(order),"asc".equals(ordertype)?true:false);
+        model.addAttribute("story",p);
+
         if("reRelateStory".equals(relate)){
             return "/project/task/relation-release/product-al-req-data.pagelet";
         }else if ("noRelateStory".equals(relate)) {
@@ -305,6 +291,16 @@ public class BuildAction extends BaseController {
             return "/project/task/relation-release/product-al-no-req-data.pagelet";
         }
         return "";
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/buildList")
+    public List<ProjectBuild> findProjectBuild(ProjectBuild build) {
+
+        List<ProjectBuild> list = buildService.findListBuild(build);
+
+        return list;
     }
 
 
