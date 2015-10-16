@@ -45,11 +45,20 @@ public class ActionManagerImpl implements ActionManager {
         return actions;
     }
 
-    public Pager<SystemAction> findByPage(int start, int limit, SystemAction systemAction, String order,
-                                          String ordertype) {
+    public Pager<SystemAction> findByPage(int start, int limit, SystemAction systemAction, String order,String ordertype) {
+    	
+    	Pager<SystemAction> pager = systemActionDao.queryPager((start-1)*limit, limit,systemAction, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+		if(pager.getRecords().size()>0){
+			for(SystemAction s : pager.getRecords()){
+				s = systemActionDao.getActionAndObject(s);
+				s.setUrl(s.getActionObjectType());
+			}
+		}
+		return pager;
+    	
+    }
 
-public Pager<SystemAction> queryPager(int start,int limit ,Condition condition,SystemAction systemAction , String order,
-			String ordertype){
+public Pager<SystemAction> queryPager(int start,int limit ,Condition condition,SystemAction systemAction , String order,String ordertype){
 		
 		Pager<SystemAction> pager = systemActionDao.queryPager((start-1)*limit, limit,condition, systemAction, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
 		if(pager.getRecords().size()>0){
