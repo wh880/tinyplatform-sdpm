@@ -32,7 +32,8 @@ public class ProductLineAction extends BaseController {
 	private ProductLineService productLineService;
 	@Autowired
 	private ProductService productService;
-	
+
+
 	@RequestMapping("/save")
 	public String save(ProductLine productLine,Model model){
 		productLineService.addProductLine(productLine);
@@ -118,13 +119,28 @@ public class ProductLineAction extends BaseController {
 		if(list == null|| list.size()==0){
 			list = productLineService.findProductLineList(new ProductLine(), "productLineId", "desc");
 			request.getSession().setAttribute("productLineList",list);
-			
+
 			if(request.getSession().getAttribute("sessionProductLineId")==null){
 				request.getSession().setAttribute("sessionProductLineId",list.size()>0?list.get(0).getProductLineId():null);
 			}
 		}
 
 		return "redirect:" + adminPath + "/product";
-	}	
-	
+	}
+
+	@RequestMapping("/to")
+	public String to(HttpServletRequest request){
+		List<ProductLine> list = (List<ProductLine>) request.getSession().getAttribute("productLineList");
+		if(list == null|| list.size()==0){
+			list = productLineService.findProductLineList(new ProductLine(), "productLineId", "desc");
+			request.getSession().setAttribute("productLineList",list);
+
+			if(request.getSession().getAttribute("sessionProductLineId")==null){
+				request.getSession().setAttribute("sessionProductLineId",list.size()>0?list.get(0).getProductLineId():null);
+			}
+		}
+
+		return "/productLine/page/project/productLine.page";
+	}
+
 }

@@ -53,7 +53,7 @@
       #@elementItem()
         #@colLabel()评审结果：#end
         #@formControlDiv("col-4")
-             #@tinySelect("storyStatus" story?.storyStatus {"class":"input-text","rel":"22"})
+             #@tinySelect("storyStatus" story?.storyStatus {"placeholder":"","datatype":"*","nullmsg":"评审结果不能为空！","class":"input-text","rel":"22"})
 			#@tinyOptionItem("zh")确认通过#end
 			#@tinyOptionItem("en")有待明确#end
 			#@tinyOptionItem("ta")拒绝#end
@@ -66,7 +66,7 @@
             #@sdpmItem("指派给")
                 <div class="input-group">
              #@Tselect2F()
-                    #@Tselect2Body("storyAssignedTo" story?.storyAssignedTo {"class":"input-text select2","style":"width:296px","url":"/product/story/storyList","ajaxType":"assignTo","data":"" })
+                    #@Tselect2Body("storyAssignedTo" story?.storyAssignedTo {"placeholder":"","datatype":"*","nullmsg":"指派给不能为空！","class":"input-text select2","style":"width:296px","url":"/product/story/storyList","ajaxType":"assignTo","data":"" })
 
                     #end
                 #*    #@Tselect2Fix()<a href="#" class="r "></a><a href="#"></a>#end*#
