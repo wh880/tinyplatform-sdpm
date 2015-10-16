@@ -22,7 +22,7 @@ public interface DocBiz {
 	public List<DocumentDoclib> getDoclibList(DocumentDoclib doclib);
 	public DocumentDoclib getDocLibById(Integer key);
 	//查询后分页吧~//可以排序OrderBy id asc
-	public Pager<DocumentDoc> queryItemWithPage(Integer start,Integer limit,DocumentDoc doc,SearchInfos conditions,String groupOperate, String sortName,boolean asc);
+	public Pager<DocumentDoc> queryItemWithPage(Integer start,Integer limit,DocumentDoc doc, String statusCondition,SearchInfos conditions,String groupOperate, String sortName,boolean asc);
 	public Pager<DocumentDoclib> queryItemWithPage(Integer start, Integer limit,DocumentDoclib doclib,String sortName, boolean asc);
 	public int[] batchDelDocByIds(List<DocumentDoc> keys);
 

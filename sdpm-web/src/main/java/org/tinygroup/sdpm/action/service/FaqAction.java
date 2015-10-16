@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaqType;
 import org.tinygroup.sdpm.service.service.inter.FaqService;
@@ -20,12 +22,14 @@ import java.util.Map;
 
 
 @Controller
-@RequestMapping("/service/faq")
+@RequestMapping("/a/service/faq")
 public class FaqAction extends BaseController {
     @Autowired
     private FaqService faqService;
     @Autowired
     private FaqTypeService faqTypeService;
+    @Autowired
+    private ProductService productService;
 
     /*新增问题*/
     @RequestMapping("/form")
@@ -35,6 +39,11 @@ public class FaqAction extends BaseController {
             ServiceFaq faq = faqService.findFaq(id);
             model.addAttribute("faq",faq);
         }
+       /* faq中查询产品名称*/
+         /*调用product的服务，查询出产品表的对象*/
+        Product product = new Product();
+        List<Product> slas = productService.findProductList(product);
+        model.addAttribute("slas", slas);
         return "/service/faq/addquestion.page";
     }
 
@@ -50,7 +59,8 @@ public class FaqAction extends BaseController {
         {
             faq = faqService.updateFaq(faq);
         }
-        return "redirect:/service/faq/list";
+        model.addAttribute("faq", faq);
+        return "redirect:" + adminPath + "/service/faq/list";
     }
 
     /*对问题进行“编辑”*/
@@ -60,6 +70,9 @@ public class FaqAction extends BaseController {
             ServiceFaq faq = faqService.findFaq(id);
             model.addAttribute("faq", faq);
         }
+        Product product = new Product();
+        List<Product> slas = productService.findProductList(product);
+        model.addAttribute("slas", slas);
         return "/service/faq/addquestion.page";
     }
 
@@ -72,15 +85,10 @@ public class FaqAction extends BaseController {
                        @RequestParam(required = false, defaultValue = "asc") String ordertype,
                        Model model)
     {
-        /*查询问题总条数*/
-        /*Integer totalNum = faqService.selectcount(id);*/
-        /*List<ServiceFaq> list=faqService.getFaqList(faq);*/
-        /*分页*/
         start = (page - 1) * pageSize;
         limit = pageSize;
         Pager<ServiceFaq> list = faqService.getFaqpage(start, limit, serviceFaq);
         model.addAttribute("pager", list);//list.CurrentPage
-        //model.addAttribute("totalNum", totalNum);
         return "/service/faq/faqmenu.page";
     }
     /*删除*/
@@ -144,10 +152,31 @@ public class FaqAction extends BaseController {
 
     @RequestMapping("/deleteTree")
     public String deleteDept(Integer faqTypeId) {
-        faqTypeService.deleteFaqType(faqTypeId);
+        faqTypeService.deleteDept(faqTypeId);
         return "service/faq/faqmenu.page";
     }
 
+    @RequestMapping("/listTree")
+    public String listTree(ServiceFaq serviceFaq, Integer id, Integer start, Integer limit, Integer faqTypeId,
+                           @RequestParam(required = false, defaultValue = "1") int page,
+                           @RequestParam(required = false, defaultValue = "10") int pageSize,
+                           @RequestParam(required = false, defaultValue = "faqId") String order,
+                           @RequestParam(required = false, defaultValue = "asc") String ordertype,
+                           Model model) {
+        start = (page - 1) * pageSize;
+        limit = pageSize;
+        if (faqTypeId == null || faqTypeId == -1) {
+            serviceFaq.setFaqTypeId(null);
+            Pager<ServiceFaq> list = faqService.getFaqpage(start, limit, serviceFaq);
+            model.addAttribute("pager", list);
+        } else {
+            Pager<ServiceFaq> list = faqService.findUserByDeptId(start, limit, faqTypeId);
+            model.addAttribute("pager", list);
+        }
+        return "/service/faq/faqmenu.page";
+    }
+
+    /*faq左侧树的数据来源*/
     @ResponseBody
     @RequestMapping("/data")
     public List data(String check) {

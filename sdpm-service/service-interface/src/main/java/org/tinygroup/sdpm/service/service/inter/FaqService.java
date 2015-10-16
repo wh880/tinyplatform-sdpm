@@ -64,4 +64,5 @@ public interface FaqService {
      * @return
      */
    /* Integer selectcount(Integer id);*/
+    Pager<ServiceFaq> findUserByDeptId(Integer start, Integer limit, Integer deptId);
 }

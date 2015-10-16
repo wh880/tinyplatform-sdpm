@@ -35,4 +35,8 @@ public class FaqTypeServiceImpl implements FaqTypeService {
     public List<ServiceFaqType> deleteFaqType(Integer id) {
         return faqTypeManager.delete(id);
     }
+
+    public Integer deleteDept(Integer id) {
+        return faqTypeManager.deleteTree(id);
+    }
 }

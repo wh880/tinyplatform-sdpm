@@ -25,10 +25,10 @@ import java.util.Date;
  * 文档相关的
  */
 public class DocumentDoclib implements Serializable {
-	
+
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
-
+	
 	/** 
 	 * 文档库ID
 	 * 

@@ -28,11 +28,6 @@ public class DocumentDoc implements Serializable {
 	
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	/** 
 	 * 文档ID
@@ -67,7 +62,7 @@ public class DocumentDoc implements Serializable {
 	 * 
 	 * 所属分类
 	 */
-	private String docModule;
+	private Integer docModule;
 
 	/** 
 	 * 文档标题
@@ -159,10 +154,7 @@ public class DocumentDoc implements Serializable {
 	 * 已删除
 	 */
 	private String docDeleted;
-	
-	public DocumentDoc(){
-		docDeleted = "0";
-	}
+
 
 	public void setDocId(Integer docId){
 		this. docId = docId;
@@ -196,11 +188,11 @@ public class DocumentDoc implements Serializable {
 		return docLibId;
 	}
 
-	public void setDocModule(String docModule){
+	public void setDocModule(Integer docModule){
 		this. docModule = docModule;
 	}
 
-	public String getDocModule(){
+	public Integer getDocModule(){
 		return docModule;
 	}
 
