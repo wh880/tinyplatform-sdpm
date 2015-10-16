@@ -268,4 +268,12 @@ public class ServiceFaqDaoImpl extends TinyDslDaoSupport implements ServiceFaqDa
 		Select select = select(SERVICE_FAQTABLE.FAQ_ID.count()).from(SERVICE_FAQTABLE);
 		return getDslSession().count(select);
 	}*/
+	public Pager<ServiceFaq> getPagerByDeptId(int start, int limit, final Integer deptId, final OrderBy... orderBies) {
+
+		Select select = MysqlSelect.selectFrom(SERVICE_FAQTABLE).where(
+				and(
+						SERVICE_FAQTABLE.FAQ_TYPE_ID.eq(deptId),
+						SERVICE_FAQTABLE.DELETED.eq(0)));
+		return getDslSession().fetchPage(select, start, limit, false, ServiceFaq.class);
+	}
 }

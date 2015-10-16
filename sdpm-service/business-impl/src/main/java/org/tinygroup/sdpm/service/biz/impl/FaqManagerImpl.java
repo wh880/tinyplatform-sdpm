@@ -49,9 +49,8 @@ public class FaqManagerImpl implements FaqManager{
     }
 
 
-   /* *//*查询问题总条数*//*
-    public Integer selectcount(Integer id) {
-        return faqDao.SelectByKey();
-    }*/
+    public Pager<ServiceFaq> findUserListByDeptId(Integer start, Integer limit, Integer deptId) {
+        return faqDao.getPagerByDeptId(start, limit, deptId);
+    }
 
 }
