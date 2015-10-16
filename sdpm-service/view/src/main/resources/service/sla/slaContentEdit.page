@@ -39,7 +39,7 @@
 
         #@elementItem()
             #@sdpmItem("协议名称")
-                #tinyInput("text" "标题" ""{"datatype":"","id":"","class":"input-text"})
+                #tinyInput("text" "标题" ""{,"id":"","class":"input-text"})
             #end
         #end
 
