@@ -72,7 +72,7 @@ public class ActionManagerImpl implements ActionManager {
     }
 
 	public Pager<SystemAction> queryBetweenDate(int start, int limit,
-			SystemAction action, Date startDate, Date endDate, String sortName,
+			SystemAction action, String startDate, String endDate, String sortName,
 			boolean asc) {
 		// TODO Auto-generated method stub
 		if (StringUtil.isBlank(sortName)) {

@@ -314,7 +314,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 	}
 
 	public Pager<SystemAction> findByDate(int start, int limit,
-			SystemAction action, final Date startDate, final Date endDate,
+			SystemAction action, final String startDate, final String endDate,
 			final OrderBy... orderArgs) {
 		if(action==null){
 			action=new SystemAction();

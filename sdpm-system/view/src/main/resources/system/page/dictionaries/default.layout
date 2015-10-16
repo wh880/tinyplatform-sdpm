@@ -20,8 +20,8 @@
 	#if(page=="dict")	
 	 #@tinyForm("dictEditform" "" "post" {"class":""}) 
 		#@topSearch() 
-		    #simpleText("编码" "" "width:25%")
-		    #simpleText("中文名" "" "width:25%")
+		    #simpleText("编码" "dictKey" "width:25%")
+		    #simpleText("中文名" "dictValue" "width:25%")
 		 	#@btnSubmit("icon-search") 搜索#end
 		 	
 		#end
@@ -31,8 +31,8 @@
 	#if(page=="module")
 	   #@tinyForm("dictEditform" "" "post" {"class":""}) 
 		#@topSearch() 
-		    #simpleText("moduleName" "" "width:25%")
-		    #simpleText("中文名" "" "width:25%")
+		    #simpleText("编码" "moduleName" "width:25%")
+		    #simpleText("中文名" "moduleTitle" "width:25%")
 		 	#@btnSubmit("icon-search") 搜索#end
 		 	
 		#end
