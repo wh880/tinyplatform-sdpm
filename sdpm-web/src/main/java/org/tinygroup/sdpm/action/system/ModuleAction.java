@@ -122,13 +122,21 @@ public class ModuleAction extends BaseController {
         model.addAttribute("module", module);
         return "/system/page/dictionaries/dict_view.pagelet";
     }
-
+    @ResponseBody
     @RequestMapping("delete")
-    public String deleteModule(Integer moduleId) {
-        if (moduleId != null) {
-            moduleService.deleteAndedit(moduleId);
-        }
-        return "redirect: list?moduleType=dict";
+    public Map<String, String> deleteModule(Integer id) {
+        Map<String, String> map = new HashedMap();
+        
+          int s=  moduleService.deleteAndedit(id);
+          if(s>0){
+        	  map.put("status", "y");
+              map.put("info", "删除成功");
+          }else{
+        	  map.put("status", "n");
+        	  map.put("info", "删除失败");
+          }
+        
+        return map;
     }
 //    @RequestMapping("dcit/delete")
 //    public String dictdeleteModule(Integer moduleId) {
