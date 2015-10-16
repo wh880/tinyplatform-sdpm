@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.action.system;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,10 @@ import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.util.ModuleUtil;
 
 import javax.servlet.http.HttpServletResponse;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -126,15 +129,12 @@ public class ModuleAction extends BaseController {
     @RequestMapping("delete")
     public Map<String, String> deleteModule(Integer id) {
         Map<String, String> map = new HashedMap();
-        
-          int s=  moduleService.deleteAndedit(id);
-          if(s>0){
-        	  map.put("status", "y");
-              map.put("info", "删除成功");
-          }else{
-        	  map.put("status", "n");
-        	  map.put("info", "删除失败");
-          }
+        if(id!=null) {
+            delteModule(id);
+        }
+          map.put("status", "y");
+          map.put("info", "删除成功");
+
         
         return map;
     }
@@ -149,7 +149,7 @@ public class ModuleAction extends BaseController {
     @RequestMapping("ajax/delete")
     public Map<String, String> ajaxDeleteModule(Integer moduleId) {
         if (moduleId != null) {
-            moduleService.deleteById(moduleId);
+            delteModule(moduleId);;
         }
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");
@@ -392,7 +392,9 @@ public class ModuleAction extends BaseController {
     	
     	module.setModuleType("story");
         List<SystemModule> list = moduleService.findAllModules(module);
+        String modulePath = ModuleUtil.getPath(module.getModuleParent(), ">", moduleService, null, false);
         model.addAttribute("list", list);
+        model.addAttribute("modulePath", modulePath);
         return "/product/page/project/product-modular.page";
     }
 
@@ -427,5 +429,15 @@ public class ModuleAction extends BaseController {
         mapTop.put("edit", true);
         mapTop.put("name", systemModule.getModuleName());
         maps.add(mapTop);
+    }
+
+    private void delteModule(int id){
+        SystemModule module = new SystemModule();
+        module.setModuleParent(id);
+        List<SystemModule> moduleList = moduleService.findModuleList(module);
+        for(SystemModule module1 : moduleList){
+            deleteModule(module1.getModuleId());
+        }
+        moduleService.deleteById(id);
     }
 }

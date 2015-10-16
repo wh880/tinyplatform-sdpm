@@ -208,7 +208,7 @@ public class TestCaseAction extends BaseController {
 	private String testResult(List<CaseStepResult> caseStepResults){
 		String result = "1";
 		for (CaseStepResult c : caseStepResults){
-			if(c.getResult() != "1" && result != "1"){
+			if( !"1".equals(c.getResult()) &&  !"1".equals(result)){
 				result=c.getResult();
 			}
 		}

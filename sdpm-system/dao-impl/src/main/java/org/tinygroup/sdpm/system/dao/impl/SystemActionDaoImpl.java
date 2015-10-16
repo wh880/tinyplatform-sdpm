@@ -16,44 +16,33 @@
 
 package org.tinygroup.sdpm.system.dao.impl;
 
-import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.SYSTEM_ACTIONTABLE;
-import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
-import static org.tinygroup.tinysqldsl.Delete.delete;
-import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.select;
-import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
-import static org.tinygroup.tinysqldsl.Select.selectFrom;
-import static org.tinygroup.tinysqldsl.Update.update;
-import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.system.dao.SystemActionDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
+import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.SYSTEM_ACTIONTABLE;
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.select;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 @Repository
 
 public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActionDao {
@@ -168,7 +157,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 		return getDslTemplate().queryPager(start, limit, systemAction, false, new SelectGenerateCallback<SystemAction>() {
 
 			public Select generate(SystemAction t) {
-				Select select = select(SYSTEM_ACTIONTABLE.ALL,FragmentSql.fragmentSelect("org_user_account actorName")).from(SYSTEM_ACTIONTABLE).join(
+				Select select = MysqlSelect.select(SYSTEM_ACTIONTABLE.ALL, FragmentSql.fragmentSelect("org_user_account actorName")).from(SYSTEM_ACTIONTABLE).join(
 						leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(SYSTEM_ACTIONTABLE.ACTION_ACTOR))).where(
 				and(
 					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(t.getActionObjectType()),
@@ -277,14 +266,14 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 	}
 
 	public SystemAction getActionAndObject(final SystemAction systemAction) {
-		return getDslTemplate().getByKey(systemAction.getActionId(), SystemAction.class, new SelectGenerateCallback<Serializable>() {
-			@SuppressWarnings("rawtypes")
-			public Select generate(Serializable t) {
-				return select(FragmentSql.fragmentSelect("a.*, "+ActionEnum.getName(systemAction.getActionObjectType())+" objectName"))
-						.from(FragmentSql.fragmentFrom("system_action a JOIN "+ActionEnum.getTable(systemAction.getActionObjectType())+" b ON a.action_object_id = b."+ActionEnum.getPrimary(systemAction.getActionObjectType())))
-						.where(FragmentSql.fragmentCondition("a.action_id="+systemAction.getActionId()));
-			}
-		});
+
+		Select select = select(FragmentSql.fragmentSelect("a.*, "+ActionEnum.getName(systemAction.getActionObjectType())+" as objectName"))
+				.from(FragmentSql.fragmentFrom(
+						"system_action a JOIN "+ActionEnum.getTable(systemAction.getActionObjectType())
+								+" b ON a.action_object_id = b."+ActionEnum.getPrimary(systemAction.getActionObjectType())))
+				.where(FragmentSql.fragmentCondition("a.action_id="+systemAction.getActionId()));
+
+		return getDslSession().fetchOneResult(select,SystemAction.class);
 	}
 	
 	public Pager<SystemAction> queryPager(int start,int limit ,final Condition dateCondition,SystemAction systemAction ,final OrderBy... orderBies) {
@@ -314,7 +303,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 	}
 
 	public Pager<SystemAction> findByDate(int start, int limit,
-			SystemAction action, final Date startDate, final Date endDate,
+			SystemAction action, final String startDate, final String endDate,
 			final OrderBy... orderArgs) {
 		if(action==null){
 			action=new SystemAction();
@@ -322,7 +311,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 		return getDslTemplate().queryPager(start, limit, action, false, new SelectGenerateCallback<SystemAction>() {
 
 			public Select generate(SystemAction t) {
-				Select select = select(SYSTEM_ACTIONTABLE.ALL,FragmentSql.fragmentSelect("org_user_account actorName")).from(SYSTEM_ACTIONTABLE).join(
+				Select select = MysqlSelect.select(SYSTEM_ACTIONTABLE.ALL, FragmentSql.fragmentSelect("org_user_account actorName")).from(SYSTEM_ACTIONTABLE).join(
 						leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(SYSTEM_ACTIONTABLE.ACTION_ACTOR))).where(
 				and(
 					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(t.getActionObjectType()),

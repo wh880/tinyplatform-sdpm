@@ -29,7 +29,8 @@
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${var?.orgUserId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #else
-                #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?id="+var?.orgUserId "ml-5")
+                #iconOperations(
+                    "#myModal" m.icon m.name m.map.width m.map.heigth adminPath+m.href+"?id="+var?.orgUserId "ml-5")
             #end
 
         #end

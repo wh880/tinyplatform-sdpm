@@ -3,10 +3,12 @@ package org.tinygroup.sdpm.action.system;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +21,7 @@ import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletResponse;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -30,6 +33,19 @@ public class EffortAction extends BaseController{
 	private EffortService effortService;
 	@Autowired
 	private TaskService taskService;
+	@RequestMapping("")
+	public String note(){
+		
+		return "/project/note/index.page";
+	}
+	@RequestMapping("date/{type}")
+	public String date(@PathVariable(value="type")String type){
+		if("1".equals(type)){
+			return "/project/note/notetable.page";
+		}
+		return "/project/note/notetable.page";
+	}
+
 	@RequestMapping("list")
 	public String list(int taskId,SystemEffort effort,Model model){
 		String order="effort_date";
@@ -105,7 +121,7 @@ public class EffortAction extends BaseController{
    		return map;
 	}
 	@RequestMapping("date")
-	public String findByDate(int start,int limit,String order ,String ordertype, int date,SystemEffort systemEffort,Model model) throws ParseException{
+	public String findByDate(int start,int limit,String order ,String ordertype,  int date,SystemEffort systemEffort,Model model) throws ParseException{
 		Date startDate = new Date();
 		Date endDate = new Date();
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");

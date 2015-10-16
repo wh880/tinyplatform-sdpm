@@ -31,7 +31,8 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.LogUtil;import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -141,14 +142,16 @@ public class BugAction extends BaseController {
 		bug.setBugConfirmed(1);
 		bugService.updateBug(bug);
 
-		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
-		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
-		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
-		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("makeSure");
-		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
-		logService.log(systemAction);
+	
+		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+				, LogUtil.LogAction.BUGCONFIRMED
+				,String.valueOf(bug.getBugId())
+				,UserUtils.getUserId()
+				,String.valueOf(bug.getProductId())
+				,String.valueOf(bug.getProjectId())
+				,null
+				,null
+				,systemAction.getActionComment());
 		return "redirect:"+"/a/quality/bug";
 	}
 
@@ -161,18 +164,21 @@ public class BugAction extends BaseController {
 
 	@RequestMapping("/assignTo")
 	public String assign(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
-		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
+
 		bug.setBugAssignedDate(new Date());
-		bug.setBugAssignedTo(user != null?user.getOrgUserId():"0");
+
 		bugService.updateBug(bug);
 
-		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
-		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
-		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("assignTo");
-		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
-		logService.log(systemAction);
+	
+		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+				, LogUtil.LogAction.ASSIGNED
+				,String.valueOf(bug.getBugId())
+				,UserUtils.getUserId()
+				,String.valueOf(bug.getProductId())
+				,String.valueOf(bug.getProjectId())
+				,null
+				,null
+				,systemAction.getActionComment());
 		return "redirect:"+"/a/quality/bug";
 	}
 	
@@ -198,18 +204,21 @@ public class BugAction extends BaseController {
 	}
 	@RequestMapping("/solve")
 	public String solve(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
-		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
-		bug.setBugResolvedBy(user != null?user.getOrgUserId():"0");
+
+		bug.setBugResolvedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		bug.setBugStatus("2");
 		bugService.updateBug(bug);
 
-		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
-		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
-		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("resolve");
-		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
-		logService.log(systemAction);
+
+		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+				, LogUtil.LogAction.RESOLVED
+				,String.valueOf(bug.getBugId())
+				,UserUtils.getUserId()
+				,String.valueOf(bug.getProductId())
+				,String.valueOf(bug.getProjectId())
+				,null
+				,null
+				,systemAction.getActionComment());
 		return "redirect:"+"/a/quality/bug";
 	}
 	
@@ -224,19 +233,22 @@ public class BugAction extends BaseController {
 
 	@RequestMapping("/close")
 	public String close(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
-		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
-		bug.setBugClosedBy(user != null?user.getOrgUserId():"0");
+
+		bug.setBugClosedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		bug.setBugClosedDate(new Date());
 		bug.setBugStatus("3");
 		bugService.updateBug(bug);
 
-		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
-		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
-		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("close");
-		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
-		logService.log(systemAction);
+
+		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+				, LogUtil.LogAction.CLOSED
+				,String.valueOf(bug.getBugId())
+				,UserUtils.getUserId()
+				,String.valueOf(bug.getProductId())
+				,String.valueOf(bug.getProjectId())
+				,null
+				,null
+				,systemAction.getActionComment());
 		return "redirect:"+"/a/quality/bug";
 	}
 	
@@ -250,19 +262,23 @@ public class BugAction extends BaseController {
 
 	@RequestMapping("/edit")
 	public String edit(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
-		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
+
 		QualityBug qualityBug = bugService.findById(bug.getBugId());
-		bug.setBugLastEditedBy(user != null?user.getOrgUserId():"0");
+
+		bug.setBugLastEditedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		bug.setBugLastEditedDate(new Date());
 		bugService.updateBug(bug);
 
-		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
-		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
-		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("edit");
-		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
-		logService.log(qualityBug,bug,systemAction);
+
+		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+				, LogUtil.LogAction.EDITED
+				,String.valueOf(bug.getBugId())
+				,UserUtils.getUserId()
+				,String.valueOf(bug.getProductId())
+				,String.valueOf(bug.getProjectId())
+				,qualityBug
+				,bug
+				,systemAction.getActionComment());
 		return "redirect:"+"/a/quality/bug";
 	}
 	
@@ -347,25 +363,28 @@ public class BugAction extends BaseController {
 	@RequestMapping(value = "/save")
 	public String save(QualityBug bug,SystemAction systemAction,@RequestParam(value = "file", required = false)MultipartFile[] file,
 			String[] title, HttpServletRequest request){
-		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
+
 		bug.setBugOpenedDate(new Date());
-		bug.setBugOpenedBy(user != null?user.getOrgUserId():"0");
+
+		bug.setBugOpenedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		QualityBug qbug=bugService.addBug(bug);
 		ProfileUtil profileUtil = new ProfileUtil();
 		try {
 			profileUtil.uploads(file, qbug.getBugId(), "bug", title);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
-		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
-		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("openBug");
-		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
-		logService.log(systemAction);
+
+		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+				, LogUtil.LogAction.OPENED
+				,String.valueOf(bug.getBugId())
+				,UserUtils.getUserId()
+				,String.valueOf(bug.getProductId())
+				,String.valueOf(bug.getProjectId())
+				,null
+				,null
+				,systemAction.getActionComment());
 		return "redirect:"+"/a/quality/bug";
 	}
 
@@ -401,6 +420,17 @@ public class BugAction extends BaseController {
 			list.add(bug);
 		}	
 		bugService.batchDeleteBug(list);
+		for(QualityBug bug:list){
+			LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+					, LogUtil.LogAction.DELETED
+					,String.valueOf(bug.getBugId())
+					,UserUtils.getUserId()
+					,String.valueOf(bug.getProductId())
+					,String.valueOf(bug.getProjectId())
+					,null
+					,null
+					,null);
+		}
 		map.put("status", "success");
 	    map.put("info", "删除成功");
 	    return map;

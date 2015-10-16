@@ -22,6 +22,7 @@ public class DeptAction extends BaseController {
     @Autowired
     private UserService userService;
 
+    @ResponseBody
     @RequestMapping("/add")
     public Map addDept(Integer orgDeptParent, String orgDeptName) {
         OrgDept dept = new OrgDept();
@@ -34,6 +35,7 @@ public class DeptAction extends BaseController {
         return map;
     }
 
+    @ResponseBody
     @RequestMapping("edit")
     public Map editDept(Integer orgDeptId, String orgDeptName) {
         OrgDept dept = deptService.findDept(orgDeptId);
@@ -45,6 +47,7 @@ public class DeptAction extends BaseController {
         return map;
     }
 
+    @ResponseBody
     @RequestMapping("delete")
     public Map deleteDept(Integer orgDeptId) {
         deptService.deleteDept(orgDeptId);
@@ -67,16 +70,16 @@ public class DeptAction extends BaseController {
     public List data(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<OrgDept> deptList = deptService.findDeptList(new OrgDept());
-        if (check == null || !check.equals("n")) {
-            Map<String, Object> map1 = new HashMap<String, Object>();
-            map1.put("id", -1);
-            map1.put("pId", 0);
-            map1.put("open", true);
-            map1.put("add", true);
-            map1.put("edit", true);
-            map1.put("name", "所有部门");
-            list.add(map1);
-        }
+//        if (check == null || !check.equals("n")) {
+//            Map<String, Object> map1 = new HashMap<String, Object>();
+//            map1.put("id", -1);
+//            map1.put("pId", 0);
+//            map1.put("open", true);
+//            map1.put("add", true);
+//            map1.put("edit", true);
+//            map1.put("name", "所有部门");
+//            list.add(map1);
+//        }
 
         for (OrgDept d : deptList) {
             Map<String, Object> map = new HashMap<String, Object>();

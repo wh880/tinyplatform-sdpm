@@ -490,6 +490,7 @@
         <init-param name="engineId" value="projectEngine"></init-param>
         <template-function name="typeInfoFunction"></template-function>
         <template-function name="dictFunction"></template-function>
+        <template-function name="stdFunction"></template-function>
     </template-config>
 
 
