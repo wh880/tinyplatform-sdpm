@@ -317,6 +317,8 @@ public class ModuleAction extends BaseController {
     		return "/product/page/project/togglebox.page";
     	}else if ("promodule".equals(forwordPager)) {
     		return "/product/page/project/product-modular.page";
+    	}else if("doc".equals(forwordPager)){
+    		return "/document/treeNew.page";
     	}
         return "";
 
@@ -333,6 +335,8 @@ public class ModuleAction extends BaseController {
     		return "/product/page/project/togglebox.page";
     	}else if ("promodule".equals(forwordPager)) {
     		return "/product/page/project/product-modular.page";
+    	}else if("doc".equals(forwordPager)){
+    		return "/document/treeNew.page";
     	}
         return "";
     }
@@ -345,6 +349,8 @@ public class ModuleAction extends BaseController {
     		return "/product/page/project/togglebox.page";
     	}else if ("promodule".equals(forwordPager)) {
     		return "/product/page/project/product-modular.page";
+    	}else if("doc".equals(forwordPager)){
+    		return "/document/treeNew.page";
     	}
         return "";
     }
