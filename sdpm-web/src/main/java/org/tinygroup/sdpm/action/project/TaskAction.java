@@ -202,16 +202,16 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(ProjectTask task,  @RequestParam(value="file",required=false)MultipartFile file,Model model) {
+    public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
         if (task.getTaskId() == null) {
-          ProjectTask newtask=  taskService.addTask(task);
-          ProfileUtil profileUtil = new ProfileUtil();
-          try {
-			profileUtil.uploadNoTitle(file, newtask.getTaskId(), "task");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            ProjectTask newtask = taskService.addTask(task);
+            ProfileUtil profileUtil = new ProfileUtil();
+            try {
+                profileUtil.uploadNoTitle(file, newtask.getTaskId(), "task");
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         } else {
             taskService.updateTask(task);
         }
@@ -220,7 +220,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/closesave", method = RequestMethod.POST)
-    public String closesave(ProjectTask task,Model model, SystemAction systemAction) {
+    public String closesave(ProjectTask task, Model model, SystemAction systemAction) {
         taskService.updateCloseTask(task);
 
         systemAction.setActionObjectId(String.valueOf(task.getTaskId()));
@@ -283,9 +283,14 @@ public class TaskAction extends BaseController {
 
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
         SystemModule module = new SystemModule();
-        module.setModuleType("project");
+        module.setModuleType("task");
         module.setModuleRoot(projectId);
         List<SystemModule> moduleList = moduleService.findModuleList(module);
+        List<SystemModule> moduleList2 = moduleService.findAllModules(module);
+        for (SystemModule m : moduleList) {
+            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
+        }
+
         List<ProductStory> storyList = storyService.findStoryByProject(projectId);
         ProductStory story = new ProductStory();
         if (storyId != null) {
@@ -387,6 +392,12 @@ public class TaskAction extends BaseController {
             taskService.batchAdd(taskList, projectId);
             return "project/task/index.page";
         }
+    }
+
+    @RequestMapping("/dynamic")
+    public String jumpDynamic() {
+
+        return null;
     }
 
 

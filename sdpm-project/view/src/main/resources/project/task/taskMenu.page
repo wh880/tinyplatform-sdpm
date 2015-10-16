@@ -28,11 +28,22 @@
 <ul class="dropdown-menu" aria-labelledby="dLabel">
     #for(var : statuMap.keySet() )
     #if(var != 0)
-        <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page?statu=${var}">${statuMap.get(var)}</a></li>
+        <li><a class="projectMore" val="${var}">${statuMap.get(var)}</a></li>
     #end
 #end
 </ul>
 </div>
+    <script>
+        $(function () {
+            var actionUrl = $("#taskTable").attr("data-url");
+            $(".projectMore").click(function (e) {
+                $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
+                $("#taskTable").trigger("refresh");
+                //console.log(actionUrl);
+//            触发ajax请求
+            });
+        });
+    </script>
 
 ##分组查看
     <div class="btn-group btnDropDown">
@@ -91,13 +102,6 @@
             </ul>
         </div>
     #end
-
-##    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/reportform.page">#buttonIcon(iconClass="icon-bar-chart")
-##        报表</a>&nbsp;
-##    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/batchAdd.page">#buttonIcon(iconClass="icon-plus-sign")
-##        批量增加</a>&nbsp;
-##    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/add.page">#buttonIcon(iconClass="icon-plus")建任务</a>&nbsp;
-
     #foreach(m:menuManager.getScopeMenus("pro-taskmenu2-op"))
         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
     #end
