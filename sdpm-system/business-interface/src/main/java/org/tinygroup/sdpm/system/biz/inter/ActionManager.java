@@ -1,7 +1,9 @@
 package org.tinygroup.sdpm.system.biz.inter;
 
+import java.util.Date;
 import java.util.List;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
@@ -52,4 +54,16 @@ public interface ActionManager {
 	  * @return
 	  */
 	 Pager<SystemAction> queryPager(int start,int limit ,Condition condition,SystemAction systemAction , String order,String ordertype);
+	/**
+	 * 通过时间段查询
+	 * @param start
+	 * @param limit
+	 * @param action
+	 * @param startDate
+	 * @param endDate
+	 * @param orderArgs
+	 * @return
+	 */
+	Pager<SystemAction> queryBetweenDate(int start,int limit,SystemAction action,Date startDate,Date endDate,
+			String sortName,boolean asc);
 }

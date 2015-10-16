@@ -28,6 +28,7 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -293,7 +294,8 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 		return getDslTemplate().queryPager(start, limit, systemAction, false, new SelectGenerateCallback<SystemAction>() {
 
 			public Select generate(SystemAction t) {
-				Select select = MysqlSelect.selectFrom(SYSTEM_ACTIONTABLE).where(
+				Select select = select(SYSTEM_ACTIONTABLE.ALL,FragmentSql.fragmentSelect("org_user_account actorName")).from(SYSTEM_ACTIONTABLE).join(
+						leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(SYSTEM_ACTIONTABLE.ACTION_ACTOR))).where(
 				and(
 					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(t.getActionObjectType()),
 					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(t.getActionObjectId()),
@@ -307,6 +309,38 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 					SYSTEM_ACTIONTABLE.ACTION_ACTION.eq(t.getActionAction()),
 					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.eq(t.getActionEfforted())));
 		return addOrderByElements(select, orderBies);
+			}
+		});
+	}
+
+	public Pager<SystemAction> findByDate(int start, int limit,
+			SystemAction action, final Date startDate, final Date endDate,
+			final OrderBy... orderArgs) {
+		if(action==null){
+			action=new SystemAction();
+		}
+		return getDslTemplate().queryPager(start, limit, action, false, new SelectGenerateCallback<SystemAction>() {
+
+			public Select generate(SystemAction t) {
+				Select select = select(SYSTEM_ACTIONTABLE.ALL,FragmentSql.fragmentSelect("org_user_account actorName")).from(SYSTEM_ACTIONTABLE).join(
+						leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(SYSTEM_ACTIONTABLE.ACTION_ACTOR))).where(
+				and(
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(t.getActionObjectType()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(t.getActionObjectId()),
+					SYSTEM_ACTIONTABLE.ACTION_PROJECT.eq(t.getActionProject()),
+					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.eq(t.getActionProduct()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(t.getActionActor()),
+					
+					startDate!=null||endDate!=null?SYSTEM_ACTIONTABLE.ACTION_DATE.between(startDate, endDate):
+					
+						SYSTEM_ACTIONTABLE.ACTION_DATE.eq(t.getActionDate()),
+					
+					SYSTEM_ACTIONTABLE.ACTION_COMMENT.eq(t.getActionComment()),
+					SYSTEM_ACTIONTABLE.ACTION_EXTRA.eq(t.getActionExtra()),
+					SYSTEM_ACTIONTABLE.ACTION_READ.eq(t.getActionRead()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTION.eq(t.getActionAction()),
+					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.eq(t.getActionEfforted())));
+		return addOrderByElements(select, orderArgs);
 			}
 		});
 	}

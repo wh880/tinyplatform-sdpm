@@ -31,12 +31,43 @@
             #@div(divClass="operationbar")
                 #@tinyForm("thisform" "" "" {"class":"test"})
                     #@formControlDiv("col-1")
-                        #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
-                            #@tinyOptionItem("zh")中国#end
-                            #@tinyOptionItem("en")英国#end
-                            #@tinyOptionItem("ta")泰国#end
+                        #@navSelect2("user" "user")
+                            #@navSelect2Nav()
+                                #if(userList)
+                                    #for(user:userList)
+                                    #if(user?.orgUserId == id)
+                                        ${user?.orgUserRealName}
+                                    #end
+                                #end
+                            #else
+                            用户
+                            #end
+
+                        <span class="caret"></span>#end
+                        #@navSelect2Body()
+                            #@navSelect2Data()
+                            <option value=""></option>
+                            <optgroup label="用户">
+                                #for(user:userList)
+                                <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+                            #end
+                        </optgroup>
+
                         #end
                     #end
+                    #hiddenInput("userIdHidden","orgUserId","","")
+
+                <script type="text/javascript">
+
+                    $(function () {
+                        $("#user-select").on("change", function () {
+                            window.location.href = "${TINY_CONTEXT_PATH +adminPath}/org/user/testtask1?choose=3&id=" + $(this).val();
+                        });
+                    });
+
+                </script>
+                #end
+            #end
                 <span style="padding-top: 5px;float: left">
                     &nbsp;&gt;
                     #foreach(m:menuManager.getScopeMenus("org-user-detail"))

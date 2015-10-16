@@ -3,6 +3,8 @@ package org.tinygroup.sdpm.service.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.service.biz.inter.SlaManager;
 import org.tinygroup.sdpm.service.dao.ServiceSlaDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
@@ -48,8 +50,8 @@ public class SlaManagerImpl implements SlaManager {
         return slaDao.getListByClientId(clientId);
     }
 
-    public Pager<ServiceSla> findPager(Integer start, Integer limit, ServiceSla sla, Integer treeId) {
-        return slaDao.queryPagerTree(start, limit, sla, treeId);
+    public Pager<ServiceSla> findPager(Integer start, Integer limit, ServiceSla sla, Integer treeId, String order, String ordertype) {
+        return slaDao.queryPagerTree(start, limit, sla, treeId, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
     }
     public ServiceSla judgeClient(String clientName) {
         return slaDao.judge(clientName);
