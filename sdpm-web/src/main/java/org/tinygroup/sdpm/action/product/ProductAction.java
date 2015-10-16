@@ -178,7 +178,7 @@ public class ProductAction extends BaseController {
         Pager<Product> pagerProduct = productService.findProductPager(page, pagesize, product, order, ordertype);
 
         model.addAttribute("pagerProduct", pagerProduct);
-        return adminPath + "/product/data/allproductdata.pagelet";
+        return  "/product/data/allproductdata.pagelet";
     }
 
     @RequestMapping("/findManager")

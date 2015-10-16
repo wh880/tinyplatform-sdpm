@@ -18,9 +18,9 @@
 				#if(m.map.type=="aModal")
 					#@iconOperations("#myModal" m.icon m.name "800" "500" url "ml-5")${m.name}#end
 				#elseif(m.map.type=="editor")
-                    <a href="${TINY_CONTEXT_PATH}${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                    <a href="${TINY_CONTEXT_PATH +adminPath}${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 				#elseif(m.map.type=="delete")
-					#@tinyTableItemRemove(TINY_CONTEXT_PATH+url productLine.productLineId)<i class="${m.icon}"></i>#end
+					#@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+url productLine.productLineId)<i class="${m.icon}"></i>#end
 				#else
                     <a href="javascript :;" onClick="javascript :history.back(-1);"
                        title="返回">#buttonIcon(iconClass=m.icon)</a>
@@ -29,7 +29,7 @@
 
 
 			#*				#@iconOperations("#myModal" "icon-off" "关闭" "800" "500" "/productLine/page/tabledemo/close.pagelet" "ml-5")关闭#end
-                            <a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/add.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
+                            <a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/tabledemo/add.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
                             <a href="#" title="删除">#buttonIcon(iconClass="icon-common-delete icon-remove")</a>
                             <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>*#
 			</span>

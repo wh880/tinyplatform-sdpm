@@ -98,12 +98,12 @@ public class ModuleUtil {
     private static String mergePath(String division, String paths, ModuleService moduleService){
         String[] path = paths.split(",");
         if(path.length>1){
-            return division+moduleService.findById(Integer.parseInt(path[0])).getModuleName()+division+ mergePath(division,paths.substring(path[0].length()+1),moduleService);
+            return moduleService.findById(Integer.parseInt(path[0])).getModuleName()+division+ mergePath(division,paths.substring(path[0].length()+1),moduleService);
         }else if(path.length>0){
             if("".equals(path[0])){
                 return "";
             }
-            return division+moduleService.findById(Integer.parseInt(path[0])).getModuleName();
+            return moduleService.findById(Integer.parseInt(path[0])).getModuleName();
         }
         return "";
     }

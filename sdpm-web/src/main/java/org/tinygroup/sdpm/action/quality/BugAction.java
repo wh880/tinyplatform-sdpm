@@ -147,7 +147,7 @@ public class BugAction extends BaseController {
 		bugService.updateBug(bug);
 
 		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
-		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
 		systemAction.setActionObjectType("bug");
@@ -171,7 +171,7 @@ public class BugAction extends BaseController {
 		bug.setBugAssignedTo(user != null?user.getOrgUserId():"0");
 		bugService.updateBug(bug);
 
-		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
 		systemAction.setActionObjectType("bug");
@@ -208,7 +208,7 @@ public class BugAction extends BaseController {
 		bug.setBugStatus("2");
 		bugService.updateBug(bug);
 
-		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
 		systemAction.setActionObjectType("bug");
@@ -235,7 +235,7 @@ public class BugAction extends BaseController {
 		bug.setBugStatus("3");
 		bugService.updateBug(bug);
 
-		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
 		systemAction.setActionObjectType("bug");
@@ -261,7 +261,7 @@ public class BugAction extends BaseController {
 		bug.setBugLastEditedDate(new Date());
 		bugService.updateBug(bug);
 
-		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
 		systemAction.setActionObjectType("bug");
@@ -339,7 +339,7 @@ public class BugAction extends BaseController {
 		bug.setBugOpenedBy(user != null?user.getOrgUserId():"0");
 		bugService.addBug(bug);
 
-		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
 		systemAction.setActionObjectType("bug");
@@ -364,7 +364,7 @@ public class BugAction extends BaseController {
 			e.printStackTrace();
 		}
 
-		systemAction.setActionObjectId(bug.getBugId());
+		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
 		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
 		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
 		systemAction.setActionObjectType("bug");

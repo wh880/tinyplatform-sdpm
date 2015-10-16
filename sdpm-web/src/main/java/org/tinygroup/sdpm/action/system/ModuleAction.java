@@ -267,7 +267,7 @@ public class ModuleAction extends BaseController {
 
     private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, String parent) {
         for (SystemModule systemModule : systemModules) {
-            if (!parent.contains("p")&&systemModule.getModuleParent() == Integer.valueOf(parent)) {
+            if (!parent.contains("p")&&systemModule.getModuleParent() == Integer.parseInt(parent)) {
                 mergeSingleModule(systemModules,systemModule,maps,parent);
             }
             if(parent.contains("p")&&systemModule.getModuleParent() == 0){
@@ -325,6 +325,8 @@ public class ModuleAction extends BaseController {
     		return "/product/page/project/togglebox.page";
     	}else if ("promodule".equals(forwordPager)) {
     		return "/product/page/project/product-modular.page";
+    	}else if("doc".equals(forwordPager)){
+    		return "/document/treeNew.page";
     	}
         return "";
 
@@ -341,6 +343,8 @@ public class ModuleAction extends BaseController {
     		return "/product/page/project/togglebox.page";
     	}else if ("promodule".equals(forwordPager)) {
     		return "/product/page/project/product-modular.page";
+    	}else if("doc".equals(forwordPager)){
+    		return "/document/treeNew.page";
     	}
         return "";
     }
@@ -353,6 +357,8 @@ public class ModuleAction extends BaseController {
     		return "/product/page/project/togglebox.page";
     	}else if ("promodule".equals(forwordPager)) {
     		return "/product/page/project/product-modular.page";
+    	}else if("doc".equals(forwordPager)){
+    		return "/document/treeNew.page";
     	}
         return "";
     }

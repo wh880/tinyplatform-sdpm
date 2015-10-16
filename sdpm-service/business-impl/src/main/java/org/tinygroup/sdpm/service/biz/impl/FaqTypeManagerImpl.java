@@ -41,4 +41,8 @@ public class FaqTypeManagerImpl implements FaqTypeManager{
         faqType.setDeleted(id);
         return faqTypeDao.query(faqType);
     }
+
+    public Integer deleteTree(Integer id) {
+        return faqTypeDao.deleteByKey(id);
+    }
 }

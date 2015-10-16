@@ -77,7 +77,10 @@ public class DocAction {
 			asc = false;
 		}
 		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
-		Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, searchInfos,groupOperate, order, asc);
+		if(doc.getDocModule() != null && doc.getDocModule() > 0){
+			
+		}
+		Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, null,searchInfos,groupOperate, order, asc);
 		model.addAttribute("docpager", docpager);
 		return "/data/datalist.pagelet";
 	}
@@ -305,7 +308,7 @@ public class DocAction {
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
-		Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc,searchInfos,groupOperate, NameUtil.resolveNameDesc(order), asc);
+		Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, null, searchInfos,groupOperate, NameUtil.resolveNameDesc(order), asc);
 		model.addAttribute("pager", docpager);
 		return "/product/data/archivedata.pagelet";
 	}

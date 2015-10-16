@@ -77,7 +77,7 @@ public class TestCaseAction extends BaseController {
 		caseStepService.batchAdd(insertStep(step,expect,testcase));
 
 		SystemAction systemAction = new SystemAction();
-		systemAction.setActionObjectId(testcase.getCaseId());
+		systemAction.setActionObjectId(String.valueOf(testcase.getCaseId()));
 		systemAction.setActionProduct(String.valueOf(testcase.getProductId()));
 		systemAction.setActionObjectType("case");
 		systemAction.setActionAction("open");
@@ -126,7 +126,7 @@ public class TestCaseAction extends BaseController {
 		testResultService.add(qualityTestResult);
 
 		SystemAction systemAction = new SystemAction();
-		systemAction.setActionObjectId(caseId);
+		systemAction.setActionObjectId(String.valueOf(caseId));
 		systemAction.setActionProduct(String.valueOf(testcase.getProductId()));
 		systemAction.setActionObjectType("case");
 		systemAction.setActionAction("run");

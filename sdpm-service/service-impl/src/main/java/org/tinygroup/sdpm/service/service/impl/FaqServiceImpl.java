@@ -41,8 +41,7 @@ public class FaqServiceImpl implements FaqService{
         return faqManager.delete(id);
     }
 
-    /*查询问题总条数*//*
-    public Integer selectcount(Integer id) {
-        return faqManager.selectcount(id);
-    }*/
+    public Pager<ServiceFaq> findUserByDeptId(Integer start, Integer limit, Integer deptId) {
+        return faqManager.findUserListByDeptId(start, limit, deptId);
+    }
 }

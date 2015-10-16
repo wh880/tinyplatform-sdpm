@@ -47,7 +47,7 @@ public interface ProjectStoryManager {
      * @param projectStory 用于查询条件
      * @return
      */
-    List<ProjectProduct> findList(ProjectStory projectStory);
+    List<ProjectStory> findList(ProjectStory projectStory);
 
     /**
      * 新增关联
