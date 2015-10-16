@@ -7,8 +7,6 @@
 #include("/common/common.page")
 #set(name="organizationUser")
 #@div()
-
-
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()
             #include("/organization/common/tab.page")

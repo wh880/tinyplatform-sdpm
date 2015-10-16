@@ -12,7 +12,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>sdpm-report develop</name>
-    <url>http://maven.apache.org</url>
+
     <modules>
         <module>business-interface</module>
         <module>business-impl</module>
@@ -24,6 +24,5 @@
         <module>service-wrapper</module>
         <module>view</module>
         <module>view-uicomponent</module>
-        <module>web</module>
     </modules>
 </project>

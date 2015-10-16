@@ -9,9 +9,9 @@
     </parent>
     <artifactId>sdpm-common-common</artifactId>
     <name>sdpm-common-common</name>
-    <url>http://maven.apache.org</url>
+
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <commons-codec.version>1.9</commons-codec.version>
     </properties>
     <dependencies>

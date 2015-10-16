@@ -10,11 +10,11 @@
     <artifactId>sdpm-product-web</artifactId>
     <name>sdpm-product-web</name>
     <packaging>war</packaging>
-    <url>http://maven.apache.org</url>
+
      <!-- 项目属性 -->
     <properties>
         <validator.version>5.1.1.Final</validator.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     </properties>
     <dependencies>
     	

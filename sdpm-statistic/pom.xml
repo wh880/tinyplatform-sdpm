@@ -10,7 +10,7 @@
     <artifactId>sdpm-statistic</artifactId>
     <packaging>pom</packaging>
     <name>sdpm-statistic develop</name>
-    <url>http://maven.apache.org</url>
+
 
     <modules>
         <module>business-inter</module>
@@ -23,6 +23,5 @@
         <module>service-wrapper</module>
         <module>view</module>
         <module>view-uicomponent</module>
-        <module>web</module>
     </modules>
 </project>

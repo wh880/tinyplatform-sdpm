@@ -11,7 +11,7 @@
     <artifactId>sdpm-metadata</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sdpm-metadata develop</name>
-    <url>http://maven.apache.org</url>
+
     <dependencies>
         <dependency>
             <groupId>org.tinygroup</groupId>
