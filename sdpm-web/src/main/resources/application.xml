@@ -85,6 +85,7 @@
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>
+            <!--<include-pattern pattern="sdpm*\.jar"/>-->
         </include-patterns>
         <exclude-full-content></exclude-full-content>
     </file-resolver-configuration>

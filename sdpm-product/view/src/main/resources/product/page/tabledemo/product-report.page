@@ -86,7 +86,7 @@
             #@settoggleLeftTitle()请选择报表类型#end
             #@settoggleLeftBody()
 				#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/report" "post" {"class":"test"})
-                    #@skinMinimal()
+                    #@skinMinimal("check-box")
 #*                    	#@Tcheckboxes("productWhiteList" product?.productWhiteList)
 							#@Tcheckbox("admin")产品需求数量#end<br/>
 							#@Tcheckbox("admin")模块需求数量#end<br/>

@@ -48,9 +48,9 @@ public class DeptManagerImpl implements DeptManager {
     }
 
     public Integer delete(Integer id) {
-        // OrgDept orgDept=orgDeptDao.getByKey(id);
-        //orgDept.setOrgDeptParent(-1);
-        return orgDeptDao.deleteByKey(id);
-        // return orgDeptDao.edit(orgDept);
+        OrgDept orgDept = orgDeptDao.getByKey(id);
+        orgDept.setOrgDeptParent(-1);
+//        return orgDeptDao.deleteByKey(id);
+        return orgDeptDao.edit(orgDept);
     }
 }

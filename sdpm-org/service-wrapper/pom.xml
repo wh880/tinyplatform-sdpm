@@ -9,9 +9,6 @@
     </parent>
     <artifactId>sdpm-org-service-wrapper</artifactId>
     <name>sdpm-org-service-wrapper</name>
-    <url>http://maven.apache.org</url>
-    <properties>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.tinygroup</groupId>

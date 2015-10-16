@@ -108,7 +108,7 @@ public class UserAction extends BaseController {
             return "organization/user/delect.pagelet";
         }
 
-        return "redirect" + adminPath + "/org/user/list/";
+        return "redirect:" + adminPath + "/org/user/list/";
     }
 
     @ResponseBody

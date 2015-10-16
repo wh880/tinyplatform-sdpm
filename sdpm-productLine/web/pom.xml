@@ -10,9 +10,9 @@
     <artifactId>sdpm-productLine-web</artifactId>
     <name>sdpm-productLine-web</name>
     <packaging>war</packaging>
-    <url>http://maven.apache.org</url>
+
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <!--可以自定义标签对,可以在其它地方用{标签名引用}-->
     </properties>
     <dependencies>

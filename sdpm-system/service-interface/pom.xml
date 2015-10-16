@@ -9,11 +9,7 @@
   </parent>
   <artifactId>sdpm-system-service-interface</artifactId>
   <name>sdpm-system-service-interface</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!--可以自定义标签对,可以在其它地方用{标签名引用}-->
-  </properties>
+
   <dependencies>
   	 <dependency>
 			<groupId>org.tinygroup</groupId>
@@ -25,11 +21,5 @@
 			<artifactId>sdpm-project-business-interface</artifactId>
 			<version>${project.version}</version>
 	</dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>

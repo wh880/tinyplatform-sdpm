@@ -30,6 +30,7 @@ public class ActionAction extends BaseController{
 	private HistoryService historyService;
 	@RequestMapping("find")
 	public String find(SystemAction action,Model model){
+//		action.setActionObjectType("user");
 		List<SystemAction> actions=actionService.find(action);
 //		Integer[] ids = new Integer[actions.size()];
 //		for(int i=0,n=actions.size();i<n;i++){
