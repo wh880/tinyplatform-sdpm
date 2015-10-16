@@ -7,22 +7,19 @@ import org.springframework.web.bind.annotation.*;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
-import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
-import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -241,18 +238,31 @@ public class BuildAction extends BaseController {
                                 Model model, HttpServletRequest request){
         //bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 
-        Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
-        model.addAttribute("bugList",p);
+
 
         if ("reRelateBug".equals(relate)) {
+            bug.setDeleted(0);
+            bug.setBugStatus("3");
+            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-bug-data.pagelet";
         }else if ("noRelateBug".equals(relate)) {
+            bug.setProjectId(null);
+            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-no-bug-data.pagelet";
         }else if ("reRelateBugRelease".equals(relate)) {
+            bug.setDeleted(0);
+            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-bug-data.pagelet";
         }else if ("noRelateBugRelease".equals(relate)) {
+            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-no-bug-data.pagelet";
         }else if ("leRelateBugRelease".equals(relate)) {
+            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-le-bug-data.pagelet";
         }
         return "";
@@ -282,6 +292,7 @@ public class BuildAction extends BaseController {
         }
         return "";
     }
+
 
 
 

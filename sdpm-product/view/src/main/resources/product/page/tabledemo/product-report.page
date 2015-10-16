@@ -105,6 +105,12 @@
 						#end*#
 						
 						#hiddenInput("hiddenFields","","",fields)
+#*						#@tinyCheckbox("chexkitem","A_productCount","")
+							oooo
+						#end<br/>
+						#@tinyCheckbox("chexkitem","A_productCount","")
+							sdfsd
+						#end*#
                         #labelCheckbox(ckId="check1" ckName="chexkitem" ckValue="A_productCount"  labelText="产品需求数量")
                         #labelCheckbox(ckId="chec2" ckName="chexkitem" ckValue="B_moduleCount" labelText="模块需求数量")
                         #labelCheckbox(ckId="check3" ckName="chexkitem" ckValue="D_storySource" labelText="需求来源统计")

@@ -13,7 +13,7 @@
 
     #foreach(m:menuManager?.getScopeMenus("dymanci-time"))
    	 #set(url=eval(m?.href))
-            <a href="${TINY_CONTEXT_PATH}${url}" ${choice==m?.id?'class="active_btn"':""}>${m.name}</a>
+            <a href="${TINY_CONTEXT_PATH}${adminPath}${url}" ${choice==m?.id?'class="active_btn"':""}>${m.name}</a>
     #end
 
                     <span style="left:330px;top:-35px; position:relative; height:10%">
@@ -66,7 +66,7 @@
         #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/system/action/list?"+tinyRequestQueryString) ##取数据地址 总数据        
 #@thead()
                 #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-                    #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                    #@tinyTh({"width":"6"})<input type="checkbox" name="product-dymanic" value="">#end
                     #@tinyTh({"class":"sorting","rel":"actionDate"})日期#end
                     #@tinyTh({"class":"sorting","rel":"actionActor"})操作者#end
                     #@tinyTh({"class":"sorting","rel":"actionAction"})动作#end

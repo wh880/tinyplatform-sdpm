@@ -41,11 +41,13 @@ public class FaqManagerImpl implements FaqManager{
         return faq;
     }
 
+    /*点击问题进去，里面的删除，在原有的基础上直接修改*/
     public Integer delete(Integer id) {
-        ServiceFaq faq = new ServiceFaq();
+       /* ServiceFaq faq = new ServiceFaq();
        faq.setFaqId(id);
         faq.setDeleted(id);
-        return faqDao.edit(faq);
+        return faqDao.edit(faq);*/
+        return faqDao.softDelete(id);
     }
 
 

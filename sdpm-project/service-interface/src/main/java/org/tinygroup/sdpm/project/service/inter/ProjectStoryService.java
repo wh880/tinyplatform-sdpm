@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface ProjectStoryService {
 
+    public List<ProjectStory> findByProjectStory(ProjectStory projectStory);
+
     public Integer batchtDel(String condition);
 
     public int[] addLink(List<ProjectStory> projectStoryList);

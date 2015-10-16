@@ -46,7 +46,7 @@
                             #@gridSysRow()
                                 #@gridSysCol(4)协议名称#end
                                 #@gridSysCol(8)<a
-                                        href="${TINY_CONTEXT_PATH}${adminPath}/service/client/slaDetail?id=${var.slaId}">${var.slaTitle}</a>#end
+                                        href="${TINY_CONTEXT_PATH}${adminPath}/service/sla/slaContent?id=${var.slaId}">${var.slaTitle}</a>#end
                             #end
 
                             #@gridSysRow()

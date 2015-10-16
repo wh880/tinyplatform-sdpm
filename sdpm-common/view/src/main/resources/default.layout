@@ -16,98 +16,95 @@
     <!--<meta name="apple-mobile-web-app-capable" content="yes" />--><!-- home screen app 全屏 -->
     <!--<meta name="apple-mobile-web-app-status-bar-style" content="black" />--><!-- 状态栏 -->
     <title>
-		#if(activeTitle)${activeTitle} #{end}软件开发项目管理
+        #if(activeTitle)${activeTitle} #{end}软件开发项目管理
     </title>
-    <meta name="keywords" content="TinyUi 是基于bootscrap的前端UI组件框架。">
-    <meta name="description"
-          content="java,j2ee,j2ee.top, tinygroup,tinygroup.org,eclipse,插件,idea,TinyFramework,悠然,悠悠然然,Tiny,Framework,CEP,通用事件处理,ui引擎,ui engine,模块化,业务单元,文档生成,xml parser,html parser,xml,html,parser,spider,网络爬虫,flow,流程,业务流,页面流,Java,SOA,框架,组件,分层,水平扩展,分区,分表,db router,db cluster,framework,框架,分布式计算,VFS,Web">
+    <meta name="keywords" content="Tiny SDPM ">
+    <meta name="description" content="Tiny,TINY,Software Development Process Management">
     <script>
         var contextPath = "${TINY_CONTEXT_PATH}";
         var CKEDITOR_BASEPATH = contextPath + '/';
         var pathname = location.pathname;
         var relativeurl = pathname.substring(CKEDITOR_BASEPATH.length);
-        var pomlist=new Array()
+        var pomlist = new Array()
     </script>
     <!--[if lt ie 9]>
-	<script>
-		document.createElement("article");
-		document.createElement("section");
-		document.createElement("aside");
-		document.createElement("footer");
-		document.createElement("header");
-		document.createElement("nav");
-		document.createElement("button");
-	</script>
+    <script>
+        document.createElement("article");
+        document.createElement("section");
+        document.createElement("aside");
+        document.createElement("footer");
+        document.createElement("header");
+        document.createElement("nav");
+        document.createElement("button");
+    </script>
     <![endif]-->
     <link rel="shortcut icon" href="${TINY_CONTEXT_PATH}/common/img/tiny32.png">
-	#if(DEBUG_MODE && DEBUG_MODE=="true")
-		#foreach(component in uiengine.getHealthUiComponents())
-			#if(component.cssResource)
-				#set(resources=component.cssResource.split(","))
-				#foreach(path in resources)
-					#set(path=path.trim())
-					#set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))
+    #if(DEBUG_MODE && DEBUG_MODE=="true")
+        #foreach(component in uiengine.getHealthUiComponents())
+            #if(component.cssResource)
+                #set(resources=component.cssResource.split(","))
+                #foreach(path in resources)
+                    #set(path=path.trim())
+                    #set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))
                     <link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet"/>
-				#end
-			#end
-			#if(component.jsResource)
-				#set(resources=component.jsResource.split(","))
-				#foreach(path in resources)
-					#set(path=path.trim())
+                #end
+            #end
+            #if(component.jsResource)
+                #set(resources=component.jsResource.split(","))
+                #foreach(path in resources)
+                    #set(path=path.trim())
                     <script src="${TINY_CONTEXT_PATH}${path}"></script>
-				#end
-			#end
-			#if(component.jsCodelet)
+                #end
+            #end
+            #if(component.jsCodelet)
                 <script>$!{component.jsCodelet}</script>#end
-			#if(component.cssCodelet)
+            #if(component.cssCodelet)
                 <style>$!{component.cssCodelet}</style>#end
-		#end
-	#else
+        #end
+    #else
         <!--[if lt ie 9]>
-			#foreach(component in uiengine.getHealthUiComponents())
-				#if(component.cssResource)
-					#set(resources=component.cssResource.split(","))
-					#foreach(path in resources)
-						#set(path=path.trim())
-						#set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))
-					<link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet"/>
-					#end
-				#end
-				#if(component.cssCodelet)
-				<style>$
-				!
-				{component.cssCodelet}    </style>
-				#end
-			#end
+            #foreach(component in uiengine.getHealthUiComponents())
+                #if(component.cssResource)
+                    #set(resources=component.cssResource.split(","))
+                    #foreach(path in resources)
+                        #set(path=path.trim())
+                        #set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))
+                    <link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet"/>
+                    #end
+                #end
+                #if(component.cssCodelet)
+                <style>$!{component . cssCodelet}/style>
+                #end
+            #end
         <![endif]-->
         <!--[if (gt IE 9)|!(IE)]><!-->
         <link href="${TINY_CONTEXT_PATH}/uiengine.uicss" rel="stylesheet"/>
         <!--<![endif]-->
         <script src="${TINY_CONTEXT_PATH}/uiengine.uijs"></script>
-	#end
+    #end
 </head>
 <body class="theme-clean main-menu-animated menu-on-top" id="bodyrap">
-	<script src="${TINY_CONTEXT_PATH}/common/js/tinyui.js"></script>
-	#@mainWrapper()
-		#@mainNavbar("/common/img/main-navbar-logo.png" "Tinyframework")
-			#@navbarNav()
-				#navbarNavItem("新增内容" "#")
-				
-				#@navbarDropdownMenu("下拉菜单")
-					#navbarNavItem("第一项" "#")
-					#navbarNavItem("第二项" "#")
-					#divider()##分割线
-					#navbarNavItem("第三项" "#")
-				#end
-			#end
-			#@rightNavBar()
+<script src="${TINY_CONTEXT_PATH}/common/js/tinyui.js"></script>
+    #@mainWrapper()
+        #@mainNavbar("/common/img/main-navbar-logo.png" "Tinyframework")
+            #@navbarNav()
+                #navbarNavItem("新增内容" "#")
+
+                #@navbarDropdownMenu("下拉菜单")
+                    #navbarNavItem("第一项" "#")
+                    #navbarNavItem("第二项" "#")
+                    #divider()##分割线
+                    #navbarNavItem("第三项" "#")
+                #end
+            #end
+            #@rightNavBar()
             <li class="nav-icon-btn nav-icon-btn-danger dropdown">
-				#@notifyDropdown(5 "fa-bullhorn" "通知" "更多的通知")
+                #@notifyDropdown(5 "fa-bullhorn" "通知" "更多的通知")
 					#include("/common/notify.page")
 				#end
             </li>
             <li class="nav-icon-btn nav-icon-btn-success dropdown">
-				#@messagesDropdown(12 "fa-envelope" "所得的消息" "更多的信息")
+                #@messagesDropdown(12 "fa-envelope" "所得的消息" "更多的信息")
 						#include("/common/messages.page")
 				#end
             </li>
@@ -129,34 +126,33 @@
                 <ul class="dropdown-menu">
                     <li><a href="javascript:void(0);"><span class="label label-warning pull-right">新的</span>资料文件</a>
                     </li>
-                    <li><a href="javascript:void(0);"><span class="badge badge-primary pull-right">新的</span>个人中心</a>
-                    </li>
+                    <li><a href="javascript:void(0);">修改密码</a></li>
                     <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;设置</a></li>
                     <li class="divider"></li>
-                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出</a>
+                    <li><a href="${TINY_CONTEXT_PATH}/logout"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出</a>
                     </li>
                 </ul>
             </li>
-			#end
-		#end
+            #end
+        #end
 
-		#@mainMenu()
-			#@navigationMenu()
-				#foreach(m in menuManager.getChildMenus("0"))
-					#TnavItem(mFor.index m.name adminPath+m.href m.icon)
-				#end
+        #@mainMenu()
+            #@navigationMenu()
+                #foreach(m in menuManager.getChildMenus("0"))
+                    #TnavItem(mFor.index m.name adminPath+m.href m.icon)
+                #end
 
-			#end <!-- navigation end -->
-		#end
+            #end <!-- navigation end -->
+        #end
     <div class="content-wrapper-bg"></div>
-		#@div("content-wrapper")
-#*		#@contentWrapper()
-				${pagePostionTitle}
-		#end*#
+        #@div("content-wrapper")
+        #*		#@contentWrapper()
+                        ${pagePostionTitle}
+                #end*#
         <!-- 主体 start -->
-			#@rowFrame()
+            #@rowFrame()
             <div id="tinypagecontent" style="min-height:490px">${pageContent}</div>
-			#end
+            #end
         <div id="tinyfooter">
             <div class="tinyfooterrap">
 			<span class="right">
@@ -165,10 +161,9 @@
                 TinyGroup &copy; 2013-${formatDate(now(),"yyyy")}
             </div>
         </div>
-		#end
-	#end
+        #end
+    #end
 <script type="text/javascript">
-    //window.TinyAdmin.start(init);
     function setPostiionNav() {
         var currenttxt = $(".navigation ul>li.active>a:first>span:first").html();
         $(document).attr("title", currenttxt + "--" + "TinyUiEnterprise展示");

@@ -4,39 +4,39 @@
                 &nbsp;&nbsp;&nbsp;${plan?.planSpec}
 	       	</div>
 		#end
-      
+
       #@div(divClass="infoContent")
 	        <p class="titleName">基本信息</p>
 <ul>
 	   <li>
 	    #@elementItem()
-	 
-		<p><b>&nbsp;&nbsp;&nbsp;名称:</b>${plan?.planName}</p>
-	
-		#end
-	   </li>
-	   
-	   <li>
-	    #@elementItem()
-	  
-		<p><b>&nbsp;&nbsp;&nbsp;开始日期:</b>${plan?.planBeginDate?formatDate(plan?.planBeginDate,'yyyy-MM-dd'):""}</p>
-	
-		#end
-	   </li>
-	   
-	   <li>
-	    #@elementItem()
-	     
-		<p><b>&nbsp;&nbsp;&nbsp;结束日期:</b>${plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy-MM-dd'):""}</p>
+
+            <p><b>&nbsp;&nbsp;&nbsp;名称:</b>${plan?.planName}</p>
 
 		#end
 	   </li>
-	       	
-</ul>			
+
+    <li>
+	    #@elementItem()
+
+            <p><b>&nbsp;&nbsp;&nbsp;开始日期:</b>${plan?.planBeginDate?formatDate(plan?.planBeginDate,'yyyy-MM-dd'):""}</p>
+
+		#end
+	   </li>
+
+    <li>
+	    #@elementItem()
+
+            <p><b>&nbsp;&nbsp;&nbsp;结束日期:</b>${plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy-MM-dd'):""}</p>
+
+		#end
+	   </li>
+
+</ul>
       #end
-      
 
-				#@div(divClass="infoContent")
+
+	#@div(divClass="infoContent")
 	        	<p class="titleName">历史记录</p>
 	       		#include("/product/page/tabledemo/historyrecord.page")
 				#end

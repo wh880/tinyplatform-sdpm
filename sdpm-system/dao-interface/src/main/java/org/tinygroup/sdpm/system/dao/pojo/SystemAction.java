@@ -96,6 +96,18 @@ public class SystemAction implements Serializable{
 	 * 
 	 */
 	private Integer actionEfforted;
+	/**
+	 * 创建者名称
+	 */
+	private String  actorName;
+
+	public String getActorName() {
+		return actorName;
+	}
+
+	public void setActorName(String actorName) {
+		this.actorName = actorName;
+	}
 
 	private String objectName;
 

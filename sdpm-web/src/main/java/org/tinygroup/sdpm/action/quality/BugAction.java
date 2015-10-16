@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
 import org.tinygroup.sdpm.action.system.ProfileUtil;
-import org.tinygroup.sdpm.common.util.CookieUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -31,20 +30,15 @@ import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
-import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.LogUtil;import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -148,6 +142,7 @@ public class BugAction extends BaseController {
 		bug.setBugConfirmed(1);
 		bugService.updateBug(bug);
 
+	
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
 				, LogUtil.LogAction.BUGCONFIRMED
 				,String.valueOf(bug.getBugId())
@@ -169,9 +164,12 @@ public class BugAction extends BaseController {
 
 	@RequestMapping("/assignTo")
 	public String assign(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
+
 		bug.setBugAssignedDate(new Date());
+
 		bugService.updateBug(bug);
 
+	
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
 				, LogUtil.LogAction.ASSIGNED
 				,String.valueOf(bug.getBugId())
@@ -206,9 +204,11 @@ public class BugAction extends BaseController {
 	}
 	@RequestMapping("/solve")
 	public String solve(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
+
 		bug.setBugResolvedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		bug.setBugStatus("2");
 		bugService.updateBug(bug);
+
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
 				, LogUtil.LogAction.RESOLVED
@@ -233,10 +233,12 @@ public class BugAction extends BaseController {
 
 	@RequestMapping("/close")
 	public String close(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
+
 		bug.setBugClosedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		bug.setBugClosedDate(new Date());
 		bug.setBugStatus("3");
 		bugService.updateBug(bug);
+
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
 				, LogUtil.LogAction.CLOSED
@@ -260,10 +262,13 @@ public class BugAction extends BaseController {
 
 	@RequestMapping("/edit")
 	public String edit(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
+
 		QualityBug qualityBug = bugService.findById(bug.getBugId());
+
 		bug.setBugLastEditedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		bug.setBugLastEditedDate(new Date());
 		bugService.updateBug(bug);
+
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
 				, LogUtil.LogAction.EDITED
@@ -358,7 +363,9 @@ public class BugAction extends BaseController {
 	@RequestMapping(value = "/save")
 	public String save(QualityBug bug,SystemAction systemAction,@RequestParam(value = "file", required = false)MultipartFile[] file,
 			String[] title, HttpServletRequest request){
+
 		bug.setBugOpenedDate(new Date());
+
 		bug.setBugOpenedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		QualityBug qbug=bugService.addBug(bug);
 		ProfileUtil profileUtil = new ProfileUtil();
@@ -367,6 +374,7 @@ public class BugAction extends BaseController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
 				, LogUtil.LogAction.OPENED

@@ -5,12 +5,12 @@
 #setTinyItemCount(records)
 #for(bug:bugPager.records)
 #@tr()
-    #@td()${task?.bugId}#end
-    #@td()${task?.bugSeverity}#end
-    #@td()${task?.priority}#end
-    #@td()${task?.bugTitle}#end
-    #@td()${task?.bugOpenedBy}#end
-    #@td()${task?.bugResolvedBy}#end
-    #@td()${task?.bugResolution}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${bug?.bugId}">${bug?.bugId}</a>#end
+    #@td()${bug?.bugSeverity}#end
+    #@td()${bug?.priority}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${bug?.bugId}">${bug?.bugTitle}</a>#end
+    #@td()${bug?.bugOpenedBy}#end
+    #@td()${bug?.bugResolvedBy}#end
+    #@td()${bug?.bugResolution}#end
 #end
 #end
