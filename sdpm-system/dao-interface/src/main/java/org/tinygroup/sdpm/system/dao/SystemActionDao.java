@@ -30,6 +30,6 @@ public interface SystemActionDao extends BaseDao<SystemAction,Integer> {
     SystemAction getActionAndObject(SystemAction systemAction);
     
     Pager<SystemAction> queryPager(int start,int limit , Condition dateCondition,SystemAction systemAction ,final OrderBy... orderBies);
-    Pager<SystemAction> findByDate(int start, int limit, SystemAction action,Date startDate,Date endDate, OrderBy... orderArgs);
+    Pager<SystemAction> findByDate(int start, int limit, SystemAction action,String startDate,String endDate, OrderBy... orderArgs);
    
 }

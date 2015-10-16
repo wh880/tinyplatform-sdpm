@@ -22,27 +22,39 @@ public class DeptAction extends BaseController {
     @Autowired
     private UserService userService;
 
+    @ResponseBody
     @RequestMapping("/add")
-    public String addDept(Integer orgDeptParent, String orgDeptName) {
+    public Map addDept(Integer orgDeptParent, String orgDeptName) {
         OrgDept dept = new OrgDept();
         dept.setOrgDeptParent(orgDeptParent);
         dept.setOrgDeptName(orgDeptName);
         deptService.addDept(dept);
-        return "organization/user/user.page";
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "y");
+        map.put("info", "增加成功");
+        return map;
     }
 
+    @ResponseBody
     @RequestMapping("edit")
-    public String editDept(Integer orgDeptId, String orgDeptName) {
+    public Map editDept(Integer orgDeptId, String orgDeptName) {
         OrgDept dept = deptService.findDept(orgDeptId);
         dept.setOrgDeptName(orgDeptName);
         deptService.updateDept(dept);
-        return "organization/user/user.page";
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "y");
+        map.put("info", "修改成功");
+        return map;
     }
 
+    @ResponseBody
     @RequestMapping("delete")
-    public String deleteDept(Integer orgDeptId) {
+    public Map deleteDept(Integer orgDeptId) {
         deptService.deleteDept(orgDeptId);
-        return "organization/user/user.page";
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "y");
+        map.put("info", "删除成功");
+        return map;
     }
 
 //    @RequestMapping("user")

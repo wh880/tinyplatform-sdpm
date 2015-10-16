@@ -216,6 +216,7 @@ public class SystemAction implements Serializable{
 	public Integer getActionEfforted(){
 		return actionEfforted;
 	}
+
 	public String getActionAction() {
 		return actionAction;
 	}

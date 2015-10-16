@@ -88,8 +88,14 @@ public class PlanAction  extends BaseController{
     }
 	
 	@RequestMapping("/find")
-	public String find(Integer planId,Model model){
-		
+	public String find(HttpServletRequest request,Integer planId,Model model){
+
+		int productId = -1;
+		if(request.getSession().getAttribute("sessionProductId")!=null){
+			productId = (Integer)request.getSession().getAttribute("sessionProductId");
+		}
+		Product product = productService.findProduct(productId)	;
+		model.addAttribute("product",product);
 		ProductPlan plan = planService.findPlan(planId);
 		
 		model.addAttribute("plan",plan);

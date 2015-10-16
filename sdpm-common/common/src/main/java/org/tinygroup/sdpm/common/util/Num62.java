@@ -1,9 +1,10 @@
-package org.tinygroup.sdpm.action.system;
+package org.tinygroup.sdpm.common.util;
+
 /**
  * 62进制数字
  */
 public class Num62 {
-	 /**
+    /**
      * 62个字母和数字，含大小写
      */
     public static final char[] N62_CHARS = {'0', '1', '2', '3', '4', '5', '6',
@@ -135,9 +136,5 @@ public class Num62 {
             }
         }
         throw new RuntimeException("N62(N36)非法字符：" + c);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(longToN62(Long.MAX_VALUE));
     }
 }

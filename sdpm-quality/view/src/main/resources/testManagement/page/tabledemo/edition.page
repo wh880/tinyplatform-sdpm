@@ -17,12 +17,12 @@
 		#@tabHead()
 			#include("/testManagement/page/Tab.page")
 		#end
-	
+
 		#@tabBodyCol("ptop-5")
 		#end
 	#end
 #end
-			
+
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/edit" "post" {"class":"test"})
 #hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
 	<div style="width:70%;float:left" class="pageleftpart">
@@ -31,7 +31,7 @@
     		<div class="RTtitle">
             	<button type="submit" id="submit" class="commitBtn">保存</button>
         	</div>
-        	        
+
    		#@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>重现步骤：&nbsp</label></div>
@@ -54,7 +54,7 @@
        		 <div class="col-12">
                 <div class="col-2 text-r"><label>附件：</label></div>
                 <div class="col-9">
-                    #include("/testManagement/page/fileupload.page")  
+                    #include("/testManagement/page/fileupload.page")
                 </div>
             </div>
         #end
@@ -72,12 +72,7 @@
         </div>
 		#end
     	<br >
-   
-        #@div(divClass="infoContent")
-            <p class="titleName">历史记录</p>
-        ##加入后，js代码会导致页面排版混乱
-            #include("/testManagement/page/historyRecord.page")
-        #end
+        #history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+bug?.bugId)
         </div>
         <div style="width: 30%;float: right">
        #TypeInfo("qualityBugEdition" bug?.bugId)
@@ -85,8 +80,8 @@
     </div>
 #end
 
-    
-    
+
+
 <script type="text/javascript">
     $("select.select2").select2();
 </script>

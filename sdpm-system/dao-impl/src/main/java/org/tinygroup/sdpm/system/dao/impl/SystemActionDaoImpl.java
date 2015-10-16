@@ -277,14 +277,14 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 	}
 
 	public SystemAction getActionAndObject(final SystemAction systemAction) {
-		return getDslTemplate().getByKey(systemAction.getActionId(), SystemAction.class, new SelectGenerateCallback<Serializable>() {
-			@SuppressWarnings("rawtypes")
-			public Select generate(Serializable t) {
-				return select(FragmentSql.fragmentSelect("a.*, "+ActionEnum.getName(systemAction.getActionObjectType())+" objectName"))
-						.from(FragmentSql.fragmentFrom("system_action a JOIN "+ActionEnum.getTable(systemAction.getActionObjectType())+" b ON a.action_object_id = b."+ActionEnum.getPrimary(systemAction.getActionObjectType())))
-						.where(FragmentSql.fragmentCondition("a.action_id="+systemAction.getActionId()));
-			}
-		});
+
+		Select select = select(FragmentSql.fragmentSelect("a.*, "+ActionEnum.getName(systemAction.getActionObjectType())+" as objectName"))
+				.from(FragmentSql.fragmentFrom(
+						"system_action a JOIN "+ActionEnum.getTable(systemAction.getActionObjectType())
+								+" b ON a.action_object_id = b."+ActionEnum.getPrimary(systemAction.getActionObjectType())))
+				.where(FragmentSql.fragmentCondition("a.action_id="+systemAction.getActionId()));
+
+		return getDslSession().fetchOneResult(select,SystemAction.class);
 	}
 	
 	public Pager<SystemAction> queryPager(int start,int limit ,final Condition dateCondition,SystemAction systemAction ,final OrderBy... orderBies) {
@@ -314,7 +314,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 	}
 
 	public Pager<SystemAction> findByDate(int start, int limit,
-			SystemAction action, final Date startDate, final Date endDate,
+			SystemAction action, final String startDate, final String endDate,
 			final OrderBy... orderArgs) {
 		if(action==null){
 			action=new SystemAction();

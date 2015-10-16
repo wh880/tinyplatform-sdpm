@@ -16,4 +16,9 @@
     <!-- SESSION缓存 -->
     <cache name="sessionCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
 
+    <!-- 系统活动会话缓存 -->
+    <cache name="shiro-activeSessionCache" maxEntriesLocalHeap="10000" overflowToDisk="true"
+           eternal="true" timeToLiveSeconds="0" timeToIdleSeconds="0"
+           diskPersistent="true" diskExpiryThreadIntervalSeconds="600"/>
+
 </ehcache>

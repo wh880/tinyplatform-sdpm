@@ -15,14 +15,21 @@
 				<table>
                     <tr>
                         <td style="width:360px">
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/index.page" class="active_btn">日历</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=1">今日</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=2">昨日</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=3">本周</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=4">上周</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=5">本月</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=6">上月</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=0">所有日志</a>
+                            <a val="1" class="selDate ${selDate==1?"active_btn":""}">今天</a>
+                            <a val="2" class="selDate ${selDate==2?"active_btn":""}">昨天</a>
+                            <a val="3" class="selDate ${selDate==3?"active_btn":""}">本周</a>
+                            <a val="4" class="selDate ${selDate==4?"active_btn":""}">上周</a>
+                            <a val="5" class="selDate ${selDate==5?"active_btn":""}">本月</a>
+                            <a val="6" class="selDate ${selDate==6?"active_btn":""}">上月</a>
+                            <a val="0" class="selDate ${selDate==0?"active_btn":""}">所有日志</a>
+##                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/index.page" class="active_btn">日历</a>
+##                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=1">今日</a>
+##                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=2">昨日</a>
+##                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=3">本周</a>
+##                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=4">上周</a>
+##                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=5">本月</a>
+##                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=6">上月</a>
+##                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/note/notetable.page?date=0">所有日志</a>
                         </td>
                         <td style="float:left">
                             <div style="width:150px">
@@ -54,3 +61,18 @@
 <script type="text/javascript">
     $(".select2").select2();
 </script>
+<script>
+    $(function{
+        var actionUrl = $("#noteTable").attr("data-url");
+        $(".selDate").click(function(e){
+            $("#dynamicTable").attr("data-url", actionUrl + "?selDate=" + $(this).attr("val"));
+            $("#dynamicTable").trigger("refresh");
+        });
+
+        $(".selUser").click(function(e){
+            $("#dynamicTable").attr("data-url", actionUrl + "?teamAccount=" + $(this).attr("val"));
+            $("#dynamicTable").trigger("refresh");
+        });
+    });
+</script>
+

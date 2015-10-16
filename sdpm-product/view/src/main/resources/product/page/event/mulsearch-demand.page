@@ -222,7 +222,7 @@
             <option value="designisso">设计如此</option>
             <option value="null">空</option>
         </select>
-
+    </div>
 
 	</div>
     <table class="table-condensed table-form" id="task-search">
