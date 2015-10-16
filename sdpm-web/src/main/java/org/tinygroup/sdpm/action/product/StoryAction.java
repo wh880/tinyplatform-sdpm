@@ -17,6 +17,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.*;
+import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
@@ -50,6 +51,8 @@ public class StoryAction extends BaseController{
 	private ProductService productService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private PlanService planService;
     
     
    
@@ -60,9 +63,18 @@ public class StoryAction extends BaseController{
     	String queryString = request.getQueryString();
        if(queryString!=null&&!queryString.contains("choose")){
 		   return "redirect:" + adminPath + "/product/story?choose=1&" + queryString;
-	   }	
-       List<OrgUser> userList = userService.findUserList(null);
+	   }
+       OrgUser user = new OrgUser();
+       ProductPlan plan = new ProductPlan();
+       if(request.getSession().getAttribute("sessionProductId")!=null){
+    	   plan.setProductId((Integer)request.getSession().getAttribute("sessionProductId"));
+       }
+      
+       List<OrgUser> userList = userService.findUserList(new OrgUser());
+       List<ProductPlan> planList = planService.findPlanList(new ProductPlan());
+       
        model.addAttribute("userList", userList);
+       model.addAttribute("planList", planList);
         return "/product/page/project/togglebox.page";
     }
 
