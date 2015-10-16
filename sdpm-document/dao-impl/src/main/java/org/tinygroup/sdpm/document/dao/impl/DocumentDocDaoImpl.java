@@ -34,13 +34,16 @@ import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.Pager;
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.document.dao.DocumentDocDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -54,8 +57,10 @@ import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
 @Repository
+@LogClass("doc")
 public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDocDao {
-
+	
+	@LogMethod("add")
 	public DocumentDoc add(DocumentDoc documentDoc) {
 		return getDslTemplate().insertAndReturnKey(documentDoc, new InsertGenerateCallback<DocumentDoc>() {
 			public Insert generate(DocumentDoc t) {
@@ -83,6 +88,7 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		});
 	}
 
+	@LogMethod("edit")
 	public int edit(DocumentDoc documentDoc) {
 		if(documentDoc == null || documentDoc.getDocId() == null){
 			return 0;
@@ -113,6 +119,7 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		});
 	}
 
+	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -124,6 +131,7 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		});
 	}
 
+	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -271,7 +279,8 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 	public int[] batchInsert(List<DocumentDoc> documentDocs){
 			return batchInsert(true ,documentDocs);
 	}
-
+	
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<DocumentDoc> documentDocs) {
 		if (CollectionUtil.isEmpty(documentDocs)) {
 			return new int[0];
@@ -301,22 +310,8 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 			}
 		});
 	}
-	
-	public int[] batchUpdateDel(List<DocumentDoc> documentDocs){
-		if (CollectionUtil.isEmpty(documentDocs)) {
-			return new int[0];
-		}
-		return getDslTemplate().batchUpdate(documentDocs, new NoParamUpdateGenerateCallback() {
-			
-			public Update generate() {
-				return update(DOCUMENT_DOCTABLE).set(
-					DOCUMENT_DOCTABLE.DOC_DELETED.value(new JdbcNamedParameter("docDeleted"))).where(
-				DOCUMENT_DOCTABLE.DOC_ID.eq(new JdbcNamedParameter("docId")));
-			}
-		});
-		
-	}
 
+	@LogMethod("batchDelete")
 	public int[] batchDelete(List<DocumentDoc> documentDocs) {
 		if (CollectionUtil.isEmpty(documentDocs)) {
 			return new int[0];
@@ -363,6 +358,22 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		}
 		return select;
 	}
-}
+
+	@LogMethod("batchUpdateDel")
+	public int[] batchUpdateDel(List<DocumentDoc> documentDocs){
+		if (CollectionUtil.isEmpty(documentDocs)) {
+			return new int[0];
+		}
+		return getDslTemplate().batchUpdate(documentDocs, new NoParamUpdateGenerateCallback() {
+			
+			public Update generate() {
+				return update(DOCUMENT_DOCTABLE).set(
+					DOCUMENT_DOCTABLE.DOC_DELETED.value(new JdbcNamedParameter("docDeleted"))).where(
+				DOCUMENT_DOCTABLE.DOC_ID.eq(new JdbcNamedParameter("docId")));
+			}
+		});
+		
+	}
 
 	
+}

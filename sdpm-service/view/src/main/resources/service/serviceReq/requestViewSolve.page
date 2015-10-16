@@ -13,7 +13,7 @@
         #@gridSysRow()
             #@colLabel("col-2")回复人员：#end
             #@gridSysCol(5)
-                #tinyInput("text" "回复人员" ""{"datatype":"","id":"回复人员","class":"input-text"})
+                #tinyInput("text" "回复人员" ""{"id":"回复人员","class":"input-text"})
             #end
 
         #end

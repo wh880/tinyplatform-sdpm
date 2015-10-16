@@ -56,7 +56,5 @@ ServiceFaq find(Integer id);
      */
     Integer delete(Integer id);
 
-
-/*    *//*查询问题总条数*//*
-    Integer selectcount(Integer id);*/
+    Pager<ServiceFaq> findUserListByDeptId(Integer start, Integer limit, Integer deptId);
 }

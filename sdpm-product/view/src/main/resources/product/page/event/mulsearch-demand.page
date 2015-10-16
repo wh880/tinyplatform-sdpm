@@ -1,5 +1,116 @@
 
 ##<span id="showsearchmore-demand">搜索</span>
+<form method="get" action="${TINY_CONTEXT_PATH}/quality/bug" id="searchform" class="form-condensed searchform">
+    <div class="hide">
+        <select id="operatortemp">
+            <option value="=">=</option>
+            <option value="!=">!=</option>
+            <option value="&gt;">&gt;</option>
+            <option value="&gt;=">&gt;=</option>
+            <option value="&lt;">&lt;</option>
+            <option value="&lt;=">&lt;=</option>
+            <option value="include">包含</option>
+            <option value="between">介于</option>
+            <option value="notinclude">不包含</option>
+            <option value="belong">从属于</option>
+        </select>
+        <select id="usertemp">
+            <option value="" selected="selected"></option>
+            <option value="admin">A:admin</option>
+            <option value="demo">D:Demo</option>
+            <option value="dev1">D:开发甲</option>
+            <option value="dev2">D:开发乙</option>
+            <option value="dev3">D:开发丙</option>
+            <option value="productManager">P:产品经理</option>
+            <option value="projectManager">P:项目经理</option>
+            <option value="tester1">T:测试甲</option>
+            <option value="tester2">T:测试乙</option>
+            <option value="tester3">T:测试丙</option>
+            <option value="testManager">T:测试经理</option>
+            <option value="closed">Closed</option>
+            <option value="$@me">自己</option>
+            <option value="null">空</option>
+        </select>
+        <select id="pritemp">
+            <option value=""></option>
+            <option value="3">3</option>
+            <option value="1">1</option>
+            <option value="44">44</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="null">空</option>
+        </select>
+        <select id="statustemp">
+            <option value="" selected="selected"></option>
+            <option value="wait">未开始</option>
+            <option value="doing">进行中</option>
+            <option value="done">已完成</option>
+            <option value="pause">已暂停</option>
+            <option value="cancel">已取消</option>
+            <option value="closed">已关闭</option>
+            <option value="null">空</option>
+        </select>
+        <select id="contemp">
+            <option value="" selected="selected"></option>
+            <option value="unconfirmed">未确认</option>
+            <option value="confirmed">已确认</option>
+        </select>
+        <select id="bugType">
+            <option value="" selected="selected"></option>
+            <option value="codeerror">代码错误</option>
+            <option value="uiimprove">界面优化</option>
+            <option value="done">设计变更</option>
+            <option value="designchange">新增需求</option>
+            <option value="designflaw">设计缺陷</option>
+            <option value="closed">配置相关</option>
+            <option value="conrelated">安装部署</option>
+            <option value="saferelated">安全相关</option>
+            <option value="perissues">性能问题</option>
+            <option value="standard">标准规范</option>
+            <option value="testscript">测试脚本</option>
+            <option value="tracking">事务跟踪</option>
+            <option value="codeimprove">代码改进</option>
+            <option value="others">其他</option>
+            <option value="null">空</option>
+        </select>
+        <select id="wintemp">
+            <option value="" selected="selected"></option>
+            <option value="Windows">Windows</option>
+            <option value="Windows 8">Windows 8</option>
+            <option value="Windows 7">Windows 7</option>
+            <option value="Windows Vista">Windows Vista</option>
+            <option value="Windows XP">Windows XP</option>
+            <option value="Windows 2012">Windows 2012</option>
+            <option value="Windows 2008">Windows 2008</option>
+            <option value="Windows 2003">Windows 2003</option>
+            <option value="Windows 2000">Windows 2000</option>
+            <option value="Android">Android</option>
+            <option value="IOS">IOS</option>
+            <option value="WP8">WP8</option>
+            <option value="Linux">Linux</option>
+            <option value="Unix">Unix</option>
+            <option value="others">其他</option>
+            <option value="null">空</option>
+        </select>
+        <select id="nowstatustemp">
+            <option value="" selected="selected"></option>
+            <option value="draft">草稿</option>
+            <option value="lived">激活</option>
+            <option value="changed">已变更</option>
+            <option value="null">空</option>
+        </select>
+        <select id="closetemp">
+            <option value="" selected="selected"></option>
+            <option value="completed">已完成</option>
+            <option value="subdivided">已细分</option>
+            <option value="repeat">重复</option>
+            <option value="delay">延期</option>
+            <option value="nodo">不做</option>
+            <option value="cancelled">已取消</option>
+            <option value="designisso">设计如此</option>
+            <option value="null">空</option>
+        </select>
+##<span id="showsearchmore-demand">搜索</span>
 <form method="get" action="${TINY_CONTEXT_PATH +adminPath}/quality/bug" id="searchform"
       class="form-condensed searchform">
     <div class="hide">
@@ -111,7 +222,7 @@
             <option value="designisso">设计如此</option>
             <option value="null">空</option>
         </select>
-
+    </div>
 
 	</div>
     <table class="table-condensed table-form" id="task-search">

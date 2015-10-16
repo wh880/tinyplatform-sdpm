@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.service;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +43,7 @@ public class ClientAction extends BaseController {
     @Autowired
     private ProductLineService productLineService;
 
+    @RequiresPermissions("service")
     @RequestMapping(value = "/list")
     public String list(ServiceClient client, Model model) {
         return "service/client/clientUser.page";
@@ -49,8 +51,8 @@ public class ClientAction extends BaseController {
 
     @RequestMapping(value = "/list/data")
     public String listData(Integer limit, Integer start, ServiceClient client, Model model, Integer treeId,
-                           @RequestParam(required = false, defaultValue = "clientCreateDate") String order,
-                           @RequestParam(required = false, defaultValue = "asc") String ordertype) {
+                           @RequestParam(required = false, defaultValue = "clientId") String order,
+                           @RequestParam(required = false, defaultValue = "desc") String ordertype) {
 
         if (treeId != null) {
             Pager<ServiceClient> pager = clientService.findClientPagerByPid(start, limit, treeId, order, ordertype);
@@ -62,7 +64,7 @@ public class ClientAction extends BaseController {
         return "service/client/clientTableData.pagelet";
     }
 
-
+    @RequiresPermissions("client-add")
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
         if (id != null) {
@@ -72,6 +74,7 @@ public class ClientAction extends BaseController {
         return "service/client/clientAdd.page";
     }
 
+    @RequiresPermissions("client-edit")
     @RequestMapping("/edit")
     public String edit(Integer id, Model model) {
         if (id != null) {
@@ -99,6 +102,7 @@ public class ClientAction extends BaseController {
         return "redirect:" + adminPath + "/service/client/list";
     }
 
+    @RequiresPermissions("client-del")
     @ResponseBody
     @RequestMapping(value = "/delete")
     public Map delete(Integer id) {
@@ -110,6 +114,7 @@ public class ClientAction extends BaseController {
         return map;
     }
 
+    @RequiresPermissions("client-batchdel")
     @ResponseBody
     @RequestMapping(value = "/batchDelete")
     public Map batchDelete(String ids) {
@@ -132,6 +137,7 @@ public class ClientAction extends BaseController {
         return map;
     }
 
+    @RequiresPermissions("client-sla")
     @RequestMapping(value = "/clientSla")
     public String showSla(Integer id, Model model) {
         List<ServiceSla> slas = clientService.findSlaByClientId(id);
@@ -141,7 +147,7 @@ public class ClientAction extends BaseController {
         return "service/client/clientProduct.page";
     }
 
-
+    @RequiresPermissions("clientSla_delete")
     @ResponseBody
     @RequestMapping(value = "/slaDelete")
     public Map slaDelete(Integer id) {
@@ -174,6 +180,7 @@ public class ClientAction extends BaseController {
         return "service/client/clientInfo.page";
     }
 
+    @RequiresPermissions("linkman-del")
     @ResponseBody
     @RequestMapping(value = "/deleteClientUser")
     public Map deleteClientUser(Integer id) {
@@ -198,6 +205,7 @@ public class ClientAction extends BaseController {
         return "service/client/companyInfoEdit.pagelet";
     }
 
+    @RequiresPermissions("linkman-new")
     @RequestMapping(value = "/clientUserUpdate")
     public String updateClientUser(ServiceClientUser clientUser) {
         if (clientUser.getId() != null) {

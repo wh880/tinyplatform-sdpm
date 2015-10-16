@@ -16,32 +16,23 @@
 
 package org.tinygroup.sdpm.system.dao.impl;
 
+import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.SYSTEM_ACTIONTABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.select;
+import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.*;
-import static org.tinygroup.tinysqldsl.Select.*;
-import static org.tinygroup.tinysqldsl.Insert.*;
-import static org.tinygroup.tinysqldsl.Delete.*;
-import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.tinysqldsl.base.FragmentSql;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
-import org.tinygroup.sdpm.system.dao.SystemActionDao;
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -49,6 +40,20 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.system.dao.SystemActionDao;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.tinysqldsl.Delete;
+import org.tinygroup.tinysqldsl.Insert;
+import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.Select;
+import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 @Repository
 
 public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActionDao {
@@ -137,7 +142,8 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(SystemAction t) {
-				Select select = selectFrom(SYSTEM_ACTIONTABLE).where(
+				Select select = select(SYSTEM_ACTIONTABLE.ALL,FragmentSql.fragmentSelect("org_user_account actorName")).from(SYSTEM_ACTIONTABLE).join(
+						leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(SYSTEM_ACTIONTABLE.ACTION_ACTOR))).where(
 				and(
 					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(t.getActionObjectType()),
 					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(t.getActionObjectId()),
@@ -162,7 +168,8 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 		return getDslTemplate().queryPager(start, limit, systemAction, false, new SelectGenerateCallback<SystemAction>() {
 
 			public Select generate(SystemAction t) {
-				Select select = MysqlSelect.selectFrom(SYSTEM_ACTIONTABLE).where(
+				Select select = select(SYSTEM_ACTIONTABLE.ALL,FragmentSql.fragmentSelect("org_user_account actorName")).from(SYSTEM_ACTIONTABLE).join(
+						leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(SYSTEM_ACTIONTABLE.ACTION_ACTOR))).where(
 				and(
 					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(t.getActionObjectType()),
 					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(t.getActionObjectId()),
@@ -276,6 +283,64 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 				return select(FragmentSql.fragmentSelect("a.*, "+ActionEnum.getName(systemAction.getActionObjectType())+" objectName"))
 						.from(FragmentSql.fragmentFrom("system_action a JOIN "+ActionEnum.getTable(systemAction.getActionObjectType())+" b ON a.action_object_id = b."+ActionEnum.getPrimary(systemAction.getActionObjectType())))
 						.where(FragmentSql.fragmentCondition("a.action_id="+systemAction.getActionId()));
+			}
+		});
+	}
+	
+	public Pager<SystemAction> queryPager(int start,int limit ,final Condition dateCondition,SystemAction systemAction ,final OrderBy... orderBies) {
+		if(systemAction==null){
+			systemAction=new SystemAction();
+		}
+		return getDslTemplate().queryPager(start, limit, systemAction, false, new SelectGenerateCallback<SystemAction>() {
+
+			public Select generate(SystemAction t) {
+				Select select = select(SYSTEM_ACTIONTABLE.ALL,FragmentSql.fragmentSelect("org_user_account actorName")).from(SYSTEM_ACTIONTABLE).join(
+						leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(SYSTEM_ACTIONTABLE.ACTION_ACTOR))).where(
+				and(
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(t.getActionObjectType()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(t.getActionObjectId()),
+					SYSTEM_ACTIONTABLE.ACTION_PROJECT.eq(t.getActionProject()),
+					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.eq(t.getActionProduct()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(t.getActionActor()),
+					dateCondition==null?SYSTEM_ACTIONTABLE.ACTION_DATE.eq(t.getActionDate()):dateCondition,
+					SYSTEM_ACTIONTABLE.ACTION_COMMENT.eq(t.getActionComment()),
+					SYSTEM_ACTIONTABLE.ACTION_EXTRA.eq(t.getActionExtra()),
+					SYSTEM_ACTIONTABLE.ACTION_READ.eq(t.getActionRead()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTION.eq(t.getActionAction()),
+					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.eq(t.getActionEfforted())));
+		return addOrderByElements(select, orderBies);
+			}
+		});
+	}
+
+	public Pager<SystemAction> findByDate(int start, int limit,
+			SystemAction action, final Date startDate, final Date endDate,
+			final OrderBy... orderArgs) {
+		if(action==null){
+			action=new SystemAction();
+		}
+		return getDslTemplate().queryPager(start, limit, action, false, new SelectGenerateCallback<SystemAction>() {
+
+			public Select generate(SystemAction t) {
+				Select select = select(SYSTEM_ACTIONTABLE.ALL,FragmentSql.fragmentSelect("org_user_account actorName")).from(SYSTEM_ACTIONTABLE).join(
+						leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(SYSTEM_ACTIONTABLE.ACTION_ACTOR))).where(
+				and(
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq(t.getActionObjectType()),
+					SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(t.getActionObjectId()),
+					SYSTEM_ACTIONTABLE.ACTION_PROJECT.eq(t.getActionProject()),
+					SYSTEM_ACTIONTABLE.ACTION_PRODUCT.eq(t.getActionProduct()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(t.getActionActor()),
+					
+					startDate!=null||endDate!=null?SYSTEM_ACTIONTABLE.ACTION_DATE.between(startDate, endDate):
+					
+						SYSTEM_ACTIONTABLE.ACTION_DATE.eq(t.getActionDate()),
+					
+					SYSTEM_ACTIONTABLE.ACTION_COMMENT.eq(t.getActionComment()),
+					SYSTEM_ACTIONTABLE.ACTION_EXTRA.eq(t.getActionExtra()),
+					SYSTEM_ACTIONTABLE.ACTION_READ.eq(t.getActionRead()),
+					SYSTEM_ACTIONTABLE.ACTION_ACTION.eq(t.getActionAction()),
+					SYSTEM_ACTIONTABLE.ACTION_EFFORTED.eq(t.getActionEfforted())));
+		return addOrderByElements(select, orderArgs);
 			}
 		});
 	}

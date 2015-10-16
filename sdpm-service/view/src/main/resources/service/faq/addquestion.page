@@ -10,18 +10,17 @@
         #end
     #end
 
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/faq/save" "post" {"class":""})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/faq/save" "post" {"class":""})
     <input type="hidden" name="faqId" value="${faq?.faqId}"/>
  #*   #@tinyForm("thisform" "" "" {"class":"test"})*#
 
         #@elementItem()
             #@sdpmItem("产品名称" "*")
                 #@tinySelect("productId" faq?.productId {"class":"input-text select2","rel":"22","id":"productId"})
-                    #@tinyOptionItem("ch")请选择#end
-                    #@tinyOptionItem("0")支付宝#end
-                    #@tinyOptionItem("1")余额宝#end
-                    #@tinyOptionItem("2")财付通#end
-                    #@tinyOptionItem("3")陆金所#end
+                    #@tinyOptionItem("")请选择#end
+                    #foreach(l:slas)
+                        #@tinyOptionItem(l.productId)${l?.productName}#end
+                    #end
                 #end
             #end
         #end
@@ -59,7 +58,7 @@
         #@elementItem()
             #@sdpmItem("问题类型" "*")
                 #TzTreeSelect(
-                    "orgDeptId" faq?.faqType{"class":"input-text","data-URL":TINY_CONTEXT_PATH+
+                    "faqTypeId" faq?.faqTypeId{"class":"input-text","data-URL":TINY_CONTEXT_PATH+adminPath+
                     "/service/faq/data?check=n"} )
             #end
         #end

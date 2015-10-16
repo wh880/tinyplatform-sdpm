@@ -65,7 +65,7 @@
             #@elementItem()
                 #@sdpmItem("请求标题 " "*")
 
-                    #tinyInput("text" "请求标题" ""{"datatype":"","id":"request_title","class":"input-text"})
+                    #tinyInput("text" "请求标题" ""{"id":"request_title","class":"input-text"})
                 #end
                 #@validateDiv("col-2")#end
             #end

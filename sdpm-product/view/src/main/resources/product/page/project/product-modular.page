@@ -13,7 +13,7 @@
       #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()模板#end
             #@settoggleLeftBody("treeLeftbox")
-                #@zTreeList(call("link","/system/module/dataone"))
+                #@zTreeList(call("link",adminPath+"/system/module/dataone"))
                     #setzTreeValMap({"pid":"moduleId","name":"moduleName","id":"moduleParent"}) ##key值为固定
 					#zTreeSetLinkUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/findProductModule" )
 					#zTreeSetAddUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/promodule/add")

@@ -41,7 +41,7 @@ public class LogUtil {
         systemAction.setActionProject(String.valueOf(project));
         systemAction.setActionObjectType(objectType);
         systemAction.setActionDate(new Date());
-        systemAction.setActionObjectId(Integer.parseInt(objectId));
+        systemAction.setActionObjectId(String.valueOf(objectId));
         systemAction.setActionActor(userId);
         systemAction.setActionComment(comment);
         logService.log(oldObject, newObject, systemAction);

@@ -106,11 +106,13 @@ public class DocBizImpl implements DocBiz {
 		return doclibdao.getByKey(key);
 	}
 
-	public Pager<DocumentDoc> queryItemWithPage(Integer start,Integer limit,DocumentDoc doc,SearchInfos conditions,
+	public Pager<DocumentDoc> queryItemWithPage(Integer start,Integer limit,DocumentDoc doc, String statusCondition,SearchInfos conditions,
 			String groupOperate, String sortName,boolean asc) {
 		// 分页
-		String condition = conditions != null ? SqlUtil.toSql(
-				conditions.getInfos(), groupOperate) : "";
+		String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
+		condition = condition != null && !"".equals(condition) ? (statusCondition != null&& !"".equals(statusCondition) ? condition + " and "
+				+ statusCondition : condition)
+				: statusCondition;
 		OrderBy orderBy = null;
 		if (sortName != null && !"".equals(sortName)) {
 			orderBy = new OrderBy(sortName, asc);

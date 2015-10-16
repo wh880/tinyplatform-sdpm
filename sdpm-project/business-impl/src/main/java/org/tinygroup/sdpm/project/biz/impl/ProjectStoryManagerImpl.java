@@ -47,8 +47,8 @@ public class ProjectStoryManagerImpl implements ProjectStoryManager {
         return projectStoryDao.findByProjectID(projectId);
     }
 
-    public List<ProjectProduct> findList(ProjectStory projectStory) {
-        return null;
+    public List<ProjectStory> findList(ProjectStory projectStory) {
+        return projectStoryDao.query(projectStory);
     }
 
     public ProjectProduct add(ProjectProduct projectProduct) {

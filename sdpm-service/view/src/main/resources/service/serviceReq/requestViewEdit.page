@@ -17,7 +17,7 @@
             #@colLabel("col-2")客户ID：#end
 
             #@gridSysCol(5)
-                #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
+                #tinyInput("text" "请求标题" ""{"id":"请求标题","class":"input-text"})
             #end
         #end
         #@gridSysRow()
@@ -44,7 +44,7 @@
             #@colLabel("col-2")请求标题：#end
 
             #@gridSysCol(5)
-                #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
+                #tinyInput("text" "请求标题" ""{"id":"请求标题","class":"input-text"})
             #end
         #end
         #@gridSysRow()

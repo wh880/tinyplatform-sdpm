@@ -1,7 +1,9 @@
 package org.tinygroup.sdpm.system.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
@@ -35,6 +37,17 @@ public class ActionServiceImpl implements ActionService {
 		return actionManager.findByPage(page, pagesize, action, order, ordertype);
 	}
 
+	public Pager<SystemAction> queryPager(int start,int limit , Condition condition,SystemAction systemAction , String order,
+			String ordertype){
+		
+		return actionManager.queryPager(start, limit, condition, systemAction, order, ordertype);
+	}
 
+	public Pager<SystemAction> queryBetweenDate(int start, int limit,
+			SystemAction action, Date startDate, Date endDate, String sortName,
+			boolean asc) {
+		// TODO Auto-generated method stub
+		return actionManager.queryBetweenDate(start, limit, action, startDate, endDate, sortName, asc);
+	}
 
 }

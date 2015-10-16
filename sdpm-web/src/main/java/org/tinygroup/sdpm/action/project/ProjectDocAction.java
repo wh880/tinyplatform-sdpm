@@ -41,7 +41,7 @@ public class ProjectDocAction extends BaseController {
 
         DocumentDoc doc = new DocumentDoc();
         doc.setDocProject(projectId);
-        Pager<DocumentDoc> docPager = docService.findDocRetPager(start, limit, doc, null, null, order, "asc".equals(ordertype) ? true : false);
+        Pager<DocumentDoc> docPager = docService.findDocRetPager(start, limit, doc, null, null, null, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("docPager", docPager);
         return "project/document/tableData.pagelet";
     }

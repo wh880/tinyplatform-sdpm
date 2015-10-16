@@ -72,8 +72,11 @@ public class SlaAction extends BaseController {
     }
 
     @RequestMapping(value = "/list/data")
-    public String listData(Integer limit, Integer start, ServiceSla sla, Integer treeId, Model model) {
-        Pager<ServiceSla> pager = slaService.findSlaPager(start, limit, sla, treeId);
+    public String listData(Integer limit, Integer start, ServiceSla sla, Integer treeId,
+                           @RequestParam(required = false, defaultValue = "faqId") String order,
+                           @RequestParam(required = false, defaultValue = "asc") String ordertype,
+                           Model model) {
+        Pager<ServiceSla> pager = slaService.findSlaPager(start, limit, sla, treeId, order, ordertype);
         model.addAttribute("pager", pager);
         return "service/sla/slaTableData.pagelet";
     }

@@ -113,7 +113,7 @@
         #@elementItem()
             #@sdpmItem("请求承诺回复时间")
                 #@tinyDateInput(
-                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px","datatype":""})#end
+                    "regionday" "" "YYYY-MM-DD" {"style":"width:200px"})#end
             #end
         #end
 
@@ -168,7 +168,7 @@
 ##        #@elementItem()
 ##            #@sdpmItem("客户ID")
 ##
-##                #tinyInput("text" "客户ID" ""{"datatype":"","id":"客户 ID","class":"input-text"})
+                ##                #tinyInput("text" "客户ID" ""{,"id":"客户 ID","class":"input-text"})
 ##
 ##            #end
 ##            #@validateDiv("col-2")#end
@@ -205,7 +205,7 @@
 ##        #@elementItem()
 ##            #@sdpmItem("请求标题 ")
 ##
-##                #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
+                ##                #tinyInput("text" "请求标题" ""{,"id":"请求标题","class":"input-text"})
 ##            #end
 ##            #@validateDiv("col-2")#end
 ##        #end

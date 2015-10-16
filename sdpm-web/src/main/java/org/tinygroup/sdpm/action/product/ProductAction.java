@@ -178,7 +178,7 @@ public class ProductAction extends BaseController {
         Pager<Product> pagerProduct = productService.findProductPager(page, pagesize, product, order, ordertype);
 
         model.addAttribute("pagerProduct", pagerProduct);
-        return adminPath + "/product/data/allproductdata.pagelet";
+        return  "/product/data/allproductdata.pagelet";
     }
 
     @RequestMapping("/findManager")
@@ -223,6 +223,17 @@ public class ProductAction extends BaseController {
         }
 		return "";
 
+    }
+
+    @RequestMapping("/addDoc")
+    public String addDoc(HttpServletRequest request, Model model) {
+        int productId = -1;
+        if (request.getSession().getAttribute("sessionProductId") != null) {
+            productId = (Integer) request.getSession().getAttribute("sessionProductId");
+        }
+        Product product = productService.findProduct(productId);
+        model.addAttribute("product", product);
+       return  "/product/page/tabledemo/add-doc.page";
     }
 
 

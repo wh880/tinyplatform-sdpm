@@ -9,12 +9,13 @@
             #set(m1=menuManager.getMenu("faq-edit"))
             #if(m1)
             #*<a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}?id=${var}">#buttonIcon(iconClass="icon-pencil")${m1.name}</a>*#
-            <a href="${TINY_CONTEXT_PATH}${m1.href}?id=${l.faqId}">#buttonIcon(iconClass="icon-pencil")${m1.name}</a>
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}?id=${l.faqId}">#buttonIcon(iconClass=
+                "icon-pencil")${m1.name}</a>
             #end
             #set(m2=menuManager.getMenu("faq-del"))
             #if(m2)
             #*#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m2.href l.faqId m2.href {"class":m2.icon})${m2.name}#end*#
-                #@delItemsdpm(TINY_CONTEXT_PATH+m2.href l.faqId "../faq/list"{"class":m2.icon})${m2.name}#end
+                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m2.href l.faqId "../faq/list"{"class":m2.icon})${m2.name}#end
             #end
             #@dialog("myModal")
                 #@dialogHeader()对话框标题#end

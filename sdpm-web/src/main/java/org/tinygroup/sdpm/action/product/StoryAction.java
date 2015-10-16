@@ -91,7 +91,7 @@ public class StoryAction extends BaseController{
     	storyService.updateStory(productStory);
         OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute("user");
         SystemAction action = new SystemAction();
-        action.setActionObjectId(productStory.getStoryId());
+        action.setActionObjectId(String.valueOf(productStory.getStoryId()));
         action.setActionProduct(String.valueOf(story.getProductId()));
         action.setActionObjectType("story");
         action.setActionAction("edit");
@@ -219,11 +219,28 @@ public class StoryAction extends BaseController{
     		@RequestParam(required = false, defaultValue = "storyId") String order, 
     		@RequestParam(required = false, defaultValue = "asc") String ordertype,
     		Model model, HttpServletRequest request){
+    	
+    	 
+    	if(request.getSession().getAttribute("sessionProductId")!=null){
+    		story.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+    	}
         
     	
     	
-    	story.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-    	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,FieldUtil.stringFormat(order),"asc".equals(ordertype)?true:false);
+    	String condition = StoryUtil.getStatusCondition(choose,request);
+    	if(story.getModuleId()!=null&&story.getModuleId()>0){
+    		
+    		 SystemModule module = new SystemModule();
+	       	 module.setModuleId(story.getModuleId());
+	   		 StringBuffer stringBuffer = new StringBuffer();
+	   		 stringBuffer.append("in (");
+	   	     ModuleUtil.getConditionByModule(stringBuffer, module, moduleService);
+	   	     stringBuffer.append(")");
+	   	     
+    		condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
+    	}
+    	story.setModuleId(null);
+    	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, condition,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList",p);
         
         if("reRelateStory".equals(relate)){
@@ -339,5 +356,14 @@ public class StoryAction extends BaseController{
 	    map.put("info", "删除成功");
 	    return map;
 	}
-
+	
+	 @RequestMapping("/toPager/{forwordPager}")
+	 public String toPager(@PathVariable(value="forwordPager")String forwordPager,Model model){
+		 
+		 
+		 if("storyReport".equals(forwordPager)){
+			 return "product/page/tabledemo/product-report.page";
+		 }
+		 return "";
+	 }
 }

@@ -2,7 +2,7 @@
     #@noRespsGridSystem()
         #@gridSysRow()
             #@gridSysCol(4)
-                #tinyInput("text" "请求标题" ""{"datatype":"","id":"请求标题","class":"input-text"})
+                #tinyInput("text" "请求标题" ""{"id":"请求标题","class":"input-text"})
             #end
             #@gridSysCol(4)
                 #@tinySelect("lang" "zh" {"class":"input-text select2","rel":"22"})
