@@ -12,7 +12,7 @@
 #for(var:[1..pagesize])
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH}/organization/userTodo.page">admin</a> #end
+	#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/organization/userTodo.page">admin</a> #end
 	#@td()1#end
 	#@td()2015-8-28#end
 	#@td()23#end
@@ -21,7 +21,7 @@
 	#@td()
 		#foreach(m:menuManager.getScopeMenus("pro-team-op"))
 			#if(m.id != "pro-team-delete")
-            <a href="${TINY_CONTEXT_PATH}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 			#else
 				#@delItemsdpm(m.href 5)#buttonIcon(iconClass=m.icon)#end
 			#end

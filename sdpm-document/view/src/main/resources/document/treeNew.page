@@ -14,23 +14,23 @@
 				#end
 			#else产品文档库 #end 
 		#end
-		#set(dataUrl = "/system/module/tree?moduleType=doc&moduleRoot="+documentLibId)
-		#set(saveUrl = "/system/module/ajax/save?moduleType=doc&moduleRoot="+documentLibId)
+		#set(dataUrl = adminPath+"/system/module/tree?moduleType=doc&moduleRoot="+documentLibId)
+		#set(saveUrl = adminPath+"/system/module/ajax/save?moduleType=doc&moduleRoot="+documentLibId)
 		#if(documentLibId==1)
-		    #set(dataUrl = "/system/module/docProductTree")
-		    #set(saveUrl = "/system/module/ajax/docTreeSave?moduleType=productDoc")
+		    #set(dataUrl = adminPath+"/system/module/docProductTree")
+		    #set(saveUrl = adminPath+"/system/module/ajax/docTreeSave?moduleType=productDoc")
 		#elseif(documentLibId==2)
-		    #set(dataUrl = "/system/module/docProjectTree")
-		    #set(saveUrl = "/system/module/ajax/docTreeSave?moduleType=projectDoc")
+		    #set(dataUrl = adminPath+"/system/module/docProjectTree")
+		    #set(saveUrl = adminPath+"/system/module/ajax/docTreeSave?moduleType=projectDoc")
 		#else
 		#end
 		#@settoggleLeftBody("treeLeftbox")
 			 #@zTreeList(call("link",dataUrl))
                     #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
-                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+"/document" )
-                    #zTreeSetAddUrl(TINY_CONTEXT_PATH+saveUrl)
-                    #zTreeSetEditUrl(TINY_CONTEXT_PATH+"/system/module/story/edit")
-                    #zTreeSetDelUrl(TINY_CONTEXT_PATH+"/system/module/story/deleteTree")
+                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/document?tree=true")
+                    #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+saveUrl)
+                    #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/story/edit")
+                    #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/story/deleteTree")
              #end
 		#end
 	#end
@@ -42,14 +42,14 @@
 				##批量删除
 				#foreach(m:menuManager.getScopeMenus("docdelete-op"))
 				#if(m.id == "batch-delete")
-            		#@mulOperation("muldelete" TINY_CONTEXT_PATH+"/document/doc/batchDelete")
+            		#@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/document/doc/batchDelete")
             			<a class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
             		#end
             	#end
             	#end		
             					
 			#end
-			#@tinyTableContent(TINY_CONTEXT_PATH+"/document/doc/list") ##取数据地址 总数据
+			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/document/doc/list") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

@@ -9,5 +9,4 @@
 
     <bean id="obtainHandleImpl" class="org.tinygroup.sdpm.common.log.obtain.impl.ObtainHandleImpl"></bean>
 
-    <bean id="dictInitProcessor" class="org.tinygroup.sdpm.system.dictinit.DictInitProcessor" />
 </beans>

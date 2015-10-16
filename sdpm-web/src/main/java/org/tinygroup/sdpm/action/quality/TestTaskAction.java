@@ -17,7 +17,7 @@ import org.tinygroup.tinysqldsl.Pager;
  */
 
 @Controller
-@RequestMapping("quality/version")
+@RequestMapping("/a/quality/version")
 public class TestTaskAction extends BaseController {
 	
 	@Autowired
@@ -47,7 +47,7 @@ public class TestTaskAction extends BaseController {
 			testTaskService.updateTestTask(testtask);
 		}
 		model.addAttribute("testtask",testtask);
-		return "redirect:"+"quality/version";
+		return "redirect:"+"/a/quality/version";
 	}
 	
 	@RequestMapping("/add")

@@ -1,5 +1,5 @@
 
-#@tinyForm("dictitemEditForm" TINY_CONTEXT_PATH+"/system/dict/save" "post" {"class":""})
+#@tinyForm("dictitemEditForm" TINY_CONTEXT_PATH+adminPath+"/system/dict/save" "post" {"class":""})
 <input type="hidden" name="dictId" value="${dict?.dictId}"/>
 <input type="hidden" name="deleted" value="0"/>
 #@gridSysRow()

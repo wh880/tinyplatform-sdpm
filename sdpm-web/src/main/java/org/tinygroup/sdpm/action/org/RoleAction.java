@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/org/privilege")
+@RequestMapping("/a/org/privilege")
 public class RoleAction extends BaseController {
     @Autowired
     private RoleService roleService;
@@ -44,7 +44,7 @@ public class RoleAction extends BaseController {
             roleService.updateRole(role);
         }
         model.addAttribute("role", role);
-        return "redirect:/org/privilege/list/";
+        return "redirect" + adminPath + "/org/privilege/list/";
     }
 
 
@@ -62,7 +62,7 @@ public class RoleAction extends BaseController {
                 roleUserService.copyRoleUser(orgRoleIdNew, orgRoleId);
             }
         }
-        return "redirect:/org/privilege/list";
+        return "redirect" + adminPath + "/org/privilege/list";
     }
 
     @ResponseBody

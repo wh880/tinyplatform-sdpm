@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Repository
 public class ObtainHandleImpl implements ObtainHandle {
-    protected static final Logger LOGGER = LoggerFactory.getLogger(ObtainHandleImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ObtainHandleImpl.class);
 
     private static Map<String, Obtain> obtainDict = new ConcurrentHashMap<String, Obtain>();
 

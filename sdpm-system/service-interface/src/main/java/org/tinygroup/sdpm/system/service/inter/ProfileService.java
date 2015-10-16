@@ -49,5 +49,11 @@ public interface ProfileService {
      */
     
     Integer softDelete(Integer id);
+    /**
+     * 通过Id查询
+     * @param id
+     * @return
+     */
+    SystemProfile findById(Integer id);
  
 }

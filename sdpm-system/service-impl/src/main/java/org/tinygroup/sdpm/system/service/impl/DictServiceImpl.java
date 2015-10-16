@@ -56,8 +56,13 @@ public class DictServiceImpl implements DictService {
 		return dictManager.bechDelete(ids);
 	}
 
-	
-	
+	public void deleteAll() {
+		dictManager.deleteAll();
+	}
 
-	
+	public List<SystemDict> findList(SystemDict dict, String columnName, boolean asc) {
+		return dictManager.findList(dict,columnName,asc);
+	}
+
+
 }

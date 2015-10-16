@@ -4,7 +4,7 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
@@ -12,7 +12,7 @@ import org.tinygroup.logger.LoggerFactory;
 /**
  * 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候取出ApplicationContext.
  */
-@Component
+@Service
 @Lazy(false)
 public class SpringContextHolder implements ApplicationContextAware, DisposableBean {
 
@@ -56,7 +56,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
      */
     public static void clearHolder() {
         if (logger.isEnabled(LogLevel.DEBUG)) {
-            logger.log(LogLevel.DEBUG, "清除SpringContextHolder中的ApplicationContext:" + applicationContext);
+            logger.logMessage(LogLevel.DEBUG, "清除SpringContextHolder中的ApplicationContext:" + applicationContext);
         }
         applicationContext = null;
     }
@@ -65,8 +65,8 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
      * 检查ApplicationContext不为空.
      */
     private static void assertContextInjected() {
-        if (applicationContext != null) {
-            logger.log(LogLevel.INFO, "applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
+        if (applicationContext == null) {
+            logger.logMessage(LogLevel.INFO, "applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
         }
     }
 

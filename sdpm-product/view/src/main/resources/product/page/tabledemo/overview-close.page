@@ -1,5 +1,4 @@
-
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/delete" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/delete" "" {"class":"test"})
 	#tinyInput("text" "productId" productId {"class":"input-text hidden"})
     #@elementItem()
         #@colLabel()关闭原因：#end

@@ -12,9 +12,9 @@
 #foreach(b : buildPager.getRecords())
     #@tr()
         #@td()<input type="checkbox" value="${b?.buildId}" name="idCheck">#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/project/version/productalbug?buildId=${b?.buildId}">${b?.buildId}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/version/productalbug?buildId=${b?.buildId}">${b?.buildId}</a>#end
         #@td()${b?.buildProduct}#end
-        #@td()<a href="${TINY_CONTEXT_PATH}/project/version/productalbug?buildId=${b?.buildId}">${b?.buildName}#end
+        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/version/productalbug?buildId=${b?.buildId}">${b?.buildName}#end
         #@td()${b?.buildScmPath}</a>#end
         #@td()${b?.buildFilePath}#end
         #@td()${b?.buildDate}#end
@@ -22,9 +22,9 @@
         #@td()
             #foreach(m:menuManager.getScopeMenus("pro-version-op"))
                 #if(m.id != "pro-version-delete")
-                <a href="${TINY_CONTEXT_PATH}${m.href}?buildId=${b?.buildId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
-                    #@delItemsdpm(TINY_CONTEXT_PATH+m.href b.buildId)#buttonIcon(iconClass=m.icon)#end
+                    #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href b.buildId)#buttonIcon(iconClass=m.icon)#end
                 #end
 
             #end

@@ -1,27 +1,12 @@
 package org.tinygroup.sdpm.action.product;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
-import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
@@ -30,10 +15,8 @@ import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
-import org.tinygroup.sdpm.product.dao.pojo.StoryCollection;
-import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
+import org.tinygroup.sdpm.product.dao.pojo.*;
+import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -41,11 +24,17 @@ import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
 
 
 @Controller
-@RequestMapping("/product/story")
+@RequestMapping("/a/product/story")
 public class StoryAction extends BaseController{
     @Autowired
     private StoryService storyService;
@@ -55,7 +44,8 @@ public class StoryAction extends BaseController{
 	private BugService bugService;
     @Autowired
     private ModuleService moduleService;
-
+	@Autowired
+	private ProductService productService;
     
     
    
@@ -65,11 +55,24 @@ public class StoryAction extends BaseController{
     	
     	String queryString = request.getQueryString();
        if(queryString!=null&&!queryString.contains("choose")){
-            return "redirect:/product/story?choose=1&"+queryString;
-        }
+		   return "redirect:" + adminPath + "/product/story?choose=1&" + queryString;
+	   }
         return "/product/page/project/togglebox.page";
     }
-    
+
+	@RequestMapping("/addstory")
+	public String addstory(HttpServletRequest request,Model model){
+		int productId = -1;
+		if (request.getSession().getAttribute("sessionProductId")!=null){
+			productId = (Integer)request.getSession().getAttribute("sessionProductId");
+		}
+		Product product = productService.findProduct(productId);
+		model.addAttribute("product",product);
+
+		return "/product/page/tabledemo/product-demand-add.page";
+	}
+
+
    @RequestMapping("/save")
     public String save(ProductStory productStory,ProductStorySpec storySpec,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,HttpServletRequest request) throws IOException{
     	
@@ -127,8 +130,8 @@ public class StoryAction extends BaseController{
     public String closeBatch(StoryCollection stories){
     	
     	storyService.updateBatchStory(stories.getProductStories());
-    	return "redirect:/product/story?currentPageId=3";
-    }
+		return "redirect:" + adminPath + "/product/story?currentPageId=3";
+	}
     
 	@ResponseBody
 	@RequestMapping("/delete")

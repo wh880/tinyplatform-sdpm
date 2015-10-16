@@ -5,9 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.util.CookieUtils;
+import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.system.service.inter.ModuleService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,26 +17,10 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-28.
  */
 @Controller
-@RequestMapping("/projectmanage")
-public class BeforeAction {
+@RequestMapping("/a/projectmanage")
+public class BeforeAction extends BaseController {
     @Autowired
     private ProjectService projectService;
-    @Autowired
-    private ModuleService moduleService;
-
-//    @RequestMapping("/task/index")
-//    public String jumpTaskIndex(@CookieValue(required = false) Integer projectId, HttpServletResponse response, HttpServletRequest request, Model model) {
-//        List<Project> list = projectService.findList();
-//        if (list == null || list.isEmpty()) {
-//            return "redirect:/project/add";
-//        }
-//
-//        Project first = list.get(0);
-//        projectId = first.getProjectId();
-//        CookieUtils.setCookie(response, "projectId", projectId.toString(), -1);
-//        model.addAttribute("projectList", list);
-//        return "project/task/index.page";
-//    }
 
     @RequestMapping("/demand/index")
     public String jumpStoryIndex() {
@@ -91,7 +75,7 @@ public class BeforeAction {
 
     @RequestMapping("/selModel")
     public String selModel(String moduleId) {
-        return "redirect:/project/task/index?moduleId=" + moduleId;
+        return "redirect:" + adminPath + "/project/task/index?moduleId=" + moduleId;
     }
 
 }

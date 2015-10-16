@@ -1,4 +1,4 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/document/doclib/save" "post" {"class":"edit"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doclib/save" "post" {"class":"edit"})
 <input type="hidden" name="docLibId" value="${doclib?.docLibId}"/>
 #@colLabel()#end
 <div class="col-8">

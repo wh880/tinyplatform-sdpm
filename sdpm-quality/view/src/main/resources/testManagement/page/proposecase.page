@@ -23,7 +23,7 @@
 
 #end
 
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+"/quality/testCase/save" "post" {"class":""})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":""})
     #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testCase?.caseId)
 	<div style="width:100%">
     	<div class="infoContent">
@@ -39,8 +39,8 @@
                                 #end
 	                    	#end                  
 	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
                     <script type="text/javascript">
                         $("#${sid}").on("change",function(){
                             var pId = $("#${sid}  option:selected").val();
@@ -121,8 +121,8 @@
 
 	                    	#end                
 	                      	#@Tselect2Fix()
-                                <a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
-                                <a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page">全部</a>
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">全部</a>
                             #end
                             <script type="text/javascript">
                                 $(document).ready(function(){
@@ -224,7 +224,7 @@
             var sele = $(this);
             $.ajax({
                 type: "POST",
-                url: "${TINY_CONTEXT_PATH}"+url,
+                url: "${TINY_CONTEXT_PATH+adminPath}"+url,
                 data: $(this).attr('data'),
                 dataType:"json",
                 success: function(data){

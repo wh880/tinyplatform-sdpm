@@ -16,7 +16,7 @@
     <br>
     #end
 #end
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/request/save" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/request/save" "post" {"class":""})
 <div style="width:80%;margin-left: 20px;" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">请求</p>
@@ -32,8 +32,8 @@
                             #@tinyOptionItem(l.productId)${l?.productName}#end
                         #end
                     #end
-                ##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/service/sla/slaAdd.page" class="r ">增加</a><a
-                ##                            href="${TINY_CONTEXT_PATH}/service/sla/sla.page">全部</a>#end
+                ##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/service/sla/slaAdd.page" class="r ">增加</a><a
+                ##                            href="${TINY_CONTEXT_PATH+adminPath}/service/sla/sla.page">全部</a>#end
                 #end
             #end
         #end

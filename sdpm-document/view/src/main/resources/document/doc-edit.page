@@ -8,7 +8,7 @@
             var s;
             $.ajax({
                 type: "POST",
-                url: "${TINY_CONTEXT_PATH}"+url,
+                url: "${TINY_CONTEXT_PATH+adminPath}"+url,
                 data: $(this).attr('data'),
                 dataType:"json",
                 success: function(data){
@@ -52,7 +52,7 @@
 
 ##set(name="document")
 #include("doc-tab.page")
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/document/doc/editSave" "post" {"class":"edit"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/editSave" "post" {"class":"edit"})
 <input name="docId" type="hidden" value="${doc?.docId}"/>
 	<div style="width:100%">
     	<div class="infoContent">
@@ -110,8 +110,8 @@
                             })
                         	</script>
 	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/project/preadd" class="r">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/">全部</a>#end                 	                    	
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd" class="r">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/">全部</a>#end                 	                    	
                 	  #end
                 	  #end
                 	  #end
@@ -128,8 +128,8 @@
 	                        #end	                       	                    	                        *#
 	                    	#end                  
 	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
                 	  #end
                 	  #end
                 	  #end

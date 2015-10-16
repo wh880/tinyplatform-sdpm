@@ -58,7 +58,7 @@
                 <ref bean="typeInfoProcessor"/>
 
                 <!--Obtain文件加载处理器-->
-                <ref bean="obtainProcessor"/>
+                <ref bean="dictFileProcessor"/>
                 <!-- database -->
                 <ref bean="constantFileResolver"/>
                 <ref bean="standardTypeFileResolver"/>
@@ -74,6 +74,7 @@
             </list>
         </property>
     </bean>
+
     <bean id="fileResolverProcessor" scope="singleton"
           class="org.tinygroup.fileresolver.applicationprocessor.FileResolverProcessor">
         <property name="fileResolver" ref="fileResolver"></property>

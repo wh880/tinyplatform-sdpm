@@ -18,7 +18,7 @@
     }
 </style>
 #set(name="organizationPrivilege")
-#@tinyForm("roleUserManager" TINY_CONTEXT_PATH+"/org/roleUser/save" "post")
+#@tinyForm("roleUserManager" TINY_CONTEXT_PATH+adminPath+"/org/roleUser/save" "post")
 <input type="hidden" name="id" value="${id}"/>
     #@div()
         #@tabWithInit("tab_demo" "optionsBox")

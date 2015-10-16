@@ -17,6 +17,11 @@ public interface ClientManager {
      */
     ServiceClient find(Integer id);
 
+    /**
+     * 查找数据库的所有记录
+     *
+     * @return
+     */
     Pager<ServiceClient> findPager(Integer start, Integer limit, ServiceClient serviceClient, String order, String ordertype);
 
     /**

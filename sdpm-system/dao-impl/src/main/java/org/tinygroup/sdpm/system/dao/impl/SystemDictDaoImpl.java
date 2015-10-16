@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.jdbctemplatedslsession.SimpleDslSession;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -231,5 +234,9 @@ public class SystemDictDaoImpl extends TinyDslDaoSupport implements SystemDictDa
 			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
 		}
 		return select;
+	}
+	public void deleteAll() {
+		SimpleDslSession simpleDslSession = (SimpleDslSession) this.getDslSession();
+		simpleDslSession.getJdbcTemplate().execute("truncate table system_dict");
 	}
 }

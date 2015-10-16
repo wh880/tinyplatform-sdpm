@@ -17,7 +17,7 @@ import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HolidayService;
 import org.tinygroup.tinysqldsl.Pager;
 @Controller
-@RequestMapping("system/action")
+@RequestMapping("a/system/action")
 public class ActionAction extends BaseController{
 	@Autowired
 	private ActionService actionService;

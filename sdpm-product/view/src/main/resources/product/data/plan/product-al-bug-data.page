@@ -9,7 +9,7 @@
 	#@td()${bug?.bugId}#end
 	#@td()@#end
 	#@td()
-		<a href="${TINY_CONTEXT_PATH}/testManagement/page/bugInfo.page"> ${bug?.bugTitle} </a> 
+    <a href="${TINY_CONTEXT_PATH +adminPath}/testManagement/page/bugInfo.page"> ${bug?.bugTitle} </a>
 	#end
 	#@td()${bug?.bugOpenedBy} #end
 	#@td()${bug?.bugAssignedTo} #end
@@ -18,7 +18,7 @@
 			#foreach(m:menuManager?.getScopeMenus("plan-linkbug"))
 	     		#set(url=eval(m.href))
 	     			#if("linkbug"==m.id)
-	     				#@tinyTableItemRemove(TINY_CONTEXT_PATH+url)<i class="${m.icon}"></i>#end
+						#@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+url)<i class="${m.icon}"></i>#end
 	     			#end
 			#end
 	#end

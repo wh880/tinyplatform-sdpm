@@ -14,7 +14,8 @@
        
 				
 			#end
-			#@tinyTableContent(TINY_CONTEXT_PATH +　"/product/story/bugSearch/leRelateBugRelease") ##取数据地址 总数据
+			#@tinyTableContent(TINY_CONTEXT_PATH +adminPath +adminPath+　
+				"/product/story/bugSearch/leRelateBugRelease") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox" name="bugId" value="">#end

@@ -30,7 +30,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 @Controller
-@RequestMapping("system/effort")
+@RequestMapping("a/system/effort")
 public class EffortAction extends BaseController{
 	@Autowired
 	private EffortService effortService;

@@ -28,7 +28,7 @@
     <br>
     #end
 #end
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/service/client/save" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/client/save" "post" {"class":""})
 <div style="width:80%;margin-left: 20px;" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">编辑客户</p>

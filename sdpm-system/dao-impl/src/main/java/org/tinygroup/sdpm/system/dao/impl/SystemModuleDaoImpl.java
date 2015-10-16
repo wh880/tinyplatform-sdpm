@@ -135,6 +135,10 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
 		
 	}
 
+	public int deleteByType(String type) {
+		return getDslTemplate().getDslSession().execute(delete(SYSTEM_MODULETABLE).where(SYSTEM_MODULETABLE.MODULE_TYPE.eq(type)));
+	}
+
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;

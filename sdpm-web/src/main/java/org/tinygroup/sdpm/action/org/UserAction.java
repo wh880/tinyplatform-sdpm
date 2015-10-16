@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.org;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +15,12 @@ import org.tinygroup.sdpm.org.service.inter.DeptService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
+import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
+import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
@@ -32,7 +37,7 @@ import java.util.Map;
 
 
 @Controller
-@RequestMapping("/org/user")
+@RequestMapping("/a/org/user")
 public class UserAction extends BaseController {
     @Autowired
     private UserService userService;
@@ -48,7 +53,12 @@ public class UserAction extends BaseController {
     private TestCaseService testCaseService;
     @Autowired
     private TestTaskService testTaskService;
+    @Autowired
+    private TeamService teamService;
+    @Autowired
+    private ProjectService projectService;
 
+    @RequiresPermissions("org-user-edit")
     @RequestMapping("/form")
     public String form(String id, Model model) {
         if (id != null) {
@@ -73,7 +83,7 @@ public class UserAction extends BaseController {
             userService.updateUser(user);
         }
         model.addAttribute("user", user);
-        return "redirect:/org/user/list/";
+        return "redirect:" + adminPath + "/org/user/list/";
     }
 
     @RequestMapping("/list")
@@ -99,7 +109,7 @@ public class UserAction extends BaseController {
             return "organization/user/delect.pagelet";
         }
 
-        return "redirect:/org/user/list/";
+        return "redirect" + adminPath + "/org/user/list/";
     }
 
     @ResponseBody
@@ -277,5 +287,28 @@ public class UserAction extends BaseController {
         Pager<QualityTestCase> testCasePager = testCaseService.findTestCasePager(start, limit, testCase1, order, false);
         model.addAttribute("testCasePager", testCasePager);
         return "/organization/user/userTestCaseTable.pagelet";
+    }
+
+    @RequestMapping("/project")
+    public String projectJump() {
+        return "/organization/user/projectAdmin.page";
+    }
+
+    @RequestMapping("/project/search")
+    public String projectSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, ProjectTask task, String order, String ordertype, Model model, HttpServletRequest request) {
+        OrgUser user = userService.findUser(id);
+        String account = user.getOrgUserAccount();
+        ProjectTeam team = new ProjectTeam();
+        team.setTeamAccount(account);
+        List<ProjectTeam> teamList = teamService.findTeamList(team);
+        List<Project> projectList = new ArrayList<Project>();
+        for (ProjectTeam team1 : teamList) {
+            projectList.add(projectService.findById(team1.getProjectId()));
+        }
+        model.addAttribute("projectList", projectList);
+        Integer size = projectList.size();
+        model.addAttribute("size", size);
+        model.addAttribute("teamList", teamList);
+        return "/organization/user/projectAdminTable.pagelet";
     }
 }

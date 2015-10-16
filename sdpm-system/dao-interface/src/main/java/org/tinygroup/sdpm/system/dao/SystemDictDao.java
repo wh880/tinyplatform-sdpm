@@ -21,5 +21,5 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 
 public interface SystemDictDao extends BaseDao<SystemDict,Integer> {
-
+    void deleteAll();
 }

@@ -97,4 +97,8 @@ public class ModuleManagerImpl implements ModuleManager{
 		return systemModuleDao.deletebyKeyAndedit(id);
 	}
 
+	public int deleteByType(String type) {
+		return systemModuleDao.deleteByType(type);
+	}
+
 }

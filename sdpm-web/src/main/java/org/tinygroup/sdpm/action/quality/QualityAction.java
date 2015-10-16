@@ -15,7 +15,7 @@ import java.util.List;
  * Created by wangll13383 on 2015/10/8.
  */
 @Controller
-@RequestMapping("/quality")
+@RequestMapping("/a/quality")
 public class QualityAction extends BaseController {
     @Autowired
     private ProductService productService;
@@ -33,7 +33,7 @@ public class QualityAction extends BaseController {
             request.getSession().removeAttribute("qualityProductId");
             request.getSession().setAttribute("qualityProductId",list.size()>0?list.get(0).getProductId():0);
         }
-        return "redirect:/quality/bug?status=tbugstatus"+(request.getQueryString()==null?"":("&"+request.getQueryString()));
+        return "redirect:/a/quality/bug?status=tbugstatus"+(request.getQueryString()==null?"":("&"+request.getQueryString()));
 
     }
     @ResponseBody

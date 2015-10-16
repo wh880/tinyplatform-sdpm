@@ -62,7 +62,8 @@
 
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+"/product/story/save" "" {"class":"test","enctype":"multipart/form-data"})
+#@tinyForm(
+    "thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/save" "" {"class":"test","enctype":"multipart/form-data"})
 
 
 <div style="width:100%;" class="pageleftpart">
@@ -80,9 +81,9 @@
 
                         #end
 
-                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page "
+                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/addProduct.page "
                                           class="r ">增加</a><a
-                                href=" ${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
+                                href=" ${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
                     #end
                 </div>
                 <div class="col-6">
@@ -94,8 +95,9 @@
 
                         #end
 
-                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a><a
-                                href=" ${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end
+                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/addProduct.page"
+                                          class="r ">增加</a><a
+                                href=" ${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
                     #end
                 </div>
             #end
@@ -114,7 +116,7 @@
 
                     #end
 
-                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-addplan.page"
+                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-addplan.page"
                                       class="r ">增加</a><a href="#"></a>#end
                 #end
             #end

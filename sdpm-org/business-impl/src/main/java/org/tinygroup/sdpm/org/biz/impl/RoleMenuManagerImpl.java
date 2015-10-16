@@ -35,6 +35,10 @@ public class RoleMenuManagerImpl implements RoleMenuManager {
         return orgRoleMenuDao.getByKey(id);
     }
 
+    public List<OrgRoleMenu> findMenuListByUser(String userId) {
+        return orgRoleMenuDao.findMenuListByUser(userId);
+    }
+
     public OrgRoleMenu findId(String id) {
         return orgRoleMenuDao.getByMenuId(id);
     }

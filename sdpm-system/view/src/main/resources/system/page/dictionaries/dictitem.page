@@ -1,4 +1,5 @@
 #!set(activeTitle="字典项管理",activeMenuId=currentPageId)
+#!set(page="module")
 #import("/org/tinygroup/zTree/components/zTree.component")
 #set(threeMenu="dictionary-entries")
 #set(editpagePath="/system/page/dictionaries/dictitem_edit.pagelet",editpageModalId="dictitemEditModal",editpageModal="#"+editpageModalId)
@@ -7,7 +8,7 @@
 #macro ztreeClick()
 if(!treeNode.isParent){
 var id = treeNode.id;
-loadURL('#link("/system/dict/dictItem?moduleId='+id+'")', $("#tBox"));
+loadURL('#link(adminPath+"/system/dict/dictItem?moduleId='+id+'")', $("#tBox"));
 }
 #end
 
@@ -16,7 +17,7 @@ loadURL('#link("/system/dict/dictItem?moduleId='+id+'")', $("#tBox"));
 #@divDataTablebox()
 #@tableHeaderBar()字典项#end
 #@leftTreeCol()
-#@searchZtreeWithInit("treeDemo" "height:454px;" "/system/module/tree?moduleType=dict")
+#@searchZtreeWithInit("treeDemo" "height:454px;" adminPath+"/system/module/tree?moduleType=dict")
 #end
 #end
 #@tableBox("tBox")

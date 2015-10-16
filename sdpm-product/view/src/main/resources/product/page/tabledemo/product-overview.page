@@ -25,8 +25,11 @@
 				
 <!--修改了关闭、编辑和返回的跳转-->
 		#@aModal("#myModal" "关闭" "700" "400" "btn-class" "/product/page/tabledemo/user-guanbi.pagelet")#buttonIcon(iconClass="icon-off")关闭#end
-		<a title="编辑" class="ml-5" href="${TINY_CONTEXT_PATH}/product/page/tabledemo/mukuai-bianji.page">#buttonIcon(iconClass="icon-plus")编辑</a>
-		<a href="${TINY_CONTEXT_PATH}/product/page/project/overview.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+		<a title="编辑" class="ml-5"
+           href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/mukuai-bianji.page">#buttonIcon(iconClass=
+			"icon-plus")编辑</a>
+		<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/overview.page" title="返回">#buttonIcon(iconClass=
+			"icon-reply")</a>
 				</span>
 				#div(divClass="clearfix")
 			#end

@@ -42,10 +42,10 @@
                 &nbsp;&gt;
                 #foreach(m:menuManager.getScopeMenus("org-user-detail"))
                     #if(m.id=="org-user-gtask")
-                        <a href="${TINY_CONTEXT_PATH}${m.href}?id=${id}" class="active_btn">${m.name}</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${id}" class="active_btn">${m.name}</a>
 
                     #else
-                        <a href="${TINY_CONTEXT_PATH}${m.href}?id=${id}">${m.name}</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${id}">${m.name}</a>
                     #end
                 #end
         </span>

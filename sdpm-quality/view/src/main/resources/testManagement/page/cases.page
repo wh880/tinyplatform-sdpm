@@ -26,7 +26,7 @@
 		                    #end
 		                    #@ulDropdownMenu("downMenuSty")                       
 		                         <p>
-		                             <a href="${TINY_CONTEXT_PATH}/testManagement/page/cases.page">需求分组</a>
+		                             <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">需求分组</a>
 		                         </p>	
 		                        #@liDivider()#end
 		                    #end
@@ -35,7 +35,7 @@
 		             #if(m.id == "tcaseserach")
 		             	<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 		             #else
-		             	<a href="${TINY_CONTEXT_PATH}${m.href}" class="${m.id==status?'active_btn':''}">${m.name}</a>
+		             	<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="${m.id==status?'active_btn':''}">${m.name}</a>
 		             #end
 		             #end
 		         #end  				
@@ -46,10 +46,10 @@
     					#@aModal("#myModal" m.name "550" "100" "" m.href "ml-5")
 								#buttonIcon(iconClass=m.icon)${m.name}#end
 					#else                  
-             			<a href="${TINY_CONTEXT_PATH}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+             			<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>
 			 		#end
 		 		#end
-#*					<a href="${TINY_CONTEXT_PATH}/testManagement/page/proposecase.page">#buttonIcon(iconClass=
+#*					<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/proposecase.page">#buttonIcon(iconClass=
                         "icon-plus")建用例</a>*#
 				</span>
             #div(divClass="clearfix")
@@ -108,7 +108,7 @@
 
 #end
 #set(requestStatuString = tinyRequestQueryString!=null ?tinyRequestQueryString:"")
-#@tinyTableContent(TINY_CONTEXT_PATH+"/quality/testCase/findPager?"+requestStatuString)
+#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/testCase/findPager?"+requestStatuString)
 #@thead()
 #@tr()
 #@tinyTh({"width":"6"})<input type="checkbox" name="" value="">#end

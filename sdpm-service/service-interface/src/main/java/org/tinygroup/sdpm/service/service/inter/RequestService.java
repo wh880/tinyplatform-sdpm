@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.service.service.inter;
 
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -67,11 +68,11 @@ public interface RequestService {
     Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, Integer status, ServiceRequest clientRequest, Integer tree, String order, String ordertype);
 
     /**
-     * 查找数据库的由我解决的记录
+     * 查找数据库的由我解决或由我回复的记录，区别在于operation
      *
      * @return
      */
-    Pager<ServiceRequest> findReplyByMe(Integer start, Integer limit, Integer operation, ServiceRequest clientRequest, String order, String ordertype);
+    Pager<ServiceRequest> findOperationByMe(Integer start, Integer limit, OrgUser user, ServiceRequest clientRequest, Integer tree, Integer operation, String order, String ordertype);
 
     /**
      * 关闭请求
