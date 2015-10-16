@@ -22,6 +22,7 @@ public class DeptAction extends BaseController {
     @Autowired
     private UserService userService;
 
+    @ResponseBody
     @RequestMapping("/add")
     public Map addDept(Integer orgDeptParent, String orgDeptName) {
         OrgDept dept = new OrgDept();
@@ -34,6 +35,7 @@ public class DeptAction extends BaseController {
         return map;
     }
 
+    @ResponseBody
     @RequestMapping("edit")
     public Map editDept(Integer orgDeptId, String orgDeptName) {
         OrgDept dept = deptService.findDept(orgDeptId);
@@ -45,6 +47,7 @@ public class DeptAction extends BaseController {
         return map;
     }
 
+    @ResponseBody
     @RequestMapping("delete")
     public Map deleteDept(Integer orgDeptId) {
         deptService.deleteDept(orgDeptId);
