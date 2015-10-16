@@ -74,12 +74,7 @@ public class DocAction {
 	@RequestMapping(value="/doc/list")
 	public String docList(String moduleId, HttpServletRequest request,Integer page,Integer limit,String order,String ordertype,DocumentDoc doc,Model model ,String groupOperate, SearchInfos searchInfos)
 	{
-		
-	/*	int m =1;
-		String a = "bbb";
-		String b = a.replaceFirst("b", String.valueOf(m));
-		System.out.println(b);*/
-		
+	
 		doc.setDocDeleted("0");		
 		boolean asc = true;
 		if("desc".equals(ordertype)){
