@@ -47,4 +47,6 @@ public interface FaqTypeService {
      * @return
      */
     List<ServiceFaqType> deleteFaqType(Integer id);
+
+    Integer deleteDept(Integer id);
 }

@@ -29,7 +29,7 @@
 	#@toggleRight()
 		
 				
-		#@tinyForm("thisform" TINY_CONTEXT_PATH+"/productLine/update" "post" )
+		#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/productLine/update" "post" )
 		#hiddenInput("","productLineId","",productLine?.productLineId)
 			
 			#@elementItem()

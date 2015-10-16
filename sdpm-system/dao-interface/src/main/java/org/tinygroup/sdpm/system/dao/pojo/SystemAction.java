@@ -41,7 +41,7 @@ public class SystemAction implements Serializable{
 	 * 对象ID
 	 * 
 	 */
-	private Integer actionObjectId;
+	private String actionObjectId;
 
 	/** 
 	 * 所属项目
@@ -96,6 +96,18 @@ public class SystemAction implements Serializable{
 	 * 
 	 */
 	private Integer actionEfforted;
+	/**
+	 * 创建者名称
+	 */
+	private String  actorName;
+
+	public String getActorName() {
+		return actorName;
+	}
+
+	public void setActorName(String actorName) {
+		this.actorName = actorName;
+	}
 
 	private String objectName;
 
@@ -133,11 +145,11 @@ public class SystemAction implements Serializable{
 		return actionObjectType;
 	}
 
-	public void setActionObjectId(Integer actionObjectId){
+	public void setActionObjectId(String actionObjectId){
 		this. actionObjectId = actionObjectId;
 	}
 
-	public Integer getActionObjectId(){
+	public String getActionObjectId(){
 		return actionObjectId;
 	}
 

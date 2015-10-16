@@ -38,7 +38,7 @@ public class ActionAction extends BaseController{
 	
 	
 	@RequestMapping("/list")
-	public String list(SystemAction action,
+	public String list(SystemAction action,String choice,
 			@RequestParam(required = false,defaultValue = "1")int page,
 			@RequestParam(required = false,defaultValue = "10")int pagesize,
 			@RequestParam(required = false,defaultValue = "actionDate")String order,
@@ -48,7 +48,7 @@ public class ActionAction extends BaseController{
 			plan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 		}
 		*/
-		Pager<SystemAction>  pagerSystemAction = actionService.findSystemActionPager(page, pagesize, action, order, ordertype);
+		Pager<SystemAction>  pagerSystemAction = actionService.queryPager(page, pagesize,ActionUtil.getActionDateCondition(choice), action, order, ordertype);
 
 		model.addAttribute("systemAction",pagerSystemAction);
 

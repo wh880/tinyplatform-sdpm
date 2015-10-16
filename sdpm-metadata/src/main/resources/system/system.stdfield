@@ -63,7 +63,7 @@
   <standard-field id="1518400fe07c4cc3a78bd5c6023f9edb" name="module_path" title="模块地址" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="51b35d0098cc46e4ae14e922f78269f6" name="action_id" title="系统日志ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="19f5ad5730c0424fa5ebe12f141aba90" name="action_object_type" title="对象类型" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="d5e3e1f45ae34d569cf8ecd010ec4437" name="action_object_id" title="对象ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="d5e3e1f45ae34d569cf8ecd010ec4437" name="action_object_id" title="对象ID" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="f74f8eb053ef448a8903f8ab823d7950" name="action_product" title="所属产品" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="6185f7b6c38f499e8870b6247a464bb0" name="action_project" title="所属项目" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="f5aed712657140c283a09dc15231d9b5" name="action_actor" title="操作者" business-type-id="27ebfcdc558c477da425a46e566d4637"/>

@@ -40,6 +40,8 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
+import org.tinygroup.sdpm.common.log.annotation.LogClass;
+import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.document.dao.DocumentDoclibDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -53,8 +55,10 @@ import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 
 @Repository
+@LogClass("doclib")
 public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements DocumentDoclibDao {
-
+	
+	@LogMethod("add")
 	public DocumentDoclib add(DocumentDoclib documentDoclib) {
 		return getDslTemplate().insertAndReturnKey(documentDoclib, new InsertGenerateCallback<DocumentDoclib>() {
 			public Insert generate(DocumentDoclib t) {
@@ -68,7 +72,8 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 			}
 		});
 	}
-
+	
+	@LogMethod("edit")
 	public int edit(DocumentDoclib documentDoclib) {
 		if(documentDoclib == null || documentDoclib.getDocLibId() == null){
 			return 0;
@@ -86,6 +91,7 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 		});
 	}
 
+	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -97,6 +103,7 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 		});
 	}
 
+	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -173,7 +180,8 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 	public int[] batchInsert(List<DocumentDoclib> documentDoclibs){
 			return batchInsert(true ,documentDoclibs);
 	}
-
+	
+	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<DocumentDoclib> documentDoclibs) {
 		if (CollectionUtil.isEmpty(documentDoclibs)) {
 			return new int[0];
@@ -191,6 +199,7 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 		});
 	}
 
+	@LogMethod("batchDelete")
 	public int[] batchDelete(List<DocumentDoclib> documentDoclibs) {
 		if (CollectionUtil.isEmpty(documentDoclibs)) {
 			return new int[0];

@@ -47,5 +47,7 @@ public interface FaqTypeManager {
      * @return
      */
     List<ServiceFaqType> delete(Integer id);
+
+    Integer deleteTree(Integer id);
 }
 

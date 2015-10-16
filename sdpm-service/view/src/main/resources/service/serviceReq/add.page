@@ -153,7 +153,7 @@
         #@elementItem()
             #@sdpmItem("请求承诺回复时间")
                 #@tinyDateInput("requestCommitmentDate" formatDate(request?.requestCommitmentDate,
-                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":""})#end
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px",})#end
             #end
         #end
 

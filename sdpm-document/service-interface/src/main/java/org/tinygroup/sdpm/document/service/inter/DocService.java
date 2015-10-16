@@ -28,7 +28,7 @@ public interface DocService {
 	public List<DocumentDoc> findDocList(DocumentDoc doc);
 	public List<DocumentDoclib> findDoclibList(DocumentDoclib doclib);
 	//page
-	public Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc,SearchInfos conditions,String groupOperate, String sortName,boolean asc);
+	public Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc, String statusCondition, SearchInfos conditions,String groupOperate, String sortName,boolean asc);
 	public Pager<DocumentDoclib> findDoclibRetPager(Integer start,Integer limit,DocumentDoclib doclib,String sortName,boolean asc);
 	//delete
 	public int deleteDocById(Integer id);

@@ -9,6 +9,7 @@ import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.dao.SystemActionDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class ActionManagerImpl implements ActionManager {
         if (actions.size() > 0) {
             for (SystemAction s : actions) {
                 s = systemActionDao.getActionAndObject(s);
-                s.setUrl(s.getActionObjectType());
+                //s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));
             }
         }
         return actions;
@@ -50,11 +51,22 @@ public class ActionManagerImpl implements ActionManager {
         if (pager.getRecords().size() > 0) {
             for (SystemAction s : pager.getRecords()) {
                 s = systemActionDao.getActionAndObject(s);
-                //s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));			}
+                //s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));
             }
         }
         return pager;
     }
 
+    public Pager<SystemAction> queryPager(int start,int limit ,Condition condition,SystemAction systemAction , String order,String ordertype){
+
+        Pager<SystemAction> pager = systemActionDao.queryPager((start-1)*limit, limit,condition, systemAction, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+        if(pager.getRecords().size()>0){
+            for(SystemAction s : pager.getRecords()){
+                s = systemActionDao.getActionAndObject(s);
+                //s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));
+            }
+        }
+        return pager;
+    }
 
 }

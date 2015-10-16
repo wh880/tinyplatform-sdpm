@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.project.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.biz.inter.ProjectStoryManager;
@@ -26,6 +27,10 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     @Autowired
     private TaskManager taskManager;
 
+
+    public List<ProjectStory> findByProjectStory(ProjectStory projectStory) {
+        return projectStoryManager.findList(projectStory);
+    }
 
     public Integer batchtDel(String condition) {
         return projectStoryManager.batchtDel(condition);
@@ -80,5 +85,10 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
             s.setTaskNumber(taskManager.getTaskSumByStory(s.getStoryId()));
         }
         return pager;
+    }
+
+    public Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
+
+        return storyManager.findPager(start, limit, story,statusCondition, conditions, groupOperate, columnName, asc);
     }
 }

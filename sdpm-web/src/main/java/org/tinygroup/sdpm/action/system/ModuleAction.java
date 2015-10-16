@@ -122,13 +122,21 @@ public class ModuleAction extends BaseController {
         model.addAttribute("module", module);
         return "/system/page/dictionaries/dict_view.pagelet";
     }
-
+    @ResponseBody
     @RequestMapping("delete")
-    public String deleteModule(Integer moduleId) {
-        if (moduleId != null) {
-            moduleService.deleteAndedit(moduleId);
-        }
-        return "redirect: list?moduleType=dict";
+    public Map<String, String> deleteModule(Integer id) {
+        Map<String, String> map = new HashedMap();
+        
+          int s=  moduleService.deleteAndedit(id);
+          if(s>0){
+        	  map.put("status", "y");
+              map.put("info", "删除成功");
+          }else{
+        	  map.put("status", "n");
+        	  map.put("info", "删除失败");
+          }
+        
+        return map;
     }
 //    @RequestMapping("dcit/delete")
 //    public String dictdeleteModule(Integer moduleId) {
@@ -259,7 +267,7 @@ public class ModuleAction extends BaseController {
 
     private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, String parent) {
         for (SystemModule systemModule : systemModules) {
-            if (!parent.contains("p")&&systemModule.getModuleParent() == Integer.valueOf(parent)) {
+            if (!parent.contains("p")&&systemModule.getModuleParent() == Integer.parseInt(parent)) {
                 mergeSingleModule(systemModules,systemModule,maps,parent);
             }
             if(parent.contains("p")&&systemModule.getModuleParent() == 0){
@@ -317,6 +325,8 @@ public class ModuleAction extends BaseController {
     		return "/product/page/project/togglebox.page";
     	}else if ("promodule".equals(forwordPager)) {
     		return "/product/page/project/product-modular.page";
+    	}else if("doc".equals(forwordPager)){
+    		return "/document/treeNew.page";
     	}
         return "";
 
@@ -333,6 +343,8 @@ public class ModuleAction extends BaseController {
     		return "/product/page/project/togglebox.page";
     	}else if ("promodule".equals(forwordPager)) {
     		return "/product/page/project/product-modular.page";
+    	}else if("doc".equals(forwordPager)){
+    		return "/document/treeNew.page";
     	}
         return "";
     }
@@ -345,6 +357,8 @@ public class ModuleAction extends BaseController {
     		return "/product/page/project/togglebox.page";
     	}else if ("promodule".equals(forwordPager)) {
     		return "/product/page/project/product-modular.page";
+    	}else if("doc".equals(forwordPager)){
+    		return "/document/treeNew.page";
     	}
         return "";
     }
