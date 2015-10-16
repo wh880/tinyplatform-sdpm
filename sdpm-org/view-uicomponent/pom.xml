@@ -9,5 +9,5 @@
     </parent>
     <artifactId>sdpm-org-view-uicomponent</artifactId>
     <name>sdpm-org-view-uicomponent</name>
-    <url>http://maven.apache.org</url>
+
 </project>

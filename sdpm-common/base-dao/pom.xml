@@ -9,9 +9,8 @@
     </parent>
     <artifactId>sdpm-common-base-dao</artifactId>
     <name>sdpm-common-base-dao</name>
-    <url>http://maven.apache.org</url>
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     </properties>
     <dependencies>
     	

@@ -10,7 +10,7 @@
     <artifactId>sdpm-quality</artifactId>
     <packaging>pom</packaging>
     <name>sdpm-quality develop</name>
-    <url>http://maven.apache.org</url>
+
     <modules>
         <module>business-interface</module>
         <module>business-impl</module>

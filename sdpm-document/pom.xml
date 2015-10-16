@@ -3,18 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>sdpm</artifactId>
-    <groupId>org.tinygroup</groupId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-    <groupId>org.tinygroup</groupId>
+        <artifactId>sdpm</artifactId>
+        <groupId>org.tinygroup</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
     <artifactId>sdpm-document</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>sdpm-document develop</name>
-    <url>http://maven.apache.org</url>
+
     <modules>
-        <module>app</module>
         <module>business-interface</module>
         <module>business-impl</module>
         <module>common</module>
@@ -25,6 +23,6 @@
         <module>service-wrapper</module>
         <module>view</module>
         <module>view-uicomponent</module>
-        <module>web</module>
+        <!--<module>web</module>-->
     </modules>
 </project>

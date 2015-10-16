@@ -10,7 +10,7 @@
     <artifactId>sdpm-org</artifactId>
     <packaging>pom</packaging>
     <name>sdpm-org develop</name>
-    <url>http://maven.apache.org</url>
+
     <modules>
         <module>business-inter</module>
         <module>business-impl</module>
