@@ -356,5 +356,14 @@ public class StoryAction extends BaseController{
 	    map.put("info", "删除成功");
 	    return map;
 	}
-
+	
+	 @RequestMapping("/toPager/{forwordPager}")
+	 public String toPager(@PathVariable(value="forwordPager")String forwordPager,Model model){
+		 
+		 
+		 if("storyReport".equals(forwordPager)){
+			 return "product/page/tabledemo/product-report.page";
+		 }
+		 return "";
+	 }
 }
