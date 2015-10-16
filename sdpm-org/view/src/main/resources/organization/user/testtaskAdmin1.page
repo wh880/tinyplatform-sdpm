@@ -54,6 +54,10 @@
                         </optgroup>
 
                         #end
+                        #@navSelect2Fix()
+                        <a href="${TINY_CONTEXT_PATH +adminPath}/org/user/list" class="r">所有用户 </a>&nbsp;
+                        <a href="${TINY_CONTEXT_PATH +adminPath}/org/user/form">添加用户</a>&nbsp;
+                        #end
                     #end
                     #hiddenInput("userIdHidden","orgUserId","","")
 
