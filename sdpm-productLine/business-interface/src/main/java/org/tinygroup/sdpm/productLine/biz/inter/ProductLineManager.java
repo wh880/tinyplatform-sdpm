@@ -68,4 +68,6 @@ public interface ProductLineManager {
 	 * @return
 	 */
 	Pager<ProductLine> findPager(int page,int pagesize,ProductLine productLine,String order,String ordertype);
+	
+	
 }

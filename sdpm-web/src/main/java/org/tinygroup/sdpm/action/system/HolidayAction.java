@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
 import org.tinygroup.sdpm.system.service.inter.HolidayService;
 import org.tinygroup.tinysqldsl.Pager;
@@ -22,6 +24,8 @@ import org.tinygroup.tinysqldsl.Pager;
 public class HolidayAction extends BaseController{
 	@Autowired
 	private HolidayService holidayService;
+	@Autowired
+	private UserService userService;
 	@RequestMapping("")
 	public String index(){
 		
@@ -30,6 +34,12 @@ public class HolidayAction extends BaseController{
 	@RequestMapping("holiday")
 	public String holiday(){
 		return "/system/page/holiday/holiday.page";
+	}
+	@RequestMapping("holiday/add")
+	public String holidayAdd(Model model){
+	List<OrgUser> orgUsers=userService.findUserList(new OrgUser());
+	model.addAttribute("users", orgUsers);
+	return "/system/page/holiday/holiday-add.pagelet";
 	}
 	@RequestMapping("holiday/findPager")
 	public String fingPage(Integer start ,Integer limit ,
@@ -47,8 +57,9 @@ public class HolidayAction extends BaseController{
 	}
 	@RequestMapping("holiday/find")
 	public String find(Holiday holiday,Model model){
+		List<OrgUser> orgUsers=userService.findUserList(new OrgUser());
 		Holiday day = holidayService.findById(holiday.getHolidayId());
-		
+		model.addAttribute("users", orgUsers);
 		model.addAttribute("holiday", day);
 		return "/system/page/holiday/edit.page";
 	}

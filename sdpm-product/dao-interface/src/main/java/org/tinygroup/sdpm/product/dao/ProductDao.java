@@ -22,6 +22,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 
 public interface ProductDao extends BaseDao<Product,Integer> {
 	
@@ -30,5 +31,7 @@ public interface ProductDao extends BaseDao<Product,Integer> {
 	List<Product> getByKeys(Integer... id);
 	
 	List<ProductAndLine> getProductAndLine(Product t);
+	
+	
 
 }

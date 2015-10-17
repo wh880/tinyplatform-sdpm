@@ -24,7 +24,7 @@
         <p class="titleName">建任务</p>
         #@elementItem()
             #@sdpmItem("所属项目")
-                <input type="hidden" name="taskProject" value="${selProject.projectId}"/>
+                #tinyInput("hidden" "taskProject" selProject.projectId)
                 ${selProject.projectName}
             #end
         #end
@@ -67,9 +67,10 @@
         #@elementItem()
             #@sdpmItem("指派给")
                 #@Tselect2F()
-                    #@Tselect2Body("taskAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("taskAssignedTo" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value=""></option>
                         #foreach(t : team)
-                            <option value="${t.teamAccount}">${t.teamAccount}</option>
+                            <option value="${t?.teamAccount}">${t?.teamAccount}</option>
                         #end
                     #end
                 ##填写任意内容，侦听需重新填加 A侦听已内置
@@ -87,7 +88,7 @@
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value=""></option>
                         #foreach(s : storyList)
-                            <option value=${s.storyId}>${s.storyTitle}</option>
+                            <option value=${s?.storyId}>${s?.storyTitle}</option>
                         #end
                     #end
                     #@Tselect2Fix()

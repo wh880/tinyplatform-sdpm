@@ -102,16 +102,16 @@
 	                        	 <option value="${project?.projectId}">${project?.projectName}</option>
 	                        #end	                       	                    	                        
 	                    	#end
-	                    	 <script type="text/javascript">
+#*	                    	 <script type="text/javascript">
                             $("#${sid}").on("change",function(){
                                 var pId = $("#${sid}  option:selected").val();
                                 ajaxRead("${sid}","docProduct","productId","productName","/document/ajax/product?projectId="+pId,${doc?.docProduct});
 
                             })
-                        	</script>
+                        	</script>*#
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd" class="r">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/">全部</a>#end                 	                    	
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end                 	                    	
                 	  #end
                 	  #end
                 	  #end
@@ -123,13 +123,13 @@
 					#@div(divClass="col-6")
 					#@Tselect2F()
 	                   		#@Tselect2Body("docProduct" doc?.docProduct {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-#*	                        #foreach(product : productList)
+					        #foreach(product : productList)
 	                        	 <option value="${product?.productId}">${product?.productName}</option>
-	                        #end	                       	                    	                        *#
+	                        #end	
 	                    	#end                  
 	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
                 	  #end
                 	  #end
                 	  #end
@@ -142,9 +142,9 @@
          <div class="col-4">
           #@Tselect2F()
 	          #@Tselect2Body("docModule" doc?.docModule {"class":"input-text select2"}) 
-#*        		 #foreach(var:libList)
+        		 #foreach(var:libList)
 	                <option value="${doc?.docModule}">${doc?.docModule}</option>
-	            #end *#
+	            #end 
 	            <option value="1">分类1</option>
 	          #end                	         
               #end

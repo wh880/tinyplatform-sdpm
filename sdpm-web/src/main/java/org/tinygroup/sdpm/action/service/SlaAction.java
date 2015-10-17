@@ -73,7 +73,7 @@ public class SlaAction extends BaseController {
 
     @RequestMapping(value = "/list/data")
     public String listData(Integer limit, Integer start, ServiceSla sla, Integer treeId,
-                           @RequestParam(required = false, defaultValue = "faqId") String order,
+                           @RequestParam(required = false, defaultValue = "slaId") String order,
                            @RequestParam(required = false, defaultValue = "asc") String ordertype,
                            Model model) {
         Pager<ServiceSla> pager = slaService.findSlaPager(start, limit, sla, treeId, order, ordertype);
@@ -96,7 +96,7 @@ public class SlaAction extends BaseController {
     public String showClient(Integer id, Integer limit, Integer start, ServiceSla sla,
                              @RequestParam(required = false, defaultValue = "1") int page,
                              @RequestParam(required = false, defaultValue = "10") int pageSize,
-                             @RequestParam(required = false, defaultValue = "faqId") String order,
+                             @RequestParam(required = false, defaultValue = "slaId") String order,
                              @RequestParam(required = false, defaultValue = "asc") String ordertype,
                              Model model) {
         start = (page - 1) * pageSize;

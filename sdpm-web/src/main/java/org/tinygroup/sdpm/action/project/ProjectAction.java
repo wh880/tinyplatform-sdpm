@@ -134,8 +134,4 @@ public class ProjectAction extends BaseController {
         return "project/survey/basicInformation.pagelet";
     }
 
-    @RequestMapping("/allProject")
-    public String allProject() {
-        return "project/allProject.page";
-    }
 }

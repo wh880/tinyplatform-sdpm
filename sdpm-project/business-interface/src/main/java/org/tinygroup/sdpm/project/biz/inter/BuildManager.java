@@ -1,6 +1,8 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
 
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -72,4 +74,11 @@ public interface BuildManager {
     Integer delete(int id);
 
     public int[] batchDelBuildByIds(List<ProjectBuild> keys);
+    
+    /**
+	 * 产品线树
+	 * @param t
+	 * @return
+	 */
+	List<ProductAndLine> getProductLineTree(ProductLine t);
 }

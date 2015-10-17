@@ -9,6 +9,7 @@ import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
 
 @Component
@@ -69,5 +70,7 @@ public class ProductServiceImpl implements ProductService {
 
 		return productManager.getProductAndLine(product);
 	}
+
+	
 
 }
