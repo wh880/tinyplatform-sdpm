@@ -2,10 +2,13 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.tinysqldsl.Pager;
+
 
 
 import java.util.Date;
@@ -61,4 +64,8 @@ public class BuildServiceImpl implements BuildService {
     public List<ProjectBuild> findListBuild(ProjectBuild projectBuild){
         return buildManager.findList(projectBuild);
     }
+	public List<ProductAndLine> getProductLineTree(ProductLine t) {
+
+		return buildManager.getProductLineTree(t);
+	}
 }

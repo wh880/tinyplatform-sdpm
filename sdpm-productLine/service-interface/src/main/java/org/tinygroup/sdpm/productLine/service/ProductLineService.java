@@ -68,10 +68,5 @@ public interface ProductLineService {
 	Pager<ProductLine> findProductLinePager(int page,int pagesize,ProductLine productLine,String order,String ordertype);
 	
 	
-	/**
-	 * 产品线树
-	 * @param t
-	 * @return
-	 */
-	List<ProductLine> getProductLineTree(ProductLine t);
+	
 }

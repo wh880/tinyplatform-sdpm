@@ -56,10 +56,7 @@ public class ProductLineServiceImpl implements ProductLineService {
 		return productLineManager.findList(productLine);
 	}
 
-	public List<ProductLine> getProductLineTree(ProductLine t) {
-
-		return productLineManager.getProductLineTree(t);
-	}
+	
 
 	
 

@@ -25,7 +25,7 @@ public interface ProductLineDao extends BaseDao<ProductLine,Integer> {
 	
 	Integer softDelete(Integer id);
 	
-	List<ProductLine> getProductLineTree(ProductLine t);
+	
 	
 
 }

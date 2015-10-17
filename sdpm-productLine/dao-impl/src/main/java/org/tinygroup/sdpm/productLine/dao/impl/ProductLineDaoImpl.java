@@ -17,8 +17,7 @@
 package org.tinygroup.sdpm.productLine.dao.impl;
 
 import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
-import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
-import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
+
 
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
@@ -314,34 +313,5 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 
     }
 	
-	public List<ProductLine> getProductLineTree(ProductLine t){
-		
-		Select select = select(PRODUCT_LINETABLE.PRODUCT_LINE_ID,PRODUCT_LINETABLE.PRODUCT_LINE_NAME,PRODUCTTABLE.PRODUCT_ID,PRODUCTTABLE.PRODUCT_NAME,PROJECT_BUILDTABLE.BUILD_ID,PROJECT_BUILDTABLE.BUILD_NAME).
-				from(PRODUCT_LINETABLE).join(leftJoin(PRODUCTTABLE, PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(PRODUCTTABLE.PRODUCT_LINE_ID))).join(leftJoin(PROJECT_BUILDTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PROJECT_BUILDTABLE.BUILD_PRODUCT))).
-				where(
-						and(	
-								PRODUCT_LINETABLE.PRODUCT_LINE_ID.isNotNull(),
-								PRODUCTTABLE.PRODUCT_ID.isNotNull(),
-								PROJECT_BUILDTABLE.BUILD_ID.isNotNull(),
-								
-								PRODUCT_LINETABLE.COMPANY_ID.eq(t.getCompanyId()),
-								PRODUCT_LINETABLE.DEPT_ID.eq(t.getDeptId()),
-								PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.eq(t.getProductLineRoot()),
-								PRODUCT_LINETABLE.PRODUCT_LINE_PARENT.eq(t.getProductLineParent()),
-								PRODUCT_LINETABLE.PRODUCT_LINE_NAME.eq(t.getProductLineName()),
-								PRODUCT_LINETABLE.PRODUCT_LINE_CODE.eq(t.getProductLineCode()),
-								PRODUCT_LINETABLE.PRODUCT_LINE_ORDER.eq(t.getProductLineOrder()),
-								PRODUCT_LINETABLE.PRODUCT_LINE_SPEC.eq(t.getProductLineSpec()),
-								PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.eq(t.getProductLineStatus()),
-								PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.eq(t.getProductLineOwner()),
-								PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.eq(t.getProductLineQualityManager()),
-								PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.eq(t.getProductLineDeliveryManager()),
-								PRODUCT_LINETABLE.ACL.eq(t.getAcl()),
-								PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.eq(t.getProductLineWhiteList()),
-								PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.eq(t.getProductLineCreatedBy()),
-								PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.eq(t.getProductLineCreatedDate()),
-								PRODUCT_LINETABLE.DELETED.eq(t.getDeleted())));
-		List<ProductLine> productLines = getDslSession().fetchList(select, ProductLine.class);
-		return productLines;
-	}
+	
 }

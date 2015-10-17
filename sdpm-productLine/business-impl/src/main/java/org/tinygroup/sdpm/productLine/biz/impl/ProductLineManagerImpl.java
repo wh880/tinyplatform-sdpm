@@ -61,10 +61,7 @@ public class ProductLineManagerImpl implements ProductLineManager{
 		return productLineDao.query(productLine);
 	}
 
-	public List<ProductLine> getProductLineTree(ProductLine t) {
-
-		return productLineDao.getProductLineTree(t);
-	}
+	
 
 	
 
