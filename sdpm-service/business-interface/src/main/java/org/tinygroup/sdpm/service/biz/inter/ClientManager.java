@@ -71,7 +71,7 @@ public interface ClientManager {
      * @param treeId 主键
      * @return
      */
-    Pager<ServiceClient> findByProduct(Integer start, Integer limit, Integer treeId, String order, String ordertype);
+    Pager<ServiceClient> findByProduct(Integer start, Integer limit, Integer treeId, String order, String orderType);
 
     /**
      * 在新建或编辑用户时判断该用户是否已存在

@@ -4,14 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.service.biz.inter.RequestManager;
 import org.tinygroup.sdpm.service.dao.ServiceRequestDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.List;
+
+import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 
 /**
  * Created by Administrator on 2015-09-18.
@@ -52,8 +57,14 @@ public class RequestManagerImpl implements RequestManager {
     }
 
     public Pager<ServiceRequest> findPager(Integer start, Integer limit, Integer status, ServiceRequest serviceRequest,
-                                           Integer treeId, String order, String ordertype) {
-        return requestDao.queryPagerBy(start, limit, serviceRequest, status, treeId, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
+                                           Integer treeId, String groupOperate, SearchInfos conditions, String order, String ordertype) {
+        String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
+        Condition condition1 = null;
+        if (condition != null) {
+            condition1 = fragmentCondition(condition);
+        }
+
+        return requestDao.queryPagerBy(start, limit, serviceRequest, status, treeId, condition1, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
     }
 
     public Pager<ServiceRequest> findOperationByMe(Integer start, Integer limit, OrgUser user, ServiceRequest serviceRequest, Integer treeId, Integer operation,
