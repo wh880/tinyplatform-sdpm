@@ -67,6 +67,8 @@
             <class-path path="E:\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\sdpm\sdpm-system\view\src\main\resources"/>
             <class-path path="E:\sdpm\sdpm-product\view\src\main\resources"/>
+             <class-path path="E:\sdpm\sdpm-productLine\view\src\main\resources"/>
+            
             <!-- 陈朋-->
             <class-path path="D:\GitFile\sdpm\sdpm-quality\view\src\main\resources"/>
             <class-path path="D:\GitFile\sdpm\sdpm-document\view\src\main\resources"/>
