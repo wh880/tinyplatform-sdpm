@@ -82,14 +82,16 @@ public class DeptAction extends BaseController {
 //        }
 
         for (OrgDept d : deptList) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("id", d.getOrgDeptId());
-            map.put("pId", d.getOrgDeptParent());
-            map.put("open", true);
-            map.put("add", true);
-            map.put("edit", true);
-            map.put("name", d.getOrgDeptName());
-            list.add(map);
+            if (!d.getOrgDeptParent().equals(-2)) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("id", d.getOrgDeptId());
+                map.put("pId", d.getOrgDeptParent());
+                map.put("open", true);
+                map.put("add", true);
+                map.put("edit", true);
+                map.put("name", d.getOrgDeptName());
+                list.add(map);
+            }
         }
         return list;
     }
