@@ -51,7 +51,7 @@
 		#end
 	</div>
 	<div style="width:30%;float:right"> 
-		#TypeInfo("holiday","")
+		#TypeInfo("holiday","1")
     </div>
 	
 		
