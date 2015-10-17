@@ -28,23 +28,24 @@ public class TypeInfoFileProcessor extends AbstractFileProcessor {
         for (FileObject fileObject : deleteList) {
             LOGGER.logMessage(LogLevel.INFO, "正在移除typeInfo文件[{0}]",
                     fileObject.getAbsolutePath());
-            TypeInfos typeinfos = (TypeInfos)caches.get(fileObject.getAbsolutePath());
-            if(typeinfos!=null){
+            TypeInfos typeinfos = (TypeInfos) caches.get(fileObject.getAbsolutePath());
+            if (typeinfos != null) {
                 typeInfoResolvor.removeTypeInfo(typeinfos);
                 caches.remove(fileObject.getAbsolutePath());
-            }            LOGGER.logMessage(LogLevel.INFO, "移除typeInfo文件[{0}]结束",
+            }
+            LOGGER.logMessage(LogLevel.INFO, "移除typeInfo文件[{0}]结束",
                     fileObject.getAbsolutePath());
         }
         for (FileObject fileObject : changeList) {
             LOGGER.logMessage(LogLevel.INFO, "正在加载typeInfo文件[{0}]",
                     fileObject.getAbsolutePath());
-            TypeInfos oldTypeinfos = (TypeInfos)caches.get(fileObject.getAbsolutePath());
-            if(oldTypeinfos!=null){
+            TypeInfos oldTypeinfos = (TypeInfos) caches.get(fileObject.getAbsolutePath());
+            if (oldTypeinfos != null) {
                 typeInfoResolvor.removeTypeInfo(oldTypeinfos);
             }
             TypeInfos typeinfos = (TypeInfos) stream
                     .fromXML(fileObject.getInputStream());
-            typeInfoResolvor.addTypeInfo(typeinfos,fileObject.getAbsolutePath());
+            typeInfoResolvor.addTypeInfo(typeinfos, fileObject.getAbsolutePath());
             caches.put(fileObject.getAbsolutePath(), typeinfos);
             LOGGER.logMessage(LogLevel.INFO, "加载typeInfo文件[{0}]结束",
                     fileObject.getAbsolutePath());
@@ -53,6 +54,6 @@ public class TypeInfoFileProcessor extends AbstractFileProcessor {
 
     @Override
     protected boolean checkMatch(FileObject fileObject) {
-        return fileObject.getFileName().endsWith(TYPEINFO_EXT_FILE_NAME) || fileObject.getFileName().endsWith(".typeinfo");
+        return fileObject.isInPackage() && fileObject.getFileName().endsWith(TYPEINFO_EXT_FILE_NAME);
     }
 }
