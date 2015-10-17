@@ -45,7 +45,7 @@
       		#end	
 							
 			#@elementItem()
-					#@colLabel()文档标题#end
+					#@colLabel()<span class="c-red">*</span>文档标题#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#tinyInput("text" "docTitle" ""{"datatype":"*4-16","nullmsg":"标题不能为空！","placeholder":"4~16个字符，字母/中文/数字/下划线","class":"input-text"})
@@ -55,7 +55,7 @@
 				#end
 				
 			#@elementItem(elementId="urlBox" eleItemClass="hidden")
-					#@colLabel()文档URL#end
+					#@colLabel()<span class="c-red">*</span>文档URL#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*","class":"input-text"})
