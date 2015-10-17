@@ -40,19 +40,15 @@
 								<script type="text/javascript">
 									$("#${sid}").on("change",function(){
 										var pId = $("#${sid}  option:selected").val();
-										ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId?:0});
-
+										ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId?:0},"module");
+                                        ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId,${bug?.buildId?:0},"build");
 									})
 								</script>
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
                 	  #end
-#*					#@tinySelect("lang" "1" {"class":"select2"})
-							#@tinyOptionItem("1")日本三菱#end
-							#@tinyOptionItem("2")销售系统#end
-							#@tinyOptionItem("3")国产需求#end
-					#end*#
+
 					#end
 					#@div(divClass="col-0")&nbsp;&nbsp#end
 					#@div(divClass="col-3")
@@ -68,14 +64,9 @@
 									})
 								</script>
                 	  #end
-#*					#@tinySelect("lang" "zh" {"class":"select2"})
-							#@tinyOptionItem("zh")/首页#end
-							#@tinyOptionItem("en")/轮播图#end
-							#@tinyOptionItem("ta")/导航#end
-					#end*#
+
 					#end
-#*					#buttonRadiusDefault(caption="维护模板")
-					#buttonRadiusDefault(caption="刷新")*#
+
 				#end
 			#end
 			#@elementItem()
@@ -92,8 +83,7 @@
 								<script type="text/javascript">
 									$("#${sid}").on("change",function(){
 										var pId = $("#${sid}  option:selected").val();
-										ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0});
-										ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProject="+pId,${bug?.buildId?:0});
+										ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0},"task");
 									})
 								</script>
 	                    	#@Tselect2Fix()
@@ -113,10 +103,7 @@
 	                   		 #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
 
 	                    	#end                
-#*	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
-	                    	#end*#
+
                 	  #end
                 	 #end
 				#end
@@ -338,7 +325,7 @@
 <script type="text/javascript">
 	$(".select2").select2();
 
-	function ajaxRead(id,toName,opKey,opvalue,url,value){
+	function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
 		var selectCheck = "select[name="+toName+"]";
 		$(selectCheck).each(function(){
 			var sele = $(this);
@@ -350,7 +337,11 @@
 				dataType:"json",
 				success: function(data){
 					sele.empty();
+					if("build"==(isBuild)){
+					var em = "<option value='0' selected  >trunk</option>";
+					}else{
 					var em = "<option value='0' selected  >/</option>";
+					}
 					sele.append(em);
 					for(var i=0,l=data.length;i<l;i++){
 						var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";

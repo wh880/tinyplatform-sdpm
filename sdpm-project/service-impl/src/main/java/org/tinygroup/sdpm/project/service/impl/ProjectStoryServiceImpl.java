@@ -44,12 +44,18 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     public List<ProductStory> findStoryByProject(Integer projectId) {
         List<ProjectStory> projectStoryList = projectStoryManager.findSrotys(projectId);
         List<Integer> storyList = new ArrayList<Integer>();
-        for (ProjectStory projectStory : projectStoryList) {
-            storyList.add(projectStory.getStoryId());
+        if (!projectStoryList.isEmpty()) {
+            for (ProjectStory projectStory : projectStoryList) {
+                storyList.add(projectStory.getStoryId());
+            }
+            Integer[] i = new Integer[storyList.size()];
+            List<ProductStory> list = storyManager.findList(storyList.toArray(i));
+            return list;
+        } else {
+            return null;
         }
-        Integer[] i = new Integer[storyList.size()];
-        List<ProductStory> list = storyManager.findList(storyList.toArray(i));
-        return list;
+
+
     }
 
     public Integer deleteProjectStory(Integer projectId, Integer storyId) {
@@ -89,6 +95,6 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
 
     public Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
 
-        return storyManager.findPager(start, limit, story,statusCondition, conditions, groupOperate, columnName, asc);
+        return storyManager.findPager(start, limit, story, statusCondition, conditions, groupOperate, columnName, asc);
     }
 }

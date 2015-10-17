@@ -12,7 +12,6 @@ import org.tinygroup.sdpm.system.service.impl.ModuleServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.DictService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.ModuleUtil;
-
 import java.util.*;
 
 /**

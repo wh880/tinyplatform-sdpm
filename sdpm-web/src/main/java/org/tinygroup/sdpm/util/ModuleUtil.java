@@ -86,19 +86,23 @@ public class ModuleUtil {
 
     public static String getPath(int moduleId, String division, ModuleService moduleService,String root, boolean openRoot){
         SystemModule module = moduleService.findById(moduleId);
-        if(module.getModulePath()==null||module.getModulePath()==""){
+        if(module.getModulePath()==null||"".equals(module.getModulePath())||"0,".equals(module.getModulePath())){
             return module.getModuleName();
         }
+        String path = null;
         if(openRoot){
-            return root+division+mergePath(division,module.getModulePath().substring(1),moduleService)+division+module.getModuleName();
+            path = mergePath(division,module.getModulePath().substring(2),moduleService);
+            return root+division+("".equals(path)?"":path+division)+module.getModuleName();
         }
-        return mergePath(division,module.getModulePath().substring(2),moduleService)+division+module.getModuleName();
+        path = mergePath(division,module.getModulePath().substring(2),moduleService);
+        return ("".equals(path)?"":path+division)+module.getModuleName();
     }
 
     private static String mergePath(String division, String paths, ModuleService moduleService){
         String[] path = paths.split(",");
         if(path.length>1){
-            return moduleService.findById(Integer.parseInt(path[0])).getModuleName()+division+ mergePath(division,paths.substring(path[0].length()+1),moduleService);
+            return moduleService.findById(Integer.parseInt(path[0]))
+                    .getModuleName()+division+ mergePath(division,paths.substring(path[0].length()+1),moduleService);
         }else if(path.length>0){
             if("".equals(path[0])){
                 return "";

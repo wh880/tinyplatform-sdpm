@@ -17,6 +17,7 @@
 				
 				#div(divClass="clearfix")
 		#end
+##		TINY_CONTEXT_PATH+adminPath+"/system/dict/searsh"
 	#if(page=="dict")	
 	 #@tinyForm("dictEditform" "" "post" {"class":""}) 
 		#@topSearch() 
@@ -27,7 +28,7 @@
 		#end
 		#end
 	#end
-	
+##	TINY_CONTEXT_PATH+adminPath+"/system/module/search"
 	#if(page=="module")
 	   #@tinyForm("dictEditform" "" "post" {"class":""}) 
 		#@topSearch() 
