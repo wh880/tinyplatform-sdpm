@@ -1,8 +1,5 @@
-
-
-
-#@div(divClass="tabInfocontents")	
-	#@tabWithInit("tab_info")
+#@div(divClass="tabInfocontents")
+	#@tabWithInit("tab_info01")
 		#@tabHead()
 			#@tabHeadCol()基本信息#end
 			#@tabHeadCol()项目/需求/任务#end
@@ -13,59 +10,59 @@
 			       		#@tbody()
 			       			#@tr()
 								#@td()所属产品#end
-			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">${bug?.productId}</a>#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">${qualityBug?.productName}</a>#end
 			       			#end
 			       			#@tr()
 								#@td()所属模块#end
-			       				#@td()${bug?.moduleId}#end
+			       				#@td()${qualityBug?.moduleName}#end
 			       			#end
 			       			#@tr()
 								#@td()所属计划#end
-			       				#@td()${bug?.planId}#end
+			       				#@td()${qualityBug?.planName}#end
 			       			#end
 			       			#@tr()
 								#@td()Bug类型#end
-			       				#@td()${bug?.bugType}#end
+			       				#@td()${qualityBug?.bugType}#end
 			       			#end
 			       			#@tr()
 								#@td()严重程度#end
-			       				#@td()${bug?.bugSeverity}#end
+			       				#@td()${qualityBug?.bugSeverity}#end
 			       			#end
 			       			#@tr()
 								#@td()优先级#end
-			       				#@td()${bug?.priority}#end
+			       				#@td()${qualityBug?.priority}#end
 			       			#end
 			       			#@tr()
 								#@td()Bug状态#end
-			       				#@td()${bug?.bugStatus}#end
+			       				#@td()${getDict("bugStatus",qualityBug?.bugStatus)}#end
 			       			#end
 			       			#@tr()
 								#@td()激活次数#end
-			       				#@td()${bug?.bugActivatedCount}#end
+			       				#@td()${qualityBug?.bugActivatedCount}#end
 			       			#end
 			       			#@tr()
 								#@td()是否确认#end
-			       				#@td()${bug?.bugConfirmed}#end
+			       				#@td()${qualityBug?.bugConfirmed>0?"已确认":"未确认"}#end
 			       			#end
 			       			#@tr()
 								#@td()当前指派#end
-			       				#@td()${bug?.bugAssignedTo} 于 ${bug?.bugAssignedDate}#end
+			       				#@td()${qualityBug?.userName} 于 ${formatDate(qualityBug?.bugAssignedDate,"yyyy-MM-dd hh-mm-ss")}#end
 			       			#end
 			       			#@tr()
 								#@td()操作系统#end
-			       				#@td()${bug?.operatingSystem}#end
+			       				#@td()${qualityBug?.operatingSystem}#end
 			       			#end
 			       			#@tr()
 								#@td()浏览器#end
-			       				#@td()${bug?.browser}#end
+			       				#@td()${qualityBug?.browser}#end
 			       			#end
 			       			#@tr()
 								#@td()关键词#end
-			       				#@td()${bug?.bugKeywords}#end
+			       				#@td()${qualityBug?.bugKeywords}#end
 			       			#end
 			       			#@tr()
 								#@td()抄送给#end
-			       				#@td()${bug?.bugMailto}#end
+			       				#@td()${qualityBug?.bugMailto}#end
 			       			#end
 			       		#end
 				 #end
@@ -77,20 +74,20 @@
 			       		#@tbody()
 			       			#@tr()
 								#@td()所属项目#end
-			       				#@td()${bug?.projectId}#end
+			       				#@td()${qualityBug?.projectName}#end
 			       			#end
 			       			#@tr()
 								#@td()相关需求#end
-			       				#@td()${bug?.storyId}#end
+			       				#@td()${qualityBug?.storyName}#end
 			       			#end
 			       			#@tr()
 								#@td()相关任务#end
-			       				#@td()${bug?.taskId}#end
+			       				#@td()${qualityBug?.taskName}#end
 			       			#end
 			       		#end
 			 #end
 		#end
-						
+
 	#end
 #end
 <br>
@@ -100,7 +97,7 @@
 			#@tabHeadCol()BUG的一生#end
 			#@tabHeadCol()其他相关#end
 		#end
-		
+
 		#@tabBodyCol("tabBorder")
 			#@table()
 			       		#@thead()
@@ -108,36 +105,36 @@
 			       		#@tbody()
 			       			#@tr()
 								#@td()由谁创建#end
-			       				#@td()${bug?.bugOpenedBy} 于 ${bug?.bugOpenedDate}#end
+			       				#@td()${qualityBug?.bugOpenedBy} 于 ${formatDate(qualityBug?.bugOpenedDate,"yyyy-MM-dd hh-mm-ss")}#end
 			       			#end
 			       			#@tr()
 								#@td()影响版本#end
-			       				#@td()${bug?.bugOpenedBuild}#end
+			       				#@td()${qualityBug?.bugOpenedBuild}#end
 			       			#end
 			       			#@tr()
 								#@td()由谁解决#end
-			       				#@td()${bug?.bugResolvedBy}#end
+			       				#@td()${qualityBug?.bugResolvedBy}#end
 			       			#end
 			       			#@tr()
 								#@td()解决版本#end
-			       				#@td()${bug?.bugResolvedBuild}#end
+			       				#@td()${qualityBug?.bugResolvedBuild}#end
 			       			#end
 			       			#@tr()
 								#@td()解决方案#end
-			       				#@td()${bug?.bugResolution}#end
+			       				#@td()${qualityBug?.bugResolution}#end
 			       			#end
 			       			#@tr()
 								#@td()由谁关闭#end
-			       				#@td()${bug?.bugClosedBy}#end
+			       				#@td()${qualityBug?.bugClosedBy}#end
 			       			#end
 			       			#@tr()
 								#@td()最后修改#end
-			       				#@td()${bug?.bugLastEditedBy}#end
+			       				#@td()${qualityBug?.bugLastEditedBy}#end
 			       			#end
 			       		#end
 			 #end
 		#end
-		
+
 		#@tabBodyCol("tabBorder")
 			#@table()
 			       		#@thead()
@@ -145,7 +142,7 @@
 			       		#@tbody()
 			       			#@tr()
 								#@td()生源用例#end
-			       				#@td()${bug?.bugFromCase}#end
+			       				#@td()${qualityBug?.bugFromCase}#end
 			       			#end
 			       			#@tr()
 								#@td()生成用例#end
@@ -153,22 +150,22 @@
 			       			#end
 			       			#@tr()
 								#@td()相关BUG#end
-			       				#@td()${bug?.linkBug}#end
+			       				#@td()${qualityBug?.linkBug}#end
 			       			#end
 			       			#@tr()
 								#@td()相关用例#end
-			       				#@td()${bug?.linkCase}#end
+			       				#@td()${qualityBug?.linkCase}#end
 			       			#end
 			       			#@tr()
 								#@td()转需求#end
-			       				#@td()${bug?.toStoryId}#end
+			       				#@td()${qualityBug?.toStoryId}#end
 			       			#end
 			       			#@tr()
 								#@td()转任务#end
-			       				#@td()${bug?.toTaskId}#end
+			       				#@td()${qualityBug?.toTaskId}#end
 			       			#end
 			       		#end
 			 #end
-		#end				
+		#end
 	#end
 #end

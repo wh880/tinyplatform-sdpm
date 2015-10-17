@@ -17,14 +17,10 @@ public class StdFunction extends AbstractTemplateFunction {
 
     public Object execute(Template template, TemplateContext context, Object... parameters) throws TemplateException {
         if(parameters.length < 2){
-            throw new RuntimeException("表或表字段名称不能为空");
+           return null;
         }
-        String field = null;
-        try {
-            field = StdUtil.getField(parameters[0].toString(),parameters[1].toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String field  = StdUtil.getField(parameters[0].toString(),parameters[1].toString());
+
         return field;
     }
 }

@@ -21,6 +21,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public interface ServiceRequestDao extends BaseDao<ServiceRequest, Integer> {
     Integer softDelete(Integer id);
     Integer saveReply(ServiceRequest clientRequest);
 
-    Pager<ServiceRequest> queryPagerBy(int start, int limit, ServiceRequest t, Integer statues, Integer treeId, OrderBy... orderArgs);
+    Pager<ServiceRequest> queryPagerBy(int start, int limit, ServiceRequest t, Integer statues, Integer treeId, Condition condition1, OrderBy... orderArgs);
 
     Pager<ServiceRequest> findOperationByMe(int start, int limit, ServiceRequest t, OrgUser user, Integer treeId, Integer operation, OrderBy... orderArgs);
 

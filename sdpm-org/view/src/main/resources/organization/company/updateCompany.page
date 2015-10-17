@@ -4,7 +4,7 @@
             #@colLabel("col-3")<span class="c-red">*</span>公司名称：#end
             #@gridSysCol(7)
                 #tinyInput(
-                    "text" "orgCompanyName" company?.orgCompanyName{"placeholder":"输入公司名称","datatype":"*","nullmsg":
+                    "text" "orgCompanyName" company?.orgCompanyName{"placeholder":"输入公司名称","datatype":"*","errormsg":
                     "请输入公司名称！","id":"name","class":
                     "input-text"})
             #end

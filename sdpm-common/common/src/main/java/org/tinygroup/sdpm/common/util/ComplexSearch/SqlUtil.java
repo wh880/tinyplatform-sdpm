@@ -1,6 +1,8 @@
 package org.tinygroup.sdpm.common.util.ComplexSearch;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 
@@ -89,7 +91,12 @@ public class SqlUtil {
         }else if("belong".equals(operate)){
             operateAndValue = " in ('"+searchInfo.getValue()+"')";
         }else{
-            operateAndValue =" "+ operate+" '"+searchInfo.getValue()+"'";
+            if(isInt(searchInfo.getValue())){
+                operateAndValue =" "+ operate+" "+searchInfo.getValue()+"";
+            }else{
+                operateAndValue =" "+ operate+" '"+searchInfo.getValue()+"'";
+            }
+
         }
         return sql.append(" "+NameUtil.resolveNameDesc(searchInfo.getField())).append(operateAndValue).toString();
     }
@@ -109,4 +116,12 @@ public class SqlUtil {
         return result;
     }
 
+    private static boolean isInt(String param){
+        Pattern pattern = Pattern.compile("[0-9]*");
+        Matcher isNum = pattern.matcher(param);
+        if( !isNum.matches() ){
+            return false;
+        }
+        return true;
+    }
 }

@@ -34,42 +34,12 @@ public class TypeInfoUtil {
 	public static String formatUrl(String url,String parameter, int id){
 		if(parameter != null&&!"".equals(parameter)){
 					url = url+"?"+parameter+"="+id;
-		}else{
-			url = url;
 		}
 		return url.startsWith("/")?url:"/"+url;
 	}
 
 	private static void init(){
-		TypeInfoResolvor resolvor = (TypeInfoResolvor)BeanContainerFactory.getBeanContainer(TypeInfoUtil.class.getClassLoader()).getBean("typeInfoResolvor");
+		TypeInfoResolvor resolvor = BeanContainerFactory.getBeanContainer(TypeInfoUtil.class.getClassLoader()).getBean("typeInfoResolvor");
 		typeDict = resolvor.getDict();
 	}
-	
-//	private static void resolveFileDir(FileObject file){
-//		if(file.isFolder()){
-//			for(FileObject f:file.getChildren()){
-//				resolveFileDir(f);
-//			}
-//		}else{
-//			if(file.getExtName().endsWith(TYPE_INFOS_FILE_EXT)){
-//				typeInfosFile.add(file);
-//			}
-//		}
-//	}
-	
-//	private static void resolverTypeInfosFiles(){
-//		for(FileObject file : typeInfosFile){
-//			XStream xstream = XStreamFactory.getXStream();
-//			xstream.processAnnotations(new Class[]{TypeInfos.class});
-//			TypeInfos typeinfos = (TypeInfos) xstream.fromXML(file.getInputStream());
-//			for(TypeInfo typeinfo :typeinfos.getTypeInfoList()){
-//				typeDict.put(typeinfo.getTypesName(), typeinfo);
-//			}
-//
-//		}
-//	}
-
-//	private static void resolverNote(List<TypeInfo> typeinfos){
-//
-//	}
 }

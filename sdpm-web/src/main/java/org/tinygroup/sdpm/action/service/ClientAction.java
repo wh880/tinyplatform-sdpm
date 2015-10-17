@@ -51,7 +51,7 @@ public class ClientAction extends BaseController {
 
     @RequestMapping(value = "/list/data")
     public String listData(Integer limit, Integer start, ServiceClient client, Model model, Integer treeId,
-                           @RequestParam(required = false, defaultValue = "clientId") String order,
+                           @RequestParam(required = false, defaultValue = "serviceClient.clientId") String order,
                            @RequestParam(required = false, defaultValue = "desc") String ordertype) {
 
         if (treeId != null) {

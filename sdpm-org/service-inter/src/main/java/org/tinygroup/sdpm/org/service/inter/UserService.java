@@ -94,4 +94,12 @@ public interface UserService {
      */
     boolean validatePassword(String plainPassword, String password);
 
+    /**
+     * 根据用户id数组查出用户list
+     *
+     * @param userIds
+     * @return
+     */
+    List<OrgUser> findUserListByIds(String[] userIds);
+
 }

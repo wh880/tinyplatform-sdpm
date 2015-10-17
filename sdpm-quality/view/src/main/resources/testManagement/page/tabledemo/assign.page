@@ -32,21 +32,23 @@
     #@elementItem()
     	 #@sdpmItem("指派给")       	
              #@Tselect2F()
-	                   		 #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">A</option>
-	                        <option value="BD">B</option>
-	                        <option value="CH">C</option>
-	                    	#end                
+	                    #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                       <option value="I0">/</option>
+	                         #for(user : userList)
+	                        <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+	                    	#end
+	                    #end
               #end  
          #end   
     #end
     #@elementItem()
         #@sdpmItem("抄送给") 
             #@Tselect2F()
-	                   		 #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">A</option>
-	                        <option value="2">B</option>
-	                        <option value="3">C</option>
+	                   		#@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="I0">/</option>
+                                #for(user : userList)
+                                <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+                                #end
 	                    	#end                
               #end 
      	#end
