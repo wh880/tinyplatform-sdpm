@@ -17,10 +17,10 @@
                     #@th()所属模块#end
                     #@td()#@formControlDiv("col-9")
                         #@Tselect2F()
-                            #@Tselect2Body("moduleId" "" {"class":"input-text select2"})
-                                <option value=""></option>
+                            #@Tselect2Body("moduleId" task.taskModule {"class":"input-text select2"})
+                                <option value="">/</option>
                                 #foreach(m : modulesList)
-                                    <option value="${m.moduleId}">m.moduleTitle</option>
+                                    <option value="${m.moduleId}">${m.moduleName}</option>
                                 #end
                             #end
                             #@Tselect2Fix()
