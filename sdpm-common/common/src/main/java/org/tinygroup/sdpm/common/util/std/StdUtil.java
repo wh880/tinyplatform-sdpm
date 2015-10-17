@@ -21,6 +21,31 @@ public class StdUtil {
 
     private static Map<String,String> tableMap = new ConcurrentHashMap<String, String>();
 
+    private static Map<String,String> tableMapping = new HashMap<String, String>();
+
+    static {
+        tableMapping.put("user","org_user");
+        tableMapping.put("story","product_story");
+        tableMapping.put("productplan","product_plan");
+        tableMapping.put("release","product_release");
+        tableMapping.put("project","project");
+        tableMapping.put("product","product");
+        tableMapping.put("build","project_build");
+        tableMapping.put("bug","quality_bug");
+        tableMapping.put("case","quality_test_case");
+        tableMapping.put("testtask","quality_test_task");
+        tableMapping.put("doclib","document_doclib");
+        tableMapping.put("doc","document_doc");
+        tableMapping.put("sla","service_sla");
+        tableMapping.put("client","service_client");
+        tableMapping.put("faq","service_faq");
+        tableMapping.put("reply","service_reply");
+        tableMapping.put("review","service_review");
+        tableMapping.put("request","service_request");
+
+
+    }
+
     public static void stdProcess(List<Table> tables){
         for(Table table : tables){
 
@@ -31,8 +56,12 @@ public class StdUtil {
         }
     }
 
-    public static String getField(String tableName, String feildName) {
-        return tableStdMap.get(tableMap.get(tableName)).get(feildName);
+    public static String getField(String tableName, String feildName) throws Exception {
+        String table = tableMapping.get(tableName);
+        if(table==null){
+            throw new Exception("表名不存在");
+        }
+        return tableStdMap.get(table).get(feildName);
     }
 
     public static Map<String, String> getField(String tableName) {

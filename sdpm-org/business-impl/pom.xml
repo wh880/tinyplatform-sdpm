@@ -9,11 +9,7 @@
     </parent>
     <artifactId>sdpm-org-business-impl</artifactId>
     <name>sdpm-org-business-impl</name>
-    <url>http://maven.apache.org</url>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--可以自定义标签对,可以在其它地方用{标签名引用}-->
-    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -30,11 +26,6 @@
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>3.0.5.RELEASE</version>
         </dependency>
     </dependencies>
 </project>

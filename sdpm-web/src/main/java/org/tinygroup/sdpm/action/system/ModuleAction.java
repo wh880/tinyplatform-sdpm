@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.action.system;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,10 @@ import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.util.ModuleUtil;
 
 import javax.servlet.http.HttpServletResponse;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +47,7 @@ public class ModuleAction extends BaseController {
 //		systemModule.setModuleType("dict");
         List<SystemModule> list = moduleService.findModules(systemModule);
         if (list != null && list.size() > 0) {
-            mergeModule(list, mapList, "0");
+            mergeModule(list, mapList, "0",true,true);
         }
         return mapList;
     }
@@ -60,10 +63,10 @@ public class ModuleAction extends BaseController {
         }
         Integer[] pIds = new Integer[integers.size()];
         List<Product> products = productService.findProductList(integers.toArray(pIds));
-        mergeProductModule(products,"story",mapList);
+        mergeProductModule(products,"story",mapList,false,false,"project");
         if(openProject>0) {
             List<SystemModule> systemModules = moduleService.findModules(systemModule);
-            mergeModule(systemModules, mapList, "0");
+            mergeModule(systemModules, mapList, "0",true,true);
         }
         return mapList;
     }
@@ -76,7 +79,7 @@ public class ModuleAction extends BaseController {
         Product product = new Product();
         product.setDeleted(0);
         List<Product> products = productService.findProductList(product);
-        mergeProductModule(products,"productDoc",mapList);
+        mergeProductModule(products,"productDoc",mapList,true,false,"doc");
         return mapList;
     }
 
@@ -97,7 +100,7 @@ public class ModuleAction extends BaseController {
             mapTop.put("id", "p"+p.getProjectId());
             mapTop.put("pId", 0);
             mapTop.put("open", false);
-            mergeModule(systemModules, mapList, "p"+p.getProjectId().toString());
+            mergeModule(systemModules, mapList, "p"+p.getProjectId().toString(),true,true);
             mapTop.put("isParent", true);
             mapTop.put("add", true);
             mapTop.put("edit", false);
@@ -126,15 +129,12 @@ public class ModuleAction extends BaseController {
     @RequestMapping("delete")
     public Map<String, String> deleteModule(Integer id) {
         Map<String, String> map = new HashedMap();
-        
-          int s=  moduleService.deleteAndedit(id);
-          if(s>0){
-        	  map.put("status", "y");
-              map.put("info", "删除成功");
-          }else{
-        	  map.put("status", "n");
-        	  map.put("info", "删除失败");
-          }
+        if(id!=null) {
+            delteModule(id);
+        }
+          map.put("status", "y");
+          map.put("info", "删除成功");
+
         
         return map;
     }
@@ -149,7 +149,7 @@ public class ModuleAction extends BaseController {
     @RequestMapping("ajax/delete")
     public Map<String, String> ajaxDeleteModule(Integer moduleId) {
         if (moduleId != null) {
-            moduleService.deleteById(moduleId);
+            delteModule(moduleId);;
         }
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");
@@ -265,13 +265,13 @@ public class ModuleAction extends BaseController {
         return map;
     }
 
-    private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, String parent) {
+    private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, String parent,boolean add,boolean edit) {
         for (SystemModule systemModule : systemModules) {
             if (!parent.contains("p")&&systemModule.getModuleParent() == Integer.parseInt(parent)) {
-                mergeSingleModule(systemModules,systemModule,maps,parent);
+                mergeSingleModule(systemModules,systemModule,maps,parent,add,edit);
             }
             if(parent.contains("p")&&systemModule.getModuleParent() == 0){
-                mergeSingleModule(systemModules,systemModule,maps,parent);
+                mergeSingleModule(systemModules,systemModule,maps,parent,add,edit);
             }
         }
     }
@@ -392,11 +392,13 @@ public class ModuleAction extends BaseController {
     	
     	module.setModuleType("story");
         List<SystemModule> list = moduleService.findAllModules(module);
+        String modulePath = ModuleUtil.getPath(module.getModuleParent(), ">", moduleService, null, false);
         model.addAttribute("list", list);
+        model.addAttribute("modulePath", modulePath);
         return "/product/page/project/product-modular.page";
     }
 
-    private void mergeProductModule(List<Product> products,String moduleType,List<Map<String,Object>> mapList){
+    private void mergeProductModule(List<Product> products,String moduleType,List<Map<String,Object>> mapList,boolean add,boolean edit,String type){
         for(Product p : products){
             SystemModule module = new SystemModule();
             module.setModuleRoot(p.getProductId());
@@ -406,26 +408,40 @@ public class ModuleAction extends BaseController {
             mapTop.put("id", "p"+p.getProductId());
             mapTop.put("pId", 0);
             mapTop.put("open", false);
-            mergeModule(systemModules, mapList, "p"+p.getProductId().toString());
+            if("doc".equals(type)){
+                mergeModule(systemModules, mapList, "p"+p.getProductId().toString(),true,true);
+            }else{
+                mergeModule(systemModules, mapList, "p"+p.getProductId().toString(),false,false);
+            }
             mapTop.put("isParent", true);
-            mapTop.put("add", true);
-            mapTop.put("edit", false);
+            mapTop.put("add", add);
+            mapTop.put("edit", edit);
             mapTop.put("name", p.getProductName());
             mapList.add(mapTop);
         }
     }
 
-    private void mergeSingleModule(List<SystemModule> systemModules,SystemModule systemModule, List<Map<String, Object>> maps, String parent){
+    private void mergeSingleModule(List<SystemModule> systemModules,SystemModule systemModule, List<Map<String, Object>> maps, String parent,boolean add,boolean edit){
         int size = maps.size();
         Map<String, Object> mapTop = Maps.newHashMap();
         mapTop.put("id", systemModule.getModuleId());
         mapTop.put("pId", parent);
         mapTop.put("open", true);
-        mergeModule(systemModules, maps, systemModule.getModuleId().toString());
+        mergeModule(systemModules, maps, systemModule.getModuleId().toString(),add,edit);
         mapTop.put("isParent", maps.size() > size ? true : false);
-        mapTop.put("add", true);
-        mapTop.put("edit", true);
+        mapTop.put("add", add);
+        mapTop.put("edit", edit);
         mapTop.put("name", systemModule.getModuleName());
         maps.add(mapTop);
+    }
+
+    private void delteModule(int id){
+        SystemModule module = new SystemModule();
+        module.setModuleParent(id);
+        List<SystemModule> moduleList = moduleService.findModuleList(module);
+        for(SystemModule module1 : moduleList){
+            deleteModule(module1.getModuleId());
+        }
+        moduleService.deleteById(id);
     }
 }

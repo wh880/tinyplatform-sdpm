@@ -55,7 +55,7 @@
               isShow="1" scope="testbugleft-tab"></menu>
          <menu id="tbugtimeup" name="被延期"  href="/quality/bug?status=tbugtimeup" icon="" sort="3"
               isShow="1" scope="testbugleft-tab"></menu> 
-         <menu id="bugEleven" name="需求变动"  href="/quality/bug?status=tbugneedchange" icon="" sort="2"
+         <menu id="tbugneedchange" name="需求变动"  href="/quality/bug?status=tbugneedchange" icon="" sort="2"
               isShow="1" scope="testbugleft-tab"></menu>
          <menu id="tsearch" name="搜索"  href="#" icon="" sort="1"
               isShow="1" scope="testbugleft-tab"></menu>                       

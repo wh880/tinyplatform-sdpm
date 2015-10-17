@@ -14,18 +14,18 @@
 				#end
 			#else产品文档库 #end 
 		#end
-		#set(dataUrl = adminPath+"/system/module/tree?moduleType=doc&moduleRoot="+documentLibId)
-		#set(saveUrl = adminPath+"/system/module/ajax/save?moduleType=doc&moduleRoot="+documentLibId)
+		#set(dataUrl = "/system/module/tree?moduleType=doc&moduleRoot="+documentLibId)
+		#set(saveUrl = "/system/module/ajax/save?moduleType=doc&moduleRoot="+documentLibId)
 		#if(documentLibId==1)
-		    #set(dataUrl = adminPath+"/system/module/docProductTree")
-		    #set(saveUrl = adminPath+"/system/module/ajax/docTreeSave?moduleType=productDoc")
+		    #set(dataUrl = "/system/module/docProductTree")
+		    #set(saveUrl = "/system/module/ajax/docTreeSave?moduleType=productDoc")
 		#elseif(documentLibId==2)
-		    #set(dataUrl = adminPath+"/system/module/docProjectTree")
-		    #set(saveUrl = adminPath+"/system/module/ajax/docTreeSave?moduleType=projectDoc")
+		    #set(dataUrl = "/system/module/docProjectTree")
+		    #set(saveUrl = "/system/module/ajax/docTreeSave?moduleType=projectDoc")
 		#else
 		#end
 		#@settoggleLeftBody("treeLeftbox")
-			 #@zTreeList(call("link",dataUrl))
+			 #@zTreeList(call("link",adminPath+dataUrl))
                     #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
                     #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/document?tree=true")
                     #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+saveUrl)
@@ -49,7 +49,8 @@
             	#end		
             					
 			#end
-			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/document/doc/list") ##取数据地址 总数据
+			
+			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/document/doc/list?"+tinyRequestQueryString) ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

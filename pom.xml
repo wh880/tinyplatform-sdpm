@@ -1,10 +1,5 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
     <inceptionYear>2006</inceptionYear>
     <groupId>org.tinygroup</groupId>
@@ -17,7 +12,7 @@
         <tiny_version>2.0.26-SNAPSHOT</tiny_version>
         <tiny_ui_version>2.0.20-SNAPSHOT</tiny_ui_version>
         <tiny_ext_version>2.0.9</tiny_ext_version>
-        <tiny_sdpm_version>0.0.1-SNAPSHOT</tiny_sdpm_version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <description/>
     <organization>
@@ -29,17 +24,6 @@
             <id>java.net</id>
             <url>http://download.java.net/maven/2/</url>
         </repository>
-        <repository>
-            <id>sonatype-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
     </repositories>
     <licenses>
         <license>
@@ -56,65 +40,21 @@
         <developerConnection>scm:git:http://git.oschina.net/tinyframework/sdpm.git</developerConnection>
         <url>http://git.oschina.net/tinyframework/sdpm.git</url>
     </scm>
-
-    <contributors>
-        <contributor>
-            <name>LuoGuo</name>
-            <email>luo_guo@live.cn</email>
-            <organization>Tiny Group</organization>
-            <organizationUrl>http://my.oschina.net/tinyframework/</organizationUrl>
-            <timezone>+8</timezone>
-        </contributor>
-    </contributors>
-    <profiles>
-        <profile>
-            <id>tiny-release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>2.1.2</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.9.1</version>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.1</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+    <modules>
+        <module>sdpm-service</module>
+        <module>sdpm-common</module>
+        <module>sdpm-document</module>
+        <module>sdpm-metadata</module>
+        <module>sdpm-productLine</module>
+        <module>sdpm-system</module>
+        <module>sdpm-product</module>
+        <module>sdpm-project</module>
+        <module>sdpm-quality</module>
+        <module>sdpm-report</module>
+        <module>sdpm-web</module>
+        <module>sdpm-statistic</module>
+        <module>sdpm-org</module>
+    </modules>
     <build>
         <plugins>
             <plugin>
@@ -317,89 +257,4 @@
             </plugins>
         </pluginManagement>
     </build>
-    <developers>
-        <developer>
-            <id>luoguo</id>
-            <name>LuoGuo</name>
-            <organization>tinygroup</organization>
-            <email>luo_guo@live.cn</email>
-            <timezone>+8</timezone>
-        </developer>
-    </developers>
-    <mailingLists>
-        <mailingList>
-            <name>LuoGuo</name>
-            <post>luo_guo@live.cn</post>
-            <subscribe>luo_guo@live.cn</subscribe>
-            <unsubscribe>luo_guo@live.cn</unsubscribe>
-        </mailingList>
-    </mailingLists>
-
-    <modules>
-        <module>sdpm-service</module>
-        <module>sdpm-common</module>
-        <module>sdpm-document</module>
-        <module>sdpm-metadata</module>
-        <module>sdpm-productLine</module>
-        <module>sdpm-system</module>
-        <module>sdpm-product</module>
-        <module>sdpm-project</module>
-        <module>sdpm-quality</module>
-        <module>sdpm-report</module>
-        <module>sdpm-web</module>
-        <module>sdpm-statistic</module>
-        <module>sdpm-org</module>
-    </modules>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.tinygroup</groupId>
-                <artifactId>org.tinygroup.fileresolver</artifactId>
-                <version>${tiny_version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.tinygroup</groupId>
-                <artifactId>org.tinygroup.templateweblayer</artifactId>
-                <version>${tiny_version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>servlet-api-2.5</artifactId>
-                        <groupId>org.mortbay.jetty</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>servlet-api</artifactId>
-                        <groupId>javax.servlet</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.tinygroup</groupId>
-                <artifactId>org.tinygroup.validate</artifactId>
-                <version>${tiny_version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.tinygroup</groupId>
-                <artifactId>org.tinygroup.dict</artifactId>
-                <version>${tiny_version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.tinygroup</groupId>
-                <artifactId>org.tinygroup.flowprocessor</artifactId>
-                <version>${tiny_version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.tinygroup</groupId>
-                <artifactId>org.tinygroup.serviceprocessor</artifactId>
-                <version>${tiny_version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.tinygroup</groupId>
-                <artifactId>org.tinygroup.cepcoreimpl</artifactId>
-                <version>${tiny_version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 </project>

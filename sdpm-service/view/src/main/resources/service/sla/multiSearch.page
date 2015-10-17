@@ -1,5 +1,5 @@
 ##<span id="showsearchmore">搜索</span>
-<form method="post" action="" id="searchform" class="form-condensed">
+<form method="post" action="${TINY_CONTEXT_PATH+adminPath}/service/list" id="searchform" class="form-condensed">
     <div class="hide">
         <select id="operatortemp">
             <option value="=">=</option>
@@ -202,64 +202,64 @@
         });
         var itemlist = []
         itemlist.push({
-            "name": "name",
-            "title": "任务名称",
-            "operator": "include",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "id",
-            "title": "编号",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "status",
-            "title": "任务状态",
-            "operator": "=",
-            "value": "status"
-        });
-        itemlist.push({
-            "name": "desc",
-            "title": "任务描述",
-            "operator": "include",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "assignedTo",
-            "title": "指派给",
+            "name": "clientName",
+            "title": "客户名称",
             "operator": "=",
             "value": "user"
         });
         itemlist.push({
-            "name": "pri",
-            "title": "优先级",
+            "name": "productName",
+            "title": "产品名称",
             "operator": "=",
-            "value": "pri"
+            "value": "user"
         });
         itemlist.push({
-            "name": "project",
-            "title": "所属项目",
+            "name": "serviceLevel",
+            "title": "服务级别",
             "operator": "=",
-            "value": "text"
+            "value": "user"
         });
         itemlist.push({
-            "name": "module",
-            "title": "所属模块",
-            "operator": "=",
-            "value": "text"
+            "name": "serviceDeadline",
+            "title": "服务期限",
+            "operator": ">=",
+            "value": "date"
         });
         itemlist.push({
-            "name": "estimate",
-            "title": "最初预计",
+            "name": "slaTitle",
+            "title": "服务协议标题",
             "operator": "=",
-            "value": "text"
+            "value": "user"
         });
         itemlist.push({
-            "name": "left",
-            "title": "预计剩余",
+            "name": "slaSpec",
+            "title": "服务协议表述",
             "operator": "=",
-            "value": "text"
+            "value": "user"
+        });
+        itemlist.push({
+            "name": "slaStatus",
+            "title": "服务级别协议",
+            "operator": "=",
+            "value": "user"
+        });
+        itemlist.push({
+            "name": "slaCreatedBy",
+            "title": "创建人",
+            "operator": "=",
+            "value": "user"
+        });
+        itemlist.push({
+            "name": "slaCreateDate",
+            "title": "创建时间",
+            "operator": ">=",
+            "value": "date"
+        });
+        itemlist.push({
+            "name": "slaReviewedBy",
+            "title": "批准人",
+            "operator": "=",
+            "value": "user"
         });
         itemlist.push({
             "name": "consumed",

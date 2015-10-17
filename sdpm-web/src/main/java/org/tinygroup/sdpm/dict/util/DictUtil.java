@@ -12,7 +12,6 @@ import org.tinygroup.sdpm.system.service.impl.ModuleServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.DictService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.ModuleUtil;
-
 import java.util.*;
 
 /**
@@ -128,6 +127,10 @@ public class DictUtil extends DictParent {
 
     public static String getValue(String type,String key){
         return dictMap.get(entryMapping.get(type)).get(key);
+    }
+
+    public static Map<String,String> getValueMap(String type){
+        return dictMap.get(entryMapping.get(type));
     }
 
     public static String getValue(String root,String type,String key){

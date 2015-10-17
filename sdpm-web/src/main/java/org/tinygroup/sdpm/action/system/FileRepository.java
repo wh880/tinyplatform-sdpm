@@ -4,6 +4,7 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
@@ -12,11 +13,10 @@ import java.io.IOException;
 
 /**
  * 文件存储
- * @author MCK
  *
  */
 @Service
-public class FileRepository /*implements ServletContextAware*/ {
+public class FileRepository implements ServletContextAware {
     private Logger log = LoggerFactory.getLogger(FileRepository.class);
     private ServletContext ctx;
 
