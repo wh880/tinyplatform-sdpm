@@ -19,6 +19,12 @@ public class StdFunction extends AbstractTemplateFunction {
         if(parameters.length < 2){
             throw new RuntimeException("表或表字段名称不能为空");
         }
-        return StdUtil.getField(parameters[0].toString(),parameters[1].toString());
+        String field = null;
+        try {
+            field = StdUtil.getField(parameters[0].toString(),parameters[1].toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return field;
     }
 }

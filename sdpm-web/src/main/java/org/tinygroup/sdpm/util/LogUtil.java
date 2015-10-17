@@ -114,7 +114,13 @@ public class LogUtil {
         TESTTASK("testtask"),
         TODO("todo"),
         DOCLIB("doclib"),
-        DOC("doc");
+        DOC("doc"),
+        SLA("sla"),
+        CLIENT("client"),
+        FAQ("faq"),
+        REPLY("reply"),
+        REVIEW("review"),
+        REQUEST("request");
         private final String operateObject;
 
         LogOperateObject(String value) {

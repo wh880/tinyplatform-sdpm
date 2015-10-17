@@ -1,43 +1,47 @@
 <script type="text/javascript">
 
 
-    function ajaxRead(id,toName,opKey,opvalue,url,value){
-        var selectCheck = "select[name="+toName+"]";
-        $(selectCheck).each(function(){
-            var sele = $(this);
-            var s;
-            $.ajax({
-                type: "POST",
-                url: "${TINY_CONTEXT_PATH+adminPath}"+url,
-                data: $(this).attr('data'),
-                dataType:"json",
-                success: function(data){
-                    sele.empty();
-                    var em = "<option value='0' selected  >/</option>";
-                    sele.append(em);
-                    for(var i=0,l=data.length;i<l;i++){
-                        var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
-                        sele.append(em);
+    function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
+    		var selectCheck = "select[name="+toName+"]";
+    		$(selectCheck).each(function(){
+    			var sele = $(this);
+    			var s;
+    			$.ajax({
+    				type: "POST",
+    				url: "${TINY_CONTEXT_PATH+adminPath}"+url,
+    				data: $(this).attr('data'),
+    				dataType:"json",
+    				success: function(data){
+    					sele.empty();
+    					if("build"==(isBuild)){
+    					var em = "<option value='0' selected  >trunk</option>";
+    					}else{
+    					var em = "<option value='0' selected  >/</option>";
+    					}
+    					sele.append(em);
+    					for(var i=0,l=data.length;i<l;i++){
+    						var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+    						sele.append(em);
 
-                    }
+    					}
 
-                    if(value!=null) {
-                        sele.val(value).trigger("change");
-                    }else {
-                        sele.val(data[0][opKey]).trigger("change");
-                    }
-
-
-                },
-                error: function(res){
-                    alert("失败");
-                }
-            });
+    					if(value!=null) {
+    						sele.val(value).trigger("change");
+    					}else {
+    						sele.val(data[0][opKey]).trigger("change");
+    					}
 
 
-        });
+    				},
+    				error: function(res){
+    					alert("失败");
+    				}
+    			});
 
-    }
+
+    		});
+
+    	}
 </script>
     #@div(divClass="infoContent")
         <p class="titleName">基本信息</p>
@@ -56,7 +60,8 @@
                 console.log("test")
                 var pId = $("#${sid}  option:selected").val();
                 ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, ${bug?.moduleId?:0});
-
+                ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId,${bug?.bugOpenedBuild?:0},"build");
+                ajaxRead("${sid}","bugResolvedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId,${bug?.bugResolvedBuild?:0},"build");
             })
         });
     </script>
@@ -110,23 +115,7 @@
 	                    		<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/Bug.page">全部</a>
 	                    	#end
                 	  #end
-#*                    #@selectRadiusBox("select_boxes")
-                        #@select(selectName="demo2" selectClass="select")
-                            #@optionSelected("") #end
-                            #@optionItem("1")代码错误#end
-                            #@optionItem("1")界面优化#end
-                            #@optionItem("1")设计缺陷#end
-                            #@optionItem("1")配置相关#end
-                            #@optionItem("1")安装部署#end
-                            #@optionItem("1")安全相关#end
-                            #@optionItem("1")性能问题#end
-                            #@optionItem("1")标准规范#end
-                            #@optionItem("1")测试脚本#end
-                            #@optionItem("1")代码改进#end
-                            #@optionItem("1")其他#end
-                            #@optionItem("1")同上#end
-                        #end
-                    #end*#
+
                     #end
                 #end
                 #@tr()
@@ -252,10 +241,7 @@
                             <script type="text/javascript">
                                 $("#${sid}").on("change",function(){
                                     var pId = $("#${sid}  option:selected").val();
-
                                     ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0});
-                                    ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProject="+pId,${bug?.bugOpenedBuild?:0});
-                                    ajaxRead("${sid}","bugResolvedBuild","buildId","buildName","/quality/bug/ajax/build?buildProject="+pId,${bug?.bugResolvedBuild?:0});
                                 })
                             </script>
                         #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项

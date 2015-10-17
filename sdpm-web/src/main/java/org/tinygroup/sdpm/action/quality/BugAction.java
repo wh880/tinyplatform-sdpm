@@ -198,6 +198,10 @@ public class BugAction extends BaseController {
 		bug = bugService.findById(bugId);
 		bug.setBugResolvedDate(new Date());
 		List<OrgUser> orgUsers = userService.findUserList(null);
+		ProjectBuild build = new ProjectBuild();
+		build.setBuildProduct(bug.getProductId());
+		List<ProjectBuild> builds = buildService.findListBuild(build);
+		model.addAttribute("buildList",builds);
 		model.addAttribute("userList",orgUsers);
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/solution.page";
@@ -205,7 +209,7 @@ public class BugAction extends BaseController {
 	@RequestMapping("/solve")
 	public String solve(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
 
-		bug.setBugResolvedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
+		bug.setBugResolvedBy(UserUtils.getUserAccount() != null?UserUtils.getUserAccount():"0");
 		bug.setBugStatus("2");
 		bugService.updateBug(bug);
 
@@ -234,7 +238,7 @@ public class BugAction extends BaseController {
 	@RequestMapping("/close")
 	public String close(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
 
-		bug.setBugClosedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
+		bug.setBugClosedBy(UserUtils.getUserAccount() != null?UserUtils.getUserAccount():"0");
 		bug.setBugClosedDate(new Date());
 		bug.setBugStatus("3");
 		bugService.updateBug(bug);
@@ -265,7 +269,7 @@ public class BugAction extends BaseController {
 
 		QualityBug qualityBug = bugService.findById(bug.getBugId());
 
-		bug.setBugLastEditedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
+		bug.setBugLastEditedBy(UserUtils.getUserAccount() != null?UserUtils.getUserAccount():"0");
 		bug.setBugLastEditedDate(new Date());
 		bugService.updateBug(bug);
 
@@ -307,6 +311,10 @@ public class BugAction extends BaseController {
 	@RequestMapping("/toCopy")
 	public String copy(Integer bugId,Model model){
 		QualityBug bug = bugService.findById(bugId);
+		List<Project> projects = projectService.findProjectList(null,null,null);
+		List<OrgUser> orgUsers = userService.findUserList(null);
+		model.addAttribute("userList",orgUsers);
+		model.addAttribute("projectList",projects);
 		model.addAttribute("bug",bug);
 		return "/testManagement/page/copyBug.page";
 	}
@@ -345,18 +353,19 @@ public class BugAction extends BaseController {
 	
 	@RequestMapping(value = "/copy",method = RequestMethod.POST)
 	public String copySave(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
-		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
 		bug.setBugOpenedDate(new Date());
-		bug.setBugOpenedBy(user != null?user.getOrgUserId():"0");
+		bug.setBugOpenedBy(UserUtils.getUserAccount() != null?UserUtils.getUserAccount():"0");
 		bugService.addBug(bug);
 
-		systemAction.setActionObjectId(String.valueOf(bug.getBugId()));
-		systemAction.setActionProduct(String.valueOf(bug.getProductId()));
-		systemAction.setActionProject(String.valueOf(bug.getProjectId()));
-		systemAction.setActionObjectType("bug");
-		systemAction.setActionAction("copyBug");
-		systemAction.setActionActor(user != null?user.getOrgUserId():"0");
-		logService.log(systemAction);
+		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+				, LogUtil.LogAction.OPENED
+				,String.valueOf(bug.getBugId())
+				,UserUtils.getUserId()
+				,String.valueOf(bug.getProductId())
+				,String.valueOf(bug.getProjectId())
+				,null
+				,null
+				,systemAction.getActionComment());
 		return "redirect:"+"/a/quality/bug";
 	}
 	
@@ -366,7 +375,7 @@ public class BugAction extends BaseController {
 
 		bug.setBugOpenedDate(new Date());
 
-		bug.setBugOpenedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
+		bug.setBugOpenedBy(UserUtils.getUserAccount() != null?UserUtils.getUserAccount():"0");
 		QualityBug qbug=bugService.addBug(bug);
 		ProfileUtil profileUtil = new ProfileUtil();
 		try {

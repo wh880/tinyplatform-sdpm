@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action.quality.util;
 
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.util.UserUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -23,22 +24,21 @@ public class QualityUtil {
         statusMap.put("tbugnotsolve",8);
         statusMap.put("tbuglong",9);
         statusMap.put("tbugtimeup",10);
-        statusMap.put("storyChange",11);
+        statusMap.put("tbugneedchange",11);
     }
 
     public static String getCondition(String status, HttpServletRequest request){
         if("".equals(status)||status==null)return "";
-        OrgUser user = (OrgUser) request.getSession().getAttribute("user");
         if(status == null||"".equals(status))return null;
         switch (statusMap.get(status)){
             case 1:return " bug_status <> 3";
             case 2:return "";
-            case 3:return " bug_assigned_to = "+(user == null?"0":user.getOrgUserId())+" ";
-            case 4:return " bug_opened_by = "+(user == null?"0":user.getOrgUserId())+" ";
-            case 5:return " bug_resolved_by = "+(user == null?"0":user.getOrgUserId())+" ";
+            case 3:return " bug_assigned_to = "+(UserUtils.getUserAccount() == null?"0":"'"+UserUtils.getUserAccount())+"' ";
+            case 4:return " bug_opened_by = "+(UserUtils.getUserAccount() == null?"0":"'"+UserUtils.getUserAccount())+"' ";
+            case 5:return " bug_resolved_by = "+(UserUtils.getUserAccount() == null?"0":"'"+UserUtils.getUserAccount())+"' ";
             case 6:return " (bug_confirmed <> 1 or bug_confirmed is null)";
             case 7:return " bug_assigned_to is null";
-            case 8:return " bug_status <> 2";
+            case 8:return " bug_status > 1";
             case 9:return " bug_status = 1";
             case 10:return "";
             case 11:return "";

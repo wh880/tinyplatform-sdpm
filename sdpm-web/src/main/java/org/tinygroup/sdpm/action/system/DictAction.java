@@ -128,9 +128,10 @@ public class DictAction extends BaseController{
 	
 
    @RequestMapping("searsh")
-   public List<SystemDict> searsh(SystemDict systemDict){
-	   List<SystemDict> list = dictService.findDictList(systemDict);
-	   return list;
+   public String searsh(SystemDict systemDict,HttpServletRequest request){
+	   request.getSession().setAttribute("dict", systemDict);
+	   
+	   return "/system/page/dictionaries/dictitem_list.pagelet";
 	   
    }
    
