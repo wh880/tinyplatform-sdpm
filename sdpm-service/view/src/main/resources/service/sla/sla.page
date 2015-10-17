@@ -19,10 +19,9 @@
             <span class="r">
                 #set(m1=menuManager.getMenu("sla-export"))
                 #if(m1)
-                #* #@iconOperations(
-                     "#myModal" m1.icon "导出" "600" "100" m1.href "ml-5")${m1.name}#end*#
-                    #@aModal("#myModal" "" "600" "" "btn-class"
-                        "/service/serviceCom/serviceExport.pagelet")#buttonIcon(iconClass="icon-download-alt")导出#end
+                    #@aModal("#myModal" "导出" "600" "170" "btn-class"
+                        "/service/serviceCom/serviceExport.pagelet")#buttonIcon(iconClass="icon-upload-alt")导出#end
+
                 #end
 
                 #set(m2=menuManager.getMenu("sla-add"))

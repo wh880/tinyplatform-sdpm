@@ -8,6 +8,8 @@
   <artifactId>sdpm-productLine-dao-interface</artifactId>
   <name>sdpm-productLine-dao-interface</name>
   <dependencies>
+  	
+  	
   	<dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-common-base-dao</artifactId>

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
 import org.tinygroup.sdpm.action.system.ProfileUtil;
+import org.tinygroup.sdpm.action.system.Profiles;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -29,7 +30,9 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
@@ -65,7 +68,8 @@ public class BugAction extends BaseController {
 	private BuildService buildService;
 	@Autowired
 	private PlanService planService;
-	
+	@Autowired
+	private ProfileService profileService;
 	
 	@RequestMapping("")
 	public String form(String get,QualityBug bug, HttpServletRequest request){
@@ -89,7 +93,25 @@ public class BugAction extends BaseController {
 		model.addAttribute("buglist",buglist);
 		return "/testManagement/data/BugData.pagelet";
 	}
-	
+	@RequestMapping("/bugInfo")
+	public String bugInfo(Integer bugId, Model model){
+		QualityBug bug = bugService.findById(bugId);
+		SystemProfile systemProfile = new SystemProfile();
+		systemProfile.setFileObjectId(bugId);
+		systemProfile.setFileObjectType(LogUtil.LogOperateObject.BUG.toString());
+		List<SystemProfile> profilesList = profileService.find(systemProfile);
+		model.addAttribute("qualityBug",bug);
+		model.addAttribute("profilesList",profilesList);
+		return "/testManagement/page/bugInfo.page";
+	}
+
+	@RequestMapping("/bugBasicInfo")
+	public String bugBasicInfo(Integer bugId, Model model){
+		QualityBug bug = bugService.findById(bugId);
+		model.addAttribute("qualityBug",bug);
+		return "/testManagement/page/bugRightInfo.pagelet";
+	}
+
 	@RequestMapping("/findBug")
 	public String findBugPager(Integer page,Integer limit,String order,String ordertype,String status,QualityBug bug,Model model,HttpServletRequest request){
 		boolean asc = true;		
@@ -317,6 +339,13 @@ public class BugAction extends BaseController {
 		model.addAttribute("projectList",projects);
 		model.addAttribute("bug",bug);
 		return "/testManagement/page/copyBug.page";
+	}
+
+	@ResponseBody
+	@RequestMapping("/ajax/plan")
+	public List<ProductPlan> getplan(ProductPlan productPlan){
+		List<ProductPlan> moduleList = planService.findPlanList(productPlan);
+		return moduleList;
 	}
 
 	@ResponseBody

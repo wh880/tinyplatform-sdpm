@@ -6,6 +6,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface ProductManager {
@@ -83,4 +84,6 @@ public interface ProductManager {
 	 * @return
 	 */
 	List<ProductAndLine> getProductAndLine(Product product);
+	
+	
 }

@@ -51,15 +51,15 @@ public class ClientAction extends BaseController {
 
     @RequestMapping(value = "/list/data")
     public String listData(Integer limit, Integer start, ServiceClient client, Model model, Integer treeId,
-                           @RequestParam(required = false, defaultValue = "clientId") String order,
-                           @RequestParam(required = false, defaultValue = "desc") String ordertype) {
+                           @RequestParam(required = false, defaultValue = "serviceClient.clientId") String order,
+                           @RequestParam(required = false, defaultValue = "desc") String orderType) {
 
         if (treeId != null) {
-            Pager<ServiceClient> pager = clientService.findClientPagerByPid(start, limit, treeId, order, ordertype);
+            Pager<ServiceClient> pager = clientService.findClientPagerByPid(start, limit, treeId, order, orderType);
             model.addAttribute("pager", pager);
             return "service/client/clientTableData.pagelet";
         }
-        Pager<ServiceClient> pager = clientService.findClientPager(start, limit, client, order, ordertype);
+        Pager<ServiceClient> pager = clientService.findClientPager(start, limit, client, order, orderType);
         model.addAttribute("pager", pager);
         return "service/client/clientTableData.pagelet";
     }

@@ -19,9 +19,13 @@
 		#@colLabel()创建者：#end
 		#@formControlDiv("col-8")
 			#@tinySelect("effortAccount" effort?.effortAccount {"class":"input-text select2"})
-				#@tinyOptionItem("wll")wll#end
-				#@tinyOptionItem("lal")lal#end
-				#@tinyOptionItem("zch")zch#end
+			#for(u:users)
+			 #@tinyOptionItem(u?.orgUserAccount)${u?.orgUserAccount}#end
+			#end
+			   
+##				#@tinyOptionItem("wll")wll#end
+##				#@tinyOptionItem("lal")lal#end
+##				#@tinyOptionItem("zch")zch#end
 			#end
 		#end
 		#@validateDiv("col-2")#end

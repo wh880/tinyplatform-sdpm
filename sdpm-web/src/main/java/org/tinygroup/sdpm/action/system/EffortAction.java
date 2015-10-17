@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
@@ -33,6 +35,8 @@ public class EffortAction extends BaseController{
 	private EffortService effortService;
 	@Autowired
 	private TaskService taskService;
+	@Autowired
+	private UserService userService;
 	@RequestMapping("")
 	public String note(){
 		
@@ -182,6 +186,8 @@ public class EffortAction extends BaseController{
 
 		ProjectTask task= new ProjectTask();
 		List<ProjectTask> taskList = taskService.findListTask(task);
+		List<OrgUser> users = userService.findUserList(new OrgUser());
+		model.addAttribute("users", users);
 		model.addAttribute("taskList", taskList);
 		if(Action.equals("add")){
 			SystemEffort effort = new SystemEffort();

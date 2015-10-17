@@ -1,5 +1,0 @@
-<type-infos>
-    <type-info name="docInfo">
-    	    <info name="documentInfo" title="文档信息" infoParameter="docId" url="/a/document/doc/viewInfo" resource="docInfo"/>
-    	</type-info>
-</type-infos>

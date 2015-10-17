@@ -1,0 +1,24 @@
+<type-infos>
+    <type-info name="project">
+        <info name="projectInfo" title="项目信息" infoParameter="projectId" url="/project/basicInformation"
+              resource="project"/>
+        <info name="productInfo" title="产品信息" infoParameter="productId" url="/product/find/baseinfo"
+              resource="product"/>
+    </type-info>
+    <type-info name="projectEdit">
+        <info name="projectInfo" title="项目信息" infoParameter="taskId" url="/project/task/basicInfoEdit"
+              resource="projectEdit"/>
+    </type-info>
+    <type-info name="projectView">
+        <info name="projectInfo" title="项目信息" infoParameter="" url="/project/task/basicInfoView.pagelet"
+              resource="projectView"/>
+    </type-info>
+    <type-info name="information">
+        <info name="projectInfo" title="基本信息" infoParameter="taskId" url="/project/task/basicInformation"
+              resource="project"/>
+    </type-info>
+    <type-info name="build">
+        <info name="projectdemandInfo" title="发布信息" infoParameter="buildId" url="/project/version/releasebaseinfo"
+              resource="build"/>
+    </type-info>
+</type-infos>

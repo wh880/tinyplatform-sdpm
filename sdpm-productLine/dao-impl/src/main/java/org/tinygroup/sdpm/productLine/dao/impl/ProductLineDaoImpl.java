@@ -17,10 +17,14 @@
 package org.tinygroup.sdpm.productLine.dao.impl;
 
 import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
+
+
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.Select.*;
+import static org.tinygroup.tinysqldsl.select.Join.*;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -308,4 +312,6 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
         });
 
     }
+	
+	
 }

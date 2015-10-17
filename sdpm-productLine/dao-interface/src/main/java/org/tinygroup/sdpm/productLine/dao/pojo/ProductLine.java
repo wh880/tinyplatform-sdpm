@@ -133,8 +133,8 @@ public class ProductLine implements Serializable{
 	 * 
 	 */
 	private Integer deleted;
-
-
+	
+	
 	public void setProductLineId(Integer productLineId){
 		this. productLineId = productLineId;
 	}
