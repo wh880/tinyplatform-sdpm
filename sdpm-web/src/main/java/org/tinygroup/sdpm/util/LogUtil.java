@@ -87,8 +87,8 @@ public class LogUtil {
         SUSPENDED("suspended"),          //挂起
         LOGIN("login"),              //登录系统
         LOGOUT("logout"),             //退出登录
-        DELETEESTIMATE("deleteestimate");     //删除了工时
-
+        DELETEESTIMATE("deleteestimate"), //删除了工时
+        REMARK("remark");
         private final String action;
 
         LogAction(String value) {

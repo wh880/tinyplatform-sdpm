@@ -19,13 +19,11 @@ public class DictFunction extends AbstractTemplateFunction {
     public Object execute(Template template, TemplateContext context, Object... parameters) throws TemplateException {
 
         if(parameters.length == 0){
-            throw new RuntimeException("字典项名称不能为空");
+            return null;
         }else if(parameters.length<=1){
             return DictUtil.getValueMap(parameters[0].toString());
         }else if(parameters.length<=2){
             return DictUtil.getValue(parameters[0].toString(),parameters[1].toString());
-        }else if(parameters.length<=3){
-            return DictUtil.getValue(parameters[0].toString(),parameters[1].toString(),parameters[2].toString());
         }
         return null;
     }

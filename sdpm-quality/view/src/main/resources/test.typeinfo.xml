@@ -11,10 +11,10 @@
             	    <info name="CaseEditionInfo" title="基本信息" resource="qualityCaseEdition" infoParameter="" url="/testManagement/page/tabledemo/editioncasepaging.pagelet"/>
             	</type-info>
 			<type-info name="qualityBugInfo" >
-            	    <info name="bugEditionInfo" title="基本信息" resource="qualityBugInfo" infoParameter="" url="/testManagement/page/bugRightInfo.pagelet"/>
+            	    <info name="bugEditionInfo" title="基本信息" resource="qualityBugInfo" infoParameter="bugId" url="/quality/bug/bugBasicInfo"/>
             		<!--	 <info name="userInfo" title="负责人信息" resource="userInfo" infoParameter="" url="/organization/userinfor.pagelet"/> -->
-            			<info name="projectInfo" title="项目信息" resource="project" infoParameter="" url="/project/task/basicInformation.pagelet" />
-            			<info name="demandInfo" title="需求信息" resource="productRelease" infoParameter="" url="/product/page/tabledemo/relation-release/releasebaseinfo.pagelet"/>       			
+            		<!--	<info name="projectInfo" title="项目信息" resource="project" infoParameter="" url="/project/task/basicInformation.pagelet" /> -->
+            			<!--<info name="demandInfo" title="需求信息" resource="productRelease" infoParameter="" url="/product/page/tabledemo/relation-release/releasebaseinfo.pagelet"/> -->
             	</type-info>
       <type-info name="qualityCaseInfo" >
             	    <info name="caseEditionInfo" title="基本信息" resource="qualityCaseInfo" infoParameter="" url="/testManagement/page/tabledemo/caseEditInfo.pagelet"/>

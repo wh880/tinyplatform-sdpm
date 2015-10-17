@@ -333,6 +333,76 @@ public class QualityBug implements Serializable {
 
 	private String assignedUser;
 
+	private String productName;
+
+	private String moduleName;
+
+	private String userName;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getModuleName() {
+		return moduleName;
+	}
+
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
+	}
+
+	public String getPlanName() {
+		return planName;
+	}
+
+	public void setPlanName(String planName) {
+		this.planName = planName;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getStoryName() {
+		return storyName;
+	}
+
+	public void setStoryName(String storyName) {
+		this.storyName = storyName;
+	}
+
+	public String getTaskName() {
+		return taskName;
+	}
+
+	public void setTaskName(String taskName) {
+		this.taskName = taskName;
+	}
+
+	private String planName;
+
+	private String projectName;
+
+	private String storyName;
+
+	private String taskName;
+
 	public String getAssignedUser() {
 		return assignedUser;
 	}
