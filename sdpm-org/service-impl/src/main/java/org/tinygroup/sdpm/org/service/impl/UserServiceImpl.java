@@ -22,6 +22,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -75,4 +76,11 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    public List<OrgUser> findUserListByIds(String[] userIds) {
+        List<OrgUser> userList = new ArrayList<OrgUser>();
+        for (String id : userIds) {
+            userList.add(userManager.find(id));
+        }
+        return userList;
+    }
 }

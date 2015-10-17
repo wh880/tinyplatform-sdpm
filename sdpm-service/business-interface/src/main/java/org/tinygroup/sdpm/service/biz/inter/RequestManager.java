@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.service.biz.inter;
 
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.tinysqldsl.Pager;
@@ -71,7 +72,7 @@ public interface RequestManager {
      *
      * @return
      */
-    Pager<ServiceRequest> findPager(Integer start, Integer limit, Integer status, ServiceRequest serviceRequest, Integer treeId, String order, String ordertype);
+    Pager<ServiceRequest> findPager(Integer start, Integer limit, Integer status, ServiceRequest serviceRequest, Integer treeId, String groupOperate, SearchInfos searchInfos, String order, String ordertype);
     /**
      * 查找数据库的由我解决或由我回复的记录，区别在于operation
      *

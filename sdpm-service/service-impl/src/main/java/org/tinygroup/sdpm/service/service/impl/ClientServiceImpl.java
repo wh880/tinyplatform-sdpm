@@ -29,12 +29,12 @@ public class ClientServiceImpl implements ClientService {
         return clientManager.find(id);
     }
 
-    public Pager<ServiceClient> findClientPager(Integer start, Integer limit, ServiceClient client, String order, String ordertype) {
-        return clientManager.findPager(start, limit, client, order, ordertype);
+    public Pager<ServiceClient> findClientPager(Integer start, Integer limit, ServiceClient client, String order, String orderType) {
+        return clientManager.findPager(start, limit, client, order, orderType);
     }
 
-    public Pager<ServiceClient> findClientPagerByPid(Integer start, Integer limit, Integer treeId, String order, String ordertype) {
-        return clientManager.findByProduct(start, limit, treeId, order, ordertype);
+    public Pager<ServiceClient> findClientPagerByPid(Integer start, Integer limit, Integer treeId, String order, String orderType) {
+        return clientManager.findByProduct(start, limit, treeId, order, orderType);
     }
 
     public List<ServiceClient> getClientList(ServiceClient client) {
