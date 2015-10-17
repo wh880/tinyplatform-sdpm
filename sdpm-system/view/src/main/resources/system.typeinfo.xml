@@ -1,6 +1,6 @@
 <type-infos>
 	<type-info name="holiday" >
-	    <info name="holiday-dynamic" title="假期动态" infoParameter="" url="system/action/find?actionObjectType=holiday" resource="holiday"/>
+	    <info name="holiday-dynamic" title="假期动态" infoParameter="" url="/system/holiday/action?actionType=holiday" resource="holiday"/>
 	
 	</type-info>
 	<type-info name="working" >
