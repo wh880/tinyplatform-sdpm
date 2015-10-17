@@ -126,14 +126,17 @@ public class DictUtil extends DictParent {
     }
 
     public static String getValue(String type,String key){
+        if(type.contains("/")){
+            return dictMap.get(type).get(key);
+        }
         return dictMap.get(entryMapping.get(type)).get(key);
     }
 
     public static Map<String,String> getValueMap(String type){
+        if(type.contains("/")){
+            return dictMap.get(type);
+        }
         return dictMap.get(entryMapping.get(type));
     }
 
-    public static String getValue(String root,String type,String key){
-        return dictMap.get(type).get(key);
-    }
 }

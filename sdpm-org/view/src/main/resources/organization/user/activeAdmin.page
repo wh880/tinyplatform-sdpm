@@ -16,20 +16,57 @@
             #@div(divClass="operationbar")
                 #@tinyForm("thisform" "" "" {"class":"test"})
                     #@formControlDiv("col-1")
-                        #@tinySelect("lang" user?.orgUserId {"class":"input-text select2","rel":"22"})
-                            #for(user:userList)
-                            #@tinyOptionItem(user?.orgUserId)${user?.orgUserRealName}#end
+                        #@navSelect2("user" "user")
+                            #@navSelect2Nav()
+                                #if(userList)
+                                    #for(user:userList)
+                                    #if(user?.orgUserId == id)
+                                        ${user?.orgUserRealName}
+                                    #end
+                                #end
+                            #else
+                            用户
+                            #end
+
+                        <span class="caret"></span>#end
+                        #@navSelect2Body()
+                            #@navSelect2Data()
+                            <option value=""></option>
+                            <optgroup label="用户">
+                                #for(user:userList)
+                                <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+                            #end
+                        </optgroup>
+
                         #end
+                        #@navSelect2Fix()
+                        <a href="${TINY_CONTEXT_PATH +adminPath}/org/user/list" class="r">所有用户 </a>&nbsp;
+                        <a href="${TINY_CONTEXT_PATH +adminPath}/org/user/form">添加用户</a>&nbsp;
                         #end
                     #end
+                    #hiddenInput("userIdHidden","orgUserId","","")
+
+                <script type="text/javascript">
+
+                    $(function () {
+                        $("#user-select").on("change", function () {
+                            window.location.href = "${TINY_CONTEXT_PATH +adminPath}/org/user/active?choose=3&id=" + $(this).val();
+                        });
+                    });
+
+                </script>
+
+                #end
+
+            #end
                 <span style="padding-top: 5px;float: left;">
                     &nbsp;&gt;
                     #foreach(m:menuManager.getScopeMenus("org-user-detail"))
                         #if(m.id=="org-user-activeAdmin")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${id}"
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}"
                                class="active_btn">${m.name}</a>
                         #else
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${id}">${m.name}</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}">${m.name}</a>
                         #end
                     #end
 
@@ -38,13 +75,14 @@
                 #end
 
             <span class="barBoxs">
-        			<a href="#" class="active_btn">今天</a>
-					<a href="#">昨天</a>
-					<a href="#">本周</a>
-					<a href="#">上周</a>
-					<a href="#">本月</a>
-					<a href="#">上月</a>
-					<a href="#">所有</a>
+                <a val="1" class="selDate">今天</a>
+                <a val="2" class="selDate">昨天</a>
+                <a val="3" class="selDate">前天</a>
+                <a val="4" class="selDate">本周</a>
+                <a val="5" class="selDate">上周</a>
+                <a val="6" class="selDate">本月</a>
+                <a val="7" class="selDate">上月</a>
+                <a val="0" class="selDate">所有</a>
         </span>
             #end
         #end
@@ -58,16 +96,15 @@
     #@div(divClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([8,10,20,50,100,200])
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/organization/user/userActiveTable.pagelet") ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org.user/active/search") ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})日期#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})操作者#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})动作#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})对象类型#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})对象名称#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"action_date"})日期#end
+                #@tinyTh({"class":"sorting","rel":"actor_name"})操作者#end
+                #@tinyTh({"class":"sorting","rel":"action_action"})动作#end
+                #@tinyTh({"class":"sorting","rel":"action_object_type"})对象类型#end
+                #@tinyTh({"class":"sorting","rel":"action_id"})ID#end
+                #@tinyTh({"class":"","rel":"object_name"})对象名称#end
             #end
         #end
     #end
@@ -75,3 +112,15 @@
 
 #simpleModal(editpageModalId)
 
+<script>
+    $(function () {
+        var actionUrl = $("#dynamicTable").attr("data-url");
+        $(".selDate").click(function (e) {
+            $("#dynamicTable").attr("data-url", actionUrl + "?selDate=" + $(this).attr("val"));
+            $(".selDate").removeClass("active_btn");
+            $(this).addClass("active_btn");
+            $("#dynamicTable").trigger("refresh");
+        });
+
+    });
+</script>
