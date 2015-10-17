@@ -27,5 +27,5 @@ public interface ProjectStoryService {
 
     public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String ordertype);
 
-    public Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc);
+    public Pager<ProjectStory> findStoryPager(int start, int limit, ProjectStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc);
 }

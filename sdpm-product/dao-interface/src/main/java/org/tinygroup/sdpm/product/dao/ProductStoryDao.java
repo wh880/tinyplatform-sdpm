@@ -48,4 +48,5 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 	int[] batchUpdateDel(List<ProductStory> ids);
 	
 	List<StoryCount> userStoryCount(ProductStory t,String field);
+
 }

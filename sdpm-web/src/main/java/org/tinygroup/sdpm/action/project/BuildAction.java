@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -14,12 +15,14 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -251,7 +254,11 @@ public class BuildAction extends BaseController {
             Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
             model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-no-bug-data.pagelet";
-        }else if ("reRelateBugRelease".equals(relate)) {
+        } else if ("leRelateBugRelease".equals(relate)) {
+            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            model.addAttribute("bugList",p);
+            return "/project/task/relation-release/product-al-le-bug-data.pagelet";
+        } else if ("reRelateBugRelease".equals(relate)) {
             bug.setDeleted(0);
             Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
             model.addAttribute("bugList",p);
@@ -260,13 +267,37 @@ public class BuildAction extends BaseController {
             Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
             model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-no-bug-data.pagelet";
-        }else if ("leRelateBugRelease".equals(relate)) {
-            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
-            model.addAttribute("bugList",p);
-            return "/project/task/relation-release/product-al-le-bug-data.pagelet";
         }
         return "";
     }
+
+
+//    @RequestMapping("/search/{relate}")
+//    public String storyListAction(@PathVariable(value="relate")String relate, int page, int pagesize,
+//                                  ProductStory story, String choose, String groupOperate, SearchInfos searchInfos,
+//                                  @RequestParam(required = false, defaultValue = "storyId") String order,
+//                                  @RequestParam(required = false, defaultValue = "asc") String ordertype,
+//                                  Model model, HttpServletRequest request){
+//
+//
+//        story.setBuildId((Integer)(request.getSession().getAttribute("sessionBuildId")));
+//        Pager<ProductStory> p =projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,FieldUtil.stringFormat(order),"asc".equals(ordertype)?true:false);
+//        model.addAttribute("story",p);
+//
+//        if("reRelateStory".equals(relate)){
+//            return "/project/task/relation-release/product-al-req-data.pagelet";
+//        }else if ("noRelateStory".equals(relate)) {
+//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
+//        }else if ("reRelateStoryRelease".equals(relate)) {
+//            return "/project/task/relation-release/product-al-req-data.pagelet";
+//        }else if ("noRelateStoryRelease".equals(relate)) {
+//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
+//        }
+//        return "";
+//    }
+
+
+
 
 
     @RequestMapping("/search/{relate}")
@@ -276,22 +307,42 @@ public class BuildAction extends BaseController {
                                   @RequestParam(required = false, defaultValue = "asc") String ordertype,
                                   Model model, HttpServletRequest request){
 
+        if(request.getSession().getAttribute("sessionProjectId")!=null){
+            story.setProjectId((Integer)(request.getSession().getAttribute("sessionProjectId")));
+        }
 
-        story.setBuildId((Integer)(request.getSession().getAttribute("sessionBuildId")));
-        Pager<ProductStory> p =projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,FieldUtil.stringFormat(order),"asc".equals(ordertype)?true:false);
-        model.addAttribute("story",p);
+        String condition = StoryUtil.getStatusCondition(choose,request);
+        if(story.getStoryVersion()!=null&&story.getStoryVersion()>0){
+
+            SystemModule module = new SystemModule();
+            module.setModuleId(story.getModuleId());
+            StringBuffer stringBuffer = new StringBuffer();
+            stringBuffer.append("in (");
+            ModuleUtil.getConditionByModule(stringBuffer, module, moduleService);
+            stringBuffer.append(")");
+
+            condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
+        }
+        story.setModuleId(null);
+        Pager<ProductStory> p = projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,story, condition,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
+        model.addAttribute("storyList",p);
+
+
+
+
+
 
         if("reRelateStory".equals(relate)){
             return "/project/task/relation-release/product-al-req-data.pagelet";
         }else if ("noRelateStory".equals(relate)) {
             return "/project/task/relation-release/product-al-no-req-data.pagelet";
-        }else if ("reRelateStoryRelease".equals(relate)) {
-            return "/project/task/relation-release/product-al-req-data.pagelet";
-        }else if ("noRelateStoryRelease".equals(relate)) {
-            return "/project/task/relation-release/product-al-no-req-data.pagelet";
         }
         return "";
     }
+
+
+
+
 
 
     @ResponseBody

@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.biz.inter.ProjectStoryManager;
 import org.tinygroup.sdpm.project.dao.ProjectProductDao;
@@ -65,5 +68,22 @@ public class ProjectStoryManagerImpl implements ProjectStoryManager {
 
     public Integer deleteByProjectStory(Integer projectId, Integer storyId) {
         return projectStoryDao.deleteByProjectStory(projectId, storyId);
+    }
+
+    public Pager<ProjectStory> findPager(int start, int limit, ProjectStory story, String statusCondition, SearchInfos conditions,
+                                         String groupOperate, String columnName, boolean asc) {
+        String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
+        condition = condition != null && !"".equals(condition) ? (statusCondition != null&& !"".equals(statusCondition) ? condition + " and "
+                + statusCondition : condition)
+                : statusCondition;
+        OrderBy orderBy = null;
+        if (columnName != null && !"".equals(columnName)) {
+            orderBy = new OrderBy(NameUtil.resolveNameDesc(columnName), asc);
+        }
+        if (condition != null && !"".equals(condition)) {
+            return projectStoryDao.complexQuery(start, limit, story, condition,
+                    orderBy);
+        }
+        return projectStoryDao.queryPager(start, limit, story, orderBy);
     }
 }
