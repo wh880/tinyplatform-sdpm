@@ -14,6 +14,7 @@ import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
 
 @Service
@@ -82,4 +83,5 @@ public class ProductManagerImpl implements ProductManager{
 		return productDao.getProductAndLine(product);
 	}
 
+	
 }

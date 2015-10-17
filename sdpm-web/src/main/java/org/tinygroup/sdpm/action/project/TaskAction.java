@@ -12,12 +12,10 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
-import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
-import org.tinygroup.sdpm.project.service.inter.TaskService;
-import org.tinygroup.sdpm.project.service.inter.TeamService;
+import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
@@ -49,7 +47,8 @@ public class TaskAction extends BaseController {
     private ProjectStoryService storyService;
     @Autowired
     private StoryService productStoryService;
-
+    @Autowired
+    private ProjectProductService projectProductService;
 
     @RequestMapping("index")
     public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model, String moduleId) {
@@ -284,10 +283,20 @@ public class TaskAction extends BaseController {
         module.setModuleType("task");
         module.setModuleRoot(projectId);
         List<SystemModule> moduleList = moduleService.findModuleList(module);
-        List<SystemModule> moduleList2 = moduleService.findAllModules(module);
         for (SystemModule m : moduleList) {
             m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
         }
+        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
+        for (ProjectProduct pp : projectProductList) {
+            module.setModuleType("story");
+            module.setModuleRoot(pp.getProductId());
+            List<SystemModule> tModuleList = moduleService.findModuleList(module);
+            for (SystemModule m : tModuleList) {
+                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
+            }
+            moduleList.addAll(tModuleList);
+        }
+
 
         List<ProductStory> storyList = storyService.findStoryByProject(projectId);
         ProductStory story = new ProductStory();
@@ -327,17 +336,29 @@ public class TaskAction extends BaseController {
         ProjectTask task = taskService.findTask(taskId);
         String projectName = projectService.findById(task.getTaskProject()).getProjectName();
         List<ProjectTeam> teamList = teamService.findTeamByProjectId(task.getTaskProject());
-        SystemModule systemModule = new SystemModule();
-        systemModule.setModuleRoot(task.getTaskProject());
-        systemModule.setModuleType("project");
-        List<SystemModule> modulesList = moduleService.findModuleList(systemModule);
+        SystemModule module = new SystemModule();
+        module.setModuleType("task");
+        module.setModuleRoot(task.getTaskProject());
+        List<SystemModule> moduleList = moduleService.findModuleList(module);
+        for (SystemModule m : moduleList) {
+            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
+        }
+        List<ProjectProduct> projectProductList = projectProductService.findProducts(task.getTaskProject());
+        for (ProjectProduct pp : projectProductList) {
+            module.setModuleType("story");
+            module.setModuleRoot(pp.getProductId());
+            List<SystemModule> tModuleList = moduleService.findModuleList(module);
+            for (SystemModule m : tModuleList) {
+                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
+            }
+            moduleList.addAll(tModuleList);
+        }
 
         List<ProductStory> storyList = storyService.findStoryByProject(task.getTaskProject());
-
         model.addAttribute("task", task);
         model.addAttribute("projectName", projectName);
         model.addAttribute("teamList", teamList);
-        model.addAttribute("modulesList", modulesList);
+        model.addAttribute("moduleList", moduleList);
         model.addAttribute("storyList", storyList);
         return "project/task/basicInfoEdit.pagelet";
     }
@@ -350,7 +371,8 @@ public class TaskAction extends BaseController {
         model.addAttribute("project", project);
 
         //查询所属模块string
-        //moduleService.findById(task.getTaskModule());
+        String modulPath = ModuleUtil.getPath(task.getTaskModule(), " > ", moduleService, task.getTaskProject().toString(), true);
+        model.addAttribute("modulPath", modulPath);
         //查询相关需求名字
         String storyTitle = productStoryService.findStory(task.getTaskStory()).getStoryTitle();
         model.addAttribute("storyTitle", storyTitle);

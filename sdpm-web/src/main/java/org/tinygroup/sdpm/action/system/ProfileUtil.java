@@ -10,6 +10,7 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.impl.ProfileServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.UserUtils;
 
 public class ProfileUtil extends BaseController{
 	 private static final String UPLOAD_PATH = "E:/file";
@@ -31,6 +32,7 @@ public class ProfileUtil extends BaseController{
         String ext = FilenameUtils.getExtension(origName);
         String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, origName, upfile);
         long size= upfile.getSize();
+        
         SystemProfile profile = new SystemProfile();
         profile.setFileAddedDate(new Date());
         profile.setFileObjectId(id);
@@ -39,6 +41,8 @@ public class ProfileUtil extends BaseController{
         profile.setFileExtension(ext);
         profile.setFilePathname(fileUrl);
         profile.setFileSize((int)size);
+        profile.setFileAddedBy(UserUtils.getUserAccount());
+        profile.setFileDeleted(String.valueOf(0));
         profileService.add(profile);
         
 	}
@@ -75,8 +79,16 @@ public class ProfileUtil extends BaseController{
 	        profile.setFileExtension(ext);
 	        profile.setFilePathname(fileUrl);
 	        profile.setFileSize((int)size);
+	        profile.setFileAddedBy(UserUtils.getUserAccount());
+	        profile.setFileDeleted(String.valueOf(0));
 	        profileService.add(profile);
 	   }
+	   /**
+	    * 添加多个无标题附件附件
+	    * @param upfile
+	    * @param id
+	    * @param type
+	    */
 	   public void uploadNoTitles(MultipartFile[] upfile,int id,String type){
 		   for(int i=0,n=upfile.length;i<n;i++){
 			   if(!upfile[i].isEmpty()&&upfile[i].getSize()>0){

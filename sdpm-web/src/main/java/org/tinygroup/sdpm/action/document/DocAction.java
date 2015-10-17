@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.codehaus.jackson.map.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +38,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import com.sun.xml.bind.v2.model.core.ID;
@@ -68,55 +71,54 @@ public class DocAction {
 			}
 		}	
 		request.getSession().setAttribute("libList",list);
+		request.getSession().setAttribute("moduleId", moduleId);
 		return "/document/document.page";
 	}
 	
 	@RequestMapping(value="/doc/list")
 	public String docList(String moduleId, HttpServletRequest request,Integer page,Integer limit,String order,String ordertype,DocumentDoc doc,Model model ,String groupOperate, SearchInfos searchInfos)
-	{
-		
-	/*	int m =1;
-		String a = "bbb";
-		String b = a.replaceFirst("b", String.valueOf(m));
-		System.out.println(b);*/
-		
+	{	
 		doc.setDocDeleted("0");		
 		boolean asc = true;
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
-		SystemModule module = new SystemModule();
 		String condition = null;
-		if(moduleId != null ){
-		if(moduleId.contains("p")&&((Integer)request.getSession().getAttribute("documentLibId"))==1){
-			doc.setDocProduct(Integer.parseInt(moduleId.substring(1)));
-			Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, condition,searchInfos,groupOperate, order, asc);
-			model.addAttribute("docpager", docpager);
-		}else if(moduleId.contains("p")&&((Integer)request.getSession().getAttribute("documentLibId"))==2) {
-			doc.setDocProject(Integer.parseInt(moduleId.substring(1)));
-			Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, condition,searchInfos,groupOperate, order, asc);
-			model.addAttribute("docpager", docpager);
-		}else if("productDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())){			
-			Integer root = moduleService.findById(Integer.valueOf(moduleId)).getModuleRoot();
-			doc.setDocProduct(Integer.valueOf(root));
-			condition = NameUtil.resolveNameDesc("docModule") + " "+ ModuleUtil.getCondition(Integer.valueOf(moduleId), moduleService);
-			Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, condition,searchInfos,groupOperate, order, asc);
-			model.addAttribute("docpager", docpager);						
-		}else if("projectDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())){
-			Integer root = moduleService.findById(Integer.valueOf(moduleId)).getModuleRoot();
-			doc.setDocProject(Integer.valueOf(root));
-			condition = NameUtil.resolveNameDesc("docModule") + " "+ ModuleUtil.getCondition(Integer.valueOf(moduleId), moduleService);
-			Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, condition,searchInfos,groupOperate, order, asc);
-			model.addAttribute("docpager", docpager);						
-		}
+		if(moduleId != null){
+			if(moduleId.contains("p")&&((Integer)request.getSession().getAttribute("documentLibId"))==1){
+				doc.setDocProduct(Integer.parseInt(moduleId.substring(1)));
+				Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, condition,searchInfos,groupOperate, order, asc);
+				model.addAttribute("docpager", docpager);
+			}else if(moduleId.contains("p")&&((Integer)request.getSession().getAttribute("documentLibId"))==2) {
+				doc.setDocProject(Integer.parseInt(moduleId.substring(1)));
+				Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, condition,searchInfos,groupOperate, order, asc);
+				model.addAttribute("docpager", docpager);
+			}else if("productDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())){			
+				Integer root = moduleService.findById(Integer.valueOf(moduleId)).getModuleRoot();
+				doc.setDocProduct(Integer.valueOf(root));
+				condition = NameUtil.resolveNameDesc("docModule") + " "+ ModuleUtil.getCondition(Integer.valueOf(moduleId), moduleService);
+				Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, condition,searchInfos,groupOperate, order, asc);
+				model.addAttribute("docpager", docpager);						
+			}else if("projectDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())){
+				Integer root = moduleService.findById(Integer.valueOf(moduleId)).getModuleRoot();
+				doc.setDocProject(Integer.valueOf(root));
+				condition = NameUtil.resolveNameDesc("docModule") + " "+ ModuleUtil.getCondition(Integer.valueOf(moduleId), moduleService);
+				Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, condition,searchInfos,groupOperate, order, asc);
+				model.addAttribute("docpager", docpager);						
+			}else if("doc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())){
+				condition = NameUtil.resolveNameDesc("docModule") + " "+ ModuleUtil.getCondition(Integer.valueOf(moduleId), moduleService);
+				Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, condition,searchInfos,groupOperate, order, asc);
+				model.addAttribute("docpager", docpager);
+			}
 		}else{
+			doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
 			Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, null,searchInfos,groupOperate, order, asc);
 			model.addAttribute("docpager", docpager);
 		}
 		return "/data/datalist.pagelet";
 	}
 	
-	//@RequiresPermissions("add-doc")
+	@RequiresPermissions("add-doc")
 	@RequestMapping(value="/doc/add")
 	public String createDoc(HttpServletRequest request ,Model model)
 	{		
@@ -134,7 +136,11 @@ public class DocAction {
 			model.addAttribute("projectList", list);
 			return "/document/add-doc-project.page";
 		}else{
-		return "/document/add-doc.page";	
+			SystemModule module = new SystemModule();
+			module.setModuleType("doc");
+			List<SystemModule> moduleList = moduleService.findAllModules(module);
+			model.addAttribute("moduleList", moduleList);
+			return "/document/add-doc.page";	
 		}
 	}
 	
@@ -142,13 +148,18 @@ public class DocAction {
 	public String addSave(HttpServletRequest request,DocumentDoc doc,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,Model model) throws IOException{	
 		List<Product> product = productService.findProductList(new Product());
 		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
+		doc.setDocDeleted("0");	
+		doc.setDocAddedBy(UserUtils.getUser().getOrgUserAccount());
 		DocumentDoc document = docservice.createNewDoc(doc);
 		
 		ProfileUtil profileUtil = new ProfileUtil();		
         profileUtil.uploads(file, document.getDocId(), "document", title);
         
 		model.addAttribute("productList", product);
-		return "redirect:"+"/a/document?docChange=true";
+		if(request.getSession().getAttribute("moduleId") == null){
+			return "redirect:"+"/a/document?docChange=true";
+		}
+		return "redirect:"+"/a/document?docChange=true&moduleId="+request.getSession().getAttribute("moduleId");
 	}
 	
 	@RequestMapping(value="/doc/edit")
@@ -157,12 +168,17 @@ public class DocAction {
 		DocumentDoc doc = new DocumentDoc();
 		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
 		doc = docservice.findDocById(docId);
+		List<Product> list1 = productService.findProductList(new Product());
+		List<Project> list2 = projectService.findList();
 		model.addAttribute("doc", doc);
+		model.addAttribute("productList", list1);
+		model.addAttribute("projectList", list2);
 		return "/document/doc-edit.page";
 	}
 	
 	@RequestMapping(value="/doc/editSave",method=RequestMethod.POST)
-	public String editSave(DocumentDoc doc,Model model){			
+	public String editSave(DocumentDoc doc,Model model){	
+		doc.setDocEditedBy(UserUtils.getUser().getOrgUserAccount());
 		docservice.editDoc(doc);
 		return "redirect:"+"/a/document?docChange=true";
 	}

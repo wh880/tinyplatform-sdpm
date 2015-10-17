@@ -1,5 +1,7 @@
+
+
+##setTinyItemCount(docpager.getTotalCount()=docpager.getTotalCount()==null?"0":docpager.getTotalCount())
 #setTinyItemCount(docpager.getTotalCount())
-##${docpager.getTotalCount()}
 #foreach(l:docpager.getRecords())
 #@tr()
 	#@td()<input type="checkbox" value="${l?.docId}" name="idCheck">#end

@@ -1,6 +1,5 @@
 package org.tinygroup.sdpm.action.system;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;

@@ -7,6 +7,7 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.pojo.PagerPojo;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface ProductService {
@@ -81,4 +82,6 @@ public interface ProductService {
 	 * @return
 	 */
 	List<ProductAndLine> getProductAndLine(Product product);
+	
+	
 }

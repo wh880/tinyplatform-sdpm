@@ -1,15 +1,15 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
-<style>
-    .secrchLac {
-        display: inline-block;
-        padding-top: 5px
-    }
-    .activeSearch {
-        float: left;
-        margin-top: 5px;
-        margin-left: 5px;
-    }
-</style>
+##<style>
+##    .secrchLac {
+##        display: inline-block;
+##        padding-top: 5px
+##    }
+##    .activeSearch {
+##        float: left;
+##        margin-top: 5px;
+##        margin-left: 5px;
+##    }
+##</style>
 
 #import("/common/component/form.component")
 #set(editpagePath=
@@ -26,68 +26,80 @@
         #end
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
-            <span class="activeSearch">
-                <a href="../active/active.page" class="active_btn">今天</a>
-					<a href="../active/active.page">昨天</a>
-					<a href="../active/active.page">前天</a>
-					<a href="../active/active.page">本周</a>
-					<a href="../active/active.page">上周</a>
-                   <a href="../active/active.page">本月</a>
-					<a href="../active/active.page">上月</a>
-					<a href="../active/active.page">所有</a>
+            <span class="f">
+                <a val="1" class="selDate">今天</a>
+                <a val="2" class="selDate">昨天</a>
+                <a val="3" class="selDate">前天</a>
+                <a val="4" class="selDate">本周</a>
+                <a val="5" class="selDate">上周</a>
+                <a val="6" class="selDate">本月</a>
+                <a val="7" class="selDate">上月</a>
+                <a val="0" class="selDate">所有</a>
 
-                 </span>
-                #@formControlDiv("col-2")
-                    #@Tselect2F()
-                        #@Tselect2Body("lang" "请选择用户" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="请选择用户">请选择用户</option>
-                        <option value="usera">用户A</option>
-                        <option value="userb">用户B</option>
-                        <option value="userc">用户c</option>
-                        <option value="userd">用户d</option>
-                        <option value="usere">用户e</option>
-
+                #@navSelect2()
+                    #@navSelect2Nav()用户<span class="caret"></span>#end
+                    #@navSelect2Body()
+                        #@navSelect2Data()
+                        <optgroup label="用户">
+                            #for(user : userList)
+                            <option class="selUser" value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                         #end
-
-                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                    </optgroup>
+                    #end
+                    #@navSelect2Fix()
+                        <a href="${TINY_CONTEXT_PATH +adminPath}/org/user/list" class="r">所有用户</a>&nbsp;
+                        <a href="${TINY_CONTEXT_PATH +adminPath}/org/user/form">添加用户</a>&nbsp;
                     #end
                 #end
-                #@formControlDiv("col-2")
-                    #@Tselect2F()
-                        #@Tselect2Body("lang" "请选择产品" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="请选择产品">请选择产品</option>
-                        <option value="producta">产品A</option>
-                        <option value="producta">产品A</option>
-                        <option value="producta">产品A</option>
-                        <option value="producta">产品A</option>
-                        <option value="producta">产品A</option>
-
-                        #end
-
-                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                    #end
-
+                #hiddenInput("orgUserIdHidden","orgUserId","","")
                 #end
-                #@formControlDiv("col-2")
-                    #@Tselect2F()
-                        #@Tselect2Body("lang" "请选择项目" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="请选择项目">请选择项目</option>
-                        <option value="projecta">项目A</option>
-                        <option value="projecta">项目A</option>
-                        <option value="projecta">项目A</option>
-                        <option value="projecta">项目A</option>
-                        <option value="projecta">项目A</option>
+            &nbsp;
 
-                        #end
 
-                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+
+            #@navSelect2()
+                #@navSelect2Nav()产品<span class="caret"></span>#end
+                #@navSelect2Body()
+                    #@navSelect2Data()
+                    <optgroup label="产品">
+                        #for(product : productList)
+                        <option class="selProduct" value="${product?.productId}">${product?.productName}</option>
                     #end
+                </optgroup>
+                    #end
+                #@navSelect2Fix()
+                    <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-listall.page"
+                       class="r">所有产品</a>&nbsp;
+                    <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/addProduct.page">添加产品</a>&nbsp;
+                #end
+            #end
+            #hiddenInput("productIdHidden","productId","","")
+        #end
+        &nbsp;
+        #@navSelect2()
+            #@navSelect2Nav()项目<span class="caret"></span>#end
+            #@navSelect2Body()
+                #@navSelect2Data()
+                <optgroup label="项目">
+                    #for(project : projectList)
+                    <option class="selProject" value="${project?.projectId}">${project?.projectName}</option>
+                #end
+            </optgroup>
+            #end
+            #@navSelect2Fix()
+                <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-listall.page" class="r">所有项目</a>
+                &nbsp;
+                <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/addProduct.page">添加项目</a>&nbsp;
+            #end
+        #end
+        #hiddenInput("projectIdHidden","projectId","","")
+    #end
 
-                #end&nbsp;
+</span>
             <span class="secrchLac">
                    <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
            </span>
-            <div style="margin-top: 10px;">
+<div>
                 #include("/organization/active/multiSearch.page")
             </div>
                 #div(divClass="clearfix")
@@ -96,21 +108,52 @@
     #end
 #end
 
+<script>
+    $(function () {
+        var actionUrl = $("#dynamicTable").attr("data-url");
+        $(".selDate").click(function (e) {
+            $("#dynamicTable").attr("data-url", actionUrl + "?selDate=" + $(this).attr("val"));
+            $(".selDate").removeClass("active_btn");
+            $(this).addClass("active_btn");
+            $("#dynamicTable").trigger("refresh");
+        });
 
-#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+        $(".selUser").click(function (e) {
+            $("#dynamicTable").attr("data-url", actionUrl + "?orgUserId=" + $(this).attr("val"));
+            $(".selUser").removeClass("active_btn");
+            $(this).addClass("active_btn");
+            $("#dynamicTable").trigger("refresh");
+        });
+
+        $(".selProduct").click(function (e) {
+            $("#dynamicTable").attr("data-url", actionUrl + "?productId=" + $(this).attr("val"));
+            $(".selProduct").removeClass("active_btn");
+            $(this).addClass("active_btn");
+            $("#dynamicTable").trigger("refresh");
+        });
+
+        $(".selProject").click(function (e) {
+            $("#dynamicTable").attr("data-url", actionUrl + "?projectId=" + $(this).attr("val"));
+            $(".selProject").removeClass("active_btn");
+            $(this).addClass("active_btn");
+            $("#dynamicTable").trigger("refresh");
+        });
+
+    });
+</script>
+#@tinyTable("dynamicTable") ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([8,10,20,50,100,200])
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/organization/active/activeTable.pagelet") ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org/active/find") ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})日期#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})操作者#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})动作#end
-                #@tinyTh({"class":"sorting","rel":"sortname","style":"color:#333"})对象类型#end
-                #@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-                #@tinyTh({"class":"","rel":"sortname"})对象名称#end
+                #@tinyTh({"class":"sorting sorting_desc","rel":"action_date"})日期#end
+                #@tinyTh({"class":"sorting","rel":"actor_name"})操作者#end
+                #@tinyTh({"class":"sorting","rel":"action_action"})动作#end
+                #@tinyTh({"class":"sorting","rel":"action_object_type"})对象类型#end
+                #@tinyTh({"class":"sorting","rel":"action_id"})ID#end
+                #@tinyTh({"class":"","rel":"object_name"})对象名称#end
             #end
         #end
     #end

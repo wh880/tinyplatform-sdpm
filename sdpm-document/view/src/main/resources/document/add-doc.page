@@ -24,22 +24,19 @@
 					#@div(divClass="col-5")
 					#@Tselect2F()
 	                   		 #@Tselect2Body("docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">分类1</option>
-	                        <option value="CT">分类2</option>
-	                        <option value="DE">分类3</option>
-	                        <option value="FL">分类4</option>
-	                        <option value="GA">分类5</option>
-	            
+	                        <option value="0">/</option>
+	                       	 #foreach(l : moduleList)
+	                       	 	<option value="${l?.moduleId}">${l?.moduleName}</option>
+	            			 #end
 	                    	#end                  	                    	
                 	  #end
                 	  #end
                 	   #end
 				#end	
-				
 			#@elementItem()
         			#@colLabel()文档类型#end
 					#@skinMinimal("mt-20")
-    					#labelRadio1(rId="typefile" rName="docType" rValue="文件" labelText="文件" "setType(this.value);")
+    					#labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="文件" "setType(this.value);" labelText="文件" )
     					#labelRadio1(rId="typeurl" rName="docType" rValue="链接" labelText="链接" "setType(this.value);")   								
     					#labelRadio1(rId="typetext" rName="docType" rValue="网页" labelText="网页" "setType(this.value);")
 					

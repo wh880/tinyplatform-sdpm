@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.project.service.inter;
 
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -68,4 +70,11 @@ public interface BuildService {
      * @return
      */
     public List<ProjectBuild> findListBuild(ProjectBuild projectBuild);
+    
+    /**
+	 * 产品线树
+	 * @param t
+	 * @return
+	 */
+	List<ProductAndLine> getProductLineTree(ProductLine t);
 }
