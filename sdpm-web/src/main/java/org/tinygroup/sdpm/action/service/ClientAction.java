@@ -53,7 +53,6 @@ public class ClientAction extends BaseController {
     public String listData(Integer limit, Integer start, ServiceClient client, Model model, Integer treeId,
                            @RequestParam(required = false, defaultValue = "serviceClient.clientId") String order,
                            @RequestParam(required = false, defaultValue = "desc") String orderType) {
-
         if (treeId != null) {
             Pager<ServiceClient> pager = clientService.findClientPagerByPid(start, limit, treeId, order, orderType);
             model.addAttribute("pager", pager);
