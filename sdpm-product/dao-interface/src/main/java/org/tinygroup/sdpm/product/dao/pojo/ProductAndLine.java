@@ -10,6 +10,32 @@ public class ProductAndLine {
 	
 	private String productLineName;
 
+	/**
+	 * 版本id
+	 */
+	private Integer buildId;
+	
+	/**
+	 * 版本名称
+	 */
+	private String buildName;
+
+	public Integer getBuildId() {
+		return buildId;
+	}
+
+	public void setBuildId(Integer buildId) {
+		this.buildId = buildId;
+	}
+
+	public String getBuildName() {
+		return buildName;
+	}
+
+	public void setBuildName(String buildName) {
+		this.buildName = buildName;
+	}
+
 	public int getProductId() {
 		return productId;
 	}

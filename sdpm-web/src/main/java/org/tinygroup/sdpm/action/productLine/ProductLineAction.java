@@ -12,9 +12,11 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
+import org.tinygroup.template.parser.grammer.TinyTemplateParser.If_directiveContext;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +34,17 @@ public class ProductLineAction extends BaseController {
     private ProductLineService productLineService;
     @Autowired
     private ProductService productService;
-
-
+   @RequestMapping("{type}")
+    public String productline(@PathVariable(value="type")String type){
+	   if("add".equals(type)){
+		   return "productLine/page/tabledemo/add.page";
+	   }
+	   if("all".equals(type)){
+		   return"productLine/page/tabledemo/list.page";
+	   }
+	   return null;
+    	
+    }
     @RequestMapping("/save")
     public String save(ProductLine productLine, Model model) {
         productLineService.addProductLine(productLine);

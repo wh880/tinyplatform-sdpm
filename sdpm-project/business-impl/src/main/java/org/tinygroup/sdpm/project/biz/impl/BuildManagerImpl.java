@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
@@ -61,4 +63,9 @@ public class BuildManagerImpl implements BuildManager {
         //
         return projectBuildDao.batchUpdateDel(keys);
     }
+
+	public List<ProductAndLine> getProductLineTree(ProductLine t) {
+
+		return projectBuildDao.getProductLineTree(t);
+	}
 }

@@ -17,6 +17,8 @@
 package org.tinygroup.sdpm.project.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 
 import java.util.List;
@@ -26,4 +28,6 @@ public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
 
     public Integer softDelete(ProjectBuild build);
     public int[] batchUpdateDel(List<ProjectBuild> builds);
+    
+	List<ProductAndLine> getProductLineTree(ProductLine t);
 }

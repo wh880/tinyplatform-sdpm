@@ -67,4 +67,6 @@ public interface ProductLineService {
 	 */
 	Pager<ProductLine> findProductLinePager(int page,int pagesize,ProductLine productLine,String order,String ordertype);
 	
+	
+	
 }

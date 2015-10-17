@@ -155,8 +155,8 @@ public class ProductAction extends BaseController {
         List<SystemHistory> histories = historyService.find(history);
         SystemAction action = new SystemAction();
         action.setActionObjectType("story");
-        List<SystemAction> actions = actionService.find(action);
-        model.addAttribute("action", actions);
+       // List<SystemAction> actions = actionService.find(action);
+       // model.addAttribute("action", actions);
         model.addAttribute("product", product);
         model.addAttribute("history", histories);
 
