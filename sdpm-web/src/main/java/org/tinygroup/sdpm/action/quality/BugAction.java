@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
 import org.tinygroup.sdpm.action.system.ProfileUtil;
@@ -180,7 +181,9 @@ public class BugAction extends BaseController {
 	@RequestMapping("/assign")
 	public String assign(Integer bugId,Model model){		
 		QualityBug bug = bugService.findById(bugId);
+		List<OrgUser> users = userService.findUserList(null);
 		model.addAttribute("bug", bug);
+		model.addAttribute("userList",users);
 		return "/testManagement/page/tabledemo/assign.page";
 	}
 
@@ -188,7 +191,6 @@ public class BugAction extends BaseController {
 	public String assign(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
 
 		bug.setBugAssignedDate(new Date());
-
 		bugService.updateBug(bug);
 
 	
@@ -402,8 +404,10 @@ public class BugAction extends BaseController {
 	public String save(QualityBug bug,SystemAction systemAction,@RequestParam(value = "file", required = false)MultipartFile[] file,
 			String[] title, HttpServletRequest request){
 
+		if(!StringUtil.isBlank(bug.getBugAssignedTo())){
+			bug.setBugAssignedDate(new Date());
+		}
 		bug.setBugOpenedDate(new Date());
-
 		bug.setBugOpenedBy(UserUtils.getUserAccount() != null?UserUtils.getUserAccount():"0");
 		QualityBug qbug=bugService.addBug(bug);
 		ProfileUtil profileUtil = new ProfileUtil();

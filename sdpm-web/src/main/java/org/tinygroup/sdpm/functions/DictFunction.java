@@ -24,8 +24,6 @@ public class DictFunction extends AbstractTemplateFunction {
             return DictUtil.getValueMap(parameters[0].toString());
         }else if(parameters.length<=2){
             return DictUtil.getValue(parameters[0].toString(),parameters[1].toString());
-        }else if(parameters.length<=3){
-            return DictUtil.getValue(parameters[0].toString(),parameters[1].toString(),parameters[2].toString());
         }
         return null;
     }

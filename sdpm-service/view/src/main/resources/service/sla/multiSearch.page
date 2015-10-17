@@ -228,12 +228,42 @@
         itemlist.push({
             "name": "slaTitle",
             "title": "服务协议标题",
-            "operator": "=",
-            "value": "user"
+            "operator": "include",
+            "value": "text"
         });
         itemlist.push({
             "name": "slaSpec",
             "title": "服务协议表述",
+            "operator": "include",
+            "value": "text"
+        });
+        itemlist.push({
+            "name": "serviceReplyTimeLimit",
+            "title": "服务响应时限",
+            "operator": "<=",
+            "value": "data"
+        });
+        itemlist.push({
+            "name": "serviceEffortLimit",
+            "title": "服务工时上限",
+            "operator": "<=",
+            "value": "data"
+        });
+        itemlist.push({
+            "name": "serviceRequestLimit",
+            "title": "服务请求数上限",
+            "operator": "<=",
+            "value": "data"
+        });
+        itemlist.push({
+            "name": "serviceTsOnsiteLimit",
+            "title": "现场服务次数上限",
+            "operator": "<=",
+            "value": "data"
+        });
+        itemlist.push({
+            "name": "serviceSpecialist",
+            "title": "服务专员",
             "operator": "=",
             "value": "user"
         });
@@ -253,7 +283,7 @@
             "name": "slaCreateDate",
             "title": "创建时间",
             "operator": ">=",
-            "value": "date"
+            "value": "data"
         });
         itemlist.push({
             "name": "slaReviewedBy",
@@ -262,119 +292,18 @@
             "value": "user"
         });
         itemlist.push({
-            "name": "consumed",
-            "title": "总消耗",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "type",
-            "title": "任务类型",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "fromBug",
-            "title": "来源Bug",
-            "operator": "belong",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "closedReason",
-            "title": "关闭原因",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "openedBy",
-            "title": "由谁创建",
+            "name": "slaClosedBy",
+            "title": "关闭人",
             "operator": "=",
             "value": "user"
         });
         itemlist.push({
-            "name": "finishedBy",
-            "title": "由谁完成",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "closedBy",
-            "title": "由谁关闭",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "canceledBy",
-            "title": "由谁取消",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "lastEditedBy",
-            "title": "最后修改",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "mailto",
-            "title": "抄送给",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "openedDate",
-            "title": "创建日期",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "deadline",
-            "title": "截止日期",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "estStarted",
-            "title": "预计开始",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "realStarted",
-            "title": "实际开始",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "assignedDate",
-            "title": "指派日期",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "finishedDate",
-            "title": "完成时间",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "closedDate",
+            "name": "slaCloseDate",
             "title": "关闭时间",
-            "operator": "=",
-            "value": "date"
+            "operator": ">=",
+            "value": "data"
         });
-        itemlist.push({
-            "name": "canceledDate",
-            "title": "取消时间",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "lastEditedDate",
-            "title": "最后修改日期",
-            "operator": "=",
-            "value": "date"
-        });
+
         function setValueBox(index, itemIndex) {
             $("#operator" + itemIndex).val(itemlist[index]["operator"]);
             switch (itemlist[index]["value"]) {
