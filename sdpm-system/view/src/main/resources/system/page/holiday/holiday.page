@@ -30,7 +30,7 @@
 ##                #@mulOperation("muldelete" call("link","/system/holiday/findIds"))            
 ##				 	#@radiusBtn("btn-danger" "icon-trash" "javascript:") 批量删除#end
 ##				 #end
-				#@aModal("#myModal" "添加" "500" "276" "btn radius btn-primary" "/system/page/holiday/holiday-add.pagelet")添加#end
+				#@aModal("#myModal" "添加" "500" "276" "btn radius btn-primary" adminPath+"/system/holiday/add")添加#end
 			
 			#end
 			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/system/holiday/findPager") ##取数据地址 总数据
