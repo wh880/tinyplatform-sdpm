@@ -1,43 +1,43 @@
-
 <script type="text/javascript">
-##二级联动的js
- function ajaxRead(id,toName,opKey,opvalue,url,value){
-            var selectCheck = "select[name="+toName+"]";
-            $(selectCheck).each(function(){
-                var sele = $(this);
-                var s;
-                $.ajax({
-                    type: "POST",
-                    url: "${TINY_CONTEXT_PATH+adminPath}"+url,
-                    data: $(this).attr('data'),
-                    dataType:"json",
-                    success: function(data){
-                        sele.empty();
-                        var em = "<option value='0' selected  >/</option>";
+
+
+    function ajaxRead(id,toName,opKey,opvalue,url,value){
+        var selectCheck = "select[name="+toName+"]";
+        $(selectCheck).each(function(){
+            var sele = $(this);
+            var s;
+            $.ajax({
+                type: "POST",
+                url: "${TINY_CONTEXT_PATH+adminPath}"+url,
+                data: $(this).attr('data'),
+                dataType:"json",
+                success: function(data){
+                    sele.empty();
+                    var em = "<option value='0' selected  >/</option>";
+                    sele.append(em);
+                    for(var i=0,l=data.length;i<l;i++){
+                        var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
                         sele.append(em);
-                        for(var i=0,l=data.length;i<l;i++){
-                            var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
-                            sele.append(em);
 
-                        }
-
-                        if(value!=null) {
-                            sele.val(value).trigger("change");
-                        }else {
-                            sele.val(data[0][opKey]).trigger("change");
-                        }
-
-
-                    },
-                    error: function(res){
-                        alert("失败");
                     }
-                });
+
+                    if(value!=null) {
+                        sele.val(value).trigger("change");
+                    }else {
+                        sele.val(data[0][opKey]).trigger("change");
+                    }
 
 
+                },
+                error: function(res){
+                    alert("失败");
+                }
             });
 
-        }
+
+        });
+
+    }
 </script>
 
 
@@ -68,22 +68,23 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#@Tselect2F()
-	                   		#@Tselect2Body("docProduct" product?.productId {"class":"input-text select2","enctype":"multipart/form-data"}) ##,"multiple":"multiple"加上为多选项
+	                   		#@Tselect2Body("docProduct" product?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                     	 <option value="0">/</option>
 	                        #foreach(product : productList)
 	                        	 <option value="${product?.productId}">${product?.productName}</option>
 	                        #end	                       	                    	                        
 	                    	#end   
-	                    	<script type="text/javascript">
-                            $("#${sid}").on("change",function(){
-                                var pId = $("#${sid}  option:selected").val();
-                                ajaxRead("${sid}","docModule","docModule","moduleTitle","/document/ajax/module?moduleRoot="+pId,${doc?.docModule?:0});
-
-                            })
-                        	</script>               
+	                    	              
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
+	                    	<script type="text/javascript">
+                            $("#${sid}").on("change",function(){
+                                var pId = $("#${sid}  option:selected").val();
+                                ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/module1?productId="+pId,${doc?.docModule?:0});
+
+                            })
+                        	</script> 
                 	  #end
                 	  #end
                 	  #end
@@ -94,7 +95,7 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#@Tselect2F()
-	                   		 #@Tselect2Body("docModule" doc?.docModule?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("docModule" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="0">/</option>	                        	            
 	                    	#end                  	                    	
                 	  #end
@@ -105,7 +106,7 @@
 			#@elementItem()
         			#@colLabel()文档类型#end
 					#@skinMinimal("mt-20")
-    					#labelRadio1(rId="typefile" rName="docType" rValue="文件" labelText="文件" "setType(this.value);")
+    					#labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="文件" "setType(this.value);" labelText="文件")
     					#labelRadio1(rId="typeurl" rName="docType" rValue="链接" labelText="链接" "setType(this.value);")   								
     					#labelRadio1(rId="typetext" rName="docType" rValue="网页" labelText="网页" "setType(this.value);")
 					
@@ -117,25 +118,27 @@
 					#@colLabel()文档标题#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docTitle" ""{"placeholder":"*","datatype":"*4-16","nullmsg":"标题不能为空！","id":"docTitle","class":"input-text"})
+						#tinyInput("text" "docTitle" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"标题不能为空！","class":"input-text"})
 					#end
 					#end
+						#@validateDiv("col-2")#end
 				#end
-				#@validateDiv("col-2")#end
+			
 			#@elementItem(elementId="urlBox" eleItemClass="hidden")
 					#@colLabel()文档URL#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*4-16","id":"docUrl","class":"input-text"})
+					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*","class":"input-text"})
 					#end
 					#end
+					#@validateDiv("col-2")#end	
 				#end
-				#@validateDiv("col-2")#end							
+										
 			#@elementItem()	
 					#@colLabel()关键字#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docKeywords" ""{"placeholder":"","datatype":"*4-16","id":"docKeywords","class":"input-text"})
+					#tinyInput("text" "docKeywords" ""{"placeholder":"","datatype":"","class":"input-text"})
 					#end
 					#end
 				#end
@@ -204,4 +207,12 @@ function setType(type)
 		$('#contentBox').addClass('hidden');
 	}
 }
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
 </script>

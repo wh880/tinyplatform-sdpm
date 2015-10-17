@@ -49,7 +49,7 @@ public class DeptManagerImpl implements DeptManager {
 
     public Integer delete(Integer id) {
         OrgDept orgDept = orgDeptDao.getByKey(id);
-        orgDept.setOrgDeptParent(-1);
+        orgDept.setOrgDeptParent(-2);
 //        return orgDeptDao.deleteByKey(id);
         return orgDeptDao.edit(orgDept);
     }

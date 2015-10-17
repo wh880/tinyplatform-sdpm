@@ -39,7 +39,7 @@
         <menu id="org-user-testtaskAdmin" name="测试" href="/org/user/testtask" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
-        <menu id="org-user-activeAdmin" name="动态" href="/organization/user/activeAdmin.page" icon="" sort="1"
+        <menu id="org-user-activeAdmin" name="动态" href="/org/user/active" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
         <!--<menu id="org-user-logAdmin" name="日志" href="/organization/user/logAdmin.page" icon="" sort="1"-->
