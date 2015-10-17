@@ -16,13 +16,16 @@
 
 package org.tinygroup.sdpm.productLine.dao;
 
-import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import java.util.List;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 
 public interface ProductLineDao extends BaseDao<ProductLine,Integer> {
 	
 	Integer softDelete(Integer id);
+	
+	List<ProductLine> getProductLineTree(ProductLine t);
 	
 
 }

@@ -133,7 +133,59 @@ public class ProductLine implements Serializable{
 	 * 
 	 */
 	private Integer deleted;
+	
+	/**
+	 * 产品id
+	 */
+	private Integer productId;
+	
+	/**
+	 * 产品名字
+	 */
+	private String productName;
+	
+	/**
+	 * 版本id
+	 */
+	private Integer buildId;
+	
+	/**
+	 * 版本名称
+	 */
+	private String buildName;
 
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public Integer getBuildId() {
+		return buildId;
+	}
+
+	public void setBuildId(Integer buildId) {
+		this.buildId = buildId;
+	}
+
+	public String getBuildName() {
+		return buildName;
+	}
+
+	public void setBuildName(String buildName) {
+		this.buildName = buildName;
+	}
 
 	public void setProductLineId(Integer productLineId){
 		this. productLineId = productLineId;
