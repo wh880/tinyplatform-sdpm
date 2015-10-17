@@ -102,17 +102,18 @@
 	                        	 <option value="${project?.projectId}">${project?.projectName}</option>
 	                        #end	                       	                    	                        
 	                    	#end
-#*	                    	 <script type="text/javascript">
-                            $("#${sid}").on("change",function(){
-                                var pId = $("#${sid}  option:selected").val();
-                                ajaxRead("${sid}","docProduct","productId","productName","/document/ajax/product?projectId="+pId,${doc?.docProduct});
-
-                            })
-                        	</script>*#
+	                    	
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd" class="r">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end                 	                    	
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end   
+	                    	             	                    	
                 	  #end
+#*                	  <script type="text/javascript">
+                            $("#${sid}").on("change",function(){
+                                var pId = $("#${sid}  option:selected").val();
+                                ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/module?projectId="+pId,${doc?.docModule});
+                            })
+                        	</script>  *#
                 	  #end
                 	  #end
 	 		#end			
@@ -123,6 +124,7 @@
 					#@div(divClass="col-6")
 					#@Tselect2F()
 	                   		#@Tselect2Body("docProduct" doc?.docProduct {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+						##	<option value="0">/<option>
 					        #foreach(product : productList)
 	                        	 <option value="${product?.productId}">${product?.productName}</option>
 	                        #end	
@@ -142,10 +144,10 @@
          <div class="col-4">
           #@Tselect2F()
 	          #@Tselect2Body("docModule" doc?.docModule {"class":"input-text select2"}) 
-        		 #foreach(var:libList)
-	                <option value="${doc?.docModule}">${doc?.docModule}</option>
+	          <option value="0">/</option>
+       		 #foreach(var:listModule)
+	                <option value="${var?.moduleId}">${var?.moduleName}</option>
 	            #end 
-	            <option value="1">分类1</option>
 	          #end                	         
               #end
               	</div>
@@ -160,13 +162,14 @@
        		</div>
      #end
      #@elementItem()
-        <div class="col-12">
-         <div class="col-2 text-r"><label>文档标题&nbsp</label></div>
-         		<div class="col-4">
-           	 	#@tinyInput("text" "docTitle" doc?.docTitle {"datatype":"*","id":"docTitle","class":"input-text"})${doc?.docTitle}#end
-              	</div>
-       	</div>
-     #end
+					#@colLabel()文档标题#end
+					#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+						#tinyInput("text" "docTitle" doc?.docTitle {"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"标题不能为空！","class":"input-text"})
+					#end
+					#end
+						#@validateDiv("col-2")#end
+				#end
      #@elementItem()
         <div class="col-12">
          <div class="col-2 text-r"><label>关键字&nbsp</label></div>
@@ -174,6 +177,7 @@
            	 	#tinyInput("text" "docKeywords" doc?.docKeywords {"datatype":"","id":"docKeywords","class":"input-text"})
               	</div>
        	</div>
+       	#@validateDiv("col-2")#end
      #end
      #@elementItem()
             <div class="col-12">
@@ -186,9 +190,10 @@
 					#@colLabel()文档URL&nbsp#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docUrl" doc?.docUrl{"placeholder":"相应的链接地址","datatype":"*4-16","id":"docUrl","class":"input-text"})
+					#tinyInput("text" "docUrl" doc?.docUrl{"placeholder":"相应的链接地址","datatype":"*","class":"input-text","nullmsg":"链接不能为空！"})
 					#end
 					#end
+					#@validateDiv("col-2")#end
 				#end
 				
         #@elementItem(elementId="contentBox" eleItemClass="hidden")
@@ -254,4 +259,12 @@
 
  $(".select2").select2(); 
 					  
-	</script>
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
+</script>
