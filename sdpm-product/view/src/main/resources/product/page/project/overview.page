@@ -16,15 +16,15 @@
 			</span>
         <span class="r">
 
-			#foreach(m:menuManager.getScopeMenus("overview-cl"))
+			#foreach(m:menuManager?.getScopeMenus("overview-cl"))
 			#set(url=eval(m?.href))
              
-                #if(m.id=="product-overview-close")
+                #if(m?.id=="product-overview-close")
                         #@iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet""ml-5")关闭#end
-                #elseif(m.id=="product-overview-back")
-                       <a href="${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #elseif(m?.id=="product-overview-back")
+                       <a href="${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
                 #elseif(m.id=="product-overview-editor")
-                    <a href="${TINY_CONTEXT_PATH +adminPath}${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                    <a href="${TINY_CONTEXT_PATH +adminPath}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
 
 
                 #end
@@ -42,7 +42,7 @@
         <p class="titleName">产品描述</p>
 
         <div>
-            ${product.productDesc}
+            ${product?.productDesc}
         </div>
     #end
 
@@ -55,16 +55,16 @@
 
     <div style="text-align:center;margin:auto">
 	        <span class="c">
-                #foreach(m:menuManager.getScopeMenus("overview-cl"))
+                #foreach(m:menuManager?.getScopeMenus("overview-cl"))
                 &nbsp;&nbsp;&nbsp;
 				#set(url=eval(m?.href))
-	                #if(m.id=="product-overview-close")
+	                #if(m?.id=="product-overview-close")
 	                        #@iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet""ml-5")关闭#end
-	                #elseif(m.id=="product-overview-back")
-	                       <a href="${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-	                #elseif(m.id=="product-overview-editor")
+	                #elseif(m?.id=="product-overview-back")
+	                       <a href="${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
+	                #elseif(m?.id=="product-overview-editor")
                         <a href="${TINY_CONTEXT_PATH +adminPath}${url}"
-                           title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                           title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
 	                #end
 	            #end
 
@@ -76,7 +76,7 @@
 
 #*	#include("/product/page/tabledemo/baseinfo.page")*#
 <div style="width:30%;float:right">
-    #TypeInfo("product" product.productId)
+    #TypeInfo("product" product?.productId)
 </div>
 
 
