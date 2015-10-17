@@ -46,11 +46,11 @@
                     &nbsp;导出模板#end
 
             #end
-
         #end &nbsp;
 
         #foreach(m:menuManager.getScopeMenus("product-new"))
-            <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}"><i
+            #set(url=eval(m.href))
+            <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i
                     class="${m.icon}">${m.name}</i></a>
         #end
 
@@ -65,7 +65,7 @@
             #@settoggleLeftTitle()
             产品线
             #end
-
+#*
             #@settoggleLeftBody("treeLeftbox")
             <ul class="treeList">
                 <li id="listContent" style="display:none; position:absolute;left:74px;">
@@ -74,6 +74,12 @@
             </ul>
             <ul id="treeDrag" class="ztree"></ul>
 
+            #end*#
+            #@settoggleLeftBody("treeLeftbox")
+                #@zTreeList(call("link",adminPath+"/productLine/treeData"))
+                    #setzTreeValMap({"id":"treeId","name":"pName","pid":"pId"}) ##Id中带"p"的为productLine的ID，其余的为productde ID
+                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/service/client/list" )
+                #end
             #end
 
 
