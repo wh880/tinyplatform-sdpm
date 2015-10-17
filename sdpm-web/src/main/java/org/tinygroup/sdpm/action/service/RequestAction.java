@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
@@ -55,6 +56,7 @@ public class RequestAction extends BaseController {
 
     @RequestMapping(value = "/list/data")
     public String listData(Integer limit, Integer start, ServiceRequest clientRequest, Integer status, Integer operation, Integer treeId, Model model,
+                           String groupOperate, SearchInfos searchInfos,
                            @RequestParam(required = false, defaultValue = "clientRequestId") String order,
                            @RequestParam(required = false, defaultValue = "desc") String ordertype) {
 
@@ -64,13 +66,7 @@ public class RequestAction extends BaseController {
             model.addAttribute("pager", pager);
             return "service/serviceReq/requestTableData.pagelet";
         }
-//        if (operation != null && operation == 2) {
-//            OrgUser user = UserUtils.getUser();
-//            Pager<ServiceRequest> pager = requestService.findReviewByMe(start, limit, user, clientRequest,treeId, order, ordertype);
-//            model.addAttribute("pager", pager);
-//            return "service/serviceReq/requestTableData.pagelet";
-//        }
-        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, order, ordertype);
+        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, groupOperate, searchInfos, order, ordertype);
         model.addAttribute("pager", pager);
         return "service/serviceReq/requestTableData.pagelet";
     }

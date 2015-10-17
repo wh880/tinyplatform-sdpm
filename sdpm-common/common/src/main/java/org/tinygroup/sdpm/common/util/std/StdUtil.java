@@ -56,10 +56,10 @@ public class StdUtil {
         }
     }
 
-    public static String getField(String tableName, String feildName) throws Exception {
+    public static String getField(String tableName, String feildName) {
         String table = tableMapping.get(tableName);
         if(table==null){
-            throw new Exception("表名不存在");
+            return null;
         }
         return tableStdMap.get(table).get(feildName);
     }

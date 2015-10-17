@@ -31,9 +31,8 @@
 		<span class="r">
 			#foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
 				#if(m.id=="tbugnote")
-					#@aModal("#myModal" m.name "800" "400" "" m.href "ml-5")
-						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
-				#else 
+
+				#else
 				#if(m.id=="tmakesure"||m.id=="tassign"||m.id=="tsolution"||m.id=="tbugadddemand"||m.id=="add-case")					
 					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">
 						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp&nbsp;
@@ -50,8 +49,8 @@
 						#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp
 				#end
 				#end
-				#end		
-				#end				
+				#end
+				#end
 			#end
 
 	#end
@@ -59,23 +58,19 @@
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
     		<p class="titleName">重现步骤</p>
-    		<p>[步骤]</p>
-    		<p>[结果]</p>
-    		<p>[期望]</p>
+    		${quality?.bugSteps}
     	</div>    		
     	<div class="infoContent">
     		<p class="titleName">附件</p>
+    		#for(file : profilesList)
+    		<p>${file?.fileTitle}.${file?.fileExtension}</p>
+    		#end
     	</div>
-    	#@div(divClass="infoContent")
-            <p class="titleName">历史记录</p>
-        ##加入后，js代码会导致页面排版混乱
-            #include("/testManagement/page/historyRecord.page")
-        #end
+    	#history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+qualityBug?.bugId)
         <center>
        		#foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
 				#if(m.id=="tbugnote")
-					#@aModal("#myModal" m.name "800" "400" "" m.href "ml-5")
-						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
+
 				#else 
 				#if(m.id=="tmakesure"||m.id=="tassign"||m.id=="tsolution"||m.id=="tbugadddemand"||m.id=="add-case")					
 					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">
@@ -117,7 +112,7 @@
 		</div>
 		#end
 	<div style="width: 30%;float: right">
-     #TypeInfo("qualityBugInfo")
+     #TypeInfo("qualityBugInfo",qualityBug?.bugId)
 
     </div>
 	#end

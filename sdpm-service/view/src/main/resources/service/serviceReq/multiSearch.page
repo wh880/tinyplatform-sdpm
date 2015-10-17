@@ -1,8 +1,11 @@
+
 ##<span id="showsearchmore">搜索</span>
-<form method="post" action="" id="searchform" class="form-condensed">
+<form method="get" id="${requestTableId}form"
+      class="form-condensed searchform">
     <div class="hide">
         <select id="operatortemp">
             <option value="=">=</option>
+            ]\
             <option value="!=">!=</option>
             <option value="&gt;">&gt;</option>
             <option value="&gt;=">&gt;=</option>
@@ -13,42 +16,43 @@
             <option value="notinclude">不包含</option>
             <option value="belong">从属于</option>
         </select>
-        <select id="usertemp">
+    ##        <select id="productId">
+    ##            <option value="" selected="selected"></option>
+    ##            <option value="3">支付宝</option>
+    ##            <option value="4">财付通</option>
+    ##            <option value="null">空</option>
+    ##        </select>
+        <select id="clientId">
             <option value="" selected="selected"></option>
-            <option value="admin">A:admin</option>
-            <option value="demo">D:Demo</option>
-            <option value="dev1">D:开发甲</option>
-            <option value="dev2">D:开发乙</option>
-            <option value="dev3">D:开发丙</option>
-            <option value="productManager">P:产品经理</option>
-            <option value="projectManager">P:项目经理</option>
-            <option value="tester1">T:测试甲</option>
-            <option value="tester2">T:测试乙</option>
-            <option value="tester3">T:测试丙</option>
-            <option value="testManager">T:测试经理</option>
-            <option value="closed">Closed</option>
-            <option value="$@me">自己</option>
+            <option value="1">恒生电子</option>
+            <option value="2">华为</option>
             <option value="null">空</option>
         </select>
-        <select id="pritemp">
-            <option value="0"></option>
-            <option value="3">3</option>
-            <option value="1">1</option>
-            <option value="44">44</option>
-            <option value="2">2</option>
-            <option value="4">4</option>
-            <option value="null">空</option>
-        </select>
-        <select id="statustemp">
+        <select id="requestType">
             <option value="" selected="selected"></option>
-            <option value="wait">未开始</option>
-            <option value="doing">进行中</option>
-            <option value="done">已完成</option>
-            <option value="pause">已暂停</option>
-            <option value="cancel">已取消</option>
-            <option value="closed">已关闭</option>
+            <option value="0">缺陷</option>
+            <option value="1">适应性</option>
             <option value="null">空</option>
         </select>
+        <select id="requestPre">
+            <option value="" selected="selected"></option>
+            <option value="0">低</option>
+            <option value="1">中</option>
+            <option value="null">空</option>
+        </select>
+    ##        <select id="requestStatus">
+    ##            <option value="" selected="selected"></option>
+    ##            <option value="0">新建</option>
+    ##            <option value="1">待回访</option>
+    ##            <option value="null">空</option>
+    ##        </select>
+        <select id="modle">
+            <option value="" selected="selected"></option>
+            <option value="2">模块一</option>
+            <option value="3">模块二</option>
+            <option value="null">空</option>
+        </select>
+
 
     </div>
     <table class="table-condensed table-form" id="task-search">
@@ -61,45 +65,49 @@
                         <td class="text-right w-60px"><span id="searchgroup1"><strong>第一组</strong></span><input
                                 type="hidden" name="andOr1" id="andOr1" value="AND">
                         </td>
-                        <td class="w-90px"><select name="field1" id="field1" class="form-control "></select>
+                        <td class="w-90px"><select name="infos[0].field" id="field1" class="form-control "></select>
                         </td>
-                        <td class="w-70px"><select name="operator1" id="operator1" class="form-control "></select>
+                        <td class="w-70px"><select name="infos[0].operate" id="operator1"
+                                                   class="form-control "></select>
                         </td>
                         <td id="valueBox1"></td>
                     </tr>
                     <tr id="searchbox2" class="">
-                        <td class="text-right w-60px" valign="middle"><select name="andOr2" id="andOr2"
+                        <td class="text-right w-60px" valign="middle"><select name="infos[1].relation" id="andOr2"
                                                                               class="form-control ">
                             <option value="and" selected="selected">并且</option>
                             <option value="or">或者</option>
                         </select>
                         </td>
-                        <td class="w-90px"><select name="field2" id="field2" class="form-control ">
+                        <td class="w-90px"><select name="infos[1].field" id="field2" class="form-control ">
                         </select>
                         </td>
-                        <td class="w-70px"><select name="operator2" id="operator2" class="form-control "></select>
+                        <td class="w-70px"><select name="infos[1].operate" id="operator2"
+                                                   class="form-control "></select>
                         </td>
                         <td id="valueBox2"><input type="text" name="value2" id="value2" value=""
                                                   class="form-control   ">
                         </td>
                     </tr>
                     <tr id="searchbox3" class="">
-                        <td class="text-right w-60px"><select name="andOr3" id="andOr3" class="form-control ">
+                        <td class="text-right w-60px"><select name="infos[2].relation" id="andOr3"
+                                                              class="form-control ">
                             <option value="and" selected="selected">并且</option>
                             <option value="or">或者</option>
                         </select>
                         </td>
-                        <td class="w-90px"><select name="field3" id="field3" class="form-control ">
+                        <td class="w-90px"><select name="infos[2].field" id="field3" class="form-control ">
                         </select>
                         </td>
-                        <td class="w-70px"><select name="operator3" id="operator3" class="form-control "></select>
+                        <td class="w-70px"><select name="infos[2].operate" id="operator3"
+                                                   class="form-control "></select>
                         </td>
                         <td id="valueBox3"></td>
                     </tr>
                     </tbody>
                 </table>
             </td>
-            <td class="text-center nobr w-90px form-inline"><select name="groupAndOr" id="groupAndOr"
+            <td class="text-center nobr w-90px form-inline"><select name="groupOperate" id="groupAndOr"
                                                                     class="form-control w-60px">
                 <option value="and" selected="selected">并且</option>
                 <option value="or">或者</option>
@@ -109,60 +117,59 @@
                 <table class="active-disabled">
                     <tbody>
                     <tr id="searchbox4" class="">
-                        <td class="text-right w-60px"><span id="searchgroup2"><strong>第二组</strong></span><input
-                                type="hidden" name="andOr4" id="andOr4" value="AND">
+                        <td class="text-right w-60px">
+                            <span id="searchgroup2"><strong>第二组</strong></span>
+                            <input type="hidden" name="andOr4" id="andOr4" value="AND">
                         </td>
-                        <td class="w-90px"><select name="field4" id="field4" class="form-control ">
-                        </select>
+                        <td class="w-90px">
+                            <select name="infos[3].field" id="field4" class="form-control ">
+                            </select>
                         </td>
-                        <td class="w-70px"><select name="operator4" id="operator4" class="form-control "></select>
+                        <td class="w-70px">
+                            <select name="infos[3].operate" id="operator4" class="form-control "></select>
                         </td>
                         <td id="valueBox4"></td>
                     </tr>
                     <tr id="searchbox5" class="">
-                        <td class="text-right w-60px"><select name="andOr5" id="andOr5" class="form-control ">
-                            <option value="and" selected="selected">并且</option>
-                            <option value="or">或者</option>
-                        </select>
+                        <td class="text-right w-60px">
+                            <select name="infos[4].relation" id="andOr5" class="form-control ">
+                                <option value="and" selected="selected">并且</option>
+                                <option value="or">或者</option>
+                            </select>
                         </td>
-                        <td class="w-90px"><select name="field5" id="field5" class="form-control ">
-                        </select>
+                        <td class="w-90px">
+                            <select name="infos[4].field" id="field5" class="form-control "></select>
                         </td>
-                        <td class="w-70px"><select name="operator5" id="operator5" class="form-control "></select>
+                        <td class="w-70px">
+                            <select name="infos[4].operate" id="operator5" class="form-control "></select>
                         </td>
                         <td id="valueBox5"></td>
                     </tr>
                     <tr id="searchbox6" class="">
-                        <td class="text-right w-60px"><select name="andOr6" id="andOr6" class="form-control ">
-                            <option value="and" selected="selected">并且</option>
-                            <option value="or">或者</option>
-                        </select>
+                        <td class="text-right w-60px">
+                            <select name="infos[5].relation" id="andOr6" class="form-control ">
+                                <option value="and" selected="selected">并且</option>
+                                <option value="or">或者</option>
+                            </select>
                         </td>
-                        <td class="w-90px"><select name="field6" id="field6" class="form-control ">
-                        </select>
+                        <td class="w-90px">
+                            <select name="infos[5].field" id="field6" class="form-control "></select>
                         </td>
-                        <td class="w-70px"><select name="operator6" id="operator6" class="form-control "></select>
+                        <td class="w-70px">
+                            <select name="infos[5].operate" id="operator6" class="form-control "></select>
                         </td>
-                        <td id="valueBox6">
-                        </td>
+                        <td id="valueBox6"></td>
                     </tr>
                     </tbody>
                 </table>
             </td>
             <td class="w-180px">
                 <div class="btn-group">
-                    <button type="submit" id="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
+                    <button type="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
                     <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
-                    #@aModal("#myModal" "请输入查询标题（保存之前请先查询）：" "500" "120" "btn radius btn-primary btn-sm"
-                        "/service/serviceReq/searchSave.pagelet")
-                        <div style="margin: 4px">
-                            保存
-                        </div>
-                    #end
-                ## <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>
+                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>
                 </div>
             </td>
-        ##新增搜索框里面的“保存”和“我的查询”
             <td>
                 <div style="width:105px;margin-top:3px;">
                     #@Tselect2F()
@@ -172,12 +179,14 @@
                             <option value="o2o">o2o系统</option>
                         #end
                     ##填写任意内容，侦听需重新填加 A侦听已内置
+                        #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
                     #end
                 </div>
             </td>
         </tr>
         </tbody>
     </table>
+
     <div id="moreOrLite">
         <a id="searchmore" href="javascript:;"><i class="icon-double-angle-down icon-2x"></i></a>
         <a id="searchlite" href="javascript:;"><i class="icon-double-angle-up icon-2x"></i></a>
@@ -188,7 +197,7 @@
     <!--
     $(function () {
         $("#showsearchmore").click(function () {
-            $("#searchform").toggleClass("showmore");
+            $(".searchform").toggleClass("showmore");
         });
         $("#searchmore").click(function () {
             $("#searchlite").css("display", "block");
@@ -201,197 +210,100 @@
             $("#searchbox5,#searchbox6,#searchbox2,#searchbox3").hide();
         });
         var itemlist = []
+//        itemlist.push({
+//            "name":"productId",
+//            "title":"产品名称",
+//            "operator":"include",
+//            "value":"proId"
+//        });
         itemlist.push({
-            "name": "name",
-            "title": "任务名称",
+            "name": "requestType",
+            "title": "请求类型",
+            "operator": "=",
+            "value": "reqT"
+        });
+        itemlist.push({
+            "name": "requestPre",
+            "title": "请求优先级",
+            "operator": "=",
+            "value": "reqP"
+        });
+        itemlist.push({
+            "name": "moduleId",
+            "title": "请求模块",
             "operator": "include",
-            "value": "text"
+            "value": "mod"
         });
         itemlist.push({
-            "name": "id",
-            "title": "编号",
+            "name": "clientId",
+            "title": "客户名称",
+            "operator": "=",
+            "value": "cliId"
+        });
+        itemlist.push({
+            "name": "requester",
+            "title": "客户联系人",
             "operator": "=",
             "value": "text"
         });
         itemlist.push({
-            "name": "status",
-            "title": "任务状态",
-            "operator": "=",
-            "value": "status"
-        });
-        itemlist.push({
-            "name": "desc",
-            "title": "任务描述",
-            "operator": "include",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "assignedTo",
-            "title": "指派给",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "pri",
-            "title": "优先级",
-            "operator": "=",
-            "value": "pri"
-        });
-        itemlist.push({
-            "name": "project",
-            "title": "所属项目",
+            "name": "requestTitle",
+            "title": "请求标题",
             "operator": "=",
             "value": "text"
         });
         itemlist.push({
-            "name": "module",
-            "title": "所属模块",
+            "name": "requestSpec",
+            "title": "请求描述",
             "operator": "=",
             "value": "text"
         });
+//        itemlist.push({
+//            "name":"requestStatus",
+//            "title":"请求状态",
+//            "operator":"=",
+//            "value":"reqS"
+//        });
         itemlist.push({
-            "name": "estimate",
-            "title": "最初预计",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "left",
-            "title": "预计剩余",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "consumed",
-            "title": "总消耗",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "type",
-            "title": "任务类型",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "fromBug",
-            "title": "来源Bug",
-            "operator": "belong",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "closedReason",
-            "title": "关闭原因",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "openedBy",
-            "title": "由谁创建",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "finishedBy",
-            "title": "由谁完成",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "closedBy",
-            "title": "由谁关闭",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "canceledBy",
-            "title": "由谁取消",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "lastEditedBy",
-            "title": "最后修改",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "mailto",
-            "title": "抄送给",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "openedDate",
-            "title": "创建日期",
+            "name": "requestSubmitDate",
+            "title": "请求提交时间",
             "operator": "=",
             "value": "date"
         });
         itemlist.push({
-            "name": "deadline",
-            "title": "截止日期",
+            "name": "requestCommitmentDate",
+            "title": "请求承诺回复时间",
             "operator": "=",
             "value": "date"
         });
-        itemlist.push({
-            "name": "estStarted",
-            "title": "预计开始",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "realStarted",
-            "title": "实际开始",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "assignedDate",
-            "title": "指派日期",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "finishedDate",
-            "title": "完成时间",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "closedDate",
-            "title": "关闭时间",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "canceledDate",
-            "title": "取消时间",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "lastEditedDate",
-            "title": "最后修改日期",
-            "operator": "=",
-            "value": "date"
-        });
+
         function setValueBox(index, itemIndex) {
             $("#operator" + itemIndex).val(itemlist[index]["operator"]);
+            var sIndex = itemIndex - 1;
             switch (itemlist[index]["value"]) {
                 case "text":
-                    $("#valueBox" + itemIndex).html('<input type="text" name="value' + itemIndex + '" id="value' + itemIndex + '" value="" class="form-control">');
+                    $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control">');
                     break;
-                case "user":
-                    $("#valueBox" + itemIndex).html($('<select name="value' + itemIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#usertemp").html()));
+//                case "proId":
+//                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#productId").html()));
+//                    break;
+                case "cliId":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#clientId").html()));
                     break;
-                case "pri":
-                    $("#valueBox" + itemIndex).html($('<select name="value' + itemIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#pritemp").html()));
+                case "reqT":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#requestType").html()));
                     break;
-                case "status":
-                    $("#valueBox" + itemIndex).html($('<select name="value' + itemIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#statustemp").html()));
+                case "reqP":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#requestPre").html()));
+                    break;
+//                case "reqS":
+//                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#requestStatus").html()));
+//                    break;
+                case "mod":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#modle").html()));
                     break;
                 case "date":
-                    $("#valueBox" + itemIndex).html('<input type="text" name="value' + itemIndex + '" id="value' + itemIndex + '" value="" class="form-control dateinput">');
+                    $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control dateinput">');
                     break;
             }
         }
@@ -416,11 +328,18 @@
             });
 
         });
-        $("#searchform").on("click", "input[class*=dateinput]", function () {
+        $(".searchform").on("click", "input[class*=dateinput]", function () {
             WdatePicker({
                 startDate: '%y-%M-01 00:00:00', dateFmt: "yyyy-MM-dd"
             })
         });
+
+        $("#${requestTableId}form").on("submit", function () {
+            $("#${requestTableId}").trigger("initnav");
+            return false;
+
+        });
+
     });
     //-->
 </script>

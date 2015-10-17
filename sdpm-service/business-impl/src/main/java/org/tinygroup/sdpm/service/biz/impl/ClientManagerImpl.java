@@ -25,12 +25,12 @@ public class ClientManagerImpl implements ClientManager {
         return clientDao.getByKey(id);
     }
 
-    public Pager<ServiceClient> findPager(Integer start, Integer limit, ServiceClient serviceClient, String order, String ordertype) {
-        return clientDao.queryPager(start, limit, serviceClient, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
+    public Pager<ServiceClient> findPager(Integer start, Integer limit, ServiceClient serviceClient, String order, String orderType) {
+        return clientDao.queryPager(start, limit, serviceClient, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(orderType)) ? true : false));
     }
 
-    public Pager<ServiceClient> findByProduct(Integer start, Integer limit, Integer treeId, String order, String ordertype) {
-        return clientDao.findByProduct(start, limit, treeId, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
+    public Pager<ServiceClient> findByProduct(Integer start, Integer limit, Integer treeId, String order, String orderType) {
+        return clientDao.findByProduct(start, limit, treeId, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(orderType)) ? true : false));
     }
     public List<ServiceClient> getList(ServiceClient client) {
         return clientDao.query(client);
