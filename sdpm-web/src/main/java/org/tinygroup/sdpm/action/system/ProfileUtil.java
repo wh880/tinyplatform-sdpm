@@ -83,6 +83,12 @@ public class ProfileUtil extends BaseController{
 	        profile.setFileDeleted(String.valueOf(0));
 	        profileService.add(profile);
 	   }
+	   /**
+	    * 添加多个无标题附件附件
+	    * @param upfile
+	    * @param id
+	    * @param type
+	    */
 	   public void uploadNoTitles(MultipartFile[] upfile,int id,String type){
 		   for(int i=0,n=upfile.length;i<n;i++){
 			   if(!upfile[i].isEmpty()&&upfile[i].getSize()>0){
