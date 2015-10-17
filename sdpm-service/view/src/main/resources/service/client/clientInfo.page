@@ -32,13 +32,6 @@
                     #end
                 #end
                 #@gridSysRow()
-                    #@colLabel("col-4")客户部门：#end
-                    #@gridSysCol(1)#end
-                    #@gridSysCol(7)
-                        <p>${client.clientDeptId}</p>
-                    #end
-                #end
-                #@gridSysRow()
                     #@colLabel("col-4")客户登记人：#end
                     #@gridSysCol(1)#end
                     #@gridSysCol(7)
