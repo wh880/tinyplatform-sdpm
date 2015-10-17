@@ -60,6 +60,7 @@
                 console.log("test")
                 var pId = $("#${sid}  option:selected").val();
                 ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, ${bug?.moduleId?:0});
+                ajaxRead("${sid}","planId","planId","planName","/quality/bug/ajax/plan?productId="+pId,${bug?.planId?:0});
                 ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId,${bug?.bugOpenedBuild?:0},"build");
                 ajaxRead("${sid}","bugResolvedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId,${bug?.bugResolvedBuild?:0},"build");
             })
@@ -98,6 +99,16 @@
                         </script>
                         #end
                 	 #end
+                #end
+                #@tr()
+                    #@th()所属计划#end
+                    #@td()
+                        #@Tselect2F()
+                        #@Tselect2Body("planId" bug?.planId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+                        #end
+                        #end
+                     #end
                 #end
                 #@tr()
                     #@th()Bug类型#end
