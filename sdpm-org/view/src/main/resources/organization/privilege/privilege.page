@@ -24,15 +24,15 @@
         #@tabHead()
             #include("/organization/common/tab.page")
         #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-            <span class="f">
-					<dr>浏览角色</dr>
-        </span>
-
-                #div(divClass="clearfix")
-            #end
-        #end
+    ##        #@tabBodyCol("ptop-5")
+    ##            #@div(divClass="operationbar")
+    ##            <span class="f">
+    ##					<dr>浏览角色</dr>
+    ##            </span>
+    ##
+    ##                #div(divClass="clearfix")
+    ##            #end
+    ##        #end
 
 
     #end

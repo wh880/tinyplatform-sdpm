@@ -17,6 +17,8 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HolidayService;
 import org.tinygroup.tinysqldsl.Pager;
 @Controller
@@ -26,6 +28,8 @@ public class HolidayAction extends BaseController{
 	private HolidayService holidayService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ActionService actionService;
 	@RequestMapping("")
 	public String index(){
 		
@@ -143,6 +147,12 @@ public class HolidayAction extends BaseController{
 	 
 		holidayService.batchSofeDelete(holiday);
 		return  "/system/page/holiday/holiday.page";
+	}
+	@RequestMapping("holiday/action")
+	public String holidayAction(SystemAction action,Model model){
+		List<SystemAction> actions = actionService.find(action);
+		model.addAttribute("action", actions);
+		return "/system/page/holiday/holiday-dynamic.pagelet";
 	}
 	
 }

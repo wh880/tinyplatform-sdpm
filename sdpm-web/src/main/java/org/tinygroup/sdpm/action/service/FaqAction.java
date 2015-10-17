@@ -133,28 +133,63 @@ public class FaqAction extends BaseController {
     }
 
     /*实现faq里面的左侧树*/
-    @RequestMapping("/addTree")
+    /*对树的节点进行新增*/
+   /* @RequestMapping("/addTree")
     public String addDept(Integer faqParentTypeId, String faqType) {
         ServiceFaqType serviceFaqType = new ServiceFaqType();
         serviceFaqType.setFaqParentTypeId(faqParentTypeId);
         serviceFaqType.setFaqType(faqType);
         faqTypeService.addFaqType(serviceFaqType);
         return "/service/faq/faqmenu.page";
+    }*/
+    @ResponseBody
+    @RequestMapping("/addTree")
+    public Map addDept(Integer faqParentTypeId, String faqType) {
+        ServiceFaqType serviceFaqType = new ServiceFaqType();
+        serviceFaqType.setFaqParentTypeId(faqParentTypeId);
+        serviceFaqType.setFaqType(faqType);
+        faqTypeService.addFaqType(serviceFaqType);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "新增成功");
+        return map;
     }
 
-    @RequestMapping("/editTree")
+    /*对树的节点进行编辑*/
+    /*@RequestMapping("/editTree")
     public String editDept(Integer faqTypeId, String faqType) {
         ServiceFaqType type = faqTypeService.findFaqType(faqTypeId);
         type.setFaqType(faqType);
         faqTypeService.updateFaqType(type);
         return "/service/faq/faqmenu.page";
+    }*/
+    @ResponseBody
+    @RequestMapping("/editTree")
+    public Map editDept(Integer faqTypeId, String faqType) {
+        ServiceFaqType type = faqTypeService.findFaqType(faqTypeId);
+        type.setFaqType(faqType);
+        faqTypeService.updateFaqType(type);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "编辑成功");
+        return map;
     }
 
-    @RequestMapping("/deleteTree")
+    /*树里面的节点的删除*/
+   /* @RequestMapping("/deleteTree")
     public String deleteDept(Integer faqTypeId) {
         faqTypeService.deleteDept(faqTypeId);
-        //return 1;
         return "/service/faq/faqmenu.page";
+    }*/
+    /*树里面的节点的删除*/
+    @ResponseBody
+    @RequestMapping("/deleteTree")
+    public Map deleteDept(Integer faqTypeId) {
+        faqTypeService.deleteDept(faqTypeId);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
     }
 
     @RequestMapping("/listTree")

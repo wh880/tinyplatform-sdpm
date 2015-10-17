@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -26,13 +27,12 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -56,6 +56,8 @@ public class UserAction extends BaseController {
     private TeamService teamService;
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private ActionService actionService;
 
 
     @RequestMapping("/form")
@@ -298,6 +300,63 @@ public class UserAction extends BaseController {
         Pager<QualityTestCase> testCasePager = testCaseService.findTestCasePager(start, limit, testCase1, order, false);
         model.addAttribute("testCasePager", testCasePager);
         return "/organization/user/userTestCaseTable.pagelet";
+    }
+
+    @RequestMapping("/active")
+    public String activeJump(OrgUser orgUser, Model model) {
+        List<OrgUser> userList = userService.findUserList(orgUser);
+        model.addAttribute("userList", userList);
+        return "/organization/user/activeAdmin.page";
+    }
+
+    @RequestMapping("/active/search")
+    public String activeSearchAction(String id, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request, Model model, String selDate) {
+        SystemAction systemAction = new SystemAction();
+        systemAction.setActionActor(id);
+        //根据日期来查
+        /**
+         * 1-今天 2-昨天 3-前天 4-本周 5-上周 6-本月 7-上月 0-所有
+         * action_date BETWEEN '2015-10-16 00:00:00' AND '2015-10-16 23:59:59'
+         */
+        Date date = new Date();
+        Date startDate;
+        Date endDate;
+
+        if ("1".equals(selDate)) {
+            startDate = DateUtils.getDateStart(date);
+            endDate = DateUtils.getDateEnd(date);
+        } else if ("2".equals(selDate)) {
+            startDate = DateUtils.addDays(DateUtils.getDateStart(date), -1);
+            endDate = DateUtils.addDays(DateUtils.getDateEnd(date), -1);
+        } else if ("3".equals(selDate)) {
+            startDate = DateUtils.addDays(DateUtils.getDateStart(date), -2);
+            endDate = DateUtils.addDays(DateUtils.getDateEnd(date), -3);
+        } else if ("4".equals(selDate)) {
+            startDate = DateUtils.getFirstDayOfWeek(date);
+            endDate = DateUtils.getLastDayOfWeek(date);
+        } else if ("5".equals(selDate)) {
+            startDate = DateUtils.addDays(DateUtils.getFirstDayOfWeek(date), -7);
+            endDate = DateUtils.addDays(DateUtils.getLastDayOfWeek(date), -7);
+        } else if ("6".equals(selDate)) {
+            startDate = DateUtils.getFirstDayOfMonth(date);
+            endDate = DateUtils.getLastDayOfMonth(date);
+        } else if ("7".equals(selDate)) {
+            startDate = DateUtils.getFirstDayOfMonth(DateUtils.addMonths(date, -1));
+            endDate = DateUtils.getLastDayOfMonth(DateUtils.addMonths(date, -1));
+        } else {
+            startDate = null;
+            endDate = null;
+        }
+        if (startDate == null && endDate == null) {
+            Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, order, ordertype);
+            model.addAttribute("actionPager", actionPager);
+        } else {
+            String startDateStr = DateUtils.formatDate(startDate, "yyyy-MM-dd HH:mm:ss");
+            String endDateStr = DateUtils.formatDate(endDate, "yyyy-MM-dd HH:mm:ss");
+            Pager<SystemAction> actionPager = actionService.queryBetweenDate(start, limit, systemAction, startDateStr, endDateStr, order, "asc".equals(ordertype) ? true : false);
+            model.addAttribute("actionPager", actionPager);
+        }
+        return "/organization/user/userActiveTable.pagelet";
     }
 
     @RequestMapping("/project")

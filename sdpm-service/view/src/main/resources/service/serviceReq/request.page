@@ -2,6 +2,7 @@
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
 
 #set(name="request")
+#set(requestTableId = "requestTableId")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()
@@ -26,11 +27,6 @@
                     #@iconOperations(
                         "#myModal" "icon-download-alt" "导出" "600" "300" m1.href "ml-5")${m1.name}#end
                 #end
-            ##################报表
-            ##                #set(m2=menuManager.getMenu("request-form"))
-            ##                #if(m2)
-            ##                    <a href="${TINY_CONTEXT_PATH+adminPath}${m2.href}">#buttonIcon(iconClass="icon-bar-chart")${m2.name}</a>
-            ##                #end
                 #set(m3=menuManager.getMenu("request-add"))
                 #if(m3)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m3.href}">#buttonIcon(iconClass="icon-plus")${m3.name}</a>

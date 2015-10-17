@@ -1,5 +1,5 @@
 #@div(divClass="tabInfocontents")
-	#@tabWithInit("tab_info")
+	#@tabWithInit("tab_info01")
 		#@tabHead()
 			#@tabHeadCol()基本信息#end
 			#@tabHeadCol()项目/需求/任务#end
@@ -34,7 +34,7 @@
 			       			#end
 			       			#@tr()
 								#@td()Bug状态#end
-			       				#@td()${getDict(""bugStatus",qualityBug?.bugStatus)}#end
+			       				#@td()${getDict("bugStatus",qualityBug?.bugStatus)}#end
 			       			#end
 			       			#@tr()
 								#@td()激活次数#end
@@ -46,7 +46,7 @@
 			       			#end
 			       			#@tr()
 								#@td()当前指派#end
-			       				#@td()${qualityBug?.bugAssignedTo} 于 ${formatDate(qualityBug?.bugAssignedDate,"yyyy-MM-dd hh-mm-ss")}#end
+			       				#@td()${qualityBug?.userName} 于 ${formatDate(qualityBug?.bugAssignedDate,"yyyy-MM-dd hh-mm-ss")}#end
 			       			#end
 			       			#@tr()
 								#@td()操作系统#end

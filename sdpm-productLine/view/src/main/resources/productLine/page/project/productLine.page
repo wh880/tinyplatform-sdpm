@@ -7,14 +7,23 @@
 ##operationbar start
     #@div(divClass="operationbar")
     <span class="f">
-					<a href="#" class="active_btn">未关闭</a>
-					<a href="#">全部</a>
-					<a href="#">由我创建</a>
-					<a href="#">新建</a>
-					<a href="#">已批准</a>
-					<a href="#">结束</a>
-					<a href="#">取消</a>
-					<a href="#">已关闭</a>
+##					<a href="#" class="active_btn">未关闭</a>
+					<a val="未关闭" class="selDate ${date==1?"active_btn":""}">未关闭</a>
+					
+					<a val="all" class="selDate ${date==2?"active_btn":""}">全部</a>
+##					<a href="#">由我创建</a>
+##					<a href="#">新建</a>
+##					<a href="#">已批准</a>
+##					<a href="#">结束</a>
+##					<a href="#">取消</a>
+##					<a href="#">已关闭</a>
+					<a val="user" class="selUser ${date==1?"active_btn":""}">由我创建</a>
+                    <a val="新建" class="selDate ${date==2?"active_btn":""}">新建</a>
+                    <a val="已批准" class="selDate ${date==3?"active_btn":""}">已批准</a>
+                    <a val="结束" class="selDate ${date==4?"active_btn":""}">结束</a>
+                    <a val="取消" class="selDate ${date==5?"active_btn":""}">取消</a>
+                   
+                    <a val="已关闭" class="selDate ${date==0?"active_btn":""}">已关闭</a>
 					
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
@@ -122,6 +131,19 @@
     #end
 
 #end
+<script>
+    $(function(){
+        var actionUrl = $("#productLinetable").attr("data-url");
+        $(".selDate").click(function(e){
+            $("#productLinetable").attr("data-url", actionUrl + "&productLineStatus=" + $(this).attr("val"));
+            $("#productLinetable").trigger("refresh");
+        });
 
+        $(".selUser").click(function(e){
+            $("#productLinetable").attr("data-url", actionUrl + "&productLineCreatedBy=" + $(this).attr("val"));
+            $("#productLinetable").trigger("refresh");
+        });
+    });
+</script>
 
 #include("/productLine/page/event/mytree.page")
