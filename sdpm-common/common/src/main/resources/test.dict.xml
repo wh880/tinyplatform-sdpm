@@ -1,4 +1,4 @@
-<!--<dictNodeEntries name="quality" title="测试">-->
+<dictNodeEntries name="sdpmTest" title="sdpm测试">
     <!--<dictNodeEntry name="bug" title="bug">-->
         <!--<dictNodeEntry name="bugStatus" title="bug状态">-->
             <!--<dictItem key="1" value="激活" sort="1"/>-->
@@ -12,4 +12,4 @@
             <!--<dictItem key="2" value="已完成" sort="2"/>-->
         <!--</dictNodeEntry>-->
     <!--</dictNodeEntry>-->
-<!--</dictNodeEntries>-->
+</dictNodeEntries>
