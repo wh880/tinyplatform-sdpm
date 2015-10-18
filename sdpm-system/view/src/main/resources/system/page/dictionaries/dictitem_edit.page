@@ -5,19 +5,19 @@
 #@gridSysRow()
 #@colLabel("col-4")<span class="c-red">*</span>代码：#end
 #@gridSysCol(6)
-#tinyInput("text" "dictKey" dict?.dictKey {"datatype":"","id":"请求标题","class":"input-text"})
+#tinyInput("text" "dictKey" dict?.dictKey {"datatype":"","id":"请求标题","class":"input-text","nullmsg":"代码不为空"})
 #end
 #end
 #@gridSysRow()
 #@colLabel("col-4")<span class="c-red">*</span>中文名：#end
 #@gridSysCol(6)
-#tinyInput("text" "dictValue"dict?.dictValue {"datatype":"","id":"请求标题","class":"input-text"})
+#tinyInput("text" "dictValue"dict?.dictValue {"datatype":"","id":"请求标题","class":"input-text","nullmsg":"中文名不为空"})
 #end
 #end
 #@gridSysRow()
 #@colLabel("col-4")<span class="c-red">*</span>排序：#end
 #@gridSysCol(6)
-#tinyInput("text" "dictSort" dict?.dictSort {"datatype":"","id":"请求标题","class":"input-text"})
+#tinyInput("text" "dictSort" dict?.dictSort {"datatype":"","id":"请求标题","class":"input-text","nullmsg":"排序代码不为空"})
 #end
 #end
 #@gridSysRow()
@@ -43,3 +43,10 @@ ${module?.moduleName}
 #end
 #end
 #end
+<script type="text/javascript">
+    $(function () {
+        $("form[name=dictitemEditForm]").Validform({
+            tiptype: 2
+        });
+    });
+</script>
