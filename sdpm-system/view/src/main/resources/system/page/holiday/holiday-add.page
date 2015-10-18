@@ -1,11 +1,11 @@
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/system/holiday/save" "post" {"class":"test"})
+#@tinyForm("holidayForm" TINY_CONTEXT_PATH+adminPath+"/system/holiday/save" "post" {"class":"test"})
     <input type="hidden" name="dictId" value="${holiday?.holidayId}"/>
     <input type="hidden" name="holidayDeleted" value="0"/>
     #@elementItem()
         #@colLabel()名称：#end
         #@formControlDiv("col-6")
-          #tinyInput("text" "holidayName" holiday?.holidayName{"id":"username","class":"input-text"})
+          #tinyInput("text" "holidayName" holiday?.holidayName{"datatype":"*","id":"holidayName","class":"input-text","nullmsg":"代码不为空"})
         #end
         #@validateDiv("col-2")#end
     #end
@@ -84,3 +84,10 @@
     #end
 	#end
 #end
+<script type="text/javascript">
+    $(function () {
+        $("form[name=holidayForm]").Validform({
+            tiptype: 2
+        });
+    });
+</script>

@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.project.biz.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,8 +12,6 @@ import org.tinygroup.sdpm.project.dao.ProjectDao;
 import org.tinygroup.sdpm.project.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
-
-import java.util.List;
 
 /**
  * Created by shenly13343 on 2015-09-18.
@@ -81,5 +81,10 @@ public class ProjectManagerImpl implements ProjectManager {
 	public Pager<Project> findPager(int start, int limit, Project project, String order, String ordertype) {
 		
 		return projectDao.queryPager((start-1)*limit, limit, project, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+	}
+
+	public List<Project> getProjectByStoryId(Integer storyId) {
+
+		return projectDao.getProjectByStoryId(storyId);
 	}
 }

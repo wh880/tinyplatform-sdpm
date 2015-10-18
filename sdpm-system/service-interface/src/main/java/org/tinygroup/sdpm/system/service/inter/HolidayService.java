@@ -46,7 +46,7 @@ public interface HolidayService {
 	 * @param holidayList
 	 * @return
 	 */
-	int[] batchAdd(List<Holiday> holidayList);
+	List<Holiday> batchAdd(List<Holiday> holidayList);
 	/**
 	 * 通过Id 查询
 	 * @param id

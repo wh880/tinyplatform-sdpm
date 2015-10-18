@@ -120,6 +120,7 @@ public class LogUtil {
         FAQ("faq"),
         REPLY("reply"),
         REVIEW("review"),
+        HOLIDAY("holiday"),
         REQUEST("request");
         private final String operateObject;
 

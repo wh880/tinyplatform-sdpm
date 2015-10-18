@@ -33,6 +33,7 @@ public class ActionEnum {
         tableMap.put("todo","todo");
         tableMap.put("doclib","document_doclib");
         tableMap.put("doc","document_doc");
+        tableMap.put("holiday","holiday");
 
         primaryMap.put("user","org_user_id");
         primaryMap.put("story","story_id");
@@ -48,6 +49,7 @@ public class ActionEnum {
         primaryMap.put("todo","todo_id");
         primaryMap.put("doclib","doc_lib_id");
         primaryMap.put("doc","doc_id");
+        primaryMap.put("holiday","holiday_id");
 
         nameMap.put("user","org_user_account");
         nameMap.put("story","story_title");
@@ -63,6 +65,7 @@ public class ActionEnum {
         nameMap.put("todo","todo_name");
         nameMap.put("doclib","doc_lib_name");
         nameMap.put("doc","doc_title");
+        nameMap.put("holiday","holiday_name");
     }
 
     public static String getTable(String type){

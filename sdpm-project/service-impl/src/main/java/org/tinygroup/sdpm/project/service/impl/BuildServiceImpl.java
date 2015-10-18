@@ -58,7 +58,7 @@ public class BuildServiceImpl implements BuildService {
         return buildManager.find(id);
     }
     public int[] deleteBuildByIds(List<ProjectBuild> ids) {
-        //
+        
         return buildManager.batchDelBuildByIds(ids);
     }
     public List<ProjectBuild> findListBuild(ProjectBuild projectBuild){

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
 import org.tinygroup.sdpm.org.service.inter.DeptService;
@@ -37,9 +38,12 @@ public class DeptAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("edit")
-    public Map editDept(Integer orgDeptId, String orgDeptName) {
+    public Map editDept(Integer orgDeptParent, Integer orgDeptId, String orgDeptName) {
         OrgDept dept = deptService.findDept(orgDeptId);
         dept.setOrgDeptName(orgDeptName);
+        if (!StringUtil.isBlank(orgDeptParent.toString())) {
+            dept.setOrgDeptParent(orgDeptParent);
+        }
         deptService.updateDept(dept);
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "y");

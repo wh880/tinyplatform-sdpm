@@ -2,7 +2,7 @@
 	<div class="panel-heading panelNobr">
 		<span class="panel-title"><i class="panel-title-icon fa fa-tasks"></i>最新动态</span>
 		<div class="panel-heading-controls">
-			<a href="${TINY_CONTEXT_PATH}/organization/active.page">更多&gt&gt</a>
+##			<a href="${TINY_CONTEXT_PATH}/organization/active.page">更多&gt&gt</a>
 		</div>
 	</div>
 	<!-- Without vertical padding -->
@@ -20,14 +20,22 @@
 	            </tr>*#
 	            <tr>
 					<td  width="100%">
-						${a?.actionDate}, ${a?.actionActor} 
-						<em>删除了</em> 假期   
-						
-						<a href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">${a?.actionObjectId}</a>。
+						${formatDate(a?.holidayHistoryDate,"yyyy-MM-dd hh:mm:ss")}, ${a?.holidayHistoryActor} 
+						#if(a?.holidayHistoryAction=="deleted")
+						<em>删除了</em> 假期 
+						  #elseif(a?.holidayHistoryAction=="opened")
+						<em>添加了</em> 假期 
+						#else
+						  <em>修改了</em> 假期 
+						#end
+##						<a href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">${a?.actionObjectId}</a>。
+                         ${a?.holidayHistoryName}
 					</td> 
 					
 				</tr>
 	            #end
+
+
         </table>
 	</div>
 </div>

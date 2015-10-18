@@ -27,4 +27,6 @@ public interface OrgUserDao extends BaseDao<OrgUser,String> {
     Pager<OrgUser> getPagerByDeptId(int start, int limit, final Integer deptId, final OrderBy... orderBies);
 
     int[] softDeleteBatch(List<OrgUser> list);
+    
+    String getNameById(String id);
 }

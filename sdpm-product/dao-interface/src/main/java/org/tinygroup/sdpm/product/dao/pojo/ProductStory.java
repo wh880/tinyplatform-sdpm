@@ -37,6 +37,33 @@ public class ProductStory implements Serializable{
 	 * 用于项目下需求模块关联需求列表显示所属计划
 	 */
 	private String planName;
+	
+	/**
+	 * 创建人名称
+	 */
+	private String storyOpenedName;
+	
+	/**
+	 * 指派人名称
+	 */
+	private String storyAssignedName;
+	
+	public String getStoryOpenedName() {
+		return storyOpenedName;
+	}
+
+	public void setStoryOpenedName(String storyOpenedName) {
+		this.storyOpenedName = storyOpenedName;
+	}
+
+	public String getStoryAssignedName() {
+		return storyAssignedName;
+	}
+
+	public void setStoryAssignedName(String storyAssignedName) {
+		this.storyAssignedName = storyAssignedName;
+	}
+
 	/**
 	 * 需求ID
 	 *

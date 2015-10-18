@@ -13,22 +13,10 @@
         #@tabBodyCol("ptop-5")
         ##operationbar star
             #@div(divClass="operationbar")
-            <span class="f">
+            #*<span class="f">
 					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-				</span>
-            <span class="r">
-                #set(m1=menuManager.getMenu("sla-export"))
-                #if(m1)
-                    #@aModal("#myModal" "导出" "600" "170" "btn-class"
-                        "/service/serviceCom/serviceExport.pagelet")#buttonIcon(iconClass="icon-upload-alt")导出#end
+				</span>*#
 
-                #end
-
-                #set(m2=menuManager.getMenu("sla-add"))
-                #if(m2)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m2.href}">#buttonIcon(iconClass=m2.icon)${m2.name}</a>
-                #end
-				</span>
                 #div(divClass="clearfix")
                 #include("/service/sla/multiSearch.page")
             #end

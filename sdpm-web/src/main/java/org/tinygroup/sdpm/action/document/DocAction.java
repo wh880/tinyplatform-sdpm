@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.fileupload.util.LimitedInputStream;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.codehaus.jackson.map.Module;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -62,7 +64,10 @@ public class DocAction {
 	@RequestMapping("")
 	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange,String tree, String moduleId)
 	{	
-		List<DocumentDoclib> list=docservice.findDoclibList(new DocumentDoclib());				
+		
+		List<DocumentDoclib> list=docservice.findDoclibList(new DocumentDoclib());		
+
+		
 		if(list.size()>0&&!("true".equals(change))&&!("true".equals(docChange))&&!("true".equals(tree))){
 			if(null==request.getSession().getAttribute("documentLibId")||doclib.getDocLibId()==null){
 				request.getSession().setAttribute("documentLibId",list.get(0).getDocLibId());
@@ -70,6 +75,7 @@ public class DocAction {
 				request.getSession().setAttribute("documentLibId",doclib.getDocLibId());
 			}
 		}	
+		
 		request.getSession().setAttribute("libList",list);
 		request.getSession().setAttribute("moduleId", moduleId);
 		return "/document/document.page";
@@ -84,7 +90,7 @@ public class DocAction {
 			asc = false;
 		}
 		String condition = null;
-		if(moduleId != null){
+		if(!StringUtil.isBlank(moduleId)){
 			if(moduleId.contains("p")&&((Integer)request.getSession().getAttribute("documentLibId"))==1){
 				doc.setDocProduct(Integer.parseInt(moduleId.substring(1)));
 				Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, condition,searchInfos,groupOperate, order, asc);
@@ -118,7 +124,7 @@ public class DocAction {
 		return "/data/datalist.pagelet";
 	}
 	
-	@RequiresPermissions("add-doc")
+	@RequiresPermissions(value={"add-doc"})
 	@RequestMapping(value="/doc/add")
 	public String createDoc(HttpServletRequest request ,Model model)
 	{		
@@ -138,6 +144,7 @@ public class DocAction {
 		}else{
 			SystemModule module = new SystemModule();
 			module.setModuleType("doc");
+			module.setModuleRoot(libid);
 			List<SystemModule> moduleList = moduleService.findAllModules(module);
 			model.addAttribute("moduleList", moduleList);
 			return "/document/add-doc.page";	
@@ -162,17 +169,22 @@ public class DocAction {
 		return "redirect:"+"/a/document?docChange=true&moduleId="+request.getSession().getAttribute("moduleId");
 	}
 	
+	@RequiresPermissions(value={"docedit"})
 	@RequestMapping(value="/doc/edit")
 	public String editDoc(HttpServletRequest request,Model model,Integer docId)
 	{	
+		SystemModule module = new SystemModule();
 		DocumentDoc doc = new DocumentDoc();
+		module.setModuleType("doc");
 		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
 		doc = docservice.findDocById(docId);
 		List<Product> list1 = productService.findProductList(new Product());
 		List<Project> list2 = projectService.findList();
+		List<SystemModule> listModule = moduleService.findModuleList(module);
 		model.addAttribute("doc", doc);
 		model.addAttribute("productList", list1);
 		model.addAttribute("projectList", list2);
+		model.addAttribute("listModule", listModule);
 		return "/document/doc-edit.page";
 	}
 	
@@ -222,6 +234,7 @@ public class DocAction {
 		return "redirect:"+"/a/document";
 	}
 	
+	@RequiresPermissions(value={"docedit","doc-view-delete"})
 	@ResponseBody
 	@RequestMapping(value="/doc/delete")
 	public Map delDoc(Integer id)
@@ -233,6 +246,7 @@ public class DocAction {
 	    return map;
 	}
 	
+	@RequiresPermissions(value={"batch-delete"})
 	@ResponseBody
 	@RequestMapping(value="/doc/batchDelete")
 	public Map bctchDelDoc(String ids)
@@ -256,12 +270,14 @@ public class DocAction {
 	    return map;
 	}
 	
+	@RequiresPermissions(value={"doclib-add"})
 	@RequestMapping(value="/doclib/toAdd")
 	public String addDocLib()
 	{
 		return "/document/add-doclib.pagelet";
 	}
 	
+	@RequiresPermissions("doclib-edit")
 	@RequestMapping(value="/doclib/edit")
 	public String editDoclib(HttpServletRequest request,DocumentDoclib doclib,Model model)
 	{		
@@ -285,6 +301,7 @@ public class DocAction {
 		return "redirect:"+"/a/document?change=true";
 	}
 	
+	@RequiresPermissions(value={"doclib-delete"})
 	@ResponseBody
 	@RequestMapping(value="/doclib/delete")
 	public Map delDocLib(Integer id)
@@ -301,13 +318,37 @@ public class DocAction {
 		return null;
 	}
 	
+	/*
+	 * 添加项目文档中项目和分类的二级联动
+	 */
 	@ResponseBody
 	@RequestMapping("/ajax/module")
-	public List<SystemModule> getModule(SystemModule systemModule){
-		systemModule.setModuleType("document");
+	public List<SystemModule> getModule(SystemModule systemModule,Integer projectId){
+		if(projectId == 0){	
+			return moduleService.findModules(systemModule);
+		}
+		systemModule.setModuleRoot(projectId);
+		systemModule.setModuleType("projectDoc");
 		return moduleService.findModules(systemModule);
 	}
 	
+	/*
+	 * 添加产品文档中产品和分类的二级联动
+	 */
+	@ResponseBody
+	@RequestMapping("/ajax/module1")
+	public List<SystemModule> getModule1(SystemModule systemModule,Integer productId){
+		if(productId ==0){
+			return moduleService.findModules(systemModule);
+		}
+		systemModule.setModuleRoot(productId);
+		systemModule.setModuleType("productDoc");
+		return moduleService.findModules(systemModule);
+	}
+	
+	/*
+	 * 添加项目文档中项目和产品的二级联动
+	 */
 	@ResponseBody
 	@RequestMapping("/ajax/product")
 	public List<Product> getproduct(Product product,Integer projectId){
@@ -316,23 +357,67 @@ public class DocAction {
 			return projectProductService.findLinkProduct();
 		}
 		List<ProjectProduct> list = projectProductService.findProducts(projectId);
+		List<Product> list2 = productService.findProductList(product);
 		Integer[] i = new Integer[list.size()];
 		List<Integer> list1 = new ArrayList<Integer>();
 		for(int j=0;j<list.size();j++){
-			list1.add(list.get(j).getProductId());
+			if(list2.get(j).getDeleted()==0){
+				list1.add(list.get(j).getProductId());
+			}
 		}
 		List<Product> productList = productService.findProductList(list1.toArray(i));
-		
-		//查出删除标志位为0的数据,暂未实现功能，故注释
-		
-		/*for(int m=0;m<list.size();m++){
-			productList.get(m).setDeleted(0);
-		}*/
 		return productList;
 	}
 	
-	//产品文档
-		@RequestMapping("/product/doc")
+	/*
+	 * 编辑文档中文档库和分类的二级联动
+	 */
+	@ResponseBody
+	@RequestMapping("/ajax/moduleByDoclib")
+	public List<SystemModule> getModuleByDoclib(Integer libId){
+		SystemModule module = new SystemModule();
+		module.setModuleRoot(libId);
+		module.setModuleType("doc");
+		List<SystemModule> list = moduleService.findModuleList(module);
+		return list;
+	}
+	
+	/*
+	 * 编辑文档中项目和分类的二级联动
+	 */
+	@ResponseBody
+	@RequestMapping("/ajax/moduleByProject")
+	public List<SystemModule> getModuleByProject(Integer projectId){
+		SystemModule module = new SystemModule();
+		module.setModuleType("projectDoc");
+		module.setModuleRoot(projectId);
+		List<SystemModule> list = moduleService.findModuleList(module);
+		return list;
+	}
+	
+	/*
+	 * 编辑文档中产品和分类的二级联动
+	 */
+	@ResponseBody
+	@RequestMapping("/ajax/moduleByProduct")
+	public List<SystemModule> getModuleByProduct(Integer productId){
+		SystemModule module = new SystemModule();
+		module.setModuleType("productDoc");
+		module.setModuleRoot(productId);
+		List<SystemModule> list = moduleService.findModuleList(module);
+		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/ajax/productByDocLib")
+	public List<Product> getProductByDocLib(){
+		Product product = new Product();
+		List<Product> list = productService.findProductList(product);
+		return list;
+	}
+	
+	//产品文档相关
+	@RequestMapping("/product/doc")
 	public String product(HttpServletRequest request,Model model){
 		Product product = new Product();
 		List<Product> list = productService.findProductList(new Product());
@@ -380,6 +465,7 @@ public class DocAction {
 		}
 		return "";
 	}
+	
 	@ResponseBody
 	@RequestMapping("/docList")
 	public List<DocumentDoc> findDocumentDoc(DocumentDoc doc) {
@@ -388,13 +474,4 @@ public class DocAction {
 
 		return list;
 	}
-	
-	//项目文档
-	@RequestMapping("/project/doc")
-	public String prodject(HttpServletRequest request){		
-		return "";
-	}
-
-
-	
 }

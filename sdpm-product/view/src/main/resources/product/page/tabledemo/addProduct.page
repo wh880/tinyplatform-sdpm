@@ -7,7 +7,7 @@
 
     $(document).ready(function () {
 
-        ajaxRead("orguser", "orgUserId", "orgUserAccount");
+
 
     #*		$("select[ajaxType='orguser']").each(function(){
 
@@ -46,6 +46,28 @@
 <div style="width:100%;float:center" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">添加产品</p>
+
+        #@elementItem()
+            #@colLabel()产品线名称：#end
+            #@formControlDiv("col-3")
+                #@Tselect2F()
+                    #@Tselect2Body("productLineId" "IN" {"class":"input-text select2"})
+                    #end
+                    <script>
+                        ajaxRead("${sid}", "productLineId", "productLineId", "productLineName", "/productLine/productLineList");
+                    </script>
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH}/a/productLine/add">增加</a>
+                        <a href="${TINY_CONTEXT_PATH}/a/productLine/all" class="r">全部</a>
+                    #end
+
+
+                #end
+
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
 
 
         #@elementItem()

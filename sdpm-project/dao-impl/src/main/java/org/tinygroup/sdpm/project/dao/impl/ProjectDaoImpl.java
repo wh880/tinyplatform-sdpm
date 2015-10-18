@@ -27,6 +27,7 @@ import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.project.dao.ProjectDao;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
@@ -397,5 +398,18 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
 		}
 		return select;
+	}
+	
+	public List<Project> getProjectByStoryId(Integer storyId){
+		
+		Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("p.*")).from(FragmentSelectItemSql.fragmentFrom("project_story ps left join project p on p.project_id = ps.project_id"))
+				.where( and(
+				FragmentSql.fragmentCondition("ps.story_id = " + storyId),
+				FragmentSql.fragmentCondition("ps.story_id is not null")
+				
+				
+				));	
+		
+		return getDslSession().fetchList(select, Project.class);
 	}
 }

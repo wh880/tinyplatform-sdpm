@@ -82,6 +82,8 @@
     <menu id="sla" name="协议" href="/service/sla/list" sort="100" isShow="1">
         <menu id="sla-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="service-sla-batchdel"/>
+        <menu id="sla-add" name="新建协议" href="/service/sla/form" icon="icon-plus" sort="1" isShow="1"
+              scope="service-sla-batchdel"/>
         <!--<menu id="sla-edit" name="编辑" href="/service/sla/slaAdd.page" icon="icon-pencil" sort="1" isShow="1"-->
         <menu id="sla-edit" name="编辑" href="/service/sla/form" icon="icon-pencil" sort="1" isShow="1"
               scope="service-sla"/>
@@ -91,8 +93,7 @@
         <menu id="sla-export" name="导出" href="/service/serviceCom/serviceExport.pagelet" icon="icon-download-alt"
               sort="1" isShow="1"
               scope="service-sla-r"/>
-        <menu id="sla-add" name="新建协议" href="/service/sla/form" icon="icon-plus" sort="1" isShow="1"
-              scope="service-sla-r"/>
+
         <!--下面是协议里面，点击“详情”页面后的“编辑”和“删除”-->
         <menu id="clientSla_editContent" name="协议编辑" href="/service/sla/slaEdit" sort="1" isShow="1"
               scope="clientSlaContent"/>

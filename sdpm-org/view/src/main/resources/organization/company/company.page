@@ -8,12 +8,6 @@
         color: #fff
     }
 
-    .operationbar {
-        border-top: none;
-        background: #f9fafe;
-        padding: 6px 5px 6px 10px;
-    }
-
     .formText {
         margin-top: -6px;
         border: #eee 1px solid;

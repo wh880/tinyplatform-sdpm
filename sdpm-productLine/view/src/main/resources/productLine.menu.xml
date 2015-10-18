@@ -2,7 +2,7 @@
 <menu id="productLine" parent-id="0" name="产品线" href="/productLine/to" icon="icon-th-large"
       sort="900" isShow="1">
 
-    <menu id="line-product" parent-id="productLine" name="产品"
+    <menu id="line-product" parent-id="productLine" name="产品线"
           href="/productLine/listProduct?productLineId=${sessionProductLineId}" icon="" sort="200"
           isShow="1" scope="productLine-left">
 
@@ -13,13 +13,14 @@
           href="/productLine/find/overview?productLineId=${sessionProductLineId}" icon="" sort="100"
           isShow="1" scope="productLine-left">
 
-        <menu id="productLine-close" parent-id="overview" name="关闭" href="/productLine/page/tabledemo/close.pagelet"
+        <menu id="productLine-close" parent-id="overview" name="关闭" href="/productLine/close?productLineId=${productLine.productLineId}"
               icon="icon-off"
               sort="99" isShow="1" scope="productLine-overview">
             <map>
                 <property key="type" value="aModal"/>
             </map>
         </menu>
+
         <menu id="productLine-edit" parent-id="overview" name="编辑" href="/productLine/page/tabledemo/add.page"
               icon="icon-pencil"
               sort="98" isShow="1" scope="productLine-overview">

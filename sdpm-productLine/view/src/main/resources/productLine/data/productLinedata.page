@@ -9,8 +9,8 @@
 	#@td()<input type="checkbox" value="1" name="productLine">#end
 	#@td()${productLine?.productLineId}#end
 	#@td()
-		<a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/project/overview.page">${productLine?.productLineName}</a>
-	#end
+		<a href="${TINY_CONTEXT_PATH +adminPath}/productLine/find/overview?productLineId=${productLine?.productLineId}">${productLine?.productLineName}</a>
+#end
 	#@td()${productLine?.productLineCode}#end
 	#@td()${productLine?.companyId}#end
 	#@td()${productLine?.deptId}#end

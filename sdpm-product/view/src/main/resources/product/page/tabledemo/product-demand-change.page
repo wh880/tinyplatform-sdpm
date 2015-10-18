@@ -4,42 +4,43 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
 
-#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
+#!set(linkName="product-demand",sonitem="
+<li>"+"需求"+"</li>")
 
 <script>
-	$(document).ready(function(){
+    $(document).ready(function () {
 
-        ajaxRead("productStory","storyId","storyTitle");
-		
-		$("#story_reviewed").on("click",function(){
-		
-			var vm = this.checked;
-			if(vm==true){
-				$("select[name='storyReviewedBy']").attr("disabled","disabled");
-			}
-			if(vm==false){
-				$("select[name='storyReviewedBy']").removeAttr("disabled");
-			}
-			
-			
-		});
-	
-	});	
+        ajaxRead("productStory", "storyId", "storyTitle");
+
+        $("#story_reviewed").on("click", function () {
+
+            var vm = this.checked;
+            if (vm == true) {
+                $("select[name='storyReviewedBy']").attr("disabled", "disabled");
+            }
+            if (vm == false) {
+                $("select[name='storyReviewedBy']").removeAttr("disabled");
+            }
+
+
+        });
+
+    });
 </script>
 
 
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/update" "" {"class":"test"})
-#hiddenInput("","storyId","",story.storyId)
+    #hiddenInput("","storyId","",story.storyId)
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">变更</p>
- 
-   #* <div class="RTtitle">
-        <button type="submit" id="submit" class="commitBtn">保存</button>
-    </div>*#
 
-      #@elementItem()
+    #* <div class="RTtitle">
+         <button type="submit" id="submit" class="commitBtn">保存</button>
+     </div>*#
+
+        #@elementItem()
             #@sdpmItem("由谁评审")
                 #@Tselect2F()
                     #@Tselect2Body("storyReviewedBy" story?.storyReviewedBy {"class":"input-text select2"})
@@ -52,85 +53,86 @@
                 #end
 
                 <script>
-                        ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
+                    ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
                 </script>
 
             #end
             #@checkboxBox()
-	            
-	            #@label(labelFor="checkbox-6")
-	    			#input(inputId="story_reviewed" inputName="story_reviewed" inputType="checkbox")        
-	            	不需要评审
-	           	 #end
-	          #end
-             
+
+                #@label(labelFor="checkbox-6")
+                    #input(inputId="story_reviewed" inputName="story_reviewed" inputType="checkbox")
+                    不需要评审
+                #end
+            #end
+
         #end
-    
+
         #@elementItem()
             #@sdpmItem("需求名称")
                 <div class="input-group">
-                    <input type="text" name="storyTitle" value="${storySpec?.storyTitle}" class="form-control" placeholder="" aria-describedby="basic-addon2" style="width:296px">
+                    <input type="text" name="storyTitle" value="${storySpec?.storyTitle}" class="form-control"
+                           placeholder="" aria-describedby="basic-addon2" style="width:296px">
                 </div>
             #end
         #end
-		
-		   #@elementItem()
+
+        #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>需求描述：</label></div>
 
                 <div class="col-9">
                     #@Teditor("content1" "storySpec" {"initialFrameHeight":"150"})
-                    
-                    	${storySpec?.storySpec}
+
+                        ${storySpec?.storySpec}
                     #end</div>
             </div>
         #end
-        
-           #@elementItem()
+
+        #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>验收标准：</label></div>
                 <div class="col-9">
                     #@Teditor("content2" "storyVerification" {"initialFrameHeight":"150"})
-                    	${storySpec?.storyVerification}
+                        ${storySpec?.storyVerification}
                     #end</div>
             </div>
         #end
 
-      
 
-         #@elementItem()
+
+        #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>备注：</label></div>
                 <div class="col-9">
                     #@Teditor("content3" "content3" {"initialFrameHeight":"150"})#end</div>
             </div>
         #end
-        
+
         #@elementItem()
-        <div class="col-12">
+            <div class="col-12">
                 <div class="col-2 text-r"><label>附件：</label></div>
 
                 <div class="col-9">
-                  #@formControlDiv("col-12")
+                    #@formControlDiv("col-12")
 		   				#include("/product/page/event/fileupload.page")
       				 		#end
-       				</div>
+                </div>
             </div>
-   		 #end
-   		 
-   		 #@elementItem()
-        <div class="col-12">
+        #end
+
+        #@elementItem()
+            <div class="col-12">
                 <div class="col-2 text-r"><label>检查影响：</label></div>
 
                 <div class="col-9  tabInfocontents">
-                  #@formControlDiv("col-12")
+                    #@formControlDiv("col-12")
 	    				#include("/product/page/tabledemo/check-effect.page")
  	    			#end
-       				</div>
+                </div>
             </div>
-   		 #end
-  
-        </div>
+        #end
+
+    </div>
     #@elementItem()
         <div class="col-12">
             <div class="col-5">
