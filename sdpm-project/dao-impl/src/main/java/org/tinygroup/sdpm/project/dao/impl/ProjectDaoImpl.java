@@ -398,4 +398,14 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 		}
 		return select;
 	}
+	
+	public List<Project> getProjectByStoryId(Integer storyId){
+		
+		Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("p.*")).from(FragmentSelectItemSql.fragmentFrom("project_story ps left join project p on p.project_id = ps.project_id")).where(and(
+				FragmentSelectItemSql.fragmentCondition("ps.story_id = " + storyId +" and ps.story_id is not null")
+				
+				));	
+		
+		return getDslSession().fetchList(select, Project.class);
+	}
 }

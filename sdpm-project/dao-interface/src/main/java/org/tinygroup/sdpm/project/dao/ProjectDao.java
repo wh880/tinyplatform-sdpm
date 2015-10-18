@@ -16,6 +16,8 @@
 
 package org.tinygroup.sdpm.project.dao;
 
+import java.util.List;
+
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -27,4 +29,6 @@ public interface ProjectDao extends BaseDao<Project,Integer> {
     public Project getTime(Project project);
 
     public Pager<Project> tquerytAll(int start, int limit, final Project project, final OrderBy... orderBies);
+    
+    List<Project> getProjectByStoryId(Integer storyId);
 }

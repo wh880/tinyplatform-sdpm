@@ -41,6 +41,7 @@ import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
@@ -223,16 +224,13 @@ public class StoryAction extends BaseController{
     	
     	
     	
-    /*	ProjectStory projectStory = new ProjectStory();
-    	projectStory.setStoryId(storyId);
-    	List<ProjectStory> projectStoryList = projectStoryService.findByProjectStory(projectStory);*/
-    	
+    	List<Project> projectList = projectService.getProjectByStoryId(storyId);
     	
     	model.addAttribute("story", productStory);
     	model.addAttribute("storySpec", storySpec);
     	model.addAttribute("testCaseList", testCaseList);
     	model.addAttribute("bugList", bugList);
-    	model.addAttribute("projectList", null);
+    	model.addAttribute("projectList", projectList);
     	
     	if("productDemandClose".equals(forwordPager)){
     		
