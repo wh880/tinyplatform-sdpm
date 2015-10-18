@@ -151,7 +151,7 @@
        		</div>
      #end
      #@elementItem()
-					#@colLabel()文档标题#end
+					#@colLabel()<span class="c-red">*</span>文档标题#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 						#tinyInput("text" "docTitle" doc?.docTitle {"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"标题不能为空！","class":"input-text"})
@@ -176,7 +176,7 @@
        			</div>
         #end
         #@elementItem(elementId="urlBox" eleItemClass="hidden")
-					#@colLabel()文档URL&nbsp#end
+					#@colLabel()<span class="c-red">*</span>文档URL&nbsp#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#tinyInput("text" "docUrl" doc?.docUrl{"placeholder":"相应的链接地址","datatype":"*","class":"input-text","nullmsg":"链接不能为空！"})
