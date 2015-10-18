@@ -64,7 +64,10 @@ public class DocAction {
 	@RequestMapping("")
 	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange,String tree, String moduleId)
 	{	
-		List<DocumentDoclib> list=docservice.findDoclibList(new DocumentDoclib());				
+		
+		List<DocumentDoclib> list=docservice.findDoclibList(new DocumentDoclib());		
+
+		
 		if(list.size()>0&&!("true".equals(change))&&!("true".equals(docChange))&&!("true".equals(tree))){
 			if(null==request.getSession().getAttribute("documentLibId")||doclib.getDocLibId()==null){
 				request.getSession().setAttribute("documentLibId",list.get(0).getDocLibId());
@@ -72,6 +75,7 @@ public class DocAction {
 				request.getSession().setAttribute("documentLibId",doclib.getDocLibId());
 			}
 		}	
+		
 		request.getSession().setAttribute("libList",list);
 		request.getSession().setAttribute("moduleId", moduleId);
 		return "/document/document.page";
@@ -314,6 +318,9 @@ public class DocAction {
 		return null;
 	}
 	
+	/*
+	 * 添加项目文档中项目和分类的二级联动
+	 */
 	@ResponseBody
 	@RequestMapping("/ajax/module")
 	public List<SystemModule> getModule(SystemModule systemModule,Integer projectId){
@@ -325,6 +332,9 @@ public class DocAction {
 		return moduleService.findModules(systemModule);
 	}
 	
+	/*
+	 * 添加产品文档中产品和分类的二级联动
+	 */
 	@ResponseBody
 	@RequestMapping("/ajax/module1")
 	public List<SystemModule> getModule1(SystemModule systemModule,Integer productId){
@@ -336,6 +346,9 @@ public class DocAction {
 		return moduleService.findModules(systemModule);
 	}
 	
+	/*
+	 * 添加项目文档中项目和产品的二级联动
+	 */
 	@ResponseBody
 	@RequestMapping("/ajax/product")
 	public List<Product> getproduct(Product product,Integer projectId){
@@ -354,6 +367,53 @@ public class DocAction {
 		}
 		List<Product> productList = productService.findProductList(list1.toArray(i));
 		return productList;
+	}
+	
+	/*
+	 * 编辑文档中文档库和分类的二级联动
+	 */
+	@ResponseBody
+	@RequestMapping("/ajax/moduleByDoclib")
+	public List<SystemModule> getModuleByDoclib(Integer libId){
+		SystemModule module = new SystemModule();
+		module.setModuleRoot(libId);
+		module.setModuleType("doc");
+		List<SystemModule> list = moduleService.findModuleList(module);
+		return list;
+	}
+	
+	/*
+	 * 编辑文档中项目和分类的二级联动
+	 */
+	@ResponseBody
+	@RequestMapping("/ajax/moduleByProject")
+	public List<SystemModule> getModuleByProject(Integer projectId){
+		SystemModule module = new SystemModule();
+		module.setModuleType("projectDoc");
+		module.setModuleRoot(projectId);
+		List<SystemModule> list = moduleService.findModuleList(module);
+		return list;
+	}
+	
+	/*
+	 * 编辑文档中产品和分类的二级联动
+	 */
+	@ResponseBody
+	@RequestMapping("/ajax/moduleByProduct")
+	public List<SystemModule> getModuleByProduct(Integer productId){
+		SystemModule module = new SystemModule();
+		module.setModuleType("productDoc");
+		module.setModuleRoot(productId);
+		List<SystemModule> list = moduleService.findModuleList(module);
+		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/ajax/productByDocLib")
+	public List<Product> getProductByDocLib(){
+		Product product = new Product();
+		List<Product> list = productService.findProductList(product);
+		return list;
 	}
 	
 	//产品文档相关
