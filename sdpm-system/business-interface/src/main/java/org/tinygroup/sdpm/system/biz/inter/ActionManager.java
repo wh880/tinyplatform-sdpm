@@ -32,7 +32,7 @@ public interface ActionManager {
 	 * @param SystemAction
 	 * @return
 	 */
-	List<SystemAction> find(SystemAction systemAction);
+	List<SystemAction> find(SystemAction systemAction,String orderBy,boolean asc);
 	/**
 	 * 分页查询
 	 * @param start

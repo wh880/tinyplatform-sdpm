@@ -1,15 +1,15 @@
-<dictNodeEntries name="quality" title="测试">
-    <dictNodeEntry name="bug" title="bug">
-        <dictNodeEntry name="bugStatus" title="bug状态">
-            <dictItem key="1" value="激活" sort="1"/>
-            <dictItem key="2" value="已解决" sort="2"/>
-            <dictItem key="3" value="已关闭" sort="3"/>
-        </dictNodeEntry>
-    </dictNodeEntry>
-    <dictNodeEntry name="case" title="测试用例">
-        <dictNodeEntry name="caseStatus" title="测试用例状态">
-            <dictItem key="1" value="未开始" sort="1"/>
-            <dictItem key="2" value="已完成" sort="2"/>
-        </dictNodeEntry>
-    </dictNodeEntry>
-</dictNodeEntries>
+<!--<dictNodeEntries name="quality" title="测试">-->
+    <!--<dictNodeEntry name="bug" title="bug">-->
+        <!--<dictNodeEntry name="bugStatus" title="bug状态">-->
+            <!--<dictItem key="1" value="激活" sort="1"/>-->
+            <!--<dictItem key="2" value="已解决" sort="2"/>-->
+            <!--<dictItem key="3" value="已关闭" sort="3"/>-->
+        <!--</dictNodeEntry>-->
+    <!--</dictNodeEntry>-->
+    <!--<dictNodeEntry name="case" title="测试用例">-->
+        <!--<dictNodeEntry name="caseStatus" title="测试用例状态">-->
+            <!--<dictItem key="1" value="未开始" sort="1"/>-->
+            <!--<dictItem key="2" value="已完成" sort="2"/>-->
+        <!--</dictNodeEntry>-->
+    <!--</dictNodeEntry>-->
+<!--</dictNodeEntries>-->

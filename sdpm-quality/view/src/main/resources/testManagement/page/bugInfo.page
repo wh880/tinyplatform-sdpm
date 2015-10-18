@@ -27,18 +27,18 @@
 #@div()
 	#@p(pClass="title_sty")
 		<span class="f">
-			Bug名称</span>
+			Bug概况</span>
 		<span class="r">
 			#foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
 				#if(m.id=="tbugnote")
 
 				#else
 				#if(m.id=="tmakesure"||m.id=="tassign"||m.id=="tsolution"||m.id=="tbugadddemand"||m.id=="add-case")					
-					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}">
 						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp&nbsp;
 				#else
 				#if(m.id=="tedition"||m.id=="tproposeBug"||m.id=="tbugback"||m.id=="tbugnext")
-					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">
 							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
 				#else
 				#if(m.id=="tbugremark")
@@ -58,7 +58,7 @@
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
     		<p class="titleName">重现步骤</p>
-    		${quality?.bugSteps}
+    		${qualityBug?.bugSteps}
     	</div>    		
     	<div class="infoContent">
     		<p class="titleName">附件</p>
@@ -73,11 +73,11 @@
 
 				#else 
 				#if(m.id=="tmakesure"||m.id=="tassign"||m.id=="tsolution"||m.id=="tbugadddemand"||m.id=="add-case")					
-					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}">
 						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp&nbsp;
 				#else
 				#if(m.id=="tedition"||m.id=="tproposeBug"||m.id=="tbugback"||m.id=="tbugnext")
-					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
+					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">
 							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
 				#else
 				#if(m.id=="tbugremark")

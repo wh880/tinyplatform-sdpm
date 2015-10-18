@@ -1,6 +1,4 @@
 <script type="text/javascript">
-
-
     function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
     		var selectCheck = "select[name="+toName+"]";
     		$(selectCheck).each(function(){

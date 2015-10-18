@@ -38,7 +38,7 @@ public interface ActionService {
 	 * @param SystemAction
 	 * @return
 	 */
-	List<SystemAction> find(SystemAction SystemAction);
+	List<SystemAction> find(SystemAction SystemAction,String orderBy,boolean asc);
 
 	/**
 	 * 分页查询
