@@ -199,7 +199,9 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file, Model model, Integer[] taskMailtoArray) {
+    public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file, Model model, Integer[] taskMailtoArray, HttpServletRequest request) {
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        task.setTaskProject(projectId);
         if (task.getTaskId() == null) {
             String taskMailTo = "";
             if (taskMailtoArray != null) {

@@ -80,7 +80,7 @@
             <dictItem key="1" value="版本1" sort="1"/>
             <dictItem key="2" value="版本2" sort="2"/>
             <dictItem key="3" value="版本3" sort="3"/>
-        </dictNodeEntry
+        </dictNodeEntry>
 	    <dictNodeEntry name="casePriority" title="优先级">
             <dictItem key="1" value="1" sort="1"/>
             <dictItem key="2" value="2" sort="2"/>
