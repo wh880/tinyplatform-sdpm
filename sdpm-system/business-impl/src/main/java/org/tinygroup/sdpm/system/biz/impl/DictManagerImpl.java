@@ -1,8 +1,5 @@
 package org.tinygroup.sdpm.system.biz.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +8,8 @@ import org.tinygroup.sdpm.system.biz.inter.DictManager;
 import org.tinygroup.sdpm.system.dao.SystemDictDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 @Service
 @Transactional
