@@ -51,9 +51,14 @@ public class HolidayManagerImpl implements HolidayManager {
 		
 	}
 
-	public int[] batchadd(List<Holiday> holidayList) {
+	public List<Holiday> batchadd(List<Holiday> holidayList) {
 		// TODO Auto-generated method stub
-		return holidayDao.batchInsert(holidayList);
+		List<Holiday> holidays= new ArrayList<Holiday>();
+		for(int i=0,n=holidayList.size();i<n;i++){
+			Holiday h=holidayDao.add(holidayList.get(i));
+			holidays.add(h);
+		}
+		return holidays;
 	}
 
 	public Holiday findById(int id) {
