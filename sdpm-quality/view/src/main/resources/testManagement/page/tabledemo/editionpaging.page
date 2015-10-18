@@ -19,12 +19,11 @@
     					var em = "<option value='0' selected  >/</option>";
     					}
     					sele.append(em);
-    					for(var i=0,l=data.length;i<l;i++){
-    						var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
-    						sele.append(em);
+                            for(var i=0,l=data.length;i<l;i++){
+                                var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+                                sele.append(em);
 
-    					}
-
+                            }
     					if(value!=null) {
     						sele.val(value).trigger("change");
     					}else {
@@ -57,9 +56,8 @@
     <script type="text/javascript">
         $(function() {
             $("#${sid}").on("change", function () {
-                console.log("test")
                 var pId = $("#${sid}  option:selected").val();
-                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, ${bug?.moduleId?:0});
+                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot="+ pId, ${bug?.moduleId?:0});
                 ajaxRead("${sid}","planId","planId","planName","/quality/bug/ajax/plan?productId="+pId,${bug?.planId?:0});
                 ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId,${bug?.bugOpenedBuild?:0},"build");
                 ajaxRead("${sid}","bugResolvedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId,${bug?.bugResolvedBuild?:0},"build");
@@ -68,7 +66,7 @@
     </script>
                         #@Tselect2Body("productId" bug?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="0">/</option>
-                            #foreach(product : qualityProductList)
+                     #foreach(product : bugProductList)
                                 #if(product?.deleted==0)
                                 <option value="${product?.productId}">${product?.productName}</option>
                                 #end
@@ -98,8 +96,7 @@
                             })
                         </script>
                         #end
-                	 #end
-                #end
+
                 #@tr()
                     #@th()所属计划#end
                     #@td()
@@ -109,6 +106,7 @@
                         #end
                         #end
                      #end
+                #end 	 #end
                 #end
                 #@tr()
                     #@th()Bug类型#end

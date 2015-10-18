@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.fileupload.util.LimitedInputStream;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.codehaus.jackson.map.Module;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -84,7 +86,7 @@ public class DocAction {
 			asc = false;
 		}
 		String condition = null;
-		if(moduleId != null){
+		if(!StringUtil.isBlank(moduleId)){
 			if(moduleId.contains("p")&&((Integer)request.getSession().getAttribute("documentLibId"))==1){
 				doc.setDocProduct(Integer.parseInt(moduleId.substring(1)));
 				Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, condition,searchInfos,groupOperate, order, asc);
@@ -138,6 +140,7 @@ public class DocAction {
 		}else{
 			SystemModule module = new SystemModule();
 			module.setModuleType("doc");
+			module.setModuleRoot(libid);
 			List<SystemModule> moduleList = moduleService.findAllModules(module);
 			model.addAttribute("moduleList", moduleList);
 			return "/document/add-doc.page";	
@@ -165,14 +168,18 @@ public class DocAction {
 	@RequestMapping(value="/doc/edit")
 	public String editDoc(HttpServletRequest request,Model model,Integer docId)
 	{	
+		SystemModule module = new SystemModule();
 		DocumentDoc doc = new DocumentDoc();
+		module.setModuleType("doc");
 		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
 		doc = docservice.findDocById(docId);
 		List<Product> list1 = productService.findProductList(new Product());
 		List<Project> list2 = projectService.findList();
+		List<SystemModule> listModule = moduleService.findModuleList(module);
 		model.addAttribute("doc", doc);
 		model.addAttribute("productList", list1);
 		model.addAttribute("projectList", list2);
+		model.addAttribute("listModule", listModule);
 		return "/document/doc-edit.page";
 	}
 	
@@ -303,8 +310,23 @@ public class DocAction {
 	
 	@ResponseBody
 	@RequestMapping("/ajax/module")
-	public List<SystemModule> getModule(SystemModule systemModule){
-		systemModule.setModuleType("document");
+	public List<SystemModule> getModule(SystemModule systemModule,Integer projectId){
+		if(projectId == 0){	
+			return moduleService.findModules(systemModule);
+		}
+		systemModule.setModuleRoot(projectId);
+		systemModule.setModuleType("projectDoc");
+		return moduleService.findModules(systemModule);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/ajax/module1")
+	public List<SystemModule> getModule1(SystemModule systemModule,Integer productId){
+		if(productId ==0){
+			return moduleService.findModules(systemModule);
+		}
+		systemModule.setModuleRoot(productId);
+		systemModule.setModuleType("productDoc");
 		return moduleService.findModules(systemModule);
 	}
 	
@@ -316,18 +338,15 @@ public class DocAction {
 			return projectProductService.findLinkProduct();
 		}
 		List<ProjectProduct> list = projectProductService.findProducts(projectId);
+		List<Product> list2 = productService.findProductList(product);
 		Integer[] i = new Integer[list.size()];
 		List<Integer> list1 = new ArrayList<Integer>();
 		for(int j=0;j<list.size();j++){
-			list1.add(list.get(j).getProductId());
+			if(list2.get(j).getDeleted()==0){
+				list1.add(list.get(j).getProductId());
+			}
 		}
 		List<Product> productList = productService.findProductList(list1.toArray(i));
-		
-		//查出删除标志位为0的数据,暂未实现功能，故注释
-		
-		/*for(int m=0;m<list.size();m++){
-			productList.get(m).setDeleted(0);
-		}*/
 		return productList;
 	}
 	

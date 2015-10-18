@@ -181,6 +181,10 @@
                                             #@dropdownA("firstMenu"　"javascript:void(0);")阶段#end
                                             #@dropdownsUl("dropdown-menu")
                                             	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStage","value":"none"}) 空 #end
+#*                                            	#for(stage:getDict("storyStage"))
+                                            		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStage","value":stage?.Key}) stage?.value#end
+                                            	#end
+                                            	*#
 #*                                            	
                                                 #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")未开始#end
                                                 #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已计划#end
@@ -215,6 +219,9 @@
                                                 #@dropdownsLi("dropdown-submenu")
                                                     #@dropdownA("secondMenu"　"javascript:void(0);")拒绝#end
                                                     #@dropdownsUl("dropdown-menu")
+#*                                                    #for(refese:getDict("storyRefese"))
+                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":refese.key}) refese.value #end
+                                                    #end*#
                                                     	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-1"}) 已完成 #end
                                                     	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-2"}) 延期 #end
                                                     	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-3"}) 不做 #end
@@ -234,8 +241,8 @@
 
 
 
-                    #foreach(m:menuManager.getScopeMenus("product-del"))
-                        #if(m.id=="product-demand-del")
+                    #foreach(m:menuManager?.getScopeMenus("product-del"))
+                        #if(m?.id=="product-demand-del")
                         #set(dae=[34,36])
                             #@btnModal("#myModal" "关闭" "1000" "400" "btn radius btn-danger" adminPath+"/product/story/findByKeys" "betchClose")批量关闭#end
                         #end

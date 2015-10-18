@@ -22,7 +22,7 @@
             #set(m1=menuManager.getMenu("request-close"))
             #if(m1)
                 #@aModal(
-                    "#myModal" m1.name "500" "200" m1.icon m1.href+"?id="+var?.clientRequestId)
+                    "#myModal" m1.name "500" "200" m1.icon adminPath+m1.href+"?id="+var?.clientRequestId)
                 #end
             #end
 

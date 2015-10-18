@@ -78,9 +78,12 @@
            #@colLabel("col-4")<span class="c-red">*</span>代码：#end
                #@gridSysCol(6)
                   #tinyInput(
-                         "text" "moduleName" module?.moduleName {"datatype":"","id":"请求标题","class":
-                             "input-text"})
+                         "text" "moduleName" module?.moduleName {"datatype":"*","id":"请求标题","class":
+                             "input-text","nullmsg":"代码不为空"})
                          #end
+                       
+                         
+	
          #end
        #@gridSysRow()
            #@colLabel("col-4")<span class="c-red">*</span>中文名：#end
@@ -93,5 +96,11 @@
  
  #end
 
-
+<script type="text/javascript">
+    $(function () {
+        $("form[name=dictEditform]").Validform({
+            tiptype: 2
+        });
+    });
+</script>
          

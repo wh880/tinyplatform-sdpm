@@ -55,12 +55,11 @@ public class StoryManagerImpl implements StoryManager {
         return productStoryDao.batchUpdate(stories);
     }
 
-    public List<ProductStory> findList(ProductStory story, String order,
-                                       String ordertype) {
-        return productStoryDao.query(
-                story,
+    public List<ProductStory> findList(ProductStory story, String order,String ordertype) {
+    	order = "product_story."+ NameUtil.resolveNameDesc(order);
+        return productStoryDao.query(story,
                 (order == null || "".equals(order)) ? null : new OrderBy(
-                        NameUtil.resolveNameDesc(order), !("desc"
+                        order, !("desc"
                         .equals(ordertype)) ? true : false));
     }
 
@@ -75,7 +74,7 @@ public class StoryManagerImpl implements StoryManager {
             orderBy = new OrderBy(NameUtil.resolveNameDesc(columnName), asc);
         }
         if (condition != null && !"".equals(condition)) {
-            return productStoryDao.complexQuery(start, limit, story, condition,
+            return productStoryDao.complexQueryRel(start, limit, story, condition,
                     orderBy);
         }
         return productStoryDao.queryPager(start, limit, story, orderBy);
