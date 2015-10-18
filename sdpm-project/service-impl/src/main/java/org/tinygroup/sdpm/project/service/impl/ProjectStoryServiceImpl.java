@@ -32,9 +32,15 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     private ProjectManager projectManager;
 
     public List<Project> findProjectsByStory(Integer storyId) {
+        if (storyId == null) {
+            return null;
+        }
         ProjectStory projectStory = new ProjectStory();
         projectStory.setStoryId(storyId);
         List<ProjectStory> projectStoryList = projectStoryManager.findList(projectStory);
+        if (projectStoryList.isEmpty() || projectStoryList == null) {
+            return null;
+        }
         List<Integer> ids = new ArrayList<Integer>();
         for (ProjectStory t : projectStoryList) {
             ids.add(t.getStoryId());
