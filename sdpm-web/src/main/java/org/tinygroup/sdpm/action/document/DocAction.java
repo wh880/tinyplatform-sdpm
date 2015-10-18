@@ -120,7 +120,7 @@ public class DocAction {
 		return "/data/datalist.pagelet";
 	}
 	
-	@RequiresPermissions("add-doc")
+	@RequiresPermissions(value={"add-doc"})
 	@RequestMapping(value="/doc/add")
 	public String createDoc(HttpServletRequest request ,Model model)
 	{		
@@ -165,6 +165,7 @@ public class DocAction {
 		return "redirect:"+"/a/document?docChange=true&moduleId="+request.getSession().getAttribute("moduleId");
 	}
 	
+	@RequiresPermissions(value={"docedit"})
 	@RequestMapping(value="/doc/edit")
 	public String editDoc(HttpServletRequest request,Model model,Integer docId)
 	{	
@@ -229,6 +230,7 @@ public class DocAction {
 		return "redirect:"+"/a/document";
 	}
 	
+	@RequiresPermissions(value={"docedit","doc-view-delete"})
 	@ResponseBody
 	@RequestMapping(value="/doc/delete")
 	public Map delDoc(Integer id)
@@ -240,6 +242,7 @@ public class DocAction {
 	    return map;
 	}
 	
+	@RequiresPermissions(value={"batch-delete"})
 	@ResponseBody
 	@RequestMapping(value="/doc/batchDelete")
 	public Map bctchDelDoc(String ids)
@@ -263,12 +266,14 @@ public class DocAction {
 	    return map;
 	}
 	
+	@RequiresPermissions(value={"doclib-add"})
 	@RequestMapping(value="/doclib/toAdd")
 	public String addDocLib()
 	{
 		return "/document/add-doclib.pagelet";
 	}
 	
+	@RequiresPermissions("doclib-edit")
 	@RequestMapping(value="/doclib/edit")
 	public String editDoclib(HttpServletRequest request,DocumentDoclib doclib,Model model)
 	{		
@@ -292,6 +297,7 @@ public class DocAction {
 		return "redirect:"+"/a/document?change=true";
 	}
 	
+	@RequiresPermissions(value={"doclib-delete"})
 	@ResponseBody
 	@RequestMapping(value="/doclib/delete")
 	public Map delDocLib(Integer id)
@@ -350,8 +356,8 @@ public class DocAction {
 		return productList;
 	}
 	
-	//产品文档
-		@RequestMapping("/product/doc")
+	//产品文档相关
+	@RequestMapping("/product/doc")
 	public String product(HttpServletRequest request,Model model){
 		Product product = new Product();
 		List<Product> list = productService.findProductList(new Product());
@@ -399,6 +405,7 @@ public class DocAction {
 		}
 		return "";
 	}
+	
 	@ResponseBody
 	@RequestMapping("/docList")
 	public List<DocumentDoc> findDocumentDoc(DocumentDoc doc) {
@@ -407,13 +414,4 @@ public class DocAction {
 
 		return list;
 	}
-	
-	//项目文档
-	@RequestMapping("/project/doc")
-	public String prodject(HttpServletRequest request){		
-		return "";
-	}
-
-
-	
 }

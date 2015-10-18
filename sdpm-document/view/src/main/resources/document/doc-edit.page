@@ -1,6 +1,5 @@
+
 <script type="text/javascript">
-
-
     function ajaxRead(id,toName,opKey,opvalue,url,value){
         var selectCheck = "select[name="+toName+"]";
         $(selectCheck).each(function(){
@@ -18,7 +17,6 @@
                     for(var i=0,l=data.length;i<l;i++){
                         var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
                         sele.append(em);
-
                     }
 
                     if(value!=null) {
@@ -62,7 +60,6 @@
          <div class="col-2 text-r"><label>所属文档库&nbsp</label></div>
          <div class="col-4">
           #@Tselect2F()
-
 	          #@Tselect2Body("docLibId" doc?.docLibId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	               <option value="0">/</option>
 	               #foreach(var:libList)
@@ -70,26 +67,18 @@
 	               		<option value="${var?.docLibId}">${var?.docLibName}</option>
 	               	#end
 	               #end
-	               <script type="text/javascript">
-                        $("#${sid}").on("change",function(){
-                            var type = $("#${sid} option:selected").val();
-                           if(type == 1){
-                               $('#product').removeClass('hidden');
-                               $('#project').addClass('hidden');
-                           }
-                           else if(type == 2){
-                               $('#project').removeClass('hidden');
-                               $('#product').removeClass('hidden');
-                           }else{
-                               $('#project').addClass('hidden');
-                               $('#product').addClass('hidden');
-                               }
-                       });
-                   </script>
-	               #end                
+	               
+	               #end  	                             
               	</div>
        		</div>
        	#end
+       	<script type="text/javascript">
+           $("#${sid}").on("change",function(){
+           var pId = $("#${sid}  option:selected").val();
+           ajaxRead("${sid}","docProduct","productId","productName","/document/ajax/product?projectId="+pId,${doc?.docProduct?:0});
+
+           })
+       </script>
      #end
      
      #@elementItem(elementId="project" eleItemClass="hidden")
@@ -260,6 +249,24 @@
  $(".select2").select2(); 
 					  
 </script>
+
+##隐藏框的JS
+<script type="text/javascript">
+                        $("#${sid}").on("change",function(){
+                            var type = $("#${sid} option:selected").val();
+                           if(type == 1){
+                               $('#product').removeClass('hidden');
+                               $('#project').addClass('hidden');
+                           }
+                           else if(type == 2){
+                               $('#project').removeClass('hidden');
+                               $('#product').removeClass('hidden');
+                           }else{
+                               $('#project').addClass('hidden');
+                               $('#product').addClass('hidden');
+                               }
+                       });
+                   </script>
 
 <script type="text/javascript">
     $(function () {
