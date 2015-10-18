@@ -199,8 +199,19 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
+    public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file, Model model, Integer[] taskMailtoArray) {
         if (task.getTaskId() == null) {
+            String taskMailTo = "";
+            if (taskMailtoArray != null) {
+                for (Integer i : taskMailtoArray) {
+                    if (StringUtil.isBlank(taskMailTo)) {
+                        taskMailTo = taskMailTo + i;
+                    } else {
+                        taskMailTo = taskMailTo + "," + i;
+                    }
+                }
+            }
+            task.setTaskMailto(taskMailTo);
             ProjectTask newtask = taskService.addTask(task);
             ProfileUtil profileUtil = new ProfileUtil();
             try {
