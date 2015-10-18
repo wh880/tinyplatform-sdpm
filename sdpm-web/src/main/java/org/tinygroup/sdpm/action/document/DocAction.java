@@ -231,7 +231,7 @@ public class DocAction {
 	}
 	
 	@RequiresPermissions("docedit")
-	@RequiresPermissions("doc-view-delete")
+	//@RequiresPermissions("doc-view-delete")
 	@ResponseBody
 	@RequestMapping(value="/doc/delete")
 	public Map delDoc(Integer id)
