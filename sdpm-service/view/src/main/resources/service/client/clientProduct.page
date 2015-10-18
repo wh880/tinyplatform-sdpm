@@ -25,7 +25,7 @@
 
                 #set(m2=menuManager.getMenu("clientSla-add"))
                 #if(m2)
-                    <a href="${TINY_CONTEXT_PATH}${adminPath}${m2.href}"
+                    <a href="${TINY_CONTEXT_PATH}${adminPath}${m2.href}?id=${client.clientId}"
                        title="绑定产品">#buttonIcon(iconClass="icon-plus")${m2.name}</a>
                 #end
 
@@ -36,7 +36,7 @@
         #end
 
         #@tabWithInit("tab_demo" "optionsBox")
-        <div style="width:100%;float:left">
+        <div style="width:70%;float:left">
             #@noRespsGridSystem()
                 #@gridSysRow()
                     #foreach(var:slas)
@@ -88,9 +88,120 @@
                 #end
             #end
         </div>
+        <div style="width:30%;float:right">
+            #@div(divClass="infoContent")
+                <p class="titleName">客户信息</p>
+                #@noRespsGridSystem()
+                    #@gridSysRow()
+                        #@colLabel("col-4")客户名称：#end
+                        #@gridSysCol(1)#end
+                        #@gridSysCol(7)
+                            <p>${client.clientName}</p>
+                        #end
+                    #end
+                    #@gridSysRow()
+                        #@colLabel("col-4")客户编号：#end
+                        #@gridSysCol(1)#end
+                        #@gridSysCol(7)
+                            <p>${client.clientNO}</p>
+                        #end
+                    #end
+                    #@gridSysRow()
+                        #@colLabel("col-4")客户部门：#end
+                        #@gridSysCol(1)#end
+                        #@gridSysCol(7)
+                            <p>${client.clientDeptId}</p>
+                        #end
+                    #end
+                    #@gridSysRow()
+                        #@colLabel("col-4")客户登记人：#end
+                        #@gridSysCol(1)#end
+                        #@gridSysCol(7)
+                            <p>${client.clientCreatedBy}</p>
+                        #end
+                    #end
+                    #@gridSysRow()
+                        #@colLabel("col-4")客户登记时间：#end
+                        #@gridSysCol(1)#end
+                        #@gridSysCol(7)
+                            <p>#if(client.clientCreateDate)${formatDate(client.clientCreateDate,"yyyy-MM-dd")}#end</p>
+                        #end
+                    #end
+                    #@gridSysRow()
+                        #@colLabel("col-4")客户描述：#end
+                        #@gridSysCol(1)#end
+                        #@gridSysCol(7)
+                            <p>${client.clientSpec}</p>
+                        #end
+                    #end
+                    #@gridSysRow()
+                        #@colLabel("col-4")客户状态：#end
+                        #@gridSysCol(1)#end
+                        #@gridSysCol(7)
+                            <p>${client.clientStatus}</p>
+                        #end
+                    #end
+                #end
+                <div style="text-align:right;margin:right">
+                    #foreach(m:menuManager.getScopeMenus("service-cil"))
+                        #if(m.id != "client-del")
+                            #@aExtendButton(
+                                "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+client.clientId)
+                                编辑#end
+                        #else
+                            #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href client.clientId TINY_CONTEXT_PATH+adminPath+adminPath+
+                                "/service/client/list"{
+                                "class":"btn radius btn-danger btn-sm"}) 删除#end
+                        #end
+                    #end
+                </div>
+            #end
+
+            #@div(divClass="infoContent")
+                <p class="titleName">客户联系人信息</p>
+                #@tableBordered()
+                    #@thead()
+                        #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+                            #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})联系人姓名#end
+                            #@tinyTh({"class":"","rel":"sortname"})职务#end
+                            #@tinyTh({"class":"","rel":"sortname"})联系人电话#end
+                            #@tinyTh({"class":"","rel":"sortname"})操作#end
+                        #end
+                    #end
+                    #foreach(var:clientUsers)
+                        <tr>
+                            <td>${var?.userAccount}</td>
+                            <td>${var?.userPost}</td>
+                            <td>${var?.userPhone}</td>
+                            <td>
+                                #set(m=menuManager.getMenu("linkman-edit"))
+                                #if(m)
+                                    #@aModal(
+                                        "#myModal1" m.name "580" "300" m.icon adminPath+m.href+"?id="+var?.id)
+                                    #end
+                                #end
+
+                                #set(m1=menuManager.getMenu("linkman-new"))
+                                #if(m1)
+                                    #@aModal(
+                                        "#myModal1" m1.name "580" "300" m1.icon adminPath+m1.href+
+                                        "?clientId="+var?.clientId)
+                                    #end
+                                #end
+
+                                #set(m2=menuManager.getMenu("linkman-del"))
+                                #if(m2)
+                                    #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m2.href var?.id)<i
+                                            class=${m2.icon}></i>#end
+                                #end
+                            </td>
+                        </tr>
+                    #end
+                #end
+            #end
+        </div>
         #end
     #end
 
 #end
-#@simpleModal("myModal1" "导出")#end
-#@simpleModal("myModal2" "新建产品")#end
+#@simpleModal("myModal1" "")#end

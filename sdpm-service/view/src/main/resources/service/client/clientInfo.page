@@ -7,9 +7,6 @@
 #set(name="client")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-    #* #@div(divClass="dropdownBox dropdownBoxes")
-         #include("/service/serviceCom/dropdownMenu.page")
-     #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
@@ -86,7 +83,6 @@
                     #end
                 #end
                 #foreach(var:clientUsers)
-                ##                    <input type="hidden" name="clientId" value="${clientUser?.clientId}"/>
                     <tr>
                         <td>${var?.userAccount}</td>
                         <td>${var?.userPost}</td>

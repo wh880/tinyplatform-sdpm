@@ -36,8 +36,13 @@ public class ActionManagerImpl implements ActionManager {
         return systemActionDao.deleteByKey(pk);
     }
 
-    public List<SystemAction> find(SystemAction SystemAction) {
-        List<SystemAction> actions = systemActionDao.query(SystemAction);
+    public List<SystemAction> find(SystemAction SystemAction,String orderBy,boolean asc) {
+        List<SystemAction> actions;
+        if(StringUtil.isBlank(orderBy)){
+            actions = systemActionDao.query(SystemAction);
+        }else{
+            actions = systemActionDao.query(SystemAction,new OrderBy(NameUtil.resolveNameDesc(orderBy),asc));
+        }
         List<SystemAction> systemActions = new ArrayList<SystemAction>();
         if (actions.size() > 0) {
 

@@ -17,6 +17,7 @@ import org.tinygroup.sdpm.system.service.inter.LogService;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -52,8 +53,8 @@ public class LogServiceImpl implements LogService{
                 SystemHistory systemHistory = new SystemHistory();
                 systemHistory.setHistoryAction(systemAction.getActionId());
                 systemHistory.setHistoryField(field.getName());
-                systemHistory.setHistoryOld(String.valueOf((oldObject == null?"":oldValue)));
-                systemHistory.setHistoryNew(String.valueOf((newObject == null?"":newValue)));
+                systemHistory.setHistoryOld(String.valueOf((oldObject == null?"":dateFormat(oldValue))));
+                systemHistory.setHistoryNew(String.valueOf((newObject == null?"":dateFormat(newValue))));
                 historyManager.add(systemHistory);
             }
 
@@ -75,7 +76,6 @@ public class LogServiceImpl implements LogService{
         Object value = null;
         try {
             value = object.getClass().getDeclaredMethod(methodName).invoke(object);
-
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -86,4 +86,13 @@ public class LogServiceImpl implements LogService{
         return value;
     }
 
+    private Object dateFormat(Object object){
+        if (object instanceof Date){
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss");
+            Date date = (Date) object;
+            format.format(date);
+            return date;
+        }
+        return object;
+    }
 }

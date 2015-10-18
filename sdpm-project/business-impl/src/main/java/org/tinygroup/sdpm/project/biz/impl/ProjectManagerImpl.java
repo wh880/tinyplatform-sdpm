@@ -64,9 +64,22 @@ public class ProjectManagerImpl implements ProjectManager {
         return projectDao.edit(project);
     }
 
-	public Project find(Integer projectId) {
-		
-		return projectDao.getByKey(projectId);
+    public List<Project> findList(List<Integer> ids) {
+        if (ids.isEmpty()) {
+            return null;
+        } else {
+            String condition = "projectId in ( ";
+            for (Integer id : ids) {
+                condition = condition + id + " ";
+            }
+            condition = condition + ")";
+            return projectDao.findByCondition(condition);
+        }
+    }
+
+    public Project find(Integer projectId) {
+
+        return projectDao.getByKey(projectId);
 	}
 
 	public List<Project> findList(Project project, String order, String ordertype) {
@@ -81,5 +94,10 @@ public class ProjectManagerImpl implements ProjectManager {
 	public Pager<Project> findPager(int start, int limit, Project project, String order, String ordertype) {
 		
 		return projectDao.queryPager((start-1)*limit, limit, project, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+	}
+
+	public List<Project> getProjectByStoryId(Integer storyId) {
+
+		return projectDao.getProjectByStoryId(storyId);
 	}
 }

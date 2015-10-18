@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.service.inter;
 
 
 import java.util.List;
+
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -90,4 +91,6 @@ public interface ProjectService {
      * @return
      */
     public Integer updateProject(Project project);
+    
+    List<Project> getProjectByStoryId(Integer storyId);
 }

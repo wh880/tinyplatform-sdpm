@@ -24,6 +24,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.org.dao.OrgUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.*;
+import static org.tinygroup.tinysqldsl.Select.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
@@ -393,4 +394,19 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         }
         return select;
     }
+
+	public String getNameById(String id) {
+		if("".equals(id)||id==null){
+			return null;
+		}
+		try {
+			Select select = select(ORG_USERTABLE.ORG_USER_ACCOUNT).from(ORG_USERTABLE).where(ORG_USERTABLE.ORG_USER_ID.eq(id));
+			
+			return getDslSession().fetchOneResult(select, String.class);
+		} catch (Exception e) {
+			return "";
+		}
+		
+		
+	}
 }

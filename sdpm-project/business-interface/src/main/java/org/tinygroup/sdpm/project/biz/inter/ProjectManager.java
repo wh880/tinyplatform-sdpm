@@ -1,13 +1,22 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
-import java.util.List;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 /**
  * Created by shenly13343 on 2015-09-18.
  */
 public interface ProjectManager {
+    /**
+     * 根据ids查询项目
+     *
+     * @param ids
+     * @return
+     */
+    public List<Project> findList(List<Integer> ids);
+
     /**
      * 根据主键id查找
      *
@@ -75,4 +84,6 @@ public interface ProjectManager {
      * @return
      */
     Pager<Project> findPager(int start,int limit,Project project,String order,String ordertype);
+    
+    List<Project> getProjectByStoryId(Integer storyId);
 }

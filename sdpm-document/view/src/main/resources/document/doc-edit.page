@@ -1,6 +1,5 @@
+
 <script type="text/javascript">
-
-
     function ajaxRead(id,toName,opKey,opvalue,url,value){
         var selectCheck = "select[name="+toName+"]";
         $(selectCheck).each(function(){
@@ -18,19 +17,16 @@
                     for(var i=0,l=data.length;i<l;i++){
                         var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
                         sele.append(em);
-
                     }
-
+					##alert(value);
                     if(value!=null) {
                         sele.val(value).trigger("change");
-                    }else {
+                    }else {               
                         sele.val(data[0][opKey]).trigger("change");
                     }
-
-
                 },
                 error: function(res){
-                    alert("失败");
+                  ##  alert("失败");
                 }
             });
 
@@ -62,34 +58,52 @@
          <div class="col-2 text-r"><label>所属文档库&nbsp</label></div>
          <div class="col-4">
           #@Tselect2F()
-
 	          #@Tselect2Body("docLibId" doc?.docLibId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	               <option value="0">/</option>
+	              ## <option value="0">/</option>
 	               #foreach(var:libList)
 	               	#if(var?.docLibDeleted != "1")
 	               		<option value="${var?.docLibId}">${var?.docLibName}</option>
 	               	#end
 	               #end
 	               <script type="text/javascript">
-                        $("#${sid}").on("change",function(){
-                            var type = $("#${sid} option:selected").val();
-                           if(type == 1){
-                               $('#product').removeClass('hidden');
-                               $('#project').addClass('hidden');
-                           }
-                           else if(type == 2){
-                               $('#project').removeClass('hidden');
-                               $('#product').removeClass('hidden');
-                           }else{
-                               $('#project').addClass('hidden');
-                               $('#product').addClass('hidden');
-                               }
-                       });
-                   </script>
-	               #end                
+						$("#${sid}").on("change",function(){
+						    var type = $("#${sid} option:selected").val();
+						   if(type == 1){
+						       $('#product').removeClass('hidden');
+						       $('#project').addClass('hidden');
+						   }
+						   else if(type == 2){
+						       $('#project').removeClass('hidden');
+						       $('#product').removeClass('hidden');
+						   }else{
+						       $('#project').addClass('hidden');
+						       $('#product').addClass('hidden');
+						               }
+						   });
+						   
+						   
+				  </script>
+				  
+				  <script type="text/javascript">
+			           $("#${sid}").on("change",function(){
+			           var pId = $("#${sid}  option:selected").val();
+			           		           
+				           if(pId=='1')
+				           {				           
+				           	ajaxRead("${sid}","docProduct","productId","productName","/document/ajax/productByDocLib",${doc?.docProduct?:0});
+				           }
+				           if(pId=='2')
+				           {
+				           		$("select[name=docProject]").val("${doc?.docProject}").trigger("change");
+				           }else{
+				           	ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/moduleByDoclib?libId="+pId,${doc?.docModule?:0});
+				           }
+			           })
+			       </script>
+	               #end  	                             
               	</div>
        		</div>
-       	#end
+       	#end      	     	
      #end
      
      #@elementItem(elementId="project" eleItemClass="hidden")
@@ -97,7 +111,8 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-6")
 					#@Tselect2F()
-	                   		#@Tselect2Body("docProject" doc?.docProject {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		#@Tselect2Body("docProject" doc?.docProject?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   ##    <option value="0">/</option>
 	                        #foreach(project : projectList)
 	                        	 <option value="${project?.projectId}">${project?.projectName}</option>
 	                        #end	                       	                    	                        
@@ -106,14 +121,21 @@
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd" class="r">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end   
-	                    	             	                    	
+	                    <script type="text/javascript"> 
+	                            	  		
+	                            $("#${sid}").on("change",function(){
+	                            var dId = $("select[name=docLibId]").val();
+	                                var pId = $("#${sid}  option:selected").val();
+	                                
+	                              if(dId == '2'){
+	                                ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/moduleByProject?projectId="+pId,${doc?.docModule?:0});                   
+	                                ajaxRead("${sid}","docProduct","productId","productName","/document/ajax/product?projectId="+pId,${doc?.docProduct?:0});
+	                        	}	                        	 
+	                        	})
+                           
+                        </script>             	                    	
                 	  #end
-#*                	  <script type="text/javascript">
-                            $("#${sid}").on("change",function(){
-                                var pId = $("#${sid}  option:selected").val();
-                                ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/module?projectId="+pId,${doc?.docModule});
-                            })
-                        	</script>  *#
+               	  		
                 	  #end
                 	  #end
 	 		#end			
@@ -123,16 +145,29 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-6")
 					#@Tselect2F()
-	                   		#@Tselect2Body("docProduct" doc?.docProduct {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-						##	<option value="0">/<option>
-					        #foreach(product : productList)
+	                   		#@Tselect2Body("docProduct" doc?.docProduct?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+							<option value="0">/<option>
+#*					        #foreach(product : productList)
 	                        	 <option value="${product?.productId}">${product?.productName}</option>
-	                        #end	
+	                        #end	*#
 	                    	#end                  
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
-                	  #end
+                	  	<script type="text/javascript">             	  		
+	                            $("#${sid}").on("change",function(){
+	                            var dId = $("select[name=docLibId]").val();
+	                             if(dId == '1'){
+	                                var pId = $("#${sid}  option:selected").val();	
+	                                if(pId == undefined){
+	                                	var pId = ${doc?.docProduct?:0};	                                	
+	                                }                           
+	                                ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/moduleByProduct?productId="+pId,${doc?.docModule?:0});
+	                            	  }
+	                            })
+                           
+                        </script>
+                	  #end                	 
                 	  #end
                 	  #end
 			#end
@@ -143,11 +178,8 @@
          <div class="col-2 text-r"><label>所属分类&nbsp</label></div>
          <div class="col-4">
           #@Tselect2F()
-	          #@Tselect2Body("docModule" doc?.docModule {"class":"input-text select2"}) 
-	          <option value="0">/</option>
-       		 #foreach(var:listModule)
-	                <option value="${var?.moduleId}">${var?.moduleName}</option>
-	            #end 
+	          #@Tselect2Body("docModule" doc?.docModule?:0 {"class":"input-text select2"}) 
+	         ## <option value="0">/</option>
 	          #end                	         
               #end
               	</div>
@@ -164,8 +196,8 @@
      #@elementItem()
 					#@colLabel()<span class="c-red">*</span>文档标题#end
 					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
-						#tinyInput("text" "docTitle" doc?.docTitle {"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"标题不能为空！","class":"input-text"})
+					#@div(divClass="col-6")
+						#tinyInput("text" "docTitle" doc?.docTitle {"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16","nullmsg":"标题不能为空！","class":"input-text"})
 					#end
 					#end
 						#@validateDiv("col-2")#end
@@ -259,6 +291,24 @@
 
  $(".select2").select2(); 
 					  
+</script>
+
+##隐藏框的JS
+<script type="text/javascript">
+	$("#${sid}").on("change",function(){
+	    var type = $("#${sid} option:selected").val();
+	   if(type == 1){
+	       $('#product').removeClass('hidden');
+	       $('#project').addClass('hidden');
+	   }
+	   else if(type == 2){
+	       $('#project').removeClass('hidden');
+	       $('#product').removeClass('hidden');
+	   }else{
+	       $('#project').addClass('hidden');
+	       $('#product').addClass('hidden');
+	               }
+	   });
 </script>
 
 <script type="text/javascript">

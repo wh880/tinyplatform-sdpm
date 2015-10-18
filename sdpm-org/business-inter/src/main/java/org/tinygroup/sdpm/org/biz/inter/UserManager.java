@@ -104,4 +104,11 @@ public interface UserManager {
      * @return 验证成功返回true
      */
     boolean validatePassword(String plainPassword, String password);
+    
+    /**
+     * 根据id查找名字
+     * @param id
+     * @return
+     */
+    String getNameById(String id);
 }

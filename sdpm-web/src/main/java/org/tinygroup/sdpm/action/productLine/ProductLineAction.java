@@ -9,15 +9,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
+
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.util.UserUtils;
-import org.tinygroup.template.parser.grammer.TinyTemplateParser.If_directiveContext;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,20 +40,27 @@ public class ProductLineAction extends BaseController {
     private ProductLineService productLineService;
     @Autowired
     private ProductService productService;
-   @RequestMapping("{type}")
-    public String productline(@PathVariable(value="type")String type){
-	   if("add".equals(type)){
-		   return "productLine/page/tabledemo/add.page";
-	   }
-	   if("all".equals(type)){
-		   return"productLine/page/tabledemo/list.page";
-	   }
-	   return null;
-    	
+    @Autowired
+    private BuildService buildService;
+
+    @RequestMapping("{type}")
+    public String productline(@PathVariable(value = "type") String type) {
+        if ("add".equals(type)) {
+            return "productLine/page/tabledemo/add.page";
+        }
+        if ("all".equals(type)) {
+            return "productLine/page/tabledemo/list.page";
+        }
+        return null;
+
     }
+
     @RequestMapping("/save")
     public String save(ProductLine productLine, Model model) {
+        productLine.setProductLineCreatedBy(UserUtils.getUser().getOrgUserAccount());
+        productLine.setProductLineStatus("新建");
         productLineService.addProductLine(productLine);
+
         return "redirect:" + "/productLine/page/tabledemo/list.page";
     }
 
@@ -56,6 +68,12 @@ public class ProductLineAction extends BaseController {
     public String update(ProductLine productLine) {
         productLineService.updateProductLine(productLine);
         return "redirect:" + "/productLine/page/tabledemo/list.page";
+    }
+
+    @RequestMapping("/close")
+    public String close(ProductLine productLine) {
+        productLineService.updateProductLine(productLine);
+        return  "/productLine/page/tabledemo/close.page";
     }
 
     @ResponseBody
@@ -164,7 +182,7 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("/listProduct")
     public String listProduct(HttpServletRequest request) {
     /*	int productLine = -1;
-		if(request.getSession().getAttribute("sessionProductLineId")!=null){
+        if(request.getSession().getAttribute("sessionProductLineId")!=null){
 			ProductLineId = (Integer)request.getSession().getAttribute("sessionProductLineId");
 		}
 		ProductLine productLine = productLineService.findProductLine(ProductLineId);
@@ -173,4 +191,104 @@ public class ProductLineAction extends BaseController {
         return "/productLine/page/project/productLine.page";
 
     }
+
+    @ResponseBody
+    @RequestMapping("/productLineList")
+    public List<ProductLine> findProductLineList(ProductLine productLine) {
+
+        List<ProductLine> list = productLineService.findlist(new ProductLine());
+
+        return list;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/treeData")
+    public List data(String check) {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<ProductAndLine> productLists = productService.getProductAndLine(new Product());
+        List<ProductLine> productLines = productLineService.findlist(new ProductLine());
+        List<ProjectBuild> projectBuilds = buildService.findListBuild(new ProjectBuild());
+
+        for (ProductLine d : productLines) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", "p" + d.getProductLineId());
+            map.put("pId", 0);
+            map.put("name", d.getProductLineName());
+            map.put("open", true);
+            list.add(map);
+        }
+        for (ProductAndLine d : productLists) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", "v" + d.getProductId());
+            map.put("pId", "p" + d.getProductLineId());
+            map.put("name", d.getProductName());
+            map.put("open", true);
+            list.add(map);
+        }
+        for (ProjectBuild d : projectBuilds) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", d.getBuildId());
+            map.put("pId", "v" + d.getBuildProduct());
+            map.put("name", d.getBuildName());
+            map.put("open", true);
+            map.put("clickAble", false);
+            list.add(map);
+        }
+        return list;
+    }
+
+
+     @RequestMapping("/totree")
+    public String totree(String treeId,Model model){
+
+         if (!("".equals(treeId)||treeId==null)){
+             String prefix = treeId.substring(0,1);
+             if ("p".equals(prefix)){
+                 model.addAttribute("productLineId",treeId.substring(1));
+                 model.addAttribute("type","product");
+             }
+             if ("v".equals(prefix)){
+                 model.addAttribute("buildProduct",treeId.substring(1));
+                 model.addAttribute("type","build");
+             }
+         }
+
+
+
+         return "/productLine/page/project/productLine.page";
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/overviewTree")
+    public List overview(String check) {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<ProductAndLine> productLists = productService.getProductAndLine(new Product());
+        List<ProductLine> productLines = productLineService.findlist(new ProductLine());
+
+        for (ProductLine d : productLines) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", "p" + d.getProductLineId());
+            map.put("pId", 0);
+            map.put("name", d.getProductLineName());
+            map.put("open", true);
+            map.put("clickAble", false);
+            list.add(map);
+        }
+        for (ProductAndLine d : productLists) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", "v" + d.getProductId());
+            map.put("pId", "p" + d.getProductLineId());
+            map.put("name", d.getProductName());
+            map.put("open", true);
+            map.put("clickAble", false);
+            list.add(map);
+        }
+
+        return list;
+    }
+
+
 }
+

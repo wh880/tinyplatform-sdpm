@@ -12,7 +12,6 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
 import org.tinygroup.sdpm.action.system.ProfileUtil;
-import org.tinygroup.sdpm.action.system.Profiles;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -445,7 +444,7 @@ public class BugAction extends BaseController {
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
 				, LogUtil.LogAction.OPENED
-				,String.valueOf(bug.getBugId())
+				,String.valueOf(qbug.getBugId())
 				,UserUtils.getUserId()
 				,String.valueOf(bug.getProductId())
 				,String.valueOf(bug.getProjectId())

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+/*import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
@@ -24,9 +24,9 @@ import org.tinygroup.sdpm.util.LogUtil.LogAction;
 import org.tinygroup.sdpm.util.LogUtil.LogOperateObject;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
-@Controller
+*/@Controller
 @RequestMapping("a/system")
-public class HolidayAction extends BaseController{
+public class HolidayAction extends BaseController{/*
 	@Autowired
 	private HolidayService holidayService;
 	@Autowired
@@ -93,22 +93,24 @@ public class HolidayAction extends BaseController{
 				holidayList.add(day);
 			}
 			
-			holidayService.batchAdd(holidayList);
+			List<Holiday> holidays=holidayService.batchAdd(holidayList);
+			for(int i=0,n=holidays.size();i<n;i++){
 			LogUtil.logWithComment(LogUtil.LogOperateObject.HOLIDAY,
-					LogUtil.LogAction.OPENED, null,
-					UserUtils.getUserId(), null, null, null, null, null);
+					LogUtil.LogAction.OPENED, String.valueOf(holidays.get(i).getHolidayId()),
+					UserUtils.getUserAccount(), null, null, null, null, null);
+			}
 		}else{
 			
 			holidayService.update(holiday);
 			LogUtil.logWithComment(LogOperateObject.HOLIDAY, LogAction.EDITED, 
 					String.valueOf(holiday.getHolidayId()), 
-					UserUtils.getUserId(), null, null, null, null, null);
+					UserUtils.getUserAccount(), null, null, null, null, null);
 		}
 		model.addAttribute("holiday", holiday);
 		return "/system/page/holiday/holiday.page";
 	}
 	@ResponseBody
-	@RequestMapping("holiday/delete")
+	@RequestMapping(value="holiday/delete")
     public Map<String, String> deleteHoliday(Integer id){
 	   Map<String, String> map = new HashedMap();
 	   if(id!=null){
@@ -169,8 +171,19 @@ public class HolidayAction extends BaseController{
 	@RequestMapping("holiday/action")
 	public String holidayAction(SystemAction action,Model model){
 		List<SystemAction> actions = actionService.find(action);
-		model.addAttribute("action", actions);
+		List<HolidayHistory> histories= new ArrayList<HolidayHistory>();
+		for(int i=0,n=actions.size();i<n;i++){
+			HolidayHistory history=new HolidayHistory();
+			history.setHolidayHistoryAction(actions.get(i).getActionAction());
+			history.setHolidayHistoryActor(actions.get(i).getActionActor());
+			
+			history.setHolidayHistoryName((holidayService.findById(Integer.valueOf(
+					actions.get(i).getActionObjectId()))).getHolidayName());
+			history.setHolidayHistoryDate(actions.get(i).getActionDate());
+			histories.add(history);
+		}
+	 		model.addAttribute("action", histories);
 		return "/system/page/holiday/holiday-dynamic.pagelet";
 	}
 	
-}
+*/}

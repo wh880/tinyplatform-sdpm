@@ -57,17 +57,7 @@
                         "nullmsg":"产品版本不能为空","class":"input-text"})
                 #end
             #end
-        #* #@elementItem()
-             #@sdpmItem("服务级别" "*")
-                     #@tinySelect("serviceLevel" sla?.serviceLevel{"datatype":"*","id":"serviceLevel","nullmsg":"产品版本不能为空","class":"input-text select2"})
-                         #@tinyOptionItem("")请选择#end
-                         #@tinyOptionItem("0")基础#end
-                         #@tinyOptionItem("1")潜力#end
-                         #@tinyOptionItem("2")核心#end
-                         #@tinyOptionItem("3")vip#end
-                     #end
-             #end
-         #end*#
+
             #@elementItem()
                 #@sdpmItem("服务级别" "*")
                     #@Tselect2F()

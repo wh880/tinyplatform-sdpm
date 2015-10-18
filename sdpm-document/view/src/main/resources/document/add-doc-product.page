@@ -30,7 +30,7 @@
 
                 },
                 error: function(res){
-                    alert("失败");
+                ##    alert("失败");
                 }
             });
 
@@ -118,7 +118,7 @@
 					#@colLabel()<span class="c-red">*</span>文档标题#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-						#tinyInput("text" "docTitle" ""{"placeholder":"4~16个字符，字母/中文/数字/下划线","datatype":"*4-16","nullmsg":"标题不能为空！","class":"input-text"})
+						#tinyInput("text" "docTitle" ""{"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16","nullmsg":"标题不能为空！","class":"input-text"})
 					#end
 					#end
 						#@validateDiv("col-2")#end

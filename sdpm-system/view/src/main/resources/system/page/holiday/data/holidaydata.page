@@ -20,7 +20,10 @@
 				<a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH+adminPath}${m.href}?holidayId=${h?.holidayId}"><i class="${m.icon}"></i></a>
 			#else
 ##				#iconOperation(m.icon m.name "ml-5 delBtn"adminPath+m.href+"?holidayId="+h?.holidayId)
-				#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href h?.holidayId)#buttonIcon(iconClass=m.icon)#end
+##				#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href h?.holidayId)#buttonIcon(iconClass=m.icon)#end
+				#@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href h?.holidayId)
+					<i class="${m.icon}" title="删除"></i>
+				#end
 			#end
 			
 		#end

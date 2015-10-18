@@ -1,0 +1,195 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="服务管理",activeMenuId=currentPageId)
+<style>
+    .select_boxes {
+        margin-top: 0
+    }
+</style>
+#set(name="sla")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/service/serviceCom/tab.page")
+        #end
+    #end
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/client/slaSave" "post" {"class":""})
+
+    <div style="width:100%;float:left" class="pageleftpart">
+        <div class="infoContent">
+            <input type="hidden" name="clientId" value="${client.clientId}"/>
+            #@elementItem()
+                #@sdpmItem("产品名称" "*")
+                    #@Tselect2F()
+                        #@Tselect2Body(
+                            "productId" ""{"datatype":"*","id":"productId",
+                            "nullmsg":"产品名称不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@tinyOptionItem("")请选择#end
+                            #foreach(l:slas)
+                                #@tinyOptionItem(l.productId)${l?.productName}#end
+                            #end
+                        #end
+                    #end
+                #end
+            #end
+
+            #@elementItem()
+                #@sdpmItem("产品版本" "*")
+                    #tinyInput(
+                        "text" "cilentProductVision" ""{"datatype":"*","id":"cilentProductVision",
+                        "nullmsg":"产品版本不能为空","class":"input-text"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务级别" "*")
+                    #@Tselect2F()
+                        #@Tselect2Body(
+                            "serviceLevel" ""{"datatype":"*","id":"serviceLevel",
+                            "nullmsg":"产品名称不能为空","class":"input-text select2"})
+                            #@tinyOptionItem("")请选择#end
+                            #@tinyOptionItem("0")基础#end
+                            #@tinyOptionItem("1")潜力#end
+                            #@tinyOptionItem("2")核心#end
+                            #@tinyOptionItem("3")vip#end
+                        #end
+                    #end
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务协议标题" "*")
+                    #tinyInput(
+                        "text" "slaTitle" ""{"datatype":"*","id":"slaTitle","nullmsg":"协议标题不能为空！","class":
+                        "input-text"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务工时上限")
+                    #tinyInput(
+                        "text" "serviceEffortLimit" ""{"id":"serviceEffortLimit",
+                        "class":"input-text select2"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务响应时限")
+                    #tinyInput(
+                        "text" "serviceReplyTimeLimit" ""{"id":
+                        "serviceReplyTimeLimit","class":
+                        "input-text select2"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("需求回访时限")
+                    #tinyInput(
+                        "text" "serviceReviewTimeLimit" ""{"id":
+                        "serviceReviewTimeLimit","class":"input-text select2"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务请求数上限")
+                    #tinyInput(
+                        "text" "serviceRequestLimit" ""{"id":"serviceRequestLimit",
+                        "class":"input-text"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("现场服务次数上限")
+                    #tinyInput("text" "serviceTsOnsiteLimit" ""{"id":
+                        "serviceTsOnsiteLimit","class":"input-text"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务专员")
+                    #tinyInput("text" "serviceSpecialist" ""{"id":"serviceSpecialist",
+                        "class":"input-text"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务级别协议" "*")
+                    #@tinySelect(
+                        "slaStatus" "" {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        #@tinyOptionItem("")请选择#end
+                        #@tinyOptionItem("0")新建#end
+                        #@tinyOptionItem("1")生效#end
+                        #@tinyOptionItem("2")到期#end
+                        #@tinyOptionItem("3")作废#end
+                        #@tinyOptionItem("4")关闭#end
+                    #end
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("服务期限" "*")
+                    #@tinyDateInput(
+                        "serviceDeadline" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                        "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("创建人")
+                    #tinyInput(
+                        "text" "slaCreatedBy" ""{"id":"slaCreatedBy","class":"input-text"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("创建时间")
+                    #@tinyDateInput(
+                        "slaCreateDate" "" "YYYY-MM-DD" {"style":"width:200px","id":"slaCreateDate","placeholder":
+                        ""})#end
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("批准人")
+                    #tinyInput("text" "slaReviewedBy" ""{"id":"slaReviewedBy","class":
+                        "input-text"})
+                #end
+            #end
+            #@elementItem()
+                #@sdpmItem("批准时间" "*")
+                    #@tinyDateInput(
+                        "slaReviewDate" "" "YYYY-MM-DD" {"style":"width:200px","id":"slaReviewDate",
+                        "datatype":
+                        "*","nullmsg":
+                        "日期不能为空","placeholder":""})#end
+                #end
+            #end
+            #@elementItem()
+                <div class="col-12">
+                    <div class="col-2 text-r"><label>协议表述：</label></div>
+
+                    <div class="col-9">
+                        #@Teditor("content" "slaSpec" {"initialFrameHeight":"150"})#end</div>
+                </div>
+            #end
+        </div>
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-5">
+
+                </div>
+                <div class="col-1">
+                    <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                </div>
+                <div class="col-1">
+                    #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+                </div>
+                <div class="col-5"></div>
+            </div>
+        #end
+    </div>
+    #end
+
+#end
+
+
+<script type="text/javascript">
+    $(".select2").select2();
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+        });
+    });
+</script>
+
+

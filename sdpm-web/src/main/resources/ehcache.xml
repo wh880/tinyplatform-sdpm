@@ -7,6 +7,9 @@
     <defaultCache maxEntriesLocalHeap="100" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
                   overflowToDisk="true" maxEntriesLocalDisk="100000"/>
 
+    <!-- 字典缓存 -->
+    sdpmDictCache
+    <cache name="sdpmDictCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
     <!-- 系统缓存 -->
     <cache name="sysCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
 
