@@ -8,4 +8,5 @@
     <bean id="dictFileProcessor" class="org.tinygroup.sdpm.dict.processor.DictFileProcessor" >
         <!--<property name="scan" value="true"></property>-->
     </bean>
+    <bean id="userFunction" class="org.tinygroup.sdpm.functions.UserFunction"></bean>
 </beans>
