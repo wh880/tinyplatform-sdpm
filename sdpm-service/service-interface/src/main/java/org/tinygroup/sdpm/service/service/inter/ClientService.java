@@ -23,7 +23,7 @@ public interface ClientService {
      * @return
      */
     Pager<ServiceClient> findClientPager(Integer start, Integer limit, ServiceClient client, String order,
-                                         String ordertype);
+                                         String orderType);
 
     /**
      * 通过左树的产品ID查找数据库的所有记录
@@ -31,7 +31,7 @@ public interface ClientService {
      * @return
      */
     Pager<ServiceClient> findClientPagerByPid(Integer start, Integer limit, Integer treeId, String order,
-                                              String ordertype);
+                                              String orderType);
 
     /**
      * 根据条件查询List

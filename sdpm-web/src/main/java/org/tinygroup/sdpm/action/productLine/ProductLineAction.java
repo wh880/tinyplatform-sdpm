@@ -12,6 +12,7 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.template.parser.grammer.TinyTemplateParser.If_directiveContext;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -80,7 +81,13 @@ public class ProductLineAction extends BaseController {
                        @RequestParam(required = false, defaultValue = "10") int pagesize,
                        @RequestParam(required = false, defaultValue = "productLineId") String order,
                        @RequestParam(required = false, defaultValue = "asc") String ordertype, Model model) {
-
+        if("user".equals(productLine.getProductLineCreatedBy())){
+        	productLine.setProductLineCreatedBy(UserUtils.getUser().getOrgUserAccount());
+        }
+        if("all".equals(productLine.getProductLineStatus())){
+        	productLine.setProductLineStatus(null);
+        }
+        
         Pager<ProductLine> pagerProductLine = productLineService.findProductLinePager(page, pagesize, productLine, order, ordertype);
 
         model.addAttribute("productLine", pagerProductLine);

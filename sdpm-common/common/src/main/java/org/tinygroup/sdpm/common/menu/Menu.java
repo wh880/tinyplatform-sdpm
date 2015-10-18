@@ -151,4 +151,13 @@ public class Menu implements Serializable, Comparable<Menu> {
         }
         return 0;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Menu menu = (Menu) obj;
+        if (menu.getId() != null) {
+            return menu.getId().equals(getId());
+        }
+        return false;
+    }
 }

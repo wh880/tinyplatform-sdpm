@@ -337,6 +337,36 @@ public class QualityBug implements Serializable {
 
 	private String moduleName;
 
+	private String userName;
+
+	private String openBuildName;
+
+	private String resolveBuildName;
+
+	public String getOpenBuildName() {
+		return openBuildName;
+	}
+
+	public void setOpenBuildName(String openBuildName) {
+		this.openBuildName = openBuildName;
+	}
+
+	public String getResolveBuildName() {
+		return resolveBuildName;
+	}
+
+	public void setResolveBuildName(String resolveBuildName) {
+		this.resolveBuildName = resolveBuildName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public String getProductName() {
 		return productName;
 	}

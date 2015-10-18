@@ -147,12 +147,16 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		return getDslTemplate().getByKey(pk, QualityBug.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return select(QUALITY_BUGTABLE.ALL,FragmentSql.fragmentSelect("product_name productName,module_name moduleName,plan_name planName,project_name projectName,story_title storyName,task_name taskName")).from(FragmentSql.fragmentFrom("quality_bug LEFT JOIN product p ON quality_bug.product_id = p.product_id\n" +
-					" LEFT JOIN system_module m ON quality_bug.module_id = m.module_id\n" +
-					" LEFT JOIN product_plan pp ON quality_bug.plan_id = pp.plan_id\n" +
-					" LEFT JOIN project  pj ON quality_bug.project_id = pj.project_id\n" +
-					" LEFT JOIN product_story ps ON quality_bug.story_id = ps.story_id\n" +
-					" LEFT JOIN project_task pt ON quality_bug.task_id = pt.task_id ")).where(QUALITY_BUGTABLE.BUG_ID.eq(t));
+			return select(QUALITY_BUGTABLE.ALL,FragmentSql.fragmentSelect("product_name productName,module_name moduleName,plan_name planName,project_name projectName,story_title storyName,task_name taskName,org_user_account userName,pb1.build_name openBuildName,pb2.build_name resolveBuildName"))
+					.from(FragmentSql.fragmentFrom("quality_bug LEFT JOIN product p ON quality_bug.product_id = p.product_id\n" +
+							" LEFT JOIN system_module m ON quality_bug.module_id = m.module_id\n" +
+							" LEFT JOIN product_plan pp ON quality_bug.plan_id = pp.plan_id\n" +
+							" LEFT JOIN project  pj ON quality_bug.project_id = pj.project_id\n" +
+							" LEFT JOIN org_user ou ON quality_bug.bug_assigned_to = ou.org_user_id\n" +
+							" LEFT JOIN product_story ps ON quality_bug.story_id = ps.story_id\n" +
+							" LEFT JOIN project_task pt ON quality_bug.task_id = pt.task_id \n" +
+							" LEFT JOIN project_build pb1 ON quality_bug.bug_opened_build = pb1.build_id\n" +
+							" LEFT JOIN project_build pb2 ON quality_bug.bug_resolved_build = pb2.build_id")).where(QUALITY_BUGTABLE.BUG_ID.eq(t));
 			}
 		});
 	}

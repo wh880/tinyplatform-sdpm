@@ -45,23 +45,25 @@
       		#end	
 							
 			#@elementItem()
-					#@colLabel()文档标题#end
+					#@colLabel()<span class="c-red">*</span>文档标题#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docTitle" ""{"placeholder":"*","datatype":"*4-16","nullmsg":"标题不能为空！","id":"docTitle","class":"input-text"})
+					#tinyInput("text" "docTitle" ""{"datatype":"*4-16","nullmsg":"标题不能为空！","placeholder":"4~16个字符，字母/中文/数字/下划线","class":"input-text"})
 					#end
 					#end
+					#@validateDiv("col-2")#end
 				#end
-				#@validateDiv("col-2")#end
+				
 			#@elementItem(elementId="urlBox" eleItemClass="hidden")
-					#@colLabel()文档URL#end
+					#@colLabel()<span class="c-red">*</span>文档URL#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*4-16","id":"docUrl","class":"input-text"})
+					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*","class":"input-text"})
 					#end
 					#end
+					#@validateDiv("col-2")#end
 				#end
-				#@validateDiv("col-2")#end							
+											
 			#@elementItem()	
 					#@colLabel()关键字#end
 					#@formControlDiv("col-8")
@@ -136,4 +138,12 @@ function setType(type)
 	}
 }
  
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
 </script>

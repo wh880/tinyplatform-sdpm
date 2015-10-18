@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
 import org.tinygroup.sdpm.action.system.ProfileUtil;
@@ -16,9 +17,11 @@ import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.PlanService;
+import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
@@ -70,7 +73,8 @@ public class BugAction extends BaseController {
 	private PlanService planService;
 	@Autowired
 	private ProfileService profileService;
-	
+	@Autowired
+	private ProductService productService;
 	@RequestMapping("")
 	public String form(String get,QualityBug bug, HttpServletRequest request){
 		String queryString = request.getQueryString();
@@ -108,6 +112,9 @@ public class BugAction extends BaseController {
 	@RequestMapping("/bugBasicInfo")
 	public String bugBasicInfo(Integer bugId, Model model){
 		QualityBug bug = bugService.findById(bugId);
+		String[] userIds = bug.getBugAssignedTo().split(",");
+		List<OrgUser> assignUsers = userService.findUserListByIds(userIds);
+		model.addAttribute("assignUsers",assignUsers);
 		model.addAttribute("qualityBug",bug);
 		return "/testManagement/page/bugRightInfo.pagelet";
 	}
@@ -180,7 +187,9 @@ public class BugAction extends BaseController {
 	@RequestMapping("/assign")
 	public String assign(Integer bugId,Model model){		
 		QualityBug bug = bugService.findById(bugId);
+		List<OrgUser> users = userService.findUserList(null);
 		model.addAttribute("bug", bug);
+		model.addAttribute("userList",users);
 		return "/testManagement/page/tabledemo/assign.page";
 	}
 
@@ -188,7 +197,6 @@ public class BugAction extends BaseController {
 	public String assign(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
 
 		bug.setBugAssignedDate(new Date());
-
 		bugService.updateBug(bug);
 
 	
@@ -310,11 +318,15 @@ public class BugAction extends BaseController {
 	
 	@RequestMapping("/editionPaging")
 	public String editionPaging(Integer bugId,Model model){
+		Product product = new Product();
+		product.setProductId(bugId);
+		List<Product> products = productService.findProductList(product);
 		QualityBug bug = bugService.findById(bugId);
 		Project p = new Project();
 		p.setProjectDeleted("0");
 		List<Project> projects = projectService.findProjectList(p,null,null);
 		List<OrgUser> orgUsers = userService.findUserList(null);
+		model.addAttribute("bugProductList",products);
 		model.addAttribute("projectList",projects);
 		model.addAttribute("userList",orgUsers);
 		model.addAttribute("bug", bug);
@@ -344,6 +356,9 @@ public class BugAction extends BaseController {
 	@ResponseBody
 	@RequestMapping("/ajax/plan")
 	public List<ProductPlan> getplan(ProductPlan productPlan){
+		if(productPlan.getProductId()<1){
+			return null;
+		}
 		List<ProductPlan> moduleList = planService.findPlanList(productPlan);
 		return moduleList;
 	}
@@ -351,6 +366,9 @@ public class BugAction extends BaseController {
 	@ResponseBody
 	@RequestMapping("/ajax/module")
 	public List<SystemModule> getModule(SystemModule systemModule){
+		if(systemModule.getModuleRoot()<1){
+			return null;
+		}
 		systemModule.setModuleType("story");
 		List<SystemModule> moduleList = moduleService.findModules(systemModule);
 		for(SystemModule module : moduleList){
@@ -362,6 +380,9 @@ public class BugAction extends BaseController {
 	@ResponseBody
 	@RequestMapping("/ajax/story")
 	public List<ProductStory> getStory(ProductStory productStory){
+		if(productStory.getProductId()<1){
+			return null;
+		}
 		if(productStory.getModuleId()==0){
 			productStory.setModuleId(null);
 		}
@@ -371,12 +392,18 @@ public class BugAction extends BaseController {
 	@ResponseBody
 	@RequestMapping("/ajax/task")
 	public List<ProjectTask> getStory(ProjectTask projectTask){
+		if(projectTask.getTaskProject()<1){
+			return null;
+		}
 		return taskService.findListTask(projectTask);
 	}
 
 	@ResponseBody
 	@RequestMapping("/ajax/build")
 	public List<ProjectBuild> getBuild(ProjectBuild projectBuild){
+		if(projectBuild.getBuildProduct()<1||projectBuild.getBuildProduct()==null){
+			return null;
+		}
 		return buildService.findListBuild(projectBuild);
 	}
 	
@@ -402,8 +429,10 @@ public class BugAction extends BaseController {
 	public String save(QualityBug bug,SystemAction systemAction,@RequestParam(value = "file", required = false)MultipartFile[] file,
 			String[] title, HttpServletRequest request){
 
+		if(!StringUtil.isBlank(bug.getBugAssignedTo())){
+			bug.setBugAssignedDate(new Date());
+		}
 		bug.setBugOpenedDate(new Date());
-
 		bug.setBugOpenedBy(UserUtils.getUserAccount() != null?UserUtils.getUserAccount():"0");
 		QualityBug qbug=bugService.addBug(bug);
 		ProfileUtil profileUtil = new ProfileUtil();

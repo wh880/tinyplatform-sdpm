@@ -65,6 +65,7 @@
 					#@colLabel()所属项目#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
+						
 					#@Tselect2F()
 	                   		#@Tselect2Body("docProject" doc?.docProject?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="0">/</option>
@@ -74,6 +75,12 @@
 	                        	#end
 	                        #end	                       	                    	                        
 	                    	#end 
+	                    	
+                        	
+                        	
+	                    	#@Tselect2Fix()
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd" class="r">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end  
 	                    	<script type="text/javascript">
                             $("#${sid}").on("change",function(){
                                 var pId = $("#${sid}  option:selected").val();
@@ -81,24 +88,26 @@
 
                             })
                         	</script>
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd" class="r">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end                 	                    	
+                        	
+	                    	<script type="text/javascript">
+	                            $("#${sid}").on("change",function(){
+	                                var pId = $("#${sid}  option:selected").val();
+	                                ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/module?projectId="+pId,${doc?.docModule?:0});
+	
+	                            })
+           			 		</script>                	                    	
                 	  #end
                 	  #end
                 	  #end
-	 		#end	 			
+	 		#end	
+	 				
     		 #@elementItem()
 					#@colLabel()所属产品#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#@Tselect2F()
 	                   		#@Tselect2Body("docProduct" doc?.docProduct {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-#*	                        #foreach(product : productList)
-	                        	#if(product?.projectDeleted != 1)
-	                        	 <option value="${product?.productId}">${product?.productName}</option>
-	                       		#end
-	                        #end	                       	                    	                        *#
+								<option value="0">/</option>
 	                    	#end                  
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
@@ -113,14 +122,9 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#@Tselect2F()
-	                   		 #@Tselect2Body("docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">分类1</option>
-	                        <option value="CT">分类2</option>
-	                        <option value="DE">分类3</option>
-	                        <option value="FL">分类4</option>
-	                        <option value="GA">分类5</option>
-	            
-	                    	#end                  	                    	
+	                   	#@Tselect2Body("docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        <option value="0">/</option>	                       	            
+	                    #end                  	                    	
                 	  #end
                 	  #end
                 	   #end
@@ -129,7 +133,7 @@
 			#@elementItem()
         			#@colLabel()文档类型#end
 					#@skinMinimal("mt-20")
-    					#labelRadio1(rId="typefile" rName="docType" rValue="文件" labelText="文件" "setType(this.value);")
+    					#labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="文件" "setType(this.value);" labelText="文件")
     					#labelRadio1(rId="typeurl" rName="docType" rValue="链接" labelText="链接" "setType(this.value);")   								
     					#labelRadio1(rId="typetext" rName="docType" rValue="网页" labelText="网页" "setType(this.value);")
 					
@@ -138,28 +142,30 @@
       		#end	
 							
 			#@elementItem()
-					#@colLabel()文档标题#end
+					#@colLabel()<span class="c-red">*</span>文档标题#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docTitle" ""{"placeholder":"*","datatype":"*4-16","nullmsg":"标题不能为空！","id":"docTitle","class":"input-text"})
+					#tinyInput("text" "docTitle" "" {"datatype":"*4-16","nullmsg":"标题不能为空！","placeholder":"4~16个字符，字母/中文/数字/下划线","class":"input-text"})
 					#end
-					#end
+					#end	
+					#@validateDiv("col-2")#end
+
 				#end
-				#@validateDiv("col-2")#end
 			#@elementItem(elementId="urlBox" eleItemClass="hidden")
-					#@colLabel()文档URL#end
+					#@colLabel()<span class="c-red">*</span>文档URL#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*4-16","id":"docUrl","class":"input-text"})
+					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*4-16","nullmsg":"链接不能为空！","id":"docUrl","class":"input-text"})
 					#end
 					#end
+					#@validateDiv("col-2")#end
 				#end
-				#@validateDiv("col-2")#end							
+											
 			#@elementItem()	
 					#@colLabel()关键字#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docKeywords" ""{"placeholder":"","datatype":"*4-16","id":"docKeywords","class":"input-text"})
+					#tinyInput("text" "docKeywords" ""{"placeholder":"","id":"docKeywords","class":"input-text"})
 					#end
 					#end
 				#end
@@ -229,6 +235,14 @@ function setType(type)
 	}
 }
 </script>
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
+</script>
+
 #*
 <script type="text/javascript">
      var 产品=[

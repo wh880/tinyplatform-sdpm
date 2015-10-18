@@ -12,7 +12,11 @@ import org.tinygroup.sdpm.system.service.impl.ModuleServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.DictService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.ModuleUtil;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangll13383 on 2015/10/15.
@@ -20,6 +24,7 @@ import java.util.*;
 public class DictUtil extends DictParent {
     private static final ModuleService moduleService = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(ModuleServiceImpl.class);
     private static final DictService dictService = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(DictServiceImpl.class);
+
     public static void insertDict(List<DictNodeEntries> dictNodeEntries){
         for(DictNodeEntries entries : dictNodeEntries){
             int parent =0;
@@ -126,14 +131,17 @@ public class DictUtil extends DictParent {
     }
 
     public static String getValue(String type,String key){
+        if(type.contains("/")){
+            return dictMap.get(type).get(key);
+        }
         return dictMap.get(entryMapping.get(type)).get(key);
     }
 
     public static Map<String,String> getValueMap(String type){
+        if(type.contains("/")){
+            return dictMap.get(type);
+        }
         return dictMap.get(entryMapping.get(type));
     }
 
-    public static String getValue(String root,String type,String key){
-        return dictMap.get(type).get(key);
-    }
 }
