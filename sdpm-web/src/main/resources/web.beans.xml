@@ -10,5 +10,6 @@
         <property name="dictHandle" ref="dictHandle"></property>
         <property name="isInitFromFile" value="true"></property>
     </bean>
-    <bean id="sdpmDictCache" class="org.tinygroup.cache.ehcache.EhCache"></bean>
+	<bean id="sdpmDictCache" class="org.tinygroup.cache.ehcache.EhCache"></bean>
+	<bean id="userFunction" class="org.tinygroup.sdpm.functions.UserFunction"></bean>
 </beans>

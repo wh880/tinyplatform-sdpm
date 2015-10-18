@@ -1,5 +1,5 @@
-#setTinyItemCount(pager.totalCount)
-#foreach(var:pager.records)
+#setTinyItemCount(pager?.totalCount)
+#foreach(var:pager?.records)
     #@tr()
         #@td()<input type="checkbox" value="${var.clientRequestId}" name="idCheck">#end
     ##        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/service/serviceReq/add.page">${var.clientRequestId}</a>#end

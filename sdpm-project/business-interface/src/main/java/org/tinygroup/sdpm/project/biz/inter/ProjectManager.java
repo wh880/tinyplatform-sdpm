@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
 import java.util.List;
+
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -75,4 +76,6 @@ public interface ProjectManager {
      * @return
      */
     Pager<Project> findPager(int start,int limit,Project project,String order,String ordertype);
+    
+    List<Project> getProjectByStoryId(Integer storyId);
 }

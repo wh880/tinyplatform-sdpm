@@ -498,6 +498,7 @@
         <template-function name="typeInfoFunction"></template-function>
         <template-function name="dictFunction"></template-function>
         <template-function name="stdFunction"></template-function>
+        <template-function name="userFunction"></template-function>
     </template-config>
 
     <dict-load-config bean_name="sdpmDictCache"></dict-load-config>

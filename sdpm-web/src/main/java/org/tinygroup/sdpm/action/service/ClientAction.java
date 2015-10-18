@@ -140,10 +140,17 @@ public class ClientAction extends BaseController {
     @RequiresPermissions("client-sla")
     @RequestMapping(value = "/clientSla")
     public String showSla(Integer id, Model model) {
-        List<ServiceSla> slas = clientService.findSlaByClientId(id);
-        ServiceClient client = clientService.findClient(id);
-        model.addAttribute("client", client);
-        model.addAttribute("slas", slas);
+        if (id != null) {
+            ServiceClientUser clientUser = new ServiceClientUser();
+            clientUser.setClientId(id);
+            List<ServiceClientUser> clientUsers = clientService.getAllClientUser(clientUser);
+            model.addAttribute("clientUsers", clientUsers);
+
+            List<ServiceSla> slas = clientService.findSlaByClientId(id);
+            ServiceClient client = clientService.findClient(id);
+            model.addAttribute("client", client);
+            model.addAttribute("slas", slas);
+        }
         return "service/client/clientProduct.page";
     }
 
@@ -167,18 +174,6 @@ public class ClientAction extends BaseController {
         return "service/sla/slaContent.page";
     }
 
-    @RequestMapping("/clientDetail")
-    public String clientDetail(Integer id, Model model) {
-        if (id != null) {
-            ServiceClient client = clientService.findClient(id);
-            model.addAttribute("client", client);
-            ServiceClientUser clientUser = new ServiceClientUser();
-            clientUser.setClientId(id);
-            List<ServiceClientUser> clientUsers = clientService.getAllClientUser(clientUser);
-            model.addAttribute("clientUsers", clientUsers);
-        }
-        return "service/client/clientInfo.page";
-    }
 
     @RequiresPermissions("linkman-del")
     @ResponseBody
@@ -213,6 +208,28 @@ public class ClientAction extends BaseController {
         } else
             clientUser = clientUserService.addClientUser(clientUser);
         return "redirect:" + adminPath + "/service/client/clientDetail?id=" + clientUser.getClientId();
+    }
+
+    @RequestMapping("/slaAdd")
+    public String slaAdd(Integer id, Model model) {
+        if (id != null) {
+            ServiceClient client = new ServiceClient();
+            client = clientService.findClient(id);
+            model.addAttribute("client", client);
+        /*调用product的服务，查询出产品表的对象*/
+            Product product = new Product();
+            List<Product> slas = productService.findProductList(product);
+            model.addAttribute("slas", slas);
+        }
+        return "/service/client/clientSlaAdd.page";
+    }
+
+    @RequestMapping("/slaSave")
+    public String slaSave(ServiceSla sla, Model model) {
+        if (sla.getSlaId() == null) {
+            sla = slaService.addSla(sla);
+        }
+        return "redirect:" + adminPath + "/service/client/clientSla?id=" + sla.getClientId();
     }
 
     @ResponseBody

@@ -61,5 +61,10 @@ public class ProjectServiceImpl implements ProjectService {
         return projectManager.update(project);
     }
 
+	public List<Project> getProjectByStoryId(Integer storyId) {
+
+		return projectManager.getProjectByStoryId(storyId);
+	}
+
 
 }
