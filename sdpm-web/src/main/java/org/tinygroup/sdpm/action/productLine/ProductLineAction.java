@@ -13,15 +13,11 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
-<<<<<<< Updated upstream
-=======
-import org.tinygroup.sdpm.project.dao.pojo.Project;
+
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
->>>>>>> Stashed changes
 import org.tinygroup.sdpm.util.UserUtils;
-import org.tinygroup.template.parser.grammer.TinyTemplateParser.If_directiveContext;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,10 +40,6 @@ public class ProductLineAction extends BaseController {
     private ProductLineService productLineService;
     @Autowired
     private ProductService productService;
-    @Autowired
-    private ProductAndLine productAndLine;
-    @Autowired
-    private ProjectService projectService;
     @Autowired
     private BuildService buildService;
 
@@ -76,6 +68,12 @@ public class ProductLineAction extends BaseController {
     public String update(ProductLine productLine) {
         productLineService.updateProductLine(productLine);
         return "redirect:" + "/productLine/page/tabledemo/list.page";
+    }
+
+    @RequestMapping("/close")
+    public String close(ProductLine productLine) {
+        productLineService.updateProductLine(productLine);
+        return  "/productLine/page/tabledemo/close.page";
     }
 
     @ResponseBody
@@ -214,7 +212,64 @@ public class ProductLineAction extends BaseController {
 
         for (ProductLine d : productLines) {
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("id", "pl" + d.getProductLineId());
+            map.put("id", "p" + d.getProductLineId());
+            map.put("pId", 0);
+            map.put("name", d.getProductLineName());
+            map.put("open", true);
+            list.add(map);
+        }
+        for (ProductAndLine d : productLists) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", "v" + d.getProductId());
+            map.put("pId", "p" + d.getProductLineId());
+            map.put("name", d.getProductName());
+            map.put("open", true);
+            list.add(map);
+        }
+        for (ProjectBuild d : projectBuilds) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", d.getBuildId());
+            map.put("pId", "v" + d.getBuildProduct());
+            map.put("name", d.getBuildName());
+            map.put("open", true);
+            map.put("clickAble", false);
+            list.add(map);
+        }
+        return list;
+    }
+
+
+     @RequestMapping("/totree")
+    public String totree(String treeId,Model model){
+
+         if (!("".equals(treeId)||treeId==null)){
+             String prefix = treeId.substring(0,1);
+             if ("p".equals(prefix)){
+                 model.addAttribute("productLineId",treeId.substring(1));
+                 model.addAttribute("type","product");
+             }
+             if ("v".equals(prefix)){
+                 model.addAttribute("buildProduct",treeId.substring(1));
+                 model.addAttribute("type","build");
+             }
+         }
+
+
+
+         return "/productLine/page/project/productLine.page";
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/overviewTree")
+    public List overview(String check) {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<ProductAndLine> productLists = productService.getProductAndLine(new Product());
+        List<ProductLine> productLines = productLineService.findlist(new ProductLine());
+
+        for (ProductLine d : productLines) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", "p" + d.getProductLineId());
             map.put("pId", 0);
             map.put("name", d.getProductLineName());
             map.put("open", true);
@@ -223,24 +278,17 @@ public class ProductLineAction extends BaseController {
         }
         for (ProductAndLine d : productLists) {
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("id", "p" + d.getProductId());
-            map.put("pId", "pl" + d.getProductLineId());
+            map.put("id", "v" + d.getProductId());
+            map.put("pId", "p" + d.getProductLineId());
             map.put("name", d.getProductName());
             map.put("open", true);
+            map.put("clickAble", false);
             list.add(map);
         }
-        for (ProjectBuild d : projectBuilds) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("id", d.getBuildId());
-            map.put("pId", "p" + d.getBuildProduct());
-            map.put("name", d.getBuildName());
-            map.put("open", true);
-            list.add(map);
-        }
-
 
         return list;
     }
+
 
 }
 
