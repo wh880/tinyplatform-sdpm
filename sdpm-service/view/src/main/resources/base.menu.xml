@@ -30,7 +30,7 @@
             <menu id="clientSla_edit" name="协议编辑" href="/service/sla/form" sort="1" isShow="1" scope="clientSla"/>
             <menu id="clientSla_delete" name="协议删除" href="/service/client/slaDelete" sort="1" isShow="1"
                   scope="clientSla"/>
-            <menu id="clientSla-add" name="绑定协议" href="/service/sla/form" icon="icon-plus" sort="1" isShow="1"
+            <menu id="clientSla-add" name="绑定协议" href="/service/client/slaAdd" icon="icon-plus" sort="1" isShow="1"
                   scope="service-sla-add"/>
             <menu id="clientSla-export" name="导出" href="/service/sla/slaExport.pagelet" icon="icon-download-alt"
                   sort="1" isShow="1"
