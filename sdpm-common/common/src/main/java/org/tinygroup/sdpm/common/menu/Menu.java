@@ -160,4 +160,9 @@ public class Menu implements Serializable, Comparable<Menu> {
         }
         return false;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
