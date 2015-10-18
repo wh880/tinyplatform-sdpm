@@ -121,7 +121,7 @@ public class DocAction {
 	}
 	
 	@RequiresPermissions("add-doc")
-	@RequestMapping(value="/doc/add")
+	//@RequestMapping(value="/doc/add")
 	public String createDoc(HttpServletRequest request ,Model model)
 	{		
 		Integer libid = (Integer) request.getSession().getAttribute("documentLibId");
@@ -165,7 +165,8 @@ public class DocAction {
 		return "redirect:"+"/a/document?docChange=true&moduleId="+request.getSession().getAttribute("moduleId");
 	}
 	
-	@RequestMapping(value="/doc/edit")
+	@RequiresPermissions("docedit")
+	//@RequestMapping(value="/doc/edit")
 	public String editDoc(HttpServletRequest request,Model model,Integer docId)
 	{	
 		SystemModule module = new SystemModule();
@@ -229,6 +230,8 @@ public class DocAction {
 		return "redirect:"+"/a/document";
 	}
 	
+	@RequiresPermissions("docedit")
+	@RequiresPermissions("doc-view-delete")
 	@ResponseBody
 	@RequestMapping(value="/doc/delete")
 	public Map delDoc(Integer id)
@@ -240,6 +243,7 @@ public class DocAction {
 	    return map;
 	}
 	
+	@RequiresPermissions("batch-delete")
 	@ResponseBody
 	@RequestMapping(value="/doc/batchDelete")
 	public Map bctchDelDoc(String ids)
@@ -263,12 +267,14 @@ public class DocAction {
 	    return map;
 	}
 	
+	@RequiresPermissions("doclib-add")
 	@RequestMapping(value="/doclib/toAdd")
 	public String addDocLib()
 	{
 		return "/document/add-doclib.pagelet";
 	}
 	
+	@RequiresPermissions("doclib-edit")
 	@RequestMapping(value="/doclib/edit")
 	public String editDoclib(HttpServletRequest request,DocumentDoclib doclib,Model model)
 	{		
@@ -292,6 +298,7 @@ public class DocAction {
 		return "redirect:"+"/a/document?change=true";
 	}
 	
+	@RequiresPermissions("doclib-delete")
 	@ResponseBody
 	@RequestMapping(value="/doclib/delete")
 	public Map delDocLib(Integer id)
@@ -351,7 +358,7 @@ public class DocAction {
 	}
 	
 	//产品文档
-		@RequestMapping("/product/doc")
+	@RequestMapping("/product/doc")
 	public String product(HttpServletRequest request,Model model){
 		Product product = new Product();
 		List<Product> list = productService.findProductList(new Product());
