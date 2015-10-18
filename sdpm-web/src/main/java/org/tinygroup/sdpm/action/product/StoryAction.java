@@ -41,9 +41,16 @@ import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
+import org.tinygroup.sdpm.quality.service.inter.CaseStepService;
+import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
@@ -70,6 +77,12 @@ public class StoryAction extends BaseController{
 	private PlanService planService;
 	@Autowired
 	private BuildService buildService;
+	@Autowired
+	private ProjectService projectService;
+	@Autowired
+	private TestCaseService testCaseService;
+	@Autowired
+	private ProjectStoryService projectStoryService;
     
     
    
@@ -199,8 +212,27 @@ public class StoryAction extends BaseController{
     	
     	ProductStory productStory = storyService.findStory(storyId);
     	ProductStorySpec storySpec = storySpecService.findStorySpec(storyId);
+    	
+    	QualityTestCase testCase = new QualityTestCase();
+    	testCase.setStoryId(storyId);
+    	List<QualityTestCase> testCaseList = testCaseService.findTestCaseList(testCase);
+    	
+    	QualityBug bug = new QualityBug();
+    	bug.setStoryId(storyId);
+    	List<QualityBug> bugList = bugService.findBugList(bug);
+    	
+    	
+    	
+    /*	ProjectStory projectStory = new ProjectStory();
+    	projectStory.setStoryId(storyId);
+    	List<ProjectStory> projectStoryList = projectStoryService.findByProjectStory(projectStory);*/
+    	
+    	
     	model.addAttribute("story", productStory);
     	model.addAttribute("storySpec", storySpec);
+    	model.addAttribute("testCaseList", testCaseList);
+    	model.addAttribute("bugList", bugList);
+    	model.addAttribute("projectList", null);
     	
     	if("productDemandClose".equals(forwordPager)){
     		

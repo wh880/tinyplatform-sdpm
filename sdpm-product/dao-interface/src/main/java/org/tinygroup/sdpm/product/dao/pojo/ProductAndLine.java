@@ -1,6 +1,8 @@
 package org.tinygroup.sdpm.product.dao.pojo;
 
-public class ProductAndLine {
+import java.io.Serializable;
+
+public class ProductAndLine implements Serializable {
 	
 	private int productId;
 	

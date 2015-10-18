@@ -8,7 +8,7 @@
 #*				#@aModal("#myModal" "批量编辑" "1300" "500" "btn radius btn-primary" "/productLine/page/tabledemo/batchedit.pagelet")批量编辑#end*#
 				<input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('productLine','全选');" />
             <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('productLine','反选');" />
-           
+
 			#end
 			#@tinyTableContent(TINY_CONTEXT_PATH +adminPath+"/productLine/list?deleted=0") ##取数据地址 总数据
 				#@thead()
@@ -29,7 +29,7 @@
 					#end
 				#end
 			#end
-#*			
+#*
 			##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
 			<script type="text/javascript">
 				$(function(){
@@ -39,7 +39,7 @@
 				})
 			</script>
 			*#
-			
-		
+
+
 		#end
 		

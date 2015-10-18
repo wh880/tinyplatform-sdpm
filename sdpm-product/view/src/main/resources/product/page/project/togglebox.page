@@ -240,7 +240,6 @@
 
 
 
-
                     #foreach(m:menuManager?.getScopeMenus("product-del"))
                         #if(m?.id=="product-demand-del")
                         #set(dae=[34,36])

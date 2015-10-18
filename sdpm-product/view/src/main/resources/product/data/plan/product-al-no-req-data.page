@@ -10,8 +10,8 @@
     #@td()@#end
 	#@td()${story?.planId}#end
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${story?.storyTitle}</a>#end
-    #@td()${story?.storyOpenedBy}#end
-    #@td()${story?.storyAssignedTo}#end
+    #@td()${story?.storyOpenedName}#end
+    #@td()${story?.storyAssignedName}#end
     #@td()${story?.storyEstimate}#end
     #@td()${story?.storyStatus}#end
     #@td()${story?.storyStage}#end
