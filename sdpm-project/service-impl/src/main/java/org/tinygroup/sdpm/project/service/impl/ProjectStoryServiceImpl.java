@@ -6,8 +6,10 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.biz.inter.ProjectStoryManager;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.tinysqldsl.Pager;
@@ -26,7 +28,19 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     private StoryManager storyManager;
     @Autowired
     private TaskManager taskManager;
+    @Autowired
+    private ProjectManager projectManager;
 
+    public List<Project> findProjectsByStory(Integer storyId) {
+        ProjectStory projectStory = new ProjectStory();
+        projectStory.setStoryId(storyId);
+        List<ProjectStory> projectStoryList = projectStoryManager.findList(projectStory);
+        List<Integer> ids = new ArrayList<Integer>();
+        for (ProjectStory t : projectStoryList) {
+            ids.add(t.getStoryId());
+        }
+        return projectManager.findList(ids);
+    }
 
     public List<ProjectStory> findByProjectStory(ProjectStory projectStory) {
         return projectStoryManager.findList(projectStory);
