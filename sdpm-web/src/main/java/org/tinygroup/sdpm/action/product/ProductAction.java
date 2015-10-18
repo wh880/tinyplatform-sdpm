@@ -169,7 +169,7 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/list")
-    public String list(Product product,
+    public String list(Product product,String treeId,
                        @RequestParam(required = false, defaultValue = "1") int page,
                        @RequestParam(required = false, defaultValue = "10") int pagesize,
                        @RequestParam(required = false, defaultValue = "productId") String order,
