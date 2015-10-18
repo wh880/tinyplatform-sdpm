@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+/*import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
@@ -24,9 +24,9 @@ import org.tinygroup.sdpm.util.LogUtil.LogAction;
 import org.tinygroup.sdpm.util.LogUtil.LogOperateObject;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
-@Controller
+*/@Controller
 @RequestMapping("a/system")
-public class HolidayAction extends BaseController{
+public class HolidayAction extends BaseController{/*
 	@Autowired
 	private HolidayService holidayService;
 	@Autowired
@@ -186,4 +186,4 @@ public class HolidayAction extends BaseController{
 		return "/system/page/holiday/holiday-dynamic.pagelet";
 	}
 	
-}
+*/}

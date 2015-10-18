@@ -83,4 +83,9 @@ public class UserServiceImpl implements UserService {
         }
         return userList;
     }
+
+	public String getNameById(String id) {
+
+		return userManager.getNameById(id);
+	}
 }
