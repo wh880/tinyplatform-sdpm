@@ -133,9 +133,16 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/find/{forword}")
-    public String find(@PathVariable(value = "forword") String forword, Integer productLineId, Model model, HttpServletRequest request) {
-        if (productLineId == null) {
-            productLineId = (Integer) request.getSession().getAttribute("sessionProductLineId");
+    public String find(@PathVariable(value = "forword") String forword,Integer productId,Integer productLineId, Model model, HttpServletRequest request) {
+    	
+    	
+    	if (productLineId == null) {
+    		if(request.getSession().getAttribute("sessionProductLineId")!=null){
+    			 productLineId = (Integer) request.getSession().getAttribute("sessionProductLineId");
+    		}else if(productId!=null){
+    			productLineId = productService.findProduct(productId).getProductLineId();
+    		}
+           
         }
         ProductLine productLine = productLineService.findProductLine(productLineId);
         model.addAttribute("productLine", productLine);

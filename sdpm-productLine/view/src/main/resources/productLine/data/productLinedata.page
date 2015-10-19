@@ -16,9 +16,9 @@
     #@td()${productLine?.deptId}#end
     #@td()${productLine?.productLineRoot}#end
     #@td()${productLine?.productLineParent}#end
-    #@td()${productLine?.productLineOwner}#end
-    #@td()${productLine?.productLineQualityManager}#end
-    #@td()${productLine?.productLineDeliveryManager}#end
+    #@td()${productLine?.ownerName}#end
+    #@td()${productLine?.qualityManagerName}#end
+    #@td()${productLine?.deliveryManagerName}#end
     #@td()${productLine?.productLineStatus}#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("productLine-all"))

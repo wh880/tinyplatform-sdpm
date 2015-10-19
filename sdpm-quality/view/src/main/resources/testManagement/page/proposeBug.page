@@ -36,7 +36,7 @@
 								#if(product?.deleted==0)
 	                       		 <option value="${product?.productId}">${product?.productName}</option>
 								#end
-	                       	 #end	                     
+	                       	 #end
 	                    	#end
 							<script type="text/javascript">
 								$("#${sid}").on("change",function(){
@@ -103,11 +103,8 @@
 					 #@Tselect2F()
 							#@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
 
-	                    	#end                
-#*	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
-	                    	#end*#
+	                    	#end
+
                 	  #end
                 	 #end
 				#end
@@ -124,7 +121,7 @@
 								#foreach(user : userList)
 								<option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
 								#end
-	                    	#end                
+	                    	#end
 	                       ###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 	 		#end
                 	  #end
@@ -139,12 +136,13 @@
 					#tinyInput("text" "bugTitle" bug?.bugTitle {"datatype":"*","id":"版本","class":"input-text"})
 				#end
 				#@div(divClass="col-0")&nbsp&nbsp#end
-                	 #@div(divClass="col-3")					
+                	 #@div(divClass="col-3")
 					#@tinySelect("priority" bug?.priority {"class":"select2"})
-					#for(pri : getDict("bugSeverity"))
+					#for(pri : getDict("bugPriority"))
 							#@tinyOptionItem(pri.value)${pri.text}#end
 					#end
 					#end
+				#end
 				#end
 				#@validateDiv("col-2")#end
 			#end
@@ -162,7 +160,7 @@
 							 #@Tselect2F()
 	                   		 #@Tselect2Body("storyId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
-	                    	#end                
+	                    	#end
 	                      	#@Tselect2Fix()
 	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
 	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">全部</a>#end
@@ -177,7 +175,7 @@
 					 #@Tselect2F()
 							#@Tselect2Body("taskId" bug?.taskId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
-	                    	#end                
+	                    	#end
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/add.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">全部</a>#end
@@ -189,7 +187,7 @@
 			#@elementItem()
 				#@colLabel()类型/严重程度：#end
 				#@formControlDiv("col-8")
-					#@div(divClass="col-5")					                	  
+					#@div(divClass="col-5")
 					#@tinySelect("bugType" bug?.bugType {"class":"select2"})
 					#for(type : getDict("bugType"))
 							#@tinyOptionItem(type.value)${type.text}#end
@@ -203,7 +201,7 @@
 	                        #for(se : getDict("bugSeverity"))
                                  #@tinyOptionItem(se.value)${se.text}#end
                             #end
-	                    	#end                
+	                    	#end
 	                    	###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 	  #end
 					#end
@@ -212,18 +210,19 @@
 			#@elementItem()
 				#@colLabel()系统/浏览器：#end
 				#@formControlDiv("col-8")
-					#@div(divClass="col-5")					 
+					#@div(divClass="col-5")
 					#@tinySelect("operatingSystem" bug?.operatingSystem {"class":"select2"})
 					#for(os : getDict("bugOS"))
 							#@tinyOptionItem(os.value)${os.text}#end
-
+                    #end
 					#end
 					#end
 					#@div(divClass="col-0")&nbsp&nbsp#end
-					#@div(divClass="col-3")					
+					#@div(divClass="col-3")
 					#@tinySelect("browser" bug?.browser {"class":"select2"})
 					#for(bro : getDict("bugBrowser"))
 							#@tinyOptionItem(bro.value)${bro.text}#end
+					#end
 					#end
 					#end
 				#end
@@ -243,7 +242,7 @@
 				#end
 				#@validateDiv("col-2")#end
 			#end
- 
+
 			#@elementItem()
 				#@colLabel()关键词：#end
 				#@formControlDiv("col-8")
@@ -255,9 +254,9 @@
 			#end
 			#@elementItem()
 				#@colLabel()附件：#end
-				#@formControlDiv("col-8")					
+				#@formControlDiv("col-8")
 					#include("/testManagement/page/fileupload.page")
-#*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#				
+
 				#end
 				#@validateDiv("col-2")#end
 			#end
@@ -268,8 +267,7 @@
             	</div>
             	<div class="col-1"></div>
             	<div class="col-1">
-#*                <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/Bug.page">
-                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>*#
+
                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
            		 </div>
             	<div class="col-5"></div>
