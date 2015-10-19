@@ -46,8 +46,8 @@
 								})
 							</script>
 	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
                 	  #end
 					#end
 					#@div(divClass="col-0")&nbsp;&nbsp#end
@@ -88,8 +88,8 @@
 				})
 			</script>
 	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd" class="r ">增加</a>
+	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>
 	                    	#end
                 	  #end
                 	 #end
