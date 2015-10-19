@@ -111,4 +111,6 @@ public interface UserManager {
      * @return
      */
     String getNameById(String id);
+
+    List<OrgUser> findUserListByIds(Integer... storyId);
 }

@@ -97,10 +97,10 @@ public interface UserService {
     /**
      * 根据用户id数组查出用户list
      *
-     * @param userIds
+     * @param
      * @return
      */
-    List<OrgUser> findUserListByIds(String[] userIds);
+    List<OrgUser> findUserListByIds(Integer... storyId);
     
     /**
      * 根据id查找名字
