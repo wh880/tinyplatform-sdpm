@@ -111,11 +111,9 @@
                     #@td()
                      #@Tselect2F()
 	                   		 #@Tselect2Body("bugType" bug?.bugType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">代码错误</option>
-	                        <option value="ME">界面优化</option>
-	                        <option value="MD">设计缺陷</option>
-	                        <option value="MD">配置相关</option>
-	                        <option value="MD">安装部署</option>
+	                        #for(type : getDict("bugType"))
+	                        <option value="${type.value}">${type.text}</option>
+	                        #end
 	                    	#end                
 	                    	#@Tselect2Fix()
 	                    		<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/proposeBug.page" class="r">增加</a>
@@ -130,9 +128,9 @@
                     #@td()
                     	#@Tselect2F()
 	                   		 #@Tselect2Body("priority" bug?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">1</option>
-	                        <option value="2">2</option>
-	                        <option value="3">3</option>
+	                        #for(pri : getDict("bugSeverity"))
+                                    #@tinyOptionItem(pri.value)${pri.text}#end
+                            #end
 	                    	#end                
                 	  #end
                 	#end
@@ -142,9 +140,9 @@
                     #@td()
                     	#@Tselect2F()
 	                   		 #@Tselect2Body("bugStatus" bug?.bugStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">激活</option>
-	                        <option value="2">已解决</option>
-                            <option value="2">已关闭</option>
+	                        #for(status : getDict("bugStatus"))
+                                    #@tinyOptionItem(status.value)${status.text}#end
+                            #end
 	                    	#end                
                 	  	#end
                     #end
@@ -168,21 +166,10 @@
                     #@th()操作系统#end
                     #@td()
                     #@Tselect2F()
-	                   		 #@Tselect2Body("operatingSystem" bug?.operatingSystem {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="A">全部</option>
-	                        <option value="B">Windows</option>
-	                        <option value="C">Windows 8</option>
-	                        <option value="D">Windows 7</option>
-	                        <option value="E">Windows XP</option>
-	                        <option value="F">Android</option>
-	                        <option value="G">WP8</option>
-	                        <option value="H">WP7</option>
-	                        <option value="I">Symbian</option>
-	                        <option value="J">Linux</option>
-	                        <option value="K">OSX</option>
-	                        <option value="L">Unix</option>
-	                        <option value="M">其他</option>
-	                        <option value="N">同上</option>	                        
+                             #@Tselect2Body("operatingSystem" bug?.operatingSystem {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                             #for(os : getDict("bugOS"))
+                                    #@tinyOptionItem(os.value)${os.text}#end
+                            #end
 	                    	#end 
 	                  #end               
                 	#end
@@ -192,23 +179,9 @@
                     #@td()
 						#@Tselect2F()
 	                   		 #@Tselect2Body("browser" bug?.browser {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="A">全部</option>
-	                        <option value="B">IE系列</option>
-	                        <option value="C">IE11</option>
-	                        <option value="D">IE10</option>
-	                        <option value="E">IE9</option>
-	                        <option value="F">IE8</option>
-	                        <option value="G">IE7</option>
-	                        <option value="H">chrome</option>
-	                        <option value="I">Firefox系列</option>
-	                        <option value="J">Firefox4</option>
-	                        <option value="K">Firefox2</option>
-	                        <option value="L">opera系列</option>
-	                        <option value="M">opera11</option>
-	                        <option value="N">opera10</option>
-	                        <option value="O">Safari</option>
-	                        <option value="P">其他</option>
-	                        <option value="Q">同上</option>	                        
+	                        #for(bro : getDict("bugBrowser"))
+                                    #@tinyOptionItem(bro.value)${bro.text}#end
+                            #end
 	                    	#end                
                 		#end
                     #end
@@ -362,9 +335,9 @@
                     #@td()
                     #@Tselect2F()
 	                   		 #@Tselect2Body("bugResolution" bug?.bugResolution {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">方案1</option>
-	                        <option value="2">方案2</option>
-	                        <option value="3">方案3</option>
+	                         #for(re : getDict("bugResolution"))
+                                    #@tinyOptionItem(re.value)${re.text}#end
+                            #end
 	                    	#end                
                 	  #end
                 	  #end

@@ -141,10 +141,8 @@
 				#@div(divClass="col-0")&nbsp&nbsp#end
                 	 #@div(divClass="col-3")					
 					#@tinySelect("priority" bug?.priority {"class":"select2"})
-							#@tinyOptionItem("3")1#end
-							#@tinyOptionItem("1")2#end
-							#@tinyOptionItem("2")3#end
-							
+					#for(pri : getDict("bugSeverity"))
+							#@tinyOptionItem(pri.value)${pri.text}#end
 					#end
 					#end
 				#end
@@ -193,27 +191,18 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")					                	  
 					#@tinySelect("bugType" bug?.bugType {"class":"select2"})
-							#@tinyOptionItem("A")代码错误#end
-							#@tinyOptionItem("B")界面优化#end
-							#@tinyOptionItem("C")设计缺陷#end
-							#@tinyOptionItem("D")配置相关#end
-							#@tinyOptionItem("E")安装部署#end
-							#@tinyOptionItem("F")安全相关#end
-							#@tinyOptionItem("G")性能问题#end
-							#@tinyOptionItem("H")标准规范#end
-							#@tinyOptionItem("I")测试脚本#end
-							#@tinyOptionItem("J")代码改进#end
-							#@tinyOptionItem("K")其他#end
-							#@tinyOptionItem("L")同上#end
+					#for(type : getDict("bugType"))
+							#@tinyOptionItem(type.value)${type.text}#end
+					#end
 					#end
 					#end
 					#@div(divClass="col-0")&nbsp&nbsp#end
 					#@div(divClass="col-3")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("bugSeverity" bug?.bugSeverity {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">1</option>
-	                        <option value="2">2</option>
-	                        <option value="3">3</option>
+	                        #for(se : getDict("bugSeverity"))
+                                 #@tinyOptionItem(se.value)${se.text}#end
+                            #end
 	                    	#end                
 	                    	###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 	  #end
@@ -225,47 +214,16 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")					 
 					#@tinySelect("operatingSystem" bug?.operatingSystem {"class":"select2"})
-							#@tinyOptionItem("1")全部#end
-							#@tinyOptionItem("2")Windows#end
-							#@tinyOptionItem("3")Windows 8#end
-							#@tinyOptionItem("4")Windows 7#end
-							#@tinyOptionItem("5")Windows Vista#end
-							#@tinyOptionItem("6")Windows XP#end
-							#@tinyOptionItem("7")Android#end
-							#@tinyOptionItem("8")WP7#end
-							#@tinyOptionItem("9")Symbian#end
-							#@tinyOptionItem("10")Linux#end
-							#@tinyOptionItem("11")OSX#end
-							#@tinyOptionItem("11")Unix#end
-							#@tinyOptionItem("11")其他#end
-							#@tinyOptionItem("12")同上#end
+					#for(os : getDict("bugOS"))
+							#@tinyOptionItem(os.value)${os.text}#end
+
 					#end
 					#end
 					#@div(divClass="col-0")&nbsp&nbsp#end
 					#@div(divClass="col-3")					
 					#@tinySelect("browser" bug?.browser {"class":"select2"})
-							#@tinyOptionItem("A")全部#end
-							#@tinyOptionItem("B")IE系列#end
-							#@tinyOptionItem("C")IE11#end
-							#@tinyOptionItem("D")IE10#end
-							#@tinyOptionItem("E")IE9#end
-							#@tinyOptionItem("F")IE8#end
-							#@tinyOptionItem("G")IE7#end
-							#@tinyOptionItem("H")IE6#end
-							#@tinyOptionItem("I")chrome#end
-							#@tinyOptionItem("J")Firefox系列#end
-							#@tinyOptionItem("K")Firefox4#end
-							#@tinyOptionItem("L")Firefox3#end
-							#@tinyOptionItem("M")Firefox2#end
-							#@tinyOptionItem("N")opera系列#end
-							#@tinyOptionItem("O")opera10#end
-							#@tinyOptionItem("P")opera9#end
-							#@tinyOptionItem("Q")Safari#end
-							#@tinyOptionItem("R")遨游#end
-							#@tinyOptionItem("S")UC#end
-							#@tinyOptionItem("T")其他#end
-							#@tinyOptionItem("U")同上#end
-							
+					#for(bro : getDict("bugBrowser"))
+							#@tinyOptionItem(bro.value)${bro.text}#end
 					#end
 					#end
 				#end
