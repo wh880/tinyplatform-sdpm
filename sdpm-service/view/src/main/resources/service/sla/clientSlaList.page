@@ -28,7 +28,8 @@
                                 #end
                                 #@tr()
                                     #@th()服务级别#end
-                                    #@td()${var.serviceLevel}#end
+                                    #@td()${getDict("serviceLevel",var?.serviceLevel)}#end
+
                                 #end
                                 #@tr()
                                     #@th()协议内容#end

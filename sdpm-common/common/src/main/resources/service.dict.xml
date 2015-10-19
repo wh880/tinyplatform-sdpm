@@ -44,7 +44,13 @@
     </dictNodeEntry>
 
     <dictNodeEntry name="sla" title="协议">
-        <dictNodeEntry name="slaStatus" title="协议状态">
+        <dictNodeEntry name="serviceLevel" title="协议级别">
+            <dictItem key="0" value="基础" sort="1"/>
+            <dictItem key="1" value="潜力" sort="2"/>
+            <dictItem key="2" value="核心" sort="3"/>
+            <dictItem key="3" value="vip" sort="4"/>
+        </dictNodeEntry>
+        <dictNodeEntry name="slaStatus" title="协议级别协议">
             <dictItem key="0" value="新建" sort="1"/>
             <dictItem key="1" value="生效" sort="2"/>
             <dictItem key="2" value="到期" sort="3"/>
