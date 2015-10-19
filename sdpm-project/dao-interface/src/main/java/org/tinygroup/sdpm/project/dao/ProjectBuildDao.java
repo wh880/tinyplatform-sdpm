@@ -32,5 +32,5 @@ public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
     
 	List<ProductAndLine> getProductLineTree(ProductLine t);
 
-    public ProjectStory findBuildStory(Integer buildId);
+    public List<ProjectStory> findBuildStory(Integer buildId);
 }
