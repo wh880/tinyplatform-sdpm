@@ -96,7 +96,7 @@ public class ProfileUtil extends BaseController{
 					uploadNoTitle(upfile[i], id, type);
 				} catch (IOException e) {
 					
-					e.printStackTrace();
+
 				}
 			   }
 		   }
