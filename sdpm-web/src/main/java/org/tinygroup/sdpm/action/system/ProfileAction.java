@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.net.ssl.SSLEngineResult.Status;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,11 +32,15 @@ public class ProfileAction extends BaseController{
 	}
 	
 	@RequiresPermissions(value="{doc-file-edit}")
+	@ResponseBody
 	@RequestMapping("edit/{type}")
-	public String eidt(SystemProfile profile,@PathVariable(value="type")String type,Model model){
+	public Map<String, String> eidt(SystemProfile profile,@PathVariable(value="type")String type,Model model){
+		Map<String,String> map = new HashedMap();
 		if("doc".equals(type)){
 			profileService.editTitle(profile);
-			return "a/document/doc/view?docid="+profile.getFileObjectId();
+			map.put("status", "y");
+			map.put("info", "修改成功");
+			return map;
 		}
 		return null;
 	}
