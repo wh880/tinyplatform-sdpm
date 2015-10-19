@@ -29,9 +29,9 @@
               isShow="1" scope="testbuginfo-tab"></menu>
          <menu id="tbugremark" name="备注" href="" icon="icon-comment-alt" sort="2"
               isShow="1" scope="testbuginfo-tab"></menu>
-         <menu id="tbugdelete" name="删除" href="" icon="icon-remove" sort="1"
+         <menu id="tbugdelete" name="删除" href="/quality/bug/delete" icon="icon-remove" sort="1"
               isShow="1" scope="testbuginfo-tab"></menu>
-         <menu id="tbugback" name="返回" href="/testManagement/page/Bug.page" icon="icon-level-up" sort="1"
+         <menu id="tbugback" name="返回" href="/quality/bug" icon="icon-level-up" sort="1"
               isShow="1" scope="testbuginfo-tab"></menu> 
          <menu id="tbugnext" name="下一个Bug" href="/testManagement/page/bugInfo.page" icon="icon-chevron-right" sort="1"
               isShow="1" scope="testbuginfo-tab"></menu> 

@@ -18,10 +18,10 @@
     #@td()${var?.priority}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${var?.bugId}">[${var?.bugConfirmed==1?"已确认":"未确认"}]${var?.bugTitle}</a>#end
     #@td()${getDict("bugStatus",var?.bugStatus)}#end
-    #@td()${getUserName(var?.bugOpenedBy)}#end
+    #@td()#*${UserUtils.get(var?.bugOpenedBy)?.orgUserRealName}*# #end
     #@td()${formatDate(var?.bugOpenedDate,"yyyy-MM-dd")}#end
-    #@td()${getUserName(var?.bugAssignedTo)}#end
-    #@td()${getUserName(var?.bugResolvedBy)}#end
+    #@td()#*${UserUtils.get(var?.bugAssignedTo)?.orgUserRealName}*# #end
+    #@td()#*${UserUtils.get(var?.bugResolvedBy)?.orgUserRealName}*# #end
     #@td()${getDict("bugResolution",var?.bugResolution?:0)}#end
     #@td()${formatDate(var?.bugResolvedDate,"yyyy-MM-dd")}#end
     #@td()
@@ -57,8 +57,7 @@
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
 		 #end
-    ##"icon-pencil"
-    ##buttonRadiusLink(caption="/testManagement/page/proposeBug")
+
     #end
 #end
 #end

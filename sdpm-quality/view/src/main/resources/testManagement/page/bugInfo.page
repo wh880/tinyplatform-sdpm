@@ -30,31 +30,71 @@
 			Bug概况</span>
 		<span class="r">
 			#foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
-				#if(m.id=="tbugnote")
+                				#if(m.id=="tmakesure")
+                                    #if(qualityBug?.bugConfirmed==1)
+                                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>&nbsp;&nbsp;
+                                    #else
+                                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                                    #end
+                                #elseif(m.id=="tassign")
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                                #elseif(m.id=="tsolution")
+                                    #if(var?.bugStatus!="1")
+                                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>&nbsp;&nbsp;
+                                    #else
+                                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                                    #end
+                                #elseif(m.id=="tbugadddemand"||m.id=="add-case")
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                                #else
+                				#end
 
-				#else
-				#if(m.id=="tmakesure"||m.id=="tassign"||m.id=="tsolution"||m.id=="tbugadddemand"||m.id=="add-case")					
-					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}">
-						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp&nbsp;
-				#else
-				#if(m.id=="tedition"||m.id=="tproposeBug"||m.id=="tbugback"||m.id=="tbugnext")
+                			#end
+#foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
+
+				#if(m.id=="tedition"||m.id=="tproposeBug"||m.id=="tbugback")
 					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">
 							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
-				#else
-				#if(m.id=="tbugremark")
+				#elseif(m.id=="tbugremark")
 					<a  title="备注" onclick="toggle()">
 						#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
+				#elseif(m.id=="tbugdelete")
+				    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">
+                    							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                #elseif(m.id=="tbugnext")
+                    #if(nextId<1)
+                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>&nbsp;&nbsp;
+                    #else
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${nextId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                    #end
 				#else
-					#@delItemsdpm("/sdpm-web/testManagement/page/Bug.page" 3 "/sdpm-web/testManagement/page/Bug.page")
-						#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp
-				#end
-				#end
-				#end
-				#end
-			#end
 
+				#end
+
+			#end
 	#end
-	#@tinyForm("thisform" "url" "post" {"class":""})
+	#@tinyForm("thisform" TINY_CONTEXT_PATH+"/a/quality/bug/addComment?bugId="+qualityBug?.bugId "post" {"class":""})
+	<script type="text/javascript">
+	$("#${fromId}").submit(function(){
+        var url = $(this).attr('action');
+        $.ajax({
+            type: "POST",
+            url:url,
+            data:$("#${fromId}").serialize(),// 你的formid
+            async: false,
+            error: function(request) {
+                alert("Connection error");
+            },
+            success: function(data) {
+            if(data.status == "success"){
+                window.location.reload();
+            };
+            }
+        });
+        return false;
+    });
+
+    </script>
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
     		<p class="titleName">重现步骤</p>
@@ -69,28 +109,49 @@
     	#history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+qualityBug?.bugId)
         <center>
        		#foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
-				#if(m.id=="tbugnote")
+                #if(m.id=="tmakesure")
+                    #if(qualityBug?.bugConfirmed==1)
+                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>&nbsp;&nbsp;
+                    #else
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                    #end
+                #elseif(m.id=="tassign")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                #elseif(m.id=="tsolution")
+                    #if(var?.bugStatus!="1")
+                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>&nbsp;&nbsp;
+                    #else
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                    #end
+                #elseif(m.id=="tbugadddemand"||m.id=="add-case")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                #else
+                #end
 
-				#else 
-				#if(m.id=="tmakesure"||m.id=="tassign"||m.id=="tsolution"||m.id=="tbugadddemand"||m.id=="add-case")					
-					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}">
-						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp&nbsp;
-				#else
-				#if(m.id=="tedition"||m.id=="tproposeBug"||m.id=="tbugback"||m.id=="tbugnext")
-					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">
-							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
-				#else
-				#if(m.id=="tbugremark")
-					<a  title="备注" onclick="toggle()">
-						#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
-				#else
-					#@delItemsdpm("/sdpm-web/testManagement/page/Bug.page" 3 "/sdpm-web/testManagement/page/Bug.page")
-						#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp
-				#end
-				#end
-				#end		
-				#end				
-			#end
+                            			#end
+            #foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
+
+            				#if(m.id=="tedition"||m.id=="tproposeBug"||m.id=="tbugback")
+            					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">
+            							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+            				#elseif(m.id=="tbugremark")
+            					<a  title="备注" onclick="toggle()">
+            						#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
+            				#elseif(m.id=="tbugdelete")
+            				    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">
+                                							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                            #elseif(m.id=="tbugnext")
+                                #if(nextId<1)
+                                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>&nbsp;&nbsp;
+                                #else
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${nextId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                                #end
+            				#else
+
+            				#end
+
+            			#end
+
 			</center>
 		#@div(divId="comment" divStyle="display:none;" divClass="infoContent")
 			<p class="titleName">备注</p>
@@ -132,5 +193,6 @@ function toggle()
    else
     comment.style.display='none';
 }
+
 </script>
 
