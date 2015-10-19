@@ -48,7 +48,7 @@ public class ProductLineManagerImpl implements ProductLineManager{
 	public Pager<ProductLine> findPager(int page, int pagesize, ProductLine productLine, String order,
 			String ordertype) {
 		
-		return productLineDao.queryPager((page-1)*pagesize, pagesize, productLine, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+		return productLineDao.findList((page-1)*pagesize, pagesize, productLine, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public int[] updateBatch(List<ProductLine> productLine) {

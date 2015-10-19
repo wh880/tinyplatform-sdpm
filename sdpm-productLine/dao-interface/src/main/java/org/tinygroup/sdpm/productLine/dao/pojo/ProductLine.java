@@ -24,6 +24,21 @@ import java.util.Date;
  * 
  */
 public class ProductLine implements Serializable{
+	
+	/**
+	 * 经理名称
+	 */
+	private String ownerName;
+	
+	/**
+	 * 质量经理
+	 */
+	private String qualityManagerName;
+	
+	/**
+	 * 交付经理
+	 */
+	private String deliveryManagerName;
 
 	/** 
 	 * 产品线ID
