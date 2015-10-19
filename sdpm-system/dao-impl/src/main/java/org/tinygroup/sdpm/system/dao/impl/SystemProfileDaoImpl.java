@@ -278,7 +278,7 @@ public class SystemProfileDaoImpl extends TinyDslDaoSupport implements SystemPro
 			public Update generate(SystemProfile t) {
 				Update update = update(SYSTEM_PROFILETABLE).set(
 					
-					SYSTEM_PROFILETABLE.FILE_DELETED.value(0)).where(
+					SYSTEM_PROFILETABLE.FILE_DELETED.value(1)).where(
 					SYSTEM_PROFILETABLE.FILE_ID.eq(t.getFileId()));
 				return update;
 			}

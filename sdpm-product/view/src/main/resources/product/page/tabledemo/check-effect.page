@@ -51,9 +51,9 @@
 						    		#@td()  ${bug?.bugTitle} #end
 						    		#@td()  ${bug?.bugStatus} #end
 						    		#@td()  ${bug?.bugOpenedBy} #end
-						    		#@td()  ${bug?.bugResolvedBy}#end
-						    		#@td() ${bug?.bugResolution}#end
-						    		#@td() ${bug?.bugLastEditedBy}#end
+						    		#@td()  ${bug?.bugResolvedBy} #end
+						    		#@td() ${bug?.bugResolution} #end
+						    		#@td() ${bug?.bugLastEditedBy} #end
 					    		#end
 					    		
 					    	#end

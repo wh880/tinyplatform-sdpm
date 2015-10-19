@@ -64,11 +64,15 @@ public class SdpmDictLoader extends AbstractDictLoader{
     public DictItem getDictItem(DictManager manager,String groupType, String key){
         Dict dict = manager.getDict(nodeMap.get(groupType),null);
         for(DictGroup group : dict.getDictGroupList()){
-            for(DictItem item : group.getItemList()){
-                if(item.getValue().equals(key)){
-                    return item;
+            if(group.getName().equals(groupType)){
+                for(DictItem item : group.getItemList()){
+                    if(item.getValue().equals(key)){
+                        return item;
+                    }
                 }
+                return null;
             }
+
         }
         return null;
     }

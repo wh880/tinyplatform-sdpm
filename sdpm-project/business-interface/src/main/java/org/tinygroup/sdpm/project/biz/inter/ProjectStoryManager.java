@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
@@ -81,4 +82,13 @@ public interface ProjectStoryManager {
      * @return
      */
     public Integer deleteByProjectStory(Integer projectId, Integer storyId);
+    /**
+     * 根据项目和需求删除关联
+     *
+     * @param
+     * @param
+     * @return
+     */
+    public Pager<ProjectStory> findPager(int start, int limit, ProjectStory story, String statusCondition, SearchInfos conditions,
+                                         String groupOperate, String columnName, boolean asc);
 }

@@ -36,14 +36,11 @@
                             <div style="width:150px">
                                 #@Tselect2F()
                                     #@Tselect2Body(
-                                        "lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                        <option value="CT">Connecticut</option>
-                                        <option value="DE">Delaware</option>
-                                        <option value="FL">Florida</option>
-                                        <option value="GA">Georgia</option>
-                                        <option value="IN">Indiana</option>
-                                        <option value="ME">Maine</option>
-                                        <option value="MD">Maryland</option>
+                                        "orgUserAccount" u?.orgUserAccount {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                        #for(u:user)
+                                        <option class="selUser" value=${u?.orgUserAccount}>${u?.orgUserAccount}</option>
+                                        #end
+                                        
                                     #end
                                 #end
                             </div>
@@ -71,7 +68,7 @@
         });
 
         $(".selUser").click(function(e){
-            $("#noteTable").attr("data-url", actionUrl + "?teamAccount=" + $(this).attr("val"));
+            $("#noteTable").attr("data-url", actionUrl + "?effortAccount=" + $(this).attr("value"));
             $("#noteTable").trigger("refresh");
         });
     });

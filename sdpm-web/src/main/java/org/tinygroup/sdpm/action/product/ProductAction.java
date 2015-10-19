@@ -211,9 +211,13 @@ public class ProductAction extends BaseController {
         if (request.getSession().getAttribute("sessionProductLineId") != null) {
 
             productLineId = (Integer) request.getSession().getAttribute("sessionProductLineId");
+        }else{
+        	List<ProductLine> lines = productLineService.findlist(new ProductLine());
+        	ProductLine productLine = lines.size()>0?lines.get(0):null;
+        	request.getSession().setAttribute("sessionProductLineId", productLine!=null?productLine.getProductLineId():null);
+            model.addAttribute("productLine", productLine);
         }
-        ProductLine productLine = productLineService.findProductLine(productLineId);
-        model.addAttribute("productLine", productLine);
+       
 
 
 		if ("addproduct".equals(forward)) {

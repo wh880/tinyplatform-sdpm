@@ -77,4 +77,10 @@ public interface BuildService {
 	 * @return
 	 */
 	List<ProductAndLine> getProductLineTree(ProductLine t);
+    /**
+     * 需求分页
+     * @param projectBuild
+     * @return
+     */
+    public Pager<ProjectBuild> findPagerBuild(ProjectBuild projectBuild, Integer start, Integer limit, String order, boolean asc);
 }

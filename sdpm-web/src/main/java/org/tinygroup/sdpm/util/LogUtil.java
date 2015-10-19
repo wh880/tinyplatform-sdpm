@@ -1,7 +1,5 @@
 package org.tinygroup.sdpm.util;
 
-import org.tinygroup.sdpm.common.log.obtain.impl.ObtainHandleImpl;
-import org.tinygroup.sdpm.common.log.obtain.inter.ObtainHandle;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.impl.LogServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.LogService;
@@ -22,7 +20,7 @@ public class LogUtil {
     public static void logWithComment(LogOperateObject objectType, LogAction action, String objectId, String userId,
                                       String productId, String projectId,
                                       Object oldObject, Object newObject, String comment) {
-        saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, productId, projectId, oldObject, newObject, comment);
+        saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, projectId, productId, oldObject, newObject, comment);
     }
 
     public static void changeLog(LogOperateObject objectType, LogAction action, String objectId, String userId,
@@ -121,7 +119,8 @@ public class LogUtil {
         REPLY("reply"),
         REVIEW("review"),
         HOLIDAY("holiday"),
-        REQUEST("request");
+        REQUEST("request"),
+        PRODUCTLINE("productLine");
         private final String operateObject;
 
         LogOperateObject(String value) {
