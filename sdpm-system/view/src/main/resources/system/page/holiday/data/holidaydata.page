@@ -6,7 +6,7 @@
 	#@td()<input type="checkbox" value="${h?.holidayId}" name="idCheck">#end
 	#@td()${h?.holidayId}#end
 	#@td()
-		<a title="国庆节"  href="${TINY_CONTEXT_PATH}/system/holiday/find?holidayId=${h?.holidayId}">${h?.holidayName}</a>
+		<a title="国庆节"  href="${TINY_CONTEXT_PATH+adminPath}/system/holiday/find?holidayId=${h?.holidayId}">${h?.holidayName}</a>
 	#end
 	#@td()${h?.holidayDate}#end
 	#@td()${h?.holidayAccount}#end

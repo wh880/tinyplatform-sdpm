@@ -128,7 +128,7 @@ public class EffortAction extends BaseController{
    		return map;
 	}
 	@RequestMapping("date")
-	public String findByDate(int start,int limit,String order ,String ordertype,  int date,SystemEffort systemEffort,Model model) throws ParseException{
+	public String findByDate(int start,int limit,String order ,String ordertype,@RequestParam(required = false, defaultValue = "0")int date,SystemEffort systemEffort,Model model) throws ParseException{
 		Date startDate = new Date();
 		Date endDate = new Date();
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");

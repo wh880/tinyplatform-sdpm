@@ -77,8 +77,6 @@ public class FaqAction extends BaseController {
     public String list(ServiceFaq serviceFaq, Integer id, String faqQuestion,
                        @RequestParam(required = false, defaultValue = "1") int page,
                        @RequestParam(required = false, defaultValue = "10") int pageSize,
-                       @RequestParam(required = false, defaultValue = "faqId") String order,
-                       @RequestParam(required = false, defaultValue = "asc") String ordertype,
                        Model model) {
         Integer start = (page - 1) * pageSize;
         Integer limit = pageSize;
@@ -134,14 +132,6 @@ public class FaqAction extends BaseController {
 
     /*实现faq里面的左侧树*/
     /*对树的节点进行新增*/
-   /* @RequestMapping("/addTree")
-    public String addDept(Integer faqParentTypeId, String faqType) {
-        ServiceFaqType serviceFaqType = new ServiceFaqType();
-        serviceFaqType.setFaqParentTypeId(faqParentTypeId);
-        serviceFaqType.setFaqType(faqType);
-        faqTypeService.addFaqType(serviceFaqType);
-        return "/service/faq/faqmenu.page";
-    }*/
     @ResponseBody
     @RequestMapping("/addTree")
     public Map addDept(Integer faqParentTypeId, String faqType) {
@@ -154,15 +144,7 @@ public class FaqAction extends BaseController {
         map.put("info", "新增成功");
         return map;
     }
-
     /*对树的节点进行编辑*/
-    /*@RequestMapping("/editTree")
-    public String editDept(Integer faqTypeId, String faqType) {
-        ServiceFaqType type = faqTypeService.findFaqType(faqTypeId);
-        type.setFaqType(faqType);
-        faqTypeService.updateFaqType(type);
-        return "/service/faq/faqmenu.page";
-    }*/
     @ResponseBody
     @RequestMapping("/editTree")
     public Map editDept(Integer faqParentTypeId, Integer faqTypeId, String faqType) {
@@ -177,13 +159,6 @@ public class FaqAction extends BaseController {
         map.put("info", "编辑成功");
         return map;
     }
-
-    /*树里面的节点的删除*/
-   /* @RequestMapping("/deleteTree")
-    public String deleteDept(Integer faqTypeId) {
-        faqTypeService.deleteDept(faqTypeId);
-        return "/service/faq/faqmenu.page";
-    }*/
     /*树里面的节点的删除*/
     @ResponseBody
     @RequestMapping("/deleteTree")
@@ -200,8 +175,6 @@ public class FaqAction extends BaseController {
     public String listTree(ServiceFaq serviceFaq, Integer id, Integer start, Integer limit, Integer faqTypeId,
                            @RequestParam(required = false, defaultValue = "1") int page,
                            @RequestParam(required = false, defaultValue = "10") int pageSize,
-                           @RequestParam(required = false, defaultValue = "faqId") String order,
-                           @RequestParam(required = false, defaultValue = "asc") String ordertype,
                            Model model) {
         start = (page - 1) * pageSize;
         limit = pageSize;
