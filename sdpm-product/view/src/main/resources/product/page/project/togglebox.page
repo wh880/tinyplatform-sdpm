@@ -180,11 +180,10 @@
                                         #@dropdownsLi("dropdown-submenu")
                                             #@dropdownA("firstMenu"　"javascript:void(0);")阶段#end
                                             #@dropdownsUl("dropdown-menu")
-                                            	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStage","value":"none"}) 空 #end
-#*                                            	#for(stage:getDict("storyStage"))
-                                            		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStage","value":stage?.Key}) stage?.value#end
+                                            	#for(stage:getDict("storyStage"))
+                                            		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStage","value":stage?.value}) ${stage?.text}#end
                                             	#end
-                                            	*#
+                                            	
 #*                                            	
                                                 #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")未开始#end
                                                 #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已计划#end
@@ -212,16 +211,16 @@
                                         #@dropdownsLi("dropdown-submenu")
                                             #@dropdownA("firstMenu"　"javascript:void(0);")评审#end
                                             #@dropdownsUl("dropdown-menu dropdown-show")
-                                            	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"yes"}) 确认通过 #end
-                                            	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no"}) 有待明确 #end
+                                            	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"1"})${getDict("storyStatus","1")} #end
+                                            	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"4"}) ${getDict("storyStatus","4")}#end
                                                
                                             #*		                		#@liDivider()<hr/>#end*#
                                                 #@dropdownsLi("dropdown-submenu")
-                                                    #@dropdownA("secondMenu"　"javascript:void(0);")拒绝#end
+                                                    #@dropdownA("secondMenu"　"javascript:void(0);")${getDict("storyStatus","2")}#end
                                                     #@dropdownsUl("dropdown-menu")
-#*                                                    #for(refese:getDict("storyRefese"))
-                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":refese.key}) refese.value #end
-                                                    #end*#
+                                                    #for(refese:getDict("storyRefese"))
+                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":refese?.value}) ${refese.text} #end
+                                                    #end
                                                     	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-1"}) 已完成 #end
                                                     	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-2"}) 延期 #end
                                                     	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-3"}) 不做 #end

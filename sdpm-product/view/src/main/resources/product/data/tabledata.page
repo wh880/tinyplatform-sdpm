@@ -99,7 +99,7 @@
     #@td()${story?.storyOpenedName}#end
     #@td()${story?.storyAssignedName}#end
     #@td()${story?.storyEstimate}#end
-    #@td()${story?.storyStatus}#end
+    #@td()${ getDict("storyStatus",story?.storyStatus) }#end
     #@td()${story?.storyStage}#end
     #@td()
      #foreach(m:menuManager?.getScopeMenus("product-de"))
