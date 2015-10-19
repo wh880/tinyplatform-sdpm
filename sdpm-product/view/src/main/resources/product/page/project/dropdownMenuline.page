@@ -1,62 +1,62 @@
 #import("/org/tinygroup/publicComponent/macro/navselect.component")
 
 #@navSelect2("productLine" "productLine")
-	#@navSelect2Nav()
-		#if(productLineList)
-			#for(productLine : productLineList)
-				#if(productLine?.productLineId == sessionProductLineId)
-					${productLine?.productLineName}
-				#end
-			#end
-		#else
-			产品
-		#end
-	
-	<span class="caret"></span>#end
-	#@navSelect2Body()
-		  #@navSelect2Data()
-		  <option value=""></option>
-		  <optgroup label="产品">
-			  #for(productLine : productLineList)
-			  	<option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
-			  #end
-		  </optgroup>
+    #@navSelect2Nav()
+        #if(productLineList)
+            #for(productLine : productLineList)
+            #if(productLine?.productLineId == sessionProductLineId)
+                ${productLine?.productLineName}
+            #end
+        #end
+    #else
+    产品
+    #end
 
-		#end
-		#@navSelect2Fix()
+<span class="caret"></span>#end
+#@navSelect2Body()
+    #@navSelect2Data()
+    <option value=""></option>
+    <optgroup label="产品">
+        #for(productLine : productLineList)
+        <option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
+    #end
+</optgroup>
 
-        <a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/tabledemo/list.page" class="r">所有产品线</a>&nbsp;
-			<!--新增产品-->
-        <a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/tabledemo/add.page">添加产品线</a>&nbsp;
-			
-		
-		#end
-	#end
+#end
+#@navSelect2Fix()
+
+<a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/tabledemo/list.page" class="r">所有产品线</a>&nbsp;
+<!--新增产品-->
+<a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/tabledemo/add.page">添加产品线</a>&nbsp;
+
+
+#end
+#end
 
 #hiddenInput("productLineIdHidden","productLineId","","")
 
-	<script type="text/javascript">
-		
-		$(function(){
-			$("#productLine-select").on("change",function(){
-				var dateValue = $(this).val();
-                $.post("${TINY_CONTEXT_PATH +adminPath}/productLine/sessionset", {productLineId: dateValue}, function (result) {
-					if(true==result){
-						window.location.reload();
-					}else{
-						alert("产品线ID值为空");
-					}
-				
-				});
-	##				$("#productIdHidden").val($(this).val());
-	##				$(".switchClass").each(function(){
-	##					var hrefnew = this.href + "&productId=" + $("#productIdHidden").val();
-	##					this.href = hrefnew;
-	##				});
-			##				window.location.href='${TINY_CONTEXT_PATH +adminPath}/product/story?currentPageId=3&productId='+$(this).find("option:selected").val();
-			});
-		});
-	
-	</script>
+<script type="text/javascript">
+
+    $(function () {
+        $("#productLine-select").on("change", function () {
+            var dateValue = $(this).val();
+            $.post("${TINY_CONTEXT_PATH +adminPath}/productLine/sessionset", {productLineId: dateValue}, function (result) {
+                if (true == result) {
+                    window.location.reload();
+                } else {
+                    alert("产品线ID值为空");
+                }
+
+            });
+        ##				$("#productIdHidden").val($(this).val());
+        ##				$(".switchClass").each(function(){
+        ##					var hrefnew = this.href + "&productId=" + $("#productIdHidden").val();
+        ##					this.href = hrefnew;
+        ##				});
+        ##				window.location.href='${TINY_CONTEXT_PATH +adminPath}/product/story?currentPageId=3&productId='+$(this).find("option:selected").val();
+        });
+    });
+
+</script>
 #end
 

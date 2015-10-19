@@ -22,7 +22,7 @@
     #@td()${formatDate(var?.bugOpenedDate,"yyyy-MM-dd")}#end
     #@td()${var?.assignedUser}#end
     #@td()${var?.bugResolvedBy}#end
-    #@td()${var?.bugResolution}#end
+    #@td()${getDict("bugResolution",var?.bugResolution)}#end
     #@td()${formatDate(var?.bugResolvedDate,"yyyy-MM-dd")}#end
     #@td()
     	#foreach(m:menuManager.getScopeMenus("testbug-op"))

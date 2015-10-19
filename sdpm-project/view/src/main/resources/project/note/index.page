@@ -55,7 +55,7 @@
 ##
 ##            #fullCalendarInit("#external-events .fc-event" "#calendar")
 ##fcid dataUrl doAction 四个参数 第一个为ID 带入外部可传参 不带则内部生成， 第二为视图日期（格式为2015-01-02），第三为事件的地址 格式请严格按例子来 返回一JSON串 第四个是操作页面 当鼠标点击到事件时会带入ID和action为edit 当点击日期为带入时间date及action为ADD 请后台配合相应的参数执行即可
-            #fullCalendar('fullCalendar' formatDate(date,yyyy-MM-dd) TINY_CONTEXT_PATH+ adminPath+
+            #fullCalendar('fullCalendar' formatDate(date,"yyyy-MM-dd") TINY_CONTEXT_PATH+ adminPath+
                 '/system/effort/event?effortObjectType=task' TINY_CONTEXT_PATH+adminPath+'/system/effort/calendar')
         #end
     #end

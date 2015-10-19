@@ -68,5 +68,9 @@ public class BuildServiceImpl implements BuildService {
 
 		return buildManager.getProductLineTree(t);
 	}
+    public Pager<ProjectBuild> findPagerBuild(ProjectBuild projectBuild, Integer start, Integer limit, String order, boolean asc){
+        return buildManager.findPager(projectBuild,start,limit,order,asc);
+    }
+
 
 }

@@ -118,7 +118,7 @@ public class ProjectAction extends BaseController {
             projectService.updateProject(project);
         }
         model.addAttribute("project", project);
-        return "redirect:" + adminPath + "/projectmanage/survey/index";
+        return "redirect:" + adminPath + "/project/manage/survey/index";
     }
 
     @RequestMapping("/delay")

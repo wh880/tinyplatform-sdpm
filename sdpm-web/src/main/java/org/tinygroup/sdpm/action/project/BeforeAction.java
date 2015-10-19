@@ -17,7 +17,7 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-28.
  */
 @Controller
-@RequestMapping("/a/projectmanage")
+@RequestMapping("/a/project/manage")
 public class BeforeAction extends BaseController {
     @Autowired
     private ProjectService projectService;

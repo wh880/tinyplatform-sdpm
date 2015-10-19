@@ -70,6 +70,7 @@ public class SdpmDictLoader extends AbstractDictLoader{
                         return item;
                     }
                 }
+                return null;
             }
 
         }
