@@ -43,9 +43,11 @@ import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
+import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
@@ -84,6 +86,8 @@ public class StoryAction extends BaseController{
 	private TestCaseService testCaseService;
 	@Autowired
 	private ProjectStoryService projectStoryService;
+	@Autowired
+	private TaskService taskService;
     
     
    
@@ -222,15 +226,19 @@ public class StoryAction extends BaseController{
     	bug.setStoryId(storyId);
     	List<QualityBug> bugList = bugService.findBugList(bug);
     	
+    	List<OrgUser> userList = userService.findUserListByIds(productStory.getStoryMailto().split(","));
+    	
     	
     	
     	List<Project> projectList = projectService.getProjectByStoryId(storyId);
+    	
     	
     	model.addAttribute("story", productStory);
     	model.addAttribute("storySpec", storySpec);
     	model.addAttribute("testCaseList", testCaseList);
     	model.addAttribute("bugList", bugList);
     	model.addAttribute("projectList", projectList);
+    	model.addAttribute("storyMailTo", userList);
     	
     	if("productDemandClose".equals(forwordPager)){
     		
@@ -242,6 +250,11 @@ public class StoryAction extends BaseController{
 			
 			return "/product/page/tabledemo/product-demand-change.page";
 		}else if ("productDemandDetail".equals(forwordPager)) {
+			
+			ProjectTask task = new ProjectTask();
+			task.setTaskStory(storyId);
+			List<ProjectTask> taskList = taskService.findListTask(task);
+			model.addAttribute("taskList", taskList);
 			
 			return "/product/page/tabledemo/hrefbaseinfo.pagelet";
 		}

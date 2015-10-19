@@ -42,14 +42,9 @@
                         "requestType" request?.requestType {"placeholder":"请求类型","datatype":"*","nullmsg":"请求类型不能为空！",
                         "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("0")缺陷#end
-                        #@tinyOptionItem("1")适应性#end
-                        #@tinyOptionItem("2")完善#end
-                        #@tinyOptionItem("3")个性化#end
-                        #@tinyOptionItem("4")全新#end
-                        #@tinyOptionItem("5")训练#end
-                        #@tinyOptionItem("6")支持#end
-                        #@tinyOptionItem("7")疑惑#end
+                        #foreach(item : getDict("requestType"))
+                            #@tinyOptionItem(item.value)${item.text}#end
+                        #end
                     #end
                 #end
             #end
@@ -61,9 +56,9 @@
                         "requestPre" request?.requestPre {"placeholder":"请求优先级","datatype":"*","nullmsg":"请求优先级不能为空！",
                         "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("0")低#end
-                        #@tinyOptionItem("1")中#end
-                        #@tinyOptionItem("2")高#end
+                        #foreach(item : getDict("requestPre"))
+                            #@tinyOptionItem(item.value)${item.text}#end
+                        #end
                     #end
                 #end
             #end
@@ -126,11 +121,9 @@
                         "requestStatus" request?.requestStatus {"placeholder":"请求状态","datatype":"*","nullmsg":
                         "请求状态不能为空！","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("0")新建#end
-                        #@tinyOptionItem("6")待回访#end
-                        #@tinyOptionItem("8")已回访#end
-                        #@tinyOptionItem("2")被拒绝#end
-                        #@tinyOptionItem("1")处理中#end
+                        #foreach(item : getDict("requestStatus"))
+                            #@tinyOptionItem(item.value)${item.text}#end
+                        #end
                     #end
                 #end
             #end

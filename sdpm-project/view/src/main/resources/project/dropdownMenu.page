@@ -31,7 +31,7 @@
         ##            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/project/task/index.page?selItem="
         ##                    + $(this).find("option:selected").text() + "&itemid=" + $(this).val() + "&stat=" + $();
         ##            //val() 选择选择项的value
-            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/projectmanage/select?projectId="
+            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/project/manage/select?projectId="
                     + $(this).find("option:selected").val()
                     + "&oldUrl=${tinyRequestRequestURI.substring(9)}";
             console.log("ggg");

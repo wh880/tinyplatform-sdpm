@@ -32,9 +32,9 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 #set(name="faq")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-       #* #@div(divClass="dropdownBox")
-            #include("/service/serviceCom/dropdownMenu.page")
-        #end*#
+    #* #@div(divClass="dropdownBox")
+         #include("/service/serviceCom/dropdownMenu.page")
+     #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
@@ -57,15 +57,18 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
             #@div(divClass="faqSty")
                 #@topSearch()
                 ##以下为搜索框及其搜索按钮
-                    #simpleText("请输入要搜索的问题" "" "width:25%")
-                    #@btnSubmit("icon-search")&nbsp;搜问题#end
-
-                <span class="r">
+                    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/faq/list" "post" {"class":""})
+                        #simpleText("请输入要搜索的问题" "faqQuestion" "width:25%")
+                    <button type="submit" id="submit" class="btn btn-success "><i class="icon-search"></i>&nbsp;搜问题
+                    </button>
+                    ##                        #@btnSubmit("icon-search")&nbsp;搜问题#end
+                    <span class="r">
                     #set(m1=menuManager.getMenu("faq-add"))
-                    #if(m1)
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}">#buttonIcon(iconClass=m1.icon)${m1.name}</a>
+                        #if(m1)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}">#buttonIcon(iconClass=m1.icon)${m1.name}</a>
+                        #end
+				    </span>
                     #end
-				</span>
                 #end
             ##以下内容，加载faq右边页面-“具体的5个问题以及问题后面的编辑和删除按钮”，包含在faqquestion.page里面
                 #include("/service/faq/faqquestion.page")

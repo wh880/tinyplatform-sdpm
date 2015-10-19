@@ -1,7 +1,7 @@
 #*
 #!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 *#
-
+#set(pltype="addProduct")
 <script>
 
 

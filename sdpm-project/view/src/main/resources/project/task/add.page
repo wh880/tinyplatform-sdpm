@@ -18,8 +18,9 @@
     #end
 #end
 #@tinyForm(
-    "addTaskForm" TINY_CONTEXT_PATH+adminPath+"/project/task/save" "" {"class":"test","enctype":"multipart/form-data"})
-<div style="width:70%;float:left" class="pageleftpart">
+    "addTaskForm" TINY_CONTEXT_PATH+adminPath+"/project/task/save" "post" {"class":"test","enctype":
+    "multipart/form-data"})
+<div class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">建任务</p>
         #@elementItem()
@@ -46,7 +47,7 @@
             #end
         #end
         #@elementItem()
-            #@sdpmItem("任务类型")
+            #@sdpmItem("任务类型" "*")
                 #@Tselect2F()
                     #@Tselect2Body(
                         "taskType" "" {"class":"input-text select2","placeholder":"任务类型","datatype":"*","nullmsg":
@@ -93,7 +94,7 @@
             #end
         #end
         #@elementItem()
-            #@sdpmItem("任务名称")
+            #@sdpmItem("任务名称" "*")
                 #@formControlDiv("col-8")
                     #tinyInput(
                         "text" "taskName" "" {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
@@ -108,7 +109,7 @@
                 ##                        "text" "taskDesc" "任务描述"{"placeholder":"任务描述","datatype":"*4-16","id":
                 ##                        "username",
                 ##                        "class":"input-text"})
-                    #@Teditor("taskDesc" "taskDesc" {"initialFrameHeight":"150","initialFrameWidth":"500"})#end
+                    #@Teditor("taskDesc" "taskDesc" {"initialFrameHeight":"150","initialFrameWidth":"700"})#end
                 #end
             #end
         #end
@@ -129,9 +130,12 @@
         #@elementItem()
             #@sdpmItem("最初预计")
                 #@formControlDiv("col-8")
-                    #tinyInput("text" "taskEstimate" ""{"placeholder":"最初预计","datatype":"n",
-                        "class":"input-text","nullmsg":"请输入最初预计"
-                    })
+                    <div class="input-group">
+                        #tinyInput("text" "taskEstimate" "" {"placeholder":"最初预计","datatype":"n",
+                            "class":"","nullmsg":"请输入最初预计",
+                            "aria-describedby":"basic-addon2"})
+                        <span class="input-group-addon" id="basic-addon2">小时</span>
+                    </div>
                 #end
             #end
         #end
@@ -170,7 +174,7 @@
                 <div class="col-2 text-r"><label>备注：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("content" "content" {"initialFrameHeight":"150"})#end
+                    #@Teditor("comment" "comment" {"initialFrameHeight":"150","initialFrameWidth":"700"})#end
                 </div>
             </div>
         #end
@@ -194,12 +198,6 @@
 </div>
 #end
 
-<div style="width:30%;float:right">
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-        #include("/project/recordlist.page")
-    #end
-</div>
 
 <script type="text/javascript">
     $(function () {

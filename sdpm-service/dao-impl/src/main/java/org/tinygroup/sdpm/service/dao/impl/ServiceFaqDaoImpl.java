@@ -156,6 +156,7 @@ public class ServiceFaqDaoImpl extends TinyDslDaoSupport implements ServiceFaqDa
 			public Select generate(ServiceFaq t) {
 				Select select = MysqlSelect.selectFrom(SERVICE_FAQTABLE).where(
 						and(
+								SERVICE_FAQTABLE.FAQ_ID.eq(t.getFaqId()),
 								SERVICE_FAQTABLE.FAQ_QUESTION.eq(t.getFaqQuestion()),
 								SERVICE_FAQTABLE.FAQ_ANSWER.eq(t.getFaqAnswer()),
 								SERVICE_FAQTABLE.DELETED.eq(t.getDeleted()),
@@ -276,6 +277,33 @@ public class ServiceFaqDaoImpl extends TinyDslDaoSupport implements ServiceFaqDa
 						SERVICE_FAQTABLE.FAQ_TYPE_ID.eq(deptId),
 						SERVICE_FAQTABLE.DELETED.eq(0)));
 		return getDslSession().fetchPage(select, start, limit, false, ServiceFaq.class);
+	}
+
+	public Pager<ServiceFaq> searchPager(Integer start, Integer limit, ServiceFaq faq, final String faqQuestion, final OrderBy... orderBies) {
+		if (faq == null) {
+			faq = new ServiceFaq();
+		}
+		return getDslTemplate().queryPager(start, limit, faq, false, new SelectGenerateCallback<ServiceFaq>() {
+
+			public Select generate(ServiceFaq t) {
+				Select select = MysqlSelect.selectFrom(SERVICE_FAQTABLE).where(
+						and(
+								SERVICE_FAQTABLE.FAQ_ID.eq(t.getFaqId()),
+								SERVICE_FAQTABLE.FAQ_QUESTION.like(faqQuestion),
+								SERVICE_FAQTABLE.FAQ_ANSWER.eq(t.getFaqAnswer()),
+								SERVICE_FAQTABLE.DELETED.eq(t.getDeleted()),
+								SERVICE_FAQTABLE.FAQ_CREATE_DATE.eq(t.getFaqCreateDate()),
+								SERVICE_FAQTABLE.FAQ_CREATED_BY.eq(t.getFaqCreatedBy()),
+								SERVICE_FAQTABLE.PRODUCT_ID.eq(t.getProductId()),
+								SERVICE_FAQTABLE.FAQ_KEYWORDS.eq(t.getFaqKeywords()),
+								SERVICE_FAQTABLE.FAQ_SOURCE_ID.eq(t.getFaqSourceId()),
+								SERVICE_FAQTABLE.FAQ_SOURCE.eq(t.getFaqSource()),
+								SERVICE_FAQTABLE.FAQ_REPLIED_BY.eq(t.getFaqRepliedBy()),
+								SERVICE_FAQTABLE.FAQ_REPLY_DATE.eq(t.getFaqReplyDate()),
+								SERVICE_FAQTABLE.FAQ_TYPE_ID.eq(t.getFaqTypeId())));
+				return addOrderByElements(select, orderBies);
+			}
+		});
 	}
 
 	/*点击问题进去，里面的删除的方法*/

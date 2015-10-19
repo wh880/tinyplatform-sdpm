@@ -36,14 +36,9 @@
          	<div class="col-2 text-r"><label>解决方案：</label></div>
          		<div class="col-4">
             #@tinySelect("bugResolution" bug?.bugResolution {"class":"input-text","rel":"22","onclick":"setType(this.value)"})
-                #@tinyOptionItem("0")/#end
-                #@tinyOptionItem("1")设计如此#end
-                #@tinyOptionItem("2")重复Bug#end
-                #@tinyOptionItem("3")外部原因#end
-                #@tinyOptionItem("4")已解决#end
-                #@tinyOptionItem("5")无法重现#end
-                #@tinyOptionItem("6")延期解决#end
-                #@tinyOptionItem("7")不予解决#end
+                #for(re : getDict("bugResolution"))
+                        #@tinyOptionItem(re.value)${re.text}#end
+                #end
             #end
               </div>
        </div>

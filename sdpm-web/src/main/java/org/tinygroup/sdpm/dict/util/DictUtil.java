@@ -165,7 +165,12 @@ public class DictUtil {
     }
 
     public static String getValue(String groupType, String key){
-        DictItem item = loader.getDictItem(manager,groupType,key);
+        DictItem item = null;
+        try {
+            item = loader.getDictItem(manager,groupType,key);
+        }catch (RuntimeException r){
+            return "";
+        }
         if(item == null){
             return "";
         }
@@ -173,7 +178,12 @@ public class DictUtil {
     }
 
     public static List<DictItem> getItemList(String groupType){
-        DictGroup group = loader.getDictGroup(manager,groupType);
+        DictGroup group = null;
+        try{
+            group = loader.getDictGroup(manager,groupType);
+        }catch (RuntimeException r){
+            return new ArrayList<DictItem>();
+        }
         if(group == null){
             return new ArrayList<DictItem>();
         }
