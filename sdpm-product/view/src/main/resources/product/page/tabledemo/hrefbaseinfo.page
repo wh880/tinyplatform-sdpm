@@ -132,7 +132,7 @@
 							#@td()相关BUG#end	
 							#@td()
 								#for(bug:bugList)
-									${bug?.bugTitle + bugFor.last?"":","}
+									<a href="${TINY_CONTEXT_PATH + adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${bug?.bugTitle}<a/>${bugFor.last?"":","}
 								#end
 							#end
 		       			#end
@@ -140,7 +140,7 @@
 							#@td()相关用例#end
 							#@td()
 								#for(task:taskList)
-									${task?.taskName + taskFor.last?"":","}
+									<a href="${TINY_CONTEXT_PATH + adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${task?.taskName}</a>${taskFor.last?"":","}
 								#end
 							#end
 		       			#end

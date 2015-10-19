@@ -99,35 +99,13 @@
     #@td()${ getDict("storyStatus",story?.storyStatus) }#end
     #@td()${story?.storyStage}#end
     #@td()
-     #foreach(m:menuManager?.getScopeMenus("product-de"))
-     #set(url=eval(m?.href))
-     <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m?.icon}"></i></a>
-    #for(story:storyList?.getRecords())
-    #@tr()
-        #@td()
-        <input type="checkbox" value="${story.storyId}" id="fieldid" name="storyId">
-        #end
-        #@td()<a
-                href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyId}</a>#end
-        #@td()${story?.storyPri}#end
-        #@td()<a
-                href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
-        #@td()${story?.planId}#end
-        #@td()${story?.storySource}#end
-        #@td()${story?.storyOpenedName}#end
-        #@td()${story?.storyAssignedName}#end
-        #@td()${story?.storyEstimate}#end
-        #@td()${story?.storyStatus}#end
-        #@td()${story?.storyStage}#end
-        #@td()
-            #foreach(m:menuManager?.getScopeMenus("product-de"))
-                #set(url=eval(m?.href))
-            <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i
-                    class="${m?.icon}"></i></a>
-            #end
->>>>>>> c51e3288097dd2e3ed8697260798d0f48a2fc75c
-        #end
-    #end
+	     #foreach(m:menuManager?.getScopeMenus("product-de"))
+		     #set(url=eval(m?.href))
+		     <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m?.icon}"></i></a>
+	   
+	     #end
+	#end
+#end
 #end
 #end
 
