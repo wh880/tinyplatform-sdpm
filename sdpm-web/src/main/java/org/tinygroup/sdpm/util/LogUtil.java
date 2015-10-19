@@ -1,7 +1,5 @@
 package org.tinygroup.sdpm.util;
 
-import org.tinygroup.sdpm.common.log.obtain.impl.ObtainHandleImpl;
-import org.tinygroup.sdpm.common.log.obtain.inter.ObtainHandle;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.impl.LogServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.LogService;
@@ -121,7 +119,8 @@ public class LogUtil {
         REPLY("reply"),
         REVIEW("review"),
         HOLIDAY("holiday"),
-        REQUEST("request");
+        REQUEST("request"),
+        PRODUCTLINE("productLine");
         private final String operateObject;
 
         LogOperateObject(String value) {
