@@ -1,9 +1,5 @@
 package org.tinygroup.sdpm.action.system;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
-/*import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
@@ -24,9 +20,13 @@ import org.tinygroup.sdpm.util.LogUtil.LogAction;
 import org.tinygroup.sdpm.util.LogUtil.LogOperateObject;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
-*/@Controller
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+@Controller
 @RequestMapping("a/system")
-public class HolidayAction extends BaseController{/*
+public class HolidayAction extends BaseController{
 	@Autowired
 	private HolidayService holidayService;
 	@Autowired
@@ -36,7 +36,7 @@ public class HolidayAction extends BaseController{/*
 	@RequestMapping("")
 	public String index(){
 		
-		return "/system/page/holiday/manage.page"; 
+		return "/system/page/holiday/holiday.page"; 
 	}
 	@RequestMapping("holiday")
 	public String holiday(){
@@ -170,7 +170,7 @@ public class HolidayAction extends BaseController{/*
 	}
 	@RequestMapping("holiday/action")
 	public String holidayAction(SystemAction action,Model model){
-		List<SystemAction> actions = actionService.find(action);
+		List<SystemAction> actions = actionService.find(action, null, false);
 		List<HolidayHistory> histories= new ArrayList<HolidayHistory>();
 		for(int i=0,n=actions.size();i<n;i++){
 			HolidayHistory history=new HolidayHistory();
@@ -186,4 +186,4 @@ public class HolidayAction extends BaseController{/*
 		return "/system/page/holiday/holiday-dynamic.pagelet";
 	}
 	
-*/}
+}

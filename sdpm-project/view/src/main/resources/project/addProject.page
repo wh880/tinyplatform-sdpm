@@ -39,28 +39,28 @@
 <div class="infoContent">
     <p class="titleName">添加</p>
     #@elementItem()
-        #@sdpmItem("项目名称")
-            #tinyInput("text" "projectName" ""{"placeholder":"请输入项目名称","datatype":"*4-16","nullmsg":"项目名称不能为空！","id":"",
+        #@sdpmItem("项目名称" "*")
+            #tinyInput("text" "projectName" ""{"placeholder":"请输入项目名称","datatype":"*","nullmsg":"项目名称不能为空！",
                 "class":"input-text"})
         #end
     #end
     #@elementItem()
-        #@sdpmItem("项目代号")
-            #tinyInput("text" "projectCode" ""{"placeholder":"请输入项目代号","datatype":"*4-16","nullmsg":"项目代号不能为空！","id":"",
+        #@sdpmItem("项目代号" "*")
+            #tinyInput("text" "projectCode" ""{"placeholder":"请输入项目代号","datatype":"*","nullmsg":"项目代号不能为空！",
                 "class":"input-text"})
         #end
     #end
     #@elementItem()
-        #@sdpmItem("起始日期")
+        #@sdpmItem("起始日期" "*")
             #@tinyDateInput(
-                "projectBegin" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"日期不能为空","placeholder":
+                "projectBegin" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"开始日期不能为空","placeholder":
                 "选择日期"})#end
         #end
     #end
     #@elementItem()
-        #@sdpmItem("结束日期")
+        #@sdpmItem("结束日期" "*")
             #@tinyDateInput(
-                "projectEnd" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"日期不能为空","placeholder":
+                "projectEnd" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"结束日期不能为空","placeholder":
                 "选择日期"})#end
 
         #end
@@ -69,7 +69,7 @@
         #@sdpmItem("可用工作日")
             <div class="input-group">
                 <input name="projectDays" type="text" class="form-control" placeholder=""
-                       aria-describedby="basic-addon2">
+                       aria-describedby="basic-addon2" datatype="n">
                 <span class="input-group-addon" id="basic-addon2">小时</span>
             </div>
         #end
@@ -79,9 +79,10 @@
         #@sdpmItem("项目类型")
             #@Tselect2F()
                 #@Tselect2Body("projectType" "0" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="0">长期项目</option>
-                    <option value="1">短期项目</option>
-                    <option value="2">运维项目</option>
+                    <option value=""></option>
+                    #foreach(type : getDict("projectType"))
+                        <option value=${type.value}>${type.text}</option>
+                    #end
                 #end
             #end
         #end
@@ -89,9 +90,9 @@
 
 ##
     #@elementItem()
-        #@sdpmItem("团队名称")
-            #tinyInput("text" "projectTeam" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":
-                "标题不能为空！","id":"username","class":"input-text"})
+        #@sdpmItem("团队名称" "*")
+            #tinyInput("text" "projectTeam" ""{"placeholder":"请输入团队名称","datatype":"*","nullmsg":
+                "团队名称不能为空","class":"input-text"})
         #end
     #end
     #@elementItem()
@@ -106,35 +107,46 @@
 #end
 #@elementItem()
     #@sdpmItem("项目描述")
-        #@Teditor("projectDesc" "content" {"initialFrameHeight":"200"})#end
+        #@Teditor("projectDesc" "content" {"initialFrameHeight":"200","initialFrameWidth":"550"})#end
     #end
 #end
+###@elementItem()
+##    #@colLabel()访问控制：#end
+##    #@skinMinimal("col-8")
+##        #labelRadio1(rId="aclopen" rName="projectAcl" rValue="1" labelText="默认设置(有项目视图权限，即可访问)"
+##            "setWhite(this.value);")
+##        #labelRadio1(rId="aclcustom" rName="projectAcl" rValue="2" labelText="私有项目(只有项目团队成员才能访问)"
+##            "setWhite(this.value);")
+##        #labelRadio1(rId="aclcustom" rName="projectAcl" rValue="3" labelText="自定义白名单(团队成员和白名单的成员可以访问)"
+##            "setWhite(this.value);")
+##
+##    #end
+##    #@validateDiv("col-2")#end
+###end
 #@elementItem()
-    #@colLabel()访问控制：#end
-    #@skinMinimal("col-8")
-            #labelRadio1(rId="aclopen" rName="projectAcl" rValue="open" labelText="默认设置(有项目视图权限，即可访问)"
-                "setWhite(this.value);")</br>
-            #labelRadio1(rId="aclcustom" rName="projectAcl" rValue="custom1" labelText="私有项目(只有项目团队成员才能访问)"
-                "setWhite(this.value);")</br>
-            #labelRadio1(rId="aclcustom" rName="projectAcl" rValue="custom" labelText="自定义白名单(团队成员和白名单的成员可以访问)"
-                "setWhite(this.value);")</br>
-
+    #@sdpmItem("访问控制")
+        #@formControlDiv("skin-minimal col-9")
+            #foreach(acl : getDict("projectAcl"))
+                #@tinyRadio("projectAcl" acl.value "1")${acl.text}#end
+            #end
+        ##            #@tinyRadio("projectAcl" "1" "man")默认设置(有项目视图权限，即可访问)#end
+        ##            #@tinyRadio("projectAcl" "2" "man")私有项目(只有项目团队成员才能访问)#end
+        ##            #@tinyRadio("projectAcl" "3" "man")自定义白名单(团队成员和白名单的成员可以访问)#end
+        #end
     #end
-    #@validateDiv("col-2")#end
 #end
 #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
     #@colLabel()分组白名单#end
     #@skinMinimal("col-8")
-        #labelCheckbox(ckId="whitelistBox" labelText="管理员")
-        #labelCheckbox(ckId="whitelistBox" labelText="研发")
-        #labelCheckbox(ckId="whitelistBox" labelText="测试")
-        #labelCheckbox(ckId="whitelistBox" labelText="项目经理")
-        #labelCheckbox(ckId="whitelistBox" labelText="产品经理")
-        #labelCheckbox(ckId="whitelistBox" labelText="研发主管")
-        #labelCheckbox(ckId="whitelistBox" labelText="产品主管")
-        #labelCheckbox(ckId="whitelistBox" labelText="测试主管")
+        #@Tcheckboxes("whiteList" "")
+            #foreach(wl : getDict("whiteList"))
+                #@gridSysCol(2)
+                    #@Tcheckbox(wl.value)${wl?.text}#end
+                #end
+            #end
+        #end
+        #@validateDiv("col-2")#end
     #end
-    #@validateDiv("col-2")#end
 #end
 
     <br/>
@@ -158,7 +170,13 @@
 #end
 
 <script type="text/javascript">
-    function setWhite(acl) {
-        acl == 'custom' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
-    }
+
+    $(function () {
+        $("form").Validform({});
+
+        $("input[name='projectAcl']").click(function (e) {
+            $(this).attr("value") == "3" ? $("#whitelistBox").removeClass("hidden") : $("#whitelistBox").addClass("hidden");
+        })
+    });
+
 </script>
