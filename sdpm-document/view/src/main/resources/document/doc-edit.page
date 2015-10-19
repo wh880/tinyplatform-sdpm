@@ -12,18 +12,22 @@
                 dataType:"json",
                 success: function(data){
                     sele.empty();
-                    var em = "<option value='0' selected  >/</option>";
+                    var em = "<option value='0'>/</option>";
                     sele.append(em);
                     for(var i=0,l=data.length;i<l;i++){
                         var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
                         sele.append(em);
                     }
+                    console.log(value);
 					##alert(value);
-                    if(value!=null) {
+                    if(!value) {
+                    	console.log('test')
+                    	
                         sele.val(value).trigger("change");
                     }else {               
                         sele.val(data[0][opKey]).trigger("change");
                     }
+                    console.log(sele,sele.val())
                 },
                 error: function(res){
                   ##  alert("失败");
@@ -145,7 +149,7 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-6")
 					#@Tselect2F()
-	                   		#@Tselect2Body("docProduct" doc?.docProduct?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		#@Tselect2Body("docProduct" doc?.docProduct?:0 {"class":"input-text select2","id":"productId"}) ##,"multiple":"multiple"加上为多选项
 							<option value="0">/<option>
 #*					        #foreach(product : productList)
 	                        	 <option value="${product?.productId}">${product?.productName}</option>

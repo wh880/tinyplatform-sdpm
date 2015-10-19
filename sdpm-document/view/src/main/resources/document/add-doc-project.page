@@ -38,6 +38,7 @@
         });
 
     }
+
 </script>
 
 
@@ -146,6 +147,8 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#tinyInput("text" "docTitle" "" {"datatype":"*1-16","nullmsg":"标题不能为空！","placeholder":"1~16个字符，字母/中文/数字/下划线","class":"input-text"})
+					
+					
 					#end
 					#end	
 					#@validateDiv("col-2")#end
@@ -155,7 +158,7 @@
 					#@colLabel()<span class="c-red">*</span>文档URL#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*4-16","nullmsg":"链接不能为空！","id":"docUrl","class":"input-text"})
+					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*4-16","nullmsg":"链接不能为空！","id":"docUrl","class":"input-text","ignore":"ignore"})
 					#end
 					#end
 					#@validateDiv("col-2")#end
@@ -234,38 +237,13 @@ function setType(type)
 		$('#contentBox').addClass('hidden');
 	}
 }
-</script>
-<script type="text/javascript">
-    $(function () {
-        $("form[name=thisform]").Validform({
-            tiptype: 2
-        });
-    });
+    
 </script>
 
-#*
 <script type="text/javascript">
-     var 产品=[
-     for(int i=0;i<${projectList}.length;i++){
-     	[for(int j=0;j<${productList}.length)
-     	]
-     	}
-     ];
-
-     function getCity(){
-         //获得省份下拉框的对象
-         var sltProvince=document.form1.province;
-         //获得城市下拉框的对象
-         var sltCity=document.form1.city;         
-         //得到对应省份的城市数组
-         var provinceCity=city[sltProvince.selectedIndex - 1];
- 
-         //清空城市下拉框，仅留提示选项
-         sltCity.length=1;
- 
-         //将城市数组中的值填充到城市下拉框中
-         for(var i=0;i<provinceCity.length;i++){
-             sltCity[i+1]=new Option(provinceCity[i],provinceCity[i]);
-         }
-     }
- </script>*#
+					    $(function () {
+					        $("form[name=thisform]").Validform({
+					            tiptype: 2
+					        });
+					    });
+					</script>

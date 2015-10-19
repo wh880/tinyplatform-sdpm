@@ -35,10 +35,12 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
@@ -152,7 +154,7 @@ public class DocAction {
 	}
 	
 	@RequestMapping(value="/doc/addSave",method=RequestMethod.POST)
-	public String addSave(HttpServletRequest request,DocumentDoc doc,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,Model model) throws IOException{	
+	public String addSave(HttpServletRequest request,SystemAction systemAction,DocumentDoc doc,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,Model model) throws IOException{	
 		List<Product> product = productService.findProductList(new Product());
 		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
 		doc.setDocDeleted("0");	
@@ -163,6 +165,17 @@ public class DocAction {
         profileUtil.uploads(file, document.getDocId(), "document", title);
         
 		model.addAttribute("productList", product);
+		
+		LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
+				LogUtil.LogAction.OPENED,
+				String.valueOf(document.getDocId()),
+				UserUtils.getUserId(),
+				String.valueOf(doc.getDocProduct()),
+				String.valueOf(doc.getDocProject()),
+				null,
+				null,
+				systemAction.getActionComment());
+		
 		if(request.getSession().getAttribute("moduleId") == null){
 			return "redirect:"+"/a/document?docChange=true";
 		}
@@ -189,9 +202,20 @@ public class DocAction {
 	}
 	
 	@RequestMapping(value="/doc/editSave",method=RequestMethod.POST)
-	public String editSave(DocumentDoc doc,Model model){	
+	public String editSave(DocumentDoc doc,SystemAction systemAction,Model model){
+		DocumentDoc documentDoc = docservice.findDocById(doc.getDocId());
 		doc.setDocEditedBy(UserUtils.getUser().getOrgUserAccount());
 		docservice.editDoc(doc);
+		
+		LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
+				LogUtil.LogAction.EDITED, 
+				String.valueOf(doc.getDocId()), 
+				UserUtils.getUserId(), 
+				String.valueOf(doc.getDocProduct()),
+				String.valueOf(doc.getDocProject()), 
+				documentDoc, 
+				doc, 
+				systemAction.getActionComment());
 		return "redirect:"+"/a/document?docChange=true";
 	}
 	
@@ -203,6 +227,7 @@ public class DocAction {
 		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
 		systemProfile.setFileObjectType("document");
 		systemProfile.setFileObjectId(docid);
+		systemProfile.setFileDeleted("0");
 		List<SystemProfile> list = profileService.find(systemProfile);
 		model.addAttribute("file",list);
 		model.addAttribute("doc",doc);
@@ -211,14 +236,19 @@ public class DocAction {
 	}
 	
 	@RequestMapping("/doc/viewInfo")
-	public String viewInfo(HttpServletRequest request, Integer docId, Model model){
-		DocumentDoc doc = new DocumentDoc();
-		DocumentDoclib docLib = new DocumentDoclib();
-		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
-		doc = docservice.findDocById(docId);
-		docLib = docservice.findDoclibById(doc.getDocLibId());
+	public String viewInfo(HttpServletRequest request, Integer docId, Model model){	
+		DocumentDoc doc = docservice.findDocById(docId);
+		//doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));		
+		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
+		System.out.println(doc.getDocModule()!=0&&doc.getDocModule()!=null);
+		if(doc.getDocModule()!=0&&doc.getDocModule()!=null){
+			SystemModule module = moduleService.findById(doc.getDocModule());
+			model.addAttribute("module",module);
+		}else{
+			model.addAttribute("module",null);
+		}
 		model.addAttribute("doc",doc);
-		model.addAttribute("docLib",docLib);
+		model.addAttribute("docLib",docLib);		
 		return "/document/basic-info.pagelet";
 	}
 	
