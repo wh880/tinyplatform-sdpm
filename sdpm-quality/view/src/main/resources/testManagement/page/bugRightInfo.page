@@ -50,11 +50,11 @@
 			       			#end
 			       			#@tr()
 								#@td()操作系统#end
-			       				#@td()${qualityBug?.operatingSystem}#end
+			       				#@td()${getDict("bugOS",qualityBug?.operatingSystem)}#end
 			       			#end
 			       			#@tr()
 								#@td()浏览器#end
-			       				#@td()${qualityBug?.browser}#end
+			       				#@td()${getDict("bugBrowser",qualityBug?.browser)}#end
 			       			#end
 			       			#@tr()
 								#@td()关键词#end
