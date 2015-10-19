@@ -29,4 +29,6 @@ public interface OrgUserDao extends BaseDao<OrgUser,String> {
     int[] softDeleteBatch(List<OrgUser> list);
     
     String getNameById(String id);
+
+    List<OrgUser> getByKeys(String... pk);
 }

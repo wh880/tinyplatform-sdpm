@@ -24,7 +24,6 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.org.dao.OrgUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.*;
-import static org.tinygroup.tinysqldsl.Select.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
@@ -36,6 +35,7 @@ import java.util.List;
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
@@ -148,6 +148,20 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                 return selectFrom(ORG_USERTABLE).where(ORG_USERTABLE.ORG_USER_ID.eq(t));
             }
         });
+    }
+
+    public List<OrgUser> getByKeys(String... pk) {
+
+        SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
+            @SuppressWarnings("rawtypes")
+            public Select generate(Serializable[] t) {
+
+                return selectFrom(ORG_USERTABLE).where(ORG_USERTABLE.ORG_USER_ID.in(t));
+            }
+
+        };
+        Select select = callback.generate(pk);
+        return getDslSession().fetchList(select, OrgUser.class);
     }
 
     public Pager<OrgUser> getPagerByDeptId(int start, int limit, final Integer deptId, final OrderBy... orderBies) {

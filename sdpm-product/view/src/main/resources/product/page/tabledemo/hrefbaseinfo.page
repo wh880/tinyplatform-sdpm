@@ -46,7 +46,12 @@
 		       			#end
 		       			#@tr()
 							#@td()抄送给#end
-		       				#@td()#end
+		       				#@td()
+		       				#for(mailto:storyMailTo)
+		       					${mailto.orgUserAccount}${mailtoFor.last?"":","}
+		       				#end
+#*		       					${story?.storyMailto}*#
+		       				#end
 		       			#end
 		       			
 		 #end
@@ -61,15 +66,16 @@
 		       		#@tbody()
 		       			#@tr()
 							#@td()由谁创建#end
-		       				#@td()${story?.storyOpenedBy} 于${story?.storyOpenedDate} #end
+		       				#@td()${getUserName(story?.storyOpenedBy)}于${story?.storyOpenedDate?formatDate(story?.storyOpenedDate,'yyyy-MM-dd'):""}创建 #end
 		       			#end
+		       			
 		       			#@tr()
 							#@td()指派给#end
-		       				#@td()${story?.storyAssignedTo} #end
+		       				#@td()${getUserName(story?.storyAssignedTo)} #end
 		       			#end
 		       			#@tr()
 							#@td()由谁评审#end
-		       				#@td()${story?.storyReviewedBy}#end
+		       				#@td()${getUserName(story?.storyReviewedBy)}#end
 		       			#end
 		       			#@tr()
 							#@td()评审时间#end
@@ -77,7 +83,7 @@
 		       			#end
 		       			#@tr()
 							#@td()由谁关闭#end
-		       				#@td()${story?.storyClosedBy}#end
+		       				#@td()${getUserName(story?.storyClosedBy)}#end
 		       			#end
 		       			#@tr()
 							#@td()关闭原因#end
@@ -85,7 +91,7 @@
 		       			#end
 		       			#@tr()
 							#@td()最后修改#end
-		       				#@td()${story?.storyLastEditedBy}于 ${story?.storyLastEditedDate}#end
+		       				#@td()${story?.storyLastEditedBy}于 ${story?.storyLastEditedDate?formatDate(story?.storyLastEditedDate,'yyyy-MM-dd'):""}修改#end
 		       			#end	
 		         		#end
 				#end
@@ -105,15 +111,13 @@
 		       		#@thead()
 		       		#end
 		       		#@tbody()
-		       			#@tr()
-							#@td()<a href="#">#68</a>测试用例1#end
+		       			
+		       			#for(task:taskList)
+		       				#@tr()
+								#@td()<a href="${TINY_CONTEXT_PATH + adminPath}/project/task/findTask?taskId=1">${task?.taskId}</a>&nbsp;&nbsp;${task?.taskName}#end
+			       			#end
 		       			#end
-		       			#@tr()
-							#@td()<a href="#">#69</a>测试用例2#end
-		       			#end
-		       			#@tr()
-							#@td()<a href="#">#70</a>测试用例3#end
-		       			#end
+		       			
 		       		#end
 		 #end
 	#end

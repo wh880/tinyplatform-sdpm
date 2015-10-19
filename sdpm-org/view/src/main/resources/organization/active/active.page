@@ -150,7 +150,7 @@
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"class":"sorting sorting_desc","rel":"action_date"})日期#end
                 #@tinyTh({"class":"sorting","rel":"actor_name"})操作者#end
-                #@tinyTh({"class":"sorting","rel":"action_action"})动作#end
+                #@tinyTh({"class":"","rel":"action_action"})动作#end
                 #@tinyTh({"class":"sorting","rel":"action_object_type"})对象类型#end
                 #@tinyTh({"class":"sorting","rel":"action_id"})ID#end
                 #@tinyTh({"class":"","rel":"object_name"})对象名称#end
