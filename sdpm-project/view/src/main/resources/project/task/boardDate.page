@@ -167,11 +167,12 @@
         background: #ccc
     }
 </style>
-#set(assignedPage=TINY_CONTEXT_PATH+adminPath+"/project/task/modal/assignedModal")
-#set(startPage=TINY_CONTEXT_PATH+adminPath+"/project/task/modal/startModal")
-#set(finishPage=TINY_CONTEXT_PATH+adminPath+"/project/task/modal/finishModal")
-#set(cancelPage=TINY_CONTEXT_PATH+adminPath+"/project/task/modal/cancelModal")
+#set(assignedPage=adminPath+"/project/task/modal/assignedModal")
+#set(startPage=adminPath+"/project/task/modal/startModal")
+#set(finishPage=adminPath+"/project/task/modal/finishModal")
+#set(cancelPage=adminPath+"/project/task/modal/cancelModal")
 #set(editPage=adminPath+"/project/task/modal/editModal")
+#set(closePage=adminPath+"/project/task/modal/closeModal")
 #import("/project/task/boardComponent.component")
 
 <table class="table table-bordered radius" id="kanbanHeader">
