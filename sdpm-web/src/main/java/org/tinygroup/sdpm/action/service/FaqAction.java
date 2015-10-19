@@ -35,10 +35,9 @@ public class FaqAction extends BaseController {
     /*新增问题*/
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
-        if (id != null)
-        {
+        if (id != null) {
             ServiceFaq faq = faqService.findFaq(id);
-            model.addAttribute("faq",faq);
+            model.addAttribute("faq", faq);
         }
        /* faq中查询产品名称*/
          /*调用product的服务，查询出产品表的对象*/
@@ -50,14 +49,10 @@ public class FaqAction extends BaseController {
 
     /* 保存*/
     @RequestMapping("/save")
-    public String save(ServiceFaq faq ,Model model)
-    {
-        if (faq.getFaqId()==null)
-        {
+    public String save(ServiceFaq faq, Model model) {
+        if (faq.getFaqId() == null) {
             faq = faqService.addFaq(faq);
-        }
-        else
-        {
+        } else {
             faq = faqService.updateFaq(faq);
         }
         model.addAttribute("faq", faq);
@@ -79,24 +74,28 @@ public class FaqAction extends BaseController {
 
     /*把faqmenu页面的所有问题都查询出来*/
     @RequestMapping("/list")
-    public String list(ServiceFaq serviceFaq, Integer id, Integer start, Integer limit,
+    public String list(ServiceFaq serviceFaq, Integer id, String faqQuestion,
                        @RequestParam(required = false, defaultValue = "1") int page,
                        @RequestParam(required = false, defaultValue = "10") int pageSize,
                        @RequestParam(required = false, defaultValue = "faqId") String order,
                        @RequestParam(required = false, defaultValue = "asc") String ordertype,
-                       Model model)
-    {
-        start = (page - 1) * pageSize;
-        limit = pageSize;
-        Pager<ServiceFaq> list = faqService.getFaqpage(start, limit, serviceFaq);
+                       Model model) {
+        Integer start = (page - 1) * pageSize;
+        Integer limit = pageSize;
+        Pager<ServiceFaq> list;
+        if (faqQuestion != null) {
+            list = faqService.searchFaq(start, limit, serviceFaq, faqQuestion);
+        } else {
+            list = faqService.getFaqpage(start, limit, serviceFaq);
+        }
         model.addAttribute("pager", list);//list.CurrentPage
         return "/service/faq/faqmenu.page";
     }
+
     /*删除*/
     @ResponseBody
     @RequestMapping("/delete")
-    public Map delete(Integer id)
-    {
+    public Map delete(Integer id) {
         faqService.deleteFaq(id);
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");
@@ -195,6 +194,7 @@ public class FaqAction extends BaseController {
         map.put("info", "删除成功");
         return map;
     }
+
 
     @RequestMapping("/listTree")
     public String listTree(ServiceFaq serviceFaq, Integer id, Integer start, Integer limit, Integer faqTypeId,
