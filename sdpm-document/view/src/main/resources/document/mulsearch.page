@@ -16,41 +16,47 @@
 		</select>
 		<select id="usertemp">
 			<option value="" selected="selected"></option>
-			<option value="admin">A:admin</option>
-			<option value="demo">D:Demo</option>
-			<option value="dev1">D:开发甲</option>
-			<option value="dev2">D:开发乙</option>
-			<option value="dev3">D:开发丙</option>
-			<option value="productManager">P:产品经理</option>
-			<option value="projectManager">P:项目经理</option>
-			<option value="tester1">T:测试甲</option>
-			<option value="tester2">T:测试乙</option>
-			<option value="tester3">T:测试丙</option>
-			<option value="testManager">T:测试经理</option>
-			<option value="closed">Closed</option>
-			<option value="$@me">自己</option>
+			#foreach(u : userList)
+				<option value="${u?.orgUserId}">${u?.orgUserRealName}</option>
+			#end
 			<option value="null">空</option>
 		</select>
-		<select id="pritemp">
+		<select id="producttemp">
 			<option value=""></option>
-			<option value="3">3</option>
-			<option value="1">1</option>
-			<option value="44">44</option>
-			<option value="2">2</option>
-			<option value="4">4</option>
+			#foreach(pd : productList)
+				<option value="${pd?.productId}">${pd?.productName}</option>
+			#end
 			<option value="null">空</option>
 		</select>
-		<select id="statustemp">
-			<option value="" selected="selected"></option>
-			<option value="wait">未开始</option>
-			<option value="doing">进行中</option>
-			<option value="done">已完成</option>
-			<option value="pause">已暂停</option>
-			<option value="cancel">已取消</option>
-			<option value="closed">已关闭</option>
+		<select id="projecttemp">
+			<option value=""></option>
+			#foreach(pj : projectList)
+				<option value="${pj?.projectId}">${pj?.projectName}</option>
+			#end
 			<option value="null">空</option>
 		</select>
-
+		<select id="moduletemp">
+			<option value=""></option>
+			#foreach(m : moduleList)
+				<option value="${m?.moduleId}">${m?.moduleName}</option>
+			#end
+			<option value="null">空</option>
+		</select>
+		<select id="doclibtemp">
+			<option value=""></option>
+			#foreach(l : libList)
+				<option value="${l?.docLibId}">${l?.docLibName}</option>
+			#end
+			<option value="null">空</option>
+		</select>
+		<select id="typetemp">
+			<option value=""></option>
+			#foreach(l : libList)
+				<option value="${l?.docLibId}">${l?.docLibName}</option>
+			#end
+			<option value="null">空</option>
+		</select>
+		
 	</div>
 	<table class="table-condensed table-form" id="task-search">
 		<tbody><tr>

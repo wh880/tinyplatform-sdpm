@@ -43,9 +43,9 @@ public class ProfileAction extends BaseController{
 	@RequiresPermissions(value="{doc-file-delete}")
 	@ResponseBody
 	@RequestMapping("delete/{type}")
-	public Map delete(Integer id,@PathVariable(value="type")String type){
+	public Map delete(Integer delId,@PathVariable(value="type")String type){
 		if("doc".equals(type)){
-			profileService.softDelete(id);
+			profileService.softDelete(delId);
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("status", "success");
 			map.put("info", "删除成功");
