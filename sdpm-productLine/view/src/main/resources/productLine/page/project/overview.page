@@ -20,13 +20,13 @@
                             class="${m?.icon}"></i></a>
                 #elseif(m.map.type=="update")
                     <a href="${TINY_CONTEXT_PATH +adminPath}${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-                #else
+                #elseif(m.map.type=="back")
                     <a href="javascript :;" onClick="javascript :history.back(-1);"
                        title="返回">#buttonIcon(iconClass=m.icon)</a>
                 #end
             #end
 
-			</span>
+    </span>
         #end
     #end
 
