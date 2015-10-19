@@ -85,7 +85,7 @@ public class CookieUtils {
                     try {
                         value = URLDecoder.decode(cookie.getValue(), "utf-8");
                     } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
+                        logger.logMessage(LogLevel.ERROR, "解析出错", e);
                     }
                     if (isRemove) {
                         cookie.setMaxAge(0);
