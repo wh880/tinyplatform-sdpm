@@ -4,7 +4,26 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
-
+#macro Tselect2Body(name value mapInfo)
+#set(sid=mapInfo?.id?:sid)
+	<select name="${name}" class="form-control" #getMapInfo(mapInfo) id="${sid}">
+	#bodyContent
+	</select>
+	<script type="text/javascript">
+	$(function(){
+		$("#${sid}").select2();
+		#if(value)
+		var valuestr="${value}";
+		var values=valuestr.split(",");
+		if(values.length>1){
+			$("#${sid}").val(values).trigger("change");
+		}else{
+			$("#${sid}").val(valuestr).trigger("change");
+		}
+		#end
+	});
+	</script>
+#end
 #set(name="qualityBug")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")

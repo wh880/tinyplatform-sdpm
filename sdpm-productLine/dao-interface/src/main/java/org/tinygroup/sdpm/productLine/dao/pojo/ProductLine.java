@@ -24,7 +24,23 @@ import java.util.Date;
  * 
  */
 public class ProductLine implements Serializable{
+	
+	/**
+	 * 经理名称
+	 */
+	private String ownerName;
+	
+	/**
+	 * 质量经理
+	 */
+	private String qualityManagerName;
+	
+	/**
+	 * 交付经理
+	 */
+	private String deliveryManagerName;
 
+	
 	/** 
 	 * 产品线ID
 	 * 
@@ -278,5 +294,29 @@ public class ProductLine implements Serializable{
 	public Integer getDeleted(){
 		return deleted;
 	}
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
+	public String getQualityManagerName() {
+		return qualityManagerName;
+	}
+
+	public void setQualityManagerName(String qualityManagerName) {
+		this.qualityManagerName = qualityManagerName;
+	}
+
+	public String getDeliveryManagerName() {
+		return deliveryManagerName;
+	}
+
+	public void setDeliveryManagerName(String deliveryManagerName) {
+		this.deliveryManagerName = deliveryManagerName;
+	}
+
 
 }

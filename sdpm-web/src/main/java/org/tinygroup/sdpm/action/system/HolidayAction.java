@@ -170,7 +170,7 @@ public class HolidayAction extends BaseController{
 	}
 	@RequestMapping("holiday/action")
 	public String holidayAction(SystemAction action,Model model){
-		List<SystemAction> actions = actionService.find(action, "actionDate", true);
+		List<SystemAction> actions = actionService.find(action, "actionDate", false);
 		List<HolidayHistory> histories= new ArrayList<HolidayHistory>();
 		if(actions.size()<12){
 		for(int i=0,n=actions.size();i<n;i++){

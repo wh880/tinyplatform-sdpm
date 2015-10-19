@@ -21,11 +21,11 @@
             </map>
         </menu>
 
-        <menu id="productLine-edit" parent-id="overview" name="编辑" href="/productLine/page/tabledemo/add.page"
+        <menu id="productLine-edit" parent-id="overview" name="编辑" href="/productLine/find?productLineId=${productLine.productLineId}"
               icon="icon-pencil"
               sort="98" isShow="1" scope="productLine-overview">
             <map>
-                <property key="type" value="editor"/>
+                <property key="type" value="update"/>
             </map>
         </menu>
         <menu id="productLine-del" parent-id="overview" name="删除" href="/tinyuiweb/action/del.pagelet"

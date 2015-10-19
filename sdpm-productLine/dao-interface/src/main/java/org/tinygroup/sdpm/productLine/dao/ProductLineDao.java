@@ -19,12 +19,15 @@ package org.tinygroup.sdpm.productLine.dao;
 import java.util.List;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface ProductLineDao extends BaseDao<ProductLine,Integer> {
 	
 	Integer softDelete(Integer id);
 	
+	Pager<ProductLine> findList(int start,int limit ,ProductLine productLine ,final OrderBy... orderArgs);
 	
 	
 

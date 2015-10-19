@@ -26,7 +26,7 @@ public class LogUtil {
     public static void changeLog(LogOperateObject objectType, LogAction action, String objectId, String userId,
                                  String productId, String projectId,
                                  Object oldObject, Object newObject) {
-        saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, productId, projectId, oldObject, newObject, null);
+        saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, projectId, productId, oldObject, newObject, null);
     }
 
     protected static void saveLog(String objectType, String action, String objectId, String userId,

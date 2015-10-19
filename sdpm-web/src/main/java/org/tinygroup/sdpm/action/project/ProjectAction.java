@@ -17,6 +17,7 @@ import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -58,7 +59,9 @@ public class ProjectAction extends BaseController {
     }
 
     @RequestMapping("add")
-    public String addPage(Model model, HttpServletResponse response, Project project, Integer[] linkProduct, Integer[] whiteList) {
+    public String addPage(Model model, HttpServletResponse response,
+                          HttpServletRequest request, Project project,
+                          Integer[] linkProduct, Integer[] whiteList) {
         String whiteListStr = "";
         if (whiteList != null) {
             if (whiteList.length > 0) {
@@ -75,7 +78,9 @@ public class ProjectAction extends BaseController {
         Project tProject = projectService.addProject(project);
         projectProductService.addLink(linkProduct, tProject.getProjectId());
         CookieUtils.setCookie(response, "cookie_projectId", tProject.getProjectId().toString());
-
+        request.getSession().setAttribute("selProject", tProject);
+        List<Project> list = projectService.findList();
+        request.getSession().setAttribute("projectList", list);
         return "project/allProject.page";
     }
 

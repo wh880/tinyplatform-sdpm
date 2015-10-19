@@ -40,17 +40,20 @@
         <p class="titleName">文档URL </p>
         ${doc?.docUrl}
     #elseif(doc.docType=='文件')<p class="titleName">附件 </p>
-    #foreach(f : file)
+    #foreach(f : file)   	
     	 #set(path=f?.filePathname)
     		<a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
     		#foreach(m:menuManager.getScopeMenus("file-op"))
 				#if(m.id == "file-edit")					
-    				#@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
+    				#@aModal("#myModal" m.name "400" "150" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
         	        	#buttonIcon(iconClass=m.icon)#end&nbsp
         	    #else
-        	    	#@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId)
-						<i class="${m.icon}" title="删除"></i>
+        	    	#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId )
+						#buttonIcon(iconClass=m.icon)
 					#end<br>
+#*        	    	#@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId)
+						<i class="${m.icon}" title="删除"></i>
+					#end<br>*#
         	    #end
         	#end    		
     #end
@@ -59,10 +62,11 @@
     ${doc?.docContent}
     #end
     #end
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-        #include("../data/historyRecord.page")
-    #end
+#*    #@div(divClass="infoContent")
+        <p class="titleName">历史记录</p>*#
+        	#history(adminPath+"/system/action/ajax/history?actionObjectType=doc&actionObjectId="+doc?.docId)
+        	###include("../data/historyRecord.page")
+#*    #end*#
     <center>		
 		#foreach(m:menuManager.getScopeMenus("doc-view-op"))
 				#if(m.id == "doc-view-delete")

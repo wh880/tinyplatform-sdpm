@@ -111,10 +111,11 @@
 		       		#@thead()
 		       		#end
 		       		#@tbody()
-		       			
+		       			#@th() ID #end
+		       			#@th() 名称 #end
 		       			#for(task:taskList)
 		       				#@tr()
-								#@td()<a href="${TINY_CONTEXT_PATH + adminPath}/project/task/findTask?taskId=1">${task?.taskId}</a>&nbsp;&nbsp;${task?.taskName}#end
+								#@td()${task?.taskId}#end #@td()<a href="${TINY_CONTEXT_PATH + adminPath}/project/task/findTask?taskId=1">${task?.taskName}</a>#end
 			       			#end
 		       			#end
 		       			
@@ -129,12 +130,23 @@
 		       		#@tbody()
 		       			#@tr()
 							#@td()相关BUG#end	
+							#@td()
+								#for(bug:bugList)
+									<a href="${TINY_CONTEXT_PATH + adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${bug?.bugTitle}<a/>${bugFor.last?"":","}
+								#end
+							#end
 		       			#end
 		       			#@tr()
 							#@td()相关用例#end
+							#@td()
+								#for(task:taskList)
+									<a href="${TINY_CONTEXT_PATH + adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${task?.taskName}</a>${taskFor.last?"":","}
+								#end
+							#end
 		       			#end
 		       			#@tr()
 							#@td()相关需求#end
+							#@td() ${story?.storyTitle} #end
 		       			#end		       					       		
 		        	#end
 		#end
