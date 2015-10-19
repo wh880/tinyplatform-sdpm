@@ -16,6 +16,7 @@ import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
@@ -56,10 +57,20 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/save")
-    public String save(ProductLine productLine, Model model) {
+    public String save(ProductLine productLine, Model model,ProductLineAction productLineAction) {
         productLine.setProductLineCreatedBy(UserUtils.getUser().getOrgUserAccount());
         productLine.setProductLineStatus("新建");
-        productLineService.addProductLine(productLine);
+        ProductLine productLine1 = productLineService.addProductLine(productLine);
+
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE
+                , LogUtil.LogAction.OPENED
+                ,String.valueOf(productLine1.getProductLineId())
+                ,UserUtils.getUserId()
+                ,null
+                ,null
+                ,null
+                ,null
+                ,productLine1.getProductLineSpec());
 
         return "redirect:" + "/productLine/page/tabledemo/list.page";
     }
