@@ -21,6 +21,7 @@ import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
@@ -50,7 +51,7 @@ public class BuildAction extends BaseController {
     @Autowired
     private BugService bugService;
     @Autowired
-    private StoryService storyService;
+    private ModuleService moduleService;
     @Autowired
     private ProjectStoryService projectStoryService;
 
@@ -307,8 +308,8 @@ public class BuildAction extends BaseController {
                                   @RequestParam(required = false, defaultValue = "asc") String ordertype,
                                   Model model, HttpServletRequest request){
 
-        if(request.getSession().getAttribute("sessionProjectId")!=null){
-            story.setProjectId((Integer)(request.getSession().getAttribute("sessionProjectId")));
+        if(request.getSession().getAttribute("sessionBuildId")!=null){
+            story.setBuildId((Integer)(request.getSession().getAttribute("sessionBuildId")));
         }
 
         String condition = StoryUtil.getStatusCondition(choose,request);
@@ -324,13 +325,8 @@ public class BuildAction extends BaseController {
             condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
         }
         story.setModuleId(null);
-        Pager<ProductStory> p = projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,story, condition,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
+        ProjectStory p = projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,story, condition,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList",p);
-
-
-
-
-
 
         if("reRelateStory".equals(relate)){
             return "/project/task/relation-release/product-al-req-data.pagelet";
