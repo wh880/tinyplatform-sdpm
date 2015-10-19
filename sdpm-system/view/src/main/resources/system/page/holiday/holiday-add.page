@@ -9,34 +9,34 @@
         #end
         #@validateDiv("col-2")#end
     #end
-    #@elementItem()
-			        #@colLabel()创建者：#end
-				        #@formControlDiv("col-6")
-	
-				        	 #@Tselect2F()
-			                    #@Tselect2Body("holidayAccount" holiday?.holidayAccount {"class":"input-text select2"})
-			                        #for(u:users)
-			                        <option value="${u?.orgUserAccount}">${u?.orgUserAccount}</option>
-			                        #end 
-			                       ##,"multiple":"multiple"加上为多选项
-##			                        <option value="Mck">Mck</option>
-##			                        <option value="wll">wll</option>
-##			                        <option value="zch">zch</option>
-##			                        <option value="gzc">gzc</option>
-##			                        <option value="cp">cp</option>
-##			                        <option value="xbb">xbb</option>
-##			                        <option value="wj">wj</option>
-			                    #end
-			                
-			                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
-			                #end
-				        	 
-				        	 
-				        #end
-			        #@validateDiv("col-2")#end
-			      #end
-			 
-			
+##    #@elementItem()
+##			        #@colLabel()创建者：#end
+##				        #@formControlDiv("col-6")
+##	
+##				        	 #@Tselect2F()
+##			                    #@Tselect2Body("holidayAccount" holiday?.holidayAccount {"class":"input-text select2"})
+##			                        #for(u:users)
+##			                        <option value="${u?.orgUserAccount}">${u?.orgUserAccount}</option>
+##			                        #end 
+##			                       ##,"multiple":"multiple"加上为多选项
+####			                        <option value="Mck">Mck</option>
+####			                        <option value="wll">wll</option>
+####			                        <option value="zch">zch</option>
+####			                        <option value="gzc">gzc</option>
+####			                        <option value="cp">cp</option>
+####			                        <option value="xbb">xbb</option>
+####			                        <option value="wj">wj</option>
+##			                    #end
+##			                
+##			                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+##			                #end
+##				        	 
+##				        	 
+##				        #end
+##			        #@validateDiv("col-2")#end
+##			      #end
+##			 
+##			
    #@elementItem()
         #@colLabel()类型：#end
          #@formControlDiv("col-6")
