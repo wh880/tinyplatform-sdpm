@@ -22,7 +22,7 @@
 			       			#end
 			       			#@tr()
 								#@td()Bug类型#end
-			       				#@td()${qualityBug?.bugType}#end
+			       				#@td()${getDict("bugType",qualityBug?.bugType)}#end
 			       			#end
 			       			#@tr()
 								#@td()严重程度#end
