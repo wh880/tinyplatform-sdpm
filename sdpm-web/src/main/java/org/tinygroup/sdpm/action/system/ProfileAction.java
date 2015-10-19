@@ -31,7 +31,7 @@ public class ProfileAction extends BaseController{
 		return null;
 	}
 	
-	@RequiresPermissions(value="{doc-file-edit}")
+	@RequiresPermissions(value="doc-file-edit")
 	@ResponseBody
 	@RequestMapping("edit/{type}")
 	public Map<String, String> eidt(SystemProfile profile,@PathVariable(value="type")String type,Model model){
@@ -45,12 +45,12 @@ public class ProfileAction extends BaseController{
 		return null;
 	}
 	
-	@RequiresPermissions(value="{doc-file-delete}")
+	@RequiresPermissions(value="doc-file-delete")
 	@ResponseBody
 	@RequestMapping("delete/{type}")
-	public Map delete(Integer delId,@PathVariable(value="type")String type){
+	public Map delete(Integer id,@PathVariable(value="type")String type){
 		if("doc".equals(type)){
-			profileService.softDelete(delId);
+			profileService.softDelete(id);
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("status", "success");
 			map.put("info", "删除成功");
