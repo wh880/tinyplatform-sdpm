@@ -1,7 +1,5 @@
 package org.tinygroup.sdpm.project.biz.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +10,8 @@ import org.tinygroup.sdpm.project.dao.ProjectDao;
 import org.tinygroup.sdpm.project.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 /**
  * Created by shenly13343 on 2015-09-18.
@@ -64,9 +64,22 @@ public class ProjectManagerImpl implements ProjectManager {
         return projectDao.edit(project);
     }
 
-	public Project find(Integer projectId) {
-		
-		return projectDao.getByKey(projectId);
+    public List<Project> findList(List<Integer> ids) {
+        if (ids.isEmpty()) {
+            return null;
+        } else {
+            String condition = "projectId in ( ";
+            for (Integer id : ids) {
+                condition = condition + id + " ";
+            }
+            condition = condition + ")";
+            return projectDao.findByCondition(condition);
+        }
+    }
+
+    public Project find(Integer projectId) {
+
+        return projectDao.getByKey(projectId);
 	}
 
 	public List<Project> findList(Project project, String order, String ordertype) {

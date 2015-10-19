@@ -57,7 +57,9 @@
                 <!--TypeInfo处理器 -->
                 <ref bean="typeInfoProcessor"/>
 
-                <!--Obtain文件加载处理器-->
+                <!--dictConfig文件加载处理器-->
+                <ref bean="dictLoadFileProcessor"/>
+                <!--dict文件加载处理器-->
                 <ref bean="dictFileProcessor"/>
                 <!-- database -->
                 <ref bean="constantFileResolver"/>

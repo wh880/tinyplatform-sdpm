@@ -19,7 +19,9 @@
         #@td()#end
     #end
 
-    #@td()${t?.taskDeadLine}#end
+    #@td()
+        ${formatdate(t?.taskDeadLine,"yyyy-MM-dd")}
+    #end
     #@td()
         #if(t.taskOpenedDate)
             ${formatdate(t.taskOpenedDate,"yyyy-MM-dd")}

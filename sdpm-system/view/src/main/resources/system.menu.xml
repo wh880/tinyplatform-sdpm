@@ -2,10 +2,10 @@
 <menu id="mysystem" parent-id="0" name="系统" href="/system" icon="icon-cogs" sort="-1"
       isShow="1">
 
-    <menu id="holiday" parent-id="mysystem" name="节假日管理" href="/system/holiday/manage" icon="" sort="300" isShow="1">
-        <menu id="manage" parent-id="holiday" name="管理" href="/system/holiday/manage" icon="" sort="200" isShow="1"></menu>
+    <menu id="holiday" parent-id="mysystem" name="节假日管理" href="/system/holiday" icon="" sort="300" isShow="1">
+       <!-- <menu id="manage" parent-id="holiday" name="管理" href="/system/holiday/manage" icon="" sort="200" isShow="1">-->
         
-        <menu id="myholiday" parent-id="holiday" name="节假日" href="/system/holiday" icon="" sort="100" isShow="1">
+        <menu id="myholiday" parent-id="holiday" name="节假日" href="/system/holiday" icon="" sort="100" isShow="1"> 
         	<menu id="myholiday-edit" parent-id="myholiday" name="编辑" href="/system/holiday/find" icon="icon-pencil" sort="300" isShow="1" scope="myholiday-op"></menu>
         	 <menu id="myholiday-del" parent-id="myholiday" name="删除" href="/system/holiday/delete" icon="icon-remove" sort="200" isShow="1" scope="myholiday-op"></menu>
         	

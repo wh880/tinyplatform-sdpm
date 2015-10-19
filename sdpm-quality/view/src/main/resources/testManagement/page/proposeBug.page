@@ -60,7 +60,7 @@
 								$("#${sid}").on("change",function(){
 									var mId = $("#${sid}  option:selected").val();
 									var pId = $("select[name=productId]  option:selected").val();
-									ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId+"&moduleId="+mId,${bug?.storyId?:0},"build");
+									ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId+"&moduleId="+mId,${bug?.storyId?:0});
 								})
 							</script>
                 	  #end

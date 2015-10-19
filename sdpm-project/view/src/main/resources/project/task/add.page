@@ -32,7 +32,7 @@
             #@sdpmItem("所属模块")
                 #@Tselect2F()
                     #@Tselect2Body("moduleId" story.moduleId==null?"":story.moduleId {"class":
-                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "input-text select2"})
                         <option value=""></option>
                         #foreach(m : moduleList)
                             <option value=${m.moduleId}>${m.moduleName}</option>
@@ -49,17 +49,12 @@
             #@sdpmItem("任务类型")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "taskType" "" {"class":"input-text select2","placeholder":"任务类型","datatype":"*4-16","nullmsg":
-                        "任务类型不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                        "taskType" "" {"class":"input-text select2","placeholder":"任务类型","datatype":"*","nullmsg":
+                        "任务类型不能为空！"})
                         <option value=""></option>
-                        <option value="1">设计</option>
-                        <option value="2">开发</option>
-                        <option value="3">测试</option>
-                        <option value="4">研究</option>
-                        <option value="5">讨论</option>
-                        <option value="6">界面</option>
-                        <option value="7">事物</option>
-                        <option value="8">其他</option>
+                        #foreach(item : getDict("taskType"))
+                            <option value="${item?.value}">${item?.text}</option>
+                        #end
                     #end
                 #end
             #end
@@ -67,13 +62,12 @@
         #@elementItem()
             #@sdpmItem("指派给")
                 #@Tselect2F()
-                    #@Tselect2Body("taskAssignedTo" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("taskAssignedTo" "" {"class":"input-text select2"})
                         <option value=""></option>
                         #foreach(t : team)
                             <option value="${t?.teamAccount}">${t?.teamAccount}</option>
                         #end
                     #end
-                ##填写任意内容，侦听需重新填加 A侦听已内置
                     #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
                         <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
@@ -85,7 +79,7 @@
             #@sdpmItem("相关需求")
                 #@Tselect2F()
                     #@Tselect2Body("taskStory" story.storyId==null?"":story.storyId {"class":
-                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "input-text select2"})
                         <option value=""></option>
                         #foreach(s : storyList)
                             <option value=${s?.storyId}>${s?.storyTitle}</option>
@@ -102,20 +96,19 @@
             #@sdpmItem("任务名称")
                 #@formControlDiv("col-8")
                     #tinyInput(
-                        "text" "taskName" "abcdefg"{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！",
-                        "id":
-                        "username","class":
-                        "input-text"})
+                        "text" "taskName" "" {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
+                        "class":"input-text"})
                 #end
             #end
         #end
         #@elementItem()
             #@sdpmItem("任务描述")
                 #@formControlDiv("col-8")
-                    #tinyInput(
-                        "text" "taskDesc" "任务描述"{"placeholder":"任务描述","datatype":"*4-16","id":
-                        "username",
-                        "class":"input-text"})
+                ##                    #tinyInput(
+                ##                        "text" "taskDesc" "任务描述"{"placeholder":"任务描述","datatype":"*4-16","id":
+                ##                        "username",
+                ##                        "class":"input-text"})
+                    #@Teditor("taskDesc" "taskDesc" {"initialFrameHeight":"150","initialFrameWidth":"500"})#end
                 #end
             #end
         #end
@@ -123,11 +116,10 @@
             #@sdpmItem("优先级")
                 #@Tselect2F()
                     #@Tselect2Body("taskPri" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                        <option value=""></option>
+                        #foreach(item : getDict("taskPri"))
+                            <option value="${item?.value}">${item?.text}</option>
+                        #end
                     #end
                 ##填写任意内容，侦听需重新填加 A侦听已内置
 
@@ -137,15 +129,16 @@
         #@elementItem()
             #@sdpmItem("最初预计")
                 #@formControlDiv("col-8")
-                    #tinyInput("text" "taskEstimate" "1.1"{"placeholder":"最初预计","datatype":"*4-16","id":
-                        "username","class":"input-text"})
+                    #tinyInput("text" "taskEstimate" ""{"placeholder":"最初预计","datatype":"n",
+                        "class":"input-text","nullmsg":"请输入最初预计"
+                    })
                 #end
             #end
         #end
         #@elementItem()
             #@sdpmItem("抄送给")
                 #@Tselect2F()
-                    #@Tselect2Body("taskMailto" "" {"class":"input-text select2","multiple":"multiple"}) ##加上为多选项
+                    #@Tselect2Body("taskMailtoArray" "" {"class":"input-text select2","multiple":"multiple"}) ##加上为多选项
                         #foreach(t : team)
                             <option value="${t.teamAccount}">${t.teamAccount}</option>
                         #end
@@ -163,21 +156,22 @@
                 #fileWithInput("file")
             #end
         #end
-        #@elementItem()
-            #@sdpmItem("添加之后")
-                #@formControlDiv("skin-minimal col-9")
-                    #@tinyRadio("sex" "man" "man" {"nullmsg":"请选择性别！","datatype":"*"})继续为需求添加任务#end
-                    #@tinyRadio("sex" "women" "man")返回任务列表#end
-                    #@tinyRadio("sex" "secret" "man")返回需求列表#end
-                #end
-            #end
-        #end
+    ##        #@elementItem()
+    ##            #@sdpmItem("添加之后")
+    ##                #@formControlDiv("skin-minimal col-9")
+    ##                    #@tinyRadio("sex" "man" "man" {"nullmsg":"请选择性别！","datatype":"*"})继续为需求添加任务#end
+    ##                    #@tinyRadio("sex" "women" "man")返回任务列表#end
+    ##                    #@tinyRadio("sex" "secret" "man")返回需求列表#end
+    ##                #end
+    ##            #end
+    ##        #end
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>备注：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("content" "content" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("content" "content" {"initialFrameHeight":"150"})#end
+                </div>
             </div>
         #end
         <br/>
@@ -206,3 +200,9 @@
         #include("/project/recordlist.page")
     #end
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $("form").Validform({});
+    });
+</script>

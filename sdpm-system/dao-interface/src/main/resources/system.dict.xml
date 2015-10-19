@@ -1,0 +1,70 @@
+<dictNodeEntries name="system" title="系统">
+    <dictNodeEntry name="action" title="动态">
+        <dictNodeEntry name="actionOperate" title="动态操作">
+            <dictItem key="created" value="创建" sort="1"/>
+            <dictItem key="opened" value="创建" sort="2"/>
+            <dictItem key="changed" value="变更" sort="3"/>
+            <dictItem key="edited" value="编辑" sort="4"/>
+            <dictItem key="assigned" value="指派" sort="5"/>
+            <dictItem key="closed" value="关闭" sort="6"/>
+            <dictItem key="deleted" value="删除" sort="7"/>
+            <dictItem key="deletedfile" value="删除附件" sort="8"/>
+            <dictItem key="editfile" value="编辑附件" sort="9"/>
+            <dictItem key="erased" value="删除" sort="10"/>
+            <dictItem key="undeleted" value="还原" sort="11"/>
+            <dictItem key="hidden" value="隐藏" sort="12"/>
+            <dictItem key="commented" value="评论" sort="13"/>
+            <dictItem key="activated" value="激活" sort="14"/>
+            <dictItem key="resolved" value="解决" sort="15"/>
+            <dictItem key="reviewed" value="评审" sort="16"/>
+            <dictItem key="moved" value="移动" sort="17"/>
+            <dictItem key="confirmed" value="确认了需求，" sort="18"/>
+            <dictItem key="bugconfirmed" value="确认" sort="19"/>
+            <dictItem key="tostory" value="转需求" sort="20"/>
+            <dictItem key="frombug" value="来源bug" sort="21"/>
+            <dictItem key="totask" value="转任务" sort="22"/>
+            <dictItem key="svncommited" value="提交代码" sort="23"/>
+            <dictItem key="gitcommited" value="提交代码" sort="24"/>
+            <dictItem key="linked2plan" value="关联计划" sort="25"/>
+            <dictItem key="unlinkedfromplan" value="移除计划" sort="26"/>
+            <dictItem key="linked2project" value="关联" sort="27"/>
+            <dictItem key="unlinkedfromproject" value="移除" sort="28"/>
+            <dictItem key="started" value="开始" sort="29"/>
+            <dictItem key="restarted" value="继续" sort="30"/>
+            <dictItem key="recordestimate" value="记录了工时" sort="31"/>
+            <dictItem key="editestimate" value="编辑了工时" sort="32"/>
+            <dictItem key="canceled" value="取消" sort="33"/>
+            <dictItem key="finished" value="完成" sort="34"/>
+            <dictItem key="paused" value="暂停" sort="35"/>
+            <dictItem key="delayed" value="延期" sort="36"/>
+            <dictItem key="suspended" value="挂起" sort="37"/>
+            <dictItem key="login" value="登录系统" sort="38"/>
+            <dictItem key="logout" value="退出登录" sort="39"/>
+            <dictItem key="deleteestimate" value="删除了工时" sort="40"/>
+            <dictItem key="remark" value="添加备注" sort="41"/>
+            <dictItem key="marked" value="编辑" sort="42"/>
+        </dictNodeEntry>
+        <dictNodeEntry name="actionObject" title="动态对象">
+            <dictItem key="user" value="用户" sort="1"/>
+            <dictItem key="story" value="需求" sort="2"/>
+            <dictItem key="task" value="任务" sort="3"/>
+            <dictItem key="productplan" value="计划" sort="4"/>
+            <dictItem key="release" value="发布" sort="5"/>
+            <dictItem key="project" value="项目" sort="6"/>
+            <dictItem key="product" value="产品" sort="7"/>
+            <dictItem key="build" value="版本" sort="8"/>
+            <dictItem key="bug" value="bug" sort="9"/>
+            <dictItem key="case" value="用例" sort="10"/>
+            <dictItem key="testtask" value="测试版本" sort="11"/>
+            <dictItem key="todo" value="代办" sort="12"/>
+            <dictItem key="doclib" value="文档库" sort="13"/>
+            <dictItem key="sla" value="协议" sort="14"/>
+            <dictItem key="client" value="客户" sort="15"/>
+            <dictItem key="faq" value="faq" sort="16"/>
+            <dictItem key="reply" value="回复" sort="17"/>
+            <dictItem key="review" value="评论" sort="18"/>
+            <dictItem key="holiday" value="节假日" sort="19"/>
+            <dictItem key="request" value="请求" sort="20"/>
+        </dictNodeEntry>
+    </dictNodeEntry>
+</dictNodeEntries>

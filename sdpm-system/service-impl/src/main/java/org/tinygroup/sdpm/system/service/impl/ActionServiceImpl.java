@@ -27,8 +27,8 @@ public class ActionServiceImpl implements ActionService {
 		return actionManager.delete(systemAction);
 	}
 
-	public List<SystemAction> find(SystemAction systemAction) {
-		return actionManager.find(systemAction);
+	public List<SystemAction> find(SystemAction systemAction,String orderby, boolean asc) {
+		return actionManager.find(systemAction,orderby,asc);
 	}
 
 	public Pager<SystemAction> findSystemActionPager(int page, int pagesize, SystemAction action, String order,

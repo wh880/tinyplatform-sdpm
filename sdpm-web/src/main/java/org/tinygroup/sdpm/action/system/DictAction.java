@@ -71,6 +71,7 @@ public class DictAction extends BaseController{
 		int s=dictService.deleteDict(dictId);
 		if(s>0)
 		{
+			DictUtil.reLoad();
 		 map.put("status", "success");
 	     map.put("info", "删除成功");
 		}else{
@@ -84,12 +85,12 @@ public class DictAction extends BaseController{
 	public String saveDict(SystemDict systemDict ,Model model){
 		if(systemDict.getDictId()==null){
 			systemDict = dictService.addDict(systemDict);
-			DictUtil.addDict(systemDict);
+			DictUtil.reLoad();
 		}
 		else{
 			SystemDict oldDict = dictService.findDict(systemDict.getDictId());
 			dictService.updateDict(systemDict);
-			DictUtil.editDict(oldDict,systemDict);
+			DictUtil.reLoad();
 		}
 		model.addAttribute("dict", systemDict);
 		return "system/page/dictionaries/dictitem.page";
@@ -120,6 +121,7 @@ public class DictAction extends BaseController{
 			intIds[i] = Integer.valueOf(sids[i]);
 		}
 		dictService.batchDelete(intIds);
+		DictUtil.reLoad();
 		Map<String, String> map = new HashedMap();
 		map.put("info", "success");
 		map.put("status","y" );

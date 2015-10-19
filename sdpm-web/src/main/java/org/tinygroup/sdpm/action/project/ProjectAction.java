@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -57,8 +58,20 @@ public class ProjectAction extends BaseController {
     }
 
     @RequestMapping("add")
-    public String addPage(Model model, HttpServletResponse response, Project project, Integer[] linkProduct) {
-
+    public String addPage(Model model, HttpServletResponse response, Project project, Integer[] linkProduct, Integer[] whiteList) {
+        String whiteListStr = "";
+        if (whiteList != null) {
+            if (whiteList.length > 0) {
+                for (Integer i : whiteList) {
+                    if (StringUtil.isBlank(whiteListStr)) {
+                        whiteListStr = whiteListStr + i;
+                    } else {
+                        whiteListStr = whiteListStr + "," + i;
+                    }
+                }
+            }
+        }
+        project.setProjectWhiteList(whiteListStr);
         Project tProject = projectService.addProject(project);
         projectProductService.addLink(linkProduct, tProject.getProjectId());
         CookieUtils.setCookie(response, "cookie_projectId", tProject.getProjectId().toString());
@@ -86,15 +99,17 @@ public class ProjectAction extends BaseController {
     }
 
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public String editSave(Project project, Model model) {
+    public String editSave(Project project, Model model, Integer[] whiteList, Integer[] linkProduct) {
         if (project.getProjectId() == null) {
-            projectService.addProject(project);
+            Project resProject = projectService.addProject(project);
+            projectProductService.addLink(linkProduct, resProject.getProjectId());
         } else {
             projectService.updateProject(project);
         }
         model.addAttribute("project", project);
         return "project/survey/index.page";
     }
+
     @RequestMapping(value = "/delaysave", method = RequestMethod.POST)
     public String delaySave(Project project, Model model) {
         if (project.getProjectId() == null) {
@@ -105,6 +120,7 @@ public class ProjectAction extends BaseController {
         model.addAttribute("project", project);
         return "redirect:" + adminPath + "/projectmanage/survey/index";
     }
+
     @RequestMapping("/delay")
     public String delay(Integer projectId, Model model) {
         if (projectId != null) {
@@ -128,7 +144,7 @@ public class ProjectAction extends BaseController {
     }
 
     @RequestMapping("/basicInformation")
-    public String basicInformation(Integer projectID, Model model){
+    public String basicInformation(Integer projectID, Model model) {
         Project project = projectService.findById(projectID);
         model.addAttribute("project", project);
         return "project/survey/basicInformation.pagelet";

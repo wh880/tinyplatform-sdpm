@@ -412,4 +412,11 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 		
 		return getDslSession().fetchList(select, Project.class);
 	}
+
+	public List<Project> findByCondition(String condition) {
+		Select select = selectFrom(PROJECTTABLE).where(
+				FragmentSql.fragmentCondition(condition)
+		);
+		return getDslSession().fetchList(select, Project.class);
+	}
 }

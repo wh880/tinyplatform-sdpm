@@ -444,7 +444,7 @@ public class BugAction extends BaseController {
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
 				, LogUtil.LogAction.OPENED
-				,String.valueOf(bug.getBugId())
+				,String.valueOf(qbug.getBugId())
 				,UserUtils.getUserId()
 				,String.valueOf(bug.getProductId())
 				,String.valueOf(bug.getProjectId())
