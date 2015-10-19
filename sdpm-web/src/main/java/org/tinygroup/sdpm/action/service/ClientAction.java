@@ -207,7 +207,7 @@ public class ClientAction extends BaseController {
             clientUserService.updateClientUser(clientUser);
         } else
             clientUser = clientUserService.addClientUser(clientUser);
-        return "redirect:" + adminPath + "/service/client/clientDetail?id=" + clientUser.getClientId();
+        return "redirect:" + adminPath + "/service/client/clientSla?id=" + clientUser.getClientId();
     }
 
     @RequestMapping("/slaAdd")

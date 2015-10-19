@@ -2,7 +2,7 @@
 
     #foreach(l:pager.records)
     #*#@normalLiItemsconment(1 "../faq/questionAnswer.page" l.faqQuestion "")*#
-        #@normalLiItemsconment(1 "../faq/questionAnswer?id="+l.faqId l.faqQuestion "")
+        #@normalLiItemsconment(lFor.index "../faq/questionAnswer?id="+l.faqId l.faqQuestion liClass="")
 
 
         #*faqmenu问题后面的编辑和删除*#

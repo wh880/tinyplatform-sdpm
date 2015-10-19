@@ -325,7 +325,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>7.6.16.v20140903</version>
                 <configuration>
-                    <jvmArgs>-XX:PermSize=256M -XX:MaxPermSize=1024M</jvmArgs>
+                    <jvmArgs>-XX:PermSize=512M -XX:MaxPermSize=1024M</jvmArgs>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <port>8989</port>

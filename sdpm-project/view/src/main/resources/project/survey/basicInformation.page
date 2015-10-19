@@ -15,8 +15,10 @@
                 #end
                 #@tr()
                     #@td()起止时间#end
-                    #@td()${selProject?.projectBegin}~${selProject?.projectEnd}#end
-                ##                #formatDate(selProject?.projectBegin, "yyyy-MM-dd")~#formatDate(selProject?.projectEnd, "yyyy-MM-dd")
+                    #@td()${formatDate(selProject?.projectBegin, "yyyy-MM-dd")}~<br/>
+                        ${formatDate(selProject?.projectEnd, "yyyy-MM-dd")}
+                    #end
+                ##
                 #end
                 #@tr()
                     #@td()可用工作日#end
@@ -53,7 +55,7 @@
                 #end
                 #@tr()
                     #@td()访问控制#end
-                    #@td()${selProject?.projectAcl}(有项目视图权限，即可访问)#end
+                    #@td()${getDict("projectAcl", selProject?.projectAcl)}#end
                 #end
                 #@tr()
                     #@td()分组白名单#end

@@ -83,7 +83,7 @@ public class HolidayAction extends BaseController{
 				
 				day.setHoilidayRemark(holiday.getHoilidayRemark());
 				
-				day.setHolidayAccount(holiday.getHolidayAccount());
+				day.setHolidayAccount(UserUtils.getUserAccount());
 				
 				day.setHolidayDate(dates[i]);
 				day.setHolidayDeleted(holiday.getHolidayDeleted());
@@ -170,8 +170,9 @@ public class HolidayAction extends BaseController{
 	}
 	@RequestMapping("holiday/action")
 	public String holidayAction(SystemAction action,Model model){
-		List<SystemAction> actions = actionService.find(action, null, false);
+		List<SystemAction> actions = actionService.find(action, "actionDate", false);
 		List<HolidayHistory> histories= new ArrayList<HolidayHistory>();
+		if(actions.size()<12){
 		for(int i=0,n=actions.size();i<n;i++){
 			HolidayHistory history=new HolidayHistory();
 			history.setHolidayHistoryAction(actions.get(i).getActionAction());
@@ -181,6 +182,18 @@ public class HolidayAction extends BaseController{
 					actions.get(i).getActionObjectId()))).getHolidayName());
 			history.setHolidayHistoryDate(actions.get(i).getActionDate());
 			histories.add(history);
+			}
+		}else{
+			for(int i=0;i<12;i++){
+				HolidayHistory history=new HolidayHistory();
+				history.setHolidayHistoryAction(actions.get(i).getActionAction());
+				history.setHolidayHistoryActor(actions.get(i).getActionActor());
+				
+				history.setHolidayHistoryName((holidayService.findById(Integer.valueOf(
+						actions.get(i).getActionObjectId()))).getHolidayName());
+				history.setHolidayHistoryDate(actions.get(i).getActionDate());
+				histories.add(history);
+				}
 		}
 	 		model.addAttribute("action", histories);
 		return "/system/page/holiday/holiday-dynamic.pagelet";

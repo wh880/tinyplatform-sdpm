@@ -14,10 +14,16 @@
         $(function () {
             var actionUrl = $("#taskTable").attr("data-url");
             $(".selChoose").click(function (e) {
-                $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
-                $(".selChoose").removeClass("active_btn");
-                $(this).addClass("active_btn");
-                $("#taskTable").trigger("refresh");
+                if ($("#taskTable").length > 0) {
+                    $("#taskTable").attr("data-url", actionUrl + "&choose=" + $(this).attr("val"));
+                    $(".selChoose").removeClass("active_btn");
+                    $(this).addClass("active_btn");
+                    $("#taskTable").trigger("refresh");
+                } else {
+                    var url = "${TINY_CONTEXT_PATH+adminPath}/project/task/index?choose=" + $(this).attr("val");
+                    window.location.href = url;
+                }
+
             });
         });
     </script>
@@ -30,13 +36,13 @@
         ${statuMap.get(statu==null?"0":statu)}
         <span class="caret"></span>
     </a>
-<ul class="dropdown-menu" aria-labelledby="dLabel">
-    #foreach(var : statuMap.keySet() )
-    #if(var != 0)
-        <li><a class="projectMore" val="${var}">${statuMap.get(var)}</a></li>
-    #end
-#end
-</ul>
+    <ul class="dropdown-menu" aria-labelledby="dLabel">
+        #foreach(var : statuMap.keySet() )
+            #if(var != 0)
+                <li><a class="projectMore" val="${var}">${statuMap.get(var)}</a></li>
+            #end
+        #end
+    </ul>
 </div>
     <script>
         $(function () {
@@ -112,6 +118,6 @@
     #end
 </span>
 
-#div(divClass="clearfix")
-#include("/project/mulsearch.page")
+    #div(divClass="clearfix")
+    #include("/project/mulsearch.page")
 #end

@@ -127,7 +127,7 @@
     #@sdpmItem("访问控制")
         #@formControlDiv("skin-minimal col-9")
             #foreach(acl : getDict("projectAcl"))
-                #@tinyRadio("projectAcl" acl.value "1")${acl.text}#end
+                #@tinyRadio("projectAcl" acl.value "")${acl.text}#end
             #end
         ##            #@tinyRadio("projectAcl" "1" "man")默认设置(有项目视图权限，即可访问)#end
         ##            #@tinyRadio("projectAcl" "2" "man")私有项目(只有项目团队成员才能访问)#end

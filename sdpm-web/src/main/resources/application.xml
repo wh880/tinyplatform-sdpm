@@ -47,8 +47,7 @@
             resolve-classpath="true">
         <class-paths>
             <!-- 需要加的自己署名 -->
-            <!-- Hulk's Paht -->
-
+            <!-- Hulk's Path -->
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-common\view\src\main\resources"/>
             <!-- 徐丹洋-->
@@ -481,7 +480,7 @@
     <!--文件监控器配置参数，具体参见FileMonitorProcessor配置管理手册，interrupt扫描间隔时间，单位秒 -->
     <file-monitor interval="10" enable="false"/>
 
-    <gzip-filter max-content-length="0">
+    <gzi region="sdpmDictCache"ngth="0">
         <!-- 多个content-type已分号隔开 -->
         <!-- <exclude-content-type>text/javascript;text/css</exclude-content-type> -->
     </gzip-filter>
