@@ -18,19 +18,20 @@
             <option value="belong">从属于</option>
         </select>
 
-        <select id="clientName">
-            <option value="" selected="selected"></option>
-            <option value="0">恒生电子</option>
-            <option value="1">诺基亚</option>
-            <option value="2">海康威视</option>
-            <option value="null">空</option>
-        </select>
+
         <select id="productName">
             <option value="" selected="selected"></option>
             <option value="0">支付宝</option>
             <option value="1">财付通</option>
             <option value="2">余额宝</option>
             <option value="3">陆金所</option>
+            <option value="null">空</option>
+        </select>
+        <select id="clientName">
+            <option value="" selected="selected"></option>
+            <option value="0">恒生电子</option>
+            <option value="1">诺基亚</option>
+            <option value="2">海康威视</option>
             <option value="null">空</option>
         </select>
         <select id="slaStatus">
@@ -146,7 +147,7 @@
                 <div class="btn-group">
                     <button type="submit" id="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
                     <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
-                    #@aModal("#myModal" "请输入查询标题（保存之前请先查询）：" "500" "120" "btn radius btn-primary btn-sm"
+                    #@aModal("#myModal" "请输入查询标题（保存之前请先查询）：" "600" "170" "btn radius btn-primary btn-sm"
                         "/service/sla/searchSave.pagelet")
                         <div style="margin: 4px">
                             保存
@@ -206,12 +207,17 @@
             "operator": "=",
             "value": "productname"
         });
-
         itemlist.push({
             "name": "slaStatus",
             "title": "服务级别协议",
             "operator": "=",
             "value": "slastatus"
+        });
+        itemlist.push({
+            "name": "slaCreatedBy",
+            "title": "创建人",
+            "operator": "=",
+            "value": "text"
         });
         itemlist.push({
             "name": "slaTitle",
@@ -225,12 +231,7 @@
             "operator": "=",
             "value": "text"
         });
-        itemlist.push({
-            "name": "slaCreatedBy",
-            "title": "创建人",
-            "operator": "=",
-            "value": "text"
-        });
+
         itemlist.push({
             "name": "slaReviewedBy",
             "title": "批准人",
@@ -263,11 +264,11 @@
                 case "text":
                     $("#valueBox" + itemIndex).html('<input type="text" name="value' + sIndex + '" id="value' + itemIndex + '" value="" class="form-control">');
                     break;
-                case "clientname":
-                    $("#valueBox" + itemIndex).html($('<select name="value' + sIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#clientName").html()));
-                    break;
                 case "productname":
                     $("#valueBox" + itemIndex).html($('<select name="value' + sIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#productName").html()));
+                    break;
+                case "clientname":
+                    $("#valueBox" + itemIndex).html($('<select name="value' + sIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#clientName").html()));
                     break;
                 case "slastatus":
                     $("#valueBox" + itemIndex).html($('<select name="value' + sIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#slaStatus").html()));
