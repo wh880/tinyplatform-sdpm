@@ -19,9 +19,12 @@
                    onclick="selectAllNullorReserve('idCheck','反选');"/>
             <a class="btn btn-default btn-success" href="${TINY_CONTEXT_PATH+adminPath}/project/task/preadd">增加</a>
             #end
-            #set(requestStatuString = tinyRequestQueryString!=null ?"&"+tinyRequestQueryString:"")
+        ###set(requestStatuString = tinyRequestQueryString!=null ?"&"+tinyRequestQueryString:"")
             #if(moduleId)
                 #set(requestStatuString = "&moduleId=" + moduleId)
+            #end
+            #if(choose)
+                #set(requestStatuString = "&choose=" + choose)
             #end
             #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+
                 "/project/task/findPager?projectId="+cookie_projectId+requestStatuString) ##取数据地址 总数据
