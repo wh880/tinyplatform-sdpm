@@ -16,7 +16,6 @@ import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
-import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
@@ -70,14 +69,24 @@ public class ProductLineAction extends BaseController {
                 ,null
                 ,null
                 ,null
-                ,productLine1.getProductLineSpec());
+                , null);
 
         return "redirect:" + "/productLine/page/tabledemo/list.page";
     }
 
     @RequestMapping("/update")
     public String update(ProductLine productLine) {
+        ProductLine productLineOld = productLineService.findProductLine(productLine.getProductLineId());
         productLineService.updateProductLine(productLine);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
+                LogUtil.LogAction.EDITED,
+                String.valueOf(productLine.getProductLineId()),
+                UserUtils.getUserId(),
+                null,
+                null,
+                productLineOld,
+                productLine,
+                productLine.getProductLineSpec());
         return "redirect:" + "/productLine/page/tabledemo/list.page";
     }
 
@@ -92,8 +101,18 @@ public class ProductLineAction extends BaseController {
     @ResponseBody
     @RequestMapping("/delete")
     public Map delete(Integer productLineId) {
+        ProductLine productLine = new ProductLine();
         productLineService.deleteProductLine(productLineId);
         Map<String, String> map = new HashMap<String, String>();
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
+                LogUtil.LogAction.DELETED,
+                String.valueOf(productLineId),
+                UserUtils.getUserId(),
+                null,
+                null,
+                null,
+                null,
+                null);
         map.put("status", "success");
         map.put("info", "删除成功");
         return map;

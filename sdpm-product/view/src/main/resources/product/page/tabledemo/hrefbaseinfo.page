@@ -66,16 +66,16 @@
 		       		#@tbody()
 		       			#@tr()
 							#@td()由谁创建#end
-		       				#@td()${getUserName(story?.storyOpenedBy)}于${story?.storyOpenedDate?formatDate(story?.storyOpenedDate,'yyyy-MM-dd'):""}创建 #end
+							#@td()${UserUtils.getUserById(story?.storyOpenedBy).orgUserRealName}于${story?.storyOpenedDate?formatDate(story?.storyOpenedDate,'yyyy-MM-dd'):""}创建 #end
 		       			#end
 		       			
 		       			#@tr()
 							#@td()指派给#end
-		       				#@td()${getUserName(story?.storyAssignedTo)} #end
+							#@td()${UserUtils.getUserById(story?.storyAssignedTo).orgUserRealName}#end
 		       			#end
 		       			#@tr()
 							#@td()由谁评审#end
-		       				#@td()${getUserName(story?.storyReviewedBy)}#end
+							#@td()${UserUtils.getUserById(story?.storyReviewedBy).orgUserRealName}#end
 		       			#end
 		       			#@tr()
 							#@td()评审时间#end
@@ -83,7 +83,7 @@
 		       			#end
 		       			#@tr()
 							#@td()由谁关闭#end
-		       				#@td()${getUserName(story?.storyClosedBy)}#end
+							#@td()${UserUtils.getUserById(story?.storyClosedBy).orgUserRealName}#end
 		       			#end
 		       			#@tr()
 							#@td()关闭原因#end
@@ -91,7 +91,7 @@
 		       			#end
 		       			#@tr()
 							#@td()最后修改#end
-		       				#@td()${story?.storyLastEditedBy}于 ${story?.storyLastEditedDate?formatDate(story?.storyLastEditedDate,'yyyy-MM-dd'):""}修改#end
+							#@td()${UserUtils.getUserById(story?.storyLastEditedBy).orgUserRealName} 于 ${story?.storyLastEditedDate?formatDate(story?.storyLastEditedDate,'yyyy-MM-dd'):""}修改#end
 		       			#end	
 		         		#end
 				#end
