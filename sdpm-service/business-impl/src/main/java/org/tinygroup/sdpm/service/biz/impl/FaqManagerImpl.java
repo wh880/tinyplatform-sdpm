@@ -55,4 +55,8 @@ public class FaqManagerImpl implements FaqManager{
         return faqDao.getPagerByDeptId(start, limit, deptId);
     }
 
+    public Pager<ServiceFaq> search(Integer start, Integer limit, ServiceFaq faq, String faqQuestion) {
+        return faqDao.searchPager(start, limit, faq,faqQuestion);
+    }
+
 }

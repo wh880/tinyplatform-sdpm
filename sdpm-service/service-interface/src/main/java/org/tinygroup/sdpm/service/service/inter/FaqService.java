@@ -65,4 +65,12 @@ public interface FaqService {
      */
    /* Integer selectcount(Integer id);*/
     Pager<ServiceFaq> findUserByDeptId(Integer start, Integer limit, Integer deptId);
+
+    /**
+     * 搜索Faq
+     *
+     * @param
+     * @return
+     */
+    Pager<ServiceFaq> searchFaq(Integer start, Integer limit, ServiceFaq faq, String faqQuestion);
 }

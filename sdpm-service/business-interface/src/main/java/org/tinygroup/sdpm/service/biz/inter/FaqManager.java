@@ -57,4 +57,12 @@ ServiceFaq find(Integer id);
     Integer delete(Integer id);
 
     Pager<ServiceFaq> findUserListByDeptId(Integer start, Integer limit, Integer deptId);
+
+    /**
+     * 搜索Faq
+     *
+     * @param id 主键
+     * @return
+     */
+    Pager<ServiceFaq> search(Integer start, Integer limit, ServiceFaq faq, String faqQuestion);
 }

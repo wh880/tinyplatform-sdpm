@@ -44,4 +44,8 @@ public class FaqServiceImpl implements FaqService{
     public Pager<ServiceFaq> findUserByDeptId(Integer start, Integer limit, Integer deptId) {
         return faqManager.findUserListByDeptId(start, limit, deptId);
     }
+
+    public Pager<ServiceFaq> searchFaq(Integer start, Integer limit, ServiceFaq faq, String faqQuestion) {
+        return faqManager.search(start, limit, faq, faqQuestion);
+    }
 }

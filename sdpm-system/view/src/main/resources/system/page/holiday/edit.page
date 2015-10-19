@@ -48,24 +48,24 @@
 			      #end
 			
 			
-			
-				 #@elementItem()
-			        #@colLabel()创建者：#end
-				        #@formControlDiv("col-8")
-				        	 #@Tselect2F()
-			                    #@Tselect2Body("holidayAccount" holiday?.holidayAccount {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-			                         #for(u:users)
-			                        <option value="${u?.orgUserAccount}">${u?.orgUserAccount}</option>
-			                        #end 
-			                    #end
-			                
-			                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
-			                #end
-				        	 
-				        	 
-				        #end
-			        #@validateDiv("col-2")#end
-			      #end
+##			
+##				 #@elementItem()
+##			        #@colLabel()创建者：#end
+##				        #@formControlDiv("col-8")
+##				        	 #@Tselect2F()
+##			                    #@Tselect2Body("holidayAccount" holiday?.holidayAccount {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+##			                         #for(u:users)
+##			                        <option value="${u?.orgUserAccount}">${u?.orgUserAccount}</option>
+##			                        #end 
+##			                    #end
+##			                
+##			                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+##			                #end
+##				        	 
+##				        	 
+##				        #end
+##			        #@validateDiv("col-2")#end
+##			      #end
 			 
         #@elementItem()
         #@colLabel()描述：#end

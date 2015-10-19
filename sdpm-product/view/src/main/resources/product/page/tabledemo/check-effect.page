@@ -18,16 +18,17 @@
 					      #end
 					    #end
 					    #@tbody()
-					    	#@tr()
+					    	
 						    	#for(project:projectList)
-						    		#@td()	${project?.projectId}	#end
-						    		#@td()  ${project?.projectName} #end
-						    		#@td()  ${project?.projectStatus} #end
-						    		#@td()  ${project?.projectOpenedBy} #end
-						    		#@td()  ${project?.projectCloseBy} #end
+							    	#@tr()
+							    		#@td()	${project?.projectId}	#end
+							    		#@td()  ${project?.projectName} #end
+							    		#@td()  ${project?.projectStatus} #end
+							    		#@td()  ${project?.projectOpenedBy} #end
+							    		#@td()  ${project?.projectCloseBy} #end
+						    		#end
 						    	#end
-					    		
-					    	#end
+					    	
 					    #end
 					  #end
 					#end
@@ -45,18 +46,19 @@
 					      #end
 					    #end
 					     #@tbody()
-					    	#@tr()
+					    	
 					    		#for(bug:bugList)
-					    			#@td()	${bug?.bugId}	#end
-						    		#@td()  ${bug?.bugTitle} #end
-						    		#@td()  ${bug?.bugStatus} #end
-						    		#@td()  ${bug?.bugOpenedBy} #end
-						    		#@td()  ${bug?.bugResolvedBy} #end
-						    		#@td() ${bug?.bugResolution} #end
-						    		#@td() ${bug?.bugLastEditedBy} #end
+						    		#@tr()
+						    			#@td()	${bug?.bugId}	#end
+							    		#@td()  ${bug?.bugTitle} #end
+							    		#@td()  ${bug?.bugStatus} #end
+							    		#@td()  ${bug?.bugOpenedBy} #end
+							    		#@td()  ${bug?.bugResolvedBy} #end
+							    		#@td() ${bug?.bugResolution} #end
+							    		#@td() ${bug?.bugLastEditedBy} #end
+						    		#end
 					    		#end
-					    		
-					    	#end
+					    	
 					    #end
 					  #end
 					#end
@@ -73,16 +75,18 @@
 					      #end
 					    #end
 					    #@tbody()
-					    	#@tr()
+					    	
 					    		#for(testCase:testCaseList)
-					    			#@td()	${testCase?.caseId}	#end
-						    		#@td()  ${testCase?.caseTitle} #end
-						    		#@td() ${testCase?.caseStatus} #end
-						    		#@td()  ${testCase?.caseOpenedBy} #end
-						    		#@td()  ${testCase?.caseLastEditedBy} #end
+					    			#@tr()
+						    			#@td()	${testCase?.caseId}	#end
+							    		#@td()  ${testCase?.caseTitle} #end
+							    		#@td() ${testCase?.caseStatus} #end
+							    		#@td()  ${testCase?.caseOpenedBy} #end
+							    		#@td()  ${testCase?.caseLastEditedBy} #end
+						    		#end
 					    		#end
 					    		
-					    	#end
+					    	
 					    #end
 					  #end
 					#end
