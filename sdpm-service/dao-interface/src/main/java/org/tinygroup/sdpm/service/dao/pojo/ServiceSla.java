@@ -24,8 +24,8 @@ import java.util.Date;
  */
 public class ServiceSla {
 
-	public static Integer DELETE_YES=1;
-	public static Integer DELETE_NO=0;
+	//	public static Integer DELETE_YES=1;
+//	public static Integer DELETE_NO=0;
 	/*在faq的pojo中，添加客户名称*/
 	private String clientName;
 	private String productName;
@@ -45,8 +45,6 @@ public class ServiceSla {
 	 * 3vip
 	 */
 	private Integer serviceLevel;
-	/*关联客户表的客户名称*/
-	private  Integer  serviceName;
 	/**
 	 * 服务期限
 	 *
@@ -161,7 +159,7 @@ public class ServiceSla {
 	private String cilentProductVision;
 
 	public ServiceSla() {
-		setDeleted(DELETE_NO);
+		setDeleted(0);
 	}
 
 	public String getClientName() {
