@@ -47,7 +47,7 @@ public class UserUtils {
      * @param id
      * @return 取不到返回null
      */
-    public static OrgUser get(String id) {
+    public static OrgUser getUserById(String id) {
         OrgUser user = (OrgUser) CacheUtils.get(USER_CACHE, USER_CACHE_ID_ + id);
         if (user == null) {
             user = userService.findUser(id);
@@ -112,7 +112,7 @@ public class UserUtils {
     public static OrgUser getUser() {
         Principal principal = getPrincipal();
         if (principal != null) {
-            OrgUser user = get(principal.getId());
+            OrgUser user = getUserById(principal.getId());
             if (user != null) {
                 return user;
             }
