@@ -46,8 +46,7 @@
             resolve-classpath="true">
         <class-paths>
             <!-- 需要加的自己署名 -->
-            <!-- Hulk's Paht -->
-
+            <!-- Hulk's Path -->
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-common\view\src\main\resources"/>
             <!-- 徐丹洋-->
