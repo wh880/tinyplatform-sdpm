@@ -5,7 +5,7 @@
 <span class="f">
     <a val="1" "ml-5" class="selChoose ${choose=="1"?"active_btn":""}">未关闭</a>
     <a val="2" "ml-5" class="selChoose ${choose=="2"?"active_btn":""}">所有</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page?choose=3" "ml-5" class=${choose=="3"?"active_btn":""}>看板</a>
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/board?choose=3" "ml-5" class=${choose=="3"?"active_btn":""}>看板</a>
     <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/gantt?choose=4" "ml-5" class=${choose=="4"?"active_btn":""}>甘特图</a>
     <a href="${TINY_CONTEXT_PATH+adminPath}/project/burn/init?choose=6" "ml-5" class=${choose=="6"?"active_btn":""}>燃尽图</a>
     <a val="7" "ml-5" class="selChoose ${choose=="7"?"active_btn":""}">指派给我</a>

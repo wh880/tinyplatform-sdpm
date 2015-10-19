@@ -485,8 +485,8 @@ public class TaskAction extends BaseController {
             map.put("pGroup", "0");
             map.put("pParent", "0");
             map.put("pOpen", "1");
-            map.put("pDepend", "1");
-            map.put("pCaption", "brian");
+            map.put("pDepend", "0");
+            map.put("pCaption", "");
             resList.add(map);
         }
         return resList;
@@ -499,5 +499,44 @@ public class TaskAction extends BaseController {
         return "project/task/ganttFind.pagelet";
     }
 
+    @RequestMapping("/board")
+    public String board(Model model) {
+        Map<String, List<ProjectTask>> map = new HashMap<String, List<ProjectTask>>();
+        ProjectTask task = new ProjectTask();
+        task.setTaskStatus(task.WAIT);
+        List<ProjectTask> resList = taskService.findListTask(task);
+        model.addAttribute("waitList", resList);
+
+        task.setTaskStatus(task.DOING);
+        resList = taskService.findListTask(task);
+        model.addAttribute("doingList", resList);
+
+        task.setTaskStatus(task.DONE);
+        resList = taskService.findListTask(task);
+        model.addAttribute("doneList", resList);
+
+        task.setTaskStatus(task.CANCEL);
+        resList = taskService.findListTask(task);
+        model.addAttribute("cancelList", resList);
+
+        task.setTaskStatus(task.CLOSE);
+        resList = taskService.findListTask(task);
+        model.addAttribute("closeList", resList);
+
+
+        return "project/task/board.page";
+    }
+
+    @RequestMapping("/modal/{forward}")
+    public String doc(@PathVariable(value = "forward") String forward, Model model, String taskId) {
+        model.addAttribute("task", taskService.findTask(Integer.parseInt(taskId)));
+        return "project/task/modal/" + forward + ".pagelet";
+    }
+
+    @RequestMapping("/grouping")
+    public String grouping(String groupKey) {
+
+        return "project/task/grouping.page";
+    }
 
 }
