@@ -24,7 +24,8 @@
                 #if(m1)
 
                     #@aModal(
-                        "#m" selProject.projectName+">延期" "750" "350" "" adminPath+"/project/delay?projectId="+selProject.projectId)#buttonIcon(iconClass="icon-calendar")延期
+                        "#m" selProject.projectName+">延期" "750" "350" "" adminPath+
+                        "/project/delay?projectId="+selProject.projectId)#buttonIcon(iconClass="icon-calendar")延期
                     #end
                 #end
                 #set(m2=menuManager.getMenu("pro-survey-hangon"))
@@ -74,13 +75,10 @@
         </div>
     #end
     #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-    ##加入后，js代码会导致页面排版混乱
-        #include("/project/recordlist.page")
+        #history(adminPath+"/system/action/ajax/history?actionObjectType=project&actionObjectId="+selProject.projectId)
     #end
 </div>
 <div class="infoPage-right">
     #TypeInfo("project", selProject?.projectId)
 </div>
 
-#@simpleModal("m" "")#end
