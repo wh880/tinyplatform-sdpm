@@ -38,15 +38,18 @@ public class EffortAction extends BaseController{
 	@Autowired
 	private UserService userService;
 	@RequestMapping("")
-	public String note(){
-		
+	public String note(Model model){
+		Date date = new Date();
+		model.addAttribute("date", date);
 		return "/project/note/index.page";
 	}
 	@RequestMapping("date/{type}")
-	public String date(@PathVariable(value="type")String type){
+	public String date(@PathVariable(value="type")String type,Model model){
 		if("1".equals(type)){
 			return "/project/note/notetable.page";
 		}
+		List<OrgUser> uers = userService.findUserList(new OrgUser());
+		model.addAttribute("user", uers);
 		return "/project/note/notetable.page";
 	}
 

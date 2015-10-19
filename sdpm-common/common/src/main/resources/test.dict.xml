@@ -20,14 +20,14 @@
           <dictItem key="12" value="同上" sort="12"/>
           </dictNodeEntry>
           <dictNodeEntry name="bugResolution" title="解决方案">
-          <dictItem key="1" value="/" sort="1"/>
-          <dictItem key="2" value="重复Bug" sort="2"/>
-          <dictItem key="3" value="设计如此" sort="3"/>
-          <dictItem key="4" value="外部原因" sort="4"/>
-          <dictItem key="5" value="已解决" sort="5"/>
-          <dictItem key="6" value="无法重现" sort="6"/>
-          <dictItem key="7" value="延期解决" sort="7"/>
-          <dictItem key="8" value="不予解决" sort="8"/>
+          <dictItem key="1" value="重复Bug" sort="1"/>
+          <dictItem key="2" value="设计如此" sort="2"/>
+          <dictItem key="3" value="外部原因" sort="3"/>
+          <dictItem key="4" value="已解决" sort="4"/>
+          <dictItem key="5" value="无法重现" sort="5"/>
+          <dictItem key="6" value="延期解决" sort="6"/>
+          <dictItem key="7" value="不予解决" sort="7"/>
+          
           
           </dictNodeEntry>
           
@@ -55,26 +55,26 @@
           </dictNodeEntry>
           
           <dictNodeEntry name="bugBrowser" title="浏览器">
-          <dictItem key="1" value="全部" sort="1"/>
-          <dictItem key="2" value="IE系列" sort="2"/>
-          <dictItem key="3" value="IE11 " sort="3"/>
-          <dictItem key="4" value="IE10" sort="4"/>
-          <dictItem key="5" value="IE9 " sort="5"/>
-          <dictItem key="6" value="IE8" sort="6"/>
-          <dictItem key="7" value="IE7" sort="7"/>
-          <dictItem key="8" value="IE6" sort="8"/>
-          <dictItem key="9" value="chrome" sort="9"/>
-          <dictItem key="10" value="Firefox系列" sort="10"/>
-          <dictItem key="11" value="Firefox4" sort="11"/>
-          <dictItem key="12" value="Firefox3" sort="12"/>
-          <dictItem key="13" value="Firefox2" sort="13"/>
-          <dictItem key="14" value="opera10" sort="14"/>
-          <dictItem key="15" value="opera9" sort="15"/>
-          <dictItem key="16" value="Safari" sort="16"/>
-          <dictItem key="17" value="遨游" sort="17"/>
-          <dictItem key="18" value="UC" sort="18"/>
-          <dictItem key="19" value="其他" sort="19"/>
-          <dictItem key="20" value="同上" sort="19"/>
+        
+          <dictItem key="1" value="IE系列" sort="1"/>
+          <dictItem key="2" value="IE11 " sort="2"/>
+          <dictItem key="3" value="IE10" sort="3"/>
+          <dictItem key="4" value="IE9 " sort="4"/>
+          <dictItem key="5" value="IE8" sort="5"/>
+          <dictItem key="6" value="IE7" sort="6"/>
+          <dictItem key="7" value="IE6" sort="7"/>
+          <dictItem key="8" value="chrome" sort="8"/>
+          <dictItem key="9" value="Firefox系列" sort="9"/>
+          <dictItem key="10" value="Firefox4" sort="10"/>
+          <dictItem key="11" value="Firefox3" sort="11"/>
+          <dictItem key="12" value="Firefox2" sort="12"/>
+          <dictItem key="13" value="opera10" sort="13"/>
+          <dictItem key="14" value="opera9" sort="14"/>
+          <dictItem key="15" value="Safari" sort="15"/>
+          <dictItem key="16" value="遨游" sort="16"/>
+          <dictItem key="17" value="UC" sort="17"/>
+          <dictItem key="18" value="其他" sort="18"/>
+          
           </dictNodeEntry>
     </dictNodeEntry>
     <dictNodeEntry name="case" title="测试用例">
@@ -82,16 +82,12 @@
             <dictItem key="1" value="未开始" sort="1"/>
             <dictItem key="2" value="已完成" sort="2"/>
         </dictNodeEntry>
-         <dictNodeEntry name="caseType" title="用例类型">
+       <!--   <dictNodeEntry name="caseType" title="用例类型">
             <dictItem key="1" value="1" sort="1"/>
             <dictItem key="2" value="2" sort="2"/>
             <dictItem key="3" value="3" sort="3"/>
-        </dictNodeEntry>
-        <dictNodeEntry name="caseStage" title="试用阶段">
-            <dictItem key="1" value="版本1" sort="1"/>
-            <dictItem key="2" value="版本2" sort="2"/>
-            <dictItem key="3" value="版本3" sort="3"/>
-        </dictNodeEntry>
+        </dictNodeEntry>  --> 
+       
 	    <dictNodeEntry name="casePriority" title="优先级">
             <dictItem key="1" value="1" sort="1"/>
             <dictItem key="2" value="2" sort="2"/>
