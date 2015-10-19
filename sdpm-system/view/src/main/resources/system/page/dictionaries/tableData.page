@@ -14,7 +14,7 @@
 						#foreach(m in menuManager.getScopeMenus("dictitem-op"))
 							#if(m.id!="dictitem-del")
 								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal
-								 m.icon m.name "" ""adminPath+m.href +"?dictId="+d?.dictId"ml-5")
+								 m.icon m.name "500" "300"adminPath+m.href +"?dictId="+d?.dictId"ml-5")
 							#else
 ##								#iconOperation(m.icon m.name "ml-5 delBtn"adminPath+m.href+"?dictId="+d?.dictId)
 								#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href d?.dictId)#buttonIcon(iconClass=m.icon)#end

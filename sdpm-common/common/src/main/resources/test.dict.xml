@@ -19,6 +19,17 @@
           <dictItem key="11" value="其他" sort="11"/>
           <dictItem key="12" value="同上" sort="12"/>
           </dictNodeEntry>
+          <dictNodeEntry name="bugResolution" title="解决方案">
+          <dictItem key="1" value="/" sort="1"/>
+          <dictItem key="2" value="重复Bug" sort="2"/>
+          <dictItem key="3" value="设计如此" sort="3"/>
+          <dictItem key="4" value="外部原因" sort="4"/>
+          <dictItem key="5" value="已解决" sort="5"/>
+          <dictItem key="6" value="无法重现" sort="6"/>
+          <dictItem key="7" value="延期解决" sort="7"/>
+          <dictItem key="8" value="不予解决" sort="8"/>
+          
+          </dictNodeEntry>
           
           <dictNodeEntry name="bugSeverity" title="严重程度">
           <dictItem key="1" value="1" sort="1"/>

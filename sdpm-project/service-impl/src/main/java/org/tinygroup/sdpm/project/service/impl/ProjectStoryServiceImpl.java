@@ -9,6 +9,7 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.biz.inter.ProjectStoryManager;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
+import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
@@ -30,6 +31,8 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     private TaskManager taskManager;
     @Autowired
     private ProjectManager projectManager;
+    @Autowired
+    private ProjectBuildDao projectBuildDao;
 
     public List<Project> findProjectsByStory(Integer storyId) {
         if (storyId == null) {
@@ -64,18 +67,12 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     public List<ProductStory> findStoryByProject(Integer projectId) {
         List<ProjectStory> projectStoryList = projectStoryManager.findSrotys(projectId);
         List<Integer> storyList = new ArrayList<Integer>();
-        if (!projectStoryList.isEmpty()) {
-            for (ProjectStory projectStory : projectStoryList) {
-                storyList.add(projectStory.getStoryId());
-            }
-            Integer[] i = new Integer[storyList.size()];
-            List<ProductStory> list = storyManager.findList(storyList.toArray(i));
-            return list;
-        } else {
-            return null;
+        for (ProjectStory projectStory : projectStoryList) {
+            storyList.add(projectStory.getStoryId());
         }
-
-
+        Integer[] i = new Integer[storyList.size()];
+        List<ProductStory> list = storyManager.findList(storyList.toArray(i));
+        return list;
     }
 
     public Integer deleteProjectStory(Integer projectId, Integer storyId) {
@@ -84,6 +81,10 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
 
     public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String ordertype) {
         return projectStoryManager.findStoryToLink(projectId, start, limit, order, ordertype);
+    }
+
+    public ProjectStory findStoryPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
+        return projectBuildDao.findBuildStory(story.getBuildId());
     }
 
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype) {
@@ -113,8 +114,8 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         return pager;
     }
 
-    public Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
-
-        return storyManager.findPager(start, limit, story, statusCondition, conditions, groupOperate, columnName, asc);
-    }
+//    public Pager<ProjectStory> findStoryPager(int start, int limit, ProjectStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
+//
+//        return projectStoryManager.findPager(start, limit, story,statusCondition, conditions, groupOperate, columnName, asc);
+//    }
 }
