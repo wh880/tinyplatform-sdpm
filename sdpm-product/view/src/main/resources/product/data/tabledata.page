@@ -91,7 +91,7 @@
     #@td()${story?.storyPri}#end
 	#@td()<a
             href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
-    #@td()${story?.planId}#end
+    #@td()${story?.planName}#end
     #@td()${story?.storySource}#end
     #@td()${story?.storyOpenedName}#end
     #@td()${story?.storyAssignedName}#end

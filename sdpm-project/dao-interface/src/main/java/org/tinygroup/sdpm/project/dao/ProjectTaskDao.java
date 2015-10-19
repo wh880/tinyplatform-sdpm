@@ -48,4 +48,5 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
     ProjectTask findTaskStory(Integer taskId);
 
     public Integer updateColum(ProjectTask projectTask);
+
 }

@@ -83,8 +83,8 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         return projectStoryManager.findStoryToLink(projectId, start, limit, order, ordertype);
     }
 
-    public ProjectStory findStoryPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
-        return projectBuildDao.findBuildStory(story.getBuildId());
+    public List<ProjectStory> findStoryPager(int start, int limit,int id, SearchInfos conditions, String groupOperate) {
+        return projectBuildDao.findBuildStory(id);
     }
 
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype) {

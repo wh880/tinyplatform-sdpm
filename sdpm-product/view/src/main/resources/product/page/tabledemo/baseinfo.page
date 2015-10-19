@@ -15,15 +15,15 @@
 		       			#end
 		       			#@tr()
 							#@td()产品负责人#end
-		       				#@td()${getUserName(product?.productOwner)}#end
+							#@td()${UserUtils.getUserById(product?.productOwner).orgUserRealName}#end
 		       			#end
 		       			#@tr()
 							#@td()测试负责人#end
-		       				#@td()${getUserName(product?.productQualityManager)}#end
+							#@td()${UserUtils.getUserById(product?.productQualityManager).orgUserRealName}#end
 		       			#end
 		       			#@tr()
 							#@td()发布负责人#end
-		       				#@td()${getUserName(product?.productDeliveryManager)}#end
+							#@td()${UserUtils.getUserById(product?.productDeliveryManager).orgUserRealName}#end
 		       			#end
 		       			#@tr()
 							#@td()状态#end
@@ -40,7 +40,7 @@
 		       			#end
 		       			#@tr()
 							#@td()由谁创建#end
-		       				#@td()${getUserName(product?.productCreatedBy)}#end
+							#@td()${UserUtils.getUserById(product?.productCreatedBy).orgUserRealName}#end
 		       			#end	
 		       			#@tr()
 							#@td()创建日期#end 

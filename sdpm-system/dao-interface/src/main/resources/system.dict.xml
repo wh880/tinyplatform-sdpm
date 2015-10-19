@@ -13,7 +13,7 @@
             <dictItem key="erased" value="删除" sort="10"/>
             <dictItem key="undeleted" value="还原" sort="11"/>
             <dictItem key="hidden" value="隐藏" sort="12"/>
-            <dictItem key="commented" value="评论" sort="13"/>
+            <dictItem key="commented" value="添加备注" sort="13"/>
             <dictItem key="activated" value="激活" sort="14"/>
             <dictItem key="resolved" value="解决" sort="15"/>
             <dictItem key="reviewed" value="评审" sort="16"/>
