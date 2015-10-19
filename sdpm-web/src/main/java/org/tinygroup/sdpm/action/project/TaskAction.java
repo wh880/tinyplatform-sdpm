@@ -20,7 +20,9 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -108,10 +110,8 @@ public class TaskAction extends BaseController {
             Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
             ProjectTask task = taskService.findTask(taskId);
             List<ProjectTeam> team = teamService.findTeamByProjectId(projectId);
-
             model.addAttribute("teamList", team);
             model.addAttribute("task", task);
-            //还需要查询其他相关任务剩余时间的信息
             return "project/task/call.page";
         }
         return "error";
@@ -198,14 +198,15 @@ public class TaskAction extends BaseController {
         return "project/task/datalist.pagelet";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file, Model model, Integer[] taskMailtoArray, HttpServletRequest request) {
+    @RequestMapping("/save")
+    public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file,
+                       Model model, String[] taskMailtoArray, HttpServletRequest request, String comment) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
         task.setTaskProject(projectId);
         if (task.getTaskId() == null) {
             String taskMailTo = "";
             if (taskMailtoArray != null) {
-                for (Integer i : taskMailtoArray) {
+                for (String i : taskMailtoArray) {
                     if (StringUtil.isBlank(taskMailTo)) {
                         taskMailTo = taskMailTo + i;
                     } else {
@@ -215,6 +216,11 @@ public class TaskAction extends BaseController {
             }
             task.setTaskMailto(taskMailTo);
             ProjectTask newtask = taskService.addTask(task);
+            LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.OPENED,
+                    newtask.getTaskId().toString(), UserUtils.getUserId(),
+                    null, newtask.getTaskProject().toString(), null,
+                    newtask, comment);
+
             ProfileUtil profileUtil = new ProfileUtil();
             try {
                 profileUtil.uploadNoTitle(file, newtask.getTaskId(), "task");
@@ -255,11 +261,16 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/callsave", method = RequestMethod.POST)
-    public String callSave(ProjectTask task, Model model) {
+    public String callSave(ProjectTask task, Model model, String commnet) {
         if (task.getTaskId() == null) {
             taskService.addTask(task);
         } else {
+            ProjectTask oldTask = taskService.findTask(task.getTaskId());
             taskService.updateCallTask(task);
+
+            LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ASSIGNED, task.getTaskId().toString(), UserUtils.getUserId(),
+                    null, task.getTaskProject().toString(), oldTask, task, commnet);
+
         }
         model.addAttribute("task", task);
         return "project/task/index.page";

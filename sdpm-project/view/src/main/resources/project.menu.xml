@@ -77,7 +77,7 @@
     </menu>
 
 
-    <menu id="demand" parent-id="project" name="需求" href="/projectmanage/demand/index" icon="" sort="1" isShow="1">
+    <menu id="demand" parent-id="project" name="需求" href="/project/manage/demand/index" icon="" sort="1" isShow="1">
         <menu id="rm-demand" name="需求移出" href="/project/demand/delete" icon="icon-remove" sort="1" isShow="1"
               scope="demand-op"/>
         <menu id="batch-distribute-task" name="分解任务" href="/project/task/preadd" icon="icon-smile" sort="100" isShow="1"
@@ -97,7 +97,7 @@
         </menu>
     </menu>
 
-    <menu id="bug" parent-id="project" name="Bug" href="/projectmanage/bug/index" icon="" sort="1" isShow="1">
+    <menu id="bug" parent-id="project" name="Bug" href="/project/manage/bug/index" icon="" sort="1" isShow="1">
         <menu id="pro-bug-confirm" name="确认" href="/project/bug/commit.page" icon="icon-search" sort="20" isShow="1"
               scope="pro-bug-op"/>
         <menu id="pro-bug-assign" name="指派" href="/project/bug/call.page" icon="icon-hand-right" sort="16" isShow="1"
@@ -108,7 +108,7 @@
               scope="pro-bug-op"/>
     </menu>
 
-    <menu id="version" parent-id="project" name="版本" href="/projectmanage/build/index" icon="" sort="1" isShow="1">
+    <menu id="version" parent-id="project" name="版本" href="/project/manage/build/index" icon="" sort="1" isShow="1">
         <menu id="pro-version-look" name="查看bug" href="/project/version/look" icon="icon-eye-open" sort="20"
               isShow="1"
               scope="pro-version-op"/>
@@ -117,7 +117,7 @@
         <menu id="pro-version-delete" name="删除" href="/project/version/delete" icon="icon-remove" sort="10" isShow="1"
               scope="pro-version-op"/>
 
-        <menu id="version-menu" name="任务菜单" href="/projectmanage/build/index" icon="" sort="1" isShow="1">
+        <menu id="version-menu" name="任务菜单" href="/project/manage/build/index" icon="" sort="1" isShow="1">
             <menu id="pro-version-report" name="新建版本" href="/project/version/add" icon="icon-plus" sort="8" isShow="1"
                   scope="pro-versionmenu-op"/>
         </menu>
@@ -134,14 +134,14 @@
 
     </menu>
 
-    <menu id="test" parent-id="project" name="测试" href="/projectmanage/test/index" icon="" sort="1" isShow="1">
+    <menu id="test" parent-id="project" name="测试" href="/project/manage/test/index" icon="" sort="1" isShow="1">
         <menu id="test-menu" name="任务菜单" href="/project/version/index.page" icon="" sort="1" isShow="1">
             <menu id="pro-test-report" name="提交测试" href="/testManagement/page/proposeversion.page" icon="icon-plus" sort="8" isShow="1"
                   scope="pro-testmenu-op"/>
         </menu>
     </menu>
 
-    <menu id="team" parent-id="project" name="团队" href="/projectmanage/team/index" icon="" sort="1" isShow="1">
+    <menu id="team" parent-id="project" name="团队" href="/project/manage/team/index" icon="" sort="1" isShow="1">
         <menu id="pro-team-delete" name="删除" href="" icon="icon-remove" sort="10" isShow="1"
               scope="pro-team-op"/>
         <menu id="team-menu" name="任务菜单" href="/project/team/index.page" icon="" sort="1" isShow="1">
@@ -157,7 +157,7 @@
     <menu id="dynamic" parent-id="project" name="动态" href="/project/dynamic/index" icon="" sort="1" isShow="1">
     </menu>
 
-    <menu id="document" parent-id="project" name="文档" href="/projectmanage/doc/index" icon="" sort="1" isShow="1">
+    <menu id="document" parent-id="project" name="文档" href="/project/manage/doc/index" icon="" sort="1" isShow="1">
         <menu id="pro-document-delete" name="删除" href="/project/doc/del" icon="icon-remove" sort="10" isShow="1"
               scope="pro-document-op"/>
         <menu id="documentmenu" name="任务菜单" href="/project/document/index.page" icon="" sort="1" isShow="1">
@@ -169,7 +169,7 @@
     <menu id="product" parent-id="project" name="产品" href="/project/product/findLinkProduct" icon="" sort="1"
           isShow="1">
     </menu>
-    <menu id="survey" parent-id="project" name="概况" href="/projectmanage/survey/index" icon="" sort="1" isShow="1">
+    <menu id="survey" parent-id="project" name="概况" href="/project/manage/survey/index" icon="" sort="1" isShow="1">
         <menu id="survey-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
             <menu id="pro-survey-delay"  sort="15" isShow="1"
                   scope="pro-surveymenu-op"/>
@@ -178,12 +178,13 @@
             <menu id="pro-survey-finish"  sort="10" isShow="1"
                   scope="pro-surveymenu-op"/>
         </menu>
-        <menu id="survey-menu2" name="任务菜单2" href="/projectmanage/survey/index" icon="" sort="1" isShow="1">
+        <menu id="survey-menu2" name="任务菜单2" href="/project/manage/survey/index" icon="" sort="1" isShow="1">
             <menu id="pro-survey-edit" name="编辑" href="/project/edit" icon="icon-pencil" sort="8" isShow="1"
                   scope="pro-surveymenu2-op"/>
             <menu id="pro-survey-remove" name="" href="" icon="" sort="6" isShow="1"
                   scope="pro-surveymenu2-op"/>
-            <menu id="pro-survey-return" name="返回" href="/projectmanage/survey/index" icon="icon-level-up" sort="4" isShow="1"
+            <menu id="pro-survey-return" name="返回" href="/project/manage/survey/index" icon="icon-level-up" sort="4"
+                  isShow="1"
                   scope="pro-surveymenu2-op"/>
         </menu>
     </menu>
