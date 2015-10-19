@@ -147,10 +147,16 @@ public class ProductAction extends BaseController {
     public String find(@PathVariable(value = "forward") String forward, Integer productId, Model model, HttpServletRequest request) {
 
         if (productId == null) {
-            productId = (Integer) request.getSession().getAttribute("sessionProductId");
+        	if(request.getSession().getAttribute("sessionProductId")==null){
+        		return "/product/addproduct/addition";
+        	}else{
+        		productId = (Integer) request.getSession().getAttribute("sessionProductId");
+        	}
+            
         }
-
+        
         Product product = productService.findProduct(productId);
+        
         SystemHistory history = new SystemHistory();
         List<SystemHistory> histories = historyService.find(history);
         SystemAction action = new SystemAction();
@@ -161,6 +167,7 @@ public class ProductAction extends BaseController {
         model.addAttribute("history", histories);
 
         if ("overview".equals(forward)) {
+        	
             return "/product/page/project/overview.page";
         } else if ("baseinfo".equals(forward)) {
             return "/product/page/tabledemo/baseinfo.pagelet";
