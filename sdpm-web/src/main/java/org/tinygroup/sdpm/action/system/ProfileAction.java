@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.net.ssl.SSLEngineResult.Status;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,8 @@ public class ProfileAction extends BaseController{
 		}
 		return null;
 	}
+	
+	@RequiresPermissions(value="{doc-file-edit}")
 	@RequestMapping("edit/{type}")
 	public String eidt(SystemProfile profile,@PathVariable(value="type")String type,Model model){
 		if("doc".equals(type)){
@@ -36,6 +39,8 @@ public class ProfileAction extends BaseController{
 		}
 		return null;
 	}
+	
+	@RequiresPermissions(value="{doc-file-delete}")
 	@ResponseBody
 	@RequestMapping("delete/{type}")
 	public Map delete(Integer id,@PathVariable(value="type")String type){
