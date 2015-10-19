@@ -36,7 +36,7 @@
         <application-processor bean="tinyListenerProcessor"></application-processor>
         <application-processor bean="fileMonitorProcessor"></application-processor>
         <application-processor bean="tinyTemplateConfigProcessor"></application-processor>
-        <application-processor bean="databaseInstallerProcessor"></application-processor>
+        <!--<application-processor bean="databaseInstallerProcessor"></application-processor>-->
         <!--<application-processor bean=""></application-processor>-->
         <application-processor bean="stdProcessor"></application-processor>
         <application-processor bean="dictLoadProcessor"></application-processor>
