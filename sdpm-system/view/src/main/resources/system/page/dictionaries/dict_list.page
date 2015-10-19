@@ -38,7 +38,7 @@
 					#@td("f-14 user-manage")
 						#foreach(m in menuManager.getScopeMenus("dict-op"))
 							#if(m.id!="dict-del")
-								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "460" "158" adminPath+m.href +"?moduleId="+mo?.moduleId "ml-5")
+								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "460" "260" adminPath+m.href +"?moduleId="+mo?.moduleId "ml-5")
 							#else
 ##								#iconOperation(m.icon m.name "ml-5 delBtn" adminPath+m.href+"?moduleId="+mo?.moduleId)
 								#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href mo?.moduleId)#buttonIcon(iconClass=m.icon)#end

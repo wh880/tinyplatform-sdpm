@@ -234,4 +234,23 @@ public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectSto
 		}
 		return select;
 	}
+
+
+	public Pager<ProjectStory> complexQuery(int start, int limit, ProjectStory projectStory, final String condition, final OrderBy... orderBys) {
+		if (projectStory == null) {
+			projectStory = new ProjectStory();
+		}
+		return getDslTemplate().queryPager(start, limit, projectStory, false, new SelectGenerateCallback<ProjectStory>() {
+
+			public Select generate(ProjectStory t) {
+				Select select = MysqlSelect.selectFrom(PROJECT_STORYTABLE).where(and(
+						fragmentCondition(condition),
+						PROJECT_STORYTABLE.PROJECT_ID.eq(t.getProjectId()),
+						PROJECT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
+						PROJECT_STORYTABLE.STORY_ID.eq(t.getStoryId()),
+						PROJECT_STORYTABLE.STORY_VERSION.eq(t.getStoryVersion())));
+				return addOrderByElements(select, orderBys);
+			}
+		});
+	}
 }

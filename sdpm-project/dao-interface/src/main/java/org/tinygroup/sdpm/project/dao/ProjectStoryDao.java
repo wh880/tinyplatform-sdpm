@@ -17,7 +17,9 @@
 package org.tinygroup.sdpm.project.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -28,5 +30,7 @@ public interface ProjectStoryDao extends BaseDao<ProjectStory, Integer> {
     public List<ProjectStory> findByProjectID(Integer projectId);
 
     public Integer deleteByProjectStory(Integer projectId, Integer storyId);
+
+    public Pager<ProjectStory> complexQuery(int start, int limit, ProjectStory projectStory, final String condition, final OrderBy... orderBys);
 
 }

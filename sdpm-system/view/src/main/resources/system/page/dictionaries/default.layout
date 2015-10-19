@@ -17,26 +17,26 @@
 				
 				#div(divClass="clearfix")
 		#end
-##		TINY_CONTEXT_PATH+adminPath+"/system/dict/searsh"
-	#if(page=="dict")	
-	 #@tinyForm("dictEditform" "" "post" {"class":""}) 
-		#@topSearch() 
-		    #simpleText("编码" "dictKey" "width:25%")
-		    #simpleText("中文名" "dictValue" "width:25%")
-		 	#@btnSubmit("icon-search") 搜索#end
-		 	
-		#end
-		#end
-	#end
-##	TINY_CONTEXT_PATH+adminPath+"/system/module/search"
-	#if(page=="module")
-	   #@tinyForm("dictEditform" "" "post" {"class":""}) 
-		#@topSearch() 
-		    #simpleText("编码" "moduleName" "width:25%")
-		    #simpleText("中文名" "moduleTitle" "width:25%")
-		 	#@btnSubmit("icon-search") 搜索#end
-		 	
-		#end
-		#end
-	#end	
+####		TINY_CONTEXT_PATH+adminPath+"/system/dict/searsh"
+##	#if(page=="dict")	
+##	 #@tinyForm("dictEditform" "" "post" {"class":""}) 
+##		#@topSearch() 
+##		    #simpleText("编码" "dictKey" "width:25%")
+##		    #simpleText("中文名" "dictValue" "width:25%")
+##		 	#@btnSubmit("icon-search") 搜索#end
+##		 	
+##		#end
+##		#end
+##	#end
+####	TINY_CONTEXT_PATH+adminPath+"/system/module/search"
+##	#if(page=="module")
+##	   #@tinyForm("dictEditform" "" "post" {"class":""}) 
+##		#@topSearch() 
+##		    #simpleText("编码" "moduleName" "width:25%")
+##		    #simpleText("中文名" "moduleTitle" "width:25%")
+##		 	#@btnSubmit("icon-search") 搜索#end
+##		 	
+##		#end
+##		#end
+##	#end	
 		#pageContent

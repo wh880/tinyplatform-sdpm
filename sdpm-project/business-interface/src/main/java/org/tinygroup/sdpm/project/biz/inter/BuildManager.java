@@ -81,4 +81,10 @@ public interface BuildManager {
 	 * @return
 	 */
 	List<ProductAndLine> getProductLineTree(ProductLine t);
+    /**
+     * 需求列表
+     * @param projectBuild
+     * @return
+     */
+     List<ProjectBuild> findStoryList(ProjectBuild projectBuild);
 }
