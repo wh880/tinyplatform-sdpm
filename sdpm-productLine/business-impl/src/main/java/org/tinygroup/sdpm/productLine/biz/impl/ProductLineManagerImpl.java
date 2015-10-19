@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.productLine.biz.inter.ProductLineManager;
 import org.tinygroup.sdpm.productLine.dao.ProductLineDao;
 import org.tinygroup.sdpm.productLine.dao.impl.FieldUtil;
@@ -48,7 +50,12 @@ public class ProductLineManagerImpl implements ProductLineManager{
 	public Pager<ProductLine> findPager(int page, int pagesize, ProductLine productLine, String order,
 			String ordertype) {
 		
-		return productLineDao.findList((page-1)*pagesize, pagesize, productLine, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+		OrderBy orderBy = null;
+		if(!StringUtil.isBlank(order)){
+			orderBy = new OrderBy("product_line."+NameUtil.resolveNameDesc(order),!("desc".equals(ordertype))?true:false);
+		}
+		
+		return productLineDao.findList((page-1)*pagesize, pagesize, productLine, orderBy);
 	}
 
 	public int[] updateBatch(List<ProductLine> productLine) {
