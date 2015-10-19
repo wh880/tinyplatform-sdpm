@@ -55,6 +55,8 @@ public class BuildAction extends BaseController {
     private ModuleService moduleService;
     @Autowired
     private ProjectStoryService projectStoryService;
+    @Autowired
+    private StoryService storyService;
 
     @RequestMapping("/productBuildList")
     public  String productBuildList(ProjectBuild build,Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request){
@@ -312,42 +314,49 @@ public class BuildAction extends BaseController {
 
 
 
-    @RequestMapping("/search/{relate}")
-    public String storyListAction(@PathVariable(value="relate")String relate, int page, int pagesize,
-                                  ProductStory story, String choose, String groupOperate, SearchInfos searchInfos,
-                                  @RequestParam(required = false, defaultValue = "storyId") String order,
-                                  @RequestParam(required = false, defaultValue = "asc") String ordertype,
-                                  Model model, HttpServletRequest request){
+//    @RequestMapping("/search/reRelateStory")
+//    public String storyListAction(@PathVariable(value="relate")String relate, int page, int pagesize,int id,
+//                                  ProductStory story, String choose, String groupOperate, SearchInfos searchInfos,
+//                                  @RequestParam(required = false, defaultValue = "storyId") String order,
+//                                  @RequestParam(required = false, defaultValue = "asc") String ordertype,
+//                                  Model model, HttpServletRequest request){
+//
+////        if(request.getSession().getAttribute("sessionBuildId")!=null){
+////            story.setBuildId((Integer)(request.getSession().getAttribute("sessionBuildId")));
+////        }
+//
+//        String condition = StoryUtil.getStatusCondition(choose,request);
+//        if(story.getStoryVersion()!=null&&story.getStoryVersion()>0){
+//
+//            SystemModule module = new SystemModule();
+//            module.setModuleId(story.getModuleId());
+//            StringBuffer stringBuffer = new StringBuffer();
+//            stringBuffer.append("in (");
+//            ModuleUtil.getConditionByModule(stringBuffer, module, moduleService);
+//            stringBuffer.append(")");
+//
+//            condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
+//        }
+//        story.setBuildId(id);
+//        List<ProjectStory> p = projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,story, condition,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
+//        model.addAttribute("storyList",p);
+//
+//        if("reRelateStory".equals(relate)){
+//            return "/project/task/relation-release/product-al-req-data.pagelet";
+//        }else if ("noRelateStory".equals(relate)) {
+//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
+//        }
+//        return "";
+//    }
 
-        if(request.getSession().getAttribute("sessionBuildId")!=null){
-            story.setBuildId((Integer)(request.getSession().getAttribute("sessionBuildId")));
-        }
-
-        String condition = StoryUtil.getStatusCondition(choose,request);
-        if(story.getStoryVersion()!=null&&story.getStoryVersion()>0){
-
-            SystemModule module = new SystemModule();
-            module.setModuleId(story.getModuleId());
-            StringBuffer stringBuffer = new StringBuffer();
-            stringBuffer.append("in (");
-            ModuleUtil.getConditionByModule(stringBuffer, module, moduleService);
-            stringBuffer.append(")");
-
-            condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
-        }
-        story.setModuleId(null);
-        ProjectStory p = projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,story, condition,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
+    @RequestMapping("/search/reRelateStory")
+    public String storyListAction( int page, int pagesize,int id,String groupOperate, SearchInfos searchInfos,
+                                   Model model){
+        List<ProjectStory> p = projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
         model.addAttribute("storyList",p);
 
-        if("reRelateStory".equals(relate)){
-            return "/project/task/relation-release/product-al-req-data.pagelet";
-        }else if ("noRelateStory".equals(relate)) {
-            return "/project/task/relation-release/product-al-no-req-data.pagelet";
-        }
-        return "";
+        return null;
     }
-
-
 
 
 

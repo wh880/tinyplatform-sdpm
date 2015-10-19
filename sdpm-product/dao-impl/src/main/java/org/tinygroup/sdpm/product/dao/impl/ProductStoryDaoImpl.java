@@ -16,24 +16,26 @@
 
 package org.tinygroup.sdpm.product.dao.impl;
 
-import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
-import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MODULETABLE;
-import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
-import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
+import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MODULETABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.*;
+import static org.tinygroup.tinysqldsl.Select.select;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.tinysqldsl.select.Join.*;
+import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -48,7 +50,6 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
-import org.tinygroup.sdpm.product.dao.constant.ProductPlanTable;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
@@ -59,8 +60,6 @@ import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Condition;
-import org.tinygroup.tinysqldsl.base.Table;
-import org.tinygroup.tinysqldsl.expression.FragmentExpressionSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
@@ -207,12 +206,18 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 	}
 
 	public ProductStory getByKey(Integer pk) {
-		return getDslTemplate().getByKey(pk, ProductStory.class, new SelectGenerateCallback<Serializable>() {
-		@SuppressWarnings("rawtypes")
-		public Select generate(Serializable t) {
-			return selectFrom(PRODUCT_STORYTABLE).where(PRODUCT_STORYTABLE.STORY_ID.eq(t));
-			}
-		});
+		try {
+			return getDslTemplate().getByKey(pk, ProductStory.class, new SelectGenerateCallback<Serializable>() {
+				@SuppressWarnings("rawtypes")
+				public Select generate(Serializable t) {
+					return selectFrom(PRODUCT_STORYTABLE).where(PRODUCT_STORYTABLE.STORY_ID.eq(t));
+					}
+				});
+		} catch (EmptyResultDataAccessException e) {
+
+			return null;
+		}
+		
 	}
 
 	public List<ProductStory> query(ProductStory productStory ,final OrderBy... orderArgs) {
@@ -265,49 +270,50 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 	}
 
 	public Pager<ProductStory> queryPager(int start,int limit ,ProductStory productStory ,final OrderBy... orderArgs) {
-		if(productStory==null){
-			productStory=new ProductStory();
+		if (productStory == null) {
+			productStory = new ProductStory();
 		}
 		return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
-
 			public Select generate(ProductStory t) {
-				Select select = MysqlSelect.selectFrom(PRODUCT_STORYTABLE).where(
-				and(
-					PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
-					PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
-					PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(t.getStoryParentId()),
-					PRODUCT_STORYTABLE.MODULE_ID.eq(t.getModuleId()),
-					PRODUCT_STORYTABLE.PLAN_ID.eq(t.getPlanId()),
-					PRODUCT_STORYTABLE.STORY_STATUS.eq(t.getStoryStatus()),
-					PRODUCT_STORYTABLE.STORY_SOURCE.eq(t.getStorySource()),
-					PRODUCT_STORYTABLE.STORY_FROM_BUG.eq(t.getStoryFromBug()),
-					PRODUCT_STORYTABLE.STORY_TITLE.eq(t.getStoryTitle()),
-					PRODUCT_STORYTABLE.STORY_KEYWORDS.eq(t.getStoryKeywords()),
-					PRODUCT_STORYTABLE.STORY_TYPE.eq(t.getStoryType()),
-					PRODUCT_STORYTABLE.STORY_PRI.eq(t.getStoryPri()),
-					PRODUCT_STORYTABLE.STORY_ESTIMATE.eq(t.getStoryEstimate()),
-					PRODUCT_STORYTABLE.STORY_STAGE.eq(t.getStoryStage()),
-					PRODUCT_STORYTABLE.STORY_MAILTO.eq(t.getStoryMailto()),
-					PRODUCT_STORYTABLE.STORY_OPENED_BY.eq(t.getStoryOpenedBy()),
-					PRODUCT_STORYTABLE.STORY_OPENED_DATE.eq(t.getStoryOpenedDate()),
-					PRODUCT_STORYTABLE.STORY_ASSIGNED_TO.eq(t.getStoryAssignedTo()),
-					PRODUCT_STORYTABLE.STORY_ASSIGNED_DATE.eq(t.getStoryAssignedDate()),
-					PRODUCT_STORYTABLE.STORY_LAST_EDITED_BY.eq(t.getStoryLastEditedBy()),
-					PRODUCT_STORYTABLE.STORY_LAST_EDITED_DATE.eq(t.getStoryLastEditedDate()),
-					PRODUCT_STORYTABLE.STORY_REVIEWED_BY.eq(t.getStoryReviewedBy()),
-					PRODUCT_STORYTABLE.STORY_REVIEWED_DATE.eq(t.getStoryReviewedDate()),
-					PRODUCT_STORYTABLE.STORY_CLOSED_BY.eq(t.getStoryClosedBy()),
-					PRODUCT_STORYTABLE.STORY_CLOSED_DATE.eq(t.getStoryClosedDate()),
-					PRODUCT_STORYTABLE.STORY_CLOSED_REASON.eq(t.getStoryClosedReason()),
-					PRODUCT_STORYTABLE.TO_BUG.eq(t.getToBug()),
-					PRODUCT_STORYTABLE.STORY_LINK_STORIES.eq(t.getStoryLinkStories()),
-					PRODUCT_STORYTABLE.STORY_CHILD_STORIES.eq(t.getStoryChildStories()),
-					PRODUCT_STORYTABLE.STORY_DUPLICATE_STORY.eq(t.getStoryDuplicateStory()),
-					PRODUCT_STORYTABLE.STORY_VERSION.eq(t.getStoryVersion()),
-					PRODUCT_STORYTABLE.BUILD_ID.eq(t.getBuildId()),
-					PRODUCT_STORYTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()),
-					PRODUCT_STORYTABLE.DELETED.eq(t.getDeleted())));
-			return addOrderByElements(select, orderArgs);
+				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("product_story.*,p.product_name,pa.plan_name,o.org_user_account as storyOpenedName,o2.org_user_account as storyAssignedName")).
+						from(FragmentSelectItemSql.fragmentFrom("product_story left join product p on p.product_id = product_story.product_id left join product_plan pa on pa.plan_id = product_story.plan_id left join org_user o on o.org_user_id = product_story.story_opened_by left join org_user o2 on o2.org_user_id = product_story.story_assigned_to"))
+						.where(and(
+						PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
+						PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
+						PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(t.getStoryParentId()),
+						PRODUCT_STORYTABLE.MODULE_ID.eq(t.getModuleId()),
+						PRODUCT_STORYTABLE.PLAN_ID.eq(t.getPlanId()),
+						PRODUCT_STORYTABLE.STORY_STATUS.eq(t.getStoryStatus()),
+						PRODUCT_STORYTABLE.STORY_SOURCE.eq(t.getStorySource()),
+						PRODUCT_STORYTABLE.STORY_FROM_BUG.eq(t.getStoryFromBug()),
+						PRODUCT_STORYTABLE.STORY_TITLE.eq(t.getStoryTitle()),
+						PRODUCT_STORYTABLE.STORY_KEYWORDS.eq(t.getStoryKeywords()),
+						PRODUCT_STORYTABLE.STORY_TYPE.eq(t.getStoryType()),
+						PRODUCT_STORYTABLE.STORY_PRI.eq(t.getStoryPri()),
+						PRODUCT_STORYTABLE.STORY_ESTIMATE.eq(t.getStoryEstimate()),
+						PRODUCT_STORYTABLE.STORY_STAGE.eq(t.getStoryStage()),
+						PRODUCT_STORYTABLE.STORY_MAILTO.eq(t.getStoryMailto()),
+						PRODUCT_STORYTABLE.STORY_OPENED_BY.eq(t.getStoryOpenedBy()),
+						PRODUCT_STORYTABLE.STORY_OPENED_DATE.eq(t.getStoryOpenedDate()),
+						PRODUCT_STORYTABLE.STORY_ASSIGNED_TO.eq(t.getStoryAssignedTo()),
+						PRODUCT_STORYTABLE.STORY_ASSIGNED_DATE.eq(t.getStoryAssignedDate()),
+						PRODUCT_STORYTABLE.STORY_LAST_EDITED_BY.eq(t.getStoryLastEditedBy()),
+						PRODUCT_STORYTABLE.STORY_LAST_EDITED_DATE.eq(t.getStoryLastEditedDate()),
+						PRODUCT_STORYTABLE.STORY_REVIEWED_BY.eq(t.getStoryReviewedBy()),
+						PRODUCT_STORYTABLE.STORY_REVIEWED_DATE.eq(t.getStoryReviewedDate()),
+						PRODUCT_STORYTABLE.STORY_CLOSED_BY.eq(t.getStoryClosedBy()),
+						PRODUCT_STORYTABLE.STORY_CLOSED_DATE.eq(t.getStoryClosedDate()),
+						PRODUCT_STORYTABLE.STORY_CLOSED_REASON.eq(t.getStoryClosedReason()),
+						PRODUCT_STORYTABLE.TO_BUG.eq(t.getToBug()),
+						PRODUCT_STORYTABLE.STORY_LINK_STORIES.eq(t.getStoryLinkStories()),
+						PRODUCT_STORYTABLE.STORY_CHILD_STORIES.eq(t.getStoryChildStories()),
+						PRODUCT_STORYTABLE.STORY_DUPLICATE_STORY.eq(t.getStoryDuplicateStory()),
+						PRODUCT_STORYTABLE.STORY_VERSION.eq(t.getStoryVersion()),
+						PRODUCT_STORYTABLE.BUILD_ID.eq(t.getBuildId()),
+						PRODUCT_STORYTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()),
+						PRODUCT_STORYTABLE.DELETED.eq(t.getDeleted())
+				));
+				return addOrderByElements(select, orderArgs);
 			}
 		});
 	}

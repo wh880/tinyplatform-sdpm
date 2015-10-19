@@ -1,0 +1,22 @@
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#set(name="task")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+    ##head end
+        #@tabBodyCol("ptop-5")
+        ##operationbar start
+            #include("/project/task/taskMenu.page")
+        ##operationbay end
+        #end
+    ##body end
+    #end
+#end
+
+##分组查看
+这里是分组

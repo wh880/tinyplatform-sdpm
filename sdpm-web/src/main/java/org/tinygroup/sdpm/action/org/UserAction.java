@@ -174,31 +174,26 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/story/search")
-    public String storySearchAction(String id, String account, int page, int pagesize, String choose, ProductStory story, String order, String ordertype, Model model, HttpServletRequest request) {
-
-        if (!StringUtil.isBlank(id) && StringUtil.isBlank(account)) {
-            OrgUser userByAccount = userService.findUser(id);
-            account = userByAccount.getOrgUserAccount();
-        }
+    public String storySearchAction(String id, int page, int pagesize, String choose, ProductStory story, String order, String ordertype, Model model, HttpServletRequest request) {
 
         if (choose.equals("6")) {
-            story.setStoryClosedBy(account);
+            story.setStoryClosedBy(id);
             Pager<ProductStory> p4 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
 
             model.addAttribute("storyList", p4);
 
         } else if (choose.equals("4")) {
-            story.setStoryOpenedBy(account);
+            story.setStoryOpenedBy(id);
             Pager<ProductStory> p2 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p2);
 
         } else if (choose.equals("5")) {
-            story.setStoryReviewedBy(account);
+            story.setStoryReviewedBy(id);
             Pager<ProductStory> p3 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p3);
 
         } else {
-            story.setStoryAssignedTo(account);
+            story.setStoryAssignedTo(id);
             Pager<ProductStory> p1 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p1);
 
@@ -310,7 +305,7 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/active/search")
-    public String activeSearchAction(String id, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request, Model model, String selDate) {
+    public String activeSearchAction(String selDate, String id, Integer start, Integer limit, int page, int pagesize, String choose, SystemAction action, String order, String ordertype, Model model, HttpServletRequest request) {
         SystemAction systemAction = new SystemAction();
         systemAction.setActionActor(id);
         //根据日期来查
@@ -330,7 +325,7 @@ public class UserAction extends BaseController {
             endDate = DateUtils.addDays(DateUtils.getDateEnd(date), -1);
         } else if ("3".equals(selDate)) {
             startDate = DateUtils.addDays(DateUtils.getDateStart(date), -2);
-            endDate = DateUtils.addDays(DateUtils.getDateEnd(date), -3);
+            endDate = DateUtils.addDays(DateUtils.getDateEnd(date), -2);
         } else if ("4".equals(selDate)) {
             startDate = DateUtils.getFirstDayOfWeek(date);
             endDate = DateUtils.getLastDayOfWeek(date);
@@ -348,12 +343,12 @@ public class UserAction extends BaseController {
             endDate = null;
         }
         if (startDate == null && endDate == null) {
-            Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, order, ordertype);
+            Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, null, null);
             model.addAttribute("actionPager", actionPager);
         } else {
             String startDateStr = DateUtils.formatDate(startDate, "yyyy-MM-dd HH:mm:ss");
             String endDateStr = DateUtils.formatDate(endDate, "yyyy-MM-dd HH:mm:ss");
-            Pager<SystemAction> actionPager = actionService.queryBetweenDate(start, limit, systemAction, startDateStr, endDateStr, order, "asc".equals(ordertype) ? true : false);
+            Pager<SystemAction> actionPager = actionService.queryBetweenDate(start, limit, systemAction, startDateStr, endDateStr, null, false);
             model.addAttribute("actionPager", actionPager);
         }
         return "/organization/user/userActiveTable.pagelet";

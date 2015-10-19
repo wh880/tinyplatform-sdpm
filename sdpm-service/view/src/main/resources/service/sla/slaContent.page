@@ -56,13 +56,14 @@
         #end
     </div>
     #end
-<div class="infoContent">
-    #@div(divClass="infoContent,col-6")
-        <p class="titleName">历史记录</p>
-        #include("/service/sla/historyRecord.page")
-    #end
-</div>
-##        #end
+##<div class="infoContent">
+## #@div(divClass="infoContent,col-6")
+#*<p class="titleName">历史记录</p>
+#include("/service/sla/historyRecord.page")*#
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=sla&actionObjectId="+sla?.slaId)
+##   #end
+##</div>
+
 </div>
 #end
 

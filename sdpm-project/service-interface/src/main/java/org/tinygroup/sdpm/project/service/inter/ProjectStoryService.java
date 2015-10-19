@@ -87,5 +87,5 @@ public interface ProjectStoryService {
      * @param asc
      * @return
      */
-    public ProjectStory findStoryPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc);
+    public List<ProjectStory> findStoryPager(int start, int limit, int id,  SearchInfos conditions, String groupOperate);
 }

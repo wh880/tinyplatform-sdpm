@@ -25,7 +25,6 @@ import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
@@ -45,14 +44,12 @@ import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_
 import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
-import static org.tinygroup.sdpm.project.dao.constant.ProjectStoryTable.PROJECT_STORYTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.select.Join.*;
-import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @LogClass("build")
@@ -321,27 +318,43 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 		return productLines;
 	}
 
-	public ProjectStory findBuildStory(Integer buildId){
-		Select select = select(PROJECT_BUILDTABLE.ALL, PRODUCT_STORY_SPECTABLE.STORY_SPEC).from(PROJECT_BUILDTABLE)
-				.join(Join.leftJoin(
-						PROJECT_STORYTABLE, PROJECT_BUILDTABLE.BUILD_ID.eq(PROJECT_STORYTABLE.STORY_ID)
-						)
-				)
-				.join(Join.leftJoin(
-						PRODUCT_STORYTABLE, PROJECT_BUILDTABLE.BUILD_STORIES.eq(PRODUCT_STORYTABLE.STORY_ID)
-						)
-				)
-				.join(Join.leftJoin(
-						PRODUCT_STORY_SPECTABLE,
-						and(PRODUCT_STORY_SPECTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
-								PROJECT_BUILDTABLE.BUILD_ID.eq(PRODUCT_STORY_SPECTABLE.STORY_VERSION)
-						)
-				))
-				.where(
-						PROJECT_BUILDTABLE.BUILD_ID.eq(buildId)
-				);
+	public List<ProjectStory> findBuildStory(Integer buildId){
+		Select select =select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
+		String[] storys = test.getBuildStories().split(",");
+		int[] array = new int[storys.length];
+		for(int i=0;i<storys.length;i++){
+			array[i]=Integer.parseInt(storys[i]);
+		}
+			List<ProjectStory>projectStorys =new ArrayList<ProjectStory>();
+//		for (int i = 0; storys != null && i < storys.length; i++) {
+			Select selects =select(PRODUCT_STORYTABLE.ALL).from(PRODUCT_STORYTABLE)
+					.where(PRODUCT_STORYTABLE.BUILD_ID.in(array));
+			projectStorys = getDslSession().fetchList(selects,ProjectStory.class);
+//		}
+		return projectStorys;
 
-		return getDslSession().fetchOneResult(select, ProjectStory.class);
+//		Select select1 = select(PROJECT_BUILDTABLE.ALL, PRODUCT_STORY_SPECTABLE.STORY_SPEC).from(PROJECT_BUILDTABLE)
+//				.join(Join.leftJoin(
+//						PROJECT_STORYTABLE, PROJECT_BUILDTABLE.BUILD_ID.eq(PROJECT_STORYTABLE.STORY_ID)
+//						)
+//				)
+//				.join(Join.leftJoin(
+//						PRODUCT_STORYTABLE, PROJECT_BUILDTABLE.BUILD_STORIES.eq(PRODUCT_STORYTABLE.STORY_ID)
+//						)
+//				)
+//				.join(Join.leftJoin(
+//						PRODUCT_STORY_SPECTABLE,
+//						and(PRODUCT_STORY_SPECTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
+//								PROJECT_BUILDTABLE.BUILD_ID.eq(PRODUCT_STORY_SPECTABLE.STORY_VERSION)
+//						)
+//				))
+//				.where(
+//						PROJECT_BUILDTABLE.BUILD_ID.eq(buildId)
+//				);
+//
+//		return getDslSession().fetchOneResult(select, ProjectStory.class);
 	}
 
 

@@ -38,28 +38,6 @@
                 }
 
 
-
-
-
-
-            #*				var i = 0;
-                            $("input[type='checkbox']").each(function(){
-
-                                if(this.checked==true){
-                                    var hm = "<input type='hidden' name='productStories"+"[" +i+"]." +inputname + "' value='" + inputvalue + "'/>";
-                                    this.name = "productStories" +　"[" + i +"]." + this.name;
-
-                                    $(this).parent().append(hm);
-
-                                      ++i;
-                                }
-
-                            });
-
-                            $("form[name='storyform']").trigger("submit");
-                            *#
-
-
             });
 
         });
@@ -73,13 +51,13 @@
     #@td()<a
             href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyId}</a>#end
     #@td()${story.storyPri}#end
-    #@td()${story.productId}#end
+    #@td()${story.productName}#end
     #@td()<a
             href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
-    #@td()${story.planId}#end
-    #@td()${story.storyOpenedBy}#end
+    #@td()${story.planName}#end
+    #@td()${story.storyOpenedName}#end
     #@td()${story.storyEstimate}#end
-    #@td()${story.storyStatus}#end
-    #@td()${story.storyStage}#end
+    #@td()${getDict("storyStatus",story?.storyStatus)}#end
+    #@td()${getDict("storyStage",story?.storyStage)}#end
 #end
 #end

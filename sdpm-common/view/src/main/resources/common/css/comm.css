@@ -44,8 +44,8 @@
     }
 
     .menu-on-top #main-menu .navigation > li {
-        width: 111px;
-        white-space: nowrap;
+        width:111px;
+        white-space:nowrap;
     }
 
     .menu-on-top #main-menu .navigation > li.mm-dropdown > a:after {
@@ -53,17 +53,17 @@
     }
 
     .menu-on-top #main-menu .navigation > li *:not(span) {
-        background: #fbfbfb !important
+        background: #fafafb !important
     }
 
     .menu-on-top #main-menu .navigation > li *:not(span):hover {
-        background: #fff !important
+        background:#fff !important
     }
 
     .menu-on-top #main-menu .navigation > li.active > a {
-        background: #fefefe !important
+        background:#fff !important
     }
-
+	.menu-on-top #main-menu .navigation > li.active > a i{background:#fff !important}
     #bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus, .theme-clean .pagination > li.active > a, .theme-clean .pagination > li.active > a:focus, .theme-clean .pagination > li.active > a:hover, .theme-clean .pagination > li.active > span {
         background: #369;
         border: #369 1px solid !important
@@ -426,4 +426,6 @@ a.btn.btn-sm.backBtn, backBtn {
 .dropdown .dropdown-submenu .dropdown-show{overflow:visible}
 
 #main-wrapper #main-menu #main-menu-inner {padding-top: 0px;}
-#main-wrapper #main-menu .navigation>li:first-child{ border-top: 0 }
+#main-wrapper #main-menu .navigation>li:first-child{ border-top:0}
+
+.togglenavpart .navtitle{height:43px;}
