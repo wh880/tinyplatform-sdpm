@@ -20,7 +20,7 @@ public class LogUtil {
     public static void logWithComment(LogOperateObject objectType, LogAction action, String objectId, String userId,
                                       String productId, String projectId,
                                       Object oldObject, Object newObject, String comment) {
-        saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, productId, projectId, oldObject, newObject, comment);
+        saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, projectId, productId, oldObject, newObject, comment);
     }
 
     public static void changeLog(LogOperateObject objectType, LogAction action, String objectId, String userId,
