@@ -3,6 +3,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
+#set(currentPageId=3)
 
 <style>
     .btn-group #Dropdown {
@@ -75,10 +76,10 @@
         #@div(divClass="dropdownBox")
             #include("/product/page/project/dropdownMenuline.page")
         #end
-
-        #@div(divClass="dropdownBox")
+		 #@div(divClass="dropdownBox")
             #include("/product/page/project/dropdownMenu.page")
         #end
+       
 
         #@tabHead()
 

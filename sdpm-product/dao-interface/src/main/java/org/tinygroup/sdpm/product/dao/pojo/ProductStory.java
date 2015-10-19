@@ -18,12 +18,26 @@ package org.tinygroup.sdpm.product.dao.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /** 
  * 需求表
  * 
  */
 public class ProductStory implements Serializable{
+	
+	/**
+	 * 抄送人
+	 */
+	private List<String> mailto;
+
+	public List<String> getMailto() {
+		return mailto;
+	}
+
+	public void setMailto(List<String> mailto) {
+		this.mailto = mailto;
+	}
 
 	/**
 	 * 关联任务的数量，用于前台显示
