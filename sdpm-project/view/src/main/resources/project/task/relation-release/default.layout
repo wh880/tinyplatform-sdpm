@@ -22,7 +22,7 @@
         <a href="${TINY_CONTEXT_PATH+adminPath}/project/version/delete?id=${b?.buildId}"
            name="删除发布">#buttonIcon(iconClass=
             "icon-remove")</a>&nbsp;
-    <a href="${TINY_CONTEXT_PATH+adminPath}/projectmanage/build/index" title="返回">#buttonIcon(iconClass=
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/manage/build/index" title="返回">#buttonIcon(iconClass=
         "icon-reply")</a>
 				</span>#div(divClass="clearfix")
 

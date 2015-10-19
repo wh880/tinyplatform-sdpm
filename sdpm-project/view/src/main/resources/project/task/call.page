@@ -20,39 +20,14 @@
 #end
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/callsave" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
-##    #hiddenInput(hiddenInputName="taskName" hiddenInputValue=task?.taskName)
-##    #hiddenInput(hiddenInputName="taskType" hiddenInputValue=task?.taskType)
-##    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
-##    #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue=task?.taskStatus)
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>编辑指派</p>
-    ##
-    ##        #@elementItem()
-    ##            #@sdpmItem("测试")
-    ##                #@Tselect2F()
-    ##                    #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-    ##                        <option value="CT">Connecticut</option>
-    ##                        <option value="DE">Delaware</option>
-    ##                        <option value="FL">Florida</option>
-    ##                        <option value="GA">Georgia</option>
-    ##                        <option value="IN">Indiana</option>
-    ##                        <option value="ME">Maine</option>
-    ##                        <option value="MD">Maryland</option>
-    ##                    #end
-    ##                ##填写任意内容，侦听需重新填加 A侦听已内置
-    ##                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/testmanagement/page/proposeBug.page"
-    ##                                      class="r ">增加</a><a
-    ##                            href="${TINY_CONTEXT_PATH+adminPath}/testmanagement/page/Bug.page">全部</a>#end
-    ##                #end
-    ##
-    ##            #end
-    ##        #end
-
         #@elementItem()
             #@sdpmItem("指派给")
                 #@Tselect2F()
-                    #@Tselect2Body("taskAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("taskAssignedTo" task.taskAssignedTo {"class":
+                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value=""></option>
                         #foreach(t : teamList)
                             <option value="${t.teamAccount}">${t.teamAccount}</option>
@@ -70,7 +45,7 @@
             #@sdpmItem("预计剩余")
                 <div class="input-group">
                     <input name="taskLeft" type="text" class="form-control" placeholder=""
-                           aria-describedby="basic-addon2">
+                           aria-describedby="basic-addon2" value=${task.taskLeft}>
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
             #end
@@ -80,7 +55,7 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>备注：</label></div>
                 <div class="col-9">
-                    #@Teditor("content" "content" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("commnet" "commnet" {"initialFrameHeight":"150","initialFrameWidth":"700"})#end</div>
             </div>
         #end
         <br/>
