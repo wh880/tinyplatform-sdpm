@@ -160,6 +160,15 @@ public class BugAction extends BaseController {
 				QualityBug bug = bugService.findById(Integer.valueOf(id));
 				bug.setBugConfirmed(1);
 				bugService.updateBug(bug);
+				LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+						, LogUtil.LogAction.BUGCONFIRMED
+						,String.valueOf(bug.getBugId())
+						,UserUtils.getUserId()
+						,String.valueOf(bug.getProductId())
+						,String.valueOf(bug.getProjectId())
+						,null
+						,null
+						,null);
 			}
 		}
 
@@ -170,6 +179,10 @@ public class BugAction extends BaseController {
 	}
 	@RequestMapping("/sure")
 	public String makesure(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
+		QualityBug qualityBug = bugService.findById(bug.getBugId());
+		if(qualityBug.getBugAssignedTo()!=bug.getBugAssignedTo()){
+			bug.setBugAssignedDate(new Date());
+		}
 		bug.setBugConfirmed(1);
 		bugService.updateBug(bug);
 
@@ -197,11 +210,11 @@ public class BugAction extends BaseController {
 
 	@RequestMapping("/assignTo")
 	public String assign(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
-
+		QualityBug qualityBug = bugService.findById(bug.getBugId());
 		bug.setBugAssignedDate(new Date());
 		bugService.updateBug(bug);
 
-	
+
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
 				, LogUtil.LogAction.ASSIGNED
 				,String.valueOf(bug.getBugId())
@@ -240,7 +253,10 @@ public class BugAction extends BaseController {
 	}
 	@RequestMapping("/solve")
 	public String solve(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
-
+		QualityBug qualityBug = bugService.findById(bug.getBugId());
+		if(qualityBug.getBugAssignedTo()!=bug.getBugAssignedTo()){
+			bug.setBugAssignedDate(new Date());
+		}
 		bug.setBugResolvedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		bug.setBugStatus("2");
 		bugService.updateBug(bug);
