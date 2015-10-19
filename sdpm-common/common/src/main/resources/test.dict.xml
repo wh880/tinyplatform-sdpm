@@ -27,8 +27,6 @@
           <dictItem key="5" value="无法重现" sort="5"/>
           <dictItem key="6" value="延期解决" sort="6"/>
           <dictItem key="7" value="不予解决" sort="7"/>
-          
-          
           </dictNodeEntry>
           
           <dictNodeEntry name="bugSeverity" title="严重程度">
@@ -75,6 +73,12 @@
           <dictItem key="18" value="其他" sort="18"/>
           
           </dictNodeEntry>
+          <dictNodeEntry name="bugPriority" title="优先级">
+            <dictItem key="1" value="1" sort="1"/>
+            <dictItem key="2" value="2" sort="2"/>
+            <dictItem key="3" value="3" sort="3"/>
+            <dictItem key="4" value="4" sort="4"/>
+        </dictNodeEntry>	
     </dictNodeEntry>
     <dictNodeEntry name="case" title="测试用例">
         <dictNodeEntry name="caseStatus" title="测试用例状态">

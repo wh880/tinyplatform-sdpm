@@ -68,7 +68,7 @@
         });
 
         $(".selUser").click(function(e){
-            $("#noteTable").attr("data-url", actionUrl + "?teamAccount=" + $(this).attr("value"));
+            $("#noteTable").attr("data-url", actionUrl + "?effortAccount=" + $(this).attr("value"));
             $("#noteTable").trigger("refresh");
         });
     });
