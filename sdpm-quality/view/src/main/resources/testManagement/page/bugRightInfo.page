@@ -26,11 +26,11 @@
 			       			#end
 			       			#@tr()
 								#@td()严重程度#end
-			       				#@td()${qualityBug?.bugSeverity}#end
+			       				#@td()${getDict("bugSeverity",qualityBug?.bugSeverity)}#end
 			       			#end
 			       			#@tr()
 								#@td()优先级#end
-			       				#@td()${qualityBug?.priority}#end
+			       				#@td()${getDict("bugPriority",qualityBug?.priority)}#end
 			       			#end
 			       			#@tr()
 								#@td()Bug状态#end
@@ -46,7 +46,7 @@
 			       			#end
 			       			#@tr()
 								#@td()当前指派#end
-			       				#@td()${qualityBug?.userName} 于 ${formatDate(qualityBug?.bugAssignedDate,"yyyy-MM-dd hh-mm-ss")}#end
+			       				#@td()${qualityBug?.bugAssignedTo} 于 ${formatDate(qualityBug?.bugAssignedDate,"yyyy-MM-dd hh-mm-ss")}#end
 			       			#end
 			       			#@tr()
 								#@td()操作系统#end
@@ -126,7 +126,7 @@
 			       			#end
 			       			#@tr()
 								#@td()解决方案#end
-			       				#@td()${qualityBug?.bugResolution}#end
+			       				#@td()${getDict("bugResolution",qualityBug?.bugResolution)}#end
 			       			#end
 			       			#@tr()
 								#@td()由谁关闭#end

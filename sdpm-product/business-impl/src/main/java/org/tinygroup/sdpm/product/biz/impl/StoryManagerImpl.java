@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.product.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
@@ -56,11 +57,13 @@ public class StoryManagerImpl implements StoryManager {
     }
 
     public List<ProductStory> findList(ProductStory story, String order,String ordertype) {
-    	order = "product_story."+ NameUtil.resolveNameDesc(order);
-        return productStoryDao.query(story,
-                (order == null || "".equals(order)) ? null : new OrderBy(
-                        order, !("desc"
-                        .equals(ordertype)) ? true : false));
+        if(StringUtil.isBlank(order)){
+            return productStoryDao.query(story);
+        }else {
+            order = "product_story." + NameUtil.resolveNameDesc(order);
+
+            return productStoryDao.query(story, new OrderBy(order, !("desc".equals(ordertype)) ? true : false));
+        }
     }
 
     public Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions,
