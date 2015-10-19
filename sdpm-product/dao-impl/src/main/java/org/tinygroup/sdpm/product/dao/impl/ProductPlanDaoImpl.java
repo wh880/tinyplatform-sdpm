@@ -28,6 +28,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -136,12 +137,18 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 	}
 
 	public ProductPlan getByKey(Integer pk) {
-		return getDslTemplate().getByKey(pk, ProductPlan.class, new SelectGenerateCallback<Serializable>() {
-		@SuppressWarnings("rawtypes")
-		public Select generate(Serializable t) {
-			return selectFrom(PRODUCT_PLANTABLE).where(PRODUCT_PLANTABLE.PLAN_ID.eq(t));
-			}
-		});
+		try {
+			return getDslTemplate().getByKey(pk, ProductPlan.class, new SelectGenerateCallback<Serializable>() {
+				@SuppressWarnings("rawtypes")
+				public Select generate(Serializable t) {
+					return selectFrom(PRODUCT_PLANTABLE).where(PRODUCT_PLANTABLE.PLAN_ID.eq(t));
+					}
+				});
+		} catch (EmptyResultDataAccessException e) {
+			
+			return null;
+		}
+		
 	}
 
 	public List<ProductPlan> query(ProductPlan productPlan ,final OrderBy... orderArgs) {

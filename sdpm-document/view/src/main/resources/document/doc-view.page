@@ -44,9 +44,15 @@
     	 #set(path=f?.filePathname)
     		<a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
     		#foreach(m:menuManager.getScopeMenus("file-op"))
+<<<<<<< HEAD
 				#if(m.id == "doc-file-edit")					
     				#@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
         	        	#buttonIcon(iconClass=m.icon)#end&nbsp&nbsp&nbsp
+=======
+				#if(m.id == "file-edit")					
+    				#@aModal("#myModal" m.name "400" "150" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
+        	        	#buttonIcon(iconClass=m.icon)#end&nbsp
+>>>>>>> 689ac318d364b5d578d6618bdd8f7c94c880a817
         	    #else
         	    	#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId )
 						#buttonIcon(iconClass=m.icon)

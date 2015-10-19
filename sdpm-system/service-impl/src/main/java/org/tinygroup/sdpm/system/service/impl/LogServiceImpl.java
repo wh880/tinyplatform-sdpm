@@ -50,6 +50,7 @@ public class LogServiceImpl implements LogService{
             if(compare(oldValue,newValue)){
                 continue;
             }else {
+
                 SystemHistory systemHistory = new SystemHistory();
                 systemHistory.setHistoryAction(systemAction.getActionId());
                 systemHistory.setHistoryField(field.getName());
@@ -95,4 +96,5 @@ public class LogServiceImpl implements LogService{
         }
         return object;
     }
+
 }

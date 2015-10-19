@@ -4,7 +4,8 @@ public class FieldUtil {
 	
 	public static final int DELETE_NO = 0;
 	public static final int DELETE_YES = 1;
-	
+
+
 	public static String stringFormat(String field) {
 		StringBuffer buffer = new StringBuffer();
 		for (char cs : field.toCharArray()) {

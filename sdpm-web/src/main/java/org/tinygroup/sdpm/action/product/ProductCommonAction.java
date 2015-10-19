@@ -53,32 +53,34 @@ public class ProductCommonAction   extends BaseController{
 		List<Object> list = new ArrayList<Object>();
 		list.addAll(plans);
 		list.addAll(releases);
+		
+		if(list.size()>0){
+			Collections.sort(list,  new Comparator<Object>() {
 
-		Collections.sort(list,  new Comparator<Object>() {
+				public int compare(Object obj1, Object obj2) {
 
-			public int compare(Object obj1, Object obj2) {
+					Date date1 = null;
+					Date date2 = null;
+					if(obj1 instanceof ProductPlan){
+						date1 = ((ProductPlan) obj1).getPlanEndDate();
+					}else if (obj1 instanceof ProductRelease) {
+						date1 = ((ProductRelease) obj1).getReleaseDate();
+					}
 
-				Date date1 = null;
-				Date date2 = null;
-				if(obj1 instanceof ProductPlan){
-					date1 = ((ProductPlan) obj2).getPlanEndDate();
-				}else if (obj1 instanceof ProductRelease) {
-					date1 = ((ProductRelease) obj1).getReleaseDate();
+					if (obj2 instanceof ProductPlan) {
+						date2 = ((ProductPlan) obj2).getPlanEndDate();
+					}else if (obj2 instanceof ProductRelease) {
+						date2 = ((ProductRelease) obj2).getReleaseDate();
+					}
+					if(date1!=null&&date2!=null){
+						return date2.compareTo(date1);
+					}else{
+						return 0;
+					}
 				}
-
-				if (obj2 instanceof ProductPlan) {
-					date2 = ((ProductPlan) obj2).getPlanEndDate();
-				}else if (obj2 instanceof ProductRelease) {
-					date2 = ((ProductRelease) obj2).getReleaseDate();
-				}
-				if(date1!=null&&date2!=null){
-					return date2.compareTo(date1);
-				}else{
-					return 0;
-				}
-			}
-		});
-		List<Object> lo = list;
+			});
+		}
+		
 		model.addAttribute("list", list);
 		return "/product/page/project/product-roadmap.page";
 	}

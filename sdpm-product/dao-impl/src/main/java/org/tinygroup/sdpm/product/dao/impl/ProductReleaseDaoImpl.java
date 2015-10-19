@@ -29,6 +29,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
@@ -54,207 +55,308 @@ import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallba
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+
 @Repository
-public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductReleaseDao {
+public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
+		ProductReleaseDao {
 
 	public ProductRelease add(ProductRelease productRelease) {
-		return getDslTemplate().insertAndReturnKey(productRelease, new InsertGenerateCallback<ProductRelease>() {
-			public Insert generate(ProductRelease t) {
-				Insert insert = insertInto(PRODUCT_RELEASETABLE).values(
-					PRODUCT_RELEASETABLE.RELEASE_ID.value(t.getReleaseId()),
-					PRODUCT_RELEASETABLE.PRODUCT_ID.value(t.getProductId()),
-					PRODUCT_RELEASETABLE.BUILD_ID.value(t.getBuildId()),
-					PRODUCT_RELEASETABLE.RELEASE_NAME.value(t.getReleaseName()),
-					PRODUCT_RELEASETABLE.RELEASE_DATE.value(t.getReleaseDate()),
-					PRODUCT_RELEASETABLE.RELEASE_STORIES.value(t.getReleaseStories()),
-					PRODUCT_RELEASETABLE.RELEASE_BUGS.value(t.getReleaseBugs()),
-					PRODUCT_RELEASETABLE.RELEASE_DESC.value(t.getReleaseDesc()),
-					PRODUCT_RELEASETABLE.DELETED.value(t.getDeleted()));
-				return insert;
-			}
-		});
+		return getDslTemplate().insertAndReturnKey(productRelease,
+				new InsertGenerateCallback<ProductRelease>() {
+					public Insert generate(ProductRelease t) {
+						Insert insert = insertInto(PRODUCT_RELEASETABLE)
+								.values(PRODUCT_RELEASETABLE.RELEASE_ID.value(t
+										.getReleaseId()),
+										PRODUCT_RELEASETABLE.PRODUCT_ID.value(t
+												.getProductId()),
+										PRODUCT_RELEASETABLE.BUILD_ID.value(t
+												.getBuildId()),
+										PRODUCT_RELEASETABLE.RELEASE_NAME
+												.value(t.getReleaseName()),
+										PRODUCT_RELEASETABLE.RELEASE_DATE
+												.value(t.getReleaseDate()),
+										PRODUCT_RELEASETABLE.RELEASE_STORIES
+												.value(t.getReleaseStories()),
+										PRODUCT_RELEASETABLE.RELEASE_BUGS
+												.value(t.getReleaseBugs()),
+										PRODUCT_RELEASETABLE.RELEASE_DESC
+												.value(t.getReleaseDesc()),
+										PRODUCT_RELEASETABLE.DELETED.value(t
+												.getDeleted()));
+						return insert;
+					}
+				});
 	}
 
 	public int edit(ProductRelease productRelease) {
-		if(productRelease == null || productRelease.getReleaseId() == null){
+		if (productRelease == null || productRelease.getReleaseId() == null) {
 			return 0;
 		}
-		return getDslTemplate().update(productRelease, new UpdateGenerateCallback<ProductRelease>() {
-			public Update generate(ProductRelease t) {
-				Update update = UpdateUtil.getUpdate(PRODUCT_RELEASETABLE, t);
-				return update;
-			}
-		});
+		return getDslTemplate().update(productRelease,
+				new UpdateGenerateCallback<ProductRelease>() {
+					public Update generate(ProductRelease t) {
+						Update update = UpdateUtil.getUpdate(
+								PRODUCT_RELEASETABLE, t);
+						return update;
+					}
+				});
 	}
 
-	public int deleteByKey(Integer pk){
-		if(pk == null){
+	public int deleteByKey(Integer pk) {
+		if (pk == null) {
 			return 0;
 		}
-		return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
-			public Delete generate(Serializable pk) {
-				return delete(PRODUCT_RELEASETABLE).where(PRODUCT_RELEASETABLE.RELEASE_ID.eq(pk));
-			}
-		});
+		return getDslTemplate().deleteByKey(pk,
+				new DeleteGenerateCallback<Serializable>() {
+					public Delete generate(Serializable pk) {
+						return delete(PRODUCT_RELEASETABLE).where(
+								PRODUCT_RELEASETABLE.RELEASE_ID.eq(pk));
+					}
+				});
 	}
 
 	public int deleteByKeys(Integer... pks) {
-		if(pks == null || pks.length == 0){
+		if (pks == null || pks.length == 0) {
 			return 0;
 		}
-		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
-			public Delete generate(Serializable[] t) {
-				return delete(PRODUCT_RELEASETABLE).where(PRODUCT_RELEASETABLE.RELEASE_ID.in(t));
-		}
-		},pks);
+		return getDslTemplate().deleteByKeys(
+				new DeleteGenerateCallback<Serializable[]>() {
+					public Delete generate(Serializable[] t) {
+						return delete(PRODUCT_RELEASETABLE).where(
+								PRODUCT_RELEASETABLE.RELEASE_ID.in(t));
+					}
+				}, pks);
 	}
-	
-	public List<ProductRelease> getByKeys(Integer... pk){
-		
+
+	public List<ProductRelease> getByKeys(Integer... pk) {
+
 		SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
 			@SuppressWarnings("rawtypes")
 			public Select generate(Serializable[] t) {
 
-				return selectFrom(PRODUCT_RELEASETABLE).where(PRODUCT_RELEASETABLE.RELEASE_ID.in(t));
+				return selectFrom(PRODUCT_RELEASETABLE).where(
+						PRODUCT_RELEASETABLE.RELEASE_ID.in(t));
 			}
-			
+
 		};
 		Select select = callback.generate(pk);
 		return getDslSession().fetchList(select, ProductRelease.class);
 	}
 
 	public ProductRelease getByKey(Integer pk) {
-		return getDslTemplate().getByKey(pk, ProductRelease.class, new SelectGenerateCallback<Serializable>() {
-		@SuppressWarnings("rawtypes")
-		public Select generate(Serializable t) {
-			return selectFrom(PRODUCT_RELEASETABLE).where(PRODUCT_RELEASETABLE.RELEASE_ID.eq(t));
-			}
-		});
-	}
+		try {
+			return getDslTemplate().getByKey(pk, ProductRelease.class, new SelectGenerateCallback<Serializable>() {
+				@SuppressWarnings("rawtypes")
+				public Select generate(Serializable t) {
+					return selectFrom(PRODUCT_RELEASETABLE).where(PRODUCT_RELEASETABLE.RELEASE_ID.eq(t));
+					}
+				});
+		} catch (EmptyResultDataAccessException e) {
 
-	public List<ProductRelease> query(ProductRelease productRelease ,final OrderBy... orderArgs) {
-		if(productRelease==null){
-			productRelease=new ProductRelease();
+			return null;
 		}
-		return getDslTemplate().query(productRelease, new SelectGenerateCallback<ProductRelease>() {
-
-			@SuppressWarnings("rawtypes")
-			public Select generate(ProductRelease t) {
-				Select select = selectFrom(PRODUCT_RELEASETABLE).where(
-				and(
-					PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t.getProductId()),
-					PRODUCT_RELEASETABLE.BUILD_ID.eq(t.getBuildId()),
-					PRODUCT_RELEASETABLE.RELEASE_NAME.eq(t.getReleaseName()),
-					PRODUCT_RELEASETABLE.RELEASE_DATE.eq(t.getReleaseDate()),
-					PRODUCT_RELEASETABLE.RELEASE_STORIES.eq(t.getReleaseStories()),
-					PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(t.getReleaseBugs()),
-					PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t.getReleaseDesc()),
-					PRODUCT_RELEASETABLE.DELETED.eq(t.getDeleted())));
-			return addOrderByElements(select, orderArgs);
-			}
-		});
+		
 	}
 
-	public Pager<ProductRelease> queryPager(int start,int limit ,ProductRelease productRelease ,final OrderBy... orderArgs) {
-		if(productRelease==null){
-			productRelease=new ProductRelease();
+	public List<ProductRelease> query(ProductRelease productRelease,
+			final OrderBy... orderArgs) {
+		if (productRelease == null) {
+			productRelease = new ProductRelease();
 		}
-		return getDslTemplate().queryPager(start, limit, productRelease, false, new SelectGenerateCallback<ProductRelease>() {
+		return getDslTemplate().query(productRelease,
+				new SelectGenerateCallback<ProductRelease>() {
 
-			public Select generate(ProductRelease t) {
-				Select select = MysqlSelect.selectFrom(PRODUCT_RELEASETABLE).where(
-				and(
-					PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t.getProductId()),
-					PRODUCT_RELEASETABLE.BUILD_ID.eq(t.getBuildId()),
-					PRODUCT_RELEASETABLE.RELEASE_NAME.eq(t.getReleaseName()),
-					PRODUCT_RELEASETABLE.RELEASE_DATE.eq(t.getReleaseDate()),
-					PRODUCT_RELEASETABLE.RELEASE_STORIES.eq(t.getReleaseStories()),
-					PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(t.getReleaseBugs()),
-					PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t.getReleaseDesc()),
-					PRODUCT_RELEASETABLE.DELETED.eq(t.getDeleted())));
-			return addOrderByElements(select, orderArgs);
-			}
-		});
+					@SuppressWarnings("rawtypes")
+					public Select generate(ProductRelease t) {
+						Select select = selectFrom(PRODUCT_RELEASETABLE).where(
+								and(PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t
+										.getProductId()),
+										PRODUCT_RELEASETABLE.BUILD_ID.eq(t
+												.getBuildId()),
+										PRODUCT_RELEASETABLE.RELEASE_NAME.eq(t
+												.getReleaseName()),
+										PRODUCT_RELEASETABLE.RELEASE_DATE.eq(t
+												.getReleaseDate()),
+										PRODUCT_RELEASETABLE.RELEASE_STORIES
+												.eq(t.getReleaseStories()),
+										PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(t
+												.getReleaseBugs()),
+										PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t
+												.getReleaseDesc()),
+										PRODUCT_RELEASETABLE.DELETED.eq(t
+												.getDeleted())));
+						return addOrderByElements(select, orderArgs);
+					}
+				});
 	}
 
-	public int[] batchInsert(boolean autoGeneratedKeys ,List<ProductRelease> productReleases) {
+	public Pager<ProductRelease> queryPager(int start, int limit,
+			ProductRelease productRelease, final OrderBy... orderArgs) {
+		if (productRelease == null) {
+			productRelease = new ProductRelease();
+		}
+		return getDslTemplate().queryPager(start, limit, productRelease, false,
+				new SelectGenerateCallback<ProductRelease>() {
+
+					public Select generate(ProductRelease t) {
+						Select select = MysqlSelect.selectFrom(
+								PRODUCT_RELEASETABLE).where(
+								and(PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t
+										.getProductId()),
+										PRODUCT_RELEASETABLE.BUILD_ID.eq(t
+												.getBuildId()),
+										PRODUCT_RELEASETABLE.RELEASE_NAME.eq(t
+												.getReleaseName()),
+										PRODUCT_RELEASETABLE.RELEASE_DATE.eq(t
+												.getReleaseDate()),
+										PRODUCT_RELEASETABLE.RELEASE_STORIES
+												.eq(t.getReleaseStories()),
+										PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(t
+												.getReleaseBugs()),
+										PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t
+												.getReleaseDesc()),
+										PRODUCT_RELEASETABLE.DELETED.eq(t
+												.getDeleted())));
+						return addOrderByElements(select, orderArgs);
+					}
+				});
+	}
+
+	public int[] batchInsert(boolean autoGeneratedKeys,
+			List<ProductRelease> productReleases) {
 		if (CollectionUtil.isEmpty(productReleases)) {
 			return new int[0];
 		}
-		return getDslTemplate().batchInsert(autoGeneratedKeys, productReleases, new NoParamInsertGenerateCallback() {
+		return getDslTemplate().batchInsert(autoGeneratedKeys, productReleases,
+				new NoParamInsertGenerateCallback() {
 
-			public Insert generate() {
-				return insertInto(PRODUCT_RELEASETABLE).values(
-					PRODUCT_RELEASETABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
-					PRODUCT_RELEASETABLE.BUILD_ID.value(new JdbcNamedParameter("buildId")),
-					PRODUCT_RELEASETABLE.RELEASE_NAME.value(new JdbcNamedParameter("releaseName")),
-					PRODUCT_RELEASETABLE.RELEASE_DATE.value(new JdbcNamedParameter("releaseDate")),
-					PRODUCT_RELEASETABLE.RELEASE_STORIES.value(new JdbcNamedParameter("releaseStories")),
-					PRODUCT_RELEASETABLE.RELEASE_BUGS.value(new JdbcNamedParameter("releaseBugs")),
-					PRODUCT_RELEASETABLE.RELEASE_DESC.value(new JdbcNamedParameter("releaseDesc")),
-					PRODUCT_RELEASETABLE.DELETED.value(new JdbcNamedParameter("deleted")));
-			}
-		});
+					public Insert generate() {
+						return insertInto(PRODUCT_RELEASETABLE)
+								.values(PRODUCT_RELEASETABLE.PRODUCT_ID
+										.value(new JdbcNamedParameter(
+												"productId")),
+										PRODUCT_RELEASETABLE.BUILD_ID
+												.value(new JdbcNamedParameter(
+														"buildId")),
+										PRODUCT_RELEASETABLE.RELEASE_NAME
+												.value(new JdbcNamedParameter(
+														"releaseName")),
+										PRODUCT_RELEASETABLE.RELEASE_DATE
+												.value(new JdbcNamedParameter(
+														"releaseDate")),
+										PRODUCT_RELEASETABLE.RELEASE_STORIES
+												.value(new JdbcNamedParameter(
+														"releaseStories")),
+										PRODUCT_RELEASETABLE.RELEASE_BUGS
+												.value(new JdbcNamedParameter(
+														"releaseBugs")),
+										PRODUCT_RELEASETABLE.RELEASE_DESC
+												.value(new JdbcNamedParameter(
+														"releaseDesc")),
+										PRODUCT_RELEASETABLE.DELETED
+												.value(new JdbcNamedParameter(
+														"deleted")));
+					}
+				});
 	}
 
-	public int[] batchInsert(List<ProductRelease> productReleases){
-			return batchInsert(true ,productReleases);
+	public int[] batchInsert(List<ProductRelease> productReleases) {
+		return batchInsert(true, productReleases);
 	}
 
 	public int[] batchUpdate(List<ProductRelease> productReleases) {
 		if (CollectionUtil.isEmpty(productReleases)) {
 			return new int[0];
 		}
-		return getDslTemplate().batchUpdate(productReleases, new NoParamUpdateGenerateCallback() {
+		return getDslTemplate().batchUpdate(productReleases,
+				new NoParamUpdateGenerateCallback() {
 
-			public Update generate() {
-				return update(PRODUCT_RELEASETABLE).set(
-					PRODUCT_RELEASETABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
-					PRODUCT_RELEASETABLE.BUILD_ID.value(new JdbcNamedParameter("buildId")),
-					PRODUCT_RELEASETABLE.RELEASE_NAME.value(new JdbcNamedParameter("releaseName")),
-					PRODUCT_RELEASETABLE.RELEASE_DATE.value(new JdbcNamedParameter("releaseDate")),
-					PRODUCT_RELEASETABLE.RELEASE_STORIES.value(new JdbcNamedParameter("releaseStories")),
-					PRODUCT_RELEASETABLE.RELEASE_BUGS.value(new JdbcNamedParameter("releaseBugs")),
-					PRODUCT_RELEASETABLE.RELEASE_DESC.value(new JdbcNamedParameter("releaseDesc")),
-					PRODUCT_RELEASETABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
-				PRODUCT_RELEASETABLE.RELEASE_ID.eq(new JdbcNamedParameter("releaseId")));
-			}
-		});
+					public Update generate() {
+						return update(PRODUCT_RELEASETABLE)
+								.set(PRODUCT_RELEASETABLE.PRODUCT_ID
+										.value(new JdbcNamedParameter(
+												"productId")),
+										PRODUCT_RELEASETABLE.BUILD_ID
+												.value(new JdbcNamedParameter(
+														"buildId")),
+										PRODUCT_RELEASETABLE.RELEASE_NAME
+												.value(new JdbcNamedParameter(
+														"releaseName")),
+										PRODUCT_RELEASETABLE.RELEASE_DATE
+												.value(new JdbcNamedParameter(
+														"releaseDate")),
+										PRODUCT_RELEASETABLE.RELEASE_STORIES
+												.value(new JdbcNamedParameter(
+														"releaseStories")),
+										PRODUCT_RELEASETABLE.RELEASE_BUGS
+												.value(new JdbcNamedParameter(
+														"releaseBugs")),
+										PRODUCT_RELEASETABLE.RELEASE_DESC
+												.value(new JdbcNamedParameter(
+														"releaseDesc")),
+										PRODUCT_RELEASETABLE.DELETED
+												.value(new JdbcNamedParameter(
+														"deleted"))).where(
+										PRODUCT_RELEASETABLE.RELEASE_ID
+												.eq(new JdbcNamedParameter(
+														"releaseId")));
+					}
+				});
 	}
 
 	public int[] batchDelete(List<ProductRelease> productReleases) {
 		if (CollectionUtil.isEmpty(productReleases)) {
 			return new int[0];
 		}
-		return getDslTemplate().batchDelete(productReleases, new NoParamDeleteGenerateCallback() {
+		return getDslTemplate().batchDelete(productReleases,
+				new NoParamDeleteGenerateCallback() {
 
-			public Delete generate() {
-				return delete(PRODUCT_RELEASETABLE).where(and(
-				PRODUCT_RELEASETABLE.RELEASE_ID.eq(new JdbcNamedParameter("releaseId")),
-				PRODUCT_RELEASETABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId")),
-				PRODUCT_RELEASETABLE.BUILD_ID.eq(new JdbcNamedParameter("buildId")),
-				PRODUCT_RELEASETABLE.RELEASE_NAME.eq(new JdbcNamedParameter("releaseName")),
-				PRODUCT_RELEASETABLE.RELEASE_DATE.eq(new JdbcNamedParameter("releaseDate")),
-				PRODUCT_RELEASETABLE.RELEASE_STORIES.eq(new JdbcNamedParameter("releaseStories")),
-				PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(new JdbcNamedParameter("releaseBugs")),
-				PRODUCT_RELEASETABLE.RELEASE_DESC.eq(new JdbcNamedParameter("releaseDesc")),
-				PRODUCT_RELEASETABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
-			}
-		});
+					public Delete generate() {
+						return delete(PRODUCT_RELEASETABLE)
+								.where(and(
+										PRODUCT_RELEASETABLE.RELEASE_ID
+												.eq(new JdbcNamedParameter(
+														"releaseId")),
+										PRODUCT_RELEASETABLE.PRODUCT_ID
+												.eq(new JdbcNamedParameter(
+														"productId")),
+										PRODUCT_RELEASETABLE.BUILD_ID
+												.eq(new JdbcNamedParameter(
+														"buildId")),
+										PRODUCT_RELEASETABLE.RELEASE_NAME
+												.eq(new JdbcNamedParameter(
+														"releaseName")),
+										PRODUCT_RELEASETABLE.RELEASE_DATE
+												.eq(new JdbcNamedParameter(
+														"releaseDate")),
+										PRODUCT_RELEASETABLE.RELEASE_STORIES
+												.eq(new JdbcNamedParameter(
+														"releaseStories")),
+										PRODUCT_RELEASETABLE.RELEASE_BUGS
+												.eq(new JdbcNamedParameter(
+														"releaseBugs")),
+										PRODUCT_RELEASETABLE.RELEASE_DESC
+												.eq(new JdbcNamedParameter(
+														"releaseDesc")),
+										PRODUCT_RELEASETABLE.DELETED
+												.eq(new JdbcNamedParameter(
+														"deleted"))));
+					}
+				});
 	}
 
-	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
-		if(orderBies==null||orderBies.length==0){
+	private Select addOrderByElements(Select select, OrderBy... orderBies) {
+		if (orderBies == null || orderBies.length == 0) {
 			return select;
 		}
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
 			OrderByElement tempElement = null;
-			
-			if(orderBies[i]!=null){
+
+			if (orderBies[i] != null) {
 				tempElement = orderBies[i].getOrderByElement();
 			}
-			
+
 			if (tempElement != null) {
 				orderByElements.add(tempElement);
 			}
@@ -264,27 +366,30 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements ProductR
 		}
 		return select;
 	}
-	
-	public Integer softDelete(Integer id) {
-        return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
-            public Update generate(Integer id) {
-                Update update = update(PRODUCT_RELEASETABLE).set(
-                		PRODUCT_RELEASETABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
-                		PRODUCT_RELEASETABLE.RELEASE_ID.eq(id));
-                return update;
-            }
-        });
 
-    }
-	public static Condition releasePueryCondition(ProductRelease t){
-		return t==null?null:and(
-						PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t.getProductId()),
-						PRODUCT_RELEASETABLE.BUILD_ID.eq(t.getBuildId()),
-						PRODUCT_RELEASETABLE.RELEASE_NAME.eq(t.getReleaseName()),
-						PRODUCT_RELEASETABLE.RELEASE_DATE.eq(t.getReleaseDate()),
-						PRODUCT_RELEASETABLE.RELEASE_STORIES.eq(t.getReleaseStories()),
-						PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(t.getReleaseBugs()),
-						PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t.getReleaseDesc()),
-						PRODUCT_RELEASETABLE.DELETED.eq(t.getDeleted()));
+	public Integer softDelete(Integer id) {
+		return getDslTemplate().update(id,
+				new UpdateGenerateCallback<Integer>() {
+					public Update generate(Integer id) {
+						Update update = update(PRODUCT_RELEASETABLE).set(
+								PRODUCT_RELEASETABLE.DELETED
+										.value(FieldUtil.DELETE_YES)).where(
+								PRODUCT_RELEASETABLE.RELEASE_ID.eq(id));
+						return update;
+					}
+				});
+
+	}
+
+	public static Condition releasePueryCondition(ProductRelease t) {
+		return t == null ? null : and(
+				PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t.getProductId()),
+				PRODUCT_RELEASETABLE.BUILD_ID.eq(t.getBuildId()),
+				PRODUCT_RELEASETABLE.RELEASE_NAME.eq(t.getReleaseName()),
+				PRODUCT_RELEASETABLE.RELEASE_DATE.eq(t.getReleaseDate()),
+				PRODUCT_RELEASETABLE.RELEASE_STORIES.eq(t.getReleaseStories()),
+				PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(t.getReleaseBugs()),
+				PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t.getReleaseDesc()),
+				PRODUCT_RELEASETABLE.DELETED.eq(t.getDeleted()));
 	}
 }

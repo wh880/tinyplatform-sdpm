@@ -15,3 +15,27 @@
 </div>
 </div>
 #end
+<script>
+$(function(){
+	$("form[name=thisform]").on("submit",function(){
+		$.ajax({
+			url:$(this).attr("action"),
+			type:"post",
+			dataType:"json",
+			data:{fileTitle:$("input[name=fileTitle]").val(),fileId:${profile?.fileId}},
+			success:function(data){
+				if(data.status=="y"){
+					window.location.reload()
+				}else{
+					layer.msg(data.info);
+				}
+			
+			},
+			error:function(){
+				layer.msg("error");
+			}
+		});
+		return false;
+	})
+})
+</script>

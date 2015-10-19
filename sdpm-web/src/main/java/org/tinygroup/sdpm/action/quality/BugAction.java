@@ -85,6 +85,9 @@ public class BugAction extends BaseController {
 		if(queryString!=null&&!queryString.contains("status")){
 			return "redirect:/a/quality/bug?status=tbugstatus&"+queryString;
 		}
+		if(StringUtil.isBlank(queryString)){
+			return "redirect:/a/quality/bug?status=tbugstatus&currentPageId=5";
+		}
 		return "/testManagement/page/Bug.page";
 	}
 	
@@ -157,6 +160,15 @@ public class BugAction extends BaseController {
 				QualityBug bug = bugService.findById(Integer.valueOf(id));
 				bug.setBugConfirmed(1);
 				bugService.updateBug(bug);
+				LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+						, LogUtil.LogAction.BUGCONFIRMED
+						,String.valueOf(bug.getBugId())
+						,UserUtils.getUserId()
+						,String.valueOf(bug.getProductId())
+						,String.valueOf(bug.getProjectId())
+						,null
+						,null
+						,null);
 			}
 		}
 
@@ -167,6 +179,10 @@ public class BugAction extends BaseController {
 	}
 	@RequestMapping("/sure")
 	public String makesure(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
+		QualityBug qualityBug = bugService.findById(bug.getBugId());
+		if(qualityBug.getBugAssignedTo()!=bug.getBugAssignedTo()){
+			bug.setBugAssignedDate(new Date());
+		}
 		bug.setBugConfirmed(1);
 		bugService.updateBug(bug);
 
@@ -194,11 +210,11 @@ public class BugAction extends BaseController {
 
 	@RequestMapping("/assignTo")
 	public String assign(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
-
+		QualityBug qualityBug = bugService.findById(bug.getBugId());
 		bug.setBugAssignedDate(new Date());
 		bugService.updateBug(bug);
 
-	
+
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
 				, LogUtil.LogAction.ASSIGNED
 				,String.valueOf(bug.getBugId())
@@ -237,8 +253,11 @@ public class BugAction extends BaseController {
 	}
 	@RequestMapping("/solve")
 	public String solve(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
-
-		bug.setBugResolvedBy(UserUtils.getUserAccount() != null?UserUtils.getUserAccount():"0");
+		QualityBug qualityBug = bugService.findById(bug.getBugId());
+		if(qualityBug.getBugAssignedTo()!=bug.getBugAssignedTo()){
+			bug.setBugAssignedDate(new Date());
+		}
+		bug.setBugResolvedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		bug.setBugStatus("2");
 		bugService.updateBug(bug);
 
@@ -267,7 +286,7 @@ public class BugAction extends BaseController {
 	@RequestMapping("/close")
 	public String close(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
 
-		bug.setBugClosedBy(UserUtils.getUserAccount() != null?UserUtils.getUserAccount():"0");
+		bug.setBugClosedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		bug.setBugClosedDate(new Date());
 		bug.setBugStatus("3");
 		bugService.updateBug(bug);
@@ -298,7 +317,7 @@ public class BugAction extends BaseController {
 
 		QualityBug qualityBug = bugService.findById(bug.getBugId());
 
-		bug.setBugLastEditedBy(UserUtils.getUserAccount() != null?UserUtils.getUserAccount():"0");
+		bug.setBugLastEditedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		bug.setBugLastEditedDate(new Date());
 		bugService.updateBug(bug);
 
@@ -409,7 +428,7 @@ public class BugAction extends BaseController {
 	@RequestMapping(value = "/copy",method = RequestMethod.POST)
 	public String copySave(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
 		bug.setBugOpenedDate(new Date());
-		bug.setBugOpenedBy(UserUtils.getUserAccount() != null?UserUtils.getUserAccount():"0");
+		bug.setBugOpenedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		bugService.addBug(bug);
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
@@ -432,7 +451,7 @@ public class BugAction extends BaseController {
 			bug.setBugAssignedDate(new Date());
 		}
 		bug.setBugOpenedDate(new Date());
-		bug.setBugOpenedBy(UserUtils.getUserAccount() != null?UserUtils.getUserAccount():"0");
+		bug.setBugOpenedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		QualityBug qbug=bugService.addBug(bug);
 		ProfileUtil profileUtil = new ProfileUtil();
 		try {

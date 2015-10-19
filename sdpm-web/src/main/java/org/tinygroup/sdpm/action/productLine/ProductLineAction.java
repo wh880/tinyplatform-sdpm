@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -15,6 +16,8 @@ import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -43,6 +46,7 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("{type}")
     public String productline(@PathVariable(value = "type") String type) {
         if ("add".equals(type)) {
+
             return "productLine/page/tabledemo/add.page";
         }
         if ("all".equals(type)) {
@@ -53,10 +57,20 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/save")
-    public String save(ProductLine productLine, Model model) {
+    public String save(ProductLine productLine, Model model,ProductLineAction productLineAction) {
         productLine.setProductLineCreatedBy(UserUtils.getUser().getOrgUserAccount());
         productLine.setProductLineStatus("新建");
-        productLineService.addProductLine(productLine);
+        ProductLine productLine1 = productLineService.addProductLine(productLine);
+
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE
+                , LogUtil.LogAction.OPENED
+                ,String.valueOf(productLine1.getProductLineId())
+                ,UserUtils.getUserId()
+                ,null
+                ,null
+                ,null
+                ,null
+                ,productLine1.getProductLineSpec());
 
         return "redirect:" + "/productLine/page/tabledemo/list.page";
     }
@@ -67,10 +81,12 @@ public class ProductLineAction extends BaseController {
         return "redirect:" + "/productLine/page/tabledemo/list.page";
     }
 
-    @RequestMapping("/close")
-    public String close(ProductLine productLine) {
+
+
+    @RequestMapping("/edit")
+    public String edit(ProductLine productLine){
         productLineService.updateProductLine(productLine);
-        return  "/productLine/page/tabledemo/close.page";
+        return "/productLine/page/tabledemo/update.page";
     }
 
     @ResponseBody
@@ -88,6 +104,13 @@ public class ProductLineAction extends BaseController {
         ProductLine productLine = productLineService.findProductLine(productLineId);
         model.addAttribute("productLine", productLine);
         return "/productLine/page/tabledemo/update.page";
+    }
+
+    @RequestMapping("/close")
+    public String close(Integer productLineId, Model model) {
+        ProductLine productLine = productLineService.findProductLine(productLineId);
+        model.addAttribute("productLine", productLine);
+        return "/productLine/page/tabledemo/close.page";
     }
 
     @RequestMapping("/list")
@@ -110,9 +133,16 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/find/{forword}")
-    public String find(@PathVariable(value = "forword") String forword, Integer productLineId, Model model, HttpServletRequest request) {
-        if (productLineId == null) {
-            productLineId = (Integer) request.getSession().getAttribute("sessionProductLineId");
+    public String find(@PathVariable(value = "forword") String forword,Integer productId,Integer productLineId, Model model, HttpServletRequest request) {
+    	
+    	
+    	if (productLineId == null) {
+    		if(request.getSession().getAttribute("sessionProductLineId")!=null){
+    			 productLineId = (Integer) request.getSession().getAttribute("sessionProductLineId");
+    		}else if(productId!=null){
+    			productLineId = productService.findProduct(productId).getProductLineId();
+    		}
+           
         }
         ProductLine productLine = productLineService.findProductLine(productLineId);
         model.addAttribute("productLine", productLine);
@@ -203,9 +233,15 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("/treeData")
     public List data(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        List<ProductAndLine> productLists = productService.getProductAndLine(new Product());
-        List<ProductLine> productLines = productLineService.findlist(new ProductLine());
-        List<ProjectBuild> projectBuilds = buildService.findListBuild(new ProjectBuild());
+        Product product = new Product();
+        product.setDeleted(FieldUtil.DELETE_NO);
+        List<ProductAndLine> productLists = productService.getProductAndLine(product);
+        ProductLine productLine = new ProductLine();
+        productLine.setDeleted(FieldUtil.DELETE_NO);
+        List<ProductLine> productLines = productLineService.findlist(productLine);
+        ProjectBuild projectBuild = new ProjectBuild();
+        projectBuild.setBuildDeleted(FieldUtil.DELETE_NO_S);
+        List<ProjectBuild> projectBuilds = buildService.findListBuild(projectBuild);
 
         for (ProductLine d : productLines) {
             Map<String, Object> map = new HashMap<String, Object>();

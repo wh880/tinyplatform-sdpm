@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import com.oracle.jrockit.jfr.InvalidValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +55,16 @@ public class BuildAction extends BaseController {
     private ModuleService moduleService;
     @Autowired
     private ProjectStoryService projectStoryService;
+
+    @RequestMapping("/productBuildList")
+    public  String productBuildList(ProjectBuild build,Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request){
+
+        boolean asc = "asc".equals(ordertype) ? true : false;
+        Pager<ProjectBuild> pager =  buildService.findPagerBuild(build, start, limit, order, asc);
+        model.addAttribute("buildPager", pager);
+        return "project/version/tableData.pagelet";
+    }
+
 
 
     @RequestMapping("/find")

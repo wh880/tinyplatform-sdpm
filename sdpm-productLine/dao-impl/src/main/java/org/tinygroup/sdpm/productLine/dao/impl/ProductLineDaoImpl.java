@@ -26,10 +26,12 @@ import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.select.Join.*;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
@@ -49,9 +51,11 @@ import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 @Repository
 public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLineDao {
 
@@ -117,12 +121,17 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 	}
 
 	public ProductLine getByKey(Integer pk) {
-		return getDslTemplate().getByKey(pk, ProductLine.class, new SelectGenerateCallback<Serializable>() {
-		@SuppressWarnings("rawtypes")
-		public Select generate(Serializable t) {
-			return selectFrom(PRODUCT_LINETABLE).where(PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(t));
-			}
-		});
+		try {
+			return getDslTemplate().getByKey(pk, ProductLine.class, new SelectGenerateCallback<Serializable>() {
+				@SuppressWarnings("rawtypes")
+				public Select generate(Serializable t) {
+					return selectFrom(PRODUCT_LINETABLE).where(PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(t));
+					}
+				});
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+		
 	}
 
 	public List<ProductLine> query(ProductLine productLine ,final OrderBy... orderArgs) {
@@ -183,6 +192,40 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.eq(t.getProductLineCreatedBy()),
 					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.eq(t.getProductLineCreatedDate()),
 					PRODUCT_LINETABLE.DELETED.eq(t.getDeleted())));
+			return addOrderByElements(select, orderArgs);
+			}
+		});
+	}
+	
+	public Pager<ProductLine> findList(int start,int limit ,ProductLine productLine ,final OrderBy... orderArgs) {
+		if(productLine==null){
+			productLine=new ProductLine();
+		}
+		
+		return getDslTemplate().queryPager(start, limit, productLine, false, new SelectGenerateCallback<ProductLine>() {
+
+			public Select generate(ProductLine t) {
+				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("product_line.*,u1.org_user_account as ownerName,u2.org_user_account as qualityManagerName,u3.org_user_account as qualityManagerName"))
+						.from(FragmentSelectItemSql.fragmentFrom("product_line left join org_user u1 on u1.org_user_id = product_line.product_line_owner left join  org_user u2 on u2.org_user_id = product_line.product_line_quality_manager left join  org_user u3 on u3.org_user_id = product_line.product_line_delivery_manager"))
+						.where(
+								and(	
+										PRODUCT_LINETABLE.COMPANY_ID.eq(t.getCompanyId()),
+										PRODUCT_LINETABLE.DEPT_ID.eq(t.getDeptId()),
+										PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.eq(t.getProductLineRoot()),
+										PRODUCT_LINETABLE.PRODUCT_LINE_PARENT.eq(t.getProductLineParent()),
+										PRODUCT_LINETABLE.PRODUCT_LINE_NAME.eq(t.getProductLineName()),
+										PRODUCT_LINETABLE.PRODUCT_LINE_CODE.eq(t.getProductLineCode()),
+										PRODUCT_LINETABLE.PRODUCT_LINE_ORDER.eq(t.getProductLineOrder()),
+										PRODUCT_LINETABLE.PRODUCT_LINE_SPEC.eq(t.getProductLineSpec()),
+										PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.eq(t.getProductLineStatus()),
+										PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.eq(t.getProductLineOwner()),
+										PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.eq(t.getProductLineQualityManager()),
+										PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.eq(t.getProductLineDeliveryManager()),
+										PRODUCT_LINETABLE.ACL.eq(t.getAcl()),
+										PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.eq(t.getProductLineWhiteList()),
+										PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.eq(t.getProductLineCreatedBy()),
+										PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.eq(t.getProductLineCreatedDate()),
+										PRODUCT_LINETABLE.DELETED.eq(t.getDeleted())));
 			return addOrderByElements(select, orderArgs);
 			}
 		});
@@ -282,7 +325,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 	}
 
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
-		if (orderBies == null) {
+		if (orderBies == null||orderBies.length==0) {
 			return select;
 		}
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
