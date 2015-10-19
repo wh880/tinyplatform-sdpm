@@ -36,15 +36,15 @@
                 <a val="7" class="selDate">上月</a>
                 <a val="0" class="selDate">所有</a>
 
-                #@navSelect2()
-                    #@navSelect2Nav()用户<span class="caret"></span>#end
+                #@navSelect2("navUser")
+                    #@navSelect2Nav()<span>用户</span><span class="caret"></span>#end
                     #@navSelect2Body()
                         #@navSelect2Data()
-                        <optgroup label="用户">
+                            <option value=null>用户</option>
                             #for(user : userList)
                             <option class="selUser" value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                         #end
-                    </optgroup>
+
                     #end
                     #@navSelect2Fix()
                         <a href="${TINY_CONTEXT_PATH +adminPath}/org/user/list" class="r">所有用户</a>&nbsp;
@@ -57,39 +57,40 @@
 
 
 
-            #@navSelect2()
-                #@navSelect2Nav()产品<span class="caret"></span>#end
+            #@navSelect2("navProduct")
+                #@navSelect2Nav()<span>产品</span><span class="caret"></span>#end
                 #@navSelect2Body()
                     #@navSelect2Data()
-                    <optgroup label="产品">
+
+                        <option value=null>产品</option>
                         #for(product : productList)
                         <option class="selProduct" value="${product?.productId}">${product?.productName}</option>
                     #end
-                </optgroup>
+
                     #end
                 #@navSelect2Fix()
-                    <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-listall.page"
+                    <a href="${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition"
                        class="r">所有产品</a>&nbsp;
-                    <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/addProduct.page">添加产品</a>&nbsp;
+                    <a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition">添加产品</a>&nbsp;
                 #end
             #end
             #hiddenInput("productIdHidden","productId","","")
         #end
         &nbsp;
-        #@navSelect2()
-            #@navSelect2Nav()项目<span class="caret"></span>#end
+        #@navSelect2("navProject")
+            #@navSelect2Nav()<span>迭代</span><span class="caret"></span>#end
             #@navSelect2Body()
                 #@navSelect2Data()
-                <optgroup label="项目">
+
+                    <option value=null>迭代</option>
                     #for(project : projectList)
                     <option class="selProject" value="${project?.projectId}">${project?.projectName}</option>
                 #end
-            </optgroup>
             #end
             #@navSelect2Fix()
-                <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-listall.page" class="r">所有项目</a>
+                <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-listall.page" class="r">所有迭代</a>
                 &nbsp;
-                <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/addProduct.page">添加项目</a>&nbsp;
+                <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/addProduct.page">添加迭代</a>&nbsp;
             #end
         #end
         #hiddenInput("projectIdHidden","projectId","","")
@@ -111,31 +112,38 @@
 <script>
     $(function () {
         var actionUrl = $("#dynamicTable").attr("data-url");
+
+        function resetHeadData() {
+            $("select[name=navUser]").closest(".droptoprj").find(".toprj>span:first").html("用户 ");
+            $("select[name=navProject]").closest(".droptoprj").find(".toprj>span:first").html("迭代");
+            $("select[name=navProduct]").closest(".droptoprj").find(".toprj>span:first").html("产品");
+        }
         $(".selDate").click(function (e) {
+            resetHeadData();
             $("#dynamicTable").attr("data-url", actionUrl + "?selDate=" + $(this).attr("val"));
             $(".selDate").removeClass("active_btn");
             $(this).addClass("active_btn");
             $("#dynamicTable").trigger("refresh");
         });
 
-        $(".selUser").click(function (e) {
-            $("#dynamicTable").attr("data-url", actionUrl + "?orgUserId=" + $(this).attr("val"));
-            $(".selUser").removeClass("active_btn");
-            $(this).addClass("active_btn");
+        $("select[name=navUser]").change(function (e) {
+            resetHeadData();
+            $("#dynamicTable").attr("data-url", actionUrl + "?orgUserId=" + $(this).val());
+            $(this).closest(".droptoprj").find(".toprj>span:first").html($(this).find("option:selected").text());
             $("#dynamicTable").trigger("refresh");
         });
 
-        $(".selProduct").click(function (e) {
-            $("#dynamicTable").attr("data-url", actionUrl + "?productId=" + $(this).attr("val"));
-            $(".selProduct").removeClass("active_btn");
-            $(this).addClass("active_btn");
+        $("select[name=navProduct]").change(function (e) {
+            resetHeadData();
+            $("#dynamicTable").attr("data-url", actionUrl + "?productId=" + $(this).val());
+            $(this).closest(".droptoprj").find(".toprj>span:first").html($(this).find("option:selected").text());
             $("#dynamicTable").trigger("refresh");
         });
 
-        $(".selProject").click(function (e) {
+        $("select[name=navProject]").change(function (e) {
+            resetHeadData();
             $("#dynamicTable").attr("data-url", actionUrl + "?projectId=" + $(this).attr("val"));
-            $(".selProject").removeClass("active_btn");
-            $(this).addClass("active_btn");
+            $(this).closest(".droptoprj").find(".toprj>span:first").html($(this).find("option:selected").text());
             $("#dynamicTable").trigger("refresh");
         });
 

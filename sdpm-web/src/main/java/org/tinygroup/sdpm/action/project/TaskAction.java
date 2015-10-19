@@ -53,7 +53,7 @@ public class TaskAction extends BaseController {
     private ProjectProductService projectProductService;
 
     @RequestMapping("index")
-    public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model, String moduleId) {
+    public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model, String moduleId, String choose) {
         List<Project> list = projectService.findList();
         Project selProject = new Project();
         if (list == null || list.isEmpty()) {
@@ -86,10 +86,12 @@ public class TaskAction extends BaseController {
         request.getSession().setAttribute("projectList", list);
         if (moduleId != null) {
             model.addAttribute("moduleId", moduleId);
-            return "project/task/index.page";
-        } else {
-            return "project/task/index.page";
         }
+        if (StringUtil.isBlank(choose)) {
+            model.addAttribute("choose", choose);
+        }
+        return "project/task/index.page";
+
 
     }
 
