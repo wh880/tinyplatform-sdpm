@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -16,6 +17,8 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.sdpm.service.service.inter.SlaService;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -55,11 +58,18 @@ public class SlaAction extends BaseController {
 
     /*新增和修改*/
     @RequestMapping("/save")
-    public String save(ServiceSla sla, Model model) {
+    public String save(Integer id, ServiceSla sla, Model model) {
         if (sla.getSlaId() == null) {
             sla = slaService.addSla(sla);
+            LogUtil.logWithComment(LogUtil.LogOperateObject.SLA, LogUtil.LogAction.OPENED, String.valueOf(sla.getSlaId()), UserUtils.getUserId(),
+                    null, null, null, sla, null);
+
         } else {
+            ServiceSla qualitySla = slaService.findSla(sla.getSlaId());
             slaService.updateSla(sla);
+             /*历史记录*/
+            LogUtil.logWithComment(LogUtil.LogOperateObject.SLA, LogUtil.LogAction.EDITED, String.valueOf(sla.getSlaId()), UserUtils.getUserId(),
+                    null, null, qualitySla, sla, null);
         }
         model.addAttribute("sla", sla);
         return "/service/sla/sla.page";
@@ -227,7 +237,7 @@ public class SlaAction extends BaseController {
         for (String s : ids.split(",")) {
             ServiceSla serviceSla = new ServiceSla();
             serviceSla.setSlaId(Integer.valueOf(s));
-            serviceSla.setDeleted(serviceSla.DELETE_YES);
+            serviceSla.setDeleted(FieldUtil.DELETE_YES);
             list.add(serviceSla);
         }
         slaService.deleteBatchSla(list);

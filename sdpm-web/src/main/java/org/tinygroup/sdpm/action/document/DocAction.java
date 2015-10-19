@@ -2,11 +2,16 @@ package org.tinygroup.sdpm.action.document;
 
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.Doc;
+import javax.print.DocFlavor;
+import javax.print.attribute.DocAttributeSet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.fileupload.util.LimitedInputStream;
@@ -29,6 +34,8 @@ import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -45,8 +52,6 @@ import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
-import com.sun.xml.bind.v2.model.core.ID;
-
 @Controller
 @RequestMapping(value="/a/document")
 public class DocAction {
@@ -62,6 +67,8 @@ public class DocAction {
 	private ProjectProductService projectProductService;
 	@Autowired
 	private ProfileService profileService;
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping("")
 	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange,String tree, String moduleId)
@@ -77,7 +84,16 @@ public class DocAction {
 				request.getSession().setAttribute("documentLibId",doclib.getDocLibId());
 			}
 		}	
-		
+		List<OrgUser> userList = userService.findUserList(new OrgUser());
+		List<Product> productList = productService.findProductList(new Product());
+        List<Project> projectList = projectService.findList();
+        List<SystemModule> module = moduleService.findModuleList(new SystemModule());
+        List<DocumentDoclib> lib = docservice.findDoclibList(new DocumentDoclib());
+        model.addAttribute("userList", userList);
+        model.addAttribute("productList", productList);
+        model.addAttribute("projectList", projectList);
+        model.addAttribute("moduleList", module);
+        model.addAttribute("libList", lib);
 		request.getSession().setAttribute("libList",list);
 		request.getSession().setAttribute("moduleId", moduleId);
 		return "/document/document.page";

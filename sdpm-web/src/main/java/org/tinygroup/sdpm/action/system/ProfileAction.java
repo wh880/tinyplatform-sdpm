@@ -31,7 +31,7 @@ public class ProfileAction extends BaseController{
 		return null;
 	}
 	
-	@RequiresPermissions(value="{doc-file-edit}")
+	@RequiresPermissions(value="doc-file-edit")
 	@ResponseBody
 	@RequestMapping("edit/{type}")
 	public Map<String, String> eidt(SystemProfile profile,@PathVariable(value="type")String type,Model model){
@@ -45,7 +45,7 @@ public class ProfileAction extends BaseController{
 		return null;
 	}
 	
-	@RequiresPermissions(value="{doc-file-delete}")
+	@RequiresPermissions(value="doc-file-delete")
 	@ResponseBody
 	@RequestMapping("delete/{type}")
 	public Map delete(Integer id,@PathVariable(value="type")String type){

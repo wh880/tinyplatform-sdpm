@@ -74,7 +74,8 @@
      #@elementItem()
         #@colLabel()描述：#end
 	#@formControlDiv("col-8")
-		#@tinyTextarea("holidayDetail" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"备注不能为空！"})${holiday?.holidayDetail}#end
+        #@tinyTextarea("holidayDetail" {"placeholder":"请输入该假期的描述","datatype":"*10-500","nullmsg":
+            "备注不能为空！"})${holiday?.holidayDetail}#end
 	#end
         #@validateDiv("col-2")#end
     #end
