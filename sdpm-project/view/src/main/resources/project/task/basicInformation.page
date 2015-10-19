@@ -53,15 +53,15 @@
             #@tbody()
                 #@tr()
                     #@td()预计开始#end
-                    #@td()${task?.taskEstStared}#end
+                    #@td()${formatDate(task?.taskEstStared,"yyyy-MM-dd")}#end
                 #end
                 #@tr()
                     #@td()实际开始#end
-                    #@td()${task?.taskRealStarted}#end
+                    #@td()${formatDate(task?.taskRealStarted,"yyyy-MM-dd")}#end
                 #end
                 #@tr()
                     #@td()截止日期#end
-                    #@td()${task?.taskDeadLine}#end
+                    #@td()${formatDate(task?.taskDeadLine,"yyyy-MM-dd")}#end
                 #end
                 #@tr()
                     #@td()最初预计#end
@@ -86,19 +86,27 @@
             #@tbody()
                 #@tr()
                     #@td()由谁创建#end
-                    #@td()${task?.taskLeft} 在 ${task?.taskOpenedDate}#end
+                    #@td()${task?.taskLeft}在
+                        ${formatDate(task?.taskOpenedDate,"yyyy-MM-dd")}
+                    #end
                 #end
                 #@tr()
                     #@td()由谁完成 #end
-                    #@td()${task?.taskFinishedBy} 在 ${task?.taskFinishedDate}#end
+                    #@td()${task?.taskFinishedBy} 在
+                        ${formatDate(task?.taskFinishedDate,"yyyy-MM-dd")}
+                    #end
                 #end
                 #@tr()
                     #@td()由谁取消#end
-                    #@td()${task?.taskCanceledBy} 在 ${task?.taskCanceledDate}#end
+                    #@td()${task?.taskCanceledBy} 在
+                        ${formatDate(task?.taskCanceledDate,"yyyy-MM-dd")}
+                    #end
                 #end
                 #@tr()
                     #@td()由谁关闭#end
-                    #@td()${task?.taskClosedBy} 在 ${task?.taskCloseDate}#end
+                    #@td()${task?.taskClosedBy} 在
+                        ${formatDate(task?.taskCloseDate,"yyyy-MM-dd")}
+                    #end
                 #end
                 #@tr()
                     #@td()关闭原因#end
@@ -106,7 +114,9 @@
                 #end
                 #@tr()
                     #@td()最后编辑#end
-                    #@td()${task?.taskLastEditedBy} 在 ${task?.taskLastEditedDate}#end
+                    #@td()${task?.taskLastEditedBy} 在
+                        ${formatDate(task?.taskLastEditedDate,"yyyy-MM-dd")}
+                    #end
                 #end
             #end
         #end

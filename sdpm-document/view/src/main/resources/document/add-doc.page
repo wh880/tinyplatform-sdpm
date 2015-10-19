@@ -58,7 +58,7 @@
 					#@colLabel()<span class="c-red">*</span>文档URL#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-5")
-					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*","class":"input-text"})
+					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*","class":"input-text","ignore":"ignore"})
 					#end
 					#end
 					#@validateDiv("col-2")#end

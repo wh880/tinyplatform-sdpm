@@ -10,7 +10,7 @@
 	    		#end
 	    		#@tr()
 	    			#@th()所属分类:#end
-	    			#@td()${doc?.docModule}#end
+	    			#@td()${module?.moduleName}#end
 	    		#end
 	    		#@tr()
 	    			#@th()文档类型:#end
@@ -31,9 +31,7 @@
 	    		#@tr()
 	    			#@th()编辑时间:#end
 	    			#@td()${doc?.docEditedDate}#end
-	    		#end
-	    		
-	    	#end	
-    	#end   	
-   ## #end
+	    		#end	    		
+	    #end	
+    #end   	
 #end
