@@ -150,7 +150,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         });
     }
 
-    public List<OrgUser> getByKeys(Integer... pk) {
+    public List<OrgUser> getByKeys(String... pk) {
 
         SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
             @SuppressWarnings("rawtypes")

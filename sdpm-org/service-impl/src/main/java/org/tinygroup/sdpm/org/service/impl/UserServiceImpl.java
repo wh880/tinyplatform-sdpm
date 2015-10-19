@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public List<OrgUser> findUserListByIds(Integer... storyId) {
+    public List<OrgUser> findUserListByIds(String... storyId) {
         return userManager.findUserListByIds(storyId);
     }
 

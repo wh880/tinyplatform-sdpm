@@ -30,5 +30,5 @@ public interface OrgUserDao extends BaseDao<OrgUser,String> {
     
     String getNameById(String id);
 
-    List<OrgUser> getByKeys(Integer... pk);
+    List<OrgUser> getByKeys(String... pk);
 }
