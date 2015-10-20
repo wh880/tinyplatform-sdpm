@@ -248,13 +248,13 @@ public class UserAction extends BaseController {
         String account = user.getOrgUserAccount();
         QualityBug bug = new QualityBug();
         if (choose.equals("6")) {
-            bug.setBugClosedBy(account);
+            bug.setBugClosedBy(id);
         } else if (choose.equals("5")) {
-            bug.setBugResolvedBy(account);
+            bug.setBugResolvedBy(id);
         } else if (choose.equals("4")) {
-            bug.setBugOpenedBy(account);
+            bug.setBugOpenedBy(id);
         } else {
-            bug.setBugAssignedTo(account);
+            bug.setBugAssignedTo(id);
         }
         Pager<QualityBug> bugPager = bugService.findBugListPager(limit * (page - 1), limit, null, bug, order, false);
         model.addAttribute("bugPager", bugPager);
