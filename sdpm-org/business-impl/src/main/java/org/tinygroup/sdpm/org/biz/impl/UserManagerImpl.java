@@ -19,13 +19,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.common.security.Digests;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.Encodes;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
 import org.tinygroup.sdpm.org.dao.OrgUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.List;
+
+import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 
 @Service
 @Transactional
@@ -50,8 +55,13 @@ public class UserManagerImpl implements UserManager {
         return null;
     }
 
-    public Pager<OrgUser> findPager(Integer start, Integer limit, OrgUser orgUser) {
-        return orgUserDao.queryPager(start, limit, orgUser);
+    public Pager<OrgUser> findPager(Integer start, Integer limit, OrgUser orgUser, String groupOperate, SearchInfos conditions) {
+        String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
+        Condition condition1 = null;
+        if (condition != null) {
+            condition1 = fragmentCondition(condition);
+        }
+        return orgUserDao.queryPagerBy(start, limit, orgUser, condition1);
     }
 
     public List<OrgUser> findList(OrgUser orgUser) {

@@ -20,6 +20,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.List;
 
@@ -31,4 +32,6 @@ public interface OrgUserDao extends BaseDao<OrgUser,String> {
     String getNameById(String id);
 
     List<OrgUser> getByKeys(String... pk);
+
+    Pager<OrgUser> queryPagerBy(int start, int limit, OrgUser orgUser, Condition condition1);
 }
