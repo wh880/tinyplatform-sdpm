@@ -15,8 +15,8 @@
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/viewInfo?docId=${d?.docId}">${d?.docId}</a>#end
     #@td()${d?.docModule}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/viewInfo?docId=${d?.docId}"></a>${d?.docTitle}#end
-    #@td()${d?.docAddedBy}#end
-    #@td()${d?.docAddedDate}#end
+    #@td()${s?.storyAssignedTo==null?"":UserUtils.getUserById(s?.storyAssignedTo)?.orgUserRealName}${d?.docAddedBy}#end
+    #@td()${format(d?.docAddedDate, "yyyy-MM-dd")}#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("pro-document-op"))
             #if(m.id == "pro-document-delete")

@@ -11,8 +11,13 @@
 #setTinyItemCount(records)
 #for(t:teamPager.getRecords())
 #@tr()
-    #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}//org/user/story?account=${t?.teamAccount}">${t?.teamAccount}</a> #end
+    #@td()<input type="checkbox" value="1"
+                 name="idCheck">#end
+    #@td()
+    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?account=${t?.teamAccount}">
+        ${t?.teamAccount=null?"":UserUtils.getUserByAccount(t?.teamAccount)?.orgUserRealName}
+    </a>
+    #end
     #@td()${t?.teamRole}#end
     #@td()${t?.teamJoin}#end
     #@td()${t?.teamDays}#end
