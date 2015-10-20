@@ -407,7 +407,10 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         return getDslTemplate().queryPager(start, limit, projectTask, false, new SelectGenerateCallback<ProjectTask>() {
 
             public Select generate(ProjectTask t) {
-                Select select = MysqlSelect.selectFrom(PROJECT_TASKTABLE).where(
+                Select select = MysqlSelect.select(PROJECT_TASKTABLE.ALL, PROJECTTABLE.PROJECT_NAME)
+                        .from(PROJECT_TASKTABLE)
+                        .join(Join.leftJoin(PROJECTTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID)))
+                        .where(
                         and(
                                 PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
                                 PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
