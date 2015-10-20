@@ -34,6 +34,11 @@ public class ProjectTask implements Serializable {
 	public static String PAUSE = "4";
 	public static String CANCEL = "5";
 	public static String CLOSE = "6";
+
+	/**
+	 * 用于显示关联项目名称
+	 */
+	private String projectName;
 	/**
 	 * 关联需求及需求描述表
 	 */
@@ -200,6 +205,14 @@ public class ProjectTask implements Serializable {
 	 * 0-未删除，1-已删除
 	 */
 	private String taskDeleted;
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
 
 	public Integer getTaskModule() {
 		return taskModule;

@@ -38,6 +38,7 @@ import java.util.List;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectStoryTable.PROJECT_STORYTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
@@ -357,7 +358,10 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         return getDslTemplate().queryPager(start, limit, projectTask, false, new SelectGenerateCallback<ProjectTask>() {
 
             public Select generate(ProjectTask t) {
-                Select select = MysqlSelect.selectFrom(PROJECT_TASKTABLE).where(
+                Select select = MysqlSelect.select(PROJECT_TASKTABLE.ALL, PROJECTTABLE.PROJECT_NAME)
+                        .from(PROJECT_TASKTABLE)
+                        .join(Join.leftJoin(PROJECTTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID)))
+                        .where(
                         and(
                                 fragmentCondition(condition),
                                 PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),

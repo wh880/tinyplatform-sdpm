@@ -46,6 +46,7 @@ public class ProjectAction extends BaseController {
 
     @RequestMapping("/findProjects")
     public String findProjects(Integer start, Integer limit, String order, String ordertype, Model model) {
+
         Pager<Project> projectPager = projectService.findProjects(start, limit, order, ordertype);
         model.addAttribute("projectPager", projectPager);
         return "project/allProjectData.pagelet";
