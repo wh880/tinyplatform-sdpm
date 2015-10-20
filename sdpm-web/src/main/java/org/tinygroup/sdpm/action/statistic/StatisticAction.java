@@ -38,7 +38,7 @@ public class StatisticAction extends BaseController {
             ProductPlan plan =new ProductPlan();
             plan.setProductId(products.get(i).getProductId());
             List<ProductPlan> productPlans = planService.findPlanList(plan);
-            productPlans.size()
+            productPlans.size();
             map.put(products.get(i),productPlans);
         }
         model.addAttribute("product",map);
