@@ -14,8 +14,8 @@
     #@td()<input type="checkbox" value="1"
                  name="idCheck">#end
     #@td()
-    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?account=${t?.teamAccount}">
-        ${t?.teamAccount=null?"":UserUtils.getUserByAccount(t?.teamAccount)?.orgUserRealName}
+    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?account=${t?.teamUserId}">
+        ${t?.teamUserId=null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
     </a>
     #end
     #@td()${t?.teamRole}#end

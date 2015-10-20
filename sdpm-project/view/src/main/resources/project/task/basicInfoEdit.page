@@ -56,9 +56,8 @@
                             #@Tselect2Body("taskAssignedTo" task?.taskAssignedTo {"class":
                                 "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                 #foreach(t : teamList)
-                                    <option value="${t.teamAccount}">
-                                        ${t
-                                        ?.teamAccount==null?"":UserUtils.getUserByAccount(t?.teamAccount)?.orgUserRealName}
+                                    <option value="${t?.teamUserId}">
+                                        ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                                     </option>
                                 #end
                             #end
@@ -123,9 +122,9 @@
                                 #@Tselect2Body("taskMailto" task?.taskMailto {"class":"input-text select2","multiple":
                                     "multiple"}) ##,"multiple":"multiple"加上为多选项
                                     #foreach(t : teamList)
-                                        <option value="${t.teamAccount}">
+                                        <option value="${t?.teamUserId}">
                                             ${t
-                                            ?.teamAccount==null?"":UserUtils.getUserByAccount(t?.teamAccount)?.orgUserRealName}
+                                            ?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                                         </option>
                                     #end
                                 #end
@@ -242,7 +241,7 @@
                                 #@Tselect2Body("taskFinishedBy" task?.taskFinishedBy {"class":
                                     "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                     #foreach(t : teamList)
-                                        <option value="${t.teamAccount}">${t.teamAccount}</option>
+                                        <option value="${t?.teamUserId}">${t?.teamUserId}</option>
                                     #end
                                 #end
                             ##填写任意内容，侦听需重新填加 A侦听已内置
@@ -279,7 +278,7 @@
                             #@Tselect2F()
                                 #@Tselect2Body("taskCanceledBy" task?.taskCanceledBy {"class":"input-text select2"})
                                     #foreach(t : teamList)
-                                        <option value="${t.teamAccount}">${t.teamAccount}</option>
+                                        <option value="${t?.teamUserId}">${t?.teamUserId}</option>
                                     #end
                                 #end
                             ##填写任意内容，侦听需重新填加 A侦听已内置
@@ -316,7 +315,7 @@
                             #@Tselect2F()
                                 #@Tselect2Body("taskClosedBy" task?.taskClosedBy {"class":"input-text select2"})
                                     #foreach(t : teamList)
-                                        <option value="${t.teamAccount}">${t.teamAccount}</option>
+                                        <option value="${t?.teamUserId}">${t?.teamUserId}</option>
                                     #end
                                 #end
                                 #@Tselect2Fix()

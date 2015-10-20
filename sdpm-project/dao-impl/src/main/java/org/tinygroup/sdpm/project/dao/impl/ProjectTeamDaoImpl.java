@@ -57,7 +57,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 				Insert insert = insertInto(PROJECT_TEAMTABLE).values(
 						PROJECT_TEAMTABLE.ID.value(t.getId()),
 						PROJECT_TEAMTABLE.PROJECT_ID.value(t.getProjectId()),
-						PROJECT_TEAMTABLE.TEAM_ACCOUNT.value(t.getTeamAccount()),
+						PROJECT_TEAMTABLE.TEAM_USER_ID.value(t.getTeamUserId()),
 						PROJECT_TEAMTABLE.TEAM_ROLE.value(t.getTeamRole()),
 						PROJECT_TEAMTABLE.TEAM_JOIN.value(t.getTeamJoin()),
 						PROJECT_TEAMTABLE.TEAM_DAYS.value(t.getTeamDays()),
@@ -75,7 +75,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 			public Update generate(ProjectTeam t) {
 				Update update = update(PROJECT_TEAMTABLE).set(
 						PROJECT_TEAMTABLE.PROJECT_ID.value(t.getProjectId()),
-						PROJECT_TEAMTABLE.TEAM_ACCOUNT.value(t.getTeamAccount()),
+						PROJECT_TEAMTABLE.TEAM_USER_ID.value(t.getTeamUserId()),
 						PROJECT_TEAMTABLE.TEAM_ROLE.value(t.getTeamRole()),
 						PROJECT_TEAMTABLE.TEAM_JOIN.value(t.getTeamJoin()),
 						PROJECT_TEAMTABLE.TEAM_DAYS.value(t.getTeamDays()),
@@ -128,7 +128,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 				Select select = selectFrom(PROJECT_TEAMTABLE).where(
 						and(
 								PROJECT_TEAMTABLE.PROJECT_ID.eq(t.getProjectId()),
-								PROJECT_TEAMTABLE.TEAM_ACCOUNT.eq(t.getTeamAccount()),
+								PROJECT_TEAMTABLE.TEAM_USER_ID.eq(t.getTeamUserId()),
 								PROJECT_TEAMTABLE.TEAM_ROLE.eq(t.getTeamRole()),
 								PROJECT_TEAMTABLE.TEAM_JOIN.eq(t.getTeamJoin()),
 								PROJECT_TEAMTABLE.TEAM_DAYS.eq(t.getTeamDays()),
@@ -148,7 +148,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 				Select select = MysqlSelect.selectFrom(PROJECT_TEAMTABLE).where(
 						and(
 								PROJECT_TEAMTABLE.PROJECT_ID.eq(t.getProjectId()),
-								PROJECT_TEAMTABLE.TEAM_ACCOUNT.eq(t.getTeamAccount()),
+								PROJECT_TEAMTABLE.TEAM_USER_ID.eq(t.getTeamUserId()),
 								PROJECT_TEAMTABLE.TEAM_ROLE.eq(t.getTeamRole()),
 								PROJECT_TEAMTABLE.TEAM_JOIN.eq(t.getTeamJoin()),
 								PROJECT_TEAMTABLE.TEAM_DAYS.eq(t.getTeamDays()),
@@ -167,7 +167,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 			public Insert generate() {
 				return insertInto(PROJECT_TEAMTABLE).values(
 						PROJECT_TEAMTABLE.PROJECT_ID.value(new JdbcNamedParameter("projectId")),
-						PROJECT_TEAMTABLE.TEAM_ACCOUNT.value(new JdbcNamedParameter("teamAccount")),
+						PROJECT_TEAMTABLE.TEAM_USER_ID.value(new JdbcNamedParameter("teamUserId")),
 						PROJECT_TEAMTABLE.TEAM_ROLE.value(new JdbcNamedParameter("teamRole")),
 						PROJECT_TEAMTABLE.TEAM_JOIN.value(new JdbcNamedParameter("teamJoin")),
 						PROJECT_TEAMTABLE.TEAM_DAYS.value(new JdbcNamedParameter("teamDays")),
@@ -189,7 +189,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 			public Update generate() {
 				return update(PROJECT_TEAMTABLE).set(
 						PROJECT_TEAMTABLE.PROJECT_ID.value(new JdbcNamedParameter("projectId")),
-						PROJECT_TEAMTABLE.TEAM_ACCOUNT.value(new JdbcNamedParameter("teamAccount")),
+						PROJECT_TEAMTABLE.TEAM_USER_ID.value(new JdbcNamedParameter("teamUserId")),
 						PROJECT_TEAMTABLE.TEAM_ROLE.value(new JdbcNamedParameter("teamRole")),
 						PROJECT_TEAMTABLE.TEAM_JOIN.value(new JdbcNamedParameter("teamJoin")),
 						PROJECT_TEAMTABLE.TEAM_DAYS.value(new JdbcNamedParameter("teamDays")),
@@ -209,7 +209,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 				return delete(PROJECT_TEAMTABLE).where(and(
 						PROJECT_TEAMTABLE.ID.eq(new JdbcNamedParameter("id")),
 						PROJECT_TEAMTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")),
-						PROJECT_TEAMTABLE.TEAM_ACCOUNT.eq(new JdbcNamedParameter("teamAccount")),
+						PROJECT_TEAMTABLE.TEAM_USER_ID.eq(new JdbcNamedParameter("teamUserId")),
 						PROJECT_TEAMTABLE.TEAM_ROLE.eq(new JdbcNamedParameter("teamRole")),
 						PROJECT_TEAMTABLE.TEAM_JOIN.eq(new JdbcNamedParameter("teamJoin")),
 						PROJECT_TEAMTABLE.TEAM_DAYS.eq(new JdbcNamedParameter("teamDays")),

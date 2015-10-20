@@ -27,8 +27,8 @@
             ${formatdate(t.taskOpenedDate,"yyyy-MM-dd")}
         #end
     #end
-    #@td()${t?.taskAssignedTo==null?"":UserUtils.getUserByAccount(t?.taskAssignedTo)?.orgUserRealName}#end
-    #@td()${t?.taskFinishedBy==null?"":UserUtils.getUserByAccount(t?.taskFinishedBy)?.orgUserRealName}#end
+    #@td()${t?.taskAssignedTo==null?"":UserUtils.getUserById(t?.taskAssignedTo)?.orgUserRealName}#end
+    #@td()${t?.taskFinishedBy==null?"":UserUtils.getUserById(t?.taskFinishedBy)?.orgUserRealName}#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("pro-task-op"))
         ##逻辑判断，根据状态判断是否可选择。

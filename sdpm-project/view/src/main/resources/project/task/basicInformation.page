@@ -25,7 +25,7 @@
                 #@tr()
                     #@td()指派给#end
                     #@td()${task
-                        ?.taskAssignedTo=null?"":UserUtils.getUserByAccount(task?.taskAssignedTo)?.orgUserRealName}#end
+                        ?.taskAssignedTo=null?"":UserUtils.getUserById(task?.taskAssignedTo)?.orgUserRealName}#end
                 #end
                 #@tr()
                     #@td()任务类型#end
@@ -87,27 +87,27 @@
             #@tbody()
                 #@tr()
                     #@td()由谁创建#end
-                    #@td()${task?.taskOpenedBy=null?"":UserUtils.getUserByAccount(task?.taskOpenedBy)?.orgUserRealName}在
+                    #@td()${task?.taskOpenedBy=null?"":UserUtils.getUserById(task?.taskOpenedBy)?.orgUserRealName}在
                         ${formatDate(task?.taskOpenedDate,"yyyy-MM-dd")}
                     #end
                 #end
                 #@tr()
                     #@td()由谁完成 #end
                     #@td()${task
-                        ?.taskFinishedBy=null?"":UserUtils.getUserByAccount(task?.taskFinishedBy)?.orgUserRealName} 在
+                        ?.taskFinishedBy=null?"":UserUtils.getUserById(task?.taskFinishedBy)?.orgUserRealName} 在
                         ${formatDate(task?.taskFinishedDate,"yyyy-MM-dd")}
                     #end
                 #end
                 #@tr()
                     #@td()由谁取消#end
                     #@td()${task
-                        ?.taskCanceledBy=null?"":UserUtils.getUserByAccount(task?.taskCanceledBy)?.orgUserRealName} 在
+                        ?.taskCanceledBy=null?"":UserUtils.getUserById(task?.taskCanceledBy)?.orgUserRealName} 在
                         ${formatDate(task?.taskCanceledDate,"yyyy-MM-dd")}
                     #end
                 #end
                 #@tr()
                     #@td()由谁关闭#end
-                    #@td()${task?.taskCloseBy=null?"":UserUtils.getUserByAccount(task?.taskCloseBy)?.orgUserRealName} 在
+                    #@td()${task?.taskCloseBy=null?"":UserUtils.getUserById(task?.taskCloseBy)?.orgUserRealName} 在
                         ${formatDate(task?.taskCloseDate,"yyyy-MM-dd")}
                     #end
                 #end
@@ -118,7 +118,7 @@
                 #@tr()
                     #@td()最后编辑#end
                     #@td()${task
-                        ?.taskLastEditedBy=null?"":UserUtils.getUserByAccount(task?.taskLastEditedBy)?.orgUserRealName}
+                        ?.taskLastEditedBy=null?"":UserUtils.getUserById(task?.taskLastEditedBy)?.orgUserRealName}
                         在
                         ${formatDate(task?.taskLastEditedDate,"yyyy-MM-dd")}
                     #end

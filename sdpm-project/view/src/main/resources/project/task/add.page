@@ -67,8 +67,8 @@
                     #@Tselect2Body("taskAssignedTo" copyTask?.taskAssignedTo {"class":"input-text select2"})
                         <option value=""></option>
                         #foreach(t : team)
-                            <option value="${t?.teamAccount}">
-                                ${t?.teamAccount==null?"":UserUtils.getUserByAccount(t?.teamAccount)?.orgUserRealName}
+                            <option value="${t?.teamUserId}">
+                                ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                             </option>
                         #end
                     #end
@@ -150,8 +150,8 @@
                 #@Tselect2F()
                     #@Tselect2Body("taskMailtoArray" "" {"class":"input-text select2","multiple":"multiple"}) ##加上为多选项
                         #foreach(t : team)
-                            <option value="${t.teamAccount}">
-                                ${t?.teamAccount?"":UserUtils.getUserByAccount(t?.teamAccount)?.orgUserRealName}
+                            <option value="${t.teamUserId}">
+                                ${t?.teamUserId?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                             </option>
                         #end
                     #end
