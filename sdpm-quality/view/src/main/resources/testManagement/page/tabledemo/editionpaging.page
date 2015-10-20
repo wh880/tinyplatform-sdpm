@@ -40,6 +40,26 @@
 
     	}
 </script>
+#macro Tselect2Body(name value mapInfo)
+#set(sid=mapInfo?.id?:sid)
+	<select name="${name}" class="form-control" #getMapInfo(mapInfo) id="${sid}">
+	#bodyContent
+	</select>
+	<script type="text/javascript">
+	$(function(){
+		$("#${sid}").select2();
+		#if(value)
+		var valuestr="${value}";
+		var values=valuestr.split(",");
+		if(values.length>1){
+			$("#${sid}").val(values).trigger("change");
+		}else{
+			$("#${sid}").val(valuestr).trigger("change");
+		}
+		#end
+	});
+	</script>
+#end
     #@div(divClass="infoContent")
         <p class="titleName">基本信息</p>
     ##该样式在comm.css样式中自定义

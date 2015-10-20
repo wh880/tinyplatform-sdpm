@@ -47,6 +47,6 @@ public interface TestTaskManager {
 	 * @param asc
 	 * @return
 	 */
-	Pager<QualityTestTask> findPager(Integer start,Integer limit,QualityTestTask testtask,String sortName,boolean asc);
+	Pager<QualityTestTask> findPager(Integer start,Integer limit,QualityTestTask testtask,String condition,String sortName,boolean asc);
 
 }

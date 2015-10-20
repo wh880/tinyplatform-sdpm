@@ -33,9 +33,9 @@ public class QualityUtil {
         switch (statusMap.get(status)){
             case 1:return " bug_status <> 3";
             case 2:return "";
-            case 3:return " bug_assigned_to = "+(UserUtils.getUserAccount() == null?"0":"'"+UserUtils.getUserAccount())+"' ";
-            case 4:return " bug_opened_by = "+(UserUtils.getUserAccount() == null?"0":"'"+UserUtils.getUserAccount())+"' ";
-            case 5:return " bug_resolved_by = "+(UserUtils.getUserAccount() == null?"0":"'"+UserUtils.getUserAccount())+"' ";
+            case 3:return " bug_assigned_to = "+(UserUtils.getUserId() == null?"0":"'"+UserUtils.getUserId())+"' ";
+            case 4:return " bug_opened_by = "+(UserUtils.getUserId() == null?"0":"'"+UserUtils.getUserId())+"' ";
+            case 5:return " bug_resolved_by = "+(UserUtils.getUserId() == null?"0":"'"+UserUtils.getUserId())+"' ";
             case 6:return " (bug_confirmed <> 1 or bug_confirmed is null)";
             case 7:return " bug_assigned_to is null";
             case 8:return " bug_status > 1";
