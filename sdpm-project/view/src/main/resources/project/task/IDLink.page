@@ -52,7 +52,6 @@
 <div style="width:70%;float:left">
     #@div(divClass="infoContent")
         <p class="titleName">任务描述</p>
-
         <div>
             ${task.taskDesc}
         </div>

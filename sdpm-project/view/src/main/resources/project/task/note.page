@@ -24,7 +24,7 @@
             #foreach(l:list)
                 #@tr()
                     #@td()${l?.effortId}#end
-                    #@td()${l?.effortDate}#end
+                    #@td()${formatDate(l?.effortDate,"yyyy-MM-dd")}#end
                     #@td()${l?.effortConsumed}#end
                     #@td()${l?.effortWork}#end
                     #@td()

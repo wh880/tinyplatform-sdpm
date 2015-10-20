@@ -47,8 +47,7 @@
     #end
 
     #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-        #include("/product/page/tabledemo/historyrecord.page")
+        #history(adminPath+"/system/action/ajax/history?actionObjectType=product&actionObjectId="+product?.productId)
     #end
 
 

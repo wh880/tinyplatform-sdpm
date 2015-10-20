@@ -20,6 +20,7 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletResponse;
@@ -57,6 +58,7 @@ public class EffortAction extends BaseController{
 	public String list(int taskId,SystemEffort effort,Model model){
 		String order="effort_date";
 		String orderTpye="desc";
+		effort.setEffortObjectId(taskId);
 		List<SystemEffort> list = effortService.findList(effort, order, orderTpye);
 		List<SystemEffort> effortList = new ArrayList<SystemEffort>();
 		if(list.size()>5){
@@ -77,6 +79,7 @@ public class EffortAction extends BaseController{
 		if(systemEffort.getEffortId()==null){
 			
 		systemEffort.setEffortBegin(new SimpleDateFormat("yyyy-MM-dd").format(systemEffort.getEffortDate()));
+			systemEffort.setEffortAccount(UserUtils.getUserAccount());
 		}
 		effortService.save(systemEffort);
 		return "project/note/notetable.page";
