@@ -50,7 +50,7 @@
                   scope="pro-taskInfo-op"/>
             <menu id="pro-Info-finish" name="完成" href="/project/task/finish" icon="icon-ok-sign" sort="8" isShow="1"
                   scope="pro-taskInfo-op"/>
-            <menu id="pro-Info-close" name="取消" href="/project/task/close" icon="icon-off" sort="6" isShow="1"
+            <menu id="pro-Info-close" name="取消" href="/project/task/cancel" icon="icon-off" sort="6" isShow="1"
                   scope="pro-taskInfo-op"/>
 
         </menu>

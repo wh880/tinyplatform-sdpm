@@ -33,7 +33,7 @@
             #@sdpmItem("总消耗")
                 <div class="input-group">
                     <input name="taskConsumed" type="text" class="form-control" placeholder=""
-                           aria-describedby="basic-addon2" value="${task.taskConsume==null?0:task.taskConsume}">
+                           aria-describedby="basic-addon2" value="${task?.taskConsumed==null?0:task.taskConsumed}">
                     <span class="input-group-addon" id="all-time">小时</span>
                 </div>
             #end
@@ -47,6 +47,18 @@
                 </div>
             #end
         #end
+        <script>
+            function check() {
+                if ($("input[name='taskLeft']").val() == "0") {
+                    var res = confirm("消耗为0，是否标记任务为完成？");
+                    if (res == true) {
+                        $("form").attr("action", "${TINY_CONTEXT_PATH+adminPath}/project/task/finishsave");
+                        return true;
+                    }
+                }
+            }
+            ;
+        </script>
 
         #@elementItem()
             <div class="col-12">
@@ -63,7 +75,7 @@
 
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit" class="commitBtn" onclick="check()">保存</button>
             </div>
             <div class="col-1">
                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
