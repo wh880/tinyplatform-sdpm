@@ -352,10 +352,10 @@ public class BuildAction extends BaseController {
     @RequestMapping("/search/reRelateStory")
     public String storyListAction( int page, int pagesize,int id,String groupOperate, SearchInfos searchInfos,
                                    Model model){
-        List<ProjectStory> p = projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
-        model.addAttribute("storyList",p);
+        Pager<ProductStory> p = projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
+        model.addAttribute("storys",p);
 
-        return null;
+        return "/project/task/relation-release/product-al-req-data.pagelet";
     }
 
 

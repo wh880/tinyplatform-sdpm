@@ -225,6 +225,12 @@ public class UserAction extends BaseController {
             task1.setTaskAssignedTo(account);
         }
         Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task1, order, false, null, null);
+        List<Integer> projectIdList = new ArrayList<Integer>();
+        for (ProjectTask project : taskPager.getRecords()) {
+            projectIdList.add(project.getTaskProject());
+        }
+        List<Project> projectList = projectService.findByProjectList(projectIdList);
+
         model.addAttribute("taskPager", taskPager);
         return "/organization/user/userTaskTable.pagelet";
     }
