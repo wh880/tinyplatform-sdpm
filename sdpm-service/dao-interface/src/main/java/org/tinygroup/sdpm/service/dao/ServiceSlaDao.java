@@ -20,13 +20,14 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.List;
 
 public interface ServiceSlaDao extends BaseDao<ServiceSla, Integer> {
     List<ServiceSla> getListByClientId(Integer clientId);
 
-    Pager<ServiceSla> queryPagerTree(int start, int limit, ServiceSla serviceSla, Integer treeId, final OrderBy... orderBies);
+    Pager<ServiceSla> queryPagerTree(int start, int limit, ServiceSla serviceSla, Integer treeId, Condition conditionl, final OrderBy... orderBies);
     ServiceSla judge(String clientName);
 
     Integer softDelete(Integer id);

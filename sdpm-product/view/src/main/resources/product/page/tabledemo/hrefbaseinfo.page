@@ -1,155 +1,159 @@
 #@div(divClass="infoContent tabInfocontents")
-	
-#@tabWithInit("tab_info01")
-	#@tabHead()
-		#@tabHeadCol()基本信息#end
-		#@tabHeadCol()需求的一生#end
-	#end
-	
-	#@tabBodyCol("tabBorder")
-		#@table()
-		       		#@thead()
-		       		#end
-		       			#@tr()
-							#@td()所属产品#end
-							#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/overview.page">${story
-                                ?.productId}</a>#end
-		       			#end
-		       			#@tr()
-							#@td()所属模块#end
-							#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/togglebox.page">${story
-                                ?.moduleId}</a>#end
-		       			#end
-		       			#@tr()
-							#@td()所属计划#end
-		       				#@td()${story?.planId}#end
-		       			#end
-		       			#@tr()
-							#@td()当前状态#end
-		       				#@td()<p style="color:green">${story?.storyStatus}</p>#end
-		       			#end
-		       			#@tr()
-							#@td()所处阶段#end
-		       				#@td()${story?.storyStage}#end
-		       			#end
-		       			#@tr()
-							#@td()优先级#end
-		       				#@td()${story?.storyPri}#end
-		       			#end
-		       			#@tr()
-							#@td()预计工时#end
-		       				#@td()${story?.storyEstimate}#end
-		       			#end
-		       			#@tr()
-							#@td()关键词#end
-		       				#@td()${stroy?.storyKeywords}#end
-		       			#end
-		       			#@tr()
-							#@td()抄送给#end
-		       				#@td()
-		       				#for(mailto:storyMailTo)
-		       					${mailto.orgUserAccount}${mailtoFor.last?"":","}
-		       				#end
-#*		       					${story?.storyMailto}*#
-		       				#end
-		       			#end
-		       			
-		 #end
-	#end
-	
-	#@tabBodyCol("tabBorder")
-		   
-	
-		#@table()
-		       		#@thead()
-		       		#end
-		       		#@tbody()
-		       			#@tr()
-							#@td()由谁创建#end
-							#@td()${UserUtils.getUserById(story?.storyOpenedBy).orgUserRealName}于${story?.storyOpenedDate?formatDate(story?.storyOpenedDate,'yyyy-MM-dd'):""}创建 #end
-		       			#end
-		       			
-		       			#@tr()
-							#@td()指派给#end
-							#@td()${UserUtils.getUserById(story?.storyAssignedTo).orgUserRealName}#end
-		       			#end
-		       			#@tr()
-							#@td()由谁评审#end
-							#@td()${UserUtils.getUserById(story?.storyReviewedBy).orgUserRealName}#end
-		       			#end
-		       			#@tr()
-							#@td()评审时间#end
-		       				#@td()${story?.storyReviewedDate?formatDate(story?.storyReviewedDate,'yyyy-MM-dd'):""}#end
-		       			#end
-		       			#@tr()
-							#@td()由谁关闭#end
-							#@td()${UserUtils.getUserById(story?.storyClosedBy).orgUserRealName}#end
-		       			#end
-		       			#@tr()
-							#@td()关闭原因#end
-		       				#@td()${story?.storyClosedReason}#end
-		       			#end
-		       			#@tr()
-							#@td()最后修改#end
-							#@td()${UserUtils.getUserById(story?.storyLastEditedBy).orgUserRealName} 于 ${story?.storyLastEditedDate?formatDate(story?.storyLastEditedDate,'yyyy-MM-dd'):""}修改#end
-		       			#end	
-		         		#end
-				#end
-		#end		       			
-	#end
+
+    #@tabWithInit("tab_info01")
+        #@tabHead()
+            #@tabHeadCol()基本信息#end
+            #@tabHeadCol()需求的一生#end
+        #end
+
+        #@tabBodyCol("tabBorder")
+            #@table()
+                #@thead()
+                #end
+                #@tr()
+                    #@td()所属产品#end
+                    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/overview.page">${story?.productId}</a>#end
+                #end
+                #@tr()
+                    #@td()所属模块#end
+                    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/togglebox.page">${story
+                        ?.moduleId}</a>#end
+                #end
+                #@tr()
+                    #@td()所属计划#end
+                    #@td()${story?.planId}#end
+                #end
+                #@tr()
+                    #@td()当前状态#end
+                    #@td()<font style="color:green">${getDict("storyStatus",story?.storyStatus)}</font>#end
+                #end
+                #@tr()
+                    #@td()所处阶段#end
+                    #@td()${getDict("storyStage",story?.storyStage)}#end
+                #end
+                #@tr()
+                    #@td()优先级#end
+                    #@td()${getDict("storyPri",story?.storyPri)}#end
+                #end
+                #@tr()
+                    #@td()预计工时#end
+                    #@td()${story?.storyEstimate}#end
+                #end
+                #@tr()
+                    #@td()关键词#end
+                    #@td()${stroy?.storyKeywords}#end
+                #end
+                #@tr()
+                    #@td()抄送给#end
+                    #@td()
+                        #for(mailto:storyMailTo)
+                        ${mailto?.orgUserAccount}${mailtoFor.last?"":","}
+
+
+                #end
+            #end
+        #end
+
+    #end
+#end
+
+#@tabBodyCol("tabBorder")
+
+
+    #@table()
+        #@thead()
+        #end
+        #@tbody()
+            #@tr()
+                #@td()由谁创建#end
+                #@td()${UserUtils.getUserById(story?.storyOpenedBy).orgUserRealName}于${story?.storyOpenedDate?formatDate(story?.storyOpenedDate,'yyyy-MM-dd'):""}创建 #end
+            #end
+
+            #@tr()
+                #@td()指派给#end
+                #@td()${UserUtils.getUserById(story?.storyAssignedTo).orgUserRealName}#end
+            #end
+            #@tr()
+                #@td()由谁评审#end
+                #@td()${UserUtils.getUserById(story?.storyReviewedBy).orgUserRealName}#end
+            #end
+            #@tr()
+                #@td()评审时间#end
+                #@td()${story?.storyReviewedDate?formatDate(story?.storyReviewedDate,'yyyy-MM-dd'):""}#end
+            #end
+            #@tr()
+                #@td()由谁关闭#end
+                #@td()${UserUtils.getUserById(story?.storyClosedBy).orgUserRealName}#end
+            #end
+            #@tr()
+                #@td()关闭原因#end
+                #@td()${story?.storyClosedReason}#end
+            #end
+            #@tr()
+                #@td()最后修改#end
+                #@td()${UserUtils.getUserById(story?.storyLastEditedBy).orgUserRealName} 于 ${story?.storyLastEditedDate?formatDate(story?.storyLastEditedDate,'yyyy-MM-dd'):""}修改#end
+            #end
+        #end
+    #end
+#end
+#end
 #end
 
 #@div(divClass="infoContent tabInfocontents")
-#@tabWithInit("tab_info02")
-	#@tabHead()
-		#@tabHeadCol()迭代任务#end
-		#@tabHeadCol()相关信息#end
-	#end
-	
-	#@tabBodyCol("tabBorder")
-		#@table()
-		       		#@thead()
-		       		#end
-		       		#@tbody()
-		       			#@th() ID #end
-		       			#@th() 名称 #end
-		       			#for(task:taskList)
-		       				#@tr()
-								#@td()${task?.taskId}#end #@td()<a href="${TINY_CONTEXT_PATH + adminPath}/project/task/findTask?taskId=1">${task?.taskName}</a>#end
-			       			#end
-		       			#end
-		       			
-		       		#end
-		 #end
-	#end
-	
-	#@tabBodyCol("tabBorder")
-		#@table()
-		       		#@thead()
-		       		#end
-		       		#@tbody()
-		       			#@tr()
-							#@td()相关BUG#end	
-							#@td()
-								#for(bug:bugList)
-									<a href="${TINY_CONTEXT_PATH + adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${bug?.bugTitle}<a/>${bugFor.last?"":","}
-								#end
-							#end
-		       			#end
-		       			#@tr()
-							#@td()相关用例#end
-							#@td()
-								#for(task:taskList)
-									<a href="${TINY_CONTEXT_PATH + adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${task?.taskName}</a>${taskFor.last?"":","}
-								#end
-							#end
-		       			#end
-		       			#@tr()
-							#@td()相关需求#end
-							#@td() ${story?.storyTitle} #end
-		       			#end		       					       		
-		        	#end
-		#end
-	#end		       			
+    #@tabWithInit("tab_info02")
+        #@tabHead()
+            #@tabHeadCol()迭代任务#end
+            #@tabHeadCol()相关信息#end
+        #end
+
+        #@tabBodyCol("tabBorder")
+            #@table()
+                #@thead()
+                #end
+                #@tbody()
+                    #@th() ID #end
+                    #@th() 名称 #end
+                    #for(task:taskList)
+                    #@tr()
+                        #@td()${task?.taskId}#end #@td()<a
+                            href="${TINY_CONTEXT_PATH + adminPath}/project/task/findTask?taskId=1">${task
+                        ?.taskName}</a>#end
+                    #end
+                #end
+
+            #end
+        #end
+    #end
+
+    #@tabBodyCol("tabBorder")
+        #@table()
+            #@thead()
+            #end
+            #@tbody()
+                #@tr()
+                    #@td()相关BUG#end
+                    #@td()
+                        #for(bug:bugList)
+                    <a href="${TINY_CONTEXT_PATH + adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${bug?.bugTitle}
+                        <a/>${bugFor.last?"":","}
+                    #end
+                #end
+            #end
+            #@tr()
+                #@td()相关用例#end
+                #@td()
+                    #for(task:taskList)
+                    <a href="${TINY_CONTEXT_PATH + adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${task
+                        ?.taskName}</a>${taskFor.last?"":","}
+                #end
+            #end
+        #end
+        #@tr()
+            #@td()相关需求#end
+            #@td() ${story?.storyTitle} #end
+        #end
+    #end
+#end
+#end
 #end
 #end

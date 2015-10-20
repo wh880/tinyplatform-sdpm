@@ -28,26 +28,26 @@
   <standard-field id="461b1811ad134b999c75ec8798cc6fae" name="project_desc" title="项目描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" default="">
     <description></description>
   </standard-field>
-  <standard-field id="36792f6411a24677b9a4c71ae93a56c1" name="project_opened_by" title="由谁创建" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="36792f6411a24677b9a4c71ae93a56c1" name="project_opened_by" title="由谁创建" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="4ab479c04eab40558aefdeeffa72cae7" name="project_opened_date" title="创建日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="bc23d6469923416aa689fa5f28da6a3f" name="project_opened_version" title="项目创建版本" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="47699dc5285e4a5fb0768bbd5457b5d1" name="project_close_by" title="项目由谁关闭" business-type-id="286a6bca92b34779bcb6fc8809f0a666"/>
+  <standard-field id="47699dc5285e4a5fb0768bbd5457b5d1" name="project_close_by" title="项目由谁关闭" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="2c89172a50054d1495789ff49ed9b0e1" name="project_close_date" title="项目关闭日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default="">
     <description></description>
   </standard-field>
-  <standard-field id="c1b67b7db4674da8a314bf02239ed35f" name="project_canceled_by" title="项目由谁取消" business-type-id="286a6bca92b34779bcb6fc8809f0a666"/>
+  <standard-field id="c1b67b7db4674da8a314bf02239ed35f" name="project_canceled_by" title="项目由谁取消" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="24dca11728884b14bd9be06764b46426" name="project_canceled_date" title="项目取消日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="b8f47ec967ba40b8b33e8deb5ec37fc8" name="project_po" title="产品负责人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="9cf8e03af53c48378961f3f5a84348ae" name="project_pm" title="项目负责人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="05e4444c3a0b40e398fff266f48eba84" name="project_qd" title="测试负责人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="7eff7598a0f14505a4e7a54a8a146a36" name="project_rd" title="项目发布负责人" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="b8f47ec967ba40b8b33e8deb5ec37fc8" name="project_po" title="产品负责人" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="9cf8e03af53c48378961f3f5a84348ae" name="project_pm" title="项目负责人" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="05e4444c3a0b40e398fff266f48eba84" name="project_qd" title="测试负责人" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="7eff7598a0f14505a4e7a54a8a146a36" name="project_rd" title="项目发布负责人" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="24ab9c69d3f64babbfc9a345d0cac3eb" name="project_team" title="团队成员" business-type-id="a30696c1e44441ecad77a832afd3731d">
     <description></description>
   </standard-field>
   <standard-field id="779f3ff51d8444c88cfb9542ad85060a" name="project_acl" title="访问控制" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">
     <description>0-open,1-private,2-custom</description>
   </standard-field>
-  <standard-field id="f3b59b52574b4f1e8a8e80f9d9f00c05" name="project_white_list" title="分组白名单" business-type-id="27ebfcdc558c477da425a46e566d4637" default="">
+  <standard-field id="f3b59b52574b4f1e8a8e80f9d9f00c05" name="project_white_list" title="分组白名单" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" default="">
     <description></description>
   </standard-field>
   <standard-field id="9628e745b2594a1b9c93c019b726d138" name="project_order" title="项目排序" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
@@ -90,24 +90,24 @@
     <description></description>
   </standard-field>
   <standard-field id="01ad8dc3196a472fabb2bf4fc3c2037f" name="task_desc" title="任务描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
-  <standard-field id="327d59a858cd4f4ea0ff8636a497a88e" name="task_open_by" title="由谁创建" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="327d59a858cd4f4ea0ff8636a497a88e" name="task_open_by" title="由谁创建" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="e5ce9edecc5646e6ae6c88f196764d6d" name="task_opened_date" title="创建日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="016289efc06c4fb59626e17d7d275234" name="task_assigned_to" title="指派给" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="016289efc06c4fb59626e17d7d275234" name="task_assigned_to" title="指派给" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="668593cafe58439abd6be6483aca0c6e" name="task_assigned_date" title="指派日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default="">
     <description></description>
   </standard-field>
   <standard-field id="3cfeefa0e3a84b2fb6848ea05efe6ff0" name="task_est_stared" title="预计开始" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="1c9e7e4fb94241d6ad60dff7f1053451" name="task_real_started" title="实际开始" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="f7a0e6a4e9c44879b960c7b778fa972e" name="task_finished_by" title="由谁完成" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="f7a0e6a4e9c44879b960c7b778fa972e" name="task_finished_by" title="由谁完成" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="e458bda7278c46028b1ce52f69cac2aa" name="task_finished_date" title="完成时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default="">
     <description></description>
   </standard-field>
-  <standard-field id="8b9005a0f05d458f9ad9c79b850e24b8" name="task_canceled_by" title="由谁取消" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="8b9005a0f05d458f9ad9c79b850e24b8" name="task_canceled_by" title="由谁取消" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="da7e19c0dd0d4f3ea165fcdbb0528b0c" name="task_canceled_date" title="取消时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="ee9117a2bd6d4faaab23bdc15efee400" name="task_closed_by" title="由谁关闭" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="ee9117a2bd6d4faaab23bdc15efee400" name="task_closed_by" title="由谁关闭" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="b58d2e5dc9fc48d8b690c9144fc193cb" name="task_close_date" title="关闭时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="80e60edc0ec14545a981c073db046a9f" name="task_closed_reason" title="关闭原因" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
-  <standard-field id="e70e2c2ab35d4703a9dbec16dc1fd243" name="task_last_edited_by" title="最后修改" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="e70e2c2ab35d4703a9dbec16dc1fd243" name="task_last_edited_by" title="最后修改" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="f976ad5772de4ff1b45bc35652ca2f06" name="task_last_edited_date" title="最后修改日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff">
     <description></description>
   </standard-field>
@@ -125,7 +125,7 @@
   <standard-field id="5ac4c0d6169044008a05dcc8d1610c6b" name="build_date" title="打包日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="b33c838369a34f0ba6b0a2063fc62b59" name="build_stories" title="已解决需求" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="9c60fef54ff64aba8d2fb9ebb554c11e" name="build_bugs" title="已解决bug" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
-  <standard-field id="674d345ce14c42b6a25eb283f666d882" name="build_builder" title="构建者" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="674d345ce14c42b6a25eb283f666d882" name="build_builder" title="构建者" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="8d1c5a7ab2ce4b5384f9f0315f52db58" name="build_desc" title="描述" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
   <standard-field id="17eedc084da5420bb4e6de6c5b152ecb" name="build_deleted" title="已删除" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">
     <description>0-未删除，1-删除</description>
@@ -139,9 +139,9 @@
   <standard-field id="7b7ebc694a5743f1b3db97619a3c7816" name="taskestimate_date" title="任务预计时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="5f2c61e114a142089f0c9f252e0d9f12" name="taskestimate_left" title="任务预计剩余" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35"/>
   <standard-field id="7ea184732399416daa3881de2244092c" name="taskestimate_consumed" title="任务预计消耗" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35"/>
-  <standard-field id="83dabbaef75d4d1fbab0d563afd3c90f" name="taskestimate_account" title="操作人帐号" business-type-id="095e594e1550424b9643c7e2279e85be" default=""/>
+  <standard-field id="83dabbaef75d4d1fbab0d563afd3c90f" name="taskestimate_account" title="操作人帐号" business-type-id="27ebfcdc558c477da425a46e566d4637" default=""/>
   <standard-field id="e24f8e6ec85e4d1899fd87dacc4082a7" name="taskestimate_work" title="备用字段" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
-  <standard-field id="dcaad72616324712a1988f2743e4a0e8" name="team_account" title="用户" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="dcaad72616324712a1988f2743e4a0e8" name="team_user_id" title="用户" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="ccae118619c147f2902feffbb66f9c77" name="team_role" title="角色" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="bab7c0daedc34545a255b9be36aed755" name="team_join" title="加盟日" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="e26d8ad4172d4f6297b5bca12dc6994b" name="team_days" title="可用工时" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35"/>

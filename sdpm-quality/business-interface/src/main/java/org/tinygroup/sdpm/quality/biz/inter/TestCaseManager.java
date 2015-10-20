@@ -1,6 +1,8 @@
 package org.tinygroup.sdpm.quality.biz.inter;
 
 import java.util.List;
+
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -61,5 +63,8 @@ public interface TestCaseManager {
 	 * @return
 	 */
 	Pager<QualityTestCase> findPager(Integer start,Integer limit,QualityTestCase testcase,String sortName,boolean asc);
+	
+	Pager<QualityTestCase> findPagerRel(Integer start,Integer limit,QualityTestCase testcase, String statusCondition, SearchInfos conditions,
+            String groupOperate,String columnName,boolean asc);
 
 }

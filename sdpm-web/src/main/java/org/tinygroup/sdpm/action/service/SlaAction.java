@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -83,10 +84,11 @@ public class SlaAction extends BaseController {
 
     @RequestMapping(value = "/list/data")
     public String listData(Integer limit, Integer start, ServiceSla sla, Integer treeId,
+                           String groupOperate, SearchInfos searchInfos,
                            @RequestParam(required = false, defaultValue = "slaId") String order,
-                           @RequestParam(required = false, defaultValue = "asc") String ordertype,
+                           @RequestParam(required = false, defaultValue = "asc") String orderType,
                            Model model) {
-        Pager<ServiceSla> pager = slaService.findSlaPager(start, limit, sla, treeId, order, ordertype);
+        Pager<ServiceSla> pager = slaService.findSlaPager(start, limit, sla, treeId, groupOperate, searchInfos, order, orderType);
         model.addAttribute("pager", pager);
         return "service/sla/slaTableData.pagelet";
     }
@@ -206,23 +208,7 @@ public class SlaAction extends BaseController {
         }
         return list;
     }
-    /*sla必填项校验*/
-    @ResponseBody
-    @RequestMapping(value = "/judgeClient")
-    public Map judgeClient(String name, String param) {
-        Map<String, String> map = new HashMap<String, String>();
-        if (param != null)
-        {
-            String productVersion = param;
-            ServiceSla serviceSla = slaService.judgeClient(productVersion);
-            map.put("status", "y");
-            map.put("info", "");
-            return map;
-        }
-        map.put("status", "n");
-        map.put("info", "请输入产品版本");
-        return map;
-    }
+
     /*sla批量删除*/
     @ResponseBody
     @RequestMapping(value = "/batchDelete")

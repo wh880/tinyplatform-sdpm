@@ -30,7 +30,7 @@
 
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/update" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/update" "" {"class":"test","enctype":"multipart/form-data"})
     #hiddenInput("","storyId","",story.storyId)
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
@@ -104,7 +104,7 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>备注：</label></div>
                 <div class="col-9">
-                    #@Teditor("content3" "content3" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
             </div>
         #end
 
@@ -153,8 +153,5 @@
 
 
 <div style="width:30%;float:right">
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-        #include("/product/page/tabledemo/historyrecord.page")
-    #end
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=story&actionObjectId="+story?.storyId)
 </div>

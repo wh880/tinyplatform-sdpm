@@ -112,6 +112,7 @@ public interface TaskService {
      */
     public Integer updateFinishTask(ProjectTask projectTask);
 
+    public Integer updateCancelTask(ProjectTask task);
     /**
      * 复杂查询
      *

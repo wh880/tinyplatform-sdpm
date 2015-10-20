@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 
 /**
@@ -74,7 +75,7 @@ public class SqlUtil {
             }
         }
 
-        return sql.toString();
+        return StringUtil.isBlank(sql.toString())?"":sql.toString();
     }
 
     private static String seanSearchInfoAppend( SearchInfo searchInfo){

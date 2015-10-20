@@ -25,21 +25,19 @@ import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
@@ -318,22 +316,25 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 		return productLines;
 	}
 
-	public List<ProjectStory> findBuildStory(Integer buildId){
+	public Pager<ProductStory> findBuildStorys(int start, int limit, Integer buildId, final OrderBy... orderBies){
 		Select select =select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
 				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
 		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
-		String[] storys = test.getBuildStories().split(",");
-		int[] array = new int[storys.length];
-		for(int i=0;i<storys.length;i++){
-			array[i]=Integer.parseInt(storys[i]);
-		}
-			List<ProjectStory>projectStorys =new ArrayList<ProjectStory>();
-//		for (int i = 0; storys != null && i < storys.length; i++) {
-			Select selects =select(PRODUCT_STORYTABLE.ALL).from(PRODUCT_STORYTABLE)
-					.where(PRODUCT_STORYTABLE.BUILD_ID.in(array));
-			projectStorys = getDslSession().fetchList(selects,ProjectStory.class);
-//		}
-		return projectStorys;
+		final String[] storys = test.getBuildStories().split(",");
+//			List<ProductStory>productStories =new ArrayList<ProductStory>();
+//			Select selects =select(PRODUCT_STORYTABLE.ALL).from(PRODUCT_STORYTABLE)
+//					.where(PRODUCT_STORYTABLE.BUILD_ID.in(storys));
+//		productStories = getDslSession().fetchList(selects,ProductStory.class);
+		ProductStory productStory = new ProductStory();
+		return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
+
+			public Select generate(ProductStory t) {
+				Select select = MysqlSelect.selectFrom(PRODUCT_STORYTABLE).where(
+								PRODUCT_STORYTABLE.STORY_ID.in(storys));
+				return addOrderByElements(select, orderBies);
+			}
+		});
+//		return productStories;
 
 //		Select select1 = select(PROJECT_BUILDTABLE.ALL, PRODUCT_STORY_SPECTABLE.STORY_SPEC).from(PROJECT_BUILDTABLE)
 //				.join(Join.leftJoin(
@@ -358,18 +359,24 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 	}
 
 
-//	public ProjectStory findnotBuildStory(Integer buildId){
-//		Select select = select( PRODUCT_STORY_SPECTABLE.ALL).from(PRODUCT_STORY_SPECTABLE.STORY_ID)
-//				.join(Join.leftJoin(
-//						PROJECT_STORYTABLE, PROJECT_BUILDTABLE.BUILD_STORIES.eq(PROJECT_STORYTABLE.STORY_ID)
-//						)
-//				)
-//				.join(Join.leftJoin(
-//						PROJECT_STORYTABLE, PROJECT_BUILDTABLE.BUILD_STORIES.eq(PROJECT_STORYTABLE.STORY_ID)
-//						)
-//				).where(
-//						PROJECT_BUILDTABLE.BUILD_PROJECT.eq(buildId)
-//				);
-//		return getDslSession().fetchOneResult(select, ProjectStory.class);
-//	}
+
+	public Pager<ProductStory> findnoBuildStorys(int start, int limit, Integer buildId, final OrderBy... orderBies){
+		Select select =select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
+		final String[] storys = test.getBuildStories().split(",");
+
+		ProductStory productStory = new ProductStory();
+		return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
+
+			public Select generate(ProductStory t) {
+				Select select = MysqlSelect.selectFrom(PRODUCT_STORYTABLE).where(
+						PRODUCT_STORYTABLE.STORY_ID.notIn(storys));
+				return addOrderByElements(select, orderBies);
+			}
+		});
+
+	}
+
+
 }

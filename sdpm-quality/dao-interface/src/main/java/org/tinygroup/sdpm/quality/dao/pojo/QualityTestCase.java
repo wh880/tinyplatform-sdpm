@@ -28,6 +28,16 @@ public class QualityTestCase implements Serializable {
 	public static int DELETE_YES = 1;
 	public static int DELETE_NO = 1;
 		
+	/**
+	 * 创建人名称
+	 */
+	private String caseOpenedName;
+	
+	/**
+	 * 执行人名称
+	 */
+	private String caseLastRunnerName;
+	
 	/** 
 	 * 用例编号
 	 * 
@@ -461,6 +471,22 @@ public class QualityTestCase implements Serializable {
 
 	public String getCaseLastRunResult(){
 		return caseLastRunResult;
+	}
+
+	public String getCaseOpenedName() {
+		return caseOpenedName;
+	}
+
+	public void setCaseOpenedName(String caseOpenedName) {
+		this.caseOpenedName = caseOpenedName;
+	}
+
+	public String getCaseLastRunnerName() {
+		return caseLastRunnerName;
+	}
+
+	public void setCaseLastRunnerName(String caseLastRunnerName) {
+		this.caseLastRunnerName = caseLastRunnerName;
 	}
 
 }

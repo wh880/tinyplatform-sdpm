@@ -25,6 +25,7 @@ public class TaskStatusUtil {
         status.put("7", "");//已延期
         status.put("8", "");//需求变动
         status.put("9", "task_status = 5");
+        status.put("0", "task_status !=6");
     }
 
     public static String getCondition(String statu, String choose, HttpServletRequest request, String moduleIds) {

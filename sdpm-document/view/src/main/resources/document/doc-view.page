@@ -36,10 +36,10 @@
         ${doc?.docKeywords}
     #end
     #@div(divClass="infoContent")
-    #if(doc?.docType=='链接')
+    #if(doc?.docType=='2')
         <p class="titleName">文档URL </p>
-        ${doc?.docUrl}
-    #elseif(doc.docType=='文件')<p class="titleName">附件 </p>
+        <a href="//${doc?.docUrl}">${doc?.docUrl}</a>
+    #elseif(doc?.docType=='1')<p class="titleName">附件 </p>
     #foreach(f : file)   	
     	 #set(path=f?.filePathname)
     		<a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
@@ -47,8 +47,7 @@
 
 				#if(m.id == "doc-file-edit")					
     				#@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
-        	        	#buttonIcon(iconClass=m.icon)#end&nbsp&nbsp&nbsp
-
+        	        	#buttonIcon(iconClass=m.icon)#end&nbsp
         	    #else
         	    	#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId )
 						#buttonIcon(iconClass=m.icon)

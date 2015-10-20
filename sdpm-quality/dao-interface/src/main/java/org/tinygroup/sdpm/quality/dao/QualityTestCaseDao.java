@@ -17,9 +17,12 @@
 package org.tinygroup.sdpm.quality.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface QualityTestCaseDao extends BaseDao<QualityTestCase,Integer> {
+	
+	Pager<QualityTestCase> queryPagerRel(int start,int limit ,QualityTestCase qualityTestCase , final String condition,final OrderBy... orderArgs);
 
 }

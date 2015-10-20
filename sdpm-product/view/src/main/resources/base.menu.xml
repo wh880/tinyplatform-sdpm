@@ -248,7 +248,15 @@
           sort="10" isShow="1" permission="Permission"></menu>
 
     <menu id="product-modular" parent-id="myproduct" name="模块" href="/system/module/findProductModule?moduleParent=0"
-          sort="9" isShow="1" permission="Permission"></menu>
+          sort="9" isShow="1" permission="Permission">
+
+        <menu id="story-file-edit" name ="编辑" href="/system/profile/find/story"
+              icon="icon-pencil" sort="3" isShow="1" scope="product-file-op"></menu>
+        <menu id="story-file-delete" name ="删除" href="/system/profile/delete/story"
+              icon="icon-remove" sort="2" isShow="1" scope="product-file-op"></menu>
+
+
+    </menu>
 
     <menu id="product-overview" parent-id="myproduct" name="概况" href="/product/find/overview?productId=${sessionProductId}" sort="8"
           isShow="1" permission="Permission">

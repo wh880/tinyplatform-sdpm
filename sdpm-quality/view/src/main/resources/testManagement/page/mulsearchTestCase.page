@@ -1,7 +1,5 @@
-
 ##<span id="showsearchmore">搜索</span>
-<form method="post" id="${requestTableId}form"
-      class="form-condensed searchform">
+<form method="get" action="" id="${testCaseTableId}form" class="form-condensed searchform">
     <div class="hide">
         <select id="operatortemp">
             <option value="=">=</option>
@@ -15,31 +13,52 @@
             <option value="notinclude">不包含</option>
             <option value="belong">从属于</option>
         </select>
-        <select id="clientId">
-            <option value="" selected="selected"></option>
-            #foreach(l:serviceClients)
-                <option value=${l.clientId}>${l.clientName}</option>
+        <select id="usertemp">
+        <option value="" selected="selected"></option>
+        #foreach(user:userList)
+        	<option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+        #end
+         <option value="null">空</option>   
+            
+            
+        </select>
+        <select id="pritemp">
+            <option value=""></option>
+            #foreach(pri:getDict("casePriority"))
+            	<option value=${pri?.value}>${pri?.text}</option>
             #end
-        </select>
-        <select id="requestType">
-            <option value="" selected="selected"></option>
-            <option value="0">缺陷</option>
-            <option value="1">适应性</option>
             <option value="null">空</option>
         </select>
-        <select id="requestPre">
+        <select id="statustemp">
             <option value="" selected="selected"></option>
-            <option value="0">低</option>
-            <option value="1">中</option>
+             #foreach(status:getDict("caseStatus"))
+            	<option value=${status?.value}>${status?.text}</option>
+            #end
             <option value="null">空</option>
         </select>
-        <select id="modle">
+         <select id="stagetemp">
             <option value="" selected="selected"></option>
-            <option value="2">模块一</option>
-            <option value="3">模块二</option>
+           	#foreach(stage:caseStage)
+           		 <option ${stage?.value}>${stage?.text}</option>
+           	#end
+           
             <option value="null">空</option>
         </select>
-
+         <select id="moduletemp">
+            <option value="" selected="selected"></option>
+            #foreach(model:modelList)
+            	 <option ${model?.value}>${model?.text}</option>
+            #end
+           
+            <option value="null">空</option>
+        </select>
+         <select id="producttemp">
+            <option value="" selected="selected"></option>
+             #foreach(product:productList)
+            	 <option ${product?.value}>${product?.text}</option>
+            #end
+            <option value="null">空</option>
+        </select>
 
     </div>
     <table class="table-condensed table-form" id="task-search">
@@ -197,72 +216,84 @@
             $("#searchbox5,#searchbox6,#searchbox2,#searchbox3").hide();
         });
         var itemlist = []
-//        itemlist.push({
-//            "name":"productId",
-//            "title":"产品名称",
-//            "operator":"include",
-//            "value":"proId"
-//        });
         itemlist.push({
-            "name": "requestType",
-            "title": "请求类型",
-            "operator": "=",
-            "value": "reqT"
-        });
-        itemlist.push({
-            "name": "requestPre",
-            "title": "请求优先级",
-            "operator": "=",
-            "value": "reqP"
-        });
-        itemlist.push({
-            "name": "moduleId",
-            "title": "请求模块",
-            "operator": "include",
-            "value": "mod"
-        });
-        itemlist.push({
-            "name": "serviceRequest.clientId",
-            "title": "客户名称",
-            "operator": "=",
-            "value": "cliId"
-        });
-        itemlist.push({
-            "name": "requester",
-            "title": "客户联系人",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "requestTitle",
-            "title": "请求标题",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "requestSpec",
-            "title": "请求描述",
-            "operator": "=",
-            "value": "text"
-        });
-//        itemlist.push({
-//            "name":"requestStatus",
-//            "title":"请求状态",
-//            "operator":"=",
-//            "value":"reqS"
-//        });
-        itemlist.push({
-            "name": "requestSubmitDate",
-            "title": "请求提交时间",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "requestCommitmentDate",
-            "title": "请求承诺回复时间",
-            "operator": "=",
-            "value": "date"
-        });
+		"name":"caseTitle",
+		"title":"用例标题",
+		"operator":"include",
+		"value":"text"
+	});
+	itemlist.push({
+		"name":"caseId",
+		"title":"用例编号",
+		"operator":"=",
+		"value":"text"
+	});
+	itemlist.push({
+		"name":"caseKeywords",
+		"title":"关键词",
+		"operator":"=",
+		"value":"text"
+	});
+	itemlist.push({
+		"name":"caseLastEditedBy",
+		"title":"修改者",
+		"operator":"include",
+		"value":"user"
+	});
+	itemlist.push({
+		"name":"caseType",
+		"title":"用例类型",
+		"operator":"=",
+		"value":"user"
+	});
+	itemlist.push({
+		"name":"caseOpenedBy",
+		"title":"由谁创建 ",
+		"operator":"=",
+		"value":"user"
+	});
+	itemlist.push({
+		"name":"caseStatus",
+		"title":"用例状态",
+		"operator":"=",
+		"value":"status"
+	});
+	itemlist.push({
+		"name":"productId",
+		"title":"所属产品",
+		"operator":"=",
+		"value":"product"
+	});
+	itemlist.push({
+		"name":"caseStage",
+		"title":"适用阶段",
+		"operator":"=",
+		"value":"stage"
+	});
+	itemlist.push({
+		"name":"moduleId",
+		"title":"所属模块",
+		"operator":"=",
+		"value":"module"
+	});
+	itemlist.push({
+		"name":"priority",
+		"title":"优先级",
+		"operator":"=",
+		"value":"pri"
+	});
+	itemlist.push({
+		"name":"caseOpenedDate",
+		"title":"创建日期",
+		"operator":"=",
+		"value":"date"
+	});
+	itemlist.push({
+		"name":"caseLastEditedDate",
+		"title":"修改日期",
+		"operator":"belong",
+		"value":"date"
+	});
 
         function setValueBox(index, itemIndex) {
             $("#operator" + itemIndex).val(itemlist[index]["operator"]);
@@ -271,27 +302,27 @@
                 case "text":
                     $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control">');
                     break;
-//                case "proId":
-//                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#productId").html()));
-//                    break;
-                case "cliId":
-                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#clientId").html()));
+                case "user":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#usertemp").html()));
                     break;
-                case "reqT":
-                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#requestType").html()));
+                case "pri":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#pritemp").html()));
                     break;
-                case "reqP":
-                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#requestPre").html()));
-                    break;
-//                case "reqS":
-//                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#requestStatus").html()));
-//                    break;
-                case "mod":
-                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#modle").html()));
+                case "status":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#statustemp").html()));
                     break;
                 case "date":
                     $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control dateinput">');
                     break;
+                case "product":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#producttemp").html()));
+                    break;
+                case "module":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#moduletemp").html()));
+                    break;
+                case "stage":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#stagetemp").html()));
+                    break;    
             }
         }
 
@@ -321,8 +352,8 @@
             })
         });
 
-        $("#${requestTableId}form").on("submit", function () {
-            $("#${requestTableId}").trigger("initnav");
+        $("#${testCaseTableId}form").on("submit", function () {
+            $("#${testCaseTableId}").trigger("initnav");
             return false;
 
         });

@@ -6,11 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBurn;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
+import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
@@ -19,6 +22,7 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,6 +39,8 @@ public class ProjectAction extends BaseController {
     private ProductService productService;
     @Autowired
     private ProjectProductService projectProductService;
+    @Autowired
+    private BurnService burnService;
 
     @RequestMapping("/find")
     public String find(Integer projectId, Model model) {
@@ -46,8 +52,38 @@ public class ProjectAction extends BaseController {
 
     @RequestMapping("/findProjects")
     public String findProjects(Integer start, Integer limit, String order, String ordertype, Model model) {
-
         Pager<Project> projectPager = projectService.findProjects(start, limit, order, ordertype);
+        Integer interval = 2;
+        if (projectPager != null) {
+            for (Project project : projectPager.getRecords()) {
+                List<ProjectBurn> burn = burnService.findBurnByProjectId(project.getProjectId());
+                String burnValue = "";
+                int i = 0;
+                Date startDate = project.getProjectBegin();
+                Date endDate = project.getProjectEnd();
+                Date nextDate = startDate;
+                float tLeft = 0f;
+                for (ProjectBurn projectBurn : burn) {
+                    if (projectBurn.getBurnDate().getTime() == startDate.getTime()) {
+                        tLeft = projectBurn.getBurnLeft();
+                    }
+                }
+                burnValue = tLeft + "";
+                while (nextDate.before(endDate)) {
+                    nextDate = DateUtils.addDays(nextDate, 1);
+                    for (ProjectBurn projectBurn : burn) {
+                        if (projectBurn.getBurnDate().getTime() == nextDate.getTime()) {
+                            tLeft = projectBurn.getBurnLeft();
+                        }
+                    }
+                    if (i % interval == 0) {
+                        burnValue = burnValue + "," + tLeft;
+                    }
+                    i++;
+                }
+                project.setBurnValue(burnValue);
+            }
+        }
         model.addAttribute("projectPager", projectPager);
         return "project/allProjectData.pagelet";
     }

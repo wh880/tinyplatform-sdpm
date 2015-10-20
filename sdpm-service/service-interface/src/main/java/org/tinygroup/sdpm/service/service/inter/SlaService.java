@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.service.service.inter;
 
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -62,7 +63,7 @@ public interface SlaService {
      *
      * @return
      */
-    Pager<ServiceSla> findSlaPager(Integer start, Integer limit, ServiceSla sla, Integer treeId, String order, String ordertype);
+    Pager<ServiceSla> findSlaPager(Integer start, Integer limit, ServiceSla sla, Integer treeId, String groupOperate, SearchInfos searchInfos, String order, String orderType);
 
     /**
      * 2015/9/29,实现协议里面，点击客户ID，页面数据显示，新增的方法

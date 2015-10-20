@@ -33,6 +33,20 @@ public class Project implements Serializable{
 	 */
 	private float percent;
 	/**
+	 * 该项目燃尽图的字符串
+	 */
+	private String burnValue;
+
+	/**
+	 * 总预计
+	 */
+	private float estimate;
+
+	/**
+	 * 总花费
+	 */
+	private float consume;
+	/**
 	 * 项目id
 	 *
 	 */
@@ -168,6 +182,30 @@ public class Project implements Serializable{
 	 * 0-未删除，1-删除
 	 */
 	private String projectDeleted;
+
+	public float getEstimate() {
+		return estimate;
+	}
+
+	public void setEstimate(float estimate) {
+		this.estimate = estimate;
+	}
+
+	public float getConsume() {
+		return consume;
+	}
+
+	public void setConsume(float consume) {
+		this.consume = consume;
+	}
+
+	public String getBurnValue() {
+		return burnValue;
+	}
+
+	public void setBurnValue(String burnValue) {
+		this.burnValue = burnValue;
+	}
 
 	public float getPercent() {
 		return percent;

@@ -17,10 +17,12 @@
 package org.tinygroup.sdpm.project.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -32,5 +34,7 @@ public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
     
 	List<ProductAndLine> getProductLineTree(ProductLine t);
 
-    public List<ProjectStory> findBuildStory(Integer buildId);
+    public Pager<ProductStory> findBuildStorys(int start, int limit, Integer buildId, OrderBy... orderArgs);
+
+    public Pager<ProductStory> findnoBuildStorys(int start, int limit, Integer buildId, OrderBy... orderArgs);
 }

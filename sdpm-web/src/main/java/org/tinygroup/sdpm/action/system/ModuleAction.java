@@ -72,6 +72,19 @@ public class ModuleAction extends BaseController {
     }
 
     @ResponseBody
+    @RequestMapping("bugTree")
+    public List<Map<String, Object>> bugTree(SystemModule systemModule, HttpServletResponse response) {
+        response.setContentType("application/json; charset=UTF-8");
+        List<Map<String, Object>> mapList = Lists.newArrayList();
+        List<SystemModule> bugModules = moduleService.findModules(systemModule);
+        systemModule.setModuleType("story");
+        List<SystemModule> productModules = moduleService.findModules(systemModule);
+        mergeModule(productModules, mapList, "0", false, false);
+        mergeModule(bugModules, mapList, "0", true, true);
+        return mapList;
+    }
+
+    @ResponseBody
     @RequestMapping("docProductTree")
     public List<Map<String, Object>> productDocTree(HttpServletResponse response) {
         response.setContentType("application/json; charset=UTF-8");

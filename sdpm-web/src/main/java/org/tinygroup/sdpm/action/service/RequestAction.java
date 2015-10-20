@@ -50,6 +50,8 @@ public class RequestAction extends BaseController {
         model.addAttribute("status", status);
         model.addAttribute("operation", operation);
         List<OrgUser> userList = userService.findUserList(new OrgUser());
+        List<ServiceClient> serviceClients = clientService.getClientList(new ServiceClient());
+        model.addAttribute("serviceClients", serviceClients);
         model.addAttribute("userList", userList);
         return "service/serviceReq/request.page";
     }
@@ -58,15 +60,15 @@ public class RequestAction extends BaseController {
     public String listData(Integer limit, Integer start, ServiceRequest clientRequest, Integer status, Integer operation, Integer treeId, Model model,
                            String groupOperate, SearchInfos searchInfos,
                            @RequestParam(required = false, defaultValue = "clientRequestId") String order,
-                           @RequestParam(required = false, defaultValue = "desc") String ordertype) {
+                           @RequestParam(required = false, defaultValue = "desc") String orderType) {
 
         if (operation != null) {
             OrgUser user = UserUtils.getUser();
-            Pager<ServiceRequest> pager = requestService.findOperationByMe(start, limit, user, clientRequest, treeId, operation, order, ordertype);
+            Pager<ServiceRequest> pager = requestService.findOperationByMe(start, limit, user, clientRequest, treeId, operation, order, orderType);
             model.addAttribute("pager", pager);
             return "service/serviceReq/requestTableData.pagelet";
         }
-        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, groupOperate, searchInfos, order, ordertype);
+        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, groupOperate, searchInfos, order, orderType);
         model.addAttribute("pager", pager);
         return "service/serviceReq/requestTableData.pagelet";
     }

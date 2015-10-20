@@ -28,10 +28,15 @@ public class ProfileAction extends BaseController{
 			model.addAttribute("profile", profile);
 			return "/document/file-edit.pagelet";
 		}
+		if("story".equals(type)){
+			SystemProfile profile=profileService.findById(fileId);
+			model.addAttribute("profile", profile);
+			return "/product/page/tabledemo/file-edit.pagelet";
+		}
 		return null;
 	}
 	
-	@RequiresPermissions(value="doc-file-edit")
+
 	@ResponseBody
 	@RequestMapping("edit/{type}")
 	public Map<String, String> eidt(SystemProfile profile,@PathVariable(value="type")String type,Model model){
@@ -42,14 +47,27 @@ public class ProfileAction extends BaseController{
 			map.put("info", "修改成功");
 			return map;
 		}
+		if("story".equals(type)){
+			profileService.editTitle(profile);
+			map.put("status", "y");
+			map.put("info", "修改成功");
+			return map;
+		}
 		return null;
 	}
 	
-	@RequiresPermissions(value="doc-file-delete")
+
 	@ResponseBody
 	@RequestMapping("delete/{type}")
 	public Map delete(Integer id,@PathVariable(value="type")String type){
 		if("doc".equals(type)){
+			profileService.softDelete(id);
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("status", "success");
+			map.put("info", "删除成功");
+			return map;
+		}
+		if("story".equals(type)){
 			profileService.softDelete(id);
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("status", "success");

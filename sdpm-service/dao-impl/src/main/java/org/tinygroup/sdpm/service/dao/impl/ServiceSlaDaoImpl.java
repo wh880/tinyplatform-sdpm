@@ -25,6 +25,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.service.dao.ServiceSlaDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
@@ -362,7 +363,7 @@ public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDa
     }
 
     /*在queryPage方法的基础上修改得来，加入参数treeId*/
-    public Pager<ServiceSla> queryPagerTree(int start, int limit, ServiceSla serviceSla, final Integer treeId, final OrderBy... orderBies) {
+    public Pager<ServiceSla> queryPagerTree(int start, int limit, ServiceSla serviceSla, final Integer treeId, final Condition conditionl, final OrderBy... orderBies) {
         if (serviceSla == null) {
             serviceSla = new ServiceSla();
         }
@@ -371,6 +372,7 @@ public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDa
             public Select generate(ServiceSla t) {
                 Select select = MysqlSelect.selectFrom(SERVICE_SLATABLE).join(Join.leftJoin(SERVICE_CLIENTTABLE, SERVICE_SLATABLE.CLIENT_ID.eq(SERVICE_CLIENTTABLE.CLIENT_ID))).where(
                         and(
+                                conditionl,
                                 SERVICE_SLATABLE.SERVICE_LEVEL.eq(t.getServiceLevel()),
                                 SERVICE_SLATABLE.SERVICE_DEADLINE.eq(t.getServiceDeadline()),
                                 SERVICE_SLATABLE.CLIENT_ID.eq(t.getClientId()),

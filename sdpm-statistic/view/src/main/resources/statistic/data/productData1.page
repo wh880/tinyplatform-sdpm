@@ -36,37 +36,98 @@
             #end
         #end
         #@tbody()
-            #@tr("text-c")
-            <td rowspan="2">测试产品</td>
-            <td rowspan="2">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
+##            #@tr("text-c")
+##            <td rowspan="2">测试产品</td>
+##            <td rowspan="2">admin</td>
+##            <td>计划</td>
+##            <td>2015-08-25</td>
+##            <td>2015-08-25</td>
+##            <td>2</td>
+##            <td>4</td>
+##            <td>1</td>
+##            <td>1</td>
+##            #end
+
+            #for(p:product)
+                 #@tr("text-c")
+                 <td rowspan=${p?.value.size()+1}> ${p?.key?.productName} </td>
+                 <td rowspan=${p?.value.size()+1}>${p?.key?.productCreatedBy}</td>
+                    #if(!p.value)
+
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                    #else
+                     #for(pl:p?.value)
+                        #@tr("text-c")
+
+                             <td>${pl?.planName}</td>
+                            <td>${formatDate(pl?.planBeginDate,"yyyy-MM-dd")}</td>
+                            <td>${formatDate(pl?.planEndDate,"yyyy-MM-dd")}</td>
+                             <td>2</td>
+                             <td>4</td>
+                             <td>1</td>
+                             <td>1</td>
+                        #end
+                     #end
+                 #end
+                #end
             #end
-            #@tr("text-c")
-            <td>计划2</td>
-            <td>2015-09-25</td>
-            <td>2015-09-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
-            #end
-            #@tr("text-c")
-            <td rowspan="1">测试产品3</td>
-            <td rowspan="1">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
-            #end
+
+##            #for(p:product)
+##            #@tr("text-c")
+##            <td rowspan="2">${p?.key?.productName}</td>
+##            <td rowspan="2">${p?.key?.productCreatedBy}</td>
+##            #end
+##
+##            #end
+##                <td>
+##                #for(pl:p?.value)
+##                      ${pl?.planName}
+##
+####                          <td>2</td>
+####                         <td>4</td>
+####                         <td>1</td>
+####                        <td>1</td>
+##                #end
+##               <td>
+##               #for(pl:p?.value)
+##                      ${formatDate(pl?.planBeginDate,"yyyy-MM-dd")}
+##               #end
+##              </td>
+##                <td>
+##                #for(pl:p?.value)
+##                  ${formatDate(pl?.planEndDate,"yyyy-MM-dd")}
+##                #end
+##                </td>
+##
+##            #end
+##            #end
+##            #@tr("text-c")
+##            <td>计划2</td>
+##            <td>2015-09-25</td>
+##            <td>2015-09-25</td>
+##            <td>2</td>
+##            <td>4</td>
+##            <td>1</td>
+##            <td>1</td>
+##            #end
+##            #@tr("text-c")
+##            <td rowspan="1">测试产品3</td>
+##            <td rowspan="1">admin</td>
+##            <td>计划</td>
+##            <td>2015-08-25</td>
+##            <td>2015-08-25</td>
+##            <td>2</td>
+##            <td>4</td>
+##            <td>1</td>
+##            <td>1</td>
+##            #end
         #end
     #end
 #end

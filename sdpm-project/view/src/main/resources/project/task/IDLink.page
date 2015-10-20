@@ -52,7 +52,6 @@
 <div style="width:70%;float:left">
     #@div(divClass="infoContent")
         <p class="titleName">任务描述</p>
-
         <div>
             ${task.taskDesc}
         </div>
@@ -74,11 +73,7 @@
 
         </div>
     #end
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-    ##加入后，js代码会导致页面排版混乱
-        #include("/project/recordlist.page")
-    #end
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
     <center>
         #foreach(m:menuManager.getScopeMenus("pro-taskInfo-op"))
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"

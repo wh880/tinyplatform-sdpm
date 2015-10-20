@@ -1,5 +1,6 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/table/components/tinytable.component")
+#import("/org/tinygroup/table/components/togglebox.component")
 #set(docTableId = "docTableId" )
 #!set(activeTitle="产品文档",activeMenuId=currentPageId)
 

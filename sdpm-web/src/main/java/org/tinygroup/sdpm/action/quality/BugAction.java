@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action.quality;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.support.SQLErrorCodes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
 import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
@@ -75,19 +77,33 @@ public class BugAction extends BaseController {
 	@Autowired
 	private ProductService productService;
 	@RequestMapping("")
-	public String form(String get,QualityBug bug, HttpServletRequest request){
+	public String form(String get,QualityBug bug, Model model, HttpServletRequest request){
+		List<Product> list = (List<Product>) request.getSession().getAttribute("qualityProductList");
 		String queryString = request.getQueryString();
+		List<OrgUser> users = userService.findUserList(null);
+		if(list == null|| list.size()==0){
+			list = productService.findProductList(new Product(),"productId","desc");
+			request.getSession().setAttribute("qualityProductList",list);
+		}
+		if(null==request.getSession().getAttribute("qualityProductId")||""==request.getSession().getAttribute("qualityProductId")){
+			request.getSession().setAttribute("qualityProductId",list.size()>0?list.get(0).getProductId():0);
+		}else{
+			request.getSession().removeAttribute("qualityProductId");
+			request.getSession().setAttribute("qualityProductId",list.size()>0?list.get(0).getProductId():0);
+		}
 		if(bug!=null&&bug.getModuleId()!=null){
 			request.getSession().setAttribute("bugModuleId",bug.getModuleId());
 		}else{
 			request.getSession().removeAttribute("bugModuleId");
 		}
 		if(queryString!=null&&!queryString.contains("status")){
+			if(!queryString.contains("currentPageId"))queryString = queryString+"&currentPageId=5";
 			return "redirect:/a/quality/bug?status=tbugstatus&"+queryString;
 		}
 		if(StringUtil.isBlank(queryString)){
 			return "redirect:/a/quality/bug?status=tbugstatus&currentPageId=5";
 		}
+		model.addAttribute("userList",users);
 		return "/testManagement/page/Bug.page";
 	}
 	
@@ -101,7 +117,7 @@ public class BugAction extends BaseController {
 	}
 	@RequestMapping("/bugInfo")
 	public String bugInfo(Integer bugId, Model model){
-		Pager<QualityBug> bugs = bugService.findBugListPager(0,1," bug_id >"+bugId+" ",null,"bugId",true);
+		Pager<QualityBug> bugs = bugService.findBugListPager(0,1," bug_id <"+bugId+" ",null,"bugId",false);
 		int nextId = 0;
 		if(bugs.getRecords().size()>0){
 			nextId = bugs.getRecords().get(0).getBugId();
@@ -128,19 +144,22 @@ public class BugAction extends BaseController {
 	}
 
 	@RequestMapping("/findBug")
-	public String findBugPager(Integer page,Integer limit,String order,String ordertype,String status,QualityBug bug,Model model,HttpServletRequest request){
+	public String findBugPager(Integer start,Integer limit,SearchInfos infos,String groupOperate, String order,String ordertype,String status,QualityBug bug,Model model,HttpServletRequest request){
 		boolean asc = true;		
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
 		String conditions = QualityUtil.getCondition(status,request);
+		conditions = StringUtil.isBlank(SqlUtil.toSql(infos.getInfos(),groupOperate))?
+				conditions:(StringUtil.isBlank(conditions)?SqlUtil.toSql(infos.getInfos(),groupOperate):conditions+" and "+ SqlUtil.toSql(infos.getInfos(),groupOperate));
 		bug.setModuleId((Integer) request.getSession().getAttribute("bugModuleId"));
 		bug.setProductId((Integer) request.getSession().getAttribute("qualityProductId"));
+		bug.setDeleted(0);
 		if(bug.getModuleId()!=null){
 			conditions = ("".equals(conditions)?" module_id ":conditions+" and module_id ")+ModuleUtil.getCondition(bug.getModuleId(),moduleService);
 			bug.setModuleId(null);
 		}
-		Pager<QualityBug> bugpager = bugService.findBugListPager(limit*(page-1), limit,conditions, bug, order, asc);
+		Pager<QualityBug> bugpager = bugService.findBugListPager(start, limit,conditions, bug, order, asc);
 		model.addAttribute("bugpager",bugpager);
 		return "/testManagement/data/BugData.pagelet";
 	}
@@ -159,22 +178,26 @@ public class BugAction extends BaseController {
 		model.addAttribute("userList",orgUsers);
 		return "/testManagement/page/tabledemo/makesure.page";
 	}
+	@ResponseBody
 	@RequestMapping("batch/sure")
-	public Map makesure(String[] bugId,Model model){
-		if(bugId.length>0){
-			for(String id : bugId){
+	public Map makesure(String ids,Model model){
+		String[] bugIds = ids.split(",");
+		if(bugIds.length>0){
+			for(String id : bugIds){
 				QualityBug bug = bugService.findById(Integer.valueOf(id));
-				bug.setBugConfirmed(1);
-				bugService.updateBug(bug);
-				LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
-						, LogUtil.LogAction.BUGCONFIRMED
-						,String.valueOf(bug.getBugId())
-						,UserUtils.getUserId()
-						,String.valueOf(bug.getProductId())
-						,String.valueOf(bug.getProjectId())
-						,null
-						,null
-						,null);
+				if(bug.getBugConfirmed()!=null&&bug.getBugConfirmed()<1) {
+					bug.setBugConfirmed(1);
+					bugService.updateBug(bug);
+					LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+							, LogUtil.LogAction.BUGCONFIRMED
+							, String.valueOf(bug.getBugId())
+							, UserUtils.getUserId()
+							, String.valueOf(bug.getProductId())
+							, String.valueOf(bug.getProjectId())
+							, null
+							, null
+							, null);
+				}
 			}
 		}
 
@@ -183,6 +206,65 @@ public class BugAction extends BaseController {
 		map.put("info", "成功");
 		return map;
 	}
+	@ResponseBody
+	@RequestMapping("batch/resolve")
+	public Map resolve(String ids,String resolutionType,Model model) {
+		String[] bugIds = ids.split(",");
+		if (bugIds.length > 0) {
+			for (String id : bugIds) {
+				QualityBug bug = bugService.findById(Integer.valueOf(id));
+				if (bug.getBugStatus()!=null&&Integer.parseInt(bug.getBugStatus()) < 2) {
+					bug.setBugConfirmed(1);
+					bug.setBugStatus("2");
+					bug.setBugResolution(resolutionType);
+					bug.setBugResolvedDate(new Date());
+					bug.setBugResolvedBy(UserUtils.getUserId());
+					bugService.updateBug(bug);
+					LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+							, LogUtil.LogAction.RESOLVED
+							, String.valueOf(bug.getBugId())
+							, UserUtils.getUserId()
+							, String.valueOf(bug.getProductId())
+							, String.valueOf(bug.getProjectId())
+							, null
+							, null
+							, null);
+				}
+			}
+		}
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("status", "success");
+		map.put("info", "成功");
+		return map;
+	}
+	@ResponseBody
+	@RequestMapping("batch/assign")
+	public Map assign(String ids,String userId,Model model) {
+		String[] bugIds = ids.split(",");
+		if (bugIds.length > 0) {
+			for (String id : bugIds) {
+				QualityBug bug = bugService.findById(Integer.valueOf(id));
+					bug.setBugConfirmed(1);
+					bug.setBugAssignedDate(new Date());
+					bug.setBugAssignedTo(userId);
+					bugService.updateBug(bug);
+					LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+							, LogUtil.LogAction.ASSIGNED
+							, String.valueOf(bug.getBugId())
+							, UserUtils.getUserId()
+							, String.valueOf(bug.getProductId())
+							, String.valueOf(bug.getProjectId())
+							, null
+							, null
+							, null);
+			}
+		}
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("status", "success");
+		map.put("info", "成功");
+		return map;
+	}
+
 	@RequestMapping("/sure")
 	public String makesure(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
 		QualityBug qualityBug = bugService.findById(bug.getBugId());
@@ -249,15 +331,12 @@ public class BugAction extends BaseController {
 				,systemAction.getActionComment());
 		return "redirect:"+"/a/quality/bug";
 	}
-	
-	@ResponseBody
+
 	@RequestMapping("/delete")
-	public Map delete(Integer bugId) {
+	public String delete(Integer bugId) {
 		bugService.deleteBug(bugId);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "success");
-        map.put("info", "删除成功");
-        return map;
+
+		return "redirect:"+"/a/quality/bug";
     }
 	
 	@RequestMapping("/toSolve")
@@ -450,9 +529,15 @@ public class BugAction extends BaseController {
 	
 	@RequestMapping(value = "/copy",method = RequestMethod.POST)
 	public String copySave(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
+		bug.setBugConfirmed(0);
+		bug.setBugStatus("1");
+		bug.setDeleted(0);
 		bug.setBugOpenedDate(new Date());
+		if(bug.getStoryId()!=null){
+			bug.setStoryVersion(storyService.findStory(bug.getStoryId()).getStoryVersion());
+		}
 		bug.setBugOpenedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
-		bugService.addBug(bug);
+		bug = bugService.addBug(bug);
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
 				, LogUtil.LogAction.OPENED
@@ -473,6 +558,8 @@ public class BugAction extends BaseController {
 		if(!StringUtil.isBlank(bug.getBugAssignedTo())){
 			bug.setBugAssignedDate(new Date());
 		}
+		bug.setBugConfirmed(0);
+		bug.setDeleted(0);
 		bug.setBugOpenedDate(new Date());
 		bug.setBugOpenedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		QualityBug qbug=bugService.addBug(bug);
