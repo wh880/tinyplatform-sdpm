@@ -51,7 +51,8 @@
 
                             #@gridSysRow()
                                 #@gridSysCol(4)服务级别#end
-                                #@gridSysCol(8)${var.serviceLevel}#end
+                            #* #@gridSysCol(8)${var.serviceLevel}#end*#
+                                #@gridSysCol(8)${getDict("serviceLevel",var?.serviceLevel)}#end
                             #end
                             #@gridSysRow()
                                 #@gridSysCol(4)服务期限#end
@@ -138,7 +139,8 @@
                         #@colLabel("col-4")客户状态：#end
                         #@gridSysCol(1)#end
                         #@gridSysCol(7)
-                            <p>${client.clientStatus}</p>
+                        #* <p>${client.clientStatus}</p>*#
+                            <p>${getDict("clientStatus",client?.clientStatus)}</p>
                         #end
                     #end
                 #end
