@@ -12,16 +12,16 @@
 
 #for(var:bugpager.records)
 #@tr()
-    #@td()<input type="checkbox" value="${var?.bugId}" name="bugId">#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${var?.bugId}">${var?.bugId}</a>#end
+    #@td()<input type="checkbox" value="${var?.bugId}" name="idCheck">#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?currentPageId=5&bugId=${var?.bugId}">${var?.bugId}</a>#end
     #@td()${var?.bugSeverity}#end
     #@td()${var?.priority}#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${var?.bugId}">[${var?.bugConfirmed==1?"已确认":"未确认"}]${var?.bugTitle}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?currentPageId=5&bugId=${var?.bugId}">[${var?.bugConfirmed==1?"已确认":"未确认"}]${var?.bugTitle}</a>#end
     #@td()${getDict("bugStatus",var?.bugStatus)}#end
-    #@td()#*${UserUtils.get(var?.bugOpenedBy)?.orgUserRealName}*# #end
+    #@td()${var?.bugOpenedBy?UserUtils.getUserById(var?.bugOpenedBy)?.orgUserRealName:""} #end
     #@td()${formatDate(var?.bugOpenedDate,"yyyy-MM-dd")}#end
-    #@td()#*${UserUtils.get(var?.bugAssignedTo)?.orgUserRealName}*# #end
-    #@td()#*${UserUtils.get(var?.bugResolvedBy)?.orgUserRealName}*# #end
+    #@td()${var?.bugAssignedTo?UserUtils.getUserById(var?.bugAssignedTo)?.orgUserRealName:""} #end
+    #@td()${var?.bugResolvedBy?UserUtils.getUserById(var?.bugResolvedBy)?.orgUserRealName:""} #end
     #@td()${getDict("bugResolution",var?.bugResolution?:0)}#end
     #@td()${formatDate(var?.bugResolvedDate,"yyyy-MM-dd")}#end
     #@td()
@@ -34,20 +34,24 @@
 		            #end
 		        #end
 		        #if(m.sort=="5")
+                    #if(var?.bugConfirmed==1)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                    #else
+                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                    #end
                 #end
                 #if(m.sort=="4")
-                    #if(var?.bugStatus!="1")
-                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-                    #else
+                    #if(var?.bugStatus=="1"&&var?.bugConfirmed==1)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                    #else
+                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
                     #end
                 #end
                 #if(m.sort=="3")
-                    #if(var?.bugStatus=="3")
-                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-                    #else
+                    #if(var?.bugStatus=="2")
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                    #else
+                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
                     #end
                 #end
                 #if(m.sort=="2")

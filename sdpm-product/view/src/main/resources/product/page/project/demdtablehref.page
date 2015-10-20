@@ -73,15 +73,30 @@
     #@div(divClass="infoContent")
         <p class="titleName">附件</p>
 
-        <div>
-            这里有问题的！！！！
-        </div>
+
+        #foreach(f:file)
+            #set(path=f?.filePathname)
+            <a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
+            #foreach(m:menuManager.getScopeMenus("product-file-op"))
+                #if(m.id == "story-file-edit")
+                    #@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
+                        #buttonIcon(iconClass=m.icon)#end&nbsp&nbsp&nbsp
+
+                #else
+                    #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId )
+                        #buttonIcon(iconClass=m.icon)
+                    #end
+                #end
+            #end <br>
+        #end
+
+
     #end
 
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-        #include("/product/page/tabledemo/historyrecord.page")
-    #end
+
+
+        #history(adminPath+"/system/action/ajax/history?actionObjectType=story&actionObjectId="+storySpec?.storyId)
+
 
 
 

@@ -1,6 +1,7 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
+#set(bugTableId = "bugTableId")
 #macro initBatchAction()
 <script>
 	$(function () {
@@ -63,7 +64,7 @@
 				<span class="f">
 					#foreach(m:menuManager.getScopeMenus("testbugleft-tab"))
 						#if(m.id != "tsearch")
-							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="${m.id==status?'active_btn':''}">${m.name}</a>
+							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}&currentPageId=5" class="${m.id==status?'active_btn':''}">${m.name}</a>
 						#else
 							<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 						#end
@@ -88,10 +89,10 @@
 		                #end&nbsp;
     				#else
     					#if(m.id=="tbuginput")
-    						#@aModal("#myModal" m.name "400" "80" "" m.href "ml-5")
+    						#@aModal("#myModal" m.name "400" "80" "" m.href+"?currentPageId=5" "ml-5")
 								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;
 						#else
-							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
+							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?currentPageId=5">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
     					#end
     				#end
     				#end
@@ -116,10 +117,10 @@
 				#@toggleLeft({"class":"aclass"})
 					#@settoggleLeftTitle()${qualityProduct?.productName}#end
 						#@settoggleLeftBody("treeLeftbox")
-							#@zTreeList(call("link",adminPath+"/system/module/tree?moduleType=story&moduleRoot="+qualityProduct?.productId))
+							#@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=bug&moduleRoot="+qualityProduct?.productId))
 								#setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
 								#zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/bug?status="+status+"&currentPageId=5")
-								#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=story&moduleRoot="+qualityProduct?.productId)
+								#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=bug&moduleRoot="+qualityProduct?.productId)
 								#zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
 								#zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
 							#end
@@ -127,14 +128,14 @@
 				#end
 			
 			#@toggleRight()
-			#@tinyTable()
+			#@tinyTable(bugTableId)
 				#@div(divBaseClass="tinyheaderTools form-inline")
 					<div class="f col-3">
 						<input type="button" value="全选" class="btn btn-default btn-primary col-3" 
-						onclick="selectAllNullorReserve('userid','全选');" />											
+						onclick="selectAllNullorReserve('idCheck','全选');" />
 						<div class="col-0">&nbsp&nbsp</div>
 						<input type="button" value="反选" class="btn btn-default btn-primary col-3"
-						 onclick="selectAllNullorReserve('userid','反选');" />						
+						 onclick="selectAllNullorReserve('idCheck','反选');" />
 						<div class="col-0">&nbsp&nbsp</div>
 						<div class="dropdown col-3">
 							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
@@ -142,16 +143,9 @@
 								<li>
 									#foreach(m:menuManager.getScopeMenus("testbug-op"))
 										#if(m.id=="tmakesure")
-											<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/batch/sure">
-												${m.name}</a>
-										#end
-									#end
-								</li>
-								<li>
-									#foreach(m:menuManager.getScopeMenus("testbug-op"))
-										#if(m.id=="tversiondelete")
-											<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">
-												${m.name}</a>
+										<a tabindex="-1" href="javascript:;">#@mulOperation("tmakesure" TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/sure")
+                                        <div>${m.name}</div>
+                                        #end</a>
 										#end
 									#end
 								</li>
@@ -160,27 +154,13 @@
 									#if(m.id=="tsolution")
 									<a tabindex="-1" href="javascript:void(0);">解决</a>
 									<ul class="dropdown-menu">
-										<li>
-											<a tabindex="-1" href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">设计如此</a>
-										</li>
-										<li>
-											<a tabindex="-1" href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">外部原因</a>
-										</li>
-										<li class="dropdown-submenu">
-											<a href="javascript:void(0);">
-												已解决</a>
-											<ul class="dropdown-menu">
-												<li>
-													<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">Admin</a>
-												</li>
-												<li>
-													<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">Trunk</a>
-												</li>
-											</ul>
-										</li>
-										<li>
-											<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">延期解决</a>
-										</li>
+									#for(re : getDict("bugResolution"))
+									<li>
+									    <a href="javascript:;">#@mulOperation("tsolution"+reFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/resolve?resolutionType="+re.value)
+                                        <div>${re.text}</div>
+                                        #end</a>
+                                    </li>
+									#end
 									</ul>
 									#end
 									#end
@@ -191,14 +171,12 @@
 									<a tabindex="-1" href="javascript:void(0);">
 											指派给</a>
 									<ul class="dropdown-menu">
+									#for(user : userList)
 										<li>
-											<a tabindex="-1" href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/assign.page">
-											admin</a>
+											<a tabindex="-1" href="javascript:void(0);">
+											#@mulOperation("tassign"+userFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/assign?userId="+user.orgUserId)<div>${user.orgUserRealName}</div>#end</a>
 										</li>
-										<li>
-											<a tabindex="-1" href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/assign.page">
-											admin1</a>
-										</li>										
+									#end
 									</ul>
 									#end
 									#end

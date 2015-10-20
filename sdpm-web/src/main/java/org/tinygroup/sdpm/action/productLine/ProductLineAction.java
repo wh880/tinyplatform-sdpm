@@ -16,6 +16,7 @@ import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
@@ -56,7 +57,7 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/save")
-    public String save(ProductLine productLine, Model model,ProductLineAction productLineAction) {
+    public String save(ProductLine productLine, SystemAction systemAction) {
         productLine.setProductLineCreatedBy(UserUtils.getUser().getOrgUserAccount());
         productLine.setProductLineStatus("新建");
         ProductLine productLine1 = productLineService.addProductLine(productLine);
@@ -69,7 +70,7 @@ public class ProductLineAction extends BaseController {
                 ,null
                 ,null
                 ,null
-                , null);
+                , systemAction.getActionComment());
 
         return "redirect:" + "/productLine/page/tabledemo/list.page";
     }
@@ -100,9 +101,10 @@ public class ProductLineAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/delete")
-    public Map delete(Integer productLineId) {
-        ProductLine productLine = new ProductLine();
+    public Map delete(Integer productLineId, SystemAction systemAction) {
+        ProductLine productLine1 = productLineService.findProductLine(productLineId);
         productLineService.deleteProductLine(productLineId);
+        ProductLine productLine = productLineService.findProductLine(productLineId);
         Map<String, String> map = new HashMap<String, String>();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.DELETED,
@@ -110,9 +112,9 @@ public class ProductLineAction extends BaseController {
                 UserUtils.getUserId(),
                 null,
                 null,
-                null,
-                null,
-                null);
+                productLine1,
+                productLine,
+                systemAction.getActionComment());
         map.put("status", "success");
         map.put("info", "删除成功");
         return map;

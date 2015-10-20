@@ -103,6 +103,14 @@ public interface StoryManager {
 	 * @return
 	 */
 	 Map<String, List<StoryCount>> report(String fields,ProductStory story);
+
+	/**
+	 * 计算状态
+	 * @param productId
+	 * @param status
+     * @return
+     */
+	int countStatus(int productId,int status);
 	
 	
 }

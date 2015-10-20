@@ -6,7 +6,26 @@
     .select_boxes{margin-top:0}
 </style>
 
-
+#macro Tselect2Body(name value mapInfo)
+#set(sid=mapInfo?.id?:sid)
+	<select name="${name}" class="form-control" #getMapInfo(mapInfo) id="${sid}">
+	#bodyContent
+	</select>
+	<script type="text/javascript">
+	$(function(){
+		$("#${sid}").select2();
+		#if(value)
+		var valuestr="${value}";
+		var values=valuestr.split(",");
+		if(values.length>1){
+			$("#${sid}").val(values).trigger("change");
+		}else{
+			$("#${sid}").val(valuestr).trigger("change");
+		}
+		#end
+	});
+	</script>
+#end
 #set(name="qualityBug")
 #@div()
 #@tabWithInit("tab_demo" "optionsBox")
@@ -60,7 +79,9 @@
 									$("#${sid}").on("change",function(){
 										var mId = $("#${sid}  option:selected").val();
 										var pId = $("select[name=productId]  option:selected").val();
-										ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId+"&moduleId="+mId,${bug?.storyId?:0});
+										if(mId>=0){
+										    ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/bug/ajax/story?productId="+pId+"&moduleId="+mId,${bug?.storyId?:0});
+										}
 									})
 								</script>
                 	  #end
@@ -323,7 +344,6 @@
 	$('select.select2').select2()
 </script>
 <script type="text/javascript">
-	$(".select2").select2();
 
 	function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
 		var selectCheck = "select[name="+toName+"]";

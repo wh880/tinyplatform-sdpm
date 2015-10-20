@@ -357,6 +357,14 @@ public class BuildAction extends BaseController {
 
         return "/project/task/relation-release/product-al-req-data.pagelet";
     }
+    @RequestMapping("/search/noRelateStory")
+    public String storynoListAction( int page, int pagesize,int id,String groupOperate, SearchInfos searchInfos,
+                                   Model model){
+        Pager<ProductStory> p = projectStoryService.findnoStoryPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
+        model.addAttribute("storys",p);
+
+        return "/project/task/relation-release/product-al-no-req-data.pagelet";
+    }
 
 
 

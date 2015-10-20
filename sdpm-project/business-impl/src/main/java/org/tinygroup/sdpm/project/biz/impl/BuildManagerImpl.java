@@ -79,5 +79,8 @@ public class BuildManagerImpl implements BuildManager {
         return projectBuildDao.findBuildStorys(start,limit,buildId);
     }
 
+    public Pager<ProductStory> findnoBuildStory(int start, int limit, Integer buildId) {
+        return projectBuildDao.findnoBuildStorys(start,limit,buildId);
+    }
 
 }

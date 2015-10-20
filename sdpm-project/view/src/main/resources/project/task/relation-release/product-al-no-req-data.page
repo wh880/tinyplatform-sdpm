@@ -1,20 +1,23 @@
+#macro setTinyItemCount(num)
+<input type="hidden" name="records" value="${num}"/>
+#end
 
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=storys.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
+#setTinyItemCount(records)
+#for(s:storys.getRecords())
 #@tr()
-    #@td()<input type="checkbox" value="${story?.storyId}" id="field" name="storyId">#end
-    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${story?.storyId}</a>#end
+    #@td()<input type="checkbox" value="${s?.storyId}" id="field" name="storyId">#end
+    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${s?.storyId}</a>#end
     #@td()@#end
-    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${story?.storyTitle}</a>#end
-    #@td()${story?.storyOpenedBy}#end
-    #@td()${story?.storyAssignedTo}#end
-    #@td()${story?.storyEstimate}#end
-    #@td()${story?.storyStatus}#end
-    #@td()${story?.storyStage}#end
+    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${s?.storyTitle}</a>#end
+    #@td()${s?.storyOpenedBy}#end
+    #@td()${s?.storyAssignedTo}#end
+    #@td()${s?.storyEstimate}#end
+    #@td()${s?.storyStatus}#end
+    #@td()${s?.storyStage}#end
 
 
 #end

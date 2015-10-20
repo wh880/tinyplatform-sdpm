@@ -1,6 +1,10 @@
 package org.tinygroup.sdpm.functions;
 
 
+import com.mysql.jdbc.log.LogUtils;
+import org.tinygroup.logger.LogLevel;
+import org.tinygroup.logger.Logger;
+import org.tinygroup.logger.LoggerFactory;
 import org.tinygroup.sdpm.dict.util.DictUtil;
 import org.tinygroup.template.Template;
 import org.tinygroup.template.TemplateContext;
@@ -11,6 +15,8 @@ import org.tinygroup.template.function.AbstractTemplateFunction;
  * Created by wangll13383 on 2015/9/29.
  */
 public class DictFunction extends AbstractTemplateFunction {
+
+
 
     public DictFunction() {
         super("getDict");
@@ -23,7 +29,11 @@ public class DictFunction extends AbstractTemplateFunction {
         }else if(parameters.length<=1){
             return DictUtil.getItemList(parameters[0].toString());
         }else if(parameters.length<=2){
-            return DictUtil.getValue(parameters[0].toString(),parameters[1].toString());
+            try {
+                return DictUtil.getValue(parameters[0].toString(), parameters[1].toString());
+            }catch (NullPointerException np){
+                return "";
+            }
         }
         return null;
     }

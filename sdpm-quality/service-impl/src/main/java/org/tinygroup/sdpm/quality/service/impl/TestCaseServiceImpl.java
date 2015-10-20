@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.quality.biz.inter.TestCaseManager;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
@@ -42,7 +43,17 @@ public class TestCaseServiceImpl implements TestCaseService {
 		return testcasemanager.batchDelete(testcases);
 	}
 	
-	public Pager<QualityTestCase> findTestCasePager(Integer start,Integer limit,QualityTestCase testcase,String sortName,boolean asc){
+	public Pager<QualityTestCase> findTestCasePager(Integer start,
+			Integer limit, QualityTestCase testcase, String sortName,
+			boolean asc) {
+
 		return testcasemanager.findPager(start, limit, testcase, sortName, asc);
 	}
+	
+	public Pager<QualityTestCase> findTestCasePager(Integer start,Integer limit,QualityTestCase testcase, String statusCondition, SearchInfos conditions,
+            String groupOperate,String columnName,boolean asc){
+		return testcasemanager.findPagerRel(start, limit, testcase, statusCondition, conditions, groupOperate, columnName, asc);
+	}
+
+	
 }

@@ -10,7 +10,7 @@
     #@tbody()
         #@tr()
             #@td()
-            <a href="${TINY_CONTEXT_PATH}/statistic/page/product.page?order=1">产品汇总表</a>
+            <a href="${TINY_CONTEXT_PATH}/a/statistic/product/all">产品汇总表</a>
             #end
         #end
         #@tr()
