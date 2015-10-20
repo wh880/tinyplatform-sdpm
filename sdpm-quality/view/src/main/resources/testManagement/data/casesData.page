@@ -3,12 +3,13 @@
 #end
 
 
+
 ${casepager?.totalCount+1}
 
 #setTinyItemCount(casepager?.totalCount)
 #for(c:casepager?.records)
 					#@tr()
-						#@td()<input type="checkbox" value="1" name="userid">#end
+						#@td()<input type="checkbox" value="${c?.caseId}" name="userid">#end
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${c?.caseId}</a>#end
 						#@td()${c?.priority}#end
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${c?.caseTitle}</a>#end

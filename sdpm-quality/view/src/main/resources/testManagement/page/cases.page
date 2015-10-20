@@ -5,6 +5,49 @@
 #set(testCaseTableId="testCaseTableId")
 
 
+<script>
+
+
+        function deleteBeatch() {
+
+            var testList = new Array();
+                $("input[type='checkbox']").each(function () {
+
+                    if (this.checked == true && this.id != "checkboxall") {
+                        var caseId = $(this).val();
+                        
+                        testList.push({caseId: caseId});
+                        
+                    }
+
+                });
+
+                if (testList.length > 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "${TINY_CONTEXT_PATH +adminPath}/quality/testCase/batchDeleteAjax",
+                        data: JSON.stringify(testList),//将对象序列化成JSON字符串
+                        dataType: "json",
+                        contentType: 'application/json;charset=utf-8', //设置请求头信息
+                        success: function (data) {
+                            window.location.reload();
+                        },
+                        error: function (res) {
+                            alert("失败");
+                        }
+                    });
+                }
+                
+
+            
+
+        }
+
+
+
+</script>
+
+
 #set(name="qualityCases")
 #@div()
 #@tabWithInit("tab_demo" "optionsBox")
@@ -90,16 +133,14 @@
 								<li>
 								#foreach(m:menuManager.getScopeMenus("testcase-op"))
     								#if(m.id=="tcasedelete")
-										<a href="javascript:void(0);">
-											删除</a>
+										<a href="javascript:void(0);"  onclick="deleteBeatch()">删除</a>
 									#end
 								#end
 								</li>
 								<li>
 								#foreach(m:menuManager.getScopeMenus("testcase-op"))
     								#if(m.id=="texecution")
-									#@iconOperations("#myModal" "" "执行" "865" "400"
-										 "/testManagement/page/tabledemo/execution.pagelet" "ml-5")执行#end
+									#@iconOperations("#myModal" "" "执行" "865" "400"	 adminPath+"/quality/testCase/execution" "execution")执行#end
 									#end
 								#end
 								</li>																
@@ -118,7 +159,7 @@
 #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/testCase/findPager?"+requestStatuString)
 #@thead()
 #@tr()
-#@tinyTh({"width":"6"})<input type="checkbox" name="userid" value="">#end
+#@tinyTh({"width":"6"})<input type="checkbox" id ="checkboxall" name="userid" value="">#end
 #@tinyTh({"class":"sorting","rel":"caseId"})ID#end
 #@tinyTh({"class":"sorting","rel":"priority"})P#end
 #@tinyTh({"class":"sorting","rel":"caseTitle"})用例标题#end

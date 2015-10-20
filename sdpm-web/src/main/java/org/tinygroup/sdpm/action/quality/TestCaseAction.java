@@ -5,6 +5,7 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -234,6 +235,17 @@ public class TestCaseAction extends BaseController {
 		testCaseService.batchDeleteTestCase(testcases);
 		return "redirect:" + "/a/quality/testCase";
 	}
+	
+	@ResponseBody
+	@RequestMapping("/batchDeleteAjax")
+	public int[] batchDelete(@RequestBody QualityTestCase[] cases) {
+		
+		List<QualityTestCase>  qualityTestCase = new ArrayList<QualityTestCase>();
+    	if(cases!=null&&cases.length>0){
+    		qualityTestCase = Arrays.asList(cases);
+    	}
+    	return testCaseService.batchDeleteTestCase(qualityTestCase);
+	}
 
 	@ResponseBody
 	@RequestMapping("/ajax/story")
@@ -305,5 +317,13 @@ public class TestCaseAction extends BaseController {
 			qualityCaseSteps.add(qualityCaseStep);
 		}
 		return qualityCaseSteps;
+	}
+	
+	
+	@RequestMapping("/case/viewInfo")
+	public String viewInfo(Integer id,Model model){
+		QualityTestCase testCase = testCaseService.findById(id);
+		model.addAttribute("testCase", testCase);
+		return "/testManagement/page/caseInfo.page";
 	}
 }
