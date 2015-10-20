@@ -77,15 +77,18 @@ public interface ProjectStoryService {
 
     /**
      * 查询所有需求
-     * @param start
-     * @param limit
      * @param story
      * @param statusCondition
-     * @param conditions
-     * @param groupOperate
      * @param columnName
      * @param asc
+     * @param start
+     * @param limit
+     * @param conditions
+     * @param groupOperate
      * @return
      */
-    public List<ProjectStory> findStoryPager(int start, int limit, int id,  SearchInfos conditions, String groupOperate);
+    public Pager<ProductStory> findStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
+
+
+    public Pager<ProductStory> findnoStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
 }

@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.biz.inter;
 
 
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.tinysqldsl.Pager;
@@ -87,4 +88,7 @@ public interface BuildManager {
      * @return
      */
      List<ProjectBuild> findStoryList(ProjectBuild projectBuild);
+
+    public Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId);
+    public Pager<ProductStory> findnoBuildStory(int start, int limit, Integer buildId);
 }

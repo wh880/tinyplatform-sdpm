@@ -17,12 +17,12 @@
     ##body end
     #end
 #end
-#@tinyForm("closeForm" TINY_CONTEXT_PATH+adminPath+"/project/task/closesave" "post" {"class":"test"})
+#@tinyForm("closeForm" TINY_CONTEXT_PATH+adminPath+"/project/task/cancelSave" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
     #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
-        <p class="titleName">${task?.taskName}>关闭</p>
+        <p class="titleName">${task?.taskName}>取消</p>
         #@elementItem()
             #@colLabel()备注&nbsp#end
             #@formControlDiv("col-8")

@@ -7,6 +7,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
@@ -70,9 +71,16 @@ public class BuildManagerImpl implements BuildManager {
 		return projectBuildDao.getProductLineTree(t);
 	}
     public List<ProjectBuild> findStoryList(ProjectBuild projectBuild) {
-        projectBuildDao.findBuildStory(projectBuild.getBuildId());
+//        projectBuildDao.findBuildStory(projectBuild.getBuildId());
         return projectBuildDao.query(projectBuild);
     }
 
+    public Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId) {
+        return projectBuildDao.findBuildStorys(start,limit,buildId);
+    }
+
+    public Pager<ProductStory> findnoBuildStory(int start, int limit, Integer buildId) {
+        return projectBuildDao.findnoBuildStorys(start,limit,buildId);
+    }
 
 }

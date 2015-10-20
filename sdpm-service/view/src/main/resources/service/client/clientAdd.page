@@ -4,9 +4,6 @@
 ##用于类似编辑页面的条目排版
 
 ##
-#macro delItemsdpm(doAction delId backUrl mapInfo)
-<a href="${backUrl}" data-removeid="${delId}" data-action="${doAction}" #getMapInfo(mapInfo)>#bodyContent</a>
-#end
 
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
 <style>

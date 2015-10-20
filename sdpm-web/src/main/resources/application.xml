@@ -78,6 +78,8 @@
             <class-path path="E:\workspace\project\sdpm\sdpm-product\view\src\main\resources"/>
             <class-path path="E:\TinyWork\sdpm\sdpm-product\view\src\main\resources"/>
             <class-path path="E:\TinyWork\sdpm\sdpm-productLine\view\src\main\resources"/>
+            <class-path path="E:\TinyWork\sdpm\sdpm-quality\view\src\main\resources"/>
+           
             <!--wll -->
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>

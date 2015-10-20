@@ -2,25 +2,18 @@ package org.tinygroup.sdpm.action.document;
 
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.print.Doc;
-import javax.print.DocFlavor;
-import javax.print.attribute.DocAttributeSet;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.fileupload.util.LimitedInputStream;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.codehaus.jackson.map.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -84,16 +77,29 @@ public class DocAction {
 				request.getSession().setAttribute("documentLibId",doclib.getDocLibId());
 			}
 		}	
-		List<OrgUser> userList = userService.findUserList(new OrgUser());
-		List<Product> productList = productService.findProductList(new Product());
-        List<Project> projectList = projectService.findList();
-        List<SystemModule> module = moduleService.findModuleList(new SystemModule());
-        List<DocumentDoclib> lib = docservice.findDoclibList(new DocumentDoclib());
+		
+		OrgUser user = new OrgUser();		
+		List<OrgUser> userList = userService.findUserList(user);
+		
+		Product product = new Product();
+		product.setDeleted(0);
+		List<Product> productList = productService.findProductList(product);
+		
+		Project project = new Project();
+		project.setProjectDeleted("0");
+		List<Project> projectList = projectService.findProjectList(project, null, null);
+		
+        List<SystemModule> moduleList = moduleService.findModuleList(new SystemModule());
+        
+        DocumentDoclib lib = new DocumentDoclib();
+        lib.setDocLibDeleted("0");
+        List<DocumentDoclib> libList = docservice.findDoclibList(lib);
+        
         model.addAttribute("userList", userList);
         model.addAttribute("productList", productList);
         model.addAttribute("projectList", projectList);
-        model.addAttribute("moduleList", module);
-        model.addAttribute("libList", lib);
+        model.addAttribute("moduleList", moduleList);
+        model.addAttribute("libList", libList);
 		request.getSession().setAttribute("libList",list);
 		request.getSession().setAttribute("moduleId", moduleId);
 		return "/document/document.page";
@@ -280,7 +286,7 @@ public class DocAction {
 		return "redirect:"+"/a/document";
 	}
 	
-	@RequiresPermissions(value={"docedit","doc-view-delete"})
+	@RequiresPermissions(value={"docdelete","doc-view-delete"},logical=Logical.AND)
 	@ResponseBody
 	@RequestMapping(value="/doc/delete")
 	public Map delDoc(Integer id)

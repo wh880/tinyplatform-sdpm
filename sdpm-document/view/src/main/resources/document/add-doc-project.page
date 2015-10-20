@@ -134,9 +134,9 @@
 			#@elementItem()
         			#@colLabel()文档类型#end
 					#@skinMinimal("mt-20")
-    					#labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="文件" "setType(this.value);" labelText="文件")
-    					#labelRadio1(rId="typeurl" rName="docType" rValue="链接" labelText="链接" "setType(this.value);")   								
-    					#labelRadio1(rId="typetext" rName="docType" rValue="网页" labelText="网页" "setType(this.value);")
+    					#labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="1" "setType(this.value);" labelText=getDict("docType","1") )
+    					#labelRadio1(rId="typeurl" rName="docType" rValue="2" labelText=getDict("docType","2") "setType(this.value);")   								
+    					#labelRadio1(rId="typetext" rName="docType" rValue="3" labelText=getDict("docType","3") "setType(this.value);")
 					
 					#end
         			#@validateDiv("col-2")#end
@@ -218,13 +218,13 @@
 /* Set doc type. */
 function setType(type)
 {
-	if(type == '链接')
+	if(type == '2')
 	{
 		$('#urlBox').removeClass('hidden');
 		$('#fileBox').addClass('hidden');
 		$('#contentBox').addClass('hidden');
 	}
-	else if(type == '网页')
+	else if(type == '3')
 	{
 		$('#urlBox').addClass('hidden');
 		$('#fileBox').addClass('hidden');

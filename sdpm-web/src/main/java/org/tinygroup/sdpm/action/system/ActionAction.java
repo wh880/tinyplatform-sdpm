@@ -54,6 +54,7 @@ public class ActionAction extends BaseController{
 			plan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 		}
 		*/
+		action.setActionObjectType("product");
 		Pager<SystemAction>  pagerSystemAction = actionService.queryPager(page, pagesize,ActionUtil.getActionDateCondition(choice), action, order, ordertype);
 
 		model.addAttribute("systemAction",pagerSystemAction);

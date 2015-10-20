@@ -88,7 +88,12 @@ public class TaskManagerImpl implements TaskManager {
     public Integer updateStartTask(ProjectTask task) {
         return taskDao.editstart(task);
     }
+
     public Integer updateCloseTask(ProjectTask task) {
+        return taskDao.updateColum(task);
+    }
+
+    public Integer updateColum(ProjectTask task) {
         return taskDao.updateColum(task);
     }
 

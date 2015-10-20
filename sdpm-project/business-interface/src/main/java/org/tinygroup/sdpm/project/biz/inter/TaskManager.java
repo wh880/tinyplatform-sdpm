@@ -114,6 +114,13 @@ public interface TaskManager {
      */
     Integer updateStartTask(ProjectTask task);
 
+    /**
+     * 公用更新，更新字段
+     *
+     * @param task
+     * @return
+     */
+    public Integer updateColum(ProjectTask task);
 
     /**
      * 根据id进行软删除用户

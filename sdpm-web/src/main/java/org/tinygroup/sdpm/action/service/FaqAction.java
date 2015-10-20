@@ -196,16 +196,6 @@ public class FaqAction extends BaseController {
         ServiceFaqType faq = new ServiceFaqType();
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<ServiceFaqType> faqs = faqTypeService.getFaqTypeList(faq);
-        if (check == null || !check.equals("n")) {
-            Map<String, Object> map1 = new HashMap<String, Object>();
-            map1.put("id", -1);
-            map1.put("pId", 0);
-            map1.put("open", true);
-            map1.put("add", true);
-            map1.put("edit", true);
-            map1.put("name", "所有问题");
-            list.add(map1);
-        }
 
         for (ServiceFaqType d : faqs) {
             Map<String, Object> map = new HashMap<String, Object>();

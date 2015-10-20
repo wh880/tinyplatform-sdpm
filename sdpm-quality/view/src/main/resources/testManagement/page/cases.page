@@ -2,6 +2,7 @@
 #import("/org/tinygroup/table/components/tinytable.component")
 
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
+#set(testCaseTableId="testCaseTableId")
 
 
 #set(name="qualityCases")
@@ -53,7 +54,7 @@
                         "icon-plus")建用例</a>*#
 				</span>
             #div(divClass="clearfix")
-            #include("/testManagement/page/mulsearch.page")
+            #include("/testManagement/page/mulsearchTestCase.page")
         #end
     ##operationbar end
     #end
@@ -61,14 +62,20 @@
 
 #@toggleBox({"class":"open"})
 	#@toggleLeft({"class":"aclass"})
-    	#@settoggleLeftTitle()用例名称#end
-	#@settoggleLeftBody("treeLeftbox")
-    	#include("/testManagement/page/moduleTree.page")
-    #end
-    #end
+		#@settoggleLeftTitle()${qualityProduct?.productName}#end
+			#@settoggleLeftBody("treeLeftbox")
+				#@zTreeList(call("link",adminPath+"/system/module/tree?moduleType=story&moduleRoot="+qualityProduct?.productId))
+					#setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
+					#zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/testCase?status="+status+"&currentPageId=5")
+					#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=story&moduleRoot="+qualityProduct?.productId)
+					#zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
+					#zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
+				#end
+			#end
+	#end
 
     #@toggleRight()
-#@tinyTable()
+#@tinyTable(testCaseTableId)
 #@div(divBaseClass="tinyheaderTools form-inline")
 			<div class="f col-3">
 						<input type="button" value="全选" class="btn btn-default btn-primary col-3" 
@@ -111,16 +118,16 @@
 #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/testCase/findPager?"+requestStatuString)
 #@thead()
 #@tr()
-#@tinyTh({"width":"6"})<input type="checkbox" name="" value="">#end
-#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-#@tinyTh({"class":"sorting","rel":"sortname"})P#end
-#@tinyTh({"class":"sorting","rel":"sortname"})用例标题#end
-#@tinyTh({"class":"sorting","rel":"sortname"})类型#end
-#@tinyTh({"class":"sorting","rel":"sortname","style":"color:#333"})创建#end
-#@tinyTh({"class":"sorting","rel":"sortname"})执行人#end
-#@tinyTh({"class":"sorting","rel":"sortname"})执行时间#end
-#@tinyTh({"class":"sorting","rel":"sortname"})结果#end
-#@tinyTh({"class":"sorting","rel":"sortname"})状态#end
+#@tinyTh({"width":"6"})<input type="checkbox" name="userid" value="">#end
+#@tinyTh({"class":"sorting","rel":"caseId"})ID#end
+#@tinyTh({"class":"sorting","rel":"priority"})P#end
+#@tinyTh({"class":"sorting","rel":"caseTitle"})用例标题#end
+#@tinyTh({"class":"sorting","rel":"caseType"})类型#end
+#@tinyTh({"class":"sorting","rel":"caseOpenedBy","style":"color:#333"})创建#end
+#@tinyTh({"class":"sorting","rel":"caseLastRunner"})执行人#end
+#@tinyTh({"class":"sorting","rel":"caseLastRunDate"})执行时间#end
+#@tinyTh({"class":"sorting","rel":"caseLastRunResult"})结果#end
+#@tinyTh({"class":"sorting","rel":"caseStatus"})状态#end
 #@tinyTh({"csortinglass":"sorting","rel":"sortname"})操作#end
 #end
 #end

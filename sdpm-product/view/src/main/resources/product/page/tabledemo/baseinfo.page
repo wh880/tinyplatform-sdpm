@@ -27,7 +27,7 @@
 		       			#end
 		       			#@tr()
 							#@td()状态#end
-		       				#@td()<font color="green">${product?.productStatus}</font>#end
+		       				#@td()<font color="green">${getDict("productStatus",product?.productStatus)}</font>#end
 		       			#end
 		       			#@tr()
 							#@td()访问控制#end
