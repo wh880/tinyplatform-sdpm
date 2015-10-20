@@ -18,16 +18,13 @@
                         var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
                         sele.append(em);
                     }
-                    console.log(value);
+                   ## console.log(value);
 					##alert(value);
-                    if(!value) {
-                    	console.log('test')
-                    	
+                    if(value!=null) {                   	
                         sele.val(value).trigger("change");
                     }else {               
                         sele.val(data[0][opKey]).trigger("change");
                     }
-                    console.log(sele,sele.val())
                 },
                 error: function(res){
                   ##  alert("失败");
@@ -158,19 +155,19 @@
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
-                	  	<script type="text/javascript">             	  		
-	                            $("#${sid}").on("change",function(){
-	                            var dId = $("select[name=docLibId]").val();
-	                             if(dId == '1'){
-	                                var pId = $("#${sid}  option:selected").val();	
-	                                if(pId == undefined){
-	                                	var pId = ${doc?.docProduct?:0};	                                	
-	                                }                           
-	                                ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/moduleByProduct?productId="+pId,${doc?.docModule?:0});
-	                            	  }
-	                            })
-                           
-                        </script>
+	                	  	<script type="text/javascript">             	  		
+		                            $("#${sid}").on("change",function(){
+		                            var dId = $("select[name=docLibId]").val();
+		                             if(dId == '1'){
+		                                var pId = $("#${sid}  option:selected").val();	
+		                                if(pId == undefined){
+		                                	var pId = ${doc?.docProduct?:0};	                                	
+		                                }                           
+		                                ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/moduleByProduct?productId="+pId,${doc?.docModule?:0});
+		                            	  }
+		                            })
+	                           
+	                        </script>
                 	  #end                	 
                 	  #end
                 	  #end
@@ -193,7 +190,7 @@
         <div class="col-12">
          <div class="col-2 text-r"><label>文档类型&nbsp</label></div>
          	<div class="col-4">
-          		${doc?.docType}
+          		${getDict("docType",doc?.docType)}
               	</div>
        		</div>
      #end
