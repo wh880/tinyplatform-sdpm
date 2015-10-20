@@ -25,32 +25,30 @@ import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
-import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
-import static org.tinygroup.tinysqldsl.select.Join.*;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 
 @LogClass("build")
 @Repository
@@ -286,17 +284,17 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 		});
 
 	}
-	
+
 	public List<ProductAndLine> getProductLineTree(ProductLine t){
-		
+
 		Select select = select(PRODUCT_LINETABLE.PRODUCT_LINE_ID,PRODUCT_LINETABLE.PRODUCT_LINE_NAME,PRODUCTTABLE.PRODUCT_ID,PRODUCTTABLE.PRODUCT_NAME,PROJECT_BUILDTABLE.BUILD_ID,PROJECT_BUILDTABLE.BUILD_NAME).
 				from(PRODUCT_LINETABLE).join(leftJoin(PRODUCTTABLE, PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(PRODUCTTABLE.PRODUCT_LINE_ID))).join(leftJoin(PROJECT_BUILDTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PROJECT_BUILDTABLE.BUILD_PRODUCT))).
 				where(
-						and(	
+						and(
 								PRODUCT_LINETABLE.PRODUCT_LINE_ID.isNotNull(),
 								PRODUCTTABLE.PRODUCT_ID.isNotNull(),
 								PROJECT_BUILDTABLE.BUILD_ID.isNotNull(),
-								
+
 								PRODUCT_LINETABLE.COMPANY_ID.eq(t.getCompanyId()),
 								PRODUCT_LINETABLE.DEPT_ID.eq(t.getDeptId()),
 								PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.eq(t.getProductLineRoot()),
@@ -318,22 +316,25 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 		return productLines;
 	}
 
-	public List<ProjectStory> findBuildStory(Integer buildId){
+	public Pager<ProductStory> findBuildStorys(int start, int limit, Integer buildId, final OrderBy... orderBies) {
 		Select select =select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
 				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
 		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
-		String[] storys = test.getBuildStories().split(",");
-		int[] array = new int[storys.length];
-		for(int i=0;i<storys.length;i++){
-			array[i]=Integer.parseInt(storys[i]);
-		}
-			List<ProjectStory>projectStorys =new ArrayList<ProjectStory>();
-//		for (int i = 0; storys != null && i < storys.length; i++) {
-			Select selects =select(PRODUCT_STORYTABLE.ALL).from(PRODUCT_STORYTABLE)
-					.where(PRODUCT_STORYTABLE.BUILD_ID.in(array));
-			projectStorys = getDslSession().fetchList(selects,ProjectStory.class);
-//		}
-		return projectStorys;
+		final String[] storys = test.getBuildStories().split(",");
+//			List<ProductStory>productStories =new ArrayList<ProductStory>();
+//			Select selects =select(PRODUCT_STORYTABLE.ALL).from(PRODUCT_STORYTABLE)
+//					.where(PRODUCT_STORYTABLE.BUILD_ID.in(storys));
+//		productStories = getDslSession().fetchList(selects,ProductStory.class);
+		ProductStory productStory = new ProductStory();
+		return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
+
+			public Select generate(ProductStory t) {
+				Select select = MysqlSelect.selectFrom(PRODUCT_STORYTABLE).where(
+						PRODUCT_STORYTABLE.BUILD_ID.in(storys));
+				return addOrderByElements(select, orderBies);
+			}
+		});
+//		return productStories;
 
 //		Select select1 = select(PROJECT_BUILDTABLE.ALL, PRODUCT_STORY_SPECTABLE.STORY_SPEC).from(PROJECT_BUILDTABLE)
 //				.join(Join.leftJoin(

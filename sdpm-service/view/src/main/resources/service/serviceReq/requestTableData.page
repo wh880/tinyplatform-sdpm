@@ -22,14 +22,15 @@
             #set(m1=menuManager.getMenu("request-close"))
             #if(m1)
                 #@aModal(
-                    "#myModal" m1.name "500" "200" m1.icon adminPath+m1.href+"?id="+var?.clientRequestId)
+                    "#myModal" aModalTitle="关闭" "500" "200" m1.icon adminPath+m1.href+
+                    "?id="+var?.clientRequestId titleName="关闭")
                 #end
             #end
 
             #set(m2=menuManager.getMenu("request-delete"))
             #if(m2)
                 #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m2.href var?.clientRequestId)<i
-                        class=${m2.icon}></i>#end
+                        class=${m2.icon}title="删除"></i>#end
             #end
 
         #end
