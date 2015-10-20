@@ -90,4 +90,5 @@ public interface BuildManager {
      List<ProjectBuild> findStoryList(ProjectBuild projectBuild);
 
     public Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId);
+    public Pager<ProductStory> findnoBuildStory(int start, int limit, Integer buildId);
 }

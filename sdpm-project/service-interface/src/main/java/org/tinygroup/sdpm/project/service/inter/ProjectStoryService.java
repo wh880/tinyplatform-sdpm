@@ -88,4 +88,7 @@ public interface ProjectStoryService {
      * @return
      */
     public Pager<ProductStory> findStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
+
+
+    public Pager<ProductStory> findnoStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
 }
