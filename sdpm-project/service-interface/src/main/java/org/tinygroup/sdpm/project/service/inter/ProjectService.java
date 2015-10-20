@@ -75,8 +75,8 @@ public interface ProjectService {
 	 * 分页查询(排序)
 	 * @param page
 	 * @param pagesize
-	 * @param productLine
-	 * @param order
+     * @param project
+     * @param order
 	 * @param ordertype
 	 * @return
 	 */
