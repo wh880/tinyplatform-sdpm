@@ -16,9 +16,9 @@ ${casepager?.totalCount+1}
 						#@td()${c?.caseType}#end
 						#@td()${c?.caseOpenedBy}#end
 						#@td()${c?.caseLastRunner}#end
-						#@td()${c?.caseLastRunDate}#end
-						#@td()${c?.caseLastRunResult}#end
-						#@td()${c?.caseStatus}#end
+						#@td()${c?.caseLastRunDate?formatDate(c?.caseLastRunDate,'yyyy年MM月dd日'):""}#end
+						#@td()${getDict("caseResule",c?.caseLastRunResult)}#end
+						#@td()${getDict("caseStatus",c?.caseStatus)}#end
 						 #@td()
                          	#foreach(m:menuManager.getScopeMenus("testcase-op"))
                          		#if(m.id=="teditioncase"||m.id=="tproposecase")
@@ -27,7 +27,7 @@ ${casepager?.totalCount+1}
             						#if(m.id=="texecution"||m.id=="tresult")
             							#iconOperations("#myModal" m.icon m.name "865" "400" m.href+"?caseId="+c?.caseId "ml-1")
             						#else
-										#@tinyTableItemRemove(m.href var)
+										#@tinyTableItemRemove(m.href c?.caseId)
 											<i class="${m.icon}" title="删除"></i>
 										#end
 									#end
