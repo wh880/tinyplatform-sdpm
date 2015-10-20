@@ -1,9 +1,7 @@
+
 ##<span id="showsearchmore">搜索</span>
-<style>#searchform.searchformshow {
-    display: block
-}</style>
-<form method="post" action="${TINY_CONTEXT_PATH+adminPath}/service/list" id="searchform"
-      class="form-condensed searchformshow">
+<form method="post" id="${slaTableId}form"
+      class="form-condensed searchform">
     <div class="hide">
         <select id="operatortemp">
             <option value="=">=</option>
@@ -17,21 +15,12 @@
             <option value="notinclude">不包含</option>
             <option value="belong">从属于</option>
         </select>
-
-
-        <select id="productName">
+        <select id="clientId">
             <option value="" selected="selected"></option>
-            <option value="0">支付宝</option>
-            <option value="1">财付通</option>
-            <option value="2">余额宝</option>
-            <option value="3">陆金所</option>
-            <option value="null">空</option>
-        </select>
-        <select id="clientName">
-            <option value="" selected="selected"></option>
-            <option value="0">恒生电子</option>
-            <option value="1">诺基亚</option>
-            <option value="2">海康威视</option>
+            <option value="1">恒生电子</option>
+            <option value="2">华为</option>
+            <option value="3">大华股份</option>
+            <option value="4">海康威视</option>
             <option value="null">空</option>
         </select>
         <select id="slaStatus">
@@ -41,7 +30,6 @@
             <option value="2">到期</option>
             <option value="3">作废</option>
             <option value="4">关闭</option>
-            <option value="null">空</option>
         </select>
 
     </div>
@@ -55,45 +43,49 @@
                         <td class="text-right w-60px"><span id="searchgroup1"><strong>第一组</strong></span><input
                                 type="hidden" name="andOr1" id="andOr1" value="AND">
                         </td>
-                        <td class="w-90px"><select name="field1" id="field1" class="form-control "></select>
+                        <td class="w-90px"><select name="infos[0].field" id="field1" class="form-control "></select>
                         </td>
-                        <td class="w-70px"><select name="operator1" id="operator1" class="form-control "></select>
+                        <td class="w-70px"><select name="infos[0].operate" id="operator1"
+                                                   class="form-control "></select>
                         </td>
                         <td id="valueBox1"></td>
                     </tr>
                     <tr id="searchbox2" class="">
-                        <td class="text-right w-60px" valign="middle"><select name="andOr2" id="andOr2"
+                        <td class="text-right w-60px" valign="middle"><select name="infos[1].relation" id="andOr2"
                                                                               class="form-control ">
                             <option value="and" selected="selected">并且</option>
                             <option value="or">或者</option>
                         </select>
                         </td>
-                        <td class="w-90px"><select name="field2" id="field2" class="form-control ">
+                        <td class="w-90px"><select name="infos[1].field" id="field2" class="form-control ">
                         </select>
                         </td>
-                        <td class="w-70px"><select name="operator2" id="operator2" class="form-control "></select>
+                        <td class="w-70px"><select name="infos[1].operate" id="operator2"
+                                                   class="form-control "></select>
                         </td>
                         <td id="valueBox2"><input type="text" name="value2" id="value2" value=""
                                                   class="form-control   ">
                         </td>
                     </tr>
                     <tr id="searchbox3" class="">
-                        <td class="text-right w-60px"><select name="andOr3" id="andOr3" class="form-control ">
+                        <td class="text-right w-60px"><select name="infos[2].relation" id="andOr3"
+                                                              class="form-control ">
                             <option value="and" selected="selected">并且</option>
                             <option value="or">或者</option>
                         </select>
                         </td>
-                        <td class="w-90px"><select name="field3" id="field3" class="form-control ">
+                        <td class="w-90px"><select name="infos[2].field" id="field3" class="form-control ">
                         </select>
                         </td>
-                        <td class="w-70px"><select name="operator3" id="operator3" class="form-control "></select>
+                        <td class="w-70px"><select name="infos[2].operate" id="operator3"
+                                                   class="form-control "></select>
                         </td>
                         <td id="valueBox3"></td>
                     </tr>
                     </tbody>
                 </table>
             </td>
-            <td class="text-center nobr w-90px form-inline"><select name="groupAndOr" id="groupAndOr"
+            <td class="text-center nobr w-90px form-inline"><select name="groupOperate" id="groupAndOr"
                                                                     class="form-control w-60px">
                 <option value="and" selected="selected">并且</option>
                 <option value="or">或者</option>
@@ -103,60 +95,59 @@
                 <table class="active-disabled">
                     <tbody>
                     <tr id="searchbox4" class="">
-                        <td class="text-right w-60px"><span id="searchgroup2"><strong>第二组</strong></span><input
-                                type="hidden" name="andOr4" id="andOr4" value="AND">
+                        <td class="text-right w-60px">
+                            <span id="searchgroup2"><strong>第二组</strong></span>
+                            <input type="hidden" name="andOr4" id="andOr4" value="AND">
                         </td>
-                        <td class="w-90px"><select name="field4" id="field4" class="form-control ">
-                        </select>
+                        <td class="w-90px">
+                            <select name="infos[3].field" id="field4" class="form-control ">
+                            </select>
                         </td>
-                        <td class="w-70px"><select name="operator4" id="operator4" class="form-control "></select>
+                        <td class="w-70px">
+                            <select name="infos[3].operate" id="operator4" class="form-control "></select>
                         </td>
                         <td id="valueBox4"></td>
                     </tr>
                     <tr id="searchbox5" class="">
-                        <td class="text-right w-60px"><select name="andOr5" id="andOr5" class="form-control ">
-                            <option value="and" selected="selected">并且</option>
-                            <option value="or">或者</option>
-                        </select>
+                        <td class="text-right w-60px">
+                            <select name="infos[4].relation" id="andOr5" class="form-control ">
+                                <option value="and" selected="selected">并且</option>
+                                <option value="or">或者</option>
+                            </select>
                         </td>
-                        <td class="w-90px"><select name="field5" id="field5" class="form-control ">
-                        </select>
+                        <td class="w-90px">
+                            <select name="infos[4].field" id="field5" class="form-control "></select>
                         </td>
-                        <td class="w-70px"><select name="operator5" id="operator5" class="form-control "></select>
+                        <td class="w-70px">
+                            <select name="infos[4].operate" id="operator5" class="form-control "></select>
                         </td>
                         <td id="valueBox5"></td>
                     </tr>
                     <tr id="searchbox6" class="">
-                        <td class="text-right w-60px"><select name="andOr6" id="andOr6" class="form-control ">
-                            <option value="and" selected="selected">并且</option>
-                            <option value="or">或者</option>
-                        </select>
+                        <td class="text-right w-60px">
+                            <select name="infos[5].relation" id="andOr6" class="form-control ">
+                                <option value="and" selected="selected">并且</option>
+                                <option value="or">或者</option>
+                            </select>
                         </td>
-                        <td class="w-90px"><select name="field6" id="field6" class="form-control ">
-                        </select>
+                        <td class="w-90px">
+                            <select name="infos[5].field" id="field6" class="form-control "></select>
                         </td>
-                        <td class="w-70px"><select name="operator6" id="operator6" class="form-control "></select>
+                        <td class="w-70px">
+                            <select name="infos[5].operate" id="operator6" class="form-control "></select>
                         </td>
-                        <td id="valueBox6">
-                        </td>
+                        <td id="valueBox6"></td>
                     </tr>
                     </tbody>
                 </table>
             </td>
             <td class="w-180px">
                 <div class="btn-group">
-                    <button type="submit" id="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
+                    <button type="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
                     <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
-                    #@aModal("#myModal" "请输入查询标题（保存之前请先查询）：" "600" "170" "btn radius btn-primary btn-sm"
-                        "/service/sla/searchSave.pagelet")
-                        <div style="margin: 4px">
-                            保存
-                        </div>
-                    #end
-                ## <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>
+                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>
                 </div>
             </td>
-        ##新增搜索框里面的“保存”和“我的查询”
             <td>
                 <div style="width:105px;margin-top:3px;">
                     #@Tselect2F()
@@ -166,12 +157,14 @@
                             <option value="o2o">o2o系统</option>
                         #end
                     ##填写任意内容，侦听需重新填加 A侦听已内置
+                        #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
                     #end
                 </div>
             </td>
         </tr>
         </tbody>
     </table>
+
     <div id="moreOrLite">
         <a id="searchmore" href="javascript:;"><i class="icon-double-angle-down icon-2x"></i></a>
         <a id="searchlite" href="javascript:;"><i class="icon-double-angle-up icon-2x"></i></a>
@@ -181,9 +174,9 @@
 <script type="text/javascript">
     <!--
     $(function () {
-        $("#showsearchmore").click(function () {
-            $("#searchform").toggleClass("showmore");
-        });
+
+        $(".searchform").toggleClass("showmore");
+
         $("#searchmore").click(function () {
             $("#searchlite").css("display", "block");
             $(this).hide();
@@ -195,18 +188,14 @@
             $("#searchbox5,#searchbox6,#searchbox2,#searchbox3").hide();
         });
         var itemlist = []
+
         itemlist.push({
-            "name": "clientName",
+            "name": "serviceSla.clientId",
             "title": "客户名称",
             "operator": "=",
-            "value": "clientname"
+            "value": "cliId"
         });
-        itemlist.push({
-            "name": "productName",
-            "title": "产品名称",
-            "operator": "=",
-            "value": "productname"
-        });
+
         itemlist.push({
             "name": "slaStatus",
             "title": "服务级别协议",
@@ -257,24 +246,25 @@
             "operator": "=",
             "value": "date"
         });
+
         function setValueBox(index, itemIndex) {
             $("#operator" + itemIndex).val(itemlist[index]["operator"]);
             var sIndex = itemIndex - 1;
             switch (itemlist[index]["value"]) {
                 case "text":
-                    $("#valueBox" + itemIndex).html('<input type="text" name="value' + sIndex + '" id="value' + itemIndex + '" value="" class="form-control">');
-                    break;
-                case "productname":
-                    $("#valueBox" + itemIndex).html($('<select name="value' + sIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#productName").html()));
-                    break;
-                case "clientname":
-                    $("#valueBox" + itemIndex).html($('<select name="value' + sIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#clientName").html()));
+                    $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control">');
                     break;
                 case "slastatus":
-                    $("#valueBox" + itemIndex).html($('<select name="value' + sIndex + '" id="value' + itemIndex + '" class="form-control">').html($("#slaStatus").html()));
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#slaStatus").html()));
+                    break;
+//                case "proId":
+//                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#productId").html()));
+//                    break;
+                case "cliId":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#clientId").html()));
                     break;
                 case "date":
-                    $("#valueBox" + itemIndex).html('<input type="text" name="value' + sIndex + '" id="value' + itemIndex + '" value="" class="form-control dateinput">');
+                    $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control dateinput">');
                     break;
             }
         }
@@ -299,12 +289,18 @@
             });
 
         });
-        $("#searchform").on("click", "input[class*=dateinput]", function () {
+        $(".searchform").on("click", "input[class*=dateinput]", function () {
             WdatePicker({
                 startDate: '%y-%M-01 00:00:00', dateFmt: "yyyy-MM-dd"
             })
         });
+
+        $("#${slaTableId}form").on("submit", function () {
+            $("#${slaTableId}").trigger("initnav");
+            return false;
+
+        });
+
     });
     //-->
 </script>
-
