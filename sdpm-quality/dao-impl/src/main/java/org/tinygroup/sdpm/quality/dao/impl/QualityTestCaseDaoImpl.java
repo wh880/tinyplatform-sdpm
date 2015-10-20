@@ -16,6 +16,7 @@
 
 package org.tinygroup.sdpm.quality.dao.impl;
 
+import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
@@ -24,9 +25,7 @@ import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
-
 import java.util.List;
 
 import org.tinygroup.tinysqldsl.Delete;
@@ -38,12 +37,12 @@ import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-
 import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
@@ -221,8 +220,57 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
 		return getDslTemplate().queryPager(start, limit, qualityTestCase, false, new SelectGenerateCallback<QualityTestCase>() {
 
 			public Select generate(QualityTestCase t) {
-				Select select = MysqlSelect.selectFrom(QUALITY_TEST_CASETABLE).where(
-				and(
+				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("quality_test_case.*,o.org_user_account as caseOpenedName,o2.org_user_account as caseLastRunnerName")).
+						from(FragmentSelectItemSql.fragmentFrom("quality_test_case left join org_user o on o.org_user_id = quality_test_case.case_opened_by left join org_user o2 on o2.org_user_id = quality_test_case.case_last_runner"))
+						.where(and(
+								
+					QUALITY_TEST_CASETABLE.PRODUCT_ID.eq(t.getProductId()),
+					QUALITY_TEST_CASETABLE.MODULE_ID.eq(t.getModuleId()),
+					QUALITY_TEST_CASETABLE.CASE_PATH.eq(t.getCasePath()),
+					QUALITY_TEST_CASETABLE.STORY_ID.eq(t.getStoryId()),
+					QUALITY_TEST_CASETABLE.STORY_VERSION.eq(t.getStoryVersion()),
+					QUALITY_TEST_CASETABLE.CASE_TITLE.eq(t.getCaseTitle()),
+					QUALITY_TEST_CASETABLE.CASE_PRECONDITION.eq(t.getCasePrecondition()),
+					QUALITY_TEST_CASETABLE.CASE_KEYWORDS.eq(t.getCaseKeywords()),
+					QUALITY_TEST_CASETABLE.PRIORITY.eq(t.getPriority()),
+					QUALITY_TEST_CASETABLE.CASE_TYPE.eq(t.getCaseType()),
+					QUALITY_TEST_CASETABLE.CASE_STAGE.eq(t.getCaseStage()),
+					QUALITY_TEST_CASETABLE.CASE_RUNWAY.eq(t.getCaseRunway()),
+					QUALITY_TEST_CASETABLE.CASE_SCRIPTED_BY.eq(t.getCaseScriptedBy()),
+					QUALITY_TEST_CASETABLE.CASE_SCRIPTED_DATE.eq(t.getCaseScriptedDate()),
+					QUALITY_TEST_CASETABLE.SCRIPT_STATUS.eq(t.getScriptStatus()),
+					QUALITY_TEST_CASETABLE.SCRIPT_LOCATION.eq(t.getScriptLocation()),
+					QUALITY_TEST_CASETABLE.CASE_STATUS.eq(t.getCaseStatus()),
+					QUALITY_TEST_CASETABLE.CASE_FREQUENCY.eq(t.getCaseFrequency()),
+					QUALITY_TEST_CASETABLE.CASE_ORDER.eq(t.getCaseOrder()),
+					QUALITY_TEST_CASETABLE.CASE_OPENED_BY.eq(t.getCaseOpenedBy()),
+					QUALITY_TEST_CASETABLE.CASE_OPENED_DATE.eq(t.getCaseOpenedDate()),
+					QUALITY_TEST_CASETABLE.CASE_LAST_EDITED_BY.eq(t.getCaseLastEditedBy()),
+					QUALITY_TEST_CASETABLE.CASE_LAST_EDITED_DATE.eq(t.getCaseLastEditedDate()),
+					QUALITY_TEST_CASETABLE.CASE_VERSION.eq(t.getCaseVersion()),
+					QUALITY_TEST_CASETABLE.LINK_CASE.eq(t.getLinkCase()),
+					QUALITY_TEST_CASETABLE.CASE_FROM_BUG.eq(t.getCaseFromBug()),
+					QUALITY_TEST_CASETABLE.DELETED.eq(t.getDeleted()),
+					QUALITY_TEST_CASETABLE.CASE_LAST_RUNNER.eq(t.getCaseLastRunner()),
+					QUALITY_TEST_CASETABLE.CASE_LAST_RUN_DATE.eq(t.getCaseLastRunDate()),
+					QUALITY_TEST_CASETABLE.CASE_LAST_RUN_RESULT.eq(t.getCaseLastRunResult())));
+			return addOrderByElements(select, orderArgs);
+			}
+		});
+	}
+	
+	public Pager<QualityTestCase> queryPagerRel(int start,int limit ,QualityTestCase qualityTestCase , final String condition,final OrderBy... orderArgs) {
+		if(qualityTestCase==null){
+			qualityTestCase=new QualityTestCase();
+		}
+		return getDslTemplate().queryPager(start, limit, qualityTestCase, false, new SelectGenerateCallback<QualityTestCase>() {
+
+			public Select generate(QualityTestCase t) {
+				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("quality_test_case.*,o.org_user_account as caseOpenedName,o2.org_user_account as caseLastRunnerName")).
+						from(FragmentSelectItemSql.fragmentFrom("quality_test_case left join org_user o on o.org_user_id = quality_test_case.case_opened_by left join org_user o2 on o2.org_user_id = quality_test_case.case_last_runner"))
+						.where(and(
+								
+					fragmentCondition(condition),
 					QUALITY_TEST_CASETABLE.PRODUCT_ID.eq(t.getProductId()),
 					QUALITY_TEST_CASETABLE.MODULE_ID.eq(t.getModuleId()),
 					QUALITY_TEST_CASETABLE.CASE_PATH.eq(t.getCasePath()),
@@ -391,6 +439,9 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
 	}
 
 	private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+		if(orderBies.length==0||orderBies==null){
+			return select;
+		}
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
 			OrderByElement tempElement = null;

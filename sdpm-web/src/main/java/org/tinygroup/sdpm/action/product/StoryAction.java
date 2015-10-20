@@ -282,8 +282,10 @@ public class StoryAction extends BaseController{
 	   		 stringBuffer.append("in (");
 	   	     ModuleUtil.getConditionByModule(stringBuffer, module, moduleService);
 	   	     stringBuffer.append(")");
-	   	     
-    		condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
+	   	     if(!(condition==null||"".equals(condition))){
+	   	    	condition+=" and ";
+	   	     }
+    		condition +=  NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
     	}
     	story.setModuleId(null);
     	Pager<ProductStory> p = storyService.findStoryPager(pagesize*(page - 1),pagesize,story, condition,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);

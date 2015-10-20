@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.quality.biz.inter.TestCaseManager;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
@@ -65,7 +68,24 @@ public class TestCaseManagerImpl implements TestCaseManager {
 		if(StringUtil.isBlank(sortName)){
 			return testcasedao.queryPager(start, limit, testcase);
 		}
-		OrderBy order = new OrderBy(sortName, asc);
+		OrderBy order = new OrderBy(NameUtil.resolveNameDesc(sortName), asc);
 		return testcasedao.queryPager(start, limit, testcase, order);
 	}
+	
+	public Pager<QualityTestCase> findPagerRel(Integer start,Integer limit,QualityTestCase testcase, String statusCondition, SearchInfos conditions,
+            String groupOperate,String columnName,boolean asc){
+		
+        String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
+        condition = condition != null && !"".equals(condition) ? (statusCondition != null && !"".equals(statusCondition) ? condition + " and "
+                + statusCondition : condition)
+                : statusCondition;
+        OrderBy orderBy = null;
+        if (columnName != null && !"".equals(columnName)) {
+            orderBy = new OrderBy("quality_test_case."+NameUtil.resolveNameDesc(columnName), asc);
+        }
+        if (condition != null && !"".equals(condition)) {
+            return testcasedao.queryPagerRel(start, limit, testcase, condition, orderBy);
+        }
+        return testcasedao.queryPager(start, limit, testcase, orderBy);
+    }
 }
