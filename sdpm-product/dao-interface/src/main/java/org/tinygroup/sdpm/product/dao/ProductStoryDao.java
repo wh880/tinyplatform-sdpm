@@ -52,4 +52,12 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 	
 	List<StoryCount> userStoryCount(ProductStory t,String field);
 
+	/**
+	 * 计算状态位
+	 * @param productId
+	 * @param status
+     * @return
+     */
+	int countStatus(int productId,int status);
+
 }

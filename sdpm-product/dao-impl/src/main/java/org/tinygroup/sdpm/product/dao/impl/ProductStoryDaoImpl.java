@@ -24,8 +24,10 @@ import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MO
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
+
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
+
 import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
@@ -692,8 +694,14 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			return null;
 		}
 	}
-	
-	
+
+	public int countStatus(int productId, int status) {
+		Select select= MysqlSelect.select(PRODUCT_STORYTABLE.STORY_STATUS.count()).from(PRODUCT_STORYTABLE).where(PRODUCT_STORYTABLE.PRODUCT_ID.eq(productId)
+		.and(PRODUCT_STORYTABLE.STORY_STATUS.eq(status)));
+		return getDslTemplate().getDslSession().fetchOneResult(select,null);
+	}
+
+
 	public List<StoryCount> fieldStoryCount(ProductStory t,String field) {
 		
 		try {
