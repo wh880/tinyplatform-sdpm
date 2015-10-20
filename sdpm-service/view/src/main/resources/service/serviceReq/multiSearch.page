@@ -235,7 +235,7 @@
             "value": "mod"
         });
         itemlist.push({
-            "name": "clientId",
+            "name": "serviceRequest.clientId",
             "title": "客户名称",
             "operator": "=",
             "value": "cliId"
