@@ -63,6 +63,9 @@ public class DocAction {
 	@Autowired
 	private UserService userService;
 	
+	/*
+	 * 主页action。session中存放了文档库id（documentLibId）
+	 */
 	@RequestMapping("")
 	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange,String tree, String moduleId)
 	{	
@@ -105,6 +108,9 @@ public class DocAction {
 		return "/document/document.page";
 	}
 	
+	/*
+	 * 首页查出数据的action
+	 */
 	@RequestMapping(value="/doc/list")
 	public String docList(String moduleId, HttpServletRequest request,Integer page,Integer limit,String order,String ordertype,DocumentDoc doc,Model model ,String groupOperate, SearchInfos searchInfos)
 	{	
@@ -148,6 +154,9 @@ public class DocAction {
 		return "/data/datalist.pagelet";
 	}
 	
+	/*
+	 * 添加文档的跳转的方法
+	 */
 	@RequiresPermissions(value={"add-doc"})
 	@RequestMapping(value="/doc/add")
 	public String createDoc(HttpServletRequest request ,Model model)
@@ -175,6 +184,9 @@ public class DocAction {
 		}
 	}
 	
+	/*
+	 * 添加文档的保存方法
+	 */
 	@RequestMapping(value="/doc/addSave",method=RequestMethod.POST)
 	public String addSave(HttpServletRequest request,SystemAction systemAction,DocumentDoc doc,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,Model model) throws IOException{	
 		List<Product> product = productService.findProductList(new Product());
@@ -204,6 +216,9 @@ public class DocAction {
 		return "redirect:"+"/a/document?docChange=true&moduleId="+request.getSession().getAttribute("moduleId");
 	}
 	
+	/*
+	 * 编辑文档的跳转的方法
+	 */
 	@RequiresPermissions(value={"docedit"})
 	@RequestMapping(value="/doc/edit")
 	public String editDoc(HttpServletRequest request,Model model,Integer docId)
@@ -223,6 +238,9 @@ public class DocAction {
 		return "/document/doc-edit.page";
 	}
 	
+	/*
+	 * 编辑文档的保存的方法
+	 */
 	@RequestMapping(value="/doc/editSave",method=RequestMethod.POST)
 	public String editSave(DocumentDoc doc,SystemAction systemAction,Model model){
 		DocumentDoc documentDoc = docservice.findDocById(doc.getDocId());
@@ -241,6 +259,9 @@ public class DocAction {
 		return "redirect:"+"/a/document?docChange=true";
 	}
 	
+	/*
+	 *查看文档基本信息
+	 */
 	@RequestMapping("/doc/view")
 	public String docView(HttpServletRequest request,DocumentDoc doc,SystemProfile systemProfile,Model model,Integer docid){
 		
@@ -257,6 +278,9 @@ public class DocAction {
 		return "/document/doc-view.page";
 	}
 	
+	/*
+	 * 文档基本信息右边的页面
+	 */
 	@RequestMapping("/doc/viewInfo")
 	public String viewInfo(HttpServletRequest request, Integer docId, Model model){	
 		DocumentDoc doc = docservice.findDocById(docId);
@@ -274,6 +298,9 @@ public class DocAction {
 		return "/document/basic-info.pagelet";
 	}
 	
+	/*
+	 * 添加文档和编辑文档的保存方法
+	 */
 	@RequestMapping(value="/doc/save",method=RequestMethod.POST)
 	public String saveDoc(HttpServletRequest request,DocumentDoc doc,Model model)
 	{
@@ -286,6 +313,9 @@ public class DocAction {
 		return "redirect:"+"/a/document";
 	}
 	
+	/*
+	 * 单条删除文档的action
+	 */
 	@RequiresPermissions(value={"docdelete","doc-view-delete"},logical=Logical.AND)
 	@ResponseBody
 	@RequestMapping(value="/doc/delete")
@@ -298,6 +328,9 @@ public class DocAction {
 	    return map;
 	}
 	
+	/*
+	 * 批量删除文档的action
+	 */
 	@RequiresPermissions(value={"batch-delete"})
 	@ResponseBody
 	@RequestMapping(value="/doc/batchDelete")
@@ -322,6 +355,9 @@ public class DocAction {
 	    return map;
 	}
 	
+	/*
+	 * 添加文档库的action
+	 */
 	@RequiresPermissions(value={"doclib-add"})
 	@RequestMapping(value="/doclib/toAdd")
 	public String addDocLib()
@@ -329,6 +365,9 @@ public class DocAction {
 		return "/document/add-doclib.pagelet";
 	}
 	
+	/*
+	 * 编辑文档库 的action
+	 */
 	@RequiresPermissions("doclib-edit")
 	@RequestMapping(value="/doclib/edit")
 	public String editDoclib(HttpServletRequest request,DocumentDoclib doclib,Model model)
@@ -341,6 +380,9 @@ public class DocAction {
 		return "/document/doclib-edit.pagelet";
 	}
 	
+	/*
+	 * 文档库编辑和保存的保存的action
+	 */
 	@RequestMapping(value="/doclib/save")
 	public String saveDoclib(HttpServletRequest request,DocumentDoclib doclib)
 	{
@@ -352,7 +394,9 @@ public class DocAction {
 		}	
 		return "redirect:"+"/a/document?change=true";
 	}
-	
+	/*
+	 * 撒谎年初文档库的action
+	 */
 	@RequiresPermissions(value={"doclib-delete"})
 	@ResponseBody
 	@RequestMapping(value="/doclib/delete")
