@@ -34,5 +34,17 @@
             <dictItem key="8" value="已发布" sort="9"/>
             <dictItem key="9" value="关闭" sort="10"/>
         </dictNodeEntry>
+
+         <dictNodeEntry name="productStatus" title="产品状态">
+             <dictItem key="0" value="新建" sort="1"/>
+             <dictItem key="1" value="草稿" sort="2"/>
+             <dictItem key="2" value="激活" sort="3"/>
+             <dictItem key="3" value="已批准" sort="4"/>
+             <dictItem key="4" value="开发中" sort="5"/>
+             <dictItem key="5" value="已变更" sort="6"/>
+             <dictItem key="6" value="维护中" sort="7"/>
+             <dictItem key="7" value="混合模式" sort="8"/>
+             <dictItem key="8" value="已关闭" sort="9"/>
+         </dictNodeEntry>
     </dictNodeEntry>
 </dictNodeEntries>
