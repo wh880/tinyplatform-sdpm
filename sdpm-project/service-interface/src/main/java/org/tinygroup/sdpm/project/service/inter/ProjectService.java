@@ -1,10 +1,10 @@
 package org.tinygroup.sdpm.project.service.inter;
 
 
-import java.util.List;
-
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 /**
  * Created by shenly13343 on 2015-09-17.
@@ -63,7 +63,7 @@ public interface ProjectService {
     
     /**
      * 对象查询(排序)
-     * @param productLine
+     * @param project
      * @param order
      * @param ordertype
      * @return
