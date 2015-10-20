@@ -17,7 +17,7 @@
                    onclick="selectAllNullorReserve('idCheck','全选');"/>
             <input type="button" value="反选" class="btn btn-default btn-primary"
                    onclick="selectAllNullorReserve('idCheck','反选');"/>
-            <a class="btn btn-default btn-success" href="${TINY_CONTEXT_PATH+adminPath}/project/task/preadd">增加</a>
+            <a class="btn btn-success" href="${TINY_CONTEXT_PATH+adminPath}/project/task/preadd">建任务</a>
             #end
         ###set(requestStatuString = tinyRequestQueryString!=null ?"&"+tinyRequestQueryString:"")
             #if(moduleId)

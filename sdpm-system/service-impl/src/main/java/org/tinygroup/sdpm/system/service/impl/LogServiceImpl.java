@@ -2,15 +2,9 @@ package org.tinygroup.sdpm.system.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tinygroup.beancontainer.BeanContainerFactory;
-import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.biz.inter.HistoryManager;
-import org.tinygroup.sdpm.system.dao.SystemActionDao;
-import org.tinygroup.sdpm.system.dao.SystemHistoryDao;
-import org.tinygroup.sdpm.system.dao.impl.SystemActionDaoImpl;
-import org.tinygroup.sdpm.system.dao.impl.SystemHistoryDaoImpl;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.system.service.inter.LogService;
@@ -53,7 +47,7 @@ public class LogServiceImpl implements LogService{
             }catch (NoSuchMethodException n){
                 continue;
             }
-            if(compare(oldValue,newValue)){
+            if (beforeAndCompare(oldValue, newValue)) {
                 continue;
             }else {
 
@@ -68,7 +62,14 @@ public class LogServiceImpl implements LogService{
         }
     }
 
+    private boolean beforeAndCompare(Object oldOne, Object newOne) {
+        Object oldValue = dateFormat(oldOne);
+        Object newValue = dateFormat(newOne);
+        return compare(oldValue, newValue);
+    }
+
     private boolean compare(Object oldOne, Object newOne){
+
         if(oldOne == null&&newOne == null){
             return true;
         }else if(newOne == null){
@@ -92,11 +93,10 @@ public class LogServiceImpl implements LogService{
     }
 
     private Object dateFormat(Object object){
-        if (object instanceof Date){
+        if (object instanceof Date) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss");
             Date date = (Date) object;
-            format.format(date);
-            return date;
+            return format.format(date);
         }
         return object;
     }
