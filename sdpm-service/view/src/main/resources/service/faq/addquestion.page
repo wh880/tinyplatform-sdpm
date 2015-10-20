@@ -31,6 +31,14 @@
                     "text" "faqCreatedBy" faq?.faqCreatedBy{"placeholder":"","id":"faqCreatedBy","class":"input-text"})
             #end
         #end
+    #* #@elementItem()
+         #@sdpmItem("创建时间")
+             #@tinyDateInput(
+                 "faqCreateDate" formatDate(faq?.faqCreateDate,
+                 "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+             "nullmsg":"日期不能为空","placeholder":"请选择创建日期"})#end
+         #end
+     #end*#
         #@elementItem()
             #@sdpmItem("创建时间")
                 #@tinyDateInput(
