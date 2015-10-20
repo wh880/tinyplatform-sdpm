@@ -139,7 +139,6 @@
                         #@colLabel("col-4")客户状态：#end
                         #@gridSysCol(1)#end
                         #@gridSysCol(7)
-                        #* <p>${client.clientStatus}</p>*#
                             <p>${getDict("clientStatus",client?.clientStatus)}</p>
                         #end
                     #end

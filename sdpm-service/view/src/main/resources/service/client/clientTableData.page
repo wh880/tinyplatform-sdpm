@@ -11,7 +11,6 @@
         #@td()${var.clientNO}#end
         #@td()${var.clientCreatedBy}#end
         #@td()${formatDate(var.clientCreateDate,"yyyy-MM-dd")}#*${var.clientCreateDate}*##end
-    #*#@td()${var.clientStatus}#end*#
         #@td()${getDict("clientStatus",var?.clientStatus)}#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("service-cil"))
