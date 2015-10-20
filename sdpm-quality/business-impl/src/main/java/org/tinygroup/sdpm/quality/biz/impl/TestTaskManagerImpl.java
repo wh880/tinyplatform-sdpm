@@ -12,6 +12,8 @@ import org.tinygroup.sdpm.quality.dao.QualityTestTaskDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 
 @Service
 @Transactional
@@ -39,12 +41,13 @@ public class TestTaskManagerImpl implements TestTaskManager {
 		return testtaskdao.edit(testtask);
 	}
 	
-	public Pager<QualityTestTask> findPager(Integer start,Integer limit,QualityTestTask testtask,String sortName,boolean asc){
+	public Pager<QualityTestTask> findPager(Integer start,Integer limit,QualityTestTask testtask,String condition,String sortName,boolean asc){
+		Condition condition1 = StringUtil.isBlank(condition)?null: FragmentSql.fragmentCondition(condition);
 		if(StringUtil.isBlank(sortName)){
-			return testtaskdao.queryPager(start, limit, testtask);
+			return testtaskdao.queryPager(start,limit,testtask,condition1);
 		}
 		OrderBy order = new OrderBy(sortName, asc);
-		return testtaskdao.queryPager(start, limit, testtask, order);
+		return testtaskdao.queryPager(start, limit, testtask,condition1, order);
 	}
 
 	public QualityTestTask find(Integer id) {

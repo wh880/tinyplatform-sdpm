@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -36,6 +37,7 @@ import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.Pager;
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
@@ -77,26 +79,13 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 		});
 	}
 
-	public int edit(QualityTestTask qualityTestTask) {
+	public int edit(final QualityTestTask qualityTestTask) {
 		if(qualityTestTask == null || qualityTestTask.getTestversionId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(qualityTestTask, new UpdateGenerateCallback<QualityTestTask>() {
 			public Update generate(QualityTestTask t) {
-				Update update = update(QUALITY_TEST_TASKTABLE).set(
-					QUALITY_TEST_TASKTABLE.TESTTASK_TITLE.value(t.getTesttaskTitle()),
-					QUALITY_TEST_TASKTABLE.PRODUCT_ID.value(t.getProductId()),
-					QUALITY_TEST_TASKTABLE.PROJECT_ID.value(t.getProjectId()),
-					QUALITY_TEST_TASKTABLE.BUILD_NAME.value(t.getBuildName()),
-					QUALITY_TEST_TASKTABLE.TESTTASK_OWNER.value(t.getTesttaskOwner()),
-					QUALITY_TEST_TASKTABLE.PRIORITY.value(t.getPriority()),
-					QUALITY_TEST_TASKTABLE.TESTTASK_BEGIN.value(t.getTesttaskBegin()),
-					QUALITY_TEST_TASKTABLE.TESTTASK_END.value(t.getTesttaskEnd()),
-					QUALITY_TEST_TASKTABLE.TESTTASK_DESC.value(t.getTesttaskDesc()),
-					QUALITY_TEST_TASKTABLE.TESTTASK_REPORT.value(t.getTesttaskReport()),
-					QUALITY_TEST_TASKTABLE.TESTTASK_STATUS.value(t.getTesttaskStatus()),
-					QUALITY_TEST_TASKTABLE.DELETED.value(t.getDeleted())).where(
-					QUALITY_TEST_TASKTABLE.TESTVERSION_ID.eq(t.getTestversionId()));
+				Update update = UpdateUtil.getUpdate(QUALITY_TEST_TASKTABLE,qualityTestTask);
 				return update;
 			}
 		});
@@ -279,5 +268,25 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
 		}
 		return select;
+	}
+
+	public Pager<QualityTestTask> queryPager(int start, int limit, QualityTestTask qualityTestTask, Condition condition, OrderBy... orderArgs) {
+		Select select = MysqlSelect.selectFrom(QUALITY_TEST_TASKTABLE).where(
+				and(
+						condition,
+						QUALITY_TEST_TASKTABLE.TESTTASK_TITLE.eq(qualityTestTask.getTesttaskTitle()),
+						QUALITY_TEST_TASKTABLE.PRODUCT_ID.eq(qualityTestTask.getProductId()),
+						QUALITY_TEST_TASKTABLE.PROJECT_ID.eq(qualityTestTask.getProjectId()),
+						QUALITY_TEST_TASKTABLE.BUILD_NAME.eq(qualityTestTask.getBuildName()),
+						QUALITY_TEST_TASKTABLE.TESTTASK_OWNER.eq(qualityTestTask.getTesttaskOwner()),
+						QUALITY_TEST_TASKTABLE.PRIORITY.eq(qualityTestTask.getPriority()),
+						QUALITY_TEST_TASKTABLE.TESTTASK_BEGIN.eq(qualityTestTask.getTesttaskBegin()),
+						QUALITY_TEST_TASKTABLE.TESTTASK_END.eq(qualityTestTask.getTesttaskEnd()),
+						QUALITY_TEST_TASKTABLE.TESTTASK_DESC.eq(qualityTestTask.getTesttaskDesc()),
+						QUALITY_TEST_TASKTABLE.TESTTASK_REPORT.eq(qualityTestTask.getTesttaskReport()),
+						QUALITY_TEST_TASKTABLE.TESTTASK_STATUS.eq(qualityTestTask.getTesttaskStatus()),
+						QUALITY_TEST_TASKTABLE.DELETED.eq(qualityTestTask.getDeleted())));
+		select =  addOrderByElements(select, orderArgs);
+		return getDslSession().fetchPage(select,start,limit,false,QualityTestTask.class);
 	}
 }
