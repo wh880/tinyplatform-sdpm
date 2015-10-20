@@ -22,9 +22,12 @@
     #@td()${s?.storyStage}#end
 
     #@td()
-        #foreach(m:menuManager.getScopeMenus("demand-op"))
-            #if(m.id == "rm-demand")
-                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href s.storyId)#buttonIcon(iconClass=m.icon)#end
+        #foreach(m:menuManager.getScopeMenus("version-linkdemand"))
+            #if(m.id == "versionstory")
+                #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href+"?storyId="+s.storyId+"&buildId="+id)<i class="${m.icon}"
+                                                                                      title=${m.name}></i>#end
+##                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href+"?storyId="+s.storyId+"&buildId="+id
+##                )#buttonIcon(iconClass=m.icon)#end
             #end
         #end
     #end
