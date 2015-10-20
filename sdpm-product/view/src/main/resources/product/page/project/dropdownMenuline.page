@@ -9,14 +9,14 @@
             #end
         #end
     #else
-    产品
+    产品线
     #end
 
 <span class="caret"></span>#end
 #@navSelect2Body()
     #@navSelect2Data()
     <option value=""></option>
-    <optgroup label="产品">
+    <optgroup label="产品线">
         #for(productLine : productLineList)
         <option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
     #end
@@ -25,9 +25,9 @@
 #end
 #@navSelect2Fix()
 
-<a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/tabledemo/list.page" class="r">所有产品线</a>&nbsp;
+<a href="${TINY_CONTEXT_PATH +adminPath}/productLine/all" class="r">所有产品线</a>&nbsp;
 <!--新增产品-->
-<a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/tabledemo/add.page">添加产品线</a>&nbsp;
+<a href="${TINY_CONTEXT_PATH +adminPath}/productLine/add">添加产品线</a>&nbsp;
 
 
 #end

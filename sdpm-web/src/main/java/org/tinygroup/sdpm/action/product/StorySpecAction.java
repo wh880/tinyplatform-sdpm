@@ -9,6 +9,12 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.service.StorySpecService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.system.service.inter.ProfileService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/a/product/storySpec")
@@ -16,6 +22,8 @@ public class StorySpecAction extends BaseController{
 	
 	@Autowired
 	private StorySpecService specService;
+	@Autowired
+	private ProfileService profileService;
 	
 	@RequestMapping("/find")
 	public String find(Integer storyId,Model model){
@@ -26,11 +34,15 @@ public class StorySpecAction extends BaseController{
 	}
 	
 	@RequestMapping("/find/{forward}")
-	public String find(@PathVariable(value="forward")String forward,ProductStory story,Model model){
+	public String find(@PathVariable(value="forward")String forward,ProductStory story,Model model,SystemProfile systemProfile){
 		
 		ProductStorySpec storySpec = specService.findStorySpec(story.getStoryId());
 		model.addAttribute("storySpec", storySpec);
-		//model.addAttribute("storyId", story.getStoryId());
+		systemProfile.setFileObjectType("story");
+		systemProfile.setFileDeleted("0");
+		systemProfile.setFileObjectId(story.getStoryId());
+		List<SystemProfile> list = profileService.find(systemProfile);
+		model.addAttribute("file",list);
 		if ("productDemandDetail".equals(forward)) {
 			
 			return "/product/page/project/demdtablehref.page";
