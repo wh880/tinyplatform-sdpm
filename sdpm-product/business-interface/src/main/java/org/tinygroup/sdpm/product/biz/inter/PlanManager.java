@@ -77,6 +77,13 @@ public interface PlanManager {
 	 * @return
 	 */
 	Pager<ProductPlan> findPager(int start,int limit,ProductPlan productPlan,String order,String ordertype);
+
+	/**
+	 * 统计查询
+	 * @param productPlan
+	 * @return
+     */
+	List<ProductPlan> statisticFind(ProductPlan productPlan);
 	
 	
 

@@ -76,7 +76,54 @@ public class ProductPlan implements Serializable{
 	 * 
 	 */
 	private Integer deleted;
+	/**
+	 * 草稿
+	 */
+	private Integer draft;
+	/**
+	 * 激活
+	 */
+	private Integer active;
+	/**
+	 * 更新
+	 */
+	private Integer change;
+	/**
+	 * 已关闭
+	 */
+	private Integer close;
 
+	public Integer getDraft() {
+		return draft;
+	}
+
+	public void setDraft(Integer draft) {
+		this.draft = draft;
+	}
+
+	public Integer getActive() {
+		return active;
+	}
+
+	public void setActive(Integer active) {
+		this.active = active;
+	}
+
+	public Integer getChange() {
+		return change;
+	}
+
+	public void setChange(Integer change) {
+		this.change = change;
+	}
+
+	public Integer getClose() {
+		return close;
+	}
+
+	public void setClose(Integer close) {
+		this.close = close;
+	}
 
 	public ProductPlan() {
 		setDeleted(DELETE_NO);
