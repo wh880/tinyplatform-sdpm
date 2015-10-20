@@ -33,7 +33,7 @@
             #@sdpmItem("总消耗")
                 <div class="input-group">
                     <input name="taskConsumed" type="text" class="form-control" placeholder=""
-                           aria-describedby="basic-addon2">
+                           aria-describedby="basic-addon2" value="${task.taskConsume==null?0:task.taskConsume}">
                     <span class="input-group-addon" id="all-time">小时</span>
                 </div>
             #end
@@ -42,7 +42,7 @@
             #@sdpmItem("预计剩余") ##预计剩余需要判断，当为0时，标识为完成
                 <div class="input-group">
                     <input name="taskLeft" type="text" class="form-control" placeholder=""
-                           aria-describedby="basic-addon2">
+                           aria-describedby="basic-addon2" value="${task.taskLeft==null?0:task.taskLeft}">
                     <span class="input-group-addon" id="last-time">小时</span>
                 </div>
             #end
@@ -51,7 +51,6 @@
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>备注：</label></div>
-
                 <div class="col-9">
                     #@Teditor("content" "content" {"initialFrameHeight":"150"})#end</div>
             </div>

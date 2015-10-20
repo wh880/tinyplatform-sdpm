@@ -156,10 +156,23 @@ public class TaskAction extends BaseController {
         if (taskId != null) {
             ProjectTask task = taskService.findTask(taskId);
             model.addAttribute("task", task);
-            //还需要查询其他相关任务剩余时间的信息
             return "project/task/start.page";
         }
         return "error";
+    }
+
+    @RequestMapping(value = "/startsave", method = RequestMethod.POST)
+    public String startsave(ProjectTask task, Model model, String content) {
+        if (task.getTaskId() == null) {
+            taskService.addTask(task);
+        } else {
+            taskService.updateStartTask(task);
+            LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.STARTED, task.getTaskId().toString(),
+                    UserUtils.getUserId(), null, task.getTaskProject().toString(), taskService.findTask(task.getTaskId()),
+                    task, content);
+        }
+        model.addAttribute("task", task);
+        return "project/task/index.page";
     }
 
     @RequestMapping("/findList")
@@ -284,17 +297,6 @@ public class TaskAction extends BaseController {
             taskService.addTask(task);
         } else {
             taskService.updateFinishTask(task);
-        }
-        model.addAttribute("task", task);
-        return "project/task/index.page";
-    }
-
-    @RequestMapping(value = "/startsave", method = RequestMethod.POST)
-    public String startsave(ProjectTask task, Model model) {
-        if (task.getTaskId() == null) {
-            taskService.addTask(task);
-        } else {
-            taskService.updateStartTask(task);
         }
         model.addAttribute("task", task);
         return "project/task/index.page";
