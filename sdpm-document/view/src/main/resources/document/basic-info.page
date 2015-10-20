@@ -14,7 +14,7 @@
 	    		#end
 	    		#@tr()
 	    			#@th()文档类型:#end
-	    			#@td()${doc?.docType}#end
+	    			#@td()${getDict("docType",doc?.docType)}#end
 	    		#end
 	    		#@tr()
 	    			#@th()由谁添加:#end
