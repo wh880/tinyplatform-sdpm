@@ -6,6 +6,9 @@ import org.tinygroup.dict.DictGroup;
 import org.tinygroup.dict.DictItem;
 import org.tinygroup.dict.DictManager;
 import org.tinygroup.dict.impl.DictManagerImpl;
+import org.tinygroup.logger.LogLevel;
+import org.tinygroup.logger.Logger;
+import org.tinygroup.logger.LoggerFactory;
 import org.tinygroup.sdpm.dict.impl.DictHandleImpl;
 import org.tinygroup.sdpm.dict.impl.SdpmDictLoader;
 import org.tinygroup.sdpm.dict.inter.DictHandle;
@@ -28,6 +31,7 @@ public class DictUtil {
     private static final DictService dictService = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(DictServiceImpl.class);
     private static final SdpmDictLoader loader = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(SdpmDictLoader.class);
     private static final DictManager manager = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(DictManagerImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DictUtil.class);
 
     public static List<Dict> getDictFromFile(List<DictNodeEntries> dictNodeEntries,Map<String,String> nodeMap){
         List<Dict> dicts = new ArrayList<Dict>();
@@ -169,6 +173,7 @@ public class DictUtil {
         try {
             item = loader.getDictItem(manager,groupType,key);
         }catch (RuntimeException r){
+            LOGGER.logMessage(LogLevel.ERROR,"找不到字典",r);
             return "";
         }
         if(item == null){
@@ -182,6 +187,7 @@ public class DictUtil {
         try{
             group = loader.getDictGroup(manager,groupType);
         }catch (RuntimeException r){
+            LOGGER.logMessage(LogLevel.ERROR,"找不到字典",r);
             return new ArrayList<DictItem>();
         }
         if(group == null){

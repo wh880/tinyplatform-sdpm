@@ -33,7 +33,7 @@
               isShow="1" scope="testbuginfo-tab"></menu>
          <menu id="tbugback" name="返回" href="/quality/bug" icon="icon-level-up" sort="1"
               isShow="1" scope="testbuginfo-tab"></menu> 
-         <menu id="tbugnext" name="下一个Bug" href="/testManagement/page/bugInfo.page" icon="icon-chevron-right" sort="1"
+         <menu id="tbugnext" name="下一个Bug" href="/quality/bug/next" icon="icon-chevron-right" sort="1"
               isShow="1" scope="testbuginfo-tab"></menu> 
          <menu id="tbugstatus" name="未关闭" href="/quality/bug?status=tbugstatus" icon="" sort="12"
               isShow="1" scope="testbugleft-tab"></menu> 

@@ -20,7 +20,7 @@
                     }
                    ## console.log(value);
 					##alert(value);
-                    if(value!=null) {                   	
+                    if(value!=null&&value!=0) {                   	
                         sele.val(value).trigger("change");
                     }else {               
                         sele.val(data[0][opKey]).trigger("change");
@@ -90,12 +90,12 @@
 			           var pId = $("#${sid}  option:selected").val();
 			           		           
 				           if(pId=='1')
-				           {				           
+				           {	           
 				           	ajaxRead("${sid}","docProduct","productId","productName","/document/ajax/productByDocLib",${doc?.docProduct?:0});
 				           }
 				           if(pId=='2')
 				           {
-				           		$("select[name=docProject]").val("${doc?.docProject}").trigger("change");
+				           	$("select[name=docProject]").val("${doc?.docProject}").trigger("change");
 				           }else{
 				           	ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/moduleByDoclib?libId="+pId,${doc?.docModule?:0});
 				           }
@@ -146,27 +146,24 @@
 					#@formControlDiv("col-8")
 					#@div(divClass="col-6")
 					#@Tselect2F()
-	                   		#@Tselect2Body("docProduct" doc?.docProduct?:0 {"class":"input-text select2","id":"productId"}) ##,"multiple":"multiple"加上为多选项
-							<option value="0">/<option>
-#*					        #foreach(product : productList)
-	                        	 <option value="${product?.productId}">${product?.productName}</option>
-	                        #end	*#
+	                   		#@Tselect2Body("docProduct" doc?.docProduct?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                    	#end                  
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
-	                	  	<script type="text/javascript">             	  		
+	                	  	<script type="text/javascript">    	  		
 		                            $("#${sid}").on("change",function(){
 		                            var dId = $("select[name=docLibId]").val();
 		                             if(dId == '1'){
 		                                var pId = $("#${sid}  option:selected").val();	
-		                                if(pId == undefined){
+		                                alert(pId);
+		                               ## console.log(pId)
+#*		                                if(pId == undefined){
 		                                	var pId = ${doc?.docProduct?:0};	                                	
-		                                }                           
+		                                }                           *#
 		                                ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/moduleByProduct?productId="+pId,${doc?.docModule?:0});
 		                            	  }
-		                            })
-	                           
+		                            })	                           
 	                        </script>
                 	  #end                	 
                 	  #end

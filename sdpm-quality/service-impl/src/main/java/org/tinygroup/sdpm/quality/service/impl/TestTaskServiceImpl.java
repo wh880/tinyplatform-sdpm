@@ -35,7 +35,11 @@ public class TestTaskServiceImpl implements TestTaskService {
 		return testtaskmanager.delete(id);
 	}
 	
-	public Pager<QualityTestTask> findTestTaskPager(Integer start,Integer limit,QualityTestTask testtask,String sortName,boolean asc){
-		return testtaskmanager.findPager(start, limit, testtask, sortName, asc);
+	public Pager<QualityTestTask> findTestTaskPager(Integer start,Integer limit,QualityTestTask testtask,String condition,String sortName,boolean asc){
+		return testtaskmanager.findPager(start, limit, testtask, condition, sortName, asc);
+	}
+
+	public Pager<QualityTestTask> findTestTaskPager(Integer start, Integer limit, QualityTestTask testtask, String sortName, boolean asc) {
+		return testtaskmanager.findPager(start,limit,testtask,null,sortName,asc);
 	}
 }

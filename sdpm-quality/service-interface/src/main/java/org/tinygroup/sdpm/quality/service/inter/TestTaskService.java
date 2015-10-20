@@ -36,5 +36,6 @@ public interface TestTaskService {
 	 * @return
 	 */
 	int deleteById(int id);
-	Pager<QualityTestTask> findTestTaskPager(Integer start,Integer limit,QualityTestTask testtask,String sortName,boolean asc);
+	Pager<QualityTestTask> findTestTaskPager(Integer start,Integer limit,QualityTestTask testtask, String condition, String sortName,boolean asc);
+	Pager<QualityTestTask> findTestTaskPager(Integer start,Integer limit,QualityTestTask testtask, String sortName,boolean asc);
 }

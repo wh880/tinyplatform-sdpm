@@ -22,7 +22,7 @@
 	    		#end
 	    		#@tr()
 	    			#@th()添加时间:#end
-	    			#@td()${doc?.docAddedDate}#end
+	    			#@td()${doc?.docAddedDate?formatDate(doc?.docAddedDate,'yyyy年MM月dd日'):""}#end
 	    		#end
 	    		#@tr()
 	    			#@th()由谁编辑:#end
@@ -30,7 +30,7 @@
 	    		#end
 	    		#@tr()
 	    			#@th()编辑时间:#end
-	    			#@td()${doc?.docEditedDate}#end
+	    			#@td()${doc?.docEditedDate?formatDate(doc?.docEditedDate,'yyyy年MM月dd日'):""}#end
 	    		#end	    		
 	    #end	
     #end   	

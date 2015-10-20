@@ -67,25 +67,33 @@ public class TaskServiceImpl implements TaskService {
         return taskManager.updateEditTask(task);
     }
     public Integer updateCallTask(ProjectTask task) {
-        return taskManager.updateCallTask(task);
+        return taskManager.updateColum(task);
     }
 
     public Integer updateFinishTask(ProjectTask task) {
         task.setTaskStatus("3");
         task.setTaskLastEditedDate(new Date());
-        return taskManager.updateFinishTask(task);
+        task.setTaskLeft(0f);
+        return taskManager.updateColum(task);
     }
     public Integer updateStartTask(ProjectTask task) {
         //task.setTaskRealStarted(new Date());
         task.setTaskStatus("2");
         task.setTaskLastEditedDate(new Date());
-        return taskManager.updateStartTask(task);
+        return taskManager.updateColum(task);
     }
     public Integer updateCloseTask(ProjectTask task) {
         task.setTaskCloseDate(new Date());
         task.setTaskStatus("6");
         task.setTaskLastEditedDate(new Date());
-        return taskManager.updateCloseTask(task);
+        return taskManager.updateColum(task);
+    }
+
+    public Integer updateCancelTask(ProjectTask task) {
+        task.setTaskCanceledDate(new Date());
+        task.setTaskStatus("5");
+        task.setTaskLastEditedDate(new Date());
+        return taskManager.updateColum(task);
     }
 
     public Pager<ProjectTask> findComplexTask() {

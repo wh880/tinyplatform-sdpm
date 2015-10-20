@@ -84,6 +84,11 @@ public class StoryServiceImpl implements StoryService {
 
 		return storyManager.report(fields, story);
 	}
+
+	public int countStatus(int productId, int status) {
+		return storyManager.countStatus(productId,status);
+	}
+
 	public int[] deleteBatchStory(List<ProductStory> ids) {
 
 		return storyManager.deleteBatch(ids);
