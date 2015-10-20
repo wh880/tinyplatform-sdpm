@@ -6,6 +6,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.biz.inter.ProjectStoryManager;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
@@ -33,6 +34,8 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     private ProjectManager projectManager;
     @Autowired
     private ProjectBuildDao projectBuildDao;
+    @Autowired
+    private BuildManager buildManager;
 
     public List<Project> findProjectsByStory(Integer storyId) {
         if (storyId == null) {
@@ -83,8 +86,8 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         return projectStoryManager.findStoryToLink(projectId, start, limit, order, ordertype);
     }
 
-    public List<ProjectStory> findStoryPager(int start, int limit,int id, SearchInfos conditions, String groupOperate) {
-        return projectBuildDao.findBuildStory(id);
+    public Pager<ProductStory> findStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate) {
+        return buildManager.findBuildStory(start,limit,id);
     }
 
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype) {
