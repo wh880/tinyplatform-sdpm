@@ -101,6 +101,11 @@ public class BugAction extends BaseController {
 	}
 	@RequestMapping("/bugInfo")
 	public String bugInfo(Integer bugId, Model model){
+		Pager<QualityBug> bugs = bugService.findBugListPager(0,1," bug_id >"+bugId+" ",null,"bugId",true);
+		int nextId = 0;
+		if(bugs.getRecords().size()>0){
+			nextId = bugs.getRecords().get(0).getBugId();
+		}
 		QualityBug bug = bugService.findById(bugId);
 		SystemProfile systemProfile = new SystemProfile();
 		systemProfile.setFileObjectId(bugId);
@@ -108,6 +113,7 @@ public class BugAction extends BaseController {
 		List<SystemProfile> profilesList = profileService.find(systemProfile);
 		model.addAttribute("qualityBug",bug);
 		model.addAttribute("profilesList",profilesList);
+		model.addAttribute("nextId",nextId);
 		return "/testManagement/page/bugInfo.page";
 	}
 
@@ -197,6 +203,23 @@ public class BugAction extends BaseController {
 				,null
 				,systemAction.getActionComment());
 		return "redirect:"+"/a/quality/bug";
+	}
+	@ResponseBody
+	@RequestMapping("addComment")
+	public Map recordComment(String comment, int bugId){
+		QualityBug bug = bugService.findById(bugId);
+		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+				, LogUtil.LogAction.COMMENTED
+				,String.valueOf(bugId)
+				,UserUtils.getUserId()
+				,String.valueOf(bug.getProductId())
+				,String.valueOf(bug.getProjectId())
+				,null
+				,null
+				,comment);
+		Map<String,String> result = new HashMap<String, String>();
+		result.put("status","success");
+		return result;
 	}
 
 	@RequestMapping("/assign")

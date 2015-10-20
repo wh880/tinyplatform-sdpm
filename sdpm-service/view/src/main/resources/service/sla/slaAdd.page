@@ -63,12 +63,11 @@
                     #@Tselect2F()
                         #@Tselect2Body(
                             "serviceLevel" sla?.serviceLevel{"datatype":"*","id":"serviceLevel",
-                            "nullmsg":"产品名称不能为空","class":"input-text select2"})
+                            "nullmsg":"服务级别不能为空","class":"input-text select2"})
                             #@tinyOptionItem("")请选择#end
-                            #@tinyOptionItem("0")基础#end
-                            #@tinyOptionItem("1")潜力#end
-                            #@tinyOptionItem("2")核心#end
-                            #@tinyOptionItem("3")vip#end
+                            #foreach(item : getDict("serviceLevel"))
+                                #@tinyOptionItem(item.value)${item.text}#end
+                            #end
                         #end
                     #end
                 #end
@@ -124,13 +123,11 @@
             #@elementItem()
                 #@sdpmItem("服务级别协议" "*")
                     #@tinySelect(
-                        "slaStatus" sla?.slaStatus {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        "slaStatus" sla?.slaStatus {"class":"input-text select2","nullmsg":"请选择服务级别协议","datatype":"*"})
                         #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("0")新建#end
-                        #@tinyOptionItem("1")生效#end
-                        #@tinyOptionItem("2")到期#end
-                        #@tinyOptionItem("3")作废#end
-                        #@tinyOptionItem("4")关闭#end
+                        #foreach(item : getDict("slaStatus"))
+                            #@tinyOptionItem(item.value)${item.text}#end
+                        #end
                     #end
                 #end
             #end

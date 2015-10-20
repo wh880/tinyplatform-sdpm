@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.quality.biz.inter.BugManager;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -47,7 +48,7 @@ public class BugManagerImpl implements BugManager {
 		if(StringUtil.isBlank(sortName)){
 			return bugdao.queryPager(start,limit,(((conditions!=null&&!"".equals(conditions))? FragmentExpressionSql.fragmentCondition(conditions):null)),bug);
 		}else{
-			OrderBy orderby = new OrderBy(sortName,asc);
+			OrderBy orderby = new OrderBy(NameUtil.resolveNameDesc(sortName),asc);
 			return bugdao.queryPager(start, limit, (((conditions!=null&&!"".equals(conditions))?FragmentExpressionSql.fragmentCondition(conditions):null)), bug, orderby);
 		}		
 	}

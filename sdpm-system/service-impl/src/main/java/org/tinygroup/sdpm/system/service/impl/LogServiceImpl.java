@@ -45,8 +45,14 @@ public class LogServiceImpl implements LogService{
     private void recordEdit( Object oldObject, Object newObject, SystemAction systemAction){
         Field[] fields =  oldObject.getClass().getDeclaredFields();
         for(Field field : fields){
-            Object oldValue = reflectValue(oldObject, NameUtil.toMethod(field.getName()));
-            Object newValue = reflectValue(newObject,NameUtil.toMethod(field.getName()));
+            Object oldValue = null;
+            Object newValue = null;
+            try{
+                oldValue = reflectValue(oldObject, NameUtil.toMethod(field.getName()));
+                newValue = reflectValue(newObject,NameUtil.toMethod(field.getName()));
+            }catch (NoSuchMethodException n){
+                continue;
+            }
             if(compare(oldValue,newValue)){
                 continue;
             }else {
@@ -73,15 +79,13 @@ public class LogServiceImpl implements LogService{
         return oldOne.equals(newOne);
     }
 
-    private Object reflectValue(Object object, String methodName){
+    private Object reflectValue(Object object, String methodName) throws NoSuchMethodException {
         Object value = null;
         try {
             value = object.getClass().getDeclaredMethod(methodName).invoke(object);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
         return value;

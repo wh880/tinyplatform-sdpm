@@ -148,7 +148,7 @@ public class ProductAction extends BaseController {
 
         if (productId == null) {
         	if(request.getSession().getAttribute("sessionProductId")==null){
-        		return "/product/addproduct/addition";
+        		return "redirect:" +adminPath+"/product/addproduct/addition";
         	}else{
         		productId = (Integer) request.getSession().getAttribute("sessionProductId");
         	}

@@ -51,8 +51,8 @@
 		</select>
 		<select id="typetemp">
 			<option value=""></option>
-			#foreach(l : libList)
-				<option value="${l?.docLibId}">${l?.docLibName}</option>
+			#foreach(t : getDict("docType"))
+				<option value="${t?.value}">${t?.text}</option>
 			#end
 			<option value="null">空</option>
 		</select>
@@ -213,31 +213,31 @@
 			"name":"doc_product",
 			"title":"所属产品",
 			"operator":"=",
-			"value":"user"
+			"value":"product"
 		});
 		itemlist.push({
 			"name":"doc_project",
 			"title":"所属项目",
 			"operator":"=",
-			"value":"user"
+			"value":"project"
 		});
 		itemlist.push({
 			"name":"doc_type",
 			"title":"文档类型",
 			"operator":"=",
-			"value":"user"
+			"value":"type"
 		});
 		itemlist.push({
 			"name":"doc_module",
 			"title":"所属分类",
 			"operator":"=",
-			"value":"user"
+			"value":"module"
 		});
 		itemlist.push({
 			"name":"doc_lib_id",
 			"title":"所属文档库",
 			"operator":"=",
-			"value":"user"
+			"value":"doclib"
 		});
 		itemlist.push({
 			"name":"doc_digest",
@@ -292,12 +292,21 @@
 				case "user":
 					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#usertemp").html()));
 					break;
-				case "pri":
-					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#pritemp").html()));
+				case "product":
+					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#producttemp").html()));
 					break;
-				case "status":
-					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#statustemp").html()));
+				case "project":
+					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#projecttemp").html()));
 					break;
+				case "module":
+					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#moduletemp").html()));
+					break;
+				case "doclib":
+					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#doclibtemp").html()));
+					break;	
+				case "type":
+					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#typetemp").html()));
+					break;			
 				case "date":
 					$("#valueBox"+itemIndex).html('<input type="text" name="infos['+sIndex+'].value" id="value'+itemIndex+'" value="" class="form-control dateinput">');
 					break;

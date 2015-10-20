@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action.system;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,8 +64,8 @@ public class ActionAction extends BaseController{
 
 	@RequestMapping("ajax/history")
 	public String getHistory(SystemAction action, Model model){
-		List<SystemAction> actions = actionService.find(action,"actionDate",true);
-		Map<SystemAction,List<SystemHistory>> map = new HashMap<SystemAction, List<SystemHistory>>();
+		List<SystemAction> actions = actionService.find(action,"actionId",true);
+		Map<SystemAction,List<SystemHistory>> map = new LinkedHashMap<SystemAction, List<SystemHistory>>();
 		for(SystemAction action1 : actions){
 			SystemHistory history = new SystemHistory();
 			history.setHistoryAction(action1.getActionId());
