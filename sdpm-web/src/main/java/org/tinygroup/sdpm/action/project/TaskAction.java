@@ -211,7 +211,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/cancelSave")
-    public String cancleSave(ProjectTask task, String content) {
+    public String cancelSave(ProjectTask task, String content) {
         if (task.getTaskId() == null) {
             taskService.addTask(task);
         } else {
@@ -330,7 +330,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/preadd")
-    public String preadd(HttpServletRequest request, Model model, Integer storyId) {
+    public String preadd(HttpServletRequest request, Model model, Integer storyId, String taskId) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
 
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
@@ -351,7 +351,10 @@ public class TaskAction extends BaseController {
             }
             moduleList.addAll(tModuleList);
         }
-
+        if (taskId != null) {
+            ProjectTask task = taskService.findTask(Integer.parseInt(taskId));
+            model.addAttribute("copyTask", task);
+        }
 
         List<ProductStory> storyList = storyService.findStoryByProject(projectId);
         ProductStory story = new ProductStory();
