@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
-import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
@@ -31,6 +30,7 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
+import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
@@ -115,10 +115,8 @@ public class StoryAction extends BaseController {
 
         productStory.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
         ProductStory story = storyService.addStory(productStory, storySpec);
-        ProfileUtil profileUtil = new ProfileUtil();
 
-        profileUtil.uploads(file, story.getStoryId(), "story", title);
-
+        uploads(file, story.getStoryId(), ProfileType.STORY, title);
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(story.getStoryId())
@@ -138,10 +136,7 @@ public class StoryAction extends BaseController {
         storyService.updateStory(productStory);
         OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute("user");
 
-
-        ProfileUtil profileUtil = new ProfileUtil();
-
-        profileUtil.uploads(file, story.getStoryId(), "story", title);
+        uploads(file, story.getStoryId(), ProfileType.STORY, title);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.EDITED,
@@ -238,10 +233,7 @@ public class StoryAction extends BaseController {
         QualityBug bug = new QualityBug();
         bug.setStoryId(storyId);
         List<QualityBug> bugList = bugService.findBugList(bug);
-
         List<OrgUser> userList = userService.findUserListByIds(productStory.getStoryMailto().split(","));
-
-
         List<Project> projectList = projectService.getProjectByStoryId(storyId);
 
 

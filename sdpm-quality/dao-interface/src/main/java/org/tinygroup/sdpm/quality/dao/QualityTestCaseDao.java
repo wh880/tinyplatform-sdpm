@@ -25,4 +25,7 @@ public interface QualityTestCaseDao extends BaseDao<QualityTestCase,Integer> {
 	
 	Pager<QualityTestCase> queryPagerRel(int start,int limit ,QualityTestCase qualityTestCase , final String condition,final OrderBy... orderArgs);
 
+
+	Integer softDelete(Integer id);
+
 }

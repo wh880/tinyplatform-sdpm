@@ -1,21 +1,12 @@
 package org.tinygroup.sdpm.action.quality;
 
-import java.io.IOException;
-import java.util.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResult;
 import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResults;
-import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -25,11 +16,12 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
-import org.tinygroup.sdpm.quality.dao.pojo.*;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult;
 import org.tinygroup.sdpm.quality.service.inter.CaseStepService;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.quality.service.inter.TestResultService;
-import org.tinygroup.sdpm.quality.service.inter.TestRunService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
@@ -38,6 +30,7 @@ import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * Created by chenpeng15668 on 2015-9-24
@@ -247,15 +240,16 @@ public class TestCaseAction extends BaseController {
 		model.addAttribute("testCase", testCase);
 		return "redirect:" + "/a/quality/testCase";
 	}
-	
+
+
 	@ResponseBody
 	@RequestMapping("/delete")
-	public String delete(Integer testCaseId, Model model) {
-		testCaseService.deleteById(testCaseId);
+	public Map delete(Integer id) {
+		testCaseService.deleteById(id);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("status", "success");
 		map.put("info", "删除成功");
-		return "redirect:" +adminPath+ "/quality/testCase";
+		return map;
 	}
 
 	@RequestMapping("/batchDelete")
