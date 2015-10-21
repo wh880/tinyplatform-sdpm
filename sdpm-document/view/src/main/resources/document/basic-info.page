@@ -18,7 +18,7 @@
 	    		#end
 	    		#@tr()
 	    			#@th()由谁添加:#end
-	    			#@td()${doc?.docAddedBy}#end
+	    			#@td()${doc?.docAddedBy?UserUtils.getUserById(doc?.docAddedBy)?.orgUserRealName:""}#end
 	    		#end
 	    		#@tr()
 	    			#@th()添加时间:#end
@@ -26,7 +26,7 @@
 	    		#end
 	    		#@tr()
 	    			#@th()由谁编辑:#end
-	    			#@td()${doc?.docEditedBy}#end
+	    			#@td()${doc?.docEditedBy?UserUtils.getUserById(doc?.docEditedBy)?.orgUserRealName:""}#end
 	    		#end
 	    		#@tr()
 	    			#@th()编辑时间:#end

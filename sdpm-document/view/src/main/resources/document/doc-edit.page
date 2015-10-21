@@ -21,7 +21,6 @@
                         sele.append(em);
                     }
                    //console.log(sele.html(),value,opKey);
-					##alert(value);
                     if(isInit) {                   	
                         sele.val(value).trigger("change");
                     }else {               
@@ -59,7 +58,6 @@
          <div class="col-4">
           #@Tselect2F()
 	          #@Tselect2Body("docLibId" doc?.docLibId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	              ## <option value="0">/</option>
 	               #foreach(var:libList)
 	               	#if(var?.docLibDeleted != "1")
 	               		<option value="${var?.docLibId}">${var?.docLibName}</option>
@@ -112,7 +110,6 @@
 					#@div(divClass="col-6")
 					#@Tselect2F()
 	                   		#@Tselect2Body("docProject" doc?.docProject?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                   ##    <option value="0">/</option>
 	                        #foreach(project : projectList)
 	                        	 <option value="${project?.projectId}">${project?.projectName}</option>
 	                        #end	                       	                    	                        
@@ -155,11 +152,6 @@
 		                            var dId = $("select[name=docLibId]").val();
 		                             if(dId == '1'){
 		                                var pId = $(this).val();	
-		                              
-		                               ## console.log(pId)
-#*		                                if(pId == undefined){
-		                                	var pId = ${doc?.docProduct?:0};	                                	
-		                                }                           *#
 		                                ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/moduleByProduct?productId="+pId,${doc?.docModule?:0});
 		                            	  }
 		                            })	                           

@@ -7,7 +7,7 @@
 #include("doc-tab.page")
 #@div()
 	#@p(pClass="title_sty")
-		<span class="f"> 文档名称</span>
+		<span class="f"> ${doc?.docTitle}</span>
 		<span class="r">
 			#foreach(m:menuManager.getScopeMenus("doc-view-op"))
 				#if(m.id == "doc-view-delete")
