@@ -195,6 +195,12 @@
             "operator": "=",
             "value": "cliId"
         });
+        itemlist.push({
+            "name": "slaCreatedBy",
+            "title": "创建人",
+            "operator": "=",
+            "value": "text"
+        });
 
         itemlist.push({
             "name": "slaStatus",
@@ -202,12 +208,7 @@
             "operator": "=",
             "value": "slastatus"
         });
-        itemlist.push({
-            "name": "slaCreatedBy",
-            "title": "创建人",
-            "operator": "=",
-            "value": "text"
-        });
+
         itemlist.push({
             "name": "slaTitle",
             "title": "服务协议标题",
