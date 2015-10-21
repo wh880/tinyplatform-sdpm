@@ -79,7 +79,7 @@
         #@sdpmItem("项目类型")
             #@Tselect2F()
                 #@Tselect2Body("projectType" "0" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value=""></option>
+                    <option value="">/</option>
                     #foreach(type : getDict("projectType"))
                         <option value=${type.value}>${type.text}</option>
                     #end
