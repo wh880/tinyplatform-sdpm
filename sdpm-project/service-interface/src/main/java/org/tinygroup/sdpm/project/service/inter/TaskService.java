@@ -12,6 +12,12 @@ import java.util.Map;
 public interface TaskService {
 
     /**
+     * 激活项目
+     * @return
+     */
+    public Integer updateDoingTask(ProjectTask task);
+
+    /**
      * 批量软删除
      *
      * @param condition

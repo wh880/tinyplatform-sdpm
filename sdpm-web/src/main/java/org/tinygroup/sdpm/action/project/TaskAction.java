@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
-import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
@@ -18,7 +17,7 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.*;
-import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.CookieUtils;
@@ -272,7 +271,7 @@ public class TaskAction extends BaseController {
 
     @RequestMapping("/save")
     public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file,
-                       Model model, String[] taskMailtoArray, HttpServletRequest request, String comment) {
+                       Model model, String[] taskMailtoArray, HttpServletRequest request, String comment) throws IOException {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         task.setTaskProject(projectId);
         if (task.getTaskId() == null) {
@@ -292,7 +291,9 @@ public class TaskAction extends BaseController {
                     newtask.getTaskId().toString(), UserUtils.getUserId(),
                     null, newtask.getTaskProject().toString(), null,
                     newtask, comment);
-            uploadNoTitle(file,newtask.getTaskId(), ProfileType.TASK);
+
+            uploadNoTitle(file, newtask.getTaskId(), ProfileType.TASK);
+
         } else {
             taskService.updateTask(task);
         }
@@ -301,20 +302,15 @@ public class TaskAction extends BaseController {
     }
 
 
-
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public String editSave(ProjectTask task, Model model, SystemAction systemAction) {
+    public String editSave(ProjectTask task, Model model, String contents) {
         taskService.updateEditTask(task);
-
-        systemAction.setActionObjectId(String.valueOf(task.getTaskId()));
-        systemAction.setActionProject(String.valueOf(task.getTaskProject()));
-        systemAction.setActionObjectType("task");
-        systemAction.setActionActor("close");
-        logService.log(systemAction);
+        ProjectTask oldTask = taskService.findTask(task.getTaskId());
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.EDITED, oldTask.getTaskId().toString(),
+                UserUtils.getUserId(), null, oldTask.getTaskProject().toString(), oldTask, task, contents);
         model.addAttribute("task", task);
         return "project/task/index.page";
     }
-
 
 
     @RequestMapping(value = "/finishsave", method = RequestMethod.POST)
@@ -563,7 +559,9 @@ public class TaskAction extends BaseController {
 
     @RequestMapping("/modal/{forward}")
     public String doc(@PathVariable(value = "forward") String forward, Model model, String taskId) {
-        model.addAttribute("task", taskService.findTask(Integer.parseInt(taskId)));
+        ProjectTask task = taskService.findTask(Integer.parseInt(taskId));
+        model.addAttribute("teamList", teamService.findTeamByProjectId(task.getTaskProject()));
+        model.addAttribute("task", task);
         return "project/task/modal/" + forward + ".pagelet";
     }
 
@@ -571,6 +569,29 @@ public class TaskAction extends BaseController {
     public String grouping(String groupKey) {
 
         return "project/task/grouping.page";
+    }
+
+    @ResponseBody
+    @RequestMapping("/ajaxChangeStatu")
+    public Map<String, String> ajaxChangeStatu(ProjectTask task, String content, String taskStatus) {
+        Map<String, String> map = new HashMap<String, String>();
+        task.setTaskLastEditedBy(UserUtils.getUserId());
+        Integer res = 0;
+        if ("doing".equals(taskStatus)) {
+            taskService.updateDoingTask(task);
+        }
+        res = taskService.updateDoingTask(task);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ACTIVATED, task.getTaskId().toString(),
+                UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
+                taskService.findTask(task.getTaskId()), task, content);
+        if (res > 0) {
+            map.put("status", "y");
+            map.put("info", "激活成功");
+        } else {
+            map.put("status", "n");
+            map.put("info", "失败");
+        }
+        return map;
     }
 
 }

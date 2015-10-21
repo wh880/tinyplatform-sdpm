@@ -36,13 +36,13 @@ public class CmsUtils {
     /**
      * 获得项目列表
      */
-    public static Project getProject(Integer projectId) {
+    public static Project getProject(String projectId) {
         List<Project> projectList = getProjectList();
         if (projectId == null && projectList != null && !projectList.isEmpty()) {
             return projectList.get(0);
         }
         for (Project project : projectList) {
-            if (project.getProjectId().equals(projectId)) {
+            if (project.getProjectId().toString().equals(projectId)) {
                 return project;
             }
         }
