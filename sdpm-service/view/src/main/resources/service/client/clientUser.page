@@ -3,9 +3,9 @@
 #set(name="client")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
- #*       #@div(divClass="dropdownBox dropdownBoxes")
-            #include("/service/serviceCom/dropdownMenu.page")
-        #end*#
+    #*       #@div(divClass="dropdownBox dropdownBoxes")
+               #include("/service/serviceCom/dropdownMenu.page")
+           #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
@@ -13,16 +13,15 @@
     ##这里是动态的模块布局
         #@tabBodyCol("ptop-5")
         #end
-        #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+        #@toggleBox({"class":"open"})
             #@toggleLeft({"class":"aclass"})
                 #@settoggleLeftTitle()产品#end
-                        #@settoggleLeftBody("treeLeftbox")
-                            #@zTreeList(call("link",adminPath+"/service/client/treeData"))
-                                #setzTreeValMap({"id":"treeId","name":"pName","pid":
-                                    "pId"}) ##Id中带"p"的为productLine的ID，其余的为productde ID
-                                #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/service/client/list" )
-                            #end
-                        #end
+                #@settoggleLeftBody("treeLeftbox")
+                    #@zTreeList(call("link",adminPath+"/service/client/treeData") {"readOnly":true})
+                        #setzTreeValMap({"id":"treeId","name":"pName","pid":"pId"})
+                        #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/service/client/list" )
+                    #end
+                #end
             #end
             #@toggleRight()
                 #include("/service/client/clientTable.page")

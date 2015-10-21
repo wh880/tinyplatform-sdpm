@@ -90,11 +90,13 @@ public class ClientAction extends BaseController {
         if (client.getClientId() == null) {
             client = clientService.addClient(client);
             //新建用户联系人表
-            serviceClientUser.setUserPhone(client.getUserPhone());
-            serviceClientUser.setUserAccount(client.getUserAccount());
-            serviceClientUser.setClientId(client.getClientId());
-            serviceClientUser.setUserPost(client.getUserPost());
-            clientService.addClientUser(serviceClientUser);
+            if (!client.getUserAccount().isEmpty()) {
+                serviceClientUser.setUserPhone(client.getUserPhone());
+                serviceClientUser.setUserAccount(client.getUserAccount());
+                serviceClientUser.setClientId(client.getClientId());
+                serviceClientUser.setUserPost(client.getUserPost());
+                clientService.addClientUser(serviceClientUser);
+            }
         } else {
             clientService.updateClient(client);
             model.addAttribute("client", client);

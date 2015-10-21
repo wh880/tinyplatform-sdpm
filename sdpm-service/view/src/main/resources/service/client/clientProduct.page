@@ -108,13 +108,6 @@
                         #end
                     #end
                     #@gridSysRow()
-                        #@colLabel("col-4")客户部门：#end
-                        #@gridSysCol(1)#end
-                        #@gridSysCol(7)
-                            <p>${client.clientDeptId}</p>
-                        #end
-                    #end
-                    #@gridSysRow()
                         #@colLabel("col-4")客户登记人：#end
                         #@gridSysCol(1)#end
                         #@gridSysCol(7)
@@ -132,7 +125,7 @@
                         #@colLabel("col-4")客户描述：#end
                         #@gridSysCol(1)#end
                         #@gridSysCol(7)
-                            <p>${client.clientSpec}</p>
+                            ${client.clientSpec}
                         #end
                     #end
                     #@gridSysRow()
@@ -156,49 +149,51 @@
                     #end
                 </div>
             #end
-            #@tinyTable()
-                #@div(divClass="infoContent")
-                    <p class="titleName">客户联系人信息</p>
-                    #@tableBordered()
-                        #@thead()
-                            #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-                                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})联系人姓名#end
-                                #@tinyTh({"class":"","rel":"sortname"})职务#end
-                                #@tinyTh({"class":"","rel":"sortname"})联系人电话#end
-                                #@tinyTh({"class":"","rel":"sortname"})操作#end
-                            #end
+            #@div(divClass="infoContent")
+                <p class="titleName">客户联系人信息</p>
+                <span style="float:right;margin-bottom:3px;margin-top: -7px">
+                    #@aModal(
+                        "#myModal1" "新建联系人" "580" "300" "btn radius btn-primary btn-sm" adminPath+
+                        "/service/client/clientUserUpdate/date"+"?clientId="+client?.clientId)新建
+                    #end
+                </span>
+                #@tableBordered()
+                    #@thead()
+                        #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+                            #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})联系人姓名#end
+                            #@tinyTh({"class":"","rel":"sortname"})职务#end
+                            #@tinyTh({"class":"","rel":"sortname"})联系人电话#end
+                            #@tinyTh({"class":"","rel":"sortname"})操作#end
                         #end
-                        #foreach(var:clientUsers)
-                            <tr>
-                                <td>${var?.userAccount}</td>
-                                <td>${var?.userPost}</td>
-                                <td>${var?.userPhone}</td>
-                                <td>
-                                    #set(m=menuManager.getMenu("linkman-edit"))
-                                    #if(m)
-                                        #@aModal(
-                                            "#myModal1" m.name "580" "300" m.icon adminPath+m.href+"?id="+var?.id)
-                                        #end
+                    #end
+                    #foreach(var:clientUsers)
+                        <tr>
+                            <td>${var?.userAccount}</td>
+                            <td>${var?.userPost}</td>
+                            <td>${var?.userPhone}</td>
+                            <td>
+                                #set(m=menuManager.getMenu("linkman-edit"))
+                                #if(m)
+                                    #@aModal(
+                                        "#myModal1" m.name "580" "300" m.icon adminPath+m.href+"?id="+var?.id)
                                     #end
+                                #end
 
-                                    #set(m1=menuManager.getMenu("linkman-new"))
-                                    #if(m1)
-                                        #@aModal(
-                                            "#myModal1" m1.name "580" "300" m1.icon adminPath+m1.href+
-                                            "?clientId="+var?.clientId)
-                                        #end
+                                #set(m1=menuManager.getMenu("linkman-new"))
+                                #if(m1)
+                                    #@aModal(
+                                        "#myModal1" m1.name "580" "300" m1.icon adminPath+m1.href+
+                                        "?clientId="+var?.clientId)
                                     #end
+                                #end
 
-                                    #set(m2=menuManager.getMenu("linkman-del"))
-                                    #if(m2)
-                                    ##                                        #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m2.href var?.id)<i
-                                    ##                                                class=${m2.icon} title="删除"></i>#end
-                                        #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m2.href var?.id ) <i
-                                                class=${m2.icon}title="删除"></i>#end
-                                    #end
-                                </td>
-                            </tr>
-                        #end
+                                #set(m2=menuManager.getMenu("linkman-del"))
+                                #if(m2)
+                                    #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m2.href var?.id ) <i class="${m2.icon}"
+                                                                                                   title="删除"></i>#end
+                                #end
+                            </td>
+                        </tr>
                     #end
                 #end
             #end

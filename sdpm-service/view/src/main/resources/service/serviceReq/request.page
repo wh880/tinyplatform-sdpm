@@ -43,7 +43,7 @@
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()所有产品#end
             #@settoggleLeftBody("treeLeftbox")
-                #@zTreeList(call("link",adminPath+"/service/client/treeData"))
+                #@zTreeList(call("link",adminPath+"/service/client/treeData") {"readOnly":true})
                     #setzTreeValMap({"id":"treeId","name":"pName","pid":
                         "pId"}) ##Id中带"p"的为productLine的ID，其余的为productde ID
                     #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/service/request/list" )
