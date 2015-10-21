@@ -60,7 +60,16 @@ public class DocAction extends BaseController{
 	private UserService userService;
 	
 	/*
-	 * 主页action。session中存放了文档库id（documentLibId）
+	 * 跳转主页
+	 * 
+	 * @param doclib
+	 * @param request
+	 * @param change
+	 * @param docChange
+	 * @param tree
+	 * @param moduleId
+	 * @return
+	 * 
 	 */
 	@RequestMapping("")
 	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange,String tree, String moduleId)
