@@ -216,17 +216,17 @@ public class TestTaskAction extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("/ajax/user")
-	public List<ProjectTeam> getUser(ProjectTeam projectTeam){
-//		if(projectTeam.getProjectId()<1||projectTeam.getProjectId()==null){
-//			return null;
-//		}
-//		List<ProjectTeam> teams = teamService.findTeamByProjectId(projectTeam.getProjectId());
-//		Integer[] userIds = new Integer[teams.size()];
-//		for(int i=0; i<userIds.length; i++){
-//			userIds[i] = teams.get(i).get
-//		}
-//		List<OrgUser> orgUsers = userService.findUserListByIds();
-		return null/*buildService.findListBuild(projectBuild)*/;
+	public List<OrgUser> getUser(ProjectTeam projectTeam){
+		if(projectTeam.getProjectId()<1||projectTeam.getProjectId()==null){
+			return null;
+		}
+		List<ProjectTeam> teams = teamService.findTeamByProjectId(projectTeam.getProjectId());
+		String[] userIds = new String[teams.size()];
+		for(int i=0; i<userIds.length; i++){
+			userIds[i] = teams.get(i).getTeamUserId();
+		}
+		List<OrgUser> orgUsers = userService.findUserListByIds(userIds);
+		return orgUsers;
 	}
 
 	private String mergeCondition(List<QualityTestRun> runs){
