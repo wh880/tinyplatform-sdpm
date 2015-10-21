@@ -9,13 +9,14 @@
 	  #end
 	#end
 	#@tbody("hide tpl")
-		#@tr()
+		#foreach(step:stepList)
+			#@tr()
 			#@td("text-c stepID")1#end
 			#@td("w-p50")
-				#tinyInput("text" "title" ""{"class":"form-control"})
+				#tinyInput("text" "step" ""{"class":"form-control"})
 			#end
 			#@td()
-				#tinyInput("text" "title" ""{"class":"form-control" ,"placeholder":"标题"})
+				#tinyInput("text" "expect" ""{"class":"form-control"})
 			#end
 			#@td("w-p125")
 					#iconOperations(iconOperationsIcon="icon-chevron-up",iconOperationsTitle="之前添加",iconOperationsCls="btn btn-small btn-default addpre")
@@ -23,22 +24,28 @@
 					#iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls="btn btn-small btn-default delbutton")
 			#end
 		#end
+		#end
+		
 	#end
 	#@tbody("databody")
-	#@tr(trId="row1")
-		#@td("text-c stepID")1#end
-			#@td("w-p50")
-				#tinyInput("text" "title" ""{"class":"form-control"})
+	#foreach(step:stepList)
+		#@tr(trId="row1")
+			#@td("text-c stepID")${stepFor.index}#end
+				#@td("w-p50")
+					#tinyInput("text" "step" step?.caseStepDesc {"class":"form-control"})
+				#end
+				#@td()
+					#tinyInput("text" "expect" step?.caseStepExpect {"class":"form-control"})
+				#end
+			#@td("w-p125")
+					#iconOperations(iconOperationsIcon="icon-chevron-up",iconOperationsTitle="之前添加",iconOperationsCls="btn btn-small btn-default addpre")
+					#iconOperations(iconOperationsIcon="icon-chevron-down",iconOperationsTitle="之后添加",iconOperationsCls="btn btn-small btn-default addnext")
+					#iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls="btn btn-small btn-default delbutton")
 			#end
-			#@td()
-				#tinyInput("text" "title" ""{"class":"form-control" ,"placeholder":"标题"})
-			#end
-		#@td("w-p125")
-				#iconOperations(iconOperationsIcon="icon-chevron-up",iconOperationsTitle="之前添加",iconOperationsCls="btn btn-small btn-default addpre")
-				#iconOperations(iconOperationsIcon="icon-chevron-down",iconOperationsTitle="之后添加",iconOperationsCls="btn btn-small btn-default addnext")
-				#iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls="btn btn-small btn-default delbutton")
 		#end
+		
 	#end
+	
 	#end
 #end
 <script>

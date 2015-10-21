@@ -235,6 +235,11 @@ public class TestCaseAction extends BaseController {
 	@RequestMapping("/copy")
 	public String copy(Integer caseId, Model model) {
 		QualityTestCase testCase = testCaseService.findById(caseId);
+		QualityCaseStep step = new QualityCaseStep();
+		step.setCaseId(caseId);
+		List<QualityCaseStep> stepList = caseStepService.findCaseStepList(step);
+		
+		model.addAttribute("stepList", stepList);
 		model.addAttribute("testCase", testCase);
 		return "/testManagement/page/copyCase.page";
 	}
@@ -245,14 +250,15 @@ public class TestCaseAction extends BaseController {
 		model.addAttribute("testCase", testCase);
 		return "redirect:" + "/a/quality/testCase";
 	}
-
+	
+	@ResponseBody
 	@RequestMapping("/delete")
 	public String delete(Integer testCaseId, Model model) {
 		testCaseService.deleteById(testCaseId);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("status", "success");
 		map.put("info", "删除成功");
-		return "redirect:" + "/a/quality/testCase";
+		return "redirect:" +adminPath+ "/quality/testCase";
 	}
 
 	@RequestMapping("/batchDelete")
