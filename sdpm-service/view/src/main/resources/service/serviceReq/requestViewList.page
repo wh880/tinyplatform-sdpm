@@ -40,7 +40,8 @@
         #@elementItem()
             #@sdpmItem("回访者" "*")
                 #tinyInput(
-                    "text" "reviewer" review?.reviewer {"datatype":"*","nullmsg":"回访者不能为空","id":"回复人员","class":
+                    "text" "reviewer" review?.reviewer?:currentReviewer {"datatype":"*","nullmsg":"回访者不能为空","id":"回复人员",
+                    "class":
                     "input-text"})
             #end
         #end
@@ -51,9 +52,9 @@
                     #@Tselect2Body(
                         "reviewType" review?.reviewType{"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("0")发放回访#end
-                        #@tinyOptionItem("1")拒绝需求回访#end
-                        #@tinyOptionItem("2")无修改需求回访#end
+                        #foreach(item : getDict("reviewType"))
+                            #@tinyOptionItem(item.value)${item.text}#end
+                        #end
                     #end
                 #end
             #end
@@ -66,11 +67,9 @@
                         "回访评分不能为空！","id":
                         "request_title", "class":"input-text select2"})
                         #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("0")很不满意#end
-                        #@tinyOptionItem("1")不满意#end
-                        #@tinyOptionItem("2")一般#end
-                        #@tinyOptionItem("3")满意#end
-                        #@tinyOptionItem("4")非常满意#end
+                        #foreach(item : getDict("reviewScore"))
+                            #@tinyOptionItem(item.value)${item.text}#end
+                        #end
                     #end
                 #end
             #end
@@ -78,7 +77,7 @@
         #@elementItem()
             #@sdpmItem("回访时间" "*")
                 #@tinyDateInput(
-                    "reviewDate" formatDate(review?.reviewDate,
+                    "reviewDate" formatDate(review?.reviewDate?:now(),
                     "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","datatype":"*","nullmsg":"日期不能为空"})#end
             #end
             #@validateDiv("col-2")#end

@@ -36,7 +36,7 @@ public class ProjectDynamicAction extends BaseController {
 
     @RequestMapping("/index")
     public String index(HttpServletRequest request, Model model) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
         model.addAttribute("teamList", teamList);
         return "project/dynamic/index.page";
@@ -44,7 +44,7 @@ public class ProjectDynamicAction extends BaseController {
 
     @RequestMapping("/find")
     public String find(Integer start, Integer limit, String order, String ordertype, HttpServletRequest request, Model model, String selDate, String teamUserId) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         SystemAction systemAction = new SystemAction();
         systemAction.setActionProject(projectId.toString());
         systemAction.setActionObjectType(LogUtil.LogOperateObject.PROJECT.toString());

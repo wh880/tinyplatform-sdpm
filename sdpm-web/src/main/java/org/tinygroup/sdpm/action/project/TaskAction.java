@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
-
+import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
@@ -18,7 +18,6 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.*;
-import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
@@ -40,6 +39,9 @@ import java.util.*;
 @Controller
 @RequestMapping("/a/project/task")
 public class TaskAction extends BaseController {
+
+    public static final String COOKIE_PROJECT_ID = "currentProjectId";
+
     @Autowired
     private TaskService taskService;
     @Autowired
@@ -57,22 +59,23 @@ public class TaskAction extends BaseController {
 
     @RequiresPermissions(value = {"task", "project"}, logical = Logical.OR)
     @RequestMapping("index")
-    public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model, String moduleId, String choose) {
+    public String index(@CookieValue(required = false, value = COOKIE_PROJECT_ID) Integer currentProjectId, String moduleId, String choose,
+                        HttpServletResponse response, HttpServletRequest request, Model model) {
         List<Project> list = projectService.findList();
         Project selProject = new Project();
         if (list == null || list.isEmpty()) {
             return "redirect:" + adminPath + "/project/add";
         } else {
-            if (cookie_projectId == null) {
+            if (currentProjectId == null) {
                 selProject = list.get(0);
                 //maxAge=-1意为永久
-                CookieUtils.setCookie(response, "cookie_projectId", selProject.getProjectId().toString(), -1);
+                CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, selProject.getProjectId().toString(), -1);
             } else {
                 boolean flag = false;
                 for (Project p : list) {
-                    if (p.getProjectId() == cookie_projectId) {
+                    if (p.getProjectId() == currentProjectId) {
                         selProject = p;
-                        CookieUtils.setCookie(response, "cookie_projectId", cookie_projectId.toString(), -1);
+                        CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, currentProjectId.toString(), -1);
                         flag = true;
                         break;
                     }
@@ -80,7 +83,7 @@ public class TaskAction extends BaseController {
                 //若数据库中无cookies中projectId对应的项目，则返回选中第一条
                 if (!flag) {
                     selProject = list.get(0);
-                    CookieUtils.setCookie(response, "cookie_projectId", selProject.getProjectId().toString(), -1);
+                    CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, selProject.getProjectId().toString(), -1);
                 }
             }
         }
@@ -113,7 +116,7 @@ public class TaskAction extends BaseController {
     @RequestMapping("/call")
     public String call(Integer taskId, Model model, HttpServletRequest request) {
         if (taskId != null) {
-            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
             ProjectTask task = taskService.findTask(taskId);
             List<ProjectTeam> team = teamService.findTeamByProjectId(projectId);
             model.addAttribute("teamList", team);
@@ -142,7 +145,7 @@ public class TaskAction extends BaseController {
     @RequestMapping("/finish")
     public String finish(Integer taskId, Model model, HttpServletRequest request) {
         if (taskId != null) {
-            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
             List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
             ProjectTask task = taskService.findTask(taskId);
             model.addAttribute("task", task);
@@ -269,8 +272,8 @@ public class TaskAction extends BaseController {
 
     @RequestMapping("/save")
     public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file,
-                       Model model, String[] taskMailtoArray, HttpServletRequest request, String comment) throws IOException {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+                       Model model, String[] taskMailtoArray, HttpServletRequest request, String comment) {
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         task.setTaskProject(projectId);
         if (task.getTaskId() == null) {
             String taskMailTo = "";
@@ -330,7 +333,7 @@ public class TaskAction extends BaseController {
 
     @RequestMapping("/preadd")
     public String preadd(HttpServletRequest request, Model model, Integer storyId, String taskId) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
 
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
         SystemModule module = new SystemModule();
@@ -465,7 +468,7 @@ public class TaskAction extends BaseController {
         if (taskList.isEmpty()) {
             return "project/task/index.page";
         } else {
-            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
             taskService.batchAdd(taskList, projectId);
             return "project/task/index.page";
         }
@@ -481,7 +484,7 @@ public class TaskAction extends BaseController {
     @RequestMapping("/gantt/init")
     public List<Map<String, String>> ganttInit(HttpServletRequest request) {
         List<Map<String, String>> resList = new ArrayList<Map<String, String>>();
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
 
         ProjectTask task = new ProjectTask();
         task.setTaskProject(projectId);
