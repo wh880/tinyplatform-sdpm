@@ -1,43 +1,39 @@
-	#@div(divClass="infoContent")
-	        <p class="titleName">描述</p>
-	       	<div>
-                &nbsp;&nbsp;&nbsp;${plan?.planSpec}
-	       	</div>
-		#end
+#@div(divClass="infoContent")
+<p class="titleName">描述</p>
+<div>
+    &nbsp;&nbsp;&nbsp;${plan?.planSpec}
+</div>
+#end
 
-      #@div(divClass="infoContent")
-	        <p class="titleName">基本信息</p>
+#@div(divClass="infoContent")
+<p class="titleName">基本信息</p>
 <ul>
-	   <li>
-	    #@elementItem()
+    <li>
+        #@elementItem()
 
-            <p><b>&nbsp;&nbsp;&nbsp;名称:</b>${plan?.planName}</p>
+            <p><b>&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称:</b>${plan?.planName}</p>
 
-		#end
-	   </li>
+        #end
+    </li>
 
     <li>
-	    #@elementItem()
+        #@elementItem()
 
             <p><b>&nbsp;&nbsp;&nbsp;开始日期:</b>${plan?.planBeginDate?formatDate(plan?.planBeginDate,'yyyy-MM-dd'):""}</p>
 
-		#end
-	   </li>
+        #end
+    </li>
 
     <li>
-	    #@elementItem()
+        #@elementItem()
 
             <p><b>&nbsp;&nbsp;&nbsp;结束日期:</b>${plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy-MM-dd'):""}</p>
 
-		#end
-	   </li>
+        #end
+    </li>
 
 </ul>
-      #end
+#end
 
-
-	#@div(divClass="infoContent")
-	        	<p class="titleName">历史记录</p>
-	       		#include("/product/page/tabledemo/historyrecord.page")
-				#end
+#history(adminPath+"/system/action/ajax/history?actionObjectType=plan&actionObjectId="+plan?.planId)
 
