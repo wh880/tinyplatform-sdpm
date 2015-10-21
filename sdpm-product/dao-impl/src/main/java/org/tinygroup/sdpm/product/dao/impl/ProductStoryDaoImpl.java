@@ -277,7 +277,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		}
 		return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
 			public Select generate(ProductStory t) {
-				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("product_story.*,p.product_name,pa.plan_name,o.org_user_account as storyOpenedName,o2.org_user_account as storyAssignedName")).
+				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("product_story.*,p.product_name as productName,pa.plan_name as planName,o.org_user_account as storyOpenedName,o2.org_user_account as storyAssignedName")).
 						from(FragmentSelectItemSql.fragmentFrom("product_story left join product p on p.product_id = product_story.product_id left join product_plan pa on pa.plan_id = product_story.plan_id left join org_user o on o.org_user_id = product_story.story_opened_by left join org_user o2 on o2.org_user_id = product_story.story_assigned_to"))
 						.where(and(
 						PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
@@ -540,7 +540,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		}
 		return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
 			public Select generate(ProductStory t) {
-				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("product_story.*,p.product_name,pa.plan_name,o.org_user_account as storyOpenedName,o2.org_user_account as storyAssignedName")).
+				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("product_story.*,p.product_name as productName,pa.plan_name as planName,o.org_user_account as storyOpenedName,o2.org_user_account as storyAssignedName")).
 						from(FragmentSelectItemSql.fragmentFrom("product_story left join product p on p.product_id = product_story.product_id left join product_plan pa on pa.plan_id = product_story.plan_id left join org_user o on o.org_user_id = product_story.story_opened_by left join org_user o2 on o2.org_user_id = product_story.story_assigned_to"))
 						.where(and(
 						fragmentCondition(condition),
