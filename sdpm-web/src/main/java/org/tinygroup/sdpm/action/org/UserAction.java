@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
@@ -88,6 +87,36 @@ public class UserAction extends BaseController {
         return "redirect:" + adminPath + "/org/user/list/";
     }
 
+
+    @ResponseBody
+    @RequestMapping(value = "/usercheck")
+    public Map usercheck(String param, String orgUserId) {
+
+        List<OrgUser> userList = userService.findUserList(new OrgUser());
+        List<String> userAccount = new ArrayList<String>();
+        Map<String, String> map = new HashMap<String, String>();
+        String account1;
+        if (StringUtil.isBlank(orgUserId)) {
+            account1 = null;
+        } else {
+            OrgUser user = userService.findUser(orgUserId);
+            account1 = user.getOrgUserAccount();
+        }
+        for (OrgUser u : userList) {
+            if (!(u.getOrgUserAccount().equals(account1))) {
+                userAccount.add(u.getOrgUserAccount());
+            }
+        }
+        if (userAccount.contains(param)) {
+            map.put("status", "n");
+            map.put("info", "用户名不可用！");
+        } else {
+            map.put("status", "y");
+            map.put("info", "用户名可用");
+        }
+        return map;
+    }
+
     @RequestMapping("/list")
     public String list(OrgUser orgUser, Model model) {
 //        List<OrgUser> list = userService.findUserList(orgUser);
@@ -137,12 +166,11 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/list/data")
-    public String listData(Integer orgDeptId, Integer start, Integer limit, OrgUser orgUser, Model model,
-                           String groupOperate, SearchInfos searchInfos
+    public String listData(Integer orgDeptId, Integer start, Integer limit, OrgUser orgUser, Model model
     ) {
         if (orgDeptId == null || orgDeptId == -1) {
             orgUser.setOrgDeptId(null);
-            Pager<OrgUser> pager = userService.findUserPager(start, limit, orgUser, groupOperate, searchInfos);
+            Pager<OrgUser> pager = userService.findUserPager(start, limit, orgUser);
             model.addAttribute("pager", pager);
         } else {
             Pager<OrgUser> pager = userService.findUserByDeptId(start, limit, orgDeptId);

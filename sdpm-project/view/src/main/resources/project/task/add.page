@@ -34,14 +34,10 @@
                 #@Tselect2F()
                     #@Tselect2Body("moduleId" copyTask?.taskModule {"class":
                         "input-text select2"})
-                        <option value=""></option>
+                        <option value="">/</option>
                         #foreach(m : moduleList)
                             <option value=${m.moduleId}>${m.moduleName}</option>
                         #end
-                    #end
-                ##填写任意内容，侦听需重新填加 A侦听已内置
-                    #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/product-modular.page">全部</a>
                     #end
                 #end
             #end
@@ -53,7 +49,7 @@
                         "taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"任务类型","datatype":"*",
                         "nullmsg":
                         "任务类型不能为空！"})
-                        <option value=""></option>
+                        <option value="">/</option>
                         #foreach(item : getDict("taskType"))
                             <option value="${item?.value}">${item?.text}</option>
                         #end
@@ -65,7 +61,7 @@
             #@sdpmItem("指派给")
                 #@Tselect2F()
                     #@Tselect2Body("taskAssignedTo" copyTask?.taskAssignedTo {"class":"input-text select2"})
-                        <option value=""></option>
+                        <option value="">/</option>
                         #foreach(t : team)
                             <option value="${t?.teamUserId}">
                                 ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
@@ -84,14 +80,14 @@
                 #@Tselect2F()
                     #@Tselect2Body("taskStory" story?.storyId==null?"":story.storyId {"class":
                         "input-text select2"})
-                        <option value=""></option>
+                        <option value="">/</option>
                         #foreach(s : storyList)
                             <option value=${s?.storyId}>${s?.storyTitle}</option>
                         #end
                     #end
                     #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search">全部</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search" class="r">全部</a>
                     #end
                 #end
             #end
@@ -121,14 +117,13 @@
             #@sdpmItem("优先级")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "taskPri" copyTask?.taskPri {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value=""></option>
+                        "taskPri" copyTask?.taskPri {"class":"input-text","minimumResultsForSearch":"Infinity"})
+                        <option value="">/</option>
                         #foreach(item : getDict("taskPri"))
                             <option value="${item?.value}">${item?.text}</option>
                         #end
                     #end
                 ##填写任意内容，侦听需重新填加 A侦听已内置
-
                 #end
             #end
         #end
@@ -148,10 +143,11 @@
         #@elementItem()
             #@sdpmItem("抄送给")
                 #@Tselect2F()
-                    #@Tselect2Body("taskMailtoArray" "" {"class":"input-text select2","multiple":"multiple"}) ##加上为多选项
+                    #@Tselect2Body("taskMailtoArray" copyTask?.taskMailTo {"class":"input-text select2","multiple":
+                        "multiple"}) ##加上为多选项
                         #foreach(t : team)
                             <option value="${t.teamUserId}">
-                                ${t?.teamUserId?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                                ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                             </option>
                         #end
                     #end

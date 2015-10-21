@@ -167,6 +167,74 @@
         background: #ccc
     }
 </style>
+<script type="text/javascript">
+    <!--
+    $(function () {
+        $(".board-task").draggable();
+        $(".btn-info-toggle").on("click", function () {
+            $(this).parents(".board").toggleClass("show-info");
+        });
+        var statarr = ["board-task-closed", "board-task-cancel", "board-task-done", "board-task-doing", "board-task-wait"];
+        var $kanban =
+        $("#kanbanHeader");
+        $(".col-droppable").droppable({
+            drop: function (event, ui) {
+                ui.helper.css({"left": "0", "top": "0"});
+                var CurrentStat = $(this).attr("data-id");
+
+                var ItemStat = getStat(ui.helper);
+
+                console.log(ItemStat);
+                console.log(CurrentStat);
+                //暂时不需要逻辑判断，可以任意拖动
+//                switch (CurrentStat) {
+//                    case "wait":
+//                        return false;
+//                        break;
+//                    case "doing":
+//                        if (ItemStat == "cancel") {
+//                            return false;
+//                        }
+//                        break;
+//                    case "closed":
+//                        if (ItemStat == "doing") {
+//                            return false;
+//                        }
+//                        break;
+//                    case "cancel":
+//                        if (ItemStat == "doing" || ItemStat == "closed") {
+//                            return false;
+//                        }
+//                        break;
+//                    case "done":
+//                        if (ItemStat == "closed" || ItemStat == "cancel") {
+//                            return false;
+//                        }
+//                        break;
+//                }
+                ui.helper.removeClass(statarr.join(" "));
+                ui.helper.addClass("board-task-" + $(this).attr("data-id"));
+                $(this).append(ui.helper);
+                ui.helper.find("a.edit").trigger("click");
+
+            }
+        });
+
+        $(".board-task").draggable({containment: "#kanbanHeader tbody", opacity: 0.35, addClasses: false})
+        function getStat($this) {
+            for (var i = statarr.length - 1; i >= 0; i--) {
+                if ($this.hasClass(statarr[i])) {
+                    return statarr[i].substr(statarr[i].lastIndexOf("-") + 1);
+                }
+            }
+        }
+
+//        $("#myModal").on("hidden",function(){
+//            $("#boardData").load("/project/task/boardDate.page");
+//        })
+    });
+    //-->
+</script>
 #set(assignedPage=adminPath+"/project/task/modal/assignedModal")
 #set(startPage=adminPath+"/project/task/modal/startModal")
 #set(finishPage=adminPath+"/project/task/modal/finishModal")
@@ -202,28 +270,28 @@
             #end
         </td>
         <td class="col-droppable col-doing" data-id="doing">
-            #if(waitList)
+            #if(doingList)
                 #foreach(task : doingList)
                 #kanbanDoing(task)
             #end
             #end
         </td>
         <td class="col-droppable col-done" data-id="done">
-            #if(waitList)
+            #if(doneList)
                 #foreach(task : doneList)
                 #kanbanDone(task)
             #end
             #end
         </td>
         <td class="col-droppable col-cancel" data-id="cancel">
-            #if(waitList)
+            #if(cancelList)
                 #foreach(task : cancelList)
                 #kanbanCancel(task)
             #end
             #end
         </td>
         <td class="col-droppable col-closed" data-id="closed">
-            #if(waitList)
+            #if(closeList)
                 #foreach(task : closeList)
                 #kanbanClosed(task)
             #end
@@ -242,66 +310,3 @@
     #end
 #end
 
-<script type="text/javascript">
-    <!--
-    $(function () {
-        $(".board-task").draggable();
-        $(".btn-info-toggle").on("click", function () {
-            $(this).parents(".board").toggleClass("show-info");
-        });
-        var statarr = ["board-task-closed", "board-task-cancel", "board-task-done", "board-task-doing", "board-task-wait"];
-        var $kanban =
-        $("#kanbanHeader");
-        $(".col-droppable").droppable({
-            drop: function (event, ui) {
-                ui.helper.css({"left": "0", "top": "0"});
-                var CurrentStat = $(this).attr("data-id");
-
-                var ItemStat = getStat(ui.helper);
-
-                console.log(ItemStat);
-                console.log(CurrentStat);
-                switch (CurrentStat) {
-                    case "wait":
-                        return false;
-                        break;
-                    case "doing":
-                        if (ItemStat == "cancel") {
-                            return false;
-                        }
-                        break;
-                    case "closed":
-                        if (ItemStat == "doing") {
-                            return false;
-                        }
-                        break;
-                    case "cancel":
-                        if (ItemStat == "doing" || ItemStat == "closed") {
-                            return false;
-                        }
-                        break;
-                    case "done":
-                        if (ItemStat == "closed" || ItemStat == "cancel") {
-                            return false;
-                        }
-                        break;
-                }
-                ui.helper.removeClass(statarr.join(" "));
-                ui.helper.addClass("board-task-" + $(this).attr("data-id"));
-                $(this).append(ui.helper);
-                ui.helper.find("[data-action=edit]").trigger("click");
-
-            }
-        });
-
-        $(".board-task").draggable({containment: "#kanbanHeader tbody", opacity: 0.35, addClasses: false})
-        function getStat($this) {
-            for (var i = statarr.length - 1; i >= 0; i--) {
-                if ($this.hasClass(statarr[i])) {
-                    return statarr[i].substr(statarr[i].lastIndexOf("-") + 1);
-                }
-            }
-        }
-    });
-    //-->
-</script>

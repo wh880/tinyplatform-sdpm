@@ -1,10 +1,6 @@
-###!set(activeTitle="左侧树",activeMenuId="1.4")
 #import("/org/tinygroup/zTree/components/zTree.component")
 #import("/common/component/project.component")
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
-##     #import("/fulimanageui/form.component")
-
-##set(pageSize=10,pages=toInt(totalNum/pageSize+1))
 <style>
     .faqSty {
         margin: 5px;
@@ -32,9 +28,6 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
 #set(name="faq")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-    #* #@div(divClass="dropdownBox")
-         #include("/service/serviceCom/dropdownMenu.page")
-     #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
@@ -61,7 +54,6 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
                         #simpleText("请输入要搜索的问题" "faqQuestion" "width:25%")
                     <button type="submit" id="submit" class="btn btn-success "><i class="icon-search"></i>&nbsp;搜问题
                     </button>
-                    ##                        #@btnSubmit("icon-search")&nbsp;搜问题#end
                     <span class="r">
                     #set(m1=menuManager.getMenu("faq-add"))
                         #if(m1)
@@ -77,7 +69,6 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         ##    以下实现faqmenu.page页面下面的分页
         <div class="btnsty-page">#tinyPageNav("bodyconentrap" pager.currentPage pager.totalPages "")</div>
         ##与上面一行的区别，是将“1”改为“page”,page为当前页码，“10”为总页码<div class="btnsty-page">#tinyPageNav("bodyconentrap" page 10 "../page/faqmenu.page")</div>
-        ##    以上实现faqmenu.page页面下面的分页
         #end
     #end
 #end

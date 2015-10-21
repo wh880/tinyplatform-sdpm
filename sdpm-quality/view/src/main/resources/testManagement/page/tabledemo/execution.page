@@ -38,8 +38,8 @@
         #end
         <center>
 	        <button type="button" id="back" class="btn">上一个</button>
-			<button type="submit" id="" class="btn btn-success">通过</button>
-			<button type="submit" id="" class="btn btn-danger">失败</button>
+			<button type="submit" id="" class="btn btn-success">执行</button>
+#*			<button type="submit" id="" class="btn btn-danger">失败</button>*#
 			<button type="button" id="back" class="btn">下一个</button>
 		</center>
     #end

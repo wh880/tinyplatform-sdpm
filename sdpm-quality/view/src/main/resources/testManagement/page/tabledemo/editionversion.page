@@ -32,11 +32,20 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("projectId" testTask?.projectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">项目1</option>
-	                        <option value="ME">项目2</option>
-	                        <option value="MD">项目3</option>
-	                    	#end                
+	                   		 #@Tselect2Body("projectId" testTask?.projectId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 <option value="0">/</option>
+	                   		 #for(project : projectList)
+	                        <option value="${project?.projectId}">${project?.projectTitle}</option>
+	                        #end
+	                    	#end
+                           <script type="text/javascript">
+                                $("#${sid}").on("change",function(){
+                                    var pId = $("#${sid}  option:selected").val();
+                                    alert(pId);
+                                    ajaxRead("${sid}","buildName","buildId","buildName","/quality/bug/ajax/build?buildProject="+pId+"buildProduct=${qualityProductId}",${testTask?.buildName?:0},"build");
+                                    ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/bug/ajax/user?projectId="+pId,${testTask?.testtaskOwner?:0});
+                                })
+                            </script>
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
@@ -51,15 +60,13 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("buildName" testTask?.buildName {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">版本1</option>
-	                        <option value="ME">版本2</option>
-	                        <option value="MD">版本3</option>
+	                   		 #@Tselect2Body("buildName" testTask?.buildName?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
 	                    	#end                
-#*	                    	#@Tselect2Fix()
+	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
-	                    	#end*#
+	                    	#end
                 	  #end
                 	 #end
 					#@validateDiv("col-2")#end
@@ -71,15 +78,13 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("testtaskOwner" testTask?.testtaskOwner {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">A</option>
-	                        <option value="ME">B</option>
-	                        <option value="MD">C</option>
+	                   		 #@Tselect2Body("testtaskOwner" testTask?.testtaskOwner?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
 	                    	#end                
-#*	                    	#@Tselect2Fix()
+                        	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
-	                    	#end*#
+	                    	#end
                 	  #end
                 	 #end
 					#@validateDiv("col-2")#end
@@ -94,9 +99,9 @@
 					#@div(divClass="col-5")
 	                        #@Tselect2F()
 	                   		 #@Tselect2Body("priority" testTask?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
+	                        #for(pri : getDict("versionPriority"))
+	                             <option value="${pri?.value}">${pri?.text}</option>
+	                        #end
 	                    	#end                	                    
                 	  #end
 	                #end
@@ -120,34 +125,15 @@
 						#end					#end
 					#@validateDiv("col-2")#end
 				#end
-#*			#@elementItem()
-				#@colLabel()相关任务：#end
-				#@formControlDiv("col-8")
-					#@Tselect2F()
-	                   		 #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">Connecticut</option>
-	                        <option value="DE">Delaware</option>
-	                        <option value="FL">Florida</option>
-	                        <option value="GA">Georgia</option>
-	                        <option value="IN">Indiana</option>
-	                        <option value="ME">Maine</option>
-	                        <option value="MD">Maryland</option>
-	                    	#end                
-	                    	#@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                	  #end
-				#end
-				#@validateDiv("col-2")#end
-			#end*#
+
 			#@elementItem()
 				#@colLabel()当前状态：#end
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					#@tinySelect("testtaskStatus" testTask?.testtaskStatus {"class":"#####","nullmsg":"请选择","datatype":""})
-						#@optionItem("")请选择#end
-						#@optionItem("")未开始#end
-						#@optionItem("")进行中#end
-						#@optionItem("")已完成#end
-						#@optionItem("")被阻塞#end
+					#for(status : getDict("versionStatus"))
+						#@optionItem(status?.value)${status?.text}#end
+					#end
 					#end
 					#end
 				#end
@@ -166,7 +152,7 @@
 			#@elementItem()
 				#@colLabel()描述：#end
 				#@formControlDiv("col-8")
-					#@Teditor("content" "testtaskDesc" {"initialFrameHeight":"150"})#end
+					#@Teditor("content" "testtaskDesc" {"initialFrameHeight":"150"})${testTask?.testtaskDesc}#end
 
 				#end
 				#@validateDiv("col-2")#end
@@ -174,7 +160,7 @@
 			#@elementItem()
 				#@colLabel()测试总结：#end
 				#@formControlDiv("col-8")
-					#@Teditor("content1" "testtaskReport" {"initialFrameHeight":"150"})#end
+					#@Teditor("content1" "testtaskReport" {"initialFrameHeight":"150"})${testTask?.testtaskReport}#end
 
 				#end
 				#@validateDiv("col-2")#end
@@ -204,4 +190,46 @@
 <script type="text/javascript">
     $(".select2").select2();
 </script>
+<script type="text/javascript">
+	function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
+    		var selectCheck = "select[name="+toName+"]";
+    		$(selectCheck).each(function(){
+    			var sele = $(this);
+    			var s;
+    			$.ajax({
+    				type: "POST",
+    				url: "${TINY_CONTEXT_PATH+adminPath}"+url,
+    				data: $(this).attr('data'),
+    				dataType:"json",
+    				success: function(data){
+    					sele.empty();
+    					if("build"==(isBuild)){
+    					var em = "<option value='0' selected  >trunk</option>";
+    					}else{
+    					var em = "<option value='0' selected  >/</option>";
+    					}
+    					sele.append(em);
+    					for(var i=0,l=data.length;i<l;i++){
+    						var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+    						sele.append(em);
 
+    					}
+
+    					if(value!=null) {
+    						sele.val(value).trigger("change");
+    					}else {
+    						sele.val(data[0][opKey]).trigger("change");
+    					}
+
+
+    				},
+    				error: function(res){
+    					alert("失败");
+    				}
+    			});
+
+
+    		});
+
+    	}
+</script>

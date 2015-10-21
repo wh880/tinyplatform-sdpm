@@ -28,7 +28,7 @@
                 #@Tselect2F()
                     #@Tselect2Body("taskAssignedTo" task?.taskAssignedTo {"class":
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value=""></option>
+                        <option value="">/</option>
                         #foreach(t : teamList)
                             <option value="${t?.teamUserId}">
                                 ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}

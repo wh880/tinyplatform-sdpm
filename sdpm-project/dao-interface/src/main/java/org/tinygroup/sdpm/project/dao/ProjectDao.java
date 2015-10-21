@@ -24,6 +24,11 @@ import org.tinygroup.tinysqldsl.Pager;
 import java.util.List;
 
 public interface ProjectDao extends BaseDao<Project,Integer> {
+
+    /**
+     * @return
+     */
+    public List<Project> tquerytAll(Project project);
     /**
      * 查询
      *

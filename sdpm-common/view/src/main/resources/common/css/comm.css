@@ -429,3 +429,15 @@ a.btn.btn-sm.backBtn, backBtn {
 #main-wrapper #main-menu .navigation>li:first-child{ border-top:0}
 
 .togglenavpart .navtitle{height:43px;}
+
+.theme-clean.menu-on-top #tinyfooter {
+    margin-top: 32px;
+}
+/*FAQ问答页面*/
+.questionBox{width: 75%;margin-left:auto;margin-right:auto}
+.questionBox .questionInfo{border: #eee  1px solid;margin: 18px 0 15px 0;}
+.infoContentbox{padding: 9px;}
+.infoContentbox div{margin-bottom:6px;}
+.questionInfo .Nametitle{background: #f6f6f6;color: #222;border-bottom: #eee 1px solid;padding: 8px; font-weight:bold}
+.questionName,.answerName{display:inline-block;width:48px;float:left}
+.contentInfolist{display:inline-block;}

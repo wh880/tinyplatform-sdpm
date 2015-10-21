@@ -80,39 +80,40 @@
 
 ##右侧按钮
 <span class="r">
-    #set(m1=menuManager.getMenu("pro-task-input"))
-    #if(m1)
-        <div class="btn-group btnDropDown">
-            <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true"
-               aria-expanded="false">
-                导入
-                <span class="caret"></span>
-            </a>
-
-            <ul class="dropdown-menu" aria-labelledby="dLabel">
-                <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/inputBug.page">导入bug</a></li>
-                <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/inputTask.page">导入任务</a></li>
-            </ul>
-
-
-        </div>
-    #end
-    #set(m2=menuManager.getMenu("pro-task-input"))
-    #if(m2)
-        <div class="btn-group btnDropDown">
-            <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true"
-               aria-expanded="false">
-                导出
-                <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dLabel">
-                <li>#@iconOperations("#myModal" "" "导出数据" "700" "100"  "/project/task/outputData.pagelet" "ml-5")
-                    导出数据#end</li>
-                <li>#@iconOperations("#myModal" "" "导出数据" "550" "100" "/project/task/outputModal.pagelet" "ml-5")
-                    导出模板#end</li>
-            </ul>
-        </div>
-    #end
+      ##注释导入、导出
+      ##    #set(m1=menuManager.getMenu("pro-task-input"))
+      ##    #if(m1)
+      ##        <div class="btn-group btnDropDown">
+      ##            <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true"
+      ##               aria-expanded="false">
+      ##                导入
+      ##                <span class="caret"></span>
+      ##            </a>
+      ##
+      ##            <ul class="dropdown-menu" aria-labelledby="dLabel">
+      ##                <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/inputBug.page">导入bug</a></li>
+      ##                <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/inputTask.page">导入任务</a></li>
+      ##            </ul>
+      ##
+      ##
+      ##        </div>
+      ##    #end
+      ##    #set(m2=menuManager.getMenu("pro-task-input"))
+      ##    #if(m2)
+      ##        <div class="btn-group btnDropDown">
+      ##            <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true"
+      ##               aria-expanded="false">
+      ##                导出
+      ##                <span class="caret"></span>
+      ##            </a>
+      ##            <ul class="dropdown-menu" aria-labelledby="dLabel">
+      ##                <li>#@iconOperations("#myModal" "" "导出数据" "700" "100"  "/project/task/outputData.pagelet" "ml-5")
+      ##                    导出数据#end</li>
+      ##                <li>#@iconOperations("#myModal" "" "导出数据" "550" "100" "/project/task/outputModal.pagelet" "ml-5")
+      ##                    导出模板#end</li>
+      ##            </ul>
+      ##        </div>
+      ##    #end
     #foreach(m:menuManager.getScopeMenus("pro-taskmenu2-op"))
         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
     #end

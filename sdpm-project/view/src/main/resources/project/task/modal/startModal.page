@@ -1,11 +1,14 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/startsave" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
-<div style="width:70%;float:left" class="pageleftpart">
+<div style="width:70%;float:left;padding-left: 10px;" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>开始</p>
         #@elementItem()
             #@sdpmItem("实际开始")
                 #dateInputSimple("taskRealStarted" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD")
+                #@tinyDateInput(
+                    "taskRealStarted" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                #end
             #end
         #end
         #@elementItem()
@@ -56,6 +59,6 @@
     <br>
 </div>
 #end
-<div style="width:30%;float:right">
+<div style="width:30%;float:right;padding-right: 10px;">
     #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
 </div>

@@ -85,5 +85,8 @@ public class BuildManagerImpl implements BuildManager {
     public Integer deletereleate(Integer storyId,Integer buildId){
         return projectBuildDao.deletereleate(storyId,buildId);
     }
+    public Integer releateReq(Integer storyId,Integer buildId){
+        return projectBuildDao.releateReq(storyId, buildId);
+    }
 
 }

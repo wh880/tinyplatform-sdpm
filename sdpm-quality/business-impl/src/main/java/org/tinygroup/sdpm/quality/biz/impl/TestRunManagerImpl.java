@@ -6,9 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.quality.biz.inter.TestRunManager;
 import org.tinygroup.sdpm.quality.dao.QualityTestRunDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
+import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 
 @Service
 @Transactional
@@ -31,4 +36,12 @@ public class TestRunManagerImpl implements TestRunManager {
 			testrun.setTestRunLastRunDate(new Date());
 			return testrundao.batchUpdate(testruns);
 		}
+
+	public Pager<QualityTestRun> findPager(Integer start, Integer limit, QualityTestRun testRun,String condition, String sortName, boolean asc) {
+		Condition condition1 = StringUtil.isBlank(condition)?null: FragmentSql.fragmentCondition(condition);
+		if(StringUtil.isBlank(sortName)){
+			return testrundao.queryPager(start,limit,testRun);
+		}
+		return testrundao.queryPager(start,limit,testRun,new OrderBy(sortName,asc));
+	}
 }

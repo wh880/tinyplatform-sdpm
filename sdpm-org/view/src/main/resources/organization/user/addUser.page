@@ -92,15 +92,18 @@
                                 #tinyInput(
                                     "text" "orgUserAccount" user?.orgUserAccount {"datatype":"*","nullmsg":"请输入用户名！",
                                     "id":"请求标题","class":
-                                    "input-text"})
+                                    "input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
+                                    "/org/user/usercheck?orgUserId="+user?.orgUserId})
                             #end
                             #@validateDiv("col-3")#end
                         #end
                         #@elementItem()
-                            #@colLabel("col-3")邮箱：#end
+                            #@colLabel("col-3")<span class="c-red">*</span>邮箱：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserEmail" user?.orgUserEmail {"id":"name",
+                                    "text" "orgUserEmail" user?.orgUserEmail {"placeholder":"@","datatype":"e","id":
+                                    "name",
+                                    "nullmsg":"请输入邮箱！",
                                     "class":
                                     "input-text"})
                             #end

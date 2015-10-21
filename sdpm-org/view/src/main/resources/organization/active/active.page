@@ -52,7 +52,7 @@
                     #end
                 #end
                 #hiddenInput("orgUserIdHidden","orgUserId","","")
-                #end
+            #end
             &nbsp;
 
 
@@ -67,7 +67,7 @@
                         <option class="selProduct" value="${product?.productId}">${product?.productName}</option>
                     #end
 
-                    #end
+                #end
                 #@navSelect2Fix()
                     <a href="${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition"
                        class="r">所有产品</a>&nbsp;
@@ -97,16 +97,10 @@
     #end
 
 </span>
-            <span class="secrchLac">
-                   <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-           </span>
-<div>
-                #include("/organization/active/multiSearch.page")
-            </div>
-                #div(divClass="clearfix")
-            #end
-        #end
-    #end
+    #div(divClass="clearfix")
+#end
+#end
+#end
 #end
 
 <script>
@@ -118,6 +112,7 @@
             $("select[name=navProject]").closest(".droptoprj").find(".toprj>span:first").html("迭代");
             $("select[name=navProduct]").closest(".droptoprj").find(".toprj>span:first").html("产品");
         }
+
         $(".selDate").click(function (e) {
             resetHeadData();
             $("#dynamicTable").attr("data-url", actionUrl + "?selDate=" + $(this).attr("val"));

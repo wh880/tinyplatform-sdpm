@@ -15,7 +15,6 @@
  */
 package org.tinygroup.sdpm.org.service.inter;
 
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -38,7 +37,7 @@ public interface UserService {
      */
     OrgUser findUserByAccount(String account);
 
-    Pager<OrgUser> findUserPager(Integer start, Integer limit, OrgUser orgUser, String groupOperate, SearchInfos searchInfos);
+    Pager<OrgUser> findUserPager(Integer start, Integer limit, OrgUser orgUser);
 
     /**
      * 根据条件查询List
@@ -101,7 +100,7 @@ public interface UserService {
      * @param
      * @return
      */
-    List<OrgUser> findUserListByIds(String... storyId);
+    List<OrgUser> findUserListByIds(String... userId);
     
     /**
      * 根据id查找名字

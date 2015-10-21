@@ -8,30 +8,32 @@
                 #@tr()
                     #@th()所属项目#end
                     #@td()
-                        #if(projectName)
-                            ${projectName}
+                        #@formControlDiv("col-10")
+                            #if(projectName)
+                                ${projectName}
+                            #end
                         #end
                     #end
                 #end
                 #@tr()
                     #@th()所属模块#end
-                    #@td()#@formControlDiv("col-10")
-                        #@Tselect2F()
-                            #@Tselect2Body("moduleId" task.taskModule {"class":"input-text select2"})
-                                <option value="">/</option>
-                                #foreach(m : modulesList)
-                                    <option value="${m.moduleId}">${m.moduleName}</option>
+                    #@td()
+                        #@formControlDiv("col-10")
+                            #@Tselect2F()
+                                #@Tselect2Body("moduleId" task.taskModule {"class":"input-text select2"})
+                                    <option value="">/</option>
+                                    #foreach(m : modulesList)
+                                        <option value="${m.moduleId}">${m.moduleName}</option>
+                                    #end
                                 #end
                             #end
-                            #@Tselect2Fix()
 
-                            #end
                         #end
-                        #@validateDiv("col-2")#end
-                    #end#end
+                    #end
                 #end
                 #@tr()
-                    #@th()相关需求#end
+                    #@th()
+                        <div style="width: 64px;float: right">相关需求</div>#end
                     #@td()
                         #@formControlDiv("col-10")
                             #@Tselect2F()
@@ -42,10 +44,9 @@
                                 #end
                                 #@Tselect2Fix()
                                     <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search">全部</a>
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search" class="r">全部</a>
                                 #end
                             #end
-                            #@validateDiv("col-2")#end
                         #end
                     #end
                 #end
@@ -54,7 +55,7 @@
                     #@td()#@formControlDiv("col-10")
                         #@Tselect2F()
                             #@Tselect2Body("taskAssignedTo" task?.taskAssignedTo {"class":
-                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                "input-text select2"})
                                 #foreach(t : teamList)
                                     <option value="${t?.teamUserId}">
                                         ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
@@ -67,23 +68,24 @@
                                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
                             #end
                         #end
-                        #@validateDiv("col-2")#end
+
                     #end#end
                 #end
                 #@tr()
                     #@th()任务类型#end
-                    #@td()#@formControlDiv("col-10")
-                        #@Tselect2F()
-                            #@Tselect2Body(
-                                "taskType" task?.taskType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                #foreach(item : getDict("taskType"))
-                                    #@tinyOptionItem(item.value)${item.text}#end
+                    #@td()
+                        #@formControlDiv("col-10")
+                            #@Tselect2F()
+                                #@Tselect2Body(
+                                    "taskType" task?.taskType {"class":
+                                    "input-text select2"})
+                                    #foreach(item : getDict("taskType"))
+                                        #@tinyOptionItem(item.value)${item.text}#end
+                                    #end
                                 #end
                             #end
-
                         #end
-                        #@validateDiv("col-2")#end
-                    #end#end
+                    #end
                 #end
                 #@tr()
                     #@th()任务状态#end
@@ -91,28 +93,29 @@
                         #@Tselect2F()
                             #@Tselect2Body(
                                 "taskStatus" task?.taskStatus {"class":
-                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                "input-text select2"})
                                 #foreach(item : getDict("taskStatus"))
                                     #@tinyOptionItem(item.value)${item.text}#end
                                 #end
                             #end
                         #end
-                        #@validateDiv("col-2")#end
+
                     #end#end
                 #end
                 #@tr()
                     #@th()优先级#end
-                    #@td()#@formControlDiv("col-10")
-                        #@Tselect2F()
-                            #@Tselect2Body(
-                                "taskPri" task?.taskPri {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                #foreach(item : getDict("taskPri"))
-                                    #@tinyOptionItem(item.value)${item.text}#end
+                    #@td()
+                        #@formControlDiv("col-10")
+                            #@Tselect2F()
+                                #@Tselect2Body(
+                                    "taskPri" task?.taskPri {"class":"input-text","minimumResultsForSearch":"Infinity"})
+                                    #foreach(item : getDict("taskPri"))
+                                        #@tinyOptionItem(item.value)${item.text}#end
+                                    #end
                                 #end
                             #end
                         #end
-                        #@validateDiv("col-2")#end
-                    #end#end
+                    #end
                 #end
                 #@tr()
                     #@th()抄送给#end
@@ -133,11 +136,10 @@
                                     <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
                                 #end
                             #end
-                            #@validateDiv("col-2")#end
+
                         #end
                     #end
                 #end
-
             #end
         #end
     #end
@@ -153,7 +155,8 @@
                     #@td()
                         #@formControlDiv("col-10")
                             #@tinyDateInput(
-                                "taskEstStared" task?.taskEstStared "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                                "taskEstStared" formatDate(task?.taskEstStared,
+                                "yyyy-MM-dd") "YYYY-MM-dd" {"datatype":"*","placeholder":"选择日期"})
                             #end
                         #end
                     #end
@@ -164,10 +167,10 @@
                         #@formControlDiv("col-10")
                             #if(task.taskRealStarted)
                                 #@tinyDateInput("taskRealStarted" formatDate(task.taskRealStarted,
-                                    "YYYY-MM-DD") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                                    "YYYY-MM-dd") "YYYY-MM-dd" {"datatype":"*","placeholder":"选择日期"})
                                 #end
                             #else
-                                #@tinyDateInput("taskRealStarted" "" "YYYY-MM-DD" {"style":"width:140px","datatype":"*",
+                                #@tinyDateInput("taskRealStarted" "" "YYYY-MM-dd" {"style":"width:140px","datatype":"*",
                                     "placeholder":"选择日期"})
                                 #end
                             #end
@@ -180,8 +183,8 @@
                     #@td()
                         #@formControlDiv("col-10")
                             #@tinyDateInput(
-                                "taskDeadLine" task?.taskDeadLine "YYYY-MM-DD" {"datatype":"*",
-                                "placeholder":"选择日期"})
+                                "taskDeadLine" formatDate(task?.taskDeadLine,"YYYY-MM-dd")
+                            "YYYY-MM-dd" {"datatype":"*","placeholder":"选择日期"})
                             #end
                         #end#end
                 #end
@@ -199,21 +202,25 @@
                 #end
                 #@tr()
                     #@th()总耗时#end
-                    #@td()${task?.taskConsumed}#end
+                    #@td()
+                        ${task?.taskConsumed}
                         #@simpleModal("myModal" "新增日志")#end
                         #@iconOperations("#myModal" "icon-time" "新增日志" "900" "400"
                             "/project/task/consumeTime.pagelet" "ml-5")
+                        #end
                     #end
                 #end
                 #@tr()
                     #@th()预计剩余#end
                     #@td()
                         #@formControlDiv("col-10")
-                            #tinyInput("text" "taskEstimate" copyTask?.taskEstimate {"placeholder":"最初预计","datatype":
-                                "/^[0-9]+(.[0-9]{1,2})?$/",
-                                "class":"","nullmsg":"请输入最初预计",
-                                "aria-describedby":"basic-addon2"})
-                            <span class="input-group-addon" id="basic-addon2">小时</span>
+                            <div class="input-group">
+                                #tinyInput("text" "taskEstimate" task?.taskEstimate {"placeholder":"最初预计","datatype":
+                                    "/^[0-9]+(.[0-9]{1,2})?$/",
+                                    "class":"","nullmsg":"请输入最初预计",
+                                    "aria-describedby":"basic-addon2"})
+                                <span class="input-group-addon" id="basic-addon2">小时</span>
+                            </div>
                         #end
                     #end
                 #end
@@ -230,8 +237,7 @@
             #@tbody()
                 #@tr()
                     #@th()由谁创建#end
-                    #@td() ${task?.taskOpenBy}
-                    #end
+                    #@td()${task?.taskOpenBy==null?"":UserUtils.getUserById(task?.taskOpenBy)?.orgUserRealName}#end
                 #end
                 #@tr()
                     #@th()由谁完成#end
@@ -239,9 +245,12 @@
                         #@formControlDiv("col-10")
                             #@Tselect2F()
                                 #@Tselect2Body("taskFinishedBy" task?.taskFinishedBy {"class":
-                                    "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                    "input-text select2"})
                                     #foreach(t : teamList)
-                                        <option value="${t?.teamUserId}">${t?.teamUserId}</option>
+                                        <option value="${t?.teamUserId}">
+                                            ${t
+                                            ?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                                        </option>
                                     #end
                                 #end
                             ##填写任意内容，侦听需重新填加 A侦听已内置
@@ -261,11 +270,11 @@
                             #if(task.taskFinishedDate)
                                 #@tinyDateInput(
                                     "taskEstStared" formatDate(task.taskFinishedDate,
-                                    "yyyy-MM-dd") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                                    "yyyy-MM-dd") "YYYY-MM-dd" {"datatype":"*","placeholder":"选择日期"})
                                 #end
                             #else
                                 #@tinyDateInput(
-                                    "taskEstStared" "" "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                                    "taskEstStared" "" "YYYY-MM-dd" {"datatype":"*","placeholder":"选择日期"})
                                 #end
                             #end
                         #end
@@ -278,7 +287,10 @@
                             #@Tselect2F()
                                 #@Tselect2Body("taskCanceledBy" task?.taskCanceledBy {"class":"input-text select2"})
                                     #foreach(t : teamList)
-                                        <option value="${t?.teamUserId}">${t?.teamUserId}</option>
+                                        <option value="${t?.teamUserId}">
+                                            ${t
+                                            ?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                                        </option>
                                     #end
                                 #end
                             ##填写任意内容，侦听需重新填加 A侦听已内置
@@ -298,11 +310,11 @@
                             #if(task.taskFinishedDate)
                                 #@tinyDateInput(
                                     "taskEstStared" formatDate(task.taskCanceledDate,
-                                    "yyyy-MM-dd") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                                    "yyyy-MM-dd") "YYYY-MM-dd" {"datatype":"*","placeholder":"选择日期"})
                                 #end
                             #else
                                 #@tinyDateInput(
-                                    "taskEstStared" "" "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                                    "taskEstStared" "" "YYYY-MM-dd" {"datatype":"*","placeholder":"选择日期"})
                                 #end
                             #end
                         #end
@@ -313,9 +325,12 @@
                     #@td()
                         #@formControlDiv("col-10")
                             #@Tselect2F()
-                                #@Tselect2Body("taskClosedBy" task?.taskClosedBy {"class":"input-text select2"})
+                                #@Tselect2Body("taskClosedBy" task?.taskClosedBy==null?"":task?.taskClosedBy {"class":
+                                    "input-text select2"})
                                     #foreach(t : teamList)
-                                        <option value="${t?.teamUserId}">${t?.teamUserId}</option>
+                                        <option value="${t?.teamUserId}">${t
+                                            ?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                                        </option>
                                     #end
                                 #end
                                 #@Tselect2Fix()
@@ -324,34 +339,35 @@
                                 #end
                             #end
                             #@validateDiv("col-2")#end
-                        #end#end
-                #end
-                #@tr()
-                    #@th()关闭原因#end
-                    #@td()
-                        #@formControlDiv("col-10")
-                            #@Tselect2F()
-                                #@Tselect2Body("taskClosedReason" task?.taskClosedReason {"class":"input-text select2"})
-                                    <option value="1">已经完成</option>
-                                    <option value="2">已经关闭</option>
-                                #end
-                            #end
-                            #@validateDiv("col-2 validmsg")#end
                         #end
                     #end
                 #end
+            ##                #@tr()
+            ##                    #@th()关闭原因#end
+            ##                    #@td()
+            ##                        #@formControlDiv("col-10")
+            ##                            #@Tselect2F()
+            ##                                #@Tselect2Body("taskClosedReason" task?.taskClosedReason {"class":"input-text select2"})
+            ##                                    <option value="1">已经完成</option>
+            ##                                    <option value="2">已经关闭</option>
+            ##                                #end
+            ##                            #end
+            ##                            #@validateDiv("col-2 validmsg")#end
+            ##                        #end
+            ##                    #end
+            ##                #end
                 #@tr()
                     #@th()关闭时间#end
                     #@td()
                         #@formControlDiv("col-10")
-                            #if(task.taskFinishedDate)
+                            #if(task.taskCloseDate  )
                                 #@tinyDateInput(
                                     "taskEstStared" formatDate(task.taskCloseDate,
-                                    "yyyy-MM-dd") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                                    "yyyy-MM-dd") "YYYY-MM-dd" {"datatype":"*","placeholder":"选择日期"})
                                 #end
                             #else
                                 #@tinyDateInput(
-                                    "taskEstStared" "" "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                                    "taskEstStared" "" "YYYY-MM-dd" {"datatype":"*","placeholder":"选择日期"})
                                 #end
                             #end
                         #end

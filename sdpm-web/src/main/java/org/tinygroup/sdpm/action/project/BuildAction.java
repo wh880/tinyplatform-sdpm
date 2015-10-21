@@ -349,6 +349,19 @@ public class BuildAction extends BaseController {
 //        }
 //        return "";
 //    }
+    @ResponseBody
+    @RequestMapping("/releateReq")
+    public Map<String, String> releateReq(String ids,Integer buildId){
+//        buildService.releateReq(storyId, buildId);
+        Map<String, String> map = new HashMap<String, String>();
+        for(String storyId:ids.split(",")){
+            buildService.releateReq(Integer.valueOf(storyId), buildId);
+        }
+//        return "project/task/relation-release/product-al-req.page";
+        map.put("status", "y");
+        map.put("info", "关联成功");
+        return map;
+    }
 
     @RequestMapping("/search/reRelateStory")
     public String storyListAction( int page, int pagesize,int id,String groupOperate, SearchInfos searchInfos,
@@ -377,6 +390,26 @@ public class BuildAction extends BaseController {
         return map;
 //        return "/project/task/relation-release/product-al-req.pagelet";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/batchDeleteReq")
+    public Map bctchDelReq(String ids,Integer buildId) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (ids == null || ids == "") {
+            map.put("status", "fail");
+            map.put("info", "请至少选择一条数据");
+            return map;
+        }
+//        List<ProductStory> list = new ArrayList<ProductStory>();
+        for (String s : ids.split(",")) {
+            Integer S = Integer.valueOf(s);
+            buildService.deletereleate(S,buildId);
+        }
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
+    }
+
 
     @ResponseBody
     @RequestMapping("/buildList")

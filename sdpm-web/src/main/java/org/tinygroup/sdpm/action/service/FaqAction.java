@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -144,21 +143,28 @@ public class FaqAction extends BaseController {
         map.put("info", "新增成功");
         return map;
     }
-    /*对树的节点进行编辑*/
+
+    /**
+     * 对树的节点进行编辑
+     *
+     * @param faqParentTypeId
+     * @param faqTypeId
+     * @param faqType
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/editTree")
     public Map editDept(Integer faqParentTypeId, Integer faqTypeId, String faqType) {
         ServiceFaqType type = faqTypeService.findFaqType(faqTypeId);
         type.setFaqType(faqType);
-        if (!StringUtil.isBlank(faqParentTypeId.toString())) {
-            type.setFaqParentTypeId(faqParentTypeId);
-        }
+        type.setFaqParentTypeId(faqParentTypeId);
         faqTypeService.updateFaqType(type);
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");
         map.put("info", "编辑成功");
         return map;
     }
+
     /*树里面的节点的删除*/
     @ResponseBody
     @RequestMapping("/deleteTree")
