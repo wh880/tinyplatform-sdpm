@@ -2,7 +2,7 @@
 {"class":"test","enctype":"multipart/form-data"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
     #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
-<div class="infoPage-left">
+<div class="infoPage-left" style="padding-left: 10px;">
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>编辑</p>
         #@elementItem()
@@ -54,14 +54,14 @@
     <br>
     #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
 </div>
-<div class="infoPage-right">
+<div class="infoPage-right" style="padding-right: 10px;">
     #TypeInfo("projectEdit", task?.taskId)
 </div>
 
 #end
 
 <script>
-    $('select.select2').select2()
+    //    $('select.select2').select2()
     $(function () {
         $("form").Validform({});
     })

@@ -26,6 +26,13 @@ public interface ProjectService {
     public List<Project> findList();
 
     /**
+     * 查询项目，包括统计总消耗等数据
+     * @param project
+     * @return
+     */
+    public List<Project> findProjects(Project project);
+
+    /**
      * 根据项目名称查找项目，项目名称要保证唯一
      *
      * @param projectName

@@ -40,7 +40,6 @@ public class UserUtils {
     private static UserService userService = SpringContextHolder.getBean(UserServiceImpl.class);
     private static MenuManager menuManager = SpringContextHolder.getBean(MenuManagerImpl.class);
 
-
     /**
      * 根据ID获取用户
      *

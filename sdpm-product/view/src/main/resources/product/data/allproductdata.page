@@ -8,8 +8,10 @@
 #for(product:pagerProduct?.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="product">#end
-	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/find?productId=${product?.productId}">${product?.productId}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/find?productId=${product?.productId}">${product?.productName}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${product?.productId}">${product
+        ?.productId}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${product?.productId}">${product
+        ?.productName}</a>#end
 	#@td()1#end
 	#@td()0#end
 	#@td()0#end

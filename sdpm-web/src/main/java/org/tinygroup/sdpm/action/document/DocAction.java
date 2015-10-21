@@ -192,7 +192,7 @@ public class DocAction {
 		List<Product> product = productService.findProductList(new Product());
 		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
 		doc.setDocDeleted("0");	
-		doc.setDocAddedBy(UserUtils.getUser().getOrgUserAccount());
+		doc.setDocAddedBy(UserUtils.getUser().getOrgUserId());
 		DocumentDoc document = docservice.createNewDoc(doc);
 		
 		ProfileUtil profileUtil = new ProfileUtil();		
@@ -244,7 +244,7 @@ public class DocAction {
 	@RequestMapping(value="/doc/editSave",method=RequestMethod.POST)
 	public String editSave(DocumentDoc doc,SystemAction systemAction,Model model){
 		DocumentDoc documentDoc = docservice.findDocById(doc.getDocId());
-		doc.setDocEditedBy(UserUtils.getUser().getOrgUserAccount());
+		doc.setDocEditedBy(UserUtils.getUser().getOrgUserId());
 		docservice.editDoc(doc);
 		
 		LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
@@ -263,9 +263,14 @@ public class DocAction {
 	 *查看文档基本信息
 	 */
 	@RequestMapping("/doc/view")
-	public String docView(HttpServletRequest request,DocumentDoc doc,SystemProfile systemProfile,Model model,Integer docid){
-		
-		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
+	public String docView(HttpServletRequest request,DocumentDoc doc,SystemProfile systemProfile,Model model,Integer docid,Integer type){
+		if(type == 1){
+			doc.setDocLibId(1);
+		}else if (type == 2) {
+			doc.setDocLibId(2);
+		}else{
+			doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
+		}
 		doc = docservice.findDocById(docid);		
 		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
 		systemProfile.setFileObjectType("document");

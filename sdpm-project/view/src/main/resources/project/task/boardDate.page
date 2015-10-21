@@ -167,81 +167,6 @@
         background: #ccc
     }
 </style>
-#set(assignedPage=adminPath+"/project/task/modal/assignedModal")
-#set(startPage=adminPath+"/project/task/modal/startModal")
-#set(finishPage=adminPath+"/project/task/modal/finishModal")
-#set(cancelPage=adminPath+"/project/task/modal/cancelModal")
-#set(editPage=adminPath+"/project/task/modal/editModal")
-#set(closePage=adminPath+"/project/task/modal/closeModal")
-#import("/project/task/boardComponent.component")
-
-<table class="table table-bordered radius" id="kanbanHeader">
-    <colgroup>
-        <col width="20%"/>
-        <col width="20%"/>
-        <col width="20%"/>
-        <col width="20%"/>
-        <col width="20%"/>
-    </colgroup>
-    <thead>
-    <tr>
-        <th class="col-wait">未开始</th>
-        <th class="col-doing">进行中</th>
-        <th class="col-done">已完成</th>
-        <th class="col-cancel">已取消</th>
-        <th class="col-closed">已关闭</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr data-id="0" class="">
-        <td class="col-droppable col-wait" data-id="wait">
-            #if(waitList)
-                #foreach(task : waitList)
-                #kanbanWait(task)
-            #end
-            #end
-        </td>
-        <td class="col-droppable col-doing" data-id="doing">
-            #if(waitList)
-                #foreach(task : doingList)
-                #kanbanDoing(task)
-            #end
-            #end
-        </td>
-        <td class="col-droppable col-done" data-id="done">
-            #if(waitList)
-                #foreach(task : doneList)
-                #kanbanDone(task)
-            #end
-            #end
-        </td>
-        <td class="col-droppable col-cancel" data-id="cancel">
-            #if(waitList)
-                #foreach(task : cancelList)
-                #kanbanCancel(task)
-            #end
-            #end
-        </td>
-        <td class="col-droppable col-closed" data-id="closed">
-            #if(waitList)
-                #foreach(task : closeList)
-                #kanbanClosed(task)
-            #end
-            #end
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-#@dialog("myModal")
-    #@dialogHeader()编辑#end
-    #@dialogBody()#end
-    #@dialogFooter()
-        #@buttonEnsure("ModalSubmitButton")确定#end
-        #@buttonCancel()关闭#end
-    #end
-#end
-
 <script type="text/javascript">
     <!--
     $(function () {
@@ -305,3 +230,78 @@
     });
     //-->
 </script>
+#set(assignedPage=adminPath+"/project/task/modal/assignedModal")
+#set(startPage=adminPath+"/project/task/modal/startModal")
+#set(finishPage=adminPath+"/project/task/modal/finishModal")
+#set(cancelPage=adminPath+"/project/task/modal/cancelModal")
+#set(editPage=adminPath+"/project/task/modal/editModal")
+#set(closePage=adminPath+"/project/task/modal/closeModal")
+#import("/project/task/boardComponent.component")
+
+<table class="table table-bordered radius" id="kanbanHeader">
+    <colgroup>
+        <col width="20%"/>
+        <col width="20%"/>
+        <col width="20%"/>
+        <col width="20%"/>
+        <col width="20%"/>
+    </colgroup>
+    <thead>
+    <tr>
+        <th class="col-wait">未开始</th>
+        <th class="col-doing">进行中</th>
+        <th class="col-done">已完成</th>
+        <th class="col-cancel">已取消</th>
+        <th class="col-closed">已关闭</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-id="0" class="">
+        <td class="col-droppable col-wait" data-id="wait">
+            #if(waitList)
+                #foreach(task : waitList)
+                #kanbanWait(task)
+            #end
+            #end
+        </td>
+        <td class="col-droppable col-doing" data-id="doing">
+            #if(doingList)
+                #foreach(task : doingList)
+                #kanbanDoing(task)
+            #end
+            #end
+        </td>
+        <td class="col-droppable col-done" data-id="done">
+            #if(doneList)
+                #foreach(task : doneList)
+                #kanbanDone(task)
+            #end
+            #end
+        </td>
+        <td class="col-droppable col-cancel" data-id="cancel">
+            #if(cancelList)
+                #foreach(task : cancelList)
+                #kanbanCancel(task)
+            #end
+            #end
+        </td>
+        <td class="col-droppable col-closed" data-id="closed">
+            #if(closeList)
+                #foreach(task : closeList)
+                #kanbanClosed(task)
+            #end
+            #end
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+#@dialog("myModal")
+    #@dialogHeader()编辑#end
+    #@dialogBody()#end
+    #@dialogFooter()
+        #@buttonEnsure("ModalSubmitButton")确定#end
+        #@buttonCancel()关闭#end
+    #end
+#end
+

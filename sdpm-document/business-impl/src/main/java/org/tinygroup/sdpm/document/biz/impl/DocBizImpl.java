@@ -21,6 +21,8 @@ import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
 import org.tinygroup.tinysqldsl.Pager;
 
+import com.thoughtworks.xstream.mapper.Mapper.Null;
+
 /**
  * 除了ID和传递进来的参数,个别参数需要在业务层处理，没有的添加不必要的过滤掉
  * 这里没有处理的字段（除了ID）传进来实体前都需要存在，否则会造成数据库字段混乱和缺失
@@ -121,7 +123,7 @@ public class DocBizImpl implements DocBiz {
 			return docdao.complexQuery(start, limit, doc, condition,
 					orderBy);
 		}
-		return docdao.queryPager(start, limit, doc, orderBy);
+		return docdao.complexQuery(start, limit, doc, null ,orderBy);
 	}
 
 	public int[] batchDelDocByIds(List<DocumentDoc> keys) {
