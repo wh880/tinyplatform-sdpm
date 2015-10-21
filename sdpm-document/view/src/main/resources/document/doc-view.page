@@ -44,7 +44,6 @@
     	 #set(path=f?.filePathname)
     		<a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
     		#foreach(m:menuManager.getScopeMenus("file-op"))
-
 				#if(m.id == "doc-file-edit")					
     				#@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
         	        	#buttonIcon(iconClass=m.icon)#end&nbsp
