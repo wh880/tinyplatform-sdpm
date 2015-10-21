@@ -146,8 +146,10 @@ public class RequestAction extends BaseController {
     @RequestMapping(value = "/review")
     public String review(Integer id, Model model) {
         if (id != null) {
+            OrgUser user = UserUtils.getUser();
             ServiceRequest clientRequest = requestService.findRequest(id);
             model.addAttribute("request", clientRequest);
+            model.addAttribute("currentReviewer", user.getOrgUserAccount());
             if (clientRequest.getRequestStatus() == ServiceRequest.RETURNVISIT) {
                 ServiceReview review = reviewService.findReviewByRequestId(id);
                 model.addAttribute("review", review);
@@ -164,7 +166,6 @@ public class RequestAction extends BaseController {
             reviewService.updateReview(review);
         }
         reviewService.changeStatus(review.getClientRequestId());
-//        model.addAttribute("review", review);
         return "redirect:" + adminPath + "/service/request/list";
     }
 
