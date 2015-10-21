@@ -15,7 +15,7 @@
 			#@div(divClass="operationbar")
 				<span class="f">
 					#foreach(m:menuManager.getScopeMenus("testverleft-tab"))
-						<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="${m.id==get?'active_btn':''}">${m.name}</a>
+						<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="${m.id==status?'active_btn':''}">${m.name}</a>
     				#end    					
 					</span>
 				<span class="r">
@@ -40,25 +40,7 @@
 						<input type="button" value="反选" class="btn btn-default btn-primary col-2"
 						 onclick="selectAllNullorReserve('userid','反选');" />
 						<div class="col-0">&nbsp&nbsp</div>
-						<div class="dropdown col-3">
-							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
-							<ul class="dropdown-menu multi-level" role="menu">
-								<li>
-								#foreach(m:menuManager.getScopeMenus("testversion-op"))
-									#if(m.id=="tversiondelete")
-										<a href="javascript:void(0);">删除</a>
-									#end
-								#end
-								</li>
-								<li>
-								#foreach(m:menuManager.getScopeMenus("testversion-op"))
-									#if(m.id=="teditionversion")
-									<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/editionversion.page">修改</a>
-									#end
-								#end
-								</li>																
-							</ul>
-						</div>
+
 						<div class="col-2">
 							#@mulOperation("muldelete" "http://127.0.0.1:8080/sqdm-quality/testManagement/page/Bug.page")
 							<a href="javascript:;" class="btn radius btn-danger "><i class="icon-trash"></i>批量删除</a>#end

@@ -26,7 +26,7 @@
 #@div()
 	#@p(pClass="title_sty")
 		<span class="f">
-			版本名称</span>
+			版本概况</span>
 		<span class="r">
 			#foreach(m:menuManager.getScopeMenus("testverinfo-tab"))
 				#if(m.id=="tvernote")
@@ -48,38 +48,21 @@
 				#end				
 			#end
 			
-#*			#@aModal("#myModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
-				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/versionStart.page">
-				#buttonIcon(iconClass="icon-play")开始</a>&nbsp;&nbsp;
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionEnd.page">
-				#buttonIcon(iconClass="icon-off")关闭</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">
-				#buttonIcon(iconClass="icon-smile")用例</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionLink.page">
-				#buttonIcon(iconClass="icon-link")关联用例</a>&nbsp;&nbsp;		
-			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/editionversion.page" title="编辑">
-				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")#buttonIcon(iconClass="icon-remove")#end&nbsp				
-			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/version.page" title="返回">
-				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;*#
+
 				</span>
 	#end
 	#@tinyForm("thisform" "url" "post" {"class":""})
-#*	<div class="infoContent">
-    		<p class="titleName">Bug名称</p>*#
+
 	<div style="width:70%;float:left" class="pageleftpart">
 		<div class="infoContent">
-    		<p class="titleName">版本描述</p>
+    		<p class="titleName">测试描述</p>
+    		${testTask?.testtaskDesc}
     	</div>
     	<div class="infoContent">
     		<p class="titleName">测试总结</p>
+    		${testTask?.testtaskReport}
     	</div>    		
-    	#@div(divClass="infoContent")
-            <p class="titleName">历史记录</p>
-        ##加入后，js代码会导致页面排版混乱
-            #include("/testManagement/page/historyRecord.page")
-        #end
+    	#history(adminPath+"/system/action/ajax/history?actionObjectType=testtask&actionObjectId="+testTask?.testversionId)
         <center>
        		 #foreach(m:menuManager.getScopeMenus("testverinfo-tab"))
 				#if(m.id=="tvernote")
@@ -103,7 +86,7 @@
 			</center>
 		</div>
 		<div style="width: 30%;float: right">
-		 #TypeInfo("qualityVersionInfo")
+##		 #TypeInfo("qualityVersionInfo")
 ##   			#include("/testManagement/page/tabledemo/versionRightInfo.page")
     	</div>
     #end

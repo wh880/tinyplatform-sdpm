@@ -1,32 +1,32 @@
 #macro setTinyItemCount(num)
 	<input type="hidden" name="records" value="${num}"/>
 #end
-
-
-
-#set(records=28,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-	#set(pagesize=records-(page-1)*pagesize)
-#end
-#setTinyItemCount(28)
-
-#for(l:linkPager)
+<script type="text/javascript">
+    $(document).ready(function(){
+        var count = $("#records").val();
+        $(".titleName").html("<i class='icon-unlink' style='float: left'>未关联用例("+count+")</i>");
+    });
+</script>
+#setTinyItemCount(casePager?.totalCount)
+#for(case:casePager?.records)
 					#@tr()
 						#@td()<input type="checkbox" value="1" name="userid">#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${l.caseId}</a>#end
+						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${case?.caseId}</a>#end
 						#@td()
 						#@Tselect2F()
 	                   		 #@Tselect2Body("caseVersion" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">版本1</option>
-	                        <option value="ME">版本2</option>
-	                        <option value="MD">版本3</option>
-	                    	#end                
+	                        #set(version = case?.caseVersion?:0)
+	                        #while(version>0)
+	                         <option value="caseVersion">${version}</option>
+	                         #set(version=version-1)
+	                    	#end
+	                    	#end
                 	  #end
                 	  	#end
-						#@td()${l.priority}#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${l.caseTitle}</a>#end
-						#@td()${l.caseType}#end
-						#@td()${l.caseOpenedBy}#end
-						#@td()${l.caseStatus}#end
+						#@td()${case?.priority}#end
+						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${case?.caseTitle}</a>#end
+						#@td()${getDict("caseType",case?.caseType)}#end
+						#@td()${case?.caseOpenedBy?UserUtils.getUserById(case?.caseOpenedBy)?.orgUserRealName:""}#end
+						#@td()${getDict("caseStatus",case?.caseStatus)}#end
 					#end
 				#end

@@ -280,12 +280,13 @@ public class TestCaseAction extends BaseController {
 			CaseStepResult caseStepResult = new CaseStepResult();
 			int i = result.indexOf("{");
 			int j = result.indexOf("}");
-			String[] values = result.substring(i, j).split(";");
+			String[] values = result.substring(i+1, j).split(";");
 			for (String value : values) {
-				if (value.contains("result")) {
-					caseStepResult.setResult(value.split(":")[1]);
+				String[] r = value.split(":");
+				if ("result".equals(r[0])) {
+					caseStepResult.setResult(r.length>1?"":r[1]);
 				} else {
-					caseStepResult.setReal(value.split(":")[1]);
+					caseStepResult.setReal(r.length>1?"":r[1]);
 				}
 			}
 			caseStepResults.add(caseStepResult);
