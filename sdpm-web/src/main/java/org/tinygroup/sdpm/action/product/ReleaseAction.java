@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.ReleaseService;
+import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
@@ -61,9 +61,7 @@ public class ReleaseAction extends BaseController{
 
 		productRelease.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 		ProductRelease release = releaseService.addRelease(productRelease);
-		ProfileUtil profileUtil = new ProfileUtil();
-		profileUtil.uploads(file, release.getReleaseId(), "release", title);
-
+		uploads(file, productRelease.getReleaseId(), ProfileType.RELEASE, title);
 		LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
 				, LogUtil.LogAction.OPENED
 				, String.valueOf(release.getReleaseId())
@@ -82,9 +80,8 @@ public class ReleaseAction extends BaseController{
 		ProductRelease release1 = releaseService.findRelease(release.getReleaseId());
 		releaseService.updateRelease(release);
 
-		ProfileUtil profileUtil = new ProfileUtil();
+		uploads(file, release.getReleaseId(), ProfileType.RELEASE, title);
 
-		profileUtil.uploads(file, release.getReleaseId(), "release", title);
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
 				, LogUtil.LogAction.EDITED

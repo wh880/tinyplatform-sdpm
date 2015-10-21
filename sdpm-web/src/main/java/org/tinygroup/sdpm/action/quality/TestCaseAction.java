@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.quality;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -251,15 +252,16 @@ public class TestCaseAction extends BaseController {
 		model.addAttribute("testCase", testCase);
 		return "redirect:" + "/a/quality/testCase";
 	}
-	
+
+
 	@ResponseBody
 	@RequestMapping("/delete")
-	public String delete(Integer testCaseId, Model model) {
-		testCaseService.deleteById(testCaseId);
+	public Map delete(Integer id) {
+		testCaseService.deleteById(id);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("status", "success");
 		map.put("info", "删除成功");
-		return "redirect:" +adminPath+ "/quality/testCase";
+		return map;
 	}
 
 	@RequestMapping("/batchDelete")
