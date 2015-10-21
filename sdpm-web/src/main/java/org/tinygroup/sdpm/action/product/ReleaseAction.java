@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
@@ -53,16 +55,20 @@ public class ReleaseAction extends BaseController{
 
 
 	@RequestMapping("/save")
-	public  String save(ProductRelease productRelease, Model model, HttpServletRequest request, SystemAction systemAction) throws IOException {
-		
+	public String save(ProductRelease productRelease, HttpServletRequest request, SystemAction systemAction, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
+
+
+
 		productRelease.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-		releaseService.addRelease(productRelease);
+		ProductRelease release = releaseService.addRelease(productRelease);
+		ProfileUtil profileUtil = new ProfileUtil();
+		profileUtil.uploads(file, release.getReleaseId(), "release", title);
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
 				, LogUtil.LogAction.OPENED
-				, String.valueOf(productRelease.getReleaseId())
+				, String.valueOf(release.getReleaseId())
 				, UserUtils.getUserId()
-				, String.valueOf(productRelease.getProductId())
+				, String.valueOf(release.getProductId())
 				, null
 				, null
 				, null
@@ -72,9 +78,13 @@ public class ReleaseAction extends BaseController{
 	}
 	
 	@RequestMapping("/update")
-	public String update(ProductRelease release,SystemAction systemAction) throws IOException {
+	public String update(ProductRelease release, SystemAction systemAction, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
 		ProductRelease release1 = releaseService.findRelease(release.getReleaseId());
 		releaseService.updateRelease(release);
+
+		ProfileUtil profileUtil = new ProfileUtil();
+
+		profileUtil.uploads(file, release.getReleaseId(), "release", title);
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
 				, LogUtil.LogAction.EDITED

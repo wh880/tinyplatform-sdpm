@@ -25,7 +25,7 @@
               isShow="1" scope="testbug-tab"></menu>    
          <menu id="tbugnote" name="日志" href="/testManagement/page/addLog.pagelet" icon="icon-time" sort="7"
               isShow="1" scope="testbuginfo-tab"></menu>         
-         <menu id="tbugadddemand" name="提需求" href="/product/page/tabledemo/product-demand-add.page" icon="icon-lightbulb" sort="3"
+         <menu id="tbugadddemand" name="提需求" href="/product/story/addstory" icon="icon-lightbulb" sort="3"
               isShow="1" scope="testbuginfo-tab"></menu>
          <menu id="tbugremark" name="备注" href="" icon="icon-comment-alt" sort="2"
               isShow="1" scope="testbuginfo-tab"></menu>

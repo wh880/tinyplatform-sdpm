@@ -46,9 +46,10 @@
         </div>
     #end
 
-    #@div(divClass="infoContent")
-        #history(adminPath+"/system/action/ajax/history?actionObjectType=product&actionObjectId="+product?.productId)
-    #end
+
+
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=product&actionObjectId="+product?.productId)
+
 
 
 

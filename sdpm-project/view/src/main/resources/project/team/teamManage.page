@@ -57,7 +57,7 @@
             <td>
                 #@Tselect2F()
                     #@Tselect2Body("teamList["+a+"].teamUserId" "" {"class":"input-text select2"})
-                        <option value=""></option>
+                        <option value="">/</option>
                         #foreach(u : userList)
                             <option value="${u.orgUserAccount}">${u.orgUserAccount}</option>
                         #end

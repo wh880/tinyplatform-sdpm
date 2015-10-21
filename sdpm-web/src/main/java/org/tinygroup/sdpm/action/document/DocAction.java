@@ -192,7 +192,7 @@ public class DocAction {
 		List<Product> product = productService.findProductList(new Product());
 		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
 		doc.setDocDeleted("0");	
-		doc.setDocAddedBy(UserUtils.getUser().getOrgUserAccount());
+		doc.setDocAddedBy(UserUtils.getUser().getOrgUserId());
 		DocumentDoc document = docservice.createNewDoc(doc);
 		
 		ProfileUtil profileUtil = new ProfileUtil();		
@@ -244,7 +244,7 @@ public class DocAction {
 	@RequestMapping(value="/doc/editSave",method=RequestMethod.POST)
 	public String editSave(DocumentDoc doc,SystemAction systemAction,Model model){
 		DocumentDoc documentDoc = docservice.findDocById(doc.getDocId());
-		doc.setDocEditedBy(UserUtils.getUser().getOrgUserAccount());
+		doc.setDocEditedBy(UserUtils.getUser().getOrgUserId());
 		docservice.editDoc(doc);
 		
 		LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,

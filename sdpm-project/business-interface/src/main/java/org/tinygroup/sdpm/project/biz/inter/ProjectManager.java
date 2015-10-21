@@ -9,6 +9,14 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-18.
  */
 public interface ProjectManager {
+
+    /**
+     * 根据项目查，关联查询了总消耗等信息
+     *
+     * @param project
+     * @return
+     */
+    public List<Project> findListProjects(Project project);
     /**
      * 根据ids查询项目
      *

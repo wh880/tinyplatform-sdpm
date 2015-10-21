@@ -8,7 +8,7 @@
 	#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/view?docid=${l?.docId}">${l?.docId}</a>#end
 	#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/view?docid=${l?.docId}">${l?.docTitle}</a>#end
 	#@td()${getDict("docType",l?.getDocType())}#end
-	#@td()${l?.docAddedBy}#end
+	#@td()${l?.docAddName}#end
 	#@td()${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy年MM月dd日'):""}#end
 	 #@td()
 	 	#foreach(m:menuManager.getScopeMenus("doc-op"))
