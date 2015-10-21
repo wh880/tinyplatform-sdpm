@@ -91,4 +91,11 @@ public interface BuildService {
      * @return
      */
     public Integer deletereleate(Integer storyId,Integer buildId);
+    /**
+     * 关联需求
+     * @param storyId
+     * @param buildId
+     * @return
+     */
+    public Integer releateReq(Integer storyId,Integer buildId);
 }

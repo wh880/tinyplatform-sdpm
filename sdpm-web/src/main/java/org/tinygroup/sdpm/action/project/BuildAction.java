@@ -349,6 +349,19 @@ public class BuildAction extends BaseController {
 //        }
 //        return "";
 //    }
+    @ResponseBody
+    @RequestMapping("/releateReq")
+    public Map<String, String> releateReq(String ids,Integer buildId){
+//        buildService.releateReq(storyId, buildId);
+        Map<String, String> map = new HashMap<String, String>();
+        for(String storyId:ids.split(",")){
+            buildService.releateReq(Integer.valueOf(storyId), buildId);
+        }
+//        return "project/task/relation-release/product-al-req.page";
+        map.put("status", "y");
+        map.put("info", "关联成功");
+        return map;
+    }
 
     @RequestMapping("/search/reRelateStory")
     public String storyListAction( int page, int pagesize,int id,String groupOperate, SearchInfos searchInfos,
