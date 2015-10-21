@@ -39,10 +39,6 @@
                             <option value=${m.moduleId}>${m.moduleName}</option>
                         #end
                     #end
-                ##填写任意内容，侦听需重新填加 A侦听已内置
-                    #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/product-modular.page">全部</a>
-                    #end
                 #end
             #end
         #end
@@ -91,7 +87,7 @@
                     #end
                     #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search">全部</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search" class="r">全部</a>
                     #end
                 #end
             #end
@@ -121,7 +117,7 @@
             #@sdpmItem("优先级")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "taskPri" copyTask?.taskPri {"class":"input-text"}) ##,"multiple":"multiple"加上为多选项
+                        "taskPri" copyTask?.taskPri {"class":"input-text","minimumResultsForSearch":"Infinity"})
                         <option value="">/</option>
                         #foreach(item : getDict("taskPri"))
                             <option value="${item?.value}">${item?.text}</option>
@@ -147,11 +143,11 @@
         #@elementItem()
             #@sdpmItem("抄送给")
                 #@Tselect2F()
-                    #@Tselect2Body("taskMailtoArray" copyTask?.taskMailtoArray {"class":"input-text select2","multiple":
+                    #@Tselect2Body("taskMailtoArray" copyTask?.taskMailTo {"class":"input-text select2","multiple":
                         "multiple"}) ##加上为多选项
                         #foreach(t : team)
                             <option value="${t.teamUserId}">
-                                ${t?.teamUserId?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                                ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                             </option>
                         #end
                     #end

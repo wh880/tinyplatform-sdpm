@@ -46,7 +46,7 @@ public class DocBizImpl implements DocBiz {
 		// 添加文档库
 		doclib.setDocLibAddedDate(new Date());
 		doclib.setDocLibEditedDate(new Date());
-	
+		doclib.setDocLibDeleted("0");
 		return doclibdao.add(doclib);
 	}
 

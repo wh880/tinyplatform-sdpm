@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
@@ -33,6 +34,8 @@ public class ProjectstoryAction extends BaseController {
     private TaskService taskService;
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private StoryService storyService;
 
     @RequestMapping("/find")
     public String find(Model model, HttpServletRequest request, Integer start, Integer limit, String order, String ordertype) {
@@ -107,15 +110,18 @@ public class ProjectstoryAction extends BaseController {
             ProjectStory projectStory = new ProjectStory();
             projectStory.setProjectId(projectId);
             projectStory.setStoryId(Integer.parseInt(id[i]));
+            ProductStory productStory = storyService.findStory(Integer.parseInt(id[i]));
+            projectStory.setProductId(productStory.getProductId());
+            projectStory.setStoryVersion(productStory.getStoryVersion());
             projectStoryList.add(projectStory);
         }
         int[] res = projectStoryService.addLink(projectStoryList);
         if (res.length > 0) {
-            map.put("statu", "y");
+            map.put("status", "y");
             map.put("info", "关联成功");
-            map.put("url", "project/demand/index.page");
+            map.put("url", "/a/project/manage/demand/index");
         } else {
-            map.put("statu", "n");
+            map.put("status", "n");
             map.put("info", "关联失败");
         }
         return map;

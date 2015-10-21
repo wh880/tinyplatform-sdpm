@@ -1,8 +1,5 @@
 package org.tinygroup.sdpm.quality.biz.impl;
 
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +12,9 @@ import org.tinygroup.sdpm.quality.biz.inter.TestCaseManager;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by chenpeng15668 on 2015-9-24
@@ -51,10 +51,9 @@ public class TestCaseManagerImpl implements TestCaseManager {
 	}
 	
 	public Integer delete(Integer id){
-		QualityTestCase testcase = new QualityTestCase();
-		testcase.setCaseId(id);
-		testcase.setDeleted(QualityTestCase.DELETE_YES);
-		return testcasedao.edit(testcase);
+
+		return testcasedao.softDelete(id);
+
 	}
 	
 	public int[] batchDelete(List<QualityTestCase> testcases){

@@ -6,6 +6,9 @@
         #@elementItem()
             #@sdpmItem("实际开始")
                 #dateInputSimple("taskRealStarted" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD")
+                #@tinyDateInput(
+                    "taskRealStarted" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                #end
             #end
         #end
         #@elementItem()

@@ -87,6 +87,8 @@ public class TaskAction extends BaseController {
                 }
             }
         }
+        //model.addAttribute("selProject", selProject);
+        //model.addAttribute("projectList", list);
         request.getSession().setAttribute("selProject", selProject);
         request.getSession().setAttribute("projectList", list);
         if (moduleId != null) {
@@ -290,20 +292,14 @@ public class TaskAction extends BaseController {
                     newtask.getTaskId().toString(), UserUtils.getUserId(),
                     null, newtask.getTaskProject().toString(), null,
                     newtask, comment);
-
-            ProfileUtil profileUtil = new ProfileUtil();
-            try {
-                profileUtil.uploadNoTitle(file, newtask.getTaskId(), "task");
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            uploadNoTitle(file,newtask.getTaskId(), ProfileType.TASK);
         } else {
             taskService.updateTask(task);
         }
         model.addAttribute("task", task);
         return "project/task/index.page";
     }
+
 
 
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
@@ -318,6 +314,7 @@ public class TaskAction extends BaseController {
         model.addAttribute("task", task);
         return "project/task/index.page";
     }
+
 
 
     @RequestMapping(value = "/finishsave", method = RequestMethod.POST)
@@ -444,7 +441,7 @@ public class TaskAction extends BaseController {
 
     @RequestMapping("/preBatchAdd")
     public String preBatchAdd(Model model, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
         model.addAttribute("teamList", teamService.findTeamByProjectId(projectId));
 
         List<ProductStory> storyList = storyService.findStoryByProject(projectId);

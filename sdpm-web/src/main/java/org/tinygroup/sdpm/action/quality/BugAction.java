@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
-import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -32,6 +31,7 @@ import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
+import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
@@ -572,7 +572,7 @@ public class BugAction extends BaseController {
 	
 	@RequestMapping(value = "/save")
 	public String save(QualityBug bug,SystemAction systemAction,@RequestParam(value = "file", required = false)MultipartFile[] file,
-			String[] title, HttpServletRequest request){
+			String[] title, HttpServletRequest request) throws IOException {
 
 		if(!StringUtil.isBlank(bug.getBugAssignedTo())){
 			bug.setBugAssignedDate(new Date());
@@ -582,12 +582,8 @@ public class BugAction extends BaseController {
 		bug.setBugOpenedDate(new Date());
 		bug.setBugOpenedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		QualityBug qbug=bugService.addBug(bug);
-		ProfileUtil profileUtil = new ProfileUtil();
-		try {
-			profileUtil.uploads(file, qbug.getBugId(), "bug", title);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+		uploads(file,qbug.getBugId(), ProfileType.BUG,title);
 
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
