@@ -83,7 +83,7 @@ public class ProjectManagerImpl implements ProjectManager {
         if (ids.isEmpty()) {
             return null;
         } else {
-            String condition = "projectId in ( ";
+            String condition = "project_id in ( ";
             for (int i = 0; i < ids.size(); i++) {
                 if (i == 0) {
                     condition = condition + ids.get(i) + " ";
