@@ -85,16 +85,16 @@
                 <p>${company?.orgCompanyBackyard}</p>
             #end
         #end
-        #@gridSysRow()
-            #@colLabel("col-4")匿名登录：#end
-            #@gridSysCol(8)
-                #if(company?.orgCompanyGuest==1)
-                    <p>允许</p>
-                #else
-                    <p>不允许</p>
-                #end
-            #end
-        #end
+    ##        #@gridSysRow()
+    ##            #@colLabel("col-4")匿名登录：#end
+    ##            #@gridSysCol(8)
+    ##                #if(company?.orgCompanyGuest==1)
+    ##                    <p>允许</p>
+    ##                #else
+    ##                    <p>不允许</p>
+    ##                #end
+    ##            #end
+    ##        #end
     </div>
     #end
 #end

@@ -17,6 +17,7 @@ package org.tinygroup.sdpm.org.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
@@ -38,8 +39,8 @@ public class UserServiceImpl implements UserService {
         return userManager.findUserByAccount(account);
     }
 
-    public Pager<OrgUser> findUserPager(Integer start, Integer limit, OrgUser orgUser) {
-        return userManager.findPager(start, limit, orgUser);
+    public Pager<OrgUser> findUserPager(Integer start, Integer limit, OrgUser orgUser, String groupOperate, SearchInfos searchInfos) {
+        return userManager.findPager(start, limit, orgUser, groupOperate, searchInfos);
     }
 
     public List<OrgUser> findUserList(OrgUser orgUser) {

@@ -4,18 +4,18 @@
 
 
 
-#set(records=teamPager.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=teamPager?.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(t:teamPager.getRecords())
+#for(t:teamPager?.getRecords())
 #@tr()
     #@td()<input type="checkbox" value="1"
                  name="idCheck">#end
     #@td()
-    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?account=${t?.teamAccount}">
-        ${t?.teamAccount=null?"":UserUtils.getUserByAccount(t?.teamAccount)?.orgUserRealName}
+    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?account=${t?.teamUserId}">
+        ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
     </a>
     #end
     #@td()${t?.teamRole}#end

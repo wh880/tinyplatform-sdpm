@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
@@ -136,10 +137,12 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/list/data")
-    public String listData(Integer orgDeptId, Integer start, Integer limit, OrgUser orgUser, Model model) {
+    public String listData(Integer orgDeptId, Integer start, Integer limit, OrgUser orgUser, Model model,
+                           String groupOperate, SearchInfos searchInfos
+    ) {
         if (orgDeptId == null || orgDeptId == -1) {
             orgUser.setOrgDeptId(null);
-            Pager<OrgUser> pager = userService.findUserPager(start, limit, orgUser);
+            Pager<OrgUser> pager = userService.findUserPager(start, limit, orgUser, groupOperate, searchInfos);
             model.addAttribute("pager", pager);
         } else {
             Pager<OrgUser> pager = userService.findUserByDeptId(start, limit, orgDeptId);
@@ -210,19 +213,17 @@ public class UserAction extends BaseController {
 
     @RequestMapping("/task/search")
     public String taskSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, ProjectTask task, String order, String ordertype, Model model, HttpServletRequest request) {
-        OrgUser user = userService.findUser(id);
-        String account = user.getOrgUserAccount();
         ProjectTask task1 = new ProjectTask();
         if (choose.equals("7")) {
-            task1.setTaskCanceledBy(account);
+            task1.setTaskCanceledBy(id);
         } else if (choose.equals("4")) {
-            task1.setTaskOpenBy(account);
+            task1.setTaskOpenBy(id);
         } else if (choose.equals("5")) {
-            task1.setTaskFinishedBy(account);
+            task1.setTaskFinishedBy(id);
         } else if (choose.equals("6")) {
-            task1.setTaskClosedBy(account);
+            task1.setTaskClosedBy(id);
         } else {
-            task1.setTaskAssignedTo(account);
+            task1.setTaskAssignedTo(id);
         }
         Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task1, order, false, null, null);
         List<Integer> projectIdList = new ArrayList<Integer>();
@@ -248,13 +249,13 @@ public class UserAction extends BaseController {
         String account = user.getOrgUserAccount();
         QualityBug bug = new QualityBug();
         if (choose.equals("6")) {
-            bug.setBugClosedBy(account);
+            bug.setBugClosedBy(id);
         } else if (choose.equals("5")) {
-            bug.setBugResolvedBy(account);
+            bug.setBugResolvedBy(id);
         } else if (choose.equals("4")) {
-            bug.setBugOpenedBy(account);
+            bug.setBugOpenedBy(id);
         } else {
-            bug.setBugAssignedTo(account);
+            bug.setBugAssignedTo(id);
         }
         Pager<QualityBug> bugPager = bugService.findBugListPager(limit * (page - 1), limit, null, bug, order, false);
         model.addAttribute("bugPager", bugPager);
@@ -289,14 +290,12 @@ public class UserAction extends BaseController {
 
     @RequestMapping("/testtask1/search")
     public String testCaseSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, QualityTestCase testCase, String order, String ordertype, Model model, HttpServletRequest request) {
-        OrgUser user = userService.findUser(id);
-        String account = user.getOrgUserAccount();
         QualityTestCase testCase1 = new QualityTestCase();
         if (choose.equals("4")) {
-            testCase1.setCaseScriptedBy(account);
+            testCase1.setCaseScriptedBy(id);
         }
         if (choose.equals("5")) {
-            testCase1.setCaseOpenedBy(account);
+            testCase1.setCaseOpenedBy(id);
         }
         Pager<QualityTestCase> testCasePager = testCaseService.findTestCasePager(start, limit, testCase1, order, false);
         model.addAttribute("testCasePager", testCasePager);
@@ -369,10 +368,8 @@ public class UserAction extends BaseController {
 
     @RequestMapping("/project/search")
     public String projectSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, ProjectTask task, String order, String ordertype, Model model, HttpServletRequest request) {
-        OrgUser user = userService.findUser(id);
-        String account = user.getOrgUserAccount();
         ProjectTeam team = new ProjectTeam();
-        team.setTeamAccount(account);
+        team.setTeamUserId(id);
         List<ProjectTeam> teamList = teamService.findTeamList(team);
         List<Project> projectList = new ArrayList<Project>();
         for (ProjectTeam team1 : teamList) {

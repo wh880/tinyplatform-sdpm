@@ -36,8 +36,8 @@
         #foreach(t : teamList)
         <tr>
             #@thW("250px")
-                ${t.teamAccount}
-                <input name="teamList[${a}].teamAccount" value="${t.teamAccount}" type="hidden">
+                ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                <input name="teamList[${a}].teamUserId" value="${t?.teamUserId}" type="hidden">
                 <input name="teamList[${a}].id" value="${t.id}" type="hidden">
             #end
             <td>
@@ -56,7 +56,7 @@
         <tr>
             <td>
                 #@Tselect2F()
-                    #@Tselect2Body("teamList["+a+"].teamAccount" "" {"class":"input-text select2"})
+                    #@Tselect2Body("teamList["+a+"].teamUserId" "" {"class":"input-text select2"})
                         <option value=""></option>
                         #foreach(u : userList)
                             <option value="${u.orgUserAccount}">${u.orgUserAccount}</option>

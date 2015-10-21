@@ -24,6 +24,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.org.dao.OrgUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
@@ -253,6 +254,49 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                                 ORG_USERTABLE.ORG_USER_DELETED.eq(t.getOrgUserDeleted())));
                 return addOrderByElements(select, orderBies);
             }
+        });
+    }
+
+    public Pager<OrgUser> queryPagerBy(final int start, final int limit, OrgUser orgUser, final Condition condition1) {
+        if (orgUser == null) {
+            orgUser = new OrgUser();
+        }
+
+        return getDslTemplate().queryPager(start, limit, orgUser, false, new SelectGenerateCallback<OrgUser>() {
+
+            public Select generate(OrgUser t) {
+                Select select = MysqlSelect.selectFrom(ORG_USERTABLE).where(
+                        and(condition1,
+                                ORG_USERTABLE.ORG_DEPT_ID.eq(t.getOrgDeptId()),
+                                ORG_USERTABLE.ORG_USER_ACCOUNT.eq(t.getOrgUserAccount()),
+                                ORG_USERTABLE.ORG_USER_PASSWORD.eq(t.getOrgUserPassword()),
+                                ORG_USERTABLE.ORG_USER_ROLE.eq(t.getOrgUserRole()),
+                                ORG_USERTABLE.ORG_USER_REAL_NAME.eq(t.getOrgUserRealName()),
+                                ORG_USERTABLE.ORG_USER_NICK_NAME.eq(t.getOrgUserNickName()),
+                                ORG_USERTABLE.ORG_USER_SUBMITTER.eq(t.getOrgUserSubmitter()),
+                                ORG_USERTABLE.ORG_USER_AVATAR.eq(t.getOrgUserAvatar()),
+                                ORG_USERTABLE.ORG_USER_BIRTHDAY.eq(t.getOrgUserBirthday()),
+                                ORG_USERTABLE.ORG_USER_GENDER.eq(t.getOrgUserGender()),
+                                ORG_USERTABLE.ORG_USER_EMAIL.eq(t.getOrgUserEmail()),
+                                ORG_USERTABLE.ORG_USER_SKYPE.eq(t.getOrgUserSkype()),
+                                ORG_USERTABLE.ORG_USER_Q_Q.eq(t.getOrgUserQQ()),
+                                ORG_USERTABLE.ORG_USER_YAHOO.eq(t.getOrgUserYahoo()),
+                                ORG_USERTABLE.ORG_USER_G_TALK.eq(t.getOrgUserGTalk()),
+                                ORG_USERTABLE.ORG_USER_WANG_WANG.eq(t.getOrgUserWangWang()),
+                                ORG_USERTABLE.ORG_USER_MOBILE.eq(t.getOrgUserMobile()),
+                                ORG_USERTABLE.ORG_USER_PHONE.eq(t.getOrgUserPhone()),
+                                ORG_USERTABLE.ORG_USER_ADDRESS.eq(t.getOrgUserAddress()),
+                                ORG_USERTABLE.ORG_USER_ZIP_CODE.eq(t.getOrgUserZipCode()),
+                                ORG_USERTABLE.ORG_USER_JOIN.eq(t.getOrgUserJoin()),
+                                ORG_USERTABLE.ORG_USER_VISITS.eq(t.getOrgUserVisits()),
+                                ORG_USERTABLE.ORG_USER_IP.eq(t.getOrgUserIp()),
+                                ORG_USERTABLE.ORG_USER_LAST.eq(t.getOrgUserLast()),
+                                ORG_USERTABLE.ORG_USER_FAILS.eq(t.getOrgUserFails()),
+                                ORG_USERTABLE.ORG_USER_LOCKED.eq(t.getOrgUserLocked()),
+                                ORG_USERTABLE.ORG_USER_DELETED.eq(t.getOrgUserDeleted())));
+                return select;
+            }
+
         });
     }
 

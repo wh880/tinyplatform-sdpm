@@ -1,6 +1,5 @@
 package org.tinygroup.sdpm.action.statistic;
 
-import org.hibernate.validator.constraints.CreditCardNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,8 +40,7 @@ public class StatisticAction extends BaseController {
             ProductPlan plan =new ProductPlan();
             plan.setDeleted(0);
             plan.setProductId(products.get(i).getProductId());
-            List<ProductPlan> productPlans = planService.findPlanList(plan);
-
+            List<ProductPlan> productPlans = planService.statisticfind(plan);
             map.put(products.get(i),productPlans);
 
         }

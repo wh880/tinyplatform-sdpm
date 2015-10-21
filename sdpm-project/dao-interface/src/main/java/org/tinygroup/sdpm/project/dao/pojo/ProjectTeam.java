@@ -41,7 +41,7 @@ public class ProjectTeam implements Serializable {
 	 * 用户
 	 * 
 	 */
-	private String teamAccount;
+	private String teamUserId;
 
 	/** 
 	 * 角色
@@ -83,12 +83,12 @@ public class ProjectTeam implements Serializable {
 		this. projectId = projectId;
 	}
 
-	public String getTeamAccount() {
-		return teamAccount;
+	public String getTeamUserId() {
+		return teamUserId;
 	}
 
-	public void setTeamAccount(String teamAccount){
-		this. teamAccount = teamAccount;
+	public void setTeamUserId(String teamUserId) {
+		this.teamUserId = teamUserId;
 	}
 
 	public String getTeamRole() {

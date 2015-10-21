@@ -26,12 +26,12 @@
         #@elementItem()
             #@sdpmItem("指派给")
                 #@Tselect2F()
-                    #@Tselect2Body("taskAssignedTo" task.taskAssignedTo {"class":
+                    #@Tselect2Body("taskAssignedTo" task?.taskAssignedTo {"class":
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value=""></option>
                         #foreach(t : teamList)
-                            <option value="${t.teamAccount}">
-                                ${t?.teamAccount=null?"":UserUtils.getUserByAccount(t?.teamAccount)?.orgUserRealName}
+                            <option value="${t?.teamUserId}">
+                                ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                             </option>
                         #end
                     #end

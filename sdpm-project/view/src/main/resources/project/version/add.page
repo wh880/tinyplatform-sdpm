@@ -64,7 +64,7 @@
                     "buildBuilder" build?.buildBuilder {"class":"input-text select2","placeholder":"","nullmsg":
                     "名称编号不能为空！"}) ##,"multiple":"multiple"加上为多选项
                     #foreach(t : teamList)
-                        <option value="${t.teamAccount}">${t.teamAccount}</option>
+                        <option value="${t?.teamUserId}">${t?.teamUserId}</option>
                     #end
                 #end
             ##填写任意内容，侦听需重新填加 A侦听已内置
