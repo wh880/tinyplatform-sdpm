@@ -37,7 +37,6 @@
                         contentType: 'application/json;charset=utf-8', //设置请求头信息
                         success: function (data) {
 
-                            alert('success');
                             window.location.reload();
                         },
                         error: function (res) {

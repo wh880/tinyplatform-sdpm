@@ -35,7 +35,9 @@
 #end
     ##tabbody end
 <br>
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testcase/save" "post" {"class":"test"})
+
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":"test","enctype":"multipart/form-data"})
 #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testcase?.caseId)
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
@@ -47,7 +49,7 @@
         	<div class="col-10">
         	#@colLabel("col-2")用例名称：#end
         	<div class="col-4">
-           		#tinyInput("text" "caseTitle" casepager?.caseTitle {"datatype":"","id":"111","class":"input-text","placeholder":""})
+           		#tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"","id":"111","class":"input-text","placeholder":""})
            </div>
            </div>
         #end
@@ -56,7 +58,7 @@
         	<div class="col-10">
 			#@colLabel("col-2")前置条件：#end
         	#@formControlDiv("col-10")
-                	#@tinyTextarea("casePrecondition" {"placeholder":"说点什么...最少输入10个字符"})请输入内容#end          
+                	#@tinyTextarea("casePrecondition" {"placeholder":"说点什么...最少输入10个字符"})${testCase?.casePrecondition}#end          
             #end
             </div>
         #end
@@ -64,33 +66,33 @@
        	 <div class="col-10">
         	#@colLabel("col-2")用例步骤：#end
         	<div class="col-10">
-          #@table("tableBoxes")
-                    #@thead()
-                        #@tr()
-                            #@th()编号#end
-                            #@th()步骤#end
-                            #@th()预期#end
-                            #@th()操作#end
-                        #end
-                    #end
-
-                    #@tbody()
-                        #for(i:[1..3])
-                        #@tr()
-                            #@td()${i}#end
-                            #@td()#inputRadiusDefaultText()#end
-                            #@td()#inputRadiusDefaultText()#end
-                            #@td()#@div()
-                                #buttonRadiusPrimary(btClass="btn-small" caption="之前添加")
-                                #buttonRadiusPrimary(btClass="btn-small" caption="之后添加")
-                                #buttonRadiusPrimary(btClass="btn-small" caption="删除")
-                            #end
-                            #end
-                        #end
-
-                        #end
-                    #end
-                #end
+         #@table("itemlist-table")
+			#@thead()
+			  #@tr()
+				#@th("text-c w-50px")编号#end
+				#@th("text-c")步骤#end
+				#@th("text-c")预期#end
+				#@th("text-c w-125px")操作#end
+			  #end
+			#end
+			#@tbody("hide tpl")
+				#@tr()
+					#@td("text-c stepID")1#end
+					#@td("w-p50")
+						#tinyInput("text" "title" ""{"class":"form-control"})
+					#end
+					#@td()
+						#tinyInput("text" "title" ""{"class":"form-control" ,"placeholder":"标题"})
+					#end
+					#@td("w-p125")
+							#iconOperations(iconOperationsIcon="icon-chevron-up",iconOperationsTitle="之前添加",iconOperationsCls="btn btn-small btn-default addpre")
+							#iconOperations(iconOperationsIcon="icon-chevron-down",iconOperationsTitle="之后添加",iconOperationsCls="btn btn-small btn-default addnext")
+							#iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls="btn btn-small btn-default delbutton")
+					#end
+				#end
+			#end
+			
+		#end
                 </div>
             </div>
         #end
@@ -131,8 +133,57 @@
                 #include("/testManagement/page/historyRecord.page")
             #end
             </div>
- #end      
-    <div style="width:30%;float:right">
-        #TypeInfo("qualityCaseEdition")
+             <div style="width:30%;float:right">
+        #TypeInfo("qualityCaseEdition" caseId)
         ###include("/testManagement/page/tabledemo/editioncasepaging.page")
     </div>
+            
+ #end      
+ 
+ 
+ 
+ 
+ 
+ #@tbody("databody")
+	#@tr(trId="row1")
+		#@td("text-c stepID")1#end
+			#@td("w-p50")
+				#tinyInput("text" "title" ""{"class":"form-control"})
+			#end
+			#@td()
+				#tinyInput("text" "title" ""{"class":"form-control" ,"placeholder":"标题"})
+			#end
+		#@td("w-p125")
+				#iconOperations(iconOperationsIcon="icon-chevron-up",iconOperationsTitle="之前添加",iconOperationsCls="btn btn-small btn-default addpre")
+				#iconOperations(iconOperationsIcon="icon-chevron-down",iconOperationsTitle="之后添加",iconOperationsCls="btn btn-small btn-default addnext")
+				#iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls="btn btn-small btn-default delbutton")
+		#end
+	#end
+#end
+			
+			
+
+<script>
+$(function(){
+	function updateStepID(){    
+		$('.itemlist-table>.databody .stepID').each(function(index){	
+			$(this).html(index+1);		
+		});
+	}
+	$(".itemlist-table").on("click",".addpre",function(){
+		$(this).parents("tr:first").before($("tbody.tpl").html());
+		updateStepID();		
+	}).on("click",".addnext",function(){
+		$(this).parents("tr:first").after($("tbody.tpl").html());
+		updateStepID();		
+	}).on("click",".delbutton",function(){
+		if($('.databody .stepID').size() == 1) return;
+		layer.confirm('确定删除?', function(){
+			$('.databody .stepID').parents("tr:first").remove();
+			updateStepID();	
+			layer.msg('删除成功！') 
+		})
+	});
+});
+</script>
+   

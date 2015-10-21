@@ -8,7 +8,7 @@
     	   
     	</type-info>
     	<type-info name="qualityCaseEdition" >
-            	    <info name="CaseEditionInfo" title="基本信息" resource="qualityCaseEdition" infoParameter="" url="/testManagement/page/tabledemo/editioncasepaging.pagelet"/>
+            	    <info name="CaseEditionInfo" title="基本信息" resource="qualityCaseEdition" infoParameter="caseId" url="/quality/testCase/find/editRight"/>
             	</type-info>
 			<type-info name="qualityBugInfo" >
             	    <info name="bugEditionInfo" title="基本信息" resource="qualityBugInfo" infoParameter="bugId" url="/quality/bug/bugBasicInfo"/>

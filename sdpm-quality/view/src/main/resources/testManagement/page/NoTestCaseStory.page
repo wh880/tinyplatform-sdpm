@@ -1,10 +1,5 @@
-#import("/org/tinygroup/table/components/togglebox.component")
-#import("/org/tinygroup/compose/components/compose_typography.component")
-#import("/common/component/linkage.component")
-#set(storyTableId = "storyTableId" )
-#!set(activeMenuId=currentPageId)
-#!set(linkName="product-demand",sonitem="
-<li>"+"需求"+"</li>")
+
+       
 
 <script>
 	
@@ -51,113 +46,10 @@
 </script>
 
 
-
-#macro liDropdownMenu(rName)
-<li class="dropdown-submenu">
-    <a tabindex="-1" data-toggle="tab">${rName}</a>
-    #bodyContent
-</li>
-#end
-
-
-
-#import("/org/tinygroup/button/components/button_smart.component")
-
-#@tabBodyCol("ptop-5")
-##operationbar start
-    #@div(divClass="operationbar")
-        #set(urlProduct = productId!=null?'productId='+productId+'&':'')
-        #set(urlModule = moduleId!=null?'moduleId='+moduleId+'&':'')
-    <span class="f">
-					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=1&currentPageId=3"
-                       class="${choose == 1?'active_btn':''}">未关闭</a>
-					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=2&currentPageId=3"
-                       class="${choose == 2?'active_btn':''}">全部需求</a>
-					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=3&currentPageId=3"
-                       class="${choose == 3?'active_btn':''}">指派给我</a>
-					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=4&currentPageId=3"
-                       class="${choose == 4?'active_btn':''}">由我创建</a>
-					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=5&currentPageId=3"
-                       class="${choose == 5?'active_btn':''}">由我评审</a>
-					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=6&currentPageId=3"
-                       class="${choose == 6?'active_btn':''}">由我关闭</a>
-					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=7&currentPageId=3"
-                       class="${choose == 7?'active_btn':''}">草稿</a>
-					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=8&currentPageId=3"
-                       class="${choose == 8?'active_btn':''}">激活</a>
-					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=9&currentPageId=3"
-                       class="${choose == 9?'active_btn':''}">已变更</a>
-					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=10&currentPageId=3"
-                       class="${choose == 10?'active_btn':''}">待关闭</a>
-					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=11&currentPageId=3"
-                       class="${choose == 11?'active_btn':''}">已关闭</a>
-					<a href="javascript:void(0);" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-				</span>
-
-
-    <span class="r">
-        #foreach(m:menuManager.getScopeMenus("product-io"))
-            #if(m.id=="product-demand-input")
-                #@aModal("#myModal" "导入" "600" "65" "btn-class"
-                    "/product/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")导入#end
-
-            #else
-
-                #if(m.id=="product-demand-output")
-                    #@buttonGroup()
-                        #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出  #@spanCaret()#end#end
-                        #@ulDropdownMenu("downMenuSty")
-                            <p>#@iconOperations(
-                                "#myModal" "" "导出" "400" "254"  "/product/page/tabledemo/product-export-data.pagelet"
-                                "ml-5")
-                                &nbsp;导出数据#end</p>
-
-                            #@iconOperations(
-                                "#myModal" "" "导出" "700" "64" "/product/page/tabledemo/product-export-template.pagelet"
-                                "ml-5")
-                                &nbsp;导出模板#end
-
-                        #end
-                    #end
-                #else
-                    <a class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}"><i
-                            class="${m.icon}">&nbsp;${m.name}</i></a>
-                #end
-            #end
-        #end
-    </span>
-
-
-
-        #div(divClass="clearfix")
-        #include("/product/page/event/mulsearch.page")
-    #end
-##operationbar end
-
-    #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
-
-        #@toggleLeft({"class":"aclass"})
-            #@settoggleLeftTitle()产品需求#end
-            #@settoggleLeftBody("treeLeftbox")
-                #@zTreeList(call("link",adminPath+"/system/module/data"))
-                    #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
-                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH +adminPath+"/product/story" )
-                    #zTreeSetAddUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/story/add?moduleType=story")
-                    #zTreeSetEditUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/story/edit")
-                    #zTreeSetDelUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/story/deleteTree")
-                #end
-            #end
-        #end
-
-
-        #@toggleRight()
             #@tinyTable(storyTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
                 #@div(divBaseClass="tinyheaderTools form-inline")
                     #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-                <input type="button" value="全选" class="btn btn-default btn-primary "
-                       onclick="selectAllNullorReserve('storyId','全选');"/>
-                <input type="button" value="反选" class="btn btn-default btn-primary"
-                       onclick="selectAllNullorReserve('storyId','反选');"/>
+               
 
 
                     #foreach(m:menuManager.getScopeMenus("product-oper"))
@@ -282,13 +174,3 @@
             </script>
 
             #end
-        #end
-    #end
-
-#end
-
-
-
-
-
-
