@@ -97,4 +97,10 @@ public interface BuildManager {
      * @return
      */
     public Integer deletereleate(Integer storyId,Integer buildId);
+    /**
+     * 关联需求
+     * @param storyId，buildId
+     * @return
+     */
+    public Integer releateReq(Integer storyId,Integer buildId);
 }

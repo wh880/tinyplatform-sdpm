@@ -410,11 +410,11 @@ public class DocAction {
 		DocumentDoclib doclib = new DocumentDoclib();
 		List<DocumentDoclib> list = docservice.findDoclibList(doclib);
 		if(id != list.get(0).getDocLibId() && id != list.get(1).getDocLibId()){
-		docservice.deleteDoclibById(id);
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("status", "success");
-	    map.put("info", "删除成功");
-	    return map;
+			docservice.deleteDoclibById(id);
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("status", "success");
+		    map.put("info", "删除成功");
+		    return map;
 		}
 		return null;
 	}
@@ -555,9 +555,13 @@ public class DocAction {
 	}
 	
 	@RequestMapping("/product/{type}/updateDoc")
-	public String saveDocument(DocumentDoc doc,@PathVariable(value="type")String type){
+	public String saveDocument(DocumentDoc doc,@PathVariable(value="type")String type,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title) throws IOException {
 		if("save".equals(type)){
-			docservice.createNewDoc(doc);
+			DocumentDoc document = docservice.createNewDoc(doc);
+			
+			ProfileUtil profileUtil = new ProfileUtil();		
+	        profileUtil.uploads(file, document.getDocId(), "document", title);
+	        
 			return "redirect:"+"/product/page/project/archive-list.page";
 		}else if ("update".equals(type)) {
 

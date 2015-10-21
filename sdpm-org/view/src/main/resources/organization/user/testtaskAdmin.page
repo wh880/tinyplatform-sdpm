@@ -5,22 +5,22 @@
     "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 
 #include("/common/common.page")
-<style>
-    .tabLayout .tabBar span a {
-        color: #333
-    }
-
-    .tabLayout .tabBar .Current a {
-        color: #fff
-    }
-
-    .operationbar {
-        border-top: none;
-        background: #f9fafe;
-        padding: 6px 5px 6px 10px;
-    }
-
-</style>
+##<style>
+##    .tabLayout .tabBar span a {
+##        color: #333
+##    }
+##
+##    .tabLayout .tabBar .Current a {
+##        color: #fff
+##    }
+##
+##    .operationbar {
+##        border-top: none;
+##        background: #f9fafe;
+##        padding: 6px 5px 6px 10px;
+##    }
+##
+##</style>
 #set(name="organizationUser")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -73,7 +73,7 @@
                 #end
 
             #end
-                <span style="padding-top: 5px;float: left">
+        <span style="float: left">
                     &nbsp;&gt;
                     #foreach(m:menuManager.getScopeMenus("org-user-detail"))
                         #if(m.id=="org-user-testtaskAdmin")

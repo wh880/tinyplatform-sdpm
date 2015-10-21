@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
 import org.tinygroup.sdpm.org.service.inter.DeptService;
@@ -41,9 +40,10 @@ public class DeptAction extends BaseController {
     public Map editDept(Integer orgDeptParent, Integer orgDeptId, String orgDeptName) {
         OrgDept dept = deptService.findDept(orgDeptId);
         dept.setOrgDeptName(orgDeptName);
-        if (!StringUtil.isBlank(orgDeptParent.toString())) {
-            dept.setOrgDeptParent(orgDeptParent);
-        }
+        dept.setOrgDeptParent(orgDeptParent);
+//        if (!StringUtil.isBlank(orgDeptParent.toString())) {
+//            dept.setOrgDeptParent(orgDeptParent);
+//        }
         deptService.updateDept(dept);
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "y");
@@ -61,30 +61,11 @@ public class DeptAction extends BaseController {
         return map;
     }
 
-//    @RequestMapping("user")
-//    public String user(Integer orgDeptId, Model model){
-//        List<OrgUser> list=userService.findUserByDeptId(orgDeptId);
-//        model.addAttribute("list",list);
-//        return "organization/user/user.page";
-//    }
-
-
     @ResponseBody
     @RequestMapping("/data")
     public List data(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<OrgDept> deptList = deptService.findDeptList(new OrgDept());
-//        if (check == null || !check.equals("n")) {
-//            Map<String, Object> map1 = new HashMap<String, Object>();
-//            map1.put("id", -1);
-//            map1.put("pId", 0);
-//            map1.put("open", true);
-//            map1.put("add", true);
-//            map1.put("edit", true);
-//            map1.put("name", "所有部门");
-//            list.add(map1);
-//        }
-
         for (OrgDept d : deptList) {
             if (!d.getOrgDeptParent().equals(-2)) {
                 Map<String, Object> map = new HashMap<String, Object>();
