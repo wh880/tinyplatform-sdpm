@@ -9,7 +9,7 @@
 #setTinyItemCount(records)
 #for(s:storys.getRecords())
 #@tr()
-    #@td()<input type="checkbox" value="${s?.storyId}" id="field" name="storyId">#end
+    #@td()<input type="checkbox" value="${s?.storyId}" id="field" name="idCheck">#end
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${s?.storyId}</a>#end
     #@td()@#end
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${s?.storyTitle}</a>#end
