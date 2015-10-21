@@ -29,13 +29,6 @@
                 <ref bean="xmlServiceFileProcessor"/>
                 <ref bean="xmlSysServiceFileProcessor"/>
 
-                <!--&lt;!&ndash; flow &ndash;&gt;-->
-                <!--<ref bean="flowFileProcessor"/>-->
-                <!--<ref bean="flowComponentProcessor"/>-->
-
-                <!--&lt;!&ndash; pageflow &ndash;&gt;-->
-                <!--<ref bean="pageFlowComponentProcessor"/>-->
-                <!--<ref bean="pageFlowFileProcessor"/>-->
 
                 <ref bean="tinyMacroFileProcessor"/>
                 <ref bean="fullContextFileFinder"/>

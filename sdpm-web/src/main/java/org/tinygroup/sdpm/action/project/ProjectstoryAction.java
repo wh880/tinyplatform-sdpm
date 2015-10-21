@@ -39,7 +39,7 @@ public class ProjectstoryAction extends BaseController {
 
     @RequestMapping("/find")
     public String find(Model model, HttpServletRequest request, Integer start, Integer limit, String order, String ordertype) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         Pager<ProductStory> story = projectStoryService.findStoryByProject(projectId, start, limit, order, ordertype);
 
         model.addAttribute("storys", story);
@@ -70,7 +70,7 @@ public class ProjectstoryAction extends BaseController {
     @ResponseBody
     @RequestMapping("/delete")
     public Map<String, String> delete(Integer id, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         //根据id进行软删
         Map<String, String> map = new HashMap<String, String>();
         Integer result = projectStoryService.deleteProjectStory(projectId, id);
@@ -92,7 +92,7 @@ public class ProjectstoryAction extends BaseController {
 
     @RequestMapping("/findStory")
     public String findStory(Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         Pager<ProductStory> storyList = projectStoryService.findStoryToLink(projectId, start, limit, order, ordertype);
         model.addAttribute("storyList", storyList);
         return "project/demand/relateDemandTableData.pagelet";
@@ -105,7 +105,7 @@ public class ProjectstoryAction extends BaseController {
         Map<String, String> map = new HashMap<String, String>();
         String[] id = ids.split(",");
         List<ProjectStory> projectStoryList = new ArrayList<ProjectStory>();
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         for (int i = 0; i < id.length; i++) {
             ProjectStory projectStory = new ProjectStory();
             projectStory.setProjectId(projectId);
@@ -144,7 +144,7 @@ public class ProjectstoryAction extends BaseController {
             condition = condition + ")";
 
 
-            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
             condition = condition + " and ";
             condition = condition + "project_id=" + projectId;
             Integer res = projectStoryService.batchtDel(condition);
@@ -166,7 +166,7 @@ public class ProjectstoryAction extends BaseController {
 
 //    @RequestMapping("/search/{relate}")
 //    public String storyListAction(@PathVariable(value="relate")String relate, Integer start, Integer limit, @RequestParam(required = false, defaultValue = "storyId") String order, @RequestParam(required = false, defaultValue = "asc")String ordertype, Model model, HttpServletRequest request){
-//        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+//        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
 //        Pager<ProductStory> story = projectStoryService.findStoryByProject(projectId, start, limit, order, ordertype);
 //        model.addAttribute("story", story);
 //

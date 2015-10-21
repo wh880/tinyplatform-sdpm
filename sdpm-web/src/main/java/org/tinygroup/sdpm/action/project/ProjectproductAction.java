@@ -25,7 +25,7 @@ public class ProjectproductAction extends BaseController {
     @RequestMapping("/findLinkProduct")
     public String findLinkProduct(Model model, HttpServletRequest request) {
         List<Product> productList = projectProductService.findLinkProduct();
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         List<ProjectProduct> linkList = projectProductService.findProducts(projectId);
         String linked = "";
         for (ProjectProduct p : linkList) {
@@ -42,7 +42,7 @@ public class ProjectproductAction extends BaseController {
 
     @RequestMapping("/save")
     public String save(Integer[] array, Model model, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         projectProductService.addLink(array, projectId);
         return "redirect:" + adminPath + "/project/product/findLinkProduct";
     }
