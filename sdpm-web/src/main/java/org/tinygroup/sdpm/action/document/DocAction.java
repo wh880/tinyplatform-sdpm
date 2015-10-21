@@ -178,7 +178,7 @@ public class DocAction {
 			SystemModule module = new SystemModule();
 			module.setModuleType("doc");
 			module.setModuleRoot(libid);
-			List<SystemModule> moduleList = moduleService.findAllModules(module);
+			List<SystemModule> moduleList = moduleService.findModules(module);
 			model.addAttribute("moduleList", moduleList);
 			return "/document/add-doc.page";	
 		}
@@ -263,7 +263,7 @@ public class DocAction {
 	 *查看文档基本信息
 	 */
 	@RequestMapping("/doc/view")
-	public String docView(HttpServletRequest request,DocumentDoc doc,SystemProfile systemProfile,Model model,Integer docid){
+	public String docView(HttpServletRequest request, SystemAction systemAction,DocumentDoc doc,SystemProfile systemProfile,Model model,Integer docid){
 		doc = docservice.findDocById(docid);	
 		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
 		systemProfile.setFileObjectType("document");
@@ -384,7 +384,7 @@ public class DocAction {
 	@RequestMapping(value="/doclib/save")
 	public String saveDoclib(HttpServletRequest request,DocumentDoclib doclib)
 	{
-		if(doclib.getDocLibId()==null||doclib.getDocLibId()==0){
+		if(doclib.getDocLibId()==null||doclib.getDocLibId()==0){		
 			doclib = docservice.createNewDocLib(doclib);
 			request.getSession().setAttribute("documentLibId", doclib.getDocLibId());
 		}else {
@@ -393,7 +393,7 @@ public class DocAction {
 		return "redirect:"+"/a/document?change=true";
 	}
 	/*
-	 * 撒谎年初文档库的action
+	 * 删除文档库的action
 	 */
 	@RequiresPermissions(value={"doclib-delete"})
 	@ResponseBody
