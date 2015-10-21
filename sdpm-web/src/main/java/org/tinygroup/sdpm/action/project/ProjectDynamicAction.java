@@ -43,7 +43,7 @@ public class ProjectDynamicAction extends BaseController {
     }
 
     @RequestMapping("/find")
-    public String find(Integer start, Integer limit, String order, String ordertype, HttpServletRequest request, Model model, String selDate, String teamAccount) {
+    public String find(Integer start, Integer limit, String order, String ordertype, HttpServletRequest request, Model model, String selDate, String teamUserId) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
         SystemAction systemAction = new SystemAction();
         systemAction.setActionProject(projectId.toString());
@@ -56,7 +56,7 @@ public class ProjectDynamicAction extends BaseController {
         Date date = new Date();
         Date startDate;
         Date endDate;
-        if (!StringUtil.isBlank(selDate) && StringUtil.isBlank(teamAccount)) {
+        if (!StringUtil.isBlank(selDate) && StringUtil.isBlank(teamUserId)) {
             if ("1".equals(selDate)) {
                 startDate = DateUtils.getDateStart(date);
                 endDate = DateUtils.getDateEnd(date);
@@ -93,8 +93,8 @@ public class ProjectDynamicAction extends BaseController {
             }
         }
         //根据用户来查
-        else if (StringUtil.isBlank(selDate) && !StringUtil.isBlank(teamAccount)) {
-            OrgUser user = userService.findUserByAccount(teamAccount);
+        else if (StringUtil.isBlank(selDate) && !StringUtil.isBlank(teamUserId)) {
+            OrgUser user = userService.findUser(teamUserId);
             systemAction.setActionActor(user.getOrgUserId());
             Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, order, ordertype);
             model.addAttribute("actionPager", actionPager);

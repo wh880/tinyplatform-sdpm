@@ -1,11 +1,10 @@
 
 ##<span id="showsearchmore">搜索</span>
-<form method="get" id="${requestTableId}form"
+<form method="post" id="${requestTableId}form"
       class="form-condensed searchform">
     <div class="hide">
         <select id="operatortemp">
             <option value="=">=</option>
-            ]\
             <option value="!=">!=</option>
             <option value="&gt;">&gt;</option>
             <option value="&gt;=">&gt;=</option>
@@ -16,17 +15,11 @@
             <option value="notinclude">不包含</option>
             <option value="belong">从属于</option>
         </select>
-    ##        <select id="productId">
-    ##            <option value="" selected="selected"></option>
-    ##            <option value="3">支付宝</option>
-    ##            <option value="4">财付通</option>
-    ##            <option value="null">空</option>
-    ##        </select>
         <select id="clientId">
             <option value="" selected="selected"></option>
-            <option value="1">恒生电子</option>
-            <option value="2">华为</option>
-            <option value="null">空</option>
+            #foreach(l:serviceClients)
+                <option value=${l.clientId}>${l.clientName}</option>
+            #end
         </select>
         <select id="requestType">
             <option value="" selected="selected"></option>
@@ -40,12 +33,6 @@
             <option value="1">中</option>
             <option value="null">空</option>
         </select>
-    ##        <select id="requestStatus">
-    ##            <option value="" selected="selected"></option>
-    ##            <option value="0">新建</option>
-    ##            <option value="1">待回访</option>
-    ##            <option value="null">空</option>
-    ##        </select>
         <select id="modle">
             <option value="" selected="selected"></option>
             <option value="2">模块一</option>

@@ -87,12 +87,19 @@
             <dictItem key="2" value="被阻塞" sort="2"/>
             <dictItem key="3" value="研究中" sort="3"/>
         </dictNodeEntry>
-       <!--   <dictNodeEntry name="caseType" title="用例类型">
-            <dictItem key="1" value="1" sort="1"/>
-            <dictItem key="2" value="2" sort="2"/>
-            <dictItem key="3" value="3" sort="3"/>
-        </dictNodeEntry>  --> 
-       
+        <dictNodeEntry name="caseResult" title="用例结果">
+            <dictItem key="1" value="通过" sort="1"/>
+            <dictItem key="2" value="失败" sort="2"/>
+        </dictNodeEntry>
+       <dictNodeEntry name="caseType" title="用例类型">
+            <dictItem key="1" value="功能测试" sort="1"/>
+            <dictItem key="2" value="性能测试" sort="2"/>
+            <dictItem key="3" value="配置相关" sort="3"/>
+            <dictItem key="4" value="安装部署" sort="4"/>
+            <dictItem key="5" value="安全相关" sort="5"/>
+            <dictItem key="6" value="接口测试" sort="6"/>
+            <dictItem key="7" value="其他" sort="7"/>
+        </dictNodeEntry>
 	    <dictNodeEntry name="casePriority" title="优先级">
             <dictItem key="1" value="1" sort="1"/>
             <dictItem key="2" value="2" sort="2"/>

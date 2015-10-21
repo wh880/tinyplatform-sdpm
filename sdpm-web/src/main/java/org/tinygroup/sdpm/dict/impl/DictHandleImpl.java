@@ -4,7 +4,6 @@ import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
 import org.tinygroup.sdpm.dict.inter.DictHandle;
 import org.tinygroup.sdpm.dict.inter.DictNodeEntries;
-import org.tinygroup.sdpm.dict.inter.DictNodeEntry;
 import org.tinygroup.sdpm.dict.util.DictUtil;
 
 import java.util.ArrayList;
@@ -23,10 +22,6 @@ public class DictHandleImpl implements DictHandle{
             throw new Exception("["+dictNodeEntries.getName()+"]已存在:"+filePath);
         }
         entriesList.add(dictNodeEntries);
-    }
-
-    public DictNodeEntry getDict(String key) {
-        return null;
     }
 
     public void insertDictNodeEntry() {

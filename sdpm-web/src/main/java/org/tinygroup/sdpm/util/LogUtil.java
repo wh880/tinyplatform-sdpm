@@ -102,7 +102,7 @@ public class LogUtil {
         USER("user"),
         STORY("story"),
         TASK("task"),
-        PRODUCTPLAN("productplan"),
+        PRODUCTPLAN("plan"),
         RELEASE("release"),
         PROJECT("project"),
         PRODUCT("product"),

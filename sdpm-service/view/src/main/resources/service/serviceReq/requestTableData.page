@@ -6,8 +6,8 @@
         #@td()<a
                 href="${TINY_CONTEXT_PATH+adminPath}/service/client/clientSla?id=${var.clientId}">${var.clientName}</a>#end
         #@td()${var.requestTitle}#end
-        #@td()${var.requestPre}#end
-        #@td()${var.requestStatus}#end
+        #@td()${getDict("requestPre",var.requestPre)}#end
+        #@td()${getDict("requestStatus",var.requestStatus)}#end
         #@td()${formatDate(var.requestCommitmentDate,"yyyy-MM-dd")}#end
         #@td()${var.replier}#end
         #@td()${var.requestReviewer}#end

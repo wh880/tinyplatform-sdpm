@@ -111,90 +111,94 @@
 
 
 <div style="width:100%;" class="pageleftpart">
-    <div class="infoContent">
-        <p class="titleName">提需求</p>
-        #@elementItem()
-            #@colLabel()所属产品：#end
+<div class="infoContent">
+    <p class="titleName">提需求</p>
+    #@elementItem()
+        #@colLabel()所属产品：#end
 
-            #@formControlDiv("col-4")
-                <div class="col-6">
-                    #@Tselect2F()
-                        #@Tselect2Body(
-                            "productId" sessionProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="0">/</option>
-                            #foreach(product : product)
-                                #if(product?.deleted==0)
-                                    <option value="${product?.productId}">${product?.productName}</option>
-                                #end
-                            #end
-                        #end
-
-                        <script>
-
-
-                            $("#${sid}").on("change", function () {
-                                var pId = $("#${sid}  option:selected").val();
-                                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId);
-                                ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?peoductId=" + pId);
-
-                            })
-
-                        </script>
-
-                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
-                                          class="r ">添加</a><a
-                                href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>#end
-                    #end
-                </div>
-                <div class="col-6">
-                    #@Tselect2F()
-                        #@Tselect2Body(
-                            "moduleId" "IN" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":
-                            "systemModel","data":"moduleType=product","relateElem":
-                            "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
-
-                        #end
-
-                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/addProduct.page"
-                                          class="r ">增加</a><a
-                                href=" ${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
-                    #end
-                </div>
-            #end
-
-
-
-        #end
-
-        #@elementItem()
-            #@colLabel()所属计划：#end
-            #@formControlDiv("col-4")
+        #@formControlDiv("col-4")
+            <div class="col-6">
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "planId" "IN" {"class":"input-text select2","url":"/product/plan/planList","ajaxType":
-                        "productPlan","data":"productId=16&companyId=1"}) ##,"multiple":"multiple"加上为多选项
+                        "productId" sessionProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="0">/</option>
+                        #foreach(product : product)
+                            #if(product?.deleted==0)
+                                <option value="${product?.productId}">${product?.productName}</option>
+                            #end
+                        #end
+                    #end
+
+                    <script>
+
+
+                        $("#${sid}").on("change", function () {
+                            var pId = $("#${sid}  option:selected").val();
+                            ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId);
+                            ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId);
+
+                        })
+
+                    </script>
+
+                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
+                                      class="r ">添加</a><a
+                            href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>#end
+                #end
+            </div>
+            <div class="col-6">
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "moduleId" "IN" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":
+                        "systemModel","data":"moduleType=product","relateElem":
+                        "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
 
                     #end
 
-                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-addplan.page"
-                                      class="r ">增加</a><a href="#"></a>#end
+                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/addProduct.page"
+                                      class="r ">增加</a><a
+                            href=" ${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
                 #end
-            #end
-            #@validateDiv("col-2")#end
+            </div>
         #end
 
-        #@elementItem()
-            #@colLabel()来源：#end
-            #@formControlDiv("col-4")
-                <div id="demand-sources">
-                    #@Tselect2F()
-                        #@Tselect2Body("storySource" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
+
+    #end
+
+    #@elementItem()
+        #@colLabel()所属计划：#end
+        #@formControlDiv("col-4")
+            #@Tselect2F()
+                #@Tselect2Body(
+                    "planId" "IN" {"class":"input-text select2","url":"/product/plan/planList","ajaxType":
+                    "productPlan","data":"productId=16&companyId=1"}) ##,"multiple":"multiple"加上为多选项
+
+                #end
+
+                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-addplan.page"
+                                  class="r ">增加</a><a href="#"></a>#end
+            #end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+    #@elementItem()
+        #@colLabel()来源：#end
+        #@formControlDiv("col-4")
+        <div id="demand-sources">
+            #@Tselect2F()
+                #@Tselect2Body("storySource" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项#for(stage:getDict("storySource"))
+
+                    #foreach(source:getDict("storySource"))
+                        <option value="${source?.value}"> ${source?.text}</option>
                     #end
 
-                    #end
-                </div>
-                <span class="customer-request" style="display:none">
+                 #end
+
+        #end
+    </div>
+        <span class="customer-request" style="display:none">
 	                <div class="col-2 text-c">&nbsp;请求：
                     </div>
 
@@ -211,152 +215,151 @@
                     </div>
                 </span>
 
-            #end
-        #end
+    #end
+#end
 
 
-        #@elementItem()
-            #@colLabel()需求名称：#end
-            #@formControlDiv("col-4")
-                #tinyInput(
-                    "text" "storyTitle" ""{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"请输入描述！","id":"email",
-                    "class":"input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
+#@elementItem()
+    #@colLabel()需求名称：#end
+    #@formControlDiv("col-4")
+        #tinyInput(
+            "text" "storyTitle" ""{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"email",
+            "class":"input-text"})
+    #end
+    #@validateDiv("col-2")#end
+#end
 
 
-        #@elementItem()
-            #@colLabel()需求描述：#end
-            #@formControlDiv("col-8")
-                #@tinyTextarea("storySpec" {"placeholder":"请输入需求描述","datatype":"*10-500","nullmsg":"描述不能为空！"})#end
-            #end
-            #@validateDiv("col-2")#end
-        #end
+#@elementItem()
+    #@colLabel()需求描述：#end
+    #@formControlDiv("col-8")
+        #@tinyTextarea("storySpec" {"datatype":""})#end
+    #end
+    #@validateDiv("col-2")#end
+#end
 
-        #@elementItem()
-            #@colLabel()验收标准：#end
-            #@formControlDiv("col-8")
-                #@tinyTextarea("storyVerification" {"placeholder":"请输入验收标准","datatype":"*10-200"})#end
-            #end
-            #@validateDiv("col-2")#end
-        #end
+#@elementItem()
+    #@colLabel()验收标准：#end
+    #@formControlDiv("col-8")
+        #@tinyTextarea("storyVerification" {"datatype":""})#end
+    #end
+    #@validateDiv("col-2")#end
+#end
 
-        #@elementItem()
-            #@colLabel()优先级：#end
-            #@formControlDiv("col-4")
-                #@Tselect2F()
-                    #@Tselect2Body("storyPri" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="1">Admin</option>
-                        <option value="2">Demo</option>
-                        <option value="3">Me</option>
-                    #end
-
-                #* #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end*#
-                #end
-            #end
-            #@validateDiv("col-2")#end
-        #end
-
-        #@elementItem()
-            #@colLabel()预计工时：#end
-            #@formControlDiv("col-4")
-                <div class="input-group">
-                    <input type="text" class="form-control" name="storyEstimate" placeholder=""
-                           aria-describedby="basic-addon2">
-                    <span class="input-group-addon" id="basic-addon2">小时</span>
-                </div>
-            #end
-            #@validateDiv("col-2")#end
-        #end
-
-        #@elementItem()
-            #@sdpmItem("由谁评审")
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "storyReviewedBy" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":
-                        "orgUser","data":""})
-
-                    #end
-                    <script>
-
-                        ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
-
-                    </script>
-
-                    #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
-                    #end
-
-                #end
-
-
-            #end
-            #@checkboxBox()
-
-                #@label(labelFor="checkbox-6")
-                    #input(inputId="story_reviewed" inputName="storyReviewedBy1" inputType="checkbox" )
-                    不需要评审
+#@elementItem()
+    #@colLabel()优先级：#end
+    #@formControlDiv("col-4")
+        #@Tselect2F()
+            #@Tselect2Body("storyPri" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #foreach(pri:getDict("storyPri"))
+                    <option value="${pri?.value}"> ${pri?.text}</option>
                 #end
             #end
 
         #end
+    #end
+    #@validateDiv("col-2")#end
+#end
 
-        #@elementItem()
-            #@colLabel()抄送给：#end
-            #@formControlDiv("col-4")
-                #@Tselect2F()
-                    #@Tselect2Body("storyMailto" "IN" {"class":"input-text select2","multiple":
-                        "multiple"}) ##,"multiple":"multiple"加上为多选项
-                    #end
-                    <script>
-
-                        ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList");
-
-                    </script>
-                    #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
-                    #end
-                #end
-            #end
-            #@validateDiv("col-2")#end
-        #end
-
-
-        #@elementItem()
-            #@colLabel()关键词：#end
-            #@formControlDiv("col-4")
-                #tinyInput(
-                    "text" "storyKeywords" ""{"datatype":"*","nullmsg":"请输入名称！","id":"text","class":"input-text"})
-            #end
-            #@validateDiv("col-2")#end
-        #end
-
-
-        #@elementItem()
-            #@colLabel()附件：#end
-            #@formControlDiv("col-10")
-                #include("/product/page/event/fileupload.page")
-            #end
-            #@validateDiv("col-2")#end
-        #end
-    </div>
-    #@elementItem()
-    <div class="col-12">
-        <div class="col-5">
-
+#@elementItem()
+    #@colLabel()预计工时：#end
+    #@formControlDiv("col-4")
+        <div class="input-group">
+            <input type="text" class="form-control" name="storyEstimate" placeholder=""
+                   aria-describedby="basic-addon2">
+            <span class="input-group-addon" id="basic-addon2">小时</span>
         </div>
-        <div class="col-1">
-            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-        </div>
-        <div class="col-1">
-            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-        </div>
-        <div class="col-5"></div>
+    #end
+    #@validateDiv("col-2")#end
+#end
+
+#@elementItem()
+    #@sdpmItem("由谁评审")
+        #@Tselect2F()
+            #@Tselect2Body(
+                "storyReviewedBy" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":
+                "orgUser","data":""})
+
+            #end
+            <script>
+
+                ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
+
+            </script>
+
+            #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+            #end
+
+        #end
+
 
     #end
+    #@checkboxBox()
+
+        #@label(labelFor="checkbox-6")
+            #input(inputId="story_reviewed" inputName="storyReviewedBy1" inputType="checkbox" )
+            不需要评审
+        #end
+    #end
+
+#end
+
+#@elementItem()
+    #@colLabel()抄送给：#end
+    #@formControlDiv("col-4")
+        #@Tselect2F()
+            #@Tselect2Body("storyMailto" "IN" {"class":"input-text select2","multiple":
+                "multiple"}) ##,"multiple":"multiple"加上为多选项
+            #end
+            <script>
+
+                ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList");
+
+            </script>
+            #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+            #end
+        #end
+    #end
+    #@validateDiv("col-2")#end
+#end
+
+
+#@elementItem()
+    #@colLabel()关键词：#end
+    #@formControlDiv("col-4")
+        #tinyInput(
+            "text" "storyKeywords" ""{"datatype":"","id":"text","class":"input-text"})
+    #end
+    #@validateDiv("col-2")#end
+#end
+
+
+#@elementItem()
+    #@colLabel()附件：#end
+    #@formControlDiv("col-10")
+        #include("/product/page/event/fileupload.page")
+    #end
+    #@validateDiv("col-2")#end
+#end
+</div>
+#@elementItem()
+<div class="col-12">
+    <div class="col-5">
+
+    </div>
+    <div class="col-1">
+        <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+    </div>
+    <div class="col-1">
+        #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+    </div>
+    <div class="col-5"></div>
+
+#end
 </div>
 #end
 

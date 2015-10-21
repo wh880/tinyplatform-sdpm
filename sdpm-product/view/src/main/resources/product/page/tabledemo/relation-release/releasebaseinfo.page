@@ -45,10 +45,5 @@
 	       	
 </ul>			
       #end
-      
-  
 
-				#@div(divClass="infoContent")
-	        	<p class="titleName">历史记录</p>
-	       		#include("/product/page/tabledemo/historyrecord.page")
-				#end
+	#history(adminPath+"/system/action/ajax/history?actionObjectType=release&actionObjectId="+release?.releaseId)

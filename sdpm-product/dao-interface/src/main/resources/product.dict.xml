@@ -21,8 +21,22 @@
             <dictItem key="3" value="已取消" sort="4"/>
             <dictItem key="12" value="计划如此" sort="5"/>
         </dictNodeEntry>
-        
-        <dictNodeEntry name="storyStatus" title="需求状态">
+
+         <dictNodeEntry name="storySource" title="需求来源">
+             <dictItem key="0" value="客户" sort="1"/>
+             <dictItem key="1" value="用户" sort="2"/>
+             <dictItem key="2" value="产品经理" sort="3"/>
+             <dictItem key="3" value="市场" sort="4"/>
+             <dictItem key="4" value="客服" sort="5"/>
+             <dictItem key="5" value="竞争对手" sort="6"/>
+             <dictItem key="6" value="合作伙伴" sort="7"/>
+             <dictItem key="7" value="开发人员" sort="8"/>
+             <dictItem key="8" value="测试人员" sort="9"/>
+             <dictItem key="9" value="BUG" sort="10"/>
+             <dictItem key="10" value="其他" sort="11"/>
+         </dictNodeEntry>
+
+         <dictNodeEntry name="storyStatus" title="需求状态">
             <dictItem key="0" value="新建" sort="1"/>
             <dictItem key="1" value="评审通过" sort="2"/>
             <dictItem key="2" value="拒绝" sort="3"/>
@@ -46,5 +60,13 @@
              <dictItem key="7" value="混合模式" sort="8"/>
              <dictItem key="8" value="已关闭" sort="9"/>
          </dictNodeEntry>
+
+         <dictNodeEntry name="storyPri" title="需求优先级">
+             <dictItem key="0" value="I" sort="1"/>
+             <dictItem key="1" value="II " sort="2"/>
+             <dictItem key="2" value="III" sort="3"/>
+             <dictItem key="3" value="IV" sort="4"/>
+         </dictNodeEntry>
+
     </dictNodeEntry>
 </dictNodeEntries>

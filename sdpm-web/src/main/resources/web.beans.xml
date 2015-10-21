@@ -2,14 +2,15 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--模板内置函数-->
     <bean id="dictFunction" class="org.tinygroup.sdpm.functions.DictFunction"/>
     <bean id="stdFunction" class="org.tinygroup.sdpm.functions.StdFunction"/>
+
+    <!--数据字典-->
     <bean id="dictHandle" class="org.tinygroup.sdpm.dict.impl.DictHandleImpl" scope="singleton"></bean>
     <bean id="dictFileProcessor" class="org.tinygroup.sdpm.dict.processor.DictFileProcessor" ></bean>
     <bean id="sdpmDictLoader" class="org.tinygroup.sdpm.dict.impl.SdpmDictLoader" scope="singleton">
         <property name="dictHandle" ref="dictHandle"></property>
         <property name="isInitFromFile" value="false"></property>
     </bean>
-	<bean id="sdpmDictCache" class="org.tinygroup.cache.ehcache.EhCache"></bean>
-	<bean id="userFunction" class="org.tinygroup.sdpm.functions.UserFunction"></bean>
 </beans>

@@ -1,83 +1,85 @@
 #@noRespsGridSystem()
     #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/company/save" "post" {"class":""})
         #@gridSysRow()
-            #@colLabel("col-3")<span class="c-red">*</span>公司名称：#end
-            #@gridSysCol(7)
-                #tinyInput(
-                    "text" "orgCompanyName" company?.orgCompanyName{"placeholder":"输入公司名称","datatype":"*","errormsg":
-                    "请输入公司名称！","id":"name","class":
-                    "input-text"})
+            #@elementItem()
+                #@colLabel("col-3")<span class="c-red">*</span>公司名称：#end
+                #@formControlDiv("col-6")
+                    #tinyInput(
+                        "text" "orgCompanyName" company?.orgCompanyName{"placeholder":"输入公司名称","datatype":"*","nullmsg":
+                        "请输入公司名称！","id":"name","class":
+                        "input-text"})
+                #end
+                #@validateDiv("col-2")#end
+            #end
+            #@elementItem()
+                #@colLabel("col-3")联系电话：#end
+                #@formControlDiv("col-6")
+                    #tinyInput(
+                        "text" "orgCompanyPhone" company?.orgCompanyPhone {"placeholder":"请输入联系电话",
+                        "id":"phone",
+                        "class":
+                        "input-text"})
+                #end
+                #@validateDiv("col-3")#end
+            #end
+            #@elementItem()
+                #@colLabel("col-3")传真：#end
+                #@formControlDiv("col-6")
+                    #tinyInput(
+                        "text" "orgUserRealName" user?.orgUserRealName {"placeholder":"请输入传真",
+                        "id":"org_user_real_name","class":
+                        "input-text"})
+                #end
+                #@validateDiv("col-3")#end
+            #end
+            #@elementItem()
+                #@colLabel("col-3")通讯地址：#end
+                #@formControlDiv("col-6")
+                    #tinyInput(
+                        "text" "orgCompanyAddress" company?.orgCompanyAddress{"placeholder":"请输入通讯地址",
+                        "id":"phone",
+                        "class":
+                        "input-text"})
+                #end
+                #@validateDiv("col-3")#end
+            #end
+            #@elementItem()
+                #@colLabel("col-3")邮政编码：#end
+                #@formControlDiv("col-6")
+                    #tinyInput(
+                        "text" "orgCompanyZipCode" company?.orgCompanyZipCode{"placeholder":"请输入邮政编码",
+                        "id":"phone",
+                        "class":
+                        "input-text"})
+                #end
+                #@validateDiv("col-3")#end
+            #end
+            #@elementItem()
+                #@colLabel("col-3")官网：#end
+                #@formControlDiv("col-6")
+                    #tinyInput(
+                        "text" "orgCompanyWebsite" company?.orgCompanyWebsite{"placeholder":"请输入官网",
+                        "id":"phone",
+                        "class":
+                        "input-text"})
+                #end
+                #@validateDiv("col-3")#end
+            #end
+            #@elementItem()
+                #@colLabel("col-3")内网：#end
+                #@formControlDiv("col-6")
+                    #tinyInput(
+                        "text" "orgCompanyBackyard" company?.orgCompanyBackyard{"placeholder":"请输入内网",
+                        "id":"phone",
+                        "class":
+                        "input-text"})
+                #end
+                #@validateDiv("col-3")#end
             #end
 
         #end
-        #@gridSysRow()
-            #@colLabel("col-3")联系电话：#end
-            #@gridSysCol(7)
-                #tinyInput(
-                    "text" "orgCompanyPhone" company?.orgCompanyPhone {"placeholder":"请输入联系电话",
-                    "nullmsg":"联系电话不能为空！","id":"phone",
-                    "class":
-                    "input-text"})
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-3")传真：#end
-            #@gridSysCol(7)
-                #tinyInput(
-                    "text" "orgCompanyFax" company?.orgCompanyFax{"placeholder":"请输入传真","nullmsg":
-                    "联系电话不能为空！","id":"phone",
-                    "class":
-                    "input-text"})
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-3")通讯地址：#end
-            #@gridSysCol(7)
-                #tinyInput(
-                    "text" "orgCompanyAddress" company?.orgCompanyAddress{"placeholder":"请输入联系电话",
-                    "nullmsg":"联系电话不能为空！","id":"phone",
-                    "class":
-                    "input-text"})
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-3")邮政编码：#end
-            #@gridSysCol(7)
-                #tinyInput(
-                    "text" "orgCompanyZipCode" company?.orgCompanyZipCode{"placeholder":"请输入联系电话",
-                    "nullmsg":"联系电话不能为空！","id":"phone",
-                    "class":
-                    "input-text"})
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-3")官网：#end
-            #@gridSysCol(7)
-                #tinyInput(
-                    "text" "orgCompanyWebsite" company?.orgCompanyWebsite{"placeholder":"请输入联系电话",
-                    "nullmsg":"联系电话不能为空！","id":"phone",
-                    "class":
-                    "input-text"})
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-3")内网：#end
-            #@gridSysCol(7)
-                #tinyInput(
-                    "text" "orgCompanyBackyard" company?.orgCompanyBackyard{"placeholder":"请输入联系电话",
-                    "nullmsg":"联系电话不能为空！","id":"phone",
-                    "class":
-                    "input-text"})
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-3")匿名登录：#end
-            #@gridSysCol(7)
-                #@tinyRadio(
-                    "orgCompanyGuest" "1" company?.orgCompanyGuest?:"0" {"nullmsg":"请选择性别！"})允许#end
-                #@tinyRadio("orgCompanyGuest" "0" company?.orgCompanyGuest?:"0")不允许#end
-            #end
-        #end
+
+
         #@gridSysRow()
 
             #@gridSysCol(7)
@@ -94,7 +96,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $().Validform({
+        $("form[name=thisform").Validform({
             tiptype: 2
 
         });

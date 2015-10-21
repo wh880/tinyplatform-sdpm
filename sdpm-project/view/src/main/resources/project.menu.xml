@@ -60,7 +60,7 @@
                   scope="pro-taskInfo2-op"/>
             <!--<menu id="pro-Info2-remark" name="备注" href="/project/task/IDLinkremark.page" icon="icon-book" sort="10" isShow="1"-->
             <!--scope="pro-taskInfo2-op"/>-->
-            <menu id="pro-Info2-copy" name="复制" href="/project/task/add.page" icon="icon-copy" sort="8" isShow="1"
+            <menu id="pro-Info2-copy" name="复制" href="/project/task/preadd" icon="icon-copy" sort="8" isShow="1"
                   scope="pro-taskInfo2-op"/>
             <menu id="pro-Info2-return" name="返回" href="/project/task/index.page" icon="icon-reply" sort="4" isShow="1"
                   scope="pro-taskInfo2-op"/>
@@ -128,7 +128,7 @@
                   scope="version-linkbug"/>
         </menu>
         <menu id="version-story" name="" href="/project/version/productalstory" icon="" sort="1" isShow="1">
-            <menu id="versionstory" name="" href="/product/story/delete?storyId=${story.storyId}" icon="icon-remove" sort="8" isShow="1"
+            <menu id="versionstory" name="" href="/project/version/deletereleate" icon="icon-remove" sort="8" isShow="1"
                   scope="version-linkdemand"/>
         </menu>
 

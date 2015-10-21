@@ -12,7 +12,7 @@
     #@td()${task?.taskEstimate}#end
     #@td()${task?.taskConsumed}#end
     #@td()${task?.taskLeft}#end
-    #@td()${task?.taskDeadLine}#end
+    #@td()${formatDate(task?.taskDeadLine,"yyyy年MM月dd日")}#end
     #@td()${getDict("taskStatus",task?.taskStatus)}#end
 #end
 #end

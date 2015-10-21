@@ -148,7 +148,7 @@
             #@elementItem()
                 #@sdpmItem("创建时间")
                     #@tinyDateInput(
-                        "slaCreateDate" formatDate(sla?.slaCreateDate,
+                        "slaCreateDate" formatDate(sla?.slaCreateDate?:now(),
                         "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","id":"slaCreateDate","placeholder":""})#end
                 #end
             #end

@@ -18,10 +18,13 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.weblayer.WebContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -86,7 +89,7 @@ public class ProductAction extends BaseController {
 
 
     @RequestMapping("/save")
-    public String save(Product product, Model model, HttpServletRequest request) {
+    public String save(Product product,SystemAction systemAction, HttpServletRequest request) {
 
         if (request.getSession().getAttribute("sessionProductLineId") != null) {
             product.setProductLineId((Integer) request.getSession().getAttribute("sessionProductLineId"));
@@ -94,15 +97,37 @@ public class ProductAction extends BaseController {
         product = productService.addProduct(product);
         SessionUtil.ProductRefresh(request, productService);
         request.getSession().setAttribute("sessionProductId", product.getProductId());
+
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
+                LogUtil.LogAction.OPENED,
+                String.valueOf(product.getProductId()),
+                UserUtils.getUserId(),
+                null,
+                null,
+                null,
+                null,
+                systemAction.getActionComment());
+
         return "redirect:" + "/product/page/tabledemo/product-listall.page";
 
     }
 
     @RequestMapping("/update")
-    public String update(Product product, HttpServletRequest request) {
-
+    public String update(Product product, HttpServletRequest request, SystemAction systemAction) throws IOException {
+        Product product1 = productService.findProduct(product.getProductId());
         productService.updateProduct(product);
         SessionUtil.ProductRefresh(request, productService);
+
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
+                LogUtil.LogAction.EDITED,
+                String.valueOf(product.getProductId()),
+                UserUtils.getUserId(),
+                null,
+                null,
+                product1,
+                product,
+                systemAction.getActionComment());
+
         return "redirect:" + "/product/page/tabledemo/product-listall.page";
     }
 
@@ -128,10 +153,24 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/delete")
-    public String delete(Integer productId, HttpServletRequest request) {
-
+    public String delete(Integer productId, HttpServletRequest request,SystemAction systemAction) {
+        Product product1 = productService.findProduct(productId);
         productService.deleteProduct(productId);
+        Product product = productService.findProduct(productId);
         SessionUtil.ProductRefresh(request, productService);
+
+
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
+                LogUtil.LogAction.DELETED,
+                String.valueOf(productId),
+                UserUtils.getUserId(),
+                null,
+                null,
+                product1,
+                product,
+                systemAction.getActionComment());
+
+
         return "redirect:" + "/product/page/tabledemo/product-listall.page";
     }
 

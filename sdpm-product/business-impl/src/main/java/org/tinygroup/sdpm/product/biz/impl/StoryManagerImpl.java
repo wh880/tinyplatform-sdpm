@@ -148,6 +148,10 @@ public class StoryManagerImpl implements StoryManager {
         return map;
     }
 
+    public int countStatus(int productId, int status) {
+        return productStoryDao.countStatus(productId,status);
+    }
+
     public int[] deleteBatch(List<ProductStory> ids) {
         // TODO Auto-generated method stub
         return productStoryDao.batchUpdateDel(ids);

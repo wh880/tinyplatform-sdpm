@@ -12,7 +12,7 @@
 #@tr()
     #@td()<input type="checkbox" value="${l?.effortId}" name="idCheck">#end
 	#@td()${l?.effortId}#end
-	#@td()${l?.effortDate}#end
+	#@td()${formatDate(l?.effortDate,"yyyy-MM-dd")}#end
 	#@td()${l?.effortAccount}#end
 	#@td()${l?.effortWork}#end
 	#@td() ${l?.effortConsumed}#end

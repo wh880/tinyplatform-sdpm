@@ -11,8 +11,8 @@
     });
 </script>
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/save" "post" {"class":""})
-#*<div style="width:70%;float:left" class="pageleftpart">*#
+#@tinyForm(
+    "thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/save" "post" {"class":"","enctype":"multipart/form-data"})
     <div class="infoContent">
         <p class="titleName">创建新发布</p>
  
@@ -23,7 +23,8 @@
      #@elementItem()
         #@colLabel()发布名称:#end
         #@formControlDiv("col-4")
-        	#tinyInput("text" "releaseName" ""{"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+            #tinyInput(
+                "text" "releaseName" ""{"datatype":"*","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
        #end
         #@validateDiv("col-2")#end
       #end
@@ -32,10 +33,15 @@
        #@formControlDiv("col-4")
 			#@Tselect2F()
                 #@Tselect2Body("buildId" "IN" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":"addrel","data":""}) ##,"multiple":"multiple"加上为多选项
-
                 #end
-            
-                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+
+                <script>
+                    ajaxRead("${sid}", "buildId", "buildId", "buildName", "/project/version/buildList");
+                </script>
+
+
+                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/project/version/add?buildId="
+                                  class="r ">增加</a><a href="${TINY_CONTEXT_PATH +adminPath}/project/manage/build/index">全部</a>#end
             #end
 		#end
         #@validateDiv("col-2")#end
@@ -52,7 +58,9 @@
     #@elementItem()
         #@colLabel()描述:#end
         #@formControlDiv("col-8")
-           #@Teditor("releaseDesc" "releaseDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})备注...最少输入10个字符#end
+            #@Teditor(
+                "releaseDesc" "releaseDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":
+                ""})#end
         #end
         #@validateDiv("col-2")#end
     #end
@@ -83,12 +91,13 @@
             <div class="col-5"></div>
         </div>
     #end
-#*   </div>*#
 #end
-#*
-<div style="width:30%;float:right">
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-        #include("/product/page/tabledemo/historyrecord.page")
-    #end
-</div>*#
+
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+        });
+    });
+</script>

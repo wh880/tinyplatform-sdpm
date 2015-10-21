@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,6 +54,7 @@ public class TaskAction extends BaseController {
     @Autowired
     private ProjectProductService projectProductService;
 
+    @RequiresPermissions(value = {"task", "project"}, logical = Logical.OR)
     @RequestMapping("index")
     public String index(@CookieValue(required = false) Integer cookie_projectId, HttpServletResponse response, HttpServletRequest request, Model model, String moduleId, String choose) {
         List<Project> list = projectService.findList();
@@ -211,7 +214,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/cancelSave")
-    public String cancleSave(ProjectTask task, String content) {
+    public String cancelSave(ProjectTask task, String content) {
         if (task.getTaskId() == null) {
             taskService.addTask(task);
         } else {
@@ -250,8 +253,10 @@ public class TaskAction extends BaseController {
                 moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId), moduleService);
             }
         }
-
-
+        //默认显示未关闭任务
+        if (statu == null && choose == null) {
+            statu = "0";
+        }
         String condition = TaskStatusUtil.getCondition(statu, choose, request, moduleIds);
         Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, condition, group);
         model.addAttribute("taskPager", taskPager);
@@ -330,7 +335,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/preadd")
-    public String preadd(HttpServletRequest request, Model model, Integer storyId) {
+    public String preadd(HttpServletRequest request, Model model, Integer storyId, String taskId) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
 
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
@@ -351,7 +356,10 @@ public class TaskAction extends BaseController {
             }
             moduleList.addAll(tModuleList);
         }
-
+        if (taskId != null) {
+            ProjectTask task = taskService.findTask(Integer.parseInt(taskId));
+            model.addAttribute("copyTask", task);
+        }
 
         List<ProductStory> storyList = storyService.findStoryByProject(projectId);
         ProductStory story = new ProductStory();

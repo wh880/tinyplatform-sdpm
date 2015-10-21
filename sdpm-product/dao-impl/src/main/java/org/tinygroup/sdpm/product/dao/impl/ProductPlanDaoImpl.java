@@ -16,43 +16,36 @@
 
 package org.tinygroup.sdpm.product.dao.impl;
 
-import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
-import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.PRODUCT_RELEASETABLE;
-import static org.tinygroup.tinysqldsl.Delete.delete;
-import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.selectFrom;
-import static org.tinygroup.tinysqldsl.Update.update;
-import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Alias;
 import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.select;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 @Repository
 public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlanDao {
 	
@@ -96,6 +89,34 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 				return update(PRODUCT_PLANTABLE).set(
 						PRODUCT_PLANTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
 								PRODUCT_PLANTABLE.PLAN_ID.eq(new JdbcNamedParameter("planId")));
+			}
+		});
+	}
+
+	public List<ProductPlan> statisticQuery(ProductPlan productPlan,final OrderBy... orderArgs) {
+		if(productPlan==null){
+			productPlan=new ProductPlan();
+		}
+		return getDslTemplate().query(productPlan, new SelectGenerateCallback<ProductPlan>() {
+
+
+			public Select generate(ProductPlan t) {
+				PRODUCT_PLANTABLE.setAlias(new Alias("a"));
+				PRODUCT_STORYTABLE.setAlias(new Alias("b"));
+				Select select = select(FragmentSql.fragmentSelect("a.*,SUM(CASE WHEN b.`story_status`=1 THEN 1 ELSE 0 END) draft," +
+						"SUM(CASE WHEN b.`story_status`=2 THEN 1 ELSE 0 END) active," +
+						"SUM(CASE WHEN b.`story_status`=3 THEN 1 ELSE 0 END) `change`," +
+						"SUM(CASE WHEN b.`story_status`=4 THEN 1 ELSE 0 END) `close`"
+				)).from(PRODUCT_PLANTABLE).join(leftJoin(PRODUCT_STORYTABLE,PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID))).where(
+						and(
+								PRODUCT_PLANTABLE.COMPANY_ID.eq(t.getCompanyId()),
+								PRODUCT_PLANTABLE.PRODUCT_ID.eq(t.getProductId()),
+								PRODUCT_PLANTABLE.PLAN_NAME.eq(t.getPlanName()),
+								PRODUCT_PLANTABLE.PLAN_SPEC.eq(t.getPlanSpec()),
+								PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.eq(t.getPlanBeginDate()),
+								PRODUCT_PLANTABLE.PLAN_END_DATE.eq(t.getPlanEndDate()),
+								PRODUCT_PLANTABLE.DELETED.eq(t.getDeleted()))).groupBy(PRODUCT_PLANTABLE.PLAN_ID);
+				return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
@@ -156,10 +177,11 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 			productPlan=new ProductPlan();
 		}
 		return getDslTemplate().query(productPlan, new SelectGenerateCallback<ProductPlan>() {
-
 			@SuppressWarnings("rawtypes")
 			public Select generate(ProductPlan t) {
-				Select select = selectFrom(PRODUCT_PLANTABLE).where(
+
+				Select select = selectFrom(PRODUCT_PLANTABLE
+				).where(
 				and(
 					PRODUCT_PLANTABLE.COMPANY_ID.eq(t.getCompanyId()),
 					PRODUCT_PLANTABLE.PRODUCT_ID.eq(t.getProductId()),

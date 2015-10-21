@@ -1,7 +1,5 @@
 package org.tinygroup.sdpm.product.biz.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,9 +7,10 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.product.biz.inter.PlanManager;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
-import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -43,6 +42,10 @@ public class PlanManagerImpl implements PlanManager{
 	public Pager<ProductPlan> findPager(int start, int limit, ProductPlan productPlan, String order, String ordertype) {
 		
 		return productPlanDao.queryPager((start-1)*limit, limit, productPlan, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+	}
+
+	public List<ProductPlan> statisticFind(ProductPlan productPlan ) {
+		return productPlanDao.statisticQuery(productPlan);
 	}
 
 	public List<ProductPlan> findList(ProductPlan productplan, String order, String ordertype) {

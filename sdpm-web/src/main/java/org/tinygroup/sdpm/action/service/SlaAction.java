@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -83,10 +84,12 @@ public class SlaAction extends BaseController {
 
     @RequestMapping(value = "/list/data")
     public String listData(Integer limit, Integer start, ServiceSla sla, Integer treeId,
+                           String groupOperate, SearchInfos searchInfos,
                            @RequestParam(required = false, defaultValue = "slaId") String order,
-                           @RequestParam(required = false, defaultValue = "asc") String ordertype,
+                           @RequestParam(required = false, defaultValue = "asc") String orderType,
                            Model model) {
-        Pager<ServiceSla> pager = slaService.findSlaPager(start, limit, sla, treeId, order, ordertype);
+        /*sla表格里面的productId与左侧树里面的product表里面的productId即treeId匹配，在findSlaPager方法匹配*/
+        Pager<ServiceSla> pager = slaService.findSlaPager(start, limit, sla, treeId, groupOperate, searchInfos, order, orderType);
         model.addAttribute("pager", pager);
         return "service/sla/slaTableData.pagelet";
     }
@@ -146,7 +149,7 @@ public class SlaAction extends BaseController {
         return map;
     }
 
-    /*协议的“协议标题”页面，协议具体内容查找出来*/
+    /*协议的“协议标题”页面，协议具体内容查找出来。将sla表中数据查询出来，放在对象sla中*/
     @RequestMapping(value = "/slaContent")
     public String slaContent(Integer id, Model model) {
         ServiceSla sla = slaService.findSla(id);

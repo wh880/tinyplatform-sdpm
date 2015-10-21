@@ -41,61 +41,65 @@
 
 
     #@noRespsGridSystem()
-    <div class="infoContent">
-        <p class="titleName">公司信息</p>
-        #@gridSysRow()
-            #@colLabel("col-4")公司名称：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyName}</p>
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")联系电话：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyPhone}</p>
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")传真：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyFax}</p>
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")通讯地址：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyAddress}</p>
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")邮政编码：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyZipCode}</p>
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")官网：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyWebsite}</p>
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")内网：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyBackyard}</p>
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")匿名登录：#end
-            #@gridSysCol(8)
-                #if(company?.orgCompanyGuest==1)
-                    <p>允许</p>
-                #else
-                    <p>不允许</p>
+        #@gridSysCol(3)#end
+        #@gridSysCol(6)
+        <div class="infoContent">
+            <p class="titleName">公司信息</p>
+            #@gridSysRow()
+                #@colLabel("col-4")公司名称：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyName}</p>
                 #end
             #end
+            #@gridSysRow()
+                #@colLabel("col-4")联系电话：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyPhone}</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")传真：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyFax}</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")通讯地址：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyAddress}</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")邮政编码：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyZipCode}</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")官网：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyWebsite}</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")内网：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyBackyard}</p>
+                #end
+            #end
+        ##        #@gridSysRow()
+        ##            #@colLabel("col-4")匿名登录：#end
+        ##            #@gridSysCol(8)
+        ##                #if(company?.orgCompanyGuest==1)
+        ##                    <p>允许</p>
+        ##                #else
+        ##                    <p>不允许</p>
+        ##                #end
+        ##            #end
+        ##        #end
+        </div>
         #end
-    </div>
+
     #end
 #end
 

@@ -12,9 +12,13 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,17 +53,41 @@ public class PlanAction  extends BaseController{
 
 
 	@RequestMapping("/save")
-	public String save(ProductPlan productPlan, Model model,HttpServletRequest request) {
+	public String save(ProductPlan productPlan, HttpServletRequest request, SystemAction systemAction) throws IOException {
 		
 		productPlan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-		planService.addPlan(productPlan);
+		ProductPlan productPlan1 = planService.addPlan(productPlan);
+
+		LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
+				, LogUtil.LogAction.OPENED
+				, String.valueOf(productPlan1.getPlanId())
+				, UserUtils.getUserId()
+				, String.valueOf(productPlan1.getProductId())
+				, null
+				, null
+				, null
+				, systemAction.getActionComment());
+
+
 		return "redirect:" + "/product/page/project/product-plan.page";
 	}
 	
 	@RequestMapping("/update")
-	public 	String update(ProductPlan plan){
-		
+	public 	String update(ProductPlan plan,SystemAction systemAction) throws IOException {
+		ProductPlan plan1 = planService.findPlan(plan.getPlanId());
 		planService.updatePlan(plan);
+
+		LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
+				, LogUtil.LogAction.EDITED
+				, String.valueOf(plan.getPlanId())
+				, UserUtils.getUserId()
+				, String.valueOf(plan.getProductId())
+				, null
+				, plan1
+				, plan
+				, systemAction.getActionComment());
+
+
 		return " redirect:" + "/product/page/project/product-plan.page";
 		
 	}
@@ -79,10 +107,24 @@ public class PlanAction  extends BaseController{
 	
 	@ResponseBody
 	@RequestMapping("/delete")
-	public Map delete(Integer planId) {
+	public Map delete(Integer planId,SystemAction systemAction) throws IOException {
+		ProductPlan plan1 = planService.findPlan(planId);
         planService.deletePlan(planId);
+		ProductPlan plan = planService.findPlan(planId);
         Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "success");
+
+		LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
+				, LogUtil.LogAction.DELETED
+				, String.valueOf(planId)
+				, UserUtils.getUserId()
+				, String.valueOf(plan.getProductId())
+				, null
+				, plan1
+				, plan
+				, systemAction.getActionComment());
+
+
+		map.put("status", "success");
         map.put("info", "删除成功");
         return map;
     }
@@ -185,6 +227,17 @@ public class PlanAction  extends BaseController{
 			list.add(plan);
 		}	
 		planService.deleteBatchPlan(list);
+		for(ProductPlan plan:list){
+			LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
+					, LogUtil.LogAction.DELETED
+					,String.valueOf(plan.getProductId())
+					,UserUtils.getUserId()
+					,String.valueOf(plan.getProductId())
+					,null
+					,null
+					,null
+					,null);
+		}
 		map.put("status", "success");
 	    map.put("info", "删除成功");
 	    return map;

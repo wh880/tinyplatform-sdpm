@@ -321,10 +321,6 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
 		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
 		final String[] storys = test.getBuildStories().split(",");
-//			List<ProductStory>productStories =new ArrayList<ProductStory>();
-//			Select selects =select(PRODUCT_STORYTABLE.ALL).from(PRODUCT_STORYTABLE)
-//					.where(PRODUCT_STORYTABLE.BUILD_ID.in(storys));
-//		productStories = getDslSession().fetchList(selects,ProductStory.class);
 		ProductStory productStory = new ProductStory();
 		return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
 
@@ -334,28 +330,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 				return addOrderByElements(select, orderBies);
 			}
 		});
-//		return productStories;
 
-//		Select select1 = select(PROJECT_BUILDTABLE.ALL, PRODUCT_STORY_SPECTABLE.STORY_SPEC).from(PROJECT_BUILDTABLE)
-//				.join(Join.leftJoin(
-//						PROJECT_STORYTABLE, PROJECT_BUILDTABLE.BUILD_ID.eq(PROJECT_STORYTABLE.STORY_ID)
-//						)
-//				)
-//				.join(Join.leftJoin(
-//						PRODUCT_STORYTABLE, PROJECT_BUILDTABLE.BUILD_STORIES.eq(PRODUCT_STORYTABLE.STORY_ID)
-//						)
-//				)
-//				.join(Join.leftJoin(
-//						PRODUCT_STORY_SPECTABLE,
-//						and(PRODUCT_STORY_SPECTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
-//								PROJECT_BUILDTABLE.BUILD_ID.eq(PRODUCT_STORY_SPECTABLE.STORY_VERSION)
-//						)
-//				))
-//				.where(
-//						PROJECT_BUILDTABLE.BUILD_ID.eq(buildId)
-//				);
-//
-//		return getDslSession().fetchOneResult(select, ProjectStory.class);
 	}
 
 
@@ -375,8 +350,38 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 				return addOrderByElements(select, orderBies);
 			}
 		});
-
 	}
+
+	public Integer deletereleate(Integer storyId,Integer buildId){
+		Select select =select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
+		final String[] storys = test.getBuildStories().split(",");
+		String newString = new String();
+		String storyID = storyId.toString();
+		for (int i = 0; i < storys.length; i++) {
+			if(!storys[i].equals(storyID)){
+			newString = newString + storys[i];
+				newString = newString+",";
+			}
+		}
+		Update update = update(PROJECT_BUILDTABLE).set(PROJECT_BUILDTABLE.BUILD_STORIES.value(newString))
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		return getDslSession().execute(update);
+	}
+
+	public Integer releateReq(Integer storyId,Integer buildId){
+		Select select =select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
+		String storys = test.getBuildStories();
+		String newString;
+		newString = storys + ","+ storyId;
+		Update update = update(PROJECT_BUILDTABLE).set(PROJECT_BUILDTABLE.BUILD_STORIES.value(newString))
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		return getDslSession().execute(update);
+	}
+
 
 
 }

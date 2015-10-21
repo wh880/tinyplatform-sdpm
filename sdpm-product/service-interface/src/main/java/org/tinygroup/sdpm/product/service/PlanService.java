@@ -79,5 +79,13 @@ public interface PlanService{
 	 * @return
 	 */
 	Pager<ProductPlan> findProductPlanPager(int page,int limit,ProductPlan productPlan,String order,String ordertype);
+
+	/**
+	 * 统计plan
+	 * @param productPlan
+
+     * @return
+     */
+	List<ProductPlan> statisticfind(ProductPlan productPlan);
 	
 }

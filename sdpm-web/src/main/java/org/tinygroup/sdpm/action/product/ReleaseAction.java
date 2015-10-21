@@ -7,14 +7,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.ReleaseService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,25 +55,71 @@ public class ReleaseAction extends BaseController{
 
 
 	@RequestMapping("/save")
-	public  String save(ProductRelease productRelease,Model model,HttpServletRequest request){
-		
+	public String save(ProductRelease productRelease, HttpServletRequest request, SystemAction systemAction, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
+
+
+
 		productRelease.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-		releaseService.addRelease(productRelease);
+		ProductRelease release = releaseService.addRelease(productRelease);
+		ProfileUtil profileUtil = new ProfileUtil();
+		profileUtil.uploads(file, release.getReleaseId(), "release", title);
+
+		LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
+				, LogUtil.LogAction.OPENED
+				, String.valueOf(release.getReleaseId())
+				, UserUtils.getUserId()
+				, String.valueOf(release.getProductId())
+				, null
+				, null
+				, null
+				, systemAction.getActionComment());
+
 		return "redirect:" + "/product/page/project/product-release.page";
 	}
 	
 	@RequestMapping("/update")
-	public String update(ProductRelease release){
+	public String update(ProductRelease release, SystemAction systemAction, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
+		ProductRelease release1 = releaseService.findRelease(release.getReleaseId());
 		releaseService.updateRelease(release);
+
+		ProfileUtil profileUtil = new ProfileUtil();
+
+		profileUtil.uploads(file, release.getReleaseId(), "release", title);
+
+		LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
+				, LogUtil.LogAction.EDITED
+				, String.valueOf(release.getReleaseId())
+				, UserUtils.getUserId()
+				, String.valueOf(release.getProductId())
+				, null
+				, release1
+				, release
+				, systemAction.getActionComment());
+
 		return "redirect:" + "/product/page/project/product-release.page";
 	}
 	
 	
 	@ResponseBody
 	@RequestMapping("/delete")
-	public Map delete(Integer releaseId){
+	public Map delete(Integer releaseId,SystemAction systemAction) throws IOException {
+
+		ProductRelease release1 = releaseService.findRelease(releaseId);
 		releaseService.deleteRelease(releaseId);
+		ProductRelease release = releaseService.findRelease(releaseId);
 		Map<String,String> map = new HashMap<String, String>();
+
+
+		LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
+				, LogUtil.LogAction.DELETED
+				, String.valueOf(releaseId)
+				, UserUtils.getUserId()
+				, String.valueOf(release.getProductId())
+				, null
+				, release1
+				, release
+				, systemAction.getActionComment());
+
 		map.put("status", "success");
 		map.put("info","删除成功");
 		return map;

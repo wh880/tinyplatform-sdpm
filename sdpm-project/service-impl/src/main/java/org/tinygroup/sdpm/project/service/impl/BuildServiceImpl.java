@@ -71,6 +71,11 @@ public class BuildServiceImpl implements BuildService {
     public Pager<ProjectBuild> findPagerBuild(ProjectBuild projectBuild, Integer start, Integer limit, String order, boolean asc){
         return buildManager.findPager(projectBuild,start,limit,order,asc);
     }
-
+    public Integer deletereleate(Integer storyId,Integer buildId){
+        return buildManager.deletereleate(storyId, buildId);
+    }
+    public Integer releateReq(Integer storyId,Integer buildId){
+        return buildManager.releateReq(storyId,buildId);
+    }
 
 }

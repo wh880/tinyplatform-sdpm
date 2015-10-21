@@ -1,3 +1,51 @@
+<script>
+    function ajaxRead(id, toName, opKey, opvalue, url, value) {
+        var selectCheck = "select[name=" + toName + "]";
+        $(selectCheck).each(function () {
+            var sele = $(this);
+            var s;
+            $.ajax({
+                type: "POST",
+                url: "${TINY_CONTEXT_PATH+adminPath}" + url,
+                data: $(this).attr('data'),
+                dataType: "json",
+                success: function (data) {
+                    sele.empty();
+                    var em = "<option value='0' selected  >/</option>";
+                    sele.append(em);
+                    for (var i = 0, l = data.length; i < l; i++) {
+                        var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
+                        sele.append(em);
+
+                    }
+                    if ("multiple" != sele.attr("multiple")) {
+                        if (value != null) {
+                            sele.val(value).trigger("change");
+                        } else {
+                            if (data.length > 0) {
+                                sele.val(data[0][opKey]).trigger("change");
+                            } else {
+                                sele.val(0).trigger("change");
+                            }
+
+                        }
+                    }
+
+
+                },
+                error: function (res) {
+                    alert("失败");
+                }
+            });
+
+
+        });
+
+    }
+
+
+</script>
+
 
 	#@div(divClass="infoContent")
         <p class="titleName">基本信息</p>
@@ -9,28 +57,38 @@
 				#@tr()
 					#@th()所属产品#end
 					#@td()
+					
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("productId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">产品2</option>
-	                        <option value="DE">产品3</option>
-	                        <option value="FL">产品4</option>
-	                        <option value="GA">产品5</option>
-	                        <option value="IN">产品1</option>
-	                    	#end                  
+	                   		 #@Tselect2Body("productId" testCase?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                       
+	                    	#end 
+	                    	<script>
+							
+		                        ajaxRead("${sid}", "productId", "productId", "productName", "/product/productList",${testCase?.productId?:0});
+								
+								 $("#${sid}").on("change", function () {
+		                            var pId = $("#${sid}  option:selected").val();
+		                            
+		                            ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,${testCase?.moduleId?:0});
+		                            ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/product/story/storyList?productId=" + pId,${testCase?.storyId?:0});
+		
+		                        });
+		                    </script>
+		                    	                 
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
                 	  #end
+                	  
+                	   	
 					#end
 				#end
 				#@tr()
 					#@th()所属模块#end
 					#@td()
 						  #@Tselect2F()
-	                   		 #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">/1/2</option>
-	                        <option value="DE">/2/3</option>
-	                        <option value="IN">/3/4</option>
+	                   		 #@Tselect2Body("moduleId" testCase?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        
 	                    	#end                
                 	  #end
 					#end
@@ -40,10 +98,8 @@
 				#@th()相关需求#end
 				#@td()
 							 #@Tselect2F()
-	                   		 #@Tselect2Body("storyId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">需求1</option>
-	                        <option value="ME">需求2</option>
-	                        <option value="MD">需求3</option>
+	                   		 #@Tselect2Body("storyId" testCase?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                       
 	                    	#end                
 	                      	#@Tselect2Fix()
 	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
@@ -55,10 +111,11 @@
 				#@th()用例类型#end
 				#@td()
 				#@Tselect2F()
-	                   		 #@Tselect2Body("caseType" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
+	                   		 #@Tselect2Body("caseType" testCase?.caseType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 	#foreach(caseType:getDict("caseType"))
+	                   		 		<option value="${caseType.value}">${caseType.text}</option>
+	                   		 	#end
+	                       
 	                    	#end                
                  #end
                	#end
@@ -67,10 +124,10 @@
 				#@th()试用阶段#end
 				#@td()
 					#@Tselect2F()
-	                   		 #@Tselect2Body("caseStage" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
+	                   		 #@Tselect2Body("caseStage" testCase?.caseStage {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+		                        #foreach(stage:getDict("caseStage"))
+	                   		 		<option value="${stage.value}">${stage.text}</option>
+	                   		 	#end
 	                    	#end                
                  	#end
 				#end
@@ -79,10 +136,10 @@
 				#@th()优先级#end
 				#@td() 
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("priority" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
+	                   		 #@Tselect2Body("priority" testCase?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+		                        #foreach(pri:getDict("casePriority"))
+	                   		 		<option value="${pri.value}">${pri.text}</option>
+	                   		 	#end
 	                    	#end                
              		#end
                  #end
@@ -91,10 +148,10 @@
 				#@th()用例状态#end
 				#@td()
 				 #@Tselect2F()
-	                   		 #@Tselect2Body("caseStatus" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
+	                   		 #@Tselect2Body("caseStatus" testCase?.caseStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        	#foreach(status:getDict("caseStatus"))
+	                   		 		<option value="${status.value}">${status.text}</option>
+	                   		 	#end
 	                    	#end                
              		#end
                 #end
@@ -102,12 +159,12 @@
 			#@tr()
 				#@th()关键词#end
 				#@td()
-					#tinyInput("text" "caseKeywords" ""{"datatype":"","id":"版本","class":"input-text"})
+					#tinyInput("text" "caseKeywords" testCase?.caseKeywords {"datatype":"","id":"版本","class":"input-text"})
 				#end
 			#end
 			#@tr()
 				#@th()相关用例#end
-				#@td()#tinyInput("text" "linkCase" ""{"datatype":"","id":"抄送给","class":"input-text"})
+				#@td()#tinyInput("text" "linkCase" testCase?.linkCase {"datatype":"","id":"抄送给","class":"input-text"})
 				#end
 			#end
 		#end
@@ -122,11 +179,11 @@
 			#@tbody()
 				#@tr()
 					#@th()由谁创建#end
-					#@td()admin 于 2015-08-31 11:31:51#end
+					#@td()${testCase?.caseOpenedBy} 于 ${testCase?.caseOpenedDate?formatDate(testCase?.caseOpenedDate,'yyyy年MM月dd日'):""}#end
 				#end
 				#@tr()
 					#@th()最后编辑#end
-					#@td()******#end
+					#@td()${testCase?.caseLastEditedBy} 于  ${testCase?.caseLastEditedDate?formatDate(testCase?.caseLastEditedDate,'yyyy年MM月dd日'):""}  #end
 				#end
 			#end
 		#end

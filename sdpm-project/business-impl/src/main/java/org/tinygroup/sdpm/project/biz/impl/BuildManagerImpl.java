@@ -82,5 +82,11 @@ public class BuildManagerImpl implements BuildManager {
     public Pager<ProductStory> findnoBuildStory(int start, int limit, Integer buildId) {
         return projectBuildDao.findnoBuildStorys(start,limit,buildId);
     }
+    public Integer deletereleate(Integer storyId,Integer buildId){
+        return projectBuildDao.deletereleate(storyId,buildId);
+    }
+    public Integer releateReq(Integer storyId,Integer buildId){
+        return projectBuildDao.releateReq(storyId, buildId);
+    }
 
 }
