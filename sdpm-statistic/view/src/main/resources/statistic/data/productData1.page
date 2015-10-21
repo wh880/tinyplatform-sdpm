@@ -36,17 +36,7 @@
             #end
         #end
         #@tbody()
-##            #@tr("text-c")
-##            <td rowspan="2">测试产品</td>
-##            <td rowspan="2">admin</td>
-##            <td>计划</td>
-##            <td>2015-08-25</td>
-##            <td>2015-08-25</td>
-##            <td>2</td>
-##            <td>4</td>
-##            <td>1</td>
-##            <td>1</td>
-##            #end
+
 
             #for(p:product)
                  #@tr("text-c")
@@ -79,55 +69,7 @@
                 #end
             #end
 
-##            #for(p:product)
-##            #@tr("text-c")
-##            <td rowspan="2">${p?.key?.productName}</td>
-##            <td rowspan="2">${p?.key?.productCreatedBy}</td>
-##            #end
-##
-##            #end
-##                <td>
-##                #for(pl:p?.value)
-##                      ${pl?.planName}
-##
-####                          <td>2</td>
-####                         <td>4</td>
-####                         <td>1</td>
-####                        <td>1</td>
-##                #end
-##               <td>
-##               #for(pl:p?.value)
-##                      ${formatDate(pl?.planBeginDate,"yyyy-MM-dd")}
-##               #end
-##              </td>
-##                <td>
-##                #for(pl:p?.value)
-##                  ${formatDate(pl?.planEndDate,"yyyy-MM-dd")}
-##                #end
-##                </td>
-##
-##            #end
-##            #end
-##            #@tr("text-c")
-##            <td>计划2</td>
-##            <td>2015-09-25</td>
-##            <td>2015-09-25</td>
-##            <td>2</td>
-##            <td>4</td>
-##            <td>1</td>
-##            <td>1</td>
-##            #end
-##            #@tr("text-c")
-##            <td rowspan="1">测试产品3</td>
-##            <td rowspan="1">admin</td>
-##            <td>计划</td>
-##            <td>2015-08-25</td>
-##            <td>2015-08-25</td>
-##            <td>2</td>
-##            <td>4</td>
-##            <td>1</td>
-##            <td>1</td>
-##            #end
+
         #end
     #end
 #end
