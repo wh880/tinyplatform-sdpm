@@ -29,6 +29,59 @@ public class DocumentDoc implements Serializable {
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
 
+	/*
+	 * 文档关联查询的字段
+	 */
+	private String projectName;
+	private String docLibName;
+	private String productName;
+	private String moduleName;
+	private String docAddName;
+	private String docEditName;
+	
+	public String getProjectName(){
+		return projectName;
+	}
+	public void setProjectName(String projectName){
+		this.projectName = projectName;
+	}
+	
+	public String getDocLibName(){
+		return docLibName;
+	}
+	public void setDocLibName(String docLibName){
+		this.docLibName = docLibName;
+	}
+	
+	public String getProductName(){
+		return productName;
+	}
+	public void setProductName(String productName){
+		this.productName = productName;
+	}
+	
+	public String getModuleName(){
+		return moduleName;
+	}
+	public void setModuleName(String moduleName){
+		this.moduleName = moduleName;
+	}
+	
+	public String getDocAddName(){
+		return docAddName;
+	}
+	public void setDocAddName(String docAddName){
+		this.docAddName = docAddName;
+	}
+	
+	public String getDocEditName(){
+		return docAddName;
+	}
+	public void setDocEditName(String docEditName){
+		this.docEditName = docEditName;
+	}
+	
+	
 	/** 
 	 * 文档ID
 	 * 

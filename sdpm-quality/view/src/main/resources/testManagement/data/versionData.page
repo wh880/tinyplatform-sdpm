@@ -1,30 +1,21 @@
-#macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
-#end
 
+#setTinyItemCount(verPager?.totalCount)
 
-
-#set(records=verpager.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-	#set(pagesize=records-(page-1)*pagesize)
-#end
-#setTinyItemCount(verpager.totalCount)
-
-#for(v:verPager.records)
+#for(v:verPager?.records)
 					#@tr()
 						#@td()<input type="checkbox" value="1" name="userid">#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionInfo.page">${v?.testversionId}</a>#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionInfo.page">${v?.testtaskTitle}</a>#end
+						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/versionInfo?testversionId=${v?.testversionId}">${v?.testversionId}</a>#end
+						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/versionInfo?testversionId=${v?.testversionId}">${v?.testtaskTitle}</a>#end
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index.page">${v?.projectId}</a>#end
-						#@td()${v?.build}#end
-						#@td()${v?.testtaskOwner}#end
+						#@td()${v?.buildName}#end
+						#@td()${v?.testtaskOwner?UserUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}#end
 						#@td()${v?.testtaskBegin}#end
 						#@td()${v?.testtaskEnd}#end
-						#@td()${v?.testtaskStatus}#end					
+						#@td()${getDict("versionStatus",v?.testtaskStatus)}#end
 						 #@td()
 						 	#foreach(m:menuManager.getScopeMenus("testversion-op"))
 						 		#if(m.id != "tversiondelete")
-						 			<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+						 			<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 						 		#else
 						 			#@tinyTableItemRemove(m.href v)
 										<i class="${m.icon}" title="删除"></i>
@@ -33,8 +24,8 @@
 						 	#end
 
 							###iconOperations("#myModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
-							
-							
+
+
 						#end
 					#end
 				#end

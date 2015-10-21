@@ -12,18 +12,23 @@
 
     #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/faq/save" "post" {"class":""})
     <input type="hidden" name="faqId" value="${faq?.faqId}"/>
- #*   #@tinyForm("thisform" "" "" {"class":"test"})*#
-
         #@elementItem()
             #@sdpmItem("产品名称" "*")
-                #@tinySelect("productId" faq?.productId {"class":"input-text select2","rel":"22","id":"productId"})
-                    #@tinyOptionItem("")请选择#end
-                    #foreach(l:slas)
-                        #@tinyOptionItem(l.productId)${l?.productName}#end
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "productId" faq?.productId{"datatype":"*","id":"productId",
+                        "nullmsg":"产品名称不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("")请选择#end
+                        #foreach(l:slas)
+                            #@tinyOptionItem(l.productId)${l?.productName}#end
+                        #end
                     #end
+                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"
+                                      class="r ">增加</a>#end
                 #end
             #end
         #end
+
 
         #@elementItem()
             #@sdpmItem("创建人")
@@ -31,18 +36,10 @@
                     "text" "faqCreatedBy" faq?.faqCreatedBy{"placeholder":"","id":"faqCreatedBy","class":"input-text"})
             #end
         #end
-    #* #@elementItem()
-         #@sdpmItem("创建时间")
-             #@tinyDateInput(
-                 "faqCreateDate" formatDate(faq?.faqCreateDate,
-                 "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
-             "nullmsg":"日期不能为空","placeholder":"请选择创建日期"})#end
-         #end
-     #end*#
         #@elementItem()
             #@sdpmItem("创建时间")
                 #@tinyDateInput(
-                    "faqCreateDate" formatDate(faq?.faqCreateDate,
+                    "faqCreateDate" formatDate(faq?.faqCreateDate?:now(),
                     "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
                 "nullmsg":"日期不能为空","placeholder":"请选择创建日期"})#end
             #end
@@ -53,16 +50,6 @@
                     "问题不能为空！","id":"faqQuestion","class":"input-text"})
             #end
         #end
-    #*#@elementItem()
-        #@sdpmItem("问题类型" "*")
-            #@tinySelect("faqType" faq?.faqType{"class":"input-text select2","rel":"22","id":"productId"})
-                #@tinyOptionItem("ch")请选择#end
-                #@tinyOptionItem("00")第一类问题#end
-                #@tinyOptionItem("01")第二类问题#end
-                #@tinyOptionItem("02")第三类问题#end
-            #end
-        #end
-    #end*#
         #@elementItem()
             #@sdpmItem("问题类型" "*")
                 #TzTreeSelect(

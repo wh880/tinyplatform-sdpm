@@ -6,7 +6,6 @@ import org.tinygroup.fileresolver.impl.AbstractFileProcessor;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.dict.inter.DictHandle;
 import org.tinygroup.sdpm.dict.inter.DictNodeEntries;
-import org.tinygroup.sdpm.dict.util.DictUtil;
 import org.tinygroup.vfs.FileObject;
 import org.tinygroup.xstream.XStreamFactory;
 
@@ -17,9 +16,10 @@ public class DictFileProcessor extends AbstractFileProcessor {
     private static final String DICT_EXT_FILE_NAME = ".dict.xml";
     @Autowired
     private DictHandle dictHandle;
+
     @Override
     protected boolean checkMatch(FileObject fileObject) {
-        return fileObject.getFileName().endsWith(DICT_EXT_FILE_NAME) || fileObject.getFileName().endsWith(".dict");
+        return fileObject.getFileName().endsWith(DICT_EXT_FILE_NAME);
     }
 
     public void process() {
@@ -49,7 +49,7 @@ public class DictFileProcessor extends AbstractFileProcessor {
             try {
                 dictHandle.addDictEntry(dictNodeEntries, fileObject.getAbsolutePath());
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.logMessage(LogLevel.ERROR, "添加数据字典出错", e);
             }
             caches.put(fileObject.getAbsolutePath(), dictNodeEntries);
             LOGGER.logMessage(LogLevel.INFO, "加载dict文件[{0}]结束",

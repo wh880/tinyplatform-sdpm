@@ -15,7 +15,6 @@
  */
 package org.tinygroup.sdpm.org.biz.inter;
 
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -43,7 +42,7 @@ public interface UserManager {
      *
      * @return
      */
-    Pager<OrgUser> findPager(Integer start, Integer limit, OrgUser orgUser, String groupOperate, SearchInfos searchInfos);
+    Pager<OrgUser> findPager(Integer start, Integer limit, OrgUser orgUser);
 
     /**
      * 根据条件查询List
@@ -113,5 +112,5 @@ public interface UserManager {
      */
     String getNameById(String id);
 
-    List<OrgUser> findUserListByIds(String... storyId);
+    List<OrgUser> findUserListByIds(String... userId);
 }

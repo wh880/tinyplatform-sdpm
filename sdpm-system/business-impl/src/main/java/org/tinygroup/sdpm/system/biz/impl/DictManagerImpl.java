@@ -72,7 +72,6 @@ public class DictManagerImpl implements DictManager {
 	}
 
 	public int bechDelete(Integer...ids) {
-		// TODO Auto-generated method stub
 		return systemDictDao.deleteByKeys(ids);
 	}
 

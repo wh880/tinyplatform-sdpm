@@ -41,9 +41,11 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
+import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.document.dao.DocumentDocDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -114,6 +116,18 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 					DOCUMENT_DOCTABLE.DOC_EDITED_DATE.value(t.getDocEditedDate()),
 					DOCUMENT_DOCTABLE.DOC_DELETED.value(t.getDocDeleted())).where(
 					DOCUMENT_DOCTABLE.DOC_ID.eq(t.getDocId()));
+				return update;
+			}
+		});
+	}
+	
+	public int editDoc(final DocumentDoc documentDoc) {
+		if(documentDoc == null || documentDoc.getDocId() == null){
+			return 0;
+		}
+		return getDslTemplate().update(documentDoc, new UpdateGenerateCallback<DocumentDoc>() {
+			public Update generate(DocumentDoc t) {
+				Update update = UpdateUtil.getUpdate(DOCUMENT_DOCTABLE,documentDoc);
 				return update;
 			}
 		});
@@ -215,7 +229,7 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		});
 	}
 	
-	public Pager<DocumentDoc> complexQuery(int start, int limit, DocumentDoc doc, final String condition,
+	public Pager<DocumentDoc> complexQueryNoRel(int start, int limit, DocumentDoc doc, final String condition,
 			final OrderBy... orderBys) {
 		if(doc == null){
 			doc =new DocumentDoc();
@@ -225,6 +239,40 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 			public Select generate(DocumentDoc t){
 				Select select = MysqlSelect.selectFrom(DOCUMENT_DOCTABLE).where(
 						and(fragmentCondition(condition),
+							DOCUMENT_DOCTABLE.DOC_PRODUCT.eq(t.getDocProduct()),
+							DOCUMENT_DOCTABLE.DOC_PROJECT.eq(t.getDocProject()),
+							DOCUMENT_DOCTABLE.DOC_LIB_ID.eq(t.getDocLibId()),
+							DOCUMENT_DOCTABLE.DOC_MODULE.eq(t.getDocModule()),
+							DOCUMENT_DOCTABLE.DOC_TITLE.eq(t.getDocTitle()),
+							DOCUMENT_DOCTABLE.DOC_DIGEST.eq(t.getDocDigest()),
+							DOCUMENT_DOCTABLE.DOC_KEYWORDS.eq(t.getDocKeywords()),
+							DOCUMENT_DOCTABLE.DOC_TYPE.eq(t.getDocType()),
+							DOCUMENT_DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
+							DOCUMENT_DOCTABLE.DOC_URL.eq(t.getDocUrl()),
+							DOCUMENT_DOCTABLE.DOC_ATTACH.eq(t.getDocAttach()),
+							DOCUMENT_DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
+							DOCUMENT_DOCTABLE.DOC_ADDED_BY.eq(t.getDocAddedBy()),
+							DOCUMENT_DOCTABLE.DOC_ADDED_DATE.eq(t.getDocAddedDate()),
+							DOCUMENT_DOCTABLE.DOC_EDITED_BY.eq(t.getDocEditedBy()),
+							DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
+							DOCUMENT_DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
+					return addOrderByElements(select, orderBys);
+				}		
+			});
+		}
+	
+	public Pager<DocumentDoc> complexQuery(int start, int limit, DocumentDoc doc, final String condition,
+			final OrderBy... orderBys) {
+		if(doc == null){
+			doc =new DocumentDoc();
+		}
+		return getDslTemplate().queryPager(start, limit, doc, false, new SelectGenerateCallback<DocumentDoc>() {
+
+			public Select generate(DocumentDoc t){
+				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("document_doc.*,d.doc_lib_name as docLibName,pd.product_name as productName,pj.project_name as projectName,m.module_name as moduleName,o.org_user_account as docAddName,o1.org_user_account as docEditName"))
+						.from(FragmentSelectItemSql.fragmentFrom("document_doc left join document_doclib d on d.doc_lib_id=document_doc.doc_lib_id left join product pd on pd.product_id=document_doc.doc_product left join project pj on pj.project_id=document_doc.doc_project left join system_module m on m.module_id=document_doc.doc_module left join org_user o on o.org_user_id=document_doc.doc_added_by left join org_user o1 on o1.org_user_id=document_doc.doc_edited_by "))
+						.where(and(
+							condition==null||"".equals(condition.trim())?DOCUMENT_DOCTABLE.DOC_ID.isNotNull():fragmentCondition(condition),
 							DOCUMENT_DOCTABLE.DOC_PRODUCT.eq(t.getDocProduct()),
 							DOCUMENT_DOCTABLE.DOC_PROJECT.eq(t.getDocProject()),
 							DOCUMENT_DOCTABLE.DOC_LIB_ID.eq(t.getDocLibId()),

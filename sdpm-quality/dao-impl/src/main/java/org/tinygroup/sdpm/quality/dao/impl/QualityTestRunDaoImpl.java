@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Select;
@@ -36,6 +37,7 @@ import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.Pager;
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 	import org.tinygroup.tinysqldsl.select.OrderByElement;
@@ -251,5 +253,21 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
 		}
 		return select;
+	}
+
+	public Pager<QualityTestRun> queryPager(int start, int limit, QualityTestRun testRun, Condition condition, OrderBy... orderArgs) {
+		Select select = MysqlSelect.selectFrom(QUALITY_TEST_RUNTABLE).where(
+				and(
+						condition,
+						QUALITY_TEST_RUNTABLE.TASK_ID.eq(testRun.getTaskId()),
+						QUALITY_TEST_RUNTABLE.CASE_ID.eq(testRun.getCaseId()),
+						QUALITY_TEST_RUNTABLE.CASE_VERSION.eq(testRun.getCaseVersion()),
+						QUALITY_TEST_RUNTABLE.TEST_RUN_ASSIGNED_TO.eq(testRun.getTestRunAssignedTo()),
+						QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUNNER.eq(testRun.getTestRunLastRunner()),
+						QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_DATE.eq(testRun.getTestRunLastRunDate()),
+						QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_RESULT.eq(testRun.getTestRunLastRunResult()),
+						QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.eq(testRun.getTestRunStatus())));
+		select =  addOrderByElements(select, orderArgs);
+		return getDslSession().fetchPage(select,start,limit,false, QualityTestRun.class);
 	}
 }

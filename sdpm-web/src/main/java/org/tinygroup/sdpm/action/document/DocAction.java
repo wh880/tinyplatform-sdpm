@@ -192,7 +192,7 @@ public class DocAction {
 		List<Product> product = productService.findProductList(new Product());
 		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
 		doc.setDocDeleted("0");	
-		doc.setDocAddedBy(UserUtils.getUser().getOrgUserAccount());
+		doc.setDocAddedBy(UserUtils.getUser().getOrgUserId());
 		DocumentDoc document = docservice.createNewDoc(doc);
 		
 		ProfileUtil profileUtil = new ProfileUtil();		
@@ -244,7 +244,7 @@ public class DocAction {
 	@RequestMapping(value="/doc/editSave",method=RequestMethod.POST)
 	public String editSave(DocumentDoc doc,SystemAction systemAction,Model model){
 		DocumentDoc documentDoc = docservice.findDocById(doc.getDocId());
-		doc.setDocEditedBy(UserUtils.getUser().getOrgUserAccount());
+		doc.setDocEditedBy(UserUtils.getUser().getOrgUserId());
 		docservice.editDoc(doc);
 		
 		LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
@@ -264,9 +264,7 @@ public class DocAction {
 	 */
 	@RequestMapping("/doc/view")
 	public String docView(HttpServletRequest request,DocumentDoc doc,SystemProfile systemProfile,Model model,Integer docid){
-		
-		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
-		doc = docservice.findDocById(docid);		
+		doc = docservice.findDocById(docid);	
 		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
 		systemProfile.setFileObjectType("document");
 		systemProfile.setFileObjectId(docid);
@@ -405,11 +403,11 @@ public class DocAction {
 		DocumentDoclib doclib = new DocumentDoclib();
 		List<DocumentDoclib> list = docservice.findDoclibList(doclib);
 		if(id != list.get(0).getDocLibId() && id != list.get(1).getDocLibId()){
-		docservice.deleteDoclibById(id);
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("status", "success");
-	    map.put("info", "删除成功");
-	    return map;
+			docservice.deleteDoclibById(id);
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("status", "success");
+		    map.put("info", "删除成功");
+		    return map;
 		}
 		return null;
 	}
@@ -550,9 +548,13 @@ public class DocAction {
 	}
 	
 	@RequestMapping("/product/{type}/updateDoc")
-	public String saveDocument(DocumentDoc doc,@PathVariable(value="type")String type){
+	public String saveDocument(DocumentDoc doc,@PathVariable(value="type")String type,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title) throws IOException {
 		if("save".equals(type)){
-			docservice.createNewDoc(doc);
+			DocumentDoc document = docservice.createNewDoc(doc);
+			
+			ProfileUtil profileUtil = new ProfileUtil();		
+	        profileUtil.uploads(file, document.getDocId(), "document", title);
+	        
 			return "redirect:"+"/product/page/project/archive-list.page";
 		}else if ("update".equals(type)) {
 

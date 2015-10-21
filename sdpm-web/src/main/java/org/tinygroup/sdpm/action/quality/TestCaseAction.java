@@ -1,15 +1,21 @@
 package org.tinygroup.sdpm.action.quality;
 
+import java.io.IOException;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResult;
 import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResults;
+import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -113,12 +119,15 @@ public class TestCaseAction extends BaseController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(QualityTestCase testcase, String[] step,
-			String[] expect, HttpServletRequest request) {
+	public String save(QualityTestCase testcase, String[] step,String[] expect, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title, HttpServletRequest request) throws Exception {
 		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
 		testcase = testCaseService.addTestCase(testcase);
 		caseStepService.batchAdd(insertStep(step, expect, testcase));
 
+		 ProfileUtil profileUtil = new ProfileUtil();
+
+	     profileUtil.uploads(file, testcase.getCaseId(), "story", title);
+		
 		SystemAction systemAction = new SystemAction();
 		systemAction.setActionObjectId(String.valueOf(testcase.getCaseId()));
 		systemAction.setActionProduct(String.valueOf(testcase.getProductId()));
@@ -135,6 +144,8 @@ public class TestCaseAction extends BaseController {
 		model.addAttribute("testcases", testcases);
 		return "redirect:" + "/a/quality/testCase";
 	}
+	
+	
 
 	@RequestMapping("/execution")
 	public String execution(Integer caseId, Model model) {
@@ -184,7 +195,7 @@ public class TestCaseAction extends BaseController {
 		systemAction.setActionAction("run");
 		systemAction.setActionActor(user != null ? user.getOrgUserId() : "0");
 		logService.log(systemAction);
-		return "redirect:" + "/a/quality/testCase";
+		return "redirect:" + adminPath+"/quality/testCase";
 	}
 
 	// 预留，需要新增一个页面
@@ -202,13 +213,33 @@ public class TestCaseAction extends BaseController {
 	@RequestMapping("/edit")
 	public String edit(Integer caseId, Model model) {
 		QualityTestCase testCase = testCaseService.findById(caseId);
+		QualityCaseStep step = new QualityCaseStep();
+		step.setCaseId(caseId);
+		List<QualityCaseStep> stepList = caseStepService.findCaseStepList(step);
+		
 		model.addAttribute("testCase", testCase);
+		model.addAttribute("stepList", stepList);
 		return "/testManagement/page/tabledemo/editioncase.page";
+	}
+	
+	@RequestMapping("/find/{forward}")
+	public String findById(@PathVariable(value = "forward") String forward,Integer caseId, Model model) {
+		QualityTestCase testCase = testCaseService.findById(caseId);
+		model.addAttribute("testCase", testCase);
+		if("editRight".equals(forward)){
+			return "/testManagement/page/tabledemo/editioncasepaging.pagelet";
+		}
+		return "";
 	}
 
 	@RequestMapping("/copy")
 	public String copy(Integer caseId, Model model) {
 		QualityTestCase testCase = testCaseService.findById(caseId);
+		QualityCaseStep step = new QualityCaseStep();
+		step.setCaseId(caseId);
+		List<QualityCaseStep> stepList = caseStepService.findCaseStepList(step);
+		
+		model.addAttribute("stepList", stepList);
 		model.addAttribute("testCase", testCase);
 		return "/testManagement/page/copyCase.page";
 	}
@@ -219,20 +250,32 @@ public class TestCaseAction extends BaseController {
 		model.addAttribute("testCase", testCase);
 		return "redirect:" + "/a/quality/testCase";
 	}
-
+	
+	@ResponseBody
 	@RequestMapping("/delete")
 	public String delete(Integer testCaseId, Model model) {
 		testCaseService.deleteById(testCaseId);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("status", "success");
 		map.put("info", "删除成功");
-		return "redirect:" + "/a/quality/testCase";
+		return "redirect:" +adminPath+ "/quality/testCase";
 	}
 
 	@RequestMapping("/batchDelete")
 	public String batchDelete(List<QualityTestCase> testcases, Model model) {
 		testCaseService.batchDeleteTestCase(testcases);
 		return "redirect:" + "/a/quality/testCase";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/batchDeleteAjax")
+	public int[] batchDelete(@RequestBody QualityTestCase[] cases) {
+		
+		List<QualityTestCase>  qualityTestCase = new ArrayList<QualityTestCase>();
+    	if(cases!=null&&cases.length>0){
+    		qualityTestCase = Arrays.asList(cases);
+    	}
+    	return testCaseService.batchDeleteTestCase(qualityTestCase);
 	}
 
 	@ResponseBody
@@ -280,12 +323,13 @@ public class TestCaseAction extends BaseController {
 			CaseStepResult caseStepResult = new CaseStepResult();
 			int i = result.indexOf("{");
 			int j = result.indexOf("}");
-			String[] values = result.substring(i, j).split(";");
+			String[] values = result.substring(i+1, j).split(";");
 			for (String value : values) {
-				if (value.contains("result")) {
-					caseStepResult.setResult(value.split(":")[1]);
+				String[] r = value.split(":");
+				if ("result".endsWith(r[0])) {
+					caseStepResult.setResult(r.length>1?r[1]:"");
 				} else {
-					caseStepResult.setReal(value.split(":")[1]);
+					caseStepResult.setReal(r.length>1?r[1]:"");
 				}
 			}
 			caseStepResults.add(caseStepResult);
@@ -305,5 +349,13 @@ public class TestCaseAction extends BaseController {
 			qualityCaseSteps.add(qualityCaseStep);
 		}
 		return qualityCaseSteps;
+	}
+	
+	
+	@RequestMapping("/case/viewInfo")
+	public String viewInfo(Integer id,Model model){
+		QualityTestCase testCase = testCaseService.findById(id);
+		model.addAttribute("testCase", testCase);
+		return "/testManagement/page/caseInfo.page";
 	}
 }

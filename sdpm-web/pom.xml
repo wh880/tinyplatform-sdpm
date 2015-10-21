@@ -15,6 +15,7 @@
     <properties>
         <validator.version>5.1.1.Final</validator.version>
         <shiro.version>1.2.3</shiro.version>
+        <ehcache.version>2.6.9</ehcache.version>
     </properties>
     <dependencies>
         <!--session存储-->
@@ -304,6 +305,14 @@
             <version>${shiro.version}</version>
         </dependency>
         <!-- SECURITY end -->
+
+        <!-- CACHE begin -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>${ehcache.version}</version>
+        </dependency>
+        <!-- CACHE end -->
 
         <dependency>
             <groupId>junit</groupId>

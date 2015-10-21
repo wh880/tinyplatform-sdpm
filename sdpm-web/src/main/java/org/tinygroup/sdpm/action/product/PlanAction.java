@@ -56,13 +56,13 @@ public class PlanAction  extends BaseController{
 	public String save(ProductPlan productPlan, HttpServletRequest request, SystemAction systemAction) throws IOException {
 		
 		productPlan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-		planService.addPlan(productPlan);
+		ProductPlan productPlan1 = planService.addPlan(productPlan);
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
 				, LogUtil.LogAction.OPENED
-				, String.valueOf(productPlan.getPlanId())
+				, String.valueOf(productPlan1.getPlanId())
 				, UserUtils.getUserId()
-				, String.valueOf(productPlan.getProductId())
+				, String.valueOf(productPlan1.getProductId())
 				, null
 				, null
 				, null
