@@ -117,7 +117,7 @@
             #@elementItem()
                 #@sdpmItem("服务期限" "*")
                     #@tinyDateInput(
-                        "serviceDeadline" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                        "serviceDeadline" "" "YYYY-MM-DD" {"style":"width:120px","datatype":"*",
                         "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
                 #end
             #end
@@ -130,7 +130,7 @@
             #@elementItem()
                 #@sdpmItem("创建时间")
                     #@tinyDateInput(
-                        "slaCreateDate" "" "YYYY-MM-DD" {"style":"width:200px","id":"slaCreateDate","placeholder":
+                        "slaCreateDate" "" "YYYY-MM-DD" {"style":"width:120px","id":"slaCreateDate","placeholder":
                         ""})#end
                 #end
             #end
@@ -143,7 +143,7 @@
             #@elementItem()
                 #@sdpmItem("批准时间" "*")
                     #@tinyDateInput(
-                        "slaReviewDate" "" "YYYY-MM-DD" {"style":"width:200px","id":"slaReviewDate",
+                        "slaReviewDate" "" "YYYY-MM-DD" {"style":"width:120px","id":"slaReviewDate",
                         "datatype":
                         "*","nullmsg":
                         "日期不能为空","placeholder":""})#end

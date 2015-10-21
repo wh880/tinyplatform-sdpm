@@ -61,7 +61,7 @@
             #@sdpmItem("客户登记时间" "*")
                 #@tinyDateInput(
                     "clientCreateDate" formatDate(client?.clientCreateDate,
-                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","datatype":"*",
                 "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
             #end
         #end

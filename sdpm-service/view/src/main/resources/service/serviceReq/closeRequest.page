@@ -23,7 +23,7 @@
         #@gridSysRow()
             #@colLabel("col-3")关闭时间：#end
             #@gridSysCol(5)
-                #@tinyDateInput("requestCloseDate" "" "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                #@tinyDateInput("requestCloseDate" "" "YYYY-MM-DD" {"style":"width:120px","datatype":"*",
                     "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
             #end
         #end

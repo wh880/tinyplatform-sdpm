@@ -17,7 +17,6 @@
                     <a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#"
                        href="javascript:void(0);">操作<span class="caret"></span></a>
                     #@ulDropdownMenu()
-
                         #@dropdownsLi("dropdown-submenu")
                             #@dropdownA("firstMenu" "javascript:void(0);")指派回复#end
                             #@dropdownsUl("dropdown-menu")
