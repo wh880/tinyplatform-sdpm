@@ -96,7 +96,7 @@
               isShow="1" scope="testcaseleft-tab"></menu>
         <menu id="tcasesee" name="分组查看"  href="#" icon="" sort="3"
               isShow="1" scope="testcaseleft-tab"></menu>
-         <menu id="tcasenodemand" name="零用例需求"  href="/quality/testCase?status=tcasenodemand&amp;productId=1" icon="" sort="2"
+         <menu id="tcasenodemand" name="零用例需求"  href="/quality/testCase?status=tcasenodemand&amp;type=story&amp;productId=${qualityProductId}" icon="" sort="2"
               isShow="1" scope="testcaseleft-tab"></menu>
         <menu id="tcaseserach" name="搜索"  href="#" icon="" sort="1"
               isShow="1" scope="testcaseleft-tab"></menu>
