@@ -1,23 +1,17 @@
 package org.tinygroup.sdpm.action.project;
 
-import com.oracle.jrockit.jfr.InvalidValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.tinygroup.sdpm.action.product.util.StoryUtil;
-import org.tinygroup.sdpm.common.dao.StringIdGenerator;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
-import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -25,7 +19,6 @@ import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,7 +65,7 @@ public class BuildAction extends BaseController {
 
     @RequestMapping("/find")
     public String find(Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProjectBuild> pager = buildService.findPager(projectId, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
@@ -97,7 +90,7 @@ public class BuildAction extends BaseController {
 
     @RequestMapping("/edit")
     public String edit(HttpServletRequest request, Integer buildId, Model model) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         SystemModule module = new SystemModule();
         module.setModuleType("project");
         module.setModuleRoot(projectId);
@@ -192,7 +185,7 @@ public class BuildAction extends BaseController {
 
     @RequestMapping("/add")
     public String add(HttpServletRequest request, Integer buildId, Model model) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         SystemModule module = new SystemModule();
         module.setModuleType("project");
         module.setModuleRoot(projectId);

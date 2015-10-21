@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.action.quality;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.support.SQLErrorCodes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +38,8 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.LogUtil;import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -604,7 +604,7 @@ public class BugAction extends BaseController {
 
 	@RequestMapping("/projectFindList")
 	public String projectFindList(Model model, Integer start, Integer limit,String order, String ordertype, HttpServletRequest request) {
-		Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+		Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
 		boolean asc = "asc".equals(ordertype) ? true : false;
 		QualityBug bug = new QualityBug();
 		bug.setProjectId(projectId);

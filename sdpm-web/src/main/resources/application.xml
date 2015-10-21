@@ -500,6 +500,8 @@
         <template-function name="stdFunction"></template-function>
         <!--用户信息工具--> 
         <static-class name="UserUtils" class="org.tinygroup.sdpm.util.UserUtils"></static-class>
+        <!--数据信息获取工具-->
+        <static-class name="CmsUtils" class="org.tinygroup.sdpm.util.CmsUtils"></static-class>
     </template-config>
 
     <dict-load-config bean_name="ehCache"></dict-load-config>
