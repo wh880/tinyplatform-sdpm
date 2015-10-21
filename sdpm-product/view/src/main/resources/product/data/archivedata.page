@@ -8,8 +8,8 @@
 #@tr()
 
 	#@td()<input type="checkbox" value="${l?.docId}" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}">${l?.docId}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}">${l?.docModule}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docId}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.moduleName}</a>#end
 	#@td()${l?.docTitle}#end
 	#@td()${l?.docAddedBy}#end
 	#@td()${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy年MM月dd日'):""}#end
