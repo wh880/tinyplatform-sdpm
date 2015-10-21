@@ -431,7 +431,6 @@
         <!--<context-param name="" value=""></context-param> -->
     </tiny-listener>
 
-
     <parser>
         <property-editors>
             <property-editor bean-name="customDateRegistrar">
@@ -476,10 +475,8 @@
         <!--<interceptors> <interceptor bean-name="sessionLifecycleLogger"></interceptor>
             <interceptor bean-name="sessionAttributeWhitelist"></interceptor> </interceptors> -->
     </session>
-    <jcs-config enable="false">
-    </jcs-config>
 
-    <cache-init-config region="sdpmDictCache"></cache-init-config>
+    <cache-init-config region="dictCache"></cache-init-config>
 
     <!--文件监控器配置参数，具体参见FileMonitorProcessor配置管理手册，interrupt扫描间隔时间，单位秒 -->
     <file-monitor interval="10" enable="false"/>
@@ -501,12 +498,11 @@
         <template-function name="typeInfoFunction"></template-function>
         <template-function name="dictFunction"></template-function>
         <template-function name="stdFunction"></template-function>
-
         <!--用户信息工具--> 
         <static-class name="UserUtils" class="org.tinygroup.sdpm.util.UserUtils"></static-class>
     </template-config>
 
-    <dict-load-config bean_name="sdpmDictCache"></dict-load-config>
+    <dict-load-config bean_name="ehCache"></dict-load-config>
 
     <datasource id="aaaa" type="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>

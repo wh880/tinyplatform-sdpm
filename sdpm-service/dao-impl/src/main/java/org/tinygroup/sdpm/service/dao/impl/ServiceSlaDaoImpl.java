@@ -138,15 +138,7 @@ public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDa
         }, pks);
     }
 
-    /* public ServiceSla getByKey(Integer pk) {
-         return getDslTemplate().getByKey(pk, ServiceSla.class, new SelectGenerateCallback<Serializable>() {
-             @SuppressWarnings("rawtypes")
-             public Select generate(Serializable t) {
-                 return selectFrom(SERVICE_SLATABLE).where(SERVICE_SLATABLE.SLA_ID.eq(t));
-             }
-         });
-     }*/
-/*仿照上面的代码，增加：根据产品id查找产品名称*/
+    /*仿照上面的代码，增加：根据sla表里面的productId关联产品表的productId，查找产品名称*/
     public ServiceSla getByKey(Integer pk) {
         return getDslTemplate().getByKey(pk, ServiceSla.class, new SelectGenerateCallback<Serializable>() {
             @SuppressWarnings("rawtypes")

@@ -56,15 +56,9 @@
         #end
     </div>
     #end
-##<div class="infoContent">
-## #@div(divClass="infoContent,col-6")
-#*<p class="titleName">历史记录</p>
-#include("/service/sla/historyRecord.page")*#
+#*协议标题点击进去，里面的历史记录*#
     #history(adminPath+"/system/action/ajax/history?actionObjectType=sla&actionObjectId="+sla?.slaId)
-##   #end
-##</div>
-
 </div>
 #end
 
-###@simpleModal("myModal3" "编辑")#end
+

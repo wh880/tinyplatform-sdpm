@@ -8,8 +8,8 @@
                   overflowToDisk="true" maxEntriesLocalDisk="100000"/>
 
     <!-- 字典缓存 -->
-    sdpmDictCache
-    <cache name="sdpmDictCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
+    <cache name="dictCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
+
     <!-- 系统缓存 -->
     <cache name="sysCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
 

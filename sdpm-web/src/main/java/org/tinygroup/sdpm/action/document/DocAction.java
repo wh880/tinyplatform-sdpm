@@ -263,9 +263,14 @@ public class DocAction {
 	 *查看文档基本信息
 	 */
 	@RequestMapping("/doc/view")
-	public String docView(HttpServletRequest request,DocumentDoc doc,SystemProfile systemProfile,Model model,Integer docid){
-		
-		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
+	public String docView(HttpServletRequest request,DocumentDoc doc,SystemProfile systemProfile,Model model,Integer docid,Integer type){
+		if(type == 1){
+			doc.setDocLibId(1);
+		}else if (type == 2) {
+			doc.setDocLibId(2);
+		}else{
+			doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
+		}
 		doc = docservice.findDocById(docid);		
 		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
 		systemProfile.setFileObjectType("document");

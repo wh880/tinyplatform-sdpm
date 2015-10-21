@@ -74,6 +74,8 @@ public class BuildServiceImpl implements BuildService {
     public Integer deletereleate(Integer storyId,Integer buildId){
         return buildManager.deletereleate(storyId, buildId);
     }
-
+    public Integer releateReq(Integer storyId,Integer buildId){
+        return buildManager.releateReq(storyId,buildId);
+    }
 
 }

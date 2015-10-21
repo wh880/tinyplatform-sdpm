@@ -257,9 +257,6 @@
                 case "slastatus":
                     $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#slaStatus").html()));
                     break;
-//                case "proId":
-//                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#productId").html()));
-//                    break;
                 case "cliId":
                     $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#clientId").html()));
                     break;
