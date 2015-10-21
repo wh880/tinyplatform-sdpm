@@ -1,23 +1,17 @@
 package org.tinygroup.sdpm.action.project;
 
-import com.oracle.jrockit.jfr.InvalidValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.tinygroup.sdpm.action.product.util.StoryUtil;
-import org.tinygroup.sdpm.common.dao.StringIdGenerator;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
-import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -25,7 +19,6 @@ import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,7 +65,7 @@ public class BuildAction extends BaseController {
 
     @RequestMapping("/find")
     public String find(Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProjectBuild> pager = buildService.findPager(projectId, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
@@ -97,7 +90,7 @@ public class BuildAction extends BaseController {
 
     @RequestMapping("/edit")
     public String edit(HttpServletRequest request, Integer buildId, Model model) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         SystemModule module = new SystemModule();
         module.setModuleType("project");
         module.setModuleRoot(projectId);
@@ -192,7 +185,7 @@ public class BuildAction extends BaseController {
 
     @RequestMapping("/add")
     public String add(HttpServletRequest request, Integer buildId, Model model) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         SystemModule module = new SystemModule();
         module.setModuleType("project");
         module.setModuleRoot(projectId);
@@ -287,68 +280,7 @@ public class BuildAction extends BaseController {
     }
 
 
-//    @RequestMapping("/search/{relate}")
-//    public String storyListAction(@PathVariable(value="relate")String relate, int page, int pagesize,
-//                                  ProductStory story, String choose, String groupOperate, SearchInfos searchInfos,
-//                                  @RequestParam(required = false, defaultValue = "storyId") String order,
-//                                  @RequestParam(required = false, defaultValue = "asc") String ordertype,
-//                                  Model model, HttpServletRequest request){
-//
-//
-//        story.setBuildId((Integer)(request.getSession().getAttribute("sessionBuildId")));
-//        Pager<ProductStory> p =projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,story, StoryUtil.getStatusCondition(choose,request),searchInfos,groupOperate,FieldUtil.stringFormat(order),"asc".equals(ordertype)?true:false);
-//        model.addAttribute("story",p);
-//
-//        if("reRelateStory".equals(relate)){
-//            return "/project/task/relation-release/product-al-req-data.pagelet";
-//        }else if ("noRelateStory".equals(relate)) {
-//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
-//        }else if ("reRelateStoryRelease".equals(relate)) {
-//            return "/project/task/relation-release/product-al-req-data.pagelet";
-//        }else if ("noRelateStoryRelease".equals(relate)) {
-//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
-//        }
-//        return "";
-//    }
 
-
-
-
-
-//    @RequestMapping("/search/reRelateStory")
-//    public String storyListAction(@PathVariable(value="relate")String relate, int page, int pagesize,int id,
-//                                  ProductStory story, String choose, String groupOperate, SearchInfos searchInfos,
-//                                  @RequestParam(required = false, defaultValue = "storyId") String order,
-//                                  @RequestParam(required = false, defaultValue = "asc") String ordertype,
-//                                  Model model, HttpServletRequest request){
-//
-////        if(request.getSession().getAttribute("sessionBuildId")!=null){
-////            story.setBuildId((Integer)(request.getSession().getAttribute("sessionBuildId")));
-////        }
-//
-//        String condition = StoryUtil.getStatusCondition(choose,request);
-//        if(story.getStoryVersion()!=null&&story.getStoryVersion()>0){
-//
-//            SystemModule module = new SystemModule();
-//            module.setModuleId(story.getModuleId());
-//            StringBuffer stringBuffer = new StringBuffer();
-//            stringBuffer.append("in (");
-//            ModuleUtil.getConditionByModule(stringBuffer, module, moduleService);
-//            stringBuffer.append(")");
-//
-//            condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
-//        }
-//        story.setBuildId(id);
-//        List<ProjectStory> p = projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,story, condition,searchInfos,groupOperate,order,"asc".equals(ordertype)?true:false);
-//        model.addAttribute("storyList",p);
-//
-//        if("reRelateStory".equals(relate)){
-//            return "/project/task/relation-release/product-al-req-data.pagelet";
-//        }else if ("noRelateStory".equals(relate)) {
-//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
-//        }
-//        return "";
-//    }
     @ResponseBody
     @RequestMapping("/releateReq")
     public Map<String, String> releateReq(String ids,Integer buildId){

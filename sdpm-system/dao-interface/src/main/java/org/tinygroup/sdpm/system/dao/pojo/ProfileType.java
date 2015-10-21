@@ -6,7 +6,13 @@ package org.tinygroup.sdpm.system.dao.pojo;
  */
 public enum ProfileType {
     PROJECT("project"),          //创建
-    EDITED("edited");          //编辑了
+    EDITED("edited"),         //编辑了
+    STORY("story"),
+    DOCUMENT("document"),
+    TASK("task"),
+    RELEASE("release"),
+    BUG("bug"),
+    TESTCASE("testCase");
     private final String type;
 
     ProfileType(String type) {

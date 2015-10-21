@@ -1,24 +1,47 @@
-
 #!set(linkName="product-archive",sonitem="
 <li>"+"文档"+"</li>")
 
-<script >
-
-
-    $(document).ready(function(){
-
-        ajaxRead("docproduct","productId","productName");
-        ajaxRead("docmodule","moduleId","moduleName");
-    });
-
-</script>
 <script type="text/javascript">
-    $(function () {
-        $("form[name=thisform").Validform({
-            tiptype: 2
+    function ajaxRead(id,toName,opKey,opvalue,url,value){
+        var selectCheck = "select[name="+toName+"]";
+        $(selectCheck).each(function(){
+            var sele = $(this);
+            var s;
+            $.ajax({
+                type: "POST",
+                url: "${TINY_CONTEXT_PATH+adminPath}"+url,
+                data: $(this).attr('data'),
+                dataType:"json",
+                success: function(data){
+                    sele.empty();
+                    var em = "<option value='0' selected  >/</option>";
+                    sele.append(em);
+                    for(var i=0,l=data.length;i<l;i++){
+                        var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+                        sele.append(em);
+
+                    }
+
+                    if(value!=null) {
+                        sele.val(value).trigger("change");
+                    }else {
+                        sele.val(data[0][opKey]).trigger("change");
+                    }
+
+
+                },
+                error: function(res){
+                ##    alert("失败");
+                }
+            });
+
+
         });
-    });
+
+    }
 </script>
+
+
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")
@@ -38,99 +61,117 @@
 
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/document/product/save/updateDoc" "post" {"class":"test"})
-<div style="width:100%;float:center" class="pageleftpart">
-    <div class="infoContent">
-        <p class="titleName">创建文档</p>
 
-        #@elementItem()
-            #@colLabel()所属产品：#end
-            #@tinySelect("docProduct" product?.productId {"style":"width:300px","class":"input-text","rel":"22"})
-                <script>
-                    ajaxRead("${sid}", "docProduct", "productId", "productName", "/product/productList");
-                </script>
+<div style="width:100%">
+<div class="infoContent">
+    <p class="titleName">创建文档</p>
+    #@elementItem()
+        #@colLabel()所属产品#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-5")
+                #@Tselect2F()
+                    #@Tselect2Body("docProduct" product?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="0">/</option>
+                        #foreach(product : productList)
+                            <option value="${product?.productId}">${product?.productName}</option>
+                        #end
+                    #end
 
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
+                    <script type="text/javascript">
+                        $("#${sid}").on("change",function(){
+                            var pId = $("#${sid}  option:selected").val();
+                            ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/module1?productId="+pId,${doc?.docModule?:0});
 
-                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
-                                  class="r ">添加</a><a
-                        href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>#end
-
+                        })
+                    </script>
+                #end
             #end
         #end
+    #end
 
-        #@elementItem()
-            #@colLabel()所属分类：#end
-            #@tinySelect("docModule" "IN" {"style":"width:300px","class":"input-text","rel":"22"})
-                <script>
-                    ajaxRead("${sid}", "docModule", "docId", "docModule", "/document/docList");
-                </script>
-
+    #@elementItem()
+        #@colLabel()所属分类#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-5")
+                #@Tselect2F()
+                    #@Tselect2Body("docModule" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="0">/</option>
+                    #end
+                #end
             #end
         #end
+    #end
 
-        #@elementItem()
-            #@colLabel()文档类型：#end
-            #@skinMinimal("mt-20")
-                #labelRadio1(rId="typefile" rName="docType" rValue="文件" labelText="文件" "setType(this.value);")
-                #labelRadio1(rId="typeurl" rName="docType" rValue="链接" labelText="链接" "setType(this.value);")
-                #labelRadio1(rId="typetext" rName="docType" rValue="网页" labelText="网页" "setType(this.value);")
+    #@elementItem()
+        #@colLabel()文档类型#end
+        #@skinMinimal("mt-20")
+            #labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="1" "setType(this.value);" labelText=getDict("docType","1") )
+            #labelRadio1(rId="typeurl" rName="docType" rValue="2" labelText=getDict("docType","2") "setType(this.value);")
+            #labelRadio1(rId="typetext" rName="docType" rValue="3" labelText=getDict("docType","3") "setType(this.value);")
 
-            #end
-            #@validateDiv("col-2")#end
         #end
+        #@validateDiv("col-2")#end
+    #end
 
-        #@elementItem()
-            #@colLabel()文档标题：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "docTitle" ""{"style":"width:300px","placeholder":"请输入文档标题","datatype":"*4-16","nullmsg":"文档标题不能为空！","id":"doctitle","class":"input-text"})
+    #@elementItem()
+        #@colLabel()<span class="c-red">*</span>文档标题#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-5")
+                #tinyInput("text" "docTitle" ""{"placeholder":"请输入文档标题","datatype":"*1-16","nullmsg":"文档标题不能为空！","class":"input-text"})
             #end
         #end
         #@validateDiv("col-2")#end
-        #@elementItem(elementId="contentBox" eleItemClass="hidden")
-            #@colLabel()文档正文：#end
-            #@formControlDiv("col-6")
-                #@Teditor("docContent" "docContent" {"initialFrameHeight":"150" ,"datatype":"*10-300"})#end
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem(elementId="urlBox" eleItemClass="hidden")
-            #@colLabel()文档URL：#end
-            #@formControlDiv("col-8")
-                #tinyInput(
-                    "text" "docUrl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16","id":"docurl",
-                    "class":"input-text"})
+    #end
+
+    #@elementItem(elementId="urlBox" eleItemClass="hidden")
+        #@colLabel()<span class="c-red">*</span>文档URL#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-5")
+                #tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*","ignore":"ignore","class":"input-text"})
             #end
         #end
         #@validateDiv("col-2")#end
-        #@elementItem()
-            #@colLabel()关键字：#end
-            #@formControlDiv("col-6")
-                #tinyInput(
-                    "text" "docKeywords" ""{"placeholder":"","datatype":"*4-16","id":"keywords","class":"input-text"})
+    #end
+
+    #@elementItem()
+        #@colLabel()关键字#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-5")
+                #tinyInput("text" "docKeywords" ""{"placeholder":"","datatype":"","class":"input-text"})
             #end
+        #end
+    #end
+    #@validateDiv("col-2")#end
+
+    #@elementItem()
+        #@colLabel()文档摘要#end
+        #@formControlDiv("col-8")
+            #@Teditor("docDigest" "docDigest" {"initialFrameHeight":"200"})#end
         #end
         #@validateDiv("col-2")#end
+    #end
 
-        #@elementItem()
-            #@colLabel()文档摘要：#end
-            #@formControlDiv("col-6")
-                #@tinyTextarea("docDigest" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"描述不能为空！"})#end
-
-            #end
-            #@validateDiv("col-2")#end
+    #@elementItem(elementId="fileBox")
+        #@colLabel()附件：#end
+        #@formControlDiv("col-8")
+            #include("/product/page/event/fileupload.page")
+        #*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#
         #end
-
-        #@elementItem(elementId="fileBox" eleItemClass="")
-            #@colLabel()附件：#end
-            #@formControlDiv("col-8")
-                #fileWithInput("file-1")
-            #end
-            #@validateDiv("col-2")#end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem(elementId="contentBox" eleItemClass="hidden")
+        #@colLabel()文档正文#end
+        #@formControlDiv("col-8")
+            #@tinyueditor("docContent" "docContent")#end
         #end
-    </div>
+        #@validateDiv("col-2")#end
+    #end
     #@elementItem()
         <div class="col-12">
-            <div class="col-2">
+            <div class="col-5">
 
             </div>
             <div class="col-1">
@@ -150,13 +191,13 @@
         /* Set doc type. */
         function setType(type)
         {
-            if(type == '链接')
+            if(type == '2')
             {
                 $('#urlBox').removeClass('hidden');
                 $('#fileBox').addClass('hidden');
                 $('#contentBox').addClass('hidden');
             }
-            else if(type == '网页')
+            else if(type == '3')
             {
                 $('#urlBox').addClass('hidden');
                 $('#fileBox').addClass('hidden');
@@ -169,4 +210,12 @@
                 $('#contentBox').addClass('hidden');
             }
         }
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("form[name=thisform]").Validform({
+                tiptype: 2
+            });
+        });
     </script>

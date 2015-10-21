@@ -1,26 +1,20 @@
 package org.tinygroup.sdpm.action.system;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.codehaus.jackson.map.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.sdpm.system.dao.pojo.Holiday;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 @Controller
 @RequestMapping("a/system/action")
 public class ActionAction extends BaseController{
@@ -54,7 +48,7 @@ public class ActionAction extends BaseController{
 			plan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 		}
 		*/
-		action.setActionObjectType("product");
+		/*action.setActionObjectType("product");*/
 		Pager<SystemAction>  pagerSystemAction = actionService.queryPager(page, pagesize,ActionUtil.getActionDateCondition(choice), action, order, ordertype);
 
 		model.addAttribute("systemAction",pagerSystemAction);
