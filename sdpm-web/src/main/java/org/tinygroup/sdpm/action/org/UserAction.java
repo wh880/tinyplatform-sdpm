@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
@@ -167,12 +166,11 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("/list/data")
-    public String listData(Integer orgDeptId, Integer start, Integer limit, OrgUser orgUser, Model model,
-                           String groupOperate, SearchInfos searchInfos
+    public String listData(Integer orgDeptId, Integer start, Integer limit, OrgUser orgUser, Model model
     ) {
         if (orgDeptId == null || orgDeptId == -1) {
             orgUser.setOrgDeptId(null);
-            Pager<OrgUser> pager = userService.findUserPager(start, limit, orgUser, groupOperate, searchInfos);
+            Pager<OrgUser> pager = userService.findUserPager(start, limit, orgUser);
             model.addAttribute("pager", pager);
         } else {
             Pager<OrgUser> pager = userService.findUserByDeptId(start, limit, orgDeptId);
