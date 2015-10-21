@@ -42,7 +42,7 @@
         #@elementItem()
             #@sdpmItem("创建时间")
                 #@tinyDateInput(
-                    "faqCreateDate" formatDate(faq?.faqCreateDate,
+                    "faqCreateDate" formatDate(faq?.faqCreateDate?:now(),
                     "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
                 "nullmsg":"日期不能为空","placeholder":"请选择创建日期"})#end
             #end
