@@ -96,18 +96,18 @@
               isShow="1" scope="testcaseleft-tab"></menu>
         <menu id="tcasesee" name="分组查看"  href="#" icon="" sort="3"
               isShow="1" scope="testcaseleft-tab"></menu>
-         <menu id="tcasenodemand" name="零用例需求"  href="/quality/testCase?status=tcasenodemand&amp;productId=1" icon="" sort="2"
+         <menu id="tcasenodemand" name="零用例需求"  href="/quality/testCase?status=tcasenodemand&amp;type=story&amp;productId=${qualityProductId}" icon="" sort="2"
               isShow="1" scope="testcaseleft-tab"></menu>
         <menu id="tcaseserach" name="搜索"  href="#" icon="" sort="1"
               isShow="1" scope="testcaseleft-tab"></menu>
 	</menu>		 
-    <menu id="qualityVersion" parent-id="quality" name="版本" href="/quality/version/?get=tvernotest&amp;productId=1" icon=""
+    <menu id="qualityVersion" parent-id="quality" name="版本" href="/quality/version?currentPageId=5" icon=""
               sort="1"       isShow="1">
-      	<menu id="tversionSituation" name="概况" href="/testManagement/page/versionSituation.page" icon="icon-file" sort="4"
+      	<menu id="tversionSituation" name="概况" href="/quality/version/versionInfo" icon="icon-file" sort="4"
               isShow="1" scope="testversion-op"></menu> 
-        <menu id="tversionLink" name="关联用例" href="/testManagement/page/versionLink.page" icon="icon-link" sort="3"
+        <menu id="tversionLink" name="关联用例" href="/quality/version/linkCase" icon="icon-link" sort="3"
               isShow="1" scope="testversion-op,pro-test-op,testverinfo-tab"></menu>      
-        <menu id="teditionversion" name="修改" href="/testManagement/page/tabledemo/editionversion.page" icon="icon-pencil" sort="2"
+        <menu id="teditionversion" name="修改" href="/quality/version/toEdit" icon="icon-pencil" sort="2"
               isShow="1" scope="testversion-op"></menu>
         <menu id="tversiondelete" name="删除" href="/tinyuiweb/action/del.pagelet" icon="icon-remove" sort="1"
               isShow="1" scope="testversion-op"></menu>
@@ -131,9 +131,9 @@
               isShow="1" scope="testverinfo-tab"></menu>
        <menu id="tverback" name="返回" href="" icon="icon-level-up" sort="1"
               isShow="1" scope="testverinfo-tab"></menu> 
-       <menu id="tvernotest" name="待测版本"  href="/quality/version/?get=tvernotest&amp;productId=1&amp;testtaskStatus=0" icon="" sort="1"
+       <menu id="tvernotest" name="待测版本"  href="/quality/version/?status=tvernotest" icon="" sort="1"
               isShow="1" scope="testverleft-tab"></menu> 
-	   <menu id="tvertest" name="已测版本"  href="/quality/version/?get=tvertest&amp;productId=1&amp;testtaskStatus=0" icon="" sort="1"
+	   <menu id="tvertest" name="已测版本"  href="/quality/version/?status=tvertest" icon="" sort="1"
               isShow="1" scope="testverleft-tab"></menu> 
               
        <menu id="tverallcase" name="所有用例"  href="#" icon="" sort="7"

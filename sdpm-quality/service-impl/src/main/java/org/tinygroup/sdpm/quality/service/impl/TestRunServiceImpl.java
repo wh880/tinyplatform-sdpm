@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.quality.biz.inter.TestRunManager;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.sdpm.quality.service.inter.TestRunService;
+import org.tinygroup.tinysqldsl.Pager;
 
 @Component
 public class TestRunServiceImpl implements TestRunService {
@@ -24,6 +25,10 @@ public class TestRunServiceImpl implements TestRunService {
 	
 	public int[] batchUpdateTestRun(List<QualityTestRun> testruns){
 		return testrunmanager.batchUpdate(testruns);
+	}
+
+	public Pager<QualityTestRun> findTestRunPager(Integer start, Integer limit, QualityTestRun testRun,String condition, String sortName, boolean asc) {
+		return testrunmanager.findPager(start,limit,testRun,condition,sortName,asc);
 	}
 
 }
