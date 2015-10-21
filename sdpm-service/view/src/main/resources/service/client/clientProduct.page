@@ -16,13 +16,6 @@
                        class="active_btn">${client.clientName}</a>
             </span>
             <span class="r">
-                #set(m1=menuManager.getMenu("clientSla-export"))
-                #if(m1)
-                    #@iconOperations(
-                        "#myModal1" "icon-download-alt" "导出" "600" "100" m1.href "ml-5")
-                        ${m1.name}#end
-                #end
-
                 #set(m2=menuManager.getMenu("clientSla-add"))
                 #if(m2)
                     <a href="${TINY_CONTEXT_PATH}${adminPath}${m2.href}?id=${client.clientId}"

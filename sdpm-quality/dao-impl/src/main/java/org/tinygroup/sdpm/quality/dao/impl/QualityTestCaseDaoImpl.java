@@ -16,40 +16,30 @@
 
 package org.tinygroup.sdpm.quality.dao.impl;
 
-import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
-import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable.*;
-import static org.tinygroup.tinysqldsl.Select.*;
-import static org.tinygroup.tinysqldsl.Insert.*;
-import static org.tinygroup.tinysqldsl.Delete.*;
-import static org.tinygroup.tinysqldsl.Update.*;
+import org.springframework.stereotype.Repository;
+import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
+import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.Pager;
-import org.springframework.stereotype.Repository;
-import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
-import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+import static org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable.QUALITY_TEST_CASETABLE;
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @Repository
 public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements QualityTestCaseDao {
@@ -456,5 +446,18 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
 			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
 		}
 		return select;
+	}
+
+
+	public Integer softDelete(Integer id) {
+		return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
+			public Update generate(Integer id) {
+				Update update = update(QUALITY_TEST_CASETABLE).set(
+						QUALITY_TEST_CASETABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
+						QUALITY_TEST_CASETABLE.CASE_ID.eq(id));
+				return update;
+			}
+		});
+
 	}
 }

@@ -56,6 +56,7 @@
             <class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources"/>
             <class-path path="E:\Tiny_Fork\sdpm\sdpm-productLine\view\src\main\resources"/>
             <class-path path="E:\Tiny_Fork\sdpm\sdpm-service\view\src\main\resources"/>
+            <class-path path="E:\Tiny_Fork\sdpm\sdpm-quality\view\src\main\resources"/>
             <!-- 明明-->
             <class-path path="D:\webspaces\sdpm\sdpm-service\view\src\main\resources"/>
             <!-- 高志超-->

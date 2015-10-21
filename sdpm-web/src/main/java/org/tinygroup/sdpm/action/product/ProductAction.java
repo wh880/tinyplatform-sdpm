@@ -263,16 +263,12 @@ public class ProductAction extends BaseController {
         	request.getSession().setAttribute("sessionProductLineId", productLine!=null?productLine.getProductLineId():null);
             model.addAttribute("productLine", productLine);
         }
-       
-
-
 		if ("addproduct".equals(forward)) {
 			return "/product/page/tabledemo/addProduct.page";
 		} else if ("allproduct".equals(forward)) {
             return "/product/page/tabledemo/product-listall.page";
         }
 		return "";
-
     }
 
     @RequestMapping("/addDoc")

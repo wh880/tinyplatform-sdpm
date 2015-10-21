@@ -22,11 +22,6 @@
 				</span>
 
             <span class="r">
-                #set(m1=menuManager.getMenu("request-export"))
-                #if(m1)
-                    #@iconOperations(
-                        "#myModal" "icon-download-alt" "导出" "600" "300" m1.href "ml-5")${m1.name}#end
-                #end
                 #set(m3=menuManager.getMenu("request-add"))
                 #if(m3)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m3.href}">#buttonIcon(iconClass="icon-plus")${m3.name}</a>
