@@ -48,6 +48,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.sdpm.common.util.update.InsertUtil;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
@@ -69,10 +70,12 @@ import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 @Repository
 public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductStoryDao {
 
-	public ProductStory add(ProductStory productStory) {
+	public ProductStory add(final ProductStory productStory) {
 		return getDslTemplate().insertAndReturnKey(productStory, new InsertGenerateCallback<ProductStory>() {
 			public Insert generate(ProductStory t) {
-				Insert insert = insertInto(PRODUCT_STORYTABLE).values(
+				Insert insert = InsertUtil.getInsert(PRODUCT_STORYTABLE, productStory);
+						
+						/*insertInto(PRODUCT_STORYTABLE).values(
 					PRODUCT_STORYTABLE.STORY_ID.value(t.getStoryId()),
 					PRODUCT_STORYTABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCT_STORYTABLE.PRODUCT_ID.value(t.getProductId()),
@@ -107,7 +110,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 					PRODUCT_STORYTABLE.STORY_VERSION.value(t.getStoryVersion()),
 					PRODUCT_STORYTABLE.BUILD_ID.value(t.getBuildId()),
 					PRODUCT_STORYTABLE.CLIENT_REQUEST_ID.value(t.getClientRequestId()),
-					PRODUCT_STORYTABLE.DELETED.value(t.getDeleted()));
+					PRODUCT_STORYTABLE.DELETED.value(t.getDeleted()));*/
 				return insert;
 			}
 		});
