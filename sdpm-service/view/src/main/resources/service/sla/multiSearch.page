@@ -100,7 +100,7 @@
                             <input type="hidden" name="andOr4" id="andOr4" value="AND">
                         </td>
                         <td class="w-90px">
-                            <select name="infos[3].field" id="field4" class="form-control ">
+                            <select name="infos[3].field" id="field4" class="form-control " style="width:112px;">
                             </select>
                         </td>
                         <td class="w-70px">
@@ -201,6 +201,12 @@
             "operator": "=",
             "value": "text"
         });
+        itemlist.push({
+            "name": "slaTitle",
+            "title": "服务协议标题",
+            "operator": "=",
+            "value": "text"
+        });
 
         itemlist.push({
             "name": "slaStatus",
@@ -209,12 +215,7 @@
             "value": "slastatus"
         });
 
-        itemlist.push({
-            "name": "slaTitle",
-            "title": "服务协议标题",
-            "operator": "=",
-            "value": "text"
-        });
+
         itemlist.push({
             "name": "slaSpec",
             "title": "服务协议表述",
