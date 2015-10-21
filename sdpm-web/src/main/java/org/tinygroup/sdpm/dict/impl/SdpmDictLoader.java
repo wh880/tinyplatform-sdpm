@@ -8,7 +8,6 @@ import org.tinygroup.dict.impl.AbstractDictLoader;
 import org.tinygroup.sdpm.dict.inter.DictHandle;
 import org.tinygroup.sdpm.dict.util.DictUtil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,10 +27,6 @@ public class SdpmDictLoader extends AbstractDictLoader{
 
     public  void setIsInitFromFile(boolean isInitFromFile) {
         this.isInitFromFile = isInitFromFile;
-    }
-
-    public DictHandle getDictHandle() {
-        return dictHandle;
     }
 
     public void setDictHandle(DictHandle dictHandle) {
@@ -72,7 +67,6 @@ public class SdpmDictLoader extends AbstractDictLoader{
                 }
                 return null;
             }
-
         }
         return null;
     }

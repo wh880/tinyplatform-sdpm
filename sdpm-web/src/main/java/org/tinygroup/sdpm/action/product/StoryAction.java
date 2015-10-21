@@ -1,24 +1,10 @@
 package org.tinygroup.sdpm.action.product;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.system.ProfileUtil;
@@ -29,30 +15,21 @@ import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
-import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
-import org.tinygroup.sdpm.product.dao.pojo.StoryCollection;
-import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
+import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
-
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
-
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
-
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
@@ -61,6 +38,11 @@ import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
 
 
 @Controller
@@ -127,7 +109,8 @@ public class StoryAction extends BaseController {
 
 
     @RequestMapping("/save")
-    public String save(SystemAction systemAction,ProductStory productStory, ProductStorySpec storySpec, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title, HttpServletRequest request) throws IOException {
+    public String save(SystemAction systemAction, ProductStory productStory, ProductStorySpec storySpec,
+                       @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title, HttpServletRequest request) throws IOException {
 
 
         productStory.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
@@ -146,15 +129,14 @@ public class StoryAction extends BaseController {
                 , null
                 , systemAction.getActionComment());
 
-        return "redirect:" +adminPath+ "/product/story?choose=1&currentPageId=3";
+        return "redirect:" + adminPath + "/product/story?choose=1&currentPageId=3";
     }
 
     @RequestMapping("/update")
-    public String update(SystemAction systemAction,ProductStory productStory, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
+    public String update(SystemAction systemAction, ProductStory productStory, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
         ProductStory story = storyService.findStory(productStory.getStoryId());
         storyService.updateStory(productStory);
         OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute("user");
-
 
 
         ProfileUtil profileUtil = new ProfileUtil();
@@ -299,7 +281,7 @@ public class StoryAction extends BaseController {
             story.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
         }
         /*if (story.getModuleId()==-1) {
-    		story.setModuleId(null);
+            story.setModuleId(null);
 		}*/
         String condition = StoryUtil.getStatusCondition(choose, request);
         if (story.getModuleId() != null && story.getModuleId() > 0) {
@@ -424,7 +406,7 @@ public class StoryAction extends BaseController {
 
     @RequestMapping("/report")
     public String report(ProductStory story, String chexkitem, Model model) {
-    		
+
     	/*List<StoryCount> productStoryCount =  storyService.productStoryCount(story);
     	List<StoryCount> modelStoryCount =  storyService.modelStoryCount(story);
     	List<StoryCount> planStoryCount =  storyService.planStoryCount(story);
