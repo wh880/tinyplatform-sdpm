@@ -67,7 +67,7 @@ public class DocBizImpl implements DocBiz {
 		doc.setDocAddedDate(docdao.getByKey(doc.getDocId()).getDocAddedDate());
 		doc.setDocDeleted(docdao.getByKey(doc.getDocId()).getDocDeleted());
 		doc.setDocEditedDate(new Date());
-		return docdao.edit(doc);
+		return docdao.editDoc(doc);
 	}
 
 	public int updtDocLib(DocumentDoclib doclib) {
