@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
-import org.tinygroup.sdpm.action.system.ProfileUtil;
+
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
@@ -18,6 +18,7 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.*;
+import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
@@ -268,7 +269,7 @@ public class TaskAction extends BaseController {
 
     @RequestMapping("/save")
     public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file,
-                       Model model, String[] taskMailtoArray, HttpServletRequest request, String comment) {
+                       Model model, String[] taskMailtoArray, HttpServletRequest request, String comment) throws IOException {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
         task.setTaskProject(projectId);
         if (task.getTaskId() == null) {
@@ -288,14 +289,7 @@ public class TaskAction extends BaseController {
                     newtask.getTaskId().toString(), UserUtils.getUserId(),
                     null, newtask.getTaskProject().toString(), null,
                     newtask, comment);
-
-            ProfileUtil profileUtil = new ProfileUtil();
-            try {
-                profileUtil.uploadNoTitle(file, newtask.getTaskId(), "task");
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            uploadNoTitle(file,newtask.getTaskId(), ProfileType.TASK);
         } else {
             taskService.updateTask(task);
         }
