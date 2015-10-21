@@ -35,7 +35,9 @@
         #@elementItem()
             #@colLabel()完成时间#end
             #@formControlDiv("skin-minimal col-5")
-                #dateInputSimple("taskFinishedDate" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD")
+                #@tinyDateInput(
+                    "taskFinishedDate" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                #end
             #end
             #@validateDiv("col-2")#end
         #end

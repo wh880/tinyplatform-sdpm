@@ -186,35 +186,36 @@
 
                 console.log(ItemStat);
                 console.log(CurrentStat);
-                switch (CurrentStat) {
-                    case "wait":
-                        return false;
-                        break;
-                    case "doing":
-                        if (ItemStat == "cancel") {
-                            return false;
-                        }
-                        break;
-                    case "closed":
-                        if (ItemStat == "doing") {
-                            return false;
-                        }
-                        break;
-                    case "cancel":
-                        if (ItemStat == "doing" || ItemStat == "closed") {
-                            return false;
-                        }
-                        break;
-                    case "done":
-                        if (ItemStat == "closed" || ItemStat == "cancel") {
-                            return false;
-                        }
-                        break;
-                }
+                //暂时不需要逻辑判断，可以任意拖动
+//                switch (CurrentStat) {
+//                    case "wait":
+//                        return false;
+//                        break;
+//                    case "doing":
+//                        if (ItemStat == "cancel") {
+//                            return false;
+//                        }
+//                        break;
+//                    case "closed":
+//                        if (ItemStat == "doing") {
+//                            return false;
+//                        }
+//                        break;
+//                    case "cancel":
+//                        if (ItemStat == "doing" || ItemStat == "closed") {
+//                            return false;
+//                        }
+//                        break;
+//                    case "done":
+//                        if (ItemStat == "closed" || ItemStat == "cancel") {
+//                            return false;
+//                        }
+//                        break;
+//                }
                 ui.helper.removeClass(statarr.join(" "));
                 ui.helper.addClass("board-task-" + $(this).attr("data-id"));
                 $(this).append(ui.helper);
-                ui.helper.find("[data-action=edit]").trigger("click");
+                ui.helper.find("a.edit").trigger("click");
 
             }
         });
@@ -227,6 +228,10 @@
                 }
             }
         }
+
+//        $("#myModal").on("hidden",function(){
+//            $("#boardData").load("/project/task/boardDate.page");
+//        })
     });
     //-->
 </script>

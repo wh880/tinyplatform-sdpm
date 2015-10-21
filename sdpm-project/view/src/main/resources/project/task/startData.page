@@ -7,7 +7,9 @@
 
 	#@elementItem()
 		#@colLabel()实际开始：#end
-		#dateInputSimple("taskRealStarted" "2015-03-23" "YYYY-MM-DD" " style='width:30%'")
+		#@tinyDateInput(
+			"taskRealStarted" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+		#end
 		#@validateDiv("col-2")#end
 	#end
 
