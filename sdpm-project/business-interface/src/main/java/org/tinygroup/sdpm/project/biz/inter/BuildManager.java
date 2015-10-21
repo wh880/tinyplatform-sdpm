@@ -91,4 +91,10 @@ public interface BuildManager {
 
     public Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId);
     public Pager<ProductStory> findnoBuildStory(int start, int limit, Integer buildId);
+    /**
+     * 删除关联
+     * @param storyId，buildId
+     * @return
+     */
+    public Integer deletereleate(Integer storyId,Integer buildId);
 }

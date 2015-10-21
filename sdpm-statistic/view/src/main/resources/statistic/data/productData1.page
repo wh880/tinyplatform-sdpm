@@ -69,10 +69,10 @@
                              <td>${pl?.planName}</td>
                             <td>${formatDate(pl?.planBeginDate,"yyyy-MM-dd")}</td>
                             <td>${formatDate(pl?.planEndDate,"yyyy-MM-dd")}</td>
-                             <td>2</td>
-                             <td>4</td>
-                             <td>1</td>
-                             <td>1</td>
+                             <td>${pl?.draft}</td>
+                             <td>${pl?.active}</td>
+                             <td>${pl?.change}</td>
+                             <td>${pl?.close}</td>
                         #end
                      #end
                  #end

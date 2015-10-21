@@ -10,7 +10,7 @@
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value=""></option>
                         #foreach(t : teamList)
-                            <option value="${t.teamAccount}">${t.teamAccount}</option>
+                            <option value="${t?.teamUserId}">${t?.teamUserId}</option>
                         #end
                     #end
                     #@Tselect2Fix()

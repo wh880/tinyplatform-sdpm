@@ -2,12 +2,12 @@
 <input type="hidden" name="records" value="${num}"/>
 #end
 #include("/project/task/maplist.page")
-#set(records=taskPager.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=taskPager?.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(t:taskPager.records)
+#for(t:taskPager?.records)
 #@tr()
     #@td()<input type="checkbox" value="${t?.taskId}" name="idCheck">#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${t?.taskId}">${t?.taskId}</a> #end
@@ -27,8 +27,8 @@
             ${formatdate(t.taskOpenedDate,"yyyy-MM-dd")}
         #end
     #end
-    #@td()${t?.taskAssignedTo}#end
-    #@td()${t?.taskFinishedBy}#end
+    #@td()${t?.taskAssignedTo==null?"":UserUtils.getUserById(t?.taskAssignedTo)?.orgUserRealName}#end
+    #@td()${t?.taskFinishedBy==null?"":UserUtils.getUserById(t?.taskFinishedBy)?.orgUserRealName}#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("pro-task-op"))
         ##逻辑判断，根据状态判断是否可选择。

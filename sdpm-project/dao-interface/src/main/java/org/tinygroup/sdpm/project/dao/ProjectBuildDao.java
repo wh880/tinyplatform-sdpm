@@ -37,4 +37,6 @@ public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
     public Pager<ProductStory> findBuildStorys(int start, int limit, Integer buildId, OrderBy... orderArgs);
 
     public Pager<ProductStory> findnoBuildStorys(int start, int limit, Integer buildId, OrderBy... orderArgs);
+
+    public Integer deletereleate(Integer storyId,Integer buildId);
 }

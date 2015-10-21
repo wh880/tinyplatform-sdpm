@@ -128,7 +128,7 @@
                   scope="version-linkbug"/>
         </menu>
         <menu id="version-story" name="" href="/project/version/productalstory" icon="" sort="1" isShow="1">
-            <menu id="versionstory" name="" href="/product/story/delete?storyId=${story.storyId}" icon="icon-remove" sort="8" isShow="1"
+            <menu id="versionstory" name="" href="/project/version/deletereleate" icon="icon-remove" sort="8" isShow="1"
                   scope="version-linkdemand"/>
         </menu>
 

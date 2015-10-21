@@ -70,14 +70,14 @@
                     "input-text"})
             #end
         #end
-        #@gridSysRow()
-            #@colLabel("col-3")匿名登录：#end
-            #@gridSysCol(7)
-                #@tinyRadio(
-                    "orgCompanyGuest" "1" company?.orgCompanyGuest?:"0" {"nullmsg":"请选择性别！"})允许#end
-                #@tinyRadio("orgCompanyGuest" "0" company?.orgCompanyGuest?:"0")不允许#end
-            #end
-        #end
+    ##        #@gridSysRow()
+    ##            #@colLabel("col-3")匿名登录：#end
+    ##            #@gridSysCol(7)
+    ##                #@tinyRadio(
+    ##                    "orgCompanyGuest" "1" company?.orgCompanyGuest?:"0" {"nullmsg":"请选择性别！"})允许#end
+    ##                #@tinyRadio("orgCompanyGuest" "0" company?.orgCompanyGuest?:"0")不允许#end
+    ##            #end
+    ##        #end
         #@gridSysRow()
 
             #@gridSysCol(7)

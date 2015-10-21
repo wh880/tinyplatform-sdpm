@@ -43,7 +43,7 @@ public class ProjectTeamTable extends Table {
 	 * 用户
 	 * 
 	 */
-	public final Column TEAM_ACCOUNT = new Column(this, "team_account");
+	public final Column TEAM_USER_ID = new Column(this, "team_user_id");
 
 	/** 
 	 * 角色

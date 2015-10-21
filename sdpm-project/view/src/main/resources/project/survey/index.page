@@ -22,24 +22,19 @@
             <span class="r">
 				#set(m1=menuManager.getMenu("pro-survey-delay"))
                 #if(m1)
-
-                    #@aModal(
-                        "#m" selProject.projectName+">延期" "750" "350" "" adminPath+
+                    #@aModal("#m" selProject.projectName+">延期" "750" "350" "" adminPath+
                         "/project/delay?projectId="+selProject.projectId)#buttonIcon(iconClass="icon-calendar")延期
-                    #end
+                #end
                 #end
                 #set(m2=menuManager.getMenu("pro-survey-hangon"))
                 #if(m2)
-                    #@aModal(
-                        "#m" selProject.projectName+">挂起" "750" "250" "" "/project/survey/hang-up.pagelet")
+                    #@aModal("#m" selProject.projectName+">挂起" "750" "250" "" "/project/survey/hang-up.pagelet")
                         #buttonIcon(iconClass="icon-pause")挂起
                     #end
-
                 #end
                 #set(m3=menuManager.getMenu("pro-survey-finish"))
                 #if(m3)
-                    #@aModal(
-                        "#m" selProject.projectName+">结束" "750" "250" "" "/project/survey/hang-up.pagelet")
+                    #@aModal("#m" selProject.projectName+">结束" "750" "250" "" "/project/survey/hang-up.pagelet")
                         #buttonIcon(iconClass="icon-off")结束
                     #end
 
@@ -69,7 +64,6 @@
         <p class="titleName">
             项目描述
         </p>
-
         <div>
             ${selProject.projectDesc}
         </div>

@@ -16,11 +16,11 @@
 
 package org.tinygroup.sdpm.product.dao;
 
-import java.util.List;
-
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
+
+import java.util.List;
 
 public interface ProductPlanDao extends BaseDao<ProductPlan,Integer> {
 	
@@ -29,5 +29,12 @@ public interface ProductPlanDao extends BaseDao<ProductPlan,Integer> {
 	List<ProductPlan> getByKeys(Integer... id);
 	
 	int[] batchUpdateDel(List<ProductPlan> ids);
+
+	/**
+	 * 统计查询
+	 * @param productPlan
+	 * @return
+     */
+	List<ProductPlan> statisticQuery(ProductPlan productPlan ,OrderBy... orderArgs);
 
 }

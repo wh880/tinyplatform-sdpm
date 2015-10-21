@@ -24,24 +24,25 @@
                 #end
                 #@tr()
                     #@td()指派给#end
-                    #@td()${task?.taskAssignedTo}#end
+                    #@td()${task
+                        ?.taskAssignedTo==null?"":UserUtils.getUserById(task?.taskAssignedTo)?.orgUserRealName}#end
                 #end
                 #@tr()
                     #@td()任务类型#end
-                    #@td()${task?.taskType}#end
+                    #@td()${getDict("taskType",task?.taskType)}#end
                 #end
                 #@tr()
                     #@td()任务状态#end
-                    #@td()${showStatuMap.get(task?.taskType)}#end
+                    #@td()${getDict("taskStatus", task?.taskStatus)}#end
                 #end
                 #@tr()
                     #@td()优先级#end
                     #@td()${task?.taskPri}#end
                 #end
-                #@tr()
-                    #@td()抄送人#end
-                    #@td()${task?.taskMailTo}#end
-                #end
+            ##                #@tr()
+            ##                    #@td()抄送人#end
+            ##                    #@td()${task?.taskMailTo}#end
+            ##                #end
             #end
         #end
     #end
@@ -86,35 +87,39 @@
             #@tbody()
                 #@tr()
                     #@td()由谁创建#end
-                    #@td()${task?.taskLeft}在
+                    #@td()${task?.taskOpenedBy==null?"":UserUtils.getUserById(task?.taskOpenedBy)?.orgUserRealName}在
                         ${formatDate(task?.taskOpenedDate,"yyyy-MM-dd")}
                     #end
                 #end
                 #@tr()
                     #@td()由谁完成 #end
-                    #@td()${task?.taskFinishedBy} 在
+                    #@td()${task
+                        ?.taskFinishedBy==null?"":UserUtils.getUserById(task?.taskFinishedBy)?.orgUserRealName} 在
                         ${formatDate(task?.taskFinishedDate,"yyyy-MM-dd")}
                     #end
                 #end
                 #@tr()
                     #@td()由谁取消#end
-                    #@td()${task?.taskCanceledBy} 在
+                    #@td()${task
+                        ?.taskCanceledBy==null?"":UserUtils.getUserById(task?.taskCanceledBy)?.orgUserRealName} 在
                         ${formatDate(task?.taskCanceledDate,"yyyy-MM-dd")}
                     #end
                 #end
                 #@tr()
                     #@td()由谁关闭#end
-                    #@td()${task?.taskClosedBy} 在
+                    #@td()${task?.taskCloseBy==null?"":UserUtils.getUserById(task?.taskCloseBy)?.orgUserRealName} 在
                         ${formatDate(task?.taskCloseDate,"yyyy-MM-dd")}
                     #end
                 #end
-                #@tr()
-                    #@td()关闭原因#end
-                    #@td()${task?.taskClosedReason}#end
-                #end
+            ##                #@tr()
+            ##                    #@td()关闭原因#end
+            ##                    #@td()${task?.taskClosedReason}#end
+            ##                #end
                 #@tr()
                     #@td()最后编辑#end
-                    #@td()${task?.taskLastEditedBy} 在
+                    #@td()${task
+                        ?.taskLastEditedBy==null?"":UserUtils.getUserById(task?.taskLastEditedBy)?.orgUserRealName}
+                        在
                         ${formatDate(task?.taskLastEditedDate,"yyyy-MM-dd")}
                     #end
                 #end

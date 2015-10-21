@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.service.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.service.biz.inter.SlaManager;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.sdpm.service.service.inter.SlaService;
@@ -40,8 +41,8 @@ public class SlaServiceImpl implements SlaService {
         return slaManager.deleteBatch(id);
     }
 
-    public Pager<ServiceSla> findSlaPager(Integer start, Integer limit, ServiceSla sla, Integer treeId, String order, String ordertype) {
-        return slaManager.findPager(start, limit, sla, treeId, order, ordertype);
+    public Pager<ServiceSla> findSlaPager(Integer start, Integer limit, ServiceSla sla, Integer treeId, String groupOperate, SearchInfos searchInfos, String order, String orderType) {
+        return slaManager.findPager(start, limit, sla, treeId, groupOperate, searchInfos, order, orderType);
     }
 
     /*2015/9/29,实现协议里面，点击客户ID，页面数据显示，新增的方法*/

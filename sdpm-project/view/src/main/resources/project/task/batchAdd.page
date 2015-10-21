@@ -89,15 +89,9 @@
                                     "taskList["+i+"].taskType" "" {"class":"input-text select2","datatype":"*4-16",
                                     "nullmsg":
                                     "不能为空"}) ##,"multiple":"multiple"加上为多选项
-                                <option value=""></option>
-                                <option value="1">设计</option>
-                                <option value="2">开发</option>
-                                <option value="3">测试</option>
-                                <option value="4">研究</option>
-                                <option value="5">讨论</option>
-                                <option value="6">界面</option>
-                                <option value="7">事物</option>
-                                <option value="8">其他</option>
+                                    #foreach(item : getDict("taskType"))
+                                        #@tinyOptionItem(item.value)${item.text}#end
+                                    #end
                                 #end
                             #end
                         #end
@@ -109,9 +103,9 @@
                                 #@Tselect2Body(
                                     "taskList["+i+"].taskAssignedTo" "" {"class":
                                     "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                <option value=""></option>
                                     #foreach(t : teamList)
-                                    <option value=""></option>
-                                    <option value="${t.teamAccount}">${t.teamAccount}</option>
+                                    <option value="${t?.teamUserId}">${t?.teamUserId}</option>
                                     #end
                                 #end
                                 #@Tselect2Fix()
@@ -133,12 +127,9 @@
                             #@Tselect2Body(
                                 "taskList["+i+"].taskPri" "" {"class":"input-text select2","datatype":"*4-16","nullmsg":
                                 "不能为空"}) ##,"multiple":"multiple"加上为多选项
-                            <option value=""></option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                                #foreach(item : getDict("Pri"))
+                                    #@tinyOptionItem(item.value)${item.text}#end
+                                #end
                             #end
                         #end
                         #@validateDiv("col-2")#end

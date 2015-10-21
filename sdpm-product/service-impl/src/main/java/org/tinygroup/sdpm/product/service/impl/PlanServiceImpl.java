@@ -50,6 +50,10 @@ public class PlanServiceImpl implements PlanService {
 		return planManager.findPager(page, limit, productPlan, order, ordertype);
 	}
 
+	public List<ProductPlan> statisticfind(ProductPlan productPlan) {
+		return planManager.statisticFind(productPlan);
+	}
+
 	public Integer deletePlan(Integer planId) {
 		
 		return planManager.delete(planId);

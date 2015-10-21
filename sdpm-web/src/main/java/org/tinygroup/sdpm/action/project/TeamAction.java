@@ -51,7 +51,7 @@ public class TeamAction extends BaseController {
         //删除用户列表中的团队成员
         for (ProjectTeam team : teamList) {
             for (int i = 0; i < userList.size(); i++) {
-                if (team.getTeamAccount().equals(userList.get(i).getOrgUserAccount())) {
+                if (team.getTeamUserId().equals(userList.get(i).getOrgUserId())) {
                     userList.remove(userList.get(i));
                     i--;
                 }
@@ -72,7 +72,7 @@ public class TeamAction extends BaseController {
         List<ProjectTeam> teamList = teams.getTeamList();
         //删选没有账号的team
         for (int i = 0; i < teamList.size(); i++) {
-            if (StringUtil.isBlank(teamList.get(i).getTeamAccount())) {
+            if (StringUtil.isBlank(teamList.get(i).getTeamUserId())) {
                 teamList.remove(teamList.get(i));
                 i--;
             }

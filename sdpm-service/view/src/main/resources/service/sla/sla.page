@@ -1,6 +1,7 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
 #set(name="sla")
+#set(slaTableId = "slaTableId")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()

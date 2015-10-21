@@ -84,5 +84,11 @@ public interface BuildService {
      * @return
      */
     public Pager<ProjectBuild> findPagerBuild(ProjectBuild projectBuild, Integer start, Integer limit, String order, boolean asc);
-
+    /**
+     * 删除关联
+     * @param storyId
+     * @param buildId
+     * @return
+     */
+    public Integer deletereleate(Integer storyId,Integer buildId);
 }

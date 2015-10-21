@@ -29,7 +29,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dLabel">
                         #foreach(team : teamList )
                             #if(var != 0)
-                                <li><a class="selUser" val="${team.teamAccount}">${team.teamAccount}</a></li>
+                                <li><a class="selUser" val="${team?.teamUserId}">${team?.teamUserId}</a></li>
                             #end
                         #end
                     </ul>
@@ -50,7 +50,7 @@
         });
 
         $(".selUser").click(function (e) {
-            $("#dynamicTable").attr("data-url", actionUrl + "?teamAccount=" + $(this).attr("val"));
+            $("#dynamicTable").attr("data-url", actionUrl + "?teamUserId=" + $(this).attr("val"));
             $(".selUser").removeClass("active_btn");
             $(this).addClass("active_btn");
             $("#dynamicTable").trigger("refresh");

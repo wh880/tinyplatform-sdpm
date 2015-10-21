@@ -375,8 +375,26 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 				return addOrderByElements(select, orderBies);
 			}
 		});
-
 	}
+
+	public Integer deletereleate(Integer storyId,Integer buildId){
+		Select select =select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
+		final String[] storys = test.getBuildStories().split(",");
+		String newString = new String();
+		String storyID = storyId.toString();
+		for (int i = 0; i < storys.length; i++) {
+			if(!storys[i].equals(storyID)){
+			newString = newString + storys[i];
+				newString = newString+",";
+			}
+		}
+		Update update = update(PROJECT_BUILDTABLE).set(PROJECT_BUILDTABLE.BUILD_STORIES.value(newString))
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		return getDslSession().execute(update);
+	}
+
 
 
 }
