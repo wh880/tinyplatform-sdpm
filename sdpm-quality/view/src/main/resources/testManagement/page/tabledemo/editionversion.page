@@ -32,7 +32,8 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("projectId" testTask?.projectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("projectId" testTask?.projectId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 <option value="0">/</option>
 	                   		 #for(project : projectList)
 	                        <option value="${project?.projectId}">${project?.projectTitle}</option>
 	                        #end
@@ -40,8 +41,9 @@
                            <script type="text/javascript">
                                 $("#${sid}").on("change",function(){
                                     var pId = $("#${sid}  option:selected").val();
+                                    alert(pId);
                                     ajaxRead("${sid}","buildName","buildId","buildName","/quality/bug/ajax/build?buildProject="+pId+"buildProduct=${qualityProductId}",${testTask?.buildName?:0},"build");
-
+                                    ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/bug/ajax/user?projectId="+pId,${testTask?.testtaskOwner?:0});
                                 })
                             </script>
 	                    	#@Tselect2Fix()
@@ -58,13 +60,13 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("buildName" testTask?.buildName {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("buildName" testTask?.buildName?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
 	                    	#end                
-#*	                    	#@Tselect2Fix()
+	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
-	                    	#end*#
+	                    	#end
                 	  #end
                 	 #end
 					#@validateDiv("col-2")#end
@@ -76,10 +78,8 @@
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("testtaskOwner" testTask?.testtaskOwner {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">A</option>
-	                        <option value="ME">B</option>
-	                        <option value="MD">C</option>
+	                   		 #@Tselect2Body("testtaskOwner" testTask?.testtaskOwner?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
 	                    	#end                
                         	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
