@@ -30,6 +30,7 @@ import org.tinygroup.sdpm.quality.service.inter.CaseStepService;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.quality.service.inter.TestResultService;
 import org.tinygroup.sdpm.quality.service.inter.TestRunService;
+import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
@@ -123,11 +124,7 @@ public class TestCaseAction extends BaseController {
 		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
 		testcase = testCaseService.addTestCase(testcase);
 		caseStepService.batchAdd(insertStep(step, expect, testcase));
-
-		 ProfileUtil profileUtil = new ProfileUtil();
-
-	     profileUtil.uploads(file, testcase.getCaseId(), "story", title);
-		
+		uploads(file,testcase.getCaseId() ,ProfileType.TESTCASE, title);
 		SystemAction systemAction = new SystemAction();
 		systemAction.setActionObjectId(String.valueOf(testcase.getCaseId()));
 		systemAction.setActionProduct(String.valueOf(testcase.getProductId()));

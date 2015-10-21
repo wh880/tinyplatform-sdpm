@@ -11,7 +11,8 @@ public enum ProfileType {
     DOCUMENT("document"),
     TASK("task"),
     RELEASE("release"),
-    BUG("bug");
+    BUG("bug"),
+    TESTCASE("testCase");
     private final String type;
 
     ProfileType(String type) {
