@@ -49,7 +49,7 @@
                         #@Tselect2F()
                             #@Tselect2Body("taskList["+i+"].moduleId" "" {"class":
                                 "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value=""></option>
+                            <option value="">/</option>
                                 #foreach(m : modulesList)
                                 <option value=${m.moduleId}>${m.moduleName}</option>
                                 #end
@@ -65,7 +65,7 @@
                             #@Tselect2Body(
                                 "taskList["+i+"].taskStory" "" {"class":
                                 "input-text select2"})
-                            <option value=""></option>
+                            <option value="">/</option>
                                 #foreach(s : storyList)
                                 <option value=${s.storyId}>${s.storyTitle}</option>
                                 #end
@@ -103,7 +103,7 @@
                                 #@Tselect2Body(
                                     "taskList["+i+"].taskAssignedTo" "" {"class":
                                     "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value=""></option>
+                                <option value="">/</option>
                                     #foreach(t : teamList)
                                     <option value="${t?.teamUserId}">${t?.teamUserId}</option>
                                     #end

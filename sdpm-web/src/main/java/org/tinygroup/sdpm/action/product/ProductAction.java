@@ -24,6 +24,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.weblayer.WebContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -112,7 +113,7 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/update")
-    public String update(Product product, HttpServletRequest request,SystemAction systemAction) {
+    public String update(Product product, HttpServletRequest request, SystemAction systemAction) throws IOException {
         Product product1 = productService.findProduct(product.getProductId());
         productService.updateProduct(product);
         SessionUtil.ProductRefresh(request, productService);

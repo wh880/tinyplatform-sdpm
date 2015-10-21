@@ -7,7 +7,7 @@
     #end
     #@navSelect2Body()
         #@navSelect2Data()
-        <option value=""></option>
+        <option value="">/</option>
         <optgroup label="项目">
             #for(p:projectList)
             <option value="${p?.projectId}">${p?.projectName}</option>

@@ -2,7 +2,7 @@
 #macro kanbanWait(task)
 <div class="board board-task board-task-wait" data-id="${task.taskId}" id="task-${task.taskId}">
     <div class="board-title">
-        #@aModal("#myModal" task?.taskName 1050 700 "" editPage+"?taskId="+task?.taskId)${task?.taskName}#end
+        #@aModal("#myModal" task?.taskName 1200 600 "" editPage+"?taskId="+task?.taskId)${task?.taskName}#end
     ##        <a href="${editPage}?taskId=${task.taskId}" data-target="#myModal" data-toggle="modal"
     ##           title="${task.taskName} data-height="460">${task.taskName}</a>
         <div class="board-actions">
@@ -12,12 +12,12 @@
                     <span class="icon-reorder"></span>
                 </button>
                 <div class="dropdown-menu pull-right">
-                    #@aModal("#myModal" task?.taskName 1050 700 "" assignedPage+"?taskId="+task?.taskId)指派#end
-                    #@aModal("#myModal" task?.taskName 1050 700 "" startPage+"?taskId="+task?.taskId)开始#end
-                    #@aModal("#myModal" task?.taskName 1050 700 "" finishPage+"?taskId="+task?.taskId)完成#end
-                    #@aModal("#myModal" task?.taskName 1050 700 "" cancelPage+"?taskId="+task?.taskId)取消#end
-                    #@aModal("#myModal" task?.taskName 1050 700 "" closePage+"?taskId="+task?.taskId)关闭#end
-                    #@aModal("#myModal" task?.taskName 1050 700 "" editPage+"?taskId="+task?.taskId)编辑#end
+                    #@aModal("#myModal" task?.taskName 1050 540 "" assignedPage+"?taskId="+task?.taskId)指派#end
+                    #@aModal("#myModal" task?.taskName 1050 540 "" startPage+"?taskId="+task?.taskId)开始#end
+                    #@aModal("#myModal" task?.taskName 1050 600 "" finishPage+"?taskId="+task?.taskId)完成#end
+                    #@aModal("#myModal" task?.taskName 1050 450 "" cancelPage+"?taskId="+task?.taskId)取消#end
+                    #@aModal("#myModal" task?.taskName 1050 460 "" closePage+"?taskId="+task?.taskId)关闭#end
+                    #@aModal("#myModal" task?.taskName 1200 600 "" editPage+"?taskId="+task?.taskId)编辑#end
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
         <span class="task-id board-id" title="编号">${task.taskId}</span>
         <span class="task-pri pri-3" title="优先级">${task.taskPri}</span>
 	  <span class="task-assignedTo" title="指派给">
-          #@aModal("#myModal" task?.taskName 1050 700 "" assignedPage+"?taskId="+task?.taskId)
+          #@aModal("#myModal" task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
               <i class="icon-hand-right"></i>
           #end
           <small>${task.taskId}</small>
@@ -43,8 +43,7 @@
 #macro kanbanDoing(task)
 <div class="board board-task board-task-doing" data-id="${task.taskId}" id="task-${task.taskId}">
     <div class="board-title">
-        <a href="${editPage}?taskId=${task.taskId}" data-target="#myModal" data-toggle="modal"
-           title="${task.taskName}">${task.taskName}</a>
+        #@aModal("#myModal" task?.taskName 1200 600 "" editPage+"?taskId="+task?.taskId)${task?.taskName}#end
 
         <div class="board-actions">
             <button type="button" class="btn btn-mini btn-link btn-info-toggle"><i class="icon-angle-down"></i></button>
@@ -53,11 +52,11 @@
                     <span class="icon-reorder"></span>
                 </button>
                 <div class="dropdown-menu pull-right">
-                    #@aModal("#myModal" task?.taskName 1050 700 "" assignedPage+"?taskId="+task?.taskId)指派#end
-                    #@aModal("#myModal" task?.taskName 1050 700 "" finishPage+"?taskId="+task?.taskId)完成#end
-                    #@aModal("#myModal" task?.taskName 1050 700 "" cancelPage+"?taskId="+task?.taskId)取消#end
-                    #@aModal("#myModal" task?.taskName 1050 700 "" closePage+"?taskId="+task?.taskId)关闭#end
-                    #@aModal("#myModal" task?.taskName 1050 700 "" editPage+"?taskId="+task?.taskId)编辑#end
+                    #@aModal("#myModal" task?.taskName 1050 540 "" assignedPage+"?taskId="+task?.taskId)指派#end
+                    #@aModal("#myModal" task?.taskName 1050 600 "" finishPage+"?taskId="+task?.taskId)完成#end
+                    #@aModal("#myModal" task?.taskName 1050 450 "" cancelPage+"?taskId="+task?.taskId)取消#end
+                    #@aModal("#myModal" task?.taskName 1050 460 "" closePage+"?taskId="+task?.taskId)关闭#end
+                    #@aModal("#myModal" task?.taskName 1200 600 "" editPage+"?taskId="+task?.taskId)编辑#end
                 </div>
             </div>
         </div>
@@ -66,7 +65,7 @@
         <span class="task-id board-id" title="编号">${task.taskId}</span>
         <span class="task-pri pri-3" title="优先级">${task.taskPri}</span>
 	  <span class="task-assignedTo" title="指派给">
-          #@aModal("#myModal" task?.taskName 1050 700 "" assignedPage+"?taskId="+task?.taskId)
+          #@aModal("#myModal" task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
               <i class="icon-hand-right"></i>
           #end
           <small>${task.taskId}</small>
@@ -83,8 +82,7 @@
 #macro kanbanDone(task)
 <div class="board board-task board-task-done" data-id="${task.taskId}" id="task-${task.taskId}">
     <div class="board-title">
-        <a href="${editPage}?taskId=${task.taskId}" data-target="#myModal" data-toggle="modal"
-           title="${task.taskName}">${task.taskName}</a>
+        #@aModal("#myModal" task?.taskName 1200 600 "" editPage+"?taskId="+task?.taskId)${task?.taskName}#end
 
         <div class="board-actions">
             <button type="button" class="btn btn-mini btn-link btn-info-toggle"><i class="icon-angle-down"></i></button>
@@ -93,9 +91,9 @@
                     <span class="icon-reorder"></span>
                 </button>
                 <div class="dropdown-menu pull-right">
-                    #@aModal("#myModal" task?.taskName 1050 700 "" assignedPage+"?taskId="+task?.taskId)指派#end
-                    #@aModal("#myModal" task?.taskName 1050 700 "" closePage+"?taskId="+task?.taskId)关闭#end
-                    #@aModal("#myModal" task?.taskName 1050 700 "" editPage+"?taskId="+task?.taskId)编辑#end
+                    #@aModal("#myModal" task?.taskName 1050 540 "" assignedPage+"?taskId="+task?.taskId)指派#end
+                    #@aModal("#myModal" task?.taskName 1050 460 "" closePage+"?taskId="+task?.taskId)关闭#end
+                    #@aModal("#myModal" task?.taskName 1050 600 "" editPage+"?taskId="+task?.taskId)编辑#end
                 </div>
             </div>
         </div>
@@ -104,7 +102,7 @@
         <span class="task-id board-id" title="编号">${task.taskId}</span>
         <span class="task-pri pri-3" title="优先级">${task.taskPri}</span>
 	  <span class="task-assignedTo" title="指派给">
-          #@aModal("#myModal" task?.taskName 1050 700 "" assignedPage+"?taskId="+task?.taskId)
+          #@aModal("#myModal" task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
               <i class="icon-hand-right"></i>
           #end
           <small>${task.taskId}</small>
@@ -122,8 +120,7 @@
 #macro kanbanCancel(task)
 <div class="board board-task board-task-cancel" data-id="${task.taskId}" id="task-${task.taskId}">
     <div class="board-title">
-        <a href="${editPage}?taskId=${task.taskId}" data-target="#myModal" data-toggle="modal"
-           title="${task.taskName}">${task.taskName}</a>
+        #@aModal("#myModal" task?.taskName 1200 600 "" editPage+"?taskId="+task?.taskId)${task?.taskName}#end
 
         <div class="board-actions">
             <button type="button" class="btn btn-mini btn-link btn-info-toggle"><i class="icon-angle-down"></i></button>
@@ -132,8 +129,8 @@
                     <span class="icon-reorder"></span>
                 </button>
                 <div class="dropdown-menu pull-right">
-                    #@aModal("#myModal" task?.taskName 1050 700 "" assignedPage+"?taskId="+task?.taskId)指派#end
-                    #@aModal("#myModal" task?.taskName 1050 700 "" editPage+"?taskId="+task?.taskId)编辑#end
+                    #@aModal("#myModal" task?.taskName 1050 540 "" assignedPage+"?taskId="+task?.taskId)指派#end
+                    #@aModal("#myModal" task?.taskName 1050 600 "" editPage+"?taskId="+task?.taskId)编辑#end
                 </div>
             </div>
         </div>
@@ -142,7 +139,7 @@
         <span class="task-id board-id" title="编号">${task.taskId}</span>
         <span class="task-pri pri-3" title="优先级">${task.taskPri}</span>
 	  <span class="task-assignedTo" title="指派给">
-		 #@aModal("#myModal" task?.taskName 1050 700 "" assignedPage+"?taskId="+task?.taskId)
+		 #@aModal("#myModal" task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
              <i class="icon-hand-right"></i>
          #end
 		 <small>${task.taskId}</small>
@@ -159,8 +156,7 @@
 #macro kanbanClosed(task)
 <div class="board board-task board-task-closed" data-id="${task.taskId}" id="task-${task.taskId}">
     <div class="board-title">
-        <a href="${editPage}?taskId=${task.taskId}" data-target="#myModal" data-toggle="modal"
-           title="${task.taskName}">${task.taskName}</a>
+        #@aModal("#myModal" task?.taskName 1200 600 "" editPage+"?taskId="+task?.taskId)${task?.taskName}#end
 
         <div class="board-actions">
             <button type="button" class="btn btn-mini btn-link btn-info-toggle"><i class="icon-angle-down"></i></button>
@@ -169,8 +165,8 @@
                     <span class="icon-reorder"></span>
                 </button>
                 <div class="dropdown-menu pull-right">
-                    #@aModal("#myModal" task?.taskName 1050 700 "" assignedPage+"?taskId="+task?.taskId)指派#end
-                    #@aModal("#myModal" task?.taskName 1050 700 "" editPage+"?taskId="+task?.taskId)编辑#end
+                    #@aModal("#myModal" task?.taskName 1050 540 "" assignedPage+"?taskId="+task?.taskId)指派#end
+                    #@aModal("#myModal" task?.taskName 1050 600 "" editPage+"?taskId="+task?.taskId)编辑#end
                 </div>
             </div>
         </div>
@@ -179,7 +175,7 @@
         <span class="task-id board-id" title="编号">${task.taskId}</span>
         <span class="task-pri pri-3" title="优先级">${task.taskPri}</span>
 	  <span class="task-assignedTo" title="指派给">
-		 #@aModal("#myModal" task?.taskName 1050 700 "" assignedPage+"?taskId="+task?.taskId)
+		 #@aModal("#myModal" task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
              <i class="icon-hand-right"></i>
          #end
 		 <small>${task.taskId}</small>
