@@ -119,8 +119,6 @@ public class TestCaseAction extends BaseController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(QualityTestCase testcase, String[] step,
-			String[] expect, HttpServletRequest request) {
 	public String save(QualityTestCase testcase, String[] step,String[] expect, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title, HttpServletRequest request) throws Exception {
 		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
 		testcase = testCaseService.addTestCase(testcase);
@@ -197,7 +195,6 @@ public class TestCaseAction extends BaseController {
 		systemAction.setActionAction("run");
 		systemAction.setActionActor(user != null ? user.getOrgUserId() : "0");
 		logService.log(systemAction);
-		return "redirect:" + "/a/quality/testCase";
 		return "redirect:" + adminPath+"/quality/testCase";
 	}
 
@@ -253,7 +250,6 @@ public class TestCaseAction extends BaseController {
 		model.addAttribute("testCase", testCase);
 		return "redirect:" + "/a/quality/testCase";
 	}
-
 	
 	@ResponseBody
 	@RequestMapping("/delete")
@@ -262,7 +258,6 @@ public class TestCaseAction extends BaseController {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("status", "success");
 		map.put("info", "删除成功");
-		return "redirect:" + "/a/quality/testCase";
 		return "redirect:" +adminPath+ "/quality/testCase";
 	}
 
@@ -328,16 +323,12 @@ public class TestCaseAction extends BaseController {
 			CaseStepResult caseStepResult = new CaseStepResult();
 			int i = result.indexOf("{");
 			int j = result.indexOf("}");
-			String[] values = result.substring(i, j).split(";");
 			String[] values = result.substring(i+1, j).split(";");
 			for (String value : values) {
-				if (value.contains("result")) {
-					caseStepResult.setResult(value.split(":")[1]);
 				String[] r = value.split(":");
 				if ("result".endsWith(r[0])) {
 					caseStepResult.setResult(r.length>1?r[1]:"");
 				} else {
-					caseStepResult.setReal(value.split(":")[1]);
 					caseStepResult.setReal(r.length>1?r[1]:"");
 				}
 			}
