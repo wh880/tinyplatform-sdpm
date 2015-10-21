@@ -30,6 +30,8 @@
                                 #@tinyOptionItem(l.productId)${l?.productName}#end
                             #end
                         #end
+                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/service/client/form"
+                                          class="r ">增加</a>#end
                     #end
                 #end
             #end
@@ -130,8 +132,8 @@
             #@elementItem()
                 #@sdpmItem("创建时间")
                     #@tinyDateInput(
-                        "slaCreateDate" "" "YYYY-MM-DD" {"style":"width:120px","id":"slaCreateDate","placeholder":
-                        ""})#end
+                        "slaCreateDate" formatDate(sla?.slaCreateDate?:now(),
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","id":"slaCreateDate","placeholder":""})#end
                 #end
             #end
             #@elementItem()
