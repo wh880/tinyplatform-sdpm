@@ -36,7 +36,7 @@
         #foreach(t : teamList)
         <tr>
             #@thW("250px")
-                ${t?.teamUserId}
+                ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                 <input name="teamList[${a}].teamUserId" value="${t?.teamUserId}" type="hidden">
                 <input name="teamList[${a}].id" value="${t.id}" type="hidden">
             #end

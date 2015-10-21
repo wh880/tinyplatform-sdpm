@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
+import org.tinygroup.sdpm.common.dao.StringIdGenerator;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -366,8 +367,16 @@ public class BuildAction extends BaseController {
         return "/project/task/relation-release/product-al-no-req-data.pagelet";
     }
 
-
-
+    @ResponseBody
+    @RequestMapping("/deletereleate")
+    public Map deletereleate(Integer storyId,Integer buildId){
+        buildService.deletereleate(storyId, buildId);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
+//        return "/project/task/relation-release/product-al-req.pagelet";
+    }
 
     @ResponseBody
     @RequestMapping("/buildList")
