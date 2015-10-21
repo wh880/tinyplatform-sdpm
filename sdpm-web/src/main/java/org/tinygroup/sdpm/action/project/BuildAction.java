@@ -379,6 +379,26 @@ public class BuildAction extends BaseController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/batchDeleteReq")
+    public Map bctchDelReq(String ids,Integer buildId) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (ids == null || ids == "") {
+            map.put("status", "fail");
+            map.put("info", "请至少选择一条数据");
+            return map;
+        }
+//        List<ProductStory> list = new ArrayList<ProductStory>();
+        for (String s : ids.split(",")) {
+            Integer S = Integer.valueOf(s);
+            buildService.deletereleate(S,buildId);
+        }
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
+    }
+
+
+    @ResponseBody
     @RequestMapping("/buildList")
     public List<ProjectBuild> findProjectBuild(ProjectBuild build) {
 
