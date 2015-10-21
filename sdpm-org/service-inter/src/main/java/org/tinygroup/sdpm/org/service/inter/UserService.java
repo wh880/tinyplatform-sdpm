@@ -100,7 +100,7 @@ public interface UserService {
      * @param
      * @return
      */
-    List<OrgUser> findUserListByIds(String... storyId);
+    List<OrgUser> findUserListByIds(String... userId);
     
     /**
      * 根据id查找名字

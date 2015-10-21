@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.org;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ public class CompanyAction extends BaseController {
     private CompanyService companyService;
 
 
+    @RequiresPermissions("org-company-edit")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(OrgCompany company, Model model) {
         companyService.updateCompany(company);
@@ -23,6 +25,7 @@ public class CompanyAction extends BaseController {
         return "redirect:" + adminPath + "/org/company/show/";
     }
 
+    @RequiresPermissions("organizationCompany")
     @RequestMapping("/show")
     public String show(Model model) {
         OrgCompany company = companyService.findCompany(1);
@@ -30,6 +33,7 @@ public class CompanyAction extends BaseController {
         return "organization/company/company.page";
     }
 
+    @RequiresPermissions("org-company-edit")
     @RequestMapping("/edit")
     public String edit(Model model) {
         OrgCompany company = companyService.findCompany(1);

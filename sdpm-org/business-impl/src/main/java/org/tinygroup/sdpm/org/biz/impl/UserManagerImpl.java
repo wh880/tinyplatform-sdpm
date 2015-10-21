@@ -110,8 +110,8 @@ public class UserManagerImpl implements UserManager {
 		return orgUserDao.getNameById(id);
 	}
 
-    public List<OrgUser> findUserListByIds(String... storyId) {
-        return orgUserDao.getByKeys(storyId);
+    public List<OrgUser> findUserListByIds(String... userId) {
+        return orgUserDao.getByKeys(userId);
     }
 
 }
