@@ -15,7 +15,7 @@
         #end
         #@tr()
             #@td()
-            <a href="${TINY_CONTEXT_PATH}/statistic/page/product.page?order=2">产品投入表</a>
+            <a href="${TINY_CONTEXT_PATH}/a/statistic/product/invest">产品投入表</a>
             #end
         #end
         #@tr()

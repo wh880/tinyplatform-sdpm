@@ -77,11 +77,11 @@ public class FileRepository implements ServletContextAware {
     }
 
     private String getRealPath(String name) {
-        String realpath = ctx.getRealPath(name);
-        if (realpath == null) {
-            realpath = ctx.getRealPath("/") + name;
+        String realPath = ctx.getRealPath(name);
+        if (realPath == null) {
+            realPath = ctx.getRealPath("/") + name;
         }
-        return realpath;
+        return realPath;
     }
 
     public void setServletContext(ServletContext servletContext) {

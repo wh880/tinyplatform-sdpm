@@ -4,7 +4,51 @@
 <style>
     .select_boxes{margin-top:0}
 </style>
+<script type="text/javascript">
 
+
+	function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
+    		var selectCheck = "select[name="+toName+"]";
+    		$(selectCheck).each(function(){
+    			var sele = $(this);
+    			var s;
+    			$.ajax({
+    				type: "POST",
+    				url: "${TINY_CONTEXT_PATH+adminPath}"+url,
+    				data: $(this).attr('data'),
+    				dataType:"json",
+    				success: function(data){
+    					sele.empty();
+    					if("build"==(isBuild)){
+    					var em = "<option value='0' selected  >trunk</option>";
+    					}else{
+    					var em = "<option value='0' selected  >/</option>";
+    					}
+    					sele.append(em);
+    					for(var i=0,l=data.length;i<l;i++){
+    						var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+    						sele.append(em);
+
+    					}
+
+    					if(value!=null) {
+    						sele.val(value).trigger("change");
+    					}else {
+    						sele.val(data[0][opKey]).trigger("change");
+    					}
+
+
+    				},
+    				error: function(res){
+    					alert("失败");
+    				}
+    			});
+
+
+    		});
+
+    	}
+</script>
 
 #set(name="qualityVersion")
 #@div()
@@ -20,8 +64,9 @@
 ##operationbar start1
 
 #end
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/version/save" "post" {"class":"test"})
+    #@tinyForm("thisform" "" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="testversionId" hiddenInputValue=testTask?.testversionId)
+    #hiddenInput(hiddenInputName="productId" hiddenInputValue=qualityProductId)
     <div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">提交测试</p>
@@ -31,10 +76,10 @@
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("projectId" testTask?.projectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">项目1</option>
-	                        <option value="ME">项目2</option>
-	                        <option value="MD">项目3</option>
-	                    	#end                
+                                #foreach(project : projectList)
+                                    <option value="${project?.projectId}">${project?.projectName}</option>
+                                #end
+	                    	#end
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
@@ -49,14 +94,15 @@
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("buildName" testTask?.buildName {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">版本1</option>
-	                        <option value="ME">版本2</option>
-	                        <option value="MD">版本3</option>
+	                   		        <option value="0">trunk</option>
+	                            #foreach(build : buildList)
+                                    <option value="${build?.buildId}">${build?.buildName}</option>
+                                #end
 	                    	#end                
-#*	                    	#@Tselect2Fix()
+	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
-	                    	#end*#
+	                    	#end
                 	  #end
                 	 #end
 				#end
@@ -68,14 +114,15 @@
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("testtaskOwner" testTask?.testtaskOwner {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">A</option>
-	                        <option value="ME">B</option>
-	                        <option value="MD">C</option>
+	                            <option value="0">/</option>
+                                #foreach(user : userList)
+                                    <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+                                #end
 	                    	#end                
-#*	                    	#@Tselect2Fix()
+	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
-	                    	#end*#
+	                    	#end
                 	  #end
                 	 #end
 				#end
@@ -88,9 +135,9 @@
                     #@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("priority" testTask?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
+                                #foreach(pri : getDict("versionPriority"))
+                                    <option value="${pri?.value}">${pri?.text}</option>
+                                #end
 	                    	#end                
                 	 #end
                 #end
@@ -102,7 +149,7 @@
             #@colLabel()开始日期：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
-                #@tinyDateInput("testtaskBegin" testTask?.testtaskBegin "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
+                #@tinyDateInput("testtaskBegin" formatDate(testTask?.testtaskBegin,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
            		#end
             #end
             #@validateDiv("col-2")#end
@@ -111,7 +158,7 @@
             #@colLabel()结束日期：#end
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
-                #@tinyDateInput("testtaskEnd" testTask?.testtaskEnd "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
+                #@tinyDateInput("testtaskEnd" formatDate(testTask?.testtaskEnd,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
            		#end
             #end
             #@validateDiv("col-2")#end
@@ -122,9 +169,9 @@
                 #@div(divClass="col-5")
 						#@Tselect2F()
 	                   		 #@Tselect2Body("testtaskStatus" testTask?.testtaskStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">未开始</option>
-	                        <option value="ME">未关闭</option>
-	                        <option value="MD">未完成</option>
+	                        #foreach(status : getDict("versionStatus"))
+                                <option value="${status?.value}">${status?.text}</option>
+                            #end
 	                    	#end                
                			#end
                 #end
@@ -224,7 +271,7 @@
     });
     $(function(){
 
-        $("form[name=thisform").attr("action",'#link("/Validform_post.html")');
+        $("form[name=thisform").attr("action",'#link(adminPath+"/quality/version/save")');
         $("form[name=thisform").Validform({
             tiptype:2,
             usePlugin:{
@@ -257,9 +304,7 @@
             },
             callback:function(data){
                 if(data.status=="y"){
-                    setTimeout(function(){
-                        $.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
-                    },2000);
+                    window.location.href=document.referrer;
                 }
                 //返回数据data是json对象，{"info":"demo info","status":"y"}
                 //info: 输出提示信息;

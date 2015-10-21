@@ -152,8 +152,9 @@ public class BugAction extends BaseController {
 			asc = false;
 		}
 		String conditions = QualityUtil.getCondition(status,request);
-		conditions = StringUtil.isBlank(SqlUtil.toSql(infos.getInfos(),groupOperate))?
-				conditions:(StringUtil.isBlank(conditions)?SqlUtil.toSql(infos.getInfos(),groupOperate):conditions+" and "+ SqlUtil.toSql(infos.getInfos(),groupOperate));
+		String result = SqlUtil.toSql(infos.getInfos(),groupOperate);
+		conditions = StringUtil.isBlank(result)?
+				conditions:(StringUtil.isBlank(conditions)?result:conditions+" and "+ SqlUtil.toSql(infos.getInfos(),groupOperate));
 		bug.setModuleId((Integer) request.getSession().getAttribute("bugModuleId"));
 		bug.setProductId((Integer) request.getSession().getAttribute("qualityProductId"));
 		bug.setDeleted(0);

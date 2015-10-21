@@ -2,21 +2,6 @@
 
 #import("/common/component/form.component")
 
-<style>
-    .tabLayout .tabBar span a {
-        color: #333
-    }
-
-    .tabLayout .tabBar .Current a {
-        color: #fff
-    }
-
-    .operationbar {
-        border-top: none;
-        background: #f9fafe;
-        padding: 6px 5px 6px 10px;
-    }
-</style>
 #set(name="organizationPrivilege")
 #@tinyForm("roleUserManager" TINY_CONTEXT_PATH+adminPath+"/org/roleUser/save" "post")
 <input type="hidden" name="id" value="${id}"/>

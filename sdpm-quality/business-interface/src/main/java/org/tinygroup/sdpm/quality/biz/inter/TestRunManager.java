@@ -3,6 +3,8 @@ package org.tinygroup.sdpm.quality.biz.inter;
 import java.util.List;
 
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
+import org.tinygroup.tinysqldsl.Pager;
 
 public interface TestRunManager {
 
@@ -25,4 +27,6 @@ public interface TestRunManager {
 	 * @return
 	 */
 	int[] batchUpdate(List<QualityTestRun> testruns);
+
+	Pager<QualityTestRun> findPager(Integer start, Integer limit, QualityTestRun testRun,String condition, String sortName, boolean asc);
 }

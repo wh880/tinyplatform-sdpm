@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="statistic" parent-id="0" name="统计" href="/statistic/index" icon="icon-tasks" sort="400"
+<menu id="statistic" parent-id="0" name="统计" href="/statistic/product/all" icon="icon-tasks" sort="400"
       isShow="1"
 >
-    <menu id="statisticProduct" parent-id="statistic" name="产品" href="/statistic/page/product.page" icon="" sort="1"
+    <menu id="statisticProduct" parent-id="statistic" name="产品" href="/statistic/product/all" icon="" sort="1"
           isShow="1"
     >
     </menu>
-    <menu id="statisticProject" parent-id="statistic" name="项目" href="/statistic/page/project.page" icon="" sort="1"
+    <menu id="statisticProject" parent-id="statistic" name="项目" href="/statistic/project/all" icon="" sort="1"
           isShow="1"
     >
     </menu>

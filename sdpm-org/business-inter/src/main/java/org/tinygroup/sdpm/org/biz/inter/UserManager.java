@@ -112,5 +112,5 @@ public interface UserManager {
      */
     String getNameById(String id);
 
-    List<OrgUser> findUserListByIds(String... storyId);
+    List<OrgUser> findUserListByIds(String... userId);
 }

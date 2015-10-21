@@ -430,6 +430,9 @@ a.btn.btn-sm.backBtn, backBtn {
 
 .togglenavpart .navtitle{height:43px;}
 
+.theme-clean.menu-on-top #tinyfooter {
+    margin-top: 32px;
+}
 /*FAQ问答页面*/
 .questionBox{width: 75%;margin-left:auto;margin-right:auto}
 .questionBox .questionInfo{border: #eee  1px solid;margin: 18px 0 15px 0;}

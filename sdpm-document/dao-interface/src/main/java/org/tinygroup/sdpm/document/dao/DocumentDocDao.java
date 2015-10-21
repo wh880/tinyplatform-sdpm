@@ -29,4 +29,5 @@ public interface DocumentDocDao extends BaseDao<DocumentDoc,Integer> {
 	
 	Pager<DocumentDoc> complexQuery(int start, int limit, DocumentDoc doc, final String condition, final OrderBy... orderBys);
 
+	int editDoc(DocumentDoc documentDoc);
 }

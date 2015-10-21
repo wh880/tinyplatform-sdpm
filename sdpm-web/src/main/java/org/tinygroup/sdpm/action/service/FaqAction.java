@@ -144,7 +144,14 @@ public class FaqAction extends BaseController {
         return map;
     }
 
-    /*对树的节点进行编辑*/
+    /**
+     * 对树的节点进行编辑
+     *
+     * @param faqParentTypeId
+     * @param faqTypeId
+     * @param faqType
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/editTree")
     public Map editDept(Integer faqParentTypeId, Integer faqTypeId, String faqType) {

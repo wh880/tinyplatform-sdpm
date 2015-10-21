@@ -45,6 +45,7 @@ import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
+import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.document.dao.DocumentDocDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -115,6 +116,18 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 					DOCUMENT_DOCTABLE.DOC_EDITED_DATE.value(t.getDocEditedDate()),
 					DOCUMENT_DOCTABLE.DOC_DELETED.value(t.getDocDeleted())).where(
 					DOCUMENT_DOCTABLE.DOC_ID.eq(t.getDocId()));
+				return update;
+			}
+		});
+	}
+	
+	public int editDoc(final DocumentDoc documentDoc) {
+		if(documentDoc == null || documentDoc.getDocId() == null){
+			return 0;
+		}
+		return getDslTemplate().update(documentDoc, new UpdateGenerateCallback<DocumentDoc>() {
+			public Update generate(DocumentDoc t) {
+				Update update = UpdateUtil.getUpdate(DOCUMENT_DOCTABLE,documentDoc);
 				return update;
 			}
 		});

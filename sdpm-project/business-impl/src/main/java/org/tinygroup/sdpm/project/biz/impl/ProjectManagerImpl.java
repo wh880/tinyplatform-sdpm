@@ -83,9 +83,14 @@ public class ProjectManagerImpl implements ProjectManager {
         if (ids.isEmpty()) {
             return null;
         } else {
-            String condition = "projectId in ( ";
-            for (Integer id : ids) {
-                condition = condition + id + " ";
+            String condition = "project_id in ( ";
+            for (int i = 0; i < ids.size(); i++) {
+                if (i == 0) {
+                    condition = condition + ids.get(i) + " ";
+                } else {
+                    condition = condition + "," + ids.get(i) + " ";
+                }
+
             }
             condition = condition + ")";
             return projectDao.findByCondition(condition);

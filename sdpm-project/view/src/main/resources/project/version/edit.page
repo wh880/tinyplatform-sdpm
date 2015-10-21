@@ -39,9 +39,9 @@
                     #end
                 #end
             ##填写任意内容，侦听需重新填加 A侦听已内置
-                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH}/a/product/page/tabledemo/addProduct.page"
-                                  class="r ">增加</a><a
-                        href="${TINY_CONTEXT_PATH}/a/product/page/tabledemo/product-listall.page">全部</a>
+                #@Tselect2Fix()
+                    <a href="${TINY_CONTEXT_PATH}/a/product/page/tabledemo/addProduct.page">增加</a>
+                    <a href="${TINY_CONTEXT_PATH}/a/product/page/tabledemo/product-listall.page" class="r">全部</a>
                 #end
             #end
         #end
@@ -73,7 +73,9 @@
     #@elementItem()
         #@sdpmItem("打包日期")
             #@formHorizontal()
-                #dateInputSimple("buildDate" "" "YYYY-MM-DD" " style='width:40%'")
+                #@tinyDateInput(
+                    "buildDate" "" "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                #end
             #end
         #end
     #end
