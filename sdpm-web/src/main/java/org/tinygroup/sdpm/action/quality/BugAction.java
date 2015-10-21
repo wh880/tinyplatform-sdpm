@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.quality;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.support.SQLErrorCodes;
 import org.springframework.stereotype.Controller;
@@ -76,6 +77,7 @@ public class BugAction extends BaseController {
 	private ProfileService profileService;
 	@Autowired
 	private ProductService productService;
+		
 	@RequestMapping("")
 	public String form(String get,QualityBug bug, Model model, HttpServletRequest request){
 		List<Product> list = (List<Product>) request.getSession().getAttribute("qualityProductList");
@@ -169,6 +171,7 @@ public class BugAction extends BaseController {
 		return "/testManagement/page/reportform.page";
 	}
 	
+	@RequiresPermissions("tmakesure")
 	@RequestMapping("/makesure")
 	public String makesure(Integer bugId,Model model){
 		QualityBug bug = new QualityBug();
@@ -178,6 +181,8 @@ public class BugAction extends BaseController {
 		model.addAttribute("userList",orgUsers);
 		return "/testManagement/page/tabledemo/makesure.page";
 	}
+	
+	@RequiresPermissions("tmakesure")
 	@ResponseBody
 	@RequestMapping("batch/sure")
 	public Map makesure(String ids,Model model){
@@ -206,6 +211,8 @@ public class BugAction extends BaseController {
 		map.put("info", "成功");
 		return map;
 	}
+	
+	@RequiresPermissions("tsolution")
 	@ResponseBody
 	@RequestMapping("batch/resolve")
 	public Map resolve(String ids,String resolutionType,Model model) {
@@ -237,6 +244,8 @@ public class BugAction extends BaseController {
 		map.put("info", "成功");
 		return map;
 	}
+	
+	@RequiresPermissions("tassign")
 	@ResponseBody
 	@RequestMapping("batch/assign")
 	public Map assign(String ids,String userId,Model model) {
@@ -264,7 +273,7 @@ public class BugAction extends BaseController {
 		map.put("info", "成功");
 		return map;
 	}
-
+	
 	@RequestMapping("/sure")
 	public String makesure(QualityBug bug, SystemAction systemAction, HttpServletRequest request){
 		QualityBug qualityBug = bugService.findById(bug.getBugId());
@@ -286,6 +295,8 @@ public class BugAction extends BaseController {
 				,systemAction.getActionComment());
 		return "redirect:"+"/a/quality/bug";
 	}
+	
+	
 	@ResponseBody
 	@RequestMapping("addComment")
 	public Map recordComment(String comment, int bugId){
@@ -304,6 +315,7 @@ public class BugAction extends BaseController {
 		return result;
 	}
 
+	@RequiresPermissions("tassign")
 	@RequestMapping("/assign")
 	public String assign(Integer bugId,Model model){		
 		QualityBug bug = bugService.findById(bugId);
@@ -332,6 +344,7 @@ public class BugAction extends BaseController {
 		return "redirect:"+"/a/quality/bug";
 	}
 
+	@RequiresPermissions("tbugdelete")
 	@RequestMapping("/delete")
 	public String delete(Integer bugId) {
 		bugService.deleteBug(bugId);
@@ -339,6 +352,7 @@ public class BugAction extends BaseController {
 		return "redirect:"+"/a/quality/bug";
     }
 	
+	@RequiresPermissions("tsolution")
 	@RequestMapping("/toSolve")
 	public String solve(Integer bugId,Model model){
 		QualityBug bug = new QualityBug();
@@ -376,6 +390,7 @@ public class BugAction extends BaseController {
 		return "redirect:"+"/a/quality/bug";
 	}
 	
+	@RequiresPermissions("tshutdown")
 	@RequestMapping("/toClose")
 	public String close(Integer bugId,Model model){
 		QualityBug bug = new QualityBug();
@@ -406,6 +421,7 @@ public class BugAction extends BaseController {
 		return "redirect:"+"/a/quality/bug";
 	}
 	
+	@RequiresPermissions("tedition")
 	@RequestMapping("/toEdit")
 	public String edit(Integer bugId,Model model){
 		QualityBug bug = new QualityBug();
@@ -452,7 +468,8 @@ public class BugAction extends BaseController {
 		model.addAttribute("bug", bug);
 		return "/testManagement/page/tabledemo/editionpaging.pagelet";
 	}
-			
+		
+	@RequiresPermissions("tbugpro")
 	@RequestMapping("/add")
 	public String add(Model model){
 		List<Project> projects = projectService.findProjectList(null,null,null);
@@ -462,6 +479,7 @@ public class BugAction extends BaseController {
 		return "/testManagement/page/proposeBug.page";
 	}
 	
+	@RequiresPermissions("tbugpro")
 	@RequestMapping("/toCopy")
 	public String copy(Integer bugId,Model model){
 		QualityBug bug = bugService.findById(bugId);

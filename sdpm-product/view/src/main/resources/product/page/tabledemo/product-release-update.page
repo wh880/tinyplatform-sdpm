@@ -10,7 +10,8 @@
     });
 </script>
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/update" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/update" "post" {"class":"","enctype":
+    "multipart/form-data"})
 
 	#tinyInput("text" "releaseId" release.releaseId {"class":"input-text hidden"})
     <div class="infoContent">

@@ -12,23 +12,22 @@
                 dataType:"json",
                 success: function(data){
                     sele.empty();
-                    var em = "<option value='0'>/</option>";
+                    var em = "<option value='0'>/</option>";                   
                     sele.append(em);
+                    var isInit=false;
                     for(var i=0,l=data.length;i<l;i++){
+                    	if(data[i][opKey]==value) isInit=true;
                         var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
                         sele.append(em);
                     }
-                   ## console.log(value);
+                   //console.log(sele.html(),value,opKey);
 					##alert(value);
-                    if(value!=null&&value!=0) {                   	
+                    if(isInit) {                   	
                         sele.val(value).trigger("change");
                     }else {               
-                        sele.val(data[0][opKey]).trigger("change");
+                        sele.val("0").trigger("change");
                     }
-                },
-                error: function(res){
-                  ##  alert("失败");
-                }
+                },               
             });
 
 
@@ -155,8 +154,8 @@
 		                            $("#${sid}").on("change",function(){
 		                            var dId = $("select[name=docLibId]").val();
 		                             if(dId == '1'){
-		                                var pId = $("#${sid}  option:selected").val();	
-		                                alert(pId);
+		                                var pId = $(this).val();	
+		                              
 		                               ## console.log(pId)
 #*		                                if(pId == undefined){
 		                                	var pId = ${doc?.docProduct?:0};	                                	
