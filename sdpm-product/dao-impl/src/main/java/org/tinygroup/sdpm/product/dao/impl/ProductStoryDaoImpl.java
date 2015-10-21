@@ -24,10 +24,8 @@ import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MO
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
-
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
-
 import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
@@ -62,6 +60,7 @@ import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.Value;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
