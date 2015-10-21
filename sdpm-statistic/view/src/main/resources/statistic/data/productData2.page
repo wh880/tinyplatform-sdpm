@@ -11,24 +11,37 @@
             产品
             #end
             #@th()
-            计划
+            项目数
+            #end
+            #@th()
+            已消耗工时
             #end
         #end
         #@tbody()
-            #@tr("text-c")
-            <td>计划1</td>
-            <td>
-                #@div(divStyle="background-color:#fff; border:solid 1px #ddd;width: 180px;")10像素填充，来点背景效果更明显#end
-            </td>
+            #for(p:productmap)
+               #@tr("text-c")
+               <td>${p?.key?.productName}</td>
+               <td>${P?.value?.size()}</td>
+               <td>20</td>
+                #end
             #end
-            #@tr("text-c")
-            <td>计划2</td>
-            <td></td>
-            #end
-            #@tr("text-c")
-            <td>计划3</td>
-            <td></td>
-            #end
+
+##            #@tr("text-c")
+##            <td>计划1</td>
+##            <td>
+##                #@div(divStyle="background-color:#fff; border:solid 1px #ddd;width: 180px;")10像素填充，来点背景效果更明显#end
+##            </td>
+##                <td></td>
+##            #end
+##            #@tr("text-c")
+##            <td>计划2</td>
+##            <td></td>
+##            <td></td>
+##            #end
+##            #@tr("text-c")
+##            <td>计划3</td>
+##            <td></td>
+##            #end
         #end
     #end
 #end

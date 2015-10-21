@@ -20,64 +20,34 @@
     #@thead()
         #@tr("text-c")
             #@th()
-            产品名称
+            编号
             #end
             #@th()
-            产品负责人
+            项目
             #end
             #@th()
-            产品计划
+            总预计
             #end
             #@th()
-            开始日期
+            总消耗
             #end
             #@th()
-            结束日期
+            偏差
             #end
             #@th()
-            草稿
-            #end
-            #@th()
-            激活
-            #end
-            #@th()
-            已变更
-            #end
-            #@th()
-            已关闭
+            偏差率
             #end
         #end
         #@tbody()
+            #for(p:projects)
             #@tr("text-c")
-            <td rowspan="2">测试产品</td>
-            <td rowspan="2">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
+            <td >${p?.projectId}</td>
+            <td >${p?.projectName}</td>
+            <td>${p?.estimate}</td>
+            <td>${p?.consume}</td>
+            <td>${p?.estimate-p?.consume}</td>
+            <td>${((p?.estimate-p?.consume)/p?.estimate)*100}%</td>
             #end
-            #@tr("text-c")
-            <td>计划2</td>
-            <td>2015-09-25</td>
-            <td>2015-09-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
-            #end
-            #@tr("text-c")
-            <td rowspan="1">测试产品3</td>
-            <td rowspan="1">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
             #end
         #end
     #end
