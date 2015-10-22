@@ -22,6 +22,23 @@
             <dictItem key="12" value="计划如此" sort="5"/>
         </dictNodeEntry>
 
+
+         <dictNodeEntry name="proReviewResult" title="评审结果">
+             <dictItem key="0" value="确认通过" sort="1"/>
+             <dictItem key="1" value="撤销变更" sort="2"/>
+             <dictItem key="2" value="有待明确" sort="3"/>
+         </dictNodeEntry>
+
+         <dictNodeEntry name="proCloseReason" title="关闭原因">
+             <dictItem key="0" value="已完成" sort="1"/>
+             <dictItem key="1" value="已细分" sort="2"/>
+             <dictItem key="2" value="重复" sort="3"/>
+             <dictItem key="3" value="延期" sort="4"/>
+             <dictItem key="4" value="不做" sort="5"/>
+             <dictItem key="5" value="已取消" sort="6"/>
+             <dictItem key="6" value="设计如此" sort="7"/>
+         </dictNodeEntry>
+
          <dictNodeEntry name="storySource" title="需求来源">
              <dictItem key="0" value="客户" sort="1"/>
              <dictItem key="1" value="用户" sort="2"/>
