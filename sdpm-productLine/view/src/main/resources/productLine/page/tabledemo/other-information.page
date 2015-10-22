@@ -46,7 +46,11 @@
             #end
             #@tr()
                 #@td()分组白名单#end
-                #@td()${productLine?.productLineWhiteList}#end
+                #@td()
+	                #foreach(white:productLine?.productLineWhiteList.split(','))
+	                	${getDict("whiteList",white)}
+	                #end
+                #end
             #end
             #@tr()
                 #@td()由谁创建#end
@@ -60,12 +64,12 @@
     #end
 #end
 #@div(divClass="infoContent")
-<p class="titleName">拥有产品</p>
-<span>产品1</span>&nbsp&nbsp
-<span>产品2</span>&nbsp&nbsp
-<span>产品3</span>
+	<p class="titleName">拥有产品</p>
+	#foreach(name:lineNameList)
+		<span>${name}</span>&nbsp&nbsp
+	#end
 #end
-
+#*
 #@div(divClass="infoContent")
 <p class="titleName">其他信息</p>
     #@table()
@@ -118,4 +122,4 @@
             #end
         #end
     #end
-#end
+#end*#

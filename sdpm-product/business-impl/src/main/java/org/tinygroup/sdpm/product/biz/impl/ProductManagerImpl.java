@@ -83,5 +83,10 @@ public class ProductManagerImpl implements ProductManager{
 		return productDao.getProductAndLine(product);
 	}
 
+	public List<String> getProductNameByLineId(Integer productLineId) {
+
+		return productDao.getProductNameByLineId(productLineId);
+	}
+
 	
 }
