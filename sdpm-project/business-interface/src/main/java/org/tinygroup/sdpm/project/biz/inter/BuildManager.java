@@ -118,4 +118,10 @@ public interface BuildManager {
      * @return
      */
     public Integer releateBug(Integer storyId,Integer buildId);
+    /**
+     * 关联需求
+     * @param buildId
+     * @return
+     */
+    public Pager<QualityBug> findBuildLegacyBug(int start, int limit, Integer buildId);
 }

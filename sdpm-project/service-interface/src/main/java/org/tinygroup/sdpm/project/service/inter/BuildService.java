@@ -134,5 +134,15 @@ public interface BuildService {
      * @return
      */
     public Pager<QualityBug> findnoBugPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
+    /**
+     * 未关联bug分页
+     * @param id
+     * @param start
+     * @param limit
+     * @param conditions
+     * @param groupOperate
+     * @return
+     */
+    public Pager<QualityBug> findBugLegacyPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
 
     }

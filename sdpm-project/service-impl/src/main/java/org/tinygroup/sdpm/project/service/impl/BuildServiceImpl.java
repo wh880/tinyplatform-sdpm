@@ -88,6 +88,9 @@ public class BuildServiceImpl implements BuildService {
     public Pager<QualityBug> findBugPager(int start, int limit, int id, SearchInfos conditions, String groupOperate) {
         return buildManager.findBuildBug(start,limit,id);
     }
+    public Pager<QualityBug> findBugLegacyPager(int start, int limit, int id, SearchInfos conditions, String groupOperate) {
+        return buildManager.findBuildLegacyBug(start,limit,id);
+    }
     public Pager<QualityBug> findnoBugPager(int start, int limit, int id, SearchInfos conditions, String groupOperate) {
         return buildManager.findnoBuildBug(start,limit,id);
     }

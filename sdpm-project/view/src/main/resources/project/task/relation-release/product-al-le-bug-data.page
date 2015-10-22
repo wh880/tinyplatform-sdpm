@@ -9,8 +9,8 @@
     #@td()${bug?.bugId} #end
     #@td()${bug?.priority} #end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/bugInfo.page">${bug?.bugTitle}</a>#end
-    #@td()${bug?.bugStatus}#end
-    #@td()${bug?.bugOpenedBy}#end
+    #@td()${getDict("bugStatus",bug?.bugStatus)}#end
+    #@td()${bug?.bugOpenedBy?UserUtils.getUserById(bug?.bugOpenedBy)?.orgUserRealName:""}#end
     #@td()${bug?.bugOpenedDate?formatDate(bug?.bugOpenedDate,'yyyy-MM-dd'):""}#end
 
 #end
