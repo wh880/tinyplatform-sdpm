@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -74,19 +75,7 @@ public class TestTaskAction extends BaseController {
 	
 	@RequestMapping("")
 	public String form(HttpServletRequest request,String get,Model model){
-		List<Product> list = (List<Product>) request.getSession().getAttribute("qualityProductList");
 		String queryString = request.getQueryString();
-		if(list == null|| list.size()==0){
-			list = productService.findProductList(new Product(),"productId","desc");
-			request.getSession().setAttribute("qualityProductList",list);
-		}
-		if(null==request.getSession().getAttribute("qualityProductId")||""==request.getSession().getAttribute("qualityProductId")){
-			request.getSession().setAttribute("qualityProductId",list.size()>0?list.get(0).getProductId():0);
-		}else{
-			request.getSession().removeAttribute("qualityProductId");
-			request.getSession().setAttribute("qualityProductId",list.size()>0?list.get(0).getProductId():0);
-		}
-
 		if(queryString!=null&&!queryString.contains("status")){
 			if(!queryString.contains("currentPageId"))queryString = queryString+"&currentPageId=5";
 			return "redirect:/a/quality/version?status=tvernotest&"+queryString;
@@ -98,14 +87,14 @@ public class TestTaskAction extends BaseController {
 	}
 	
 	@RequestMapping("/findPager")
-	public String findPager(Integer start, Integer limit, SearchInfos infos, String groupOperate, String order, String ordertype, String status, QualityTestTask testtask, Model model, HttpServletRequest request){
+	public String findPager(@CookieValue Integer qualityProductId,Integer start, Integer limit, SearchInfos infos, String groupOperate, String order, String ordertype, String status, QualityTestTask testtask, Model model, HttpServletRequest request){
 		testtask.setDeleted(0);
 		boolean asc = true;
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
 		String conditions = mergeCondition(getStatusCondition(status),SqlUtil.toSql(infos.getInfos(),groupOperate));
-		testtask.setProductId((Integer) request.getSession().getAttribute("qualityProductId"));
+		testtask.setProductId(qualityProductId);
 		Pager<QualityTestTask> verpager = testTaskService.findTestTaskPager(start, limit, testtask,conditions, order, asc);
 		model.addAttribute("verPager",verpager);
 		return "/testManagement/data/versionData.pagelet";
@@ -147,10 +136,10 @@ public class TestTaskAction extends BaseController {
 	}
 	
 	@RequestMapping("/add")
-	public String add(Model model,HttpServletRequest request){
+	public String add(@CookieValue Integer qualityProductId,Model model,HttpServletRequest request){
 		List<Project> projects = projectService.findProjectList(null,null,null);
 		ProjectBuild build = new ProjectBuild();
-		build.setBuildProduct((Integer) request.getSession().getAttribute("qualityProductId"));
+		build.setBuildProduct(qualityProductId);
 		List<ProjectBuild> builds = buildService.findListBuild(build);
 		List<OrgUser> users = userService.findUserList(null);
 		model.addAttribute("projectList",projects);
@@ -174,8 +163,16 @@ public class TestTaskAction extends BaseController {
 	}
 	@ResponseBody
 	@RequestMapping("/makeLink")
-	public Map makeLink(Integer[] ids,Integer[] ves, Model model){
+	public Map makeLink(Integer testversionId, Integer[] ids,Integer[] ves){
 
+		for(int i = 0; i<ids.length; i++){
+			QualityTestRun run = new QualityTestRun();
+			run.setCaseId(ids[i]);
+			run.setCaseVersion(ves[i]);
+			run.setTestRunStatus("1");
+			run.setTaskId(testversionId);
+			testRunService.add(run);
+		}
 		Map<String,String> result = new HashMap<String, String>();
 		result.put("status","y");
 		return result;
@@ -200,9 +197,9 @@ public class TestTaskAction extends BaseController {
 	}
 
 	@RequestMapping("/toEdit")
-	public String edit(Integer testversionId,Model model, HttpServletRequest request){
+	public String edit(@CookieValue Integer qualityProductId,Integer testversionId,Model model, HttpServletRequest request){
 		QualityTestTask testTask = testTaskService.findById(testversionId);
-		List<ProjectProduct> projectProducts = projectProductService.findProjects((Integer) request.getSession().getAttribute("qualityProductId"));
+		List<ProjectProduct> projectProducts = projectProductService.findProjects(qualityProductId);
 		List<Integer> ids = new ArrayList<Integer>();
 		for(ProjectProduct projectProduct : projectProducts){
 			ids.add(projectProduct.getProjectId());
@@ -244,6 +241,21 @@ public class TestTaskAction extends BaseController {
 		testTask.setTestversionId(testversionId);
 		testTask.setDeleted(1);
 		testTaskService.updateTestTask(testTask);
+		Map<String,String> result = new HashMap<String, String>();
+		result.put("status","y");
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping("/ajax/batchDelete")
+	public Map batchDelete(Integer[] ids){
+
+		for(int id : ids){
+			QualityTestTask testTask = new QualityTestTask();
+			testTask.setTestversionId(id);
+			testTask.setDeleted(1);
+			testTaskService.updateTestTask(testTask);
+		}
 		Map<String,String> result = new HashMap<String, String>();
 		result.put("status","y");
 		return result;

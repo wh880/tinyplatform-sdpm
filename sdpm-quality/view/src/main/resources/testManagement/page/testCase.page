@@ -4,10 +4,10 @@
 	#@toggleLeft({"class":"aclass"})
 		#@settoggleLeftTitle()${qualityProduct?.productName}#end
 			#@settoggleLeftBody("treeLeftbox")
-				#@zTreeList(call("link",adminPath+"/system/module/tree?moduleType=story&moduleRoot="+qualityProduct?.productId))
+				#@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=case&moduleRoot="+qualityProduct?.productId))
 					#setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
 					#zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/testCase?status="+status+"&currentPageId=5")
-					#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=story&moduleRoot="+qualityProduct?.productId)
+					#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=case&moduleRoot="+qualityProduct?.productId)
 					#zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
 					#zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
 				#end

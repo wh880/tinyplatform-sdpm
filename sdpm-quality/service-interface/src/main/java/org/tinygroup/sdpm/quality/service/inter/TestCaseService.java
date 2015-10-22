@@ -62,4 +62,8 @@ public interface TestCaseService {
 	
 	Pager<QualityTestCase> findTestCasePager(Integer start,Integer limit,QualityTestCase testcase, String statusCondition, SearchInfos conditions,
             String groupOperate,String columnName,boolean asc);
+
+
+	Pager<QualityTestCase> findStoryChangedCase(Integer start,Integer limit,QualityTestCase testcase, String condition,String columnName,boolean asc);
+
 }

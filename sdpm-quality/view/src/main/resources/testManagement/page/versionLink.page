@@ -8,9 +8,10 @@
 			 var checklist = [];
 			 var versions = [];
 			 $("#${tableId} input[name=idCheck]:checked").each(function (e) {
-			    var str = $(this).val().split(",");
-				  checklist.push(str[0]);
-				  versions.push(str[1]);
+			   // var str = $(this).val().split(",");
+				  checklist.push($(this).val());
+				  var v_val=$(this).closest("tr").find("select:first").val();
+				  versions.push(v_val);
 			 });
 			 if(checklist.length==0){
 				layer.msg("请选择记录")
@@ -18,21 +19,12 @@
 			 }
 			 $.ajax({
 				  url: "${doActionUrl}",
-				  data: {ids: checklist.join(","),ves:versions.join(","), action: "${operation}"#mapToJson(map)},
+				  data: {ids: checklist,ves:versions, action: "${operation}"#mapToJson(map)},
 				  dataType: "json",
+				  traditional:true,
 				  success: function (data) {
 						if (data.status=="success"||data.status=="y") {
-							 //console.log(data);
-							 if(data.url){
-								 var url=data.url;
-								 if(url.indexOf("http://")!=0){
-									url=contextPath+url;
-								 }
-								 window.location.href=url;
-							 }else{
-								layer.msg(data.info,2, 1);
-								$("#${tableId}").trigger("initnav");
-							 }
+							  location.href = "${TINY_CONTEXT_PATH+adminPath+"/quality/version/taskToCase?testversionId="+testversionId+"&currentPageId=5&status=tverallcase"}";
 						}else{
 							 layer.msg(data.info);
 						}
@@ -93,7 +85,7 @@
 						 onclick="selectAllNullorReserve('idCheck','反选');" />
 						<div class="col-0">&nbsp&nbsp</div>
 						<div class="dropdown col-3">
-							#@mulOperation("link" TINY_CONTEXT_PATH+adminPath+"/quality/version/makeLink")
+							#@mulOperation("link" TINY_CONTEXT_PATH+adminPath+"/quality/version/makeLink?testversionId="+testversionId)
 							<div><input type="button" value="保存" class="btn btn-default btn-primary" /></div>
 							#end
 						</div>

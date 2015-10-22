@@ -28,5 +28,7 @@ public interface TestRunManager {
 	 */
 	int[] batchUpdate(List<QualityTestRun> testruns);
 
+	QualityTestRun add(QualityTestRun run);
+
 	Pager<QualityTestRun> findPager(Integer start, Integer limit, QualityTestRun testRun,String condition, String sortName, boolean asc);
 }
