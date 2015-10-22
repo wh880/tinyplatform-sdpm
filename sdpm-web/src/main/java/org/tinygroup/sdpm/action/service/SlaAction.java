@@ -10,9 +10,7 @@ import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
@@ -183,32 +181,6 @@ public class SlaAction extends BaseController {
         return map;
     }
 
-    @ResponseBody
-    @RequestMapping("/treeData")
-    public List data(String check) {
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        List<ProductAndLine> productLists = productService.getProductAndLine(new Product());
-        List<ProductLine> productLines = productLineService.findList(new ProductLine());
-
-        for (ProductLine d : productLines) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("id", "p" + d.getProductLineId());
-            map.put("pId", 0);
-            map.put("name", d.getProductLineName());
-            map.put("open", true);
-            map.put("clickAble", false);
-            list.add(map);
-        }
-        for (ProductAndLine d : productLists) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("id", d.getProductId());
-            map.put("pId", "p" + d.getProductLineId());
-            map.put("name", d.getProductName());
-            map.put("open", true);
-            list.add(map);
-        }
-        return list;
-    }
 
     /*sla批量删除*/
     @ResponseBody
