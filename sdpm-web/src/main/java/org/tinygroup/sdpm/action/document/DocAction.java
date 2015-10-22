@@ -573,4 +573,10 @@ public class DocAction extends BaseController{
 
 		return list;
 	}
+	
+	//测试页面专用
+	@RequestMapping("/test")
+	public String test() {
+		return "testManagement/page/tabledemo/batchExecute.page";
+	}
 }

@@ -17,7 +17,7 @@
         			#@td()#end
         			#@td()#end
         			#@td()
-	        			#@skinMinimal("mt-20")
+	        			#@skinMinimal("mt-1")
 	    					#labelRadio(rId="aaa" rName="caseStatus" rChecked="checked" rValue="1" labelText=getDict("caseStatus","1") )
 	    					#labelRadio(rId="bbb" rName="caseStatus" rValue="2" labelText=getDict("caseStatus","2"))   								
 	    					#labelRadio(rId="ccc" rName="caseStatus" rValue="3" labelText=getDict("caseStatus","3"))						
@@ -25,6 +25,13 @@
 					#end
         		#end
         	#end
+        	#@tr("text-c")
+        		<td colspan="5">
+        		<center>
+        			<button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+        			</center>
+        			</td>
+        	#end        	
         #end
     #end
 #end
