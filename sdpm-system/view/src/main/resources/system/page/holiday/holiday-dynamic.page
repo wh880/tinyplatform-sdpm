@@ -1,8 +1,14 @@
-<div class="panel">
+
+##	#set(viewpagePath="/system/page/holidayHistory.page",viewpageModalId="holidayHistoryModal",viewpageModal="#holidayHistory")
+    <div class="panel">
 	<div class="panel-heading panelNobr">
 		<span class="panel-title"><i class="panel-title-icon fa fa-tasks"></i>最新动态</span>
 		<div class="panel-heading-controls">
 ##			<a href="${TINY_CONTEXT_PATH}/organization/active.page">更多&gt&gt</a>
+##				#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal
+##                                     m.icon m.name "500" "300"adminPath+m.href +"?dictId="+d?.dictId"ml-5")
+	       #@aModal("#myModal" "测试标题" "900" "620" "" "/system/page/holiday/holidayHistory.pagelet")更多#end
+
 		</div>
 	</div>
 	<!-- Without vertical padding -->
@@ -10,17 +16,10 @@
 		<table class="table  table-striped "> 
 			#for(a:action)
 	
-#*				<tr>
-					<td>9月09日 14:39</td> 
-					<td>admin </td>
-					<td>添加假期</td>
-					<td>
-						<a href="#"> 国庆节</a>
-					</td>
-	            </tr>*#
+
 	            <tr>
 					<td  width="100%">
-						${formatDate(a?.holidayHistoryDate,"yyyy-MM-dd hh:mm:ss")}, ${a?.holidayHistoryActor} 
+						${formatDate(a?.holidayHistoryDate,"yyyy-MM-dd hh:mm:ss")}, ${UserUtils.getUserById(a?.holidayHistoryActor).orgUserRealName}
 						#if(a?.holidayHistoryAction=="deleted")
 						<em>删除了</em> 假期 
 						  #elseif(a?.holidayHistoryAction=="opened")

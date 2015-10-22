@@ -21,6 +21,8 @@ import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,6 +56,14 @@ public class BuildAction extends BaseController {
     @Autowired
     private StoryService storyService;
 
+    @RequestMapping("/productBuildList")
+    public String productBuildList(ProjectBuild build, Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
+
+        boolean asc = "asc".equals(ordertype) ? true : false;
+        Pager<ProjectBuild> pager = buildService.findPagerBuild(build, start, limit, order, asc);
+        model.addAttribute("buildPager", pager);
+        return "project/version/tableData.pagelet";
+    }
 
 
     @RequestMapping("/find")
@@ -71,12 +81,15 @@ public class BuildAction extends BaseController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(ProjectBuild build, Model model) {
+    public String save(ProjectBuild build, Model model,String commnet) {
         if (build.getBuildId() == null) {
             buildService.add(build);
         } else {
             buildService.updateBuild(build);
         }
+        LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD, LogUtil.LogAction.EDITED, build.getBuildId().toString(), UserUtils.getUserId(),
+                null, buildService.findBuild(build.getBuildId()).getBuildProject().toString(),
+                buildService.findBuild(build.getBuildId()),null, commnet);
         model.addAttribute("build", build);
         return "project/version/index.page";
     }
@@ -91,33 +104,44 @@ public class BuildAction extends BaseController {
         List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
         model.addAttribute("teamList", teamList);
         model.addAttribute("prodcutList", list);
-        if (buildId != null) {
+        if (buildId != null&&buildId!=0) {
             ProjectBuild build = buildService.findBuild(buildId);
             model.addAttribute("build", build);
 
+        }else{
+            model.addAttribute("build", null);
         }
+
+
         return "project/version/edit.page";
     }
 
 
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public String editSave(ProjectBuild build, Model model) {
+    public String editSave(ProjectBuild build, Model model,String commnet) {
         if (build.getBuildId() == null) {
             buildService.add(build);
         } else {
             buildService.updateBuild(build);
         }
+        LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD, LogUtil.LogAction.EDITED, build.getBuildId().toString(), UserUtils.getUserId(),
+                null, buildService.findBuild(build.getBuildId()).getBuildProject().toString(),
+                buildService.findBuild(build.getBuildId()),null, commnet);
         model.addAttribute("build", build);
         return "project/version/index.page";
     }
 
     @RequestMapping(value = "/addsave", method = RequestMethod.POST)
-    public String addSave(ProjectBuild build, Model model) {
+    public String addSave(ProjectBuild build, Model model,String commnet) {
         if (build.getBuildId() == null) {
+            build.setBuildBuilder(UserUtils.getUserId());
             buildService.add(build);
         } else {
             buildService.updateBuild(build);
         }
+        LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD, LogUtil.LogAction.EDITED, build.getBuildId().toString(), UserUtils.getUserId(),
+                null, buildService.findBuild(build.getBuildId()).getBuildProject().toString(),
+                buildService.findBuild(build.getBuildId()),null, commnet);
         model.addAttribute("build", build);
         return "project/version/index.page";
     }
@@ -177,20 +201,23 @@ public class BuildAction extends BaseController {
     }
 
     @RequestMapping("/add")
-    public String add(HttpServletRequest request, Integer buildId, Model model) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
-        SystemModule module = new SystemModule();
-        module.setModuleType("project");
-        module.setModuleRoot(projectId);
-        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
-        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
-        model.addAttribute("teamList", teamList);
-        model.addAttribute("prodcutList", list);
-        if (buildId != null) {
-            ProjectBuild build = buildService.findBuild(buildId);
-            model.addAttribute("build", build);
-
-        }
+    public String add() {
+//        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+//        SystemModule module = new SystemModule();
+//        module.setModuleType("project");
+//        module.setModuleRoot(projectId);
+//        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
+//        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
+//        model.addAttribute("teamList", teamList);
+//        model.addAttribute("prodcutList", list);
+//        if (buildId != null) {
+//            ProjectBuild build = buildService.findBuild(buildId);
+//            model.addAttribute("build", build);
+//
+//        }
+//        LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD, LogUtil.LogAction.EDITED, buildId.toString(), UserUtils.getUserId(),
+//                null, buildService.findBuild(buildId).getBuildProject().toString(),
+//                buildService.findBuild(buildId),null, commnet);
         return "project/version/add.page";
     }
 
@@ -378,19 +405,6 @@ public class BuildAction extends BaseController {
 
         return list;
     }
-
-
-    //这是产品线调用的别动
-    @RequestMapping("/productBuildList")
-    public String productBuildList(ProjectBuild build, Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
-
-        boolean asc = "asc".equals(ordertype) ? true : false;
-        Pager<ProjectBuild> pager = buildService.findPagerBuild(build, start, limit, order, asc);
-        model.addAttribute("buildPager", pager);
-        return "project/version/tableData.pagelet";
-    }
-
-
 
 
 }

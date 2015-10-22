@@ -8,4 +8,11 @@
     </parent>
     <artifactId>sdpm-statistic-service-inter</artifactId>
     <name>sdpm-statistic-service-inter</name>
+    <dependencies>
+		    <dependency>
+		     <groupId>org.tinygroup</groupId>
+             <artifactId>sdpm-statistic-business-inter</artifactId>
+             <version>${project.version}</version>
+		    </dependency>
+    </dependencies>
 </project>

@@ -37,6 +37,10 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     @Autowired
     private BuildManager buildManager;
 
+    public int[] updateLink(List<ProjectStory> projectStoryList) {
+        return projectStoryManager.updaeLink(projectStoryList);
+    }
+
     public List<Project> findProjectsByStory(Integer storyId) {
         if (storyId == null) {
             return null;

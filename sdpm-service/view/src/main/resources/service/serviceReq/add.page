@@ -67,7 +67,7 @@
                         <script type="text/javascript">
                             $("#${sid}").on("change", function () {
                                 var pId = $(this).val();
-                                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/service/request/ajax/moduleByProduct?productId=" + pId, ${request?.moduleId ? : 0
+                                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/service/request/ajax/moduleByProduct?productId=" + pId, ${request?.moduleId ? request.moduleId : 0
                             });
                             })
                         </script>
