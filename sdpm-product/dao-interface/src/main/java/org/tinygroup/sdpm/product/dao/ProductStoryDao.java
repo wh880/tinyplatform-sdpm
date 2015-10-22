@@ -59,5 +59,7 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
      * @return
      */
 	int countStatus(int productId,int status);
+	
+	ProductStory getReleteStoryByKey(Integer pk);
 
 }

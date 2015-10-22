@@ -48,7 +48,7 @@ public class StoryManagerImpl implements StoryManager {
 
     public ProductStory find(Integer storyId) {
 
-        return productStoryDao.getByKey(storyId);
+        return productStoryDao.getReleteStoryByKey(storyId);
     }
 
     public int[] updateBatch(List<ProductStory> stories) {

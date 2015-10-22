@@ -61,6 +61,7 @@ import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.base.Value;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
@@ -223,6 +224,24 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		}
 		
 	}
+	
+	public ProductStory getReleteStoryByKey(Integer pk) {
+		try {
+			return getDslTemplate().getByKey(pk, ProductStory.class, new SelectGenerateCallback<Serializable>() {
+				@SuppressWarnings("rawtypes")
+				public Select generate(Serializable t) {
+				
+				return select(FragmentSql.fragmentSelect("product_story.*,p.product_name as productName,pl.plan_name as planName,m.module_title as moduleTitle"))
+					.from(FragmentSql.fragmentFrom("product_story left join product p on p.product_id = product_story.product_id left join product_plan pl on pl.plan_id = product_story.plan_id left join system_module m on m.module_id = product_story.module_id"))
+					.where(PRODUCT_STORYTABLE.STORY_ID.eq(t));
+					}
+				});
+		} catch (EmptyResultDataAccessException e) {
+
+			return null;
+		}
+		
+	}
 
 	public List<ProductStory> query(ProductStory productStory ,final OrderBy... orderArgs) {
 		if(productStory==null){
@@ -277,7 +296,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		if (productStory == null) {
 			productStory = new ProductStory();
 		}
-		return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
+		return getDslTemplate().queryPager(start>0?start:0, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
 			public Select generate(ProductStory t) {
 				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("product_story.*,p.product_name as productName,pa.plan_name as planName,o.org_user_account as storyOpenedName,o2.org_user_account as storyAssignedName")).
 						from(FragmentSelectItemSql.fragmentFrom("product_story left join product p on p.product_id = product_story.product_id left join product_plan pa on pa.plan_id = product_story.plan_id left join org_user o on o.org_user_id = product_story.story_opened_by left join org_user o2 on o2.org_user_id = product_story.story_assigned_to"))
@@ -490,7 +509,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		if (productStory == null) {
 			productStory = new ProductStory();
 		}
-		return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
+		return getDslTemplate().queryPager(start>0?start:0, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
 
 			public Select generate(ProductStory t) {
 				Select select = MysqlSelect.selectFrom(PRODUCT_STORYTABLE).where(and(
@@ -540,7 +559,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		if (productStory == null) {
 			productStory = new ProductStory();
 		}
-		return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
+		return getDslTemplate().queryPager(start>0?start:0, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
 			public Select generate(ProductStory t) {
 				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("product_story.*,p.product_name as productName,pa.plan_name as planName,o.org_user_account as storyOpenedName,o2.org_user_account as storyAssignedName")).
 						from(FragmentSelectItemSql.fragmentFrom("product_story left join product p on p.product_id = product_story.product_id left join product_plan pa on pa.plan_id = product_story.plan_id left join org_user o on o.org_user_id = product_story.story_opened_by left join org_user o2 on o2.org_user_id = product_story.story_assigned_to"))

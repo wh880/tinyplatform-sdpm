@@ -191,7 +191,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		if(product==null){
 			product=new Product();
 		}
-		return getDslTemplate().queryPager(start, limit, product, false, new SelectGenerateCallback<Product>() {
+		return getDslTemplate().queryPager(start>0?start:0, limit, product, false, new SelectGenerateCallback<Product>() {
 
 			public Select generate(Product t) {
 				Select select = MysqlSelect.selectFrom(PRODUCTTABLE).where(
