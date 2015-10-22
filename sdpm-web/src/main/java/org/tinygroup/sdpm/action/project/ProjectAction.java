@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -48,6 +50,8 @@ public class ProjectAction extends BaseController {
     private ProjectProductService projectProductService;
     @Autowired
     private BurnService burnService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/find")
     public String find(Integer projectId, Model model) {
@@ -269,6 +273,23 @@ public class ProjectAction extends BaseController {
         model.addAttribute("project", project);
         model.addAttribute("productlist", productlist);
         return "project/survey/basicInformation.pagelet";
+    }
+
+    @RequestMapping("/findManager")
+    public String findManager(String projectId, Model model) {
+        Project project = projectService.findById(Integer.parseInt(projectId));
+        //项目负责人
+        OrgUser projectPm = userService.findUser(project.getProjectPm());
+        //测试负责人
+        OrgUser productQd = userService.findUser(project.getProjectQd());
+        //发布负责人
+        OrgUser productRd = userService.findUser(project.getProjectRd());
+
+        model.addAttribute("projectPm", projectPm);
+        model.addAttribute("productQd", productQd);
+        model.addAttribute("productRd", productRd);
+
+        return "organization/others/projectUserBaseInfo.pagelet";
     }
 
 }
