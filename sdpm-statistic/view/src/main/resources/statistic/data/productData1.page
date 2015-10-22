@@ -43,7 +43,6 @@
                  <td rowspan=${p?.value.size()+1}> ${p?.key?.productName} </td>
                  <td rowspan=${p?.value.size()+1}>${p?.key?.productCreatedBy}</td>
                     #if(!p.value)
-
                             <td></td>
                             <td></td>
                             <td></td>
@@ -51,11 +50,9 @@
                             <td></td>
                             <td></td>
                             <td></td>
-
                     #else
                      #for(pl:p?.value)
                         #@tr("text-c")
-
                              <td>${pl?.planName}</td>
                             <td>${formatDate(pl?.planBeginDate,"yyyy-MM-dd")}</td>
                             <td>${formatDate(pl?.planEndDate,"yyyy-MM-dd")}</td>

@@ -28,7 +28,6 @@ public class RoleUserAction extends BaseController {
 
     /**
      * 显示角色的用户
-     *
      * @param id
      * @param model
      * @return
@@ -37,7 +36,6 @@ public class RoleUserAction extends BaseController {
     @RequestMapping("/show")
     public String showUser(Integer id, Model model) {
         List<OrgUser> userList = userService.findUserList(new OrgUser());
-        // Integer roleId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_roleId"));
         List<OrgRoleUser> linkList = roleUserService.findUserByRoleId(id);
         String linked = "";
         for (OrgRoleUser p : linkList) {
@@ -57,12 +55,11 @@ public class RoleUserAction extends BaseController {
      *
      * @param id
      * @param array
-     * @param model
      * @return
      */
     @RequiresPermissions("org-privilege-user")
     @RequestMapping("/save")
-    public String save(Integer id, String[] array, Model model) {
+    public String save(Integer id, String[] array) {
         roleUserService.addRoleUser(array, id);
         return "redirect:" + adminPath + "/org/privilege/list";
     }

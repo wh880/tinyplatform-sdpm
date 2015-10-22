@@ -51,8 +51,7 @@
 #end
 #macro labelRadio1(rId rName rValue rClass radioOther labelText)
 	#@radioBox()
-		#radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)
-		#@label(ckId)${labelText}#end
+		<label>#radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)${labelText}</label>
 	#end
 #end
 #include("doc-tab.page")
@@ -65,7 +64,7 @@
 			 #@elementItem()
 					#@colLabel()所属项目#end
 					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
+					#@div(divClass="col-6")
 						
 					#@Tselect2F()
 	                   		#@Tselect2Body("docProject" doc?.docProject?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -105,7 +104,7 @@
     		 #@elementItem()
 					#@colLabel()所属产品#end
 					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
+					#@div(divClass="col-6")
 					#@Tselect2F()
 	                   		#@Tselect2Body("docProduct" doc?.docProduct {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 								<option value="0">/</option>
@@ -121,7 +120,7 @@
 			#@elementItem()
 					#@colLabel()所属分类#end
 					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
+					#@div(divClass="col-6")
 					#@Tselect2F()
 	                   	#@Tselect2Body("docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="0">/</option>	                       	            
@@ -144,21 +143,19 @@
 							
 			#@elementItem()
 					#@colLabel()<span class="c-red">*</span>文档标题#end
-					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
-					#tinyInput("text" "docTitle" "" {"datatype":"*1-16","nullmsg":"标题不能为空！","placeholder":"1~16个字符，字母/中文/数字/下划线","class":"input-text"})
-					
-					
+					#@formControlDiv("col-4")
+					#@div(divClass="col-12")
+						#tinyInput("text" "docTitle" ""{"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16","nullmsg":"标题不能为空！","class":"input-text"})
 					#end
-					#end	
+					#end
 					#@validateDiv("col-2")#end
-
 				#end
+				
 			#@elementItem(elementId="urlBox" eleItemClass="hidden")
-					#@colLabel()<span class="c-red">*</span>文档URL#end
+					#@colLabel()文档URL#end
 					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
-					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*4-16","nullmsg":"链接不能为空！","id":"docUrl","class":"input-text","ignore":"ignore"})
+					#@div(divClass="col-6")
+					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","nullmsg":"链接不能为空！","id":"docUrl","class":"input-text"})
 					#end
 					#end
 					#@validateDiv("col-2")#end
@@ -167,7 +164,7 @@
 			#@elementItem()	
 					#@colLabel()关键字#end
 					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
+					#@div(divClass="col-6")
 					#tinyInput("text" "docKeywords" ""{"placeholder":"","id":"docKeywords","class":"input-text"})
 					#end
 					#end

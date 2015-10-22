@@ -195,12 +195,25 @@
             <artifactId>sdpm-project-service-wrapper</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+          <!-- statistic -->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-statistic-view</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-statistic-service-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-statistic-service-wrapper</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+      
+        
+        <!-- statistic end -->
 
         <!--spring版本-->
         <dependency>
