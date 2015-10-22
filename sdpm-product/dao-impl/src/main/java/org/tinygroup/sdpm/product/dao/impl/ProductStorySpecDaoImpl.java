@@ -166,7 +166,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 		if(productStorySpec==null){
 			productStorySpec=new ProductStorySpec();
 		}
-		return getDslTemplate().queryPager(start, limit, productStorySpec, false, new SelectGenerateCallback<ProductStorySpec>() {
+		return getDslTemplate().queryPager(start>0?start:0, limit, productStorySpec, false, new SelectGenerateCallback<ProductStorySpec>() {
 
 			public Select generate(ProductStorySpec t) {
 				Select select = MysqlSelect.selectFrom(PRODUCT_STORY_SPECTABLE).where(

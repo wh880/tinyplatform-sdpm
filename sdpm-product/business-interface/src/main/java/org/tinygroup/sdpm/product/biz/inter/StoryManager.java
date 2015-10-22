@@ -1,13 +1,13 @@
 package org.tinygroup.sdpm.product.biz.inter;
 
-import java.util.List;
-import java.util.Map;
-
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
+import java.util.Map;
 
 public interface StoryManager {
 	
@@ -111,6 +111,8 @@ public interface StoryManager {
      * @return
      */
 	int countStatus(int productId,int status);
+
+	List<ProductStory> findProductNameByStoryId(Integer storyId);
 	
 	
 }

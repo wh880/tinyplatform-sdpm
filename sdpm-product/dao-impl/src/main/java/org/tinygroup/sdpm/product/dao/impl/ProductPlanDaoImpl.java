@@ -200,7 +200,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 		if(productPlan==null){
 			productPlan=new ProductPlan();
 		}
-		return getDslTemplate().queryPager(start, limit, productPlan, false, new SelectGenerateCallback<ProductPlan>() {
+		return getDslTemplate().queryPager(start>0?start:0, limit, productPlan, false, new SelectGenerateCallback<ProductPlan>() {
 
 			public Select generate(ProductPlan t) {
 				Select select = MysqlSelect.selectFrom(PRODUCT_PLANTABLE).where(

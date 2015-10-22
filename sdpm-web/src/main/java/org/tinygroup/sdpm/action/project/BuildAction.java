@@ -54,15 +54,6 @@ public class BuildAction extends BaseController {
     @Autowired
     private StoryService storyService;
 
-    @RequestMapping("/productBuildList")
-    public  String productBuildList(ProjectBuild build,Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request){
-
-        boolean asc = "asc".equals(ordertype) ? true : false;
-        Pager<ProjectBuild> pager =  buildService.findPagerBuild(build, start, limit, order, asc);
-        model.addAttribute("buildPager", pager);
-        return "project/version/tableData.pagelet";
-    }
-
 
 
     @RequestMapping("/find")
@@ -387,6 +378,19 @@ public class BuildAction extends BaseController {
 
         return list;
     }
+
+
+    //这是产品线调用的别动
+    @RequestMapping("/productBuildList")
+    public String productBuildList(ProjectBuild build, Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
+
+        boolean asc = "asc".equals(ordertype) ? true : false;
+        Pager<ProjectBuild> pager = buildService.findPagerBuild(build, start, limit, order, asc);
+        model.addAttribute("buildPager", pager);
+        return "project/version/tableData.pagelet";
+    }
+
+
 
 
 }
