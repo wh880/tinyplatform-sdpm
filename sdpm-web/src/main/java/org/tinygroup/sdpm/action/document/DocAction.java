@@ -462,7 +462,7 @@ public class DocAction extends BaseController{
 				list1.add(list.get(j).getProductId());
 			}
 		}
-		List<Product> productList = productService.findProductList(list1.toArray(i));
+		List<Product> productList = productService.findProductListByIds(list1.toArray(i));
 		return productList;
 	}
 	

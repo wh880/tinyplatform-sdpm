@@ -171,12 +171,16 @@
     </menu>
     <menu id="survey" parent-id="project" name="概况" href="/project/manage/survey/index" icon="" sort="1" isShow="1">
         <menu id="survey-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
-            <menu id="pro-survey-delay"  sort="15" isShow="1"
-                  scope="pro-surveymenu-op"/>
-            <menu id="pro-survey-hangon" sort="10" isShow="1"
-                  scope="pro-surveymenu-op"/>
-            <menu id="pro-survey-finish"  sort="10" isShow="1"
-                  scope="pro-surveymenu-op"/>
+            <menu id="pro-survey-delay" name="延期" href="/project/delay"
+                  sort="40" isShow="1" scope="pro-surveymenu-op" icon="icon-calendar"/>
+            <menu id="pro-survey-hangUp" name="挂起" href="/project/hangUp"
+                  sort="30" isShow="1" scope="pro-surveymenu-op" icon="icon-pause"/>
+            <menu id="pro-survey-finish" name="结束" href="/project/finish"
+                  sort="10" isShow="1" scope="pro-surveymenu-op" icon="icon-off"/>
+            <menu id="pro-survey-doing" name="开始" href="/project/start"
+                  sort="50" isShow="1" scope="pro-surveymenu-op" icon="icon-play"/>
+            <menu id="pro-survey-active" name="激活" href="/project/doing"
+                  sort="20" isShow="1" scope="pro-surveymenu-op" icon="icon-play"/>
         </menu>
         <menu id="survey-menu2" name="任务菜单2" href="/project/manage/survey/index" icon="" sort="1" isShow="1">
             <menu id="pro-survey-edit" name="编辑" href="/project/edit" icon="icon-pencil" sort="8" isShow="1"

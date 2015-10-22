@@ -1,37 +1,6 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/delaysave" "post" {"class":"test"})
+#@tinyForm("thisform"  TINY_CONTEXT_PATH+adminPath+"/project/finish" "post" {"class":""})
     #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
-    #@elementItem()
-        #@colLabel()起始日期#end
-        #@formControlDiv("col-8")
-            #@tinyDateInput(
-                "projectBegin" formatDate(project?.projectBegin,
-                "YYYY-MM-dd") "YYYY-MM-dd" {"style":"width:140px","datatype":"*","nullmsg":
-            "日期不能为空","placeholder":"选择日期"})#end
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()结束日期#end
-        #@formControlDiv("col-8")
-            #@tinyDateInput(
-                "projectEnd" formatDate(project?.projectEnd,
-                "YYYY-MM-dd") "YYYY-MM-dd" {"style":"width:140px","datatype":"*","nullmsg":"日期不能为空",
-            "placeholder":"选择日期"})#end
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()可用工作日#end
-        #@formControlDiv("col-2")
-        <div class="input-group">
-            <input name="projectDays" value=${project?.projectDays} type="text" class="form-control" placeholder=""
-                   aria-describedby="basic-addon2" datatype="n">
-            <span class="input-group-addon" id="basic-addon2">天</span>
-        </div>
-
-        #end
-        #@validateDiv("col-10")#end
-    #end
+    #hiddenInput(hiddenInputName="projectName" hiddenInputValue=project?.projectName)
     #@elementItem()
         #@colLabel()备注：#end
         #@formControlDiv("col-8")
@@ -52,9 +21,6 @@
         <div class="col-5"></div>
     </div>
     #end
-<div>
-    #history(adminPath+"/system/action/ajax/history?actionObjectType=project&actionObjectId="+project?.projectId)
-</div>
 #end
 
 <script>

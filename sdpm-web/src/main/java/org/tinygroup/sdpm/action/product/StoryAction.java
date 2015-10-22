@@ -246,7 +246,6 @@ public class StoryAction extends BaseController {
     public String find(Integer storyId, @PathVariable(value = "forwordPager") String forwordPager, Model model, SystemAction systemAction) {
 
         ProductStory productStory = storyService.findStory(storyId);
-        
         ProductStorySpec storySpec = new ProductStorySpec();
         storySpec.setStoryId(storyId);
         Pager<ProductStorySpec> pagerSpec = storySpecService.findStorySpecPager(0, 1, storySpec, "storyVersion", "desc");

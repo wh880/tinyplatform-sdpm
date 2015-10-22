@@ -17,38 +17,63 @@
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
             <span class="f">
-                ${selProject.projectName}
+                ${CmsUtils.getProject(currentProjectId).projectName}
             </span>
             <span class="r">
-				#set(m1=menuManager.getMenu("pro-survey-delay"))
-                #if(m1)
-                    #@aModal("#m" selProject.projectName+">延期" "750" "350" "" adminPath+
-                        "/project/delay?projectId="+selProject.projectId)#buttonIcon(iconClass="icon-calendar")延期
-                #end
-                #end
-                #set(m2=menuManager.getMenu("pro-survey-hangon"))
-                #if(m2)
-                    #@aModal("#m" selProject.projectName+">挂起" "750" "250" "" "/project/survey/hang-up.pagelet")
-                        #buttonIcon(iconClass="icon-pause")挂起
+                ##判断状态 进行中 3个按钮，挂起只是修改起止时间 3个按钮，挂起 则可以激活和结束，结束 可以激活
+                ##                    ${project?.projectStatus}
+                    #foreach(m:menuManager.getScopeMenus("pro-surveymenu-op"))
+                        #if(project?.projectStatus=="1")
+                            #if(m.id == "pro-survey-finish" || m.id == "pro-survey-hangUp" ||
+                            m.id == "pro-survey-delay" || m.id == "pro-survey-doing")
+                                #@aModal("#myModal" CmsUtils.getProject(currentProjectId).projectName+">"+m.name
+                                1000 500 "" adminPath+m.href+"?projectId="+currentProjectId)
+                                    #buttonIcon(iconClass=m.icon)${m.name}
+                                #end
+                            #end
+                        #elseif (project?.projectStatus=="2")
+                            #if(m.id == "pro-survey-finish" || m.id == "pro-survey-hangUp" ||
+                            m.id == "pro-survey-delay")
+                                #@aModal("#myModal" CmsUtils.getProject(currentProjectId).projectName+">"+m.name
+                                1000 500 "" adminPath+m.href+"?projectId="+currentProjectId)
+                                    #buttonIcon(iconClass=m.icon)${m.name}
+                                #end
+                            #end
+                        #elseif (project?.projectStatus=="3")
+                            #if(m.id == "pro-survey-active" || m.sort == "pro-survey-finish")
+                                #@aModal("#myModal" CmsUtils.getProject(currentProjectId).projectName+">"+m.name
+                                1000 500 "" adminPath+m.href+"?projectId="+currentProjectId)
+                                    #buttonIcon(iconClass=m.icon)${m.name}
+                                #end
+                            #end
+                        #elseif (project?.projectStatus=="4")
+                            #if(m.sort == "pro-survey-active")
+                                #@aModal("#myModal" CmsUtils.getProject(currentProjectId).projectName+">"+m.name
+                                1000 500 "" adminPath+m.href+"?projectId="+currentProjectId)
+                                    #buttonIcon(iconClass=m.icon)${m.name}
+                                #end
+                            #end
+                        #else
+                        #end
                     #end
-                #end
-                #set(m3=menuManager.getMenu("pro-survey-finish"))
-                #if(m3)
-                    #@aModal("#m" selProject.projectName+">结束" "750" "250" "" "/project/survey/hang-up.pagelet")
-                        #buttonIcon(iconClass="icon-off")结束
+                    <script>
+                        $(function () {
+                            $("#myModal").on("hidden", function () {
+                            ##                                $("#tinypagecontent").load("${TINY_CONTEXT_PATH+adminPath}/project/manage/survey/index");
+                                location = location;
+                            });
+                        });
+                    </script>
+
+                    #foreach(m:menuManager.getScopeMenus("pro-surveymenu2-op"))
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?projectId=${project?.projectId}"
+                           title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                     #end
 
-                #end
-
-                #foreach(m:menuManager.getScopeMenus("pro-surveymenu2-op"))
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?projectId=${project?.projectId}"
-                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-                #end
-
-                #set(m4=menuManager.getMenu("pro-survey-remove"))
-                #if(m4)
-                    #@aModal("#m" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
-                #end
+                    #set(m4=menuManager.getMenu("pro-survey-remove"))
+                    #if(m4)
+                        #@aModal("#m" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
+                    #end
 				</span>
                 #div(divClass="clearfix")
             #end
@@ -62,15 +87,17 @@
         <p class="titleName">
             项目描述
         </p>
+
         <div>
-            ${selProject.projectDesc}
+            ${CmsUtils.getProject(currentProjectId)?.projectDesc}
         </div>
     #end
     #@div(divClass="infoContent")
-        #history(adminPath+"/system/action/ajax/history?actionObjectType=project&actionObjectId="+selProject.projectId)
+        #history(adminPath+"/system/action/ajax/history?actionObjectType=project&actionObjectId="+currentProjectId)
     #end
 </div>
 <div class="infoPage-right">
-    #TypeInfo("project", selProject?.projectId)
+    #TypeInfo("project", currentProjectId)
 </div>
+#@dialog("Modal")#end
 

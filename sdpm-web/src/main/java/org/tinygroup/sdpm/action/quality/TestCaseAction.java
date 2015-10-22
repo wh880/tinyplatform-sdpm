@@ -13,12 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResult;
 import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResults;
@@ -71,7 +66,7 @@ public class TestCaseAction extends BaseController {
 	public String form(QualityTestCase testCase, HttpServletRequest request,Model model) {
 		String queryString = request.getQueryString();
 		if (queryString != null && !queryString.contains("status")) {
-			return "redirect:/a/quality/testCase?status=tcaseall&"
+			return "redirect:/a/quality/testCase?currentPageId=5&status=tcaseall&"
 					+ queryString;
 		}
 		List<OrgUser> userList = userService.findUserList(new OrgUser());
@@ -86,18 +81,16 @@ public class TestCaseAction extends BaseController {
 	}
 
 	@RequestMapping("/findPager")
-	public String findPager(Integer page, Integer limit, String groupOperate,
-			SearchInfos searchInfos, String status, String order,
-			String ordertype, QualityTestCase testcase, Model model,
-			HttpServletRequest request) {
+	public String findPager(@CookieValue Integer qualityProductId,Integer start, Integer limit, String groupOperate,
+							SearchInfos searchInfos, String status, String order,
+							String ordertype, QualityTestCase testcase, Model model,
+							HttpServletRequest request) {
 		boolean asc = true;
 		if ("desc".equals(ordertype)) {
 			asc = false;
 		}
-		if (request.getSession().getAttribute("qualityProductId") != null) {
-			testcase.setProductId((Integer) request.getSession().getAttribute(
-					"qualityProductId"));
-		}
+		testcase.setProductId(qualityProductId);
+
 		String condition = "";
 		if (testcase.getModuleId() != null && testcase.getModuleId() > 0) {
 
@@ -107,14 +100,18 @@ public class TestCaseAction extends BaseController {
 			stringBuffer.append("in (");
 			ModuleUtil.getConditionByModule(stringBuffer, module, moduleService);
 			stringBuffer.append(")");
-			
 			if(!("".equals(condition.trim())||condition==null)){
 				condition +=" and ";
 			}
 			condition +=  NameUtil.resolveNameDesc("moduleId") + " "+ stringBuffer.toString();
 		}
 		testcase.setModuleId(null);
-		Pager<QualityTestCase> casepager = testCaseService.findTestCasePager(limit * (page - 1), limit, testcase, condition, searchInfos, groupOperate, order, asc);
+		Pager<QualityTestCase> casepager = null;
+		if("tcaseneedchange".equals(status)){
+			casepager = testCaseService.findStoryChangedCase(start,limit,testcase,condition,order,"asc".equals(ordertype)?true:false);
+		}else if("tcaseall".equals(status)){
+			casepager = testCaseService.findTestCasePager(start, limit, testcase, condition, searchInfos, groupOperate, order, asc);
+		}
 		model.addAttribute("casepager", casepager);
 		return "testManagement/data/casesData.pagelet";
 	}
@@ -361,4 +358,5 @@ public class TestCaseAction extends BaseController {
 		model.addAttribute("testCase", testCase);
 		return "/testManagement/page/caseInfo.page";
 	}
+
 }

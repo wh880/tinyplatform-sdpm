@@ -56,10 +56,10 @@ public class StoryManagerImpl implements StoryManager {
         return productStoryDao.batchUpdate(stories);
     }
 
-    public List<ProductStory> findList(ProductStory story, String order,String ordertype) {
-        if(StringUtil.isBlank(order)){
+    public List<ProductStory> findList(ProductStory story, String order, String ordertype) {
+        if (StringUtil.isBlank(order)) {
             return productStoryDao.query(story);
-        }else {
+        } else {
             order = "product_story." + NameUtil.resolveNameDesc(order);
 
             return productStoryDao.query(story, new OrderBy(order, !("desc".equals(ordertype)) ? true : false));
@@ -74,7 +74,7 @@ public class StoryManagerImpl implements StoryManager {
                 : statusCondition;
         OrderBy orderBy = null;
         if (columnName != null && !"".equals(columnName)) {
-            orderBy = new OrderBy("product_story."+NameUtil.resolveNameDesc(columnName), asc);
+            orderBy = new OrderBy("product_story." + NameUtil.resolveNameDesc(columnName), asc);
         }
         if (condition != null && !"".equals(condition)) {
             return productStoryDao.complexQueryRel(start, limit, story, condition,
@@ -149,7 +149,7 @@ public class StoryManagerImpl implements StoryManager {
     }
 
     public int countStatus(int productId, int status) {
-        return productStoryDao.countStatus(productId,status);
+        return productStoryDao.countStatus(productId, status);
     }
 
     public int[] deleteBatch(List<ProductStory> ids) {
@@ -157,5 +157,7 @@ public class StoryManagerImpl implements StoryManager {
         return productStoryDao.batchUpdateDel(ids);
     }
 
-
+    public List<ProductStory> findProductNameByStoryId(Integer storyId) {
+        return productStoryDao.findpNameBysId(storyId);
+    }
 }

@@ -19,6 +19,8 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.service.service.inter.ReviewService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -43,6 +45,8 @@ public class RequestAction extends BaseController {
     private ProductService productService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ModuleService moduleService;
 
     @RequiresPermissions("request")
     @RequestMapping(value = "/list")
@@ -226,5 +230,14 @@ public class RequestAction extends BaseController {
         map.put("status", "y");
         map.put("info", "删除成功");
         return map;
+    }
+    @ResponseBody
+    @RequestMapping("/ajax/moduleByProduct")
+    public List<SystemModule> getModuleByProduct(Integer productId) {
+        SystemModule module = new SystemModule();
+        module.setModuleRoot(productId);
+        module.setModuleType("productDoc");
+        List<SystemModule> list = moduleService.findModuleList(module);
+        return list;
     }
 }

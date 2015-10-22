@@ -38,7 +38,7 @@
                 #@sdpmItem("所属项目")
                     #@Tselect2F()
                         #@Tselect2Body(
-                            "docProject" selProject.projectId {"class":
+                            "docProject" currentProjectId {"class":
                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             #foreach(project : projectList)
                                 <option value="${project.projectId}">${project.projectName}</option>

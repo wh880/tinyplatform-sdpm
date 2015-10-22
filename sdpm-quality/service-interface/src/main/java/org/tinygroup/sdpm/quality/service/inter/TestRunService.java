@@ -27,5 +27,7 @@ public interface TestRunService {
 	 */
 	int[] batchUpdateTestRun(List<QualityTestRun> testruns);
 
+	QualityTestRun add(QualityTestRun run);
+
 	Pager<QualityTestRun> findTestRunPager(Integer start, Integer limit, QualityTestRun testRun,String condition, String sortName, boolean asc);
 }

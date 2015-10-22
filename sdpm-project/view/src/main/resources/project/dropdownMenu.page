@@ -1,6 +1,5 @@
 #@navSelect2("sleProject" "sleProject")
     #@navSelect2Nav()
-
         #if(currentProjectId)
             ${CmsUtils.getProject(currentProjectId).projectName}
         #else

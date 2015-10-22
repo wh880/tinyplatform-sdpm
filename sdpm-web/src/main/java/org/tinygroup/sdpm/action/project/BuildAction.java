@@ -3,9 +3,11 @@ package org.tinygroup.sdpm.action.project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -51,15 +53,6 @@ public class BuildAction extends BaseController {
     private ProjectStoryService projectStoryService;
     @Autowired
     private StoryService storyService;
-
-    @RequestMapping("/productBuildList")
-    public  String productBuildList(ProjectBuild build,Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request){
-
-        boolean asc = "asc".equals(ordertype) ? true : false;
-        Pager<ProjectBuild> pager =  buildService.findPagerBuild(build, start, limit, order, asc);
-        model.addAttribute("buildPager", pager);
-        return "project/version/tableData.pagelet";
-    }
 
 
 
@@ -385,6 +378,19 @@ public class BuildAction extends BaseController {
 
         return list;
     }
+
+
+    //这是产品线调用的别动
+    @RequestMapping("/productBuildList")
+    public String productBuildList(ProjectBuild build, Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
+
+        boolean asc = "asc".equals(ordertype) ? true : false;
+        Pager<ProjectBuild> pager = buildService.findPagerBuild(build, start, limit, order, asc);
+        model.addAttribute("buildPager", pager);
+        return "project/version/tableData.pagelet";
+    }
+
+
 
 
 }

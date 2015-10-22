@@ -114,9 +114,10 @@
       ##            </ul>
       ##        </div>
       ##    #end
-    #foreach(m:menuManager.getScopeMenus("pro-taskmenu2-op"))
-        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-    #end
+          #foreach(m:menuManager.getScopeMenus("pro-taskmenu2-op"))
+              <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
+                 title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+          #end
 </span>
 
     #div(divClass="clearfix")

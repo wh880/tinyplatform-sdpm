@@ -1,7 +1,7 @@
 #macro setTinyItemCount(num)
 	<input type="hidden" name="records" value="${num}"/>
 #end
-#set(count="")
+#set(count=casePager?.totalCount)
 <script type="text/javascript">
     $(document).ready(function(){
         $(".titleName").html("<i class='icon-unlink' style='float: left'>未关联用例(${count})</i>");
@@ -12,21 +12,28 @@
 #set(count=asePager?.totalCount)
 #for(case:casePager?.records)
 					#@tr()
-						#@td()<input type="checkbox" value="${case?.caseId}}" name="idCheck">#end
+						#@td()<input type="checkbox" value="${case?.caseId}" name="idCheck">#end
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${case?.caseId}</a>#end
 						#@td()
 						#@Tselect2F()
-	                   		 #@Tselect2Body("caseVersion"+caseFor?.index "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("caseVersion" "" {"class":"input-text","minimumResultsForSearch":"Infinity"}) ##,"multiple":"multiple"加上为多选项
 	                        #set(version = case?.caseVersion?:0)
 	                        #while(version>0)
-	                         <option value="caseVersion">${version}</option>
+	                         <option value="${version}">${version}</option>
 	                         #set(version=version-1)
 	                    	#end
 	                    	#end
                 	  #end
                 	  	#end
 						#@td()${case?.priority}#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${case?.caseTitle}</a>#end
+						#@td()${case?.caseTitle}(
+						 #set(version = case?.caseVersion?:0)
+                        #while(version>0)
+                         <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">#${version}</a>
+                         #set(version=version-1)
+                        #end
+
+						)#end
 						#@td()${getDict("caseType",case?.caseType)}#end
 						#@td()${case?.caseOpenedBy?UserUtils.getUserById(case?.caseOpenedBy)?.orgUserRealName:""}#end
 						#@td()${getDict("caseStatus",case?.caseStatus)}#end
