@@ -46,7 +46,7 @@
         #end
         #@elementItem()
             #@sdpmItem("问题标题" "*")
-                #tinyInput("text" "faqQuestion" faq?.faqQuestion{"placeholder":"","datatype":"*4-16","nullmsg":
+                #tinyInput("text" "faqQuestion" faq?.faqQuestion{"placeholder":"","datatype":"*","nullmsg":
                     "问题不能为空！","id":"faqQuestion","class":"input-text"})
             #end
         #end

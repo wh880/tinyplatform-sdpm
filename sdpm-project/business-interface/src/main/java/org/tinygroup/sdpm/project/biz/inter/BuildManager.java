@@ -5,6 +5,7 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -103,4 +104,24 @@ public interface BuildManager {
      * @return
      */
     public Integer releateReq(Integer storyId,Integer buildId);
+    public Pager<QualityBug> findnoBuildBug(int start, int limit, Integer buildId);
+    public Pager<QualityBug> findBuildBug(int start, int limit, Integer buildId);
+    /**
+     * 删除关联
+     * @param storyId，buildId
+     * @return
+     */
+    public Integer deletereleateBug(Integer storyId,Integer buildId);
+    /**
+     * 关联需求
+     * @param storyId，buildId
+     * @return
+     */
+    public Integer releateBug(Integer storyId,Integer buildId);
+    /**
+     * 关联需求
+     * @param buildId
+     * @return
+     */
+    public Pager<QualityBug> findBuildLegacyBug(int start, int limit, Integer buildId);
 }

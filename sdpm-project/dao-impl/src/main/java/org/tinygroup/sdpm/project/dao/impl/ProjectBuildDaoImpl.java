@@ -29,6 +29,8 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.quality.dao.constant.QualityBugTable;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
@@ -42,6 +44,8 @@ import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_
 import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
+import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
+
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
@@ -333,6 +337,45 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 
 	}
 
+	public Pager<QualityBug> findBuildBugs(int start, int limit, Integer buildId, final OrderBy... orderBies){
+		Select select =select(PROJECT_BUILDTABLE.BUILD_BUGS).from(PROJECT_BUILDTABLE)
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
+		final String[] bugs = test.getBuildBugs().split(",");
+		QualityBug qualityBug = new QualityBug();
+		return getDslTemplate().queryPager(start, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
+
+			public Select generate(QualityBug t) {
+				Select select = MysqlSelect.selectFrom(QUALITY_BUGTABLE).where(
+						and(
+								QUALITY_BUGTABLE.BUG_ID.in(bugs)
+							,QUALITY_BUGTABLE.BUG_STATUS.eq("2")
+				)
+				);
+				return addOrderByElements(select, orderBies);
+			}
+		});
+
+	}
+
+	public Pager<QualityBug> findBuildLegacyBugs(int start, int limit, Integer buildId, final OrderBy... orderBies){
+		Select select =select(PROJECT_BUILDTABLE.BUILD_BUGS).from(PROJECT_BUILDTABLE)
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
+		final String[] bugs = test.getBuildBugs().split(",");
+		QualityBug qualityBug = new QualityBug();
+		return getDslTemplate().queryPager(start, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
+
+			public Select generate(QualityBug t) {
+				Select select = MysqlSelect.selectFrom(QUALITY_BUGTABLE).where(
+						and(QUALITY_BUGTABLE.BUG_ID.in(bugs),
+								QUALITY_BUGTABLE.BUG_STATUS.eq("1")));
+				return addOrderByElements(select, orderBies);
+			}
+		});
+
+	}
+
 
 
 	public Pager<ProductStory> findnoBuildStorys(int start, int limit, Integer buildId, final OrderBy... orderBies){
@@ -347,6 +390,23 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 			public Select generate(ProductStory t) {
 				Select select = MysqlSelect.selectFrom(PRODUCT_STORYTABLE).where(
 						PRODUCT_STORYTABLE.STORY_ID.notIn(storys));
+				return addOrderByElements(select, orderBies);
+			}
+		});
+	}
+
+	public Pager<QualityBug> findnoBuildBugs(int start, int limit, Integer buildId, final OrderBy... orderBies){
+		Select select =select(PROJECT_BUILDTABLE.BUILD_BUGS).from(PROJECT_BUILDTABLE)
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
+		final String[] bugs = test.getBuildBugs().split(",");
+
+		QualityBug qualityBug = new QualityBug();
+		return getDslTemplate().queryPager(start, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
+
+			public Select generate(QualityBug t) {
+				Select select = MysqlSelect.selectFrom(QUALITY_BUGTABLE).where(
+						QUALITY_BUGTABLE.BUG_ID.notIn(bugs));
 				return addOrderByElements(select, orderBies);
 			}
 		});
@@ -370,6 +430,25 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 		return getDslSession().execute(update);
 	}
 
+
+	public Integer deletereleateBug(Integer bugId,Integer buildId){
+		Select select =select(PROJECT_BUILDTABLE.BUILD_BUGS).from(PROJECT_BUILDTABLE)
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
+		final String[] bugs = test.getBuildBugs().split(",");
+		String newString = new String();
+		String storyID = bugId.toString();
+		for (int i = 0; i < bugs.length; i++) {
+			if(!bugs[i].equals(storyID)){
+				newString = newString + bugs[i];
+				newString = newString+",";
+			}
+		}
+		Update update = update(PROJECT_BUILDTABLE).set(PROJECT_BUILDTABLE.BUILD_BUGS.value(newString))
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		return getDslSession().execute(update);
+	}
+
 	public Integer releateReq(Integer storyId,Integer buildId){
 		Select select =select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
 				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
@@ -378,6 +457,18 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 		String newString;
 		newString = storys + ","+ storyId;
 		Update update = update(PROJECT_BUILDTABLE).set(PROJECT_BUILDTABLE.BUILD_STORIES.value(newString))
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		return getDslSession().execute(update);
+	}
+
+	public Integer releateBug(Integer bugId,Integer buildId){
+		Select select =select(PROJECT_BUILDTABLE.BUILD_BUGS).from(PROJECT_BUILDTABLE)
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
+		String bugs = test.getBuildBugs();
+		String newString;
+		newString = bugs + ","+ bugId;
+		Update update = update(PROJECT_BUILDTABLE).set(PROJECT_BUILDTABLE.BUILD_BUGS.value(newString))
 				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
 		return getDslSession().execute(update);
 	}

@@ -2,11 +2,13 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
 
@@ -76,6 +78,21 @@ public class BuildServiceImpl implements BuildService {
     }
     public Integer releateReq(Integer storyId,Integer buildId){
         return buildManager.releateReq(storyId,buildId);
+    }
+    public Integer deletereleateBug(Integer bugId,Integer buildId){
+        return buildManager.deletereleateBug(bugId, buildId);
+    }
+    public Integer releateBug(Integer bugId,Integer buildId){
+        return buildManager.releateBug(bugId,buildId);
+    }
+    public Pager<QualityBug> findBugPager(int start, int limit, int id, SearchInfos conditions, String groupOperate) {
+        return buildManager.findBuildBug(start,limit,id);
+    }
+    public Pager<QualityBug> findBugLegacyPager(int start, int limit, int id, SearchInfos conditions, String groupOperate) {
+        return buildManager.findBuildLegacyBug(start,limit,id);
+    }
+    public Pager<QualityBug> findnoBugPager(int start, int limit, int id, SearchInfos conditions, String groupOperate) {
+        return buildManager.findnoBuildBug(start,limit,id);
     }
 
 }

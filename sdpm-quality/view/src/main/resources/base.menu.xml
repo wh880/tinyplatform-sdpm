@@ -149,6 +149,15 @@
        <menu id="tverrelcase" name="关联用例"  href="#" icon="icon-link" sort="2"
               isShow="1" scope="version-case-right"></menu>
        <menu id="tveroutdata" name="导出数据"  href="#" icon="icon-upload-alt" sort="1"
-              isShow="1" scope="version-case-right"></menu>                                       
+              isShow="1" scope="version-case-right"></menu>      
+              
+        <menu id="tvergo" name="执行"  href="/quality/testCase/execution" icon="icon-play" sort="4"
+              isShow="1" scope="version-case-op"></menu>
+       <menu id="tverresult" name="结果"  href="/quality/testCase/result" icon="icon-flag" sort="3"
+              isShow="1" scope="version-case-op"></menu>  
+       <menu id="tverremove" name="移除"  href="#" icon="icon-trash" sort="2"
+              isShow="1" scope="version-case-op"></menu>
+       <menu id="tvertobug" name="转Bug"  href="#" icon=" icon-bug" sort="1"
+              isShow="1" scope="version-case-op"></menu>                                       
     </menu>      	               
 </menu>

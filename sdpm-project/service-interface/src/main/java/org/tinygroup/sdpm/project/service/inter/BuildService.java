@@ -1,9 +1,11 @@
 package org.tinygroup.sdpm.project.service.inter;
 
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -98,4 +100,49 @@ public interface BuildService {
      * @return
      */
     public Integer releateReq(Integer storyId,Integer buildId);
-}
+    /**
+     * 删除关联
+     * @param bugId
+     * @param buildId
+     * @return
+     */
+    public Integer deletereleateBug(Integer bugId,Integer buildId);
+    /**
+     * 关联需求
+     * @param bugId
+     * @param buildId
+     * @return
+     */
+    public Integer releateBug(Integer bugId,Integer buildId);
+    /**
+     * bug分页
+     * @param id
+     * @param start
+     * @param limit
+     * @param conditions
+     * @param groupOperate
+     * @return
+     */
+    public Pager<QualityBug> findBugPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
+    /**
+     * 未关联bug分页
+     * @param id
+     * @param start
+     * @param limit
+     * @param conditions
+     * @param groupOperate
+     * @return
+     */
+    public Pager<QualityBug> findnoBugPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
+    /**
+     * 未关联bug分页
+     * @param id
+     * @param start
+     * @param limit
+     * @param conditions
+     * @param groupOperate
+     * @return
+     */
+    public Pager<QualityBug> findBugLegacyPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
+
+    }

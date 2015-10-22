@@ -38,7 +38,7 @@
     });
 </script>
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/update" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/reviewed" "" {"class":"test"})
 
     #hiddenInput("","storyId","",story.storyId)
 
@@ -65,9 +65,11 @@
                 #@tinySelect(
                     "storyStatus" story?.storyStatus {"placeholder":"","datatype":"*","nullmsg":"评审结果不能为空！","class":
                     "input-text","rel":"22"})
-                    #@tinyOptionItem("zh")确认通过#end
-                    #@tinyOptionItem("en")有待明确#end
-                    #@tinyOptionItem("ta")拒绝#end
+
+                    #foreach(source:getDict("proReviewResult"))
+                        <option value="${source?.value}"> ${source?.text}</option>
+                    #end
+
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -77,16 +79,22 @@
             #@sdpmItem("指派给")
                 <div class="input-group">
                     #@Tselect2F()
-                    #@Tselect2Body(
-                        "storyAssignedTo" story?.storyAssignedTo {"placeholder":"","datatype":"*","nullmsg":"指派给不能为空！",
-                        "class":"input-text select2","style":"width:296px" })
+                        #@Tselect2Body(
+                            "storyAssignedTo" story?.storyAssignedTo {"placeholder":"","datatype":"*","nullmsg":
+                            "指派给不能为空！",
+                            "class":"input-text select2","style":"width:296px" })
 
+                        #end
                     #end
-                #*    #@Tselect2Fix()<a href="#" class="r "></a><a href="#"></a>#end*#
-                #end
                     <script>
                         ajaxRead("${sid}", "storyAssignedTo", "orgUserId", "orgUserRealName", "/org/user/userList");
                     </script>
+
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                    #end
+
 
                 </div>
             #end
@@ -101,9 +109,12 @@
                         "multiple":"multiple"})
 
                     #end
-                #*
-                                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
-                *#
+
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                    #end
+
                 #end
                 <script>
                     ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
@@ -116,7 +127,7 @@
                 <div class="col-2 text-r"><label>备注：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("content3" "content3" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
             </div>
         #end
 
@@ -156,8 +167,5 @@
 
 
 <div style="width:30%;float:right">
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-        #include("/product/page/tabledemo/historyrecord.page")
-    #end
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=story&actionObjectId="+story?.storyId)
 </div>

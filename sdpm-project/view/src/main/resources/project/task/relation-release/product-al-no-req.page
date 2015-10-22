@@ -2,6 +2,7 @@
 #import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeMenuId=currentPageId)
 #!set(cname="no-demand",type="demand")
+###set(storyTId = "storyTId" )
 
 #include("/product/page/event/mulsearch-demand.page")
 #@tinyForm("thisform" "" "post" {"class":"test"})

@@ -14,6 +14,7 @@ import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -42,7 +43,10 @@ import org.tinygroup.tinysqldsl.Pager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -112,8 +116,12 @@ public class StoryAction extends BaseController {
     public String save(SystemAction systemAction, ProductStory productStory, ProductStorySpec storySpec,
                        @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title, HttpServletRequest request) throws IOException {
 
-
-        productStory.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
+    	if(request.getSession().getAttribute("sessionProductId")!=null){
+    		productStory.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
+    	}
+        productStory.setStoryStatus("0");
+        
+        storySpec.setStoryVersion(0);
         ProductStory story = storyService.addStory(productStory, storySpec);
 
         uploads(file, story.getStoryId(), ProfileType.STORY, title);
@@ -291,6 +299,45 @@ public class StoryAction extends BaseController {
                 systemAction.getActionComment());
         return "redirect:" + "/product/page/project/togglebox.page";
     }
+
+    @RequestMapping("/reviewed")
+    public String reviewed(SystemAction systemAction, ProductStory productStory) throws IOException {
+        ProductStory story = storyService.findStory(productStory.getStoryId());
+        storyService.updateStory(productStory);
+        OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute("user");
+
+
+        LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
+                LogUtil.LogAction.REVIEWED,
+                String.valueOf(productStory.getStoryId()),
+                UserUtils.getUserId(),
+                String.valueOf(productStory.getProductId()),
+                null,
+                story,
+                productStory,
+                systemAction.getActionComment());
+        return "redirect:" + "/product/page/project/togglebox.page";
+    }
+
+
+    @RequestMapping("/close")
+    public String close(SystemAction systemAction, ProductStory productStory) {
+        ProductStory story = storyService.findStory(productStory.getStoryId());
+        productStory.setDeleted(FieldUtil.DELETE_YES);
+        storyService.updateStory(productStory);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
+                LogUtil.LogAction.CLOSED,
+                String.valueOf(productStory.getStoryId()),
+                UserUtils.getUserId(),
+                String.valueOf(story.getProductId()),
+                null,
+                story,
+                productStory,
+                systemAction.getActionComment());
+        return "redirect:" + "/product/page/project/togglebox.page";
+    }
+
+
 
 
     @RequestMapping("/search")

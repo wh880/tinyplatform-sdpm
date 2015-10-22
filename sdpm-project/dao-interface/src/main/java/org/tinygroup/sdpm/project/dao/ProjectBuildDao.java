@@ -23,6 +23,7 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 
 import java.util.List;
 
@@ -41,4 +42,14 @@ public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
     public Integer deletereleate(Integer storyId,Integer buildId);
 
     public Integer releateReq(Integer storyId,Integer buildId);
+
+    public Pager<QualityBug> findBuildBugs(int start, int limit, Integer buildId, final OrderBy... orderBies);
+
+    public Pager<QualityBug> findnoBuildBugs(int start, int limit, Integer buildId, final OrderBy... orderBies);
+
+    public Integer deletereleateBug(Integer bugId,Integer buildId);
+
+    public Integer releateBug(Integer bugId,Integer buildId);
+
+    public Pager<QualityBug> findBuildLegacyBugs(int start, int limit, Integer buildId, final OrderBy... orderBies);
 }

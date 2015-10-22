@@ -69,7 +69,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 	public Product add(final Product product) {
 		return getDslTemplate().insertAndReturnKey(product, new InsertGenerateCallback<Product>() {
 			public Insert generate(Product t) {
-				Insert insert = InsertUtil.getInsert(PRODUCT_PLANTABLE, product);/*insertInto(PRODUCTTABLE).values(
+				Insert insert = InsertUtil.getInsert(PRODUCTTABLE, product);/*insertInto(PRODUCTTABLE).values(
 					PRODUCTTABLE.PRODUCT_ID.value(t.getProductId()),
 					PRODUCTTABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCTTABLE.DEPT_ID.value(t.getDeptId()),
