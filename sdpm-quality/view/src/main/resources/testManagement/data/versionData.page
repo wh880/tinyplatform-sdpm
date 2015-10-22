@@ -3,9 +3,9 @@
 
 #for(v:verPager?.records)
 					#@tr()
-						#@td()<input type="checkbox" value="1" name="userid">#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/versionInfo?testversionId=${v?.testversionId}">${v?.testversionId}</a>#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/versionInfo?testversionId=${v?.testversionId}">${v?.testtaskTitle}</a>#end
+						#@td()<input type="checkbox" value="${v?.testversionId}" name="idCheck">#end
+						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v?.testversionId}</a>#end
+						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v?.testtaskTitle}</a>#end
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index.page">${v?.projectId}</a>#end
 						#@td()${v?.buildName}#end
 						#@td()${v?.testtaskOwner?UserUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}#end
@@ -17,9 +17,28 @@
 						 		#if(m.id != "tversiondelete")
 						 			<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 						 		#else
-						 			#@tinyTableItemRemove(m.href v)
-										<i class="${m.icon}" title="删除"></i>
-									#end
+									<a class="versionDelete" href="javascript:void(0)"><i class="${m.icon}" title="删除"></i></a>
+								    <script type="text/javascript">
+                                                $(function(){
+                                                    var check = $(".versionDelete");
+                                                    check.on("click",function(){
+                                                        layer.confirm("是否确认删除?",function() {
+                                                        $.ajax({
+                                                             type: "get",
+                                                             url: "${TINY_CONTEXT_PATH+adminPath+m?.href+"?testversionId="+v?.testversionId}",
+                                                             dataType: "json",
+                                                             success: function(data){
+                                                                    if(data.status == "y"){
+                                                                    window.location.reload();
+                                                                    }
+                                                                }
+                                                                 });
+                                                                 return false;
+                                                    });
+                                                    });
+                                                })
+
+                                            </script>
 						 		#end
 						 	#end
 

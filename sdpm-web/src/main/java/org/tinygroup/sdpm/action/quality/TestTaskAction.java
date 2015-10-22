@@ -32,7 +32,9 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.quality.service.inter.TestRunService;
 import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -67,6 +69,8 @@ public class TestTaskAction extends BaseController {
 	private ProjectProductService projectProductService;
 	@Autowired
 	private TeamService teamService;
+	@Autowired
+	private ModuleService moduleService;
 	
 	@RequestMapping("")
 	public String form(HttpServletRequest request,String get,Model model){
@@ -83,25 +87,24 @@ public class TestTaskAction extends BaseController {
 			request.getSession().setAttribute("qualityProductId",list.size()>0?list.get(0).getProductId():0);
 		}
 
-//		if(queryString!=null&&!queryString.contains("status")){
-//			if(!queryString.contains("currentPageId"))queryString = queryString+"&currentPageId=5";
-//			return "redirect:/a/quality/bug?status=tbugstatus&"+queryString;
-//		}
-//		if(StringUtil.isBlank(queryString)){
-//			return "redirect:/a/quality/bug?status=tbugstatus&currentPageId=5";
-//		}
+		if(queryString!=null&&!queryString.contains("status")){
+			if(!queryString.contains("currentPageId"))queryString = queryString+"&currentPageId=5";
+			return "redirect:/a/quality/version?status=tvernotest&"+queryString;
+		}
+		if(StringUtil.isBlank(queryString)){
+			return "redirect:/a/quality/version?status=tvernotest&currentPageId=5";
+		}
 		return "/testManagement/page/version.page";
 	}
 	
 	@RequestMapping("/findPager")
 	public String findPager(Integer start, Integer limit, SearchInfos infos, String groupOperate, String order, String ordertype, String status, QualityTestTask testtask, Model model, HttpServletRequest request){
+		testtask.setDeleted(0);
 		boolean asc = true;
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
-		String conditions = getStatusCondition(status);
-		conditions = StringUtil.isBlank(SqlUtil.toSql(infos.getInfos(),groupOperate))?
-				conditions:(StringUtil.isBlank(conditions)?SqlUtil.toSql(infos.getInfos(),groupOperate):conditions+" and "+ SqlUtil.toSql(infos.getInfos(),groupOperate));
+		String conditions = mergeCondition(getStatusCondition(status),SqlUtil.toSql(infos.getInfos(),groupOperate));
 		testtask.setProductId((Integer) request.getSession().getAttribute("qualityProductId"));
 		Pager<QualityTestTask> verpager = testTaskService.findTestTaskPager(start, limit, testtask,conditions, order, asc);
 		model.addAttribute("verPager",verpager);
@@ -112,6 +115,7 @@ public class TestTaskAction extends BaseController {
 	public Map save(QualityTestTask testtask,Model model){
 		if(testtask.getTestversionId() == null){
 			testtask = testTaskService.addTestTask(testtask);
+			testtask.setDeleted(0);
 			LogUtil.logWithComment(LogUtil.LogOperateObject.TESTTASK,
 					LogUtil.LogAction.OPENED,
 					String.valueOf(testtask.getTestversionId()),
@@ -123,7 +127,18 @@ public class TestTaskAction extends BaseController {
 					null
 					);
 		}else{
+			QualityTestTask testTask = testTaskService.findById(testtask.getTestversionId());
 			testTaskService.updateTestTask(testtask);
+			LogUtil.logWithComment(LogUtil.LogOperateObject.TESTTASK,
+					LogUtil.LogAction.EDITED,
+					String.valueOf(testtask.getTestversionId()),
+					UserUtils.getUserId(),
+					String.valueOf(testtask.getProductId()),
+					String.valueOf(testtask.getProjectId()),
+					testTask,
+					testtask,
+					null
+			);
 		}
 		model.addAttribute("testtask",testtask);
 		Map<String,String> result = new HashMap<String, String>();
@@ -145,27 +160,29 @@ public class TestTaskAction extends BaseController {
 	}
 	
 	@RequestMapping("/versionInfo")
-	public String versionInfo(int testversionId, Model model){
+	public String versionInfo(Integer testversionId, Model model){
 		QualityTestTask testTask = testTaskService.findById(testversionId);
 		model.addAttribute("testTask",testTask);
 		return "/testManagement/page/versionSituation.page";
 	}
 
 	@RequestMapping("/versionRightInfo")
-	public String versionRightInfo(int testversionId, Model model){
+	public String versionRightInfo(Integer testversionId, Model model){
 		QualityTestTask testTask = testTaskService.findById(testversionId);
 		model.addAttribute("testTask",testTask);
 		return "/testManagement/page/tabledemo/versionRightInfo.pagelet";
 	}
+	@ResponseBody
+	@RequestMapping("/makeLink")
+	public Map makeLink(Integer[] ids,Integer[] ves, Model model){
+
+		Map<String,String> result = new HashMap<String, String>();
+		result.put("status","y");
+		return result;
+	}
 	
 	@RequestMapping("/linkCase")
 	public String linkCase(int testversionId, Model model){
-//		QualityTestRun run = new QualityTestRun();
-//		run.setTaskId(testversionId);
-//		List<QualityTestRun> runs = testRunService.findTestRunList(run);
-//		String notInCondition = mergeCondition(runs);
-//		model.addAttribute("count",runs.size());
-//		Pager<QualityTestCase> casePager = testCaseService.;
 		return "/testManagement/page/versionLink.page";
 	}
 
@@ -174,11 +191,10 @@ public class TestTaskAction extends BaseController {
 		QualityTestRun run = new QualityTestRun();
 		run.setTaskId(testversionId);
 		List<QualityTestRun> runs = testRunService.findTestRunList(run);
-		String notInCondition = mergeCondition(runs);
-//		String result = SqlUtil.toSql(infos.getInfos(),groupOperate);
-//		String conditions = (StringUtil.isBlank(notInCondition)?"":(StringUtil.isBlank(result)?"":" and "))
-//				+(StringUtil.isBlank(result)?"":result);
-		Pager<QualityTestCase> casePager = testCaseService.findTestCasePager(start,limit,null,notInCondition,null,null,order,"asc".equals(ordertype)?true:false);
+		String conditions = mergeCondition(mergeCondition(runs,false),SqlUtil.toSql(infos.getInfos(),groupOperate));
+		QualityTestCase testCase = new QualityTestCase();
+		testCase.setDeleted(0);
+		Pager<QualityTestCase> casePager = testCaseService.findTestCasePager(start,limit,testCase,conditions,null,null,order,"asc".equals(ordertype)?true:false);
 		model.addAttribute("casePager",casePager);
 		return "/testManagement/data/link.pagelet";
 	}
@@ -191,25 +207,17 @@ public class TestTaskAction extends BaseController {
 		for(ProjectProduct projectProduct : projectProducts){
 			ids.add(projectProduct.getProjectId());
 		}
-		List<Project> projects = projectService.findByProjectList(ids);
+		List<Project> projects = ids.size()>0?projectService.findByProjectList(ids):new ArrayList<Project>();
 		model.addAttribute("testTask",testTask);
 		model.addAttribute("projectList",projects);
 		return "/testManagement/page/tabledemo/editionversion.page";
-	}
-
-	private String getStatusCondition(String status){
-		if("tvertest".equals(status)){
-			return " testtask_status = 'done' ";
-		}else{
-			return " testtask_status <> 'done' ";
-		}
 	}
 
 	@ResponseBody
 	@RequestMapping("/ajax/build")
 	public List<ProjectBuild> getBuild(ProjectBuild projectBuild){
 		if(projectBuild.getBuildProduct()<1||projectBuild.getBuildProduct()==null){
-			return null;
+			return new ArrayList<ProjectBuild>();
 		}
 		return buildService.findListBuild(projectBuild);
 	}
@@ -218,26 +226,96 @@ public class TestTaskAction extends BaseController {
 	@RequestMapping("/ajax/user")
 	public List<OrgUser> getUser(ProjectTeam projectTeam){
 		if(projectTeam.getProjectId()<1||projectTeam.getProjectId()==null){
-			return null;
+			return new ArrayList<OrgUser>();
 		}
 		List<ProjectTeam> teams = teamService.findTeamByProjectId(projectTeam.getProjectId());
 		String[] userIds = new String[teams.size()];
 		for(int i=0; i<userIds.length; i++){
 			userIds[i] = teams.get(i).getTeamUserId();
 		}
-		List<OrgUser> orgUsers = userService.findUserListByIds(userIds);
+		List<OrgUser> orgUsers = userIds.length>0?userService.findUserListByIds(userIds):new ArrayList<OrgUser>();
 		return orgUsers;
 	}
 
-	private String mergeCondition(List<QualityTestRun> runs){
+	@ResponseBody
+	@RequestMapping("/ajax/delete")
+	public Map delete(Integer testversionId){
+		QualityTestTask testTask = new QualityTestTask();
+		testTask.setTestversionId(testversionId);
+		testTask.setDeleted(1);
+		testTaskService.updateTestTask(testTask);
+		Map<String,String> result = new HashMap<String, String>();
+		result.put("status","y");
+		return result;
+	}
+
+	@RequestMapping("/taskToCase")
+	public String taskToCase(Integer testversionId,String moduleId, Model model, HttpServletRequest request){
+		QualityTestTask testTask = testTaskService.findById(testversionId);
+		String queryString = request.getQueryString();
+		if(StringUtil.isBlank(moduleId)){
+			request.getSession().removeAttribute("taskToCaseModuleId");
+		}else{
+			request.getSession().setAttribute("taskToCaseModuleId",moduleId);
+		}
+
+		model.addAttribute("testTask",testTask);
+		return "/testManagement/page/tabledemo/verCase.page";
+	}
+
+	@RequestMapping("/taskToCaseData")
+	public String taskToCaseData(Integer testversionId,Integer start, String status,Integer moduleId, Integer limit,SearchInfos infos,String groupOperate, String order, String ordertype, Model model,HttpServletRequest request){
+		QualityTestRun run = new QualityTestRun();
+		run.setTaskId(testversionId);
+		String conditions =mergeCondition(getTaskToCaseCondition(status),SqlUtil.toSql(infos.getInfos(),groupOperate));
+		if(moduleId!=null){
+			String moduleCondition = ModuleUtil.getCondition(moduleId,moduleService);
+			conditions = mergeCondition(conditions,StringUtil.isBlank(moduleCondition)?"":(" module_id "+moduleCondition));
+		}
+		Pager<QualityTestRun> runsPager = testRunService.findTestRunPager(start,limit,run,conditions,order,"asc".equals(ordertype)?true:false);
+		model.addAttribute("runsPager",runsPager);
+		return "/testManagement/data/verCaseData.pagelet";
+	}
+
+	private String mergeCondition(List<QualityTestRun> runs, boolean in){
 		if(!(runs.size()>0))return "";
 		StringBuffer sb = new StringBuffer();
-		sb.append(" not in (");
+		if(in) {
+			sb.append(" case_id in (");
+		}else{
+			sb.append(" case_id not in (");
+		}
 		for(QualityTestRun run : runs){
 			if(!sb.toString().endsWith("("))sb.append(",");
 			sb.append(run.getCaseId());
 		}
 		sb.append(")");
 		return sb.toString();
+	}
+
+	private String getStatusCondition(String status){
+		if(StringUtil.isBlank(status))return "";
+		if("tvertest".equals(status)){
+			return " testtask_status = 'done' ";
+		}else{
+			return " testtask_status <> 'done' ";
+		}
+	}
+
+	private String getTaskToCaseCondition(String status){
+		if(StringUtil.isBlank(status))return "";
+		if("tverallcase".equals(status)){
+			return "";
+		}else{
+			return " case_opened_by = '"+UserUtils.getUserId()+"' ";
+		}
+	}
+
+	private String mergeCondition(String condition1, String condition2){
+		String operate = "";
+		if(!StringUtil.isBlank(condition1)&&!StringUtil.isBlank(condition2)){
+			operate = " and ";
+		}
+		return (StringUtil.isBlank(condition1)?"":condition1)+operate+(StringUtil.isBlank(condition2)?"":condition2);
 	}
 }
