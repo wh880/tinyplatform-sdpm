@@ -124,9 +124,7 @@
 	                                var pId = $("#${sid}  option:selected").val();
 
 	                              if(dId == '2'){
-                                      ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByProject?projectId=" + pId, ${doc?.docModule ? : 0
-                                  }
-                                );
+                                      ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByProject?projectId=" + pId, ${doc?.docModule?:0});
 	                                ajaxRead("${sid}","docProduct","productId","productName","/document/ajax/product?projectId="+pId,${doc?.docProduct?:0});
                             }
 	                        	})
@@ -178,20 +176,32 @@
      #@elementItem()
         <div class="col-12">
          <div class="col-2 text-r"><label>文档类型&nbsp</label></div>
-         	<div class="col-4">
+         	<div class="col-4" id="doctype">
           		${getDict("docType",doc?.docType)}
               	</div>
        		</div>
      #end
      #@elementItem()
-					#@colLabel()<span class="c-red">*</span>文档标题#end
-					#@formControlDiv("col-8")
-					#@div(divClass="col-6")
-						#tinyInput("text" "docTitle" doc?.docTitle {"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16","nullmsg":"标题不能为空！","class":"input-text"})
-					#end
-					#end
-						#@validateDiv("col-2")#end
-				#end
+			#@colLabel()<span class="c-red">*</span>文档标题#end
+			#@formControlDiv("col-4")
+			#@div(divClass="col-12")
+				#tinyInput("text" "docTitle" doc?.docTitle {"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16","nullmsg":"标题不能为空！","class":"input-text"})
+			#end
+			#end
+				#@validateDiv("col-2")#end
+		#end
+				
+		 #@elementItem(elementId="urlBox" eleItemClass="hidden")
+			#@colLabel()文档URL&nbsp#end
+			#@formControlDiv("col-8")
+			#@div(divClass="col-6")
+			#tinyInput("text" "docUrl" doc?.docUrl{"placeholder":"相应的链接地址","class":"input-text","nullmsg":"链接不能为空！"})
+			#end
+			#end
+			#@validateDiv("col-2")#end
+		#end
+				
+				
      #@elementItem()
         <div class="col-12">
          <div class="col-2 text-r"><label>关键字&nbsp</label></div>
@@ -205,19 +215,10 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>文档摘要&nbsp</label></div>
                 <div class="col-6">
-                    #@Teditor("docDigest" "content" {"initialFrameHeight":"150"})${doc?.docDigest}#end</div>
+                    #@Teditor("docDigest" "docDigest" {"initialFrameHeight":"150"})${doc?.docDigest}#end</div>
        			</div>
         #end
-        #@elementItem(elementId="urlBox" eleItemClass="hidden")
-					#@colLabel()<span class="c-red">*</span>文档URL&nbsp#end
-					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
-					#tinyInput("text" "docUrl" doc?.docUrl{"placeholder":"相应的链接地址","datatype":"*","class":"input-text","nullmsg":"链接不能为空！"})
-					#end
-					#end
-					#@validateDiv("col-2")#end
-				#end
-
+       
             #@elementItem(elementId="contentBox" eleItemClass="hidden")
 					#@colLabel()文档正文&nbsp#end
 					#@formControlDiv("col-8")
@@ -268,12 +269,18 @@
    switch(doctypeContent){
    		case "文件":
    			$('#fileBox').removeClass('hidden');
+   			$('#urlBox').addClass('hidden');
+   			$('#contentBox').addClass('hidden');
    		break;
    		case "链接":
    			$('#urlBox').removeClass('hidden');
+   			$('#contentBox').addClass('hidden');
+   			$('#fileBox').addClass('hidden');
    		break;
    		case "网页":
    			$('#contentBox').removeClass('hidden');
+   			$('#fileBox').addClass('hidden');
+   			$('#urlBox').addClass('hidden');
    		break;
    }
 });
@@ -283,23 +290,6 @@
 
 </script>
 
-##隐藏框的JS
-<script type="text/javascript">
-	$("#${sid}").on("change",function(){
-	    var type = $("#${sid} option:selected").val();
-	   if(type == 1){
-	       $('#product').removeClass('hidden');
-	       $('#project').addClass('hidden');
-	   }
-	   else if(type == 2){
-	       $('#project').removeClass('hidden');
-	       $('#product').removeClass('hidden');
-	   }else{
-	       $('#project').addClass('hidden');
-	       $('#product').addClass('hidden');
-	               }
-	   });
-</script>
 
 <script type="text/javascript">
     $(function () {
