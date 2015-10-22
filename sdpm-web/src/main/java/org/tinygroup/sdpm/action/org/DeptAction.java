@@ -41,9 +41,6 @@ public class DeptAction extends BaseController {
         OrgDept dept = deptService.findDept(orgDeptId);
         dept.setOrgDeptName(orgDeptName);
         dept.setOrgDeptParent(orgDeptParent);
-//        if (!StringUtil.isBlank(orgDeptParent.toString())) {
-//            dept.setOrgDeptParent(orgDeptParent);
-//        }
         deptService.updateDept(dept);
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "y");

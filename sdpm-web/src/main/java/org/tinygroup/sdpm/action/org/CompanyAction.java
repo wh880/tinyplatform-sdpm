@@ -17,6 +17,13 @@ public class CompanyAction extends BaseController {
     private CompanyService companyService;
 
 
+    /**
+     * 公司编辑后的保存
+     *
+     * @param company
+     * @param model
+     * @return
+     */
     @RequiresPermissions("org-company-edit")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(OrgCompany company, Model model) {
@@ -25,6 +32,12 @@ public class CompanyAction extends BaseController {
         return "redirect:" + adminPath + "/org/company/show/";
     }
 
+    /**
+     *
+     *显示公司页面
+     * @param model
+     * @return
+     */
     @RequiresPermissions("organizationCompany")
     @RequestMapping("/show")
     public String show(Model model) {
@@ -33,6 +46,11 @@ public class CompanyAction extends BaseController {
         return "organization/company/company.page";
     }
 
+    /**
+     * 编辑时候查询公司详情
+     * @param model
+     * @return
+     */
     @RequiresPermissions("org-company-edit")
     @RequestMapping("/edit")
     public String edit(Model model) {

@@ -9,11 +9,11 @@
     #@td()${p?.projectId}#end
     #@td()${p?.projectCode}#end
     #@td()${p?.projectName}#end
-    #@td()${p?.projectBegin}#end
-    #@td()${p?.projectEnd}#end
-    #@td()${p?.projectStatus}#end
+    #@td()${formatDate(p?.projectBegin,"yyyy年MM月dd日")}#end
+    #@td()${formatDate(p?.projectEnd,"yyyy年MM月dd日")}#end
+    #@td()${getDict("projectStatus",p?.projectStatus)}#end
     #@td()${t?.teamRole}#end
-    #@td()${t?.teamJoin}#end
+    #@td()${formatDate(t?.teamJoin,"yyyy年MM月dd日")}#end
     #@td()${t?.teamDays}#end
 #end
 #end

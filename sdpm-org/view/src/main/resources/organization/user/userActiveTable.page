@@ -9,10 +9,10 @@
 #setTinyItemCount(records)
 #for(a:actionPager.getRecords())
 #@tr()
-    #@td()${a?.actionDate}#end
+    #@td()${formatDate(a?.actionDate,"yyyy年MM月dd日 hh:mm")}#end
     #@td()${a?.actorName}#end
-    #@td()${a?.actionAction}#end
-    #@td()${a?.actionObjectType}#end
+    #@td()${getDict("actionOperate",a?.actionAction)}#end
+    #@td()${getDict("actionObject",a?.actionObjectType)}#end
     #@td()${a?.actionId}#end
     #@td()${a?.objectName}</a>#end
 #end
