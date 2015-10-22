@@ -1,36 +1,3 @@
-<script type="text/javascript">
-    function ajaxRead(id, toName, opKey, opvalue, url, value) {
-        var selectCheck = "select[name=" + toName + "]";
-        $(selectCheck).each(function () {
-            var sele = $(this);
-            var s;
-            $.ajax({
-                type: "POST",
-                url: "${TINY_CONTEXT_PATH+adminPath}" + url,
-                data: $(this).attr('data'),
-                dataType: "json",
-                success: function (data) {
-                    sele.empty();
-                    var em = "<option value='0'>/</option>";
-                    sele.append(em);
-                    var isInit = false;
-                    for (var i = 0, l = data.length; i < l; i++) {
-                        if (data[i][opKey] == value) isInit = true;
-                        var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
-                        sele.append(em);
-                    }
-                    //console.log(sele.html(),value,opKey);
-                    if (isInit) {
-                        sele.val(value).trigger("change");
-                    } else {
-                        sele.val("0").trigger("change");
-                    }
-                },
-            });
-        });
-    }
-</script>
-
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
@@ -213,3 +180,35 @@
     });
 </script>
 
+<script type="text/javascript">
+    function ajaxRead(id, toName, opKey, opvalue, url, value) {
+        var selectCheck = "select[name=" + toName + "]";
+        $(selectCheck).each(function () {
+            var sele = $(this);
+            var s;
+            $.ajax({
+                type: "POST",
+                url: "${TINY_CONTEXT_PATH+adminPath}" + url,
+                data: $(this).attr('data'),
+                dataType: "json",
+                success: function (data) {
+                    sele.empty();
+                    var em = "<option value='0'>/</option>";
+                    sele.append(em);
+                    var isInit = false;
+                    for (var i = 0, l = data.length; i < l; i++) {
+                        if (data[i][opKey] == value) isInit = true;
+                        var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
+                        sele.append(em);
+                    }
+                    //console.log(sele.html(),value,opKey);
+                    if (isInit) {
+                        sele.val(value).trigger("change");
+                    } else {
+                        sele.val("0").trigger("change");
+                    }
+                },
+            });
+        });
+    }
+</script>
