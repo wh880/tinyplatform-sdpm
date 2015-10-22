@@ -124,7 +124,7 @@
 
 
         <menu id="version-bug" name="" href="/project/version/productalbug" icon="" sort="1" isShow="1">
-            <menu id="versionbug" name="" href="/quality/bug/delete?bugId=${bug.bugId}" icon="icon-remove" sort="8" isShow="1"
+            <menu id="versionbug" name="" href="/project/version/deletereleateBug" icon="icon-remove" sort="8" isShow="1"
                   scope="version-linkbug"/>
         </menu>
         <menu id="version-story" name="" href="/project/version/productalstory" icon="" sort="1" isShow="1">

@@ -22,6 +22,7 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.common.util.update.InsertUtil;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
@@ -50,10 +51,10 @@ import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlanDao {
 	
 
-	public ProductPlan add(ProductPlan productPlan) {
+	public ProductPlan add(final ProductPlan productPlan) {
 		return getDslTemplate().insertAndReturnKey(productPlan, new InsertGenerateCallback<ProductPlan>() {
 			public Insert generate(ProductPlan t) {
-				Insert insert = insertInto(PRODUCT_PLANTABLE).values(
+				Insert insert =InsertUtil.getInsert(PRODUCT_PLANTABLE, productPlan);  /*insertInto(PRODUCT_PLANTABLE).values(
 					PRODUCT_PLANTABLE.PLAN_ID.value(t.getPlanId()),
 					PRODUCT_PLANTABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCT_PLANTABLE.PRODUCT_ID.value(t.getProductId()),
@@ -61,7 +62,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 					PRODUCT_PLANTABLE.PLAN_SPEC.value(t.getPlanSpec()),
 					PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.value(t.getPlanBeginDate()),
 					PRODUCT_PLANTABLE.PLAN_END_DATE.value(t.getPlanEndDate()),
-					PRODUCT_PLANTABLE.DELETED.value(t.getDeleted()));
+					PRODUCT_PLANTABLE.DELETED.value(t.getDeleted()));*/
 				return insert;
 			}
 		});

@@ -1,11 +1,11 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/startsave" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/ajaxChangeStatu" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
+    #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue="start")
 <div style="width:70%;float:left;padding-left: 10px;" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>开始</p>
         #@elementItem()
             #@sdpmItem("实际开始")
-                #dateInputSimple("taskRealStarted" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD")
                 #@tinyDateInput(
                     "taskRealStarted" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
                 #end
@@ -62,3 +62,36 @@
 <div style="width:30%;float:right;padding-right: 10px;">
     #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
 </div>
+
+<script>
+    $(function () {
+        $("form[name=thisform").Validform({
+            beforeSubmit: function (curform) {
+                $(curform).ajaxSubmit({
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "y" || data.status == "success") {
+                            layer.msg(data.info, 2, 1, function () {
+                                $(curform).closest(".modal").trigger("close");
+                            });
+                        } else {
+                            layer.msg(data.info, 1, 9);
+                        }
+//                        try {
+//                            //当弹出框时触发弹出框关闭
+//                            $(curform).closest(".modal").find(".modal-header .close").trigger("click");//弹出框关闭
+//                            $("table.tinytable").trigger("initnav");
+//                        } catch (e) {
+//                            console.log(e)
+//                        }
+
+                    },
+                    error: function () {
+                        layer.msg(data.info);
+                    }
+                });
+                return false;
+            }
+        });
+    });
+</script>

@@ -43,6 +43,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.common.util.update.InsertUtil;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -65,10 +66,10 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 
 	protected static final Table SERVICE_CLIENTTABLE = null;
 
-	public Product add(Product product) {
+	public Product add(final Product product) {
 		return getDslTemplate().insertAndReturnKey(product, new InsertGenerateCallback<Product>() {
 			public Insert generate(Product t) {
-				Insert insert = insertInto(PRODUCTTABLE).values(
+				Insert insert = InsertUtil.getInsert(PRODUCT_PLANTABLE, product);/*insertInto(PRODUCTTABLE).values(
 					PRODUCTTABLE.PRODUCT_ID.value(t.getProductId()),
 					PRODUCTTABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCTTABLE.DEPT_ID.value(t.getDeptId()),
@@ -86,7 +87,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 					PRODUCTTABLE.PRODUCT_CREATED_BY.value(t.getProductCreatedBy()),
 					PRODUCTTABLE.PRODUCT_CREATED_DATE.value(t.getProductCreatedDate()),
 					PRODUCTTABLE.PRODUCT_CREATED_VERSION.value(t.getProductCreatedVersion()),
-					PRODUCTTABLE.DELETED.value(t.getDeleted()));
+					PRODUCTTABLE.DELETED.value(t.getDeleted()));*/
 				return insert;
 			}
 		});

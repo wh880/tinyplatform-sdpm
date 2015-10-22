@@ -18,6 +18,7 @@ package org.tinygroup.sdpm.quality.dao.impl;
 
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityTestRunTable.*;
+import static org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
@@ -40,7 +41,8 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.select.Join;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.sdpm.quality.dao.QualityTestRunDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -256,7 +258,13 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 	}
 
 	public Pager<QualityTestRun> queryPager(int start, int limit, QualityTestRun testRun, Condition condition, OrderBy... orderArgs) {
-		Select select = MysqlSelect.selectFrom(QUALITY_TEST_RUNTABLE).where(
+		Select select = MysqlSelect.select(QUALITY_TEST_RUNTABLE.ALL,
+				QUALITY_TEST_CASETABLE.CASE_TITLE.as("caseTitle"),
+				QUALITY_TEST_CASETABLE.CASE_TYPE.as("caseType"),
+				QUALITY_TEST_CASETABLE.PRIORITY.as("proority")).from(QUALITY_TEST_RUNTABLE).join(
+				Join.leftJoin(
+						QUALITY_TEST_CASETABLE,
+						and(QUALITY_TEST_CASETABLE.CASE_ID.eq(QUALITY_TEST_RUNTABLE.CASE_ID),QUALITY_TEST_CASETABLE.CASE_VERSION.eq(QUALITY_TEST_RUNTABLE.CASE_VERSION)))).where(
 				and(
 						condition,
 						QUALITY_TEST_RUNTABLE.TASK_ID.eq(testRun.getTaskId()),
@@ -266,7 +274,8 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 						QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUNNER.eq(testRun.getTestRunLastRunner()),
 						QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_DATE.eq(testRun.getTestRunLastRunDate()),
 						QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_RESULT.eq(testRun.getTestRunLastRunResult()),
-						QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.eq(testRun.getTestRunStatus())));
+						QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.eq(testRun.getTestRunStatus()),
+						QUALITY_TEST_CASETABLE.DELETED.eq(0)));
 		select =  addOrderByElements(select, orderArgs);
 		return getDslSession().fetchPage(select,start,limit,false, QualityTestRun.class);
 	}

@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.org;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,15 @@ public class RoleUserAction extends BaseController {
     @Autowired
     UserService userService;
 
+
+    /**
+     * 显示角色的用户
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("org-privilege-user")
     @RequestMapping("/show")
     public String showUser(Integer id, Model model) {
         List<OrgUser> userList = userService.findUserList(new OrgUser());
@@ -42,6 +52,15 @@ public class RoleUserAction extends BaseController {
         return "organization/privilege/groupMaintain.page";
     }
 
+    /**
+     * 保存角色用户
+     *
+     * @param id
+     * @param array
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("org-privilege-user")
     @RequestMapping("/save")
     public String save(Integer id, String[] array, Model model) {
         roleUserService.addRoleUser(array, id);

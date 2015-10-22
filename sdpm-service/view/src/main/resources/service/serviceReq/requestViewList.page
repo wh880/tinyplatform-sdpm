@@ -86,7 +86,7 @@
             <div class="col-2 text-r"><label><span class="c-red">*</span>回访描述：</label></div>
             #@formControlDiv("col-8")
                 #@tinyTextarea(
-                    "reviewSpec" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"描述不能为空！"})${review
+                    "reviewSpec" {"datatype":"*","nullmsg":"描述不能为空！"})${review
                     ?.reviewSpec}#end
             #end
             #@validateDiv("col-2")#end

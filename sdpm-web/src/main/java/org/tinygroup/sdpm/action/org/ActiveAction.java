@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.org;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +47,7 @@ public class ActiveAction extends BaseController {
      * @param model
      * @return
      */
+    @RequiresPermissions("organizationActive")
     @RequestMapping("/show")
     public String show(HttpServletRequest request, Model model) {
         List<OrgUser> userList = userService.findUserList(new OrgUser());
@@ -71,6 +73,7 @@ public class ActiveAction extends BaseController {
      * @param projectId
      * @return
      */
+    @RequiresPermissions("organizationCompany")
     @RequestMapping("/find")
     public String find(Integer start, Integer limit, String order, String ordertype, HttpServletRequest request, Model model, String selDate, String orgUserId, String productId, String projectId) {
         SystemAction systemAction = new SystemAction();

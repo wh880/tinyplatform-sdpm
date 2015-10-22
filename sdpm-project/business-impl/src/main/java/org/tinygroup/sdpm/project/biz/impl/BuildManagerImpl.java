@@ -12,6 +12,7 @@ import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -79,14 +80,33 @@ public class BuildManagerImpl implements BuildManager {
         return projectBuildDao.findBuildStorys(start,limit,buildId);
     }
 
+    public Pager<QualityBug> findBuildBug(int start, int limit, Integer buildId) {
+        return projectBuildDao.findBuildBugs(start,limit,buildId);
+    }
+
     public Pager<ProductStory> findnoBuildStory(int start, int limit, Integer buildId) {
         return projectBuildDao.findnoBuildStorys(start,limit,buildId);
     }
+
+    public Pager<QualityBug> findnoBuildBug(int start, int limit, Integer buildId) {
+        return projectBuildDao.findnoBuildBugs(start,limit,buildId);
+    }
+
     public Integer deletereleate(Integer storyId,Integer buildId){
         return projectBuildDao.deletereleate(storyId,buildId);
     }
+
+    public Integer deletereleateBug(Integer bugId,Integer buildId){
+        return projectBuildDao.deletereleateBug(bugId,buildId);
+    }
+
+
     public Integer releateReq(Integer storyId,Integer buildId){
         return projectBuildDao.releateReq(storyId, buildId);
+    }
+
+    public Integer releateBug(Integer bugId,Integer buildId){
+        return projectBuildDao.releateBug(bugId, buildId);
     }
 
 }

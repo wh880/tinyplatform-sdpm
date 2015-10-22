@@ -72,9 +72,11 @@
                     dataType: "json",
                     success: function (data) {
                         if (data.status == "y" || data.status == "success") {
-                            $(curform).closest(".modal").trigger("close");
+                            layer.msg(data.info, 2, 1, function () {
+                                $(curform).closest(".modal").trigger("close");
+                            });
                         } else {
-                            layer.msg(data.info, 1, 1);
+                            layer.msg(data.info, 1, 9);
                         }
 //                        try {
 //                            //当弹出框时触发弹出框关闭

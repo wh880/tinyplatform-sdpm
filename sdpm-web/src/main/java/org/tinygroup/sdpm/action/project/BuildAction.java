@@ -243,39 +243,29 @@ public class BuildAction extends BaseController {
 
 
     @RequestMapping("/bugSearch/{relate}")
-    public String bugListAction(@PathVariable(value="relate")String relate, int page, int pagesize, QualityBug bug, SearchInfos searchInfos,
-                                @RequestParam(required = false, defaultValue = "bugId") String order,
-                                @RequestParam(required = false, defaultValue = "asc") String ordertype,
-                                Model model, HttpServletRequest request){
+    public String bugListAction(@PathVariable(value="relate")String relate, int page, int pagesize, QualityBug bug,int id,String groupOperate, SearchInfos searchInfos,
+                                Model model){
         //bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 
 
 
         if ("reRelateBug".equals(relate)) {
             bug.setDeleted(0);
-            bug.setBugStatus("3");
-            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            bug.setBugStatus("2");
+            Pager<QualityBug> p = buildService.findBugPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
             model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-bug-data.pagelet";
         }else if ("noRelateBug".equals(relate)) {
             bug.setProjectId(null);
-            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            Pager<QualityBug> p = buildService.findnoBugPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
             model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-no-bug-data.pagelet";
         } else if ("leRelateBugRelease".equals(relate)) {
-            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
+            Pager<QualityBug> p = buildService.findnoBugPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
             model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-le-bug-data.pagelet";
-        } else if ("reRelateBugRelease".equals(relate)) {
-            bug.setDeleted(0);
-            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
-            model.addAttribute("bugList",p);
-            return "/project/task/relation-release/product-al-bug-data.pagelet";
-        }else if ("noRelateBugRelease".equals(relate)) {
-            Pager<QualityBug> p = bugService.findBugListPager(pagesize*(page - 1), pagesize,searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype)?true:false);
-            model.addAttribute("bugList",p);
-            return "/project/task/relation-release/product-al-no-bug-data.pagelet";
         }
+
         return "";
     }
 
@@ -288,6 +278,20 @@ public class BuildAction extends BaseController {
         Map<String, String> map = new HashMap<String, String>();
         for(String storyId:ids.split(",")){
             buildService.releateReq(Integer.valueOf(storyId), buildId);
+        }
+//        return "project/task/relation-release/product-al-req.page";
+        map.put("status", "y");
+        map.put("info", "关联成功");
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("/releateBug")
+    public Map<String, String> releateBug(String ids,Integer buildId){
+//        buildService.releateReq(storyId, buildId);
+        Map<String, String> map = new HashMap<String, String>();
+        for(String bugId:ids.split(",")){
+            buildService.releateBug(Integer.valueOf(bugId), buildId);
         }
 //        return "project/task/relation-release/product-al-req.page";
         map.put("status", "y");
@@ -324,6 +328,17 @@ public class BuildAction extends BaseController {
     }
 
     @ResponseBody
+    @RequestMapping("/deletereleateBug")
+    public Map deletereleateBug(Integer bugId,Integer buildId){
+        buildService.deletereleateBug(bugId, buildId);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
+//        return "/project/task/relation-release/product-al-req.pagelet";
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/batchDeleteReq")
     public Map bctchDelReq(String ids,Integer buildId) {
         Map<String, String> map = new HashMap<String, String>();
@@ -336,6 +351,25 @@ public class BuildAction extends BaseController {
         for (String s : ids.split(",")) {
             Integer S = Integer.valueOf(s);
             buildService.deletereleate(S,buildId);
+        }
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/batchDeleteBug")
+    public Map bctchDelBug(String ids,Integer buildId) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (ids == null || ids == "") {
+            map.put("status", "fail");
+            map.put("info", "请至少选择一条数据");
+            return map;
+        }
+//        List<ProductStory> list = new ArrayList<ProductStory>();
+        for (String bug : ids.split(",")) {
+            Integer Bug = Integer.valueOf(bug);
+            buildService.deletereleateBug(Bug,buildId);
         }
         map.put("status", "success");
         map.put("info", "删除成功");

@@ -1,20 +1,22 @@
 #macro setTinyItemCount(num)
 	<input type="hidden" name="records" value="${num}"/>
 #end
+#set(count="")
 <script type="text/javascript">
     $(document).ready(function(){
-        var count = $("#records").val();
-        $(".titleName").html("<i class='icon-unlink' style='float: left'>未关联用例("+count+")</i>");
+        $(".titleName").html("<i class='icon-unlink' style='float: left'>未关联用例(${count})</i>");
     });
 </script>
+
 #setTinyItemCount(casePager?.totalCount)
+#set(count=asePager?.totalCount)
 #for(case:casePager?.records)
 					#@tr()
-						#@td()<input type="checkbox" value="1" name="userid">#end
+						#@td()<input type="checkbox" value="${case?.caseId}}" name="idCheck">#end
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${case?.caseId}</a>#end
 						#@td()
 						#@Tselect2F()
-	                   		 #@Tselect2Body("caseVersion" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("caseVersion"+caseFor?.index "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        #set(version = case?.caseVersion?:0)
 	                        #while(version>0)
 	                         <option value="caseVersion">${version}</option>

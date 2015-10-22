@@ -1,6 +1,51 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 #set(count="")
 #set(name="qualityVersion")
+#macro mulOperation(operation doActionUrl map)<span id="${operation}-${tableId}">#bodyContent</span><script type="text/javascript">
+ $(function(){
+  $("#${operation}-${tableId}").on("click",function() {
+		layer.confirm("请确认?",function() {
+			 var checklist = [];
+			 var versions = [];
+			 $("#${tableId} input[name=idCheck]:checked").each(function (e) {
+			    var str = $(this).val().split(",");
+				  checklist.push(str[0]);
+				  versions.push(str[1]);
+			 });
+			 if(checklist.length==0){
+				layer.msg("请选择记录")
+				 return false;
+			 }
+			 $.ajax({
+				  url: "${doActionUrl}",
+				  data: {ids: checklist.join(","),ves:versions.join(","), action: "${operation}"#mapToJson(map)},
+				  dataType: "json",
+				  success: function (data) {
+						if (data.status=="success"||data.status=="y") {
+							 //console.log(data);
+							 if(data.url){
+								 var url=data.url;
+								 if(url.indexOf("http://")!=0){
+									url=contextPath+url;
+								 }
+								 window.location.href=url;
+							 }else{
+								layer.msg(data.info,2, 1);
+								$("#${tableId}").trigger("initnav");
+							 }
+						}else{
+							 layer.msg(data.info);
+						}
+				  },
+				  error:function(){
+					  layer.msg("系统出错，请确认你的请求地址");
+				  }
+			 })
+		});
+		//return false;
+  })
+ });
+</script>#end
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
 			#@div(divClass="dropdownBox")
@@ -42,14 +87,15 @@
 					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 					<div class="f col-2">
 						<input type="button" value="全选" class="btn btn-default btn-primary col-3" 
-						onclick="selectAllNullorReserve('userid','全选');" />											
+						onclick="selectAllNullorReserve('idCheck','全选');" />
 						<div class="col-0">&nbsp&nbsp</div>
 						<input type="button" value="反选" class="btn btn-default btn-primary col-3"
-						 onclick="selectAllNullorReserve('userid','反选');" />						
+						 onclick="selectAllNullorReserve('idCheck','反选');" />
 						<div class="col-0">&nbsp&nbsp</div>
 						<div class="dropdown col-3">
-							<input type="submit" value="保存" class="btn btn-default btn-primary" 
-									 />
+							#@mulOperation("link" TINY_CONTEXT_PATH+adminPath+"/quality/version/makeLink")
+							<div><input type="button" value="保存" class="btn btn-default btn-primary" /></div>
+							#end
 						</div>
 					</div>
 				#end
