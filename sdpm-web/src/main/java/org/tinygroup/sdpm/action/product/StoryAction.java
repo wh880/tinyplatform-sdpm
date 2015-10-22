@@ -168,12 +168,20 @@ public class StoryAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/updateBatch")
-    public int[] updateBatch(@RequestBody ProductStory[] stories) {
-        List<ProductStory> productStories = new ArrayList<ProductStory>();
+    public boolean updateBatch(@RequestBody ProductStory[] stories) {
+       /* List<ProductStory> productStories = new ArrayList<ProductStory>();
         if (stories != null && stories.length > 0) {
             productStories = Arrays.asList(stories);
         }
-        return storyService.updateBatchStory(productStories);
+        return storyService.updateBatchStory(productStories);*/
+
+    	if(stories.length==0||stories==null){
+    		return false;
+    	}
+    	for (ProductStory story : stories) {
+			storyService.updateStory(story);
+		}
+    	return true;
     }
 
     @RequestMapping("/closeBatch")
