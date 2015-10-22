@@ -33,37 +33,50 @@
         #foreach(m:menuManager.getScopeMenus("pro-task-op"))
         ##逻辑判断，根据状态判断是否可选择。
         ##1.关闭，则
-            #if(t.taskStatus == 6)
-                #if(m.sort != 10 || m.sort!= 4)
-                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-                #else
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
-                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-                #end
-            #elseif(t.taskStatus == 1)
-                #if(m.sort == 6)
-                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-                #else
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
-                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-                #end
-            #elseif(t.taskStatus == 3)
-                #if(m.sort == 8 || m.sort == 15)
+            #if(t.taskStatus == 1)
+                #if(m.id == "pro-task-close")
                     <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
                 #else
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
             #elseif(t.taskStatus == 2)
-                #if(m.sort == 6 || m.sort == 15)
+                #if(m.id == "pro-task-start" || m.id=="pro-task-close")
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #elseif(t.taskStatus == 3)
+                #if(m.id == "pro-task-start" || m.id == "pro-task-finish")
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #elseif(t.taskStatus == 4)
+                #if(m.id == "pro-task-start" || m.id == "pro-task-close")
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #elseif(t.taskStatus == 5)
+                #if(m.id == "pro-task-call" || m.id == "pro-task-start" || m.id =="pro-task-finish")
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #elseif(t.taskStatus == 6)
+                #if(m.id == "pro-task-call" || m.id == "pro-task-start" ||
+                m.id =="pro-task-finish" || m.id == "pro-task-close")
                     <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
                 #else
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
             #else
-                无
-                #break()
             #end
         #end
     #end
