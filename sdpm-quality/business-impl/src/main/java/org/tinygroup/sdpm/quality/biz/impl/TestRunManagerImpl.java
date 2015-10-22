@@ -40,8 +40,8 @@ public class TestRunManagerImpl implements TestRunManager {
 	public Pager<QualityTestRun> findPager(Integer start, Integer limit, QualityTestRun testRun,String condition, String sortName, boolean asc) {
 		Condition condition1 = StringUtil.isBlank(condition)?null: FragmentSql.fragmentCondition(condition);
 		if(StringUtil.isBlank(sortName)){
-			return testrundao.queryPager(start,limit,testRun);
+			return testrundao.queryPager(start,limit,testRun,condition1);
 		}
-		return testrundao.queryPager(start,limit,testRun,new OrderBy(sortName,asc));
+		return testrundao.queryPager(start,limit,testRun,condition1,new OrderBy(sortName,asc));
 	}
 }

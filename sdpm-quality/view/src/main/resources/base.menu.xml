@@ -109,7 +109,7 @@
               isShow="1" scope="testversion-op,pro-test-op,testverinfo-tab"></menu>      
         <menu id="teditionversion" name="修改" href="/quality/version/toEdit" icon="icon-pencil" sort="2"
               isShow="1" scope="testversion-op"></menu>
-        <menu id="tversiondelete" name="删除" href="/tinyuiweb/action/del.pagelet" icon="icon-remove" sort="1"
+        <menu id="tversiondelete" name="删除" href="/quality/version/ajax/delete" icon="icon-remove" sort="1"
               isShow="1" scope="testversion-op"></menu>
       	<menu id="tproposeversion" name="完成" href="/testManagement/page/proposeversion.page" icon="icon-ok-sign" sort="12" isShow="1"
               scope="pro-version-op"/>     
@@ -127,7 +127,7 @@
               isShow="1" scope="testverinfo-tab"></menu>
        <menu id="tvercase" name="用例" href="/testManagement/page/cases.page" icon="icon-smile" sort="4"
               isShow="1" scope="testverinfo-tab"></menu>  
-       <menu id="tverdelete" name="删除" href="" icon="icon-remove" sort="2"
+       <menu id="tverdelete" name="删除" href="/quality/version/ajax/delete" icon="icon-remove" sort="2"
               isShow="1" scope="testverinfo-tab"></menu>
        <menu id="tverback" name="返回" href="" icon="icon-level-up" sort="1"
               isShow="1" scope="testverinfo-tab"></menu> 
@@ -136,15 +136,15 @@
 	   <menu id="tvertest" name="已测版本"  href="/quality/version/?status=tvertest" icon="" sort="1"
               isShow="1" scope="testverleft-tab"></menu> 
               
-       <menu id="tverallcase" name="所有用例"  href="#" icon="" sort="7"
+       <menu id="tverallcase" name="所有用例"  href="/quality/version/taskToCase?status=tverallcase&amp;currentPageId=5" icon="" sort="7"
               isShow="1" scope="version-case"></menu>      
-       <menu id="tverassign" name="指派给我"  href="#" icon="" sort="6"
+       <menu id="tverassign" name="指派给我"  href="/quality/version/taskToCase?status=tverassign&amp;currentPageId=5" icon="" sort="6"
               isShow="1" scope="version-case"></menu>
        <menu id="tversee" name="分组查看"  href="#" icon="" sort="5"
               isShow="1" scope="version-case"></menu>      
        <menu id="tversearch" name="搜索"  href="#" icon="" sort="4"
               isShow="1" scope="version-case"></menu>
-       <menu id="tverInfo" name="概况"  href="#" icon="" sort="3"
+       <menu id="tverInfo" name="概况"  href="/quality/version/versionInfo?currentPageId=5" icon="" sort="3"
               isShow="1" scope="version-case"></menu>  
        <menu id="tverrelcase" name="关联用例"  href="#" icon="icon-link" sort="2"
               isShow="1" scope="version-case-right"></menu>

@@ -23,6 +23,27 @@
 
 #end
 		#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/version/save" "post" {"class":"test"})
+		<script type="text/javascript">
+            $(function(){
+                var form = $("#${fromId}");
+                var action = form.attr("action");
+                form.submit(function(){
+                    $.ajax({
+                         type: "post",
+                         url: action,
+                         data: form.serialize(),
+                         dataType: "json",
+                         success: function(data){
+                                if(data.status == "y"){
+                                window.location.href=document.referrer;
+                                }
+                            }
+                             });
+                             return false;
+                });
+            })
+
+        </script>
 		#hiddenInput(hiddenInputName="testversionId" hiddenInputValue=testTask?.testversionId)
 			<div style="width:100%">
     			<div class="infoContent">
@@ -35,15 +56,14 @@
 	                   		 #@Tselect2Body("projectId" testTask?.projectId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                   		 <option value="0">/</option>
 	                   		 #for(project : projectList)
-	                        <option value="${project?.projectId}">${project?.projectTitle}</option>
+	                        <option value="${project?.projectId}">${project?.projectName}</option>
 	                        #end
 	                    	#end
                            <script type="text/javascript">
                                 $("#${sid}").on("change",function(){
                                     var pId = $("#${sid}  option:selected").val();
-                                    alert(pId);
-                                    ajaxRead("${sid}","buildName","buildId","buildName","/quality/bug/ajax/build?buildProject="+pId+"buildProduct=${qualityProductId}",${testTask?.buildName?:0},"build");
-                                    ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/bug/ajax/user?projectId="+pId,${testTask?.testtaskOwner?:0});
+                                    ajaxRead("${sid}","buildName","buildId","buildName","/quality/version/ajax/build?buildProject="+pId+"&buildProduct=${qualityProductId?:0}",${testTask?.buildName?:0},"build");
+                                    ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${testTask?.testtaskOwner?:0}");
                                 })
                             </script>
 	                    	#@Tselect2Fix()
@@ -186,10 +206,6 @@
 	#end
 	#end
 
-
-<script type="text/javascript">
-    $(".select2").select2();
-</script>
 <script type="text/javascript">
 	function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
     		var selectCheck = "select[name="+toName+"]";

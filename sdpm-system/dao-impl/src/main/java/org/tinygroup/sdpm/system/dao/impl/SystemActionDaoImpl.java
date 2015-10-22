@@ -16,24 +16,6 @@
 
 package org.tinygroup.sdpm.system.dao.impl;
 
-import org.springframework.stereotype.Repository;
-import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.jdbctemplatedslsession.callback.*;
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.system.dao.SystemActionDao;
-import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
-import org.tinygroup.tinysqldsl.*;
-import org.tinygroup.tinysqldsl.base.Condition;
-import org.tinygroup.tinysqldsl.base.FragmentSql;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.select.OrderByElement;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.SYSTEM_ACTIONTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
@@ -43,6 +25,35 @@ import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Repository;
+import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.system.dao.SystemActionDao;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.tinysqldsl.Delete;
+import org.tinygroup.tinysqldsl.Insert;
+import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.Select;
+import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 @Repository
 
 public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActionDao {
@@ -266,14 +277,18 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 	}
 
 	public SystemAction getActionAndObject(final SystemAction systemAction) {
+		try {
+			Select select = select(FragmentSql.fragmentSelect("a.*, "+ActionEnum.getName(systemAction.getActionObjectType())+" as objectName"))
+					.from(FragmentSql.fragmentFrom(
+							"system_action a JOIN "+ActionEnum.getTable(systemAction.getActionObjectType())
+									+" b ON a.action_object_id = b."+ActionEnum.getPrimary(systemAction.getActionObjectType())))
+					.where(FragmentSql.fragmentCondition("a.action_id="+systemAction.getActionId()));
 
-		Select select = select(FragmentSql.fragmentSelect("a.*, "+ActionEnum.getName(systemAction.getActionObjectType())+" as objectName"))
-				.from(FragmentSql.fragmentFrom(
-						"system_action a JOIN "+ActionEnum.getTable(systemAction.getActionObjectType())
-								+" b ON a.action_object_id = b."+ActionEnum.getPrimary(systemAction.getActionObjectType())))
-				.where(FragmentSql.fragmentCondition("a.action_id="+systemAction.getActionId()));
-
-		return getDslSession().fetchOneResult(select,SystemAction.class);
+			return getDslSession().fetchOneResult(select,SystemAction.class);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+		
 	}
 	
 	public Pager<SystemAction> queryPager(int start,int limit ,final Condition dateCondition,SystemAction systemAction ,final OrderBy... orderBies) {

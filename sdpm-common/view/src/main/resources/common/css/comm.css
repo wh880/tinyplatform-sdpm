@@ -195,7 +195,7 @@
 }
 
 .infoContent {
-    margin: 18px 0px 10px 0px;
+    margin: 15px 0px 10px 0px;
     padding: 16px 6px;
     border: #eee 1px solid;
     position: relative;
@@ -441,3 +441,17 @@ a.btn.btn-sm.backBtn, backBtn {
 .questionInfo .Nametitle{background: #f6f6f6;color: #222;border-bottom: #eee 1px solid;padding: 8px; font-weight:bold}
 .questionName,.answerName{display:inline-block;width:48px;float:left}
 .contentInfolist{display:inline-block;}
+
+/*客服模块*/
+.slaEmptyInfo {
+    font-size: 20px;
+    color: #666;
+    padding: 12px 6px;
+    margin-top: 6px;
+}
+
+.slaEmptyInfo {
+    margin-right: 6px;
+    color: #FA3;
+    font-size: 24px;
+}
