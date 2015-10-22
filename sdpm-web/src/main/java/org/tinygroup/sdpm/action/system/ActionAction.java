@@ -15,6 +15,8 @@ import org.tinygroup.tinysqldsl.Pager;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("a/system/action")
 public class ActionAction extends BaseController{
@@ -42,16 +44,23 @@ public class ActionAction extends BaseController{
 			@RequestParam(required = false,defaultValue = "1")int page,
 			@RequestParam(required = false,defaultValue = "10")int pagesize,
 			@RequestParam(required = false,defaultValue = "actionDate")String order,
-			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model){
+			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model,HttpServletRequest request){
 		
 	/*	if(request.getSession().getAttribute("sessionProductId")!=null){
 			plan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 		}
 		*/
 		/*action.setActionObjectType("product");*/
+		if(request.getSession().getAttribute("sessionProductId")!=null){
+			action.setActionProduct(String.valueOf((Integer) request.getSession().getAttribute("sessionProductId")));
+		}else{
+			action.setActionProduct(null);
+		}
+		
 		Pager<SystemAction>  pagerSystemAction = actionService.queryPager(page, pagesize,ActionUtil.getActionDateCondition(choice), action, order, ordertype);
 
 		model.addAttribute("systemAction",pagerSystemAction);
+		
 
 		return "/product/data/tinydynamicdata.pagelet";
 	}
