@@ -1,4 +1,4 @@
-#@div(divClass="tabInfocontents")
+#@div(divClass=" infoContent tabInfocontents")
 	#@tabWithInit("tab_info01")
 		#@tabHead()
 			#@tabHeadCol()基本信息#end
@@ -96,7 +96,7 @@
 	#end
 #end
 <br>
-#@div(divClass="tabInfocontents")
+#@div(divClass=" infoContent tabInfocontents")
 	#@tabWithInit("tab_info1")
 		#@tabHead()
 			#@tabHeadCol()BUG的一生#end

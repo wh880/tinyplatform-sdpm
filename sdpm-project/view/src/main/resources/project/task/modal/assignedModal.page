@@ -10,7 +10,9 @@
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="">/</option>
                         #foreach(t : teamList)
-                            <option value="${t?.teamUserId}">${t?.teamUserId}</option>
+                            <option value="${t?.teamUserId}">
+                                ${UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                            </option>
                         #end
                     #end
                     #@Tselect2Fix()
@@ -69,8 +71,9 @@
                     dataType: "json",
                     success: function (data) {
                         if (data.status == "y" || data.status == "success") {
-                            $(curform).closest(".modal").trigger("close");
-                            location = location;
+                            layer.msg(data.info, 2, 1, function () {
+                                $(curform).closest(".modal").trigger("close");
+                            });
                         } else {
                             layer.msg(data.info, 1, 9);
                         }

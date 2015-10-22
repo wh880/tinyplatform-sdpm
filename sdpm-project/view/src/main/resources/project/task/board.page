@@ -17,6 +17,5 @@
     ##body end
     #end
 #end
-<div id="boardData">
+
 #include("/project/task/boardDate.page")
-</div>

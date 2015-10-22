@@ -24,7 +24,9 @@ import javax.validation.Validator;
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Hulk on 2015/9/20.
@@ -120,7 +122,7 @@ public abstract class BaseController {
 //     */
 //    @ExceptionHandler({AuthenticationException.class})
 //    public String authenticationException() {
-//        return "error/403";
+//        return "error/40x";
 //    }
 //
 
@@ -258,6 +260,24 @@ public abstract class BaseController {
                 uploadNoTitle(uploadFiles[i], objectId, type);
             }
         }
+    }
+
+    /**
+     * 拼装前台Ajax请求结果
+     *
+     * @param result
+     * @param msg
+     * @return
+     */
+    protected Map<String, String> resultMap(boolean result, final String msg) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (result) {
+            map.put("status", "y");
+        } else {
+            map.put("status", "n");
+        }
+        map.put("info", msg);
+        return map;
     }
 
 }

@@ -28,6 +28,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
     public List<Project> findList() {
         Project project = new Project();
+        project.setProjectDeleted(Project.DELETE_NO);
         return projectDao.query(project);
     }
 
