@@ -76,7 +76,7 @@ public class CmsUtils {
     /**
      * 清楚产品线列表
      */
-    public static void removetProductLineList() {
+    public static void removeProductLineList() {
         CacheUtils.remove(CMS_CACHE, CMS_CACHE_PRODUCCT_LINE_LIST);
     }
 
