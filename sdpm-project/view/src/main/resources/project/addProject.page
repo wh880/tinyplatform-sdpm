@@ -36,124 +36,126 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/add" "" {"class":"test"})
 
 <div style="width:100%;float:left" class="pageleftpart">
-<div class="infoContent">
-    <p class="titleName">添加</p>
-    #@elementItem()
-        #@sdpmItem("项目名称" "*")
-            #tinyInput("text" "projectName" ""{"placeholder":"请输入项目名称","datatype":"*","nullmsg":"项目名称不能为空！",
-                "class":"input-text"})
+    <div class="infoContent">
+        <p class="titleName">添加</p>
+        #@elementItem()
+            #@sdpmItem("项目名称" "*")
+                #tinyInput("text" "projectName" ""{"placeholder":"请输入项目名称","datatype":"*","nullmsg":"项目名称不能为空！",
+                    "class":"input-text"})
+            #end
         #end
-    #end
-    #@elementItem()
-        #@sdpmItem("项目代号" "*")
-            #tinyInput("text" "projectCode" ""{"placeholder":"请输入项目代号","datatype":"*","nullmsg":"项目代号不能为空！",
-                "class":"input-text"})
+        #@elementItem()
+            #@sdpmItem("项目代号" "*")
+                #tinyInput("text" "projectCode" ""{"placeholder":"请输入项目代号","datatype":"*","nullmsg":"项目代号不能为空！",
+                    "class":"input-text"})
+            #end
         #end
-    #end
-    #@elementItem()
-        #@sdpmItem("起始日期" "*")
-            #@tinyDateInput(
-                "projectBegin" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"开始日期不能为空","placeholder":
-                "选择日期"})#end
+        #@elementItem()
+            #@sdpmItem("起始日期" "*")
+                #@tinyDateInput(
+                    "projectBegin" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"开始日期不能为空",
+                    "placeholder":
+                    "选择日期"})#end
+            #end
         #end
-    #end
-    #@elementItem()
-        #@sdpmItem("结束日期" "*")
-            #@tinyDateInput(
-                "projectEnd" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"结束日期不能为空","placeholder":
-                "选择日期"})#end
+        #@elementItem()
+            #@sdpmItem("结束日期" "*")
+                #@tinyDateInput(
+                    "projectEnd" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"结束日期不能为空",
+                    "placeholder":
+                    "选择日期"})#end
 
+            #end
         #end
-    #end
-    #@elementItem()
-        #@sdpmItem("可用工作日")
-            <div class="input-group">
-                <input name="projectDays" type="text" class="form-control" placeholder=""
-                       aria-describedby="basic-addon2" datatype="n">
-                <span class="input-group-addon" id="basic-addon2">小时</span>
-            </div>
+        #@elementItem()
+            #@sdpmItem("可用工作日")
+                <div class="input-group">
+                    <input name="projectDays" type="text" class="form-control" placeholder=""
+                           aria-describedby="basic-addon2" datatype="n">
+                    <span class="input-group-addon" id="basic-addon2">小时</span>
+                </div>
+            #end
         #end
-    #end
 
-    #@elementItem()
-        #@sdpmItem("项目类型")
-            #@Tselect2F()
-                #@Tselect2Body("projectType" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="">/</option>
-                    #foreach(type : getDict("projectType"))
-                        <option value=${type.value}>${type.text}</option>
+        #@elementItem()
+            #@sdpmItem("项目类型")
+                #@Tselect2F()
+                    #@Tselect2Body("projectType" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="">/</option>
+                        #foreach(type : getDict("projectType"))
+                            <option value=${type.value}>${type.text}</option>
+                        #end
                     #end
                 #end
             #end
         #end
-    #end
 
-##
-    #@elementItem()
-        #@sdpmItem("团队名称" "*")
-            #tinyInput("text" "projectTeam" ""{"placeholder":"请输入团队名称","datatype":"*","nullmsg":
-                "团队名称不能为空","class":"input-text"})
+    ##
+        #@elementItem()
+            #@sdpmItem("团队名称" "*")
+                #tinyInput("text" "projectTeam" ""{"placeholder":"请输入团队名称","datatype":"*","nullmsg":
+                    "团队名称不能为空","class":"input-text"})
+            #end
         #end
-    #end
-    #@elementItem()
-        #@sdpmItem("关联产品")
-            #@Tselect2F()
-                #@Tselect2Body("linkProduct" "" {"class":"input-text select2"})
-                    <option value="">/</option>
-                    #foreach(p : prodcutList)
-                        <option value="${p?.productId}">${p.productName}</option>
+        #@elementItem()
+            #@sdpmItem("关联产品")
+                #@Tselect2F()
+                    #@Tselect2Body("linkProduct" "" {"class":"input-text select2"})
+                        <option value="">/</option>
+                        #foreach(p : prodcutList)
+                            <option value="${p?.productId}">${p.productName}</option>
+                        #end
+                    #end
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
                     #end
                 #end
-                #@Tselect2Fix()
-                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
-                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
-                #end
             #end
         #end
-    #end
-#end
-#@elementItem()
-    #@sdpmItem("项目描述")
-        #@Teditor("projectDesc" "content" {"initialFrameHeight":"200","initialFrameWidth":"550"})#end
-    #end
-#end
-#@elementItem()
-    #@sdpmItem("访问控制")
-        #@formControlDiv("skin-minimal col-9")
-            #foreach(acl : getDict("projectAcl"))
-                #@tinyRadio("projectAcl" acl.value "")${acl.text}#end
-            #end
-        #end
-    #end
-#end
-#@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
-    #@colLabel()分组白名单#end
-    #@skinMinimal("col-8")
-        #@Tcheckboxes("whiteList" "")
-            #foreach(wl : getDict("whiteList"))
-                #@gridSysCol(2)
-                    #@Tcheckbox(wl.value)${wl?.text}#end
-                #end
-            #end
-        #end
-        #@validateDiv("col-2")#end
-    #end
-#end
-</div>
-#@elementItem()
-    <div class="col-12">
-        <div class="col-5">
 
-        </div>
-        <div class="col-1">
-            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-        </div>
-        <div class="col-1">
-            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
-        </div>
-        <div class="col-5"></div>
+        #@elementItem()
+            #@sdpmItem("项目描述")
+                #@Teditor("projectDesc" "content" {"initialFrameHeight":"200","initialFrameWidth":"550"})#end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("访问控制")
+                #@formControlDiv("skin-minimal col-9")
+                    #foreach(acl : getDict("projectAcl"))
+                        #@tinyRadio("projectAcl" acl.value "")${acl.text}#end
+                    #end
+                #end
+            #end
+        #end
+        #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
+            #@colLabel()分组白名单#end
+            #@skinMinimal("col-8")
+                #@Tcheckboxes("whiteList" "")
+                    #foreach(wl : getDict("whiteList"))
+                        #@gridSysCol(2)
+                            #@Tcheckbox(wl.value)${wl?.text}#end
+                        #end
+                    #end
+                #end
+                #@validateDiv("col-2")#end
+            #end
+        #end
     </div>
-#end
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
     <br>
 </div>
 #end

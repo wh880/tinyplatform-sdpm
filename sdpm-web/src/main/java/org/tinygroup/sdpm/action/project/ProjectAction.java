@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -12,18 +13,23 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBurn;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
+import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by shenly13343 on 2015-09-21.
@@ -95,7 +101,12 @@ public class ProjectAction extends BaseController {
         return "project/addProject.page";
     }
 
-    @RequestMapping("add")
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String addPageGet() {
+        return "project/allProject.page";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addPage(Model model, HttpServletResponse response,
                           HttpServletRequest request, Project project,
                           Integer[] linkProduct, Integer[] whiteList) {
@@ -114,13 +125,14 @@ public class ProjectAction extends BaseController {
         project.setProjectWhiteList(whiteListStr);
         Project tProject = projectService.addProject(project);
         projectProductService.addLink(linkProduct, tProject.getProjectId());
+
         CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
-        request.getSession().setAttribute("selProject", tProject);
-        List<Project> list = projectService.findList();
-        request.getSession().setAttribute("projectList", list);
+//        request.getSession().setAttribute("selProject", tProject);
+//        List<Project> list = projectService.findList();
+//        request.getSession().setAttribute("projectList", list);
+        CmsUtils.removetList();
         return "project/allProject.page";
     }
-
 
     @RequestMapping("/allProject")
     public String jumpAllProject() {
@@ -152,43 +164,105 @@ public class ProjectAction extends BaseController {
         return "project/survey/index.page";
     }
 
-    @RequestMapping(value = "/delaysave", method = RequestMethod.POST)
-    public String delaySave(Project project, Model model) {
-        if (project.getProjectId() == null) {
-            projectService.addProject(project);
-        } else {
-            projectService.updateProject(project);
-        }
-        model.addAttribute("project", project);
-        return "redirect:" + adminPath + "/project/manage/survey/index";
-    }
 
     @RequestMapping("/delay")
     public String delay(Integer projectId, Model model) {
-        if (projectId != null) {
-            Project project = projectService.findById(projectId);
-            model.addAttribute("project", project);
-            //还需要查询其他相关任务剩余时间的信息
-            return "/project/survey/delay.pagelet";
-        }
-        return "error";
+        Project project = projectService.findById(projectId);
+        model.addAttribute("project", project);
+        return "/project/survey/delay.pagelet";
     }
 
-    @RequestMapping("/hangup")
-    public String hangup(Integer projectId, Model model) {
-        if (projectId != null) {
-            Project project = projectService.findById(projectId);
-            model.addAttribute("project", project);
-            //还需要查询其他相关任务剩余时间的信息
-            return "/project/survey/hang-up.pagelet";
-        }
-        return "error";
+    @ResponseBody
+    @RequestMapping(value = "/delaysave", method = RequestMethod.POST)
+    public Map<String, String> delaySave(Project project, String content) {
+        Project oldProject = projectService.findById(project.getProjectId());
+        Integer res = projectService.updateProject(project);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.DELAYED, oldProject.getProjectId().toString(),
+                UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
+        return resultMap(res > 0 ? true : false, res > 0 ? "延期成功" : "延期失败");
     }
+
+    @RequestMapping("/hangUp")
+    public String hangUp(Integer projectId, Model model) {
+        Project project = projectService.findById(projectId);
+        model.addAttribute("project", project);
+        return "/project/survey/hangUp.pagelet";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "hangUp", method = RequestMethod.POST)
+    public Map<String, String> hangUpSave(Project project, String content) {
+        Project oldProject = projectService.findById(project.getProjectId());
+        project.setProjectStatus(project.HANGUP);
+        Integer res = projectService.updateProject(project);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.SUSPENDED, oldProject.getProjectId().toString(),
+                UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
+        return resultMap(res > 0 ? true : false, res > 0 ? "挂起成功" : "挂起失败");
+    }
+
+    @RequestMapping("/start")
+    public String start(Integer projectId, Model model) {
+        Project project = projectService.findById(projectId);
+        model.addAttribute("project", project);
+        return "/project/survey/start.pagelet";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "start", method = RequestMethod.POST)
+    public Map<String, String> startSave(Project project, String content) {
+        Project oldProject = projectService.findById(project.getProjectId());
+        project.setProjectStatus(project.DOING);
+        Integer res = projectService.updateProject(project);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.STARTED, oldProject.getProjectId().toString(),
+                UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
+        return resultMap(res > 0 ? true : false, res > 0 ? "开始成功" : "开始失败");
+    }
+
+    @RequestMapping("/doing")
+    public String doing(Integer projectId, Model model) {
+        Project project = projectService.findById(projectId);
+        model.addAttribute("project", project);
+        return "/project/survey/doing.pagelet";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "doing", method = RequestMethod.POST)
+    public Map<String, String> doingSave(Project project, String content) {
+        Project oldProject = projectService.findById(project.getProjectId());
+        project.setProjectStatus(project.DOING);
+        Integer res = projectService.updateProject(project);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.ACTIVATED, oldProject.getProjectId().toString(),
+                UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
+        return resultMap(res > 0 ? true : false, res > 0 ? "激活成功" : "激活失败");
+    }
+
+    @RequestMapping("/finish")
+    public String finish(Integer projectId, Model model) {
+        Project project = projectService.findById(projectId);
+        model.addAttribute("project", project);
+        return "/project/survey/doing.pagelet";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "finish", method = RequestMethod.POST)
+    public Map<String, String> finishSave(Project project, String content) {
+        Project oldProject = projectService.findById(project.getProjectId());
+        project.setProjectStatus(project.FINISH);
+        Integer res = projectService.updateProject(project);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.FINISHED, oldProject.getProjectId().toString(),
+                UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
+        return resultMap(res > 0 ? true : false, res > 0 ? "完成成功" : "完成失败");
+    }
+
 
     @RequestMapping("/basicInformation")
     public String basicInformation(Integer projectID, Model model) {
         Project project = projectService.findById(projectID);
+        List<ProjectProduct> list = projectProductService.findProducts(projectID);
+        Integer[] ids = new Integer[list.size()];
+        List<Product> productlist = productService.findProductList(list.toArray(ids));
         model.addAttribute("project", project);
+        model.addAttribute("productlist", productlist);
         return "project/survey/basicInformation.pagelet";
     }
 

@@ -58,8 +58,10 @@
 #foreach(p:projectPager.records)
     #@tr()
         #@td()<input type="checkbox" value="1" name="idCheck">#end
-        #@td()${p?.projectId}#end
-        #@td()${p?.projectName}#end
+        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/manage/survey/index?projectId=${p?.projectId}">${p
+            ?.projectId}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/manage/survey/index?projectId=${p?.projectId}">${p
+            ?.projectName}</a>#end
         #@td()${p?.projectCode}#end
         #@td()
             #if(p.projectEnd)
@@ -67,8 +69,7 @@
             #end
         #end
         #@td()
-        ##        getDict("projectStaut")
-            ${p?.projectStatu}
+            ${getDict("projectStaut", p.projectStatus)}
         #end
         #@td()${format("%.2f",p.estimate)}#end
         #@td()${format("%.2f",p.consume)}#end

@@ -28,6 +28,10 @@ public class Project implements Serializable{
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
 
+	public static String WAIT = "1";
+	public static String DOING = "2";
+	public static String HANGUP = "3";
+	public static String FINISH = "4";
 	/**
 	 * 项目下任务完成进度
 	 */
@@ -89,6 +93,7 @@ public class Project implements Serializable{
 	private Integer projectDays;
 	/**
 	 * 项目状态
+	 * 1-未开始 2-进行中 3-已挂起 4-已完成
 	 */
 	private String projectStatus;
 	/**

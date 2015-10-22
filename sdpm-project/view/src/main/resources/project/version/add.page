@@ -29,7 +29,7 @@
 <div class="infoContent">
     <p class="titleName">新建版本</p>
     #@elementItem()
-        <input type="hidden" name="buildProject" value="${selProject.projectId}"/>
+        <input type="hidden" name="buildProject" value="${currentProjectId}"/>
     #end
     #@elementItem()
         #@sdpmItem("产品")
