@@ -41,7 +41,7 @@ public class ProductLineAction extends BaseController {
     @Autowired
     private BuildService buildService;
 
-    @RequestMapping("{type}")
+    @RequestMapping("/content/{type}")
     public String productline(@PathVariable(value = "type") String type) {
         if ("add".equals(type)) {
 
@@ -157,7 +157,6 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("/find/{forword}")
     public String find(@PathVariable(value = "forword") String forword,Integer productId,Integer productLineId, Model model, HttpServletRequest request) {
     	
-    	
     	if (productLineId == null) {
     		if(request.getSession().getAttribute("sessionProductLineId")!=null){
     			 productLineId = (Integer) request.getSession().getAttribute("sessionProductLineId");
@@ -166,8 +165,12 @@ public class ProductLineAction extends BaseController {
     		}
            
         }
+    	
         ProductLine productLine = productLineService.findProductLine(productLineId);
+        List<String> lineNameList = productService.getProductNameByLineId(productLineId);
+        
         model.addAttribute("productLine", productLine);
+        model.addAttribute("lineNameList", lineNameList);
 
         if ("overview".equals(forword)) {
             return "/productLine/page/project/overview.page";

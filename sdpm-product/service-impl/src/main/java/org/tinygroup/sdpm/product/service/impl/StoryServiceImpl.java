@@ -1,8 +1,5 @@
 package org.tinygroup.sdpm.product.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
@@ -12,6 +9,9 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class StoryServiceImpl implements StoryService {
@@ -92,6 +92,10 @@ public class StoryServiceImpl implements StoryService {
 	public int[] deleteBatchStory(List<ProductStory> ids) {
 
 		return storyManager.deleteBatch(ids);
+	}
+
+	public List<ProductStory> findProductName(Integer storyId) {
+		return storyManager.findProductNameByStoryId(storyId);
 	}
 
 }
