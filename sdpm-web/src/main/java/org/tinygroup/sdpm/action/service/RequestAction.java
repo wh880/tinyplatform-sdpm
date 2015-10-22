@@ -111,13 +111,6 @@ public class RequestAction extends BaseController {
         model.addAttribute("requests", requests);
         return "service/serviceReq/closeRequest.pagelet";
     }
-
-    /* @RequestMapping(value = "/close/date")
-     public String closed(ServiceRequest clientRequest, Model model) {
-         if (clientRequest.getClientRequestId() != null)
-             requestService.closeRequest(clientRequest);
-         return "redirect:" + adminPath + "/service/request/list";
-     }*/
     @RequestMapping(value = "/close/date")
     public String closed(ServiceRequest clientRequest, Model model) {
         if (clientRequest.getClientRequestId() != null)
