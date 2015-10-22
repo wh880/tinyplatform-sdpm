@@ -23,14 +23,16 @@
         </select>
         <select id="requestType">
             <option value="" selected="selected"></option>
-            <option value="0">缺陷</option>
-            <option value="1">适应性</option>
+            #foreach(item : getDict("requestType"))
+                <option value=${item.value}>${item.text}</option>
+            #end
             <option value="null">空</option>
         </select>
         <select id="requestPre">
             <option value="" selected="selected"></option>
-            <option value="0">低</option>
-            <option value="1">中</option>
+            #foreach(item : getDict("requestPre"))
+                <option value=${item.value}>${item.text}</option>
+            #end
             <option value="null">空</option>
         </select>
         <select id="modle">
