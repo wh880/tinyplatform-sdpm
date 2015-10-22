@@ -57,17 +57,17 @@
                                     #@gridSysCol(8)
                                         #if(var.serviceDeadline)${formatDate(var.serviceDeadline,"yyyy-MM-dd")}#end
                                     #end
-                                #end
+                                    #end
                                 #@gridSysRow()
                                     #@gridSysCol(4)批准人#end
                                     #@gridSysCol(8)${var.slaReviewedBy}#end
-                                #end
+                                    #end
                                 #@gridSysRow()
                                     #@gridSysCol(4)批准时间#end
                                     #@gridSysCol(8) #if(var.slaReviewDate)${formatDate
                                         (var.serviceDeadline,"yyyy-MM-dd")}#end
+                                        #end
                                     #end
-                                #end
                                 <div style="text-align:right;margin:right;padding-right:15px">
                                     #foreach(m:menuManager.getScopeMenus("clientSla"))
                                         #if(m.id != "clientSla_delete")
@@ -82,7 +82,7 @@
                                         #end
                                     #end
                                 </div>
-                            </div>
+                                </div>
                                 #end
                         #end
                         #end
