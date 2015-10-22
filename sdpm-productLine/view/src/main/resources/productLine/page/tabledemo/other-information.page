@@ -26,31 +26,31 @@
             #end
             #@tr()
                 #@td()产品线经理#end
-                #@td()${UserUtils.getUserById(productLine?.productLineOwner)?.orgUserRealName}#end
+                #@td()${productLine?.productLineOwner}#end
             #end
             #@tr()
                 #@td()产品线质量经理#end
-                #@td()${UserUtils.getUserById(productLine?.productLineQualityManager)?.orgUserRealName}#end
+                #@td()${productLine?.productLineQualityManager}#end
             #end
             #@tr()
                 #@td()产品交付经理#end
-                #@td()${UserUtils.getUserById(productLine?.productLineDeliveryManager)?.orgUserRealName}#end
+                #@td()${productLine?.productLineDeliveryManager}#end
             #end
             #@tr()
                 #@td()状态#end
-                #@td()<font color="green">${getDict("productLineStatus",productLine?.productLineStatus)}</font>#end
+                #@td()<font color="green">${productLine?.productLineStatus}</font>#end
             #end
             #@tr()
                 #@td()访问控制#end
-                #@td()${getDict("lineAccessControl",productLine?.acl)}#end
+                #@td()${productLine?.acl}#end
             #end
             #@tr()
                 #@td()分组白名单#end
-                #@td()${productLine?.productLineWhiteList}#end
+                #@td()#end
             #end
             #@tr()
                 #@td()由谁创建#end
-                #@td()${UserUtils.getUserById(productLine?.productLineCreatedBy)?.orgUserRealName}#end
+                #@td()${productLine?.productLineCreatedBy}#end
             #end
             #@tr()
                 #@td()创建日期#end
