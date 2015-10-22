@@ -50,4 +50,6 @@ public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
     public Integer deletereleateBug(Integer bugId,Integer buildId);
 
     public Integer releateBug(Integer bugId,Integer buildId);
+
+    public Pager<QualityBug> findBuildLegacyBugs(int start, int limit, Integer buildId, final OrderBy... orderBies);
 }
