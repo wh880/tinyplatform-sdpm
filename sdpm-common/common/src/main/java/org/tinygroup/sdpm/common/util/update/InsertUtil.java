@@ -31,9 +31,7 @@ public class InsertUtil {
 		                String tableField = field.getName();
 		                String primaryField = StdUtil.getPrimary(table.getName())!=null?StdUtil.getPrimary(table.getName()).toLowerCase():"";
 		                if(!tableField.toLowerCase().equals(primaryField)){
-		                    Column column = new Column(NameUtil.resolveNameDesc(tableField));
-		                    column.setTable(table);
-		                    values.add(new Value(column,value));
+		                    values.add(new Column(table,NameUtil.resolveNameDesc(tableField)).value(value));
 		                }else{
 		                    primaryValue = value;
 		                }

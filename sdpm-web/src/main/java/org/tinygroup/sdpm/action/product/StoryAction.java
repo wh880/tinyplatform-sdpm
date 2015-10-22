@@ -168,12 +168,20 @@ public class StoryAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/updateBatch")
-    public int[] updateBatch(@RequestBody ProductStory[] stories) {
-        List<ProductStory> productStories = new ArrayList<ProductStory>();
+    public boolean updateBatch(@RequestBody ProductStory[] stories) {
+       /* List<ProductStory> productStories = new ArrayList<ProductStory>();
         if (stories != null && stories.length > 0) {
             productStories = Arrays.asList(stories);
         }
-        return storyService.updateBatchStory(productStories);
+        return storyService.updateBatchStory(productStories);*/
+
+    	if(stories.length==0||stories==null){
+    		return false;
+    	}
+    	for (ProductStory story : stories) {
+			storyService.updateStory(story);
+		}
+    	return true;
     }
 
     @RequestMapping("/closeBatch")
@@ -221,7 +229,7 @@ public class StoryAction extends BaseController {
     }
 
     @RequestMapping("/{forwordPager}/findPager")
-    public String find(Integer storyId, @PathVariable(value = "forwordPager") String forwordPager, Model model) {
+    public String find(Integer storyId, @PathVariable(value = "forwordPager") String forwordPager, Model model, SystemAction systemAction) {
 
         ProductStory productStory = storyService.findStory(storyId);
         ProductStorySpec storySpec = storySpecService.findStorySpec(storyId);
@@ -245,13 +253,11 @@ public class StoryAction extends BaseController {
         model.addAttribute("storyMailTo", userList);
 
         if ("productDemandClose".equals(forwordPager)) {
-
             return "/product/page/tabledemo/product-demand-close.page";
         } else if ("productDemandReview".equals(forwordPager)) {
 
             return "/product/page/tabledemo/product-demand-review.page";
         } else if ("productDemandChange".equals(forwordPager)) {
-
             return "/product/page/tabledemo/product-demand-change.page";
         } else if ("productDemandDetail".equals(forwordPager)) {
 
@@ -265,6 +271,27 @@ public class StoryAction extends BaseController {
 
         return "";
     }
+
+    @RequestMapping("/changed")
+    public String changed(SystemAction systemAction, ProductStory productStory, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
+        ProductStory story = storyService.findStory(productStory.getStoryId());
+        storyService.updateStory(productStory);
+        OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute("user");
+
+        uploads(file, story.getStoryId(), ProfileType.STORY, title);
+
+        LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
+                LogUtil.LogAction.CHANGED,
+                String.valueOf(productStory.getStoryId()),
+                UserUtils.getUserId(),
+                String.valueOf(productStory.getProductId()),
+                null,
+                story,
+                productStory,
+                systemAction.getActionComment());
+        return "redirect:" + "/product/page/project/togglebox.page";
+    }
+
 
     @RequestMapping("/search")
     public String storySearchAction(int page, int pagesize, ProductStory story, String choose, String groupOperate, SearchInfos searchInfos, String order, String ordertype, Model model, HttpServletRequest request) {

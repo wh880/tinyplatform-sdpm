@@ -41,6 +41,7 @@ import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.common.util.update.InsertUtil;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
@@ -60,11 +61,11 @@ import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 		ProductReleaseDao {
 
-	public ProductRelease add(ProductRelease productRelease) {
+	public ProductRelease add(final ProductRelease productRelease) {
 		return getDslTemplate().insertAndReturnKey(productRelease,
 				new InsertGenerateCallback<ProductRelease>() {
 					public Insert generate(ProductRelease t) {
-						Insert insert = insertInto(PRODUCT_RELEASETABLE)
+						Insert insert = InsertUtil.getInsert(PRODUCT_RELEASETABLE, productRelease);/*insertInto(PRODUCT_RELEASETABLE)
 								.values(PRODUCT_RELEASETABLE.RELEASE_ID.value(t
 										.getReleaseId()),
 										PRODUCT_RELEASETABLE.PRODUCT_ID.value(t
@@ -82,7 +83,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 										PRODUCT_RELEASETABLE.RELEASE_DESC
 												.value(t.getReleaseDesc()),
 										PRODUCT_RELEASETABLE.DELETED.value(t
-												.getDeleted()));
+												.getDeleted()));*/
 						return insert;
 					}
 				});
@@ -145,17 +146,19 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 
 	public ProductRelease getByKey(Integer pk) {
 		try {
-			return getDslTemplate().getByKey(pk, ProductRelease.class, new SelectGenerateCallback<Serializable>() {
-				@SuppressWarnings("rawtypes")
-				public Select generate(Serializable t) {
-					return selectFrom(PRODUCT_RELEASETABLE).where(PRODUCT_RELEASETABLE.RELEASE_ID.eq(t));
-					}
-				});
+			return getDslTemplate().getByKey(pk, ProductRelease.class,
+					new SelectGenerateCallback<Serializable>() {
+						@SuppressWarnings("rawtypes")
+						public Select generate(Serializable t) {
+							return selectFrom(PRODUCT_RELEASETABLE).where(
+									PRODUCT_RELEASETABLE.RELEASE_ID.eq(t));
+						}
+					});
 		} catch (EmptyResultDataAccessException e) {
 
 			return null;
 		}
-		
+
 	}
 
 	public List<ProductRelease> query(ProductRelease productRelease,
