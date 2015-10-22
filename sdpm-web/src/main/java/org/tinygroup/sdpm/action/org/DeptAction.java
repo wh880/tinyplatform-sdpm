@@ -22,6 +22,13 @@ public class DeptAction extends BaseController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 部门的增加功能
+     *
+     * @param orgDeptParent
+     * @param orgDeptName
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/add")
     public Map addDept(Integer orgDeptParent, String orgDeptName) {
@@ -35,6 +42,13 @@ public class DeptAction extends BaseController {
         return map;
     }
 
+    /**
+     * 部门的编辑功能
+     * @param orgDeptParent
+     * @param orgDeptId
+     * @param orgDeptName
+     * @return
+     */
     @ResponseBody
     @RequestMapping("edit")
     public Map editDept(Integer orgDeptParent, Integer orgDeptId, String orgDeptName) {
@@ -48,6 +62,11 @@ public class DeptAction extends BaseController {
         return map;
     }
 
+    /**
+     * 部门的删除功能
+     * @param orgDeptId
+     * @return
+     */
     @ResponseBody
     @RequestMapping("delete")
     public Map deleteDept(Integer orgDeptId) {
@@ -58,6 +77,11 @@ public class DeptAction extends BaseController {
         return map;
     }
 
+    /**
+     * 部门树的数据拼接
+     * @param check
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/data")
     public List data(String check) {

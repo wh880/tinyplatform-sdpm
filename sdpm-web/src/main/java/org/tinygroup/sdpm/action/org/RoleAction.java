@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.action.org;
 
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,15 @@ public class RoleAction extends BaseController {
     @Autowired
     private RoleUserService roleUserService;
 
+    /**
+     * 增加或编辑时候显示页面
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+
+    @RequiresPermissions(value = {"org-privilege-edit", "organizationAddGroup"}, logical = Logical.OR)
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
         if (id != null) {
@@ -36,6 +47,14 @@ public class RoleAction extends BaseController {
         return "organization/privilege/addGroup.page";
     }
 
+    /**
+     * 角色新增和编辑的保存
+     *
+     * @param role
+     * @param model
+     * @return
+     */
+    @RequiresPermissions(value = {"org-privilege-edit", "organizationAddGroup"}, logical = Logical.OR)
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(OrgRole role, Model model) {
         if (role.getOrgRoleId() == null) {
@@ -48,6 +67,16 @@ public class RoleAction extends BaseController {
     }
 
 
+    /**
+     * 角色的复制功能
+     *
+     * @param orgRoleId
+     * @param orgRoleName
+     * @param orgRoleRemarks
+     * @param copyPart
+     * @return
+     */
+    @RequiresPermissions("org-privilege-copy")
     @RequestMapping("/copyRole")
     public String copyRole(Integer orgRoleId, String orgRoleName, String orgRoleRemarks, String[] copyPart) {
         OrgRole orgRole1 = new OrgRole();
@@ -65,6 +94,13 @@ public class RoleAction extends BaseController {
         return "redirect:" + adminPath + "/org/privilege/list";
     }
 
+    /**
+     * 角色的删除功能
+     *
+     * @param id
+     * @return
+     */
+    @RequiresPermissions("org-privilege-delete")
     @ResponseBody
     @RequestMapping(value = "/delete")
     public Map delete(Integer id) {
@@ -75,6 +111,15 @@ public class RoleAction extends BaseController {
         return map;
     }
 
+    /**
+     * 角色主页面
+     *
+     * @param orgRole
+     * @param model
+     * @return
+     */
+
+    @RequiresPermissions("organizationPrivilege")
     @RequestMapping("/list")
     public String list(OrgRole orgRole, Model model) {
         List<OrgRole> list = roleService.findRoleList(orgRole);
@@ -82,6 +127,16 @@ public class RoleAction extends BaseController {
         return "organization/privilege/privilege.page";
     }
 
+    /**
+     * 角色页面数据
+     *
+     * @param start
+     * @param limit
+     * @param orgRole
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("organizationPrivilege")
     @RequestMapping("/list/data")
     public String listData(Integer start, Integer limit, OrgRole orgRole, Model model) {
         Pager<OrgRole> pager = roleService.findRolePager(start, limit, orgRole);
