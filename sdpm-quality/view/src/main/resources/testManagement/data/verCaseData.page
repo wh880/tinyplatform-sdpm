@@ -13,17 +13,11 @@
 						#@td()${run?.testLastRunResult}#end
 						#@td()${getDict("versionStatus",run?.testRunStatus)}#end
 						 #@td()
-                         	#foreach(m:menuManager.getScopeMenus("testcase-op"))
-                         		#if(m.id=="teditioncase"||m.id=="tproposecase")
+                         	#foreach(m:menuManager.getScopeMenus("version-case-op"))
+                         		#if(m.id=="tverremove"||m.id=="tvertobug")
             						<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?caseId=${run?.caseId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             					#else
-            						#if(m.id=="texecution"||m.id=="tresult")
-            							#iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId "ml-1")
-            						#else
-										#@tinyTableItemRemove(m.href run?.caseId)
-											<i class="${m.icon}" title="删除"></i>
-										#end
-									#end
+            						#iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId "ml-1")						
 								#end
                          	#end
 

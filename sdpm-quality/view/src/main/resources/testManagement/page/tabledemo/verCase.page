@@ -1,5 +1,9 @@
-#import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/table/components/tinytable.component")
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/icon/components/icon.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/button/components/button_smart.component")
 
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 #set(testCaseTableId="testCaseTableId")
@@ -71,29 +75,32 @@
 
     #@toggleRight()
 #@tinyTable(testCaseTableId)
-#@div(divBaseClass="tinyheaderTools form-inline")
+#@div(divBaseClass="tinyheaderTools")
 	<div class="f col-5">
-		<input type="button" value="全选" class="btn btn-default btn-primary col-3" 
+		<input type="button" value="全选" class="btn btn-default btn-primary col-1.5" 
 			onclick="selectAllNullorReserve('idCheck','全选');" />
 		<div class="col-0">&nbsp&nbsp</div>
-		<input type="button" value="反选" class="btn btn-default btn-primary col-3"
+		<input type="button" value="反选" class="btn btn-default btn-primary col-1.5"
 		 	onclick="selectAllNullorReserve('idCheck','反选');" />
-		<div class="col-0">&nbsp&nbsp</div>	
-		#@elementItem()
-			#@colLabel()指派#end
-			#@formControlDiv("col-8")
-				#@div(divClass="col-6")
-					#@Tselect2F()
-		               	#@Tselect2Body("docProduct" doc?.docProduct?:0 {"class":"input-text select2"})
-		                #end                  
-		        	#end                	 
-		        #end
-	        #end
-		#end
-		<a href="#">
-		<input type="button" value="执行" class="btn btn-default btn-primary col-3" />	</a>				
+		<div class="col-2 text-r">
+			<input type="button" value="指派" class="btn radius grayBtn" />
+				</div>		
+		<div class="col-4">		
+			#@Tselect2F()
+               	#@Tselect2Body("caseScriptedBy" "" {"class":"input-text select2"})
+               		<option value="0">/</option>
+                #end                  
+        	#end   	 
+        	</div>
+        <div class="col-0">&nbsp&nbsp</div>
+        <div class="col-2">
+			<a href="#">
+				<input type="button" value="执行" class="btn btn-default btn-primary" />	</a>	
+		</div>			
 	</div>
+	<span class=" form-inline">
 #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+</span>
 #end
 #set(requestStatusString = tinyRequestQueryString!=null ?("?"+tinyRequestQueryString):"")
 #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/version/taskToCaseData"+requestStatusString)
