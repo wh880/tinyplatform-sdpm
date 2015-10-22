@@ -34,7 +34,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     public int delete(int id) {
-        return 0;
+        return teamManager.delete(id);
     }
 
     public List<ProjectTeam> findTeamByProjectId(Integer projectId) {
