@@ -46,15 +46,12 @@
             #end
             #@tr()
                 #@td()分组白名单#end
-<<<<<<< HEAD
                 #@td()
 	                #foreach(white:productLine?.productLineWhiteList.split(','))
 	                	${getDict("whiteList",white)}
 	                #end
                 #end
-=======
                 #@td()#end
->>>>>>> 10371a4ceca394b4dda1efb6308cf2fe684db9a1
             #end
             #@tr()
                 #@td()由谁创建#end
