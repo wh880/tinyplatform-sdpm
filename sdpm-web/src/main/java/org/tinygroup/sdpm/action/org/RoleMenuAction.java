@@ -12,7 +12,6 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 import org.tinygroup.sdpm.org.service.inter.RoleMenuService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,27 +35,16 @@ public class RoleMenuAction extends BaseController {
         List<OrgRoleMenu> list = new ArrayList<OrgRoleMenu>();
         List<OrgRoleMenu> orgRoleMenus = roleMenuService.findMenuByRoleId(id);
         roleMenuService.batchDeleteRoleMenu(orgRoleMenus);
-        // List<String> orgRoleMenusIds = initMenuIdList(orgRoleMenus);
         for (String i : ids) {
-
-//            if (orgRoleMenusIds.contains(i)) {
-//                continue;
-//            } else {
                 OrgRoleMenu orgRoleMenu = new OrgRoleMenu();
                 orgRoleMenu.setOrgRoleId(id);
                 orgRoleMenu.setOrgRoleMenuId(i);
                 list.add(orgRoleMenu);
-            // }
         }
         if (!list.isEmpty()) {
             roleMenuService.batchAddRoleMenu(list);
         }
-
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "保存成功！");
-        return map;
-
+        return resultMap(true, "保存成功！");
     }
 
     /**

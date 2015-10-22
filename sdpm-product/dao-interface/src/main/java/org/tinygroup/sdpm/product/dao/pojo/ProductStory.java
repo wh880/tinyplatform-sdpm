@@ -53,6 +53,11 @@ public class ProductStory implements Serializable{
 	private String planName;
 	
 	/**
+	 * 模块名称
+	 */
+	private String moduleTitle;
+	
+	/**
 	 * 创建人名称
 	 */
 	private String storyOpenedName;
@@ -557,5 +562,13 @@ public class ProductStory implements Serializable{
 
 	public void setPlanName(String planName) {
 		this.planName = planName;
+	}
+
+	public String getModuleTitle() {
+		return moduleTitle;
+	}
+
+	public void setModuleTitle(String moduleTitle) {
+		this.moduleTitle = moduleTitle;
 	}
 }

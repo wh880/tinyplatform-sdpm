@@ -27,6 +27,10 @@ public class TestRunServiceImpl implements TestRunService {
 		return testrunmanager.batchUpdate(testruns);
 	}
 
+	public QualityTestRun add(QualityTestRun run) {
+		return testrunmanager.add(run);
+	}
+
 	public Pager<QualityTestRun> findTestRunPager(Integer start, Integer limit, QualityTestRun testRun,String condition, String sortName, boolean asc) {
 		return testrunmanager.findPager(start,limit,testRun,condition,sortName,asc);
 	}

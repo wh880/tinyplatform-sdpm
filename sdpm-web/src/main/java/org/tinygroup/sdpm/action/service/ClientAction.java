@@ -261,7 +261,7 @@ public class ClientAction extends BaseController {
     public List data(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<ProductAndLine> productLists = productService.getProductAndLine(new Product());
-        List<ProductLine> productLines = productLineService.findlist(new ProductLine());
+        List<ProductLine> productLines = productLineService.findList(new ProductLine());
 
         for (ProductLine d : productLines) {
             Map<String, Object> map = new HashMap<String, Object>();

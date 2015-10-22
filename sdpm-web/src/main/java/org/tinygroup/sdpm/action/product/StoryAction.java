@@ -42,8 +42,10 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -120,6 +122,10 @@ public class StoryAction extends BaseController {
     		productStory.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
     	}
         productStory.setStoryStatus("0");
+        productStory.setStoryOpenedDate(new Date());
+        productStory.setStoryOpenedBy(UserUtils.getUser().getOrgUserId());
+        productStory.setStoryLastEditedBy(UserUtils.getUser().getOrgUserId());
+        productStory.setStoryLastEditedDate(new Date());
         
         storySpec.setStoryVersion(0);
         ProductStory story = storyService.addStory(productStory, storySpec);
@@ -240,7 +246,18 @@ public class StoryAction extends BaseController {
     public String find(Integer storyId, @PathVariable(value = "forwordPager") String forwordPager, Model model, SystemAction systemAction) {
 
         ProductStory productStory = storyService.findStory(storyId);
-        ProductStorySpec storySpec = storySpecService.findStorySpec(storyId);
+        ProductStorySpec storySpec = new ProductStorySpec();
+        storySpec.setStoryId(storyId);
+        Pager<ProductStorySpec> pagerSpec = storySpecService.findStorySpecPager(0, 1, storySpec, "storyVersion", "desc");
+        if(pagerSpec!=null){
+        	if(pagerSpec.getRecords().size()>0||pagerSpec.getRecords()!=null){
+        		storySpec = pagerSpec.getRecords().get(0);
+        	}else{
+        		storySpec = null;
+        	}
+        }else {
+        	storySpec = null;
+		}
 
         QualityTestCase testCase = new QualityTestCase();
         testCase.setStoryId(storyId);

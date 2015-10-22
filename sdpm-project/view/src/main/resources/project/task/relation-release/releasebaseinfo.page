@@ -32,7 +32,7 @@
         #@elementItem()
 
             <p><b>打包日期:</b>
-                    ${build?.buildDate}
+                     ${formatDate(build?.buildDate,"yyyy-MM-dd hh-mm-ss")}
             </p>
 
         #end
@@ -42,7 +42,8 @@
         #@elementItem()
 
             <p><b>构建者:</b>
-                    ${build?.buildBuilder}
+                ${build?.buildBuilder}
+##                ?UserUtils.getUserById(build?.buildBuilder)?.orgUserRealName:""}
             </p>
 
         #end

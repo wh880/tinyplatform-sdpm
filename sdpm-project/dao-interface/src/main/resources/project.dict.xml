@@ -50,4 +50,10 @@
         <dictItem key="2" value="短期项目" sort="2"/>
         <dictItem key="3" value="运维项目" sort="3"/>
     </dictNodeEntry>
+    <dictNodeEntry name="projectStatus" title="项目状态">
+        <dictItem key="1" value="未开始" sort="1"/>
+        <dictItem key="2" value="进行中" sort="2"/>
+        <dictItem key="3" value="已挂起" sort="3"/>
+        <dictItem key="4" value="已完成" sort="4"/>
+    </dictNodeEntry>
 </dictNodeEntries>

@@ -24,7 +24,6 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.weblayer.WebContext;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -268,8 +267,8 @@ public class ProductAction extends BaseController {
 
             productLineId = (Integer) request.getSession().getAttribute("sessionProductLineId");
         }else{
-        	List<ProductLine> lines = productLineService.findlist(new ProductLine());
-        	ProductLine productLine = lines.size()>0?lines.get(0):null;
+            List<ProductLine> lines = productLineService.findList(new ProductLine());
+            ProductLine productLine = lines.size()>0?lines.get(0):null;
         	request.getSession().setAttribute("sessionProductLineId", productLine!=null?productLine.getProductLineId():null);
             model.addAttribute("productLine", productLine);
         }

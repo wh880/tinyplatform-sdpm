@@ -17,8 +17,8 @@
         #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/version/productalbug?buildId=${b?.buildId}">${b?.buildName}#end
         #@td()${b?.buildScmPath}</a>#end
         #@td()${b?.buildFilePath}#end
-        #@td()${b?.buildDate}#end
-        #@td()${b?.buildBuilder}#end
+        #@td()${formatDate(qb?.buildDate,"yyyy-MM-dd hh-mm-ss")}#end
+        #@td()${b?.buildBuilder.getUserById(b?.buildBuilder)?.orgUserRealName:""}#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("pro-version-op"))
                 #if(m.id != "pro-version-delete")

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
@@ -34,7 +35,10 @@ import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -112,82 +116,84 @@ public class UserAction extends BaseController {
     /**
      * 用户名唯一性校验
      *
-     * @param param
+     * @param account
      * @param orgUserId
      * @return
      */
     @RequiresPermissions(value = {"org-user-add", "organizationAddUser"}, logical = Logical.OR)
     @ResponseBody
     @RequestMapping(value = "/usercheck")
-    public Map usercheck(String param, String orgUserId) {
-
-        List<OrgUser> userList = userService.findUserList(new OrgUser());
-        List<String> userAccount = new ArrayList<String>();
-        Map<String, String> map = new HashMap<String, String>();
-        String account1;
-        if (StringUtil.isBlank(orgUserId)) {
-            account1 = null;
-        } else {
-            OrgUser user = userService.findUser(orgUserId);
-            account1 = user.getOrgUserAccount();
-        }
-        for (OrgUser u : userList) {
-            if (!(u.getOrgUserAccount().equals(account1))) {
-                userAccount.add(u.getOrgUserAccount());
+    public Map userCheck(@RequestParam("param") String account, String orgUserId) {
+        OrgUser user = new OrgUser();
+        user.setOrgUserAccount(account);
+        List<OrgUser> userList = userService.findUserList(user);
+        if (StringUtil.isBlank(orgUserId)) { //新用户
+            if (userList.isEmpty()) {
+                return resultMap(true, "用户名可用");
+            }
+        } else { //修改用户信息
+            if (userList.size() == 1) {
+                return resultMap(true, "用户名可用");
             }
         }
-        if (userAccount.contains(param)) {
-            map.put("status", "n");
-            map.put("info", "用户名不可用！");
-        } else {
-            map.put("status", "y");
-            map.put("info", "用户名可用");
-        }
-        return map;
+        return resultMap(false, "用户名不可用！");
     }
 
     /**
      * 用户主页面显示
-     *
-     * @param orgUser
-     * @param model
-     * @return
      */
     @RequiresPermissions("organizationUser")
     @RequestMapping("/list")
-    public String list(OrgUser orgUser, Model model) {
-//        List<OrgUser> list = userService.findUserList(orgUser);
-//        model.addAttribute("list", list);
+    public String list() {
         return "organization/user/user.page";
     }
 
+    /**
+     * 删除页面 跳转
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("org-user-delete")
     @RequestMapping("/delete/page")
     public String deleteData(String id, Model model) {
         model.addAttribute("id", id);
         return "organization/user/delect.pagelet";
     }
 
+    /**
+     * 删除用户的提交
+     *
+     * @param id
+     * @param password
+     * @return
+     */
+    @RequiresPermissions("org-user-delete")
     @RequestMapping("/delete")
     public String delete(String id, String password) {
         OrgUser orgUser = userService.findUser(id);
-        String password1 = orgUser.getOrgUserPassword();
-        if (userService.validatePassword(password, password1)) {
+        String userPassword = orgUser.getOrgUserPassword();
+        if (userService.validatePassword(password, userPassword)) {
             userService.deleteUser(id);
         } else {
             return "organization/user/delect.pagelet";
         }
-
         return "redirect:" + adminPath + "/org/user/list/";
     }
 
+    /**
+     * 批量删除功能
+     *
+     * @param ids
+     * @return
+     */
+    @RequiresPermissions("org-user-batchdel")
     @ResponseBody
     @RequestMapping(value = "/batchDelete")
     public Map batchDelete(String ids) {
-        Map<String, String> map = new HashMap<String, String>();
         if (ids == null) {
-            map.put("status", "n");
-            map.put("info", "删除失败");
-            return map;
+            return resultMap(false, "删除失败");
         }
         List<OrgUser> list = new ArrayList<OrgUser>();
         for (String s : ids.split(",")) {
@@ -197,25 +203,43 @@ public class UserAction extends BaseController {
             list.add(orgUser);
         }
         userService.deleteBatchUser(list);
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
+    /**
+     * 用户列表数据的获取
+     *
+     * @param orgDeptId
+     * @param start
+     * @param limit
+     * @param orgUser
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("organizationUser")
     @RequestMapping("/list/data")
-    public String listData(Integer orgDeptId, Integer start, Integer limit, OrgUser orgUser, Model model
-    ) {
+    public String listData(Integer orgDeptId, Integer start, Integer limit,
+                           OrgUser orgUser, Model model) {
+        Pager<OrgUser> pager;
         if (orgDeptId == null || orgDeptId == -1) {
             orgUser.setOrgDeptId(null);
-            Pager<OrgUser> pager = userService.findUserPager(start, limit, orgUser);
-            model.addAttribute("pager", pager);
+            pager = userService.findUserPager(start, limit, orgUser);
         } else {
-            Pager<OrgUser> pager = userService.findUserByDeptId(start, limit, orgDeptId);
-            model.addAttribute("pager", pager);
+            pager = userService.findUserByDeptId(start, limit, orgDeptId);
         }
+        model.addAttribute("pager", pager);
         return "organization/user/userTableData.pagelet";
     }
 
+    /**
+     * 显示用户档案页面
+     *
+     * @param id
+     * @param orgUser
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("org-user-profileAdmin")
     @RequestMapping("/show/profile")
     public String show(String id, OrgUser orgUser, Model model) {
         OrgUser user = userService.findUser(id);
@@ -225,15 +249,27 @@ public class UserAction extends BaseController {
         return "organization/user/profileAdmin.page";
     }
 
+    /**
+     * 点击用户后页面的用户选择
+     *
+     * @param orgUser
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/userList")
     public List<OrgUser> findUser(OrgUser orgUser) {
-
         List<OrgUser> list = userService.findUserList(orgUser);
-
         return list;
     }
 
+    /**
+     * 用户下的需求
+     *
+     * @param orgUser
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("org-user-storyAdmin")
     @RequestMapping("/story")
     public String storyJump(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
@@ -241,13 +277,12 @@ public class UserAction extends BaseController {
         return "/organization/user/storyAdmin.page";
     }
 
+    @RequiresPermissions("org-user-storyAdmin")
     @RequestMapping("/story/search")
-    public String storySearchAction(String id, int page, int pagesize, String choose, ProductStory story, String order, String ordertype, Model model, HttpServletRequest request) {
-
+    public String storySearchAction(String id, int page, int pagesize, String choose, ProductStory story, String order, Model model) {
         if (choose.equals("6")) {
             story.setStoryClosedBy(id);
             Pager<ProductStory> p4 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
-
             model.addAttribute("storyList", p4);
 
         } else if (choose.equals("4")) {
@@ -264,11 +299,18 @@ public class UserAction extends BaseController {
             story.setStoryAssignedTo(id);
             Pager<ProductStory> p1 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
             model.addAttribute("storyList", p1);
-
         }
         return "organization/user/userStoryTable.pagelet";
     }
 
+    /**
+     * 用户下的任务
+     *
+     * @param orgUser
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("org-user-taskAdmin")
     @RequestMapping("/task")
     public String taskJump(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
@@ -276,8 +318,9 @@ public class UserAction extends BaseController {
         return "/organization/user/taskAdmin.page";
     }
 
+    @RequiresPermissions("org-user-taskAdmin")
     @RequestMapping("/task/search")
-    public String taskSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, ProjectTask task, String order, String ordertype, Model model, HttpServletRequest request) {
+    public String taskSearchAction(String id, Integer start, Integer limit, String choose, String order, Model model) {
         ProjectTask task1 = new ProjectTask();
         if (choose.equals("7")) {
             task1.setTaskCanceledBy(id);
@@ -301,6 +344,14 @@ public class UserAction extends BaseController {
         return "/organization/user/userTaskTable.pagelet";
     }
 
+    /**
+     * 用户下的缺陷
+     *
+     * @param orgUser
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("org-user-bugAdmin")
     @RequestMapping("/bug")
     public String bugJump(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
@@ -308,6 +359,7 @@ public class UserAction extends BaseController {
         return "/organization/user/bugAdmin.page";
     }
 
+    @RequiresPermissions("org-user-bugAdmin")
     @RequestMapping("/bug/search")
     public String bugSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, ProjectTask task, String order, String ordertype, Model model, HttpServletRequest request) {
         OrgUser user = userService.findUser(id);
@@ -327,6 +379,15 @@ public class UserAction extends BaseController {
         return "/organization/user/bugAdminTable.pagelet";
     }
 
+
+    /**
+     * 用户下的测试
+     *
+     * @param orgUser
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("org-user-testtaskAdmin")
     @RequestMapping("/testtask")
     public String testTaskJump(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
@@ -334,6 +395,7 @@ public class UserAction extends BaseController {
         return "/organization/user/testtaskAdmin.page";
     }
 
+    @RequiresPermissions("org-user-testtaskAdmin")
     @RequestMapping("/testtask/search")
     public String testTaskSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, QualityTestTask testTask, String order, String ordertype, Model model, HttpServletRequest request) {
         OrgUser user = userService.findUser(id);
@@ -346,6 +408,7 @@ public class UserAction extends BaseController {
         return "/organization/user/userTesttaskTable.pagelet";
     }
 
+    @RequiresPermissions("org-user-testtaskAdmin")
     @RequestMapping("/testtask1")
     public String testTaskJump2(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
@@ -353,6 +416,7 @@ public class UserAction extends BaseController {
         return "/organization/user/testtaskAdmin1.page";
     }
 
+    @RequiresPermissions("org-user-testtaskAdmin")
     @RequestMapping("/testtask1/search")
     public String testCaseSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, QualityTestCase testCase, String order, String ordertype, Model model, HttpServletRequest request) {
         QualityTestCase testCase1 = new QualityTestCase();
@@ -367,6 +431,14 @@ public class UserAction extends BaseController {
         return "/organization/user/userTestCaseTable.pagelet";
     }
 
+    /***
+     * 用户下的动态
+     *
+     * @param orgUser
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("org-user-activeAdmin")
     @RequestMapping("/active")
     public String activeJump(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
@@ -374,6 +446,7 @@ public class UserAction extends BaseController {
         return "/organization/user/activeAdmin.page";
     }
 
+    @RequiresPermissions("org-user-activeAdmin")
     @RequestMapping("/active/search")
     public String activeSearchAction(String selDate, String id, Integer start, Integer limit, int page, int pagesize, String choose, SystemAction action, String order, String ordertype, Model model, HttpServletRequest request) {
         SystemAction systemAction = new SystemAction();
@@ -424,6 +497,14 @@ public class UserAction extends BaseController {
         return "/organization/user/userActiveTable.pagelet";
     }
 
+    /**
+     * 用户下的项目
+     *
+     * @param orgUser
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("org-user-projectAdmin")
     @RequestMapping("/project")
     public String projectJump(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
@@ -431,6 +512,7 @@ public class UserAction extends BaseController {
         return "/organization/user/projectAdmin.page";
     }
 
+    @RequiresPermissions("org-user-projectAdmin")
     @RequestMapping("/project/search")
     public String projectSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, ProjectTask task, String order, String ordertype, Model model, HttpServletRequest request) {
         ProjectTeam team = new ProjectTeam();

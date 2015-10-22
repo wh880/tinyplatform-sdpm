@@ -11,13 +11,13 @@ ${casepager?.totalCount+1}
 #@tr()
     #@td()<input type="checkbox" value="${c?.caseId}" name="userid">#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${c?.caseId}</a>#end
-    #@td()${c?.priority}#end
+    #@td()${getDict("casePriority",c?.priority)}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${c?.caseTitle}</a>#end
-    #@td()${c?.caseType}#end
+    #@td()${getDict("caseType",c?.caseType)}#end
     #@td()${c?.caseOpenedBy}#end
     #@td()${c?.caseLastRunner}#end
     #@td()${c?.caseLastRunDate?formatDate(c?.caseLastRunDate,'yyyy年MM月dd日'):""}#end
-    #@td()${getDict("caseResule",c?.caseLastRunResult)}#end
+    #@td()${getDict("caseResult",c?.caseLastRunResult)}#end
     #@td()${getDict("caseStatus",c?.caseStatus)}#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("testcase-op"))

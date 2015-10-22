@@ -4,10 +4,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
@@ -81,19 +78,8 @@ public class BugAction extends BaseController {
 		
 	@RequestMapping("")
 	public String form(String get,QualityBug bug, Model model, HttpServletRequest request){
-		List<Product> list = (List<Product>) request.getSession().getAttribute("qualityProductList");
 		String queryString = request.getQueryString();
 		List<OrgUser> users = userService.findUserList(null);
-		if(list == null|| list.size()==0){
-			list = productService.findProductList(new Product(),"productId","desc");
-			request.getSession().setAttribute("qualityProductList",list);
-		}
-		if(null==request.getSession().getAttribute("qualityProductId")||""==request.getSession().getAttribute("qualityProductId")){
-			request.getSession().setAttribute("qualityProductId",list.size()>0?list.get(0).getProductId():0);
-		}else{
-			request.getSession().removeAttribute("qualityProductId");
-			request.getSession().setAttribute("qualityProductId",list.size()>0?list.get(0).getProductId():0);
-		}
 		if(bug!=null&&bug.getModuleId()!=null){
 			request.getSession().setAttribute("bugModuleId",bug.getModuleId());
 		}else{
@@ -147,7 +133,7 @@ public class BugAction extends BaseController {
 	}
 
 	@RequestMapping("/findBug")
-	public String findBugPager(Integer start,Integer limit,SearchInfos infos,String groupOperate, String order,String ordertype,String status,QualityBug bug,Model model,HttpServletRequest request){
+	public String findBugPager(@CookieValue Integer qualityProductId, Integer start, Integer limit, SearchInfos infos, String groupOperate, String order, String ordertype, String status, QualityBug bug, Model model, HttpServletRequest request){
 		boolean asc = true;		
 		if("desc".equals(ordertype)){
 			asc = false;
@@ -157,7 +143,7 @@ public class BugAction extends BaseController {
 		conditions = StringUtil.isBlank(result)?
 				conditions:(StringUtil.isBlank(conditions)?result:conditions+" and "+ SqlUtil.toSql(infos.getInfos(),groupOperate));
 		bug.setModuleId((Integer) request.getSession().getAttribute("bugModuleId"));
-		bug.setProductId((Integer) request.getSession().getAttribute("qualityProductId"));
+		bug.setProductId(qualityProductId);
 		bug.setDeleted(0);
 		if(bug.getModuleId()!=null){
 			conditions = ("".equals(conditions)?" module_id ":conditions+" and module_id ")+ModuleUtil.getCondition(bug.getModuleId(),moduleService);

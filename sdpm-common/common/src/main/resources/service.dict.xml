@@ -28,6 +28,7 @@
             <dictItem key="8" value="已回访" sort="3"/>
             <dictItem key="2" value="被拒绝" sort="4"/>
             <dictItem key="1" value="处理中" sort="5"/>
+            <dictItem key="10" value="关闭" sort="6"/>
         </dictNodeEntry>
         <dictNodeEntry name="reviewType" title="回访类型">
             <dictItem key="0" value="发放回访" sort="1"/>

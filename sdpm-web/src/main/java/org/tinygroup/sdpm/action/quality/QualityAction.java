@@ -21,18 +21,7 @@ public class QualityAction extends BaseController {
     private ProductService productService;
     @RequestMapping("")
     public String qualityAction(HttpServletRequest request){
-        List<Product> list = (List<Product>) request.getSession().getAttribute("qualityProductList");
-        if(list == null|| list.size()==0){
-            list = productService.findProductList(new Product(),"productId","desc");
-            request.getSession().setAttribute("qualityProductList",list);
-        }
 
-        if(null==request.getSession().getAttribute("qualityProductId")||""==request.getSession().getAttribute("qualityProductId")){
-            request.getSession().setAttribute("qualityProductId",list.size()>0?list.get(0).getProductId():0);
-        }else{
-            request.getSession().removeAttribute("qualityProductId");
-            request.getSession().setAttribute("qualityProductId",list.size()>0?list.get(0).getProductId():0);
-        }
         return "redirect:/a/quality/bug?status=tbugstatus"+(request.getQueryString()==null?"":("&"+request.getQueryString()));
 
     }

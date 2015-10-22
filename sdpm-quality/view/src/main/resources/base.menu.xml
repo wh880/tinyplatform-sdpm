@@ -90,13 +90,13 @@
               isShow="1" scope="testcasenote-op"></menu>
        <menu id="tnotedelete" name="删除" href="" icon="icon-remove" sort="1"
               isShow="1" scope="testcasenote-op"></menu>
-       <menu id="tcaseall" name="所有"  href="/quality/testCase?status=tcaseal" icon="" sort="5"
+       <menu id="tcaseall" name="所有"  href="/quality/testCase?status=tcaseall&amp;currentPageId=5" icon="" sort="5"
               isShow="1" scope="testcaseleft-tab"></menu>
-        <menu id="tcaseneedchange" name="需求变动"  href="/quality/testCase?status=tcaseneedchange&amp;caseStatus=tcaseneedchange" icon="" sort="4"
+        <menu id="tcaseneedchange" name="需求变动"  href="/quality/testCase?status=tcaseneedchange&amp;currentPageId=5" icon="" sort="4"
               isShow="1" scope="testcaseleft-tab"></menu>
         <menu id="tcasesee" name="分组查看"  href="#" icon="" sort="3"
               isShow="1" scope="testcaseleft-tab"></menu>
-         <menu id="tcasenodemand" name="零用例需求"  href="/quality/testCase?status=tcasenodemand&amp;type=story&amp;productId=${qualityProductId}" icon="" sort="2"
+         <menu id="tcasenodemand" name="零用例需求"  href="/quality/testCase?status=tcasenodemand&amp;type=noCase&amp;productId=${qualityProductId}&amp;currentPageId=5" icon="" sort="2"
               isShow="1" scope="testcaseleft-tab"></menu>
         <menu id="tcaseserach" name="搜索"  href="#" icon="" sort="1"
               isShow="1" scope="testcaseleft-tab"></menu>

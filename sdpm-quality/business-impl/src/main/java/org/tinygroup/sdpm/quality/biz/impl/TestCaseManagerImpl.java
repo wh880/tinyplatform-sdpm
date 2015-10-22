@@ -12,6 +12,8 @@ import org.tinygroup.sdpm.quality.biz.inter.TestCaseManager;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 
 import java.util.Date;
 import java.util.List;
@@ -78,6 +80,7 @@ public class TestCaseManagerImpl implements TestCaseManager {
         condition = condition != null && !"".equals(condition) ? (statusCondition != null && !"".equals(statusCondition) ? condition + " and "
                 + statusCondition : condition)
                 : statusCondition;
+		Condition condition1 = null;
         OrderBy orderBy = null;
         if (columnName != null && !"".equals(columnName)) {
             orderBy = new OrderBy("quality_test_case."+NameUtil.resolveNameDesc(columnName), asc);
@@ -87,4 +90,15 @@ public class TestCaseManagerImpl implements TestCaseManager {
         }
         return testcasedao.queryPager(start, limit, testcase, orderBy);
     }
+
+	public Pager<QualityTestCase> findStoryChangedCase(Integer start, Integer limit, QualityTestCase testcase, String condition, String columnName, boolean asc) {
+		Condition condition1 = null;
+		if(!StringUtil.isBlank(condition)){
+			condition1 = FragmentSql.fragmentCondition(condition);
+		}
+		if(StringUtil.isBlank(columnName)){
+			testcasedao.queryStoryChangedCase(start,limit,testcase,condition1);
+		}
+		return testcasedao.queryStoryChangedCase(start,limit,testcase,condition1,new OrderBy(columnName,asc));
+	}
 }
