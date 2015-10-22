@@ -18,6 +18,7 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.CookieUtils;
@@ -271,7 +272,7 @@ public class TaskAction extends BaseController {
 
     @RequestMapping("/save")
     public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file,
-                       Model model, String[] taskMailtoArray, HttpServletRequest request, String comment) throws IOException {
+                       Model model, String[] taskMailtoArray, HttpServletRequest request, String comment) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         task.setTaskProject(projectId);
         if (task.getTaskId() == null) {
@@ -291,9 +292,11 @@ public class TaskAction extends BaseController {
                     newtask.getTaskId().toString(), UserUtils.getUserId(),
                     null, newtask.getTaskProject().toString(), null,
                     newtask, comment);
-
-            uploadNoTitle(file, newtask.getTaskId(), ProfileType.TASK);
-
+            try {
+                uploadNoTitle(file, newtask.getTaskId(), ProfileType.TASK);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             taskService.updateTask(task);
         }
@@ -302,12 +305,16 @@ public class TaskAction extends BaseController {
     }
 
 
+
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public String editSave(ProjectTask task, Model model, String contents) {
+    public String editSave(ProjectTask task, Model model, SystemAction systemAction) {
         taskService.updateEditTask(task);
-        ProjectTask oldTask = taskService.findTask(task.getTaskId());
-        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.EDITED, oldTask.getTaskId().toString(),
-                UserUtils.getUserId(), null, oldTask.getTaskProject().toString(), oldTask, task, contents);
+
+        systemAction.setActionObjectId(String.valueOf(task.getTaskId()));
+        systemAction.setActionProject(String.valueOf(task.getTaskProject()));
+        systemAction.setActionObjectType("task");
+        systemAction.setActionActor("close");
+        logService.log(systemAction);
         model.addAttribute("task", task);
         return "project/task/index.page";
     }
