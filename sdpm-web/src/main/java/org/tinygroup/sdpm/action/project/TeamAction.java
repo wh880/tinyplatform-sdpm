@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -16,6 +17,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangying14938 on 2015-09-22.团队
@@ -57,7 +59,6 @@ public class TeamAction extends BaseController {
                 }
             }
         }
-
         model.addAttribute("userList", userList);
         model.addAttribute("teamList", teamList);
         return "project/team/teamManage.page";
@@ -92,5 +93,12 @@ public class TeamAction extends BaseController {
         Integer updateRes = teamService.batchUpdate(updateList);
 
         return "project/team/index.page";
+    }
+
+    @ResponseBody
+    @RequestMapping("/del")
+    public Map<String, String> del(String id) {
+        Integer res = teamService.delete(Integer.parseInt(id));
+        return resultMap(res > 0 ? true : false, res > 0 ? "删除成功" : "删除失败");
     }
 }

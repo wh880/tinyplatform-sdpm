@@ -120,11 +120,8 @@ public class ClientAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/batchDelete")
     public Map batchDelete(String ids) {
-        Map<String, String> map = new HashMap<String, String>();
         if (ids == null) {
-            map.put("status", "n");
-            map.put("info", "删除失败");
-            return map;
+            return resultMap(false, "删除失败");
         }
         List<ServiceClient> list = new ArrayList<ServiceClient>();
         for (String s : ids.split(",")) {
@@ -134,9 +131,7 @@ public class ClientAction extends BaseController {
             list.add(serviceClient);
         }
         clientService.deleteBatchClient(list);
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
     @RequiresPermissions("client-sla")
@@ -215,8 +210,7 @@ public class ClientAction extends BaseController {
     @RequestMapping("/slaAdd")
     public String slaAdd(Integer id, Model model) {
         if (id != null) {
-            ServiceClient client = new ServiceClient();
-            client = clientService.findClient(id);
+            ServiceClient client = clientService.findClient(id);
             model.addAttribute("client", client);
         /*调用product的服务，查询出产品表的对象*/
             Product product = new Product();
@@ -227,7 +221,7 @@ public class ClientAction extends BaseController {
     }
 
     @RequestMapping("/slaSave")
-    public String slaSave(ServiceSla sla, Model model) {
+    public String slaSave(ServiceSla sla) {
         if (sla.getSlaId() == null) {
             sla = slaService.addSla(sla);
         }
@@ -258,7 +252,7 @@ public class ClientAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/treeData")
-    public List data(String check) {
+    public List data() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<ProductAndLine> productLists = productService.getProductAndLine(new Product());
         List<ProductLine> productLines = productLineService.findList(new ProductLine());

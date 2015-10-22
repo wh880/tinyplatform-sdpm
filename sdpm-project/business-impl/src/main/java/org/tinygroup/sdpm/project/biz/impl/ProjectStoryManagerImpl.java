@@ -36,6 +36,11 @@ public class ProjectStoryManagerImpl implements ProjectStoryManager {
         return projectStoryDao.batchInsert(projectStoryList);
     }
 
+    public int[] updaeLink(List<ProjectStory> projectStoryList) {
+
+        return projectStoryDao.batchUpdate(projectStoryList);
+    }
+
     public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String oredertype) {
         if (order == null) {
             return projectProductDao.findStory(projectId, start, limit);

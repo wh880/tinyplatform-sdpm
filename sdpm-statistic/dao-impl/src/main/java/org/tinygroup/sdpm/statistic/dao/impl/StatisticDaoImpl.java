@@ -6,7 +6,6 @@ import org.tinygroup.sdpm.statistic.dao.StatisticDao;
 import org.tinygroup.sdpm.statistic.dao.pojo.ProjectTaskSta;
 import org.tinygroup.sdpm.statistic.dao.pojo.StatisticOrg;
 import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.base.Alias;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
@@ -35,17 +34,15 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao{
 	}
 
 	public List<ProjectTaskSta> findProTasks(ProjectTaskSta projectTaskSta) {
-		PROJECT_TASKTABLE.setAlias(new Alias("a"));
-		PROJECTTABLE.setAlias(new Alias("b"));
 		if(projectTaskSta.getAssignedTo()==null){
 			return null;
 		}
-		Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("a.task_id AS taskId," +
-				"b.project_name AS projectName," +
-				"  a.task_assigned_to AS assignedTo," +
-				"SUM(a.task_id) AS taskNum," +
-				"SUM(a.task_estimate) AS estimate," +
-				"SUM(a.task_left) AS 'left'")).from(PROJECT_TASKTABLE).join(Join.leftJoin(PROJECTTABLE,
+		Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("project_task.task_id AS taskId," +
+				"project.project_name AS projectName," +
+				"project_task.task_assigned_to AS assignedTo," +
+				"SUM(project_task.task_id) AS taskNum," +
+				"SUM(project_task.task_estimate) AS estimate," +
+				"SUM(project_task.task_left) AS 'left'")).from(PROJECT_TASKTABLE).join(Join.leftJoin(PROJECTTABLE,
 				PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID))).where(PROJECT_TASKTABLE.TASK_ASSIGNED_TO.eq(
 				projectTaskSta.getAssignedTo())).groupBy(PROJECTTABLE.PROJECT_ID);
 		return getDslSession().fetchList(select,ProjectTaskSta.class);

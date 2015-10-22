@@ -210,6 +210,9 @@
         <div class="loginBtn">
             <p class="buttonBox">
                 <span class="leftBtn"><a href="#"></a></span>
+                <span class="leftBtn leftCheckbox"><input id="checkbox-1" name="rememberMe"
+                                                          type="checkbox"/>记住用户名</span>
+
 					<span class="rightBtn">
 						<a class="regBtn" href="#"></a>
 						<input class="loginBtn" type="submit" value="登录"/>

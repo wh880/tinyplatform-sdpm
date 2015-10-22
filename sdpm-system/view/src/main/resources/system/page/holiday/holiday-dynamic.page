@@ -16,14 +16,7 @@
 		<table class="table  table-striped "> 
 			#for(a:action)
 	
-#*				<tr>
-					<td>9月09日 14:39</td> 
-					<td>admin </td>
-					<td>添加假期</td>
-					<td>
-						<a href="#"> 国庆节</a>
-					</td>
-	            </tr>*#
+
 	            <tr>
 					<td  width="100%">
 						${formatDate(a?.holidayHistoryDate,"yyyy-MM-dd hh:mm:ss")}, ${UserUtils.getUserById(a?.holidayHistoryActor).orgUserRealName}
