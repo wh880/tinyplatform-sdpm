@@ -233,7 +233,7 @@ public class RequestAction extends BaseController {
     }
     @ResponseBody
     @RequestMapping("/ajax/moduleByProduct")
-    public List<SystemModule> getModuleByProduct(Integer productId) {
+    public List<SystemModule> getModuleByProduct(Integer productId){
         SystemModule module = new SystemModule();
         module.setModuleRoot(productId);
         module.setModuleType("productDoc");
