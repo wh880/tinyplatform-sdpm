@@ -95,7 +95,7 @@
         #@elementItem()
             #@colLabel()是否通过：#end
             #@formControlDiv("col-8")
-                #Tswitcher("reviewResult" ["0","1"] review?.reviewResult) ##第二个为选中状态 第三参数为数据库返回时的数据
+                #Tswitcher("reviewResult" ["0","1"] review?.reviewResult?:1) ##第二个为选中状态 第三参数为数据库返回时的数据
             #end
         #end
 

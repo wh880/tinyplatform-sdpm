@@ -261,7 +261,7 @@ public class BuildAction extends BaseController {
             model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-no-bug-data.pagelet";
         } else if ("leRelateBugRelease".equals(relate)) {
-            Pager<QualityBug> p = buildService.findnoBugPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
+            Pager<QualityBug> p = buildService.findBugLegacyPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
             model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-le-bug-data.pagelet";
         }

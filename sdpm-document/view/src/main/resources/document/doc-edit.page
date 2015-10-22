@@ -12,7 +12,7 @@
                 dataType:"json",
                 success: function(data){
                     sele.empty();
-                    var em = "<option value='0'>/</option>";                   
+                    var em = "<option value='0'>/</option>";
                     sele.append(em);
                     var isInit=false;
                     for(var i=0,l=data.length;i<l;i++){
@@ -21,12 +21,12 @@
                         sele.append(em);
                     }
                    //console.log(sele.html(),value,opKey);
-                    if(isInit) {                   	
+                    if (isInit) {
                         sele.val(value).trigger("change");
-                    }else {               
+                    } else {
                         sele.val("0").trigger("change");
                     }
-                },               
+                },
             });
 
 
@@ -78,16 +78,15 @@
 						       $('#product').addClass('hidden');
 						               }
 						   });
-						   
-						   
-				  </script>
-				  
+
+
+                   </script>
+
 				  <script type="text/javascript">
 			           $("#${sid}").on("change",function(){
 			           var pId = $("#${sid}  option:selected").val();
-			           		           
-				           if(pId=='1')
-				           {	           
+
+				           if(pId=='1') {
 				           	ajaxRead("${sid}","docProduct","productId","productName","/document/ajax/productByDocLib",${doc?.docProduct?:0});
 				           }
 				           if(pId=='2')
@@ -98,12 +97,12 @@
 				           }
 			           })
 			       </script>
-	               #end  	                             
+              #end
               	</div>
        		</div>
-       	#end      	     	
+          #end
      #end
-     
+
      #@elementItem(elementId="project" eleItemClass="hidden")
 					#@colLabel()所属项目#end
 					#@formControlDiv("col-8")
@@ -112,64 +111,66 @@
 	                   		#@Tselect2Body("docProject" doc?.docProject?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        #foreach(project : projectList)
 	                        	 <option value="${project?.projectId}">${project?.projectName}</option>
-	                        #end	                       	                    	                        
+                            #end
 	                    	#end
-	                    	
+
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd" class="r">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end   
-	                    <script type="text/javascript"> 
-	                            	  		
-	                            $("#${sid}").on("change",function(){
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end
+                        <script type="text/javascript">
+
+                            $("#${sid}").on("change",function(){
 	                            var dId = $("select[name=docLibId]").val();
 	                                var pId = $("#${sid}  option:selected").val();
-	                                
+
 	                              if(dId == '2'){
-	                                ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/moduleByProject?projectId="+pId,${doc?.docModule?:0});                   
+                                      ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByProject?projectId=" + pId, ${doc?.docModule ? : 0
+                                  }
+                                );
 	                                ajaxRead("${sid}","docProduct","productId","productName","/document/ajax/product?projectId="+pId,${doc?.docProduct?:0});
-	                        	}	                        	 
+                            }
 	                        	})
-                           
-                        </script>             	                    	
+
+                        </script>
                 	  #end
-               	  		
+
                 	  #end
                 	  #end
-	 		#end			
-			
+     #end
+
     		 #@elementItem(elementId="product" eleItemClass="hidden")
 					#@colLabel()所属产品#end
 					#@formControlDiv("col-8")
 					#@div(divClass="col-6")
 					#@Tselect2F()
 	                   		#@Tselect2Body("docProduct" doc?.docProduct?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                    	#end                  
+                            #end
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
-	                	  	<script type="text/javascript">    	  		
+                        <script type="text/javascript">
 		                            $("#${sid}").on("change",function(){
 		                            var dId = $("select[name=docLibId]").val();
 		                             if(dId == '1'){
-		                                var pId = $(this).val();	
+                                         var pId = $(this).val();
 		                                ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/moduleByProduct?productId="+pId,${doc?.docModule?:0});
 		                            	  }
-		                            })	                           
+                                    })
 	                        </script>
-                	  #end                	 
+                    #end
                 	  #end
                 	  #end
 			#end
-			
-			 				
-     #@elementItem()
+
+
+            #@elementItem()
         <div class="col-12">
          <div class="col-2 text-r"><label>所属分类&nbsp</label></div>
          <div class="col-4">
           #@Tselect2F()
-	          #@Tselect2Body("docModule" doc?.docModule?:0 {"class":"input-text select2"}) 
+	          #@Tselect2Body("docModule" doc?.docModule?:0 {"class":"input-text select2"})
 	         ## <option value="0">/</option>
-	          #end                	         
+          #end
               #end
               	</div>
        		</div>
@@ -216,12 +217,12 @@
 					#end
 					#@validateDiv("col-2")#end
 				#end
-				
-        #@elementItem(elementId="contentBox" eleItemClass="hidden")
+
+            #@elementItem(elementId="contentBox" eleItemClass="hidden")
 					#@colLabel()文档正文&nbsp#end
 					#@formControlDiv("col-8")
 						#@tinyueditor("docContent" "docContent")说点什么...最少输入10个字符#end
-					#end					
+                    #end
 					#@validateDiv("col-2")#end
 			#end
         #@elementItem()
@@ -258,7 +259,7 @@
 #@dialog("myModal")
         #@dialogHeader()#end
         #@dialogBody()<p></p>#end
-#end     
+#end
 
 <script type="text/javascript">
    /*这是显示不同类型编辑框的脚本*/
@@ -274,12 +275,12 @@
    		case "网页":
    			$('#contentBox').removeClass('hidden');
    		break;
-   }	
+   }
 });
 
 
- $(".select2").select2(); 
-					  
+   $(".select2").select2();
+
 </script>
 
 ##隐藏框的JS

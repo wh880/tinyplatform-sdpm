@@ -347,7 +347,26 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 
 			public Select generate(QualityBug t) {
 				Select select = MysqlSelect.selectFrom(QUALITY_BUGTABLE).where(
-						QUALITY_BUGTABLE.BUG_ID.in(bugs));
+						and(QUALITY_BUGTABLE.BUG_ID.in(bugs),
+							QUALITY_BUGTABLE.BUG_STATUS.eq('2')));
+				return addOrderByElements(select, orderBies);
+			}
+		});
+
+	}
+
+	public Pager<QualityBug> findBuildLegacyBugs(int start, int limit, Integer buildId, final OrderBy... orderBies){
+		Select select =select(PROJECT_BUILDTABLE.BUILD_BUGS).from(PROJECT_BUILDTABLE)
+				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
+		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
+		final String[] bugs = test.getBuildBugs().split(",");
+		QualityBug qualityBug = new QualityBug();
+		return getDslTemplate().queryPager(start, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
+
+			public Select generate(QualityBug t) {
+				Select select = MysqlSelect.selectFrom(QUALITY_BUGTABLE).where(
+						and(QUALITY_BUGTABLE.BUG_ID.in(bugs),
+								QUALITY_BUGTABLE.BUG_STATUS.eq('1')));
 				return addOrderByElements(select, orderBies);
 			}
 		});

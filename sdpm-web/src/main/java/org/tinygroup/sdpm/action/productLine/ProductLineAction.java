@@ -1,5 +1,13 @@
 package org.tinygroup.sdpm.action.productLine;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.sdpm.action.product.SessionUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -20,12 +29,6 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 产品线控制器
@@ -57,11 +60,14 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/save")
-    public String save(ProductLine productLine, SystemAction systemAction) {
+    public String save(ProductLine productLine, SystemAction systemAction,HttpServletRequest request) {
         productLine.setProductLineCreatedBy(UserUtils.getUser().getOrgUserAccount());
-        productLine.setProductLineStatus("新建");
+        productLine.setProductLineCreatedDate(new Date());
+        productLine.setProductLineStatus("0");
         ProductLine productLine1 = productLineService.addProductLine(productLine);
-
+        SessionUtil.ProductLineRefresh(request, productLineService);
+        request.getSession().setAttribute("sessionProductLineId",productLine1.getProductLineId());
+        
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE
                 , LogUtil.LogAction.OPENED
                 ,String.valueOf(productLine1.getProductLineId())
@@ -202,6 +208,9 @@ public class ProductLineAction extends BaseController {
         List<ProductLine> list = (List<ProductLine>) request.getSession().getAttribute("productLineList");
         if (list == null || list.size() == 0) {
             list = productLineService.findProductLineList(new ProductLine(), "productLineId", "desc");
+            if(list.size()==0||list==null){
+            	return "redirect:" + adminPath + "/productLine/add";
+            }
             request.getSession().setAttribute("productLineList", list);
 
             if (request.getSession().getAttribute("sessionProductLineId") == null) {
