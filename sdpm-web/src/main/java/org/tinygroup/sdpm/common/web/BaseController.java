@@ -222,6 +222,7 @@ public abstract class BaseController {
      * @throws IOException
      */
     public void uploads(MultipartFile[] uploadFiles, Integer objectId, ProfileType type, String[] title) throws IOException {
+        if(uploadFiles==null||uploadFiles.length<1)return;
         for (int i = 0, n = uploadFiles.length; i < n; i++) {
             if (!uploadFiles[i].isEmpty() && uploadFiles[i].getSize() > 0)
                 upload(uploadFiles[i], objectId, type, title[i]);

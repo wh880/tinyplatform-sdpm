@@ -4,7 +4,44 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/button/components/button_smart.component")
-
+#macro assignOperation(operation doActionUrl map)<span id="${operation}-${tableId}">#bodyContent</span><script type="text/javascript">
+ $(function(){
+  $("#${operation}-${tableId}").on("click",function() {
+		layer.confirm("请确认?",function() {
+			 var checklist = [];
+			 var userId = $("select[name=assignTo] option:selected").val();
+			 if(userId == 0){
+			    layer.msg("请选择指派对象")
+                return false;
+			 }
+			 $("#${tableId} input[name=idCheck]:checked").each(function (e) {
+				  checklist.push($(this).val());
+			 });
+			 if(checklist.length==0){
+				layer.msg("请选择记录")
+				 return false;
+			 }
+			 $.ajax({
+				  url: "${doActionUrl}",
+				  data: {ids: checklist,userId:userId, action: "${operation}"#mapToJson(map)},
+				  dataType: "json",
+				  traditional:true,
+				  success: function (data) {
+						if (data.status=="success"||data.status=="y") {
+							  location.href = "${TINY_CONTEXT_PATH+adminPath+"/quality/version/taskToCase?testversionId="+testversionId+"&currentPageId=5&status=tverallcase"}";
+						}else{
+							 layer.msg(data.info);
+						}
+				  },
+				  error:function(){
+					  layer.msg("系统出错，请确认你的请求地址");
+				  }
+			 })
+		});
+		//return false;
+  })
+ });
+</script>#end
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 #set(testCaseTableId="testCaseTableId")
 
@@ -83,12 +120,15 @@
 		<input type="button" value="反选" class="btn btn-default btn-primary col-1.5"
 		 	onclick="selectAllNullorReserve('idCheck','反选');" />
 		<div class="col-2 text-r">
-			<input type="button" value="指派" class="btn radius grayBtn" />
+		#@assignOperation("assign" TINY_CONTEXT_PATH+adminPath+"/quality/version/ajax/assign")<div><input type="button" value="指派" class="btn radius grayBtn" /></div>#end</a>
 				</div>		
 		<div class="col-4">		
 			#@Tselect2F()
-               	#@Tselect2Body("caseScriptedBy" "" {"class":"input-text select2"})
-               		<option value="0">/</option>
+               	#@Tselect2Body("assignTo" "" {"class":"input-text select2"})
+               	    <option value="0">/</option>
+               	    #for(user : userList)
+               		<option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+               		#end
                 #end                  
         	#end   	 
         	</div>

@@ -2,13 +2,13 @@
 #setTinyItemCount(runsPager?.totalCount)
 #for(run :runsPager?.records)
 					#@tr()
-						#@td()<input type="checkbox" value="1" name="userid">#end
+						#@td()<input type="checkbox" value="${run?.testRunId}" name="idCheck">#end
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run?.caseId}</a>#end
 						#@td()${getDict("casePriority",run?.priority)}#end
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run?.caseTitle}</a>#end
 						#@td()${getDict("caseType",run?.caseType)}#end
-						#@td()${run?.caseScriptedBy?UserUtils.getUserById(run?.testRunAssignedTo):""}#end
-						#@td()${run?.caseLastRunner?UserUtils.getUserById(run?.testLastRunner):""}#end
+						#@td()${run?.testRunAssignedTo?UserUtils.getUserById(run?.testRunAssignedTo)?.orgUserRealName:""}#end
+						#@td()${run?.caseLastRunner?UserUtils.getUserById(run?.testLastRunner)?.orgUserRealName:""}#end
 						#@td()${run?.caseLastRunDate?formatDate(run?.testLastRunDate,'yyyy年MM月dd日'):""}#end
 						#@td()${run?.testLastRunResult}#end
 						#@td()${getDict("versionStatus",run?.testRunStatus)}#end

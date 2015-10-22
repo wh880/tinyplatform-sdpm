@@ -33,8 +33,8 @@
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
 					 #@Tselect2F()
-                            #@Tselect2Body("productId" testCase?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                #for(product : productList)
+                            #@Tselect2Body("productId" testCase?.productId?:(qualityProductId?:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                #for(product : CmsUtils.getProductList())
                                 <option value="${product?.productId}">${product?.productName}</option>
                                 #end
 	                    	#end                  
@@ -44,8 +44,8 @@
                     <script type="text/javascript">
                         $("#${sid}").on("change",function(){
                             var pId = $("#${sid}  option:selected").val();
-                            ajaxRead("moduleId","moduleId","moduleTitle","/quality/testCase/ajax/module?productId="+pId);
-                            ajaxRead("storyId","storyId","storyTitle","/quality/testCase/ajax/story?productId="+pId);
+                            ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/testCase/ajax/module?moduleRoot="+pId,${case?.moduleId?:0});
+                            ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/testCase/ajax/story?productId="+pId,${case?.storyId?:0});
                         })
                     </script>
                 	  #end
@@ -59,7 +59,7 @@
                         <script type="text/javascript">
                             $(document).ready(function(){
                                 var pId = $("select[name=productId] option:selected").val();
-                                ajaxRead("moduleId","moduleId","moduleTitle","/quality/testCase/ajax/module?productId="+pId);
+                                ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/testCase/ajax/module?moduleRoot="+pId,${case?.moduleId?:0});
                             });
                         </script>
                 	  #end
@@ -72,9 +72,10 @@
             	#@div(divClass="col-5")
                      #@Tselect2F()
 	                   		 #@Tselect2Body("caseType" testCase?.caseType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">1</option>
-	                        <option value="2">2</option>
-	                        <option value="3">3</option>
+	                   		 <option value="0"></option>
+	                   		 #for(type : getDict("caseType"))
+	                   		    <option value="${type.value}">${type.text}</option>
+	                   		 #end
 	                    	#end                
                 	  #end
                 #end
@@ -88,9 +89,10 @@
                #@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("caseStage" testCase?.caseStage {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">版本1</option>
-	                        <option value="2">版本2</option>
-	                        <option value="3">版本3</option>
+	                       <option value="0"></option>
+                         #for(stage : getDict("caseStage"))
+                            <option value="${stage.value}">${stage.text}</option>
+                         #end
 	                    	#end
                 	  #end
                 #end
@@ -127,7 +129,7 @@
                             <script type="text/javascript">
                                 $(document).ready(function(){
                                     var pId = $("select[name=productId]  option:selected").val();
-                                    ajaxRead("storyId","storyId","storyTitle","/quality/testCase/ajax/story?productId="+pId);
+                                    ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/testCase/ajax/story?productId="+pId,${case?.storyId?:0});
                                 });
                             </script>
                         #end
@@ -216,37 +218,50 @@
    </div>
 
 <script type="text/javascript">
-    $(".select2").select2();
-
-    function ajaxRead(toName,opKey,opvalue,url){
-        var selectCheck = "select[name="+toName+"]";
-        $(selectCheck).each(function(){
-            var sele = $(this);
-            $.ajax({
-                type: "POST",
-                url: "${TINY_CONTEXT_PATH+adminPath}"+url,
-                data: $(this).attr('data'),
-                dataType:"json",
-                success: function(data){
-                    for(var i=0,l=data.length;i<l;i++){
-                        var em = "<option value='"+data[i][opKey]+"'>"+ data[i][opvalue] +"</option>";
-                        sele.append(em);
-
-                    }
-                    sele.val(data[0][opKey]).trigger("change");
-
-                },
-                error: function(res){
-                    alert("失败");
-                }
-            });
 
 
-        });
+	function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
+    		var selectCheck = "select[name="+toName+"]";
+    		$(selectCheck).each(function(){
+    			var sele = $(this);
+    			var s;
+    			$.ajax({
+    				type: "POST",
+    				url: "${TINY_CONTEXT_PATH+adminPath}"+url,
+    				data: $(this).attr('data'),
+    				dataType:"json",
+    				success: function(data){
+    					sele.empty();
+    					if("build"==(isBuild)){
+    					var em = "<option value='0' selected  >trunk</option>";
+    					}else{
+    					var em = "<option value='0' selected  >/</option>";
+    					}
+    					sele.append(em);
+    					for(var i=0,l=data.length;i<l;i++){
+    						var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+    						sele.append(em);
 
-    }
+    					}
+
+    					if(value!=null) {
+    						sele.val(value).trigger("change");
+    					}else {
+    						sele.val(data[0][opKey]).trigger("change");
+    					}
+
+
+    				},
+    				error: function(res){
+    					alert("失败");
+    				}
+    			});
+
+
+    		});
+
+    	}
 </script>
-
 
 #end
 #end

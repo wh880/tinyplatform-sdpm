@@ -99,8 +99,8 @@ public class TestTaskAction extends BaseController {
 	@RequestMapping(value = "/save",method = RequestMethod.POST)
 	public Map save(QualityTestTask testtask,Model model){
 		if(testtask.getTestversionId() == null){
-			testtask = testTaskService.addTestTask(testtask);
 			testtask.setDeleted(0);
+			testtask = testTaskService.addTestTask(testtask);
 			LogUtil.logWithComment(LogUtil.LogOperateObject.TESTTASK,
 					LogUtil.LogAction.OPENED,
 					String.valueOf(testtask.getTestversionId()),
@@ -244,13 +244,18 @@ public class TestTaskAction extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("/ajax/batchDelete")
-	public Map batchDelete(Integer[] ids){
-
-		for(int id : ids){
-			QualityTestTask testTask = new QualityTestTask();
-			testTask.setTestversionId(id);
-			testTask.setDeleted(1);
-			testTaskService.updateTestTask(testTask);
+	public Map batchDelete(String ids){
+		String[] tIds = null;
+		if(!StringUtil.isBlank(ids)){
+			tIds = ids.split(",");
+		}
+		if(tIds!=null&&tIds.length>0) {
+			for (String id : tIds) {
+				QualityTestTask testTask = new QualityTestTask();
+				testTask.setTestversionId(Integer.parseInt(id));
+				testTask.setDeleted(1);
+				testTaskService.updateTestTask(testTask);
+			}
 		}
 		Map<String,String> result = new HashMap<String, String>();
 		result.put("status","y");
@@ -260,6 +265,7 @@ public class TestTaskAction extends BaseController {
 	@RequestMapping("/taskToCase")
 	public String taskToCase(Integer testversionId,String moduleId, Model model, HttpServletRequest request){
 		QualityTestTask testTask = testTaskService.findById(testversionId);
+		List<OrgUser> orgUsers = userService.findUserList(null);
 		String queryString = request.getQueryString();
 		if(StringUtil.isBlank(moduleId)){
 			request.getSession().removeAttribute("taskToCaseModuleId");
@@ -268,6 +274,7 @@ public class TestTaskAction extends BaseController {
 		}
 
 		model.addAttribute("testTask",testTask);
+		model.addAttribute("userList",orgUsers);
 		return "/testManagement/page/tabledemo/verCase.page";
 	}
 
@@ -283,6 +290,20 @@ public class TestTaskAction extends BaseController {
 		Pager<QualityTestRun> runsPager = testRunService.findTestRunPager(start,limit,run,conditions,order,"asc".equals(ordertype)?true:false);
 		model.addAttribute("runsPager",runsPager);
 		return "/testManagement/data/verCaseData.pagelet";
+	}
+
+	@ResponseBody
+	@RequestMapping("/ajax/assign")
+	public Map assign(Integer[] ids, String userId){
+		for(int id : ids){
+			QualityTestRun run = new QualityTestRun();
+			run.setTestRunId(id);
+			run.setTestRunAssignedTo(userId);
+			testRunService.updateTestRun(run);
+		}
+		Map<String,String> result = new HashMap<String, String>();
+		result.put("status","y");
+		return result;
 	}
 
 	private String mergeCondition(List<QualityTestRun> runs, boolean in){
@@ -315,7 +336,7 @@ public class TestTaskAction extends BaseController {
 		if("tverallcase".equals(status)){
 			return "";
 		}else{
-			return " case_opened_by = '"+UserUtils.getUserId()+"' ";
+			return " test_run_assigned_to = '"+UserUtils.getUserId()+"' ";
 		}
 	}
 

@@ -1,7 +1,7 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 #set(count="")
 #set(name="qualityVersion")
-#macro mulOperation(operation doActionUrl map)<span id="${operation}-${tableId}">#bodyContent</span><script type="text/javascript">
+#macro linkOperation(operation doActionUrl map)<span id="${operation}-${tableId}">#bodyContent</span><script type="text/javascript">
  $(function(){
   $("#${operation}-${tableId}").on("click",function() {
 		layer.confirm("请确认?",function() {
@@ -85,7 +85,7 @@
 						 onclick="selectAllNullorReserve('idCheck','反选');" />
 						<div class="col-0">&nbsp&nbsp</div>
 						<div class="dropdown col-3">
-							#@mulOperation("link" TINY_CONTEXT_PATH+adminPath+"/quality/version/makeLink?testversionId="+testversionId)
+							#@linkOperation("link" TINY_CONTEXT_PATH+adminPath+"/quality/version/makeLink?testversionId="+testversionId)
 							<div><input type="button" value="保存" class="btn btn-default btn-primary" /></div>
 							#end
 						</div>

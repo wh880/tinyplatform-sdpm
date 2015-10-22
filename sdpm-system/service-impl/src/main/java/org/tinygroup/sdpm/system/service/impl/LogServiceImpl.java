@@ -94,7 +94,7 @@ public class LogServiceImpl implements LogService{
 
     private Object dateFormat(Object object){
         if (object instanceof Date) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             Date date = (Date) object;
             return format.format(date);
         }

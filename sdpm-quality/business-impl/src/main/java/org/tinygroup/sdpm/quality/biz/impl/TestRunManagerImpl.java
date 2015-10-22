@@ -27,7 +27,6 @@ public class TestRunManagerImpl implements TestRunManager {
 		}
 		
 		public int update(QualityTestRun testrun){
-			testrun.setTestRunLastRunDate(new Date());
 			return testrundao.edit(testrun);
 		}
 		

@@ -37,7 +37,7 @@ public class TestCaseManagerImpl implements TestCaseManager {
 	}
 	
 	public QualityTestCase add(QualityTestCase testcase){
-		testcase.setCaseScriptedDate(new Date());
+		testcase.setCaseOpenedDate(new Date());
 		return testcasedao.add(testcase);
 	}
 	

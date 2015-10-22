@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.tinysqldsl.Delete;
 import org.tinygroup.tinysqldsl.Insert;
@@ -77,22 +78,13 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 		});
 	}
 
-	public int edit(QualityTestRun qualityTestRun) {
+	public int edit(final QualityTestRun qualityTestRun) {
 		if(qualityTestRun == null || qualityTestRun.getTestRunId() == null){
 			return 0;
 		}
 		return getDslTemplate().update(qualityTestRun, new UpdateGenerateCallback<QualityTestRun>() {
 			public Update generate(QualityTestRun t) {
-				Update update = update(QUALITY_TEST_RUNTABLE).set(
-					QUALITY_TEST_RUNTABLE.TASK_ID.value(t.getTaskId()),
-					QUALITY_TEST_RUNTABLE.CASE_ID.value(t.getCaseId()),
-					QUALITY_TEST_RUNTABLE.CASE_VERSION.value(t.getCaseVersion()),
-					QUALITY_TEST_RUNTABLE.TEST_RUN_ASSIGNED_TO.value(t.getTestRunAssignedTo()),
-					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUNNER.value(t.getTestRunLastRunner()),
-					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_DATE.value(t.getTestRunLastRunDate()),
-					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_RESULT.value(t.getTestRunLastRunResult()),
-					QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.value(t.getTestRunStatus())).where(
-					QUALITY_TEST_RUNTABLE.TEST_RUN_ID.eq(t.getTestRunId()));
+				Update update = UpdateUtil.getUpdate(QUALITY_TEST_RUNTABLE,qualityTestRun);
 				return update;
 			}
 		});

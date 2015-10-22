@@ -14,9 +14,9 @@ ${casepager?.totalCount+1}
     #@td()${getDict("casePriority",c?.priority)}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${c?.caseTitle}</a>#end
     #@td()${getDict("caseType",c?.caseType)}#end
-    #@td()${c?.caseOpenedBy}#end
-    #@td()${c?.caseLastRunner}#end
-    #@td()${c?.caseLastRunDate?formatDate(c?.caseLastRunDate,'yyyy年MM月dd日'):""}#end
+    #@td()${c?.caseOpenedBy?UserUtils.getUserById(c?.caseOpenedBy)?.orgUserRealName:""}#end
+    #@td()${c?.caseLastRunner?UserUtils.getUserById(c?.caseLastRunner)?.orgUserRealName:""}#end
+    #@td()${c?.caseLastRunDate?formatDate(c?.caseLastRunDate,'yyyy-MM-dd日'):""}#end
     #@td()${getDict("caseResult",c?.caseLastRunResult)}#end
     #@td()${getDict("caseStatus",c?.caseStatus)}#end
     #@td()

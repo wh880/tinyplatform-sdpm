@@ -72,7 +72,7 @@
               isShow="1" scope="testcase-op"></menu>
          <menu id="tcasedelete" name="删除" href="/quality/testCase/delete" icon="icon-remove" sort="1"
               isShow="1" scope="testcase-op"></menu>
-        <menu id="add-case" name="建用例" href="/quality/testCase/add" icon="icon-sitemap" sort="3"
+        <menu id="add-case" name="建用例" href="/quality/testCase/add?currentPageId=5" icon="icon-sitemap" sort="3"
               isShow="1" scope="demand-op,product-de,testcase-tab,testbuginfo-tab"></menu>
         <menu id="tcaseinput" name="导入" href="/testManagement/page/tabledemo/importBug.pagelet" icon="icon-download-alt" sort="5"
               isShow="1" scope="testcase-tab"></menu>

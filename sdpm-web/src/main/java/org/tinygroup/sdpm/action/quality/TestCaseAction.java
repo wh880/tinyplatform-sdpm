@@ -36,7 +36,9 @@ import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 /**
@@ -65,9 +67,9 @@ public class TestCaseAction extends BaseController {
 	@RequestMapping("")
 	public String form(QualityTestCase testCase, HttpServletRequest request,Model model) {
 		String queryString = request.getQueryString();
-		if (queryString != null && !queryString.contains("status")) {
-			return "redirect:/a/quality/testCase?currentPageId=5&status=tcaseall&"
-					+ queryString;
+		if (queryString == null || !queryString.contains("status")) {
+			return "redirect:/a/quality/testCase?currentPageId=5&status=tcaseall"
+					+ (queryString==null?"":"&"+queryString);
 		}
 		List<OrgUser> userList = userService.findUserList(new OrgUser());
 		List<Product> productList = productService.findProductList(new Product());
@@ -123,17 +125,27 @@ public class TestCaseAction extends BaseController {
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(QualityTestCase testcase, String[] step,String[] expect, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title, HttpServletRequest request) throws Exception {
-		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
+		testcase.setCaseOpenedBy(UserUtils.getUserId());
+		if(testcase.getStoryId()>0){
+			testcase.setStoryVersion(storyService.findStory(testcase.getStoryId()).getStoryVersion());
+		}
+		testcase.setCaseStatus("1");
+		testcase.setDeleted(0);
+		testcase.setCaseVersion(1);
 		testcase = testCaseService.addTestCase(testcase);
 		caseStepService.batchAdd(insertStep(step, expect, testcase));
 		uploads(file,testcase.getCaseId() ,ProfileType.TESTCASE, title);
-		SystemAction systemAction = new SystemAction();
-		systemAction.setActionObjectId(String.valueOf(testcase.getCaseId()));
-		systemAction.setActionProduct(String.valueOf(testcase.getProductId()));
-		systemAction.setActionObjectType("case");
-		systemAction.setActionAction("open");
-		systemAction.setActionActor(user != null ? user.getOrgUserId() : "0");
-		logService.log(systemAction);
+
+		LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
+				LogUtil.LogAction.OPENED,
+				String.valueOf(testcase.getCaseId()),
+				UserUtils.getUserId(),
+				String.valueOf(testcase.getProductId()),
+				null,
+				null,
+				null,
+				null
+				);
 		return "redirect:" + "/a/quality/testCase";
 	}
 
@@ -281,12 +293,14 @@ public class TestCaseAction extends BaseController {
 	@ResponseBody
 	@RequestMapping("/ajax/story")
 	public List<ProductStory> getStory(ProductStory productStory) {
+		if(!(productStory.getProductId()>0))return new ArrayList<ProductStory>();
 		return storyService.findStoryList(productStory, null, null);
 	}
 
 	@ResponseBody
 	@RequestMapping("/ajax/module")
 	public List<SystemModule> getModule(SystemModule systemModule) {
+		if(!(systemModule.getModuleRoot()>0))return new ArrayList<SystemModule>();
 		systemModule.setModuleType("story");
 		return moduleService.findModules(systemModule);
 	}
