@@ -16,8 +16,6 @@
 
 package org.tinygroup.sdpm.product.dao;
 
-import java.util.List;
-
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
@@ -26,6 +24,8 @@ import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.select.Join;
+
+import java.util.List;
 
 public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 	
@@ -59,5 +59,10 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
      * @return
      */
 	int countStatus(int productId,int status);
+	
+	ProductStory getReleteStoryByKey(Integer pk);
+
+
+	List<ProductStory> findpNameBysId(Integer id);
 
 }

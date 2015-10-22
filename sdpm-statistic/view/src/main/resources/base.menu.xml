@@ -14,7 +14,7 @@
           isShow="1"
     >
     </menu>
-    <menu id="statisticOrg" parent-id="statistic" name="组织" href="/statistic/page/org.page" icon="" sort="1" isShow="1"
+    <menu id="statisticOrg" parent-id="statistic" name="组织" href="/statistic/org/all" icon="" sort="1" isShow="1"
     >
     </menu>
 </menu>

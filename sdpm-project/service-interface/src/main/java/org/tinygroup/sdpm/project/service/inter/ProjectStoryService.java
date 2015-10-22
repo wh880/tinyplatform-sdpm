@@ -14,6 +14,14 @@ import java.util.List;
  */
 public interface ProjectStoryService {
 
+    /**
+     * 批量更新关联
+     *
+     * @param projectStoryList
+     * @return
+     */
+    public int[] updateLink(List<ProjectStory> projectStoryList);
+
     public List<Project> findProjectsByStory(Integer storyId);
 
     /**

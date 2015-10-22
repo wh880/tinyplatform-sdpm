@@ -45,7 +45,7 @@
 
     </menu>
 
-    <menu id="productLine-list" parent-id="productLine" name="所有产品线" href="/productLine/all"
+    <menu id="productLine-list" parent-id="productLine" name="所有产品线" href="/productLine/content/all"
           icon="icon-globe" sort="400"
           isShow="1" scope="productLine-right">
         <menu id="allproductline-edit" name="产品线编辑" href="/productLine/find?productLineId=${productLine.productLineId}"
@@ -53,7 +53,7 @@
         <menu id="allproductline-remove" name="删除" href="/productLine/delete?productLineId=${productLine.productLineId}"
               icon="icon-remove" sort="99" isShow="1" scope="productLine-all"/>
     </menu>
-    <menu id="productLine-add" parent-id="productLine" name="添加产品线" href="/productLine/add"
+    <menu id="productLine-add" parent-id="productLine" name="添加产品线" href="/productLine/content/add"
           icon="icon-plus-sign"
           sort="200" isShow="1" scope="productLine-right"></menu>
 

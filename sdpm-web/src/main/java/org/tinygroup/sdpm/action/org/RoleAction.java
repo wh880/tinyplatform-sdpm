@@ -15,7 +15,6 @@ import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.RoleUserService;
 import org.tinygroup.tinysqldsl.Pager;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +35,6 @@ public class RoleAction extends BaseController {
      * @param model
      * @return
      */
-
     @RequiresPermissions(value = {"org-privilege-edit", "organizationAddGroup"}, logical = Logical.OR)
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
@@ -105,10 +103,7 @@ public class RoleAction extends BaseController {
     @RequestMapping(value = "/delete")
     public Map delete(Integer id) {
         roleService.deleteRole(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
     /**
@@ -118,7 +113,6 @@ public class RoleAction extends BaseController {
      * @param model
      * @return
      */
-
     @RequiresPermissions("organizationPrivilege")
     @RequestMapping("/list")
     public String list(OrgRole orgRole, Model model) {

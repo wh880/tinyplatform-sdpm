@@ -85,5 +85,11 @@ public interface ProductManager {
 	 */
 	List<ProductAndLine> getProductAndLine(Product product);
 	
+	/**
+	 * 根据产品线ID查找产品的名字
+	 * @param productLineId
+	 * @return
+	 */
+	List<String> getProductNameByLineId(Integer productLineId);
 	
 }

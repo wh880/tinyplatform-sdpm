@@ -198,7 +198,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 		if (productRelease == null) {
 			productRelease = new ProductRelease();
 		}
-		return getDslTemplate().queryPager(start, limit, productRelease, false,
+		return getDslTemplate().queryPager(start>0?start:0, limit, productRelease, false,
 				new SelectGenerateCallback<ProductRelease>() {
 
 					public Select generate(ProductRelease t) {

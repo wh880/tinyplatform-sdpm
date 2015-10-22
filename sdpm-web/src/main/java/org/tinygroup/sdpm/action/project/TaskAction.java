@@ -165,6 +165,7 @@ public class TaskAction extends BaseController {
                     null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
                     taskService.findTask(task.getTaskId()), task, commnet);
         }
+
         model.addAttribute("task", task);
         return "project/task/index.page";
     }

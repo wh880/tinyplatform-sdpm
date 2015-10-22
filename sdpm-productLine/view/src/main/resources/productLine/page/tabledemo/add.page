@@ -4,189 +4,189 @@
 #set(linkName="overview")
 
 #macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
-	<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked") checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass) class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio" onclick="${radioOther}"/>
+<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked")
+               checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass)
+               class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio"
+               onclick="${radioOther}"/>
 #end
 #macro labelRadio1(rId rName rChecked rValue rClass radioOther labelText)
-	#@radioBox()
-		#radio1(rId=rId rName=rName rChecked=rChecked rValue=rValue rClass=rClass radioOthe=radioOther)
-		#@label(ckId)${labelText}#end
-	#end
+    #@radioBox()
+        #radio1(rId=rId rName=rName rChecked=rChecked rValue=rValue rClass=rClass radioOthe=radioOther)
+        #@label(ckId)${labelText}#end
+    #end
 #end
 
 
-		
-				
-		#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/productLine/save" "post" {"class":""})
-			
-			#@elementItem()
-				#@colLabel()<span class="c-red">*</span>产品线名称：#end
-				#@formControlDiv("col-4")
-					#tinyInput(
-						"text" "productLineName" ""{"placeholder":"产品线名称","nullmsg":"请输入产品线名称！","datatype":"*","id":
-						"product-name","class":"input-text"})
-				#end
-				#@validateDiv("col-2")#end
-			#end
-			#@elementItem()
-				#@colLabel()<span class="c-red">*</span>产品编号：#end
-				#@formControlDiv("col-4")
-					#tinyInput(
-						"text" "productLineCode" ""{"placeholder":"产品编号","nullmsg":"请输入产品编号！","datatype":"*","id":
-						"product-id","class":"input-text"})
-				#end
-				#@validateDiv("col-2")#end
-			#end
 
 
-		#*		 #@elementItem()
-                    #@colLabel()节点：#end
-                    #@formControlDiv("col-4")
-                #@Tselect2F()
-                        #@Tselect2Body("productLineRoot" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="123">12</option>
-                            <option value="124">13</option>
-                            <option value="125">14</option>
-                            <option value="126">15</option>
-                            <option value="127">16</option>
-                            <option value="128">17</option>
-                            <option value="129">18</option>
-                        #end
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/productLine/save" "post" {"class":""})
 
-                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                    #end
+    #@elementItem()
+        #@colLabel()<span class="c-red">*</span>产品线名称：#end
+        #@formControlDiv("col-4")
+            #tinyInput(
+                "text" "productLineName" ""{"placeholder":"产品线名称","nullmsg":"请输入产品线名称！","datatype":"*","id":
+                "product-name","class":"input-text"})
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel()<span class="c-red">*</span>产品编号：#end
+        #@formControlDiv("col-4")
+            #tinyInput(
+                "text" "productLineCode" ""{"placeholder":"产品编号","nullmsg":"请输入产品编号！","datatype":"*","id":
+                "product-id","class":"input-text"})
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+
+#*		 #@elementItem()
+            #@colLabel()节点：#end
+            #@formControlDiv("col-4")
+        #@Tselect2F()
+                #@Tselect2Body("productLineRoot" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="123">12</option>
+                    <option value="124">13</option>
+                    <option value="125">14</option>
+                    <option value="126">15</option>
+                    <option value="127">16</option>
+                    <option value="128">17</option>
+                    <option value="129">18</option>
+                #end
+
+                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
             #end
-                    #@validateDiv("col-2")#end
-                #end*#
-			
-			
-			#@elementItem()
-				#@colLabel()产品线经理：#end
-				#@formControlDiv("col-4")
-					#@Tselect2F()
-	                    #@Tselect2Body("productLineOwner" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                    #end
-                    <script>
+    #end
+            #@validateDiv("col-2")#end
+        #end*#
 
-                        ajaxRead("${sid}", "productLineOwner", "orgUserId", "orgUserRealName", "/org/user/userList");
 
-                    </script>
+    #@elementItem()
+        #@colLabel()产品线经理：#end
+        #@formControlDiv("col-4")
+            #@Tselect2F()
+                #@Tselect2Body("productLineOwner" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #end
+            <script>
 
-						#@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
-						#end
-	                
-	                #end
-				#end
-				#@validateDiv("col-2")#end
-			#end
-			#@elementItem()
-				#@colLabel()产品线质量经理：#end
-				#@formControlDiv("col-4")
-					#@Tselect2F()
-	                    #@Tselect2Body("productLineQualityManager" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                    #end
+                ajaxRead("${sid}", "productLineOwner", "orgUserId", "orgUserRealName", "/org/user/userList");
 
-                    <script>
+            </script>
 
-                        ajaxRead("${sid}", "productLineQualityManager", "orgUserId", "orgUserRealName", "/org/user/userList");
+                #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                #end
 
-                    </script>
+            #end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel()产品线质量经理：#end
+        #@formControlDiv("col-4")
+            #@Tselect2F()
+                #@Tselect2Body(
+                    "productLineQualityManager" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #end
 
-						#@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
-						#end
-	                
-	                #end
-				#end
-				#@validateDiv("col-2")#end
-			#end
-			#@elementItem()
-				#@colLabel()产品线交付经理：#end
-				#@formControlDiv("col-4")
-					#@Tselect2F()
-	                    #@Tselect2Body("productLineDeliveryManager" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                    #end
-                    <script>
+            <script>
 
-                        ajaxRead("${sid}", "productLineDeliveryManager", "orgUserId", "orgUserRealName", "/org/user/userList");
+                ajaxRead("${sid}", "productLineQualityManager", "orgUserId", "orgUserRealName", "/org/user/userList");
 
-                    </script>
+            </script>
 
-						#@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
-						#end
-	                
-	                #end
-				#end
-				#@validateDiv("col-2")#end
-			#end
-			#@elementItem()
-				#@colLabel()产品线描述：#end
-				#@formControlDiv("col-8")
-					#@Teditor("productLineSpec" "productLineSpec" {"initialFrameHeight":"200" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})描述一下产品的相关信息...#end
-				#end
-				#@validateDiv("col-2")#end
-			#end
-			
-			 #@elementItem()
-	            #@colLabel()访问控制：#end
-	            #@skinMinimal("col-8")
-	
-				#@Tradioes("acl" "0" {"onclick":"setWhite(this.value)"})
-	       			<div>#@Tradio("0") 默认设置(有项目视图权限，即可访问)#end</div>
-	       			<div>#@Tradio("2") 私有项目(只有项目团队成员才能访问)#end</div>
-	       			<div>#@Tradio("1") 自定义白名单(团队成员和白名单的成员可以访问)#end</div>
-	       		#end
-	            #end
-	            #@validateDiv("col-2")#end
-	        #end
-		    #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
-	            #@colLabel()分组白名单#end
-	            #@skinMinimal("col-8")
-	            	#@Tcheckboxes("productLineWhiteList" "")
-						#@Tcheckbox("admin")管理员#end
-						#@Tcheckbox("develop")研发#end
-						#@Tcheckbox("test")测试#end
-						#@Tcheckbox("projectManager")项目经理#end
-						#@Tcheckbox("productManager")产品经理#end
-						#@Tcheckbox("developSupervisor")研发主管#end
-						#@Tcheckbox("productSupervisor")产品主管#end
-						#@Tcheckbox("testSupervisor")测试主管#end
-					#end 
-	             
-	            #end
-	            #@validateDiv("col-2")#end
-	        #end
-			
-			
-			  
-				 #@elementItem()
-		        <div class="col-12">
-		            <div class="col-5">
-		
-		            </div>
-		            <div class="col-1">
-		                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-		            </div>
-		            <div class="col-1">
-						#@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-		            </div>
-		            <div class="col-5"></div>
-		        </div>
-		    	#end
-		#end
-				
-	
+                #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                #end
+
+            #end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel()产品线交付经理：#end
+        #@formControlDiv("col-4")
+            #@Tselect2F()
+                #@Tselect2Body(
+                    "productLineDeliveryManager" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #end
+            <script>
+
+                ajaxRead("${sid}", "productLineDeliveryManager", "orgUserId", "orgUserRealName", "/org/user/userList");
+
+            </script>
+
+                #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                #end
+
+            #end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel()产品线描述：#end
+        #@formControlDiv("col-8")
+            #@Teditor("productLineSpec" "productLineSpec" {"initialFrameHeight":"200" ,"placeholder":"说点什么...最少输入10个字符",
+                "datatype":"*10-500"})描述一下产品的相关信息...#end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+    #@elementItem()
+        #@colLabel()访问控制：#end
+        #@skinMinimal("col-8")
+
+            #@Tradioes("acl" "0" {"onclick":"setWhite(this.value)"})
+                #foreach(source:getDict("lineAccessControl"))
+                <div>#@Tradio(source?.value)${source?.text}#end</div>
+                #end
+            #end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+    #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
+        #@colLabel()分组白名单#end
+        #@skinMinimal("col-8")
+            #@Tcheckboxes("productLineWhiteList" "")
+                #foreach(source:getDict("whiteList"))
+                    #@Tcheckbox(source?.value)${source?.text}#end
+                #end
+            #end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+
+
+    #@elementItem()
+    <div class="col-12">
+        <div class="col-5">
+
+        </div>
+        <div class="col-1">
+            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+        </div>
+        <div class="col-1">
+            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+        </div>
+        <div class="col-5"></div>
+    </div>
+    #end
+#end
+
+
 
 
 <script type="text/javascript">
-function setWhite(acl)
-{
-    acl == 'custom' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
-}
+    function setWhite(acl) {
+        acl == 'custom' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
+    }
 </script>
 <script type="text/javascript">
     $(function () {
@@ -197,6 +197,6 @@ function setWhite(acl)
 </script>
 <script type="text/javascript">
     function setWhite(acl) {
-        acl == '1' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
+        acl == '2' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
     }
 </script>

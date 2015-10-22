@@ -14,7 +14,7 @@
 	#@navSelect2Body()
 		  #@navSelect2Data()
 		  <option value=""></option>
-		  <optgroup label="文档">
+		  <optgroup label="文档库">
 		  #foreach(doclib:libList)
 		  #if(doclib?.docLibDeleted != "1")
 		 	 <option value="${doclib?.docLibId}">${doclib?.docLibName}</option>
@@ -22,7 +22,6 @@
 		  #end
 		  </optgroup>
 		#end
-		##@navSelect2Fix()<a href="#">全部</a>#end
 	#end
 #end
 <script type="text/javascript">

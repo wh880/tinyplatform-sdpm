@@ -281,4 +281,52 @@ public abstract class BaseController {
         return map;
     }
 
+    /**
+     * 根据日期来查
+     * <p>
+     * 1-今天 2-昨天 3-前天 4-本周 5-上周 6-本月 7-上月 0-所有
+     * action_date BETWEEN '2015-10-16 00:00:00' AND '2015-10-16 23:59:59'
+     *
+     * @param selectDate
+     * @param startDate
+     * @param endDate
+     */
+    public void betweenDate(String selectDate, Date dateStart, Date dateEnd) {
+        Date date = new Date();
+        Date startDate;
+        Date endDate;
+
+        if ("1".equals(selectDate)) {
+            startDate = DateUtils.getDateStart(date);
+            endDate = DateUtils.getDateEnd(date);
+        } else if ("2".equals(selectDate)) {
+            startDate = DateUtils.addDays(DateUtils.getDateStart(date), -1);
+            endDate = DateUtils.addDays(DateUtils.getDateEnd(date), -1);
+        } else if ("3".equals(selectDate)) {
+            startDate = DateUtils.addDays(DateUtils.getDateStart(date), -2);
+            endDate = DateUtils.addDays(DateUtils.getDateEnd(date), -2);
+        } else if ("4".equals(selectDate)) {
+            startDate = DateUtils.getFirstDayOfWeek(date);
+            endDate = DateUtils.getLastDayOfWeek(date);
+        } else if ("5".equals(selectDate)) {
+            startDate = DateUtils.addDays(DateUtils.getFirstDayOfWeek(date), -7);
+            endDate = DateUtils.addDays(DateUtils.getLastDayOfWeek(date), -7);
+        } else if ("6".equals(selectDate)) {
+            startDate = DateUtils.getFirstDayOfMonth(date);
+            endDate = DateUtils.getLastDayOfMonth(date);
+        } else if ("7".equals(selectDate)) {
+            startDate = DateUtils.getFirstDayOfMonth(DateUtils.addMonths(date, -1));
+            endDate = DateUtils.getLastDayOfMonth(DateUtils.addMonths(date, -1));
+        } else {
+            startDate = null;
+            endDate = null;
+        }
+        if (startDate != null) {
+            dateStart.setTime(startDate.getTime());
+        }
+        if (endDate != null) {
+            dateEnd.setTime(endDate.getTime());
+        }
+    }
+
 }

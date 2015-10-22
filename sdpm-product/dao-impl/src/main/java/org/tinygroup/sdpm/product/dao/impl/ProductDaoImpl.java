@@ -191,7 +191,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		if(product==null){
 			product=new Product();
 		}
-		return getDslTemplate().queryPager(start, limit, product, false, new SelectGenerateCallback<Product>() {
+		return getDslTemplate().queryPager(start>0?start:0, limit, product, false, new SelectGenerateCallback<Product>() {
 
 			public Select generate(Product t) {
 				Select select = MysqlSelect.selectFrom(PRODUCTTABLE).where(
@@ -396,6 +396,13 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 						PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(t.getProductCreatedDate()),
 						PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(t.getProductCreatedVersion()),
 						PRODUCTTABLE.DELETED.eq(t.getDeleted()));
+	}
+
+	public List<String> getProductNameByLineId(Integer productLineId) {
+		
+		Select select = Select.select(PRODUCTTABLE.PRODUCT_NAME).from(PRODUCTTABLE).where(PRODUCTTABLE.PRODUCT_LINE_ID.eq(productLineId));
+		
+		return getDslSession().fetchList(select, String.class);
 	}
 	
 

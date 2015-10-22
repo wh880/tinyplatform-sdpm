@@ -115,8 +115,25 @@ public class ProjectstoryAction extends BaseController {
             projectStory.setStoryVersion(productStory.getStoryVersion());
             projectStoryList.add(projectStory);
         }
-        int[] res = projectStoryService.addLink(projectStoryList);
-        if (res.length > 0) {
+        List<ProjectStory> updateList = new ArrayList<ProjectStory>();
+        List<ProjectStory> insertList = new ArrayList<ProjectStory>();
+        for (ProjectStory t : projectStoryList) {
+            ProjectStory temp = new ProjectStory();
+            temp.setProjectId(t.getProjectId());
+            temp.setStoryId(t.getStoryId());
+            List<ProjectStory> result = projectStoryService.findByProjectStory(temp);
+            if (result.isEmpty()) {
+                insertList.add(t);
+            } else {
+                t.setId(result.get(0).getId());
+                updateList.add(t);
+            }
+        }
+        int[] insertResult = projectStoryService.addLink(insertList);
+        int[] updateResult = projectStoryService.updateLink(updateList);
+
+        //int[] res = projectStoryService.addLink(projectStoryList);
+        if ((insertResult.length + updateResult.length) > 0) {
             map.put("status", "y");
             map.put("info", "关联成功");
             map.put("url", "/a/project/manage/demand/index");

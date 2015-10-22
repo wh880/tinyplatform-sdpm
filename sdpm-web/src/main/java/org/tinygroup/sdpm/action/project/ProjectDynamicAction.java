@@ -53,35 +53,10 @@ public class ProjectDynamicAction extends BaseController {
          * 1-今天 2-昨天 3-前天 4-本周 5-上周 6-本月 7-上月 0-所有
          * action_date BETWEEN '2015-10-16 00:00:00' AND '2015-10-16 23:59:59'
          */
-        Date date = new Date();
-        Date startDate;
-        Date endDate;
+        Date startDate = new Date();
+        Date endDate = new Date();
         if (!StringUtil.isBlank(selDate) && StringUtil.isBlank(teamUserId)) {
-            if ("1".equals(selDate)) {
-                startDate = DateUtils.getDateStart(date);
-                endDate = DateUtils.getDateEnd(date);
-            } else if ("2".equals(selDate)) {
-                startDate = DateUtils.addDays(DateUtils.getDateStart(date), -1);
-                endDate = DateUtils.addDays(DateUtils.getDateEnd(date), -1);
-            } else if ("3".equals(selDate)) {
-                startDate = DateUtils.addDays(DateUtils.getDateStart(date), -2);
-                endDate = DateUtils.addDays(DateUtils.getDateEnd(date), -3);
-            } else if ("4".equals(selDate)) {
-                startDate = DateUtils.getFirstDayOfWeek(date);
-                endDate = DateUtils.getLastDayOfWeek(date);
-            } else if ("5".equals(selDate)) {
-                startDate = DateUtils.addDays(DateUtils.getFirstDayOfWeek(date), -7);
-                endDate = DateUtils.addDays(DateUtils.getLastDayOfWeek(date), -7);
-            } else if ("6".equals(selDate)) {
-                startDate = DateUtils.getFirstDayOfMonth(date);
-                endDate = DateUtils.getLastDayOfMonth(date);
-            } else if ("7".equals(selDate)) {
-                startDate = DateUtils.getFirstDayOfMonth(DateUtils.addMonths(date, -1));
-                endDate = DateUtils.getLastDayOfMonth(DateUtils.addMonths(date, -1));
-            } else {
-                startDate = null;
-                endDate = null;
-            }
+            betweenDate(selDate, startDate, endDate);
             if (startDate == null && endDate == null) {
                 Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, order, ordertype);
                 model.addAttribute("actionPager", actionPager);

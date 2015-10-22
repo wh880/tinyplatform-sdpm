@@ -11,7 +11,7 @@
     #@tbody()
         #@tr()
             #@td()
-            <a href="${TINY_CONTEXT_PATH}/statistic/page/org.page?order=1">产品汇总表</a>
+            <a href="${TINY_CONTEXT_PATH}/statistic/page/org.page?order=1">员工负载表</a>
             #end
         #end
         #@tr()

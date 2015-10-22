@@ -59,7 +59,7 @@
                     #@Tselect2Body("teamList["+a+"].teamUserId" "" {"class":"input-text select2"})
                         <option value="">/</option>
                         #foreach(u : userList)
-                            <option value="${u.orgUserAccount}">${u.orgUserAccount}</option>
+                            <option value="${u.orgUserId}">${u.orgUserRealName}</option>
                         #end
                     #end
                     #@Tselect2Fix()

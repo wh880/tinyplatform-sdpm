@@ -56,5 +56,10 @@ public class ProductServiceImpl implements ProductService {
         return productManager.getProductAndLine(product);
     }
 
+	public List<String> getProductNameByLineId(Integer productLineId) {
+
+		return productManager.getProductNameByLineId(productLineId);
+	}
+
 
 }

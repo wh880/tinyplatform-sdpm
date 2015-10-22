@@ -12,16 +12,15 @@
                 #end
                 #@tr()
                     #@td()所属产品#end
-                    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/overview.page">${story?.productId}</a>#end
+                    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${story?.productId}">${stories?.productName}</a>#end
                 #end
                 #@tr()
                     #@td()所属模块#end
-                    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/togglebox.page">${story
-                        ?.moduleId}</a>#end
+                    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/togglebox.page">${story?.moduleTitle}</a>#end
                 #end
                 #@tr()
                     #@td()所属计划#end
-                    #@td()${story?.planId}#end
+                    #@td()${story?.planName}#end
                 #end
                 #@tr()
                     #@td()当前状态#end
@@ -66,16 +65,16 @@
         #@tbody()
             #@tr()
                 #@td()由谁创建#end
-                #@td()${UserUtils.getUserById(story?.storyOpenedBy).orgUserRealName}于${story?.storyOpenedDate?formatDate(story?.storyOpenedDate,'yyyy-MM-dd'):""}创建 #end
+                #@td()${UserUtils.getUserById(story?.storyOpenedBy)?.orgUserRealName}&nbsp;于&nbsp;${story?.storyOpenedDate?formatDate(story?.storyOpenedDate,'yyyy-MM-dd'):""}于&nbsp;创建 #end
             #end
 
             #@tr()
                 #@td()指派给#end
-                #@td()${UserUtils.getUserById(story?.storyAssignedTo).orgUserRealName}#end
+                #@td()${UserUtils.getUserById(story?.storyAssignedTo)?.orgUserRealName}#end
             #end
             #@tr()
                 #@td()由谁评审#end
-                #@td()${UserUtils.getUserById(story?.storyReviewedBy).orgUserRealName}#end
+                #@td()${UserUtils.getUserById(story?.storyReviewedBy)?.orgUserRealName}#end
             #end
             #@tr()
                 #@td()评审时间#end
@@ -83,7 +82,7 @@
             #end
             #@tr()
                 #@td()由谁关闭#end
-                #@td()${UserUtils.getUserById(story?.storyClosedBy).orgUserRealName}#end
+                #@td()${UserUtils.getUserById(story?.storyClosedBy)?.orgUserRealName}#end
             #end
             #@tr()
                 #@td()关闭原因#end
@@ -91,7 +90,7 @@
             #end
             #@tr()
                 #@td()最后修改#end
-                #@td()${UserUtils.getUserById(story?.storyLastEditedBy).orgUserRealName} 于 ${story?.storyLastEditedDate?formatDate(story?.storyLastEditedDate,'yyyy-MM-dd'):""}修改#end
+                #@td()${UserUtils.getUserById(story?.storyLastEditedBy)?.orgUserRealName}&nbsp;于&nbsp; ${story?.storyLastEditedDate?formatDate(story?.storyLastEditedDate,'yyyy-MM-dd'):""}&nbsp;修改#end
             #end
         #end
     #end

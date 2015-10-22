@@ -8,6 +8,11 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-17.
  */
 public interface BurnService {
+
+    /**
+     * 根据数据库数据跟新燃尽图表
+     */
+    public void updateDate(Integer taskId);
     /**
      * 新增，在项目变动后需要增加字段
      * @param projectBurn

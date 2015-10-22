@@ -1,17 +1,16 @@
 package org.tinygroup.sdpm.document.service.inter;
 
-import java.util.List;
-
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 /**
  * @date 2015/09/21
  * @author Alu
  *
  */
-
 public interface DocService {
 	
 	public DocumentDoc createNewDoc(DocumentDoc doc);
