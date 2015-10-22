@@ -41,11 +41,14 @@
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				##批量删除
 				#foreach(m:menuManager.getScopeMenus("docdelete-op"))
-				#if(m.id == "batch-delete")
-            		#@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/document/doc/batchDelete")
-            			<a class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
-            		#end
-            	#end
+					#if(m.id == "batch-delete")
+	            		#@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/document/doc/batchDelete")
+	            			<a class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
+	            		#end
+	            	#else
+	            		<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="btn radius btn-success btn-sm">
+	            			<i class=" icon-plus">创建文档</i></a>
+	            	#end
             	#end		
             					
 			#end

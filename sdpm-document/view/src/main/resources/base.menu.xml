@@ -23,7 +23,7 @@
 			
 			
 		<menu id="add-doc" name="创建文档" href="/document/doc/add"
-			icon="icon-plus" sort="1" isShow="1" scope="add-doc"></menu>
+			icon="icon-plus" sort="1" isShow="1" scope="docdelete-op"></menu>
 			
 			
 		<menu id="doc-view-edit" name ="编辑" href="/document/doc/edit"

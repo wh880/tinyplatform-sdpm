@@ -1,5 +1,4 @@
 
-##<span id="showsearchmore">搜索</span>
 <form method="get" action="${TINY_CONTEXT_PATH+adminPath}/document" id="${docTableId}form" class="form-condensed searchform">
 	<div class="hide">
 		<select id="operatortemp">
@@ -177,9 +176,7 @@
 <script type="text/javascript">
 	<!--
 	$(function(){
-		$("#showsearchmore").click(function(){
 			$(".searchform").toggleClass("showmore");
-		});
 		$("#searchmore").click(function(){
 			$("#searchlite").css("display","block");
 			$(this).hide();
