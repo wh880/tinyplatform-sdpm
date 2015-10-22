@@ -25,8 +25,8 @@
         <p class="titleName">建任务</p>
         #@elementItem()
             #@sdpmItem("所属项目")
-                #tinyInput("hidden" "taskProject" selProject.projectId)
-                ${selProject.projectName}
+                #tinyInput("hidden" "taskProject" currentProjectId)
+                ${CmsUtils.getProject(currentProjectId).projectName}
             #end
         #end
         #@elementItem()

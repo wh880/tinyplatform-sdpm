@@ -3,7 +3,13 @@
 
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
     #@toggleLeft({"class":"aclass"})
-        #@settoggleLeftTitle()${selProject.projectName}#end
+        #@settoggleLeftTitle()
+            #if(currentProjectId)
+                ${CmsUtils.getProject(currentProjectId).projectName}
+            #else
+                ${CmsUtils.getProjectList().get(0).projectName}
+            #end
+        #end
         #@settoggleLeftBody("treeLeftbox")
             #include("/project/task/moduleTree.page")
         #end

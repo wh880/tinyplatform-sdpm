@@ -35,11 +35,12 @@ function tLoadContent(link, contain, className) {
 #end
 
 #macro historyDiv(contentUrl)
+	#set(historyId=fmt("hid%d",rand()))
     #@div(divClass="infoContent")
     <p class="titleName">历史记录</p>
-    <div id="histories"></div>
+    <div id="${historyId}"></div>
     #end
 <script type="text/javascript">
-    tLoadContent("${TINY_CONTEXT_PATH+contentUrl}","#histories",".histories")
+    tLoadContent("${TINY_CONTEXT_PATH+contentUrl}", "#${historyId}", ".histories")
 </script>
 #end

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
@@ -55,9 +56,14 @@ public class BeforeAction extends BaseController {
     }
 
     @RequestMapping("/survey/index")
-    public String jumpSurveyIndex(Model model, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
-        Project project = projectService.findById(projectId);
+    public String jumpSurveyIndex(Model model, HttpServletRequest request, HttpServletResponse response,
+                                  String projectId) {
+        if (StringUtil.isBlank(projectId)) {
+            projectId = CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID);
+        } else {
+            CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, projectId);
+        }
+        Project project = projectService.findById(Integer.parseInt(projectId));
         model.addAttribute("project", project);
         return "/project/survey/index.page";
     }
