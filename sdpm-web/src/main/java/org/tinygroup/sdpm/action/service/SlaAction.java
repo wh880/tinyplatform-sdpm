@@ -62,13 +62,14 @@ public class SlaAction extends BaseController {
     public String save(Integer id, ServiceSla sla, Model model) {
         if (sla.getSlaId() == null) {
             sla = slaService.addSla(sla);
+           /* 新增的历史记录*/
             LogUtil.logWithComment(LogUtil.LogOperateObject.SLA, LogUtil.LogAction.OPENED, String.valueOf(sla.getSlaId()), UserUtils.getUserId(),
                     null, null, null, sla, null);
 
         } else {
             ServiceSla qualitySla = slaService.findSla(sla.getSlaId());
             slaService.updateSla(sla);
-             /*历史记录*/
+             /*编辑历史记录*/
             LogUtil.logWithComment(LogUtil.LogOperateObject.SLA, LogUtil.LogAction.EDITED, String.valueOf(sla.getSlaId()), UserUtils.getUserId(),
                     null, null, qualitySla, sla, null);
         }
@@ -76,7 +77,7 @@ public class SlaAction extends BaseController {
         return "/service/sla/sla.page";
     }
 
-    /*注解的意义是，想根据产品id找到产品名称。"和“/form”拼凑成查询语句，/list"和"/list/data"是实现sla开始 页面表中数据的显示*/
+    /*注解的意义是，想根据产品id找到产品名称。"/list"和"/list/data"显示页面表中数据*/
     @RequestMapping(value = "/list")
     public String list(ServiceSla sla, Model model) {
         return "/service/sla/sla.page";
