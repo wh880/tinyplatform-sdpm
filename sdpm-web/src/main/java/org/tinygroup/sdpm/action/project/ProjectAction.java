@@ -131,7 +131,7 @@ public class ProjectAction extends BaseController {
 //        request.getSession().setAttribute("selProject", tProject);
 //        List<Project> list = projectService.findList();
 //        request.getSession().setAttribute("projectList", list);
-        CmsUtils.removetList();
+        CmsUtils.removeProjectList();
         return "project/allProject.page";
     }
 
@@ -265,7 +265,7 @@ public class ProjectAction extends BaseController {
         for (ProjectProduct t : list) {
             productIdList.add(t.getProductId());
         }
-        List<Product> productlist = productService.findProductList(productIdList.toArray(ids));
+        List<Product> productlist = productService.findProductListByIds(productIdList.toArray(ids));
         model.addAttribute("project", project);
         model.addAttribute("productlist", productlist);
         return "project/survey/basicInformation.pagelet";
