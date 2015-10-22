@@ -12,37 +12,37 @@
 				<span class="f">
 
     #foreach(m:menuManager?.getScopeMenus("dymanci-time"))
-   	 #set(url=eval(m?.href))
-            <a href="${TINY_CONTEXT_PATH}${adminPath}${url}" ${choice==m?.id?'class="active_btn"':""}>${m.name}</a>
+        #set(url=eval(m?.href))
+        <a href="${TINY_CONTEXT_PATH}${adminPath}${url}" ${choice==m?.id?'class="active_btn"':""}>${m.name}</a>
     #end
 
-                    <span style="left:330px;top:-35px; position:relative; height:10%">
-                        #@tinyForm("thisform" "" "" {"class":"test"})
-                            #@elementItem()
-                                #@formControlDiv("col-2")
-                                    #@Tselect2F()
-                                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"})
-                                            <option value="CV"><a
-                                                    href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/dymanicdata.page">上周</a>
-                                            </option>
-                                            <option value="BN"><a
-                                                    
-                                                    href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/dymanicdata.page">上月</a>
-                                            </option>
-                                            <option value="MK"><a
-                                                    href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/dymanicdata.page">前半年</a>
-                                            </option>
-                                            <option value="AS"><a
-                                                    href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/dymanicdata.page">去年</a>
-                                            </option>
-                                        #end
-                                    #end
-                                #end
-                                #@validateDiv("col-2")#end
-                            #end
-                            #div(divClass="clearfix")
-                        #end
-                    </span>
+                #*  <span style="left:330px;top:-35px; position:relative; height:10%">
+                      #@tinyForm("thisform" "" "" {"class":"test"})
+                          #@elementItem()
+                              #@formControlDiv("col-2")
+                                  #@Tselect2F()
+                                      #@Tselect2Body("lang" "IN" {"class":"input-text select2"})
+                                          <option value="CV"><a
+                                                  href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/dymanicdata.page">上周</a>
+                                          </option>
+                                          <option value="BN"><a
+
+                                                  href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/dymanicdata.page">上月</a>
+                                          </option>
+                                          <option value="MK"><a
+                                                  href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/dymanicdata.page">前半年</a>
+                                          </option>
+                                          <option value="AS"><a
+                                                  href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/dymanicdata.page">去年</a>
+                                          </option>
+                                      #end
+                                  #end
+                              #end
+                              #@validateDiv("col-2")#end
+                          #end
+                          #div(divClass="clearfix")
+                      #end
+                  </span>*#
 				</span>
     #div(divClass="clearfix")
 </div>
@@ -55,16 +55,17 @@
         <input type="button" value="反选" class="btn btn-default btn-primary"
                onclick="selectAllNullorReserve('product-dymanic','反选');"/>
 
-#*            #foreach(m:menuManager.getScopeMenus("dymanci-dl"))
-                #if(m.id=="product-dymanic-badel")
-                    #@radiusBtn(
-                        "btn radius btn-danger " "icon-trash" "javascript:;" "deleteBatch" "batchDel" )&nbsp;批量删除#end
-                #end
-            #end*#
+        #*            #foreach(m:menuManager.getScopeMenus("dymanci-dl"))
+                        #if(m.id=="product-dymanic-badel")
+                            #@radiusBtn(
+                                "btn radius btn-danger " "icon-trash" "javascript:;" "deleteBatch" "batchDel" )&nbsp;批量删除#end
+                        #end
+                    #end*#
 
         #end
-        #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/system/action/list?"+tinyRequestQueryString) ##取数据地址 总数据        
-#@thead()
+        #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+
+            "/system/action/list?"+tinyRequestQueryString) ##取数据地址 总数据
+            #@thead()
                 #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                     #@tinyTh({"width":"6"})<input type="checkbox" name="product-dymanic" value="">#end
                     #@tinyTh({"class":"sorting","rel":"actionDate"})日期#end

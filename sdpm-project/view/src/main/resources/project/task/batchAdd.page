@@ -48,16 +48,12 @@
                     #@td()
                         #@Tselect2F()
                             #@Tselect2Body("taskList["+i+"].moduleId" "" {"class":
-                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                "input-text select2"})
                             <option value="">/</option>
                                 #foreach(m : modulesList)
                                 <option value=${m.moduleId}>${m.moduleName}</option>
                                 #end
-                                #@Tselect2Fix()
-
-                                #end
                             #end
-                            #@validateDiv("col-2")#end
                         #end
                     #end
                     #@td()
@@ -72,10 +68,10 @@
                             #end
                             #@Tselect2Fix()
                             <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search">全部</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search" class="r">全部</a>
                             #end
                         #end
-                        #@validateDiv("col-2")#end
+
                     #end
                     #@td()
                         #tinyInput(
@@ -86,23 +82,23 @@
                         #@formControlDiv( )
                             #@Tselect2F()
                                 #@Tselect2Body(
-                                    "taskList["+i+"].taskType" "" {"class":"input-text select2","datatype":"*4-16",
-                                    "nullmsg":
-                                    "不能为空"}) ##,"multiple":"multiple"加上为多选项
+                                    "taskList["+i+"].taskType" "" {"class":"input-text select2",
+                                    "datatype":"*",
+                                    "nullmsg":"不能为空"})
                                     #foreach(item : getDict("taskType"))
                                         #@tinyOptionItem(item.value)${item.text}#end
                                     #end
                                 #end
                             #end
                         #end
-                        #@validateDiv("col-2")#end
+
                     #end
                     #@td()
                         #@formControlDiv()
                             #@Tselect2F()
                                 #@Tselect2Body(
                                     "taskList["+i+"].taskAssignedTo" "" {"class":
-                                    "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                    "input-text select2"})
                                 <option value="">/</option>
                                     #foreach(t : teamList)
                                     <option value="${t?.teamUserId}">${t?.teamUserId}</option>
@@ -114,7 +110,7 @@
                                 #end
                             #end
                         #end
-                        #@validateDiv("col-2")#end
+
                     #end
                     #@td()
                         #tinyInput("text" "taskList["+i+"].taskEstimate" "")
@@ -126,13 +122,13 @@
                         #@Tselect2F()
                             #@Tselect2Body(
                                 "taskList["+i+"].taskPri" "" {"class":"input-text select2","datatype":"*4-16","nullmsg":
-                                "不能为空"}) ##,"multiple":"multiple"加上为多选项
+                                "不能为空","minimumResultsForSearch":"Infinity"}) ##,"multiple":"multiple"加上为多选项
                                 #foreach(item : getDict("Pri"))
                                     #@tinyOptionItem(item.value)${item.text}#end
                                 #end
                             #end
                         #end
-                        #@validateDiv("col-2")#end
+
                     #end
                 #end
 

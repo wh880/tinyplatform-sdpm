@@ -11,7 +11,6 @@ import org.tinygroup.sdpm.util.CookieUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * Created by shenly13343 on 2015-09-28.
@@ -34,7 +33,7 @@ public class BeforeAction extends BaseController {
 
     @RequestMapping("/build/index")
     public String jumpBuildIndex(Model model, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         Project project = projectService.findById(projectId);
         model.addAttribute("project", project);
         return "project/version/index.page";
@@ -57,19 +56,15 @@ public class BeforeAction extends BaseController {
 
     @RequestMapping("/survey/index")
     public String jumpSurveyIndex(Model model, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         Project project = projectService.findById(projectId);
         model.addAttribute("project", project);
         return "/project/survey/index.page";
     }
 
     @RequestMapping("/select")
-    public String selectProject(Integer projectId, String oldUrl, Model model, HttpServletResponse response, HttpServletRequest request) {
-        CookieUtils.setCookie(response, "cookie_projectId", projectId.toString(), -1);
-        Project selProject = projectService.findById(projectId);
-        List<Project> list = projectService.findList();
-        request.getSession().setAttribute("selProject", selProject);
-        request.getSession().setAttribute("projectList", list);
+    public String selectProject(Integer projectId, String oldUrl, HttpServletResponse response, HttpServletRequest request) {
+        CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, projectId.toString(), -1);
         return "redirect:" + oldUrl;
     }
 

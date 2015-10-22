@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.product.util;
 
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class StoryUtil {
     public static String getStatusCondition(String choose, HttpServletRequest request){
+    	if(StringUtil.isBlank(choose)){
+    		return "";
+    	}
         OrgUser user = (OrgUser) request.getSession().getAttribute("orgUser");
         if(choose == null||"".equals(choose))return null;
         switch (Integer.valueOf(choose)){
@@ -24,7 +28,7 @@ public class StoryUtil {
             case 10:return "story_status='Acceptance'";
             case 11:return "story_status='closed'";
         }
-        return null;
+        return "";
     }
     
 

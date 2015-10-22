@@ -46,7 +46,7 @@ public class DocBizImpl implements DocBiz {
 		// 添加文档库
 		doclib.setDocLibAddedDate(new Date());
 		doclib.setDocLibEditedDate(new Date());
-	
+		doclib.setDocLibDeleted("0");
 		return doclibdao.add(doclib);
 	}
 
@@ -67,7 +67,7 @@ public class DocBizImpl implements DocBiz {
 		doc.setDocAddedDate(docdao.getByKey(doc.getDocId()).getDocAddedDate());
 		doc.setDocDeleted(docdao.getByKey(doc.getDocId()).getDocDeleted());
 		doc.setDocEditedDate(new Date());
-		return docdao.edit(doc);
+		return docdao.editDoc(doc);
 	}
 
 	public int updtDocLib(DocumentDoclib doclib) {

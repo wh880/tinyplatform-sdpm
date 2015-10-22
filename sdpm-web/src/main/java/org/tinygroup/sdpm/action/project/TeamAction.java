@@ -35,7 +35,7 @@ public class TeamAction extends BaseController {
 
     @RequestMapping("find")
     public String find(Model model, HttpServletRequest request, Integer start, Integer limit, String order, String ordertype) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         ProjectTeam team = new ProjectTeam();
         team.setProjectId(projectId);
         Pager<ProjectTeam> pager = teamService.findPager(team, start, limit, order, ordertype);
@@ -45,7 +45,7 @@ public class TeamAction extends BaseController {
 
     @RequestMapping("/preTeamManage")
     public String preTeamManage(Model model, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
         List<OrgUser> userList = userService.findUserList(new OrgUser());
         //删除用户列表中的团队成员
@@ -65,7 +65,7 @@ public class TeamAction extends BaseController {
 
     @RequestMapping("/teamManageSave")
     public String teamManageSave(Teams teams, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         List<ProjectTeam> updateList = new ArrayList<ProjectTeam>();
         List<ProjectTeam> addList = new ArrayList<ProjectTeam>();
 

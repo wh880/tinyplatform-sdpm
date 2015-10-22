@@ -33,7 +33,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public List<Project> findByProjectList(List<Integer> list) {
-        return null;
+        return projectManager.findList(list);
     }
 
     public List<Project> findProjects(Project project) {

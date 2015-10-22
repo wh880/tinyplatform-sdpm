@@ -1,4 +1,4 @@
-#import("/org/tinygroup/form/components/form.component")
+A#import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
@@ -26,7 +26,9 @@
         <p class="titleName">${task?.taskName}>开始</p>
         #@elementItem()
             #@sdpmItem("实际开始")
-                #dateInputSimple("taskRealStarted" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD")
+                #@tinyDateInput(
+                    "taskRealStarted" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                #end
             #end
         #end
         #@elementItem()

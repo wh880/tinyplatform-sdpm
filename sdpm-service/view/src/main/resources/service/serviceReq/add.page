@@ -131,15 +131,15 @@
         #@elementItem()
             #@sdpmItem("请求提交时间" "*")
                 #@tinyDateInput(
-                    "requestSubmitDate" formatDate(request?.requestSubmitDate,
-                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                    "requestSubmitDate" formatDate(request?.requestSubmitDate?:now(),
+                "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","datatype":"*",
                 "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
             #end
         #end
         #@elementItem()
             #@sdpmItem("请求承诺回复时间")
                 #@tinyDateInput("requestCommitmentDate" formatDate(request?.requestCommitmentDate,
-                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px"})#end
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px"})#end
             #end
         #end
 

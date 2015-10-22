@@ -78,7 +78,7 @@
     #@elementItem()
         #@sdpmItem("项目类型")
             #@Tselect2F()
-                #@Tselect2Body("projectType" "0" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #@Tselect2Body("projectType" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     <option value="">/</option>
                     #foreach(type : getDict("projectType"))
                         <option value=${type.value}>${type.text}</option>
@@ -97,10 +97,17 @@
     #end
     #@elementItem()
         #@sdpmItem("关联产品")
-        ###tinyInput("text" "username" ""{"style":"width:300px","placeholder":"","datatype":"*4-16","nullmsg":"标题不能为空！","id":"username","class":"input-text"})
-            #@tinySelect("linkProduct" "zh" {"class":"input-text select2","rel":"22","multiple":"multiple"})
-                #for(p : prodcutList)
-                #@tinyOptionItem(p.productId)${p.productName}#end
+            #@Tselect2F()
+                #@Tselect2Body("linkProduct" "" {"class":"input-text select2"})
+                    <option value="">/</option>
+                    #foreach(p : prodcutList)
+                        <option value="${p?.productId}">${p.productName}</option>
+                    #end
+                #end
+                #@Tselect2Fix()
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
+                #end
             #end
         #end
     #end
@@ -110,28 +117,12 @@
         #@Teditor("projectDesc" "content" {"initialFrameHeight":"200","initialFrameWidth":"550"})#end
     #end
 #end
-###@elementItem()
-##    #@colLabel()访问控制：#end
-##    #@skinMinimal("col-8")
-##        #labelRadio1(rId="aclopen" rName="projectAcl" rValue="1" labelText="默认设置(有项目视图权限，即可访问)"
-##            "setWhite(this.value);")
-##        #labelRadio1(rId="aclcustom" rName="projectAcl" rValue="2" labelText="私有项目(只有项目团队成员才能访问)"
-##            "setWhite(this.value);")
-##        #labelRadio1(rId="aclcustom" rName="projectAcl" rValue="3" labelText="自定义白名单(团队成员和白名单的成员可以访问)"
-##            "setWhite(this.value);")
-##
-##    #end
-##    #@validateDiv("col-2")#end
-###end
 #@elementItem()
     #@sdpmItem("访问控制")
         #@formControlDiv("skin-minimal col-9")
             #foreach(acl : getDict("projectAcl"))
                 #@tinyRadio("projectAcl" acl.value "")${acl.text}#end
             #end
-        ##            #@tinyRadio("projectAcl" "1" "man")默认设置(有项目视图权限，即可访问)#end
-        ##            #@tinyRadio("projectAcl" "2" "man")私有项目(只有项目团队成员才能访问)#end
-        ##            #@tinyRadio("projectAcl" "3" "man")自定义白名单(团队成员和白名单的成员可以访问)#end
         #end
     #end
 #end
@@ -148,8 +139,6 @@
         #@validateDiv("col-2")#end
     #end
 #end
-
-    <br/>
 </div>
 #@elementItem()
     <div class="col-12">

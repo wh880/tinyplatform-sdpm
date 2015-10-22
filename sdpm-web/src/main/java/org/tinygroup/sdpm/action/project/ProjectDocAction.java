@@ -37,7 +37,7 @@ public class ProjectDocAction extends BaseController {
 
     @RequestMapping("/findList")
     public String findList(Model model, HttpServletRequest request, Integer start, Integer limit, String order, String ordertype) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
 
         DocumentDoc doc = new DocumentDoc();
         doc.setDocProject(projectId);

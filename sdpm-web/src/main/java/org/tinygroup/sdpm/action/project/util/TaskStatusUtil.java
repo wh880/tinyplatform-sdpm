@@ -52,7 +52,7 @@ public class TaskStatusUtil {
             if (StringUtil.isBlank(condition)) {
                 condition = "task_module " + moduleIds;
             } else {
-                condition = "and task_module " + moduleIds;
+                condition = condition + " and task_module " + moduleIds;
             }
         }
 //task_model

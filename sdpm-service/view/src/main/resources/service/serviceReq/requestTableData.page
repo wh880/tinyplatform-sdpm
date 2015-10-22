@@ -30,7 +30,7 @@
             #set(m2=menuManager.getMenu("request-delete"))
             #if(m2)
                 #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m2.href var?.clientRequestId)<i
-                        class=${m2.icon}title="删除"></i>#end
+                        class="${m2.icon}" title="删除"></i>#end
             #end
 
         #end

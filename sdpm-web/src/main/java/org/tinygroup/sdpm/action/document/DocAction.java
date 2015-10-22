@@ -1,29 +1,17 @@
 package org.tinygroup.sdpm.action.document;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
@@ -35,6 +23,7 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
@@ -45,9 +34,16 @@ import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequestMapping(value="/a/document")
-public class DocAction {
+public class DocAction extends BaseController{
 	@Autowired
 	private DocService docservice;
 	@Autowired
@@ -64,7 +60,16 @@ public class DocAction {
 	private UserService userService;
 	
 	/*
-	 * 主页action。session中存放了文档库id（documentLibId）
+	 * 跳转主页
+	 * 
+	 * @param doclib
+	 * @param request
+	 * @param change
+	 * @param docChange
+	 * @param tree
+	 * @param moduleId
+	 * @return
+	 * 
 	 */
 	@RequestMapping("")
 	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange,String tree, String moduleId)
@@ -178,7 +183,7 @@ public class DocAction {
 			SystemModule module = new SystemModule();
 			module.setModuleType("doc");
 			module.setModuleRoot(libid);
-			List<SystemModule> moduleList = moduleService.findAllModules(module);
+			List<SystemModule> moduleList = moduleService.findModules(module);
 			model.addAttribute("moduleList", moduleList);
 			return "/document/add-doc.page";	
 		}
@@ -194,9 +199,7 @@ public class DocAction {
 		doc.setDocDeleted("0");	
 		doc.setDocAddedBy(UserUtils.getUser().getOrgUserId());
 		DocumentDoc document = docservice.createNewDoc(doc);
-		
-		ProfileUtil profileUtil = new ProfileUtil();		
-        profileUtil.uploads(file, document.getDocId(), "document", title);
+		uploads(file,document.getDocId(), ProfileType.DOCUMENT,title);
         
 		model.addAttribute("productList", product);
 		
@@ -263,15 +266,8 @@ public class DocAction {
 	 *查看文档基本信息
 	 */
 	@RequestMapping("/doc/view")
-	public String docView(HttpServletRequest request,DocumentDoc doc,SystemProfile systemProfile,Model model,Integer docid,Integer type){
-		if(type == 1){
-			doc.setDocLibId(1);
-		}else if (type == 2) {
-			doc.setDocLibId(2);
-		}else{
-			doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
-		}
-		doc = docservice.findDocById(docid);		
+	public String docView(HttpServletRequest request, SystemAction systemAction,DocumentDoc doc,SystemProfile systemProfile,Model model,Integer docid){
+		doc = docservice.findDocById(docid);	
 		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
 		systemProfile.setFileObjectType("document");
 		systemProfile.setFileObjectId(docid);
@@ -391,7 +387,7 @@ public class DocAction {
 	@RequestMapping(value="/doclib/save")
 	public String saveDoclib(HttpServletRequest request,DocumentDoclib doclib)
 	{
-		if(doclib.getDocLibId()==null||doclib.getDocLibId()==0){
+		if(doclib.getDocLibId()==null||doclib.getDocLibId()==0){		
 			doclib = docservice.createNewDocLib(doclib);
 			request.getSession().setAttribute("documentLibId", doclib.getDocLibId());
 		}else {
@@ -400,7 +396,7 @@ public class DocAction {
 		return "redirect:"+"/a/document?change=true";
 	}
 	/*
-	 * 撒谎年初文档库的action
+	 * 删除文档库的action
 	 */
 	@RequiresPermissions(value={"doclib-delete"})
 	@ResponseBody
@@ -558,10 +554,8 @@ public class DocAction {
 	public String saveDocument(DocumentDoc doc,@PathVariable(value="type")String type,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title) throws IOException {
 		if("save".equals(type)){
 			DocumentDoc document = docservice.createNewDoc(doc);
-			
-			ProfileUtil profileUtil = new ProfileUtil();		
-	        profileUtil.uploads(file, document.getDocId(), "document", title);
-	        
+
+	        uploads(file,document.getDocId(),ProfileType.DOCUMENT,title);
 			return "redirect:"+"/product/page/project/archive-list.page";
 		}else if ("update".equals(type)) {
 
