@@ -20,7 +20,9 @@
                 #@Tselect2F()
                     #@Tselect2Body("taskFinishedBy"  {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #foreach(t : teamList)
-                            <option value="${t?.teamUserId}">${t?.teamUserId}</option>
+                            <option value="${t?.teamUserId}">
+                                ${UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                            </option>
                         #end
                     #end
                 ##填写任意内容，侦听需重新填加 A侦听已内置
