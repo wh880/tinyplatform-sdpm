@@ -36,10 +36,7 @@ public class DeptAction extends BaseController {
         dept.setOrgDeptParent(orgDeptParent);
         dept.setOrgDeptName(orgDeptName);
         deptService.addDept(dept);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "增加成功");
-        return map;
+        return resultMap(true, "增加成功");
     }
 
     /**
@@ -56,10 +53,7 @@ public class DeptAction extends BaseController {
         dept.setOrgDeptName(orgDeptName);
         dept.setOrgDeptParent(orgDeptParent);
         deptService.updateDept(dept);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "修改成功");
-        return map;
+        return resultMap(true, "修改成功");
     }
 
     /**
@@ -71,20 +65,15 @@ public class DeptAction extends BaseController {
     @RequestMapping("delete")
     public Map deleteDept(Integer orgDeptId) {
         deptService.deleteDept(orgDeptId);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
     /**
      * 部门树的数据拼接
-     * @param check
-     * @return
      */
     @ResponseBody
     @RequestMapping("/data")
-    public List data(String check) {
+    public List data() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<OrgDept> deptList = deptService.findDeptList(new OrgDept());
         for (OrgDept d : deptList) {
