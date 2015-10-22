@@ -241,6 +241,7 @@ public class StoryAction extends BaseController {
 
         ProductStory productStory = storyService.findStory(storyId);
         ProductStorySpec storySpec = storySpecService.findStorySpec(storyId);
+        List<ProductStory> stories = storyService.findProductName(storyId);
 
         QualityTestCase testCase = new QualityTestCase();
         testCase.setStoryId(storyId);
@@ -259,6 +260,7 @@ public class StoryAction extends BaseController {
         model.addAttribute("bugList", bugList);
         model.addAttribute("projectList", projectList);
         model.addAttribute("storyMailTo", userList);
+        model.addAttribute("stories", stories);
 
         if ("productDemandClose".equals(forwordPager)) {
             return "/product/page/tabledemo/product-demand-close.page";

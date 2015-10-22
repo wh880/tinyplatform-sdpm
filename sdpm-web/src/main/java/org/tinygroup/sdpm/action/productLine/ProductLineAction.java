@@ -41,7 +41,7 @@ public class ProductLineAction extends BaseController {
     @Autowired
     private BuildService buildService;
 
-    @RequestMapping("{type}")
+    @RequestMapping("/content/{type}")
     public String productline(@PathVariable(value = "type") String type) {
         if ("add".equals(type)) {
 

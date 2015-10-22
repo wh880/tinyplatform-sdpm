@@ -16,6 +16,33 @@
 
 package org.tinygroup.sdpm.product.dao.impl;
 
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Repository;
+import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.sdpm.common.util.update.InsertUtil;
+import org.tinygroup.sdpm.common.util.update.UpdateUtil;
+import org.tinygroup.sdpm.product.dao.ProductStoryDao;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
+import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Column;
+import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.Join;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
@@ -29,52 +56,62 @@ import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Repository;
-import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.util.common.NameUtil;
-import org.tinygroup.sdpm.common.util.update.InsertUtil;
-import org.tinygroup.sdpm.common.util.update.UpdateUtil;
-import org.tinygroup.sdpm.product.dao.ProductStoryDao;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.base.Column;
-import org.tinygroup.tinysqldsl.base.Condition;
-import org.tinygroup.tinysqldsl.base.Value;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.select.Join;
-import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 @Repository
 public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductStoryDao {
 
+	public static Condition[] storyPueryCondition(ProductStory t, Condition... condition) {
+
+		Condition[] con = t == null ? new Condition[]{PRODUCT_STORYTABLE.STORY_ID.isNotNull()} : new Condition[]{
+				PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
+				PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
+				PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(t.getStoryParentId()),
+				PRODUCT_STORYTABLE.MODULE_ID.eq(t.getModuleId()),
+				PRODUCT_STORYTABLE.PLAN_ID.eq(t.getPlanId()),
+				PRODUCT_STORYTABLE.STORY_STATUS.eq(t.getStoryStatus()),
+				PRODUCT_STORYTABLE.STORY_SOURCE.eq(t.getStorySource()),
+				PRODUCT_STORYTABLE.STORY_FROM_BUG.eq(t.getStoryFromBug()),
+				PRODUCT_STORYTABLE.STORY_TITLE.eq(t.getStoryTitle()),
+				PRODUCT_STORYTABLE.STORY_KEYWORDS.eq(t.getStoryKeywords()),
+				PRODUCT_STORYTABLE.STORY_TYPE.eq(t.getStoryType()),
+				PRODUCT_STORYTABLE.STORY_PRI.eq(t.getStoryPri()),
+				PRODUCT_STORYTABLE.STORY_ESTIMATE.eq(t.getStoryEstimate()),
+				PRODUCT_STORYTABLE.STORY_STAGE.eq(t.getStoryStage()),
+				PRODUCT_STORYTABLE.STORY_MAILTO.eq(t.getStoryMailto()),
+				PRODUCT_STORYTABLE.STORY_OPENED_BY.eq(t.getStoryOpenedBy()),
+				PRODUCT_STORYTABLE.STORY_OPENED_DATE.eq(t.getStoryOpenedDate()),
+				PRODUCT_STORYTABLE.STORY_ASSIGNED_TO.eq(t.getStoryAssignedTo()),
+				PRODUCT_STORYTABLE.STORY_ASSIGNED_DATE.eq(t.getStoryAssignedDate()),
+				PRODUCT_STORYTABLE.STORY_LAST_EDITED_BY.eq(t.getStoryLastEditedBy()),
+				PRODUCT_STORYTABLE.STORY_LAST_EDITED_DATE.eq(t.getStoryLastEditedDate()),
+				PRODUCT_STORYTABLE.STORY_REVIEWED_BY.eq(t.getStoryReviewedBy()),
+				PRODUCT_STORYTABLE.STORY_REVIEWED_DATE.eq(t.getStoryReviewedDate()),
+				PRODUCT_STORYTABLE.STORY_CLOSED_BY.eq(t.getStoryClosedBy()),
+				PRODUCT_STORYTABLE.STORY_CLOSED_DATE.eq(t.getStoryClosedDate()),
+				PRODUCT_STORYTABLE.STORY_CLOSED_REASON.eq(t.getStoryClosedReason()),
+				PRODUCT_STORYTABLE.TO_BUG.eq(t.getToBug()),
+				PRODUCT_STORYTABLE.STORY_LINK_STORIES.eq(t.getStoryLinkStories()),
+				PRODUCT_STORYTABLE.STORY_CHILD_STORIES.eq(t.getStoryChildStories()),
+				PRODUCT_STORYTABLE.STORY_DUPLICATE_STORY.eq(t.getStoryDuplicateStory()),
+				PRODUCT_STORYTABLE.STORY_VERSION.eq(t.getStoryVersion()),
+				PRODUCT_STORYTABLE.BUILD_ID.eq(t.getBuildId()),
+				PRODUCT_STORYTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()),
+				PRODUCT_STORYTABLE.DELETED.eq(t.getDeleted())};
+
+		if (condition != null && condition.length > 0) {
+			int conLen1 = con.length;//保存第一个数组长度
+			int conLen2 = condition.length;//保存第二个数组长度
+			con = Arrays.copyOf(con, conLen1 + conLen2);//扩容
+			System.arraycopy(condition, 0, con, conLen1, conLen2);//将第二个数组与第一个数组合并
+		}
+
+		return con;
+	}
+	
 	public ProductStory add(final ProductStory productStory) {
 		return getDslTemplate().insertAndReturnKey(productStory, new InsertGenerateCallback<ProductStory>() {
 			public Insert generate(ProductStory t) {
 				Insert insert = InsertUtil.getInsert(PRODUCT_STORYTABLE, productStory);
-						
+
 						/*insertInto(PRODUCT_STORYTABLE).values(
 					PRODUCT_STORYTABLE.STORY_ID.value(t.getStoryId()),
 					PRODUCT_STORYTABLE.COMPANY_ID.value(t.getCompanyId()),
@@ -115,7 +152,6 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			}
 		});
 	}
-	
 
 	public int edit(ProductStory productStory) {
 		if(productStory == null || productStory.getStoryId() == null){
@@ -187,23 +223,21 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		},pks);
 	}
 	
-	
-	
 	@SuppressWarnings("rawtypes")
 	public <T> T getByKeys(Serializable pk, Class<T> requiredType,SelectGenerateCallback<Serializable> callback) {
 		Select select=callback.generate(pk);
 		return getDslSession().fetchOneResult(select, requiredType);
 	}
-	
+
 	public List<ProductStory> getByKeys(Integer... pk){
-		
+
 		SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
 			@SuppressWarnings("rawtypes")
 			public Select generate(Serializable[] t) {
 
 				return selectFrom(PRODUCT_STORYTABLE).where(PRODUCT_STORYTABLE.STORY_ID.in(t));
 			}
-			
+
 		};
 		Select select = callback.generate(pk);
 		return getDslSession().fetchList(select, ProductStory.class);
@@ -221,7 +255,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 
 			return null;
 		}
-		
+
 	}
 
 	public List<ProductStory> query(ProductStory productStory ,final OrderBy... orderArgs) {
@@ -534,8 +568,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			}
 		});
 	}
-	
-	
+
 	public Pager<ProductStory> complexQueryRel(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys) {
 		if (productStory == null) {
 			productStory = new ProductStory();
@@ -585,6 +618,12 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			}
 		});
 	}
+
+	public List<ProductStory> findpNameBysId(Integer id) {
+		Select select = select(PRODUCT_STORYTABLE.STORY_ID, PRODUCTTABLE.PRODUCT_ID, PRODUCTTABLE.PRODUCT_NAME).from(PRODUCT_STORYTABLE).join(leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_STORYTABLE.PRODUCT_ID)));
+		return getDslSession().fetchList(select, ProductStory.class);
+
+	}
 	
 	public Integer softDelete(Integer id) {
         return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
@@ -597,7 +636,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
         });
 
     }
-	
+
 	public int getCount(ProductStory t,Join join,Condition... condition){
 		Select select = null;
 		if(join==null){
@@ -605,7 +644,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		}else{
 			 select = select(PRODUCT_STORYTABLE.STORY_ID.count()).from(PRODUCT_STORYTABLE).join(join).where(and(storyPueryCondition(t,condition)));
 		}
-		
+
 		return getDslSession().count(select);
 	}
 
@@ -626,14 +665,14 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			return null;
 		}
 	}
-	
+
 	public List<StoryCount> productStoryCount(ProductStory t) {
-			
+
 		try {
 			if(t==null){
 				t=new ProductStory();
 			}
-			
+
 			int nm = getCount(t,leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_STORYTABLE.PRODUCT_ID)),PRODUCT_STORYTABLE.PRODUCT_ID.isNotNull());
 			Select select = select(PRODUCTTABLE.PRODUCT_NAME.as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
 					FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
@@ -645,14 +684,12 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			e.printStackTrace();
 			return null;
 		}
-		
-		
-		
-	}
 
+
+	}
 	
 	public List<StoryCount> planStoryCount(ProductStory t, ProductPlan plan) {
-		
+
 		try {
 			if(t==null){
 				t=new ProductStory();
@@ -660,7 +697,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			if(plan==null){
 				plan=new ProductPlan();
 			}
-			
+
 			int nm = getCount(t,leftJoin(PRODUCT_PLANTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID)),PRODUCT_STORYTABLE.PLAN_ID.isNotNull());
 			Select select = select(PRODUCT_PLANTABLE.PLAN_NAME .as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
 					FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
@@ -672,23 +709,23 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
-	
+
 	public List<StoryCount> userStoryCount(ProductStory t,String field) {
 		try {
 
 			if(t==null){
 				t=new ProductStory();
 			}
-		
+
 			Column column = new Column(PRODUCT_STORYTABLE, NameUtil.resolveNameDesc(field));
 			int nm = getCount(t,leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(column)),column.isNotNull());
-			
+
 			Select select = select(ORG_USERTABLE.ORG_USER_REAL_NAME.as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
 					FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
 					.from(PRODUCT_STORYTABLE).join(leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(column))).where(and(storyPueryCondition(t, column.isNotNull()))).groupBy(column);
-			
+
 			List<StoryCount> storyCounts =  getDslSession().fetchList(select, StoryCount.class);
 			return storyCounts;
 		} catch (Exception e) {
@@ -702,28 +739,6 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		.and(PRODUCT_STORYTABLE.STORY_STATUS.eq(status)));
 		return getDslTemplate().getDslSession().fetchOneResult(select,null);
 	}
-
-
-	public List<StoryCount> fieldStoryCount(ProductStory t,String field) {
-		
-		try {
-			if(t==null){
-				t=new ProductStory();
-			}
-		
-			Column column = new Column(PRODUCT_STORYTABLE, NameUtil.resolveNameDesc(field));
-			int nm = getCount(t,null,column.isNotNull());
-			
-			Select select = select(column.as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
-					FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
-					.from(PRODUCT_STORYTABLE).where(and(storyPueryCondition(t, column.isNotNull()))).groupBy(column);
-			
-			return getDslSession().fetchList(select, StoryCount.class);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
 	
 	/*
 	select system_module.module_name as name,
@@ -733,52 +748,25 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 	on product_story.module_id=system_module.module_id
 	 group by product_story.product_id;*/
 
-	public static Condition[] storyPueryCondition(ProductStory t,Condition... condition){
-		
-				Condition[] con = t==null?new Condition[]{PRODUCT_STORYTABLE.STORY_ID.isNotNull()}:new Condition[]{
-						PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
-						PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
-						PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(t.getStoryParentId()),
-						PRODUCT_STORYTABLE.MODULE_ID.eq(t.getModuleId()),
-						PRODUCT_STORYTABLE.PLAN_ID.eq(t.getPlanId()),
-						PRODUCT_STORYTABLE.STORY_STATUS.eq(t.getStoryStatus()),
-						PRODUCT_STORYTABLE.STORY_SOURCE.eq(t.getStorySource()),
-						PRODUCT_STORYTABLE.STORY_FROM_BUG.eq(t.getStoryFromBug()),
-						PRODUCT_STORYTABLE.STORY_TITLE.eq(t.getStoryTitle()),
-						PRODUCT_STORYTABLE.STORY_KEYWORDS.eq(t.getStoryKeywords()),
-						PRODUCT_STORYTABLE.STORY_TYPE.eq(t.getStoryType()),
-						PRODUCT_STORYTABLE.STORY_PRI.eq(t.getStoryPri()),
-						PRODUCT_STORYTABLE.STORY_ESTIMATE.eq(t.getStoryEstimate()),
-						PRODUCT_STORYTABLE.STORY_STAGE.eq(t.getStoryStage()),
-						PRODUCT_STORYTABLE.STORY_MAILTO.eq(t.getStoryMailto()),
-						PRODUCT_STORYTABLE.STORY_OPENED_BY.eq(t.getStoryOpenedBy()),
-						PRODUCT_STORYTABLE.STORY_OPENED_DATE.eq(t.getStoryOpenedDate()),
-						PRODUCT_STORYTABLE.STORY_ASSIGNED_TO.eq(t.getStoryAssignedTo()),
-						PRODUCT_STORYTABLE.STORY_ASSIGNED_DATE.eq(t.getStoryAssignedDate()),
-						PRODUCT_STORYTABLE.STORY_LAST_EDITED_BY.eq(t.getStoryLastEditedBy()),
-						PRODUCT_STORYTABLE.STORY_LAST_EDITED_DATE.eq(t.getStoryLastEditedDate()),
-						PRODUCT_STORYTABLE.STORY_REVIEWED_BY.eq(t.getStoryReviewedBy()),
-						PRODUCT_STORYTABLE.STORY_REVIEWED_DATE.eq(t.getStoryReviewedDate()),
-						PRODUCT_STORYTABLE.STORY_CLOSED_BY.eq(t.getStoryClosedBy()),
-						PRODUCT_STORYTABLE.STORY_CLOSED_DATE.eq(t.getStoryClosedDate()),
-						PRODUCT_STORYTABLE.STORY_CLOSED_REASON.eq(t.getStoryClosedReason()),
-						PRODUCT_STORYTABLE.TO_BUG.eq(t.getToBug()),
-						PRODUCT_STORYTABLE.STORY_LINK_STORIES.eq(t.getStoryLinkStories()),
-						PRODUCT_STORYTABLE.STORY_CHILD_STORIES.eq(t.getStoryChildStories()),
-						PRODUCT_STORYTABLE.STORY_DUPLICATE_STORY.eq(t.getStoryDuplicateStory()),
-						PRODUCT_STORYTABLE.STORY_VERSION.eq(t.getStoryVersion()),
-						PRODUCT_STORYTABLE.BUILD_ID.eq(t.getBuildId()),
-						PRODUCT_STORYTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()),
-						PRODUCT_STORYTABLE.DELETED.eq(t.getDeleted())};
-				
-				if(condition!=null&&condition.length>0){
-					int conLen1=con.length;//保存第一个数组长度
-					int conLen2=condition.length;//保存第二个数组长度
-					con= Arrays.copyOf(con,conLen1+ conLen2);//扩容
-					System.arraycopy(condition, 0, con, conLen1,conLen2 );//将第二个数组与第一个数组合并
-				}
-				
-				return con;
+	public List<StoryCount> fieldStoryCount(ProductStory t,String field) {
+
+		try {
+			if(t==null){
+				t=new ProductStory();
+			}
+
+			Column column = new Column(PRODUCT_STORYTABLE, NameUtil.resolveNameDesc(field));
+			int nm = getCount(t,null,column.isNotNull());
+
+			Select select = select(column.as("name"),FragmentSelectItemSql.fragmentSelect("count(product_story.story_id) as number"),
+					FragmentSelectItemSql.fragmentSelect("format(count(product_story.story_id)/"+nm+",2) as percent"))
+					.from(PRODUCT_STORYTABLE).where(and(storyPueryCondition(t, column.isNotNull()))).groupBy(column);
+
+			return getDslSession().fetchList(select, StoryCount.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public int[] batchUpdateDel(List<ProductStory> ids) {

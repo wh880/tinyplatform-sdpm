@@ -12,7 +12,9 @@
                 #end
                 #@tr()
                     #@td()所属产品#end
-                    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/overview.page">${story?.productId}</a>#end
+                    #@td()<a
+                            href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${story?.productId}">${stories
+                        ?.productName}</a>#end
                 #end
                 #@tr()
                     #@td()所属模块#end
