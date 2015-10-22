@@ -163,9 +163,7 @@
                     #@tinyDateInput(
                         "slaReviewDate" formatDate(sla?.slaReviewDate,
                         "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","id":"slaReviewDate",
-                    "datatype":
-                    "*","nullmsg":
-                    "日期不能为空","placeholder":""})#end
+                    "datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
                 #end
             #end
             #@elementItem()
