@@ -42,70 +42,62 @@
 <script type="text/javascript">
     $(".select2").select2();
 </script>
-
-#@tableStriped("table-border")
+<style>
+    .multable tbody tr td{vertical-align: middle}
+</style>
+#@tableStriped("table-border multable")
     #@thead()
         #@tr("text-c")
             #@th()
-            产品名称
+            姓名
             #end
             #@th()
-            产品负责人
+            项目
             #end
             #@th()
-            产品计划
+            任务数
             #end
             #@th()
-            开始日期
+            剩余工时
             #end
             #@th()
-            结束日期
+            总任务数
             #end
             #@th()
-            草稿
+            总工时
             #end
             #@th()
-            激活
-            #end
-            #@th()
-            已变更
-            #end
-            #@th()
-            已关闭
+            工作负载
             #end
         #end
         #@tbody()
+            #for(o:orgsmap)
             #@tr("text-c")
-            <td rowspan="2">测试产品</td>
-            <td rowspan="2">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
+                <td rowspan=${o?.value.size()+1}>${o?.key?.orgUserAccount}</td>
+                #if(!o.value)
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                #else
+                    #set(estimate=0,taskNum=0)
+                    #for(s:o?.value)
+                        #set(estimate=estimate+s.estimate,taskNum=taskNum+s.taskNum)
+                     #@tr("text-c")
+                        <td>${s.projectName}</td>
+                        <td>${s.taskNum}</td>
+                        <td>${s.left}</td>
+                        <td>${s.taskNum}</td>
+                        <td>${s.estimate}</td>
+                        <td>18%</td>
+                     #end
+                   #end
+                #end
+              #end
             #end
-            #@tr("text-c")
-            <td>计划2</td>
-            <td>2015-09-25</td>
-            <td>2015-09-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
-            #end
-            #@tr("text-c")
-            <td rowspan="1">测试产品3</td>
-            <td rowspan="1">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
-            #end
+
         #end
     #end
 #end

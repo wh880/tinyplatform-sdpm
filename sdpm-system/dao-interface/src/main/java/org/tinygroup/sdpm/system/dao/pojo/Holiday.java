@@ -17,6 +17,7 @@
 package org.tinygroup.sdpm.system.dao.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /** 
@@ -80,6 +81,44 @@ public class Holiday implements Serializable{
 	 */
 	private String hoilidayRemark;
 
+	/**
+	 * 动作
+
+	 */
+    private String actionAction;
+	/**
+	 * 操作人ID
+	 */
+	private String actionActor;
+	/**
+	 * 操作时间
+	 */
+	private Date actionDate;
+
+
+	public String getActionAction() {
+		return actionAction;
+	}
+
+	public void setActionAction(String actionAction) {
+		this.actionAction = actionAction;
+	}
+
+	public String getActionActor() {
+		return actionActor;
+	}
+
+	public void setActionActor(String actionActor) {
+		this.actionActor = actionActor;
+	}
+
+	public Date getActionDate() {
+		return actionDate;
+	}
+
+	public void setActionDate(Date actionDate) {
+		this.actionDate = actionDate;
+	}
 
 	public void setHolidayId(Integer holidayId){
 		this. holidayId = holidayId;
