@@ -49,8 +49,7 @@
 #end
 #macro labelRadio1(rId rName rValue rClass radioOther labelText)
 	#@radioBox()
-		#radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)
-		#@label(ckId)${labelText}#end
+		<label>#radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)${labelText}</label>
 	#end
 #end
 
@@ -64,7 +63,7 @@
 			#@elementItem()
 					#@colLabel()所属产品#end
 					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
+					#@div(divClass="col-6")
 					#@Tselect2F()
 	                   		#@Tselect2Body("docProduct" product?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                     	 <option value="0">/</option>
@@ -91,7 +90,7 @@
 			#@elementItem()
 					#@colLabel()所属分类#end
 					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
+					#@div(divClass="col-6")
 					#@Tselect2F()
 	                   		 #@Tselect2Body("docModule" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        <option value="0">/</option>	                        	            
@@ -114,19 +113,19 @@
 							
 			#@elementItem()
 					#@colLabel()<span class="c-red">*</span>文档标题#end
-					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
+					#@formControlDiv("col-4")
+					#@div(divClass="col-12")
 						#tinyInput("text" "docTitle" ""{"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16","nullmsg":"标题不能为空！","class":"input-text"})
 					#end
 					#end
-						#@validateDiv("col-2")#end
+					#@validateDiv("col-2")#end
 				#end
 			
 			#@elementItem(elementId="urlBox" eleItemClass="hidden")
-					#@colLabel()<span class="c-red">*</span>文档URL#end
+					#@colLabel()文档URL#end
 					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
-					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*","ignore":"ignore","class":"input-text"})
+					#@div(divClass="col-6")
+						#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","class":"input-text"})
 					#end
 					#end
 					#@validateDiv("col-2")#end	
@@ -135,7 +134,7 @@
 			#@elementItem()	
 					#@colLabel()关键字#end
 					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
+					#@div(divClass="col-6")
 					#tinyInput("text" "docKeywords" ""{"placeholder":"","datatype":"","class":"input-text"})
 					#end
 					#end

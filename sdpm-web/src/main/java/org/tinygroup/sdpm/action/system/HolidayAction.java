@@ -52,12 +52,10 @@ public class HolidayAction extends BaseController{
 	public String fingPage(Integer start ,Integer limit ,
 			String order,String ordertype,Holiday holiday,Model model){
 		boolean asc = true;
-//		orderType="asc";
 		if("desc".equals(ordertype)){
 			asc=false;
 		}
-//		holiday.setHolidayId(1);
-		
+		holiday.setHolidayDeleted(0);
 	    Pager<Holiday> holidayPage=	holidayService.findByPage(start, limit, holiday, order, asc);
 		model.addAttribute("holiday", holidayPage);
 		return "/system/page/holiday/data/holidaydata.pagelet";
@@ -78,13 +76,9 @@ public class HolidayAction extends BaseController{
 			String[] dates=selectList.split(",");
 			for(int i=0,n=dates.length;i<n;i++){
 				Holiday day = new Holiday();
-				
 		     	day.setCompanyId(holiday.getCompanyId());
-				
 				day.setHoilidayRemark(holiday.getHoilidayRemark());
-				
-				day.setHolidayAccount(UserUtils.getUserAccount());
-				
+				day.setHolidayAccount(UserUtils.getUserId());
 				day.setHolidayDate(dates[i]);
 				day.setHolidayDeleted(holiday.getHolidayDeleted());
 				day.setHolidayDetail(holiday.getHolidayDetail());
@@ -92,19 +86,18 @@ public class HolidayAction extends BaseController{
 				day.setHolidayType(holiday.getHolidayType());
 				holidayList.add(day);
 			}
-			
 			List<Holiday> holidays=holidayService.batchAdd(holidayList);
 			for(int i=0,n=holidays.size();i<n;i++){
 			LogUtil.logWithComment(LogUtil.LogOperateObject.HOLIDAY,
 					LogUtil.LogAction.OPENED, String.valueOf(holidays.get(i).getHolidayId()),
-					UserUtils.getUserAccount(), null, null, null, null, null);
+					UserUtils.getUserId(), null, null, null, null, null);
 			}
 		}else{
 			
 			holidayService.update(holiday);
 			LogUtil.logWithComment(LogOperateObject.HOLIDAY, LogAction.EDITED, 
 					String.valueOf(holiday.getHolidayId()), 
-					UserUtils.getUserAccount(), null, null, null, null, null);
+					UserUtils.getUserId(), null, null, null, null, null);
 		}
 		model.addAttribute("holiday", holiday);
 		return "/system/page/holiday/holiday.page";
@@ -120,7 +113,7 @@ public class HolidayAction extends BaseController{
 		   map.put("info", "删除成功");
 		   map.put("status", "y");
 		   LogUtil.logWithComment(LogOperateObject.HOLIDAY, LogAction.DELETED, 
-				   String.valueOf(id), UserUtils.getUserAccount(), null, 
+				   String.valueOf(id), UserUtils.getUserId(), null,
 				   null, null, null, null);
 	     }
 	   else{
@@ -129,16 +122,7 @@ public class HolidayAction extends BaseController{
 	   }
 	   return map;
      }
-//	@ResponseBody
-//	@RequestMapping("holiday/delete")
-//	public String deleteHoliday(Integer holidayId){
-//		if(holidayId!=null){
-//			   Holiday holiday = new Holiday();
-//			   holiday.setHolidayId(holidayId);
-//			   holidayService.delete(holiday);
-//	    }
-//		return "/system/page/holiday/holiday.page";
-//	}
+
 	@RequestMapping("holiday/manage")
 	public String manage(Holiday holiday,Model model){
 		List<Holiday> holidayList = holidayService.find(holiday);
@@ -162,7 +146,7 @@ public class HolidayAction extends BaseController{
 	   List<Holiday> holiday= holidays.getHoliday();
 	    for(int i=0,n=holiday.size();i<n;i++){
 	    	 LogUtil.logWithComment(LogOperateObject.HOLIDAY, LogAction.DELETED, 
-					   String.valueOf(holiday.get(i).getHolidayId()), UserUtils.getUserAccount(), null, 
+					   String.valueOf(holiday.get(i).getHolidayId()), UserUtils.getUserId(), null,
 					   null, null, null, holiday.get(i).getHoilidayRemark());
 	    }
 		holidayService.batchSofeDelete(holiday);
@@ -184,7 +168,7 @@ public class HolidayAction extends BaseController{
 			histories.add(history);
 			}
 		}else{
-			for(int i=0;i<12;i++){
+			for(int i=0;i<7;i++){
 				HolidayHistory history=new HolidayHistory();
 				history.setHolidayHistoryAction(actions.get(i).getActionAction());
 				history.setHolidayHistoryActor(actions.get(i).getActionActor());
@@ -198,5 +182,16 @@ public class HolidayAction extends BaseController{
 	 		model.addAttribute("action", histories);
 		return "/system/page/holiday/holiday-dynamic.pagelet";
 	}
-	
+	@RequestMapping("holiday/history")
+	public String holidayHistory(Integer start,Integer limit,String order,String ordertype,Model model){
+		Holiday holiday = new Holiday();
+		boolean asc = true;
+		if("desc".equals(ordertype)){
+			asc=false;
+		}
+		Pager<Holiday> History = holidayService.findByPage(start,limit,holiday,order,asc);
+		List<HolidayHistory> holidayHistories = new ArrayList<HolidayHistory>();
+		model.addAttribute("History",History);
+		return "/system/page/holiday/holidayHistoryTableData.pagelet";
+	}
 }

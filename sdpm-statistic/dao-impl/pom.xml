@@ -9,6 +9,11 @@
   <name>sdpm-statistic-dao-impl</name>
 
   <dependencies>
+    <dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>sdpm-project-dao-interface</artifactId>
+			<version>${project.version}</version>
+	</dependency>
   	<dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-statistic-dao-inter</artifactId>

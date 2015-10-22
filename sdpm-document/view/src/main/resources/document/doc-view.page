@@ -11,7 +11,7 @@
 		<span class="r">
 			#foreach(m:menuManager.getScopeMenus("doc-view-op"))
 				#if(m.id == "doc-view-delete")
-					#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document")
+					#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document" {"title":"返回"})
 						#buttonIcon(iconClass=m.icon)
 					#end&nbsp
 				#else
@@ -63,7 +63,7 @@
     <center>		
 		#foreach(m:menuManager.getScopeMenus("doc-view-op"))
 				#if(m.id == "doc-view-delete")
-					#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document")
+					#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document" {"title":"返回"})
 						#buttonIcon(iconClass=m.icon)
 					#end&nbsp
 				#else

@@ -397,6 +397,13 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 						PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(t.getProductCreatedVersion()),
 						PRODUCTTABLE.DELETED.eq(t.getDeleted()));
 	}
+
+	public List<String> getProductNameByLineId(Integer productLineId) {
+		
+		Select select = Select.select(PRODUCTTABLE.PRODUCT_NAME).from(PRODUCTTABLE).where(PRODUCTTABLE.PRODUCT_LINE_ID.eq(productLineId));
+		
+		return getDslSession().fetchList(select, String.class);
+	}
 	
 
 }

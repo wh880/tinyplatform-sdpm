@@ -32,6 +32,8 @@ public interface ProductDao extends BaseDao<Product,Integer> {
 	
 	List<ProductAndLine> getProductAndLine(Product t);
 	
+	List<String> getProductNameByLineId(Integer productLineId);
+	
 	
 
 }

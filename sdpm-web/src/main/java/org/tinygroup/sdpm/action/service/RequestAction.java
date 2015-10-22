@@ -107,9 +107,10 @@ public class RequestAction extends BaseController {
     @RequestMapping(value = "/close")//关闭请求
     public String close(Integer id, Model model) {
         model.addAttribute("clientRequestId", id);
+        ServiceRequest requests = requestService.findRequest(id);
+        model.addAttribute("requests", requests);
         return "service/serviceReq/closeRequest.pagelet";
     }
-
     @RequestMapping(value = "/close/date")
     public String closed(ServiceRequest clientRequest, Model model) {
         if (clientRequest.getClientRequestId() != null)
@@ -233,7 +234,7 @@ public class RequestAction extends BaseController {
     }
     @ResponseBody
     @RequestMapping("/ajax/moduleByProduct")
-    public List<SystemModule> getModuleByProduct(Integer productId) {
+    public List<SystemModule> getModuleByProduct(Integer productId){
         SystemModule module = new SystemModule();
         module.setModuleRoot(productId);
         module.setModuleType("productDoc");

@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.PlanService;
@@ -14,6 +16,8 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.statistic.dao.pojo.ProjectTaskSta;
+import org.tinygroup.sdpm.statistic.service.inter.StatisticService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +37,10 @@ public class StatisticAction extends BaseController {
     private ProjectService projectService;
     @Autowired
     private ProjectProductService projectProductService;
+    @Autowired
+    private StatisticService statisticService;
+    @Autowired
+    private UserService userService;
     @RequestMapping("{type}/all")
     public String productAll(Model model, @PathVariable(value="type")String type){
         model.addAttribute("order", "1");
@@ -51,8 +59,22 @@ public class StatisticAction extends BaseController {
         }
         if ("project".equals(type)){
             List<Project> projects= projectService.findProjects(new Project());
+
             model.addAttribute("projects",projects);
             return "/statistic/page/project.page";
+        }
+        if("org".equals(type)){
+            List<OrgUser> orgUsers = userService.findUserList(new OrgUser());
+            Map<OrgUser,List<ProjectTaskSta>> map = new HashMap<OrgUser, List<ProjectTaskSta>>();
+            for(int i=0,n=orgUsers.size();i<n;i++){
+               ProjectTaskSta projectTaskSta = new ProjectTaskSta();
+                projectTaskSta.setAssignedTo(orgUsers.get(i).getOrgUserId());
+                List<ProjectTaskSta> projectTaskStas=statisticService.findProTasks(projectTaskSta);
+                map.put(orgUsers.get(i),projectTaskStas);
+            }
+
+        	model.addAttribute("orgsmap", map);
+        	return  "/statistic/page/org.page";
         }
         return null;
     }
