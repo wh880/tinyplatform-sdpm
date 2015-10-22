@@ -2,15 +2,23 @@
 #@navSelect2("product" "product")
 #@navSelect2Nav()
 #if(qualityProductId)
-#for(product : qualityProductList)
+#for(product : CmsUtils.getProductList())
 #if(product?.productId == qualityProductId)
 ${product?.productName}
-#set(qualityProduct = product)
 #break
 #end
 #end
 #else
+#if(CmsUtils.getProductList()?.size()>0)
+<script type="text/javascript">
+    $(function(){
+        $.cookie('qualityProductId',"${CmsUtils.getProductList()?.get(0)?.productId}");
+    })
+</script>
+${CmsUtils.getProductList()?.get(0)?.productName}
+#else
 无产品
+#end
 #end
 
 <span class="caret"></span>#end
@@ -18,7 +26,7 @@ ${product?.productName}
 #@navSelect2Data()
 <option value=""></option>
 <optgroup label="产品">
-	#for(product : qualityProductList)
+	#for(product : CmsUtils.getProductList())
 		#if(product?.deleted==0)
 		<option value="${product?.productId}">${product?.productName}</option>
 		#end
@@ -42,21 +50,9 @@ ${product?.productName}
 
 	$(function(){
 		$("#product-select").on("change",function(){
-			var dateValue = $(this).val();
-			$.post("${TINY_CONTEXT_PATH+adminPath}/quality/changeProduct",{productId:dateValue},function(result){
-				if(true==result){
-					window.location.reload();
-				}else{
-					alert("产品ID值为空");
-				}
-
-			});
-	##				$("#productIdHidden").val($(this).val());
-	##				$(".switchClass").each(function(){
-				##					var hrefnew = this.href + "&productId=" + $("#productIdHidden").val();
-	##					this.href = hrefnew;
-	##				});
-	##				window.location.href='${TINY_CONTEXT_PATH+adminPath}/product/story?currentPageId=3&productId='+$(this).find("option:selected").val();
+			var dataValue = $(this).val();
+			$.cookie('qualityProductId',dataValue);
+			window.location.reload();
 		});
 	});
 

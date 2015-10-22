@@ -51,7 +51,7 @@ public class UserUtils {
         if (user == null) {
             user = userService.findUser(id);
             if (user == null) {
-                return null;
+                return new OrgUser();
             }
             CacheUtils.put(USER_CACHE, USER_CACHE_ID_ + user.getOrgUserId(), user);
             CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getOrgUserAccount(), user);
@@ -112,9 +112,6 @@ public class UserUtils {
         Principal principal = getPrincipal();
         if (principal != null) {
             OrgUser user = getUserById(principal.getId());
-            if (user != null) {
-                return user;
-            }
         }
         // 如果没有登录，则返回实例化空的User对象。
         return new OrgUser();

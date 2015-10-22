@@ -161,8 +161,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
             return 0;
         }
         Update update = UpdateUtil.getUpdate(PROJECTTABLE, project);
-        getDslSession().execute(update);
-        return 0;
+        return getDslSession().execute(update);
     }
 
     @LogMethod("deleteByKey")

@@ -20,11 +20,13 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 public interface QualityTestCaseDao extends BaseDao<QualityTestCase,Integer> {
 	
 	Pager<QualityTestCase> queryPagerRel(int start,int limit ,QualityTestCase qualityTestCase , final String condition,final OrderBy... orderArgs);
 
+	Pager<QualityTestCase> queryStoryChangedCase(int start, int limit , QualityTestCase qualityTestCase , Condition condition, final OrderBy... orderArgs);
 
 	Integer softDelete(Integer id);
 

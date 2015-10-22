@@ -109,7 +109,7 @@
     #end
 ##tabbody end
 
-#if(type!="story")
+#if(type!="noCase")
 		#include("/testManagement/page/testCase.page")
 	#else
 		#include("/testManagement/page/NoTestCaseStory.page")

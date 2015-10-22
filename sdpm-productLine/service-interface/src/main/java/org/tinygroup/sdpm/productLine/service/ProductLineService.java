@@ -1,8 +1,9 @@
 package org.tinygroup.sdpm.productLine.service;
 
-import java.util.List;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 public interface ProductLineService {
 	
@@ -18,7 +19,7 @@ public interface ProductLineService {
 	 * @param productLine
 	 * @return
 	 */
-	List<ProductLine> findlist(ProductLine productLine);
+	List<ProductLine> findList(ProductLine productLine);
 	
 	/**
 	 * 编辑产品线

@@ -1,13 +1,5 @@
 package org.tinygroup.sdpm.action.productLine;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +21,9 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * 产品线控制器
@@ -253,7 +248,7 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("/productLineList")
     public List<ProductLine> findProductLineList(ProductLine productLine) {
 
-        List<ProductLine> list = productLineService.findlist(new ProductLine());
+        List<ProductLine> list = productLineService.findList(new ProductLine());
 
         return list;
     }
@@ -268,7 +263,7 @@ public class ProductLineAction extends BaseController {
         List<ProductAndLine> productLists = productService.getProductAndLine(product);
         ProductLine productLine = new ProductLine();
         productLine.setDeleted(FieldUtil.DELETE_NO);
-        List<ProductLine> productLines = productLineService.findlist(productLine);
+        List<ProductLine> productLines = productLineService.findList(productLine);
         ProjectBuild projectBuild = new ProjectBuild();
         projectBuild.setBuildDeleted(FieldUtil.DELETE_NO_S);
         List<ProjectBuild> projectBuilds = buildService.findListBuild(projectBuild);
@@ -328,7 +323,7 @@ public class ProductLineAction extends BaseController {
     public List overview(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<ProductAndLine> productLists = productService.getProductAndLine(new Product());
-        List<ProductLine> productLines = productLineService.findlist(new ProductLine());
+        List<ProductLine> productLines = productLineService.findList(new ProductLine());
 
         for (ProductLine d : productLines) {
             Map<String, Object> map = new HashMap<String, Object>();
