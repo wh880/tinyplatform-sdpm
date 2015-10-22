@@ -231,7 +231,6 @@ public class RequestAction extends BaseController {
         map.put("info", "删除成功");
         return map;
     }
-
     @ResponseBody
     @RequestMapping("/ajax/moduleByProduct")
     public List<SystemModule> getModuleByProduct(Integer productId) {
