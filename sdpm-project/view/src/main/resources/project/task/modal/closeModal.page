@@ -42,8 +42,9 @@
                     dataType: "json",
                     success: function (data) {
                         if (data.status == "y" || data.status == "success") {
-                            $(curform).closest(".modal").trigger("close");
-                            location = location;
+                            layer.msg(data.info, 2, 1, function () {
+                                $(curform).closest(".modal").trigger("close");
+                            });
                         } else {
                             layer.msg(data.info, 1, 9);
                         }

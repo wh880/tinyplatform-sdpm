@@ -242,9 +242,9 @@
             }
         }
 
-//        $("#myModal").on("hidden",function(){
-//            $("#boardData").load("/project/task/boardDate.page");
-//        })
+        $("#myModal").on("hidden", function () {
+            $("#tinypagecontent").load("${TINY_CONTEXT_PATH+adminPath}/project/task/board?choose=${choose}&ajax=1");
+        })
     });
     //-->
 </script>
