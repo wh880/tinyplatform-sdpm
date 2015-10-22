@@ -227,7 +227,7 @@
                         ui.helper.find("a.cancel").trigger("click");
                         break;
                     case "close":
-                        ui.helper.find("a.close").trigger("click");
+                        ui.helper.find("a.boardClose").trigger("click");
                         break;
                 }
             }

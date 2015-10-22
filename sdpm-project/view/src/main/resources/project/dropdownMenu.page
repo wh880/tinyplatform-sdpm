@@ -2,7 +2,6 @@
     #@navSelect2Nav()
 
         #if(currentProjectId)
-            ${currentProjectId}
             ${CmsUtils.getProject(currentProjectId).projectName}
         #else
             ${CmsUtils.getProjectList().get(0).projectName}

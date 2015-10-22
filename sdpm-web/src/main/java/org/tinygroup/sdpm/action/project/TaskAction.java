@@ -577,11 +577,27 @@ public class TaskAction extends BaseController {
         Map<String, String> map = new HashMap<String, String>();
         task.setTaskLastEditedBy(UserUtils.getUserId());
         Integer res = 0;
+        LogUtil.LogAction logAction = null;
         if ("doing".equals(taskStatus)) {
-            taskService.updateDoingTask(task);
+            res = taskService.updateDoingTask(task);
+            logAction = LogUtil.LogAction.ACTIVATED;
+        } else if ("close".equals(taskStatus)) {
+            res = taskService.updateCloseTask(task);
+            logAction = LogUtil.LogAction.CLOSED;
+        } else if ("cancel".equals(taskStatus)) {
+            res = taskService.updateCancelTask(task);
+            logAction = LogUtil.LogAction.CANCELED;
+        } else if ("finish".equals(taskStatus)) {
+            res = taskService.updateFinishTask(task);
+            logAction = LogUtil.LogAction.FINISHED;
+        } else if ("start".equals(taskStatus)) {
+            res = taskService.updateStartTask(task);
+            logAction = LogUtil.LogAction.STARTED;
+        } else {
+            res = taskService.updateTask(task);
+            logAction = LogUtil.LogAction.EDITED;
         }
-        res = taskService.updateDoingTask(task);
-        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ACTIVATED, task.getTaskId().toString(),
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, logAction, task.getTaskId().toString(),
                 UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
                 taskService.findTask(task.getTaskId()), task, content);
         if (res > 0) {
