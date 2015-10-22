@@ -114,7 +114,7 @@ public class ProjectAction extends BaseController {
         project.setProjectWhiteList(whiteListStr);
         Project tProject = projectService.addProject(project);
         projectProductService.addLink(linkProduct, tProject.getProjectId());
-        CookieUtils.setCookie(response, "cookie_projectId", tProject.getProjectId().toString());
+        CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
         request.getSession().setAttribute("selProject", tProject);
         List<Project> list = projectService.findList();
         request.getSession().setAttribute("projectList", list);

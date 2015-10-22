@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
@@ -33,10 +34,12 @@ public class ProjectstoryAction extends BaseController {
     private TaskService taskService;
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private StoryService storyService;
 
     @RequestMapping("/find")
     public String find(Model model, HttpServletRequest request, Integer start, Integer limit, String order, String ordertype) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         Pager<ProductStory> story = projectStoryService.findStoryByProject(projectId, start, limit, order, ordertype);
 
         model.addAttribute("storys", story);
@@ -67,7 +70,7 @@ public class ProjectstoryAction extends BaseController {
     @ResponseBody
     @RequestMapping("/delete")
     public Map<String, String> delete(Integer id, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         //根据id进行软删
         Map<String, String> map = new HashMap<String, String>();
         Integer result = projectStoryService.deleteProjectStory(projectId, id);
@@ -89,7 +92,7 @@ public class ProjectstoryAction extends BaseController {
 
     @RequestMapping("/findStory")
     public String findStory(Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         Pager<ProductStory> storyList = projectStoryService.findStoryToLink(projectId, start, limit, order, ordertype);
         model.addAttribute("storyList", storyList);
         return "project/demand/relateDemandTableData.pagelet";
@@ -102,20 +105,23 @@ public class ProjectstoryAction extends BaseController {
         Map<String, String> map = new HashMap<String, String>();
         String[] id = ids.split(",");
         List<ProjectStory> projectStoryList = new ArrayList<ProjectStory>();
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         for (int i = 0; i < id.length; i++) {
             ProjectStory projectStory = new ProjectStory();
             projectStory.setProjectId(projectId);
             projectStory.setStoryId(Integer.parseInt(id[i]));
+            ProductStory productStory = storyService.findStory(Integer.parseInt(id[i]));
+            projectStory.setProductId(productStory.getProductId());
+            projectStory.setStoryVersion(productStory.getStoryVersion());
             projectStoryList.add(projectStory);
         }
         int[] res = projectStoryService.addLink(projectStoryList);
         if (res.length > 0) {
-            map.put("statu", "y");
+            map.put("status", "y");
             map.put("info", "关联成功");
-            map.put("url", "project/demand/index.page");
+            map.put("url", "/a/project/manage/demand/index");
         } else {
-            map.put("statu", "n");
+            map.put("status", "n");
             map.put("info", "关联失败");
         }
         return map;
@@ -138,7 +144,7 @@ public class ProjectstoryAction extends BaseController {
             condition = condition + ")";
 
 
-            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
             condition = condition + " and ";
             condition = condition + "project_id=" + projectId;
             Integer res = projectStoryService.batchtDel(condition);
@@ -160,7 +166,7 @@ public class ProjectstoryAction extends BaseController {
 
 //    @RequestMapping("/search/{relate}")
 //    public String storyListAction(@PathVariable(value="relate")String relate, Integer start, Integer limit, @RequestParam(required = false, defaultValue = "storyId") String order, @RequestParam(required = false, defaultValue = "asc")String ordertype, Model model, HttpServletRequest request){
-//        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+//        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
 //        Pager<ProductStory> story = projectStoryService.findStoryByProject(projectId, start, limit, order, ordertype);
 //        model.addAttribute("story", story);
 //

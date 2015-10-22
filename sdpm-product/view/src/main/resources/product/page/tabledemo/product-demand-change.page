@@ -30,7 +30,8 @@
 
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/update" "" {"class":"test","enctype":"multipart/form-data"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/changed" "" {"class":"test","enctype":
+    "multipart/form-data"})
     #hiddenInput("","storyId","",story.storyId)
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">

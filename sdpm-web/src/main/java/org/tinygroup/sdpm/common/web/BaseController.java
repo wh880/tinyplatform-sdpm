@@ -1,15 +1,22 @@
 package org.tinygroup.sdpm.common.web;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
+import org.tinygroup.sdpm.action.system.FileRepository;
 import org.tinygroup.sdpm.common.beanvalidator.BeanValidators;
 import org.tinygroup.sdpm.common.util.DateUtils;
+import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
+import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.LogService;
+import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.UserUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
@@ -17,7 +24,9 @@ import javax.validation.Validator;
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Hulk on 2015/9/20.
@@ -27,7 +36,6 @@ public abstract class BaseController {
      * 日志对象
      */
     protected Logger logger = LoggerFactory.getLogger(BaseController.class);
-
     /**
      * 动态记录对象
      */
@@ -44,6 +52,20 @@ public abstract class BaseController {
      */
     @Value("${adminPath}")
     protected String adminPath;
+
+    /**
+     * 上传路径
+     */
+    @Value("${userfiles.basedir}")
+    protected String UPLOAD_PATH;
+
+    @Autowired
+    private FileRepository fileRepository;
+    @Autowired
+    private ProfileService profileService;
+
+    protected BaseController() {
+    }
 
     /**
      * 服务端参数有效性验证
@@ -64,6 +86,18 @@ public abstract class BaseController {
         return true;
     }
 
+
+//    /**
+//     * 客户端返回JSON字符串
+//     *
+//     * @param response
+//     * @param object
+//     * @return
+//     */
+//    protected String renderString(HttpServletResponse response, Object object) {
+//        return renderString(response, JsonMapper.toJsonString(object), "application/json");
+//    }
+
     /**
      * 服务端参数有效性验证
      *
@@ -74,6 +108,23 @@ public abstract class BaseController {
     protected void beanValidator(Object object, Class<?>... groups) {
         BeanValidators.validateWithException(validator, object, groups);
     }
+
+//    /**
+//     * 参数绑定异常
+//     */
+//    @ExceptionHandler({BindException.class, ConstraintViolationException.class, ValidationException.class})
+//    public String bindException() {
+//        return "error/400";
+//    }
+
+//    /**
+//     * 授权登录异常
+//     */
+//    @ExceptionHandler({AuthenticationException.class})
+//    public String authenticationException() {
+//        return "error/40x";
+//    }
+//
 
     /**
      * 添加Model消息
@@ -88,18 +139,6 @@ public abstract class BaseController {
         }
         model.addAttribute("message", sb.toString());
     }
-
-
-//    /**
-//     * 客户端返回JSON字符串
-//     *
-//     * @param response
-//     * @param object
-//     * @return
-//     */
-//    protected String renderString(HttpServletResponse response, Object object) {
-//        return renderString(response, JsonMapper.toJsonString(object), "application/json");
-//    }
 
     /**
      * 客户端返回字符串
@@ -119,23 +158,6 @@ public abstract class BaseController {
             return null;
         }
     }
-
-//    /**
-//     * 参数绑定异常
-//     */
-//    @ExceptionHandler({BindException.class, ConstraintViolationException.class, ValidationException.class})
-//    public String bindException() {
-//        return "error/400";
-//    }
-
-//    /**
-//     * 授权登录异常
-//     */
-//    @ExceptionHandler({AuthenticationException.class})
-//    public String authenticationException() {
-//        return "error/403";
-//    }
-//
 
     /**
      * 初始化数据绑定
@@ -169,6 +191,93 @@ public abstract class BaseController {
 //				return value != null ? DateUtils.formatDateTime((Date)value) : "";
 //			}
         });
+    }
+
+    /**
+     * 添加单个附件
+     *
+     * @param uploadFile
+     * @param objectId
+     * @param type
+     * @param title
+     * @throws IOException
+     */
+    public void upload(MultipartFile uploadFile, Integer objectId, ProfileType type, String title) throws IOException {
+        String origName = uploadFile.getOriginalFilename();
+        String ext = FilenameUtils.getExtension(origName);
+        String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, origName, uploadFile);
+        long size = uploadFile.getSize();
+        SystemProfile profile = new SystemProfile(fileUrl, title, ext, (int) size,
+                type.getType(), objectId, UserUtils.getUserAccount(), new Date(), null, null, "0");
+        profileService.add(profile);
+    }
+
+    /**
+     * 添加多个附件
+     *
+     * @param uploadFiles
+     * @param objectId
+     * @param type
+     * @param title
+     * @throws IOException
+     */
+    public void uploads(MultipartFile[] uploadFiles, Integer objectId, ProfileType type, String[] title) throws IOException {
+        for (int i = 0, n = uploadFiles.length; i < n; i++) {
+            if (!uploadFiles[i].isEmpty() && uploadFiles[i].getSize() > 0)
+                upload(uploadFiles[i], objectId, type, title[i]);
+        }
+    }
+
+    /**
+     * 添加附件没有标题
+     *
+     * @param uploadFile
+     * @param objectId
+     * @param type
+     * @throws IOException
+     */
+    public void uploadNoTitle(MultipartFile uploadFile, Integer objectId, ProfileType type) throws IOException {
+        String origName = uploadFile.getOriginalFilename();
+        String ext = FilenameUtils.getExtension(origName);
+        String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, origName, uploadFile);
+        long size = uploadFile.getSize();
+
+        SystemProfile profile = new SystemProfile(fileUrl, null, ext, (int) size,
+                type.getType(), objectId, UserUtils.getUserAccount(), new Date(), null, null, "0");
+        profileService.add(profile);
+    }
+
+    /**
+     * 添加多个无标题附件附件
+     *
+     * @param uploadFiles
+     * @param objectId
+     * @param type
+     */
+    public void uploadNoTitles(MultipartFile[] uploadFiles, Integer objectId, ProfileType type) throws IOException {
+        for (int i = 0, n = uploadFiles.length; i < n; i++) {
+            if (!uploadFiles[i].isEmpty() && uploadFiles[i].getSize() > 0) {
+                uploadNoTitle(uploadFiles[i], objectId, type);
+            }
+        }
+    }
+
+    /**
+     * 拼装前台Ajax请求结果
+     *
+     * @param result
+     * @param msg
+     * @return
+     */
+    protected Map<String, String> resultMap(boolean result, final String msg) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (result) {
+            map.put("status", "y");
+        } else {
+            map.put("status", "n");
+        }
+        map.put("info", msg);
+        return map;
     }
 
 }

@@ -22,11 +22,6 @@
 				</span>
 
             <span class="r">
-                #set(m1=menuManager.getMenu("request-export"))
-                #if(m1)
-                    #@iconOperations(
-                        "#myModal" "icon-download-alt" "导出" "600" "300" m1.href "ml-5")${m1.name}#end
-                #end
                 #set(m3=menuManager.getMenu("request-add"))
                 #if(m3)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m3.href}">#buttonIcon(iconClass="icon-plus")${m3.name}</a>
@@ -43,7 +38,7 @@
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()所有产品#end
             #@settoggleLeftBody("treeLeftbox")
-                #@zTreeList(call("link",adminPath+"/service/client/treeData"))
+                #@zTreeList(call("link",adminPath+"/service/client/treeData") {"readOnly":true})
                     #setzTreeValMap({"id":"treeId","name":"pName","pid":
                         "pId"}) ##Id中带"p"的为productLine的ID，其余的为productde ID
                     #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/service/request/list" )

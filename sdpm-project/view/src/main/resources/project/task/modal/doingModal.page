@@ -1,18 +1,47 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/ajaxChangeStatu" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
-    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
-    #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue="close")
+    #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue="doing")
 <div style="width:70%;float:left;padding-left: 10px;" class="pageleftpart">
     <div class="infoContent">
-        <p class="titleName">${task?.taskName}>关闭</p>
+        <p class="titleName">${task?.taskName}>激活</p>
         #@elementItem()
-            #@colLabel()备注&nbsp#end
-            #@formControlDiv("col-8")
-                #@Teditor("content" "content" {"initialFrameHeight":"150"})#end
+            #@sdpmItem("指派给")
+                #@Tselect2F()
+                    #@Tselect2Body("taskAssignedTo" "" {"class":
+                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="">/</option>
+                        #foreach(t : teamList)
+                            <option value="${t?.teamUserId}">
+                                ${UserUtils.getUserById(t?.teamUserId).orgUserRealName}
+                            </option>
+                        #end
+                    #end
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                    #end
+                #end
             #end
-            #@validateDiv("col-2")#end
         #end
-        <br/>
+
+        #@elementItem()
+            #@sdpmItem("预计剩余")
+                <div class="input-group">
+                    <input name="taskLeft" type="text" class="form-control" placeholder=""
+                           aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon2">小时</span>
+                </div>
+            #end
+        #end
+
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：</label></div>
+                <div class="col-9">
+                    #@Teditor("commnet" "commnet" {"initialFrameHeight":"150","initialFrameWidth":"550"})#end</div>
+            </div>
+        #end
+
     </div>
     #@elementItem()
         <div class="col-12">
@@ -34,6 +63,7 @@
 <div style="width:30%;float:right;padding-right: 10px;">
     #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
 </div>
+
 <script>
     $(function () {
         $("form[name=thisform").Validform({

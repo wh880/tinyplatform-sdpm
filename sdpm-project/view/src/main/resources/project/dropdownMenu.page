@@ -1,7 +1,10 @@
 #@navSelect2("sleProject" "sleProject")
     #@navSelect2Nav()
-        #if(selProject)
-            ${selProject.projectName}
+
+        #if(currentProjectId)
+            ${CmsUtils.getProject(currentProjectId).projectName}
+        #else
+            ${CmsUtils.getProjectList().get(0).projectName}
         #end
     <span class="caret"></span>
     #end
@@ -9,7 +12,7 @@
         #@navSelect2Data()
         <option value="">/</option>
         <optgroup label="项目">
-            #for(p:projectList)
+            #foreach(p:CmsUtils.getProjectList())
             <option value="${p?.projectId}">${p?.projectName}</option>
         #end
     </optgroup>

@@ -20,6 +20,12 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskManager taskManager;
 
+    public Integer updateDoingTask(ProjectTask task) {
+        task.setTaskStatus(task.DOING);
+        task.setTaskLastEditedDate(new Date());
+        return taskManager.updateColum(task);
+    }
+
     public Integer batchSoftDel(String condition) {
         return taskManager.batchSoftDel(condition);
     }

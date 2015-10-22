@@ -186,27 +186,28 @@
 
                 console.log(ItemStat);
                 console.log(CurrentStat);
+                //暂时不需要逻辑判断，可以任意拖动
                 switch (CurrentStat) {
                     case "wait":
                         return false;
                         break;
                     case "doing":
-                        if (ItemStat == "cancel") {
-                            return false;
-                        }
-                        break;
-                    case "closed":
                         if (ItemStat == "doing") {
                             return false;
                         }
                         break;
-                    case "cancel":
+                    case "closed":
                         if (ItemStat == "doing" || ItemStat == "closed") {
                             return false;
                         }
                         break;
+                    case "cancel":
+                        if (ItemStat == "doing" || ItemStat == "closed" || ItemStat == "cancel") {
+                            return false;
+                        }
+                        break;
                     case "done":
-                        if (ItemStat == "closed" || ItemStat == "cancel") {
+                        if (ItemStat == "closed" || ItemStat == "cancel" || ItemStat == "done") {
                             return false;
                         }
                         break;
@@ -214,8 +215,21 @@
                 ui.helper.removeClass(statarr.join(" "));
                 ui.helper.addClass("board-task-" + $(this).attr("data-id"));
                 $(this).append(ui.helper);
-                ui.helper.find("[data-action=edit]").trigger("click");
-
+//                ui.helper.find("a.edit").trigger("click");
+                switch (CurrentStat) {
+                    case "doing":
+                        ui.helper.find("a.doing").trigger("click");
+                        break;
+                    case "done":
+                        ui.helper.find("a.done").trigger("click");
+                        break;
+                    case "cancel":
+                        ui.helper.find("a.cancel").trigger("click");
+                        break;
+                    case "close":
+                        ui.helper.find("a.boardClose").trigger("click");
+                        break;
+                }
             }
         });
 
@@ -227,6 +241,10 @@
                 }
             }
         }
+
+        $("#myModal").on("hidden", function () {
+            $("#tinypagecontent").load("${TINY_CONTEXT_PATH+adminPath}/project/task/board?choose=${choose}&ajax=1");
+        })
     });
     //-->
 </script>
@@ -236,6 +254,7 @@
 #set(cancelPage=adminPath+"/project/task/modal/cancelModal")
 #set(editPage=adminPath+"/project/task/modal/editModal")
 #set(closePage=adminPath+"/project/task/modal/closeModal")
+#set(doingPage=adminPath+"/project/task/modal/doingModal")
 #import("/project/task/boardComponent.component")
 
 <table class="table table-bordered radius" id="kanbanHeader">
@@ -296,12 +315,5 @@
     </tbody>
 </table>
 
-#@dialog("myModal")
-    #@dialogHeader()编辑#end
-    #@dialogBody()#end
-    #@dialogFooter()
-        #@buttonEnsure("ModalSubmitButton")确定#end
-        #@buttonCancel()关闭#end
-    #end
-#end
+#@dialog("myModal")#end
 

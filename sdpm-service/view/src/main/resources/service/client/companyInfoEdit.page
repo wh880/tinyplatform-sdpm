@@ -29,7 +29,7 @@
         #@validateDiv("col-3")#end
     #end
     #@elementItem()
-        #@colLabel("col-3")<span class="c-red">*</span>联系人电话：#end
+        #@colLabel("col-3")联系人电话：#end
         #@formControlDiv("col-6")
             #tinyInput(
                 "text" "userPhone" clientUser?.userPhone {"datatype":"/^[0-9\.]{11,12}$/","nullmsg":"客户电话不能为空","id":

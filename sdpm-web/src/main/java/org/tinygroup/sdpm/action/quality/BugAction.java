@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.action.quality;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.support.SQLErrorCodes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
+import org.tinygroup.sdpm.action.project.TaskAction;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
-import org.tinygroup.sdpm.action.system.ProfileUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -33,13 +32,15 @@ import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
+import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.LogUtil;import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -572,7 +573,7 @@ public class BugAction extends BaseController {
 	
 	@RequestMapping(value = "/save")
 	public String save(QualityBug bug,SystemAction systemAction,@RequestParam(value = "file", required = false)MultipartFile[] file,
-			String[] title, HttpServletRequest request){
+			String[] title, HttpServletRequest request) throws IOException {
 
 		if(!StringUtil.isBlank(bug.getBugAssignedTo())){
 			bug.setBugAssignedDate(new Date());
@@ -582,12 +583,8 @@ public class BugAction extends BaseController {
 		bug.setBugOpenedDate(new Date());
 		bug.setBugOpenedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		QualityBug qbug=bugService.addBug(bug);
-		ProfileUtil profileUtil = new ProfileUtil();
-		try {
-			profileUtil.uploads(file, qbug.getBugId(), "bug", title);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+		uploads(file,qbug.getBugId(), ProfileType.BUG,title);
 
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
@@ -604,7 +601,7 @@ public class BugAction extends BaseController {
 
 	@RequestMapping("/projectFindList")
 	public String projectFindList(Model model, Integer start, Integer limit,String order, String ordertype, HttpServletRequest request) {
-		Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+		Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
 		boolean asc = "asc".equals(ordertype) ? true : false;
 		QualityBug bug = new QualityBug();
 		bug.setProjectId(projectId);

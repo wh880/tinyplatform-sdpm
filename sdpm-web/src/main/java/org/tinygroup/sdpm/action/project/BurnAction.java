@@ -34,7 +34,7 @@ public class BurnAction extends BaseController {
 
     @RequestMapping("/init")
     public String initBurn(HttpServletRequest request, Model model, Integer choose, Integer interval) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         if (interval == null) {
             interval = 3;
         }

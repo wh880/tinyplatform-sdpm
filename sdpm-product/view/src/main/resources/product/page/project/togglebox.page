@@ -32,7 +32,7 @@
 				
 			});	
 			if(checklist.length==0){
-				alert("请选择数据");
+				layer.msg("请选择数据")
 			}
 			var data = ""
 			for(var i=0;i<checklist.length;i++){

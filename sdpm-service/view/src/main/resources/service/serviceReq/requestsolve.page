@@ -45,14 +45,14 @@
 
                 #@elementItem()
                     #@sdpmItem("回复人")
-                        #tinyInput("text" "replier" request?.replier{"id":"解决人员","class":"input-text"})
+                        #tinyInput("text" "replier" request?.replier {"id":"解决人员","class":"input-text"})
                     #end
                 #end
                 #@elementItem()
                     #@sdpmItem("回复处理时间" "*")
                         #@tinyDateInput(
-                            "replyDate" formatDate(request?.replyDate,
-                            "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                            "replyDate" formatDate(request?.replyDate?:now(),
+                            "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","datatype":"*",
                         "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
                     #end
                 #end

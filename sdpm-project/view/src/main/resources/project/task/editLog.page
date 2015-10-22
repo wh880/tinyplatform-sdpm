@@ -10,7 +10,8 @@
             #@tr()
                 #@th()日期#end
                 #@td()
-                    #@tinyDateInput("taskOpenedDate" "2015-08-12" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
+                    #@tinyDateInput(
+                        "taskOpenedDate" "2015-08-12" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
                         "日期不能为空"})#end
                 #end
             #end
@@ -34,9 +35,10 @@
                         <option value="MD">Maryland</option>
                         #end
                     ##填写任意内容，侦听需重新填加 A侦听已内置
-                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/organization/user/add.page"
-                                          class="r ">增加</a><a
-                                href="${TINY_CONTEXT_PATH+adminPath}/organization/user/userRightTable.page">全部</a>#end
+                        #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/organization/user/add.page" class="r ">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/organization/user/userRightTable.page" class="r">全部</a>
+                        #end
                     #end
                 #end
             #end

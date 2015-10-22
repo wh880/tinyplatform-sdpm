@@ -36,7 +36,7 @@
         <application-processor bean="tinyListenerProcessor"></application-processor>
         <application-processor bean="fileMonitorProcessor"></application-processor>
         <application-processor bean="tinyTemplateConfigProcessor"></application-processor>
-        <!--<application-processor bean="databaseInstallerProcessor"></application-processor>-->
+        <application-processor bean="databaseInstallerProcessor"></application-processor>
         <!--<application-processor bean=""></application-processor>-->
         <application-processor bean="stdProcessor"></application-processor>
         <application-processor bean="dictLoadProcessor"></application-processor>
@@ -56,6 +56,7 @@
             <class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources"/>
             <class-path path="E:\Tiny_Fork\sdpm\sdpm-productLine\view\src\main\resources"/>
             <class-path path="E:\Tiny_Fork\sdpm\sdpm-service\view\src\main\resources"/>
+            <class-path path="E:\Tiny_Fork\sdpm\sdpm-quality\view\src\main\resources"/>
             <!-- 明明-->
             <class-path path="D:\webspaces\sdpm\sdpm-service\view\src\main\resources"/>
             <!-- 高志超-->
@@ -500,6 +501,8 @@
         <template-function name="stdFunction"></template-function>
         <!--用户信息工具--> 
         <static-class name="UserUtils" class="org.tinygroup.sdpm.util.UserUtils"></static-class>
+        <!--数据信息获取工具-->
+        <static-class name="CmsUtils" class="org.tinygroup.sdpm.util.CmsUtils"></static-class>
     </template-config>
 
     <dict-load-config bean_name="ehCache"></dict-load-config>

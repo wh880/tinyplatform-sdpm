@@ -41,6 +41,7 @@ import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.common.util.update.InsertUtil;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -60,17 +61,17 @@ import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 @Component
 public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements ProductStorySpecDao {
 
-	public ProductStorySpec add(ProductStorySpec productStorySpec) {
+	public ProductStorySpec add(final ProductStorySpec productStorySpec) {
 		return getDslTemplate().insertAndReturnKey(productStorySpec, new InsertGenerateCallback<ProductStorySpec>() {
 			public Insert generate(ProductStorySpec t) {
-				Insert insert = insertInto(PRODUCT_STORY_SPECTABLE).values(
+				Insert insert = InsertUtil.getInsert(PRODUCT_STORY_SPECTABLE, productStorySpec);/*insertInto(PRODUCT_STORY_SPECTABLE).values(
 					PRODUCT_STORY_SPECTABLE.STORYSPEC_ID.value(t.getStoryspecId()),
 					PRODUCT_STORY_SPECTABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCT_STORY_SPECTABLE.STORY_ID.value(t.getStoryId()),
 					PRODUCT_STORY_SPECTABLE.STORY_VERSION.value(t.getStoryVersion()),
 					PRODUCT_STORY_SPECTABLE.STORY_TITLE.value(t.getStoryTitle()),
 					PRODUCT_STORY_SPECTABLE.STORY_SPEC.value(t.getStorySpec()),
-					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification()));
+					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification()));*/
 				return insert;
 			}
 		});
