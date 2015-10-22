@@ -1,13 +1,13 @@
 package org.tinygroup.sdpm.productLine.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.productLine.biz.inter.ProductLineManager;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 @Component
 public class ProductLineServiceImpl implements ProductLineService {
@@ -51,7 +51,7 @@ public class ProductLineServiceImpl implements ProductLineService {
 		return productLineManager.findPager(page, pagesize, productLine, order, ordertype);
 	}
 
-	public List<ProductLine> findlist(ProductLine productLine) {
+	public List<ProductLine> findList(ProductLine productLine) {
 		
 		return productLineManager.findList(productLine);
 	}

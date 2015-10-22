@@ -62,7 +62,7 @@ public class ModuleAction extends BaseController {
             integers.add(p.getProductId());
         }
         Integer[] pIds = new Integer[integers.size()];
-        List<Product> products = productService.findProductList(integers.toArray(pIds));
+        List<Product> products = productService.findProductListByIds(integers.toArray(pIds));
         mergeProductModule(products, "story", mapList, false, false, "project");
         if (openProject > 0) {
             List<SystemModule> systemModules = moduleService.findModules(systemModule);
