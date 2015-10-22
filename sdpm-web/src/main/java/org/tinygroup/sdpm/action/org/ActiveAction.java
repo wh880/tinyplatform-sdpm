@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.org;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,14 @@ public class ActiveAction extends BaseController {
     private ProductService productService;
 
 
+    /**
+     * 显示动态页面，并查询用户、产品、迭代的列表
+     *
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("organizationActive")
     @RequestMapping("/show")
     public String show(HttpServletRequest request, Model model) {
         List<OrgUser> userList = userService.findUserList(new OrgUser());
@@ -50,6 +59,21 @@ public class ActiveAction extends BaseController {
         return "organization/active/active.page";
     }
 
+    /**
+     * 根据选择的时间段、用户、产品、项目来查询相应的动态
+     * @param start
+     * @param limit
+     * @param order
+     * @param ordertype
+     * @param request
+     * @param model
+     * @param selDate
+     * @param orgUserId
+     * @param productId
+     * @param projectId
+     * @return
+     */
+    @RequiresPermissions("organizationCompany")
     @RequestMapping("/find")
     public String find(Integer start, Integer limit, String order, String ordertype, HttpServletRequest request, Model model, String selDate, String orgUserId, String productId, String projectId) {
         SystemAction systemAction = new SystemAction();

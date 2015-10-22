@@ -1,32 +1,26 @@
-#macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
-#end
 
-
-${casepager?.totalCount+1}
-
-#setTinyItemCount(casepager?.totalCount)
-#for(c:casepager?.records)
+#setTinyItemCount(runsPager?.totalCount)
+#for(run :runsPager?.records)
 					#@tr()
 						#@td()<input type="checkbox" value="1" name="userid">#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/case/viewInfo?id=${c?.caseId}">${c?.caseId}</a>#end
-						#@td()${getDict("casePriority",c?.priority)}#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/case/viewInfo?id=${c?.caseId}">${c?.caseTitle}</a>#end
-						#@td()${getDict("caseType",c?.caseType)}#end
-						#@td()${c?.caseScriptedBy}#end
-						#@td()${c?.caseLastRunner}#end
-						#@td()${c?.caseLastRunDate?formatDate(c?.caseLastRunDate,'yyyy年MM月dd日'):""}#end
-						#@td()${getDict("caseResule",c?.caseLastRunResult)}#end
-						#@td()${getDict("caseStatus",c?.caseStatus)}#end
+						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run?.caseId}</a>#end
+						#@td()${getDict("casePriority",run?.priority)}#end
+						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run?.caseTitle}</a>#end
+						#@td()${getDict("caseType",run?.caseType)}#end
+						#@td()${run?.caseScriptedBy?UserUtils.getUserById(run?.testRunAssignedTo):""}#end
+						#@td()${run?.caseLastRunner?UserUtils.getUserById(run?.testLastRunner):""}#end
+						#@td()${run?.caseLastRunDate?formatDate(run?.testLastRunDate,'yyyy年MM月dd日'):""}#end
+						#@td()${run?.testLastRunResult}#end
+						#@td()${getDict("versionStatus",run?.testRunStatus)}#end
 						 #@td()
                          	#foreach(m:menuManager.getScopeMenus("testcase-op"))
                          		#if(m.id=="teditioncase"||m.id=="tproposecase")
-            						<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?caseId=${c?.caseId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            						<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?caseId=${run?.caseId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             					#else
             						#if(m.id=="texecution"||m.id=="tresult")
-            							#iconOperations("#myModal" m.icon m.name "865" "400" m.href+"?caseId="+c?.caseId "ml-1")
+            							#iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId "ml-1")
             						#else
-										#@tinyTableItemRemove(m.href c?.caseId)
+										#@tinyTableItemRemove(m.href run?.caseId)
 											<i class="${m.icon}" title="删除"></i>
 										#end
 									#end

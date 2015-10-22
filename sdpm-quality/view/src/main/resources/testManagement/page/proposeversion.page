@@ -75,7 +75,17 @@
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
+					 <script type="text/javascript">
+					 $(function(){
+					    $("#${sid}").on("change",function(){
+                             var pId = $("#${sid}  option:selected").val();
+                             ajaxRead("${sid}","buildName","buildId","buildName","/quality/version/ajax/build?buildProject="+pId+"&buildProduct=${qualityProductId?:0}",${testTask?.buildName?:0},"build");
+                             ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${testTask?.testtaskOwner?:0}");
+                         });
+					 })
+                     </script>
 	                   		 #@Tselect2Body("projectId" testTask?.projectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 <option value="0">/</option>
                                 #foreach(project : projectList)
                                     <option value="${project?.projectId}">${project?.projectName}</option>
                                 #end
@@ -94,10 +104,7 @@
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("buildName" testTask?.buildName {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                   		        <option value="0">trunk</option>
-	                            #foreach(build : buildList)
-                                    <option value="${build?.buildId}">${build?.buildName}</option>
-                                #end
+
 	                    	#end                
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
@@ -114,10 +121,7 @@
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("testtaskOwner" testTask?.testtaskOwner {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                            <option value="0">/</option>
-                                #foreach(user : userList)
-                                    <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-                                #end
+
 	                    	#end                
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
@@ -318,9 +322,7 @@
         });
     });
 </script>
-<script type="text/javascript">
-    $(".select2").select2();
-</script>
+
         #end
 #end
 

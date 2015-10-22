@@ -24,31 +24,41 @@ public interface UserService {
     /**
      * 根据主键id查找用户
      *
-     * @param id 主键
+     * @param id
      * @return
      */
     OrgUser findUser(String id);
 
+
     /**
-     * 根据主键id查找用户
+     * 根据用户名刚查找用户
      *
      * @param account 用户名
      * @return
      */
     OrgUser findUserByAccount(String account);
 
+    /**
+     * 对象查询用户pager
+     *
+     * @param start
+     * @param limit
+     * @param orgUser
+     * @return
+     */
     Pager<OrgUser> findUserPager(Integer start, Integer limit, OrgUser orgUser);
 
     /**
-     * 根据条件查询List
+     * 根据条件查询用户List
      *
      * @param orgUser 用于查询条件
      * @return
      */
     List<OrgUser> findUserList(OrgUser orgUser);
 
+
     /**
-     * 根据部门Id查询list
+     * 根据部门Id查询用户pager
      * @param deptId
      * @return
      */
@@ -101,9 +111,9 @@ public interface UserService {
      * @return
      */
     List<OrgUser> findUserListByIds(String... userId);
-    
+
     /**
-     * 根据id查找名字
+     * 根据id查找用户名
      * @param id
      * @return
      */

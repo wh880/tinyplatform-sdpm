@@ -37,8 +37,10 @@
                         dataType: "json",
                         contentType: 'application/json;charset=utf-8', //设置请求头信息
                         success: function (data) {
-                        $("#${tableId}").trigger("refresh");
-                            window.location.reload();
+                        	if(data==true){
+                        		window.location.reload();
+                        	}
+                            
                         },
                         error: function (res) {
                             layer.msg("系统出错，请确认你的请求地址");

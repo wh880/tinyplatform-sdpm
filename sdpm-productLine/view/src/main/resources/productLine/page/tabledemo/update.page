@@ -32,27 +32,27 @@
             #@validateDiv("col-2")#end
         #end
 
+    #*
+            #@elementItem()
+                #@colLabel()节点：#end
+                #@formControlDiv("col-4")
+                    #@Tselect2F()
+                        #@Tselect2Body("productLineRoot" productLine?.productLineRoot {"class":
+                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value="123">12</option>
+                            <option value="124">13</option>
+                            <option value="125">14</option>
+                            <option value="126">15</option>
+                            <option value="127">16</option>
+                            <option value="128">17</option>
+                            <option value="129">18</option>
+                        #end
 
-        #@elementItem()
-            #@colLabel()节点：#end
-            #@formControlDiv("col-4")
-                #@Tselect2F()
-                    #@Tselect2Body("productLineRoot" productLine?.productLineRoot {"class":
-                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="123">12</option>
-                        <option value="124">13</option>
-                        <option value="125">14</option>
-                        <option value="126">15</option>
-                        <option value="127">16</option>
-                        <option value="128">17</option>
-                        <option value="129">18</option>
+                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                     #end
-
-                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 #end
-            #end
-            #@validateDiv("col-2")#end
-        #end
+                #@validateDiv("col-2")#end
+            #end*#
 
 
         #@elementItem()
@@ -61,16 +61,18 @@
                 #@Tselect2F()
                     #@Tselect2Body("productLineOwner" productLine?.productLineOwner {"class":
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="123">12</option>
-                        <option value="124">13</option>
-                        <option value="125">14</option>
-                        <option value="126">15</option>
-                        <option value="127">16</option>
-                        <option value="128">17</option>
-                        <option value="129">18</option>
+                    #end
+                    <script>
+
+                        ajaxRead("${sid}", "productLineOwner", "orgUserId", "orgUserRealName", "/org/user/userList");
+
+                    </script>
+
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
                     #end
 
-                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -81,14 +83,19 @@
                 #@Tselect2F()
                     #@Tselect2Body("productLineQualityManager" productLine?.productLineQualityManager {"class":
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="张三">张三</option>
-                        <option value="张三">李四</option>
-                        <option value="王五">王五</option>
-                        <option value="赵六">赵六</option>
-                        <option value="沈七">沈七</option>
                     #end
 
-                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+                    <script>
+
+                        ajaxRead("${sid}", "productLineQualityManager", "orgUserId", "orgUserRealName", "/org/user/userList");
+
+                    </script>
+
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                    #end
+
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -99,14 +106,18 @@
                 #@Tselect2F()
                     #@Tselect2Body("productLineDeliveryManager" productLine?.productLineDeliveryManager {"class":
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="张三">张三</option>
-                        <option value="张三">李四</option>
-                        <option value="王五">王五</option>
-                        <option value="赵六">赵六</option>
-                        <option value="沈七">沈七</option>
+                    #end
+                    <script>
+
+                        ajaxRead("${sid}", "productLineDeliveryManager", "orgUserId", "orgUserRealName", "/org/user/userList");
+
+                    </script>
+
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
                     #end
 
-                    #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 #end
             #end
             #@validateDiv("col-2")#end

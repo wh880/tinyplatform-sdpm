@@ -46,7 +46,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public Project addProject(Project project) {
-
+        project.setProjectDeleted(project.DELETE_NO);
         return projectManager.add(project);
     }
 
