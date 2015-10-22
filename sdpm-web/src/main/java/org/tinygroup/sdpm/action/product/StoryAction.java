@@ -116,8 +116,12 @@ public class StoryAction extends BaseController {
     public String save(SystemAction systemAction, ProductStory productStory, ProductStorySpec storySpec,
                        @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title, HttpServletRequest request) throws IOException {
 
-
-        productStory.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
+    	if(request.getSession().getAttribute("sessionProductId")!=null){
+    		productStory.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
+    	}
+        productStory.setStoryStatus("0");
+        
+        storySpec.setStoryVersion(0);
         ProductStory story = storyService.addStory(productStory, storySpec);
 
         uploads(file, story.getStoryId(), ProfileType.STORY, title);

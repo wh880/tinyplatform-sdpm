@@ -24,7 +24,9 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.weblayer.WebContext;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -75,8 +77,12 @@ public class ProductAction extends BaseController {
     @RequestMapping("")
     public String productAction(HttpServletRequest request, WebContext webContext) {
         List<Product> sessionList = (List<Product>) request.getSession().getAttribute("productList");
-        String oldUrl = webContext.get("oldUrl");
         List<Product> list = SessionUtil.ProductRefresh(request, productService);
+        if(list.size()==0||list==null){
+        	request.getSession().removeAttribute("sessionProductId");
+        	request.getSession().removeAttribute("productList");
+        	return "forward:"+adminPath+"/product/addproduct/addition";
+        }
         if (sessionList == null || sessionList.size() == 0) {
 
             if (request.getSession().getAttribute("sessionProductId") == null) {
@@ -84,7 +90,7 @@ public class ProductAction extends BaseController {
             }
         }
 
-        return "redirect:/a/product/story?" + (list.size() > 0 ? ("productId=" + list.get(0).getProductId()) : "") + "&choose=1" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
+        return "redirect:"+adminPath+"/product/story?" + (list.size() > 0 ? ("productId=" + list.get(0).getProductId()) : "") + "&choose=1" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
     }
 
 
@@ -94,6 +100,10 @@ public class ProductAction extends BaseController {
         if (request.getSession().getAttribute("sessionProductLineId") != null) {
             product.setProductLineId((Integer) request.getSession().getAttribute("sessionProductLineId"));
         }
+        product.setProductCreatedBy(UserUtils.getUser().getOrgUserAccount());
+        product.setProductCreatedDate(new Date());
+        product.setProductStatus("0");
+        
         product = productService.addProduct(product);
         SessionUtil.ProductRefresh(request, productService);
         request.getSession().setAttribute("sessionProductId", product.getProductId());

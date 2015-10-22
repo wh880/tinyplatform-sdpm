@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.action.org;
 
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,6 +62,14 @@ public class UserAction extends BaseController {
     private ActionService actionService;
 
 
+    /**
+     * 用户新增和编辑页面显示
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequiresPermissions(value = {"org-user-edit", "organizationAddUser", "org-user-editprofile"}, logical = Logical.OR)
     @RequestMapping("/form")
     public String form(String id, Model model) {
         if (id != null) {
@@ -71,6 +81,17 @@ public class UserAction extends BaseController {
         return "organization/user/addUser.page";
     }
 
+    /**
+     * 增加修改用户的保存
+     *
+     * @param user
+     * @param model
+     * @param password1
+     * @param password2
+     * @return
+     */
+
+    @RequiresPermissions(value = {"org-user-edit", "org-user-add", "organizationAddUser"}, logical = Logical.OR)
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(OrgUser user, Model model, String password1, String password2) {
         if (StringUtil.isBlank(user.getOrgUserId())) {
@@ -88,6 +109,14 @@ public class UserAction extends BaseController {
     }
 
 
+    /**
+     * 用户名唯一性校验
+     *
+     * @param param
+     * @param orgUserId
+     * @return
+     */
+    @RequiresPermissions(value = {"org-user-add", "organizationAddUser"}, logical = Logical.OR)
     @ResponseBody
     @RequestMapping(value = "/usercheck")
     public Map usercheck(String param, String orgUserId) {
@@ -117,6 +146,14 @@ public class UserAction extends BaseController {
         return map;
     }
 
+    /**
+     * 用户主页面显示
+     *
+     * @param orgUser
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("organizationUser")
     @RequestMapping("/list")
     public String list(OrgUser orgUser, Model model) {
 //        List<OrgUser> list = userService.findUserList(orgUser);

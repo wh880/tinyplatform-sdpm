@@ -54,7 +54,7 @@
                     #@Tselect2Body("productLineId" "IN" {"class":"input-text select2"})
                     #end
                     <script>
-                        ajaxRead("${sid}", "productLineId", "productLineId", "productLineName", "/productLine/productLineList");
+                        ajaxRead("${sid}", "productLineId", "productLineId", "productLineName", "/productLine/productLineList",${sessionProductLineId?:0});
                     </script>
                     #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH}/a/productLine/add">增加</a>
@@ -74,7 +74,7 @@
             #@colLabel()产品名称：#end
             #@formControlDiv("col-3")
                 #tinyInput(
-                    "text" "productCode" ""{"placeholder":"请输入产品名称","datatype":"*","nullmsg":"产品名称不能为空！","id":
+                    "text" "productName" ""{"placeholder":"请输入产品名称","datatype":"*","nullmsg":"产品名称不能为空！","id":
                     "productCode","class":"input-text"})
             #end
             #@validateDiv("col-2")#end

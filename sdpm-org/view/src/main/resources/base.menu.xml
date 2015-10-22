@@ -24,7 +24,7 @@
 
         <menu id="org-user-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="org-user-batchdel"/>
-        <menu id="org-user-add" name="增加" href="addUser.page" icon="icon-plus" sort="1" isShow="1"
+        <menu id="org-user-add" name="增加" href="/org/user/form" icon="icon-plus" sort="1" isShow="1"
               scope="org-user-add"/>
 
         <menu id="org-user-storyAdmin" name="需求" href="/org/user/story" icon="" sort="1"
@@ -42,9 +42,6 @@
         <menu id="org-user-activeAdmin" name="动态" href="/org/user/active" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
-        <!--<menu id="org-user-logAdmin" name="日志" href="/organization/user/logAdmin.page" icon="" sort="1"-->
-        <!--isShow="1"-->
-        <!--scope="org-user-detail"/>-->
         <menu id="org-user-projectAdmin" name="项目" href="/org/user/project" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
@@ -59,24 +56,9 @@
               scope="org-user-editprofile"/>
 
     </menu>
-    <!--<menu id="organizationGtask" name="待办" href="/organization/gtask/gtasks.page" icon="" sort="1"-->
-    <!--isShow="1"-->
-    <!-->-->
-    <!--</menu>-->
-    <!--<menu id="organizationLog" name="日志" href="/organization/log/log.page" icon="" sort="1"-->
-    <!--isShow="1"-->
-    <!-->-->
-    <!--<menu id="org-log-export" name="导出" href="/organization/log/export.pagelet" icon="icon-download-alt"-->
-    <!--sort="1" isShow="1"-->
-    <!--scope="org-log-export"/>-->
-    <!--</menu>-->
     <menu id="organizationActive" name="动态" href="/org/active/show" icon="" sort="1" isShow="1"
     >
     </menu>
-    <!--<menu id="organizationDepartment" name="部门" href="/organization/department/department.page" icon="" sort="1"-->
-    <!--isShow="1"-->
-    <!-->-->
-    <!--</menu>-->
     <menu id="organizationPrivilege" name="角色" href="/org/privilege/list" icon="" sort="1" isShow="1"
     >
         <menu id="org-privilege-maintain" name="权限维护" href="/org/roleMenu/show"

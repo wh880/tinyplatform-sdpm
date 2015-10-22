@@ -114,9 +114,8 @@
                 success: function (data) {
                     if (data.status == "y") {
                         layer.msg(data.info, 2, 1, function () {
-                            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/org/privilege/list"
+                            window.location.href = load;
                         })
-                        // window.location.href="/"
                     } else {
                         layer.msg(data.info)
                     }

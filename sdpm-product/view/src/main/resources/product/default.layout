@@ -52,7 +52,7 @@
 
                 },
                 error: function (res) {
-                    alert("失败");
+                    alert("失败"+toName);
                 }
             });
 

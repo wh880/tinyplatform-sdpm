@@ -11,9 +11,9 @@
     #@td()
     <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/bugInfo.page"> ${bug?.bugTitle} </a>
     #end
-    #@td()${bug?.bugOpenedBy} #end
-    #@td()${bug?.bugAssignedTo} #end
-    #@td()${bug?.bugStatus} #end
+    #@td()${bug?.bugOpenedBy?UserUtils.getUserById(bug?.bugOpenedBy)?.orgUserRealName:""} #end
+    #@td()${bug?.bugAssignedTo?UserUtils.getUserById(bug?.bugAssignedTo)?.orgUserRealName:""}#end
+    #@td()${getDict("bugStatus",bug?.bugStatus)}#end
 
 
 #end

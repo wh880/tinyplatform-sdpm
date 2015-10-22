@@ -73,7 +73,7 @@ public class ActiveAction extends BaseController {
      * @param projectId
      * @return
      */
-    @RequiresPermissions("organizationCompany")
+    @RequiresPermissions("organizationActive")
     @RequestMapping("/find")
     public String find(Integer start, Integer limit, String order, String ordertype, HttpServletRequest request, Model model, String selDate, String orgUserId, String productId, String projectId) {
         SystemAction systemAction = new SystemAction();
