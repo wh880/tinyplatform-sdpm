@@ -27,6 +27,7 @@ import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -284,7 +285,7 @@ public class TaskAction extends BaseController {
 
     @RequestMapping("/save")
     public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file,
-                       Model model, String[] taskMailtoArray, HttpServletRequest request, String comment) throws IOException {
+                       Model model, String[] taskMailtoArray, HttpServletRequest request, String comment) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         task.setTaskProject(projectId);
         if (task.getTaskId() == null) {
@@ -304,9 +305,11 @@ public class TaskAction extends BaseController {
                     newtask.getTaskId().toString(), UserUtils.getUserId(),
                     null, newtask.getTaskProject().toString(), null,
                     newtask, comment);
-
-            uploadNoTitle(file, newtask.getTaskId(), ProfileType.TASK);
-
+            try {
+                uploadNoTitle(file, newtask.getTaskId(), ProfileType.TASK);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             taskService.updateTask(task);
         }
