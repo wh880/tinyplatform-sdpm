@@ -16,7 +16,7 @@
                     #@aModal("#myModal" task?.taskName 1050 540 "doing" startPage+"?taskId="+task?.taskId)开始#end
                     #@aModal("#myModal" task?.taskName 1050 600 "finish" finishPage+"?taskId="+task?.taskId)完成#end
                     #@aModal("#myModal" task?.taskName 1050 450 "cancel" cancelPage+"?taskId="+task?.taskId)取消#end
-                    #@aModal("#myModal" task?.taskName 1050 460 "close" closePage+"?taskId="+task?.taskId)关闭#end
+                    #@aModal("#myModal" task?.taskName 1050 460 "boardClose" closePage+"?taskId="+task?.taskId)关闭#end
                     #@aModal("#myModal" task?.taskName 1300 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
                 </div>
             </div>
@@ -55,7 +55,7 @@
                     #@aModal("#myModal" task?.taskName 1050 540 "assigned" assignedPage+"?taskId="+task?.taskId)指派#end
                     #@aModal("#myModal" task?.taskName 1050 600 "done" finishPage+"?taskId="+task?.taskId)完成#end
                     #@aModal("#myModal" task?.taskName 1050 450 "cancel" cancelPage+"?taskId="+task?.taskId)取消#end
-                    #@aModal("#myModal" task?.taskName 1050 460 "close" closePage+"?taskId="+task?.taskId)关闭#end
+                    #@aModal("#myModal" task?.taskName 1050 460 "boardClose" closePage+"?taskId="+task?.taskId)关闭#end
                     #@aModal("#myModal" task?.taskName 1200 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
                 </div>
             </div>
@@ -92,8 +92,9 @@
                 </button>
                 <div class="dropdown-menu pull-right">
                     #@aModal("#myModal" task?.taskName 1050 540 "assigned" assignedPage+"?taskId="+task?.taskId)指派#end
-                    #@aModal("#myModal" task?.taskName 1050 460 "close" closePage+"?taskId="+task?.taskId)关闭#end
+                    #@aModal("#myModal" task?.taskName 1050 460 "boardClose" closePage+"?taskId="+task?.taskId)关闭#end
                     #@aModal("#myModal" task?.taskName 1300 600 "doing" doingPage+"?taskId="+task?.taskId)激活#end
+                    #@aModal("#myModal" task?.taskName 1050 450 "cancel" cancelPage+"?taskId="+task?.taskId)取消#end
                     #@aModal("#myModal" task?.taskName 1050 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
                 </div>
             </div>

@@ -1,6 +1,7 @@
-#@tinyForm("closeForm" TINY_CONTEXT_PATH+adminPath+"/project/task/cancleSave" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/ajaxChangeStatu" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
     #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
+    #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue="cancel")
 <div style="width:70%;float:left;padding-left: 10px;" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>取消</p>
@@ -33,3 +34,37 @@
 <div style="width:30%;float:right;padding-right: 10px;">
     #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
 </div>
+
+<script>
+    $(function () {
+        $("form[name=thisform").Validform({
+            beforeSubmit: function (curform) {
+                $(curform).ajaxSubmit({
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "y" || data.status == "success") {
+                            $(curform).closest(".modal").trigger("close");
+                            sleep(100);
+                            location = location;
+                        } else {
+                            layer.msg(data.info, 1, 9);
+                        }
+//                        try {
+//                            //当弹出框时触发弹出框关闭
+//                            $(curform).closest(".modal").find(".modal-header .close").trigger("click");//弹出框关闭
+//                            $("table.tinytable").trigger("initnav");
+//                        } catch (e) {
+//                            console.log(e)
+//                        }
+                        return false;
+
+                    },
+                    error: function () {
+                        layer.msg(data.info);
+                    }
+                });
+                return false;
+            }
+        });
+    });
+</script>
