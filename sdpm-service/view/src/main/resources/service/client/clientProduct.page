@@ -30,64 +30,63 @@
 
         #@tabWithInit("tab_demo" "optionsBox")
             #if(slas.isEmpty())
-            <div style="width:70%;float:left">
-                <p class="slaEmptyInfo"><i class="fa fa-fw fa-warning fa-lg text-warning"></i>该客户未签订任何协议!</p>
-            </div>
-            #else
-            <div style="width:70%;float:left">
-                #@noRespsGridSystem()
-                    #@gridSysRow()
-                        #foreach(var:slas)
-                        <div class="slaInfoBox">
-                            #gridSysCol(2)
-                            #@gridSysCol(10)
-                                #@gridSysRow()
-                                    #@gridSysCol(4)协议名称#end
-                                    #@gridSysCol(8)<a
-                                            href="${TINY_CONTEXT_PATH}${adminPath}/service/sla/slaContent?id=${var.slaId}">${var.slaTitle}</a>#end
-                                #end
+                     <div style="width:70%;float:left">
+                         <p class="slaEmptyInfo"><i class="fa fa-fw fa-warning fa-lg text-warning"></i>该客户未签订任何协议!</p>
+                     </div>
+                #else
+                <div style="width:70%;float:left">
+                    #@noRespsGridSystem()
+                        #@gridSysRow()
+                            #foreach(var:slas)
+                            <div class="slaInfoBox">
+                                #gridSysCol(2)
+                                #@gridSysCol(10)
+                                    #@gridSysRow()
+                                        #@gridSysCol(4)协议名称#end
+                                        #@gridSysCol(8)<a
+                                                href="${TINY_CONTEXT_PATH}${adminPath}/service/sla/slaContent?id=${var.slaId}">${var.slaTitle}</a>#end
+                                    #end
 
-                                #@gridSysRow()
-                                    #@gridSysCol(4)服务级别#end
-                                #* #@gridSysCol(8)${var.serviceLevel}#end*#
-                                    #@gridSysCol(8)${getDict("serviceLevel",var?.serviceLevel)}#end
+                                    #@gridSysRow()
+                                        #@gridSysCol(4)服务级别#end
+                                    #* #@gridSysCol(8)${var.serviceLevel}#end*#
+                                        #@gridSysCol(8)${getDict("serviceLevel",var?.serviceLevel)}#end
                                     #end
-                                #@gridSysRow()
-                                    #@gridSysCol(4)服务期限#end
-                                    #@gridSysCol(8)
-                                        #if(var.serviceDeadline)${formatDate(var.serviceDeadline,"yyyy-MM-dd")}#end
-                                    #end
-                                    #end
-                                #@gridSysRow()
-                                    #@gridSysCol(4)批准人#end
-                                    #@gridSysCol(8)${var.slaReviewedBy}#end
-                                    #end
-                                #@gridSysRow()
-                                    #@gridSysCol(4)批准时间#end
-                                    #@gridSysCol(8) #if(var.slaReviewDate)${formatDate
-                                        (var.serviceDeadline,"yyyy-MM-dd")}#end
+                                    #@gridSysRow()
+                                        #@gridSysCol(4)服务期限#end
+                                        #@gridSysCol(8)
+                                            #if(var.serviceDeadline)${formatDate(var.serviceDeadline,"yyyy-MM-dd")}#end
                                         #end
                                     #end
-                                <div style="text-align:right;margin:right;padding-right:15px">
-                                    #foreach(m:menuManager.getScopeMenus("clientSla"))
-                                        #if(m.id != "clientSla_delete")
-                                            #@aExtendButton(
-                                                "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+var.slaId
-                                                ""
-                                                "")编辑#end
-                                        #else
-                                            #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href var?.slaId "" {
-                                                "class":
-                                                "btn radius btn-danger btn-sm"}) 删除#end
+                                    #@gridSysRow()
+                                        #@gridSysCol(4)批准人#end
+                                        #@gridSysCol(8)${var.slaReviewedBy}#end
+                                    #end
+                                    #@gridSysRow()
+                                        #@gridSysCol(4)批准时间#end
+                                        #@gridSysCol(8) #if(var.slaReviewDate)${formatDate
+                                            (var.serviceDeadline,"yyyy-MM-dd")}#end
                                         #end
+                                    #end
+                                    <div style="text-align:right;margin:right;padding-right:15px">
+                                        #foreach(m:menuManager.getScopeMenus("clientSla"))
+                                            #if(m.id != "clientSla_delete")
+                                                #@aExtendButton(
+                                                    "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+var.slaId ""
+                                                    "")编辑#end
+                                            #else
+                                                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href var?.slaId "" {
+                                                    "class":
+                                                    "btn radius btn-danger btn-sm"}) 删除#end
+                                            #end
                                         #end
-                                </div>
+                                    </div>
                                 </div>
                                 #end
-                        #end
+                            #end
                         #end
                     #end
-            </div>
+                </div>
             #end
 
         <div style="width:30%;float:right;">
