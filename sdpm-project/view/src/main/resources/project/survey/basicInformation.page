@@ -30,7 +30,7 @@
                     #@td()${getDict("projectType",project?.projectType)}#end
                 #end
                 #@tr()
-                    #@td()项目状态${project?.projectStatus}#end
+                    #@td()项目状态#end
                     #@td()${getDict("projectStatus",project?.projectStatus)}#end
                 #end
                 #@tr()
@@ -61,7 +61,7 @@
                     #@td()相关产品#end
                     #@td()
                         #foreach(p : productlist)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/?productId=${p.productId}">${p.productName}</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/?productId=${p.productId}">${p.productName}、</a>
                         #end
                     #end
                 #end

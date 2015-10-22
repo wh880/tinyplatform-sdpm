@@ -27,6 +27,7 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -260,7 +261,11 @@ public class ProjectAction extends BaseController {
         Project project = projectService.findById(projectID);
         List<ProjectProduct> list = projectProductService.findProducts(projectID);
         Integer[] ids = new Integer[list.size()];
-        List<Product> productlist = productService.findProductList(list.toArray(ids));
+        List<Integer> productIdList = new ArrayList<Integer>();
+        for (ProjectProduct t : list) {
+            productIdList.add(t.getProductId());
+        }
+        List<Product> productlist = productService.findProductList(productIdList.toArray(ids));
         model.addAttribute("project", project);
         model.addAttribute("productlist", productlist);
         return "project/survey/basicInformation.pagelet";
