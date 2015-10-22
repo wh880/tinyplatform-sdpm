@@ -86,7 +86,7 @@
 			           $("#${sid}").on("change",function(){
 			           var pId = $("#${sid}  option:selected").val();
 
-				           if(pId=='1') {
+                           if (pId == '1') {
 				           	ajaxRead("${sid}","docProduct","productId","productName","/document/ajax/productByDocLib",${doc?.docProduct?:0});
 				           }
 				           if(pId=='2')
@@ -119,7 +119,7 @@
                                 <a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end
                         <script type="text/javascript">
 
-                            $("#${sid}").on("change",function(){
+                            $("#${sid}").on("change", function () {
 	                            var dId = $("select[name=docLibId]").val();
 	                                var pId = $("#${sid}  option:selected").val();
 
@@ -157,9 +157,9 @@
 		                            	  }
                                     })
 	                        </script>
+                	  #end
+                	  #end
                     #end
-                	  #end
-                	  #end
 			#end
 
 

@@ -87,10 +87,10 @@
                 #end
 
                 <div class="r">
-                    #@aModal(
-                        "#myModal" "导出HTML" "700" "130" "icon-upload-alt"
-                        "/project/task/relation-release/product-export-html.pagelet")
-                        导出HTML#end&nbsp;
+##                    #@aModal(
+##                        "#myModal" "导出HTML" "700" "130" "icon-upload-alt"
+##                        "/project/task/relation-release/product-export-html.pagelet")
+##                        导出HTML#end&nbsp;
                 </div>
             #end
             #@tabBodyCol("ptop-5")

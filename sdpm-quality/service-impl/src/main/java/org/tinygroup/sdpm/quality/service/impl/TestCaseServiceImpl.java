@@ -55,5 +55,9 @@ public class TestCaseServiceImpl implements TestCaseService {
 		return testcasemanager.findPagerRel(start, limit, testcase, statusCondition, conditions, groupOperate, columnName, asc);
 	}
 
-	
+	public Pager<QualityTestCase> findStoryChangedCase(Integer start, Integer limit, QualityTestCase testcase, String condition, String columnName, boolean asc) {
+		return testcasemanager.findStoryChangedCase(start,limit,testcase,condition,columnName,asc);
+	}
+
+
 }

@@ -31,7 +31,15 @@
                         #foreach(l:productList)
                             #@tinyOptionItem(l.productId)${l?.productName}#end
                         #end
+                        <script type="text/javascript">
+                            $("#${sid}").on("change", function () {
+                                var pId = $(this).val();
+                                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/service/request/ajax/moduleByProduct?productId=" + pId, ${request?.moduleId ? : 0
+                            });
+                            })
+                        </script>
                     #end
+
                 #end
             #end
         #end
@@ -66,13 +74,7 @@
         #@elementItem()
             #@sdpmItem("请求模块")
                 #@Tselect2F()
-                    #@Tselect2Body(
-                        "moduleId" request?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("2")模块一#end
-                        #@tinyOptionItem("3")模块二#end
-                        #@tinyOptionItem("4")模块三#end
-                    #end
+                    #@Tselect2Body("moduleId" request?.moduleId {"class":"input-text select2"})#end
                 #end
             #end
         #end

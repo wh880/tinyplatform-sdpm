@@ -37,6 +37,10 @@ public class TestRunManagerImpl implements TestRunManager {
 			return testrundao.batchUpdate(testruns);
 		}
 
+	public QualityTestRun add(QualityTestRun run) {
+		return testrundao.add(run);
+	}
+
 	public Pager<QualityTestRun> findPager(Integer start, Integer limit, QualityTestRun testRun,String condition, String sortName, boolean asc) {
 		Condition condition1 = StringUtil.isBlank(condition)?null: FragmentSql.fragmentCondition(condition);
 		if(StringUtil.isBlank(sortName)){
