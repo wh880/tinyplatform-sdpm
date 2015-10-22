@@ -347,8 +347,11 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 
 			public Select generate(QualityBug t) {
 				Select select = MysqlSelect.selectFrom(QUALITY_BUGTABLE).where(
-						and(QUALITY_BUGTABLE.BUG_ID.in(bugs),
-							QUALITY_BUGTABLE.BUG_STATUS.eq('2')));
+						and(
+								QUALITY_BUGTABLE.BUG_ID.in(bugs)
+							,QUALITY_BUGTABLE.BUG_STATUS.eq("2")
+				)
+				);
 				return addOrderByElements(select, orderBies);
 			}
 		});
@@ -366,7 +369,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 			public Select generate(QualityBug t) {
 				Select select = MysqlSelect.selectFrom(QUALITY_BUGTABLE).where(
 						and(QUALITY_BUGTABLE.BUG_ID.in(bugs),
-								QUALITY_BUGTABLE.BUG_STATUS.eq('1')));
+								QUALITY_BUGTABLE.BUG_STATUS.eq("1")));
 				return addOrderByElements(select, orderBies);
 			}
 		});
