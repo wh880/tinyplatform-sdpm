@@ -10,6 +10,7 @@ import org.tinygroup.tinysqldsl.Pager;
 
 public interface StorySpecService {
 	
+	ProductStorySpec add(ProductStorySpec storySpec);
 	/**
 	 * 根据需求Id查找
 	 * @param storyId
@@ -41,4 +42,10 @@ public interface StorySpecService {
 	 */
 	Pager<ProductStorySpec> findStorySpecPager(int page,int limit,ProductStorySpec storySpec,String order,String ordertype);
 	
+	/**
+	 * 查找最新版本
+	 * @param storyId
+	 * @return
+	 */
+	int getNewStoryVersion(Integer storyId);
 }
