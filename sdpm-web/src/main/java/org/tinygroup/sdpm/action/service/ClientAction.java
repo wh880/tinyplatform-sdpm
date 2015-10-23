@@ -123,7 +123,6 @@ public class ClientAction extends BaseController {
         ServiceClientUser serviceClientUser = new ServiceClientUser();
         if (client.getClientId() == null) {
             client = clientService.addClient(client);
-            //新建用户联系人表
             if (!client.getUserAccount().isEmpty()) {
                 serviceClientUser.setUserPhone(client.getUserPhone());
                 serviceClientUser.setUserAccount(client.getUserAccount());

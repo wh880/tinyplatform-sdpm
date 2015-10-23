@@ -469,10 +469,13 @@ public class UserAction extends BaseController {
         if (startDate == null && endDate == null) {
             Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, null, null);
             model.addAttribute("actionPager", actionPager);
-        } else {
+        } else if (!startDate.equals(endDate)) {
             String startDateStr = DateUtils.formatDate(startDate, "yyyy-MM-dd HH:mm:ss");
             String endDateStr = DateUtils.formatDate(endDate, "yyyy-MM-dd HH:mm:ss");
             Pager<SystemAction> actionPager = actionService.queryBetweenDate(start, limit, systemAction, startDateStr, endDateStr, null, false);
+            model.addAttribute("actionPager", actionPager);
+        } else {
+            Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, null, null);
             model.addAttribute("actionPager", actionPager);
         }
         return "/organization/user/userActiveTable.pagelet";
