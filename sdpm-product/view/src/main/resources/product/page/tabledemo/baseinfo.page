@@ -49,7 +49,7 @@
 		       		#end
 		       	#end
 		#end
-		#@div(divClass="infoContent")
+#*		#@div(divClass="infoContent")
 		        <p class="titleName">其他信息</p>
 		       	#@table()
 		       		#@thead()
@@ -101,4 +101,4 @@
 		       			#end	
 		       		#end
 		       	#end
-		#end
+		#end*#

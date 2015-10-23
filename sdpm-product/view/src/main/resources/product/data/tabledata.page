@@ -14,7 +14,7 @@
                     if (this.checked == true && this.id != "checkboxall") {
                         var storyid = $(this).val();
                         if ("storyAssignedTo" == inputname) {
-                            storyList.push({storyId: storyid, storyAssignedTo: inputvalue});
+                            storyList.push({storyId: storyid, storyAssignedTo: inputvalue,storyAssignedDate:new Date()});
                         }
                         if ("storyStage" == inputname) {
                             storyList.push({storyId: storyid, storyStage: inputvalue});
@@ -23,7 +23,7 @@
                             storyList.push({storyId: storyid, planId: inputvalue});
                         }
                         if ("storyStatus" == inputname) {
-                            storyList.push({storyId: storyid, storyStatus: inputvalue});
+                            storyList.push({storyId: storyid, storyStatus: inputvalue,storyReviewedDate:new Date()});
                         }
                     }
 
@@ -73,12 +73,12 @@
 	#@td()<a
             href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
     #@td()${story?.planName}#end
-    #@td()${story?.storySource}#end
+    #@td()${getDict("storySource",story?.storySource)}#end
     #@td()${story?.storyOpenedName}#end
     #@td()${story?.storyAssignedName}#end
     #@td()${story?.storyEstimate}#end
     #@td()${ getDict("storyStatus",story?.storyStatus) }#end
-    #@td()${story?.storyStage}#end
+    #@td()${ getDict("storyStage",story?.storyStage) }#end
     #@td()
 	     #foreach(m:menuManager?.getScopeMenus("product-de"))
 		     #set(url=eval(m?.href))

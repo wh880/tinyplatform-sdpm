@@ -32,7 +32,7 @@
   <standard-field id="b9c09ba271a74c9d991fbb38373025c2" name="product_created_version" title="创建版本" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default="&apos;0.0.1-SNAPSHOT&apos;"/>
   <standard-field id="c97bbba549674da3bf7688b351ed34b9" name="product_created_date" title="创建日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default="now()"/>
   <standard-field id="c7e8356f9bea4a26801fcc5bc3eddbff" name="product_created_by" title="创建者" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default=""/>
-  <standard-field id="b9c09ba271a74c9d991fbb38373025c2" name="product_created_version" title="创建版本" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default="&apos;0.0.1-SNAPSHOT&apos;"/>
+  <standard-field id="b9c09ba271a74c9d991fbb38373025c2" name="product_created_version" title="创建版本" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default=""/>
   <standard-field id="c97bbba549674da3bf7688b351ed34b9" name="product_created_date" title="创建日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default=""/>
   <standard-field id="1ac76197c3214536851e8d3f6d04a619" name="plan_id" title="计划ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
     <description></description>

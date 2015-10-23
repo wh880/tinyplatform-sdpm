@@ -43,6 +43,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.common.util.update.InsertUtil;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.productLine.dao.ProductLineDao;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
@@ -59,10 +60,12 @@ import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 @Repository
 public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLineDao {
 
-	public ProductLine add(ProductLine productLine) {
+	public ProductLine add(final ProductLine productLine) {
 		return getDslTemplate().insertAndReturnKey(productLine, new InsertGenerateCallback<ProductLine>() {
 			public Insert generate(ProductLine t) {
-				Insert insert = insertInto(PRODUCT_LINETABLE).values(
+				Insert insert = InsertUtil.getInsert(PRODUCT_LINETABLE, productLine);
+						
+						/*insertInto(PRODUCT_LINETABLE).values(
 					PRODUCT_LINETABLE.PRODUCT_LINE_ID.value(t.getProductLineId()),
 					PRODUCT_LINETABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCT_LINETABLE.DEPT_ID.value(t.getDeptId()),
@@ -80,7 +83,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 					PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.value(t.getProductLineWhiteList()),
 					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.value(t.getProductLineCreatedBy()),
 					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.value(t.getProductLineCreatedDate()),
-					PRODUCT_LINETABLE.DELETED.value(t.getDeleted()));
+					PRODUCT_LINETABLE.DELETED.value(t.getDeleted()));*/
 				return insert;
 			}
 		});
