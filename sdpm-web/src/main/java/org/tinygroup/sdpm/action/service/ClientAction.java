@@ -89,7 +89,9 @@ public class ClientAction extends BaseController {
         ServiceClientUser serviceClientUser = new ServiceClientUser();
         if (client.getClientId() == null) {
             client = clientService.addClient(client);
-            //新建用户联系人表
+            /**
+             * 新建用户联系人表
+             */
             if (!client.getUserAccount().isEmpty()) {
                 serviceClientUser.setUserPhone(client.getUserPhone());
                 serviceClientUser.setUserAccount(client.getUserAccount());
@@ -203,7 +205,9 @@ public class ClientAction extends BaseController {
         if (id != null) {
             ServiceClient client = clientService.findClient(id);
             model.addAttribute("client", client);
-        /*调用product的服务，查询出产品表的对象*/
+            /**
+             * 调用product的服务，查询出产品表的对象
+             */
             Product product = new Product();
             List<Product> slas = productService.findProductList(product);
             model.addAttribute("slas", slas);
