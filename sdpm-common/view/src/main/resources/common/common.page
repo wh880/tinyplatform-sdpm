@@ -15,3 +15,9 @@
         });
     });
 </script>
+
+<script>
+    function resetForm(_this) {
+        $(_this).closest("form").get(0).reset();
+    }
+</script>
