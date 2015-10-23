@@ -57,9 +57,11 @@ public class ReleaseAction extends BaseController{
 	@RequestMapping("/save")
 	public String save(ProductRelease productRelease, HttpServletRequest request, SystemAction systemAction, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
 
+		if(request.getSession().getAttribute("sessionProductId")!=null){
+			productRelease.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+		}
 
-
-		productRelease.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+		
 		ProductRelease release = releaseService.addRelease(productRelease);
 		uploads(file, productRelease.getReleaseId(), ProfileType.RELEASE, title);
 		LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
