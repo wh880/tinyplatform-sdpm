@@ -22,7 +22,7 @@
 #end
 
 #@tinyForm(
-    "thisform" TINY_CONTEXT_PATH+adminPath+"/project/version/save" "" {"class":"test","enctype":"multipart/form-data"})
+    "thisform" TINY_CONTEXT_PATH+adminPath+"/project/version/addsave" "" {"class":"test","enctype":"multipart/form-data"})
 
 
 ##<div style="width:100%;float:left" class="pageleftpart">

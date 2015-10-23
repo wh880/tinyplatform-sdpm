@@ -3,8 +3,7 @@ package org.tinygroup.sdpm.statistic.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.statistic.biz.inter.StatisticManager;
-import org.tinygroup.sdpm.statistic.dao.pojo.ProjectTaskSta;
-import org.tinygroup.sdpm.statistic.dao.pojo.StatisticOrg;
+import org.tinygroup.sdpm.statistic.dao.pojo.*;
 import org.tinygroup.sdpm.statistic.service.inter.StatisticService;
 
 import java.util.List;
@@ -19,6 +18,18 @@ public class StatisticServiceImpl implements StatisticService{
 
 	public List<ProjectTaskSta> findProTasks(ProjectTaskSta projectTaskSta) {
 		return statisticManager.findListProTask(projectTaskSta);
+	}
+
+	public List<QualityBugSta> findBugCreate(QualityBugSta qualityBugSta) {
+		return statisticManager.findBugCreate(qualityBugSta);
+	}
+
+	public List<Assigned> findAssigned(Assigned assigned) {
+		return statisticManager.findAssigned(assigned);
+	}
+
+	public List<QualityBugCall> findBugCall(QualityBugCall qualityBugCall) {
+		return statisticManager.findBugCall(qualityBugCall);
 	}
 
 }

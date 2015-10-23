@@ -46,6 +46,7 @@ public interface RoleManager {
      * @return
      */
     List<OrgRole> findList(OrgRole orgRole);
+
     /**
      * 新增有一Role
      *

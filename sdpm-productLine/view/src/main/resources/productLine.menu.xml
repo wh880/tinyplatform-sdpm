@@ -10,7 +10,7 @@
               isShow="1" scope="product-new" icon="icon-plus-sign"></menu>
     </menu>
     <menu id="overview" parent-id="productLine" name="概况"
-          href="/productLine/find/overview?productLineId=${sessionProductLineId}" icon="" sort="100"
+          href="/productLine/find/overview" icon="" sort="100"
           isShow="1" scope="productLine-left">
 
         <menu id="productLine-close" parent-id="overview" name="关闭" href="/productLine/close?productLineId=${productLine.productLineId}"

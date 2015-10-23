@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.PlanService;
@@ -18,6 +19,7 @@ import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +57,10 @@ public class PlanAction  extends BaseController{
 	@RequestMapping("/save")
 	public String save(ProductPlan productPlan, HttpServletRequest request, SystemAction systemAction) throws IOException {
 		
-		productPlan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+		if(request.getSession().getAttribute("sessionProductId")!=null){
+			productPlan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+		}
+		productPlan.setDeleted(FieldUtil.DELETE_NO);
 		ProductPlan productPlan1 = planService.addPlan(productPlan);
 
 		LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
@@ -164,7 +169,7 @@ public class PlanAction  extends BaseController{
 	@RequestMapping("/forword/{forwordPager}")
 	public String forword(@PathVariable(value="forwordPager")String forwordPager,Integer planId,Model model){
 		
-		model.addAttribute("planId",planId);
+		model.addAttribute("plan",planService.findPlan(planId));
 		
 		if ("reRelateStory".equals(forwordPager)) {
 			return "/product/page/tabledemo/relation-plan/product-al-req.page";
@@ -188,11 +193,13 @@ public class PlanAction  extends BaseController{
 			@RequestParam(required = false,defaultValue = "planId")String order,
 			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model,HttpServletRequest request){
 		
+		Pager<ProductPlan>  pagerProductPlan = null;
 		if(request.getSession().getAttribute("sessionProductId")!=null){
 			plan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+			plan.setDeleted(FieldUtil.DELETE_NO);
+			pagerProductPlan = planService.findProductPlanPager(page, pagesize, plan, order, ordertype);
 		}
 		
-		Pager<ProductPlan>  pagerProductPlan = planService.findProductPlanPager(page, pagesize, plan, order, ordertype);
 
 		model.addAttribute("productPlan",pagerProductPlan);
 

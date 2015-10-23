@@ -9,11 +9,19 @@
             #@colLabel()产品：#end
             #@formControlDiv("col-8")
                 #@Tselect2F()
-                    #@Tselect2Body("productId" product?.productName  {"class":"input-text select2"})
-
+                    #@Tselect2Body("productId" product?.productId  {"class":"input-text select2"})
+                        #foreach(product : productList)
+                            #if(product?.deleted==0)
+                                <option value="${product?.productId}">${product?.productName}</option>
+                            #end
+                        #end
                     #end
+
                     <script>
-                        ajaxRead("${sid}", "productId", "productId", "productName", "/product/productList");
+                        $("#${sid}").on("change", function () {
+                            var pId = $("#${sid}  option:selected").val();
+                            ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId);
+                        })
                     </script>
 
 
@@ -25,8 +33,6 @@
             #end
             #@validateDiv("col-2")#end
         #end
-
-
     </li>
 
     <li>
@@ -36,10 +42,6 @@
                 #@Tselect2F()
                     #@Tselect2Body("moduleId" story?.moduleId {"class":"input-text select2"})
                     #end
-
-                    <script>
-                        ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/system/module/moduleList");
-                    </script>
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -51,18 +53,9 @@
             #@colLabel()来源：#end
             #@formControlDiv("col-8")
                 #@tinySelect("storySource" stroy?.storySource {"class":"input-text ","rel":"22"})
-                    <option value="1">竞争对手</option>
-                    <option value="2">客户</option>
-                    <option value="3">用户</option>
-                    <option value="4">产品经理</option>
-                    <option value="5">市场</option>
-                    <option value="6">客服</option>
-                    <option value="7">合作伙伴</option>
-                    <option value="8">开发人员</option>
-                    <option value="9">测试人员</option>
-                    <option value="10">BUG</option>
-                    <option value="11">其他</option>
-
+                    #foreach(source:getDict("storySource"))
+                        <option value="${source?.value}"> ${source?.text}</option>
+                    #end
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -72,7 +65,7 @@
     <li>
         #@elementItem()
             #@colLabel()当前状态：#end
-            ${story?.storyStatus}
+            ${getDict("storyStatus",story?.storyStatus)}
         #end
     </li>
 
@@ -83,10 +76,9 @@
                 #@tinySelect(
                     "storyPri" story?.storyPri {"class":"input-text ","rel":"22"
                 })
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                    #foreach(source:getDict("storyPri"))
+                        <option value="${source?.value}"> ${source?.text}</option>
+                    #end
 
                 #end
             #end
@@ -130,9 +122,7 @@
                         "multiple"}) ##,"multiple":"multiple"加上为多选项
                     #end
                     <script>
-
                         ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList");
-
                     </script>
 
                     #@Tselect2Fix()
@@ -154,7 +144,7 @@
     <li>
         #@elementItem()
             #@colLabel()由谁创建：#end
-            <p>${story?.storyOpenedBy}</p>
+            <p> ${UserUtils.getUserById(story?.storyOpenedBy).orgUserRealName}</p>
         #end
     </li>
 
@@ -166,13 +156,10 @@
                     #@Tselect2F()
                         #@Tselect2Body("storyAssignedTo" story?.storyAssignedTo {"class":
                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
                         #end
 
                         <script>
-
                             ajaxRead("${sid}", "storyAssignedTo", "orgUserId", "orgUserRealName", "/org/user/userList");
-
                         </script>
 
                         #@Tselect2Fix()

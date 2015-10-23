@@ -2,7 +2,8 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="产品概况",activeMenuId=currentPageId)
-#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
+#!set(linkName="product-demand",sonitem="
+<li>"+"需求"+"</li>")
 
 #include("/product/page/event/common.page")
 #set(name="version")
@@ -29,7 +30,7 @@
 
 #@tabWithInit("tab_demo" "optionsBox")
 
-#hiddenInput("","storyId","",storyId)
+    #hiddenInput("","storyId","",storyId)
 
     #@div(divClass="operationbar")
     <span class="f">
@@ -38,16 +39,16 @@
     <span class="r">
 
          #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
-         #set(url=eval(m?.href))
-           #if(m?.map?.type=="aModal")
+             #set(url=eval(m?.href))
+             #if(m?.map?.type=="aModal")
                  #@aModal("#myModal" m.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m?.icon)${m?.name}#end
-           #elseif(m?.map?.type=="icon-href")
-               <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m.icon)${m?.name}</a>
-           #elseif(m?.map?.type=="icon")
-               <a href="${TINY_CONTEXT_PATH +adminPath}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
-           #elseif(m?.map?.type=="note")
-           		  <a href="${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)
-           #end
+             #elseif(m?.map?.type=="icon-href")
+                 <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m.icon)${m?.name}</a>
+             #elseif(m?.map?.type=="icon")
+                 <a href="${TINY_CONTEXT_PATH +adminPath}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
+             #elseif(m?.map?.type=="note")
+             <a href="${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)
+             #end
          #end
     </span>
     #end
@@ -58,7 +59,7 @@
         <p class="titleName">产品描述</p>
 
         <div>
-           ${storySpec?.storySpec}
+            ${storySpec?.storySpec}
         </div>
     #end
 
@@ -66,7 +67,7 @@
         <p class="titleName">验收标准</p>
 
         <div>
-          ${storySpec?.storyVerification}
+            ${storySpec?.storyVerification}
         </div>
     #end
 
@@ -90,12 +91,12 @@
             #end <br>
         #end
 
-
     #end
 
 
 
-        #history(adminPath+"/system/action/ajax/history?actionObjectType=story&actionObjectId="+storySpec?.storyId)
+
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=story&actionObjectId="+storySpec?.storyId)
 
 
 
@@ -103,55 +104,58 @@
     <div style="text-align:center;margin:auto">
 <span>
 	   #foreach(m:menuManager?.getScopeMenus("pro_demand_log"))
-	   &nbsp;&nbsp;
-		 #set(url=eval(m?.href))
-		   #if(m?.map?.type=="aModal")
-		         #@aModal("#myModal" m?.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m?.icon)${m?.name}#end
-		   #elseif(m?.map?.type=="icon-href")
+           &nbsp;&nbsp;
+           #set(url=eval(m?.href))
+           #if(m?.map?.type=="aModal")
+               #@aModal("#myModal" m?.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m?.icon)${m?.name}#end
+           #elseif(m?.map?.type=="icon-href")
                <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m?.icon)${m?.name}</a>
-		   #elseif(m?.map?.type=="icon")
+           #elseif(m?.map?.type=="icon")
                <a href="${TINY_CONTEXT_PATH +adminPath}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
-		   #elseif(m.map.type=="note")
-		   		  <a href="${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)
-		   #end
-		 #end
+           #elseif(m.map.type=="note")
+           <a href="${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)
+           #end
+       #end
 </span>
     </div>
 
-    <div class="infoContent" id="beizhutext" style="display:none">
+    #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/remark" "" {"class":"test","enctype":
+        "multipart/form-data"})
 
-        <p class="titleName">备注</p>
-        #@elementItem()
-
-            #@formControlDiv("col-16")
-                #@Teditor("content1" "content1" {"initialFrameHeight":"200" ,"datatype":"*10-500"})
-                    备注描述...最少输入10个字符#end
+        #hiddenInput("","storyId","",storyId)
+        <div class="infoContent" id="beizhutext" style="display:none">
+            <p class="titleName">备注</p>
+            #@elementItem()
+                #@formControlDiv("col-16")
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"200" ,"datatype":"*10-500"})
+                        备注描述...最少输入10个字符#end
+                #end
+                #@validateDiv("col-2")#end
             #end
-            #@validateDiv("col-2")#end
-        #end
-        <br>
+            <br>
 
-    #@elementItem()
-        <div class="col-12">
-            <div class="col-5">
+            #@elementItem()
+                <div class="col-12">
+                    <div class="col-5">
 
-            </div>
-            <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-            </div>
-            <div class="col-1">
-                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-            </div>
-            <div class="col-5"></div>
+                    </div>
+                    <div class="col-1">
+                        <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                    </div>
+                    <div class="col-1">
+                        #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+                    </div>
+                    <div class="col-5"></div>
+                </div>
+            #end
         </div>
+
     #end
-    </div>
 
 </div>
 
 <div style="width:30%;float:right">
-#*#include("/product/page/tabledemo/hrefbaseinfo.page")*#
-	#TypeInfo("demandhref" storyId)
+    #TypeInfo("demandhref" storyId)
 </div>
 
 

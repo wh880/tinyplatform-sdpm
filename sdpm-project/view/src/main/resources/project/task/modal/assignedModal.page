@@ -27,7 +27,7 @@
             #@sdpmItem("预计剩余")
                 <div class="input-group">
                     <input name="taskLeft" type="text" class="form-control" placeholder=""
-                           aria-describedby="basic-addon2" value=${task.taskLeft}>
+                           aria-describedby="basic-addon2" value=${task.taskLeft} datetype="n">
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
             #end

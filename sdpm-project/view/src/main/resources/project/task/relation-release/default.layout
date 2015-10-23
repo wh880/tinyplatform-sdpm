@@ -51,8 +51,8 @@
                         #end
                     #end
                     #if("no-demand"==cname)
-                        <div style="float:right">
-                            <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+                        <div class="r">
+                            <a href="#" id="showsearchmore-demand">&nbsp;&nbsp; #buttonIcon(iconClass="icon-search")搜索</a>
                         </div>
                     #end
                 #end
@@ -81,7 +81,7 @@
                     #end
                     #if("no-bug"==cname)
                         <div class="r">
-                            <a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
+                            <a href="#" id="showsearchmore-bug">#buttonIcon(iconClass="icon-search")搜索</a>
                         </div>
                     #end
                 #end

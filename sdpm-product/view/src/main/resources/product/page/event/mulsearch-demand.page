@@ -1,117 +1,5 @@
-
-##<span id="showsearchmore-demand">搜索</span>
-<form method="get" action="${TINY_CONTEXT_PATH}/quality/bug" id="searchform" class="form-condensed searchform">
-    <div class="hide">
-        <select id="operatortemp">
-            <option value="=">=</option>
-            <option value="!=">!=</option>
-            <option value="&gt;">&gt;</option>
-            <option value="&gt;=">&gt;=</option>
-            <option value="&lt;">&lt;</option>
-            <option value="&lt;=">&lt;=</option>
-            <option value="include">包含</option>
-            <option value="between">介于</option>
-            <option value="notinclude">不包含</option>
-            <option value="belong">从属于</option>
-        </select>
-        <select id="usertemp">
-            <option value="" selected="selected"></option>
-            <option value="admin">A:admin</option>
-            <option value="demo">D:Demo</option>
-            <option value="dev1">D:开发甲</option>
-            <option value="dev2">D:开发乙</option>
-            <option value="dev3">D:开发丙</option>
-            <option value="productManager">P:产品经理</option>
-            <option value="projectManager">P:项目经理</option>
-            <option value="tester1">T:测试甲</option>
-            <option value="tester2">T:测试乙</option>
-            <option value="tester3">T:测试丙</option>
-            <option value="testManager">T:测试经理</option>
-            <option value="closed">Closed</option>
-            <option value="$@me">自己</option>
-            <option value="null">空</option>
-        </select>
-        <select id="pritemp">
-            <option value=""></option>
-            <option value="3">3</option>
-            <option value="1">1</option>
-            <option value="44">44</option>
-            <option value="2">2</option>
-            <option value="4">4</option>
-            <option value="null">空</option>
-        </select>
-        <select id="statustemp">
-            <option value="" selected="selected"></option>
-            <option value="wait">未开始</option>
-            <option value="doing">进行中</option>
-            <option value="done">已完成</option>
-            <option value="pause">已暂停</option>
-            <option value="cancel">已取消</option>
-            <option value="closed">已关闭</option>
-            <option value="null">空</option>
-        </select>
-        <select id="contemp">
-            <option value="" selected="selected"></option>
-            <option value="unconfirmed">未确认</option>
-            <option value="confirmed">已确认</option>
-        </select>
-        <select id="bugType">
-            <option value="" selected="selected"></option>
-            <option value="codeerror">代码错误</option>
-            <option value="uiimprove">界面优化</option>
-            <option value="done">设计变更</option>
-            <option value="designchange">新增需求</option>
-            <option value="designflaw">设计缺陷</option>
-            <option value="closed">配置相关</option>
-            <option value="conrelated">安装部署</option>
-            <option value="saferelated">安全相关</option>
-            <option value="perissues">性能问题</option>
-            <option value="standard">标准规范</option>
-            <option value="testscript">测试脚本</option>
-            <option value="tracking">事务跟踪</option>
-            <option value="codeimprove">代码改进</option>
-            <option value="others">其他</option>
-            <option value="null">空</option>
-        </select>
-        <select id="wintemp">
-            <option value="" selected="selected"></option>
-            <option value="Windows">Windows</option>
-            <option value="Windows 8">Windows 8</option>
-            <option value="Windows 7">Windows 7</option>
-            <option value="Windows Vista">Windows Vista</option>
-            <option value="Windows XP">Windows XP</option>
-            <option value="Windows 2012">Windows 2012</option>
-            <option value="Windows 2008">Windows 2008</option>
-            <option value="Windows 2003">Windows 2003</option>
-            <option value="Windows 2000">Windows 2000</option>
-            <option value="Android">Android</option>
-            <option value="IOS">IOS</option>
-            <option value="WP8">WP8</option>
-            <option value="Linux">Linux</option>
-            <option value="Unix">Unix</option>
-            <option value="others">其他</option>
-            <option value="null">空</option>
-        </select>
-        <select id="nowstatustemp">
-            <option value="" selected="selected"></option>
-            <option value="draft">草稿</option>
-            <option value="lived">激活</option>
-            <option value="changed">已变更</option>
-            <option value="null">空</option>
-        </select>
-        <select id="closetemp">
-            <option value="" selected="selected"></option>
-            <option value="completed">已完成</option>
-            <option value="subdivided">已细分</option>
-            <option value="repeat">重复</option>
-            <option value="delay">延期</option>
-            <option value="nodo">不做</option>
-            <option value="cancelled">已取消</option>
-            <option value="designisso">设计如此</option>
-            <option value="null">空</option>
-        </select>
-##<span id="showsearchmore-demand">搜索</span>
-<form method="get" action="${TINY_CONTEXT_PATH +adminPath}/quality/bug" id="searchform"
+##<span id="showsearchmore">搜索</span>
+<form method="get" action="${TINY_CONTEXT_PATH +adminPath}/product/story" id="${storyTableId}form"
       class="form-condensed searchform">
     <div class="hide">
         <select id="operatortemp">
@@ -162,101 +50,62 @@
             <option value="closed">已关闭</option>
             <option value="null">空</option>
         </select>
-        <select id="contemp">
-            <option value="" selected="selected"></option>
-            <option value="unconfirmed">未确认</option>
-            <option value="confirmed">已确认</option>
-        </select>
-        <select id="bugType">
-            <option value="" selected="selected"></option>
-            <option value="codeerror">代码错误</option>
-            <option value="uiimprove">界面优化</option>
-            <option value="done">设计变更</option>
-            <option value="designchange">新增需求</option>
-            <option value="designflaw">设计缺陷</option>
-            <option value="closed">配置相关</option>
-            <option value="conrelated">安装部署</option>
-            <option value="saferelated">安全相关</option>
-            <option value="perissues">性能问题</option>
-            <option value="standard">标准规范</option>
-            <option value="testscript">测试脚本</option>
-            <option value="tracking">事务跟踪</option>
-            <option value="codeimprove">代码改进</option>
-            <option value="others">其他</option>
-            <option value="null">空</option>
-        </select>
-        <select id="wintemp">
-            <option value="" selected="selected"></option>
-            <option value="Windows">Windows</option>
-            <option value="Windows 8">Windows 8</option>
-            <option value="Windows 7">Windows 7</option>
-            <option value="Windows Vista">Windows Vista</option>
-            <option value="Windows XP">Windows XP</option>
-            <option value="Windows 2012">Windows 2012</option>
-            <option value="Windows 2008">Windows 2008</option>
-            <option value="Windows 2003">Windows 2003</option>
-            <option value="Windows 2000">Windows 2000</option>
-            <option value="Android">Android</option>
-            <option value="IOS">IOS</option>
-            <option value="WP8">WP8</option>
-            <option value="Linux">Linux</option>
-            <option value="Unix">Unix</option>
-            <option value="others">其他</option>
-            <option value="null">空</option>
-        </select>
-        <select id="nowstatustemp">
-            <option value="" selected="selected"></option>
-            <option value="draft">草稿</option>
-            <option value="lived">激活</option>
-            <option value="changed">已变更</option>
-            <option value="null">空</option>
-        </select>
-        <select id="closetemp">
-            <option value="" selected="selected"></option>
-            <option value="completed">已完成</option>
-            <option value="subdivided">已细分</option>
-            <option value="repeat">重复</option>
-            <option value="delay">延期</option>
-            <option value="nodo">不做</option>
-            <option value="cancelled">已取消</option>
-            <option value="designisso">设计如此</option>
-            <option value="null">空</option>
-        </select>
-    </div>
 
-	</div>
+    </div>
     <table class="table-condensed table-form" id="task-search">
-        <tbody><tr>
+        <tbody>
+        <tr>
             <td class="w-400px">
                 <table class="active-disabled">
                     <tbody>
-                    <tr id="searchbox1" class=""><td class="text-right w-60px"><span id="searchgroup1"><strong>第一组</strong></span><input type="hidden" name="andOr1" id="andOr1" value="AND">
-                    </td><td class="w-90px"><select name="infos[0].field" id="field1" class="form-control "></select>
-                    </td><td class="w-70px"><select name="infos[0].operate" id="operator1" class="form-control "></select>
-                    </td>
-                        <td id="valueBox1" ></td>
+                    <tr id="searchbox1" class="">
+                        <td class="text-right w-60px"><span id="searchgroup1"><strong>第一组</strong></span><input
+                                type="hidden" name="andOr1" id="andOr1" value="AND">
+                        </td>
+                        <td class="w-90px"><select name="infos[0].field" id="field1" class="form-control "></select>
+                        </td>
+                        <td class="w-70px"><select name="infos[0].operate" id="operator1"
+                                                   class="form-control "></select>
+                        </td>
+                        <td id="valueBox1"></td>
                     </tr>
-                    <tr id="searchbox2" class=""><td class="text-right w-60px" valign="middle"><select name="infos[1].relation" id="andOr2" class="form-control ">
-                        <option value="and" selected="selected">并且</option>
-                        <option value="or">或者</option>
-                    </select>
-                    </td><td class="w-90px"><select name="infos[1].field" id="field2" class="form-control ">
-                    </select>
-                    </td><td class="w-70px"><select name="infos[1].operate" id="operator2" class="form-control "></select>
-                    </td><td id="valueBox2"><input type="text" name="value2" id="value2" value="" class="form-control   ">
-                    </td></tr>
-                    <tr id="searchbox3" class=""><td class="text-right w-60px"><select name="infos[2].relation" id="andOr3" class="form-control ">
-                        <option value="and" selected="selected">并且</option>
-                        <option value="or">或者</option>
-                    </select>
-                    </td><td class="w-90px"><select name="infos[2].field" id="field3" class="form-control ">
-                    </select>
-                    </td><td class="w-70px"><select name="infos[2].operate" id="operator3" class="form-control "></select>
-                    </td><td id="valueBox3"></td>
+                    <tr id="searchbox2" class="">
+                        <td class="text-right w-60px" valign="middle"><select name="infos[1].relation" id="andOr2"
+                                                                              class="form-control ">
+                            <option value="and" selected="selected">并且</option>
+                            <option value="or">或者</option>
+                        </select>
+                        </td>
+                        <td class="w-90px"><select name="infos[1].field" id="field2" class="form-control ">
+                        </select>
+                        </td>
+                        <td class="w-70px"><select name="infos[1].operate" id="operator2"
+                                                   class="form-control "></select>
+                        </td>
+                        <td id="valueBox2"><input type="text" name="value2" id="value2" value=""
+                                                  class="form-control   ">
+                        </td>
                     </tr>
-                    </tbody></table>
+                    <tr id="searchbox3" class="">
+                        <td class="text-right w-60px"><select name="infos[2].relation" id="andOr3"
+                                                              class="form-control ">
+                            <option value="and" selected="selected">并且</option>
+                            <option value="or">或者</option>
+                        </select>
+                        </td>
+                        <td class="w-90px"><select name="infos[2].field" id="field3" class="form-control ">
+                        </select>
+                        </td>
+                        <td class="w-70px"><select name="infos[2].operate" id="operator3"
+                                                   class="form-control "></select>
+                        </td>
+                        <td id="valueBox3"></td>
+                    </tr>
+                    </tbody>
+                </table>
             </td>
-            <td class="text-center nobr w-90px form-inline"><select name="groupOperate" id="groupAndOr" class="form-control w-60px">
+            <td class="text-center nobr w-90px form-inline"><select name="groupOperate" id="groupAndOr"
+                                                                    class="form-control w-60px">
                 <option value="and" selected="selected">并且</option>
                 <option value="or">或者</option>
             </select>
@@ -314,21 +163,21 @@
             <td class="w-180px">
                 <div class="btn-group">
                     <button type="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
-                 #*   <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
+#*                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
                     <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>*#
                 </div>
             </td>
             <td>
                 <div style="width:105px;margin-top:3px;">
-					#@Tselect2F()
-						#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2F()
+                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="CRM">我的查询</option>
                             <option value="P2P">P2P系统</option>
                             <option value="o2o">o2o系统</option>
-						#end
-					##填写任意内容，侦听需重新填加 A侦听已内置
-						#@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
-					#end
+                        #end
+                    ##填写任意内容，侦听需重新填加 A侦听已内置
+                        #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+                    #end
                 </div>
             </td>
         </tr>
@@ -336,222 +185,240 @@
     </table>
 
     <div id="moreOrLite">
-        <a id="searchmore" href="javascript:;" ><i class="icon-double-angle-down icon-2x"></i></a>
-        <a id="searchlite" href="javascript:;" ><i class="icon-double-angle-up icon-2x"></i></a>
+        <a id="searchmore" href="javascript:;"><i class="icon-double-angle-down icon-2x"></i></a>
+        <a id="searchlite" href="javascript:;"><i class="icon-double-angle-up icon-2x"></i></a>
     </div>
 </form>
 
 <script type="text/javascript">
     <!--
-    $(function(){
-        $("#showsearchmore-demand").click(function(){
+    $(function () {
+        $("#showsearchmore-demand").click(function () {
             $(".searchform").toggleClass("showmore");
         });
-        $("#searchmore").click(function(){
-            $("#searchlite").css("display","block");
+        $("#searchmore").click(function () {
+            $("#searchlite").css("display", "block");
             $(this).hide();
             $("#searchbox5,#searchbox6,#searchbox2,#searchbox3").show();
         });
-        $("#searchlite").click(function(){
-            $("#searchmore").css("display","block");
+        $("#searchlite").click(function () {
+            $("#searchmore").css("display", "block");
             $(this).hide();
             $("#searchbox5,#searchbox6,#searchbox2,#searchbox3").hide();
         });
-        var itemlist=[]
+        var itemlist = []
         itemlist.push({
-            "name":"storyTitle",
-            "title":"需求名称",
-            "operator":"include",
-            "value":"text"
+            "name": "story_parentId",
+            "title": "父需求",
+            "operator": "include",
+            "value": "text"
         });
         itemlist.push({
-            "name":"storyId",
-            "title":"需求编号",
-            "operator":"=",
-            "value":"text"
+            "name": "module_id",
+            "title": "所属模块",
+            "operator": "=",
+            "value": "text"
         });
         itemlist.push({
-            "name":"storyKeywords",
-            "title":"关键词",
-            "operator":"include",
-            "value":"text"
+            "name": "plan_id",
+            "title": "所属计划",
+            "operator": "=",
+            "value": "status"
         });
         itemlist.push({
-            "name":"storyStage",
-            "title":"所处阶段",
-            "operator":"=",
-            "value":"nowstatus"
+            "name": "story_status",
+            "title": "需求状态",
+            "operator": "include",
+            "value": "text"
         });
         itemlist.push({
-            "name":"storyPri",
-            "title":"需求优先级",
-            "operator":"=",
-            "value":"pri"
+            "name": "story_source",
+            "title": "需求来源",
+            "operator": "=",
+            "value": "user"
         });
         itemlist.push({
-            "name":"moduleId",
-            "title":"所属模块",
-            "operator":"从属于",
-            "value":"text"
+            "name": "story_fromBug",
+            "title": "需求来源bug",
+            "operator": "=",
+            "value": "pri"
         });
         itemlist.push({
-            "name":"planName",
-            "title":"所属计划",
-            "operator":"=",
-            "value":"text"
+            "name": "story_title",
+            "title": "需求标题",
+            "operator": "=",
+            "value": "text"
         });
         itemlist.push({
-            "name":"storyEstimate",
-            "title":"预计工时",
-            "operator":"=",
-            "value":"text"
+            "name": "story_keywords",
+            "title": "需求关键字",
+            "operator": "=",
+            "value": "text"
         });
         itemlist.push({
-            "name":"storySource",
-            "title":"来源",
-            "operator":"=",
-            "value":"user"
+            "name": "story_type",
+            "title": "需求类型",
+            "operator": "=",
+            "value": "text"
         });
         itemlist.push({
-            "name":"storyFromBug",
-            "title":"来源Bug",
-            "operator":"=",
-            "value":"text"
+            "name": "story_pri",
+            "title": "需求优先级",
+            "operator": "=",
+            "value": "text"
         });
         itemlist.push({
-            "name":"storyOpenedBy",
-            "title":"由谁创建",
-            "operator":"=",
-            "value":"user"
+            "name": "story_estimate",
+            "title": "预计工时",
+            "operator": "=",
+            "value": "text"
         });
         itemlist.push({
-            "name":"storyReviewedBy",
-            "title":"由谁评审",
-            "operator":"include",
-            "value":"user"
+            "name": "story_stage",
+            "title": "所处阶段",
+            "operator": "=",
+            "value": "text"
         });
         itemlist.push({
-            "name":"storyAssignedTo",
-            "title":"指派给",
-            "operator":"=",
-            "value":"user"
+            "name": "story_mailto",
+            "title": "邮件列表",
+            "operator": "belong",
+            "value": "text"
         });
         itemlist.push({
-            "name":"storyClosedBy",
-            "title":"由谁关闭",
-            "operator":"=",
-            "value":"user"
+            "name": "story_openedBy",
+            "title": "创建人",
+            "operator": "=",
+            "value": "text"
         });
         itemlist.push({
-            "name":"storyLastEditedBy",
-            "title":"上次编辑者",
-            "operator":"=",
-            "value":"user"
-        });
-       /* itemlist.push({
-            "name":"sendto",
-            "title":"抄送给",
-            "operator":"=",
-            "value":"user"
-        });*/
-        itemlist.push({
-            "name":"storyClosedReason",
-            "title":"关闭原因",
-            "operator":"=",
-            "value":"close"
+            "name": "story_openedDate",
+            "title": "创建日期",
+            "operator": "=",
+            "value": "user"
         });
         itemlist.push({
-            "name":"storyVersion",
-            "title":"版本号",
-            "operator":">=",
-            "value":"text"
+            "name": "story_assignedTo",
+            "title": "指派对象",
+            "operator": "=",
+            "value": "user"
         });
         itemlist.push({
-            "name":"storyOpenedDate",
-            "title":"创建日期",
-            "operator":"=",
-            "value":"data"
+            "name": "story_assignedDate",
+            "title": "指派日期",
+            "operator": "=",
+            "value": "user"
         });
         itemlist.push({
-            "name":"storyReviewedDate",
-            "title":"评审时间",
-            "operator":">=",
-            "value":"data"
+            "name": "story_lastEditedBy",
+            "title": "最后编辑人",
+            "operator": "=",
+            "value": "user"
         });
         itemlist.push({
-            "name":"storyAssignedDate",
-            "title":"指派日期",
-            "operator":">=",
-            "value":"data"
+            "name": "story_lastEditedDate",
+            "title": "最后编辑日",
+            "operator": "=",
+            "value": "user"
         });
         itemlist.push({
-            "name":"storyClosedDate",
-            "title":"关闭日期",
-            "operator":">=",
-            "value":"data"
+            "name": "story_reviewedBy",
+            "title": "审核人",
+            "operator": "=",
+            "value": "user"
         });
         itemlist.push({
-            "name":"storyLastEditedDate",
-            "title":"上次修改日期",
-            "operator":"=",
-            "value":"data"
+            "name": "story_reviewedDate",
+            "title": "审核日期",
+            "operator": "=",
+            "value": "date"
+        });
+        itemlist.push({
+            "name": "story_closedBy",
+            "title": "关闭人",
+            "operator": "=",
+            "value": "date"
+        });
+        itemlist.push({
+            "name": "story_closedDate",
+            "title": "关闭日期",
+            "operator": "=",
+            "value": "date"
+        });
+        itemlist.push({
+            "name": "story_closedReason",
+            "title": "关闭原因",
+            "operator": "=",
+            "value": "date"
+        });
+        itemlist.push({
+            "name": "story_version",
+            "title": "需求版本",
+            "operator": "=",
+            "value": "date"
+        });
+        itemlist.push({
+            "name": "build_id",
+            "title": "对应版本",
+            "operator": "=",
+            "value": "date"
+        });
+        itemlist.push({
+            "name": "client_request_id",
+            "title": "请求",
+            "operator": "=",
+            "value": "date"
         });
 
-
-        function setValueBox(index,itemIndex){
-            $("#operator"+itemIndex).val(itemlist[index]["operator"]);
-            var sIndex = itemIndex-1;
-            switch(itemlist[index]["value"]){
+        function setValueBox(index, itemIndex) {
+            $("#operator" + itemIndex).val(itemlist[index]["operator"]);
+            var sIndex = itemIndex - 1;
+            switch (itemlist[index]["value"]) {
                 case "text":
-                    $("#valueBox"+itemIndex).html('<input type="text" name="infos['+sIndex+'].value" id="value'+itemIndex+'" value="" class="form-control">');
+                    $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control">');
                     break;
                 case "user":
-                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#usertemp").html()));
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#usertemp").html()));
                     break;
                 case "pri":
-                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#pritemp").html()));
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#pritemp").html()));
                     break;
                 case "status":
-                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#statustemp").html()));
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#statustemp").html()));
                     break;
                 case "date":
-                    $("#valueBox"+itemIndex).html('<input type="text" name="infos['+sIndex+'].value" id="value'+itemIndex+'" value="" class="form-control dateinput">');
-                    break;
-                case "nowstatus":
-                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#nowstatustemp").html()));
-                    break;
-                case "close":
-                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#closetemp").html()));
+                    $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control dateinput">');
                     break;
             }
         }
-        $("#field1,#field2,#field3,#field4,#field5,#field6").each(function(index){
+
+        $("#field1,#field2,#field3,#field4,#field5,#field6").each(function (index) {
             $(this).empty();
             var option;
-            for(var i=0;i<itemlist.length;i++){
+            for (var i = 0; i < itemlist.length; i++) {
                 option = $("<option>").val(itemlist[i]["name"]).text(itemlist[i]["title"]);
                 $(this).append(option);
             }
             $(this).val(itemlist[index]["name"]);
-            $("#operator"+(index+1)).html($("#operatortemp").html());
-            setValueBox(index,index+1);
-            $(this).on("change",function(){
-                for(var i=0;i<itemlist.length;i++){
-                    if(itemlist[i]["name"]==$(this).val()){
-                        setValueBox(i,$(this).attr("id").substr(-1));
+            $("#operator" + (index + 1)).html($("#operatortemp").html());
+            setValueBox(index, index + 1);
+            $(this).on("change", function () {
+                for (var i = 0; i < itemlist.length; i++) {
+                    if (itemlist[i]["name"] == $(this).val()) {
+                        setValueBox(i, $(this).attr("id").substr(-1));
                         break;
                     }
                 }
             });
 
         });
-        $(".searchform").on("click","input[class*=dateinput]",function(){
+        $(".searchform").on("click", "input[class*=dateinput]", function () {
             WdatePicker({
-                startDate:'%y-%M-01 00:00:00',dateFmt:"yyyy-MM-dd"
+                startDate: '%y-%M-01 00:00:00', dateFmt: "yyyy-MM-dd"
             })
         });
 
-        $("#${storyTableId}form").on("submit",function(){
+        $("#${storyTableId}form").on("submit", function () {
             $("#${storyTableId}").trigger("initnav");
             return false;
 

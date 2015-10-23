@@ -69,8 +69,9 @@ public class StoryManagerImpl implements StoryManager {
     public Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions,
                                          String groupOperate, String columnName, boolean asc) {
         String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
-        condition = condition != null && !"".equals(condition) ? (statusCondition != null && !"".equals(statusCondition) ? condition + " and "
-                + statusCondition : condition)
+        
+        condition = !StringUtil.isBlank(condition) ? (!StringUtil.isBlank(statusCondition) ? condition + " and "
+                + statusCondition : " " + condition)
                 : statusCondition;
         OrderBy orderBy = null;
         if (columnName != null && !"".equals(columnName)) {
@@ -153,11 +154,20 @@ public class StoryManagerImpl implements StoryManager {
     }
 
     public int[] deleteBatch(List<ProductStory> ids) {
-        // TODO Auto-generated method stub
         return productStoryDao.batchUpdateDel(ids);
     }
 
     public List<ProductStory> findProductNameByStoryId(Integer storyId) {
         return productStoryDao.findpNameBysId(storyId);
     }
+
+	public Pager<ProductStory> findPager(int start, int limit,ProductStory story, String condition, String columnName, boolean asc) {
+		
+		OrderBy orderBy = null;
+		if(!StringUtil.isBlank(columnName)){
+			orderBy = new OrderBy(NameUtil.resolveNameDesc(columnName), asc);
+		}
+		
+		return productStoryDao.complexQuery(start, limit, story, condition, orderBy);
+	}
 }

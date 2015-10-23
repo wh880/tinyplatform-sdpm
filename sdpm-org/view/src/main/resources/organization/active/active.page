@@ -1,23 +1,8 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
-##<style>
-##    .secrchLac {
-##        display: inline-block;
-##        padding-top: 5px
-##    }
-##    .activeSearch {
-##        float: left;
-##        margin-top: 5px;
-##        margin-left: 5px;
-##    }
-##</style>
-
 #import("/common/component/form.component")
 #set(editpagePath=
     "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
-
-
 #set(name="organizationActive")
-
 #include("/common/common.page")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -54,19 +39,14 @@
                 #hiddenInput("orgUserIdHidden","orgUserId","","")
             #end
             &nbsp;
-
-
-
             #@navSelect2("navProduct")
                 #@navSelect2Nav()<span>产品</span><span class="caret"></span>#end
                 #@navSelect2Body()
                     #@navSelect2Data()
-
                         <option value=null>产品</option>
                         #for(product : productList)
                         <option class="selProduct" value="${product?.productId}">${product?.productName}</option>
                     #end
-
                 #end
                 #@navSelect2Fix()
                     <a href="${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition"
@@ -81,21 +61,19 @@
             #@navSelect2Nav()<span>迭代</span><span class="caret"></span>#end
             #@navSelect2Body()
                 #@navSelect2Data()
-
                     <option value=null>迭代</option>
                     #for(project : projectList)
                     <option class="selProject" value="${project?.projectId}">${project?.projectName}</option>
                 #end
             #end
             #@navSelect2Fix()
-                <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-listall.page" class="r">所有迭代</a>
+                <a href="${TINY_CONTEXT_PATH +adminPath}/project/allProject" class="r">所有迭代</a>
                 &nbsp;
-                <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/addProduct.page">添加迭代</a>&nbsp;
+                <a href="${TINY_CONTEXT_PATH +adminPath}/project/preadd">添加迭代</a>&nbsp;
             #end
         #end
         #hiddenInput("projectIdHidden","projectId","","")
     #end
-
 </span>
     #div(divClass="clearfix")
 #end

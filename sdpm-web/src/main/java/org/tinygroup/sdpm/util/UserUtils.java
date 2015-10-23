@@ -115,6 +115,7 @@ public class UserUtils {
         Principal principal = getPrincipal();
         if (principal != null) {
             OrgUser user = getUserById(principal.getId());
+            return user;
         }
         // 如果没有登录，则返回实例化空的User对象。
         return new OrgUser();

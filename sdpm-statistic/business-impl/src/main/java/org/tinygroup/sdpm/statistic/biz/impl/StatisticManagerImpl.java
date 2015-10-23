@@ -5,8 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.statistic.biz.inter.StatisticManager;
 import org.tinygroup.sdpm.statistic.dao.StatisticDao;
-import org.tinygroup.sdpm.statistic.dao.pojo.ProjectTaskSta;
-import org.tinygroup.sdpm.statistic.dao.pojo.StatisticOrg;
+import org.tinygroup.sdpm.statistic.dao.pojo.*;
 
 import java.util.List;
 @Service
@@ -22,6 +21,18 @@ public class StatisticManagerImpl implements StatisticManager{
 
 	public List<ProjectTaskSta> findListProTask(ProjectTaskSta projectTaskSta) {
 		return statisticDao.findProTasks(projectTaskSta);
+	}
+
+	public List<QualityBugSta> findBugCreate(QualityBugSta qualityBugSta) {
+		return statisticDao.findBugCreate(qualityBugSta);
+	}
+
+	public List<Assigned> findAssigned(Assigned assigned) {
+		return statisticDao.findAssigned(assigned);
+	}
+
+	public List<QualityBugCall> findBugCall(QualityBugCall qualityBugCall) {
+		return statisticDao.findBugCall(qualityBugCall);
 	}
 
 }

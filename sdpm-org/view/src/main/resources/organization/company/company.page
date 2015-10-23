@@ -1,19 +1,4 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
-<style>
-    .tabLayout .tabBar span a {
-        color: #333
-    }
-
-    .tabLayout .tabBar .Current a {
-        color: #fff
-    }
-
-    .formText {
-        margin-top: -6px;
-        border: #eee 1px solid;
-        padding: 2px 0 16px
-    }
-</style>
 #set(name="organizationCompany")
 #include("/common/common.page")
 #@div()
