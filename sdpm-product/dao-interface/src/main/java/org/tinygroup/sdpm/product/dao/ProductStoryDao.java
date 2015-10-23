@@ -39,8 +39,8 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 	List<ProductStory> getByKeys(Integer... id);
 	
 	List<StoryCount> modelStoryCount(ProductStory story);
-	
-	int getCount(ProductStory story,Join join,Condition... condition);
+
+	Integer getCount(ProductStory story, Join join, Condition... condition);
 	
 	List<StoryCount> productStoryCount(ProductStory t);
 	
@@ -58,7 +58,7 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 	 * @param status
      * @return
      */
-	int countStatus(int productId,int status);
+	Integer countStatus(int productId, int status);
 	
 	ProductStory getReleteStoryByKey(Integer pk);
 
