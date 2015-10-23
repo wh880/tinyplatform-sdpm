@@ -3,7 +3,8 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
-#!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
+#!set(linkName="product-demand",sonitem="
+<li>"+"需求"+"</li>")
 
 
 <script type="text/javascript">
@@ -15,189 +16,88 @@
 </script>
 
 
-</style>
-
 <script>
-	$(document).ready(function(){
 
-		$("#subdivision").hide();
-		$("#repeat").hide();
+    $(document).ready(function () {
 
-		$("select[name='storyClosedReason']").on("change",function(){
-			var subdivision = $("#subdivision");
-			var repeat = $("#repeat");
-if
-(
-$
-(
-this
+        $("#subdivision").hide();
+        $("#repeat").hide();
 
-)
-.
+        $("select[name='storyClosedReason']").on("change", function () {
+            var subdivision = $("#subdivision");
+            var repeat = $("#repeat");
+            if ($(this).val() == '1') {
+                repeat.hide();
+                subdivision.show();
+            } else if ($(this).val() == '2') {
+                subdivision.hide();
+                repeat.show();
+            } else {
+                subdivision.hide();
+                repeat.hide();
+            }
 
-val
-(
-)
-=
-=
-'1'
-)
-{
-				repeat.hide();
-				subdivision.show();
-}
-else
 
-if
-(
-$
-(
-this
+        });
 
-)
-.
-
-val
-(
-)
-=
-=
-'2'
-)
-{
-				subdivision.hide();
-				repeat.show();
-			}else{
-				subdivision.hide();
-				repeat.hide();
-			}
-
-});
-
-	});
+    });
 </script>
 
-    #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/close" "" {"class":"test"})
-#hiddenInput("","deleted","","1")
-#hiddenInput("","storyId","",story?.storyId)
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/close" "" {"class":"test"})
+    #hiddenInput("","deleted","","1")
+    #hiddenInput("","storyId","",story?.storyId)
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">关闭</p>
-     #@elementItem()
-        #@colLabel()关闭原因：#end
-        #@formControlDiv("col-3")
-            #@tinySelect("storyClosedReason" story?.storyClosedReason {"class":"input-text","rel":"22"})
-                #foreach(s:getDict("proCloseReason"))
-                option value=
-                "${s?.value}"
-                >${s?
-                .text
+        #@elementItem()
+            #@colLabel()关闭原因：#end
+            #@formControlDiv("col-3")
+                #@tinySelect("storyClosedReason" story?.storyClosedReason {"class":"input-text","rel":"22"})
+                    #foreach(s:getDict("proCloseReason"))
+                        <option value="${s?.value}">${s?.text}</option>
+                    #end
 
-                }
-                <
-                /option>
                 #end
-
-		#end
+            #end
+            #@validateDiv("col-3")#end
         #end
-        #@validateDiv("col-3")#end
-    #end
-     #@elementItem("subdivision")
-         #@colLabel()<span class=
-         "c-red"
-         >
-         *<
-
-         /span>     #end
-        #@formControlDiv("col-3")
-            #tinyInput("text" "storyChildStories" "" {"datatype":"","nullmsg":"细分需求不能为空！","class":"input-text"})
+        #@elementItem("subdivision")
+            #@colLabel()<span class="c-red">*</span>细分需求：#end
+            #@formControlDiv("col-3")
+                #tinyInput("text" "storyChildStories" "" {"datatype":"","nullmsg":"细分需求不能为空！","class":"input-text"})
+            #end
+            #@validateDiv("col-2")#end
         #end
-        #@validateDiv("col-2")#end
-    #end
-     #@elementItem("repeat")
-         #@colLabel() span class=
-         "c-red"
-         >
-         *<
-
-         /span>重复需求：#end
-        #@formControlDiv("col-3")
-            #tinyInput("text" "storyDuplicateStory" ""{"datatype":"","nullmsg":"重复需求不能为空！","class":"input-text"})
+        #@elementItem("repeat")
+            #@colLabel()<span class="c-red">*</span>重复需求：#end
+            #@formControlDiv("col-3")
+                #tinyInput("text" "storyDuplicateStory" ""{"datatype":"","nullmsg":"重复需求不能为空！","class":"input-text"})
+            #end
+            #@validateDiv("col-2")#end
         #end
-        #@validateDiv("col-2")#end
-    #end
-
-         #@elementItem()
-         	 #@colLabel()备注：#end
-         	 #@formControlDiv("col-8")
-                 #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"200" })#end
-             #end
-        #end
-        </div>
 
         #@elementItem()
-        <div class="col-12">
-        <
-        div class
-
-        =
-        "col-5"
-        >
-
-        </div>
-          < div class
-
-        =
-        "col-1"
-        >
-        <
-        button style
-
-        =
-        "float: left"
-        type
-
-        =
-        "submit"
-        id
-
-        =
-        "submit"
-        class
-
-        =
-        "commitBtn"
-        >
-        保存<
-
-        /
-        button >
-        <
-
-        /
-        div >
-        < div class
-
-        =
-        "col-1"
-        >
-            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-            <
-
-        /
-        div >
-        < div class
-
-        =
-        "col-5"
-        >
-        <
-        /
-        div >
-        <
-
-        /div>
+            #@colLabel()备注：#end
+            #@formControlDiv("col-8")
+                #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"200" })#end
+            #end
         #end
+    </div>
+
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
 
     <br>
 </div>
