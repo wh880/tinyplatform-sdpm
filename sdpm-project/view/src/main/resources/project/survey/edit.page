@@ -124,7 +124,7 @@
                         #@Tselect2F()
                             #@Tselect2Body("projectStatus" project?.projectStatus; {"class":
                                 "input-text select2"})
-                                #foreach(status:getDict(projectStatus))
+                                #foreach(status:getDict("projectStatus"))
                                 <option value="${status?.value}">${status?.text}</option>
                                 #end
                             #end

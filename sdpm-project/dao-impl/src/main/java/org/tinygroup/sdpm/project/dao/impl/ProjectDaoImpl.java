@@ -88,6 +88,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         Select select = MysqlSelect.select(PROJECTTABLE.ALL,
                 FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_estimate) as estimate"),
                 FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed) as consumed"),
+                FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_left) as allLeft"),
                 FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent")
         )
                 .from(PROJECTTABLE).join(

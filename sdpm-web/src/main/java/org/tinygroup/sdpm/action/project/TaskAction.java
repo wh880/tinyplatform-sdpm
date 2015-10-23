@@ -27,7 +27,6 @@ import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -55,6 +54,8 @@ public class TaskAction extends BaseController {
     private StoryService productStoryService;
     @Autowired
     private ProjectProductService projectProductService;
+    @Autowired
+    private BurnService burnService;
 
     @RequiresPermissions(value = {"task", "project"}, logical = Logical.OR)
     @RequestMapping("index")
@@ -216,6 +217,7 @@ public class TaskAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.STARTED, task.getTaskId().toString(),
                     UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
                     taskService.findTask(task.getTaskId()), task, content);
+            burnService.updateDate(task.getTaskId());
         }
         model.addAttribute("task", task);
         return "project/task/index.page";
