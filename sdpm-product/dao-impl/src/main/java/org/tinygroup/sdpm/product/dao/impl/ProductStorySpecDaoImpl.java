@@ -271,4 +271,16 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 						PRODUCT_STORY_SPECTABLE.STORY_SPEC.eq(t.getStorySpec()),
 						PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.eq(t.getStoryVerification()));
 	}
+
+	public int getNewStoryVersion(Integer storyId) {
+		ProductStorySpec spec = new ProductStorySpec();
+		spec.setStoryId(storyId);
+		Pager<ProductStorySpec> pager = queryPager(0, 1, spec, new OrderBy("story_version", false));
+		if(pager!=null){
+			if(pager.getRecords().size()>0||pager.getRecords()!=null){
+				return pager.getRecords().get(0).getStoryVersion();
+			}
+		}
+		return -1;
+	}
 }

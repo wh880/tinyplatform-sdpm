@@ -76,12 +76,13 @@ public class EffortAction extends BaseController{
 	}
 	@RequestMapping("save")
 	public String add(SystemEffort systemEffort,Model model){
-		if(systemEffort.getEffortId()==null){
-			
-		systemEffort.setEffortBegin(new SimpleDateFormat("yyyy-MM-dd").format(systemEffort.getEffortDate()));
-			systemEffort.setEffortAccount(UserUtils.getUserAccount());
+		if (systemEffort.getEffortDate()!=null) {
+			if (systemEffort.getEffortId() == null) {
+				systemEffort.setEffortBegin(new SimpleDateFormat("yyyy-MM-dd").format(systemEffort.getEffortDate()));
+				systemEffort.setEffortAccount(UserUtils.getUserAccount());
+			}
+			effortService.save(systemEffort);
 		}
-		effortService.save(systemEffort);
 		return "project/note/notetable.page";
 	}
 	@RequestMapping("findPager")

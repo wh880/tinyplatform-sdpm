@@ -38,7 +38,9 @@
                                     #@Tselect2Body(
                                         "orgUserAccount" u?.orgUserAccount {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                         #for(u:user)
-                                        <option class="selUser" value=${u?.orgUserAccount}>${u?.orgUserAccount}</option>
+                                        <option value="${u?.orgUserAccount}">
+                                            <a class="selUser" val="${u?.orgUserAccount}">${u?.orgUserAccount}</a>
+                                        </option>
                                         #end
                                         
                                     #end
@@ -67,9 +69,8 @@
             $("#noteTable").trigger("refresh");
         });
 
-        $(".selUser").click(function(e){
-            $("#noteTable").attr("data-url", actionUrl + "?effortAccount=" + $(this).attr("value"));
-            $("#noteTable").trigger("refresh");
+        $(".selUser").(function(e){
+            alert("ggg");
         });
     });
 </script>

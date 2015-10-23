@@ -4,7 +4,10 @@
     #labelCheckbox(ckId="overdate" labelText="过期计划")
 #end
 <div style="height: 10px;"></div>
-#@tableStriped("table-border")
+<style>
+    .multable tbody tr td{vertical-align: middle}
+</style>
+#@tableStriped("table-border multable ")
     #@thead()
         #@tr("text-c")
             #@th()
@@ -41,7 +44,7 @@
             #for(p:product)
                  #@tr("text-c")
                  <td rowspan=${p?.value.size()+1}> ${p?.key?.productName} </td>
-                 <td rowspan=${p?.value.size()+1}>${p?.key?.productCreatedBy}</td>
+                 <td rowspan=${p?.value.size()+1}>${UserUtils.getUserById(p?.key?.productCreatedBy).orgUserRealName}</td>
                     #if(!p.value)
                             <td></td>
                             <td></td>
@@ -65,8 +68,6 @@
                  #end
                 #end
             #end
-
-
         #end
     #end
 #end
