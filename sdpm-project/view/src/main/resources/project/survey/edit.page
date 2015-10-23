@@ -17,11 +17,6 @@
     #end
 #end
 <style>
-    #*.tabLayout .tabBar span a{color:#333}
-    .tabLayout .tabBar .Current a{color:#fff}
-    .operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
-    .b {margin-left: 8px;}*#
-
     .hidden_namesty {
         margin-left: 17%
     }
@@ -45,220 +40,223 @@
             #@div(divClass="operationbar")
             <a href="#">项目名称</a>>编辑项目
             #end
-            #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/editsave" "" {"class":"test"})
-                #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
-                #@elementItem()
-                    #@colLabel()项目名称#end
-                    #@formControlDiv("col-8")
-                        #tinyInput(
-                            "text" "projectName" project?.projectName{"style":"width:300px","placeholder":"请输入项目名称",
-                            "datatype":"*4-16",
-                            "nullmsg":"项目名称不能为空！","id":"","class":"input-text"})
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@elementItem()
-                    #@colLabel()项目代号#end
-                    #@formControlDiv("col-8")
-                        #tinyInput(
-                            "text" "projectCode" project?.projectCode{"style":"width:300px","placeholder":"请输入项目代号",
-                            "datatype":"*4-16",
-                            "nullmsg":"项目代号不能为空！","id":"","class":"input-text"})
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@elementItem()
-                    #@colLabel()起始日期#end
-                    #@formControlDiv("col-8")
-                        #@tinyDateInput(
-                            "projectBegin" project?.projectBegin "YYYY-MM-DD" {"style":"width:260px","datatype":"*",
-                            "nullmsg":"日期不能为空",
-                            "placeholder":"选择日期"})#end
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@elementItem()
-                    #@colLabel()结束日期#end
-                    #@formControlDiv("col-8")
-                        #@tinyDateInput(
-                            "projectEnd" project?.projectEnd "YYYY-MM-DD" {"style":"width:260px","datatype":"*",
-                            "nullmsg":"日期不能为空",
-                            "placeholder":"选择日期"})#end
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@elementItem()
-                    #@sdpmItem("可用工作日")
-                    <div class="input-group">
-                        <input name="projectDays" type="text" class="form-control" placeholder=""
-                               value=${project?.projectDays}
-                               aria-describedby="basic-addon2">
-                        <span class="input-group-addon" id="basic-addon2">小时</span>
-                    </div>
-                    #end
-                #end
-                #@elementItem()
-                    #@sdpmItem("项目类型")
-                        #@Tselect2F()
-                            #@Tselect2Body(
-                                "projectType" project?.projectType {"class":
-                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                #foreach(type:getDict("projectType"))
-                                <option value="${type?.value}">${type?.text}</option>
-                                #end
-                            #end
-                        #end
-                    #end
-                #end
-                #@elementItem()
-                    #@sdpmItem("团队名称")
-                        #tinyInput(
-                            "text" "projectTeam" project?.projectTeam{"style":"width:300px","placeholder":"","datatype":
-                            "*4-16","nullmsg":
-                            "标题不能为空！","id":"username","class":"input-text"})
-                    #end
-                #end
-                #@elementItem()
-                    #@colLabel()项目状态#end
-                    #@formControlDiv("col-8")
-                        #@Tselect2F()
-                            #@Tselect2Body("projectStatus" project?.projectStatus; {"class":
-                                "input-text select2"})
-                                #foreach(status:getDict("projectStatus"))
-                                <option value="${status?.value}">${status?.text}</option>
-                                #end
-                            #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
-
-                        #end
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@elementItem()
-                    #@colLabel()产品负责人#end
-                    #@formControlDiv("col-8")
-                        #@Tselect2F()
-                            #@Tselect2Body("projectPo" project?.projectPO {"class":
-                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                #foreach(t : teamList)
-                                <option value="${t?.teamUserId}">${t.teamUserId}</option>
-                                #end
-                            #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
-                            #end
-                        #end
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@elementItem()
-                    #@colLabel()项目负责人#end
-                    #@formControlDiv("col-8")
-                        #@Tselect2F()
-                            #@Tselect2Body("projectPm" project?.projectPm {"class":
-                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                #foreach(t : teamList)
-                                <option value="${t?.teamUserId}">${t?.teamUserId}</option>
-                                #end
-                            #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
-                            #end
-                        #end
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@elementItem()
-                    #@colLabel()测试负责人#end
-                    #@formControlDiv("col-8")
-                        #@Tselect2F()
-                            #@Tselect2Body("projectQd" project?.projectQd {"class":
-                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                #foreach(t : teamList)
-                                <option value="${t?.teamUserId}">${t?.teamUserId}</option>
-                                #end
-                            #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r ">全部</a>
-                            #end
-                        #end
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@elementItem()
-                    #@colLabel()发布负责人#end
-                    #@formControlDiv("col-8")
-                        #@Tselect2F()
-                            #@Tselect2Body("projectRd;" project?.projectRd {"class":
-                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                #foreach(t : teamList)
-                                <option value="${t?.teamUserId}">${t?.teamUserId}</option>
-                                #end
-                            #end
-                        ##填写任意内容，侦听需重新填加 A侦听已内置
-                            #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
-                            #end
-                        #end
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
-                #@elementItem()
-                    #@sdpmItem("关联产品")
-                        #@tinySelect(
-                            "linkProduct" project?.linkProduct {"class":"input-text select2","rel":"22","multiple":
-                            "multiple"})
-                            #for(p : prodcutList)
-                            #@tinyOptionItem(p.productId)${p.productName}#end
-                        #end
-                    #end
-                #end
-            <br/>
-                #@elementItem()
-                    #@sdpmItem("项目描述")
-                        #@Teditor("projectDesc" "content" {"initialFrameHeight":"200"})${project?.projectDesc}#end
-                    #end
-                #end
-                #@elementItem()
-                    #@sdpmItem("访问控制")
-                        #@formControlDiv("skin-minimal col-9")
-                            #foreach(acl : getDict("projectAcl"))
-                                #@tinyRadio("projectAcl" acl.value "")${acl.text}#end
-                            #end
-                        #end
-                    #end
-                #end
-                #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
-                    #@colLabel()分组白名单#end
-                    #@skinMinimal("col-8")
-                        #@Tcheckboxes("whiteList" project?.projectWhiteList)
-                            #foreach(wl : getDict("whiteList"))
-                                #@gridSysCol(2)
-                                    #@Tcheckbox(wl.value)${wl?.text}#end
-                                #end
-                            #end
-                        #end
-                        #@validateDiv("col-2")#end
-                    #end
-                #end
-            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-            <a href="${TINY_CONTEXT_PATH+adminPath}/project/survey/index.page">#buttonDefault(caption="返回")</a>
-            #end
-
         #end
     #end
 #end
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/editsave" "" {"class":"test"})
+    #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
+    #@elementItem()
+        #@sdpmItem("项目名称" "*")
+            #tinyInput(
+                "text" "projectName" project?.projectName {"placeholder":"请输入项目名称","datatype":"*","nullmsg":"项目名称不能为空！",
+                "class":"input-text"})
+            #@validateDiv("col-2")#end
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("项目代号" "*")
+            #tinyInput(
+                "text" "projectCode" project?.projectCode {"placeholder":"请输入项目代号","datatype":"*","nullmsg":"项目代号不能为空！",
+                "class":"input-text"})
+            #@validateDiv("col-2")#end
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("起始日期" "*")
+            #@tinyDateInput("projectBegin"  formatDate(project?.projectBegin){"style":"width:275px",
+            "datatype":"*","nullmsg":"开始日期不能为空","placeholder":"选择日期"})
+            #end
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("结束日期" "*")
+            #@tinyDateInput(
+                "projectEnd" formatDate(project?.projectEnd,
+                "yyyy-MM-dd") "yyyy-MM-dd" {"style":"width:275px","datatype":"*","nullmsg":"结束日期不能为空",
+            "placeholder":
+            "选择日期"})#end
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("可用工作日")
+        <div class="input-group">
+            <input name="projectDays" type="text" class="form-control" placeholder=""
+                   value=${project?.projectDays}
+                   aria-describedby="basic-addon2">
+            <span class="input-group-addon" id="basic-addon2">小时</span>
+        </div>
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("项目类型")
+            #@Tselect2F()
+                #@Tselect2Body(
+                    "projectType" project?.projectType {"class":
+                    "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #foreach(type:getDict("projectType"))
+                    <option value="${type?.value}">${type?.text}</option>
+                    #end
+                #end
+            #end
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("团队名称" "*")
+            #tinyInput("text" "projectTeam" project?.projectTeam {"placeholder":"请输入团队名称","datatype":"*","nullmsg":
+                "团队名称不能为空","class":"input-text"})
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("关联产品")
+            #@Tselect2F()
+                #@Tselect2Body("linkProduct" "" {"class":"input-text select2","multiple":"multiple"})
+                    #foreach(p : prodcutList)
+                    <option value="${p?.productId}">${p.productName}</option>
+                    #end
+                #end
+                #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
+                #end
+            #end
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("项目状态")
+            #@Tselect2F()
+                #@Tselect2Body(
+                    "projectType" project?.projectStatus {"class":"input-text select2","minimumResultsForSearch":
+                    "Infinity"}) ##,"multiple":"multiple"加上为多选项
+                <option value="">/</option>
+                    #foreach(type : getDict("projectType"))
+                    <option value=${type.value}>${type.text}</option>
+                    #end
+                #end
+            #end
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("产品负责人")
+            #@Tselect2F()
+                #@Tselect2Body("projectPo" project?.projectPO {"class":"input-text select2"})
+                    #foreach(t : team)
+                    <option value="${t?.teamUserId}">
+                        ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                    </option>
+                    #end
+                #end
+                #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                #end
+            #end
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("项目负责人")
+            #@Tselect2F()
+                #@Tselect2Body("projectPm" project?.projectPm {"class":"input-text select2"})
+                    #foreach(t : team)
+                    <option value="${t?.teamUserId}">
+                        ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                    </option>
+                    #end
+                #end
+                #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                #end
+            #end
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("测试负责人")
+            #@Tselect2F()
+                #@Tselect2Body("projectQd" project?.projectQd {"class":"input-text select2"})
+                    #foreach(t : team)
+                    <option value="${t?.teamUserId}">
+                        ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                    </option>
+                    #end
+                #end
+                #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                #end
+            #end
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("发布负责人")
+            #@Tselect2F()
+                #@Tselect2Body("projectRd" project?.projectRd {"class":"input-text select2"})
+                    #foreach(t : team)
+                    <option value="${t?.teamUserId}">
+                        ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                    </option>
+                    #end
+                #end
+                #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                #end
+            #end
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("项目描述")
+            #@Teditor("projectDesc" "content" {"initialFrameHeight":"200","initialFrameWidth":
+                "700"})${project?.projectDesc}#end
+        #end
+    #end
+    #@elementItem()
+        #@sdpmItem("访问控制")
+            #@formControlDiv("skin-minimal col-10")
+                #foreach(acl : getDict("projectAcl"))
+                    #@tinyRadio("projectAcl" acl.value "")${acl.text}#end
+                #end
+            #end
+        #end
+    #end
+    #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
+        #@skinMinimal("col-8")
+            #@Tcheckboxes("whiteList" project?.projectWhiteList)
+                #foreach(wl : getDict("whiteList"))
+                    #@gridSysCol(2)
+                        #@Tcheckbox(wl.value)${wl?.text}#end
+                    #end
+                #end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+    #end
+    #@elementItem()
+    <div class="col-12">
+        <div class="col-5">
+
+        </div>
+        <div class="col-1">
+            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+        </div>
+        <div class="col-1">
+            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+        </div>
+        <div class="col-5"></div>
+    </div>
+    #end
 #end
 
+
+
 <script type="text/javascript">
-    function setWhite(acl) {
-        acl == 'custom' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
-    }
+
+    $(function () {
+        $("form").Validform({});
+
+        $("input[name='projectAcl']").click(function (e) {
+            $(this).attr("value") == "3" ? $("#whitelistBox").removeClass("hidden") : $("#whitelistBox").addClass("hidden");
+        })
+    });
+
 </script>

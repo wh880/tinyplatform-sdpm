@@ -22,7 +22,7 @@
                             #@Tselect2F()
                                 #@Tselect2Body("moduleId" task.taskModule {"class":"input-text select2"})
                                     <option value="">/</option>
-                                    #foreach(m : modulesList)
+                                    #foreach(m : moduleList)
                                         <option value="${m.moduleId}">${m.moduleName}</option>
                                     #end
                                 #end

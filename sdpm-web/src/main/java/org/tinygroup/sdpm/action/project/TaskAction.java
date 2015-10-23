@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -56,6 +57,8 @@ public class TaskAction extends BaseController {
     private ProjectProductService projectProductService;
     @Autowired
     private BurnService burnService;
+    @Autowired
+    private UserService userService;
 
     @RequiresPermissions(value = {"task", "project"}, logical = Logical.OR)
     @RequestMapping("index")
@@ -432,10 +435,16 @@ public class TaskAction extends BaseController {
         model.addAttribute("project", project);
 
         //查询所属模块string
-        String modulPath = ModuleUtil.getPath(task.getTaskModule(), " > ", moduleService, task.getTaskProject().toString(), true);
+        String modulPath = "";
+        if (task.getTaskModule() == null) {
+            modulPath = "/";
+        } else {
+            modulPath = ModuleUtil.getPath(task.getTaskModule(), " > ", moduleService, task.getTaskProject().toString(), true);
+        }
         model.addAttribute("modulPath", modulPath);
         //查询相关需求名字
-        String storyTitle = productStoryService.findStory(task.getTaskStory()).getStoryTitle();
+        ProductStory productStory = productStoryService.findStory(task.getTaskStory());
+        String storyTitle = productStory == null ? "" : productStory.getStoryTitle();
         model.addAttribute("storyTitle", storyTitle);
         return "project/task/basicInformation.pagelet";
     }
@@ -508,7 +517,7 @@ public class TaskAction extends BaseController {
             }
 
             map.put("pColor", t.getTaskPri().toString());
-            map.put("pRes", t.getTaskAssignedTo());
+            map.put("pRes", userService.findUser(t.getTaskAssignedTo()).getOrgUserRealName());
             //进度
             float comp;
             if ((t.getTaskConsumed() == null || t.getTaskConsumed() == 0) || (t.getTaskConsumed() + t.getTaskLeft() == 0)) {
@@ -570,7 +579,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/grouping")
-    public String grouping(String groupKey) {
+    public String grouping(String groupKey, Model model) {
 
         return "project/task/grouping.page";
     }

@@ -151,7 +151,8 @@ public class ProjectAction extends BaseController {
             List<ProjectTeam> teamList = teamService.findTeamByProjectId(project.getProjectId());
             model.addAttribute("teamList", teamList);
             model.addAttribute("project", project);
-            //还需要查询其他相关任务剩余时间的信息
+            List<Product> list = productService.findProductList(new Product(), "productId", "desc");
+            model.addAttribute("prodcutList", list);
             return "project/survey/edit.page";
         }
         return "error";

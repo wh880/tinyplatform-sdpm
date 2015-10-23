@@ -17,15 +17,15 @@
         #end
     ##body end
         #@div(divClass="operationbar")
-        <span class="f">
-            <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/viewingtask.page" "ml-5" class=${type
-            =="noclose"?"active_btn":""}>查看任务关系</a>
-            <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/maintenancetask.page" "ml-5" class=${type
-            =="all"?"active_btn":""}>维护任务关系</a>
-        </span>
+        ##        <span class="f">
+        ##            <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/viewingtask.page" "ml-5" class=${type
+        ##            =="noclose"?"active_btn":""}>查看任务关系</a>
+        ##            <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/maintenancetask.page" "ml-5" class=${type
+        ##            =="all"?"active_btn":""}>维护任务关系</a>
+        ##        </span>
         #end
     #end
 #end
 #gantt("GanttChartDIV" TINY_CONTEXT_PATH+adminPath+"/project/task/gantt/init" TINY_CONTEXT_PATH+adminPath+
-    "/project/task/gantt/find")
+    "/project/task/gantt/find" {"width":"900","heigh":"600"})
 

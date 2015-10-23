@@ -6,7 +6,7 @@
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>关闭</p>
         #@elementItem()
-            #@colLabel()备注&nbsp#end
+            #@colLabel()备注#end
             #@formControlDiv("col-8")
                 #@Teditor("content" "content" {"initialFrameHeight":"150"})#end
             #end

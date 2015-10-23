@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -18,6 +19,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangying14938 on 2015-09-22.燃尽图
@@ -33,7 +35,7 @@ public class BurnAction extends BaseController {
     private ProjectService projectService;
 
     @RequestMapping("/init")
-    public String initBurn(HttpServletRequest request, Model model, Integer choose, Integer interval) {
+    public String initBurn(HttpServletRequest request, Model model, Integer choose, Integer interval, String ajax) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         if (interval == null) {
             interval = 3;
@@ -115,8 +117,15 @@ public class BurnAction extends BaseController {
         model.addAttribute("average", average);
         model.addAttribute("days", days);
         model.addAttribute("left", left);
-
+        model.addAttribute("interval", interval);
         model.addAttribute("choose", choose);
-        return "project/task/projectBurn.page";
+        return "project/task/projectBurn.page" + (ajax == null ? "" : "let");
+    }
+
+    @ResponseBody
+    @RequestMapping("/update")
+    public Map<String, String> update() {
+        burnService.updateDate(null);
+        return resultMap(true, "更新成功");
     }
 }

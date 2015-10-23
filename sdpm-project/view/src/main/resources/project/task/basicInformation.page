@@ -12,7 +12,7 @@
                 #end
                 #@tr()
                     #@td()所属模块#end
-                    #@td()${modulPath==null?modulPath:"/"}#end
+                    #@td()${(modulPath==null || modulPath == "")?"/":modulPath}#end
                 #end
                 #@tr()
                     #@td()相关需求#end

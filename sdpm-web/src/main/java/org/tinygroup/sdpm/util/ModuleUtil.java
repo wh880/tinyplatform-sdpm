@@ -85,7 +85,11 @@ public class ModuleUtil {
     }
 
     public static String getPath(int moduleId, String division, ModuleService moduleService,String root, boolean openRoot){
+
         SystemModule module = moduleService.findById(moduleId);
+        if (module == null) {
+            return "/";
+        }
         if(module.getModulePath()==null||"".equals(module.getModulePath())||"0,".equals(module.getModulePath())){
             return module.getModuleName();
         }
