@@ -37,12 +37,8 @@ ${CmsUtils.getProductList()?.get(0)?.productName}
 #end
 #@navSelect2Fix()
 
-<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page" class="r">所有产品</a>&nbsp;
-<!--新增产品-->
-<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page">添加产品</a>&nbsp;
-
-
-#end
+<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>&nbsp
+<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp#end
 #end
 
 #hiddenInput("productIdHidden","productId","","")

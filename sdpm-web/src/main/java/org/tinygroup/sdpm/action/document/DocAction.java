@@ -29,12 +29,16 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.CmsUtils;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +48,10 @@ import java.util.Map;
 @Controller
 @RequestMapping(value="/a/document")
 public class DocAction extends BaseController{
+	
+	
+	public static final String COOKIE_DOCLIB_ID ="documentLibId";
+	
 	@Autowired
 	private DocService docservice;
 	@Autowired
@@ -59,7 +67,7 @@ public class DocAction extends BaseController{
 	@Autowired
 	private UserService userService;
 	
-	/*
+	/**
 	 * 跳转主页
 	 * 
 	 * @param doclib
@@ -69,23 +77,31 @@ public class DocAction extends BaseController{
 	 * @param tree
 	 * @param moduleId
 	 * @return
-	 * 
 	 */
 	@RequestMapping("")
-	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange,String tree, String moduleId)
-	{	
-		
-		List<DocumentDoclib> list=docservice.findDoclibList(new DocumentDoclib());		
-
-		
-		if(list.size()>0&&!("true".equals(change))&&!("true".equals(docChange))&&!("true".equals(tree))){
-			if(null==request.getSession().getAttribute("documentLibId")||doclib.getDocLibId()==null){
-				request.getSession().setAttribute("documentLibId",list.get(0).getDocLibId());
-			}else {
-				request.getSession().setAttribute("documentLibId",doclib.getDocLibId());
+	public String docIndex(@CookieValue(required = false, value = COOKIE_DOCLIB_ID) Integer documentLibId,
+			DocumentDoclib docLib,String change,String docChange,String tree, String moduleId,
+			HttpServletRequest request, HttpServletResponse response, Model model)	{
+	/*	if (null!=docLib.getDocLibId()) {
+			documentLibId=docLib.getDocLibId();
+			CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString(),-1);
+		}else {
+			if (null==documentLibId) {
+				List<DocumentDoclib> list=docservice.findDoclibList(new DocumentDoclib());		
+				if (list!=null&&!list.isEmpty()) {
+					documentLibId=list.get(0).getDocLibId();
+					CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString(),-1);
+				}
 			}
-		}	
-		
+		}	*/
+		/*if (null==documentLibId) {
+			List<DocumentDoclib> list=docservice.findDoclibList(new DocumentDoclib());		
+			if (list!=null&&!list.isEmpty()) {
+				documentLibId=list.get(0).getDocLibId();
+				CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString(),-1);
+			}
+		}*/
+				
 		OrgUser user = new OrgUser();		
 		List<OrgUser> userList = userService.findUserList(user);
 		
@@ -108,13 +124,25 @@ public class DocAction extends BaseController{
         model.addAttribute("projectList", projectList);
         model.addAttribute("moduleList", moduleList);
         model.addAttribute("libList", libList);
-		request.getSession().setAttribute("libList",list);
 		request.getSession().setAttribute("moduleId", moduleId);
+
 		return "/document/document.page";
 	}
 	
-	/*
-	 * 首页查出数据的action
+	/**
+	 * 首页查出数据
+	 * 
+	 * @param moduleId
+	 * @param request
+	 * @param page
+	 * @param limit
+	 * @param order
+	 * @param ordertype
+	 * @param doc
+	 * @param model
+	 * @param groupOperate
+	 * @param searchInfos
+	 * @return
 	 */
 	@RequestMapping(value="/doc/list")
 	public String docList(String moduleId, HttpServletRequest request,Integer page,Integer limit,String order,String ordertype,DocumentDoc doc,Model model ,String groupOperate, SearchInfos searchInfos)
@@ -124,13 +152,14 @@ public class DocAction extends BaseController{
 		if("desc".equals(ordertype)){
 			asc = false;
 		}
+		Integer libId = Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID));
 		String condition = null;
 		if(!StringUtil.isBlank(moduleId)){
-			if(moduleId.contains("p")&&((Integer)request.getSession().getAttribute("documentLibId"))==1){
+			if(moduleId.contains("p")&&libId==1){
 				doc.setDocProduct(Integer.parseInt(moduleId.substring(1)));
 				Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, condition,searchInfos,groupOperate, order, asc);
 				model.addAttribute("docpager", docpager);
-			}else if(moduleId.contains("p")&&((Integer)request.getSession().getAttribute("documentLibId"))==2) {
+			}else if(moduleId.contains("p")&&libId==2) {
 				doc.setDocProject(Integer.parseInt(moduleId.substring(1)));
 				Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, condition,searchInfos,groupOperate, order, asc);
 				model.addAttribute("docpager", docpager);
@@ -152,21 +181,25 @@ public class DocAction extends BaseController{
 				model.addAttribute("docpager", docpager);
 			}
 		}else{
-			doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
+			doc.setDocLibId(libId);
 			Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, null,searchInfos,groupOperate, order, asc);
 			model.addAttribute("docpager", docpager);
 		}
 		return "/data/datalist.pagelet";
 	}
 	
-	/*
-	 * 添加文档的跳转的方法
+	/**
+	 * 添加文档的跳转
+	 * 
+	 * @param request
+	 * @param model
+	 * @return
 	 */
 	@RequiresPermissions(value={"add-doc"})
 	@RequestMapping(value="/doc/add")
 	public String createDoc(HttpServletRequest request ,Model model)
 	{		
-		Integer libid = (Integer) request.getSession().getAttribute("documentLibId");
+		Integer libid = Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID));
 		if(libid == 1){
 			Product product = new Product();
 			List<Product> list = productService.findProductList(product);
@@ -189,13 +222,22 @@ public class DocAction extends BaseController{
 		}
 	}
 	
-	/*
-	 * 添加文档的保存方法
+	/**
+	 * 保存文档
+	 * 
+	 * @param request
+	 * @param systemAction
+	 * @param doc
+	 * @param file
+	 * @param title
+	 * @param model
+	 * @return
+	 * @throws IOException
 	 */
 	@RequestMapping(value="/doc/addSave",method=RequestMethod.POST)
 	public String addSave(HttpServletRequest request,SystemAction systemAction,DocumentDoc doc,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,Model model) throws IOException{	
 		List<Product> product = productService.findProductList(new Product());
-		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
+		doc.setDocLibId(Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID)));
 		doc.setDocDeleted("0");	
 		doc.setDocAddedBy(UserUtils.getUser().getOrgUserId());
 		DocumentDoc document = docservice.createNewDoc(doc);
@@ -219,8 +261,13 @@ public class DocAction extends BaseController{
 		return "redirect:"+"/a/document?docChange=true&moduleId="+request.getSession().getAttribute("moduleId");
 	}
 	
-	/*
-	 * 编辑文档的跳转的方法
+	/**
+	 * 编辑文档的跳转
+	 * 
+	 * @param request
+	 * @param model
+	 * @param docId
+	 * @return
 	 */
 	@RequiresPermissions(value={"docedit"})
 	@RequestMapping(value="/doc/edit")
@@ -229,26 +276,34 @@ public class DocAction extends BaseController{
 		SystemModule module = new SystemModule();
 		DocumentDoc doc = new DocumentDoc();
 		module.setModuleType("doc");
-		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
 		doc = docservice.findDocById(docId);
 		List<Product> list1 = productService.findProductList(new Product());
 		List<Project> list2 = projectService.findList();
 		List<SystemModule> listModule = moduleService.findModuleList(module);
+		List<DocumentDoclib> libList = docservice.findDoclibList(new DocumentDoclib());
 		model.addAttribute("doc", doc);
 		model.addAttribute("productList", list1);
 		model.addAttribute("projectList", list2);
 		model.addAttribute("listModule", listModule);
+		model.addAttribute("libList", libList);
 		return "/document/doc-edit.page";
 	}
 	
-	/*
-	 * 编辑文档的保存的方法
+	/**
+	 * 编辑文档的保存
+	 * 
+	 * @param doc
+	 * @param systemAction
+	 * @param model
+	 * @return
 	 */
 	@RequestMapping(value="/doc/editSave",method=RequestMethod.POST)
-	public String editSave(DocumentDoc doc,SystemAction systemAction,Model model){
+	public String editSave(DocumentDoc doc,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,SystemAction systemAction,Model model) throws IOException{
 		DocumentDoc documentDoc = docservice.findDocById(doc.getDocId());
 		doc.setDocEditedBy(UserUtils.getUser().getOrgUserId());
 		docservice.editDoc(doc);
+		
+		uploads(file,doc.getDocId(), ProfileType.DOCUMENT,title);
 		
 		LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
 				LogUtil.LogAction.EDITED, 
@@ -262,8 +317,16 @@ public class DocAction extends BaseController{
 		return "redirect:"+"/a/document?docChange=true";
 	}
 	
-	/*
-	 *查看文档基本信息
+	/**
+	 * 文档信息页面
+	 * 
+	 * @param request
+	 * @param systemAction
+	 * @param doc
+	 * @param systemProfile
+	 * @param model
+	 * @param docid
+	 * @return
 	 */
 	@RequestMapping("/doc/view")
 	public String docView(HttpServletRequest request, SystemAction systemAction,DocumentDoc doc,SystemProfile systemProfile,Model model,Integer docid){
@@ -279,13 +342,17 @@ public class DocAction extends BaseController{
 		return "/document/doc-view.page";
 	}
 	
-	/*
-	 * 文档基本信息右边的页面
+	/**
+	 * 文档信息的基本信息页面
+	 * 
+	 * @param request
+	 * @param docId
+	 * @param model
+	 * @return
 	 */
 	@RequestMapping("/doc/viewInfo")
 	public String viewInfo(HttpServletRequest request, Integer docId, Model model){	
-		DocumentDoc doc = docservice.findDocById(docId);
-		//doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));		
+		DocumentDoc doc = docservice.findDocById(docId);		
 		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
 		System.out.println(doc.getDocModule()!=0&&doc.getDocModule()!=null);
 		if(doc.getDocModule()!=0&&doc.getDocModule()!=null){
@@ -299,8 +366,13 @@ public class DocAction extends BaseController{
 		return "/document/basic-info.pagelet";
 	}
 	
-	/*
-	 * 添加文档和编辑文档的保存方法
+	/**
+	 * 添加文档和编辑文档的保存
+	 * 
+	 * @param request
+	 * @param doc
+	 * @param model
+	 * @return
 	 */
 	@RequestMapping(value="/doc/save",method=RequestMethod.POST)
 	public String saveDoc(HttpServletRequest request,DocumentDoc doc,Model model)
@@ -314,8 +386,11 @@ public class DocAction extends BaseController{
 		return "redirect:"+"/a/document";
 	}
 	
-	/*
-	 * 单条删除文档的action
+	/**
+	 * 删除单条文档
+	 * 
+	 * @param id
+	 * @return
 	 */
 	@RequiresPermissions(value={"docdelete","doc-view-delete"},logical=Logical.AND)
 	@ResponseBody
@@ -329,8 +404,11 @@ public class DocAction extends BaseController{
 	    return map;
 	}
 	
-	/*
-	 * 批量删除文档的action
+	/**
+	 * 批量删除文档
+	 * 
+	 * @param ids
+	 * @return
 	 */
 	@RequiresPermissions(value={"batch-delete"})
 	@ResponseBody
@@ -356,8 +434,10 @@ public class DocAction extends BaseController{
 	    return map;
 	}
 	
-	/*
-	 * 添加文档库的action
+	/**
+	 * 添加文档库的跳转
+	 * 
+	 * @return
 	 */
 	@RequiresPermissions(value={"doclib-add"})
 	@RequestMapping(value="/doclib/toAdd")
@@ -366,37 +446,50 @@ public class DocAction extends BaseController{
 		return "/document/add-doclib.pagelet";
 	}
 	
-	/*
-	 * 编辑文档库 的action
+	/**
+	 * 编辑文档库 的跳转
+	 * 
+	 * @param request
+	 * @param doclib
+	 * @param model
+	 * @return
 	 */
 	@RequiresPermissions("doclib-edit")
 	@RequestMapping(value="/doclib/edit")
 	public String editDoclib(HttpServletRequest request,DocumentDoclib doclib,Model model)
 	{		
-		doclib = docservice.findDoclibById((Integer) request.getSession().getAttribute("documentLibId"));
+		doclib = docservice.findDoclibById(Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID)));
 		model.addAttribute("doclib", doclib);
-		if((Integer) request.getSession().getAttribute("documentLibId") == 1 || (Integer) request.getSession().getAttribute("documentLibId") == 2){
+		if(Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID)) == 1 || Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID)) == 2){
 			return "/document/doclib-no-edit.pagelet";
 		}
 		return "/document/doclib-edit.pagelet";
 	}
 	
-	/*
-	 * 文档库编辑和保存的保存的action
+	/**
+	 * 文档库编辑和新增的保存
+	 * 
+	 * @param request
+	 * @param doclib
+	 * @return
 	 */
 	@RequestMapping(value="/doclib/save")
-	public String saveDoclib(HttpServletRequest request,DocumentDoclib doclib)
+	public String saveDoclib(HttpServletRequest request,DocumentDoclib doclib, HttpServletResponse response)
 	{
 		if(doclib.getDocLibId()==null||doclib.getDocLibId()==0){		
 			doclib = docservice.createNewDocLib(doclib);
-			request.getSession().setAttribute("documentLibId", doclib.getDocLibId());
+			CookieUtils.setCookie(response, DocAction.COOKIE_DOCLIB_ID, doclib.getDocLibId().toString(), -1);
+		//	request.getSession().setAttribute("documentLibId", doclib.getDocLibId());
 		}else {
 			docservice.editDocLibName(doclib);
 		}	
 		return "redirect:"+"/a/document?change=true";
 	}
-	/*
-	 * 删除文档库的action
+	/**
+	 * 删除文档库
+	 * 
+	 * @param id
+	 * @return
 	 */
 	@RequiresPermissions(value={"doclib-delete"})
 	@ResponseBody
@@ -415,8 +508,12 @@ public class DocAction extends BaseController{
 		return null;
 	}
 	
-	/*
+	/**
 	 * 添加项目文档中项目和分类的二级联动
+	 * 
+	 * @param systemModule
+	 * @param projectId
+	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping("/ajax/module")
@@ -429,8 +526,12 @@ public class DocAction extends BaseController{
 		return moduleService.findModules(systemModule);
 	}
 	
-	/*
+	/**
 	 * 添加产品文档中产品和分类的二级联动
+	 * 
+	 * @param systemModule
+	 * @param productId
+	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping("/ajax/module1")
@@ -443,8 +544,12 @@ public class DocAction extends BaseController{
 		return moduleService.findModules(systemModule);
 	}
 	
-	/*
+	/**
 	 * 添加项目文档中项目和产品的二级联动
+	 * 
+	 * @param product
+	 * @param projectId
+	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping("/ajax/product")
@@ -466,8 +571,11 @@ public class DocAction extends BaseController{
 		return productList;
 	}
 	
-	/*
+	/**
 	 * 编辑文档中文档库和分类的二级联动
+	 * 
+	 * @param libId
+	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping("/ajax/moduleByDoclib")
@@ -479,8 +587,11 @@ public class DocAction extends BaseController{
 		return list;
 	}
 	
-	/*
+	/**
 	 * 编辑文档中项目和分类的二级联动
+	 * 
+	 * @param projectId
+	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping("/ajax/moduleByProject")
@@ -492,8 +603,11 @@ public class DocAction extends BaseController{
 		return list;
 	}
 	
-	/*
+	/**
 	 * 编辑文档中产品和分类的二级联动
+	 * 
+	 * @param productId
+	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping("/ajax/moduleByProduct")
@@ -505,6 +619,11 @@ public class DocAction extends BaseController{
 		return list;
 	}
 	
+	/**
+	 * 编辑文档中产品和文档库的二级联动
+	 * 
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/ajax/productByDocLib")
 	public List<Product> getProductByDocLib(){

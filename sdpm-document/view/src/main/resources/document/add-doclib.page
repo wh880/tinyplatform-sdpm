@@ -1,11 +1,11 @@
 
 #@tinyForm("doclib" TINY_CONTEXT_PATH+adminPath+"/document/doclib/save" "post" {"class":"doclib"})
 	#@elementItem()
-       #@colLabel("col-3")添加文档库：#end
+       #@colLabel("col-2")#end
 			<div class="col-8">
 			#@div(divClass="col-8")
 				
-				#tinyInput("text" "docLibName" "" {"style":"height:29px","placeholder":"文档库名称","id":"docLibName","class":"input-text"})
+				#tinyInput("text" "docLibName" "" {"style":"height:32px","placeholder":"文档库名称","id":"docLibName","class":"input-text"})
 				
 			#end
 			<div class="col-3">
