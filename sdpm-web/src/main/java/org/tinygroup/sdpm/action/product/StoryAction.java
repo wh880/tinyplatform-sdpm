@@ -449,13 +449,33 @@ public class StoryAction extends BaseController {
     }
 
     @RequestMapping("/bugSearch/{relate}")
-    public String bugListAction(@PathVariable(value = "relate") String relate, int page, int pagesize, QualityBug bug, SearchInfos searchInfos,
-                                @RequestParam(required = false, defaultValue = "bugId") String order,
+    public String bugListAction(@PathVariable(value = "relate") String relate, int page, int pagesize, QualityBug bug, SearchInfos searchInfos,String groupOperate, 
+                                @RequestParam(required = false, defaultValue = "bugId") String order,String type,
                                 @RequestParam(required = false, defaultValue = "asc") String ordertype,
                                 Model model, HttpServletRequest request) {
         //bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+    	
+    	if (request.getSession().getAttribute("sessionProductId") != null) {
+    		bug.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
+        }
 
-        Pager<QualityBug> p = bugService.findBugListPager(pagesize * (page - 1), pagesize, searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype) ? true : false);
+        //String condition = StoryUtil.getStatusCondition(choose, request);
+        
+        String condition = "";
+        if(searchInfos!=null){
+        	if(searchInfos.getInfos().size()>0||searchInfos.getInfos()!=null){
+        		String sql =  SqlUtil.toSql(searchInfos.getInfos(), groupOperate);
+        		if(!StringUtil.isBlank(sql)){
+        			condition += sql;
+        		}
+        	}
+        }
+        if("noRelate".equals(type)){
+        	condition = (StringUtil.isBlank(condition.trim())?" ":(condition+" and " )) + " quality_bug.plan_id <> "+bug.getPlanId();
+        	bug.setPlanId(null);
+        }
+
+        Pager<QualityBug> p = bugService.findBugListPager(pagesize * (page - 1), pagesize,condition, bug, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("bugList", p);
 
         if ("reRelateBug".equals(relate)) {
