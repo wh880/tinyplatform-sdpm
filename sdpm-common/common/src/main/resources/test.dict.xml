@@ -90,7 +90,15 @@
         <dictNodeEntry name="caseResult" title="用例结果">
             <dictItem key="1" value="通过" sort="1"/>
             <dictItem key="2" value="失败" sort="2"/>
+            <dictItem key="3" value="阻塞" sort="3"/>
         </dictNodeEntry>
+        <dictNodeEntry name="caseStepResult" title="用例步骤结果">
+            <dictItem key="1" value="N/A" sort="1"/>
+            <dictItem key="2" value="通过" sort="2"/>
+            <dictItem key="3" value="失败" sort="3"/>
+            <dictItem key="4" value="阻塞" sort="4"/>
+        </dictNodeEntry>
+
        <dictNodeEntry name="caseType" title="用例类型">
             <dictItem key="1" value="功能测试" sort="1"/>
             <dictItem key="2" value="性能测试" sort="2"/>

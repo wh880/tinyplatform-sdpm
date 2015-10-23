@@ -49,4 +49,5 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao{
 	}
 
 
+
 }

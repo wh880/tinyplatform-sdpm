@@ -154,31 +154,9 @@ public class HolidayAction extends BaseController{
 	}
 	@RequestMapping("holiday/action")
 	public String holidayAction(SystemAction action,Model model){
-		List<SystemAction> actions = actionService.find(action, "actionDate", false);
-		List<HolidayHistory> histories= new ArrayList<HolidayHistory>();
-		if(actions.size()<12){
-		for(int i=0,n=actions.size();i<n;i++){
-			HolidayHistory history=new HolidayHistory();
-			history.setHolidayHistoryAction(actions.get(i).getActionAction());
-			history.setHolidayHistoryActor(actions.get(i).getActionActor());
-			
-			history.setHolidayHistoryName((holidayService.findById(Integer.valueOf(
-					actions.get(i).getActionObjectId()))).getHolidayName());
-			history.setHolidayHistoryDate(actions.get(i).getActionDate());
-			histories.add(history);
-			}
-		}else{
-			for(int i=0;i<7;i++){
-				HolidayHistory history=new HolidayHistory();
-				history.setHolidayHistoryAction(actions.get(i).getActionAction());
-				history.setHolidayHistoryActor(actions.get(i).getActionActor());
-				
-				history.setHolidayHistoryName((holidayService.findById(Integer.valueOf(
-						actions.get(i).getActionObjectId()))).getHolidayName());
-				history.setHolidayHistoryDate(actions.get(i).getActionDate());
-				histories.add(history);
-				}
-		}
+		  Holiday holiday = new Holiday();
+		    Pager<Holiday> historyPage = holidayService.findByPage(0,7,holiday,"holiday_date",false);
+		    List<Holiday> histories = historyPage.getRecords();
 	 		model.addAttribute("action", histories);
 		return "/system/page/holiday/holiday-dynamic.pagelet";
 	}
@@ -190,7 +168,7 @@ public class HolidayAction extends BaseController{
 			asc=false;
 		}
 		Pager<Holiday> History = holidayService.findByPage(start,limit,holiday,order,asc);
-		List<HolidayHistory> holidayHistories = new ArrayList<HolidayHistory>();
+
 		model.addAttribute("History",History);
 		return "/system/page/holiday/holidayHistoryTableData.pagelet";
 	}
