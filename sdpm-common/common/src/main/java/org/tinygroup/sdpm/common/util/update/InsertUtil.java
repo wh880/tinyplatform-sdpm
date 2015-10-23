@@ -14,39 +14,47 @@ import org.tinygroup.tinysqldsl.base.Table;
 import org.tinygroup.tinysqldsl.base.Value;
 
 public class InsertUtil {
-	public static Insert getInsert(Table table, Object object){
+	public static Insert getInsert(Table table, Object object) {
 		try {
 
-			 List<Value> values = new ArrayList<Value>();
-		     Field[] fields = object.getClass().getDeclaredFields();
-		     Object primaryValue = null;
-		     for(Field field : fields){
-		    	 Method method = null;
-		    	 Object value = null;
-		    	 method = object.getClass().getMethod(NameUtil.toMethod(field.getName()));
-		    	 if(method!=null){
-		    		 value = method.invoke(object);
-		    	 }
-		    	 if(value != null){
-		                String tableField = field.getName();
-		                String primaryField = StdUtil.getPrimary(table.getName())!=null?StdUtil.getPrimary(table.getName()).toLowerCase():"";
-		                if(!tableField.toLowerCase().equals(primaryField)){
-		                    values.add(new Column(table,NameUtil.resolveNameDesc(tableField)).value(value));
-		                }else{
-		                    primaryValue = value;
-		                }
-		            }
-		    	 
-		     }
-		     Column primary = new Column(NameUtil.resolveNameDesc(StdUtil.getPrimary(NameUtil.resolveNameDesc(table.getName()))));
-	        primary.setTable(table);
-	        Value[] values1 = new Value[values.size()];
-	        
-	        return Insert.insertInto(table).values( values.toArray(values1));
-			
-		
+			List<Value> values = new ArrayList<Value>();
+			Field[] fields = object.getClass().getDeclaredFields();
+			Object primaryValue = null;
+			for (Field field : fields) {
+				Method method = null;
+				Object value = null;
+				try {
+					method = object.getClass().getMethod(NameUtil.toMethod(field.getName()));
+				} catch (NoSuchMethodException e) {
+					break;
+				}
+
+				if (method != null) {
+					value = method.invoke(object);
+				}
+				if (value != null) {
+					String tableField = field.getName();
+					String primaryField = StdUtil.getPrimary(table.getName()) != null ? StdUtil
+							.getPrimary(table.getName()).toLowerCase() : "";
+					if (!tableField.toLowerCase().equals(primaryField)) {
+						values.add(new Column(table, NameUtil
+								.resolveNameDesc(tableField)).value(value));
+					} else {
+						primaryValue = value;
+					}
+				}
+
+			}
+			Column primary = new Column(NameUtil.resolveNameDesc(StdUtil
+					.getPrimary(NameUtil.resolveNameDesc(table.getName()))));
+			primary.setTable(table);
+			Value[] values1 = new Value[values.size()];
+
+			return Insert.insertInto(table).values(values.toArray(values1));
+
 		} catch (Exception e) {
-		e.printStackTrace();
-		return null;
-	}}
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
