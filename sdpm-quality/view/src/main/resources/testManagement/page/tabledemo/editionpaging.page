@@ -84,7 +84,7 @@
     </script>
                         #@Tselect2Body("productId" bug?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="0">/</option>
-                     #foreach(product : bugProductList)
+                     #foreach(product : CmsUtils.getProductList())
                                 #if(product?.deleted==0)
                                 <option value="${product?.productId}">${product?.productName}</option>
                                 #end
@@ -246,7 +246,7 @@
                             </script>
                         #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="0">/</option>
-                         #foreach(project : projectList)
+                         #foreach(project : CmsUtils.getProjectList())
                         <option value="${project?.projectId}">${project?.projectName}</option>
                         #end
                         #end
