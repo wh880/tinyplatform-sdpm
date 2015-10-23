@@ -72,13 +72,14 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao{
 		}
 		Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("org_user.org_user_id AS userId," +
 				"SUM( CASE WHEN quality_bug.bug_status = 1 THEN 1 ELSE 0 END ) repeatBug,"+
-				"SUM(CASE WHEN quality_bug.bug_status = 2 THEN	1 ELSE 0	END	) designEd,"+
-				"SUM(CASE WHEN quality_bug.bug_status = 3 THEN	1 ELSE 0	END	) externalCause,"+
-				"SUM(CASE WHEN quality_bug.bug_status = 4 THEN	1 ELSE 0	END	) solved,"+
-				"SUM(CASE WHEN quality_bug.bug_status = 5 THEN	1 ELSE 0	END	) notReproduce,"+
-				"SUM(CASE WHEN quality_bug.bug_status = 6 THEN	1 ELSE 0	END	) delayResolved,"+
-				"SUM(CASE WHEN quality_bug.bug_status = 7 THEN	1 ELSE 0	END	) notResolved,"+
-				"COUNT(product_story.story_from_bug) AS toStroy")).from(QUALITY_BUGTABLE).join(Join.leftJoin(
+				"SUM(CASE WHEN quality_bug.bug_status = 2 THEN	1 ELSE 0 END	) designEd,"+
+				"SUM(CASE WHEN quality_bug.bug_status = 3 THEN	1 ELSE 0 END	) externalCause,"+
+				"SUM(CASE WHEN quality_bug.bug_status = 4 THEN	1 ELSE 0 END	) solved,"+
+				"SUM(CASE WHEN quality_bug.bug_status = 5 THEN	1 ELSE 0 END	) notReproduce,"+
+				"SUM(CASE WHEN quality_bug.bug_status = 6 THEN	1 ELSE 0 END	) delayResolved,"+
+				"SUM(CASE WHEN quality_bug.bug_status = 7 THEN	1 ELSE 0 END	) notResolved,"+
+				"COUNT(product_story.story_from_bug) AS toStory,"+
+		          " COUNT(quality_bug.bug_id) AS bugNum")).from(QUALITY_BUGTABLE).join(Join.leftJoin(
 				ORG_USERTABLE,ORG_USERTABLE.ORG_USER_ID.eq(QUALITY_BUGTABLE.BUG_OPENED_BY)
 		),Join.leftJoin(PRODUCT_STORYTABLE,PRODUCT_STORYTABLE.STORY_FROM_BUG.eq(QUALITY_BUGTABLE.BUG_ID))).where(and(
 				QUALITY_BUGTABLE.BUG_OPENED_DATE.eq(qualityBugSta.getBugCreateDate()),
