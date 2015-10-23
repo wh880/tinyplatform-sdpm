@@ -1,28 +1,4 @@
-<script>
-    $(document).ready(function () {
 
-        ajaxRead("eidtpro", "productId", "productName");
-        ajaxRead("eidtmod", "moduleId", "moduleName");
-        ajaxRead("eidtfrom", "storyId", "storySource");
-        ajaxRead("eidtPri", "storyId", "storyPri");
-        ajaxRead("send", "storyId", "storyPri");
-        ajaxRead("assign", "storyId", "storyAssignedTo");
-
-        $("#story_reviewed").on("click", function () {
-
-            var vm = this.checked;
-            if (vm == true) {
-                $("select[name='storyReviewedBy']").attr("disabled", "disabled");
-            }
-            if (vm == false) {
-                $("select[name='storyReviewedBy']").removeAttr("disabled");
-            }
-
-
-        });
-
-    });
-</script>
 
 #@div(divClass="infoContent")
 <p class="titleName">基本信息</p>

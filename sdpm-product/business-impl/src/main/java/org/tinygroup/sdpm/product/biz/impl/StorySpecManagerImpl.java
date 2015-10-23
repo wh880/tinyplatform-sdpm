@@ -47,4 +47,14 @@ public class StorySpecManagerImpl implements StorySpecManager{
 		return productStorySpecDao.getByKeys(storyspecId);
 	}
 
+	public int getNewStoryVersion(Integer storyId) {
+
+		return productStorySpecDao.getNewStoryVersion(storyId);
+	}
+
+	public ProductStorySpec add(ProductStorySpec storySpec) {
+
+		return productStorySpecDao.add(storySpec);
+	}
+
 }

@@ -37,5 +37,15 @@ public class StorySpecServiceImpl implements StorySpecService {
 		return storySpecManager.findList(storyspecId);
 	}
 
+	public int getNewStoryVersion(Integer storyId) {
+
+		return storySpecManager.getNewStoryVersion(storyId);
+	}
+
+	public ProductStorySpec add(ProductStorySpec storySpec) {
+
+		return storySpecManager.add(storySpec);
+	}
+
 
 }

@@ -24,6 +24,8 @@ import java.util.List;
 public interface ProductStorySpecDao extends BaseDao<ProductStorySpec,Integer> {
 	
 	List<ProductStorySpec> getByKeys(Integer... id);
+	
+	int getNewStoryVersion(Integer storyId);
 
 
 }

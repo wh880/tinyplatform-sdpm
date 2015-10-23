@@ -42,8 +42,10 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -120,7 +122,7 @@ public class StoryAction extends BaseController {
     		productStory.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
     	}
         productStory.setStoryStatus("0");
-        
+        productStory.setStoryVersion(0);
         storySpec.setStoryVersion(0);
         ProductStory story = storyService.addStory(productStory, storySpec);
 
@@ -283,9 +285,15 @@ public class StoryAction extends BaseController {
     }
 
     @RequestMapping("/changed")
-    public String changed(SystemAction systemAction, ProductStory productStory, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
+    public String changed(SystemAction systemAction, ProductStory productStory,ProductStorySpec storySpec,@RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
         ProductStory story = storyService.findStory(productStory.getStoryId());
+
         storyService.updateStory(productStory);
+        
+        
+        int version =storySpecService.getNewStoryVersion(productStory.getStoryId());
+        storySpec.setStoryVersion(version+1);
+        storySpecService.add(storySpec);
         OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute("user");
 
         uploads(file, story.getStoryId(), ProfileType.STORY, title);
