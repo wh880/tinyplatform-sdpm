@@ -33,8 +33,13 @@ public class SlaAction extends BaseController {
     @Autowired
     private ProductService productService;
 
-
-    /*查询*/
+    /**
+     * 查询
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
         if (id != null) {
