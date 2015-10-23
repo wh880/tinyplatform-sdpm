@@ -70,10 +70,6 @@
                     #@td()访问控制#end
                     #@td()${getDict("projectAcl", project?.projectAcl)}#end
                 #end
-            ##                #@tr()
-            ##                    #@td()分组白名单#end
-            ##                    #@td()${project?.projectWhiteList}#end
-            ##                #end
             #end
         #end
     #end
