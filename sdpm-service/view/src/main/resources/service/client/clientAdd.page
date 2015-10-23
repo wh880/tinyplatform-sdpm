@@ -1,10 +1,6 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
-##用于类似编辑页面的条目排版
-
-##
-
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
 <style>
     .select_boxes {
@@ -38,14 +34,6 @@
                     "text" "clientNO" client?.clientNO {"id":"client_n_o","class":"input-text"})
             #end
         #end
-
-
-##        #@elementItem()
-##            #@sdpmItem("客户部门")
-##                #tinyInput("text" "clientDeptId" client?.clientDeptId {"id":"client_dept_id","class":"input-text"})
-##            #end
-##        #end
-
         #@elementItem()
             #@sdpmItem("客户登记人" "*")
                 #tinyInput(

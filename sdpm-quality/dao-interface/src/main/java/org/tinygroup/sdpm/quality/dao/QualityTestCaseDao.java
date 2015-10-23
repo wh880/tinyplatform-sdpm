@@ -16,6 +16,8 @@
 
 package org.tinygroup.sdpm.quality.dao;
 
+import java.util.List;
+
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
@@ -29,5 +31,7 @@ public interface QualityTestCaseDao extends BaseDao<QualityTestCase,Integer> {
 	Pager<QualityTestCase> queryStoryChangedCase(int start, int limit , QualityTestCase qualityTestCase , Condition condition, final OrderBy... orderArgs);
 
 	Integer softDelete(Integer id);
+	
+	List<Integer> getStoryIds(QualityTestCase t);
 
 }

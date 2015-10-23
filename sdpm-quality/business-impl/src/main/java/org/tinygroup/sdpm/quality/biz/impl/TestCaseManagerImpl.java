@@ -100,4 +100,9 @@ public class TestCaseManagerImpl implements TestCaseManager {
 		}
 		return testcasedao.queryStoryChangedCase(start,limit,testcase,condition1,new OrderBy(columnName,asc));
 	}
+
+	public List<Integer> getStoryIds(QualityTestCase t) {
+
+		return testcasedao.getStoryIds(t);
+	}
 }
