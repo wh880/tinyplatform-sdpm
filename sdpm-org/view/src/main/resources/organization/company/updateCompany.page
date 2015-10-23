@@ -78,8 +78,6 @@
             #end
 
         #end
-
-
         #@gridSysRow()
 
             #@gridSysCol(7)
@@ -89,16 +87,11 @@
             #end
         #end
     #end
-
 #end
-
-
-
 <script type="text/javascript">
     $(function () {
         $("form[name=thisform").Validform({
             tiptype: 2
-
         });
     });
 </script>

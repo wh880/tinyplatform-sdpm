@@ -60,6 +60,7 @@ public interface UserManager {
      * @return
      */
     Pager<OrgUser> findUserListByDeptId(Integer start, Integer limit, Integer deptId);
+
     /**
      * 新增有一个用户
      *
@@ -91,6 +92,7 @@ public interface UserManager {
      * @return
      */
     int[] deleteBatch(List<OrgUser> list);
+
     /**
      * 生成安全的密码，生成随机的16位salt并经过1024次 sha-1 hash
      */
@@ -104,9 +106,10 @@ public interface UserManager {
      * @return 验证成功返回true
      */
     boolean validatePassword(String plainPassword, String password);
-    
+
     /**
      * 根据id查找名字
+     *
      * @param id
      * @return
      */

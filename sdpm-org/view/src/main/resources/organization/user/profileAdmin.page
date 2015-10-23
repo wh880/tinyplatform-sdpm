@@ -151,12 +151,6 @@
                         <p>${user?.orgUserRole}</p>
                     #end
                 #end
-            ##                #@gridSysRow()
-            ##                    #@colLabel("col-4")权限：#end
-            ##                    #@gridSysCol(8)
-            ##                        <p>${user?.orgUserSubmitter}</p>
-            ##                    #end
-            ##                #end
                 #@gridSysRow()
                     #@colLabel("col-4")加入日期：#end
                     #@gridSysCol(8)
@@ -185,12 +179,6 @@
                         <p>${user?.orgUserYahoo}</p>
                     #end
                 #end
-            ##                #@gridSysRow()
-            ##                    #@colLabel("col-4")职位：#end
-            ##                    #@gridSysCol(8)
-            ##                        <p>${user?.orgUserGTalk}</p>
-            ##                    #end
-            ##                #end
                 #@gridSysRow()
                     #@colLabel("col-4")Gtalk：#end
                     #@gridSysCol(8)
