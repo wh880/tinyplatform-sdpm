@@ -17,9 +17,9 @@
         "icon-link")关联需求</a>&nbsp;
 				<a href="${TINY_CONTEXT_PATH+adminPath}/project/version/forword/alBug?buildId=${build.buildId}">#buttonIcon(iconClass=
                     "icon-bug")关联Bug</a>&nbsp;
-<a href="${TINY_CONTEXT_PATH+adminPath}/project/version/edit?buildId=${b?.buildId}">#buttonIcon(iconClass=
+<a href="${TINY_CONTEXT_PATH+adminPath}/project/version/edit?buildId=${build.buildId}">#buttonIcon(iconClass=
     "icon-pencil")编辑发布</a>&nbsp;
-        <a href="${TINY_CONTEXT_PATH+adminPath}/project/version/delete?id=${b?.buildId}"
+        <a href="${TINY_CONTEXT_PATH+adminPath}/project/version/delete?id=${build.buildId}"
            name="删除发布">#buttonIcon(iconClass=
             "icon-remove")</a>&nbsp;
     <a href="${TINY_CONTEXT_PATH+adminPath}/project/manage/build/index" title="返回">#buttonIcon(iconClass=

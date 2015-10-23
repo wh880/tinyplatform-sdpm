@@ -37,7 +37,7 @@ public class BeforeAction extends BaseController {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         Project project = projectService.findById(projectId);
         model.addAttribute("project", project);
-        return "project/version/index.page";
+            return "project/version/index.page";
     }
 
     @RequestMapping("/test/index")

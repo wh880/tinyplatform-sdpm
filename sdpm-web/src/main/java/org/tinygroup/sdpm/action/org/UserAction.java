@@ -406,9 +406,8 @@ public class UserAction extends BaseController {
     @RequestMapping("/testtask/search")
     public String testTaskSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, QualityTestTask testTask, String order, String ordertype, Model model, HttpServletRequest request) {
         OrgUser user = userService.findUser(id);
-        String account = user.getOrgUserAccount();
         QualityTestTask testTask1 = new QualityTestTask();
-        testTask1.setTesttaskOwner(account);
+        testTask1.setTesttaskOwner(id);
         Pager<QualityTestTask> testTaskPager = testTaskService.findTestTaskPager(start, limit, testTask1, order, false);
         model.addAttribute("testTaskPager", testTaskPager);
 

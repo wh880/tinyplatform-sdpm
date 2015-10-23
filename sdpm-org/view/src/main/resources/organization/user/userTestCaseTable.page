@@ -5,14 +5,14 @@
 #setTinyItemCount(records)
 #for(testCase:testCasePager.records)
 #@tr()
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${testCase?.caseId}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase">${testCase?.caseId}</a>#end
     #@td()${testCase?.priority}#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${testCase?.caseTitle}</a>#end
-    #@td()${testCase?.caseType}#end
-    #@td()${testCase?.caseOpenedBy}#end
-    #@td()${testCase?.caseLastRunner}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase">${testCase?.caseTitle}</a>#end
+    #@td()${getDict("caseType",testCase?.caseType)}#end
+    #@td()${testCase?.caseOpenedBy?UserUtils.getUserById(testCase?.caseOpenedBy)?.orgUserRealName:""}#end
+    #@td()${testCase?.caseLastRunner?UserUtils.getUserById(testCase?.caseLastRunner)?.orgUserRealName:""}#end
     #@td()${testCase?.caseLastRunDate}#end
-    #@td()${testCase?.caseLastRunResult}#end
-    #@td()${testCase?.caseStatus}#end
+    #@td()${getDict("caseResult",testCase?.caseLastRunResult)}#end
+    #@td()${getDict("caseStatus",testCase?.caseStatus)}#end
 #end
 #end
