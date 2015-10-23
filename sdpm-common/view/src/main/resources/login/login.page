@@ -188,6 +188,8 @@
             color: rgb(255, 255, 255);
             font-weight: bold;
         }
+		.leftCheckbox{color:#777}
+		.leftCheckbox input{margin:2px 4px 0 -12px;vertical-align:top;}
     </style>
 </head>
 <body>
