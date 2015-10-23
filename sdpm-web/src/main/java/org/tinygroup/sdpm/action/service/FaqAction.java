@@ -38,8 +38,6 @@ public class FaqAction extends BaseController {
             ServiceFaq faq = faqService.findFaq(id);
             model.addAttribute("faq", faq);
         }
-       /* faq中查询产品名称*/
-         /*调用product的服务，查询出产品表的对象*/
         Product product = new Product();
         List<Product> slas = productService.findProductList(product);
         model.addAttribute("slas", slas);
@@ -56,19 +54,6 @@ public class FaqAction extends BaseController {
         }
         model.addAttribute("faq", faq);
         return "redirect:" + adminPath + "/service/faq/list";
-    }
-
-    /*对问题进行“编辑”*/
-    @RequestMapping("/edit")
-    public String edit(Integer id, Model model) {
-        if (id != null) {
-            ServiceFaq faq = faqService.findFaq(id);
-            model.addAttribute("faq", faq);
-        }
-        Product product = new Product();
-        List<Product> slas = productService.findProductList(product);
-        model.addAttribute("slas", slas);
-        return "/service/faq/addquestion.page";
     }
 
     /*把faqmenu页面的所有问题都查询出来*/
@@ -94,10 +79,7 @@ public class FaqAction extends BaseController {
     @RequestMapping("/delete")
     public Map delete(Integer id) {
         faqService.deleteFaq(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "success");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
     /*点击问题进去，显示里面的问题和答案。由faqquestion.page跳转过来。*/
@@ -119,16 +101,6 @@ public class FaqAction extends BaseController {
         return "/service/faq/addquestion.page";
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/faqContentDelete")
-    public Map faqTitleDelete(Integer id) {
-        faqService.deleteFaq(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
-    }
-
     /*实现faq里面的左侧树*/
     /*对树的节点进行新增*/
     @ResponseBody
@@ -138,10 +110,7 @@ public class FaqAction extends BaseController {
         serviceFaqType.setFaqParentTypeId(faqParentTypeId);
         serviceFaqType.setFaqType(faqType);
         faqTypeService.addFaqType(serviceFaqType);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "success");
-        map.put("info", "新增成功");
-        return map;
+        return resultMap(true, "新增成功");
     }
 
     /**
@@ -159,10 +128,7 @@ public class FaqAction extends BaseController {
         type.setFaqType(faqType);
         type.setFaqParentTypeId(faqParentTypeId);
         faqTypeService.updateFaqType(type);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "success");
-        map.put("info", "编辑成功");
-        return map;
+        return resultMap(true, "编辑成功");
     }
 
     /*树里面的节点的删除*/
@@ -170,10 +136,7 @@ public class FaqAction extends BaseController {
     @RequestMapping("/deleteTree")
     public Map deleteDept(Integer faqTypeId) {
         faqTypeService.deleteDept(faqTypeId);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "success");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
 

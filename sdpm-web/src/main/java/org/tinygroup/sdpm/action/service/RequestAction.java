@@ -19,13 +19,10 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.service.service.inter.ReviewService;
-import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
-import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,8 +42,6 @@ public class RequestAction extends BaseController {
     private ProductService productService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private ModuleService moduleService;
 
     @RequiresPermissions("request")
     @RequestMapping(value = "/list")
@@ -123,10 +118,7 @@ public class RequestAction extends BaseController {
     @RequestMapping(value = "/delete")
     public Map delete(Integer id) {
         requestService.deleteRequest(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
     @RequiresPermissions("request-solve")
@@ -179,7 +171,6 @@ public class RequestAction extends BaseController {
     @RequestMapping(value = "/solveBy")
     public Map solveBy(Integer[] ids, String name) {
         List<ServiceRequest> list = new ArrayList<ServiceRequest>();
-        Map<String, String> map = new HashMap<String, String>();
         for (Integer id : ids) {
             ServiceRequest serviceRequest = new ServiceRequest();
             serviceRequest.setClientRequestId(id);
@@ -187,9 +178,7 @@ public class RequestAction extends BaseController {
             list.add(serviceRequest);
         }
         requestService.updateReply(list);
-        map.put("status", "y");
-        map.put("info", "操作成功");
-        return map;
+        return resultMap(true, "操作成功");
     }
 
     @RequiresPermissions("request-review-byme")
@@ -197,7 +186,6 @@ public class RequestAction extends BaseController {
     @RequestMapping(value = "/reviewBy")
     public Map reviewBy(Integer[] ids, String name) {
         List<ServiceRequest> list = new ArrayList<ServiceRequest>();
-        Map<String, String> map = new HashMap<String, String>();
         for (Integer id : ids) {
             ServiceRequest serviceRequest = new ServiceRequest();
             serviceRequest.setClientRequestId(id);
@@ -205,20 +193,15 @@ public class RequestAction extends BaseController {
             list.add(serviceRequest);
         }
         requestService.updateReview(list);
-        map.put("status", "y");
-        map.put("info", "操作成功");
-        return map;
+        return resultMap(true, "操作成功");
     }
 
     @RequiresPermissions("request-batchdel")
     @ResponseBody
     @RequestMapping(value = "/batchDelete")
     public Map batchDelete(String ids) {
-        Map<String, String> map = new HashMap<String, String>();
         if (ids == null) {
-            map.put("status", "n");
-            map.put("info", "删除失败");
-            return map;
+            return resultMap(false, "删除失败");
         }
         List<ServiceRequest> list = new ArrayList<ServiceRequest>();
         for (String s : ids.split(",")) {
@@ -228,17 +211,6 @@ public class RequestAction extends BaseController {
             list.add(serviceRequest);
         }
         requestService.deleteBatchRequest(list);
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
-    }
-    @ResponseBody
-    @RequestMapping("/ajax/moduleByProduct")
-    public List<SystemModule> getModuleByProduct(Integer productId){
-        SystemModule module = new SystemModule();
-        module.setModuleRoot(productId);
-        module.setModuleType("productDoc");
-        List<SystemModule> list = moduleService.findModuleList(module);
-        return list;
+        return resultMap(true, "删除成功");
     }
 }

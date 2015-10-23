@@ -110,10 +110,7 @@ public class ClientAction extends BaseController {
     public Map delete(Integer id) {
         clientService.deleteClient(id);
         clientUserService.deleteAllClientUser(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
     @RequiresPermissions("client-batchdel")
@@ -156,10 +153,7 @@ public class ClientAction extends BaseController {
     @RequestMapping(value = "/slaDelete")
     public Map slaDelete(Integer id) {
         slaService.deleteSla(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
     @RequestMapping("/slaDetail")
@@ -177,10 +171,7 @@ public class ClientAction extends BaseController {
     @RequestMapping(value = "/deleteClientUser")
     public Map deleteClientUser(Integer id) {
         clientService.deleteClientUser(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
     @RequestMapping(value = "/clientUserUpdate/date")
@@ -236,18 +227,12 @@ public class ClientAction extends BaseController {
             String clientName = param;
             ServiceClient serviceClient = clientService.judgeClient(clientName);
             if (serviceClient != null) {
-                map.put("status", "n");
-                map.put("info", "该客户已存在");
-                return map;
+                return resultMap(false, "该客户已存在");
             } else {
-                map.put("status", "y");
-                map.put("info", "");
-                return map;
+                return resultMap(true, "");
             }
         }
-        map.put("status", "n");
-        map.put("info", "请输入客户名称");
-        return map;
+        return resultMap(false, "请输入客户名称");
     }
 
     @ResponseBody
