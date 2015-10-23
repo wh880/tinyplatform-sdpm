@@ -8,7 +8,7 @@
     #for(result : testResults)
         #@foldMenu("" "Tinyfold3" "" "width:100%")
             #@foldItem("#"+result?.testResultId+"   "+formatDate(result?.testResultDate,"yyyy-MM-dd hh:mm:ss")+" 由 "+(result?.testResultLastRunner?UserUtils.getUserById(result?.testResultLastRunner)?.orgUserRealName:"")+"  执行   "+getDict("caseResult",result?.caseResult))
-                #if(caseSteps)
+                #if(caseSteps.get(result?.testResultId))
                     #@tableStriped()
                         #@thead()
                             #@tr()
@@ -21,12 +21,12 @@
                         #end
                         #@tbody()
                             #set(sResults = stepResults?.get(result?.testResultId))
-                            #for(caseStep:caseSteps)
+                            #for(caseStep:caseSteps.get(result?.testResultId))
                                 #@tr()
                                     #@th()${caseStepFor.index}#end
                                     #@td()${caseStep?.caseStepDesc}#end
                                     #@td()${caseStep?.caseStepExpect}#end
-                                    #@td()${sResults?.get(caseStepFor.index-1)?.result}#end
+                                    #@td()${getDict("caseStepResult",sResults?.get(caseStepFor.index-1)?.result)}#end
                                     #@td()${sResults?.get(caseStepFor.index-1)?.real}#end
                                 #end
                             #end

@@ -153,35 +153,12 @@
             #@validateDiv("col-2")#end
         #end
         ##暂留、、、、、、、、、、、、、、、、、
-        #@elementItem()
-            #@colLabel()用例步骤：#end
-            #@table("tableBoxes col-8")
-                #@thead()
-                    #@tr()
-                        #@th()编号#end
-                        #@th()步骤#end
-                        #@th()预期#end
-                        #@th()操作#end
-                    #end
-                #end
-                #@tbody()
-                    #for(i:[1..3])
-                    #@tr()
-                        #@td()${i}#end
-                        #@td()#tinyInput("text" "step" testCase?.caseTitle {"datatype":"*10-500","id":"版本","class":"input-text"})#end
-                        #@td()#tinyInput("text" "expect" testCase?.caseTitle {"datatype":"*10-500","id":"版本","class":"input-text"})#end
-                        #@td()#@div()
-                            #buttonRadiusPrimary(btClass="btn-small" caption="之前添加")
-                            #buttonRadiusPrimary(btClass="btn-small" caption="之后添加")
-                            #buttonRadiusPrimary(btClass="btn-small" caption="删除")
-                            #end
-                        #end
-                    #end
-                    #end
-                #end
-            #end
-            #@validateDiv("col-2")#end
-        #end
+       #@elementItem()
+               	#@colLabel("col-2")用例步骤：#end
+               	<div class="col-8">
+             		   #include("/testManagement/page/caseStepAdd.page")
+                   </div>
+               #end
         #@elementItem()
             #@colLabel()关键词：#end
             #@formControlDiv("col-8")

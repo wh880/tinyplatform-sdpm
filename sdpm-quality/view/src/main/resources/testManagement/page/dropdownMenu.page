@@ -13,6 +13,7 @@ ${product?.productName}
 <script type="text/javascript">
     $(function(){
         $.cookie('qualityProductId',"${CmsUtils.getProductList()?.get(0)?.productId}");
+        window.location.reload();
     })
 </script>
 ${CmsUtils.getProductList()?.get(0)?.productName}

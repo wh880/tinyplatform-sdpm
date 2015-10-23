@@ -72,14 +72,6 @@ public class TestCaseAction extends BaseController {
 			return "redirect:/a/quality/testCase?currentPageId=5&status=tcaseall"
 					+ (queryString==null?"":"&"+queryString);
 		}
-		List<OrgUser> userList = userService.findUserList(new OrgUser());
-		List<Product> productList = productService.findProductList(new Product());
-		SystemModule module = new SystemModule();
-		module.setModuleType("task");
-		List<SystemModule> modelList = moduleService.findAllModules(module);
-		model.addAttribute("userList", userList);
-		model.addAttribute("productList", productList);
-		model.addAttribute("modelList", modelList);
 		return "testManagement/page/cases.page";
 	}
 
@@ -109,6 +101,7 @@ public class TestCaseAction extends BaseController {
 			condition +=  NameUtil.resolveNameDesc("moduleId") + " "+ stringBuffer.toString();
 		}
 		testcase.setModuleId(null);
+		testcase.setDeleted(0);
 		Pager<QualityTestCase> casepager = null;
 		if("tcaseneedchange".equals(status)){
 			casepager = testCaseService.findStoryChangedCase(start,limit,testcase,condition,order,"asc".equals(ordertype)?true:false);
@@ -125,28 +118,50 @@ public class TestCaseAction extends BaseController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(QualityTestCase testcase, String[] step,String[] expect, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title, HttpServletRequest request) throws Exception {
-		testcase.setCaseOpenedBy(UserUtils.getUserId());
-		if(testcase.getStoryId()>0){
-			testcase.setStoryVersion(storyService.findStory(testcase.getStoryId()).getStoryVersion());
-		}
-		testcase.setCaseStatus("1");
-		testcase.setDeleted(0);
-		testcase.setCaseVersion(1);
-		testcase = testCaseService.addTestCase(testcase);
-		caseStepService.batchAdd(insertStep(step, expect, testcase));
-		uploads(file,testcase.getCaseId() ,ProfileType.TESTCASE, title);
+	public String save(QualityTestCase testcase,String comment, String[] step,String[] expect, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title, HttpServletRequest request) throws Exception {
+		if(testcase.getCaseId()==null||testcase.getCaseId()<1) {
+			testcase.setCaseOpenedBy(UserUtils.getUserId());
+			if (testcase.getStoryId() > 0) {
+				testcase.setStoryVersion(storyService.findStory(testcase.getStoryId()).getStoryVersion());
+			}
+			testcase.setCaseStatus("1");
+			testcase.setDeleted(0);
+			testcase.setCaseVersion(1);
+			testcase = testCaseService.addTestCase(testcase);
+			insertStep(step, expect, testcase);
+			uploads(file, testcase.getCaseId(), ProfileType.TESTCASE, title);
 
-		LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
-				LogUtil.LogAction.OPENED,
-				String.valueOf(testcase.getCaseId()),
-				UserUtils.getUserId(),
-				String.valueOf(testcase.getProductId()),
-				null,
-				null,
-				null,
-				null
-				);
+			LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
+					LogUtil.LogAction.OPENED,
+					String.valueOf(testcase.getCaseId()),
+					UserUtils.getUserId(),
+					String.valueOf(testcase.getProductId()),
+					null,
+					null,
+					null,
+					null
+			);
+		}else{
+			QualityTestCase testCase = testCaseService.findById(testcase.getCaseId());
+			QualityCaseStep step1 = new QualityCaseStep();
+			step1.setCaseId(testcase.getCaseId());
+			List<QualityCaseStep> steps = caseStepService.findCaseStepList(step1);
+			if(isCaseModify(step,expect,steps)){
+				testcase.setCaseVersion(testCase.getCaseVersion()+1);
+				insertStep(step, expect, testcase);
+			}
+			testCaseService.updateTestCase(testcase);
+			LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
+					LogUtil.LogAction.EDITED,
+					String.valueOf(testcase.getCaseId()),
+					UserUtils.getUserId(),
+					String.valueOf(testcase.getProductId()),
+					null,
+					testCase,
+					testcase,
+					comment
+			);
+		}
 		return "redirect:" + "/a/quality/testCase";
 	}
 
@@ -165,22 +180,25 @@ public class TestCaseAction extends BaseController {
 		QualityCaseStep qualityCaseStep = new QualityCaseStep();
 		qualityCaseStep.setCaseId(caseId);
 		qualityCaseStep.setCaseVersion(testcase.getCaseVersion());
-		List<QualityCaseStep> qualityCaseSteps = caseStepService
-				.findCaseStepList(qualityCaseStep);
+		List<QualityCaseStep> stepList = caseStepService.findCaseStepList(qualityCaseStep);
 		QualityTestResult qualityTestResult = new QualityTestResult();
 		qualityTestResult.setLinkCase(caseId);
 		List<QualityTestResult> qualityTestResults = testResultService
 				.findTestResultList(qualityTestResult);
 		Map<String, List<CaseStepResult>> caseStepResults = new HashMap<String, List<CaseStepResult>>();
+		Map<String, List<QualityCaseStep>> caseSteps= new HashMap<String, List<QualityCaseStep>>();
 		for (QualityTestResult qualityTestResult1 : qualityTestResults) {
-
+			qualityCaseStep.setCaseVersion(qualityTestResult1.getCaseVersion());
+			List<QualityCaseStep> caseStepList = caseStepService.findCaseStepList(qualityCaseStep);
+			caseSteps.put(String.valueOf(qualityTestResult1.getTestResultId()),caseStepList);
 			caseStepResults.put(
 					String.valueOf(qualityTestResult1.getTestResultId()),
 					resolveResult(qualityTestResult1));
 		}
 
 		model.addAttribute("testcase", testcase);
-		model.addAttribute("caseSteps", qualityCaseSteps);
+		model.addAttribute("stepList", stepList);
+		model.addAttribute("caseSteps", caseSteps);
 		model.addAttribute("testResults", qualityTestResults);
 		model.addAttribute("stepResults", caseStepResults);
 		return "/testManagement/page/tabledemo/execution.pagelet";
@@ -189,38 +207,39 @@ public class TestCaseAction extends BaseController {
 	@RequestMapping("/execute")
 	public String execute(Integer caseId, CaseStepResults caseStepResults,String resultType,
 			HttpServletRequest request) {
-		QualityTestCase testcase = testCaseService.findById(caseId);
-		QualityTestCase old = testcase;
+		QualityTestCase old = testCaseService.findById(caseId);
+		QualityTestCase testCase = new QualityTestCase();
 		QualityTestResult qualityTestResult = new QualityTestResult();
 		qualityTestResult.setLinkCase(caseId);
 		qualityTestResult.setTestResultDate(new Date());
 		qualityTestResult.setTestResultLastRunner(UserUtils.getUserId());
-		qualityTestResult.setCaseVersion(testcase.getCaseVersion());
+		qualityTestResult.setCaseVersion(old.getCaseVersion());
 		if(caseStepResults!=null&&caseStepResults.getCaseStepResultList()!=null&&caseStepResults.getCaseStepResultList().size()>0) {
 			qualityTestResult.setCaseStepresults(mergeResult(caseStepResults
 					.getCaseStepResultList()));
-			qualityTestResult.setCaseResult(testResult(caseStepResults
-					.getCaseStepResultList()));
-			testcase.setCaseLastRunResult(testResult(caseStepResults
-					.getCaseStepResultList()));
+			String result = testResult(caseStepResults
+					.getCaseStepResultList());
+			qualityTestResult.setCaseResult(result);
+			testCase.setCaseLastRunResult(result);
+			if("3".equals(result))testCase.setCaseStatus("2");
 		}
 		if(!StringUtil.isBlank(resultType)){
 			String result = "pass".equals(resultType)?"1":"2";
 			qualityTestResult.setCaseResult(result);
-			testcase.setCaseLastRunResult(result);
+			testCase.setCaseLastRunResult(result);
 		}
-		testcase.setCaseLastRunDate(new Date());
-		testcase.setCaseLastRunner(UserUtils.getUserId());
-		testCaseService.updateTestCase(testcase);
+		testCase.setCaseLastRunDate(new Date());
+		testCase.setCaseLastRunner(UserUtils.getUserId());
+		testCaseService.updateTestCase(testCase);
 		testResultService.add(qualityTestResult);
 		LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
 				LogUtil.LogAction.RUN,
-				String.valueOf(testcase.getCaseId()),
+				String.valueOf(old.getCaseId()),
 				UserUtils.getUserId(),
-				String.valueOf(testcase.getProductId()),
+				String.valueOf(old.getProductId()),
 				null,
 				old,
-				testcase,
+				testCase,
 				null
 		);
 		return "redirect:" + adminPath+"/quality/testCase";
@@ -243,6 +262,7 @@ public class TestCaseAction extends BaseController {
 		QualityTestCase testCase = testCaseService.findById(caseId);
 		QualityCaseStep step = new QualityCaseStep();
 		step.setCaseId(caseId);
+		step.setCaseVersion(testCase.getCaseVersion());
 		List<QualityCaseStep> stepList = caseStepService.findCaseStepList(step);
 		
 		model.addAttribute("testCase", testCase);
@@ -265,18 +285,12 @@ public class TestCaseAction extends BaseController {
 		QualityTestCase testCase = testCaseService.findById(caseId);
 		QualityCaseStep step = new QualityCaseStep();
 		step.setCaseId(caseId);
+		step.setCaseVersion(testCase.getCaseVersion());
 		List<QualityCaseStep> stepList = caseStepService.findCaseStepList(step);
-		
+
 		model.addAttribute("stepList", stepList);
 		model.addAttribute("testCase", testCase);
 		return "/testManagement/page/copyCase.page";
-	}
-
-	@RequestMapping(value = "/copySave", method = RequestMethod.POST)
-	public String copySave(QualityTestCase testCase, Model model) {
-		testCaseService.addTestCase(testCase);
-		model.addAttribute("testCase", testCase);
-		return "redirect:" + "/a/quality/testCase";
 	}
 
 
@@ -290,10 +304,20 @@ public class TestCaseAction extends BaseController {
 		return map;
 	}
 
+	@ResponseBody
 	@RequestMapping("/batchDelete")
-	public String batchDelete(List<QualityTestCase> testcases, Model model) {
-		testCaseService.batchDeleteTestCase(testcases);
-		return "redirect:" + "/a/quality/testCase";
+	public Map batchDelete(String ids, Model model) {
+		String[] cId =  ids.split(",");
+		for(String id : cId){
+			QualityTestCase testCase = new QualityTestCase();
+			testCase.setCaseId(Integer.parseInt(id));
+			testCase.setDeleted(1);
+			testCaseService.updateTestCase(testCase);
+		}
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("status", "success");
+		map.put("info", "删除成功");
+		return map;
 	}
 	
 	@ResponseBody
@@ -372,8 +396,9 @@ public class TestCaseAction extends BaseController {
 		return caseStepResults;
 	}
 
-	private List<QualityCaseStep> insertStep(String[] steps, String[] expects,
+	private void insertStep(String[] steps, String[] expects,
 			QualityTestCase tcase) {
+		if(steps==null||steps.length<1||StringUtil.isBlank(steps[0]))return;
 		List<QualityCaseStep> qualityCaseSteps = new ArrayList<QualityCaseStep>();
 		for (int i = 0; i < steps.length; i++) {
 			QualityCaseStep qualityCaseStep = new QualityCaseStep();
@@ -383,7 +408,9 @@ public class TestCaseAction extends BaseController {
 			qualityCaseStep.setCaseStepExpect(expects[i]);
 			qualityCaseSteps.add(qualityCaseStep);
 		}
-		return qualityCaseSteps;
+		for(QualityCaseStep step : qualityCaseSteps){
+			caseStepService.addCaseStep(step);
+		}
 	}
 	
 	
@@ -392,6 +419,22 @@ public class TestCaseAction extends BaseController {
 		QualityTestCase testCase = testCaseService.findById(id);
 		model.addAttribute("testCase", testCase);
 		return "/testManagement/page/caseInfo.page";
+	}
+
+	public boolean isCaseModify(String[] step, String[] expect,List<QualityCaseStep> steps){
+		if(step==null){
+			return (steps.size()<1)?false:true;
+		}else if(step.length>0&&step.length == steps.size()){
+			for(int i=0; i<step.length; i++){
+				QualityCaseStep caseStep = steps.get(i);
+				if(!StringUtil.equals(caseStep.getCaseStepDesc(),step[i])||
+						!StringUtil.equals(caseStep.getCaseStepExpect(),expect[i])){
+					return true;
+				}
+			}
+			return false;
+		}
+		return true;
 	}
 
 }
