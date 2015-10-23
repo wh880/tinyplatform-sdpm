@@ -181,25 +181,6 @@ public class FaqAction extends BaseController {
         return resultMap(true, "删除成功");
     }
 
-
-    @RequestMapping("/listTree")
-    public String listTree(ServiceFaq serviceFaq, Integer id, Integer start, Integer limit, Integer faqTypeId,
-                           @RequestParam(required = false, defaultValue = "1") int page,
-                           @RequestParam(required = false, defaultValue = "10") int pageSize,
-                           Model model) {
-        start = (page - 1) * pageSize;
-        limit = pageSize;
-        if (faqTypeId == null || faqTypeId == -1) {
-            serviceFaq.setFaqTypeId(null);
-            Pager<ServiceFaq> list = faqService.getFaqpage(start, limit, serviceFaq);
-            model.addAttribute("pager", list);
-        } else {
-            Pager<ServiceFaq> list = faqService.findUserByDeptId(start, limit, faqTypeId);
-            model.addAttribute("pager", list);
-        }
-        return "/service/faq/faqmenu.page";
-    }
-
     /**
      * faq左侧树的数据来源
      * @param check

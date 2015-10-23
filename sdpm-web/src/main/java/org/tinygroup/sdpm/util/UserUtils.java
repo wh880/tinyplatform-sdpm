@@ -47,6 +47,9 @@ public class UserUtils {
      * @return 取不到返回null
      */
     public static OrgUser getUserById(String id) {
+        if (StringUtil.isBlank(id)) {
+            return new OrgUser();
+        }
         OrgUser user = (OrgUser) CacheUtils.get(USER_CACHE, USER_CACHE_ID_ + id);
         if (user == null) {
             user = userService.findUser(id);

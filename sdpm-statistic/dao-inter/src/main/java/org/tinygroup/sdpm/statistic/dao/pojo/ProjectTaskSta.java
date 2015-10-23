@@ -1,9 +1,11 @@
 package org.tinygroup.sdpm.statistic.dao.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by MCK on 2015/10/22.
  */
-public class ProjectTaskSta {
+public class ProjectTaskSta implements Serializable{
     /**
      * 任务Id
      */
@@ -30,7 +32,30 @@ public class ProjectTaskSta {
      */
     private float left;
     //后面需求在加字段
+    /**
+     * 用户角色
+     */
+    private String userRole;
+    /**
+     * z指派日期
+     */
+    private String assignedDate;
 
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
+    public String getAssignedDate() {
+        return assignedDate;
+    }
+
+    public void setAssignedDate(String assignedDate) {
+        this.assignedDate = assignedDate;
+    }
 
     public float getLeft() {
         return left;

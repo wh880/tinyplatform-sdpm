@@ -22,7 +22,7 @@
 #end
 
 #@tinyForm(
-    "thisform" TINY_CONTEXT_PATH+adminPath+"/project/version/save" "" {"class":"test","enctype":"multipart/form-data"})
+    "thisform" TINY_CONTEXT_PATH+adminPath+"/project/version/addsave" "" {"class":"test","enctype":"multipart/form-data"})
 
 
 ##<div style="width:100%;float:left" class="pageleftpart">
@@ -34,11 +34,13 @@
     #@elementItem()
         #@sdpmItem("产品")
             #@Tselect2F()
+
                 #@Tselect2Body(
                     "buildProduct" build?.buildProduct {"class":"input-text select2","datatype":"*4-16","nullmsg":
                     "产品不能为空！"}) ##,"multiple":"multiple"加上为多选项
+
                     #foreach(p : prodcutList)
-                        <option value="${p.productId}">${p.productId}</option>
+                        <option value="${p.productId}">${p.productName}</option>
                     #end
                 #end
             ##填写任意内容，侦听需重新填加 A侦听已内置
@@ -64,7 +66,7 @@
                     "buildBuilder" build?.buildBuilder {"class":"input-text select2","placeholder":"","nullmsg":
                     "名称编号不能为空！"}) ##,"multiple":"multiple"加上为多选项
                     #foreach(t : teamList)
-                        <option value="${t?.teamUserId}">${t?.teamUserId}</option>
+                        <option value="${t?.teamUserId}">${t?.teamUserId?UserUtils.getUserById(t?.teamUserId)?.orgUserRealName:""}</option>
                     #end
                 #end
             ##填写任意内容，侦听需重新填加 A侦听已内置

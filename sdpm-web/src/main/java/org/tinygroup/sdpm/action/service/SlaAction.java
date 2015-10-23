@@ -107,7 +107,9 @@ public class SlaAction extends BaseController {
                            @RequestParam(required = false, defaultValue = "slaId") String order,
                            @RequestParam(required = false, defaultValue = "asc") String orderType,
                            Model model) {
-        /*sla表格里面的productId与左侧树里面的product表里面的productId即treeId匹配，在findSlaPager方法匹配*/
+        /**
+         * sla表格里面的productId与左侧树里面的product表里面的productId即treeId匹配，在findSlaPager方法匹配
+         */
         Pager<ServiceSla> pager = slaService.findSlaPager(start, limit, sla, treeId, groupOperate, searchInfos, order, orderType);
         model.addAttribute("pager", pager);
         return "service/sla/slaTableData.pagelet";
@@ -136,7 +138,9 @@ public class SlaAction extends BaseController {
                              @RequestParam(required = false, defaultValue = "1") int page,
                              @RequestParam(required = false, defaultValue = "10") int pageSize,
                              Model model) {
-        /*在dao层，findSlaBySlaId调用的方法中，增加了根据产品id查找产品名称*/
+        /**
+         * 在dao层，findSlaBySlaId调用的方法中，增加了根据产品id查找产品名称
+         */
         List<ServiceSla> slas = slaService.findSlaBySlaId(id);
         ServiceClient client = clientService.findClient(id);
         model.addAttribute("client", client);

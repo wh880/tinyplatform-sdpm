@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
@@ -143,6 +144,8 @@ public class StoryAction extends BaseController {
     @RequestMapping("/update")
     public String update(SystemAction systemAction, ProductStory productStory, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
         ProductStory story = storyService.findStory(productStory.getStoryId());
+        productStory.setStoryLastEditedBy(UserUtils.getUser().getOrgUserId());
+        productStory.setStoryLastEditedDate(new Date());
         storyService.updateStory(productStory);
         OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute("user");
 
@@ -221,6 +224,29 @@ public class StoryAction extends BaseController {
 
         return map;
     }
+    
+    @ResponseBody
+    @RequestMapping("/ajaxUpdate")
+    public Map deleteRel(ProductStory story) {
+    	
+    	
+    	storyService.updateStory(story);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "成功");
+
+        LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
+                LogUtil.LogAction.DELETED,
+                String.valueOf(story.getStoryId()),
+                UserUtils.getUserId(),
+                String.valueOf(story.getProductId()),
+                null,
+                null,
+                null,
+                null);
+
+        return map;
+    }
 
     @RequestMapping("/find")
     public String find(Integer storyId, Model model) {
@@ -252,7 +278,8 @@ public class StoryAction extends BaseController {
         QualityBug bug = new QualityBug();
         bug.setStoryId(storyId);
         List<QualityBug> bugList = bugService.findBugList(bug);
-        List<OrgUser> userList = userService.findUserListByIds(productStory.getStoryMailto().split(","));
+        String  storyMailto =productStory.getStoryMailto();
+        List<OrgUser> userList = StringUtil.isBlank(storyMailto)?null:userService.findUserListByIds(storyMailto.split(","));
         List<Project> projectList = projectService.getProjectByStoryId(storyId);
 
 
@@ -369,7 +396,7 @@ public class StoryAction extends BaseController {
             ModuleUtil.getConditionByModule(stringBuffer, module, moduleService);
             stringBuffer.append(")");
 
-            condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
+            condition = StringUtil.isBlank(condition.trim())?" ":" and " + NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
         }
         story.setModuleId(null);
         Pager<ProductStory> p = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, condition, searchInfos, groupOperate, order, "asc".equals(ordertype) ? true : false);
@@ -379,7 +406,7 @@ public class StoryAction extends BaseController {
     }
 
     @RequestMapping("/search/{relate}")
-    public String storyListAction(@PathVariable(value = "relate") String relate, int page, int pagesize,
+    public String storyListAction(@PathVariable(value = "relate") String relate, int page, int pagesize,String type,
                                   ProductStory story, String choose, String groupOperate, SearchInfos searchInfos,
                                   @RequestParam(required = false, defaultValue = "storyId") String order,
                                   @RequestParam(required = false, defaultValue = "asc") String ordertype,
@@ -390,21 +417,23 @@ public class StoryAction extends BaseController {
             story.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
         }
 
-
-        String condition = StoryUtil.getStatusCondition(choose, request);
-        if (story.getModuleId() != null && story.getModuleId() > 0) {
-
-            SystemModule module = new SystemModule();
-            module.setModuleId(story.getModuleId());
-            StringBuffer stringBuffer = new StringBuffer();
-            stringBuffer.append("in (");
-            ModuleUtil.getConditionByModule(stringBuffer, module, moduleService);
-            stringBuffer.append(")");
-
-            condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
+        //String condition = StoryUtil.getStatusCondition(choose, request);
+        
+        String condition = "";
+        if(searchInfos!=null){
+        	if(searchInfos.getInfos().size()>0||searchInfos.getInfos()!=null){
+        		String sql =  SqlUtil.toSql(searchInfos.getInfos(), groupOperate);
+        		if(!StringUtil.isBlank(sql)){
+        			condition += sql;
+        		}
+        	}
         }
-        story.setModuleId(null);
-        Pager<ProductStory> p = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, condition, searchInfos, groupOperate, order, "asc".equals(ordertype) ? true : false);
+        if("noRelate".equals(type)){
+        	condition = (StringUtil.isBlank(condition.trim())?" ":(condition+" and " )) + " product_story.plan_id <> "+story.getPlanId();
+        	story.setPlanId(null);
+        }
+        
+        Pager<ProductStory> p = storyService.findPager(pagesize * (page - 1), pagesize, story, condition, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("storyList", p);
 
         if ("reRelateStory".equals(relate)) {
