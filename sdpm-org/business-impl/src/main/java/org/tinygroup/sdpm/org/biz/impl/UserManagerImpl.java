@@ -105,10 +105,10 @@ public class UserManagerImpl implements UserManager {
         return password.equals(Encodes.encodeHex(salt) + Encodes.encodeHex(hashPassword));
     }
 
-	public String getNameById(String id) {
+    public String getNameById(String id) {
 
-		return orgUserDao.getNameById(id);
-	}
+        return orgUserDao.getNameById(id);
+    }
 
     public List<OrgUser> findUserListByIds(String... userId) {
         return orgUserDao.getByKeys(userId);

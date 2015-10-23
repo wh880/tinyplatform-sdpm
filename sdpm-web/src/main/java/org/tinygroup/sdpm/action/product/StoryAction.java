@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.product;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -157,6 +158,9 @@ public class StoryAction extends BaseController {
     	}
         productStory.setStoryStatus("0");
         productStory.setStoryVersion(0);
+        productStory.setStoryOpenedBy(UserUtils.getUserId());
+        productStory.setStoryOpenedDate(new Date());
+        
         storySpec.setStoryVersion(0);
         ProductStory story = storyService.addStory(productStory, storySpec);
         uploads(file, story.getStoryId(), ProfileType.STORY, title);
@@ -451,7 +455,7 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("/search")
-    public String storySearchAction(int page, int pagesize, ProductStory story, String choose, String groupOperate, SearchInfos searchInfos, String order, String ordertype, Model model, HttpServletRequest request) {
+    public String storySearchAction(int page, int pagesize, ProductStory story,String type, String choose, String groupOperate, SearchInfos searchInfos, String order, String ordertype, Model model, HttpServletRequest request) {
 
         if (request.getSession().getAttribute("sessionProductId") != null) {
             story.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
@@ -470,6 +474,17 @@ public class StoryAction extends BaseController {
             condition = condition + " and " + NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
         }
         story.setModuleId(null);
+        
+        if("noCase".equals(type)){
+        	QualityTestCase testCase = new QualityTestCase();
+        	testCase.setProductId(story.getProductId());
+        	List<Integer> list =testCaseService.getStoryIds(testCase);
+        	if(list.size()>0||list!=null){
+        		String ids = list.toString().substring(1, list.toString().length()-1);
+            	condition = (StringUtil.isBlank(condition)?" ": condition +" and ") + "product_story.story_id not in ("+ ids+") ";
+        	}
+        	
+        }
         Pager<ProductStory> p = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, condition, searchInfos, groupOperate, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("storyList", p);
 
@@ -713,5 +728,5 @@ public class StoryAction extends BaseController {
         return "redirect:" + adminPath + "/product/storySpec/find/productDemandDetail?storyId=" + story.getStoryId();
 
     }
-
+    
 }

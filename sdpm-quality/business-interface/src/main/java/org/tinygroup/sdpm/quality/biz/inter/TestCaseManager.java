@@ -68,5 +68,7 @@ public interface TestCaseManager {
             String groupOperate,String columnName,boolean asc);
 
 	Pager<QualityTestCase> findStoryChangedCase(Integer start,Integer limit,QualityTestCase testcase, String condition, String columnName,boolean asc);
-
+	
+	
+	List<Integer> getStoryIds(QualityTestCase t);
 }

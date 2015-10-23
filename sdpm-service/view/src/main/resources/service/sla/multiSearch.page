@@ -146,7 +146,11 @@
                 <div class="btn-group">
                     <button type="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
                     <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
-                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>
+                #*<button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>*#
+                    #@aModal("#myModal" "请输入查询标题（保存之前请先查询）：" "500" "170" "btn radius btn-primary btn-sm"
+                        "/service/sla/searchSave.pagelet")
+                        <div style="margin: 4px">保存</div>
+                    #end
                 </div>
             </td>
         </tr>
