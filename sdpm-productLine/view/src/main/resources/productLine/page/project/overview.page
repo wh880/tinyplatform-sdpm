@@ -5,6 +5,11 @@
 #set(linkName="overview")
 #include("/product/page/event/common.page")
 #set(name="version")
+<style>
+    .treeLeftbox .leftztree > li:first-child {
+        display: none
+    }
+</style>
 #@tabWithInit("tab_demo" "optionsBox")
 
     #@tabBodyCol("ptop-5")

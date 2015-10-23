@@ -70,7 +70,7 @@
 		<span>${name}</span>&nbsp&nbsp
 	#end
 #end
-#*
+
 #@div(divClass="infoContent")
 <p class="titleName">其他信息</p>
     #@table()
@@ -123,4 +123,4 @@
             #end
         #end
     #end
-#end*#
+#end
