@@ -10,7 +10,7 @@
           isShow="1"
     >
     </menu>
-    <menu id="statisticTest" parent-id="statistic" name="测试" href="/statistic/page/test.page" icon="" sort="1"
+    <menu id="statisticTest" parent-id="statistic" name="测试" href="/statistic/quality/bugCreate" icon="" sort="1"
           isShow="1"
     >
     </menu>

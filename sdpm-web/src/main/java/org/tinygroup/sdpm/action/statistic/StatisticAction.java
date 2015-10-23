@@ -17,6 +17,7 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.statistic.dao.pojo.ProjectTaskSta;
+import org.tinygroup.sdpm.statistic.dao.pojo.QualityBugSta;
 import org.tinygroup.sdpm.statistic.service.inter.StatisticService;
 
 import java.util.HashMap;
@@ -90,5 +91,12 @@ public class StatisticAction extends BaseController {
         model.addAttribute("productmap",map);
         model.addAttribute("order","2");
         return  "/statistic/page/product.page";
+    }
+    @RequestMapping("quality/bugCreate")
+    public String qualityBugCreate(Model model){
+        model.addAttribute("order","1");
+        List<QualityBugSta> bugStas = statisticService.findBugCreate(new QualityBugSta());
+        model.addAttribute("bugStas",bugStas);
+        return "/statistic/page/test.page";
     }
 }

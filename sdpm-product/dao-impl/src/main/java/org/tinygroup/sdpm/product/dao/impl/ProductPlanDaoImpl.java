@@ -27,7 +27,6 @@ import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.tinysqldsl.*;
-import org.tinygroup.tinysqldsl.base.Alias;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
@@ -102,12 +101,10 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 
 
 			public Select generate(ProductPlan t) {
-				PRODUCT_PLANTABLE.setAlias(new Alias("a"));
-				PRODUCT_STORYTABLE.setAlias(new Alias("b"));
-				Select select = select(FragmentSql.fragmentSelect("a.*,SUM(CASE WHEN b.`story_status`=1 THEN 1 ELSE 0 END) draft," +
-						"SUM(CASE WHEN b.`story_status`=2 THEN 1 ELSE 0 END) active," +
-						"SUM(CASE WHEN b.`story_status`=3 THEN 1 ELSE 0 END) `change`," +
-						"SUM(CASE WHEN b.`story_status`=4 THEN 1 ELSE 0 END) `close`"
+				Select select = select(FragmentSql.fragmentSelect("product_plan.*,SUM(CASE WHEN product_story.`story_status`=1 THEN 1 ELSE 0 END) draft," +
+						"SUM(CASE WHEN product_story.`story_status`=2 THEN 1 ELSE 0 END) active," +
+						"SUM(CASE WHEN product_story.`story_status`=3 THEN 1 ELSE 0 END) `change`," +
+						"SUM(CASE WHEN product_story.`story_status`=4 THEN 1 ELSE 0 END) `close`"
 				)).from(PRODUCT_PLANTABLE).join(leftJoin(PRODUCT_STORYTABLE,PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID))).where(
 						and(
 								PRODUCT_PLANTABLE.COMPANY_ID.eq(t.getCompanyId()),

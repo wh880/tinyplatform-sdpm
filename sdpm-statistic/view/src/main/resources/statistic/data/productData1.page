@@ -44,7 +44,7 @@
             #for(p:product)
                  #@tr("text-c")
                  <td rowspan=${p?.value.size()+1}> ${p?.key?.productName} </td>
-                 <td rowspan=${p?.value.size()+1}>${UserUtils.getUserById(p?.key?.productCreatedBy).orgUserRealName}</td>
+                 <td rowspan=${p?.value.size()+1}>${p?.key?.productCreatedBy?UserUtils.getUserById(p?.key?.productCreatedBy)?.orgUserRealName:""}</td>
                     #if(!p.value)
                             <td></td>
                             <td></td>
