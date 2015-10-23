@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2015-09-28.
+ * Created by xudy on 2015-09-28.
  */
 @Controller
 @RequestMapping("/a/service/request")
@@ -43,6 +43,14 @@ public class RequestAction extends BaseController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 根据不同条件显示请求表格内容
+     *
+     * @param operation 用于由我回复和由我解决
+     * @param status    请求的不同的状态
+     * @param model
+     * @return
+     */
     @RequiresPermissions("request")
     @RequestMapping(value = "/list")
     public String list(Integer operation, Integer status, Model model) {
@@ -55,6 +63,21 @@ public class RequestAction extends BaseController {
         return "service/serviceReq/request.page";
     }
 
+    /**
+     * 显示请求表格内容
+     * @param limit 分页的记录限制
+     * @param start 分页的当前页
+     * @param clientRequest
+     * @param operation 用于由我回复和由我解决
+     * @param status 请求的不同的状态
+     * @param treeId 左侧树对应产品的id
+     * @param model
+     * @param groupOperate 搜索功能的条件
+     * @param searchInfos 搜索功能需要搜索的信息
+     * @param order 排序
+     * @param orderType
+     * @return
+     */
     @RequestMapping(value = "/list/data")
     public String listData(Integer limit, Integer start, ServiceRequest clientRequest, Integer status, Integer operation, Integer treeId, Model model,
                            String groupOperate, SearchInfos searchInfos,
@@ -72,6 +95,12 @@ public class RequestAction extends BaseController {
         return "service/serviceReq/requestTableData.pagelet";
     }
 
+    /**
+     * 从表中读取数据跳到新建或编辑页面
+     * @param id
+     * @param model
+     * @return
+     */
     @RequiresPermissions("request-add")
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
@@ -87,6 +116,12 @@ public class RequestAction extends BaseController {
         return "service/serviceReq/add.page";
     }
 
+    /**
+     * 保存
+     * @param clientRequest
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/save")
     public String save(ServiceRequest clientRequest, Model model) {
         if (clientRequest.getClientRequestId() == null) {
@@ -98,14 +133,27 @@ public class RequestAction extends BaseController {
         return "redirect:" + adminPath + "/service/request/list";
     }
 
+    /**
+     * 关闭请求
+     * @param id
+     * @param model
+     * @return
+     */
     @RequiresPermissions("request-close")
-    @RequestMapping(value = "/close")//关闭请求
+    @RequestMapping(value = "/close")
     public String close(Integer id, Model model) {
         model.addAttribute("clientRequestId", id);
         ServiceRequest requests = requestService.findRequest(id);
         model.addAttribute("requests", requests);
         return "service/serviceReq/closeRequest.pagelet";
     }
+
+    /**
+     * 关闭请求
+     * @param clientRequest
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/close/date")
     public String closed(ServiceRequest clientRequest, Model model) {
         if (clientRequest.getClientRequestId() != null)
@@ -113,6 +161,11 @@ public class RequestAction extends BaseController {
         return "redirect:" + adminPath + "/service/request/list";
     }
 
+    /**
+     * 删除请求
+     * @param id
+     * @return
+     */
     @RequiresPermissions("request-delete")
     @ResponseBody
     @RequestMapping(value = "/delete")
@@ -121,6 +174,12 @@ public class RequestAction extends BaseController {
         return resultMap(true, "删除成功");
     }
 
+    /**
+     * 恢复请求
+     * @param id
+     * @param model
+     * @return
+     */
     @RequiresPermissions("request-solve")
     @RequestMapping(value = "/reply")
     public String reply(Integer id, Model model) {
@@ -131,6 +190,11 @@ public class RequestAction extends BaseController {
         return "/service/serviceReq/requestsolve.page";
     }
 
+    /**
+     * 恢复保存
+     * @param clientRequest
+     * @return
+     */
     @RequestMapping(value = "/replySave")
     public String replySave(ServiceRequest clientRequest) {
         if (clientRequest != null) {
@@ -139,6 +203,12 @@ public class RequestAction extends BaseController {
         return "redirect:" + adminPath + "/service/request/list";
     }
 
+    /**
+     * 回访
+     * @param id
+     * @param model
+     * @return
+     */
     @RequiresPermissions("request-back")
     @RequestMapping(value = "/review")
     public String review(Integer id, Model model) {
@@ -155,6 +225,12 @@ public class RequestAction extends BaseController {
         return "service/serviceReq/requestViewList.page";
     }
 
+    /**
+     * 回访保存
+     * @param review
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/reviewSave")
     public String reviewSave(ServiceReview review, Model model) {
         if (review.getReviewId() == null) {
@@ -166,6 +242,12 @@ public class RequestAction extends BaseController {
         return "redirect:" + adminPath + "/service/request/list";
     }
 
+    /**
+     * 指派回复
+     * @param ids
+     * @param name
+     * @return
+     */
     @RequiresPermissions("request-tome")
     @ResponseBody
     @RequestMapping(value = "/solveBy")
@@ -181,6 +263,12 @@ public class RequestAction extends BaseController {
         return resultMap(true, "操作成功");
     }
 
+    /**
+     * 指派回访
+     * @param ids
+     * @param name
+     * @return
+     */
     @RequiresPermissions("request-review-byme")
     @ResponseBody
     @RequestMapping(value = "/reviewBy")
@@ -196,6 +284,11 @@ public class RequestAction extends BaseController {
         return resultMap(true, "操作成功");
     }
 
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
     @RequiresPermissions("request-batchdel")
     @ResponseBody
     @RequestMapping(value = "/batchDelete")
