@@ -2,11 +2,11 @@
     #@tableBorder("out-border")
         #@thead()
             #@tr("text-c")
-                #@thW("50px")ID#end
-                #@thW("150px")P#end
-                #@thW("150px")所属模块#end
-                #@thW("150px")用例标题#end
-                #@thW("150px")测试结果#end
+                #@thW()ID#end
+                #@thW()P#end
+                #@thW()所属模块#end
+                #@thW()用例标题#end
+                #@thW()测试结果#end
             #end
         #end
         #@tbody()
@@ -26,10 +26,10 @@
         		#end
         	#end
         	#@tr("text-c")
-        		<td colspan="5">
-        		<center>
+        		<td colspan="5" class="col-2">
+        			<div class="col-5"></div>
         			<button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-        			</center>
+        			
         			</td>
         	#end        	
         #end

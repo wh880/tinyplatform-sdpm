@@ -406,9 +406,8 @@ public class UserAction extends BaseController {
     @RequestMapping("/testtask/search")
     public String testTaskSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, QualityTestTask testTask, String order, String ordertype, Model model, HttpServletRequest request) {
         OrgUser user = userService.findUser(id);
-        String account = user.getOrgUserAccount();
         QualityTestTask testTask1 = new QualityTestTask();
-        testTask1.setTesttaskOwner(account);
+        testTask1.setTesttaskOwner(id);
         Pager<QualityTestTask> testTaskPager = testTaskService.findTestTaskPager(start, limit, testTask1, order, false);
         model.addAttribute("testTaskPager", testTaskPager);
 
@@ -470,10 +469,13 @@ public class UserAction extends BaseController {
         if (startDate == null && endDate == null) {
             Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, null, null);
             model.addAttribute("actionPager", actionPager);
-        } else {
+        } else if (!startDate.equals(endDate)) {
             String startDateStr = DateUtils.formatDate(startDate, "yyyy-MM-dd HH:mm:ss");
             String endDateStr = DateUtils.formatDate(endDate, "yyyy-MM-dd HH:mm:ss");
             Pager<SystemAction> actionPager = actionService.queryBetweenDate(start, limit, systemAction, startDateStr, endDateStr, null, false);
+            model.addAttribute("actionPager", actionPager);
+        } else {
+            Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, null, null);
             model.addAttribute("actionPager", actionPager);
         }
         return "/organization/user/userActiveTable.pagelet";

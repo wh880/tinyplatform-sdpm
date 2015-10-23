@@ -65,7 +65,7 @@
 
                     $(function () {
                         $("#user-select").on("change", function () {
-                            window.location.href = "${TINY_CONTEXT_PATH +adminPath}/org/user/testtask1?choose=3&id=" + $(this).val();
+                            window.location.href = "${TINY_CONTEXT_PATH +adminPath}/org/user/testtask?choose=3&id=" + $(this).val();
                         });
                     });
 
@@ -89,7 +89,7 @@
 
             <span class="barBoxs">
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/testtask?choose=3&id=${id}"
-                   class="${choose == 3?'active_btn':''}">他的任务</a>
+                   class="${choose == 3?'active_btn':''}">负责版本</a>
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/testtask1?choose=4&id=${id}"
                    class="${choose == 4?'active_btn':''}">给他的用例</a>
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/testtask1?choose=5&id=${id}"

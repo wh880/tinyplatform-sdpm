@@ -201,23 +201,22 @@ public class BuildAction extends BaseController {
     }
 
     @RequestMapping("/add")
-    public String add() {
-//        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
-//        SystemModule module = new SystemModule();
-//        module.setModuleType("project");
-//        module.setModuleRoot(projectId);
-//        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
-//        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
-//        model.addAttribute("teamList", teamList);
-//        model.addAttribute("prodcutList", list);
-//        if (buildId != null) {
-//            ProjectBuild build = buildService.findBuild(buildId);
-//            model.addAttribute("build", build);
-//
-//        }
-//        LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD, LogUtil.LogAction.EDITED, buildId.toString(), UserUtils.getUserId(),
-//                null, buildService.findBuild(buildId).getBuildProject().toString(),
-//                buildService.findBuild(buildId),null, commnet);
+    public String add(HttpServletRequest request, Integer buildId, Model model,String commnet) {
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+        SystemModule module = new SystemModule();
+        module.setModuleType("project");
+        module.setModuleRoot(projectId);
+        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
+        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
+        model.addAttribute("teamList", teamList);
+        model.addAttribute("prodcutList", list);
+        if (buildId != null&&buildId!=0) {
+            ProjectBuild build = buildService.findBuild(buildId);
+            model.addAttribute("build", build);
+
+        }else{
+            model.addAttribute("build", null);
+        }
         return "project/version/add.page";
     }
 

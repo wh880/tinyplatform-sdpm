@@ -2,14 +2,14 @@
 <input type="hidden" name="records" value="${num}"/>
 #end
 
-#set(records=actionPager.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=actionPager?.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
 #for(a:actionPager.getRecords())
 #@tr()
-    #@td()${format(a?.actionDate, "yyyy-MM-dd")}#end
+    #@td()${formatDate(a?.actionDate, "yyyy-MM-dd")}#end
     #@td()${a?.actorName}#end
     #@td()${a?.actionAction}#end
     #@td()${a?.actionObjectType}#end

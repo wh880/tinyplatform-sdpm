@@ -49,7 +49,11 @@ public class Project implements Serializable{
 	/**
 	 * 总花费
 	 */
-	private float consume;
+	private float consumed;
+	/**
+	 * 总剩余
+	 */
+	private float allLeft;
 	/**
 	 * 项目id
 	 *
@@ -188,6 +192,14 @@ public class Project implements Serializable{
 	 */
 	private String projectDeleted;
 
+	public float getAllLeft() {
+		return allLeft;
+	}
+
+	public void setAllLeft(float allLeft) {
+		this.allLeft = allLeft;
+	}
+
 	public float getEstimate() {
 		return estimate;
 	}
@@ -197,11 +209,11 @@ public class Project implements Serializable{
 	}
 
 	public float getConsume() {
-		return consume;
+		return consumed;
 	}
 
-	public void setConsume(float consume) {
-		this.consume = consume;
+	public void setConsume(float consumed) {
+		this.consumed = consumed;
 	}
 
 	public String getBurnValue() {
