@@ -65,7 +65,7 @@
     $(function () {
         $("#updateBurn").click(function () {
             $.ajax({
-                url: "${TINY_CONTEXT_PATH+adminPath}/project/task/burn/update",
+                url: "${TINY_CONTEXT_PATH+adminPath}/project/burn/update",
                 type: "POST",
                 success: function (data) {
                     if (data.status == "y" || data.status == "success") {

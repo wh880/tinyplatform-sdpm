@@ -32,12 +32,13 @@ public class BurnServiceImpl implements BurnService {
 
     public void updateDate(Integer taskId) {
         //当任务修改以后 根据跟新的任务刷新燃尽图，统计项目
-        ProjectBurn burn = new ProjectBurn();
+
         if (taskId == null) {
             List<Project> projectList = projectManager.findListProjects(new Project());
             if (!projectList.isEmpty()) {
                 for (Project p : projectList) {
                     List<Project> tList = projectManager.findListProjects(p);
+                    ProjectBurn burn = new ProjectBurn();
                     burn.setProjectId(p.getProjectId());
                     burn.setBurnDate(DateUtils.getDateStart(new Date()));
                     List<ProjectBurn> res = burnManager.findList(burn);
@@ -55,6 +56,7 @@ public class BurnServiceImpl implements BurnService {
             ProjectTask task = taskManager.find(taskId);
             Project project = projectManager.find(task.getTaskProject());
             List<Project> projectList = projectManager.findListProjects(project);
+            ProjectBurn burn = new ProjectBurn();
             burn.setProjectId(project.getProjectId());
             burn.setBurnDate(DateUtils.getDateStart(new Date()));
             List<ProjectBurn> res = burnManager.findList(burn);
@@ -67,8 +69,6 @@ public class BurnServiceImpl implements BurnService {
                 burnManager.update(burn);
             }
         }
-
-        burnManager.findList(burn);
     }
 
     public int addBurn(ProjectBurn burn) {
