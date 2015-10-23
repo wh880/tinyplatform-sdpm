@@ -34,8 +34,9 @@
                         #@td()
                         #@Tselect2F()
                             #@Tselect2Body("caseStepResultList["+(caseStepFor.index-1)+"].result" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            #for(step : getDict("stepResult"))
-                            <option value="step.value">${step.text}/option>
+                            #for(step : getDict("caseStepResult"))
+                            <option value="${step.value}">${step.text}</option>
+                            #end
                             #end
                         #end
                         #end
@@ -82,7 +83,7 @@
                                     #@th()${caseStepFor.index}#end
                                     #@td()${caseStep?.caseStepDesc}#end
                                     #@td()${caseStep?.caseStepExpect}#end
-                                    #@td()${getDict("stepResult",sResults?.size()>0?sResults?.get(caseStepFor.index-1)?.result:"-1")}#end
+                                    #@td()${getDict("caseStepResult",sResults?.size()>0?sResults?.get(caseStepFor.index-1)?.result:"-1")}#end
                                     #@td()${sResults?.size()>0?sResults?.get(caseStepFor.index-1)?.real:""}#end
                                 #end
                             #end
