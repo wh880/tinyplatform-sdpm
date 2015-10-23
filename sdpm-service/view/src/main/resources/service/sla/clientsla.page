@@ -3,33 +3,23 @@
 #set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-     #*   #@div(divClass="dropdownBox dropdownBoxes")
-            #include("/service/serviceCom/dropdownMenu.page")
-        #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
         #@tabBodyCol("ptop-5")
-        ##operationbar star
             #@div(divClass="operationbar")
             <span class="f">
 					<a href="#" class="active_btn">${client.clientName}</a>
             </span>
             <span class="r">
-                #@iconOperations(
-                    "#myModal1" "icon-download-alt" "导出" "600" "100" "/service/sla/slaExport.pagelet" "ml-5")
-                    导出#end
                 #set(m1=menuManager.getMenu("sla-add"))
                 #if(m1)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}">#buttonIcon(iconClass=m1.icon)${m1.name}</a>
                 #end
-            #*<a href="${TINY_CONTEXT_PATH}/service/sla/slaAdd.page"
-               title="新建协议">#buttonIcon(iconClass="icon-plus")新建协议</a>*#
                 <a href="${TINY_CONTEXT_PATH}/service/sla/sla.page"
                    title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
             </span>
             #end
-        ##operationbar end
         #end
         #include("/service/sla/clientSlaList.page")
     #end

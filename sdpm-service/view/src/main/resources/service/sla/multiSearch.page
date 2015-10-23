@@ -74,7 +74,8 @@
                             <option value="or">或者</option>
                         </select>
                         </td>
-                        <td class="w-90px"><select name="infos[2].field" id="field3" class="form-control ">
+                        <td class="w-90px"><select name="infos[2].field" id="field3" class="form-control "
+                                                   style="width: 112px">
                         </select>
                         </td>
                         <td class="w-70px"><select name="infos[2].operate" id="operator3"
@@ -146,19 +147,6 @@
                     <button type="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
                     <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
                     <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>
-                </div>
-            </td>
-            <td>
-                <div style="width:105px;margin-top:3px;">
-                    #@Tselect2F()
-                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="CRM">我的查询</option>
-                            <option value="P2P">P2P系统</option>
-                            <option value="o2o">o2o系统</option>
-                        #end
-                    ##填写任意内容，侦听需重新填加 A侦听已内置
-                        #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
-                    #end
                 </div>
             </td>
         </tr>
