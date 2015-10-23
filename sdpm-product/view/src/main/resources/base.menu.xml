@@ -175,7 +175,7 @@
         <menu id="product-plan-badel" name="批量删除" href="" icon="" sort="81" isShow="1"
               scope="plan-badel"/>
         <menu id="linkstory" name="删除" href="/product/story/ajaxUpdate?storyId=${story.storyId}&amp;planId=0" icon="icon-remove" sort="80" isShow="1" scope="plan-linkdemand"/>
- 		<menu id="linkbug" name="删除" href="/quality/bug/delete?bugId=${bug.bugId}" icon="icon-remove" sort="79" isShow="1" scope="plan-linkbug"/>
+ 		<menu id="linkbug" name="删除" href="/quality/bug/ajaxUpdate?bugId=${bug.bugId}&amp;planId=0" icon="icon-remove" sort="79" isShow="1" scope="plan-linkbug"/>
         
     </menu>
 

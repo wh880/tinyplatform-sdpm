@@ -1,6 +1,6 @@
 
 ##<span id="showsearchmore-bug">搜索</span>
-<form method="get" action="${TINY_CONTEXT_PATH +adminPath}/product/plan/forword/noRelateBug" id="${storyTableId}form"
+<form method="get" action="${TINY_CONTEXT_PATH +adminPath}/product/plan/forword/noRelateBug" id="${bugTableId}form"
       class="form-condensed searchform">
     <div class="hide">
         <select id="operatortemp">
@@ -460,8 +460,8 @@
             })
         });
 
-        $("#${storyTableId}form").on("submit",function(){
-            $("#${storyTableId}").trigger("initnav");
+        $("#${bugTableId}form").on("submit",function(){
+            $("#${bugTableId}").trigger("initnav");
             return false;
 
         });

@@ -1,11 +1,25 @@
 package org.tinygroup.sdpm.action.product;
 
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
@@ -15,7 +29,13 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
-import org.tinygroup.sdpm.product.dao.pojo.*;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
+import org.tinygroup.sdpm.product.dao.pojo.StoryCollection;
+import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
@@ -38,14 +58,6 @@ import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 需求的控制器
@@ -533,11 +545,33 @@ public class StoryAction extends BaseController {
      * @return 返回数据集合
      */
     @RequestMapping("/bugSearch/{relate}")
-    public String bugListAction(@PathVariable(value = "relate") String relate, int page, int pagesize, QualityBug bug, SearchInfos searchInfos,
-                                @RequestParam(required = false, defaultValue = "bugId") String order,
+    public String bugListAction(@PathVariable(value = "relate") String relate, int page, int pagesize, QualityBug bug, SearchInfos searchInfos,String groupOperate, 
+                                @RequestParam(required = false, defaultValue = "bugId") String order,String type,
                                 @RequestParam(required = false, defaultValue = "asc") String ordertype,
-                                Model model) {
-        Pager<QualityBug> p = bugService.findBugListPager(pagesize * (page - 1), pagesize, searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), "") : "", bug, null, "asc".equals(ordertype) ? true : false);
+                                Model model, HttpServletRequest request) {
+        //bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
+    	
+    	if (request.getSession().getAttribute("sessionProductId") != null) {
+    		bug.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
+        }
+
+        //String condition = StoryUtil.getStatusCondition(choose, request);
+        
+        String condition = "";
+        if(searchInfos!=null){
+        	if(searchInfos.getInfos().size()>0||searchInfos.getInfos()!=null){
+        		String sql =  SqlUtil.toSql(searchInfos.getInfos(), groupOperate);
+        		if(!StringUtil.isBlank(sql)){
+        			condition += sql;
+        		}
+        	}
+        }
+        if("noRelate".equals(type)){
+        	condition = (StringUtil.isBlank(condition.trim())?" ":(condition+" and " )) + " quality_bug.plan_id <> "+bug.getPlanId();
+        	bug.setPlanId(null);
+        }
+
+        Pager<QualityBug> p = bugService.findBugListPager(pagesize * (page - 1), pagesize,condition, bug, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("bugList", p);
 
         if ("reRelateBug".equals(relate)) {

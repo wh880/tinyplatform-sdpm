@@ -69,7 +69,7 @@
 			#@tinyTableContent(TINY_CONTEXT_PATH +adminPath +"/product/story/search/noRelateStory?planId="+planId+"&type=noRelate&deleted=0") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-						#@tinyTh({"width":"8"})<input type="checkbox" name="storyId" value="">#end
+						#@tinyTh({"width":"8"})<input type="checkbox" id="checkboxall" name="storyId" value="">#end
 						#@tinyTh({"class":"sorting","rel":"storyId"})ID#end
 						#@tinyTh({"class":"","rel":"sortname"})P#end
 						#@tinyTh({"class":"","rel":"planId"})所属计划#end
