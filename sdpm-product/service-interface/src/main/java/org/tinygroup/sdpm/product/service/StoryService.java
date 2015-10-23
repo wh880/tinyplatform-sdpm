@@ -116,5 +116,6 @@ public interface StoryService {
 
 
 	List<ProductStory> findProductName(Integer storyId);
-
+	
+	Pager<ProductStory> findPager(int start, int limit,ProductStory story, String condition, String columnName, boolean asc);
 }

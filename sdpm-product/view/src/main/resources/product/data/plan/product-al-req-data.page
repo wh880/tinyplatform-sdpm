@@ -6,9 +6,13 @@
 #for(story:storyList.getRecords())
 #@tr()
     #@td()<input type="checkbox" value="${story?.storyId}" id="field" name="storyId">#end
-    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${story?.storyId}</a>#end
+    #@td()<a
+            href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story
+        ?.storyId}</a>#end
     #@td()@#end
-    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${story?.storyTitle}</a>#end
+    #@td()<a
+            href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story
+        ?.storyTitle}</a>#end
     #@td()${story?.storyOpenedName}#end
     #@td()${story?.storyAssignedName}#end
     #@td()${story?.storyEstimate}#end

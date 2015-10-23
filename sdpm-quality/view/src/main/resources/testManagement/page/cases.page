@@ -8,7 +8,7 @@
 <script>
 
 
-        function deleteBeatch() {
+        function deleteBatch() {
 
             var testList = new Array();
                 $("input[type='checkbox']").each(function () {

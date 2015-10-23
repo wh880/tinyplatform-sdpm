@@ -8,9 +8,7 @@
 #set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-    ##tabbody end
     <div style="width:100%;float:left">
-    #* #foreach(var:[1..3])*#
         #foreach(var:slas)
             #@gridSysCol(4)
                 #@div(divClass="infoContent")

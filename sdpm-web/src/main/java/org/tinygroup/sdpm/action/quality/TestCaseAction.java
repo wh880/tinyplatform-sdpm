@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResult;
 import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResults;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
@@ -163,6 +164,7 @@ public class TestCaseAction extends BaseController {
 		QualityTestCase testcase = testCaseService.findById(caseId);
 		QualityCaseStep qualityCaseStep = new QualityCaseStep();
 		qualityCaseStep.setCaseId(caseId);
+		qualityCaseStep.setCaseVersion(testcase.getCaseVersion());
 		List<QualityCaseStep> qualityCaseSteps = caseStepService
 				.findCaseStepList(qualityCaseStep);
 		QualityTestResult qualityTestResult = new QualityTestResult();
@@ -171,10 +173,12 @@ public class TestCaseAction extends BaseController {
 				.findTestResultList(qualityTestResult);
 		Map<String, List<CaseStepResult>> caseStepResults = new HashMap<String, List<CaseStepResult>>();
 		for (QualityTestResult qualityTestResult1 : qualityTestResults) {
+
 			caseStepResults.put(
 					String.valueOf(qualityTestResult1.getTestResultId()),
 					resolveResult(qualityTestResult1));
 		}
+
 		model.addAttribute("testcase", testcase);
 		model.addAttribute("caseSteps", qualityCaseSteps);
 		model.addAttribute("testResults", qualityTestResults);
@@ -183,29 +187,42 @@ public class TestCaseAction extends BaseController {
 	}
 
 	@RequestMapping("/execute")
-	public String execute(Integer caseId, CaseStepResults caseStepResults,
+	public String execute(Integer caseId, CaseStepResults caseStepResults,String resultType,
 			HttpServletRequest request) {
-		OrgUser user = (OrgUser) request.getSession().getAttribute("user");
 		QualityTestCase testcase = testCaseService.findById(caseId);
+		QualityTestCase old = testcase;
 		QualityTestResult qualityTestResult = new QualityTestResult();
 		qualityTestResult.setLinkCase(caseId);
 		qualityTestResult.setTestResultDate(new Date());
-		qualityTestResult.setTestResultLastRunner(user != null ? user
-				.getOrgUserNickName() : "");
+		qualityTestResult.setTestResultLastRunner(UserUtils.getUserId());
 		qualityTestResult.setCaseVersion(testcase.getCaseVersion());
-		qualityTestResult.setCaseStepresults(mergeResult(caseStepResults
-				.getCaseStepResultList()));
-		qualityTestResult.setCaseResult(testResult(caseStepResults
-				.getCaseStepResultList()));
+		if(caseStepResults!=null&&caseStepResults.getCaseStepResultList()!=null&&caseStepResults.getCaseStepResultList().size()>0) {
+			qualityTestResult.setCaseStepresults(mergeResult(caseStepResults
+					.getCaseStepResultList()));
+			qualityTestResult.setCaseResult(testResult(caseStepResults
+					.getCaseStepResultList()));
+			testcase.setCaseLastRunResult(testResult(caseStepResults
+					.getCaseStepResultList()));
+		}
+		if(!StringUtil.isBlank(resultType)){
+			String result = "pass".equals(resultType)?"1":"2";
+			qualityTestResult.setCaseResult(result);
+			testcase.setCaseLastRunResult(result);
+		}
+		testcase.setCaseLastRunDate(new Date());
+		testcase.setCaseLastRunner(UserUtils.getUserId());
+		testCaseService.updateTestCase(testcase);
 		testResultService.add(qualityTestResult);
-
-		SystemAction systemAction = new SystemAction();
-		systemAction.setActionObjectId(String.valueOf(caseId));
-		systemAction.setActionProduct(String.valueOf(testcase.getProductId()));
-		systemAction.setActionObjectType("case");
-		systemAction.setActionAction("run");
-		systemAction.setActionActor(user != null ? user.getOrgUserId() : "0");
-		logService.log(systemAction);
+		LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
+				LogUtil.LogAction.RUN,
+				String.valueOf(testcase.getCaseId()),
+				UserUtils.getUserId(),
+				String.valueOf(testcase.getProductId()),
+				null,
+				old,
+				testcase,
+				null
+		);
 		return "redirect:" + adminPath+"/quality/testCase";
 	}
 
@@ -319,10 +336,13 @@ public class TestCaseAction extends BaseController {
 	}
 
 	private String testResult(List<CaseStepResult> caseStepResults) {
+		if(caseStepResults==null||caseStepResults.size()<1)return "0";
 		String result = "1";
 		for (CaseStepResult c : caseStepResults) {
-			if (!"1".equals(c.getResult()) && !"1".equals(result)) {
+			if ("2".equals(c.getResult())) {
 				result = c.getResult();
+			}else if("3".equals(c.getResult())){
+				result = "2".equals(result)?"2":"3";
 			}
 		}
 		return result;
@@ -330,6 +350,7 @@ public class TestCaseAction extends BaseController {
 
 	private List<CaseStepResult> resolveResult(
 			QualityTestResult qualityTestResult) {
+		if(StringUtil.isBlank(qualityTestResult.getCaseStepresults()))return new ArrayList<CaseStepResult>();
 		List<CaseStepResult> caseStepResults = new ArrayList<CaseStepResult>();
 		String[] stepResults = qualityTestResult.getCaseStepresults()
 				.split(",");

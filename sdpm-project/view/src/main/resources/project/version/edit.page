@@ -21,7 +21,7 @@
     #end
 #end
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/version/editsave" post {"class":"test","enctype":
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/version/addsave" post {"class":"test","enctype":
     "multipart/form-data"})
     #hiddenInput(hiddenInputName="buildId" hiddenInputValue=build?.buildId)
 ##<div style="width:100%;float:left" class="pageleftpart">
@@ -40,8 +40,8 @@
                 #end
             ##填写任意内容，侦听需重新填加 A侦听已内置
                 #@Tselect2Fix()
-                    <a href="${TINY_CONTEXT_PATH}/a/product/page/tabledemo/addProduct.page">增加</a>
-                    <a href="${TINY_CONTEXT_PATH}/a/product/page/tabledemo/product-listall.page" class="r">全部</a>
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
                 #end
             #end
         #end
@@ -59,7 +59,7 @@
                 #@Tselect2Body(
                     "buildBuilder" build?.buildBuilder {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     #foreach(t : teamList)
-                        <option value="${t?.teamUserId}">${t?.teamUserId}</option>
+                        <option value="${t?.teamUserId}">${t?.teamUserId?UserUtils.getUserById(t?.teamUserId)?.orgUserRealName:""}</option>
                     #end
                 #end
             ##填写任意内容，侦听需重新填加 A侦听已内置

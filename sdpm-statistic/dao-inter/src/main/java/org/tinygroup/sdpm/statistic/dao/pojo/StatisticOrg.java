@@ -1,8 +1,9 @@
 package org.tinygroup.sdpm.statistic.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class StatisticOrg {
+public class StatisticOrg implements Serializable{
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
 

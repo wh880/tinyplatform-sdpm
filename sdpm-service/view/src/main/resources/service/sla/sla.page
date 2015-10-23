@@ -7,24 +7,20 @@
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
-
         #@tabBodyCol("ptop-5")
-        ##operationbar star
             #@div(divClass="operationbar")
                 #div(divClass="clearfix")
                 #include("/service/sla/multiSearch.page")
             #end
         #end
-
-
     #*实现左侧树2015-10-12,21:17*#
-        #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+        #@toggleBox({"class":"open"})
             #@toggleLeft({"class":"aclass"})
                 #@settoggleLeftTitle()所有产品#end
                 #@settoggleLeftBody("treeLeftbox")
                     #@zTreeList(call("link",adminPath+"/service/client/treeData") {"readOnly":true})
-                        #setzTreeValMap({"id":"treeId","name":"pName","pid":
-                            "pId"}) ##Id中带"p"的为productLine的ID，其余的为productde ID
+                    ##Id中带"p"的为productLine的ID，其余的为productde ID
+                        #setzTreeValMap({"id":"treeId","name":"pName","pid":"pId"})
                         #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/service/sla/list" )
                     #end
                 #end
@@ -33,7 +29,6 @@
                 #include("/service/sla/slaTable.page")
             #end
         #end
-
     #end
 #end
 #@simpleModal("myModal" "导出")#end

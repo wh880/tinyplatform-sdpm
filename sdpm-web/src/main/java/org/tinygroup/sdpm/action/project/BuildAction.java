@@ -40,21 +40,12 @@ public class BuildAction extends BaseController {
     @Autowired
     private BuildService buildService;
     @Autowired
-    private ProjectService projectService;
-    @Autowired
     private TeamService teamService;
     @Autowired
     private ProductService productService;
     @Autowired
-    private ProjectProductService projectProductService;
-    @Autowired
-    private BugService bugService;
-    @Autowired
-    private ModuleService moduleService;
-    @Autowired
     private ProjectStoryService projectStoryService;
-    @Autowired
-    private StoryService storyService;
+
 
     @RequestMapping("/productBuildList")
     public String productBuildList(ProjectBuild build, Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
@@ -76,23 +67,10 @@ public class BuildAction extends BaseController {
     }
 
     @RequestMapping("/look")
-    public String look(Integer buildId, Model model) {
+    public String look() {
         return "project/bug/index.page";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(ProjectBuild build, Model model,String commnet) {
-        if (build.getBuildId() == null) {
-            buildService.add(build);
-        } else {
-            buildService.updateBuild(build);
-        }
-        LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD, LogUtil.LogAction.EDITED, build.getBuildId().toString(), UserUtils.getUserId(),
-                null, buildService.findBuild(build.getBuildId()).getBuildProject().toString(),
-                buildService.findBuild(build.getBuildId()),null, commnet);
-        model.addAttribute("build", build);
-        return "project/version/index.page";
-    }
 
     @RequestMapping("/edit")
     public String edit(HttpServletRequest request, Integer buildId, Model model) {
@@ -117,19 +95,6 @@ public class BuildAction extends BaseController {
     }
 
 
-    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public String editSave(ProjectBuild build, Model model,String commnet) {
-        if (build.getBuildId() == null) {
-            buildService.add(build);
-        } else {
-            buildService.updateBuild(build);
-        }
-        LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD, LogUtil.LogAction.EDITED, build.getBuildId().toString(), UserUtils.getUserId(),
-                null, buildService.findBuild(build.getBuildId()).getBuildProject().toString(),
-                buildService.findBuild(build.getBuildId()),null, commnet);
-        model.addAttribute("build", build);
-        return "project/version/index.page";
-    }
 
     @RequestMapping(value = "/addsave", method = RequestMethod.POST)
     public String addSave(ProjectBuild build, Model model,String commnet) {
@@ -139,9 +104,6 @@ public class BuildAction extends BaseController {
         } else {
             buildService.updateBuild(build);
         }
-        LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD, LogUtil.LogAction.EDITED, build.getBuildId().toString(), UserUtils.getUserId(),
-                null, buildService.findBuild(build.getBuildId()).getBuildProject().toString(),
-                buildService.findBuild(build.getBuildId()),null, commnet);
         model.addAttribute("build", build);
         return "project/version/index.page";
     }
@@ -152,15 +114,7 @@ public class BuildAction extends BaseController {
     public Map<String, String> delete(Integer id, Model model) {
         Integer res = buildService.softDeleteBuild(id);
         Map<String, String> map = new HashMap<String, String>();
-        if (res > 0) {
-            map.put("status", "y");
-            map.put("info", "删除成功");
-        } else {
-            map.put("status", "n");
-            map.put("info", "删除失败");
-        }
-
-        return map;
+        return resultMap(true,"删除成功");
     }
 
     @RequestMapping("/product-al-bug")
@@ -201,23 +155,22 @@ public class BuildAction extends BaseController {
     }
 
     @RequestMapping("/add")
-    public String add() {
-//        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
-//        SystemModule module = new SystemModule();
-//        module.setModuleType("project");
-//        module.setModuleRoot(projectId);
-//        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
-//        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
-//        model.addAttribute("teamList", teamList);
-//        model.addAttribute("prodcutList", list);
-//        if (buildId != null) {
-//            ProjectBuild build = buildService.findBuild(buildId);
-//            model.addAttribute("build", build);
-//
-//        }
-//        LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD, LogUtil.LogAction.EDITED, buildId.toString(), UserUtils.getUserId(),
-//                null, buildService.findBuild(buildId).getBuildProject().toString(),
-//                buildService.findBuild(buildId),null, commnet);
+    public String add(HttpServletRequest request, Integer buildId, Model model,String commnet) {
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+        SystemModule module = new SystemModule();
+        module.setModuleType("project");
+        module.setModuleRoot(projectId);
+        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
+        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
+        model.addAttribute("teamList", teamList);
+        model.addAttribute("prodcutList", list);
+        if (buildId != null&&buildId!=0) {
+            ProjectBuild build = buildService.findBuild(buildId);
+            model.addAttribute("build", build);
+
+        }else{
+            model.addAttribute("build", null);
+        }
         return "project/version/add.page";
     }
 
@@ -265,9 +218,6 @@ public class BuildAction extends BaseController {
     @RequestMapping("/bugSearch/{relate}")
     public String bugListAction(@PathVariable(value="relate")String relate, int page, int pagesize, QualityBug bug,int id,String groupOperate, SearchInfos searchInfos,
                                 Model model){
-        //bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-
-
 
         if ("reRelateBug".equals(relate)) {
             bug.setDeleted(0);
@@ -294,26 +244,22 @@ public class BuildAction extends BaseController {
     @ResponseBody
     @RequestMapping("/releateReq")
     public Map<String, String> releateReq(String ids,Integer buildId){
-//        buildService.releateReq(storyId, buildId);
         Map<String, String> map = new HashMap<String, String>();
         for(String storyId:ids.split(",")){
             buildService.releateReq(Integer.valueOf(storyId), buildId);
         }
-//        return "project/task/relation-release/product-al-req.page";
-        map.put("status", "y");
-        map.put("info", "关联成功");
-        return map;
+//        map.put("status", "y");
+//        map.put("info", "关联成功");
+        return resultMap(true,"关联成功");
     }
 
     @ResponseBody
     @RequestMapping("/releateBug")
     public Map<String, String> releateBug(String ids,Integer buildId){
-//        buildService.releateReq(storyId, buildId);
         Map<String, String> map = new HashMap<String, String>();
         for(String bugId:ids.split(",")){
             buildService.releateBug(Integer.valueOf(bugId), buildId);
         }
-//        return "project/task/relation-release/product-al-req.page";
         map.put("status", "y");
         map.put("info", "关联成功");
         return map;
@@ -344,7 +290,7 @@ public class BuildAction extends BaseController {
         map.put("status", "success");
         map.put("info", "删除成功");
         return map;
-//        return "/project/task/relation-release/product-al-req.pagelet";
+
     }
 
     @ResponseBody
@@ -355,7 +301,7 @@ public class BuildAction extends BaseController {
         map.put("status", "success");
         map.put("info", "删除成功");
         return map;
-//        return "/project/task/relation-release/product-al-req.pagelet";
+
     }
 
     @ResponseBody
@@ -367,7 +313,7 @@ public class BuildAction extends BaseController {
             map.put("info", "请至少选择一条数据");
             return map;
         }
-//        List<ProductStory> list = new ArrayList<ProductStory>();
+
         for (String s : ids.split(",")) {
             Integer S = Integer.valueOf(s);
             buildService.deletereleate(S,buildId);
@@ -386,7 +332,7 @@ public class BuildAction extends BaseController {
             map.put("info", "请至少选择一条数据");
             return map;
         }
-//        List<ProductStory> list = new ArrayList<ProductStory>();
+
         for (String bug : ids.split(",")) {
             Integer Bug = Integer.valueOf(bug);
             buildService.deletereleateBug(Bug,buildId);

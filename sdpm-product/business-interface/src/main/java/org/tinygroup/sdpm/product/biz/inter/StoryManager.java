@@ -77,6 +77,15 @@ public interface StoryManager {
 	Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc);
 	
 	/**
+	 * 分页查询（排序）
+	 * @param start
+	 * @param limit
+	 * @param story
+	 * @return
+	 */
+	Pager<ProductStory> findPager(int start, int limit, ProductStory story, String condition, String columnName, boolean asc);
+	
+	/**
 	 * 产品需求数量分类
 	 * @param story
 	 * @return
