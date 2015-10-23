@@ -65,5 +65,6 @@ public interface TestCaseService {
 
 
 	Pager<QualityTestCase> findStoryChangedCase(Integer start,Integer limit,QualityTestCase testcase, String condition,String columnName,boolean asc);
-
+	
+	List<Integer> getStoryIds(QualityTestCase t);
 }

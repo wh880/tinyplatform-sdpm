@@ -59,5 +59,10 @@ public class TestCaseServiceImpl implements TestCaseService {
 		return testcasemanager.findStoryChangedCase(start,limit,testcase,condition,columnName,asc);
 	}
 
+	public List<Integer> getStoryIds(QualityTestCase t) {
+
+		return testcasemanager.getStoryIds(t);
+	}
+
 
 }
