@@ -34,16 +34,38 @@ public class BurnServiceImpl implements BurnService {
         //当任务修改以后 根据跟新的任务刷新燃尽图，统计项目
         ProjectBurn burn = new ProjectBurn();
         if (taskId == null) {
-            //更新全部
+            List<Project> projectList = projectManager.findListProjects(new Project());
+            if (!projectList.isEmpty()) {
+                for (Project p : projectList) {
+                    List<Project> tList = projectManager.findListProjects(p);
+                    burn.setProjectId(p.getProjectId());
+                    burn.setBurnDate(DateUtils.getDateStart(new Date()));
+                    List<ProjectBurn> res = burnManager.findList(burn);
+                    burn.setBurnConsumed(tList.get(0).getConsume());
+                    burn.setBurnLeft(tList.get(0).getAllLeft());
+                    if (res.isEmpty()) {
+                        burnManager.add(burn);
+                    } else {
+                        burn.setId(res.get(0).getId());
+                        burnManager.update(burn);
+                    }
+                }
+            }
         } else {
             ProjectTask task = taskManager.find(taskId);
             Project project = projectManager.find(task.getTaskProject());
             List<Project> projectList = projectManager.findListProjects(project);
             burn.setProjectId(project.getProjectId());
-            burn.setBurnConsumed(project.getConsume());
-
             burn.setBurnDate(DateUtils.getDateStart(new Date()));
             List<ProjectBurn> res = burnManager.findList(burn);
+            burn.setBurnConsumed(projectList.get(0).getConsume());
+            burn.setBurnLeft(projectList.get(0).getAllLeft());
+            if (res.isEmpty()) {
+                burnManager.add(burn);
+            } else {
+                burn.setId(res.get(0).getId());
+                burnManager.update(burn);
+            }
         }
 
         burnManager.findList(burn);

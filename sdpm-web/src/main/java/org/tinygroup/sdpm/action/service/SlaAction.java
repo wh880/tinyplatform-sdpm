@@ -33,18 +33,27 @@ public class SlaAction extends BaseController {
     @Autowired
     private ProductService productService;
 
-
-    /*查询*/
+    /**
+     * 查询
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
         if (id != null) {
             ServiceSla sla = slaService.findSla(id);
             model.addAttribute("sla", sla);
         }
-        /*调用client的服务，查询出客户表的对象*/
+        /**
+         * 调用client的服务，查询出客户表的对象
+         */
         ServiceClient client = new ServiceClient();
         List<ServiceClient> list = clientService.getClientList(client);
-        /*调用product的服务，查询出产品表的对象*/
+        /**
+         * 调用product的服务，查询出产品表的对象
+         */
         Product product = new Product();
         List<Product> slas = productService.findProductList(product);
         model.addAttribute("slas", slas);
@@ -52,19 +61,30 @@ public class SlaAction extends BaseController {
         return "/service/sla/slaAdd.page";
     }
 
-    /*新增和修改*/
+    /**
+     * 新增和修改
+     *
+     * @param id
+     * @param sla
+     * @param model
+     * @return
+     */
     @RequestMapping("/save")
     public String save(Integer id, ServiceSla sla, Model model) {
         if (sla.getSlaId() == null) {
             sla = slaService.addSla(sla);
-           /* 新增的历史记录*/
+            /**
+             * 新增的历史记录
+             */
             LogUtil.logWithComment(LogUtil.LogOperateObject.SLA, LogUtil.LogAction.OPENED, String.valueOf(sla.getSlaId()), UserUtils.getUserId(),
                     null, null, null, sla, null);
 
         } else {
             ServiceSla qualitySla = slaService.findSla(sla.getSlaId());
             slaService.updateSla(sla);
-             /*编辑历史记录*/
+            /**
+             * 编辑历史记录
+             */
             LogUtil.logWithComment(LogUtil.LogOperateObject.SLA, LogUtil.LogAction.EDITED, String.valueOf(sla.getSlaId()), UserUtils.getUserId(),
                     null, null, qualitySla, sla, null);
         }
@@ -72,7 +92,10 @@ public class SlaAction extends BaseController {
         return "/service/sla/sla.page";
     }
 
-    /*注解的意义是，想根据产品id找到产品名称。"/list"和"/list/data"显示页面表中数据*/
+    /**
+     * 注解的意义是，想根据产品id找到产品名称。"/list"和"/list/data"显示页面表中数据
+     * @return
+     */
     @RequestMapping(value = "/list")
     public String list() {
         return "/service/sla/sla.page";
@@ -97,7 +120,17 @@ public class SlaAction extends BaseController {
         return resultMap(true, "删除成功");
     }
 
-    /* 协议里面，点击“详情”进入。注解的意义是，想根据产品id找到产品名称*/
+    /**
+     * 协议里面，点击“详情”进入。注解的意义是，想根据产品id找到产品名称
+     * @param id
+     * @param limit
+     * @param start
+     * @param sla
+     * @param page
+     * @param pageSize
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/slaClient")
     public String showClient(Integer id, Integer limit, Integer start, ServiceSla sla,
                              @RequestParam(required = false, defaultValue = "1") int page,
@@ -111,7 +144,12 @@ public class SlaAction extends BaseController {
         return "service/sla/clientsla.page";
     }
 
-    /*协议的“协议标题”页面，协议具体内容查找出来。将sla表中数据查询出来，放在对象sla中*/
+    /**
+     * 协议的“协议标题”页面，协议具体内容查找出来。将sla表中数据查询出来，放在对象sla中
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/slaContent")
     public String slaContent(Integer id, Model model) {
         ServiceSla sla = slaService.findSla(id);
@@ -119,7 +157,11 @@ public class SlaAction extends BaseController {
         return "service/sla/slaContent.page";
     }
 
-    /*sla批量删除*/
+    /**
+     * sla批量删除
+     * @param ids
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/batchDelete")
     public Map batchDelete(String ids) {
