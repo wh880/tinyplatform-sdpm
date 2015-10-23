@@ -210,11 +210,10 @@ public class ReleaseAction extends BaseController{
 		
 		ProductRelease release = releaseService.findRelease(releaseId);
 		if(release!=null&&!StringUtil.isBlank(release.getReleaseStories())){
-			
 			String releaseStories = release.getReleaseStories();
-			releaseStories = storyIdUtils(releaseStories, storyId.trim());
-			
-			
+			releaseStories = storyIdUtils(releaseStories,storyId!=null?"":storyId.trim());
+			release.setReleaseStories(releaseStories);
+			releaseService.updateRelease(release);
 		}
 		
 		
@@ -223,6 +222,25 @@ public class ReleaseAction extends BaseController{
 		map.put("info", "成功");
 
 		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/ajaxRelateStory")
+	public boolean RelateStory(ProductStory[] stories){
+		if(stories.length>0&&stories!=null){
+			ProductRelease release = releaseService.findRelease(stories[0].getReleaseId());
+			String releaseStories = release.getReleaseStories();
+			for (ProductStory story : stories) {
+				if(release!=null&&!(StringUtil.isBlank(release.getReleaseStories()))){
+					releaseStories = releaseStories + "," + story.getReleaseId();
+				}
+			}
+			release.setReleaseStories(releaseStories);
+			releaseService.updateRelease(release);
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public static String storyIdUtils(String soure,String inde){

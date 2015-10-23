@@ -26,6 +26,8 @@ import java.util.List;
  */
 public class ProductStory implements Serializable{
 	
+	private Integer releaseId;
+	
 	/**
 	 * 抄送人
 	 */
@@ -570,5 +572,13 @@ public class ProductStory implements Serializable{
 
 	public void setModuleTitle(String moduleTitle) {
 		this.moduleTitle = moduleTitle;
+	}
+
+	public Integer getReleaseId() {
+		return releaseId;
+	}
+
+	public void setReleaseId(Integer releaseId) {
+		this.releaseId = releaseId;
 	}
 }
