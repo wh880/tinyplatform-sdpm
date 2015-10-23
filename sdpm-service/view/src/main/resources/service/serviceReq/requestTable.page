@@ -60,7 +60,7 @@
                 #@tinyTh({"class":"sorting","rel":"requestTitle"})请求标题#end
                 #@tinyTh({"class":"sorting","rel":"requestPre"})请求优先级#end
                 #@tinyTh({"class":"sorting","rel":"requestStatus"})状态#end
-                #@tinyTh({"class":"sorting","rel":"requestCommitmentDate"})请求承诺完成时间#end
+                #@tinyTh({"class":"sorting","rel":"requestCommitmentDate"})承诺完成时间#end
                 #@tinyTh({"class":"sorting","rel":"replier"})指派回复#end
                 #@tinyTh({"class":"sorting","rel":"requestReviewer"})指派回访#end
                 #@tinyTh()操作#end

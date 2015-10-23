@@ -26,20 +26,18 @@
             #foreach(item : getDict("requestType"))
                 <option value=${item.value}>${item.text}</option>
             #end
-            <option value="null">空</option>
         </select>
         <select id="requestPre">
             <option value="" selected="selected"></option>
             #foreach(item : getDict("requestPre"))
                 <option value=${item.value}>${item.text}</option>
             #end
-            <option value="null">空</option>
         </select>
         <select id="modle">
             <option value="" selected="selected"></option>
-            <option value="2">模块一</option>
-            <option value="3">模块二</option>
-            <option value="null">空</option>
+            #foreach(l:moduleList)
+                <option value=${l.moduleId}>${l.moduleName}</option>
+            #end
         </select>
 
 
@@ -255,13 +253,13 @@
 //        });
         itemlist.push({
             "name": "requestSubmitDate",
-            "title": "请求提交时间",
+            "title": "提交时间",
             "operator": "=",
             "value": "date"
         });
         itemlist.push({
             "name": "requestCommitmentDate",
-            "title": "请求承诺回复时间",
+            "title": "承诺回复时间",
             "operator": "=",
             "value": "date"
         });

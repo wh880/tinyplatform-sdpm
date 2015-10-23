@@ -19,6 +19,8 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.service.service.inter.ReviewService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -42,7 +44,8 @@ public class RequestAction extends BaseController {
     private ProductService productService;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private ModuleService moduleService;
     /**
      * 根据不同条件显示请求表格内容
      *
@@ -53,11 +56,18 @@ public class RequestAction extends BaseController {
      */
     @RequiresPermissions("request")
     @RequestMapping(value = "/list")
-    public String list(Integer operation, Integer status, Model model) {
+    public String list(Integer operation, Integer status, Integer treeId, Model model) {
         model.addAttribute("status", status);
         model.addAttribute("operation", operation);
         List<OrgUser> userList = userService.findUserList(new OrgUser());
         List<ServiceClient> serviceClients = clientService.getClientList(new ServiceClient());
+        if (treeId != null) {
+            SystemModule module = new SystemModule();
+            module.setModuleType("productDoc");
+            module.setModuleRoot(treeId);
+            List<SystemModule> moduleList = moduleService.findModuleList(module);
+            model.addAttribute("moduleList", moduleList);
+        }
         model.addAttribute("serviceClients", serviceClients);
         model.addAttribute("userList", userList);
         return "service/serviceReq/request.page";
@@ -65,16 +75,17 @@ public class RequestAction extends BaseController {
 
     /**
      * 显示请求表格内容
-     * @param limit 分页的记录限制
-     * @param start 分页的当前页
+     *
+     * @param limit         分页的记录限制
+     * @param start         分页的当前页
      * @param clientRequest
-     * @param operation 用于由我回复和由我解决
-     * @param status 请求的不同的状态
-     * @param treeId 左侧树对应产品的id
+     * @param operation     用于由我回复和由我解决
+     * @param status        请求的不同的状态
+     * @param treeId        左侧树对应产品的id
      * @param model
-     * @param groupOperate 搜索功能的条件
-     * @param searchInfos 搜索功能需要搜索的信息
-     * @param order 排序
+     * @param groupOperate  搜索功能的条件
+     * @param searchInfos   搜索功能需要搜索的信息
+     * @param order         排序
      * @param orderType
      * @return
      */
@@ -97,6 +108,7 @@ public class RequestAction extends BaseController {
 
     /**
      * 从表中读取数据跳到新建或编辑页面
+     *
      * @param id
      * @param model
      * @return
@@ -118,6 +130,7 @@ public class RequestAction extends BaseController {
 
     /**
      * 保存
+     *
      * @param clientRequest
      * @param model
      * @return
@@ -135,6 +148,7 @@ public class RequestAction extends BaseController {
 
     /**
      * 关闭请求
+     *
      * @param id
      * @param model
      * @return
@@ -150,6 +164,7 @@ public class RequestAction extends BaseController {
 
     /**
      * 关闭请求
+     *
      * @param clientRequest
      * @param model
      * @return
@@ -163,6 +178,7 @@ public class RequestAction extends BaseController {
 
     /**
      * 删除请求
+     *
      * @param id
      * @return
      */
@@ -176,6 +192,7 @@ public class RequestAction extends BaseController {
 
     /**
      * 恢复请求
+     *
      * @param id
      * @param model
      * @return
@@ -192,6 +209,7 @@ public class RequestAction extends BaseController {
 
     /**
      * 恢复保存
+     *
      * @param clientRequest
      * @return
      */
@@ -205,6 +223,7 @@ public class RequestAction extends BaseController {
 
     /**
      * 回访
+     *
      * @param id
      * @param model
      * @return
@@ -227,6 +246,7 @@ public class RequestAction extends BaseController {
 
     /**
      * 回访保存
+     *
      * @param review
      * @param model
      * @return
@@ -244,6 +264,7 @@ public class RequestAction extends BaseController {
 
     /**
      * 指派回复
+     *
      * @param ids
      * @param name
      * @return
@@ -265,6 +286,7 @@ public class RequestAction extends BaseController {
 
     /**
      * 指派回访
+     *
      * @param ids
      * @param name
      * @return
@@ -286,6 +308,7 @@ public class RequestAction extends BaseController {
 
     /**
      * 批量删除
+     *
      * @param ids
      * @return
      */

@@ -108,7 +108,6 @@
             #@sdpmItem("请求模块")
                 #@Tselect2F()
                     #@Tselect2Body("moduleId" request?.moduleId {"class":"input-text select2"})#end
-
                 #end
             #end
         #end
