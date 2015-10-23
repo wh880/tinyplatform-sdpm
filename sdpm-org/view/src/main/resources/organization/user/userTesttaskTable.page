@@ -5,13 +5,13 @@
 #setTinyItemCount(records)
 #for(testTask:testTaskPager.records)
 #@tr()
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionInfo.page">${testTask
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase">${testTask
         ?.testversionId}</a>#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionInfo.page">${testTask?.testtaskTitle}#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index.page">${testTask?.projectId}#end
-    #@td()${testTask?.build}#end
-    #@td()${testTask?.testtaskBegin}#end
-    #@td()${testTask?.testtaskEnd}#end
-    #@td()${testTask?.testtaskStatus}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase">${testTask?.testtaskTitle}#end
+    #@td()${testTask?.projectId}#end
+    #@td()${testTask?.buildName}#end
+    #@td()${formatDate(testTask?.testtaskBegin,"yyyy年MM月dd日")}#end
+    #@td()${formatDate(testTask?.testtaskEnd,"yyyy年MM月dd日")}#end
+    #@td()${getDict("versionStatus",testTask?.testtaskStatus)}#end
 #end
 #end
