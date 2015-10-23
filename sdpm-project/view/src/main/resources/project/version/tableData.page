@@ -17,14 +17,14 @@
         #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/version/productalbug?buildId=${b?.buildId}">${b?.buildName}#end
         #@td()${b?.buildScmPath}</a>#end
         #@td()${b?.buildFilePath}#end
-        #@td()${formatDate(qb?.buildDate,"yyyy-MM-dd hh-mm-ss")}#end
+        #@td()${formatDate(b?.buildDate,"yyyy-MM-dd hh-mm-ss")}#end
         #@td()${b?.buildBuilder?UserUtils.getUserById(b?.buildBuilder)?.orgUserRealName:""}#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("pro-version-op"))
                 #if(m.id != "pro-version-delete")
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
-                    #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href b.buildId)#buttonIcon(iconClass=m.icon)#end
+                    #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href b.buildId)<i class="${m.icon}" title=${m.name}></i>#end
                 #end
 
             #end

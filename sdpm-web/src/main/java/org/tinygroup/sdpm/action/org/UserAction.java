@@ -32,6 +32,8 @@ import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -101,21 +103,30 @@ public class UserAction extends BaseController {
         if (StringUtil.isBlank(user.getOrgUserId())) {
             if (password1.equals(password2)) {
                 user.setOrgUserPassword(password1);
-                userService.addUser(user);
-//                LogUtil.logWithComment(LogUtil.LogOperateObject.USER
-//                        , LogUtil.LogAction.CREATED
-//                        , String.valueOf(user.getOrgUserId())
-//                        , UserUtils.getUserId()
-//                        , String.valueOf(user.getOrgUserId())
-//                        , null
-//                        , null
-//                        , null
-//                        , systemAction.getActionComment());
+                OrgUser userTemp = userService.addUser(user);
+                LogUtil.logWithComment(LogUtil.LogOperateObject.USER
+                        , LogUtil.LogAction.CREATED
+                        , String.valueOf(userTemp.getOrgUserId())
+                        , UserUtils.getUserId()
+                        , null
+                        , null
+                        , null
+                        , null
+                        , null);
             } else {
                 return "organization/user/addUser.page";
             }
         } else {
             userService.updateUser(user);
+            LogUtil.logWithComment(LogUtil.LogOperateObject.USER
+                    , LogUtil.LogAction.EDITED
+                    , String.valueOf(user.getOrgUserId())
+                    , UserUtils.getUserId()
+                    , null
+                    , null
+                    , null
+                    , null
+                    , null);
         }
         model.addAttribute("user", user);
         return "redirect:" + adminPath + "/org/user/list/";
@@ -185,6 +196,15 @@ public class UserAction extends BaseController {
         String userPassword = orgUser.getOrgUserPassword();
         if (userService.validatePassword(password, userPassword)) {
             userService.deleteUser(id);
+            LogUtil.logWithComment(LogUtil.LogOperateObject.USER
+                    , LogUtil.LogAction.DELETED
+                    , String.valueOf(id)
+                    , UserUtils.getUserId()
+                    , null
+                    , null
+                    , null
+                    , null
+                    , null);
         } else {
             return "organization/user/delect.pagelet";
         }

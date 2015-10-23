@@ -658,7 +658,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 
     }
 
-	public int getCount(ProductStory t,Join join,Condition... condition){
+	public Integer getCount(ProductStory t, Join join, Condition... condition) {
 		Select select = null;
 		if(join==null){
 			 select = select(PRODUCT_STORYTABLE.STORY_ID.count()).from(PRODUCT_STORYTABLE).where(and(storyPueryCondition(t,condition)));
@@ -755,7 +755,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		}
 	}
 
-	public int countStatus(int productId, int status) {
+	public Integer countStatus(int productId, int status) {
 		Select select= MysqlSelect.select(PRODUCT_STORYTABLE.STORY_STATUS.count()).from(PRODUCT_STORYTABLE).where(PRODUCT_STORYTABLE.PRODUCT_ID.eq(productId)
 		.and(PRODUCT_STORYTABLE.STORY_STATUS.eq(status)));
 		return getDslTemplate().getDslSession().fetchOneResult(select,null);

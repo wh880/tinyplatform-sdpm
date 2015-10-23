@@ -128,11 +128,22 @@ public class ProductLineAction extends BaseController {
         return "/productLine/page/tabledemo/update.page";
     }
 
-    @RequestMapping("/close")
-    public String close(Integer productLineId, Model model) {
-        ProductLine productLine = productLineService.findProductLine(productLineId);
-        model.addAttribute("productLine", productLine);
-        return "/productLine/page/tabledemo/close.page";
+
+    @RequestMapping("/shut")
+    public String shut(SystemAction systemAction, ProductLine productLine) {
+        ProductLine productLine1 = productLineService.findProductLine(productLine.getProductLineId());
+        productLine.setDeleted(FieldUtil.DELETE_YES);
+        productLineService.updateProductLine(productLine);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
+                LogUtil.LogAction.CLOSED,
+                String.valueOf(productLine.getProductLineId()),
+                UserUtils.getUserId(),
+                String.valueOf(productLine.getProductLineId()),
+                null,
+                productLine1,
+                productLine,
+                systemAction.getActionComment());
+        return "redirect:" + "/productLine/page/tabledemo/list.page";
     }
 
     @RequestMapping("/list")

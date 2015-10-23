@@ -58,7 +58,7 @@
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-        <menu id="demand_set" name="建用例" href="/testManagement/page/proposecase.page" icon="icon-sitemap" sort="41"
+        <menu id="demand_set" name="建用例" href="/quality/testCase/add?currentPageId=5" icon="icon-sitemap" sort="41"
               isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon-href"/>
