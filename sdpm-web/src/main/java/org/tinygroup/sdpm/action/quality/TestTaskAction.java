@@ -243,6 +243,15 @@ public class TestTaskAction extends BaseController {
 	}
 
 	@ResponseBody
+	@RequestMapping("/ajax/deleteRun")
+	public Map deleteRun(Integer runId){
+		testRunService.delete(runId);
+		Map<String,String> result = new HashMap<String, String>();
+		result.put("status","success");
+		return result;
+	}
+
+	@ResponseBody
 	@RequestMapping("/ajax/batchDelete")
 	public Map batchDelete(String ids){
 		String[] tIds = null;

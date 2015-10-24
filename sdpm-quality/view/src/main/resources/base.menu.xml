@@ -86,9 +86,9 @@
               isShow="1" scope="testcaseinfo-tab"></menu>
        <menu id="tcaseback" name="返回" href="" icon="icon-level-up" sort="1"
               isShow="1" scope="testcaseinfo-tab"></menu>
-       <menu id="tnoteedit" name="编辑" href="/testManagement/page/editLog.pagelet" icon="icon-pencil" sort="2"
+       <menu id="tnoteedit" name="编辑" href="/quality/testCase/edit" icon="icon-pencil" sort="2"
               isShow="1" scope="testcasenote-op"></menu>
-       <menu id="tnotedelete" name="删除" href="" icon="icon-remove" sort="1"
+       <menu id="tnotedelete" name="删除" href="/quality/testCase/" icon="icon-remove" sort="1"
               isShow="1" scope="testcasenote-op"></menu>
        <menu id="tcaseall" name="所有"  href="/quality/testCase?status=tcaseall&amp;currentPageId=5" icon="" sort="5"
               isShow="1" scope="testcaseleft-tab"></menu>

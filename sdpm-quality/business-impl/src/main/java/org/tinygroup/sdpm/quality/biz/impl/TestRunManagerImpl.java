@@ -40,6 +40,14 @@ public class TestRunManagerImpl implements TestRunManager {
 		return testrundao.add(run);
 	}
 
+	public QualityTestRun findRunById(Integer id) {
+		return testrundao.getByKey(id);
+	}
+
+	public int delete(Integer runId) {
+		return testrundao.deleteByKey(runId);
+	}
+
 	public Pager<QualityTestRun> findPager(Integer start, Integer limit, QualityTestRun testRun,String condition, String sortName, boolean asc) {
 		Condition condition1 = StringUtil.isBlank(condition)?null: FragmentSql.fragmentCondition(condition);
 		if(StringUtil.isBlank(sortName)){

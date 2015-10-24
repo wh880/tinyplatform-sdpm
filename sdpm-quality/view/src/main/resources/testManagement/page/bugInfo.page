@@ -77,7 +77,7 @@
 
 			#end
 	#end
-	#@tinyForm("thisform" TINY_CONTEXT_PATH+"/a/quality/bug/addComment?bugId="+qualityBug?.bugId "post" {"class":""})
+	#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/addComment?bugId="+qualityBug?.bugId "post" {"class":""})
 	<script type="text/javascript">
 	$("#${fromId}").submit(function(){
         var url = $(this).attr('action');
