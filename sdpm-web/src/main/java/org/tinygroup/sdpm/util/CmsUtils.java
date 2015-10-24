@@ -105,18 +105,17 @@ public class CmsUtils {
         CacheUtils.remove(CMS_CACHE, CMS_CACHE_PROJECT_LIST);
     }
 
-
     /**
      * 获得产品列表
      */
-    public static List<Product> getProductListByLine(Integer productLineId) {
+    public static List<Product> getProductListByLine(String productLineId) {
         if (productLineId == null) {
             return getProductList();
         }
         List<Product> productList = (List<Product>) CacheUtils.get(CMS_CACHE, CMS_CACHE_PRODUCT_LIST_LINE_ID_ + productLineId);
         if (productList == null) {
             Product product = new Product();
-            product.setProductLineId(productLineId);
+            product.setProductLineId(Integer.valueOf(productLineId));
             productList = productService.findProductList(product);
             CacheUtils.put(CMS_CACHE, CMS_CACHE_PRODUCT_LIST_LINE_ID_ + productLineId, productList);
         }
@@ -127,13 +126,15 @@ public class CmsUtils {
      * 清楚产品列表
      * （在修改、新增产品时进行调用）
      */
-    public static void removeProductList(Integer productLineId) {
+    public static void removeProductList(String productLineId) {
         CacheUtils.remove(CMS_CACHE, CMS_CACHE_PRODUCT_LIST_LINE_ID_ + productLineId);
         removeProductList();
     }
 
     /**
      * 获得产品
+     *
+     * @param productId
      */
     public static Product getProduct(String productId) {
         List<Product> productList = getProductList();
@@ -148,16 +149,17 @@ public class CmsUtils {
         return new Product();
     }
 
+
     /**
      * 获得文档库
      */
-    public static DocumentDoclib getDocLib(Integer libId){
-    	List<DocumentDoclib> libList = getLibList();
+    public static DocumentDoclib getDocLib(String libId) {
+        List<DocumentDoclib> libList = getLibList();
         if (libId == null && libList != null && !libList.isEmpty()) {
             return libList.get(0);
         }
         for (DocumentDoclib doclib : libList) {
-            if (doclib.getDocLibId()==libId) {
+            if (doclib.getDocLibId().toString().equals(libId)) {
                 return doclib;
             }
         }
@@ -167,21 +169,20 @@ public class CmsUtils {
     /**
      * 获得文档库
      */
-
-    public static List<DocumentDoclib> getLibList(){
-    	 List<DocumentDoclib> libList = (List<DocumentDoclib>) CacheUtils.get(CMS_CACHE, CMS_CACHE_DOCLIB_LIST);
-         if (libList == null) {
-        	 libList = docService.findDoclibList(new DocumentDoclib());
-             CacheUtils.put(CMS_CACHE, CMS_CACHE_DOCLIB_LIST, libList);
-         }
-         return libList;
+    public static List<DocumentDoclib> getLibList() {
+        List<DocumentDoclib> libList = (List<DocumentDoclib>) CacheUtils.get(CMS_CACHE, CMS_CACHE_DOCLIB_LIST);
+        if (libList == null) {
+            libList = docService.findDoclibList(new DocumentDoclib());
+            CacheUtils.put(CMS_CACHE, CMS_CACHE_DOCLIB_LIST, libList);
+        }
+        return libList;
     }
 
     /**
      * 清除文档库列表
      */
-    public static void removeLibList(){
-    	CacheUtils.remove(CMS_CACHE, CMS_CACHE_DOCLIB_LIST);
+    public static void removeLibList() {
+        CacheUtils.remove(CMS_CACHE, CMS_CACHE_DOCLIB_LIST);
     }
 
 }

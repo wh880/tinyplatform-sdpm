@@ -25,7 +25,7 @@ public class CookieUtils {
      * @param value 值
      */
     public static void setCookie(HttpServletResponse response, String name, String value) {
-        setCookie(response, name, value, 60 * 60 * 24);
+        setCookie(response, name, value, -1);
     }
 
     /**
