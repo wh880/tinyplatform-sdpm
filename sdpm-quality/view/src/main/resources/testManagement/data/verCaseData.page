@@ -8,19 +8,44 @@
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run?.caseTitle}</a>#end
 						#@td()${getDict("caseType",run?.caseType)}#end
 						#@td()${run?.testRunAssignedTo?UserUtils.getUserById(run?.testRunAssignedTo)?.orgUserRealName:""}#end
-						#@td()${run?.caseLastRunner?UserUtils.getUserById(run?.testLastRunner)?.orgUserRealName:""}#end
-						#@td()${run?.caseLastRunDate?formatDate(run?.testLastRunDate,'yyyy年MM月dd日'):""}#end
-						#@td()${run?.testLastRunResult}#end
-						#@td()${getDict("versionStatus",run?.testRunStatus)}#end
+						#@td()${run?.testRunLastRunner?UserUtils.getUserById(run?.testRunLastRunner)?.orgUserRealName:""}#end
+						#@td()${run?.testRunLastRunDate?formatDate(run?.testRunLastRunDate,'yyyy-MM-dd hh:mm:ss'):""}#end
+						#@td()${getDict("caseResult",run?.testRunLastRunResult)}#end
+						#@td()${getDict("caseStatus",run?.testRunStatus)}#end
 						 #@td()
                          	#foreach(m:menuManager.getScopeMenus("version-case-op"))
-                         		#if(m.id=="tverremove"||m.id=="tvertobug")
-            						<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?caseId=${run?.caseId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                         		#if(m.id=="tverremove")
+            						<a class="deleteRun" href="javascript:void(0)" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            					#elseif(m.id=="tvertobug")
+            					    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?caseId=${run?.caseId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             					#else
-            						#iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId "ml-1")						
+            						#iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId+"&from=task&runId="+run?.testRunId "ml-1")
 								#end
                          	#end
 
 						#end
 					#end
 				#end
+<script type="text/javascript">
+$(function(){
+    $(".deleteRun").on("click",function(){
+        var id = $(this).closest("tr").find("input[type=checkbox]").val();
+        layer.confirm("是否确认删除?",function(){
+            $.ajax({
+                 type: "POST",
+                 url:"${TINY_CONTEXT_PATH+adminPath}/quality/version/ajax/deleteRun",
+                 data:{runId:id},
+                 async: false,
+                 error: function(request) {
+                     alert("Connection error");
+                 },
+                 success: function(data) {
+                     if(data.status == "success"){
+                         window.location.reload();
+                     };
+                 }
+             });
+         });
+    });
+})
+</script>

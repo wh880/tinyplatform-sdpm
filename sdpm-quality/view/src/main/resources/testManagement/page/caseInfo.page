@@ -26,24 +26,38 @@
 #@div()
 	#@p(pClass="title_sty")
 		<span class="f">
-			用例名称</span>
+			${testCase?.caseTitle}</span>
 		<span class="r">
 		##加一个转bug
 			#foreach(m:menuManager.getScopeMenus("testcaseinfo-tab"))
 				#if(m.id=="texecution"||m.id=="tresult")
-					#@aModal("#myModal" m.name "800" "400" "" m.href "ml-5")
+					#@aModal("#myModal" m.name "800" "400" "" adminPath+m.href+"?caseId="+testCase?.caseId+"&currentPageId=5" "ml-5")
 						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
 				#else
 				#if(m.id=="teditioncase"||m.id=="tproposecase"||m.id=="tcaseback")
-					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
-						#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+					#if(m.id=="tcaseback")
+                     <a class"back" href="javascript:void(0)" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                     <script type="text/javascript">
+                     $(function(){
+                         $("#back").on("click",function(){
+                                window.location.href = document.referrer;
+                         });
+                     })
+
+                     </script>
+                    #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?caseId=${testCase?.caseId}&currentPageId=5" title="${m.name}">
+                                            #buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                    #end
 				#else
 				#if(m.id=="tcaseremark")
 					<a  title="备注" onclick="toggle()">
 						#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
 				#else
-					#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")
-						#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp
+                    #if(m.id=="tcaseinfodelete")
+                    <a class="caseDelete" href="javascript:void(0)" title="${m.name}">
+                                        							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                #end
 				#end
 				#end
 				#end
@@ -52,8 +66,28 @@
 
 				</span>
 	#end
-	#@tinyForm("thisform" "url" "post" {"class":""})
+	#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/addComment?caseId="+testCase?.caseId "post" {"class":""})
+    <script type="text/javascript">
+    	$("#${fromId}").submit(function(){
+            var url = $(this).attr('action');
+            $.ajax({
+                type: "POST",
+                url:url,
+                data:$("#${fromId}").serialize(),// 你的formid
+                async: false,
+                error: function(request) {
+                    alert("Connection error");
+                },
+                success: function(data) {
+                if(data.status == "success"){
+                    window.location.reload();
+                };
+                }
+            });
+            return false;
+        });
 
+        </script>
 	<div style="width:70%;float:left" class="pageleftpart">
 		<div class="infoContent">
     		<p class="titleName">前置条件</p>
@@ -89,19 +123,26 @@
         <center>
         	#foreach(m:menuManager.getScopeMenus("testcaseinfo-tab"))
 				#if(m.id=="texecution"||m.id=="tresult")
-					#@aModal("#myModal" m.name "800" "400" "" m.href "ml-5")
+					#@aModal("#myModal" m.name "800" "400" "" adminPath+m.href+"?caseId="+testCase?.caseId+"&currentPageId=5" "ml-5")
 						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
 				#else
 				#if(m.id=="teditioncase"||m.id=="tproposecase"||m.id=="tcaseback")
-					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
-						#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+			        #if(m.id=="tcaseback")
+			         <a class="back" href="javascript:void(0)" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+			        #else
+			        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?caseId=${testCase?.caseId}&currentPageId=5" title="${m.name}">
+                    						#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+			        #end
+
 				#else
 				#if(m.id=="tcaseremark")
 					<a  title="备注" onclick="toggle()">
 						#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
 				#else
-					#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")
-						#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp
+					 #if(m.id=="tcaseinfodelete")
+                        <a class="caseDelete" href="javascript:void(0)" title="${m.name}">
+                                            							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                    #end
 				#end
 				#end
 				#end
@@ -109,7 +150,7 @@
 			</center>
 		#@div(divId="comment" divStyle="display:none;" divClass="infoContent")
 			<p class="titleName">备注</p>
-			#@Teditor("content1" "content1" {"initialFrameHeight":"150"})#end
+			#@Teditor("content" "comment" {"initialFrameHeight":"150"})#end
 			#@elementItem()
         	<div class="col-12">
             <div class="col-5">
@@ -150,5 +191,28 @@ function toggle()
    else
     comment.style.display='none';
 }
+
+$(function(){
+    $(".caseDelete").on("click",function(){
+         $.ajax({
+             type: "POST",
+             url:"${TINY_CONTEXT_PATH+adminPath}/quality/testCase/delete",
+             data:{id:${testCase?.caseId}},// 你的formid
+             async: false,
+             error: function(request) {
+                 alert("Connection error");
+             },
+             success: function(data) {
+             if(data.status == "success"){
+                 window.location.href = document.referrer;
+             };
+             }
+         });
+    });
+
+     $(".back").on("click",function(){
+            window.location.href = document.referrer;
+     });
+ })
 </script>
 

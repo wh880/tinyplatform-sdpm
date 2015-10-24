@@ -27,12 +27,11 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult;
+import org.tinygroup.sdpm.quality.dao.pojo.*;
 import org.tinygroup.sdpm.quality.service.inter.CaseStepService;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.quality.service.inter.TestResultService;
+import org.tinygroup.sdpm.quality.service.inter.TestRunService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
@@ -61,9 +60,8 @@ public class TestCaseAction extends BaseController {
 	@Autowired
 	private TestResultService testResultService;
 	@Autowired
-	private UserService userService;
-	@Autowired
-	private ProductService productService;
+	private TestRunService testRunService;
+
 
 	@RequestMapping("")
 	public String form(QualityTestCase testCase, HttpServletRequest request,Model model) {
@@ -205,8 +203,12 @@ public class TestCaseAction extends BaseController {
 	}
 
 	@RequestMapping("/execute")
-	public String execute(Integer caseId, CaseStepResults caseStepResults,String resultType,
+	public String execute(Integer caseId, CaseStepResults caseStepResults,String resultType, String from,Integer runId,
 			HttpServletRequest request) {
+		QualityTestRun run = null;
+		if(!StringUtil.isBlank(from)){
+			run = testRunService.findRunById(runId);
+		}
 		QualityTestCase old = testCaseService.findById(caseId);
 		QualityTestCase testCase = new QualityTestCase();
 		QualityTestResult qualityTestResult = new QualityTestResult();
@@ -221,14 +223,32 @@ public class TestCaseAction extends BaseController {
 					.getCaseStepResultList());
 			qualityTestResult.setCaseResult(result);
 			testCase.setCaseLastRunResult(result);
-			if("3".equals(result))testCase.setCaseStatus("2");
+			if(run!=null){
+				run.setTestRunLastRunDate(new Date());
+				run.setTestRunLastRunResult(result);
+			}
+			if("3".equals(result)){
+				testCase.setCaseStatus("2");
+				if(run!=null){
+					run.setTestRunStatus(result);
+				}
+			}
 		}
 		if(!StringUtil.isBlank(resultType)){
 			String result = "pass".equals(resultType)?"1":"2";
 			qualityTestResult.setCaseResult(result);
 			testCase.setCaseLastRunResult(result);
+			testCase.setCaseStatus(result);
+			if(run!=null){
+				run.setTestRunLastRunDate(new Date());
+				run.setTestRunLastRunResult(result);
+			}
 		}
 		testCase.setCaseLastRunDate(new Date());
+		if(run!=null){
+			run.setTestRunLastRunner(UserUtils.getUserId());
+			testRunService.updateTestRun(run);
+		}
 		testCase.setCaseLastRunner(UserUtils.getUserId());
 		testCaseService.updateTestCase(testCase);
 		testResultService.add(qualityTestResult);
@@ -242,6 +262,7 @@ public class TestCaseAction extends BaseController {
 				testCase,
 				null
 		);
+		if(run!=null)return "redirect:" + adminPath+"/quality/version/taskToCase?testversionId="+run.getTaskId()+"&currentPageId=5&status=tverallcase";
 		return "redirect:" + adminPath+"/quality/testCase";
 	}
 
@@ -255,6 +276,24 @@ public class TestCaseAction extends BaseController {
 	public String result(Integer caseId, Model model) {
 		execution(caseId, model);
 		return "/testManagement/page/tabledemo/result.pagelet";
+	}
+
+	@ResponseBody
+	@RequestMapping("addComment")
+	public Map recordComment(String comment, int caseId){
+		QualityTestCase testCase = testCaseService.findById(caseId);
+		LogUtil.logWithComment(LogUtil.LogOperateObject.CASE
+				, LogUtil.LogAction.COMMENTED
+				,String.valueOf(caseId)
+				,UserUtils.getUserId()
+				,String.valueOf(testCase.getProductId())
+				,null
+				,null
+				,null
+				,comment);
+		Map<String,String> result = new HashMap<String, String>();
+		result.put("status","success");
+		return result;
 	}
 
 	@RequestMapping("/edit")

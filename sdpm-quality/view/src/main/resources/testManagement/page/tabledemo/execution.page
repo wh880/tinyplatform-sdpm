@@ -1,4 +1,8 @@
-#@tinyForm("execution" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/execute" "" {"class":"test"})
+#set(mark = "")
+#if(from)
+#set(mark = "?from="+from+"&runId="+runId)
+#end
+#@tinyForm("execution" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/execute"+mark "" {"class":"test"})
 #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testcase?.caseId)
 <script type="text/javascript">
                 $(function(){

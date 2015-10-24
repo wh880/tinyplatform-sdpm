@@ -31,6 +31,14 @@ public class TestRunServiceImpl implements TestRunService {
 		return testrunmanager.add(run);
 	}
 
+	public QualityTestRun findRunById(Integer id) {
+		return testrunmanager.findRunById(id);
+	}
+
+	public int delete(Integer runId) {
+		return testrunmanager.delete(runId);
+	}
+
 	public Pager<QualityTestRun> findTestRunPager(Integer start, Integer limit, QualityTestRun testRun,String condition, String sortName, boolean asc) {
 		return testrunmanager.findPager(start,limit,testRun,condition,sortName,asc);
 	}
