@@ -26,6 +26,10 @@ import java.util.List;
  */
 public class ProductStory implements Serializable{
 	
+	public ProductStory() {
+		super();
+	}
+
 	private Integer releaseId;
 	
 	/**

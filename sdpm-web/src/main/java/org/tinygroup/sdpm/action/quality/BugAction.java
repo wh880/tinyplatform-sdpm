@@ -634,6 +634,30 @@ public class BugAction extends BaseController {
 	    return map;
 	}
 	
+	
+	//批量删除（软） 产品下面的计划、发布关联BUG表上使用的
+		@ResponseBody
+		@RequestMapping(value="/batchDelBugStory")
+		public Map bctchBugDelStory(String ids)
+		{		
+			Map<String,String> map = new HashMap<String,String>();
+			if(ids == null){
+				map.put("status", "fail");
+			    map.put("info", "删除失败");
+				return map;
+			}
+			for(String s : ids.split(",")){			
+				QualityBug bug= new QualityBug();
+				bug.setBugId(Integer.valueOf(s));
+				bug.setPlanId(0);
+				bugService.updateBug(bug);
+			}	
+			
+			map.put("status", "success");
+		    map.put("info", "删除成功");
+		    return map;
+		}
+	
 	//产品计划、发布关联BUG下面的搜索按钮使用
 	@RequestMapping("/linkBug")
     public String bugAction(ProductPlan plan,QualityBug bug, String groupOperate, Model model, HttpServletRequest request, HttpServletResponse response){

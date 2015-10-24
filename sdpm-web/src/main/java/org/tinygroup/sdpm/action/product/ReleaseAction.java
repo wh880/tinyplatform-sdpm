@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -211,7 +212,29 @@ public class ReleaseAction extends BaseController{
 		ProductRelease release = releaseService.findRelease(releaseId);
 		if(release!=null&&!StringUtil.isBlank(release.getReleaseStories())){
 			String releaseStories = release.getReleaseStories();
-			releaseStories = storyIdUtils(releaseStories,storyId!=null?"":storyId.trim());
+			releaseStories = storyIdUtils(releaseStories,storyId==null?"":storyId.trim());
+			release.setReleaseStories(releaseStories);
+			releaseService.updateRelease(release);
+		}
+		
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("status", "success");
+		map.put("info", "成功");
+
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/ajaxBatchDelAlWork")
+	public Map deleteBatchStory(Integer releaseId,String ids) {
+		
+		ProductRelease release = releaseService.findRelease(releaseId);
+		if(release!=null&&!StringUtil.isBlank(release.getReleaseStories())){
+			String releaseStories = release.getReleaseStories();
+			for (String id : ids.split(",")) {
+				releaseStories = storyIdUtils(releaseStories,id==null?"":id.trim());
+			}
 			release.setReleaseStories(releaseStories);
 			releaseService.updateRelease(release);
 		}
@@ -226,13 +249,13 @@ public class ReleaseAction extends BaseController{
 	
 	@ResponseBody
 	@RequestMapping("/ajaxRelateStory")
-	public boolean RelateStory(ProductStory[] stories){
+	public boolean RelateStory(@RequestBody ProductStory[] stories){
 		if(stories.length>0&&stories!=null){
 			ProductRelease release = releaseService.findRelease(stories[0].getReleaseId());
 			String releaseStories = release.getReleaseStories();
 			for (ProductStory story : stories) {
 				if(release!=null&&!(StringUtil.isBlank(release.getReleaseStories()))){
-					releaseStories = releaseStories + "," + story.getReleaseId();
+					releaseStories = releaseStories + "," + story.getStoryId();
 				}
 			}
 			release.setReleaseStories(releaseStories);
@@ -249,7 +272,7 @@ public class ReleaseAction extends BaseController{
 			soure = soure.substring(1);
 		}
 		if(soure.endsWith(",")){
-			soure = soure.substring(0, soure.length());
+			soure = soure.substring(0, soure.length()-1);
 		}
 		return soure;
 	}

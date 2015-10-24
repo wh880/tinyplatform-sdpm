@@ -830,6 +830,28 @@ public class StoryAction extends BaseController {
         map.put("info", "删除成功");
         return map;
     }
+	
+	@ResponseBody
+    @RequestMapping(value = "/batchDelPlanStory")
+    public Map bctchPlanDelStory(String ids) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (ids == null) {
+            map.put("status", "fail");
+            map.put("info", "删除失败");
+            return map;
+        }
+        for (String s : ids.split(",")) {
+            ProductStory story = new ProductStory();
+            story.setStoryId(Integer.valueOf(s));
+            story.setPlanId(0);
+            storyService.updateStory(story);
+        }
+        
+
+        map.put("status", "success");
+        map.put("info", "删除成功");
+        return map;
+    }
 
 	/**
 	 *
