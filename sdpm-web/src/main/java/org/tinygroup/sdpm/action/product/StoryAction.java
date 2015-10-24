@@ -609,11 +609,16 @@ public class StoryAction extends BaseController {
 			ProductRelease release = releaseService.findRelease(releaseId);
 			if(release!=null){
 				String releaseStories = release.getReleaseStories();
-				if(!StringUtil.isBlank(releaseStories)){
+				if(releaseStories!=null){
 					if("alWork".equals(type)){
-						condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id in ("+releaseStories+") ";
+						if("".equals(releaseStories)){
+							condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id is null ";
+						}else{
+							condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id in ("+releaseStories+") ";
+						}
+						
 					}
-					if("noWork".equals(type)){
+					if("noWork".equals(type)&&!StringUtil.isBlank(releaseStories)){
 						condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id not in ("+releaseStories+") ";
 					}
 				}
@@ -662,6 +667,7 @@ public class StoryAction extends BaseController {
 	public String bugListAction(@PathVariable(value = "relate") String relate,
 			int page,
 			int pagesize,
+			Integer releaseId,
 			QualityBug bug,
 			SearchInfos searchInfos,
 			String groupOperate,
@@ -689,13 +695,37 @@ public class StoryAction extends BaseController {
 				}
 			}
 		}
-		if ("noRelate".equals(type)) {
+		if ("noRelateBug".equals(relate)) {
 			condition = (StringUtil.isBlank(condition.trim()) ? " "
 					: (condition + " and "))
 					+ " quality_bug.plan_id <> "
 					+ bug.getPlanId();
 			bug.setPlanId(null);
 		}
+		
+		if(releaseId!=null&&releaseId>0){
+			ProductRelease release = releaseService.findRelease(releaseId);
+			if(release!=null){
+				String releaseBugs = release.getReleaseBugs();
+				if(releaseBugs!=null){
+					if("reRelateBugRelease".equals(relate)){
+						if("".endsWith(releaseBugs)){
+							condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id is null";
+						}else{
+							condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id in ("+releaseBugs+") ";
+						}
+						
+					}
+					if("noRelateBugRelease".equals(relate)&&!StringUtil.isBlank(releaseBugs)){
+						condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id not in ("+releaseBugs+") ";
+					}
+					if("leRelateBugRelease".equals(relate)&&!StringUtil.isBlank(releaseBugs)){
+						//condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id not in ("+releaseBugs+") ";
+					}
+				}
+			}
+		}
+		
 
 		Pager<QualityBug> p = bugService.findBugListPager(
 				pagesize * (page - 1), pagesize, condition, bug, order,

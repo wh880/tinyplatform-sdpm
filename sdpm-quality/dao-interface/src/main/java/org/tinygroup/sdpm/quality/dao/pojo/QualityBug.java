@@ -24,7 +24,8 @@ import java.util.Date;
  * 
  */
 public class QualityBug implements Serializable {
-
+	
+	private Integer releaseId;
 	/** 
 	 * Bug编号
 	 * 
@@ -837,6 +838,14 @@ public class QualityBug implements Serializable {
 
 	public Integer getDeleted(){
 		return deleted;
+	}
+
+	public Integer getReleaseId() {
+		return releaseId;
+	}
+
+	public void setReleaseId(Integer releaseId) {
+		this.releaseId = releaseId;
 	}
 
 }

@@ -294,7 +294,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		if(qualityBug==null){
 			qualityBug=new QualityBug();
 		}
-		return getDslTemplate().queryPager(start, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
+		return getDslTemplate().queryPager(start>0?start:0, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
 
 			public Select generate(QualityBug t) {
 				MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,FragmentSql.fragmentSelect("org_user_account assignedUser")).from(QUALITY_BUGTABLE)
