@@ -102,19 +102,19 @@
     function initBurnChar() {
         var data =
         {
-            labels: [${days}],
+            labels: ${days},
             datasets: [
                 {
                     label: "基准线",
                     color: "#CCC",
                     fillColor: "rgba(0,0,0,0)",
                     showTooltips: false,
-                    data: [${average}]
+                    data: ${average}
                 },
                 {
                     label: "剩余",
                     color: "#0033CC",
-                    data: [${left}]
+                    data: ${left}
                 }]
         };
 

@@ -42,9 +42,9 @@ public class UserUtils {
 
     /**
      * 根据ID获取用户
-     *
+     *当id为空或者为null返回新对象
      * @param id
-     * @return 取不到返回null
+     * @return 取不到返回new OrgUser();
      */
     public static OrgUser getUserById(String id) {
         if (StringUtil.isBlank(id)) {
