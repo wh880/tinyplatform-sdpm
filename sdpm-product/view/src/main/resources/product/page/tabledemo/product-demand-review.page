@@ -50,9 +50,9 @@
         #@elementItem()
             #@daterangepickerPosition()
                 #@colLabel()评审时间：#end
-                #@formControlDiv("col-8")
+                #@formControlDiv("col-4")
                     #@tinyDateInput("storyReviewedDate" story?.storyReviewedDate?formatDate(story?.storyReviewedDate,
-                        'yyyy-MM-dd'):"" "YYYY-MM-DD" {"style":"width:258px","datatype":"*","nullmsg":"日期不能为空"})#end
+                        'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
                 #end
                 #@validateDiv("col-2")#end
             #end
@@ -80,14 +80,13 @@
                 <div class="input-group">
                     #@Tselect2F()
                         #@Tselect2Body(
-                            "storyAssignedTo" story?.storyAssignedTo {"placeholder":"","datatype":"*","nullmsg":
-                            "指派给不能为空！",
-                            "class":"input-text select2","style":"width:296px" })
+                            "storyAssignedTo" story?.storyAssignedTo {"placeholder":"",
+                            "class":"input-text select2","style":"width:300px" })
 
                         #end
                     #end
                     <script>
-                        ajaxRead("${sid}", "storyAssignedTo", "orgUserId", "orgUserRealName", "/org/user/userList");
+                        ajaxRead("${sid}", "storyAssignedTo", "orgUserId", "orgUserRealName", "/org/user/userList", "");
                     </script>
 
                     #@Tselect2Fix()
@@ -101,26 +100,26 @@
         #end
 
         #@elementItem()
-            #@sdpmItem("由谁评审")
-
+            #@colLabel()由谁评审：#end
+            #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body(
-                        "storyReviewedBy" story?.storyReviewedBy {"class":"input-text select2","style":"width:296px",
-                        "multiple":"multiple"})
-
+                    #@Tselect2Body("storyReviewedBy" story?.storyReviewedBy {"class":
+                        "input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
                     #end
+
+                    <script>
+                        ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
+                    </script>
 
                     #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
                         <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
                     #end
+                    #end
 
                 #end
-                <script>
-                    ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
-                </script>
+            #@validateDiv("col-2")#end
             #end
-        #end
 
         #@elementItem()
             <div class="col-12">

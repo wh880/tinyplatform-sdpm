@@ -417,8 +417,21 @@ public class TestCaseAction extends BaseController {
 	@RequestMapping("/case/viewInfo")
 	public String viewInfo(Integer id,Model model){
 		QualityTestCase testCase = testCaseService.findById(id);
+		QualityCaseStep step = new QualityCaseStep();
+		step.setCaseId(id);
+		step.setCaseVersion(testCase.getCaseVersion());
+		List<QualityCaseStep> stepList = caseStepService.findCaseStepList(step);
+
 		model.addAttribute("testCase", testCase);
+		model.addAttribute("stepList", stepList);
 		return "/testManagement/page/caseInfo.page";
+	}
+
+	@RequestMapping("/case/rightInfo")
+	public String rightInfo(Integer caseId,Model model){
+		QualityTestCase testCase = testCaseService.findById(caseId);
+		model.addAttribute("testCase", testCase);
+		return "/testManagement/page/tabledemo/caseEditInfo.pagelet";
 	}
 
 	public boolean isCaseModify(String[] step, String[] expect,List<QualityCaseStep> steps){

@@ -115,12 +115,17 @@
 
 			#@toggleBox({"class":"open"})
 				#@toggleLeft({"class":"aclass"})
-					#@settoggleLeftTitle()${qualityProduct?.productName}#end
+					#@settoggleLeftTitle()#for(product : CmsUtils.getProductList())
+                                                                        #if(product?.productId == qualityProductId)
+                                                                        ${product?.productName}
+                                                                        #break
+                                                                        #end
+                                                                        #end#end
 						#@settoggleLeftBody("treeLeftbox")
-							#@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=bug&moduleRoot="+qualityProduct?.productId))
+							#@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=bug&moduleRoot="+qualityProductId))
 								#setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
 								#zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/bug?status="+status+"&currentPageId=5")
-								#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=bug&moduleRoot="+qualityProduct?.productId)
+								#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=bug&moduleRoot="+qualityProductId)
 								#zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
 								#zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
 							#end

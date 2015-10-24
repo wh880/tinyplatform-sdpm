@@ -19,7 +19,6 @@ import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +36,7 @@ import java.util.Map;
 public class PlanAction  extends BaseController{
 	@Autowired
 	private PlanService planService;
-	
+
 	@Autowired
 	private ProductService productService;
 
@@ -56,7 +55,7 @@ public class PlanAction  extends BaseController{
 
 	@RequestMapping("/save")
 	public String save(ProductPlan productPlan, HttpServletRequest request, SystemAction systemAction) throws IOException {
-		
+
 		if(request.getSession().getAttribute("sessionProductId")!=null){
 			productPlan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 		}
@@ -76,7 +75,7 @@ public class PlanAction  extends BaseController{
 
 		return "redirect:" + "/product/page/project/product-plan.page";
 	}
-	
+
 	@RequestMapping("/update")
 	public 	String update(ProductPlan plan,SystemAction systemAction) throws IOException {
 		ProductPlan plan1 = planService.findPlan(plan.getPlanId());
@@ -93,8 +92,8 @@ public class PlanAction  extends BaseController{
 				, systemAction.getActionComment());
 
 
-		return " redirect:" + "/product/page/project/product-plan.page";
-		
+		return " redirect:" + adminPath + "/product/plan/content";
+
 	}
 
 	@RequestMapping("/addplan")
@@ -109,7 +108,7 @@ public class PlanAction  extends BaseController{
 		return "/product/page/tabledemo/product-addplan.page";
 
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/delete")
 	public Map delete(Integer planId,SystemAction systemAction) throws IOException {
@@ -133,7 +132,7 @@ public class PlanAction  extends BaseController{
         map.put("info", "删除成功");
         return map;
     }
-	
+
 	@RequestMapping("/find")
 	public String find(HttpServletRequest request,Integer planId,Model model){
 
@@ -144,9 +143,9 @@ public class PlanAction  extends BaseController{
 		Product product = productService.findProduct(productId)	;
 		model.addAttribute("product",product);
 		ProductPlan plan = planService.findPlan(planId);
-		
+
 		model.addAttribute("plan",plan);
-		
+
 		return "/product/page/tabledemo/product-plan-update.page";
 	}
 	

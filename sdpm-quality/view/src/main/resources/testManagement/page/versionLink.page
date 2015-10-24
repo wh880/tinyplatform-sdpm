@@ -93,7 +93,8 @@
 				#end
 				<div class="infoContent">
 				    <p class="titleName"><</p>
-			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/version/link")
+			#set(requestStatusString = tinyRequestQueryString!=null ?"?"+tinyRequestQueryString:"")
+			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/version/link"+requestStatusString)
 				#@thead()
 					#@tr()
 						#@tinyTh({"width":"6"})<input type="checkbox" name="userid" value="">#end

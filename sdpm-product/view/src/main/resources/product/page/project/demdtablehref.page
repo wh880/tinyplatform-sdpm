@@ -34,7 +34,7 @@
 
     #@div(divClass="operationbar")
     <span class="f">
-					<a href="#" class="active_btn">这是一条演示用的需求</a>
+					<a href="#" class="active_btn">${story?.storyTitle}</a>
 			</span>
     <span class="r">
 
@@ -127,8 +127,7 @@
             <p class="titleName">备注</p>
             #@elementItem()
                 #@formControlDiv("col-16")
-                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"200" ,"datatype":"*10-500"})
-                        备注描述...最少输入10个字符#end
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"200" ,"datatype":"*10-500"})#end
                 #end
                 #@validateDiv("col-2")#end
             #end

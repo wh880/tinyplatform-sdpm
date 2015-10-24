@@ -12,15 +12,20 @@
                 #end
                 #@tr()
                     #@td()所属产品#end
-                    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${story?.productId}">${stories?.productName}</a>#end
+                    #@td()<a
+                            href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${story?.productId}">${story
+                        ?.productName}</a>#end
                 #end
                 #@tr()
                     #@td()所属模块#end
-                    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/togglebox.page">${story?.moduleTitle}</a>#end
+                    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?currentPageId=3">${story
+                        ?.moduleTitle}</a>#end
                 #end
                 #@tr()
                     #@td()所属计划#end
-                    #@td()${story?.planName}#end
+                    #@td()<a
+                            href="${TINY_CONTEXT_PATH +adminPath}/product/plan/forword/reRelateStory?planId=${story?.planId}">${story
+                        ?.planName}</a>#end
                 #end
                 #@tr()
                     #@td()当前状态#end
@@ -47,8 +52,6 @@
                     #@td()
                         #for(mailto:storyMailTo)
                         ${mailto?.orgUserAccount}${mailtoFor.last?"":","}
-
-
                 #end
             #end
         #end
@@ -65,7 +68,7 @@
         #@tbody()
             #@tr()
                 #@td()由谁创建#end
-                #@td()${UserUtils.getUserById(story?.storyOpenedBy)?.orgUserRealName}&nbsp;于&nbsp;${story?.storyOpenedDate?formatDate(story?.storyOpenedDate,'yyyy-MM-dd'):""}于&nbsp;创建 #end
+                #@td()${UserUtils.getUserById(story?.storyOpenedBy)?.orgUserRealName}&nbsp;于&nbsp;${story?.storyOpenedDate?formatDate(story?.storyOpenedDate,'yyyy-MM-dd'):""}&nbsp;创建 #end
             #end
 
             #@tr()

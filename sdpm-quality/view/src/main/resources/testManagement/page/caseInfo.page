@@ -30,7 +30,7 @@
 		<span class="r">
 		##加一个转bug
 			#foreach(m:menuManager.getScopeMenus("testcaseinfo-tab"))
-				#if(m.id=="tcasenote"||m.id=="texecution"||m.id=="tresult")
+				#if(m.id=="texecution"||m.id=="tresult")
 					#@aModal("#myModal" m.name "800" "400" "" m.href "ml-5")
 						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
 				#else
@@ -49,31 +49,15 @@
 				#end
 		  #end
 		
-#*			#@aModal("#noteModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
-				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
-			#@aModal("#myModal" "执行" "600" "300" "" "/testManagement/page/tabledemo/caseExecute.pagelet" "ml-5")
-				#buttonIcon(iconClass="icon-flag-checkered")执行#end&nbsp;&nbsp;
-			#@aModal("#myModal" "结果" "600" "300" "" "/testManagement/page/tabledemo/caseResult.pagelet" "ml-5")
-					#buttonIcon(iconClass="icon-play")结果#end&nbsp;&nbsp;		
-			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/editioncase.page" title="编辑">
-				#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp;
-			<a  title="备注" onclick="toggle()">
-				#buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
-			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/proposecase.page" title="复制">
-				#buttonIcon(iconClass="icon-copy")</a>&nbsp;&nbsp;
-			#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")
-					#buttonIcon(iconClass="icon-remove")#end&nbsp&nbsp				
 
-			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page" title="返回">
-				#buttonIcon(iconClass="icon-level-up")</a>&nbsp;&nbsp;*#
 				</span>
 	#end
 	#@tinyForm("thisform" "url" "post" {"class":""})
-#*	<div class="infoContent">
-    		<p class="titleName">Bug名称</p>*#
+
 	<div style="width:70%;float:left" class="pageleftpart">
 		<div class="infoContent">
     		<p class="titleName">前置条件</p>
+    		${testCase?.casePrecondition}
     	</div>
     	<div class="infoContent">
     		<p class="titleName">步骤</p>
@@ -86,10 +70,14 @@
                 #end
             #end
             #@tbody()
+            #if(stepList?.size()>0)
+            	#foreach(step:stepList)
                 #@tr()
-                    #@th()1#end
-                    #@td()表格内容#end
-                    #@td()表格内容#end                    
+                    #@th()${stepFor.index}#end
+                    #@td()${step?.caseStepDesc}#end
+                    #@td()${step?.caseStepExpect}#end
+                #end
+                #end
                 #end
             #end
         #end
@@ -97,14 +85,10 @@
     	<div class="infoContent">
     		<p class="titleName">附件</p>
     	</div>
-    	#@div(divClass="infoContent")
-            <p class="titleName">历史记录</p>
-        ##加入后，js代码会导致页面排版混乱
-            #include("/testManagement/page/historyRecord.page")
-        #end
+    	#history(adminPath+"/system/action/ajax/history?actionObjectType=case&actionObjectId="+testCase?.caseId)
         <center>
         	#foreach(m:menuManager.getScopeMenus("testcaseinfo-tab"))
-				#if(m.id=="tcasenote"||m.id=="texecution"||m.id=="tresult")
+				#if(m.id=="texecution"||m.id=="tresult")
 					#@aModal("#myModal" m.name "800" "400" "" m.href "ml-5")
 						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
 				#else
@@ -144,7 +128,7 @@
 		</div>
 		#end
 	<div style="width: 30%;float: right">
-		 #TypeInfo("qualityCaseInfo")
+		 #TypeInfo("qualityCaseInfo",testCase?.caseId)
  ##  #include("/testManagement/page/tabledemo/caseEditInfo.page")
     </div>
 	#end

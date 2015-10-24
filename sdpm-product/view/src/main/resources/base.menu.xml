@@ -76,7 +76,7 @@
                 <property key="type" value="note"/>
             </map>
         </menu>
-        <menu id="demand_copy" name="复制" href="/product/page/tabledemo/product-demand-add.page" icon="icon-copy"
+        <menu id="demand_copy" name="复制" href="/product/story/findcopy?storyId=${storyId}" icon="icon-copy"
               sort="38" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon"/>
@@ -223,7 +223,7 @@
         <menu id="product-release-badel" name="批量删除" href="" icon="" sort="1" isShow="1"
               scope="release-badel"/>
    <menu id="aboutstory" name="删除" href="/product/release/ajaxDelAlWork?storyId=${story.storyId}&amp;releaseId=${releaseId}" icon="icon-remove" sort="1" isShow="1" scope="release-linkdemand"/>
- 		<menu id="aboutbug" name="删除" href="/quality/bug/delete?bugId=${bug.bugId}" icon="icon-remove" sort="1" isShow="1" scope="release-linkbug"/>
+ 		<menu id="aboutbug" name="删除" href="/product/release/ajaxDelBug?bugId=${bug.bugId}&amp;releaseId=${releaseId}" icon="icon-remove" sort="1" isShow="1" scope="release-linkbug"/>
     </menu>
 
     <menu id="product-roadmap" parent-id="myproduct" name="路线图" href="/product/common/roadMap"

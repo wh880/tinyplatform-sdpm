@@ -71,7 +71,7 @@
         #@elementItem()
             #@sdpmItem("需求名称")
                 <div class="input-group">
-                    <input type="text" name="storyTitle" value="${storySpec?.storyTitle}" class="form-control"
+                    <input type="text" name="storyTitle" value="${story?.storyTitle}" class="form-control"
                            placeholder="" aria-describedby="basic-addon2" style="width:296px">
                 </div>
             #end
@@ -82,10 +82,7 @@
                 <div class="col-2 text-r"><label>需求描述：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("content1" "storySpec" {"initialFrameHeight":"150"})
-
-                        ${storySpec?.storySpec}
-                    #end</div>
+                    #@Teditor("content1" "storySpec" {"initialFrameHeight":"150"})${storySpec?.storySpec}#end</div>
             </div>
         #end
 
@@ -93,9 +90,8 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>验收标准：</label></div>
                 <div class="col-9">
-                    #@Teditor("content2" "storyVerification" {"initialFrameHeight":"150"})
-                        ${storySpec?.storyVerification}
-                    #end</div>
+                    #@Teditor("content2" "storyVerification" {"initialFrameHeight":"150"})${storySpec
+                        ?.storyVerification}#end</div>
             </div>
         #end
 
@@ -112,7 +108,6 @@
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>附件：</label></div>
-
                 <div class="col-9">
                     #@formControlDiv("col-12")
 		   				#include("/product/page/event/fileupload.page")

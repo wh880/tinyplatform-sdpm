@@ -61,7 +61,8 @@
 #end
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/document/product/save/updateDoc" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/document/product/save/updateDoc" "post" {"class":"test","enctype":
+    "multipart/form-data"})
 
 <div style="width:100%">
 <div class="infoContent">
