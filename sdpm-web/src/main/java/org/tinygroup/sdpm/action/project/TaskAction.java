@@ -21,13 +21,11 @@ import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
-import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ModuleUtil;
-import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -160,7 +158,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/finishsave", method = RequestMethod.POST)
-    public String finishsave(ProjectTask task, Model model, String commnet) {
+    public String finishSave(ProjectTask task, Model model, String commnet) {
         if (task.getTaskId() == null) {
             taskService.addTask(task);
         } else {
@@ -193,7 +191,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/closesave", method = RequestMethod.POST)
-    public String closesave(ProjectTask task, String content) {
+    public String closeSave(ProjectTask task, String content) {
         taskService.updateCloseTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CLOSED, task.getTaskId().toString(),
                 UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
@@ -212,7 +210,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/startsave", method = RequestMethod.POST)
-    public String startsave(ProjectTask task, Model model, String content) {
+    public String startSave(ProjectTask task, Model model, String content) {
         if (task.getTaskId() == null) {
             taskService.addTask(task);
         } else {
@@ -336,7 +334,7 @@ public class TaskAction extends BaseController {
 
 
     @RequestMapping("/preadd")
-    public String preadd(HttpServletRequest request, Model model, Integer storyId, String taskId) {
+    public String preAdd(HttpServletRequest request, Model model, Integer storyId, String taskId) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
 
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
@@ -377,7 +375,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/batchadd")
-    public String batchadd(Integer taskId, Model model) {
+    public String batchAdd(Integer taskId, Model model) {
         if (taskId != null) {
             ProjectTask task = taskService.findTask(taskId);
             model.addAttribute("task", task);
@@ -492,12 +490,20 @@ public class TaskAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/gantt/init")
-    public List<Map<String, String>> ganttInit(HttpServletRequest request) {
-        List<Map<String, String>> resList = new ArrayList<Map<String, String>>();
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
-
+    public List<Map<String, String>> ganttInit(@CookieValue(value = TaskAction.COOKIE_PROJECT_ID, required = false) String projectId,
+                                               HttpServletResponse response) {
+        List<Map<String, String>> resultList = new ArrayList<Map<String, String>>();
+        if (StringUtil.isBlank(projectId)) {
+            Project project = CmsUtils.getProject(projectId);
+            if (project.getProjectId() != null) {
+                projectId = project.getProjectId().toString();
+                CookieUtils.setCookie(response, COOKIE_PROJECT_ID, projectId);
+            } else {
+                return null;
+            }
+        }
         ProjectTask task = new ProjectTask();
-        task.setTaskProject(projectId);
+        task.setTaskProject(Integer.valueOf(projectId));
         List<ProjectTask> taskList = taskService.findListTask(task);
 
         for (ProjectTask t : taskList) {
@@ -531,9 +537,9 @@ public class TaskAction extends BaseController {
             map.put("pOpen", "1");
             map.put("pDepend", "0");
             map.put("pCaption", "");
-            resList.add(map);
+            resultList.add(map);
         }
-        return resList;
+        return resultList;
     }
 
     @RequestMapping("/gantt/find")
@@ -545,7 +551,6 @@ public class TaskAction extends BaseController {
 
     @RequestMapping("/board")
     public String board(Model model, String ajax) {
-        Map<String, List<ProjectTask>> map = new HashMap<String, List<ProjectTask>>();
         ProjectTask task = new ProjectTask();
         task.setTaskStatus(task.WAIT);
         List<ProjectTask> resList = taskService.findListTask(task);
@@ -580,14 +585,13 @@ public class TaskAction extends BaseController {
 
     @RequestMapping("/grouping")
     public String grouping(String groupKey, Model model) {
-
         return "project/task/grouping.page";
     }
 
     @ResponseBody
     @RequestMapping("/ajaxChangeStatu")
     public Map<String, String> ajaxChangeStatu(ProjectTask task, String content, String taskStatus) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map;
         task.setTaskLastEditedBy(UserUtils.getUserId());
         Integer res = 0;
         LogUtil.LogAction logAction = null;

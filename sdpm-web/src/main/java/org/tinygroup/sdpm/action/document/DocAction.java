@@ -82,7 +82,7 @@ public class DocAction extends BaseController{
 	public String docIndex(@CookieValue(required = false, value = COOKIE_DOCLIB_ID) Integer documentLibId,
 			DocumentDoclib docLib,String change,String docChange,String tree, String moduleId,
 			HttpServletRequest request, HttpServletResponse response, Model model)	{
-	/*	if (null!=docLib.getDocLibId()) {
+		if (null!=docLib.getDocLibId()) {
 			documentLibId=docLib.getDocLibId();
 			CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString(),-1);
 		}else {
@@ -93,15 +93,9 @@ public class DocAction extends BaseController{
 					CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString(),-1);
 				}
 			}
-		}	*/
-		/*if (null==documentLibId) {
-			List<DocumentDoclib> list=docservice.findDoclibList(new DocumentDoclib());		
-			if (list!=null&&!list.isEmpty()) {
-				documentLibId=list.get(0).getDocLibId();
-				CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString(),-1);
-			}
-		}*/
-				
+		}	
+		model.addAttribute("documentLibId", documentLibId);
+		
 		OrgUser user = new OrgUser();		
 		List<OrgUser> userList = userService.findUserList(user);
 		
@@ -482,6 +476,8 @@ public class DocAction extends BaseController{
 		//	request.getSession().setAttribute("documentLibId", doclib.getDocLibId());
 		}else {
 			docservice.editDocLibName(doclib);
+			
+			CookieUtils.setCookie(response, DocAction.COOKIE_DOCLIB_ID, doclib.getDocLibId().toString(), -1);
 		}	
 		return "redirect:"+"/a/document?change=true";
 	}
