@@ -1,6 +1,3 @@
-
-
-##setTinyItemCount(docpager.getTotalCount()=docpager.getTotalCount()==null?"0":docpager.getTotalCount())
 #setTinyItemCount(docpager.getTotalCount())
 #foreach(l:docpager.getRecords())
 #@tr()
@@ -20,7 +17,6 @@
 				#end
 			#end
 		#end
-
 	#end
 #end
 #end

@@ -1,26 +1,25 @@
-
 <script type="text/javascript">
-    function ajaxRead(id,toName,opKey,opvalue,url,value){
-        var selectCheck = "select[name="+toName+"]";
-        $(selectCheck).each(function(){
+    function ajaxRead(id, toName, opKey, opvalue, url, value) {
+        var selectCheck = "select[name=" + toName + "]";
+        $(selectCheck).each(function () {
             var sele = $(this);
             var s;
             $.ajax({
                 type: "POST",
-                url: "${TINY_CONTEXT_PATH+adminPath}"+url,
+                url: "${TINY_CONTEXT_PATH+adminPath}" + url,
                 data: $(this).attr('data'),
-                dataType:"json",
-                success: function(data){
+                dataType: "json",
+                success: function (data) {
                     sele.empty();
                     var em = "<option value='0'>/</option>";
                     sele.append(em);
-                    var isInit=false;
-                    for(var i=0,l=data.length;i<l;i++){
-                    	if(data[i][opKey]==value) isInit=true;
-                        var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+                    var isInit = false;
+                    for (var i = 0, l = data.length; i < l; i++) {
+                        if (data[i][opKey] == value) isInit = true;
+                        var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
                         sele.append(em);
                     }
-                   //console.log(sele.html(),value,opKey);
+                    //console.log(sele.html(),value,opKey);
                     if (isInit) {
                         sele.val(value).trigger("change");
                     } else {
@@ -28,204 +27,206 @@
                     }
                 },
             });
-
-
         });
-
     }
 </script>
-
-
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="产品文档库",activeMenuId=currentPageId)
-##脚本
-#include("common.page")
+#include("/document/common.page")
 
 ##set(name="document")
 #include("doc-tab.page")
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/editSave" "post" {"class":"edit","enctype":"multipart/form-data"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/editSave" "post" {"class":"edit","enctype":
+    "multipart/form-data"})
 <input name="docId" type="hidden" value="${doc?.docId}"/>
-	<div style="width:100%">
-    	<div class="infoContent">
-			<p class="titleName">编辑</p>
-    #@elementItem()
+<div style="width:100%">
+    <div class="infoContent">
+        <p class="titleName">编辑</p>
+        #@elementItem()
         <div class="col-12">
-         <div class="col-2 text-r"><label>所属文档库&nbsp</label></div>
-         <div class="col-4">
-          #@Tselect2F()
-	          #@Tselect2Body("docLibId" doc?.docLibId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	               #foreach(var:libList)
-	               	#if(var?.docLibDeleted != "1")
-	               		<option value="${var?.docLibId}">${var?.docLibName}</option>
-	               	#end
-	               #end
-	               <script type="text/javascript">
-						$("#${sid}").on("change",function(){
-						    var type = $("#${sid} option:selected").val();
-						   if(type == 1){
-						       $('#product').removeClass('hidden');
-						       $('#project').addClass('hidden');
-						   }
-						   else if(type == 2){
-						       $('#project').removeClass('hidden');
-						       $('#product').removeClass('hidden');
-						   }else{
-						       $('#project').addClass('hidden');
-						       $('#product').addClass('hidden');
-						               }
-						   });
+            <div class="col-2 text-r"><label>所属文档库&nbsp</label></div>
+        <div class="col-4">
+            #@Tselect2F()
+                #@Tselect2Body("docLibId" doc?.docLibId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #foreach(var:libList)
+                        #if(var?.docLibDeleted != "1")
+                            <option value="${var?.docLibId}">${var?.docLibName}</option>
+                        #end
+                    #end
+                    <script type="text/javascript">
+                        $("#${sid}").on("change", function () {
+                            var type = $("#${sid} option:selected").val();
+                            if (type == 1) {
+                                $('#product').removeClass('hidden');
+                                $('#project').addClass('hidden');
+                            }
+                            else if (type == 2) {
+                                $('#project').removeClass('hidden');
+                                $('#product').removeClass('hidden');
+                            } else {
+                                $('#project').addClass('hidden');
+                                $('#product').addClass('hidden');
+                            }
+                        });
+                    </script>
+                    <script type="text/javascript">
+                        $("#${sid}").on("change", function () {
+                            var pId = $("#${sid}  option:selected").val();
 
+                            if (pId == '1') {
+                                ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/productByDocLib", ${doc?.docProduct ? : 0
+                            }
+                            );
+                        }
+                        if (pId == '2') {
+                            $("select[name=docProject]").val("${doc?.docProject}").trigger("change");
+                        } else {
+                            ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByDoclib?libId=" + pId, ${doc?.docModule ? : 0
+                        }
+                        )
+                        ;
+                        }
+                        })
+                    </script>
+                #end
+            </div>
+            </div>
+            #end
+        #end
 
-                   </script>
+        #@elementItem(elementId="project" eleItemClass="hidden")
+            #@colLabel()所属项目#end
+            #@formControlDiv("col-8")
+                #@div(divClass="col-6")
+                    #@Tselect2F()
+                        #@Tselect2Body("docProject" doc?.docProject?:0 {"class":
+                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(project : projectList)
+                                <option value="${project?.projectId}">${project?.projectName}</option>
+                            #end
+                        #end
 
-				  <script type="text/javascript">
-			           $("#${sid}").on("change",function(){
-			           var pId = $("#${sid}  option:selected").val();
-
-                           if (pId == '1') {
-				           	ajaxRead("${sid}","docProduct","productId","productName","/document/ajax/productByDocLib",${doc?.docProduct?:0});
-				           }
-				           if(pId=='2')
-				           {
-				           	$("select[name=docProject]").val("${doc?.docProject}").trigger("change");
-				           }else{
-				           	ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/moduleByDoclib?libId="+pId,${doc?.docModule?:0});
-				           }
-			           })
-			       </script>
-			  #end
-              	</div>
-       		</div>
-		  #end
-     #end
-
-     #@elementItem(elementId="project" eleItemClass="hidden")
-					#@colLabel()所属项目#end
-					#@formControlDiv("col-8")
-					#@div(divClass="col-6")
-					#@Tselect2F()
-	                   		#@Tselect2Body("docProject" doc?.docProject?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        #foreach(project : projectList)
-	                        	 <option value="${project?.projectId}">${project?.projectName}</option>
-							#end
-	                    	#end
-
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd" class="r">增加</a>
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end
+                        #@Tselect2Fix()
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd" class="r">增加</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end
                         <script type="text/javascript">
 
                             $("#${sid}").on("change", function () {
-	                            var dId = $("select[name=docLibId]").val();
-	                                var pId = $("#${sid}  option:selected").val();
+                                var dId = $("select[name=docLibId]").val();
+                                var pId = $("#${sid}  option:selected").val();
 
-	                              if(dId == '2'){
-                                      ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByProject?projectId=" + pId, ${doc?.docModule?:0});
-	                                ajaxRead("${sid}","docProduct","productId","productName","/document/ajax/product?projectId="+pId,${doc?.docProduct?:0});
+                                if (dId == '2') {
+                                    ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByProject?projectId=" + pId, ${doc?.docModule ? : 0
+                                }
+                                );
+                            ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/product?projectId=" + pId, ${doc?.docProduct ? : 0
+                            })
+                            ;
                             }
-	                        	})
+                            })
 
                         </script>
-                	  #end
+                    #end
 
-                	  #end
-                	  #end
-	 #end
+                #end
+            #end
+        #end
 
-    		 #@elementItem(elementId="product" eleItemClass="hidden")
-					#@colLabel()所属产品#end
-					#@formControlDiv("col-8")
-					#@div(divClass="col-6")
-					#@Tselect2F()
-	                   		#@Tselect2Body("docProduct" doc?.docProduct?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-							#end
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
+        #@elementItem(elementId="product" eleItemClass="hidden")
+            #@colLabel()所属产品#end
+            #@formControlDiv("col-8")
+                #@div(divClass="col-6")
+                    #@Tselect2F()
+                        #@Tselect2Body("docProduct" doc?.docProduct?:0 {"class":
+                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #end
+                        #@Tselect2Fix()
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
                         <script type="text/javascript">
-		                            $("#${sid}").on("change",function(){
-		                            var dId = $("select[name=docLibId]").val();
-		                             if(dId == '1'){
-                                         var pId = $(this).val();
-		                                ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/moduleByProduct?productId="+pId,${doc?.docModule?:0});
-		                            	  }
-                                    })
-	                        </script>
-                	  #end
-                	  #end
-					#end
-			#end
-
-
-			#@elementItem()
-		        <div class="col-12">
-		         <div class="col-2 text-r"><label>所属分类&nbsp</label></div>
-		         <div class="col-4">
-		          #@Tselect2F()
+                            $("#${sid}").on("change", function () {
+                                var dId = $("select[name=docLibId]").val();
+                                if (dId == '1') {
+                                    var pId = $(this).val();
+                                    ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByProduct?productId=" + pId, ${doc?.docModule ? : 0
+                                }
+                                );
+                            }
+                            })
+                        </script>
+                    #end
+                #end
+            #end
+        #end
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>所属分类&nbsp</label></div>
+                <div class="col-4">
+                    #@Tselect2F()
 			          #@Tselect2Body("docModule" doc?.docModule?:0 {"class":"input-text select2"})
-			         ## <option value="0">/</option>
-				  #end
+                    #end
 		              #end
-		              	</div>
-		       		</div>
-    		 #end
-     #@elementItem()
-        <div class="col-12">
-         <div class="col-2 text-r"><label>文档类型&nbsp</label></div>
-         	<div class="col-4" id="doctype">
-          		${getDict("docType",doc?.docType)}
-              	</div>
-       		</div>
-     #end
-     #@elementItem()
-			#@colLabel()<span class="c-red">*</span>文档标题#end
-			#@formControlDiv("col-4")
-			#@div(divClass="col-12")
-				#tinyInput("text" "docTitle" doc?.docTitle {"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16","nullmsg":"标题不能为空！","class":"input-text"})
-			#end
-			#end
-				#@validateDiv("col-2")#end
-		#end
-				
-		 #@elementItem(elementId="urlBox" eleItemClass="hidden")
-			#@colLabel()文档URL&nbsp#end
-			#@formControlDiv("col-8")
-			#@div(divClass="col-6")
-			#tinyInput("text" "docUrl" doc?.docUrl{"placeholder":"相应的链接地址","class":"input-text","nullmsg":"链接不能为空！"})
-			#end
-			#end
-			#@validateDiv("col-2")#end
-		#end
-				
-				
-     #@elementItem()
-        <div class="col-12">
-         <div class="col-2 text-r"><label>关键字&nbsp</label></div>
-         		<div class="col-4">
-           	 	#tinyInput("text" "docKeywords" doc?.docKeywords {"datatype":"","id":"docKeywords","class":"input-text"})
-              	</div>
-       	</div>
-       	#@validateDiv("col-2")#end
-     #end
-     #@elementItem()
+                </div>
+            </div>
+        #end
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>文档类型&nbsp</label></div>
+                <div class="col-4" id="doctype">
+                    ${getDict("docType",doc?.docType)}
+                </div>
+            </div>
+        #end
+        #@elementItem()
+            #@colLabel()<span class="c-red">*</span>文档标题#end
+            #@formControlDiv("col-4")
+                #@div(divClass="col-12")
+                    #tinyInput("text" "docTitle" doc?.docTitle {"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16",
+                        "nullmsg":"标题不能为空！","class":"input-text"})
+                #end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+        #@elementItem(elementId="urlBox" eleItemClass="hidden")
+            #@colLabel()文档URL&nbsp#end
+            #@formControlDiv("col-8")
+                #@div(divClass="col-6")
+                    #tinyInput(
+                        "text" "docUrl" doc?.docUrl{"placeholder":"相应的链接地址","class":"input-text","nullmsg":"链接不能为空！"})
+                #end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>关键字&nbsp</label></div>
+                <div class="col-4">
+                    #tinyInput(
+                        "text" "docKeywords" doc?.docKeywords {"datatype":"","id":"docKeywords","class":"input-text"})
+                </div>
+            </div>
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>文档摘要&nbsp</label></div>
                 <div class="col-6">
                     #@Teditor("docDigest" "docDigest" {"initialFrameHeight":"150"})${doc?.docDigest}#end</div>
-       			</div>
+            </div>
         #end
 
-		#@elementItem(elementId="contentBox" eleItemClass="hidden")
-				#@colLabel()文档正文&nbsp#end
-				#@formControlDiv("col-8")
-					#@tinyueditor("docContent" "docContent")#end
-				#end
-				#@validateDiv("col-2")#end
-		#end
+        #@elementItem(elementId="contentBox" eleItemClass="hidden")
+            #@colLabel()文档正文&nbsp#end
+            #@formControlDiv("col-8")
+                #@tinyueditor("docContent" "docContent")#end
+            #end
+            #@validateDiv("col-2")#end
+        #end
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>文档备注&nbsp</label></div>
@@ -234,62 +235,57 @@
             </div>
         #end
         #@elementItem(elementId="fileBox" eleItemClass="hidden")
-    	<div class="col-12">
-         <div class="col-2 text-r"><label>附件</label></div>
-         	<div class="col-6">
-             #include("fileupload.page")
-             </div>
-         </div>
-     #end
-     #@elementItem()
-        <div class="col-12">
-            <div class="col-5">
-                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+            <div class="col-12">
+                <div class="col-2 text-r"><label>附件</label></div>
+                <div class="col-6">
+                    #include("fileupload.page")
+                </div>
             </div>
-            <div class="col-1"></div>
-            <div class="col-1">
-                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+        #end
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-5">
+                    <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-1">
+                    #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+                </div>
+                <div class="col-5"></div>
             </div>
-            <div class="col-5"></div>
-        </div>
-	#end
-	</div>
-	</div>
+        #end
+    </div>
+</div>
 #end
 #@dialog("myModal")
-        #@dialogHeader()#end
-        #@dialogBody()<p></p>#end
+    #@dialogHeader()#end
+    #@dialogBody()<p></p>#end
 #end
 
 <script type="text/javascript">
-   /*这是显示不同类型编辑框的脚本*/
-   $(function() {
-   var doctypeContent=$.trim($('#doctype').html());
-   switch(doctypeContent){
-   		case "文件":
-   			$('#fileBox').removeClass('hidden');
-   			$('#urlBox').addClass('hidden');
-   			$('#contentBox').addClass('hidden');
-   		break;
-   		case "链接":
-   			$('#urlBox').removeClass('hidden');
-   			$('#contentBox').addClass('hidden');
-   			$('#fileBox').addClass('hidden');
-   		break;
-   		case "网页":
-   			$('#contentBox').removeClass('hidden');
-   			$('#fileBox').addClass('hidden');
-   			$('#urlBox').addClass('hidden');
-   		break;
-   }
-});
-
-
-   $(".select2").select2();
-
+    /*这是显示不同类型编辑框的脚本*/
+    $(function () {
+        var doctypeContent = $.trim($('#doctype').html());
+        switch (doctypeContent) {
+            case "文件":
+                $('#fileBox').removeClass('hidden');
+                $('#urlBox').addClass('hidden');
+                $('#contentBox').addClass('hidden');
+                break;
+            case "链接":
+                $('#urlBox').removeClass('hidden');
+                $('#contentBox').addClass('hidden');
+                $('#fileBox').addClass('hidden');
+                break;
+            case "网页":
+                $('#contentBox').removeClass('hidden');
+                $('#fileBox').addClass('hidden');
+                $('#urlBox').addClass('hidden');
+                break;
+        }
+    });
+    $(".select2").select2();
 </script>
-
-
 <script type="text/javascript">
     $(function () {
         $("form[name=thisform]").Validform({

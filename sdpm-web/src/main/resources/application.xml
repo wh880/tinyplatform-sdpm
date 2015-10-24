@@ -51,6 +51,7 @@
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-common\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
+            <class-path path="E:\workcode\sdpm\sdpm-document\view\src\main\resources\"/>
 
             <!-- 徐丹洋-->
             <class-path path="D:\sdpm\sdpm-service\view\src\main\resources"/>
@@ -90,9 +91,6 @@
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-system\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-document\view\src\main\resources"/>
-            <!--alu -->
-            <class-path path="D:\TinyFramworkTest\sdpm\sdpm-document\view\src\main\resources"/>
-
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>

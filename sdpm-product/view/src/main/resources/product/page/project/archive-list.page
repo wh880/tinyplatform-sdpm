@@ -10,14 +10,11 @@
 				<span class="active_btn">文档列表</span>
 			</span>
     <span class="r">
-
-
         #foreach(m:menuManager.getScopeMenus("archive-add"))
             #if(m.id=="product-archive-add")
                 <a href="${TINY_CONTEXT_PATH +adminPath}/product/addDoc" title="创建文档">#buttonIcon(iconClass="icon-plus")创建文档</a>
             #end
         #end
-
 			</span>
         #div(divClass="clearfix")
     #end
@@ -52,9 +49,6 @@
                     #end
                 #end
             #end
-        
-  
-
 #end
 
 #include("/product/page/event/mytree.page")
